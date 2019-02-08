@@ -2424,25 +2424,25 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O18">
       <dia:attribute name="obj_pos">
-        <dia:point val="-1,-49"/>
+        <dia:point val="-1,-53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-1.05,-49.05;24.19,-42.95"/>
+        <dia:rectangle val="-1.05,-53.05;24.96,-44.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-1,-49"/>
+        <dia:point val="-1,-53"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.140000000000001"/>
+        <dia:real val="25.91"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="8.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#generation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::fluent, Enablable, Outputable#</dia:string>
+        <dia:string>#masd::fluent, Outputable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Configuration related to code generation.#</dia:string>
@@ -2531,13 +2531,13 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
             <dia:string>#reference_model_directories#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;boost::filesystem::path&gt;#</dia:string>
+            <dia:string>#std::vector&lt;boost::filesystem::path&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Directories to search for reference models.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2574,7 +2574,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#enable_compatibility_mode#</dia:string>
+            <dia:string>#compatibility_mode_enabled#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#bool#</dia:string>
@@ -2583,7 +2583,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Attempt to process inputs, ignoring certain types of errors.#</dia:string>
+            <dia:string>#If true, attempt to process inputs, ignoring certain types of errors.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2606,7 +2606,78 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
+            <dia:string>#Target model for generation.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#delete_extra_files#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
             <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, deletes any files that are not known to Dogen .#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#ignore_files_matching_regex#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::vector&lt;std::string&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Files matching the supplied regular expressions will be ignored by Dogen.
+
+Only applicable when deleting extra files.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#cpp_headers_output_directory#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#boost::filesystem::path#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Directory in which to place C++ header files.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2666,7 +2737,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:point val="9.645,-38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="8.895,-43.05;11.77,-37.2"/>
+        <dia:rectangle val="8.895,-44.65;12.155,-37.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2674,8 +2745,8 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="9.645,-38"/>
         <dia:point val="9.645,-41"/>
-        <dia:point val="11.57,-41"/>
-        <dia:point val="11.57,-43"/>
+        <dia:point val="11.955,-41"/>
+        <dia:point val="11.955,-44.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

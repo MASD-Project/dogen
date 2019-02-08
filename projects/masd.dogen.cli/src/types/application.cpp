@@ -49,7 +49,7 @@ void application::execute(const std::vector<std::string>& args,
         return;
 
     const auto& cfg(*ocfg);
-    std::cout << "Configuration: " << cfg << std::endl;
+    std::cout << cfg << std::endl;
 }
 
 int application::run(const std::vector<std::string>& args,

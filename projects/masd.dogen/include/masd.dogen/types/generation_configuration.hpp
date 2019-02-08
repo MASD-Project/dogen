@@ -25,7 +25,8 @@
 #pragma once
 #endif
 
-#include <list>
+#include <string>
+#include <vector>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 
@@ -47,22 +48,16 @@ public:
 
 public:
     generation_configuration(
-        const bool enabled,
         const boost::filesystem::path& output_directory,
-        const std::list<boost::filesystem::path>& reference_model_directories,
+        const std::vector<boost::filesystem::path>& reference_model_directories,
         const bool force_write,
-        const bool enable_compatibility_mode,
-        const boost::filesystem::path& target);
+        const bool compatibility_mode_enabled,
+        const boost::filesystem::path& target,
+        const bool delete_extra_files,
+        const std::vector<std::string>& ignore_files_matching_regex,
+        const boost::filesystem::path& cpp_headers_output_directory);
 
 public:
-    /**
-     * @brief If true, the configurable aspect will be expressed.
-     */
-    /**@{*/
-    bool enabled() const;
-    generation_configuration& enabled(const bool v);
-    /**@}*/
-
     /**
      * @brief Directory in which to place the output.
      */
@@ -73,10 +68,15 @@ public:
     generation_configuration& output_directory(const boost::filesystem::path&& v);
     /**@}*/
 
-    const std::list<boost::filesystem::path>& reference_model_directories() const;
-    std::list<boost::filesystem::path>& reference_model_directories();
-    generation_configuration& reference_model_directories(const std::list<boost::filesystem::path>& v);
-    generation_configuration& reference_model_directories(const std::list<boost::filesystem::path>&& v);
+    /**
+     * @brief Directories to search for reference models.
+     */
+    /**@{*/
+    const std::vector<boost::filesystem::path>& reference_model_directories() const;
+    std::vector<boost::filesystem::path>& reference_model_directories();
+    generation_configuration& reference_model_directories(const std::vector<boost::filesystem::path>& v);
+    generation_configuration& reference_model_directories(const std::vector<boost::filesystem::path>&& v);
+    /**@}*/
 
     /**
      * @brief Always write files, even when there are no differences.
@@ -87,17 +87,52 @@ public:
     /**@}*/
 
     /**
-     * @brief Attempt to process inputs, ignoring certain types of errors.
+     * @brief If true, attempt to process inputs, ignoring certain types of errors.
      */
     /**@{*/
-    bool enable_compatibility_mode() const;
-    generation_configuration& enable_compatibility_mode(const bool v);
+    bool compatibility_mode_enabled() const;
+    generation_configuration& compatibility_mode_enabled(const bool v);
     /**@}*/
 
+    /**
+     * @brief Target model for generation.
+     */
+    /**@{*/
     const boost::filesystem::path& target() const;
     boost::filesystem::path& target();
     generation_configuration& target(const boost::filesystem::path& v);
     generation_configuration& target(const boost::filesystem::path&& v);
+    /**@}*/
+
+    /**
+     * @brief If true, deletes any files that are not known to Dogen .
+     */
+    /**@{*/
+    bool delete_extra_files() const;
+    generation_configuration& delete_extra_files(const bool v);
+    /**@}*/
+
+    /**
+     * @brief Files matching the supplied regular expressions will be ignored by Dogen.
+     *
+     * Only applicable when deleting extra files.
+     */
+    /**@{*/
+    const std::vector<std::string>& ignore_files_matching_regex() const;
+    std::vector<std::string>& ignore_files_matching_regex();
+    generation_configuration& ignore_files_matching_regex(const std::vector<std::string>& v);
+    generation_configuration& ignore_files_matching_regex(const std::vector<std::string>&& v);
+    /**@}*/
+
+    /**
+     * @brief Directory in which to place C++ header files.
+     */
+    /**@{*/
+    const boost::filesystem::path& cpp_headers_output_directory() const;
+    boost::filesystem::path& cpp_headers_output_directory();
+    generation_configuration& cpp_headers_output_directory(const boost::filesystem::path& v);
+    generation_configuration& cpp_headers_output_directory(const boost::filesystem::path&& v);
+    /**@}*/
 
 public:
     bool operator==(const generation_configuration& rhs) const;
@@ -110,12 +145,14 @@ public:
     generation_configuration& operator=(generation_configuration other);
 
 private:
-    bool enabled_;
     boost::filesystem::path output_directory_;
-    std::list<boost::filesystem::path> reference_model_directories_;
+    std::vector<boost::filesystem::path> reference_model_directories_;
     bool force_write_;
-    bool enable_compatibility_mode_;
+    bool compatibility_mode_enabled_;
     boost::filesystem::path target_;
+    bool delete_extra_files_;
+    std::vector<std::string> ignore_files_matching_regex_;
+    boost::filesystem::path cpp_headers_output_directory_;
 };
 
 }

@@ -73,6 +73,17 @@ const std::string logging_log_level_warn("warn");
 const std::string logging_log_level_error("error");
 const std::string logging_default_log_directory("log");
 
+const std::string generation_compatibility_mode_enabled_arg(
+    "compatibility-mode-enabled");
+const std::string generation_target_arg("target");
+const std::string generation_output_dir_arg("output-directory");
+const std::string generation_cpp_headers_output_directory_arg(
+    "cpp-headers-output-directory");
+const std::string generation_delete_extra_files_arg("delete-extra-files");
+const std::string generation_ignore_files_matching_regex_arg(
+    "ignore-files-matching-regex");
+const std::string generation_force_write_arg("force-write");
+
 const std::string invalid_option("Option is not valid for command: ");
 const std::string invalid_command("Command is invalid or unsupported: ");
 const std::string missing_target("Mandatory parameter target is missing. ");
@@ -146,7 +157,7 @@ positional_options_description make_positional_options() {
 options_description make_generation_options_description() {
     options_description r("Generation");
     r.add_options()
-        ("compatibility-mode,m", "Attempt to process inputs, "
+        ("compatibility-mode-enabled,m", "Attempt to process inputs, "
             "ignoring certain types of errors.")
         ("delete-extra-files,d", "Delete any additional files found in "
             "directories managed by Knitter.")
@@ -419,6 +430,47 @@ read_logging_configuration(const variables_map& vm) {
 }
 
 /**
+ * @brief Reads the tracing configuration from the variables map.
+ */
+masd::dogen::generation_configuration
+read_generation_configuration(const variables_map& vm) {
+    masd::dogen::generation_configuration r;
+
+    using boost::filesystem::absolute;
+    if (vm.count(generation_target_arg)) {
+        const auto target_str(vm[generation_target_arg].as<std::string>());
+        r.target(absolute(target_str));
+    }
+
+    r.compatibility_mode_enabled(
+        vm.count(generation_compatibility_mode_enabled_arg) != 0);
+    r.delete_extra_files(vm.count(generation_delete_extra_files_arg) != 0);
+    r.force_write(vm.count(generation_force_write_arg) != 0);
+
+    if (vm.count(generation_ignore_files_matching_regex_arg)) {
+        const auto p(vm[generation_ignore_files_matching_regex_arg]
+            .as<std::vector<std::string>>());
+        r.ignore_files_matching_regex(p);
+    }
+
+    if (!vm.count(generation_output_dir_arg))
+        r.output_directory(boost::filesystem::current_path());
+    else {
+        const auto s(vm[generation_output_dir_arg].as<std::string>());
+        r.output_directory(absolute(s));
+    }
+
+    if (vm.count(generation_cpp_headers_output_directory_arg)) {
+        const auto s(vm[generation_cpp_headers_output_directory_arg]
+            .as<std::string>());
+        r.cpp_headers_output_directory(absolute(s));
+    }
+
+    return r;
+}
+
+
+/**
  * @brief Contains the processing logic for when the user supplies a
  * command in the command line.
  */
@@ -453,8 +505,9 @@ handle_command(const std::string& command_name, const bool has_help,
         }
 
         store(command_line_parser(options).options(god).run(), vm);
+        r.generation(read_generation_configuration(vm));
         r.activity(masd::dogen::activity::generate);
-
+        model_name = r.generation()->target().stem().filename().string();
     } else if (command_name == convert_command_name) {
         const auto cod(make_convert_options_description());
         if (has_help) {
