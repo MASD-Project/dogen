@@ -7,7 +7,7 @@ environment:
   matrix:
     - compiler: clang-cl
       generator: Ninja
-      build_group: Experimental
+      build_group: Continuous
       msvc_setup_path: C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat
       msvc_setup_arg: x86_amd64
     - compiler: msvc
