@@ -34,7 +34,7 @@
 namespace masd::dogen::cli {
 
 /**
- * Interface for the parsing of command line arguments.
+ * Interface for a command-line parser of the dogen options.
  */
 class command_line_parser {
 public:
@@ -47,7 +47,11 @@ public:
 public:
     /**
      * Transforms the supplied command line arguments into the
-     * coding options.
+     * coding options, if valid.
+     *
+     * @param arguments Command line arguments supplied by the user.
+     * @param info stream in which to place informative text.
+     * @param error stream in which to place errors.
      */
     virtual boost::optional<masd::dogen::configuration>
     parse(const std::vector<std::string>& arguments, std::ostream& info,

@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <boost/program_options.hpp>
 #include "masd.dogen.cli/types/command_line_parser.hpp"
 
 namespace masd::dogen::cli {

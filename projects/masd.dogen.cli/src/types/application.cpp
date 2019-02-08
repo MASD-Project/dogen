@@ -19,11 +19,14 @@
  *
  */
 #include <cstdlib>
+#include <iostream>
 #include <boost/exception/diagnostic_information.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/log/severity_level.hpp"
 #include "masd.dogen.utility/log/life_cycle_manager.hpp"
 #include "masd.dogen.cli/types/application.hpp"
+#include "masd.dogen/types/configuration.hpp"
+#include "masd.dogen/io/configuration_io.hpp"
 
 namespace {
 
@@ -41,9 +44,12 @@ application::application(const command_line_parser& clp)
 
 void application::execute(const std::vector<std::string>& args,
     std::ostream& info, std::ostream& error) const {
-    const auto o(command_line_parser_.parse(args, info, error));
-    if (!o)
+    const auto ocfg(command_line_parser_.parse(args, info, error));
+    if (!ocfg)
         return;
+
+    const auto& cfg(*ocfg);
+    std::cout << "Configuration: " << cfg << std::endl;
 }
 
 int application::run(const std::vector<std::string>& args,

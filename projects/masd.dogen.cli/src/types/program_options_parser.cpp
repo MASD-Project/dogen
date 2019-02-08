@@ -19,7 +19,9 @@
  *
  */
 #include <iomanip>
+#include <boost/program_options.hpp>
 #include <boost/throw_exception.hpp>
+#include <boost/filesystem/operations.hpp>
 #include "masd.dogen/version.hpp"
 #include "masd.dogen.cli/types/parser_exception.hpp"
 #include "masd.dogen.cli/types/program_options_parser.hpp"
@@ -46,15 +48,37 @@ const std::string weave_command_name("weave");
 const std::string weave_command_desc(
     "Weaves one or more template files into its final output. ");
 
+const std::string indent("   ");
 const std::string help_arg("help");
 const std::string version_arg("version");
 const std::string command_arg("command");
+const std::string tracing_enabled_arg("tracing-enabled");
+const std::string tracing_level_arg("tracing-level");
+const std::string tracing_level_detail("detail");
+const std::string tracing_level_summary("summary");
+const std::string tracing_guids_enabled_arg("tracing-guids-enabled");
+const std::string tracing_format_arg("tracing-format");
+const std::string tracing_format_org_mode("org-mode");
+const std::string tracing_format_markdown("markdown");
+const std::string tracing_output_directory_arg("tracing-output-directory");
+const std::string tracing_default_directory("tracing");
 
-const std::string indent("   ");
+const std::string logging_log_enabled_arg("log-enabled");
+const std::string logging_log_directory_arg("log-directory");
+const std::string logging_log_level_arg("log-level");
+const std::string logging_log_level_trace("trace");
+const std::string logging_log_level_debug("debug");
+const std::string logging_log_level_info("info");
+const std::string logging_log_level_warn("warn");
+const std::string logging_log_level_error("error");
+const std::string logging_default_log_directory("log");
 
 const std::string invalid_option("Option is not valid for command: ");
 const std::string invalid_command("Command is invalid or unsupported: ");
 const std::string missing_target("Mandatory parameter target is missing. ");
+const std::string invalid_tracing_level("Tracing level is invalid: ");
+const std::string invalid_log_level("Tracing level is invalid: ");
+const std::string invalid_format("Tracing format is invalid: ");
 
 using boost::program_options::value;
 using boost::program_options::variables_map;
@@ -62,19 +86,21 @@ using boost::program_options::options_description;
 using boost::program_options::positional_options_description;
 using masd::dogen::cli::parser_exception;
 
-/*
- * Create the the top-level option descriptions.
+/**
+ * @brief Creates the the top-level option descriptions.
  */
 options_description make_top_level_options_description() {
-    options_description r;
     options_description god("General");
     god.add_options()
         ("help,h", "Display usage and exit.")
         ("version,v", "Output version information and exit.");
+
+    options_description r;
     r.add(god);
 
     options_description lod("Logging");
     lod.add_options()
+        ("log-enabled,e", "Generate a log file.")
         ("log-level,l", value<std::string>(),
             "What level to use for logging. Valid values: trace, debug, info, "
             "warn, error. Defaults to 'info'.")
@@ -105,12 +131,18 @@ options_description make_top_level_options_description() {
     return r;
 }
 
+/**
+ * @brief Creates the positional options.
+ */
 positional_options_description make_positional_options() {
     positional_options_description r;
     r.add("command", 1).add("args", -1);
     return r;
 }
 
+/**
+ * @brief Creates the options related to code generation.
+ */
 options_description make_generation_options_description() {
     options_description r("Generation");
     r.add_options()
@@ -137,6 +169,9 @@ options_description make_generation_options_description() {
     return r;
 }
 
+/**
+ * @brief Creates the options related to conversion.
+ */
 options_description make_convert_options_description() {
     options_description r("Convert");
     r.add_options()
@@ -150,6 +185,9 @@ options_description make_convert_options_description() {
     return r;
 }
 
+/**
+ * @brief Creates the options related to weaving.
+ */
 options_description make_weave_options_description() {
     options_description r("Weave");
     r.add_options()
@@ -160,6 +198,10 @@ options_description make_weave_options_description() {
     return r;
 }
 
+/**
+ * @brief ensures the supplied command is a valid command. If not,
+ * reports the erros into stream and throws.
+ */
 void validate_command_name(const std::string& command_name,
     std::ostream& err) {
     const bool is_valid_command_name(
@@ -177,16 +219,22 @@ void validate_command_name(const std::string& command_name,
 }
 
 /**
- * @brief Prints the top-level help text.
+ * @brief Prints the header of the help text, applicable to all cases.
  */
 void print_help_header(std::ostream& s) {
-    s << "Dogen is a Model Driven Engineering tool that processes models encoded"
-      << " in supported codecs." << std::endl
+    s << "Dogen is a Model Driven Engineering tool that processes models"
+      << " encoded in supported codecs." << std::endl
       << "Dogen is created by the MASD project. "
       << "For details, type --version."
       << std::endl;
 }
 
+/**
+ * @brief Prints the top-level help text when no command is supplied.
+ *
+ * @param od top-level options.
+ * @param s info stream.
+ */
 void print_help(const boost::program_options::options_description& od,
     std::ostream& s) {
     print_help_header(s);
@@ -207,6 +255,13 @@ void print_help(const boost::program_options::options_description& od,
     lambda(weave_command_name, weave_command_desc);
 }
 
+/**
+ * @brief Prints help text at the command level.
+ *
+ * @param command_name name of the command to print help for.
+ * @param od command options.
+ * @param s info stream.
+ */
 void print_help_command(const std::string& command_name,
     const boost::program_options::options_description& od, std::ostream& s) {
     print_help_header(s);
@@ -218,6 +273,8 @@ void print_help_command(const std::string& command_name,
 
 /**
  * @brief Print the program's version details.
+ *
+ * @param s info stream.
  */
 void version(std::ostream& s) {
     s << knitter_product << std::endl
@@ -238,6 +295,10 @@ void version(std::ostream& s) {
     }
 }
 
+/**
+ * @brief Contains the processing logic for when the user did not
+ * supply a command in the command line.
+ */
 boost::optional<masd::dogen::configuration>
 handle_no_command(const bool has_version, const bool has_help,
     const options_description& od, std::ostream& info, std::ostream& err) {
@@ -263,10 +324,109 @@ handle_no_command(const bool has_version, const bool has_help,
     return boost::optional<masd::dogen::configuration>();
 }
 
+/**
+ * @brief Reads the tracing configuration from the variables map.
+ */
+masd::dogen::tracing_configuration read_tracing_configuration(
+    const std::string& model_name, const variables_map& vm) {
+
+    masd::dogen::tracing_configuration r;
+    r.enabled(vm.count(tracing_enabled_arg) != 0);
+    r.guids_enabled(vm.count(tracing_guids_enabled_arg) != 0);
+
+    using masd::dogen::tracing_level;
+    if (vm.count(tracing_level_arg)) {
+        const auto s(vm[tracing_level_arg].as<std::string>());
+        if (s == tracing_level_detail)
+            r.level(tracing_level::detail);
+        if (s == tracing_level_summary)
+            r.level(tracing_level::summary);
+        else
+            BOOST_THROW_EXCEPTION(parser_exception(invalid_tracing_level + s));
+    } else if (r.enabled())
+        r.level(tracing_level::summary);
+
+    using masd::dogen::tracing_format;
+    if (vm.count(tracing_format_arg)) {
+        const auto s(vm[tracing_format_arg].as<std::string>());
+        if (s == tracing_format_org_mode)
+            r.format(tracing_format::org_mode);
+        else if (s == tracing_format_markdown)
+            r.format(tracing_format::markdown);
+        else
+            BOOST_THROW_EXCEPTION(parser_exception(invalid_format + s));
+    } else if (r.enabled())
+        r.format(tracing_format::org_mode);
+
+    const auto out_dir =
+        [&]() {
+            using boost::filesystem::absolute;
+            if (vm.count(tracing_output_directory_arg) == 0) {
+                if (!r.enabled())
+                    return boost::filesystem::path();
+                return absolute(tracing_default_directory) / model_name;
+            }
+
+            const auto s(vm[tracing_output_directory_arg].as<std::string>());
+            return absolute(s) / model_name;
+        }();
+    r.output_directory(out_dir);
+    return r;
+}
+
+/**
+ * @brief Reads the tracing configuration from the variables map.
+ */
+masd::dogen::logging_configuration
+read_logging_configuration(const variables_map& vm) {
+
+    masd::dogen::logging_configuration r;
+    r.enabled(vm.count(logging_log_enabled_arg) != 0);
+
+    using masd::dogen::log_level;
+    if (vm.count(logging_log_level_arg)) {
+        const auto s(vm[logging_log_level_arg].as<std::string>());
+        if (s == logging_log_level_trace)
+            r.level(log_level::trace);
+        else if (s == logging_log_level_debug)
+            r.level(log_level::debug);
+        else if (s == logging_log_level_info)
+            r.level(log_level::info);
+        else if (s == logging_log_level_warn)
+            r.level(log_level::warn);
+        else if (s == logging_log_level_error)
+            r.level(log_level::error);
+        else
+            BOOST_THROW_EXCEPTION(parser_exception(invalid_log_level + s));
+    } else  if (r.enabled())
+        r.level(log_level::info);
+
+    const boost::filesystem::path out_dir =
+        [&]() {
+            using boost::filesystem::absolute;
+            if (vm.count(logging_log_directory_arg) == 0) {
+                if (!r.enabled())
+                    return boost::filesystem::path();
+                return absolute(logging_default_log_directory);
+            }
+
+            const auto s(vm[logging_log_directory_arg].as<std::string>());
+            return absolute(s);
+        }();
+    r.output_directory(out_dir);
+
+    return r;
+}
+
+/**
+ * @brief Contains the processing logic for when the user supplies a
+ * command in the command line.
+ */
 boost::optional<masd::dogen::configuration>
 handle_command(const std::string& command_name, const bool has_help,
     const boost::program_options::parsed_options& po, std::ostream& info,
     std::ostream& /*err*/, variables_map& vm) {
+
     /*
      * Collect all the unrecognized options from the first pass. It
      * includes the positional command name, so we need to erase it.
@@ -280,6 +440,9 @@ handle_command(const std::string& command_name, const bool has_help,
      * For each command we need to setup their set of options, parse
      * them and then generate the appropriate options.
      */
+    std::string model_name;
+    using masd::dogen::activity;
+    masd::dogen::configuration r;
     using boost::program_options::command_line_parser;
     typedef boost::optional<masd::dogen::configuration> empty_config;
     if (command_name == generate_command_name) {
@@ -290,7 +453,7 @@ handle_command(const std::string& command_name, const bool has_help,
         }
 
         store(command_line_parser(options).options(god).run(), vm);
-
+        r.activity(masd::dogen::activity::generate);
 
     } else if (command_name == convert_command_name) {
         const auto cod(make_convert_options_description());
@@ -300,6 +463,7 @@ handle_command(const std::string& command_name, const bool has_help,
         }
 
         store(command_line_parser(options).options(cod).run(), vm);
+        r.activity(masd::dogen::activity::convert);
 
     } else if (command_name == weave_command_name) {
         const auto cod(make_weave_options_description());
@@ -309,9 +473,15 @@ handle_command(const std::string& command_name, const bool has_help,
         }
 
         store(command_line_parser(options).options(cod).run(), vm);
-
+        r.activity(masd::dogen::activity::weave);
     }
-    return boost::optional<masd::dogen::configuration>();
+
+    /*
+     * Now process the common options.
+     */
+    r.tracing(read_tracing_configuration(model_name, vm));
+    r.logging(read_logging_configuration(vm));
+    return r;
 }
 
 }
@@ -339,13 +509,13 @@ program_options_parser::parse(const std::vector<std::string>& arguments,
     const bool has_help(vm.count(help_arg));
 
     /*
-     * First, handle the simpler case of no command supplied.
+     * First, handle the simpler case where no command is supplied.
      */
     if (!has_command)
         return handle_no_command(has_version, has_help, tlod, info, err);
 
     /*
-     * The user supplied a command, so we need to retrieve it and
+     * If the user supplied a command, we need to retrieve it and
      * ensure it is valid.
      */
     const auto command_name(vm[command_arg].as<std::string>());
@@ -353,7 +523,10 @@ program_options_parser::parse(const std::vector<std::string>& arguments,
 
     /*
      * Copying the same approach as git, we also consider version to
-     * be invalid at the command level.
+     * be invalid at the command level. We don't bother to handle this
+     * at program options level, but instead check for the presence of
+     * the (supposedly valid, according to program options) version
+     * command and throw.
      */
     if (has_version) {
         err << "Error: unrecognised option for command '" << command_name
@@ -363,10 +536,10 @@ program_options_parser::parse(const std::vector<std::string>& arguments,
     }
 
     /*
-     * Finally, we can now process the command. Notice that we are
-     * suppliying the variables map into the handler by
-     * reference. This is because we need access to the global options
-     * that ma have already been setup.
+     * We can now process the command. Notice that we are suppliying
+     * the variables map into the handler by reference. This is
+     * because we need access to the global options that may have
+     * already been setup.
      */
     return handle_command(command_name, has_help, po, info, err, vm);
 }
