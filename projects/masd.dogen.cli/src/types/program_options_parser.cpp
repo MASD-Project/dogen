@@ -41,10 +41,10 @@ const std::string generate_command_desc(
     "Generates source code from input models.");
 const std::string convert_command_name("convert");
 const std::string convert_command_desc(
-    "Converts an input model from one format to another. ");
+    "Converts a model from one codec to another. ");
 const std::string weave_command_name("weave");
 const std::string weave_command_desc(
-    "Weaves a template file into its final output. ");
+    "Weaves one or more template files into its final output. ");
 
 const std::string help_arg("help");
 const std::string version_arg("version");
@@ -52,61 +52,56 @@ const std::string command_arg("command");
 
 const std::string indent("   ");
 
+const std::string invalid_option("Option is not valid for command: ");
 const std::string invalid_command("Command is invalid or unsupported: ");
 const std::string missing_target("Mandatory parameter target is missing. ");
 
 using boost::program_options::value;
 using boost::program_options::variables_map;
-using boost::program_options::include_positional;
 using boost::program_options::options_description;
-using boost::program_options::collect_unrecognized;
 using boost::program_options::positional_options_description;
+using masd::dogen::cli::parser_exception;
 
-options_description make_general_options_description() {
-    options_description r("General");
-    r.add_options()
+/*
+ * Create the the top-level option descriptions.
+ */
+options_description make_top_level_options_description() {
+    options_description r;
+    options_description god("General");
+    god.add_options()
         ("help,h", "Display usage and exit.")
         ("version,v", "Output version information and exit.");
+    r.add(god);
 
-    return r;
-}
-
-options_description make_logging_options_description() {
-    options_description r("Logging");
-    r.add_options()
+    options_description lod("Logging");
+    lod.add_options()
         ("log-level,l", value<std::string>(),
-            "What level to use for logging. Options: trace, debug, info, "
+            "What level to use for logging. Valid values: trace, debug, info, "
             "warn, error. Defaults to 'info'.")
         ("log-directory,g", value<std::string>(),
             "Directory to place the log file in. Defaults to 'log'.");
+    r.add(lod);
 
-    return r;
-}
-
-options_description make_tracing_options_description()  {
-    options_description r("Tracing");
-    r.add_options()
+    options_description tod("Tracing");
+    tod.add_options()
         ("tracing-enabled", "Generate metrics about executed transforms.")
         ("tracing-level", "Level at which to trace. "
-            "Valid levels: detail, summary.")
-        ("tracing-guids-enabled", "Use guids in tracing metrics, "
-            "to make comparisons easier.")
+            "Valid values: detail, summary.")
+        ("tracing-guids-enabled", "Use guids in tracing metrics, Not"
+            "  recommended when making comparisons between runs.")
         ("tracing-format", "Format to use for tracing metrics. "
-            "Valid formts: org-mode, markdown")
+            "Valid values: org-mode, markdown")
         ("tracing-output-directory", "Directory in which to dump probe data. "
             "Only used if transforms tracing is enabled.");
+    r.add(tod);
 
-    return r;
-}
-
-options_description make_command_options_description() {
-    options_description r("Commands");
-    r.add_options()
+    options_description cod("Commands");
+    cod.add_options()
         ("command", value<std::string>(), "Command to execute. "
             "Available commands: generate, convert, weave.")
         ("args", value<std::vector<std::string> >(),
             "Arguments for command");
-
+    r.add(cod);
     return r;
 }
 
@@ -115,7 +110,6 @@ positional_options_description make_positional_options() {
     r.add("command", 1).add("args", -1);
     return r;
 }
-
 
 options_description make_generation_options_description() {
     options_description r("Generation");
@@ -146,34 +140,58 @@ options_description make_generation_options_description() {
 options_description make_convert_options_description() {
     options_description r("Convert");
     r.add_options()
-        ("force-write,f", "Always write files, even when there are "
-            "no differences.")
-        ("destination,d",
-            value<std::string>(), "Output directory for the generated code. "
-            "Defaults to the current working directory.")
-        ("target,t",
+        ("source,s",
             value<std::string>(),
-            "Model to generate code for, in any of the supported formats.");
+            "Input model to read, in any of the supported formats.")
+        ("destination,d",
+            value<std::string>(),
+            "Output model to convert to, in any of the supported formats.");
 
     return r;
 }
 
-bool is_command_valid(const std::string& command) {
-    return
-        command == generate_command_name ||
-        command == convert_command_name;
+options_description make_weave_options_description() {
+    options_description r("Weave");
+    r.add_options()
+        ("target,t",
+            value<std::string>(),
+            "File or directory containing supported templates.");
+
+    return r;
+}
+
+void validate_command_name(const std::string& command_name,
+    std::ostream& err) {
+    const bool is_valid_command_name(
+        command_name == generate_command_name ||
+        command_name == convert_command_name ||
+        command_name == weave_command_name);
+
+    if (is_valid_command_name)
+        return;
+
+    err << "Error: '" << command_name << "' is not a valid command. "
+        << more_information  << std::endl;
+
+    BOOST_THROW_EXCEPTION(parser_exception(invalid_command + command_name));
 }
 
 /**
  * @brief Prints the top-level help text.
  */
-void help(const boost::program_options::options_description& od,
+void print_help_header(std::ostream& s) {
+    s << "Dogen is a Model Driven Engineering tool that processes models encoded"
+      << " in supported codecs." << std::endl
+      << "Dogen is created by the MASD project. "
+      << "For details, type --version."
+      << std::endl;
+}
+
+void print_help(const boost::program_options::options_description& od,
     std::ostream& s) {
-    s << "Dogen is a Model Driven Engineering tool to process input models."
-      << std::endl
-      << "Dogen is created by the MASD project. For details type --version."
-      << std::endl
-      << "Dogen has a command-based interface: <command> <options>" << std::endl
+    print_help_header(s);
+    s << "Dogen uses a command-based interface: <command> <options>. "
+      << std::endl << "See below for a list of valid commands. "
       << "For command specific options, type <command> --help." << std::endl
       << std::endl << "Global options: " << std::endl << od << std::endl
       <<  "Command information: "<< std::endl << std::endl;
@@ -187,6 +205,15 @@ void help(const boost::program_options::options_description& od,
     lambda(generate_command_name, generate_command_desc);
     lambda(convert_command_name, convert_command_desc);
     lambda(weave_command_name, weave_command_desc);
+}
+
+void print_help_command(const std::string& command_name,
+    const boost::program_options::options_description& od, std::ostream& s) {
+    print_help_header(s);
+    s << "Displaying options specific to the " << command_name << " command. "
+      << std::endl
+      << "For global options, type --help." << std::endl << std::endl
+      << od;
 }
 
 /**
@@ -211,129 +238,137 @@ void version(std::ostream& s) {
     }
 }
 
+boost::optional<masd::dogen::configuration>
+handle_no_command(const bool has_version, const bool has_help,
+    const options_description& od, std::ostream& info, std::ostream& err) {
+    /*
+     * The only valid options are help or version, so if those are
+     * not present we can safely throw.
+     */
+    if (!has_version && !has_help) {
+        err << usage_error_msg << no_command_msg
+            << more_information << std::endl;
+        BOOST_THROW_EXCEPTION(parser_exception(no_command_msg));
+    }
+
+    /*
+     * Note that we do not mind if the user has supplied both help
+     * and version - help takes priority.
+     */
+    if (has_help)
+        print_help(od, info);
+    else if (has_version)
+        version(info);
+
+    return boost::optional<masd::dogen::configuration>();
+}
+
+boost::optional<masd::dogen::configuration>
+handle_command(const std::string& command_name, const bool has_help,
+    const boost::program_options::parsed_options& po, std::ostream& info,
+    std::ostream& /*err*/, variables_map& vm) {
+    /*
+     * Collect all the unrecognized options from the first pass. It
+     * includes the positional command name, so we need to erase it.
+     */
+    using boost::program_options::include_positional;
+    using boost::program_options::collect_unrecognized;
+    auto options(collect_unrecognized(po.options, include_positional));
+    options.erase(options.begin());
+
+    /*
+     * For each command we need to setup their set of options, parse
+     * them and then generate the appropriate options.
+     */
+    using boost::program_options::command_line_parser;
+    typedef boost::optional<masd::dogen::configuration> empty_config;
+    if (command_name == generate_command_name) {
+        const auto god(make_generation_options_description());
+        if (has_help) {
+            print_help_command(generate_command_name, god, info);
+            return empty_config();
+        }
+
+        store(command_line_parser(options).options(god).run(), vm);
+
+
+    } else if (command_name == convert_command_name) {
+        const auto cod(make_convert_options_description());
+        if (has_help) {
+            print_help_command(convert_command_name, cod, info);
+            return empty_config();
+        }
+
+        store(command_line_parser(options).options(cod).run(), vm);
+
+    } else if (command_name == weave_command_name) {
+        const auto cod(make_weave_options_description());
+        if (has_help) {
+            print_help_command(weave_command_name, cod, info);
+            return empty_config();
+        }
+
+        store(command_line_parser(options).options(cod).run(), vm);
+
+    }
+    return boost::optional<masd::dogen::configuration>();
+}
+
 }
 
 namespace masd::dogen::cli {
 
-program_options_parser::program_options_parser() {}
-
 boost::optional<masd::dogen::configuration>
 program_options_parser::parse(const std::vector<std::string>& arguments,
     std::ostream& info, std::ostream& err) const {
-
     /*
-     * Create the first stage command line options, parse them and
+     * Create the top-level command line options, parse them and
      * retrieve the results of the parsing.
      */
-    options_description od;
-    od.add(make_general_options_description());
-    od.add(make_logging_options_description());
-    od.add(make_tracing_options_description());
-    od.add(make_command_options_description());
+    const options_description tlod(make_top_level_options_description());
     const auto po = boost::program_options::command_line_parser(arguments).
-        options(od).
+        options(tlod).
         positional(make_positional_options()).
         allow_unregistered().
         run();
 
     variables_map vm;
     boost::program_options::store(po, vm);
-
     const bool has_command(vm.count(command_arg));
     const bool has_version(vm.count(version_arg));
     const bool has_help(vm.count(help_arg));
 
     /*
-     * First, handle the case of no command supplied.
+     * First, handle the simpler case of no command supplied.
      */
-    if (!has_command) {
-        /*
-         * The only valid options are help or version, so if those are
-         * not present we can safely throw.
-         */
-        if (!has_version && !has_help) {
-            err << usage_error_msg << no_command_msg
-                << more_information << std::endl;
-            BOOST_THROW_EXCEPTION(parser_exception(no_command_msg));
-        }
+    if (!has_command)
+        return handle_no_command(has_version, has_help, tlod, info, err);
 
-        /*
-         * Note that we do not mind if the user has supplied both help
-         * and version - help takes priority.
-         */
-        if (has_help)
-            help(od, info);
-        else if (vm.count(version_arg))
-            version(info);
-        return boost::optional<masd::dogen::configuration>();
+    /*
+     * The user supplied a command, so we need to retrieve it and
+     * ensure it is valid.
+     */
+    const auto command_name(vm[command_arg].as<std::string>());
+    validate_command_name(command_name, err);
+
+    /*
+     * Copying the same approach as git, we also consider version to
+     * be invalid at the command level.
+     */
+    if (has_version) {
+        err << "Error: unrecognised option for command '" << command_name
+            << "'. " << more_information  << std::endl;
+
+        BOOST_THROW_EXCEPTION(parser_exception(invalid_option + "version"));
     }
 
     /*
-     * The user supplied a command. Retrieve it, and ensure it is
-     * valid.
+     * Finally, we can now process the command. Notice that we are
+     * suppliying the variables map into the handler by
+     * reference. This is because we need access to the global options
+     * that ma have already been setup.
      */
-    const auto cmd(vm["command"].as<std::string>());
-    if (!is_command_valid(cmd)) {
-        err << "Error: '" << cmd << "' is not a valid command. "
-            << more_information  << std::endl;
-
-        BOOST_THROW_EXCEPTION(parser_exception(invalid_command + cmd));
-    }
-
-    /*
-     * To make our life easier, we allow users to ask for version info
-     * at the command level. We'd have to faff around a fair bit with
-     * the original options in order to make version invalid, and it
-     * does not seem worth the effort. Note that help is command
-     * sensitive and thus it is handled below.
-     */
-    if (vm.count(version_arg)) {
-        version(info);
-        return boost::optional<masd::dogen::configuration>();
-    }
-
-    /*
-     * Now lets process the actual, valid commands. For each we need
-     * to setup their set of options and then parse them.
-     */
-    if (cmd == generate_command_name) {
-        const auto god(make_generation_options_description());
-        auto opts(collect_unrecognized(po.options, include_positional));
-        opts.erase(opts.begin());
-        store(boost::program_options::command_line_parser(opts)
-            .options(god).run(), vm);
-
-        if (has_help) {
-            info << "Dogen is a Model Driven Engineering tool to process input models."
-                 << std::endl
-                 << "Dogen is created by the MASD project. "
-                 << "For details type --version."
-                 << std::endl
-                 << "Displaying options specific to the generate command. "
-                 << std::endl
-                 << "For global options, type --help." << std::endl << std::endl
-                 << god;
-        }
-    } else if (cmd == convert_command_name) {
-        const auto cod(make_convert_options_description());
-        auto opts(collect_unrecognized(po.options, include_positional));
-        opts.erase(opts.begin());
-        store(boost::program_options::command_line_parser(opts)
-            .options(cod).run(), vm);
-
-        if (has_help) {
-            info << "Dogen is a Model Driven Engineering tool to process input models."
-                 << std::endl
-                 << "Dogen is created by the MASD project. "
-                 << "For details type --version."
-                 << std::endl
-                 << "Displaying options specific to the generate command. "
-                 << std::endl
-                 << "For global options, type --help." << std::endl << std::endl
-                 << cod;
-        }
-    }
-    return boost::optional<masd::dogen::configuration>();
+    return handle_command(command_name, has_help, po, info, err, vm);
 }
 
 }

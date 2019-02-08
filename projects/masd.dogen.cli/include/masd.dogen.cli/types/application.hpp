@@ -45,16 +45,23 @@ public:
 public:
     application(const command_line_parser& clp);
 
+private:
+    /**
+     * Executes the main workflow of the application.
+     */
+    void execute(const std::vector<std::string>& args,
+        std::ostream& info, std::ostream& error) const;
+
 public:
     /**
      * Executes the application and returns its exit code.
      *
      * @param args command line arguments.
-     * @param info_stream stream to use to output information.
-     * @param error_stream stream to use to output errors.
+     * @param info stream to use to output information.
+     * @param error stream to use to output errors.
      */
     int run(const std::vector<std::string>& args,
-        std::ostream& info_stream, std::ostream& error_stream) const;
+        std::ostream& info, std::ostream& error) const;
 
 private:
     const command_line_parser& command_line_parser_;

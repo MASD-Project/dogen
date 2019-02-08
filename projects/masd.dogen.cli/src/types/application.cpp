@@ -19,23 +19,37 @@
  *
  */
 #include <cstdlib>
+#include <boost/exception/diagnostic_information.hpp>
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/log/severity_level.hpp"
+#include "masd.dogen.utility/log/life_cycle_manager.hpp"
 #include "masd.dogen.cli/types/application.hpp"
+
+namespace {
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory("knitter"));
+
+const std::string log_file_prefix("masd.dogen.cli.");
+
+}
 
 namespace masd::dogen::cli {
 
 application::application(const command_line_parser& clp)
     : command_line_parser_(clp) { }
 
+void application::execute(const std::vector<std::string>& args,
+    std::ostream& info, std::ostream& error) const {
+    const auto o(command_line_parser_.parse(args, info, error));
+    if (!o)
+        return;
+}
+
 int application::run(const std::vector<std::string>& args,
     std::ostream& info, std::ostream& error) const {
     try {
-        const auto o(command_line_parser_.parse(args, info, error));
-        if (o) {
-            info << "success!" << std::endl;
-            return EXIT_SUCCESS;
-        }
-
-        info << "no errors, do nothing" << std::endl;
+        execute(args, info, error);
         return EXIT_SUCCESS;
     } catch(const std::exception& e) {
         info << "failure, errors: " << e.what() << std::endl;

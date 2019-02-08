@@ -18,18 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#include <string>
+#include <vector>
 #include <iostream>
-#include <boost/di.hpp>
 #include "masd.dogen.cli/types/application.hpp"
-#include "masd.dogen.cli/types/program_options_parser.hpp"
-#include "masd.dogen.cli/types/command_line_parser.hpp"
 #include "masd.dogen.cli/types/injector_factory.hpp"
 
 int main(const int argc, const char* argv[]) {
-    const auto args(std::vector<std::string>(argv + 1, argv + argc));
-
     using namespace masd::dogen::cli;
-    auto injector = injector_factory::make_injector();
-    const auto a(injector.create<application>());
-    return a.run(args, std::cout, std::cerr);
+    auto inj(injector_factory::make_injector());
+    const auto app(inj.create<application>());
+
+    const auto args(std::vector<std::string>(argv + 1, argv + argc));
+    return app.run(args, std::cout, std::cerr);
 }
