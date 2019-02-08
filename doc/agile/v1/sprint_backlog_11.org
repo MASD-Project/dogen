@@ -13,23 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-07 Thu 09:21]
+#+CAPTION: Clock summary at [2019-02-08 Fri 11:14]
 | <75>                                       |          |        |        |       |
 | Headline                                   | Time     |        |        |     % |
 |--------------------------------------------+----------+--------+--------+-------|
-| *Total time*                               | *144:25* |        |        | 100.0 |
+| *Total time*                               | *149:27* |        |        | 100.0 |
 |--------------------------------------------+----------+--------+--------+-------|
-| Stories                                    | 144:25   |        |        | 100.0 |
-| Active                                     |          | 144:25 |        | 100.0 |
+| Stories                                    | 149:27   |        |        | 100.0 |
+| Active                                     |          | 149:27 |        | 100.0 |
 | Edit release notes for previous sprint     |          |        |   2:03 |   1.4 |
-| Sprint and product backlog grooming        |          |        |   3:29 |   2.4 |
-| Work on MASD theory                        |          |        | 113:38 |  78.7 |
-| Rename models to fit MASD architecture     |          |        |   4:56 |   3.4 |
-| Read up on framework and API design        |          |        |   0:57 |   0.7 |
-| Analyse the state of the mess of refactors |          |        |   6:27 |   4.5 |
-| Create the =orchestration= model           |          |        |   4:15 |   2.9 |
-| Great meta-data rename                     |          |        |   4:54 |   3.4 |
-| Create a single binary for all of dogen    |          |        |   3:46 |   2.6 |
+| Sprint and product backlog grooming        |          |        |   3:29 |   2.3 |
+| Work on MASD theory                        |          |        | 113:38 |  76.0 |
+| Rename models to fit MASD architecture     |          |        |   4:56 |   3.3 |
+| Read up on framework and API design        |          |        |   0:57 |   0.6 |
+| Analyse the state of the mess of refactors |          |        |   6:27 |   4.3 |
+| Create the =orchestration= model           |          |        |   4:15 |   2.8 |
+| Great meta-data rename                     |          |        |   4:54 |   3.3 |
+| Create a single binary for all of dogen    |          |        |   8:48 |   5.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -406,6 +406,9 @@ Notes:
 
 *** STARTED Create a single binary for all of dogen                   :story:
     :LOGBOOK:
+    CLOCK: [2019-02-07 Thu 16:20]--[2019-02-07 Thu 17:03] =>  0:43
+    CLOCK: [2019-02-07 Thu 14:05]--[2019-02-07 Thu 15:40] =>  1:35
+    CLOCK: [2019-02-07 Thu 09:21]--[2019-02-07 Thu 12:05] =>  2:44
     CLOCK: [2019-02-07 Thu 08:36]--[2019-02-07 Thu 09:20] =>  0:44
     CLOCK: [2019-02-06 Wed 16:01]--[2019-02-06 Wed 19:03] =>  3:02
     :END:
