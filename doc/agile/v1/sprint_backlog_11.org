@@ -13,23 +13,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-08 Fri 11:14]
+#+CAPTION: Clock summary at [2019-02-08 Fri 14:02]
 | <75>                                       |          |        |        |       |
 | Headline                                   | Time     |        |        |     % |
 |--------------------------------------------+----------+--------+--------+-------|
-| *Total time*                               | *149:27* |        |        | 100.0 |
+| *Total time*                               | *154:32* |        |        | 100.0 |
 |--------------------------------------------+----------+--------+--------+-------|
-| Stories                                    | 149:27   |        |        | 100.0 |
-| Active                                     |          | 149:27 |        | 100.0 |
-| Edit release notes for previous sprint     |          |        |   2:03 |   1.4 |
-| Sprint and product backlog grooming        |          |        |   3:29 |   2.3 |
-| Work on MASD theory                        |          |        | 113:38 |  76.0 |
-| Rename models to fit MASD architecture     |          |        |   4:56 |   3.3 |
+| Stories                                    | 154:32   |        |        | 100.0 |
+| Active                                     |          | 154:32 |        | 100.0 |
+| Edit release notes for previous sprint     |          |        |   2:03 |   1.3 |
+| Sprint and product backlog grooming        |          |        |   3:50 |   2.5 |
+| Work on MASD theory                        |          |        | 113:38 |  73.5 |
+| Rename models to fit MASD architecture     |          |        |   4:56 |   3.2 |
 | Read up on framework and API design        |          |        |   0:57 |   0.6 |
-| Analyse the state of the mess of refactors |          |        |   6:27 |   4.3 |
+| Analyse the state of the mess of refactors |          |        |   6:27 |   4.2 |
 | Create the =orchestration= model           |          |        |   4:15 |   2.8 |
-| Great meta-data rename                     |          |        |   4:54 |   3.3 |
-| Create a single binary for all of dogen    |          |        |   8:48 |   5.9 |
+| Great meta-data rename                     |          |        |   4:54 |   3.2 |
+| Create a single binary for all of dogen    |          |        |   8:57 |   5.8 |
+| Update vcpkg across all operative systems  |          |        |   4:35 |   3.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -135,6 +136,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
      :LOGBOOK:
+     CLOCK: [2019-02-08 Fri 13:41]--[2019-02-08 Fri 14:02] =>  0:21
      CLOCK: [2019-02-06 Wed 11:51]--[2019-02-06 Wed 12:10] =>  0:19
      CLOCK: [2018-11-22 Thu 10:21]--[2018-11-22 Thu 11:25] =>  1:01
      CLOCK: [2018-11-19 Mon 09:10]--[2018-11-19 Mon 11:01] =>  1:51
@@ -367,6 +369,81 @@ Important conclusions:
 
 Create a model with the top-level transforms.
 
+*** COMPLETED Create the =generation= model                           :story:
+    CLOSED: [2019-02-08 Fri 13:51]
+
+*Rationake*: model has been created. The approach has changed and we
+have stories to cover it.
+
+Create a new model called =generation= and move all code-generation
+related class to it.
+
+We need to create classes for element properties and make model have a
+collection that is a pair of element and element properties. We need a
+good name for this pair:
+
+- extended element
+- augmented element
+- decorated element: though not using the decorator pattern; also, we
+  already have decoration properties so this is confusing.
+
+Alternatively we could just call it =element= and make it contain a
+modeling element.
+
+Approach:
+
+- create a new generation model, copying across all of the meta-model
+  and transform classes from yarn. Get the model to transform from
+  endomodel to generation model.
+- augment formattables with the new element properties. Supply this
+  data via the context or assistant.
+
+Problems:
+
+- all of the transforms assume access to the modeling element means
+  access to the generation properties. However, with the introduction
+  of the generation element we now have a disconnect. For example, we
+  sometimes sort and bucket the elements, and then modify them; this
+  no longer works with generation elements because these are not
+  pointers. It would be easier to make the generation properties a
+  part of the element. This is an ongoing discussion we've had since
+  the days of formattables. However, in formattables we did write all
+  of the transforms to take into account the formattable contained
+  both the element and the formattable properties, whereas now we need
+  to update all transforms to fit this approach. This is a lot more
+  work. The quick hack is to slot in the properties directly into the
+  element as some kind of "opaque properties". We could create a base
+  class =opaque_properties= and then have a container of these in
+  element. However, to make it properly extensible, the only way is to
+  make it a unordered set of pointers.
+- actually the right solution for this is to use multiple
+  inheritance. For each modeling element we need to create a
+  corresponding generation version of it, which is the combination of
+  the modeling element and a generation element base class. Them the
+  generation model is made up of pointers to generation elements and
+  it dispatches into generation elements descendants in the
+  formatter. The key point is to preserve the distinction between
+  modeling (single element) vs generation (projection across facet
+  space).
+
+*** COMPLETED Rename core models                                      :story:
+    CLOSED: [2019-02-08 Fri 13:52]
+
+*Rationale*: this has been implemented.
+
+The more we catch up with the literature, the more the current model
+names look weird, particularly =modeling= and =generation=. In reality
+all of the models relate to "modeling" and to generation. We should
+just bite the bullet and use the compiler related names: frontend,
+middleend and backend.
+
+Interestingly, eCore/EMF also take the same approach of having a model
+that is then enriched for generation. This means we could have:
+
+- frontend/interop/external.
+- middleend/modeling
+- backend/generation
+
 *** STARTED Great meta-data rename                                    :story:
     :LOGBOOK:
     CLOCK: [2018-11-26 Mon 10:01]--[2018-11-26 Mon 11:02] =>  1:01
@@ -404,8 +481,41 @@ Notes:
 
 - decoration etc are still not using the =masd.= prefix.
 
+Merged stories:
+
+*Update all stereotypes to masd*
+
+We need to start distinguishing MASD from dogen. The profile for UML
+is part of MASD rather than dogen, so we should update all stereotypes
+to match. We need to make a decision regarding the "dia extensions" -
+its not clear if its MASD or dogen.
+
+*Clean up UML profiles and meta-data*
+
+- we should wait until we rename =quilt= too so we can clean up the
+  quilt meta-data at the same time.
+- rename references too since they belong to external, i.e.:
+
+: #DOGEN yarn.reference=annotations.dia
+
+  should be:
+
+: #DOGEN external.reference=annotations.dia
+
+- similarly with:
+
+: #DOGEN yarn.dia.comment=true
+
+  should instead be:
+
+: #DOGEN external.dia.comment=true
+
+  in fact, should we mention "tagged values" instead of "comment"?
+
+
 *** STARTED Create a single binary for all of dogen                   :story:
     :LOGBOOK:
+    CLOCK: [2019-02-08 Fri 13:31]--[2019-02-08 Fri 13:40] =>  0:19
     CLOCK: [2019-02-07 Thu 16:20]--[2019-02-07 Thu 17:03] =>  0:43
     CLOCK: [2019-02-07 Thu 14:05]--[2019-02-07 Thu 15:40] =>  1:35
     CLOCK: [2019-02-07 Thu 09:21]--[2019-02-07 Thu 12:05] =>  2:44
@@ -461,6 +571,16 @@ call it something allusive to the command line, such as cli. However,
 the final binary should be called dogen or perhaps, =dogen.cli=. This
 fits in with other binaries such as =dogen.web=, =dogen.http=,
 =dogen.gui= etc.
+
+*** STARTED Update vcpkg across all operative systems                 :story:
+    :LOGBOOK:
+    CLOCK: [2019-02-08 Fri 12:25]--[2019-02-08 Fri 13:30] =>  1:05
+    CLOCK: [2019-02-08 Fri 08:35]--[2019-02-08 Fri 12:05] =>  3:30
+    :END:
+
+Now that we have updated linux to latest vcpkg, we need to do the same
+for windows and osx. Hopefully latest boost.di and boost will fix the
+errors we are experiencing there.
 
 *** Move top-level transforms into orchestration                      :story:
 
@@ -1256,3 +1376,90 @@ We could use something like the [[https://code.google.com/p/dtl-cpp/wiki/Tutoria
 *Rationale*: superseded by the MASD rename.
 
 We renamed the model but did not update the traits.
+*** CANCELLED Update backend shape to match yarn                      :story:
+    CLOSED: [2019-02-08 Fri 13:55]
+
+*Rationale*: this story has been superseded by the latest refactor.
+
+In an ideal world, the backends should be made up of two components:
+
+- *meta-model*: a set of types that augment yarn with backend
+  specific elements. This is what we call fabric at present.
+- *transforms*: of these we have two kinds:
+  - the model-to-model transforms that involve either yarn meta-model
+    elements or backened specific meta-model elements. These live in
+    fabric at present.
+   - the model-to-text transforms that convert a meta-model element
+     (yarn or backend specific) into an artefact. These we call
+     formatters at present.
+
+The ultimate destination for the backend is then to have a shape that
+reflects this:
+
+- rename formatters to transforms
+- move artefact formatter into yarn; with this it means we can also
+  move all of the top-level workflow formatting logic into
+  yarn. However, before we can do this we must make all of the backend
+  specific code in the formatter interface go away.
+- note that at this point we no longer need to know what formatters
+  belong to what backend other than perhaps to figure out if the
+  backend is enabled. This means yarn can now have the registrars for
+  formatters and organise them by backend. Which means the
+  model-to-text chain will own all of these. However, we still have
+  the managed directories to worry about; somehow, someone has to be
+  able to compute the managed directories per kernel. This could be
+  done at yarn level if the locator is clever enough.
+
+Of course, before we can contemplate this change, we must first get
+rid of formattables altogether.
+
+We must also somehow model canonical formatters in yarn. Take this
+into account when we do:
+
+:        /*
+:         * We must have one canonical formatter per type per facet.
+:         * FIXME: this check is broken at the moment because this is
+:         * only applicable to yarn types, not fabric types. It is also
+:         * not applicable to forward declarations. We need some
+:         * additional information from yarn to be able to figure out
+:         * which types must have a canonical archetype.
+:         */
+
+Notes from MASD:
+
+- Formatters are now seen as merely *text transforms* that convert
+  from the generational model to the extractional model. We could
+  house them under "text transforms" rather than transforms because we
+  will also need regular model transforms.
+- Formatters model is the extractional model. It provides primitives
+  to create transforms to generate its types. It needs to be augmented
+  with the model types, and divided using the traditional namespaces
+  (metamodel, transforms, helpers).
+- moving towards having multiple components per model means that its
+  much easier to support facets in this way. The other great advantage
+  of this approach is that now each facet can have its DLL main / main
+  if a binary is to be made for it, on its own folder. Conversely, the
+  top-level DLL main / main is the cross-facet component, so its
+  slightly clearer who includes what. We should also start specifying
+  explicitly what is included in each target.
+- when tests become a facet rename it to testing.
+
+Merged Stories:
+
+*Rename fabric and formattables*
+
+In the long run, we should use proper names for these namespaces:
+
+- fabric is meta-model;
+- formattables houses transformations.
+
+Unfortunately this will cause problems with the yarn names.
+
+*** CANCELLED Tidy-up fabric                                          :story:
+    CLOSED: [2019-02-08 Fri 13:57]
+
+*Rationale*: this story has been superseded by the latest refactor.
+
+Now we have dynamic transforms, we don't really need all the classlets
+we've created in fabric. We can get away with probably just the
+dynamic transform, calling all the factories.

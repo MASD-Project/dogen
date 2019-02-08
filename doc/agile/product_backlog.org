@@ -534,71 +534,11 @@ different projects.
 
 We should do the same thing for =--delete-extra-files=.
 
-*** Update all stereotypes to masd                                    :story:
-
-We need to start distinguishing MASD from dogen. The profile for UML
-is part of MASD rather than dogen, so we should update all stereotypes
-to match. We need to make a decision regarding the "dia extensions" -
-its not clear if its MASD or dogen.
-
 *** Improve comments on reference implementation                      :story:
 
 At present it is very difficult to understand what each model and/or
 each type does in the reference implementations. We need to add some
 comments to make it more obvious.
-
-*** Create the =generation= model                                     :story:
-
-Create a new model called =generation= and move all code-generation
-related class to it.
-
-We need to create classes for element properties and make model have a
-collection that is a pair of element and element properties. We need a
-good name for this pair:
-
-- extended element
-- augmented element
-- decorated element: though not using the decorator pattern; also, we
-  already have decoration properties so this is confusing.
-
-Alternatively we could just call it =element= and make it contain a
-modeling element.
-
-Approach:
-
-- create a new generation model, copying across all of the meta-model
-  and transform classes from yarn. Get the model to transform from
-  endomodel to generation model.
-- augment formattables with the new element properties. Supply this
-  data via the context or assistant.
-
-Problems:
-
-- all of the transforms assume access to the modeling element means
-  access to the generation properties. However, with the introduction
-  of the generation element we now have a disconnect. For example, we
-  sometimes sort and bucket the elements, and then modify them; this
-  no longer works with generation elements because these are not
-  pointers. It would be easier to make the generation properties a
-  part of the element. This is an ongoing discussion we've had since
-  the days of formattables. However, in formattables we did write all
-  of the transforms to take into account the formattable contained
-  both the element and the formattable properties, whereas now we need
-  to update all transforms to fit this approach. This is a lot more
-  work. The quick hack is to slot in the properties directly into the
-  element as some kind of "opaque properties". We could create a base
-  class =opaque_properties= and then have a container of these in
-  element. However, to make it properly extensible, the only way is to
-  make it a unordered set of pointers.
-- actually the right solution for this is to use multiple
-  inheritance. For each modeling element we need to create a
-  corresponding generation version of it, which is the combination of
-  the modeling element and a generation element base class. Them the
-  generation model is made up of pointers to generation elements and
-  it dispatches into generation elements descendants in the
-  formatter. The key point is to preserve the distinction between
-  modeling (single element) vs generation (projection across facet
-  space).
 
 *** Adding reference to itself results in resolution errors           :story:
 
@@ -678,42 +618,6 @@ This also means we can transparently change the underlying collection;
 though it would force a recompile, no code should break (e.g. from
 list to vector or array).
 
-*** Rename core models                                                :story:
-
-The more we catch up with the literature, the more the current model
-names look weird, particularly =modeling= and =generation=. In reality
-all of the models relate to "modeling" and to generation. We should
-just bite the bullet and use the compiler related names: frontend,
-middleend and backend.
-
-Interestingly, eCore/EMF also take the same approach of having a model
-that is then enriched for generation. This means we could have:
-
-- frontend/interop/external.
-- middleend/modeling
-- backend/generation
-
-*** Clean up UML profiles and meta-data                               :story:
-
-- we should wait until we rename =quilt= too so we can clean up the
-  quilt meta-data at the same time.
-- rename references too since they belong to external, i.e.:
-
-: #DOGEN yarn.reference=annotations.dia
-
-  should be:
-
-: #DOGEN external.reference=annotations.dia
-
-- similarly with:
-
-: #DOGEN yarn.dia.comment=true
-
-  should instead be:
-
-: #DOGEN external.dia.comment=true
-
-  in fact, should we mention "tagged values" instead of "comment"?
 *** Clean up external element                                         :story:
 
 Need to add: can_be_primitive_underlier, in_global_module,
@@ -741,82 +645,6 @@ remove all of the legacy code.
 *** Generate file paths as a transform                                :story:
 
 See the comments in the previous sprint.
-
-*** Update backend shape to match yarn                                :story:
-
-In an ideal world, the backends should be made up of two components:
-
-- *meta-model*: a set of types that augment yarn with backend
-  specific elements. This is what we call fabric at present.
-- *transforms*: of these we have two kinds:
-  - the model-to-model transforms that involve either yarn meta-model
-    elements or backened specific meta-model elements. These live in
-    fabric at present.
-   - the model-to-text transforms that convert a meta-model element
-     (yarn or backend specific) into an artefact. These we call
-     formatters at present.
-
-The ultimate destination for the backend is then to have a shape that
-reflects this:
-
-- rename formatters to transforms
-- move artefact formatter into yarn; with this it means we can also
-  move all of the top-level workflow formatting logic into
-  yarn. However, before we can do this we must make all of the backend
-  specific code in the formatter interface go away.
-- note that at this point we no longer need to know what formatters
-  belong to what backend other than perhaps to figure out if the
-  backend is enabled. This means yarn can now have the registrars for
-  formatters and organise them by backend. Which means the
-  model-to-text chain will own all of these. However, we still have
-  the managed directories to worry about; somehow, someone has to be
-  able to compute the managed directories per kernel. This could be
-  done at yarn level if the locator is clever enough.
-
-Of course, before we can contemplate this change, we must first get
-rid of formattables altogether.
-
-We must also somehow model canonical formatters in yarn. Take this
-into account when we do:
-
-:        /*
-:         * We must have one canonical formatter per type per facet.
-:         * FIXME: this check is broken at the moment because this is
-:         * only applicable to yarn types, not fabric types. It is also
-:         * not applicable to forward declarations. We need some
-:         * additional information from yarn to be able to figure out
-:         * which types must have a canonical archetype.
-:         */
-
-Notes from MASD:
-
-- Formatters are now seen as merely *text transforms* that convert
-  from the generational model to the extractional model. We could
-  house them under "text transforms" rather than transforms because we
-  will also need regular model transforms.
-- Formatters model is the extractional model. It provides primitives
-  to create transforms to generate its types. It needs to be augmented
-  with the model types, and divided using the traditional namespaces
-  (metamodel, transforms, helpers).
-- moving towards having multiple components per model means that its
-  much easier to support facets in this way. The other great advantage
-  of this approach is that now each facet can have its DLL main / main
-  if a binary is to be made for it, on its own folder. Conversely, the
-  top-level DLL main / main is the cross-facet component, so its
-  slightly clearer who includes what. We should also start specifying
-  explicitly what is included in each target.
-- when tests become a facet rename it to testing.
-
-Merged Stories:
-
-*Rename fabric and formattables*
-
-In the long run, we should use proper names for these namespaces:
-
-- fabric is meta-model;
-- formattables houses transformations.
-
-Unfortunately this will cause problems with the yarn names.
 
 *** Consider bucketing elements by meta-type in model                 :story:
 
@@ -857,12 +685,6 @@ of features; this is what we have so far called "properties". The
 instances of these features are called configurations. We just need a
 strategy for mapping features into UML models, for which there are
 several in the literature.
-
-*** Tidy-up fabric                                                    :story:
-
-Now we have dynamic transforms, we don't really need all the classlets
-we've created in fabric. We can get away with probably just the
-dynamic transform, calling all the factories.
 
 *** Create a text model post-processing chain                         :story:
 
