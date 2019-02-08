@@ -73,16 +73,19 @@ const std::string logging_log_level_warn("warn");
 const std::string logging_log_level_error("error");
 const std::string logging_default_log_directory("log");
 
-const std::string generation_compatibility_mode_enabled_arg(
+const std::string generate_compatibility_mode_enabled_arg(
     "compatibility-mode-enabled");
-const std::string generation_target_arg("target");
-const std::string generation_output_dir_arg("output-directory");
-const std::string generation_cpp_headers_output_directory_arg(
+const std::string generate_target_arg("target");
+const std::string generate_output_dir_arg("output-directory");
+const std::string generate_cpp_headers_output_directory_arg(
     "cpp-headers-output-directory");
-const std::string generation_delete_extra_files_arg("delete-extra-files");
-const std::string generation_ignore_files_matching_regex_arg(
+const std::string generate_delete_extra_files_arg("delete-extra-files");
+const std::string generate_ignore_files_matching_regex_arg(
     "ignore-files-matching-regex");
-const std::string generation_force_write_arg("force-write");
+const std::string generate_force_write_arg("force-write");
+
+const std::string convert_source_arg("source");
+const std::string convert_destination_arg("destination");
 
 const std::string invalid_option("Option is not valid for command: ");
 const std::string invalid_command("Command is invalid or unsupported: ");
@@ -154,7 +157,7 @@ positional_options_description make_positional_options() {
 /**
  * @brief Creates the options related to code generation.
  */
-options_description make_generation_options_description() {
+options_description make_generate_options_description() {
     options_description r("Generation");
     r.add_options()
         ("compatibility-mode-enabled,m", "Attempt to process inputs, "
@@ -430,38 +433,38 @@ read_logging_configuration(const variables_map& vm) {
 }
 
 /**
- * @brief Reads the tracing configuration from the variables map.
+ * @brief Reads the generation configuration from the variables map.
  */
 masd::dogen::generation_configuration
 read_generation_configuration(const variables_map& vm) {
     masd::dogen::generation_configuration r;
 
     using boost::filesystem::absolute;
-    if (vm.count(generation_target_arg)) {
-        const auto target_str(vm[generation_target_arg].as<std::string>());
+    if (vm.count(generate_target_arg)) {
+        const auto target_str(vm[generate_target_arg].as<std::string>());
         r.target(absolute(target_str));
     }
 
     r.compatibility_mode_enabled(
-        vm.count(generation_compatibility_mode_enabled_arg) != 0);
-    r.delete_extra_files(vm.count(generation_delete_extra_files_arg) != 0);
-    r.force_write(vm.count(generation_force_write_arg) != 0);
+        vm.count(generate_compatibility_mode_enabled_arg) != 0);
+    r.delete_extra_files(vm.count(generate_delete_extra_files_arg) != 0);
+    r.force_write(vm.count(generate_force_write_arg) != 0);
 
-    if (vm.count(generation_ignore_files_matching_regex_arg)) {
-        const auto p(vm[generation_ignore_files_matching_regex_arg]
+    if (vm.count(generate_ignore_files_matching_regex_arg)) {
+        const auto p(vm[generate_ignore_files_matching_regex_arg]
             .as<std::vector<std::string>>());
         r.ignore_files_matching_regex(p);
     }
 
-    if (!vm.count(generation_output_dir_arg))
+    if (!vm.count(generate_output_dir_arg))
         r.output_directory(boost::filesystem::current_path());
     else {
-        const auto s(vm[generation_output_dir_arg].as<std::string>());
+        const auto s(vm[generate_output_dir_arg].as<std::string>());
         r.output_directory(absolute(s));
     }
 
-    if (vm.count(generation_cpp_headers_output_directory_arg)) {
-        const auto s(vm[generation_cpp_headers_output_directory_arg]
+    if (vm.count(generate_cpp_headers_output_directory_arg)) {
+        const auto s(vm[generate_cpp_headers_output_directory_arg]
             .as<std::string>());
         r.cpp_headers_output_directory(absolute(s));
     }
@@ -469,6 +472,26 @@ read_generation_configuration(const variables_map& vm) {
     return r;
 }
 
+/**
+ * @brief Reads the conversion configuration from the variables map.
+ */
+masd::dogen::conversion_configuration
+read_conversion_configuration(const variables_map& vm) {
+    masd::dogen::conversion_configuration r;
+
+    using boost::filesystem::absolute;
+    if (vm.count(convert_source_arg)) {
+        const auto s(vm[convert_source_arg].as<std::string>());
+        r.source(absolute(s));
+    }
+
+    if (vm.count(convert_destination_arg)) {
+        const auto s(vm[convert_destination_arg].as<std::string>());
+        r.destination_file_name(s);
+    }
+
+    return r;
+}
 
 /**
  * @brief Contains the processing logic for when the user supplies a
@@ -498,7 +521,7 @@ handle_command(const std::string& command_name, const bool has_help,
     using boost::program_options::command_line_parser;
     typedef boost::optional<masd::dogen::configuration> empty_config;
     if (command_name == generate_command_name) {
-        const auto god(make_generation_options_description());
+        const auto god(make_generate_options_description());
         if (has_help) {
             print_help_command(generate_command_name, god, info);
             return empty_config();
@@ -516,6 +539,7 @@ handle_command(const std::string& command_name, const bool has_help,
         }
 
         store(command_line_parser(options).options(cod).run(), vm);
+        r.conversion(read_conversion_configuration(vm));
         r.activity(masd::dogen::activity::convert);
 
     } else if (command_name == weave_command_name) {
