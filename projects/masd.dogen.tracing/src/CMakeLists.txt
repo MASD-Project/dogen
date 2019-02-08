@@ -33,10 +33,19 @@ set_target_properties(${lib_target_name} PROPERTIES
 set_target_properties(${lib_target_name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
+set(use_msvc_libs OFF)
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+    if ("${CMAKE_CXX_SIMULATE_ID}" STREQUAL "MSVC")
+        set(use_msvc_libs ON)
+    endif ()
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+    set(use_msvc_libs ON)
+endif ()
+
 target_link_libraries(${lib_target_name}
     masd.dogen.utility.lib
     masd.dogen.extraction.lib
-    $<$<CXX_COMPILER_ID:MSVC>:bcrypt>
+    $<$<BOOL:${use_msvc_libs}>:bcrypt>
     ${Boost_LIBRARIES})
 
 install(TARGETS ${lib_target_name} ARCHIVE DESTINATION lib COMPONENT libraries)
