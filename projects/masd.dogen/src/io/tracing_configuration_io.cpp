@@ -39,7 +39,7 @@ std::ostream& operator<<(std::ostream& s, const tracing_configuration& v) {
       << "\"output_directory\": " << "\"" << v.output_directory().generic_string() << "\"" << ", "
       << "\"level\": " << v.level() << ", "
       << "\"format\": " << v.format() << ", "
-      << "\"enable_guids\": " << v.enable_guids()
+      << "\"guids_enabled\": " << v.guids_enabled()
       << " }";
     return(s);
 }

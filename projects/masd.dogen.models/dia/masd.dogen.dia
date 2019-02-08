@@ -2424,19 +2424,19 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O18">
       <dia:attribute name="obj_pos">
-        <dia:point val="-2,-49"/>
+        <dia:point val="-1,-49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-2.05,-49.05;23.19,-43.75"/>
+        <dia:rectangle val="-1.05,-49.05;24.19,-42.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-2,-49"/>
+        <dia:point val="-1,-49"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.140000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#generation_configuration#</dia:string>
@@ -2595,6 +2595,29 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#target#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#boost::filesystem::path#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -2643,7 +2666,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:point val="9.645,-38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="8.895,-43.85;10.77,-37.2"/>
+        <dia:rectangle val="8.895,-43.05;11.77,-37.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2651,8 +2674,8 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="9.645,-38"/>
         <dia:point val="9.645,-41"/>
-        <dia:point val="10.57,-41"/>
-        <dia:point val="10.57,-43.8"/>
+        <dia:point val="11.57,-41"/>
+        <dia:point val="11.57,-43"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7588,16 +7611,16 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:point val="-17,-49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.05,-49.05;-5.67,-45.35"/>
+        <dia:rectangle val="-17.05,-49.05;-4.13,-44.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-17,-49"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.279999999999999"/>
+        <dia:real val="12.82"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#weaving_configuration#</dia:string>
@@ -7710,6 +7733,29 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#target#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#boost::filesystem::path#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -7755,17 +7801,17 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-11.1675,-49"/>
+        <dia:point val="-10.59,-49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-11.9175,-58.65;-7.315,-48.2"/>
+        <dia:rectangle val="-11.34,-58.65;-7.315,-48.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-11.1675,-49"/>
-        <dia:point val="-11.1675,-53"/>
+        <dia:point val="-10.59,-49"/>
+        <dia:point val="-10.59,-53"/>
         <dia:point val="-7.515,-53"/>
         <dia:point val="-7.515,-58.6"/>
       </dia:attribute>
@@ -7829,7 +7875,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:point val="-1,-38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-11.2175,-45.45;-0.25,-37.2"/>
+        <dia:rectangle val="-10.64,-44.65;-0.25,-37.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7837,8 +7883,8 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-1,-38"/>
         <dia:point val="-1,-41"/>
-        <dia:point val="-11.1675,-41"/>
-        <dia:point val="-11.1675,-45.4"/>
+        <dia:point val="-10.59,-41"/>
+        <dia:point val="-10.59,-44.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -8520,7 +8566,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:point val="26,-49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="25.95,-49.05;40.025,-44.55"/>
+        <dia:rectangle val="25.95,-49.05;40.025,-43.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="26,-49"/>
@@ -8529,7 +8575,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:real val="13.975"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#conversion_configuration#</dia:string>
@@ -8619,6 +8665,29 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#source#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#boost::filesystem::path#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#destination_type#</dia:string>
@@ -8718,7 +8787,7 @@ for the destination type.#</dia:string>
         <dia:point val="20.29,-38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.54,-44.65;33.1875,-37.2"/>
+        <dia:rectangle val="19.54,-43.85;33.1875,-37.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8727,7 +8796,7 @@ for the destination type.#</dia:string>
         <dia:point val="20.29,-38"/>
         <dia:point val="20.29,-41"/>
         <dia:point val="32.9875,-41"/>
-        <dia:point val="32.9875,-44.6"/>
+        <dia:point val="32.9875,-43.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

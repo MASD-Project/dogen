@@ -52,7 +52,7 @@ public:
         const boost::filesystem::path& output_directory,
         const masd::dogen::tracing_level level,
         const masd::dogen::tracing_format format,
-        const bool enable_guids);
+        const bool guids_enabled);
 
 public:
     /**
@@ -95,8 +95,8 @@ public:
      * Disabling GUIDs makes comparisons easier.
      */
     /**@{*/
-    bool enable_guids() const;
-    tracing_configuration& enable_guids(const bool v);
+    bool guids_enabled() const;
+    tracing_configuration& guids_enabled(const bool v);
     /**@}*/
 
 public:
@@ -114,7 +114,7 @@ private:
     boost::filesystem::path output_directory_;
     masd::dogen::tracing_level level_;
     masd::dogen::tracing_format format_;
-    bool enable_guids_;
+    bool guids_enabled_;
 };
 
 }

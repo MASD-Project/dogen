@@ -28,7 +28,8 @@ std::ostream& operator<<(std::ostream& s, const weaving_configuration& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::weaving_configuration\"" << ", "
       << "\"output_directory\": " << "\"" << v.output_directory().generic_string() << "\"" << ", "
-      << "\"style\": " << v.style()
+      << "\"style\": " << v.style() << ", "
+      << "\"target\": " << "\"" << v.target().generic_string() << "\""
       << " }";
     return(s);
 }

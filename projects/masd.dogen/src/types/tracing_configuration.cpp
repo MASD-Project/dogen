@@ -26,26 +26,26 @@ tracing_configuration::tracing_configuration()
     : enabled_(static_cast<bool>(0)),
       level_(static_cast<masd::dogen::tracing_level>(0)),
       format_(static_cast<masd::dogen::tracing_format>(0)),
-      enable_guids_(static_cast<bool>(0)) { }
+      guids_enabled_(static_cast<bool>(0)) { }
 
 tracing_configuration::tracing_configuration(tracing_configuration&& rhs)
     : enabled_(std::move(rhs.enabled_)),
       output_directory_(std::move(rhs.output_directory_)),
       level_(std::move(rhs.level_)),
       format_(std::move(rhs.format_)),
-      enable_guids_(std::move(rhs.enable_guids_)) { }
+      guids_enabled_(std::move(rhs.guids_enabled_)) { }
 
 tracing_configuration::tracing_configuration(
     const bool enabled,
     const boost::filesystem::path& output_directory,
     const masd::dogen::tracing_level level,
     const masd::dogen::tracing_format format,
-    const bool enable_guids)
+    const bool guids_enabled)
     : enabled_(enabled),
       output_directory_(output_directory),
       level_(level),
       format_(format),
-      enable_guids_(enable_guids) { }
+      guids_enabled_(guids_enabled) { }
 
 void tracing_configuration::swap(tracing_configuration& other) noexcept {
     using std::swap;
@@ -53,7 +53,7 @@ void tracing_configuration::swap(tracing_configuration& other) noexcept {
     swap(output_directory_, other.output_directory_);
     swap(level_, other.level_);
     swap(format_, other.format_);
-    swap(enable_guids_, other.enable_guids_);
+    swap(guids_enabled_, other.guids_enabled_);
 }
 
 bool tracing_configuration::operator==(const tracing_configuration& rhs) const {
@@ -61,7 +61,7 @@ bool tracing_configuration::operator==(const tracing_configuration& rhs) const {
         output_directory_ == rhs.output_directory_ &&
         level_ == rhs.level_ &&
         format_ == rhs.format_ &&
-        enable_guids_ == rhs.enable_guids_;
+        guids_enabled_ == rhs.guids_enabled_;
 }
 
 tracing_configuration& tracing_configuration::operator=(tracing_configuration other) {
@@ -115,12 +115,12 @@ tracing_configuration& tracing_configuration::format(const masd::dogen::tracing_
     return *this;
 }
 
-bool tracing_configuration::enable_guids() const {
-    return enable_guids_;
+bool tracing_configuration::guids_enabled() const {
+    return guids_enabled_;
 }
 
-tracing_configuration& tracing_configuration::enable_guids(const bool v) {
-    enable_guids_ = v;
+tracing_configuration& tracing_configuration::guids_enabled(const bool v) {
+    guids_enabled_ = v;
     return *this;
 }
 

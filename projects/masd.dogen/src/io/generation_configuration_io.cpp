@@ -51,7 +51,8 @@ std::ostream& operator<<(std::ostream& s, const generation_configuration& v) {
       << "\"output_directory\": " << "\"" << v.output_directory().generic_string() << "\"" << ", "
       << "\"reference_model_directories\": " << v.reference_model_directories() << ", "
       << "\"force_write\": " << v.force_write() << ", "
-      << "\"enable_compatibility_mode\": " << v.enable_compatibility_mode()
+      << "\"enable_compatibility_mode\": " << v.enable_compatibility_mode() << ", "
+      << "\"target\": " << "\"" << v.target().generic_string() << "\""
       << " }";
     return(s);
 }

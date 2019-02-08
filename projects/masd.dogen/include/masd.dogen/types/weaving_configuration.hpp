@@ -48,7 +48,8 @@ public:
 public:
     weaving_configuration(
         const boost::filesystem::path& output_directory,
-        const masd::dogen::weaving_style style);
+        const masd::dogen::weaving_style style,
+        const boost::filesystem::path& target);
 
 public:
     /**
@@ -69,6 +70,11 @@ public:
     weaving_configuration& style(const masd::dogen::weaving_style v);
     /**@}*/
 
+    const boost::filesystem::path& target() const;
+    boost::filesystem::path& target();
+    weaving_configuration& target(const boost::filesystem::path& v);
+    weaving_configuration& target(const boost::filesystem::path&& v);
+
 public:
     bool operator==(const weaving_configuration& rhs) const;
     bool operator!=(const weaving_configuration& rhs) const {
@@ -82,6 +88,7 @@ public:
 private:
     boost::filesystem::path output_directory_;
     masd::dogen::weaving_style style_;
+    boost::filesystem::path target_;
 };
 
 }

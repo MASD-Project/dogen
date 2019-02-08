@@ -51,7 +51,8 @@ public:
         const boost::filesystem::path& output_directory,
         const std::list<boost::filesystem::path>& reference_model_directories,
         const bool force_write,
-        const bool enable_compatibility_mode);
+        const bool enable_compatibility_mode,
+        const boost::filesystem::path& target);
 
 public:
     /**
@@ -93,6 +94,11 @@ public:
     generation_configuration& enable_compatibility_mode(const bool v);
     /**@}*/
 
+    const boost::filesystem::path& target() const;
+    boost::filesystem::path& target();
+    generation_configuration& target(const boost::filesystem::path& v);
+    generation_configuration& target(const boost::filesystem::path&& v);
+
 public:
     bool operator==(const generation_configuration& rhs) const;
     bool operator!=(const generation_configuration& rhs) const {
@@ -109,6 +115,7 @@ private:
     std::list<boost::filesystem::path> reference_model_directories_;
     bool force_write_;
     bool enable_compatibility_mode_;
+    boost::filesystem::path target_;
 };
 
 }

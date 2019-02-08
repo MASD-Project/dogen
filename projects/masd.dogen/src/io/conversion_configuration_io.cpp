@@ -36,6 +36,7 @@ std::ostream& operator<<(std::ostream& s, const conversion_configuration& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::conversion_configuration\"" << ", "
       << "\"output_directory\": " << "\"" << v.output_directory().generic_string() << "\"" << ", "
+      << "\"source\": " << "\"" << v.source().generic_string() << "\"" << ", "
       << "\"destination_type\": " << "\"" << tidy_up_string(v.destination_type()) << "\"" << ", "
       << "\"destination_file_name\": " << "\"" << tidy_up_string(v.destination_file_name()) << "\""
       << " }";

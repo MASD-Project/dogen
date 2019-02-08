@@ -46,6 +46,7 @@ public:
 public:
     conversion_configuration(
         const boost::filesystem::path& output_directory,
+        const boost::filesystem::path& source,
         const std::string& destination_type,
         const std::string& destination_file_name);
 
@@ -59,6 +60,11 @@ public:
     conversion_configuration& output_directory(const boost::filesystem::path& v);
     conversion_configuration& output_directory(const boost::filesystem::path&& v);
     /**@}*/
+
+    const boost::filesystem::path& source() const;
+    boost::filesystem::path& source();
+    conversion_configuration& source(const boost::filesystem::path& v);
+    conversion_configuration& source(const boost::filesystem::path&& v);
 
     /**
      * @brief Type of the model to convert into.
@@ -97,6 +103,7 @@ public:
 
 private:
     boost::filesystem::path output_directory_;
+    boost::filesystem::path source_;
     std::string destination_type_;
     std::string destination_file_name_;
 };

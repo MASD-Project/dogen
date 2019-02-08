@@ -27,23 +27,28 @@ weaving_configuration::weaving_configuration()
 
 weaving_configuration::weaving_configuration(weaving_configuration&& rhs)
     : output_directory_(std::move(rhs.output_directory_)),
-      style_(std::move(rhs.style_)) { }
+      style_(std::move(rhs.style_)),
+      target_(std::move(rhs.target_)) { }
 
 weaving_configuration::weaving_configuration(
     const boost::filesystem::path& output_directory,
-    const masd::dogen::weaving_style style)
+    const masd::dogen::weaving_style style,
+    const boost::filesystem::path& target)
     : output_directory_(output_directory),
-      style_(style) { }
+      style_(style),
+      target_(target) { }
 
 void weaving_configuration::swap(weaving_configuration& other) noexcept {
     using std::swap;
     swap(output_directory_, other.output_directory_);
     swap(style_, other.style_);
+    swap(target_, other.target_);
 }
 
 bool weaving_configuration::operator==(const weaving_configuration& rhs) const {
     return output_directory_ == rhs.output_directory_ &&
-        style_ == rhs.style_;
+        style_ == rhs.style_ &&
+        target_ == rhs.target_;
 }
 
 weaving_configuration& weaving_configuration::operator=(weaving_configuration other) {
@@ -76,6 +81,24 @@ masd::dogen::weaving_style weaving_configuration::style() const {
 
 weaving_configuration& weaving_configuration::style(const masd::dogen::weaving_style v) {
     style_ = v;
+    return *this;
+}
+
+const boost::filesystem::path& weaving_configuration::target() const {
+    return target_;
+}
+
+boost::filesystem::path& weaving_configuration::target() {
+    return target_;
+}
+
+weaving_configuration& weaving_configuration::target(const boost::filesystem::path& v) {
+    target_ = v;
+    return *this;
+}
+
+weaving_configuration& weaving_configuration::target(const boost::filesystem::path&& v) {
+    target_ = std::move(v);
     return *this;
 }
 

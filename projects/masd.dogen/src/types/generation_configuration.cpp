@@ -32,19 +32,22 @@ generation_configuration::generation_configuration(generation_configuration&& rh
       output_directory_(std::move(rhs.output_directory_)),
       reference_model_directories_(std::move(rhs.reference_model_directories_)),
       force_write_(std::move(rhs.force_write_)),
-      enable_compatibility_mode_(std::move(rhs.enable_compatibility_mode_)) { }
+      enable_compatibility_mode_(std::move(rhs.enable_compatibility_mode_)),
+      target_(std::move(rhs.target_)) { }
 
 generation_configuration::generation_configuration(
     const bool enabled,
     const boost::filesystem::path& output_directory,
     const std::list<boost::filesystem::path>& reference_model_directories,
     const bool force_write,
-    const bool enable_compatibility_mode)
+    const bool enable_compatibility_mode,
+    const boost::filesystem::path& target)
     : enabled_(enabled),
       output_directory_(output_directory),
       reference_model_directories_(reference_model_directories),
       force_write_(force_write),
-      enable_compatibility_mode_(enable_compatibility_mode) { }
+      enable_compatibility_mode_(enable_compatibility_mode),
+      target_(target) { }
 
 void generation_configuration::swap(generation_configuration& other) noexcept {
     using std::swap;
@@ -53,6 +56,7 @@ void generation_configuration::swap(generation_configuration& other) noexcept {
     swap(reference_model_directories_, other.reference_model_directories_);
     swap(force_write_, other.force_write_);
     swap(enable_compatibility_mode_, other.enable_compatibility_mode_);
+    swap(target_, other.target_);
 }
 
 bool generation_configuration::operator==(const generation_configuration& rhs) const {
@@ -60,7 +64,8 @@ bool generation_configuration::operator==(const generation_configuration& rhs) c
         output_directory_ == rhs.output_directory_ &&
         reference_model_directories_ == rhs.reference_model_directories_ &&
         force_write_ == rhs.force_write_ &&
-        enable_compatibility_mode_ == rhs.enable_compatibility_mode_;
+        enable_compatibility_mode_ == rhs.enable_compatibility_mode_ &&
+        target_ == rhs.target_;
 }
 
 generation_configuration& generation_configuration::operator=(generation_configuration other) {
@@ -129,6 +134,24 @@ bool generation_configuration::enable_compatibility_mode() const {
 
 generation_configuration& generation_configuration::enable_compatibility_mode(const bool v) {
     enable_compatibility_mode_ = v;
+    return *this;
+}
+
+const boost::filesystem::path& generation_configuration::target() const {
+    return target_;
+}
+
+boost::filesystem::path& generation_configuration::target() {
+    return target_;
+}
+
+generation_configuration& generation_configuration::target(const boost::filesystem::path& v) {
+    target_ = v;
+    return *this;
+}
+
+generation_configuration& generation_configuration::target(const boost::filesystem::path&& v) {
+    target_ = std::move(v);
     return *this;
 }
 
