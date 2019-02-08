@@ -34,8 +34,8 @@ New-Item -ItemType directory -Path $downloads_dir | Out-Null
 # generate the dropbox link or else we will still point to the old
 # package. Update the link below as well as the folder name.
 #
-$vcpkg_dropbox_link="s/gfy5s4tlrn4c9kt"
-$vcpkg_folder="vcpkg-export-20181018-153308"
+$vcpkg_dropbox_link="s/8ub7bjo7vovlrzl"
+$vcpkg_folder="vcpkg-export-20190208-113530"
 $vcpkg_package="${vcpkg_folder}.zip"
 $vcpkg_input_location="https://www.dropbox.com/${vcpkg_dropbox_link}/${vcpkg_package}?dl=0"
 $vcpkg_downloads_location="${downloads_dir}\${vcpkg_package}"
