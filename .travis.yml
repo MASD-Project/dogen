@@ -26,15 +26,6 @@ git:
   depth: 2
 
 matrix:
-  allow_failures:
-    # clang build is failing at present
-    - os: linux
-      compiler: clang
-      env: configuration=Release compiler="clang7" generator="Ninja" build_group="Continuous"
-    - os: linux
-      compiler: clang
-      env: coverage=1 configuration=Debug compiler="clang7" generator="Ninja" build_group="Continuous"
-
   include:
     #
     # OSX Clang
