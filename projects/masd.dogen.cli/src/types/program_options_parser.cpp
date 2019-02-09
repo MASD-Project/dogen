@@ -72,7 +72,6 @@ const std::string logging_log_level_info("info");
 const std::string logging_log_level_warn("warn");
 const std::string logging_log_level_error("error");
 const std::string logging_default_log_directory("log");
-
 const std::string generate_compatibility_mode_enabled_arg(
     "compatibility-mode-enabled");
 const std::string generate_target_arg("target");
@@ -83,9 +82,9 @@ const std::string generate_delete_extra_files_arg("delete-extra-files");
 const std::string generate_ignore_files_matching_regex_arg(
     "ignore-files-matching-regex");
 const std::string generate_force_write_arg("force-write");
-
 const std::string convert_source_arg("source");
 const std::string convert_destination_arg("destination");
+const std::string weaving_target_arg("target");
 
 const std::string invalid_option("Option is not valid for command: ");
 const std::string invalid_command("Command is invalid or unsupported: ");
@@ -494,13 +493,29 @@ read_conversion_configuration(const variables_map& vm) {
 }
 
 /**
+ * @brief Reads the weaving configuration from the variables map.
+ */
+masd::dogen::weaving_configuration
+read_weaving_configuration(const variables_map& vm) {
+    masd::dogen::weaving_configuration r;
+
+    using boost::filesystem::absolute;
+    if (vm.count(weaving_target_arg)) {
+        const auto s(vm[weaving_target_arg].as<std::string>());
+        r.target(absolute(s));
+    }
+
+    return r;
+}
+
+/**
  * @brief Contains the processing logic for when the user supplies a
  * command in the command line.
  */
 boost::optional<masd::dogen::configuration>
 handle_command(const std::string& command_name, const bool has_help,
     const boost::program_options::parsed_options& po, std::ostream& info,
-    std::ostream& /*err*/, variables_map& vm) {
+    variables_map& vm) {
 
     /*
      * Collect all the unrecognized options from the first pass. It
@@ -541,7 +556,7 @@ handle_command(const std::string& command_name, const bool has_help,
         store(command_line_parser(options).options(cod).run(), vm);
         r.conversion(read_conversion_configuration(vm));
         r.activity(masd::dogen::activity::convert);
-
+        model_name = r.conversion()->source().stem().filename().string();
     } else if (command_name == weave_command_name) {
         const auto cod(make_weave_options_description());
         if (has_help) {
@@ -550,11 +565,14 @@ handle_command(const std::string& command_name, const bool has_help,
         }
 
         store(command_line_parser(options).options(cod).run(), vm);
+        r.weaving(read_weaving_configuration(vm));
         r.activity(masd::dogen::activity::weave);
+        model_name = r.weaving()->target().stem().filename().string();
     }
 
     /*
-     * Now process the common options.
+     * Now process the common options. We must do this at the end
+     * because we require the model name.
      */
     r.tracing(read_tracing_configuration(model_name, vm));
     r.logging(read_logging_configuration(vm));
@@ -618,7 +636,7 @@ program_options_parser::parse(const std::vector<std::string>& arguments,
      * because we need access to the global options that may have
      * already been setup.
      */
-    return handle_command(command_name, has_help, po, info, err, vm);
+    return handle_command(command_name, has_help, po, info, vm);
 }
 
 }

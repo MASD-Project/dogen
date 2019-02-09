@@ -7875,7 +7875,7 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:point val="-10.59,-49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-11.34,-58.65;-7.315,-48.2"/>
+        <dia:rectangle val="-11.34,-58.65;-7.5075,-48.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7883,8 +7883,8 @@ Only applicable when deleting extra files.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-10.59,-49"/>
         <dia:point val="-10.59,-53"/>
-        <dia:point val="-7.515,-53"/>
-        <dia:point val="-7.515,-58.6"/>
+        <dia:point val="-7.7075,-53"/>
+        <dia:point val="-7.7075,-58.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
