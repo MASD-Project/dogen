@@ -2330,11 +2330,6 @@ from system models, we could possibly just define a bundle called
 This should be a stereotype to make it really visible. Also, the type
 should have a colour that is easy to spot like light gray.
 
-*** Consider renaming LAM to a sewing term                            :story:
-
-In keeping with the rest of Dogen we should also use a sewing term for
-LAM. Wool is an interesting one.
-
 *** Consider adding =artefact_set= to formatters' model               :story:
 
 We are using collections of artefacts quite a bit, and it makes sense
@@ -11635,12 +11630,6 @@ transformations using a language such as [[https://eclipse.org/atl/][ATL]]. This
 that we could transform a meta-model created by the user into one of
 our meta-models used for code generation.
 
-A proposed name for the meta-meta-model is =seam= for no good reason;
-it means:
-
-A seam, in sewing, is the line where two pieces of fabric are held
-together by thread.
-
 Meta-meta-models are vaguely related to binding.
 
 On further thought, we should probably make a clear separation of
@@ -13470,25 +13459,6 @@ If we ever reach a point where Dogen is complete according to the
 vision, we should add this emblem:
 
 http://unmaintained.tech/
-
-*** Keep track of sewing terms allocation                              :epic:
-
-This story just keeps track of how we are using the different sewing
-terms in Dogen. We are only tracking terms which are not yet
-incorporated into the product. It also keeps track of ideas that have
-not yet allocated a term.
-
-| Term   | Meaning | Dogen usage                                               |
-|--------+---------+-----------------------------------------------------------|
-| weave  |         | Reserved for AOP support?                                 |
-| [[https://en.wikipedia.org/wiki/Glossary_of_sewing_terms#D][dart]]   |         | Skeleton generator tool.                                  |
-| [[https://en.wikipedia.org/wiki/Yoke_(clothing)][yoke]]   |         |                                                           |
-| tailor |         | Format converter. e.g. Dia to JSON, etc.                  |
-| jersey |         | Code generation service.                                  |
-| hem    |         | HTTP Wrapper around jersey.                               |
-| twine  |         | Tool to infer model from XML/JSON/CSV instance documents. |
-|        |         | Tool to infer model from SQL database schemas.            |
-| pleat  |         |                                                           |
 
 *** Feature toggles and code generation                               :story:
 
