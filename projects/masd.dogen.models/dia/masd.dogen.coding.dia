@@ -11424,7 +11424,7 @@ model.#</dia:string>
         <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.extraction.cpp.types.forward_declarations.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -18318,7 +18318,7 @@ model.#</dia:string>
         <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.extraction.cpp.types.forward_declarations.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -21143,7 +21143,7 @@ model.#</dia:string>
         <dia:point val="100.18,33"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="90.8581,23.9996;100.93,33.8"/>
+        <dia:rectangle val="90.8576,23.9996;100.93,33.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -21151,8 +21151,8 @@ model.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="100.18,33"/>
         <dia:point val="100.18,29"/>
-        <dia:point val="90.9101,29"/>
-        <dia:point val="90.9081,24.0496"/>
+        <dia:point val="90.9081,29"/>
+        <dia:point val="90.9076,24.0496"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -22420,7 +22420,7 @@ model.#</dia:string>
         <dia:point val="206,33"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="193.859,28.2;206.75,33.8"/>
+        <dia:rectangle val="193.858,28.2;206.75,33.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -22428,8 +22428,8 @@ model.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="206,33"/>
         <dia:point val="206,29"/>
-        <dia:point val="193.912,29"/>
-        <dia:point val="193.909,32.9498"/>
+        <dia:point val="193.909,29"/>
+        <dia:point val="193.908,32.9498"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -27013,7 +27013,7 @@ Temporary data structure used to build trees of names.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="177.88,104.6"/>
         <dia:point val="177.88,109"/>
-        <dia:point val="201.91,109"/>
+        <dia:point val="201.908,109"/>
         <dia:point val="201.908,104.05"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
