@@ -1,7 +1,7 @@
 <#@ masd.annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=masd::dogen::generation::cpp::formatters::serialization #>
 <#@ stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
-<#@ stitch.inclusion_dependency="masd.dogen.utility/log/logger.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.utility/types/log/logger.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/fabric/registrar.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>
