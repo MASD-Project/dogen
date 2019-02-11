@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.injection.dia/types/traits.hpp"
 #include "masd.dogen.injection.dia/types/building_error.hpp"
 #include "masd.dogen.injection.dia/types/processed_comment_factory.hpp"

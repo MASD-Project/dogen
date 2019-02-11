@@ -21,8 +21,8 @@
 #include <unordered_set>
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"

@@ -22,7 +22,7 @@
 #include <ostream>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.annotations/io/type_io.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"

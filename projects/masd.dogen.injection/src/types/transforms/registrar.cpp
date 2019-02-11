@@ -20,7 +20,7 @@
  */
 #include <unordered_set>
 #include <boost/throw_exception.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.injection/types/transforms/registrar_error.hpp"
 #include "masd.dogen.injection/types/transforms/registrar.hpp"
 

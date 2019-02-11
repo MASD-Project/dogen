@@ -20,9 +20,9 @@
  */
 #include <array>
 #include <boost/test/unit_test.hpp>
-#include "masd.dogen.utility/test/asserter.hpp"
-#include "masd.dogen.utility/test/logging.hpp"
-#include "masd.dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.utility/types/test/asserter.hpp"
+#include "masd.dogen.utility/types/test/logging.hpp"
+#include "masd.dogen.utility/types/test/exception_checkers.hpp"
 #include "masd.dogen.coding/types/meta_model/endomodel.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/io/meta_model/object_io.hpp"

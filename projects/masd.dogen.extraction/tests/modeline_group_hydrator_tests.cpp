@@ -20,15 +20,15 @@
  */
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem/fstream.hpp>
-#include "masd.dogen.utility/test/logging.hpp"
-#include "masd.dogen.utility/test/canned_tests.hpp"
-#include "masd.dogen.utility/filesystem/path.hpp"
-#include "masd.dogen.utility/io/list_io.hpp"
-#include "masd.dogen.utility/io/unordered_map_io.hpp"
+#include "masd.dogen.utility/types/test/logging.hpp"
+#include "masd.dogen.utility/types/test/canned_tests.hpp"
+#include "masd.dogen.utility/types/filesystem/path.hpp"
+#include "masd.dogen.utility/types/io/list_io.hpp"
+#include "masd.dogen.utility/types/io/unordered_map_io.hpp"
 #include "masd.dogen.extraction/types/modeline_group_hydrator.hpp"
 #include "masd.dogen.extraction/io/modeline_group_io.hpp"
 #include "masd.dogen.extraction/types/hydration_error.hpp"
-#include "masd.dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.utility/types/test/exception_checkers.hpp"
 
 namespace {
 

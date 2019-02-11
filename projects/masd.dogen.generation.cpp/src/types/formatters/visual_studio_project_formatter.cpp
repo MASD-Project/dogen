@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 #include "masd.dogen.extraction/types/sequence_formatter.hpp"
-#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
 #include <boost/make_shared.hpp>
 
 namespace masd::dogen::generation::cpp::formatters {

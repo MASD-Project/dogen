@@ -23,7 +23,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/property_tree/json_parser.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.annotations/types/hydration_error.hpp"
 #include "masd.dogen.annotations/types/profile_hydrator.hpp"
 

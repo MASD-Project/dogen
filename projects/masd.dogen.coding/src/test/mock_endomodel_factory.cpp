@@ -24,8 +24,8 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.utility/exception/utility_exception.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/exception/utility_exception.hpp"
 #include "masd.dogen.annotations/types/value_factory.hpp"
 #include "masd.dogen.coding/types/meta_model/exception.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"

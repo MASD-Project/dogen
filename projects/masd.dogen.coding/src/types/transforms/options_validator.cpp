@@ -19,7 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.coding/io/transforms/options_io.hpp"
 #include "masd.dogen.coding/types/transforms/validation_error.hpp"
 #include "masd.dogen.coding/types/transforms/options_validator.hpp"

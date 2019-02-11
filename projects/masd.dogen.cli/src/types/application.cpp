@@ -21,9 +21,9 @@
 #include <cstdlib>
 #include <iostream>
 #include <boost/exception/diagnostic_information.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.utility/log/severity_level.hpp"
-#include "masd.dogen.utility/log/life_cycle_manager.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/log/severity_level.hpp"
+#include "masd.dogen.utility/types/log/life_cycle_manager.hpp"
 #include "masd.dogen.cli/types/application.hpp"
 #include "masd.dogen/types/configuration.hpp"
 #include "masd.dogen/io/configuration_io.hpp"

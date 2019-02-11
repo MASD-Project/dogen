@@ -19,11 +19,11 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "masd.dogen.utility/test/asserter.hpp"
-#include "masd.dogen.utility/io/list_io.hpp"
-#include "masd.dogen.utility/test_data/validating_resolver.hpp"
-#include "masd.dogen.utility/test_data/tds_test_good.hpp"
-#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/types/test/asserter.hpp"
+#include "masd.dogen.utility/types/io/list_io.hpp"
+#include "masd.dogen.utility/types/test_data/validating_resolver.hpp"
+#include "masd.dogen.utility/types/test_data/tds_test_good.hpp"
+#include "masd.dogen.utility/types/test/logging.hpp"
 #include "masd.dogen.coding/types/helpers/file_linter.hpp"
 
 namespace  {

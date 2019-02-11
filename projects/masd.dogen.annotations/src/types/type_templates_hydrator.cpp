@@ -23,7 +23,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/property_tree/json_parser.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.annotations/io/value_types_io.hpp"
 #include "masd.dogen.annotations/io/template_kinds_io.hpp"
 #include "masd.dogen.annotations/types/value_factory.hpp"

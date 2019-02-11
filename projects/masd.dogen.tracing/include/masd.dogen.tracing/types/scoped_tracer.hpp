@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/tracer.hpp"
 
 namespace masd::dogen::tracing {

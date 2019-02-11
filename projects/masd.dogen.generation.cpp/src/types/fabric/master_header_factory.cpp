@@ -21,7 +21,7 @@
 #include <memory>
 #include <forward_list>
 #include <boost/make_shared.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.coding/types/helpers/building_error.hpp"
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"

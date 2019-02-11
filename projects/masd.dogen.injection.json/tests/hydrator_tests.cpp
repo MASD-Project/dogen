@@ -21,9 +21,9 @@
 #include <sstream>
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem/fstream.hpp>
-#include "masd.dogen.utility/test/logging.hpp"
-#include "masd.dogen.utility/filesystem/path.hpp"
-#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/types/test/logging.hpp"
+#include "masd.dogen.utility/types/filesystem/path.hpp"
+#include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/test/mock_type_factory.hpp"
 #include "masd.dogen.annotations/test/mock_type_repository_factory.hpp"
@@ -32,7 +32,7 @@
 #include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.injection.json/types/hydration_error.hpp"
 #include "masd.dogen.injection.json/types/hydrator.hpp"
-#include "masd.dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.utility/types/test/exception_checkers.hpp"
 
 namespace {
 

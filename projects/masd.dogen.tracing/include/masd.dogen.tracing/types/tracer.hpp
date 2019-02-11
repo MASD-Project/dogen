@@ -28,7 +28,7 @@
 #include <stack>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository.hpp"
 #include "masd.dogen.tracing/types/metrics.hpp"

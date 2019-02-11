@@ -25,12 +25,12 @@
 #include <boost/range/algorithm.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/range/algorithm/set_algorithm.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.utility/io/set_io.hpp"
-#include "masd.dogen.utility/io/list_io.hpp"
-#include "masd.dogen.utility/io/forward_list_io.hpp"
-#include "masd.dogen.utility/filesystem/file.hpp"
-#include "masd.dogen.utility/io/forward_list_io.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/set_io.hpp"
+#include "masd.dogen.utility/types/io/list_io.hpp"
+#include "masd.dogen.utility/types/io/forward_list_io.hpp"
+#include "masd.dogen.utility/types/filesystem/file.hpp"
+#include "masd.dogen.utility/types/io/forward_list_io.hpp"
 #include "masd.dogen.coding/types/helpers/file_linter.hpp"
 
 namespace {

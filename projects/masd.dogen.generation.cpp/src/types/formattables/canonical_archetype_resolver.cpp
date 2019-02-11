@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/resolution_error.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/canonical_archetype_resolver.hpp"
 

@@ -19,7 +19,7 @@
  *
  */
 #include <boost/make_shared.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/assembly_info.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/meta_name_factory.hpp"

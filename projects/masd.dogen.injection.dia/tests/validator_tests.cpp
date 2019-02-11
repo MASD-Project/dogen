@@ -20,12 +20,12 @@
  */
 #include <sstream>
 #include <boost/test/unit_test.hpp>
-#include "masd.dogen.utility/test/logging.hpp"
-#include "masd.dogen.utility/test/asserter.hpp"
+#include "masd.dogen.utility/types/test/logging.hpp"
+#include "masd.dogen.utility/types/test/asserter.hpp"
 #include "masd.dogen.injection.dia/types/validator.hpp"
 #include "masd.dogen.injection.dia/io/processed_object_io.hpp"
 #include "masd.dogen.injection.dia/types/validation_error.hpp"
-#include "masd.dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.utility/types/test/exception_checkers.hpp"
 
 using masd::dogen::utility::test::asserter;
 

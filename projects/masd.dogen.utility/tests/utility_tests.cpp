@@ -24,18 +24,18 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/exception/diagnostic_information.hpp>
 #include <boost/throw_exception.hpp>
-#include "masd.dogen.utility/test/logging.hpp"
-#include "masd.dogen.utility/io/jsonify_io.hpp"
-#include "masd.dogen.utility/io/vector_io.hpp"
-#include "masd.dogen.utility/io/pair_io.hpp"
-#include "masd.dogen.utility/io/map_io.hpp"
-#include "masd.dogen.utility/io/array_io.hpp"
-#include "masd.dogen.utility/test/logging.hpp"
-#include "masd.dogen.utility/log/life_cycle_manager.hpp"
-#include "masd.dogen.utility/log/scoped_life_cycle_manager.hpp"
-#include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.utility/exception/utility_exception.hpp"
-#include "masd.dogen.utility/test/json_validator.hpp"
+#include "masd.dogen.utility/types/test/logging.hpp"
+#include "masd.dogen.utility/types/io/jsonify_io.hpp"
+#include "masd.dogen.utility/types/io/vector_io.hpp"
+#include "masd.dogen.utility/types/io/pair_io.hpp"
+#include "masd.dogen.utility/types/io/map_io.hpp"
+#include "masd.dogen.utility/types/io/array_io.hpp"
+#include "masd.dogen.utility/types/test/logging.hpp"
+#include "masd.dogen.utility/types/log/life_cycle_manager.hpp"
+#include "masd.dogen.utility/types/log/scoped_life_cycle_manager.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/exception/utility_exception.hpp"
+#include "masd.dogen.utility/types/test/json_validator.hpp"
 
 namespace this_is_a_test {
 

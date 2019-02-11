@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "masd.dogen.utility/exception/utility_exception.hpp"
+#include "masd.dogen.utility/types/exception/utility_exception.hpp"
 
 namespace masd::dogen::knitter {
 

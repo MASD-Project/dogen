@@ -20,8 +20,8 @@
  */
 #define BOOST_TEST_MODULE masd.dogen.coding.tests
 #include <boost/test/unit_test.hpp>
-#include "masd.dogen.utility/test/logging.hpp"
-#include "masd.dogen.utility/test/fixture.hpp"
+#include "masd.dogen.utility/types/test/logging.hpp"
+#include "masd.dogen.utility/types/test/fixture.hpp"
 #include "masd.dogen.generation.csharp/types/initializer.hpp"
 #include "masd.dogen.generation.cpp/types/initializer.hpp"
 #include "masd.dogen.injection.json/types/initializer.hpp"

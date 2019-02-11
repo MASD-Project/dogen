@@ -19,9 +19,9 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.utility/io/unordered_set_io.hpp"
-#include "masd.dogen.utility/io/unordered_map_io.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/unordered_set_io.hpp"
+#include "masd.dogen.utility/types/io/unordered_map_io.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"

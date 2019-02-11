@@ -21,8 +21,8 @@
 #include <vector>
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "masd.dogen.utility/test/logging.hpp"
-#include "masd.dogen.utility/io/vector_io.hpp"
+#include "masd.dogen.utility/types/test/logging.hpp"
+#include "masd.dogen.utility/types/io/vector_io.hpp"
 #include "masd.dogen.coding/io/transforms/options_io.hpp"
 #include "masd.dogen.knitter/program_options_parser.hpp"
 #include "masd.dogen.knitter/parser_validation_error.hpp"

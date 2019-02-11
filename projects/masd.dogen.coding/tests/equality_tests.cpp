@@ -20,10 +20,10 @@
  */
 // #include <unordered_map>
 #include <boost/test/unit_test.hpp>
-// #include "masd.dogen.utility/io/unordered_map_io.hpp"
-// #include "masd.dogen.utility/test/asserter.hpp"
-// #include "masd.dogen.utility/test/logging.hpp"
-// #include "masd.dogen.utility/test/canned_tests.hpp"
+// #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
+// #include "masd.dogen.utility/types/test/asserter.hpp"
+// #include "masd.dogen.utility/types/test/logging.hpp"
+// #include "masd.dogen.utility/types/test/canned_tests.hpp"
 // #include "masd.dogen.coding/types/all.hpp"
 // #include "masd.dogen.coding/io/all_io.hpp"
 // #include "masd.dogen.coding/test_data/all_td.hpp"

@@ -20,14 +20,14 @@
  */
 #include <sstream>
 #include <boost/test/unit_test.hpp>
-#include "masd.dogen.utility/test/logging.hpp"
-#include "masd.dogen.utility/test/asserter.hpp"
-#include "masd.dogen.utility/io/pair_io.hpp"
-#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/types/test/logging.hpp"
+#include "masd.dogen.utility/types/test/asserter.hpp"
+#include "masd.dogen.utility/types/io/pair_io.hpp"
+#include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.injection.dia/types/building_error.hpp"
 #include "masd.dogen.injection.dia/io/processed_comment_io.hpp"
 #include "masd.dogen.injection.dia/types/processed_comment_factory.hpp"
-#include "masd.dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.utility/types/test/exception_checkers.hpp"
 
 using masd::dogen::utility::test::asserter;
 

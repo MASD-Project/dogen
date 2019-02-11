@@ -22,8 +22,8 @@
 #include <boost/pointer_cast.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.utility/io/unordered_set_io.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/unordered_set_io.hpp"
 #include "masd.dogen.extraction/types/indent_filter.hpp"
 #include "masd.dogen.extraction/types/comment_formatter.hpp"
 #include "masd.dogen.extraction/types/decoration_formatter.hpp"

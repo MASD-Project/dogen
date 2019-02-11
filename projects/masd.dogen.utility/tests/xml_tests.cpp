@@ -24,16 +24,16 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "masd.dogen.utility/test/logging.hpp"
-#include "masd.dogen.utility/test/macros.hpp"
-#include "masd.dogen.utility/test_data/test_data.hpp"
-#include "masd.dogen.utility/test_data/xml_reader.hpp"
-#include "masd.dogen.utility/xml/exception.hpp"
-#include "masd.dogen.utility/exception/invalid_enum_value.hpp"
-#include "masd.dogen.utility/xml/text_reader.hpp"
-#include "masd.dogen.utility/xml/text_reader_io.hpp"
-#include "masd.dogen.utility/xml/node_types.hpp"
-#include "masd.dogen.utility/xml/node_types_io.hpp"
+#include "masd.dogen.utility/types/test/logging.hpp"
+#include "masd.dogen.utility/types/test/macros.hpp"
+#include "masd.dogen.utility/types/test_data/test_data.hpp"
+#include "masd.dogen.utility/types/test_data/xml_reader.hpp"
+#include "masd.dogen.utility/types/xml/exception.hpp"
+#include "masd.dogen.utility/types/exception/invalid_enum_value.hpp"
+#include "masd.dogen.utility/types/xml/text_reader.hpp"
+#include "masd.dogen.utility/types/xml/text_reader_io.hpp"
+#include "masd.dogen.utility/types/xml/node_types.hpp"
+#include "masd.dogen.utility/types/xml/node_types_io.hpp"
 
 using namespace masd::dogen::utility::log;
 using masd::dogen::utility::xml::exception;

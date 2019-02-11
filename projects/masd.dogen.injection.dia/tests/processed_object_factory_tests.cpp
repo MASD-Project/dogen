@@ -21,14 +21,14 @@
 #include <sstream>
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "masd.dogen.utility/test/asserter.hpp"
-#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/types/test/asserter.hpp"
+#include "masd.dogen.utility/types/test/logging.hpp"
 #include "masd.dogen.dia/io/object_io.hpp"
 #include "masd.dogen.injection.dia/types/processed_object.hpp"
 #include "masd.dogen.injection.dia/types/processed_object_factory.hpp"
 #include "masd.dogen.injection.dia/io/processed_object_io.hpp"
 #include "masd.dogen.dia/test/mock_object_factory.hpp"
-#include "masd.dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.utility/types/test/exception_checkers.hpp"
 
 using namespace masd::dogen::injection::dia;
 using masd::dogen::utility::test::asserter;

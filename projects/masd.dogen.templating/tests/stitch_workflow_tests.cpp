@@ -19,11 +19,11 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "masd.dogen.utility/test/logging.hpp"
-#include "masd.dogen.utility/test/asserter.hpp"
-#include "masd.dogen.utility/test_data/seam.hpp"
-#include "masd.dogen.utility/test_data/stitch.hpp"
-#include "masd.dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.utility/types/test/logging.hpp"
+#include "masd.dogen.utility/types/test/asserter.hpp"
+#include "masd.dogen.utility/types/test_data/seam.hpp"
+#include "masd.dogen.utility/types/test_data/stitch.hpp"
+#include "masd.dogen.utility/types/test/exception_checkers.hpp"
 #include "masd.dogen.templating/io/stitch/text_template_io.hpp"
 #include "masd.dogen.templating/types/stitch/instantiation_error.hpp"
 #include "masd.dogen.templating/types/stitch/workflow.hpp"

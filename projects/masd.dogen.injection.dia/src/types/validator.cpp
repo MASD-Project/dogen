@@ -19,9 +19,9 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.utility/io/list_io.hpp"
-#include "masd.dogen.utility/io/vector_io.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/list_io.hpp"
+#include "masd.dogen.utility/types/io/vector_io.hpp"
 #include "masd.dogen.injection.dia/types/validation_error.hpp"
 #include "masd.dogen.injection.dia/types/validator.hpp"
 

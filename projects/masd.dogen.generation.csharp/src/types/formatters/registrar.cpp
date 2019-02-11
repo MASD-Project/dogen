@@ -19,8 +19,8 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.utility/io/forward_list_io.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/forward_list_io.hpp"
 #include "masd.dogen.annotations/io/archetype_location_io.hpp"
 #include "masd.dogen.generation.csharp/io/formatters/repository_io.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/registrar_error.hpp"

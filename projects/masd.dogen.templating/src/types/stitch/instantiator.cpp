@@ -20,10 +20,10 @@
  */
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/operations.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.utility/io/unordered_map_io.hpp"
-#include "masd.dogen.utility/filesystem/path.hpp"
-#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/unordered_map_io.hpp"
+#include "masd.dogen.utility/types/filesystem/path.hpp"
+#include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.annotations/io/annotation_io.hpp"
 #include "masd.dogen.templating/types/wale/workflow.hpp"
 #include "masd.dogen.templating/types/stitch/instantiation_error.hpp"

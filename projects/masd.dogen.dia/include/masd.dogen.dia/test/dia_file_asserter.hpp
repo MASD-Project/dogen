@@ -26,7 +26,7 @@
 #endif
 
 #include "masd.dogen.dia/types/diagram.hpp"
-#include "masd.dogen.utility/test/file_asserter.hpp"
+#include "masd.dogen.utility/types/test/file_asserter.hpp"
 
 namespace masd::dogen::dia::test {
 

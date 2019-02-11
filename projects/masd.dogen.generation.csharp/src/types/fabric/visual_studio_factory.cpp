@@ -20,7 +20,7 @@
  */
 #include <boost/make_shared.hpp>
 #include <boost/algorithm/string/join.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"

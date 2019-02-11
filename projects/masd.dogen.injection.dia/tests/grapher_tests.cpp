@@ -22,14 +22,14 @@
 #include <memory>
 #include <boost/test/unit_test.hpp>
 #include <boost/graph/depth_first_search.hpp>
-#include "masd.dogen.utility/test/asserter.hpp"
-#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/types/test/asserter.hpp"
+#include "masd.dogen.utility/types/test/logging.hpp"
 #include "masd.dogen.injection.dia/io/processed_object_io.hpp"
 #include "masd.dogen.injection.dia/test/mock_processed_object_factory.hpp"
 #include "masd.dogen.injection.dia/types/graphing_error.hpp"
 #include "masd.dogen.injection.dia/types/grapher.hpp"
-#include "masd.dogen.utility/io/list_io.hpp"
-#include "masd.dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.utility/types/io/list_io.hpp"
+#include "masd.dogen.utility/types/test/exception_checkers.hpp"
 
 using namespace masd::dogen::injection::dia;
 using masd::dogen::utility::test::asserter;

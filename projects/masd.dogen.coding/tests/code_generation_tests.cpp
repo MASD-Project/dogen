@@ -24,13 +24,13 @@
 #include <boost/test/unit_test_monitor.hpp>
 // #include <boost/algorithm/string/predicate.hpp>
 // #include <boost/algorithm/string/replace.hpp>
-// #include "masd.dogen.utility/test_data/validating_resolver.hpp"
-// #include "masd.dogen.utility/filesystem/file.hpp"
-// #include "masd.dogen.utility/test/macros.hpp"
-// #include "masd.dogen.utility/test/asserter.hpp"
-// #include "masd.dogen.utility/test_data/injection_dia.hpp"
-// #include "masd.dogen.utility/test_data/injection_json.hpp"
-// #include "masd.dogen.utility/test/logging.hpp"
+// #include "masd.dogen.utility/types/test_data/validating_resolver.hpp"
+// #include "masd.dogen.utility/types/filesystem/file.hpp"
+// #include "masd.dogen.utility/types/test/macros.hpp"
+// #include "masd.dogen.utility/types/test/asserter.hpp"
+// #include "masd.dogen.utility/types/test_data/injection_dia.hpp"
+// #include "masd.dogen.utility/types/test_data/injection_json.hpp"
+// #include "masd.dogen.utility/types/test/logging.hpp"
 // #include "masd.dogen.dia/io/diagram_io.hpp"
 // #include "masd.dogen.coding/test/mock_options_factory.hpp"
 // #include "masd.dogen.coding/types/transforms/options.hpp"
@@ -41,7 +41,7 @@
 // #include "masd.dogen.coding/serialization/meta_model/model_ser.hpp"
 // #include "masd.dogen.dia/test/dia_file_asserter.hpp"
 // #include "masd.dogen.coding/test/yarn_file_asserter.hpp"
-// #include "masd.dogen.utility/test/exception_checkers.hpp"
+// #include "masd.dogen.utility/types/test/exception_checkers.hpp"
 
 /*
  * Comment these out as required if testing only one frontend. These

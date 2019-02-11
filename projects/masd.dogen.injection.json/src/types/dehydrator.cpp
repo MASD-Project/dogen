@@ -19,8 +19,8 @@
  *
  */
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.extraction/types/utility_formatter.hpp"
 #include "masd.dogen.injection.json/types/dehydrator.hpp"
 

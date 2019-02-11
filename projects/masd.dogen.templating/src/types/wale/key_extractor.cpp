@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.utility/io/unordered_set_io.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/unordered_set_io.hpp"
 #include "masd.dogen.templating/types/wale/extraction_error.hpp"
 #include "masd.dogen.templating/types/wale/key_extractor.hpp"
 

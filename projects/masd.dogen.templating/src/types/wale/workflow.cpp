@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.utility/io/unordered_map_io.hpp"
-#include "masd.dogen.utility/filesystem/path.hpp"
-#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/unordered_map_io.hpp"
+#include "masd.dogen.utility/types/filesystem/path.hpp"
+#include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.templating/io/wale/properties_io.hpp"
 #include "masd.dogen.templating/types/wale/key_extractor.hpp"
 #include "masd.dogen.templating/types/wale/formatter.hpp"

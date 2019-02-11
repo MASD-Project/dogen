@@ -19,10 +19,10 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.utility/serialization/xml_helper.hpp"
-#include "masd.dogen.utility/filesystem/file.hpp"
-#include "masd.dogen.utility/exception/utility_exception.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/serialization/xml_helper.hpp"
+#include "masd.dogen.utility/types/filesystem/file.hpp"
+#include "masd.dogen.utility/types/exception/utility_exception.hpp"
 #include "masd.dogen.dia/serialization/diagram_ser.hpp"
 #include "masd.dogen.dia/io/diagram_io.hpp"
 #include "masd.dogen.dia/test/dia_file_asserter.hpp"

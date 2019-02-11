@@ -19,8 +19,8 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "masd.dogen.utility/test/logging.hpp"
-#include "masd.dogen.utility/io/unordered_set_io.hpp"
+#include "masd.dogen.utility/types/test/logging.hpp"
+#include "masd.dogen.utility/types/io/unordered_set_io.hpp"
 #include "masd.dogen.templating/io/wale/text_template_io.hpp"
 #include "masd.dogen.templating/types/wale/formatter.hpp"
 

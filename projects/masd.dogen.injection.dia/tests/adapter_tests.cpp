@@ -23,8 +23,8 @@
 #include <initializer_list>
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "masd.dogen.utility/test/logging.hpp"
-#include "masd.dogen.utility/test/asserter.hpp"
+#include "masd.dogen.utility/types/test/logging.hpp"
+#include "masd.dogen.utility/types/test/asserter.hpp"
 #include "masd.dogen.coding/io/meta_model/object_io.hpp"
 #include "masd.dogen.coding/io/meta_model/enumeration_io.hpp"
 #include "masd.dogen.coding/io/meta_model/module_io.hpp"
@@ -34,7 +34,7 @@
 #include "masd.dogen.injection.dia/io/context_io.hpp"
 #include "masd.dogen.injection.dia/types/processed_object.hpp"
 #include "masd.dogen.injection.dia/test/mock_processed_object_factory.hpp"
-#include "masd.dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.utility/types/test/exception_checkers.hpp"
 
 using namespace masd::dogen::injection::dia;
 using masd::dogen::utility::test::asserter;

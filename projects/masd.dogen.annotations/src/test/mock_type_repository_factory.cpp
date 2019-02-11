@@ -19,7 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.annotations/types/building_error.hpp"
 #include "masd.dogen.annotations/test/mock_type_factory.hpp"
 #include "masd.dogen.annotations/test/mock_type_repository_factory.hpp"

@@ -19,8 +19,8 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-// #include "masd.dogen.utility/test/logging.hpp"
-// #include "masd.dogen.utility/test/canned_tests.hpp"
+// #include "masd.dogen.utility/types/test/logging.hpp"
+// #include "masd.dogen.utility/types/test/canned_tests.hpp"
 // #include "masd.dogen.coding/types/all.hpp"
 // #include "masd.dogen.coding/hash/all_hash.hpp"
 // #include "masd.dogen.coding/io/all_io.hpp"

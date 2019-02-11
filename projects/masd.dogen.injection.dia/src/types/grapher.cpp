@@ -23,7 +23,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/graph/depth_first_search.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.injection.dia/io/dia_object_types_io.hpp"
 #include "masd.dogen.injection.dia/types/graphing_error.hpp"
 #include "masd.dogen.injection.dia/types/grapher.hpp"

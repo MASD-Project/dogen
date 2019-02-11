@@ -20,7 +20,7 @@
  */
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/workflow.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/registrar_factory.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/build_files_factory.hpp"

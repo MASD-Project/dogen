@@ -20,8 +20,8 @@
  */
 #include <iterator>
 #include <boost/throw_exception.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.utility/io/unordered_map_io.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/unordered_map_io.hpp"
 #include "masd.dogen.generation.cpp/types/workflow_error.hpp"
 #include "masd.dogen.coding/io/meta_model/formatting_styles_io.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/artefact_properties_io.hpp"

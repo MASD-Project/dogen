@@ -22,9 +22,9 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/erase.hpp>
-#include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.utility/string/splitter.hpp"
-#include "masd.dogen.utility/exception/invalid_enum_value.hpp"
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/string/splitter.hpp"
+#include "masd.dogen.utility/types/exception/invalid_enum_value.hpp"
 #include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
 #include "masd.dogen.coding/types/helpers/stereotypes_helper.hpp"
 
