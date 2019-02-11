@@ -1204,6 +1204,31 @@ utilities. We could also just go back to the ideas around needle and
 call it =needle=, or something else that is not very likely to clash
 with user code.
 
+Another way to look at this is to consider the utility model as just
+like any other model and instead introduce "type bundles" for certain
+functionality. For example: logging, etc. We could just have a
+stereotype for these "bundles", applicable to a package:
+
+: masd::bundle::logging
+
+This would generate a namespace with logging functionality. Users can
+create a small package and not bother with supplying details or create
+a large package and add their own types to it as well.
+
+The bundle expands during transformation to the generation of the
+types associated with the bundle. This means we need individual
+meta-types for each type. In the cases where we have helpers per type
+(e.g. IO, etc) maybe it makes more sense to use these as properties
+and enable them specifically:
+
+: masd::bundle::io
+: masd.bundle.io.add_type=std::array
+
+Similarly, the test bundle provides a number of dogen tests for
+types. If you'd like to test models, you need to enable it on your
+utility model - e.g. models must reference a utility model and then we
+check to see if the test bundle is enabled.
+
 *** Code generation of tests for dogen models                         :story:
 
 We probably already have a story for this. At present we are manually
@@ -6116,18 +6141,6 @@ only be one dogen application/package, this is a confusion name. We
 should rename it. Names:
 
 - masd-dogen
-
-*** Finish adding support for clang-cl builds                         :story:
-
-We have added preliminary support for building with clang-cl on
-windows, but the build is not green. Most of the errors seem to be on
-boost.
-
-Links:
-
-- [[https://ci.appveyor.com/project/mcraveiro/dogen/builds/19463961/job/6bnv6ppljlklu2ag][Release build]]
-- [[https://ci.appveyor.com/project/mcraveiro/dogen/builds/19463961/job/45yhn8sdhexvsdmi][Debug build]]
-- [[https://github.com/Kitware/CDash/issues/733][CDash reporting problems]]
 
 *** Tidy-up dogen windows package                                     :story:
 
