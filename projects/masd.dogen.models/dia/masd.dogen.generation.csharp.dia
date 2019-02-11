@@ -1194,7 +1194,7 @@
         <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.extraction.cpp.types.forward_declarations.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="true"/>
@@ -1571,7 +1571,7 @@
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.extraction.cpp.io.enabled=true
 #DOGEN masd.extraction.cpp.io.overwrite=false
-#</dia:string>
+#DOGEN masd.extraction.cpp.types.forward_declarations.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4278,7 +4278,7 @@
         <dia:point val="141.725,40.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="118.858,38.95;142.475,44.05"/>
+        <dia:rectangle val="118.857,38.95;142.475,44.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4332,7 +4332,7 @@
         <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.extraction.cpp.types.forward_declarations.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -7355,7 +7355,7 @@
         <dia:point val="149.375,-64"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="131.412,-72.85;150.125,-63.2"/>
+        <dia:rectangle val="131.413,-72.85;150.125,-63.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13053,7 +13053,7 @@
         <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.extraction.cpp.types.forward_declarations.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="true"/>
@@ -14391,7 +14391,7 @@
         <dia:point val="204.49,-61.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="197.257,-62.15;205.24,-52.2"/>
+        <dia:rectangle val="197.258,-62.15;205.24,-52.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -16330,7 +16330,7 @@
         <dia:point val="180.917,-84.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="180.167,-85.55;200.882,-77.2"/>
+        <dia:rectangle val="180.167,-85.55;200.883,-77.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17004,7 +17004,7 @@
         <dia:point val="71,-48.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="63.95,-60.45;71.75,-47.3"/>
+        <dia:rectangle val="63.95,-60.45;71.75,-48.1"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
