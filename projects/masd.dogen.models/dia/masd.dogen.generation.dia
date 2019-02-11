@@ -7033,13 +7033,13 @@ only be written to the filesystem if it does not exist.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O51">
       <dia:attribute name="obj_pos">
-        <dia:point val="154,141"/>
+        <dia:point val="154,140.929"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="153.95,140.95;191.125,151.05"/>
+        <dia:rectangle val="153.95,140.879;191.125,150.979"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="154,141"/>
+        <dia:point val="154,140.929"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="37.075000000000003"/>
@@ -7054,7 +7054,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.extraction.cpp.types.forward_declarations.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="true"/>
@@ -7416,7 +7416,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.extraction.cpp.types.forward_declarations.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -7735,7 +7735,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:point val="149.37,145.4"/>
         <dia:point val="149.37,157"/>
         <dia:point val="172.537,157"/>
-        <dia:point val="172.537,151"/>
+        <dia:point val="172.537,150.929"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7798,7 +7798,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:point val="195.705,133.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="191.025,132.65;196.455,141.8"/>
+        <dia:rectangle val="191.025,132.65;196.455,141.729"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7807,7 +7807,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:point val="195.705,133.4"/>
         <dia:point val="195.705,137"/>
         <dia:point val="191.075,137"/>
-        <dia:point val="191.075,141"/>
+        <dia:point val="191.075,140.929"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
