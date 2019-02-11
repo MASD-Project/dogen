@@ -291,7 +291,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#utility_exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::header_only#</dia:string>
@@ -1182,7 +1182,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#array#</dia:string>
+        <dia:string>#array_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::header_only#</dia:string>
@@ -1293,7 +1293,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#forward_list#</dia:string>
+        <dia:string>#forward_list_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::header_only#</dia:string>
@@ -1404,7 +1404,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#jsonify#</dia:string>
+        <dia:string>#jsonify_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::header_only#</dia:string>
@@ -1515,7 +1515,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#list#</dia:string>
+        <dia:string>#list_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::header_only#</dia:string>
@@ -1626,7 +1626,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#map#</dia:string>
+        <dia:string>#map_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::header_only#</dia:string>
@@ -1737,7 +1737,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#memory#</dia:string>
+        <dia:string>#memory_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::header_only#</dia:string>
@@ -1848,7 +1848,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#optional#</dia:string>
+        <dia:string>#optional_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::header_only#</dia:string>
@@ -1959,7 +1959,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#pair#</dia:string>
+        <dia:string>#pair_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::header_only#</dia:string>
@@ -2070,7 +2070,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#set#</dia:string>
+        <dia:string>#set_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::header_only#</dia:string>
@@ -2181,7 +2181,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#shared_ptr#</dia:string>
+        <dia:string>#shared_ptr_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::header_only#</dia:string>
@@ -2292,7 +2292,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#typeindex#</dia:string>
+        <dia:string>#typeindex_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::header_only#</dia:string>
@@ -2391,19 +2391,19 @@
         <dia:point val="41,25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="40.95,24.95;49.635,28.05"/>
+        <dia:rectangle val="40.95,24.95;49.83,28.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="41,25"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="8.7799999999999994"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#unordered_map#</dia:string>
+        <dia:string>#unordered_map_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::header_only#</dia:string>
@@ -2514,7 +2514,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#unordered_set#</dia:string>
+        <dia:string>#unordered_set_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::header_only#</dia:string>
@@ -2625,7 +2625,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#vector#</dia:string>
+        <dia:string>#vector_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::header_only#</dia:string>
@@ -2721,16 +2721,16 @@
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O27">
       <dia:attribute name="obj_pos">
-        <dia:point val="28,45"/>
+        <dia:point val="28,38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="27.95,43.95;53.05,60.05"/>
+        <dia:rectangle val="27.95,36.95;53.05,53.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="28,45"/>
+        <dia:point val="28,38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25"/>
@@ -2759,13 +2759,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O28">
       <dia:attribute name="obj_pos">
-        <dia:point val="43,52"/>
+        <dia:point val="43,45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.95,51.95;51.635,55.05"/>
+        <dia:rectangle val="42.95,44.95;51.635,48.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="43,52"/>
+        <dia:point val="43,45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.5849999999999991"/>
@@ -2870,13 +2870,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O29">
       <dia:attribute name="obj_pos">
-        <dia:point val="29,47"/>
+        <dia:point val="29,40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.95,46.95;38.0725,50.05"/>
+        <dia:rectangle val="28.95,39.95;38.0725,43.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="29,47"/>
+        <dia:point val="29,40"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="9.0224999999999991"/>
@@ -2981,13 +2981,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O30">
       <dia:attribute name="obj_pos">
-        <dia:point val="29,52"/>
+        <dia:point val="29,45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.95,51.95;41.66,55.05"/>
+        <dia:rectangle val="28.95,44.95;41.66,48.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="29,52"/>
+        <dia:point val="29,45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.609999999999999"/>
@@ -3092,13 +3092,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O31">
       <dia:attribute name="obj_pos">
-        <dia:point val="43,47"/>
+        <dia:point val="43,40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.95,46.95;51.635,50.05"/>
+        <dia:rectangle val="42.95,39.95;51.635,43.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="43,47"/>
+        <dia:point val="43,40"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.5849999999999991"/>
