@@ -38,8 +38,8 @@
     },
     {
       "name": {
-        "simple": "overwrite",
-        "qualified": "masd.extraction.cpp.types.forward_declarations.overwrite"
+        "simple": "enabled",
+        "qualified": "masd.extraction.cpp.types.forward_declarations.enabled"
       },
       "archetype_location": {
         "kernel": "masd",
@@ -47,7 +47,7 @@
       },
       "template_kind": "instance",
       "untyped_value": [
-        "true"
+        "false"
       ]
     }
   ]
