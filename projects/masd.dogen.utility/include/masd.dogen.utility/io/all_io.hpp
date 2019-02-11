@@ -18,19 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_UTILITY_IO_UTILITY_IO_HPP
-#define MASD_DOGEN_UTILITY_IO_UTILITY_IO_HPP
+#ifndef MASD_DOGEN_UTILITY_IO_ALL_IO_HPP
+#define MASD_DOGEN_UTILITY_IO_ALL_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
-
-/**
- * @brief Overloads for general objects (stl, boost, etc) to support
- * the inserter operator.
- *
- * Used only for debugging purposes.
- */
-namespace masd::dogen::utility::streaming { }
 
 #endif

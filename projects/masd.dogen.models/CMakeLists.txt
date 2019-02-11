@@ -114,6 +114,7 @@ if (DOGEN_KNITTER_EXECUTABLE)
     set(models ${models} ${prefix}.coding)
     set(models ${models} ${prefix}.templating)
     set(models ${models} ${prefix}.orchestration)
+    set(models ${models} ${prefix}.utility)
 endif()
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia)

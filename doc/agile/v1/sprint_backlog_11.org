@@ -13,28 +13,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-11 Mon 14:48]
+#+CAPTION: Clock summary at [2019-02-11 Mon 17:39]
 | <75>                                                 |          |        |        |       |
 | Headline                                             | Time     |        |        |     % |
 |------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                         | *165:52* |        |        | 100.0 |
+| *Total time*                                         | *168:40* |        |        | 100.0 |
 |------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                              | 165:52   |        |        | 100.0 |
-| Active                                               |          | 165:52 |        | 100.0 |
+| Stories                                              | 168:40   |        |        | 100.0 |
+| Active                                               |          | 168:40 |        | 100.0 |
 | Edit release notes for previous sprint               |          |        |   2:03 |   1.2 |
 | Sprint and product backlog grooming                  |          |        |   4:11 |   2.5 |
-| Work on MASD theory                                  |          |        | 113:38 |  68.5 |
-| Rename models to fit MASD architecture               |          |        |   4:56 |   3.0 |
+| Work on MASD theory                                  |          |        | 113:38 |  67.4 |
+| Rename models to fit MASD architecture               |          |        |   4:56 |   2.9 |
 | Read up on framework and API design                  |          |        |   0:57 |   0.6 |
-| Analyse the state of the mess of refactors           |          |        |   6:27 |   3.9 |
-| Create the =orchestration= model                     |          |        |   4:15 |   2.6 |
-| Update vcpkg across all operative systems            |          |        |   4:35 |   2.8 |
+| Analyse the state of the mess of refactors           |          |        |   6:27 |   3.8 |
+| Create the =orchestration= model                     |          |        |   4:15 |   2.5 |
+| Update vcpkg across all operative systems            |          |        |   4:35 |   2.7 |
 | Update C# reference models to latest dogen           |          |        |   0:42 |   0.4 |
-| Great meta-data rename                               |          |        |   4:54 |   3.0 |
-| Create a single binary for all of dogen              |          |        |  15:50 |   9.5 |
+| Great meta-data rename                               |          |        |   4:54 |   2.9 |
+| Create a single binary for all of dogen              |          |        |  15:50 |   9.4 |
 | Dogen's vcpkg export for OSX was created from master |          |        |   0:46 |   0.5 |
 | Finish adding support for clang-cl builds            |          |        |   1:11 |   0.7 |
-| Convert the utility model into a regular dogen model |          |        |   1:27 |   0.9 |
+| Convert the utility model into a regular dogen model |          |        |   4:15 |   2.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -650,6 +650,8 @@ Links:
 
 *** STARTED Convert the utility model into a regular dogen model      :story:
     :LOGBOOK:
+    CLOCK: [2019-02-11 Mon 17:15]--[2019-02-11 Mon 17:38] =>  0:23
+    CLOCK: [2019-02-11 Mon 14:49]--[2019-02-11 Mon 17:14] =>  2:25
     CLOCK: [2019-02-11 Mon 13:54]--[2019-02-11 Mon 14:48] =>  0:54
     CLOCK: [2019-02-11 Mon 11:51]--[2019-02-11 Mon 12:11] =>  0:20
     CLOCK: [2019-02-11 Mon 11:37]--[2019-02-11 Mon 11:50] =>  0:13
@@ -661,6 +663,17 @@ logging etc. It makes no sense to create these types
 manually. Instead, we need to create a utility model and mark all of
 the existing types as either hand-crafted or regenerate them via dogen
 (for example for enums).
+
+Tasks:
+
+- replace exceptions with dogen exceptions
+
+*** JSON models in dogen are out of sync                              :story:
+
+Problems:
+
+- tailor generation results in files with the wrong name (=dia.json=)
+- input models were copied into test data.
 
 *** Add option for northwind tests                                    :story:
 
