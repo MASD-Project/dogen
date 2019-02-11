@@ -22,5 +22,9 @@
 
 namespace masd::dogen {
 
+configuration configuration_builder::build() {
+    configuration r;
+    return r;
+}
 
 }
