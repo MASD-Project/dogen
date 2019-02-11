@@ -23,6 +23,10 @@ for layer in dia.active_display().diagram.data.layers:
             object.properties["fill_colour"] = "Khaki"
             continue;
 
+        if object.type.name == "UML - LargePackage":
+            object.properties["fill_colour"] = "WhiteSmoke"
+            continue;
+
         if object.type.name != "UML - Class":
             continue;
 
