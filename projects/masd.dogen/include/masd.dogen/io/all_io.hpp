@@ -27,7 +27,6 @@
 
 #include "masd.dogen/io/model_io.hpp"
 #include "masd.dogen/io/archive_io.hpp"
-#include "masd.dogen/io/activity_io.hpp"
 #include "masd.dogen/io/artefact_io.hpp"
 #include "masd.dogen/io/log_level_io.hpp"
 #include "masd.dogen/io/operation_io.hpp"

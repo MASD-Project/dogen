@@ -22,8 +22,5 @@
 
 namespace masd::dogen {
 
-bool configuration_builder::operator==(const configuration_builder& /*rhs*/) const {
-    return true;
-}
 
 }

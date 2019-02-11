@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen/types/configuration.hpp"
 
 namespace masd::dogen {
 
@@ -35,17 +35,19 @@ namespace masd::dogen {
 class configuration_builder final {
 public:
     configuration_builder() = default;
-    configuration_builder(const configuration_builder&) = default;
-    configuration_builder(configuration_builder&&) = default;
+    configuration_builder(const configuration_builder&) = delete;
+    configuration_builder(configuration_builder&&) = delete;
     ~configuration_builder() = default;
-    configuration_builder& operator=(const configuration_builder&) = default;
+    configuration_builder& operator=(const configuration_builder&) = delete;
 
 public:
-    bool operator==(const configuration_builder& rhs) const;
-    bool operator!=(const configuration_builder& rhs) const {
-        return !this->operator==(rhs);
-    }
+    configuration_builder generation_mode();
 
+public:
+    configuration build();
+
+private:
+    configuration configuration_;
 };
 
 }

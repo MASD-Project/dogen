@@ -28,7 +28,6 @@
 #include "masd.dogen/types/dogen.hpp"
 #include "masd.dogen/types/model.hpp"
 #include "masd.dogen/types/archive.hpp"
-#include "masd.dogen/types/activity.hpp"
 #include "masd.dogen/types/artefact.hpp"
 #include "masd.dogen/types/log_level.hpp"
 #include "masd.dogen/types/operation.hpp"

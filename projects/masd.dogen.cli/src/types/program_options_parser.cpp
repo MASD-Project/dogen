@@ -531,7 +531,6 @@ handle_command(const std::string& command_name, const bool has_help,
      * them and then generate the appropriate options.
      */
     std::string model_name;
-    using masd::dogen::activity;
     masd::dogen::configuration r;
     using boost::program_options::command_line_parser;
     typedef boost::optional<masd::dogen::configuration> empty_config;
@@ -543,9 +542,9 @@ handle_command(const std::string& command_name, const bool has_help,
         }
 
         store(command_line_parser(options).options(god).run(), vm);
-        r.generation(read_generation_configuration(vm));
-        r.activity(masd::dogen::activity::generate);
-        model_name = r.generation()->target().stem().filename().string();
+        const auto gc(read_generation_configuration(vm));
+        model_name = gc.target().stem().filename().string();
+        r.activity(gc);
     } else if (command_name == convert_command_name) {
         const auto cod(make_convert_options_description());
         if (has_help) {
@@ -554,9 +553,9 @@ handle_command(const std::string& command_name, const bool has_help,
         }
 
         store(command_line_parser(options).options(cod).run(), vm);
-        r.conversion(read_conversion_configuration(vm));
-        r.activity(masd::dogen::activity::convert);
-        model_name = r.conversion()->source().stem().filename().string();
+        const auto cc(read_conversion_configuration(vm));
+        model_name = cc.source().stem().filename().string();
+        r.activity(cc);
     } else if (command_name == weave_command_name) {
         const auto cod(make_weave_options_description());
         if (has_help) {
@@ -565,9 +564,9 @@ handle_command(const std::string& command_name, const bool has_help,
         }
 
         store(command_line_parser(options).options(cod).run(), vm);
-        r.weaving(read_weaving_configuration(vm));
-        r.activity(masd::dogen::activity::weave);
-        model_name = r.weaving()->target().stem().filename().string();
+        const auto wc(read_weaving_configuration(vm));
+        model_name = wc.target().stem().filename().string();
+        r.activity(wc);
     }
 
     /*

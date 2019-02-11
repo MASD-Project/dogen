@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "masd.dogen/io/activity_io.hpp"
+#include <boost/variant/apply_visitor.hpp>
 #include "masd.dogen/io/configuration_io.hpp"
 #include "masd.dogen/io/diffing_configuration_io.hpp"
 #include "masd.dogen/io/logging_configuration_io.hpp"
@@ -30,44 +30,32 @@
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::generation_configuration>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+struct boost_variant_masd_dogen_generation_configuration_masd_dogen_weaving_configuration_masd_dogen_conversion_configuration_visitor : public boost::static_visitor<> {
+    boost_variant_masd_dogen_generation_configuration_masd_dogen_weaving_configuration_masd_dogen_conversion_configuration_visitor(std::ostream& s) : stream_(s) {
+        s << "{ " << "\"__type__\": " << "\"boost::variant\"" << ", ";
+        s << "\"data\": ";
+    }
 
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
-    return s;
-}
+    ~boost_variant_masd_dogen_generation_configuration_masd_dogen_weaving_configuration_masd_dogen_conversion_configuration_visitor() { stream_ << " }"; }
 
-}
+    void operator()(const masd::dogen::generation_configuration& v) const {
+        stream_ << v;
+    }
 
-namespace boost {
+    void operator()(const masd::dogen::weaving_configuration& v) const {
+        stream_ << v;
+    }
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::weaving_configuration>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+    void operator()(const masd::dogen::conversion_configuration& v) const {
+        stream_ << v;
+    }
 
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
-    return s;
-}
+private:
+    std::ostream& stream_;
+};
 
-}
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::conversion_configuration>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
+inline std::ostream& operator<<(std::ostream& s, const boost::variant<masd::dogen::generation_configuration, masd::dogen::weaving_configuration, masd::dogen::conversion_configuration>& v) {
+    boost::apply_visitor(boost_variant_masd_dogen_generation_configuration_masd_dogen_weaving_configuration_masd_dogen_conversion_configuration_visitor(s), v);
     return s;
 }
 
@@ -79,9 +67,6 @@ std::ostream& operator<<(std::ostream& s, const configuration& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::configuration\"" << ", "
       << "\"activity\": " << v.activity() << ", "
-      << "\"generation\": " << v.generation() << ", "
-      << "\"weaving\": " << v.weaving() << ", "
-      << "\"conversion\": " << v.conversion() << ", "
       << "\"tracing\": " << v.tracing() << ", "
       << "\"logging\": " << v.logging() << ", "
       << "\"diffing\": " << v.diffing()
