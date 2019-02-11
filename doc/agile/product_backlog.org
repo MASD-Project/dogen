@@ -1229,6 +1229,10 @@ types. If you'd like to test models, you need to enable it on your
 utility model - e.g. models must reference a utility model and then we
 check to see if the test bundle is enabled.
 
+For extra marks, with would be great if you could associate a bundle
+with a facet as well, so that the IO, hashing etc types would go into
+the right facet folders rather than under types.
+
 *** Code generation of tests for dogen models                         :story:
 
 We probably already have a story for this. At present we are manually
