@@ -5222,15 +5222,6 @@ Results in:
 
 We need to ignore empty expressions.
 
-*** Contents change check is done twice                               :story:
-
-We seem to check twice if a file has changed:
-
-: 2015-04-26 12:37:28.451464 [DEBUG] [formatters.filesystem_writer] File contents have not changed, and force write is false so not writing.
-: 2015-04-26 12:37:28.451486 [DEBUG] [formatters.filesystem_writer] File contents have not changed, and force write is false so not writing.
-
-This is in stitch but it should be the same for knit.
-
 *** Stitch does not handle directories very well                      :story:
 
 At present we seem to generate log files called =.= when we use stitch
@@ -8339,19 +8330,6 @@ It would be nice if we could automatically generate boost variant
 visitors with lambda support. See:
 
 - [[http://stackoverflow.com/questions/7867555/best-way-to-do-variant-visitation-with-lambdas][Best way to do variant visitation with lambdas]]
-
-*** Consider adding a writing policy to files                         :story:
-
-At present we are using a single flag to describe several
-possibilities with regards to file writing:
-
-- write if its a new file;
-- write if the contents have changed;
-- write always. No use case yet.
-
-It may make more sense to have an enum for this. Having said that, we
-removed the "force write" feature so there is less of a need for this
-at present.
 
 *** Add support for disabling unique filenames                        :story:
 
@@ -11525,31 +11503,6 @@ need sets/etc or if there are other alternatives:
 
 In cases where we know upfront the number of elements we require and
 we already have them sorted, we may not need a set.
-
-*** Remove unused features                                             :epic:
-
-This story captures any features that we no longer require and will
-remove at some point. We have already removed most of the unused
-features, but the story keeps track of any remnants.
-
-At the very start of dogen we added a number of features that we
-thought were useful such as suppressing model directory, facet
-directories etc. We should look at all the features and make a list of
-all features that we are not currently making use of and create
-stories to remove them.
-
-We may have to split this story into several but we should at least
-trim down the obvious ones:
-
-- delete extra files: we always do so why make it optional.
-- disable facet folders: no use case.
-- force write: we never force write and now the logic is a bit at odds
-  with the overwriting logic: should we force write even if overwrite
-  is set to false? This would break hand-crafted code.
-- etc.
-
-Basically any feature which we are not using at present and cannot
-think of an obvious use case.
 
 *** Add support for multiple backends                                  :epic:
 
