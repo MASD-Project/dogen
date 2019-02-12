@@ -70,6 +70,7 @@
 #include "masd.dogen.coding/io/meta_model/orm_database_systems_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_model_properties_io.hpp"
 #include "masd.dogen.coding/io/transforms/naming_configuration_io.hpp"
+#include "masd.dogen.coding/io/meta_model/generation_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_module_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_object_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/path_contribution_types_io.hpp"

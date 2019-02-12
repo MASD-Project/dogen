@@ -42,6 +42,7 @@
 #include "masd.dogen.coding/types/meta_model/locator_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_model_properties.hpp"
 #include "masd.dogen.coding/hash/meta_model/element_archetype_hash.hpp"
+#include "masd.dogen.coding/types/meta_model/generation_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/global_archetype_location_properties.hpp"
 
 namespace masd::dogen::coding::meta_model {
@@ -75,7 +76,8 @@ public:
         const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties,
         const std::unordered_set<masd::dogen::coding::meta_model::element_archetype>& enabled_archetype_for_element,
         const masd::dogen::coding::meta_model::locator_properties& locator_properties,
-        const masd::dogen::coding::meta_model::global_archetype_location_properties& global_archetype_location_properties);
+        const masd::dogen::coding::meta_model::global_archetype_location_properties& global_archetype_location_properties,
+        const boost::optional<masd::dogen::coding::meta_model::generation_properties>& generation_properties);
 
 public:
     /**
@@ -189,6 +191,11 @@ public:
     void global_archetype_location_properties(const masd::dogen::coding::meta_model::global_archetype_location_properties& v);
     void global_archetype_location_properties(const masd::dogen::coding::meta_model::global_archetype_location_properties&& v);
 
+    const boost::optional<masd::dogen::coding::meta_model::generation_properties>& generation_properties() const;
+    boost::optional<masd::dogen::coding::meta_model::generation_properties>& generation_properties();
+    void generation_properties(const boost::optional<masd::dogen::coding::meta_model::generation_properties>& v);
+    void generation_properties(const boost::optional<masd::dogen::coding::meta_model::generation_properties>&& v);
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -214,6 +221,7 @@ private:
     std::unordered_set<masd::dogen::coding::meta_model::element_archetype> enabled_archetype_for_element_;
     masd::dogen::coding::meta_model::locator_properties locator_properties_;
     masd::dogen::coding::meta_model::global_archetype_location_properties global_archetype_location_properties_;
+    boost::optional<masd::dogen::coding::meta_model::generation_properties> generation_properties_;
 };
 
 }

@@ -61,7 +61,8 @@ model::model(model&& rhs)
       orm_properties_(std::move(rhs.orm_properties_)),
       enabled_archetype_for_element_(std::move(rhs.enabled_archetype_for_element_)),
       locator_properties_(std::move(rhs.locator_properties_)),
-      global_archetype_location_properties_(std::move(rhs.global_archetype_location_properties_)) { }
+      global_archetype_location_properties_(std::move(rhs.global_archetype_location_properties_)),
+      generation_properties_(std::move(rhs.generation_properties_)) { }
 
 model::model(
     const masd::dogen::coding::meta_model::name& name,
@@ -77,7 +78,8 @@ model::model(
     const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties,
     const std::unordered_set<masd::dogen::coding::meta_model::element_archetype>& enabled_archetype_for_element,
     const masd::dogen::coding::meta_model::locator_properties& locator_properties,
-    const masd::dogen::coding::meta_model::global_archetype_location_properties& global_archetype_location_properties)
+    const masd::dogen::coding::meta_model::global_archetype_location_properties& global_archetype_location_properties,
+    const boost::optional<masd::dogen::coding::meta_model::generation_properties>& generation_properties)
     : name_(name),
       meta_name_(meta_name),
       references_(references),
@@ -91,7 +93,8 @@ model::model(
       orm_properties_(orm_properties),
       enabled_archetype_for_element_(enabled_archetype_for_element),
       locator_properties_(locator_properties),
-      global_archetype_location_properties_(global_archetype_location_properties) { }
+      global_archetype_location_properties_(global_archetype_location_properties),
+      generation_properties_(generation_properties) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -109,6 +112,7 @@ void model::swap(model& other) noexcept {
     swap(enabled_archetype_for_element_, other.enabled_archetype_for_element_);
     swap(locator_properties_, other.locator_properties_);
     swap(global_archetype_location_properties_, other.global_archetype_location_properties_);
+    swap(generation_properties_, other.generation_properties_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -125,7 +129,8 @@ bool model::operator==(const model& rhs) const {
         orm_properties_ == rhs.orm_properties_ &&
         enabled_archetype_for_element_ == rhs.enabled_archetype_for_element_ &&
         locator_properties_ == rhs.locator_properties_ &&
-        global_archetype_location_properties_ == rhs.global_archetype_location_properties_;
+        global_archetype_location_properties_ == rhs.global_archetype_location_properties_ &&
+        generation_properties_ == rhs.generation_properties_;
 }
 
 model& model::operator=(model other) {
@@ -332,6 +337,22 @@ void model::global_archetype_location_properties(const masd::dogen::coding::meta
 
 void model::global_archetype_location_properties(const masd::dogen::coding::meta_model::global_archetype_location_properties&& v) {
     global_archetype_location_properties_ = std::move(v);
+}
+
+const boost::optional<masd::dogen::coding::meta_model::generation_properties>& model::generation_properties() const {
+    return generation_properties_;
+}
+
+boost::optional<masd::dogen::coding::meta_model::generation_properties>& model::generation_properties() {
+    return generation_properties_;
+}
+
+void model::generation_properties(const boost::optional<masd::dogen::coding::meta_model::generation_properties>& v) {
+    generation_properties_ = v;
+}
+
+void model::generation_properties(const boost::optional<masd::dogen::coding::meta_model::generation_properties>&& v) {
+    generation_properties_ = std::move(v);
 }
 
 }

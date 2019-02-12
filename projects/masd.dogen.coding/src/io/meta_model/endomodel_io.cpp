@@ -33,6 +33,7 @@
 #include "masd.dogen.coding/io/meta_model/origin_types_io.hpp"
 #include "masd.dogen.coding/io/meta_model/object_template_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_model_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/generation_properties_io.hpp"
 
 namespace std {
 
@@ -375,6 +376,21 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dog
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::generation_properties>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace masd::dogen::coding::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const endomodel& v) {
@@ -396,7 +412,8 @@ std::ostream& operator<<(std::ostream& s, const endomodel& v) {
       << "\"root_module\": " << v.root_module() << ", "
       << "\"input_language\": " << v.input_language() << ", "
       << "\"output_languages\": " << v.output_languages() << ", "
-      << "\"orm_properties\": " << v.orm_properties()
+      << "\"orm_properties\": " << v.orm_properties() << ", "
+      << "\"generation_properties\": " << v.generation_properties()
       << " }";
     return(s);
 }

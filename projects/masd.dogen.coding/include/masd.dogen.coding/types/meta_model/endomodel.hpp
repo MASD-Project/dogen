@@ -45,6 +45,7 @@
 #include "masd.dogen.coding/types/meta_model/enumeration_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_model_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/generation_properties.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
@@ -80,7 +81,8 @@ public:
         const boost::shared_ptr<masd::dogen::coding::meta_model::module>& root_module,
         const masd::dogen::coding::meta_model::languages input_language,
         const std::list<masd::dogen::coding::meta_model::languages>& output_languages,
-        const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties);
+        const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties,
+        const boost::optional<masd::dogen::coding::meta_model::generation_properties>& generation_properties);
 
 public:
     /**
@@ -242,6 +244,11 @@ public:
     void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& v);
     void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>&& v);
 
+    const boost::optional<masd::dogen::coding::meta_model::generation_properties>& generation_properties() const;
+    boost::optional<masd::dogen::coding::meta_model::generation_properties>& generation_properties();
+    void generation_properties(const boost::optional<masd::dogen::coding::meta_model::generation_properties>& v);
+    void generation_properties(const boost::optional<masd::dogen::coding::meta_model::generation_properties>&& v);
+
 public:
     bool operator==(const endomodel& rhs) const;
     bool operator!=(const endomodel& rhs) const {
@@ -270,6 +277,7 @@ private:
     masd::dogen::coding::meta_model::languages input_language_;
     std::list<masd::dogen::coding::meta_model::languages> output_languages_;
     boost::optional<masd::dogen::coding::meta_model::orm_model_properties> orm_properties_;
+    boost::optional<masd::dogen::coding::meta_model::generation_properties> generation_properties_;
 };
 
 }
