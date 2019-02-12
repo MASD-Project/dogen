@@ -22,6 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.generation.csharp/io/formattables/model_io.hpp"
+#include "masd.dogen.coding/io/meta_model/generation_properties_io.hpp"
 #include "masd.dogen.generation.csharp/io/formattables/formattable_io.hpp"
 #include "masd.dogen.generation.csharp/io/formattables/aspect_properties_io.hpp"
 #include "masd.dogen.generation.csharp/io/formattables/assistant_properties_io.hpp"
@@ -102,6 +103,21 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::generation_properties>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace masd::dogen::generation::csharp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const model& v) {
@@ -111,7 +127,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"formattables\": " << v.formattables() << ", "
       << "\"project_items\": " << v.project_items() << ", "
       << "\"aspect_properties\": " << v.aspect_properties() << ", "
-      << "\"assistant_properties\": " << v.assistant_properties()
+      << "\"assistant_properties\": " << v.assistant_properties() << ", "
+      << "\"generation_properties\": " << v.generation_properties()
       << " }";
     return(s);
 }
