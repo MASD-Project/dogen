@@ -655,13 +655,13 @@
         <dia:point val="-43,-58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-43.05,-58.05;-30.515,-53.55"/>
+        <dia:rectangle val="-43.05,-58.05;-23.97,-53.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-43,-58"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.434999999999999"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -759,7 +759,7 @@
             <dia:string>#tracing#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#tracing_configuration#</dia:string>
+            <dia:string>#boost::optional&lt;tracing_configuration&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -782,7 +782,7 @@
             <dia:string>#diffing#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#diffing_configuration#</dia:string>
+            <dia:string>#boost::optional&lt;diffing_configuration&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -969,13 +969,13 @@
         <dia:point val="-24,-69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-24.05,-69.05;-13.055,-63.75"/>
+        <dia:rectangle val="-24.05,-69.05;-13.7975,-63.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-24,-69"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.895"/>
+        <dia:real val="10.1525"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -984,7 +984,7 @@
         <dia:string>#tracing_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::fluent, Enablable#</dia:string>
+        <dia:string>#masd::fluent#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Configuration related to tracing.#</dia:string>
@@ -1412,17 +1412,17 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-13.105,-69"/>
+        <dia:point val="-13.8475,-69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-13.855,-74.65;-6.5075,-68.2"/>
+        <dia:rectangle val="-14.5975,-74.65;-6.5075,-68.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-13.105,-69"/>
-        <dia:point val="-13.105,-72"/>
+        <dia:point val="-13.8475,-69"/>
+        <dia:point val="-13.8475,-72"/>
         <dia:point val="-6.7075,-72"/>
         <dia:point val="-6.7075,-74.6"/>
       </dia:attribute>
@@ -3170,13 +3170,13 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:point val="-56,-69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-56.05,-69.05;-45.055,-65.95"/>
+        <dia:rectangle val="-56.05,-69.05;-46.125,-65.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-56,-69"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.895"/>
+        <dia:real val="9.8249999999999993"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -3185,7 +3185,7 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:string>#diffing_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::fluent, Enablable#</dia:string>
+        <dia:string>#masd::fluent#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Configuration for diff generation.#</dia:string>
@@ -3864,17 +3864,17 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-36.7825,-58"/>
+        <dia:point val="-33.51,-58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-37.5325,-65.45;-35.5825,-57.2"/>
+        <dia:rectangle val="-35.8325,-65.45;-32.76,-57.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-36.7825,-58"/>
-        <dia:point val="-36.7825,-62"/>
+        <dia:point val="-33.51,-58"/>
+        <dia:point val="-33.51,-62"/>
         <dia:point val="-35.7825,-62"/>
         <dia:point val="-35.7825,-65.4"/>
       </dia:attribute>
@@ -3898,274 +3898,6 @@ Only applicable when deleting extra files.#</dia:string>
       </dia:connections>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O27">
-      <dia:attribute name="obj_pos">
-        <dia:point val="-55,-79"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="-55.05,-79.05;-44.825,-75.35"/>
-      </dia:attribute>
-      <dia:attribute name="elem_corner">
-        <dia:point val="-55,-79"/>
-      </dia:attribute>
-      <dia:attribute name="elem_width">
-        <dia:real val="10.125"/>
-      </dia:attribute>
-      <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="name">
-        <dia:string>#Enablable#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="stereotype">
-        <dia:string>#masd::object_template#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="comment">
-        <dia:string>#Element which can be enabled.#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="abstract">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_attributes">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_operations">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="visible_attributes">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_comments">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_after_char">
-        <dia:int val="40"/>
-      </dia:attribute>
-      <dia:attribute name="comment_line_length">
-        <dia:int val="17"/>
-      </dia:attribute>
-      <dia:attribute name="comment_tagging">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="line_width">
-        <dia:real val="0.10000000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="line_color">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="fill_color">
-        <dia:color val="#eed2ee"/>
-      </dia:attribute>
-      <dia:attribute name="text_color">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font">
-        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font">
-        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font">
-        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font">
-        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font">
-        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font_height">
-        <dia:real val="0.69999999999999996"/>
-      </dia:attribute>
-      <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#enabled#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, the configurable aspect will be expressed.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-      </dia:attribute>
-      <dia:attribute name="operations"/>
-      <dia:attribute name="template">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="templates"/>
-    </dia:object>
-    <dia:object type="UML - Class" version="0" id="O28">
-      <dia:attribute name="obj_pos">
-        <dia:point val="-31,-48"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="-31.05,-48.05;-14.28,-44.35"/>
-      </dia:attribute>
-      <dia:attribute name="elem_corner">
-        <dia:point val="-31,-48"/>
-      </dia:attribute>
-      <dia:attribute name="elem_width">
-        <dia:real val="16.669999999999998"/>
-      </dia:attribute>
-      <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="name">
-        <dia:string>#Outputable#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="stereotype">
-        <dia:string>#masd::object_template#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="comment">
-        <dia:string>#Element which requires output information.#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="abstract">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_attributes">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_operations">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="visible_attributes">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_comments">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_after_char">
-        <dia:int val="40"/>
-      </dia:attribute>
-      <dia:attribute name="comment_line_length">
-        <dia:int val="17"/>
-      </dia:attribute>
-      <dia:attribute name="comment_tagging">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="line_width">
-        <dia:real val="0.10000000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="line_color">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="fill_color">
-        <dia:color val="#eed2ee"/>
-      </dia:attribute>
-      <dia:attribute name="text_color">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font">
-        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font">
-        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font">
-        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font">
-        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font">
-        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font_height">
-        <dia:real val="0.69999999999999996"/>
-      </dia:attribute>
-      <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#output_directory#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#boost::filesystem::path#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Directory in which to place the output.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-      </dia:attribute>
-      <dia:attribute name="operations"/>
-      <dia:attribute name="template">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="templates"/>
-    </dia:object>
-    <dia:object type="UML - Class" version="0" id="O29">
       <dia:attribute name="obj_pos">
         <dia:point val="-13,23"/>
       </dia:attribute>
@@ -4368,7 +4100,7 @@ Only applicable when deleting extra files.#</dia:string>
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O30">
+    <dia:object type="UML - Association" version="2" id="O28">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -4435,11 +4167,11 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O58" connection="5"/>
-        <dia:connection handle="1" to="O29" connection="1"/>
+        <dia:connection handle="0" to="O56" connection="5"/>
+        <dia:connection handle="1" to="O27" connection="1"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O31">
+    <dia:object type="UML - Class" version="0" id="O29">
       <dia:attribute name="obj_pos">
         <dia:point val="8,23"/>
       </dia:attribute>
@@ -4642,7 +4374,7 @@ Only applicable when deleting extra files.#</dia:string>
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O32">
+    <dia:object type="UML - Association" version="2" id="O30">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -4709,11 +4441,11 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O58" connection="7"/>
-        <dia:connection handle="1" to="O31" connection="1"/>
+        <dia:connection handle="0" to="O56" connection="7"/>
+        <dia:connection handle="1" to="O29" connection="1"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O33">
+    <dia:object type="UML - Class" version="0" id="O31">
       <dia:attribute name="obj_pos">
         <dia:point val="22,-10"/>
       </dia:attribute>
@@ -4893,7 +4625,7 @@ Only applicable when deleting extra files.#</dia:string>
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O34">
+    <dia:object type="UML - Association" version="2" id="O32">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -4961,10 +4693,10 @@ Only applicable when deleting extra files.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O17" connection="7"/>
-        <dia:connection handle="1" to="O33" connection="1"/>
+        <dia:connection handle="1" to="O31" connection="1"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O35">
+    <dia:object type="UML - Association" version="2" id="O33">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -5032,10 +4764,10 @@ Only applicable when deleting extra files.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O21" connection="5"/>
-        <dia:connection handle="1" to="O33" connection="7"/>
+        <dia:connection handle="1" to="O31" connection="7"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O36">
+    <dia:object type="UML - Class" version="0" id="O34">
       <dia:attribute name="obj_pos">
         <dia:point val="19,1"/>
       </dia:attribute>
@@ -5194,7 +4926,7 @@ Only applicable when deleting extra files.#</dia:string>
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O37">
+    <dia:object type="UML - Association" version="2" id="O35">
       <dia:attribute name="name">
         <dia:string>#&lt; makes#</dia:string>
       </dia:attribute>
@@ -5261,11 +4993,11 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O36" connection="1"/>
-        <dia:connection handle="1" to="O33" connection="5"/>
+        <dia:connection handle="0" to="O34" connection="1"/>
+        <dia:connection handle="1" to="O31" connection="5"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O38">
+    <dia:object type="UML - Class" version="0" id="O36">
       <dia:attribute name="obj_pos">
         <dia:point val="-59,-24"/>
       </dia:attribute>
@@ -5588,7 +5320,7 @@ Only applicable when deleting extra files.#</dia:string>
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O39">
+    <dia:object type="UML - Class" version="0" id="O37">
       <dia:attribute name="obj_pos">
         <dia:point val="-85,-24"/>
       </dia:attribute>
@@ -5829,7 +5561,7 @@ Only applicable when deleting extra files.#</dia:string>
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O40">
+    <dia:object type="UML - Class" version="0" id="O38">
       <dia:attribute name="obj_pos">
         <dia:point val="-64,-10"/>
       </dia:attribute>
@@ -5939,7 +5671,7 @@ Only applicable when deleting extra files.#</dia:string>
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O41">
+    <dia:object type="UML - Class" version="0" id="O39">
       <dia:attribute name="obj_pos">
         <dia:point val="75,-11"/>
       </dia:attribute>
@@ -6049,7 +5781,7 @@ Only applicable when deleting extra files.#</dia:string>
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O42">
+    <dia:object type="UML - Association" version="2" id="O40">
       <dia:attribute name="name">
         <dia:string>#throws &gt;#</dia:string>
       </dia:attribute>
@@ -6117,10 +5849,10 @@ Only applicable when deleting extra files.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O21" connection="7"/>
-        <dia:connection handle="1" to="O41" connection="0"/>
+        <dia:connection handle="1" to="O39" connection="0"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O43">
+    <dia:object type="UML - Association" version="2" id="O41">
       <dia:attribute name="name">
         <dia:string>#&lt; throws#</dia:string>
       </dia:attribute>
@@ -6188,10 +5920,10 @@ Only applicable when deleting extra files.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O25" connection="6"/>
-        <dia:connection handle="1" to="O41" connection="2"/>
+        <dia:connection handle="1" to="O39" connection="2"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O44">
+    <dia:object type="UML - Association" version="2" id="O42">
       <dia:attribute name="name">
         <dia:string>#&lt; throws#</dia:string>
       </dia:attribute>
@@ -6258,11 +5990,11 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O38" connection="6"/>
-        <dia:connection handle="1" to="O40" connection="2"/>
+        <dia:connection handle="0" to="O36" connection="6"/>
+        <dia:connection handle="1" to="O38" connection="2"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O45">
+    <dia:object type="UML - Association" version="2" id="O43">
       <dia:attribute name="name">
         <dia:string>#throws &gt;#</dia:string>
       </dia:attribute>
@@ -6329,11 +6061,11 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O39" connection="6"/>
-        <dia:connection handle="1" to="O40" connection="0"/>
+        <dia:connection handle="0" to="O37" connection="6"/>
+        <dia:connection handle="1" to="O38" connection="0"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O46">
+    <dia:object type="UML - Note" version="0" id="O44">
       <dia:attribute name="obj_pos">
         <dia:point val="-72,-3"/>
       </dia:attribute>
@@ -6388,7 +6120,7 @@ Only applicable when deleting extra files.#</dia:string>
         </dia:composite>
       </dia:attribute>
     </dia:object>
-    <dia:object type="UML - Message" version="0" id="O47">
+    <dia:object type="UML - Message" version="0" id="O45">
       <dia:attribute name="obj_pos">
         <dia:point val="-64.235,-3"/>
       </dia:attribute>
@@ -6418,11 +6150,11 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:point val="-61.8456,-4.5"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O46" connection="1"/>
-        <dia:connection handle="1" to="O40" connection="6"/>
+        <dia:connection handle="0" to="O44" connection="1"/>
+        <dia:connection handle="1" to="O38" connection="6"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O48">
+    <dia:object type="UML - Class" version="0" id="O46">
       <dia:attribute name="obj_pos">
         <dia:point val="-47,-3"/>
       </dia:attribute>
@@ -6579,7 +6311,7 @@ Only applicable when deleting extra files.#</dia:string>
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O49">
+    <dia:object type="UML - Class" version="0" id="O47">
       <dia:attribute name="obj_pos">
         <dia:point val="-52,11"/>
       </dia:attribute>
@@ -6736,7 +6468,7 @@ Only applicable when deleting extra files.#</dia:string>
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O50">
+    <dia:object type="UML - Association" version="2" id="O48">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -6803,11 +6535,11 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O49" connection="1"/>
-        <dia:connection handle="1" to="O48" connection="6"/>
+        <dia:connection handle="0" to="O47" connection="1"/>
+        <dia:connection handle="1" to="O46" connection="6"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O51">
+    <dia:object type="UML - Association" version="2" id="O49">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -6874,18 +6606,18 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="1" to="O49" connection="6"/>
+        <dia:connection handle="1" to="O47" connection="6"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O52">
+    <dia:object type="UML - Class" version="0" id="O50">
       <dia:attribute name="obj_pos">
-        <dia:point val="-65,-58"/>
+        <dia:point val="-61,-58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-65.05,-58.05;-51.36,-54.35"/>
+        <dia:rectangle val="-61.05,-58.05;-47.36,-54.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-65,-58"/>
+        <dia:point val="-61,-58"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.59"/>
@@ -7036,7 +6768,7 @@ Only applicable when deleting extra files.#</dia:string>
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O53">
+    <dia:object type="UML - Note" version="0" id="O51">
       <dia:attribute name="obj_pos">
         <dia:point val="55,-11"/>
       </dia:attribute>
@@ -7091,7 +6823,7 @@ Only applicable when deleting extra files.#</dia:string>
         </dia:composite>
       </dia:attribute>
     </dia:object>
-    <dia:object type="UML - Message" version="0" id="O54">
+    <dia:object type="UML - Message" version="0" id="O52">
       <dia:attribute name="obj_pos">
         <dia:point val="70.53,-8.55"/>
       </dia:attribute>
@@ -7121,11 +6853,11 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:point val="72.765,-8.725"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O53" connection="4"/>
-        <dia:connection handle="1" to="O41" connection="3"/>
+        <dia:connection handle="0" to="O51" connection="4"/>
+        <dia:connection handle="1" to="O39" connection="3"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O55">
+    <dia:object type="UML - Class" version="0" id="O53">
       <dia:attribute name="obj_pos">
         <dia:point val="-39,31"/>
       </dia:attribute>
@@ -7310,7 +7042,7 @@ for the destination type.#</dia:string>
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O56">
+    <dia:object type="UML - Association" version="2" id="O54">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -7377,10 +7109,10 @@ for the destination type.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="1" to="O55" connection="6"/>
+        <dia:connection handle="1" to="O53" connection="6"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O57">
+    <dia:object type="UML - Association" version="2" id="O55">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -7418,19 +7150,19 @@ for the destination type.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-30.565,-58"/>
+        <dia:point val="-24.02,-58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-31.315,-63.85;-18.3525,-57.2"/>
+        <dia:rectangle val="-24.77,-63.85;-18.7237,-57.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-30.565,-58"/>
-        <dia:point val="-30.565,-62"/>
-        <dia:point val="-18.5525,-62"/>
-        <dia:point val="-18.5525,-63.8"/>
+        <dia:point val="-24.02,-58"/>
+        <dia:point val="-24.02,-62"/>
+        <dia:point val="-18.9237,-62"/>
+        <dia:point val="-18.9237,-63.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7451,7 +7183,7 @@ for the destination type.#</dia:string>
         <dia:connection handle="1" to="O6" connection="6"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O58">
+    <dia:object type="UML - Class" version="0" id="O56">
       <dia:attribute name="obj_pos">
         <dia:point val="-4,13"/>
       </dia:attribute>
@@ -7608,7 +7340,7 @@ for the destination type.#</dia:string>
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O59">
+    <dia:object type="UML - Association" version="2" id="O57">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -7676,10 +7408,10 @@ for the destination type.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O0" connection="16"/>
-        <dia:connection handle="1" to="O58" connection="1"/>
+        <dia:connection handle="1" to="O56" connection="1"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O60">
+    <dia:object type="UML - Class" version="0" id="O58">
       <dia:attribute name="obj_pos">
         <dia:point val="34,-10"/>
       </dia:attribute>
@@ -7836,7 +7568,7 @@ for the destination type.#</dia:string>
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O61">
+    <dia:object type="UML - Class" version="0" id="O59">
       <dia:attribute name="obj_pos">
         <dia:point val="33,-24"/>
       </dia:attribute>
@@ -7993,7 +7725,7 @@ for the destination type.#</dia:string>
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O62">
+    <dia:object type="UML - Association" version="2" id="O60">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -8061,10 +7793,10 @@ for the destination type.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O17" connection="11"/>
-        <dia:connection handle="1" to="O61" connection="8"/>
+        <dia:connection handle="1" to="O59" connection="8"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O63">
+    <dia:object type="UML - Association" version="2" id="O61">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -8131,11 +7863,11 @@ for the destination type.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O61" connection="6"/>
-        <dia:connection handle="1" to="O60" connection="1"/>
+        <dia:connection handle="0" to="O59" connection="6"/>
+        <dia:connection handle="1" to="O58" connection="1"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O64">
+    <dia:object type="UML - Association" version="2" id="O62">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -8176,7 +7908,7 @@ for the destination type.#</dia:string>
         <dia:point val="-43,-58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-50.6025,-66.05;-42.25,-56.4"/>
+        <dia:rectangle val="-51.1375,-66.05;-42.25,-57.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8184,8 +7916,8 @@ for the destination type.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-43,-58"/>
         <dia:point val="-43,-62"/>
-        <dia:point val="-50.5525,-62"/>
-        <dia:point val="-50.5525,-66"/>
+        <dia:point val="-51.0875,-62"/>
+        <dia:point val="-51.0875,-66"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -8206,7 +7938,7 @@ for the destination type.#</dia:string>
         <dia:connection handle="1" to="O22" connection="6"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O65">
+    <dia:object type="UML - Association" version="2" id="O63">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -8244,19 +7976,19 @@ for the destination type.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-43,-53.6"/>
+        <dia:point val="-33.51,-53.5501"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-58.255,-54.45;-42.25,-48.2"/>
+        <dia:rectangle val="-54.255,-54.45;-32.76,-48.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-43,-53.6"/>
-        <dia:point val="-43,-49"/>
-        <dia:point val="-58.205,-49"/>
-        <dia:point val="-58.205,-54.4"/>
+        <dia:point val="-33.51,-53.5501"/>
+        <dia:point val="-33.51,-49"/>
+        <dia:point val="-54.205,-49"/>
+        <dia:point val="-54.205,-54.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -8273,8 +8005,8 @@ for the destination type.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O4" connection="5"/>
-        <dia:connection handle="1" to="O52" connection="6"/>
+        <dia:connection handle="0" to="O4" connection="12"/>
+        <dia:connection handle="1" to="O50" connection="6"/>
       </dia:connections>
     </dia:object>
   </dia:layer>
