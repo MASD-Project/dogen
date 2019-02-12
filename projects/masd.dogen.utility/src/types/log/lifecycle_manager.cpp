@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#define _SILENCE_CXX17_ALLOCATOR_VOID_DEPRECATION_WARNING
 #include <boost/make_shared.hpp>
 #include <boost/log/sinks.hpp>
 #include <boost/log/common.hpp>
