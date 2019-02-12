@@ -29,7 +29,7 @@
 #include <boost/core/null_deleter.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include "masd.dogen.utility/types/exception/invalid_enum_value.hpp"
-#include "masd.dogen.utility/types/log/life_cycle_manager.hpp"
+#include "masd.dogen.utility/types/log/lifecycle_manager.hpp"
 
 namespace {
 
@@ -44,7 +44,7 @@ const std::string time_stamp_format("%Y-%m-%d %H:%M:%S.%f");
 
 namespace masd::dogen::utility::log {
 
-void life_cycle_manager::create_file_backend(
+void lifecycle_manager::create_file_backend(
     boost::filesystem::path file_name, const severity_level severity) {
     using namespace boost::log;
 
@@ -74,7 +74,7 @@ void life_cycle_manager::create_file_backend(
     boost::log::core::get()->add_sink(sink);
 }
 
-void life_cycle_manager::create_console_backend(const severity_level severity) {
+void lifecycle_manager::create_console_backend(const severity_level severity) {
     using namespace boost; // to handle empty deleter moving namespaces
     using namespace boost::log;
 
@@ -98,7 +98,7 @@ void life_cycle_manager::create_console_backend(const severity_level severity) {
     boost::log::core::get()->add_sink(sink);
 }
 
-void life_cycle_manager::
+void lifecycle_manager::
 initialise(const boost::filesystem::path& file_name,
     const severity_level severity, const bool log_to_console) {
     if (log_to_console)
@@ -110,7 +110,7 @@ initialise(const boost::filesystem::path& file_name,
         boost::log::attributes::local_clock());
 }
 
-void life_cycle_manager::shutdown() {
+void lifecycle_manager::shutdown() {
     using namespace boost::log;
     boost::shared_ptr<core> core(core::get());
     core->remove_all_sinks();

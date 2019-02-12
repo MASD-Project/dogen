@@ -36,7 +36,6 @@
 #include "masd.dogen.coding/io/meta_model/facet_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/archetype_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/local_archetype_location_properties_io.hpp"
-
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
 #include "masd.dogen.coding/types/transforms/archetype_location_properties_transform.hpp"
 

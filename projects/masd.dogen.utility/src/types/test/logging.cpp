@@ -35,8 +35,8 @@ void log_if_test_has_failed() {
         BOOST_LOG_SEV(lg, error) << "test failed.";
 }
 
-dogen::utility::log::scoped_life_cycle_manager
-scoped_life_cycle_manager_factory(std::string test_module,
+dogen::utility::log::scoped_lifecycle_manager
+scoped_lifecycle_manager_factory(std::string test_module,
     std::string test_suite,
     std::string function_name) {
     std::ostringstream stream;
@@ -45,7 +45,7 @@ scoped_life_cycle_manager_factory(std::string test_module,
            << "/" << function_name;
 
     using namespace masd::dogen::utility::log;
-    return scoped_life_cycle_manager(stream.str());
+    return scoped_lifecycle_manager(stream.str());
 }
 
 boost::filesystem::path tracing_directory_path(std::string test_module,

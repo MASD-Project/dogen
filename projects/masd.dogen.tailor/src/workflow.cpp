@@ -21,7 +21,7 @@
 #include <iostream>
 #include <boost/exception/diagnostic_information.hpp>
 #include "masd.dogen/version.hpp"
-#include "masd.dogen.utility/types/log/life_cycle_manager.hpp"
+#include "masd.dogen.utility/types/log/lifecycle_manager.hpp"
 #include "masd.dogen.utility/types/log/severity_level.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.options/types/tailoring_options.hpp"
@@ -104,8 +104,7 @@ initialise_logging(const masd::dogen::options::tailoring_options& to) {
     const std::string log_file_name(log_file_prefix + model_name_ + ".log");
     log_path_ = dir / log_file_name;
 
-    life_cycle_manager lcm;
-    lcm.initialise(log_path_, sev);
+    lifecycle_manager::initialise(log_path_, sev);
     can_log_ = true;
 }
 
@@ -194,6 +193,7 @@ int workflow::execute(const int argc, const char* argv[]) {
         report_exception();
         return 1;
     }
+    lifecycle_manager::shutdown();
     return 0;
 }
 

@@ -25,26 +25,26 @@
 #pragma once
 #endif
 
-#include "masd.dogen.utility/types/log/life_cycle_manager.hpp"
+#include "masd.dogen.utility/types/log/lifecycle_manager.hpp"
 
 namespace masd::dogen::utility::log {
 
-class scoped_life_cycle_manager {
+class scoped_lifecycle_manager {
 public:
-    scoped_life_cycle_manager() = delete;
-    scoped_life_cycle_manager(const scoped_life_cycle_manager&) = delete;
-    scoped_life_cycle_manager(scoped_life_cycle_manager&&) = default;
-    scoped_life_cycle_manager& operator=(const scoped_life_cycle_manager&) =
+    scoped_lifecycle_manager() = delete;
+    scoped_lifecycle_manager(const scoped_lifecycle_manager&) = delete;
+    scoped_lifecycle_manager(scoped_lifecycle_manager&&) = default;
+    scoped_lifecycle_manager& operator=(const scoped_lifecycle_manager&) =
         delete;
 
 public:
-    scoped_life_cycle_manager(std::string file_name,
+    scoped_lifecycle_manager(std::string file_name,
         severity_level severity = severity_level::debug,
         bool log_to_console = false);
-    ~scoped_life_cycle_manager();
+    ~scoped_lifecycle_manager();
 
 private:
-    life_cycle_manager manager_;
+    lifecycle_manager manager_;
 };
 
 }

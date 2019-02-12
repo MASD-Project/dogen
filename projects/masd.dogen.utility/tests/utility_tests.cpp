@@ -31,8 +31,8 @@
 #include "masd.dogen.utility/types/io/map_io.hpp"
 #include "masd.dogen.utility/types/io/array_io.hpp"
 #include "masd.dogen.utility/types/test/logging.hpp"
-#include "masd.dogen.utility/types/log/life_cycle_manager.hpp"
-#include "masd.dogen.utility/types/log/scoped_life_cycle_manager.hpp"
+#include "masd.dogen.utility/types/log/lifecycle_manager.hpp"
+#include "masd.dogen.utility/types/log/scoped_lifecycle_manager.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/exception/utility_exception.hpp"
 #include "masd.dogen.utility/types/test/json_validator.hpp"
@@ -106,10 +106,10 @@ using namespace masd::dogen::utility::log;
 
 BOOST_AUTO_TEST_SUITE(utility_tests)
 
-BOOST_AUTO_TEST_CASE(exercise_log_life_cycle_manager) {
+BOOST_AUTO_TEST_CASE(exercise_log_lifecycle_manager) {
     // exericise 1: write a simple type to log file.
-    life_cycle_manager lcm;
-    lcm.initialise(log_file_name("exercise_log_life_cycle_manager", 1),
+    lifecycle_manager lcm;
+    lcm.initialise(log_file_name("exercise_log_lifecycle_manager", 1),
         severity_level::debug);
 
     using namespace boost::log;
@@ -132,7 +132,7 @@ BOOST_AUTO_TEST_CASE(exercise_log_life_cycle_manager) {
 
     // exercise 5: shutdown logging and initialise it with different settings.
     lcm.shutdown();
-    lcm.initialise(log_file_name("exercise_log_life_cycle_manager", 2),
+    lcm.initialise(log_file_name("exercise_log_lifecycle_manager", 2),
         severity_level::warn);
     BOOST_LOG_SEV(lg, debug) << "this statement should not appear";
     BOOST_LOG_SEV(lg, error) << "this statement should appear";
@@ -140,12 +140,12 @@ BOOST_AUTO_TEST_CASE(exercise_log_life_cycle_manager) {
     BOOST_CHECK(true);
 }
 
-BOOST_AUTO_TEST_CASE(exercise_scoped_log_life_cycle_manager) {
+BOOST_AUTO_TEST_CASE(exercise_scoped_log_lifecycle_manager) {
     logger lg(logger_factory(test_suite));
 
     {
-        scoped_life_cycle_manager slcm(
-            log_file_name("exercise_scoped_log_life_cycle_manager", 1),
+        scoped_lifecycle_manager slcm(
+            log_file_name("exercise_scoped_log_lifecycle_manager", 1),
             severity_level::debug);
         BOOST_LOG_SEV(lg, trace)
             << "scoped1: " << "this statement should not appear";
@@ -154,8 +154,8 @@ BOOST_AUTO_TEST_CASE(exercise_scoped_log_life_cycle_manager) {
     }
 
     {
-        scoped_life_cycle_manager slcm(
-            log_file_name("exercise_scoped_log_life_cycle_manager", 2),
+        scoped_lifecycle_manager slcm(
+            log_file_name("exercise_scoped_log_lifecycle_manager", 2),
             severity_level::trace);
         BOOST_LOG_SEV(lg, trace)
             << "scoped3: " << "this statement should appear";

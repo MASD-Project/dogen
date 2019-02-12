@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.utility/types/log/scoped_life_cycle_manager.hpp"
+#include "masd.dogen.utility/types/log/scoped_lifecycle_manager.hpp"
 
 namespace masd::dogen::utility::log {
 
-scoped_life_cycle_manager::scoped_life_cycle_manager(std::string file_name,
+scoped_lifecycle_manager::scoped_lifecycle_manager(std::string file_name,
     severity_level severity, bool log_to_console) {
     manager_.initialise(file_name, severity, log_to_console);
 }
 
-scoped_life_cycle_manager::~scoped_life_cycle_manager() {
+scoped_lifecycle_manager::~scoped_lifecycle_manager() {
     manager_.shutdown();
 }
 

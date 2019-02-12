@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/exception/diagnostic_information.hpp>
 #include "masd.dogen/version.hpp"
-#include "masd.dogen.utility/types/log/life_cycle_manager.hpp"
+#include "masd.dogen.utility/types/log/lifecycle_manager.hpp"
 #include "masd.dogen.utility/types/log/severity_level.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.extraction/types/formatting_error.hpp"
@@ -107,10 +107,8 @@ workflow::generate_options(const int argc, const char* argv[]) const {
 
 void workflow::initialise_logging(const coding::transforms::options& o) {
     log_path_ = o.log_file();
-
-    life_cycle_manager lcm;
     const auto sev(utility::log::to_severity_level(o.log_level()));
-    lcm.initialise(o.log_file(), sev);
+    lifecycle_manager::initialise(o.log_file(), sev);
     can_log_ = true;
 }
 
@@ -198,6 +196,7 @@ int workflow::execute(const int argc, const char* argv[]) {
         report_exception();
         return 1;
     }
+    lifecycle_manager::shutdown();
     return 0;
 }
 

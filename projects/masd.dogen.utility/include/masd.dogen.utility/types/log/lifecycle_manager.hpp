@@ -37,13 +37,13 @@ namespace masd::dogen::utility::log {
  * @brief Manages the starting and stopping of logging for an
  * application.
  */
-class life_cycle_manager {
+class lifecycle_manager {
 public:
-    life_cycle_manager() = default;
-    life_cycle_manager(const life_cycle_manager&) = default;
-    ~life_cycle_manager() = default;
-    life_cycle_manager(life_cycle_manager&&) = default;
-    life_cycle_manager& operator=(const life_cycle_manager&) = default;
+    lifecycle_manager() = default;
+    lifecycle_manager(const lifecycle_manager&) = default;
+    ~lifecycle_manager() = default;
+    lifecycle_manager(lifecycle_manager&&) = default;
+    lifecycle_manager& operator=(const lifecycle_manager&) = default;
 
 private:
     /**
@@ -51,13 +51,13 @@ private:
      *
      * @note file_name is non-const by ref by design.
      */
-    void create_file_backend(boost::filesystem::path file_name,
+    static void create_file_backend(boost::filesystem::path file_name,
         const severity_level severity);
 
     /**
      * @brief Creates a boost log console backend.
      */
-    void create_console_backend(const severity_level severity);
+    static void create_console_backend(const severity_level severity);
 
 public:
     /**
@@ -72,7 +72,7 @@ public:
      * @param severity log level.
      * @param log_to_console if true, logging is also done to the console.
      */
-    void initialise(const boost::filesystem::path& file_name,
+    static void initialise(const boost::filesystem::path& file_name,
         const severity_level severity = severity_level::debug,
         const bool log_to_console = false);
 
@@ -81,7 +81,7 @@ public:
      *
      * Should be done in a thread-safe context.
      */
-    void shutdown();
+    static void shutdown();
 };
 
 }
