@@ -106,9 +106,12 @@ workflow::generate_options(const int argc, const char* argv[]) const {
 }
 
 void workflow::initialise_logging(const coding::transforms::options& o) {
-    log_path_ = o.log_file();
-    const auto sev(utility::log::to_severity_level(o.log_level()));
-    lifecycle_manager::initialise(o.log_file(), sev);
+    using namespace utility::log;
+    logging_configuration cfg;
+    cfg.filename(o.log_file().filename().generic_string());
+    cfg.output_directory(o.log_file().parent_path());
+    cfg.severity(to_severity_level(o.log_level()));
+    lifecycle_manager::initialise(cfg);
     can_log_ = true;
 }
 

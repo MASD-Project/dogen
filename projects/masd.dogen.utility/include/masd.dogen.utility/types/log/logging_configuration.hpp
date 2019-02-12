@@ -48,7 +48,7 @@ public:
 
 public:
     logging_configuration(
-        const masd::dogen::utility::log::severity_level& level,
+        const masd::dogen::utility::log::severity_level& severity,
         const std::string& filename,
         const bool output_to_console,
         const boost::filesystem::path& output_directory);
@@ -58,10 +58,10 @@ public:
      * @brief Level at which to log.
      */
     /**@{*/
-    const masd::dogen::utility::log::severity_level& level() const;
-    masd::dogen::utility::log::severity_level& level();
-    logging_configuration& level(const masd::dogen::utility::log::severity_level& v);
-    logging_configuration& level(const masd::dogen::utility::log::severity_level&& v);
+    const masd::dogen::utility::log::severity_level& severity() const;
+    masd::dogen::utility::log::severity_level& severity();
+    logging_configuration& severity(const masd::dogen::utility::log::severity_level& v);
+    logging_configuration& severity(const masd::dogen::utility::log::severity_level&& v);
     /**@}*/
 
     /**
@@ -105,7 +105,7 @@ public:
     logging_configuration& operator=(logging_configuration other);
 
 private:
-    masd::dogen::utility::log::severity_level level_;
+    masd::dogen::utility::log::severity_level severity_;
     std::string filename_;
     bool output_to_console_;
     boost::filesystem::path output_directory_;

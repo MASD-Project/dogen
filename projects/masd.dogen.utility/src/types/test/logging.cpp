@@ -21,6 +21,7 @@
 #include <sstream>
 #include <boost/test/unit_test.hpp>
 #include <boost/test/results_collector.hpp>
+#include "masd.dogen.utility/types/log/logging_configuration.hpp"
 #include "masd.dogen.utility/types/test/logging.hpp"
 
 namespace masd::dogen::utility::test {
@@ -37,15 +38,17 @@ void log_if_test_has_failed() {
 
 dogen::utility::log::scoped_lifecycle_manager
 scoped_lifecycle_manager_factory(std::string test_module,
-    std::string test_suite,
-    std::string function_name) {
-    std::ostringstream stream;
+    std::string test_suite, std::string function_name) {
 
-    stream << "log/" << test_module << "/" << test_suite
-           << "/" << function_name;
+    std::ostringstream s;
+    s << "log/" << test_module << "/" << test_suite << "/" << function_name;
 
     using namespace masd::dogen::utility::log;
-    return scoped_lifecycle_manager(stream.str());
+    logging_configuration cfg;
+    cfg.filename(s.str());
+    cfg.severity(severity_level::debug);
+
+    return scoped_lifecycle_manager(cfg);
 }
 
 boost::filesystem::path tracing_directory_path(std::string test_module,

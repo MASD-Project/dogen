@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "masd.dogen.utility/types/log/lifecycle_manager.hpp"
+#include "masd.dogen.utility/types/log/logging_configuration.hpp"
 
 namespace masd::dogen::utility::log {
 
@@ -34,17 +34,12 @@ public:
     scoped_lifecycle_manager() = delete;
     scoped_lifecycle_manager(const scoped_lifecycle_manager&) = delete;
     scoped_lifecycle_manager(scoped_lifecycle_manager&&) = default;
-    scoped_lifecycle_manager& operator=(const scoped_lifecycle_manager&) =
-        delete;
+    scoped_lifecycle_manager&
+    operator=(const scoped_lifecycle_manager&) = delete;
 
 public:
-    scoped_lifecycle_manager(std::string file_name,
-        severity_level severity = severity_level::debug,
-        bool log_to_console = false);
+    scoped_lifecycle_manager(const logging_configuration& cfg);
     ~scoped_lifecycle_manager();
-
-private:
-    lifecycle_manager manager_;
 };
 
 }

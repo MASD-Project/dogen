@@ -18,37 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#include <stdexcept>
-#include "masd.dogen.utility/types/log/severity_level.hpp"
-#include "masd.dogen.utility/types/exception/invalid_enum_value.hpp"
+#ifndef MASD_DOGEN_UTILITY_TYPES_LOG_LOGGING_CONFIGURATION_VALIDATOR_HPP
+#define MASD_DOGEN_UTILITY_TYPES_LOG_LOGGING_CONFIGURATION_VALIDATOR_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-const std::string trace_level("trace");
-const std::string debug_level("debug");
-const std::string info_level("info");
-const std::string warn_level("warn");
-const std::string error_level("error");
-
-}
+#include "masd.dogen.utility/types/log/logging_configuration.hpp"
 
 namespace masd::dogen::utility::log {
 
-severity_level to_severity_level(const std::string& s) {
-    if (s == trace_level)
-        return severity_level::trace;
-    if (s == debug_level)
-        return severity_level::debug;
-    if (s == info_level)
-        return severity_level::info;
-    if (s == warn_level)
-        return severity_level::warn;
-    if (s == error_level)
-        return severity_level::error;
+class logging_configuration_validator final {
+public:
+    logging_configuration_validator() = delete;
+    logging_configuration_validator(const logging_configuration_validator&) = delete;
+    logging_configuration_validator(logging_configuration_validator&&) = delete;
+    ~logging_configuration_validator() = delete;
+    logging_configuration_validator&
+    operator=(const logging_configuration_validator&) = delete;
 
-    using dogen::utility::exception::invalid_enum_value;
-    BOOST_THROW_EXCEPTION(
-        invalid_enum_value("Invalid or unexpected severity level: " + s));
-}
+public:
+    static void validate(const logging_configuration& cfg);
+};
 
 }
+
+#endif

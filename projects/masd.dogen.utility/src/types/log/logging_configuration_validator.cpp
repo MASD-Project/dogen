@@ -18,37 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include <stdexcept>
-#include "masd.dogen.utility/types/log/severity_level.hpp"
-#include "masd.dogen.utility/types/exception/invalid_enum_value.hpp"
+#include <boost/throw_exception.hpp>
+#include <boost/filesystem/operations.hpp>
+#include "masd.dogen.utility/types/log/invalid_logging_configuration.hpp"
+#include "masd.dogen.utility/types/log/logging_configuration_validator.hpp"
 
 namespace {
 
-const std::string trace_level("trace");
-const std::string debug_level("debug");
-const std::string info_level("info");
-const std::string warn_level("warn");
-const std::string error_level("error");
+const std::string no_logging("Must log to file and/or console");
+const std::string invalid_directory("Not a directory: ");
+const std::string directory_not_found("Could not find directory: ");
 
 }
 
 namespace masd::dogen::utility::log {
 
-severity_level to_severity_level(const std::string& s) {
-    if (s == trace_level)
-        return severity_level::trace;
-    if (s == debug_level)
-        return severity_level::debug;
-    if (s == info_level)
-        return severity_level::info;
-    if (s == warn_level)
-        return severity_level::warn;
-    if (s == error_level)
-        return severity_level::error;
-
-    using dogen::utility::exception::invalid_enum_value;
-    BOOST_THROW_EXCEPTION(
-        invalid_enum_value("Invalid or unexpected severity level: " + s));
+void logging_configuration_validator::
+validate(const logging_configuration& cfg) {
+    /*
+     * We must have at least one form of logging, file or console.
+     */
+    const bool output_to_file(!cfg.filename().empty());
+    if (!cfg.output_to_console() && !output_to_file)
+        BOOST_THROW_EXCEPTION(invalid_logging_configuration(no_logging));
 }
 
 }

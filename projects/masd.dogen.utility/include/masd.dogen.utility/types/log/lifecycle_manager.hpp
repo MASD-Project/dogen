@@ -30,6 +30,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.utility/types/log/severity_level.hpp"
+#include "masd.dogen.utility/types/log/logging_configuration.hpp"
 
 namespace masd::dogen::utility::log {
 
@@ -39,19 +40,19 @@ namespace masd::dogen::utility::log {
  */
 class lifecycle_manager {
 public:
-    lifecycle_manager() = default;
-    lifecycle_manager(const lifecycle_manager&) = default;
-    ~lifecycle_manager() = default;
-    lifecycle_manager(lifecycle_manager&&) = default;
-    lifecycle_manager& operator=(const lifecycle_manager&) = default;
+    lifecycle_manager() = delete;
+    lifecycle_manager(const lifecycle_manager&) = delete;
+    ~lifecycle_manager() = delete;
+    lifecycle_manager(lifecycle_manager&&) = delete;
+    lifecycle_manager& operator=(const lifecycle_manager&) = delete;
 
 private:
     /**
      * @brief Creates a boost log file backend.
      *
-     * @note file_name is non-const by ref by design.
+     * @note path is non-const by ref by design.
      */
-    static void create_file_backend(boost::filesystem::path file_name,
+    static void create_file_backend(boost::filesystem::path path,
         const severity_level severity);
 
     /**
@@ -64,17 +65,8 @@ public:
      * @brief Initialise logging for the entire application.
      *
      * @note Must be done in a thread-safe context.
-     *
-     * @param file_name log file; can be a relative or absolute path
-     * to it. If it does not have a @e .log extension, it is appended
-     * to it.
-     *
-     * @param severity log level.
-     * @param log_to_console if true, logging is also done to the console.
      */
-    static void initialise(const boost::filesystem::path& file_name,
-        const severity_level severity = severity_level::debug,
-        const bool log_to_console = false);
+    static void initialise(const logging_configuration& cfg);
 
     /**
      * @brief Shutdown logging for the entire application.

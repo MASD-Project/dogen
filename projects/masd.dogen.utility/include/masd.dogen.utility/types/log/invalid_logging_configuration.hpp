@@ -18,37 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include <stdexcept>
-#include "masd.dogen.utility/types/log/severity_level.hpp"
-#include "masd.dogen.utility/types/exception/invalid_enum_value.hpp"
+#ifndef MASD_DOGEN_UTILITY_TYPES_LOG_INVALID_LOGGING_CONFIGURATION_HPP
+#define MASD_DOGEN_UTILITY_TYPES_LOG_INVALID_LOGGING_CONFIGURATION_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-const std::string trace_level("trace");
-const std::string debug_level("debug");
-const std::string info_level("info");
-const std::string warn_level("warn");
-const std::string error_level("error");
-
-}
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace masd::dogen::utility::log {
 
-severity_level to_severity_level(const std::string& s) {
-    if (s == trace_level)
-        return severity_level::trace;
-    if (s == debug_level)
-        return severity_level::debug;
-    if (s == info_level)
-        return severity_level::info;
-    if (s == warn_level)
-        return severity_level::warn;
-    if (s == error_level)
-        return severity_level::error;
+/**
+ * @brief The values supplied for the logging configuration are not valid.
+ */
+class invalid_logging_configuration : public virtual std::exception, public virtual boost::exception {
+public:
+    invalid_logging_configuration() = default;
+    ~invalid_logging_configuration() noexcept = default;
 
-    using dogen::utility::exception::invalid_enum_value;
-    BOOST_THROW_EXCEPTION(
-        invalid_enum_value("Invalid or unexpected severity level: " + s));
+public:
+    explicit invalid_logging_configuration(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
 }
 
-}
+#endif

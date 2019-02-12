@@ -28,7 +28,7 @@
 #include <boost/log/core.hpp>
 #include <boost/core/null_deleter.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
-#include "masd.dogen.utility/types/exception/invalid_enum_value.hpp"
+#include "masd.dogen.utility/types/log/logging_configuration_validator.hpp"
 #include "masd.dogen.utility/types/log/lifecycle_manager.hpp"
 
 namespace {
@@ -45,14 +45,14 @@ const std::string time_stamp_format("%Y-%m-%d %H:%M:%S.%f");
 namespace masd::dogen::utility::log {
 
 void lifecycle_manager::create_file_backend(
-    boost::filesystem::path file_name, const severity_level severity) {
+    boost::filesystem::path path, const severity_level severity) {
     using namespace boost::log;
 
-    if (file_name.extension() != extension)
-        file_name += extension;
+    if (path.extension() != extension)
+        path += extension;
 
     auto backend(boost::make_shared<sinks::text_file_backend>(
-            keywords::file_name = file_name.string(),
+            keywords::file_name = path.string(),
             keywords::rotation_size = 300 * 1024 * 1024,
             keywords::time_based_rotation =
             sinks::file::rotation_at_time_point(12, 0, 0)));
@@ -99,12 +99,16 @@ void lifecycle_manager::create_console_backend(const severity_level severity) {
 }
 
 void lifecycle_manager::
-initialise(const boost::filesystem::path& file_name,
-    const severity_level severity, const bool log_to_console) {
-    if (log_to_console)
-        create_console_backend(severity);
+initialise(const logging_configuration& cfg) {
+    logging_configuration_validator::validate(cfg);
 
-    create_file_backend(file_name, severity);
+    if (cfg.output_to_console())
+        create_console_backend(cfg.severity());
+
+    if (!cfg.filename().empty()) {
+        const auto path(cfg.output_directory() / cfg.filename());
+        create_file_backend(path, cfg.severity());
+    }
 
     boost::log::core::get()->add_global_attribute(time_stamp_attr,
         boost::log::attributes::local_clock());

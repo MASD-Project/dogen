@@ -26,31 +26,31 @@ logging_configuration::logging_configuration()
     : output_to_console_(static_cast<bool>(0)) { }
 
 logging_configuration::logging_configuration(logging_configuration&& rhs)
-    : level_(std::move(rhs.level_)),
+    : severity_(std::move(rhs.severity_)),
       filename_(std::move(rhs.filename_)),
       output_to_console_(std::move(rhs.output_to_console_)),
       output_directory_(std::move(rhs.output_directory_)) { }
 
 logging_configuration::logging_configuration(
-    const masd::dogen::utility::log::severity_level& level,
+    const masd::dogen::utility::log::severity_level& severity,
     const std::string& filename,
     const bool output_to_console,
     const boost::filesystem::path& output_directory)
-    : level_(level),
+    : severity_(severity),
       filename_(filename),
       output_to_console_(output_to_console),
       output_directory_(output_directory) { }
 
 void logging_configuration::swap(logging_configuration& other) noexcept {
     using std::swap;
-    swap(level_, other.level_);
+    swap(severity_, other.severity_);
     swap(filename_, other.filename_);
     swap(output_to_console_, other.output_to_console_);
     swap(output_directory_, other.output_directory_);
 }
 
 bool logging_configuration::operator==(const logging_configuration& rhs) const {
-    return level_ == rhs.level_ &&
+    return severity_ == rhs.severity_ &&
         filename_ == rhs.filename_ &&
         output_to_console_ == rhs.output_to_console_ &&
         output_directory_ == rhs.output_directory_;
@@ -62,21 +62,21 @@ logging_configuration& logging_configuration::operator=(logging_configuration ot
     return *this;
 }
 
-const masd::dogen::utility::log::severity_level& logging_configuration::level() const {
-    return level_;
+const masd::dogen::utility::log::severity_level& logging_configuration::severity() const {
+    return severity_;
 }
 
-masd::dogen::utility::log::severity_level& logging_configuration::level() {
-    return level_;
+masd::dogen::utility::log::severity_level& logging_configuration::severity() {
+    return severity_;
 }
 
-logging_configuration& logging_configuration::level(const masd::dogen::utility::log::severity_level& v) {
-    level_ = v;
+logging_configuration& logging_configuration::severity(const masd::dogen::utility::log::severity_level& v) {
+    severity_ = v;
     return *this;
 }
 
-logging_configuration& logging_configuration::level(const masd::dogen::utility::log::severity_level&& v) {
-    level_ = std::move(v);
+logging_configuration& logging_configuration::severity(const masd::dogen::utility::log::severity_level&& v) {
+    severity_ = std::move(v);
     return *this;
 }
 

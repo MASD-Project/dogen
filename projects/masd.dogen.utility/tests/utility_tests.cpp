@@ -108,9 +108,10 @@ BOOST_AUTO_TEST_SUITE(utility_tests)
 
 BOOST_AUTO_TEST_CASE(exercise_log_lifecycle_manager) {
     // exericise 1: write a simple type to log file.
-    lifecycle_manager lcm;
-    lcm.initialise(log_file_name("exercise_log_lifecycle_manager", 1),
-        severity_level::debug);
+    logging_configuration cfg1;
+    cfg1.filename(log_file_name("exercise_log_lifecycle_manager", 1));
+    cfg1.severity(severity_level::debug);
+    lifecycle_manager::initialise(cfg1);
 
     using namespace boost::log;
     logger lg(logger_factory(test_suite));
@@ -131,12 +132,16 @@ BOOST_AUTO_TEST_CASE(exercise_log_lifecycle_manager) {
     BOOST_LOG_SEV(lg, error) << "this statement is an error";
 
     // exercise 5: shutdown logging and initialise it with different settings.
-    lcm.shutdown();
-    lcm.initialise(log_file_name("exercise_log_lifecycle_manager", 2),
-        severity_level::warn);
+    lifecycle_manager::shutdown();
+
+    logging_configuration cfg2;
+    cfg2.filename(log_file_name("exercise_log_lifecycle_manager", 2));
+    cfg2.severity(severity_level::warn);
+    lifecycle_manager::initialise(cfg2);
+
     BOOST_LOG_SEV(lg, debug) << "this statement should not appear";
     BOOST_LOG_SEV(lg, error) << "this statement should appear";
-    lcm.shutdown();
+    lifecycle_manager::shutdown();
     BOOST_CHECK(true);
 }
 
@@ -144,23 +149,25 @@ BOOST_AUTO_TEST_CASE(exercise_scoped_log_lifecycle_manager) {
     logger lg(logger_factory(test_suite));
 
     {
-        scoped_lifecycle_manager slcm(
-            log_file_name("exercise_scoped_log_lifecycle_manager", 1),
-            severity_level::debug);
-        BOOST_LOG_SEV(lg, trace)
-            << "scoped1: " << "this statement should not appear";
-        BOOST_LOG_SEV(lg, error)
-            << "scoped2: " << "this statement should appear";
+        logging_configuration cfg;
+        cfg.filename(log_file_name("exercise_scoped_log_lifecycle_manager", 1));
+        cfg.severity(severity_level::debug);
+        scoped_lifecycle_manager slcm(cfg);
+        BOOST_LOG_SEV(lg, trace) << "scoped1: "
+                                 << "this statement should not appear";
+        BOOST_LOG_SEV(lg, error) << "scoped2: "
+                                 << "this statement should appear";
     }
 
     {
-        scoped_lifecycle_manager slcm(
-            log_file_name("exercise_scoped_log_lifecycle_manager", 2),
-            severity_level::trace);
-        BOOST_LOG_SEV(lg, trace)
-            << "scoped3: " << "this statement should appear";
-        BOOST_LOG_SEV(lg, error)
-            << "scoped4: " << "this statement should appear";
+        logging_configuration cfg;
+        cfg.filename(log_file_name("exercise_scoped_log_lifecycle_manager", 2));
+        cfg.severity(severity_level::trace);
+        scoped_lifecycle_manager slcm(cfg);
+        BOOST_LOG_SEV(lg, trace) << "scoped3: "
+                                 << "this statement should appear";
+        BOOST_LOG_SEV(lg, error) << "scoped4: "
+                                 << "this statement should appear";
     }
 }
 

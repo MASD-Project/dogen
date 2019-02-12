@@ -99,12 +99,12 @@ generate_tailoring_options(const int argc, const char* argv[]) const {
 
 void workflow::
 initialise_logging(const masd::dogen::options::tailoring_options& to) {
-    const auto dir(to.log_directory());
-    const auto sev(masd::dogen::utility::log::to_severity_level(to.log_level()));
-    const std::string log_file_name(log_file_prefix + model_name_ + ".log");
-    log_path_ = dir / log_file_name;
-
-    lifecycle_manager::initialise(log_path_, sev);
+    using namespace masd::dogen::utility::log;
+    logging_configuration cfg;
+    cfg.filename(log_file_prefix + model_name_ + ".log");
+    cfg.output_directory(to.log_directory());
+    cfg.severity(to_severity_level(to.log_level()));
+    lifecycle_manager::initialise(cfg);
     can_log_ = true;
 }
 

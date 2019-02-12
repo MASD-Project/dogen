@@ -94,5 +94,7 @@
 #include "masd.dogen.utility/types/test_data/test_data_exception.hpp"
 #include "masd.dogen.utility/types/test_data/validating_resolver.hpp"
 #include "masd.dogen.utility/types/test/move_assignment_copy_tester.hpp"
+#include "masd.dogen.utility/types/log/invalid_logging_configuration.hpp"
+#include "masd.dogen.utility/types/log/logging_configuration_validator.hpp"
 
 #endif
