@@ -46,5 +46,7 @@ for layer in dia.active_display().diagram.data.layers:
             object.properties["fill_colour"] = "thistle2"
         elif "masd::handcrafted" in stereotype:
             object.properties["fill_colour"] = "Lemon Chiffon"
+        elif "masd::header_only" in stereotype:
+            object.properties["fill_colour"] = "Lemon Chiffon"
         else:
             object.properties["fill_colour"] = "Mint Cream"
