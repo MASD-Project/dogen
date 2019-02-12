@@ -4892,13 +4892,6 @@ We are using the full constructor for immutability, but its not clear
 how that would work on a inheritance tree. Ensure we have test cases
 for this.
 
-*** Inserter for enumerations shouldn't throw                         :story:
-
-We only use the inserter for debug dumping and it could happen that we
-are about to write the message for an exception when we decide to
-throw. Instead we should just print unexpected/invalid value and cast
-it to a numeric value in brackets.
-
 *** Add comments to test model sanitizer                              :story:
 
 We should explain why we decided to create a test model sanitizer
@@ -6924,146 +6917,6 @@ Links:
 
 - https://github.com/nadult/fwk_enum
 
-*** Consider adding a better enum representation                      :story:
-
-Useful functionality:
-
-- from string, no throw. Only available if enumeration has invalid.
-- from string, throw. Requires stdexcept, throws std::invalid_argument.
-- to string, no throw.
-- to string, throw.
-- parameterisation of strings: qualified or non-qualified.
-- container. Using container conventions, =value_type= is the
-  enumeration, =underlying_type= is the built-in type.
-
-When creating the class, it would be nice to maintain the strong
-semantics of C++ 11 enums whilst at the same time having a nice
-namespace for the enumeration.
-
-We probably need to have multiple enum providers - or better:
-styles. This is c++ specific
-(e.g. =masd.enumeration.cpp.style=). Styles:
-
-- plain:
-  - C++ 98: plain enum, no enum class.
-  - C++ 11 and above: plain enum, no enum class.
-- strong:
-  - C++ 98: inside class
-  - C++ 11 and above: plain enum with enum class.
-- encapsulated: (improved, featureful, ?)
-  - Enum as a class with iteration, string support, etc. This is the
-    "masd" provider/style. With conversion methods.
-- external library: [[https://github.com/therocode/meta_enum][meta-enum]], [[https://github.com/aantron/better-enums][better-enums]], [[https://github.com/nadult/fwk_enum][fwk_enum]], etc. The style
-  is the name of the library.
-
-We should also take into consideration the "boolean enum" scenario,
-whereby we want a wrapper around a boolean. See [[https://codereview.stackexchange.com/questions/11300/boolean-enums-improved-clarity-or-just-overkill][Boolean enums:
-improved clarity or just overkill?]] Ideally the metamodel should make
-this clear rather than having to set meta-data type to bool and then
-making sure there are only two values. In effect, we have three
-different types of enumerations:
-
-- regular enumerations;
-- boolean enumerations;
-- flags.
-
-The metamodel must reflect this.
-
-**** Scenarios:
-
-- create from value:
-
-: const my_enum a(my_enum::my_value);
-
-  Type is named after the enum, values are accessible by scope, e.g.:
-  =my_enum::=.
-
-- initialise from string:
-
-: const auto a(my_enum::from_string("my_value"));
-: const auto a(my_enum::from_string("my_enum::my_value"));
-
-- initialise from string with exceptions:
-
-: const auto a(my_enum::from_string_throw("my_value"));
-: const auto a(my_enum::from_string_throw("my_enum::my_value"));
-
-  Problems: users cannot disable qualified/non-qualified conversions.
-
-- dump to string, non-qualified:
-
-: std::cout << a.to_string(); // my_value
-
-- dump to string, qualified:
-
-: std::cout << a.to_string_qualified(); // my_enum::my_value
-
-- pretty print:
-
-: std::cout << a; // my_enum::my_value
-
-  Problems: we need to distinguish between dumping to string in the
-  sense of pretty printing from a string conversion.
-
-- iterate:
-
-: for (const auto e : my_enum::values())
-:    std::cout << e.to_string();
-
-- similarly named enums cannot be confused.
-
-: a::colour c = b::colour::red; // does not compile.
-: a::colour c = c::colour::red; // compiles.
-
-**** Notes
-
-- a good compromise from the ideal scenario is to create a
-  =my_enum_traits= class. Sadly, it cannot be =my_enum::traits=. The
-  API then becomes:
-
-: my_enum_traits::from_name("X"); // accepts both simple and qualified
-: my_enum_traits::from_simple_name("X");
-: my_enum_traits::from_qualified_name("X:X");
-: my_enum_traits::to_simple_name(e);
-: my_enum_traits::to_qualified_name(e);
-
-: my_enum_traits::from_name_throw("X"); // accepts both simple and qualified
-: my_enum_traits::from_simple_name_throw("X"); // rather than string
-: my_enum_traits::from_qualified_name_throw("X:X");
-: my_enum_traits::from_underlying_type(123); // validates cast
-: my_enum_traits::from_underlying_type_throw(123); // validates cast
-: my_enum_traits::to_simple_name_throw(e);
-: my_enum_traits::to_qualified_name_throw(e);
-
-: my_enum_traits::values(); // static array of enum.
-: my_enum_traits::names(); // static array of names.
-
-: my_enum_traits::to_index(e); // position of enum in names, values.
-: my_enum_traits::to_index_throw(e); // position of enum in names, values.
-
-- the non-throwable functions are only defined if invalid is
-  available.
-- use =noexcept= on the non-throwable functions.
-- use =string_view= on C++ 17, =string= elsewhere.
-- use =array= on c++ 11 and above, else =vector=.
-- enum should be defined as a class on c++ 98. In this case we
-  probably do not need a separate traits class.
-- define a boost lexical cast from string and to string in terms of
-  the above functions. This can be enabled by the user via meta-data.
-- crazy idea: we could also create a map of enum to T where T is a
-  =std::function=. Something like a "dispatchable" class. Users can
-  set functions and then call =dispatch(x)= which will execute the
-  method at =to_index(x)=. No use case for it yet though.
-- stroustrup proposes using operators with enums. However, its not
-  clear there are good operators for all of the use cases above.
-
-Links:
-
-- [[https://www.ibm.com/developerworks/rational/library/scoped-enums/index.html][C++0x, scoped enums]]
-- [[https://stackoverflow.com/questions/36937912/specializing-boostlexical-cast-for-enums-in-boostproperty-maps][specializing boost::lexical_cast for enums in boost::property_maps]]
-- [[https://stackoverflow.com/questions/28828957/enum-to-string-in-modern-c11-c14-c17-and-future-c20][enum to string in modern C++11 / C++14 / C++17 and future C++20]]
-- [[https://stackoverflow.com/questions/21295935/can-a-c-enum-class-have-methods][Can a C++ enum class have methods?]]
-
 *** Consider adding support for bitsery serialisation                 :story:
 
 There is yet another modern c++ serialisation library: bitsery. It
@@ -9037,12 +8890,162 @@ Value zero should always be assigned to the most used enumeration
 value because it is very efficient to compare against zero. We should
 use a different value for invalid such as =0xFF...= etc.
 
+*** Inserter for enumerations shouldn't throw                         :story:
+
+We only use the inserter for debug dumping and it could happen that we
+are about to write the message for an exception when we decide to
+throw. Instead we should just print unexpected/invalid value and cast
+it to a numeric value in brackets.
+
+*** Consider adding a better enum representation                      :story:
+
+Useful functionality:
+
+- from string, no throw. Only available if enumeration has invalid.
+- from string, throw. Requires stdexcept, throws std::invalid_argument.
+- to string, no throw.
+- to string, throw.
+- parameterisation of strings: qualified or non-qualified.
+- container. Using container conventions, =value_type= is the
+  enumeration, =underlying_type= is the built-in type.
+
+When creating the class, it would be nice to maintain the strong
+semantics of C++ 11 enums whilst at the same time having a nice
+namespace for the enumeration.
+
+We probably need to have multiple enum providers - or better:
+styles. This is c++ specific
+(e.g. =masd.enumeration.cpp.style=). Styles:
+
+- plain:
+  - C++ 98: plain enum, no enum class.
+  - C++ 11 and above: plain enum, no enum class.
+- strong:
+  - C++ 98: inside class
+  - C++ 11 and above: plain enum with enum class.
+- encapsulated: (improved, featureful, ?)
+  - Enum as a class with iteration, string support, etc. This is the
+    "masd" provider/style. With conversion methods.
+- external library: [[https://github.com/therocode/meta_enum][meta-enum]], [[https://github.com/aantron/better-enums][better-enums]], [[https://github.com/nadult/fwk_enum][fwk_enum]], etc. The style
+  is the name of the library.
+
+We should also take into consideration the "boolean enum" scenario,
+whereby we want a wrapper around a boolean. See [[https://codereview.stackexchange.com/questions/11300/boolean-enums-improved-clarity-or-just-overkill][Boolean enums:
+improved clarity or just overkill?]] Ideally the metamodel should make
+this clear rather than having to set meta-data type to bool and then
+making sure there are only two values. In effect, we have three
+different types of enumerations:
+
+- regular enumerations;
+- boolean enumerations;
+- flags.
+
+The metamodel must reflect this.
+
+**** Scenarios:
+
+- create from value:
+
+: const my_enum a(my_enum::my_value);
+
+  Type is named after the enum, values are accessible by scope, e.g.:
+  =my_enum::=.
+
+- initialise from string:
+
+: const auto a(my_enum::from_string("my_value"));
+: const auto a(my_enum::from_string("my_enum::my_value"));
+
+- initialise from string with exceptions:
+
+: const auto a(my_enum::from_string_throw("my_value"));
+: const auto a(my_enum::from_string_throw("my_enum::my_value"));
+
+  Problems: users cannot disable qualified/non-qualified conversions.
+
+- dump to string, non-qualified:
+
+: std::cout << a.to_string(); // my_value
+
+- dump to string, qualified:
+
+: std::cout << a.to_string_qualified(); // my_enum::my_value
+
+- pretty print:
+
+: std::cout << a; // my_enum::my_value
+
+  Problems: we need to distinguish between dumping to string in the
+  sense of pretty printing from a string conversion.
+
+- iterate:
+
+: for (const auto e : my_enum::values())
+:    std::cout << e.to_string();
+
+- similarly named enums cannot be confused.
+
+: a::colour c = b::colour::red; // does not compile.
+: a::colour c = c::colour::red; // compiles.
+
+**** Notes
+
+- a good compromise from the ideal scenario is to create a
+  =my_enum_traits= class. Sadly, it cannot be =my_enum::traits=. The
+  API then becomes:
+
+: my_enum_traits::from_name("X"); // accepts both simple and qualified
+: my_enum_traits::from_simple_name("X");
+: my_enum_traits::from_qualified_name("X:X");
+: my_enum_traits::to_simple_name(e);
+: my_enum_traits::to_qualified_name(e);
+
+: my_enum_traits::from_name_throw("X"); // accepts both simple and qualified
+: my_enum_traits::from_simple_name_throw("X"); // rather than string
+: my_enum_traits::from_qualified_name_throw("X:X");
+: my_enum_traits::from_underlying_type(123); // validates cast
+: my_enum_traits::from_underlying_type_throw(123); // validates cast
+: my_enum_traits::to_simple_name_throw(e);
+: my_enum_traits::to_qualified_name_throw(e);
+
+: my_enum_traits::values(); // static array of enum.
+: my_enum_traits::names(); // static array of names.
+
+: my_enum_traits::to_index(e); // position of enum in names, values.
+: my_enum_traits::to_index_throw(e); // position of enum in names, values.
+
+- the non-throwable functions are only defined if invalid is
+  available.
+- use =noexcept= on the non-throwable functions.
+- use =string_view= on C++ 17, =string= elsewhere.
+- use =array= on c++ 11 and above, else =vector=.
+- enum should be defined as a class on c++ 98. In this case we
+  probably do not need a separate traits class.
+- define a boost lexical cast from string and to string in terms of
+  the above functions. This can be enabled by the user via meta-data.
+- crazy idea: we could also create a map of enum to T where T is a
+  =std::function=. Something like a "dispatchable" class. Users can
+  set functions and then call =dispatch(x)= which will execute the
+  method at =to_index(x)=. No use case for it yet though.
+- stroustrup proposes using operators with enums. However, its not
+  clear there are good operators for all of the use cases above.
+
+Links:
+
+- [[https://www.ibm.com/developerworks/rational/library/scoped-enums/index.html][C++0x, scoped enums]]
+- [[https://stackoverflow.com/questions/36937912/specializing-boostlexical-cast-for-enums-in-boostproperty-maps][specializing boost::lexical_cast for enums in boost::property_maps]]
+- [[https://stackoverflow.com/questions/28828957/enum-to-string-in-modern-c11-c14-c17-and-future-c20][enum to string in modern C++11 / C++14 / C++17 and future C++20]]
+- [[https://stackoverflow.com/questions/21295935/can-a-c-enum-class-have-methods][Can a C++ enum class have methods?]]
+
+
+
 *** Allow renaming =invalid= enumerator                               :story:
 
 At present we issue the =invalid= enumerator to signal no
 choice. However, in certain cases there are domain specific options
 that are better suited (such as =none=, etc). Users should be able to
 change the name of the enumerator.
+
 
 *** Bitmask enumeration                                               :story:
 

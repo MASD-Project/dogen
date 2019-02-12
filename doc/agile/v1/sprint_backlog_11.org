@@ -13,28 +13,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-11 Mon 17:39]
+#+CAPTION: Clock summary at [2019-02-12 Tue 12:25]
 | <75>                                                 |          |        |        |       |
 | Headline                                             | Time     |        |        |     % |
 |------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                         | *168:40* |        |        | 100.0 |
+| *Total time*                                         | *172:11* |        |        | 100.0 |
 |------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                              | 168:40   |        |        | 100.0 |
-| Active                                               |          | 168:40 |        | 100.0 |
+| Stories                                              | 172:11   |        |        | 100.0 |
+| Active                                               |          | 172:11 |        | 100.0 |
 | Edit release notes for previous sprint               |          |        |   2:03 |   1.2 |
-| Sprint and product backlog grooming                  |          |        |   4:11 |   2.5 |
-| Work on MASD theory                                  |          |        | 113:38 |  67.4 |
+| Sprint and product backlog grooming                  |          |        |   4:11 |   2.4 |
+| Work on MASD theory                                  |          |        | 113:38 |  66.0 |
 | Rename models to fit MASD architecture               |          |        |   4:56 |   2.9 |
 | Read up on framework and API design                  |          |        |   0:57 |   0.6 |
-| Analyse the state of the mess of refactors           |          |        |   6:27 |   3.8 |
+| Analyse the state of the mess of refactors           |          |        |   6:27 |   3.7 |
 | Create the =orchestration= model                     |          |        |   4:15 |   2.5 |
 | Update vcpkg across all operative systems            |          |        |   4:35 |   2.7 |
 | Update C# reference models to latest dogen           |          |        |   0:42 |   0.4 |
-| Great meta-data rename                               |          |        |   4:54 |   2.9 |
-| Create a single binary for all of dogen              |          |        |  15:50 |   9.4 |
-| Dogen's vcpkg export for OSX was created from master |          |        |   0:46 |   0.5 |
-| Finish adding support for clang-cl builds            |          |        |   1:11 |   0.7 |
-| Convert the utility model into a regular dogen model |          |        |   4:15 |   2.5 |
+| Convert the utility model into a regular dogen model |          |        |   7:27 |   4.3 |
+| Great meta-data rename                               |          |        |   4:54 |   2.8 |
+| Create a single binary for all of dogen              |          |        |  15:50 |   9.2 |
+| Dogen's vcpkg export for OSX was created from master |          |        |   0:46 |   0.4 |
+| Finish adding support for clang-cl builds            |          |        |   1:30 |   0.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -471,6 +471,29 @@ errors we are experiencing there.
 
 At present the C# reference models do not work with latest dogen.
 
+*** COMPLETED Convert the utility model into a regular dogen model    :story:
+    CLOSED: [2019-02-12 Tue 12:25]
+    :LOGBOOK:
+    CLOCK: [2019-02-12 Tue 09:19]--[2019-02-12 Tue 12:25] =>  3:06
+    CLOCK: [2019-02-11 Mon 17:39]--[2019-02-11 Mon 17:45] =>  0:06
+    CLOCK: [2019-02-11 Mon 17:15]--[2019-02-11 Mon 17:38] =>  0:23
+    CLOCK: [2019-02-11 Mon 14:49]--[2019-02-11 Mon 17:14] =>  2:25
+    CLOCK: [2019-02-11 Mon 13:54]--[2019-02-11 Mon 14:48] =>  0:54
+    CLOCK: [2019-02-11 Mon 11:51]--[2019-02-11 Mon 12:11] =>  0:20
+    CLOCK: [2019-02-11 Mon 11:37]--[2019-02-11 Mon 11:50] =>  0:13
+    :END:
+
+Up to now we have manually created utility. However, as part of the
+CLI cleanup we should really have high-level constructs to represent
+logging etc. It makes no sense to create these types
+manually. Instead, we need to create a utility model and mark all of
+the existing types as either hand-crafted or regenerate them via dogen
+(for example for enums).
+
+Tasks:
+
+- replace exceptions with dogen exceptions
+
 *** STARTED Great meta-data rename                                    :story:
     :LOGBOOK:
     CLOCK: [2018-11-26 Mon 10:01]--[2018-11-26 Mon 11:02] =>  1:01
@@ -622,6 +645,7 @@ Problems:
 
 *** STARTED Finish adding support for clang-cl builds                 :story:
     :LOGBOOK:
+    CLOCK: [2019-02-12 Tue 08:28]--[2019-02-12 Tue 08:47] =>  0:19
     CLOCK: [2019-02-09 Sat 16:19]--[2019-02-09 Sat 16:37] =>  0:18
     CLOCK: [2019-02-09 Sat 15:25]--[2019-02-09 Sat 16:18] =>  0:53
     :END:
@@ -648,25 +672,11 @@ Links:
 - [[https://ci.appveyor.com/project/mcraveiro/dogen/builds/19463961/job/45yhn8sdhexvsdmi][Debug build]]
 - [[https://github.com/Kitware/CDash/issues/733][CDash reporting problems]]
 
-*** STARTED Convert the utility model into a regular dogen model      :story:
-    :LOGBOOK:
-    CLOCK: [2019-02-11 Mon 17:15]--[2019-02-11 Mon 17:38] =>  0:23
-    CLOCK: [2019-02-11 Mon 14:49]--[2019-02-11 Mon 17:14] =>  2:25
-    CLOCK: [2019-02-11 Mon 13:54]--[2019-02-11 Mon 14:48] =>  0:54
-    CLOCK: [2019-02-11 Mon 11:51]--[2019-02-11 Mon 12:11] =>  0:20
-    CLOCK: [2019-02-11 Mon 11:37]--[2019-02-11 Mon 11:50] =>  0:13
-    :END:
+*** Rename profile header only                                        :story:
 
-Up to now we have manually created utility. However, as part of the
-CLI cleanup we should really have high-level constructs to represent
-logging etc. It makes no sense to create these types
-manually. Instead, we need to create a utility model and mark all of
-the existing types as either hand-crafted or regenerate them via dogen
-(for example for enums).
+This profile only applies to C++ so it should be:
 
-Tasks:
-
-- replace exceptions with dogen exceptions
+: masd::cpp::header_only
 
 *** JSON models in dogen are out of sync                              :story:
 
