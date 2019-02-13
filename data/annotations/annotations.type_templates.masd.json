@@ -26,6 +26,58 @@
   },
   {
     "name": {
+      "simple": "force_write",
+      "qualified": "masd.extraction.force_write"
+    },
+    "archetype_location": {
+      "kernel": "masd"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": false
+  },
+  {
+    "name": {
+      "simple": "delete_extra_files",
+      "qualified": "masd.extraction.delete_extra_files"
+    },
+    "archetype_location": {
+      "kernel": "masd"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": false
+  },
+  {
+    "name": {
+      "simple": "ignore_files_matching_regex",
+      "qualified": "masd.extraction.ignore_files_matching_regex"
+    },
+    "archetype_location": {
+      "kernel": "masd"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": false
+  },
+  {
+    "name": {
+      "simple": "cpp_headers_output_directory",
+      "qualified": "masd.extraction.cpp_headers_output_directory"
+    },
+    "archetype_location": {
+      "kernel": "masd"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": false
+  },
+  {
+    "name": {
       "simple": "formatting_style"
     },
     "archetype_location": {
