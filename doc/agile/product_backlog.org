@@ -6975,6 +6975,37 @@ interest. It raises several questions:
   be very large. Perhaps we could start by supporting the basic
   functionality once there are use cases.
 
+Actually maybe we should see GraphQL as an injector rather than just
+as a run time thing. In other words:
+
+- user creates a schema using GraphQL notation. [[https://github.com/graphql/libgraphqlparser/blob/master/test/schema-kitchen-sink.graphql][Example schema]].
+- dogen has an injector metamodel for graphql that implements facebook
+  representation in json of graphql. that is we use their library to
+  parse graphql schemas and generate json objects. we also create
+  entities (meta-model) for their json entities. [[https://github.com/graphql/libgraphqlparser/blob/master/test/schema-kitchen-sink.json][Example schema after
+  parse]]. Note that the schema is parsed and interpreted "at compile
+  time"; that is, we generate code for the model described by the
+  schema.
+- at runtime we take instance documents of the schema ([[https://github.com/graphql/libgraphqlparser/blob/master/test/kitchen-sink.graphql][example]]) and
+  convert these into JSON ([[https://github.com/graphql/libgraphqlparser/blob/master/test/kitchen-sink.json][example]]). Note that the generated
+  meta-model must be able to represent instances of the queries.
+- at this point we have a query representation in memory. The system
+  then needs to go and execute the query (domain code). Once the
+  results come back, we then convert them into the generated model and
+  "somehow" supply the query as parameterisation for JSON
+  serialisation; that is, the query states which fields we should
+  serialise out.
+
+Either way, it seems there are two approaches:
+
+- we can start with a GraphQL schema and treat it as a model
+  (injector); or
+- we can start with a model and generate its GraphQL schema.
+
+In either case, we then need to have some model that represents
+GraphQL queries dynamically, and the ability to only serialise out a
+subset of elements in a given object as per the query.
+
 Links:
 
 - https://brandur.org/graphql
