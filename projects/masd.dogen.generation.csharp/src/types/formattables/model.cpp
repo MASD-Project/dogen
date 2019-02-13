@@ -28,7 +28,7 @@ model::model(model&& rhs)
       project_items_(std::move(rhs.project_items_)),
       aspect_properties_(std::move(rhs.aspect_properties_)),
       assistant_properties_(std::move(rhs.assistant_properties_)),
-      generation_properties_(std::move(rhs.generation_properties_)) { }
+      extraction_properties_(std::move(rhs.extraction_properties_)) { }
 
 model::model(
     const masd::dogen::coding::meta_model::name& name,
@@ -36,13 +36,13 @@ model::model(
     const std::list<std::string>& project_items,
     const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::aspect_properties>& aspect_properties,
     const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::assistant_properties>& assistant_properties,
-    const boost::optional<masd::dogen::coding::meta_model::generation_properties>& generation_properties)
+    const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& extraction_properties)
     : name_(name),
       formattables_(formattables),
       project_items_(project_items),
       aspect_properties_(aspect_properties),
       assistant_properties_(assistant_properties),
-      generation_properties_(generation_properties) { }
+      extraction_properties_(extraction_properties) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -51,7 +51,7 @@ void model::swap(model& other) noexcept {
     swap(project_items_, other.project_items_);
     swap(aspect_properties_, other.aspect_properties_);
     swap(assistant_properties_, other.assistant_properties_);
-    swap(generation_properties_, other.generation_properties_);
+    swap(extraction_properties_, other.extraction_properties_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -60,7 +60,7 @@ bool model::operator==(const model& rhs) const {
         project_items_ == rhs.project_items_ &&
         aspect_properties_ == rhs.aspect_properties_ &&
         assistant_properties_ == rhs.assistant_properties_ &&
-        generation_properties_ == rhs.generation_properties_;
+        extraction_properties_ == rhs.extraction_properties_;
 }
 
 model& model::operator=(model other) {
@@ -149,20 +149,20 @@ void model::assistant_properties(const std::unordered_map<std::string, masd::dog
     assistant_properties_ = std::move(v);
 }
 
-const boost::optional<masd::dogen::coding::meta_model::generation_properties>& model::generation_properties() const {
-    return generation_properties_;
+const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& model::extraction_properties() const {
+    return extraction_properties_;
 }
 
-boost::optional<masd::dogen::coding::meta_model::generation_properties>& model::generation_properties() {
-    return generation_properties_;
+boost::optional<masd::dogen::coding::meta_model::extraction_properties>& model::extraction_properties() {
+    return extraction_properties_;
 }
 
-void model::generation_properties(const boost::optional<masd::dogen::coding::meta_model::generation_properties>& v) {
-    generation_properties_ = v;
+void model::extraction_properties(const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& v) {
+    extraction_properties_ = v;
 }
 
-void model::generation_properties(const boost::optional<masd::dogen::coding::meta_model::generation_properties>&& v) {
-    generation_properties_ = std::move(v);
+void model::extraction_properties(const boost::optional<masd::dogen::coding::meta_model::extraction_properties>&& v) {
+    extraction_properties_ = std::move(v);
 }
 
 }

@@ -70,7 +70,7 @@
 #include "masd.dogen.coding/hash/meta_model/orm_database_systems_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/orm_model_properties_hash.hpp"
 #include "masd.dogen.coding/hash/transforms/naming_configuration_hash.hpp"
-#include "masd.dogen.coding/hash/meta_model/generation_properties_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/extraction_properties_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/orm_module_properties_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/orm_object_properties_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/path_contribution_types_hash.hpp"

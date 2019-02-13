@@ -27,7 +27,7 @@
 #include "masd.dogen.coding/hash/meta_model/element_archetype_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/locator_properties_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/orm_model_properties_hash.hpp"
-#include "masd.dogen.coding/hash/meta_model/generation_properties_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/extraction_properties_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/global_archetype_location_properties_hash.hpp"
 
 namespace {
@@ -101,7 +101,7 @@ inline std::size_t hash_std_unordered_set_masd_dogen_coding_meta_model_element_a
     return seed;
 }
 
-inline std::size_t hash_boost_optional_masd_dogen_coding_meta_model_generation_properties(const boost::optional<masd::dogen::coding::meta_model::generation_properties>& v) {
+inline std::size_t hash_boost_optional_masd_dogen_coding_meta_model_extraction_properties(const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -132,7 +132,7 @@ std::size_t model_hasher::hash(const model& v) {
     combine(seed, hash_std_unordered_set_masd_dogen_coding_meta_model_element_archetype(v.enabled_archetype_for_element()));
     combine(seed, v.locator_properties());
     combine(seed, v.global_archetype_location_properties());
-    combine(seed, hash_boost_optional_masd_dogen_coding_meta_model_generation_properties(v.generation_properties()));
+    combine(seed, hash_boost_optional_masd_dogen_coding_meta_model_extraction_properties(v.extraction_properties()));
 
     return seed;
 }

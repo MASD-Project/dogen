@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.coding/io/meta_model/generation_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/extraction_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -45,9 +45,23 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>&
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace masd::dogen::coding::meta_model {
 
-std::ostream& operator<<(std::ostream& s, const generation_properties& v) {
+std::ostream& operator<<(std::ostream& s, const extraction_properties& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -55,12 +69,13 @@ std::ostream& operator<<(std::ostream& s, const generation_properties& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::generation_properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::extraction_properties\"" << ", "
       << "\"force_write\": " << v.force_write() << ", "
-      << "\"compatibility_mode_enabled\": " << v.compatibility_mode_enabled() << ", "
       << "\"delete_extra_files\": " << v.delete_extra_files() << ", "
       << "\"ignore_files_matching_regex\": " << v.ignore_files_matching_regex() << ", "
-      << "\"cpp_headers_output_directory\": " << "\"" << v.cpp_headers_output_directory().generic_string() << "\""
+      << "\"cpp_headers_output_directory\": " << "\"" << v.cpp_headers_output_directory().generic_string() << "\"" << ", "
+      << "\"enabled_backends\": " << v.enabled_backends() << ", "
+      << "\"enable_backend_directories\": " << v.enable_backend_directories()
       << " }";
     return(s);
 }

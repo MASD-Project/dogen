@@ -19942,10 +19942,10 @@ and element.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#generation_properties#</dia:string>
+            <dia:string>#extraction_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;coding::meta_model::generation_properties&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;coding::meta_model::extraction_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

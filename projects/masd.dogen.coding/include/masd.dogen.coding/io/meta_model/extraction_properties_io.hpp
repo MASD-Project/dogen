@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_IO_META_MODEL_GENERATION_PROPERTIES_IO_HPP
-#define MASD_DOGEN_CODING_IO_META_MODEL_GENERATION_PROPERTIES_IO_HPP
+#ifndef MASD_DOGEN_CODING_IO_META_MODEL_EXTRACTION_PROPERTIES_IO_HPP
+#define MASD_DOGEN_CODING_IO_META_MODEL_EXTRACTION_PROPERTIES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "masd.dogen.coding/types/meta_model/generation_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/extraction_properties.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const masd::dogen::coding::meta_model::generation_properties& v);
+     const masd::dogen::coding::meta_model::extraction_properties& v);
 
 }
 

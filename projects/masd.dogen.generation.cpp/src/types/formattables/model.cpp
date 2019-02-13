@@ -34,7 +34,7 @@ model::model(model&& rhs)
       odb_databases_(std::move(rhs.odb_databases_)),
       odb_sql_name_case_(std::move(rhs.odb_sql_name_case_)),
       project_items_(std::move(rhs.project_items_)),
-      generation_properties_(std::move(rhs.generation_properties_)) { }
+      extraction_properties_(std::move(rhs.extraction_properties_)) { }
 
 model::model(
     const masd::dogen::coding::meta_model::name& name,
@@ -45,7 +45,7 @@ model::model(
     const std::list<std::string>& odb_databases,
     const std::string& odb_sql_name_case,
     const std::list<std::string>& project_items,
-    const boost::optional<masd::dogen::coding::meta_model::generation_properties>& generation_properties)
+    const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& extraction_properties)
     : name_(name),
       streaming_properties_(streaming_properties),
       formattables_(formattables),
@@ -54,7 +54,7 @@ model::model(
       odb_databases_(odb_databases),
       odb_sql_name_case_(odb_sql_name_case),
       project_items_(project_items),
-      generation_properties_(generation_properties) { }
+      extraction_properties_(extraction_properties) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -66,7 +66,7 @@ void model::swap(model& other) noexcept {
     swap(odb_databases_, other.odb_databases_);
     swap(odb_sql_name_case_, other.odb_sql_name_case_);
     swap(project_items_, other.project_items_);
-    swap(generation_properties_, other.generation_properties_);
+    swap(extraction_properties_, other.extraction_properties_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -78,7 +78,7 @@ bool model::operator==(const model& rhs) const {
         odb_databases_ == rhs.odb_databases_ &&
         odb_sql_name_case_ == rhs.odb_sql_name_case_ &&
         project_items_ == rhs.project_items_ &&
-        generation_properties_ == rhs.generation_properties_;
+        extraction_properties_ == rhs.extraction_properties_;
 }
 
 model& model::operator=(model other) {
@@ -207,20 +207,20 @@ void model::project_items(const std::list<std::string>&& v) {
     project_items_ = std::move(v);
 }
 
-const boost::optional<masd::dogen::coding::meta_model::generation_properties>& model::generation_properties() const {
-    return generation_properties_;
+const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& model::extraction_properties() const {
+    return extraction_properties_;
 }
 
-boost::optional<masd::dogen::coding::meta_model::generation_properties>& model::generation_properties() {
-    return generation_properties_;
+boost::optional<masd::dogen::coding::meta_model::extraction_properties>& model::extraction_properties() {
+    return extraction_properties_;
 }
 
-void model::generation_properties(const boost::optional<masd::dogen::coding::meta_model::generation_properties>& v) {
-    generation_properties_ = v;
+void model::extraction_properties(const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& v) {
+    extraction_properties_ = v;
 }
 
-void model::generation_properties(const boost::optional<masd::dogen::coding::meta_model::generation_properties>&& v) {
-    generation_properties_ = std::move(v);
+void model::extraction_properties(const boost::optional<masd::dogen::coding::meta_model::extraction_properties>&& v) {
+    extraction_properties_ = std::move(v);
 }
 
 }

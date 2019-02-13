@@ -22,7 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/model_io.hpp"
-#include "masd.dogen.coding/io/meta_model/generation_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/extraction_properties_io.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/formattable_io.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/cpp_standards_io.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/facet_properties_io.hpp"
@@ -106,7 +106,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::generation_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -132,7 +132,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"odb_databases\": " << v.odb_databases() << ", "
       << "\"odb_sql_name_case\": " << "\"" << tidy_up_string(v.odb_sql_name_case()) << "\"" << ", "
       << "\"project_items\": " << v.project_items() << ", "
-      << "\"generation_properties\": " << v.generation_properties()
+      << "\"extraction_properties\": " << v.extraction_properties()
       << " }";
     return(s);
 }

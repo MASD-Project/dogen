@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_GENERATION_PROPERTIES_HPP
-#define MASD_DOGEN_CODING_TYPES_META_MODEL_GENERATION_PROPERTIES_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_EXTRACTION_PROPERTIES_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_EXTRACTION_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,31 +28,33 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <unordered_set>
 #include <boost/filesystem/path.hpp>
 
 namespace masd::dogen::coding::meta_model {
 
 /**
- * @brief Properties related to code generation.
+ * @brief Properties related to extraction.
  */
-class generation_properties final {
+class extraction_properties final {
 public:
-    generation_properties(const generation_properties&) = default;
-    ~generation_properties() = default;
+    extraction_properties(const extraction_properties&) = default;
+    ~extraction_properties() = default;
 
 public:
-    generation_properties();
+    extraction_properties();
 
 public:
-    generation_properties(generation_properties&& rhs);
+    extraction_properties(extraction_properties&& rhs);
 
 public:
-    generation_properties(
+    extraction_properties(
         const bool force_write,
-        const bool compatibility_mode_enabled,
         const bool delete_extra_files,
         const std::vector<std::string>& ignore_files_matching_regex,
-        const boost::filesystem::path& cpp_headers_output_directory);
+        const boost::filesystem::path& cpp_headers_output_directory,
+        const std::unordered_set<std::string>& enabled_backends,
+        const bool enable_backend_directories);
 
 public:
     /**
@@ -61,14 +63,6 @@ public:
     /**@{*/
     bool force_write() const;
     void force_write(const bool v);
-    /**@}*/
-
-    /**
-     * @brief If true, attempt to process inputs, ignoring certain types of errors.
-     */
-    /**@{*/
-    bool compatibility_mode_enabled() const;
-    void compatibility_mode_enabled(const bool v);
     /**@}*/
 
     /**
@@ -92,7 +86,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Directory in which to place C++ header files.
+     * @brief Directory in which to place C++ header files. Must be a relative path.
      */
     /**@{*/
     const boost::filesystem::path& cpp_headers_output_directory() const;
@@ -101,22 +95,31 @@ public:
     void cpp_headers_output_directory(const boost::filesystem::path&& v);
     /**@}*/
 
+    const std::unordered_set<std::string>& enabled_backends() const;
+    std::unordered_set<std::string>& enabled_backends();
+    void enabled_backends(const std::unordered_set<std::string>& v);
+    void enabled_backends(const std::unordered_set<std::string>&& v);
+
+    bool enable_backend_directories() const;
+    void enable_backend_directories(const bool v);
+
 public:
-    bool operator==(const generation_properties& rhs) const;
-    bool operator!=(const generation_properties& rhs) const {
+    bool operator==(const extraction_properties& rhs) const;
+    bool operator!=(const extraction_properties& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(generation_properties& other) noexcept;
-    generation_properties& operator=(generation_properties other);
+    void swap(extraction_properties& other) noexcept;
+    extraction_properties& operator=(extraction_properties other);
 
 private:
     bool force_write_;
-    bool compatibility_mode_enabled_;
     bool delete_extra_files_;
     std::vector<std::string> ignore_files_matching_regex_;
     boost::filesystem::path cpp_headers_output_directory_;
+    std::unordered_set<std::string> enabled_backends_;
+    bool enable_backend_directories_;
 };
 
 }
@@ -125,8 +128,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::coding::meta_model::generation_properties& lhs,
-    masd::dogen::coding::meta_model::generation_properties& rhs) {
+    masd::dogen::coding::meta_model::extraction_properties& lhs,
+    masd::dogen::coding::meta_model::extraction_properties& rhs) {
     lhs.swap(rhs);
 }
 

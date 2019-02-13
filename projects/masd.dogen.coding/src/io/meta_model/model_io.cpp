@@ -30,7 +30,7 @@
 #include "masd.dogen.coding/io/meta_model/element_archetype_io.hpp"
 #include "masd.dogen.coding/io/meta_model/locator_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_model_properties_io.hpp"
-#include "masd.dogen.coding/io/meta_model/generation_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/extraction_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/global_archetype_location_properties_io.hpp"
 
 namespace std {
@@ -164,7 +164,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<masd::
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::generation_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -202,7 +202,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element() << ", "
       << "\"locator_properties\": " << v.locator_properties() << ", "
       << "\"global_archetype_location_properties\": " << v.global_archetype_location_properties() << ", "
-      << "\"generation_properties\": " << v.generation_properties()
+      << "\"extraction_properties\": " << v.extraction_properties()
       << " }";
     return(s);
 }

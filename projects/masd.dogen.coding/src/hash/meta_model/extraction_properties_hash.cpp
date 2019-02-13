@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.coding/hash/meta_model/generation_properties_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/extraction_properties_hash.hpp"
 
 namespace {
 
@@ -42,18 +42,27 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
     return seed;
 }
 
+inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
 }
 
 namespace masd::dogen::coding::meta_model {
 
-std::size_t generation_properties_hasher::hash(const generation_properties& v) {
+std::size_t extraction_properties_hasher::hash(const extraction_properties& v) {
     std::size_t seed(0);
 
     combine(seed, v.force_write());
-    combine(seed, v.compatibility_mode_enabled());
     combine(seed, v.delete_extra_files());
     combine(seed, hash_std_vector_std_string(v.ignore_files_matching_regex()));
     combine(seed, hash_boost_filesystem_path(v.cpp_headers_output_directory()));
+    combine(seed, hash_std_unordered_set_std_string(v.enabled_backends()));
+    combine(seed, v.enable_backend_directories());
 
     return seed;
 }

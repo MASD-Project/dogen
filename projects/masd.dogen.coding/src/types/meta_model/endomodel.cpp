@@ -124,7 +124,7 @@ endomodel::endomodel(endomodel&& rhs)
       input_language_(std::move(rhs.input_language_)),
       output_languages_(std::move(rhs.output_languages_)),
       orm_properties_(std::move(rhs.orm_properties_)),
-      generation_properties_(std::move(rhs.generation_properties_)) { }
+      extraction_properties_(std::move(rhs.extraction_properties_)) { }
 
 endomodel::endomodel(
     const masd::dogen::coding::meta_model::name& name,
@@ -144,7 +144,7 @@ endomodel::endomodel(
     const masd::dogen::coding::meta_model::languages input_language,
     const std::list<masd::dogen::coding::meta_model::languages>& output_languages,
     const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties,
-    const boost::optional<masd::dogen::coding::meta_model::generation_properties>& generation_properties)
+    const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& extraction_properties)
     : name_(name),
       meta_name_(meta_name),
       origin_type_(origin_type),
@@ -162,7 +162,7 @@ endomodel::endomodel(
       input_language_(input_language),
       output_languages_(output_languages),
       orm_properties_(orm_properties),
-      generation_properties_(generation_properties) { }
+      extraction_properties_(extraction_properties) { }
 
 void endomodel::swap(endomodel& other) noexcept {
     using std::swap;
@@ -183,7 +183,7 @@ void endomodel::swap(endomodel& other) noexcept {
     swap(input_language_, other.input_language_);
     swap(output_languages_, other.output_languages_);
     swap(orm_properties_, other.orm_properties_);
-    swap(generation_properties_, other.generation_properties_);
+    swap(extraction_properties_, other.extraction_properties_);
 }
 
 bool endomodel::operator==(const endomodel& rhs) const {
@@ -204,7 +204,7 @@ bool endomodel::operator==(const endomodel& rhs) const {
         input_language_ == rhs.input_language_ &&
         output_languages_ == rhs.output_languages_ &&
         orm_properties_ == rhs.orm_properties_ &&
-        generation_properties_ == rhs.generation_properties_;
+        extraction_properties_ == rhs.extraction_properties_;
 }
 
 endomodel& endomodel::operator=(endomodel other) {
@@ -469,20 +469,20 @@ void endomodel::orm_properties(const boost::optional<masd::dogen::coding::meta_m
     orm_properties_ = std::move(v);
 }
 
-const boost::optional<masd::dogen::coding::meta_model::generation_properties>& endomodel::generation_properties() const {
-    return generation_properties_;
+const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& endomodel::extraction_properties() const {
+    return extraction_properties_;
 }
 
-boost::optional<masd::dogen::coding::meta_model::generation_properties>& endomodel::generation_properties() {
-    return generation_properties_;
+boost::optional<masd::dogen::coding::meta_model::extraction_properties>& endomodel::extraction_properties() {
+    return extraction_properties_;
 }
 
-void endomodel::generation_properties(const boost::optional<masd::dogen::coding::meta_model::generation_properties>& v) {
-    generation_properties_ = v;
+void endomodel::extraction_properties(const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& v) {
+    extraction_properties_ = v;
 }
 
-void endomodel::generation_properties(const boost::optional<masd::dogen::coding::meta_model::generation_properties>&& v) {
-    generation_properties_ = std::move(v);
+void endomodel::extraction_properties(const boost::optional<masd::dogen::coding::meta_model::extraction_properties>&& v) {
+    extraction_properties_ = std::move(v);
 }
 
 }

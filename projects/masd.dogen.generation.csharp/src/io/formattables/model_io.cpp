@@ -22,7 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.generation.csharp/io/formattables/model_io.hpp"
-#include "masd.dogen.coding/io/meta_model/generation_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/extraction_properties_io.hpp"
 #include "masd.dogen.generation.csharp/io/formattables/formattable_io.hpp"
 #include "masd.dogen.generation.csharp/io/formattables/aspect_properties_io.hpp"
 #include "masd.dogen.generation.csharp/io/formattables/assistant_properties_io.hpp"
@@ -105,7 +105,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::generation_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -128,7 +128,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"project_items\": " << v.project_items() << ", "
       << "\"aspect_properties\": " << v.aspect_properties() << ", "
       << "\"assistant_properties\": " << v.assistant_properties() << ", "
-      << "\"generation_properties\": " << v.generation_properties()
+      << "\"extraction_properties\": " << v.extraction_properties()
       << " }";
     return(s);
 }

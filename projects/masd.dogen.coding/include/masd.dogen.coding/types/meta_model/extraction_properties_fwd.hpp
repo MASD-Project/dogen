@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_GENERATION_PROPERTIES_FWD_HPP
-#define MASD_DOGEN_CODING_TYPES_META_MODEL_GENERATION_PROPERTIES_FWD_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_EXTRACTION_PROPERTIES_FWD_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_EXTRACTION_PROPERTIES_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 namespace masd::dogen::coding::meta_model {
 
-class generation_properties;
+class extraction_properties;
 
 }
 

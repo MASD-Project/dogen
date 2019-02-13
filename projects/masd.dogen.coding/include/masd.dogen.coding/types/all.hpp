@@ -127,7 +127,7 @@
 #include "masd.dogen.coding/types/transforms/naming_configuration.hpp"
 #include "masd.dogen.coding/types/transforms/primitives_transform.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
-#include "masd.dogen.coding/types/meta_model/generation_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/extraction_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_module_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_object_properties.hpp"
 #include "masd.dogen.coding/types/transforms/code_generation_chain.hpp"
