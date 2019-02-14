@@ -26,7 +26,7 @@ namespace masd::dogen::coding::helpers {
 meta_model::location meta_name_factory::make_location() {
     meta_model::location r;
     r.external_modules().push_back("dogen");
-    r.model_modules().push_back("yarn");
+    r.model_modules().push_back("coding");
     r.internal_modules().push_back("meta_model");
     return r;
 }

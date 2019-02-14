@@ -25,7 +25,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("yarn.helpers.string_processor"));
+auto lg(logger_factory("coding.helpers.string_processor"));
 
 const std::string empty;
 const std::string comma(",");

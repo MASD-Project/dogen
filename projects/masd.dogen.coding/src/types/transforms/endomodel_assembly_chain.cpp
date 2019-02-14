@@ -28,7 +28,7 @@
 
 namespace {
 
-const std::string transform_id("yarn.transforms.endomodel_assembly_chain");
+const std::string transform_id("coding.transforms.endomodel_assembly_chain");
 
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));

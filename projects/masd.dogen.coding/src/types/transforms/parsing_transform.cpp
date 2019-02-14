@@ -51,7 +51,7 @@ errmsg_parsing_owner;
 
 namespace {
 
-const std::string transform_id("yarn.transforms.parsing_transform");
+const std::string transform_id("coding.transforms.parsing_transform");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -170,7 +170,7 @@ parse_parent(const type_group& tg, meta_model::object& o) {
     }
 
     /*
-     * Convert the string obtained via meta-data into a yarn name and
+     * Convert the string obtained via meta-data into a coding name and
      * set it as our parent name.
      */
     const auto pn(helpers::name_builder::build(parent));
@@ -200,7 +200,7 @@ parse_underlying_element(const type_group& tg, meta_model::enumeration& e) {
     }
 
     /*
-     * Convert the string obtained via meta-data into a yarn name and
+     * Convert the string obtained via meta-data into a coding name and
      * set it as our underlying element name.
      */
     const auto ue(helpers::name_builder::build(s));

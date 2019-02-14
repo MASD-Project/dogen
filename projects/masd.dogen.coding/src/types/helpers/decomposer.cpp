@@ -26,7 +26,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("yarn.helpers.decomposer"));
+auto lg(logger_factory("coding.helpers.decomposer"));
 
 }
 

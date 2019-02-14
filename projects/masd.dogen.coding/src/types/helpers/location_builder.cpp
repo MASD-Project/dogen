@@ -30,7 +30,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("yarn.helpers.location_builder"));
+auto lg(logger_factory("coding.helpers.location_builder"));
 
 const std::string empty_model_modules("Model modules are empty.");
 const std::string empty_internal_modules("Internal modules are empty.");

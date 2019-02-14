@@ -31,7 +31,7 @@
 namespace masd::dogen::coding::transforms {
 
 /**
- * @brief Updates the meta-names of all of the yarn meta-model
+ * @brief Updates the meta-names of all of the coding meta-model
  * elements.
  */
 class meta_naming_transform final {
@@ -42,7 +42,7 @@ public:
      * Note that any injected meta-model elements are not updated as
      * part of this transform; these are expected to be handled
      * internally as they are generated. We only concern ourselves
-     * with well-known meta-model elements from yarn.
+     * with well-known meta-model elements from coding.
      */
     static void transform(const context& ctx, meta_model::endomodel& em);
 };

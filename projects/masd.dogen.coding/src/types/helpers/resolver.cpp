@@ -43,7 +43,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("yarn.helpers.resolver"));
+auto lg(logger_factory("coding.helpers.resolver"));
 
 const std::string empty;
 const std::string orphan_object("Object's parent could not be located: ");

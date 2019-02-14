@@ -39,7 +39,7 @@
 namespace {
 
 const std::string transform_id(
-    "yarn.transforms.endomodel_post_processing_chain");
+    "coding.transforms.endomodel_post_processing_chain");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -88,7 +88,7 @@ transform(const context& ctx, meta_model::endomodel& em) {
 
     /*
      * Meta-name transform must be applied after all transforms that
-     * inject new meta-model types for the yarn model. At present that
+     * inject new meta-model types for the coding model. At present that
      * is stereotypes and containment transforms. This is also why we
      * cannot apply this transform at the exomodel level.
      */

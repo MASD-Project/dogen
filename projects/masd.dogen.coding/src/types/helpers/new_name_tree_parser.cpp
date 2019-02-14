@@ -24,6 +24,6 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg2(logger_factory("yarn.helpers.new_name_tree_parser"));
+auto lg2(logger_factory("coding.helpers.new_name_tree_parser"));
 
 }

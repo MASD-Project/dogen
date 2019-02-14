@@ -34,7 +34,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-static logger lg(logger_factory("yarn.helpers.reference_paths_extractor"));
+static logger lg(logger_factory("coding.helpers.reference_paths_extractor"));
 
 const std::string library_dir("library");
 

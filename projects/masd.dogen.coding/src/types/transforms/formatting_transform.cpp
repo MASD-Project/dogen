@@ -33,7 +33,7 @@
 
 namespace {
 
-const std::string transform_id("yarn.transforms.formatting_transform");
+const std::string transform_id("coding.transforms.formatting_transform");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));

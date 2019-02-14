@@ -30,7 +30,7 @@
 
 namespace {
 
-const std::string transform_id("yarn.transforms.dynamic_transforms_chain");
+const std::string transform_id("coding.transforms.dynamic_transforms_chain");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));

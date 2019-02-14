@@ -33,7 +33,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("yarn.helpers.endomodel_pre_processing_validator"));
+auto lg(logger_factory("coding.helpers.endomodel_pre_processing_validator"));
 
 const std::string multiple_inheritance_not_supported(
     "Multiple inheritance is not supported on target models: ");

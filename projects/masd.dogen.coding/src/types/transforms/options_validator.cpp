@@ -27,7 +27,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("yarn.transforms.options_validator"));
+auto lg(logger_factory("coding.transforms.options_validator"));
 
 const std::string missing_target("Mandatory parameter target is missing");
 const std::string non_absolute_target("Target path is not absolute: ");

@@ -42,7 +42,7 @@
 namespace {
 
 const std::string transform_id(
-    "yarn.transforms.archetype_location_properties_transform");
+    "coding.transforms.archetype_location_properties_transform");
 
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));

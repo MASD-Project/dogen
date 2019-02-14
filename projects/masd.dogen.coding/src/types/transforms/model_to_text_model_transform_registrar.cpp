@@ -29,7 +29,7 @@ namespace {
 
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(
-        "yarn.meta_model.model_to_text_model_transform_registrar"));
+        "coding.meta_model.model_to_text_model_transform_registrar"));
 
 const std::string no_transforms("No model to text transforms provided.");
 const std::string null_transform("Transform supplied is null");

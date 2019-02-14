@@ -27,7 +27,7 @@ namespace {
 
 using namespace masd::dogen::utility::log;
 static logger
-lg(logger_factory("yarn.transforms.dynamic_transform_registrar"));
+lg(logger_factory("coding.transforms.dynamic_transform_registrar"));
 
 const std::string no_transforms("No transforms provided.");
 const std::string null_frontend("Frontend supplied is null.");

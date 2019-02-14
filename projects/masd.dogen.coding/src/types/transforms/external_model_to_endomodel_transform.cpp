@@ -53,18 +53,18 @@
 namespace {
 
 const std::string transform_id(
-    "yarn.transforms.external_model_to_endomodel_transform");
+    "masd.transforms.external_model_to_endomodel_transform");
 
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 const std::string duplicate_element("Element id already exists: ");
 const std::string missing_model_modules("Must supply model modules.");
-const std::string missing_element_type("Missing yarn element type. Element: ");
+const std::string missing_element_type("Missing masd element type. Element: ");
 const std::string invalid_element_type(
-    "Invalid or usupported yarn element type: ");
-const std::string too_many_yarn_types(
-    "Attempting to set the yarn type more than once.");
+    "Invalid or usupported masd element type: ");
+const std::string too_many_element_types(
+    "Attempting to set the masd type more than once.");
 
 using masd::dogen::coding::meta_model::location;
 const location empty_location = location();
@@ -160,12 +160,12 @@ compute_element_type(const std::list<meta_model::static_stereotypes>& st,
      * so bomb out.
      */
     if (et.size() > 1) {
-        BOOST_LOG_SEV(lg, warn) << too_many_yarn_types;
-        BOOST_THROW_EXCEPTION(transformation_error(too_many_yarn_types));
+        BOOST_LOG_SEV(lg, warn) << too_many_element_types;
+        BOOST_THROW_EXCEPTION(transformation_error(too_many_element_types));
     }
 
     /*
-     * If no yarn element type came up, attempt to use the fallback
+     * If no masd element type came up, attempt to use the fallback
      * stereotype suggested by the frontend. If none was suggested
      * just return invalid.
      */

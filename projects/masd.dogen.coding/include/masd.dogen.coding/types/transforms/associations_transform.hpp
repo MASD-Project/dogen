@@ -39,11 +39,11 @@ namespace masd::dogen::coding::transforms {
  * @brief Transform that specialises in indexing associations for
  * objects.
  *
- * @section yarn_association_expander_0 Requirements
+ * @section coding_association_expander_0 Requirements
  *
  * The expansion of local attributes is expected to have taken place.
  *
- * @section yarn_attribute_indexer_1 Indexing Process
+ * @section coding_attribute_indexer_1 Indexing Process
  *
  * The expander goes through all attributes in objects and, for every
  * name tree, unpacks all the associations implied by their presence.

@@ -27,7 +27,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("yarn.helpers.mappings_validator"));
+auto lg(logger_factory("coding.helpers.mappings_validator"));
 
 const std::string lam_id_prefix("<lam>");
 const std::string default_mapping_set_name("default.mapping_set");

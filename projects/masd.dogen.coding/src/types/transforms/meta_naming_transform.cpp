@@ -30,7 +30,7 @@
 
 namespace {
 
-const std::string transform_id("yarn.transforms.meta_naming_transform");
+const std::string transform_id("coding.transforms.meta_naming_transform");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -45,7 +45,7 @@ class updater {
 public:
     void operator()(meta_model::element&) {
         /*
-         * Element ignored on purpose; we cannot update non-yarn
+         * Element ignored on purpose; we cannot update non-coding
          * meta-model elements.
          */
     }

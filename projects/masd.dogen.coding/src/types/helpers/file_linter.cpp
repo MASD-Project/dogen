@@ -36,7 +36,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("yarn.helpers.file_linter"));
+auto lg(logger_factory("coding.helpers.file_linter"));
 
 }
 

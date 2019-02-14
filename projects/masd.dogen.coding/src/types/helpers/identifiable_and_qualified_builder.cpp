@@ -28,7 +28,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("yarn.helpers.resolver"));
+auto lg(logger_factory("coding.helpers.resolver"));
 
 const std::string qn_missing("Could not find qualified name for language: ");
 

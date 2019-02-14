@@ -61,7 +61,7 @@ private:
 
 private:
     /**
-     * @brief Creates a yarn name using the element name provided, and
+     * @brief Creates a coding name using the element name provided, and
      * places it in the location provided.
      *
      * n may be a simple name or a qualified name.
@@ -72,7 +72,7 @@ private:
         const std::string& n) const;
 
     /**
-     * @brief Converts an injection attribute to an yarn attribute.
+     * @brief Converts an injection attribute to an coding attribute.
      *
      * @pre name and type of the injector attribute must not be empty.
      */
@@ -80,7 +80,7 @@ private:
         const injection::meta_model::attribute& a) const;
 
     /**
-     * @brief Converts an injector attribute to an yarn enumerator.
+     * @brief Converts an injector attribute to an coding enumerator.
      *
      * @pre name and type of the injector attribute must not be empty.
      */
@@ -99,7 +99,7 @@ private:
 public:
     /**
      * @brief Converts an exoelement with a stereotype of coding::object
-     * to a yarn object.
+     * to a coding object.
      */
     boost::shared_ptr<meta_model::object>
     to_object(const meta_model::location& l,
@@ -108,7 +108,7 @@ public:
 
     /**
      * @brief Converts an exoelement with a stereotype of
-     * coding::object_template to a yarn object template.
+     * coding::object_template to a coding object template.
      */
     boost::shared_ptr<meta_model::object_template>
     to_object_template(const meta_model::location& l,
@@ -117,7 +117,7 @@ public:
 
     /**
      * @brief Converts an exoelement with a stereotype of
-     * coding::exception to a yarn exception.
+     * coding::exception to a coding exception.
      */
     boost::shared_ptr<meta_model::exception>
     to_exception(const meta_model::location& l,
@@ -126,7 +126,7 @@ public:
 
     /**
      * @brief Converts an exoelement with a stereotype of
-     * coding::primitive to a yarn primitive.
+     * coding::primitive to a coding primitive.
      */
     boost::shared_ptr<meta_model::primitive>
     to_primitive(const meta_model::location& l,
@@ -135,7 +135,7 @@ public:
 
     /**
      * @brief Converts an exoelement with a stereotype of
-     * coding::enumeration to a yarn enumeration.
+     * coding::enumeration to a coding enumeration.
      */
     boost::shared_ptr<meta_model::enumeration>
     to_enumeration(const meta_model::location& l,
@@ -144,7 +144,7 @@ public:
 
     /**
      * @brief Converts an exoelement with a stereotype of
-     * coding::module to a yarn module.
+     * coding::module to a coding module.
      */
     boost::shared_ptr<meta_model::module>
     to_module(const bool is_root_module, const meta_model::location& l,
@@ -153,7 +153,7 @@ public:
 
     /**
      * @brief Converts an exoelement with a stereotype of
-     * coding::module to a yarn module.
+     * coding::module to a coding module.
      */
     boost::shared_ptr<meta_model::builtin>
     to_builtin(const meta_model::location& l,

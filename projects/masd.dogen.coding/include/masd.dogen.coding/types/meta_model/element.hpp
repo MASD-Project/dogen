@@ -159,7 +159,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Stereotypes that are not part of the yarn UML profile. These are user defined.
+     * @brief Stereotypes that are not part of the masd UML profile. These are user defined.
      */
     /**@{*/
     const std::list<std::string>& dynamic_stereotypes() const;

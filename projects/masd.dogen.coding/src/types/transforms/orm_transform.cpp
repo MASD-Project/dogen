@@ -46,7 +46,7 @@
 
 namespace {
 
-const std::string transform_id("yarn.transforms.orm_transform");
+const std::string transform_id("coding.transforms.orm_transform");
 
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));

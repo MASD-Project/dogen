@@ -159,7 +159,7 @@ public:
 public:
     /**
      * @brief Initialises a new mock factory at a given stage in the
-     * yarn pipeline, as given by the flags supplied.
+     * coding pipeline, as given by the flags supplied.
      */
     explicit mock_endomodel_factory(const flags& f,
         annotation_function_type fn = annotation_function_type());
@@ -231,7 +231,7 @@ public:
 
     /**
      * @brief Returns true if the name matches the mock model factory
-     * naming convention for type @e n, and the yarn naming convention
+     * naming convention for type @e n, and the coding naming convention
      * for visitors.
      */
     bool is_type_name_n_visitor(const unsigned int n,

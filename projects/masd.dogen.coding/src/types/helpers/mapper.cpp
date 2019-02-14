@@ -38,7 +38,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("yarn.helpers.mapper"));
+auto lg(logger_factory("coding.helpers.mapper"));
 
 const std::string lam_pointer("<lam><pointer>");
 

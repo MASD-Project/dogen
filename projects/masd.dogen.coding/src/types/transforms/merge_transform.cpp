@@ -27,7 +27,7 @@
 
 namespace {
 
-const std::string transform_id("yarn.transforms.merge_transform");
+const std::string transform_id("coding.transforms.merge_transform");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));

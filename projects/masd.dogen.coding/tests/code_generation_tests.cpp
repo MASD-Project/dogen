@@ -40,7 +40,7 @@
 // #include "masd.dogen.dia/serialization/diagram_ser.hpp"
 // #include "masd.dogen.coding/serialization/meta_model/model_ser.hpp"
 // #include "masd.dogen.dia/test/dia_file_asserter.hpp"
-// #include "masd.dogen.coding/test/yarn_file_asserter.hpp"
+// #include "masd.dogen.coding/test/coding_file_asserter.hpp"
 // #include "masd.dogen.utility/types/test/exception_checkers.hpp"
 
 /*

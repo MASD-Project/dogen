@@ -36,14 +36,14 @@ errmsg_validation_owner;
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("yarn.helpers.endomodel_post_processing_validator"));
+auto lg(logger_factory("coding.helpers.endomodel_post_processing_validator"));
 
 const std::string space(" ");
 const std::regex strict_name_regex("^[a-zA-Z_][a-zA-Z0-9_]*$");
 const std::regex loose_name_regex("^[a-zA-Z_][\\-\\.a-zA-Z0-9_]*$");
 
 /*
- * FIXME: we've removed the following keywords for now because yarn
+ * FIXME: we've removed the following keywords for now because masd
  * uses these terms: "module"
  */
 std::array<std::string, 81> cpp_reserved = { {
@@ -96,7 +96,7 @@ std::array<std::string, 64> csharp_reserved = { {
  * FIXME: we've removed the following builtins for now, because they
  * are being used by the following models:
  *
- * - "object": yarn
+ * - "object": masd
  * - "string": std
  */
 std::array<std::string, 12> csharp_builtins = { {

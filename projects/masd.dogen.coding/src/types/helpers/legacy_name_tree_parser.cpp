@@ -41,7 +41,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("yarn.helpers.legacy_name_tree_parser"));
+auto lg(logger_factory("coding.helpers.legacy_name_tree_parser"));
 
 const std::string unsupported_language("Invalid or unsupported language: ");
 const std::string error_msg("Failed to parse string: ");

@@ -38,7 +38,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("yarn.helpers.name_tree_builder"));
+auto lg(logger_factory("coding.helpers.name_tree_builder"));
 
 }
 

@@ -28,7 +28,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("yarn.helpers.indexer"));
+auto lg(logger_factory("coding.helpers.indexer"));
 
 }
 

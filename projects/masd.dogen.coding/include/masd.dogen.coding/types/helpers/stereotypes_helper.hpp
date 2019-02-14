@@ -44,7 +44,7 @@ public:
      *
      * @note The string must not have any leading or trailing spaces
      * or other artefacts and must match exactly the definition of a
-     * well-known yarn stereotype, e.g. 'coding::object', etc.
+     * well-known coding stereotype, e.g. 'coding::object', etc.
      */
     meta_model::static_stereotypes from_string(const std::string& s) const;
 
@@ -69,7 +69,7 @@ public:
 
 public:
     /**
-     * @brief Returns true if the well-known stereotype denotes a yarn
+     * @brief Returns true if the well-known stereotype denotes a coding
      * element type, false otherwise.
      */
     bool is_element_type(const meta_model::static_stereotypes ss) const;

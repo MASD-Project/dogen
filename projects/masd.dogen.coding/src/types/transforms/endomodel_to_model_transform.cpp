@@ -43,7 +43,7 @@
 
 namespace {
 
-const std::string transform_id("yarn.transforms.endomodel_to_model_transform");
+const std::string transform_id("coding.transforms.endomodel_to_model_transform");
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 

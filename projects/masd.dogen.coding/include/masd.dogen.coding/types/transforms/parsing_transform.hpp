@@ -41,7 +41,7 @@ namespace masd::dogen::coding::transforms {
 
 /**
  * @brief Expands all encoded representations that require parsing
- * into their yarn form.
+ * into their coding form.
  *
  * As an example, all local attributes have unparsed types - strings
  * following a well defined notation - that need to be parsed into

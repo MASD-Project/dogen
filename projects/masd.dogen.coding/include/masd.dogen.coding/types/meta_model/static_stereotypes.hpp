@@ -28,7 +28,7 @@
 namespace masd::dogen::coding::meta_model {
 
 /**
- * @brief Lists all stereotypes defined in the yarn UML profile.
+ * @brief Lists all stereotypes defined in the masd UML profile.
  */
 enum class static_stereotypes : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum

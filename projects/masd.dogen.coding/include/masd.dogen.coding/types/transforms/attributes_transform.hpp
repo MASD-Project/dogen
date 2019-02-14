@@ -36,12 +36,12 @@ namespace masd::dogen::coding::transforms {
  * @brief Transformation that specialises in expanding attributes
  * across the model.
  *
- * @section yarn_attributes_expander_0 Model requirements
+ * @section coding_attributes_expander_0 Model requirements
  *
  * The basic expansion of local attributes and of object templates is
  * expected to have taken place.
  *
- * @section yarn_attributes_expander_1 Types of attributes
+ * @section coding_attributes_expander_1 Types of attributes
  *
  * There are three sets of attributes the expander is interested in:
  *
@@ -51,7 +51,7 @@ namespace masd::dogen::coding::transforms {
  *
  * Lets cover each of these in more details.
  *
- * @subsection yarn_attributes_expander_11 Local attributes
+ * @subsection coding_attributes_expander_11 Local attributes
  *
  * On a natural, pre-expanded state, local attributes encompass only
  * the attributes defined on the class directly. The transform behaves
@@ -81,7 +81,7 @@ namespace masd::dogen::coding::transforms {
  * source code - say as C++ concepts - all we require is the set of
  * all attributes for that object template (see below).
  *
- * @subsection yarn_attributes_expander_12 Inherited attributes
+ * @subsection coding_attributes_expander_12 Inherited attributes
  *
  * These provide an easy way to look-up which attributes one has
  * inherited and from whom. For objects, the inherited attributes are
@@ -93,7 +93,7 @@ namespace masd::dogen::coding::transforms {
  * attributes of the parent. However, we haven't yet found a good use
  * case for them.
  *
- * @subsection yarn_attributes_expander_13 All attributes
+ * @subsection coding_attributes_expander_13 All attributes
  *
  * The "all attribute" set contains every single attribute. It is the
  * sum all the local attributes with all of the inherited

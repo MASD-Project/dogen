@@ -28,7 +28,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("yarn.helpers.name_factory"));
+auto lg(logger_factory("coding.helpers.name_factory"));
 
 const std::string empty_internal_modules("Internal modules cannot be empty.");
 

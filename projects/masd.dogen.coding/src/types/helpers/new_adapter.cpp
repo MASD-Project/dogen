@@ -31,7 +31,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-static logger lg(logger_factory("yarn.helpers.new_adapter"));
+static logger lg(logger_factory("coding.helpers.new_adapter"));
 
 const std::string empty_name("Name is empty.");
 const std::string enumerator_with_type("Enumerators cannot have a type: ");

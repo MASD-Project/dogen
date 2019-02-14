@@ -33,7 +33,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("yarn.helpers.mapping_hydrator"));
+auto lg(logger_factory("coding.helpers.mapping_hydrator"));
 
 const std::string empty;
 const std::string lam_id_key("lam_id");

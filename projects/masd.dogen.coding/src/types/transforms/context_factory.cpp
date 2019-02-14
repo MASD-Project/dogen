@@ -39,7 +39,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("yarn.transforms.context_factory"));
+auto lg(logger_factory("coding.transforms.context_factory"));
 
 const std::string duplicate_segment("Duplicat segment: ");
 

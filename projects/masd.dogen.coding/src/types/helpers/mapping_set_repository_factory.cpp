@@ -37,7 +37,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("yarn.helpers.mapping_set_repository_factory"));
+auto lg(logger_factory("coding.helpers.mapping_set_repository_factory"));
 
 const std::string duplicate_lam_id("Duplicate language agnostic id: ");
 const std::string default_mapping_set_name("default.mapping_set");

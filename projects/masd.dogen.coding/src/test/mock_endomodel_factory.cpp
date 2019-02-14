@@ -41,7 +41,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-static logger lg(logger_factory("yarn.mock_endomodel_factory"));
+static logger lg(logger_factory("coding.mock_endomodel_factory"));
 
 const std::string model_name_prefix("some_model_");
 const std::string type_name_prefix("some_type_");
