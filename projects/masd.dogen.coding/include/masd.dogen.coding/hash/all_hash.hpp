@@ -54,7 +54,6 @@
 #include "masd.dogen.coding/hash/helpers/mapping_context_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/letter_cases_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/origin_types_hash.hpp"
-#include "masd.dogen.coding/hash/transforms/configuration_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/object_template_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/type_parameters_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/facet_properties_hash.hpp"

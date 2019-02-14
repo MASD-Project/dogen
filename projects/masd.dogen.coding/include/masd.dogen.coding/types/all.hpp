@@ -81,7 +81,6 @@
 #include "masd.dogen.coding/types/helpers/resolution_error.hpp"
 #include "masd.dogen.coding/types/helpers/string_processor.hpp"
 #include "masd.dogen.coding/types/helpers/validation_error.hpp"
-#include "masd.dogen.coding/types/transforms/configuration.hpp"
 #include "masd.dogen.coding/types/transforms/orm_transform.hpp"
 #include "masd.dogen.coding/types/helpers/filesystem_writer.hpp"
 #include "masd.dogen.coding/types/helpers/mappings_hydrator.hpp"
