@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_GENERATION_PROPERTIES_TRANSFORM_HPP
-#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_GENERATION_PROPERTIES_TRANSFORM_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_EXTRACTION_PROPERTIES_TRANSFORM_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_EXTRACTION_PROPERTIES_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,17 +29,17 @@
 
 namespace masd::dogen::coding::transforms {
 
-class generation_properties_transform final {
+class extraction_properties_transform final {
 public:
-    generation_properties_transform() = default;
-    generation_properties_transform(const generation_properties_transform&) = default;
-    generation_properties_transform(generation_properties_transform&&) = default;
-    ~generation_properties_transform() = default;
-    generation_properties_transform& operator=(const generation_properties_transform&) = default;
+    extraction_properties_transform() = default;
+    extraction_properties_transform(const extraction_properties_transform&) = default;
+    extraction_properties_transform(extraction_properties_transform&&) = default;
+    ~extraction_properties_transform() = default;
+    extraction_properties_transform& operator=(const extraction_properties_transform&) = default;
 
 public:
-    bool operator==(const generation_properties_transform& rhs) const;
-    bool operator!=(const generation_properties_transform& rhs) const {
+    bool operator==(const extraction_properties_transform& rhs) const;
+    bool operator!=(const extraction_properties_transform& rhs) const {
         return !this->operator==(rhs);
     }
 

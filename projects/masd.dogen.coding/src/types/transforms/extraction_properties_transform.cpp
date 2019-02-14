@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.coding/types/transforms/generation_properties_transform.hpp"
+#include "masd.dogen.coding/types/transforms/extraction_properties_transform.hpp"
 
 namespace masd::dogen::coding::transforms {
 
-bool generation_properties_transform::operator==(const generation_properties_transform& /*rhs*/) const {
+bool extraction_properties_transform::operator==(const extraction_properties_transform& /*rhs*/) const {
     return true;
 }
 

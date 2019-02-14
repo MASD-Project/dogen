@@ -166,7 +166,7 @@
 #include "masd.dogen.coding/types/helpers/endomodel_pre_processing_validator.hpp"
 #include "masd.dogen.coding/types/helpers/identifiable_and_qualified_builder.hpp"
 #include "masd.dogen.coding/types/transforms/endomodel_post_processing_chain.hpp"
-#include "masd.dogen.coding/types/transforms/generation_properties_transform.hpp"
+#include "masd.dogen.coding/types/transforms/extraction_properties_transform.hpp"
 #include "masd.dogen.coding/types/helpers/endomodel_post_processing_validator.hpp"
 #include "masd.dogen.coding/types/meta_model/intra_backend_segment_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/denormalised_archetype_properties.hpp"
