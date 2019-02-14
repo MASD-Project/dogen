@@ -22,21 +22,13 @@
 
 namespace masd::dogen::generation::csharp::formattables {
 
-model::model(model&& rhs)
-    : name_(std::move(rhs.name_)),
-      formattables_(std::move(rhs.formattables_)),
-      project_items_(std::move(rhs.project_items_)),
-      aspect_properties_(std::move(rhs.aspect_properties_)),
-      assistant_properties_(std::move(rhs.assistant_properties_)),
-      extraction_properties_(std::move(rhs.extraction_properties_)) { }
-
 model::model(
     const masd::dogen::coding::meta_model::name& name,
     const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::formattable>& formattables,
     const std::list<std::string>& project_items,
     const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::aspect_properties>& aspect_properties,
     const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::assistant_properties>& assistant_properties,
-    const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& extraction_properties)
+    const masd::dogen::coding::meta_model::extraction_properties& extraction_properties)
     : name_(name),
       formattables_(formattables),
       project_items_(project_items),
@@ -149,19 +141,19 @@ void model::assistant_properties(const std::unordered_map<std::string, masd::dog
     assistant_properties_ = std::move(v);
 }
 
-const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& model::extraction_properties() const {
+const masd::dogen::coding::meta_model::extraction_properties& model::extraction_properties() const {
     return extraction_properties_;
 }
 
-boost::optional<masd::dogen::coding::meta_model::extraction_properties>& model::extraction_properties() {
+masd::dogen::coding::meta_model::extraction_properties& model::extraction_properties() {
     return extraction_properties_;
 }
 
-void model::extraction_properties(const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& v) {
+void model::extraction_properties(const masd::dogen::coding::meta_model::extraction_properties& v) {
     extraction_properties_ = v;
 }
 
-void model::extraction_properties(const boost::optional<masd::dogen::coding::meta_model::extraction_properties>&& v) {
+void model::extraction_properties(const masd::dogen::coding::meta_model::extraction_properties&& v) {
     extraction_properties_ = std::move(v);
 }
 

@@ -29,7 +29,6 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include <boost/optional.hpp>
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/extraction_properties.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/formattable.hpp"
@@ -42,10 +41,8 @@ class model final {
 public:
     model() = default;
     model(const model&) = default;
+    model(model&&) = default;
     ~model() = default;
-
-public:
-    model(model&& rhs);
 
 public:
     model(
@@ -54,7 +51,7 @@ public:
         const std::list<std::string>& project_items,
         const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::aspect_properties>& aspect_properties,
         const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::assistant_properties>& assistant_properties,
-        const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& extraction_properties);
+        const masd::dogen::coding::meta_model::extraction_properties& extraction_properties);
 
 public:
     const masd::dogen::coding::meta_model::name& name() const;
@@ -82,10 +79,10 @@ public:
     void assistant_properties(const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::assistant_properties>& v);
     void assistant_properties(const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::assistant_properties>&& v);
 
-    const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& extraction_properties() const;
-    boost::optional<masd::dogen::coding::meta_model::extraction_properties>& extraction_properties();
-    void extraction_properties(const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& v);
-    void extraction_properties(const boost::optional<masd::dogen::coding::meta_model::extraction_properties>&& v);
+    const masd::dogen::coding::meta_model::extraction_properties& extraction_properties() const;
+    masd::dogen::coding::meta_model::extraction_properties& extraction_properties();
+    void extraction_properties(const masd::dogen::coding::meta_model::extraction_properties& v);
+    void extraction_properties(const masd::dogen::coding::meta_model::extraction_properties&& v);
 
 public:
     bool operator==(const model& rhs) const;
@@ -103,7 +100,7 @@ private:
     std::list<std::string> project_items_;
     std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::aspect_properties> aspect_properties_;
     std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::assistant_properties> assistant_properties_;
-    boost::optional<masd::dogen::coding::meta_model::extraction_properties> extraction_properties_;
+    masd::dogen::coding::meta_model::extraction_properties extraction_properties_;
 };
 
 }

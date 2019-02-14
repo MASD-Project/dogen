@@ -79,7 +79,7 @@ model::model(
     const std::unordered_set<masd::dogen::coding::meta_model::element_archetype>& enabled_archetype_for_element,
     const masd::dogen::coding::meta_model::locator_properties& locator_properties,
     const masd::dogen::coding::meta_model::global_archetype_location_properties& global_archetype_location_properties,
-    const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& extraction_properties)
+    const masd::dogen::coding::meta_model::extraction_properties& extraction_properties)
     : name_(name),
       meta_name_(meta_name),
       references_(references),
@@ -339,19 +339,19 @@ void model::global_archetype_location_properties(const masd::dogen::coding::meta
     global_archetype_location_properties_ = std::move(v);
 }
 
-const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& model::extraction_properties() const {
+const masd::dogen::coding::meta_model::extraction_properties& model::extraction_properties() const {
     return extraction_properties_;
 }
 
-boost::optional<masd::dogen::coding::meta_model::extraction_properties>& model::extraction_properties() {
+masd::dogen::coding::meta_model::extraction_properties& model::extraction_properties() {
     return extraction_properties_;
 }
 
-void model::extraction_properties(const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& v) {
+void model::extraction_properties(const masd::dogen::coding::meta_model::extraction_properties& v) {
     extraction_properties_ = v;
 }
 
-void model::extraction_properties(const boost::optional<masd::dogen::coding::meta_model::extraction_properties>&& v) {
+void model::extraction_properties(const masd::dogen::coding::meta_model::extraction_properties&& v) {
     extraction_properties_ = std::move(v);
 }
 

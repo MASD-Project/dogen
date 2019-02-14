@@ -4824,7 +4824,7 @@
             <dia:string>#extraction_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;coding::meta_model::extraction_properties&gt;#</dia:string>
+            <dia:string>#coding::meta_model::extraction_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

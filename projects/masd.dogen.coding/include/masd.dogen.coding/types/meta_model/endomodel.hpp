@@ -82,7 +82,7 @@ public:
         const masd::dogen::coding::meta_model::languages input_language,
         const std::list<masd::dogen::coding::meta_model::languages>& output_languages,
         const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties,
-        const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& extraction_properties);
+        const masd::dogen::coding::meta_model::extraction_properties& extraction_properties);
 
 public:
     /**
@@ -244,10 +244,10 @@ public:
     void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& v);
     void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>&& v);
 
-    const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& extraction_properties() const;
-    boost::optional<masd::dogen::coding::meta_model::extraction_properties>& extraction_properties();
-    void extraction_properties(const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& v);
-    void extraction_properties(const boost::optional<masd::dogen::coding::meta_model::extraction_properties>&& v);
+    const masd::dogen::coding::meta_model::extraction_properties& extraction_properties() const;
+    masd::dogen::coding::meta_model::extraction_properties& extraction_properties();
+    void extraction_properties(const masd::dogen::coding::meta_model::extraction_properties& v);
+    void extraction_properties(const masd::dogen::coding::meta_model::extraction_properties&& v);
 
 public:
     bool operator==(const endomodel& rhs) const;
@@ -277,7 +277,7 @@ private:
     masd::dogen::coding::meta_model::languages input_language_;
     std::list<masd::dogen::coding::meta_model::languages> output_languages_;
     boost::optional<masd::dogen::coding::meta_model::orm_model_properties> orm_properties_;
-    boost::optional<masd::dogen::coding::meta_model::extraction_properties> extraction_properties_;
+    masd::dogen::coding::meta_model::extraction_properties extraction_properties_;
 };
 
 }

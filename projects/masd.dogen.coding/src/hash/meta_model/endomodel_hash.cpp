@@ -196,16 +196,6 @@ inline std::size_t hash_boost_optional_masd_dogen_coding_meta_model_orm_model_pr
     return seed;
 }
 
-inline std::size_t hash_boost_optional_masd_dogen_coding_meta_model_extraction_properties(const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& v) {
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
-}
-
 }
 
 namespace masd::dogen::coding::meta_model {
@@ -230,7 +220,7 @@ std::size_t endomodel_hasher::hash(const endomodel& v) {
     combine(seed, v.input_language());
     combine(seed, hash_std_list_masd_dogen_coding_meta_model_languages(v.output_languages()));
     combine(seed, hash_boost_optional_masd_dogen_coding_meta_model_orm_model_properties(v.orm_properties()));
-    combine(seed, hash_boost_optional_masd_dogen_coding_meta_model_extraction_properties(v.extraction_properties()));
+    combine(seed, v.extraction_properties());
 
     return seed;
 }

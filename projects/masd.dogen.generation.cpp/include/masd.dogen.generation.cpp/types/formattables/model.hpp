@@ -29,7 +29,6 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include <boost/optional.hpp>
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/extraction_properties.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/formattable.hpp"
@@ -42,13 +41,11 @@ namespace masd::dogen::generation::cpp::formattables {
 class model final {
 public:
     model(const model&) = default;
+    model(model&&) = default;
     ~model() = default;
 
 public:
     model();
-
-public:
-    model(model&& rhs);
 
 public:
     model(
@@ -60,7 +57,7 @@ public:
         const std::list<std::string>& odb_databases,
         const std::string& odb_sql_name_case,
         const std::list<std::string>& project_items,
-        const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& extraction_properties);
+        const masd::dogen::coding::meta_model::extraction_properties& extraction_properties);
 
 public:
     const masd::dogen::coding::meta_model::name& name() const;
@@ -101,10 +98,10 @@ public:
     void project_items(const std::list<std::string>& v);
     void project_items(const std::list<std::string>&& v);
 
-    const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& extraction_properties() const;
-    boost::optional<masd::dogen::coding::meta_model::extraction_properties>& extraction_properties();
-    void extraction_properties(const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& v);
-    void extraction_properties(const boost::optional<masd::dogen::coding::meta_model::extraction_properties>&& v);
+    const masd::dogen::coding::meta_model::extraction_properties& extraction_properties() const;
+    masd::dogen::coding::meta_model::extraction_properties& extraction_properties();
+    void extraction_properties(const masd::dogen::coding::meta_model::extraction_properties& v);
+    void extraction_properties(const masd::dogen::coding::meta_model::extraction_properties&& v);
 
 public:
     bool operator==(const model& rhs) const;
@@ -125,7 +122,7 @@ private:
     std::list<std::string> odb_databases_;
     std::string odb_sql_name_case_;
     std::list<std::string> project_items_;
-    boost::optional<masd::dogen::coding::meta_model::extraction_properties> extraction_properties_;
+    masd::dogen::coding::meta_model::extraction_properties extraction_properties_;
 };
 
 }

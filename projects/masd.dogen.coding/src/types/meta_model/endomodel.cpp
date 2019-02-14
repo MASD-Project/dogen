@@ -144,7 +144,7 @@ endomodel::endomodel(
     const masd::dogen::coding::meta_model::languages input_language,
     const std::list<masd::dogen::coding::meta_model::languages>& output_languages,
     const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties,
-    const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& extraction_properties)
+    const masd::dogen::coding::meta_model::extraction_properties& extraction_properties)
     : name_(name),
       meta_name_(meta_name),
       origin_type_(origin_type),
@@ -469,19 +469,19 @@ void endomodel::orm_properties(const boost::optional<masd::dogen::coding::meta_m
     orm_properties_ = std::move(v);
 }
 
-const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& endomodel::extraction_properties() const {
+const masd::dogen::coding::meta_model::extraction_properties& endomodel::extraction_properties() const {
     return extraction_properties_;
 }
 
-boost::optional<masd::dogen::coding::meta_model::extraction_properties>& endomodel::extraction_properties() {
+masd::dogen::coding::meta_model::extraction_properties& endomodel::extraction_properties() {
     return extraction_properties_;
 }
 
-void endomodel::extraction_properties(const boost::optional<masd::dogen::coding::meta_model::extraction_properties>& v) {
+void endomodel::extraction_properties(const masd::dogen::coding::meta_model::extraction_properties& v) {
     extraction_properties_ = v;
 }
 
-void endomodel::extraction_properties(const boost::optional<masd::dogen::coding::meta_model::extraction_properties>&& v) {
+void endomodel::extraction_properties(const masd::dogen::coding::meta_model::extraction_properties&& v) {
     extraction_properties_ = std::move(v);
 }
 
