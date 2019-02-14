@@ -81,7 +81,6 @@ if (DOGEN_KNITTER_EXECUTABLE)
     set(projects_dir "${CMAKE_SOURCE_DIR}/projects")
     set(common_arguments --output-directory ${projects_dir}/)
     set(common_arguments ${common_arguments} ${other_options})
-    set(common_arguments ${common_arguments} ${ignore_regexes})
 
     # uncomment to enable tracing.
     # set(common_arguments ${common_arguments} "--probe-all")
