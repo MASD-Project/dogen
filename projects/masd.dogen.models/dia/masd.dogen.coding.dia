@@ -68,7 +68,7 @@
         <dia:point val="-247.071,-113.143"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-247.121,-114.193;43.979,9.90714"/>
+        <dia:rectangle val="-247.121,-114.193;43.979,9.907"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1723,7 +1723,7 @@ for Java, etc.#</dia:string>
         <dia:point val="-186.624,-56.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-187.474,-56.45;-162.887,-44.9992"/>
+        <dia:rectangle val="-187.474,-56.45;-162.888,-44.9992"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1765,7 +1765,7 @@ for Java, etc.#</dia:string>
         <dia:point val="-166.749,-56.3281"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-167.599,-56.3781;-162.887,-44.95"/>
+        <dia:rectangle val="-167.599,-56.3781;-162.888,-44.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2691,7 +2691,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="-192.429,-24.9281"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-229.284,-24.9781;-191.579,-16.021"/>
+        <dia:rectangle val="-229.283,-24.9781;-191.579,-16.021"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3963,7 +3963,7 @@ formatting.#</dia:string>
         <dia:point val="-195.816,-73.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-196.666,-73.45;-162.887,-44.95"/>
+        <dia:rectangle val="-196.666,-73.45;-162.888,-44.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4163,7 +4163,7 @@ formatting.#</dia:string>
         <dia:point val="-198.711,-55.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-199.561,-55.65;-162.887,-44.95"/>
+        <dia:rectangle val="-199.561,-55.65;-162.888,-44.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7162,7 +7162,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-213.071,-55.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-213.921,-55.65;-206.887,-44.9992"/>
+        <dia:rectangle val="-213.921,-55.65;-206.888,-44.9992"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7204,7 +7204,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-215.276,-67"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-216.126,-67.05;-206.887,-44.95"/>
+        <dia:rectangle val="-216.126,-67.05;-206.888,-44.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7246,7 +7246,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-225.736,-55.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-226.586,-55.65;-206.887,-44.95"/>
+        <dia:rectangle val="-226.586,-55.65;-206.888,-44.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7288,7 +7288,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-236.314,-71"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-237.163,-71.05;-206.887,-44.9992"/>
+        <dia:rectangle val="-237.164,-71.05;-206.888,-44.9992"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7641,7 +7641,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-192.429,-24.9281"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-202.588,-24.9781;-191.579,-2.021"/>
+        <dia:rectangle val="-202.587,-24.9781;-191.579,-2.021"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8579,7 +8579,7 @@ model.#</dia:string>
         <dia:point val="-178.196,-72.671"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-179.046,-72.721;-162.887,-44.95"/>
+        <dia:rectangle val="-179.046,-72.721;-162.888,-44.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10067,7 +10067,7 @@ model.#</dia:string>
         <dia:point val="-229.233,-8.42389"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-229.983,-9.17389;-219.344,-1.271"/>
+        <dia:rectangle val="-229.983,-9.17391;-219.343,-1.271"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10826,7 +10826,7 @@ model.#</dia:string>
         <dia:point val="-172.585,-10.071"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-179.523,-10.821;-171.835,-1.32025"/>
+        <dia:rectangle val="-179.522,-10.821;-171.835,-1.32025"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -21197,7 +21197,7 @@ model.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="100.18,33"/>
         <dia:point val="100.18,29"/>
-        <dia:point val="90.9076,29"/>
+        <dia:point val="90.9075,29"/>
         <dia:point val="90.9075,24.0496"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -31941,7 +31941,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-76.8571,69.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-113.987,68.85;-76.1071,87.1928"/>
+        <dia:rectangle val="-113.988,68.85;-76.1071,87.1928"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -34863,19 +34863,19 @@ size limitations.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O256">
       <dia:attribute name="obj_pos">
-        <dia:point val="18,-77"/>
+        <dia:point val="16.0714,-76.6429"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="17.95,-77.05;40.11,-73.35"/>
+        <dia:rectangle val="16.0214,-76.6929;38.1814,-69.7929"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="18,-77"/>
+        <dia:point val="16.0714,-76.6429"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="22.059999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#text_model#</dia:string>
@@ -35000,6 +35000,100 @@ size limitations.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#force_write#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Always write files, even when there are no differences.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#delete_extra_files#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, deletes any files that are not known to Dogen .#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#ignore_files_matching_regex#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::vector&lt;std::string&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Files matching the supplied regular expressions will be ignored by Dogen.
+
+Only applicable when deleting extra files.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#cpp_headers_output_directory#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#boost::filesystem::path#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Directory in which to place C++ header files. Must be a relative path.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -38751,7 +38845,7 @@ model directory.#</dia:string>
         <dia:point val="-192.429,-30.9281"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-193.179,-39.728;-183.202,-30.1281"/>
+        <dia:rectangle val="-193.179,-39.728;-183.201,-30.1281"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -39572,13 +39666,13 @@ model directory.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O295">
       <dia:attribute name="obj_pos">
-        <dia:point val="14.071,-62.9281"/>
+        <dia:point val="14,-63"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.021,-62.9781;34.256,-57.6781"/>
+        <dia:rectangle val="13.95,-63.05;34.185,-57.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="14.071,-62.9281"/>
+        <dia:point val="14,-63"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.134999999999998"/>
@@ -39815,19 +39909,19 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="29.03,-73.3499"/>
+        <dia:point val="27.1014,-69.7925"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="24.0885,-74.0999;29.78,-62.1281"/>
+        <dia:rectangle val="24.0175,-70.5425;27.8514,-62.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="29.03,-73.3499"/>
-        <dia:point val="29.03,-68.9281"/>
-        <dia:point val="24.1385,-68.9281"/>
-        <dia:point val="24.1385,-62.9281"/>
+        <dia:point val="27.1014,-69.7925"/>
+        <dia:point val="27.1014,-66"/>
+        <dia:point val="24.0675,-66"/>
+        <dia:point val="24.0675,-63"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -39844,7 +39938,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O256" connection="12"/>
+        <dia:connection handle="0" to="O256" connection="20"/>
         <dia:connection handle="1" to="O295" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
@@ -42694,7 +42788,7 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:point val="-49.554,-74.2281"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-50.304,-74.9781;-46.95,-71.1"/>
+        <dia:rectangle val="-50.304,-75.0281;-46.95,-71.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -42766,7 +42860,7 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:point val="-23,-74.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-25.76,-75.05;-22.25,-71.1"/>
+        <dia:rectangle val="-25.76,-75.1;-22.25,-71.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -43015,7 +43109,7 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:point val="-122.902,66"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-126.828,58.55;-122.152,67.6"/>
+        <dia:rectangle val="-126.828,58.55;-122.152,66.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

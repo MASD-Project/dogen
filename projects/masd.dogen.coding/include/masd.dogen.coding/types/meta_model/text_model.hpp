@@ -26,6 +26,8 @@
 #endif
 
 #include <list>
+#include <string>
+#include <vector>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.coding/types/meta_model/artefact.hpp"
@@ -34,15 +36,23 @@ namespace masd::dogen::coding::meta_model {
 
 class text_model final {
 public:
-    text_model() = default;
     text_model(const text_model&) = default;
-    text_model(text_model&&) = default;
     ~text_model() = default;
+
+public:
+    text_model();
+
+public:
+    text_model(text_model&& rhs);
 
 public:
     text_model(
         const std::list<masd::dogen::coding::meta_model::artefact>& artefacts,
-        const std::list<boost::filesystem::path>& managed_directories);
+        const std::list<boost::filesystem::path>& managed_directories,
+        const bool force_write,
+        const bool delete_extra_files,
+        const std::vector<std::string>& ignore_files_matching_regex,
+        const boost::filesystem::path& cpp_headers_output_directory);
 
 public:
     const std::list<masd::dogen::coding::meta_model::artefact>& artefacts() const;
@@ -54,6 +64,44 @@ public:
     std::list<boost::filesystem::path>& managed_directories();
     void managed_directories(const std::list<boost::filesystem::path>& v);
     void managed_directories(const std::list<boost::filesystem::path>&& v);
+
+    /**
+     * @brief Always write files, even when there are no differences.
+     */
+    /**@{*/
+    bool force_write() const;
+    void force_write(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, deletes any files that are not known to Dogen .
+     */
+    /**@{*/
+    bool delete_extra_files() const;
+    void delete_extra_files(const bool v);
+    /**@}*/
+
+    /**
+     * @brief Files matching the supplied regular expressions will be ignored by Dogen.
+     *
+     * Only applicable when deleting extra files.
+     */
+    /**@{*/
+    const std::vector<std::string>& ignore_files_matching_regex() const;
+    std::vector<std::string>& ignore_files_matching_regex();
+    void ignore_files_matching_regex(const std::vector<std::string>& v);
+    void ignore_files_matching_regex(const std::vector<std::string>&& v);
+    /**@}*/
+
+    /**
+     * @brief Directory in which to place C++ header files. Must be a relative path.
+     */
+    /**@{*/
+    const boost::filesystem::path& cpp_headers_output_directory() const;
+    boost::filesystem::path& cpp_headers_output_directory();
+    void cpp_headers_output_directory(const boost::filesystem::path& v);
+    void cpp_headers_output_directory(const boost::filesystem::path&& v);
+    /**@}*/
 
 public:
     bool operator==(const text_model& rhs) const;
@@ -68,6 +116,10 @@ public:
 private:
     std::list<masd::dogen::coding::meta_model::artefact> artefacts_;
     std::list<boost::filesystem::path> managed_directories_;
+    bool force_write_;
+    bool delete_extra_files_;
+    std::vector<std::string> ignore_files_matching_regex_;
+    boost::filesystem::path cpp_headers_output_directory_;
 };
 
 }

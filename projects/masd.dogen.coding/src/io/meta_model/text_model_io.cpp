@@ -19,6 +19,8 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/artefact_io.hpp"
 #include "masd.dogen.coding/io/meta_model/text_model_io.hpp"
 
@@ -50,13 +52,45 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<boost::filesyst
 
 }
 
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace masd::dogen::coding::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const text_model& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::coding::meta_model::text_model\"" << ", "
       << "\"artefacts\": " << v.artefacts() << ", "
-      << "\"managed_directories\": " << v.managed_directories()
+      << "\"managed_directories\": " << v.managed_directories() << ", "
+      << "\"force_write\": " << v.force_write() << ", "
+      << "\"delete_extra_files\": " << v.delete_extra_files() << ", "
+      << "\"ignore_files_matching_regex\": " << v.ignore_files_matching_regex() << ", "
+      << "\"cpp_headers_output_directory\": " << "\"" << v.cpp_headers_output_directory().generic_string() << "\""
       << " }";
     return(s);
 }
