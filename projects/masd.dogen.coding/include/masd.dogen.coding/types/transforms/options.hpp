@@ -48,7 +48,6 @@ public:
         const boost::filesystem::path& log_file,
         const std::string& log_level,
         const boost::filesystem::path& target,
-        const bool delete_extra_files,
         const std::vector<std::string>& ignore_patterns,
         const boost::filesystem::path& output_directory_path,
         const boost::filesystem::path& cpp_headers_output_directory_path,
@@ -89,14 +88,6 @@ public:
     boost::filesystem::path& target();
     void target(const boost::filesystem::path& v);
     void target(const boost::filesystem::path&& v);
-    /**@}*/
-
-    /**
-     * @brief Delete any extra files found in managed directories.
-     */
-    /**@{*/
-    bool delete_extra_files() const;
-    void delete_extra_files(const bool v);
     /**@}*/
 
     /**
@@ -205,7 +196,6 @@ private:
     boost::filesystem::path log_file_;
     std::string log_level_;
     boost::filesystem::path target_;
-    bool delete_extra_files_;
     std::vector<std::string> ignore_patterns_;
     boost::filesystem::path output_directory_path_;
     boost::filesystem::path cpp_headers_output_directory_path_;

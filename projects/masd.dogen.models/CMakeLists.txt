@@ -80,9 +80,7 @@ if (DOGEN_KNITTER_EXECUTABLE)
     set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/poly-stitch.el)
     set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/*.py)
 
-
     set(other_options --log-level ${DOGEN_LOG_LEVEL})
-    set(other_options ${other_options} --delete-extra-files)
 
     # uncomment the next line if you require compatibility support
     # set(other_options ${other_options} --compatibility-mode)

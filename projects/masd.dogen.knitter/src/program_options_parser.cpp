@@ -57,7 +57,6 @@ const std::string target_arg("target");
 const std::string output_dir_arg("output-directory");
 const std::string cpp_headers_output_directory_arg(
     "cpp-headers-output-directory");
-const std::string delete_extra_files_arg("delete-extra-files");
 const std::string ignore_files_matching_regex_arg(
     "ignore-files-matching-regex");
 const std::string info_level("info");
@@ -130,8 +129,6 @@ program_options_parser::make_output_options_description() const {
     using boost::program_options::value;
     boost::program_options::options_description r("Output options");
     r.add_options()
-        ("delete-extra-files,d", "Delete any additional files found in "
-            "directories managed by Knitter.")
         ("ignore-files-matching-regex,i",
             value<std::vector<std::string> >(),
             "Ignore files matching regex, if they are on the deletion list")
@@ -249,8 +246,6 @@ make_knitting_options(const variables_map& vm) const {
     const auto model_name = r.target().stem().filename().string();
     const std::string log_file_name(log_file_prefix + model_name + ".log");
     r.log_file(log_path / log_file_name);
-
-    r.delete_extra_files(vm.count(delete_extra_files_arg) != 0);
 
     if (vm.count(ignore_files_matching_regex_arg)) {
         typedef std::vector<std::string> argument_type;

@@ -54,7 +54,7 @@ write(const context& ctx, const meta_model::text_model& tm) {
 
 void code_generation_chain::lint(const transforms::options& o,
     const meta_model::text_model& tm) {
-    if (!o.delete_extra_files())
+    if (!tm.delete_extra_files())
         return;
 
     const auto lint(helpers::file_linter::lint(o.ignore_patterns(), tm));

@@ -30,7 +30,6 @@ transforms::options mock_options_factory::make_knitting_options(
     transforms::options r;
     r.log_level(log_level);
     r.target(target);
-    r.delete_extra_files(true);
     r.output_directory_path(project_dir);
     return r;
 }

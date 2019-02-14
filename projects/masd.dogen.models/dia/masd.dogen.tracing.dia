@@ -99,6 +99,7 @@
 #DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=masd.dogen.tracing
 #DOGEN masd.injection.input_language=cpp
+#DOGEN masd.extraction.delete_extra_files=true
 #DOGEN masd.extraction.force_write=false
 #DOGEN masd.extraction.cpp.enabled=true
 #DOGEN masd.extraction.cpp.standard=c++-17

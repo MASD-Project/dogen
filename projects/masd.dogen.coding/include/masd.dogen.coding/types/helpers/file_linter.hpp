@@ -33,6 +33,9 @@
 
 namespace masd::dogen::coding::helpers {
 
+/**
+ * @brief Creates a list of all the lint on a model.
+ */
 class file_linter final {
 private:
     /**

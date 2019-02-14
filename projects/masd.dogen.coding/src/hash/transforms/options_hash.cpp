@@ -52,7 +52,6 @@ std::size_t options_hasher::hash(const options& v) {
     combine(seed, hash_boost_filesystem_path(v.log_file()));
     combine(seed, v.log_level());
     combine(seed, hash_boost_filesystem_path(v.target()));
-    combine(seed, v.delete_extra_files());
     combine(seed, hash_std_vector_std_string(v.ignore_patterns()));
     combine(seed, hash_boost_filesystem_path(v.output_directory_path()));
     combine(seed, hash_boost_filesystem_path(v.cpp_headers_output_directory_path()));

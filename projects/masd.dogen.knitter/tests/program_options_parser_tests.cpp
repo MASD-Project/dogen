@@ -55,8 +55,6 @@ const std::string target_value_arg("some_target");
 const std::string output_dir_arg("--output-directory");
 const std::string output_dir_value_arg("an output dir");
 
-const std::string delete_extra_files_arg("--delete-extra-files");
-
 class help_mock {
 public:
     explicit help_mock(bool& called) : called_(called) { }
@@ -322,18 +320,15 @@ BOOST_AUTO_TEST_CASE(not_supplying_output_options_results_in_expected_options) {
     const std::vector<std::string> o = { target_arg, target_value_arg };
     const auto ko(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
-    BOOST_CHECK(!ko.delete_extra_files());
 }
 
 BOOST_AUTO_TEST_CASE(supplying_output_options_results_in_expected_options) {
     SETUP_TEST_LOG_SOURCE("supplying_output_options_results_in_expected_options");
     const std::vector<std::string> o = {
-        target_arg, target_value_arg,
-        delete_extra_files_arg
+        target_arg, target_value_arg
     };
     const auto ko(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
-    BOOST_CHECK(ko.delete_extra_files());
 }
 
 BOOST_AUTO_TEST_CASE(supplying_log_options_results_in_options_with_expected_log_options) {
