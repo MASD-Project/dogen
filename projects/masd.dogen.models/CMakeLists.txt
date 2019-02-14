@@ -73,13 +73,6 @@ if (DOGEN_TAILOR_EXECUTABLE)
 endif()
 
 if (DOGEN_KNITTER_EXECUTABLE)
-    set(ig_flg "--ignore-files-matching-regex")
-    set(ignore_regexes ${ig_flg} .*/CMakeLists.txt)
-    set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/test/.*)
-    set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/tests/.*)
-    set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/poly-stitch.el)
-    set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/*.py)
-
     set(other_options --log-level ${DOGEN_LOG_LEVEL})
 
     # uncomment the next line if you require compatibility support
@@ -96,9 +89,10 @@ if (DOGEN_KNITTER_EXECUTABLE)
 
     # main input models
     set(prefix "masd.dogen")
-    set(models ${prefix})
-    set(models ${models} ${prefix}.annotations)
-    set(models ${models} ${prefix}.cli)
+    #set(models ${prefix})
+    #set(models ${models} ${prefix}.annotations)
+    set(models ${prefix}.annotations)
+    #set(models ${models} ${prefix}.cli)
     set(models ${models} ${prefix}.dia)
     set(models ${models} ${prefix}.extraction)
     set(models ${models} ${prefix}.options)
@@ -111,7 +105,7 @@ if (DOGEN_KNITTER_EXECUTABLE)
     set(models ${models} ${prefix}.generation.csharp)
     set(models ${models} ${prefix}.coding)
     set(models ${models} ${prefix}.templating)
-    set(models ${models} ${prefix}.orchestration)
+    #set(models ${models} ${prefix}.orchestration)
     set(models ${models} ${prefix}.utility)
 endif()
 

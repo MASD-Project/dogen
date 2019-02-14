@@ -99,6 +99,9 @@
 #DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=masd.dogen.tracing
 #DOGEN masd.injection.input_language=cpp
+#DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
+#DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
+#DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
 #DOGEN masd.extraction.delete_extra_files=true
 #DOGEN masd.extraction.force_write=false
 #DOGEN masd.extraction.cpp.enabled=true
