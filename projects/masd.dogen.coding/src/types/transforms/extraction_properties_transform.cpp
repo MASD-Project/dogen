@@ -84,6 +84,10 @@ std::vector<std::string> extraction_properties_transform::
 obtain_ignore_files_matching_regex(const type_group& tg,
     const annotations::annotation& ra) {
     const annotations::entry_selector s(ra);
+
+    if (!s.has_entry(tg.ignore_files_matching_regex))
+        return std::vector<std::string>();
+
     const auto c(s.get_text_collection_content(tg.ignore_files_matching_regex));
     std::vector<std::string> r;
     r.reserve(c.size());

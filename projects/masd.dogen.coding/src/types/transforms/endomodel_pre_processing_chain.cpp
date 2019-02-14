@@ -30,6 +30,7 @@
 #include "masd.dogen.coding/types/transforms/type_params_transform.hpp"
 #include "masd.dogen.coding/types/transforms/parsing_transform.hpp"
 #include "masd.dogen.coding/types/transforms/primitives_transform.hpp"
+#include "masd.dogen.coding/types/transforms/extraction_properties_transform.hpp"
 #include "masd.dogen.coding/types/transforms/endomodel_pre_processing_chain.hpp"
 
 namespace {
@@ -84,6 +85,7 @@ apply_second_set_of_transforms(const context& ctx, meta_model::endomodel& em) {
     origin_transform::transform(ctx, em);
     type_params_transform::transform(ctx, em);
     parsing_transform::transform(ctx, em);
+    extraction_properties_transform::transform(ctx, em);
 
     /*
      * Primitive expansion requires parsing expansion to populate the
