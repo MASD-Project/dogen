@@ -22,6 +22,8 @@
 #include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/string.hpp>
+#include <boost/serialization/vector.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
@@ -56,6 +58,10 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("artefacts", v.artefacts_);
     ar << make_nvp("managed_directories", v.managed_directories_);
+    ar << make_nvp("force_write", v.force_write_);
+    ar << make_nvp("delete_extra_files", v.delete_extra_files_);
+    ar << make_nvp("ignore_files_matching_regex", v.ignore_files_matching_regex_);
+    ar << make_nvp("cpp_headers_output_directory", v.cpp_headers_output_directory_);
 }
 
 template<typename Archive>
@@ -64,6 +70,10 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("artefacts", v.artefacts_);
     ar >> make_nvp("managed_directories", v.managed_directories_);
+    ar >> make_nvp("force_write", v.force_write_);
+    ar >> make_nvp("delete_extra_files", v.delete_extra_files_);
+    ar >> make_nvp("ignore_files_matching_regex", v.ignore_files_matching_regex_);
+    ar >> make_nvp("cpp_headers_output_directory", v.cpp_headers_output_directory_);
 }
 
 } }

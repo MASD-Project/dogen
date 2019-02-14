@@ -51,6 +51,14 @@ inline std::size_t hash_std_list_boost_filesystem_path(const std::list<boost::fi
     return seed;
 }
 
+inline std::size_t hash_std_vector_std_string(const std::vector<std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
 }
 
 namespace masd::dogen::extraction::meta_model {
@@ -60,6 +68,10 @@ std::size_t model_hasher::hash(const model& v) {
 
     combine(seed, hash_std_list_masd_dogen_extraction_meta_model_artefact(v.artefacts()));
     combine(seed, hash_std_list_boost_filesystem_path(v.managed_directories()));
+    combine(seed, v.force_write());
+    combine(seed, v.delete_extra_files());
+    combine(seed, hash_std_vector_std_string(v.ignore_files_matching_regex()));
+    combine(seed, hash_boost_filesystem_path(v.cpp_headers_output_directory()));
 
     return seed;
 }
