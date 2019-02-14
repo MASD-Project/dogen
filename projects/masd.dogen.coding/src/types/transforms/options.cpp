@@ -24,7 +24,6 @@ namespace masd::dogen::coding::transforms {
 
 options::options()
     : delete_extra_files_(static_cast<bool>(0)),
-      force_write_(static_cast<bool>(0)),
       compatibility_mode_(static_cast<bool>(0)),
       probe_stats_(static_cast<bool>(0)),
       probe_stats_disable_guids_(static_cast<bool>(0)),
@@ -37,7 +36,6 @@ options::options(options&& rhs)
       log_level_(std::move(rhs.log_level_)),
       target_(std::move(rhs.target_)),
       delete_extra_files_(std::move(rhs.delete_extra_files_)),
-      force_write_(std::move(rhs.force_write_)),
       ignore_patterns_(std::move(rhs.ignore_patterns_)),
       output_directory_path_(std::move(rhs.output_directory_path_)),
       cpp_headers_output_directory_path_(std::move(rhs.cpp_headers_output_directory_path_)),
@@ -54,7 +52,6 @@ options::options(
     const std::string& log_level,
     const boost::filesystem::path& target,
     const bool delete_extra_files,
-    const bool force_write,
     const std::vector<std::string>& ignore_patterns,
     const boost::filesystem::path& output_directory_path,
     const boost::filesystem::path& cpp_headers_output_directory_path,
@@ -69,7 +66,6 @@ options::options(
       log_level_(log_level),
       target_(target),
       delete_extra_files_(delete_extra_files),
-      force_write_(force_write),
       ignore_patterns_(ignore_patterns),
       output_directory_path_(output_directory_path),
       cpp_headers_output_directory_path_(cpp_headers_output_directory_path),
@@ -87,7 +83,6 @@ void options::swap(options& other) noexcept {
     swap(log_level_, other.log_level_);
     swap(target_, other.target_);
     swap(delete_extra_files_, other.delete_extra_files_);
-    swap(force_write_, other.force_write_);
     swap(ignore_patterns_, other.ignore_patterns_);
     swap(output_directory_path_, other.output_directory_path_);
     swap(cpp_headers_output_directory_path_, other.cpp_headers_output_directory_path_);
@@ -105,7 +100,6 @@ bool options::operator==(const options& rhs) const {
         log_level_ == rhs.log_level_ &&
         target_ == rhs.target_ &&
         delete_extra_files_ == rhs.delete_extra_files_ &&
-        force_write_ == rhs.force_write_ &&
         ignore_patterns_ == rhs.ignore_patterns_ &&
         output_directory_path_ == rhs.output_directory_path_ &&
         cpp_headers_output_directory_path_ == rhs.cpp_headers_output_directory_path_ &&
@@ -178,14 +172,6 @@ bool options::delete_extra_files() const {
 
 void options::delete_extra_files(const bool v) {
     delete_extra_files_ = v;
-}
-
-bool options::force_write() const {
-    return force_write_;
-}
-
-void options::force_write(const bool v) {
-    force_write_ = v;
 }
 
 const std::vector<std::string>& options::ignore_patterns() const {

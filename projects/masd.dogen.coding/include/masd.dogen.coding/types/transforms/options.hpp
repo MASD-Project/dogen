@@ -49,7 +49,6 @@ public:
         const std::string& log_level,
         const boost::filesystem::path& target,
         const bool delete_extra_files,
-        const bool force_write,
         const std::vector<std::string>& ignore_patterns,
         const boost::filesystem::path& output_directory_path,
         const boost::filesystem::path& cpp_headers_output_directory_path,
@@ -98,14 +97,6 @@ public:
     /**@{*/
     bool delete_extra_files() const;
     void delete_extra_files(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Always generate files even if there are no differences with existing file.
-     */
-    /**@{*/
-    bool force_write() const;
-    void force_write(const bool v);
     /**@}*/
 
     /**
@@ -215,7 +206,6 @@ private:
     std::string log_level_;
     boost::filesystem::path target_;
     bool delete_extra_files_;
-    bool force_write_;
     std::vector<std::string> ignore_patterns_;
     boost::filesystem::path output_directory_path_;
     boost::filesystem::path cpp_headers_output_directory_path_;

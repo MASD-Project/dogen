@@ -60,7 +60,6 @@ const std::string cpp_headers_output_directory_arg(
 const std::string delete_extra_files_arg("delete-extra-files");
 const std::string ignore_files_matching_regex_arg(
     "ignore-files-matching-regex");
-const std::string force_write_arg("force-write");
 const std::string info_level("info");
 const std::string default_log_directory("log");
 
@@ -136,8 +135,6 @@ program_options_parser::make_output_options_description() const {
         ("ignore-files-matching-regex,i",
             value<std::vector<std::string> >(),
             "Ignore files matching regex, if they are on the deletion list")
-        ("force-write,f", "Always write files, even when there are "
-            "no differences.")
         ("output-directory,o",
             value<std::string>(),
             "Output directory for the generated code. "
@@ -254,7 +251,6 @@ make_knitting_options(const variables_map& vm) const {
     r.log_file(log_path / log_file_name);
 
     r.delete_extra_files(vm.count(delete_extra_files_arg) != 0);
-    r.force_write(vm.count(force_write_arg) != 0);
 
     if (vm.count(ignore_files_matching_regex_arg)) {
         typedef std::vector<std::string> argument_type;

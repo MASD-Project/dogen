@@ -60,7 +60,6 @@ std::ostream& operator<<(std::ostream& s, const options& v) {
       << "\"log_level\": " << "\"" << tidy_up_string(v.log_level()) << "\"" << ", "
       << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
       << "\"delete_extra_files\": " << v.delete_extra_files() << ", "
-      << "\"force_write\": " << v.force_write() << ", "
       << "\"ignore_patterns\": " << v.ignore_patterns() << ", "
       << "\"output_directory_path\": " << "\"" << v.output_directory_path().generic_string() << "\"" << ", "
       << "\"cpp_headers_output_directory_path\": " << "\"" << v.cpp_headers_output_directory_path().generic_string() << "\"" << ", "
