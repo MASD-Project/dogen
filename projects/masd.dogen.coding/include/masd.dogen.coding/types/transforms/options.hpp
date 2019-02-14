@@ -26,7 +26,6 @@
 #endif
 
 #include <string>
-#include <vector>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 
@@ -48,7 +47,6 @@ public:
         const boost::filesystem::path& log_file,
         const std::string& log_level,
         const boost::filesystem::path& target,
-        const std::vector<std::string>& ignore_patterns,
         const boost::filesystem::path& output_directory_path,
         const boost::filesystem::path& cpp_headers_output_directory_path,
         const bool compatibility_mode,
@@ -88,16 +86,6 @@ public:
     boost::filesystem::path& target();
     void target(const boost::filesystem::path& v);
     void target(const boost::filesystem::path&& v);
-    /**@}*/
-
-    /**
-     * @brief List of regular expressions to filter out files to ignore.
-     */
-    /**@{*/
-    const std::vector<std::string>& ignore_patterns() const;
-    std::vector<std::string>& ignore_patterns();
-    void ignore_patterns(const std::vector<std::string>& v);
-    void ignore_patterns(const std::vector<std::string>&& v);
     /**@}*/
 
     /**
@@ -196,7 +184,6 @@ private:
     boost::filesystem::path log_file_;
     std::string log_level_;
     boost::filesystem::path target_;
-    std::vector<std::string> ignore_patterns_;
     boost::filesystem::path output_directory_path_;
     boost::filesystem::path cpp_headers_output_directory_path_;
     bool compatibility_mode_;

@@ -34,14 +34,6 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
     return seed;
 }
 
-inline std::size_t hash_std_vector_std_string(const std::vector<std::string>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
 }
 
 namespace masd::dogen::coding::transforms {
@@ -52,7 +44,6 @@ std::size_t options_hasher::hash(const options& v) {
     combine(seed, hash_boost_filesystem_path(v.log_file()));
     combine(seed, v.log_level());
     combine(seed, hash_boost_filesystem_path(v.target()));
-    combine(seed, hash_std_vector_std_string(v.ignore_patterns()));
     combine(seed, hash_boost_filesystem_path(v.output_directory_path()));
     combine(seed, hash_boost_filesystem_path(v.cpp_headers_output_directory_path()));
     combine(seed, v.compatibility_mode());

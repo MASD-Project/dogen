@@ -52,12 +52,17 @@ write(const context& ctx, const meta_model::text_model& tm) {
         w.write(tm.artefacts());
 }
 
-void code_generation_chain::lint(const transforms::options& o,
-    const meta_model::text_model& tm) {
+void code_generation_chain::lint(const meta_model::text_model& tm) {
+    /*
+     * If we're not going to delete the files, don't bother linting..
+     */
     if (!tm.delete_extra_files())
         return;
 
-    const auto lint(helpers::file_linter::lint(o.ignore_patterns(), tm));
+    const auto lint(helpers::file_linter::lint(tm));
+    if (lint.empty())
+        return;
+
     utility::filesystem::remove(lint);
 }
 
@@ -82,7 +87,7 @@ void code_generation_chain::transform(const context& ctx) {
     /*
      * Perform any housekeeping if need be.
      */
-    lint(o, tm);
+    lint(tm);
 
     BOOST_LOG_SEV(lg, info) << "Finished code generation.";
 }

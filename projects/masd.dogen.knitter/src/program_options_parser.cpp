@@ -57,8 +57,6 @@ const std::string target_arg("target");
 const std::string output_dir_arg("output-directory");
 const std::string cpp_headers_output_directory_arg(
     "cpp-headers-output-directory");
-const std::string ignore_files_matching_regex_arg(
-    "ignore-files-matching-regex");
 const std::string info_level("info");
 const std::string default_log_directory("log");
 
@@ -129,9 +127,6 @@ program_options_parser::make_output_options_description() const {
     using boost::program_options::value;
     boost::program_options::options_description r("Output options");
     r.add_options()
-        ("ignore-files-matching-regex,i",
-            value<std::vector<std::string> >(),
-            "Ignore files matching regex, if they are on the deletion list")
         ("output-directory,o",
             value<std::string>(),
             "Output directory for the generated code. "
@@ -246,12 +241,6 @@ make_knitting_options(const variables_map& vm) const {
     const auto model_name = r.target().stem().filename().string();
     const std::string log_file_name(log_file_prefix + model_name + ".log");
     r.log_file(log_path / log_file_name);
-
-    if (vm.count(ignore_files_matching_regex_arg)) {
-        typedef std::vector<std::string> argument_type;
-        const auto p(vm[ignore_files_matching_regex_arg].as<argument_type>());
-        r.ignore_patterns(p);
-    }
 
     if (!vm.count(output_dir_arg))
         r.output_directory_path(boost::filesystem::current_path());

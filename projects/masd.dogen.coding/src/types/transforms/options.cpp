@@ -34,7 +34,6 @@ options::options(options&& rhs)
     : log_file_(std::move(rhs.log_file_)),
       log_level_(std::move(rhs.log_level_)),
       target_(std::move(rhs.target_)),
-      ignore_patterns_(std::move(rhs.ignore_patterns_)),
       output_directory_path_(std::move(rhs.output_directory_path_)),
       cpp_headers_output_directory_path_(std::move(rhs.cpp_headers_output_directory_path_)),
       compatibility_mode_(std::move(rhs.compatibility_mode_)),
@@ -49,7 +48,6 @@ options::options(
     const boost::filesystem::path& log_file,
     const std::string& log_level,
     const boost::filesystem::path& target,
-    const std::vector<std::string>& ignore_patterns,
     const boost::filesystem::path& output_directory_path,
     const boost::filesystem::path& cpp_headers_output_directory_path,
     const bool compatibility_mode,
@@ -62,7 +60,6 @@ options::options(
     : log_file_(log_file),
       log_level_(log_level),
       target_(target),
-      ignore_patterns_(ignore_patterns),
       output_directory_path_(output_directory_path),
       cpp_headers_output_directory_path_(cpp_headers_output_directory_path),
       compatibility_mode_(compatibility_mode),
@@ -78,7 +75,6 @@ void options::swap(options& other) noexcept {
     swap(log_file_, other.log_file_);
     swap(log_level_, other.log_level_);
     swap(target_, other.target_);
-    swap(ignore_patterns_, other.ignore_patterns_);
     swap(output_directory_path_, other.output_directory_path_);
     swap(cpp_headers_output_directory_path_, other.cpp_headers_output_directory_path_);
     swap(compatibility_mode_, other.compatibility_mode_);
@@ -94,7 +90,6 @@ bool options::operator==(const options& rhs) const {
     return log_file_ == rhs.log_file_ &&
         log_level_ == rhs.log_level_ &&
         target_ == rhs.target_ &&
-        ignore_patterns_ == rhs.ignore_patterns_ &&
         output_directory_path_ == rhs.output_directory_path_ &&
         cpp_headers_output_directory_path_ == rhs.cpp_headers_output_directory_path_ &&
         compatibility_mode_ == rhs.compatibility_mode_ &&
@@ -158,22 +153,6 @@ void options::target(const boost::filesystem::path& v) {
 
 void options::target(const boost::filesystem::path&& v) {
     target_ = std::move(v);
-}
-
-const std::vector<std::string>& options::ignore_patterns() const {
-    return ignore_patterns_;
-}
-
-std::vector<std::string>& options::ignore_patterns() {
-    return ignore_patterns_;
-}
-
-void options::ignore_patterns(const std::vector<std::string>& v) {
-    ignore_patterns_ = v;
-}
-
-void options::ignore_patterns(const std::vector<std::string>&& v) {
-    ignore_patterns_ = std::move(v);
 }
 
 const boost::filesystem::path& options::output_directory_path() const {

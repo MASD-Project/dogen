@@ -51,8 +51,10 @@ to_artefact(const boost::filesystem::path& p) {
 }
 
 const masd::dogen::coding::meta_model::text_model
-create_model(const std::list<boost::filesystem::path>& files) {
+create_model(const std::list<boost::filesystem::path>& files,
+    const std::vector<std::string>& ignored_files) {
     masd::dogen::coding::meta_model::text_model r;
+    r.ignore_files_matching_regex(ignored_files);
     r.managed_directories(managed_directories());
     for(const auto& f : files)
         r.artefacts().push_back(to_artefact(f));
@@ -74,10 +76,9 @@ BOOST_AUTO_TEST_CASE(when_all_files_are_present_file_linter_does_not_find_extra_
         tds_test_good::expected_test_serializer_2_xmltst(),
         tds_test_good::expected_empty_file_txt()
     };
-    const auto tm(create_model(files));
-
+    const auto tm(create_model(files, ignored_files));
     using masd::dogen::coding::helpers::file_linter;
-    const auto result(file_linter::lint(ignored_files, tm));
+    const auto result(file_linter::lint(tm));
     BOOST_CHECK(result.empty());
 }
 
@@ -89,12 +90,11 @@ BOOST_AUTO_TEST_CASE(when_extra_files_are_present_file_linter_finds_the_extra_fi
         tds_test_good::expected_test_serializer_2_xmltst(),
         tds_test_good::expected_empty_file_txt()
     };
-    const auto tm(create_model(files));
-
+    const auto tm(create_model(files, ignored_files));
     using masd::dogen::coding::helpers::file_linter;
-    const auto result(file_linter::lint(ignored_files, tm));
+    const auto result(file_linter::lint(tm));
 
-    BOOST_CHECK(result.size() == 2);
+    BOOST_REQUIRE(result.size() == 2);
     BOOST_CHECK(
         (result.front() == tds_test_good::expected_file_1_txt() &&
             result.back() == tds_test_good::expected_file_2_txt()) ||
@@ -110,11 +110,11 @@ BOOST_AUTO_TEST_CASE(ignored_files_are_not_deleted) {
         tds_test_good::expected_test_serializer_2_xmltst(),
         tds_test_good::expected_empty_file_txt()
     };
-    const auto tm(create_model(files));
 
     const std::vector<std::string> ignores({".*/file_1.*"});
+    const auto tm(create_model(files, ignores));
     using masd::dogen::coding::helpers::file_linter;
-    const auto result(file_linter::lint(ignores, tm));
+    const auto result(file_linter::lint(tm));
 
     BOOST_CHECK([&]{
             for (const auto& f : result)

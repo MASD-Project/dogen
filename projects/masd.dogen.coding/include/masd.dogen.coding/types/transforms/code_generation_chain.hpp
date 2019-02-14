@@ -64,7 +64,7 @@ private:
     /**
      * @brief Handles any extraneous files which should be removed.
      */
-    static void lint(const options& o, const meta_model::text_model& tm);
+    static void lint(const meta_model::text_model& tm);
 
 public:
     static void transform(const context& ctx);

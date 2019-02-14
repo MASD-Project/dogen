@@ -112,8 +112,7 @@ file_linter::filter(const std::vector<std::string>& patterns,
 }
 
 std::list<boost::filesystem::path> file_linter::
-lint(const std::vector<std::string>& patterns,
-    const meta_model::text_model& tm) {
+lint(const meta_model::text_model& tm) {
     BOOST_LOG_SEV(lg, info) << "Started linting text model.";
 
     /*
@@ -138,7 +137,7 @@ lint(const std::vector<std::string>& patterns,
      * supplied regular expressions. Whatever is left is the model's
      * lint - candidates for removal.
      */
-    const auto r(filter(patterns, delta));
+    const auto r(filter(tm.ignore_files_matching_regex(), delta));
 
     BOOST_LOG_SEV(lg, info) << "Finished linting text model. Lint: " << r;
     return r;

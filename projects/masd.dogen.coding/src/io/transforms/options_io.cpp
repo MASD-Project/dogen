@@ -31,20 +31,6 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace masd::dogen::coding::transforms {
 
 std::ostream& operator<<(std::ostream& s, const options& v) {
@@ -59,7 +45,6 @@ std::ostream& operator<<(std::ostream& s, const options& v) {
       << "\"log_file\": " << "\"" << v.log_file().generic_string() << "\"" << ", "
       << "\"log_level\": " << "\"" << tidy_up_string(v.log_level()) << "\"" << ", "
       << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
-      << "\"ignore_patterns\": " << v.ignore_patterns() << ", "
       << "\"output_directory_path\": " << "\"" << v.output_directory_path().generic_string() << "\"" << ", "
       << "\"cpp_headers_output_directory_path\": " << "\"" << v.cpp_headers_output_directory_path().generic_string() << "\"" << ", "
       << "\"compatibility_mode\": " << v.compatibility_mode() << ", "
