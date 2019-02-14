@@ -137,7 +137,7 @@ void workflow::
 write_artefacts(const std::list<coding::meta_model::artefact>& artefacts) const {
     BOOST_LOG_SEV(lg, debug) << "About to write. Artefacts: " << artefacts;
 
-    coding::helpers::filesystem_writer w(false/*force_write*/);
+    coding::helpers::filesystem_writer w;
     w.write(artefacts);
 
     BOOST_LOG_SEV(lg, debug) << "Finished writing.";

@@ -13,21 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-14 Thu 15:32]
+#+CAPTION: Clock summary at [2019-02-14 Thu 16:24]
 | <75>                                                 |          |        |        |       |
 | Headline                                             | Time     |        |        |     % |
 |------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                         | *180:23* |        |        | 100.0 |
+| *Total time*                                         | *181:14* |        |        | 100.0 |
 |------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                              | 180:23   |        |        | 100.0 |
-| Active                                               |          | 180:23 |        | 100.0 |
+| Stories                                              | 181:14   |        |        | 100.0 |
+| Active                                               |          | 181:14 |        | 100.0 |
 | Edit release notes for previous sprint               |          |        |   2:03 |   1.1 |
 | Sprint and product backlog grooming                  |          |        |   4:43 |   2.6 |
-| Work on MASD theory                                  |          |        | 113:38 |  63.0 |
+| Work on MASD theory                                  |          |        | 113:38 |  62.7 |
 | Rename models to fit MASD architecture               |          |        |   4:56 |   2.7 |
 | Read up on framework and API design                  |          |        |   0:57 |   0.5 |
 | Analyse the state of the mess of refactors           |          |        |   6:27 |   3.6 |
-| Create the =orchestration= model                     |          |        |   4:15 |   2.4 |
+| Create the =orchestration= model                     |          |        |   4:15 |   2.3 |
 | Update vcpkg across all operative systems            |          |        |   4:35 |   2.5 |
 | Update C# reference models to latest dogen           |          |        |   0:42 |   0.4 |
 | Convert the utility model into a regular dogen model |          |        |   7:27 |   4.1 |
@@ -35,7 +35,7 @@
 | Great meta-data rename                               |          |        |   4:54 |   2.7 |
 | Create a single binary for all of dogen              |          |        |  16:27 |   9.1 |
 | Dogen's vcpkg export for OSX was created from master |          |        |   0:46 |   0.4 |
-| Move generation properties into meta-data            |          |        |   6:00 |   3.3 |
+| Move generation properties into meta-data            |          |        |   6:51 |   3.8 |
 | Fix clang-cl warnings                                |          |        |   0:31 |   0.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -677,6 +677,7 @@ Problems:
 
 *** STARTED Move generation properties into meta-data                 :story:
     :LOGBOOK:
+    CLOCK: [2019-02-14 Thu 15:33]--[2019-02-14 Thu 16:24] =>  0:51
     CLOCK: [2019-02-14 Thu 14:40]--[2019-02-14 Thu 15:32] =>  0:52
     CLOCK: [2019-02-14 Thu 14:01]--[2019-02-14 Thu 14:39] =>  0:38
     CLOCK: [2019-02-14 Thu 09:54]--[2019-02-14 Thu 11:46] =>  1:52
@@ -711,6 +712,24 @@ Notes:
 
 - opened issue: [[https://github.com/Microsoft/vcpkg/issues/5336][Building with clang-cl on windows generates warnings
   from vcpkg-installed libraries]]
+
+*** Move text model into extraction model                             :story:
+
+We started this work but stopped half-way. This is required in order
+to move to the new pipeline orchestration.
+
+Tasks:
+
+- copy the current state of all types into extraction as they have
+  moved on.
+- make coding refer to extraction to start off with. Eventually the
+  transforms can be moved over to =generation.extraction=.
+
+*** Stitch does not have a force write flag                           :story:
+
+At present the stitch workflow is hardcoded not to force write. The
+correct solution is to allow the template to have a force write
+parameter.
 
 *** Contents change check is done twice                               :story:
 

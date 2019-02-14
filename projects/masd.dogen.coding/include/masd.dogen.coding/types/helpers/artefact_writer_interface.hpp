@@ -44,6 +44,13 @@ public:
      */
     virtual void
     write(const std::list<meta_model::artefact>& artefacts) const = 0;
+
+    /**
+     * @brief Write the artefacts, ignoring any clever logic to avoid
+     * unnecessary writes.
+     */
+    virtual void
+    force_write(const std::list<meta_model::artefact>& artefacts) const = 0;
 };
 
 }

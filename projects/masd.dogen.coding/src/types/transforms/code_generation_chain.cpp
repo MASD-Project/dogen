@@ -46,7 +46,10 @@ write(const context& ctx, const meta_model::text_model& tm) {
     }
 
     const auto& w(ctx.artefact_writer());
-    w.write(tm.artefacts());
+    if (tm.force_write())
+        w.force_write(tm.artefacts());
+    else
+        w.write(tm.artefacts());
 }
 
 void code_generation_chain::lint(const transforms::options& o,

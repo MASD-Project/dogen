@@ -133,7 +133,7 @@ context context_factory::make(const options& o, const bool enable_validation) {
         o.probe_directory());
 
     using helpers::filesystem_writer;
-    auto writer(boost::make_shared<filesystem_writer>(o.force_write()));
+    auto writer(boost::make_shared<filesystem_writer>());
 
     const context r(data_dirs, o, alrp, atrp, msrp, frp, tracer,
         ibsp, writer);
