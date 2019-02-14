@@ -1174,7 +1174,7 @@ Aggregates a group of logically related elements into a unit.#</dia:string>
         <dia:string>#Stateful#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Represents a structural template for yarn objects.#</dia:string>
+        <dia:string>#Represents a structural template for masd objects.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2754,8 +2754,8 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:string>#Representation of the class notion in the OOP paradigm.
 
 The @e object is equivalent to a meta-class, but we decided against this
-name because all elements should also have the prefix meta - after all, yarn is a
-meta-model. Since the word class cannot be used in c++ to name types, we
+name because all elements should also have the prefix meta - after all, coding
+is ameta-model. Since the word class cannot be used in c++ to name types, we
 decided instead to use the word object.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -5165,7 +5165,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:string>#Nameable, MetaNameable, DeterminableOrigin#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Intermediate representation of a yarn model.#</dia:string>
+        <dia:string>#Intermediate representation of a masd model.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -8554,7 +8554,7 @@ model.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Stereotypes that are not part of the yarn UML profile. These are user defined.#</dia:string>
+            <dia:string>#Stereotypes that are not part of the masd UML profile. These are user defined.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -40865,7 +40865,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Lists all stereotypes defined in the yarn UML profile.#</dia:string>
+        <dia:string>#Lists all stereotypes defined in the masd UML profile.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

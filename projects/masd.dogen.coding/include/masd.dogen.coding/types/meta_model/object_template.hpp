@@ -37,7 +37,7 @@
 namespace masd::dogen::coding::meta_model {
 
 /**
- * @brief Represents a structural template for coding objects.
+ * @brief Represents a structural template for masd objects.
  */
 class object_template final : public masd::dogen::coding::meta_model::element {
 public:

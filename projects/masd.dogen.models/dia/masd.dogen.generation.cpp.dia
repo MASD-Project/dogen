@@ -15187,7 +15187,7 @@ an enumeration, false otherwise.#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Houses the masd.extraction.cpp extensions to yarn.
+            <dia:string>#Houses the masd.extraction.cpp extensions to masd.
 
 #DOGEN masd.injection.dia.comment=true#</dia:string>
           </dia:attribute>

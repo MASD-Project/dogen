@@ -170,7 +170,7 @@
       "parents": [
         "meta_model::element"
       ],
-      "documentation": "Represents a structural template for yarn objects.\n",
+      "documentation": "Represents a structural template for masd objects.\n",
       "stereotypes": [
         "Stateful"
       ],
@@ -283,7 +283,7 @@
         {
           "name": "dynamic_stereotypes",
           "type": "std::list<std::string>",
-          "documentation": "Stereotypes that are not part of the yarn UML profile. These are user defined.\n"
+          "documentation": "Stereotypes that are not part of the masd UML profile. These are user defined.\n"
         }
       ]
     },
@@ -405,7 +405,7 @@
       "parents": [
         "meta_model::element"
       ],
-      "documentation": "Representation of the class notion in the OOP paradigm.\n\nThe @e object is equivalent to a meta-class, but we decided against this\nname because all elements should also have the prefix meta - after all, yarn is a\nmeta-model. Since the word class cannot be used in c++ to name types, we\ndecided instead to use the word object.\n",
+      "documentation": "Representation of the class notion in the OOP paradigm.\n\nThe @e object is equivalent to a meta-class, but we decided against this\nname because all elements should also have the prefix meta - after all, masd is a\nmeta-model. Since the word class cannot be used in c++ to name types, we\ndecided instead to use the word object.\n",
       "stereotypes": [
         "Stateful",
         "Relatable",
@@ -636,7 +636,7 @@
     },
     {
       "name": "meta_model::endomodel",
-      "documentation": "Intermediate representation of a yarn model.\n",
+      "documentation": "Intermediate representation of a masd model.\n",
       "stereotypes": [
         "Nameable",
         "MetaNameable",
@@ -2557,7 +2557,7 @@
     },
     {
       "name": "meta_model::static_stereotypes",
-      "documentation": "Lists all stereotypes defined in the yarn UML profile.\n",
+      "documentation": "Lists all stereotypes defined in the masd UML profile.\n",
       "stereotypes": [
         "masd::enumeration"
       ],

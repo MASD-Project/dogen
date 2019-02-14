@@ -50,7 +50,7 @@
 namespace masd::dogen::coding::meta_model {
 
 /**
- * @brief Intermediate representation of a coding model.
+ * @brief Intermediate representation of a masd model.
  */
 class endomodel final {
 public:

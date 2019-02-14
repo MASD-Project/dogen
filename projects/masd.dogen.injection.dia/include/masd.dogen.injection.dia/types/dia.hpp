@@ -31,7 +31,7 @@
  *
  * By that we mean that it is a model designed to transform a representation of
  * a user model in Dia diagram format to its counterpart in the external format,
- * taking into account any special yarn meta-data which the user may have encoded
+ * taking into account any special masd meta-data which the user may have encoded
  * into the Dia diagram. Note that the Dia diagram format contains a representation
  * of UML. We pass that meta-data straight through into the external model, without
  * any further processing.
@@ -63,7 +63,7 @@
  * @section external_dia_1 Intermediate processing
  *
  * To make the code easier to read and maintain, we created a numeber of
- * intermediate stages between a Dia diagram and yarn:
+ * intermediate stages between a Dia diagram and masd:
  *
  * @li Dia object -> processed object -> profile -> external element
  *
@@ -72,10 +72,10 @@
  * the resulting processing code was full of loops and look-ups. Instead,
  * we make the generic Dia object into a very concrete processed object -
  * still preserving most of the semantics of Dia - and then from those we
- * build a profile. A profile allows us to quickly scan for UML and yarn
+ * build a profile. A profile allows us to quickly scan for UML and masd
  * type information without getting lost in the intricacies of the generic
  * Dia structure. With these in hand, the @ref transformer is able to
- * create the corresponding yarn entity, and the transformation code is
+ * create the corresponding masd entity, and the transformation code is
  * not obscured.
  *
  * @section external_dia_2 Dia meta-data
@@ -84,7 +84,7 @@
  * needs to follow in order to comply with Dogen:
  *
  * @li any public attribute in a class is automatically converted into a
- * yarn property rather than a member variable. This means that it is
+ * masd property rather than a member variable. This means that it is
  * expected that a getter and a setter will be generated.
  *
  * @li a number of stereotypes were added, as per the definitions in the
@@ -98,7 +98,7 @@
  * place at the top-level. Only one such note is expected per containing
  * entity.
  *
- * The yarn stereotypes have the following behaviours:
+ * The masd stereotypes have the following behaviours:
  *
  * @li @b exception: an exception class will be code generated. This is still
  * a value object but it will have any additional machinery related to

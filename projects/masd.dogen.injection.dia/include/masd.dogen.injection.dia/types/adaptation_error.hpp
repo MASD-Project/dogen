@@ -32,7 +32,7 @@ namespace masd::dogen::injection::dia {
 
 /**
  * @brief A fatal error has occurred while adapting a Dia model object
- * into its yarn representation.
+ * into its masd representation.
  */
 class adaptation_error : public virtual std::exception, public virtual boost::exception {
 public:

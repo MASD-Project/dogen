@@ -43,8 +43,8 @@ namespace masd::dogen::coding::meta_model {
  * @brief Representation of the class notion in the OOP paradigm.
  *
  * The @e object is equivalent to a meta-class, but we decided against this
- * name because all elements should also have the prefix meta - after all, coding is a
- * meta-model. Since the word class cannot be used in c++ to name types, we
+ * name because all elements should also have the prefix meta - after all, coding
+ * is ameta-model. Since the word class cannot be used in c++ to name types, we
  * decided instead to use the word object.
  */
 class object final : public masd::dogen::coding::meta_model::element {
