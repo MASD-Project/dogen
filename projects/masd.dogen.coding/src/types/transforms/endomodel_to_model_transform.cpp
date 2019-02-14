@@ -153,6 +153,7 @@ endomodel_to_model_transform::transform(const meta_model::endomodel& em) {
     r.references(em.references());
     r.root_module(em.root_module());
     r.orm_properties(em.orm_properties());
+    r.extraction_properties(em.extraction_properties());
 
     const auto size(compute_total_size(em));
     r.elements().reserve(size);

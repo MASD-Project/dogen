@@ -13,29 +13,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-13 Wed 18:34]
+#+CAPTION: Clock summary at [2019-02-14 Thu 12:19]
 | <75>                                                 |          |        |        |       |
 | Headline                                             | Time     |        |        |     % |
 |------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                         | *176:30* |        |        | 100.0 |
+| *Total time*                                         | *178:53* |        |        | 100.0 |
 |------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                              | 176:30   |        |        | 100.0 |
-| Active                                               |          | 176:30 |        | 100.0 |
-| Edit release notes for previous sprint               |          |        |   2:03 |   1.2 |
-| Sprint and product backlog grooming                  |          |        |   4:43 |   2.7 |
-| Work on MASD theory                                  |          |        | 113:38 |  64.4 |
+| Stories                                              | 178:53   |        |        | 100.0 |
+| Active                                               |          | 178:53 |        | 100.0 |
+| Edit release notes for previous sprint               |          |        |   2:03 |   1.1 |
+| Sprint and product backlog grooming                  |          |        |   4:43 |   2.6 |
+| Work on MASD theory                                  |          |        | 113:38 |  63.5 |
 | Rename models to fit MASD architecture               |          |        |   4:56 |   2.8 |
 | Read up on framework and API design                  |          |        |   0:57 |   0.5 |
-| Analyse the state of the mess of refactors           |          |        |   6:27 |   3.7 |
+| Analyse the state of the mess of refactors           |          |        |   6:27 |   3.6 |
 | Create the =orchestration= model                     |          |        |   4:15 |   2.4 |
 | Update vcpkg across all operative systems            |          |        |   4:35 |   2.6 |
 | Update C# reference models to latest dogen           |          |        |   0:42 |   0.4 |
 | Convert the utility model into a regular dogen model |          |        |   7:27 |   4.2 |
-| Improve support for clang-cl builds                  |          |        |   2:02 |   1.2 |
-| Great meta-data rename                               |          |        |   4:54 |   2.8 |
-| Create a single binary for all of dogen              |          |        |  16:27 |   9.3 |
+| Improve support for clang-cl builds                  |          |        |   2:02 |   1.1 |
+| Great meta-data rename                               |          |        |   4:54 |   2.7 |
+| Create a single binary for all of dogen              |          |        |  16:27 |   9.2 |
 | Dogen's vcpkg export for OSX was created from master |          |        |   0:46 |   0.4 |
-| Move generation properties into meta-data            |          |        |   2:38 |   1.5 |
+| Move generation properties into meta-data            |          |        |   4:30 |   2.5 |
+| Fix clang-cl warnings                                |          |        |   0:31 |   0.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -676,6 +677,7 @@ Problems:
 
 *** STARTED Move generation properties into meta-data                 :story:
     :LOGBOOK:
+    CLOCK: [2019-02-14 Thu 09:54]--[2019-02-14 Thu 11:46] =>  1:52
     CLOCK: [2019-02-13 Wed 17:53]--[2019-02-13 Wed 18:34] =>  0:41
     CLOCK: [2019-02-13 Wed 17:02]--[2019-02-13 Wed 17:52] =>  0:50
     CLOCK: [2019-02-12 Tue 18:30]--[2019-02-12 Tue 18:43] =>  0:13
@@ -686,6 +688,27 @@ We have a number of properties that are in the configuration of the
 code generator but which are really part of the model. We need to move
 these into the model to avoid having to add them to the new CLI
 interface.
+
+Notes:
+
+- rename "yarn." transforms in log to "masd."
+
+*** STARTED Fix clang-cl warnings                                     :story:
+    :LOGBOOK:
+    CLOCK: [2019-02-14 Thu 11:47]--[2019-02-14 Thu 12:18] =>  0:31
+    :END:
+
+We also have a number of warnings left to clean up, all related to
+boost.log:
+
+: masd.dogen.utility.lib(lifecycle_manager.cpp.obj) : warning LNK4217: locally defined symbol
+: ?get_tss_data@detail@boost@@YAPEAXPEBX@Z (void * __cdecl boost::detail::get_tss_data(void const *))
+: imported in function "public: struct boost::log::v2s_mt_nt6::sinks::basic_formatting_sink_frontend<char>::formatting_context * __cdecl boost::thread_specific_ptr<struct boost::log::v2s_mt_nt6::sinks::basic_formatting_sink_frontend<char>::formatting_context>::get(void)const " (?get@?$thread_specific_ptr@Uformatting_context@?$basic_formatting_sink_frontend@D@sinks@v2s_mt_nt6@log@boost@@@boost@@QEBAPEAUformatting_context@?$basic_formatting_sink_frontend@D@sinks@v2s_mt_nt6@log@2@XZ)
+
+Notes:
+
+- opened issue: [[https://github.com/Microsoft/vcpkg/issues/5336][Building with clang-cl on windows generates warnings
+  from vcpkg-installed libraries]]
 
 *** Contents change check is done twice                               :story:
 
@@ -1524,7 +1547,7 @@ add the compiler name to the package we can then upload them too. This
 would be good because we can then test to make sure all packages are
 working correctly.
 
-*** Fix clang-cl broken test and warnings                             :story:
+*** Fix clang-cl broken test                                          :story:
 
 We have one test failing on clang-cl, ref impl:
 
@@ -1537,13 +1560,6 @@ We have one test failing on clang-cl, ref impl:
 It seems that the boost registration is failing on debug. This is very
 strange as it works on MSVC and Linux, release and debug but fails on
 clang-cl release.
-
-We also have a number of warnings left to clean up, all related to
-boost.log:
-
-: masd.dogen.utility.lib(lifecycle_manager.cpp.obj) : warning LNK4217: locally defined symbol
-: ?get_tss_data@detail@boost@@YAPEAXPEBX@Z (void * __cdecl boost::detail::get_tss_data(void const *))
-: imported in function "public: struct boost::log::v2s_mt_nt6::sinks::basic_formatting_sink_frontend<char>::formatting_context * __cdecl boost::thread_specific_ptr<struct boost::log::v2s_mt_nt6::sinks::basic_formatting_sink_frontend<char>::formatting_context>::get(void)const " (?get@?$thread_specific_ptr@Uformatting_context@?$basic_formatting_sink_frontend@D@sinks@v2s_mt_nt6@log@boost@@@boost@@QEBAPEAUformatting_context@?$basic_formatting_sink_frontend@D@sinks@v2s_mt_nt6@log@2@XZ)
 
 ** Deprecated
 *** CANCELLED Update =yarn.dia= traits to external                    :story:

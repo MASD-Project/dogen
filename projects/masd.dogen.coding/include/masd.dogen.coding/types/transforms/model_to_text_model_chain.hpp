@@ -28,37 +28,14 @@
 #include <list>
 #include <string>
 #include <unordered_set>
-#include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.extraction/types/decoration_properties_factory.hpp"
 #include "masd.dogen.coding/types/meta_model/text_model.hpp"
 #include "masd.dogen.coding/types/transforms/model_to_text_model_transform_registrar.hpp"
-#include "masd.dogen.coding/types/transforms/configuration.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::coding::transforms {
 
 class model_to_text_model_chain final {
-private:
-    struct type_group {
-        annotations::type enable_backend_directories;
-        std::list<annotations::type> enabled;
-    };
-
-    static type_group make_type_group(const annotations::type_repository& atrp,
-        const std::list<annotations::archetype_location>& als);
-
-    static std::unordered_set<std::string> obtain_enabled_backends(
-        const type_group& tg, const annotations::annotation& ra);
-
-    static bool obtain_enable_backend_directories(const type_group& tg,
-        const annotations::annotation& ra);
-
-    static configuration make_configuration(const context& ctx,
-        const std::list<annotations::archetype_location>& als,
-        const annotations::annotation& ra);
-
 public:
     /**
      * @brief Registrar that keeps track of the available transforms.

@@ -20,9 +20,6 @@
  */
 #include <boost/lexical_cast.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.annotations/io/type_io.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
@@ -47,67 +44,6 @@ namespace masd::dogen::coding::transforms {
 
 std::shared_ptr<model_to_text_model_transform_registrar>
 model_to_text_model_chain::registrar_;
-
-model_to_text_model_chain::type_group model_to_text_model_chain::
-make_type_group(const annotations::type_repository& atrp,
-    const std::list<annotations::archetype_location>& als) {
-    type_group r;
-
-    const annotations::type_repository_selector rs(atrp);
-    const auto ekd(traits::enable_backend_directories());
-    r.enable_backend_directories = rs.select_type_by_name(ekd);
-
-    const auto en(traits::enabled());
-    for (const auto al : als) {
-        type_group tg;
-        const auto backend(al.backend());
-        r.enabled.push_back(rs.select_type_by_name(backend, en));
-    }
-
-    return r;
-}
-
-std::unordered_set<std::string>
-model_to_text_model_chain::obtain_enabled_backends(const type_group& tg,
-    const annotations::annotation& ra) {
-
-    std::unordered_set<std::string> r;
-    const annotations::entry_selector s(ra);
-    for (const auto& t : tg.enabled) {
-        const bool enabled(s.get_boolean_content_or_default(t));
-        if (!enabled)
-            continue;
-
-        r.insert(t.archetype_location().backend());
-    }
-
-    return r;
-}
-
-bool model_to_text_model_chain::obtain_enable_backend_directories(
-    const type_group& tg, const annotations::annotation& ra) {
-    const annotations::entry_selector s(ra);
-    return s.get_boolean_content_or_default(tg.enable_backend_directories);
-}
-
-configuration model_to_text_model_chain::make_configuration(
-    const context& ctx, const std::list<annotations::archetype_location>& als,
-    const annotations::annotation& ra) {
-
-    configuration r;
-    const auto tg(make_type_group(ctx.type_repository(), als));
-    r.enabled_backends(obtain_enabled_backends(tg, ra));
-    if (r.enabled_backends().size() > 1) {
-        BOOST_LOG_SEV(lg, warn) << "More than one backend is enabled: "
-                                << r.enabled_backends().size()
-                                << ". Forcing enable_backend_directories.";
-        r.enable_backend_directories(true);
-    } else
-        r.enable_backend_directories(obtain_enable_backend_directories(tg, ra));
-
-    return r;
-}
-
 model_to_text_model_transform_registrar&
 model_to_text_model_chain::registrar() {
     if (!registrar_) {
@@ -162,11 +98,7 @@ transform(const context& ctx, const meta_model::model& m) {
      * options - output on language X but disable backend for language
      * X - so we need to throw to let it know.
      */
-    const auto& ra(m.root_module()->annotation());
-    const auto& alrp(ctx.archetype_location_repository());
-    const auto& als(alrp.archetype_locations());
-    const auto cfg(make_configuration(ctx, als, ra));
-    const auto& ek(cfg.enabled_backends());
+    const auto& ek(m.extraction_properties().enabled_backends());
     const auto is_enabled(ek.find(id) != ek.end());
     if (!is_enabled) {
         BOOST_LOG_SEV(lg, error) << disabled_transform << t.id();
@@ -176,7 +108,7 @@ transform(const context& ctx, const meta_model::model& m) {
     /*
      * Generate artefacts for all elements in model.
      */
-    const bool ekd(cfg.enable_backend_directories());
+    const bool ekd(m.extraction_properties().enable_backend_directories());
     auto r(t.transform(ctx, ekd, m));
     BOOST_LOG_SEV(lg, debug) << "Generated files for : " << id
                              << ". Total files: "
