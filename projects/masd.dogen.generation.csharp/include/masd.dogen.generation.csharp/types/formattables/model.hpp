@@ -30,7 +30,6 @@
 #include <algorithm>
 #include <unordered_map>
 #include "masd.dogen.coding/types/meta_model/name.hpp"
-#include "masd.dogen.coding/types/meta_model/extraction_properties.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/formattable.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/aspect_properties.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/assistant_properties.hpp"
@@ -50,8 +49,7 @@ public:
         const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::formattable>& formattables,
         const std::list<std::string>& project_items,
         const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::aspect_properties>& aspect_properties,
-        const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::assistant_properties>& assistant_properties,
-        const masd::dogen::coding::meta_model::extraction_properties& extraction_properties);
+        const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::assistant_properties>& assistant_properties);
 
 public:
     const masd::dogen::coding::meta_model::name& name() const;
@@ -79,11 +77,6 @@ public:
     void assistant_properties(const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::assistant_properties>& v);
     void assistant_properties(const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::assistant_properties>&& v);
 
-    const masd::dogen::coding::meta_model::extraction_properties& extraction_properties() const;
-    masd::dogen::coding::meta_model::extraction_properties& extraction_properties();
-    void extraction_properties(const masd::dogen::coding::meta_model::extraction_properties& v);
-    void extraction_properties(const masd::dogen::coding::meta_model::extraction_properties&& v);
-
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -100,7 +93,6 @@ private:
     std::list<std::string> project_items_;
     std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::aspect_properties> aspect_properties_;
     std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::assistant_properties> assistant_properties_;
-    masd::dogen::coding::meta_model::extraction_properties extraction_properties_;
 };
 
 }

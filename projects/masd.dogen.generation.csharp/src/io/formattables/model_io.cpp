@@ -22,7 +22,6 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.generation.csharp/io/formattables/model_io.hpp"
-#include "masd.dogen.coding/io/meta_model/extraction_properties_io.hpp"
 #include "masd.dogen.generation.csharp/io/formattables/formattable_io.hpp"
 #include "masd.dogen.generation.csharp/io/formattables/aspect_properties_io.hpp"
 #include "masd.dogen.generation.csharp/io/formattables/assistant_properties_io.hpp"
@@ -112,8 +111,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"formattables\": " << v.formattables() << ", "
       << "\"project_items\": " << v.project_items() << ", "
       << "\"aspect_properties\": " << v.aspect_properties() << ", "
-      << "\"assistant_properties\": " << v.assistant_properties() << ", "
-      << "\"extraction_properties\": " << v.extraction_properties()
+      << "\"assistant_properties\": " << v.assistant_properties()
       << " }";
     return(s);
 }

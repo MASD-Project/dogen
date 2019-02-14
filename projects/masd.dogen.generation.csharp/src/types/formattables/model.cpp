@@ -27,14 +27,12 @@ model::model(
     const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::formattable>& formattables,
     const std::list<std::string>& project_items,
     const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::aspect_properties>& aspect_properties,
-    const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::assistant_properties>& assistant_properties,
-    const masd::dogen::coding::meta_model::extraction_properties& extraction_properties)
+    const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::assistant_properties>& assistant_properties)
     : name_(name),
       formattables_(formattables),
       project_items_(project_items),
       aspect_properties_(aspect_properties),
-      assistant_properties_(assistant_properties),
-      extraction_properties_(extraction_properties) { }
+      assistant_properties_(assistant_properties) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -43,7 +41,6 @@ void model::swap(model& other) noexcept {
     swap(project_items_, other.project_items_);
     swap(aspect_properties_, other.aspect_properties_);
     swap(assistant_properties_, other.assistant_properties_);
-    swap(extraction_properties_, other.extraction_properties_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -51,8 +48,7 @@ bool model::operator==(const model& rhs) const {
         formattables_ == rhs.formattables_ &&
         project_items_ == rhs.project_items_ &&
         aspect_properties_ == rhs.aspect_properties_ &&
-        assistant_properties_ == rhs.assistant_properties_ &&
-        extraction_properties_ == rhs.extraction_properties_;
+        assistant_properties_ == rhs.assistant_properties_;
 }
 
 model& model::operator=(model other) {
@@ -139,22 +135,6 @@ void model::assistant_properties(const std::unordered_map<std::string, masd::dog
 
 void model::assistant_properties(const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::assistant_properties>&& v) {
     assistant_properties_ = std::move(v);
-}
-
-const masd::dogen::coding::meta_model::extraction_properties& model::extraction_properties() const {
-    return extraction_properties_;
-}
-
-masd::dogen::coding::meta_model::extraction_properties& model::extraction_properties() {
-    return extraction_properties_;
-}
-
-void model::extraction_properties(const masd::dogen::coding::meta_model::extraction_properties& v) {
-    extraction_properties_ = v;
-}
-
-void model::extraction_properties(const masd::dogen::coding::meta_model::extraction_properties&& v) {
-    extraction_properties_ = std::move(v);
 }
 
 }

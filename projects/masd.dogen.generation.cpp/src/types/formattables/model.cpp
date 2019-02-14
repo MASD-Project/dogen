@@ -33,8 +33,7 @@ model::model(
     const masd::dogen::generation::cpp::formattables::cpp_standards cpp_standard,
     const std::list<std::string>& odb_databases,
     const std::string& odb_sql_name_case,
-    const std::list<std::string>& project_items,
-    const masd::dogen::coding::meta_model::extraction_properties& extraction_properties)
+    const std::list<std::string>& project_items)
     : name_(name),
       streaming_properties_(streaming_properties),
       formattables_(formattables),
@@ -42,8 +41,7 @@ model::model(
       cpp_standard_(cpp_standard),
       odb_databases_(odb_databases),
       odb_sql_name_case_(odb_sql_name_case),
-      project_items_(project_items),
-      extraction_properties_(extraction_properties) { }
+      project_items_(project_items) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -55,7 +53,6 @@ void model::swap(model& other) noexcept {
     swap(odb_databases_, other.odb_databases_);
     swap(odb_sql_name_case_, other.odb_sql_name_case_);
     swap(project_items_, other.project_items_);
-    swap(extraction_properties_, other.extraction_properties_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -66,8 +63,7 @@ bool model::operator==(const model& rhs) const {
         cpp_standard_ == rhs.cpp_standard_ &&
         odb_databases_ == rhs.odb_databases_ &&
         odb_sql_name_case_ == rhs.odb_sql_name_case_ &&
-        project_items_ == rhs.project_items_ &&
-        extraction_properties_ == rhs.extraction_properties_;
+        project_items_ == rhs.project_items_;
 }
 
 model& model::operator=(model other) {
@@ -194,22 +190,6 @@ void model::project_items(const std::list<std::string>& v) {
 
 void model::project_items(const std::list<std::string>&& v) {
     project_items_ = std::move(v);
-}
-
-const masd::dogen::coding::meta_model::extraction_properties& model::extraction_properties() const {
-    return extraction_properties_;
-}
-
-masd::dogen::coding::meta_model::extraction_properties& model::extraction_properties() {
-    return extraction_properties_;
-}
-
-void model::extraction_properties(const masd::dogen::coding::meta_model::extraction_properties& v) {
-    extraction_properties_ = v;
-}
-
-void model::extraction_properties(const masd::dogen::coding::meta_model::extraction_properties&& v) {
-    extraction_properties_ = std::move(v);
 }
 
 }

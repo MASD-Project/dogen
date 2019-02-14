@@ -22,7 +22,6 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/model_io.hpp"
-#include "masd.dogen.coding/io/meta_model/extraction_properties_io.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/formattable_io.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/cpp_standards_io.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/facet_properties_io.hpp"
@@ -116,8 +115,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"cpp_standard\": " << v.cpp_standard() << ", "
       << "\"odb_databases\": " << v.odb_databases() << ", "
       << "\"odb_sql_name_case\": " << "\"" << tidy_up_string(v.odb_sql_name_case()) << "\"" << ", "
-      << "\"project_items\": " << v.project_items() << ", "
-      << "\"extraction_properties\": " << v.extraction_properties()
+      << "\"project_items\": " << v.project_items()
       << " }";
     return(s);
 }
