@@ -68,7 +68,7 @@
         <dia:point val="-6,27"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-6.05,26.95;15.355,37.55"/>
+        <dia:rectangle val="-6.05,26.95;19.205,38.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -77,10 +77,10 @@
         <dia:point val="-6,27"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="21.305000000000003"/>
+        <dia:real val="25.155000000000005"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="10.500000000000002"/>
+        <dia:real val="11.300000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -99,6 +99,7 @@
 #DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=masd.dogen.tracing
 #DOGEN masd.injection.input_language=cpp
+#DOGEN masd.extraction.force_write=false
 #DOGEN masd.extraction.cpp.enabled=true
 #DOGEN masd.extraction.cpp.standard=c++-17
 #DOGEN masd.extraction.cpp.msbuild.enabled=false
@@ -1613,13 +1614,13 @@
         <dia:point val="48,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.95,47.95;56.25,51.05"/>
+        <dia:rectangle val="47.95,47.95;55.865,51.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="48,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.1999999999999993"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -1759,7 +1760,7 @@
         <dia:point val="50.215,39.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.465,38.65;52.2957,48.7498"/>
+        <dia:rectangle val="49.465,38.65;52.1216,48.7498"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1767,8 +1768,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="50.215,39.4"/>
         <dia:point val="50.215,44"/>
-        <dia:point val="52.0847,44"/>
-        <dia:point val="52.0957,47.9498"/>
+        <dia:point val="51.9574,44"/>
+        <dia:point val="51.9216,47.9498"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1794,13 +1795,13 @@
         <dia:point val="12,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="11.95,47.95;18.8675,51.05"/>
+        <dia:rectangle val="11.95,47.95;20.635,51.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="12,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.8174999999999999"/>
+        <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>

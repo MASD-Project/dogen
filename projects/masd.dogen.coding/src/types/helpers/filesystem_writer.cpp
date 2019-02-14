@@ -90,9 +90,6 @@ private:
 
 bool filesystem_writer_impl::
 requires_writing(const meta_model::artefact& f) const {
-    if (force_write_)
-        return true;
-
     /*
      * If the file does not yet exist, we must always write it.
      */
@@ -101,14 +98,23 @@ requires_writing(const meta_model::artefact& f) const {
 
     /*
      * If the file exists and the overwrite flag is set to false then
-     * we should not write.
+     * we should not write. This is for cases where the user has
+     * handcrafted the file.
      */
     if (!f.overwrite())
         return false;
 
     /*
-     * Perform a binary diff of the file content; if it has changed,
-     * we need to write.
+     * If force write is on, there is no additional clever logic for
+     * writting - we should just write.
+     */
+    if (force_write_)
+        return true;
+
+    /*
+     * Finally, we need to check if there is a need to write or
+     * not. For this we perform a binary diff of the file content; if
+     * it has changed, we need to write.
      */
     using masd::dogen::utility::filesystem::read_file_content;
     const std::string existing_content(read_file_content(f.path()));

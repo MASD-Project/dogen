@@ -13,17 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-14 Thu 16:29]
+#+CAPTION: Clock summary at [2019-02-14 Thu 16:40]
 | <75>                                                 |          |        |        |       |
 | Headline                                             | Time     |        |        |     % |
 |------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                         | *181:18* |        |        | 100.0 |
+| *Total time*                                         | *181:28* |        |        | 100.0 |
 |------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                              | 181:18   |        |        | 100.0 |
-| Active                                               |          | 181:18 |        | 100.0 |
+| Stories                                              | 181:28   |        |        | 100.0 |
+| Active                                               |          | 181:28 |        | 100.0 |
 | Edit release notes for previous sprint               |          |        |   2:03 |   1.1 |
 | Sprint and product backlog grooming                  |          |        |   4:43 |   2.6 |
-| Work on MASD theory                                  |          |        | 113:38 |  62.7 |
+| Work on MASD theory                                  |          |        | 113:38 |  62.6 |
 | Rename models to fit MASD architecture               |          |        |   4:56 |   2.7 |
 | Read up on framework and API design                  |          |        |   0:57 |   0.5 |
 | Analyse the state of the mess of refactors           |          |        |   6:27 |   3.6 |
@@ -35,7 +35,7 @@
 | Great meta-data rename                               |          |        |   4:54 |   2.7 |
 | Create a single binary for all of dogen              |          |        |  16:27 |   9.1 |
 | Dogen's vcpkg export for OSX was created from master |          |        |   0:46 |   0.4 |
-| Move generation properties into meta-data            |          |        |   6:55 |   3.8 |
+| Move generation properties into meta-data            |          |        |   7:05 |   3.9 |
 | Fix clang-cl warnings                                |          |        |   0:31 |   0.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -677,6 +677,7 @@ Problems:
 
 *** STARTED Move generation properties into meta-data                 :story:
     :LOGBOOK:
+    CLOCK: [2019-02-14 Thu 16:30]--[2019-02-14 Thu 16:40] =>  0:10
     CLOCK: [2019-02-14 Thu 16:25]--[2019-02-14 Thu 16:29] =>  0:04
     CLOCK: [2019-02-14 Thu 15:33]--[2019-02-14 Thu 16:24] =>  0:51
     CLOCK: [2019-02-14 Thu 14:40]--[2019-02-14 Thu 15:32] =>  0:52
