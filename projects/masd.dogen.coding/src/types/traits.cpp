@@ -77,13 +77,33 @@ std::string traits::model_modules() {
     return r;
 }
 
-std::string traits::enable_backend_directories() {
+std::string traits::extraction::force_write() {
+    static std::string r("masd.extraction.force_write");
+    return r;
+}
+
+std::string traits::extraction::delete_extra_files() {
+    static std::string r("masd.extraction.delete_extra_files");
+    return r;
+}
+
+std::string traits::extraction::ignore_files_matching_regex() {
+    static std::string r("masd.extraction.ignore_files_matching_regex");
+    return r;
+}
+
+std::string traits::extraction::cpp_headers_output_directory() {
+    static std::string r("masd.extraction.cpp_headers_output_directory");
+    return r;
+}
+
+std::string traits::extraction::enable_backend_directories() {
     static std::string r("masd.extraction.enable_backend_directories");
     return r;
 }
 
-std::string traits::force_backend_directory() {
-    static std::string r("masd.extraction.force_backend_directory");
+std::string traits::enable_backend_directories() {
+    static std::string r("masd.extraction.enable_backend_directories");
     return r;
 }
 

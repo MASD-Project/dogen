@@ -32,7 +32,7 @@
 
 namespace {
 
-const std::string transform_id("yarn.transforms.model_to_text_model_chain");
+const std::string transform_id("masd.transforms.model_to_text_model_chain");
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 

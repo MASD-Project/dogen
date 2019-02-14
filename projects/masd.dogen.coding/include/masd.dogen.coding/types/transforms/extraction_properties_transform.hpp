@@ -25,24 +25,62 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <unordered_set>
+#include <boost/optional.hpp>
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.coding/types/transforms/context_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/extraction_properties.hpp"
 
 namespace masd::dogen::coding::transforms {
 
+/**
+ * @brief Expands all extraction properties from meta-data.
+ */
 class extraction_properties_transform final {
-public:
-    extraction_properties_transform() = default;
-    extraction_properties_transform(const extraction_properties_transform&) = default;
-    extraction_properties_transform(extraction_properties_transform&&) = default;
-    ~extraction_properties_transform() = default;
-    extraction_properties_transform& operator=(const extraction_properties_transform&) = default;
+private:
+    struct type_group {
+        annotations::type force_write;
+        annotations::type delete_extra_files;
+        annotations::type ignore_files_matching_regex;
+        annotations::type cpp_headers_output_directory;
+        annotations::type enable_backend_directories;
+        std::list<annotations::type> enabled;
+    };
+
+    static type_group make_type_group(const annotations::type_repository& atrp,
+        const std::list<annotations::archetype_location>& als);
+
+    static bool obtain_force_write(const type_group& tg,
+        const annotations::annotation& ra);
+
+    static bool obtain_delete_extra_files(const type_group& tg,
+        const annotations::annotation& ra);
+
+    static std::vector<std::string> obtain_ignore_files_matching_regex(
+        const type_group& tg, const annotations::annotation& ra);
+
+    static boost::filesystem::path obtain_cpp_headers_output_directory(
+        const type_group& tg, const annotations::annotation& ra);
+
+    static std::unordered_set<std::string> obtain_enabled_backends(
+        const type_group& tg, const annotations::annotation& ra);
+
+    static bool obtain_enable_backend_directories(const type_group& tg,
+        const annotations::annotation& ra);
+
+    static meta_model::extraction_properties make_extraction_properties(
+        const context& ctx,
+        const std::list<annotations::archetype_location>& als,
+        const annotations::annotation& ra);
 
 public:
-    bool operator==(const extraction_properties_transform& rhs) const;
-    bool operator!=(const extraction_properties_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * Execute the extraction properties transform.
+     */
+    static void transform(const context& ctx, meta_model::endomodel& m);
 };
 
 }

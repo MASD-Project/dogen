@@ -41,8 +41,15 @@ struct traits {
     static std::string reference();
     static std::string external_modules();
     static std::string model_modules();
+
+    struct extraction {
+        static std::string force_write();
+        static std::string delete_extra_files();
+        static std::string ignore_files_matching_regex();
+        static std::string cpp_headers_output_directory();
+        static std::string enable_backend_directories();
+    };
     static std::string enable_backend_directories();
-    static std::string force_backend_directory();
 
     struct type_parameters {
         static std::string variable_number_of_parameters();
