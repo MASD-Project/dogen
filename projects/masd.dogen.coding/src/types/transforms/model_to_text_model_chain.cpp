@@ -127,6 +127,24 @@ transform(const context& ctx, const std::list<meta_model::model>& models) {
     BOOST_LOG_SEV(lg, debug) << "Transforming models: " << models.size();
 
     meta_model::text_model r;
+    if (models.empty())
+        return r;
+
+    /*
+     * Copy across the extraction properties. We can use any of the
+     * models in the list as they must all share the same properties
+     * from the original target. This will be cleaned up when we fix
+     * the processing pipeline.
+     */
+    const auto ep(models.front().extraction_properties());
+    r.force_write(ep.force_write());
+    r.delete_extra_files(ep.delete_extra_files());
+    r.ignore_files_matching_regex(ep.ignore_files_matching_regex());
+    r.cpp_headers_output_directory(ep.cpp_headers_output_directory());
+
+    /*
+     * Now transform the models into artefacts.
+     */
     for (const auto& m : models)
         merge(transform(ctx, m), r);
 
