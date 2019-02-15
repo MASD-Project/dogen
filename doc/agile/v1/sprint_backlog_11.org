@@ -13,18 +13,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-15 Fri 11:45]
+#+CAPTION: Clock summary at [2019-02-15 Fri 14:58]
 | <75>                                                 |          |        |        |       |
 | Headline                                             | Time     |        |        |     % |
 |------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                         | *185:42* |        |        | 100.0 |
+| *Total time*                                         | *186:29* |        |        | 100.0 |
 |------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                              | 185:42   |        |        | 100.0 |
-| Active                                               |          | 185:42 |        | 100.0 |
+| Stories                                              | 186:29   |        |        | 100.0 |
+| Active                                               |          | 186:29 |        | 100.0 |
 | Edit release notes for previous sprint               |          |        |   2:03 |   1.1 |
-| Sprint and product backlog grooming                  |          |        |   4:46 |   2.6 |
-| Work on MASD theory                                  |          |        | 113:38 |  61.2 |
-| Rename models to fit MASD architecture               |          |        |   4:56 |   2.7 |
+| Sprint and product backlog grooming                  |          |        |   4:55 |   2.6 |
+| Work on MASD theory                                  |          |        | 113:38 |  60.9 |
+| Rename models to fit MASD architecture               |          |        |   4:56 |   2.6 |
 | Read up on framework and API design                  |          |        |   0:57 |   0.5 |
 | Analyse the state of the mess of refactors           |          |        |   6:27 |   3.5 |
 | Create the =orchestration= model                     |          |        |   4:15 |   2.3 |
@@ -36,7 +36,7 @@
 | Great meta-data rename                               |          |        |   4:54 |   2.6 |
 | Create a single binary for all of dogen              |          |        |  18:17 |   9.8 |
 | Dogen's vcpkg export for OSX was created from master |          |        |   0:46 |   0.4 |
-| Fix clang-cl warnings                                |          |        |   0:31 |   0.3 |
+| Fix clang-cl warnings                                |          |        |   1:09 |   0.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -142,6 +142,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
      :LOGBOOK:
+     CLOCK: [2019-02-15 Fri 11:46]--[2019-02-15 Fri 11:55] =>  0:09
      CLOCK: [2019-02-15 Fri 09:50]--[2019-02-15 Fri 09:53] =>  0:03
      CLOCK: [2019-02-13 Wed 10:42]--[2019-02-13 Wed 11:04] =>  0:22
      CLOCK: [2019-02-13 Wed 09:53]--[2019-02-13 Wed 10:03] =>  0:10
@@ -761,6 +762,7 @@ Problems:
 
 *** STARTED Fix clang-cl warnings                                     :story:
     :LOGBOOK:
+    CLOCK: [2019-02-15 Fri 14:21]--[2019-02-15 Fri 14:59] =>  0:38
     CLOCK: [2019-02-14 Thu 11:47]--[2019-02-14 Thu 12:18] =>  0:31
     :END:
 
@@ -775,6 +777,21 @@ Notes:
 
 - opened issue: [[https://github.com/Microsoft/vcpkg/issues/5336][Building with clang-cl on windows generates warnings
   from vcpkg-installed libraries]]
+- it seems that the log files show a lot more warnings than those
+  reported by cdash,
+- Updated issue on CDash parsing problems for clang-cl: [[https://github.com/Kitware/CDash/issues/733][Parsing of
+  errors and warnings from clang-cl]]
+
+*** Use tracing options in existing code
+
+Tasks:
+
+- add dependency to API from tracing.
+- implement a tracer constructor that takes in tracing configuration.
+- add tracing configuration to coding options.
+- update knitter to generate tracing options.
+- delete probing options from configuration.
+- delete probing options from tracer.
 
 *** References to types in top-level namespace do not resolve         :story:
 

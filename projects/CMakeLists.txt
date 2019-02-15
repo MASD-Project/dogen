@@ -176,11 +176,21 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC" OR
         "${CMAKE_CXX_FLAGS} /D _SILENCE_CXX17_OLD_ALLOCATOR_MEMBERS_DEPRECATION_WARNING")
     set(CMAKE_CXX_FLAGS
         "${CMAKE_CXX_FLAGS} /D _SILENCE_CXX17_ALLOCATOR_VOID_DEPRECATION_WARNING")
+    set(CMAKE_CXX_FLAGS
+        "${CMAKE_CXX_FLAGS} /D CRT_SECURE_NO_WARNINGS")
 
     foreach(flag_var CMAKE_C_FLAGS_DEBUG CMAKE_CXX_FLAGS_DEBUG CMAKE_C_FLAGS_RELEASE CMAKE_CXX_FLAGS_RELEASE CMAKE_C_FLAGS_MINSIZEREL CMAKE_CXX_FLAGS_MINSIZEREL CMAKE_C_FLAGS_RELWITHDEBINFO CMAKE_CXX_FLAGS_RELWITHDEBINFO)
         string(REGEX REPLACE "/MD" "/MT" ${flag_var} "${${flag_var}}")
         string(REGEX REPLACE "/MDd" "/MTd" ${flag_var} "${${flag_var}}")
     endforeach(flag_var)
+
+    # Options specific to clang-cl
+    if (CMAKE_COMPILER_IS_CLANGXX)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xclang -Wno-unknown-pragmas")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xclang -Wassume")
+        set(CMAKE_CXX_FLAGS
+            "${CMAKE_CXX_FLAGS} -Xclang -Wdeprecated-declarations")
+    endif()
 
     if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
         # flag not supported by clang-cl
