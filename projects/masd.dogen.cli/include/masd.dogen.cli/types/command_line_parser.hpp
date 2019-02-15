@@ -29,7 +29,7 @@
 #include <vector>
 #include <string>
 #include <boost/optional.hpp>
-#include "masd.dogen/types/configuration.hpp"
+#include "masd.dogen.cli/types/configuration.hpp"
 
 namespace masd::dogen::cli {
 
@@ -53,7 +53,7 @@ public:
      * @param info stream in which to place informative text.
      * @param error stream in which to place errors.
      */
-    virtual boost::optional<masd::dogen::configuration>
+    virtual boost::optional<configuration>
     parse(const std::vector<std::string>& arguments, std::ostream& info,
         std::ostream& error) const = 0;
 };

@@ -34,7 +34,7 @@ namespace masd::dogen::cli {
  */
 class program_options_parser final : public command_line_parser {
 public:
-    boost::optional<masd::dogen::configuration>
+    boost::optional<configuration>
     parse(const std::vector<std::string>& arguments, std::ostream& info,
         std::ostream& error) const override;
 };
