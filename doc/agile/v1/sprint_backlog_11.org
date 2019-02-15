@@ -13,17 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-15 Fri 09:37]
+#+CAPTION: Clock summary at [2019-02-15 Fri 09:53]
 | <75>                                                 |          |        |        |       |
 | Headline                                             | Time     |        |        |     % |
 |------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                         | *183:38* |        |        | 100.0 |
+| *Total time*                                         | *183:52* |        |        | 100.0 |
 |------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                              | 183:38   |        |        | 100.0 |
-| Active                                               |          | 183:38 |        | 100.0 |
+| Stories                                              | 183:52   |        |        | 100.0 |
+| Active                                               |          | 183:52 |        | 100.0 |
 | Edit release notes for previous sprint               |          |        |   2:03 |   1.1 |
-| Sprint and product backlog grooming                  |          |        |   4:43 |   2.6 |
-| Work on MASD theory                                  |          |        | 113:38 |  61.9 |
+| Sprint and product backlog grooming                  |          |        |   4:46 |   2.6 |
+| Work on MASD theory                                  |          |        | 113:38 |  61.8 |
 | Rename models to fit MASD architecture               |          |        |   4:56 |   2.7 |
 | Read up on framework and API design                  |          |        |   0:57 |   0.5 |
 | Analyse the state of the mess of refactors           |          |        |   6:27 |   3.5 |
@@ -33,9 +33,9 @@
 | Convert the utility model into a regular dogen model |          |        |   7:27 |   4.1 |
 | Improve support for clang-cl builds                  |          |        |   2:02 |   1.1 |
 | Great meta-data rename                               |          |        |   4:54 |   2.7 |
-| Create a single binary for all of dogen              |          |        |  16:27 |   9.0 |
+| Create a single binary for all of dogen              |          |        |  16:27 |   8.9 |
 | Dogen's vcpkg export for OSX was created from master |          |        |   0:46 |   0.4 |
-| Move generation properties into meta-data            |          |        |   9:15 |   5.0 |
+| Move generation properties into meta-data            |          |        |   9:26 |   5.1 |
 | Fix clang-cl warnings                                |          |        |   0:31 |   0.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -142,6 +142,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
      :LOGBOOK:
+     CLOCK: [2019-02-15 Fri 09:50]--[2019-02-15 Fri 09:53] =>  0:03
      CLOCK: [2019-02-13 Wed 10:42]--[2019-02-13 Wed 11:04] =>  0:22
      CLOCK: [2019-02-13 Wed 09:53]--[2019-02-13 Wed 10:03] =>  0:10
      CLOCK: [2019-02-11 Mon 11:28]--[2019-02-11 Mon 11:37] =>  0:09
@@ -525,6 +526,58 @@ Links:
 - [[https://ci.appveyor.com/project/mcraveiro/dogen/builds/19463961/job/45yhn8sdhexvsdmi][Debug build]]
 - [[https://github.com/Kitware/CDash/issues/733][CDash reporting problems]]
 
+*** COMPLETED Simplify split configuration configuration              :story:
+    CLOSED: [2019-02-15 Fri 09:43]
+
+*Rationale*: implemented as part of moving extraction options into
+meta-data.
+
+At present we have two separate command line parameters to configure
+the main output directory and the directory for header files. The
+second parameter is used for split configurations. The problem is that
+we now need to treat split configuration projects specially because of
+this. It makes more sense to force the header directory to be relative
+to the output path and make it a meta-data parameter.
+
+*** COMPLETED Make "ignore regexes" a model property                  :story:
+    CLOSED: [2019-02-15 Fri 09:44]
+
+*Rationale*: implemented as part of moving extraction options into
+meta-data.
+
+At present we have a command line option:
+=--ignore-files-matching-regex=. It is used to ignore files in a
+project. However, the problem is, because it is a command line option,
+it must be supplied with each invocation of Dogen. This means that if
+we want to run dogen from outside the build system, we need to know
+what options were set in the build scripts or else we will have
+different results. This is a problem for testing. We should make it a
+meta-data option, which is supplied with each model and even more
+interesting, can be used with profiling. This means we can create
+profiles for specific purposes (ODB, lisp, etc) and then reuse them in
+different projects.
+
+We should do the same thing for =--delete-extra-files=.
+
+*** COMPLETED Fix the northwind model                                 :story:
+    CLOSED: [2019-02-15 Fri 09:45]
+
+*Rationale*: implemented as part of the ref impl / vcpkg clean up.
+
+There are numerous problems with this model:
+
+- at present we have oracle support on ODB. Oracle libs are not
+  distributed with debian. If we do not find oracle we do not compile
+  northwind. This is not ideal. We should remove oracle support from
+  northwind, and install odb support in the build machine (hopefully
+  available as debs).
+- the tests are commented out and require a clean up.
+- the tests require a database to be up.
+
+Notes:
+
+- it is possible to setup [[https://docs.travis-ci.com/user/database-setup/#postgresql][postgres on travis]]
+
 *** STARTED Great meta-data rename                                    :story:
     :LOGBOOK:
     CLOCK: [2018-11-26 Mon 10:01]--[2018-11-26 Mon 11:02] =>  1:01
@@ -677,6 +730,7 @@ Problems:
 
 *** STARTED Move generation properties into meta-data                 :story:
     :LOGBOOK:
+    CLOCK: [2019-02-15 Fri 09:38]--[2019-02-15 Fri 09:49] =>  0:11
     CLOCK: [2019-02-15 Fri 08:51]--[2019-02-15 Fri 09:37] =>  0:46
     CLOCK: [2019-02-14 Thu 21:04]--[2019-02-14 Thu 21:10] =>  0:06
     CLOCK: [2019-02-14 Thu 17:45]--[2019-02-14 Thu 18:29] =>  0:44
@@ -718,6 +772,12 @@ Notes:
 
 - opened issue: [[https://github.com/Microsoft/vcpkg/issues/5336][Building with clang-cl on windows generates warnings
   from vcpkg-installed libraries]]
+
+*** Rename the =transform= method to =apply=                          :story:
+
+Its a bit silly to name classes =x_transform= and then to have their
+main method also called =transform=. We should rename these to
+something like =apply=.
 
 *** Move text model into extraction model                             :story:
 

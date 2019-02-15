@@ -493,47 +493,6 @@ tests:
 - test runs against the model and hard-coded location, produces the
   diff. Test asserts of the diff being non-zero.
 
-*** Fix the northwind model                                           :story:
-
-There are numerous problems with this model:
-
-- at present we have oracle support on ODB. Oracle libs are not
-  distributed with debian. If we do not find oracle we do not compile
-  northwind. This is not ideal. We should remove oracle support from
-  northwind, and install odb support in the build machine (hopefully
-  available as debs).
-- the tests are commented out and require a clean up.
-- the tests require a database to be up.
-
-Notes:
-
-- it is possible to setup [[https://docs.travis-ci.com/user/database-setup/#postgresql][postgres on travis]]
-
-*** Simplify split configuration configuration                        :story:
-
-At present we have two separate command line parameters to configure
-the main output directory and the directory for header files. The
-second parameter is used for split configurations. The problem is that
-we now need to treat split configuration projects specially because of
-this. It makes more sense to force the header directory to be relative
-to the output path and make it a meta-data parameter.
-
-*** Make "ignore regexes" a model property                            :story:
-
-At present we have a command line option:
-=--ignore-files-matching-regex=. It is used to ignore files in a
-project. However, the problem is, because it is a command line option,
-it must be supplied with each invocation of Dogen. This means that if
-we want to run dogen from outside the build system, we need to know
-what options were set in the build scripts or else we will have
-different results. This is a problem for testing. We should make it a
-meta-data option, which is supplied with each model and even more
-interesting, can be used with profiling. This means we can create
-profiles for specific purposes (ODB, lisp, etc) and then reuse them in
-different projects.
-
-We should do the same thing for =--delete-extra-files=.
-
 *** Improve comments on reference implementation                      :story:
 
 At present it is very difficult to understand what each model and/or
@@ -624,12 +583,6 @@ Need to add: can_be_primitive_underlier, in_global_module,
 can_be_enumeration_underlier, is_default_enumeration_type,
 is_associative_container
 
-*** Rename the =transform= method to =apply=                          :story:
-
-Its a bit silly to name classes =x_transform= and then to have their
-main method also called =transform=. We should rename these to
-something like =apply=.
-
 *** Remove exomodel remnants                                          :story:
 
 It seems we have removed the exomodel on the main, but a grep for it
@@ -688,18 +641,18 @@ several in the literature.
 
 *** Create a text model post-processing chain                         :story:
 
-The following transforms can be done after generation of the text model:
+ The following transforms can be done after generation of the text model:
 
-- clang format
-- protected regions: read the file on disk, replace contents of the
-  protected region with the data read from disk.
+ - clang format
+ - protected regions: read the file on disk, replace contents of the
+   protected region with the data read from disk.
 
-These can be contained in a post-processing chain for the text model.
+ These can be contained in a post-processing chain for the text model.
 
-Note that we need artefacts to have an associated language so that we
-can use the correct clang format configuration. If a language is not
-supported by clang format (e.g. c#) we should just skip the files. The
-text model could group files by language.
+ Note that we need artefacts to have an associated language so that we
+ can use the correct clang format configuration. If a language is not
+ supported by clang format (e.g. c#) we should just skip the files. The
+ text model could group files by language.
 
 *** Detect unqualified stereotypes                                    :story:
 
