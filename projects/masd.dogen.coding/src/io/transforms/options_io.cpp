@@ -46,7 +46,6 @@ std::ostream& operator<<(std::ostream& s, const options& v) {
       << "\"log_level\": " << "\"" << tidy_up_string(v.log_level()) << "\"" << ", "
       << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
       << "\"output_directory_path\": " << "\"" << v.output_directory_path().generic_string() << "\"" << ", "
-      << "\"cpp_headers_output_directory_path\": " << "\"" << v.cpp_headers_output_directory_path().generic_string() << "\"" << ", "
       << "\"compatibility_mode\": " << v.compatibility_mode() << ", "
       << "\"probe_stats\": " << v.probe_stats() << ", "
       << "\"probe_stats_disable_guids\": " << v.probe_stats_disable_guids() << ", "

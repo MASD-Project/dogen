@@ -69,7 +69,8 @@ formattables::locator model_to_text_model_transform::make_locator(
 
     const auto& mn(m.name());
     const auto odp(o.output_directory_path());
-    const auto chodp(o.cpp_headers_output_directory_path());
+    const auto& ep(m.extraction_properties());
+    const auto chodp(ep.cpp_headers_output_directory());
     const auto ekd(enable_backend_directories);
     const auto ids(m.module_ids());
     const formattables::locator r(odp, chodp, atrp, frp, ra, mn, ids, ekd);

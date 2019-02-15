@@ -22,6 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/join.hpp>
+#include <boost/filesystem/operations.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
@@ -65,9 +66,8 @@ locator::locator(
       module_ids_(module_ids),
       project_path_(make_project_path(output_directory_path, model_name,
               configuration_, enable_backend_directories)),
-      headers_project_path_(
-          cpp_headers_output_directory_path.empty() ?
-          project_path_ : cpp_headers_output_directory_path),
+      headers_project_path_(compute_headers_path(output_directory_path,
+              project_path_, cpp_headers_output_directory_path)),
       split_mode_(!cpp_headers_output_directory_path.empty()) {}
 
 locator::type_group
@@ -187,6 +187,27 @@ locator_configuration locator::make_configuration(
     r.backend_directory_name(s.get_text_content_or_default(kdn));
 
     return r;
+}
+
+boost::filesystem::path locator::compute_headers_path(
+    const boost::filesystem::path& output_directory_path,
+    const boost::filesystem::path& project_path,
+    const boost::filesystem::path& cpp_headers_output_directory_path) const {
+
+    /*
+     * If the user did not supply a path for C++ headers, we simply
+     * place them inside the project.
+     */
+    if (cpp_headers_output_directory_path.empty())
+        return project_path;
+
+    /*
+     * If a path was supplied, it is relative to the output
+     * directory. We need to compute the canonical path resulting from
+     * that.
+     */
+    using boost::filesystem::canonical;
+    return canonical(cpp_headers_output_directory_path, output_directory_path);
 }
 
 locator_configuration locator::make_configuration(

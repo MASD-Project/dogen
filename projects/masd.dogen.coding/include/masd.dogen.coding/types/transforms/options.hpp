@@ -48,7 +48,6 @@ public:
         const std::string& log_level,
         const boost::filesystem::path& target,
         const boost::filesystem::path& output_directory_path,
-        const boost::filesystem::path& cpp_headers_output_directory_path,
         const bool compatibility_mode,
         const bool probe_stats,
         const bool probe_stats_disable_guids,
@@ -96,16 +95,6 @@ public:
     boost::filesystem::path& output_directory_path();
     void output_directory_path(const boost::filesystem::path& v);
     void output_directory_path(const boost::filesystem::path&& v);
-    /**@}*/
-
-    /**
-     * @brief If set, all c++ include files will be placed at this location.
-     */
-    /**@{*/
-    const boost::filesystem::path& cpp_headers_output_directory_path() const;
-    boost::filesystem::path& cpp_headers_output_directory_path();
-    void cpp_headers_output_directory_path(const boost::filesystem::path& v);
-    void cpp_headers_output_directory_path(const boost::filesystem::path&& v);
     /**@}*/
 
     /**
@@ -185,7 +174,6 @@ private:
     std::string log_level_;
     boost::filesystem::path target_;
     boost::filesystem::path output_directory_path_;
-    boost::filesystem::path cpp_headers_output_directory_path_;
     bool compatibility_mode_;
     bool probe_stats_;
     bool probe_stats_disable_guids_;

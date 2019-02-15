@@ -55,8 +55,6 @@ const std::string log_directory_arg("log-directory");
 const std::string compatibility_mode_arg("compatibility-mode");
 const std::string target_arg("target");
 const std::string output_dir_arg("output-directory");
-const std::string cpp_headers_output_directory_arg(
-    "cpp-headers-output-directory");
 const std::string info_level("info");
 const std::string default_log_directory("log");
 
@@ -130,11 +128,7 @@ program_options_parser::make_output_options_description() const {
         ("output-directory,o",
             value<std::string>(),
             "Output directory for the generated code. "
-            "Defaults to the current working directory.")
-        ("cpp-headers-output-directory,c",
-            value<std::string>(),
-            "If set, the c++ header files will be placed at this location."
-            "If not set, they are placed inside of output-directory.");
+            "Defaults to the current working directory.");
 
     return r;
 }
@@ -247,11 +241,6 @@ make_knitting_options(const variables_map& vm) const {
     else {
         const auto s(vm[output_dir_arg].as<std::string>());
         r.output_directory_path(absolute(s));
-    }
-
-    if (vm.count(cpp_headers_output_directory_arg)) {
-        const auto s(vm[cpp_headers_output_directory_arg].as<std::string>());
-        r.cpp_headers_output_directory_path(absolute(s));
     }
 
     r.compatibility_mode(vm.count(compatibility_mode_arg) != 0);

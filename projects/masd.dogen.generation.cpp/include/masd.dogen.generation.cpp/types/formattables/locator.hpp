@@ -89,6 +89,11 @@ private:
         const formatters::repository& frp, const annotations::annotation& o);
 
 private:
+    boost::filesystem::path compute_headers_path(
+        const boost::filesystem::path& output_directory_path,
+        const boost::filesystem::path& project_path,
+        const boost::filesystem::path& cpp_headers_output_directory_path) const;
+
     /**
      * @brief Given a facet, returns its configuration.
      *

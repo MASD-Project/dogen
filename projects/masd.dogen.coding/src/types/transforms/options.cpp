@@ -35,7 +35,6 @@ options::options(options&& rhs)
       log_level_(std::move(rhs.log_level_)),
       target_(std::move(rhs.target_)),
       output_directory_path_(std::move(rhs.output_directory_path_)),
-      cpp_headers_output_directory_path_(std::move(rhs.cpp_headers_output_directory_path_)),
       compatibility_mode_(std::move(rhs.compatibility_mode_)),
       probe_stats_(std::move(rhs.probe_stats_)),
       probe_stats_disable_guids_(std::move(rhs.probe_stats_disable_guids_)),
@@ -49,7 +48,6 @@ options::options(
     const std::string& log_level,
     const boost::filesystem::path& target,
     const boost::filesystem::path& output_directory_path,
-    const boost::filesystem::path& cpp_headers_output_directory_path,
     const bool compatibility_mode,
     const bool probe_stats,
     const bool probe_stats_disable_guids,
@@ -61,7 +59,6 @@ options::options(
       log_level_(log_level),
       target_(target),
       output_directory_path_(output_directory_path),
-      cpp_headers_output_directory_path_(cpp_headers_output_directory_path),
       compatibility_mode_(compatibility_mode),
       probe_stats_(probe_stats),
       probe_stats_disable_guids_(probe_stats_disable_guids),
@@ -76,7 +73,6 @@ void options::swap(options& other) noexcept {
     swap(log_level_, other.log_level_);
     swap(target_, other.target_);
     swap(output_directory_path_, other.output_directory_path_);
-    swap(cpp_headers_output_directory_path_, other.cpp_headers_output_directory_path_);
     swap(compatibility_mode_, other.compatibility_mode_);
     swap(probe_stats_, other.probe_stats_);
     swap(probe_stats_disable_guids_, other.probe_stats_disable_guids_);
@@ -91,7 +87,6 @@ bool options::operator==(const options& rhs) const {
         log_level_ == rhs.log_level_ &&
         target_ == rhs.target_ &&
         output_directory_path_ == rhs.output_directory_path_ &&
-        cpp_headers_output_directory_path_ == rhs.cpp_headers_output_directory_path_ &&
         compatibility_mode_ == rhs.compatibility_mode_ &&
         probe_stats_ == rhs.probe_stats_ &&
         probe_stats_disable_guids_ == rhs.probe_stats_disable_guids_ &&
@@ -169,22 +164,6 @@ void options::output_directory_path(const boost::filesystem::path& v) {
 
 void options::output_directory_path(const boost::filesystem::path&& v) {
     output_directory_path_ = std::move(v);
-}
-
-const boost::filesystem::path& options::cpp_headers_output_directory_path() const {
-    return cpp_headers_output_directory_path_;
-}
-
-boost::filesystem::path& options::cpp_headers_output_directory_path() {
-    return cpp_headers_output_directory_path_;
-}
-
-void options::cpp_headers_output_directory_path(const boost::filesystem::path& v) {
-    cpp_headers_output_directory_path_ = v;
-}
-
-void options::cpp_headers_output_directory_path(const boost::filesystem::path&& v) {
-    cpp_headers_output_directory_path_ = std::move(v);
 }
 
 bool options::compatibility_mode() const {

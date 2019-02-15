@@ -785,7 +785,7 @@ supported languages.#</dia:string>
         <dia:point val="-278,-113"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-278.05,-113.05;-250.1,-76.85"/>
+        <dia:rectangle val="-278.05,-113.05;-250.1,-74.45"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -797,7 +797,7 @@ supported languages.#</dia:string>
         <dia:real val="27.850000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="36.100000000000001"/>
+        <dia:real val="38.5"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -8160,13 +8160,13 @@ space.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O60">
       <dia:attribute name="obj_pos">
-        <dia:point val="-278,-76"/>
+        <dia:point val="-278,-72"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-278.05,-76.05;-259.74,-69.15"/>
+        <dia:rectangle val="-278.05,-72.05;-259.74,-65.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-278,-76"/>
+        <dia:point val="-278,-72"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.210000000000001"/>
@@ -32355,16 +32355,16 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-228.857,55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-228.907,54.95;-205.592,66.65"/>
+        <dia:rectangle val="-228.907,54.95;-210.212,65.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-228.857,55"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="23.215"/>
+        <dia:real val="18.594999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="11.600000000000001"/>
+        <dia:real val="10.800000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#options#</dia:string>
@@ -32535,29 +32535,6 @@ Temporary data structure used to build trees of names.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Full path to the directory in which to place the generated code.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#cpp_headers_output_directory_path#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#boost::filesystem::path#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If set, all c++ include files will be placed at this location.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32783,7 +32760,7 @@ size limitations.#</dia:string>
         <dia:point val="-181.19,43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-205.692,42.25;-180.44,55.8"/>
+        <dia:rectangle val="-210.312,42.25;-180.44,55.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32791,8 +32768,8 @@ size limitations.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-181.19,43"/>
         <dia:point val="-181.19,48.2857"/>
-        <dia:point val="-205.642,48.2857"/>
-        <dia:point val="-205.642,55"/>
+        <dia:point val="-210.262,48.2857"/>
+        <dia:point val="-210.262,55"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -32855,7 +32832,7 @@ size limitations.#</dia:string>
         <dia:point val="-212.59,36.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-217.3,35.85;-211.84,55.8"/>
+        <dia:rectangle val="-219.61,35.85;-211.84,55.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32863,8 +32840,8 @@ size limitations.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-212.59,36.6"/>
         <dia:point val="-212.59,48.2857"/>
-        <dia:point val="-217.25,48.2857"/>
-        <dia:point val="-217.25,55"/>
+        <dia:point val="-219.56,48.2857"/>
+        <dia:point val="-219.56,55"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
