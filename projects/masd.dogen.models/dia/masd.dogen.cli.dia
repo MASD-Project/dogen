@@ -1744,7 +1744,7 @@
             <dia:string>#tracing#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;masd::dogen::tracing_configuration&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;tracing_configuration&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -1767,7 +1767,7 @@
             <dia:string>#diffing#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;masd::dogen::diffing_configuration&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;diffing_configuration&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -1790,7 +1790,7 @@
             <dia:string>#error_handling#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;masd::dogen::error_handling_configuration&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;error_handling_configuration&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -2119,13 +2119,13 @@ These include traces, logs etc.#</dia:string>
         <dia:point val="86,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="85.95,48.95;99.64,53.45"/>
+        <dia:rectangle val="85.95,48.95;98.87,53.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="86,49"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="12.82"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -2223,7 +2223,7 @@ These include traces, logs etc.#</dia:string>
             <dia:string>#style#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#masd::dogen::weaving_style#</dia:string>
+            <dia:string>#weaving_style#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -2639,7 +2639,7 @@ for the destination type.#</dia:string>
         <dia:point val="96.5,43.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="92.745,43.05;97.25,49.8"/>
+        <dia:rectangle val="92.36,43.05;97.25,49.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2647,8 +2647,8 @@ for the destination type.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="96.5,43.8"/>
         <dia:point val="96.5,46"/>
-        <dia:point val="92.795,46"/>
-        <dia:point val="92.795,49"/>
+        <dia:point val="92.41,46"/>
+        <dia:point val="92.41,49"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
