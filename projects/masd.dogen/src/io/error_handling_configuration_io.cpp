@@ -20,12 +20,11 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "masd.dogen/io/diffing_style_io.hpp"
-#include "masd.dogen/io/diffing_configuration_io.hpp"
+#include "masd.dogen/io/error_handling_configuration_io.hpp"
 
 namespace masd::dogen {
 
-std::ostream& operator<<(std::ostream& s, const diffing_configuration& v) {
+std::ostream& operator<<(std::ostream& s, const error_handling_configuration& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -33,9 +32,8 @@ std::ostream& operator<<(std::ostream& s, const diffing_configuration& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::diffing_configuration\"" << ", "
-      << "\"style\": " << v.style() << ", "
-      << "\"report_identical_files\": " << v.report_identical_files()
+      << "\"__type__\": " << "\"masd::dogen::error_handling_configuration\"" << ", "
+      << "\"compatibility_mode_enabled\": " << v.compatibility_mode_enabled()
       << " }";
     return(s);
 }

@@ -23,77 +23,43 @@
 namespace masd::dogen {
 
 tracing_configuration::tracing_configuration()
-    : enabled_(static_cast<bool>(0)),
-      level_(static_cast<masd::dogen::tracing_level>(0)),
+    : level_(static_cast<masd::dogen::tracing_level>(0)),
       format_(static_cast<masd::dogen::tracing_format>(0)),
-      guids_enabled_(static_cast<bool>(0)) { }
-
-tracing_configuration::tracing_configuration(tracing_configuration&& rhs)
-    : enabled_(std::move(rhs.enabled_)),
-      output_directory_(std::move(rhs.output_directory_)),
-      level_(std::move(rhs.level_)),
-      format_(std::move(rhs.format_)),
-      guids_enabled_(std::move(rhs.guids_enabled_)) { }
+      guids_enabled_(static_cast<bool>(0)),
+      use_short_names_(static_cast<bool>(0)) { }
 
 tracing_configuration::tracing_configuration(
-    const bool enabled,
-    const boost::filesystem::path& output_directory,
     const masd::dogen::tracing_level level,
     const masd::dogen::tracing_format format,
-    const bool guids_enabled)
-    : enabled_(enabled),
-      output_directory_(output_directory),
-      level_(level),
+    const bool guids_enabled,
+    const std::string& logging_impact,
+    const bool use_short_names)
+    : level_(level),
       format_(format),
-      guids_enabled_(guids_enabled) { }
+      guids_enabled_(guids_enabled),
+      logging_impact_(logging_impact),
+      use_short_names_(use_short_names) { }
 
 void tracing_configuration::swap(tracing_configuration& other) noexcept {
     using std::swap;
-    swap(enabled_, other.enabled_);
-    swap(output_directory_, other.output_directory_);
     swap(level_, other.level_);
     swap(format_, other.format_);
     swap(guids_enabled_, other.guids_enabled_);
+    swap(logging_impact_, other.logging_impact_);
+    swap(use_short_names_, other.use_short_names_);
 }
 
 bool tracing_configuration::operator==(const tracing_configuration& rhs) const {
-    return enabled_ == rhs.enabled_ &&
-        output_directory_ == rhs.output_directory_ &&
-        level_ == rhs.level_ &&
+    return level_ == rhs.level_ &&
         format_ == rhs.format_ &&
-        guids_enabled_ == rhs.guids_enabled_;
+        guids_enabled_ == rhs.guids_enabled_ &&
+        logging_impact_ == rhs.logging_impact_ &&
+        use_short_names_ == rhs.use_short_names_;
 }
 
 tracing_configuration& tracing_configuration::operator=(tracing_configuration other) {
     using std::swap;
     swap(*this, other);
-    return *this;
-}
-
-bool tracing_configuration::enabled() const {
-    return enabled_;
-}
-
-tracing_configuration& tracing_configuration::enabled(const bool v) {
-    enabled_ = v;
-    return *this;
-}
-
-const boost::filesystem::path& tracing_configuration::output_directory() const {
-    return output_directory_;
-}
-
-boost::filesystem::path& tracing_configuration::output_directory() {
-    return output_directory_;
-}
-
-tracing_configuration& tracing_configuration::output_directory(const boost::filesystem::path& v) {
-    output_directory_ = v;
-    return *this;
-}
-
-tracing_configuration& tracing_configuration::output_directory(const boost::filesystem::path&& v) {
-    output_directory_ = std::move(v);
     return *this;
 }
 
@@ -121,6 +87,33 @@ bool tracing_configuration::guids_enabled() const {
 
 tracing_configuration& tracing_configuration::guids_enabled(const bool v) {
     guids_enabled_ = v;
+    return *this;
+}
+
+const std::string& tracing_configuration::logging_impact() const {
+    return logging_impact_;
+}
+
+std::string& tracing_configuration::logging_impact() {
+    return logging_impact_;
+}
+
+tracing_configuration& tracing_configuration::logging_impact(const std::string& v) {
+    logging_impact_ = v;
+    return *this;
+}
+
+tracing_configuration& tracing_configuration::logging_impact(const std::string&& v) {
+    logging_impact_ = std::move(v);
+    return *this;
+}
+
+bool tracing_configuration::use_short_names() const {
+    return use_short_names_;
+}
+
+tracing_configuration& tracing_configuration::use_short_names(const bool v) {
+    use_short_names_ = v;
     return *this;
 }
 

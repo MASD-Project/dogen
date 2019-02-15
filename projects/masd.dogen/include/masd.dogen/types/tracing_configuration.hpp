@@ -25,54 +25,34 @@
 #pragma once
 #endif
 
+#include <string>
 #include <algorithm>
-#include <boost/filesystem/path.hpp>
 #include "masd.dogen/types/tracing_level.hpp"
 #include "masd.dogen/types/tracing_format.hpp"
 
 namespace masd::dogen {
 
 /**
- * @brief Configuration related to tracing.
+ * @brief Configuration related to transform tracing.
  */
 class tracing_configuration final {
 public:
     tracing_configuration(const tracing_configuration&) = default;
+    tracing_configuration(tracing_configuration&&) = default;
     ~tracing_configuration() = default;
 
 public:
     tracing_configuration();
 
 public:
-    tracing_configuration(tracing_configuration&& rhs);
-
-public:
     tracing_configuration(
-        const bool enabled,
-        const boost::filesystem::path& output_directory,
         const masd::dogen::tracing_level level,
         const masd::dogen::tracing_format format,
-        const bool guids_enabled);
+        const bool guids_enabled,
+        const std::string& logging_impact,
+        const bool use_short_names);
 
 public:
-    /**
-     * @brief If true, the configurable aspect will be expressed.
-     */
-    /**@{*/
-    bool enabled() const;
-    tracing_configuration& enabled(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Directory in which to place the output.
-     */
-    /**@{*/
-    const boost::filesystem::path& output_directory() const;
-    boost::filesystem::path& output_directory();
-    tracing_configuration& output_directory(const boost::filesystem::path& v);
-    tracing_configuration& output_directory(const boost::filesystem::path&& v);
-    /**@}*/
-
     /**
      * @brief Dump all available tracing information about transforms.
      */
@@ -99,6 +79,28 @@ public:
     tracing_configuration& guids_enabled(const bool v);
     /**@}*/
 
+    /**
+     * @brief Additional information to tell tracing about the possible impact of logging.
+     *
+     * Informative string detailing whether logging was off, or set to debug etc. This is
+     * required in order to be able to compare like-for-like numbers.
+     */
+    /**@{*/
+    const std::string& logging_impact() const;
+    std::string& logging_impact();
+    tracing_configuration& logging_impact(const std::string& v);
+    tracing_configuration& logging_impact(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Use short directory and file names. Useful mainly on windows due to path
+     * size limitations.
+     */
+    /**@{*/
+    bool use_short_names() const;
+    tracing_configuration& use_short_names(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const tracing_configuration& rhs) const;
     bool operator!=(const tracing_configuration& rhs) const {
@@ -110,11 +112,11 @@ public:
     tracing_configuration& operator=(tracing_configuration other);
 
 private:
-    bool enabled_;
-    boost::filesystem::path output_directory_;
     masd::dogen::tracing_level level_;
     masd::dogen::tracing_format format_;
     bool guids_enabled_;
+    std::string logging_impact_;
+    bool use_short_names_;
 };
 
 }

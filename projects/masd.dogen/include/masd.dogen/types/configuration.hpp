@@ -26,13 +26,10 @@
 #endif
 
 #include <algorithm>
-#include <boost/variant.hpp>
+#include <boost/optional.hpp>
 #include "masd.dogen/types/diffing_configuration.hpp"
-#include "masd.dogen/types/logging_configuration.hpp"
 #include "masd.dogen/types/tracing_configuration.hpp"
-#include "masd.dogen/types/weaving_configuration.hpp"
-#include "masd.dogen/types/conversion_configuration.hpp"
-#include "masd.dogen/types/generation_configuration.hpp"
+#include "masd.dogen/types/error_handling_configuration.hpp"
 
 namespace masd::dogen {
 
@@ -47,41 +44,30 @@ public:
 
 public:
     configuration(
-        const boost::variant<masd::dogen::generation_configuration, masd::dogen::weaving_configuration, masd::dogen::conversion_configuration>& activity,
-        const masd::dogen::tracing_configuration& tracing,
-        const masd::dogen::logging_configuration& logging,
-        const masd::dogen::diffing_configuration& diffing);
+        const boost::optional<masd::dogen::error_handling_configuration>& error_handling,
+        const boost::optional<masd::dogen::tracing_configuration>& tracing,
+        const boost::optional<masd::dogen::diffing_configuration>& diffing);
 
 public:
-    const boost::variant<masd::dogen::generation_configuration, masd::dogen::weaving_configuration, masd::dogen::conversion_configuration>& activity() const;
-    boost::variant<masd::dogen::generation_configuration, masd::dogen::weaving_configuration, masd::dogen::conversion_configuration>& activity();
-    configuration& activity(const boost::variant<masd::dogen::generation_configuration, masd::dogen::weaving_configuration, masd::dogen::conversion_configuration>& v);
-    configuration& activity(const boost::variant<masd::dogen::generation_configuration, masd::dogen::weaving_configuration, masd::dogen::conversion_configuration>&& v);
+    const boost::optional<masd::dogen::error_handling_configuration>& error_handling() const;
+    boost::optional<masd::dogen::error_handling_configuration>& error_handling();
+    configuration& error_handling(const boost::optional<masd::dogen::error_handling_configuration>& v);
+    configuration& error_handling(const boost::optional<masd::dogen::error_handling_configuration>&& v);
 
     /**
      * @brief Configuration for tracing.
      */
     /**@{*/
-    const masd::dogen::tracing_configuration& tracing() const;
-    masd::dogen::tracing_configuration& tracing();
-    configuration& tracing(const masd::dogen::tracing_configuration& v);
-    configuration& tracing(const masd::dogen::tracing_configuration&& v);
+    const boost::optional<masd::dogen::tracing_configuration>& tracing() const;
+    boost::optional<masd::dogen::tracing_configuration>& tracing();
+    configuration& tracing(const boost::optional<masd::dogen::tracing_configuration>& v);
+    configuration& tracing(const boost::optional<masd::dogen::tracing_configuration>&& v);
     /**@}*/
 
-    /**
-     * @brief Configuration for logging.
-     */
-    /**@{*/
-    const masd::dogen::logging_configuration& logging() const;
-    masd::dogen::logging_configuration& logging();
-    configuration& logging(const masd::dogen::logging_configuration& v);
-    configuration& logging(const masd::dogen::logging_configuration&& v);
-    /**@}*/
-
-    const masd::dogen::diffing_configuration& diffing() const;
-    masd::dogen::diffing_configuration& diffing();
-    configuration& diffing(const masd::dogen::diffing_configuration& v);
-    configuration& diffing(const masd::dogen::diffing_configuration&& v);
+    const boost::optional<masd::dogen::diffing_configuration>& diffing() const;
+    boost::optional<masd::dogen::diffing_configuration>& diffing();
+    configuration& diffing(const boost::optional<masd::dogen::diffing_configuration>& v);
+    configuration& diffing(const boost::optional<masd::dogen::diffing_configuration>&& v);
 
 public:
     bool operator==(const configuration& rhs) const;
@@ -94,10 +80,9 @@ public:
     configuration& operator=(configuration other);
 
 private:
-    boost::variant<masd::dogen::generation_configuration, masd::dogen::weaving_configuration, masd::dogen::conversion_configuration> activity_;
-    masd::dogen::tracing_configuration tracing_;
-    masd::dogen::logging_configuration logging_;
-    masd::dogen::diffing_configuration diffing_;
+    boost::optional<masd::dogen::error_handling_configuration> error_handling_;
+    boost::optional<masd::dogen::tracing_configuration> tracing_;
+    boost::optional<masd::dogen::diffing_configuration> diffing_;
 };
 
 }

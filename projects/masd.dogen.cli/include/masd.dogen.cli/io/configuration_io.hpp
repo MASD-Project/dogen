@@ -18,26 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "masd.dogen/io/diffing_style_io.hpp"
-#include "masd.dogen/io/diffing_configuration_io.hpp"
+#ifndef MASD_DOGEN_CLI_IO_CONFIGURATION_IO_HPP
+#define MASD_DOGEN_CLI_IO_CONFIGURATION_IO_HPP
 
-namespace masd::dogen {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const diffing_configuration& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
+#include <iosfwd>
+#include "masd.dogen.cli/types/configuration.hpp"
 
-    s << " { "
-      << "\"__type__\": " << "\"masd::dogen::diffing_configuration\"" << ", "
-      << "\"style\": " << v.style() << ", "
-      << "\"report_identical_files\": " << v.report_identical_files()
-      << " }";
-    return(s);
-}
+namespace masd::dogen::cli {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const masd::dogen::cli::configuration& v);
 
 }
+
+#endif

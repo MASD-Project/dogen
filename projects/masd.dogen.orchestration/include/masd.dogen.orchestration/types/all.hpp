@@ -26,11 +26,6 @@
 #endif
 
 #include "masd.dogen.orchestration/types/orchestration.hpp"
-#include "masd.dogen.orchestration/types/in_memory_weaver.hpp"
-#include "masd.dogen.orchestration/types/filesystem_weaver.hpp"
-#include "masd.dogen.orchestration/types/in_memory_converter.hpp"
-#include "masd.dogen.orchestration/types/in_memory_generator.hpp"
-#include "masd.dogen.orchestration/types/filesystem_converter.hpp"
-#include "masd.dogen.orchestration/types/filesystem_generator.hpp"
+#include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
 
 #endif

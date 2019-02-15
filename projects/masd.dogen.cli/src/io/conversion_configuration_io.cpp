@@ -19,23 +19,25 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "masd.dogen/io/diffing_style_io.hpp"
-#include "masd.dogen/io/diffing_configuration_io.hpp"
+#include <boost/algorithm/string.hpp>
+#include "masd.dogen.cli/io/conversion_configuration_io.hpp"
 
-namespace masd::dogen {
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
 
-std::ostream& operator<<(std::ostream& s, const diffing_configuration& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
+namespace masd::dogen::cli {
 
+std::ostream& operator<<(std::ostream& s, const conversion_configuration& v) {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::diffing_configuration\"" << ", "
-      << "\"style\": " << v.style() << ", "
-      << "\"report_identical_files\": " << v.report_identical_files()
+      << "\"__type__\": " << "\"masd::dogen::cli::conversion_configuration\"" << ", "
+      << "\"source\": " << "\"" << v.source().generic_string() << "\"" << ", "
+      << "\"destination_type\": " << "\"" << tidy_up_string(v.destination_type()) << "\"" << ", "
+      << "\"destination_file_name\": " << "\"" << tidy_up_string(v.destination_file_name()) << "\""
       << " }";
     return(s);
 }

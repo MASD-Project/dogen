@@ -26,7 +26,7 @@
 #endif
 
 #include <algorithm>
-#include <boost/filesystem/path.hpp>
+#include "masd.dogen/types/diffing_style.hpp"
 
 namespace masd::dogen {
 
@@ -36,36 +36,32 @@ namespace masd::dogen {
 class diffing_configuration final {
 public:
     diffing_configuration(const diffing_configuration&) = default;
+    diffing_configuration(diffing_configuration&&) = default;
     ~diffing_configuration() = default;
 
 public:
     diffing_configuration();
 
 public:
-    diffing_configuration(diffing_configuration&& rhs);
-
-public:
     diffing_configuration(
-        const bool enabled,
-        const boost::filesystem::path& output_directory);
+        const masd::dogen::diffing_style style,
+        const bool report_identical_files);
 
 public:
     /**
-     * @brief If true, the configurable aspect will be expressed.
+     * @brief What style to use when producing diffs.
      */
     /**@{*/
-    bool enabled() const;
-    diffing_configuration& enabled(const bool v);
+    masd::dogen::diffing_style style() const;
+    diffing_configuration& style(const masd::dogen::diffing_style v);
     /**@}*/
 
     /**
-     * @brief Directory in which to place the output.
+     * @brief If true, reports files that have not changed as well.
      */
     /**@{*/
-    const boost::filesystem::path& output_directory() const;
-    boost::filesystem::path& output_directory();
-    diffing_configuration& output_directory(const boost::filesystem::path& v);
-    diffing_configuration& output_directory(const boost::filesystem::path&& v);
+    bool report_identical_files() const;
+    diffing_configuration& report_identical_files(const bool v);
     /**@}*/
 
 public:
@@ -79,8 +75,8 @@ public:
     diffing_configuration& operator=(diffing_configuration other);
 
 private:
-    bool enabled_;
-    boost::filesystem::path output_directory_;
+    masd::dogen::diffing_style style_;
+    bool report_identical_files_;
 };
 
 }

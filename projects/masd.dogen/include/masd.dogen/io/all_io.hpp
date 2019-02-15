@@ -25,25 +25,13 @@
 #pragma once
 #endif
 
-#include "masd.dogen/io/model_io.hpp"
-#include "masd.dogen/io/archive_io.hpp"
-#include "masd.dogen/io/artefact_io.hpp"
-#include "masd.dogen/io/log_level_io.hpp"
-#include "masd.dogen/io/operation_io.hpp"
-#include "masd.dogen/io/archive_type_io.hpp"
 #include "masd.dogen/io/configuration_io.hpp"
+#include "masd.dogen/io/diffing_style_io.hpp"
 #include "masd.dogen/io/tracing_level_io.hpp"
 #include "masd.dogen/io/weaving_style_io.hpp"
-#include "masd.dogen/io/operation_type_io.hpp"
 #include "masd.dogen/io/tracing_format_io.hpp"
-#include "masd.dogen/io/operation_reason_io.hpp"
-#include "masd.dogen/io/artefact_container_io.hpp"
-#include "masd.dogen/io/artefact_group_type_io.hpp"
 #include "masd.dogen/io/diffing_configuration_io.hpp"
-#include "masd.dogen/io/logging_configuration_io.hpp"
 #include "masd.dogen/io/tracing_configuration_io.hpp"
-#include "masd.dogen/io/weaving_configuration_io.hpp"
-#include "masd.dogen/io/conversion_configuration_io.hpp"
-#include "masd.dogen/io/generation_configuration_io.hpp"
+#include "masd.dogen/io/error_handling_configuration_io.hpp"
 
 #endif

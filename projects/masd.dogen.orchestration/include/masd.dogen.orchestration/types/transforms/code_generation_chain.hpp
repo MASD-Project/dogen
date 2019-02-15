@@ -18,26 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "masd.dogen/io/diffing_style_io.hpp"
-#include "masd.dogen/io/diffing_configuration_io.hpp"
+#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_CODE_GENERATION_CHAIN_HPP
+#define MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_CODE_GENERATION_CHAIN_HPP
 
-namespace masd::dogen {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const diffing_configuration& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
+#include <algorithm>
 
-    s << " { "
-      << "\"__type__\": " << "\"masd::dogen::diffing_configuration\"" << ", "
-      << "\"style\": " << v.style() << ", "
-      << "\"report_identical_files\": " << v.report_identical_files()
-      << " }";
-    return(s);
+namespace masd::dogen::orchestration::transforms {
+
+class code_generation_chain final {
+public:
+    code_generation_chain() = default;
+    code_generation_chain(const code_generation_chain&) = default;
+    code_generation_chain(code_generation_chain&&) = default;
+    ~code_generation_chain() = default;
+    code_generation_chain& operator=(const code_generation_chain&) = default;
+
+public:
+    bool operator==(const code_generation_chain& rhs) const;
+    bool operator!=(const code_generation_chain& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
+
 }
 
-}
+#endif

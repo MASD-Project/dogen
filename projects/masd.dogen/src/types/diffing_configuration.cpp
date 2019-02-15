@@ -23,27 +23,24 @@
 namespace masd::dogen {
 
 diffing_configuration::diffing_configuration()
-    : enabled_(static_cast<bool>(0)) { }
-
-diffing_configuration::diffing_configuration(diffing_configuration&& rhs)
-    : enabled_(std::move(rhs.enabled_)),
-      output_directory_(std::move(rhs.output_directory_)) { }
+    : style_(static_cast<masd::dogen::diffing_style>(0)),
+      report_identical_files_(static_cast<bool>(0)) { }
 
 diffing_configuration::diffing_configuration(
-    const bool enabled,
-    const boost::filesystem::path& output_directory)
-    : enabled_(enabled),
-      output_directory_(output_directory) { }
+    const masd::dogen::diffing_style style,
+    const bool report_identical_files)
+    : style_(style),
+      report_identical_files_(report_identical_files) { }
 
 void diffing_configuration::swap(diffing_configuration& other) noexcept {
     using std::swap;
-    swap(enabled_, other.enabled_);
-    swap(output_directory_, other.output_directory_);
+    swap(style_, other.style_);
+    swap(report_identical_files_, other.report_identical_files_);
 }
 
 bool diffing_configuration::operator==(const diffing_configuration& rhs) const {
-    return enabled_ == rhs.enabled_ &&
-        output_directory_ == rhs.output_directory_;
+    return style_ == rhs.style_ &&
+        report_identical_files_ == rhs.report_identical_files_;
 }
 
 diffing_configuration& diffing_configuration::operator=(diffing_configuration other) {
@@ -52,30 +49,21 @@ diffing_configuration& diffing_configuration::operator=(diffing_configuration ot
     return *this;
 }
 
-bool diffing_configuration::enabled() const {
-    return enabled_;
+masd::dogen::diffing_style diffing_configuration::style() const {
+    return style_;
 }
 
-diffing_configuration& diffing_configuration::enabled(const bool v) {
-    enabled_ = v;
+diffing_configuration& diffing_configuration::style(const masd::dogen::diffing_style v) {
+    style_ = v;
     return *this;
 }
 
-const boost::filesystem::path& diffing_configuration::output_directory() const {
-    return output_directory_;
+bool diffing_configuration::report_identical_files() const {
+    return report_identical_files_;
 }
 
-boost::filesystem::path& diffing_configuration::output_directory() {
-    return output_directory_;
-}
-
-diffing_configuration& diffing_configuration::output_directory(const boost::filesystem::path& v) {
-    output_directory_ = v;
-    return *this;
-}
-
-diffing_configuration& diffing_configuration::output_directory(const boost::filesystem::path&& v) {
-    output_directory_ = std::move(v);
+diffing_configuration& diffing_configuration::report_identical_files(const bool v) {
+    report_identical_files_ = v;
     return *this;
 }
 

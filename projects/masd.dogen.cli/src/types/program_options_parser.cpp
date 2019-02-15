@@ -153,63 +153,63 @@ positional_options_description make_positional_options() {
     return r;
 }
 
-/**
- * @brief Creates the options related to code generation.
- */
-options_description make_generate_options_description() {
-    options_description r("Generation");
-    r.add_options()
-        ("compatibility-mode-enabled,m", "Attempt to process inputs, "
-            "ignoring certain types of errors.")
-        ("delete-extra-files,d", "Delete any additional files found in "
-            "directories managed by Knitter.")
-        ("ignore-files-matching-regex,i",
-            value<std::vector<std::string> >(),
-            "Ignore files matching regex, if they are on the deletion list")
-        ("force-write,f", "Always write files, even when there are "
-            "no differences.")
-        ("output-directory,o",
-            value<std::string>(), "Output directory for the generated code. "
-            "Defaults to the current working directory.")
-        ("cpp-headers-output-directory,c",
-            value<std::string>(),
-            "If set, the C++ header files will be placed at this location."
-            "If not set, they are placed inside of output-directory.")
-        ("target,t",
-            value<std::string>(),
-            "Model to generate code for, in any of the supported formats.");
+// /**
+//  * @brief Creates the options related to code generation.
+//  */
+// options_description make_generate_options_description() {
+//     options_description r("Generation");
+//     r.add_options()
+//         ("compatibility-mode-enabled,m", "Attempt to process inputs, "
+//             "ignoring certain types of errors.")
+//         ("delete-extra-files,d", "Delete any additional files found in "
+//             "directories managed by Knitter.")
+//         ("ignore-files-matching-regex,i",
+//             value<std::vector<std::string> >(),
+//             "Ignore files matching regex, if they are on the deletion list")
+//         ("force-write,f", "Always write files, even when there are "
+//             "no differences.")
+//         ("output-directory,o",
+//             value<std::string>(), "Output directory for the generated code. "
+//             "Defaults to the current working directory.")
+//         ("cpp-headers-output-directory,c",
+//             value<std::string>(),
+//             "If set, the C++ header files will be placed at this location."
+//             "If not set, they are placed inside of output-directory.")
+//         ("target,t",
+//             value<std::string>(),
+//             "Model to generate code for, in any of the supported formats.");
 
-    return r;
-}
+//     return r;
+// }
 
-/**
- * @brief Creates the options related to conversion.
- */
-options_description make_convert_options_description() {
-    options_description r("Convert");
-    r.add_options()
-        ("source,s",
-            value<std::string>(),
-            "Input model to read, in any of the supported formats.")
-        ("destination,d",
-            value<std::string>(),
-            "Output model to convert to, in any of the supported formats.");
+// /**
+//  * @brief Creates the options related to conversion.
+//  */
+// options_description make_convert_options_description() {
+//     options_description r("Convert");
+//     r.add_options()
+//         ("source,s",
+//             value<std::string>(),
+//             "Input model to read, in any of the supported formats.")
+//         ("destination,d",
+//             value<std::string>(),
+//             "Output model to convert to, in any of the supported formats.");
 
-    return r;
-}
+//     return r;
+// }
 
-/**
- * @brief Creates the options related to weaving.
- */
-options_description make_weave_options_description() {
-    options_description r("Weave");
-    r.add_options()
-        ("target,t",
-            value<std::string>(),
-            "File or directory containing supported templates.");
+// /**
+//  * @brief Creates the options related to weaving.
+//  */
+// options_description make_weave_options_description() {
+//     options_description r("Weave");
+//     r.add_options()
+//         ("target,t",
+//             value<std::string>(),
+//             "File or directory containing supported templates.");
 
-    return r;
-}
+//     return r;
+// }
 
 /**
  * @brief ensures the supplied command is a valid command. If not,
@@ -268,21 +268,21 @@ void print_help(const boost::program_options::options_description& od,
     lambda(weave_command_name, weave_command_desc);
 }
 
-/**
- * @brief Prints help text at the command level.
- *
- * @param command_name name of the command to print help for.
- * @param od command options.
- * @param s info stream.
- */
-void print_help_command(const std::string& command_name,
-    const boost::program_options::options_description& od, std::ostream& s) {
-    print_help_header(s);
-    s << "Displaying options specific to the " << command_name << " command. "
-      << std::endl
-      << "For global options, type --help." << std::endl << std::endl
-      << od;
-}
+// /**
+//  * @brief Prints help text at the command level.
+//  *
+//  * @param command_name name of the command to print help for.
+//  * @param od command options.
+//  * @param s info stream.
+//  */
+// void print_help_command(const std::string& command_name,
+//     const boost::program_options::options_description& od, std::ostream& s) {
+//     print_help_header(s);
+//     s << "Displaying options specific to the " << command_name << " command. "
+//       << std::endl
+//       << "For global options, type --help." << std::endl << std::endl
+//       << od;
+// }
 
 /**
  * @brief Print the program's version details.
@@ -340,11 +340,13 @@ handle_no_command(const bool has_version, const bool has_help,
 /**
  * @brief Reads the tracing configuration from the variables map.
  */
-masd::dogen::tracing_configuration read_tracing_configuration(
+/*
+boost::optional<masd::dogen::tracing_configuration> read_tracing_configuration(
     const std::string& model_name, const variables_map& vm) {
 
+    const bool enabled(vm.count(tracing_enabled_arg) != 0);
+
     masd::dogen::tracing_configuration r;
-    r.enabled(vm.count(tracing_enabled_arg) != 0);
     r.guids_enabled(vm.count(tracing_guids_enabled_arg) != 0);
 
     using masd::dogen::tracing_level;
@@ -356,7 +358,7 @@ masd::dogen::tracing_configuration read_tracing_configuration(
             r.level(tracing_level::summary);
         else
             BOOST_THROW_EXCEPTION(parser_exception(invalid_tracing_level + s));
-    } else if (r.enabled())
+    } else if (enabled)
         r.level(tracing_level::summary);
 
     using masd::dogen::tracing_format;
@@ -368,14 +370,14 @@ masd::dogen::tracing_configuration read_tracing_configuration(
             r.format(tracing_format::markdown);
         else
             BOOST_THROW_EXCEPTION(parser_exception(invalid_format + s));
-    } else if (r.enabled())
+    } else if (enabled)
         r.format(tracing_format::org_mode);
 
     const auto out_dir =
         [&]() {
             using boost::filesystem::absolute;
             if (vm.count(tracing_output_directory_arg) == 0) {
-                if (!r.enabled())
+                if (!enabled)
                     return boost::filesystem::path();
                 return absolute(tracing_default_directory) / model_name;
             }
@@ -386,10 +388,11 @@ masd::dogen::tracing_configuration read_tracing_configuration(
     r.output_directory(out_dir);
     return r;
 }
-
+*/
 /**
  * @brief Reads the tracing configuration from the variables map.
  */
+/*
 masd::dogen::logging_configuration
 read_logging_configuration(const variables_map& vm) {
 
@@ -430,10 +433,11 @@ read_logging_configuration(const variables_map& vm) {
 
     return r;
 }
-
+*/
 /**
  * @brief Reads the generation configuration from the variables map.
  */
+/*
 masd::dogen::generation_configuration
 read_generation_configuration(const variables_map& vm) {
     masd::dogen::generation_configuration r;
@@ -470,10 +474,11 @@ read_generation_configuration(const variables_map& vm) {
 
     return r;
 }
-
+*/
 /**
  * @brief Reads the conversion configuration from the variables map.
  */
+/*
 masd::dogen::conversion_configuration
 read_conversion_configuration(const variables_map& vm) {
     masd::dogen::conversion_configuration r;
@@ -491,10 +496,11 @@ read_conversion_configuration(const variables_map& vm) {
 
     return r;
 }
-
+*/
 /**
  * @brief Reads the weaving configuration from the variables map.
  */
+/*
 masd::dogen::weaving_configuration
 read_weaving_configuration(const variables_map& vm) {
     masd::dogen::weaving_configuration r;
@@ -507,74 +513,75 @@ read_weaving_configuration(const variables_map& vm) {
 
     return r;
 }
-
+*/
 /**
  * @brief Contains the processing logic for when the user supplies a
  * command in the command line.
  */
 boost::optional<masd::dogen::configuration>
-handle_command(const std::string& command_name, const bool has_help,
-    const boost::program_options::parsed_options& po, std::ostream& info,
-    variables_map& vm) {
+handle_command(const std::string& /*command_name*/, const bool /*has_help*/,
+    const boost::program_options::parsed_options& /*po*/, std::ostream& /*info*/,
+    variables_map& /*vm*/) {
 
-    /*
-     * Collect all the unrecognized options from the first pass. It
-     * includes the positional command name, so we need to erase it.
-     */
-    using boost::program_options::include_positional;
-    using boost::program_options::collect_unrecognized;
-    auto options(collect_unrecognized(po.options, include_positional));
-    options.erase(options.begin());
+    // /*
+    //  * Collect all the unrecognized options from the first pass. It
+    //  * includes the positional command name, so we need to erase it.
+    //  */
+    // using boost::program_options::include_positional;
+    // using boost::program_options::collect_unrecognized;
+    // auto options(collect_unrecognized(po.options, include_positional));
+    // options.erase(options.begin());
 
-    /*
-     * For each command we need to setup their set of options, parse
-     * them and then generate the appropriate options.
-     */
-    std::string model_name;
-    masd::dogen::configuration r;
-    using boost::program_options::command_line_parser;
-    typedef boost::optional<masd::dogen::configuration> empty_config;
-    if (command_name == generate_command_name) {
-        const auto god(make_generate_options_description());
-        if (has_help) {
-            print_help_command(generate_command_name, god, info);
-            return empty_config();
-        }
+    // /*
+    //  * For each command we need to setup their set of options, parse
+    //  * them and then generate the appropriate options.
+    //  */
+    // std::string model_name;
+    // masd::dogen::configuration r;
+    // using boost::program_options::command_line_parser;
+    // typedef boost::optional<masd::dogen::configuration> empty_config;
+    // if (command_name == generate_command_name) {
+    //     const auto god(make_generate_options_description());
+    //     if (has_help) {
+    //         print_help_command(generate_command_name, god, info);
+    //         return empty_config();
+    //     }
 
-        store(command_line_parser(options).options(god).run(), vm);
-        const auto gc(read_generation_configuration(vm));
-        model_name = gc.target().stem().filename().string();
-        r.activity(gc);
-    } else if (command_name == convert_command_name) {
-        const auto cod(make_convert_options_description());
-        if (has_help) {
-            print_help_command(convert_command_name, cod, info);
-            return empty_config();
-        }
+    //     store(command_line_parser(options).options(god).run(), vm);
+    //     const auto gc(read_generation_configuration(vm));
+    //     model_name = gc.target().stem().filename().string();
+    //     r.activity(gc);
+    // } else if (command_name == convert_command_name) {
+    //     const auto cod(make_convert_options_description());
+    //     if (has_help) {
+    //         print_help_command(convert_command_name, cod, info);
+    //         return empty_config();
+    //     }
 
-        store(command_line_parser(options).options(cod).run(), vm);
-        const auto cc(read_conversion_configuration(vm));
-        model_name = cc.source().stem().filename().string();
-        r.activity(cc);
-    } else if (command_name == weave_command_name) {
-        const auto cod(make_weave_options_description());
-        if (has_help) {
-            print_help_command(weave_command_name, cod, info);
-            return empty_config();
-        }
+    //     store(command_line_parser(options).options(cod).run(), vm);
+    //     const auto cc(read_conversion_configuration(vm));
+    //     model_name = cc.source().stem().filename().string();
+    //     r.activity(cc);
+    // } else if (command_name == weave_command_name) {
+    //     const auto cod(make_weave_options_description());
+    //     if (has_help) {
+    //         print_help_command(weave_command_name, cod, info);
+    //         return empty_config();
+    //     }
 
-        store(command_line_parser(options).options(cod).run(), vm);
-        const auto wc(read_weaving_configuration(vm));
-        model_name = wc.target().stem().filename().string();
-        r.activity(wc);
-    }
+    //     store(command_line_parser(options).options(cod).run(), vm);
+    //     const auto wc(read_weaving_configuration(vm));
+    //     model_name = wc.target().stem().filename().string();
+    //     r.activity(wc);
+    // }
 
-    /*
-     * Now process the common options. We must do this at the end
-     * because we require the model name.
-     */
-    r.tracing(read_tracing_configuration(model_name, vm));
-    r.logging(read_logging_configuration(vm));
+    // /*
+    //  * Now process the common options. We must do this at the end
+    //  * because we require the model name.
+    //  */
+    // r.tracing(read_tracing_configuration(model_name, vm));
+    // r.logging(read_logging_configuration(vm));
+    boost::optional<masd::dogen::configuration> r;
     return r;
 }
 

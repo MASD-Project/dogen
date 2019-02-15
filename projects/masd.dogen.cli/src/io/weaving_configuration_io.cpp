@@ -19,23 +19,16 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "masd.dogen/io/diffing_style_io.hpp"
-#include "masd.dogen/io/diffing_configuration_io.hpp"
+#include "masd.dogen/io/weaving_style_io.hpp"
+#include "masd.dogen.cli/io/weaving_configuration_io.hpp"
 
-namespace masd::dogen {
+namespace masd::dogen::cli {
 
-std::ostream& operator<<(std::ostream& s, const diffing_configuration& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
+std::ostream& operator<<(std::ostream& s, const weaving_configuration& v) {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::diffing_configuration\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::cli::weaving_configuration\"" << ", "
       << "\"style\": " << v.style() << ", "
-      << "\"report_identical_files\": " << v.report_identical_files()
+      << "\"target\": " << "\"" << v.target().generic_string() << "\""
       << " }";
     return(s);
 }

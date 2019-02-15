@@ -13,29 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-15 Fri 09:53]
+#+CAPTION: Clock summary at [2019-02-15 Fri 11:45]
 | <75>                                                 |          |        |        |       |
 | Headline                                             | Time     |        |        |     % |
 |------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                         | *183:52* |        |        | 100.0 |
+| *Total time*                                         | *185:42* |        |        | 100.0 |
 |------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                              | 183:52   |        |        | 100.0 |
-| Active                                               |          | 183:52 |        | 100.0 |
+| Stories                                              | 185:42   |        |        | 100.0 |
+| Active                                               |          | 185:42 |        | 100.0 |
 | Edit release notes for previous sprint               |          |        |   2:03 |   1.1 |
 | Sprint and product backlog grooming                  |          |        |   4:46 |   2.6 |
-| Work on MASD theory                                  |          |        | 113:38 |  61.8 |
+| Work on MASD theory                                  |          |        | 113:38 |  61.2 |
 | Rename models to fit MASD architecture               |          |        |   4:56 |   2.7 |
 | Read up on framework and API design                  |          |        |   0:57 |   0.5 |
 | Analyse the state of the mess of refactors           |          |        |   6:27 |   3.5 |
 | Create the =orchestration= model                     |          |        |   4:15 |   2.3 |
 | Update vcpkg across all operative systems            |          |        |   4:35 |   2.5 |
 | Update C# reference models to latest dogen           |          |        |   0:42 |   0.4 |
-| Convert the utility model into a regular dogen model |          |        |   7:27 |   4.1 |
+| Convert the utility model into a regular dogen model |          |        |   7:27 |   4.0 |
 | Improve support for clang-cl builds                  |          |        |   2:02 |   1.1 |
-| Great meta-data rename                               |          |        |   4:54 |   2.7 |
-| Create a single binary for all of dogen              |          |        |  16:27 |   8.9 |
-| Dogen's vcpkg export for OSX was created from master |          |        |   0:46 |   0.4 |
 | Move generation properties into meta-data            |          |        |   9:26 |   5.1 |
+| Great meta-data rename                               |          |        |   4:54 |   2.6 |
+| Create a single binary for all of dogen              |          |        |  18:17 |   9.8 |
+| Dogen's vcpkg export for OSX was created from master |          |        |   0:46 |   0.4 |
 | Fix clang-cl warnings                                |          |        |   0:31 |   0.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -578,6 +578,35 @@ Notes:
 
 - it is possible to setup [[https://docs.travis-ci.com/user/database-setup/#postgresql][postgres on travis]]
 
+*** COMPLETED Move generation properties into meta-data               :story:
+    CLOSED: [2019-02-15 Fri 11:23]
+    :LOGBOOK:
+    CLOCK: [2019-02-15 Fri 09:38]--[2019-02-15 Fri 09:49] =>  0:11
+    CLOCK: [2019-02-15 Fri 08:51]--[2019-02-15 Fri 09:37] =>  0:46
+    CLOCK: [2019-02-14 Thu 21:04]--[2019-02-14 Thu 21:10] =>  0:06
+    CLOCK: [2019-02-14 Thu 17:45]--[2019-02-14 Thu 18:29] =>  0:44
+    CLOCK: [2019-02-14 Thu 16:41]--[2019-02-14 Thu 17:15] =>  0:34
+    CLOCK: [2019-02-14 Thu 16:30]--[2019-02-14 Thu 16:40] =>  0:10
+    CLOCK: [2019-02-14 Thu 16:25]--[2019-02-14 Thu 16:29] =>  0:04
+    CLOCK: [2019-02-14 Thu 15:33]--[2019-02-14 Thu 16:24] =>  0:51
+    CLOCK: [2019-02-14 Thu 14:40]--[2019-02-14 Thu 15:32] =>  0:52
+    CLOCK: [2019-02-14 Thu 14:01]--[2019-02-14 Thu 14:39] =>  0:38
+    CLOCK: [2019-02-14 Thu 09:54]--[2019-02-14 Thu 11:46] =>  1:52
+    CLOCK: [2019-02-13 Wed 17:53]--[2019-02-13 Wed 18:34] =>  0:41
+    CLOCK: [2019-02-13 Wed 17:02]--[2019-02-13 Wed 17:52] =>  0:50
+    CLOCK: [2019-02-12 Tue 18:30]--[2019-02-12 Tue 18:43] =>  0:13
+    CLOCK: [2019-02-12 Tue 17:35]--[2019-02-12 Tue 18:29] =>  0:54
+    :END:
+
+We have a number of properties that are in the configuration of the
+code generator but which are really part of the model. We need to move
+these into the model to avoid having to add them to the new CLI
+interface.
+
+Notes:
+
+- rename "yarn." transforms in log to "masd." - done.
+
 *** STARTED Great meta-data rename                                    :story:
     :LOGBOOK:
     CLOCK: [2018-11-26 Mon 10:01]--[2018-11-26 Mon 11:02] =>  1:01
@@ -648,6 +677,8 @@ its not clear if its MASD or dogen.
 
 *** STARTED Create a single binary for all of dogen                   :story:
     :LOGBOOK:
+    CLOCK: [2019-02-15 Fri 11:24]--[2019-02-15 Fri 11:45] =>  0:21
+    CLOCK: [2019-02-15 Fri 09:54]--[2019-02-15 Fri 11:23] =>  1:29
     CLOCK: [2019-02-13 Wed 10:04]--[2019-02-13 Wed 10:41] =>  0:37
     CLOCK: [2019-02-11 Mon 10:01]--[2019-02-11 Mon 11:27] =>  1:26
     CLOCK: [2019-02-09 Sat 16:38]--[2019-02-09 Sat 18:15] =>  1:37
@@ -728,34 +759,6 @@ Problems:
   due to a hash mismatch. This may be something to do with the git
   version (2.7).
 
-*** STARTED Move generation properties into meta-data                 :story:
-    :LOGBOOK:
-    CLOCK: [2019-02-15 Fri 09:38]--[2019-02-15 Fri 09:49] =>  0:11
-    CLOCK: [2019-02-15 Fri 08:51]--[2019-02-15 Fri 09:37] =>  0:46
-    CLOCK: [2019-02-14 Thu 21:04]--[2019-02-14 Thu 21:10] =>  0:06
-    CLOCK: [2019-02-14 Thu 17:45]--[2019-02-14 Thu 18:29] =>  0:44
-    CLOCK: [2019-02-14 Thu 16:41]--[2019-02-14 Thu 17:15] =>  0:34
-    CLOCK: [2019-02-14 Thu 16:30]--[2019-02-14 Thu 16:40] =>  0:10
-    CLOCK: [2019-02-14 Thu 16:25]--[2019-02-14 Thu 16:29] =>  0:04
-    CLOCK: [2019-02-14 Thu 15:33]--[2019-02-14 Thu 16:24] =>  0:51
-    CLOCK: [2019-02-14 Thu 14:40]--[2019-02-14 Thu 15:32] =>  0:52
-    CLOCK: [2019-02-14 Thu 14:01]--[2019-02-14 Thu 14:39] =>  0:38
-    CLOCK: [2019-02-14 Thu 09:54]--[2019-02-14 Thu 11:46] =>  1:52
-    CLOCK: [2019-02-13 Wed 17:53]--[2019-02-13 Wed 18:34] =>  0:41
-    CLOCK: [2019-02-13 Wed 17:02]--[2019-02-13 Wed 17:52] =>  0:50
-    CLOCK: [2019-02-12 Tue 18:30]--[2019-02-12 Tue 18:43] =>  0:13
-    CLOCK: [2019-02-12 Tue 17:35]--[2019-02-12 Tue 18:29] =>  0:54
-    :END:
-
-We have a number of properties that are in the configuration of the
-code generator but which are really part of the model. We need to move
-these into the model to avoid having to add them to the new CLI
-interface.
-
-Notes:
-
-- rename "yarn." transforms in log to "masd." - done.
-
 *** STARTED Fix clang-cl warnings                                     :story:
     :LOGBOOK:
     CLOCK: [2019-02-14 Thu 11:47]--[2019-02-14 Thu 12:18] =>  0:31
@@ -772,6 +775,13 @@ Notes:
 
 - opened issue: [[https://github.com/Microsoft/vcpkg/issues/5336][Building with clang-cl on windows generates warnings
   from vcpkg-installed libraries]]
+
+*** References to types in top-level namespace do not resolve         :story:
+
+When referring to =weaving_styles= defined in =masd::dogen= from
+within =masd::dogen::cli=, dogen failed to resolve the
+type. Qualifying it as =masd::dogen::weaving_styles= solved the
+problem. Resolver is not walking up the path correctly.
 
 *** Rename the =transform= method to =apply=                          :story:
 

@@ -18,26 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
+#include <string>
 #include <ostream>
-#include <boost/io/ios_state.hpp>
+#include <stdexcept>
 #include "masd.dogen/io/diffing_style_io.hpp"
-#include "masd.dogen/io/diffing_configuration_io.hpp"
 
 namespace masd::dogen {
 
-std::ostream& operator<<(std::ostream& s, const diffing_configuration& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
+std::ostream& operator<<(std::ostream& s, const diffing_style& v) {
+    s << "{ " << "\"__type__\": " << "\"diffing_style\", " << "\"value\": ";
 
-    s << " { "
-      << "\"__type__\": " << "\"masd::dogen::diffing_configuration\"" << ", "
-      << "\"style\": " << v.style() << ", "
-      << "\"report_identical_files\": " << v.report_identical_files()
-      << " }";
-    return(s);
+    std::string attr;
+    switch (v) {
+    case diffing_style::invalid:
+        attr = "\"invalid\"";
+        break;
+    case diffing_style::minimal:
+        attr = "\"minimal\"";
+        break;
+    case diffing_style::unified_diff:
+        attr = "\"unified_diff\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for diffing_style");
+    }
+    s << attr << " }";
+    return s;
 }
 
 }

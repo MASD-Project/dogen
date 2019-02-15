@@ -20,9 +20,18 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
 #include "masd.dogen/io/tracing_level_io.hpp"
 #include "masd.dogen/io/tracing_format_io.hpp"
 #include "masd.dogen/io/tracing_configuration_io.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
 
 namespace masd::dogen {
 
@@ -35,11 +44,11 @@ std::ostream& operator<<(std::ostream& s, const tracing_configuration& v) {
 
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::tracing_configuration\"" << ", "
-      << "\"enabled\": " << v.enabled() << ", "
-      << "\"output_directory\": " << "\"" << v.output_directory().generic_string() << "\"" << ", "
       << "\"level\": " << v.level() << ", "
       << "\"format\": " << v.format() << ", "
-      << "\"guids_enabled\": " << v.guids_enabled()
+      << "\"guids_enabled\": " << v.guids_enabled() << ", "
+      << "\"logging_impact\": " << "\"" << tidy_up_string(v.logging_impact()) << "\"" << ", "
+      << "\"use_short_names\": " << v.use_short_names()
       << " }";
     return(s);
 }

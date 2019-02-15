@@ -19,23 +19,30 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "masd.dogen/io/diffing_style_io.hpp"
-#include "masd.dogen/io/diffing_configuration_io.hpp"
+#include "masd.dogen.cli/io/generation_configuration_io.hpp"
 
-namespace masd::dogen {
+namespace std {
 
-std::ostream& operator<<(std::ostream& s, const diffing_configuration& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
+inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::filesystem::path>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << (*i).generic_string() << "\"";
+    }
+    s << "] ";
+    return s;
+}
 
+}
+
+namespace masd::dogen::cli {
+
+std::ostream& operator<<(std::ostream& s, const generation_configuration& v) {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::diffing_configuration\"" << ", "
-      << "\"style\": " << v.style() << ", "
-      << "\"report_identical_files\": " << v.report_identical_files()
+      << "\"__type__\": " << "\"masd::dogen::cli::generation_configuration\"" << ", "
+      << "\"reference_model_directories\": " << v.reference_model_directories() << ", "
+      << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
+      << "\"output_directory\": " << "\"" << v.output_directory().generic_string() << "\""
       << " }";
     return(s);
 }
