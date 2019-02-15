@@ -83,6 +83,13 @@ private:
         const indices& idx, meta_model::name ctx, const meta_model::name& n);
 
     /**
+     * @brief Resolves a name where the ctx has model modules.
+     */
+    static boost::optional<meta_model::name>
+    try_resolve_name_with_context_model_modules(
+        const indices& idx, meta_model::name ctx, const meta_model::name& n);
+
+    /**
      * @brief Resolves a partially formed name into a full name.
      */
     static meta_model::name resolve_name(

@@ -307,6 +307,56 @@ try_resolve_name_with_context_internal_modules(const indices& idx,
     return boost::optional<meta_model::name>();
 }
 
+boost::optional<meta_model::name> resolver::
+try_resolve_name_with_context_model_modules(const indices& idx,
+    meta_model::name ctx, const meta_model::name& n) {
+
+    BOOST_LOG_SEV(lg, debug) << "Context has model modules.";
+
+    /*
+     * If we do not have an internal module path set but the
+     * context does, we need to traverse it all the way up to
+     * the model module, and see if anything matches. This
+     * allows us to refer to types inside a package without
+     * having to fully qualify them.
+     *
+     * We start at the innermost internal module and make our way
+     * upwards.
+     */
+    name_factory nf;
+    auto r(nf.build_combined_element_name(ctx, n,
+            true/*populate_model_modules_if_blank*/,
+            true/*populate_internal_modules_if_blank*/));
+
+    BOOST_LOG_SEV(lg, debug) << "Internal modules climb: " << r;
+
+    if (is_name_referable(idx, r)) {
+        BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
+        return r;
+    }
+
+    do {
+        ctx.location().model_modules().pop_back();
+        r.location().model_modules().clear();
+        r = nf.build_combined_element_name(ctx, r,
+            true/*populate_model_modules_if_blank*/,
+            true/*populate_internal_modules_if_blank*/);
+
+        BOOST_LOG_SEV(lg, debug) << "Model modules climb: " << r;
+
+        if (is_name_referable(idx, r)) {
+            BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
+            return r;
+        }
+    } while (!ctx.location().model_modules().empty());
+
+    /*
+     * If we didn't find anything, we should not throw as there still
+     * are other possibilities left to try.
+     */
+    return boost::optional<meta_model::name>();
+}
+
 meta_model::name resolver::
 resolve_name(const meta_model::endomodel& im, const indices& idx,
     const meta_model::name& ctx, const meta_model::name& n) {
@@ -356,6 +406,20 @@ resolve_name(const meta_model::endomodel& im, const indices& idx,
             return r;
         }
     }
+
+    /*
+     * If there are model modules in the context, we need to try to
+     * find the name in each of these.
+     */
+    if (!ctx.location().model_modules().empty()) {
+        auto r(try_resolve_name_with_context_model_modules(idx, ctx, n));
+        if (r)
+            return *r;
+
+        BOOST_LOG_SEV(lg, debug) << "Failed to resolve with context's "
+                                 << "model modules.";
+    } else
+        BOOST_LOG_SEV(lg, debug) << "Context does not have model modules.";
 
     /*
      * Finally, the only other possibility is that the name is on the
