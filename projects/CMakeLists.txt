@@ -184,12 +184,16 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC" OR
         string(REGEX REPLACE "/MDd" "/MTd" ${flag_var} "${${flag_var}}")
     endforeach(flag_var)
 
-    # Options specific to clang-cl
+    # Options specific to clang-cl. We suppress a number of warnings
+    # because at present the code is littered with these coming out of
+    # third party libraries like boost.
     if (CMAKE_COMPILER_IS_CLANGXX)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xclang -Wno-unknown-pragmas")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xclang -Wassume")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xclang -Wno-assume")
         set(CMAKE_CXX_FLAGS
-            "${CMAKE_CXX_FLAGS} -Xclang -Wdeprecated-declarations")
+            "${CMAKE_CXX_FLAGS} -Xclang -Wno-deprecated-declarations")
+        set(CMAKE_CXX_FLAGS
+            "${CMAKE_CXX_FLAGS} -Xclang -Wno-delete-non-virtual-dtor")
     endif()
 
     if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
