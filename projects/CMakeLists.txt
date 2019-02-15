@@ -194,6 +194,8 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC" OR
             "${CMAKE_CXX_FLAGS} -Xclang -Wno-deprecated-declarations")
         set(CMAKE_CXX_FLAGS
             "${CMAKE_CXX_FLAGS} -Xclang -Wno-delete-non-virtual-dtor")
+        set(CMAKE_CXX_FLAGS
+            "${CMAKE_CXX_FLAGS} -Xclang -Wno-potentially-evaluated-expression")
     endif()
 
     if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
