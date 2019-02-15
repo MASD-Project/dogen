@@ -2375,7 +2375,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
         <dia:point val="-35.1675,-71"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-40.7575,-76.65;-34.4175,-69.4"/>
+        <dia:rectangle val="-40.7575,-76.65;-34.4175,-70.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2446,7 +2446,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
         <dia:point val="-43,-58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-52.2675,-68.2009;-42.25,-56.4"/>
+        <dia:rectangle val="-52.2675,-68.2009;-42.25,-57.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
