@@ -103,22 +103,22 @@
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O1">
       <dia:attribute name="obj_pos">
-        <dia:point val="-48,12"/>
+        <dia:point val="-48,7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,11.95;-22.795,26.55"/>
+        <dia:rectangle val="-48.05,6.95;-20.87,24.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-48,12"/>
+        <dia:point val="-48,7"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.155000000000005"/>
+        <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="14.500000000000002"/>
+        <dia:real val="17.700000000000003"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -161,7 +161,7 @@
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-47.65,13.245"/>
+            <dia:point val="-47.65,8.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -28101,8 +28101,8 @@ an "odd" formatter.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="37,56.8"/>
         <dia:point val="37,63.3334"/>
-        <dia:point val="30.9077,63.3334"/>
-        <dia:point val="30.9076,67.9508"/>
+        <dia:point val="30.9075,63.3334"/>
+        <dia:point val="30.9075,67.9508"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
