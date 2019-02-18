@@ -93,7 +93,7 @@ void enablement_transform::compute_enablement_for_artefact_properties(
 
     /*
      * As we may be processing a segmented entity, not all formatting
-     * need to be present in the local configuration. For example, an
+     * needs to be present in the local configuration. For example, an
      * entity may be segmented into an object and a forward
      * declaration; in this case, when we are processing the object,
      * we will still see the forward declaration formatting in the
@@ -157,10 +157,10 @@ void enablement_transform::compute_enablement_for_artefact_properties(
         ap.overwrite(gc.facet_overwrite());
 
     /*
-     * If either the entire backend or facet have been disabled
-     * globally, the formatter will be disabled too.
+     * If the entire backend has been disabled globally, the formatter
+     * will be disabled too.
      */
-    if (!gc.backend_enabled() || !gc.facet_enabled()) {
+    if (!gc.backend_enabled()) {
         ap.enabled(false);
         return;
     }
@@ -186,10 +186,17 @@ void enablement_transform::compute_enablement_for_artefact_properties(
     }
 
     /*
-     * If nothing else has been set, use the global enablement
-     * flag for the formatter.
+     * If nothing else has been set, use the global enablement flag
+     * for the facet. Note that this logic is one big hack. We used to
+     * rely on the archetype enablement, but since it defaults to
+     * true, it means we ignore the global facet settings; this in
+     * turn means its not possible to globally switch off a facet. So
+     * we now instead rely on the facet enablement flag. This means
+     * that you cannot switch off a facet globally but enable only one
+     * archetype for that facet. As this seems like a pretty
+     * far-fetched use case, we ignore it for now.
      */
-    ap.enabled(gc.archetype_enabled());
+    ap.enabled(gc.facet_enabled());
     BOOST_LOG_SEV(lg, debug) << "Enablement for: " << archetype
                              << " value: " << ap.enabled();
 }
