@@ -18,24 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CLI_TYPES_ALL_HPP
-#define MASD_DOGEN_CLI_TYPES_ALL_HPP
+#ifndef MASD_DOGEN_CLI_TYPES_CONFIGURATION_VALIDATOR_HPP
+#define MASD_DOGEN_CLI_TYPES_CONFIGURATION_VALIDATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.cli/types/cli.hpp"
-#include "masd.dogen.cli/types/application.hpp"
-#include "masd.dogen.cli/types/configuration.hpp"
-#include "masd.dogen.cli/types/injector_factory.hpp"
-#include "masd.dogen.cli/types/parser_exception.hpp"
-#include "masd.dogen.cli/types/command_line_parser.hpp"
-#include "masd.dogen.cli/types/application_exception.hpp"
-#include "masd.dogen.cli/types/weaving_configuration.hpp"
-#include "masd.dogen.cli/types/program_options_parser.hpp"
-#include "masd.dogen.cli/types/configuration_validator.hpp"
-#include "masd.dogen.cli/types/conversion_configuration.hpp"
-#include "masd.dogen.cli/types/generation_configuration.hpp"
+#include <algorithm>
+
+namespace masd::dogen::cli {
+
+class configuration_validator final {
+public:
+    configuration_validator() = default;
+    configuration_validator(const configuration_validator&) = default;
+    configuration_validator(configuration_validator&&) = default;
+    ~configuration_validator() = default;
+    configuration_validator& operator=(const configuration_validator&) = default;
+
+public:
+    bool operator==(const configuration_validator& rhs) const;
+    bool operator!=(const configuration_validator& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
+
+}
 
 #endif
