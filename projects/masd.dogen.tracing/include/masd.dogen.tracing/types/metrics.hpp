@@ -30,7 +30,6 @@
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.tracing/types/metrics_fwd.hpp"
-#include "masd.dogen.tracing/serialization/metrics_fwd_ser.hpp"
 
 namespace masd::dogen::tracing {
 
@@ -51,13 +50,6 @@ public:
         const unsigned long start,
         const unsigned long end,
         const std::list<boost::shared_ptr<masd::dogen::tracing::metrics> >& children);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const masd::dogen::tracing::metrics& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, masd::dogen::tracing::metrics& v, unsigned int version);
 
 public:
     const std::string& transform_id() const;
