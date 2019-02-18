@@ -9052,6 +9052,11 @@ Notes:
   should be a flag to force this if users really need it.
 - for flags, 0 must always mean "none", as in "all flags are
   cleared".
+
+Links:
+
+- [[https://dreamdota.com/explore-c-20-bitmask-design/][Explore C++20 Bit Flag with Designated Initializer and Concepts]]
+
 *** Support for file level comments via dynamic extensions            :story:
 
 #+begin_quote
