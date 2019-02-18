@@ -26,8 +26,6 @@
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/model_generation_chain.hpp"
 #include "masd.dogen.coding/types/transforms/external_model_to_endomodel_transform.hpp"
-// #include "masd.dogen.coding/types/transforms/exomodel_generation_chain.hpp"
-// #include "masd.dogen.coding/types/transforms/exomodel_to_endomodel_transform.hpp"
 #include "masd.dogen.coding/types/transforms/endomodel_pre_processing_chain.hpp"
 #include "masd.dogen.coding/types/transforms/initial_target_chain.hpp"
 
@@ -52,15 +50,14 @@ initial_target_chain::transform(const context& ctx) {
      * First we obtain the target model in the internal representation
      * of the exogenous model.
      */
-    // const auto em(exomodel_generation_chain::transform(ctx, tp));
+    using injection::transforms::model_generation_chain;
     const injection::transforms::context ext_ctx(ctx.tracer());
-    const auto m(injection::transforms::model_generation_chain::transform(ext_ctx, tp));
+    const auto m(model_generation_chain::transform(ext_ctx, tp));
 
     /*
      * Then we convert the internal representation of the exogenous
      * model into an endogenous model, ready for further processing.
      */
-    // auto r(exomodel_to_endomodel_transform::transform(ctx, em));
     auto r(external_model_to_endomodel_transform::transform(ctx, m));
 
     /*
