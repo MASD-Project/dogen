@@ -1017,7 +1017,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.extraction.cpp.hash.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4864,7 +4864,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:point val="3,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,21.95;28.59,34.15"/>
+        <dia:rectangle val="2.95,21.95;30.13,37.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4873,10 +4873,10 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:point val="3,22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.540000000000003"/>
+        <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="12.100000000000001"/>
+        <dia:real val="15.300000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -4907,7 +4907,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
 #DOGEN masd.extraction.cpp.visual_studio.project.enabled=false
 #DOGEN masd.extraction.cpp.visual_studio.solution.enabled=false
 #DOGEN masd.extraction.csharp.enabled=false
-#DOGEN masd.annotations.profile=dogen.disable_common_facets_temp#</dia:string>
+#DOGEN masd.annotations.profile=dogen.disable_common_facets#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -12049,13 +12049,13 @@ only be written to the filesystem if it does not exist.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O90">
       <dia:attribute name="obj_pos">
-        <dia:point val="8,36"/>
+        <dia:point val="3,40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="7.95,35.95;16.635,39.05"/>
+        <dia:rectangle val="2.95,39.95;11.635,43.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="8,36"/>
+        <dia:point val="3,40"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.5849999999999991"/>

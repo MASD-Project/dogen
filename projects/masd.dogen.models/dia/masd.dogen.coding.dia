@@ -858,7 +858,7 @@ and to build it.
 #DOGEN masd.extraction.cpp.visual_studio.project.enabled=false
 #DOGEN masd.extraction.cpp.visual_studio.solution.enabled=false
 #DOGEN masd.extraction.csharp.enabled=false
-#DOGEN masd.annotations.profile=dogen.disable_common_facets_temp#</dia:string>
+#DOGEN masd.annotations.profile=dogen.disable_common_facets#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -3095,7 +3095,9 @@ have one and only one name.
 
 Names are required in addition to just using the qualfied ID representation
 because we use them to infer all sorts of properties for an element (namespaces,
-naming files, etc).#</dia:string>
+naming files, etc).
+
+#DOGEN masd.extraction.cpp.hash.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4249,7 +4251,9 @@ relationship.
 Also, note that the location class itself encodes the address of the
 element that owns that location; returning to the linked list idea,
 the tail of the linked list is the name of the element, and the
-remaining linked list provides the location of the element.#</dia:string>
+remaining linked list provides the location of the element.
+
+#DOGEN masd.extraction.cpp.hash.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -8644,7 +8648,9 @@ model.#</dia:string>
         <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Models need to declare upfront the programming language they will target.#</dia:string>
+        <dia:string>#Models need to declare upfront the programming language they will target.
+
+#DOGEN masd.extraction.cpp.hash.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -32072,7 +32078,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.extraction.cpp.hash.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
