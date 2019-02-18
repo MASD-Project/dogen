@@ -9100,7 +9100,7 @@ model.#</dia:string>
         <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.extraction.cpp.hash.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

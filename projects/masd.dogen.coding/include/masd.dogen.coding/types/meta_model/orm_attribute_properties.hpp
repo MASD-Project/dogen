@@ -30,6 +30,7 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include "masd.dogen.coding/types/meta_model/orm_database_systems.hpp"
+#include "masd.dogen.coding/hash/meta_model/orm_database_systems_hash.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
