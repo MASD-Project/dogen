@@ -13,32 +13,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-15 Fri 17:52]
-| <75>                                                      |          |        |        |       |
-| Headline                                                  | Time     |        |        |     % |
-|-----------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                              | *188:47* |        |        | 100.0 |
-|-----------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                   | 188:47   |        |        | 100.0 |
-| Active                                                    |          | 188:47 |        | 100.0 |
-| Edit release notes for previous sprint                    |          |        |   2:03 |   1.1 |
-| Sprint and product backlog grooming                       |          |        |   5:02 |   2.7 |
-| Work on MASD theory                                       |          |        | 113:38 |  60.2 |
-| Rename models to fit MASD architecture                    |          |        |   4:56 |   2.6 |
-| Read up on framework and API design                       |          |        |   0:57 |   0.5 |
-| Analyse the state of the mess of refactors                |          |        |   6:27 |   3.4 |
-| Create the =orchestration= model                          |          |        |   4:15 |   2.3 |
-| Update vcpkg across all operative systems                 |          |        |   4:35 |   2.4 |
-| Update C# reference models to latest dogen                |          |        |   0:42 |   0.4 |
-| Convert the utility model into a regular dogen model      |          |        |   7:27 |   3.9 |
-| Improve support for clang-cl builds                       |          |        |   2:02 |   1.1 |
-| Move generation properties into meta-data                 |          |        |   9:26 |   5.0 |
-| Great meta-data rename                                    |          |        |   4:54 |   2.6 |
-| Create a single binary for all of dogen                   |          |        |  19:02 |  10.1 |
-| Dogen's vcpkg export for OSX was created from master      |          |        |   0:46 |   0.4 |
-| Fix clang-cl warnings                                     |          |        |   1:50 |   1.0 |
-| Use tracing options in existing code                      |          |        |   0:30 |   0.3 |
-| References to types in top-level namespace do not resolve |          |        |   0:15 |   0.1 |
+#+CAPTION: Clock summary at [2019-02-18 Mon 13:02]
+| <75>                                                        |          |        |        |       |
+| Headline                                                    | Time     |        |        |     % |
+|-------------------------------------------------------------+----------+--------+--------+-------|
+| *Total time*                                                | *190:47* |        |        | 100.0 |
+|-------------------------------------------------------------+----------+--------+--------+-------|
+| Stories                                                     | 190:47   |        |        | 100.0 |
+| Active                                                      |          | 190:47 |        | 100.0 |
+| Edit release notes for previous sprint                      |          |        |   2:03 |   1.1 |
+| Sprint and product backlog grooming                         |          |        |   5:02 |   2.6 |
+| Work on MASD theory                                         |          |        | 113:38 |  59.6 |
+| Rename models to fit MASD architecture                      |          |        |   4:56 |   2.6 |
+| Read up on framework and API design                         |          |        |   0:57 |   0.5 |
+| Analyse the state of the mess of refactors                  |          |        |   6:27 |   3.4 |
+| Create the =orchestration= model                            |          |        |   4:15 |   2.2 |
+| Update vcpkg across all operative systems                   |          |        |   4:35 |   2.4 |
+| Update C# reference models to latest dogen                  |          |        |   0:42 |   0.4 |
+| Convert the utility model into a regular dogen model        |          |        |   7:27 |   3.9 |
+| Improve support for clang-cl builds                         |          |        |   2:02 |   1.1 |
+| Move generation properties into meta-data                   |          |        |   9:26 |   4.9 |
+| Disabling facet globally and enabling locally does not work |          |        |   2:00 |   1.0 |
+| Great meta-data rename                                      |          |        |   4:54 |   2.6 |
+| Create a single binary for all of dogen                     |          |        |  19:02 |  10.0 |
+| Dogen's vcpkg export for OSX was created from master        |          |        |   0:46 |   0.4 |
+| Fix clang-cl warnings                                       |          |        |   1:50 |   1.0 |
+| Use tracing options in existing code                        |          |        |   0:30 |   0.3 |
+| References to types in top-level namespace do not resolve   |          |        |   0:15 |   0.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -610,6 +611,17 @@ interface.
 Notes:
 
 - rename "yarn." transforms in log to "masd." - done.
+
+*** COMPLETED Disabling facet globally and enabling locally does not work :story:
+    CLOSED: [2019-02-18 Mon 13:02]
+    :LOGBOOK:
+    CLOCK: [2019-02-18 Mon 11:02]--[2019-02-18 Mon 13:02] =>  2:00
+    :END:
+
+We tried to disable hash globally and then enable it just for the
+types that require it, but it was not expressed. Interestingly,
+disabling an archetype globally and then enabling it locally does work
+(e.g. forward declarations).
 
 *** STARTED Great meta-data rename                                    :story:
     :LOGBOOK:
