@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
+#include "masd.dogen/io/tracing_configuration_io.hpp"
 #include "masd.dogen.coding/io/transforms/options_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -52,7 +53,8 @@ std::ostream& operator<<(std::ostream& s, const options& v) {
       << "\"probe_stats_org_mode\": " << v.probe_stats_org_mode() << ", "
       << "\"probe_all\": " << v.probe_all() << ", "
       << "\"probe_directory\": " << "\"" << v.probe_directory().generic_string() << "\"" << ", "
-      << "\"probe_use_short_names\": " << v.probe_use_short_names()
+      << "\"probe_use_short_names\": " << v.probe_use_short_names() << ", "
+      << "\"tracing\": " << v.tracing()
       << " }";
     return(s);
 }

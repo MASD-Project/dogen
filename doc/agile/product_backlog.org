@@ -105,21 +105,6 @@ When we try to create a mutable class that has a property of an
 immutable type, the code fails to compile due to the swap
 method. This is because immutable types do not provide swap.
 
-*** Model references are not transitive                               :story:
-
-For some reason we do not seem to be following references of
-referenced models. We should load them automatically, now that they
-are part of the meta-data. However, the =yarn.json= model breaks when
-we remove the reference to annotation even though it does not use this
-model directly and =yarn= is referencing it correctly.
-
-The reason why is that we load up references to all intermediate
-models, but then on merge we only take target references. What we
-really need to do is to combine the reference containers on merge. For
-this we need to create a method that loops through the map and inserts
-all keys which have not yet been inserted. Something like "merge
-references".
-
 *** Using underscores with C# results in invalid code                 :story:
 
 When building in LAM, if one uses underscore notation we create code

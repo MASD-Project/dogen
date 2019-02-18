@@ -41,7 +41,8 @@ options::options(options&& rhs)
       probe_stats_org_mode_(std::move(rhs.probe_stats_org_mode_)),
       probe_all_(std::move(rhs.probe_all_)),
       probe_directory_(std::move(rhs.probe_directory_)),
-      probe_use_short_names_(std::move(rhs.probe_use_short_names_)) { }
+      probe_use_short_names_(std::move(rhs.probe_use_short_names_)),
+      tracing_(std::move(rhs.tracing_)) { }
 
 options::options(
     const boost::filesystem::path& log_file,
@@ -54,7 +55,8 @@ options::options(
     const bool probe_stats_org_mode,
     const bool probe_all,
     const boost::filesystem::path& probe_directory,
-    const bool probe_use_short_names)
+    const bool probe_use_short_names,
+    const masd::dogen::tracing_configuration& tracing)
     : log_file_(log_file),
       log_level_(log_level),
       target_(target),
@@ -65,7 +67,8 @@ options::options(
       probe_stats_org_mode_(probe_stats_org_mode),
       probe_all_(probe_all),
       probe_directory_(probe_directory),
-      probe_use_short_names_(probe_use_short_names) { }
+      probe_use_short_names_(probe_use_short_names),
+      tracing_(tracing) { }
 
 void options::swap(options& other) noexcept {
     using std::swap;
@@ -80,6 +83,7 @@ void options::swap(options& other) noexcept {
     swap(probe_all_, other.probe_all_);
     swap(probe_directory_, other.probe_directory_);
     swap(probe_use_short_names_, other.probe_use_short_names_);
+    swap(tracing_, other.tracing_);
 }
 
 bool options::operator==(const options& rhs) const {
@@ -93,7 +97,8 @@ bool options::operator==(const options& rhs) const {
         probe_stats_org_mode_ == rhs.probe_stats_org_mode_ &&
         probe_all_ == rhs.probe_all_ &&
         probe_directory_ == rhs.probe_directory_ &&
-        probe_use_short_names_ == rhs.probe_use_short_names_;
+        probe_use_short_names_ == rhs.probe_use_short_names_ &&
+        tracing_ == rhs.tracing_;
 }
 
 options& options::operator=(options other) {
@@ -228,6 +233,22 @@ bool options::probe_use_short_names() const {
 
 void options::probe_use_short_names(const bool v) {
     probe_use_short_names_ = v;
+}
+
+const masd::dogen::tracing_configuration& options::tracing() const {
+    return tracing_;
+}
+
+masd::dogen::tracing_configuration& options::tracing() {
+    return tracing_;
+}
+
+void options::tracing(const masd::dogen::tracing_configuration& v) {
+    tracing_ = v;
+}
+
+void options::tracing(const masd::dogen::tracing_configuration&& v) {
+    tracing_ = std::move(v);
 }
 
 }

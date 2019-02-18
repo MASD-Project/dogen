@@ -28,6 +28,7 @@
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
+#include "masd.dogen/types/tracing_configuration.hpp"
 
 namespace masd::dogen::coding::transforms {
 
@@ -54,7 +55,8 @@ public:
         const bool probe_stats_org_mode,
         const bool probe_all,
         const boost::filesystem::path& probe_directory,
-        const bool probe_use_short_names);
+        const bool probe_use_short_names,
+        const masd::dogen::tracing_configuration& tracing);
 
 public:
     /**
@@ -159,6 +161,11 @@ public:
     void probe_use_short_names(const bool v);
     /**@}*/
 
+    const masd::dogen::tracing_configuration& tracing() const;
+    masd::dogen::tracing_configuration& tracing();
+    void tracing(const masd::dogen::tracing_configuration& v);
+    void tracing(const masd::dogen::tracing_configuration&& v);
+
 public:
     bool operator==(const options& rhs) const;
     bool operator!=(const options& rhs) const {
@@ -181,6 +188,7 @@ private:
     bool probe_all_;
     boost::filesystem::path probe_directory_;
     bool probe_use_short_names_;
+    masd::dogen::tracing_configuration tracing_;
 };
 
 }
