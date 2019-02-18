@@ -136,6 +136,7 @@
 
 #DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=masd.dogen.generation.cpp
+#DOGEN masd.injection.reference=masd.dogen.dia
 #DOGEN masd.injection.reference=masd.dogen.options.dia
 #DOGEN masd.injection.reference=masd.dogen.coding.dia
 #DOGEN masd.injection.reference=masd.dogen.extraction.dia

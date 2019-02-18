@@ -4892,6 +4892,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
           <dia:attribute name="string">
             <dia:string>##DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=masd.dogen.generation
+#DOGEN masd.injection.reference=masd.dogen.dia
 #DOGEN masd.injection.reference=masd.dogen.annotations.dia
 #DOGEN masd.injection.reference=masd.dogen.coding.dia
 #DOGEN masd.injection.reference=masd.dogen.tracing.dia
