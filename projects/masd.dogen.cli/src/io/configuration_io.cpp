@@ -27,6 +27,7 @@
 #include "masd.dogen.cli/io/conversion_configuration_io.hpp"
 #include "masd.dogen.cli/io/generation_configuration_io.hpp"
 #include "masd.dogen/io/error_handling_configuration_io.hpp"
+#include "masd.dogen.utility/io/log/logging_configuration_io.hpp"
 
 namespace boost {
 

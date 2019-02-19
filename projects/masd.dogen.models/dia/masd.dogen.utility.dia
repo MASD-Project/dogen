@@ -103,22 +103,22 @@
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O1">
       <dia:attribute name="obj_pos">
-        <dia:point val="0.842857,-15.0786"/>
+        <dia:point val="1,-20"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="0.792857,-15.1286;26.8179,-4.5286"/>
+        <dia:rectangle val="0.95,-20.05;28.13,-6.25"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="0.842857,-15.0786"/>
+        <dia:point val="1,-20"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.925000000000001"/>
+        <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="10.500000000000002"/>
+        <dia:real val="13.700000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -156,7 +156,7 @@
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="1.19286,-13.8336"/>
+            <dia:point val="1.35,-18.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -8099,12 +8099,7 @@
       <dia:attribute name="comment">
         <dia:string>#Options related to logging.
 
-#DOGEN masd.extraction.cpp.types.forward_declarations.enabled=false
-#DOGEN masd.extraction.cpp.io.enabled=false
-#DOGEN masd.extraction.cpp.serialization.enabled=false
-#DOGEN masd.extraction.cpp.hash.enabled=false
-#DOGEN masd.extraction.cpp.test_data.enabled=false
-#DOGEN masd.extraction.cpp.odb.enabled=false#</dia:string>
+#DOGEN masd.extraction.cpp.types.forward_declarations.enabled=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -8328,7 +8323,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:point val="40,62.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.62,61.65;40.75,70.6"/>
+        <dia:rectangle val="31.62,61.65;40.75,69.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8400,7 +8395,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:point val="26.03,58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="25.28,54.2;48.3425,59.6"/>
+        <dia:rectangle val="25.28,54.2;48.3425,58.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8472,7 +8467,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:point val="15,69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="11.535,60.95;15.75,70.6"/>
+        <dia:rectangle val="11.535,60.95;15.75,69.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8817,7 +8812,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:point val="51.515,72.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="44.83,71.85;52.265,82.6"/>
+        <dia:rectangle val="44.83,71.85;52.265,81.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8960,7 +8955,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:point val="56.285,62.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.7075,61.65;57.035,70.6"/>
+        <dia:rectangle val="43.7075,61.65;57.035,69.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9032,7 +9027,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:point val="8.2925,69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,60.95;9.0425,70.6"/>
+        <dia:rectangle val="2.95,60.95;9.0425,69.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
