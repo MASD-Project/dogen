@@ -24,41 +24,41 @@ namespace masd::dogen::cli {
 
 configuration::configuration(configuration&& rhs)
     : logging_(std::move(rhs.logging_)),
+      error_handling_(std::move(rhs.error_handling_)),
       tracing_(std::move(rhs.tracing_)),
       diffing_(std::move(rhs.diffing_)),
-      error_handling_(std::move(rhs.error_handling_)),
       byproduct_output_directory_(std::move(rhs.byproduct_output_directory_)),
       activity_(std::move(rhs.activity_)) { }
 
 configuration::configuration(
     const boost::optional<masd::dogen::utility::log::logging_configuration>& logging,
+    const boost::optional<masd::dogen::error_handling_configuration>& error_handling,
     const boost::optional<masd::dogen::tracing_configuration>& tracing,
     const boost::optional<masd::dogen::diffing_configuration>& diffing,
-    const boost::optional<masd::dogen::error_handling_configuration>& error_handling,
     const boost::filesystem::path& byproduct_output_directory,
     const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& activity)
     : logging_(logging),
+      error_handling_(error_handling),
       tracing_(tracing),
       diffing_(diffing),
-      error_handling_(error_handling),
       byproduct_output_directory_(byproduct_output_directory),
       activity_(activity) { }
 
 void configuration::swap(configuration& other) noexcept {
     using std::swap;
     swap(logging_, other.logging_);
+    swap(error_handling_, other.error_handling_);
     swap(tracing_, other.tracing_);
     swap(diffing_, other.diffing_);
-    swap(error_handling_, other.error_handling_);
     swap(byproduct_output_directory_, other.byproduct_output_directory_);
     swap(activity_, other.activity_);
 }
 
 bool configuration::operator==(const configuration& rhs) const {
     return logging_ == rhs.logging_ &&
+        error_handling_ == rhs.error_handling_ &&
         tracing_ == rhs.tracing_ &&
         diffing_ == rhs.diffing_ &&
-        error_handling_ == rhs.error_handling_ &&
         byproduct_output_directory_ == rhs.byproduct_output_directory_ &&
         activity_ == rhs.activity_;
 }
@@ -83,6 +83,22 @@ void configuration::logging(const boost::optional<masd::dogen::utility::log::log
 
 void configuration::logging(const boost::optional<masd::dogen::utility::log::logging_configuration>&& v) {
     logging_ = std::move(v);
+}
+
+const boost::optional<masd::dogen::error_handling_configuration>& configuration::error_handling() const {
+    return error_handling_;
+}
+
+boost::optional<masd::dogen::error_handling_configuration>& configuration::error_handling() {
+    return error_handling_;
+}
+
+void configuration::error_handling(const boost::optional<masd::dogen::error_handling_configuration>& v) {
+    error_handling_ = v;
+}
+
+void configuration::error_handling(const boost::optional<masd::dogen::error_handling_configuration>&& v) {
+    error_handling_ = std::move(v);
 }
 
 const boost::optional<masd::dogen::tracing_configuration>& configuration::tracing() const {
@@ -115,22 +131,6 @@ void configuration::diffing(const boost::optional<masd::dogen::diffing_configura
 
 void configuration::diffing(const boost::optional<masd::dogen::diffing_configuration>&& v) {
     diffing_ = std::move(v);
-}
-
-const boost::optional<masd::dogen::error_handling_configuration>& configuration::error_handling() const {
-    return error_handling_;
-}
-
-boost::optional<masd::dogen::error_handling_configuration>& configuration::error_handling() {
-    return error_handling_;
-}
-
-void configuration::error_handling(const boost::optional<masd::dogen::error_handling_configuration>& v) {
-    error_handling_ = v;
-}
-
-void configuration::error_handling(const boost::optional<masd::dogen::error_handling_configuration>&& v) {
-    error_handling_ = std::move(v);
 }
 
 const boost::filesystem::path& configuration::byproduct_output_directory() const {

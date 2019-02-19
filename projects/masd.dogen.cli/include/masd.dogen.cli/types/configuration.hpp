@@ -54,9 +54,9 @@ public:
 public:
     configuration(
         const boost::optional<masd::dogen::utility::log::logging_configuration>& logging,
+        const boost::optional<masd::dogen::error_handling_configuration>& error_handling,
         const boost::optional<masd::dogen::tracing_configuration>& tracing,
         const boost::optional<masd::dogen::diffing_configuration>& diffing,
-        const boost::optional<masd::dogen::error_handling_configuration>& error_handling,
         const boost::filesystem::path& byproduct_output_directory,
         const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& activity);
 
@@ -71,6 +71,11 @@ public:
     void logging(const boost::optional<masd::dogen::utility::log::logging_configuration>&& v);
     /**@}*/
 
+    const boost::optional<masd::dogen::error_handling_configuration>& error_handling() const;
+    boost::optional<masd::dogen::error_handling_configuration>& error_handling();
+    void error_handling(const boost::optional<masd::dogen::error_handling_configuration>& v);
+    void error_handling(const boost::optional<masd::dogen::error_handling_configuration>&& v);
+
     const boost::optional<masd::dogen::tracing_configuration>& tracing() const;
     boost::optional<masd::dogen::tracing_configuration>& tracing();
     void tracing(const boost::optional<masd::dogen::tracing_configuration>& v);
@@ -80,11 +85,6 @@ public:
     boost::optional<masd::dogen::diffing_configuration>& diffing();
     void diffing(const boost::optional<masd::dogen::diffing_configuration>& v);
     void diffing(const boost::optional<masd::dogen::diffing_configuration>&& v);
-
-    const boost::optional<masd::dogen::error_handling_configuration>& error_handling() const;
-    boost::optional<masd::dogen::error_handling_configuration>& error_handling();
-    void error_handling(const boost::optional<masd::dogen::error_handling_configuration>& v);
-    void error_handling(const boost::optional<masd::dogen::error_handling_configuration>&& v);
 
     /**
      * @brief Directory in which to place all artefacts which are not directly related to code generation.
@@ -115,9 +115,9 @@ public:
 
 private:
     boost::optional<masd::dogen::utility::log::logging_configuration> logging_;
+    boost::optional<masd::dogen::error_handling_configuration> error_handling_;
     boost::optional<masd::dogen::tracing_configuration> tracing_;
     boost::optional<masd::dogen::diffing_configuration> diffing_;
-    boost::optional<masd::dogen::error_handling_configuration> error_handling_;
     boost::filesystem::path byproduct_output_directory_;
     boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration> activity_;
 };

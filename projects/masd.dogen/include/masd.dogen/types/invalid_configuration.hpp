@@ -18,24 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_TYPES_ALL_HPP
-#define MASD_DOGEN_TYPES_ALL_HPP
+#ifndef MASD_DOGEN_TYPES_INVALID_CONFIGURATION_HPP
+#define MASD_DOGEN_TYPES_INVALID_CONFIGURATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen/types/dogen.hpp"
-#include "masd.dogen/types/configuration.hpp"
-#include "masd.dogen/types/diffing_style.hpp"
-#include "masd.dogen/types/tracing_level.hpp"
-#include "masd.dogen/types/weaving_style.hpp"
-#include "masd.dogen/types/tracing_format.hpp"
-#include "masd.dogen/types/configuration_builder.hpp"
-#include "masd.dogen/types/diffing_configuration.hpp"
-#include "masd.dogen/types/invalid_configuration.hpp"
-#include "masd.dogen/types/tracing_configuration.hpp"
-#include "masd.dogen/types/configuration_validator.hpp"
-#include "masd.dogen/types/error_handling_configuration.hpp"
+#include <string>
+#include <boost/exception/info.hpp>
+
+namespace masd::dogen {
+
+/**
+ * @brief The values supplied for the configuration are not valid.
+ */
+class invalid_configuration : public virtual std::exception, public virtual boost::exception {
+public:
+    invalid_configuration() = default;
+    ~invalid_configuration() noexcept = default;
+
+public:
+    explicit invalid_configuration(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
+}
 
 #endif

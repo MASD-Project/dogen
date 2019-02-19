@@ -46,6 +46,21 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dog
 
 namespace boost {
 
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::error_handling_configuration>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace boost {
+
 inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::tracing_configuration>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
@@ -62,21 +77,6 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dog
 namespace boost {
 
 inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::diffing_configuration>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::error_handling_configuration>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -128,9 +128,9 @@ std::ostream& operator<<(std::ostream& s, const configuration& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::cli::configuration\"" << ", "
       << "\"logging\": " << v.logging() << ", "
+      << "\"error_handling\": " << v.error_handling() << ", "
       << "\"tracing\": " << v.tracing() << ", "
       << "\"diffing\": " << v.diffing() << ", "
-      << "\"error_handling\": " << v.error_handling() << ", "
       << "\"byproduct_output_directory\": " << "\"" << v.byproduct_output_directory().generic_string() << "\"" << ", "
       << "\"activity\": " << v.activity()
       << " }";
