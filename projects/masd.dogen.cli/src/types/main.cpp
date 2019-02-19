@@ -21,14 +21,27 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include "masd.dogen.cli/types/initializer.hpp"
 #include "masd.dogen.cli/types/application.hpp"
 #include "masd.dogen.cli/types/injector_factory.hpp"
 
 int main(const int argc, const char* argv[]) {
+    /*
+     * Perform DI initialisation and obtain the application.
+     */
     using namespace masd::dogen::cli;
     auto inj(injector_factory::make_injector());
     const auto app(inj.create<application>());
 
+    /*
+     * FIXME: perform legacy initialisation. To be removed once we
+     * move all to DI.
+     */
+    initializer::initialize();
+
+    /*
+     * Execute the application.
+     */
     const auto args(std::vector<std::string>(argv + 1, argv + argc));
     return app.run(args, std::cout, std::cerr);
 }
