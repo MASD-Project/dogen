@@ -18,30 +18,111 @@
  * MA 02110-1301, USA.
  *
  */
+#include <cstdlib>
 #include <string>
 #include <vector>
+#include <ostream>
 #include <iostream>
+#include <boost/exception/diagnostic_information.hpp>
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/log/severity_level.hpp"
+#include "masd.dogen.utility/types/log/logging_configuration.hpp"
+#include "masd.dogen.utility/types/log/scoped_lifecycle_manager.hpp"
 #include "masd.dogen.cli/types/initializer.hpp"
 #include "masd.dogen.cli/types/application.hpp"
 #include "masd.dogen.cli/types/injector_factory.hpp"
+#include "masd.dogen.cli/types/parser_exception.hpp"
+#include "masd.dogen.cli/types/command_line_parser.hpp"
+
+namespace {
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory("knitter"));
+
+const std::string err_prefix("Error: ");
+const std::string gen_failure("Failed to generate model.");
+const std::string force_terminate("dogen.cli was forced to terminate.");
+
+void report_exception(const bool can_log, const std::exception& e) {
+    /*
+     * Dump to the console first.
+     */
+    std::cerr << err_prefix << e.what() << std::endl;
+    std::cerr << gen_failure << std::endl;
+
+    if (!can_log)
+        return;
+
+    /*
+     * We must catch by std::exception and cast the boost exception
+     * here; if we were to catch boost exception, we would not have
+     * access to the what() method and thus could not provide a
+     * user-friendly message to the console.
+     */
+    const auto be(dynamic_cast<const boost::exception* const>(&e));
+    if (!be)
+        return;
+
+    BOOST_LOG_SEV(lg, error) << err_prefix << boost::diagnostic_information(*be);
+    BOOST_LOG_SEV(lg, error) << gen_failure;
+}
+
+}
 
 int main(const int argc, const char* argv[]) {
-    /*
-     * Perform DI initialisation and obtain the application.
-     */
     using namespace masd::dogen::cli;
-    auto inj(injector_factory::make_injector());
-    const auto app(inj.create<application>());
+    bool can_log(false);
 
-    /*
-     * FIXME: perform legacy initialisation. To be removed once we
-     * move all to DI.
-     */
-    initializer::initialize();
+    try {
+        /*
+         * Perform DI initialisation and obtain the parser.
+         */
+        auto inj(injector_factory::make_injector());
+        const auto clp(inj.create<std::unique_ptr<command_line_parser>>());
 
-    /*
-     * Execute the application.
-     */
-    const auto args(std::vector<std::string>(argv + 1, argv + argc));
-    return app.run(args, std::cout, std::cerr);
+        /*
+         * Create the configuration from command line options. If we
+         * have no configuration, then there is nothing to do.
+         */
+        const auto args(std::vector<std::string>(argv + 1, argv + argc));
+        const auto ocfg(clp->parse(args, std::cout, std::cerr));
+
+        if (!ocfg)
+            return EXIT_SUCCESS;
+
+        /*
+         * Since we have a configuration, we can now initialise the
+         * logging subsystem.
+         */
+        const auto& cfg(*ocfg);
+        using namespace masd::dogen::utility::log;
+        scoped_lifecycle_manager slm(cfg.logging());
+        can_log = true;
+
+        /*
+         * Now perform legacy initialisation. It uses logging so it
+         * must be done after logging initialisation. FIXME: To be
+         * removed once we move all to DI.
+         */
+        initializer::initialize();
+
+        /*
+         * Execute the application.
+         */
+        application app;
+        app.run(cfg);
+    } catch (const parser_exception& e) {
+        /*
+         * Reporting of these to the console is already handled by the
+         * parser itself.
+         */
+        return EXIT_FAILURE;
+    } catch (const std::exception& e) {
+        report_exception(can_log, e);
+        return EXIT_FAILURE;
+    } catch(...) {
+        std::cerr << force_terminate << std::endl;
+        return EXIT_FAILURE;
+    }
+    return EXIT_SUCCESS;
 }

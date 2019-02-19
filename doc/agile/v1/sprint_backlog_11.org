@@ -711,6 +711,7 @@ its not clear if its MASD or dogen.
 
 *** STARTED Create a single binary for all of dogen                   :story:
     :LOGBOOK:
+    CLOCK: [2019-02-19 Tue 11:19]--[2019-02-19 Tue 13:04] =>  1:45
     CLOCK: [2019-02-15 Fri 16:28]--[2019-02-15 Fri 17:13] =>  0:45
     CLOCK: [2019-02-15 Fri 11:24]--[2019-02-15 Fri 11:45] =>  0:21
     CLOCK: [2019-02-15 Fri 09:54]--[2019-02-15 Fri 11:23] =>  1:29
@@ -824,6 +825,7 @@ Notes:
 
 *** STARTED Use tracing options in existing code                      :story:
     :LOGBOOK:
+    CLOCK: [2019-02-19 Tue 11:05]--[2019-02-19 Tue 11:18] =>  0:13
     CLOCK: [2019-02-18 Mon 18:50]--[2019-02-18 Mon 18:52] =>  0:02
     CLOCK: [2019-02-18 Mon 14:52]--[2019-02-18 Mon 15:04] =>  0:12
     CLOCK: [2019-02-15 Fri 17:14]--[2019-02-15 Fri 17:44] =>  0:30

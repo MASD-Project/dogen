@@ -29,6 +29,9 @@
 
 namespace {
 
+const std::string indent("   ");
+const std::string log_file_prefix("dogen.cli.");
+
 const std::string more_information("Try --help' for more information.");
 const std::string knitter_product("MASD Dogen v" DOGEN_VERSION);
 const std::string knitter_build_info(DOGEN_BUILD_INFO);
@@ -49,7 +52,6 @@ const std::string weave_command_name("weave");
 const std::string weave_command_desc(
     "Weaves one or more template files into its final output. ");
 
-const std::string indent("   ");
 const std::string help_arg("help");
 const std::string version_arg("version");
 const std::string command_arg("command");
@@ -378,13 +380,14 @@ boost::optional<masd::dogen::tracing_configuration> read_tracing_configuration(
 /**
  * @brief Reads the tracing configuration from the variables map.
  */
-boost::optional<logging_configuration>
-read_logging_configuration(const variables_map& vm) {
+boost::optional<logging_configuration> read_logging_configuration(
+    const std::string& model_name, const variables_map& vm) {
     const auto enabled(vm.count(logging_log_enabled_arg) != 0);
     if (!enabled)
         return boost::optional<logging_configuration>();
 
     logging_configuration r;
+    r.filename(log_file_prefix + model_name);
 
     if (vm.count(logging_log_level_arg)) {
         const auto s(vm[logging_log_level_arg].as<std::string>());
@@ -545,17 +548,12 @@ handle_command(const std::string& command_name, const bool has_help,
      * because we require the model name.
      */
     r.tracing(read_tracing_configuration(model_name, vm));
-    r.logging(read_logging_configuration(vm));
+    r.logging(read_logging_configuration(model_name, vm));
     return r;
 }
 
-}
-
-namespace masd::dogen::cli {
-
-boost::optional<configuration>
-program_options_parser::parse(const std::vector<std::string>& arguments,
-    std::ostream& info, std::ostream& err) const {
+boost::optional<configuration> parse(const std::vector<std::string>& arguments,
+    std::ostream& info, std::ostream& err) {
     /*
      * Create the top-level command line options, parse them and
      * retrieve the results of the parsing.
@@ -607,6 +605,23 @@ program_options_parser::parse(const std::vector<std::string>& arguments,
      * already been setup.
      */
     return handle_command(command_name, has_help, po, info, vm);
+}
+
+}
+
+namespace masd::dogen::cli {
+
+boost::optional<configuration>
+program_options_parser::parse(const std::vector<std::string>& arguments,
+    std::ostream& info, std::ostream& err) const {
+
+    try {
+        return ::parse(arguments, info, err);
+    } catch (const boost::program_options::error& e) {
+        err << usage_error_msg << e.what() << std::endl
+            << more_information << std::endl;
+        BOOST_THROW_EXCEPTION(parser_exception(e.what()));
+    }
 }
 
 }

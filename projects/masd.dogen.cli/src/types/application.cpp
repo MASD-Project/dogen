@@ -18,49 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include <cstdlib>
-#include <iostream>
-#include <boost/exception/diagnostic_information.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.utility/types/log/severity_level.hpp"
-#include "masd.dogen.utility/types/log/lifecycle_manager.hpp"
-#include "masd.dogen.cli/types/application.hpp"
-#include "masd.dogen.cli/types/configuration.hpp"
 #include "masd.dogen.cli/io/configuration_io.hpp"
+#include "masd.dogen.cli/types/application.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("knitter"));
-
-const std::string log_file_prefix("masd.dogen.cli.");
+auto lg(logger_factory("application"));
 
 }
 
 namespace masd::dogen::cli {
 
-application::application(const command_line_parser& clp)
-    : command_line_parser_(clp) { }
-
-void application::execute(const std::vector<std::string>& args,
-    std::ostream& info, std::ostream& error) const {
-    const auto ocfg(command_line_parser_.parse(args, info, error));
-    if (!ocfg)
-        return;
-
-    const auto& cfg(*ocfg);
-    std::cout << cfg << std::endl;
-}
-
-int application::run(const std::vector<std::string>& args,
-    std::ostream& info, std::ostream& error) const {
-    try {
-        execute(args, info, error);
-        return EXIT_SUCCESS;
-    } catch(const std::exception& e) {
-        info << "failure, errors: " << e.what() << std::endl;
-        return EXIT_FAILURE;
-    }
+void application::run(const configuration& cfg) const {
+    BOOST_LOG_SEV(lg, info) << cfg;
 }
 
 }

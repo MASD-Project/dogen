@@ -27,7 +27,7 @@
 
 #include <memory>
 #include <ostream>
-#include "masd.dogen.cli/types/command_line_parser.hpp"
+#include "masd.dogen.cli/types/configuration.hpp"
 
 namespace masd::dogen::cli {
 
@@ -36,35 +36,19 @@ namespace masd::dogen::cli {
  */
 class application final {
 public:
-    application() = delete;
-    application(const application&) = default;
-    application(application&&) = default;
+    application() = default;
+    application(const application&) = delete;
+    application(application&&) = delete;
     ~application() = default;
     application& operator=(const application&) = delete;
 
 public:
-    application(const command_line_parser& clp);
-
-private:
     /**
-     * Executes the main workflow of the application.
-     */
-    void execute(const std::vector<std::string>& args,
-        std::ostream& info, std::ostream& error) const;
-
-public:
-    /**
-     * Executes the application and returns its exit code.
+     * Executes the application.
      *
-     * @param args command line arguments.
-     * @param info stream to use to output information.
-     * @param error stream to use to output errors.
+     * @param cfg Application configuration.
      */
-    int run(const std::vector<std::string>& args,
-        std::ostream& info, std::ostream& error) const;
-
-private:
-    const command_line_parser& command_line_parser_;
+    void run(const configuration& cfg) const;
 };
 
 }
