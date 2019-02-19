@@ -32723,7 +32723,7 @@ size limitations.#</dia:string>
             <dia:string>#tracing#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#masd::dogen::tracing_configuration#</dia:string>
+            <dia:string>#tracing_configuration#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

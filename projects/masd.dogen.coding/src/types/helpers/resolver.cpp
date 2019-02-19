@@ -326,7 +326,7 @@ try_resolve_name_with_context_model_modules(const indices& idx,
     name_factory nf;
     auto r(nf.build_combined_element_name(ctx, n,
             true/*populate_model_modules_if_blank*/,
-            true/*populate_internal_modules_if_blank*/));
+            false/*populate_internal_modules_if_blank*/));
 
     BOOST_LOG_SEV(lg, debug) << "Internal modules climb: " << r;
 
@@ -340,7 +340,7 @@ try_resolve_name_with_context_model_modules(const indices& idx,
         r.location().model_modules().clear();
         r = nf.build_combined_element_name(ctx, r,
             true/*populate_model_modules_if_blank*/,
-            true/*populate_internal_modules_if_blank*/);
+            false/*populate_internal_modules_if_blank*/);
 
         BOOST_LOG_SEV(lg, debug) << "Model modules climb: " << r;
 
