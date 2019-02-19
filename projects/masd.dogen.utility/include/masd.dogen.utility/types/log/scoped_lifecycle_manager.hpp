@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <boost/optional.hpp>
 #include "masd.dogen.utility/types/log/logging_configuration.hpp"
 
 namespace masd::dogen::utility::log {
@@ -38,7 +39,7 @@ public:
     operator=(const scoped_lifecycle_manager&) = delete;
 
 public:
-    scoped_lifecycle_manager(const logging_configuration& cfg);
+    scoped_lifecycle_manager(const boost::optional<logging_configuration>& ocfg);
     ~scoped_lifecycle_manager();
 };
 

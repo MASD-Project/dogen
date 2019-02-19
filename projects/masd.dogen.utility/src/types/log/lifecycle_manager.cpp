@@ -19,15 +19,15 @@
  *
  */
 #include <boost/make_shared.hpp>
+#include <boost/core/null_deleter.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/log/core.hpp>
 #include <boost/log/sinks.hpp>
 #include <boost/log/common.hpp>
 #include <boost/log/attributes.hpp>
 #include <boost/log/expressions.hpp>
 #include <boost/log/sources/logger.hpp>
 #include <boost/log/support/date_time.hpp>
-#include <boost/log/core.hpp>
-#include <boost/core/null_deleter.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
 #include "masd.dogen.utility/types/log/logging_configuration_validator.hpp"
 #include "masd.dogen.utility/types/log/lifecycle_manager.hpp"
 
@@ -99,9 +99,25 @@ void lifecycle_manager::create_console_backend(const severity_level severity) {
 }
 
 void lifecycle_manager::
-initialise(const logging_configuration& cfg) {
+initialise(const boost::optional<logging_configuration>& ocfg) {
+    /*
+     * If no configuration is supplied, logging is to be disabled.
+     */
+    if (!ocfg) {
+        auto core(boost::log::core::get());
+        core->set_logging_enabled(false);
+        return;
+    }
+
+    /*
+     * A configuration was supplied. Ensure it is valid.
+     */
+    const auto& cfg(*ocfg);
     logging_configuration_validator::validate(cfg);
 
+    /*
+     * Use the configuration to setup the logging infrastructure.
+     */
     if (cfg.output_to_console())
         create_console_backend(cfg.severity());
 
@@ -115,8 +131,7 @@ initialise(const logging_configuration& cfg) {
 }
 
 void lifecycle_manager::shutdown() {
-    using namespace boost::log;
-    boost::shared_ptr<core> core(core::get());
+    auto core(boost::log::core::get());
     core->remove_all_sinks();
 }
 

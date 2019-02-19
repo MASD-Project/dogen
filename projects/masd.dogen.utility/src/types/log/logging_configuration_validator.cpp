@@ -26,8 +26,8 @@
 namespace {
 
 const std::string no_logging("Must log to file and/or console");
-const std::string invalid_directory("Not a directory: ");
-const std::string directory_not_found("Could not find directory: ");
+const std::string unexpected_dir(
+    "Output directory supplied without a file name.");
 
 }
 
@@ -41,6 +41,14 @@ validate(const logging_configuration& cfg) {
     const bool output_to_file(!cfg.filename().empty());
     if (!cfg.output_to_console() && !output_to_file)
         BOOST_THROW_EXCEPTION(invalid_logging_configuration(no_logging));
+
+    /*
+     * If the filename was not supplied, we do not expect the output
+     * directory to have been supplied either, as its only applicable
+     * to file logging.
+     */
+    if (cfg.filename().empty() && !cfg.output_directory().empty())
+        BOOST_THROW_EXCEPTION(invalid_logging_configuration(unexpected_dir));
 }
 
 }

@@ -27,6 +27,7 @@
 
 #include <list>
 #include <string>
+#include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.utility/types/log/severity_level.hpp"
@@ -64,9 +65,11 @@ public:
     /**
      * @brief Initialise logging for the entire application.
      *
+     * If no configuration is supplied, logging is disabled.
+     *
      * @note Must be done in a thread-safe context.
      */
-    static void initialise(const logging_configuration& cfg);
+    static void initialise(const boost::optional<logging_configuration>& ocfg);
 
     /**
      * @brief Shutdown logging for the entire application.

@@ -24,8 +24,8 @@
 namespace masd::dogen::utility::log {
 
 scoped_lifecycle_manager::
-scoped_lifecycle_manager(const logging_configuration& cfg) {
-    lifecycle_manager::initialise(cfg);
+scoped_lifecycle_manager(const boost::optional<logging_configuration>& ocfg) {
+    lifecycle_manager::initialise(ocfg);
 }
 
 scoped_lifecycle_manager::~scoped_lifecycle_manager() {
