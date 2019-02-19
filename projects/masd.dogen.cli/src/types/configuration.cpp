@@ -24,43 +24,28 @@ namespace masd::dogen::cli {
 
 configuration::configuration(configuration&& rhs)
     : logging_(std::move(rhs.logging_)),
-      error_handling_(std::move(rhs.error_handling_)),
-      tracing_(std::move(rhs.tracing_)),
-      diffing_(std::move(rhs.diffing_)),
-      byproduct_output_directory_(std::move(rhs.byproduct_output_directory_)),
-      activity_(std::move(rhs.activity_)) { }
+      api_(std::move(rhs.api_)),
+      cli_(std::move(rhs.cli_)) { }
 
 configuration::configuration(
     const boost::optional<masd::dogen::utility::log::logging_configuration>& logging,
-    const boost::optional<masd::dogen::error_handling_configuration>& error_handling,
-    const boost::optional<masd::dogen::tracing_configuration>& tracing,
-    const boost::optional<masd::dogen::diffing_configuration>& diffing,
-    const boost::filesystem::path& byproduct_output_directory,
-    const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& activity)
+    const masd::dogen::configuration& api,
+    const masd::dogen::cli::cli_configuration& cli)
     : logging_(logging),
-      error_handling_(error_handling),
-      tracing_(tracing),
-      diffing_(diffing),
-      byproduct_output_directory_(byproduct_output_directory),
-      activity_(activity) { }
+      api_(api),
+      cli_(cli) { }
 
 void configuration::swap(configuration& other) noexcept {
     using std::swap;
     swap(logging_, other.logging_);
-    swap(error_handling_, other.error_handling_);
-    swap(tracing_, other.tracing_);
-    swap(diffing_, other.diffing_);
-    swap(byproduct_output_directory_, other.byproduct_output_directory_);
-    swap(activity_, other.activity_);
+    swap(api_, other.api_);
+    swap(cli_, other.cli_);
 }
 
 bool configuration::operator==(const configuration& rhs) const {
     return logging_ == rhs.logging_ &&
-        error_handling_ == rhs.error_handling_ &&
-        tracing_ == rhs.tracing_ &&
-        diffing_ == rhs.diffing_ &&
-        byproduct_output_directory_ == rhs.byproduct_output_directory_ &&
-        activity_ == rhs.activity_;
+        api_ == rhs.api_ &&
+        cli_ == rhs.cli_;
 }
 
 configuration& configuration::operator=(configuration other) {
@@ -85,84 +70,36 @@ void configuration::logging(const boost::optional<masd::dogen::utility::log::log
     logging_ = std::move(v);
 }
 
-const boost::optional<masd::dogen::error_handling_configuration>& configuration::error_handling() const {
-    return error_handling_;
+const masd::dogen::configuration& configuration::api() const {
+    return api_;
 }
 
-boost::optional<masd::dogen::error_handling_configuration>& configuration::error_handling() {
-    return error_handling_;
+masd::dogen::configuration& configuration::api() {
+    return api_;
 }
 
-void configuration::error_handling(const boost::optional<masd::dogen::error_handling_configuration>& v) {
-    error_handling_ = v;
+void configuration::api(const masd::dogen::configuration& v) {
+    api_ = v;
 }
 
-void configuration::error_handling(const boost::optional<masd::dogen::error_handling_configuration>&& v) {
-    error_handling_ = std::move(v);
+void configuration::api(const masd::dogen::configuration&& v) {
+    api_ = std::move(v);
 }
 
-const boost::optional<masd::dogen::tracing_configuration>& configuration::tracing() const {
-    return tracing_;
+const masd::dogen::cli::cli_configuration& configuration::cli() const {
+    return cli_;
 }
 
-boost::optional<masd::dogen::tracing_configuration>& configuration::tracing() {
-    return tracing_;
+masd::dogen::cli::cli_configuration& configuration::cli() {
+    return cli_;
 }
 
-void configuration::tracing(const boost::optional<masd::dogen::tracing_configuration>& v) {
-    tracing_ = v;
+void configuration::cli(const masd::dogen::cli::cli_configuration& v) {
+    cli_ = v;
 }
 
-void configuration::tracing(const boost::optional<masd::dogen::tracing_configuration>&& v) {
-    tracing_ = std::move(v);
-}
-
-const boost::optional<masd::dogen::diffing_configuration>& configuration::diffing() const {
-    return diffing_;
-}
-
-boost::optional<masd::dogen::diffing_configuration>& configuration::diffing() {
-    return diffing_;
-}
-
-void configuration::diffing(const boost::optional<masd::dogen::diffing_configuration>& v) {
-    diffing_ = v;
-}
-
-void configuration::diffing(const boost::optional<masd::dogen::diffing_configuration>&& v) {
-    diffing_ = std::move(v);
-}
-
-const boost::filesystem::path& configuration::byproduct_output_directory() const {
-    return byproduct_output_directory_;
-}
-
-boost::filesystem::path& configuration::byproduct_output_directory() {
-    return byproduct_output_directory_;
-}
-
-void configuration::byproduct_output_directory(const boost::filesystem::path& v) {
-    byproduct_output_directory_ = v;
-}
-
-void configuration::byproduct_output_directory(const boost::filesystem::path&& v) {
-    byproduct_output_directory_ = std::move(v);
-}
-
-const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& configuration::activity() const {
-    return activity_;
-}
-
-boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& configuration::activity() {
-    return activity_;
-}
-
-void configuration::activity(const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& v) {
-    activity_ = v;
-}
-
-void configuration::activity(const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>&& v) {
-    activity_ = std::move(v);
+void configuration::cli(const masd::dogen::cli::cli_configuration&& v) {
+    cli_ = std::move(v);
 }
 
 }

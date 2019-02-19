@@ -26,15 +26,9 @@
 #endif
 
 #include <algorithm>
-#include <boost/variant.hpp>
 #include <boost/optional.hpp>
-#include <boost/filesystem/path.hpp>
-#include "masd.dogen/types/diffing_configuration.hpp"
-#include "masd.dogen/types/tracing_configuration.hpp"
-#include "masd.dogen.cli/types/weaving_configuration.hpp"
-#include "masd.dogen.cli/types/conversion_configuration.hpp"
-#include "masd.dogen.cli/types/generation_configuration.hpp"
-#include "masd.dogen/types/error_handling_configuration.hpp"
+#include "masd.dogen/types/configuration.hpp"
+#include "masd.dogen.cli/types/cli_configuration.hpp"
 #include "masd.dogen.utility/types/log/logging_configuration.hpp"
 
 namespace masd::dogen::cli {
@@ -54,11 +48,8 @@ public:
 public:
     configuration(
         const boost::optional<masd::dogen::utility::log::logging_configuration>& logging,
-        const boost::optional<masd::dogen::error_handling_configuration>& error_handling,
-        const boost::optional<masd::dogen::tracing_configuration>& tracing,
-        const boost::optional<masd::dogen::diffing_configuration>& diffing,
-        const boost::filesystem::path& byproduct_output_directory,
-        const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& activity);
+        const masd::dogen::configuration& api,
+        const masd::dogen::cli::cli_configuration& cli);
 
 public:
     /**
@@ -71,37 +62,15 @@ public:
     void logging(const boost::optional<masd::dogen::utility::log::logging_configuration>&& v);
     /**@}*/
 
-    const boost::optional<masd::dogen::error_handling_configuration>& error_handling() const;
-    boost::optional<masd::dogen::error_handling_configuration>& error_handling();
-    void error_handling(const boost::optional<masd::dogen::error_handling_configuration>& v);
-    void error_handling(const boost::optional<masd::dogen::error_handling_configuration>&& v);
+    const masd::dogen::configuration& api() const;
+    masd::dogen::configuration& api();
+    void api(const masd::dogen::configuration& v);
+    void api(const masd::dogen::configuration&& v);
 
-    const boost::optional<masd::dogen::tracing_configuration>& tracing() const;
-    boost::optional<masd::dogen::tracing_configuration>& tracing();
-    void tracing(const boost::optional<masd::dogen::tracing_configuration>& v);
-    void tracing(const boost::optional<masd::dogen::tracing_configuration>&& v);
-
-    const boost::optional<masd::dogen::diffing_configuration>& diffing() const;
-    boost::optional<masd::dogen::diffing_configuration>& diffing();
-    void diffing(const boost::optional<masd::dogen::diffing_configuration>& v);
-    void diffing(const boost::optional<masd::dogen::diffing_configuration>&& v);
-
-    /**
-     * @brief Directory in which to place all artefacts which are not directly related to code generation.
-     *
-     * These include traces, logs etc.
-     */
-    /**@{*/
-    const boost::filesystem::path& byproduct_output_directory() const;
-    boost::filesystem::path& byproduct_output_directory();
-    void byproduct_output_directory(const boost::filesystem::path& v);
-    void byproduct_output_directory(const boost::filesystem::path&& v);
-    /**@}*/
-
-    const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& activity() const;
-    boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& activity();
-    void activity(const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& v);
-    void activity(const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>&& v);
+    const masd::dogen::cli::cli_configuration& cli() const;
+    masd::dogen::cli::cli_configuration& cli();
+    void cli(const masd::dogen::cli::cli_configuration& v);
+    void cli(const masd::dogen::cli::cli_configuration&& v);
 
 public:
     bool operator==(const configuration& rhs) const;
@@ -115,11 +84,8 @@ public:
 
 private:
     boost::optional<masd::dogen::utility::log::logging_configuration> logging_;
-    boost::optional<masd::dogen::error_handling_configuration> error_handling_;
-    boost::optional<masd::dogen::tracing_configuration> tracing_;
-    boost::optional<masd::dogen::diffing_configuration> diffing_;
-    boost::filesystem::path byproduct_output_directory_;
-    boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration> activity_;
+    masd::dogen::configuration api_;
+    masd::dogen::cli::cli_configuration cli_;
 };
 
 }

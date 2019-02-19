@@ -42,11 +42,13 @@ public:
     configuration_validator& operator=(
         const configuration_validator&) = delete;
 
-public:
+private:
     static void validate(
         const boost::optional<error_handling_configuration>& ocfg);
     static void validate(const boost::optional<tracing_configuration>& ocfg);
     static void validate(const boost::optional<diffing_configuration>& ocfg);
+
+public:
     static void validate(const configuration& cfg);
 };
 

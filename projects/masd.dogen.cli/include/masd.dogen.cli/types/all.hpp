@@ -31,6 +31,7 @@
 #include "masd.dogen.cli/types/configuration.hpp"
 #include "masd.dogen.cli/types/injector_factory.hpp"
 #include "masd.dogen.cli/types/parser_exception.hpp"
+#include "masd.dogen.cli/types/cli_configuration.hpp"
 #include "masd.dogen.cli/types/command_line_parser.hpp"
 #include "masd.dogen.cli/types/application_exception.hpp"
 #include "masd.dogen.cli/types/weaving_configuration.hpp"

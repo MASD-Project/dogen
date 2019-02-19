@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CLI_IO_ALL_IO_HPP
-#define MASD_DOGEN_CLI_IO_ALL_IO_HPP
+#ifndef MASD_DOGEN_CLI_TYPES_CLI_CONFIGURATION_FWD_HPP
+#define MASD_DOGEN_CLI_TYPES_CLI_CONFIGURATION_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.cli/io/configuration_io.hpp"
-#include "masd.dogen.cli/io/cli_configuration_io.hpp"
-#include "masd.dogen.cli/io/weaving_configuration_io.hpp"
-#include "masd.dogen.cli/io/conversion_configuration_io.hpp"
-#include "masd.dogen.cli/io/generation_configuration_io.hpp"
+namespace masd::dogen::cli {
+
+class cli_configuration;
+
+}
 
 #endif

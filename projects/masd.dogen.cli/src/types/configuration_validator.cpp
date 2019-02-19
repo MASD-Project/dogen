@@ -34,9 +34,7 @@ namespace masd::dogen::cli {
 void configuration_validator::validate(const configuration& cfg) {
     BOOST_LOG_SEV(lg, debug) << "Validating configuration.";
 
-    masd::dogen::configuration_validator::validate(cfg.error_handling());
-    masd::dogen::configuration_validator::validate(cfg.tracing());
-    masd::dogen::configuration_validator::validate(cfg.diffing());
+    masd::dogen::configuration_validator::validate(cfg.api());
 
     BOOST_LOG_SEV(lg, debug) << "Configuration is valid.";
 }

@@ -377,6 +377,17 @@ boost::optional<masd::dogen::tracing_configuration> read_tracing_configuration(
     return r;
 }
 
+boost::optional<masd::dogen::diffing_configuration> read_diffing_configuration(
+    const std::string& /*model_name*/, const variables_map& vm) {
+
+    const bool enabled(vm.count(tracing_enabled_arg) != 0);
+    if (!enabled)
+        return boost::optional<masd::dogen::diffing_configuration>();
+
+    masd::dogen::diffing_configuration r;
+    return r;
+}
+
 /**
  * @brief Reads the tracing configuration from the variables map.
  */
@@ -518,7 +529,7 @@ handle_command(const std::string& command_name, const bool has_help,
         store(command_line_parser(options).options(god).run(), vm);
         const auto gc(read_generation_configuration(vm));
         model_name = gc.target().stem().filename().string();
-        r.activity(gc);
+        r.cli().activity(gc);
     } else if (command_name == convert_command_name) {
         const auto cod(make_convert_options_description());
         if (has_help) {
@@ -529,7 +540,7 @@ handle_command(const std::string& command_name, const bool has_help,
         store(command_line_parser(options).options(cod).run(), vm);
         const auto cc(read_conversion_configuration(vm));
         model_name = cc.source().stem().filename().string();
-        r.activity(cc);
+        r.cli().activity(cc);
     } else if (command_name == weave_command_name) {
         const auto cod(make_weave_options_description());
         if (has_help) {
@@ -540,14 +551,15 @@ handle_command(const std::string& command_name, const bool has_help,
         store(command_line_parser(options).options(cod).run(), vm);
         const auto wc(read_weaving_configuration(vm));
         model_name = wc.target().stem().filename().string();
-        r.activity(wc);
+        r.cli().activity(wc);
     }
 
     /*
      * Now process the common options. We must do this at the end
      * because we require the model name.
      */
-    r.tracing(read_tracing_configuration(model_name, vm));
+    r.api().tracing(read_tracing_configuration(model_name, vm));
+    r.api().diffing(read_diffing_configuration(model_name, vm));
     r.logging(read_logging_configuration(model_name, vm));
     return r;
 }
