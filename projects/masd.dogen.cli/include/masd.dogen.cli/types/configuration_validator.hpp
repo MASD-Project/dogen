@@ -25,24 +25,21 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.cli/types/configuration.hpp"
 
 namespace masd::dogen::cli {
 
 class configuration_validator final {
 public:
-    configuration_validator() = default;
-    configuration_validator(const configuration_validator&) = default;
-    configuration_validator(configuration_validator&&) = default;
-    ~configuration_validator() = default;
-    configuration_validator& operator=(const configuration_validator&) = default;
+    configuration_validator() = delete;
+    configuration_validator(const configuration_validator&) = delete;
+    configuration_validator(configuration_validator&&) = delete;
+    ~configuration_validator() = delete;
+    configuration_validator& operator=(
+        const configuration_validator&) = delete;
 
 public:
-    bool operator==(const configuration_validator& rhs) const;
-    bool operator!=(const configuration_validator& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void validate(const configuration& cfg);
 };
 
 }

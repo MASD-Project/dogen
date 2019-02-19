@@ -37,7 +37,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("knitter"));
+auto lg(logger_factory("main"));
 
 const std::string err_prefix("Error: ");
 const std::string gen_failure("Failed to generate model.");
@@ -63,15 +63,16 @@ void report_exception(const bool can_log, const std::exception& e) {
     if (!be)
         return;
 
-    BOOST_LOG_SEV(lg, error) << err_prefix << boost::diagnostic_information(*be);
+    using boost::diagnostic_information;
+    BOOST_LOG_SEV(lg, error) << err_prefix << diagnostic_information(*be);
     BOOST_LOG_SEV(lg, error) << gen_failure;
 }
 
 }
 
 int main(const int argc, const char* argv[]) {
-    using namespace masd::dogen::cli;
     bool can_log(false);
+    using namespace masd::dogen::cli;
 
     try {
         /*
@@ -81,18 +82,24 @@ int main(const int argc, const char* argv[]) {
         const auto clp(inj.create<std::unique_ptr<command_line_parser>>());
 
         /*
-         * Create the configuration from command line options. If we
-         * have no configuration, then there is nothing to do.
+         * Create the configuration from command line options.
          */
         const auto args(std::vector<std::string>(argv + 1, argv + argc));
         const auto ocfg(clp->parse(args, std::cout, std::cerr));
 
+        /*
+         * If we have no configuration, then there is nothing to
+          * do. This can only happen if the user requested some valid
+          * options such as help or version; any errors at the command
+          * line level are treated as exceptions, and all other cases
+          * must result in a configuration object.
+          */
         if (!ocfg)
             return EXIT_SUCCESS;
 
         /*
-         * Since we have a configuration, we can now initialise the
-         * logging subsystem.
+         * Since we have a configuration, we can now attempt to
+         * initialise the logging subsystem.
          */
         const auto& cfg(*ocfg);
         using namespace masd::dogen::utility::log;
@@ -107,20 +114,20 @@ int main(const int argc, const char* argv[]) {
         initializer::initialize();
 
         /*
-         * Execute the application.
+         * Finally, we can execute the application.
          */
         application app;
         app.run(cfg);
-    } catch (const parser_exception& e) {
+    } catch (const parser_exception& /*e*/) {
         /*
-         * Reporting of these to the console is already handled by the
-         * parser itself.
+         * Reporting of these types of errors to the console has
+         * already been handled by the parser itself.
          */
         return EXIT_FAILURE;
     } catch (const std::exception& e) {
         report_exception(can_log, e);
         return EXIT_FAILURE;
-    } catch(...) {
+    } catch (...) {
         std::cerr << force_terminate << std::endl;
         return EXIT_FAILURE;
     }

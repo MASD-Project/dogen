@@ -18,12 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen/types/configuration_validator.hpp"
 #include "masd.dogen.cli/types/configuration_validator.hpp"
+
+namespace {
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory("cli.configuration_validator"));
+
+}
 
 namespace masd::dogen::cli {
 
-bool configuration_validator::operator==(const configuration_validator& /*rhs*/) const {
-    return true;
+void configuration_validator::validate(const configuration& cfg) {
+    BOOST_LOG_SEV(lg, debug) << "Validating configuration.";
+
+    masd::dogen::configuration_validator::validate(cfg.error_handling());
+    masd::dogen::configuration_validator::validate(cfg.tracing());
+    masd::dogen::configuration_validator::validate(cfg.diffing());
+
+    BOOST_LOG_SEV(lg, debug) << "Configuration is valid.";
 }
 
 }

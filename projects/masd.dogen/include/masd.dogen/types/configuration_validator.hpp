@@ -25,24 +25,29 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <boost/optional.hpp>
+#include "masd.dogen/types/configuration.hpp"
 
 namespace masd::dogen {
 
+/**
+ * @brief Validates the Dogen configuration at the API level.
+ */
 class configuration_validator final {
 public:
-    configuration_validator() = default;
-    configuration_validator(const configuration_validator&) = default;
-    configuration_validator(configuration_validator&&) = default;
-    ~configuration_validator() = default;
-    configuration_validator& operator=(const configuration_validator&) = default;
+    configuration_validator() = delete;
+    configuration_validator(const configuration_validator&) = delete;
+    configuration_validator(configuration_validator&&) = delete;
+    ~configuration_validator() = delete;
+    configuration_validator& operator=(
+        const configuration_validator&) = delete;
 
 public:
-    bool operator==(const configuration_validator& rhs) const;
-    bool operator!=(const configuration_validator& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void validate(
+        const boost::optional<error_handling_configuration>& ocfg);
+    static void validate(const boost::optional<tracing_configuration>& ocfg);
+    static void validate(const boost::optional<diffing_configuration>& ocfg);
+    static void validate(const configuration& cfg);
 };
 
 }

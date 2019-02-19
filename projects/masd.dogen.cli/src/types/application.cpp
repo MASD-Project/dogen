@@ -19,20 +19,24 @@
  *
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.cli/io/configuration_io.hpp"
+#include "masd.dogen.cli/types/configuration_validator.hpp"
 #include "masd.dogen.cli/types/application.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("application"));
+auto lg(logger_factory("cli.application"));
 
 }
 
 namespace masd::dogen::cli {
 
 void application::run(const configuration& cfg) const {
-    BOOST_LOG_SEV(lg, info) << cfg;
+    BOOST_LOG_SEV(lg, debug) << "Application started.";
+
+    configuration_validator::validate(cfg);
+
+    BOOST_LOG_SEV(lg, debug) << "Application finished.";
 }
 
 }

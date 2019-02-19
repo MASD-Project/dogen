@@ -18,12 +18,71 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/optional_io.hpp"
+#include "masd.dogen/io/error_handling_configuration_io.hpp"
+#include "masd.dogen/io/tracing_configuration_io.hpp"
+#include "masd.dogen/io/diffing_configuration_io.hpp"
 #include "masd.dogen/types/configuration_validator.hpp"
+
+namespace {
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory("configuration_validator"));
+
+}
 
 namespace masd::dogen {
 
-bool configuration_validator::operator==(const configuration_validator& /*rhs*/) const {
-    return true;
+void configuration_validator::
+validate(const boost::optional<error_handling_configuration>& ocfg) {
+    BOOST_LOG_SEV(lg, debug) << "Validating error handling configuration.";
+
+    if (!ocfg) {
+        BOOST_LOG_SEV(lg, debug) << "No configuration supplied.";
+        return;
+    }
+
+    const auto& cfg(*ocfg);
+    BOOST_LOG_SEV(lg, debug) << cfg;
+    BOOST_LOG_SEV(lg, debug) << "Error handling configuration is valid.";
+}
+
+void configuration_validator::
+validate(const boost::optional<tracing_configuration>& ocfg) {
+    BOOST_LOG_SEV(lg, debug) << "Validating tracing configuration.";
+
+    if (!ocfg) {
+        BOOST_LOG_SEV(lg, debug) << "No configuration supplied.";
+        return;
+    }
+
+    const auto& cfg(*ocfg);
+    BOOST_LOG_SEV(lg, debug) << cfg;
+    BOOST_LOG_SEV(lg, debug) << "Tracing configuration is valid.";
+}
+
+void configuration_validator::
+validate(const boost::optional<diffing_configuration>& ocfg) {
+    BOOST_LOG_SEV(lg, debug) << "Validating diffing configuration.";
+    if (!ocfg) {
+        BOOST_LOG_SEV(lg, debug) << "No configuration supplied.";
+        return;
+    }
+
+    const auto& cfg(*ocfg);
+    BOOST_LOG_SEV(lg, debug) << cfg;
+    BOOST_LOG_SEV(lg, debug) << "Diffing configuration is valid.";
+}
+
+void configuration_validator::validate(const configuration& cfg) {
+    BOOST_LOG_SEV(lg, debug) << "Validating API configuration.";
+
+    validate(cfg.error_handling());
+    validate(cfg.tracing());
+    validate(cfg.diffing());
+
+    BOOST_LOG_SEV(lg, debug) << "API configuration is valid.";
 }
 
 }
