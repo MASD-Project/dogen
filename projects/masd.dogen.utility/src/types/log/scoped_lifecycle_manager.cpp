@@ -23,13 +23,27 @@
 
 namespace masd::dogen::utility::log {
 
+scoped_lifecycle_manager::scoped_lifecycle_manager()
+    : is_initialised_(false) {}
+
 scoped_lifecycle_manager::
 scoped_lifecycle_manager(const boost::optional<logging_configuration>& ocfg) {
-    lifecycle_manager::initialise(ocfg);
+    initialise(ocfg);
 }
 
 scoped_lifecycle_manager::~scoped_lifecycle_manager() {
-    lifecycle_manager::shutdown();
+    if (is_initialised_)
+        lifecycle_manager::shutdown();
+}
+
+void scoped_lifecycle_manager::
+initialise(const boost::optional<logging_configuration>& ocfg) {
+    is_initialised_ = true;
+    lifecycle_manager::initialise(ocfg);
+}
+
+bool scoped_lifecycle_manager::is_initialised() const {
+    return is_initialised_;
 }
 
 }

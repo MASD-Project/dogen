@@ -30,17 +30,38 @@
 
 namespace masd::dogen::utility::log {
 
+/**
+ * @brief Provides a RAII wrapper around the logging lifecycle
+ * manager.
+ */
 class scoped_lifecycle_manager {
 public:
-    scoped_lifecycle_manager() = delete;
     scoped_lifecycle_manager(const scoped_lifecycle_manager&) = delete;
     scoped_lifecycle_manager(scoped_lifecycle_manager&&) = default;
     scoped_lifecycle_manager&
     operator=(const scoped_lifecycle_manager&) = delete;
 
 public:
-    scoped_lifecycle_manager(const boost::optional<logging_configuration>& ocfg);
+    scoped_lifecycle_manager();
+    scoped_lifecycle_manager(
+        const boost::optional<logging_configuration>& ocfg);
     ~scoped_lifecycle_manager();
+
+public:
+    /**
+     * @brief Forces a initialisation / re-initialisation of logging.
+     */
+    void initialise(const boost::optional<logging_configuration>& ocfg);
+
+public:
+    /**
+     * @brief Returns true if the logging system has been initialised
+     * at least once.
+     */
+    bool is_initialised() const;
+
+private:
+    bool is_initialised_;
 };
 
 }

@@ -71,8 +71,9 @@ void report_exception(const bool can_log, const std::exception& e) {
 }
 
 int main(const int argc, const char* argv[]) {
-    bool can_log(false);
     using namespace masd::dogen::cli;
+    using masd::dogen::utility::log::scoped_lifecycle_manager;
+    scoped_lifecycle_manager slm;
 
     try {
         /*
@@ -102,9 +103,7 @@ int main(const int argc, const char* argv[]) {
          * initialise the logging subsystem.
          */
         const auto& cfg(*ocfg);
-        using namespace masd::dogen::utility::log;
-        scoped_lifecycle_manager slm(cfg.logging());
-        can_log = true;
+        slm.initialise(cfg.logging());
 
         /*
          * Now perform legacy initialisation. It uses logging so it
@@ -125,7 +124,7 @@ int main(const int argc, const char* argv[]) {
          */
         return EXIT_FAILURE;
     } catch (const std::exception& e) {
-        report_exception(can_log, e);
+        report_exception(slm.is_initialised(), e);
         return EXIT_FAILURE;
     } catch (...) {
         std::cerr << force_terminate << std::endl;
