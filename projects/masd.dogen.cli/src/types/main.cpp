@@ -40,15 +40,15 @@ using namespace masd::dogen::utility::log;
 auto lg(logger_factory("main"));
 
 const std::string err_prefix("Error: ");
-const std::string gen_failure("Failed to generate model.");
-const std::string force_terminate("dogen.cli was forced to terminate.");
+const std::string activity_failure("Failed to execute command.");
+const std::string force_terminate("Application was forced to terminate.");
 
 void report_exception(const bool can_log, const std::exception& e) {
     /*
      * Dump to the console first.
      */
     std::cerr << err_prefix << e.what() << std::endl;
-    std::cerr << gen_failure << std::endl;
+    std::cerr << activity_failure << std::endl;
 
     if (!can_log)
         return;
@@ -65,7 +65,7 @@ void report_exception(const bool can_log, const std::exception& e) {
 
     using boost::diagnostic_information;
     BOOST_LOG_SEV(lg, error) << err_prefix << diagnostic_information(*be);
-    BOOST_LOG_SEV(lg, error) << gen_failure;
+    BOOST_LOG_SEV(lg, error) << activity_failure;
 }
 
 }
