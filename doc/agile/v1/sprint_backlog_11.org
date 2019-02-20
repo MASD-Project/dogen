@@ -731,6 +731,7 @@ its not clear if its MASD or dogen.
 
 *** STARTED Create a single binary for all of dogen                   :story:
     :LOGBOOK:
+    CLOCK: [2019-02-20 Wed 15:34]--[2019-02-20 Wed 15:41] =>  0:07
     CLOCK: [2019-02-20 Wed 14:41]--[2019-02-20 Wed 15:33] =>  0:52
     CLOCK: [2019-02-20 Wed 11:13]--[2019-02-20 Wed 12:52] =>  1:39
     CLOCK: [2019-02-20 Wed 09:45]--[2019-02-20 Wed 10:01] =>  0:31
