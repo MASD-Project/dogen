@@ -13,22 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-20 Wed 12:52]
+#+CAPTION: Clock summary at [2019-02-20 Wed 15:33]
 | <75>                                                      |          |        |        |       |
 | Headline                                                  | Time     |        |        |     % |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                              | *203:01* |        |        | 100.0 |
+| *Total time*                                              | *203:53* |        |        | 100.0 |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                   | 203:01   |        |        | 100.0 |
-| Active                                                    |          | 203:01 |        | 100.0 |
+| Stories                                                   | 203:53   |        |        | 100.0 |
+| Active                                                    |          | 203:53 |        | 100.0 |
 | Edit release notes for previous sprint                    |          |        |   2:03 |   1.0 |
 | Sprint and product backlog grooming                       |          |        |   5:13 |   2.6 |
-| Work on MASD theory                                       |          |        | 113:38 |  56.0 |
+| Work on MASD theory                                       |          |        | 113:38 |  55.7 |
 | Rename models to fit MASD architecture                    |          |        |   4:56 |   2.4 |
 | Read up on framework and API design                       |          |        |   0:57 |   0.5 |
 | Analyse the state of the mess of refactors                |          |        |   6:27 |   3.2 |
 | Create the =orchestration= model                          |          |        |   4:15 |   2.1 |
-| Update vcpkg across all operative systems                 |          |        |   4:35 |   2.3 |
+| Update vcpkg across all operative systems                 |          |        |   4:35 |   2.2 |
 | Update C# reference models to latest dogen                |          |        |   0:42 |   0.3 |
 | Convert the utility model into a regular dogen model      |          |        |   7:27 |   3.7 |
 | Improve support for clang-cl builds                       |          |        |   2:02 |   1.0 |
@@ -37,7 +37,7 @@
 | References to types in top-level namespace do not resolve |          |        |   0:51 |   0.4 |
 | Create a colour palette test model                        |          |        |   1:09 |   0.6 |
 | Great meta-data rename                                    |          |        |   4:54 |   2.4 |
-| Create a single binary for all of dogen                   |          |        |  24:54 |  12.3 |
+| Create a single binary for all of dogen                   |          |        |  25:46 |  12.6 |
 | Dogen's vcpkg export for OSX was created from master      |          |        |   0:46 |   0.4 |
 | Fix clang-cl warnings                                     |          |        |   5:07 |   2.5 |
 | Use tracing options in existing code                      |          |        |   0:57 |   0.5 |
@@ -731,6 +731,7 @@ its not clear if its MASD or dogen.
 
 *** STARTED Create a single binary for all of dogen                   :story:
     :LOGBOOK:
+    CLOCK: [2019-02-20 Wed 14:41]--[2019-02-20 Wed 15:33] =>  0:52
     CLOCK: [2019-02-20 Wed 11:13]--[2019-02-20 Wed 12:52] =>  1:39
     CLOCK: [2019-02-20 Wed 09:45]--[2019-02-20 Wed 10:01] =>  0:31
     CLOCK: [2019-02-19 Tue 15:47]--[2019-02-19 Tue 16:25] =>  0:38

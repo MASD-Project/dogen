@@ -72,8 +72,8 @@ if (DOGEN_TAILOR_EXECUTABLE)
     endforeach()
 endif()
 
-if (DOGEN_KNITTER_EXECUTABLE)
-    set(other_options --log-level ${DOGEN_LOG_LEVEL})
+if (DOGEN_CLI_EXECUTABLE)
+    set(other_options --log-enabled --log-level ${DOGEN_LOG_LEVEL})
 
     # uncomment the next line if you require compatibility support
     # set(other_options ${other_options} --compatibility-mode)
