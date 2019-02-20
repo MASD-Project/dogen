@@ -333,13 +333,13 @@
         <dia:point val="39,-4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="38.95,-4.05;55.335,0.45"/>
+        <dia:rectangle val="38.95,-4.05;62.265,0.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="39,-4"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.285"/>
+        <dia:real val="23.215"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -464,6 +464,23 @@
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
+                <dia:string>#cfg#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#configuration#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="0"/>
+              </dia:attribute>
+            </dia:composite>
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
                 <dia:string>#target#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
@@ -481,10 +498,10 @@
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#cfg#</dia:string>
+                <dia:string>#output_directory#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#configuration#</dia:string>
+                <dia:string>#boost::filesystem::path#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

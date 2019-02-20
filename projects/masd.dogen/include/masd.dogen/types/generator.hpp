@@ -18,15 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_ALL_HPP
-#define MASD_DOGEN_ORCHESTRATION_TYPES_ALL_HPP
+#ifndef MASD_DOGEN_TYPES_GENERATOR_HPP
+#define MASD_DOGEN_TYPES_GENERATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.orchestration/types/generator.hpp"
-#include "masd.dogen.orchestration/types/orchestration.hpp"
-#include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
+#include <boost/filesystem/path.hpp>
+#include "masd.dogen/types/configuration.hpp"
+
+namespace masd::dogen {
+
+class generator {
+public:
+    generator() = default;
+    generator(const generator&) = delete;
+    generator(generator&&) = delete;
+    virtual ~generator() noexcept = default;
+    generator& operator=(const generator&) = delete;
+
+public:
+    virtual void generate(const configuration& cfg,
+        const boost::filesystem::path& target,
+        const boost::filesystem::path& output_directory,
+        const boost::filesystem::path& tracing_output_directory) const = 0;
+};
+
+}
 
 #endif

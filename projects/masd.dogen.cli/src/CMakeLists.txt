@@ -36,7 +36,6 @@ set_target_properties(${lib_target_name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
 target_link_libraries(${lib_target_name}
-    masd.dogen.lib
     ${Boost_LIBRARIES})
 
 install(TARGETS ${lib_target_name} ARCHIVE DESTINATION lib COMPONENT libraries)
@@ -53,8 +52,6 @@ set_target_properties(${exe_target_name} PROPERTIES
 
 target_link_libraries(${exe_target_name}
     ${lib_target_name}
-    masd.dogen.lib
-    masd.dogen.utility.lib
     masd.dogen.options.lib
     masd.dogen.dia.lib
     masd.dogen.extraction.lib
@@ -64,6 +61,8 @@ target_link_libraries(${exe_target_name}
     masd.dogen.coding.lib
     masd.dogen.generation.cpp.lib
     masd.dogen.generation.csharp.lib
+    masd.dogen.lib
+    masd.dogen.orchestration.lib
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES}

@@ -26,6 +26,7 @@
 #endif
 
 #include "masd.dogen/types/dogen.hpp"
+#include "masd.dogen/types/generator.hpp"
 #include "masd.dogen/types/configuration.hpp"
 #include "masd.dogen/types/diffing_style.hpp"
 #include "masd.dogen/types/tracing_level.hpp"
