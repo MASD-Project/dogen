@@ -18,17 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_ALL_HPP
-#define MASD_DOGEN_ORCHESTRATION_TYPES_ALL_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "masd.dogen.orchestration/types/weaver.hpp"
 #include "masd.dogen.orchestration/types/converter.hpp"
-#include "masd.dogen.orchestration/types/generator.hpp"
-#include "masd.dogen.orchestration/types/orchestration.hpp"
-#include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
 
-#endif
+namespace masd::dogen::orchestration {
+
+void converter::convert(const configuration& /*cfg*/,
+    const boost::filesystem::path& /*target*/,
+    const boost::filesystem::path& /*destination*/,
+    const boost::filesystem::path& /*tracing_output_directory*/) const {
+}
+
+}

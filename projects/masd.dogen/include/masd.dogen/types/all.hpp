@@ -26,6 +26,8 @@
 #endif
 
 #include "masd.dogen/types/dogen.hpp"
+#include "masd.dogen/types/weaver.hpp"
+#include "masd.dogen/types/converter.hpp"
 #include "masd.dogen/types/generator.hpp"
 #include "masd.dogen/types/configuration.hpp"
 #include "masd.dogen/types/diffing_style.hpp"

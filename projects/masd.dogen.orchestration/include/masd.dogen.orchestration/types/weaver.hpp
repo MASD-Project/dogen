@@ -18,17 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_ALL_HPP
-#define MASD_DOGEN_ORCHESTRATION_TYPES_ALL_HPP
+#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_WEAVER_HPP
+#define MASD_DOGEN_ORCHESTRATION_TYPES_WEAVER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.orchestration/types/weaver.hpp"
-#include "masd.dogen.orchestration/types/converter.hpp"
-#include "masd.dogen.orchestration/types/generator.hpp"
-#include "masd.dogen.orchestration/types/orchestration.hpp"
-#include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
+#include "masd.dogen/types/weaver.hpp"
+
+namespace masd::dogen::orchestration {
+
+class weaver final : public masd::dogen::weaver {
+public:
+    weaver() = default;
+    weaver(const weaver&) = delete;
+    weaver(weaver&&) = delete;
+    weaver& operator=(const weaver&) = delete;
+    virtual ~weaver() noexcept { }
+
+public:
+    void weave(const configuration& cfg,
+        const boost::filesystem::path& target,
+        const boost::filesystem::path& tracing_output_directory) const;
+};
+
+}
 
 #endif

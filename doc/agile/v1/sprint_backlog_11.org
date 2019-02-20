@@ -13,17 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-20 Wed 18:43]
+#+CAPTION: Clock summary at [2019-02-20 Wed 19:00]
 | <75>                                                      |          |        |        |       |
 | Headline                                                  | Time     |        |        |     % |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                              | *206:58* |        |        | 100.0 |
+| *Total time*                                              | *207:17* |        |        | 100.0 |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                   | 206:58   |        |        | 100.0 |
-| Active                                                    |          | 206:58 |        | 100.0 |
+| Stories                                                   | 207:17   |        |        | 100.0 |
+| Active                                                    |          | 207:17 |        | 100.0 |
 | Edit release notes for previous sprint                    |          |        |   2:03 |   1.0 |
 | Sprint and product backlog grooming                       |          |        |   5:13 |   2.5 |
-| Work on MASD theory                                       |          |        | 113:38 |  54.9 |
+| Work on MASD theory                                       |          |        | 113:38 |  54.8 |
 | Rename models to fit MASD architecture                    |          |        |   4:56 |   2.4 |
 | Read up on framework and API design                       |          |        |   0:57 |   0.5 |
 | Analyse the state of the mess of refactors                |          |        |   6:27 |   3.1 |
@@ -37,7 +37,7 @@
 | References to types in top-level namespace do not resolve |          |        |   0:51 |   0.4 |
 | Create a colour palette test model                        |          |        |   1:09 |   0.6 |
 | Great meta-data rename                                    |          |        |   4:54 |   2.4 |
-| Create a single binary for all of dogen                   |          |        |  28:51 |  13.9 |
+| Create a single binary for all of dogen                   |          |        |  29:10 |  14.1 |
 | Dogen's vcpkg export for OSX was created from master      |          |        |   0:46 |   0.4 |
 | Fix clang-cl warnings                                     |          |        |   5:07 |   2.5 |
 | Use tracing options in existing code                      |          |        |   0:57 |   0.5 |
@@ -731,6 +731,7 @@ its not clear if its MASD or dogen.
 
 *** STARTED Create a single binary for all of dogen                   :story:
     :LOGBOOK:
+    CLOCK: [2019-02-20 Wed 18:41]--[2019-02-20 Wed 19:00] =>  0:19
     CLOCK: [2019-02-20 Wed 15:42]--[2019-02-20 Wed 18:40] =>  2:58
     CLOCK: [2019-02-20 Wed 15:34]--[2019-02-20 Wed 15:41] =>  0:07
     CLOCK: [2019-02-20 Wed 14:41]--[2019-02-20 Wed 15:33] =>  0:52

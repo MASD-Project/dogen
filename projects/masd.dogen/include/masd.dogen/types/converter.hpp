@@ -18,17 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_ALL_HPP
-#define MASD_DOGEN_ORCHESTRATION_TYPES_ALL_HPP
+#ifndef MASD_DOGEN_TYPES_CONVERTER_HPP
+#define MASD_DOGEN_TYPES_CONVERTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.orchestration/types/weaver.hpp"
-#include "masd.dogen.orchestration/types/converter.hpp"
-#include "masd.dogen.orchestration/types/generator.hpp"
-#include "masd.dogen.orchestration/types/orchestration.hpp"
-#include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
+#include <boost/filesystem/path.hpp>
+#include "masd.dogen/types/configuration.hpp"
+
+namespace masd::dogen {
+
+class converter {
+public:
+    converter() = default;
+    converter(const converter&) = delete;
+    converter(converter&&) = delete;
+    virtual ~converter() noexcept = default;
+    converter& operator=(const converter&) = delete;
+
+public:
+    virtual void convert(const configuration& cfg,
+        const boost::filesystem::path& source,
+        const boost::filesystem::path& destination,
+        const boost::filesystem::path& tracing_output_directory) const = 0;
+};
+
+}
 
 #endif
