@@ -4,14 +4,14 @@
     "masd::interface"
   ],
   "parents": [
-    "dogen.handcrafted"
+    "dogen.header_only"
   ],
   "scope": "root_module",
   "templates": [
     {
       "name": {
-        "simple": "overwrite",
-        "qualified": "masd.extraction.cpp.types.class_implementation.enabled"
+        "simple": "is_final",
+        "qualified": "masd.generalization.is_final"
       },
       "archetype_location": {
         "kernel": "masd",
