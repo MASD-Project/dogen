@@ -51,6 +51,8 @@ for layer in dia.active_display().diagram.data.layers:
             object.properties["fill_colour"] = "#FFFACD"
         elif "masd::interface" in stereotype:
             object.properties["fill_colour"] = "#EEFACD"
+        elif "masd::entry_point" in stereotype:
+            object.properties["fill_colour"] = "#B2E2E2"
 
         #
         # Theme: Core meta-elements
