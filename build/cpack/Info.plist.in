@@ -5,11 +5,11 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>dogen_knitter</string>
+	<string>dogen</string>
 	<key>CFBundleIconFile</key>
 	<string>application_dogen.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.github.DomainDrivenConsulting.dogen</string>
+	<string>com.github.MASD.dogen</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

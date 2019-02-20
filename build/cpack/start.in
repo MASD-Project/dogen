@@ -1,4 +1,4 @@
 #!/bin/bash
 
 export DYLD_LIBRARY_PATH="`dirname "$0"`"/../Resources/bin/""
-`dirname "$0"`"/../Resources/bin/dogen.knitter"
+`dirname "$0"`"/../Resources/bin/masd.dogen.cli"

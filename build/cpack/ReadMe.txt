@@ -1,10 +1,10 @@
 Dogen is a code generator designed to target domain models.
 
-Dogen is required for Kitanda because we use a intensively domain
-driven approach to software engineering, resulting in a very large
-number of domain specific languages (DSLs). Dogen was created to make
-the modeling process simpler: the user creates a domain model using a
-UML tool and Dogen uses it to generate its source code
-representation. The generated code contains most of the services
-required from a typical C++ domain object such as serialisation,
-hashing, streaming and so on.
+Dogen is the reference implementation of the MASD Project code
+generator. MASD - Model Assisted Software Development - is a new
+methodology for the development of software systems based on MDE. In
+lay terms, Dogen's objective is to automate the development process as
+much as possible: the user creates models in one of the supported
+frontend formats and respecting a set of predefined restrictions;
+Dogen then uses this input to generate a source code representation of
+the model.
