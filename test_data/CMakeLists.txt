@@ -107,9 +107,9 @@ file(GLOB samples "${input_dir}/*.dia")
 install(FILES ${samples} DESTINATION share/samples/dia)
 
 #
-# Tailor targets
+# Conversion targets
 #
-if (DOGEN_TAILOR_EXECUTABLE)
+if (DOGEN_CLI_EXECUTABLE)
     set(ignore false)
     set(ignore_models package_without_name class_without_name two_empty_layers)
     foreach(sample ${samples})
@@ -117,12 +117,13 @@ if (DOGEN_TAILOR_EXECUTABLE)
         get_filename_component(model_name ${sample} NAME_WE)
 
         if(NOT ${model_name} IN_LIST ignore_models)
-            add_custom_target(tailor_${model_name}
-                COMMENT "Tailoring ${model_name}."
+            add_custom_target(convert_${model_name}
+                COMMENT "Converting ${model_name}."
                 WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-                COMMAND ${DOGEN_TAILOR_EXECUTABLE} --log-level=${DOGEN_LOG_LEVEL} --target ${sample} --output ${output_dir}/${model_name}.json)
-
-            add_dependencies(tailor_all tailor_${model_name})
+                COMMAND echo ${DOGEN_CLI_EXECUTABLE} convert
+                --log-enabled --log-level=${DOGEN_LOG_LEVEL}
+                --source ${sample} --destination ${output_dir}/${model_name}.json)
+            add_dependencies(convert_all convert_${model_name})
         endif()
     endforeach()
 

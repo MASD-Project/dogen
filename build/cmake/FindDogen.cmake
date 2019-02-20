@@ -36,21 +36,3 @@ if (DOGEN_CLI_EXECUTABLE)
 else()
     message(STATUS "Dogen CLI not found.")
 endif()
-
-find_program(DOGEN_TAILOR_EXECUTABLE NAMES masd.dogen.tailor
-    HINTS ${CMAKE_BINARY_DIR}/stage/bin)
-if (DOGEN_TAILOR_EXECUTABLE)
-    execute_process(
-        COMMAND ${DOGEN_TAILOR_EXECUTABLE} --version
-        COMMAND grep ^Dogen
-        COMMAND cut -b14-
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        ERROR_VARIABLE DOGEN_ERROR
-        OUTPUT_VARIABLE DOGEN_TAILOR_VERSION
-        RESULT_VARIABLE DOGEN_RESULT
-        OUTPUT_STRIP_TRAILING_WHITESPACE)
-
-      message(STATUS "Found Dogen Tailor ${DOGEN_TAILOR_VERSION} (${DOGEN_TAILOR_EXECUTABLE})")
-else()
-    message(STATUS "Dogen Tailor not found.")
-endif()

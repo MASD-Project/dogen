@@ -53,28 +53,28 @@ if (WITH_JSON_VALIDATION)
     endforeach()
 endif()
 
-#
-# Tailor targets
-#
-file(GLOB models "dia/*.dia")
+if (DOGEN_CLI_EXECUTABLE)
+    set(other_options --log-enabled --log-level ${DOGEN_LOG_LEVEL})
 
-if (DOGEN_TAILOR_EXECUTABLE)
+    #
+    # Model conversion
+    #
+    file(GLOB models "dia/*.dia")
     foreach(model ${models})
         set(model_name "")
         get_filename_component(model_name ${model} NAME)
 
-        add_custom_target(tailor_${model_name}
-          COMMENT "Tailoring ${model_name}."
-          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-          COMMAND ${DOGEN_TAILOR_EXECUTABLE} --log-level=${DOGEN_LOG_LEVEL}
-          --target ${model} --output ${output_dir}/${model_name}.json)
-        add_dependencies(tailor_all tailor_${model_name})
+        add_custom_target(convert_${model_name}
+            COMMENT "Converting ${model_name}."
+            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+            COMMAND echo ${DOGEN_CLI_EXECUTABLE} convert ${other_options}
+            --source ${model} --destination ${output_dir}/${model_name}.json)
+        add_dependencies(convert_all convert_${model_name})
     endforeach()
-endif()
 
-if (DOGEN_CLI_EXECUTABLE)
-    set(other_options --log-enabled --log-level ${DOGEN_LOG_LEVEL})
-
+    #
+    # Code generation
+    #
     # uncomment the next line if you require compatibility support
     # set(other_options ${other_options} --compatibility-mode)
 
