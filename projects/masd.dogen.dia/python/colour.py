@@ -19,12 +19,15 @@
 #
 for layer in dia.active_display().diagram.data.layers:
     for object in layer.objects:
+        #
+        # Theme: UML elements
+        #
         if object.type.name == "UML - Note":
-            object.properties["fill_colour"] = "Khaki"
+            object.properties["fill_colour"] = "#F0E68C"
             continue;
 
         if object.type.name == "UML - LargePackage":
-            object.properties["fill_colour"] = "WhiteSmoke"
+            object.properties["fill_colour"] = "#F5F5F5"
             continue;
 
         if object.type.name != "UML - Class":
@@ -32,23 +35,35 @@ for layer in dia.active_display().diagram.data.layers:
 
         name = object.properties["name"].value
         stereotype = object.properties["stereotype"].value
+        #
+        # Theme: ORM
+        #
         if "masd::orm::object" in stereotype:
-            object.properties["fill_colour"] = "Pale Green"
+            object.properties["fill_colour"] = "#98FB98"
         elif "masd::orm::value" in stereotype:
-            object.properties["fill_colour"] = "Plum"
-        elif "masd::enumeration" in stereotype:
-            object.properties["fill_colour"] = "Papaya Whip"
-        elif "masd::primitive" in stereotype:
-            object.properties["fill_colour"] = "Light Steel Blue"
-        elif "masd::exception" in stereotype:
-            object.properties["fill_colour"] = "Peach Puff"
-        elif "masd::object_template" in stereotype:
-            object.properties["fill_colour"] = "thistle2"
+            object.properties["fill_colour"] = "#DDA0DD"
+        #
+        # Theme: Manually generated
+        #
         elif "masd::handcrafted" in stereotype:
-            object.properties["fill_colour"] = "Lemon Chiffon"
+            object.properties["fill_colour"] = "#FFFACD"
         elif "masd::header_only" in stereotype:
-            object.properties["fill_colour"] = "Lemon Chiffon"
+            object.properties["fill_colour"] = "#FFFACD"
         elif "masd::interface" in stereotype:
-            object.properties["fill_colour"] = "Lemon Chiffon"
+            object.properties["fill_colour"] = "#EEFACD"
+
+        #
+        # Theme: Core meta-elements
+        #
+        elif "masd::enumeration" in stereotype:
+            object.properties["fill_colour"] = "#FFEFD5"
+        elif "masd::primitive" in stereotype:
+            object.properties["fill_colour"] = "#B0C4DE"
+        elif "masd::exception" in stereotype:
+            object.properties["fill_colour"] = "#FFDAB9"
+        elif "masd::object_template" in stereotype:
+            object.properties["fill_colour"] = "#EED2DE"
+        elif "masd::object" in stereotype:
+            object.properties["fill_colour"] = "#F5FFFA"
         else:
-            object.properties["fill_colour"] = "Mint Cream"
+            object.properties["fill_colour"] = "#F5FFFA"
