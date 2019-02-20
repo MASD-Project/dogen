@@ -24,28 +24,23 @@ namespace masd::dogen::cli {
 
 conversion_configuration::conversion_configuration(conversion_configuration&& rhs)
     : source_(std::move(rhs.source_)),
-      destination_type_(std::move(rhs.destination_type_)),
-      destination_file_name_(std::move(rhs.destination_file_name_)) { }
+      destination_(std::move(rhs.destination_)) { }
 
 conversion_configuration::conversion_configuration(
     const boost::filesystem::path& source,
-    const std::string& destination_type,
-    const std::string& destination_file_name)
+    const std::string& destination)
     : source_(source),
-      destination_type_(destination_type),
-      destination_file_name_(destination_file_name) { }
+      destination_(destination) { }
 
 void conversion_configuration::swap(conversion_configuration& other) noexcept {
     using std::swap;
     swap(source_, other.source_);
-    swap(destination_type_, other.destination_type_);
-    swap(destination_file_name_, other.destination_file_name_);
+    swap(destination_, other.destination_);
 }
 
 bool conversion_configuration::operator==(const conversion_configuration& rhs) const {
     return source_ == rhs.source_ &&
-        destination_type_ == rhs.destination_type_ &&
-        destination_file_name_ == rhs.destination_file_name_;
+        destination_ == rhs.destination_;
 }
 
 conversion_configuration& conversion_configuration::operator=(conversion_configuration other) {
@@ -72,39 +67,21 @@ conversion_configuration& conversion_configuration::source(const boost::filesyst
     return *this;
 }
 
-const std::string& conversion_configuration::destination_type() const {
-    return destination_type_;
+const std::string& conversion_configuration::destination() const {
+    return destination_;
 }
 
-std::string& conversion_configuration::destination_type() {
-    return destination_type_;
+std::string& conversion_configuration::destination() {
+    return destination_;
 }
 
-conversion_configuration& conversion_configuration::destination_type(const std::string& v) {
-    destination_type_ = v;
+conversion_configuration& conversion_configuration::destination(const std::string& v) {
+    destination_ = v;
     return *this;
 }
 
-conversion_configuration& conversion_configuration::destination_type(const std::string&& v) {
-    destination_type_ = std::move(v);
-    return *this;
-}
-
-const std::string& conversion_configuration::destination_file_name() const {
-    return destination_file_name_;
-}
-
-std::string& conversion_configuration::destination_file_name() {
-    return destination_file_name_;
-}
-
-conversion_configuration& conversion_configuration::destination_file_name(const std::string& v) {
-    destination_file_name_ = v;
-    return *this;
-}
-
-conversion_configuration& conversion_configuration::destination_file_name(const std::string&& v) {
-    destination_file_name_ = std::move(v);
+conversion_configuration& conversion_configuration::destination(const std::string&& v) {
+    destination_ = std::move(v);
     return *this;
 }
 

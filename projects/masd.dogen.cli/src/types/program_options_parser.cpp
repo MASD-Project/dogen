@@ -472,7 +472,7 @@ read_conversion_configuration(const variables_map& vm) {
 
     if (vm.count(convert_destination_arg)) {
         const auto s(vm[convert_destination_arg].as<std::string>());
-        r.destination_file_name(s);
+        r.destination(s);
     }
 
     return r;

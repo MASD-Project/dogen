@@ -22,6 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.orchestration/types/generator.hpp"
+#include "masd.dogen.orchestration/types/converter.hpp"
 #include "masd.dogen.cli/types/configuration_validator.hpp"
 #include "masd.dogen.cli/types/application_exception.hpp"
 #include "masd.dogen.cli/types/application.hpp"
@@ -55,9 +56,10 @@ public:
             application_exception("Unsupported actvitity: weaving"));
     }
 
-    void operator()(const conversion_configuration& /*cfg*/) const {
-        BOOST_THROW_EXCEPTION(
-            application_exception("Unsupported actvitity: conversion"));
+    void operator()(const conversion_configuration& cfg) const {
+        masd::dogen::orchestration::converter c;
+        c.convert(configuration_.api(), cfg.source(), cfg.destination(),
+            configuration_.cli().tracing_output_directory());
     }
 
 private:

@@ -46,8 +46,7 @@ public:
 public:
     conversion_configuration(
         const boost::filesystem::path& source,
-        const std::string& destination_type,
-        const std::string& destination_file_name);
+        const std::string& destination);
 
 public:
     const boost::filesystem::path& source() const;
@@ -56,28 +55,13 @@ public:
     conversion_configuration& source(const boost::filesystem::path&& v);
 
     /**
-     * @brief Type of the model to convert into.
-     *
-     * Must be supported by Dogen.
+     * @brief Name of the file to output the conversion to.
      */
     /**@{*/
-    const std::string& destination_type() const;
-    std::string& destination_type();
-    conversion_configuration& destination_type(const std::string& v);
-    conversion_configuration& destination_type(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Name of the file to output to, when outputting to a file.
-     *
-     * If not supplied, defaults to the source file name, with the appropriate extension
-     * for the destination type.
-     */
-    /**@{*/
-    const std::string& destination_file_name() const;
-    std::string& destination_file_name();
-    conversion_configuration& destination_file_name(const std::string& v);
-    conversion_configuration& destination_file_name(const std::string&& v);
+    const std::string& destination() const;
+    std::string& destination();
+    conversion_configuration& destination(const std::string& v);
+    conversion_configuration& destination(const std::string&& v);
     /**@}*/
 
 public:
@@ -92,8 +76,7 @@ public:
 
 private:
     boost::filesystem::path source_;
-    std::string destination_type_;
-    std::string destination_file_name_;
+    std::string destination_;
 };
 
 }

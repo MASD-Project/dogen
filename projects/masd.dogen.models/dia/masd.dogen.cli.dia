@@ -2053,16 +2053,16 @@
         <dia:point val="109,14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="108.95,13.95;123.025,19.25"/>
+        <dia:rectangle val="108.95,13.95;121.87,18.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="109,14"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.975"/>
+        <dia:real val="12.82"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#conversion_configuration#</dia:string>
@@ -2177,7 +2177,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#destination_type#</dia:string>
+            <dia:string>#destination#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -2186,35 +2186,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Type of the model to convert into.
-
-Must be supported by Dogen.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#destination_file_name#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Name of the file to output to, when outputting to a file.
-
-If not supplied, defaults to the source file name, with the appropriate extension
-for the destination type.#</dia:string>
+            <dia:string>#Name of the file to output the conversion to.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2345,7 +2317,7 @@ for the destination type.#</dia:string>
         <dia:point val="111,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="110.25,19.15;116.188,26.8"/>
+        <dia:rectangle val="110.25,18.35;115.61,26.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2353,8 +2325,8 @@ for the destination type.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="111,26"/>
         <dia:point val="111,22"/>
-        <dia:point val="115.987,22"/>
-        <dia:point val="115.987,19.2"/>
+        <dia:point val="115.41,22"/>
+        <dia:point val="115.41,18.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

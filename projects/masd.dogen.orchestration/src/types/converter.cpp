@@ -18,14 +18,72 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.injection/types/transforms/context.hpp"
+#include "masd.dogen.injection/types/transforms/model_to_model_chain.hpp"
+#include "masd.dogen.injection.json/types/initializer.hpp"
+#include "masd.dogen.injection.dia/types/initializer.hpp"
+#include "masd.dogen.coding/types/transforms/options.hpp"
+#include "masd.dogen.coding/types/transforms/context_factory.hpp"
+#include "masd.dogen.coding/types/transforms/code_generation_chain.hpp"
 #include "masd.dogen.orchestration/types/converter.hpp"
+
+namespace {
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory("orchestration.converter"));
+
+using masd::dogen::coding::transforms::options;
+options make_options(const masd::dogen::configuration& cfg,
+    const boost::filesystem::path& source,
+    const boost::filesystem::path& tracing_output_directory) {
+    options r;
+
+    r.target(source);
+
+    if (cfg.error_handling()) {
+        const auto& eh(*cfg.error_handling());
+        r.compatibility_mode(eh.compatibility_mode_enabled());
+    }
+
+    if (cfg.tracing()) {
+        const auto& t(*cfg.tracing());
+        r.log_level(t.logging_impact());
+
+        using masd::dogen::tracing_level;
+        r.probe_all(t.level() == tracing_level::detail);
+        r.probe_stats(true);
+        r.probe_stats_disable_guids(t.guids_enabled());
+
+        using masd::dogen::tracing_format;
+        r.probe_stats_org_mode(t.format() == tracing_format::org_mode);
+        r.probe_directory(tracing_output_directory);
+        r.probe_use_short_names(t.use_short_names());
+    }
+
+    return r;
+}
+
+}
 
 namespace masd::dogen::orchestration {
 
-void converter::convert(const configuration& /*cfg*/,
-    const boost::filesystem::path& /*target*/,
-    const boost::filesystem::path& /*destination*/,
-    const boost::filesystem::path& /*tracing_output_directory*/) const {
+void converter::convert(const configuration& cfg,
+    const boost::filesystem::path& source,
+    const boost::filesystem::path& destination,
+    const boost::filesystem::path& tracing_output_directory) const {
+    BOOST_LOG_SEV(lg, debug) << "Started conversion.";
+
+    const auto o(make_options(cfg, source, tracing_output_directory));
+
+    using namespace coding::transforms;
+    const auto ctx(context_factory::make(o, false/*enable_validation*/));
+    const masd::dogen::injection::transforms::context ext_ctx(ctx.tracer());
+
+    using namespace masd::dogen::injection::transforms;
+    model_to_model_chain::transform(ext_ctx, source, destination);
+
+    BOOST_LOG_SEV(lg, debug) << "Finished conversion.";
 }
 
 }
