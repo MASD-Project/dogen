@@ -13142,7 +13142,7 @@ submit a PR. This repo cannot be used to submit PRs.
 Investigation on Python: it seems its fairly trivial to extend dia
 using python:
 
-- [[https://wiki.gnome.org/Apps/Dia/Python][Dia Python Plugin]]
+- [[https://wiki.gnome.org/Apps/Dia/Python][Dia Python Plugin]]: includes lots of scripts.
 - [[http://pastebin.com/pPkL3PxQ][Manipulating UML in Dia's Python Console]]
 - [[https://github.com/GNOME/dia/tree/master/plug-ins/python][Lots of examples of python scripts]]
 
