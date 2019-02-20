@@ -19,9 +19,11 @@
  *
  */
 #include <boost/variant.hpp>
+#include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.orchestration/types/generator.hpp"
 #include "masd.dogen.cli/types/configuration_validator.hpp"
+#include "masd.dogen.cli/types/application_exception.hpp"
 #include "masd.dogen.cli/types/application.hpp"
 
 namespace {
@@ -30,6 +32,7 @@ using namespace masd::dogen::utility::log;
 auto lg(logger_factory("cli.application"));
 
 using masd::dogen::cli::configuration;
+using masd::dogen::cli::application_exception;
 using masd::dogen::cli::generation_configuration;
 using masd::dogen::cli::weaving_configuration;
 using masd::dogen::cli::conversion_configuration;
@@ -48,17 +51,18 @@ public:
     }
 
     void operator()(const weaving_configuration& /*cfg*/) const {
-
+        BOOST_THROW_EXCEPTION(
+            application_exception("Unsupported actvitity: weaving"));
     }
 
     void operator()(const conversion_configuration& /*cfg*/) const {
-
+        BOOST_THROW_EXCEPTION(
+            application_exception("Unsupported actvitity: conversion"));
     }
 
 private:
     const configuration& configuration_;
 };
-
 
 }
 
