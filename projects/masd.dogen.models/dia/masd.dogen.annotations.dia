@@ -65,22 +65,22 @@
   <dia:layer name="Background" visible="true" active="true">
     <dia:object type="UML - Note" version="0" id="O0">
       <dia:attribute name="obj_pos">
-        <dia:point val="-49,-118"/>
+        <dia:point val="-49,-129"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-49.05,-118.05;-21.1,-104.25"/>
+        <dia:rectangle val="-49.05,-129.05;-21.1,-112.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-49,-118"/>
+        <dia:point val="-49,-129"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.850000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13.700000000000001"/>
+        <dia:real val="16.900000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -113,7 +113,7 @@ yet imposing some constraints on the shape of the data.
 #DOGEN masd.extraction.cpp.visual_studio.project.enabled=false
 #DOGEN masd.extraction.cpp.visual_studio.solution.enabled=false
 #DOGEN masd.extraction.csharp.enabled=false
-#DOGEN masd.annotations.profile=dogen.disable_common_facets_temp#</dia:string>
+#DOGEN masd.annotations.profile=dogen.disable_common_facets#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -122,7 +122,7 @@ yet imposing some constraints on the shape of the data.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-48.65,-116.755"/>
+            <dia:point val="-48.65,-127.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -6254,17 +6254,17 @@ The starting point of the recursion is the level supplied by an archetype locati
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O36">
       <dia:attribute name="obj_pos">
-        <dia:point val="136.918,-41.9504"/>
+        <dia:point val="136.91,-41.9504"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="117.702,-42.0063;137.769,-32.0004"/>
+        <dia:rectangle val="117.702,-42.0018;137.76,-32.0004"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="136.918,-41.9504"/>
-        <dia:point val="136.953,-37"/>
+        <dia:point val="136.91,-41.9504"/>
+        <dia:point val="136.918,-37"/>
         <dia:point val="117.752,-37"/>
         <dia:point val="117.752,-32.0504"/>
       </dia:attribute>
