@@ -24,16 +24,16 @@ if (DOGEN_CLI_EXECUTABLE)
         set(target ${model})
         set(target_ext ${target}.${frontend})
         set(target_path ${models_dir}/${target_ext})
-        message(STATUS knit_${target_ext})
-        add_custom_target(knit_${target_ext}
+        message(STATUS generate_${target_ext})
+        add_custom_target(generate_${target_ext}
             COMMENT "Generating ${target_ext} model" VERBATIM
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${DOGEN_CLI_EXECUTABLE} generate
             --target ${target_path} ${common_arguments})
-        add_dependencies(knit_all_${frontend} knit_${target_ext})
+        add_dependencies(generate_all_${frontend} generate_${target_ext})
 
         if (WITH_BENCHMARKS)
-            add_custom_target(benchmark_knit_${target_ext}
+            add_custom_target(benchmark_generate_${target_ext}
                 COMMENT "Benchmarking generation of  ${target_ext} model" VERBATIM
                 WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
                 COMMAND ${benchmark_command} ${benchmark_repeats}
@@ -41,7 +41,7 @@ if (DOGEN_CLI_EXECUTABLE)
                 ${DOGEN_CLI_EXECUTABLE} generate --target ${target_path}
                 ${common_arguments})
             add_dependencies(benchmark_${frontend}
-                benchmark_knit_${target_ext})
+                benchmark_generate_${target_ext})
         endif()
     endforeach()
 endif()

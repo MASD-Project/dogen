@@ -350,14 +350,14 @@ else()
 endif()
 
 #
-# Log level to use for all Dogen tools
-#
-set(DOGEN_LOG_LEVEL "debug")
-
-#
 # Dogen
 #
 find_package(Dogen REQUIRED)
+
+#
+# Log level to use for all Dogen invocations
+#
+set(DOGEN_LOG_LEVEL "debug")
 
 #
 # aggregate targets and their aliases
@@ -370,10 +370,10 @@ add_custom_target(rebase)
 add_custom_target(diff)
 
 if (DOGEN_CLI_EXECUTABLE)
-    add_custom_target(knit_all_dia)
-    add_custom_target(knit_all_json)
-    add_custom_target(ka)
-    add_dependencies(ka knit_all_dia)
+    add_custom_target(generate_all_dia)
+    add_custom_target(generate_all_json)
+    add_custom_target(ga)
+    add_dependencies(ga generate_all_dia)
 endif()
 
 if (DOGEN_STITCHER_EXECUTABLE)
@@ -383,11 +383,11 @@ if (DOGEN_STITCHER_EXECUTABLE)
 endif()
 
 if (DOGEN_CLI_EXECUTABLE AND DOGEN_STITCHER_EXECUTABLE)
-    add_custom_target(knit_and_stitch)
-    add_dependencies(knit_and_stitch knit_all_dia)
-    add_dependencies(knit_and_stitch stitch_all)
+    add_custom_target(generate_and_stitch)
+    add_dependencies(generate_and_stitch generate_all_dia)
+    add_dependencies(generate_and_stitch stitch_all)
     add_custom_target(kas)
-    add_dependencies(kas knit_and_stitch)
+    add_dependencies(kas generate_and_stitch)
 endif()
 
 
