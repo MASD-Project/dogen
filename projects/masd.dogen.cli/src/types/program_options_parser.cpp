@@ -213,7 +213,7 @@ void validate_command_name(const std::string& command_name,
     if (is_valid_command_name)
         return;
 
-    err << "Error: '" << command_name << "' is not a valid command. "
+    err << usage_error_msg << "'" << command_name << "' is not a valid command. "
         << more_information  << std::endl;
 
     BOOST_THROW_EXCEPTION(parser_exception(invalid_command + command_name));
