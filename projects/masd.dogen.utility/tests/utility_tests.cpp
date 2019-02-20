@@ -86,13 +86,13 @@ public:
         exception::exception(message) { }
 };
 
-const std::string test_suite("masd.dogen.utility.tests");
-const std::string test_module("utility");
-const std::string prefix("log/utility/utility_tests/");
+const std::string test_suite("utility_tests");
+const std::string test_module("masd.dogen.utility.tests");
+const boost::filesystem::path log_dir("log");
 
 std::string log_file_name(std::string function, unsigned int postfix = 0) {
     std::ostringstream stream;
-    stream << prefix << function;
+    stream << function;
     if (postfix != 0)
         stream << postfix;
     return stream.str();
@@ -110,6 +110,7 @@ BOOST_AUTO_TEST_CASE(exercise_log_lifecycle_manager) {
     // exericise 1: write a simple type to log file.
     logging_configuration cfg1;
     cfg1.filename(log_file_name("exercise_log_lifecycle_manager", 1));
+    cfg1.output_directory(log_dir / test_module / test_suite);
     cfg1.severity(severity_level::debug);
     lifecycle_manager::initialise(cfg1);
 
@@ -136,6 +137,7 @@ BOOST_AUTO_TEST_CASE(exercise_log_lifecycle_manager) {
 
     logging_configuration cfg2;
     cfg2.filename(log_file_name("exercise_log_lifecycle_manager", 2));
+    cfg2.output_directory(log_dir / test_module / test_suite);
     cfg2.severity(severity_level::warn);
     lifecycle_manager::initialise(cfg2);
 
@@ -152,6 +154,7 @@ BOOST_AUTO_TEST_CASE(exercise_scoped_log_lifecycle_manager) {
         logging_configuration cfg;
         cfg.filename(log_file_name("exercise_scoped_log_lifecycle_manager", 1));
         cfg.severity(severity_level::debug);
+        cfg.output_directory(log_dir / test_module / test_suite);
         scoped_lifecycle_manager slcm(cfg);
         BOOST_LOG_SEV(lg, trace) << "scoped1: "
                                  << "this statement should not appear";
@@ -162,6 +165,7 @@ BOOST_AUTO_TEST_CASE(exercise_scoped_log_lifecycle_manager) {
     {
         logging_configuration cfg;
         cfg.filename(log_file_name("exercise_scoped_log_lifecycle_manager", 2));
+        cfg.output_directory(log_dir / test_module / test_suite);
         cfg.severity(severity_level::trace);
         scoped_lifecycle_manager slcm(cfg);
         BOOST_LOG_SEV(lg, trace) << "scoped3: "

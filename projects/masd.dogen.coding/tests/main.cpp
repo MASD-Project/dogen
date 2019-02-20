@@ -30,7 +30,7 @@
 namespace  {
 
 const std::string test_suite("initializer");
-const std::string test_module("coding");
+const std::string test_module("masd.dogen.coding.tests");
 
 struct initializer {
     initializer() {
