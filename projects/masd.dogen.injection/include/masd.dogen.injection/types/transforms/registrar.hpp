@@ -34,6 +34,12 @@
 namespace masd::dogen::injection::transforms {
 
 class registrar final {
+private:
+    /**
+     * @brief Sanity checks the supplied extension.
+     */
+    void validate_extension(const std::string& ext) const;
+
 public:
     /**
      * @brief Ensures the registrar is ready to be used.

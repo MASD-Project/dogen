@@ -43,6 +43,13 @@ const std::string null_transform("Transform supplied is null.");
 
 namespace masd::dogen::injection::transforms {
 
+void registrar::validate_extension(const std::string& ext) const {
+    if (ext.empty()) {
+        BOOST_LOG_SEV(lg, debug) << empty_extension;
+        BOOST_THROW_EXCEPTION(registrar_error(empty_extension));
+    }
+}
+
 void registrar::validate() {
     /*
      * There must at least be one encoding transform.
@@ -139,6 +146,7 @@ register_decoding_transform(std::shared_ptr<decoding_transform_interface> t) {
 
 encoding_transform_interface&
 registrar::encoding_transform_for_extension(const std::string& ext) {
+    validate_extension(ext);
     BOOST_LOG_SEV(lg, debug) << "Looking for encoding transform for extension: "
                              << ext;
 
@@ -155,6 +163,7 @@ registrar::encoding_transform_for_extension(const std::string& ext) {
 
 decoding_transform_interface&
 registrar::decoding_transform_for_extension(const std::string& ext) {
+    validate_extension(ext);
     BOOST_LOG_SEV(lg, debug) << "Looking for decoding transform for extension: "
                              << ext;
 
