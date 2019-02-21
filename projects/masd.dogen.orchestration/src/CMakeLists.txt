@@ -38,7 +38,6 @@ set_target_properties(${lib_target_name}
 target_link_libraries(${lib_target_name}
     masd.dogen.lib
     masd.dogen.utility.lib
-    masd.dogen.options.lib
     masd.dogen.dia.lib
     masd.dogen.extraction.lib
     masd.dogen.injection.lib
