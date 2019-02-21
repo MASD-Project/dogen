@@ -19,6 +19,7 @@
  *
  */
 #include <iomanip>
+#include <iostream>
 #include <boost/program_options.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/operations.hpp>
@@ -30,7 +31,7 @@
 namespace {
 
 const std::string indent("   ");
-const std::string log_file_prefix("dogen.cli.");
+const std::string run_identifier_prefix("masd.dogen.cli.");
 
 const std::string more_information("Try --help' for more information.");
 const std::string knitter_product("MASD Dogen v" DOGEN_VERSION);
@@ -389,16 +390,33 @@ boost::optional<masd::dogen::diffing_configuration> read_diffing_configuration(
 }
 
 /**
+ * @brief Constructs an identifier sufficiently unique for this
+ * run. It can be used for log file names, directories, etc.
+ */
+std::string compute_run_identifier(const std::string& command,
+    const boost::filesystem::path& target) {
+
+    std::ostringstream s;
+    s << run_identifier_prefix << command;
+
+    const auto fn(target.filename().string());
+    if (!fn.empty())
+        s << "." << fn;
+
+    return s.str();
+}
+
+/**
  * @brief Reads the tracing configuration from the variables map.
  */
 boost::optional<logging_configuration> read_logging_configuration(
-    const std::string& model_name, const variables_map& vm) {
+    const std::string& run_identifier, const variables_map& vm) {
     const auto enabled(vm.count(logging_log_enabled_arg) != 0);
     if (!enabled)
         return boost::optional<logging_configuration>();
 
     logging_configuration r;
-    r.filename(log_file_prefix + model_name);
+    r.filename(run_identifier);
 
     if (vm.count(logging_log_level_arg)) {
         const auto s(vm[logging_log_level_arg].as<std::string>());
@@ -515,8 +533,8 @@ handle_command(const std::string& command_name, const bool has_help,
      * For each command we need to setup their set of options, parse
      * them and then generate the appropriate options.
      */
-    std::string model_name;
     configuration r;
+    boost::filesystem::path target;
     using boost::program_options::command_line_parser;
     typedef boost::optional<configuration> empty_config;
     if (command_name == generate_command_name) {
@@ -528,7 +546,7 @@ handle_command(const std::string& command_name, const bool has_help,
 
         store(command_line_parser(options).options(god).run(), vm);
         const auto gc(read_generation_configuration(vm));
-        model_name = gc.target().stem().filename().string();
+        target = gc.target();
         r.cli().activity(gc);
     } else if (command_name == convert_command_name) {
         const auto cod(make_convert_options_description());
@@ -539,7 +557,7 @@ handle_command(const std::string& command_name, const bool has_help,
 
         store(command_line_parser(options).options(cod).run(), vm);
         const auto cc(read_conversion_configuration(vm));
-        model_name = cc.source().stem().filename().string();
+        target = cc.source();
         r.cli().activity(cc);
     } else if (command_name == weave_command_name) {
         const auto cod(make_weave_options_description());
@@ -550,7 +568,7 @@ handle_command(const std::string& command_name, const bool has_help,
 
         store(command_line_parser(options).options(cod).run(), vm);
         const auto wc(read_weaving_configuration(vm));
-        model_name = wc.target().stem().filename().string();
+        target = wc.target();
         r.cli().activity(wc);
     }
 
@@ -558,9 +576,10 @@ handle_command(const std::string& command_name, const bool has_help,
      * Now process the common options. We must do this at the end
      * because we require the model name.
      */
-    r.api().tracing(read_tracing_configuration(model_name, vm));
-    r.api().diffing(read_diffing_configuration(model_name, vm));
-    r.logging(read_logging_configuration(model_name, vm));
+    const auto run_identifier(compute_run_identifier(command_name, target));
+    r.api().tracing(read_tracing_configuration(run_identifier, vm));
+    r.api().diffing(read_diffing_configuration(run_identifier, vm));
+    r.logging(read_logging_configuration(run_identifier, vm));
     return r;
 }
 
