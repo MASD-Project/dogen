@@ -51,7 +51,7 @@ options make_options(const masd::dogen::configuration& cfg,
         using masd::dogen::tracing_level;
         r.probe_all(t.level() == tracing_level::detail);
         r.probe_stats(true);
-        r.probe_stats_disable_guids(t.guids_enabled());
+        r.probe_stats_disable_guids(!t.guids_enabled());
 
         using masd::dogen::tracing_format;
         r.probe_stats_org_mode(t.format() == tracing_format::org_mode);

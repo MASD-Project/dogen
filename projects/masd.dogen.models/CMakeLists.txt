@@ -83,8 +83,10 @@ if (DOGEN_CLI_EXECUTABLE)
     set(common_arguments ${common_arguments} ${other_options})
 
     # uncomment to enable tracing.
-    # set(common_arguments ${common_arguments} "--probe-all")
-    # set(common_arguments ${common_arguments} "--probe-stats-org-mode")
+    # set(common_arguments ${common_arguments} --tracing-enabled)
+    # set(common_arguments ${common_arguments} --tracing-level detail)
+    # set(common_arguments ${common_arguments} --tracing-format org-mode)
+    # set(common_arguments ${common_arguments} --tracing-guids-enabled)
 
     # main input models
     set(prefix "masd.dogen")

@@ -33,7 +33,7 @@ namespace masd::dogen {
 enum class tracing_format : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     org_mode = 1, ///< Emacs Org mode.
-    markdown = 2 ///< Markdown text format.
+    plain = 2 ///< Plain text format.
 };
 
 }

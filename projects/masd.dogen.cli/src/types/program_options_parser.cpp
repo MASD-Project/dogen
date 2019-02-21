@@ -63,7 +63,7 @@ const std::string tracing_level_summary("summary");
 const std::string tracing_guids_enabled_arg("tracing-guids-enabled");
 const std::string tracing_format_arg("tracing-format");
 const std::string tracing_format_org_mode("org-mode");
-const std::string tracing_format_markdown("markdown");
+const std::string tracing_format_plain("plain");
 const std::string tracing_output_directory_arg("tracing-output-directory");
 const std::string tracing_default_directory("tracing");
 
@@ -126,14 +126,14 @@ options_description make_top_level_options_description() {
     options_description tod("Tracing");
     tod.add_options()
         ("tracing-enabled", "Generate metrics about executed transforms.")
-        ("tracing-level", "Level at which to trace. "
+        ("tracing-level",  value<std::string>(), "Level at which to trace."
             "Valid values: detail, summary.")
         ("tracing-guids-enabled", "Use guids in tracing metrics, Not"
             "  recommended when making comparisons between runs.")
-        ("tracing-format", "Format to use for tracing metrics. "
-            "Valid values: org-mode, markdown")
-        ("tracing-output-directory", "Directory in which to dump probe data. "
-            "Only used if transforms tracing is enabled.");
+        ("tracing-format", value<std::string>(), "Format to use for tracing"
+            " metrics. Valid values: org-mode, text")
+        ("tracing-output-directory", value<std::string>(), "Directory in which "
+            "to dump probe data. Only used if transforms tracing is enabled.");
     r.add(tod);
 
     options_description cod("Commands");
@@ -329,8 +329,8 @@ handle_no_command(const bool has_version, const bool has_help,
 /**
  * @brief Reads the tracing configuration from the variables map.
  */
-boost::optional<masd::dogen::tracing_configuration> read_tracing_configuration(
-    const std::string& model_name, const variables_map& vm) {
+boost::optional<masd::dogen::tracing_configuration>
+read_tracing_configuration(const variables_map& vm) {
 
     const bool enabled(vm.count(tracing_enabled_arg) != 0);
     if (!enabled)
@@ -342,9 +342,10 @@ boost::optional<masd::dogen::tracing_configuration> read_tracing_configuration(
     using masd::dogen::tracing_level;
     if (vm.count(tracing_level_arg)) {
         const auto s(vm[tracing_level_arg].as<std::string>());
+
         if (s == tracing_level_detail)
             r.level(tracing_level::detail);
-        if (s == tracing_level_summary)
+        else if (s == tracing_level_summary)
             r.level(tracing_level::summary);
         else
             BOOST_THROW_EXCEPTION(parser_exception(invalid_tracing_level + s));
@@ -356,30 +357,18 @@ boost::optional<masd::dogen::tracing_configuration> read_tracing_configuration(
         const auto s(vm[tracing_format_arg].as<std::string>());
         if (s == tracing_format_org_mode)
             r.format(tracing_format::org_mode);
-        else if (s == tracing_format_markdown)
-            r.format(tracing_format::markdown);
+        else if (s == tracing_format_plain)
+            r.format(tracing_format::plain);
         else
             BOOST_THROW_EXCEPTION(parser_exception(invalid_format + s));
     } else if (enabled)
         r.format(tracing_format::org_mode);
 
-    const auto out_dir =
-        [&]() {
-            using boost::filesystem::absolute;
-            if (vm.count(tracing_output_directory_arg) == 0) {
-                if (!enabled)
-                    return boost::filesystem::path();
-                return absolute(tracing_default_directory) / model_name;
-            }
-
-            const auto s(vm[tracing_output_directory_arg].as<std::string>());
-            return absolute(s) / model_name;
-        }();
     return r;
 }
 
-boost::optional<masd::dogen::diffing_configuration> read_diffing_configuration(
-    const std::string& /*model_name*/, const variables_map& vm) {
+boost::optional<masd::dogen::diffing_configuration>
+read_diffing_configuration(const variables_map& vm) {
 
     const bool enabled(vm.count(tracing_enabled_arg) != 0);
     if (!enabled)
@@ -576,9 +565,23 @@ handle_command(const std::string& command_name, const bool has_help,
      * Now process the common options. We must do this at the end
      * because we require the model name.
      */
+    r.api().tracing(read_tracing_configuration(vm));
+    r.api().diffing(read_diffing_configuration(vm));
+
     const auto run_identifier(compute_run_identifier(command_name, target));
-    r.api().tracing(read_tracing_configuration(run_identifier, vm));
-    r.api().diffing(read_diffing_configuration(run_identifier, vm));
+    const auto out_dir =
+        [&]() {
+            using boost::filesystem::absolute;
+            if (vm.count(tracing_output_directory_arg) == 0) {
+                if (!r.api().tracing())
+                    return boost::filesystem::path();
+                return absolute(tracing_default_directory) / run_identifier;
+            }
+
+            const auto s(vm[tracing_output_directory_arg].as<std::string>());
+            return absolute(s) / run_identifier;
+        }();
+    r.cli().tracing_output_directory(out_dir);
     r.logging(read_logging_configuration(run_identifier, vm));
     return r;
 }
@@ -648,6 +651,10 @@ program_options_parser::parse(const std::vector<std::string>& arguments,
 
     try {
         return ::parse(arguments, info, err);
+    } catch(const parser_exception& e) {
+        err << usage_error_msg << e.what() << std::endl
+            << more_information << std::endl;
+        BOOST_THROW_EXCEPTION(e);
     } catch (const boost::program_options::error& e) {
         err << usage_error_msg << e.what() << std::endl
             << more_information << std::endl;
