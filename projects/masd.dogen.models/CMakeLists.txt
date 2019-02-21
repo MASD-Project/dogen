@@ -67,7 +67,7 @@ if (DOGEN_CLI_EXECUTABLE)
         add_custom_target(convert_${model_name}
             COMMENT "Converting ${model_name}."
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND echo ${DOGEN_CLI_EXECUTABLE} convert ${other_options}
+            COMMAND ${DOGEN_CLI_EXECUTABLE} convert ${other_options}
             --source ${model} --destination ${output_dir}/${model_name}.json)
         add_dependencies(convert_all convert_${model_name})
     endforeach()
