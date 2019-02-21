@@ -13,31 +13,31 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-21 Thu 14:08]
+#+CAPTION: Clock summary at [2019-02-21 Thu 14:54]
 | <75>                                                      |          |        |        |       |
 | Headline                                                  | Time     |        |        |     % |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                              | *211:28* |        |        | 100.0 |
+| *Total time*                                              | *212:13* |        |        | 100.0 |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                   | 211:28   |        |        | 100.0 |
-| Active                                                    |          | 211:28 |        | 100.0 |
+| Stories                                                   | 212:13   |        |        | 100.0 |
+| Active                                                    |          | 212:13 |        | 100.0 |
 | Edit release notes for previous sprint                    |          |        |   2:03 |   1.0 |
 | Sprint and product backlog grooming                       |          |        |   5:32 |   2.6 |
-| Work on MASD theory                                       |          |        | 113:38 |  53.7 |
+| Work on MASD theory                                       |          |        | 113:38 |  53.5 |
 | Rename models to fit MASD architecture                    |          |        |   4:56 |   2.3 |
 | Read up on framework and API design                       |          |        |   0:57 |   0.4 |
-| Analyse the state of the mess of refactors                |          |        |   6:27 |   3.1 |
+| Analyse the state of the mess of refactors                |          |        |   6:27 |   3.0 |
 | Create the =orchestration= model                          |          |        |   4:15 |   2.0 |
 | Update vcpkg across all operative systems                 |          |        |   4:35 |   2.2 |
 | Update C# reference models to latest dogen                |          |        |   0:42 |   0.3 |
 | Convert the utility model into a regular dogen model      |          |        |   7:27 |   3.5 |
 | Improve support for clang-cl builds                       |          |        |   2:02 |   1.0 |
-| Move generation properties into meta-data                 |          |        |   9:26 |   4.5 |
+| Move generation properties into meta-data                 |          |        |   9:26 |   4.4 |
 | Disabling facet globally and enabling locally fails       |          |        |   2:21 |   1.1 |
 | References to types in top-level namespace do not resolve |          |        |   0:51 |   0.4 |
 | Create a colour palette test model                        |          |        |   1:09 |   0.5 |
+| Create a single binary for all of dogen                   |          |        |  33:47 |  15.9 |
 | Great meta-data rename                                    |          |        |   4:54 |   2.3 |
-| Create a single binary for all of dogen                   |          |        |  33:02 |  15.6 |
 | Dogen's vcpkg export for OSX was created from master      |          |        |   0:46 |   0.4 |
 | Fix clang-cl warnings                                     |          |        |   5:07 |   2.4 |
 | Use tracing options in existing code                      |          |        |   0:57 |   0.4 |
@@ -676,76 +676,10 @@ stereotype:
 This can be a simple profile like handcrafted. It can even be a
 superset of handcrafted.
 
-*** STARTED Great meta-data rename                                    :story:
+*** COMPLETED Create a single binary for all of dogen                 :story:
+    CLOSED: [2019-02-21 Thu 14:54]
     :LOGBOOK:
-    CLOCK: [2018-11-26 Mon 10:01]--[2018-11-26 Mon 11:02] =>  1:01
-    CLOCK: [2018-11-23 Fri 21:43]--[2018-11-23 Fri 22:20] =>  0:37
-    CLOCK: [2018-11-23 Fri 20:55]--[2018-11-23 Fri 21:42] =>  0:47
-    CLOCK: [2018-11-23 Fri 16:57]--[2018-11-23 Fri 18:08] =>  1:11
-    CLOCK: [2018-11-23 Fri 16:50]--[2018-11-23 Fri 16:56] =>  0:06
-    CLOCK: [2018-11-23 Fri 15:37]--[2018-11-23 Fri 16:49] =>  1:12
-    :END:
-
-All of the existing stereotypes and meta-data need to be moved from
-the existing names (e.g. =quilt=, =yarn=, etc) into
-=masd=. Interestingly, we can take this opportunity to make dia
-diagrams a bit more readable. Instead of
-
-: #DOGEN a.b.c=d
-
-we can now just do:
-
-: masd.a.b.c=4
-
-It is very unlikely dia users will need lines starting with =masd.=.
-
-We should probably try to tackle this rename sooner rather than later
-since it badly breaks model-compatibility.
-
-We should use the new names as part of this rename, e.g.:
-
-: masd.injection.dia.comment
-: masd.extraction.cpp.enabled
-
-Rename =is_proxy_model= to =platform_definition_model=.
-
-Notes:
-
-- decoration etc are still not using the =masd.= prefix.
-
-Merged stories:
-
-*Update all stereotypes to masd*
-
-We need to start distinguishing MASD from dogen. The profile for UML
-is part of MASD rather than dogen, so we should update all stereotypes
-to match. We need to make a decision regarding the "dia extensions" -
-its not clear if its MASD or dogen.
-
-*Clean up UML profiles and meta-data*
-
-- we should wait until we rename =quilt= too so we can clean up the
-  quilt meta-data at the same time.
-- rename references too since they belong to external, i.e.:
-
-: #DOGEN yarn.reference=annotations.dia
-
-  should be:
-
-: #DOGEN external.reference=annotations.dia
-
-- similarly with:
-
-: #DOGEN yarn.dia.comment=true
-
-  should instead be:
-
-: #DOGEN external.dia.comment=true
-
-  in fact, should we mention "tagged values" instead of "comment"?
-
-*** STARTED Create a single binary for all of dogen                   :story:
-    :LOGBOOK:
+    CLOCK: [2019-02-21 Thu 14:09]--[2019-02-21 Thu 14:54] =>  0:45
     CLOCK: [2019-02-21 Thu 13:21]--[2019-02-21 Thu 14:08] =>  0:47
     CLOCK: [2019-02-21 Thu 10:53]--[2019-02-21 Thu 11:23] =>  0:30
     CLOCK: [2019-02-21 Thu 10:28]--[2019-02-21 Thu 10:52] =>  0:24
@@ -841,6 +775,74 @@ call it something allusive to the command line, such as cli. However,
 the final binary should be called dogen or perhaps, =dogen.cli=. This
 fits in with other binaries such as =dogen.web=, =dogen.http=,
 =dogen.gui= etc.
+
+*** STARTED Great meta-data rename                                    :story:
+    :LOGBOOK:
+    CLOCK: [2018-11-26 Mon 10:01]--[2018-11-26 Mon 11:02] =>  1:01
+    CLOCK: [2018-11-23 Fri 21:43]--[2018-11-23 Fri 22:20] =>  0:37
+    CLOCK: [2018-11-23 Fri 20:55]--[2018-11-23 Fri 21:42] =>  0:47
+    CLOCK: [2018-11-23 Fri 16:57]--[2018-11-23 Fri 18:08] =>  1:11
+    CLOCK: [2018-11-23 Fri 16:50]--[2018-11-23 Fri 16:56] =>  0:06
+    CLOCK: [2018-11-23 Fri 15:37]--[2018-11-23 Fri 16:49] =>  1:12
+    :END:
+
+All of the existing stereotypes and meta-data need to be moved from
+the existing names (e.g. =quilt=, =yarn=, etc) into
+=masd=. Interestingly, we can take this opportunity to make dia
+diagrams a bit more readable. Instead of
+
+: #DOGEN a.b.c=d
+
+we can now just do:
+
+: masd.a.b.c=4
+
+It is very unlikely dia users will need lines starting with =masd.=.
+
+We should probably try to tackle this rename sooner rather than later
+since it badly breaks model-compatibility.
+
+We should use the new names as part of this rename, e.g.:
+
+: masd.injection.dia.comment
+: masd.extraction.cpp.enabled
+
+Rename =is_proxy_model= to =platform_definition_model=.
+
+Notes:
+
+- decoration etc are still not using the =masd.= prefix.
+
+Merged stories:
+
+*Update all stereotypes to masd*
+
+We need to start distinguishing MASD from dogen. The profile for UML
+is part of MASD rather than dogen, so we should update all stereotypes
+to match. We need to make a decision regarding the "dia extensions" -
+its not clear if its MASD or dogen.
+
+*Clean up UML profiles and meta-data*
+
+- we should wait until we rename =quilt= too so we can clean up the
+  quilt meta-data at the same time.
+- rename references too since they belong to external, i.e.:
+
+: #DOGEN yarn.reference=annotations.dia
+
+  should be:
+
+: #DOGEN external.reference=annotations.dia
+
+- similarly with:
+
+: #DOGEN yarn.dia.comment=true
+
+  should instead be:
+
+: #DOGEN external.dia.comment=true
+
+  in fact, should we mention "tagged values" instead of "comment"?
 
 *** STARTED Dogen's vcpkg export for OSX was created from master      :story:
     :LOGBOOK:

@@ -24,6 +24,7 @@
 #include <ostream>
 #include <iostream>
 #include <boost/exception/diagnostic_information.hpp>
+#include "masd.dogen.utility/types/io/vector_io.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/log/severity_level.hpp"
 #include "masd.dogen.utility/types/log/logging_configuration.hpp"
@@ -104,6 +105,7 @@ int main(const int argc, const char* argv[]) {
          */
         const auto& cfg(*ocfg);
         slm.initialise(cfg.logging());
+        BOOST_LOG_SEV(lg, debug) << "Command line arguments: " << args;
 
         /*
          * Now perform legacy initialisation. It uses logging so it
