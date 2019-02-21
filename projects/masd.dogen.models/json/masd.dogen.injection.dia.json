@@ -6,7 +6,6 @@
     "masd.injection.reference": "masd.dogen.dia.json",
     "masd.injection.reference": "masd.dogen.annotations.json",
     "masd.injection.reference": "masd.dogen.extraction.json",
-    "masd.injection.reference": "masd.dogen.options.json",
     "masd.injection.reference": "masd.dogen.tracing.json",
     "masd.injection.reference": "masd.dogen.injection.json",
     "masd.injection.input_language": "cpp",

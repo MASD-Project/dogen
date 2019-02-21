@@ -2505,7 +2505,6 @@ the root of an inheritance tree.
 #DOGEN masd.injection.reference=masd.dogen.dia.dia
 #DOGEN masd.injection.reference=masd.dogen.annotations.dia
 #DOGEN masd.injection.reference=masd.dogen.extraction.dia
-#DOGEN masd.injection.reference=masd.dogen.options.dia
 #DOGEN masd.injection.reference=masd.dogen.tracing.dia
 #DOGEN masd.injection.reference=masd.dogen.injection.dia
 #DOGEN masd.injection.input_language=cpp

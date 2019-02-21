@@ -31,7 +31,6 @@ mv masd.dogen.generation.cpp.dia.json masd.dogen.generation.cpp.json
 mv masd.dogen.generation.csharp.dia.json masd.dogen.generation.csharp.json
 mv masd.dogen.generation.dia.json masd.dogen.generation.json
 mv masd.dogen.old.dia.json masd.dogen.old.json
-mv masd.dogen.options.dia.json masd.dogen.options.json
 mv masd.dogen.orchestration.dia.json masd.dogen.orchestration.json
 mv masd.dogen.templating.dia.json masd.dogen.templating.json
 mv masd.dogen.tracing.dia.json masd.dogen.tracing.json

@@ -4,7 +4,6 @@
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "masd.dogen.generation.cpp",
     "masd.injection.reference": "masd.dogen.generation.json",
-    "masd.injection.reference": "masd.dogen.options.json",
     "masd.injection.reference": "masd.dogen.coding.json",
     "masd.injection.reference": "masd.dogen.extraction.json",
     "masd.injection.reference": "masd.dogen.annotations.json",
