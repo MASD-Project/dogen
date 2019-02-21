@@ -13,19 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-21 Thu 11:23]
+#+CAPTION: Clock summary at [2019-02-21 Thu 14:08]
 | <75>                                                      |          |        |        |       |
 | Headline                                                  | Time     |        |        |     % |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                              | *210:22* |        |        | 100.0 |
+| *Total time*                                              | *211:28* |        |        | 100.0 |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                   | 210:22   |        |        | 100.0 |
-| Active                                                    |          | 210:22 |        | 100.0 |
+| Stories                                                   | 211:28   |        |        | 100.0 |
+| Active                                                    |          | 211:28 |        | 100.0 |
 | Edit release notes for previous sprint                    |          |        |   2:03 |   1.0 |
-| Sprint and product backlog grooming                       |          |        |   5:13 |   2.5 |
-| Work on MASD theory                                       |          |        | 113:38 |  54.0 |
+| Sprint and product backlog grooming                       |          |        |   5:32 |   2.6 |
+| Work on MASD theory                                       |          |        | 113:38 |  53.7 |
 | Rename models to fit MASD architecture                    |          |        |   4:56 |   2.3 |
-| Read up on framework and API design                       |          |        |   0:57 |   0.5 |
+| Read up on framework and API design                       |          |        |   0:57 |   0.4 |
 | Analyse the state of the mess of refactors                |          |        |   6:27 |   3.1 |
 | Create the =orchestration= model                          |          |        |   4:15 |   2.0 |
 | Update vcpkg across all operative systems                 |          |        |   4:35 |   2.2 |
@@ -37,10 +37,10 @@
 | References to types in top-level namespace do not resolve |          |        |   0:51 |   0.4 |
 | Create a colour palette test model                        |          |        |   1:09 |   0.5 |
 | Great meta-data rename                                    |          |        |   4:54 |   2.3 |
-| Create a single binary for all of dogen                   |          |        |  32:15 |  15.3 |
+| Create a single binary for all of dogen                   |          |        |  33:02 |  15.6 |
 | Dogen's vcpkg export for OSX was created from master      |          |        |   0:46 |   0.4 |
 | Fix clang-cl warnings                                     |          |        |   5:07 |   2.4 |
-| Use tracing options in existing code                      |          |        |   0:57 |   0.5 |
+| Use tracing options in existing code                      |          |        |   0:57 |   0.4 |
 | Model references are not transitive                       |          |        |   0:21 |   0.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -147,6 +147,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
      :LOGBOOK:
+     CLOCK: [2019-02-21 Thu 13:01]--[2019-02-21 Thu 13:20] =>  0:19
      CLOCK: [2019-02-19 Tue 13:05]--[2019-02-19 Tue 13:16] =>  0:11
      CLOCK: [2019-02-15 Fri 17:45]--[2019-02-15 Fri 17:52] =>  0:07
      CLOCK: [2019-02-15 Fri 11:46]--[2019-02-15 Fri 11:55] =>  0:09
@@ -661,6 +662,20 @@ Create a simple "colour palette" test model that exercises all
 stereotypes which are expressed as colours and ensure there is some
 kind of useful pattern.
 
+*** COMPLETED Add support for header-only types                       :story:
+    CLOSED: [2019-02-21 Thu 13:13]
+
+*Rationale*: this was already implemented.
+
+Sometimes we may just want to generate a simple header only class. By
+default we always get a cpp. We could suppress the cpp by having a
+stereotype:
+
+: masd::header_only
+
+This can be a simple profile like handcrafted. It can even be a
+superset of handcrafted.
+
 *** STARTED Great meta-data rename                                    :story:
     :LOGBOOK:
     CLOCK: [2018-11-26 Mon 10:01]--[2018-11-26 Mon 11:02] =>  1:01
@@ -731,6 +746,7 @@ its not clear if its MASD or dogen.
 
 *** STARTED Create a single binary for all of dogen                   :story:
     :LOGBOOK:
+    CLOCK: [2019-02-21 Thu 13:21]--[2019-02-21 Thu 14:08] =>  0:47
     CLOCK: [2019-02-21 Thu 10:53]--[2019-02-21 Thu 11:23] =>  0:30
     CLOCK: [2019-02-21 Thu 10:28]--[2019-02-21 Thu 10:52] =>  0:24
     CLOCK: [2019-02-21 Thu 10:07]--[2019-02-21 Thu 10:27] =>  0:20
@@ -915,6 +931,28 @@ logic in the code at present (i.e. without a two-phase approach) would
 mean we'd have to load the same models several times (or heavily
 rewrite existing code, resulting in a two-phase approach, anyway).
 
+*** Create transforms for templating                                  :story:
+
+At present we are using workflows to convert stitch and wale
+templates. In reality, these are just tranforms. We need to figure out
+if there should just be a high-level transform in orchestrator that
+encapsulates these or if the templating model itself should follow the
+naming convention.
+
+*** Remove the need for =dia.comment= tag                             :story:
+
+At present we are detecting the presence of =masd.dogen.dia.comment=
+in a UML comment to determine if it is to be processed as a comment
+for the model module. However, we could just as well look for the
+presence of meta-data parameters instead. Similarly, we could say that
+it is an error to have more than one comment with meta-data parameters
+(as hopefully with do at present with dia.comment). This is a
+usability papercut.
+
+While we're there we could also remove the need for =#DOGEN= and state
+that all meta-data keys must start with =masd.=. For user specific
+keys we could namespace them: =masd.user.=.
+
 *** Add support for "directory mode" in conversion                    :story:
 
 The real use case we have for conversion is to point it to a directory
@@ -925,6 +963,10 @@ them in the output directory.
 A second but related use case is to point it to a model, supply a
 destination "type" and then output it into a directory, without having
 to supply a destination file.
+
+In effect, this is a common use case for all commands (generate and
+weaving as well). We could probably deduce it: if the user supplied a
+directory as a target, we should do it in directory mode.
 
 *** Add stereotype for IoC containers                                 :story:
 
@@ -1096,17 +1138,6 @@ to facets in coding.
   processing.
 - by the end of this refactor, cpp and csharp should contain only the
   formatters.
-
-*** Add support for header-only types                                 :story:
-
-Sometimes we may just want to generate a simple header only class. By
-default we always get a cpp. We could suppress the cpp by having a
-stereotype:
-
-: masd::header_only
-
-This can be a simple profile like handcrafted. It can even be a
-superset of handcrafted.
 
 *** Create =generation.extraction= model                              :story:
 

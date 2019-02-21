@@ -40,14 +40,15 @@ target_link_libraries(${lib_target_name}
     masd.dogen.templating.lib
     ${Boost_LIBRARIES})
 
-if (DOGEN_STITCHER_EXECUTABLE)
-    add_custom_target(stitch_${lib_target_name}
-        COMMENT "Stitching ${lib_binary_name} model" VERBATIM
+if (DOGEN_CLI_EXECUTABLE)
+    set(other_options --log-enabled --log-level ${DOGEN_LOG_LEVEL})
+
+    add_custom_target(weave_${lib_target_name}
+        COMMENT "Weaving ${lib_target_name}" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_STITCHER_EXECUTABLE}
-        --target ${CMAKE_CURRENT_SOURCE_DIR}/
-        --log-level ${DOGEN_LOG_LEVEL})
-    add_dependencies(stitch_all stitch_${name})
+        COMMAND ${DOGEN_CLI_EXECUTABLE} weave ${other_options}
+        --target ${CMAKE_CURRENT_SOURCE_DIR}/)
+    add_dependencies(weave_all weave_${lib_target_name})
 endif()
 
 install(TARGETS ${lib_target_name} ARCHIVE DESTINATION lib COMPONENT libraries)

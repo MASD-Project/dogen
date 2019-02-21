@@ -33,6 +33,10 @@ parameter to force a class to become a parent.
 
 For now we just hacked it by adding a fake descendant.
 
+Interestingly, we already have a "is final" meta-data parameter. We
+could possibly check this; if its not final then we could assume it is
+a base class.
+
 *** Windows packages have a sanity folder                             :story:
 
 We should remove the ctest file and add the dia and json examples. We

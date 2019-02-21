@@ -33,16 +33,6 @@ auto lg(logger_factory("orchestration.generator"));
 const std::string stitch_ext(".stitch");
 const std::string unsupported_extension("Extension is unsupported: ");
 
-void validate_extension(const boost::filesystem::path& target) {
-    const auto ext(target.extension().generic_string());
-    if (ext == stitch_ext)
-        return;
-
-    BOOST_LOG_SEV(lg, error) << unsupported_extension << "'" << stitch_ext << "'";
-    using masd::dogen::weaving_exception;
-    BOOST_THROW_EXCEPTION(weaving_exception(unsupported_extension + ext));
-}
-
 }
 
 namespace masd::dogen::orchestration {
@@ -52,7 +42,6 @@ void weaver::weave(const configuration& /*cfg*/,
     const boost::filesystem::path& /*tracing_output_directory*/) const {
     BOOST_LOG_SEV(lg, debug) << "Started weaving.";
 
-    validate_extension(target);
     masd::dogen::templating::stitch::workflow w(false/*compatibility_mode*/);
     w.execute(target);
     BOOST_LOG_SEV(lg, debug) << "Started weaving.";
