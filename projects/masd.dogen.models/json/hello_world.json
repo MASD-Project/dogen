@@ -4,6 +4,7 @@
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "dogen.hello_world",
     "masd.injection.input_language": "cpp",
+    "masd.extraction.delete_extra_files": "true",
     "masd.extraction.cpp.enabled": "true",
     "masd.extraction.cpp.standard": "c++-17",
     "masd.extraction.cpp.msbuild.enabled": "false",

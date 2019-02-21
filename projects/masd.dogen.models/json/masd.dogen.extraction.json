@@ -1,9 +1,11 @@
 {
-  "documentation": "Provides the basic formatting primitives.\n\nThis model is the repository of all formatting related code\nwhich is not language specific. Language-specific models can\nthen make use of it.\n",
+  "documentation": "Provides the basic extraction primitives.\n\nThis model is the repository of all extraction related code which is\nnot language specific. Language-specific models can then make use of\nit.\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "masd.dogen.extraction",
     "masd.injection.input_language": "cpp",
+    "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
+    "masd.extraction.delete_extra_files": "true",
     "masd.extraction.cpp.enabled": "true",
     "masd.extraction.cpp.standard": "c++-17",
     "masd.extraction.cpp.msbuild.enabled": "false",
@@ -562,6 +564,116 @@
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "helpers::artefact_writer_interface",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::filesystem_writer",
+      "parents": [
+        "helpers::artefact_writer_interface"
+      ],
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::stream_writer",
+      "parents": [
+        "helpers::artefact_writer_interface"
+      ],
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stream_",
+          "type": "std::ostream"
+        }
+      ]
+    },
+    {
+      "name": "helpers::writing_error",
+      "documentation": "An error ocrurred whilst writing.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "meta_model::model",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "artefacts",
+          "type": "std::list<artefact>"
+        },
+        {
+          "name": "managed_directories",
+          "type": "std::list<boost::filesystem::path>"
+        },
+        {
+          "name": "force_write",
+          "type": "bool",
+          "documentation": "Always write files, even when there are no differences.\n"
+        },
+        {
+          "name": "delete_extra_files",
+          "type": "bool",
+          "documentation": "If true, deletes any files that are not known to Dogen .\n"
+        },
+        {
+          "name": "ignore_files_matching_regex",
+          "type": "std::vector<std::string>",
+          "documentation": "Files matching the supplied regular expressions will be ignored by Dogen.\n\nOnly applicable when deleting extra files.\n"
+        },
+        {
+          "name": "cpp_headers_output_directory",
+          "type": "boost::filesystem::path",
+          "documentation": "Directory in which to place C++ header files. Must be a relative path.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::artefact",
+      "documentation": "Artefact in a text model.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "path",
+          "type": "boost::filesystem::path",
+          "documentation": "Absolute path to the file, indicating the location in the filesystem where it will be written.\n"
+        },
+        {
+          "name": "content",
+          "type": "std::string",
+          "documentation": "Content of the file.\n"
+        },
+        {
+          "name": "overwrite",
+          "type": "bool",
+          "documentation": "Determines when to write the file.\n\nIf true, the file will always be written to the filesystem; if false, the file will\nonly be written to the filesystem if it does not exist.\n"
+        },
+        {
+          "name": "dependencies",
+          "type": "std::vector<boost::filesystem::path>",
+          "documentation": "Files in the project directory that this file depends on, but which are not generated.\n"
+        }
+      ]
     }
   ]
 }

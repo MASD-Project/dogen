@@ -14,7 +14,7 @@
   "elements": [
     {
       "name": "class_a",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "prop0",
@@ -29,7 +29,7 @@
     },
     {
       "name": "class_b",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -59,11 +59,11 @@
     },
     {
       "name": "pkg1",
-      "fallback_element_type": "dogen::module"
+      "fallback_element_type": "masd::module"
     },
     {
       "name": "pkg1::class_c",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -77,7 +77,7 @@
     },
     {
       "name": "class_d",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -107,7 +107,7 @@
     },
     {
       "name": "class_e",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -137,7 +137,7 @@
     },
     {
       "name": "class_f",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -155,7 +155,7 @@
     },
     {
       "name": "class_g",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -173,7 +173,7 @@
     },
     {
       "name": "base",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -186,7 +186,7 @@
       "parents": [
         "base"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "prop_1",
@@ -196,7 +196,7 @@
     },
     {
       "name": "class_h",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -210,7 +210,7 @@
     },
     {
       "name": "builtins",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -251,7 +251,7 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -261,7 +261,7 @@
     },
     {
       "name": "class_j",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -285,7 +285,7 @@
       "tagged_values": {
         "masd.enumeration.underlying_element": "std::int8_t"
       },
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "an_enumerator",
@@ -306,11 +306,11 @@
       "tagged_values": {
         "masd.primitive.underlying_element": "std::string"
       },
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "class_k",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "prop_0",

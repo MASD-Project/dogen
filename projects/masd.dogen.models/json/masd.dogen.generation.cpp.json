@@ -10,6 +10,8 @@
     "masd.injection.reference": "masd.dogen.annotations.json",
     "masd.injection.reference": "masd.dogen.tracing.json",
     "masd.injection.input_language": "cpp",
+    "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
+    "masd.extraction.delete_extra_files": "true",
     "masd.extraction.cpp.enabled": "true",
     "masd.extraction.cpp.standard": "c++-17",
     "masd.extraction.cpp.msbuild.enabled": "false",
@@ -21,10 +23,18 @@
   "elements": [
     {
       "name": "formatters",
+      "documentation": "Formatters for the C++ model.\n\nTakes types in the C++ model and creates a file\nrepresentation of these types according to the\ngrammar of the C++-11 programming language.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
       "name": "formatters::types",
+      "documentation": "Formatters for the types facet of the\nC++ language.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
@@ -39,6 +49,9 @@
       "stereotypes": [
         "masd::handcrafted"
       ],
+      "tagged_values": {
+        "masd.extraction.cpp.types.forward_declarations.enabled": "true"
+      },
       "fallback_element_type": "masd::object"
     },
     {
@@ -50,6 +63,10 @@
     },
     {
       "name": "formatters::hash",
+      "documentation": "Formatters for the hash facet of the\nC++ language.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
@@ -110,6 +127,10 @@
     },
     {
       "name": "formatters::io",
+      "documentation": "Formatters for the io facet of the\nC++ language.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
@@ -142,6 +163,10 @@
     },
     {
       "name": "formatters::serialization",
+      "documentation": "Formatters for the boost serialisation\nfacet of the C++ language.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
@@ -171,6 +196,10 @@
     },
     {
       "name": "formatters::test_data",
+      "documentation": "Formatters for the test_data facet\nof the C++ language.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
@@ -203,6 +232,10 @@
     },
     {
       "name": "formatters::odb",
+      "documentation": "Formatters for the odb facet of the\nC++ language.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
@@ -363,6 +396,10 @@
     },
     {
       "name": "formattables",
+      "documentation": "Formattables contains all types required by the formatters\nand those used to generate them.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
@@ -501,6 +538,9 @@
       "stereotypes": [
         "masd::handcrafted"
       ],
+      "tagged_values": {
+        "masd.extraction.cpp.types.forward_declarations.enabled": "true"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -564,6 +604,9 @@
       "stereotypes": [
         "masd::handcrafted"
       ],
+      "tagged_values": {
+        "masd.extraction.cpp.types.forward_declarations.enabled": "true"
+      },
       "fallback_element_type": "masd::object"
     },
     {
@@ -693,6 +736,10 @@
     },
     {
       "name": "fabric",
+      "documentation": "Houses the masd.extraction.cpp extensions to masd.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
@@ -1875,6 +1922,10 @@
     },
     {
       "name": "formatters::rapidjson",
+      "documentation": "Formatters that enable serialisation into and\nfrom JSON,using the RapidJson library.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {

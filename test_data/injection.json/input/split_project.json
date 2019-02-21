@@ -13,11 +13,11 @@
   "elements": [
     {
       "name": "package1",
-      "fallback_element_type": "dogen::module"
+      "fallback_element_type": "masd::module"
     },
     {
       "name": "package1::first_class",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "public_attribute",

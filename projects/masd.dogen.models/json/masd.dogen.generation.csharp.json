@@ -10,6 +10,8 @@
     "masd.injection.reference": "masd.dogen.annotations.json",
     "masd.injection.reference": "masd.dogen.tracing.json",
     "masd.injection.input_language": "cpp",
+    "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
+    "masd.extraction.delete_extra_files": "true",
     "masd.extraction.cpp.enabled": "true",
     "masd.extraction.cpp.standard": "c++-17",
     "masd.extraction.cpp.msbuild.enabled": "false",
@@ -75,6 +77,9 @@
       "stereotypes": [
         "masd::handcrafted"
       ],
+      "tagged_values": {
+        "masd.extraction.cpp.types.forward_declarations.enabled": "true"
+      },
       "fallback_element_type": "masd::object"
     },
     {
@@ -84,7 +89,8 @@
       ],
       "tagged_values": {
         "masd.extraction.cpp.io.enabled": "true",
-        "masd.extraction.cpp.io.overwrite": "false"
+        "masd.extraction.cpp.io.overwrite": "false",
+        "masd.extraction.cpp.types.forward_declarations.enabled": "true"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -246,6 +252,9 @@
       "stereotypes": [
         "masd::handcrafted"
       ],
+      "tagged_values": {
+        "masd.extraction.cpp.types.forward_declarations.enabled": "true"
+      },
       "fallback_element_type": "masd::object"
     },
     {
@@ -715,6 +724,9 @@
       "stereotypes": [
         "masd::handcrafted"
       ],
+      "tagged_values": {
+        "masd.extraction.cpp.types.forward_declarations.enabled": "true"
+      },
       "fallback_element_type": "masd::object"
     },
     {

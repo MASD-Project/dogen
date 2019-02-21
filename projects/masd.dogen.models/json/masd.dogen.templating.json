@@ -4,6 +4,8 @@
     "masd.injection.model_modules": "masd.dogen.templating",
     "masd.injection.reference": "masd.dogen.extraction.json",
     "masd.injection.input_language": "cpp",
+    "masd.extraction.ignore_files_matching_regex": ".*/poly-stitch.el",
+    "masd.extraction.delete_extra_files": "true",
     "masd.extraction.cpp.enabled": "true",
     "masd.extraction.cpp.standard": "c++-17",
     "masd.extraction.cpp.msbuild.enabled": "false",

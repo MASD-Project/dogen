@@ -1,13 +1,9 @@
 {
-  "documentation": "Provides file importing support for JSON.\n",
+  "documentation": "Orchestration-based imlementation of the Dogen product API.\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
-    "masd.injection.model_modules": "masd.dogen.injection.json",
-    "masd.injection.reference": "masd.dogen.annotations.json",
-    "masd.injection.reference": "masd.dogen.extraction.json",
-    "masd.injection.reference": "masd.dogen.options.json",
-    "masd.injection.reference": "masd.dogen.tracing.json",
-    "masd.injection.reference": "masd.dogen.injection.json",
+    "masd.injection.reference": "masd.dogen.json",
+    "masd.injection.model_modules": "masd.dogen.orchestration",
     "masd.injection.input_language": "cpp",
     "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
     "masd.extraction.delete_extra_files": "true",
@@ -21,45 +17,44 @@
   },
   "elements": [
     {
-      "name": "hydration_error",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
+      "name": "transforms",
+      "fallback_element_type": "masd::module"
     },
     {
-      "name": "initializer",
+      "name": "transforms::code_generation_chain",
       "stereotypes": [
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "hydrator",
+      "name": "generator",
       "stereotypes": [
         "masd::handcrafted"
       ],
+      "tagged_values": {
+        "masd.generalization.parent": "masd::dogen::generator"
+      },
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "decoding_transform",
+      "name": "weaver",
       "stereotypes": [
         "masd::handcrafted"
       ],
+      "tagged_values": {
+        "masd.generalization.parent": "masd::dogen::weaver"
+      },
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "encoding_transform",
+      "name": "converter",
       "stereotypes": [
         "masd::handcrafted"
       ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "dehydrator",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
+      "tagged_values": {
+        "masd.generalization.parent": "masd::dogen::converter"
+      },
       "fallback_element_type": "masd::object"
     }
   ]
