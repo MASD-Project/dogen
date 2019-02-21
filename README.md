@@ -208,8 +208,8 @@ If you'd like to run the project tests, execute the target
 ## Regenerating Models
 
 If you'd like to run Dogen to regenerate all of its models, you can do
-so by using the target ```knit_all``` or its abbreviation
-```ka```. This is useful, for example, to update the models to the
+so by using the target ```generate_all``` or its abbreviation
+```ga```. This is useful, for example, to update the models to the
 latest version of Dogen, or just to see how Dogen works. By default
 Dogen uses the current built version, but you can also use
 another. For this you may need to tell CMake of its location by
@@ -257,7 +257,7 @@ also include:
 
 - a small model reproducing the problem;
 - the compressed log; it is located under the directory where you
-  executed Dogen and named ```dogen.knitter.MODEL.log``` where
+  executed Dogen and named ```masd.dogen.cli.MODEL.log``` where
   ```MODEL``` is the name of the model you ran against.
 
 Bugs can be submitted
