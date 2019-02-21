@@ -42,12 +42,11 @@ target_link_libraries(${lib_target_name}
 
 if (DOGEN_CLI_EXECUTABLE)
     set(other_options --log-enabled --log-level ${DOGEN_LOG_LEVEL})
-
     add_custom_target(weave_${lib_target_name}
         COMMENT "Weaving ${lib_target_name}" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         COMMAND ${DOGEN_CLI_EXECUTABLE} weave ${other_options}
-        --target ${CMAKE_CURRENT_SOURCE_DIR}/)
+        --target ${CMAKE_SOURCE_DIR}/projects/${name})
     add_dependencies(weave_all weave_${lib_target_name})
 endif()
 
