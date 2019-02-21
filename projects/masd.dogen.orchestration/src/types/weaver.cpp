@@ -18,13 +18,44 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen/types/weaving_exception.hpp"
+#include "masd.dogen.templating/types/wale/workflow.hpp"
+#include "masd.dogen.templating/types/stitch/workflow.hpp"
 #include "masd.dogen.orchestration/types/weaver.hpp"
+
+namespace {
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory("orchestration.generator"));
+
+const std::string stitch_ext(".stitch");
+const std::string unsupported_extension("Extension is unsupported: ");
+
+void validate_extension(const boost::filesystem::path& target) {
+    const auto ext(target.extension().generic_string());
+    if (ext == stitch_ext)
+        return;
+
+    BOOST_LOG_SEV(lg, error) << unsupported_extension << "'" << stitch_ext << "'";
+    using masd::dogen::weaving_exception;
+    BOOST_THROW_EXCEPTION(weaving_exception(unsupported_extension + ext));
+}
+
+}
 
 namespace masd::dogen::orchestration {
 
 void weaver::weave(const configuration& /*cfg*/,
-    const boost::filesystem::path& /*target*/,
+    const boost::filesystem::path& target,
     const boost::filesystem::path& /*tracing_output_directory*/) const {
+    BOOST_LOG_SEV(lg, debug) << "Started weaving.";
+
+    validate_extension(target);
+    masd::dogen::templating::stitch::workflow w(false/*compatibility_mode*/);
+    w.execute(target);
+    BOOST_LOG_SEV(lg, debug) << "Started weaving.";
 }
 
 }

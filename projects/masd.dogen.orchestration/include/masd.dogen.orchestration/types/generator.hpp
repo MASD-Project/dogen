@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include "masd.dogen/types/generator.hpp"
 
 namespace masd::dogen::orchestration {
