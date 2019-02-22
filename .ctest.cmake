@@ -176,6 +176,8 @@ ctest_start(${build_group})
 # AppVeyor/Travis are already managing the git checkout.
 #
 if (NOT DEFINED ENV{BUILD_PROVIDER})
+    find_program(CTEST_GIT_COMMAND NAMES git)
+    set(CTEST_UPDATE_COMMAND "${CTEST_GIT_COMMAND}")
     message("Running git update.")
     ctest_update(BUILD ${CTEST_SOURCE_DIRECTORY})
 endif()
