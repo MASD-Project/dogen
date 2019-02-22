@@ -1,9 +1,9 @@
-<#@ decoration.licence_name=gpl_v3 #>
+<#@ masd.decoration.licence_name=gpl_v3 #>
 <#@ masd.decoration.copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
 <#@ masd.decoration.modeline_group_name=emacs #>
-<#@ stitch.relative_output_directory=../../seam/actual/src #>
-<#@ stitch.stream_variable_name=s #>
-<#@ stitch.inclusion_dependency="simple_template.hpp" #>
+<#@ masd.stitch.relative_output_directory=../actual #>
+<#@ masd.stitch.stream_variable_name=s #>
+<#@ masd.stitch.inclusion_dependency="simple_template.hpp" #>
 <#+
 void complex_template(std::ostream& s) {
 #>

@@ -1,5 +1,5 @@
-<#@ stitch.relative_output_directory=../../seam/actual/src #>
-<#@ stitch.stream_variable_name=s #>
+<#@ masd.stitch.relative_output_directory=../actual #>
+<#@ masd.stitch.stream_variable_name=s #>
 <#+
 #include "simple_template.hpp"
 

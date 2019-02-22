@@ -69,7 +69,8 @@ annotation_factory::annotation_factory(
     const archetype_location_repository& alrp,
     const type_repository& trp, const bool compatibility_mode)
     : data_dirs_(data_dirs), archetype_location_repository_(alrp),
-      type_repository_(trp), profiles_(create_annotation_profiles()),
+      type_repository_(trp),
+      profiles_(create_annotation_profiles(compatibility_mode)),
       type_group_(make_type_group()), compatibility_mode_(compatibility_mode) {}
 
 inline std::ostream&
@@ -250,8 +251,8 @@ get_bound_labels(const std::unordered_map<std::string, annotation>& profiles,
 }
 
 std::unordered_map<std::string, annotation> annotation_factory::
-create_annotation_profiles() const {
-    profiler prf(compatibility_mode_);
+create_annotation_profiles(const bool compatibility_mode) const {
+    profiler prf(compatibility_mode);
     const auto& alrp(archetype_location_repository_);
     const auto& trp(type_repository_);
     return prf.generate(data_dirs_, alrp, trp);

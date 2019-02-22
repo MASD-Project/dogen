@@ -197,6 +197,8 @@ void profiler::setup_annotations(const archetype_location_repository& alrp,
                                          << tpl.name().qualified()
                                          << " Result: " << pc.annotation();
             } catch (const instantiation_error& e) {
+                BOOST_LOG_SEV(lg, error) << "compatibility_mode_: "
+                                         << compatibility_mode_;
                 if (!compatibility_mode_) {
                     BOOST_LOG_SEV(lg, error) << "Error instantiating profile: "
                                              << prfn << ". Message: "

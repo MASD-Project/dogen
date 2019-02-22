@@ -21,7 +21,6 @@
 #include <boost/test/unit_test.hpp>
 #include "masd.dogen.utility/types/test/logging.hpp"
 #include "masd.dogen.utility/types/test/asserter.hpp"
-#include "masd.dogen.utility/types/test_data/seam.hpp"
 #include "masd.dogen.utility/types/test_data/stitch.hpp"
 #include "masd.dogen.utility/types/test/exception_checkers.hpp"
 #include "masd.dogen.templating/io/stitch/text_template_io.hpp"
@@ -35,7 +34,7 @@ const std::string test_module("masd.dogen.templating.tests");
 const std::string test_suite("stitch_workflow_tests");
 
 const std::string empty_template("Template has no content");
-const bool compatibility_mode(false);
+const bool compatibility_mode(true);
 
 }
 
@@ -45,8 +44,7 @@ using masd::dogen::templating::stitch::instantiation_error;
 
 BOOST_AUTO_TEST_SUITE(stitch_workflow_tests)
 
-/*
-BOOST_IGNORE_AUTO_TEST_CASE(simple_template_results_in_expected_output) {
+BOOST_AUTO_TEST_CASE(simple_template_results_in_expected_output) {
     SETUP_TEST_LOG_SOURCE("simple_template_results_in_expected_output");
 
     masd::dogen::templating::stitch::workflow w(compatibility_mode);
@@ -54,11 +52,11 @@ BOOST_IGNORE_AUTO_TEST_CASE(simple_template_results_in_expected_output) {
     w.execute(stitch::input_simple_template_stitch());
 
     BOOST_CHECK(asserter::assert_file(
-            seam::expected_simple_template_stitch_cpp(),
-            seam::actual_simple_template_stitch_cpp()));
+            stitch::expected_simple_template_stitch_cpp(),
+            stitch::actual_simple_template_stitch_cpp()));
 }
 
-BOOST_IGNORE_AUTO_TEST_CASE(complex_template_results_in_expected_output) {
+BOOST_AUTO_TEST_CASE(complex_template_results_in_expected_output) {
     SETUP_TEST_LOG_SOURCE("complex_template_results_in_expected_output");
 
     masd::dogen::templating::stitch::workflow w(compatibility_mode);
@@ -66,10 +64,9 @@ BOOST_IGNORE_AUTO_TEST_CASE(complex_template_results_in_expected_output) {
     w.execute(stitch::input_complex_template_stitch());
 
     BOOST_CHECK(asserter::assert_file(
-            seam::expected_complex_template_stitch_cpp(),
-            seam::actual_complex_template_stitch_cpp()));
+            stitch::expected_complex_template_stitch_cpp(),
+            stitch::actual_complex_template_stitch_cpp()));
 }
-*/
 
 BOOST_AUTO_TEST_CASE(empty_template_throws) {
     SETUP_TEST_LOG_SOURCE("empty_template_throws");

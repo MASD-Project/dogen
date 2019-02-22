@@ -108,7 +108,7 @@ private:
      * @brief Creates the annotation profiles.
      */
     std::unordered_map<std::string, annotation>
-    create_annotation_profiles() const;
+    create_annotation_profiles(const bool compatibility_mode) const;
 
     std::list<std::string> get_bound_labels(const std::unordered_map<
         std::string, annotation>& profiles, const std::list<std::string>&
