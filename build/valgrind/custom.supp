@@ -17,6 +17,16 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
+{
+    boost log 1
+    Memcheck:Leak
+    match-leak-kinds: reachable
+    fun:_Znwm
+    ...
+    fun:_ZN5boost3log12v2s_mt_posix7sources21basic_severity_loggerINS2_20basic_channel_loggerINS2_12basic_loggerIcNS2_23severity_channel_loggerIN4masd5dogen7utility3log14severity_levelENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEENS2_19single_thread_modelEEESH_EESB_E20open_record_unlockedINS_9parameter3aux15tagged_argumentINS1_8keywords3tag8severityEKSB_EEEENS1_6recordERKT_
+    fun:_ZN5boost3log12v2s_mt_posix7sources22basic_composite_loggerIcNS2_23severity_channel_loggerIN4masd5dogen7utility3log14severity_levelENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEENS2_19single_thread_modelENS2_8featuresIJNS2_8severityIS9_EENS2_7channelISF_EEEEEE11open_recordINS_9parameter3aux15tagged_argumentINS1_8keywords3tag8severityEKS9_EEEENS1_6recordERKT_
+    ...
+}
 
 {
     getpwuid_r
