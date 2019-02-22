@@ -531,17 +531,6 @@ In addition, =io= is very misleading as the facet is not supposed to
 do I/O proper (e.g. serialisation) but more pretty-printing or debug
 dumping. So perhaps =pretty_print=.
 
-*** Update annotation profiles and stereotypes to masd namespace      :story:
-
-We should rename all annotation profiles and all stereotypes into the
-MASD namespace.
-
-We should also rename the artefact formatters to a compliant names,
-e.g. instead of =C# Artefact Formatter= maybe
-=dogen::csharp_artefact_formatter=. Note its dogen not MASD because
-these are dogen specific profiles. We need to create a model for
-dogen, separate from the MASD standard profile.
-
 *** Consider adding collections at the meta-model level               :story:
 
 A very common pattern we've observed is the creation of "container"

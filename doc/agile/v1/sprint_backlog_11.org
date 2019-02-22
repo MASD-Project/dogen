@@ -13,17 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-22 Fri 17:42]
+#+CAPTION: Clock summary at [2019-02-22 Fri 19:09]
 | <75>                                                      |          |        |        |       |
 | Headline                                                  | Time     |        |        |     % |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                              | *219:43* |        |        | 100.0 |
+| *Total time*                                              | *220:49* |        |        | 100.0 |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                   | 219:43   |        |        | 100.0 |
-| Active                                                    |          | 219:43 |        | 100.0 |
+| Stories                                                   | 220:49   |        |        | 100.0 |
+| Active                                                    |          | 220:49 |        | 100.0 |
 | Edit release notes for previous sprint                    |          |        |   2:03 |   0.9 |
 | Sprint and product backlog grooming                       |          |        |   5:32 |   2.5 |
-| Work on MASD theory                                       |          |        | 113:38 |  51.7 |
+| Work on MASD theory                                       |          |        | 113:38 |  51.5 |
 | Rename models to fit MASD architecture                    |          |        |   4:56 |   2.2 |
 | Read up on framework and API design                       |          |        |   0:57 |   0.4 |
 | Analyse the state of the mess of refactors                |          |        |   6:27 |   2.9 |
@@ -36,9 +36,9 @@
 | Disabling facet globally and enabling locally fails       |          |        |   2:21 |   1.1 |
 | References to types in top-level namespace do not resolve |          |        |   0:51 |   0.4 |
 | Create a colour palette test model                        |          |        |   1:09 |   0.5 |
-| Create a single binary for all of dogen                   |          |        |  37:30 |  17.1 |
+| Create a single binary for all of dogen                   |          |        |  37:30 |  17.0 |
 | Setup a nightly build for Dogen                           |          |        |   3:47 |   1.7 |
-| Great meta-data rename                                    |          |        |   4:54 |   2.2 |
+| Great meta-data rename                                    |          |        |   6:00 |   2.7 |
 | Dogen's vcpkg export for OSX was created from master      |          |        |   0:46 |   0.3 |
 | Fix clang-cl warnings                                     |          |        |   5:07 |   2.3 |
 | Use tracing options in existing code                      |          |        |   0:57 |   0.4 |
@@ -795,8 +795,26 @@ fits in with other binaries such as =dogen.web=, =dogen.http=,
 We haven't had nightlies with valgrind for a long time. We need these
 for both Dogen and the C++ ref impl.
 
-*** STARTED Great meta-data rename                                    :story:
+*** COMPLETED Update annotation profiles and stereotypes to masd namespace :story:
+    CLOSED: [2019-02-22 Fri 18:52]
+
+*Rationale*: this has been implemented as part of the great meta-data
+rename..
+
+We should rename all annotation profiles and all stereotypes into the
+MASD namespace.
+
+We should also rename the artefact formatters to a compliant names,
+e.g. instead of =C# Artefact Formatter= maybe
+=dogen::csharp_artefact_formatter=. Note its dogen not MASD because
+these are dogen specific profiles. We need to create a model for
+dogen, separate from the MASD standard profile.
+
+*** COMPLETED Great meta-data rename                                  :story:
+    CLOSED: [2019-02-22 Fri 19:09]
     :LOGBOOK:
+    CLOCK: [2019-02-22 Fri 18:52]--[2019-02-22 Fri 19:09] =>  0:17
+    CLOCK: [2019-02-22 Fri 18:02]--[2019-02-22 Fri 18:51] =>  0:49
     CLOCK: [2018-11-26 Mon 10:01]--[2018-11-26 Mon 11:02] =>  1:01
     CLOCK: [2018-11-23 Fri 21:43]--[2018-11-23 Fri 22:20] =>  0:37
     CLOCK: [2018-11-23 Fri 20:55]--[2018-11-23 Fri 21:42] =>  0:47
@@ -951,6 +969,18 @@ the unique set of referenced models and load those. To put in this
 logic in the code at present (i.e. without a two-phase approach) would
 mean we'd have to load the same models several times (or heavily
 rewrite existing code, resulting in a two-phase approach, anyway).
+
+*** Throw on profiles that refer to invalid fields                    :story:
+
+At present during profile instantiation, if we detect a field which
+does not exist we skip the profile. This was done in the past because
+we had different binaries for stitch, knit etc, which meant that we
+could either split profiles by application or skip errors
+silently. Now we have a single binary, we could enable this
+validation. However, the stitch tests still rely on this
+behaviour. The right solution for this is to have some kind of
+override flag ("compatibility mode" springs to mind) which is off by
+default but can be used (judiciously).
 
 *** Implement configuration validator                                 :story:
 
