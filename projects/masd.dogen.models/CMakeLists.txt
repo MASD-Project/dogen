@@ -72,22 +72,6 @@ if (DOGEN_CLI_EXECUTABLE)
         add_dependencies(convert_all convert_${model_name})
     endforeach()
 
-    #
-    # Code generation
-    #
-    # uncomment the next line if you require compatibility support
-    # set(other_options ${other_options} --compatibility-mode)
-
-    set(projects_dir "${CMAKE_SOURCE_DIR}/projects")
-    set(common_arguments --output-directory ${projects_dir}/)
-    set(common_arguments ${common_arguments} ${other_options})
-
-    # uncomment to enable tracing.
-    # set(common_arguments ${common_arguments} --tracing-enabled)
-    # set(common_arguments ${common_arguments} --tracing-level detail)
-    # set(common_arguments ${common_arguments} --tracing-format org-mode)
-    # set(common_arguments ${common_arguments} --tracing-guids-enabled)
-
     # main input models
     set(prefix "masd.dogen")
     set(models ${prefix})

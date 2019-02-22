@@ -354,11 +354,6 @@ endif()
 find_package(Dogen REQUIRED)
 
 #
-# Log level to use for all Dogen invocations
-#
-set(DOGEN_LOG_LEVEL "debug")
-
-#
 # aggregate targets and their aliases
 #
 add_custom_target(run_all_tests)
@@ -389,6 +384,29 @@ if (DOGEN_CLI_EXECUTABLE)
     add_custom_target(convert_all)
     add_custom_target(ca)
     add_dependencies(ca convert_all)
+
+    #
+    # Options to use for all Dogen invocations
+    #
+    set(DOGEN_LOG_LEVEL "debug")
+    set(DOGEN_LOG_OPTIONS --log-enabled --log-level ${DOGEN_LOG_LEVEL})
+
+    set(DOGEN_TRACING_OPTIONS "")
+    # uncomment to enable tracing.
+    # set(DOGEN_TRACING_OPTIONS ${DOGEN_TRACING_OPTIONS} --tracing-enabled)
+    # set(DOGEN_TRACING_OPTIONS ${DOGEN_TRACING_OPTIONS} --tracing-level detail)
+    # set(DOGEN_TRACING_OPTIONS ${DOGEN_TRACING_OPTIONS} --tracing-format org-mode)
+    # set(DOGEN_TRACING_OPTIONS ${DOGEN_TRACING_OPTIONS} --tracing-guids-enabled)
+
+    set(DOGEN_COMMON_OPTIONS ${DOGEN_LOG_OPTIONS} ${DOGEN_TRACING_OPTIONS})
+    # uncomment the next line if you require compatibility support
+    # set(DOGEN_COMMON_OPTIONS ${DOGEN_COMMON_OPTIONS} --compatibility-mode)
+
+    #
+    # Options for code generation only
+    #
+    set(projects_dir "${CMAKE_SOURCE_DIR}/projects")
+    set(DOGEN_GENERATION_OPTIONS --output-directory ${projects_dir}/)
 endif()
 
 if (WITH_JSON_VALIDATION)
@@ -408,7 +426,8 @@ endif()
 
 if(WITH_BENCHMARKS)
     set(benchmark_repeats "20")
-    set(benchmark_command "${CMAKE_SOURCE_DIR}/build/scripts/benchmark.linux.sh")
+    set(benchmark_command
+        "${CMAKE_SOURCE_DIR}/build/scripts/benchmark.linux.sh")
     set(benchmark_directory "${stage_test_data_dir}/benchmarks/actual")
     set(benchmark_prefix "")
     if(NOT EXISTS "${benchmark_directory}")

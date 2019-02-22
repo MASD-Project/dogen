@@ -121,8 +121,8 @@ if (DOGEN_CLI_EXECUTABLE)
                 COMMENT "Converting ${model_name}."
                 WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
                 COMMAND ${DOGEN_CLI_EXECUTABLE} convert
-                --log-enabled --log-level=${DOGEN_LOG_LEVEL}
-                --source ${sample} --destination ${output_dir}/${model_name}.json)
+                --source ${sample} --destination ${output_dir}/${model_name}.json
+                ${DOGEN_COMMON_OPTIONS})
             add_dependencies(convert_all convert_${model_name})
         endif()
     endforeach()

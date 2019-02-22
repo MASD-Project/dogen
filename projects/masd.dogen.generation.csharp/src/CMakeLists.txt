@@ -45,8 +45,9 @@ if (DOGEN_CLI_EXECUTABLE)
     add_custom_target(weave_${lib_target_name}
         COMMENT "Weaving ${lib_target_name}" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_CLI_EXECUTABLE} weave ${other_options}
-        --target ${CMAKE_SOURCE_DIR}/projects/${name})
+        COMMAND ${DOGEN_CLI_EXECUTABLE} weave
+        --target ${CMAKE_SOURCE_DIR}/projects/${name}
+        ${DOGEN_COMMON_OPTIONS})
     add_dependencies(weave_all weave_${lib_target_name})
 endif()
 
