@@ -158,7 +158,7 @@ if(${build_group} MATCHES Nightly)
         set(valgrind_options "${valgrind_options} --gen-suppressions=all")
         set(CTEST_MEMORYCHECK_COMMAND_OPTIONS ${valgrind_options})
         set(CTEST_MEMORYCHECK_SUPPRESSIONS_FILE
-            "${CTEST_SOURCE_DIRECTORY}/build/valgrind/${product}.supp")
+            "${CTEST_SOURCE_DIRECTORY}/build/valgrind/custom.supp")
     endif()
 endif()
 

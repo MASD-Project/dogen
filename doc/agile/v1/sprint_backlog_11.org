@@ -13,17 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-22 Fri 11:00]
+#+CAPTION: Clock summary at [2019-02-22 Fri 12:37]
 | <75>                                                      |          |        |        |       |
 | Headline                                                  | Time     |        |        |     % |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                              | *214:16* |        |        | 100.0 |
+| *Total time*                                              | *215:50* |        |        | 100.0 |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                   | 214:16   |        |        | 100.0 |
-| Active                                                    |          | 214:16 |        | 100.0 |
-| Edit release notes for previous sprint                    |          |        |   2:03 |   1.0 |
+| Stories                                                   | 215:50   |        |        | 100.0 |
+| Active                                                    |          | 215:50 |        | 100.0 |
+| Edit release notes for previous sprint                    |          |        |   2:03 |   0.9 |
 | Sprint and product backlog grooming                       |          |        |   5:32 |   2.6 |
-| Work on MASD theory                                       |          |        | 113:38 |  53.0 |
+| Work on MASD theory                                       |          |        | 113:38 |  52.6 |
 | Rename models to fit MASD architecture                    |          |        |   4:56 |   2.3 |
 | Read up on framework and API design                       |          |        |   0:57 |   0.4 |
 | Analyse the state of the mess of refactors                |          |        |   6:27 |   3.0 |
@@ -36,8 +36,8 @@
 | Disabling facet globally and enabling locally fails       |          |        |   2:21 |   1.1 |
 | References to types in top-level namespace do not resolve |          |        |   0:51 |   0.4 |
 | Create a colour palette test model                        |          |        |   1:09 |   0.5 |
-| Create a single binary for all of dogen                   |          |        |  34:35 |  16.1 |
-| Setup a nightly build for Dogen                           |          |        |   1:15 |   0.6 |
+| Create a single binary for all of dogen                   |          |        |  34:35 |  16.0 |
+| Setup a nightly build for Dogen                           |          |        |   2:49 |   1.3 |
 | Great meta-data rename                                    |          |        |   4:54 |   2.3 |
 | Dogen's vcpkg export for OSX was created from master      |          |        |   0:46 |   0.4 |
 | Fix clang-cl warnings                                     |          |        |   5:07 |   2.4 |
@@ -780,6 +780,9 @@ fits in with other binaries such as =dogen.web=, =dogen.http=,
 
 *** STARTED Setup a nightly build for Dogen                           :story:
     :LOGBOOK:
+    CLOCK: [2019-02-22 Fri 12:29]--[2019-02-22 Fri 12:37] =>  0:08
+    CLOCK: [2019-02-22 Fri 12:01]--[2019-02-22 Fri 12:28] =>  0:27
+    CLOCK: [2019-02-22 Fri 11:01]--[2019-02-22 Fri 12:00] =>  0:59
     CLOCK: [2019-02-22 Fri 09:45]--[2019-02-22 Fri 11:00] =>  1:15
     :END:
 
