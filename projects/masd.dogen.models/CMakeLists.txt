@@ -54,8 +54,6 @@ if (WITH_JSON_VALIDATION)
 endif()
 
 if (DOGEN_CLI_EXECUTABLE)
-    set(other_options --log-enabled --log-level ${DOGEN_LOG_LEVEL})
-
     #
     # Model conversion
     #
@@ -67,8 +65,9 @@ if (DOGEN_CLI_EXECUTABLE)
         add_custom_target(convert_${model_name}
             COMMENT "Converting ${model_name}."
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND ${DOGEN_CLI_EXECUTABLE} convert ${other_options}
-            --source ${model} --destination ${output_dir}/${model_name}.json)
+            COMMAND ${DOGEN_CLI_EXECUTABLE} convert
+            --source ${model} --destination ${output_dir}/${model_name}.json
+            ${DOGEN_COMMON_OPTIONS})
         add_dependencies(convert_all convert_${model_name})
     endforeach()
 
