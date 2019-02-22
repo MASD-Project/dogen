@@ -13,30 +13,31 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-21 Thu 15:42]
+#+CAPTION: Clock summary at [2019-02-22 Fri 11:00]
 | <75>                                                      |          |        |        |       |
 | Headline                                                  | Time     |        |        |     % |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                              | *213:01* |        |        | 100.0 |
+| *Total time*                                              | *214:16* |        |        | 100.0 |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                   | 213:01   |        |        | 100.0 |
-| Active                                                    |          | 213:01 |        | 100.0 |
+| Stories                                                   | 214:16   |        |        | 100.0 |
+| Active                                                    |          | 214:16 |        | 100.0 |
 | Edit release notes for previous sprint                    |          |        |   2:03 |   1.0 |
 | Sprint and product backlog grooming                       |          |        |   5:32 |   2.6 |
-| Work on MASD theory                                       |          |        | 113:38 |  53.3 |
+| Work on MASD theory                                       |          |        | 113:38 |  53.0 |
 | Rename models to fit MASD architecture                    |          |        |   4:56 |   2.3 |
 | Read up on framework and API design                       |          |        |   0:57 |   0.4 |
 | Analyse the state of the mess of refactors                |          |        |   6:27 |   3.0 |
 | Create the =orchestration= model                          |          |        |   4:15 |   2.0 |
-| Update vcpkg across all operative systems                 |          |        |   4:35 |   2.2 |
+| Update vcpkg across all operative systems                 |          |        |   4:35 |   2.1 |
 | Update C# reference models to latest dogen                |          |        |   0:42 |   0.3 |
 | Convert the utility model into a regular dogen model      |          |        |   7:27 |   3.5 |
-| Improve support for clang-cl builds                       |          |        |   2:02 |   1.0 |
+| Improve support for clang-cl builds                       |          |        |   2:02 |   0.9 |
 | Move generation properties into meta-data                 |          |        |   9:26 |   4.4 |
 | Disabling facet globally and enabling locally fails       |          |        |   2:21 |   1.1 |
 | References to types in top-level namespace do not resolve |          |        |   0:51 |   0.4 |
 | Create a colour palette test model                        |          |        |   1:09 |   0.5 |
-| Create a single binary for all of dogen                   |          |        |  34:35 |  16.2 |
+| Create a single binary for all of dogen                   |          |        |  34:35 |  16.1 |
+| Setup a nightly build for Dogen                           |          |        |   1:15 |   0.6 |
 | Great meta-data rename                                    |          |        |   4:54 |   2.3 |
 | Dogen's vcpkg export for OSX was created from master      |          |        |   0:46 |   0.4 |
 | Fix clang-cl warnings                                     |          |        |   5:07 |   2.4 |
@@ -776,6 +777,14 @@ call it something allusive to the command line, such as cli. However,
 the final binary should be called dogen or perhaps, =dogen.cli=. This
 fits in with other binaries such as =dogen.web=, =dogen.http=,
 =dogen.gui= etc.
+
+*** STARTED Setup a nightly build for Dogen                           :story:
+    :LOGBOOK:
+    CLOCK: [2019-02-22 Fri 09:45]--[2019-02-22 Fri 11:00] =>  1:15
+    :END:
+
+We haven't had nightlies with valgrind for a long time. We need these
+for both Dogen and the C++ ref impl.
 
 *** STARTED Great meta-data rename                                    :story:
     :LOGBOOK:
