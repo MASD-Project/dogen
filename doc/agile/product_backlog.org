@@ -9657,6 +9657,19 @@ be nice to be able to declare these subsets in the meta-model and:
 - create a bool function that given an enumerator tells us if it is in
   a subset or not.
 
+*** Add support for load testing                                      :story:
+
+Once we have proper support for test data sets (e.g. generate
+realistic data) and once we have proper support for networking
+(e.g. HTTP, etc), we should consider adding "load testing"
+features. That is, we could generate requests (based on suitably
+annotated types). We could offer some kind of base functionality for
+load testing (requests per second, size, etc).
+
+Links:
+
+- https://github.com/sepehrdaddev/Xerxes: DOS tool
+
 *** Add support for user supplied test data sets                      :story:
 
 #+begin_quote

@@ -13,31 +13,31 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-22 Fri 12:37]
+#+CAPTION: Clock summary at [2019-02-22 Fri 14:44]
 | <75>                                                      |          |        |        |       |
 | Headline                                                  | Time     |        |        |     % |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                              | *215:50* |        |        | 100.0 |
+| *Total time*                                              | *216:48* |        |        | 100.0 |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                   | 215:50   |        |        | 100.0 |
-| Active                                                    |          | 215:50 |        | 100.0 |
+| Stories                                                   | 216:48   |        |        | 100.0 |
+| Active                                                    |          | 216:48 |        | 100.0 |
 | Edit release notes for previous sprint                    |          |        |   2:03 |   0.9 |
 | Sprint and product backlog grooming                       |          |        |   5:32 |   2.6 |
-| Work on MASD theory                                       |          |        | 113:38 |  52.6 |
+| Work on MASD theory                                       |          |        | 113:38 |  52.4 |
 | Rename models to fit MASD architecture                    |          |        |   4:56 |   2.3 |
 | Read up on framework and API design                       |          |        |   0:57 |   0.4 |
 | Analyse the state of the mess of refactors                |          |        |   6:27 |   3.0 |
 | Create the =orchestration= model                          |          |        |   4:15 |   2.0 |
 | Update vcpkg across all operative systems                 |          |        |   4:35 |   2.1 |
 | Update C# reference models to latest dogen                |          |        |   0:42 |   0.3 |
-| Convert the utility model into a regular dogen model      |          |        |   7:27 |   3.5 |
+| Convert the utility model into a regular dogen model      |          |        |   7:27 |   3.4 |
 | Improve support for clang-cl builds                       |          |        |   2:02 |   0.9 |
 | Move generation properties into meta-data                 |          |        |   9:26 |   4.4 |
 | Disabling facet globally and enabling locally fails       |          |        |   2:21 |   1.1 |
 | References to types in top-level namespace do not resolve |          |        |   0:51 |   0.4 |
 | Create a colour palette test model                        |          |        |   1:09 |   0.5 |
 | Create a single binary for all of dogen                   |          |        |  34:35 |  16.0 |
-| Setup a nightly build for Dogen                           |          |        |   2:49 |   1.3 |
+| Setup a nightly build for Dogen                           |          |        |   3:47 |   1.7 |
 | Great meta-data rename                                    |          |        |   4:54 |   2.3 |
 | Dogen's vcpkg export for OSX was created from master      |          |        |   0:46 |   0.4 |
 | Fix clang-cl warnings                                     |          |        |   5:07 |   2.4 |
@@ -680,6 +680,7 @@ superset of handcrafted.
 *** COMPLETED Create a single binary for all of dogen                 :story:
     CLOSED: [2019-02-21 Thu 14:54]
     :LOGBOOK:
+    CLOCK: [2019-02-22 Fri 14:45]--[2019-02-22 Fri 15:41] =>  0:56
     CLOCK: [2019-02-21 Thu 14:55]--[2019-02-21 Thu 15:43] =>  0:48
     CLOCK: [2019-02-21 Thu 14:09]--[2019-02-21 Thu 14:54] =>  0:45
     CLOCK: [2019-02-21 Thu 13:21]--[2019-02-21 Thu 14:08] =>  0:47
@@ -778,8 +779,11 @@ the final binary should be called dogen or perhaps, =dogen.cli=. This
 fits in with other binaries such as =dogen.web=, =dogen.http=,
 =dogen.gui= etc.
 
-*** STARTED Setup a nightly build for Dogen                           :story:
+*** COMPLETED Setup a nightly build for Dogen                         :story:
+    CLOSED: [2019-02-22 Fri 14:44]
     :LOGBOOK:
+    CLOCK: [2019-02-22 Fri 14:10]--[2019-02-22 Fri 14:44] =>  0:34
+    CLOCK: [2019-02-22 Fri 13:45]--[2019-02-22 Fri 14:09] =>  0:24
     CLOCK: [2019-02-22 Fri 12:29]--[2019-02-22 Fri 12:37] =>  0:08
     CLOCK: [2019-02-22 Fri 12:01]--[2019-02-22 Fri 12:28] =>  0:27
     CLOCK: [2019-02-22 Fri 11:01]--[2019-02-22 Fri 12:00] =>  0:59
