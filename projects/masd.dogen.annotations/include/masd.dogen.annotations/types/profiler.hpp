@@ -40,6 +40,9 @@
 namespace masd::dogen::annotations {
 
 class profiler {
+public:
+    explicit profiler(const bool compatibility_mode);
+
 private:
     typedef std::unordered_map<std::string, profiler_configuration>
     profile_map_type;
@@ -72,6 +75,9 @@ public:
     generate(const std::vector<boost::filesystem::path>& data_dirs,
         const archetype_location_repository& alrp,
         const type_repository& trp) const;
+
+private:
+    const bool compatibility_mode_;
 };
 
 }

@@ -13,17 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-22 Fri 19:09]
+#+CAPTION: Clock summary at [2019-02-22 Fri 19:31]
 | <75>                                                      |          |        |        |       |
 | Headline                                                  | Time     |        |        |     % |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                              | *220:49* |        |        | 100.0 |
+| *Total time*                                              | *221:10* |        |        | 100.0 |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                   | 220:49   |        |        | 100.0 |
-| Active                                                    |          | 220:49 |        | 100.0 |
+| Stories                                                   | 221:10   |        |        | 100.0 |
+| Active                                                    |          | 221:10 |        | 100.0 |
 | Edit release notes for previous sprint                    |          |        |   2:03 |   0.9 |
 | Sprint and product backlog grooming                       |          |        |   5:32 |   2.5 |
-| Work on MASD theory                                       |          |        | 113:38 |  51.5 |
+| Work on MASD theory                                       |          |        | 113:38 |  51.4 |
 | Rename models to fit MASD architecture                    |          |        |   4:56 |   2.2 |
 | Read up on framework and API design                       |          |        |   0:57 |   0.4 |
 | Analyse the state of the mess of refactors                |          |        |   6:27 |   2.9 |
@@ -39,6 +39,7 @@
 | Create a single binary for all of dogen                   |          |        |  37:30 |  17.0 |
 | Setup a nightly build for Dogen                           |          |        |   3:47 |   1.7 |
 | Great meta-data rename                                    |          |        |   6:00 |   2.7 |
+| Throw on profiles that refer to invalid fields            |          |        |   0:21 |   0.2 |
 | Dogen's vcpkg export for OSX was created from master      |          |        |   0:46 |   0.3 |
 | Fix clang-cl warnings                                     |          |        |   5:07 |   2.3 |
 | Use tracing options in existing code                      |          |        |   0:57 |   0.4 |
@@ -881,6 +882,22 @@ its not clear if its MASD or dogen.
 
   in fact, should we mention "tagged values" instead of "comment"?
 
+*** COMPLETED Throw on profiles that refer to invalid fields          :story:
+    CLOSED: [2019-02-22 Fri 19:31]
+    :LOGBOOK:
+    CLOCK: [2019-02-22 Fri 19:10]--[2019-02-22 Fri 19:31] =>  0:21
+    :END:
+
+At present during profile instantiation, if we detect a field which
+does not exist we skip the profile. This was done in the past because
+we had different binaries for stitch, knit etc, which meant that we
+could either split profiles by application or skip errors
+silently. Now we have a single binary, we could enable this
+validation. However, the stitch tests still rely on this
+behaviour. The right solution for this is to have some kind of
+override flag ("compatibility mode" springs to mind) which is off by
+default but can be used (judiciously).
+
 *** STARTED Dogen's vcpkg export for OSX was created from master      :story:
     :LOGBOOK:
     CLOCK: [2019-02-09 Sat 06:20]--[2019-02-09 Sat 06:46] =>  0:26
@@ -969,18 +986,6 @@ the unique set of referenced models and load those. To put in this
 logic in the code at present (i.e. without a two-phase approach) would
 mean we'd have to load the same models several times (or heavily
 rewrite existing code, resulting in a two-phase approach, anyway).
-
-*** Throw on profiles that refer to invalid fields                    :story:
-
-At present during profile instantiation, if we detect a field which
-does not exist we skip the profile. This was done in the past because
-we had different binaries for stitch, knit etc, which meant that we
-could either split profiles by application or skip errors
-silently. Now we have a single binary, we could enable this
-validation. However, the stitch tests still rely on this
-behaviour. The right solution for this is to have some kind of
-override flag ("compatibility mode" springs to mind) which is off by
-default but can be used (judiciously).
 
 *** Implement configuration validator                                 :story:
 

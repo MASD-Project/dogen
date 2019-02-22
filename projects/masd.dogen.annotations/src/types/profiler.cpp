@@ -59,6 +59,9 @@ const std::string empty_label("Profile has an empty label: ");
 
 namespace masd::dogen::annotations {
 
+profiler::profiler(const bool compatibility_mode)
+    : compatibility_mode_(compatibility_mode) {}
+
 std::vector<boost::filesystem::path> profiler::to_profile_directories(
     const std::vector<boost::filesystem::path>& data_dirs) const {
     std::vector<boost::filesystem::path> r;
@@ -194,22 +197,17 @@ void profiler::setup_annotations(const archetype_location_repository& alrp,
                                          << tpl.name().qualified()
                                          << " Result: " << pc.annotation();
             } catch (const instantiation_error& e) {
-                /*
-                 * Note: we are skipping profiles that fail with
-                 * instantiation errors. This is because its not
-                 * always the case that all profiles are instantiable;
-                 * for example, a profile for knitter may not work for
-                 * stitch, because its missing all of the
-                 * formatters. This is not a very elegant solution,
-                 * but it will do until we think of something
-                 * better. Note that this only happens for stitch
-                 * tests at present (because there we do not want a
-                 * dependency on the rest of the code base). FIXME:
-                 * this is a hack that needs to be removed.
-                 */
-                BOOST_LOG_SEV(lg, error) << "Error instantiating profile: "
-                                         << prfn << ". Message: " << e.what()
-                                         << ". Skipping profile.";
+                if (!compatibility_mode_) {
+                    BOOST_LOG_SEV(lg, error) << "Error instantiating profile: "
+                                             << prfn << ". Message: "
+                                             << e.what() << ".";
+
+                    throw e;
+                }
+
+                BOOST_LOG_SEV(lg, warn) << "Error instantiating profile: "
+                                        << prfn << ". Message: " << e.what()
+                                        << ". Skipping profile.";
             }
         }
     }

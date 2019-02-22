@@ -41,7 +41,7 @@ namespace masd::dogen::annotations {
 
 class template_instantiator {
 public:
-    template_instantiator(const archetype_location_repository& alrp);
+    explicit template_instantiator(const archetype_location_repository& alrp);
 
 public:
     bool is_instantiable(const template_kinds tk) const;

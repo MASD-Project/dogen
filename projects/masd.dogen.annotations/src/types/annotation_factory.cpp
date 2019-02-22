@@ -251,7 +251,7 @@ get_bound_labels(const std::unordered_map<std::string, annotation>& profiles,
 
 std::unordered_map<std::string, annotation> annotation_factory::
 create_annotation_profiles() const {
-    profiler prf;
+    profiler prf(compatibility_mode_);
     const auto& alrp(archetype_location_repository_);
     const auto& trp(type_repository_);
     return prf.generate(data_dirs_, alrp, trp);
