@@ -41,7 +41,6 @@ target_link_libraries(${lib_target_name}
     ${Boost_LIBRARIES})
 
 if (DOGEN_CLI_EXECUTABLE)
-    set(other_options --log-enabled --log-level ${DOGEN_LOG_LEVEL})
     add_custom_target(weave_${lib_target_name}
         COMMENT "Weaving ${lib_target_name}" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
