@@ -197,10 +197,10 @@ ctest_build()
 # CDash to see the testing status. Travis/AppVeyor just tells us
 # weather the build and packaging steps have worked or failed.
 #
-# ctest_test(RETURN_VALUE retval)
+ctest_test(RETURN_VALUE retval)
 
-# if(WITH_MEMCHECK AND CTEST_MEMORYCHECK_COMMAND)
-#   ctest_memcheck(PARALLEL_LEVEL ${number_of_jobs})
-# endif()
+if(WITH_MEMCHECK AND CTEST_MEMORYCHECK_COMMAND)
+    ctest_memcheck(PARALLEL_LEVEL ${number_of_jobs})
+endif()
 
-# ctest_submit()
+ctest_submit()
