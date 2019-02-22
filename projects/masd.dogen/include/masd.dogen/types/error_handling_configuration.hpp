@@ -47,7 +47,7 @@ public:
 
 public:
     /**
-     * @brief Try to process diagram even if there are errors.
+     * @brief Try to process models even if there are errors.
      *
      * Only a certain class of errors are allowed, believed to be caused by backwards or
      * forwards compatibility problems: missing types or types that do not exist.

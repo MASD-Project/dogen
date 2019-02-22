@@ -56,6 +56,16 @@ const std::string weave_command_desc(
 const std::string help_arg("help");
 const std::string version_arg("version");
 const std::string command_arg("command");
+const std::string logging_log_enabled_arg("log-enabled");
+const std::string logging_log_directory_arg("log-directory");
+const std::string logging_log_level_arg("log-level");
+const std::string logging_log_level_trace("trace");
+const std::string logging_log_level_debug("debug");
+const std::string logging_log_level_info("info");
+const std::string logging_log_level_warn("warn");
+const std::string logging_log_level_error("error");
+const std::string logging_default_log_directory("log");
+
 const std::string tracing_enabled_arg("tracing-enabled");
 const std::string tracing_level_arg("tracing-level");
 const std::string tracing_level_detail("detail");
@@ -67,15 +77,9 @@ const std::string tracing_format_plain("plain");
 const std::string tracing_output_directory_arg("tracing-output-directory");
 const std::string tracing_default_directory("tracing");
 
-const std::string logging_log_enabled_arg("log-enabled");
-const std::string logging_log_directory_arg("log-directory");
-const std::string logging_log_level_arg("log-level");
-const std::string logging_log_level_trace("trace");
-const std::string logging_log_level_debug("debug");
-const std::string logging_log_level_info("info");
-const std::string logging_log_level_warn("warn");
-const std::string logging_log_level_error("error");
-const std::string logging_default_log_directory("log");
+const std::string error_handling_compatibility_mode_arg(
+    "compatibility-mode-enabled");
+
 const std::string generate_target_arg("target");
 const std::string generate_output_dir_arg("output-directory");
 const std::string convert_source_arg("source");
@@ -135,6 +139,12 @@ options_description make_top_level_options_description() {
         ("tracing-output-directory", value<std::string>(), "Directory in which "
             "to dump probe data. Only used if transforms tracing is enabled.");
     r.add(tod);
+
+    options_description ehod("Error Handling");
+    ehod.add_options()
+        ("compatibility-mode-enabled",
+            "Try to process models even if there are errors.");
+    r.add(ehod);
 
     options_description cod("Commands");
     cod.add_options()
@@ -367,12 +377,24 @@ read_tracing_configuration(const variables_map& vm) {
     return r;
 }
 
-boost::optional<masd::dogen::diffing_configuration>
-read_diffing_configuration(const variables_map& vm) {
+boost::optional<masd::dogen::error_handling_configuration>
+read_error_handling_configuration(const variables_map& vm) {
+    const bool compatibility_mode(
+        vm.count(error_handling_compatibility_mode_arg) != 0);
+    if (!compatibility_mode)
+        return boost::optional<masd::dogen::error_handling_configuration>();
 
-    const bool enabled(vm.count(tracing_enabled_arg) != 0);
-    if (!enabled)
-        return boost::optional<masd::dogen::diffing_configuration>();
+    masd::dogen::error_handling_configuration r;
+    r.compatibility_mode_enabled(compatibility_mode);
+    return r;
+}
+
+boost::optional<masd::dogen::diffing_configuration>
+read_diffing_configuration(const variables_map& /*vm*/) {
+    // FIXME: waiting for diffing implementation
+    // const bool enabled(vm.count(tracing_enabled_arg) != 0);
+    // if (!enabled)
+    //     return boost::optional<masd::dogen::diffing_configuration>();
 
     masd::dogen::diffing_configuration r;
     return r;
@@ -567,6 +589,7 @@ handle_command(const std::string& command_name, const bool has_help,
      */
     r.api().tracing(read_tracing_configuration(vm));
     r.api().diffing(read_diffing_configuration(vm));
+    r.api().error_handling(read_error_handling_configuration(vm));
 
     const auto run_identifier(compute_run_identifier(command_name, target));
     const auto out_dir =
