@@ -178,7 +178,7 @@ ctest_start(${build_group})
 if (NOT DEFINED ENV{BUILD_PROVIDER})
     find_program(CTEST_GIT_COMMAND NAMES git)
     set(CTEST_UPDATE_COMMAND "${CTEST_GIT_COMMAND}")
-    message("Running git update.")
+    set(CTEST_GIT_UPDATE_CUSTOM "${CTEST_GIT_COMMAND}" pull origin master)
     ctest_update(BUILD ${CTEST_SOURCE_DIRECTORY})
 endif()
 
