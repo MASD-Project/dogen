@@ -201,7 +201,11 @@ void profiler::setup_annotations(const archetype_location_repository& alrp,
                  * for example, a profile for knitter may not work for
                  * stitch, because its missing all of the
                  * formatters. This is not a very elegant solution,
-                 * but it will do until we think of something better.
+                 * but it will do until we think of something
+                 * better. Note that this only happens for stitch
+                 * tests at present (because there we do not want a
+                 * dependency on the rest of the code base). FIXME:
+                 * this is a hack that needs to be removed.
                  */
                 BOOST_LOG_SEV(lg, error) << "Error instantiating profile: "
                                          << prfn << ". Message: " << e.what()

@@ -2,7 +2,7 @@
   {
     "name": {
       "simple": "generate_decoration",
-      "qualified": "decoration.generate_decoration"
+      "qualified": "masd.decoration.generate_decoration"
     },
     "archetype_location": {
       "kernel": "formatters"
@@ -14,7 +14,7 @@
   {
     "name": {
       "simple": "copyright_notice",
-      "qualified": "decoration.copyright_notice"
+      "qualified": "masd.decoration.copyright_notice"
     },
     "archetype_location": {
       "kernel": "formatters"
@@ -26,7 +26,7 @@
   {
     "name": {
       "simple": "licence_name",
-      "qualified": "decoration.licence_name"
+      "qualified": "masd.decoration.licence_name"
     },
     "archetype_location": {
       "kernel": "formatters"
@@ -38,7 +38,7 @@
   {
     "name": {
       "simple": "modeline_group_name",
-      "qualified": "decoration.modeline_group_name"
+      "qualified": "masd.decoration.modeline_group_name"
     },
     "archetype_location": {
       "kernel": "formatters"
@@ -50,7 +50,7 @@
   {
     "name": {
       "simple": "add_date_time",
-      "qualified": "decoration.code_generation_marker.add_date_time"
+      "qualified": "masd.decoration.code_generation_marker.add_date_time"
     },
     "archetype_location": {
       "kernel": "formatters"
@@ -62,7 +62,7 @@
   {
     "name": {
       "simple": "add_warning",
-      "qualified": "decoration.code_generation_marker.add_warning"
+      "qualified": "masd.decoration.code_generation_marker.add_warning"
     },
     "archetype_location": {
       "kernel": "formatters"
@@ -74,7 +74,7 @@
   {
     "name": {
       "simple": "message",
-      "qualified": "decoration.code_generation_marker.message"
+      "qualified": "masd.decoration.code_generation_marker.message"
     },
     "archetype_location": {
       "kernel": "formatters"
