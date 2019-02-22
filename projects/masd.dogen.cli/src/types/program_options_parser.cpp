@@ -471,10 +471,11 @@ read_generation_configuration(const variables_map& vm) {
     generation_configuration r;
 
     using boost::filesystem::absolute;
-    if (vm.count(generate_target_arg)) {
-        const auto target_str(vm[generate_target_arg].as<std::string>());
-        r.target(absolute(target_str));
-    }
+    if (vm.count(generate_target_arg) == 0)
+        BOOST_THROW_EXCEPTION(parser_exception(missing_target));
+
+    const auto target_str(vm[generate_target_arg].as<std::string>());
+    r.target(absolute(target_str));
 
     if (!vm.count(generate_output_dir_arg))
         r.output_directory(boost::filesystem::current_path());
