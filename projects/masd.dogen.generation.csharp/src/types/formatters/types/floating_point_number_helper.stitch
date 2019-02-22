@@ -1,13 +1,13 @@
 <#@ masd.annotations.profile=dogen.stitch #>
-<#@ stitch.containing_namespaces=masd::dogen::generation::csharp::formatters::types #>
-<#@ stitch.inclusion_dependency="masd.dogen.extraction/types/csharp/scoped_namespace_formatter.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/assistant.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/types/traits.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formattables/helper_properties.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/types/floating_point_number_helper.hpp" #>
-<#@ stitch.wale.template=csharp_helper_formatter_implementation.wale #>
-<#@ stitch.wale.kvp.helper.family=FloatingPointNumber #>
-<#@ stitch.wale.kvp.class.simple_name=floating_point_number_helper #>
+<#@ masd.stitch.containing_namespaces=masd::dogen::generation::csharp::formatters::types #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.extraction/types/csharp/scoped_namespace_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formattables/helper_properties.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/types/floating_point_number_helper.hpp" #>
+<#@ masd.stitch.wale.template=csharp_helper_formatter_implementation.wale #>
+<#@ masd.stitch.wale.kvp.helper.family=FloatingPointNumber #>
+<#@ masd.stitch.wale.kvp.class.simple_name=floating_point_number_helper #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 

@@ -1,18 +1,18 @@
 <#@ masd.annotations.profile=dogen.stitch #>
-<#@ stitch.containing_namespaces=masd::dogen::generation::csharp::formatters::io #>
-<#@ stitch.inclusion_dependency="masd.dogen.extraction/types/sequence_formatter.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.csharp/types/traits.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.csharp/types/fabric/assistant.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.csharp/types/fabric/meta_name_factory.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/io/traits.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/assistant.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/io/assistant_formatter.hpp" #>
-<#@ stitch.wale.template=csharp_formatter_implementation.wale #>
-<#@ stitch.wale.kvp.class.simple_name=assistant_formatter #>
-<#@ stitch.wale.kvp.archetype.simple_name=assistant #>
-<#@ stitch.wale.kvp.yarn_element=fabric::assistant #>
-<#@ stitch.wale.kvp.meta_element=assistant #>
-<#@ stitch.wale.kvp.meta_name_factory=fabric::meta_name_factory #>
+<#@ masd.stitch.containing_namespaces=masd::dogen::generation::csharp::formatters::io #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.extraction/types/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/fabric/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/fabric/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/io/assistant_formatter.hpp" #>
+<#@ masd.stitch.wale.template=csharp_formatter_implementation.wale #>
+<#@ masd.stitch.wale.kvp.class.simple_name=assistant_formatter #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=assistant #>
+<#@ masd.stitch.wale.kvp.yarn_element=fabric::assistant #>
+<#@ masd.stitch.wale.kvp.meta_element=assistant #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=fabric::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 

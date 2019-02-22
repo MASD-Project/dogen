@@ -2,7 +2,7 @@
   {
     "name": {
       "simple": "stream_variable_name",
-      "qualified": "stitch.stream_variable_name"
+      "qualified": "masd.stitch.stream_variable_name"
     },
     "archetype_location": {
       "kernel": "stitch"
@@ -15,7 +15,7 @@
   {
     "name": {
       "simple": "relative_output_directory",
-      "qualified": "stitch.relative_output_directory"
+      "qualified": "masd.stitch.relative_output_directory"
     },
     "archetype_location": {
       "kernel": "stitch"
@@ -27,7 +27,7 @@
   {
     "name": {
       "simple": "inclusion_dependency",
-      "qualified": "stitch.inclusion_dependency"
+      "qualified": "masd.stitch.inclusion_dependency"
     },
     "archetype_location": {
       "kernel": "stitch"
@@ -39,7 +39,7 @@
   {
     "name": {
       "simple": "containing_namespaces",
-      "qualified": "stitch.containing_namespaces"
+      "qualified": "masd.stitch.containing_namespaces"
     },
     "archetype_location": {
       "kernel": "stitch"
@@ -51,7 +51,7 @@
   {
     "name": {
       "simple": "template",
-      "qualified": "stitch.wale.template"
+      "qualified": "masd.stitch.wale.template"
     },
     "archetype_location": {
       "kernel": "stitch"
@@ -63,7 +63,7 @@
   {
     "name": {
       "simple": "kvp",
-      "qualified": "stitch.wale.kvp"
+      "qualified": "masd.stitch.wale.kvp"
     },
     "archetype_location": {
       "kernel": "stitch"

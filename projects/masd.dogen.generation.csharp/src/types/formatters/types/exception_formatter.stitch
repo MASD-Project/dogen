@@ -1,18 +1,18 @@
 <#@ masd.annotations.profile=dogen.stitch #>
-<#@ stitch.containing_namespaces=masd::dogen::generation::csharp::formatters::types #>
-<#@ stitch.inclusion_dependency="masd.dogen.coding/types/meta_model/exception.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.coding/types/helpers/meta_name_factory.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.extraction/types/sequence_formatter.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.csharp/types/traits.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/types/traits.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/assistant.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/types/exception_formatter.hpp" #>
-<#@ stitch.wale.template=csharp_formatter_implementation.wale #>
-<#@ stitch.wale.kvp.class.simple_name=exception_formatter #>
-<#@ stitch.wale.kvp.archetype.simple_name=exception #>
-<#@ stitch.wale.kvp.yarn_element=coding::meta_model::exception #>
-<#@ stitch.wale.kvp.meta_element=exception #>
-<#@ stitch.wale.kvp.meta_name_factory=coding::helpers::meta_name_factory #>
+<#@ masd.stitch.containing_namespaces=masd::dogen::generation::csharp::formatters::types #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.coding/types/meta_model/exception.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.coding/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.extraction/types/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/types/exception_formatter.hpp" #>
+<#@ masd.stitch.wale.template=csharp_formatter_implementation.wale #>
+<#@ masd.stitch.wale.kvp.class.simple_name=exception_formatter #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=exception #>
+<#@ masd.stitch.wale.kvp.yarn_element=coding::meta_model::exception #>
+<#@ masd.stitch.wale.kvp.meta_element=exception #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=coding::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 

@@ -1,12 +1,12 @@
 <#@ masd.annotations.profile=dogen.stitch #>
-<#@ stitch.containing_namespaces=masd::dogen::generation::cpp::formatters::hash #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/hash/traits.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/assistant.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formattables/helper_properties.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/hash/variant_helper.hpp" #>
-<#@ stitch.wale.template=cpp_helper_formatter_implementation_enabled.wale #>
-<#@ stitch.wale.kvp.helper.family=BoostVariant #>
-<#@ stitch.wale.kvp.class.simple_name=variant_helper #>
+<#@ masd.stitch.containing_namespaces=masd::dogen::generation::cpp::formatters::hash #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/hash/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formattables/helper_properties.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/hash/variant_helper.hpp" #>
+<#@ masd.stitch.wale.template=cpp_helper_formatter_implementation_enabled.wale #>
+<#@ masd.stitch.wale.kvp.helper.family=BoostVariant #>
+<#@ masd.stitch.wale.kvp.class.simple_name=variant_helper #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 

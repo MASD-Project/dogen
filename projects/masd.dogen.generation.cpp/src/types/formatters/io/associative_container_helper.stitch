@@ -1,13 +1,13 @@
 <#@ masd.annotations.profile=dogen.stitch #>
-<#@ stitch.containing_namespaces=masd::dogen::generation::cpp::formatters::io #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/io/associative_container_helper.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/assistant.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/io/traits.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/types/traits.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formattables/helper_properties.hpp" #>
-<#@ stitch.wale.template=cpp_helper_formatter_implementation.wale #>
-<#@ stitch.wale.kvp.helper.family=AssociativeContainer #>
-<#@ stitch.wale.kvp.class.simple_name=associative_container_helper #>
+<#@ masd.stitch.containing_namespaces=masd::dogen::generation::cpp::formatters::io #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/io/associative_container_helper.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formattables/helper_properties.hpp" #>
+<#@ masd.stitch.wale.template=cpp_helper_formatter_implementation.wale #>
+<#@ masd.stitch.wale.kvp.helper.family=AssociativeContainer #>
+<#@ masd.stitch.wale.kvp.class.simple_name=associative_container_helper #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
