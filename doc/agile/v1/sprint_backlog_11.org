@@ -13,17 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-22 Fri 21:17]
+#+CAPTION: Clock summary at [2019-02-23 Sat 09:21]
 | <75>                                                      |          |        |        |       |
 | Headline                                                  | Time     |        |        |     % |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                              | *221:55* |        |        | 100.0 |
+| *Total time*                                              | *222:13* |        |        | 100.0 |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                   | 221:55   |        |        | 100.0 |
-| Active                                                    |          | 221:55 |        | 100.0 |
+| Stories                                                   | 222:13   |        |        | 100.0 |
+| Active                                                    |          | 222:13 |        | 100.0 |
 | Edit release notes for previous sprint                    |          |        |   2:03 |   0.9 |
 | Sprint and product backlog grooming                       |          |        |   5:32 |   2.5 |
-| Work on MASD theory                                       |          |        | 113:38 |  51.2 |
+| Work on MASD theory                                       |          |        | 113:38 |  51.1 |
 | Rename models to fit MASD architecture                    |          |        |   4:56 |   2.2 |
 | Read up on framework and API design                       |          |        |   0:57 |   0.4 |
 | Analyse the state of the mess of refactors                |          |        |   6:27 |   2.9 |
@@ -32,13 +32,14 @@
 | Update C# reference models to latest dogen                |          |        |   0:42 |   0.3 |
 | Convert the utility model into a regular dogen model      |          |        |   7:27 |   3.4 |
 | Improve support for clang-cl builds                       |          |        |   2:02 |   0.9 |
-| Move generation properties into meta-data                 |          |        |   9:26 |   4.3 |
+| Move generation properties into meta-data                 |          |        |   9:26 |   4.2 |
 | Disabling facet globally and enabling locally fails       |          |        |   2:21 |   1.1 |
 | References to types in top-level namespace do not resolve |          |        |   0:51 |   0.4 |
 | Create a colour palette test model                        |          |        |   1:09 |   0.5 |
 | Create a single binary for all of dogen                   |          |        |  37:30 |  16.9 |
-| Setup a nightly build for Dogen                           |          |        |   3:47 |   1.7 |
+| Setup a nightly build for Dogen                           |          |        |   3:53 |   1.7 |
 | Great meta-data rename                                    |          |        |   6:00 |   2.7 |
+| Remove the need for =dia.comment= tag                     |          |        |   0:12 |   0.1 |
 | Throw on profiles that refer to invalid fields            |          |        |   1:06 |   0.5 |
 | Dogen's vcpkg export for OSX was created from master      |          |        |   0:46 |   0.3 |
 | Fix clang-cl warnings                                     |          |        |   5:07 |   2.3 |
@@ -785,6 +786,7 @@ fits in with other binaries such as =dogen.web=, =dogen.http=,
 *** COMPLETED Setup a nightly build for Dogen                         :story:
     CLOSED: [2019-02-22 Fri 14:44]
     :LOGBOOK:
+    CLOCK: [2019-02-23 Sat 09:15]--[2019-02-23 Sat 09:21] =>  0:06
     CLOCK: [2019-02-22 Fri 14:10]--[2019-02-22 Fri 14:44] =>  0:34
     CLOCK: [2019-02-22 Fri 13:45]--[2019-02-22 Fri 14:09] =>  0:24
     CLOCK: [2019-02-22 Fri 12:29]--[2019-02-22 Fri 12:37] =>  0:08
@@ -881,6 +883,35 @@ its not clear if its MASD or dogen.
 : #DOGEN external.dia.comment=true
 
   in fact, should we mention "tagged values" instead of "comment"?
+
+*** CANCELLED Remove the need for =dia.comment= tag                   :story:
+    CLOSED: [2019-02-23 Sat 09:14]
+    :LOGBOOK:
+    CLOCK: [2019-02-23 Sat 09:02]--[2019-02-23 Sat 09:14] =>  0:12
+    :END:
+
+At present we are detecting the presence of =masd.dogen.dia.comment=
+in a UML comment to determine if it is to be processed as a comment
+for the model module. However, we could just as well look for the
+presence of meta-data parameters instead. Similarly, we could say that
+it is an error to have more than one comment with meta-data parameters
+(as hopefully with do at present with dia.comment). This is a
+usability papercut.
+
+While we're there we could also remove the need for =#DOGEN= and state
+that all meta-data keys must start with =masd.=. For user specific
+keys we could namespace them: =masd.user.=.
+
+Actually these assumptions are not entirely true:
+
+- for the use case where we just want to add comments to a namespace,
+  we need the dia.comment marker as there will be no other meta-data
+  on the comment.
+- it is not inconceivable that a comment may have a line starting with
+  =masd.= in one of the masd models. Seems like an arbitrary
+  limitation to forbid this and could result in strange errors.
+
+As a result the conclusion is that we should not implement this story.
 
 *** STARTED Throw on profiles that refer to invalid fields            :story:
     :LOGBOOK:
@@ -1004,20 +1035,6 @@ templates. In reality, these are just tranforms. We need to figure out
 if there should just be a high-level transform in orchestrator that
 encapsulates these or if the templating model itself should follow the
 naming convention.
-
-*** Remove the need for =dia.comment= tag                             :story:
-
-At present we are detecting the presence of =masd.dogen.dia.comment=
-in a UML comment to determine if it is to be processed as a comment
-for the model module. However, we could just as well look for the
-presence of meta-data parameters instead. Similarly, we could say that
-it is an error to have more than one comment with meta-data parameters
-(as hopefully with do at present with dia.comment). This is a
-usability papercut.
-
-While we're there we could also remove the need for =#DOGEN= and state
-that all meta-data keys must start with =masd.=. For user specific
-keys we could namespace them: =masd.user.=.
 
 *** Add support for "directory mode" in conversion                    :story:
 
