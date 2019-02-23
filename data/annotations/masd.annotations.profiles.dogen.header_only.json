@@ -1,7 +1,7 @@
 {
-  "name": "dogen.header_only",
+  "name": "dogen.cpp.header_only",
   "labels": [
-    "masd::header_only"
+    "masd::cpp::header_only"
   ],
   "parents": [
     "dogen.handcrafted"

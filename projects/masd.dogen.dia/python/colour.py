@@ -47,7 +47,7 @@ for layer in dia.active_display().diagram.data.layers:
         #
         elif "masd::handcrafted" in stereotype:
             object.properties["fill_colour"] = "#FFFACD"
-        elif "masd::header_only" in stereotype:
+        elif "masd::cpp::header_only" in stereotype:
             object.properties["fill_colour"] = "#FFFACD"
         elif "masd::interface" in stereotype:
             object.properties["fill_colour"] = "#EEFACD"

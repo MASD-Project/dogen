@@ -187,7 +187,7 @@
         <dia:string>#invalid_enum_value#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -298,7 +298,7 @@
         <dia:string>#utility_exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -929,7 +929,7 @@
         <dia:string>#combine#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1040,7 +1040,7 @@
         <dia:string>#list_hash#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1189,7 +1189,7 @@
         <dia:string>#array_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1300,7 +1300,7 @@
         <dia:string>#forward_list_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1411,7 +1411,7 @@
         <dia:string>#jsonify_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1522,7 +1522,7 @@
         <dia:string>#list_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1633,7 +1633,7 @@
         <dia:string>#map_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1744,7 +1744,7 @@
         <dia:string>#memory_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1855,7 +1855,7 @@
         <dia:string>#optional_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1966,7 +1966,7 @@
         <dia:string>#pair_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2077,7 +2077,7 @@
         <dia:string>#set_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2188,7 +2188,7 @@
         <dia:string>#shared_ptr_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2299,7 +2299,7 @@
         <dia:string>#typeindex_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2410,7 +2410,7 @@
         <dia:string>#unordered_map_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2521,7 +2521,7 @@
         <dia:string>#unordered_set_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2632,7 +2632,7 @@
         <dia:string>#vector_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3502,7 +3502,7 @@
         <dia:string>#xml_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3613,7 +3613,7 @@
         <dia:string>#path#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4133,7 +4133,7 @@
         <dia:string>#canned_tests#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4244,7 +4244,7 @@
         <dia:string>#construction_tester#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4355,7 +4355,7 @@
         <dia:string>#equality_tester#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4466,7 +4466,7 @@
         <dia:string>#file_asserter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4577,7 +4577,7 @@
         <dia:string>#hash_tester#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4910,7 +4910,7 @@
         <dia:string>#move_assignment_copy_tester#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5021,7 +5021,7 @@
         <dia:string>#xml_serialization_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5132,7 +5132,7 @@
         <dia:string>#exception_checkers#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5354,7 +5354,7 @@
         <dia:string>#io_tester#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5465,7 +5465,7 @@
         <dia:string>#less_than_tester#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5576,7 +5576,7 @@
         <dia:string>#macros#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5687,7 +5687,7 @@
         <dia:string>#serialization_tester#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5947,7 +5947,7 @@
         <dia:string>#generate_container#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6058,7 +6058,7 @@
         <dia:string>#generator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6613,7 +6613,7 @@
         <dia:string>#sequence#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6946,7 +6946,7 @@
         <dia:string>#test_data_exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7057,7 +7057,7 @@
         <dia:string>#test_data#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7428,7 +7428,7 @@
         <dia:string>#exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7539,7 +7539,7 @@
         <dia:string>#node_types#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

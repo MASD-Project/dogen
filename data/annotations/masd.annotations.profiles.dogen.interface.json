@@ -4,7 +4,7 @@
     "masd::interface"
   ],
   "parents": [
-    "dogen.header_only"
+    "dogen.cpp.header_only"
   ],
   "scope": "root_module",
   "templates": [
