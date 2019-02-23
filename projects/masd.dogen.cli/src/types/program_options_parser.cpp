@@ -106,9 +106,10 @@ using masd::dogen::utility::log::logging_configuration;
 using masd::dogen::utility::log::severity_level;
 
 /**
- * @brief Creates the the top-level option descriptions.
+ * @brief Creates the the top-level option descriptions that are
+ * visible to the end users.
  */
-options_description make_top_level_options_description() {
+options_description make_top_level_visible_options_description() {
     options_description god("General");
     god.add_options()
         ("help,h", "Display usage and exit.")
@@ -146,13 +147,20 @@ options_description make_top_level_options_description() {
             "Try to process models even if there are errors.");
     r.add(ehod);
 
-    options_description cod("Commands");
-    cod.add_options()
+    return r;
+}
+
+/**
+ * @brief Creates the the top-level option descriptions that are
+ * hidden to end users.
+ */
+options_description make_top_level_hidden_options_description() {
+    options_description r("Commands");
+    r.add_options()
         ("command", value<std::string>(), "Command to execute. "
             "Available commands: generate, convert, weave.")
         ("args", value<std::vector<std::string> >(),
             "Arguments for command");
-    r.add(cod);
     return r;
 }
 
@@ -236,9 +244,7 @@ void validate_command_name(const std::string& command_name,
 void print_help_header(std::ostream& s) {
     s << "Dogen is a Model Driven Engineering tool that processes models"
       << " encoded in supported codecs." << std::endl
-      << "Dogen is created by the MASD project. "
-      << "For details, type --version."
-      << std::endl;
+      << "Dogen is created by the MASD project. " << std::endl;
 }
 
 /**
@@ -251,10 +257,9 @@ void print_help(const boost::program_options::options_description& od,
     std::ostream& s) {
     print_help_header(s);
     s << "Dogen uses a command-based interface: <command> <options>. "
-      << std::endl << "See below for a list of valid commands. "
-      << "For command specific options, type <command> --help." << std::endl
+      << std::endl << "See below for a list of valid commands. " << std::endl
       << std::endl << "Global options: " << std::endl << od << std::endl
-      <<  "Command information: "<< std::endl << std::endl;
+      <<  "Commands: "<< std::endl << std::endl;
 
     auto lambda([&](const std::string& name, const std::string& desc) {
                     const unsigned int command_width(15);
@@ -265,6 +270,9 @@ void print_help(const boost::program_options::options_description& od,
     lambda(generate_command_name, generate_command_desc);
     lambda(convert_command_name, convert_command_desc);
     lambda(weave_command_name, weave_command_desc);
+
+    s << std::endl << "For command specific options, type <command> --help."
+      << std::endl;
 }
 
 /**
@@ -614,11 +622,21 @@ boost::optional<configuration> parse(const std::vector<std::string>& arguments,
     std::ostream& info, std::ostream& err) {
     /*
      * Create the top-level command line options, parse them and
-     * retrieve the results of the parsing.
+     * retrieve the results of the parsing. Note that we split then
+     * into visible and hidden to avoid showing the hidden options to
+     * the user in the help description.
      */
-    const options_description tlod(make_top_level_options_description());
+    const auto visible(make_top_level_visible_options_description());
+    const auto hidden(make_top_level_hidden_options_description());
+    const auto all(
+        [&](){
+            options_description r;
+            r.add(visible).add(hidden);
+            return r;
+        }());
+
     const auto po = boost::program_options::command_line_parser(arguments).
-        options(tlod).
+        options(all).
         positional(make_positional_options()).
         allow_unregistered().
         run();
@@ -630,10 +648,11 @@ boost::optional<configuration> parse(const std::vector<std::string>& arguments,
     const bool has_help(vm.count(help_arg));
 
     /*
-     * First, handle the simpler case where no command is supplied.
+     * First, handle the simpler case where no command is
+     * supplied. Note that we only supply the visible options here.
      */
     if (!has_command)
-        return handle_no_command(has_version, has_help, tlod, info, err);
+        return handle_no_command(has_version, has_help, visible, info, err);
 
     /*
      * If the user supplied a command, we need to retrieve it and

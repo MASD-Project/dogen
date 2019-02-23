@@ -13,30 +13,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-23 Sat 09:21]
+#+CAPTION: Clock summary at [2019-02-23 Sat 10:38]
 | <75>                                                      |          |        |        |       |
 | Headline                                                  | Time     |        |        |     % |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                              | *222:13* |        |        | 100.0 |
+| *Total time*                                              | *223:29* |        |        | 100.0 |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                   | 222:13   |        |        | 100.0 |
-| Active                                                    |          | 222:13 |        | 100.0 |
+| Stories                                                   | 223:29   |        |        | 100.0 |
+| Active                                                    |          | 223:29 |        | 100.0 |
 | Edit release notes for previous sprint                    |          |        |   2:03 |   0.9 |
 | Sprint and product backlog grooming                       |          |        |   5:32 |   2.5 |
-| Work on MASD theory                                       |          |        | 113:38 |  51.1 |
+| Work on MASD theory                                       |          |        | 113:38 |  50.8 |
 | Rename models to fit MASD architecture                    |          |        |   4:56 |   2.2 |
 | Read up on framework and API design                       |          |        |   0:57 |   0.4 |
 | Analyse the state of the mess of refactors                |          |        |   6:27 |   2.9 |
 | Create the =orchestration= model                          |          |        |   4:15 |   1.9 |
 | Update vcpkg across all operative systems                 |          |        |   4:35 |   2.1 |
 | Update C# reference models to latest dogen                |          |        |   0:42 |   0.3 |
-| Convert the utility model into a regular dogen model      |          |        |   7:27 |   3.4 |
+| Convert the utility model into a regular dogen model      |          |        |   7:27 |   3.3 |
 | Improve support for clang-cl builds                       |          |        |   2:02 |   0.9 |
 | Move generation properties into meta-data                 |          |        |   9:26 |   4.2 |
 | Disabling facet globally and enabling locally fails       |          |        |   2:21 |   1.1 |
 | References to types in top-level namespace do not resolve |          |        |   0:51 |   0.4 |
 | Create a colour palette test model                        |          |        |   1:09 |   0.5 |
-| Create a single binary for all of dogen                   |          |        |  37:30 |  16.9 |
+| Create a single binary for all of dogen                   |          |        |  38:46 |  17.3 |
 | Setup a nightly build for Dogen                           |          |        |   3:53 |   1.7 |
 | Great meta-data rename                                    |          |        |   6:00 |   2.7 |
 | Remove the need for =dia.comment= tag                     |          |        |   0:12 |   0.1 |
@@ -682,6 +682,7 @@ superset of handcrafted.
 *** COMPLETED Create a single binary for all of dogen                 :story:
     CLOSED: [2019-02-21 Thu 14:54]
     :LOGBOOK:
+    CLOCK: [2019-02-23 Sat 09:22]--[2019-02-23 Sat 10:38] =>  1:16
     CLOCK: [2019-02-22 Fri 16:20]--[2019-02-22 Fri 17:42] =>  1:22
     CLOCK: [2019-02-22 Fri 15:42]--[2019-02-22 Fri 16:19] =>  0:37
     CLOCK: [2019-02-22 Fri 14:45]--[2019-02-22 Fri 15:41] =>  0:56
