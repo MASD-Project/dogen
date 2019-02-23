@@ -27,7 +27,9 @@
 
 #include <stack>
 #include <algorithm>
+#include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
+#include "masd.dogen/types/tracing_configuration.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository.hpp"
@@ -36,23 +38,21 @@
 
 namespace masd::dogen::tracing {
 
+/**
+ * @brief Handles all of the tracing-related work.
+ */
 class tracer final {
 public:
     tracer(const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
-        const std::string log_level,
-        const bool probe_all,
-        const bool probe_data,
-        const bool probe_stats,
-        const bool disable_guids_in_stats,
-        const bool use_org_mode,
-        const bool use_short_names,
-        const boost::filesystem::path probe_directory);
+        const boost::filesystem::path& tracing_directory,
+        const boost::optional<tracing_configuration>& cfg);
 
 private:
     void validate() const;
     bool tracing_enabled() const;
-    void handle_probe_directory() const;
+    bool detailed_tracing_enabled() const;
+    void handle_tracing_directory() const;
     void handle_current_directory() const;
     void ensure_transform_position_not_empty() const;
 
@@ -78,7 +78,7 @@ public:
         const Ioable& input) const {
         start_chain(transform_id, model_id);
 
-        if (!probe_data_)
+        if (!detailed_tracing_enabled())
             return;
 
         ensure_transform_position_not_empty();
@@ -98,7 +98,7 @@ public:
         const Ioable& input) const {
         start_transform(transform_id, model_id);
 
-        if (probe_data_) {
+        if (detailed_tracing_enabled()) {
             ensure_transform_position_not_empty();
             ++transform_position_.top();
             const auto p(full_path_for_writing(transform_id, "input"));
@@ -110,7 +110,7 @@ public:
 
     template<typename Ioable>
     void end_chain(const Ioable& output) const {
-        if (probe_data_) {
+        if (detailed_tracing_enabled()) {
             ensure_transform_position_not_empty();
             ++transform_position_.top();
             const auto id(builder_.current()->transform_id());
@@ -124,7 +124,7 @@ public:
 
     template<typename Ioable>
     void end_transform(const Ioable& output) const {
-        if (probe_data_) {
+        if (detailed_tracing_enabled()) {
             ensure_transform_position_not_empty();
             ++transform_position_.top();
             const auto id(builder_.current()->transform_id());
@@ -137,15 +137,11 @@ public:
     void end_tracing() const;
 
 private:
+    const boost::optional<tracing_configuration> configuration_;
+    const boost::filesystem::path tracing_directory_;
     mutable metrics_builder builder_;
     mutable std::stack<unsigned int> transform_position_;
     mutable boost::filesystem::path current_directory_;
-    const bool probe_data_;
-    const bool probe_stats_;
-    const bool disable_guids_in_stats_;
-    const bool use_org_mode_;
-    const bool use_short_names_;
-    const boost::filesystem::path probe_directory_;
 };
 
 }

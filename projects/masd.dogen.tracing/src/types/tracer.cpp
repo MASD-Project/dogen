@@ -22,6 +22,8 @@
 #include <iomanip>
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/convenience.hpp>
+#include "masd.dogen/io/tracing_configuration_io.hpp"
+#include "masd.dogen.utility/types/io/optional_io.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.annotations/io/type_repository_io.hpp"
@@ -42,8 +44,9 @@ const unsigned int leading_zeros(3);
 const std::string delimiter("-");
 const std::string extension(".json");
 
-const std::string chain_directory_exists("Directory for chain already exists: ");
-const std::string directory_missing("Probe data directory must be supplied.");
+const std::string chain_directory_exists(
+    "Directory for chain already exists: ");
+const std::string directory_missing("Tracing data directory must be supplied.");
 const std::string failed_delete("Failed to delete tracer data directory.");
 const std::string failed_create("Failed to create tracer data directory.");
 const std::string unexpected_empty("The stack must not be empty.");
@@ -54,31 +57,23 @@ namespace masd::dogen::tracing {
 
 tracer::tracer(const annotations::archetype_location_repository& alrp,
     const annotations::type_repository& atrp,
-    const std::string log_level,
-    const bool probe_all,
-    const bool probe_data,
-    const bool probe_stats,
-    const bool disable_guids_in_stats,
-    const bool use_org_mode,
-    const bool use_short_names,
-    const boost::filesystem::path probe_directory) :
-    builder_(log_level, probe_all),
-    current_directory_(probe_directory),
-    probe_data_(probe_data),
-    probe_stats_(probe_all || probe_stats),
-    disable_guids_in_stats_(disable_guids_in_stats),
-    use_org_mode_(use_org_mode),
-    use_short_names_(use_short_names),
-    probe_directory_(probe_directory) {
+    const boost::filesystem::path& tracing_directory,
+    const boost::optional<tracing_configuration>& cfg) :
+    configuration_(cfg),
+    tracing_directory_(tracing_directory),
+    builder_(configuration_ ?
+        configuration_->logging_impact() : empty,
+        detailed_tracing_enabled()),
+    current_directory_(tracing_directory) {
 
     validate();
 
     if (!tracing_enabled())
         return;
 
-    handle_probe_directory();
+    handle_tracing_directory();
 
-    if (!probe_data_)
+    if (!detailed_tracing_enabled())
         return;
 
     transform_position_.push(0);
@@ -90,31 +85,36 @@ void tracer::validate() const {
      * If data tracing was requested, we must have a directory in
      * which to place the data.
      */
-    if (probe_data_ && probe_directory_.empty()) {
+    if (tracing_enabled() && tracing_directory_.empty()) {
         BOOST_LOG_SEV(lg, error) << directory_missing;
         BOOST_THROW_EXCEPTION(tracing_error(directory_missing));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Tracer initialised. Settings: "
-                             << " probe data: " << probe_data_
-                             << " probe stats: " << probe_stats_
-                             << " probe data directory: "
-                             << probe_directory_.generic_string();
+    BOOST_LOG_SEV(lg, debug) << "Tracer initialised. Configuration: "
+                             << configuration_;
+    BOOST_LOG_SEV(lg, debug) << "Tracing directory: '"
+                             << tracing_directory_.generic_string() << "'";
 }
 
 bool tracer::tracing_enabled() const {
-    return probe_data_ || probe_stats_;
+    // double-bang by design.
+    return !!configuration_;
 }
 
-void tracer::handle_probe_directory() const {
-    BOOST_LOG_SEV(lg, debug) << "Handling probe directory.";
+bool tracer::detailed_tracing_enabled() const {
+    return tracing_enabled() &&
+        configuration_->level() == tracing_level::detail;
+}
 
-    if (boost::filesystem::exists(probe_directory_)) {
-        BOOST_LOG_SEV(lg, debug) << "Tracer data already exists: "
-                                 << probe_directory_.generic_string();
+void tracer::handle_tracing_directory() const {
+    BOOST_LOG_SEV(lg, debug) << "Handling tracing directory.";
+
+    if (boost::filesystem::exists(tracing_directory_)) {
+        BOOST_LOG_SEV(lg, debug) << "Tracing directory already exists: "
+                                 << tracing_directory_.generic_string();
 
         boost::system::error_code ec;
-        boost::filesystem::remove_all(probe_directory_, ec);
+        boost::filesystem::remove_all(tracing_directory_, ec);
         if (ec) {
             BOOST_LOG_SEV(lg, error) << failed_delete;
             BOOST_THROW_EXCEPTION(tracing_error(failed_delete));
@@ -123,13 +123,13 @@ void tracer::handle_probe_directory() const {
     }
 
     boost::system::error_code ec;
-    boost::filesystem::create_directories(probe_directory_, ec);
+    boost::filesystem::create_directories(tracing_directory_, ec);
     if (ec) {
         BOOST_LOG_SEV(lg, error) << failed_create;
         BOOST_THROW_EXCEPTION(tracing_error(failed_create));
     }
     BOOST_LOG_SEV(lg, debug) << "Created tracer data directory: "
-                             << probe_directory_.generic_string();
+                             << tracing_directory_.generic_string();
 }
 
 void tracer::handle_current_directory() const {
@@ -142,7 +142,7 @@ void tracer::handle_current_directory() const {
     s << std::setfill(zero) << std::setw(leading_zeros)
       << transform_position_.top();
 
-    if (!use_short_names_)
+    if (configuration_ && !configuration_->use_short_names())
         s << delimiter << id;
 
     current_directory_ /= s.str();
@@ -176,7 +176,7 @@ tracer::full_path_for_writing(const std::string& filename) const {
     s << std::setfill(zero) << std::setw(leading_zeros)
       << transform_position_.top();
 
-    if (!use_short_names_)
+    if (configuration_ && !configuration_->use_short_names())
         s << delimiter << filename;
 
     s << extension;
@@ -192,7 +192,7 @@ boost::filesystem::path tracer::full_path_for_writing(
     s << std::setfill(zero) << std::setw(leading_zeros)
       << transform_position_.top();
 
-    if (!use_short_names_) {
+    if (configuration_ && !configuration_->use_short_names()) {
         s << delimiter << transform_id << delimiter
           << builder_.current()->guid();
     }
@@ -244,7 +244,7 @@ void tracer::start_chain(const std::string& transform_id,
                              << " (" << builder_.current()->guid() << ")";
     builder_.start(transform_id, model_id);
 
-    if (!probe_data_)
+    if (!detailed_tracing_enabled())
         return;
 
     ++transform_position_.top();
@@ -270,7 +270,7 @@ void tracer::end_chain() const {
                              << " (" << builder_.current()->guid() << ")";
     builder_.end();
 
-    if (!probe_data_)
+    if (!detailed_tracing_enabled())
         return;
 
     ensure_transform_position_not_empty();
@@ -292,15 +292,17 @@ void tracer::end_transform() const {
 void tracer::end_tracing() const {
     BOOST_LOG_SEV(lg, debug) << "Finished tracing.";
 
-    if (!probe_stats_)
+    if (!tracing_enabled())
         return;
 
     const auto tm(builder_.build());
-    const bool uom(use_org_mode_);
-    const bool dgis(disable_guids_in_stats_);
+    const bool uom(configuration_->format() == tracing_format::org_mode);
+    const bool dgis(configuration_->guids_enabled());
     const auto s(metrics_printer::print(dgis, uom, tm));
+    BOOST_LOG_SEV(lg, debug) << "Writing to tracing directory: '"
+                             << tracing_directory_.generic_string() << "'";
     const auto fn(uom ? "transform_stats.org" : "transform_stats.txt");
-    utility::filesystem::write(probe_directory_ / fn, s);
+    utility::filesystem::write(tracing_directory_ / fn, s);
 }
 
 }

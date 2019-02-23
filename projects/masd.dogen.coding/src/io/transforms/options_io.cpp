@@ -32,6 +32,21 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::tracing_configuration>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace masd::dogen::coding::transforms {
 
 std::ostream& operator<<(std::ostream& s, const options& v) {
@@ -48,12 +63,7 @@ std::ostream& operator<<(std::ostream& s, const options& v) {
       << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
       << "\"output_directory_path\": " << "\"" << v.output_directory_path().generic_string() << "\"" << ", "
       << "\"compatibility_mode\": " << v.compatibility_mode() << ", "
-      << "\"probe_stats\": " << v.probe_stats() << ", "
-      << "\"probe_stats_disable_guids\": " << v.probe_stats_disable_guids() << ", "
-      << "\"probe_stats_org_mode\": " << v.probe_stats_org_mode() << ", "
-      << "\"probe_all\": " << v.probe_all() << ", "
       << "\"probe_directory\": " << "\"" << v.probe_directory().generic_string() << "\"" << ", "
-      << "\"probe_use_short_names\": " << v.probe_use_short_names() << ", "
       << "\"tracing\": " << v.tracing()
       << " }";
     return(s);

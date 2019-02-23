@@ -124,13 +124,7 @@ context context_factory::make(const options& o, const bool enable_validation) {
     extraction::repository_factory frpf;
     const auto frp(frpf.make(data_dirs));
 
-    tracing::tracer tracer(alrp, atrp,
-        o.log_level(), o.probe_all(), o.probe_all(),
-        o.probe_all() || o.probe_stats(),
-        o.probe_stats_disable_guids(),
-        o.probe_stats_org_mode(),
-        o.probe_use_short_names(),
-        o.probe_directory());
+    tracing::tracer tracer(alrp, atrp, o.probe_directory(), o.tracing());
 
     using helpers::filesystem_writer;
     auto writer(boost::make_shared<filesystem_writer>());

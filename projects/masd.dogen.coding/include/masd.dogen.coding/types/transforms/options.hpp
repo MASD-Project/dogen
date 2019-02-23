@@ -27,6 +27,7 @@
 
 #include <string>
 #include <algorithm>
+#include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen/types/tracing_configuration.hpp"
 
@@ -50,13 +51,8 @@ public:
         const boost::filesystem::path& target,
         const boost::filesystem::path& output_directory_path,
         const bool compatibility_mode,
-        const bool probe_stats,
-        const bool probe_stats_disable_guids,
-        const bool probe_stats_org_mode,
-        const bool probe_all,
         const boost::filesystem::path& probe_directory,
-        const bool probe_use_short_names,
-        const masd::dogen::tracing_configuration& tracing);
+        const boost::optional<masd::dogen::tracing_configuration>& tracing);
 
 public:
     /**
@@ -111,38 +107,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Enable tracing for statistics around transforms.
-     */
-    /**@{*/
-    bool probe_stats() const;
-    void probe_stats(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Disable guids in probe stats, to make comparisons easier.
-     */
-    /**@{*/
-    bool probe_stats_disable_guids() const;
-    void probe_stats_disable_guids(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Output the stats as an org-mode document.
-     */
-    /**@{*/
-    bool probe_stats_org_mode() const;
-    void probe_stats_org_mode(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Enable all tracing.
-     */
-    /**@{*/
-    bool probe_all() const;
-    void probe_all(const bool v);
-    /**@}*/
-
-    /**
      * @brief Full path to the directory in which to place probe information.
      */
     /**@{*/
@@ -152,19 +116,10 @@ public:
     void probe_directory(const boost::filesystem::path&& v);
     /**@}*/
 
-    /**
-     * @brief Use short directory and file names. Useful mainly on windows due to path
-     * size limitations.
-     */
-    /**@{*/
-    bool probe_use_short_names() const;
-    void probe_use_short_names(const bool v);
-    /**@}*/
-
-    const masd::dogen::tracing_configuration& tracing() const;
-    masd::dogen::tracing_configuration& tracing();
-    void tracing(const masd::dogen::tracing_configuration& v);
-    void tracing(const masd::dogen::tracing_configuration&& v);
+    const boost::optional<masd::dogen::tracing_configuration>& tracing() const;
+    boost::optional<masd::dogen::tracing_configuration>& tracing();
+    void tracing(const boost::optional<masd::dogen::tracing_configuration>& v);
+    void tracing(const boost::optional<masd::dogen::tracing_configuration>&& v);
 
 public:
     bool operator==(const options& rhs) const;
@@ -182,13 +137,8 @@ private:
     boost::filesystem::path target_;
     boost::filesystem::path output_directory_path_;
     bool compatibility_mode_;
-    bool probe_stats_;
-    bool probe_stats_disable_guids_;
-    bool probe_stats_org_mode_;
-    bool probe_all_;
     boost::filesystem::path probe_directory_;
-    bool probe_use_short_names_;
-    masd::dogen::tracing_configuration tracing_;
+    boost::optional<masd::dogen::tracing_configuration> tracing_;
 };
 
 }

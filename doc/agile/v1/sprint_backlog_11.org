@@ -13,27 +13,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-23 Sat 10:38]
+#+CAPTION: Clock summary at [2019-02-23 Sat 16:12]
 | <75>                                                      |          |        |        |       |
 | Headline                                                  | Time     |        |        |     % |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                              | *223:29* |        |        | 100.0 |
+| *Total time*                                              | *224:42* |        |        | 100.0 |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                   | 223:29   |        |        | 100.0 |
-| Active                                                    |          | 223:29 |        | 100.0 |
+| Stories                                                   | 224:42   |        |        | 100.0 |
+| Active                                                    |          | 224:42 |        | 100.0 |
 | Edit release notes for previous sprint                    |          |        |   2:03 |   0.9 |
 | Sprint and product backlog grooming                       |          |        |   5:32 |   2.5 |
-| Work on MASD theory                                       |          |        | 113:38 |  50.8 |
+| Work on MASD theory                                       |          |        | 113:38 |  50.6 |
 | Rename models to fit MASD architecture                    |          |        |   4:56 |   2.2 |
 | Read up on framework and API design                       |          |        |   0:57 |   0.4 |
 | Analyse the state of the mess of refactors                |          |        |   6:27 |   2.9 |
 | Create the =orchestration= model                          |          |        |   4:15 |   1.9 |
-| Update vcpkg across all operative systems                 |          |        |   4:35 |   2.1 |
+| Update vcpkg across all operative systems                 |          |        |   4:35 |   2.0 |
 | Update C# reference models to latest dogen                |          |        |   0:42 |   0.3 |
 | Convert the utility model into a regular dogen model      |          |        |   7:27 |   3.3 |
 | Improve support for clang-cl builds                       |          |        |   2:02 |   0.9 |
 | Move generation properties into meta-data                 |          |        |   9:26 |   4.2 |
-| Disabling facet globally and enabling locally fails       |          |        |   2:21 |   1.1 |
+| Disabling facet globally and enabling locally fails       |          |        |   2:21 |   1.0 |
 | References to types in top-level namespace do not resolve |          |        |   0:51 |   0.4 |
 | Create a colour palette test model                        |          |        |   1:09 |   0.5 |
 | Create a single binary for all of dogen                   |          |        |  38:46 |  17.3 |
@@ -43,7 +43,7 @@
 | Throw on profiles that refer to invalid fields            |          |        |   1:06 |   0.5 |
 | Dogen's vcpkg export for OSX was created from master      |          |        |   0:46 |   0.3 |
 | Fix clang-cl warnings                                     |          |        |   5:07 |   2.3 |
-| Use tracing options in existing code                      |          |        |   0:57 |   0.4 |
+| Use tracing options in existing code                      |          |        |   2:10 |   1.0 |
 | Model references are not transitive                       |          |        |   0:21 |   0.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -982,6 +982,8 @@ Notes:
 
 *** STARTED Use tracing options in existing code                      :story:
     :LOGBOOK:
+    CLOCK: [2019-02-23 Sat 15:39]--[2019-02-23 Sat 16:12] =>  0:33
+    CLOCK: [2019-02-23 Sat 10:38]--[2019-02-23 Sat 11:18] =>  0:40
     CLOCK: [2019-02-19 Tue 11:05]--[2019-02-19 Tue 11:18] =>  0:13
     CLOCK: [2019-02-18 Mon 18:50]--[2019-02-18 Mon 18:52] =>  0:02
     CLOCK: [2019-02-18 Mon 14:52]--[2019-02-18 Mon 15:04] =>  0:12

@@ -44,19 +44,11 @@ options make_options(const masd::dogen::configuration& cfg,
         r.compatibility_mode(eh.compatibility_mode_enabled());
     }
 
+    r.tracing(cfg.tracing());
     if (cfg.tracing()) {
         const auto& t(*cfg.tracing());
         r.log_level(t.logging_impact());
-
-        using masd::dogen::tracing_level;
-        r.probe_all(t.level() == tracing_level::detail);
-        r.probe_stats(true);
-        r.probe_stats_disable_guids(!t.guids_enabled());
-
-        using masd::dogen::tracing_format;
-        r.probe_stats_org_mode(t.format() == tracing_format::org_mode);
         r.probe_directory(tracing_output_directory);
-        r.probe_use_short_names(t.use_short_names());
     }
 
     return r;

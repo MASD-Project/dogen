@@ -23,12 +23,7 @@
 namespace masd::dogen::coding::transforms {
 
 options::options()
-    : compatibility_mode_(static_cast<bool>(0)),
-      probe_stats_(static_cast<bool>(0)),
-      probe_stats_disable_guids_(static_cast<bool>(0)),
-      probe_stats_org_mode_(static_cast<bool>(0)),
-      probe_all_(static_cast<bool>(0)),
-      probe_use_short_names_(static_cast<bool>(0)) { }
+    : compatibility_mode_(static_cast<bool>(0)) { }
 
 options::options(options&& rhs)
     : log_file_(std::move(rhs.log_file_)),
@@ -36,12 +31,7 @@ options::options(options&& rhs)
       target_(std::move(rhs.target_)),
       output_directory_path_(std::move(rhs.output_directory_path_)),
       compatibility_mode_(std::move(rhs.compatibility_mode_)),
-      probe_stats_(std::move(rhs.probe_stats_)),
-      probe_stats_disable_guids_(std::move(rhs.probe_stats_disable_guids_)),
-      probe_stats_org_mode_(std::move(rhs.probe_stats_org_mode_)),
-      probe_all_(std::move(rhs.probe_all_)),
       probe_directory_(std::move(rhs.probe_directory_)),
-      probe_use_short_names_(std::move(rhs.probe_use_short_names_)),
       tracing_(std::move(rhs.tracing_)) { }
 
 options::options(
@@ -50,24 +40,14 @@ options::options(
     const boost::filesystem::path& target,
     const boost::filesystem::path& output_directory_path,
     const bool compatibility_mode,
-    const bool probe_stats,
-    const bool probe_stats_disable_guids,
-    const bool probe_stats_org_mode,
-    const bool probe_all,
     const boost::filesystem::path& probe_directory,
-    const bool probe_use_short_names,
-    const masd::dogen::tracing_configuration& tracing)
+    const boost::optional<masd::dogen::tracing_configuration>& tracing)
     : log_file_(log_file),
       log_level_(log_level),
       target_(target),
       output_directory_path_(output_directory_path),
       compatibility_mode_(compatibility_mode),
-      probe_stats_(probe_stats),
-      probe_stats_disable_guids_(probe_stats_disable_guids),
-      probe_stats_org_mode_(probe_stats_org_mode),
-      probe_all_(probe_all),
       probe_directory_(probe_directory),
-      probe_use_short_names_(probe_use_short_names),
       tracing_(tracing) { }
 
 void options::swap(options& other) noexcept {
@@ -77,12 +57,7 @@ void options::swap(options& other) noexcept {
     swap(target_, other.target_);
     swap(output_directory_path_, other.output_directory_path_);
     swap(compatibility_mode_, other.compatibility_mode_);
-    swap(probe_stats_, other.probe_stats_);
-    swap(probe_stats_disable_guids_, other.probe_stats_disable_guids_);
-    swap(probe_stats_org_mode_, other.probe_stats_org_mode_);
-    swap(probe_all_, other.probe_all_);
     swap(probe_directory_, other.probe_directory_);
-    swap(probe_use_short_names_, other.probe_use_short_names_);
     swap(tracing_, other.tracing_);
 }
 
@@ -92,12 +67,7 @@ bool options::operator==(const options& rhs) const {
         target_ == rhs.target_ &&
         output_directory_path_ == rhs.output_directory_path_ &&
         compatibility_mode_ == rhs.compatibility_mode_ &&
-        probe_stats_ == rhs.probe_stats_ &&
-        probe_stats_disable_guids_ == rhs.probe_stats_disable_guids_ &&
-        probe_stats_org_mode_ == rhs.probe_stats_org_mode_ &&
-        probe_all_ == rhs.probe_all_ &&
         probe_directory_ == rhs.probe_directory_ &&
-        probe_use_short_names_ == rhs.probe_use_short_names_ &&
         tracing_ == rhs.tracing_;
 }
 
@@ -179,38 +149,6 @@ void options::compatibility_mode(const bool v) {
     compatibility_mode_ = v;
 }
 
-bool options::probe_stats() const {
-    return probe_stats_;
-}
-
-void options::probe_stats(const bool v) {
-    probe_stats_ = v;
-}
-
-bool options::probe_stats_disable_guids() const {
-    return probe_stats_disable_guids_;
-}
-
-void options::probe_stats_disable_guids(const bool v) {
-    probe_stats_disable_guids_ = v;
-}
-
-bool options::probe_stats_org_mode() const {
-    return probe_stats_org_mode_;
-}
-
-void options::probe_stats_org_mode(const bool v) {
-    probe_stats_org_mode_ = v;
-}
-
-bool options::probe_all() const {
-    return probe_all_;
-}
-
-void options::probe_all(const bool v) {
-    probe_all_ = v;
-}
-
 const boost::filesystem::path& options::probe_directory() const {
     return probe_directory_;
 }
@@ -227,27 +165,19 @@ void options::probe_directory(const boost::filesystem::path&& v) {
     probe_directory_ = std::move(v);
 }
 
-bool options::probe_use_short_names() const {
-    return probe_use_short_names_;
-}
-
-void options::probe_use_short_names(const bool v) {
-    probe_use_short_names_ = v;
-}
-
-const masd::dogen::tracing_configuration& options::tracing() const {
+const boost::optional<masd::dogen::tracing_configuration>& options::tracing() const {
     return tracing_;
 }
 
-masd::dogen::tracing_configuration& options::tracing() {
+boost::optional<masd::dogen::tracing_configuration>& options::tracing() {
     return tracing_;
 }
 
-void options::tracing(const masd::dogen::tracing_configuration& v) {
+void options::tracing(const boost::optional<masd::dogen::tracing_configuration>& v) {
     tracing_ = v;
 }
 
-void options::tracing(const masd::dogen::tracing_configuration&& v) {
+void options::tracing(const boost::optional<masd::dogen::tracing_configuration>&& v) {
     tracing_ = std::move(v);
 }
 
