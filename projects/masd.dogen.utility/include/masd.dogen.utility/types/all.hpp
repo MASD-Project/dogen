@@ -44,7 +44,6 @@
 #include "masd.dogen.utility/types/hash/list_hash.hpp"
 #include "masd.dogen.utility/types/io/optional_io.hpp"
 #include "masd.dogen.utility/types/test/io_tester.hpp"
-#include "masd.dogen.utility/types/test_data/seam.hpp"
 #include "masd.dogen.utility/types/xml/node_types.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.utility/types/filesystem/path.hpp"
