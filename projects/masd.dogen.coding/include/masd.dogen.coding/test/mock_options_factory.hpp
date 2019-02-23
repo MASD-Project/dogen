@@ -47,10 +47,9 @@ public:
      * @brief Returns the knitting options with target set and
      * optionally project directory and module path.
      */
-    static transforms::options make_knitting_options(
+    static transforms::options make_options(
         const boost::filesystem::path& target,
-        const boost::filesystem::path project_dir = boost::filesystem::path(),
-        const std::string log_level = std::string("info"));
+        const boost::filesystem::path project_dir = boost::filesystem::path());
 };
 
 }

@@ -133,19 +133,19 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O1">
       <dia:attribute name="obj_pos">
-        <dia:point val="27,27"/>
+        <dia:point val="28,27"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="26.95,26.95;50.265,39.45"/>
+        <dia:rectangle val="27.95,26.95;51.265,38.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="27,27"/>
+        <dia:point val="28,27"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="23.215"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="12.4"/>
+        <dia:real val="11.6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#tracer#</dia:string>
@@ -267,10 +267,10 @@
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#log_level#</dia:string>
+                <dia:string>#alrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::string&amp;#</dia:string>
+                <dia:string>#annotations::archetype_location_repository#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -279,15 +279,15 @@
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#tracing_stats#</dia:string>
+                <dia:string>#atrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#bool#</dia:string>
+                <dia:string>#annotations::type_repository#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -296,58 +296,7 @@
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
-              </dia:attribute>
-            </dia:composite>
-            <dia:composite type="umlparameter">
-              <dia:attribute name="name">
-                <dia:string>#tracing_stats_disable_guids#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="type">
-                <dia:string>#bool#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="value">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="comment">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="kind">
-                <dia:enum val="0"/>
-              </dia:attribute>
-            </dia:composite>
-            <dia:composite type="umlparameter">
-              <dia:attribute name="name">
-                <dia:string>#tracing_stats_org_mode#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="type">
-                <dia:string>#bool#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="value">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="comment">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="kind">
-                <dia:enum val="0"/>
-              </dia:attribute>
-            </dia:composite>
-            <dia:composite type="umlparameter">
-              <dia:attribute name="name">
-                <dia:string>#tracing_all#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="type">
-                <dia:string>#bool#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="value">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="comment">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
@@ -355,7 +304,7 @@
                 <dia:string>#tracing_directory#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const boost::filesystem::path&amp;#</dia:string>
+                <dia:string>#boost::filesystem::path#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -364,15 +313,15 @@
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#tracing_use_short_names#</dia:string>
+                <dia:string>#cfg#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#bool#</dia:string>
+                <dia:string>#boost::optional&lt;tracing_configuration&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -381,7 +330,7 @@
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -1581,17 +1530,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="38.6075,39.4"/>
+        <dia:point val="39.6075,38.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="36.13,38.65;39.3575,48.8"/>
+        <dia:rectangle val="36.13,37.85;40.3575,48.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="38.6075,39.4"/>
-        <dia:point val="38.6075,44"/>
+        <dia:point val="39.6075,38.6"/>
+        <dia:point val="39.6075,44"/>
         <dia:point val="36.18,44"/>
         <dia:point val="36.18,48"/>
       </dia:attribute>
@@ -1762,17 +1711,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="50.215,39.4"/>
+        <dia:point val="51.215,38.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.465,38.65;53.1075,48.7498"/>
+        <dia:rectangle val="50.465,37.85;53.1075,48.7498"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="50.215,39.4"/>
-        <dia:point val="50.215,44"/>
+        <dia:point val="51.215,38.6"/>
+        <dia:point val="51.215,44"/>
         <dia:point val="52.9075,44"/>
         <dia:point val="52.9075,47.9498"/>
       </dia:attribute>
@@ -1946,7 +1895,7 @@
         <dia:point val="21.0782,47.9286"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="20.3282,39.35;27.2,48.7286"/>
+        <dia:rectangle val="20.3282,38.55;28.2,48.7286"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1954,8 +1903,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="21.0782,47.9286"/>
         <dia:point val="21.0782,44"/>
-        <dia:point val="27,44"/>
-        <dia:point val="27,39.4"/>
+        <dia:point val="28,44"/>
+        <dia:point val="28,38.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

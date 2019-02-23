@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
@@ -46,8 +45,6 @@ public:
 
 public:
     options(
-        const boost::filesystem::path& log_file,
-        const std::string& log_level,
         const boost::filesystem::path& target,
         const boost::filesystem::path& output_directory_path,
         const bool compatibility_mode,
@@ -55,26 +52,6 @@ public:
         const boost::optional<masd::dogen::tracing_configuration>& tracing);
 
 public:
-    /**
-     * @brief Full path to the log file.
-     */
-    /**@{*/
-    const boost::filesystem::path& log_file() const;
-    boost::filesystem::path& log_file();
-    void log_file(const boost::filesystem::path& v);
-    void log_file(const boost::filesystem::path&& v);
-    /**@}*/
-
-    /**
-     * @brief What level of logging to log at.
-     */
-    /**@{*/
-    const std::string& log_level() const;
-    std::string& log_level();
-    void log_level(const std::string& v);
-    void log_level(const std::string&& v);
-    /**@}*/
-
     /**
      * @brief Full path to the model to generate.
      */
@@ -132,8 +109,6 @@ public:
     options& operator=(options other);
 
 private:
-    boost::filesystem::path log_file_;
-    std::string log_level_;
     boost::filesystem::path target_;
     boost::filesystem::path output_directory_path_;
     bool compatibility_mode_;

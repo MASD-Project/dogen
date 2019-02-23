@@ -20,17 +20,8 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
 #include "masd.dogen/io/tracing_configuration_io.hpp"
 #include "masd.dogen.coding/io/transforms/options_io.hpp"
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
 
 namespace boost {
 
@@ -58,8 +49,6 @@ std::ostream& operator<<(std::ostream& s, const options& v) {
 
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::coding::transforms::options\"" << ", "
-      << "\"log_file\": " << "\"" << v.log_file().generic_string() << "\"" << ", "
-      << "\"log_level\": " << "\"" << tidy_up_string(v.log_level()) << "\"" << ", "
       << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
       << "\"output_directory_path\": " << "\"" << v.output_directory_path().generic_string() << "\"" << ", "
       << "\"compatibility_mode\": " << v.compatibility_mode() << ", "

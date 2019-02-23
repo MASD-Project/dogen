@@ -44,10 +44,8 @@ options make_options(const masd::dogen::configuration& cfg,
         r.compatibility_mode(eh.compatibility_mode_enabled());
     }
 
-    r.tracing(cfg.tracing());
     if (cfg.tracing()) {
-        const auto& t(*cfg.tracing());
-        r.log_level(t.logging_impact());
+        r.tracing(cfg.tracing());
         r.probe_directory(tracing_output_directory);
     }
 

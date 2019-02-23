@@ -50,14 +50,14 @@ const std::string output_dir_is_relative("The output directory path is not");
 
 masd::dogen::coding::transforms::options target_only() {
     using masd::dogen::coding::test::mock_options_factory;
-    return mock_options_factory::make_knitting_options(absolute_target);
+    return mock_options_factory::make_options(absolute_target);
 }
 
 masd::dogen::coding::transforms::options target_and_project_dir(
     const boost::filesystem::path& target,
     const boost::filesystem::path& output_dir) {
     using masd::dogen::coding::test::mock_options_factory;
-    return mock_options_factory::make_knitting_options(target, output_dir);
+    return mock_options_factory::make_options(target, output_dir);
 }
 
 }

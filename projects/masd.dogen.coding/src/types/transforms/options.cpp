@@ -26,25 +26,19 @@ options::options()
     : compatibility_mode_(static_cast<bool>(0)) { }
 
 options::options(options&& rhs)
-    : log_file_(std::move(rhs.log_file_)),
-      log_level_(std::move(rhs.log_level_)),
-      target_(std::move(rhs.target_)),
+    : target_(std::move(rhs.target_)),
       output_directory_path_(std::move(rhs.output_directory_path_)),
       compatibility_mode_(std::move(rhs.compatibility_mode_)),
       probe_directory_(std::move(rhs.probe_directory_)),
       tracing_(std::move(rhs.tracing_)) { }
 
 options::options(
-    const boost::filesystem::path& log_file,
-    const std::string& log_level,
     const boost::filesystem::path& target,
     const boost::filesystem::path& output_directory_path,
     const bool compatibility_mode,
     const boost::filesystem::path& probe_directory,
     const boost::optional<masd::dogen::tracing_configuration>& tracing)
-    : log_file_(log_file),
-      log_level_(log_level),
-      target_(target),
+    : target_(target),
       output_directory_path_(output_directory_path),
       compatibility_mode_(compatibility_mode),
       probe_directory_(probe_directory),
@@ -52,8 +46,6 @@ options::options(
 
 void options::swap(options& other) noexcept {
     using std::swap;
-    swap(log_file_, other.log_file_);
-    swap(log_level_, other.log_level_);
     swap(target_, other.target_);
     swap(output_directory_path_, other.output_directory_path_);
     swap(compatibility_mode_, other.compatibility_mode_);
@@ -62,9 +54,7 @@ void options::swap(options& other) noexcept {
 }
 
 bool options::operator==(const options& rhs) const {
-    return log_file_ == rhs.log_file_ &&
-        log_level_ == rhs.log_level_ &&
-        target_ == rhs.target_ &&
+    return target_ == rhs.target_ &&
         output_directory_path_ == rhs.output_directory_path_ &&
         compatibility_mode_ == rhs.compatibility_mode_ &&
         probe_directory_ == rhs.probe_directory_ &&
@@ -75,38 +65,6 @@ options& options::operator=(options other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const boost::filesystem::path& options::log_file() const {
-    return log_file_;
-}
-
-boost::filesystem::path& options::log_file() {
-    return log_file_;
-}
-
-void options::log_file(const boost::filesystem::path& v) {
-    log_file_ = v;
-}
-
-void options::log_file(const boost::filesystem::path&& v) {
-    log_file_ = std::move(v);
-}
-
-const std::string& options::log_level() const {
-    return log_level_;
-}
-
-std::string& options::log_level() {
-    return log_level_;
-}
-
-void options::log_level(const std::string& v) {
-    log_level_ = v;
-}
-
-void options::log_level(const std::string&& v) {
-    log_level_ = std::move(v);
 }
 
 const boost::filesystem::path& options::target() const {

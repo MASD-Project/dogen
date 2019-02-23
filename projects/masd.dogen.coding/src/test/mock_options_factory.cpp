@@ -22,13 +22,11 @@
 
 namespace masd::dogen::coding::test {
 
-transforms::options mock_options_factory::make_knitting_options(
+transforms::options mock_options_factory::make_options(
     const boost::filesystem::path& target,
-    const boost::filesystem::path project_dir,
-    const std::string log_level) {
+    const boost::filesystem::path project_dir) {
 
     transforms::options r;
-    r.log_level(log_level);
     r.target(target);
     r.output_directory_path(project_dir);
     return r;
