@@ -36,7 +36,6 @@ foreach(dir ${sub_dir})
         # here, then deleting it in test models and copying again.
         # FIXME: investigate this
         file(COPY ${cur_dir}/${dir} DESTINATION ${stage_dir}/test_data)
-        message(STATUS "${cur_dir}/${dir}")
         file(MAKE_DIRECTORY ${stage_test_data_dir}/${dir}/actual)
         file(MAKE_DIRECTORY ${stage_test_data_dir}/${dir}/expected)
 
