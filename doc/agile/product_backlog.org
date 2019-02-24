@@ -16,31 +16,18 @@ usage.
 
 We should just output the underlying primitive.
 
-*** Fix typo in ODB error message                                     :story:
+*** Parent without descendants in current model errors                :story:
 
-Spelt =FATAL= instead of =FATAL_ERROR= in ODB makefile:
+ At present it is not possible to generate a parent in a model which
+ does not have at least one descendant in that model. This is because
+ we do not generate the base class methods. We need a meta-data
+ parameter to force a class to become a parent.
 
-: if (NOT ODB_EXECUTABLE)
-:    message(FATAL_ERROR "ODB Executable not defined.")
-: endif()
+ For now we just hacked it by adding a fake descendant.
 
-*** Parent without descendants in current model is invalid            :story:
-
-At present it is not possible to generate a parent in a model which
-does not have at least one descendant in that model. This is because
-we do not generate the base class methods. We need a meta-data
-parameter to force a class to become a parent.
-
-For now we just hacked it by adding a fake descendant.
-
-Interestingly, we already have a "is final" meta-data parameter. We
-could possibly check this; if its not final then we could assume it is
-a base class.
-
-*** Windows packages have a sanity folder                             :story:
-
-We should remove the ctest file and add the dia and json examples. We
-should also have pdf/html docs.
+ Interestingly, we already have a "is final" meta-data parameter. We
+ could possibly check this; if its not final then we could assume it is
+ a base class.
 
 *** Drop the original extension in tailor                             :story:
 
@@ -51,6 +38,16 @@ Filenames in tailor look weird:
 it should just be:
 
 : dart.json
+
+Actually this is not a tailor / converter problem per se - its just
+that CMake is supplying the entire file name with extension to dogen
+as the destination. However, due to restrictions on how =NAME_WE=
+works for multiple extensions, it is non-trivial to sort this
+problem. In addition, because we want to read models from the dia
+directory and write them into the JSON directory, we can't just simply
+change dogen to update the extension itself. We need some hackery in
+CMake to process extensions properly like by dropping the last N
+characters of the filename or some such.
 
 *** Throw on unsupported stereotypes for specific kernels             :story:
 
@@ -1960,24 +1957,6 @@ Notes:
   should probably add comments to each transform describing these
   properties.
 -
-
-*** Consider renaming probing to tracing                              :story:
-
-It seems that in MDE what we called probing is more aptly called
-"tracing". We should rename the code to match this. Czarnecki and
-Helsen:
-
-#+begin_quote
-Tracing can be understood as the runtime footprint of transformation
-execution. A common form of trace information in model transformation
-are traceability links connecting source and target elements, which
-are essentially instances of the mapping between the source and target
-domains.
-#+end_quote
-
-The top-level object responsible for tracing is called the
-=tracer=. Although its not clear if a tracer is just providing probing
-data or is also an execution engine.
 
 *** Consider having a =transformator=                                 :story:
 

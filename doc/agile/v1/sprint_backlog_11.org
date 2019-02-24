@@ -13,17 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-23 Sat 16:36]
+#+CAPTION: Clock summary at [2019-02-24 Sun 10:42]
 | <75>                                                      |          |        |        |       |
 | Headline                                                  | Time     |        |        |     % |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                              | *225:03* |        |        | 100.0 |
+| *Total time*                                              | *226:10* |        |        | 100.0 |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                   | 225:03   |        |        | 100.0 |
-| Active                                                    |          | 225:03 |        | 100.0 |
+| Stories                                                   | 226:10   |        |        | 100.0 |
+| Active                                                    |          | 226:10 |        | 100.0 |
 | Edit release notes for previous sprint                    |          |        |   2:03 |   0.9 |
-| Sprint and product backlog grooming                       |          |        |   5:32 |   2.5 |
-| Work on MASD theory                                       |          |        | 113:38 |  50.5 |
+| Sprint and product backlog grooming                       |          |        |   6:39 |   2.9 |
+| Work on MASD theory                                       |          |        | 113:38 |  50.2 |
 | Rename models to fit MASD architecture                    |          |        |   4:56 |   2.2 |
 | Read up on framework and API design                       |          |        |   0:57 |   0.4 |
 | Analyse the state of the mess of refactors                |          |        |   6:27 |   2.9 |
@@ -36,7 +36,7 @@
 | Disabling facet globally and enabling locally fails       |          |        |   2:21 |   1.0 |
 | References to types in top-level namespace do not resolve |          |        |   0:51 |   0.4 |
 | Create a colour palette test model                        |          |        |   1:09 |   0.5 |
-| Create a single binary for all of dogen                   |          |        |  38:46 |  17.2 |
+| Create a single binary for all of dogen                   |          |        |  38:46 |  17.1 |
 | Setup a nightly build for Dogen                           |          |        |   3:53 |   1.7 |
 | Great meta-data rename                                    |          |        |   6:00 |   2.7 |
 | Remove the need for =dia.comment= tag                     |          |        |   0:12 |   0.1 |
@@ -151,6 +151,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
      :LOGBOOK:
+     CLOCK: [2019-02-24 Sun 09:35]--[2019-02-24 Sun 10:42] =>  1:07
      CLOCK: [2019-02-21 Thu 13:01]--[2019-02-21 Thu 13:20] =>  0:19
      CLOCK: [2019-02-19 Tue 13:05]--[2019-02-19 Tue 13:16] =>  0:11
      CLOCK: [2019-02-15 Fri 17:45]--[2019-02-15 Fri 17:52] =>  0:07
@@ -946,6 +947,47 @@ Tasks:
 This profile only applies to C++ so it should be:
 
 : masd::cpp::header_only
+
+*** COMPLETED Consider renaming probing to tracing                    :story:
+    CLOSED: [2019-02-24 Sun 10:12]
+
+*Rationale*: this was already implemented.
+
+It seems that in MDE what we called probing is more aptly called
+"tracing". We should rename the code to match this. Czarnecki and
+Helsen:
+
+#+begin_quote
+Tracing can be understood as the runtime footprint of transformation
+execution. A common form of trace information in model transformation
+are traceability links connecting source and target elements, which
+are essentially instances of the mapping between the source and target
+domains.
+#+end_quote
+
+The top-level object responsible for tracing is called the
+=tracer=. Although its not clear if a tracer is just providing probing
+data or is also an execution engine.
+
+*** COMPLETED Fix typo in ODB error message                           :story:
+    CLOSED: [2019-02-24 Sun 10:14]
+
+*Rationale*: this was already implemented.
+
+Spelt =FATAL= instead of =FATAL_ERROR= in ODB makefile:
+
+: if (NOT ODB_EXECUTABLE)
+:    message(FATAL_ERROR "ODB Executable not defined.")
+: endif()
+
+*** COMPLETED Windows packages have a sanity folder                   :story:
+    CLOSED: [2019-02-24 Sun 10:20]
+
+*Rationale*: this was already implemented. Validated by installing
+latest package on windows, no mention of sanity, binary works fine.
+
+We should remove the ctest file and add the dia and json examples. We
+should also have pdf/html docs.
 
 *** STARTED Throw on profiles that refer to invalid fields            :story:
     :LOGBOOK:
