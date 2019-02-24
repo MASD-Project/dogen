@@ -18,21 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_GENERATION_IO_TRANSFORMS_CONFIGURATION_IO_HPP
-#define MASD_DOGEN_GENERATION_IO_TRANSFORMS_CONFIGURATION_IO_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_REGISTRAR_ERROR_FWD_HPP
+#define MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_REGISTRAR_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "masd.dogen.generation/types/transforms/configuration.hpp"
-
 namespace masd::dogen::generation::transforms {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const masd::dogen::generation::transforms::configuration& v);
+class registrar_error;
 
 }
 

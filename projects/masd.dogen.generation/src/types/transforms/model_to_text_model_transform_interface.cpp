@@ -22,8 +22,7 @@
 
 namespace masd::dogen::generation::transforms {
 
-bool model_to_text_model_transform_interface::operator==(const model_to_text_model_transform_interface& /*rhs*/) const {
-    return true;
-}
+model_to_text_model_transform_interface::
+~model_to_text_model_transform_interface() noexcept {}
 
 }

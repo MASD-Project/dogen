@@ -25,55 +25,55 @@
 #pragma once
 #endif
 
+#include <list>
+#include <string>
 #include <memory>
-#include <algorithm>
 #include <unordered_map>
+#include "masd.dogen.annotations/types/archetype_location.hpp"
 #include "masd.dogen.coding/types/meta_model/languages.hpp"
-#include "masd.dogen.coding/hash/meta_model/languages_hash.hpp"
-#include "masd.dogen.generation/types/transforms/model_to_text_model_transform_interface_fwd.hpp"
+#include "masd.dogen.generation/types/transforms/model_to_text_model_transform_interface.hpp"
 
 namespace masd::dogen::generation::transforms {
 
-class model_to_text_model_transform_registrar final {
+/**
+ * @brief Keeps track of all the available model to text model
+ * transforms. These are implemented by language-specific backends.
+ */
+class model_to_text_model_transform_registrar {
 public:
-    model_to_text_model_transform_registrar() = default;
-    model_to_text_model_transform_registrar(const model_to_text_model_transform_registrar&) = default;
-    model_to_text_model_transform_registrar(model_to_text_model_transform_registrar&&) = default;
-    ~model_to_text_model_transform_registrar() = default;
+    /**
+     * @brief Registers a model to text transform.
+     */
+    void register_transform(
+        std::shared_ptr<model_to_text_model_transform_interface> t);
 
 public:
-    explicit model_to_text_model_transform_registrar(const std::unordered_map<dogen::coding::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> >& transforms_by_language_);
+    /**
+     * @brief Ensures the registrar is ready to be used.
+     */
+    void validate() const;
 
 public:
-    const std::unordered_map<dogen::coding::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> >& transforms_by_language_() const;
-    std::unordered_map<dogen::coding::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> >& transforms_by_language_();
-    void transforms_by_language_(const std::unordered_map<dogen::coding::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> >& v);
-    void transforms_by_language_(const std::unordered_map<dogen::coding::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> >&& v);
+    /**
+     * @brief Returns the transform for the supplied language, if any
+     * exists. Otherwise returns a null shared pointer.
+     */
+    std::shared_ptr<model_to_text_model_transform_interface>
+    transform_for_language(const coding::meta_model::languages l) const;
 
-public:
-    bool operator==(const model_to_text_model_transform_registrar& rhs) const;
-    bool operator!=(const model_to_text_model_transform_registrar& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    void swap(model_to_text_model_transform_registrar& other) noexcept;
-    model_to_text_model_transform_registrar& operator=(model_to_text_model_transform_registrar other);
+    /**
+     * @brief Returns all available transforms, by language.
+     */
+    const std::unordered_map<
+        coding::meta_model::languages,
+        std::shared_ptr<model_to_text_model_transform_interface>>&
+    transforms_by_language() const;
 
 private:
-    std::unordered_map<dogen::coding::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> > transforms_by_language__;
+    std::unordered_map<coding::meta_model::languages,
+    std::shared_ptr<model_to_text_model_transform_interface>>
+    transforms_by_language_;
 };
-
-}
-
-namespace std {
-
-template<>
-inline void swap(
-    masd::dogen::generation::transforms::model_to_text_model_transform_registrar& lhs,
-    masd::dogen::generation::transforms::model_to_text_model_transform_registrar& rhs) {
-    lhs.swap(rhs);
-}
 
 }
 

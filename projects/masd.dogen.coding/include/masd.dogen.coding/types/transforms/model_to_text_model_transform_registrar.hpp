@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-
 #include <list>
 #include <string>
 #include <memory>

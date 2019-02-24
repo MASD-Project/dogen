@@ -25,25 +25,51 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include <unordered_set>
+#include "masd.dogen.coding/types/transforms/context_fwd.hpp"
+#include "masd.dogen.extraction/types/decoration_properties_factory.hpp"
+#include "masd.dogen.extraction/types/meta_model/model.hpp"
+#include "masd.dogen.generation/types/transforms/model_to_text_model_transform_registrar.hpp"
 
 namespace masd::dogen::generation::transforms {
 
 class model_to_text_model_chain final {
 public:
-    model_to_text_model_chain() = default;
-    model_to_text_model_chain(const model_to_text_model_chain&) = default;
-    model_to_text_model_chain(model_to_text_model_chain&&) = default;
-    ~model_to_text_model_chain() = default;
-    model_to_text_model_chain& operator=(const model_to_text_model_chain&) = default;
+    /**
+     * @brief Registrar that keeps track of the available transforms.
+     */
+    static model_to_text_model_transform_registrar& registrar();
+
+private:
+    /*
+     * Merges source into destination.
+     */
+    static void merge(extraction::meta_model::model&& src,
+        extraction::meta_model::model& dst);
 
 public:
-    bool operator==(const model_to_text_model_chain& rhs) const;
-    bool operator!=(const model_to_text_model_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
+    static extraction::meta_model::model
+    transform(const coding::transforms::context& ctx,
+        const coding::meta_model::model& m);
+    static extraction::meta_model::model
+    transform(const coding::transforms::context& ctx,
+        const std::list<coding::meta_model::model>& models);
 
+private:
+    static std::shared_ptr<model_to_text_model_transform_registrar> registrar_;
 };
+
+/*
+ * Helper method to register transforms.
+ */
+template<typename Transform>
+inline void register_transform() {
+    auto t(std::make_shared<Transform>());
+    auto& rg(model_to_text_model_chain::registrar());
+    rg.register_transform(t);
+}
 
 }
 

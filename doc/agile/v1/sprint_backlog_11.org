@@ -1085,6 +1085,7 @@ rewrite existing code, resulting in a two-phase approach, anyway).
 
 *** STARTED Move top-level transforms into orchestration              :story:
     :LOGBOOK:
+    CLOCK: [2019-02-24 Sun 18:00]--[2019-02-24 Sun 18:26] =>  0:26
     CLOCK: [2019-02-24 Sun 17:43]--[2019-02-24 Sun 17:59] =>  0:16
     CLOCK: [2019-02-24 Sun 16:51]--[2019-02-24 Sun 17:42] =>  0:51
     :END:
@@ -1098,6 +1099,9 @@ rewrite existing code, resulting in a two-phase approach, anyway).
   this point coding should only depend on injectors.
 - try implement interface based I/O instead of reading/writing
   directly from the filesystem.
+- first move the model to text model transform into
+  =generation.cpp=. This means updating all of the formatters. Also,
+  use the external model, deleting all of the text models.
 
 *** Move injection processing out of coding                           :story:
 

@@ -25,24 +25,94 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include <forward_list>
+#include <unordered_map>
+#include <boost/filesystem/path.hpp>
+#include "masd.dogen.annotations/types/archetype_locations_group.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository_parts.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/types/meta_model/text_model.hpp"
+#include "masd.dogen.coding/types/meta_model/intra_backend_segment_properties.hpp"
+#include "masd.dogen.coding/types/transforms/options.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.extraction/types/meta_model/model.hpp"
 
 namespace masd::dogen::generation::transforms {
 
-class model_to_text_model_transform_interface final {
+/**
+ * @brief Performs a model to text transformation of a meta-model,
+ * into its supported language.
+ */
+class model_to_text_model_transform_interface {
 public:
     model_to_text_model_transform_interface() = default;
-    model_to_text_model_transform_interface(const model_to_text_model_transform_interface&) = default;
-    model_to_text_model_transform_interface(model_to_text_model_transform_interface&&) = default;
-    ~model_to_text_model_transform_interface() = default;
-    model_to_text_model_transform_interface& operator=(const model_to_text_model_transform_interface&) = default;
+    model_to_text_model_transform_interface(
+        const model_to_text_model_transform_interface&) = delete;
+    model_to_text_model_transform_interface(
+        model_to_text_model_transform_interface&&) = default;
+    virtual ~model_to_text_model_transform_interface() noexcept = 0;
 
 public:
-    bool operator==(const model_to_text_model_transform_interface& rhs) const;
-    bool operator!=(const model_to_text_model_transform_interface& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Returns the identity of this transform.
+     */
+    virtual std::string id() const = 0;
 
+    /**
+     * @brief All archetype locations for the archetypes owned by this
+     * transform, listing all available backends, facets and
+     * archetypes.
+     */
+    virtual const std::forward_list<annotations::archetype_location>&
+    archetype_locations() const = 0;
+
+    /**
+     * @brief Returns the archetype locations for each meta name.
+     */
+    virtual const std::unordered_map<std::string,
+                                     annotations::archetype_locations_group>&
+    archetype_locations_by_meta_name() const = 0;
+
+    /**
+     * @brief Returns the archetype locations for each family.
+     */
+    virtual const std::unordered_map<std::string,
+                                     std::list<annotations::archetype_location>
+                                     >&
+    archetype_locations_by_family() const = 0;
+
+    /**
+     * @brief Returns this backend's part of the repository of
+     * archetype locations.
+     */
+    virtual const annotations::archetype_location_repository_parts&
+    archetype_location_repository_parts() const = 0;
+
+    /**
+     * @brief Language supported by this transform.
+     */
+    virtual coding::meta_model::languages language() const = 0;
+
+    /**
+     * @brief Returns all intra-backend segment properties.
+     */
+    virtual std::unordered_map<
+        std::string,
+        coding::meta_model::intra_backend_segment_properties>
+    intra_backend_segment_properties(
+        const coding::transforms::options& o) const = 0;
+
+    /**
+     * @brief Generates the text model representation for this
+     * transform.
+     */
+    virtual extraction::meta_model::model
+    transform(const coding::transforms::context& ctx,
+        const bool requires_backend_directory,
+        const coding::meta_model::model& m) const = 0;
 };
 
 }
