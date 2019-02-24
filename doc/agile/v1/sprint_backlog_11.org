@@ -13,20 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-24 Sun 10:42]
+#+CAPTION: Clock summary at [2019-02-24 Sun 17:42]
 | <75>                                                      |          |        |        |       |
 | Headline                                                  | Time     |        |        |     % |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                              | *226:10* |        |        | 100.0 |
+| *Total time*                                              | *227:01* |        |        | 100.0 |
 |-----------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                   | 226:10   |        |        | 100.0 |
-| Active                                                    |          | 226:10 |        | 100.0 |
+| Stories                                                   | 227:01   |        |        | 100.0 |
+| Active                                                    |          | 227:01 |        | 100.0 |
 | Edit release notes for previous sprint                    |          |        |   2:03 |   0.9 |
 | Sprint and product backlog grooming                       |          |        |   6:39 |   2.9 |
-| Work on MASD theory                                       |          |        | 113:38 |  50.2 |
+| Work on MASD theory                                       |          |        | 113:38 |  50.1 |
 | Rename models to fit MASD architecture                    |          |        |   4:56 |   2.2 |
 | Read up on framework and API design                       |          |        |   0:57 |   0.4 |
-| Analyse the state of the mess of refactors                |          |        |   6:27 |   2.9 |
+| Analyse the state of the mess of refactors                |          |        |   6:27 |   2.8 |
 | Create the =orchestration= model                          |          |        |   4:15 |   1.9 |
 | Update vcpkg across all operative systems                 |          |        |   4:35 |   2.0 |
 | Update C# reference models to latest dogen                |          |        |   0:42 |   0.3 |
@@ -38,7 +38,7 @@
 | Create a colour palette test model                        |          |        |   1:09 |   0.5 |
 | Create a single binary for all of dogen                   |          |        |  38:46 |  17.1 |
 | Setup a nightly build for Dogen                           |          |        |   3:53 |   1.7 |
-| Great meta-data rename                                    |          |        |   6:00 |   2.7 |
+| Great meta-data rename                                    |          |        |   6:00 |   2.6 |
 | Remove the need for =dia.comment= tag                     |          |        |   0:12 |   0.1 |
 | Use tracing options in existing code                      |          |        |   2:25 |   1.1 |
 | Rename profile header only                                |          |        |   0:06 |   0.0 |
@@ -46,6 +46,7 @@
 | Dogen's vcpkg export for OSX was created from master      |          |        |   0:46 |   0.3 |
 | Fix clang-cl warnings                                     |          |        |   5:07 |   2.3 |
 | Model references are not transitive                       |          |        |   0:21 |   0.2 |
+| Move top-level transforms into orchestration              |          |        |   0:51 |   0.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1082,6 +1083,35 @@ logic in the code at present (i.e. without a two-phase approach) would
 mean we'd have to load the same models several times (or heavily
 rewrite existing code, resulting in a two-phase approach, anyway).
 
+*** STARTED Move top-level transforms into orchestration              :story:
+    :LOGBOOK:
+    CLOCK: [2019-02-24 Sun 16:51]--[2019-02-24 Sun 17:42] =>  0:51
+    :END:
+
+- clear up the existing orchestration model We don't really know what
+  its current state is. Keep it as a backup as we may need to go back
+  to it.
+- copy the top-level chains into orchestration, into a well
+  defined namespace (say =dirty=). This must include the model to text
+  model and registration. Remove all of these types from coding. At
+  this point coding should only depend on injectors.
+- try implement interface based I/O instead of reading/writing
+  directly from the filesystem.
+
+*** Move injection processing out of coding                           :story:
+
+- add model source into injection
+- add model set into injection, with target and references
+- add workflow that takes in a string, path, etc and creates a model
+  set. It will need to read references and language from the model
+  annotations.
+- add model set into coding.
+- add a new model: coding.injection. Create a class that converts from
+  one model set to another.
+- add a chain in orchestration that does the new injection workflow
+  and passes the model set into coding.
+- delete injection related classes in coding.
+
 *** Implement configuration validator                                 :story:
 
 At present we are not performing any validation.
@@ -1215,16 +1245,6 @@ Problems:
 - check master builds libodb 2.4
 - build libodb 2.5 from masd and re-export.
 
-*** Move top-level transforms into orchestration                      :story:
-
-- clear up the existing orchestration model We don't really know what
-  its current state is. Keep it as a backup as we may need to go back
-  to it.
-- copy the top-level chains into orchestration, into a well
-  defined namespace (say =dirty=). This must include the model to text
-  model and registration. Remove all of these types from coding. At
-  this point coding should only depend on injectors.
-
 *** Move generation model out of coding                               :story:
 
 - then copy the model from coding into generation and all associated
@@ -1241,20 +1261,6 @@ Problems:
 We moved a number of properties out of formattables. Move them
 back. By the end of this refactor we should end up with no references
 to facets in coding.
-
-*** Move injection processing out of coding                           :story:
-
-- add model source into injection
-- add model set into injection, with target and references
-- add workflow that takes in a string, path, etc and creates a model
-  set. It will need to read references and language from the model
-  annotations.
-- add model set into coding.
-- add a new model: coding.injection. Create a class that converts from
-  one model set to another.
-- add a chain in orchestration that does the new injection workflow
-  and passes the model set into coding.
-- delete injection related classes in coding.
 
 *** Move fabric types into generation                                 :story:
 

@@ -29,6 +29,7 @@
 #include "masd.dogen.orchestration/types/converter.hpp"
 #include "masd.dogen.orchestration/types/generator.hpp"
 #include "masd.dogen.orchestration/types/orchestration.hpp"
+#include "masd.dogen.orchestration/types/injector_factory.hpp"
 #include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
 
 #endif

@@ -27,6 +27,9 @@
 
 #include <memory>
 #include <ostream>
+#include "masd.dogen/types/weaver.hpp"
+#include "masd.dogen/types/converter.hpp"
+#include "masd.dogen/types/generator.hpp"
 #include "masd.dogen.cli/types/configuration.hpp"
 
 namespace masd::dogen::cli {
@@ -43,12 +46,20 @@ public:
     application& operator=(const application&) = delete;
 
 public:
+    application(const weaver& w, const converter& c, const generator& g);
+
+public:
     /**
      * Executes the application.
      *
      * @param cfg Application configuration.
      */
     void run(const configuration& cfg) const;
+
+private:
+    const weaver& weaver_;
+    const converter& converter_;
+    const generator& generator_;
 };
 
 }

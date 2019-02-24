@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
-#define MASD_DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
+#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_INJECTOR_FACTORY_HPP
+#define MASD_DOGEN_ORCHESTRATION_TYPES_INJECTOR_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/di.hpp>
-#include "masd.dogen.cli/types/command_line_parser.hpp"
-#include "masd.dogen.cli/types/program_options_parser.hpp"
-#include "masd.dogen.orchestration/types/injector_factory.hpp"
+#include "masd.dogen.orchestration/types/weaver.hpp"
+#include "masd.dogen.orchestration/types/converter.hpp"
+#include "masd.dogen.orchestration/types/generator.hpp"
 
-namespace masd::dogen::cli {
+namespace masd::dogen::orchestration {
 
 class injector_factory final {
 public:
@@ -38,8 +38,12 @@ public:
         using boost::di::bind;
         using boost::di::make_injector;
         return make_injector(
-            masd::dogen::orchestration::injector_factory::make_injector(),
-            bind<command_line_parser>.to<program_options_parser>());
+            bind<masd::dogen::weaver>
+            .to<masd::dogen::orchestration::weaver>(),
+            bind<masd::dogen::converter>
+            .to<masd::dogen::orchestration::converter>(),
+            bind<masd::dogen::generator>
+            .to<masd::dogen::orchestration::generator>());
     }
 };
 

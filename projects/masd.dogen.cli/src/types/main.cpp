@@ -44,9 +44,13 @@ const std::string err_prefix("Error: ");
 const std::string activity_failure("Failed to execute command.");
 const std::string force_terminate("Application was forced to terminate.");
 
+/**
+ * @brief Reports exceptions to the log and console.
+ */
 void report_exception(const bool can_log, const std::exception& e) {
     /*
-     * Dump to the console first.
+     * Dump to the console first. Here we just want to make our output
+     * as humanly readable as possible.
      */
     std::cerr << err_prefix << e.what() << std::endl;
     std::cerr << activity_failure << std::endl;
@@ -55,10 +59,12 @@ void report_exception(const bool can_log, const std::exception& e) {
         return;
 
     /*
-     * We must catch by std::exception and cast the boost exception
-     * here; if we were to catch boost exception, we would not have
-     * access to the what() method and thus could not provide a
-     * user-friendly message to the console.
+     * Now we can try to dump useful, but less user-friendly
+     * information by interrogating the exception. Note that we must
+     * catch by std::exception and cast the boost exception; if we
+     * were to catch boost exception, we would not have access to the
+     * what() method and thus could not provide the exception message
+     * to the console.
      */
     const auto be(dynamic_cast<const boost::exception* const>(&e));
     if (!be)
@@ -69,57 +75,65 @@ void report_exception(const bool can_log, const std::exception& e) {
     BOOST_LOG_SEV(lg, error) << activity_failure;
 }
 
+/**
+ * @brief Executes the CLI workflow.
+ */
+int execute_cli_workflow(const int argc, const char* argv[],
+    masd::dogen::utility::log::scoped_lifecycle_manager& slm) {
+
+    /*
+     * Perform DI initialisation and obtain the parser.
+     */
+    using namespace masd::dogen::cli;
+    auto inj(injector_factory::make_injector());
+    const auto p(inj.create<std::unique_ptr<command_line_parser>>());
+
+    /*
+     * Create the configuration from command line options.
+     */
+    const auto args(std::vector<std::string>(argv + 1, argv + argc));
+    const auto ocfg(p->parse(args, std::cout, std::cerr));
+
+    /*
+     * If we have no configuration, then there is nothing to do. This
+     * can only happen if the user requested some valid options such
+     * as help or version; any errors at the command line level are
+     * treated as exceptions, and all other cases must result in a
+     * configuration object.
+     */
+    if (!ocfg)
+        return EXIT_SUCCESS;
+
+    /*
+     * Since we have a configuration, we can now attempt to
+     * initialise the logging subsystem.
+     */
+    const auto& cfg(*ocfg);
+    slm.initialise(cfg.logging());
+    BOOST_LOG_SEV(lg, debug) << "Command line arguments: " << args;
+
+    /*
+     * Now perform legacy initialisation. It uses logging so it must
+     * be done after logging initialisation. FIXME: To be removed once
+     * we move all to DI.
+     */
+    initializer::initialize();
+
+    /*
+     * Execute the application.
+     */
+    const auto app(inj.create<std::unique_ptr<application>>());
+    app->run(cfg);
+    return EXIT_SUCCESS;
+}
+
 }
 
 int main(const int argc, const char* argv[]) {
-    using namespace masd::dogen::cli;
-    using masd::dogen::utility::log::scoped_lifecycle_manager;
-    scoped_lifecycle_manager slm;
-
+    masd::dogen::utility::log::scoped_lifecycle_manager slm;
     try {
-        /*
-         * Perform DI initialisation and obtain the parser.
-         */
-        auto inj(injector_factory::make_injector());
-        const auto clp(inj.create<std::unique_ptr<command_line_parser>>());
-
-        /*
-         * Create the configuration from command line options.
-         */
-        const auto args(std::vector<std::string>(argv + 1, argv + argc));
-        const auto ocfg(clp->parse(args, std::cout, std::cerr));
-
-        /*
-         * If we have no configuration, then there is nothing to
-          * do. This can only happen if the user requested some valid
-          * options such as help or version; any errors at the command
-          * line level are treated as exceptions, and all other cases
-          * must result in a configuration object.
-          */
-        if (!ocfg)
-            return EXIT_SUCCESS;
-
-        /*
-         * Since we have a configuration, we can now attempt to
-         * initialise the logging subsystem.
-         */
-        const auto& cfg(*ocfg);
-        slm.initialise(cfg.logging());
-        BOOST_LOG_SEV(lg, debug) << "Command line arguments: " << args;
-
-        /*
-         * Now perform legacy initialisation. It uses logging so it
-         * must be done after logging initialisation. FIXME: To be
-         * removed once we move all to DI.
-         */
-        initializer::initialize();
-
-        /*
-         * Finally, we can execute the application.
-         */
-        application app;
-        app.run(cfg);
-    } catch (const parser_exception& /*e*/) {
+        return execute_cli_workflow(argc, argv, slm);
+    } catch (const masd::dogen::cli::parser_exception& /*e*/) {
         /*
          * Reporting of these types of errors to the console has
          * already been handled by the parser itself.
@@ -132,5 +146,4 @@ int main(const int argc, const char* argv[]) {
         std::cerr << force_terminate << std::endl;
         return EXIT_FAILURE;
     }
-    return EXIT_SUCCESS;
 }
