@@ -21,7 +21,7 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.coding/types/transforms/options.hpp"
 #include "masd.dogen.coding/types/transforms/context_factory.hpp"
-#include "masd.dogen.coding/types/transforms/code_generation_chain.hpp"
+#include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
 #include "masd.dogen.orchestration/types/generator.hpp"
 
 namespace {
@@ -67,7 +67,7 @@ void generator::generate(const configuration& cfg,
 
     using namespace coding::transforms;
     const auto ctx(context_factory::make(o));
-    code_generation_chain::transform(ctx);
+    transforms::code_generation_chain::transform(ctx);
 
     BOOST_LOG_SEV(lg, debug) << "Finished generation.";
 }

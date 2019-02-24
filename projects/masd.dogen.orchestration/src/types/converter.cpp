@@ -25,7 +25,6 @@
 #include "masd.dogen.injection.dia/types/initializer.hpp"
 #include "masd.dogen.coding/types/transforms/options.hpp"
 #include "masd.dogen.coding/types/transforms/context_factory.hpp"
-#include "masd.dogen.coding/types/transforms/code_generation_chain.hpp"
 #include "masd.dogen.orchestration/types/converter.hpp"
 
 namespace {

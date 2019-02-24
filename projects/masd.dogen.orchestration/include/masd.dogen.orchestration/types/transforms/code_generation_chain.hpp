@@ -25,24 +25,50 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.coding/types/meta_model/text_model.hpp"
 
 namespace masd::dogen::orchestration::transforms {
 
+/**
+ * @brief Responsible for transforming a high-level representation of
+ * a domain into code, in one or more programming languages.
+ *
+ * The model which one intends to transform is known as the @e target
+ * model. The transform starts by invoking the correct front-end to
+ * read in the target model and all of its dependencies. There are two
+ * types of dependencies:
+ *
+ * @li @e explicit: specified by the options passed in; these are
+ * models created by the user and any models that they, in turn,
+ * depend on.
+ *
+ * @li @e implicit: these are known as the @e system models. They are
+ * added automatically. Examples are built-ins, boost, std, etc.
+ *
+ * Collectively, all implicit and explicit models are referred to as
+ * the @e input models. The input models read the front-end are
+ * converted into the middle end representation - endomodels. They are
+ * then merged it into a single, unified Yarn model, called the @e
+ * merged model; all dependencies are resolved and validated.
+ *
+ * The transform then instantiates all backends requested by the
+ * options passed in. They use the merged model to generate source
+ * code, and then outputted it to the desired destination.
+ */
 class code_generation_chain final {
-public:
-    code_generation_chain() = default;
-    code_generation_chain(const code_generation_chain&) = default;
-    code_generation_chain(code_generation_chain&&) = default;
-    ~code_generation_chain() = default;
-    code_generation_chain& operator=(const code_generation_chain&) = default;
+private:
+    static void write(const coding::transforms::context& ctx,
+        const coding::meta_model::text_model& tm);
+
+private:
+    /**
+     * @brief Handles any extraneous files which should be removed.
+     */
+    static void lint(const coding::meta_model::text_model& tm);
 
 public:
-    bool operator==(const code_generation_chain& rhs) const;
-    bool operator!=(const code_generation_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const coding::transforms::context& ctx);
 };
 
 }

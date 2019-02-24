@@ -18,12 +18,80 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/filesystem/path.hpp"
+#include "masd.dogen.utility/types/filesystem/file.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.coding/types/transforms/text_model_generation_chain.hpp"
+#include "masd.dogen.coding/types/helpers/file_linter.hpp"
 #include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
+
+namespace {
+
+const std::string transform_id(
+    "masd.dogen.orchestration.code_generation_chain");
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace masd::dogen::orchestration::transforms {
 
-bool code_generation_chain::operator==(const code_generation_chain& /*rhs*/) const {
-    return true;
+void code_generation_chain::write(const coding::transforms::context& ctx,
+    const coding::meta_model::text_model& tm) {
+
+    if (tm.artefacts().empty()) {
+        BOOST_LOG_SEV(lg, warn) << "No files were generated, so no output.";
+        return;
+    }
+
+    const auto& w(ctx.artefact_writer());
+    if (tm.force_write())
+        w.force_write(tm.artefacts());
+    else
+        w.write(tm.artefacts());
+}
+
+void code_generation_chain::lint(const coding::meta_model::text_model& tm) {
+    /*
+     * If we're not going to delete the files, don't bother linting..
+     */
+    if (!tm.delete_extra_files())
+        return;
+
+    const auto lint(coding::helpers::file_linter::lint(tm));
+    if (lint.empty())
+        return;
+
+    utility::filesystem::remove(lint);
+}
+
+void code_generation_chain::transform(const coding::transforms::context& ctx) {
+    BOOST_LOG_SEV(lg, info) << "Starting code generation.";
+
+    const auto& o(ctx.transform_options());
+    const auto model_name(o.target().filename().string());
+    tracing::scoped_chain_tracer stp(lg, "code generation chain",
+        transform_id, model_name, ctx.tracer());
+
+    /*
+     * Obtain the text models.
+     */
+    const auto tm(
+        coding::transforms::text_model_generation_chain::transform(ctx));
+
+    /*
+     * Write the artefacts.
+     */
+    write(ctx, tm);
+
+    /*
+     * Perform any housekeeping if need be.
+     */
+    lint(tm);
+
+    BOOST_LOG_SEV(lg, info) << "Finished code generation.";
 }
 
 }
