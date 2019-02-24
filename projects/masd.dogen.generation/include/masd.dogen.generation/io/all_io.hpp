@@ -26,8 +26,6 @@
 #endif
 
 #include "masd.dogen.generation/io/meta_model/model_io.hpp"
-#include "masd.dogen.generation/io/meta_model/artefact_io.hpp"
-#include "masd.dogen.generation/io/meta_model/text_model_io.hpp"
 #include "masd.dogen.generation/io/meta_model/facet_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/element_archetype_io.hpp"
 #include "masd.dogen.generation/io/meta_model/formatting_styles_io.hpp"

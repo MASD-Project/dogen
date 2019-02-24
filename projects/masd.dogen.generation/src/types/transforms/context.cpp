@@ -30,14 +30,12 @@ context::context(
     const tracing::tracer& tracer,
     const std::unordered_map<std::string,
     meta_model::intra_backend_segment_properties>&
-    intra_backend_segment_properties,
-    const boost::shared_ptr<helpers::artefact_writer_interface> writer) :
+    intra_backend_segment_properties) :
     archetype_location_repository_(alrp), type_repository_(atrp),
     annotation_factory_(data_directories, archetype_location_repository_,
         type_repository_, false/*options.compatibility_mode()*/),
     formatting_repository_(frp), tracer_(tracer),
-    intra_backend_segment_properties_(intra_backend_segment_properties),
-    writer_(writer) {}
+    intra_backend_segment_properties_(intra_backend_segment_properties) {}
 
 context::~context() {
     tracer_.end_tracing();
@@ -68,10 +66,6 @@ const std::unordered_map<std::string,
                          meta_model::intra_backend_segment_properties>&
 context::intra_backend_segment_properties() const {
     return intra_backend_segment_properties_;
-}
-
-const helpers::artefact_writer_interface& context::artefact_writer() const {
-    return *writer_;
 }
 
 }

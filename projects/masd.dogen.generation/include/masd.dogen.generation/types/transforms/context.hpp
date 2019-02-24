@@ -35,7 +35,6 @@
 #include "masd.dogen.extraction/types/repository.hpp"
 #include "masd.dogen.tracing/types/tracer.hpp"
 #include "masd.dogen.generation/types/meta_model/intra_backend_segment_properties.hpp"
-#include "masd.dogen.generation/types/helpers/artefact_writer_interface.hpp"
 
 namespace masd::dogen::generation::transforms {
 
@@ -51,8 +50,7 @@ class context final {
         const tracing::tracer& tracer,
         const std::unordered_map<std::string,
         meta_model::intra_backend_segment_properties>&
-        intra_backend_segment_properties,
-        const boost::shared_ptr<helpers::artefact_writer_interface> writer);
+        intra_backend_segment_properties);
     ~context();
 
 public:
@@ -90,11 +88,6 @@ public:
                              meta_model::intra_backend_segment_properties>&
     intra_backend_segment_properties() const;
 
-    /**
-     * @brief Writer for artefacts.
-     */
-    const helpers::artefact_writer_interface& artefact_writer() const;
-
 private:
     const annotations::archetype_location_repository
     archetype_location_repository_;
@@ -105,7 +98,6 @@ private:
     const std::unordered_map<std::string,
                              meta_model::intra_backend_segment_properties>
     intra_backend_segment_properties_;
-    const boost::shared_ptr<helpers::artefact_writer_interface> writer_;
 };
 
 }
