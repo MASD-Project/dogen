@@ -21,6 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem/operations.hpp>
+#include <boost/range/iterator_range.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/filesystem/file_not_found.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
@@ -82,10 +83,12 @@ std::set<boost::filesystem::path> find_files(const boost::filesystem::path& d) {
     }
 
     using boost::filesystem::recursive_directory_iterator;
-    for (recursive_directory_iterator end, i(d); i != end; ++i) {
-        const auto& p(boost::filesystem::absolute(*i));
-        if (boost::filesystem::is_regular_file(p))
-            r.insert(p);
+    const auto begin = recursive_directory_iterator(d);
+    const auto end = recursive_directory_iterator();
+    for (const auto& p: boost::make_iterator_range(begin, end)) {
+        const auto& abs(boost::filesystem::absolute(p));
+        if (boost::filesystem::is_regular_file(abs))
+            r.insert(abs);
     }
     return r;
 }

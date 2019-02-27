@@ -12,21 +12,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-26 Tue 15:47]
-| <75>                                |        |      |      |       |
-| Headline                            | Time   |      |      |     % |
-|-------------------------------------+--------+------+------+-------|
-| *Total time*                        | *0:18* |      |      | 100.0 |
-|-------------------------------------+--------+------+------+-------|
-| Stories                             | 0:18   |      |      | 100.0 |
-| Active                              |        | 0:18 |      | 100.0 |
-| Sprint and product backlog grooming |        |      | 0:18 | 100.0 |
+#+CAPTION: Clock summary at [2019-02-27 Wed 17:46]
+| <75>                                        |        |      |      |       |
+| Headline                                    | Time   |      |      |     % |
+|---------------------------------------------+--------+------+------+-------|
+| *Total time*                                | *2:05* |      |      | 100.0 |
+|---------------------------------------------+--------+------+------+-------|
+| Stories                                     | 2:05   |      |      | 100.0 |
+| Active                                      |        | 2:05 |      | 100.0 |
+| Edit release notes for previous sprint      |        |      | 1:27 |  69.6 |
+| Sprint and product backlog grooming         |        |      | 0:18 |  14.4 |
+| Try to fix valgrind warning on =find_files= |        |      | 0:20 |  16.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2019-02-26 Tue 16:51]
     :LOGBOOK:
+    CLOCK: [2019-02-27 Wed 10:12]--[2019-02-27 Wed 10:32] =>  0:20
     CLOCK: [2019-02-26 Tue 15:44]--[2019-02-26 Tue 16:51] =>  1:07
     :END:
 
@@ -180,8 +183,8 @@ You can download binaries from [Bintray](https://bintray.com/masd-project/main/d
 For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
 #+end_src
 
-- [[https://twitter.com/MarcoCraveiro/status/1056856688983187456][Tweet]]
-- [[https://www.linkedin.com/feed/update/urn:li:activity:6462624611979841536][LinkedIn]]
+- [[https://twitter.com/MarcoCraveiro/status/1100704249032462336][Tweet]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6506470333200023552][LinkedIn]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -190,6 +193,23 @@ For all other architectures and/or operative systems, you will need to build Dog
     :END:
 
  Updates to sprint and product backlog.
+
+*** STARTED Try to fix valgrind warning on =find_files=               :story:
+    :LOGBOOK:
+    CLOCK: [2019-02-27 Wed 17:25]--[2019-02-27 Wed 17:45] =>  0:20
+    :END:
+
+We seem to be doing something wrong with directory iterators:
+
+: UMC ==7755== Conditional jump or move depends on uninitialised value(s)
+: ==7755==    at 0xA0FAFB: (anonymous namespace)::dir_itr_increment(void*&, void*&, std::__cxx11::basic_string, std::allocator >&, boost::filesystem::file_status&, boost::filesystem::file_status&) (operations.cpp:2163)
+: ==7755==    by 0xA101B5: boost::filesystem::detail::directory_iterator_increment(boost::filesystem::directory_iterator&, boost::system::error_code*) (operations.cpp:2374)
+: ==7755==    by 0xA1002E: boost::filesystem::detail::directory_iterator_construct(boost::filesystem::directory_iterator&, boost::filesystem::path const&, boost::system::error_code*) (operations.cpp:2354)
+: ==7755==    by 0x6F2AF6: boost::filesystem::directory_iterator::directory_iterator(boost::filesystem::path const&) (operations.hpp:905)
+: ==7755==    by 0x6F2462: boost::filesystem::recursive_directory_iterator::recursive_directory_iterator(boost::filesystem::path const&) (operations.hpp:1174)
+: ==7755==    by 0x6F0E15: masd::dogen::utility::filesystem::find_files(boost::filesystem::path const&) (file.cpp:85)
+: ==7755==    by 0x6ADB4B: masd::dogen::coding::helpers::mapping_set_repository_factory::obtain_mappings[abi:cxx11](std::vector > const&) const (mapping_set_repository_factory.cpp:66)
+: ==7755==    by 0x6AF507: masd::dogen::coding::helpers::mapping_set_repository_factory::make(std::vector > const&) const (mapping_set_repository_factory.cpp:172)
 
 *** Throw on profiles that refer to invalid fields                    :story:
 
