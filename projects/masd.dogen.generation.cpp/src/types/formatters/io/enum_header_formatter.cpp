@@ -84,7 +84,7 @@ std::list<std::string> enum_header_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-coding::meta_model::artefact enum_header_formatter::
+extraction::meta_model::artefact enum_header_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& ye(a.as<coding::meta_model::enumeration>(e));

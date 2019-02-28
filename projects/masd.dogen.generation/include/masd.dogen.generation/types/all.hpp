@@ -56,7 +56,6 @@
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 #include "masd.dogen.generation/types/meta_model/intra_backend_segment_properties.hpp"
 #include "masd.dogen.generation/types/meta_model/denormalised_archetype_properties.hpp"
-#include "masd.dogen.generation/types/transforms/extraction_model_generation_chain.hpp"
 #include "masd.dogen.generation/types/meta_model/local_archetype_location_properties.hpp"
 #include "masd.dogen.generation/types/meta_model/global_archetype_location_properties.hpp"
 #include "masd.dogen.generation/types/transforms/archetype_location_properties_transform.hpp"

@@ -31,7 +31,7 @@
 #include "masd.dogen.utility/types/io/forward_list_io.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.utility/types/io/forward_list_io.hpp"
-#include "masd.dogen.coding/types/helpers/file_linter.hpp"
+#include "masd.dogen.extraction/types/helpers/file_linter.hpp"
 
 namespace {
 
@@ -40,12 +40,12 @@ auto lg(logger_factory("coding.helpers.file_linter"));
 
 }
 
-namespace masd::dogen::coding::helpers {
+namespace masd::dogen::extraction::helpers {
 
 std::set<boost::filesystem::path> file_linter::
-obtain_expected_files(const meta_model::text_model& tm) {
+obtain_expected_files(const meta_model::model& m) {
     std::set<boost::filesystem::path> r;
-    for (const auto a : tm.artefacts()) {
+    for (const auto a : m.artefacts()) {
         r.insert(a.path().generic_string());
         for (const auto& d : a.dependencies())
             r.insert(d.generic_string());
@@ -112,20 +112,20 @@ file_linter::filter(const std::vector<std::string>& patterns,
 }
 
 std::list<boost::filesystem::path> file_linter::
-lint(const meta_model::text_model& tm) {
+lint(const meta_model::model& m) {
     BOOST_LOG_SEV(lg, info) << "Started linting text model.";
 
     /*
      * First we obtain the set of files expected, given the contents
      * of the text model.
      */
-    const auto expected(obtain_expected_files(tm));
+    const auto expected(obtain_expected_files(m));
 
     /*
      * Then we find out which files are actually available in the file
      * system, in the directories managed by the text model.
      */
-    const auto actual(obtain_actual_files(tm.managed_directories()));
+    const auto actual(obtain_actual_files(m.managed_directories()));
 
     /*
      * We then compute the difference between the two sets.
@@ -137,7 +137,7 @@ lint(const meta_model::text_model& tm) {
      * supplied regular expressions. Whatever is left is the model's
      * lint - candidates for removal.
      */
-    const auto r(filter(tm.ignore_files_matching_regex(), delta));
+    const auto r(filter(m.ignore_files_matching_regex(), delta));
 
     BOOST_LOG_SEV(lg, info) << "Finished linting text model. Lint: " << r;
     return r;

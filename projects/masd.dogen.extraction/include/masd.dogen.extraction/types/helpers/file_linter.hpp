@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_FILE_LINTER_HPP
-#define MASD_DOGEN_CODING_TYPES_HELPERS_FILE_LINTER_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_HELPERS_FILE_LINTER_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_HELPERS_FILE_LINTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,9 +29,9 @@
 #include <list>
 #include <vector>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.coding/types/meta_model/text_model.hpp"
+#include "masd.dogen.extraction/types/meta_model/model.hpp"
 
-namespace masd::dogen::coding::helpers {
+namespace masd::dogen::extraction::helpers {
 
 /**
  * @brief Creates a list of all the lint on a model.
@@ -42,7 +42,7 @@ private:
      * @brief Obtains a list of expected files for the supplied model.
      */
     static std::set<boost::filesystem::path>
-    obtain_expected_files(const meta_model::text_model& tm);
+    obtain_expected_files(const meta_model::model& m);
 
     /**
      * @brief Returns all files in all managed directories.
@@ -70,7 +70,7 @@ private:
 
 public:
     static std::list<boost::filesystem::path>
-    lint(const meta_model::text_model& tm);
+    lint(const meta_model::model& m);
 };
 
 }

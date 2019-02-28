@@ -53,7 +53,7 @@ public:
         const coding::meta_model::name& n) const override;
 
 public:
-    coding::meta_model::artefact format(const context& ctx,
+    extraction::meta_model::artefact format(const context& ctx,
         const coding::meta_model::element& e) const override;
 
 private:

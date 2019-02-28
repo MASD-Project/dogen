@@ -30,7 +30,7 @@
 #include "masd.dogen.annotations/types/archetype_location.hpp"
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/types/meta_model/artefact.hpp"
+#include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/locator.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/dependencies_builder_factory.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/inclusion_support_types.hpp"
@@ -101,7 +101,7 @@ public:
     /**
      * @brief Generate a file representation for the element.
      */
-    virtual coding::meta_model::artefact
+    virtual extraction::meta_model::artefact
     format(const context& ctx, const coding::meta_model::element& e) const = 0;
 };
 

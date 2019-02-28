@@ -33,7 +33,7 @@
 #include <boost/optional.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
 #include "masd.dogen.annotations/types/archetype_location.hpp"
-#include "masd.dogen.coding/types/meta_model/artefact.hpp"
+#include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.extraction/types/comment_styles.hpp"
 #include "masd.dogen.extraction/types/cpp/scoped_namespace_formatter.hpp"
 #include "masd.dogen.extraction/types/cpp/scoped_boilerplate_formatter.hpp"
@@ -395,7 +395,7 @@ public:
      * @brief Generates a file with the current contents of the
      * stream.
      */
-    coding::meta_model::artefact make_artefact() const;
+    extraction::meta_model::artefact make_artefact() const;
 
 private:
     std::ostringstream stream_;

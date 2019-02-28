@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_MODEL_TO_TEXT_MODEL_TRANSFORM_HPP
-#define MASD_DOGEN_GENERATION_CPP_TYPES_MODEL_TO_TEXT_MODEL_TRANSFORM_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_MODEL_TO_EXTRACTION_MODEL_TRANSFORM_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_MODEL_TO_EXTRACTION_MODEL_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,7 +35,7 @@
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
-#include "masd.dogen.coding/types/transforms/model_to_text_model_transform_interface.hpp"
+#include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_interface.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/locator.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/model.hpp"
@@ -45,17 +45,18 @@ namespace masd::dogen::generation::cpp {
 /**
  * @brief Implements a C++ model to text transform.
  */
-class model_to_text_model_transform final :
-        public coding::transforms::model_to_text_model_transform_interface {
+class model_to_extraction_model_transform final
+    : public generation::transforms::model_to_extraction_model_transform_interface {
 public:
-    model_to_text_model_transform() = default;
-    model_to_text_model_transform(
-        const model_to_text_model_transform&) = delete;
-    model_to_text_model_transform(model_to_text_model_transform&&) = default;
+    model_to_extraction_model_transform() = default;
+    model_to_extraction_model_transform(
+        const model_to_extraction_model_transform&) = delete;
+    model_to_extraction_model_transform(
+        model_to_extraction_model_transform&&) = default;
 
 public:
 
-    ~model_to_text_model_transform() noexcept;
+    ~model_to_extraction_model_transform() noexcept;
 
 private:
     /**
@@ -84,7 +85,7 @@ private:
     /**
      * @brief Create the files representation of the formattables model.
      */
-    std::list<coding::meta_model::artefact>
+    std::list<extraction::meta_model::artefact>
     format(const std::unordered_set<coding::meta_model::element_archetype>&
         enabled_archetype_for_element, const annotations::type_repository& atrp,
         const annotations::annotation_factory& af,
@@ -121,7 +122,7 @@ public:
     intra_backend_segment_properties(
         const coding::transforms::options& o) const override;
 
-    coding::meta_model::text_model
+    extraction::meta_model::model
     transform(const coding::transforms::context& ctx,
         const bool enable_backend_directories,
         const coding::meta_model::model& m) const override;

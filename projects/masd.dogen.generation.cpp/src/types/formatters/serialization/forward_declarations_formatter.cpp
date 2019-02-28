@@ -85,7 +85,7 @@ std::list<std::string> forward_declarations_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-coding::meta_model::artefact forward_declarations_formatter::
+extraction::meta_model::artefact forward_declarations_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
 
@@ -94,7 +94,7 @@ format(const context& ctx, const coding::meta_model::element& e) const {
     // FIXME: hack: legacy formatters do not support serialisation
     // forward declarations for some types.
     if (fd.is_enum() || fd.is_exception())
-        return coding::meta_model::artefact();
+        return extraction::meta_model::artefact();
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

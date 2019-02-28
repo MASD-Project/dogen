@@ -22,7 +22,7 @@
 #include "masd.dogen.utility/types/test/logging.hpp"
 #include "masd.dogen.utility/types/test/asserter.hpp"
 #include "masd.dogen.utility/types/test/exception_checkers.hpp"
-#include "masd.dogen.coding/io/meta_model/artefact_io.hpp"
+#include "masd.dogen.extraction/io/meta_model/artefact_io.hpp"
 #include "masd.dogen.templating/test/mock_text_template_factory.hpp"
 #include "masd.dogen.templating/io/stitch/text_template_io.hpp"
 #include "masd.dogen.templating/types/stitch/resolution_error.hpp"
@@ -167,7 +167,7 @@ line 2
 
 const std::string unmapped_variable("Key not found:");
 
-masd::dogen::coding::meta_model::artefact
+masd::dogen::extraction::meta_model::artefact
 format(const masd::dogen::templating::stitch::text_template& tt) {
     masd::dogen::templating::stitch::formatter f;
     return f.format(tt);

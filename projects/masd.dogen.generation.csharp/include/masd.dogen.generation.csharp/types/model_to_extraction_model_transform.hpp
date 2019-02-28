@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_MODEL_TO_TEXT_MODEL_TRANSFORM_HPP
-#define MASD_DOGEN_GENERATION_CSHARP_TYPES_MODEL_TO_TEXT_MODEL_TRANSFORM_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_MODEL_TO_EXTRACTION_MODEL_TRANSFORM_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_MODEL_TO_EXTRACTION_MODEL_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -37,7 +37,7 @@
 #include "masd.dogen.extraction/types/repository.hpp"
 #include "masd.dogen.extraction/types/decoration_properties_factory.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
-#include "masd.dogen.coding/types/transforms/model_to_text_model_transform_interface.hpp"
+#include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_interface.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/repository.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/locator.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/model.hpp"
@@ -47,16 +47,17 @@ namespace masd::dogen::generation::csharp {
 /**
  * @brief Manages the c# backend.
  */
-class model_to_text_model_transform final
-    : public coding::transforms::model_to_text_model_transform_interface {
+class model_to_extraction_model_transform final
+    : public generation::transforms::model_to_extraction_model_transform_interface {
 public:
-    model_to_text_model_transform() = default;
-    model_to_text_model_transform(
-        const model_to_text_model_transform&) = delete;
-    model_to_text_model_transform(model_to_text_model_transform&&) = default;
+    model_to_extraction_model_transform() = default;
+    model_to_extraction_model_transform(
+        const model_to_extraction_model_transform&) = delete;
+    model_to_extraction_model_transform(
+        model_to_extraction_model_transform&&) = default;
 
 public:
-    ~model_to_text_model_transform() noexcept;
+    ~model_to_extraction_model_transform() noexcept;
 
 private:
     formattables::model create_formattables_model(
@@ -65,7 +66,7 @@ private:
         const formatters::repository& frp, const formattables::locator & l,
         const coding::meta_model::model& m) const;
 
-    std::list<coding::meta_model::artefact>
+    std::list<extraction::meta_model::artefact>
     format(const annotations::type_repository& atrp,
         const annotations::annotation_factory& af,
         const dogen::extraction::repository& drp,
@@ -95,7 +96,7 @@ public:
     intra_backend_segment_properties(
         const coding::transforms::options& o) const override;
 
-    coding::meta_model::text_model
+    extraction::meta_model::model
     transform(const coding::transforms::context& ctx,
         const bool enable_backend_directories,
         const coding::meta_model::model& m) const override;

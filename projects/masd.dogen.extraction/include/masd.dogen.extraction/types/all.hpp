@@ -47,6 +47,7 @@
 #include "masd.dogen.extraction/types/modeline_locations.hpp"
 #include "masd.dogen.extraction/types/repository_factory.hpp"
 #include "masd.dogen.extraction/types/sequence_formatter.hpp"
+#include "masd.dogen.extraction/types/helpers/file_linter.hpp"
 #include "masd.dogen.extraction/types/infix_configuration.hpp"
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.extraction/types/decoration_formatter.hpp"

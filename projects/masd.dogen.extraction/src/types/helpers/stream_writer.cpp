@@ -40,4 +40,9 @@ void stream_writer::write(const std::list<meta_model::artefact>& files) const {
     }
 }
 
+void stream_writer::
+force_write(const std::list<meta_model::artefact>& files) const {
+    write(files);
+}
+
 }

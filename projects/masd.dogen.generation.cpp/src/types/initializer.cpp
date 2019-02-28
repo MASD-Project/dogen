@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.coding/types/transforms/model_to_text_model_chain.hpp"
+#include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/workflow.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/workflow.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/initializer.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/initializer.hpp"
-#include "masd.dogen.generation.cpp/types/model_to_text_model_transform.hpp"
+#include "masd.dogen.generation.cpp/types/model_to_extraction_model_transform.hpp"
 #include "masd.dogen.generation.cpp/types/initializer.hpp"
 
 namespace masd::dogen::generation::cpp {
@@ -31,7 +31,8 @@ namespace masd::dogen::generation::cpp {
 void initializer::initialize() {
     formatters::initializer::initialize(formatters::workflow::registrar());
     fabric::initializer::initialize();
-    coding::transforms::register_transform<model_to_text_model_transform>();
+    using generation::transforms::register_transform;
+    register_transform<model_to_extraction_model_transform>();
 }
 
 }

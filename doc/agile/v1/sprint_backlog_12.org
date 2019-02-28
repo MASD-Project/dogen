@@ -12,18 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-28 Thu 10:03]
+#+CAPTION: Clock summary at [2019-02-28 Thu 13:54]
 | <75>                                                |        |      |      |       |
 | Headline                                            | Time   |      |      |     % |
 |-----------------------------------------------------+--------+------+------+-------|
-| *Total time*                                        | *2:47* |      |      | 100.0 |
+| *Total time*                                        | *5:42* |      |      | 100.0 |
 |-----------------------------------------------------+--------+------+------+-------|
-| Stories                                             | 2:47   |      |      | 100.0 |
-| Active                                              |        | 2:47 |      | 100.0 |
-| Edit release notes for previous sprint              |        |      | 1:27 |  52.1 |
-| Sprint and product backlog grooming                 |        |      | 0:18 |  10.8 |
-| Try to fix valgrind warning on =find_files=         |        |      | 0:20 |  12.0 |
-| Implement text model generation chain in generation |        |      | 0:42 |  25.1 |
+| Stories                                             | 5:42   |      |      | 100.0 |
+| Active                                              |        | 5:42 |      | 100.0 |
+| Edit release notes for previous sprint              |        |      | 1:27 |  25.4 |
+| Sprint and product backlog grooming                 |        |      | 0:18 |   5.3 |
+| Implement text model generation chain in generation |        |      | 3:37 |  63.5 |
+| Try to fix valgrind warning on =find_files=         |        |      | 0:20 |   5.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -195,6 +195,42 @@ For all other architectures and/or operative systems, you will need to build Dog
 
  Updates to sprint and product backlog.
 
+*** COMPLETED Implement text model generation chain in generation     :story:
+    CLOSED: [2019-02-28 Thu 13:54]
+    :LOGBOOK:
+    CLOCK: [2019-02-28 Thu 12:59]--[2019-02-28 Thu 13:53] =>  0:54
+    CLOCK: [2019-02-28 Thu 10:04]--[2019-02-28 Thu 12:05] =>  2:01
+    CLOCK: [2019-02-28 Thu 09:21]--[2019-02-28 Thu 10:03] =>  0:42
+    :END:
+
+Move the text model transform and all related code into the generation
+model. This implies updating all formatters.
+
+Notes:
+
+- move linter into orchestration or extraction
+
+Merged Stories:
+
+*Move text model into extraction model*
+
+We started this work but stopped half-way. This is required in order
+to move to the new pipeline orchestration.
+
+Tasks:
+
+- copy the current state of all types into extraction as they have
+  moved on.
+- make coding refer to extraction to start off with. Eventually the
+  transforms can be moved over to =generation.extraction=.
+
+*Create a context factory for injection model*
+
+At present we are creating a coding context just so we can get access
+to the tracer. We then initialise the injection context with the
+tracer. A better approach would be to have a context factory that
+handles the tracer creation in injection.
+
 *** STARTED Try to fix valgrind warning on =find_files=               :story:
     :LOGBOOK:
     CLOCK: [2019-02-27 Wed 17:25]--[2019-02-27 Wed 17:45] =>  0:20
@@ -211,14 +247,6 @@ We seem to be doing something wrong with directory iterators:
 : ==7755==    by 0x6F0E15: masd::dogen::utility::filesystem::find_files(boost::filesystem::path const&) (file.cpp:85)
 : ==7755==    by 0x6ADB4B: masd::dogen::coding::helpers::mapping_set_repository_factory::obtain_mappings[abi:cxx11](std::vector > const&) const (mapping_set_repository_factory.cpp:66)
 : ==7755==    by 0x6AF507: masd::dogen::coding::helpers::mapping_set_repository_factory::make(std::vector > const&) const (mapping_set_repository_factory.cpp:172)
-
-*** STARTED Implement text model generation chain in generation       :story:
-    :LOGBOOK:
-    CLOCK: [2019-02-28 Thu 09:21]--[2019-02-28 Thu 10:03] =>  0:42
-    :END:
-
-Move the text model transform and all related code into the generation
-model. This implies updating all formatters.
 
 *** Throw on profiles that refer to invalid fields                    :story:
 
@@ -401,18 +429,6 @@ globally and on just for those two types.
 Its a bit silly to name classes =x_transform= and then to have their
 main method also called =transform=. We should rename these to
 something like =apply=.
-
-*** Move text model into extraction model                             :story:
-
-We started this work but stopped half-way. This is required in order
-to move to the new pipeline orchestration.
-
-Tasks:
-
-- copy the current state of all types into extraction as they have
-  moved on.
-- make coding refer to extraction to start off with. Eventually the
-  transforms can be moved over to =generation.extraction=.
 
 *** Stitch does not have a force write flag                           :story:
 

@@ -34,7 +34,7 @@
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
-#include "masd.dogen.coding/types/meta_model/artefact.hpp"
+#include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.extraction/types/repository.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/element_archetype.hpp"
@@ -66,14 +66,14 @@ private:
         const std::string& archetype) const;
 
 private:
-    std::list<coding::meta_model::artefact>
+    std::list<extraction::meta_model::artefact>
     format(const std::unordered_set<coding::meta_model::element_archetype>&
         enabled_archetype_for_element, const formattables::model& fm,
         const coding::meta_model::element& e,
         const formattables::element_properties& ep) const;
 
 public:
-    std::list<coding::meta_model::artefact>
+    std::list<extraction::meta_model::artefact>
     execute(const std::unordered_set<coding::meta_model::element_archetype>&
         enabled_archetype_for_element, const formattables::model& fm) const;
 

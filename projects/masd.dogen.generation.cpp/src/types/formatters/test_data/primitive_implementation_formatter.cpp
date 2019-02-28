@@ -96,7 +96,7 @@ std::list<std::string> primitive_implementation_formatter::inclusion_dependencie
     return builder.build();
 }
 
-coding::meta_model::artefact primitive_implementation_formatter::
+extraction::meta_model::artefact primitive_implementation_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& p(a.as<coding::meta_model::primitive>(e));

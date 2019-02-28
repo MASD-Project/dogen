@@ -20,38 +20,43 @@
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.coding/io/meta_model/text_model_io.hpp"
-#include "masd.dogen.coding/types/transforms/model_to_text_model_chain.hpp"
 #include "masd.dogen.coding/types/transforms/model_generation_chain.hpp"
-#include "masd.dogen.coding/types/transforms/text_model_generation_chain.hpp"
+#include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
+#include "masd.dogen.extraction/io/meta_model/model_io.hpp"
+#include "masd.dogen.orchestration/types/transforms/extraction_model_generation_chain.hpp"
 
 namespace {
 
 const std::string
-transform_id("masd.dogen.coding.text_model_generation_chain");
+transform_id("masd.dogen.orchestration.extraction_model_generation_chain");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 }
 
-namespace masd::dogen::coding::transforms {
+namespace masd::dogen::orchestration::transforms {
 
-meta_model::text_model
-text_model_generation_chain::transform(const context& ctx) {
+extraction::meta_model::model
+extraction_model_generation_chain::
+transform(const coding::transforms::context& ctx) {
+
+
     const auto model_name(ctx.transform_options().target().filename().string());
-    tracing::scoped_chain_tracer stp(lg, "text model generation chain",
+    tracing::scoped_chain_tracer stp(lg, "extraction model generation chain",
         transform_id, model_name, ctx.tracer());
 
     /*
      * Obtain the models.
      */
+    using coding::transforms::model_generation_chain;
     const auto models(model_generation_chain::transform(ctx));
 
     /*
      * Run the model to text transforms.
      */
-    const auto r(model_to_text_model_chain::transform(ctx, models));
+    using generation::transforms::model_to_extraction_model_chain;
+    const auto r(model_to_extraction_model_chain::transform(ctx, models));
     stp.end_chain(r);
 
     return r;

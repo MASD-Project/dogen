@@ -65,7 +65,7 @@ inclusion_dependencies(const coding::meta_model::element& /*e*/) const {
     return r;
 }
 
-coding::meta_model::artefact assistant_formatter::
+extraction::meta_model::artefact assistant_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);

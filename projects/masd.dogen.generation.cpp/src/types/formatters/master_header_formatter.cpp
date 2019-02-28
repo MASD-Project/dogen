@@ -88,7 +88,7 @@ std::list<std::string> master_header_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-coding::meta_model::artefact master_header_formatter::
+extraction::meta_model::artefact master_header_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
 

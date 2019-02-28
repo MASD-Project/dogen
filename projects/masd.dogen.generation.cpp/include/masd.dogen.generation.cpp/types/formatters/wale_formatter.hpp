@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "masd.dogen.coding/types/meta_model/artefact.hpp"
+#include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.coding/types/meta_model/element_fwd.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/artefact_properties.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
@@ -37,7 +37,7 @@ private:
     bool is_header(const inclusion_support_types ist) const;
 
 public:
-    coding::meta_model::artefact format(
+    extraction::meta_model::artefact format(
         const artefact_formatter_interface& stock_formatter,
         const context& ctx, const coding::meta_model::element& e) const;
 };

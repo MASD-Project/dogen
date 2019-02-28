@@ -152,7 +152,8 @@ annotations::archetype_location formatter::archetype_location() const {
     return r;
 }
 
-coding::meta_model::artefact formatter::format(const text_template& tt) const {
+extraction::meta_model::artefact
+formatter::format(const text_template& tt) const {
     BOOST_LOG_SEV(lg, debug) << "Formatting text template.";
 
     const auto& ss(tt.properties().stitching_properties());
@@ -185,7 +186,7 @@ coding::meta_model::artefact formatter::format(const text_template& tt) const {
         }
     }
 
-    coding::meta_model::artefact r;
+    extraction::meta_model::artefact r;
     r.overwrite(true);
     r.content(s.str());
     if (!tt.output_path().empty())

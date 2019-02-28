@@ -696,8 +696,8 @@ std::ostream& assistant::stream() {
     return filtering_stream_;
 }
 
-coding::meta_model::artefact assistant::make_artefact() const {
-    coding::meta_model::artefact r;
+extraction::meta_model::artefact assistant::make_artefact() const {
+    extraction::meta_model::artefact r;
     r.content(stream_.str());
     r.path(artefact_properties_.file_path());
 

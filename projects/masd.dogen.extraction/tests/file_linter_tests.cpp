@@ -24,12 +24,12 @@
 #include "masd.dogen.utility/types/test_data/validating_resolver.hpp"
 #include "masd.dogen.utility/types/test_data/tds_test_good.hpp"
 #include "masd.dogen.utility/types/test/logging.hpp"
-#include "masd.dogen.coding/types/helpers/file_linter.hpp"
+#include "masd.dogen.extraction/types/helpers/file_linter.hpp"
 
 namespace  {
 
 const std::string test_suite("file_linter_tests");
-const std::string test_module("masd.dogen.coding.tests");
+const std::string test_module("masd.dogen.extraction.tests");
 const std::string fl_tds_expected("file_linter/expected");
 const std::string fl_tds_actual_f1("file_linter/actual/file_1.txt");
 const std::string fl_tds_actual_f2("file_linter/actual/file_2.txt");
@@ -43,17 +43,17 @@ const std::list<boost::filesystem::path> managed_directories() {
     return r;
 }
 
-const masd::dogen::coding::meta_model::artefact
+const masd::dogen::extraction::meta_model::artefact
 to_artefact(const boost::filesystem::path& p) {
-    masd::dogen::coding::meta_model::artefact r;
+    masd::dogen::extraction::meta_model::artefact r;
     r.path(p);
     return r;
 }
 
-const masd::dogen::coding::meta_model::text_model
+const masd::dogen::extraction::meta_model::model
 create_model(const std::list<boost::filesystem::path>& files,
     const std::vector<std::string>& ignored_files) {
-    masd::dogen::coding::meta_model::text_model r;
+    masd::dogen::extraction::meta_model::model r;
     r.ignore_files_matching_regex(ignored_files);
     r.managed_directories(managed_directories());
     for(const auto& f : files)
@@ -77,7 +77,7 @@ BOOST_AUTO_TEST_CASE(when_all_files_are_present_file_linter_does_not_find_extra_
         tds_test_good::expected_empty_file_txt()
     };
     const auto tm(create_model(files, ignored_files));
-    using masd::dogen::coding::helpers::file_linter;
+    using masd::dogen::extraction::helpers::file_linter;
     const auto result(file_linter::lint(tm));
     BOOST_CHECK(result.empty());
 }
@@ -91,7 +91,7 @@ BOOST_AUTO_TEST_CASE(when_extra_files_are_present_file_linter_finds_the_extra_fi
         tds_test_good::expected_empty_file_txt()
     };
     const auto tm(create_model(files, ignored_files));
-    using masd::dogen::coding::helpers::file_linter;
+    using masd::dogen::extraction::helpers::file_linter;
     const auto result(file_linter::lint(tm));
 
     BOOST_REQUIRE(result.size() == 2);
@@ -113,7 +113,7 @@ BOOST_AUTO_TEST_CASE(ignored_files_are_not_deleted) {
 
     const std::vector<std::string> ignores({".*/file_1.*"});
     const auto tm(create_model(files, ignores));
-    using masd::dogen::coding::helpers::file_linter;
+    using masd::dogen::extraction::helpers::file_linter;
     const auto result(file_linter::lint(tm));
 
     BOOST_CHECK([&]{

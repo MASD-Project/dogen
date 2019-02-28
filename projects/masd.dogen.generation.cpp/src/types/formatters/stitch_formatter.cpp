@@ -49,7 +49,7 @@ bool stitch_formatter::is_header(const inclusion_support_types ist) const {
         ist == inclusion_support_types::canonical_support;
 }
 
-coding::meta_model::artefact stitch_formatter::
+extraction::meta_model::artefact stitch_formatter::
 format(const artefact_formatter_interface& stock_formatter, const context& ctx,
     const coding::meta_model::element& e) const {
     const auto al(stock_formatter.archetype_location());
@@ -71,7 +71,7 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
         BOOST_LOG_SEV(lg, debug) << "Stitch template not found: "
                                  << fp.generic_string();
 
-        coding::meta_model::artefact r;
+        extraction::meta_model::artefact r;
         r.overwrite(a.new_artefact_properties().overwrite());
         return r;
     }

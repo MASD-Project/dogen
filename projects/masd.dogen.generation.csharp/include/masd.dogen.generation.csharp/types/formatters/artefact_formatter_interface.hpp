@@ -29,7 +29,7 @@
 #include <typeindex>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.annotations/types/archetype_location.hpp"
-#include "masd.dogen.coding/types/meta_model/artefact.hpp"
+#include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/locator.hpp"
@@ -84,7 +84,7 @@ public:
     /**
      * @brief Generate a file representation for the element.
      */
-    virtual coding::meta_model::artefact
+    virtual extraction::meta_model::artefact
     format(const context& ctx, const coding::meta_model::element& e) const = 0;
 };
 

@@ -35,7 +35,6 @@ set_target_properties(${tests_target_name}
 
 target_link_libraries(${tests_target_name}
     ${lib_target_name}
-    masd.dogen.utility.lib
     ${LIBXML2_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}

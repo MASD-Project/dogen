@@ -77,9 +77,9 @@ std::list<std::string> builtin_header_formatter::inclusion_dependencies(
     return r;
 }
 
-coding::meta_model::artefact builtin_header_formatter::
+extraction::meta_model::artefact builtin_header_formatter::
 format(const context& /*ctx*/, const coding::meta_model::element& /*e*/) const {
-    coding::meta_model::artefact r;
+    extraction::meta_model::artefact r;
     return r;
 }
 

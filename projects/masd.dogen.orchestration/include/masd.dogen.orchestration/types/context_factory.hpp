@@ -18,16 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_ARTEFACT_FWD_HPP
-#define MASD_DOGEN_CODING_TYPES_META_MODEL_ARTEFACT_FWD_HPP
+#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_CONTEXT_FACTORY_HPP
+#define MASD_DOGEN_ORCHESTRATION_TYPES_CONTEXT_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace masd::dogen::coding::meta_model {
+#include "masd.dogen.annotations/types/archetype_location_repository.hpp"
+#include "masd.dogen.coding/types/transforms/options.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.injection/types/transforms/context.hpp"
 
-class artefact;
+namespace masd::dogen::orchestration {
+
+/**
+ * @brief Factory that creates transformation contexts.
+ */
+class context_factory final {
+public:
+    static injection::transforms::context
+    make_injector_context(const coding::transforms::options& o,
+        const bool enable_validation = true);
+
+    static coding::transforms::context
+    make_coding_context(const coding::transforms::options& o,
+        const bool enable_validation = true);
+};
 
 }
 

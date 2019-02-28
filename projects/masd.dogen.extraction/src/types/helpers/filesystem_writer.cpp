@@ -31,7 +31,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-static logger lg(logger_factory("generation.filesystem_writer"));
+static logger lg(logger_factory("extraction.filesystem_writer"));
 
 const std::string using_dir_message("Using directory: ");
 const std::string created_dir_message("Created directory: ");
@@ -51,13 +51,45 @@ std::string create_hacked_contents(const std::string file_name) {
 
 namespace masd::dogen::extraction::helpers {
 
-filesystem_writer::filesystem_writer(const bool force_write)
-    : force_write_(force_write) {}
+class filesystem_writer_impl {
+public:
+    filesystem_writer_impl(const bool force_write) :
+        force_write_(force_write) {}
 
-bool filesystem_writer::requires_writing(const meta_model::artefact& f) const {
-    if (force_write_)
-        return true;
+private:
+    /**
+     * @brief Returns true if the artefact needs to be written to the
+     * filesystem, false otherwise.
+     */
+    bool requires_writing(const meta_model::artefact& a) const;
 
+    /**
+     * @brief Creates directories to house the file, if they do not
+     * yet exist.
+     */
+    void create_directories(const boost::filesystem::path& file_path) const;
+
+    /**
+     * @brief Handle the special case of writing empty artefacts.
+     *
+     * FIXME: this is a hack for now.
+     */
+    void write_empty_file(const meta_model::artefact& a) const;
+
+    /**
+     * @brief Writes the artefact.
+     */
+    void write(const meta_model::artefact& a) const;
+
+public:
+    void write(const std::list<meta_model::artefact>& files) const;
+
+private:
+    const bool force_write_;
+};
+
+bool filesystem_writer_impl::
+requires_writing(const meta_model::artefact& f) const {
     /*
      * If the file does not yet exist, we must always write it.
      */
@@ -66,14 +98,23 @@ bool filesystem_writer::requires_writing(const meta_model::artefact& f) const {
 
     /*
      * If the file exists and the overwrite flag is set to false then
-     * we should not write.
+     * we should not write. This is for cases where the user has
+     * handcrafted the file.
      */
     if (!f.overwrite())
         return false;
 
     /*
-     * Perform a binary diff of the file content; if it has changed,
-     * we need to write.
+     * If force write is on, there is no additional clever logic for
+     * writting - we should just write.
+     */
+    if (force_write_)
+        return true;
+
+    /*
+     * Finally, we need to check if there is a need to write or
+     * not. For this we perform a binary diff of the file content; if
+     * it has changed, we need to write.
      */
     using masd::dogen::utility::filesystem::read_file_content;
     const std::string existing_content(read_file_content(f.path()));
@@ -87,7 +128,7 @@ bool filesystem_writer::requires_writing(const meta_model::artefact& f) const {
     return true;
 }
 
-void filesystem_writer::create_directories(
+void filesystem_writer_impl::create_directories(
     const boost::filesystem::path& file_path) const {
     const auto dir(file_path.parent_path());
     if (dir.empty() || dir.generic_string() == "/")
@@ -99,7 +140,8 @@ void filesystem_writer::create_directories(
         using_dir_message) << dir.generic_string();
 }
 
-void filesystem_writer::write_empty_file(const meta_model::artefact& f) const {
+void filesystem_writer_impl::
+write_empty_file(const meta_model::artefact& f) const {
     const auto gs(f.path().generic_string());
     if (boost::filesystem::exists(f.path())) {
         BOOST_LOG_SEV(lg, trace) << "File has no content so no writing: " << gs;
@@ -119,7 +161,7 @@ void filesystem_writer::write_empty_file(const meta_model::artefact& f) const {
     return;
 }
 
-void filesystem_writer::write(const meta_model::artefact& f) const {
+void filesystem_writer_impl::write(const meta_model::artefact& f) const {
     const auto gs(f.path().generic_string());
     BOOST_LOG_SEV(lg, debug) << "Writing file: " << gs;
 
@@ -146,13 +188,27 @@ void filesystem_writer::write(const meta_model::artefact& f) const {
     BOOST_LOG_SEV(lg, debug) << "Processed file: " << gs;
 }
 
-void filesystem_writer::
+void filesystem_writer_impl::
 write(const std::list<meta_model::artefact>& files) const {
     BOOST_LOG_SEV(lg, info) << "Writing files: " << files;
     for (const auto& f : files)
         write(f);
 
     BOOST_LOG_SEV(lg, info) << "Finished writing files: " << files;
+}
+
+void filesystem_writer::
+write(const std::list<meta_model::artefact>& files) const {
+    BOOST_LOG_SEV(lg, info) << "Writing with force write disabled.";
+    filesystem_writer_impl fwi(false/*force_write*/);
+    fwi.write(files);
+}
+
+void filesystem_writer::
+force_write(const std::list<meta_model::artefact>& files) const {
+    BOOST_LOG_SEV(lg, info) << "Writing with force write enabled.";
+    filesystem_writer_impl fwi(true/*force_write*/);
+    fwi.write(files);
 }
 
 }

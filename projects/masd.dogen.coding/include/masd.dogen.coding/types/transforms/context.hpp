@@ -27,7 +27,6 @@
 
 #include <vector>
 #include <string>
-#include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
@@ -37,7 +36,6 @@
 #include "masd.dogen.coding/types/meta_model/intra_backend_segment_properties.hpp"
 #include "masd.dogen.coding/types/transforms/options.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository.hpp"
-#include "masd.dogen.coding/types/helpers/artefact_writer_interface.hpp"
 
 namespace masd::dogen::coding::transforms {
 
@@ -65,8 +63,7 @@ public:
         const tracing::tracer& tracer,
         const std::unordered_map<std::string,
         meta_model::intra_backend_segment_properties>&
-        intra_backend_segment_properties,
-        const boost::shared_ptr<helpers::artefact_writer_interface> writer);
+        intra_backend_segment_properties);
     ~context();
 
 public:
@@ -122,11 +119,6 @@ public:
                              meta_model::intra_backend_segment_properties>&
     intra_backend_segment_properties() const;
 
-    /**
-     * @brief Writer for artefacts.
-     */
-    const helpers::artefact_writer_interface& artefact_writer() const;
-
 private:
     const std::vector<boost::filesystem::path> data_directories_;
     const transforms::options options_;
@@ -140,7 +132,6 @@ private:
     const std::unordered_map<std::string,
                              meta_model::intra_backend_segment_properties>
     intra_backend_segment_properties_;
-    const boost::shared_ptr<helpers::artefact_writer_interface> writer_;
 };
 
 }

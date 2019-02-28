@@ -22,8 +22,9 @@
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.coding/types/transforms/text_model_generation_chain.hpp"
-#include "masd.dogen.coding/types/helpers/file_linter.hpp"
+#include "masd.dogen.extraction/types/helpers/filesystem_writer.hpp"
+#include "masd.dogen.extraction/types/helpers/file_linter.hpp"
+#include "masd.dogen.orchestration/types/transforms/extraction_model_generation_chain.hpp"
 #include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
 
 namespace {
@@ -38,29 +39,28 @@ auto lg(logger_factory(transform_id));
 
 namespace masd::dogen::orchestration::transforms {
 
-void code_generation_chain::write(const coding::transforms::context& ctx,
-    const coding::meta_model::text_model& tm) {
+void code_generation_chain::write(const extraction::meta_model::model& m) {
 
-    if (tm.artefacts().empty()) {
+    if (m.artefacts().empty()) {
         BOOST_LOG_SEV(lg, warn) << "No files were generated, so no output.";
         return;
     }
 
-    const auto& w(ctx.artefact_writer());
-    if (tm.force_write())
-        w.force_write(tm.artefacts());
+    const auto& w = extraction::helpers::filesystem_writer();
+    if (m.force_write())
+        w.force_write(m.artefacts());
     else
-        w.write(tm.artefacts());
+        w.write(m.artefacts());
 }
 
-void code_generation_chain::lint(const coding::meta_model::text_model& tm) {
+void code_generation_chain::lint(const extraction::meta_model::model& m) {
     /*
      * If we're not going to delete the files, don't bother linting..
      */
-    if (!tm.delete_extra_files())
+    if (!m.delete_extra_files())
         return;
 
-    const auto lint(coding::helpers::file_linter::lint(tm));
+    const auto lint(extraction::helpers::file_linter::lint(m));
     if (lint.empty())
         return;
 
@@ -78,18 +78,17 @@ void code_generation_chain::transform(const coding::transforms::context& ctx) {
     /*
      * Obtain the text models.
      */
-    const auto tm(
-        coding::transforms::text_model_generation_chain::transform(ctx));
+    const auto m(extraction_model_generation_chain::transform(ctx));
 
     /*
      * Write the artefacts.
      */
-    write(ctx, tm);
+    write(m);
 
     /*
      * Perform any housekeeping if need be.
      */
-    lint(tm);
+    lint(m);
 
     BOOST_LOG_SEV(lg, info) << "Finished code generation.";
 }

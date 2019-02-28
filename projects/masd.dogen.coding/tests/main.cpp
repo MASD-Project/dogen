@@ -22,28 +22,6 @@
 #include <boost/test/unit_test.hpp>
 #include "masd.dogen.utility/types/test/logging.hpp"
 #include "masd.dogen.utility/types/test/fixture.hpp"
-#include "masd.dogen.generation.csharp/types/initializer.hpp"
-#include "masd.dogen.generation.cpp/types/initializer.hpp"
-#include "masd.dogen.injection.json/types/initializer.hpp"
-#include "masd.dogen.injection.dia/types/initializer.hpp"
-
-namespace  {
-
-const std::string test_suite("initializer");
-const std::string test_module("masd.dogen.coding.tests");
-
-struct initializer {
-    initializer() {
-        SETUP_TEST_LOG("initializer");
-        masd::dogen::injection::json::initializer::initialize();
-        masd::dogen::injection::dia::initializer::initialize();
-        masd::dogen::generation::csharp::initializer::initialize();
-        masd::dogen::generation::cpp::initializer::initialize();
-    }
-};
-
-}
 
 using namespace masd::dogen::utility::test;
 BOOST_GLOBAL_FIXTURE(exception_fixture);
-BOOST_GLOBAL_FIXTURE(initializer);

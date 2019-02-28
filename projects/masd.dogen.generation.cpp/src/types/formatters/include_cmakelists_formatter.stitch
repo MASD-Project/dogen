@@ -70,7 +70,7 @@ std::list<std::string> include_cmakelists_formatter::inclusion_dependencies(
     return r;
 }
 
-coding::meta_model::artefact include_cmakelists_formatter::
+extraction::meta_model::artefact include_cmakelists_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& c(a.as<fabric::cmakelists>(e));

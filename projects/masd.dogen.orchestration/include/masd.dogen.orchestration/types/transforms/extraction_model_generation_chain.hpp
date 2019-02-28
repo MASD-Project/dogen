@@ -18,10 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.coding/types/helpers/artefact_writer_interface.hpp"
+#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_EXTRACTION_MODEL_GENERATION_CHAIN_HPP
+#define MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_EXTRACTION_MODEL_GENERATION_CHAIN_HPP
 
-namespace masd::dogen::coding::helpers {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-artefact_writer_interface::~artefact_writer_interface() noexcept { }
+#include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.extraction/types/meta_model/model.hpp"
+
+namespace masd::dogen::orchestration::transforms {
+
+class extraction_model_generation_chain final {
+public:
+    static extraction::meta_model::model
+    transform(const coding::transforms::context& ctx);
+};
 
 }
+
+#endif

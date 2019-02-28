@@ -19,12 +19,10 @@
  *
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.injection/types/transforms/context.hpp"
-#include "masd.dogen.injection/types/transforms/model_to_model_chain.hpp"
+#include "masd.dogen.orchestration/types/context_factory.hpp"
 #include "masd.dogen.injection.json/types/initializer.hpp"
 #include "masd.dogen.injection.dia/types/initializer.hpp"
-#include "masd.dogen.coding/types/transforms/options.hpp"
-#include "masd.dogen.coding/types/transforms/context_factory.hpp"
+#include "masd.dogen.injection/types/transforms/model_to_model_chain.hpp"
 #include "masd.dogen.orchestration/types/converter.hpp"
 
 namespace {
@@ -64,13 +62,10 @@ void converter::convert(const configuration& cfg,
     BOOST_LOG_SEV(lg, debug) << "Started conversion.";
 
     const auto o(make_options(cfg, source, tracing_output_directory));
-
-    using namespace coding::transforms;
-    const auto ctx(context_factory::make(o, false/*enable_validation*/));
-    const masd::dogen::injection::transforms::context ext_ctx(ctx.tracer());
+    const auto ctx(context_factory::make_injector_context(o));
 
     using namespace masd::dogen::injection::transforms;
-    model_to_model_chain::transform(ext_ctx, source, destination);
+    model_to_model_chain::transform(ctx, source, destination);
 
     BOOST_LOG_SEV(lg, debug) << "Finished conversion.";
 }

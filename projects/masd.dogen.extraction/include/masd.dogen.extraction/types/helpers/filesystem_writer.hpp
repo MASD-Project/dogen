@@ -35,38 +35,9 @@ namespace masd::dogen::extraction::helpers {
  */
 class filesystem_writer : public artefact_writer_interface {
 public:
-    explicit filesystem_writer(const bool force_write);
-
-private:
-    /**
-     * @brief Returns true if the artefact needs to be written to the
-     * filesystem, false otherwise.
-     */
-    bool requires_writing(const meta_model::artefact& a) const;
-
-    /**
-     * @brief Creates directories to house the file, if they do not
-     * yet exist.
-     */
-    void create_directories(const boost::filesystem::path& file_path) const;
-
-    /**
-     * @brief Handle the special case of writing empty artefacts.
-     *
-     * FIXME: this is a hack for now.
-     */
-    void write_empty_file(const meta_model::artefact& a) const;
-
-    /**
-     * @brief Writes the artefact.
-     */
-    void write(const meta_model::artefact& a) const;
-
-public:
     void write(const std::list<meta_model::artefact>& artefacts) const override;
-
-private:
-    const bool force_write_;
+    void force_write(
+        const std::list<meta_model::artefact>& artefacts) const override;
 };
 
 }

@@ -29,8 +29,8 @@
 #include "masd.dogen.annotations/types/type_repository_factory.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
 #include "masd.dogen.extraction/types/repository_factory.hpp"
-#include "masd.dogen.coding/io/meta_model/artefact_io.hpp"
-#include "masd.dogen.coding/types/helpers/filesystem_writer.hpp"
+#include "masd.dogen.extraction/io/meta_model/artefact_io.hpp"
+#include "masd.dogen.extraction/types/helpers/filesystem_writer.hpp"
 #include "masd.dogen.templating/types/stitch/parser.hpp"
 #include "masd.dogen.templating/types/stitch/properties_factory.hpp"
 #include "masd.dogen.templating/types/stitch/instantiator.hpp"
@@ -119,13 +119,13 @@ annotations::type_repository workflow::create_annotations_type_repository(
     return f.make(alrp, data_dirs);
 }
 
-std::list<coding::meta_model::artefact>
+std::list<extraction::meta_model::artefact>
 workflow::create_artefacts(const annotations::type_repository& atrp,
     const annotations::annotation_factory& af,
     const masd::dogen::extraction::repository& drp, const std::forward_list<
     boost::filesystem::path>& text_template_paths) const {
 
-    std::list<coding::meta_model::artefact> r;
+    std::list<extraction::meta_model::artefact> r;
     const instantiator inst(atrp, af, drp);
     for (const auto& p : text_template_paths)
         r.push_front(inst.instantiate(p));
@@ -133,11 +133,11 @@ workflow::create_artefacts(const annotations::type_repository& atrp,
     return r;
 }
 
-void workflow::
-write_artefacts(const std::list<coding::meta_model::artefact>& artefacts) const {
+void workflow::write_artefacts(
+    const std::list<extraction::meta_model::artefact>& artefacts) const {
     BOOST_LOG_SEV(lg, debug) << "About to write. Artefacts: " << artefacts;
 
-    coding::helpers::filesystem_writer w;
+    extraction::helpers::filesystem_writer w;
     w.write(artefacts);
 
     BOOST_LOG_SEV(lg, debug) << "Finished writing.";

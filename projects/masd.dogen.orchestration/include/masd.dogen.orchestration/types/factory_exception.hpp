@@ -18,16 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_TEXT_MODEL_FWD_HPP
-#define MASD_DOGEN_CODING_TYPES_META_MODEL_TEXT_MODEL_FWD_HPP
+#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_FACTORY_EXCEPTION_HPP
+#define MASD_DOGEN_ORCHESTRATION_TYPES_FACTORY_EXCEPTION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace masd::dogen::coding::meta_model {
+#include <string>
+#include <boost/exception/info.hpp>
 
-class text_model;
+namespace masd::dogen::orchestration {
+
+/**
+ * @brief An error occurred in the factory whilst making.
+ */
+class factory_exception : public virtual std::exception, public virtual boost::exception {
+public:
+    factory_exception() = default;
+    ~factory_exception() noexcept = default;
+
+public:
+    explicit factory_exception(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
 
 }
 

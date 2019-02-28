@@ -43,8 +43,9 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 endif ()
 
 target_link_libraries(${lib_target_name}
+    masd.dogen.lib
     masd.dogen.utility.lib
-    masd.dogen.extraction.lib
+    masd.dogen.annotations.lib
     $<$<BOOL:${use_msvc_libs}>:bcrypt>
     ${Boost_LIBRARIES})
 

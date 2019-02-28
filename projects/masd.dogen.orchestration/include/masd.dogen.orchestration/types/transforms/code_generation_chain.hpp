@@ -26,7 +26,7 @@
 #endif
 
 #include "masd.dogen.coding/types/transforms/context.hpp"
-#include "masd.dogen.coding/types/meta_model/text_model.hpp"
+#include "masd.dogen.extraction/types/meta_model/model.hpp"
 
 namespace masd::dogen::orchestration::transforms {
 
@@ -58,14 +58,13 @@ namespace masd::dogen::orchestration::transforms {
  */
 class code_generation_chain final {
 private:
-    static void write(const coding::transforms::context& ctx,
-        const coding::meta_model::text_model& tm);
+    static void write(const extraction::meta_model::model& m);
 
 private:
     /**
      * @brief Handles any extraneous files which should be removed.
      */
-    static void lint(const coding::meta_model::text_model& tm);
+    static void lint(const extraction::meta_model::model& m);
 
 public:
     static void transform(const coding::transforms::context& ctx);

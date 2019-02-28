@@ -26,7 +26,12 @@ namespace masd::dogen::coding::test {
 transforms::context mock_context_factory::make() {
     masd::dogen::coding::transforms::options o;
     using masd::dogen::coding::transforms::context_factory;
-    const auto r(context_factory::make(o, false/*enable_validation*/));
+
+    annotations::archetype_location_repository alrp;
+    std::unordered_map<
+        std::string,
+        coding::meta_model::intra_backend_segment_properties> ibsp;
+    const auto r(context_factory::make(alrp, ibsp, o, false/*enable_validation*/));
     return r;
 }
 

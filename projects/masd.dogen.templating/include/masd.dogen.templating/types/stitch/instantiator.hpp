@@ -30,7 +30,7 @@
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
-#include "masd.dogen.coding/types/meta_model/artefact.hpp"
+#include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.extraction/types/repository.hpp"
 #include "masd.dogen.templating/types/stitch/properties_factory.hpp"
 #include "masd.dogen.templating/types/stitch/text_template.hpp"
@@ -77,11 +77,11 @@ private:
     /**
      * @brief Formats the supplied text template.
      */
-    coding::meta_model::artefact
+    extraction::meta_model::artefact
     format_text_template(const text_template& tt) const;
 
 public:
-    coding::meta_model::artefact
+    extraction::meta_model::artefact
     instantiate(const boost::filesystem::path& input_path) const;
 
 private:

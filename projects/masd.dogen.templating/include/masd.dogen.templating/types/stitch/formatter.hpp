@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "masd.dogen.coding/types/meta_model/artefact.hpp"
+#include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.annotations/types/archetype_location.hpp"
 #include "masd.dogen.templating/types/stitch/line.hpp"
 #include "masd.dogen.templating/types/stitch/text_template.hpp"
@@ -87,7 +87,7 @@ public:
     /**
      * @brief Formats the template into an artefact.
      */
-    coding::meta_model::artefact format(const text_template& tt) const;
+    extraction::meta_model::artefact format(const text_template& tt) const;
 };
 
 }

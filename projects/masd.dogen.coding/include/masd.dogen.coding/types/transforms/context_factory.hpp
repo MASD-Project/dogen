@@ -27,7 +27,6 @@
 
 #include "masd.dogen.annotations/types/archetype_location_repository.hpp"
 #include "masd.dogen.coding/types/transforms/options.hpp"
-#include "masd.dogen.coding/types/transforms/model_to_text_model_transform_registrar.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 
 namespace masd::dogen::coding::transforms {
@@ -36,20 +35,12 @@ namespace masd::dogen::coding::transforms {
  * @brief Factory that creates transformation contexts.
  */
 class context_factory final {
-private:
-    static std::unordered_map<std::string,
-                              meta_model::intra_backend_segment_properties>
-    create_intra_backend_segment_properties(
-        const options& o,
-        const model_to_text_model_transform_registrar& rg);
-
-    static annotations::archetype_location_repository
-    create_archetype_location_repository(
-        const model_to_text_model_transform_registrar& rg);
-
 public:
     static context
-    make(const options& o, const bool enable_validation = true);
+    make(const annotations::archetype_location_repository alrp,
+        const std::unordered_map<std::string,
+        coding::meta_model::intra_backend_segment_properties>&
+        ibsp, const options& o, const bool enable_validation = true);
 };
 
 }

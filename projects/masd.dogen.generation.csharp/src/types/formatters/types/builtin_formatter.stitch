@@ -15,9 +15,9 @@
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-coding::meta_model::artefact builtin_formatter::
+extraction::meta_model::artefact builtin_formatter::
 format(const context& /*ctx*/, const coding::meta_model::element& /*e*/) const {
-    coding::meta_model::artefact r;
+    extraction::meta_model::artefact r;
     return r;
 }
 

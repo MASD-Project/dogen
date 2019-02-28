@@ -19,8 +19,12 @@
  *
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
 #include "masd.dogen.coding/types/transforms/options.hpp"
 #include "masd.dogen.coding/types/transforms/context_factory.hpp"
+#include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
+#include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
+#include "masd.dogen.orchestration/types/context_factory.hpp"
 #include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
 #include "masd.dogen.orchestration/types/generator.hpp"
 
@@ -28,6 +32,8 @@ namespace {
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory("orchestration.generator"));
+
+const std::string duplicate_segment("Duplicat segment: ");
 
 using masd::dogen::coding::transforms::options;
 options make_options(const masd::dogen::configuration& cfg,
@@ -56,6 +62,7 @@ options make_options(const masd::dogen::configuration& cfg,
 
 namespace masd::dogen::orchestration {
 
+
 void generator::generate(const configuration& cfg,
     const boost::filesystem::path& target,
     const boost::filesystem::path& output_directory,
@@ -65,8 +72,7 @@ void generator::generate(const configuration& cfg,
     const auto o(make_options(cfg, target, output_directory,
             tracing_output_directory));
 
-    using namespace coding::transforms;
-    const auto ctx(context_factory::make(o));
+    const auto ctx(context_factory::make_coding_context(o));
     transforms::code_generation_chain::transform(ctx);
 
     BOOST_LOG_SEV(lg, debug) << "Finished generation.";

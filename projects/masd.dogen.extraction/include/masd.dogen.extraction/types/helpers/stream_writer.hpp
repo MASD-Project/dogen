@@ -40,6 +40,8 @@ public:
 
 public:
     void write(const std::list<meta_model::artefact>& files) const override;
+    void force_write(
+        const std::list<meta_model::artefact>& files) const override;
 
 private:
     std::ostream& stream_;

@@ -26,7 +26,7 @@
 #endif
 
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
-#include "masd.dogen.coding/types/meta_model/artefact.hpp"
+#include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.extraction/types/repository.hpp"
 #include "masd.dogen.coding/types/meta_model/element_fwd.hpp"
 #include "masd.dogen.templating/types/stitch/instantiator.hpp"
@@ -45,7 +45,7 @@ private:
     bool is_header(const inclusion_support_types ist) const;
 
 public:
-    coding::meta_model::artefact
+    extraction::meta_model::artefact
     format(const artefact_formatter_interface& stock_formatter,
         const context& ctx, const coding::meta_model::element& e) const;
 

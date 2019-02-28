@@ -64,9 +64,9 @@ inclusion_dependencies(const coding::meta_model::element& /*e*/) const {
     return r;
 }
 
-coding::meta_model::artefact builtin_formatter::
+extraction::meta_model::artefact builtin_formatter::
 format(const context& /*ctx*/, const coding::meta_model::element& /*e*/) const {
-    coding::meta_model::artefact r;
+    extraction::meta_model::artefact r;
     return r;
 }
 

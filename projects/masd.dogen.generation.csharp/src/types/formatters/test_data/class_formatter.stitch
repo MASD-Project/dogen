@@ -16,7 +16,7 @@
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-coding::meta_model::artefact class_formatter::format(
+extraction::meta_model::artefact class_formatter::format(
     const context& ctx, const coding::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);

@@ -68,7 +68,7 @@ const coding::meta_model::artefact_properties& workflow::get_artefact_properties
     return i->second;
 }
 
-std::list<coding::meta_model::artefact>
+std::list<extraction::meta_model::artefact>
 workflow::format(const std::unordered_set<coding::meta_model::element_archetype>&
     enabled_archetype_for_element, const formattables::model& fm,
     const coding::meta_model::element& e,
@@ -80,7 +80,7 @@ workflow::format(const std::unordered_set<coding::meta_model::element_archetype>
     const auto mn(e.meta_name().id());
     BOOST_LOG_SEV(lg, debug) << "Meta name: " << mn;
 
-    std::list<coding::meta_model::artefact> r;
+    std::list<extraction::meta_model::artefact> r;
     const auto& frp(registrar().formatter_repository());
     const auto i(frp.stock_artefact_formatters_by_meta_name().find(mn));
     if (i == frp.stock_artefact_formatters_by_meta_name().end()) {
@@ -139,11 +139,11 @@ workflow::format(const std::unordered_set<coding::meta_model::element_archetype>
     return r;
 }
 
-std::list<coding::meta_model::artefact> workflow::
+std::list<extraction::meta_model::artefact> workflow::
 execute(const std::unordered_set<coding::meta_model::element_archetype>&
     enabled_archetype_for_element, const formattables::model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started formatting. Model " << fm.name().id();
-    std::list<coding::meta_model::artefact> r;
+    std::list<extraction::meta_model::artefact> r;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
         const auto& eprops(formattable.element_properties());

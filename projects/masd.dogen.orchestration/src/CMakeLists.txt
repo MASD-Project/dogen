@@ -46,6 +46,7 @@ target_link_libraries(${lib_target_name}
     masd.dogen.coding.lib
     masd.dogen.generation.cpp.lib
     masd.dogen.generation.csharp.lib
+    masd.dogen.generation.lib
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES})

@@ -29,7 +29,10 @@
 #include "masd.dogen.orchestration/types/converter.hpp"
 #include "masd.dogen.orchestration/types/generator.hpp"
 #include "masd.dogen.orchestration/types/orchestration.hpp"
+#include "masd.dogen.orchestration/types/context_factory.hpp"
 #include "masd.dogen.orchestration/types/injector_factory.hpp"
+#include "masd.dogen.orchestration/types/factory_exception.hpp"
 #include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
+#include "masd.dogen.orchestration/types/transforms/extraction_model_generation_chain.hpp"
 
 #endif

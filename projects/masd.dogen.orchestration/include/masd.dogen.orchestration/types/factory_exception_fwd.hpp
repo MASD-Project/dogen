@@ -18,32 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_EXTRACTION_MODEL_GENERATION_CHAIN_HPP
-#define MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_EXTRACTION_MODEL_GENERATION_CHAIN_HPP
+#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_FACTORY_EXCEPTION_FWD_HPP
+#define MASD_DOGEN_ORCHESTRATION_TYPES_FACTORY_EXCEPTION_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
+namespace masd::dogen::orchestration {
 
-namespace masd::dogen::generation::transforms {
-
-class extraction_model_generation_chain final {
-public:
-    extraction_model_generation_chain() = default;
-    extraction_model_generation_chain(const extraction_model_generation_chain&) = default;
-    extraction_model_generation_chain(extraction_model_generation_chain&&) = default;
-    ~extraction_model_generation_chain() = default;
-    extraction_model_generation_chain& operator=(const extraction_model_generation_chain&) = default;
-
-public:
-    bool operator==(const extraction_model_generation_chain& rhs) const;
-    bool operator!=(const extraction_model_generation_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-};
+class factory_exception;
 
 }
 
