@@ -25,24 +25,37 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <memory>
+#include "masd.dogen.generation/types/transforms/dynamic_transform_interface.hpp"
 
 namespace masd::dogen::generation::transforms {
 
 class dynamic_transform_registrar final {
 public:
-    dynamic_transform_registrar() = default;
-    dynamic_transform_registrar(const dynamic_transform_registrar&) = default;
-    dynamic_transform_registrar(dynamic_transform_registrar&&) = default;
-    ~dynamic_transform_registrar() = default;
-    dynamic_transform_registrar& operator=(const dynamic_transform_registrar&) = default;
+    /*
+     * @brief Registers a given external transform.
+     *
+     * @pre Pointer must not be null.
+     */
+    void register_dynamic_transform(
+        std::shared_ptr<const dynamic_transform_interface> t);
 
 public:
-    bool operator==(const dynamic_transform_registrar& rhs) const;
-    bool operator!=(const dynamic_transform_registrar& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Ensures the registrar is ready to be used.
+     */
+    void validate() const;
 
+public:
+    /**
+     * @brief Returns all of the registered external transforms.
+     */
+    std::list<std::shared_ptr<const dynamic_transform_interface>>
+    dynamic_transforms() const;
+
+private:
+    std::list<std::shared_ptr<const dynamic_transform_interface>> transforms_;
 };
 
 }

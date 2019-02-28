@@ -18,12 +18,53 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.generation/io/meta_model/model_io.hpp"
 #include "masd.dogen.generation/types/transforms/generability_transform.hpp"
+
+namespace {
+
+const std::string
+transform_id("generation.transforms.generability_transform");
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace masd::dogen::generation::transforms {
 
-bool generability_transform::operator==(const generability_transform& /*rhs*/) const {
-    return true;
+bool generability_transform::
+is_generatable(const coding::meta_model::element& e) {
+    const auto ot(e.origin_type());
+    return ot == coding::meta_model::origin_types::target;
+}
+
+bool generability_transform::
+has_generatable_types(const meta_model::model& m) {
+    for (const auto ptr : m.elements()) {
+        if (is_generatable(*ptr))
+            return true;
+    }
+
+    return false;
+}
+
+void generability_transform::
+transform(const context& ctx, meta_model::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "generability transform",
+        transform_id, m.name().id(), ctx.tracer(), m);
+    m.has_generatable_types(has_generatable_types(m));
+    stp.end_transform(m);
 }
 
 }

@@ -18,26 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_GENERABILITY_TRANSFORM_HPP
-#define MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_GENERABILITY_TRANSFORM_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_CONTEXT_FWD_HPP
+#define MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_CONTEXT_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.generation/types/transforms/context.hpp"
-#include "masd.dogen.generation/types/meta_model/model.hpp"
-
 namespace masd::dogen::generation::transforms {
 
-class generability_transform final {
-private:
-    static bool is_generatable(const coding::meta_model::element& e);
-    static bool has_generatable_types(const meta_model::model& m);
-
-public:
-    static void transform(const context& ctx, meta_model::model& m);
-};
+class context;
 
 }
 

@@ -25,24 +25,46 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include "masd.dogen.annotations/types/archetype_locations_group.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/element_archetype.hpp"
+#include "masd.dogen.coding/types/meta_model/artefact_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/local_archetype_location_properties.hpp"
+#include "masd.dogen.generation/types/meta_model/denormalised_archetype_properties.hpp"
+#include "masd.dogen.generation/types/transforms/context.hpp"
+#include "masd.dogen.generation/types/meta_model/model.hpp"
 
 namespace masd::dogen::generation::transforms {
 
 class enablement_transform final {
-public:
-    enablement_transform() = default;
-    enablement_transform(const enablement_transform&) = default;
-    enablement_transform(enablement_transform&&) = default;
-    ~enablement_transform() = default;
-    enablement_transform& operator=(const enablement_transform&) = default;
+private:
+    static bool is_element_disabled(
+        const coding::meta_model::element& e);
+
+    static void compute_enablement_for_artefact_properties(
+        const std::unordered_map<std::string,
+        meta_model::denormalised_archetype_properties>&
+        global_archetype_location_properties,
+        const std::unordered_map<std::string,
+        coding::meta_model::local_archetype_location_properties>&
+        local_archetype_location_properties,
+        const std::string& archetype,
+        coding::meta_model::artefact_properties& ap);
+
+    static void compute_enablement_for_element(
+        const std::unordered_map<std::string,
+        annotations::archetype_locations_group>&
+        archetype_locations_by_meta_name,
+        const std::unordered_map<std::string,
+        meta_model::denormalised_archetype_properties>&
+        global_archetype_location_properties,
+        std::unordered_set<meta_model::element_archetype>&
+        enabled_archetype_for_element, coding::meta_model::element& e);
 
 public:
-    bool operator==(const enablement_transform& rhs) const;
-    bool operator!=(const enablement_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const context& ctx, meta_model::model& m);
 };
 
 }

@@ -18,12 +18,61 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.extraction/types/repository_factory.hpp"
+#include "masd.dogen.extraction/types/decoration_properties_factory.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.generation/io/meta_model/model_io.hpp"
+#include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/transforms/dynamic_transforms_chain.hpp"
+
+namespace {
+
+const std::string
+transform_id("generation.transforms.dynamic_transforms_chain");
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace masd::dogen::generation::transforms {
 
-bool dynamic_transforms_chain::operator==(const dynamic_transforms_chain& /*rhs*/) const {
-    return true;
+std::shared_ptr<dynamic_transform_registrar>
+dynamic_transforms_chain::registrar_;
+
+dynamic_transform_registrar& dynamic_transforms_chain::registrar() {
+    if (!registrar_)
+        registrar_ = std::make_shared<dynamic_transform_registrar>();
+
+    return *registrar_;
+}
+
+dogen::extraction::decoration_properties_factory
+dynamic_transforms_chain::create_decoration_properties_factory(
+    const context& ctx, const annotations::annotation& ra) {
+    using masd::dogen::extraction::decoration_properties_factory;
+    decoration_properties_factory
+        r(ctx.type_repository(), ctx.formatting_repository(), ra);
+    return r;
+}
+
+void dynamic_transforms_chain::
+transform(const context& ctx, meta_model::model& m) {
+    tracing::scoped_chain_tracer stp(lg, "dynamic transforms chain",
+        transform_id, m.name().id(), ctx.tracer(), m);
+
+    auto& rg(registrar());
+    rg.validate();
+
+    const auto& ra(m.root_module()->annotation());
+    const auto dpf(create_decoration_properties_factory(ctx, ra));
+    for (const auto& dt : rg.dynamic_transforms())
+        dt->transform(ctx, dpf, m);
+
+    stp.end_chain(m);
 }
 
 }

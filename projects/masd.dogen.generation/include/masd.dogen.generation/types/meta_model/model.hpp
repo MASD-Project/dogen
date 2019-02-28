@@ -39,6 +39,7 @@
 #include "masd.dogen.coding/types/meta_model/element_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/origin_types.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_model_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/extraction_properties.hpp"
 #include "masd.dogen.generation/types/meta_model/element_archetype.hpp"
 #include "masd.dogen.generation/types/meta_model/locator_properties.hpp"
 #include "masd.dogen.generation/hash/meta_model/element_archetype_hash.hpp"
@@ -75,7 +76,8 @@ public:
         const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties,
         const std::unordered_set<masd::dogen::generation::meta_model::element_archetype>& enabled_archetype_for_element,
         const masd::dogen::generation::meta_model::locator_properties& locator_properties,
-        const masd::dogen::generation::meta_model::global_archetype_location_properties& global_archetype_location_properties);
+        const masd::dogen::generation::meta_model::global_archetype_location_properties& global_archetype_location_properties,
+        const masd::dogen::coding::meta_model::extraction_properties& extraction_properties);
 
 public:
     const masd::dogen::coding::meta_model::name& name() const;
@@ -179,6 +181,11 @@ public:
     void global_archetype_location_properties(const masd::dogen::generation::meta_model::global_archetype_location_properties& v);
     void global_archetype_location_properties(const masd::dogen::generation::meta_model::global_archetype_location_properties&& v);
 
+    const masd::dogen::coding::meta_model::extraction_properties& extraction_properties() const;
+    masd::dogen::coding::meta_model::extraction_properties& extraction_properties();
+    void extraction_properties(const masd::dogen::coding::meta_model::extraction_properties& v);
+    void extraction_properties(const masd::dogen::coding::meta_model::extraction_properties&& v);
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -204,6 +211,7 @@ private:
     std::unordered_set<masd::dogen::generation::meta_model::element_archetype> enabled_archetype_for_element_;
     masd::dogen::generation::meta_model::locator_properties locator_properties_;
     masd::dogen::generation::meta_model::global_archetype_location_properties global_archetype_location_properties_;
+    masd::dogen::coding::meta_model::extraction_properties extraction_properties_;
 };
 
 }

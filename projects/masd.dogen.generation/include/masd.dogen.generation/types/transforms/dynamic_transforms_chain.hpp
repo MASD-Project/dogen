@@ -25,25 +25,47 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.extraction/types/decoration_properties_factory.hpp"
+#include "masd.dogen.generation/types/meta_model/model.hpp"
+#include "masd.dogen.generation/types/transforms/dynamic_transform_registrar.hpp"
+#include "masd.dogen.generation/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::generation::transforms {
 
 class dynamic_transforms_chain final {
-public:
-    dynamic_transforms_chain() = default;
-    dynamic_transforms_chain(const dynamic_transforms_chain&) = default;
-    dynamic_transforms_chain(dynamic_transforms_chain&&) = default;
-    ~dynamic_transforms_chain() = default;
-    dynamic_transforms_chain& operator=(const dynamic_transforms_chain&) = default;
+private:
+    /**
+     * @brief Create the decoration configuration factory.
+     */
+    static masd::dogen::extraction::decoration_properties_factory
+    create_decoration_properties_factory(
+        const context& ctx, const annotations::annotation& ra);
 
 public:
-    bool operator==(const dynamic_transforms_chain& rhs) const;
-    bool operator!=(const dynamic_transforms_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Registrar that keeps track of the available external
+     * transforms.
+     */
+    static dynamic_transform_registrar& registrar();
 
+public:
+    static void transform(const context& ctx, meta_model::model& m);
+
+private:
+    static std::shared_ptr<dynamic_transform_registrar> registrar_;
 };
+
+/*
+ * Helper method to register external transforms.
+ */
+template<typename ExternalTransform>
+inline void register_dynamic_transform() {
+    auto t(std::make_shared<ExternalTransform>());
+    auto& rg(dynamic_transforms_chain::registrar());
+    rg.register_dynamic_transform(t);
+}
 
 }
 

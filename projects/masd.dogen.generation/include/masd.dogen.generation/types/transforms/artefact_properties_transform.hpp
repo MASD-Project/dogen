@@ -25,24 +25,23 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.generation/types/meta_model/model.hpp"
+#include "masd.dogen.generation/types/transforms/context.hpp"
 
 namespace masd::dogen::generation::transforms {
 
+/**
+ * @brief Creates all of the artefact properties for all of the
+ * artefact locations supported for each meta-model element.
+ */
 class artefact_properties_transform final {
-public:
-    artefact_properties_transform() = default;
-    artefact_properties_transform(const artefact_properties_transform&) = default;
-    artefact_properties_transform(artefact_properties_transform&&) = default;
-    ~artefact_properties_transform() = default;
-    artefact_properties_transform& operator=(const artefact_properties_transform&) = default;
+private:
+    static void update_element(const context& ctx,
+        coding::meta_model::element& e);
 
 public:
-    bool operator==(const artefact_properties_transform& rhs) const;
-    bool operator!=(const artefact_properties_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const context& ctx, meta_model::model& m);
 };
 
 }

@@ -25,24 +25,26 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.extraction/types/decoration_properties_factory.hpp"
+#include "masd.dogen.generation/types/meta_model/model.hpp"
+#include "masd.dogen.generation/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::generation::transforms {
 
-class dynamic_transform_interface final {
+class dynamic_transform_interface {
 public:
     dynamic_transform_interface() = default;
-    dynamic_transform_interface(const dynamic_transform_interface&) = default;
+    dynamic_transform_interface(const dynamic_transform_interface&) = delete;
     dynamic_transform_interface(dynamic_transform_interface&&) = default;
-    ~dynamic_transform_interface() = default;
-    dynamic_transform_interface& operator=(const dynamic_transform_interface&) = default;
+    virtual ~dynamic_transform_interface() noexcept = 0;
 
 public:
-    bool operator==(const dynamic_transform_interface& rhs) const;
-    bool operator!=(const dynamic_transform_interface& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    virtual std::string id() const = 0;
+    virtual void transform(const context& ctx,
+        const masd::dogen::extraction::decoration_properties_factory& dpf,
+        meta_model::model& m) const = 0;
 };
 
 }

@@ -22,8 +22,6 @@
 
 namespace masd::dogen::generation::transforms {
 
-bool dynamic_transform_interface::operator==(const dynamic_transform_interface& /*rhs*/) const {
-    return true;
-}
+dynamic_transform_interface::~dynamic_transform_interface() noexcept { }
 
 }

@@ -28,6 +28,7 @@
 #include "masd.dogen.generation/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/io/meta_model/origin_types_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_model_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/extraction_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/element_archetype_io.hpp"
 #include "masd.dogen.generation/io/meta_model/locator_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/global_archetype_location_properties_io.hpp"
@@ -185,7 +186,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"orm_properties\": " << v.orm_properties() << ", "
       << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element() << ", "
       << "\"locator_properties\": " << v.locator_properties() << ", "
-      << "\"global_archetype_location_properties\": " << v.global_archetype_location_properties()
+      << "\"global_archetype_location_properties\": " << v.global_archetype_location_properties() << ", "
+      << "\"extraction_properties\": " << v.extraction_properties()
       << " }";
     return(s);
 }
