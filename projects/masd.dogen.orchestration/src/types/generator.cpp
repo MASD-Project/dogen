@@ -21,7 +21,6 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
 #include "masd.dogen.coding/types/transforms/options.hpp"
-#include "masd.dogen.coding/types/transforms/context_factory.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
 #include "masd.dogen.orchestration/types/context_factory.hpp"

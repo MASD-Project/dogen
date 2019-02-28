@@ -18,20 +18,60 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.coding/types/transforms/context_factory.hpp"
+#include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
+#include <boost/throw_exception.hpp>
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/filesystem/path.hpp"
+#include "masd.dogen.utility/types/filesystem/file.hpp"
+#include "masd.dogen.annotations/types/type_repository_factory.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
+#include "masd.dogen.extraction/types/repository_factory.hpp"
+#include "masd.dogen.tracing/types/tracer.hpp"
+#include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
 #include "masd.dogen.coding/test/mock_context_factory.hpp"
+
+namespace {
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory("coding.transforms.mock_context_factory"));
+
+}
 
 namespace masd::dogen::coding::test {
 
 transforms::context mock_context_factory::make() {
+    BOOST_LOG_SEV(lg, debug) << "Creating the mock context.";
+
     masd::dogen::coding::transforms::options o;
-    using masd::dogen::coding::transforms::context_factory;
 
     annotations::archetype_location_repository alrp;
     std::unordered_map<
         std::string,
         coding::meta_model::intra_backend_segment_properties> ibsp;
-    const auto r(context_factory::make(alrp, ibsp, o, false/*enable_validation*/));
+
+    /*
+     * Obtain all the data structures required to make a context, and
+     * create the context.
+     */
+    const auto data_dir(utility::filesystem::data_files_directory());
+    const auto data_dirs(std::vector<boost::filesystem::path>{ data_dir });
+
+    helpers::mapping_set_repository_factory msrpf;
+    const auto msrp(msrpf.make(data_dirs));
+
+    annotations::type_repository_factory atrpf;
+    const auto atrp(atrpf.make(alrp, data_dirs));
+
+    extraction::repository_factory frpf;
+    const auto frp(frpf.make(data_dirs));
+
+    tracing::tracer tracer(alrp, atrp, o.probe_directory(), o.tracing());
+
+    const transforms::context r(data_dirs, o, alrp, atrp, msrp, frp, tracer,
+        ibsp);
+
+    BOOST_LOG_SEV(lg, debug) << "Created the context.";
     return r;
 }
 
