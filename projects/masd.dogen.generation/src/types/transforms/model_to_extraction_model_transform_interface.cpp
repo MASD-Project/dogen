@@ -18,33 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_TEXT_MODEL_GENERATION_CHAIN_HPP
-#define MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_TEXT_MODEL_GENERATION_CHAIN_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <algorithm>
+#include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_interface.hpp"
 
 namespace masd::dogen::generation::transforms {
 
-class text_model_generation_chain final {
-public:
-    text_model_generation_chain() = default;
-    text_model_generation_chain(const text_model_generation_chain&) = default;
-    text_model_generation_chain(text_model_generation_chain&&) = default;
-    ~text_model_generation_chain() = default;
-    text_model_generation_chain& operator=(const text_model_generation_chain&) = default;
-
-public:
-    bool operator==(const text_model_generation_chain& rhs) const;
-    bool operator!=(const text_model_generation_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-};
+model_to_extraction_model_transform_interface::
+~model_to_extraction_model_transform_interface() noexcept {}
 
 }
-
-#endif

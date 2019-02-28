@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_CHAIN_HPP
-#define MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_CHAIN_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_EXTRACTION_MODEL_CHAIN_HPP
+#define MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_EXTRACTION_MODEL_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,16 +31,16 @@
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 #include "masd.dogen.extraction/types/decoration_properties_factory.hpp"
 #include "masd.dogen.extraction/types/meta_model/model.hpp"
-#include "masd.dogen.generation/types/transforms/model_to_text_model_transform_registrar.hpp"
+#include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
 
 namespace masd::dogen::generation::transforms {
 
-class model_to_text_model_chain final {
+class model_to_extraction_model_chain final {
 public:
     /**
      * @brief Registrar that keeps track of the available transforms.
      */
-    static model_to_text_model_transform_registrar& registrar();
+    static model_to_extraction_model_transform_registrar& registrar();
 
 private:
     /*
@@ -58,7 +58,7 @@ public:
         const std::list<coding::meta_model::model>& models);
 
 private:
-    static std::shared_ptr<model_to_text_model_transform_registrar> registrar_;
+    static std::shared_ptr<model_to_extraction_model_transform_registrar> registrar_;
 };
 
 /*
@@ -67,7 +67,7 @@ private:
 template<typename Transform>
 inline void register_transform() {
     auto t(std::make_shared<Transform>());
-    auto& rg(model_to_text_model_chain::registrar());
+    auto& rg(model_to_extraction_model_chain::registrar());
     rg.register_transform(t);
 }
 

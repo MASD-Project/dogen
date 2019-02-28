@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_TRANSFORM_INTERFACE_HPP
-#define MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_TRANSFORM_INTERFACE_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_EXTRACTION_MODEL_TRANSFORM_INTERFACE_HPP
+#define MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_EXTRACTION_MODEL_TRANSFORM_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,7 +34,7 @@
 #include "masd.dogen.annotations/types/archetype_location_repository_parts.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/meta_model/languages.hpp"
-#include "masd.dogen.coding/types/meta_model/text_model.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/meta_model/intra_backend_segment_properties.hpp"
 #include "masd.dogen.coding/types/transforms/options.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
@@ -46,14 +46,14 @@ namespace masd::dogen::generation::transforms {
  * @brief Performs a model to text transformation of a meta-model,
  * into its supported language.
  */
-class model_to_text_model_transform_interface {
+class model_to_extraction_model_transform_interface {
 public:
-    model_to_text_model_transform_interface() = default;
-    model_to_text_model_transform_interface(
-        const model_to_text_model_transform_interface&) = delete;
-    model_to_text_model_transform_interface(
-        model_to_text_model_transform_interface&&) = default;
-    virtual ~model_to_text_model_transform_interface() noexcept = 0;
+    model_to_extraction_model_transform_interface() = default;
+    model_to_extraction_model_transform_interface(
+        const model_to_extraction_model_transform_interface&) = delete;
+    model_to_extraction_model_transform_interface(
+        model_to_extraction_model_transform_interface&&) = default;
+    virtual ~model_to_extraction_model_transform_interface() noexcept = 0;
 
 public:
     /**

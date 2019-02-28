@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_TRANSFORM_REGISTRAR_HPP
-#define MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_TRANSFORM_REGISTRAR_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_EXTRACTION_MODEL_TRANSFORM_REGISTRAR_HPP
+#define MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_EXTRACTION_MODEL_TRANSFORM_REGISTRAR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,7 +31,7 @@
 #include <unordered_map>
 #include "masd.dogen.annotations/types/archetype_location.hpp"
 #include "masd.dogen.coding/types/meta_model/languages.hpp"
-#include "masd.dogen.generation/types/transforms/model_to_text_model_transform_interface.hpp"
+#include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_interface.hpp"
 
 namespace masd::dogen::generation::transforms {
 
@@ -39,13 +39,13 @@ namespace masd::dogen::generation::transforms {
  * @brief Keeps track of all the available model to text model
  * transforms. These are implemented by language-specific backends.
  */
-class model_to_text_model_transform_registrar {
+class model_to_extraction_model_transform_registrar {
 public:
     /**
      * @brief Registers a model to text transform.
      */
     void register_transform(
-        std::shared_ptr<model_to_text_model_transform_interface> t);
+        std::shared_ptr<model_to_extraction_model_transform_interface> t);
 
 public:
     /**
@@ -58,7 +58,7 @@ public:
      * @brief Returns the transform for the supplied language, if any
      * exists. Otherwise returns a null shared pointer.
      */
-    std::shared_ptr<model_to_text_model_transform_interface>
+    std::shared_ptr<model_to_extraction_model_transform_interface>
     transform_for_language(const coding::meta_model::languages l) const;
 
     /**
@@ -66,12 +66,12 @@ public:
      */
     const std::unordered_map<
         coding::meta_model::languages,
-        std::shared_ptr<model_to_text_model_transform_interface>>&
+        std::shared_ptr<model_to_extraction_model_transform_interface>>&
     transforms_by_language() const;
 
 private:
     std::unordered_map<coding::meta_model::languages,
-    std::shared_ptr<model_to_text_model_transform_interface>>
+    std::shared_ptr<model_to_extraction_model_transform_interface>>
     transforms_by_language_;
 };
 

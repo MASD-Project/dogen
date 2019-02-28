@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.generation/types/transforms/text_model_generation_chain.hpp"
+#include "masd.dogen.generation/types/transforms/extraction_model_generation_chain.hpp"
 
 namespace masd::dogen::generation::transforms {
 
-bool text_model_generation_chain::operator==(const text_model_generation_chain& /*rhs*/) const {
+bool extraction_model_generation_chain::operator==(const extraction_model_generation_chain& /*rhs*/) const {
     return true;
 }
 

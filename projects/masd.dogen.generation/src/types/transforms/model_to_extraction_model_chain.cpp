@@ -24,12 +24,12 @@
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.generation/types/transforms/transformation_error.hpp"
-#include "masd.dogen.generation/types/transforms/model_to_text_model_chain.hpp"
+#include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 
 namespace {
 
 const std::string transform_id(
-    "generation.transforms.model_to_text_model_chain");
+    "generation.transforms.model_to_extraction_model_chain");
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
@@ -42,26 +42,27 @@ const std::string disabled_transform(
 
 namespace masd::dogen::generation::transforms {
 
-std::shared_ptr<model_to_text_model_transform_registrar>
-model_to_text_model_chain::registrar_;
-model_to_text_model_transform_registrar&
-model_to_text_model_chain::registrar() {
+std::shared_ptr<
+    model_to_extraction_model_transform_registrar>
+model_to_extraction_model_chain::registrar_;
+model_to_extraction_model_transform_registrar&
+model_to_extraction_model_chain::registrar() {
     if (!registrar_) {
         registrar_ = std::make_shared<
-            model_to_text_model_transform_registrar>();
+            model_to_extraction_model_transform_registrar>();
     }
 
     return *registrar_;
 }
 
-void model_to_text_model_chain::
+void model_to_extraction_model_chain::
 merge(extraction::meta_model::model&& src, extraction::meta_model::model& dst) {
     dst.artefacts().splice(dst.artefacts().end(), src.artefacts());
     dst.managed_directories().splice(dst.managed_directories().end(),
         src.managed_directories());
 }
 
-extraction::meta_model::model model_to_text_model_chain::
+extraction::meta_model::model model_to_extraction_model_chain::
 transform(const coding::transforms::context& ctx,
     const coding::meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Transforming model: " << m.name().id();
@@ -120,7 +121,7 @@ transform(const coding::transforms::context& ctx,
     return r;
 }
 
-extraction::meta_model::model model_to_text_model_chain::
+extraction::meta_model::model model_to_extraction_model_chain::
 transform(const coding::transforms::context& ctx,
     const std::list<coding::meta_model::model>& models) {
     tracing::scoped_chain_tracer stp(lg, "code generation chain",

@@ -207,7 +207,8 @@ legacy_name_tree_parser::
 legacy_name_tree_parser(const meta_model::languages language)
     : language_(language) {}
 
-meta_model::name_tree legacy_name_tree_parser::parse(const std::string& s) const {
+meta_model::name_tree
+legacy_name_tree_parser::parse(const std::string& s) const {
     BOOST_LOG_SEV(lg, debug) << "parsing name: " << s;
 
     auto builder(std::make_shared<name_tree_builder>());

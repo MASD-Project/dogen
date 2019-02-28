@@ -23,13 +23,13 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.generation/types/transforms/registrar_error.hpp"
-#include "masd.dogen.generation/types/transforms/model_to_text_model_transform_registrar.hpp"
+#include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(
-        "generation.meta_model.model_to_text_model_transform_registrar"));
+        "generation.meta_model.model_to_extraction_model_transform_registrar"));
 
 const std::string no_transforms("No model to text transforms provided.");
 const std::string null_transform("Transform supplied is null");
@@ -39,8 +39,8 @@ const std::string language_taken("Transform already registered for language: ");
 
 namespace masd::dogen::generation::transforms {
 
-void model_to_text_model_transform_registrar::
-register_transform(std::shared_ptr<model_to_text_model_transform_interface> t) {
+void model_to_extraction_model_transform_registrar::
+register_transform(std::shared_ptr<model_to_extraction_model_transform_interface> t) {
     if (!t) {
         BOOST_LOG_SEV(lg, error) << null_transform;
         BOOST_THROW_EXCEPTION(registrar_error(null_transform));
@@ -60,7 +60,7 @@ register_transform(std::shared_ptr<model_to_text_model_transform_interface> t) {
     BOOST_LOG_SEV(lg, debug) << "Registrered transform: " << t->id();
 }
 
-void model_to_text_model_transform_registrar::validate() const {
+void model_to_extraction_model_transform_registrar::validate() const {
     if (transforms_by_language_.empty()) {
         BOOST_LOG_SEV(lg, error) << no_transforms;
         BOOST_THROW_EXCEPTION(registrar_error(no_transforms));
@@ -68,19 +68,19 @@ void model_to_text_model_transform_registrar::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
 }
 
-std::shared_ptr<model_to_text_model_transform_interface>
-model_to_text_model_transform_registrar::
+std::shared_ptr<model_to_extraction_model_transform_interface>
+model_to_extraction_model_transform_registrar::
 transform_for_language(const coding::meta_model::languages l) const {
     const auto i(transforms_by_language_.find(l));
     if (i == transforms_by_language_.end())
-        return std::shared_ptr<model_to_text_model_transform_interface>();
+        return std::shared_ptr<model_to_extraction_model_transform_interface>();
 
     return i->second;
 }
 
 const std::unordered_map<coding::meta_model::languages, std::
-                         shared_ptr<model_to_text_model_transform_interface>>&
-model_to_text_model_transform_registrar::transforms_by_language() const {
+                         shared_ptr<model_to_extraction_model_transform_interface>>&
+model_to_extraction_model_transform_registrar::transforms_by_language() const {
     return transforms_by_language_;
 }
 

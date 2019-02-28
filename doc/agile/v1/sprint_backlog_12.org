@@ -12,17 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-27 Wed 17:46]
-| <75>                                        |        |      |      |       |
-| Headline                                    | Time   |      |      |     % |
-|---------------------------------------------+--------+------+------+-------|
-| *Total time*                                | *2:05* |      |      | 100.0 |
-|---------------------------------------------+--------+------+------+-------|
-| Stories                                     | 2:05   |      |      | 100.0 |
-| Active                                      |        | 2:05 |      | 100.0 |
-| Edit release notes for previous sprint      |        |      | 1:27 |  69.6 |
-| Sprint and product backlog grooming         |        |      | 0:18 |  14.4 |
-| Try to fix valgrind warning on =find_files= |        |      | 0:20 |  16.0 |
+#+CAPTION: Clock summary at [2019-02-28 Thu 10:03]
+| <75>                                                |        |      |      |       |
+| Headline                                            | Time   |      |      |     % |
+|-----------------------------------------------------+--------+------+------+-------|
+| *Total time*                                        | *2:47* |      |      | 100.0 |
+|-----------------------------------------------------+--------+------+------+-------|
+| Stories                                             | 2:47   |      |      | 100.0 |
+| Active                                              |        | 2:47 |      | 100.0 |
+| Edit release notes for previous sprint              |        |      | 1:27 |  52.1 |
+| Sprint and product backlog grooming                 |        |      | 0:18 |  10.8 |
+| Try to fix valgrind warning on =find_files=         |        |      | 0:20 |  12.0 |
+| Implement text model generation chain in generation |        |      | 0:42 |  25.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -210,6 +211,14 @@ We seem to be doing something wrong with directory iterators:
 : ==7755==    by 0x6F0E15: masd::dogen::utility::filesystem::find_files(boost::filesystem::path const&) (file.cpp:85)
 : ==7755==    by 0x6ADB4B: masd::dogen::coding::helpers::mapping_set_repository_factory::obtain_mappings[abi:cxx11](std::vector > const&) const (mapping_set_repository_factory.cpp:66)
 : ==7755==    by 0x6AF507: masd::dogen::coding::helpers::mapping_set_repository_factory::make(std::vector > const&) const (mapping_set_repository_factory.cpp:172)
+
+*** STARTED Implement text model generation chain in generation       :story:
+    :LOGBOOK:
+    CLOCK: [2019-02-28 Thu 09:21]--[2019-02-28 Thu 10:03] =>  0:42
+    :END:
+
+Move the text model transform and all related code into the generation
+model. This implies updating all formatters.
 
 *** Throw on profiles that refer to invalid fields                    :story:
 

@@ -6411,22 +6411,22 @@ model directory.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O47">
       <dia:attribute name="obj_pos">
-        <dia:point val="125,141"/>
+        <dia:point val="122,141"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="124.95,140.95;149.42,145.45"/>
+        <dia:rectangle val="121.95,140.95;149.5,146.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="125,141"/>
+        <dia:point val="122,141"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.369999999999997"/>
+        <dia:real val="27.449999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#model_to_text_model_chain#</dia:string>
+        <dia:string>#model_to_extraction_model_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>
@@ -6522,7 +6522,7 @@ model directory.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#const model_to_text_transform_registrar&amp;#</dia:string>
+            <dia:string>#model_to_text_transform_registrar#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6552,7 +6552,7 @@ model directory.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::text_model#</dia:string>
+            <dia:string>#extraction::meta_model::model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6575,10 +6575,27 @@ model directory.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
+                <dia:string>#ctx#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#coding::meta_model::context#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="0"/>
+              </dia:attribute>
+            </dia:composite>
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const meta_model::model&amp;#</dia:string>
+                <dia:string>#coding::meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6616,7 +6633,7 @@ model directory.#</dia:string>
         <dia:real val="10"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#model_to_text_model_transform_interface#</dia:string>
+        <dia:string>#model_to_extraction_model_transform_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>
@@ -6781,10 +6798,10 @@ model directory.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
+            <dia:boolean val="true"/>
           </dia:attribute>
           <dia:attribute name="inheritance_type">
-            <dia:enum val="2"/>
+            <dia:enum val="0"/>
           </dia:attribute>
           <dia:attribute name="query">
             <dia:boolean val="false"/>
@@ -6829,10 +6846,10 @@ model directory.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
+            <dia:boolean val="true"/>
           </dia:attribute>
           <dia:attribute name="inheritance_type">
-            <dia:enum val="2"/>
+            <dia:enum val="0"/>
           </dia:attribute>
           <dia:attribute name="query">
             <dia:boolean val="false"/>
@@ -6880,7 +6897,7 @@ model directory.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::text_model#</dia:string>
+            <dia:string>#extraction::meta_model::model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6906,7 +6923,7 @@ model directory.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#coding::meta_model::context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6923,7 +6940,7 @@ model directory.#</dia:string>
                 <dia:string>#enable_backend_directories#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const bool#</dia:string>
+                <dia:string>#bool#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6940,7 +6957,7 @@ model directory.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#model#</dia:string>
+                <dia:string>#coding::meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6966,19 +6983,19 @@ model directory.#</dia:string>
         <dia:point val="144,126"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="143.95,125.95;195.755,133.45"/>
+        <dia:rectangle val="143.95,125.95;198.065,133.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="144,126"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="51.704999999999998"/>
+        <dia:real val="54.015000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#model_to_text_model_transform_registrar#</dia:string>
+        <dia:string>#model_to_extraction_model_transform_registrar#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>
@@ -7070,7 +7087,7 @@ model directory.#</dia:string>
             <dia:string>#transforms_by_language_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;coding::meta_model::languages, std::shared_ptr&lt;model_to_text_model_transform_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;coding::meta_model::languages, std::shared_ptr&lt;model_to_extraction_model_transform_interface&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -7124,7 +7141,7 @@ model directory.#</dia:string>
                 <dia:string>#t#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;model_to_text_model_transform_interface&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;model_to_extraction_model_transform_interface&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -7176,7 +7193,7 @@ model directory.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;model_to_text_model_transform_interface&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;model_to_extraction_model_transform_interface&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7224,7 +7241,7 @@ model directory.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#const std::unordered_map&lt;meta_model::languages, std::shared_ptr&lt;model_to_text_model_transform_interface&gt;&gt;&amp;#</dia:string>
+            <dia:string>#const std::unordered_map&lt;meta_model::languages, std::shared_ptr&lt;model_to_extraction_model_transform_interface&gt;&gt;&amp;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7291,17 +7308,17 @@ model directory.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="137.185,145.4"/>
+        <dia:point val="135.725,146.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="136.435,144.65;172.737,157.05"/>
+        <dia:rectangle val="134.975,145.45;172.737,157.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="137.185,145.4"/>
-        <dia:point val="137.185,157"/>
+        <dia:point val="135.725,146.2"/>
+        <dia:point val="135.725,157"/>
         <dia:point val="172.537,157"/>
         <dia:point val="172.537,150.929"/>
       </dia:attribute>
@@ -7363,17 +7380,17 @@ model directory.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="195.705,133.4"/>
+        <dia:point val="198.015,133.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="191.025,132.65;196.455,141.729"/>
+        <dia:rectangle val="191.025,132.65;198.765,141.729"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="195.705,133.4"/>
-        <dia:point val="195.705,137"/>
+        <dia:point val="198.015,133.4"/>
+        <dia:point val="198.015,137"/>
         <dia:point val="191.075,137"/>
         <dia:point val="191.075,140.929"/>
       </dia:attribute>
@@ -7825,13 +7842,13 @@ model directory.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O55">
       <dia:attribute name="obj_pos">
-        <dia:point val="91,149"/>
+        <dia:point val="99,150"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="90.95,148.95;111.185,152.65"/>
+        <dia:rectangle val="98.95,149.95;119.185,153.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="91,149"/>
+        <dia:point val="99,150"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.134999999999998"/>
@@ -8002,13 +8019,13 @@ model directory.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O56">
       <dia:attribute name="obj_pos">
-        <dia:point val="126,161"/>
+        <dia:point val="125,161"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="125.95,160.95;140.795,164.65"/>
+        <dia:rectangle val="124.95,160.95;139.795,164.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="126,161"/>
+        <dia:point val="125,161"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -8196,17 +8213,17 @@ model directory.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="91,152.6"/>
+        <dia:point val="99,153.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="90.95,152.55;95.195,161.8"/>
+        <dia:rectangle val="93.695,153.55;99.2,161.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="91,152.6"/>
-        <dia:point val="91,157"/>
+        <dia:point val="99,153.6"/>
+        <dia:point val="99,157"/>
         <dia:point val="94.445,157"/>
         <dia:point val="94.445,161"/>
       </dia:attribute>
@@ -8268,19 +8285,19 @@ model directory.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="111.135,152.6"/>
+        <dia:point val="119.135,153.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="110.385,151.85;133.573,161.8"/>
+        <dia:rectangle val="118.385,152.85;132.572,161.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="111.135,152.6"/>
-        <dia:point val="111.135,157"/>
-        <dia:point val="133.373,157"/>
-        <dia:point val="133.373,161"/>
+        <dia:point val="119.135,153.6"/>
+        <dia:point val="119.135,157"/>
+        <dia:point val="132.373,157"/>
+        <dia:point val="132.373,161"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -8766,17 +8783,17 @@ model directory.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="149.37,141"/>
+        <dia:point val="149.45,141"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="143.95,133.35;150.12,141.8"/>
+        <dia:rectangle val="143.95,133.35;150.2,141.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="149.37,141"/>
-        <dia:point val="149.37,137"/>
+        <dia:point val="149.45,141"/>
+        <dia:point val="149.45,137"/>
         <dia:point val="144,137"/>
         <dia:point val="144,133.4"/>
       </dia:attribute>
@@ -8838,19 +8855,19 @@ model directory.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="125,141"/>
+        <dia:point val="122,141"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="116.71,136.2;125.2,141.8"/>
+        <dia:rectangle val="107.085,136.2;122.2,141.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="125,141"/>
-        <dia:point val="125,137"/>
-        <dia:point val="117.46,137"/>
-        <dia:point val="117.46,141"/>
+        <dia:point val="122,141"/>
+        <dia:point val="122,137"/>
+        <dia:point val="107.835,137"/>
+        <dia:point val="107.835,141"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -9519,19 +9536,19 @@ model directory.#</dia:string>
         <dia:point val="80,141"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="79.95,140.95;117.51,144.65"/>
+        <dia:rectangle val="79.95,140.95;107.885,145.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="80,141"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="37.460000000000001"/>
+        <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#text_model_generation_chain#</dia:string>
+        <dia:string>#extraction_model_generation_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>
@@ -9627,7 +9644,7 @@ model directory.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::textual_model#</dia:string>
+            <dia:string>#extraction::meta_model::model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -9653,7 +9670,7 @@ model directory.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#coding::meta_model::context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9670,7 +9687,7 @@ model directory.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#coding::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
