@@ -25,24 +25,15 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.generation/types/meta_model/model.hpp"
+#include "masd.dogen.generation/types/transforms/context.hpp"
 
 namespace masd::dogen::generation::transforms {
 
 class model_post_processing_chain final {
 public:
-    model_post_processing_chain() = default;
-    model_post_processing_chain(const model_post_processing_chain&) = default;
-    model_post_processing_chain(model_post_processing_chain&&) = default;
-    ~model_post_processing_chain() = default;
-    model_post_processing_chain& operator=(const model_post_processing_chain&) = default;
-
 public:
-    bool operator==(const model_post_processing_chain& rhs) const;
-    bool operator!=(const model_post_processing_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const context& ctx, meta_model::model& m);
 };
 
 }

@@ -249,6 +249,20 @@ We seem to be doing something wrong with directory iterators:
 : ==7755==    by 0x6ADB4B: masd::dogen::coding::helpers::mapping_set_repository_factory::obtain_mappings[abi:cxx11](std::vector > const&) const (mapping_set_repository_factory.cpp:66)
 : ==7755==    by 0x6AF507: masd::dogen::coding::helpers::mapping_set_repository_factory::make(std::vector > const&) const (mapping_set_repository_factory.cpp:172)
 
+*** STARTED Move generation model out of coding                       :story:
+    :LOGBOOK:
+    CLOCK: [2019-02-28 Thu 14:03]--[2019-02-28 Thu 15:34] =>  1:31
+    :END:
+
+- then copy the model from coding into generation and all associated
+  transforms.
+- then add support in each generation model (cpp, csharp) for
+  converting from the generation model to the formattables model.
+- then create a model generation chain that uses the generation model.
+- then delete the model and transforms from coding; delete the
+  adaptors from generation models (cpp, csharp).
+- then move the model to text model chain into generation.
+
 *** Throw on profiles that refer to invalid fields                    :story:
 
 At present during profile instantiation, if we detect a field which
@@ -472,17 +486,6 @@ Problems:
 - ensure we built it from masd and not master
 - check master builds libodb 2.4
 - build libodb 2.5 from masd and re-export.
-
-*** Move generation model out of coding                               :story:
-
-- then copy the model from coding into generation and all associated
-  transforms.
-- then add support in each generation model (cpp, csharp) for
-  converting from the generation model to the formattables model.
-- then create a model generation chain that uses the generation model.
-- then delete the model and transforms from coding; delete the
-  adaptors from generation models (cpp, csharp).
-- then move the model to text model chain into generation.
 
 *** Move generation element properties back into formattables         :story:
 

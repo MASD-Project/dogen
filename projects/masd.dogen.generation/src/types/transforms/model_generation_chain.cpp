@@ -18,12 +18,43 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.utility/types/io/list_io.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.generation/io/meta_model/model_io.hpp"
+#include "masd.dogen.generation/types/transforms/coding_model_to_generation_model_transform.hpp"
+#include "masd.dogen.generation/types/transforms/model_post_processing_chain.hpp"
 #include "masd.dogen.generation/types/transforms/model_generation_chain.hpp"
+
+namespace {
+
+const std::string
+transform_id("generation.transforms.model_generation_chain");
+
+using namespace masd::dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
+
 
 namespace masd::dogen::generation::transforms {
 
-bool model_generation_chain::operator==(const model_generation_chain& /*rhs*/) const {
-    return true;
+std::list<meta_model::model>
+model_generation_chain::transform(const context& ctx,
+    const std::list<coding::meta_model::endomodel>& endomodels) {
+    tracing::scoped_chain_tracer stp(lg, "model generation chain",
+        transform_id, ctx.tracer());
+
+    auto r(coding_model_to_generation_model_transform::transform(ctx, endomodels));
+
+    /*
+     * Apply all of the post-processing transforms to the
+     * model.
+     */
+    for (auto& m : r)
+        model_post_processing_chain::transform(ctx, m);
+
+    stp.end_chain(r);
+    return r;
 }
 
 }

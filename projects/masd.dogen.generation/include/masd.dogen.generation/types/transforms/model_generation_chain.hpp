@@ -25,24 +25,18 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.generation/types/meta_model/model.hpp"
+#include "masd.dogen.generation/types/transforms/context.hpp"
 
 namespace masd::dogen::generation::transforms {
 
 class model_generation_chain final {
 public:
-    model_generation_chain() = default;
-    model_generation_chain(const model_generation_chain&) = default;
-    model_generation_chain(model_generation_chain&&) = default;
-    ~model_generation_chain() = default;
-    model_generation_chain& operator=(const model_generation_chain&) = default;
-
-public:
-    bool operator==(const model_generation_chain& rhs) const;
-    bool operator!=(const model_generation_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static std::list<meta_model::model>
+    transform(const context& ctx,
+        const std::list<coding::meta_model::endomodel>& endomodels);
 };
 
 }
