@@ -29,26 +29,6 @@ We should just output the underlying primitive.
  could possibly check this; if its not final then we could assume it is
  a base class.
 
-*** Drop the original extension in tailor                             :story:
-
-Filenames in tailor look weird:
-
-: dart.dia.json
-
-it should just be:
-
-: dart.json
-
-Actually this is not a tailor / converter problem per se - its just
-that CMake is supplying the entire file name with extension to dogen
-as the destination. However, due to restrictions on how =NAME_WE=
-works for multiple extensions, it is non-trivial to sort this
-problem. In addition, because we want to read models from the dia
-directory and write them into the JSON directory, we can't just simply
-change dogen to update the extension itself. We need some hackery in
-CMake to process extensions properly like by dropping the last N
-characters of the filename or some such.
-
 *** Throw on unsupported stereotypes for specific kernels             :story:
 
 In some cases we may support a feature in one language but not on
@@ -71,15 +51,19 @@ interfaces at the end after any base classes or else we will have
 compiler errors. This means we need to be able to distinguish
 interfaces from other types (e.g. =interface= stereotype).
 
-*** Assorted bugs to look at                                          :story:
+*** Registrar in serialisation generated unnecessarily                :story:
 
-These need to be put into stories:
+Registrar coming out even when there is no inheritance.
 
-- Registrar coming out even when there is no inheritance.
-- No setting to add include for precompiled headers: stdafx.h
-- No vcxproj for c++ and no way to add code-generated files. Ideally
-  one should be able to include a code-generated file into project
-  with list of items
+*** Add meta-data to trigger inclusion/generation of =stdafx=         :story:
+
+No setting to add include for precompiled headers: =stdafx.h=
+
+*** Generate visual studio c++ projects                               :story:
+
+No vcxproj for c++ and no way to add code-generated files. Ideally one
+should be able to include a code-generated file into project with list
+of items
 
 *** Primitives are not comparable                                     :story:
 
@@ -426,6 +410,15 @@ vision. The V2 vision is to finish the dogen API and implement all
 functionality in terms of metamodel elements - e.g. no special cases
 such as profiles, licences etc.
 
+*** Rename =fallback_element_type=                                    :story:
+
+Our JSON uses a very strangely named attribute to carry the meta-type:
+
+:       "fallback_element_type": "masd::object",
+
+Its not at all obvious what this is meant to do. It should just be the
+=element_type=.
+
 *** Mapping of third-party dependencies                               :story:
 
 System models should follow the physical structure of
@@ -478,6 +471,52 @@ tests:
 - directories and model locations are hard-coded in each test.
 - test runs against the model and hard-coded location, produces the
   diff. Test asserts of the diff being non-zero.
+
+*** Code generation of tests for dogen models                         :story:
+
+We probably already have a story for this. At present we are manually
+generating tests for each model (serialisation, etc). The structure of
+the tests is very predictable. In a world where tests are a facet, we
+could have some options to control the generation of tests. This would
+also allow end users to generate tests for their models and report the
+results. We would need to generate the utility model for this - or
+perhaps we could code generate tests in a way that no longer requires
+templates - its all "hard-coded". This would make the tests easier to
+follow, but we would generate a lot of code.
+
+We could separate dogen specific tests from user tests by naming them
+differently, e.g. =abc_dogen_test.cpp=. We can then create two
+different test binaries, one for dogen tests and another for user
+tests, so that users don't have to run dogen tests unless something
+has gone wrong.
+
+Interestingly we could even set rules to ignore tests that are known
+to fail:
+
+- if object has no members do not do equality tests
+- if object has some kind of recursion do not do tests
+- etc.
+
+These can be marked as known limitations. At present the tests require
+Boost.Test but it should be possible to target other frameworks
+(meta-data option).
+
+Merged stories:
+
+*Consider creating a "test" facet*
+
+Whilst we can't really generate tests, we can at least create the
+stubs for them. For this we could have a =test= facet that uses a
+stereotype, e.g. =test_suite=. Users mark classes with
+these. Attributes are the test cases. At the model level users can
+choose the test framework. For example for Boost.Test, it generates
+the main file with fixture initialisation, etc. We could then have one
+of two approaches:
+
+- protected regions, where the test contents are protected and perhaps
+  an area at the top for globals etc.
+- stubs only, were we generate the original content but then users
+  subsequently manage the files.
 
 *** Improve comments on reference implementation                      :story:
 
@@ -602,20 +641,21 @@ instances of these features are called configurations. We just need a
 strategy for mapping features into UML models, for which there are
 several in the literature.
 
-*** Create a text model post-processing chain                         :story:
+*** Create a extraction model post-processing chain                   :story:
 
- The following transforms can be done after generation of the text model:
+The following transforms can be done after generation of the
+extraction model:
 
- - clang format
- - protected regions: read the file on disk, replace contents of the
-   protected region with the data read from disk.
+- clang format
+- protected regions: read the file on disk, replace contents of the
+  protected region with the data read from disk.
 
- These can be contained in a post-processing chain for the text model.
+These can be contained in a post-processing chain for the text model.
 
- Note that we need artefacts to have an associated language so that we
- can use the correct clang format configuration. If a language is not
- supported by clang format (e.g. c#) we should just skip the files. The
- text model could group files by language.
+Note that we need artefacts to have an associated language so that we
+can use the correct clang format configuration. If a language is not
+supported by clang format (e.g. c#) we should just skip the files. The
+text model could group files by language.
 
 *** Detect unqualified stereotypes                                    :story:
 
@@ -712,6 +752,20 @@ At present we generate constructors, swap, etc. for handcrafted
 classes. Ideally users should be able to create a profile that enables
 the things they want to see on a template and then associate it with a
 stereotype. For this we will need aspect support.
+
+A more interesting approach would be to combine wale (or its proper
+replacement, a mustache based solution) with the meta-model: if one
+could create *any* text file that can behave like this kind of
+template, we could arbitrarily extend dogen for trivial use cases:
+
+- main, entry point.
+- interface.
+- other uses users may find. Because they can bind templates against
+  elements, this would make extensibility easier.
+
+However, this is not a replacement for stitch: it is only helpful for
+trivial cases and its not even clear it would work for all - e.g. how
+would one loop trough all attributes in an object?
 
 *** Code-generate annotations type templates                          :story:
 
@@ -942,110 +996,6 @@ make this distinction clear, e.g.:
 This means the include container should have two different containers
 to match this structure.
 
-*** Move element segmentation into yarn                               :story:
-
-We've added the notion that an element can be composed of other
-elements in quilt, in order to handle forward declarations. However,
-with a little bit of effort we can generalise it into yarn. It would
-be useful for other things such as inner classes. We don't need to
-actually implement inner classes right now but we should make sure the
-moving of this feature into yarn is compatible with it.
-
-Notes:
-
-- seems like we have two use cases: a) we need all elements, master
-  and extensions and we don't really care about which is which. b) we
-  only want masters. However, we must be able to access the same
-  element properties from either the master or the extension. Having
-  said all that, it seems we don't really need all of the element
-  properties for both - forward declarations probably only need:
-  decoration and artefact properties.
-- we don't seem to use the map in formattables model anywhere, other
-  than to find master/extension elements.
-- Yarn model could have two simple list containers (masters and
-  all). Or maybe we don't even need this to start off with, we can
-  just iterate and skip extensions where required.
-- so in conclusion, we to move decoration, enablement and dependencies
-  into yarn (basically decoration and artefact properties) first and
-  then see where segmentation ends.
-
-Tasks:
-
-- add a concept for element extensions: =Extensible=. Contains a list
-  of element pointers.
-- populate it with the extensions.
-- change enablement to merge all element properties of extensible
-  elements.
-
-*** Create a yarn locator                                             :story:
-
-We need to move all functionality which is not kernel specific into
-yarn for the locator. This will exist in the helpers namespace. We
-then need to implement the C++ locator as a composite of yarn
-locator. It will live in fabric.
-
-*Other Notes*
-
-At present we have multiple calls in locator, which are a bit
-ad-hoc. We could potentially create a pattern. Say for C++, we have
-the following parameters:
-
-- relative or full path
-- include or implementation: this is simultaneously used to determine
-  the placement (below) and the extension.
-- meta-model element:
-- "placement": top-level project directory, source directory or
-  "natural" location inside of facet.
-- archetype location: used to determine the facet and archetype
-  postfixes.
-
-E.g.:
-
-: make_full_path_for_enumeration_implementation
-
-Interestingly, the "placement" is a function of the archetype location
-(a given artefact has a fixed placement). So a naive approach to this
-seems to imply one could create a data driven locator, that works for
-all languages if supplied suitable configuration data. To generalise:
-
-- project directory is common to all languages.
-- source or include directories become "project
-  sub-directories". There is a mapping between the artefact location
-  and a project sub-directory.
-- there is a mapping between the artefact location and the facet and
-  artefact postfixes.
-- extensions are a slight complication: a) we want to allow users to
-  override header/implementation extensions, but to do it so for the
-  entire project (except maybe for ODB files). However, what yarn's
-  locator needs is a mapping of artefact location to  extension. It
-  would be a tad cumbersome to have to specify extensions one artefact
-  location at a time. So someone has to read a kernel level
-  configuration parameter with the artefact extensions and expand it
-  to the required mappings. Whilst dealing with this we also have the
-  issue of elements which have extension in their names such as visual
-  studio projects and solutions. The correct solution is to implement
-  these using element extensions, and to remove the extension from the
-  element name.
-- each kernel can supply its configuration to yarn's locator via the
-  kernel interface. This is fairly static so it can be supplied early
-  on during initialisation.
-- there is still something not quite right. We are performing a
-  mapping between some logical space (the modeling space) and the
-  physical space (paths in the filesystem). Some modeling elements
-  such as the various CMakeLists.txt do not have enough information at
-  the logical level to tell us about their location; at present the
-  formatter itself gives us this hint ("include cmakelists" or "source
-  cmakelists"?). It would be annoying to have to split these into
-  multiple archetypes just so we can have a function between the
-  archetype location and the physical space. Although, if this is the
-  only case of a modeling element not mapping uniquely, perhaps we
-  should do exactly this.
-- However, we still have inclusion paths to worry about. As we done
-  with the source/include directories, we need to somehow create a
-  concept of inclusion path which is not language specific; "relative
-  path" and "requires relative path" perhaps? These could be a
-  function of archetype location.
-
 *** Move ORM camel-case and databases into yarn                       :story:
 
 We should handle this property at the ORM level, rather than at the
@@ -1068,15 +1018,6 @@ canonical archetypes and which don't. In the validation we said:
 
 We should have some kind of flag in yarn to distinguish. This still
 requires a bit of thinking.
-
-*** Tidy-up of inclusion terminology                                  :story:
-
-Random notes:
-
-- imports and exports
-- some types support both (headers)
-- some support imports only (cpp)
-- some support neither (cmakelists, etc).
 
 *** Move helpers into generation                                      :story:
 
@@ -1148,52 +1089,6 @@ check to see if the test bundle is enabled.
 For extra marks, with would be great if you could associate a bundle
 with a facet as well, so that the IO, hashing etc types would go into
 the right facet folders rather than under types.
-
-*** Code generation of tests for dogen models                         :story:
-
-We probably already have a story for this. At present we are manually
-generating tests for each model (serialisation, etc). The structure of
-the tests is very predictable. In a world where tests are a facet, we
-could have some options to control the generation of tests. This would
-also allow end users to generate tests for their models and report the
-results. We would need to generate the utility model for this - or
-perhaps we could code generate tests in a way that no longer requires
-templates - its all "hard-coded". This would make the tests easier to
-follow, but we would generate a lot of code.
-
-We could separate dogen specific tests from user tests by naming them
-differently, e.g. =abc_dogen_test.cpp=. We can then create two
-different test binaries, one for dogen tests and another for user
-tests, so that users don't have to run dogen tests unless something
-has gone wrong.
-
-Interestingly we could even set rules to ignore tests that are known
-to fail:
-
-- if object has no members do not do equality tests
-- if object has some kind of recursion do not do tests
-- etc.
-
-These can be marked as known limitations. At present the tests require
-Boost.Test but it should be possible to target other frameworks
-(meta-data option).
-
-Merged stories:
-
-*Consider creating a "test" facet*
-
-Whilst we can't really generate tests, we can at least create the
-stubs for them. For this we could have a =test= facet that uses a
-stereotype, e.g. =test_suite=. Users mark classes with
-these. Attributes are the test cases. At the model level users can
-choose the test framework. For example for Boost.Test, it generates
-the main file with fixture initialisation, etc. We could then have one
-of two approaches:
-
-- protected regions, where the test contents are protected and perhaps
-  an area at the top for globals etc.
-- stubs only, were we generate the original content but then users
-  subsequently manage the files.
 
 *** Make explicit all implicit modeling elements                      :story:
 
@@ -1830,23 +1725,6 @@ This also lines up with the story we had where we question our use of
 attributes. In reality we have created a notion of "property". We need
 a stereotype for this.
 
-*** Add support for structs                                           :story:
-
-Even in C++ it is useful sometimes to define a type as a plain struct,
-with no getters and setters and all members public. We could still
-generate IO etc as per usual (well, almost as the API would be
-different).
-
-For this we would need a different stereotype. We need to do more
-research on POCOs/PODs/POJOs.
-
-Links:
-
-- [[https://en.wikipedia.org/wiki/Plain_old_Java_object][POJO]]
-- [[https://en.wikipedia.org/wiki/Plain_old_CLR_object][POCO]]
-- [[https://en.wikipedia.org/wiki/Passive_data_structure][Passive data structure]]
-- [[https://en.wikipedia.org/wiki/Data_transfer_object][Data transfer object]]
-
 *** Support for multiple "generation strategies"                      :story:
 
 It seems we have a requirement to support different kinds of
@@ -1964,7 +1842,7 @@ Links:
 - [[http://www.boost.org/community/feature_model_diagrams.html][Feature Model Diagrams in text and HTML]]
 - [[https://github.com/EmilianoSanchez/Feature-Model-Optimization][Feature-Model-Optimization]]
 
-*** Consider renaming =yarn::name=                                    :story:
+*** Consider renaming =coding::name=                                  :story:
 
 Now that we are using the name "name" to mean a plain string (exomodel
 related classes), it raises a question as to whether name (and
@@ -1974,6 +1852,13 @@ concept that is used by both exomodel entities and the "new name"
 class. However, we never managed to find a good name for this class.
 
 *** Add models for the executables                                    :story:
+
+We have now updated all of dogen so that everything is a model,
+including the executables. However, we still haven't added high-level
+concepts to generate the right targets for both executables and
+libraries. We also need a template for entry point.
+
+*Previous understanding*
 
 At present the executables are all hand-crafted. However, as we want
 to move the options into each executable we need them to be in a
@@ -2257,20 +2142,6 @@ from system models, we could possibly just define a bundle called
 This should be a stereotype to make it really visible. Also, the type
 should have a colour that is easy to spot like light gray.
 
-*** Consider adding =artefact_set= to formatters' model               :story:
-
-We are using collections of artefacts quite a bit, and it makes sense
-to create an abstraction for it such as a =artefact_set=. However, for
-this to work properly we need to add at least one basic behaviour: the
-ability to merge two artefact sets. Or else we will end up having to
-unpack the artefacts, then merging them, then creating a new artefact
-set.
-
-Problem is, we either create the artefact set as a non-generatable
-type - not ideal - or we create it as generatable and need to add this
-as a free function. We need to wait until dogen has support for
-merging code generation.
-
 *** Rename yarn types that clash with reserved keywords               :story:
 
 When we added the new validation rules, yarn did not pass
@@ -2303,11 +2174,6 @@ Ideally we should have:
   descriptions so that users know whats available.
 - a check that a stereotype has not yet been registered so only one
   consumer can bind to it.
-
-*** Consider supplying element configuration as a parameter           :story:
-
-Figure out if element configuration is context or if it is better
-expressed as a stand alone formatting parameter.
 
 *** Consider renaming test data to sequence                           :story:
 
@@ -2576,15 +2442,15 @@ there are two different kinds of exomodels: proxyness is a fundamental
 property of an exomodel. If we do this we can then do the mapping in
 flight as we transform from exomodel to endomodel.
 
-*** Add support for "ad-hoc" probing                                  :story:
+*** Add support for "ad-hoc" tracing                                  :story:
 
-We have a set of inputs supplied to the prober called "initial
+We have a set of inputs supplied to the tracer called "initial
 input". This is not ideal. We need a way to generalise the "initial
 input" dumping. In effect, what we are really saying is that within a
 transform we may need to dump more state than just the initial
 inputs. We need a way to express this in the probing API.
 
-*** Tailor does not output static stereotypes                         :story:
+*** Conversion does not output static stereotypes                     :story:
 
 At present we only output static stereotypes. However, there is no
 point on fixing this until we move to the new JSON format.
@@ -5967,6 +5833,23 @@ This may not be required once we move over to Catch since the specs
 become very readable.
 
 ** Features that would be nice to have one day
+
+*** Add support for structs                                           :story:
+
+Even in C++ it is useful sometimes to define a type as a plain struct,
+with no getters and setters and all members public. We could still
+generate IO etc as per usual (well, almost as the API would be
+different).
+
+For this we would need a different stereotype. We need to do more
+research on POCOs/PODs/POJOs.
+
+Links:
+
+- [[https://en.wikipedia.org/wiki/Plain_old_Java_object][POJO]]
+- [[https://en.wikipedia.org/wiki/Plain_old_CLR_object][POCO]]
+- [[https://en.wikipedia.org/wiki/Passive_data_structure][Passive data structure]]
+- [[https://en.wikipedia.org/wiki/Data_transfer_object][Data transfer object]]
 
 *** Add project documentation                                         :story:
 

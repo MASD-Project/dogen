@@ -5,28 +5,29 @@
 
 * Mission Statement
 
-- resolve the refactoring problem with lots of duplicated types;
+- resolve the refactoring problem with lots of duplicated types.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-01 Fri 11:31]
+#+CAPTION: Clock summary at [2019-03-01 Fri 12:07]
 | <75>                                                |         |       |      |       |
 | Headline                                            | Time    |       |      |     % |
 |-----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                        | *12:26* |       |      | 100.0 |
+| *Total time*                                        | *13:00* |       |      | 100.0 |
 |-----------------------------------------------------+---------+-------+------+-------|
-| Stories                                             | 12:26   |       |      | 100.0 |
-| Active                                              |         | 12:26 |      | 100.0 |
-| Edit release notes for previous sprint              |         |       | 1:27 |  11.7 |
-| Sprint and product backlog grooming                 |         |       | 0:18 |   2.4 |
-| Implement text model generation chain in generation |         |       | 3:45 |  30.2 |
-| Move generation model out of coding                 |         |       | 4:22 |  35.1 |
-| Rename endomodel to just model                      |         |       | 2:11 |  17.6 |
+| Stories                                             | 13:00   |       |      | 100.0 |
+| Active                                              |         | 13:00 |      | 100.0 |
+| Edit release notes for previous sprint              |         |       | 1:27 |  11.2 |
+| Sprint and product backlog grooming                 |         |       | 0:42 |   5.4 |
+| Implement text model generation chain in generation |         |       | 3:45 |  28.8 |
+| Move generation model out of coding                 |         |       | 4:22 |  33.6 |
+| Rename endomodel to just model                      |         |       | 2:11 |  16.8 |
 | Remove exomodel remnants                            |         |       | 0:03 |   0.4 |
-| Try to fix valgrind warning on =find_files=         |         |       | 0:20 |   2.7 |
+| Try to fix valgrind warning on =find_files=         |         |       | 0:20 |   2.6 |
+| Move injection processing out of coding             |         |       | 0:10 |   1.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -193,6 +194,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-03-01 Fri 11:43]--[2019-03-01 Fri 12:07] =>  0:24
     CLOCK: [2019-02-26 Tue 15:25]--[2019-02-26 Tue 15:43] =>  0:18
     :END:
 
@@ -281,6 +283,22 @@ Once the =external= model has been created, we need to replace the
 legacy exomodel related transforms; and once that is done, we need to
 remove all of the legacy code.
 
+*** COMPLETED Update ref impl namespaces to match the new specification :story:
+    CLOSED: [2019-03-01 Fri 11:43]
+
+*Rationale*: already implemented.
+
+Perform the namespace update to the reference implementation.
+
+*** COMPLETED Log file names do not have frontend                     :story:
+    CLOSED: [2019-03-01 Fri 11:45]
+
+*Rationale*: already implemented.
+
+Add extension to log file name so that we can see both Dia and JSON
+logs at the same time. At present, one overwrites the other because we
+do not have the frontend (e.g. the extension) on the log file name.
+
 *** STARTED Try to fix valgrind warning on =find_files=               :story:
     :LOGBOOK:
     CLOCK: [2019-02-27 Wed 17:25]--[2019-02-27 Wed 17:45] =>  0:20
@@ -297,6 +315,67 @@ We seem to be doing something wrong with directory iterators:
 : ==7755==    by 0x6F0E15: masd::dogen::utility::filesystem::find_files(boost::filesystem::path const&) (file.cpp:85)
 : ==7755==    by 0x6ADB4B: masd::dogen::coding::helpers::mapping_set_repository_factory::obtain_mappings[abi:cxx11](std::vector > const&) const (mapping_set_repository_factory.cpp:66)
 : ==7755==    by 0x6AF507: masd::dogen::coding::helpers::mapping_set_repository_factory::make(std::vector > const&) const (mapping_set_repository_factory.cpp:172)
+
+*** STARTED Move injection processing out of coding                   :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-01 Fri 11:37]--[2019-03-01 Fri 11:43] =>  0:06
+    CLOCK: [2019-03-01 Fri 11:32]--[2019-03-01 Fri 11:36] =>  0:04
+    :END:
+
+We need to stop the intermixing between injection and coding
+models. We need to load up all of the injection models in one go and
+supply them into coding for processing.
+
+Notes:
+
+- add annotations to injection. Read references.
+- add logic to read system models into injection.
+- add a chain in orchestration that does the new injection workflow
+  and passes the model set into coding.
+- delete injection related classes in coding.
+
+*** Model references are not transitive                               :story:
+
+For some reason we do not seem to be following references of
+referenced models. We should load them automatically, now that they
+are part of the meta-data. However, the =yarn.json= model breaks when
+we remove the reference to annotation even though it does not use this
+model directly and =yarn= is referencing it correctly.
+
+The reason why is that we load up references to all intermediate
+models, but then on merge we only take target references. What we
+really need to do is to combine the reference containers on merge. For
+this we need to create a method that loops through the map and inserts
+all keys which have not yet been inserted. Something like "merge
+references".
+
+We should address this issue when we introduce two-phase parsing of
+models. This is because, as with the new meta-model elements, we also
+need to do a first pass across the target and all reference models to
+obtain all the paths for all referenced models. We then need to obtain
+the unique set of referenced models and load those. To put in this
+logic in the code at present (i.e. without a two-phase approach) would
+mean we'd have to load the same models several times (or heavily
+rewrite existing code, resulting in a two-phase approach, anyway).
+
+*** Add model sources and sinks in Dogen                              :story:
+
+At present we are reading and writing to files inside the
+workflows. This means that if we want to use databases in the future
+we will have to update the entire code base to cope with this. A
+better approach is to perform IO via some interface, which can be
+implemented to target either the filesystem or a database, cache, etc.
+
+Notes:
+
+- add workflow that takes in a string, path, etc and creates a model
+  set. It will need to read references and language from the model
+  annotations.
+- add model source into injection
+- add model set into injection, with target and references
+- add model set into coding.
+- add a new model: coding.injection. Create a class that converts from
+  one model set to another.
 
 *** Consider adding a dot graph of the transforms to probing          :story:
 
@@ -375,30 +454,6 @@ Notes:
   messages slightly different from MSVC]]. Clang [[http://lists.llvm.org/pipermail/cfe-dev/2019-February/061339.html][have patched]] the diffs
   now.
 
-*** Model references are not transitive                               :story:
-
-For some reason we do not seem to be following references of
-referenced models. We should load them automatically, now that they
-are part of the meta-data. However, the =yarn.json= model breaks when
-we remove the reference to annotation even though it does not use this
-model directly and =yarn= is referencing it correctly.
-
-The reason why is that we load up references to all intermediate
-models, but then on merge we only take target references. What we
-really need to do is to combine the reference containers on merge. For
-this we need to create a method that loops through the map and inserts
-all keys which have not yet been inserted. Something like "merge
-references".
-
-We should address this issue when we introduce two-phase parsing of
-models. This is because, as with the new meta-model elements, we also
-need to do a first pass across the target and all reference models to
-obtain all the paths for all referenced models. We then need to obtain
-the unique set of referenced models and load those. To put in this
-logic in the code at present (i.e. without a two-phase approach) would
-mean we'd have to load the same models several times (or heavily
-rewrite existing code, resulting in a two-phase approach, anyway).
-
 *** Move top-level transforms into orchestration                      :story:
 
 - clear up the existing orchestration model We don't really know what
@@ -414,23 +469,10 @@ rewrite existing code, resulting in a two-phase approach, anyway).
   =generation.cpp=. This means updating all of the formatters. Also,
   use the external model, deleting all of the text models.
 
-*** Move injection processing out of coding                           :story:
-
-- add model source into injection
-- add model set into injection, with target and references
-- add workflow that takes in a string, path, etc and creates a model
-  set. It will need to read references and language from the model
-  annotations.
-- add model set into coding.
-- add a new model: coding.injection. Create a class that converts from
-  one model set to another.
-- add a chain in orchestration that does the new injection workflow
-  and passes the model set into coding.
-- delete injection related classes in coding.
-
 *** Implement configuration validator                                 :story:
 
-At present we are not performing any validation.
+At present we are not performing any validation to the new
+configuration classes in the API.
 
 *** Create transforms for templating                                  :story:
 
@@ -454,6 +496,28 @@ to supply a destination file.
 In effect, this is a common use case for all commands (generate and
 weaving as well). We could probably deduce it: if the user supplied a
 directory as a target, we should do it in directory mode.
+
+Merged stories:
+
+*Drop the original extension in tailor*
+
+Filenames in tailor look weird:
+
+: dart.dia.json
+
+it should just be:
+
+: dart.json
+
+Actually this is not a tailor / converter problem per se - its just
+that CMake is supplying the entire file name with extension to dogen
+as the destination. However, due to restrictions on how =NAME_WE=
+works for multiple extensions, it is non-trivial to sort this
+problem. In addition, because we want to read models from the dia
+directory and write them into the JSON directory, we can't just simply
+change dogen to update the extension itself. We need some hackery in
+CMake to process extensions properly like by dropping the last N
+characters of the filename or some such.
 
 *** Add stereotype for IoC containers                                 :story:
 
@@ -877,10 +941,10 @@ ideal. In general:
 
 *** Remove hello world model                                          :story:
 
- It is confusing to have it mixed up with product models. Use a regular
- dogen model to test the package. We could have it on the reference
- model as a stand alone example, or we could create a "hello dogen"
- product for a trivial example of dogen usage.
+It is confusing to have it mixed up with product models. Use a regular
+dogen model to test the package. We could have it on the reference
+model as a stand alone example, or we could create a "hello dogen"
+product for a trivial example of dogen usage.
 
 *** Move from doxygen to standardese                                  :story:
 
@@ -894,10 +958,6 @@ either markup via a meta-data parameter (documentation markup?).
 Links:
 
 - https://github.com/foonathan/standardese
-
-*** Update ref impl namespaces to match the new specification         :story:
-
-Perform the namespace update to the reference implementation.
 
 *** New approach to model testsing                                    :story:
 
@@ -1157,42 +1217,42 @@ groups, etc. Its all in the annotations transform.
 
 *** Problems in conversion of dogen models                            :story:
 
- Regenerated all models, got the following errors:
+Regenerated all models, got the following errors:
 
- - we are adding the extension to the dia filename because of how CMake
-   works. We should probably remove the output parameter or at least
-   allow defaulting it to a replacement of the extension.
- - we are removing the dependencies due to duplicates in JSON keys.
- - we are looking for .dia diagrams instead of .json for references.
+- we are adding the extension to the dia filename because of how CMake
+  works. We should probably remove the output parameter or at least
+  allow defaulting it to a replacement of the extension.
+- we are removing the dependencies due to duplicates in JSON keys.
+- we are looking for .dia diagrams instead of .json for references.
 
- *Previous Understanding*
+*Previous Understanding*
 
- We converted all of dogen's models from dia into JSON using tailor and
- code-generated them to see if there were any differences.
+We converted all of dogen's models from dia into JSON using tailor and
+code-generated them to see if there were any differences.
 
- Issues to address:
+Issues to address:
 
- - problems with =quilt.cpp= and =yarn.dia= / =yarn.json=: the
-   conversion of the model path did not work as expected - we do not
-   know of the "."  separator. Fixed it manually and then it all worked
-   (minus CMakeLists, see below). We could possibly fix the builder to
-   automatically use the "." to separate model paths. Actually with the
-   latest changes we now seem to only be looking at the first model
-   module, so for =yarn.dia= we only have =yarn=.
- - CMakeLists were deleted on all models for some reason, even though
-   the annotations profile look correct.
- - in quilt we correctly generated the forward declarations for
-   registrar error and workflow error without including boost
-   exception. Not sure why that is, nor why it is that we are including
-   them for forward declarations.
- - Missing include of registrar serialisation in
-   =all_ser.hpp=. Instability in =registrar_ser.cpp=, but content is
-   correct otherwise.
- - =database.json= generated invalid JSON.
- - references in dia diagrams have the dia extension. This means that
-   they do not resolve when converted to JSON.
+- problems with =quilt.cpp= and =yarn.dia= / =yarn.json=: the
+  conversion of the model path did not work as expected - we do not
+  know of the "."  separator. Fixed it manually and then it all worked
+  (minus CMakeLists, see below). We could possibly fix the builder to
+  automatically use the "." to separate model paths. Actually with the
+  latest changes we now seem to only be looking at the first model
+  module, so for =yarn.dia= we only have =yarn=.
+- CMakeLists were deleted on all models for some reason, even though
+  the annotations profile look correct.
+- in quilt we correctly generated the forward declarations for
+  registrar error and workflow error without including boost
+  exception. Not sure why that is, nor why it is that we are including
+  them for forward declarations.
+- Missing include of registrar serialisation in
+  =all_ser.hpp=. Instability in =registrar_ser.cpp=, but content is
+  correct otherwise.
+- =database.json= generated invalid JSON.
+- references in dia diagrams have the dia extension. This means that
+  they do not resolve when converted to JSON.
 
- "Script":
+"Script":
 
  #+begin_src
 rm *.json
@@ -1201,16 +1261,10 @@ for a in $A; do /home/marco/Development/DomainDrivenConsulting/dogen/build/outpu
 for a in $A; do /home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/bin/dogen.knitter -t ${a}.json --cpp-project-dir /home/marco/Development/DomainDrivenConsulting/dogen/projects --ignore-files-matching-regex .*/CMakeLists.txt --ignore-files-matching-regex .*/test/.* --ignore-files-matching-regex .*/tests/.* --verbose --delete-extra-files; done
  #+end_src
 
- In an ideal world, we should probably have a script that we run as
- part of =knit_and_stitch= that converts to tailor and then runs
- knitter on the models, so that we keep track of tailor breaks outside
- of JSON test models.
-
-*** Log file names do not have frontend                               :story:
-
-Add extension to log file name so that we can see both Dia and JSON
-logs at the same time. At present, one overwrites the other because we
-do not have the frontend (e.g. the extension) on the log file name.
+In an ideal world, we should probably have a script that we run as
+part of =knit_and_stitch= that converts to tailor and then runs
+knitter on the models, so that we keep track of tailor breaks outside
+of JSON test models.
 
 *** Update static strings to string views                             :story:
 
@@ -1312,4 +1366,139 @@ It seems that the boost registration is failing on debug. This is very
 strange as it works on MSVC and Linux, release and debug but fails on
 clang-cl release.
 
+*** Move element segmentation into yarn                               :story:
+
+We've added the notion that an element can be composed of other
+elements in quilt, in order to handle forward declarations. However,
+with a little bit of effort we can generalise it into yarn. It would
+be useful for other things such as inner classes. We don't need to
+actually implement inner classes right now but we should make sure the
+moving of this feature into yarn is compatible with it.
+
+Notes:
+
+- seems like we have two use cases: a) we need all elements, master
+  and extensions and we don't really care about which is which. b) we
+  only want masters. However, we must be able to access the same
+  element properties from either the master or the extension. Having
+  said all that, it seems we don't really need all of the element
+  properties for both - forward declarations probably only need:
+  decoration and artefact properties.
+- we don't seem to use the map in formattables model anywhere, other
+  than to find master/extension elements.
+- Yarn model could have two simple list containers (masters and
+  all). Or maybe we don't even need this to start off with, we can
+  just iterate and skip extensions where required.
+- so in conclusion, we to move decoration, enablement and dependencies
+  into yarn (basically decoration and artefact properties) first and
+  then see where segmentation ends.
+
+Tasks:
+
+- add a concept for element extensions: =Extensible=. Contains a list
+  of element pointers.
+- populate it with the extensions.
+- change enablement to merge all element properties of extensible
+  elements.
+
+*** Create a yarn locator                                             :story:
+
+We need to move all functionality which is not kernel specific into
+yarn for the locator. This will exist in the helpers namespace. We
+then need to implement the C++ locator as a composite of yarn
+locator. It will live in fabric.
+
+*Other Notes*
+
+At present we have multiple calls in locator, which are a bit
+ad-hoc. We could potentially create a pattern. Say for C++, we have
+the following parameters:
+
+- relative or full path
+- include or implementation: this is simultaneously used to determine
+  the placement (below) and the extension.
+- meta-model element:
+- "placement": top-level project directory, source directory or
+  "natural" location inside of facet.
+- archetype location: used to determine the facet and archetype
+  postfixes.
+
+E.g.:
+
+: make_full_path_for_enumeration_implementation
+
+Interestingly, the "placement" is a function of the archetype location
+(a given artefact has a fixed placement). So a naive approach to this
+seems to imply one could create a data driven locator, that works for
+all languages if supplied suitable configuration data. To generalise:
+
+- project directory is common to all languages.
+- source or include directories become "project
+  sub-directories". There is a mapping between the artefact location
+  and a project sub-directory.
+- there is a mapping between the artefact location and the facet and
+  artefact postfixes.
+- extensions are a slight complication: a) we want to allow users to
+  override header/implementation extensions, but to do it so for the
+  entire project (except maybe for ODB files). However, what yarn's
+  locator needs is a mapping of artefact location to  extension. It
+  would be a tad cumbersome to have to specify extensions one artefact
+  location at a time. So someone has to read a kernel level
+  configuration parameter with the artefact extensions and expand it
+  to the required mappings. Whilst dealing with this we also have the
+  issue of elements which have extension in their names such as visual
+  studio projects and solutions. The correct solution is to implement
+  these using element extensions, and to remove the extension from the
+  element name.
+- each kernel can supply its configuration to yarn's locator via the
+  kernel interface. This is fairly static so it can be supplied early
+  on during initialisation.
+- there is still something not quite right. We are performing a
+  mapping between some logical space (the modeling space) and the
+  physical space (paths in the filesystem). Some modeling elements
+  such as the various CMakeLists.txt do not have enough information at
+  the logical level to tell us about their location; at present the
+  formatter itself gives us this hint ("include cmakelists" or "source
+  cmakelists"?). It would be annoying to have to split these into
+  multiple archetypes just so we can have a function between the
+  archetype location and the physical space. Although, if this is the
+  only case of a modeling element not mapping uniquely, perhaps we
+  should do exactly this.
+- However, we still have inclusion paths to worry about. As we done
+  with the source/include directories, we need to somehow create a
+  concept of inclusion path which is not language specific; "relative
+  path" and "requires relative path" perhaps? These could be a
+  function of archetype location.
+
+*** Tidy-up of inclusion terminology                                  :story:
+
+Random notes:
+
+- imports and exports
+- some types support both (headers)
+- some support imports only (cpp)
+- some support neither (cmakelists, etc).
+
+*** Consider adding =artefact_set= to formatters' model               :story:
+
+We are using collections of artefacts quite a bit, and it makes sense
+to create an abstraction for it such as a =artefact_set=. However, for
+this to work properly we need to add at least one basic behaviour: the
+ability to merge two artefact sets. Or else we will end up having to
+unpack the artefacts, then merging them, then creating a new artefact
+set.
+
+Problem is, we either create the artefact set as a non-generatable
+type - not ideal - or we create it as generatable and need to add this
+as a free function. We need to wait until dogen has support for
+merging code generation.
+
 ** Deprecated
+*** CANCELLED Consider supplying element configuration as a parameter :story:
+    CLOSED: [2019-03-01 Fri 12:03]
+
+*Rationale*: models have changed so much, not even sure what this
+story is about.
+
+Figure out if element configuration is context or if it is better
+expressed as a stand alone formatting parameter.
