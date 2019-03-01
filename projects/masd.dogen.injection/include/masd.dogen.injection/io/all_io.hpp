@@ -28,5 +28,6 @@
 #include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.injection/io/meta_model/element_io.hpp"
 #include "masd.dogen.injection/io/meta_model/attribute_io.hpp"
+#include "masd.dogen.injection/io/meta_model/model_set_io.hpp"
 
 #endif

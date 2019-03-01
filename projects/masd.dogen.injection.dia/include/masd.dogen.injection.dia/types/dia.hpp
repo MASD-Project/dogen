@@ -26,17 +26,17 @@
 #endif
 
 /**
- * @brief External.Dia is a unidirectional transformation model that transforms
- * Dia @e diagram into an external @e model.
+ * @brief Injection.Dia is a unidirectional transformation model that transforms
+ * a Dia @e diagram into an injection @e model.
  *
  * By that we mean that it is a model designed to transform a representation of
- * a user model in Dia diagram format to its counterpart in the external format,
+ * a user model in Dia diagram format to its counterpart in the injection format,
  * taking into account any special masd meta-data which the user may have encoded
  * into the Dia diagram. Note that the Dia diagram format contains a representation
- * of UML. We pass that meta-data straight through into the external model, without
- * any further processing.
+ * of UML. We pass that meta-data straight through into the injection model,
+ * without any further processing.
  *
- * @section external_dia_0 Dia diagrams as DAGs
+ * @section injection_dia_0 Dia diagrams as DAGs
  *
  * Dia diagrams are made up of @e objects, identified by IDs. These objects
  * contain a number of UML model elements, which we are interested in. For
@@ -46,26 +46,26 @@
  * @li UML generalisation
  * @li UML notes
  *
- * and so on. Each of these objects will contribute to am external element.
+ * and so on. Each of these objects will contribute to am injection element.
  * However, we need to be aware of object containment - e.g. if a class is
- * contained in a package. This is because the external element names are scoped
+ * contained in a package. This is because the injection element names are scoped
  * by the packages. So, to make our life easier we created a DAG of Dia objects
  * that provides us with the information in dependency order. That is, we process
  * dia objects in such a way that when a dependency exists, we know that the object
  * in which we depend on has already been processed. Please note that to ensure no
  * cycles we had to ignore some of the UML objects such as UML aggregation -
- * but fortunately, these objects do not provide sufficient information for
- * an external transformation anyway so not much was lost (instead, one must
- * manually declare attributes in a class).
+ * but fortunately, these objects do not provide sufficient information as
+ * required for dogen transformations, so not much was lost. Instead, one must
+ * manually declare attributes in a class.
  *
  * See @ref grapher for details on how the the DAG is built.
  *
- * @section external_dia_1 Intermediate processing
+ * @section injection_dia_1 Intermediate processing
  *
  * To make the code easier to read and maintain, we created a numeber of
- * intermediate stages between a Dia diagram and masd:
+ * intermediate stages between a Dia diagram and an injection model:
  *
- * @li Dia object -> processed object -> profile -> external element
+ * @li Dia object -> processed object -> profile -> injection element
  *
  * This may look a bit excessive at first glance, but it was done because
  * the shape of the Dia objects is a bit too generic for our purposes, and
@@ -78,7 +78,7 @@
  * create the corresponding masd entity, and the transformation code is
  * not obscured.
  *
- * @section external_dia_2 Dia meta-data
+ * @section injection_dia_2 Dia meta-data
  *
  * There are a couple of conventions on how to model in Dia that one
  * needs to follow in order to comply with Dogen:
@@ -88,37 +88,17 @@
  * expected that a getter and a setter will be generated.
  *
  * @li a number of stereotypes were added, as per the definitions in the
- * UML profile. For details, see the Dogen UML profile.
+ * MASD UML profile. For details, see the Dogen UML profile.
  *
  * @li any type without any stereotype assumes a default stereotype, again
- * as per Dogen UML profile.
+ * as per MASD UML profile.
  *
- * @li any UML Note with the marker #DOGEN masd.injection.dia.comment=true will be
- * used as the documentation of the current package - or the model, if
+ * @li any UML Note with the marker #DOGEN masd.injection.dia.comment=true will
+ * be used as the documentation of the current package - or the model, if
  * place at the top-level. Only one such note is expected per containing
  * entity.
  *
- * The masd stereotypes have the following behaviours:
- *
- * @li @b exception: an exception class will be code generated. This is still
- * a value object but it will have any additional machinery related to
- * exceptions attached to it.
- *
- * @li @b enumeration: Can only have attributes, and the attributes must not
- * have types. Type defaults to unsigned int.
- *
- * @li @b object @b template: Defines new stereotypes on the fly; that
- * is, if you create a UML class @e MyObjectTemplate with property @e a
- * and mark it as an object template, you can then create a UML class @e
- * my_class with a stereotype of @e MyObjectTemplate; the result will be
- * that my_class will have a property @e a too.
- *
- * @li @b visitable: a visitor service will be create for the type. Must be
- * the root of an inheritance tree.
- *
- * @li @b fluent: a fluent interface will be generated for all properties.
- *
- * @li @b immutable: only getters will be generated for each property.
+ * For details on the stereotypes see the MASD UML profile.
  */
 namespace masd::dogen::injection::dia {
 }

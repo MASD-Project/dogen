@@ -18,29 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_INJECTION_TYPES_INJECTION_HPP
-#define MASD_DOGEN_INJECTION_TYPES_INJECTION_HPP
+#include "masd.dogen.injection/types/helpers/references_path_finder.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace masd::dogen::injection::helpers {
 
-/**
- * @brief Provides support for encoding and decoding of external models.
- *
- * An external model is defined as:
- *
- * - a third-party format that is not owned or controlled by
- *   Dogen, such as Dia
- * - a Dogen format designed for interoperability (JSON).
- *
- * External models are converted into an intermediate format called
- * the @e injection model, at which point they are in a suitable
- * form to be injected into Dogen for further processing. A @e codec
- * must be created for each external model, providing a transformation
- * between these native formats and the injection model.
- */
-namespace masd::dogen::injection {
+bool references_path_finder::operator==(const references_path_finder& /*rhs*/) const {
+    return true;
 }
 
-#endif
+}

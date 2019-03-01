@@ -49,7 +49,9 @@ public:
         const std::string& documentation,
         const std::list<std::pair<std::string, std::string> >& tagged_values,
         const std::list<std::string>& stereotypes,
-        const std::list<masd::dogen::injection::meta_model::element>& elements);
+        const std::list<masd::dogen::injection::meta_model::element>& elements,
+        const std::string& language,
+        const std::list<std::string>& references);
 
 public:
     const std::string& name() const;
@@ -86,6 +88,16 @@ public:
     void elements(const std::list<masd::dogen::injection::meta_model::element>& v);
     void elements(const std::list<masd::dogen::injection::meta_model::element>&& v);
 
+    const std::string& language() const;
+    std::string& language();
+    void language(const std::string& v);
+    void language(const std::string&& v);
+
+    const std::list<std::string>& references() const;
+    std::list<std::string>& references();
+    void references(const std::list<std::string>& v);
+    void references(const std::list<std::string>&& v);
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -102,6 +114,8 @@ private:
     std::list<std::pair<std::string, std::string> > tagged_values_;
     std::list<std::string> stereotypes_;
     std::list<masd::dogen::injection::meta_model::element> elements_;
+    std::string language_;
+    std::list<std::string> references_;
 };
 
 }

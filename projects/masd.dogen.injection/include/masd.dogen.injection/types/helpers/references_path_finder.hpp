@@ -18,29 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_INJECTION_TYPES_INJECTION_HPP
-#define MASD_DOGEN_INJECTION_TYPES_INJECTION_HPP
+#ifndef MASD_DOGEN_INJECTION_TYPES_HELPERS_REFERENCES_PATH_FINDER_HPP
+#define MASD_DOGEN_INJECTION_TYPES_HELPERS_REFERENCES_PATH_FINDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-/**
- * @brief Provides support for encoding and decoding of external models.
- *
- * An external model is defined as:
- *
- * - a third-party format that is not owned or controlled by
- *   Dogen, such as Dia
- * - a Dogen format designed for interoperability (JSON).
- *
- * External models are converted into an intermediate format called
- * the @e injection model, at which point they are in a suitable
- * form to be injected into Dogen for further processing. A @e codec
- * must be created for each external model, providing a transformation
- * between these native formats and the injection model.
- */
-namespace masd::dogen::injection {
+#include <algorithm>
+
+namespace masd::dogen::injection::helpers {
+
+class references_path_finder final {
+public:
+    references_path_finder() = default;
+    references_path_finder(const references_path_finder&) = default;
+    references_path_finder(references_path_finder&&) = default;
+    ~references_path_finder() = default;
+    references_path_finder& operator=(const references_path_finder&) = default;
+
+public:
+    bool operator==(const references_path_finder& rhs) const;
+    bool operator!=(const references_path_finder& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
+
 }
 
 #endif

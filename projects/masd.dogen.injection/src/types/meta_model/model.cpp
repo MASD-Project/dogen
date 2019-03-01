@@ -27,12 +27,16 @@ model::model(
     const std::string& documentation,
     const std::list<std::pair<std::string, std::string> >& tagged_values,
     const std::list<std::string>& stereotypes,
-    const std::list<masd::dogen::injection::meta_model::element>& elements)
+    const std::list<masd::dogen::injection::meta_model::element>& elements,
+    const std::string& language,
+    const std::list<std::string>& references)
     : name_(name),
       documentation_(documentation),
       tagged_values_(tagged_values),
       stereotypes_(stereotypes),
-      elements_(elements) { }
+      elements_(elements),
+      language_(language),
+      references_(references) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -41,6 +45,8 @@ void model::swap(model& other) noexcept {
     swap(tagged_values_, other.tagged_values_);
     swap(stereotypes_, other.stereotypes_);
     swap(elements_, other.elements_);
+    swap(language_, other.language_);
+    swap(references_, other.references_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -48,7 +54,9 @@ bool model::operator==(const model& rhs) const {
         documentation_ == rhs.documentation_ &&
         tagged_values_ == rhs.tagged_values_ &&
         stereotypes_ == rhs.stereotypes_ &&
-        elements_ == rhs.elements_;
+        elements_ == rhs.elements_ &&
+        language_ == rhs.language_ &&
+        references_ == rhs.references_;
 }
 
 model& model::operator=(model other) {
@@ -135,6 +143,38 @@ void model::elements(const std::list<masd::dogen::injection::meta_model::element
 
 void model::elements(const std::list<masd::dogen::injection::meta_model::element>&& v) {
     elements_ = std::move(v);
+}
+
+const std::string& model::language() const {
+    return language_;
+}
+
+std::string& model::language() {
+    return language_;
+}
+
+void model::language(const std::string& v) {
+    language_ = v;
+}
+
+void model::language(const std::string&& v) {
+    language_ = std::move(v);
+}
+
+const std::list<std::string>& model::references() const {
+    return references_;
+}
+
+std::list<std::string>& model::references() {
+    return references_;
+}
+
+void model::references(const std::list<std::string>& v) {
+    references_ = v;
+}
+
+void model::references(const std::list<std::string>&& v) {
+    references_ = std::move(v);
 }
 
 }
