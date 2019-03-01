@@ -12,22 +12,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-01 Fri 12:07]
+#+CAPTION: Clock summary at [2019-03-01 Fri 14:32]
 | <75>                                                |         |       |      |       |
 | Headline                                            | Time    |       |      |     % |
 |-----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                        | *13:00* |       |      | 100.0 |
+| *Total time*                                        | *14:53* |       |      | 100.0 |
 |-----------------------------------------------------+---------+-------+------+-------|
-| Stories                                             | 13:00   |       |      | 100.0 |
-| Active                                              |         | 13:00 |      | 100.0 |
-| Edit release notes for previous sprint              |         |       | 1:27 |  11.2 |
-| Sprint and product backlog grooming                 |         |       | 0:42 |   5.4 |
-| Implement text model generation chain in generation |         |       | 3:45 |  28.8 |
-| Move generation model out of coding                 |         |       | 4:22 |  33.6 |
-| Rename endomodel to just model                      |         |       | 2:11 |  16.8 |
-| Remove exomodel remnants                            |         |       | 0:03 |   0.4 |
-| Try to fix valgrind warning on =find_files=         |         |       | 0:20 |   2.6 |
-| Move injection processing out of coding             |         |       | 0:10 |   1.3 |
+| Stories                                             | 14:53   |       |      | 100.0 |
+| Active                                              |         | 14:53 |      | 100.0 |
+| Edit release notes for previous sprint              |         |       | 1:27 |   9.7 |
+| Sprint and product backlog grooming                 |         |       | 0:42 |   4.7 |
+| Implement text model generation chain in generation |         |       | 3:45 |  25.2 |
+| Move generation model out of coding                 |         |       | 4:22 |  29.3 |
+| Rename endomodel to just model                      |         |       | 2:11 |  14.7 |
+| Remove exomodel remnants                            |         |       | 0:03 |   0.3 |
+| Try to fix valgrind warning on =find_files=         |         |       | 0:20 |   2.2 |
+| Move injection processing out of coding             |         |       | 2:03 |  13.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -318,6 +318,7 @@ We seem to be doing something wrong with directory iterators:
 
 *** STARTED Move injection processing out of coding                   :story:
     :LOGBOOK:
+    CLOCK: [2019-03-01 Fri 12:39]--[2019-03-01 Fri 14:32] =>  1:53
     CLOCK: [2019-03-01 Fri 11:37]--[2019-03-01 Fri 11:43] =>  0:06
     CLOCK: [2019-03-01 Fri 11:32]--[2019-03-01 Fri 11:36] =>  0:04
     :END:
@@ -333,6 +334,37 @@ Notes:
 - add a chain in orchestration that does the new injection workflow
   and passes the model set into coding.
 - delete injection related classes in coding.
+- remove extensions from references, and then use registered injectors
+  to determine the expected extensions.
+- rename model generation chain to model production chain. This way we
+  avoid confusion with code generation.
+- grep for exogenous and endogenous.
+- rename =external_model_to_model_transform= to injection.
+- create a top-level context that owns all other four contexts. It
+  contains the top-level tracer. Then supply the tracer to the other
+  contexts. Create a context factory that internally creates the other
+  contexts.
+- make tracer ioable, then implement all contexts via code
+  generation. Ensure tracer does not end tracing on destruction and
+  make it copyable. Or maybe make it a boost shared pointer.
+- system models should be referenced just like any other model. The
+  only difference is that they are sourced from elsewhere. This means
+  we can now implement the reference models directory path approach.
+
+*** Rename =fallback_element_type=                                    :story:
+
+Our JSON uses a very strangely named attribute to carry the meta-type:
+
+:       "fallback_element_type": "masd::object",
+
+Its not at all obvious what this is meant to do. It should just be the
+=element_type=.
+
+We introduced this because users can set the stereotype,
+e.g. =masd::object= - but don't always have to (e.g. when converting a
+model from Dia). In this case, the fallback element type is
+used. Perhaps we can keep the "fallback" logic internally, but just
+call it element type?
 
 *** Model references are not transitive                               :story:
 
@@ -357,6 +389,20 @@ the unique set of referenced models and load those. To put in this
 logic in the code at present (i.e. without a two-phase approach) would
 mean we'd have to load the same models several times (or heavily
 rewrite existing code, resulting in a two-phase approach, anyway).
+
+*** Adding reference to itself results in resolution errors           :story:
+
+Whilst trying to fix the JSON models we inadvertently added a
+self-reference in =dogen.generation.json=:
+
+:    "yarn.reference": "dogen.generation.json",
+
+This resulted in some puzzling errors:
+
+: 2018-10-18 19:15:00.861210 [ERROR] [yarn.transforms.enablement_transform] Duplicate element archetype: quilt.cpp.serialization.registrar_implementation <dogen><generation><registrar>
+
+Ideally we should either warn and ignore or fail to process models
+with self-references.
 
 *** Add model sources and sinks in Dogen                              :story:
 
@@ -384,6 +430,12 @@ chains and transforms. It would be great if we could visualise them as
 a graph using dot/graphviz. The notation looks quite straightforward
 and since we've already built the graph in tracing, its probably just
 a case of transforming it.
+
+We can just add a new format: dot. Then teach the metrics printer to
+output in it. Ideally we should find a way to put at least the timings
+on the graph as well. We should take this opportunity to use the
+tracing formats directly in metrics printer rather than the "use
+org-mode" hack we do at present.
 
 Links:
 
@@ -1024,20 +1076,20 @@ on the fly.
 
 *** Facet enablement and model references is buggy                    :story:
 
-At present we are processing enablement as part of the
-post-processing. This means that we are using the target model's
-annotation profile in order to determine the facet enablement. This
-can cause problems as follows: say we enable hashing on a model via
-the model profile of M0. We then consume that model as a reference and
-disable hashing on M1. When processing types from M0 for M1 we will
-disable hashing for them as well. Thus, no includes for hashing will
-be generated even if a hash map is used.
+ At present we are processing enablement as part of the
+ post-processing. This means that we are using the target model's
+ annotation profile in order to determine the facet enablement. This
+ can cause problems as follows: say we enable hashing on a model via
+ the model profile of M0. We then consume that model as a reference and
+ disable hashing on M1. When processing types from M0 for M1 we will
+ disable hashing for them as well. Thus, no includes for hashing will
+ be generated even if a hash map is used.
 
-Actually this is not quite right. We are expanding annotations at the
-external model transform level; this means the enablement on the
-reference must be correct. However, somehow we seem to be looking at
-the element on the target model when deciding to include the hash
-file from reference model.
+ Actually this is not quite right. We are expanding annotations at the
+ external model transform level; this means the enablement on the
+ reference must be correct. However, somehow we seem to be looking at
+ the element on the target model when deciding to include the hash
+ file from reference model.
 
 *** Consider creating a test build for all facets                     :story:
 

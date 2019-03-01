@@ -1755,13 +1755,13 @@ size limitations.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="-54,-71"/>
+        <dia:point val="-53,-71"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-54.05,-71.05;-40.385,-68.15"/>
+        <dia:rectangle val="-53.05,-71.05;-39.385,-68.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-54,-71"/>
+        <dia:point val="-53,-71"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.565000000000001"/>
@@ -2160,7 +2160,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
         <dia:point val="-43,-58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-47.2675,-68.2009;-42.25,-57.2"/>
+        <dia:rectangle val="-46.2675,-68.2009;-42.25,-57.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2168,8 +2168,8 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
       <dia:attribute name="orth_points">
         <dia:point val="-43,-58"/>
         <dia:point val="-43,-62"/>
-        <dia:point val="-47.2175,-62"/>
-        <dia:point val="-47.2175,-68.1509"/>
+        <dia:point val="-46.2175,-62"/>
+        <dia:point val="-46.2175,-68.1509"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -3803,7 +3803,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
         <dia:point val="-56.97,-42.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-61.5063,-43.15;-56.22,-34.2"/>
+        <dia:rectangle val="-61.5062,-43.15;-56.22,-34.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3874,7 +3874,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
         <dia:point val="-11,-56.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.68,-57.65;-10.25,-53.7"/>
+        <dia:rectangle val="-18.68,-57.7;-10.25,-54.5"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

@@ -2377,22 +2377,22 @@ On the case of a UML note, represents the text of the note.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O18">
       <dia:attribute name="obj_pos">
-        <dia:point val="-117,19"/>
+        <dia:point val="-116,18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-117.05,18.95;-85.25,111.15"/>
+        <dia:rectangle val="-116.05,17.95;-84.25,93.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-117,19"/>
+        <dia:point val="-116,18"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="31.700000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="92.099999999999994"/>
+        <dia:real val="75.299999999999997"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -2406,17 +2406,17 @@ On the case of a UML note, represents the text of the note.#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#External.Dia is a unidirectional transformation model that transforms
-Dia @e diagram into an external @e model.
+            <dia:string>#Injection.Dia is a unidirectional transformation model that transforms
+a Dia @e diagram into an injection @e model.
 
 By that we mean that it is a model designed to transform a representation of
-a user model in Dia diagram format to its counterpart in the external format,
+a user model in Dia diagram format to its counterpart in the injection format,
 taking into account any special masd meta-data which the user may have encoded
 into the Dia diagram. Note that the Dia diagram format contains a representation
-of UML. We pass that meta-data straight through into the external model, without
-any further processing.
+of UML. We pass that meta-data straight through into the injection model,
+without any further processing.
 
-@section external_dia_0 Dia diagrams as DAGs
+@section injection_dia_0 Dia diagrams as DAGs
 
 Dia diagrams are made up of @e objects, identified by IDs. These objects
 contain a number of UML model elements, which we are interested in. For
@@ -2426,26 +2426,26 @@ instance:
 @li UML generalisation
 @li UML notes
 
-and so on. Each of these objects will contribute to am external element.
+and so on. Each of these objects will contribute to am injection element.
 However, we need to be aware of object containment - e.g. if a class is
-contained in a package. This is because the external element names are scoped
+contained in a package. This is because the injection element names are scoped
 by the packages. So, to make our life easier we created a DAG of Dia objects
 that provides us with the information in dependency order. That is, we process
 dia objects in such a way that when a dependency exists, we know that the object
 in which we depend on has already been processed. Please note that to ensure no
 cycles we had to ignore some of the UML objects such as UML aggregation -
-but fortunately, these objects do not provide sufficient information for
-an external transformation anyway so not much was lost (instead, one must
-manually declare attributes in a class).
+but fortunately, these objects do not provide sufficient information as
+required for dogen transformations, so not much was lost. Instead, one must
+manually declare attributes in a class.
 
 See @ref grapher for details on how the the DAG is built.
 
-@section external_dia_1 Intermediate processing
+@section injection_dia_1 Intermediate processing
 
 To make the code easier to read and maintain, we created a numeber of
-intermediate stages between a Dia diagram and masd:
+intermediate stages between a Dia diagram and an injection model:
 
-@li Dia object -&gt; processed object -&gt; profile -&gt; external element
+@li Dia object -&gt; processed object -&gt; profile -&gt; injection element
 
 This may look a bit excessive at first glance, but it was done because
 the shape of the Dia objects is a bit too generic for our purposes, and
@@ -2458,7 +2458,7 @@ Dia structure. With these in hand, the @ref transformer is able to
 create the corresponding masd entity, and the transformation code is
 not obscured.
 
-@section external_dia_2 Dia meta-data
+@section injection_dia_2 Dia meta-data
 
 There are a couple of conventions on how to model in Dia that one
 needs to follow in order to comply with Dogen:
@@ -2468,37 +2468,17 @@ masd property rather than a member variable. This means that it is
 expected that a getter and a setter will be generated.
 
 @li a number of stereotypes were added, as per the definitions in the
-UML profile. For details, see the Dogen UML profile.
+MASD UML profile. For details, see the Dogen UML profile.
 
 @li any type without any stereotype assumes a default stereotype, again
-as per Dogen UML profile.
+as per MASD UML profile.
 
-@li any UML Note with the marker #DOGEN masd.injection.dia.comment=true will be
-used as the documentation of the current package - or the model, if
+@li any UML Note with the marker #DOGEN masd.injection.dia.comment=true will
+be used as the documentation of the current package - or the model, if
 place at the top-level. Only one such note is expected per containing
 entity.
 
-The masd stereotypes have the following behaviours:
-
-@li @b exception: an exception class will be code generated. This is still
-a value object but it will have any additional machinery related to
-exceptions attached to it.
-
-@li @b enumeration: Can only have attributes, and the attributes must not
-have types. Type defaults to unsigned int.
-
-@li @b object @b template: Defines new stereotypes on the fly; that
-is, if you create a UML class @e MyObjectTemplate with property @e a
-and mark it as an object template, you can then create a UML class @e
-my_class with a stereotype of @e MyObjectTemplate; the result will be
-that my_class will have a property @e a too.
-
-@li @b visitable: a visitor service will be create for the type. Must be
-the root of an inheritance tree.
-
-@li @b fluent: a fluent interface will be generated for all properties.
-
-@li @b immutable: only getters will be generated for each property.
+For details on the stereotypes see the MASD UML profile.
 
 #DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=masd.dogen.injection.dia
@@ -2527,7 +2507,7 @@ the root of an inheritance tree.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-116.65,20.245"/>
+            <dia:point val="-115.65,19.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -3419,7 +3399,7 @@ manageable format.#</dia:string>
         <dia:point val="0.745,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-0.005,29.2;8.12245,34.8"/>
+        <dia:rectangle val="-0.005,29.2;8.11171,34.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3427,8 +3407,8 @@ manageable format.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="0.745,34"/>
         <dia:point val="0.745,30"/>
-        <dia:point val="7.96054,30"/>
-        <dia:point val="7.92245,33.9498"/>
+        <dia:point val="7.92245,30"/>
+        <dia:point val="7.91171,33.9498"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

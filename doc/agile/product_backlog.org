@@ -410,15 +410,6 @@ vision. The V2 vision is to finish the dogen API and implement all
 functionality in terms of metamodel elements - e.g. no special cases
 such as profiles, licences etc.
 
-*** Rename =fallback_element_type=                                    :story:
-
-Our JSON uses a very strangely named attribute to carry the meta-type:
-
-:       "fallback_element_type": "masd::object",
-
-Its not at all obvious what this is meant to do. It should just be the
-=element_type=.
-
 *** Mapping of third-party dependencies                               :story:
 
 System models should follow the physical structure of
@@ -523,20 +514,6 @@ of two approaches:
 At present it is very difficult to understand what each model and/or
 each type does in the reference implementations. We need to add some
 comments to make it more obvious.
-
-*** Adding reference to itself results in resolution errors           :story:
-
-Whilst trying to fix the JSON models we inadvertently added a
-self-reference in =dogen.generation.json=:
-
-:    "yarn.reference": "dogen.generation.json",
-
-This resulted in some puzzling errors:
-
-: 2018-10-18 19:15:00.861210 [ERROR] [yarn.transforms.enablement_transform] Duplicate element archetype: quilt.cpp.serialization.registrar_implementation <dogen><generation><registrar>
-
-Ideally we should either warn and ignore or fail to process models
-with self-references.
 
 *** Handcrafted stereotype would not work on C# models                :story:
 

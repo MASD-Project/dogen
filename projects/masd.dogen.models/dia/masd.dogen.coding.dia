@@ -15685,13 +15685,13 @@ model.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O115">
       <dia:attribute name="obj_pos">
-        <dia:point val="-231,111"/>
+        <dia:point val="-226,111"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-231.05,110.95;-210.43,114.65"/>
+        <dia:rectangle val="-226.05,110.95;-205.43,114.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-231,111"/>
+        <dia:point val="-226,111"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.52"/>
@@ -16045,7 +16045,7 @@ model.#</dia:string>
         <dia:point val="-202.74,94.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-220.79,93.85;-201.99,111.8"/>
+        <dia:rectangle val="-215.79,93.85;-201.99,111.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -16053,8 +16053,8 @@ model.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-202.74,94.6"/>
         <dia:point val="-202.74,106.345"/>
-        <dia:point val="-220.74,106.345"/>
-        <dia:point val="-220.74,111"/>
+        <dia:point val="-215.74,106.345"/>
+        <dia:point val="-215.74,111"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
