@@ -22,8 +22,8 @@
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/elements_traversal.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
 #include "masd.dogen.coding/types/transforms/meta_naming_transform.hpp"
@@ -92,11 +92,11 @@ public:
 };
 
 void meta_naming_transform::
-transform(const context& ctx, meta_model::endomodel& em) {
+transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "meta-naming transform",
         transform_id, em.name().id(), ctx.tracer(), em);
 
-    em.meta_name(meta_name_factory::make_endomodel_name());
+    em.meta_name(meta_name_factory::make_model_name());
 
     updater u;
     meta_model::elements_traversal(em, u);

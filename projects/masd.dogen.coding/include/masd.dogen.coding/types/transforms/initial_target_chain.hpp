@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::coding::transforms {
@@ -37,7 +37,7 @@ namespace masd::dogen::coding::transforms {
  */
 class initial_target_chain final {
 public:
-    static meta_model::endomodel transform(const context& ctx);
+    static meta_model::model transform(const context& ctx);
 };
 
 }

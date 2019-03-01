@@ -27,18 +27,18 @@
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/initial_target_chain.hpp"
 #include "masd.dogen.coding/types/transforms/references_chain.hpp"
-#include "masd.dogen.coding/types/transforms/endomodel_assembly_chain.hpp"
-#include "masd.dogen.coding/types/transforms/endomodel_post_processing_chain.hpp"
-#include "masd.dogen.coding/types/transforms/endomodel_generation_chain.hpp"
+#include "masd.dogen.coding/types/transforms/model_assembly_chain.hpp"
+#include "masd.dogen.coding/types/transforms/model_post_processing_chain.hpp"
+#include "masd.dogen.coding/types/transforms/model_generation_chain.hpp"
 
 namespace {
 
-const std::string transform_id("coding.transforms.endomodel_generation_chain");
+const std::string transform_id("coding.transforms.model_generation_chain");
 
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -47,10 +47,10 @@ static logger lg(logger_factory(transform_id));
 
 namespace masd::dogen::coding::transforms {
 
-std::list<meta_model::endomodel>
-endomodel_generation_chain::transform(const context& ctx) {
+std::list<meta_model::model>
+model_generation_chain::transform(const context& ctx) {
     const auto model_name(ctx.transform_options().target().filename().string());
-    tracing::scoped_chain_tracer stp(lg, "endomodel generation chain",
+    tracing::scoped_chain_tracer stp(lg, "model generation chain",
         transform_id, model_name, ctx.tracer());
 
     /*
@@ -78,20 +78,20 @@ endomodel_generation_chain::transform(const context& ctx) {
      * - the target model is a PSM and the reference model is also a
      *   PSM, and they share the same language.
      */
-    std::list<meta_model::endomodel> r;
+    std::list<meta_model::model> r;
     const auto refs(references_chain::transform(ctx, target));
     for (const auto ol : target.output_languages()) {
         /*
          * Execute the assembly chain for each of the requested output
          * languages.
          */
-        auto em(endomodel_assembly_chain::transform(ctx, ol, target, refs));
+        auto em(model_assembly_chain::transform(ctx, ol, target, refs));
 
         /*
          * Then apply all of the post-processing transforms to the
          * assembled model.
          */
-        endomodel_post_processing_chain::transform(ctx, em);
+        model_post_processing_chain::transform(ctx, em);
         r.push_back(em);
     }
 

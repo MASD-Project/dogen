@@ -30,7 +30,7 @@
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/helpers/name_builder.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
 #include "masd.dogen.coding/types/transforms/containment_transform.hpp"
@@ -72,7 +72,7 @@ containment_transform::create_global_module(const meta_model::origin_types ot) {
 }
 
 void containment_transform::
-inject_global_module(meta_model::endomodel& em) {
+inject_global_module(meta_model::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Injecting global module for: "
                              << em.name().id();
 
@@ -100,7 +100,7 @@ inject_global_module(meta_model::endomodel& em) {
 }
 
 void containment_transform::
-transform(const context& ctx, meta_model::endomodel& em) {
+transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "containment transform",
         transform_id, em.name().id(), ctx.tracer(), em);
 

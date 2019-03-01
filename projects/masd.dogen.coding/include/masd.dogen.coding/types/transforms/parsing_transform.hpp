@@ -34,7 +34,7 @@
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.coding/types/meta_model/attribute.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::coding::transforms {
@@ -105,7 +105,7 @@ public:
     /**
      * Execute the property expansion against the model.
      */
-    static void transform(const context& ctx, meta_model::endomodel& m);
+    static void transform(const context& ctx, meta_model::model& m);
 };
 
 }

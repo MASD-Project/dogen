@@ -21,8 +21,8 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
-#include "masd.dogen.coding/types/helpers/endomodel_pre_processing_validator.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
+#include "masd.dogen.coding/types/helpers/model_pre_processing_validator.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/modules_transform.hpp"
 #include "masd.dogen.coding/types/transforms/origin_transform.hpp"
@@ -31,12 +31,12 @@
 #include "masd.dogen.coding/types/transforms/parsing_transform.hpp"
 #include "masd.dogen.coding/types/transforms/primitives_transform.hpp"
 #include "masd.dogen.coding/types/transforms/extraction_properties_transform.hpp"
-#include "masd.dogen.coding/types/transforms/endomodel_pre_processing_chain.hpp"
+#include "masd.dogen.coding/types/transforms/model_pre_processing_chain.hpp"
 
 namespace {
 
 const std::string transform_id(
-    "coding.transforms.endomodel_pre_processing_chain");
+    "coding.transforms.model_pre_processing_chain");
 
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -45,9 +45,9 @@ static logger lg(logger_factory(transform_id));
 
 namespace masd::dogen::coding::transforms {
 
-bool endomodel_pre_processing_chain::is_language_relevant(
+bool model_pre_processing_chain::is_language_relevant(
     const std::unordered_set<meta_model::languages>& relevant_languages,
-    const meta_model::endomodel& em) {
+    const meta_model::model& em) {
     const auto l(em.input_language());
     const auto i(relevant_languages.find(l));
     if (i == relevant_languages.end()) {
@@ -65,8 +65,8 @@ bool endomodel_pre_processing_chain::is_language_relevant(
     return true;
 }
 
-void endomodel_pre_processing_chain::
-apply_first_set_of_transforms(const context& ctx, meta_model::endomodel& em) {
+void model_pre_processing_chain::
+apply_first_set_of_transforms(const context& ctx, meta_model::model& em) {
     /*
      * Module transform must be done before origin and language
      * transforms to get these properties populated on the new
@@ -76,8 +76,8 @@ apply_first_set_of_transforms(const context& ctx, meta_model::endomodel& em) {
     language_transform::transform(ctx, em);
 }
 
-void endomodel_pre_processing_chain::
-apply_second_set_of_transforms(const context& ctx, meta_model::endomodel& em) {
+void model_pre_processing_chain::
+apply_second_set_of_transforms(const context& ctx, meta_model::model& em) {
     /*
      * There are no particular dependencies on the next set of
      * transforms.
@@ -96,11 +96,11 @@ apply_second_set_of_transforms(const context& ctx, meta_model::endomodel& em) {
     /*
      * Ensure the model is valid.
      */
-    helpers::endomodel_pre_processing_validator::validate(em);
+    helpers::model_pre_processing_validator::validate(em);
 }
 
-void endomodel_pre_processing_chain::
-transform(const context& ctx, meta_model::endomodel& em) {
+void model_pre_processing_chain::
+transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_chain_tracer stp(lg, "pre-processing chain",
         transform_id, em.name().id(), ctx.tracer(), em);
 
@@ -110,9 +110,9 @@ transform(const context& ctx, meta_model::endomodel& em) {
     stp.end_chain(em);
 }
 
-bool endomodel_pre_processing_chain::try_transform(const context& ctx,
+bool model_pre_processing_chain::try_transform(const context& ctx,
     const std::unordered_set<meta_model::languages>& relevant_languages,
-    meta_model::endomodel& em) {
+    meta_model::model& em) {
     tracing::scoped_chain_tracer stp(lg, "pre-processing chain",
         transform_id, em.name().id(), ctx.tracer(), em);
 

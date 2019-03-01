@@ -28,7 +28,7 @@
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/meta_model/builtin.hpp"
@@ -179,7 +179,7 @@ void enumerations_transform::populate_from_annotations(
 
 meta_model::name
 enumerations_transform::obtain_enumeration_default_underlying_element_name(
-    const meta_model::endomodel& em) {
+    const meta_model::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Obtaining default enumeration underlying "
                              << "element name for model: " << em.name().id();
 
@@ -302,7 +302,7 @@ void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
 }
 
 void enumerations_transform::transform(const context& ctx,
-    meta_model::endomodel& em) {
+    meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "enumerations transform",
         transform_id, em.name().id(), ctx.tracer(), em);
 

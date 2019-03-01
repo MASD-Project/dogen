@@ -13636,7 +13636,7 @@ an enumeration, false otherwise.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#coding::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14377,7 +14377,7 @@ an enumeration, false otherwise.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#coding::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14608,7 +14608,7 @@ an enumeration, false otherwise.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const endomodel&amp;#</dia:string>
+                <dia:string>#const model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14840,7 +14840,7 @@ an enumeration, false otherwise.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const endomodel&amp;#</dia:string>
+                <dia:string>#const model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -30739,7 +30739,7 @@ an "odd" formatter.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#const coding::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -34349,7 +34349,7 @@ an "odd" formatter.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#const coding::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -36219,7 +36219,7 @@ from JSON,using the RapidJson library.
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#coding::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -36485,7 +36485,7 @@ from JSON,using the RapidJson library.
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#coding::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

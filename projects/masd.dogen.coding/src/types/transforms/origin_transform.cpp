@@ -23,7 +23,7 @@
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
@@ -90,7 +90,7 @@ make_type_group(const annotations::type_repository& atrp) {
 }
 
 bool origin_transform::
-is_proxy_model(const type_group& tg, const meta_model::endomodel& em) {
+is_proxy_model(const type_group& tg, const meta_model::model& em) {
     const auto& o(em.root_module()->annotation());
     const annotations::entry_selector s(o);
     const bool r(s.get_boolean_content_or_default(tg.is_proxy_model));
@@ -100,7 +100,7 @@ is_proxy_model(const type_group& tg, const meta_model::endomodel& em) {
 }
 
 meta_model::origin_types
-origin_transform::compute_origin_types(const meta_model::endomodel& em,
+origin_transform::compute_origin_types(const meta_model::model& em,
     const bool is_proxy_model) {
     using meta_model::origin_types;
     if (is_proxy_model && em.origin_type() == origin_types::target) {
@@ -119,7 +119,7 @@ origin_transform::compute_origin_types(const meta_model::endomodel& em,
 }
 
 void origin_transform::
-transform(const context& ctx, meta_model::endomodel& em) {
+transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "origin transform",
         transform_id, em.name().id(), ctx.tracer(), em);
 

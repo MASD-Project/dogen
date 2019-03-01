@@ -26,7 +26,7 @@
 #endif
 
 #include <list>
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
 
@@ -35,13 +35,13 @@ namespace masd::dogen::generation::transforms {
 class coding_model_to_generation_model_transform final {
 private:
     static std::size_t
-    compute_total_size(const coding::meta_model::endomodel& em);
+    compute_total_size(const coding::meta_model::model& em);
     static meta_model::model
-    transform(const coding::meta_model::endomodel& em);
+    transform(const coding::meta_model::model& em);
 
 public:
     static std::list<meta_model::model> transform(const context& ctx,
-        const std::list<coding::meta_model::endomodel>& ems);
+        const std::list<coding::meta_model::model>& ems);
 };
 
 }

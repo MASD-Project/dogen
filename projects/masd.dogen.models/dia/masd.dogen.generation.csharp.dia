@@ -8247,7 +8247,7 @@
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::endomodel&amp; #</dia:string>
+                <dia:string>#coding::meta_model::model&amp; #</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9534,7 +9534,7 @@
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::endomodel&amp; #</dia:string>
+                <dia:string>#coding::meta_model::model&amp; #</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9838,7 +9838,7 @@
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::endomodel&amp; #</dia:string>
+                <dia:string>#coding::meta_model::model&amp; #</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14222,7 +14222,7 @@
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::endomodel&amp; #</dia:string>
+                <dia:string>#coding::meta_model::model&amp; #</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -16521,7 +16521,7 @@
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#coding::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -16786,7 +16786,7 @@
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#coding::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

@@ -36,12 +36,12 @@
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/builtin.hpp"
 #include "masd.dogen.coding/types/helpers/building_error.hpp"
-#include "masd.dogen.coding/test/mock_endomodel_factory.hpp"
+#include "masd.dogen.coding/test/mock_model_factory.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
-static logger lg(logger_factory("coding.mock_endomodel_factory"));
+static logger lg(logger_factory("coding.mock_model_factory"));
 
 const std::string model_name_prefix("some_model_");
 const std::string type_name_prefix("some_type_");
@@ -162,11 +162,11 @@ std::string mock_unparsed_type_shared_ptr(const meta_model::name& n) {
 }
 
 meta_model::name_tree
-mock_name_tree(mock_endomodel_factory::attribute_types pt) {
+mock_name_tree(mock_model_factory::attribute_types pt) {
     meta_model::name_tree r;
     helpers::name_factory nf;
-    using test::mock_endomodel_factory;
-    using attribute_types = mock_endomodel_factory::attribute_types;
+    using test::mock_model_factory;
+    using attribute_types = mock_model_factory::attribute_types;
 
     switch(pt) {
     case attribute_types::unsigned_int:
@@ -202,10 +202,10 @@ mock_name_tree(mock_endomodel_factory::attribute_types pt) {
 }
 
 std::string
-mock_unparsed_type(mock_endomodel_factory::attribute_types pt) {
+mock_unparsed_type(mock_model_factory::attribute_types pt) {
     using namespace coding;
-    using test::mock_endomodel_factory;
-    using attribute_types = mock_endomodel_factory::attribute_types;
+    using test::mock_model_factory;
+    using attribute_types = mock_model_factory::attribute_types;
 
     switch(pt) {
     case attribute_types::unsigned_int:
@@ -274,7 +274,7 @@ void populate_object(meta_model::object& o, const unsigned int i,
     o.origin_type(ot);
 }
 
-void populate_simple_model_attributes(meta_model::endomodel& m,
+void populate_simple_model_attributes(meta_model::model& m,
     const unsigned int n, const meta_model::origin_types ot) {
     m.name(mock_model_name(n));
     m.origin_type(ot);
@@ -282,9 +282,9 @@ void populate_simple_model_attributes(meta_model::endomodel& m,
 
 meta_model::attribute mock_attribute(const meta_model::name& owning_element,
     const bool types_parsed, const unsigned int n = 0,
-    const test::mock_endomodel_factory::
+    const test::mock_model_factory::
     attribute_types pt =
-    test::mock_endomodel_factory::attribute_types::
+    test::mock_model_factory::attribute_types::
     unsigned_int,
     boost::optional<meta_model::name> name =
     boost::optional<meta_model::name>()) {
@@ -296,8 +296,8 @@ meta_model::attribute mock_attribute(const meta_model::name& owning_element,
     r.name(pn);
     r.documentation(documentation);
 
-    using test::mock_endomodel_factory;
-    using attribute_types = mock_endomodel_factory::attribute_types;
+    using test::mock_model_factory;
+    using attribute_types = mock_model_factory::attribute_types;
 
     if (types_parsed) {
         if (pt == attribute_types::value_object)
@@ -323,9 +323,9 @@ template<typename StatefulAndNameable>
 void add_attribute(StatefulAndNameable& sn,
     const bool attributes_indexed,
     const bool types_parsed, const unsigned int n = 0,
-    const test::mock_endomodel_factory::
+    const test::mock_model_factory::
     attribute_types pt =
-    test::mock_endomodel_factory::attribute_types::
+    test::mock_model_factory::attribute_types::
     unsigned_int,
     boost::optional<meta_model::name> name =
     boost::optional<meta_model::name>()) {
@@ -389,7 +389,7 @@ void insert_nameable(std::unordered_map<std::string, Nameable>& map,
     map.insert(std::make_pair(n->name().id(), n));
 }
 
-void insert_object(meta_model::endomodel& m,
+void insert_object(meta_model::model& m,
     const boost::shared_ptr<meta_model::object>& o) {
     m.objects().insert(std::make_pair(o->name().id(), o));
 }
@@ -416,7 +416,7 @@ void add_test_annotationss(annotations::annotation& a) {
 
 }
 
-mock_endomodel_factory::flags::flags(const bool tagged,
+mock_model_factory::flags::flags(const bool tagged,
     const bool merged, const bool resolved,
     const bool object_templates_indexed, const bool attributes_indexed,
     const bool associations_indexed, const bool types_parsed) :
@@ -426,98 +426,98 @@ mock_endomodel_factory::flags::flags(const bool tagged,
     associations_indexed_(associations_indexed),
     types_parsed_(types_parsed) { }
 
-bool mock_endomodel_factory::flags::tagged() const {
+bool mock_model_factory::flags::tagged() const {
     return tagged_;
 }
 
-void mock_endomodel_factory::flags::tagged(const bool v) {
+void mock_model_factory::flags::tagged(const bool v) {
     tagged_ = v;
 }
 
-bool mock_endomodel_factory::flags::merged() const {
+bool mock_model_factory::flags::merged() const {
     return merged_;
 }
 
-void mock_endomodel_factory::flags::merged(const bool v) {
+void mock_model_factory::flags::merged(const bool v) {
     merged_ = v;
 }
 
-bool mock_endomodel_factory::flags::resolved() const {
+bool mock_model_factory::flags::resolved() const {
     return resolved_;
 }
 
-void mock_endomodel_factory::flags::resolved(const bool v) {
+void mock_model_factory::flags::resolved(const bool v) {
     resolved_ = v;
 }
 
-bool mock_endomodel_factory::flags::object_templates_indexed() const {
+bool mock_model_factory::flags::object_templates_indexed() const {
     return object_templates_indexed_;
 }
-void mock_endomodel_factory::flags::object_templates_indexed(const bool v) {
+void mock_model_factory::flags::object_templates_indexed(const bool v) {
     object_templates_indexed_ = v;
 }
 
-bool mock_endomodel_factory::flags::attributes_indexed() const {
+bool mock_model_factory::flags::attributes_indexed() const {
     return attributes_indexed_;
 }
 
-void mock_endomodel_factory::flags::attributes_indexed(const bool v) {
+void mock_model_factory::flags::attributes_indexed(const bool v) {
     attributes_indexed_ = v;
 }
 
-bool mock_endomodel_factory::flags::associations_indexed() const {
+bool mock_model_factory::flags::associations_indexed() const {
     return associations_indexed_;
 }
 
-void mock_endomodel_factory::flags::types_parsed(const bool v) {
+void mock_model_factory::flags::types_parsed(const bool v) {
     types_parsed_ = v;
 }
 
-bool mock_endomodel_factory::flags::types_parsed() const {
+bool mock_model_factory::flags::types_parsed() const {
     return types_parsed_;
 }
 
-void mock_endomodel_factory::flags::
+void mock_model_factory::flags::
 associations_indexed(const bool v) {
     associations_indexed_ = v;
 }
 
-mock_endomodel_factory::
-mock_endomodel_factory(const flags& f,
+mock_model_factory::
+mock_model_factory(const flags& f,
     annotation_function_type fn) : flags_(f),
       annotation_function_(fn ? fn : add_test_annotationss) { }
 
-std::string mock_endomodel_factory::
+std::string mock_model_factory::
 simple_model_name(const unsigned int n) const {
     return ::model_name(n);
 }
 
-std::string mock_endomodel_factory::
+std::string mock_model_factory::
 simple_object_template_name(const unsigned int n) const {
     return ::object_template_name(n);
 }
 
-std::string mock_endomodel_factory::
+std::string mock_model_factory::
 simple_type_name(const unsigned int n) const {
     return ::type_name(n);
 }
 
-std::string mock_endomodel_factory::
+std::string mock_model_factory::
 simple_module_name(const unsigned int n) const {
     return ::module_name(n);
 }
 
-std::string mock_endomodel_factory::
+std::string mock_model_factory::
 simple_attribute_name(const unsigned int n) const {
     return ::attribute_name(n);
 }
 
-meta_model::name mock_endomodel_factory::
+meta_model::name mock_model_factory::
 model_name(const unsigned int n) const {
     return mock_model_name(n);
 }
 
-bool mock_endomodel_factory::
+bool mock_model_factory::
 is_model_n(const unsigned int n, const meta_model::name& name) const {
     const auto mmp(name.location().model_modules());
     if (mmp.empty())
@@ -527,40 +527,40 @@ is_model_n(const unsigned int n, const meta_model::name& name) const {
     return is_model_n(n, mn);
 }
 
-bool mock_endomodel_factory::
+bool mock_model_factory::
 is_model_n(const unsigned int n, const std::string& name) const {
     return simple_model_name(n) == name;
 }
 
-bool mock_endomodel_factory::
+bool mock_model_factory::
 is_type_name_n(const unsigned int n, const meta_model::name& name) const {
     return is_type_name_n(n, name.simple());
 }
 
-bool mock_endomodel_factory::is_object_template_name_n(
+bool mock_model_factory::is_object_template_name_n(
     const unsigned int n, const meta_model::name& name) const {
     return object_template_name(n) == name.simple();
 }
 
-bool mock_endomodel_factory::
+bool mock_model_factory::
 is_type_name_n(const unsigned int n, const std::string& name) const {
     return type_name(n) == name;
 }
 
-bool mock_endomodel_factory::
+bool mock_model_factory::
 is_module_n(const unsigned int n, const std::string& name) const {
     return module_name(n) == name;
 }
 
-bool mock_endomodel_factory::is_type_name_n_visitor(
+bool mock_model_factory::is_type_name_n_visitor(
     const unsigned int n, const meta_model::name& name) const {
     return
         boost::contains(name.simple(), type_name(n)) &&
         boost::contains(name.simple(), visitor_postfix);
 }
 
-void mock_endomodel_factory::handle_model_module(
-    const bool add_model_module, meta_model::endomodel& m) const {
+void mock_model_factory::handle_model_module(
+    const bool add_model_module, meta_model::model& m) const {
     if (!add_model_module)
         return;
 
@@ -568,7 +568,7 @@ void mock_endomodel_factory::handle_model_module(
     insert_nameable(m.modules(), module);
 }
 
-meta_model::builtin mock_endomodel_factory::
+meta_model::builtin mock_model_factory::
 make_builtin(const unsigned int i, const meta_model::name& model_name,
     const meta_model::origin_types ot, const unsigned int module_n) const {
 
@@ -587,7 +587,7 @@ make_builtin(const unsigned int i, const meta_model::name& model_name,
 }
 
 boost::shared_ptr<meta_model::object>
-mock_endomodel_factory::make_object(const unsigned int i,
+mock_model_factory::make_object(const unsigned int i,
     const meta_model::name& model_name, const meta_model::origin_types ot,
     const unsigned int module_n) const {
 
@@ -601,7 +601,7 @@ mock_endomodel_factory::make_object(const unsigned int i,
 }
 
 boost::shared_ptr<meta_model::object>
-mock_endomodel_factory::make_object_with_attribute(
+mock_model_factory::make_object_with_attribute(
     const unsigned int i, const meta_model::name& model_name,
     const meta_model::origin_types ot, const unsigned int module_n) const {
 
@@ -611,13 +611,13 @@ mock_endomodel_factory::make_object_with_attribute(
 }
 
 boost::shared_ptr<meta_model::object>
-mock_endomodel_factory::make_object(unsigned int i,
+mock_model_factory::make_object(unsigned int i,
     const meta_model::origin_types ot, const unsigned int module_n) const {
     return make_object(i, mock_model_name(i), ot, module_n);
 }
 
 boost::shared_ptr<meta_model::object_template>
-mock_endomodel_factory::make_object_template(const unsigned int i,
+mock_model_factory::make_object_template(const unsigned int i,
     const meta_model::name& model_name,
     const meta_model::origin_types ot) const {
 
@@ -636,7 +636,7 @@ mock_endomodel_factory::make_object_template(const unsigned int i,
     return r;
 }
 
-boost::shared_ptr<meta_model::enumeration> mock_endomodel_factory::
+boost::shared_ptr<meta_model::enumeration> mock_model_factory::
 make_enumeration(const unsigned int i, const meta_model::name& model_name,
     const meta_model::origin_types ot, const unsigned int module_n) const {
 
@@ -672,7 +672,7 @@ make_enumeration(const unsigned int i, const meta_model::name& model_name,
 }
 
 boost::shared_ptr<meta_model::exception>
-mock_endomodel_factory::make_exception(const unsigned int i,
+mock_model_factory::make_exception(const unsigned int i,
     const meta_model::name& model_name, const meta_model::origin_types ot,
     const unsigned int module_n) const {
 
@@ -694,7 +694,7 @@ mock_endomodel_factory::make_exception(const unsigned int i,
 }
 
 boost::shared_ptr<meta_model::module>
-mock_endomodel_factory::make_module(const meta_model::name& n,
+mock_model_factory::make_module(const meta_model::name& n,
     const meta_model::origin_types ot, const std::string& documentation) const {
     auto r(boost::make_shared<meta_model::module>());
     r->name(n);
@@ -708,7 +708,7 @@ mock_endomodel_factory::make_module(const meta_model::name& n,
 }
 
 boost::shared_ptr<meta_model::module>
-mock_endomodel_factory::make_module(const unsigned int module_n,
+mock_model_factory::make_module(const unsigned int module_n,
     const meta_model::name& model_name, const meta_model::origin_types ot,
     const std::list<std::string>& internal_modules,
     const std::string& documentation) const {
@@ -720,7 +720,7 @@ mock_endomodel_factory::make_module(const unsigned int module_n,
 }
 
 meta_model::name
-mock_endomodel_factory::make_name(const unsigned int model_n,
+mock_model_factory::make_name(const unsigned int model_n,
     const unsigned int simple_n) const {
 
     helpers::name_builder b;
@@ -729,23 +729,23 @@ mock_endomodel_factory::make_name(const unsigned int model_n,
     return b.build();
 }
 
-meta_model::endomodel
-mock_endomodel_factory::make_empty_model(
+meta_model::model
+mock_model_factory::make_empty_model(
     const meta_model::origin_types ot, const unsigned int n,
     const bool add_model_module) const {
-    meta_model::endomodel r;
+    meta_model::model r;
     populate_simple_model_attributes(r, n, ot);
     handle_model_module(add_model_module, r);
     return r;
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 make_single_type_model(const meta_model::origin_types ot, const unsigned int n,
     const object_types objt, const bool add_model_module) const {
     return make_multi_type_model(n, 1, ot, objt, 0, add_model_module);
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 make_single_type_model_in_module(const meta_model::origin_types ot,
     const unsigned int n,
     const object_types objt, const unsigned int mod_n,
@@ -753,12 +753,12 @@ make_single_type_model_in_module(const meta_model::origin_types ot,
     return make_multi_type_model(n, 1, ot, objt, mod_n, add_model_module);
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 make_multi_type_model(const unsigned int n, const unsigned int type_n,
     const meta_model::origin_types ot, const object_types objt,
     const unsigned int mod_n, const bool add_model_module) const {
 
-    meta_model::endomodel r(make_empty_model(ot, n, add_model_module));
+    meta_model::model r(make_empty_model(ot, n, add_model_module));
 
     std::list<std::string> internal_modules;
     for (unsigned int i(0); i < mod_n; ++i) {
@@ -795,10 +795,10 @@ make_multi_type_model(const unsigned int n, const unsigned int type_n,
     return r;
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 make_single_object_template_model(const meta_model::origin_types ot,
     const unsigned int n, const bool add_model_module) const {
-    meta_model::endomodel r(make_empty_model(ot, n, add_model_module));
+    meta_model::model r(make_empty_model(ot, n, add_model_module));
 
     auto ui(test::make_builtin(unsigned_int));
     r.builtins().insert(std::make_pair(ui->name().id(), ui));
@@ -816,10 +816,10 @@ make_single_object_template_model(const meta_model::origin_types ot,
     return r;
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 make_first_degree_object_templates_model(const meta_model::origin_types ot,
     const unsigned int n, const bool add_model_module) const {
-    meta_model::endomodel r(make_empty_model(ot, n, add_model_module));
+    meta_model::model r(make_empty_model(ot, n, add_model_module));
 
     auto ui(test::make_builtin(unsigned_int));
     r.builtins().insert(std::make_pair(ui->name().id(), ui));
@@ -849,11 +849,11 @@ make_first_degree_object_templates_model(const meta_model::origin_types ot,
     return r;
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 make_second_degree_object_templates_model(const meta_model::origin_types ot,
     const unsigned int n,
     const bool add_model_module) const {
-    meta_model::endomodel r(make_empty_model(ot, n, add_model_module));
+    meta_model::model r(make_empty_model(ot, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
     r.builtins().insert(std::make_pair(ui->name().id(), ui));
@@ -899,11 +899,11 @@ make_second_degree_object_templates_model(const meta_model::origin_types ot,
     return r;
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 make_multiple_inheritance_object_templates_model(
     const meta_model::origin_types ot, const unsigned int n,
     const bool add_model_module) const {
-    meta_model::endomodel r(make_empty_model(ot, n, add_model_module));
+    meta_model::model r(make_empty_model(ot, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
     r.builtins().insert(std::make_pair(ui->name().id(), ui));
@@ -928,7 +928,7 @@ make_multiple_inheritance_object_templates_model(
     return r;
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 make_diamond_inheritance_object_templates_model(
     const meta_model::origin_types ot, const unsigned int n,
     const bool add_model_module) const {
@@ -971,7 +971,7 @@ make_diamond_inheritance_object_templates_model(
     return r;
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 make_object_with_parent_that_instantiates_object_template(
     const meta_model::origin_types ot,
     const unsigned int n, const bool add_model_module) const {
@@ -997,7 +997,7 @@ make_object_with_parent_that_instantiates_object_template(
     return r;
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 make_object_with_parent_that_instantiates_a_child_object_template(
     const meta_model::origin_types ot,
     const unsigned int n, const bool add_model_module) const {
@@ -1031,7 +1031,7 @@ make_object_with_parent_that_instantiates_a_child_object_template(
     return r;
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 make_object_template_that_inherits_missing_object_template(
     const meta_model::origin_types ot, const unsigned int n,
     const bool add_model_module) const {
@@ -1043,7 +1043,7 @@ make_object_template_that_inherits_missing_object_template(
     return r;
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 make_object_that_instantiates_missing_object_template(
     const meta_model::origin_types ot, const unsigned int n,
     const bool add_model_module) const {
@@ -1062,7 +1062,7 @@ make_object_that_instantiates_missing_object_template(
     return r;
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 make_object_that_instantiates_object_template_with_missing_parent(
     const meta_model::origin_types ot,
     const unsigned int n, const bool add_model_module) const {
@@ -1086,7 +1086,7 @@ make_object_that_instantiates_object_template_with_missing_parent(
     return r;
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 object_with_both_transparent_and_opaque_associations(
     const meta_model::origin_types ot,
     const bool add_model_module) const {
@@ -1148,7 +1148,7 @@ object_with_both_transparent_and_opaque_associations(
     return r;
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 object_with_attribute(const meta_model::origin_types ot,
     const object_types objt, const attribute_types pt,
     const bool add_model_module) const {
@@ -1241,8 +1241,8 @@ object_with_attribute(const meta_model::origin_types ot,
     return r;
 }
 
-std::array<meta_model::endomodel, 2>
-mock_endomodel_factory::object_with_attribute_type_in_different_model(
+std::array<meta_model::model, 2>
+mock_model_factory::object_with_attribute_type_in_different_model(
     const bool add_model_module) const {
     const auto tg(meta_model::origin_types::target);
     auto o0(make_object(0, tg));
@@ -1261,10 +1261,10 @@ mock_endomodel_factory::object_with_attribute_type_in_different_model(
     insert_object(m1, o1);
     handle_model_module(add_model_module, m1);
 
-    return std::array<meta_model::endomodel, 2> {{ m0, m1 }};
+    return std::array<meta_model::model, 2> {{ m0, m1 }};
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 object_with_missing_attribute_type(const meta_model::origin_types ot,
     const bool add_model_module) const {
     using meta_model::origin_types;
@@ -1283,7 +1283,7 @@ object_with_missing_attribute_type(const meta_model::origin_types ot,
     return r;
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 object_with_parent_in_the_same_model(const meta_model::origin_types ot,
     const bool has_attribute, const bool add_model_module) const {
     const auto mn(mock_model_name(0));
@@ -1312,7 +1312,7 @@ object_with_parent_in_the_same_model(const meta_model::origin_types ot,
     return r;
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 object_with_missing_parent_in_the_same_model(const meta_model::origin_types ot,
     const bool add_model_module) const {
     const auto mn(mock_model_name(0));
@@ -1326,7 +1326,7 @@ object_with_missing_parent_in_the_same_model(const meta_model::origin_types ot,
     return r;
 }
 
-std::array<meta_model::endomodel, 2> mock_endomodel_factory::
+std::array<meta_model::model, 2> mock_model_factory::
 object_with_parent_in_different_models(const bool add_model_module) const {
     const auto tg(meta_model::origin_types::target);
     auto o0(make_object(0, tg));
@@ -1342,10 +1342,10 @@ object_with_parent_in_different_models(const bool add_model_module) const {
     auto m1(make_empty_model(npr, 1, add_model_module));
     insert_object(m1, o1);
 
-    return std::array<meta_model::endomodel, 2> {{ m0, m1 }};
+    return std::array<meta_model::model, 2> {{ m0, m1 }};
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 object_with_three_children_in_same_model(const meta_model::origin_types ot,
     const bool add_model_module) const {
     const auto mn(mock_model_name(0));
@@ -1369,7 +1369,7 @@ object_with_three_children_in_same_model(const meta_model::origin_types ot,
     return r;
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 object_with_third_degree_parent_in_same_model(const meta_model::origin_types ot,
     const bool has_attribute, const bool add_model_module) const {
     const auto mn(mock_model_name(0));
@@ -1424,7 +1424,7 @@ object_with_third_degree_parent_in_same_model(const meta_model::origin_types ot,
     return r;
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 object_with_third_degree_parent_missing(const meta_model::origin_types ot,
     const bool add_model_module) const {
     const auto mn(mock_model_name(0));
@@ -1454,7 +1454,7 @@ object_with_third_degree_parent_missing(const meta_model::origin_types ot,
     return r;
 }
 
-std::array<meta_model::endomodel, 4> mock_endomodel_factory::
+std::array<meta_model::model, 4> mock_model_factory::
 object_with_third_degree_parent_in_different_models(
     const bool add_model_module) const {
     using meta_model::origin_types;
@@ -1489,10 +1489,10 @@ object_with_third_degree_parent_in_different_models(
     auto m3(make_empty_model(npr, 3, add_model_module));
     insert_object(m3, o3);
 
-    return std::array<meta_model::endomodel, 4>{{ m0, m1, m2, m3 }};
+    return std::array<meta_model::model, 4>{{ m0, m1, m2, m3 }};
 }
 
-std::array<meta_model::endomodel, 4> mock_endomodel_factory::
+std::array<meta_model::model, 4> mock_model_factory::
 object_with_missing_third_degree_parent_in_different_models(
     const bool add_model_module) const {
     using meta_model::origin_types;
@@ -1524,10 +1524,10 @@ object_with_missing_third_degree_parent_in_different_models(
     auto m2(make_empty_model(npr, 2, add_model_module));
     insert_object(m2, o2);
 
-    return std::array<meta_model::endomodel, 4>{{ m0, m1, m2 }};
+    return std::array<meta_model::model, 4>{{ m0, m1, m2 }};
 }
 
-meta_model::endomodel mock_endomodel_factory::
+meta_model::model mock_model_factory::
 object_with_group_of_attributes_of_different_types(
     const meta_model::origin_types ot,
     const bool repeat_group, const bool add_model_module) const {

@@ -29,7 +29,7 @@
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/type.hpp"
 #include "masd.dogen.coding/types/meta_model/type_parameters.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::coding::transforms {
@@ -52,7 +52,7 @@ private:
         meta_model::object& o);
 
 public:
-    static void transform(const context& ctx, meta_model::endomodel& em);
+    static void transform(const context& ctx, meta_model::model& em);
 };
 
 }

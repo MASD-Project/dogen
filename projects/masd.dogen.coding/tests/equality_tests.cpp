@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_SUITE(equality_tests)
 //     test_equality<module_generator>();
 //     test_equality<object_generator>();
 //     test_equality<object_template_generator>();
-//     test_equality<endomodel_generator>();
+//     test_equality<model_generator>();
 // }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -38,7 +38,7 @@
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/helpers/name_builder.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
 #include "masd.dogen.coding/types/helpers/legacy_name_tree_parser.hpp"
@@ -243,7 +243,7 @@ void parsing_transform::parse_underlying_element(const type_group& tg,
 }
 
 void parsing_transform::
-transform(const context& ctx, meta_model::endomodel& em) {
+transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "parsing transform",
         transform_id, em.name().id(), ctx.tracer(), em);
 

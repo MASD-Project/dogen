@@ -25,13 +25,13 @@
 #pragma once
 #endif
 
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 
 namespace masd::dogen::coding::helpers {
 
-class endomodel_pre_processing_validator final {
+class model_pre_processing_validator final {
 public:
-    static void validate(const meta_model::endomodel& im);
+    static void validate(const meta_model::model& im);
 };
 
 }

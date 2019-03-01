@@ -21,12 +21,12 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/model_generation_chain.hpp"
-#include "masd.dogen.coding/types/transforms/external_model_to_endomodel_transform.hpp"
-#include "masd.dogen.coding/types/transforms/endomodel_pre_processing_chain.hpp"
+#include "masd.dogen.coding/types/transforms/external_model_to_model_transform.hpp"
+#include "masd.dogen.coding/types/transforms/model_pre_processing_chain.hpp"
 #include "masd.dogen.coding/types/transforms/initial_target_chain.hpp"
 
 namespace {
@@ -39,7 +39,7 @@ static logger lg(logger_factory(transform_id));
 
 namespace masd::dogen::coding::transforms {
 
-meta_model::endomodel
+meta_model::model
 initial_target_chain::transform(const context& ctx) {
     const auto tp(ctx.transform_options().target());
     const auto model_name(tp.filename().string());
@@ -58,7 +58,7 @@ initial_target_chain::transform(const context& ctx) {
      * Then we convert the internal representation of the exogenous
      * model into an endogenous model, ready for further processing.
      */
-    auto r(external_model_to_endomodel_transform::transform(ctx, m));
+    auto r(external_model_to_model_transform::transform(ctx, m));
 
     /*
      * Next, we set the origin of the target model to target so that
@@ -70,7 +70,7 @@ initial_target_chain::transform(const context& ctx) {
      * Finally, we apply all of the pre-processing transforms to the
      * target.
      */
-    endomodel_pre_processing_chain::transform(ctx, r);
+    model_pre_processing_chain::transform(ctx, r);
 
     stp.end_chain(r);
     return r;

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_ENDOMODEL_HPP
-#define MASD_DOGEN_CODING_TYPES_META_MODEL_ENDOMODEL_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_MODEL_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_MODEL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -52,19 +52,19 @@ namespace masd::dogen::coding::meta_model {
 /**
  * @brief Intermediate representation of a masd model.
  */
-class endomodel final {
+class model final {
 public:
-    endomodel(const endomodel&) = default;
-    ~endomodel() = default;
+    model(const model&) = default;
+    ~model() = default;
 
 public:
-    endomodel();
+    model();
 
 public:
-    endomodel(endomodel&& rhs);
+    model(model&& rhs);
 
 public:
-    endomodel(
+    model(
         const masd::dogen::coding::meta_model::name& name,
         const masd::dogen::coding::meta_model::name& meta_name,
         const masd::dogen::coding::meta_model::origin_types origin_type,
@@ -114,7 +114,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All other intermediate models that this endomodel depends on, mapped to their
+     * @brief All other intermediate models that this model depends on, mapped to their
      * origin.
      */
     /**@{*/
@@ -125,7 +125,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All leaf types in this endomodel.
+     * @brief All leaf types in this model.
      *
      * Leaves are types concrete types which have a parent.
      */
@@ -137,7 +137,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Modules contained in the endomodel.
+     * @brief Modules contained in the model.
      */
     /**@{*/
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::module> >& modules() const;
@@ -147,7 +147,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All the object templates available in this endomodel.
+     * @brief All the object templates available in this model.
      */
     /**@{*/
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object_template> >& object_templates() const;
@@ -157,7 +157,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All built-ins contained in this endomodel.
+     * @brief All built-ins contained in this model.
      */
     /**@{*/
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::builtin> >& builtins() const;
@@ -167,7 +167,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All enumerations contained in this endomodel.
+     * @brief All enumerations contained in this model.
      */
     /**@{*/
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::enumeration> >& enumerations() const;
@@ -177,7 +177,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All primitives in this endomodel.
+     * @brief All primitives in this model.
      */
     /**@{*/
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::primitive> >& primitives() const;
@@ -187,7 +187,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All objects contained in this endomodel.
+     * @brief All objects contained in this model.
      */
     /**@{*/
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object> >& objects() const;
@@ -197,7 +197,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All exceptions in this endomodel.
+     * @brief All exceptions in this model.
      */
     /**@{*/
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::exception> >& exceptions() const;
@@ -207,7 +207,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All visitors in this endomodel.
+     * @brief All visitors in this model.
      */
     /**@{*/
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::visitor> >& visitors() const;
@@ -222,7 +222,7 @@ public:
     void root_module(const boost::shared_ptr<masd::dogen::coding::meta_model::module>&& v);
 
     /**
-     * @brief Language in which this endomodel was written.
+     * @brief Language in which this model was written.
      */
     /**@{*/
     masd::dogen::coding::meta_model::languages input_language() const;
@@ -250,14 +250,14 @@ public:
     void extraction_properties(const masd::dogen::coding::meta_model::extraction_properties&& v);
 
 public:
-    bool operator==(const endomodel& rhs) const;
-    bool operator!=(const endomodel& rhs) const {
+    bool operator==(const model& rhs) const;
+    bool operator!=(const model& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(endomodel& other) noexcept;
-    endomodel& operator=(endomodel other);
+    void swap(model& other) noexcept;
+    model& operator=(model other);
 
 private:
     masd::dogen::coding::meta_model::name name_;
@@ -286,8 +286,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::coding::meta_model::endomodel& lhs,
-    masd::dogen::coding::meta_model::endomodel& rhs) {
+    masd::dogen::coding::meta_model::model& lhs,
+    masd::dogen::coding::meta_model::model& rhs) {
     lhs.swap(rhs);
 }
 

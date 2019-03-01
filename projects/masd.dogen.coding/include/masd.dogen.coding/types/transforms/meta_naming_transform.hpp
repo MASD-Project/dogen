@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "masd.dogen.coding/types/meta_model/endomodel_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/model_fwd.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 
 namespace masd::dogen::coding::transforms {
@@ -37,14 +37,14 @@ namespace masd::dogen::coding::transforms {
 class meta_naming_transform final {
 public:
     /**
-     * @brief Performs the transform on the endomodel.
+     * @brief Performs the transform on the model.
      *
      * Note that any injected meta-model elements are not updated as
      * part of this transform; these are expected to be handled
      * internally as they are generated. We only concern ourselves
      * with well-known meta-model elements from coding.
      */
-    static void transform(const context& ctx, meta_model::endomodel& em);
+    static void transform(const context& ctx, meta_model::model& em);
 };
 
 }

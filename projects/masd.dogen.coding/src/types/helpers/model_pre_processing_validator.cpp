@@ -28,12 +28,12 @@
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
 #include "masd.dogen.coding/types/helpers/validation_error.hpp"
-#include "masd.dogen.coding/types/helpers/endomodel_pre_processing_validator.hpp"
+#include "masd.dogen.coding/types/helpers/model_pre_processing_validator.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("coding.helpers.endomodel_pre_processing_validator"));
+auto lg(logger_factory("coding.helpers.model_pre_processing_validator"));
 
 const std::string multiple_inheritance_not_supported(
     "Multiple inheritance is not supported on target models: ");
@@ -198,8 +198,8 @@ validate(const std::string& id, const meta_model::module& m) const {
     validate_name(id, m.in_global_module(), m.name());
 }
 
-void endomodel_pre_processing_validator::
-validate(const meta_model::endomodel& im) {
+void model_pre_processing_validator::
+validate(const meta_model::model& im) {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << im.name().id();
 
     using meta_model::origin_types;

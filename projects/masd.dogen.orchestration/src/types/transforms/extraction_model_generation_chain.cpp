@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.coding/types/transforms/endomodel_generation_chain.hpp"
+#include "masd.dogen.coding/types/transforms/model_generation_chain.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/transforms/model_generation_chain.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
@@ -49,8 +49,7 @@ transform(const coding::transforms::context& ctx) {
     /*
      * Obtain the coding models.
      */
-    using coding::transforms::endomodel_generation_chain;
-    const auto cms(endomodel_generation_chain::transform(ctx));
+    const auto cms(coding::transforms::model_generation_chain::transform(ctx));
 
     /*
      * Obtain the generation models
@@ -67,8 +66,8 @@ transform(const coding::transforms::context& ctx) {
         ctx.tracer(),
         ibsp,
         ctx.transform_options().output_directory_path());
-    using generation::transforms::model_generation_chain;
-    const auto gms(model_generation_chain::transform(ctx2, cms));
+    const auto gms(
+        generation::transforms::model_generation_chain::transform(ctx2, cms));
 
     /*
      * Obtain the extraction models.

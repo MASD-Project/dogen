@@ -18,22 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_ENDOMODEL_POST_PROCESSING_CHAIN_HPP
-#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_ENDOMODEL_POST_PROCESSING_CHAIN_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_MODEL_FWD_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_MODEL_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
-#include "masd.dogen.coding/types/transforms/context_fwd.hpp"
+namespace masd::dogen::coding::meta_model {
 
-namespace masd::dogen::coding::transforms {
-
-class endomodel_post_processing_chain final {
-public:
-    static void transform(const context& ctx, meta_model::endomodel& em);
-};
+class model;
 
 }
 

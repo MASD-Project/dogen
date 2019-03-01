@@ -28,7 +28,7 @@
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/helpers/resolver.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
@@ -79,7 +79,7 @@ generalization_transform::make_is_final(const type_group& tg,
 
 std::unordered_set<std::string>
 generalization_transform::update_and_collect_parent_ids(
-    const helpers::indices& idx, meta_model::endomodel& em) {
+    const helpers::indices& idx, meta_model::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Updating and collecting parent ids.";
 
     using helpers::resolver;
@@ -117,7 +117,7 @@ generalization_transform::update_and_collect_parent_ids(
 
 void generalization_transform::populate_properties_up_the_generalization_tree(
     const type_group& tg, const meta_model::name& leaf,
-    meta_model::endomodel& em, meta_model::object& o) {
+    meta_model::model& em, meta_model::object& o) {
 
     /*
      * Add the leaf to all nodes of the tree except for the leaf node
@@ -175,7 +175,7 @@ void generalization_transform::populate_properties_up_the_generalization_tree(
 void generalization_transform::
 populate_generalizable_properties(const type_group& tg,
     const std::unordered_set<std::string>& parent_ids,
-    meta_model::endomodel& em) {
+    meta_model::model& em) {
 
     for (auto& pair : em.objects()) {
         const auto& id(pair.first);
@@ -236,7 +236,7 @@ populate_generalizable_properties(const type_group& tg,
     }
 }
 
-void generalization_transform::sort_leaves(meta_model::endomodel& em) {
+void generalization_transform::sort_leaves(meta_model::model& em) {
     for (auto& pair : em.objects()) {
         auto& o(*pair.second);
         o.leaves().sort();
@@ -244,7 +244,7 @@ void generalization_transform::sort_leaves(meta_model::endomodel& em) {
 }
 
 void generalization_transform::transform(const context& ctx,
-    const helpers::indices& idx, meta_model::endomodel& em) {
+    const helpers::indices& idx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "generalization transform",
         transform_id, em.name().id(), ctx.tracer(), em);
 

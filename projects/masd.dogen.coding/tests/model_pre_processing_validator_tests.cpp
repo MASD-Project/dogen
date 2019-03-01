@@ -26,21 +26,21 @@
 #include "masd.dogen.utility/types/test/exception_checkers.hpp"
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/helpers/validation_error.hpp"
-#include "masd.dogen.coding/test/mock_endomodel_factory.hpp"
-#include "masd.dogen.coding/types/helpers/endomodel_pre_processing_validator.hpp"
+#include "masd.dogen.coding/test/mock_model_factory.hpp"
+#include "masd.dogen.coding/types/helpers/model_pre_processing_validator.hpp"
 
 namespace {
 
 const std::string test_module("masd.dogen.coding.tests");
-const std::string test_suite("endomodel_pre_processing_validator_tests");
+const std::string test_suite("model_pre_processing_validator_tests");
 
-using masd::dogen::coding::test::mock_endomodel_factory;
-const mock_endomodel_factory::flags flags;
-const mock_endomodel_factory factory(flags);
+using masd::dogen::coding::test::mock_model_factory;
+const mock_model_factory::flags flags;
+const mock_model_factory factory(flags);
 
 const std::string invalid_id("INVALID");
 const std::string invalid_model_name("INVALID");
@@ -54,10 +54,10 @@ using masd::dogen::utility::test::contains_checker;
 using masd::dogen::coding::helpers::validation_error;
 using masd::dogen::coding::meta_model::origin_types;
 using masd::dogen::coding::meta_model::languages;
-using masd::dogen::coding::helpers::endomodel_pre_processing_validator;
+using masd::dogen::coding::helpers::model_pre_processing_validator;
 
 
-BOOST_AUTO_TEST_SUITE(endomodel_pre_processing_validator_tests)
+BOOST_AUTO_TEST_SUITE(model_pre_processing_validator_tests)
 
 BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
     SETUP_TEST_LOG_SOURCE("type_with_incorrect_model_name_throws");
@@ -71,7 +71,7 @@ BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
 
     contains_checker<validation_error> c(incorrect_model);
     BOOST_CHECK_EXCEPTION(
-        endomodel_pre_processing_validator::validate(m), validation_error, c);
+        model_pre_processing_validator::validate(m), validation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
@@ -85,7 +85,7 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
 
     contains_checker<validation_error> c(inconsistent_kvp);
     BOOST_CHECK_EXCEPTION(
-        endomodel_pre_processing_validator::validate(m), validation_error, c);
+        model_pre_processing_validator::validate(m), validation_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

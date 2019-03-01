@@ -29,7 +29,7 @@
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/helpers/resolver.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
 #include "masd.dogen.coding/types/transforms/object_templates_transform.hpp"
@@ -67,7 +67,7 @@ inline bool operator<(const name& lhs, const name& rhs) {
 namespace masd::dogen::coding::transforms {
 
 meta_model::object& object_templates_transform::
-find_object(const meta_model::name& n, meta_model::endomodel& em) {
+find_object(const meta_model::name& n, meta_model::model& em) {
     auto i(em.objects().find(n.id()));
     if (i == em.objects().end()) {
         BOOST_LOG_SEV(lg, error) << object_not_found << n.id();
@@ -78,7 +78,7 @@ find_object(const meta_model::name& n, meta_model::endomodel& em) {
 
 meta_model::object_template& object_templates_transform::
 resolve_object_template(const meta_model::name& owner,
-    const meta_model::name& object_template_name, meta_model::endomodel& em) {
+    const meta_model::name& object_template_name, meta_model::model& em) {
     using helpers::resolver;
     const auto& n(object_template_name);
     const auto on(resolver::try_resolve_object_template_name(owner, n, em));
@@ -123,7 +123,7 @@ remove_duplicates(std::list<meta_model::name>& names) {
 }
 
 void object_templates_transform::
-expand_object(meta_model::object& o, meta_model::endomodel& em,
+expand_object(meta_model::object& o, meta_model::model& em,
     std::unordered_set<meta_model::name>& processed_names) {
     BOOST_LOG_SEV(lg, debug) << "Expanding object: " << o.name().id();
 
@@ -206,7 +206,7 @@ expand_object(meta_model::object& o, meta_model::endomodel& em,
     BOOST_LOG_SEV(lg, debug) << "Finished indexing object.";
 }
 
-void object_templates_transform::expand_objects(meta_model::endomodel& em) {
+void object_templates_transform::expand_objects(meta_model::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Expanding objects: " << em.objects().size();
 
     std::unordered_set<meta_model::name> processed_names;
@@ -218,7 +218,7 @@ void object_templates_transform::expand_objects(meta_model::endomodel& em) {
 
 void object_templates_transform::
 expand_object_template(meta_model::object_template& otp,
-    meta_model::endomodel& em,
+    meta_model::model& em,
     std::unordered_set<meta_model::name>& processed_names) {
     BOOST_LOG_SEV(lg, debug) << "Expand object template: " << otp.name().id();
 
@@ -249,7 +249,7 @@ expand_object_template(meta_model::object_template& otp,
 }
 
 void
-object_templates_transform::expand_object_templates(meta_model::endomodel& em) {
+object_templates_transform::expand_object_templates(meta_model::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Expading object templates: "
                              << em.object_templates().size();
 
@@ -261,7 +261,7 @@ object_templates_transform::expand_object_templates(meta_model::endomodel& em) {
 }
 
 void object_templates_transform::
-transform(const context& ctx, meta_model::endomodel& em) {
+transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "object templates transform",
         transform_id, em.name().id(), ctx.tracer(), em);
 

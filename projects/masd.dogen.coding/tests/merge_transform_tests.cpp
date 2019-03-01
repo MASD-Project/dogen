@@ -26,12 +26,12 @@
 #include "masd.dogen.utility/types/test/exception_checkers.hpp"
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
 #include "masd.dogen.coding/test/mock_context_factory.hpp"
-#include "masd.dogen.coding/test/mock_endomodel_factory.hpp"
+#include "masd.dogen.coding/test/mock_model_factory.hpp"
 #include "masd.dogen.coding/types/transforms/merge_transform.hpp"
 
 namespace {
@@ -39,9 +39,9 @@ namespace {
 const std::string test_module("masd.dogen.coding.tests");
 const std::string test_suite("merge_transform_tests");
 
-using masd::dogen::coding::test::mock_endomodel_factory;
-const mock_endomodel_factory::flags flags;
-const mock_endomodel_factory factory(flags);
+using masd::dogen::coding::test::mock_model_factory;
+const mock_model_factory::flags flags;
+const mock_model_factory factory(flags);
 
 const std::string invalid_id("INVALID");
 const std::string invalid_model_name("INVALID");
@@ -56,7 +56,7 @@ const std::string too_many_targets("Only one target expected.");
 
 using masd::dogen::utility::test::contains_checker;
 using masd::dogen::coding::meta_model::origin_types;
-using masd::dogen::coding::meta_model::endomodel;
+using masd::dogen::coding::meta_model::model;
 using masd::dogen::coding::transforms::merge_transform;
 using masd::dogen::coding::test::mock_context_factory;
 
@@ -69,7 +69,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     const auto target(factory.make_single_type_model(tg, 0));
 
     const unsigned int n(5);
-    std::list<endomodel> ims;
+    std::list<model> ims;
     const auto npr(origin_types::non_proxy_reference);
     for (unsigned int i(1); i < n; ++i) {
         const auto m(factory.make_single_type_model(npr, i));
@@ -133,7 +133,7 @@ BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
     const auto tg(origin_types::target);
     const auto m(factory.make_empty_model(tg));
 
-    const std::list<endomodel> ims;
+    const std::list<model> ims;
     const auto ctx(mock_context_factory::make());
     const auto combined(merge_transform::transform(ctx, m, ims));
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << combined;

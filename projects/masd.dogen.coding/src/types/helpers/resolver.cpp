@@ -33,7 +33,7 @@
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.coding/io/meta_model/name_tree_io.hpp"
 #include "masd.dogen.coding/io/meta_model/attribute_io.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
 #include "masd.dogen.coding/types/helpers/identifiable_and_qualified_builder.hpp"
@@ -59,13 +59,13 @@ typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 namespace masd::dogen::coding::helpers {
 
 bool resolver::
-is_floating_point(const meta_model::endomodel& im,
+is_floating_point(const meta_model::model& im,
     const meta_model::name& n) {
     auto i(im.builtins().find(n.id()));
     return i != im.builtins().end() && i->second->is_floating_point();
 }
 
-bool resolver::is_builtin(const meta_model::endomodel& im,
+bool resolver::is_builtin(const meta_model::model& im,
     const meta_model::name& n) {
 
     auto i(im.builtins().find(n.id()));
@@ -76,7 +76,7 @@ bool resolver::is_builtin(const meta_model::endomodel& im,
     return false;
 }
 
-bool resolver::is_primitive(const meta_model::endomodel& im,
+bool resolver::is_primitive(const meta_model::model& im,
     const meta_model::name& n) {
 
     auto i(im.primitives().find(n.id()));
@@ -87,7 +87,7 @@ bool resolver::is_primitive(const meta_model::endomodel& im,
     return false;
 }
 
-bool resolver::is_enumeration(const meta_model::endomodel& im,
+bool resolver::is_enumeration(const meta_model::model& im,
     const meta_model::name& n) {
 
     auto i(im.enumerations().find(n.id()));
@@ -98,7 +98,7 @@ bool resolver::is_enumeration(const meta_model::endomodel& im,
     return false;
 }
 
-bool resolver::is_object(const meta_model::endomodel& im,
+bool resolver::is_object(const meta_model::model& im,
     const meta_model::name& n) {
 
     auto i(im.objects().find(n.id()));
@@ -109,7 +109,7 @@ bool resolver::is_object(const meta_model::endomodel& im,
     return false;
 }
 
-bool resolver::is_object_template(const meta_model::endomodel& im,
+bool resolver::is_object_template(const meta_model::model& im,
     const meta_model::name& n) {
 
     auto i(im.object_templates().find(n.id()));
@@ -133,7 +133,7 @@ is_name_referable(const indices& idx, const meta_model::name& n) {
 }
 
 meta_model::name resolver::resolve_name_with_internal_modules(
-    const meta_model::endomodel& im, const indices& idx,
+    const meta_model::model& im, const indices& idx,
     const meta_model::name& ctx, const meta_model::name& n) {
 
     /*
@@ -358,7 +358,7 @@ try_resolve_name_with_context_model_modules(const indices& idx,
 }
 
 meta_model::name resolver::
-resolve_name(const meta_model::endomodel& im, const indices& idx,
+resolve_name(const meta_model::model& im, const indices& idx,
     const meta_model::name& ctx, const meta_model::name& n) {
 
     BOOST_LOG_SEV(lg, debug) << "Resolving name: " << n.id();
@@ -438,7 +438,7 @@ resolve_name(const meta_model::endomodel& im, const indices& idx,
     BOOST_THROW_EXCEPTION(resolution_error(undefined_type + n.id()));
 }
 
-void resolver::resolve_name_tree(const meta_model::endomodel& im,
+void resolver::resolve_name_tree(const meta_model::model& im,
     const indices& idx, const meta_model::name& owner,
     meta_model::name_tree& nt) {
 
@@ -481,7 +481,7 @@ void resolver::resolve_name_tree(const meta_model::endomodel& im,
     nt.qualified(iq.second);
 }
 
-void resolver::resolve_attribute(const meta_model::endomodel& im,
+void resolver::resolve_attribute(const meta_model::model& im,
     const indices& idx, const meta_model::name& owner,
     meta_model::attribute& attr) {
 
@@ -504,7 +504,7 @@ void resolver::resolve_attribute(const meta_model::endomodel& im,
     }
 }
 
-void resolver::resolve_attributes(const meta_model::endomodel& im,
+void resolver::resolve_attributes(const meta_model::model& im,
     const indices& idx, const meta_model::name& owner,
     std::list<meta_model::attribute>& attributes) {
 
@@ -513,7 +513,7 @@ void resolver::resolve_attributes(const meta_model::endomodel& im,
 }
 
 void resolver::
-validate_inheritance_graph(const meta_model::endomodel& im,
+validate_inheritance_graph(const meta_model::model& im,
     const meta_model::object& o) {
     /*
      * Ensure that all parents and original parents exist as objects.
@@ -543,7 +543,7 @@ validate_inheritance_graph(const meta_model::endomodel& im,
 }
 
 void resolver::validate_object_template_inheritance(
-    const meta_model::endomodel& im, const meta_model::object_template& otp) {
+    const meta_model::model& im, const meta_model::object_template& otp) {
     const auto id(otp.name().id());
     for (const auto& n : otp.parents()) {
         if (is_object_template(im, n))
@@ -559,7 +559,7 @@ void resolver::validate_object_template_inheritance(
 }
 
 void resolver::
-resolve_object_templates(const indices& idx, meta_model::endomodel& im) {
+resolve_object_templates(const indices& idx, meta_model::model& im) {
     BOOST_LOG_SEV(lg, debug) << "Resolving object templates. Size: "
                              << im.object_templates().size();
 
@@ -577,7 +577,7 @@ resolve_object_templates(const indices& idx, meta_model::endomodel& im) {
 }
 
 void resolver::
-resolve_objects(const indices& idx, meta_model::endomodel& im) {
+resolve_objects(const indices& idx, meta_model::model& im) {
     BOOST_LOG_SEV(lg, debug) << "Resolving objects. Size: "
                              << im.objects().size();
 
@@ -594,7 +594,7 @@ resolve_objects(const indices& idx, meta_model::endomodel& im) {
 }
 
 void resolver::
-resolve_enumerations(const indices& idx, meta_model::endomodel& im) {
+resolve_enumerations(const indices& idx, meta_model::model& im) {
     BOOST_LOG_SEV(lg, debug) << "Resolving enumerations. Size: "
                              << im.enumerations().size();
 
@@ -628,7 +628,7 @@ resolve_enumerations(const indices& idx, meta_model::endomodel& im) {
 }
 
 void resolver::
-resolve_primitives(const indices& idx, meta_model::endomodel& im) {
+resolve_primitives(const indices& idx, meta_model::model& im) {
     BOOST_LOG_SEV(lg, debug) << "Resolving primitives. Size: "
                              << im.primitives().size();
 
@@ -660,7 +660,7 @@ resolve_primitives(const indices& idx, meta_model::endomodel& im) {
 }
 
 meta_model::name resolver::
-resolve(const meta_model::endomodel& im, const indices& idx,
+resolve(const meta_model::model& im, const indices& idx,
     const meta_model::name& ctx, const meta_model::name& n) {
 
     const auto r(resolve_name(im, idx, ctx, n));
@@ -671,7 +671,7 @@ resolve(const meta_model::endomodel& im, const indices& idx,
 
 boost::optional<meta_model::name> resolver::
 try_resolve_object_template_name(meta_model::name ctx, const std::string& s,
-    const meta_model::endomodel& im) {
+    const meta_model::model& im) {
 
     BOOST_LOG_SEV(lg, debug) << "Resolving object template name: " << s;
 
@@ -729,13 +729,13 @@ try_resolve_object_template_name(meta_model::name ctx, const std::string& s,
 
 boost::optional<meta_model::name>
 resolver::try_resolve_object_template_name(const meta_model::name& ctx,
-    const meta_model::name& n, const meta_model::endomodel& im) {
+    const meta_model::name& n, const meta_model::model& im) {
     // FIXME: hack for now, just take simple name. Requires a bit more
     // thinking.
     return try_resolve_object_template_name(ctx, n.simple(), im);
 }
 
-void resolver::resolve(const indices& idx, meta_model::endomodel& im) {
+void resolver::resolve(const indices& idx, meta_model::model& im) {
     BOOST_LOG_SEV(lg, debug) << "Resolving model: " << im.name().id();
 
     resolve_object_templates(idx, im);

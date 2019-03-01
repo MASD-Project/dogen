@@ -59,7 +59,7 @@ BOOST_AUTO_TEST_SUITE(hashing_tests)
 //     // test_hashing<module_generator>();
 //     // test_hashing<object_generator>();
 //     // test_hashing<object_template_generator>();
-//     // test_hashing<endomodel_generator>();
+//     // test_hashing<model_generator>();
 // }
 
 BOOST_AUTO_TEST_SUITE_END()

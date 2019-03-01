@@ -23,7 +23,7 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/elements_traversal.hpp"
@@ -89,7 +89,7 @@ const std::unordered_map<std::string, std::list<std::string>>&
 
 class updater {
 public:
-    updater(meta_model::endomodel& im) : model_(im) { }
+    updater(meta_model::model& im) : model_(im) { }
 
 private:
     boost::optional<meta_model::name>
@@ -108,7 +108,7 @@ public:
     void operator()(meta_model::visitor& v) { update(v); }
 
 public:
-    meta_model::endomodel& model_;
+    meta_model::model& model_;
 };
 
 boost::optional<meta_model::name>
@@ -199,7 +199,7 @@ void updater::update(meta_model::element& e) {
 }
 
 void modules_transform::
-create_missing_modules(meta_model::endomodel& im) {
+create_missing_modules(meta_model::model& im) {
     internal_modules_builder b;
     meta_model::elements_traversal(im, b);
 
@@ -218,13 +218,13 @@ create_missing_modules(meta_model::endomodel& im) {
 }
 
 void modules_transform::
-expand_containing_module(meta_model::endomodel& im) {
+expand_containing_module(meta_model::model& im) {
     updater u(im);
     meta_model::elements_traversal(im, u);
 }
 
 void modules_transform::
-transform(const context& ctx, meta_model::endomodel& em) {
+transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "modules transform",
         transform_id, em.name().id(), ctx.tracer(), em);
 

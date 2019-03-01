@@ -28,7 +28,7 @@
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/meta_model/origin_types.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 
 namespace masd::dogen::coding::transforms {
@@ -45,7 +45,7 @@ private:
      * @brief Injects the global module, and makes all modules that do
      * not have a containing namespace be contained by it.
      */
-    static void inject_global_module(meta_model::endomodel& im);
+    static void inject_global_module(meta_model::model& im);
 
 public:
 
@@ -54,7 +54,7 @@ public:
      *
      * @param m Yarn model to operate on.
      */
-    static void transform(const context& ctx, meta_model::endomodel& im);
+    static void transform(const context& ctx, meta_model::model& im);
 };
 
 }

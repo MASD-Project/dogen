@@ -23,16 +23,16 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "masd.dogen.utility/types/test/logging.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/helpers/resolution_error.hpp"
 #include "masd.dogen.coding/types/transforms/merge_transform.hpp"
 #include "masd.dogen.coding/types/helpers/indexer.hpp"
 #include "masd.dogen.coding/types/helpers/indices.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/io/meta_model/attribute_io.hpp"
 #include "masd.dogen.utility/types/test/exception_checkers.hpp"
 #include "masd.dogen.coding/test/mock_context_factory.hpp"
-#include "masd.dogen.coding/test/mock_endomodel_factory.hpp"
+#include "masd.dogen.coding/test/mock_model_factory.hpp"
 #include "masd.dogen.coding/types/helpers/resolver.hpp"
 
 namespace {
@@ -40,7 +40,7 @@ namespace {
 const std::string test_module("masd.dogen.coding.tests");
 const std::string test_suite("resolver_tests");
 
-using masd::dogen::coding::test::mock_endomodel_factory;
+using masd::dogen::coding::test::mock_model_factory;
 
 /*
  * FIXME: we need to update the mock factory to generate merged
@@ -54,12 +54,12 @@ using masd::dogen::coding::test::mock_endomodel_factory;
  *
  * Flag was added but does nothing yet.
  */
-const mock_endomodel_factory::flags flags(false/*tagged*/,
+const mock_model_factory::flags flags(false/*tagged*/,
     true/*merged*/, false/*resolved*/, false/*object_templates_indexed*/,
     false/*attributes_indexed*/, false/*associations_indexed*/,
     true/*types parsed*/);
 
-const mock_endomodel_factory factory(flags);
+const mock_model_factory factory(flags);
 
 const auto idx = masd::dogen::coding::helpers::indices();
 
@@ -76,7 +76,7 @@ using masd::dogen::coding::helpers::resolution_error;
 using masd::dogen::coding::helpers::indexer;
 using masd::dogen::coding::helpers::resolver;
 using masd::dogen::coding::transforms::merge_transform;
-using masd::dogen::coding::meta_model::endomodel;
+using masd::dogen::coding::meta_model::model;
 using masd::dogen::coding::test::mock_context_factory;
 
 BOOST_AUTO_TEST_SUITE(resolver_tests)
@@ -99,7 +99,7 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_the_same_model_resolves_succe
     }
     const auto idx(indexer::index(m));
     using namespace masd::dogen::coding::meta_model;
-    const auto original([](const endomodel& im) {
+    const auto original([](const model& im) {
             auto r(im);
             r.objects().clear();
             for (const auto& pair : im.objects()) {
@@ -137,7 +137,7 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_different_model_results_in_su
 
     const auto m(factory.object_with_attribute_type_in_different_model());
 
-    const std::list<endomodel> refs = { m[1] };
+    const std::list<model> refs = { m[1] };
     const auto ctx(mock_context_factory::make());
     auto combined(merge_transform::transform(ctx, m[0], refs));
     BOOST_CHECK(combined.objects().size() == 2);
@@ -177,7 +177,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
     SETUP_TEST_LOG_SOURCE("object_with_parent_in_the_same_model_resolves_successfully");
     const auto m(factory.object_with_parent_in_the_same_model());
 
-    const std::list<endomodel> refs;
+    const std::list<model> refs;
     const auto ctx(mock_context_factory::make());
     auto combined(merge_transform::transform(ctx, m, refs));
     BOOST_CHECK(combined.objects().size() == 2);
@@ -209,7 +209,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
 
     const auto m(factory.object_with_parent_in_different_models());
 
-    const std::list<endomodel> refs = { m[1] };
+    const std::list<model> refs = { m[1] };
     const auto ctx(mock_context_factory::make());
     auto combined(merge_transform::transform(ctx, m[0], refs));
     BOOST_CHECK(combined.objects().size() == 2);
@@ -238,7 +238,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
 BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_successfully) {
     SETUP_TEST_LOG_SOURCE("object_with_third_degree_parent_in_same_model_resolves_successfully");
     const auto m(factory.object_with_third_degree_parent_in_same_model());
-    const std::list<endomodel> refs;
+    const std::list<model> refs;
 
     const auto ctx(mock_context_factory::make());
     auto combined(merge_transform::transform(ctx, m, refs));
@@ -289,7 +289,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
     SETUP_TEST_LOG_SOURCE("object_with_third_degree_parent_in_different_models_resolves_successfully");
 
     const auto a(factory.object_with_third_degree_parent_in_different_models());
-    const std::list<endomodel> refs = { a[1], a[2], a[3] };
+    const std::list<model> refs = { a[1], a[2], a[3] };
 
     const auto ctx(mock_context_factory::make());
     auto combined(merge_transform::transform(ctx, a[0], refs));
@@ -322,7 +322,7 @@ BOOST_AUTO_TEST_CASE(object_with_missing_third_degree_parent_in_different_models
         factory.object_with_missing_third_degree_parent_in_different_models());
 
     const auto ctx(mock_context_factory::make());
-    const std::list<endomodel> refs = { a[1], a[2] };
+    const std::list<model> refs = { a[1], a[2] };
     auto combined(merge_transform::transform(ctx, a[0], refs));
 
     contains_checker<resolution_error> c(missing_parent);

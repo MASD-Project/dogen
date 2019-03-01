@@ -154,7 +154,7 @@ make_extraction_properties(const context& ctx,
 }
 
 void extraction_properties_transform::transform(const context& ctx,
-    meta_model::endomodel& m) {
+    meta_model::model& m) {
 
     const auto& ra(m.root_module()->annotation());
     const auto& alrp(ctx.archetype_location_repository());

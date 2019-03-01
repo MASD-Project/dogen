@@ -36,8 +36,6 @@ private:
     static meta_model::name make_name(const std::string& sn);
 
 public:
-    static meta_model::name make_exomodel_name();
-    static meta_model::name make_endomodel_name();
     static meta_model::name make_model_name();
 
     static meta_model::name make_module_name();

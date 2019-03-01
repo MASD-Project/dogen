@@ -127,7 +127,7 @@ const decomposition_result& decomposer::result() const {
 }
 
 decomposition_result
-decomposer::decompose(const meta_model::endomodel& em) {
+decomposer::decompose(const meta_model::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Decomposing model: " << em.name().id();
 
     decomposer dc;

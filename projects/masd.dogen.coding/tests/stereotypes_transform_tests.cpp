@@ -24,21 +24,21 @@
 #include "masd.dogen.utility/types/test/logging.hpp"
 #include "masd.dogen.utility/types/test/asserter.hpp"
 #include "masd.dogen.utility/types/test/exception_checkers.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/io/meta_model/object_io.hpp"
 #include "masd.dogen.coding/test/mock_context_factory.hpp"
-#include "masd.dogen.coding/test/mock_endomodel_factory.hpp"
+#include "masd.dogen.coding/test/mock_model_factory.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
 #include "masd.dogen.coding/types/meta_model/static_stereotypes.hpp"
 #include "masd.dogen.coding/types/transforms/stereotypes_transform.hpp"
 
 namespace {
 
-using masd::dogen::coding::test::mock_endomodel_factory;
-const mock_endomodel_factory::flags flags;
-const mock_endomodel_factory factory(flags);
+using masd::dogen::coding::test::mock_model_factory;
+const mock_model_factory::flags flags;
+const mock_model_factory factory(flags);
 
 const std::string test_module("masd.dogen.coding.tests");
 const std::string test_suite("stereotypes_transform_tests");

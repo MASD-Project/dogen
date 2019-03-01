@@ -20,15 +20,15 @@
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/mapping_transform.hpp"
 #include "masd.dogen.coding/types/transforms/merge_transform.hpp"
-#include "masd.dogen.coding/types/transforms/endomodel_assembly_chain.hpp"
+#include "masd.dogen.coding/types/transforms/model_assembly_chain.hpp"
 
 namespace {
 
-const std::string transform_id("coding.transforms.endomodel_assembly_chain");
+const std::string transform_id("coding.transforms.model_assembly_chain");
 
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -37,9 +37,9 @@ static logger lg(logger_factory(transform_id));
 
 namespace masd::dogen::coding::transforms {
 
-meta_model::endomodel endomodel_assembly_chain::transform(const context& ctx,
-    const meta_model::languages l, const meta_model::endomodel& target,
-    const std::list<meta_model::endomodel>& refs) {
+meta_model::model model_assembly_chain::transform(const context& ctx,
+    const meta_model::languages l, const meta_model::model& target,
+    const std::list<meta_model::model>& refs) {
     tracing::scoped_chain_tracer stp(lg, "model assembly chain",
         transform_id, target.name().id(), ctx.tracer());
 
@@ -52,7 +52,7 @@ meta_model::endomodel endomodel_assembly_chain::transform(const context& ctx,
     /*
      * Now do the same for the references.
      */
-    std::list<meta_model::endomodel> mapped_refs;
+    std::list<meta_model::model> mapped_refs;
     for (const auto& ref : refs) {
         /*
          * We have all references for all the output languages

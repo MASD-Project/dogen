@@ -1,5 +1,5 @@
 {
-  "documentation": "Yarn is the Dogen meta-model.\n\n@section coding_0 Overview\n\nCoding is a meta-model that provides a programming-language-neutral\ntype representation, designed for code generation. There are two core\ntypes in coding: @e endomodel and @e model. Intermediate models are\nobtained via @frontends and post-processed until they form a cohesive\nwhole. They are then transformed into a final model representation, at\nwhich point they are suitable for code generation.\n\n@section coding_0 Mission\n\nCoding's objectives are:\n\n@li to provide a set of constructs that the frontends can map to\neasily, as well as the machinery for frontend management\n(registration, etc.).\n\n@li to provide the tooling required to combine multiple intermediate\ncoding models together into a bigger model - called the intermediate\n@e merged model.\n\n@li to ensure the consistency of the intermediate merged model via\nvalidation rules (such as verifying that all types have a definitions,\netc.).\n\n@li to provide all the information required to build the final model\nand to build it.\n",
+  "documentation": "Yarn is the Dogen meta-model.\n\n@section coding_0 Overview\n\nCoding is a meta-model that provides a programming-language-neutral\ntype representation, designed for code generation. There are two core\ntypes in coding: @e model and @e model. Intermediate models are\nobtained via @frontends and post-processed until they form a cohesive\nwhole. They are then transformed into a final model representation, at\nwhich point they are suitable for code generation.\n\n@section coding_0 Mission\n\nCoding's objectives are:\n\n@li to provide a set of constructs that the frontends can map to\neasily, as well as the machinery for frontend management\n(registration, etc.).\n\n@li to provide the tooling required to combine multiple intermediate\ncoding models together into a bigger model - called the intermediate\n@e merged model.\n\n@li to ensure the consistency of the intermediate merged model via\nvalidation rules (such as verifying that all types have a definitions,\netc.).\n\n@li to provide all the information required to build the final model\nand to build it.\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "masd.dogen.coding",
@@ -586,7 +586,7 @@
         {
           "name": "leaves",
           "type": "std::unordered_set<name>",
-          "documentation": "All leaf types in this endomodel.\n\nLeaves are types concrete types which have a parent.\n"
+          "documentation": "All leaf types in this model.\n\nLeaves are types concrete types which have a parent.\n"
         },
         {
           "name": "elements",
@@ -640,7 +640,7 @@
       ]
     },
     {
-      "name": "meta_model::endomodel",
+      "name": "meta_model::model",
       "documentation": "Intermediate representation of a masd model.\n",
       "stereotypes": [
         "Nameable",
@@ -652,52 +652,52 @@
         {
           "name": "references",
           "type": "std::unordered_map<name,origin_types>",
-          "documentation": "All other intermediate models that this endomodel depends on, mapped to their\norigin.\n"
+          "documentation": "All other intermediate models that this model depends on, mapped to their\norigin.\n"
         },
         {
           "name": "leaves",
           "type": "std::unordered_set<name>",
-          "documentation": "All leaf types in this endomodel.\n\nLeaves are types concrete types which have a parent.\n"
+          "documentation": "All leaf types in this model.\n\nLeaves are types concrete types which have a parent.\n"
         },
         {
           "name": "modules",
           "type": "std::unordered_map<std::string, boost::shared_ptr<module>>",
-          "documentation": "Modules contained in the endomodel.\n"
+          "documentation": "Modules contained in the model.\n"
         },
         {
           "name": "object_templates",
           "type": "std::unordered_map<std::string, boost::shared_ptr<object_template>>",
-          "documentation": "All the object templates available in this endomodel.\n"
+          "documentation": "All the object templates available in this model.\n"
         },
         {
           "name": "builtins",
           "type": "std::unordered_map<std::string, boost::shared_ptr<builtin>>",
-          "documentation": "All built-ins contained in this endomodel.\n"
+          "documentation": "All built-ins contained in this model.\n"
         },
         {
           "name": "enumerations",
           "type": "std::unordered_map<std::string, boost::shared_ptr<enumeration>>",
-          "documentation": "All enumerations contained in this endomodel.\n"
+          "documentation": "All enumerations contained in this model.\n"
         },
         {
           "name": "primitives",
           "type": "std::unordered_map<std::string, boost::shared_ptr<primitive>>",
-          "documentation": "All primitives in this endomodel.\n"
+          "documentation": "All primitives in this model.\n"
         },
         {
           "name": "objects",
           "type": "std::unordered_map<std::string, boost::shared_ptr<object>>",
-          "documentation": "All objects contained in this endomodel.\n"
+          "documentation": "All objects contained in this model.\n"
         },
         {
           "name": "exceptions",
           "type": "std::unordered_map<std::string, boost::shared_ptr<exception>>",
-          "documentation": "All exceptions in this endomodel.\n"
+          "documentation": "All exceptions in this model.\n"
         },
         {
           "name": "visitors",
           "type": "std::unordered_map<std::string, boost::shared_ptr<visitor>>",
-          "documentation": "All visitors in this endomodel.\n"
+          "documentation": "All visitors in this model.\n"
         },
         {
           "name": "root_module",
@@ -706,7 +706,7 @@
         {
           "name": "input_language",
           "type": "languages",
-          "documentation": "Language in which this endomodel was written.\n"
+          "documentation": "Language in which this model was written.\n"
         },
         {
           "name": "output_languages",
@@ -1255,14 +1255,14 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::endomodel_pre_processing_chain",
+      "name": "transforms::model_pre_processing_chain",
       "stereotypes": [
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::endomodel_generation_chain",
+      "name": "transforms::model_generation_chain",
       "stereotypes": [
         "masd::handcrafted"
       ],
@@ -1276,14 +1276,14 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::endomodel_assembly_chain",
+      "name": "transforms::model_assembly_chain",
       "stereotypes": [
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::endomodel_post_processing_chain",
+      "name": "transforms::model_post_processing_chain",
       "stereotypes": [
         "masd::handcrafted"
       ],
@@ -1453,7 +1453,7 @@
       ]
     },
     {
-      "name": "transforms::endomodel_to_model_transform",
+      "name": "transforms::model_to_model_transform",
       "stereotypes": [
         "masd::handcrafted"
       ],
@@ -1515,7 +1515,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "helpers::endomodel_post_processing_validator",
+      "name": "helpers::model_post_processing_validator",
       "stereotypes": [
         "masd::handcrafted"
       ],
@@ -1530,7 +1530,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "helpers::endomodel_pre_processing_validator",
+      "name": "helpers::model_pre_processing_validator",
       "stereotypes": [
         "masd::handcrafted"
       ],
@@ -2650,7 +2650,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::external_model_to_endomodel_transform",
+      "name": "transforms::external_model_to_model_transform",
       "stereotypes": [
         "masd::handcrafted"
       ],

@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 
 namespace masd::dogen::coding::transforms {
@@ -35,11 +35,11 @@ namespace masd::dogen::coding::transforms {
  */
 class modules_transform final {
 private:
-    static void create_missing_modules(meta_model::endomodel& em);
-    static void expand_containing_module(meta_model::endomodel& em);
+    static void create_missing_modules(meta_model::model& em);
+    static void expand_containing_module(meta_model::model& em);
 
 public:
-    static void transform(const context& ctx, meta_model::endomodel& em);
+    static void transform(const context& ctx, meta_model::model& em);
 };
 
 }

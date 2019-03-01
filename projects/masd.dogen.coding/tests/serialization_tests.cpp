@@ -60,7 +60,7 @@ BOOST_AUTO_TEST_SUITE(serialization_tests)
 //     roundtrip_type<module_generator>();
 //     roundtrip_type<object_generator>();
 //     roundtrip_type<object_template_generator>();
-//     roundtrip_type<endomodel_generator>();
+//     roundtrip_type<model_generator>();
 // }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/helpers/mapper.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/mapping_transform.hpp"
@@ -40,8 +40,8 @@ bool mapping_transform::is_mappable(const meta_model::languages from,
     return helpers::mapper::is_mappable(from, to);
 }
 
-meta_model::endomodel mapping_transform::transform(const context& ctx,
-    const meta_model::endomodel& src, const meta_model::languages to) {
+meta_model::model mapping_transform::transform(const context& ctx,
+    const meta_model::model& src, const meta_model::languages to) {
     tracing::scoped_transform_tracer stp(lg, "mapping transform",
         transform_id, src.name().id(), ctx.tracer(), src);
 

@@ -28,7 +28,7 @@
 /*
 #include "masd.dogen.coding/types/name_builder.hpp"
 #include "masd.dogen.coding/types/name_factory.hpp"
-#include "masd.dogen.coding/types/endomodel.hpp"
+#include "masd.dogen.coding/types/model.hpp"
 #include "masd.dogen.coding/types/parsing_error.hpp"
 #include "masd.dogen.coding/io/name_tree_io.hpp"
 #include "masd.dogen.coding/io/name_io.hpp"

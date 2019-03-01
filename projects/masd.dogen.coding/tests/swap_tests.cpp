@@ -54,7 +54,7 @@ BOOST_AUTO_TEST_SUITE(swap_tests)
 //     test_swap<module_generator>();
 //     test_swap<object_generator>();
 //     test_swap<object_template_generator>();
-//     test_swap<endomodel_generator>();
+//     test_swap<model_generator>();
 // }
 
 BOOST_AUTO_TEST_SUITE_END()

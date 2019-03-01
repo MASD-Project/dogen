@@ -28,7 +28,7 @@
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/types/helpers/decomposer.hpp"
 #include "masd.dogen.coding/types/helpers/validation_error.hpp"
-#include "masd.dogen.coding/types/helpers/endomodel_post_processing_validator.hpp"
+#include "masd.dogen.coding/types/helpers/model_post_processing_validator.hpp"
 
 typedef boost::error_info<struct owner, std::string>
 errmsg_validation_owner;
@@ -36,7 +36,7 @@ errmsg_validation_owner;
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("coding.helpers.endomodel_post_processing_validator"));
+auto lg(logger_factory("coding.helpers.model_post_processing_validator"));
 
 const std::string space(" ");
 const std::regex strict_name_regex("^[a-zA-Z_][a-zA-Z0-9_]*$");
@@ -129,12 +129,12 @@ inline void check_not_in_container(const Container& c, const std::string& str,
     }
 }
 
-bool endomodel_post_processing_validator::
+bool model_post_processing_validator::
 allow_spaces_in_built_in_types(const meta_model::languages l) {
     return l == meta_model::languages::cpp;
 }
 
-void endomodel_post_processing_validator::validate_string(const std::string& s,
+void model_post_processing_validator::validate_string(const std::string& s,
     const std::regex& regex, bool check_not_builtin) {
     BOOST_LOG_SEV(lg, trace) << "Sanity checking string: " << s;
 
@@ -172,13 +172,13 @@ void endomodel_post_processing_validator::validate_string(const std::string& s,
     BOOST_LOG_SEV(lg, trace) << "String passed all sanity checks.";
 }
 
-void endomodel_post_processing_validator::validate_strings(
+void model_post_processing_validator::validate_strings(
     const std::list<std::string>& strings, const std::regex& regex) {
     for (const auto& s : strings)
         validate_string(s, regex);
 }
 
-void endomodel_post_processing_validator::validate_name(const meta_model::name& n,
+void model_post_processing_validator::validate_name(const meta_model::name& n,
     const std::regex& regex, const bool allow_spaces_in_built_in_types) {
     /*
      * All names must have a non-empty id.
@@ -228,7 +228,7 @@ void endomodel_post_processing_validator::validate_name(const meta_model::name& 
         validate_string(l.element(), regex);
 }
 
-void endomodel_post_processing_validator::
+void model_post_processing_validator::
 validate_names(const std::list<std::pair<std::string, meta_model::name>>& names,
     const meta_model::languages l) {
     BOOST_LOG_SEV(lg, debug) << "Sanity checking names.";
@@ -266,7 +266,7 @@ validate_names(const std::list<std::pair<std::string, meta_model::name>>& names,
     BOOST_LOG_SEV(lg, debug) << "Finished validating names.";
 }
 
-void endomodel_post_processing_validator::
+void model_post_processing_validator::
 validate_injected_names(
     const std::list<std::pair<std::string, meta_model::name>>& names) {
     BOOST_LOG_SEV(lg, debug) << "Sanity checking injected names.";
@@ -321,7 +321,7 @@ validate_injected_names(
     BOOST_LOG_SEV(lg, debug) << "Finished validating all names.";
 }
 
-void endomodel_post_processing_validator::validate_meta_names(
+void model_post_processing_validator::validate_meta_names(
     const std::list<std::pair<std::string, meta_model::name>>& meta_names) {
     BOOST_LOG_SEV(lg, debug) << "Sanity checking all meta-names.";
 
@@ -351,7 +351,7 @@ void endomodel_post_processing_validator::validate_meta_names(
     BOOST_LOG_SEV(lg, debug) << "Finished validating all meta-names.";
 }
 
-void endomodel_post_processing_validator::
+void model_post_processing_validator::
 validate_name_tree(const std::unordered_set<std::string>& abstract_elements,
     const meta_model::languages l, const meta_model::name_tree& nt,
     const bool inherit_opaqueness_from_parent) {
@@ -368,7 +368,7 @@ validate_name_tree(const std::unordered_set<std::string>& abstract_elements,
         validate_name_tree(ae, l, c, nt.are_children_opaque());
 }
 
-void endomodel_post_processing_validator::validate_name_trees(
+void model_post_processing_validator::validate_name_trees(
     const std::unordered_set<std::string>& abstract_elements,
     const meta_model::languages l,
     const std::list<std::pair<std::string, meta_model::name_tree>>& nts) {
@@ -397,8 +397,8 @@ void endomodel_post_processing_validator::validate_name_trees(
     }
 }
 
-void endomodel_post_processing_validator::
-validate(const indices& idx, const meta_model::endomodel& im) {
+void model_post_processing_validator::
+validate(const indices& idx, const meta_model::model& im) {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << im.name().id();
 
     const auto l(im.input_language());

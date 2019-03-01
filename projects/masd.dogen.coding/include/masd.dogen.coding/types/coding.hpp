@@ -32,7 +32,7 @@
  *
  * Coding is a meta-model that provides a programming-language-neutral
  * type representation, designed for code generation. There are two core
- * types in coding: @e endomodel and @e model. Intermediate models are
+ * types in coding: @e model and @e model. Intermediate models are
  * obtained via @frontends and post-processed until they form a cohesive
  * whole. They are then transformed into a final model representation, at
  * which point they are suitable for code generation.

@@ -239,7 +239,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#All leaf types in this endomodel.
+            <dia:string>#All leaf types in this model.
 
 Leaves are types concrete types which have a parent.#</dia:string>
           </dia:attribute>
@@ -5519,7 +5519,7 @@ model directory.#</dia:string>
                 <dia:string>#em#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -5726,7 +5726,7 @@ model directory.#</dia:string>
                 <dia:string>#em#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -5903,7 +5903,7 @@ model directory.#</dia:string>
                 <dia:string>#em#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8498,7 +8498,7 @@ model directory.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#const coding::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

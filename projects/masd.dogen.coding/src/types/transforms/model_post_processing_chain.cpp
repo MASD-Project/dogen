@@ -20,9 +20,9 @@
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/helpers/indexer.hpp"
-#include "masd.dogen.coding/types/helpers/endomodel_post_processing_validator.hpp"
+#include "masd.dogen.coding/types/helpers/model_post_processing_validator.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/enumerations_transform.hpp"
 #include "masd.dogen.coding/types/transforms/generalization_transform.hpp"
@@ -34,12 +34,12 @@
 #include "masd.dogen.coding/types/transforms/attributes_transform.hpp"
 #include "masd.dogen.coding/types/transforms/associations_transform.hpp"
 #include "masd.dogen.coding/types/transforms/meta_naming_transform.hpp"
-#include "masd.dogen.coding/types/transforms/endomodel_post_processing_chain.hpp"
+#include "masd.dogen.coding/types/transforms/model_post_processing_chain.hpp"
 
 namespace {
 
 const std::string transform_id(
-    "coding.transforms.endomodel_post_processing_chain");
+    "coding.transforms.model_post_processing_chain");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -48,9 +48,9 @@ auto lg(logger_factory(transform_id));
 
 namespace masd::dogen::coding::transforms {
 
-void endomodel_post_processing_chain::
-transform(const context& ctx, meta_model::endomodel& em) {
-    tracing::scoped_chain_tracer stp(lg, "endomodel post-processing chain",
+void model_post_processing_chain::
+transform(const context& ctx, meta_model::model& em) {
+    tracing::scoped_chain_tracer stp(lg, "model post-processing chain",
         transform_id, em.name().id(), ctx.tracer(), em);
 
     /*
@@ -129,7 +129,7 @@ transform(const context& ctx, meta_model::endomodel& em) {
     /*
      * Ensure the model is valid.
      */
-    helpers::endomodel_post_processing_validator::validate(idx, em);
+    helpers::model_post_processing_validator::validate(idx, em);
 
     stp.end_chain(em);
 }

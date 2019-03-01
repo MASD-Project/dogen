@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/builtin.hpp"
 #include "masd.dogen.coding/types/meta_model/visitor.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
 #include "masd.dogen.coding/types/meta_model/exception.hpp"
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
@@ -102,11 +102,11 @@ const boost::shared_ptr<masd::dogen::coding::meta_model::visitor>& rhs) {
 
 namespace masd::dogen::coding::meta_model {
 
-endomodel::endomodel()
+model::model()
     : origin_type_(static_cast<masd::dogen::coding::meta_model::origin_types>(0)),
       input_language_(static_cast<masd::dogen::coding::meta_model::languages>(0)) { }
 
-endomodel::endomodel(endomodel&& rhs)
+model::model(model&& rhs)
     : name_(std::move(rhs.name_)),
       meta_name_(std::move(rhs.meta_name_)),
       origin_type_(std::move(rhs.origin_type_)),
@@ -126,7 +126,7 @@ endomodel::endomodel(endomodel&& rhs)
       orm_properties_(std::move(rhs.orm_properties_)),
       extraction_properties_(std::move(rhs.extraction_properties_)) { }
 
-endomodel::endomodel(
+model::model(
     const masd::dogen::coding::meta_model::name& name,
     const masd::dogen::coding::meta_model::name& meta_name,
     const masd::dogen::coding::meta_model::origin_types origin_type,
@@ -164,7 +164,7 @@ endomodel::endomodel(
       orm_properties_(orm_properties),
       extraction_properties_(extraction_properties) { }
 
-void endomodel::swap(endomodel& other) noexcept {
+void model::swap(model& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(meta_name_, other.meta_name_);
@@ -186,7 +186,7 @@ void endomodel::swap(endomodel& other) noexcept {
     swap(extraction_properties_, other.extraction_properties_);
 }
 
-bool endomodel::operator==(const endomodel& rhs) const {
+bool model::operator==(const model& rhs) const {
     return name_ == rhs.name_ &&
         meta_name_ == rhs.meta_name_ &&
         origin_type_ == rhs.origin_type_ &&
@@ -207,281 +207,281 @@ bool endomodel::operator==(const endomodel& rhs) const {
         extraction_properties_ == rhs.extraction_properties_;
 }
 
-endomodel& endomodel::operator=(endomodel other) {
+model& model::operator=(model other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const masd::dogen::coding::meta_model::name& endomodel::name() const {
+const masd::dogen::coding::meta_model::name& model::name() const {
     return name_;
 }
 
-masd::dogen::coding::meta_model::name& endomodel::name() {
+masd::dogen::coding::meta_model::name& model::name() {
     return name_;
 }
 
-void endomodel::name(const masd::dogen::coding::meta_model::name& v) {
+void model::name(const masd::dogen::coding::meta_model::name& v) {
     name_ = v;
 }
 
-void endomodel::name(const masd::dogen::coding::meta_model::name&& v) {
+void model::name(const masd::dogen::coding::meta_model::name&& v) {
     name_ = std::move(v);
 }
 
-const masd::dogen::coding::meta_model::name& endomodel::meta_name() const {
+const masd::dogen::coding::meta_model::name& model::meta_name() const {
     return meta_name_;
 }
 
-masd::dogen::coding::meta_model::name& endomodel::meta_name() {
+masd::dogen::coding::meta_model::name& model::meta_name() {
     return meta_name_;
 }
 
-void endomodel::meta_name(const masd::dogen::coding::meta_model::name& v) {
+void model::meta_name(const masd::dogen::coding::meta_model::name& v) {
     meta_name_ = v;
 }
 
-void endomodel::meta_name(const masd::dogen::coding::meta_model::name&& v) {
+void model::meta_name(const masd::dogen::coding::meta_model::name&& v) {
     meta_name_ = std::move(v);
 }
 
-masd::dogen::coding::meta_model::origin_types endomodel::origin_type() const {
+masd::dogen::coding::meta_model::origin_types model::origin_type() const {
     return origin_type_;
 }
 
-void endomodel::origin_type(const masd::dogen::coding::meta_model::origin_types v) {
+void model::origin_type(const masd::dogen::coding::meta_model::origin_types v) {
     origin_type_ = v;
 }
 
-const std::unordered_map<masd::dogen::coding::meta_model::name, masd::dogen::coding::meta_model::origin_types>& endomodel::references() const {
+const std::unordered_map<masd::dogen::coding::meta_model::name, masd::dogen::coding::meta_model::origin_types>& model::references() const {
     return references_;
 }
 
-std::unordered_map<masd::dogen::coding::meta_model::name, masd::dogen::coding::meta_model::origin_types>& endomodel::references() {
+std::unordered_map<masd::dogen::coding::meta_model::name, masd::dogen::coding::meta_model::origin_types>& model::references() {
     return references_;
 }
 
-void endomodel::references(const std::unordered_map<masd::dogen::coding::meta_model::name, masd::dogen::coding::meta_model::origin_types>& v) {
+void model::references(const std::unordered_map<masd::dogen::coding::meta_model::name, masd::dogen::coding::meta_model::origin_types>& v) {
     references_ = v;
 }
 
-void endomodel::references(const std::unordered_map<masd::dogen::coding::meta_model::name, masd::dogen::coding::meta_model::origin_types>&& v) {
+void model::references(const std::unordered_map<masd::dogen::coding::meta_model::name, masd::dogen::coding::meta_model::origin_types>&& v) {
     references_ = std::move(v);
 }
 
-const std::unordered_set<masd::dogen::coding::meta_model::name>& endomodel::leaves() const {
+const std::unordered_set<masd::dogen::coding::meta_model::name>& model::leaves() const {
     return leaves_;
 }
 
-std::unordered_set<masd::dogen::coding::meta_model::name>& endomodel::leaves() {
+std::unordered_set<masd::dogen::coding::meta_model::name>& model::leaves() {
     return leaves_;
 }
 
-void endomodel::leaves(const std::unordered_set<masd::dogen::coding::meta_model::name>& v) {
+void model::leaves(const std::unordered_set<masd::dogen::coding::meta_model::name>& v) {
     leaves_ = v;
 }
 
-void endomodel::leaves(const std::unordered_set<masd::dogen::coding::meta_model::name>&& v) {
+void model::leaves(const std::unordered_set<masd::dogen::coding::meta_model::name>&& v) {
     leaves_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::module> >& endomodel::modules() const {
+const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::module> >& model::modules() const {
     return modules_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::module> >& endomodel::modules() {
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::module> >& model::modules() {
     return modules_;
 }
 
-void endomodel::modules(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::module> >& v) {
+void model::modules(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::module> >& v) {
     modules_ = v;
 }
 
-void endomodel::modules(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::module> >&& v) {
+void model::modules(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::module> >&& v) {
     modules_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object_template> >& endomodel::object_templates() const {
+const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object_template> >& model::object_templates() const {
     return object_templates_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object_template> >& endomodel::object_templates() {
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object_template> >& model::object_templates() {
     return object_templates_;
 }
 
-void endomodel::object_templates(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object_template> >& v) {
+void model::object_templates(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object_template> >& v) {
     object_templates_ = v;
 }
 
-void endomodel::object_templates(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object_template> >&& v) {
+void model::object_templates(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object_template> >&& v) {
     object_templates_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::builtin> >& endomodel::builtins() const {
+const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::builtin> >& model::builtins() const {
     return builtins_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::builtin> >& endomodel::builtins() {
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::builtin> >& model::builtins() {
     return builtins_;
 }
 
-void endomodel::builtins(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::builtin> >& v) {
+void model::builtins(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::builtin> >& v) {
     builtins_ = v;
 }
 
-void endomodel::builtins(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::builtin> >&& v) {
+void model::builtins(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::builtin> >&& v) {
     builtins_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::enumeration> >& endomodel::enumerations() const {
+const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::enumeration> >& model::enumerations() const {
     return enumerations_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::enumeration> >& endomodel::enumerations() {
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::enumeration> >& model::enumerations() {
     return enumerations_;
 }
 
-void endomodel::enumerations(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::enumeration> >& v) {
+void model::enumerations(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::enumeration> >& v) {
     enumerations_ = v;
 }
 
-void endomodel::enumerations(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::enumeration> >&& v) {
+void model::enumerations(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::enumeration> >&& v) {
     enumerations_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::primitive> >& endomodel::primitives() const {
+const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::primitive> >& model::primitives() const {
     return primitives_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::primitive> >& endomodel::primitives() {
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::primitive> >& model::primitives() {
     return primitives_;
 }
 
-void endomodel::primitives(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::primitive> >& v) {
+void model::primitives(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::primitive> >& v) {
     primitives_ = v;
 }
 
-void endomodel::primitives(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::primitive> >&& v) {
+void model::primitives(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::primitive> >&& v) {
     primitives_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object> >& endomodel::objects() const {
+const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object> >& model::objects() const {
     return objects_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object> >& endomodel::objects() {
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object> >& model::objects() {
     return objects_;
 }
 
-void endomodel::objects(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object> >& v) {
+void model::objects(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object> >& v) {
     objects_ = v;
 }
 
-void endomodel::objects(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object> >&& v) {
+void model::objects(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object> >&& v) {
     objects_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::exception> >& endomodel::exceptions() const {
+const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::exception> >& model::exceptions() const {
     return exceptions_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::exception> >& endomodel::exceptions() {
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::exception> >& model::exceptions() {
     return exceptions_;
 }
 
-void endomodel::exceptions(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::exception> >& v) {
+void model::exceptions(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::exception> >& v) {
     exceptions_ = v;
 }
 
-void endomodel::exceptions(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::exception> >&& v) {
+void model::exceptions(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::exception> >&& v) {
     exceptions_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::visitor> >& endomodel::visitors() const {
+const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::visitor> >& model::visitors() const {
     return visitors_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::visitor> >& endomodel::visitors() {
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::visitor> >& model::visitors() {
     return visitors_;
 }
 
-void endomodel::visitors(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::visitor> >& v) {
+void model::visitors(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::visitor> >& v) {
     visitors_ = v;
 }
 
-void endomodel::visitors(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::visitor> >&& v) {
+void model::visitors(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::visitor> >&& v) {
     visitors_ = std::move(v);
 }
 
-const boost::shared_ptr<masd::dogen::coding::meta_model::module>& endomodel::root_module() const {
+const boost::shared_ptr<masd::dogen::coding::meta_model::module>& model::root_module() const {
     return root_module_;
 }
 
-boost::shared_ptr<masd::dogen::coding::meta_model::module>& endomodel::root_module() {
+boost::shared_ptr<masd::dogen::coding::meta_model::module>& model::root_module() {
     return root_module_;
 }
 
-void endomodel::root_module(const boost::shared_ptr<masd::dogen::coding::meta_model::module>& v) {
+void model::root_module(const boost::shared_ptr<masd::dogen::coding::meta_model::module>& v) {
     root_module_ = v;
 }
 
-void endomodel::root_module(const boost::shared_ptr<masd::dogen::coding::meta_model::module>&& v) {
+void model::root_module(const boost::shared_ptr<masd::dogen::coding::meta_model::module>&& v) {
     root_module_ = std::move(v);
 }
 
-masd::dogen::coding::meta_model::languages endomodel::input_language() const {
+masd::dogen::coding::meta_model::languages model::input_language() const {
     return input_language_;
 }
 
-void endomodel::input_language(const masd::dogen::coding::meta_model::languages v) {
+void model::input_language(const masd::dogen::coding::meta_model::languages v) {
     input_language_ = v;
 }
 
-const std::list<masd::dogen::coding::meta_model::languages>& endomodel::output_languages() const {
+const std::list<masd::dogen::coding::meta_model::languages>& model::output_languages() const {
     return output_languages_;
 }
 
-std::list<masd::dogen::coding::meta_model::languages>& endomodel::output_languages() {
+std::list<masd::dogen::coding::meta_model::languages>& model::output_languages() {
     return output_languages_;
 }
 
-void endomodel::output_languages(const std::list<masd::dogen::coding::meta_model::languages>& v) {
+void model::output_languages(const std::list<masd::dogen::coding::meta_model::languages>& v) {
     output_languages_ = v;
 }
 
-void endomodel::output_languages(const std::list<masd::dogen::coding::meta_model::languages>&& v) {
+void model::output_languages(const std::list<masd::dogen::coding::meta_model::languages>&& v) {
     output_languages_ = std::move(v);
 }
 
-const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& endomodel::orm_properties() const {
+const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& model::orm_properties() const {
     return orm_properties_;
 }
 
-boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& endomodel::orm_properties() {
+boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& model::orm_properties() {
     return orm_properties_;
 }
 
-void endomodel::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& v) {
+void model::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& v) {
     orm_properties_ = v;
 }
 
-void endomodel::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>&& v) {
+void model::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>&& v) {
     orm_properties_ = std::move(v);
 }
 
-const masd::dogen::coding::meta_model::extraction_properties& endomodel::extraction_properties() const {
+const masd::dogen::coding::meta_model::extraction_properties& model::extraction_properties() const {
     return extraction_properties_;
 }
 
-masd::dogen::coding::meta_model::extraction_properties& endomodel::extraction_properties() {
+masd::dogen::coding::meta_model::extraction_properties& model::extraction_properties() {
     return extraction_properties_;
 }
 
-void endomodel::extraction_properties(const masd::dogen::coding::meta_model::extraction_properties& v) {
+void model::extraction_properties(const masd::dogen::coding::meta_model::extraction_properties& v) {
     extraction_properties_ = v;
 }
 
-void endomodel::extraction_properties(const masd::dogen::coding::meta_model::extraction_properties&& v) {
+void model::extraction_properties(const masd::dogen::coding::meta_model::extraction_properties&& v) {
     extraction_properties_ = std::move(v);
 }
 

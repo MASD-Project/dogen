@@ -21,11 +21,11 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/io/meta_model/module_io.hpp"
 #include "masd.dogen.coding/io/meta_model/object_io.hpp"
 #include "masd.dogen.coding/io/meta_model/builtin_io.hpp"
 #include "masd.dogen.coding/io/meta_model/visitor_io.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
 #include "masd.dogen.coding/io/meta_model/exception_io.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.coding/io/meta_model/primitive_io.hpp"
@@ -378,9 +378,9 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dog
 
 namespace masd::dogen::coding::meta_model {
 
-std::ostream& operator<<(std::ostream& s, const endomodel& v) {
+std::ostream& operator<<(std::ostream& s, const model& v) {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::endomodel\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::model\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"origin_type\": " << v.origin_type() << ", "

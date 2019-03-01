@@ -48,7 +48,7 @@ namespace masd::dogen::orchestration::transforms {
  *
  * Collectively, all implicit and explicit models are referred to as
  * the @e input models. The input models read the front-end are
- * converted into the middle end representation - endomodels. They are
+ * converted into the middle end representation - models. They are
  * then merged it into a single, unified Yarn model, called the @e
  * merged model; all dependencies are resolved and validated.
  *

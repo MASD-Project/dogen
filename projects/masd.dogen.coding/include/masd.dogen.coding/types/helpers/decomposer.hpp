@@ -37,7 +37,7 @@
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
 #include "masd.dogen.coding/types/meta_model/attribute.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/helpers/decomposition_result.hpp"
 
 namespace masd::dogen::coding::helpers {
@@ -83,7 +83,7 @@ private:
 
 public:
     static decomposition_result
-    decompose(const meta_model::endomodel& em);
+    decompose(const meta_model::model& em);
 
 private:
     decomposition_result result_;

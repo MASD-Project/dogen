@@ -18,21 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_IO_META_MODEL_ENDOMODEL_IO_HPP
-#define MASD_DOGEN_CODING_IO_META_MODEL_ENDOMODEL_IO_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_ENDOMODEL_GENERATION_CHAIN_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_ENDOMODEL_GENERATION_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
-namespace masd::dogen::coding::meta_model {
+namespace masd::dogen::coding::transforms {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const masd::dogen::coding::meta_model::endomodel& v);
+/**
+ * @brief The model generation chain is a top-level transformation
+ * responsible for obtaining a set of models to which all the
+ * internal transforms have been applied.
+ */
+class model_generation_chain final {
+public:
+    static std::list<meta_model::model> transform(const context& ctx);
+};
 
 }
 

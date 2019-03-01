@@ -23,12 +23,12 @@
 #include "masd.dogen.utility/types/test/asserter.hpp"
 #include "masd.dogen.utility/types/test/logging.hpp"
 #include "masd.dogen.utility/types/test/exception_checkers.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/io/meta_model/object_io.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/test/mock_context_factory.hpp"
-#include "masd.dogen.coding/test/mock_endomodel_factory.hpp"
+#include "masd.dogen.coding/test/mock_model_factory.hpp"
 #include "masd.dogen.coding/types/transforms/associations_transform.hpp"
 
 namespace {
@@ -37,7 +37,7 @@ const std::string test_module("masd.dogen.coding.tests");
 const std::string test_suite("associations_transform_tests");
 const std::string object_not_found("Object not found in");
 
-using masd::dogen::coding::test::mock_endomodel_factory;
+using masd::dogen::coding::test::mock_model_factory;
 
 /* @note tagging should make no difference to tests, and not having tags
  * makes the model dumps easier to understand.
@@ -45,11 +45,11 @@ using masd::dogen::coding::test::mock_endomodel_factory;
  * However, strictly speaking, tagging happens before transform so it
  * would be more truthful to use a tagged model in the tests.
  */
-const mock_endomodel_factory::flags flags(
+const mock_model_factory::flags flags(
     false/*tagged*/, false/*merged*/, false/*resolved*/,
     true/*object_templates_indexed*/, true/*attributes_indexed*/,
     false/*associations_indexed*/, true/*types parsed*/);
-const mock_endomodel_factory factory(flags);
+const mock_model_factory factory(flags);
 
 }
 
@@ -58,9 +58,9 @@ using masd::dogen::utility::test::asserter;
 using masd::dogen::coding::meta_model::origin_types;
 using masd::dogen::coding::transforms::associations_transform;
 using object_types =
-    masd::dogen::coding::test::mock_endomodel_factory::object_types;
+    masd::dogen::coding::test::mock_model_factory::object_types;
 using attribute_types =
-    masd::dogen::coding::test::mock_endomodel_factory::attribute_types;
+    masd::dogen::coding::test::mock_model_factory::attribute_types;
 using masd::dogen::coding::test::mock_context_factory;
 
 BOOST_AUTO_TEST_SUITE(associations_transform_tests)

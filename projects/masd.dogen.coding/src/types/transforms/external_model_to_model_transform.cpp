@@ -39,7 +39,7 @@
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/io/meta_model/location_io.hpp"
 #include "masd.dogen.injection/io/meta_model/model_io.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
 #include "masd.dogen.coding/io/helpers/stereotypes_conversion_result_io.hpp"
 #include "masd.dogen.coding/types/helpers/name_builder.hpp"
@@ -48,12 +48,12 @@
 #include "masd.dogen.coding/types/helpers/stereotypes_helper.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
-#include "masd.dogen.coding/types/transforms/external_model_to_endomodel_transform.hpp"
+#include "masd.dogen.coding/types/transforms/external_model_to_model_transform.hpp"
 
 namespace {
 
 const std::string transform_id(
-    "masd.transforms.external_model_to_endomodel_transform");
+    "masd.transforms.external_model_to_model_transform");
 
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -86,9 +86,9 @@ insert(const boost::shared_ptr<Element>& e,
 }
 
 std::ostream& operator<<(std::ostream& s,
-    const external_model_to_endomodel_transform::type_group& v) {
+    const external_model_to_model_transform::type_group& v) {
     s << " { "
-      << "\"__type__\": " << "\"coding::external_model_to_endomodel_transform::"
+      << "\"__type__\": " << "\"coding::external_model_to_model_transform::"
       << "type_group\"" << ", "
       << "\"external_modules\": " << v.external_modules << ", "
       << "\"model_modules\": " << v.model_modules
@@ -96,8 +96,8 @@ std::ostream& operator<<(std::ostream& s,
     return s;
 }
 
-external_model_to_endomodel_transform::type_group
-external_model_to_endomodel_transform::
+external_model_to_model_transform::type_group
+external_model_to_model_transform::
 make_type_group(const annotations::type_repository& atrp) {
     type_group r;
 
@@ -113,7 +113,7 @@ make_type_group(const annotations::type_repository& atrp) {
 }
 
 naming_configuration
-external_model_to_endomodel_transform::make_naming_configuration(
+external_model_to_model_transform::make_naming_configuration(
     const type_group& tg, const annotations::annotation& a) {
 
     const annotations::entry_selector s(a);
@@ -131,7 +131,7 @@ external_model_to_endomodel_transform::make_naming_configuration(
     return r;
 }
 
-meta_model::location external_model_to_endomodel_transform::
+meta_model::location external_model_to_model_transform::
 create_location(const naming_configuration& nc) {
     helpers::location_builder b;
     b.external_modules(nc.external_modules());
@@ -142,7 +142,7 @@ create_location(const naming_configuration& nc) {
     return r;
 }
 
-meta_model::static_stereotypes external_model_to_endomodel_transform::
+meta_model::static_stereotypes external_model_to_model_transform::
 compute_element_type(const std::list<meta_model::static_stereotypes>& st,
     const std::string& fallback_element_type) {
 
@@ -175,9 +175,9 @@ compute_element_type(const std::list<meta_model::static_stereotypes>& st,
     return h.from_string(fallback_element_type);
 }
 
-void external_model_to_endomodel_transform::
+void external_model_to_model_transform::
 process_element(const helpers::new_adapter& ad, const meta_model::location& l,
-    const injection::meta_model::element& e, meta_model::endomodel& em) {
+    const injection::meta_model::element& e, meta_model::model& em) {
 
     helpers::stereotypes_helper h;
     const auto scr(h.from_string(e.stereotypes()));
@@ -214,10 +214,10 @@ process_element(const helpers::new_adapter& ad, const meta_model::location& l,
     } }
 }
 
-meta_model::endomodel external_model_to_endomodel_transform::
+meta_model::model external_model_to_model_transform::
 transform(const context& ctx, const injection::meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
-        "external model to endomodel transform", transform_id, m.name(),
+        "external model to model transform", transform_id, m.name(),
         ctx.tracer(), m);
 
     helpers::stereotypes_helper h;
@@ -229,7 +229,7 @@ transform(const context& ctx, const injection::meta_model::model& m) {
     const auto nc(make_naming_configuration(tg, ra));
     const auto model_location(create_location(nc));
 
-    meta_model::endomodel r;
+    meta_model::model r;
     helpers::name_builder b(true/*model_name_mode*/);
     b.external_modules(model_location.external_modules());
     b.model_modules(model_location.model_modules());

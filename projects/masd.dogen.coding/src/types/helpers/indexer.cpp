@@ -34,7 +34,7 @@ auto lg(logger_factory("coding.helpers.indexer"));
 
 namespace masd::dogen::coding::helpers {
 
-indices indexer::index(meta_model::endomodel& m) {
+indices indexer::index(meta_model::model& m) {
     indices r;
 
     for (const auto& pair : m.builtins()) {

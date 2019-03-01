@@ -53,7 +53,7 @@ BOOST_AUTO_TEST_SUITE(io_tests)
 //     test_io<module_generator>();
 //     test_io<object_generator>();
 //     test_io<object_template_generator>();
-//     test_io<endomodel_generator>();
+//     test_io<model_generator>();
 // }
 
 BOOST_AUTO_TEST_SUITE_END()

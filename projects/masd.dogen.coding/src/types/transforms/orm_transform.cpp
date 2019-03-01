@@ -39,7 +39,7 @@
 #include "masd.dogen.coding/io/meta_model/orm_model_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_object_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_primitive_properties_io.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/orm_transform.hpp"
@@ -315,7 +315,7 @@ orm_transform::make_module_properties(const type_group& tg,
 }
 
 void orm_transform::
-transform_objects(const type_group& tg, meta_model::endomodel& em) {
+transform_objects(const type_group& tg, meta_model::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Started transforming objects.";
 
     boost::optional<meta_model::letter_cases> lc;
@@ -369,7 +369,7 @@ transform_objects(const type_group& tg, meta_model::endomodel& em) {
 }
 
 void orm_transform::
-transform_object_templates(const type_group& tg, meta_model::endomodel& em) {
+transform_object_templates(const type_group& tg, meta_model::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Started transforming object templates.";
 
     for (auto& pair : em.object_templates()) {
@@ -384,7 +384,7 @@ transform_object_templates(const type_group& tg, meta_model::endomodel& em) {
 }
 
 void orm_transform::transform_primitives(
-    const type_group& tg, meta_model::endomodel& em) {
+    const type_group& tg, meta_model::model& em) {
 
     BOOST_LOG_SEV(lg, debug) << "Started transforming primitives.";
 
@@ -424,7 +424,7 @@ void orm_transform::transform_primitives(
 }
 
 void orm_transform::
-transform_modules(const type_group& tg, meta_model::endomodel& em) {
+transform_modules(const type_group& tg, meta_model::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Started transforming modules.";
 
     for (auto& pair : em.modules()) {
@@ -491,7 +491,7 @@ transform_modules(const type_group& tg, meta_model::endomodel& em) {
 }
 
 void orm_transform::
-transform(const context& ctx, meta_model::endomodel& em) {
+transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "orm transform",
         transform_id, em.name().id(), ctx.tracer(), em);
 

@@ -29,7 +29,7 @@
 #include <functional>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.annotations/types/annotation.hpp"
 
 namespace masd::dogen::coding::test {
@@ -37,7 +37,7 @@ namespace masd::dogen::coding::test {
 /**
  * @brief Generates mock intermediate models.
  */
-class mock_endomodel_factory {
+class mock_model_factory {
 public:
     /**
      * @brief Types of objects supported by the factory.
@@ -161,7 +161,7 @@ public:
      * @brief Initialises a new mock factory at a given stage in the
      * coding pipeline, as given by the flags supplied.
      */
-    explicit mock_endomodel_factory(const flags& f,
+    explicit mock_model_factory(const flags& f,
         annotation_function_type fn = annotation_function_type());
 
 public:
@@ -241,7 +241,7 @@ public:
      * @brief If required, adds a module for the model.
      */
     void handle_model_module(const bool add_model_module,
-        meta_model::endomodel& m) const;
+        meta_model::model& m) const;
 
 public:
     /**
@@ -324,7 +324,7 @@ public:
     /**
      * @brief Builds a model with no elements.
      */
-    meta_model::endomodel make_empty_model(
+    meta_model::model make_empty_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0, const bool add_model_module = false) const;
 
@@ -332,7 +332,7 @@ public:
      * @brief Builds a model with a name derived from n, containing a
      * single type with a name also deriving from n.
      */
-    meta_model::endomodel make_single_type_model(
+    meta_model::model make_single_type_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
         const object_types objt = object_types::value_object,
@@ -342,7 +342,7 @@ public:
      * @brief Builds a model with a name derived from n, containing a
      * single type with a name also deriving from n, inside mod_n modules.
      */
-    meta_model::endomodel make_single_type_model_in_module(
+    meta_model::model make_single_type_model_in_module(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
         const object_types objt = object_types::value_object,
@@ -353,7 +353,7 @@ public:
      * @brief Builds a model with a name derived from n, and a number
      * of types determined by type_n, inside mod_n module.
      */
-    meta_model::endomodel make_multi_type_model(
+    meta_model::model make_multi_type_model(
         const unsigned int n,
         const unsigned int type_n,
         const meta_model::origin_types ot = meta_model::origin_types::target,
@@ -366,7 +366,7 @@ public:
      * @brief Builds a model with an object template, and an object
      * that instantiates it.
      */
-    meta_model::endomodel make_single_object_template_model(
+    meta_model::model make_single_object_template_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
@@ -376,14 +376,14 @@ public:
      * another object template, and two types that instantiate each
      * object template.
      */
-    meta_model::endomodel make_first_degree_object_templates_model(
+    meta_model::model make_first_degree_object_templates_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Same as first degree but with 2 levels of inheritance.
      */
-    meta_model::endomodel make_second_degree_object_templates_model(
+    meta_model::model make_second_degree_object_templates_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0, const bool add_model_module = false) const;
 
@@ -391,7 +391,7 @@ public:
      * @brief Builds a model with two base object templates and an
      * object template that inherits from both.
      */
-    meta_model::endomodel make_multiple_inheritance_object_templates_model(
+    meta_model::model make_multiple_inheritance_object_templates_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
@@ -402,7 +402,7 @@ public:
      * refines both of these. Finally, an object that instantiates the
      * last object template.
      */
-    meta_model::endomodel make_diamond_inheritance_object_templates_model(
+    meta_model::model make_diamond_inheritance_object_templates_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
@@ -411,7 +411,7 @@ public:
      * @brief Builds a model with a child object with a parent that
      * instantiates an object template.
      */
-    meta_model::endomodel
+    meta_model::model
     make_object_with_parent_that_instantiates_object_template(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
@@ -422,7 +422,7 @@ public:
      * instantiates an object template, which inherits from another
      * object template.
      */
-    meta_model::endomodel
+    meta_model::model
     make_object_with_parent_that_instantiates_a_child_object_template(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
@@ -432,7 +432,7 @@ public:
      * @brief Builds a model with an object template that inherits
      * from a non-existing object template.
      */
-    meta_model::endomodel
+    meta_model::model
     make_object_template_that_inherits_missing_object_template(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
@@ -442,7 +442,7 @@ public:
      * @brief Builds a model with an object that instantiates a
      * non-existing object template.
      */
-    meta_model::endomodel make_object_that_instantiates_missing_object_template(
+    meta_model::model make_object_that_instantiates_missing_object_template(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
@@ -451,7 +451,7 @@ public:
      * @brief Object that instantiates object template with missing
      * parent.
      */
-    meta_model::endomodel
+    meta_model::model
     make_object_that_instantiates_object_template_with_missing_parent(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
@@ -462,7 +462,7 @@ public:
      * @brief Scenario: object that exercises both weak and regular
      * associations.
      */
-    meta_model::endomodel
+    meta_model::model
     object_with_both_transparent_and_opaque_associations(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool add_model_module = false) const;
@@ -471,7 +471,7 @@ public:
      * @brief Scenario: object with single attribute of a type existent in
      * current model.
      */
-    meta_model::endomodel object_with_attribute(
+    meta_model::model object_with_attribute(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const object_types objt = object_types::value_object,
         const attribute_types pt = attribute_types::value_object,
@@ -481,21 +481,21 @@ public:
      * @brief Scenario: object with single attribute of a type existent in
      * a second model.
      */
-    std::array<meta_model::endomodel, 2>
+    std::array<meta_model::model, 2>
     object_with_attribute_type_in_different_model(
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with attribute of missing type.
      */
-    meta_model::endomodel object_with_missing_attribute_type(
+    meta_model::model object_with_missing_attribute_type(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with parent in current model.
      */
-    meta_model::endomodel object_with_parent_in_the_same_model(
+    meta_model::model object_with_parent_in_the_same_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool has_attribute = false,
         const bool add_model_module = false) const;
@@ -503,21 +503,21 @@ public:
     /**
      * @brief Scenario: object with missing parent in current model.
      */
-    meta_model::endomodel object_with_missing_parent_in_the_same_model(
+    meta_model::model object_with_missing_parent_in_the_same_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with a parent in a second model.
      */
-    std::array<meta_model::endomodel, 2>
+    std::array<meta_model::model, 2>
     object_with_parent_in_different_models(
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with three children.
      */
-    meta_model::endomodel object_with_three_children_in_same_model(
+    meta_model::model object_with_three_children_in_same_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool add_model_module = false) const;
 
@@ -525,7 +525,7 @@ public:
      * @brief Scenario: object with three levels deep in inheritance tree
      * in current model.
      */
-    meta_model::endomodel
+    meta_model::model
     object_with_third_degree_parent_in_same_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool has_attribute = false,
@@ -535,7 +535,7 @@ public:
      * @brief Scenario: object with three levels deep in inheritance tree
      * has missing parent.
      */
-    meta_model::endomodel object_with_third_degree_parent_missing(
+    meta_model::model object_with_third_degree_parent_missing(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool add_model_module = false) const;
 
@@ -543,7 +543,7 @@ public:
      * @brief Scenario: object three levels deep in inheritance tree,
      * with parents in different models.
      */
-    std::array<meta_model::endomodel, 4>
+    std::array<meta_model::model, 4>
     object_with_third_degree_parent_in_different_models(
         const bool add_model_module = false) const;
 
@@ -552,7 +552,7 @@ public:
      * with parents in different models and a missing top-level
      * parent.
      */
-    std::array<meta_model::endomodel, 4>
+    std::array<meta_model::model, 4>
     object_with_missing_third_degree_parent_in_different_models(
         const bool add_model_module = false) const;
 
@@ -564,7 +564,7 @@ public:
      * @param repeat_group if true, adds two instances of the group,
      * otherwise just one.
      */
-    meta_model::endomodel
+    meta_model::model
     object_with_group_of_attributes_of_different_types(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool repeat_group = false,

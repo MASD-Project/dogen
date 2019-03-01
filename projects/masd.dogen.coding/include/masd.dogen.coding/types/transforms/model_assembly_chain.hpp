@@ -18,30 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_ENDOMODEL_GENERATION_CHAIN_HPP
-#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_ENDOMODEL_GENERATION_CHAIN_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_ENDOMODEL_ASSEMBLY_CHAIN_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_ENDOMODEL_ASSEMBLY_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <list>
-#include <iosfwd>
-#include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::coding::transforms {
 
 /**
- * @brief The endomodel generation chain is a top-level transformation
- * responsible for obtaining a set of endomodels to which all the
- * internal transforms have been applied.
+ * @brief Merges target and references and post-processes the result.
  */
-class endomodel_generation_chain final {
+class model_assembly_chain final {
 public:
-    static std::list<meta_model::endomodel> transform(const context& ctx);
+    static meta_model::model transform(const context& ctx,
+        const meta_model::languages l,
+        const meta_model::model& target,
+        const std::list<meta_model::model>& refs);
 };
 
 }

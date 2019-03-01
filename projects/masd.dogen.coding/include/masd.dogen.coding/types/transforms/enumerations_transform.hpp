@@ -32,7 +32,7 @@
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/languages.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::coding::transforms {
@@ -78,7 +78,7 @@ private:
 
 private:
     static meta_model::name obtain_enumeration_default_underlying_element_name(
-        const meta_model::endomodel& em);
+        const meta_model::model& em);
     static std::string obtain_invalid_enumerator_simple_name(
         const meta_model::languages l);
     static meta_model::enumerator make_invalid_enumerator(
@@ -91,7 +91,7 @@ private:
         const meta_model::languages l, meta_model::enumeration& e);
 
 public:
-    static void transform(const context& ctx, meta_model::endomodel& em);
+    static void transform(const context& ctx, meta_model::model& em);
 };
 
 }

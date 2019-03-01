@@ -29,7 +29,7 @@
 #include <string>
 #include <unordered_map>
 #include "masd.dogen.coding/types/meta_model/languages.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 
 namespace masd::dogen::coding::transforms {
@@ -60,13 +60,13 @@ namespace masd::dogen::coding::transforms {
  */
 class merge_transform final {
 private:
-    static void merge(const meta_model::endomodel& src,
-        meta_model::endomodel& dst);
+    static void merge(const meta_model::model& src,
+        meta_model::model& dst);
 
 public:
-    static meta_model::endomodel transform(const context& ctx,
-        const meta_model::endomodel& target,
-        const std::list<meta_model::endomodel>& refs);
+    static meta_model::model transform(const context& ctx,
+        const meta_model::model& target,
+        const std::list<meta_model::model>& refs);
 };
 
 }

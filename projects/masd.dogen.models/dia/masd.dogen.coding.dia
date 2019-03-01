@@ -817,7 +817,7 @@ supported languages.#</dia:string>
 
 Coding is a meta-model that provides a programming-language-neutral
 type representation, designed for code generation. There are two core
-types in coding: @e endomodel and @e model. Intermediate models are
+types in coding: @e model and @e model. Intermediate models are
 obtained via @frontends and post-processed until they form a cohesive
 whole. They are then transformed into a final model representation, at
 which point they are suitable for code generation.
@@ -4755,7 +4755,7 @@ meta-types (object templates) and non-types (modules and backend specific entiti
         <dia:real val="14.800000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#endomodel#</dia:string>
+        <dia:string>#model#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#Nameable, MetaNameable, DeterminableOrigin#</dia:string>
@@ -4853,7 +4853,7 @@ meta-types (object templates) and non-types (modules and backend specific entiti
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#All other intermediate models that this endomodel depends on, mapped to their
+            <dia:string>#All other intermediate models that this model depends on, mapped to their
 origin.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -4877,7 +4877,7 @@ origin.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#All leaf types in this endomodel.
+            <dia:string>#All leaf types in this model.
 
 Leaves are types concrete types which have a parent.#</dia:string>
           </dia:attribute>
@@ -4902,7 +4902,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Modules contained in the endomodel.#</dia:string>
+            <dia:string>#Modules contained in the model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4925,7 +4925,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#All the object templates available in this endomodel.#</dia:string>
+            <dia:string>#All the object templates available in this model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4948,7 +4948,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#All built-ins contained in this endomodel.#</dia:string>
+            <dia:string>#All built-ins contained in this model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4971,7 +4971,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#All enumerations contained in this endomodel.#</dia:string>
+            <dia:string>#All enumerations contained in this model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4994,7 +4994,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#All primitives in this endomodel.#</dia:string>
+            <dia:string>#All primitives in this model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5017,7 +5017,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#All objects contained in this endomodel.#</dia:string>
+            <dia:string>#All objects contained in this model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5040,7 +5040,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#All exceptions in this endomodel.#</dia:string>
+            <dia:string>#All exceptions in this model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5063,7 +5063,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#All visitors in this endomodel.#</dia:string>
+            <dia:string>#All visitors in this model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5109,7 +5109,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Language in which this endomodel was written.#</dia:string>
+            <dia:string>#Language in which this model was written.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -11309,7 +11309,7 @@ model.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#endomodel#</dia:string>
+            <dia:string>#model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -11373,7 +11373,7 @@ model.#</dia:string>
         <dia:real val="5.2000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#endomodel_pre_processing_chain#</dia:string>
+        <dia:string>#model_pre_processing_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>
@@ -11512,7 +11512,7 @@ model.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#endomodel&amp;#</dia:string>
+                <dia:string>#model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11594,7 +11594,7 @@ model.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#endomodel&amp;#</dia:string>
+                <dia:string>#model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11704,7 +11704,7 @@ model.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#endomodel_generation_chain#</dia:string>
+        <dia:string>#model_generation_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>
@@ -11960,7 +11960,7 @@ model.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;meta_model::endomodel&gt;#</dia:string>
+            <dia:string>#std::list&lt;meta_model::model&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -12003,7 +12003,7 @@ model.#</dia:string>
                 <dia:string>#target#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#const meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -12113,7 +12113,7 @@ model.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#endomodel_assembly_chain#</dia:string>
+        <dia:string>#model_assembly_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>
@@ -12209,7 +12209,7 @@ model.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#endomodel#</dia:string>
+            <dia:string>#model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -12269,7 +12269,7 @@ model.#</dia:string>
                 <dia:string>#ems#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::list&lt;meta_model::endomodel&gt;&amp;#</dia:string>
+                <dia:string>#const std::list&lt;meta_model::model&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -12451,7 +12451,7 @@ model.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#endomodel_post_processing_chain#</dia:string>
+        <dia:string>#model_post_processing_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>
@@ -12590,7 +12590,7 @@ model.#</dia:string>
                 <dia:string>#em#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -12724,7 +12724,7 @@ model.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::endomodel#</dia:string>
+            <dia:string>#meta_model::model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -12750,7 +12750,7 @@ model.#</dia:string>
                 <dia:string>#ems#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::list&lt;meta_model::endomodel&gt;&amp;#</dia:string>
+                <dia:string>#const std::list&lt;meta_model::model&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -12982,7 +12982,7 @@ model.#</dia:string>
                 <dia:string>#em#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13159,7 +13159,7 @@ model.#</dia:string>
                 <dia:string>#em#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13336,7 +13336,7 @@ model.#</dia:string>
                 <dia:string>#em#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13729,7 +13729,7 @@ model.#</dia:string>
                 <dia:string>#em#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13978,7 +13978,7 @@ model.#</dia:string>
                 <dia:string>#em#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14227,7 +14227,7 @@ model.#</dia:string>
                 <dia:string>#em#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14602,7 +14602,7 @@ model.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#endomodel&amp;#</dia:string>
+                <dia:string>#model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14779,7 +14779,7 @@ model.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#endomodel&amp;#</dia:string>
+                <dia:string>#model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14956,7 +14956,7 @@ model.#</dia:string>
                 <dia:string>#em#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -15133,7 +15133,7 @@ model.#</dia:string>
                 <dia:string>#em#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -15310,7 +15310,7 @@ model.#</dia:string>
                 <dia:string>#em#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -15487,7 +15487,7 @@ model.#</dia:string>
                 <dia:string>#em#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -15664,7 +15664,7 @@ model.#</dia:string>
                 <dia:string>#em#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -15841,7 +15841,7 @@ model.#</dia:string>
                 <dia:string>#em#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -16417,7 +16417,7 @@ model.#</dia:string>
                 <dia:string>#em#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -16891,7 +16891,7 @@ model.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const endomodel&amp;#</dia:string>
+                <dia:string>#const model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -17001,7 +17001,7 @@ model.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#endomodel_post_processing_validator#</dia:string>
+        <dia:string>#model_post_processing_validator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>
@@ -17123,7 +17123,7 @@ model.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const endomodel&amp;#</dia:string>
+                <dia:string>#const model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -17416,7 +17416,7 @@ model.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#endomodel_pre_processing_validator#</dia:string>
+        <dia:string>#model_pre_processing_validator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>
@@ -17538,7 +17538,7 @@ model.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const endomodel&amp;#</dia:string>
+                <dia:string>#const model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -18108,7 +18108,7 @@ model.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const endomodel&amp;#</dia:string>
+                <dia:string>#const model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -18484,7 +18484,7 @@ model.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const endomodel&amp;#</dia:string>
+                <dia:string>#const model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -18600,7 +18600,7 @@ model.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#endomodel&amp;#</dia:string>
+                <dia:string>#model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -19104,7 +19104,7 @@ model.#</dia:string>
                 <dia:string>#target#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const endomodel&amp;#</dia:string>
+                <dia:string>#const model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -19457,7 +19457,7 @@ model.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const endomodel&amp;#</dia:string>
+                <dia:string>#const model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -21969,7 +21969,7 @@ another.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#const endomodel&amp;#</dia:string>
+            <dia:string>#const model&amp;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -22012,7 +22012,7 @@ another.#</dia:string>
                 <dia:string>#src#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#const meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -26990,7 +26990,7 @@ Temporary data structure used to build trees of names.#</dia:string>
                 <dia:string>#em#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -27118,7 +27118,7 @@ Temporary data structure used to build trees of names.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#make_endomodel_name#</dia:string>
+            <dia:string>#make_model_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -28181,7 +28181,7 @@ Temporary data structure used to build trees of names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O205">
       <dia:attribute name="name">
-        <dia:string>#converts and exomodel into an endomodel using &gt;#</dia:string>
+        <dia:string>#converts and exomodel into an model using &gt;#</dia:string>
       </dia:attribute>
       <dia:attribute name="direction">
         <dia:enum val="1"/>
@@ -28253,7 +28253,7 @@ Temporary data structure used to build trees of names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O206">
       <dia:attribute name="name">
-        <dia:string>#&lt; converts and exomodel into an endomodel using#</dia:string>
+        <dia:string>#&lt; converts and exomodel into an model using#</dia:string>
       </dia:attribute>
       <dia:attribute name="direction">
         <dia:enum val="1"/>
@@ -30919,7 +30919,7 @@ defined stereotypes.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#external_model_to_endomodel_transform#</dia:string>
+        <dia:string>#external_model_to_model_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>
@@ -31532,7 +31532,7 @@ Only applicable when deleting extra files.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

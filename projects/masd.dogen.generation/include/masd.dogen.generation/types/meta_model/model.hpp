@@ -101,7 +101,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All leaf types in this endomodel.
+     * @brief All leaf types in this model.
      *
      * Leaves are types concrete types which have a parent.
      */

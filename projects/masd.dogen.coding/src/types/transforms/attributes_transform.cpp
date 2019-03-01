@@ -29,7 +29,7 @@
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
 #include "masd.dogen.coding/types/transforms/attributes_transform.hpp"
@@ -52,7 +52,7 @@ const std::string object_template_not_found(
 namespace masd::dogen::coding::transforms {
 
 meta_model::object& attributes_transform::
-find_object(const meta_model::name& n, meta_model::endomodel& em) {
+find_object(const meta_model::name& n, meta_model::model& em) {
     const auto id(n.id());
     auto i(em.objects().find(id));
     if (i == em.objects().end()) {
@@ -63,7 +63,7 @@ find_object(const meta_model::name& n, meta_model::endomodel& em) {
 }
 
 meta_model::object_template& attributes_transform::
-find_object_template(const meta_model::name& n, meta_model::endomodel& em) {
+find_object_template(const meta_model::name& n, meta_model::model& em) {
     const auto& id(n.id());
     auto i(em.object_templates().find(id));
     if (i == em.object_templates().end()) {
@@ -75,7 +75,7 @@ find_object_template(const meta_model::name& n, meta_model::endomodel& em) {
 }
 
 void attributes_transform::expand_object(meta_model::object& o,
-    meta_model::endomodel& em, std::unordered_set<std::string>& processed_ids) {
+    meta_model::model& em, std::unordered_set<std::string>& processed_ids) {
     const auto id(o.name().id());
     BOOST_LOG_SEV(lg, debug) << "Expanding object: " << id;
 
@@ -169,7 +169,7 @@ void attributes_transform::expand_object(meta_model::object& o,
     processed_ids.insert(id);
 }
 
-void attributes_transform::expand_objects(meta_model::endomodel& em) {
+void attributes_transform::expand_objects(meta_model::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Expanding objects: " << em.objects().size();
 
     std::unordered_set<std::string> processed_ids;
@@ -180,7 +180,7 @@ void attributes_transform::expand_objects(meta_model::endomodel& em) {
 }
 
 void attributes_transform::expand_object_template(
-    meta_model::object_template& ot, meta_model::endomodel& em,
+    meta_model::object_template& ot, meta_model::model& em,
     std::unordered_set<std::string>& processed_ids) {
     const auto id(ot.name().id());
     BOOST_LOG_SEV(lg, debug) << "Expanding object template:" << id;
@@ -219,7 +219,7 @@ void attributes_transform::expand_object_template(
     processed_ids.insert(id);
 }
 
-void attributes_transform::expand_object_templates(meta_model::endomodel& em) {
+void attributes_transform::expand_object_templates(meta_model::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Expanding object templates: "
                              << em.object_templates().size();
 
@@ -231,7 +231,7 @@ void attributes_transform::expand_object_templates(meta_model::endomodel& em) {
 }
 
 void attributes_transform::
-transform(const context& ctx, meta_model::endomodel& em) {
+transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "attributes transform",
         transform_id, em.name().id(), ctx.tracer(), em);
 

@@ -18,30 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_ENDOMODEL_ASSEMBLY_CHAIN_HPP
-#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_ENDOMODEL_ASSEMBLY_CHAIN_HPP
+#ifndef MASD_DOGEN_CODING_IO_META_MODEL_MODEL_IO_HPP
+#define MASD_DOGEN_CODING_IO_META_MODEL_MODEL_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
-#include "masd.dogen.coding/types/transforms/context_fwd.hpp"
+#include <iosfwd>
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 
-namespace masd::dogen::coding::transforms {
+namespace masd::dogen::coding::meta_model {
 
-/**
- * @brief Merges target and references and post-processes the result.
- */
-class endomodel_assembly_chain final {
-public:
-    static meta_model::endomodel transform(const context& ctx,
-        const meta_model::languages l,
-        const meta_model::endomodel& target,
-        const std::list<meta_model::endomodel>& refs);
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const masd::dogen::coding::meta_model::model& v);
 
 }
 

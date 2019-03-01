@@ -27,7 +27,7 @@
 
 #include <string>
 #include "masd.dogen.coding/types/meta_model/name.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/helpers/indices.hpp"
 
@@ -36,7 +36,7 @@ namespace masd::dogen::coding::transforms {
 class resolver_transform final {
 public:
     static void transform(const context& ctx, const helpers::indices& idx,
-        meta_model::endomodel& em);
+        meta_model::model& em);
 };
 
 }

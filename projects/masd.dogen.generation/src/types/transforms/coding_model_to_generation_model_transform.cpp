@@ -33,7 +33,7 @@
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
 #include "masd.dogen.coding/types/meta_model/elements_traversal.hpp"
@@ -134,7 +134,7 @@ private:
 }
 
 std::size_t coding_model_to_generation_model_transform::
-compute_total_size(const coding::meta_model::endomodel& em) {
+compute_total_size(const coding::meta_model::model& em) {
     std::size_t r;
     r = em.modules().size();
     r += em.object_templates().size();
@@ -148,7 +148,7 @@ compute_total_size(const coding::meta_model::endomodel& em) {
 }
 
 meta_model::model coding_model_to_generation_model_transform::
-transform(const coding::meta_model::endomodel& m) {
+transform(const coding::meta_model::model& m) {
     meta_model::model r;
     r.name(m.name());
     r.meta_name(coding::helpers::meta_name_factory::make_model_name());
@@ -181,7 +181,7 @@ transform(const coding::meta_model::endomodel& m) {
 
 std::list<meta_model::model>
 coding_model_to_generation_model_transform::transform(const context& ctx,
-    const std::list<coding::meta_model::endomodel>& ms) {
+    const std::list<coding::meta_model::model>& ms) {
     tracing::scoped_transform_tracer stp(lg,
         "coding model to generation model transform",
         transform_id, ctx.tracer(), ms);

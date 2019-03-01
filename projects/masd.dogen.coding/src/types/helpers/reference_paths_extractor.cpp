@@ -128,7 +128,7 @@ obtain_paths_to_user_references(const transforms::context& ctx,
 
 std::list<boost::filesystem::path>
 reference_paths_extractor::extract(const transforms::context& ctx,
-    const meta_model::endomodel& target) {
+    const meta_model::model& target) {
     /*
      * Obtain the root annotation and read the requested user
      * references from it.

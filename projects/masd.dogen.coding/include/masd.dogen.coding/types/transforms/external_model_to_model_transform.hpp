@@ -37,13 +37,13 @@
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/location.hpp"
 #include "masd.dogen.coding/types/meta_model/attribute.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 #include "masd.dogen.coding/types/transforms/naming_configuration.hpp"
 
 namespace masd::dogen::coding::transforms {
 
-class external_model_to_endomodel_transform final {
+class external_model_to_model_transform final {
 private:
     struct type_group {
         annotations::type external_modules;
@@ -67,10 +67,10 @@ private:
 
     static void process_element(const helpers::new_adapter& ad,
         const meta_model::location& l,
-        const injection::meta_model::element& e, meta_model::endomodel& em);
+        const injection::meta_model::element& e, meta_model::model& em);
 
 public:
-    static meta_model::endomodel
+    static meta_model::model
     transform(const context& ctx, const injection::meta_model::model& m);
 };
 

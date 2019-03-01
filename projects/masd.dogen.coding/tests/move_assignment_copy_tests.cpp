@@ -53,7 +53,7 @@
 //     test_move_assignment_copy<module_generator>();
 //     test_move_assignment_copy<object_generator>();
 //     test_move_assignment_copy<object_template_generator>();
-//     test_move_assignment_copy<endomodel_generator>();
+//     test_move_assignment_copy<model_generator>();
 // }
 
 // BOOST_AUTO_TEST_SUITE_END()

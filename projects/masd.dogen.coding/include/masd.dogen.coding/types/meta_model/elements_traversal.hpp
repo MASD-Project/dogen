@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
@@ -43,7 +43,7 @@ namespace masd::dogen::coding::meta_model {
  */
 /**@{*/
 template<typename TraversalVisitor>
-inline void elements_traversal(const meta_model::endomodel& m,
+inline void elements_traversal(const meta_model::model& m,
     const TraversalVisitor& v) {
     for (const auto& pair : m.modules())
         v(*pair.second);
@@ -71,7 +71,7 @@ inline void elements_traversal(const meta_model::endomodel& m,
 }
 
 template<typename TraversalVisitor>
-inline void elements_traversal(const meta_model::endomodel& m,
+inline void elements_traversal(const meta_model::model& m,
     TraversalVisitor& v) {
     for (auto& pair : m.modules())
         v(*pair.second);
@@ -99,7 +99,7 @@ inline void elements_traversal(const meta_model::endomodel& m,
 }
 
 template<typename TraversalVisitor>
-inline void elements_traversal(meta_model::endomodel& m,
+inline void elements_traversal(meta_model::model& m,
     TraversalVisitor& v) {
     for (auto& pair : m.modules())
         v(*pair.second);
@@ -133,7 +133,7 @@ inline void elements_traversal(meta_model::endomodel& m,
  */
 /**@{*/
 template<typename TraversalVisitor>
-inline void shared_elements_traversal(const meta_model::endomodel& m,
+inline void shared_elements_traversal(const meta_model::model& m,
     const TraversalVisitor& v) {
     for (const auto& pair : m.modules())
         v(pair.second);
@@ -161,7 +161,7 @@ inline void shared_elements_traversal(const meta_model::endomodel& m,
 }
 
 template<typename TraversalVisitor>
-inline void shared_elements_traversal(const meta_model::endomodel& m,
+inline void shared_elements_traversal(const meta_model::model& m,
     TraversalVisitor& v) {
     for (auto& pair : m.modules())
         v(pair.second);
@@ -189,7 +189,7 @@ inline void shared_elements_traversal(const meta_model::endomodel& m,
 }
 
 template<typename TraversalVisitor>
-inline void shared_elements_traversal(meta_model::endomodel& m,
+inline void shared_elements_traversal(meta_model::model& m,
     TraversalVisitor& v) {
     for (auto& pair : m.modules())
         v(pair.second);

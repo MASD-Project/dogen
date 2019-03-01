@@ -22,12 +22,12 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/helpers/reference_paths_extractor.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/model_generation_chain.hpp"
-#include "masd.dogen.coding/types/transforms/external_model_to_endomodel_transform.hpp"
-#include "masd.dogen.coding/types/transforms/endomodel_pre_processing_chain.hpp"
+#include "masd.dogen.coding/types/transforms/external_model_to_model_transform.hpp"
+#include "masd.dogen.coding/types/transforms/model_pre_processing_chain.hpp"
 #include "masd.dogen.coding/types/transforms/references_chain.hpp"
 
 namespace {
@@ -44,7 +44,7 @@ const std::string non_absolute_target("Target path is not absolute: ");
 namespace masd::dogen::coding::transforms {
 
 std::unordered_set<meta_model::languages> references_chain::
-obtain_relevant_languages(const meta_model::endomodel& target) {
+obtain_relevant_languages(const meta_model::model& target) {
     std::unordered_set<meta_model::languages> r;
     r.insert(target.input_language());
 
@@ -54,8 +54,8 @@ obtain_relevant_languages(const meta_model::endomodel& target) {
     return r;
 }
 
-std::list<meta_model::endomodel> references_chain::
-transform(const context& ctx, const meta_model::endomodel& target) {
+std::list<meta_model::model> references_chain::
+transform(const context& ctx, const meta_model::model& target) {
     tracing::scoped_chain_tracer stp(lg, "references chain",
         transform_id, target.name().id(), ctx.tracer());
 
@@ -77,7 +77,7 @@ transform(const context& ctx, const meta_model::endomodel& target) {
      * Load each reference model from the references path, filter and
      * pre-process them.
      */
-    std::list<meta_model::endomodel> r;
+    std::list<meta_model::model> r;
     for (const auto& rp : rps) {
         /*
          * Obtain the reference model in the internal representation
@@ -91,7 +91,7 @@ transform(const context& ctx, const meta_model::endomodel& target) {
          * Convert the internal representation of the exogenous model into
          * an endogenous model, ready for further processing.
          */
-        auto m(external_model_to_endomodel_transform::transform(ctx, em));
+        auto m(external_model_to_model_transform::transform(ctx, em));
 
         /*
          * Apply all of the pre-processing transforms to the reference
@@ -111,7 +111,7 @@ transform(const context& ctx, const meta_model::endomodel& target) {
          * Given that the list of system models is very small at
          * present, we are ignoring these problems.
          */
-        if (endomodel_pre_processing_chain::try_transform(ctx, rl, m))
+        if (model_pre_processing_chain::try_transform(ctx, rl, m))
             r.push_back(m);
     }
 

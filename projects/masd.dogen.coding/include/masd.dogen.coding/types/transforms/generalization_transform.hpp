@@ -30,7 +30,7 @@
 #include "masd.dogen.annotations/types/type.hpp"
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 #include "masd.dogen.coding/types/helpers/indices.hpp"
 
@@ -50,21 +50,21 @@ private:
 private:
     static std::unordered_set<std::string>
     update_and_collect_parent_ids(const helpers::indices& idx,
-        meta_model::endomodel& em);
+        meta_model::model& em);
 
     static void populate_properties_up_the_generalization_tree(
         const type_group& tg, const meta_model::name& leaf,
-        meta_model::endomodel& em, meta_model::object& o);
+        meta_model::model& em, meta_model::object& o);
 
     static void populate_generalizable_properties(const type_group& tg,
         const std::unordered_set<std::string>& parent_ids,
-        meta_model::endomodel& em);
+        meta_model::model& em);
 
-    static void sort_leaves(meta_model::endomodel& em);
+    static void sort_leaves(meta_model::model& em);
 
 public:
     static void transform(const context& ctx, const helpers::indices& idx,
-        meta_model::endomodel& em);
+        meta_model::model& em);
 };
 
 }

@@ -53,8 +53,8 @@ namespace masd::dogen::coding::helpers {
 mapper::mapper(const mapping_set_repository& msrp)
     : mapping_set_repository_(msrp) { }
 
-meta_model::endomodel mapper::
-clone(const meta_model::endomodel& im) const {
+meta_model::model mapper::
+clone(const meta_model::model& im) const {
     auto r(im);
     r.modules(clone(im.modules()));
     r.object_templates(clone(im.object_templates()));
@@ -89,7 +89,7 @@ mapper::translations_for_language(const mapping_set& ms,
 std::unordered_map<std::string, meta_model::name>
 mapper::injections_for_language(const mapping_set& ms,
     const meta_model::languages l,
-    const meta_model::endomodel& im) const {
+    const meta_model::model& im) const {
 
     std::unordered_map<std::string, meta_model::name> r;
     const auto cpp(meta_model::languages::cpp);
@@ -124,7 +124,7 @@ mapper::injections_for_language(const mapping_set& ms,
 
 mapping_context mapper::create_mapping_context(const mapping_set& ms,
     const meta_model::languages from, const meta_model::languages to,
-    const meta_model::endomodel& im) const {
+    const meta_model::model& im) const {
     mapping_context r;
     r.translations(translations_for_language(ms, from, to));
     r.injections(injections_for_language(ms, to, im));
@@ -211,9 +211,9 @@ is_mappable(const meta_model::languages from, const meta_model::languages to) {
     return from == to || from == meta_model::languages::language_agnostic;
 }
 
-meta_model::endomodel
+meta_model::model
 mapper::map(const meta_model::languages from, const meta_model::languages to,
-    const meta_model::endomodel& im) const {
+    const meta_model::model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Started mapping. Model: " << im.name().id();
     BOOST_LOG_SEV(lg, debug) << "Mapping from: " << from << " to: " << to;
     if (from == to) {

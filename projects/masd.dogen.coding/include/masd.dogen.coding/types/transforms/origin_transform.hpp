@@ -27,7 +27,7 @@
 
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::coding::transforms {
@@ -41,13 +41,13 @@ private:
     static type_group make_type_group(const annotations::type_repository& atrp);
 
     static bool is_proxy_model(const type_group& tg,
-        const meta_model::endomodel& em);
+        const meta_model::model& em);
 
     static meta_model::origin_types compute_origin_types(
-        const meta_model::endomodel& em, const bool is_proxy_model);
+        const meta_model::model& em, const bool is_proxy_model);
 
 public:
-    static void transform(const context& ctx, meta_model::endomodel& em);
+    static void transform(const context& ctx, meta_model::model& em);
 };
 
 }

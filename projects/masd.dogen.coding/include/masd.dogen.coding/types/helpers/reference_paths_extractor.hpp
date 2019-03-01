@@ -31,7 +31,7 @@
 #include "masd.dogen.annotations/types/type.hpp"
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::coding::helpers {
@@ -62,7 +62,7 @@ private:
 public:
     static std::list<boost::filesystem::path>
     extract(const transforms::context& ctx,
-        const meta_model::endomodel& target);
+        const meta_model::model& target);
 };
 
 }

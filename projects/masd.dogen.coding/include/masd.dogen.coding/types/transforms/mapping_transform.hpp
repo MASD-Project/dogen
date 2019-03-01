@@ -26,7 +26,7 @@
 #endif
 
 #include "masd.dogen.coding/types/meta_model/languages.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::coding::transforms {
@@ -36,8 +36,8 @@ public:
     static bool is_mappable(const meta_model::languages from,
         const meta_model::languages to);
 
-    static meta_model::endomodel transform(const context& ctx,
-        const meta_model::endomodel& src, const meta_model::languages to);
+    static meta_model::model transform(const context& ctx,
+        const meta_model::model& src, const meta_model::languages to);
 };
 
 }

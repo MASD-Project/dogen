@@ -26,14 +26,14 @@
 #endif
 
 #include <unordered_set>
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/helpers/indices.hpp"
 
 namespace masd::dogen::coding::helpers {
 
 class indexer final {
 public:
-    static indices index(meta_model::endomodel& m);
+    static indices index(meta_model::model& m);
 };
 
 }

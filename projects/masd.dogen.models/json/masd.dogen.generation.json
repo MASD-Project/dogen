@@ -39,7 +39,7 @@
         {
           "name": "leaves",
           "type": "std::unordered_set<coding::meta_model::name>",
-          "documentation": "All leaf types in this endomodel.\n\nLeaves are types concrete types which have a parent.\n"
+          "documentation": "All leaf types in this model.\n\nLeaves are types concrete types which have a parent.\n"
         },
         {
           "name": "elements",

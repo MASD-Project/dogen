@@ -32,13 +32,13 @@
 #include <unordered_set>
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/languages.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/helpers/indices.hpp"
 #include "masd.dogen.coding/types/helpers/decomposition_result.hpp"
 
 namespace masd::dogen::coding::helpers {
 
-class endomodel_post_processing_validator final {
+class model_post_processing_validator final {
 private:
     static bool allow_spaces_in_built_in_types(const meta_model::languages l);
 
@@ -67,7 +67,7 @@ private:
         const std::list<std::pair<std::string, meta_model::name_tree>>& nts);
 
 public:
-    static void validate(const indices& idx, const meta_model::endomodel& im);
+    static void validate(const indices& idx, const meta_model::model& im);
 };
 
 }

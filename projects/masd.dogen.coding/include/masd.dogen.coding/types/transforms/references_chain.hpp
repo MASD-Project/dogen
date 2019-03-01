@@ -28,7 +28,7 @@
 #include <list>
 #include <unordered_set>
 #include "masd.dogen.coding/types/meta_model/languages.hpp"
-#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::coding::transforms {
@@ -36,11 +36,11 @@ namespace masd::dogen::coding::transforms {
 class references_chain final {
 private:
     static std::unordered_set<meta_model::languages>
-    obtain_relevant_languages(const meta_model::endomodel& target);
+    obtain_relevant_languages(const meta_model::model& target);
 
 public:
-    static std::list<meta_model::endomodel>
-    transform(const context& ctx, const meta_model::endomodel& target);
+    static std::list<meta_model::model>
+    transform(const context& ctx, const meta_model::model& target);
 };
 
 }

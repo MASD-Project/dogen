@@ -22,7 +22,7 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
-#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/transforms/merge_transform.hpp"
 
 namespace {
@@ -46,8 +46,8 @@ void copy(const ElementAssociativeContainer& src,
 
 namespace masd::dogen::coding::transforms {
 
-void merge_transform::merge(const meta_model::endomodel& src,
-    meta_model::endomodel& dst) {
+void merge_transform::merge(const meta_model::model& src,
+    meta_model::model& dst) {
 
     /*
      * Skip any reference models for which the input language does
@@ -92,10 +92,10 @@ void merge_transform::merge(const meta_model::endomodel& src,
     dst.references().insert(p);
 }
 
-meta_model::endomodel
+meta_model::model
 merge_transform::transform(const context& ctx,
-    const meta_model::endomodel& target,
-    const std::list<meta_model::endomodel>& refs) {
+    const meta_model::model& target,
+    const std::list<meta_model::model>& refs) {
     tracing::scoped_transform_tracer stp(lg, "merge transform",
         transform_id, target.name().id(), ctx.tracer());
 
