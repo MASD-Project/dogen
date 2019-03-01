@@ -26,7 +26,7 @@
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/model_production_chain.hpp"
-#include "masd.dogen.coding/types/transforms/external_model_to_model_transform.hpp"
+#include "masd.dogen.coding/types/transforms/injection_model_to_coding_model_transform.hpp"
 #include "masd.dogen.coding/types/transforms/model_pre_processing_chain.hpp"
 #include "masd.dogen.coding/types/transforms/references_chain.hpp"
 
@@ -91,7 +91,7 @@ transform(const context& ctx, const meta_model::model& target) {
          * Convert the internal representation of the exogenous model into
          * an endogenous model, ready for further processing.
          */
-        auto m(external_model_to_model_transform::transform(ctx, em));
+        auto m(injection_model_to_coding_model_transform::transform(ctx, em));
 
         /*
          * Apply all of the pre-processing transforms to the reference

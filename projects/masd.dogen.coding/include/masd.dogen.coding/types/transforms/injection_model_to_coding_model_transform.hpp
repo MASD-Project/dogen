@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_EXTERNAL_MODEL_TO_ENDOMODEL_TRANSFORM_HPP
-#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_EXTERNAL_MODEL_TO_ENDOMODEL_TRANSFORM_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_INJECTION_MODEL_TO_CODING_MODEL_TRANSFORM_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_INJECTION_MODEL_TO_CODING_MODEL_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -43,7 +43,7 @@
 
 namespace masd::dogen::coding::transforms {
 
-class external_model_to_model_transform final {
+class injection_model_to_coding_model_transform final {
 private:
     struct type_group {
         annotations::type external_modules;

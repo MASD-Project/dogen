@@ -38,7 +38,7 @@
 #include "masd.dogen.injection/types/transforms/model_to_model_chain.hpp"
 #include "masd.dogen.injection/types/transforms/references_transform.hpp"
 #include "masd.dogen.injection/types/transforms/transformation_error.hpp"
-#include "masd.dogen.injection/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.injection/types/transforms/model_production_chain.hpp"
 #include "masd.dogen.injection/types/transforms/model_set_production_chain.hpp"
 #include "masd.dogen.injection/types/transforms/decoding_transform_interface.hpp"
 #include "masd.dogen.injection/types/transforms/encoding_transform_interface.hpp"

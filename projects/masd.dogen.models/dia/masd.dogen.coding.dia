@@ -14071,13 +14071,13 @@ model.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O104">
       <dia:attribute name="obj_pos">
-        <dia:point val="-163,66"/>
+        <dia:point val="-155,66"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-163.05,65.95;-142.43,69.65"/>
+        <dia:rectangle val="-155.05,65.95;-134.43,69.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-163,66"/>
+        <dia:point val="-155,66"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.52"/>
@@ -14287,7 +14287,7 @@ model.#</dia:string>
         <dia:point val="-164.09,56.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-164.84,55.45;-152.54,66.8"/>
+        <dia:rectangle val="-164.84,55.45;-144.54,66.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14295,8 +14295,8 @@ model.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-164.09,56.2"/>
         <dia:point val="-164.09,62.3452"/>
-        <dia:point val="-152.74,62.3452"/>
-        <dia:point val="-152.74,66"/>
+        <dia:point val="-144.74,62.3452"/>
+        <dia:point val="-144.74,66"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -28218,7 +28218,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-222.865,54.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-223.615,53.85;-185.8,72.1928"/>
+        <dia:rectangle val="-223.615,53.85;-189.943,72.1928"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -28226,8 +28226,8 @@ Temporary data structure used to build trees of names.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-222.865,54.6"/>
         <dia:point val="-222.865,72.1428"/>
-        <dia:point val="-186,72.1428"/>
-        <dia:point val="-186,69"/>
+        <dia:point val="-190.143,72.1428"/>
+        <dia:point val="-190.143,69.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -28251,7 +28251,7 @@ Temporary data structure used to build trees of names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O206">
       <dia:attribute name="name">
-        <dia:string>#&lt; converts and model into an model using#</dia:string>
+        <dia:string>#&lt; converts an injection model into a coding model using#</dia:string>
       </dia:attribute>
       <dia:attribute name="direction">
         <dia:enum val="1"/>
@@ -28290,7 +28290,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-131,54.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-169.223,53.85;-130.25,72.1928"/>
+        <dia:rectangle val="-159.278,53.85;-130.25,72.1928"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -28298,8 +28298,8 @@ Temporary data structure used to build trees of names.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-131,54.6"/>
         <dia:point val="-131,72.1428"/>
-        <dia:point val="-169.173,72.1428"/>
-        <dia:point val="-169.173,69"/>
+        <dia:point val="-159.228,72.1428"/>
+        <dia:point val="-159.228,69.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -30902,22 +30902,22 @@ defined stereotypes.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O227">
       <dia:attribute name="obj_pos">
-        <dia:point val="-186,66"/>
+        <dia:point val="-190.143,66"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-186.05,65.95;-169.123,69.05"/>
+        <dia:rectangle val="-190.193,65.95;-159.178,69.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-186,66"/>
+        <dia:point val="-190.143,66"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.827500000000001"/>
+        <dia:real val="30.914999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#external_model_to_model_transform#</dia:string>
+        <dia:string>#injection_model_to_coding_model_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>
@@ -31004,7 +31004,73 @@ defined stereotypes.#</dia:string>
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes"/>
-      <dia:attribute name="operations"/>
+      <dia:attribute name="operations">
+        <dia:composite type="umloperation">
+          <dia:attribute name="name">
+            <dia:string>#transform#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="stereotype">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#meta_model::model#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="inheritance_type">
+            <dia:enum val="2"/>
+          </dia:attribute>
+          <dia:attribute name="query">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="parameters">
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
+                <dia:string>#ctx#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#context#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="1"/>
+              </dia:attribute>
+            </dia:composite>
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
+                <dia:string>#m#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#injection::meta_model::model#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="1"/>
+              </dia:attribute>
+            </dia:composite>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
       </dia:attribute>
@@ -31376,13 +31442,13 @@ Only applicable when deleting extra files.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O230">
       <dia:attribute name="obj_pos">
-        <dia:point val="-195,40"/>
+        <dia:point val="-194,40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-195.05,39.95;-174.045,43.65"/>
+        <dia:rectangle val="-194.05,39.95;-173.045,43.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-195,40"/>
+        <dia:point val="-194,40"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.905000000000001"/>
@@ -31592,7 +31658,7 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:point val="-177.045,51"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-183.828,43.55;-176.295,51.8"/>
+        <dia:rectangle val="-183.598,43.55;-176.295,51.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31600,8 +31666,8 @@ Only applicable when deleting extra files.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-177.045,51"/>
         <dia:point val="-177.045,47"/>
-        <dia:point val="-183.778,47"/>
-        <dia:point val="-183.778,43.6"/>
+        <dia:point val="-183.548,47"/>
+        <dia:point val="-183.548,43.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

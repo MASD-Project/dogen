@@ -25,7 +25,7 @@
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/model_production_chain.hpp"
-#include "masd.dogen.coding/types/transforms/external_model_to_model_transform.hpp"
+#include "masd.dogen.coding/types/transforms/injection_model_to_coding_model_transform.hpp"
 #include "masd.dogen.coding/types/transforms/model_pre_processing_chain.hpp"
 #include "masd.dogen.coding/types/transforms/initial_target_chain.hpp"
 
@@ -58,7 +58,7 @@ initial_target_chain::transform(const context& ctx) {
      * Then we convert the internal representation of the exogenous
      * model into an endogenous model, ready for further processing.
      */
-    auto r(external_model_to_model_transform::transform(ctx, m));
+    auto r(injection_model_to_coding_model_transform::transform(ctx, m));
 
     /*
      * Next, we set the origin of the target model to target so that
