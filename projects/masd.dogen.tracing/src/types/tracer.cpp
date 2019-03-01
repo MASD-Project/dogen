@@ -20,8 +20,10 @@
  */
 #include <sstream>
 #include <iomanip>
+#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/convenience.hpp>
+#include "masd.dogen/io/tracing_format_io.hpp"
 #include "masd.dogen/io/tracing_configuration_io.hpp"
 #include "masd.dogen.utility/types/io/optional_io.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
@@ -50,6 +52,8 @@ const std::string directory_missing("Tracing data directory must be supplied.");
 const std::string failed_delete("Failed to delete tracer data directory.");
 const std::string failed_create("Failed to create tracer data directory.");
 const std::string unexpected_empty("The stack must not be empty.");
+const std::string invalid_tracing_format(
+    "Invalid or unsupported tracing format: ");
 
 }
 
@@ -296,13 +300,30 @@ void tracer::end_tracing() const {
         return;
 
     const auto tm(builder_.build());
-    const bool uom(configuration_->format() == tracing_format::org_mode);
-    const bool dgis(configuration_->guids_enabled());
-    const auto s(metrics_printer::print(dgis, uom, tm));
+    const auto tf(configuration_->format());
+    const bool dg(!configuration_->guids_enabled());
+    const auto s(metrics_printer::print(dg, tf, tm));
     BOOST_LOG_SEV(lg, debug) << "Writing to tracing directory: '"
                              << tracing_directory_.generic_string() << "'";
-    const auto fn(uom ? "transform_stats.org" : "transform_stats.txt");
-    utility::filesystem::write(tracing_directory_ / fn, s);
+
+    boost::filesystem::path p(tracing_directory_);
+    const std::string fn("transform_stats");
+    switch(tf) {
+    case tracing_format::plain:
+        p /= fn + ".txt";
+        break;
+    case tracing_format::org_mode:
+        p /= fn + ".org";
+        break;
+    case tracing_format::graphviz:
+        p /= fn + ".dot";
+        break;
+    default: {
+        BOOST_LOG_SEV(lg, error) << invalid_tracing_format << tf;
+        BOOST_THROW_EXCEPTION(tracing_error(invalid_tracing_format +
+                boost::lexical_cast<std::string>(tf)));
+    } }
+    utility::filesystem::write(p, s);
 }
 
 }

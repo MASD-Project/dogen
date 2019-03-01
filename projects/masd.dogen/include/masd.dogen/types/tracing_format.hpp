@@ -32,8 +32,9 @@ namespace masd::dogen {
  */
 enum class tracing_format : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
-    org_mode = 1, ///< Emacs Org mode.
-    plain = 2 ///< Plain text format.
+    plain = 1, ///< Plain text format.
+    org_mode = 2, ///< Emacs Org mode.
+    graphviz = 3 ///< Dot notation for GraphViz
 };
 
 }

@@ -33,11 +33,14 @@ std::ostream& operator<<(std::ostream& s, const tracing_format& v) {
     case tracing_format::invalid:
         attr = "\"invalid\"";
         break;
+    case tracing_format::plain:
+        attr = "\"plain\"";
+        break;
     case tracing_format::org_mode:
         attr = "\"org_mode\"";
         break;
-    case tracing_format::plain:
-        attr = "\"plain\"";
+    case tracing_format::graphviz:
+        attr = "\"graphviz\"";
         break;
     default:
         throw std::invalid_argument("Invalid value for tracing_format");

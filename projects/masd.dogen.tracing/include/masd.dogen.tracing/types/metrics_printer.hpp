@@ -27,19 +27,30 @@
 
 #include <ostream>
 #include <boost/shared_ptr.hpp>
+#include "masd.dogen/types/tracing_format.hpp"
 #include "masd.dogen.tracing/types/metrics.hpp"
 
 namespace masd::dogen::tracing {
 
 class metrics_printer final {
 private:
-    static void print(std::ostream& o, unsigned int fill_level,
-        const bool disable_guids_in_stats, const bool use_org_mode,
+    static void print_plain(std::ostream& o, unsigned int fill_level,
+        const bool disable_guids, const boost::shared_ptr<const metrics> tm);
+
+    static void print_org_mode(std::ostream& o, unsigned int fill_level,
+        const bool disable_guids, const boost::shared_ptr<const metrics> tm);
+
+    static void print_graphviz(std::ostream& table_stream,
+        std::ostream& vertex_stream, const bool disable_guids,
+        const std::string& parent_id,
         const boost::shared_ptr<const metrics> tm);
+
+    static void print_graphviz(std::ostream& o,
+        const bool disable_guids, const boost::shared_ptr<const metrics> tm);
 
 public:
     static std::string
-    print(const bool disable_guids_in_stats, const bool use_org_mode,
+    print(const bool disable_guids, const tracing_format tf,
         const boost::shared_ptr<const metrics> tm);
 };
 

@@ -20,7 +20,12 @@
  */
 #include <sstream>
 #include <iomanip>
+#include <boost/lexical_cast.hpp>
+#include <boost/throw_exception.hpp>
+#include <boost/algorithm/string.hpp>
+#include "masd.dogen/io/tracing_format_io.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.tracing/types/tracing_error.hpp"
 #include "masd.dogen.tracing/types/metrics_printer.hpp"
 
 namespace {
@@ -32,45 +37,149 @@ const char org_mode_filler('*');
 const char txt_filler(' ');
 const unsigned int org_mode_fill_size(1);
 const unsigned int txt_fill_size(4);
+const std::string empty;
+
+const std::string invalid_tracing_format(
+    "Invalid or unsupported tracing format: ");
 
 }
 
 namespace masd::dogen::tracing {
 
-void metrics_printer::print(std::ostream& o, unsigned int fill_level,
-    const bool disable_guids_in_stats, const bool use_org_mode,
+void metrics_printer::print_plain(std::ostream& o, unsigned int fill_level,
+    const bool disable_guids,
     const boost::shared_ptr<const metrics> tm) {
 
-    BOOST_LOG_SEV(lg, debug) << "Fill level: " << fill_level;
-    auto elapsed (tm->end() - tm->start());
+    BOOST_LOG_SEV(lg, trace) << "Fill level: " << fill_level;
+    auto elapsed(tm->end() - tm->start());
 
-    if (use_org_mode) {
-        o << std::string(org_mode_fill_size * fill_level, org_mode_filler)
-          << " ";
-    } else
-        o << std::string(txt_fill_size * fill_level, txt_filler);
+    o << std::string(txt_fill_size * fill_level, txt_filler);
 
     o << tm->transform_id() << " (" << elapsed  << " ms)"
       << " [" << tm->model_id() << "]";
 
-    if (!disable_guids_in_stats)
+    if (!disable_guids)
         o << " [" << tm->guid() << "]";
 
     o << std::endl;
 
     ++fill_level;
     for(auto child : tm->children())
-        print(o, fill_level, disable_guids_in_stats, use_org_mode, child);
+        print_plain(o, fill_level, disable_guids, child);
+}
+
+void metrics_printer::print_org_mode(std::ostream& o, unsigned int fill_level,
+    const bool disable_guids,
+    const boost::shared_ptr<const metrics> tm) {
+
+    BOOST_LOG_SEV(lg, trace) << "Fill level: " << fill_level;
+    auto elapsed(tm->end() - tm->start());
+
+    o << std::string(org_mode_fill_size * fill_level, org_mode_filler)
+      << " ";
+
+    o << tm->transform_id() << " (" << elapsed  << " ms)"
+      << " [" << tm->model_id() << "]";
+
+    if (!disable_guids)
+        o << " [" << tm->guid() << "]";
+
+    o << std::endl;
+
+    ++fill_level;
+    for(auto child : tm->children())
+        print_org_mode(o, fill_level, disable_guids, child);
+}
+
+void metrics_printer::print_graphviz(std::ostream& table_stream,
+    std::ostream& vertex_stream, const bool disable_guids,
+    const std::string& parent_id, const boost::shared_ptr<const metrics> tm) {
+
+    auto elapsed(tm->end() - tm->start());
+
+    auto tid(tm->transform_id());
+    boost::replace_all(tid, ".", "_");
+
+    auto pid(parent_id);
+    boost::replace_all(pid, ".", "_");
+
+    auto mid(tm->model_id());
+    if (mid.empty())
+        mid = "empty";
+    else {
+        boost::replace_all(mid, "<", "");
+        boost::replace_all(mid, ">", "_");
+    }
+
+    std::string guid("GUID_");
+    guid += tm->guid();
+    boost::replace_all(guid, "-", "_");
+
+    table_stream << "  " << guid << " [ label=<" << std::endl
+                 << "  <table border=\"1\" cellborder=\"0\" cellspacing=\"1\">"
+                 << std::endl
+                 << "    <tr><td align=\"left\"><b>" << tm->transform_id()
+                 << " [" << mid << "]"
+                 << "</b></td></tr>"
+                 << std::endl
+                 << "    <tr><td align=\"left\">" << elapsed << "ms</td></tr>"
+                 << std::endl;
+
+    if (!disable_guids) {
+        table_stream << "    <tr><td align=\"left\"><font color=\"darkgreen\">"
+                     << tm->guid() << "</font></td></tr>" << std::endl;
+    }
+    table_stream << "  </table>>];" << std::endl<< std::endl;
+
+    if (!parent_id.empty())
+        vertex_stream << "  " << pid << " -> " << guid << std::endl;
+
+    for(auto child : tm->children())
+        print_graphviz(table_stream, vertex_stream, disable_guids,
+            guid, child);
+}
+
+void metrics_printer::print_graphviz(std::ostream& s,
+    const bool disable_guids,
+    const boost::shared_ptr<const metrics> tm) {
+
+    s << "digraph D {" << std::endl
+      << "  node [shape=plaintext fontname=\"Sans serif\" fontsize=\"8\"];"
+      << std::endl<< std::endl;
+
+    std::ostringstream table_stream;
+    std::ostringstream vertex_stream;
+    print_graphviz(table_stream, vertex_stream, disable_guids, empty, tm);
+
+    s << table_stream.str() << std::endl;
+    s << vertex_stream.str() << std::endl;
+    s << "}" << std::endl;
 }
 
 std::string metrics_printer::
-print(const bool disable_guids_in_stats, const bool use_org_mode,
+print(const bool disable_guids, const tracing_format tf,
     const boost::shared_ptr<const metrics> tm) {
     BOOST_LOG_SEV(lg, debug) << "Printing graph.";
 
-    unsigned int fill_level(use_org_mode ? 1 : 0);
     std::ostringstream s;
-    print(s, fill_level, disable_guids_in_stats, use_org_mode, tm);
+    switch(tf) {
+    case tracing_format::plain:
+        BOOST_LOG_SEV(lg, debug) << "Using plain format.";
+        print_plain(s, 0, disable_guids, tm);
+        break;
+    case tracing_format::org_mode:
+        BOOST_LOG_SEV(lg, debug) << "Using org-mode format.";
+        print_org_mode(s, 1, disable_guids, tm);
+        break;
+    case tracing_format::graphviz:
+        BOOST_LOG_SEV(lg, debug) << "Using graphviz format.";
+        print_graphviz(s, disable_guids, tm);
+        break;
+    default: {
+        BOOST_LOG_SEV(lg, error) << invalid_tracing_format << tf;
+        BOOST_THROW_EXCEPTION(tracing_error(invalid_tracing_format +
+                boost::lexical_cast<std::string>(tf)));
+    } }
     const auto r(s.str());
 
     BOOST_LOG_SEV(lg, debug) << "Finished printing graph.";

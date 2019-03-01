@@ -72,8 +72,9 @@ const std::string tracing_level_detail("detail");
 const std::string tracing_level_summary("summary");
 const std::string tracing_guids_enabled_arg("tracing-guids-enabled");
 const std::string tracing_format_arg("tracing-format");
-const std::string tracing_format_org_mode("org-mode");
 const std::string tracing_format_plain("plain");
+const std::string tracing_format_org_mode("org-mode");
+const std::string tracing_format_graphviz("graphviz");
 const std::string tracing_output_directory_arg("tracing-output-directory");
 const std::string tracing_default_directory("tracing");
 
@@ -373,10 +374,12 @@ read_tracing_configuration(const variables_map& vm) {
     using masd::dogen::tracing_format;
     if (vm.count(tracing_format_arg)) {
         const auto s(vm[tracing_format_arg].as<std::string>());
-        if (s == tracing_format_org_mode)
-            r.format(tracing_format::org_mode);
-        else if (s == tracing_format_plain)
+        if (s == tracing_format_plain)
             r.format(tracing_format::plain);
+        else if (s == tracing_format_org_mode)
+            r.format(tracing_format::org_mode);
+        else if (s == tracing_format_graphviz)
+            r.format(tracing_format::graphviz);
         else
             BOOST_THROW_EXCEPTION(parser_exception(invalid_format + s));
     } else if (enabled)

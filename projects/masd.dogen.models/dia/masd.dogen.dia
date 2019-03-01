@@ -634,19 +634,19 @@ size limitations.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O3">
       <dia:attribute name="obj_pos">
-        <dia:point val="-6,-82"/>
+        <dia:point val="-5,-82"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-6.05,-82.05;2.635,-77.55"/>
+        <dia:rectangle val="-5.05,-82.05;3.635,-76.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-6,-82"/>
+        <dia:point val="-5,-82"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#tracing_format#</dia:string>
@@ -738,6 +738,29 @@ size limitations.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
+            <dia:string>#plain#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Plain text format.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
             <dia:string>#org_mode#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -761,7 +784,7 @@ size limitations.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#plain#</dia:string>
+            <dia:string>#graphviz#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -770,7 +793,7 @@ size limitations.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Plain text format.#</dia:string>
+            <dia:string>#Dot notation for GraphViz#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -901,7 +924,7 @@ size limitations.#</dia:string>
         <dia:point val="-4.72,-71"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-5.47,-77.65;-1.5075,-70.2"/>
+        <dia:rectangle val="-5.47,-76.85;-0.5075,-70.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -909,8 +932,8 @@ size limitations.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-4.72,-71"/>
         <dia:point val="-4.72,-75"/>
-        <dia:point val="-1.7075,-75"/>
-        <dia:point val="-1.7075,-77.6"/>
+        <dia:point val="-0.7075,-75"/>
+        <dia:point val="-0.7075,-76.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
