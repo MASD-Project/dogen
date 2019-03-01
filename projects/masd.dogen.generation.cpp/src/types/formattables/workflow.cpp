@@ -33,7 +33,7 @@ static logger lg(logger_factory("generation.cpp.formattables.workflow"));
 namespace masd::dogen::generation::cpp::formattables {
 
 model workflow::make_model(const formatters::repository& frp,
-    const coding::meta_model::model& m) const {
+    const generation::meta_model::model& m) const {
     adapter a;
     return a.adapt(frp, m);
 }
@@ -41,9 +41,10 @@ model workflow::make_model(const formatters::repository& frp,
 void workflow::expand_model(
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
-    const std::unordered_set<coding::meta_model::element_archetype>&
+    const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element,
-    const formatters::repository& frp, const locator& l, model& fm) const {
+    const formatters::repository& frp, const locator& l,
+    model& fm) const {
     model_expander ex;
     ex.expand(atrp, ra, enabled_archetype_for_element, frp, l, fm);
 }
@@ -52,7 +53,7 @@ model workflow::execute(
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
     const locator& l, const formatters::repository& frp,
-    const coding::meta_model::model& m) const {
+    const generation::meta_model::model& m) const {
 
     auto r(make_model(frp, m));
     expand_model(atrp, ra, m.enabled_archetype_for_element(), frp, l, r);

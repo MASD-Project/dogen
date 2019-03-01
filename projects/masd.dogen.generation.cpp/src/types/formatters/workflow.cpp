@@ -69,7 +69,8 @@ const coding::meta_model::artefact_properties& workflow::get_artefact_properties
 }
 
 std::list<extraction::meta_model::artefact>
-workflow::format(const std::unordered_set<coding::meta_model::element_archetype>&
+workflow::format(
+    const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element, const formattables::model& fm,
     const coding::meta_model::element& e,
     const formattables::element_properties& ep) const {
@@ -140,7 +141,7 @@ workflow::format(const std::unordered_set<coding::meta_model::element_archetype>
 }
 
 std::list<extraction::meta_model::artefact> workflow::
-execute(const std::unordered_set<coding::meta_model::element_archetype>&
+execute(const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element, const formattables::model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started formatting. Model " << fm.name().id();
     std::list<extraction::meta_model::artefact> r;

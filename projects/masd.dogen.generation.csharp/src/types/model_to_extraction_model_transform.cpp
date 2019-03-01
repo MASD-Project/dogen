@@ -51,7 +51,7 @@ model_to_extraction_model_transform::create_formattables_model(
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
     const formatters::repository& frp, const formattables::locator& l,
-    const coding::meta_model::model& m) const {
+    const generation::meta_model::model& m) const {
     formattables::workflow fw;
     return fw.execute(atrp, ra, frp, l, m);
 }
@@ -102,25 +102,28 @@ model_to_extraction_model_transform::language() const {
 }
 
 std::unordered_map<std::string,
-                   coding::meta_model::intra_backend_segment_properties>
+                   generation::meta_model::intra_backend_segment_properties>
 model_to_extraction_model_transform::intra_backend_segment_properties(
     const coding::transforms::options& /*o*/) const {
     using namespace coding::meta_model;
-    class intra_backend_segment_properties project;
+    generation::meta_model::intra_backend_segment_properties project;
+
+    using generation::meta_model::path_contribution_types;
     project.internal_modules(path_contribution_types::as_folders);
     project.facet(path_contribution_types::as_folders);
 
-    std::unordered_map<std::string,
-                       coding::meta_model::intra_backend_segment_properties> r;
+    std::unordered_map<
+        std::string,
+        generation::meta_model::intra_backend_segment_properties> r;
     r["project"] = project;
     return r;
 }
 
 extraction::meta_model::model
 model_to_extraction_model_transform::transform(
-    const coding::transforms::context& ctx,
+    const generation::transforms::context& ctx,
     const bool enable_backend_directories,
-    const coding::meta_model::model& m) const {
+    const generation::meta_model::model& m) const {
     tracing::scoped_transform_tracer stp(lg,
         "C# model to text transform", transform_id, m.name().id(),
         ctx.tracer());
@@ -133,7 +136,7 @@ model_to_extraction_model_transform::transform(
     const auto mn(m.name());
     const auto& ra(m.root_module()->annotation());
     const auto& atrp(ctx.type_repository());
-    const auto odp(ctx.transform_options().output_directory_path());
+    const auto odp(ctx.output_directory_path());
     const auto& frp(formatters::workflow::registrar().formatter_repository());
     const bool ekd(enable_backend_directories);
     const formattables::locator l(odp, atrp, frp, ra, mn, m.module_ids(), ekd);

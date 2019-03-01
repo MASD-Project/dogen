@@ -27,8 +27,8 @@
 
 #include <list>
 #include <boost/shared_ptr.hpp>
-#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/registrar_fwd.hpp"
 
 namespace masd::dogen::generation::cpp::fabric {
@@ -40,7 +40,7 @@ private:
 
 public:
     std::list<boost::shared_ptr<coding::meta_model::element>>
-    make(const coding::meta_model::model& m) const;
+    make(const generation::meta_model::model& m) const;
 };
 
 }

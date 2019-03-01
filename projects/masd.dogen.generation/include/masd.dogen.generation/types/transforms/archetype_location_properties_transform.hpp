@@ -29,10 +29,10 @@
 #include <boost/optional.hpp>
 #include "masd.dogen.annotations/types/archetype_location_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/types/meta_model/element_archetype.hpp"
-#include "masd.dogen.coding/types/meta_model/backend_properties.hpp"
-#include "masd.dogen.coding/types/meta_model/facet_properties.hpp"
-#include "masd.dogen.coding/types/meta_model/archetype_properties.hpp"
+#include "masd.dogen.generation/types/meta_model/element_archetype.hpp"
+#include "masd.dogen.generation/types/meta_model/backend_properties.hpp"
+#include "masd.dogen.generation/types/meta_model/facet_properties.hpp"
+#include "masd.dogen.generation/types/meta_model/archetype_properties.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 

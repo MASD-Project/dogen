@@ -27,10 +27,10 @@
 
 #include <string>
 #include <unordered_map>
-#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_database_systems.hpp"
 #include "masd.dogen.coding/types/meta_model/letter_cases.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_model_properties.hpp"
+#include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/formattable.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/model.hpp"
@@ -58,7 +58,7 @@ public:
      * @brief Given a yarn model, produces the corresponding formattables.
      */
     model adapt(const formatters::repository& frp,
-        const coding::meta_model::model& m) const;
+        const generation::meta_model::model& m) const;
 };
 
 }

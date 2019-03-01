@@ -32,12 +32,11 @@
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.annotations/types/archetype_locations_group.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository_parts.hpp"
-#include "masd.dogen.coding/types/meta_model/model.hpp"
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
-#include "masd.dogen.coding/types/meta_model/model.hpp"
-#include "masd.dogen.coding/types/meta_model/intra_backend_segment_properties.hpp"
 #include "masd.dogen.coding/types/transforms/options.hpp"
-#include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.generation/types/meta_model/intra_backend_segment_properties.hpp"
+#include "masd.dogen.generation/types/transforms/context.hpp"
+#include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.extraction/types/meta_model/model.hpp"
 
 namespace masd::dogen::generation::transforms {
@@ -101,7 +100,7 @@ public:
      */
     virtual std::unordered_map<
         std::string,
-        coding::meta_model::intra_backend_segment_properties>
+        generation::meta_model::intra_backend_segment_properties>
     intra_backend_segment_properties(
         const coding::transforms::options& o) const = 0;
 
@@ -110,9 +109,9 @@ public:
      * transform.
      */
     virtual extraction::meta_model::model
-    transform(const coding::transforms::context& ctx,
+    transform(const generation::transforms::context& ctx,
         const bool requires_backend_directory,
-        const coding::meta_model::model& m) const = 0;
+        const generation::meta_model::model& m) const = 0;
 };
 
 }

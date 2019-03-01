@@ -19,13 +19,13 @@
  *
  */
 #include "masd.dogen.generation.cpp/types/fabric/dynamic_transform.hpp"
-#include "masd.dogen.coding/types/transforms/dynamic_transforms_chain.hpp"
+#include "masd.dogen.generation/types/transforms/dynamic_transforms_chain.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/initializer.hpp"
 
 namespace masd::dogen::generation::cpp::fabric {
 
 void initializer::initialize() {
-    coding::transforms::register_dynamic_transform<dynamic_transform>();
+    generation::transforms::register_dynamic_transform<dynamic_transform>();
 }
 
 }

@@ -33,7 +33,6 @@
 #include "masd.dogen.annotations/types/archetype_location_repository.hpp"
 #include "masd.dogen.extraction/types/repository.hpp"
 #include "masd.dogen.tracing/types/tracer.hpp"
-#include "masd.dogen.coding/types/meta_model/intra_backend_segment_properties.hpp"
 #include "masd.dogen.coding/types/transforms/options.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository.hpp"
 
@@ -60,10 +59,7 @@ public:
         const annotations::type_repository& atrp,
         const helpers::mapping_set_repository& msrp,
         const masd::dogen::extraction::repository& frp,
-        const tracing::tracer& tracer,
-        const std::unordered_map<std::string,
-        meta_model::intra_backend_segment_properties>&
-        intra_backend_segment_properties);
+        const tracing::tracer& tracer);
     ~context();
 
 public:
@@ -112,13 +108,6 @@ public:
      */
     const tracing::tracer& tracer() const;
 
-    /**
-     * @brief Returns all intra-backend segment properties.
-     */
-    const std::unordered_map<std::string,
-                             meta_model::intra_backend_segment_properties>&
-    intra_backend_segment_properties() const;
-
 private:
     const std::vector<boost::filesystem::path> data_directories_;
     const transforms::options options_;
@@ -129,9 +118,6 @@ private:
     const helpers::mapping_set_repository mapping_repository_;
     const masd::dogen::extraction::repository formatting_repository_;
     const tracing::tracer tracer_;
-    const std::unordered_map<std::string,
-                             meta_model::intra_backend_segment_properties>
-    intra_backend_segment_properties_;
 };
 
 }

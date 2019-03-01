@@ -47,11 +47,12 @@ namespace masd::dogen::orchestration {
 using generation::transforms::model_to_extraction_model_transform_registrar;
 
 std::unordered_map<std::string,
-                   coding::meta_model::intra_backend_segment_properties>
+                   generation::meta_model::intra_backend_segment_properties>
 create_intra_backend_segment_properties(const coding::transforms::options& o,
     const model_to_extraction_model_transform_registrar& rg) {
-    std::unordered_map<std::string,
-                       coding::meta_model::intra_backend_segment_properties> r;
+    std::unordered_map<
+        std::string,
+        generation::meta_model::intra_backend_segment_properties> r;
 
     /*
      * Obtain the intra-backend segment properties of each registered
@@ -142,7 +143,7 @@ make_coding_context(const coding::transforms::options& o,
     rg.validate();
 
     const auto alrp(create_archetype_location_repository(rg));
-    const auto ibsp(create_intra_backend_segment_properties(o, rg));
+    // const auto ibsp(create_intra_backend_segment_properties(o, rg));
 
     /*
      * Obtain all the data structures required to make a context, and
@@ -163,7 +164,7 @@ make_coding_context(const coding::transforms::options& o,
     tracing::tracer tracer(alrp, atrp, o.probe_directory(), o.tracing());
 
     using coding::transforms::context;
-    const context r(data_dirs, o, alrp, atrp, msrp, frp, tracer, ibsp);
+    const context r(data_dirs, o, alrp, atrp, msrp, frp, tracer);
     return r;
 }
 

@@ -90,7 +90,7 @@ private:
 
 void decoration_expander::
 expand(const dogen::extraction::decoration_properties_factory& dpf,
-    coding::meta_model::model& m) const {
+    generation::meta_model::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Populating decoration properties.";
 

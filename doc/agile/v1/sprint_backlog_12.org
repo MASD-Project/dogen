@@ -12,18 +12,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-28 Thu 14:02]
-| <75>                                                |        |      |      |       |
-| Headline                                            | Time   |      |      |     % |
-|-----------------------------------------------------+--------+------+------+-------|
-| *Total time*                                        | *5:50* |      |      | 100.0 |
-|-----------------------------------------------------+--------+------+------+-------|
-| Stories                                             | 5:50   |      |      | 100.0 |
-| Active                                              |        | 5:50 |      | 100.0 |
-| Edit release notes for previous sprint              |        |      | 1:27 |  24.9 |
-| Sprint and product backlog grooming                 |        |      | 0:18 |   5.1 |
-| Implement text model generation chain in generation |        |      | 3:45 |  64.3 |
-| Try to fix valgrind warning on =find_files=         |        |      | 0:20 |   5.7 |
+#+CAPTION: Clock summary at [2019-03-01 Fri 09:13]
+| <75>                                                |         |       |      |       |
+| Headline                                            | Time    |       |      |     % |
+|-----------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                        | *10:12* |       |      | 100.0 |
+|-----------------------------------------------------+---------+-------+------+-------|
+| Stories                                             | 10:12   |       |      | 100.0 |
+| Active                                              |         | 10:12 |      | 100.0 |
+| Edit release notes for previous sprint              |         |       | 1:27 |  14.2 |
+| Sprint and product backlog grooming                 |         |       | 0:18 |   2.9 |
+| Implement text model generation chain in generation |         |       | 3:45 |  36.8 |
+| Move generation model out of coding                 |         |       | 4:22 |  42.8 |
+| Try to fix valgrind warning on =find_files=         |         |       | 0:20 |   3.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -232,6 +233,23 @@ to the tracer. We then initialise the injection context with the
 tracer. A better approach would be to have a context factory that
 handles the tracer creation in injection.
 
+*** COMPLETED Move generation model out of coding                     :story:
+    CLOSED: [2019-03-01 Fri 09:13]
+    :LOGBOOK:
+    CLOCK: [2019-03-01 Fri 08:21]--[2019-03-01 Fri 09:13] =>  0:52
+    CLOCK: [2019-02-28 Thu 15:35]--[2019-02-28 Thu 17:34] =>  1:59
+    CLOCK: [2019-02-28 Thu 14:03]--[2019-02-28 Thu 15:34] =>  1:31
+    :END:
+
+- then copy the model from coding into generation and all associated
+  transforms.
+- then add support in each generation model (cpp, csharp) for
+  converting from the generation model to the formattables model.
+- then create a model generation chain that uses the generation model.
+- then delete the model and transforms from coding; delete the
+  adaptors from generation models (cpp, csharp).
+- then move the model to text model chain into generation.
+
 *** STARTED Try to fix valgrind warning on =find_files=               :story:
     :LOGBOOK:
     CLOCK: [2019-02-27 Wed 17:25]--[2019-02-27 Wed 17:45] =>  0:20
@@ -249,19 +267,32 @@ We seem to be doing something wrong with directory iterators:
 : ==7755==    by 0x6ADB4B: masd::dogen::coding::helpers::mapping_set_repository_factory::obtain_mappings[abi:cxx11](std::vector > const&) const (mapping_set_repository_factory.cpp:66)
 : ==7755==    by 0x6AF507: masd::dogen::coding::helpers::mapping_set_repository_factory::make(std::vector > const&) const (mapping_set_repository_factory.cpp:172)
 
-*** STARTED Move generation model out of coding                       :story:
-    :LOGBOOK:
-    CLOCK: [2019-02-28 Thu 14:03]--[2019-02-28 Thu 15:34] =>  1:31
-    :END:
+*** Consider adding a dot graph of the transforms to probing          :story:
 
-- then copy the model from coding into generation and all associated
-  transforms.
-- then add support in each generation model (cpp, csharp) for
-  converting from the generation model to the formattables model.
-- then create a model generation chain that uses the generation model.
-- then delete the model and transforms from coding; delete the
-  adaptors from generation models (cpp, csharp).
-- then move the model to text model chain into generation.
+At present it is very difficult to figure out the composition of the
+chains and transforms. It would be great if we could visualise them as
+a graph using dot/graphviz. The notation looks quite straightforward
+and since we've already built the graph in tracing, its probably just
+a case of transforming it.
+
+Links:
+
+- [[https://renenyffenegger.ch/notes/tools/Graphviz/examples/index][Graphviz (dot) examples]]
+
+*** Consider renaming log level =trace=                               :story:
+
+Its slightly confusing given that we also have =tracing=.
+
+*** Consider making =disabled= a trace/log level                      :story:
+
+At present we have two knobs to control tracing/logging:
+
+- enabled
+- level
+
+According to the rule of making invalid states unrepresentable, we
+should just have a log level of disabled, so that its not possible to
+set the trace/log level when logging is disabled.
 
 *** Throw on profiles that refer to invalid fields                    :story:
 

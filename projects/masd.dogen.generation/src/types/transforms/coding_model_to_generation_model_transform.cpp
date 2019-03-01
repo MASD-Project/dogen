@@ -44,7 +44,7 @@
 namespace {
 
 const std::string transform_id(
-    "generation.transforms.endomodel_to_model_transform");
+    "generation.transforms.coding_model_to_generation_model_transform");
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
@@ -75,22 +75,16 @@ private:
 
     void add(boost::shared_ptr<coding::meta_model::element> e) {
         /*
-         * We need to ensure that there aren't any duplicate element
-         * id's across all of the different containers. However, there
-         * is an exception: element extensions share the same id as
-         * the original element, so they are not considered
-         * duplicates. All other elements must have unique element
-         * ids.
+         * Element extensions share the same id as the original
+         * element, so they are not considered duplicates. All other
+         * elements must have unique element ids.
          */
         if (!e->is_element_extension()) {
             const auto id(e->name().id());
             ensure_not_yet_processed(id);
             processed_ids_.insert(id);
         }
-
-        /*meta_model::generatable_element ge;
-        ge.coding_element(e);
-        result_.elements().push_back(ge);*/
+        result_.elements().push_back(e);
     }
 
 public:
@@ -174,6 +168,7 @@ transform(const coding::meta_model::endomodel& m) {
     r.references(m.references());
     r.root_module(m.root_module());
     r.orm_properties(m.orm_properties());
+    r.extraction_properties(m.extraction_properties());
 
     const auto size(compute_total_size(m));
     r.elements().reserve(size);
@@ -184,10 +179,11 @@ transform(const coding::meta_model::endomodel& m) {
     return r;
 }
 
-std::list<meta_model::model> coding_model_to_generation_model_transform::
-transform(const context& ctx, const
-    std::list<coding::meta_model::endomodel>& ms) {
-    tracing::scoped_transform_tracer stp(lg, "endomodel to model transform",
+std::list<meta_model::model>
+coding_model_to_generation_model_transform::transform(const context& ctx,
+    const std::list<coding::meta_model::endomodel>& ms) {
+    tracing::scoped_transform_tracer stp(lg,
+        "coding model to generation model transform",
         transform_id, ctx.tracer(), ms);
 
     std::list<meta_model::model> r;

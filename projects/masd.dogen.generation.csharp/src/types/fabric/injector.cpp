@@ -41,39 +41,39 @@ injector::~injector() noexcept {}
 
 void injector::
 add_element(const boost::shared_ptr<coding::meta_model::element>& e,
-    coding::meta_model::model& m) const {
+    generation::meta_model::model& m) const {
     m.elements().push_back(e);
 }
 
 void injector::add_elements(
     const std::list<boost::shared_ptr<coding::meta_model::element>>& elements,
-    coding::meta_model::model& m) const {
+    generation::meta_model::model& m) const {
     for (auto& e : elements)
         add_element(e, m);
 }
 
 void injector::inject_visual_studio(const annotations::type_repository& atrp,
-    coding::meta_model::model& m) const {
+    generation::meta_model::model& m) const {
     visual_studio_factory f;
     const auto e(f.make(atrp, m));
     add_elements(e, m);
 }
 
 void injector::
-inject_assembly_info(coding::meta_model::model& m) const {
+inject_assembly_info(generation::meta_model::model& m) const {
     assembly_info_factory f;
     const auto e(f.make(m));
     add_element(e, m);
 }
 
-void injector::inject_assistant(coding::meta_model::model& m) const {
+void injector::inject_assistant(generation::meta_model::model& m) const {
     assistant_factory f;
     const auto e(f.make(m));
     add_element(e, m);
 }
 
 void injector::inject(const annotations::type_repository& atrp,
-    coding::meta_model::model& m) const {
+    generation::meta_model::model& m) const {
     inject_visual_studio(atrp, m);
     inject_assembly_info(m);
     inject_assistant(m);

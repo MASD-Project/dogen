@@ -31,7 +31,7 @@
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.generation/io/meta_model/model_io.hpp"
-#include "masd.dogen.coding/io/meta_model/element_archetype_io.hpp"
+#include "masd.dogen.generation/io/meta_model/element_archetype_io.hpp"
 #include "masd.dogen.generation/io/meta_model/backend_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/facet_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/archetype_properties_io.hpp"

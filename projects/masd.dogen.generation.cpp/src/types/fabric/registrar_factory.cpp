@@ -48,7 +48,7 @@ make(const coding::meta_model::name& model_name) const {
 }
 
 std::list<boost::shared_ptr<coding::meta_model::element>>
-registrar_factory::make(const coding::meta_model::model& m) const {
+registrar_factory::make(const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating registrars.";
 
     std::list<boost::shared_ptr<coding::meta_model::element>> r;

@@ -87,7 +87,7 @@ make_configuration(const annotations::type_repository& atrp,
 }
 
 std::string visual_studio_factory::
-obtain_project_name(const coding::meta_model::model& m) const {
+obtain_project_name(const generation::meta_model::model& m) const {
     coding::helpers::name_flattener nfl(false/*detect_model_name*/);
     const auto ns(nfl.flatten(m.name()));
 
@@ -99,7 +99,7 @@ obtain_project_name(const coding::meta_model::model& m) const {
 boost::shared_ptr<coding::meta_model::element> visual_studio_factory::
 make_solution(const visual_studio_configuration cfg,
     const std::string& project_name,
-    const coding::meta_model::model& m) const {
+    const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Visual Studio Solution.";
 
     coding::helpers::name_factory nf;
@@ -122,7 +122,7 @@ make_solution(const visual_studio_configuration cfg,
 boost::shared_ptr<coding::meta_model::element> visual_studio_factory::
 make_project(const visual_studio_configuration cfg,
     const std::string& project_name,
-    const coding::meta_model::model& m) const {
+    const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Visual Studio Project.";
 
     coding::helpers::name_factory nf;
@@ -141,9 +141,9 @@ make_project(const visual_studio_configuration cfg,
     return r;
 }
 
-std::list<boost::shared_ptr<coding::meta_model::element>> visual_studio_factory::
-make(const annotations::type_repository& atrp,
-    const coding::meta_model::model& m) const {
+std::list<boost::shared_ptr<coding::meta_model::element>>
+visual_studio_factory::make(const annotations::type_repository& atrp,
+    const generation::meta_model::model& m) const {
 
     const auto pn(obtain_project_name(m));
     const auto ra(m.root_module()->annotation());

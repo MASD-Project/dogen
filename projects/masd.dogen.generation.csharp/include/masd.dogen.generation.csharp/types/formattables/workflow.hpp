@@ -27,7 +27,7 @@
 
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/model.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/locator.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/repository.hpp"
@@ -41,7 +41,7 @@ private:
      * @brief Retrieves the ids of all the modules in the model.
      */
     model make_model(const formatters::repository& frp,
-        const coding::meta_model::model& m) const;
+        const generation::meta_model::model& m) const;
 
     void expand_model(
         const annotations::type_repository& atrp,
@@ -53,7 +53,7 @@ public:
         const annotations::type_repository& atrp,
         const annotations::annotation& ra,
         const formatters::repository& frp, const locator& l,
-        const coding::meta_model::model& m) const;
+        const generation::meta_model::model& m) const;
 };
 
 }

@@ -57,7 +57,7 @@ namespace masd::dogen::coding::helpers {
 using meta_model::static_stereotypes;
 
 static_stereotypes stereotypes_helper::from_string(const std::string& s) const {
-    BOOST_LOG_SEV(lg, error) << "Converting stereotype: " << s;
+    BOOST_LOG_SEV(lg, debug) << "Converting stereotype: " << s;
 
     if (s == stereotype_object)
         return static_stereotypes::object;

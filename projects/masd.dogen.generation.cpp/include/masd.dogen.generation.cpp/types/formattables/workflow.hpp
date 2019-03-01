@@ -29,8 +29,8 @@
 #include <unordered_set>
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.coding/types/meta_model/model.hpp"
-#include "masd.dogen.coding/types/meta_model/element_archetype.hpp"
+#include "masd.dogen.generation/types/meta_model/model.hpp"
+#include "masd.dogen.generation/types/meta_model/element_archetype.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/model.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/locator.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
@@ -41,21 +41,22 @@ namespace masd::dogen::generation::cpp::formattables {
 class workflow {
 private:
     model make_model(const formatters::repository& frp,
-        const coding::meta_model::model& m) const;
+        const generation::meta_model::model& m) const;
 
     void expand_model(
         const annotations::type_repository& atrp,
         const annotations::annotation& ra,
-        const std::unordered_set<coding::meta_model::element_archetype>&
+        const std::unordered_set<generation::meta_model::element_archetype>&
         enabled_archetype_for_element,
-        const formatters::repository& frp, const locator& l, model& fm) const;
+        const formatters::repository& frp, const locator& l,
+        model& fm) const;
 
 public:
     model execute(
         const annotations::type_repository& atrp,
         const annotations::annotation& ra,
         const locator& l, const formatters::repository& frp,
-        const coding::meta_model::model& m) const;
+        const generation::meta_model::model& m) const;
 };
 
 }

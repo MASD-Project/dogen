@@ -42,6 +42,7 @@ namespace masd::dogen::generation::transforms {
  * @brief Context for transformations.
  */
 class context final {
+public:
     context(
         const std::vector<boost::filesystem::path>& data_directories,
         const annotations::archetype_location_repository& alrp,
@@ -50,7 +51,8 @@ class context final {
         const tracing::tracer& tracer,
         const std::unordered_map<std::string,
         meta_model::intra_backend_segment_properties>&
-        intra_backend_segment_properties);
+        intra_backend_segment_properties,
+        boost::filesystem::path output_directory_path);
     ~context();
 
 public:
@@ -88,16 +90,20 @@ public:
                              meta_model::intra_backend_segment_properties>&
     intra_backend_segment_properties() const;
 
+    // FIXME: for now
+    boost::filesystem::path output_directory_path() const;
+
 private:
     const annotations::archetype_location_repository
     archetype_location_repository_;
     const annotations::type_repository type_repository_;
         const annotations::annotation_factory annotation_factory_;
     const masd::dogen::extraction::repository formatting_repository_;
-    const tracing::tracer tracer_;
+    const tracing::tracer& tracer_;
     const std::unordered_map<std::string,
                              meta_model::intra_backend_segment_properties>
     intra_backend_segment_properties_;
+    boost::filesystem::path output_directory_path_;
 };
 
 }

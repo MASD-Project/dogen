@@ -30,15 +30,18 @@ context::context(
     const tracing::tracer& tracer,
     const std::unordered_map<std::string,
     meta_model::intra_backend_segment_properties>&
-    intra_backend_segment_properties) :
+    intra_backend_segment_properties,
+    boost::filesystem::path output_directory_path) :
     archetype_location_repository_(alrp), type_repository_(atrp),
     annotation_factory_(data_directories, archetype_location_repository_,
         type_repository_, false/*options.compatibility_mode()*/),
     formatting_repository_(frp), tracer_(tracer),
-    intra_backend_segment_properties_(intra_backend_segment_properties) {}
+    intra_backend_segment_properties_(intra_backend_segment_properties),
+    output_directory_path_(output_directory_path) {}
 
 context::~context() {
-    tracer_.end_tracing();
+    // FIXME: hack
+    // tracer_.end_tracing();
 }
 
 const annotations::archetype_location_repository&
@@ -66,6 +69,10 @@ const std::unordered_map<std::string,
                          meta_model::intra_backend_segment_properties>&
 context::intra_backend_segment_properties() const {
     return intra_backend_segment_properties_;
+}
+
+boost::filesystem::path context::output_directory_path() const {
+    return output_directory_path_;
 }
 
 }

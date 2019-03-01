@@ -59,7 +59,7 @@ make(const coding::meta_model::name& n,
 }
 
 std::list<boost::shared_ptr<coding::meta_model::element>>
-odb_options_factory::make(const coding::meta_model::model& m) const {
+odb_options_factory::make(const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating ODB Options.";
 
     using coding::meta_model::origin_types;

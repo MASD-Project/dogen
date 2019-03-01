@@ -31,7 +31,7 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/element_archetype.hpp"
+#include "masd.dogen.generation/types/meta_model/element_archetype.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/directive_group.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/directive_group_repository.hpp"
 
@@ -45,7 +45,7 @@ class dependencies_builder {
 public:
     dependencies_builder(
         const directive_group_repository& dgrp,
-        const std::unordered_set<coding::meta_model::element_archetype>&
+        const std::unordered_set<generation::meta_model::element_archetype>&
         enabled_archetype_for_element);
 
 private:
@@ -103,7 +103,7 @@ public:
 private:
     const directive_group_repository& repository_;
     std::list<std::string> dependencies_;
-    const std::unordered_set<coding::meta_model::element_archetype>&
+    const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element_;
 };
 

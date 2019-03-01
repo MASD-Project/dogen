@@ -239,7 +239,7 @@ void inclusion_expander::populate_inclusion_dependencies(
 }
 
 void inclusion_expander::expand(const annotations::type_repository& atrp,
-    const std::unordered_set<coding::meta_model::element_archetype>&
+    const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element, const formatters::repository& frp,
     const locator& l, model& fm) const {
 

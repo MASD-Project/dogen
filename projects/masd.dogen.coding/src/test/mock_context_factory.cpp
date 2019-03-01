@@ -46,9 +46,6 @@ transforms::context mock_context_factory::make() {
     masd::dogen::coding::transforms::options o;
 
     annotations::archetype_location_repository alrp;
-    std::unordered_map<
-        std::string,
-        coding::meta_model::intra_backend_segment_properties> ibsp;
 
     /*
      * Obtain all the data structures required to make a context, and
@@ -68,8 +65,7 @@ transforms::context mock_context_factory::make() {
 
     tracing::tracer tracer(alrp, atrp, o.probe_directory(), o.tracing());
 
-    const transforms::context r(data_dirs, o, alrp, atrp, msrp, frp, tracer,
-        ibsp);
+    const transforms::context r(data_dirs, o, alrp, atrp, msrp, frp, tracer);
 
     BOOST_LOG_SEV(lg, debug) << "Created the context.";
     return r;

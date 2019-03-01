@@ -38,7 +38,7 @@ const std::string module_name("Properties");
 namespace masd::dogen::generation::csharp::fabric {
 
 boost::shared_ptr<coding::meta_model::element> assembly_info_factory::
-make(const coding::meta_model::model& m) const {
+make(const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Assembly Info.";
 
     coding::helpers::name_factory nf;

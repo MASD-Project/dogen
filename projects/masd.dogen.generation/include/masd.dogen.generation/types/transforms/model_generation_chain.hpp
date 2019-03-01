@@ -36,7 +36,7 @@ class model_generation_chain final {
 public:
     static std::list<meta_model::model>
     transform(const context& ctx,
-        const std::list<coding::meta_model::endomodel>& endomodels);
+        const std::list<coding::meta_model::endomodel>& ms);
 };
 
 }

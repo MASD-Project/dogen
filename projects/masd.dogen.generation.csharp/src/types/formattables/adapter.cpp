@@ -34,8 +34,9 @@ static logger lg(logger_factory("generation.csharp.formattables.adapter"));
 
 namespace masd::dogen::generation::csharp::formattables {
 
-std::unordered_map<std::string, formattable> adapter::adapt(
-    const formatters::repository& frp, const coding::meta_model::model& m) const {
+std::unordered_map<std::string, formattable>
+adapter::adapt(const formatters::repository& frp,
+    const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming yarn to formattables."
                              << " Elements in model: " << m.elements().size();
 

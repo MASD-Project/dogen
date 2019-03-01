@@ -22,6 +22,7 @@
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.extraction/io/meta_model/model_io.hpp"
 #include "masd.dogen.extraction/types/helpers/filesystem_writer.hpp"
 #include "masd.dogen.extraction/types/helpers/file_linter.hpp"
 #include "masd.dogen.orchestration/types/transforms/extraction_model_generation_chain.hpp"
@@ -29,8 +30,8 @@
 
 namespace {
 
-const std::string transform_id(
-    "masd.dogen.orchestration.code_generation_chain");
+const std::string
+transform_id("orchestration.transforms.code_generation_chain");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -76,7 +77,7 @@ void code_generation_chain::transform(const coding::transforms::context& ctx) {
         transform_id, model_name, ctx.tracer());
 
     /*
-     * Obtain the text models.
+     * Obtain the extraction models.
      */
     const auto m(extraction_model_generation_chain::transform(ctx));
 
@@ -89,6 +90,7 @@ void code_generation_chain::transform(const coding::transforms::context& ctx) {
      * Perform any housekeeping if need be.
      */
     lint(m);
+    stp.end_chain(m);
 
     BOOST_LOG_SEV(lg, info) << "Finished code generation.";
 }

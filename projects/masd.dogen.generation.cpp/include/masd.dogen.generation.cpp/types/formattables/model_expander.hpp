@@ -28,7 +28,7 @@
 #include <unordered_set>
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.coding/types/meta_model/element_archetype.hpp"
+#include "masd.dogen.generation/types/meta_model/element_archetype.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/locator.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/model.hpp"
@@ -45,7 +45,7 @@ private:
 
     void expand_inclusion(
         const annotations::type_repository& atrp,
-        const std::unordered_set<coding::meta_model::element_archetype>&
+        const std::unordered_set<generation::meta_model::element_archetype>&
         enabled_archetype_for_element,
         const formatters::repository& frp, const locator& l, model& fm) const;
 
@@ -73,7 +73,7 @@ private:
 public:
     void expand(const annotations::type_repository& atrp,
         const annotations::annotation& ra,
-        const std::unordered_set<coding::meta_model::element_archetype>&
+        const std::unordered_set<generation::meta_model::element_archetype>&
         enabled_archetype_for_element,
         const formatters::repository& frp, const locator& l, model& fm) const;
 };

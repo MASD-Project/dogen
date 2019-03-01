@@ -58,19 +58,19 @@ model_to_extraction_model_transform::create_formattables_model(
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
     const formatters::repository& frp, const formattables::locator& l,
-    const coding::meta_model::model& m) const {
+    const generation::meta_model::model& m) const {
     formattables::workflow fw;
     return fw.execute(atrp, ra, l, frp, m);
 }
 
 formattables::locator model_to_extraction_model_transform::make_locator(
-    const coding::transforms::options& o,
+    const boost::filesystem::path& output_directory_path,
     const annotations::type_repository& atrp, const annotations::annotation& ra,
     const formatters::repository& frp, const bool enable_backend_directories,
-    const coding::meta_model::model& m) const {
+    const generation::meta_model::model& m) const {
 
     const auto& mn(m.name());
-    const auto odp(o.output_directory_path());
+    const auto odp(output_directory_path);
     const auto& ep(m.extraction_properties());
     const auto chodp(ep.cpp_headers_output_directory());
     const auto ekd(enable_backend_directories);
@@ -85,7 +85,7 @@ std::string model_to_extraction_model_transform::id() const {
 
 std::list<extraction::meta_model::artefact>
 model_to_extraction_model_transform::
-format(const std::unordered_set<coding::meta_model::element_archetype>&
+format(const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element, const annotations::type_repository& atrp,
     const annotations::annotation_factory& af,
     const dogen::extraction::repository& drp,
@@ -125,31 +125,33 @@ model_to_extraction_model_transform::archetype_locations_by_family() const {
 }
 
 const annotations::archetype_location_repository_parts&
-model_to_extraction_model_transform::archetype_location_repository_parts() const {
+model_to_extraction_model_transform::
+archetype_location_repository_parts() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_location_repository_parts();
 }
 
-coding::meta_model::languages model_to_extraction_model_transform::language() const {
+coding::meta_model::languages
+model_to_extraction_model_transform::language() const {
     return coding::meta_model::languages::cpp;
 }
 
 std::unordered_map<std::string,
-                   coding::meta_model::intra_backend_segment_properties>
+                   generation::meta_model::intra_backend_segment_properties>
 model_to_extraction_model_transform::
 intra_backend_segment_properties(const coding::transforms::options& /*o*/) const {
     // coding::meta_model::intra_backend_segment_properties include;
     // coding::meta_model::intra_backend_segment_properties implementation;
     std::unordered_map<std::string,
-                       coding::meta_model::intra_backend_segment_properties> r;
+                       generation::meta_model::intra_backend_segment_properties> r;
     return r;
 }
 
 extraction::meta_model::model
 model_to_extraction_model_transform::transform(
-    const coding::transforms::context& ctx,
+    const generation::transforms::context& ctx,
     const bool enable_backend_directories,
-    const coding::meta_model::model& m) const {
+    const generation::meta_model::model& m) const {
     tracing::scoped_transform_tracer stp(lg,
         "C++ model to text transform", transform_id, m.name().id(),
         ctx.tracer());
@@ -159,11 +161,11 @@ model_to_extraction_model_transform::transform(
     /*
      * Create the locator.
      */
-    const auto& o(ctx.transform_options());
+    const auto& odp(ctx.output_directory_path());
     const auto& atrp(ctx.type_repository());
     const auto& ra(m.root_module()->annotation());
     const auto& frp(formatters_repository());
-    const auto l(make_locator(o, atrp, ra, frp, enable_backend_directories, m));
+    const auto l(make_locator(odp, atrp, ra, frp, enable_backend_directories, m));
 
     /*
      * Generate the formattables model.

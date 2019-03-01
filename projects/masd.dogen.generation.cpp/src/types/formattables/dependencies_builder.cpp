@@ -23,7 +23,7 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
-#include "masd.dogen.coding/hash/meta_model/element_archetype_hash.hpp"
+#include "masd.dogen.generation/hash/meta_model/element_archetype_hash.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/building_error.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/directive_group_io.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/dependencies_builder.hpp"
@@ -52,7 +52,7 @@ namespace masd::dogen::generation::cpp::formattables {
 
 dependencies_builder::dependencies_builder(
     const directive_group_repository& dgrp,
-    const std::unordered_set<coding::meta_model::element_archetype>&
+    const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element)
     : repository_(dgrp),
       enabled_archetype_for_element_(enabled_archetype_for_element) {}
@@ -74,7 +74,7 @@ dependencies_builder::get_directive_group(
 
 bool dependencies_builder::is_enabled(const coding::meta_model::name& n,
     const std::string& archetype) const {
-    coding::meta_model::element_archetype ea(n.id(), archetype);
+    generation::meta_model::element_archetype ea(n.id(), archetype);
     const auto i(enabled_archetype_for_element_.find(ea));
     const bool is_disabled(i == enabled_archetype_for_element_.end());
     return !is_disabled;

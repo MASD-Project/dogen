@@ -31,7 +31,7 @@
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.coding/io/meta_model/letter_cases_io.hpp"
 #include "masd.dogen.coding/types/helpers/name_flattener.hpp"
-#include "masd.dogen.coding/hash/meta_model/element_archetype_hash.hpp"
+#include "masd.dogen.generation/hash/meta_model/element_archetype_hash.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/streaming_properties_io.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/helper_properties_io.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/io/traits.hpp"
@@ -272,7 +272,7 @@ assistant::make_namespaces(const coding::meta_model::name& n,
 }
 
 bool assistant::is_archetype_enabled(const std::string& archetype) const {
-    coding::meta_model::element_archetype ea(element_.name().id(), archetype);
+    generation::meta_model::element_archetype ea(element_.name().id(), archetype);
     const auto& eafe(context_.enabled_archetype_for_element());
     const auto i(eafe.find(ea));
     const bool is_disabled(i == eafe.end());
@@ -670,7 +670,7 @@ names_with_enabled_archetype(const std::string& archetype,
         const auto id(n.id());
         BOOST_LOG_SEV(lg, debug) << "Checking enablement for name: " << id;
 
-        coding::meta_model::element_archetype ea(id, archetype);
+        generation::meta_model::element_archetype ea(id, archetype);
         const auto& eafe(context_.enabled_archetype_for_element());
         const auto i(eafe.find(ea));
         const bool is_disabled(i == eafe.end());

@@ -29,7 +29,7 @@
 #include <unordered_map>
 #include "masd.dogen.annotations/types/archetype_locations_group.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/types/meta_model/element_archetype.hpp"
+#include "masd.dogen.generation/types/meta_model/element_archetype.hpp"
 #include "masd.dogen.coding/types/meta_model/artefact_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/local_archetype_location_properties.hpp"
 #include "masd.dogen.generation/types/meta_model/denormalised_archetype_properties.hpp"

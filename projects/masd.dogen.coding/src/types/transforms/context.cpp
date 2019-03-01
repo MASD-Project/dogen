@@ -29,16 +29,12 @@ context::context(
         const annotations::type_repository& atrp,
         const helpers::mapping_set_repository& msrp,
         const masd::dogen::extraction::repository& frp,
-        const tracing::tracer& tracer,
-        const std::unordered_map<std::string,
-        meta_model::intra_backend_segment_properties>&
-        intra_backend_segment_properties) :
+        const tracing::tracer& tracer) :
     data_directories_(data_directories), options_(options),
     archetype_location_repository_(alrp), type_repository_(atrp),
     annotation_factory_(data_directories, archetype_location_repository_,
         type_repository_, options.compatibility_mode()),
-    mapping_repository_(msrp), formatting_repository_(frp), tracer_(tracer),
-    intra_backend_segment_properties_(intra_backend_segment_properties) {}
+    mapping_repository_(msrp), formatting_repository_(frp), tracer_(tracer) {}
 
 context::~context() {
     tracer_.end_tracing();
@@ -75,12 +71,6 @@ const masd::dogen::extraction::repository& context::formatting_repository() cons
 
 const tracing::tracer& context::tracer() const {
     return tracer_;
-}
-
-const std::unordered_map<std::string,
-                         meta_model::intra_backend_segment_properties>&
-context::intra_backend_segment_properties() const {
-    return intra_backend_segment_properties_;
 }
 
 }

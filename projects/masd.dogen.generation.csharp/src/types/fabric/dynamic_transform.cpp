@@ -23,6 +23,7 @@
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/injector.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/decoration_expander.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/dynamic_transform.hpp"
@@ -39,7 +40,7 @@ static logger lg(logger_factory(id));
 namespace masd::dogen::generation::csharp::fabric {
 
 bool dynamic_transform::
-requires_expansion(const coding::meta_model::model& m) const {
+requires_expansion(const generation::meta_model::model& m) const {
     const auto l(m.output_language());
     const auto r(l == coding::meta_model::languages::csharp);
     if (!r) {
@@ -51,14 +52,14 @@ requires_expansion(const coding::meta_model::model& m) const {
 
 void dynamic_transform::expand_injection(
     const annotations::type_repository& atrp,
-    coding::meta_model::model& m) const {
+    generation::meta_model::model& m) const {
     injector i;
     i.inject(atrp, m);
 }
 
 void dynamic_transform::expand_decoration(
     const dogen::extraction::decoration_properties_factory& dpf,
-    coding::meta_model::model& m) const {
+    generation::meta_model::model& m) const {
     decoration_expander de;
     de.expand(dpf, m);
 }
@@ -67,9 +68,9 @@ std::string dynamic_transform::id() const {
     return ::id;
 }
 
-void dynamic_transform:: transform(const coding::transforms::context& ctx,
+void dynamic_transform:: transform(const generation::transforms::context& ctx,
     const dogen::extraction::decoration_properties_factory& dpf,
-    coding::meta_model::model& m) const {
+    generation::meta_model::model& m) const {
 
     if (!requires_expansion(m)) {
         BOOST_LOG_SEV(lg, debug) << "Expansion not required: "

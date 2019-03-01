@@ -47,7 +47,7 @@ void model_expander::expand_canonical_archetypes(
 
 void model_expander::expand_inclusion(
     const annotations::type_repository& atrp,
-    const std::unordered_set<coding::meta_model::element_archetype>&
+    const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element, const formatters::repository& frp,
     const locator& l, model& fm) const {
     inclusion_expander ex;
@@ -103,7 +103,7 @@ model_expander::expand_cpp_standard(const annotations::type_repository& atrp,
 
 void model_expander::expand(
     const annotations::type_repository& atrp, const annotations::annotation& ra,
-    const std::unordered_set<coding::meta_model::element_archetype>&
+    const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element,
     const formatters::repository& frp, const locator& l, model& fm) const {
 

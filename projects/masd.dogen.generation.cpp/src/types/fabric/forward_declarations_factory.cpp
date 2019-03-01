@@ -34,8 +34,8 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-static logger lg(logger_factory(
-        "quit.cpp.fabric.forward_declarations_factory"));
+static logger
+lg(logger_factory("generation.cpp.fabric.forward_declarations_factory"));
 
 }
 
@@ -91,7 +91,7 @@ private:
 
 std::list<boost::shared_ptr<coding::meta_model::element>>
 forward_declarations_factory::
-make(const coding::meta_model::model& m) const {
+make(const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating forward declarations.";
 
     generator g;

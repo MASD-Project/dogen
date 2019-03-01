@@ -36,7 +36,8 @@
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
 #include "masd.dogen.extraction/types/repository.hpp"
 #include "masd.dogen.extraction/types/decoration_properties_factory.hpp"
-#include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.generation/types/meta_model/model.hpp"
+#include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_interface.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/repository.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/locator.hpp"
@@ -64,7 +65,7 @@ private:
         const annotations::type_repository& atrp,
         const annotations::annotation& ra,
         const formatters::repository& frp, const formattables::locator & l,
-        const coding::meta_model::model& m) const;
+        const generation::meta_model::model& m) const;
 
     std::list<extraction::meta_model::artefact>
     format(const annotations::type_repository& atrp,
@@ -92,14 +93,14 @@ public:
     coding::meta_model::languages language() const override;
 
     std::unordered_map<std::string,
-                       coding::meta_model::intra_backend_segment_properties>
+                       generation::meta_model::intra_backend_segment_properties>
     intra_backend_segment_properties(
         const coding::transforms::options& o) const override;
 
     extraction::meta_model::model
-    transform(const coding::transforms::context& ctx,
+    transform(const generation::transforms::context& ctx,
         const bool enable_backend_directories,
-        const coding::meta_model::model& m) const override;
+        const generation::meta_model::model& m) const override;
 };
 
 }

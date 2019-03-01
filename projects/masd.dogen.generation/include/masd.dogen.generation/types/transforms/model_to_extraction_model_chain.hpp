@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <unordered_set>
-#include "masd.dogen.coding/types/transforms/context_fwd.hpp"
+#include "masd.dogen.generation/types/transforms/context_fwd.hpp"
 #include "masd.dogen.extraction/types/decoration_properties_factory.hpp"
 #include "masd.dogen.extraction/types/meta_model/model.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
@@ -51,14 +51,15 @@ private:
 
 public:
     static extraction::meta_model::model
-    transform(const coding::transforms::context& ctx,
-        const coding::meta_model::model& m);
+    transform(const generation::transforms::context& ctx,
+        const generation::meta_model::model& m);
     static extraction::meta_model::model
-    transform(const coding::transforms::context& ctx,
-        const std::list<coding::meta_model::model>& models);
+    transform(const generation::transforms::context& ctx,
+        const std::list<generation::meta_model::model>& models);
 
 private:
-    static std::shared_ptr<model_to_extraction_model_transform_registrar> registrar_;
+    static std::shared_ptr<model_to_extraction_model_transform_registrar>
+    registrar_;
 };
 
 /*

@@ -26,8 +26,8 @@
 #endif
 
 #include <boost/shared_ptr.hpp>
-#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
 
 namespace masd::dogen::generation::cpp::fabric {
@@ -36,7 +36,7 @@ class master_header_factory final {
 public:
     boost::shared_ptr<coding::meta_model::element>
     make(const formatters::repository& rp,
-        const coding::meta_model::model& m) const;
+        const generation::meta_model::model& m) const;
 };
 
 }

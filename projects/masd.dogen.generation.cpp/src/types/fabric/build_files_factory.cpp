@@ -43,7 +43,7 @@ const std::string msbuild_targets_name("msbuild_targets");
 namespace masd::dogen::generation::cpp::fabric {
 
 boost::shared_ptr<coding::meta_model::element> build_files_factory::
-make_cmakelists(const coding::meta_model::model& m) const {
+make_cmakelists(const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating CMakeLists.";
 
     coding::helpers::name_factory nf;
@@ -58,7 +58,7 @@ make_cmakelists(const coding::meta_model::model& m) const {
 }
 
 boost::shared_ptr<coding::meta_model::element> build_files_factory::
-make_msbuild_targets(const coding::meta_model::model& m) const {
+make_msbuild_targets(const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating MSBuild Targets.";
 
     coding::helpers::name_factory nf;
@@ -73,7 +73,7 @@ make_msbuild_targets(const coding::meta_model::model& m) const {
 }
 
 std::list<boost::shared_ptr<coding::meta_model::element>> build_files_factory::
-make(const coding::meta_model::model& m) const {
+make(const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Build Files.";
 
     std::list<boost::shared_ptr<coding::meta_model::element>> r;

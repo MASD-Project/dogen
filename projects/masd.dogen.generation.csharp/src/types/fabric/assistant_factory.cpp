@@ -33,7 +33,7 @@ const std::string assistant_name("Assistant");
 namespace masd::dogen::generation::csharp::fabric {
 
 boost::shared_ptr<coding::meta_model::element>
-assistant_factory::make(const coding::meta_model::model& m) const {
+assistant_factory::make(const generation::meta_model::model& m) const {
     coding::helpers::name_factory nf;
     const auto n(nf.build_element_in_model(m.name(), assistant_name));
 

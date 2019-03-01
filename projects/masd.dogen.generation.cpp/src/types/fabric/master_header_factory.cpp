@@ -181,7 +181,7 @@ void generator::process_element(const coding::meta_model::element& e) {
 
 boost::shared_ptr<coding::meta_model::element>
 master_header_factory::make(const formatters::repository& frp,
-    const coding::meta_model::model& m) const {
+    const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating the master header.";
 
     generator g(m.name(), frp);
