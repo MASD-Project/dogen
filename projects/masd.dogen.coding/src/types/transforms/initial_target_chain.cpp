@@ -51,8 +51,13 @@ initial_target_chain::transform(const context& ctx) {
      * of the exogenous model.
      */
     using injection::transforms::model_production_chain;
-    const injection::transforms::context ext_ctx(ctx.tracer());
-    const auto m(model_production_chain::transform(ext_ctx, tp));
+    const injection::transforms::context inj_ctx(
+        ctx.data_directories(),
+        ctx.archetype_location_repository(),
+        ctx.type_repository(),
+        ctx.tracer(),
+        ctx.transform_options().compatibility_mode());
+    const auto m(model_production_chain::transform(inj_ctx, tp));
 
     /*
      * Then we convert the internal representation of the exogenous

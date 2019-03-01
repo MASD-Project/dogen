@@ -39,7 +39,7 @@
 namespace masd::dogen::coding::transforms {
 
 /**
- * @brief Context for all transformations.
+ * @brief Context for all coding transformations.
  *
  * Contains all of the external data required for the transformations
  * to execute. It's not ideal to have a huge "global" class, with lots
@@ -114,7 +114,7 @@ private:
     const annotations::archetype_location_repository
     archetype_location_repository_;
     const annotations::type_repository type_repository_;
-        const annotations::annotation_factory annotation_factory_;
+    const annotations::annotation_factory annotation_factory_;
     const helpers::mapping_set_repository mapping_repository_;
     const masd::dogen::extraction::repository formatting_repository_;
     const tracing::tracer tracer_;

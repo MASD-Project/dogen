@@ -22,8 +22,33 @@
 
 namespace masd::dogen::injection::transforms {
 
-context::context(const masd::dogen::tracing::tracer& tracer)
-    : tracer_(tracer) { }
+context::context(
+    const std::vector<boost::filesystem::path>& data_directories,
+    const annotations::archetype_location_repository& alrp,
+    const annotations::type_repository& atrp,
+    const tracing::tracer& tracer,
+    const bool compatibility_mode) :
+    data_directories_(data_directories),
+    archetype_location_repository_(alrp), type_repository_(atrp),
+    annotation_factory_(data_directories, archetype_location_repository_,
+        type_repository_, compatibility_mode), tracer_(tracer) {}
+
+const std::vector<boost::filesystem::path>& context::data_directories() const {
+    return data_directories_;
+}
+
+const annotations::archetype_location_repository&
+context::archetype_location_repository() const {
+    return archetype_location_repository_;
+}
+
+const annotations::type_repository& context::type_repository() const {
+    return type_repository_;
+}
+
+const annotations::annotation_factory& context::annotation_factory() const {
+    return annotation_factory_;
+}
 
 const masd::dogen::tracing::tracer& context::tracer() const {
     return tracer_;

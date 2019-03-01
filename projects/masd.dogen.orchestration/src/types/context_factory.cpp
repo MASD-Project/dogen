@@ -116,7 +116,9 @@ make_injector_context(const coding::transforms::options& o,
     annotations::type_repository_factory atrpf;
     const auto atrp(atrpf.make(alrp, data_dirs));
     tracing::tracer tracer(alrp, atrp, o.probe_directory(), o.tracing());
-    const masd::dogen::injection::transforms::context r(tracer);
+    const masd::dogen::injection::transforms::context
+        r(data_dirs, alrp, atrp, tracer, o.compatibility_mode());
+
     return r;
 }
 
