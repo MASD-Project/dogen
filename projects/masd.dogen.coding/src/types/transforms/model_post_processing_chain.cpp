@@ -90,7 +90,7 @@ transform(const context& ctx, meta_model::model& em) {
      * Meta-name transform must be applied after all transforms that
      * inject new meta-model types for the coding model. At present that
      * is stereotypes and containment transforms. This is also why we
-     * cannot apply this transform at the exomodel level.
+     * cannot apply this transform at the model level.
      */
     meta_naming_transform::transform(ctx, em);
 

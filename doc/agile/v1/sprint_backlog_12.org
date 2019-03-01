@@ -12,19 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-01 Fri 11:16]
+#+CAPTION: Clock summary at [2019-03-01 Fri 11:20]
 | <75>                                                |         |       |      |       |
 | Headline                                            | Time    |       |      |     % |
 |-----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                        | *12:13* |       |      | 100.0 |
+| *Total time*                                        | *12:16* |       |      | 100.0 |
 |-----------------------------------------------------+---------+-------+------+-------|
-| Stories                                             | 12:13   |       |      | 100.0 |
-| Active                                              |         | 12:13 |      | 100.0 |
-| Edit release notes for previous sprint              |         |       | 1:27 |  11.9 |
-| Sprint and product backlog grooming                 |         |       | 0:18 |   2.5 |
-| Implement text model generation chain in generation |         |       | 3:45 |  30.7 |
-| Move generation model out of coding                 |         |       | 4:22 |  35.7 |
-| Rename endomodel to just model                      |         |       | 2:01 |  16.5 |
+| Stories                                             | 12:16   |       |      | 100.0 |
+| Active                                              |         | 12:16 |      | 100.0 |
+| Edit release notes for previous sprint              |         |       | 1:27 |  11.8 |
+| Sprint and product backlog grooming                 |         |       | 0:18 |   2.4 |
+| Implement text model generation chain in generation |         |       | 3:45 |  30.6 |
+| Move generation model out of coding                 |         |       | 4:22 |  35.6 |
+| Rename endomodel to just model                      |         |       | 2:01 |  16.4 |
+| Remove exomodel remnants                            |         |       | 0:03 |   0.4 |
 | Try to fix valgrind warning on =find_files=         |         |       | 0:20 |   2.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -264,6 +265,20 @@ sensible. Update all transforms, variables, etc.
 Notes:
 
 - what is new adapter in coding?
+
+*** COMPLETED Remove exomodel remnants                                :story:
+    CLOSED: [2019-03-01 Fri 11:20]
+    CLOCK: [2019-03-01 Fri 11:17]--[2019-03-01 Fri 11:20] =>  0:03
+
+It seems we have removed the exomodel on the main, but a grep for it
+still shows quite a few remnants. Go through the grep and remove all
+of it.
+
+*Previous Understanding*
+
+Once the =external= model has been created, we need to replace the
+legacy exomodel related transforms; and once that is done, we need to
+remove all of the legacy code.
 
 *** STARTED Try to fix valgrind warning on =find_files=               :story:
     :LOGBOOK:

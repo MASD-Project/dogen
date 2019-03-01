@@ -28181,7 +28181,7 @@ Temporary data structure used to build trees of names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O205">
       <dia:attribute name="name">
-        <dia:string>#converts and exomodel into an model using &gt;#</dia:string>
+        <dia:string>#converts and model into an model using &gt;#</dia:string>
       </dia:attribute>
       <dia:attribute name="direction">
         <dia:enum val="1"/>
@@ -28253,7 +28253,7 @@ Temporary data structure used to build trees of names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O206">
       <dia:attribute name="name">
-        <dia:string>#&lt; converts and exomodel into an model using#</dia:string>
+        <dia:string>#&lt; converts and model into an model using#</dia:string>
       </dia:attribute>
       <dia:attribute name="direction">
         <dia:enum val="1"/>

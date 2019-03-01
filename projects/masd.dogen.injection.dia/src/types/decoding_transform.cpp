@@ -131,7 +131,7 @@ transform(const injection::transforms::context& ctx,
     BOOST_LOG_SEV(lg, debug) << "Read Dia diagram.";
 
     const auto model_name(p.filename().generic_string());
-    tracing::scoped_transform_tracer stp(lg, "dia exomodel transform",
+    tracing::scoped_transform_tracer stp(lg, "dia model transform",
         transform_id, model_name, ctx.tracer(), diagram);
 
     const auto pos(obtain_processed_objects(diagram));

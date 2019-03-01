@@ -63,7 +63,7 @@ model_to_model_chain::obtain_transforms(
 void model_to_model_chain::transform(const transforms::context& ctx,
     const boost::filesystem::path& src_path,
     const boost::filesystem::path& dst_path) {
-    tracing::scoped_chain_tracer stp(lg, "exomodel to exomodel chain",
+    tracing::scoped_chain_tracer stp(lg, "model to model chain",
         transform_id, ctx.tracer());
 
     /*
@@ -76,7 +76,7 @@ void model_to_model_chain::transform(const transforms::context& ctx,
     auto src(tuple.get<0>().transform(ctx, src_path));
 
     /*
-     * Transform the exomodel to the requested representation.
+     * Transform the model to the requested representation.
      */
     tuple.get<1>().transform(ctx, src, dst_path);
 }

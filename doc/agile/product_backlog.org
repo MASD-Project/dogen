@@ -558,18 +558,6 @@ Need to add: can_be_primitive_underlier, in_global_module,
 can_be_enumeration_underlier, is_default_enumeration_type,
 is_associative_container
 
-*** Remove exomodel remnants                                          :story:
-
-It seems we have removed the exomodel on the main, but a grep for it
-still shows quite a few remnants. Go through the grep and remove all
-of it.
-
-*Previous Understanding*
-
-Once the =external= model has been created, we need to replace the
-legacy exomodel related transforms; and once that is done, we need to
-remove all of the legacy code.
-
 *** Generate file paths as a transform                                :story:
 
 See the comments in the previous sprint.
