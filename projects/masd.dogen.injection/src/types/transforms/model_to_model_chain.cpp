@@ -23,7 +23,7 @@
 #include "masd.dogen.injection/types/meta_model/model.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/transformation_error.hpp"
-#include "masd.dogen.injection/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.injection/types/transforms/model_production_chain.hpp"
 #include "masd.dogen.injection/types/transforms/model_to_model_chain.hpp"
 
 namespace {
@@ -47,7 +47,7 @@ model_to_model_chain::obtain_transforms(
     /*
      * Start by ensuring the registrar is in a good place.
      */
-    auto& rg(model_generation_chain::registrar());
+    auto& rg(model_production_chain::registrar());
     rg.validate();
 
     /*

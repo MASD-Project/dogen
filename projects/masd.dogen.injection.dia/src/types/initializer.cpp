@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.injection/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.injection/types/transforms/model_production_chain.hpp"
 #include "masd.dogen.injection.dia/types/decoding_transform.hpp"
 #include "masd.dogen.injection.dia/types/initializer.hpp"
 

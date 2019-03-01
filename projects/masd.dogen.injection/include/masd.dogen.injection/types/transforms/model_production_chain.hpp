@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_MODEL_GENERATION_CHAIN_HPP
-#define MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_MODEL_GENERATION_CHAIN_HPP
+#ifndef MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_MODEL_PRODUCTION_CHAIN_HPP
+#define MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_MODEL_PRODUCTION_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,7 +36,7 @@ namespace masd::dogen::injection::transforms {
  * @brief Given the location of a supported exogenous model, it
  * obtains it and transforms it into an injection model.
  */
-class model_generation_chain final {
+class model_production_chain final {
 private:
     /*
      * @brief Given a path to an exogenous model, returns the
@@ -72,7 +72,7 @@ private:
  */
 template<typename EncodingTransform>
 inline void register_encoding_transform() {
-    auto& rg(model_generation_chain::registrar());
+    auto& rg(model_production_chain::registrar());
     auto t(std::make_shared<EncodingTransform>());
     rg.register_encoding_transform(t);
 }
@@ -82,7 +82,7 @@ inline void register_encoding_transform() {
  */
 template<typename DecodingTransform>
 inline void register_decoding_transform() {
-    auto& rg(model_generation_chain::registrar());
+    auto& rg(model_production_chain::registrar());
     auto t(std::make_shared<DecodingTransform>());
     rg.register_decoding_transform(t);
 }

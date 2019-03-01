@@ -22,11 +22,11 @@
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
-#include "masd.dogen.injection/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.injection/types/transforms/model_production_chain.hpp"
 
 namespace {
 
-const std::string transform_id("injection.transforms.model_generation_chain");
+const std::string transform_id("injection.transforms.model_production_chain");
 
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -35,9 +35,9 @@ static logger lg(logger_factory(transform_id));
 
 namespace masd::dogen::injection::transforms {
 
-std::shared_ptr<registrar> model_generation_chain::registrar_;
+std::shared_ptr<registrar> model_production_chain::registrar_;
 
-decoding_transform_interface& model_generation_chain::
+decoding_transform_interface& model_production_chain::
 transform_for_model(const boost::filesystem::path& p) {
     /*
      * Ensure the registrar is in a valid state before we proceed.
@@ -47,14 +47,14 @@ transform_for_model(const boost::filesystem::path& p) {
     return rg.decoding_transform_for_path(p);
 }
 
-transforms::registrar& model_generation_chain::registrar() {
+transforms::registrar& model_production_chain::registrar() {
     if (!registrar_)
         registrar_ = std::make_shared<transforms::registrar>();
 
     return *registrar_;
 }
 
-meta_model::model model_generation_chain::
+meta_model::model model_production_chain::
 transform(const context& ctx, const boost::filesystem::path& p) {
     const auto model_name(p.filename().generic_string());
     tracing::scoped_chain_tracer stp(lg, "injection model generation chain",

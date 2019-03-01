@@ -25,7 +25,7 @@
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
-#include "masd.dogen.injection/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.injection/types/transforms/model_production_chain.hpp"
 #include "masd.dogen.coding/types/transforms/external_model_to_model_transform.hpp"
 #include "masd.dogen.coding/types/transforms/model_pre_processing_chain.hpp"
 #include "masd.dogen.coding/types/transforms/references_chain.hpp"
@@ -83,9 +83,9 @@ transform(const context& ctx, const meta_model::model& target) {
          * Obtain the reference model in the internal representation
          * of the exogenous model.
          */
-        using injection::transforms::model_generation_chain;
+        using injection::transforms::model_production_chain;
         const injection::transforms::context ext_ctx(ctx.tracer());
-        const auto em(model_generation_chain::transform(ext_ctx, rp));
+        const auto em(model_production_chain::transform(ext_ctx, rp));
 
         /*
          * Convert the internal representation of the exogenous model into
