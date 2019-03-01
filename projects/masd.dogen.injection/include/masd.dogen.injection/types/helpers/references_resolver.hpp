@@ -18,30 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_MODEL_SET_PRODUCTION_CHAIN_HPP
-#define MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_MODEL_SET_PRODUCTION_CHAIN_HPP
+#ifndef MASD_DOGEN_INJECTION_TYPES_HELPERS_REFERENCES_RESOLVER_HPP
+#define MASD_DOGEN_INJECTION_TYPES_HELPERS_REFERENCES_RESOLVER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <unordered_set>
+#include <list>
+#include <string>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.injection/types/meta_model/model_set.hpp"
-#include "masd.dogen.injection/types/transforms/context_fwd.hpp"
 
-namespace masd::dogen::injection::transforms {
+namespace masd::dogen::injection::helpers {
 
-class model_set_production_chain final {
-private:
-    static meta_model::model_set
-    transform(const context& ctx, const boost::filesystem::path& p,
-        std::unordered_set<std::string>& processed_models,
-        const bool is_target);
+class references_resolver final {
+public:
+    references_resolver(
+        const std::list<std::string>& extensions,
+        const std::list<boost::filesystem::path>& dirs);
 
 public:
-    static meta_model::model_set
-    transform(const context& ctx, const boost::filesystem::path& p);
+    boost::filesystem::path resolve(const std::string& ref) const;
+
+    std::list<boost::filesystem::path>
+    resolve(const std::list<std::string>& refs) const;
+
+private:
+    const std::list<std::string> extensions_;
+    const std::list<boost::filesystem::path> directories_;
 };
 
 }

@@ -25,24 +25,28 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.injection/types/meta_model/model.hpp"
+#include "masd.dogen.injection/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::injection::transforms {
 
 class language_transform final {
-public:
-    language_transform() = default;
-    language_transform(const language_transform&) = default;
-    language_transform(language_transform&&) = default;
-    ~language_transform() = default;
-    language_transform& operator=(const language_transform&) = default;
+private:
+    struct type_group {
+        annotations::type input_language;
+    };
+
+    static type_group make_type_group(const annotations::type_repository& atrp);
+
+    static std::string make_input_language(const type_group& tg,
+        const annotations::annotation& a);
 
 public:
-    bool operator==(const language_transform& rhs) const;
-    bool operator!=(const language_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const context& ctx, meta_model::model& m);
 };
 
 }

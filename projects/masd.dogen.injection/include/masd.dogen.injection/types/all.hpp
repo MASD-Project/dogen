@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include "masd.dogen.injection/types/traits.hpp"
 #include "masd.dogen.injection/types/injection.hpp"
 #include "masd.dogen.injection/types/meta_model/model.hpp"
 #include "masd.dogen.injection/types/meta_model/element.hpp"
@@ -33,13 +34,15 @@
 #include "masd.dogen.injection/types/meta_model/model_set.hpp"
 #include "masd.dogen.injection/types/transforms/registrar.hpp"
 #include "masd.dogen.injection/types/transforms/registrar_error.hpp"
+#include "masd.dogen.injection/types/helpers/references_resolver.hpp"
 #include "masd.dogen.injection/types/transforms/language_transform.hpp"
-#include "masd.dogen.injection/types/helpers/references_path_finder.hpp"
 #include "masd.dogen.injection/types/transforms/model_to_model_chain.hpp"
 #include "masd.dogen.injection/types/transforms/references_transform.hpp"
 #include "masd.dogen.injection/types/transforms/transformation_error.hpp"
+#include "masd.dogen.injection/types/transforms/annotations_transform.hpp"
 #include "masd.dogen.injection/types/transforms/model_production_chain.hpp"
 #include "masd.dogen.injection/types/transforms/model_set_production_chain.hpp"
+#include "masd.dogen.injection/types/helpers/reference_resolution_exception.hpp"
 #include "masd.dogen.injection/types/transforms/decoding_transform_interface.hpp"
 #include "masd.dogen.injection/types/transforms/encoding_transform_interface.hpp"
 

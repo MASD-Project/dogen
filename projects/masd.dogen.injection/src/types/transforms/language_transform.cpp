@@ -18,12 +18,46 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.injection/io/meta_model/model_io.hpp"
+#include "masd.dogen.injection/types/traits.hpp"
+#include "masd.dogen.injection/types/transforms/transformation_error.hpp"
 #include "masd.dogen.injection/types/transforms/language_transform.hpp"
+
+namespace {
+
+const std::string transform_id("injection.transforms.language_transform");
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace masd::dogen::injection::transforms {
 
-bool language_transform::operator==(const language_transform& /*rhs*/) const {
-    return true;
+language_transform::type_group
+language_transform::make_type_group(const annotations::type_repository& /*atrp*/) {
+    type_group r;
+    // const annotations::type_repository_selector s(atrp);
+    // r.input_language = s.select_type_by_name(traits::input_language());
+    return r;
+}
+
+std::string language_transform::make_input_language(const type_group& /*tg*/,
+    const annotations::annotation& /*a*/) {
+    // type_group r;
+    // const annotations::type_repository_selector s(atrp);
+    // r.input_language =
+    // s.select_type_by_name(traits::input_language());
+    return std::string();
+}
+
+void language_transform::transform(const context& /*ctx*/, meta_model::model& /*m*/) {
+    // const auto lang_str(s.get_text_content_or_default(tg.input_language));    
 }
 
 }

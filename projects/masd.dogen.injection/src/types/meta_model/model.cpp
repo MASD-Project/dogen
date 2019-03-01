@@ -23,37 +23,41 @@
 namespace masd::dogen::injection::meta_model {
 
 model::model(
-    const std::string& name,
-    const std::string& documentation,
     const std::list<std::pair<std::string, std::string> >& tagged_values,
     const std::list<std::string>& stereotypes,
+    const std::string& documentation,
+    const std::string& name,
+    const masd::dogen::annotations::annotation& annotation,
     const std::list<masd::dogen::injection::meta_model::element>& elements,
     const std::string& language,
     const std::list<std::string>& references)
-    : name_(name),
-      documentation_(documentation),
-      tagged_values_(tagged_values),
+    : tagged_values_(tagged_values),
       stereotypes_(stereotypes),
+      documentation_(documentation),
+      name_(name),
+      annotation_(annotation),
       elements_(elements),
       language_(language),
       references_(references) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
-    swap(name_, other.name_);
-    swap(documentation_, other.documentation_);
     swap(tagged_values_, other.tagged_values_);
     swap(stereotypes_, other.stereotypes_);
+    swap(documentation_, other.documentation_);
+    swap(name_, other.name_);
+    swap(annotation_, other.annotation_);
     swap(elements_, other.elements_);
     swap(language_, other.language_);
     swap(references_, other.references_);
 }
 
 bool model::operator==(const model& rhs) const {
-    return name_ == rhs.name_ &&
-        documentation_ == rhs.documentation_ &&
-        tagged_values_ == rhs.tagged_values_ &&
+    return tagged_values_ == rhs.tagged_values_ &&
         stereotypes_ == rhs.stereotypes_ &&
+        documentation_ == rhs.documentation_ &&
+        name_ == rhs.name_ &&
+        annotation_ == rhs.annotation_ &&
         elements_ == rhs.elements_ &&
         language_ == rhs.language_ &&
         references_ == rhs.references_;
@@ -63,38 +67,6 @@ model& model::operator=(model other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const std::string& model::name() const {
-    return name_;
-}
-
-std::string& model::name() {
-    return name_;
-}
-
-void model::name(const std::string& v) {
-    name_ = v;
-}
-
-void model::name(const std::string&& v) {
-    name_ = std::move(v);
-}
-
-const std::string& model::documentation() const {
-    return documentation_;
-}
-
-std::string& model::documentation() {
-    return documentation_;
-}
-
-void model::documentation(const std::string& v) {
-    documentation_ = v;
-}
-
-void model::documentation(const std::string&& v) {
-    documentation_ = std::move(v);
 }
 
 const std::list<std::pair<std::string, std::string> >& model::tagged_values() const {
@@ -127,6 +99,54 @@ void model::stereotypes(const std::list<std::string>& v) {
 
 void model::stereotypes(const std::list<std::string>&& v) {
     stereotypes_ = std::move(v);
+}
+
+const std::string& model::documentation() const {
+    return documentation_;
+}
+
+std::string& model::documentation() {
+    return documentation_;
+}
+
+void model::documentation(const std::string& v) {
+    documentation_ = v;
+}
+
+void model::documentation(const std::string&& v) {
+    documentation_ = std::move(v);
+}
+
+const std::string& model::name() const {
+    return name_;
+}
+
+std::string& model::name() {
+    return name_;
+}
+
+void model::name(const std::string& v) {
+    name_ = v;
+}
+
+void model::name(const std::string&& v) {
+    name_ = std::move(v);
+}
+
+const masd::dogen::annotations::annotation& model::annotation() const {
+    return annotation_;
+}
+
+masd::dogen::annotations::annotation& model::annotation() {
+    return annotation_;
+}
+
+void model::annotation(const masd::dogen::annotations::annotation& v) {
+    annotation_ = v;
+}
+
+void model::annotation(const masd::dogen::annotations::annotation&& v) {
+    annotation_ = std::move(v);
 }
 
 const std::list<masd::dogen::injection::meta_model::element>& model::elements() const {

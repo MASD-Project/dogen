@@ -31,10 +31,11 @@ element::element()
       is_floating_point_(static_cast<bool>(0)) { }
 
 element::element(
-    const std::string& name,
-    const std::string& documentation,
     const std::list<std::pair<std::string, std::string> >& tagged_values,
     const std::list<std::string>& stereotypes,
+    const std::string& documentation,
+    const std::string& name,
+    const masd::dogen::annotations::annotation& annotation,
     const std::list<std::string>& parents,
     const std::list<masd::dogen::injection::meta_model::attribute>& attributes,
     const std::string& fallback_element_type,
@@ -44,10 +45,11 @@ element::element(
     const bool is_default_enumeration_type,
     const bool is_associative_container,
     const bool is_floating_point)
-    : name_(name),
-      documentation_(documentation),
-      tagged_values_(tagged_values),
+    : tagged_values_(tagged_values),
       stereotypes_(stereotypes),
+      documentation_(documentation),
+      name_(name),
+      annotation_(annotation),
       parents_(parents),
       attributes_(attributes),
       fallback_element_type_(fallback_element_type),
@@ -60,10 +62,11 @@ element::element(
 
 void element::swap(element& other) noexcept {
     using std::swap;
-    swap(name_, other.name_);
-    swap(documentation_, other.documentation_);
     swap(tagged_values_, other.tagged_values_);
     swap(stereotypes_, other.stereotypes_);
+    swap(documentation_, other.documentation_);
+    swap(name_, other.name_);
+    swap(annotation_, other.annotation_);
     swap(parents_, other.parents_);
     swap(attributes_, other.attributes_);
     swap(fallback_element_type_, other.fallback_element_type_);
@@ -76,10 +79,11 @@ void element::swap(element& other) noexcept {
 }
 
 bool element::operator==(const element& rhs) const {
-    return name_ == rhs.name_ &&
-        documentation_ == rhs.documentation_ &&
-        tagged_values_ == rhs.tagged_values_ &&
+    return tagged_values_ == rhs.tagged_values_ &&
         stereotypes_ == rhs.stereotypes_ &&
+        documentation_ == rhs.documentation_ &&
+        name_ == rhs.name_ &&
+        annotation_ == rhs.annotation_ &&
         parents_ == rhs.parents_ &&
         attributes_ == rhs.attributes_ &&
         fallback_element_type_ == rhs.fallback_element_type_ &&
@@ -95,38 +99,6 @@ element& element::operator=(element other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const std::string& element::name() const {
-    return name_;
-}
-
-std::string& element::name() {
-    return name_;
-}
-
-void element::name(const std::string& v) {
-    name_ = v;
-}
-
-void element::name(const std::string&& v) {
-    name_ = std::move(v);
-}
-
-const std::string& element::documentation() const {
-    return documentation_;
-}
-
-std::string& element::documentation() {
-    return documentation_;
-}
-
-void element::documentation(const std::string& v) {
-    documentation_ = v;
-}
-
-void element::documentation(const std::string&& v) {
-    documentation_ = std::move(v);
 }
 
 const std::list<std::pair<std::string, std::string> >& element::tagged_values() const {
@@ -159,6 +131,54 @@ void element::stereotypes(const std::list<std::string>& v) {
 
 void element::stereotypes(const std::list<std::string>&& v) {
     stereotypes_ = std::move(v);
+}
+
+const std::string& element::documentation() const {
+    return documentation_;
+}
+
+std::string& element::documentation() {
+    return documentation_;
+}
+
+void element::documentation(const std::string& v) {
+    documentation_ = v;
+}
+
+void element::documentation(const std::string&& v) {
+    documentation_ = std::move(v);
+}
+
+const std::string& element::name() const {
+    return name_;
+}
+
+std::string& element::name() {
+    return name_;
+}
+
+void element::name(const std::string& v) {
+    name_ = v;
+}
+
+void element::name(const std::string&& v) {
+    name_ = std::move(v);
+}
+
+const masd::dogen::annotations::annotation& element::annotation() const {
+    return annotation_;
+}
+
+masd::dogen::annotations::annotation& element::annotation() {
+    return annotation_;
+}
+
+void element::annotation(const masd::dogen::annotations::annotation& v) {
+    annotation_ = v;
+}
+
+void element::annotation(const masd::dogen::annotations::annotation&& v) {
+    annotation_ = std::move(v);
 }
 
 const std::list<std::string>& element::parents() const {

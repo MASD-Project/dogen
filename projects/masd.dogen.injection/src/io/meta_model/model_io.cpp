@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "masd.dogen.annotations/io/annotation_io.hpp"
 #include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.injection/io/meta_model/element_io.hpp"
 
@@ -91,10 +92,11 @@ namespace masd::dogen::injection::meta_model {
 std::ostream& operator<<(std::ostream& s, const model& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::injection::meta_model::model\"" << ", "
-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "
       << "\"stereotypes\": " << v.stereotypes() << ", "
+      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"annotation\": " << v.annotation() << ", "
       << "\"elements\": " << v.elements() << ", "
       << "\"language\": " << "\"" << tidy_up_string(v.language()) << "\"" << ", "
       << "\"references\": " << v.references()

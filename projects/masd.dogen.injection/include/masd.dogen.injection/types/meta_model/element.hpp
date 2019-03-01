@@ -29,6 +29,7 @@
 #include <string>
 #include <utility>
 #include <algorithm>
+#include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.injection/types/meta_model/attribute.hpp"
 
 namespace masd::dogen::injection::meta_model {
@@ -47,10 +48,11 @@ public:
 
 public:
     element(
-        const std::string& name,
-        const std::string& documentation,
         const std::list<std::pair<std::string, std::string> >& tagged_values,
         const std::list<std::string>& stereotypes,
+        const std::string& documentation,
+        const std::string& name,
+        const masd::dogen::annotations::annotation& annotation,
         const std::list<std::string>& parents,
         const std::list<masd::dogen::injection::meta_model::attribute>& attributes,
         const std::string& fallback_element_type,
@@ -62,10 +64,15 @@ public:
         const bool is_floating_point);
 
 public:
-    const std::string& name() const;
-    std::string& name();
-    void name(const std::string& v);
-    void name(const std::string&& v);
+    const std::list<std::pair<std::string, std::string> >& tagged_values() const;
+    std::list<std::pair<std::string, std::string> >& tagged_values();
+    void tagged_values(const std::list<std::pair<std::string, std::string> >& v);
+    void tagged_values(const std::list<std::pair<std::string, std::string> >&& v);
+
+    const std::list<std::string>& stereotypes() const;
+    std::list<std::string>& stereotypes();
+    void stereotypes(const std::list<std::string>& v);
+    void stereotypes(const std::list<std::string>&& v);
 
     /**
      * @brief Code comments.
@@ -81,15 +88,20 @@ public:
     void documentation(const std::string&& v);
     /**@}*/
 
-    const std::list<std::pair<std::string, std::string> >& tagged_values() const;
-    std::list<std::pair<std::string, std::string> >& tagged_values();
-    void tagged_values(const std::list<std::pair<std::string, std::string> >& v);
-    void tagged_values(const std::list<std::pair<std::string, std::string> >&& v);
+    const std::string& name() const;
+    std::string& name();
+    void name(const std::string& v);
+    void name(const std::string&& v);
 
-    const std::list<std::string>& stereotypes() const;
-    std::list<std::string>& stereotypes();
-    void stereotypes(const std::list<std::string>& v);
-    void stereotypes(const std::list<std::string>&& v);
+    /**
+     * @brief Annotation for this element.
+     */
+    /**@{*/
+    const masd::dogen::annotations::annotation& annotation() const;
+    masd::dogen::annotations::annotation& annotation();
+    void annotation(const masd::dogen::annotations::annotation& v);
+    void annotation(const masd::dogen::annotations::annotation&& v);
+    /**@}*/
 
     const std::list<std::string>& parents() const;
     std::list<std::string>& parents();
@@ -141,10 +153,11 @@ public:
     element& operator=(element other);
 
 private:
-    std::string name_;
-    std::string documentation_;
     std::list<std::pair<std::string, std::string> > tagged_values_;
     std::list<std::string> stereotypes_;
+    std::string documentation_;
+    std::string name_;
+    masd::dogen::annotations::annotation annotation_;
     std::list<std::string> parents_;
     std::list<masd::dogen::injection::meta_model::attribute> attributes_;
     std::string fallback_element_type_;

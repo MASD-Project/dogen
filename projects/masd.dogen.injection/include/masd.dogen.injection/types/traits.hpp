@@ -18,12 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.injection/types/helpers/references_path_finder.hpp"
+#ifndef MASD_DOGEN_INJECTION_TYPES_TRAITS_HPP
+#define MASD_DOGEN_INJECTION_TYPES_TRAITS_HPP
 
-namespace masd::dogen::injection::helpers {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-bool references_path_finder::operator==(const references_path_finder& /*rhs*/) const {
-    return true;
+#include <algorithm>
+
+namespace masd::dogen::injection {
+
+class traits final {
+public:
+    traits() = default;
+    traits(const traits&) = default;
+    traits(traits&&) = default;
+    ~traits() = default;
+    traits& operator=(const traits&) = default;
+
+public:
+    bool operator==(const traits& rhs) const;
+    bool operator!=(const traits& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
+
 }
 
-}
+#endif

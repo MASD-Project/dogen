@@ -18,31 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_MODEL_SET_PRODUCTION_CHAIN_HPP
-#define MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_MODEL_SET_PRODUCTION_CHAIN_HPP
+#ifndef MASD_DOGEN_INJECTION_TYPES_HELPERS_REFERENCE_RESOLUTION_EXCEPTION_FWD_HPP
+#define MASD_DOGEN_INJECTION_TYPES_HELPERS_REFERENCE_RESOLUTION_EXCEPTION_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <unordered_set>
-#include <boost/filesystem/path.hpp>
-#include "masd.dogen.injection/types/meta_model/model_set.hpp"
-#include "masd.dogen.injection/types/transforms/context_fwd.hpp"
+namespace masd::dogen::injection::helpers {
 
-namespace masd::dogen::injection::transforms {
-
-class model_set_production_chain final {
-private:
-    static meta_model::model_set
-    transform(const context& ctx, const boost::filesystem::path& p,
-        std::unordered_set<std::string>& processed_models,
-        const bool is_target);
-
-public:
-    static meta_model::model_set
-    transform(const context& ctx, const boost::filesystem::path& p);
-};
+class reference_resolution_exception;
 
 }
 

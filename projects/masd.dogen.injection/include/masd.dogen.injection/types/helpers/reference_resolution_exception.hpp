@@ -18,31 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_INJECTION_TYPES_HELPERS_REFERENCES_PATH_FINDER_HPP
-#define MASD_DOGEN_INJECTION_TYPES_HELPERS_REFERENCES_PATH_FINDER_HPP
+#ifndef MASD_DOGEN_INJECTION_TYPES_HELPERS_REFERENCE_RESOLUTION_EXCEPTION_HPP
+#define MASD_DOGEN_INJECTION_TYPES_HELPERS_REFERENCE_RESOLUTION_EXCEPTION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace masd::dogen::injection::helpers {
 
-class references_path_finder final {
+class reference_resolution_exception : public virtual std::exception, public virtual boost::exception {
 public:
-    references_path_finder() = default;
-    references_path_finder(const references_path_finder&) = default;
-    references_path_finder(references_path_finder&&) = default;
-    ~references_path_finder() = default;
-    references_path_finder& operator=(const references_path_finder&) = default;
+    reference_resolution_exception() = default;
+    ~reference_resolution_exception() noexcept = default;
 
 public:
-    bool operator==(const references_path_finder& rhs) const;
-    bool operator!=(const references_path_finder& rhs) const {
-        return !this->operator==(rhs);
-    }
+    explicit reference_resolution_exception(const std::string& message) : message_(message) { }
 
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
 };
 
 }

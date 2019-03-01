@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "masd.dogen.annotations/io/annotation_io.hpp"
 #include "masd.dogen.injection/io/meta_model/attribute_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -76,10 +77,11 @@ namespace masd::dogen::injection::meta_model {
 std::ostream& operator<<(std::ostream& s, const attribute& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::injection::meta_model::attribute\"" << ", "
-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "
       << "\"stereotypes\": " << v.stereotypes() << ", "
+      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"annotation\": " << v.annotation() << ", "
       << "\"type\": " << "\"" << tidy_up_string(v.type()) << "\""
       << " }";
     return(s);

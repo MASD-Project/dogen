@@ -33,13 +33,13 @@
 namespace masd::dogen::injection::transforms {
 
 /**
- * @brief Given the location of a supported exogenous model, it
- * obtains it and transforms it into an injection model.
+ * @brief Given the location of a supported external model, it obtains
+ * it and transforms it into an injection model.
  */
 class model_production_chain final {
 private:
     /*
-     * @brief Given a path to an exogenous model, returns the
+     * @brief Given a path to an external model, returns the
      * appropriate decoding transform for it.
      */
     static decoding_transform_interface&
@@ -54,10 +54,10 @@ public:
 
 public:
     /**
-     * @brief Apply the transform to the exogenous model at path @e p.
+     * @brief Apply the transform to the external model at path @e p.
      *
      * @pre @e p must point to a valid file, and contain a supported
-     * exogenous model.
+     * external model.
      */
     static meta_model::model
     transform(const context& ctx, const boost::filesystem::path& p);

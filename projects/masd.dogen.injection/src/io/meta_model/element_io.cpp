@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
+#include "masd.dogen.annotations/io/annotation_io.hpp"
 #include "masd.dogen.injection/io/meta_model/element_io.hpp"
 #include "masd.dogen.injection/io/meta_model/attribute_io.hpp"
 
@@ -98,10 +99,11 @@ std::ostream& operator<<(std::ostream& s, const element& v) {
 
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::injection::meta_model::element\"" << ", "
-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "
       << "\"stereotypes\": " << v.stereotypes() << ", "
+      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"annotation\": " << v.annotation() << ", "
       << "\"parents\": " << v.parents() << ", "
       << "\"attributes\": " << v.attributes() << ", "
       << "\"fallback_element_type\": " << "\"" << tidy_up_string(v.fallback_element_type()) << "\"" << ", "

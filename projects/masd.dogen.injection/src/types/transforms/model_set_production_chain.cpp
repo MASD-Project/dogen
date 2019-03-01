@@ -18,12 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.injection/types/transforms/model_production_chain.hpp"
 #include "masd.dogen.injection/types/transforms/model_set_production_chain.hpp"
 
 namespace masd::dogen::injection::transforms {
 
-bool model_set_production_chain::operator==(const model_set_production_chain& /*rhs*/) const {
-    return true;
+meta_model::model_set
+model_set_production_chain::transform(const context& /*ctx*/,
+    const boost::filesystem::path& /*p*/,
+    std::unordered_set<std::string>& /*processed_models*/,
+    const bool /*is_target*/) {
+
+    meta_model::model_set r;
+    return r;
+}
+
+meta_model::model_set
+model_set_production_chain::transform(const context& ctx,
+    const boost::filesystem::path& p) {
+    std::unordered_set<std::string> processed_models;
+    return transform(ctx, p, processed_models, true/*is_target*/);
 }
 
 }
