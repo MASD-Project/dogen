@@ -12,19 +12,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-01 Fri 11:20]
+#+CAPTION: Clock summary at [2019-03-01 Fri 11:31]
 | <75>                                                |         |       |      |       |
 | Headline                                            | Time    |       |      |     % |
 |-----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                        | *12:16* |       |      | 100.0 |
+| *Total time*                                        | *12:26* |       |      | 100.0 |
 |-----------------------------------------------------+---------+-------+------+-------|
-| Stories                                             | 12:16   |       |      | 100.0 |
-| Active                                              |         | 12:16 |      | 100.0 |
-| Edit release notes for previous sprint              |         |       | 1:27 |  11.8 |
+| Stories                                             | 12:26   |       |      | 100.0 |
+| Active                                              |         | 12:26 |      | 100.0 |
+| Edit release notes for previous sprint              |         |       | 1:27 |  11.7 |
 | Sprint and product backlog grooming                 |         |       | 0:18 |   2.4 |
-| Implement text model generation chain in generation |         |       | 3:45 |  30.6 |
-| Move generation model out of coding                 |         |       | 4:22 |  35.6 |
-| Rename endomodel to just model                      |         |       | 2:01 |  16.4 |
+| Implement text model generation chain in generation |         |       | 3:45 |  30.2 |
+| Move generation model out of coding                 |         |       | 4:22 |  35.1 |
+| Rename endomodel to just model                      |         |       | 2:11 |  17.6 |
 | Remove exomodel remnants                            |         |       | 0:03 |   0.4 |
 | Try to fix valgrind warning on =find_files=         |         |       | 0:20 |   2.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
@@ -255,6 +255,7 @@ handles the tracer creation in injection.
 *** COMPLETED Rename endomodel to just model                          :story:
     CLOSED: [2019-03-01 Fri 11:16]
     :LOGBOOK:
+    CLOCK: [2019-03-01 Fri 11:21]--[2019-03-01 Fri 11:31] =>  0:10
     CLOCK: [2019-03-01 Fri 10:55]--[2019-03-01 Fri 11:16] =>  0:21
     CLOCK: [2019-03-01 Fri 09:14]--[2019-03-01 Fri 10:54] =>  1:40
     :END:

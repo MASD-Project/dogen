@@ -26,35 +26,33 @@
 #endif
 
 /**
- * @brief Yarn is the Dogen meta-model.
+ * @brief Coding is the core Dogen meta-model representing software entities.
  *
  * @section coding_0 Overview
  *
  * Coding is a meta-model that provides a programming-language-neutral
- * type representation, designed for code generation. There are two core
- * types in coding: @e model and @e model. Intermediate models are
- * obtained via @frontends and post-processed until they form a cohesive
- * whole. They are then transformed into a final model representation, at
- * which point they are suitable for code generation.
+ * type representation, designed for code generation. Intermediate models
+ * are obtained via frontends and post-processed until they form a
+ * cohesive whole. They are then suitable to be sent down the
+ * pipeline for further processing.
  *
  * @section coding_0 Mission
  *
  * Coding's objectives are:
  *
- * @li to provide a set of constructs that the frontends can map to
- * easily, as well as the machinery for frontend management
- * (registration, etc.).
+ * @li to represent all high-level entities that exist across a number
+ * of technical spaces used in software engineering. These entities
+ * are not necessarily limited to programming language entities, though
+ * of course, these form the core set of elements we're interested in.
+ * Additional entities such as build sytems and high-level patterns
+ * such as GoF and others are also captured.
  *
- * @li to provide the tooling required to combine multiple intermediate
- * coding models together into a bigger model - called the intermediate
- * @e merged model.
+ * @li to provide the tooling required to combine multiple coding
+ * models together into a bigger model - called the @e merged model.
  *
- * @li to ensure the consistency of the intermediate merged model via
- * validation rules (such as verifying that all types have a definitions,
+ * @li to ensure the consistency of the merged model via validation
+ * rules (such as verifying that all types have a definitions,
  * etc.).
- *
- * @li to provide all the information required to build the final model
- * and to build it.
  */
 namespace masd::dogen::coding {
 }
