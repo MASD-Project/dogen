@@ -18,24 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_ALL_HPP
-#define MASD_DOGEN_ORCHESTRATION_TYPES_ALL_HPP
+#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_INJECTION_MODEL_GENERATION_CHAIN_HPP
+#define MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_INJECTION_MODEL_GENERATION_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.orchestration/types/weaver.hpp"
-#include "masd.dogen.orchestration/types/converter.hpp"
-#include "masd.dogen.orchestration/types/generator.hpp"
-#include "masd.dogen.orchestration/types/orchestration.hpp"
-#include "masd.dogen.orchestration/types/context_factory.hpp"
-#include "masd.dogen.orchestration/types/injector_factory.hpp"
-#include "masd.dogen.orchestration/types/factory_exception.hpp"
-#include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
-#include "masd.dogen.orchestration/types/transforms/coding_model_generation_chain.hpp"
-#include "masd.dogen.orchestration/types/transforms/injection_model_generation_chain.hpp"
-#include "masd.dogen.orchestration/types/transforms/extraction_model_generation_chain.hpp"
-#include "masd.dogen.orchestration/types/transforms/generation_model_generation_chain.hpp"
+#include <algorithm>
+
+namespace masd::dogen::orchestration::transforms {
+
+class injection_model_generation_chain final {
+public:
+    injection_model_generation_chain() = default;
+    injection_model_generation_chain(const injection_model_generation_chain&) = default;
+    injection_model_generation_chain(injection_model_generation_chain&&) = default;
+    ~injection_model_generation_chain() = default;
+    injection_model_generation_chain& operator=(const injection_model_generation_chain&) = default;
+
+public:
+    bool operator==(const injection_model_generation_chain& rhs) const;
+    bool operator!=(const injection_model_generation_chain& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
+
+}
 
 #endif
