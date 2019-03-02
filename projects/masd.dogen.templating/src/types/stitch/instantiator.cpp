@@ -147,10 +147,10 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
          * annotation object and use it to generate the properties.
          */
         const auto st(annotations::scope_types::root_module);
-        auto a(annotation_factory_.make(r.body().tagged_values(), st));
-        annotation_expander_.expand(a);
-        BOOST_LOG_SEV(lg, debug) << "Annotation: " << a;
-        r.properties(properties_factory_.make(a));
+        const auto original(annotation_factory_.make(r.body().tagged_values(), st));
+        const auto expanded(annotation_expander_.expand(original));
+        BOOST_LOG_SEV(lg, debug) << "Annotation: " << expanded;
+        r.properties(properties_factory_.make(expanded));
 
         /*
          * Perform the required processing for wale templates.
