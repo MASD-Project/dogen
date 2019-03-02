@@ -4849,7 +4849,7 @@ for Java, etc.#</dia:string>
         <dia:point val="30.265,100.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.515,99.85;47.05,106.05"/>
+        <dia:rectangle val="29.515,99.85;48.05,106.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4857,8 +4857,8 @@ for Java, etc.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="30.265,100.6"/>
         <dia:point val="30.265,106"/>
-        <dia:point val="47,106"/>
-        <dia:point val="47,100.6"/>
+        <dia:point val="48,106"/>
+        <dia:point val="48,100.6"/>
         <dia:point val="45.53,100.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
