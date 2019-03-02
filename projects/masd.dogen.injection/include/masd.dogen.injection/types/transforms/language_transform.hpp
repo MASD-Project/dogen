@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <string>
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/type.hpp"

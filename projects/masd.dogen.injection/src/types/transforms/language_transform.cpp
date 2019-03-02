@@ -20,11 +20,13 @@
  */
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.injection/types/traits.hpp"
+#include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/transformation_error.hpp"
 #include "masd.dogen.injection/types/transforms/language_transform.hpp"
@@ -55,10 +57,15 @@ std::string language_transform::make_input_language(const type_group& tg,
 }
 
 void language_transform::transform(const context& ctx, meta_model::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "referencestransform",
+        transform_id, m.name(), ctx.tracer(), m);
+
     const auto tg(make_type_group(ctx.type_repository()));
     const auto ra(m.annotation());
     const auto l(make_input_language(tg, ra));
     m.language(l);
+
+    stp.end_transform(m);
 }
 
 }

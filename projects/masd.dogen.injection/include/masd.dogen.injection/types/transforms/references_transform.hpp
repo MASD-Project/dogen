@@ -25,24 +25,29 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.injection/types/meta_model/model.hpp"
+#include "masd.dogen.injection/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::injection::transforms {
 
 class references_transform final {
-public:
-    references_transform() = default;
-    references_transform(const references_transform&) = default;
-    references_transform(references_transform&&) = default;
-    ~references_transform() = default;
-    references_transform& operator=(const references_transform&) = default;
+private:
+    struct type_group {
+        annotations::type reference;
+    };
+    friend std::ostream& operator<<(std::ostream& s,
+        const type_group& v);
+
+    static type_group make_type_group(const annotations::type_repository& atrp);
+
+    static std::list<std::string> make_references(const type_group& tg,
+        const annotations::annotation& a);
 
 public:
-    bool operator==(const references_transform& rhs) const;
-    bool operator!=(const references_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const context& ctx, meta_model::model& m);
 };
 
 }

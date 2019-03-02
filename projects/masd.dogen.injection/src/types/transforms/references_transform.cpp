@@ -18,12 +18,74 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/list_io.hpp"
+#include "masd.dogen.utility/types/filesystem/file.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.annotations/io/type_io.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.injection/io/meta_model/model_io.hpp"
+#include "masd.dogen.injection/types/traits.hpp"
+#include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/references_transform.hpp"
+
+namespace {
+
+const std::string transform_id("injection.transforms.references_transform");
+
+using namespace masd::dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
 
 namespace masd::dogen::injection::transforms {
 
-bool references_transform::operator==(const references_transform& /*rhs*/) const {
-    return true;
+std::ostream&
+operator<<(std::ostream& s, const references_transform::type_group& v) {
+
+    s << " { "
+      << "\"__type__\": " << "\"masd::dogen::coding::"
+      << "descriptor_factory::type_group\"" << ", "
+      << "\"references\": " << v.reference
+      << " }";
+
+    return s;
+}
+
+references_transform::type_group references_transform::
+make_type_group(const annotations::type_repository& atrp) {
+    BOOST_LOG_SEV(lg, debug) << "Creating type group.";
+
+    type_group r;
+    const annotations::type_repository_selector s(atrp);
+    r.reference = s.select_type_by_name(traits::reference());
+
+    BOOST_LOG_SEV(lg, debug) << "Created type group. Result: " << r;
+    return r;
+}
+
+std::list<std::string> references_transform::
+make_references(const type_group& tg, const annotations::annotation& a) {
+    const annotations::entry_selector s(a);
+    const auto& ref(tg.reference);
+    if (s.has_entry(ref))
+        return s.get_text_collection_content(ref);
+
+    return std::list<std::string>{};
+}
+
+void references_transform::transform(const context& ctx, meta_model::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "referencestransform",
+        transform_id, m.name(), ctx.tracer(), m);
+
+    const auto tg(make_type_group(ctx.type_repository()));
+    const auto ra(m.annotation());
+    const auto refs(make_references(tg, ra));
+    m.references(refs);
+
+    stp.end_transform(m);
 }
 
 }
