@@ -12,24 +12,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-02 Sat 15:36]
+#+CAPTION: Clock summary at [2019-03-02 Sat 15:52]
 | <75>                                                     |         |       |      |       |
 | Headline                                                 | Time    |       |      |     % |
 |----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                             | *22:39* |       |      | 100.0 |
+| *Total time*                                             | *22:52* |       |      | 100.0 |
 |----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                  | 22:39   |       |      | 100.0 |
-| Active                                                   |         | 22:39 |      | 100.0 |
-| Edit release notes for previous sprint                   |         |       | 1:27 |   6.4 |
+| Stories                                                  | 22:52   |       |      | 100.0 |
+| Active                                                   |         | 22:52 |      | 100.0 |
+| Edit release notes for previous sprint                   |         |       | 1:27 |   6.3 |
 | Sprint and product backlog grooming                      |         |       | 0:42 |   3.1 |
-| Implement text model generation chain in generation      |         |       | 3:45 |  16.6 |
-| Move generation model out of coding                      |         |       | 4:22 |  19.3 |
-| Rename endomodel to just model                           |         |       | 2:11 |   9.6 |
+| Implement text model generation chain in generation      |         |       | 3:45 |  16.4 |
+| Move generation model out of coding                      |         |       | 4:22 |  19.1 |
+| Rename endomodel to just model                           |         |       | 2:11 |   9.5 |
 | Remove exomodel remnants                                 |         |       | 0:03 |   0.2 |
-| Consider adding a dot graph of the transforms to probing |         |       | 1:47 |   7.9 |
+| Consider adding a dot graph of the transforms to probing |         |       | 1:47 |   7.8 |
+| Split annotations processing into two phases             |         |       | 3:10 |  13.8 |
 | Try to fix valgrind warning on =find_files=              |         |       | 0:20 |   1.5 |
-| Move injection processing out of coding                  |         |       | 5:05 |  22.4 |
-| Split annotations processing into two phases             |         |       | 2:57 |  13.0 |
+| Move injection processing out of coding                  |         |       | 5:05 |  22.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -332,6 +332,101 @@ Links:
 
 - [[https://renenyffenegger.ch/notes/tools/Graphviz/examples/index][Graphviz (dot) examples]]
 
+*** COMPLETED Split annotations processing into two phases            :story:
+    CLOSED: [2019-03-02 Sat 15:52]
+    :LOGBOOK:
+    CLOCK: [2019-03-02 Sat 15:37]--[2019-03-02 Sat 15:50] =>  0:13
+    CLOCK: [2019-03-02 Sat 15:12]--[2019-03-02 Sat 15:36] =>  0:24
+    CLOCK: [2019-03-02 Sat 15:01]--[2019-03-02 Sat 15:11] =>  0:10
+    CLOCK: [2019-03-02 Sat 08:01]--[2019-03-02 Sat 08:20] =>  0:19
+    CLOCK: [2019-03-02 Sat 07:19]--[2019-03-02 Sat 08:00] =>  0:41
+    CLOCK: [2019-03-02 Sat 07:09]--[2019-03-02 Sat 07:18] =>  0:09
+    CLOCK: [2019-03-02 Sat 06:31]--[2019-03-02 Sat 07:08] =>  0:37
+    CLOCK: [2019-03-01 Fri 18:01]--[2019-03-01 Fri 18:18] =>  0:17
+    CLOCK: [2019-03-01 Fri 17:40]--[2019-03-01 Fri 18:00] =>  0:20
+    :END:
+
+At present the annotation factory does two very distinct jobs:
+
+- the creation of an annotation. For this we just need to map the KVPs
+  to a slightly more typed structure. This should be doable at pretty
+  much any time.
+- profile expansion. For this we need for all the fields to have been
+  setup and template expanded; we need the stereotypes to have been
+  processed and we need the profiles to have been processed. Only then
+  we can match the dynamic stereotypes against the profiles and setup
+  the annotation.
+
+In a world where profiles are distinct meta-entities, this is fine
+because we can ensure we read the JSON files first and then perform
+model processing. However, going forward, we want models to contain
+profiles (once they are renamed to something more sensible). What this
+means is that we have a circular dependency between profiles and
+models. This had been understood in the past (somewhere in the product
+backlog) but we didn't quite point out a solution.
+
+The solution appears simple: split annotation processing into two
+steps:
+
+- First we initialise the annotation without any further
+  processing. This then allows users to query it, but if they do, they
+  will not see any of the profile related fields. This should be ok
+  because we are just looking for a few root module properties
+  (references, etc). We've already performed some analysis on this -
+  locate this story.
+- Second we expand the profiles. This must be done very early on in
+  coding. Unfortunately, we also made another mistake: when we adapt a
+  injection element into their coding meta-type, we are performing the
+  annotation expansion. This made sense at the time, but its now not
+  ideal because we want to resolve all types to their coding types
+  before we perform profile expansion (so that we can locate the
+  profiles first amongst the meta-types and perform their
+  initialisation).
+
+Problems:
+
+- something is not quite right with stitch expansion; we used to have
+  profile expansion before (somehow) but now it does not work any
+  more. Fixed.
+
+Tasks:
+
+- create a "profile expander" that takes on the role of profile
+  expansion from annotation factory. Update existing transform to call
+  first the factory then the expander and make sure nothing breaks.
+- add annotation processing to injection, including annotation factory
+  (minus profile expansion).
+- remove annotations factory work from new adapter, reusing instead
+  injection annotation.
+- finish the injection clean up, removing all of the injection related
+  transforms.
+- create a profile expansion transform, performed after the injection
+  to coding transform.
+- at this point, we are now read to introduce a new transform that
+  will sit just before the profile expansion transform and which will
+  filter all the meta-elements in the model (such as profiles) and
+  pre-process them prior to profile expansion. There will likely be
+  some complications related to naming (this transform must be done
+  before resolution etc and profiles are a form of name resolution).
+
+Notes:
+
+- note that types are different from profiles: once we code-generate
+  the types code, we will register them at initialisation time. This
+  can be done exactly as is at present, but instead of reading the
+  type templates from JSON we are merely creating some C++ code which
+  performs the same role. Then, we can initialise the type repository
+  as we do at present (during context generation), which will then
+  perform the template expansion and so forth. All of this must
+  precede both profile expansion and any querying of annotations prior
+  to expansion. The best way to achieve this is to create a type
+  registrar that allows generated code to register types. We can call
+  this generate code in the initialiser.
+- the generation of the fields will require a transform that creates a
+  masd::object with the fields, the class that registers the type, and
+  a class that reads the fields to populate the object. We need LAM to
+  map types from annotations to the output language.
+
 *** STARTED Try to fix valgrind warning on =find_files=               :story:
     :LOGBOOK:
     CLOCK: [2019-02-27 Wed 17:25]--[2019-02-27 Wed 17:45] =>  0:20
@@ -388,99 +483,6 @@ Notes:
 - system models should be referenced just like any other model. The
   only difference is that they are sourced from elsewhere. This means
   we can now implement the reference models directory path approach.
-
-*** STARTED Split annotations processing into two phases              :story:
-    :LOGBOOK:
-    CLOCK: [2019-03-02 Sat 15:12]--[2019-03-02 Sat 15:36] =>  0:24
-    CLOCK: [2019-03-02 Sat 15:01]--[2019-03-02 Sat 15:11] =>  0:10
-    CLOCK: [2019-03-02 Sat 08:01]--[2019-03-02 Sat 08:20] =>  0:19
-    CLOCK: [2019-03-02 Sat 07:19]--[2019-03-02 Sat 08:00] =>  0:41
-    CLOCK: [2019-03-02 Sat 07:09]--[2019-03-02 Sat 07:18] =>  0:09
-    CLOCK: [2019-03-02 Sat 06:31]--[2019-03-02 Sat 07:08] =>  0:37
-    CLOCK: [2019-03-01 Fri 18:01]--[2019-03-01 Fri 18:18] =>  0:17
-    CLOCK: [2019-03-01 Fri 17:40]--[2019-03-01 Fri 18:00] =>  0:20
-    :END:
-
-At present the annotation factory does two very distinct jobs:
-
-- the creation of an annotation. For this we just need to map the KVPs
-  to a slightly more typed structure. This should be doable at pretty
-  much any time.
-- profile expansion. For this we need for all the fields to have been
-  setup and template expanded; we need the stereotypes to have been
-  processed and we need the profiles to have been processed. Only then
-  we can match the dynamic stereotypes against the profiles and setup
-  the annotation.
-
-In a world where profiles are distinct meta-entities, this is fine
-because we can ensure we read the JSON files first and then perform
-model processing. However, going forward, we want models to contain
-profiles (once they are renamed to something more sensible). What this
-means is that we have a circular dependency between profiles and
-models. This had been understood in the past (somewhere in the product
-backlog) but we didn't quite point out a solution.
-
-The solution appears simple: split annotation processing into two
-steps:
-
-- First we initialise the annotation without any further
-  processing. This then allows users to query it, but if they do, they
-  will not see any of the profile related fields. This should be ok
-  because we are just looking for a few root module properties
-  (references, etc). We've already performed some analysis on this -
-  locate this story.
-- Second we expand the profiles. This must be done very early on in
-  coding. Unfortunately, we also made another mistake: when we adapt a
-  injection element into their coding meta-type, we are performing the
-  annotation expansion. This made sense at the time, but its now not
-  ideal because we want to resolve all types to their coding types
-  before we perform profile expansion (so that we can locate the
-  profiles first amongst the meta-types and perform their
-  initialisation).
-
-Problems:
-
-- something is not quite right with stitch expansion; we used to have
-  profile expansion before (somehow) but now it does not work any
-  more.
-
-Tasks:
-
-- create a "profile expander" that takes on the role of profile
-  expansion from annotation factory. Update existing transform to call
-  first the factory then the expander and make sure nothing breaks.
-- add annotation processing to injection, including annotation factory
-  (minus profile expansion).
-- remove annotations factory work from new adapter, reusing instead
-  injection annotation.
-- finish the injection clean up, removing all of the injection related
-  transforms.
-- create a profile expansion transform, performed after the injection
-  to coding transform.
-- at this point, we are now read to introduce a new transform that
-  will sit just before the profile expansion transform and which will
-  filter all the meta-elements in the model (such as profiles) and
-  pre-process them prior to profile expansion. There will likely be
-  some complications related to naming (this transform must be done
-  before resolution etc and profiles are a form of name resolution).
-
-Notes:
-
-- note that types are different from profiles: once we code-generate
-  the types code, we will register them at initialisation time. This
-  can be done exactly as is at present, but instead of reading the
-  type templates from JSON we are merely creating some C++ code which
-  performs the same role. Then, we can initialise the type repository
-  as we do at present (during context generation), which will then
-  perform the template expansion and so forth. All of this must
-  precede both profile expansion and any querying of annotations prior
-  to expansion. The best way to achieve this is to create a type
-  registrar that allows generated code to register types. We can call
-  this generate code in the initialiser.
-- the generation of the fields will require a transform that creates a
-  masd::object with the fields, the class that registers the type, and
-  a class that reads the fields to populate the object. We need LAM to
-  map types from annotations to the output language.
 
 *** Rename =fallback_element_type=                                    :story:
 

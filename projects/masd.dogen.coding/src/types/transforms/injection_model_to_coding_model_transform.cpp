@@ -203,7 +203,7 @@ process_element(const helpers::new_adapter& ad, const meta_model::location& l,
         insert(ad.to_enumeration(l, scr, e), em.enumerations());
         break;
     case static_stereotypes::module:
-        insert(ad.to_module(false/*is_root_module*/, l, scr, e), em.modules());
+        insert(ad.to_module(l, scr, e), em.modules());
         break;
     case static_stereotypes::builtin:
         insert(ad.to_builtin(l, scr, e), em.builtins());
@@ -241,8 +241,7 @@ transform(const context& ctx, const injection::meta_model::model& m) {
     r.name(b.build());
     BOOST_LOG_SEV(lg, debug) << "Computed model name: " << r.name();
 
-    const helpers::new_adapter
-        ad(ctx.annotation_factory(), ctx.annotation_expander());
+    const helpers::new_adapter ad(ctx.annotation_expander());
     for (const auto& e : m.elements()) {
         const auto l(e.in_global_module() ? empty_location : model_location);
         process_element(ad, l, e, r);

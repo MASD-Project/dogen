@@ -36,18 +36,12 @@ static logger lg(logger_factory("coding.helpers.new_adapter"));
 const std::string empty_name("Name is empty.");
 const std::string enumerator_with_type("Enumerators cannot have a type: ");
 
-using masd::dogen::annotations::scope_types;
-const scope_types entity_scope(scope_types::entity);
-const scope_types root_scope(scope_types::root_module);
-const scope_types property_scope(scope_types::property);
-
 }
 
 namespace masd::dogen::coding::helpers {
 
-new_adapter::new_adapter(const annotations::annotation_factory& f,
-    const annotations::annotation_expander& e)
-    : annotation_factory_(f), annotation_expander_(e) {}
+new_adapter::new_adapter(const annotations::annotation_expander& e)
+    : annotation_expander_(e) {}
 
 void new_adapter::ensure_not_empty(const std::string& n) const {
     if (n.empty()) {
@@ -79,52 +73,48 @@ meta_model::name new_adapter::to_name(const meta_model::location& l,
 
 meta_model::attribute
 new_adapter::to_attribute(const meta_model::location& /*l*/,
-    const injection::meta_model::attribute& ea) const {
-    ensure_not_empty(ea.name());
+    const injection::meta_model::attribute& ia) const {
+    ensure_not_empty(ia.name());
 
     meta_model::attribute r;
-    r.name().simple(ea.name()); // FIXME
-    r.unparsed_type(ea.type());
-    r.documentation(ea.documentation());
-    r.annotation(annotation_factory_.make(ea.tagged_values(), property_scope));
+    r.name().simple(ia.name()); // FIXME
+    r.unparsed_type(ia.type());
+    r.documentation(ia.documentation());
+    r.annotation(annotation_expander_.expand(ia.annotation()));
 
     return r;
 }
 
 meta_model::enumerator
 new_adapter::to_enumerator(const meta_model::location& /*l*/,
-    const injection::meta_model::attribute& ea) const {
-    ensure_not_empty(ea.name());
+    const injection::meta_model::attribute& ia) const {
+    ensure_not_empty(ia.name());
 
-    if (!ea.type().empty()) {
-        const auto t(ea.type());
+    if (!ia.type().empty()) {
+        const auto t(ia.type());
         BOOST_LOG_SEV(lg, error) << enumerator_with_type << t;
         BOOST_THROW_EXCEPTION(adaptation_error(enumerator_with_type + t));
     }
 
     meta_model::enumerator r;
-    r.name().simple(ea.name()); // FIXME
-    r.documentation(ea.documentation());
-    r.annotation(annotation_factory_.make(ea.tagged_values(), property_scope));
+    r.name().simple(ia.name()); // FIXME
+    r.documentation(ia.documentation());
+    r.annotation(annotation_expander_.expand(ia.annotation()));
 
     return r;
 }
 
-void new_adapter::populate_element(const annotations::scope_types scope,
-    const meta_model::location& l,
+void new_adapter::populate_element(const meta_model::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ee, meta_model::element& e) const {
-    e.name(to_name(l, ee.name()));
+    const injection::meta_model::element& ie, meta_model::element& e) const {
+    e.name(to_name(l, ie.name()));
     e.origin_type(meta_model::origin_types::not_yet_determined);
-    e.documentation(ee.documentation());
+    e.documentation(ie.documentation());
     e.static_stereotypes(scr.static_stereotypes());
 
     const auto& ds(scr.dynamic_stereotypes());
     e.dynamic_stereotypes(ds);
-
-    const auto& tv(ee.tagged_values());
-    auto a(annotation_factory_.make(tv, scope));
-    e.annotation(annotation_expander_.expand(ds, a));
+    e.annotation(annotation_expander_.expand(ds, ie.annotation()));
     e.in_global_module(
         l.external_modules().empty() && l.model_modules().empty());
 }
@@ -132,19 +122,19 @@ void new_adapter::populate_element(const annotations::scope_types scope,
 boost::shared_ptr<meta_model::object>
 new_adapter::to_object(const meta_model::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ee) const {
+    const injection::meta_model::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming external element to object: "
-                             << ee.name();
+                             << ie.name();
 
     auto r(boost::make_shared<meta_model::object>());
-    populate_element(entity_scope, l, scr, ee, *r);
-    r->is_associative_container(ee.is_associative_container());
-    r->can_be_primitive_underlier(ee.can_be_primitive_underlier());
+    populate_element(l, scr, ie, *r);
+    r->is_associative_container(ie.is_associative_container());
+    r->can_be_primitive_underlier(ie.can_be_primitive_underlier());
 
-    for (const auto& attr : ee.attributes())
+    for (const auto& attr : ie.attributes())
         r->local_attributes().push_back(to_attribute(l, attr));
 
-    for (const auto& p : ee.parents())
+    for (const auto& p : ie.parents())
         r->parents().push_back(to_name(l, p));
 
     return r;
@@ -153,17 +143,17 @@ new_adapter::to_object(const meta_model::location& l,
 boost::shared_ptr<meta_model::object_template>
 new_adapter::to_object_template(const meta_model::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ee) const {
+    const injection::meta_model::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming external element "
-                             << "to object template: " << ee.name();
+                             << "to object template: " << ie.name();
 
     auto r(boost::make_shared<meta_model::object_template>());
-    populate_element(entity_scope, l, scr, ee, *r);
+    populate_element(l, scr, ie, *r);
 
-    for (const auto& attr : ee.attributes())
+    for (const auto& attr : ie.attributes())
         r->local_attributes().push_back(to_attribute(l, attr));
 
-    for (const auto& p : ee.parents())
+    for (const auto& p : ie.parents())
         r->parents().push_back(to_name(l, p));
 
     return r;
@@ -172,71 +162,69 @@ new_adapter::to_object_template(const meta_model::location& l,
 boost::shared_ptr<meta_model::exception>
 new_adapter::to_exception(const meta_model::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ee) const {
+    const injection::meta_model::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming external element to exception: "
-                             << ee.name();
+                             << ie.name();
 
     auto r(boost::make_shared<meta_model::exception>());
-    populate_element(entity_scope, l, scr, ee, *r);
+    populate_element(l, scr, ie, *r);
     return r;
 }
 
 boost::shared_ptr<meta_model::primitive>
 new_adapter::to_primitive(const meta_model::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ee) const {
+    const injection::meta_model::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming external element to primitive: "
-                             << ee.name();
+                             << ie.name();
 
     auto r(boost::make_shared<meta_model::primitive>());
-    populate_element(entity_scope, l, scr, ee, *r);
+    populate_element(l, scr, ie, *r);
     return r;
 }
 
 boost::shared_ptr<meta_model::enumeration>
 new_adapter::to_enumeration(const meta_model::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ee) const {
+    const injection::meta_model::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming external element to enumeration: "
-                             << ee.name();
+                             << ie.name();
 
     auto r(boost::make_shared<meta_model::enumeration>());
-    populate_element(entity_scope, l, scr, ee, *r);
+    populate_element(l, scr, ie, *r);
 
-    for (const auto& attr : ee.attributes())
+    for (const auto& attr : ie.attributes())
         r->enumerators().push_back(to_enumerator(l, attr));
 
     return r;
 }
 
 boost::shared_ptr<meta_model::module> new_adapter::
-to_module(const bool is_root_module, const meta_model::location& l,
+to_module(const meta_model::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ee) const {
+    const injection::meta_model::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming external element to module: "
-                             << ee.name();
+                             << ie.name();
 
-    const auto st(is_root_module ? root_scope : entity_scope);
     auto r(boost::make_shared<meta_model::module>());
-    populate_element(st, l, scr, ee, *r);
+    populate_element(l, scr, ie, *r);
     return r;
 }
 
 boost::shared_ptr<meta_model::builtin>
 new_adapter::to_builtin(const meta_model::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ee) const {
+    const injection::meta_model::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming external element to builtin: "
-                             << ee.name();
+                             << ie.name();
 
-    const auto es(annotations::scope_types::entity);
     auto r(boost::make_shared<meta_model::builtin>());
-    populate_element(es, l, scr, ee, *r);
+    populate_element(l, scr, ie, *r);
 
-    r->can_be_primitive_underlier(ee.can_be_primitive_underlier());
-    r->is_default_enumeration_type(ee.is_default_enumeration_type());
-    r->is_floating_point(ee.is_floating_point());
-    r->can_be_enumeration_underlier(ee.can_be_enumeration_underlier());
+    r->can_be_primitive_underlier(ie.can_be_primitive_underlier());
+    r->is_default_enumeration_type(ie.is_default_enumeration_type());
+    r->is_floating_point(ie.is_floating_point());
+    r->can_be_enumeration_underlier(ie.can_be_enumeration_underlier());
 
     return r;
 }
