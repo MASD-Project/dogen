@@ -98,7 +98,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"annotation\": " << v.annotation() << ", "
       << "\"elements\": " << v.elements() << ", "
-      << "\"language\": " << "\"" << tidy_up_string(v.language()) << "\"" << ", "
+      << "\"input_language\": " << "\"" << tidy_up_string(v.input_language()) << "\"" << ", "
       << "\"references\": " << v.references()
       << " }";
     return(s);

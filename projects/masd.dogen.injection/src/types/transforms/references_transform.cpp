@@ -77,7 +77,7 @@ make_references(const type_group& tg, const annotations::annotation& a) {
 }
 
 void references_transform::transform(const context& ctx, meta_model::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "referencestransform",
+    tracing::scoped_transform_tracer stp(lg, "references transform",
         transform_id, m.name(), ctx.tracer(), m);
 
     const auto tg(make_type_group(ctx.type_repository()));

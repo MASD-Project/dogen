@@ -52,7 +52,7 @@ public:
         const std::string& name,
         const masd::dogen::annotations::annotation& annotation,
         const std::list<masd::dogen::injection::meta_model::element>& elements,
-        const std::string& language,
+        const std::string& input_language,
         const std::list<std::string>& references);
 
 public:
@@ -100,10 +100,10 @@ public:
     void elements(const std::list<masd::dogen::injection::meta_model::element>& v);
     void elements(const std::list<masd::dogen::injection::meta_model::element>&& v);
 
-    const std::string& language() const;
-    std::string& language();
-    void language(const std::string& v);
-    void language(const std::string&& v);
+    const std::string& input_language() const;
+    std::string& input_language();
+    void input_language(const std::string& v);
+    void input_language(const std::string&& v);
 
     const std::list<std::string>& references() const;
     std::list<std::string>& references();
@@ -127,7 +127,7 @@ private:
     std::string name_;
     masd::dogen::annotations::annotation annotation_;
     std::list<masd::dogen::injection::meta_model::element> elements_;
-    std::string language_;
+    std::string input_language_;
     std::list<std::string> references_;
 };
 

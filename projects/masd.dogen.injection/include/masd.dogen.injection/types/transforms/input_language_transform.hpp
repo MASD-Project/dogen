@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_LANGUAGE_TRANSFORM_HPP
-#define MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_LANGUAGE_TRANSFORM_HPP
+#ifndef MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_INPUT_LANGUAGE_TRANSFORM_HPP
+#define MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_INPUT_LANGUAGE_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,7 +33,7 @@
 
 namespace masd::dogen::injection::transforms {
 
-class language_transform final {
+class input_language_transform final {
 private:
     struct type_group {
         annotations::type input_language;

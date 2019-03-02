@@ -12,24 +12,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-02 Sat 19:37]
+#+CAPTION: Clock summary at [2019-03-02 Sat 19:45]
 | <75>                                                     |         |       |      |       |
 | Headline                                                 | Time    |       |      |     % |
 |----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                             | *23:32* |       |      | 100.0 |
+| *Total time*                                             | *23:39* |       |      | 100.0 |
 |----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                  | 23:32   |       |      | 100.0 |
-| Active                                                   |         | 23:32 |      | 100.0 |
-| Edit release notes for previous sprint                   |         |       | 1:27 |   6.2 |
+| Stories                                                  | 23:39   |       |      | 100.0 |
+| Active                                                   |         | 23:39 |      | 100.0 |
+| Edit release notes for previous sprint                   |         |       | 1:27 |   6.1 |
 | Sprint and product backlog grooming                      |         |       | 0:42 |   3.0 |
 | Implement text model generation chain in generation      |         |       | 3:45 |  15.9 |
-| Move generation model out of coding                      |         |       | 4:22 |  18.6 |
-| Rename endomodel to just model                           |         |       | 2:11 |   9.3 |
+| Move generation model out of coding                      |         |       | 4:22 |  18.5 |
+| Rename endomodel to just model                           |         |       | 2:11 |   9.2 |
 | Remove exomodel remnants                                 |         |       | 0:03 |   0.2 |
-| Consider adding a dot graph of the transforms to probing |         |       | 1:47 |   7.6 |
-| Split annotations processing into two phases             |         |       | 3:10 |  13.5 |
+| Consider adding a dot graph of the transforms to probing |         |       | 1:47 |   7.5 |
+| Split annotations processing into two phases             |         |       | 3:10 |  13.4 |
 | Try to fix valgrind warning on =find_files=              |         |       | 0:20 |   1.4 |
-| Move injection processing out of coding                  |         |       | 5:45 |  24.4 |
+| Move injection processing out of coding                  |         |       | 5:52 |  24.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -436,6 +436,7 @@ We seem to be doing something wrong with directory iterators:
 
 *** STARTED Move injection processing out of coding                   :story:
     :LOGBOOK:
+    CLOCK: [2019-03-02 Sat 19:38]--[2019-03-02 Sat 19:45] =>  0:07
     CLOCK: [2019-03-02 Sat 19:20]--[2019-03-02 Sat 19:37] =>  0:17
     CLOCK: [2019-03-02 Sat 18:56]--[2019-03-02 Sat 19:19] =>  0:23
     CLOCK: [2019-03-01 Fri 17:03]--[2019-03-01 Fri 17:39] =>  0:36
