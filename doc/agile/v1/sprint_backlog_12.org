@@ -12,24 +12,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-02 Sat 15:52]
+#+CAPTION: Clock summary at [2019-03-02 Sat 19:19]
 | <75>                                                     |         |       |      |       |
 | Headline                                                 | Time    |       |      |     % |
 |----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                             | *22:52* |       |      | 100.0 |
+| *Total time*                                             | *23:15* |       |      | 100.0 |
 |----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                  | 22:52   |       |      | 100.0 |
-| Active                                                   |         | 22:52 |      | 100.0 |
-| Edit release notes for previous sprint                   |         |       | 1:27 |   6.3 |
-| Sprint and product backlog grooming                      |         |       | 0:42 |   3.1 |
-| Implement text model generation chain in generation      |         |       | 3:45 |  16.4 |
-| Move generation model out of coding                      |         |       | 4:22 |  19.1 |
-| Rename endomodel to just model                           |         |       | 2:11 |   9.5 |
+| Stories                                                  | 23:15   |       |      | 100.0 |
+| Active                                                   |         | 23:15 |      | 100.0 |
+| Edit release notes for previous sprint                   |         |       | 1:27 |   6.2 |
+| Sprint and product backlog grooming                      |         |       | 0:42 |   3.0 |
+| Implement text model generation chain in generation      |         |       | 3:45 |  16.1 |
+| Move generation model out of coding                      |         |       | 4:22 |  18.8 |
+| Rename endomodel to just model                           |         |       | 2:11 |   9.4 |
 | Remove exomodel remnants                                 |         |       | 0:03 |   0.2 |
-| Consider adding a dot graph of the transforms to probing |         |       | 1:47 |   7.8 |
-| Split annotations processing into two phases             |         |       | 3:10 |  13.8 |
-| Try to fix valgrind warning on =find_files=              |         |       | 0:20 |   1.5 |
-| Move injection processing out of coding                  |         |       | 5:05 |  22.2 |
+| Consider adding a dot graph of the transforms to probing |         |       | 1:47 |   7.7 |
+| Split annotations processing into two phases             |         |       | 3:10 |  13.6 |
+| Try to fix valgrind warning on =find_files=              |         |       | 0:20 |   1.4 |
+| Move injection processing out of coding                  |         |       | 5:28 |  23.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -398,16 +398,6 @@ Tasks:
   (minus profile expansion).
 - remove annotations factory work from new adapter, reusing instead
   injection annotation.
-- finish the injection clean up, removing all of the injection related
-  transforms.
-- create a profile expansion transform, performed after the injection
-  to coding transform.
-- at this point, we are now read to introduce a new transform that
-  will sit just before the profile expansion transform and which will
-  filter all the meta-elements in the model (such as profiles) and
-  pre-process them prior to profile expansion. There will likely be
-  some complications related to naming (this transform must be done
-  before resolution etc and profiles are a form of name resolution).
 
 Notes:
 
@@ -446,6 +436,7 @@ We seem to be doing something wrong with directory iterators:
 
 *** STARTED Move injection processing out of coding                   :story:
     :LOGBOOK:
+    CLOCK: [2019-03-02 Sat 18:56]--[2019-03-02 Sat 19:19] =>  0:23
     CLOCK: [2019-03-01 Fri 17:03]--[2019-03-01 Fri 17:39] =>  0:36
     CLOCK: [2019-03-01 Fri 16:48]--[2019-03-01 Fri 17:02] =>  0:14
     CLOCK: [2019-03-01 Fri 14:55]--[2019-03-01 Fri 16:47] =>  1:52
@@ -483,6 +474,16 @@ Notes:
 - system models should be referenced just like any other model. The
   only difference is that they are sourced from elsewhere. This means
   we can now implement the reference models directory path approach.
+- finish the injection clean up, removing all of the injection related
+  transforms.
+- create a profile expansion transform, performed after the injection
+  to coding transform.
+- at this point, we are now read to introduce a new transform that
+  will sit just before the profile expansion transform and which will
+  filter all the meta-elements in the model (such as profiles) and
+  pre-process them prior to profile expansion. There will likely be
+  some complications related to naming (this transform must be done
+  before resolution etc and profiles are a form of name resolution).
 
 *** Rename =fallback_element_type=                                    :story:
 

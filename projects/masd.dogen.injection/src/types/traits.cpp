@@ -22,8 +22,14 @@
 
 namespace masd::dogen::injection {
 
-bool traits::operator==(const traits& /*rhs*/) const {
-    return true;
+std::string traits::input_language() {
+    static std::string r("masd.injection.input_language");
+    return r;
+}
+
+std::string traits::reference() {
+    static std::string r("masd.injection.reference");
+    return r;
 }
 
 }

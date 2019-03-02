@@ -22,6 +22,7 @@
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
+#include "masd.dogen.injection/types/transforms/language_transform.hpp"
 #include "masd.dogen.injection/types/transforms/annotations_transform.hpp"
 #include "masd.dogen.injection/types/transforms/model_production_chain.hpp"
 
@@ -73,6 +74,11 @@ transform(const context& ctx, const boost::filesystem::path& p) {
      * Process all annotations.
      */
     annotations_transform::transform(ctx, r);
+
+    /*
+     * Read the input language.
+     */
+    language_transform::transform(ctx, r);
 
     stp.end_chain(r);
     return r;

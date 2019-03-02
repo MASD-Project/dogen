@@ -25,24 +25,14 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
 
 namespace masd::dogen::injection {
 
 class traits final {
 public:
-    traits() = default;
-    traits(const traits&) = default;
-    traits(traits&&) = default;
-    ~traits() = default;
-    traits& operator=(const traits&) = default;
-
-public:
-    bool operator==(const traits& rhs) const;
-    bool operator!=(const traits& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static std::string input_language();
+    static std::string reference();
 };
 
 }
