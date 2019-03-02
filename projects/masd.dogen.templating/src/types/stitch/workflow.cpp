@@ -122,11 +122,12 @@ annotations::type_repository workflow::create_annotations_type_repository(
 std::list<extraction::meta_model::artefact>
 workflow::create_artefacts(const annotations::type_repository& atrp,
     const annotations::annotation_factory& af,
+    const annotations::annotation_expander& ae,
     const masd::dogen::extraction::repository& drp, const std::forward_list<
     boost::filesystem::path>& text_template_paths) const {
 
     std::list<extraction::meta_model::artefact> r;
-    const instantiator inst(atrp, af, drp);
+    const instantiator inst(atrp, af, ae, drp);
     for (const auto& p : text_template_paths)
         r.push_front(inst.instantiate(p));
 
@@ -156,9 +157,11 @@ void workflow::execute(const boost::filesystem::path& p) const {
 
     const auto cm(compatibility_mode_);
     const auto frp(create_formatting_repository(data_dirs));
-    annotations::annotation_factory af(data_dirs, alrp, atrp, cm);
+    annotations::annotation_factory af(alrp, atrp, cm);
+    annotations::annotation_expander ae(data_dirs, alrp, atrp, cm);
+
     properties_factory pf(atrp, frp);
-    const auto artefacts(create_artefacts(atrp, af, frp, paths));
+    const auto artefacts(create_artefacts(atrp, af, ae, frp, paths));
     write_artefacts(artefacts);
 
     BOOST_LOG_SEV(lg, debug) << "Finished executing workflow.";

@@ -31,6 +31,7 @@
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.annotations/types/scope_types.hpp"
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
+#include "masd.dogen.annotations/types/annotation_expander.hpp"
 #include "masd.dogen.injection/types/meta_model/attribute.hpp"
 #include "masd.dogen.injection/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/location.hpp"
@@ -51,7 +52,8 @@ namespace masd::dogen::coding::helpers {
 
 class new_adapter final {
 public:
-    explicit new_adapter(const annotations::annotation_factory& f);
+    new_adapter(const annotations::annotation_factory& f,
+        const annotations::annotation_expander& e);
 
 private:
     /**
@@ -162,6 +164,7 @@ public:
 
 private:
     const annotations::annotation_factory& annotation_factory_;
+    const annotations::annotation_expander& annotation_expander_;
 };
 
 }

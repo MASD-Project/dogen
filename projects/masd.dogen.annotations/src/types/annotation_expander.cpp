@@ -22,10 +22,8 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string/erase.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/list_io.hpp"
-#include "masd.dogen.utility/types/io/unordered_map_io.hpp"
 #include "masd.dogen.annotations/io/type_io.hpp"
 #include "masd.dogen.annotations/io/annotation_io.hpp"
 #include "masd.dogen.annotations/io/scope_types_io.hpp"
@@ -43,21 +41,11 @@ using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("annotations.annotation_expander"));
 
 const std::string empty;
-const std::string expected_scope(" Expected scope: ");
-const std::string actual_scope(" Actual scope: ");
-const std::string duplicate_type("Type already inserted: ");
-const std::string duplicate_key("Key already inserted: ");
-const std::string too_many_values("More than one value supplied against key: ");
-const std::string type_not_found("Type not found: ");
-const std::string field_used_in_invalid_scope("Field used in invalid scope: ");
 const std::string missing_profile(
     "Annotation uses a profile that could not be found: ");
 const std::string too_many_binds(
     "Too many candidate labels bind to a profile: ");
-
-// const std::string kernel_name("masd");
 const std::string type_name("masd.annotations.profile");
-
 const std::string default_root("default.root_module");
 
 }
@@ -241,6 +229,11 @@ annotation annotation_expander::expand(
      */
     BOOST_LOG_SEV(lg, debug) << "No profiles found, using original.";
     return a;
+}
+
+annotation annotation_expander::expand(const annotation& a) const {
+    std::list<std::string> candidate_labels;
+    return expand(candidate_labels, a);
 }
 
 }

@@ -46,8 +46,9 @@ std::shared_ptr<cpp::formatters::registrar> workflow::registrar_;
 
 workflow::workflow(const annotations::type_repository& atrp,
     const annotations::annotation_factory& af,
+    const annotations::annotation_expander& ae,
     const dogen::extraction::repository& frp)
-    : stitch_formatter_(atrp, af, frp) { }
+    : stitch_formatter_(atrp, af, ae, frp) { }
 
 cpp::formatters::registrar& workflow::registrar() {
     if (!registrar_)

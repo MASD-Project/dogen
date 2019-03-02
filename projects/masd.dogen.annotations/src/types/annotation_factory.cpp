@@ -19,22 +19,15 @@
  *
  */
 #include <sstream>
-#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/erase.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
-#include "masd.dogen.annotations/io/type_io.hpp"
 #include "masd.dogen.annotations/io/annotation_io.hpp"
 #include "masd.dogen.annotations/io/scope_types_io.hpp"
-#include "masd.dogen.annotations/types/merger.hpp"
-#include "masd.dogen.annotations/types/profiler.hpp"
 #include "masd.dogen.annotations/types/value_factory.hpp"
 #include "masd.dogen.annotations/types/building_error.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
 
 namespace {
@@ -42,7 +35,6 @@ namespace {
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("annotations.annotation_factory"));
 
-const std::string empty;
 const std::string expected_scope(" Expected scope: ");
 const std::string actual_scope(" Actual scope: ");
 const std::string duplicate_type("Type already inserted: ");
@@ -50,64 +42,16 @@ const std::string duplicate_key("Key already inserted: ");
 const std::string too_many_values("More than one value supplied against key: ");
 const std::string type_not_found("Type not found: ");
 const std::string field_used_in_invalid_scope("Field used in invalid scope: ");
-const std::string missing_profile(
-    "Annotation uses a profile that could not be found: ");
-const std::string too_many_binds(
-    "Too many candidate labels bind to a profile: ");
-
-// const std::string kernel_name("masd");
-const std::string type_name("masd.annotations.profile");
-
-const std::string default_root("default.root_module");
 
 }
 
 namespace masd::dogen::annotations {
 
 annotation_factory::annotation_factory(
-    const std::vector<boost::filesystem::path>& data_dirs,
     const archetype_location_repository& alrp,
     const type_repository& trp, const bool compatibility_mode)
-    : data_dirs_(data_dirs), archetype_location_repository_(alrp),
-      type_repository_(trp),
-      profiles_(create_annotation_profiles(compatibility_mode)),
-      type_group_(make_type_group()), compatibility_mode_(compatibility_mode) {}
-
-inline std::ostream&
-operator<<(std::ostream& s, const annotation_factory::type_group& v) {
-
-    s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::"
-      << "annotation_factory::type_group\"" << ", "
-      << "\"profile\": " << v.profile
-      << " }";
-
-    return s;
-}
-
-annotation_factory::type_group
-annotation_factory::make_type_group() const {
-    BOOST_LOG_SEV(lg, debug) << "Creating annotation types.";
-
-    type_group r;
-    const type_repository_selector s(type_repository_);
-    r.profile = s.select_type_by_name(type_name);
-
-    BOOST_LOG_SEV(lg, debug) << "Created annotation types. Result: " << r;
-    return r;
-}
-
-std::string annotation_factory::
-obtain_profile_name(const type_group& tg, const annotation& a) const {
-    BOOST_LOG_SEV(lg, debug) << "Reading profile name.";
-    const entry_selector s(a);
-    std::string r;
-    if (s.has_entry(tg.profile))
-        r = s.get_text_content(tg.profile);
-
-    BOOST_LOG_SEV(lg, debug) << "Profile name: '" << r << "'";
-    return r;
-}
+    : archetype_location_repository_(alrp), type_repository_(trp),
+      compatibility_mode_(compatibility_mode) {}
 
 boost::optional<type>
 annotation_factory::try_obtain_type(const std::string& n) const {
@@ -146,14 +90,6 @@ void annotation_factory::validate_scope(const type& t,
         BOOST_LOG_SEV(lg, error) << s.str();
         BOOST_THROW_EXCEPTION(building_error(s.str()));
     }
-}
-
-std::string annotation_factory::
-get_default_profile_name_for_scope(const scope_types scope) const {
-    if (scope == scope_types::root_module)
-        return default_root;
-
-    return empty;
 }
 
 annotation annotation_factory::create_annotation(const scope_types scope,
@@ -238,124 +174,11 @@ annotation_factory::aggregate_entries(
     return r;
 }
 
-std::list<std::string> annotation_factory::
-get_bound_labels(const std::unordered_map<std::string, annotation>& profiles,
-    const std::list<std::string>& candidate_labels) const {
-
-    std::list<std::string> r;
-    for (const auto& cl : candidate_labels) {
-        if (profiles.find(cl) != profiles.end())
-            r.push_back(cl);
-    }
-    return r;
-}
-
-std::unordered_map<std::string, annotation> annotation_factory::
-create_annotation_profiles(const bool compatibility_mode) const {
-    profiler prf(compatibility_mode);
-    const auto& alrp(archetype_location_repository_);
-    const auto& trp(type_repository_);
-    return prf.generate(data_dirs_, alrp, trp);
-}
-
-annotation annotation_factory::
-handle_profiles(const type_group& tg, const std::unordered_map<std::string,
-    annotation>& profiles, const std::list<std::string>& candidate_labels,
-    const annotation& original) const {
-
-    BOOST_LOG_SEV(lg, debug) << "Started handling profiles. Original: "
-                             << original;
-
-    /*
-     * If a profile name was specified via the meta-data, it must
-     * exist on our profile collection. Locate it, merge it with the
-     * original annotation and return that.
-     */
-    const auto profn(obtain_profile_name(tg, original));
-    if (!profn.empty()) {
-        BOOST_LOG_SEV(lg, debug) << "Configured profile: " << profn;
-        const auto i(profiles.find(profn));
-        if (i == profiles.end()) {
-            BOOST_LOG_SEV(lg, error) << missing_profile << profn;
-            BOOST_THROW_EXCEPTION(building_error(missing_profile + profn));
-        }
-
-        merger mg;
-        const auto annotation_profile(i->second);
-        const annotation r(mg.merge(original, annotation_profile));
-        BOOST_LOG_SEV(lg, debug) << "Merged profile: " << r;
-        return r;
-    } else
-        BOOST_LOG_SEV(lg, debug) << "Profile not set in meta-data.";
-
-    /*
-     * Lets try each of the candidate labels instead and see if any of
-     * them bind to a profile.
-     */
-    const auto bound_labels(get_bound_labels(profiles, candidate_labels));
-    if (bound_labels.size() > 1) {
-        BOOST_LOG_SEV(lg, error) << too_many_binds << bound_labels;
-        BOOST_THROW_EXCEPTION(building_error(too_many_binds));
-    }
-
-    for (const auto& bl : bound_labels) {
-        BOOST_LOG_SEV(lg, debug) << "Bound label: " << bl;
-        const auto i(profiles.find(bl));
-        if (i == profiles.end()) {
-            BOOST_LOG_SEV(lg, error) << missing_profile << bl;
-            BOOST_THROW_EXCEPTION(building_error(missing_profile + bl));
-        }
-
-        merger mg;
-        const auto annotation_profile(i->second);
-        const annotation r(mg.merge(original, annotation_profile));
-        BOOST_LOG_SEV(lg, debug) << "Merged profile: " << r;
-        return r;
-    }
-
-    /*
-     * If no profile name was found by now, we need to try looking for
-     * the well-known default profiles, based on the scope of the
-     * annotation. Not all scope types have a mapping, and the default
-     * profiles do not necessarily exist.
-     */
-    const auto def_profn(get_default_profile_name_for_scope(original.scope()));
-    if (!def_profn.empty()) {
-        BOOST_LOG_SEV(lg, debug) << "Looking for default profile; " << def_profn;
-
-        const auto i(profiles.find(def_profn));
-        if (i != profiles.end()) {
-            merger mg;
-            const auto annotation_profile(i->second);
-            const annotation r(mg.merge(original, annotation_profile));
-            BOOST_LOG_SEV(lg, debug) << "Merged profile: " << r;
-            return r;
-        }
-    } else
-        BOOST_LOG_SEV(lg, debug) << "Scope does not have a default profile.";
-
-    /*
-     * If we could find nothing suitable, just return the original.
-     */
-    BOOST_LOG_SEV(lg, debug) << "No profiles found, using original.";
-    return original;
-}
-
 annotation annotation_factory::make(
     const std::list<std::pair<std::string, std::string>>& entries,
     const scope_types scope) const {
-    const std::list<std::string> candidate_labels;
-    return make(entries, scope, candidate_labels);
-}
-
-annotation annotation_factory::make(
-    const std::list<std::pair<std::string, std::string>>& entries,
-    const scope_types scope,
-    const std::list<std::string>& candidate_labels) const {
     auto aggregated_entries(aggregate_entries(entries));
-    const auto original(create_annotation(scope, aggregated_entries));
-    const auto& cl(candidate_labels);
-    const auto r(handle_profiles(type_group_, profiles_, cl, original));
+    const auto r(create_annotation(scope, aggregated_entries));
     return r;
 }
 

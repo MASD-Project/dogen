@@ -49,8 +49,10 @@ namespace masd::dogen::templating::stitch {
 
 instantiator::instantiator(const annotations::type_repository& atrp,
     const annotations::annotation_factory& af,
+    const annotations::annotation_expander& ae,
     const masd::dogen::extraction::repository& frp)
-    : annotation_factory_(af), properties_factory_(atrp, frp) {}
+    : annotation_factory_(af), annotation_expander_(ae),
+      properties_factory_(atrp, frp) {}
 
 boost::filesystem::path
 instantiator::compute_output_path(const boost::filesystem::path& input_path,
@@ -145,7 +147,8 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
          * annotation object and use it to generate the properties.
          */
         const auto st(annotations::scope_types::root_module);
-        const auto a(annotation_factory_.make(r.body().tagged_values(), st));
+        auto a(annotation_factory_.make(r.body().tagged_values(), st));
+        annotation_expander_.expand(a);
         BOOST_LOG_SEV(lg, debug) << "Annotation: " << a;
         r.properties(properties_factory_.make(a));
 

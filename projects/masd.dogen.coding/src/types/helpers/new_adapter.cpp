@@ -45,8 +45,9 @@ const scope_types property_scope(scope_types::property);
 
 namespace masd::dogen::coding::helpers {
 
-new_adapter::new_adapter(const annotations::annotation_factory& f)
-    : annotation_factory_(f) {}
+new_adapter::new_adapter(const annotations::annotation_factory& f,
+    const annotations::annotation_expander& e)
+    : annotation_factory_(f), annotation_expander_(e) {}
 
 void new_adapter::ensure_not_empty(const std::string& n) const {
     if (n.empty()) {
@@ -122,7 +123,8 @@ void new_adapter::populate_element(const annotations::scope_types scope,
     e.dynamic_stereotypes(ds);
 
     const auto& tv(ee.tagged_values());
-    e.annotation(annotation_factory_.make(tv, scope, ds));
+    auto a(annotation_factory_.make(tv, scope));
+    e.annotation(annotation_expander_.expand(ds, a));
     e.in_global_module(
         l.external_modules().empty() && l.model_modules().empty());
 }

@@ -31,6 +31,7 @@
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
+#include "masd.dogen.annotations/types/annotation_expander.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository.hpp"
 #include "masd.dogen.extraction/types/repository.hpp"
 #include "masd.dogen.tracing/types/tracer.hpp"
@@ -74,6 +75,11 @@ public:
     const annotations::annotation_factory& annotation_factory() const;
 
     /**
+     * @brief Expander to expand annotations.
+     */
+    const annotations::annotation_expander& annotation_expander() const;
+
+    /**
      * @brief Repository with formatter data.
      */
     const masd::dogen::extraction::repository& formatting_repository() const;
@@ -97,7 +103,8 @@ private:
     const annotations::archetype_location_repository
     archetype_location_repository_;
     const annotations::type_repository type_repository_;
-        const annotations::annotation_factory annotation_factory_;
+    const annotations::annotation_factory annotation_factory_;
+    const annotations::annotation_expander annotation_expander_;
     const masd::dogen::extraction::repository formatting_repository_;
     const tracing::tracer& tracer_;
     const std::unordered_map<std::string,

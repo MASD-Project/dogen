@@ -34,6 +34,7 @@
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
+#include "masd.dogen.annotations/types/annotation_expander.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_interface.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
@@ -90,6 +91,7 @@ private:
     format(const std::unordered_set<generation::meta_model::element_archetype>&
         enabled_archetype_for_element, const annotations::type_repository& atrp,
         const annotations::annotation_factory& af,
+        const annotations::annotation_expander& ae,
         const dogen::extraction::repository& drp,
         const formattables::model& fm) const;
 

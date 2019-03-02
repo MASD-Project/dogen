@@ -225,7 +225,11 @@ transform(const context& ctx, const injection::meta_model::model& m) {
     const auto scr(h.from_string(m.stereotypes()));
     const auto& f(ctx.annotation_factory());
     const auto scope(annotations::scope_types::root_module);
-    const auto ra(f.make(m.tagged_values(), scope, scr.dynamic_stereotypes()));
+    const auto ra1(f.make(m.tagged_values(), scope));
+
+    const auto& e(ctx.annotation_expander());
+    const auto ra(e.expand(scr.dynamic_stereotypes(), ra1));
+
     const auto tg(make_type_group(ctx.type_repository()));
     const auto nc(make_naming_configuration(tg, ra));
     const auto model_location(create_location(nc));
@@ -237,7 +241,8 @@ transform(const context& ctx, const injection::meta_model::model& m) {
     r.name(b.build());
     BOOST_LOG_SEV(lg, debug) << "Computed model name: " << r.name();
 
-    const helpers::new_adapter ad(ctx.annotation_factory());
+    const helpers::new_adapter
+        ad(ctx.annotation_factory(), ctx.annotation_expander());
     for (const auto& e : m.elements()) {
         const auto l(e.in_global_module() ? empty_location : model_location);
         process_element(ad, l, e, r);

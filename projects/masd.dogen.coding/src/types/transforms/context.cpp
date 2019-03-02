@@ -32,7 +32,9 @@ context::context(
         const tracing::tracer& tracer) :
     data_directories_(data_directories), options_(options),
     archetype_location_repository_(alrp), type_repository_(atrp),
-    annotation_factory_(data_directories, archetype_location_repository_,
+    annotation_factory_(archetype_location_repository_,
+        type_repository_, options.compatibility_mode()),
+    annotation_expander_(data_directories, archetype_location_repository_,
         type_repository_, options.compatibility_mode()),
     mapping_repository_(msrp), formatting_repository_(frp), tracer_(tracer) {}
 
@@ -61,11 +63,16 @@ const annotations::annotation_factory& context::annotation_factory() const {
     return annotation_factory_;
 }
 
+const annotations::annotation_expander& context::annotation_expander() const {
+    return annotation_expander_;
+}
+
 const helpers::mapping_set_repository& context::mapping_repository() const {
     return mapping_repository_;
 }
 
-const masd::dogen::extraction::repository& context::formatting_repository() const {
+const masd::dogen::extraction::repository&
+context::formatting_repository() const {
     return formatting_repository_;
 }
 

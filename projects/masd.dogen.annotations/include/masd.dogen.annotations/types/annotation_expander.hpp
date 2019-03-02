@@ -101,6 +101,12 @@ public:
     annotation expand(const std::list<std::string>& candidate_labels,
         const annotation& a) const;
 
+    /**
+     * @brief Augment the original annotation with any profile
+     * entries, if any suitable are found.
+     */
+    annotation expand(const annotation& a) const;
+
 private:
     const std::vector<boost::filesystem::path> data_dirs_;
     const archetype_location_repository& archetype_location_repository_;

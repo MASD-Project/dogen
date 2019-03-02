@@ -33,7 +33,9 @@ context::context(
     intra_backend_segment_properties,
     boost::filesystem::path output_directory_path) :
     archetype_location_repository_(alrp), type_repository_(atrp),
-    annotation_factory_(data_directories, archetype_location_repository_,
+    annotation_factory_(archetype_location_repository_,
+        type_repository_, false/*options.compatibility_mode()*/),
+    annotation_expander_(data_directories, archetype_location_repository_,
         type_repository_, false/*options.compatibility_mode()*/),
     formatting_repository_(frp), tracer_(tracer),
     intra_backend_segment_properties_(intra_backend_segment_properties),
@@ -57,7 +59,12 @@ const annotations::annotation_factory& context::annotation_factory() const {
     return annotation_factory_;
 }
 
-const masd::dogen::extraction::repository& context::formatting_repository() const {
+const annotations::annotation_expander& context::annotation_expander() const {
+    return annotation_expander_;
+}
+
+const masd::dogen::extraction::repository&
+context::formatting_repository() const {
     return formatting_repository_;
 }
 

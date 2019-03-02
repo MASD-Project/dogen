@@ -30,7 +30,7 @@ context::context(
     const bool compatibility_mode) :
     data_directories_(data_directories),
     archetype_location_repository_(alrp), type_repository_(atrp),
-    annotation_factory_(data_directories, archetype_location_repository_,
+    annotation_factory_(archetype_location_repository_,
         type_repository_, compatibility_mode), tracer_(tracer) {}
 
 const std::vector<boost::filesystem::path>& context::data_directories() const {

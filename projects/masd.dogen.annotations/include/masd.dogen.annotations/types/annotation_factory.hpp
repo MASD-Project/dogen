@@ -47,26 +47,12 @@ public:
     /**
      * @brief Initialise the annotations object factory.
      *
-     * @param data_dirs directories in which to look for data files.
      * @param alrp the archetype location repository.
      * @param trp the type repository.
      */
     annotation_factory(
-        const std::vector<boost::filesystem::path>& data_dirs,
         const archetype_location_repository& alrp,
         const type_repository& trp, const bool compatibility_mode);
-
-private:
-    struct type_group {
-        annotations::type profile;
-    };
-
-    friend std::ostream& operator<<(std::ostream& s, const type_group& v);
-
-    type_group make_type_group() const;
-
-    std::string
-    obtain_profile_name(const type_group& tg, const annotation& a) const;
 
 private:
     /**
@@ -104,47 +90,17 @@ private:
     aggregate_entries(const std::list<std::pair<std::string, std::string>>&
         entries) const;
 
-    /**
-     * @brief Creates the annotation profiles.
-     */
-    std::unordered_map<std::string, annotation>
-    create_annotation_profiles(const bool compatibility_mode) const;
-
-    std::list<std::string> get_bound_labels(const std::unordered_map<
-        std::string, annotation>& profiles, const std::list<std::string>&
-        candidate_labels) const;
-
-    /**
-     * @brief Augment the original annotation with any profile
-     * entries, if it has one.
-     */
-    annotation
-    handle_profiles(const type_group& tg, const std::unordered_map<std::string,
-        annotation>& profiles, const std::list<std::string>& candidate_labels,
-        const annotation& original) const;
-
 public:
-    /**
-     * @brief Create an annotation without profile support.
-     */
-    annotation
-    make(const std::list<std::pair<std::string, std::string>>& entries,
-        const scope_types scope) const;
-
     /**
      * @brief Create an annotation with profile support.
      */
     annotation
     make(const std::list<std::pair<std::string, std::string>>& entries,
-        const scope_types scope,
-        const std::list<std::string>& candidate_labels) const;
+        const scope_types scope) const;
 
 private:
-    const std::vector<boost::filesystem::path> data_dirs_;
     const archetype_location_repository& archetype_location_repository_;
     const type_repository& type_repository_;
-    const std::unordered_map<std::string, annotation> profiles_;
-    const type_group type_group_;
     const bool compatibility_mode_;
 };
 
