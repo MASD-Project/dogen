@@ -18,12 +18,43 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.injection/io/meta_model/model_io.hpp"
+#include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/annotations_transform.hpp"
+
+namespace {
+
+const std::string transform_id("injector.transforms.annotations_transform");
+
+using namespace masd::dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
 
 namespace masd::dogen::injection::transforms {
 
-bool annotations_transform::operator==(const annotations_transform& /*rhs*/) const {
-    return true;
+void annotations_transform::transform(const transforms::context& ctx,
+    meta_model::model& m) {
+
+    tracing::scoped_transform_tracer stp(lg, "annotations transform",
+        transform_id, m.name(), ctx.tracer(), m);
+
+    BOOST_LOG_SEV(lg, debug) << "Total elements: " << m.elements().size();
+
+    const auto& f(ctx.annotation_factory());
+    using masd::dogen::annotations::scope_types;
+    m.annotation(f.make(m.tagged_values(), scope_types::root_module));
+
+    for (auto& e : m.elements()) {
+        e.annotation(f.make(e.tagged_values(), scope_types::entity));
+
+        for (auto& a : e.attributes())
+            a.annotation(f.make(a.tagged_values(), scope_types::property));
+    }
+
+    stp.end_transform(m);
 }
 
 }

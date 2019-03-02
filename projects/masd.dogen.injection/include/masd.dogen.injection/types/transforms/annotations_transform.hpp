@@ -25,24 +25,16 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.annotations/types/annotation_factory.hpp"
+#include "masd.dogen.injection/types/meta_model/model.hpp"
+#include "masd.dogen.injection/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::injection::transforms {
 
 class annotations_transform final {
 public:
-    annotations_transform() = default;
-    annotations_transform(const annotations_transform&) = default;
-    annotations_transform(annotations_transform&&) = default;
-    ~annotations_transform() = default;
-    annotations_transform& operator=(const annotations_transform&) = default;
-
-public:
-    bool operator==(const annotations_transform& rhs) const;
-    bool operator!=(const annotations_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const transforms::context& ctx,
+        meta_model::model& m);
 };
 
 }
