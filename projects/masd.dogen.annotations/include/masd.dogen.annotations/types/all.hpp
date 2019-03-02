@@ -55,6 +55,7 @@
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
 #include "masd.dogen.annotations/types/archetype_location.hpp"
 #include "masd.dogen.annotations/types/profile_repository.hpp"
+#include "masd.dogen.annotations/types/annotation_expander.hpp"
 #include "masd.dogen.annotations/types/instantiation_error.hpp"
 #include "masd.dogen.annotations/types/template_instantiator.hpp"
 #include "masd.dogen.annotations/types/profiler_configuration.hpp"
