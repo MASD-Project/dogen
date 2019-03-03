@@ -18,12 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.orchestration/types/transforms/coding_model_generation_chain.hpp"
+#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_CONTEXT_FACTORY_HPP
+#define MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_CONTEXT_FACTORY_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "masd.dogen.annotations/types/archetype_location_repository.hpp"
+#include "masd.dogen.coding/types/transforms/options.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.injection/types/transforms/context.hpp"
 
 namespace masd::dogen::orchestration::transforms {
 
-bool coding_model_generation_chain::operator==(const coding_model_generation_chain& /*rhs*/) const {
-    return true;
-}
+/**
+ * @brief Factory that creates transformation contexts.
+ */
+class context_factory final {
+public:
+    static injection::transforms::context
+    make_injector_context(const coding::transforms::options& o,
+        const bool enable_validation = true);
+
+    static coding::transforms::context
+    make_coding_context(const coding::transforms::options& o,
+        const bool enable_validation = true);
+};
 
 }
+
+#endif

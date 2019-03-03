@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_FACTORY_EXCEPTION_FWD_HPP
-#define MASD_DOGEN_ORCHESTRATION_TYPES_FACTORY_EXCEPTION_FWD_HPP
+#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_FACTORY_EXCEPTION_FWD_HPP
+#define MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_FACTORY_EXCEPTION_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace masd::dogen::orchestration {
+namespace masd::dogen::orchestration::transforms {
 
 class factory_exception;
 

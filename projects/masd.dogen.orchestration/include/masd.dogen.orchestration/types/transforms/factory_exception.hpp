@@ -18,31 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_INJECTION_MODEL_GENERATION_CHAIN_HPP
-#define MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_INJECTION_MODEL_GENERATION_CHAIN_HPP
+#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_FACTORY_EXCEPTION_HPP
+#define MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_FACTORY_EXCEPTION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace masd::dogen::orchestration::transforms {
 
-class injection_model_generation_chain final {
+/**
+ * @brief An error occurred in the factory whilst making.
+ */
+class factory_exception : public virtual std::exception, public virtual boost::exception {
 public:
-    injection_model_generation_chain() = default;
-    injection_model_generation_chain(const injection_model_generation_chain&) = default;
-    injection_model_generation_chain(injection_model_generation_chain&&) = default;
-    ~injection_model_generation_chain() = default;
-    injection_model_generation_chain& operator=(const injection_model_generation_chain&) = default;
+    factory_exception() = default;
+    ~factory_exception() noexcept = default;
 
 public:
-    bool operator==(const injection_model_generation_chain& rhs) const;
-    bool operator!=(const injection_model_generation_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
+    explicit factory_exception(const std::string& message) : message_(message) { }
 
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
 };
 
 }

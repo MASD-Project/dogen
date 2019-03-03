@@ -30,19 +30,19 @@
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
-#include "masd.dogen.orchestration/types/factory_exception.hpp"
-#include "masd.dogen.orchestration/types/context_factory.hpp"
+#include "masd.dogen.orchestration/types/transforms/factory_exception.hpp"
+#include "masd.dogen.orchestration/types/transforms/context_factory.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("orchestration.generator"));
+auto lg(logger_factory("orchestration.transforms.context_factory"));
 
 const std::string duplicate_segment("Duplicat segment: ");
 
 }
 
-namespace masd::dogen::orchestration {
+namespace masd::dogen::orchestration::transforms {
 
 using generation::transforms::model_to_extraction_model_transform_registrar;
 

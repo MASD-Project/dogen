@@ -18,12 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.orchestration/types/transforms/injection_model_generation_chain.hpp"
+#include "masd.dogen.orchestration/types/transforms/context.hpp"
 
 namespace masd::dogen::orchestration::transforms {
 
-bool injection_model_generation_chain::operator==(const injection_model_generation_chain& /*rhs*/) const {
-    return true;
+context::context(
+    const masd::dogen::injection::transforms::context& injection_context,
+    const masd::dogen::coding::transforms::context& coding_context,
+    const masd::dogen::generation::transforms::context& generation_context)
+    : injection_context_(injection_context),
+      coding_context_(coding_context),
+      generation_context_(generation_context) { }
+
+const masd::dogen::injection::transforms::context& context::injection_context() const {
+    return injection_context_;
+}
+
+const masd::dogen::coding::transforms::context& context::coding_context() const {
+    return coding_context_;
+}
+
+const masd::dogen::generation::transforms::context& context::generation_context() const {
+    return generation_context_;
 }
 
 }

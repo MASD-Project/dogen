@@ -23,7 +23,7 @@
 #include "masd.dogen.coding/types/transforms/options.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
-#include "masd.dogen.orchestration/types/context_factory.hpp"
+#include "masd.dogen.orchestration/types/transforms/context_factory.hpp"
 #include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
 #include "masd.dogen.orchestration/types/generator.hpp"
 
@@ -71,7 +71,7 @@ void generator::generate(const configuration& cfg,
     const auto o(make_options(cfg, target, output_directory,
             tracing_output_directory));
 
-    const auto ctx(context_factory::make_coding_context(o));
+    const auto ctx(transforms::context_factory::make_coding_context(o));
     transforms::code_generation_chain::transform(ctx);
 
     BOOST_LOG_SEV(lg, debug) << "Finished generation.";

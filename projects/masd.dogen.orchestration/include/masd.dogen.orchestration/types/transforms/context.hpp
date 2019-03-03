@@ -18,32 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_CONTEXT_FACTORY_HPP
-#define MASD_DOGEN_ORCHESTRATION_TYPES_CONTEXT_FACTORY_HPP
+#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_CONTEXT_HPP
+#define MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_CONTEXT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.annotations/types/archetype_location_repository.hpp"
-#include "masd.dogen.coding/types/transforms/options.hpp"
+#include <algorithm>
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
+#include "masd.dogen.generation/types/transforms/context.hpp"
 
-namespace masd::dogen::orchestration {
+namespace masd::dogen::orchestration::transforms {
 
-/**
- * @brief Factory that creates transformation contexts.
- */
-class context_factory final {
+class context final {
 public:
-    static injection::transforms::context
-    make_injector_context(const coding::transforms::options& o,
-        const bool enable_validation = true);
+    context(
+        const masd::dogen::injection::transforms::context& injection_context,
+        const masd::dogen::coding::transforms::context& coding_context,
+        const masd::dogen::generation::transforms::context& generation_context);
 
-    static coding::transforms::context
-    make_coding_context(const coding::transforms::options& o,
-        const bool enable_validation = true);
+public:
+    const masd::dogen::injection::transforms::context& injection_context() const;
+    const masd::dogen::coding::transforms::context& coding_context() const;
+    const masd::dogen::generation::transforms::context& generation_context() const;
+
+private:
+    masd::dogen::injection::transforms::context injection_context_;
+    masd::dogen::coding::transforms::context coding_context_;
+    masd::dogen::generation::transforms::context generation_context_;
 };
 
 }
