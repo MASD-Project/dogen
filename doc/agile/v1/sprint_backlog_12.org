@@ -12,24 +12,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-02 Sat 19:45]
+#+CAPTION: Clock summary at [2019-03-03 Sun 08:23]
 | <75>                                                     |         |       |      |       |
 | Headline                                                 | Time    |       |      |     % |
 |----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                             | *23:39* |       |      | 100.0 |
+| *Total time*                                             | *24:38* |       |      | 100.0 |
 |----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                  | 23:39   |       |      | 100.0 |
-| Active                                                   |         | 23:39 |      | 100.0 |
-| Edit release notes for previous sprint                   |         |       | 1:27 |   6.1 |
-| Sprint and product backlog grooming                      |         |       | 0:42 |   3.0 |
-| Implement text model generation chain in generation      |         |       | 3:45 |  15.9 |
-| Move generation model out of coding                      |         |       | 4:22 |  18.5 |
-| Rename endomodel to just model                           |         |       | 2:11 |   9.2 |
+| Stories                                                  | 24:38   |       |      | 100.0 |
+| Active                                                   |         | 24:38 |      | 100.0 |
+| Edit release notes for previous sprint                   |         |       | 1:27 |   5.9 |
+| Sprint and product backlog grooming                      |         |       | 0:42 |   2.8 |
+| Implement text model generation chain in generation      |         |       | 3:45 |  15.2 |
+| Move generation model out of coding                      |         |       | 4:22 |  17.7 |
+| Rename endomodel to just model                           |         |       | 2:11 |   8.9 |
 | Remove exomodel remnants                                 |         |       | 0:03 |   0.2 |
-| Consider adding a dot graph of the transforms to probing |         |       | 1:47 |   7.5 |
-| Split annotations processing into two phases             |         |       | 3:10 |  13.4 |
+| Consider adding a dot graph of the transforms to probing |         |       | 1:47 |   7.2 |
+| Split annotations processing into two phases             |         |       | 3:10 |  12.9 |
 | Try to fix valgrind warning on =find_files=              |         |       | 0:20 |   1.4 |
-| Move injection processing out of coding                  |         |       | 5:52 |  24.8 |
+| Move injection processing out of coding                  |         |       | 6:51 |  27.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -436,6 +436,8 @@ We seem to be doing something wrong with directory iterators:
 
 *** STARTED Move injection processing out of coding                   :story:
     :LOGBOOK:
+    CLOCK: [2019-03-03 Sun 08:15]--[2019-03-03 Sun 08:23] =>  0:08
+    CLOCK: [2019-03-03 Sun 07:23]--[2019-03-03 Sun 08:14] =>  0:51
     CLOCK: [2019-03-02 Sat 19:38]--[2019-03-02 Sat 19:45] =>  0:07
     CLOCK: [2019-03-02 Sat 19:20]--[2019-03-02 Sat 19:37] =>  0:17
     CLOCK: [2019-03-02 Sat 18:56]--[2019-03-02 Sat 19:19] =>  0:23
@@ -486,6 +488,10 @@ Notes:
   pre-process them prior to profile expansion. There will likely be
   some complications related to naming (this transform must be done
   before resolution etc and profiles are a form of name resolution).
+- in order to do side-by-side testing, create a new field called
+  "references2" and populate it with the new style of references. Then
+  create a parallel transform chain that can be switched on and off
+  with a macro from orchestration.
 
 *** Rename =fallback_element_type=                                    :story:
 

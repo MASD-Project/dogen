@@ -19,31 +19,18 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
 #include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.injection/io/meta_model/model_set_io.hpp"
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
-
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::injection::meta_model::model>& v) {
-    s << "[";
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::injection::meta_model::model>& v) {
+    s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
+        s << *i;
     }
-    s << " ] ";
+    s << "] ";
     return s;
 }
 
@@ -55,9 +42,7 @@ std::ostream& operator<<(std::ostream& s, const model_set& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::injection::meta_model::model_set\"" << ", "
       << "\"target\": " << v.target() << ", "
-      << "\"direct_references\": " << v.direct_references() << ", "
-      << "\"transitive_references\": " << v.transitive_references() << ", "
-      << "\"system_models\": " << v.system_models()
+      << "\"references\": " << v.references()
       << " }";
     return(s);
 }

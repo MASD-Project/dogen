@@ -47,6 +47,11 @@ public:
     void validate();
 
     /**
+     * @brief Returns a list of registered extensions.
+     */
+    std::list<std::string> registered_extensions() const;
+
+    /**
      * @brief Registers an encoding transform.
      *
      * @pre Encoding transform must not yet be registered.
@@ -111,6 +116,7 @@ private:
     std::unordered_map<std::string,
                        std::shared_ptr<decoding_transform_interface>>
     decoding_transforms_;
+    std::list<std::string> registered_extensions_;
 };
 
 }

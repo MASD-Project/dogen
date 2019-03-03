@@ -25,9 +25,8 @@
 #pragma once
 #endif
 
-#include <string>
+#include <list>
 #include <algorithm>
-#include <unordered_map>
 #include "masd.dogen.injection/types/meta_model/model.hpp"
 
 namespace masd::dogen::injection::meta_model {
@@ -42,9 +41,7 @@ public:
 public:
     model_set(
         const masd::dogen::injection::meta_model::model& target,
-        const std::unordered_map<std::string, masd::dogen::injection::meta_model::model>& direct_references,
-        const std::unordered_map<std::string, masd::dogen::injection::meta_model::model>& transitive_references,
-        const std::unordered_map<std::string, masd::dogen::injection::meta_model::model>& system_models);
+        const std::list<masd::dogen::injection::meta_model::model>& references);
 
 public:
     const masd::dogen::injection::meta_model::model& target() const;
@@ -52,20 +49,10 @@ public:
     void target(const masd::dogen::injection::meta_model::model& v);
     void target(const masd::dogen::injection::meta_model::model&& v);
 
-    const std::unordered_map<std::string, masd::dogen::injection::meta_model::model>& direct_references() const;
-    std::unordered_map<std::string, masd::dogen::injection::meta_model::model>& direct_references();
-    void direct_references(const std::unordered_map<std::string, masd::dogen::injection::meta_model::model>& v);
-    void direct_references(const std::unordered_map<std::string, masd::dogen::injection::meta_model::model>&& v);
-
-    const std::unordered_map<std::string, masd::dogen::injection::meta_model::model>& transitive_references() const;
-    std::unordered_map<std::string, masd::dogen::injection::meta_model::model>& transitive_references();
-    void transitive_references(const std::unordered_map<std::string, masd::dogen::injection::meta_model::model>& v);
-    void transitive_references(const std::unordered_map<std::string, masd::dogen::injection::meta_model::model>&& v);
-
-    const std::unordered_map<std::string, masd::dogen::injection::meta_model::model>& system_models() const;
-    std::unordered_map<std::string, masd::dogen::injection::meta_model::model>& system_models();
-    void system_models(const std::unordered_map<std::string, masd::dogen::injection::meta_model::model>& v);
-    void system_models(const std::unordered_map<std::string, masd::dogen::injection::meta_model::model>&& v);
+    const std::list<masd::dogen::injection::meta_model::model>& references() const;
+    std::list<masd::dogen::injection::meta_model::model>& references();
+    void references(const std::list<masd::dogen::injection::meta_model::model>& v);
+    void references(const std::list<masd::dogen::injection::meta_model::model>&& v);
 
 public:
     bool operator==(const model_set& rhs) const;
@@ -79,9 +66,7 @@ public:
 
 private:
     masd::dogen::injection::meta_model::model target_;
-    std::unordered_map<std::string, masd::dogen::injection::meta_model::model> direct_references_;
-    std::unordered_map<std::string, masd::dogen::injection::meta_model::model> transitive_references_;
-    std::unordered_map<std::string, masd::dogen::injection::meta_model::model> system_models_;
+    std::list<masd::dogen::injection::meta_model::model> references_;
 };
 
 }

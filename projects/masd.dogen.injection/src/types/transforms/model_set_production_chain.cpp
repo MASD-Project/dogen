@@ -18,26 +18,86 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.injection/io/meta_model/model_set_io.hpp"
+#include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/model_production_chain.hpp"
 #include "masd.dogen.injection/types/transforms/model_set_production_chain.hpp"
 
+namespace {
+
+const std::string
+transform_id("injection.transforms.model_set_production_chain");
+
+using namespace masd::dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+const std::string library_dir("library");
+
+}
+
 namespace masd::dogen::injection::transforms {
 
-meta_model::model_set
-model_set_production_chain::transform(const context& /*ctx*/,
-    const boost::filesystem::path& /*p*/,
-    std::unordered_set<std::string>& /*processed_models*/,
-    const bool /*is_target*/) {
+std::list<boost::filesystem::path>
+model_set_production_chain::make_directories(const context& ctx,
+    const boost::filesystem::path& target_path) {
+    std::list<boost::filesystem::path> r;
+    /*
+     * Add all system directories.
+     */
+    for (const auto& dir : ctx.data_directories())
+        r.push_back(dir / library_dir);
 
-    meta_model::model_set r;
+    /*
+     * Add the directory where target is located.
+     */
+    r.push_back(target_path.parent_path());
+    return r;
+}
+
+std::list<meta_model::model>
+model_set_production_chain::transform(const context& ctx,
+    const helpers::references_resolver& res,
+    const boost::filesystem::path& p,
+    std::unordered_set<std::string>& processed_models) {
+
+    std::list<meta_model::model> r;
+    r.push_back(model_production_chain::transform(ctx, p));
+    for (const auto& ref : r.front().references()) {
+        const auto insert(processed_models.insert(ref).second);
+        if (!insert)
+            continue;
+
+        const auto rp(res.resolve(ref));
+        r.splice(r.end(), transform(ctx, res, rp, processed_models));
+    }
+
     return r;
 }
 
 meta_model::model_set
 model_set_production_chain::transform(const context& ctx,
     const boost::filesystem::path& p) {
+    const auto mn(p.filename().string());
+    tracing::scoped_chain_tracer stp(lg, "injection model set production chain",
+        transform_id, mn, ctx.tracer());
+
     std::unordered_set<std::string> processed_models;
-    return transform(ctx, p, processed_models, true/*is_target*/);
+    const auto& rg(model_production_chain::registrar());
+    const auto exts(rg.registered_extensions());
+    const auto dirs(make_directories(ctx, p));
+    helpers::references_resolver res(exts, dirs);
+
+    meta_model::model_set r;
+    auto models(transform(ctx, res, p, processed_models));
+    r.target(models.front());
+    models.pop_front();
+    r.references(models);
+
+    stp.end_chain(r);
+
+    return r;
 }
 
 }

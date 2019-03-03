@@ -74,6 +74,10 @@ void registrar::validate() {
                              << decoding_transforms_.size();
 }
 
+std::list<std::string> registrar::registered_extensions() const {
+    return registered_extensions_;
+}
+
 void registrar::
 register_encoding_transform(std::shared_ptr<encoding_transform_interface> t) {
     BOOST_LOG_SEV(lg, debug) << "Registering encoding transform.";
@@ -101,8 +105,10 @@ register_encoding_transform(std::shared_ptr<encoding_transform_interface> t) {
     BOOST_LOG_SEV(lg, debug) << "Registering against extension: " << e;
     const auto pair(std::make_pair(e, t));
     const auto inserted(encoding_transforms_.insert(pair).second);
-    if (inserted)
+    if (inserted) {
+        registered_extensions_.push_back(e);
         return;
+    }
 
     BOOST_LOG_SEV(lg, error) << extension_already_registered << e;
     BOOST_THROW_EXCEPTION(registrar_error(extension_already_registered + e));
