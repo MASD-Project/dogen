@@ -48,7 +48,7 @@ namespace masd::dogen::tracing {
 
 metrics_builder::
 metrics_builder(const std::string& log_level, const bool writing_probe_data) {
-    BOOST_LOG_SEV(lg, debug) << "Initialising. ";
+    BOOST_LOG_SEV(lg, debug) << "Initialising.";
     std::ostringstream s;
     s << "version: v" << DOGEN_VERSION << ", "
       << "log: " << log_level;

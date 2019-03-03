@@ -62,7 +62,7 @@ void converter::convert(const configuration& cfg,
     BOOST_LOG_SEV(lg, debug) << "Started conversion.";
 
     const auto o(make_options(cfg, source, tracing_output_directory));
-    const auto ctx(transforms::context_factory::make_injector_context(o));
+    const auto ctx(transforms::context_factory::make_injection_context(o));
 
     using namespace masd::dogen::injection::transforms;
     model_to_model_chain::transform(ctx, source, destination);

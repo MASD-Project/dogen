@@ -88,7 +88,7 @@ create_archetype_location_repository(
 }
 
 injection::transforms::context context_factory::
-make_injector_context(const coding::transforms::options& o,
+make_injection_context(const coding::transforms::options& o,
     const bool enable_validation) {
 
     BOOST_LOG_SEV(lg, debug) << "Creating the context.";

@@ -38,7 +38,7 @@ namespace masd::dogen::orchestration::transforms {
 class context_factory final {
 public:
     static injection::transforms::context
-    make_injector_context(const coding::transforms::options& o,
+    make_injection_context(const coding::transforms::options& o,
         const bool enable_validation = true);
 
     static coding::transforms::context

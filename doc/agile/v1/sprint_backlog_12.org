@@ -436,6 +436,8 @@ We seem to be doing something wrong with directory iterators:
 
 *** STARTED Move injection processing out of coding                   :story:
     :LOGBOOK:
+    CLOCK: [2019-03-03 Sun 15:21]--[2019-03-03 Sun 16:07] =>  0:46
+    CLOCK: [2019-03-03 Sun 12:30]--[2019-03-03 Sun 12:46] =>  0:16
     CLOCK: [2019-03-03 Sun 10:11]--[2019-03-03 Sun 10:41] =>  0:30
     CLOCK: [2019-03-03 Sun 09:59]--[2019-03-03 Sun 10:11] =>  0:12
     CLOCK: [2019-03-03 Sun 08:15]--[2019-03-03 Sun 08:23] =>  0:08
