@@ -103,9 +103,9 @@ yet imposing some constraints on the shape of the data.
 #DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=masd.dogen.annotations
 #DOGEN masd.injection.input_language=cpp
-#DOGEN masd.injection.new_reference=cpp.builtins
-#DOGEN masd.injection.new_reference=cpp.std
-#DOGEN masd.injection.new_reference=cpp.boost
+#DOGEN masd.injection.reference=cpp.builtins
+#DOGEN masd.injection.reference=cpp.std
+#DOGEN masd.injection.reference=cpp.boost
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*

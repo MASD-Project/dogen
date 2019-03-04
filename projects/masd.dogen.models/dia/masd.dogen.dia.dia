@@ -4827,9 +4827,9 @@ between the class and the slot concepts, we renamed it.#</dia:string>
             <dia:string>##DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=masd.dogen.dia
 #DOGEN masd.injection.input_language=cpp
-#DOGEN masd.injection.new_reference=cpp.builtins
-#DOGEN masd.injection.new_reference=cpp.std
-#DOGEN masd.injection.new_reference=cpp.boost
+#DOGEN masd.injection.reference=cpp.builtins
+#DOGEN masd.injection.reference=cpp.std
+#DOGEN masd.injection.reference=cpp.boost
 #DOGEN masd.extraction.delete_extra_files=true
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
