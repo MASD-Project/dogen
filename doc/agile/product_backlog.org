@@ -452,63 +452,6 @@ what went wrong. We should also keep track of the model that was
 generated (e.g. its location and git commit) so we can download it and
 reproduce it locally.
 
-*** Rework the tests using diff mode                                  :story:
-
-Once we have diff mode, we need to find some kind of workflow for
-tests:
-
-- each product is composed of a git URL and a list of models.
-- we git clone all repos as part of the build process.
-- directories and model locations are hard-coded in each test.
-- test runs against the model and hard-coded location, produces the
-  diff. Test asserts of the diff being non-zero.
-
-*** Code generation of tests for dogen models                         :story:
-
-We probably already have a story for this. At present we are manually
-generating tests for each model (serialisation, etc). The structure of
-the tests is very predictable. In a world where tests are a facet, we
-could have some options to control the generation of tests. This would
-also allow end users to generate tests for their models and report the
-results. We would need to generate the utility model for this - or
-perhaps we could code generate tests in a way that no longer requires
-templates - its all "hard-coded". This would make the tests easier to
-follow, but we would generate a lot of code.
-
-We could separate dogen specific tests from user tests by naming them
-differently, e.g. =abc_dogen_test.cpp=. We can then create two
-different test binaries, one for dogen tests and another for user
-tests, so that users don't have to run dogen tests unless something
-has gone wrong.
-
-Interestingly we could even set rules to ignore tests that are known
-to fail:
-
-- if object has no members do not do equality tests
-- if object has some kind of recursion do not do tests
-- etc.
-
-These can be marked as known limitations. At present the tests require
-Boost.Test but it should be possible to target other frameworks
-(meta-data option).
-
-Merged stories:
-
-*Consider creating a "test" facet*
-
-Whilst we can't really generate tests, we can at least create the
-stubs for them. For this we could have a =test= facet that uses a
-stereotype, e.g. =test_suite=. Users mark classes with
-these. Attributes are the test cases. At the model level users can
-choose the test framework. For example for Boost.Test, it generates
-the main file with fixture initialisation, etc. We could then have one
-of two approaches:
-
-- protected regions, where the test contents are protected and perhaps
-  an area at the top for globals etc.
-- stubs only, were we generate the original content but then users
-  subsequently manage the files.
-
 *** Improve comments on reference implementation                      :story:
 
 At present it is very difficult to understand what each model and/or

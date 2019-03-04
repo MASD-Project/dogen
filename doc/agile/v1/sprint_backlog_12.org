@@ -197,6 +197,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-03-04 Mon 18:31]--[2019-03-04 Mon 18:41] =>  0:10
     CLOCK: [2019-03-04 Mon 18:14]--[2019-03-04 Mon 18:25] =>  0:11
     CLOCK: [2019-03-01 Fri 11:43]--[2019-03-01 Fri 12:07] =>  0:24
     CLOCK: [2019-02-26 Tue 15:25]--[2019-02-26 Tue 15:43] =>  0:18
@@ -566,6 +567,154 @@ something like =apply=.
 
 We should work on this once the system tests are back and running, as
 we may break a lot of things with a "simple" tidy-up.
+
+*** Add DTL to vcpkg                                                  :story:
+
+DTL seems to be the easiest library to work with in terms of
+generating diffs. However, its not on vcpkg.
+
+Tasks:
+
+- add CMake support to DTL. Not strictly needed but seems like an easy
+  thing to do and will make vcpkg easier. It also means we can build
+  tests and examples to make sure it all works in isolation. Actually
+  this was tried before and not accepted by the maintainer.
+- add DTL port.
+
+Links:
+
+- [[https://github.com/google/diff-match-patch/tree/master/cpp][diff-match-patch]]: interesting diff library but requires QT.
+- [[https://github.com/Martinsos/edlib#usage-and-examples][edlib]]: interesting library but seems to be more for Levehnstein
+  diffs. Also not on vcpkg.
+- [[https://github.com/cubicdaiya/dtl/pull/2][Add cmake support]]: PR to add CMake support to DTL, not accepted by
+  the maintainer. See also [[https://github.com/chino540off/dtl][the repo]].
+- [[https://github.com/Microsoft/vcpkg/tree/master/ports/libodb][libodb]]: example of a project with a vcpkg specific CMake support.
+- [[https://stackoverflow.com/questions/13438547/linux-c-or-c-library-to-diff-and-patch-strings][Linux C or C++ library to diff and patch strings?]]
+
+*** Add basic "diff mode"                                             :story:
+
+We need a very simple way of checking all generated files in memory
+against what's in the file system and returning a flag if they are
+different. We can then use these flags to determine if tests pass. In
+the future we can extend this approach to include a proper diff of the
+files, but for now we just need a reliable way to run system tests
+again.
+
+Actually the right solution for this is to see the processing as part
+of a chain:
+
+- out of the generator come a set of artefacts with operations (write,
+  merge, ignore)
+- these get joined with a transform that reads the state of the file
+  system. It then adds more operations: delete, etc. If there are no
+  diffs, it marks those files as skip.
+- the final step is a processor which gets that model and executes the
+  operations. This can then be replaced by a "reporter" that simply
+  states what the operations would be.
+
+Diff mode is using the report to see if there are any diffs.
+
+Merged Stories:
+
+*Validation-only or dry-run mode*
+
+Both stitcher and knitter could do with a "dry-run" mode in which we'd
+do everything except for actually outputting.
+
+*For Knitter*
+
+It would be nice if one could just check if a dia diagram is valid for
+code generation, e.g. =--validate= or something along those lines.
+
+*For Stitch*
+
+We are interested in performing the parsing. This would be useful for
+example for a flymake mode in emacs.
+
+An additional feature of dry-run would be to run, generate the model
+and then produce a unified diff, e.g. tell me what you'd change. For
+this we'd have to link against a diff library. We need to
+automatically exclude non-overwrite files (or have an option to
+exclude/include them).
+
+Links:
+
+- [[https://github.com/google/diff-match-patch/tree/master/cpp][google Diff Match Patch library]]
+- [[https://github.com/cubicdaiya/dtl][DTL: Diff Template Library]]
+- [[https://stackoverflow.com/questions/1451694/is-there-a-way-to-diff-files-from-c][SO: Is there a way to diff files from C++?]]
+
+*Dry-run option to just diff with existing generated code*
+
+#+begin_quote
+*Story*: As a dogen user, I want to know what has changed with the
+next code generation so that I can evaluate if the changes are as
+expected or not.
+#+end_quote
+
+It would be useful to have an option that would do everything except
+writing the files to disk; instead, it would diff them with the
+existing files and report if there are any differences. This would be
+useful to make sure the source code matches the latest version of the
+diagram.
+
+We could use something like the [[https://code.google.com/p/dtl-cpp/wiki/Tutorial][DTL library]].
+
+*** Rework the system tests using diff mode                           :story:
+
+Once we have diff mode, we need to find some kind of workflow for
+tests:
+
+- each product is composed of a git URL and a list of models.
+- we git clone all repos as part of the build process.
+- directories and model locations are hard-coded in each test.
+- test runs against the model and hard-coded location, produces the
+  diff. Test asserts of the diff being non-zero.
+
+*** Code generation of tests for dogen models                         :story:
+
+We probably already have a story for this. At present we are manually
+generating tests for each model (serialisation, etc). The structure of
+the tests is very predictable. In a world where tests are a facet, we
+could have some options to control the generation of tests. This would
+also allow end users to generate tests for their models and report the
+results. We would need to generate the utility model for this - or
+perhaps we could code generate tests in a way that no longer requires
+templates - its all "hard-coded". This would make the tests easier to
+follow, but we would generate a lot of code.
+
+We could separate dogen specific tests from user tests by naming them
+differently, e.g. =abc_dogen_test.cpp=. We can then create two
+different test binaries, one for dogen tests and another for user
+tests, so that users don't have to run dogen tests unless something
+has gone wrong.
+
+Interestingly we could even set rules to ignore tests that are known
+to fail:
+
+- if object has no members do not do equality tests
+- if object has some kind of recursion do not do tests
+- etc.
+
+These can be marked as known limitations. At present the tests require
+Boost.Test but it should be possible to target other frameworks
+(meta-data option).
+
+Merged stories:
+
+*Consider creating a "test" facet*
+
+Whilst we can't really generate tests, we can at least create the
+stubs for them. For this we could have a =test= facet that uses a
+stereotype, e.g. =test_suite=. Users mark classes with
+these. Attributes are the test cases. At the model level users can
+choose the test framework. For example for Boost.Test, it generates
+the main file with fixture initialisation, etc. We could then have one
+of two approaches:
+
+- protected regions, where the test contents are protected and perhaps
+  an area at the top for globals etc.
+- stubs only, were we generate the original content but then users
+  subsequently manage the files.
 
 *** Move coding to generation model transform into orchestration      :story:
 
@@ -1028,29 +1177,6 @@ namespaces and they are more than one level deep (we have a lot of
 
 We need to wrap these in if's for C++ 17 and add nested namespaces.
 
-*** Add DTL to vcpkg                                                  :story:
-
-DTL seems to be the easiest library to work with in terms of
-generating diffs. However, its not on vcpkg.
-
-Tasks:
-
-- add CMake support to DTL. Not strictly needed but seems like an easy
-  thing to do and will make vcpkg easier. It also means we can build
-  tests and examples to make sure it all works in isolation. Actually
-  this was tried before and not accepted by the maintainer.
-- add DTL port.
-
-Links:
-
-- [[https://github.com/google/diff-match-patch/tree/master/cpp][diff-match-patch]]: interesting diff library but requires QT.
-- [[https://github.com/Martinsos/edlib#usage-and-examples][edlib]]: interesting library but seems to be more for Levehnstein
-  diffs. Also not on vcpkg.
-- [[https://github.com/cubicdaiya/dtl/pull/2][Add cmake support]]: PR to add CMake support to DTL, not accepted by
-  the maintainer. See also [[https://github.com/chino540off/dtl][the repo]].
-- [[https://github.com/Microsoft/vcpkg/tree/master/ports/libodb][libodb]]: example of a project with a vcpkg specific CMake support.
-- [[https://stackoverflow.com/questions/13438547/linux-c-or-c-library-to-diff-and-patch-strings][Linux C or C++ library to diff and patch strings?]]
-
 *** Add tests for external and model modules                          :story:
 
 At present we do not have tests exercising different combinations of
@@ -1213,7 +1339,7 @@ Links:
 
 - https://github.com/foonathan/standardese
 
-*** New approach to model testsing                                    :story:
+*** New approach to model testing                                    :story:
 
 In the beginning we generated all models with all facets, even the
 dogen core models. The idea was to test the generator even though
@@ -1529,74 +1655,6 @@ for logging etc. We can just replace these with string views.
 Links:
 
 - [[https://www.bfilipek.com/2018/10/strings17talk.html][Let's Talk About String Operations in C++17]]
-
-*** Add basic "diff mode"                                             :story:
-
-We need a very simple way of checking all generated files in memory
-against what's in the file system and returning a flag if they are
-different. We can then use these flags to determine if tests pass. In
-the future we can extend this approach to include a proper diff of the
-files, but for now we just need a reliable way to run system tests
-again.
-
-Actually the right solution for this is to see the processing as part
-of a chain:
-
-- out of the generator come a set of artefacts with operations (write,
-  merge, ignore)
-- these get joined with a transform that reads the state of the file
-  system. It then adds more operations: delete, etc. If there are no
-  diffs, it marks those files as skip.
-- the final step is a processor which gets that model and executes the
-  operations. This can then be replaced by a "reporter" that simply
-  states what the operations would be.
-
-Diff mode is using the report to see if there are any diffs.
-
-Merged Stories:
-
-*Validation-only or dry-run mode*
-
-Both stitcher and knitter could do with a "dry-run" mode in which we'd
-do everything except for actually outputting.
-
-*For Knitter*
-
-It would be nice if one could just check if a dia diagram is valid for
-code generation, e.g. =--validate= or something along those lines.
-
-*For Stitch*
-
-We are interested in performing the parsing. This would be useful for
-example for a flymake mode in emacs.
-
-An additional feature of dry-run would be to run, generate the model
-and then produce a unified diff, e.g. tell me what you'd change. For
-this we'd have to link against a diff library. We need to
-automatically exclude non-overwrite files (or have an option to
-exclude/include them).
-
-Links:
-
-- [[https://github.com/google/diff-match-patch/tree/master/cpp][google Diff Match Patch library]]
-- [[https://github.com/cubicdaiya/dtl][DTL: Diff Template Library]]
-- [[https://stackoverflow.com/questions/1451694/is-there-a-way-to-diff-files-from-c][SO: Is there a way to diff files from C++?]]
-
-*Dry-run option to just diff with existing generated code*
-
-#+begin_quote
-*Story*: As a dogen user, I want to know what has changed with the
-next code generation so that I can evaluate if the changes are as
-expected or not.
-#+end_quote
-
-It would be useful to have an option that would do everything except
-writing the files to disk; instead, it would diff them with the
-existing files and report if there are any differences. This would be
-useful to make sure the source code matches the latest version of the
-diagram.
-
-We could use something like the [[https://code.google.com/p/dtl-cpp/wiki/Tutorial][DTL library]].
 
 *** Consider adding compiler name to package                          :story:
 
