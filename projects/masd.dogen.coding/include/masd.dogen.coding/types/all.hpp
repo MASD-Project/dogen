@@ -116,7 +116,6 @@
 #include "masd.dogen.coding/types/transforms/meta_naming_transform.hpp"
 #include "masd.dogen.coding/types/transforms/stereotypes_transform.hpp"
 #include "masd.dogen.coding/types/transforms/type_params_transform.hpp"
-#include "masd.dogen.coding/types/helpers/reference_paths_extractor.hpp"
 #include "masd.dogen.coding/types/transforms/associations_transform.hpp"
 #include "masd.dogen.coding/types/transforms/enumerations_transform.hpp"
 #include "masd.dogen.coding/types/transforms/model_generation_chain.hpp"
