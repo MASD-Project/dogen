@@ -23,7 +23,7 @@
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.injection/types/transforms/model_set_production_chain.hpp"
-#include "masd.dogen.coding/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.coding/types/transforms/model_production_chain.hpp"
 #include "masd.dogen.generation/types/transforms/model_generation_chain.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"
@@ -95,7 +95,7 @@ void code_generation_chain::transform(const context& ctx) {
     /*
      * Obtain the coding models.
      */
-    const auto cms(coding::transforms::model_generation_chain::transform(
+    const auto cms(coding::transforms::model_production_chain::transform(
             ctx.coding_context(), ims));
 
     /*

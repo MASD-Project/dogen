@@ -26,6 +26,7 @@
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.injection/io/meta_model/model_set_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
@@ -34,11 +35,11 @@
 #include "masd.dogen.coding/types/transforms/model_post_processing_chain.hpp"
 #include "masd.dogen.coding/types/transforms/injection_model_set_to_coding_model_set_transform.hpp"
 #include "masd.dogen.coding/types/transforms/model_set_pre_processing_chain.hpp"
-#include "masd.dogen.coding/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.coding/types/transforms/model_production_chain.hpp"
 
 namespace {
 
-const std::string transform_id("coding.transforms.model_generation_chain");
+const std::string transform_id("coding.transforms.model_production_chain");
 
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -48,8 +49,10 @@ static logger lg(logger_factory(transform_id));
 namespace masd::dogen::coding::transforms {
 
 std::list<meta_model::model>
-model_generation_chain::transform(const context& ctx,
+model_production_chain::transform(const context& ctx,
     const injection::meta_model::model_set& ims) {
+    tracing::scoped_chain_tracer stp(lg, "production chain",
+        transform_id, ims.target().name(), *ctx.tracer(), ims);
 
     /*
      * First we transform the injection model set into a coding model
@@ -107,6 +110,8 @@ model_generation_chain::transform(const context& ctx,
         model_post_processing_chain::transform(ctx, m);
         r.push_back(m);
     }
+
+    stp.end_chain(r);
     return r;
 }
 

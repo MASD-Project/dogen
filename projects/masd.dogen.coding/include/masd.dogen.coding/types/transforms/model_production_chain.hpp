@@ -18,17 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_ENDOMODEL_GENERATION_CHAIN_HPP
-#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_ENDOMODEL_GENERATION_CHAIN_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_ENDOMODEL_PRODUCTION_CHAIN_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_ENDOMODEL_PRODUCTION_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <list>
-#include <iosfwd>
-#include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.injection/types/meta_model/model_set.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
@@ -36,11 +33,13 @@
 namespace masd::dogen::coding::transforms {
 
 /**
- * @brief The model generation chain is a top-level transformation
- * responsible for obtaining a set of models to which all the
- * internal transforms have been applied.
+ * @brief Top-level transformation responsible for converting an
+ * injection model set into a coding model set.
+ *
+ * Note that this transform assumes all injection transforms have been
+ * * applied to the injection model set.
  */
-class model_generation_chain final {
+class model_production_chain final {
 public:
     static std::list<meta_model::model> transform(const context& ctx,
         const injection::meta_model::model_set& ims);

@@ -785,7 +785,7 @@ supported languages.#</dia:string>
         <dia:point val="-278,-90"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-278.05,-90.05;-250.1,-46.65"/>
+        <dia:rectangle val="-278.05,-90.05;-250.1,-49.85"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -797,7 +797,7 @@ supported languages.#</dia:string>
         <dia:real val="27.850000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="43.300000000000004"/>
+        <dia:real val="40.100000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -11422,7 +11422,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#model_generation_chain#</dia:string>
+        <dia:string>#model_production_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>
@@ -30997,7 +30997,7 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:point val="-129.167,-16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-133.245,-27.25;-128.417,-14.4"/>
+        <dia:rectangle val="-133.245,-27.25;-128.417,-15.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31069,7 +31069,7 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:point val="-166.4,46"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-167.15,42.95;-144.8,47.6"/>
+        <dia:rectangle val="-167.15,42.2;-144.8,46.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31141,7 +31141,7 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:point val="-128.965,46"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-129.715,39.55;-126.343,47.6"/>
+        <dia:rectangle val="-129.715,39.55;-126.343,46.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31213,7 +31213,7 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:point val="-189,29.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-194.53,28.35;-188.25,38.7"/>
+        <dia:rectangle val="-194.53,28.3;-188.25,37.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31285,7 +31285,7 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:point val="-171.56,29.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-172.31,28.35;-165.95,38.7"/>
+        <dia:rectangle val="-172.31,28.3;-165.95,37.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31357,7 +31357,7 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:point val="-190,58.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-195.53,58.5293;-189.45,72.7"/>
+        <dia:rectangle val="-195.53,58.5293;-189.45,71.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31429,7 +31429,7 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:point val="-169.48,58.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-170.23,57.85;-162.95,72.8"/>
+        <dia:rectangle val="-170.23,57.85;-162.95,72.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31503,7 +31503,7 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:point val="-178.2,46"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-180.33,29.55;-177.45,47.6"/>
+        <dia:rectangle val="-180.33,29.55;-177.45,46.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
