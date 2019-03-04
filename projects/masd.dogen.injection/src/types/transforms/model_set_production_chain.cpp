@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.injection/io/meta_model/model_set_io.hpp"
@@ -40,7 +41,7 @@ const std::string library_dir("library");
 namespace masd::dogen::injection::transforms {
 
 std::list<boost::filesystem::path>
-model_set_production_chain::make_directories(const context& ctx,
+model_set_production_chain::obtain_directory_list(const context& ctx,
     const boost::filesystem::path& target_path) {
     std::list<boost::filesystem::path> r;
     /*
@@ -62,15 +63,23 @@ model_set_production_chain::transform(const context& ctx,
     const boost::filesystem::path& p,
     std::unordered_set<std::string>& processed_models) {
 
+    BOOST_LOG_SEV(lg, trace) << "Processing: " << p.generic();
+
     std::list<meta_model::model> r;
     r.push_back(model_production_chain::transform(ctx, p));
+    BOOST_LOG_SEV(lg, trace) << "References: " << r.front().references();
     for (const auto& ref : r.front().references()) {
+        BOOST_LOG_SEV(lg, trace) << "Attempting to process reference: " << ref;
         const auto insert(processed_models.insert(ref).second);
-        if (!insert)
+        if (!insert) {
+            BOOST_LOG_SEV(lg, trace) << "Reference already processed.";
             continue;
+        }
 
         const auto rp(res.resolve(ref));
+        BOOST_LOG_SEV(lg, trace) << "Resolved to path: " << rp.generic();
         r.splice(r.end(), transform(ctx, res, rp, processed_models));
+        BOOST_LOG_SEV(lg, trace) << "Processed reference.";
     }
 
     return r;
@@ -86,12 +95,17 @@ model_set_production_chain::transform(const context& ctx,
     std::unordered_set<std::string> processed_models;
     const auto& rg(model_production_chain::registrar());
     const auto exts(rg.registered_extensions());
-    const auto dirs(make_directories(ctx, p));
+    const auto dirs(obtain_directory_list(ctx, p));
     helpers::references_resolver res(exts, dirs);
 
     meta_model::model_set r;
     auto models(transform(ctx, res, p, processed_models));
+    BOOST_LOG_SEV(lg, debug) << "Read injection model graph. Total: "
+                             << models.size();
+
     r.target(models.front());
+    BOOST_LOG_SEV(lg, trace) << "Target: " << r.target().name();
+
     models.pop_front();
     r.references(models);
 

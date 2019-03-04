@@ -22,6 +22,7 @@
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.injection/types/transforms/model_set_production_chain.hpp"
 #include "masd.dogen.coding/types/transforms/model_generation_chain.hpp"
 #include "masd.dogen.generation/types/transforms/model_generation_chain.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
@@ -82,6 +83,13 @@ void code_generation_chain::transform(const context& ctx) {
 
     const auto& to(ctx.coding_context().transform_options());
     BOOST_LOG_SEV(lg, debug) << "Target: " << to.target().generic();
+
+    /*
+     * Obtain the injection model set.
+     */
+    using injection::transforms::model_set_production_chain;
+    /*const auto ms = */model_set_production_chain::transform(ctx.injection_context(),
+        ctx.coding_context().transform_options().target());
 
     /*
      * Obtain the coding models.

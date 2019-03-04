@@ -28,7 +28,7 @@ std::string traits::input_language() {
 }
 
 std::string traits::reference() {
-    static std::string r("masd.injection.reference");
+    static std::string r("masd.injection.new_reference");
     return r;
 }
 

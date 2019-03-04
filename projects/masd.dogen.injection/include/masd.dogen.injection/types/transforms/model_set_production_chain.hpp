@@ -36,7 +36,7 @@ namespace masd::dogen::injection::transforms {
 class model_set_production_chain final {
 private:
     static std::list<boost::filesystem::path>
-    make_directories(const context& ctx,
+    obtain_directory_list(const context& ctx,
         const boost::filesystem::path& target_path);
 
     static std::list<meta_model::model>
