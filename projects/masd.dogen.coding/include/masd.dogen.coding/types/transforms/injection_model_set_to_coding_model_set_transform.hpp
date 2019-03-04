@@ -25,24 +25,16 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.injection/types/meta_model/model_set.hpp"
+#include "masd.dogen.coding/types/meta_model/model_set.hpp"
+#include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::coding::transforms {
 
 class injection_model_set_to_coding_model_set_transform final {
 public:
-    injection_model_set_to_coding_model_set_transform() = default;
-    injection_model_set_to_coding_model_set_transform(const injection_model_set_to_coding_model_set_transform&) = default;
-    injection_model_set_to_coding_model_set_transform(injection_model_set_to_coding_model_set_transform&&) = default;
-    ~injection_model_set_to_coding_model_set_transform() = default;
-    injection_model_set_to_coding_model_set_transform& operator=(const injection_model_set_to_coding_model_set_transform&) = default;
-
-public:
-    bool operator==(const injection_model_set_to_coding_model_set_transform& rhs) const;
-    bool operator!=(const injection_model_set_to_coding_model_set_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static meta_model::model_set transform(const context& ctx,
+        const injection::meta_model::model_set& ms);
 };
 
 }

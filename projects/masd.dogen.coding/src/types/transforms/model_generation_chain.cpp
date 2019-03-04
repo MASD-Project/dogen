@@ -60,7 +60,6 @@ model_generation_chain::transform(const context& ctx) {
      * same; or it is a Platform Independent Model (PIM), making use
      * of LAM types (the Language Agnostic Model).
      */
-
     const auto target(initial_target_chain::transform(ctx));
 
     /*

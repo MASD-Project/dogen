@@ -18,12 +18,61 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.coding/types/transforms/model_pre_processing_chain.hpp"
+#include "masd.dogen.coding/types/transforms/injection_model_to_coding_model_transform.hpp"
 #include "masd.dogen.coding/types/transforms/injection_model_set_to_coding_model_set_transform.hpp"
+
+namespace {
+
+const std::string transform_id(
+    "coding.transforms.injection_model_set_to_coding_model_set_transform");
+using namespace masd::dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
 
 namespace masd::dogen::coding::transforms {
 
-bool injection_model_set_to_coding_model_set_transform::operator==(const injection_model_set_to_coding_model_set_transform& /*rhs*/) const {
-    return true;
+meta_model::model_set injection_model_set_to_coding_model_set_transform::
+transform(const context& ctx, const injection::meta_model::model_set& ms) {
+    const auto model_name(ms.target().name());
+    tracing::scoped_chain_tracer stp(lg,
+        "injection model set to coding model set", transform_id, model_name,
+        *ctx.tracer());
+
+    /*
+     * First we convert the target injection model into a coding
+     * model, ready for further processing.
+     */
+    meta_model::model_set r;
+    r.target(injection_model_to_coding_model_transform::transform(
+            ctx, ms.target()));
+
+    /*
+     * Next, we set the origin of the target model to target so that
+     * further transforms can be applied such as the origin transform.
+     */
+    r.target().origin_type(meta_model::origin_types::target);
+
+    /*
+     * Then we apply all of the pre-processing transforms to the
+     * target.
+     */
+    model_pre_processing_chain::transform(ctx, r.target());
+
+    /*
+     * Now we do the same thing but for the reference models.
+     */
+    for (const auto& ref : ms.references()) {
+        auto m(injection_model_to_coding_model_transform::transform(ctx, ref));
+        model_pre_processing_chain::transform(ctx, m);
+        r.references().push_back(m);
+    }
+    return r;
 }
 
 }
