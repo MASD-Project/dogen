@@ -101,7 +101,7 @@ walk_name_tree(const meta_model::model& em, meta_model::object& o,
 }
 
 void associations_transform::
-expand_object(const meta_model::model& em, meta_model::object& o) {
+process_object(const meta_model::model& em, meta_model::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Expand object: " << o.name().id();
 
     for (const auto& p : o.local_attributes()) {
@@ -135,10 +135,8 @@ transform(const context& ctx, meta_model::model& em) {
 
     BOOST_LOG_SEV(lg, debug) << "Total objects: " << em.objects().size();
 
-    for (auto& pair : em.objects()) {
-        auto& o(*pair.second);
-        expand_object(em, o);
-    }
+    for (auto& pair : em.objects())
+        process_object(em, *pair.second);
 
     stp.end_transform(em);
 }

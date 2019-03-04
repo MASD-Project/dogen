@@ -12,24 +12,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-04 Mon 18:14]
+#+CAPTION: Clock summary at [2019-03-04 Mon 18:31]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *36:26* |       |       | 100.0 |
+| *Total time*                                             | *36:42* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 36:26   |       |       | 100.0 |
-| Active                                                   |         | 36:26 |       | 100.0 |
+| Stories                                                  | 36:42   |       |       | 100.0 |
+| Active                                                   |         | 36:42 |       | 100.0 |
 | Edit release notes for previous sprint                   |         |       |  1:27 |   4.0 |
-| Sprint and product backlog grooming                      |         |       |  0:42 |   1.9 |
-| Implement text model generation chain in generation      |         |       |  3:45 |  10.3 |
-| Move generation model out of coding                      |         |       |  4:22 |  12.0 |
-| Rename endomodel to just model                           |         |       |  2:11 |   6.0 |
+| Sprint and product backlog grooming                      |         |       |  0:53 |   2.4 |
+| Implement text model generation chain in generation      |         |       |  3:45 |  10.2 |
+| Move generation model out of coding                      |         |       |  4:22 |  11.9 |
+| Rename endomodel to just model                           |         |       |  2:11 |   5.9 |
 | Remove exomodel remnants                                 |         |       |  0:03 |   0.1 |
 | Consider adding a dot graph of the transforms to probing |         |       |  1:47 |   4.9 |
-| Split annotations processing into two phases             |         |       |  3:10 |   8.7 |
-| Move injection processing out of coding                  |         |       | 18:39 |  51.2 |
+| Split annotations processing into two phases             |         |       |  3:10 |   8.6 |
+| Move injection processing out of coding                  |         |       | 18:39 |  50.8 |
 | Try to fix valgrind warning on =find_files=              |         |       |  0:20 |   0.9 |
+| Rename the =transform= method to =apply=                 |         |       |  0:05 |   0.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -196,6 +197,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-03-04 Mon 18:14]--[2019-03-04 Mon 18:25] =>  0:11
     CLOCK: [2019-03-01 Fri 11:43]--[2019-03-01 Fri 12:07] =>  0:24
     CLOCK: [2019-02-26 Tue 15:25]--[2019-02-26 Tue 15:43] =>  0:18
     :END:
@@ -508,6 +510,34 @@ Notes:
   - tracing on annotations.
   - injection.json on extraction.
 
+*** COMPLETED Model references are not transitive                     :story:
+    CLOSED: [2019-03-04 Mon 18:20]
+
+*Rationale*: implemented as part of moving injection processing out of
+coding.
+
+For some reason we do not seem to be following references of
+referenced models. We should load them automatically, now that they
+are part of the meta-data. However, the =yarn.json= model breaks when
+we remove the reference to annotation even though it does not use this
+model directly and =yarn= is referencing it correctly.
+
+The reason why is that we load up references to all intermediate
+models, but then on merge we only take target references. What we
+really need to do is to combine the reference containers on merge. For
+this we need to create a method that loops through the map and inserts
+all keys which have not yet been inserted. Something like "merge
+references".
+
+We should address this issue when we introduce two-phase parsing of
+models. This is because, as with the new meta-model elements, we also
+need to do a first pass across the target and all reference models to
+obtain all the paths for all referenced models. We then need to obtain
+the unique set of referenced models and load those. To put in this
+logic in the code at present (i.e. without a two-phase approach) would
+mean we'd have to load the same models several times (or heavily
+rewrite existing code, resulting in a two-phase approach, anyway).
+
 *** STARTED Try to fix valgrind warning on =find_files=               :story:
     :LOGBOOK:
     CLOCK: [2019-02-27 Wed 17:25]--[2019-02-27 Wed 17:45] =>  0:20
@@ -524,6 +554,18 @@ We seem to be doing something wrong with directory iterators:
 : ==7755==    by 0x6F0E15: masd::dogen::utility::filesystem::find_files(boost::filesystem::path const&) (file.cpp:85)
 : ==7755==    by 0x6ADB4B: masd::dogen::coding::helpers::mapping_set_repository_factory::obtain_mappings[abi:cxx11](std::vector > const&) const (mapping_set_repository_factory.cpp:66)
 : ==7755==    by 0x6AF507: masd::dogen::coding::helpers::mapping_set_repository_factory::make(std::vector > const&) const (mapping_set_repository_factory.cpp:172)
+
+*** STARTED Rename the =transform= method to =apply=                  :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-04 Mon 18:25]--[2019-03-04 Mon 18:30] =>  0:05
+    :END:
+
+Its a bit silly to name classes =x_transform= and then to have their
+main method also called =transform=. We should rename these to
+something like =apply=.
+
+We should work on this once the system tests are back and running, as
+we may break a lot of things with a "simple" tidy-up.
 
 *** Move coding to generation model transform into orchestration      :story:
 
@@ -573,30 +615,6 @@ e.g. =masd::object= - but don't always have to (e.g. when converting a
 model from Dia). In this case, the fallback element type is
 used. Perhaps we can keep the "fallback" logic internally, but just
 call it element type?
-
-*** Model references are not transitive                               :story:
-
-For some reason we do not seem to be following references of
-referenced models. We should load them automatically, now that they
-are part of the meta-data. However, the =yarn.json= model breaks when
-we remove the reference to annotation even though it does not use this
-model directly and =yarn= is referencing it correctly.
-
-The reason why is that we load up references to all intermediate
-models, but then on merge we only take target references. What we
-really need to do is to combine the reference containers on merge. For
-this we need to create a method that loops through the map and inserts
-all keys which have not yet been inserted. Something like "merge
-references".
-
-We should address this issue when we introduce two-phase parsing of
-models. This is because, as with the new meta-model elements, we also
-need to do a first pass across the target and all reference models to
-obtain all the paths for all referenced models. We then need to obtain
-the unique set of referenced models and load those. To put in this
-logic in the code at present (i.e. without a two-phase approach) would
-mean we'd have to load the same models several times (or heavily
-rewrite existing code, resulting in a two-phase approach, anyway).
 
 *** Adding reference to itself results in resolution errors           :story:
 
@@ -806,12 +824,6 @@ are generating forward declarations for all types, for no reason.
 We are generating hash for all types at present in coding but we only
 need it for two types: name and location. Try to switch it off
 globally and on just for those two types.
-
-*** Rename the =transform= method to =apply=                          :story:
-
-Its a bit silly to name classes =x_transform= and then to have their
-main method also called =transform=. We should rename these to
-something like =apply=.
 
 *** Stitch does not have a force write flag                           :story:
 

@@ -39,13 +39,13 @@ namespace masd::dogen::coding::transforms {
  * @brief Transform that specialises in indexing associations for
  * objects.
  *
- * @section coding_association_expander_0 Requirements
+ * @section coding_associations_transform_0 Requirements
  *
- * The expansion of local attributes is expected to have taken place.
+ * The transform of local attributes is expected to have taken place.
  *
- * @section coding_attribute_indexer_1 Indexing Process
+ * @section coding_associations_transform_1 Indexing Process
  *
- * The expander goes through all attributes in objects and, for every
+ * The transform goes through all attributes in objects and, for every
  * name tree, unpacks all the associations implied by their presence.
  *
  * Associations are of two types: @e regular or @e weak. This
@@ -81,14 +81,14 @@ private:
 
 private:
     /**
-     * @brief Expands a specific object.
+     * @brief Processes a specific object.
      */
-    static void expand_object(const meta_model::model& em,
+    static void process_object(const meta_model::model& em,
         meta_model::object& o);
 
 public:
     /**
-     * @brief Expands all association relationships.
+     * @brief Transforms all association relationships on all objects.
      */
     static void transform(const context& ctx, meta_model::model& em);
 };
