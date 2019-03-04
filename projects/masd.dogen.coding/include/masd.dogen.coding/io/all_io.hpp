@@ -42,6 +42,7 @@
 #include "masd.dogen.coding/io/meta_model/attribute_io.hpp"
 #include "masd.dogen.coding/io/meta_model/exception_io.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/meta_model/model_set_io.hpp"
 #include "masd.dogen.coding/io/meta_model/name_tree_io.hpp"
 #include "masd.dogen.coding/io/meta_model/primitive_io.hpp"
 #include "masd.dogen.coding/io/helpers/mapping_value_io.hpp"

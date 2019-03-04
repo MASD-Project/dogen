@@ -52,6 +52,7 @@
 #include "masd.dogen.coding/types/meta_model/attribute.hpp"
 #include "masd.dogen.coding/types/meta_model/exception.hpp"
 #include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/types/meta_model/model_set.hpp"
 #include "masd.dogen.coding/types/meta_model/name_tree.hpp"
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_error.hpp"
@@ -135,5 +136,6 @@
 #include "masd.dogen.coding/types/transforms/extraction_properties_transform.hpp"
 #include "masd.dogen.coding/types/meta_model/local_archetype_location_properties.hpp"
 #include "masd.dogen.coding/types/transforms/injection_model_to_coding_model_transform.hpp"
+#include "masd.dogen.coding/types/transforms/injection_model_set_to_coding_model_set_transform.hpp"
 
 #endif
