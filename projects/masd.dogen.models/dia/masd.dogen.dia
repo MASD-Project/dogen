@@ -959,7 +959,7 @@ size limitations.#</dia:string>
         <dia:point val="-84,-82"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-84.05,-82.05;-56.87,-68.25"/>
+        <dia:rectangle val="-84.05,-82.05;-56.87,-65.85"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -971,7 +971,7 @@ size limitations.#</dia:string>
         <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13.700000000000001"/>
+        <dia:real val="16.100000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>

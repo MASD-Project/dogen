@@ -33,6 +33,7 @@
 #include "masd.dogen.coding/types/transforms/model_assembly_chain.hpp"
 #include "masd.dogen.coding/types/transforms/model_post_processing_chain.hpp"
 #include "masd.dogen.coding/types/transforms/injection_model_set_to_coding_model_set_transform.hpp"
+#include "masd.dogen.coding/types/transforms/model_set_pre_processing_chain.hpp"
 #include "masd.dogen.coding/types/transforms/model_generation_chain.hpp"
 
 namespace {
@@ -54,8 +55,14 @@ model_generation_chain::transform(const context& ctx,
      * First we transform the injection model set into a coding model
      * set.
      */
-    const auto cms(injection_model_set_to_coding_model_set_transform::
-        transform(ctx, ims));
+    using inj_transform = injection_model_set_to_coding_model_set_transform;
+    auto cms(inj_transform::transform(ctx, ims));
+
+    /*
+     * Then we apply a set of post-processing transforms to the model
+     * set.
+     */
+    model_set_pre_processing_chain::transform(ctx, cms);
 
     /*
      * Note that we've obtained the target given the user options;

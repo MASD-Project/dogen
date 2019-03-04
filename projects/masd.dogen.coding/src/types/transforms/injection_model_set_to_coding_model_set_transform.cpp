@@ -22,7 +22,6 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
-#include "masd.dogen.coding/types/transforms/model_pre_processing_chain.hpp"
 #include "masd.dogen.coding/types/transforms/injection_model_to_coding_model_transform.hpp"
 #include "masd.dogen.coding/types/transforms/injection_model_set_to_coding_model_set_transform.hpp"
 
@@ -46,32 +45,21 @@ transform(const context& ctx, const injection::meta_model::model_set& ms) {
 
     /*
      * First we convert the target injection model into a coding
-     * model, ready for further processing.
+     * model. We must set the origin of the target model to target so
+     * that further transforms can be applied such as the origin
+     * transform.
      */
     meta_model::model_set r;
-    r.target(injection_model_to_coding_model_transform::transform(
-            ctx, ms.target()));
-
-    /*
-     * Next, we set the origin of the target model to target so that
-     * further transforms can be applied such as the origin transform.
-     */
+    using injection_transform = injection_model_to_coding_model_transform;
+    r.target(injection_transform::transform(ctx, ms.target()));
     r.target().origin_type(meta_model::origin_types::target);
 
     /*
-     * Then we apply all of the pre-processing transforms to the
-     * target.
+     * Now we do the same thing to the reference models.
      */
-    model_pre_processing_chain::transform(ctx, r.target());
+    for (const auto& ref : ms.references())
+        r.references().push_back(injection_transform::transform(ctx, ref));
 
-    /*
-     * Now we do the same thing but for the reference models.
-     */
-    for (const auto& ref : ms.references()) {
-        auto m(injection_model_to_coding_model_transform::transform(ctx, ref));
-        model_pre_processing_chain::transform(ctx, m);
-        r.references().push_back(m);
-    }
     return r;
 }
 
