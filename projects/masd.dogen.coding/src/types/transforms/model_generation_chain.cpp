@@ -34,6 +34,7 @@
 #include "masd.dogen.coding/types/transforms/references_chain.hpp"
 #include "masd.dogen.coding/types/transforms/model_assembly_chain.hpp"
 #include "masd.dogen.coding/types/transforms/model_post_processing_chain.hpp"
+#include "masd.dogen.coding/types/transforms/injection_model_set_to_coding_model_set_transform.hpp"
 #include "masd.dogen.coding/types/transforms/model_generation_chain.hpp"
 
 namespace {
@@ -46,6 +47,63 @@ static logger lg(logger_factory(transform_id));
 }
 
 namespace masd::dogen::coding::transforms {
+
+std::list<meta_model::model>
+model_generation_chain::transform(const context& ctx,
+    const injection::meta_model::model_set& ims) {
+
+    /*
+     * First we transform the injection model set into a coding model
+     * set.
+     */
+    const auto cms(injection_model_set_to_coding_model_set_transform::
+        transform(ctx, ims));
+
+    /*
+     * Note that we've obtained the target given the user options;
+     * that is, the target is either a Platform Specific Model (PSM) -
+     * in which case the input language and the output language are
+     * one and the same - or it is a Platform Independent Model (PIM),
+     * making use of LAM types (the Language Agnostic Model) and thus
+     * requiring mapping to a PSM.
+     *
+     * With regards to the references, note that we are not filtering
+     * them at all; we include all references that the user deemed
+     * necessary, regardlesss of compatibility with the target
+     * language. In practice, the reference and target permutations
+     * should fall into the one of the following categories:
+     *
+     * - the target model is a PIM and the reference is also a PIM,
+     *   thus both require mapping to a PSM.
+     *
+     * - the target model is a PIM, and the reference model is a PSM
+     *   in a language which the user is interested in - i.e. its one
+     *   of the target model's output language.
+     *
+     * - the target model is a PSM and the reference model is also a
+     *   PSM, and they share the same language.
+     *
+     * The below code takes into account all of these permutations,
+     * performing mapping as required.
+     */
+    std::list<meta_model::model> r;
+    for (const auto ol : cms.target().output_languages()) {
+        /*
+         * Execute the assembly chain for each of the requested output
+         * languages.
+         */
+        auto m(model_assembly_chain::transform(ctx, ol, cms.target(),
+                cms.references()));
+
+        /*
+         * Then apply all of the post-processing transforms to the
+         * assembled model.
+         */
+        model_post_processing_chain::transform(ctx, m);
+        r.push_back(m);
+    }
+    return r;
+}
 
 std::list<meta_model::model>
 model_generation_chain::transform(const context& ctx) {

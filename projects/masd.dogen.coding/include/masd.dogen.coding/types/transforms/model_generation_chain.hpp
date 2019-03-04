@@ -29,6 +29,7 @@
 #include <iosfwd>
 #include "masd.dogen.annotations/types/type.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.injection/types/meta_model/model_set.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
@@ -41,6 +42,9 @@ namespace masd::dogen::coding::transforms {
  */
 class model_generation_chain final {
 public:
+    static std::list<meta_model::model> transform(const context& ctx,
+        const injection::meta_model::model_set& ims);
+
     static std::list<meta_model::model> transform(const context& ctx);
 };
 
