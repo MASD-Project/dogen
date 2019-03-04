@@ -29,6 +29,7 @@
 #include "masd.dogen.utility/types/log/severity_level.hpp"
 #include "masd.dogen.utility/types/log/logging_configuration.hpp"
 #include "masd.dogen.utility/types/log/scoped_lifecycle_manager.hpp"
+#include "masd.dogen.cli/io/configuration_io.hpp"
 #include "masd.dogen.cli/types/initializer.hpp"
 #include "masd.dogen.cli/types/application.hpp"
 #include "masd.dogen.cli/types/injector_factory.hpp"
@@ -111,6 +112,7 @@ int execute_cli_workflow(const int argc, const char* argv[],
     const auto& cfg(*ocfg);
     slm.initialise(cfg.logging());
     BOOST_LOG_SEV(lg, debug) << "Command line arguments: " << args;
+    BOOST_LOG_SEV(lg, debug) << "Configuration: " << cfg;
 
     /*
      * Now perform legacy initialisation. It uses logging so it must

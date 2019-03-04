@@ -108,6 +108,7 @@ context_factory::make_context(const coding::transforms::options& o,
 
     orchestration::transforms::context r;
     r.coding_context().transform_options(o);
+    r.generation_context().output_directory_path(o.output_directory_path());
 
     /*
      * Obtain the transform registrar and ensure it has been setup.
