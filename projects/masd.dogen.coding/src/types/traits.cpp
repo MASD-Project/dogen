@@ -47,11 +47,6 @@ std::string traits::overwrite() {
     return r;
 }
 
-std::string traits::input_language() {
-    static std::string r("masd.injection.input_language");
-    return r;
-}
-
 std::string traits::output_language() {
     static std::string r("masd.extraction.output_language");
     return r;
@@ -59,11 +54,6 @@ std::string traits::output_language() {
 
 std::string traits::is_proxy_model() {
     static std::string r("masd.injection.is_proxy_model");
-    return r;
-}
-
-std::string traits::reference() {
-    static std::string r("masd.injection.reference");
     return r;
 }
 

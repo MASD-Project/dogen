@@ -41,21 +41,17 @@ private:
 
 private:
     struct type_group {
-        annotations::type input_language;
         annotations::type output_language;
     };
 
     static type_group make_type_group(const annotations::type_repository& atrp);
-
-    static meta_model::languages make_input_language(const type_group& tg,
-        const annotations::annotation& a);
 
     static std::list<meta_model::languages>
     make_output_languages(const type_group& tg,
         const annotations::annotation& a);
 
 public:
-    static void transform(const context& ctx, meta_model::model& im);
+    static void transform(const context& ctx, meta_model::model& m);
 };
 
 }

@@ -33,11 +33,9 @@
 namespace masd::dogen::coding::transforms {
 
 /**
- * @brief Top-level transformation responsible for converting an
- * injection model set into a coding model set.
- *
- * Note that this transform assumes all injection transforms have been
- * * applied to the injection model set.
+ * @brief Top-level transformation responsible for converting a raw
+ * model set into a group of models with all coding transforms
+ * applied.
  */
 class model_production_chain final {
 public:

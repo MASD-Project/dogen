@@ -35,10 +35,8 @@ struct traits {
     static std::string postfix();
     static std::string supported();
     static std::string overwrite();
-    static std::string input_language();
     static std::string output_language();
     static std::string is_proxy_model();
-    static std::string reference();
     static std::string external_modules();
     static std::string model_modules();
 

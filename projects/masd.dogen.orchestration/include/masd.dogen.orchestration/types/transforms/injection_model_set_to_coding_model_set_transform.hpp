@@ -31,6 +31,12 @@
 
 namespace masd::dogen::orchestration::transforms {
 
+/**
+ * @brief Converts an injection model set into a coding model set.
+ *
+ * The transform assumes all injection transforms have been applied to
+ * the injection model set.
+ */
 class injection_model_set_to_coding_model_set_transform final {
 public:
     static coding::meta_model::model_set

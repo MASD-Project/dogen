@@ -43,6 +43,7 @@ const std::string cpp_language("cpp");
 const std::string csharp_language("csharp");
 const std::string la_language("language_agnostic");
 
+const std::string lanugage_not_set("Input language must be set.");
 const std::string unsupported_lanugage("Language is not supported: ");
 
 }
@@ -66,17 +67,8 @@ language_transform::type_group language_transform::
 make_type_group(const annotations::type_repository& atrp) {
     type_group r;
     const annotations::type_repository_selector s(atrp);
-    r.input_language = s.select_type_by_name(traits::input_language());
     r.output_language = s.select_type_by_name(traits::output_language());
     return r;
-}
-
-meta_model::languages
-language_transform::make_input_language(const type_group& tg,
-    const annotations::annotation& a) {
-    const annotations::entry_selector s(a);
-    const auto lang_str(s.get_text_content_or_default(tg.input_language));
-    return to_language(lang_str);
 }
 
 std::list<meta_model::languages>
@@ -96,49 +88,54 @@ language_transform::make_output_languages(const type_group& tg,
 }
 
 void language_transform::
-transform(const context& ctx, meta_model::model& em) {
+transform(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "language transform",
-        transform_id, em.name().id(), *ctx.tracer(), em);
+        transform_id, m.name().id(), *ctx.tracer(), m);
 
-    const auto tg(make_type_group(*ctx.type_repository()));
-    const auto ra(em.root_module()->annotation());
+    /*
+     * Ensure the input language has been set by now.
+     */
     using meta_model::languages;
-    const bool has_input_language(em.input_language() != languages::invalid);
+    const bool has_input_language(m.input_language() != languages::invalid);
     if (!has_input_language) {
-        const auto il(make_input_language(tg, ra));
-        em.input_language(il);
-        BOOST_LOG_SEV(lg, debug) << "Expanded input language to: " << il;
-    } else {
-        BOOST_LOG_SEV(lg, debug) << "Model already has an input language: "
-                                 << em.input_language();
+        BOOST_LOG_SEV(lg, error) << lanugage_not_set;
+        BOOST_THROW_EXCEPTION(transformation_error(lanugage_not_set));
     }
 
-    if (em.output_languages().empty()) {
-        const auto ol(make_output_languages(tg, ra));
-
-        /*
-         * If we did not set an output language, assume the input as
-         * output. Validator will ensure this language is actually
-         * outputtable.
-         */
-        if (ol.empty()) {
-            em.output_languages().push_back(em.input_language());
-
-            BOOST_LOG_SEV(lg, debug) << "No output language overrides found. "
-                                     << "Defaulting to input languae: "
-                                     << em.output_languages();
-        } else {
-            em.output_languages(ol);
-
-            BOOST_LOG_SEV(lg, debug) << "Expanded output languages to: "
-                                     << em.output_languages();
-        }
-    } else {
+    /*
+     * If we've already got output languages, there is no work
+     * required.
+     */
+    if (!m.output_languages().empty()) {
         BOOST_LOG_SEV(lg, debug) << "Model already has output languages: "
-                                 << em.output_languages();
+                                 << m.output_languages();
+        return; // not ending tracing by design as there are no changes.
     }
 
-    stp.end_transform(em);
+    /*
+     * Read the output languages requested by the user.
+     */
+    const auto ra(m.root_module()->annotation());
+    const auto tg(make_type_group(*ctx.type_repository()));
+    const auto ol(make_output_languages(tg, ra));
+
+    /*
+     * If the user did not set an output language, assume the input as
+     * output. Validator will ensure this language is legal (e.g. the
+     * output language does not result in a PIM).
+     */
+    if (ol.empty()) {
+        m.output_languages().push_back(m.input_language());
+        BOOST_LOG_SEV(lg, debug) << "No output language overrides found. "
+                                 << "Defaulting to input languae: "
+                                 << m.output_languages();
+    } else {
+        m.output_languages(ol);
+        BOOST_LOG_SEV(lg, debug) << "Expanded output languages to: "
+                                 << m.output_languages();
+    }
+
+    stp.end_transform(m);
 }
 
 }
