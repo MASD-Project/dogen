@@ -28,7 +28,7 @@ namespace {
 
 using namespace masd::dogen::utility::log;
 static logger
-lg(logger_factory("injection.registrar"));
+lg(logger_factory("injection.transforms.registrar"));
 
 const std::string empty_extension("Extension cannot be empty.");
 const std::string no_encoding_transforms("No encoding transforms provided.");
@@ -74,8 +74,18 @@ void registrar::validate() {
                              << decoding_transforms_.size();
 }
 
-std::list<std::string> registrar::registered_extensions() const {
-    return registered_extensions_;
+std::list<std::string> registrar::registered_encoding_extensions() const {
+    std::list<std::string> r;
+    for (const auto& p : encoding_transforms_)
+        r.push_back(p.first);
+    return r;
+}
+
+std::list<std::string> registrar::registered_decoding_extensions() const {
+    std::list<std::string> r;
+    for (const auto& p : decoding_transforms_)
+        r.push_back(p.first);
+    return r;
 }
 
 void registrar::
@@ -105,10 +115,8 @@ register_encoding_transform(std::shared_ptr<encoding_transform_interface> t) {
     BOOST_LOG_SEV(lg, debug) << "Registering against extension: " << e;
     const auto pair(std::make_pair(e, t));
     const auto inserted(encoding_transforms_.insert(pair).second);
-    if (inserted) {
-        registered_extensions_.push_back(e);
+    if (inserted)
         return;
-    }
 
     BOOST_LOG_SEV(lg, error) << extension_already_registered << e;
     BOOST_THROW_EXCEPTION(registrar_error(extension_already_registered + e));

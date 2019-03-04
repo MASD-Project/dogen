@@ -47,9 +47,14 @@ public:
     void validate();
 
     /**
-     * @brief Returns a list of registered extensions.
+     * @brief Returns a list of registered extensions for encoding.
      */
-    std::list<std::string> registered_extensions() const;
+    std::list<std::string> registered_encoding_extensions() const;
+
+    /**
+     * @brief Returns a list of registered extensions for decoding.
+     */
+    std::list<std::string> registered_decoding_extensions() const;
 
     /**
      * @brief Registers an encoding transform.
@@ -116,7 +121,6 @@ private:
     std::unordered_map<std::string,
                        std::shared_ptr<decoding_transform_interface>>
     decoding_transforms_;
-    std::list<std::string> registered_extensions_;
 };
 
 }
