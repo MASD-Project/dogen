@@ -18,14 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ORCHESTRATION_IO_ALL_IO_HPP
-#define MASD_DOGEN_ORCHESTRATION_IO_ALL_IO_HPP
+#ifndef MASD_DOGEN_ORCHESTRATION_IO_TRANSFORMS_NAMING_CONFIGURATION_IO_HPP
+#define MASD_DOGEN_ORCHESTRATION_IO_TRANSFORMS_NAMING_CONFIGURATION_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.orchestration/io/transforms/naming_configuration_io.hpp"
-#include "masd.dogen.orchestration/io/helpers/stereotypes_conversion_result_io.hpp"
+#include <iosfwd>
+#include "masd.dogen.orchestration/types/transforms/naming_configuration.hpp"
+
+namespace masd::dogen::orchestration::transforms {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const masd::dogen::orchestration::transforms::naming_configuration& v);
+
+}
 
 #endif

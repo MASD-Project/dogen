@@ -29,10 +29,18 @@
 #include "masd.dogen.orchestration/types/converter.hpp"
 #include "masd.dogen.orchestration/types/generator.hpp"
 #include "masd.dogen.orchestration/types/orchestration.hpp"
+#include "masd.dogen.orchestration/types/helpers/adapter.hpp"
 #include "masd.dogen.orchestration/types/injector_factory.hpp"
 #include "masd.dogen.orchestration/types/transforms/context.hpp"
+#include "masd.dogen.orchestration/types/helpers/stereotypes_helper.hpp"
 #include "masd.dogen.orchestration/types/transforms/context_factory.hpp"
+#include "masd.dogen.orchestration/types/helpers/adaptation_exception.hpp"
 #include "masd.dogen.orchestration/types/transforms/factory_exception.hpp"
+#include "masd.dogen.orchestration/types/transforms/transform_exception.hpp"
+#include "masd.dogen.orchestration/types/transforms/naming_configuration.hpp"
 #include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
+#include "masd.dogen.orchestration/types/helpers/stereotypes_conversion_result.hpp"
+#include "masd.dogen.orchestration/types/transforms/injection_model_to_coding_model_transform.hpp"
+#include "masd.dogen.orchestration/types/transforms/injection_model_set_to_coding_model_set_transform.hpp"
 
 #endif

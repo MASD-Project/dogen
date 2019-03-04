@@ -31429,21 +31429,17 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:point val="-169.48,58.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-170.23,57.85;-162.95,72.05"/>
+        <dia:rectangle val="-170.23,57.85;-162.95,71.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="-169.48,58.6"/>
-        <dia:point val="-169.48,72"/>
-        <dia:point val="-167,72"/>
-        <dia:point val="-167,71.1"/>
+        <dia:point val="-169.48,71.1"/>
         <dia:point val="-163,71.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
-        <dia:enum val="1"/>
-        <dia:enum val="0"/>
         <dia:enum val="1"/>
         <dia:enum val="0"/>
       </dia:attribute>

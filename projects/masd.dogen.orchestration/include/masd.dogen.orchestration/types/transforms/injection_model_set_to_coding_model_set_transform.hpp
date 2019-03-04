@@ -18,14 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ORCHESTRATION_IO_ALL_IO_HPP
-#define MASD_DOGEN_ORCHESTRATION_IO_ALL_IO_HPP
+#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_INJECTION_MODEL_SET_TO_CODING_MODEL_SET_TRANSFORM_HPP
+#define MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_INJECTION_MODEL_SET_TO_CODING_MODEL_SET_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.orchestration/io/transforms/naming_configuration_io.hpp"
-#include "masd.dogen.orchestration/io/helpers/stereotypes_conversion_result_io.hpp"
+#include "masd.dogen.injection/types/meta_model/model_set.hpp"
+#include "masd.dogen.coding/types/meta_model/model_set.hpp"
+#include "masd.dogen.coding/types/transforms/context_fwd.hpp"
+
+namespace masd::dogen::orchestration::transforms {
+
+class injection_model_set_to_coding_model_set_transform final {
+public:
+    static coding::meta_model::model_set
+    transform(const coding::transforms::context& ctx,
+        const injection::meta_model::model_set& ms);
+};
+
+}
 
 #endif

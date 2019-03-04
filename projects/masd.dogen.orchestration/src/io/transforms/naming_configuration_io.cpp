@@ -18,14 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ORCHESTRATION_IO_ALL_IO_HPP
-#define MASD_DOGEN_ORCHESTRATION_IO_ALL_IO_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
+#include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "masd.dogen.orchestration/io/transforms/naming_configuration_io.hpp"
-#include "masd.dogen.orchestration/io/helpers/stereotypes_conversion_result_io.hpp"
 
-#endif
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
+namespace masd::dogen::orchestration::transforms {
+
+std::ostream& operator<<(std::ostream& s, const naming_configuration& v) {
+    s << " { "
+      << "\"__type__\": " << "\"masd::dogen::orchestration::transforms::naming_configuration\"" << ", "
+      << "\"external_modules\": " << "\"" << tidy_up_string(v.external_modules()) << "\"" << ", "
+      << "\"model_modules\": " << "\"" << tidy_up_string(v.model_modules()) << "\""
+      << " }";
+    return(s);
+}
+
+}
