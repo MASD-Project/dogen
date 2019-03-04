@@ -34,6 +34,5 @@
 #include "masd.dogen.orchestration/types/transforms/context_factory.hpp"
 #include "masd.dogen.orchestration/types/transforms/factory_exception.hpp"
 #include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
-#include "masd.dogen.orchestration/types/transforms/extraction_model_generation_chain.hpp"
 
 #endif

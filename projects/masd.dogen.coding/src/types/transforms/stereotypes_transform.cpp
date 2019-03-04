@@ -469,7 +469,7 @@ void stereotypes_transform::transform(meta_model::primitive& p) {
 void stereotypes_transform::
 transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "stereotypes transform",
-        transform_id, em.name().id(), ctx.tracer(), em);
+        transform_id, em.name().id(), *ctx.tracer(), em);
 
     for (auto& pair : em.objects())
         transform(*pair.second, em);

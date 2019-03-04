@@ -41,7 +41,7 @@ meta_model::model model_assembly_chain::transform(const context& ctx,
     const meta_model::languages l, const meta_model::model& target,
     const std::list<meta_model::model>& refs) {
     tracing::scoped_chain_tracer stp(lg, "model assembly chain",
-        transform_id, target.name().id(), ctx.tracer());
+        transform_id, target.name().id(), *ctx.tracer());
 
     /*
      * Perform all the language mapping required for target and

@@ -34,6 +34,12 @@ namespace masd::dogen::orchestration::transforms {
 
 class context final {
 public:
+    context() = default;
+    context(const context&) = default;
+    context(context&&) = default;
+    ~context() = default;
+
+public:
     context(
         const masd::dogen::injection::transforms::context& injection_context,
         const masd::dogen::coding::transforms::context& coding_context,
@@ -41,8 +47,19 @@ public:
 
 public:
     const masd::dogen::injection::transforms::context& injection_context() const;
+    masd::dogen::injection::transforms::context& injection_context();
+    void injection_context(const masd::dogen::injection::transforms::context& v);
+    void injection_context(const masd::dogen::injection::transforms::context&& v);
+
     const masd::dogen::coding::transforms::context& coding_context() const;
+    masd::dogen::coding::transforms::context& coding_context();
+    void coding_context(const masd::dogen::coding::transforms::context& v);
+    void coding_context(const masd::dogen::coding::transforms::context&& v);
+
     const masd::dogen::generation::transforms::context& generation_context() const;
+    masd::dogen::generation::transforms::context& generation_context();
+    void generation_context(const masd::dogen::generation::transforms::context& v);
+    void generation_context(const masd::dogen::generation::transforms::context&& v);
 
 private:
     masd::dogen::injection::transforms::context injection_context_;

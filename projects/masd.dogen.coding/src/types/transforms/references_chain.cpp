@@ -57,7 +57,7 @@ obtain_relevant_languages(const meta_model::model& target) {
 std::list<meta_model::model> references_chain::
 transform(const context& ctx, const meta_model::model& target) {
     tracing::scoped_chain_tracer stp(lg, "references chain",
-        transform_id, target.name().id(), ctx.tracer());
+        transform_id, target.name().id(), *ctx.tracer());
 
     /*
      * Obtain the absolute paths to all reference models - system and
@@ -84,12 +84,13 @@ transform(const context& ctx, const meta_model::model& target) {
          * of the exogenous model.
          */
         using injection::transforms::model_production_chain;
-        const injection::transforms::context inj_ctx(
-            ctx.data_directories(),
-            ctx.archetype_location_repository(),
-            ctx.type_repository(),
-            ctx.tracer(),
-            ctx.transform_options().compatibility_mode());
+        injection::transforms::context inj_ctx;
+        inj_ctx.data_directories(ctx.data_directories());
+        inj_ctx.archetype_location_repository(
+            ctx.archetype_location_repository());
+        inj_ctx.type_repository(ctx.type_repository());
+        inj_ctx.tracer(ctx.tracer());
+        inj_ctx.annotation_factory(ctx.annotation_factory());
         const auto em(model_production_chain::transform(inj_ctx, rp));
 
         /*

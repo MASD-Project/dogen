@@ -493,9 +493,9 @@ transform_modules(const type_group& tg, meta_model::model& em) {
 void orm_transform::
 transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "orm transform",
-        transform_id, em.name().id(), ctx.tracer(), em);
+        transform_id, em.name().id(), *ctx.tracer(), em);
 
-    const auto tg(make_type_group(ctx.type_repository()));
+    const auto tg(make_type_group(*ctx.type_repository()));
     const auto& rm(*em.root_module());
     em.orm_properties(make_model_properties(tg, rm.annotation()));
 

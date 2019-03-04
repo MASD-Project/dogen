@@ -64,7 +64,7 @@ void model_to_model_chain::transform(const transforms::context& ctx,
     const boost::filesystem::path& src_path,
     const boost::filesystem::path& dst_path) {
     tracing::scoped_chain_tracer stp(lg, "model to model chain",
-        transform_id, ctx.tracer());
+        transform_id, *ctx.tracer());
 
     /*
      * Obtain a tuple containing the source and destination

@@ -61,7 +61,7 @@ meta_model::model model_production_chain::
 transform(const context& ctx, const boost::filesystem::path& p) {
     const auto model_name(p.filename().generic_string());
     tracing::scoped_chain_tracer stp(lg, "injection model production chain",
-        transform_id, model_name, ctx.tracer());
+        transform_id, model_name, *ctx.tracer());
 
     /*
      * Transform the exogenous model - in whatever supported exogenous

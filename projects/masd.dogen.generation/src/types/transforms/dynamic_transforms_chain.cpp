@@ -55,14 +55,14 @@ dynamic_transforms_chain::create_decoration_properties_factory(
     const context& ctx, const annotations::annotation& ra) {
     using masd::dogen::extraction::decoration_properties_factory;
     decoration_properties_factory
-        r(ctx.type_repository(), ctx.formatting_repository(), ra);
+        r(*ctx.type_repository(), *ctx.formatting_repository(), ra);
     return r;
 }
 
 void dynamic_transforms_chain::
 transform(const context& ctx, meta_model::model& m) {
     tracing::scoped_chain_tracer stp(lg, "dynamic transforms chain",
-        transform_id, m.name().id(), ctx.tracer(), m);
+        transform_id, m.name().id(), *ctx.tracer(), m);
 
     auto& rg(registrar());
     rg.validate();

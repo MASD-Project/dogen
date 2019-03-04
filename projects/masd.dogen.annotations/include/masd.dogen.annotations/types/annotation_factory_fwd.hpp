@@ -18,23 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_EXTRACTION_MODEL_GENERATION_CHAIN_HPP
-#define MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_EXTRACTION_MODEL_GENERATION_CHAIN_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_ANNOTATION_FACTORY_FWD_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_ANNOTATION_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.coding/types/transforms/context.hpp"
-#include "masd.dogen.extraction/types/meta_model/model.hpp"
+namespace masd::dogen::annotations {
 
-namespace masd::dogen::orchestration::transforms {
-
-class extraction_model_generation_chain final {
-public:
-    static extraction::meta_model::model
-    transform(const coding::transforms::context& ctx);
-};
+class annotation_factory;
 
 }
 

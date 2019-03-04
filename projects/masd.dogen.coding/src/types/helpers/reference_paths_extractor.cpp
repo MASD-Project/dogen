@@ -116,7 +116,7 @@ obtain_paths_to_user_references(const transforms::context& ctx,
     const annotations::annotation& ra) {
 
     const auto target_dir(ctx.transform_options().target().parent_path());
-    const auto tg(make_type_group(ctx.type_repository()));
+    const auto tg(make_type_group(*ctx.type_repository()));
     const auto refs(make_user_references(tg, ra));
     std::list<boost::filesystem::path> r;
     for (const auto& ref : refs) {

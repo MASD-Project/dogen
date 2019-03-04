@@ -82,9 +82,9 @@ populate_from_annotations(const type_group& tg, meta_model::primitive& p) {
 void primitives_transform::
 transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "primitives transform",
-        transform_id, em.name().id(), ctx.tracer(), em);
+        transform_id, em.name().id(), *ctx.tracer(), em);
 
-    const auto tg(make_type_group(ctx.type_repository()));
+    const auto tg(make_type_group(*ctx.type_repository()));
     for (auto& pair : em.primitives()) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Transforming: " << id;

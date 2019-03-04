@@ -245,9 +245,9 @@ void parsing_transform::parse_underlying_element(const type_group& tg,
 void parsing_transform::
 transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "parsing transform",
-        transform_id, em.name().id(), ctx.tracer(), em);
+        transform_id, em.name().id(), *ctx.tracer(), em);
 
-    const auto tg(make_type_group(ctx.type_repository()));
+    const auto tg(make_type_group(*ctx.type_repository()));
     const auto l(em.input_language());
 
     for (auto& pair : em.objects()) {

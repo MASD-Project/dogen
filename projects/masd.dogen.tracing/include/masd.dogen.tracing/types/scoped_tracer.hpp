@@ -37,7 +37,7 @@ public:
         const std::string& description, const std::string& id, const tracer& tp)
         : description_(description), lg_(lg), dismiss_(false), tracer_(tp) {
         using namespace masd::dogen::utility::log;
-        BOOST_LOG_SEV(lg_, debug) << "Started " << description << ". ";
+        BOOST_LOG_SEV(lg_, debug) << "Started " << description << ".";
         tracer_.start_chain(id);
     }
 
@@ -46,7 +46,7 @@ public:
         const std::string& model_id, const tracer& tp)
         : description_(description), lg_(lg), dismiss_(false), tracer_(tp) {
         using namespace masd::dogen::utility::log;
-        BOOST_LOG_SEV(lg_, debug) << "Started " << description << ". ";
+        BOOST_LOG_SEV(lg_, debug) << "Started " << description << ".";
         tracer_.start_chain(id, model_id);
     }
 
@@ -57,7 +57,7 @@ public:
         : description_(description), lg_(lg), dismiss_(false), tracer_(tp) {
         using namespace masd::dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "Started " << description
-                                  << ". Model: " << model_id;
+                                  << " [" << model_id << "]";
         tracer_.start_chain(id, model_id, input);
     }
 

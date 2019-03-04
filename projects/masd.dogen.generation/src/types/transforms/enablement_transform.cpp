@@ -315,9 +315,9 @@ void enablement_transform::compute_enablement_for_element(
 void enablement_transform::
 transform(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "enablement new_transform",
-        transform_id, m.name().id(), ctx.tracer(), m);
+        transform_id, m.name().id(), *ctx.tracer(), m);
 
-    const auto& alrp(ctx.archetype_location_repository());
+    const auto& alrp(*ctx.archetype_location_repository());
     const auto& albmn(alrp.archetype_locations_by_meta_name());
     const auto& galp(m.global_archetype_location_properties()
         .denormalised_archetype_properties());

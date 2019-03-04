@@ -39,11 +39,11 @@ void annotations_transform::transform(const transforms::context& ctx,
     meta_model::model& m) {
 
     tracing::scoped_transform_tracer stp(lg, "annotations transform",
-        transform_id, m.name(), ctx.tracer(), m);
+        transform_id, m.name(), *ctx.tracer(), m);
 
     BOOST_LOG_SEV(lg, debug) << "Total elements: " << m.elements().size();
 
-    const auto& f(ctx.annotation_factory());
+    const auto& f(*ctx.annotation_factory());
     using masd::dogen::annotations::scope_types;
     m.annotation(f.make(m.tagged_values(), scope_types::root_module));
 

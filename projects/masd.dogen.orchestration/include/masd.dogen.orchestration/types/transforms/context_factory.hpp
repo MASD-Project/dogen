@@ -27,22 +27,17 @@
 
 #include "masd.dogen.annotations/types/archetype_location_repository.hpp"
 #include "masd.dogen.coding/types/transforms/options.hpp"
-#include "masd.dogen.coding/types/transforms/context.hpp"
-#include "masd.dogen.injection/types/transforms/context.hpp"
+#include "masd.dogen.orchestration/types/transforms/context.hpp"
 
 namespace masd::dogen::orchestration::transforms {
 
 /**
- * @brief Factory that creates transformation contexts.
+ * @brief Factory that creates the transformation context.
  */
 class context_factory final {
 public:
-    static injection::transforms::context
-    make_injection_context(const coding::transforms::options& o,
-        const bool enable_validation = true);
-
-    static coding::transforms::context
-    make_coding_context(const coding::transforms::options& o,
+    static orchestration::transforms::context
+    make_context(const coding::transforms::options& o,
         const bool enable_validation = true);
 };
 

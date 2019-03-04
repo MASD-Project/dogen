@@ -132,7 +132,7 @@ transform(const injection::transforms::context& ctx,
 
     const auto model_name(p.filename().generic_string());
     tracing::scoped_transform_tracer stp(lg, "dia model transform",
-        transform_id, model_name, ctx.tracer(), diagram);
+        transform_id, model_name, *ctx.tracer(), diagram);
 
     const auto pos(obtain_processed_objects(diagram));
     const auto r(obtain_model(model_name, pos));

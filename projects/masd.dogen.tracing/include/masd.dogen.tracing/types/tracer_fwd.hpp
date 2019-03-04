@@ -18,29 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.coding/types/helpers/resolver.hpp"
-#include "masd.dogen.coding/io/meta_model/model_io.hpp"
-#include "masd.dogen.coding/types/transforms/resolver_transform.hpp"
+#ifndef MASD_DOGEN_TRACING_TYPES_TRACER_FWD_HPP
+#define MASD_DOGEN_TRACING_TYPES_TRACER_FWD_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-const std::string transform_id("coding.transforms.resolver_transform");
+namespace masd::dogen::tracing {
 
-using namespace masd::dogen::utility::log;
-static logger lg(logger_factory(transform_id));
+class tracer;
 
 }
 
-namespace masd::dogen::coding::transforms {
-
-void resolver_transform::transform(const context& ctx,
-    const helpers::indices& idx, meta_model::model& em) {
-    tracing::scoped_transform_tracer stp(lg, "resolver transform",
-        transform_id, em.name().id(), *ctx.tracer(), em);
-    helpers::resolver::resolve(idx, em);
-    stp.end_transform(em);
-}
-
-}
+#endif

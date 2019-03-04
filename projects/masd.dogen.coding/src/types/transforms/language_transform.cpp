@@ -98,9 +98,9 @@ language_transform::make_output_languages(const type_group& tg,
 void language_transform::
 transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "language transform",
-        transform_id, em.name().id(), ctx.tracer(), em);
+        transform_id, em.name().id(), *ctx.tracer(), em);
 
-    const auto tg(make_type_group(ctx.type_repository()));
+    const auto tg(make_type_group(*ctx.type_repository()));
     const auto ra(em.root_module()->annotation());
     using meta_model::languages;
     const bool has_input_language(em.input_language() != languages::invalid);

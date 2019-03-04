@@ -171,10 +171,10 @@ transform_element(const std::unordered_map<std::string, type_group> tgs,
 void formatting_transform::
 transform(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "formatting transform",
-        transform_id, m.name().id(), ctx.tracer(), m);
+        transform_id, m.name().id(), *ctx.tracer(), m);
 
-    const auto& atrp(ctx.type_repository());
-    const auto& als(ctx.archetype_location_repository().archetype_locations());
+    const auto& atrp(*ctx.type_repository());
+    const auto& als(ctx.archetype_location_repository()->archetype_locations());
     const auto tgs(make_type_groups(atrp, als));
 
     for(auto& ptr : m.elements())

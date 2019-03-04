@@ -121,9 +121,9 @@ origin_transform::compute_origin_types(const meta_model::model& em,
 void origin_transform::
 transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "origin transform",
-        transform_id, em.name().id(), ctx.tracer(), em);
+        transform_id, em.name().id(), *ctx.tracer(), em);
 
-    const auto tg(make_type_group(ctx.type_repository()));
+    const auto tg(make_type_group(*ctx.type_repository()));
     const auto ipm(is_proxy_model(tg, em));
     const auto ot(compute_origin_types(em, ipm));
     em.origin_type(ot);

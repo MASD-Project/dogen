@@ -478,10 +478,10 @@ void archetype_location_properties_transform::
 transform(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "archetype location properties transform",
-        transform_id, m.name().id(), ctx.tracer(), m);
+        transform_id, m.name().id(), *ctx.tracer(), m);
 
-    const auto& atrp(ctx.type_repository());
-    const auto& alrp(ctx.archetype_location_repository());
+    const auto& atrp(*ctx.type_repository());
+    const auto& alrp(*ctx.archetype_location_repository());
     populate_global_archetype_location_properties(atrp, alrp, m);
     populate_local_archetype_location_properties(atrp, alrp, m);
 }

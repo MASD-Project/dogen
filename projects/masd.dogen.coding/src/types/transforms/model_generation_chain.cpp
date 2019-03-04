@@ -51,7 +51,7 @@ std::list<meta_model::model>
 model_generation_chain::transform(const context& ctx) {
     const auto model_name(ctx.transform_options().target().filename().string());
     tracing::scoped_chain_tracer stp(lg, "model generation chain",
-        transform_id, model_name, ctx.tracer());
+        transform_id, model_name, *ctx.tracer());
 
     /*
      * Obtain the initial target, given the user options. The initial

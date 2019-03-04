@@ -97,7 +97,7 @@ merge_transform::transform(const context& ctx,
     const meta_model::model& target,
     const std::list<meta_model::model>& refs) {
     tracing::scoped_transform_tracer stp(lg, "merge transform",
-        transform_id, target.name().id(), ctx.tracer());
+        transform_id, target.name().id(), *ctx.tracer());
 
     /*
      * We start by making a complete copy of the target model, which

@@ -43,6 +43,9 @@ namespace masd::dogen::tracing {
  */
 class tracer final {
 public:
+    tracer(const tracer&) = default;
+
+public:
     tracer(const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
         const boost::filesystem::path& tracing_directory,

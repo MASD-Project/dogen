@@ -71,7 +71,7 @@ void generator::generate(const configuration& cfg,
     const auto o(make_options(cfg, target, output_directory,
             tracing_output_directory));
 
-    const auto ctx(transforms::context_factory::make_coding_context(o));
+    const auto ctx(transforms::context_factory::make_context(o));
     transforms::code_generation_chain::transform(ctx);
 
     BOOST_LOG_SEV(lg, debug) << "Finished generation.";

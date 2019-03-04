@@ -184,7 +184,7 @@ coding_model_to_generation_model_transform::transform(const context& ctx,
     const std::list<coding::meta_model::model>& ms) {
     tracing::scoped_transform_tracer stp(lg,
         "coding model to generation model transform",
-        transform_id, ctx.tracer(), ms);
+        transform_id, *ctx.tracer(), ms);
 
     std::list<meta_model::model> r;
     for(const auto& m : ms)

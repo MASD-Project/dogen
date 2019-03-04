@@ -304,7 +304,7 @@ void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
 void enumerations_transform::transform(const context& ctx,
     meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "enumerations transform",
-        transform_id, em.name().id(), ctx.tracer(), em);
+        transform_id, em.name().id(), *ctx.tracer(), em);
 
     /*
      * If no enumerations exist, we can just exit. This means we can
@@ -316,7 +316,7 @@ void enumerations_transform::transform(const context& ctx,
         return;
 
     const auto l(em.input_language());
-    const auto tg(make_type_group(ctx.type_repository()));
+    const auto tg(make_type_group(*ctx.type_repository()));
     const auto duen(obtain_enumeration_default_underlying_element_name(em));
 
     for (auto& pair : em.enumerations()) {

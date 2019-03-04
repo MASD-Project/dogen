@@ -18,40 +18,104 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.tracing/types/tracer.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
+#include "masd.dogen.annotations/types/annotation_factory.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository.hpp"
 
 namespace masd::dogen::injection::transforms {
 
 context::context(
     const std::vector<boost::filesystem::path>& data_directories,
-    const annotations::archetype_location_repository& alrp,
-    const annotations::type_repository& atrp,
-    const tracing::tracer& tracer,
-    const bool compatibility_mode) :
-    data_directories_(data_directories),
-    archetype_location_repository_(alrp), type_repository_(atrp),
-    annotation_factory_(archetype_location_repository_,
-        type_repository_, compatibility_mode), tracer_(tracer) {}
+    const boost::shared_ptr<masd::dogen::annotations::type_repository>& type_repository,
+    const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& archetype_location_repository,
+    const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& annotation_factory,
+    const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer)
+    : data_directories_(data_directories),
+      type_repository_(type_repository),
+      archetype_location_repository_(archetype_location_repository),
+      annotation_factory_(annotation_factory),
+      tracer_(tracer) { }
 
 const std::vector<boost::filesystem::path>& context::data_directories() const {
     return data_directories_;
 }
 
-const annotations::archetype_location_repository&
-context::archetype_location_repository() const {
-    return archetype_location_repository_;
+std::vector<boost::filesystem::path>& context::data_directories() {
+    return data_directories_;
 }
 
-const annotations::type_repository& context::type_repository() const {
+void context::data_directories(const std::vector<boost::filesystem::path>& v) {
+    data_directories_ = v;
+}
+
+void context::data_directories(const std::vector<boost::filesystem::path>&& v) {
+    data_directories_ = std::move(v);
+}
+
+const boost::shared_ptr<masd::dogen::annotations::type_repository>& context::type_repository() const {
     return type_repository_;
 }
 
-const annotations::annotation_factory& context::annotation_factory() const {
+boost::shared_ptr<masd::dogen::annotations::type_repository>& context::type_repository() {
+    return type_repository_;
+}
+
+void context::type_repository(const boost::shared_ptr<masd::dogen::annotations::type_repository>& v) {
+    type_repository_ = v;
+}
+
+void context::type_repository(const boost::shared_ptr<masd::dogen::annotations::type_repository>&& v) {
+    type_repository_ = std::move(v);
+}
+
+const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& context::archetype_location_repository() const {
+    return archetype_location_repository_;
+}
+
+boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& context::archetype_location_repository() {
+    return archetype_location_repository_;
+}
+
+void context::archetype_location_repository(const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& v) {
+    archetype_location_repository_ = v;
+}
+
+void context::archetype_location_repository(const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>&& v) {
+    archetype_location_repository_ = std::move(v);
+}
+
+const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& context::annotation_factory() const {
     return annotation_factory_;
 }
 
-const masd::dogen::tracing::tracer& context::tracer() const {
+boost::shared_ptr<masd::dogen::annotations::annotation_factory>& context::annotation_factory() {
+    return annotation_factory_;
+}
+
+void context::annotation_factory(const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& v) {
+    annotation_factory_ = v;
+}
+
+void context::annotation_factory(const boost::shared_ptr<masd::dogen::annotations::annotation_factory>&& v) {
+    annotation_factory_ = std::move(v);
+}
+
+const boost::shared_ptr<masd::dogen::tracing::tracer>& context::tracer() const {
     return tracer_;
+}
+
+boost::shared_ptr<masd::dogen::tracing::tracer>& context::tracer() {
+    return tracer_;
+}
+
+void context::tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v) {
+    tracer_ = v;
+}
+
+void context::tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>&& v) {
+    tracer_ = std::move(v);
 }
 
 }

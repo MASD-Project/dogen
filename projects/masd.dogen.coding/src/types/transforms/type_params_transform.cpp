@@ -83,9 +83,9 @@ expand_type_parameters(const type_group& tg, meta_model::object& o) {
 void type_params_transform::
 transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "type params transform",
-        transform_id, em.name().id(), ctx.tracer(), em);
+        transform_id, em.name().id(), *ctx.tracer(), em);
 
-    const auto tg(make_type_group(ctx.type_repository()));
+    const auto tg(make_type_group(*ctx.type_repository()));
     for (auto& pair : em.objects()) {
         auto& o(*pair.second);
         expand_type_parameters(tg, o);

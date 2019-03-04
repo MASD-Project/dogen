@@ -81,7 +81,7 @@ model_set_production_chain::transform(const context& ctx,
     const boost::filesystem::path& p) {
     const auto mn(p.filename().string());
     tracing::scoped_chain_tracer stp(lg, "injection model set production chain",
-        transform_id, mn, ctx.tracer());
+        transform_id, mn, *ctx.tracer());
 
     std::unordered_set<std::string> processed_models;
     const auto& rg(model_production_chain::registrar());

@@ -24,6 +24,7 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
+#include "masd.dogen.annotations/types/annotation_factory.hpp"
 #include "masd.dogen.annotations/types/type_repository_factory.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
 #include "masd.dogen.extraction/types/repository_factory.hpp"
@@ -45,7 +46,7 @@ transforms::context mock_context_factory::make() {
 
     masd::dogen::coding::transforms::options o;
 
-    annotations::archetype_location_repository alrp;
+    auto alrp(boost::make_shared<annotations::archetype_location_repository>());
 
     /*
      * Obtain all the data structures required to make a context, and
@@ -55,17 +56,31 @@ transforms::context mock_context_factory::make() {
     const auto data_dirs(std::vector<boost::filesystem::path>{ data_dir });
 
     helpers::mapping_set_repository_factory msrpf;
-    const auto msrp(msrpf.make(data_dirs));
+    const auto msrp(boost::make_shared<
+        helpers::mapping_set_repository>(msrpf.make(data_dirs)));
 
     annotations::type_repository_factory atrpf;
-    const auto atrp(atrpf.make(alrp, data_dirs));
+    const auto atrp(boost::make_shared<annotations::type_repository>(
+            atrpf.make(*alrp, data_dirs)));
 
     extraction::repository_factory frpf;
-    const auto frp(frpf.make(data_dirs));
+    const auto frp(boost::make_shared<extraction::repository>(
+            frpf.make(data_dirs)));
 
-    tracing::tracer tracer(alrp, atrp, o.probe_directory(), o.tracing());
+    auto tracer(boost::make_shared<tracing::tracer>(
+            *alrp, *atrp, o.probe_directory(), o.tracing()));
 
-    const transforms::context r(data_dirs, o, alrp, atrp, msrp, frp, tracer);
+    const auto af(boost::make_shared<annotations::annotation_factory>(
+                *alrp, *atrp, o.compatibility_mode()));
+
+    transforms::context r;
+    r.data_directories(data_dirs);
+    r.transform_options(o);
+    r.archetype_location_repository(alrp);
+    r.type_repository(atrp);
+    r.mapping_repository(msrp);
+    r.formatting_repository(frp);
+    r.tracer(tracer);
 
     BOOST_LOG_SEV(lg, debug) << "Created the context.";
     return r;

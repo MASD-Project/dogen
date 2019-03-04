@@ -7003,13 +7003,13 @@ model directory.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O49">
       <dia:attribute name="obj_pos">
-        <dia:point val="131,126"/>
+        <dia:point val="131,127"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="130.95,125.95;185.065,133.45"/>
+        <dia:rectangle val="130.95,126.95;185.065,134.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="131,126"/>
+        <dia:point val="131,127"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="54.015000000000001"/>
@@ -7403,16 +7403,16 @@ model directory.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="185.015,133.4"/>
+        <dia:point val="185.015,134.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="184.265,132.65;192.12,141.8"/>
+        <dia:rectangle val="184.265,133.65;192.12,141.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="185.015,133.4"/>
+        <dia:point val="185.015,134.4"/>
         <dia:point val="185.015,137"/>
         <dia:point val="191.92,137"/>
         <dia:point val="191.92,141"/>
@@ -8809,7 +8809,7 @@ model directory.#</dia:string>
         <dia:point val="124,141"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="123.25,133.35;131.2,141.8"/>
+        <dia:rectangle val="123.25,134.35;131.2,141.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8818,7 +8818,7 @@ model directory.#</dia:string>
         <dia:point val="124,141"/>
         <dia:point val="124,137"/>
         <dia:point val="131,137"/>
-        <dia:point val="131,133.4"/>
+        <dia:point val="131,134.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -9412,19 +9412,19 @@ model directory.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O68">
       <dia:attribute name="obj_pos">
-        <dia:point val="38,115"/>
+        <dia:point val="39,114"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="37.95,114.95;86.29,121.85"/>
+        <dia:rectangle val="38.95,113.95;87.29,123.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="38,115"/>
+        <dia:point val="39,114"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="48.239999999999995"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="9.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#context#</dia:string>
@@ -9519,7 +9519,7 @@ model directory.#</dia:string>
             <dia:string>#type_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#annotations::type_repository#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;annotations::type_repository&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9542,7 +9542,53 @@ model directory.#</dia:string>
             <dia:string>#archetype_location_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#annotations::archetype_location_repository#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;annotations::archetype_location_repository&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#annotation_factory#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#boost::shared_ptr&lt;annotations::annotation_factory&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#annotation_expander#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#boost::shared_ptr&lt;annotations::annotation_expander&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9565,7 +9611,7 @@ model directory.#</dia:string>
             <dia:string>#formatting_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#extraction::repository#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;extraction::repository&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9588,7 +9634,7 @@ model directory.#</dia:string>
             <dia:string>#tracer#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#tracing::tracer#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;tracing::tracer&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9618,6 +9664,29 @@ model directory.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#output_directory_path#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#boost::filesystem::path#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#FIXME: to be removed#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -9711,13 +9780,13 @@ model directory.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O70">
       <dia:attribute name="obj_pos">
-        <dia:point val="39,126"/>
+        <dia:point val="39,127"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="38.95,125.95;74.2,129.65"/>
+        <dia:rectangle val="38.95,126.95;74.2,130.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="39,126"/>
+        <dia:point val="39,127"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="35.149999999999999"/>
@@ -9927,7 +9996,7 @@ model directory.#</dia:string>
         <dia:point val="39,141"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="38.25,129.55;57.16,141.8"/>
+        <dia:rectangle val="38.25,130.55;56.775,141.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9935,8 +10004,8 @@ model directory.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="39,141"/>
         <dia:point val="39,137"/>
-        <dia:point val="56.96,137"/>
-        <dia:point val="56.96,129.6"/>
+        <dia:point val="56.575,137"/>
+        <dia:point val="56.575,130.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -9998,13 +10067,13 @@ model directory.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O73">
       <dia:attribute name="obj_pos">
-        <dia:point val="92,115"/>
+        <dia:point val="92,114"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="91.95,114.95;102.032,118.05"/>
+        <dia:rectangle val="91.95,113.95;102.032,117.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="92,115"/>
+        <dia:point val="92,114"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="9.9824999999999999"/>
@@ -10219,13 +10288,13 @@ model directory.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O75">
       <dia:attribute name="obj_pos">
-        <dia:point val="105,115"/>
+        <dia:point val="106,114"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="104.95,114.95;112.865,118.05"/>
+        <dia:rectangle val="105.95,113.95;113.865,117.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="105,115"/>
+        <dia:point val="106,114"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="7.8150000000000004"/>

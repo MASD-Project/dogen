@@ -74,7 +74,7 @@ void dynamic_transform::transform(const generation::transforms::context& ctx,
     if (!requires_expansion(m))
         return;
 
-    expand_injection(ctx.type_repository(), m);
+    expand_injection(*ctx.type_repository(), m);
     expand_decoration(dpf, m);
 }
 

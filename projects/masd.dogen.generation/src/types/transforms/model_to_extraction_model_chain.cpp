@@ -125,7 +125,7 @@ extraction::meta_model::model model_to_extraction_model_chain::
 transform(const generation::transforms::context& ctx,
     const std::list<generation::meta_model::model>& models) {
     tracing::scoped_chain_tracer stp(lg, "model to extraction model chain",
-        transform_id, ctx.tracer());
+        transform_id, *ctx.tracer());
 
     BOOST_LOG_SEV(lg, debug) << "Transforming models: " << models.size();
 

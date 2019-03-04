@@ -43,9 +43,9 @@ bool mapping_transform::is_mappable(const meta_model::languages from,
 meta_model::model mapping_transform::transform(const context& ctx,
     const meta_model::model& src, const meta_model::languages to) {
     tracing::scoped_transform_tracer stp(lg, "mapping transform",
-        transform_id, src.name().id(), ctx.tracer(), src);
+        transform_id, src.name().id(), *ctx.tracer(), src);
 
-    const helpers::mapper mp(ctx.mapping_repository());
+    const helpers::mapper mp(*ctx.mapping_repository());
     auto r(mp.map(src.input_language(), to, src));
 
     stp.end_transform(r);

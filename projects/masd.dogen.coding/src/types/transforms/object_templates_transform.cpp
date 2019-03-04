@@ -263,7 +263,7 @@ object_templates_transform::expand_object_templates(meta_model::model& em) {
 void object_templates_transform::
 transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "object templates transform",
-        transform_id, em.name().id(), ctx.tracer(), em);
+        transform_id, em.name().id(), *ctx.tracer(), em);
 
     /*
      * We must expand object templates before we expand objects as we

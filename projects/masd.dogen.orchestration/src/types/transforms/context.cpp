@@ -34,12 +34,48 @@ const masd::dogen::injection::transforms::context& context::injection_context() 
     return injection_context_;
 }
 
+masd::dogen::injection::transforms::context& context::injection_context() {
+    return injection_context_;
+}
+
+void context::injection_context(const masd::dogen::injection::transforms::context& v) {
+    injection_context_ = v;
+}
+
+void context::injection_context(const masd::dogen::injection::transforms::context&& v) {
+    injection_context_ = std::move(v);
+}
+
 const masd::dogen::coding::transforms::context& context::coding_context() const {
     return coding_context_;
 }
 
+masd::dogen::coding::transforms::context& context::coding_context() {
+    return coding_context_;
+}
+
+void context::coding_context(const masd::dogen::coding::transforms::context& v) {
+    coding_context_ = v;
+}
+
+void context::coding_context(const masd::dogen::coding::transforms::context&& v) {
+    coding_context_ = std::move(v);
+}
+
 const masd::dogen::generation::transforms::context& context::generation_context() const {
     return generation_context_;
+}
+
+masd::dogen::generation::transforms::context& context::generation_context() {
+    return generation_context_;
+}
+
+void context::generation_context(const masd::dogen::generation::transforms::context& v) {
+    generation_context_ = v;
+}
+
+void context::generation_context(const masd::dogen::generation::transforms::context&& v) {
+    generation_context_ = std::move(v);
 }
 
 }

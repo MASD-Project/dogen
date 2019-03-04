@@ -42,7 +42,7 @@ std::list<meta_model::model>
 model_generation_chain::transform(const context& ctx,
     const std::list<coding::meta_model::model>& ms) {
     tracing::scoped_chain_tracer stp(lg, "model generation chain",
-        transform_id, ctx.tracer());
+        transform_id, *ctx.tracer());
 
     auto r(coding_model_to_generation_model_transform::transform(ctx, ms));
 

@@ -22,10 +22,13 @@
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.coding/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.generation/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"
 #include "masd.dogen.extraction/types/helpers/filesystem_writer.hpp"
 #include "masd.dogen.extraction/types/helpers/file_linter.hpp"
-#include "masd.dogen.orchestration/types/transforms/extraction_model_generation_chain.hpp"
+#include "masd.dogen.orchestration/types/transforms/context.hpp"
 #include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
 
 namespace {
@@ -68,18 +71,37 @@ void code_generation_chain::lint(const extraction::meta_model::model& m) {
     utility::filesystem::remove(lint);
 }
 
-void code_generation_chain::transform(const coding::transforms::context& ctx) {
+void code_generation_chain::transform(const context& ctx) {
     BOOST_LOG_SEV(lg, info) << "Starting code generation.";
 
-    const auto& o(ctx.transform_options());
+    const auto& o(ctx.coding_context().transform_options());
     const auto model_name(o.target().filename().string());
+    const auto& tracer(*ctx.injection_context().tracer());
     tracing::scoped_chain_tracer stp(lg, "code generation chain",
-        transform_id, model_name, ctx.tracer());
+        transform_id, model_name, tracer);
+
+    const auto& to(ctx.coding_context().transform_options());
+    BOOST_LOG_SEV(lg, debug) << "Target: " << to.target().generic();
+
+    /*
+     * Obtain the coding models.
+     */
+    const auto cms(coding::transforms::model_generation_chain::transform(
+            ctx.coding_context()));
+
+    /*
+     * Obtain the generation models.
+     */
+    const auto gms(
+        generation::transforms::model_generation_chain::transform(
+            ctx.generation_context(), cms));
 
     /*
      * Obtain the extraction models.
      */
-    const auto m(extraction_model_generation_chain::transform(ctx));
+    using generation::transforms::model_to_extraction_model_chain;
+    const auto m(model_to_extraction_model_chain::transform(
+            ctx.generation_context(), gms));
 
     /*
      * Write the artefacts.

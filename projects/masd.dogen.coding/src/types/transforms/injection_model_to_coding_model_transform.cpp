@@ -23,6 +23,7 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.annotations/io/type_io.hpp"
+#include "masd.dogen.annotations/types/annotation_factory.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
@@ -219,18 +220,18 @@ meta_model::model injection_model_to_coding_model_transform::
 transform(const context& ctx, const injection::meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "external model to model transform", transform_id, m.name(),
-        ctx.tracer(), m);
+        *ctx.tracer(), m);
 
     helpers::stereotypes_helper h;
     const auto scr(h.from_string(m.stereotypes()));
-    const auto& f(ctx.annotation_factory());
+    const auto& f(*ctx.annotation_factory());
     const auto scope(annotations::scope_types::root_module);
     const auto ra1(f.make(m.tagged_values(), scope));
 
-    const auto& e(ctx.annotation_expander());
+    const auto& e(*ctx.annotation_expander());
     const auto ra(e.expand(scr.dynamic_stereotypes(), ra1));
 
-    const auto tg(make_type_group(ctx.type_repository()));
+    const auto tg(make_type_group(*ctx.type_repository()));
     const auto nc(make_naming_configuration(tg, ra));
     const auto model_location(create_location(nc));
 
@@ -241,7 +242,7 @@ transform(const context& ctx, const injection::meta_model::model& m) {
     r.name(b.build());
     BOOST_LOG_SEV(lg, debug) << "Computed model name: " << r.name();
 
-    const helpers::new_adapter ad(ctx.annotation_expander());
+    const helpers::new_adapter ad(*ctx.annotation_expander());
     for (const auto& e : m.elements()) {
         const auto l(e.in_global_module() ? empty_location : model_location);
         process_element(ad, l, e, r);

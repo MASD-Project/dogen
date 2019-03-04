@@ -26,61 +26,63 @@
 #endif
 
 #include <vector>
+#include <algorithm>
+#include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.annotations/types/annotation_factory.hpp"
-#include "masd.dogen.annotations/types/archetype_location_repository.hpp"
-#include "masd.dogen.tracing/types/tracer.hpp"
+#include "masd.dogen.tracing/types/tracer_fwd.hpp"
+#include "masd.dogen.annotations/types/type_repository_fwd.hpp"
+#include "masd.dogen.annotations/types/annotation_factory_fwd.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository_fwd.hpp"
 
 namespace masd::dogen::injection::transforms {
 
 class context final {
 public:
-    context(
-        const std::vector<boost::filesystem::path>& data_directories,
-        const annotations::archetype_location_repository& alrp,
-        const annotations::type_repository& atrp,
-        const masd::dogen::tracing::tracer& tracer,
-        const bool compatibility_mode);
+    context() = default;
+    // context(const context&) = default;
+    // context(context&&) = default;
+    ~context() = default;
 
 public:
-    /**
-     * @brief System directories containing Dogen's configuration,
-     * profiles, etc.
-     */
+    context(
+        const std::vector<boost::filesystem::path>& data_directories,
+        const boost::shared_ptr<masd::dogen::annotations::type_repository>& type_repository,
+        const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& archetype_location_repository,
+        const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& annotation_factory,
+        const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer);
+
+public:
     const std::vector<boost::filesystem::path>& data_directories() const;
+    std::vector<boost::filesystem::path>& data_directories();
+    void data_directories(const std::vector<boost::filesystem::path>& v);
+    void data_directories(const std::vector<boost::filesystem::path>&& v);
 
-    /**
-     * @brief All of the available archetype locations.
-     */
-    const annotations::archetype_location_repository&
-    archetype_location_repository() const;
+    const boost::shared_ptr<masd::dogen::annotations::type_repository>& type_repository() const;
+    boost::shared_ptr<masd::dogen::annotations::type_repository>& type_repository();
+    void type_repository(const boost::shared_ptr<masd::dogen::annotations::type_repository>& v);
+    void type_repository(const boost::shared_ptr<masd::dogen::annotations::type_repository>&& v);
 
-    /**
-     * @brief Repository with annotation types, used to validate and
-     * access meta-data.
-     */
-    const annotations::type_repository& type_repository() const;
+    const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& archetype_location_repository() const;
+    boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& archetype_location_repository();
+    void archetype_location_repository(const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& v);
+    void archetype_location_repository(const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>&& v);
 
-    /**
-     * @brief Factory to generate annotations.
-     */
-    const annotations::annotation_factory& annotation_factory() const;
+    const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& annotation_factory() const;
+    boost::shared_ptr<masd::dogen::annotations::annotation_factory>& annotation_factory();
+    void annotation_factory(const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& v);
+    void annotation_factory(const boost::shared_ptr<masd::dogen::annotations::annotation_factory>&& v);
 
-    /*
-     * @brief Returns the transform probe.
-     */
-    const tracing::tracer& tracer() const;
+    const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer() const;
+    boost::shared_ptr<masd::dogen::tracing::tracer>& tracer();
+    void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v);
+    void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>&& v);
 
 private:
-    const std::vector<boost::filesystem::path> data_directories_;
-    const annotations::archetype_location_repository
-    archetype_location_repository_;
-    const annotations::type_repository type_repository_;
-    const annotations::annotation_factory annotation_factory_;
-
-    // by reference by design
-    const masd::dogen::tracing::tracer& tracer_;
+    std::vector<boost::filesystem::path> data_directories_;
+    boost::shared_ptr<masd::dogen::annotations::type_repository> type_repository_;
+    boost::shared_ptr<masd::dogen::annotations::archetype_location_repository> archetype_location_repository_;
+    boost::shared_ptr<masd::dogen::annotations::annotation_factory> annotation_factory_;
+    boost::shared_ptr<masd::dogen::tracing::tracer> tracer_;
 };
 
 }

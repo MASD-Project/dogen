@@ -102,7 +102,7 @@ inject_global_module(meta_model::model& em) {
 void containment_transform::
 transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "containment transform",
-        transform_id, em.name().id(), ctx.tracer(), em);
+        transform_id, em.name().id(), *ctx.tracer(), em);
 
     inject_global_module(em);
 

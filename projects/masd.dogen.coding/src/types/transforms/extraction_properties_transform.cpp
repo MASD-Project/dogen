@@ -21,6 +21,7 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
@@ -134,7 +135,7 @@ make_extraction_properties(const context& ctx,
     const std::list<annotations::archetype_location>& als,
     const annotations::annotation& ra) {
 
-    const auto tg(make_type_group(ctx.type_repository(), als));
+    const auto tg(make_type_group(*ctx.type_repository(), als));
     meta_model::extraction_properties r;
     r.force_write(obtain_force_write(tg, ra));
     r.delete_extra_files(obtain_delete_extra_files(tg, ra));
@@ -157,7 +158,7 @@ void extraction_properties_transform::transform(const context& ctx,
     meta_model::model& m) {
 
     const auto& ra(m.root_module()->annotation());
-    const auto& alrp(ctx.archetype_location_repository());
+    const auto& alrp(*ctx.archetype_location_repository());
     const auto& als(alrp.archetype_locations());
     const auto ep(make_extraction_properties(ctx, als, ra));
     m.extraction_properties(ep);

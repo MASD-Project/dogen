@@ -26,105 +26,105 @@
 #endif
 
 #include <vector>
-#include <string>
+#include <algorithm>
+#include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.annotations/types/annotation_factory.hpp"
-#include "masd.dogen.annotations/types/annotation_expander.hpp"
-#include "masd.dogen.annotations/types/archetype_location_repository.hpp"
-#include "masd.dogen.extraction/types/repository.hpp"
-#include "masd.dogen.tracing/types/tracer.hpp"
+#include "masd.dogen.tracing/types/tracer_fwd.hpp"
 #include "masd.dogen.coding/types/transforms/options.hpp"
-#include "masd.dogen.coding/types/helpers/mapping_set_repository.hpp"
+#include "masd.dogen.extraction/types/repository_fwd.hpp"
+#include "masd.dogen.annotations/types/type_repository_fwd.hpp"
+#include "masd.dogen.annotations/types/annotation_factory_fwd.hpp"
+#include "masd.dogen.annotations/types/annotation_expander_fwd.hpp"
+#include "masd.dogen.coding/types/helpers/mapping_set_repository_fwd.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository_fwd.hpp"
 
 namespace masd::dogen::coding::transforms {
 
 /**
- * @brief Context for all coding transformations.
+ *
+ * Context for all coding transformations.
  *
  * Contains all of the external data required for the transformations
  * to execute. It's not ideal to have a huge "global" class, with lots
  * of unrelated state; however, over time, we found that a number of
  * arguments were being supplied across the call graph, resulting in a
  * lot of repetitive code. The context gathers together all of these.
- *
- * Note that this class needs to be handcrafted because we have some
- * factories in the state - not just data objects.
  */
 class context final {
 public:
-    context(
-        const std::vector<boost::filesystem::path>& data_directories,
-        const options& options,
-        const annotations::archetype_location_repository& alrp,
-        const annotations::type_repository& atrp,
-        const helpers::mapping_set_repository& msrp,
-        const masd::dogen::extraction::repository& frp,
-        const tracing::tracer& tracer);
-    ~context();
+    context() = default;
+    // context(const context&) = default;
+    // context(context&&) = default;
+    ~context() = default;
 
 public:
-    /**
-     * @brief System directories containing Dogen's configuration,
-     * profiles, etc.
-     */
+    context(
+        const std::vector<boost::filesystem::path>& data_directories,
+        const masd::dogen::coding::transforms::options& transform_options,
+        const boost::shared_ptr<masd::dogen::annotations::type_repository>& type_repository,
+        const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& archetype_location_repository,
+        const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& annotation_factory,
+        const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& annotation_expander,
+        const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& mapping_repository,
+        const boost::shared_ptr<masd::dogen::extraction::repository>& formatting_repository,
+        const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer);
+
+public:
     const std::vector<boost::filesystem::path>& data_directories() const;
+    std::vector<boost::filesystem::path>& data_directories();
+    void data_directories(const std::vector<boost::filesystem::path>& v);
+    void data_directories(const std::vector<boost::filesystem::path>&& v);
 
-    /**
-     * @brief User supplied parameters.
-     *
-     * @note Added prefix "transform_" to keep gcc happy.
-     */
-    const options& transform_options() const;
+    const masd::dogen::coding::transforms::options& transform_options() const;
+    masd::dogen::coding::transforms::options& transform_options();
+    void transform_options(const masd::dogen::coding::transforms::options& v);
+    void transform_options(const masd::dogen::coding::transforms::options&& v);
 
-    /**
-     * @brief All of the available archetype locations.
-     */
-    const annotations::archetype_location_repository&
-    archetype_location_repository() const;
+    const boost::shared_ptr<masd::dogen::annotations::type_repository>& type_repository() const;
+    boost::shared_ptr<masd::dogen::annotations::type_repository>& type_repository();
+    void type_repository(const boost::shared_ptr<masd::dogen::annotations::type_repository>& v);
+    void type_repository(const boost::shared_ptr<masd::dogen::annotations::type_repository>&& v);
 
-    /**
-     * @brief Repository with annotation types, used to validate and
-     * access meta-data.
-     */
-    const annotations::type_repository& type_repository() const;
+    const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& archetype_location_repository() const;
+    boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& archetype_location_repository();
+    void archetype_location_repository(const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& v);
+    void archetype_location_repository(const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>&& v);
 
-    /**
-     * @brief Factory to generate annotations.
-     */
-    const annotations::annotation_factory& annotation_factory() const;
+    const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& annotation_factory() const;
+    boost::shared_ptr<masd::dogen::annotations::annotation_factory>& annotation_factory();
+    void annotation_factory(const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& v);
+    void annotation_factory(const boost::shared_ptr<masd::dogen::annotations::annotation_factory>&& v);
 
-    /**
-     * @brief Expander to expand the annotations.
-     */
-    const annotations::annotation_expander& annotation_expander() const;
+    const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& annotation_expander() const;
+    boost::shared_ptr<masd::dogen::annotations::annotation_expander>& annotation_expander();
+    void annotation_expander(const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& v);
+    void annotation_expander(const boost::shared_ptr<masd::dogen::annotations::annotation_expander>&& v);
 
-    /**
-     * @brief Data to perform language mapping.
-     */
-    const helpers::mapping_set_repository& mapping_repository() const;
+    const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& mapping_repository() const;
+    boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& mapping_repository();
+    void mapping_repository(const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& v);
+    void mapping_repository(const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>&& v);
 
-    /**
-     * @brief Repository with formatter data.
-     */
-    const masd::dogen::extraction::repository& formatting_repository() const;
+    const boost::shared_ptr<masd::dogen::extraction::repository>& formatting_repository() const;
+    boost::shared_ptr<masd::dogen::extraction::repository>& formatting_repository();
+    void formatting_repository(const boost::shared_ptr<masd::dogen::extraction::repository>& v);
+    void formatting_repository(const boost::shared_ptr<masd::dogen::extraction::repository>&& v);
 
-    /*
-     * @brief Returns the transform probe.
-     */
-    const tracing::tracer& tracer() const;
+    const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer() const;
+    boost::shared_ptr<masd::dogen::tracing::tracer>& tracer();
+    void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v);
+    void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>&& v);
 
 private:
-    const std::vector<boost::filesystem::path> data_directories_;
-    const transforms::options options_;
-    const annotations::archetype_location_repository
-    archetype_location_repository_;
-    const annotations::type_repository type_repository_;
-    const annotations::annotation_factory annotation_factory_;
-    const annotations::annotation_expander annotation_expander_;
-    const helpers::mapping_set_repository mapping_repository_;
-    const masd::dogen::extraction::repository formatting_repository_;
-    const tracing::tracer tracer_;
+    std::vector<boost::filesystem::path> data_directories_;
+    masd::dogen::coding::transforms::options transform_options_;
+    boost::shared_ptr<masd::dogen::annotations::type_repository> type_repository_;
+    boost::shared_ptr<masd::dogen::annotations::archetype_location_repository> archetype_location_repository_;
+    boost::shared_ptr<masd::dogen::annotations::annotation_factory> annotation_factory_;
+    boost::shared_ptr<masd::dogen::annotations::annotation_expander> annotation_expander_;
+    boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository> mapping_repository_;
+    boost::shared_ptr<masd::dogen::extraction::repository> formatting_repository_;
+    boost::shared_ptr<masd::dogen::tracing::tracer> tracer_;
 };
 
 }

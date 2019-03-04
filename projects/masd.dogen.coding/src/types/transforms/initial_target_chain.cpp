@@ -44,19 +44,21 @@ initial_target_chain::transform(const context& ctx) {
     const auto tp(ctx.transform_options().target());
     const auto model_name(tp.filename().string());
     tracing::scoped_chain_tracer stp(lg, "initial target chain",
-        transform_id, model_name, ctx.tracer());
+        transform_id, model_name, *ctx.tracer());
 
     /*
      * First we obtain the target model in the internal representation
      * of the exogenous model.
      */
     using injection::transforms::model_production_chain;
-    const injection::transforms::context inj_ctx(
-        ctx.data_directories(),
-        ctx.archetype_location_repository(),
-        ctx.type_repository(),
-        ctx.tracer(),
-        ctx.transform_options().compatibility_mode());
+    injection::transforms::context inj_ctx;
+    inj_ctx.data_directories(ctx.data_directories());
+    inj_ctx.archetype_location_repository(
+        ctx.archetype_location_repository());
+    inj_ctx.type_repository(ctx.type_repository());
+    inj_ctx.tracer(ctx.tracer());
+    inj_ctx.annotation_factory(ctx.annotation_factory());
+    // inj_ctx.compatibility_mode(ctx.transform_options().compatibility_mode());
     const auto m(model_production_chain::transform(inj_ctx, tp));
 
     /*

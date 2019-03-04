@@ -155,7 +155,7 @@ model_to_extraction_model_transform::transform(
     const generation::meta_model::model& m) const {
     tracing::scoped_transform_tracer stp(lg,
         "C++ model to text transform", transform_id, m.name().id(),
-        ctx.tracer());
+        *ctx.tracer());
 
     BOOST_LOG_SEV(lg, debug) << "Started backend.";
 
@@ -163,7 +163,7 @@ model_to_extraction_model_transform::transform(
      * Create the locator.
      */
     const auto& odp(ctx.output_directory_path());
-    const auto& atrp(ctx.type_repository());
+    const auto& atrp(*ctx.type_repository());
     const auto& ra(m.root_module()->annotation());
     const auto& frp(formatters_repository());
     const auto l(make_locator(odp, atrp, ra, frp, enable_backend_directories, m));
@@ -177,9 +177,9 @@ model_to_extraction_model_transform::transform(
      * Code-generate all artefacts.
      */
     extraction::meta_model::model r;
-    const auto& drp(ctx.formatting_repository());
-    const auto& af(ctx.annotation_factory());
-    const auto& ae(ctx.annotation_expander());
+    const auto& drp(*ctx.formatting_repository());
+    const auto& af(*ctx.annotation_factory());
+    const auto& ae(*ctx.annotation_expander());
     const auto& eafe(m.enabled_archetype_for_element());
 
     r.artefacts(format(eafe, atrp, af, ae, drp, fm));

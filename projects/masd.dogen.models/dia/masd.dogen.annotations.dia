@@ -2029,17 +2029,17 @@ to the content of entries.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="115,-76.4"/>
+        <dia:point val="117,-76.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="110.555,-77.15;115.75,-68.2"/>
+        <dia:rectangle val="110.555,-77.15;117.75,-68.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="115,-76.4"/>
-        <dia:point val="115,-72"/>
+        <dia:point val="117,-76.4"/>
+        <dia:point val="117,-72"/>
         <dia:point val="110.605,-72"/>
         <dia:point val="110.605,-69"/>
       </dia:attribute>
@@ -2067,14 +2067,14 @@ to the content of entries.#</dia:string>
         <dia:point val="113.915,-86.75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="113.848,-87.6794;115.225,-86.325"/>
+        <dia:rectangle val="113.857,-87.7026;117.119,-86.325"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="113.915,-86.75"/>
-        <dia:point val="115,-87.3"/>
+        <dia:point val="117,-87.3"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -2089,7 +2089,7 @@ to the content of entries.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="114.457,-86.525"/>
+        <dia:point val="115.457,-86.525"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O14" connection="4"/>
@@ -2134,17 +2134,17 @@ to the content of entries.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="115,-95"/>
+        <dia:point val="117,-95"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="106.858,-98.8;115.75,-94.2"/>
+        <dia:rectangle val="106.858,-98.8;117.75,-94.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="115,-95"/>
-        <dia:point val="115,-98"/>
+        <dia:point val="117,-95"/>
+        <dia:point val="117,-98"/>
         <dia:point val="106.907,-98"/>
         <dia:point val="106.907,-95"/>
       </dia:attribute>
@@ -2999,13 +2999,13 @@ formatter we must have a facet. We may not have any.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O22">
       <dia:attribute name="obj_pos">
-        <dia:point val="115,-95"/>
+        <dia:point val="117,-95"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="114.95,-95.05;149.045,-76.35"/>
+        <dia:rectangle val="116.95,-95.05;151.045,-76.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="115,-95"/>
+        <dia:point val="117,-95"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="33.994999999999997"/>
@@ -11445,7 +11445,7 @@ associated properties.#</dia:string>
         <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.extraction.cpp.types.forward_declarations.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -11692,7 +11692,7 @@ associated properties.#</dia:string>
         <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.extraction.cpp.types.forward_declarations.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

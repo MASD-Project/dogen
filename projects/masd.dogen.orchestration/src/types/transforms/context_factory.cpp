@@ -18,9 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
+#include "masd.dogen.annotations/types/annotation_factory.hpp"
+#include "masd.dogen.annotations/types/annotation_expander.hpp"
 #include "masd.dogen.annotations/types/type_repository_factory.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
 #include "masd.dogen.tracing/types/tracer.hpp"
@@ -74,23 +77,24 @@ create_intra_backend_segment_properties(const coding::transforms::options& o,
     return r;
 }
 
-annotations::archetype_location_repository
+boost::shared_ptr<annotations::archetype_location_repository>
 create_archetype_location_repository(
     const model_to_extraction_model_transform_registrar& rg) {
-    annotations::archetype_location_repository_builder b;
+
+    using namespace annotations;
+    archetype_location_repository_builder b;
     for (const auto& pair : rg.transforms_by_language()) {
         const auto& t(*pair.second);
         b.add(t.archetype_locations_by_meta_name());
         b.add(t.archetype_locations_by_family());
         b.add(t.archetype_location_repository_parts());
     }
-    return b.build();
+    return boost::make_shared<archetype_location_repository>(b.build());
 }
 
-injection::transforms::context context_factory::
-make_injection_context(const coding::transforms::options& o,
+orchestration::transforms::context
+context_factory::make_context(const coding::transforms::options& o,
     const bool enable_validation) {
-
     BOOST_LOG_SEV(lg, debug) << "Creating the context.";
 
     if (enable_validation) {
@@ -102,6 +106,9 @@ make_injection_context(const coding::transforms::options& o,
         v.validate(o);
     }
 
+    orchestration::transforms::context r;
+    r.coding_context().transform_options(o);
+
     /*
      * Obtain the transform registrar and ensure it has been setup.
      */
@@ -109,64 +116,73 @@ make_injection_context(const coding::transforms::options& o,
     const auto& rg = model_to_extraction_model_chain::registrar();
     rg.validate();
 
-    const auto alrp(create_archetype_location_repository(rg));
-
+    /*
+     * Obtain the data directories.
+     */
     const auto data_dir(utility::filesystem::data_files_directory());
     const auto data_dirs(std::vector<boost::filesystem::path>{ data_dir });
+    r.injection_context().data_directories(data_dirs);
+    r.coding_context().data_directories(data_dirs);
+
+    /*
+     * Setup the annotations related data structures.
+     */
+    const auto alrp(create_archetype_location_repository(rg));
+    r.injection_context().archetype_location_repository(alrp);
+    r.coding_context().archetype_location_repository(alrp);
+    r.generation_context().archetype_location_repository(alrp);
+
     annotations::type_repository_factory atrpf;
-    const auto atrp(atrpf.make(alrp, data_dirs));
-    tracing::tracer tracer(alrp, atrp, o.probe_directory(), o.tracing());
-    const masd::dogen::injection::transforms::context
-        r(data_dirs, alrp, atrp, tracer, o.compatibility_mode());
-
-    return r;
-}
-
-coding::transforms::context context_factory::
-make_coding_context(const coding::transforms::options& o,
-    const bool enable_validation) {
-
-    BOOST_LOG_SEV(lg, debug) << "Creating the context.";
-
-    if (enable_validation) {
-        /*
-         * Before anything else, lets make sure the transform options make
-         * sense. No point in proceeding otherwise.
-         */
-        coding::transforms::options_validator v;
-        v.validate(o);
-    }
+    const auto atrp(boost::make_shared<annotations::type_repository>(
+            atrpf.make(*alrp, data_dirs)));
+    r.injection_context().type_repository(atrp);
+    r.coding_context().type_repository(atrp);
+    r.generation_context().type_repository(atrp);
 
     /*
-     * Obtain the transform registrar and ensure it has been setup.
+     * Setup the annotations related factories.
      */
-    using generation::transforms::model_to_extraction_model_chain;
-    const auto& rg = model_to_extraction_model_chain::registrar();
-    rg.validate();
+    const auto af(boost::make_shared<annotations::annotation_factory>(
+                *alrp, *atrp, o.compatibility_mode()));
+    r.injection_context().annotation_factory(af);
+    r.coding_context().annotation_factory(af);
+    r.generation_context().annotation_factory(af);
 
-    const auto alrp(create_archetype_location_repository(rg));
-    // const auto ibsp(create_intra_backend_segment_properties(o, rg));
+    const auto ae(boost::make_shared<annotations::annotation_expander>(
+            data_dirs, *alrp, *atrp, o.compatibility_mode()));
+    r.coding_context().annotation_expander(ae);
+    r.generation_context().annotation_expander(ae);
 
     /*
-     * Obtain all the data structures required to make a context, and
-     * create the context.
+     * Setup the intrabackend segment properties.
      */
-    const auto data_dir(utility::filesystem::data_files_directory());
-    const auto data_dirs(std::vector<boost::filesystem::path>{ data_dir });
+    const auto ibsp(create_intra_backend_segment_properties(o, rg));
+    r.generation_context().intra_backend_segment_properties(ibsp);
 
     coding::helpers::mapping_set_repository_factory msrpf;
-    const auto msrp(msrpf.make(data_dirs));
+    const auto msrp(
+        boost::make_shared<coding::helpers::mapping_set_repository>(
+            msrpf.make(data_dirs)));
+    r.coding_context().mapping_repository(msrp);
 
-    annotations::type_repository_factory atrpf;
-    const auto atrp(atrpf.make(alrp, data_dirs));
-
+    /*
+     * Setup the extraction repository.
+     */
     extraction::repository_factory frpf;
-    const auto frp(frpf.make(data_dirs));
+    const auto frp(
+        boost::make_shared<extraction::repository>(frpf.make(data_dirs)));
+    r.coding_context().formatting_repository(frp);
+    r.generation_context().formatting_repository(frp);
 
-    tracing::tracer tracer(alrp, atrp, o.probe_directory(), o.tracing());
+    /*
+     * Setup the tracer.
+     */
+    const auto tracer(boost::make_shared<tracing::tracer>
+        (*alrp, *atrp, o.probe_directory(), o.tracing()));
+    r.injection_context().tracer(tracer);
+    r.coding_context().tracer(tracer);
+    r.generation_context().tracer(tracer);
 
-    using coding::transforms::context;
-    const context r(data_dirs, o, alrp, atrp, msrp, frp, tracer);
     return r;
 }
 

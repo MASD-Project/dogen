@@ -49,7 +49,7 @@ meta_model::model decoding_transform::transform(const transforms::context& ctx,
     const boost::filesystem::path& p) {
     const auto model_name(p.filename().string());
     tracing::scoped_transform_tracer stp(lg, "JSON decoding transform",
-        transform_id, model_name, ctx.tracer());
+        transform_id, model_name, *ctx.tracer());
 
     hydrator h;
     const auto r(h.hydrate(p));

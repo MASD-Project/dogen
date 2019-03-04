@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.extraction/types/meta_model/model.hpp"
+#include "masd.dogen.orchestration/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::orchestration::transforms {
 
@@ -67,7 +67,7 @@ private:
     static void lint(const extraction::meta_model::model& m);
 
 public:
-    static void transform(const coding::transforms::context& ctx);
+    static void transform(const context& ctx);
 };
 
 }

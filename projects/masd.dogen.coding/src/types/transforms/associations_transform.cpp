@@ -131,7 +131,7 @@ expand_object(const meta_model::model& em, meta_model::object& o) {
 void associations_transform::
 transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "associations transform",
-        transform_id, em.name().id(), ctx.tracer(), em);
+        transform_id, em.name().id(), *ctx.tracer(), em);
 
     BOOST_LOG_SEV(lg, debug) << "Total objects: " << em.objects().size();
 

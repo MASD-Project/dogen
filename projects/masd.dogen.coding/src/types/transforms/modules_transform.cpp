@@ -226,7 +226,7 @@ expand_containing_module(meta_model::model& im) {
 void modules_transform::
 transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "modules transform",
-        transform_id, em.name().id(), ctx.tracer(), em);
+        transform_id, em.name().id(), *ctx.tracer(), em);
 
     create_missing_modules(em);
     expand_containing_module(em);

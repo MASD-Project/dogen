@@ -233,7 +233,7 @@ void attributes_transform::expand_object_templates(meta_model::model& em) {
 void attributes_transform::
 transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "attributes transform",
-        transform_id, em.name().id(), ctx.tracer(), em);
+        transform_id, em.name().id(), *ctx.tracer(), em);
 
     expand_object_templates(em);
     expand_objects(em);

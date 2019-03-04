@@ -94,7 +94,7 @@ public:
 void meta_naming_transform::
 transform(const context& ctx, meta_model::model& em) {
     tracing::scoped_transform_tracer stp(lg, "meta-naming transform",
-        transform_id, em.name().id(), ctx.tracer(), em);
+        transform_id, em.name().id(), *ctx.tracer(), em);
 
     em.meta_name(meta_name_factory::make_model_name());
 

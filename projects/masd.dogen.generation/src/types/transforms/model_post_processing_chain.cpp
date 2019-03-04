@@ -44,7 +44,7 @@ namespace masd::dogen::generation::transforms {
 void model_post_processing_chain::
 transform(const context& ctx, meta_model::model& m) {
     tracing::scoped_chain_tracer stp(lg, "model post-processing chain",
-        transform_id, m.name().id(), ctx.tracer(), m);
+        transform_id, m.name().id(), *ctx.tracer(), m);
 
     /*
      * Perform dynamic expansion first. These are backend specific.

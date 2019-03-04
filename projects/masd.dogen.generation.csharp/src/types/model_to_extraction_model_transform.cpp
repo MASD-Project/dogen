@@ -126,7 +126,7 @@ model_to_extraction_model_transform::transform(
     const generation::meta_model::model& m) const {
     tracing::scoped_transform_tracer stp(lg,
         "C# model to text transform", transform_id, m.name().id(),
-        ctx.tracer());
+        *ctx.tracer());
 
     BOOST_LOG_SEV(lg, debug) << "Started backend.";
 
@@ -135,7 +135,7 @@ model_to_extraction_model_transform::transform(
      */
     const auto mn(m.name());
     const auto& ra(m.root_module()->annotation());
-    const auto& atrp(ctx.type_repository());
+    const auto& atrp(*ctx.type_repository());
     const auto odp(ctx.output_directory_path());
     const auto& frp(formatters::workflow::registrar().formatter_repository());
     const bool ekd(enable_backend_directories);
@@ -150,8 +150,8 @@ model_to_extraction_model_transform::transform(
      * Code-generate all artefacts.
      */
     extraction::meta_model::model r;
-    const auto& drp(ctx.formatting_repository());
-    const auto& af(ctx.annotation_factory());
+    const auto& drp(*ctx.formatting_repository());
+    const auto& af(*ctx.annotation_factory());
     r.artefacts(format(atrp, af, drp, fm));
     r.managed_directories().push_back(l.project_path());
 
