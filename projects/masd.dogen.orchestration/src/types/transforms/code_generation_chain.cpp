@@ -32,8 +32,6 @@
 #include "masd.dogen.orchestration/types/transforms/context.hpp"
 #include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
 
-#define NEW_WORLD 1
-
 namespace {
 
 const std::string
@@ -90,25 +88,15 @@ void code_generation_chain::transform(const context& ctx) {
      * Obtain the injection model set.
      */
     using injection::transforms::model_set_production_chain;
-#ifndef NEW_WORLD
-    model_set_production_chain::transform(ctx.injection_context(),
-        ctx.coding_context().transform_options().target());
-#else
     const auto ims(model_set_production_chain::transform(
             ctx.injection_context(),
             ctx.coding_context().transform_options().target()));
-#endif
 
     /*
      * Obtain the coding models.
      */
-#ifndef NEW_WORLD
-    const auto cms(coding::transforms::model_generation_chain::transform(
-            ctx.coding_context()));
-#else
     const auto cms(coding::transforms::model_generation_chain::transform(
             ctx.coding_context(), ims));
-#endif
 
     /*
      * Obtain the generation models.

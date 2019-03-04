@@ -2792,7 +2792,7 @@ for Java, etc.#</dia:string>
         <dia:point val="56,90"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="55.95,89.95;92.355,96.85"/>
+        <dia:rectangle val="55.95,89.95;92.355,97.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="56,90"/>
@@ -2801,13 +2801,13 @@ for Java, etc.#</dia:string>
         <dia:real val="36.305"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="7.6000000000000005"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#context#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>##</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.extraction.cpp.types.forward_declarations.enabled=true#</dia:string>
@@ -5248,13 +5248,13 @@ and, if so, ignore it.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O41">
       <dia:attribute name="obj_pos">
-        <dia:point val="41,80"/>
+        <dia:point val="40,80"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="40.95,79.95;60.415,83.65"/>
+        <dia:rectangle val="39.95,79.95;59.415,83.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="41,80"/>
+        <dia:point val="40,80"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="19.365000000000002"/>
@@ -6135,7 +6135,7 @@ and, if so, ignore it.#</dia:string>
         <dia:point val="36.99,80"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="36.24,74.2;50.8825,80.8"/>
+        <dia:rectangle val="36.24,74.2;49.8825,80.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6143,8 +6143,8 @@ and, if so, ignore it.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="36.99,80"/>
         <dia:point val="36.99,75"/>
-        <dia:point val="50.6825,75"/>
-        <dia:point val="50.6825,80"/>
+        <dia:point val="49.6825,75"/>
+        <dia:point val="49.6825,80"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

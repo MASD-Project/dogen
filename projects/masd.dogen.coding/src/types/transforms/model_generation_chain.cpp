@@ -30,8 +30,6 @@
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
-#include "masd.dogen.coding/types/transforms/initial_target_chain.hpp"
-#include "masd.dogen.coding/types/transforms/references_chain.hpp"
 #include "masd.dogen.coding/types/transforms/model_assembly_chain.hpp"
 #include "masd.dogen.coding/types/transforms/model_post_processing_chain.hpp"
 #include "masd.dogen.coding/types/transforms/injection_model_set_to_coding_model_set_transform.hpp"
@@ -102,57 +100,6 @@ model_generation_chain::transform(const context& ctx,
         model_post_processing_chain::transform(ctx, m);
         r.push_back(m);
     }
-    return r;
-}
-
-std::list<meta_model::model>
-model_generation_chain::transform(const context& ctx) {
-    const auto model_name(ctx.transform_options().target().filename().string());
-    tracing::scoped_chain_tracer stp(lg, "model generation chain",
-        transform_id, model_name, *ctx.tracer());
-
-    /*
-     * Obtain the initial target, given the user options. The initial
-     * target is either a Platform Specific Model (PSM), in which case
-     * the input language and the output language are one and the
-     * same; or it is a Platform Independent Model (PIM), making use
-     * of LAM types (the Language Agnostic Model).
-     */
-    const auto target(initial_target_chain::transform(ctx));
-
-    /*
-     * Obain the references. Note that we are filtering them to only
-     * include those which have languages compatible with the target
-     * language. These fall into the one of the following categories:
-     *
-     * - the target model is a PIM and the reference is also a PIM,
-     *   thus both require mapping to a PSM.
-     *
-     * - the target model is a PIM, and the reference model is a PSM
-     *   in a language which the user is interested in - i.e. its one
-     *   of the target model's output language.
-     *
-     * - the target model is a PSM and the reference model is also a
-     *   PSM, and they share the same language.
-     */
-    std::list<meta_model::model> r;
-    const auto refs(references_chain::transform(ctx, target));
-    for (const auto ol : target.output_languages()) {
-        /*
-         * Execute the assembly chain for each of the requested output
-         * languages.
-         */
-        auto em(model_assembly_chain::transform(ctx, ol, target, refs));
-
-        /*
-         * Then apply all of the post-processing transforms to the
-         * assembled model.
-         */
-        model_post_processing_chain::transform(ctx, em);
-        r.push_back(em);
-    }
-
-    stp.end_chain(r);
     return r;
 }
 

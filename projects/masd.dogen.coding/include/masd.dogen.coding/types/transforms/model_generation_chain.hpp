@@ -44,8 +44,6 @@ class model_generation_chain final {
 public:
     static std::list<meta_model::model> transform(const context& ctx,
         const injection::meta_model::model_set& ims);
-
-    static std::list<meta_model::model> transform(const context& ctx);
 };
 
 }
