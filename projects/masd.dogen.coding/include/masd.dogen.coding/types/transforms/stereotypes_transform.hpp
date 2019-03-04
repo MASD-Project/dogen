@@ -51,6 +51,12 @@ private:
     static bool is_stereotype_handled_externally(const std::string& s);
 
     /**
+     * @brief Returns true if the well-known stereotype denotes a coding
+     * element type, false otherwise.
+     */
+    static bool is_element_type(const meta_model::static_stereotypes ss);
+
+    /**
      * @brief Transforms the static stereotypes of the object, if any
      * exist.
      */

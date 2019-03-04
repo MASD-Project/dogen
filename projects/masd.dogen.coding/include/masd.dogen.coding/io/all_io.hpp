@@ -61,13 +61,11 @@
 #include "masd.dogen.coding/io/meta_model/artefact_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_database_systems_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_model_properties_io.hpp"
-#include "masd.dogen.coding/io/transforms/naming_configuration_io.hpp"
 #include "masd.dogen.coding/io/meta_model/extraction_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_module_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_object_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_attribute_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_primitive_properties_io.hpp"
-#include "masd.dogen.coding/io/helpers/stereotypes_conversion_result_io.hpp"
 #include "masd.dogen.coding/io/meta_model/local_archetype_location_properties_io.hpp"
 
 #endif

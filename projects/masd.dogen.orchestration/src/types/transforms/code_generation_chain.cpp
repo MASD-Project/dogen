@@ -23,6 +23,7 @@
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.injection/types/transforms/model_set_production_chain.hpp"
+#include "masd.dogen.orchestration/types/transforms/injection_model_set_to_coding_model_set_transform.hpp"
 #include "masd.dogen.coding/types/transforms/model_production_chain.hpp"
 #include "masd.dogen.generation/types/transforms/model_generation_chain.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
@@ -93,10 +94,16 @@ void code_generation_chain::transform(const context& ctx) {
             ctx.coding_context().transform_options().target()));
 
     /*
-     * Obtain the coding models.
+     * Convert the injection model set into a coding model set.
      */
-    const auto cms(coding::transforms::model_production_chain::transform(
-            ctx.coding_context(), ims));
+    using inj_transform = injection_model_set_to_coding_model_set_transform;
+    const auto cmset(inj_transform::transform(ctx.coding_context(), ims));
+
+    /*
+     * Run all the coding transforms against the model set.
+     */
+    const auto cms(coding::transforms::model_production_chain::
+        transform(ctx.coding_context(), cmset));
 
     /*
      * Obtain the generation models.

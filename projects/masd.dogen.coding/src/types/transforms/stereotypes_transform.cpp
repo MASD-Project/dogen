@@ -31,7 +31,6 @@
 #include "masd.dogen.coding/types/helpers/name_builder.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
-#include "masd.dogen.coding/types/helpers/stereotypes_helper.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_object_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_primitive_properties.hpp"
 #include "masd.dogen.coding/types/transforms/stereotypes_transform.hpp"
@@ -92,6 +91,19 @@ is_stereotype_handled_externally(const std::string& s) {
         s == stereotype_csharp_artefact_formatter;
 }
 
+bool stereotypes_transform::
+is_element_type(const meta_model::static_stereotypes ss) {
+    using meta_model::static_stereotypes;
+    return
+        ss == static_stereotypes::object ||
+        ss == static_stereotypes::object_template ||
+        ss == static_stereotypes::exception ||
+        ss == static_stereotypes::primitive ||
+        ss == static_stereotypes::enumeration ||
+        ss == static_stereotypes::module ||
+        ss == static_stereotypes::builtin;
+}
+
 void stereotypes_transform::
 transform_static_stereotypes(meta_model::object& o, meta_model::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Static  stereotypes: "
@@ -101,11 +113,10 @@ transform_static_stereotypes(meta_model::object& o, meta_model::model& em) {
      * First we process all of the well-known stereotypes, collecting
      * any invalid ones as we go along.
      */
-    helpers::stereotypes_helper h;
     using meta_model::static_stereotypes;
     std::list<static_stereotypes> unknown_stereotypes;
     for (const auto ss : o.static_stereotypes()) {
-        if (h.is_element_type(ss)) {
+        if (is_element_type(ss)) {
             /*
              * We can safely ignore any element type information as
              * that has already been used to instantiate the
@@ -432,11 +443,10 @@ void stereotypes_transform::transform(meta_model::primitive& p) {
      * Process all of the well-known stereotypes, collecting any
      * invalid ones as we go along.
      */
-    helpers::stereotypes_helper h;
     using meta_model::static_stereotypes;
     std::list<static_stereotypes> unknown_static_stereotypes;
     for (const auto st : p.static_stereotypes()) {
-        if (h.is_element_type(st)) {
+        if (is_element_type(st)) {
             /*
              * We can safely ignore any element type information as
              * that has already been used to instantiate the
