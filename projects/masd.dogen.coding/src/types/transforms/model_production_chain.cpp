@@ -49,9 +49,15 @@ namespace masd::dogen::coding::transforms {
 
 std::list<meta_model::model>
 model_production_chain::transform(const context& ctx,
-    const coding::meta_model::model_set& cms) {
+    coding::meta_model::model_set cms) {
     tracing::scoped_chain_tracer stp(lg, "coding model production chain",
         transform_id, cms.target().name().id(), *ctx.tracer(), cms);
+
+    /*
+     * Then we apply a set of post-processing transforms to the model
+     * set.
+     */
+    model_set_pre_processing_chain::transform(ctx, cms);
 
     /*
      * Note that we've obtained the target given the user options;

@@ -12,24 +12,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-04 Mon 17:50]
+#+CAPTION: Clock summary at [2019-03-04 Mon 18:14]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *36:04* |       |       | 100.0 |
+| *Total time*                                             | *36:26* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 36:04   |       |       | 100.0 |
-| Active                                                   |         | 36:04 |       | 100.0 |
+| Stories                                                  | 36:26   |       |       | 100.0 |
+| Active                                                   |         | 36:26 |       | 100.0 |
 | Edit release notes for previous sprint                   |         |       |  1:27 |   4.0 |
 | Sprint and product backlog grooming                      |         |       |  0:42 |   1.9 |
-| Implement text model generation chain in generation      |         |       |  3:45 |  10.4 |
-| Move generation model out of coding                      |         |       |  4:22 |  12.1 |
-| Rename endomodel to just model                           |         |       |  2:11 |   6.1 |
+| Implement text model generation chain in generation      |         |       |  3:45 |  10.3 |
+| Move generation model out of coding                      |         |       |  4:22 |  12.0 |
+| Rename endomodel to just model                           |         |       |  2:11 |   6.0 |
 | Remove exomodel remnants                                 |         |       |  0:03 |   0.1 |
 | Consider adding a dot graph of the transforms to probing |         |       |  1:47 |   4.9 |
-| Split annotations processing into two phases             |         |       |  3:10 |   8.8 |
+| Split annotations processing into two phases             |         |       |  3:10 |   8.7 |
+| Move injection processing out of coding                  |         |       | 18:39 |  51.2 |
 | Try to fix valgrind warning on =find_files=              |         |       |  0:20 |   0.9 |
-| Move injection processing out of coding                  |         |       | 18:17 |  50.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -417,25 +417,10 @@ Notes:
   a class that reads the fields to populate the object. We need LAM to
   map types from annotations to the output language.
 
-*** STARTED Try to fix valgrind warning on =find_files=               :story:
+*** COMPLETED Move injection processing out of coding                 :story:
+    CLOSED: [2019-03-04 Mon 18:13]
     :LOGBOOK:
-    CLOCK: [2019-02-27 Wed 17:25]--[2019-02-27 Wed 17:45] =>  0:20
-    :END:
-
-We seem to be doing something wrong with directory iterators:
-
-: UMC ==7755== Conditional jump or move depends on uninitialised value(s)
-: ==7755==    at 0xA0FAFB: (anonymous namespace)::dir_itr_increment(void*&, void*&, std::__cxx11::basic_string, std::allocator >&, boost::filesystem::file_status&, boost::filesystem::file_status&) (operations.cpp:2163)
-: ==7755==    by 0xA101B5: boost::filesystem::detail::directory_iterator_increment(boost::filesystem::directory_iterator&, boost::system::error_code*) (operations.cpp:2374)
-: ==7755==    by 0xA1002E: boost::filesystem::detail::directory_iterator_construct(boost::filesystem::directory_iterator&, boost::filesystem::path const&, boost::system::error_code*) (operations.cpp:2354)
-: ==7755==    by 0x6F2AF6: boost::filesystem::directory_iterator::directory_iterator(boost::filesystem::path const&) (operations.hpp:905)
-: ==7755==    by 0x6F2462: boost::filesystem::recursive_directory_iterator::recursive_directory_iterator(boost::filesystem::path const&) (operations.hpp:1174)
-: ==7755==    by 0x6F0E15: masd::dogen::utility::filesystem::find_files(boost::filesystem::path const&) (file.cpp:85)
-: ==7755==    by 0x6ADB4B: masd::dogen::coding::helpers::mapping_set_repository_factory::obtain_mappings[abi:cxx11](std::vector > const&) const (mapping_set_repository_factory.cpp:66)
-: ==7755==    by 0x6AF507: masd::dogen::coding::helpers::mapping_set_repository_factory::make(std::vector > const&) const (mapping_set_repository_factory.cpp:172)
-
-*** STARTED Move injection processing out of coding                   :story:
-    :LOGBOOK:
+    CLOCK: [2019-03-04 Mon 17:51]--[2019-03-04 Mon 18:13] =>  0:22
     CLOCK: [2019-03-04 Mon 17:30]--[2019-03-04 Mon 17:50] =>  0:20
     CLOCK: [2019-03-04 Mon 17:17]--[2019-03-04 Mon 17:29] =>  0:12
     CLOCK: [2019-03-04 Mon 16:15]--[2019-03-04 Mon 17:16] =>  1:01
@@ -522,6 +507,27 @@ Notes:
   - injection on extraction.
   - tracing on annotations.
   - injection.json on extraction.
+
+*** STARTED Try to fix valgrind warning on =find_files=               :story:
+    :LOGBOOK:
+    CLOCK: [2019-02-27 Wed 17:25]--[2019-02-27 Wed 17:45] =>  0:20
+    :END:
+
+We seem to be doing something wrong with directory iterators:
+
+: UMC ==7755== Conditional jump or move depends on uninitialised value(s)
+: ==7755==    at 0xA0FAFB: (anonymous namespace)::dir_itr_increment(void*&, void*&, std::__cxx11::basic_string, std::allocator >&, boost::filesystem::file_status&, boost::filesystem::file_status&) (operations.cpp:2163)
+: ==7755==    by 0xA101B5: boost::filesystem::detail::directory_iterator_increment(boost::filesystem::directory_iterator&, boost::system::error_code*) (operations.cpp:2374)
+: ==7755==    by 0xA1002E: boost::filesystem::detail::directory_iterator_construct(boost::filesystem::directory_iterator&, boost::filesystem::path const&, boost::system::error_code*) (operations.cpp:2354)
+: ==7755==    by 0x6F2AF6: boost::filesystem::directory_iterator::directory_iterator(boost::filesystem::path const&) (operations.hpp:905)
+: ==7755==    by 0x6F2462: boost::filesystem::recursive_directory_iterator::recursive_directory_iterator(boost::filesystem::path const&) (operations.hpp:1174)
+: ==7755==    by 0x6F0E15: masd::dogen::utility::filesystem::find_files(boost::filesystem::path const&) (file.cpp:85)
+: ==7755==    by 0x6ADB4B: masd::dogen::coding::helpers::mapping_set_repository_factory::obtain_mappings[abi:cxx11](std::vector > const&) const (mapping_set_repository_factory.cpp:66)
+: ==7755==    by 0x6AF507: masd::dogen::coding::helpers::mapping_set_repository_factory::make(std::vector > const&) const (mapping_set_repository_factory.cpp:172)
+
+*** Move coding to generation model transform into orchestration      :story:
+
+There is no need to house this in generation.
 
 *** Add warning for unused references                                 :story:
 

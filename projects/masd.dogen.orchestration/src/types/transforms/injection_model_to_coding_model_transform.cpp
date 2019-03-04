@@ -27,6 +27,7 @@
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
@@ -39,7 +40,6 @@
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/io/meta_model/location_io.hpp"
-#include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
 #include "masd.dogen.coding/types/helpers/name_builder.hpp"
@@ -239,7 +239,7 @@ coding::meta_model::model injection_model_to_coding_model_transform::
 transform(const coding::transforms::context& ctx,
     const injection::meta_model::model& im) {
     tracing::scoped_transform_tracer stp(lg,
-        "external model to model transform", transform_id, im.name(),
+        "injection model to coding model transform", transform_id, im.name(),
         *ctx.tracer(), im);
 
     helpers::stereotypes_helper h;
@@ -281,6 +281,7 @@ transform(const coding::transforms::context& ctx,
     r.root_module()->documentation(im.documentation());
     insert(r.root_module(), r.modules());
 
+    stp.end_transform(r);
     return r;
 }
 
