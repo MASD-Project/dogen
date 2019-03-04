@@ -134,6 +134,10 @@
           <dia:attribute name="string">
             <dia:string>##DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=masd.dogen.templating
+#DOGEN masd.injection.new_reference=cpp.builtins
+#DOGEN masd.injection.new_reference=cpp.boost
+#DOGEN masd.injection.new_reference=cpp.std
+#DOGEN masd.injection.new_reference=masd.dogen.extraction
 #DOGEN masd.injection.reference=masd.dogen.extraction.dia
 #DOGEN masd.injection.input_language=cpp
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt

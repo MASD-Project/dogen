@@ -832,7 +832,7 @@ of course, these form the core set of elements we're interested in.
 Additional entities such as build sytems and high-level patterns
 such as GoF and others are also captured.
 
-@li to provide the tooling required to combine multiple coding 
+@li to provide the tooling required to combine multiple coding
 models together into a bigger model - called the @e merged model.
 
 @li to ensure the consistency of the merged model via validation
@@ -841,6 +841,13 @@ etc.).
 
 #DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=masd.dogen.coding
+#DOGEN masd.injection.new_reference=cpp.builtins
+#DOGEN masd.injection.new_reference=cpp.std
+#DOGEN masd.injection.new_reference=cpp.boost
+#DOGEN masd.injection.new_reference=masd.dogen
+#DOGEN masd.injection.new_reference=masd.dogen.annotations
+#DOGEN masd.injection.new_reference=masd.dogen.tracing
+#DOGEN masd.injection.new_reference=masd.dogen.extraction
 #DOGEN masd.injection.reference=masd.dogen.dia
 #DOGEN masd.injection.reference=masd.dogen.annotations.dia
 #DOGEN masd.injection.reference=masd.dogen.extraction.dia

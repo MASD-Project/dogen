@@ -2482,6 +2482,14 @@ For details on the stereotypes see the MASD UML profile.
 
 #DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=masd.dogen.injection.dia
+#DOGEN masd.injection.new_reference=cpp.builtins
+#DOGEN masd.injection.new_reference=cpp.std
+#DOGEN masd.injection.new_reference=cpp.boost
+#DOGEN masd.injection.new_reference=masd.dogen.dia
+#DOGEN masd.injection.new_reference=masd.dogen.annotations
+#DOGEN masd.injection.new_reference=masd.dogen.tracing
+#DOGEN masd.injection.new_reference=masd.dogen.injection
+#DOGEN masd.injection.new_reference=masd.dogen.extraction
 #DOGEN masd.injection.reference=masd.dogen.dia.dia
 #DOGEN masd.injection.reference=masd.dogen.annotations.dia
 #DOGEN masd.injection.reference=masd.dogen.extraction.dia

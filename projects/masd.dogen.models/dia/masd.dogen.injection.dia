@@ -945,6 +945,11 @@ between these native formats and the injection model.
 #DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=masd.dogen.injection
 #DOGEN masd.injection.input_language=cpp
+#DOGEN masd.injection.new_reference=cpp.builtins
+#DOGEN masd.injection.new_reference=cpp.std
+#DOGEN masd.injection.new_reference=cpp.boost
+#DOGEN masd.injection.new_reference=masd.dogen.annotations
+#DOGEN masd.injection.new_reference=masd.dogen.tracing
 #DOGEN masd.injection.reference=masd.dogen.tracing.dia
 #DOGEN masd.injection.reference=masd.dogen.annotations.dia
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
@@ -4886,7 +4891,7 @@ for Java, etc.#</dia:string>
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>#This chain loads every model and obtains their model set,
-and so forth, recursively. However, for the top-most model 
+and so forth, recursively. However, for the top-most model
 (which we know its the target model) it assembles the moodel
 sets in the correct order. That is, a direct reference of a
 reference becomes a transitive reference for the target.

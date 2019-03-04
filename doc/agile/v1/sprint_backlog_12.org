@@ -12,24 +12,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-04 Mon 09:27]
+#+CAPTION: Clock summary at [2019-03-04 Mon 10:39]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *30:14* |       |       | 100.0 |
+| *Total time*                                             | *31:25* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 30:14   |       |       | 100.0 |
-| Active                                                   |         | 30:14 |       | 100.0 |
-| Edit release notes for previous sprint                   |         |       |  1:27 |   4.8 |
-| Sprint and product backlog grooming                      |         |       |  0:42 |   2.3 |
-| Implement text model generation chain in generation      |         |       |  3:45 |  12.4 |
-| Move generation model out of coding                      |         |       |  4:22 |  14.4 |
-| Rename endomodel to just model                           |         |       |  2:11 |   7.2 |
+| Stories                                                  | 31:25   |       |       | 100.0 |
+| Active                                                   |         | 31:25 |       | 100.0 |
+| Edit release notes for previous sprint                   |         |       |  1:27 |   4.6 |
+| Sprint and product backlog grooming                      |         |       |  0:42 |   2.2 |
+| Implement text model generation chain in generation      |         |       |  3:45 |  11.9 |
+| Move generation model out of coding                      |         |       |  4:22 |  13.9 |
+| Rename endomodel to just model                           |         |       |  2:11 |   6.9 |
 | Remove exomodel remnants                                 |         |       |  0:03 |   0.2 |
-| Consider adding a dot graph of the transforms to probing |         |       |  1:47 |   5.9 |
-| Split annotations processing into two phases             |         |       |  3:10 |  10.5 |
+| Consider adding a dot graph of the transforms to probing |         |       |  1:47 |   5.7 |
+| Split annotations processing into two phases             |         |       |  3:10 |  10.1 |
 | Try to fix valgrind warning on =find_files=              |         |       |  0:20 |   1.1 |
-| Move injection processing out of coding                  |         |       | 12:27 |  41.2 |
+| Move injection processing out of coding                  |         |       | 13:38 |  43.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -436,6 +436,7 @@ We seem to be doing something wrong with directory iterators:
 
 *** STARTED Move injection processing out of coding                   :story:
     :LOGBOOK:
+    CLOCK: [2019-03-04 Mon 09:28]--[2019-03-04 Mon 10:39] =>  1:11
     CLOCK: [2019-03-04 Mon 09:00]--[2019-03-04 Mon 09:27] =>  0:27
     CLOCK: [2019-03-04 Mon 07:59]--[2019-03-04 Mon 08:28] =>  1:04
     CLOCK: [2019-03-03 Sun 20:55]--[2019-03-03 Sun 21:04] =>  0:09
@@ -500,6 +501,29 @@ Notes:
   "references2" and populate it with the new style of references. Then
   create a parallel transform chain that can be switched on and off
   with a macro from orchestration.
+- we need to also support models with extensions, just in case users
+  decide to supply them. However, this is a bit tricky - sometimes we
+  may have false positives, such as for the "dia" models.
+- strange dependencies:
+  - injection on extraction.
+  - tracing on annotations.
+  - injection.json on extraction.
+
+*** Add warning for unused references                                 :story:
+
+It would be nice if we could figure out if the user has added some
+references to a model that are not required. This could be done as a
+byproduct of resolution. However, we need to be careful when we
+introduce two-passes as we may use a model for say profiles or
+concepts but nothing else. One way of addressing this is to have a
+container of "used references"; whenever we find a type from a
+reference, we add that reference to the list. In the end we diff that
+container against the global refs.
+
+*** Generate model dependency graph                                   :story:
+
+It would be nice to generate a tracing of the model dependencies. This
+may not necessarily be part of tracing.
 
 *** Add logging to console again                                      :story:
 

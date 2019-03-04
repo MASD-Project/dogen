@@ -98,6 +98,13 @@
 
 #DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=masd.dogen.injection.json
+#DOGEN masd.injection.new_reference=cpp.builtins
+#DOGEN masd.injection.new_reference=cpp.std
+#DOGEN masd.injection.new_reference=cpp.boost
+#DOGEN masd.injection.new_reference=masd.dogen.annotations
+#DOGEN masd.injection.new_reference=masd.dogen.tracing
+#DOGEN masd.injection.new_reference=masd.dogen.extraction
+#DOGEN masd.injection.new_reference=masd.dogen.injection
 #DOGEN masd.injection.reference=masd.dogen.annotations.dia
 #DOGEN masd.injection.reference=masd.dogen.extraction.dia
 #DOGEN masd.injection.reference=masd.dogen.tracing.dia

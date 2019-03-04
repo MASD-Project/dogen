@@ -99,6 +99,11 @@
 #DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=masd.dogen.tracing
 #DOGEN masd.injection.input_language=cpp
+#DOGEN masd.injection.new_reference=cpp.builtins
+#DOGEN masd.injection.new_reference=cpp.boost
+#DOGEN masd.injection.new_reference=cpp.std
+#DOGEN masd.injection.new_reference=masd.dogen
+#DOGEN masd.injection.new_reference=masd.dogen.annotations
 #DOGEN masd.injection.reference=masd.dogen.dia
 #DOGEN masd.injection.reference=masd.dogen.annotations.dia
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
