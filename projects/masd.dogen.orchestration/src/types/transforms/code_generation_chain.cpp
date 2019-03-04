@@ -32,7 +32,7 @@
 #include "masd.dogen.orchestration/types/transforms/context.hpp"
 #include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
 
-// #define NEW_WORLD 1
+#define NEW_WORLD 1
 
 namespace {
 
