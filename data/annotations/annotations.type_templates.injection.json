@@ -176,6 +176,18 @@
   },
   {
     "name": {
+      "simple": "new_reference",
+      "qualified": "masd.injection.new_reference"
+    },
+    "archetype_location": {
+      "kernel": "masd"
+    },
+    "value_type": "text_collection",
+    "template_kind": "instance",
+    "scope": "root_module"
+  },
+  {
+    "name": {
       "simple": "input_language",
       "qualified": "masd.injection.input_language"
     },
