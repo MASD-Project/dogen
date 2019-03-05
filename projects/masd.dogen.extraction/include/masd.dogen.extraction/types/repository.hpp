@@ -29,7 +29,6 @@
 #include <algorithm>
 #include <unordered_map>
 #include "masd.dogen.extraction/types/modeline_group.hpp"
-#include "masd.dogen.extraction/serialization/repository_fwd_ser.hpp"
 
 namespace masd::dogen::extraction {
 
@@ -44,13 +43,6 @@ public:
     repository(
         const std::unordered_map<std::string, masd::dogen::extraction::modeline_group>& modeline_groups,
         const std::unordered_map<std::string, std::string>& licence_texts);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const masd::dogen::extraction::repository& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, masd::dogen::extraction::repository& v, unsigned int version);
 
 public:
     const std::unordered_map<std::string, masd::dogen::extraction::modeline_group>& modeline_groups() const;

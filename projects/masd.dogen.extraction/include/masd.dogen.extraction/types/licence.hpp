@@ -28,7 +28,6 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include "masd.dogen.extraction/serialization/licence_fwd_ser.hpp"
 
 namespace masd::dogen::extraction {
 
@@ -46,13 +45,6 @@ public:
     licence(
         const std::list<std::string>& copyright_notices,
         const std::string& text);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const masd::dogen::extraction::licence& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, masd::dogen::extraction::licence& v, unsigned int version);
 
 public:
     /**

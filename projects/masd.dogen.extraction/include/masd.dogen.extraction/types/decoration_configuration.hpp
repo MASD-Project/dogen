@@ -29,7 +29,6 @@
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "masd.dogen.extraction/serialization/decoration_configuration_fwd_ser.hpp"
 
 namespace masd::dogen::extraction {
 
@@ -51,13 +50,6 @@ public:
         const boost::optional<bool>& marker_add_date_time,
         const boost::optional<bool>& marker_add_warning,
         const std::string& marker_message);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const masd::dogen::extraction::decoration_configuration& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, masd::dogen::extraction::decoration_configuration& v, unsigned int version);
 
 public:
     const boost::optional<bool>& generate_decoration() const;

@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include "masd.dogen.extraction/serialization/infix_configuration_fwd_ser.hpp"
 
 namespace masd::dogen::extraction {
 
@@ -47,13 +46,6 @@ public:
         const std::string& not_first,
         const std::string& not_last,
         const std::string& last);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const masd::dogen::extraction::infix_configuration& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, masd::dogen::extraction::infix_configuration& v, unsigned int version);
 
 public:
     /**

@@ -31,7 +31,6 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
-#include "masd.dogen.extraction/serialization/meta_model/model_fwd_ser.hpp"
 
 namespace masd::dogen::extraction::meta_model {
 
@@ -54,13 +53,6 @@ public:
         const bool delete_extra_files,
         const std::vector<std::string>& ignore_files_matching_regex,
         const boost::filesystem::path& cpp_headers_output_directory);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const masd::dogen::extraction::meta_model::model& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, masd::dogen::extraction::meta_model::model& v, unsigned int version);
 
 public:
     const std::list<masd::dogen::extraction::meta_model::artefact>& artefacts() const;

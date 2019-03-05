@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include "masd.dogen.extraction/serialization/modeline_field_fwd_ser.hpp"
 
 namespace masd::dogen::extraction {
 
@@ -45,13 +44,6 @@ public:
     modeline_field(
         const std::string& name,
         const std::string& value);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const masd::dogen::extraction::modeline_field& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, masd::dogen::extraction::modeline_field& v, unsigned int version);
 
 public:
     /**

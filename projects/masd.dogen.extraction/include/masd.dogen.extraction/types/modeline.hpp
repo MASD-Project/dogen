@@ -31,7 +31,6 @@
 #include "masd.dogen.extraction/types/editors.hpp"
 #include "masd.dogen.extraction/types/modeline_field.hpp"
 #include "masd.dogen.extraction/types/modeline_locations.hpp"
-#include "masd.dogen.extraction/serialization/modeline_fwd_ser.hpp"
 
 namespace masd::dogen::extraction {
 
@@ -62,13 +61,6 @@ public:
         const masd::dogen::extraction::editors editor,
         const masd::dogen::extraction::modeline_locations location,
         const std::list<masd::dogen::extraction::modeline_field>& fields);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const masd::dogen::extraction::modeline& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, masd::dogen::extraction::modeline& v, unsigned int version);
 
 public:
     /**

@@ -30,7 +30,6 @@
 #include <boost/optional.hpp>
 #include "masd.dogen.extraction/types/licence.hpp"
 #include "masd.dogen.extraction/types/modeline.hpp"
-#include "masd.dogen.extraction/serialization/decoration_properties_fwd_ser.hpp"
 
 namespace masd::dogen::extraction {
 
@@ -54,13 +53,6 @@ public:
         const boost::optional<masd::dogen::extraction::modeline>& modeline,
         const boost::optional<masd::dogen::extraction::licence>& licence,
         const std::string& code_generation_marker);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const masd::dogen::extraction::decoration_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, masd::dogen::extraction::decoration_properties& v, unsigned int version);
 
 public:
     /**
