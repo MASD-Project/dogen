@@ -561,7 +561,7 @@ instances of these features are called configurations. We just need a
 strategy for mapping features into UML models, for which there are
 several in the literature.
 
-*** Create a extraction model post-processing chain                   :story:
+*** Additional extraction model post-processing chain transforms      :story:
 
 The following transforms can be done after generation of the
 extraction model:
@@ -569,8 +569,6 @@ extraction model:
 - clang format
 - protected regions: read the file on disk, replace contents of the
   protected region with the data read from disk.
-
-These can be contained in a post-processing chain for the text model.
 
 Note that we need artefacts to have an associated language so that we
 can use the correct clang format configuration. If a language is not

@@ -568,30 +568,10 @@ something like =apply=.
 We should work on this once the system tests are back and running, as
 we may break a lot of things with a "simple" tidy-up.
 
-*** Add DTL to vcpkg                                                  :story:
-
-DTL seems to be the easiest library to work with in terms of
-generating diffs. However, its not on vcpkg.
-
-Tasks:
-
-- add CMake support to DTL. Not strictly needed but seems like an easy
-  thing to do and will make vcpkg easier. It also means we can build
-  tests and examples to make sure it all works in isolation. Actually
-  this was tried before and not accepted by the maintainer.
-- add DTL port.
-
-Links:
-
-- [[https://github.com/google/diff-match-patch/tree/master/cpp][diff-match-patch]]: interesting diff library but requires QT.
-- [[https://github.com/Martinsos/edlib#usage-and-examples][edlib]]: interesting library but seems to be more for Levehnstein
-  diffs. Also not on vcpkg.
-- [[https://github.com/cubicdaiya/dtl/pull/2][Add cmake support]]: PR to add CMake support to DTL, not accepted by
-  the maintainer. See also [[https://github.com/chino540off/dtl][the repo]].
-- [[https://github.com/Microsoft/vcpkg/tree/master/ports/libodb][libodb]]: example of a project with a vcpkg specific CMake support.
-- [[https://stackoverflow.com/questions/13438547/linux-c-or-c-library-to-diff-and-patch-strings][Linux C or C++ library to diff and patch strings?]]
-
-*** Add basic "diff mode"                                             :story:
+*** STARTED Add basic "diff mode"                                     :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-05 Tue 07:52]--[2019-03-05 Tue 08:38] =>  0:46
+    :END:
 
 We need a very simple way of checking all generated files in memory
 against what's in the file system and returning a flag if they are
@@ -658,6 +638,45 @@ useful to make sure the source code matches the latest version of the
 diagram.
 
 We could use something like the [[https://code.google.com/p/dtl-cpp/wiki/Tutorial][DTL library]].
+
+*** Create a extraction model post-processing chain                   :story:
+
+We already have a few transforms that can go into this chain:
+
+- linting
+- writing
+- diffing
+
+Additional stories are in the backlog.
+
+*** Add DTL to vcpkg                                                  :story:
+
+DTL seems to be the easiest library to work with in terms of
+generating diffs. However, its not on vcpkg.
+
+Tasks:
+
+- add CMake support to DTL. Not strictly needed but seems like an easy
+  thing to do and will make vcpkg easier. It also means we can build
+  tests and examples to make sure it all works in isolation. Actually
+  this was tried before and not accepted by the maintainer.
+- add DTL port.
+
+Links:
+
+- [[https://github.com/google/diff-match-patch/tree/master/cpp][diff-match-patch]]: interesting diff library but requires QT.
+- [[https://github.com/Martinsos/edlib#usage-and-examples][edlib]]: interesting library but seems to be more for Levehnstein
+  diffs. Also not on vcpkg.
+- [[https://github.com/cubicdaiya/dtl/pull/2][Add cmake support]]: PR to add CMake support to DTL, not accepted by
+  the maintainer. See also [[https://github.com/chino540off/dtl][the repo]].
+- [[https://github.com/Microsoft/vcpkg/tree/master/ports/libodb][libodb]]: example of a project with a vcpkg specific CMake support.
+- [[https://stackoverflow.com/questions/13438547/linux-c-or-c-library-to-diff-and-patch-strings][Linux C or C++ library to diff and patch strings?]]
+
+*** Move all formatters in extraction to generation                   :story:
+
+Since we only need these during generation, seems like the more
+logical place. This should be done when (after) we move all of the
+meta-elements that live in formatter into coding.
 
 *** Rework the system tests using diff mode                           :story:
 
