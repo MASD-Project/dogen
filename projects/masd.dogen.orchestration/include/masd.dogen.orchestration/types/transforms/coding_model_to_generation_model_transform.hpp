@@ -25,24 +25,25 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.generation/types/meta_model/model.hpp"
+#include "masd.dogen.generation/types/transforms/context.hpp"
 
 namespace masd::dogen::orchestration::transforms {
 
 class coding_model_to_generation_model_transform final {
-public:
-    coding_model_to_generation_model_transform() = default;
-    coding_model_to_generation_model_transform(const coding_model_to_generation_model_transform&) = default;
-    coding_model_to_generation_model_transform(coding_model_to_generation_model_transform&&) = default;
-    ~coding_model_to_generation_model_transform() = default;
-    coding_model_to_generation_model_transform& operator=(const coding_model_to_generation_model_transform&) = default;
+private:
+    static std::size_t
+    compute_total_size(const coding::meta_model::model& em);
+
+    static generation::meta_model::model
+    transform(const coding::meta_model::model& em);
 
 public:
-    bool operator==(const coding_model_to_generation_model_transform& rhs) const;
-    bool operator!=(const coding_model_to_generation_model_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static std::list<generation::meta_model::model>
+    transform(const generation::transforms::context& ctx,
+        const std::list<coding::meta_model::model>& cms);
 };
 
 }
