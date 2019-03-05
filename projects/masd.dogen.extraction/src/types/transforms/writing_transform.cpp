@@ -35,7 +35,8 @@ auto lg(logger_factory(transform_id));
 
 namespace masd::dogen::extraction::transforms {
 
-void writing_transform::transform(const context& ctx, meta_model::model& m) {
+void writing_transform::
+transform(const context& ctx, const meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "writting transform",
         transform_id, m.name(), *ctx.tracer(), m);
 

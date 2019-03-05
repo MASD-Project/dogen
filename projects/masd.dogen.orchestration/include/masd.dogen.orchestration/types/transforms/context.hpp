@@ -29,6 +29,7 @@
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
+#include "masd.dogen.extraction/types/transforms/context.hpp"
 
 namespace masd::dogen::orchestration::transforms {
 
@@ -43,7 +44,8 @@ public:
     context(
         const masd::dogen::injection::transforms::context& injection_context,
         const masd::dogen::coding::transforms::context& coding_context,
-        const masd::dogen::generation::transforms::context& generation_context);
+        const masd::dogen::generation::transforms::context& generation_context,
+        const masd::dogen::extraction::transforms::context& extraction_context);
 
 public:
     const masd::dogen::injection::transforms::context& injection_context() const;
@@ -61,10 +63,16 @@ public:
     void generation_context(const masd::dogen::generation::transforms::context& v);
     void generation_context(const masd::dogen::generation::transforms::context&& v);
 
+    const masd::dogen::extraction::transforms::context& extraction_context() const;
+    masd::dogen::extraction::transforms::context& extraction_context();
+    void extraction_context(const masd::dogen::extraction::transforms::context& v);
+    void extraction_context(const masd::dogen::extraction::transforms::context&& v);
+
 private:
     masd::dogen::injection::transforms::context injection_context_;
     masd::dogen::coding::transforms::context coding_context_;
     masd::dogen::generation::transforms::context generation_context_;
+    masd::dogen::extraction::transforms::context extraction_context_;
 };
 
 }

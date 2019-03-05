@@ -37,7 +37,7 @@ auto lg(logger_factory(transform_id));
 namespace masd::dogen::extraction::transforms {
 
 void model_generation_chain::
-transform(const context& ctx, meta_model::model& m) {
+transform(const context& ctx, const meta_model::model& m) {
     tracing::scoped_chain_tracer stp(lg, "model generation chain",
         transform_id, m.name(), *ctx.tracer(), m);
 

@@ -57,15 +57,6 @@ namespace masd::dogen::orchestration::transforms {
  * code, and then outputted it to the desired destination.
  */
 class code_generation_chain final {
-private:
-    static void write(const extraction::meta_model::model& m);
-
-private:
-    /**
-     * @brief Handles any extraneous files which should be removed.
-     */
-    static void lint(const extraction::meta_model::model& m);
-
 public:
     static void transform(const context& ctx);
 };

@@ -19,8 +19,6 @@
  *
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.utility/types/filesystem/path.hpp"
-#include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.injection/types/transforms/model_set_production_chain.hpp"
 #include "masd.dogen.orchestration/types/transforms/injection_model_set_to_coding_model_set_transform.hpp"
@@ -28,8 +26,7 @@
 #include "masd.dogen.generation/types/transforms/model_generation_chain.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"
-#include "masd.dogen.extraction/types/helpers/filesystem_writer.hpp"
-#include "masd.dogen.extraction/types/helpers/file_linter.hpp"
+#include "masd.dogen.extraction/types/transforms/model_generation_chain.hpp"
 #include "masd.dogen.orchestration/types/transforms/context.hpp"
 #include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
 
@@ -44,34 +41,6 @@ auto lg(logger_factory(transform_id));
 }
 
 namespace masd::dogen::orchestration::transforms {
-
-void code_generation_chain::write(const extraction::meta_model::model& m) {
-
-    if (m.artefacts().empty()) {
-        BOOST_LOG_SEV(lg, warn) << "No files were generated, so no output.";
-        return;
-    }
-
-    const auto& w = extraction::helpers::filesystem_writer();
-    if (m.force_write())
-        w.force_write(m.artefacts());
-    else
-        w.write(m.artefacts());
-}
-
-void code_generation_chain::lint(const extraction::meta_model::model& m) {
-    /*
-     * If we're not going to delete the files, don't bother linting..
-     */
-    if (!m.delete_extra_files())
-        return;
-
-    const auto lint(extraction::helpers::file_linter::lint(m));
-    if (lint.empty())
-        return;
-
-    utility::filesystem::remove(lint);
-}
 
 void code_generation_chain::transform(const context& ctx) {
     BOOST_LOG_SEV(lg, info) << "Starting code generation.";
@@ -116,19 +85,14 @@ void code_generation_chain::transform(const context& ctx) {
      * Obtain the extraction models.
      */
     using generation::transforms::model_to_extraction_model_chain;
-    const auto m(model_to_extraction_model_chain::transform(
+    const auto em(model_to_extraction_model_chain::transform(
             ctx.generation_context(), gms));
 
-    /*
-     * Write the artefacts.
-     */
-    write(m);
 
-    /*
-     * Perform any housekeeping if need be.
-     */
-    lint(m);
-    stp.end_chain(m);
+    extraction::transforms::model_generation_chain::transform(
+        ctx.extraction_context(), em);
+
+    stp.end_chain(em);
 
     BOOST_LOG_SEV(lg, info) << "Finished code generation.";
 }

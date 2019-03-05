@@ -30,9 +30,12 @@
 
 namespace masd::dogen::extraction::transforms {
 
+/**
+ * @brief Handles any extraneous files which should be removed.
+ */
 class linting_transform final {
 public:
-    static void transform(const context& ctx, meta_model::model& m);
+    static void transform(const context& ctx, const meta_model::model& m);
 };
 
 }

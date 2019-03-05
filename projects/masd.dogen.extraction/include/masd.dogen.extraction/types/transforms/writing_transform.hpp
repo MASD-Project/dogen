@@ -32,7 +32,7 @@ namespace masd::dogen::extraction::transforms {
 
 class writing_transform final {
 public:
-    static void transform(const context& ctx, meta_model::model& m);
+    static void transform(const context& ctx, const meta_model::model& m);
 };
 
 }

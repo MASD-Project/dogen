@@ -34,8 +34,8 @@ namespace masd::dogen::extraction::transforms {
 class context final {
 public:
     context() = default;
-    context(const context&) = default;
-    context(context&&) = default;
+    // context(const context&) = default;
+    // context(context&&) = default;
     ~context() = default;
 
 public:

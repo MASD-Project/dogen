@@ -25,10 +25,12 @@ namespace masd::dogen::orchestration::transforms {
 context::context(
     const masd::dogen::injection::transforms::context& injection_context,
     const masd::dogen::coding::transforms::context& coding_context,
-    const masd::dogen::generation::transforms::context& generation_context)
+    const masd::dogen::generation::transforms::context& generation_context,
+    const masd::dogen::extraction::transforms::context& extraction_context)
     : injection_context_(injection_context),
       coding_context_(coding_context),
-      generation_context_(generation_context) { }
+      generation_context_(generation_context),
+      extraction_context_(extraction_context) { }
 
 const masd::dogen::injection::transforms::context& context::injection_context() const {
     return injection_context_;
@@ -76,6 +78,22 @@ void context::generation_context(const masd::dogen::generation::transforms::cont
 
 void context::generation_context(const masd::dogen::generation::transforms::context&& v) {
     generation_context_ = std::move(v);
+}
+
+const masd::dogen::extraction::transforms::context& context::extraction_context() const {
+    return extraction_context_;
+}
+
+masd::dogen::extraction::transforms::context& context::extraction_context() {
+    return extraction_context_;
+}
+
+void context::extraction_context(const masd::dogen::extraction::transforms::context& v) {
+    extraction_context_ = v;
+}
+
+void context::extraction_context(const masd::dogen::extraction::transforms::context&& v) {
+    extraction_context_ = std::move(v);
 }
 
 }

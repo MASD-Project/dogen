@@ -12,27 +12,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-05 Tue 08:47]
+#+CAPTION: Clock summary at [2019-03-05 Tue 09:35]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *37:47* |       |       | 100.0 |
+| *Total time*                                             | *38:34* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 37:47   |       |       | 100.0 |
-| Active                                                   |         | 37:47 |       | 100.0 |
+| Stories                                                  | 38:34   |       |       | 100.0 |
+| Active                                                   |         | 38:34 |       | 100.0 |
 | Edit release notes for previous sprint                   |         |       |  1:27 |   3.8 |
-| Sprint and product backlog grooming                      |         |       |  1:03 |   2.8 |
-| Implement text model generation chain in generation      |         |       |  3:45 |   9.9 |
-| Move generation model out of coding                      |         |       |  4:22 |  11.6 |
-| Rename endomodel to just model                           |         |       |  2:11 |   5.8 |
+| Sprint and product backlog grooming                      |         |       |  1:03 |   2.7 |
+| Implement text model generation chain in generation      |         |       |  3:45 |   9.7 |
+| Move generation model out of coding                      |         |       |  4:22 |  11.3 |
+| Rename endomodel to just model                           |         |       |  2:11 |   5.7 |
 | Remove exomodel remnants                                 |         |       |  0:03 |   0.1 |
-| Consider adding a dot graph of the transforms to probing |         |       |  1:47 |   4.7 |
-| Split annotations processing into two phases             |         |       |  3:10 |   8.4 |
-| Move injection processing out of coding                  |         |       | 18:39 |  49.4 |
+| Consider adding a dot graph of the transforms to probing |         |       |  1:47 |   4.6 |
+| Split annotations processing into two phases             |         |       |  3:10 |   8.2 |
+| Move injection processing out of coding                  |         |       | 18:39 |  48.4 |
+| Create a extraction model post-processing chain          |         |       |  0:56 |   2.4 |
 | Try to fix valgrind warning on =find_files=              |         |       |  0:20 |   0.9 |
 | Rename the =transform= method to =apply=                 |         |       |  0:05 |   0.2 |
 | Add basic "diff mode"                                    |         |       |  0:46 |   2.0 |
-| Create a extraction model post-processing chain          |         |       |  0:09 |   0.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -541,6 +541,21 @@ logic in the code at present (i.e. without a two-phase approach) would
 mean we'd have to load the same models several times (or heavily
 rewrite existing code, resulting in a two-phase approach, anyway).
 
+*** COMPLETED Create a extraction model post-processing chain         :story:
+    CLOSED: [2019-03-05 Tue 09:33]
+    :LOGBOOK:
+    CLOCK: [2019-03-05 Tue 08:48]--[2019-03-05 Tue 09:35] =>  0:47
+    CLOCK: [2019-03-05 Tue 08:38]--[2019-03-05 Tue 08:47] =>  0:09
+    :END:
+
+We already have a few transforms that can go into this chain:
+
+- linting
+- writing
+- diffing
+
+Additional stories are in the backlog.
+
 *** STARTED Try to fix valgrind warning on =find_files=               :story:
     :LOGBOOK:
     CLOCK: [2019-02-27 Wed 17:25]--[2019-02-27 Wed 17:45] =>  0:20
@@ -640,19 +655,6 @@ useful to make sure the source code matches the latest version of the
 diagram.
 
 We could use something like the [[https://code.google.com/p/dtl-cpp/wiki/Tutorial][DTL library]].
-
-*** STARTED Create a extraction model post-processing chain           :story:
-    :LOGBOOK:
-    CLOCK: [2019-03-05 Tue 08:38]--[2019-03-05 Tue 08:47] =>  0:09
-    :END:
-
-We already have a few transforms that can go into this chain:
-
-- linting
-- writing
-- diffing
-
-Additional stories are in the backlog.
 
 *** Move coding to generation model transform into orchestration      :story:
 

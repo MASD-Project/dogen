@@ -183,6 +183,7 @@ context_factory::make_context(const coding::transforms::options& o,
     r.injection_context().tracer(tracer);
     r.coding_context().tracer(tracer);
     r.generation_context().tracer(tracer);
+    r.extraction_context().tracer(tracer);
 
     return r;
 }
