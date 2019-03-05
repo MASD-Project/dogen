@@ -50,7 +50,6 @@
 #include "masd.dogen.generation/types/meta_model/archetype_family_properties.hpp"
 #include "masd.dogen.generation/types/transforms/dynamic_transform_interface.hpp"
 #include "masd.dogen.generation/types/transforms/dynamic_transform_registrar.hpp"
-#include "masd.dogen.generation/types/transforms/model_post_processing_chain.hpp"
 #include "masd.dogen.generation/types/transforms/locator_properties_transform.hpp"
 #include "masd.dogen.generation/types/transforms/artefact_properties_transform.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"

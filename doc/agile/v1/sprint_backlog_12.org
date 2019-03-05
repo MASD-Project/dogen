@@ -12,27 +12,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-05 Tue 09:35]
-| <75>                                                     |         |       |       |       |
-| Headline                                                 | Time    |       |       |     % |
-|----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *38:34* |       |       | 100.0 |
-|----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 38:34   |       |       | 100.0 |
-| Active                                                   |         | 38:34 |       | 100.0 |
-| Edit release notes for previous sprint                   |         |       |  1:27 |   3.8 |
-| Sprint and product backlog grooming                      |         |       |  1:03 |   2.7 |
-| Implement text model generation chain in generation      |         |       |  3:45 |   9.7 |
-| Move generation model out of coding                      |         |       |  4:22 |  11.3 |
-| Rename endomodel to just model                           |         |       |  2:11 |   5.7 |
-| Remove exomodel remnants                                 |         |       |  0:03 |   0.1 |
-| Consider adding a dot graph of the transforms to probing |         |       |  1:47 |   4.6 |
-| Split annotations processing into two phases             |         |       |  3:10 |   8.2 |
-| Move injection processing out of coding                  |         |       | 18:39 |  48.4 |
-| Create a extraction model post-processing chain          |         |       |  0:56 |   2.4 |
-| Try to fix valgrind warning on =find_files=              |         |       |  0:20 |   0.9 |
-| Rename the =transform= method to =apply=                 |         |       |  0:05 |   0.2 |
-| Add basic "diff mode"                                    |         |       |  0:46 |   2.0 |
+#+CAPTION: Clock summary at [2019-03-05 Tue 10:10]
+| <75>                                                         |         |       |       |       |
+| Headline                                                     | Time    |       |       |     % |
+|--------------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                                 | *39:07* |       |       | 100.0 |
+|--------------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                      | 39:07   |       |       | 100.0 |
+| Active                                                       |         | 39:07 |       | 100.0 |
+| Edit release notes for previous sprint                       |         |       |  1:27 |   3.7 |
+| Sprint and product backlog grooming                          |         |       |  1:03 |   2.7 |
+| Implement text model generation chain in generation          |         |       |  3:45 |   9.6 |
+| Move generation model out of coding                          |         |       |  4:22 |  11.2 |
+| Rename endomodel to just model                               |         |       |  2:11 |   5.6 |
+| Remove exomodel remnants                                     |         |       |  0:03 |   0.1 |
+| Consider adding a dot graph of the transforms to probing     |         |       |  1:47 |   4.6 |
+| Split annotations processing into two phases                 |         |       |  3:10 |   8.1 |
+| Move injection processing out of coding                      |         |       | 18:39 |  47.7 |
+| Create a extraction model post-processing chain              |         |       |  0:56 |   2.4 |
+| Move coding to generation model transform into orchestration |         |       |  0:33 |   1.4 |
+| Try to fix valgrind warning on =find_files=                  |         |       |  0:20 |   0.9 |
+| Rename the =transform= method to =apply=                     |         |       |  0:05 |   0.2 |
+| Add basic "diff mode"                                        |         |       |  0:46 |   2.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -556,6 +557,14 @@ We already have a few transforms that can go into this chain:
 
 Additional stories are in the backlog.
 
+*** COMPLETED Move coding to generation model transform into orchestration :story:
+    CLOSED: [2019-03-05 Tue 10:09]
+    :LOGBOOK:
+    CLOCK: [2019-03-05 Tue 09:36]--[2019-03-05 Tue 10:09] =>  0:33
+    :END:
+
+There is no need to house this in generation.
+
 *** STARTED Try to fix valgrind warning on =find_files=               :story:
     :LOGBOOK:
     CLOCK: [2019-02-27 Wed 17:25]--[2019-02-27 Wed 17:45] =>  0:20
@@ -655,10 +664,6 @@ useful to make sure the source code matches the latest version of the
 diagram.
 
 We could use something like the [[https://code.google.com/p/dtl-cpp/wiki/Tutorial][DTL library]].
-
-*** Move coding to generation model transform into orchestration      :story:
-
-There is no need to house this in generation.
 
 *** Add DTL to vcpkg                                                  :story:
 
