@@ -33,11 +33,11 @@ std::ostream& operator<<(std::ostream& s, const diffing_style& v) {
     case diffing_style::invalid:
         attr = "\"invalid\"";
         break;
-    case diffing_style::minimal:
-        attr = "\"minimal\"";
+    case diffing_style::brief:
+        attr = "\"brief\"";
         break;
-    case diffing_style::unified_diff:
-        attr = "\"unified_diff\"";
+    case diffing_style::unified:
+        attr = "\"unified\"";
         break;
     default:
         throw std::invalid_argument("Invalid value for diffing_style");

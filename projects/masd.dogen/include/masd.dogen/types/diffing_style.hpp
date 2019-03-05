@@ -29,8 +29,8 @@ namespace masd::dogen {
 
 enum class diffing_style : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
-    minimal = 1, ///< Reports only if a file is different or not.
-    unified_diff = 2 ///< Produces unified diffs for each file that differs.
+    brief = 1, ///< Reports only if a file is different or not.
+    unified = 2 ///< Produces unified diffs for each file that differs.
 };
 
 }

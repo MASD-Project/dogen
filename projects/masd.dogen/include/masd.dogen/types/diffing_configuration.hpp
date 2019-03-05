@@ -45,7 +45,7 @@ public:
 public:
     diffing_configuration(
         const masd::dogen::diffing_style style,
-        const bool report_identical_files);
+        const bool report_unchanged_files);
 
 public:
     /**
@@ -60,8 +60,8 @@ public:
      * @brief If true, reports files that have not changed as well.
      */
     /**@{*/
-    bool report_identical_files() const;
-    diffing_configuration& report_identical_files(const bool v);
+    bool report_unchanged_files() const;
+    diffing_configuration& report_unchanged_files(const bool v);
     /**@}*/
 
 public:
@@ -76,7 +76,7 @@ public:
 
 private:
     masd::dogen::diffing_style style_;
-    bool report_identical_files_;
+    bool report_unchanged_files_;
 };
 
 }

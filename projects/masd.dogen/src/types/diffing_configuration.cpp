@@ -24,23 +24,23 @@ namespace masd::dogen {
 
 diffing_configuration::diffing_configuration()
     : style_(static_cast<masd::dogen::diffing_style>(0)),
-      report_identical_files_(static_cast<bool>(0)) { }
+      report_unchanged_files_(static_cast<bool>(0)) { }
 
 diffing_configuration::diffing_configuration(
     const masd::dogen::diffing_style style,
-    const bool report_identical_files)
+    const bool report_unchanged_files)
     : style_(style),
-      report_identical_files_(report_identical_files) { }
+      report_unchanged_files_(report_unchanged_files) { }
 
 void diffing_configuration::swap(diffing_configuration& other) noexcept {
     using std::swap;
     swap(style_, other.style_);
-    swap(report_identical_files_, other.report_identical_files_);
+    swap(report_unchanged_files_, other.report_unchanged_files_);
 }
 
 bool diffing_configuration::operator==(const diffing_configuration& rhs) const {
     return style_ == rhs.style_ &&
-        report_identical_files_ == rhs.report_identical_files_;
+        report_unchanged_files_ == rhs.report_unchanged_files_;
 }
 
 diffing_configuration& diffing_configuration::operator=(diffing_configuration other) {
@@ -58,12 +58,12 @@ diffing_configuration& diffing_configuration::style(const masd::dogen::diffing_s
     return *this;
 }
 
-bool diffing_configuration::report_identical_files() const {
-    return report_identical_files_;
+bool diffing_configuration::report_unchanged_files() const {
+    return report_unchanged_files_;
 }
 
-diffing_configuration& diffing_configuration::report_identical_files(const bool v) {
-    report_identical_files_ = v;
+diffing_configuration& diffing_configuration::report_unchanged_files(const bool v) {
+    report_unchanged_files_ = v;
     return *this;
 }
 

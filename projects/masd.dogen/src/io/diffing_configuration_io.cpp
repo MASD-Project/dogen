@@ -35,7 +35,7 @@ std::ostream& operator<<(std::ostream& s, const diffing_configuration& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::diffing_configuration\"" << ", "
       << "\"style\": " << v.style() << ", "
-      << "\"report_identical_files\": " << v.report_identical_files()
+      << "\"report_unchanged_files\": " << v.report_unchanged_files()
       << " }";
     return(s);
 }
