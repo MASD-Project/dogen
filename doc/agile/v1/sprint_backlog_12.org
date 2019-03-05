@@ -12,28 +12,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-05 Tue 10:10]
+#+CAPTION: Clock summary at [2019-03-05 Tue 15:19]
 | <75>                                                         |         |       |       |       |
 | Headline                                                     | Time    |       |       |     % |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                 | *39:07* |       |       | 100.0 |
+| *Total time*                                                 | *43:36* |       |       | 100.0 |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                      | 39:07   |       |       | 100.0 |
-| Active                                                       |         | 39:07 |       | 100.0 |
-| Edit release notes for previous sprint                       |         |       |  1:27 |   3.7 |
-| Sprint and product backlog grooming                          |         |       |  1:03 |   2.7 |
-| Implement text model generation chain in generation          |         |       |  3:45 |   9.6 |
-| Move generation model out of coding                          |         |       |  4:22 |  11.2 |
-| Rename endomodel to just model                               |         |       |  2:11 |   5.6 |
+| Stories                                                      | 43:36   |       |       | 100.0 |
+| Active                                                       |         | 43:36 |       | 100.0 |
+| Edit release notes for previous sprint                       |         |       |  1:27 |   3.3 |
+| Sprint and product backlog grooming                          |         |       |  1:03 |   2.4 |
+| Implement text model generation chain in generation          |         |       |  3:45 |   8.6 |
+| Move generation model out of coding                          |         |       |  4:22 |  10.0 |
+| Rename endomodel to just model                               |         |       |  2:11 |   5.0 |
 | Remove exomodel remnants                                     |         |       |  0:03 |   0.1 |
-| Consider adding a dot graph of the transforms to probing     |         |       |  1:47 |   4.6 |
-| Split annotations processing into two phases                 |         |       |  3:10 |   8.1 |
-| Move injection processing out of coding                      |         |       | 18:39 |  47.7 |
-| Create a extraction model post-processing chain              |         |       |  0:56 |   2.4 |
-| Move coding to generation model transform into orchestration |         |       |  0:33 |   1.4 |
-| Try to fix valgrind warning on =find_files=                  |         |       |  0:20 |   0.9 |
+| Consider adding a dot graph of the transforms to probing     |         |       |  1:47 |   4.1 |
+| Split annotations processing into two phases                 |         |       |  3:10 |   7.3 |
+| Move injection processing out of coding                      |         |       | 18:39 |  42.8 |
+| Create a extraction model post-processing chain              |         |       |  0:56 |   2.1 |
+| Move coding to generation model transform into orchestration |         |       |  0:33 |   1.3 |
+| Try to fix valgrind warning on =find_files=                  |         |       |  0:20 |   0.8 |
 | Rename the =transform= method to =apply=                     |         |       |  0:05 |   0.2 |
-| Add basic "diff mode"                                        |         |       |  0:46 |   2.0 |
+| Add basic "diff mode"                                        |         |       |  1:23 |   3.2 |
+| Add DTL to vcpkg                                             |         |       |  3:52 |   8.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -565,6 +566,37 @@ Additional stories are in the backlog.
 
 There is no need to house this in generation.
 
+*** COMPLETED Dogen's vcpkg export for OSX was created from master    :story:
+    CLOSED: [2019-03-05 Tue 14:20]
+
+*Rationale*: implemented as part of the DTL work.
+
+Problems:
+
+- we have built it from master instead of masd branch.
+- installing libodb et al. from master fails due to a config error. We
+  need to check that master has our fix. We need to check that the
+  config.h workaround works for OSX as well.
+- when building using the masd branch, we can't download ODB from git
+  due to a hash mismatch. This may be something to do with the git
+  version (2.7).
+
+*** COMPLETED Move top-level transforms into orchestration            :story:
+    CLOSED: [2019-03-05 Tue 14:25]
+
+- clear up the existing orchestration model We don't really know what
+  its current state is. Keep it as a backup as we may need to go back
+  to it.
+- copy the top-level chains into orchestration, into a well
+  defined namespace (say =dirty=). This must include the model to text
+  model and registration. Remove all of these types from coding. At
+  this point coding should only depend on injectors.
+- try implement interface based I/O instead of reading/writing
+  directly from the filesystem.
+- first move the model to text model transform into
+  =generation.cpp=. This means updating all of the formatters. Also,
+  use the external model, deleting all of the text models.
+
 *** STARTED Try to fix valgrind warning on =find_files=               :story:
     :LOGBOOK:
     CLOCK: [2019-02-27 Wed 17:25]--[2019-02-27 Wed 17:45] =>  0:20
@@ -596,6 +628,8 @@ we may break a lot of things with a "simple" tidy-up.
 
 *** STARTED Add basic "diff mode"                                     :story:
     :LOGBOOK:
+    CLOCK: [2019-03-05 Tue 15:07]--[2019-03-05 Tue 15:19] =>  0:12
+    CLOCK: [2019-03-05 Tue 11:16]--[2019-03-05 Tue 11:41] =>  0:25
     CLOCK: [2019-03-05 Tue 07:52]--[2019-03-05 Tue 08:38] =>  0:46
     :END:
 
@@ -665,28 +699,62 @@ diagram.
 
 We could use something like the [[https://code.google.com/p/dtl-cpp/wiki/Tutorial][DTL library]].
 
-*** Add DTL to vcpkg                                                  :story:
+*** STARTED Add DTL to vcpkg                                          :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-05 Tue 13:02]--[2019-03-05 Tue 15:06] =>  2:04
+    CLOCK: [2019-03-05 Tue 11:42]--[2019-03-05 Tue 12:26] =>  0:44
+    CLOCK: [2019-03-05 Tue 11:01]--[2019-03-05 Tue 11:15] =>  0:14
+    CLOCK: [2019-03-05 Tue 10:10]--[2019-03-05 Tue 11:00] =>  0:50
+    :END:
 
-DTL seems to be the easiest library to work with in terms of
-generating diffs. However, its not on vcpkg.
+dtl seems to be the easiest library to work with in terms of
+generating diffs. however, its not on vcpkg.
 
-Tasks:
-
-- add CMake support to DTL. Not strictly needed but seems like an easy
-  thing to do and will make vcpkg easier. It also means we can build
-  tests and examples to make sure it all works in isolation. Actually
+- add cmake support to dtl. not strictly needed but seems like an easy
+  thing to do and will make vcpkg easier. it also means we can build
+  tests and examples to make sure it all works in isolation. actually
   this was tried before and not accepted by the maintainer.
-- add DTL port.
+- add dtl port.
 
-Links:
+Notes:
 
-- [[https://github.com/google/diff-match-patch/tree/master/cpp][diff-match-patch]]: interesting diff library but requires QT.
-- [[https://github.com/Martinsos/edlib#usage-and-examples][edlib]]: interesting library but seems to be more for Levehnstein
-  diffs. Also not on vcpkg.
-- [[https://github.com/cubicdaiya/dtl/pull/2][Add cmake support]]: PR to add CMake support to DTL, not accepted by
-  the maintainer. See also [[https://github.com/chino540off/dtl][the repo]].
-- [[https://github.com/Microsoft/vcpkg/tree/master/ports/libodb][libodb]]: example of a project with a vcpkg specific CMake support.
-- [[https://stackoverflow.com/questions/13438547/linux-c-or-c-library-to-diff-and-patch-strings][Linux C or C++ library to diff and patch strings?]]
+- odb targets: =odb::libodb-sqlite=
+
+links:
+
+- [[https://github.com/google/diff-match-patch/tree/master/cpp][diff-match-patch]]: interesting diff library but requires qt.
+- [[https://github.com/martinsos/edlib#usage-and-examples][edlib]]: interesting library but seems to be more for levehnstein
+  diffs. also not on vcpkg.
+- [[https://github.com/cubicdaiya/dtl/pull/2][add cmake support]]: pr to add cmake support to dtl, not accepted by
+  the maintainer. see also [[https://github.com/chino540off/dtl][the repo]].
+- [[https://github.com/microsoft/vcpkg/tree/master/ports/libodb][libodb]]: example of a project with a vcpkg specific cmake support.
+- [[https://stackoverflow.com/questions/13438547/linux-c-or-c-library-to-diff-and-patch-strings][linux c or c++ library to diff and patch strings?]]
+
+*** Remove coding options                                             :story:
+
+By now we should have moved away from using most properties in coding
+options. We need to get rid of this class because its making the logic
+confusing.
+
+- delete unused properties.
+- move remaining properties to the context.
+
+In fact this is all one big hack at present. We started off by having
+a single context for all activities, but in truth there are different
+requirements. For conversion we just need the injection context. We
+need to have different make functions in the factory for each use
+case. Each function should take in the API configuration itself, plus
+any additional (i.e. hacked) parameters.
+
+Notes:
+
+- transform options and formatting repository are not used in coding.
+
+*** Update dogen's windows vcpkg export                               :story:
+
+- ensure we built it from masd and not master
+- check master builds libodb 2.4
+- build libodb 2.5 from masd and re-export.
 
 *** Move all formatters in extraction to generation                   :story:
 
@@ -861,18 +929,6 @@ appears to be that we do something in the generation path that is not
 done for weaving (and presumably for conversion). The hack was put
 back in for now.
 
-*** Dogen's vcpkg export for OSX was created from master              :story:
-
-Problems:
-
-- we have built it from master instead of masd branch.
-- installing libodb et al. from master fails due to a config error. We
-  need to check that master has our fix. We need to check that the
-  config.h workaround works for OSX as well.
-- when building using the masd branch, we can't download ODB from git
-  due to a hash mismatch. This may be something to do with the git
-  version (2.7).
-
 *** Fix clang-cl warnings                                             :story:
 
 We also have a number of warnings left to clean up, all related to
@@ -894,20 +950,12 @@ Notes:
   messages slightly different from MSVC]]. Clang [[http://lists.llvm.org/pipermail/cfe-dev/2019-February/061339.html][have patched]] the diffs
   now.
 
-*** Move top-level transforms into orchestration                      :story:
+*** Add option for northwind tests                                    :story:
 
-- clear up the existing orchestration model We don't really know what
-  its current state is. Keep it as a backup as we may need to go back
-  to it.
-- copy the top-level chains into orchestration, into a well
-  defined namespace (say =dirty=). This must include the model to text
-  model and registration. Remove all of these types from coding. At
-  this point coding should only depend on injectors.
-- try implement interface based I/O instead of reading/writing
-  directly from the filesystem.
-- first move the model to text model transform into
-  =generation.cpp=. This means updating all of the formatters. Also,
-  use the external model, deleting all of the text models.
+  At present, when we detect ODB and associated libraries, we build and
+  run the northwind tests. However, not all build agents have postgres
+  installed. We need an option that can be used to stop the inclusion of
+  the northwind tests - or ideally, to build the tests but not run it.
 
 *** Implement configuration validator                                 :story:
 
@@ -1033,19 +1081,6 @@ Problems:
 
 - tailor generation results in files with the wrong name (=dia.json=)
 - input models were copied into test data.
-
-*** Add option for northwind tests                                    :story:
-
-  At present, when we detect ODB and associated libraries, we build and
-  run the northwind tests. However, not all build agents have postgres
-  installed. We need an option that can be used to stop the inclusion of
-  the northwind tests - or ideally, to build the tests but not run it.
-
-*** Update dogen's windows vcpkg export                               :story:
-
-- ensure we built it from masd and not master
-- check master builds libodb 2.4
-- build libodb 2.5 from masd and re-export.
 
 *** Move generation element properties back into formattables         :story:
 
@@ -1845,3 +1880,24 @@ story is about.
 
 Figure out if element configuration is context or if it is better
 expressed as a stand alone formatting parameter.
+*** CANCELLED Build boost for MinGW                                   :story:
+    CLOSED: [2019-03-05 Tue 14:23]
+
+*Rationale*: we will not support any additional compilers in CI as the
+ones we have are already keeping us busy.
+
+We do not have a MinGW build on windows. This could probably be easily
+added. Steps:
+
+- download and install =mingw= on the windows VM.
+- create a vcpkg package using =mingw=, and upload it to dropbox.
+- setup a new build on appveyor on the build matrix for mingw.
+
+Notes:
+
+- In order to add support for appveyor we need to fix the path:
+
+:  # Workaround for CMake not wanting sh.exe on PATH for MinGW
+:  - ps: PATH=%PATH%:C:\Program Files\Git\usr\bin;=%
+: before_build:
+:  - ps: set PATH=C:\MinGW\bin;%PATH%
