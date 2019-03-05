@@ -902,7 +902,7 @@
         <dia:point val="-25,-12"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-25.05,-12.05;2.13,16.95"/>
+        <dia:rectangle val="-25.05,-12.05;2.13,15.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -914,7 +914,7 @@
         <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="28.900000000000002"/>
+        <dia:real val="27.300000000000004"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -5136,13 +5136,13 @@ and, if so, ignore it.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O40">
       <dia:attribute name="obj_pos">
-        <dia:point val="-25,15"/>
+        <dia:point val="-24,19"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-25.05,14.95;-16.365,18.05"/>
+        <dia:rectangle val="-24.05,18.95;-15.365,22.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-25,15"/>
+        <dia:point val="-24,19"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.5849999999999991"/>
