@@ -12,25 +12,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-04 Mon 18:31]
+#+CAPTION: Clock summary at [2019-03-05 Tue 08:47]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *36:42* |       |       | 100.0 |
+| *Total time*                                             | *37:47* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 36:42   |       |       | 100.0 |
-| Active                                                   |         | 36:42 |       | 100.0 |
-| Edit release notes for previous sprint                   |         |       |  1:27 |   4.0 |
-| Sprint and product backlog grooming                      |         |       |  0:53 |   2.4 |
-| Implement text model generation chain in generation      |         |       |  3:45 |  10.2 |
-| Move generation model out of coding                      |         |       |  4:22 |  11.9 |
-| Rename endomodel to just model                           |         |       |  2:11 |   5.9 |
+| Stories                                                  | 37:47   |       |       | 100.0 |
+| Active                                                   |         | 37:47 |       | 100.0 |
+| Edit release notes for previous sprint                   |         |       |  1:27 |   3.8 |
+| Sprint and product backlog grooming                      |         |       |  1:03 |   2.8 |
+| Implement text model generation chain in generation      |         |       |  3:45 |   9.9 |
+| Move generation model out of coding                      |         |       |  4:22 |  11.6 |
+| Rename endomodel to just model                           |         |       |  2:11 |   5.8 |
 | Remove exomodel remnants                                 |         |       |  0:03 |   0.1 |
-| Consider adding a dot graph of the transforms to probing |         |       |  1:47 |   4.9 |
-| Split annotations processing into two phases             |         |       |  3:10 |   8.6 |
-| Move injection processing out of coding                  |         |       | 18:39 |  50.8 |
+| Consider adding a dot graph of the transforms to probing |         |       |  1:47 |   4.7 |
+| Split annotations processing into two phases             |         |       |  3:10 |   8.4 |
+| Move injection processing out of coding                  |         |       | 18:39 |  49.4 |
 | Try to fix valgrind warning on =find_files=              |         |       |  0:20 |   0.9 |
 | Rename the =transform= method to =apply=                 |         |       |  0:05 |   0.2 |
+| Add basic "diff mode"                                    |         |       |  0:46 |   2.0 |
+| Create a extraction model post-processing chain          |         |       |  0:09 |   0.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -639,7 +641,10 @@ diagram.
 
 We could use something like the [[https://code.google.com/p/dtl-cpp/wiki/Tutorial][DTL library]].
 
-*** Create a extraction model post-processing chain                   :story:
+*** STARTED Create a extraction model post-processing chain           :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-05 Tue 08:38]--[2019-03-05 Tue 08:47] =>  0:09
+    :END:
 
 We already have a few transforms that can go into this chain:
 
@@ -648,6 +653,10 @@ We already have a few transforms that can go into this chain:
 - diffing
 
 Additional stories are in the backlog.
+
+*** Move coding to generation model transform into orchestration      :story:
+
+There is no need to house this in generation.
 
 *** Add DTL to vcpkg                                                  :story:
 
@@ -734,10 +743,6 @@ of two approaches:
   an area at the top for globals etc.
 - stubs only, were we generate the original content but then users
   subsequently manage the files.
-
-*** Move coding to generation model transform into orchestration      :story:
-
-There is no need to house this in generation.
 
 *** Add warning for unused references                                 :story:
 

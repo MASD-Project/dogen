@@ -65,12 +65,16 @@
 #include "masd.dogen.extraction/types/cpp/header_guard_formatter.hpp"
 #include "masd.dogen.extraction/types/csharp/namespace_formatter.hpp"
 #include "masd.dogen.extraction/types/csharp/boilerplate_formatter.hpp"
+#include "masd.dogen.extraction/types/transforms/diffing_transform.hpp"
+#include "masd.dogen.extraction/types/transforms/linting_transform.hpp"
+#include "masd.dogen.extraction/types/transforms/writing_transform.hpp"
 #include "masd.dogen.extraction/types/decoration_properties_factory.hpp"
 #include "masd.dogen.extraction/types/code_generation_marker_factory.hpp"
 #include "masd.dogen.extraction/types/cpp/scoped_namespace_formatter.hpp"
 #include "masd.dogen.extraction/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "masd.dogen.extraction/types/csharp/scoped_namespace_formatter.hpp"
 #include "masd.dogen.extraction/types/helpers/artefact_writer_interface.hpp"
+#include "masd.dogen.extraction/types/transforms/model_generation_chain.hpp"
 #include "masd.dogen.extraction/types/csharp/scoped_boilerplate_formatter.hpp"
 
 #endif
