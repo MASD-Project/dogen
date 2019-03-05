@@ -25,24 +25,14 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.extraction/types/meta_model/model.hpp"
+#include "masd.dogen.extraction/types/transforms/context.hpp"
 
 namespace masd::dogen::extraction::transforms {
 
 class model_generation_chain final {
 public:
-    model_generation_chain() = default;
-    model_generation_chain(const model_generation_chain&) = default;
-    model_generation_chain(model_generation_chain&&) = default;
-    ~model_generation_chain() = default;
-    model_generation_chain& operator=(const model_generation_chain&) = default;
-
-public:
-    bool operator==(const model_generation_chain& rhs) const;
-    bool operator!=(const model_generation_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const context& ctx, meta_model::model& m);
 };
 
 }

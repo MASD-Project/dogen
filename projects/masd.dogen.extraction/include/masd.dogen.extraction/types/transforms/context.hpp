@@ -18,21 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_LINTING_TRANSFORM_HPP
-#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_LINTING_TRANSFORM_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_CONTEXT_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_CONTEXT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.extraction/types/transforms/context.hpp"
-#include "masd.dogen.extraction/types/meta_model/model.hpp"
+#include <algorithm>
+#include <boost/shared_ptr.hpp>
+#include "masd.dogen.tracing/types/tracer_fwd.hpp"
 
 namespace masd::dogen::extraction::transforms {
 
-class linting_transform final {
+class context final {
 public:
-    static void transform(const context& ctx, meta_model::model& m);
+    context() = default;
+    context(const context&) = default;
+    context(context&&) = default;
+    ~context() = default;
+
+public:
+    explicit context(const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer);
+
+public:
+    const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer() const;
+    boost::shared_ptr<masd::dogen::tracing::tracer>& tracer();
+    void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v);
+    void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>&& v);
+
+private:
+    boost::shared_ptr<masd::dogen::tracing::tracer> tracer_;
 };
 
 }

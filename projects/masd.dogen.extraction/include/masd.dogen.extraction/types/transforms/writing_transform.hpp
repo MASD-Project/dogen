@@ -25,24 +25,14 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.extraction/types/meta_model/model.hpp"
+#include "masd.dogen.extraction/types/transforms/context.hpp"
 
 namespace masd::dogen::extraction::transforms {
 
 class writing_transform final {
 public:
-    writing_transform() = default;
-    writing_transform(const writing_transform&) = default;
-    writing_transform(writing_transform&&) = default;
-    ~writing_transform() = default;
-    writing_transform& operator=(const writing_transform&) = default;
-
-public:
-    bool operator==(const writing_transform& rhs) const;
-    bool operator!=(const writing_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const context& ctx, meta_model::model& m);
 };
 
 }

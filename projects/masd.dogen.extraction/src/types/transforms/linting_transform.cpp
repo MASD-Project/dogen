@@ -18,12 +18,40 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/list_io.hpp"
+#include "masd.dogen.utility/types/filesystem/path.hpp"
+#include "masd.dogen.utility/types/filesystem/file.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.extraction/types/helpers/file_linter.hpp"
 #include "masd.dogen.extraction/types/transforms/linting_transform.hpp"
+
+namespace {
+
+const std::string transform_id("extraction.transforms.linting_transform");
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace masd::dogen::extraction::transforms {
 
-bool linting_transform::operator==(const linting_transform& /*rhs*/) const {
-    return true;
+void linting_transform::transform(const context& ctx, meta_model::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "linting transform",
+        transform_id, m.name(), *ctx.tracer());
+
+    /*
+     * If we're not going to delete the files, don't bother linting..
+     */
+    if (!m.delete_extra_files())
+        return;
+
+    const auto lint(helpers::file_linter::lint(m));
+    if (!lint.empty())
+        utility::filesystem::remove(lint);
+
+    stp.end_transform(lint);
 }
 
 }

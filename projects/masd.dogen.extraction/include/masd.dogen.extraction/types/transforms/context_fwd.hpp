@@ -18,22 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_LINTING_TRANSFORM_HPP
-#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_LINTING_TRANSFORM_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_CONTEXT_FWD_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_CONTEXT_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.extraction/types/transforms/context.hpp"
-#include "masd.dogen.extraction/types/meta_model/model.hpp"
-
 namespace masd::dogen::extraction::transforms {
 
-class linting_transform final {
-public:
-    static void transform(const context& ctx, meta_model::model& m);
-};
+class context;
 
 }
 
