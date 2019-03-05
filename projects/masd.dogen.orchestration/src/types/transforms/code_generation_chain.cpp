@@ -21,12 +21,13 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.injection/types/transforms/model_set_production_chain.hpp"
-#include "masd.dogen.orchestration/types/transforms/injection_model_set_to_coding_model_set_transform.hpp"
 #include "masd.dogen.coding/types/transforms/model_production_chain.hpp"
 #include "masd.dogen.generation/types/transforms/model_generation_chain.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"
 #include "masd.dogen.extraction/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.orchestration/types/transforms/injection_model_set_to_coding_model_set_transform.hpp"
+#include "masd.dogen.orchestration/types/transforms/coding_model_to_generation_model_transform.hpp"
 #include "masd.dogen.orchestration/types/transforms/context.hpp"
 #include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
 
@@ -65,8 +66,8 @@ void code_generation_chain::transform(const context& ctx) {
     /*
      * Convert the injection model set into a coding model set.
      */
-    using inj_transform = injection_model_set_to_coding_model_set_transform;
-    const auto cmset(inj_transform::transform(ctx.coding_context(), ims));
+    const auto cmset(injection_model_set_to_coding_model_set_transform::
+        transform(ctx.coding_context(), ims));
 
     /*
      * Run all the coding transforms against the model set.
@@ -77,9 +78,15 @@ void code_generation_chain::transform(const context& ctx) {
     /*
      * Obtain the generation models.
      */
-    const auto gms(
-        generation::transforms::model_generation_chain::transform(
-            ctx.generation_context(), cms));
+
+    auto gms(transforms::coding_model_to_generation_model_transform::
+        transform(ctx.generation_context(), cms));
+
+    /*
+     * Run all the generation transforms agains the generation models.
+     */
+    generation::transforms::model_generation_chain::
+        transform(ctx.generation_context(), gms);
 
     /*
      * Obtain the extraction models.
@@ -88,7 +95,9 @@ void code_generation_chain::transform(const context& ctx) {
     const auto em(model_to_extraction_model_chain::transform(
             ctx.generation_context(), gms));
 
-
+    /*
+     * Runn all of the extraction transforms against the extraction models.
+     */
     extraction::transforms::model_generation_chain::transform(
         ctx.extraction_context(), em);
 

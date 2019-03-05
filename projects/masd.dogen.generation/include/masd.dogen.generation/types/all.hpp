@@ -59,7 +59,6 @@
 #include "masd.dogen.generation/types/meta_model/local_archetype_location_properties.hpp"
 #include "masd.dogen.generation/types/meta_model/global_archetype_location_properties.hpp"
 #include "masd.dogen.generation/types/transforms/archetype_location_properties_transform.hpp"
-#include "masd.dogen.generation/types/transforms/coding_model_to_generation_model_transform.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_interface.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
 

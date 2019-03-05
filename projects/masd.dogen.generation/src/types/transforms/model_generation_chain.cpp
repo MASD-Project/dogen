@@ -21,7 +21,6 @@
 #include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.generation/io/meta_model/model_io.hpp"
-#include "masd.dogen.generation/types/transforms/coding_model_to_generation_model_transform.hpp"
 #include "masd.dogen.generation/types/transforms/model_post_processing_chain.hpp"
 #include "masd.dogen.generation/types/transforms/model_generation_chain.hpp"
 
@@ -35,25 +34,20 @@ static logger lg(logger_factory(transform_id));
 
 }
 
-
 namespace masd::dogen::generation::transforms {
 
-std::list<meta_model::model>
-model_generation_chain::transform(const context& ctx,
-    const std::list<coding::meta_model::model>& ms) {
+void model_generation_chain::transform(const context& ctx,
+    std::list<meta_model::model>& gms) {
     tracing::scoped_chain_tracer stp(lg, "model generation chain",
         transform_id, *ctx.tracer());
-
-    auto r(coding_model_to_generation_model_transform::transform(ctx, ms));
 
     /*
      * Apply all of the post-processing transforms to the model.
      */
-    for (auto& m : r)
+    for (auto& m : gms)
         model_post_processing_chain::transform(ctx, m);
 
-    stp.end_chain(r);
-    return r;
+    stp.end_chain(gms);
 }
 
 }

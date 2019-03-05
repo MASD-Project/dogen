@@ -26,7 +26,6 @@
 #endif
 
 #include <list>
-#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
 
@@ -34,9 +33,8 @@ namespace masd::dogen::generation::transforms {
 
 class model_generation_chain final {
 public:
-    static std::list<meta_model::model>
-    transform(const context& ctx,
-        const std::list<coding::meta_model::model>& ms);
+    static void transform(const context& ctx,
+        std::list<meta_model::model>& ms);
 };
 
 }
