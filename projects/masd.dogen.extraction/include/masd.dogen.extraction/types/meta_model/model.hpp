@@ -47,6 +47,8 @@ public:
 
 public:
     model(
+        const std::string& name,
+        const std::string& language,
         const std::list<masd::dogen::extraction::meta_model::artefact>& artefacts,
         const std::list<boost::filesystem::path>& managed_directories,
         const bool force_write,
@@ -55,6 +57,16 @@ public:
         const boost::filesystem::path& cpp_headers_output_directory);
 
 public:
+    const std::string& name() const;
+    std::string& name();
+    void name(const std::string& v);
+    void name(const std::string&& v);
+
+    const std::string& language() const;
+    std::string& language();
+    void language(const std::string& v);
+    void language(const std::string&& v);
+
     const std::list<masd::dogen::extraction::meta_model::artefact>& artefacts() const;
     std::list<masd::dogen::extraction::meta_model::artefact>& artefacts();
     void artefacts(const std::list<masd::dogen::extraction::meta_model::artefact>& v);
@@ -114,6 +126,8 @@ public:
     model& operator=(model other);
 
 private:
+    std::string name_;
+    std::string language_;
     std::list<masd::dogen::extraction::meta_model::artefact> artefacts_;
     std::list<boost::filesystem::path> managed_directories_;
     bool force_write_;

@@ -27,7 +27,9 @@ model::model()
       delete_extra_files_(static_cast<bool>(0)) { }
 
 model::model(model&& rhs)
-    : artefacts_(std::move(rhs.artefacts_)),
+    : name_(std::move(rhs.name_)),
+      language_(std::move(rhs.language_)),
+      artefacts_(std::move(rhs.artefacts_)),
       managed_directories_(std::move(rhs.managed_directories_)),
       force_write_(std::move(rhs.force_write_)),
       delete_extra_files_(std::move(rhs.delete_extra_files_)),
@@ -35,13 +37,17 @@ model::model(model&& rhs)
       cpp_headers_output_directory_(std::move(rhs.cpp_headers_output_directory_)) { }
 
 model::model(
+    const std::string& name,
+    const std::string& language,
     const std::list<masd::dogen::extraction::meta_model::artefact>& artefacts,
     const std::list<boost::filesystem::path>& managed_directories,
     const bool force_write,
     const bool delete_extra_files,
     const std::vector<std::string>& ignore_files_matching_regex,
     const boost::filesystem::path& cpp_headers_output_directory)
-    : artefacts_(artefacts),
+    : name_(name),
+      language_(language),
+      artefacts_(artefacts),
       managed_directories_(managed_directories),
       force_write_(force_write),
       delete_extra_files_(delete_extra_files),
@@ -50,6 +56,8 @@ model::model(
 
 void model::swap(model& other) noexcept {
     using std::swap;
+    swap(name_, other.name_);
+    swap(language_, other.language_);
     swap(artefacts_, other.artefacts_);
     swap(managed_directories_, other.managed_directories_);
     swap(force_write_, other.force_write_);
@@ -59,7 +67,9 @@ void model::swap(model& other) noexcept {
 }
 
 bool model::operator==(const model& rhs) const {
-    return artefacts_ == rhs.artefacts_ &&
+    return name_ == rhs.name_ &&
+        language_ == rhs.language_ &&
+        artefacts_ == rhs.artefacts_ &&
         managed_directories_ == rhs.managed_directories_ &&
         force_write_ == rhs.force_write_ &&
         delete_extra_files_ == rhs.delete_extra_files_ &&
@@ -71,6 +81,38 @@ model& model::operator=(model other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const std::string& model::name() const {
+    return name_;
+}
+
+std::string& model::name() {
+    return name_;
+}
+
+void model::name(const std::string& v) {
+    name_ = v;
+}
+
+void model::name(const std::string&& v) {
+    name_ = std::move(v);
+}
+
+const std::string& model::language() const {
+    return language_;
+}
+
+std::string& model::language() {
+    return language_;
+}
+
+void model::language(const std::string& v) {
+    language_ = v;
+}
+
+void model::language(const std::string&& v) {
+    language_ = std::move(v);
 }
 
 const std::list<masd::dogen::extraction::meta_model::artefact>& model::artefacts() const {

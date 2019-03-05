@@ -24,6 +24,14 @@
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/artefact_io.hpp"
 
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::extraction::meta_model::artefact>& v) {
@@ -52,14 +60,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<boost::filesyst
 
 }
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
-
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>& v) {
@@ -85,6 +85,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
 
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::extraction::meta_model::model\"" << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"language\": " << "\"" << tidy_up_string(v.language()) << "\"" << ", "
       << "\"artefacts\": " << v.artefacts() << ", "
       << "\"managed_directories\": " << v.managed_directories() << ", "
       << "\"force_write\": " << v.force_write() << ", "
