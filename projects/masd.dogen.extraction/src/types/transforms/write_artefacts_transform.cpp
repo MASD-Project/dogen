@@ -18,10 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/filesystem.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"
-#include "masd.dogen.extraction/types/helpers/filesystem_writer.hpp"
+#include "masd.dogen.extraction/io/meta_model/operation_type_io.hpp"
 #include "masd.dogen.extraction/types/transforms/write_artefacts_transform.hpp"
 
 namespace {
@@ -32,25 +33,63 @@ const std::string transform_id(
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
+const std::string using_dir_message("Using directory: ");
+const std::string created_dir_message("Created directory: ");
+
 }
 
 namespace masd::dogen::extraction::transforms {
+
+void write_artefacts_transform::create_directories(
+    const boost::filesystem::path& file_path) {
+    const auto dir(file_path.parent_path());
+    if (dir.empty() || dir.generic_string() == "/")
+        return;
+
+    using boost::filesystem::create_directories;
+    const bool created(create_directories(dir));
+    BOOST_LOG_SEV(lg, trace) << (created ? created_dir_message :
+        using_dir_message) << dir.generic_string();
+}
 
 void write_artefacts_transform::
 transform(const context& ctx, const meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "writting transform",
         transform_id, m.name(), *ctx.tracer(), m);
 
+    /*
+     * If we don't have any artefacts then we're done.
+     */
     if (m.artefacts().empty()) {
-        BOOST_LOG_SEV(lg, warn) << "No files were generated, so no output.";
+        BOOST_LOG_SEV(lg, warn) << "No artefacts were generated.";
         return;
     }
 
-    const auto w = helpers::filesystem_writer();
-    if (m.force_write())
-        w.force_write(m.artefacts());
-    else
-        w.write(m.artefacts());
+    /*
+     * Write each artefact that has been marked with a "write"
+     * operation to the filesystem. Ignore all other artefacts.
+     */
+    for (const auto& a : m.artefacts()) {
+        const auto gs(a.path().generic_string());
+        BOOST_LOG_SEV(lg, debug) << "Writing file: " << gs;
+
+        if (gs.empty()) {
+            // FIXME: throw
+            BOOST_LOG_SEV(lg, error) << "Empty file name supplied.";
+            return;
+        }
+
+        using extraction::meta_model::operation_type;
+        const auto ot(a.operation().type());
+        if (ot != operation_type::write) {
+            BOOST_LOG_SEV(lg, error) << "Ignoring operation: " << ot;
+            continue;
+        }
+
+        create_directories(a.path());
+        using masd::dogen::utility::filesystem::write_file_content;
+        write_file_content(a.path(), a.content());
+    }
 
     stp.end_transform(m);
 }

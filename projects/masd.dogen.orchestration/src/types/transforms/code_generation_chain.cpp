@@ -89,7 +89,7 @@ void code_generation_chain::transform(const context& ctx,
      * Obtain the extraction models.
      */
     using generation::transforms::model_to_extraction_model_chain;
-    const auto em(model_to_extraction_model_chain::transform(
+    auto em(model_to_extraction_model_chain::transform(
             ctx.generation_context(), gms));
 
     /*

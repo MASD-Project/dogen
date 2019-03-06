@@ -31,6 +31,14 @@
 namespace masd::dogen::extraction::transforms {
 
 class write_artefacts_transform final {
+private:
+    /**
+     * @brief Creates directories to house the file, if they do not
+     * yet exist.
+     */
+    static void
+    create_directories(const boost::filesystem::path& file_path);
+
 public:
     static void transform(const context& ctx, const meta_model::model& m);
 };

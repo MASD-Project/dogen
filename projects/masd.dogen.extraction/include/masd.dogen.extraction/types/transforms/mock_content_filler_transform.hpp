@@ -25,24 +25,18 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.extraction/types/transforms/context.hpp"
+#include "masd.dogen.extraction/types/meta_model/model.hpp"
 
 namespace masd::dogen::extraction::transforms {
 
+/**
+ * @brief Handles the (admitedly hacked) case where we generate empty
+ * artefacts which cause linker warnings.
+ */
 class mock_content_filler_transform final {
 public:
-    mock_content_filler_transform() = default;
-    mock_content_filler_transform(const mock_content_filler_transform&) = default;
-    mock_content_filler_transform(mock_content_filler_transform&&) = default;
-    ~mock_content_filler_transform() = default;
-    mock_content_filler_transform& operator=(const mock_content_filler_transform&) = default;
-
-public:
-    bool operator==(const mock_content_filler_transform& rhs) const;
-    bool operator!=(const mock_content_filler_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const context& ctx, meta_model::model& m);
 };
 
 }

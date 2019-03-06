@@ -14525,7 +14525,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:point val="-39,47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.05,46.95;-30.365,55.45"/>
+        <dia:rectangle val="-39.05,46.95;-30.365,56.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-39,47"/>
@@ -14534,7 +14534,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.4000000000000004"/>
+        <dia:real val="9.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#operation_reason#</dia:string>
@@ -14764,7 +14764,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#lint#</dia:string>
+            <dia:string>#unexpected#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -14774,6 +14774,29 @@ only be written to the filesystem if it does not exist.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Artefact represents an unexpected file in project.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#ignore_unexpected#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#File is unexpected but the user asked us to ignore it.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -15013,19 +15036,19 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:point val="23,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="22.95,21.95;41.3425,25.65"/>
+        <dia:rectangle val="22.95,21.95;37.795,25.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="23,22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.2925"/>
+        <dia:real val="14.744999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#determine_operation_reason_transform#</dia:string>
+        <dia:string>#operation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>
@@ -15369,7 +15392,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:point val="24.59,32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.84,25.55;32.3463,33.6"/>
+        <dia:rectangle val="23.84,25.55;30.5725,33.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15377,8 +15400,8 @@ only be written to the filesystem if it does not exist.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="24.59,32"/>
         <dia:point val="24.59,29"/>
-        <dia:point val="32.1463,29"/>
-        <dia:point val="32.1463,25.6"/>
+        <dia:point val="30.3725,29"/>
+        <dia:point val="30.3725,25.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -16227,7 +16250,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#ffdab9"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>

@@ -18,12 +18,40 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/filesystem/file.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.extraction/io/meta_model/model_io.hpp"
 #include "masd.dogen.extraction/types/transforms/remove_files_transform.hpp"
+
+namespace {
+
+const std::string transform_id("extraction.transforms.remove_files_transform");
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace masd::dogen::extraction::transforms {
 
-bool remove_files_transform::operator==(const remove_files_transform& /*rhs*/) const {
-    return true;
+void remove_files_transform::
+transform(const context& ctx, const meta_model::model& m) {
+    tracing::scoped_transform_tracer stp(lg,
+        "remove files transform", transform_id, m.name(), *ctx.tracer());
+
+    std::list<boost::filesystem::path> unexpected;
+    for (const auto& a : m.artefacts()) {
+        using extraction::meta_model::operation_type;
+        if (a.operation().type() == operation_type::remove)
+            unexpected.push_back(a.path());
+    }
+
+    if (unexpected.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "No files found to remove.";
+        return;
+    }
+    utility::filesystem::remove(unexpected);
 }
 
 }

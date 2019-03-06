@@ -51,8 +51,11 @@ std::ostream& operator<<(std::ostream& s, const operation_reason& v) {
     case operation_reason::force_write:
         attr = "\"force_write\"";
         break;
-    case operation_reason::lint:
-        attr = "\"lint\"";
+    case operation_reason::unexpected:
+        attr = "\"unexpected\"";
+        break;
+    case operation_reason::ignore_unexpected:
+        attr = "\"ignore_unexpected\"";
         break;
     default:
         throw std::invalid_argument("Invalid value for operation_reason");

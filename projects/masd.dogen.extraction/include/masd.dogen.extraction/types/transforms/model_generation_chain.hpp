@@ -32,7 +32,7 @@ namespace masd::dogen::extraction::transforms {
 
 class model_generation_chain final {
 public:
-    static void transform(const context& ctx, const meta_model::model& m);
+    static void transform(const context& ctx, meta_model::model& m);
 };
 
 }

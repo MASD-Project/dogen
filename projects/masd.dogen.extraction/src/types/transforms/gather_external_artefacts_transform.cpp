@@ -23,6 +23,7 @@
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.extraction/io/meta_model/model_io.hpp"
 #include "masd.dogen.extraction/io/helpers/files_by_status_io.hpp"
 #include "masd.dogen.extraction/types/helpers/file_status_collector.hpp"
 #include "masd.dogen.extraction/types/transforms/gather_external_artefacts_transform.hpp"
@@ -40,20 +41,50 @@ auto lg(logger_factory(transform_id));
 namespace masd::dogen::extraction::transforms {
 
 void gather_external_artefacts_transform::
-transform(const context& ctx, const meta_model::model& m) {
+transform(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
-        "gatehr external artefacts transform",
-        transform_id, m.name(), *ctx.tracer());
+        "gather external artefacts transform", transform_id, m.name(),
+        *ctx.tracer(), m);
 
     /*
-     * If we're not going to delete the files, don't bother linting..
+     * First, collect all files with a status worth looking at. If
+     * nothing turns up, we're done.
      */
-    if (!m.delete_extra_files())
-        return;
-
     const auto fbs(helpers::file_status_collector::collect(m));
-    if (!fbs.unexpected().empty())
-        utility::filesystem::remove(fbs.unexpected());
+    if (fbs.unexpected().empty() && fbs.ignored().empty()) {
+        BOOST_LOG_SEV(lg, debug) << "No files found.";
+        return;
+    }
+
+    /*
+     * Now, for each file, generate artefacts with the appropriate
+     * operations and add them to the model.
+     */
+    for (const auto& f : fbs.ignored()) {
+        meta_model::artefact a;
+        a.path(f);
+
+        using meta_model::operation_type;
+        a.operation().type(operation_type::ignore);
+
+        using meta_model::operation_reason;
+        a.operation().reason(operation_reason::ignore_unexpected);
+
+        m.artefacts().push_back(a);
+    }
+
+    for (const auto& f : fbs.unexpected()) {
+        meta_model::artefact a;
+        a.path(f);
+
+        using meta_model::operation_type;
+        a.operation().type(operation_type::remove);
+
+        using meta_model::operation_reason;
+        a.operation().reason(operation_reason::unexpected);
+
+        m.artefacts().push_back(a);
+    }
 
     stp.end_transform(fbs);
 }

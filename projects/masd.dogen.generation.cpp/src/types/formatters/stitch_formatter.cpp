@@ -75,12 +75,9 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
         r.overwrite(a.new_artefact_properties().overwrite());
 
         extraction::meta_model::operation op;
-        using extraction::meta_model::operation_type;
-        using extraction::meta_model::operation_reason;
-        if (r.overwrite())
-            op.type(operation_type::create_only);
-        else
-            op.type(operation_type::write);
+        using ot = extraction::meta_model::operation_type;
+        op.type(r.overwrite() ? ot::write : ot::create_only);
+        r.operation(op);
 
         return r;
     }
@@ -92,12 +89,9 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
     r.overwrite(a.new_artefact_properties().overwrite());
 
     extraction::meta_model::operation op;
-    using extraction::meta_model::operation_type;
-    using extraction::meta_model::operation_reason;
-    if (r.overwrite())
-        op.type(operation_type::create_only);
-    else
-        op.type(operation_type::write);
+    using ot = extraction::meta_model::operation_type;
+    op.type(r.overwrite() ? ot::write : ot::create_only);
+    r.operation(op);
 
     r.dependencies().push_back(stitch_template);
     return r;

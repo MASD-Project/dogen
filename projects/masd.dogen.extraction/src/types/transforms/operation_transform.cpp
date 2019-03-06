@@ -31,12 +31,12 @@
 #include "masd.dogen.extraction/io/helpers/files_by_status_io.hpp"
 #include "masd.dogen.extraction/types/helpers/file_status_collector.hpp"
 #include "masd.dogen.extraction/types/transforms/transform_exception.hpp"
-#include "masd.dogen.extraction/types/transforms/determine_operation_reason_transform.hpp"
+#include "masd.dogen.extraction/types/transforms/operation_transform.hpp"
 
 namespace {
 
 const std::string transform_id(
-    "extraction.transforms.determine_operation_reason_transform");
+    "extraction.transforms.operation_transform");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -48,15 +48,19 @@ const std::string unexpected_operation(
 
 namespace masd::dogen::extraction::transforms {
 
-void determine_operation_reason_transform::
+void operation_transform::
 transform(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
-        "mark unchanged artefacts transform",
-        transform_id, m.name(), *ctx.tracer());
+        "operation transform", transform_id, m.name(),
+        *ctx.tracer(), m);
 
     for (auto& a : m.artefacts()) {
         const auto gs(a.path().generic());
         BOOST_LOG_SEV(lg, trace) << "Processing: " << gs;
+
+        // HACK: we seemt to have some blank artefacts atm.
+        if (a.path().empty())
+            continue;
 
         /*
          * We only expect artefacts with a limited range of
@@ -74,10 +78,12 @@ transform(const context& ctx, meta_model::model& m) {
 
         /*
          * If the file does not yet exist, it must be a newly
-         * generated file.
+         * generated file. If the user requested create only, we can
+         * safely bump it to write.
          */
         using extraction::meta_model::operation_reason;
         if (!boost::filesystem::exists(a.path())) {
+            a.operation().type(operation_type::write);
             a.operation().reason(operation_reason::newly_generated);
             BOOST_LOG_SEV(lg, trace) << "File does not yet exist for artefact.";
             continue;
@@ -85,7 +91,7 @@ transform(const context& ctx, meta_model::model& m) {
 
         /*
          * The file already exists. Check to see if the user requested
-         * we create it _only_ if it doesn't yet exist. If so, we are
+         * to create it only if it doesn't yet exist; if so, we are
          * now safe to ignore it.
          */
         if (ot == operation_type::create_only) {
@@ -96,10 +102,20 @@ transform(const context& ctx, meta_model::model& m) {
         }
 
         /*
-         * If the user requested we write the generated file, check if
-         * there is a need to write or not. For this we perform a
-         * binary diff of the file content; if it has changed, we need
-         * to write.
+         * If the user requested force write, we should always write
+         * regardlesss of contents. However, note that this does not
+         * apply to create only, which has already been handled above.
+         */
+        if (m.force_write()) {
+            a.operation().reason(operation_reason::force_write);
+            BOOST_LOG_SEV(lg, trace) << "Force write is on so writing.";
+            continue;
+        }
+
+        /*
+         * Check if there is a need to write or not. For this we
+         * perform a binary diff of the file content; if it has
+         * changed, we need to write.
          */
         using masd::dogen::utility::filesystem::read_file_content;
         const std::string c(read_file_content(a.path()));

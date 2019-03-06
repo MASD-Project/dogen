@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_DETERMINE_OPERATION_REASON_TRANSFORM_HPP
-#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_DETERMINE_OPERATION_REASON_TRANSFORM_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_OPERATION_TRANSFORM_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_OPERATION_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,11 +31,9 @@
 namespace masd::dogen::extraction::transforms {
 
 /**
- * @brief Performs a binary diff between the artefact and the file in
- * the filesystem, if any exists, and marks the artefact accordingly -
- * as changed or unchanged.
+ * @brief Updates the operation property of the artefacts.
  */
-class determine_operation_reason_transform final {
+class operation_transform final {
 public:
     static void transform(const context& ctx, meta_model::model& m);
 };

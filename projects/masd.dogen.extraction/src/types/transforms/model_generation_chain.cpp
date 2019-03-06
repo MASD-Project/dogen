@@ -21,6 +21,8 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"
+#include "masd.dogen.extraction/types/transforms/operation_transform.hpp"
+#include "masd.dogen.extraction/types/transforms/remove_files_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/write_artefacts_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/gather_external_artefacts_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/model_generation_chain.hpp"
@@ -37,12 +39,31 @@ auto lg(logger_factory(transform_id));
 namespace masd::dogen::extraction::transforms {
 
 void model_generation_chain::
-transform(const context& ctx, const meta_model::model& m) {
+transform(const context& ctx, meta_model::model& m) {
     tracing::scoped_chain_tracer stp(lg, "model generation chain",
         transform_id, m.name(), *ctx.tracer(), m);
 
-    write_artefacts_transform::transform(ctx, m);
+    /*
+     * First we need to update the operations on all artefacts so that
+     * subsequent transforms know what to do with them.
+     */
+    operation_transform::transform(ctx, m);
+
+    /*
+     * Then we need to find all the external artefacts in the
+     * filesystem and figure out which ones are expected.
+     */
     gather_external_artefacts_transform::transform(ctx, m);
+
+    /*
+     * Now write all of the artefacts that require writing.
+     */
+    write_artefacts_transform::transform(ctx, m);
+
+    /*
+     * Finally, remove all of the unexpected files.
+     */
+    remove_files_transform::transform(ctx, m);
 }
 
 }

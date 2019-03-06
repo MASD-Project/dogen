@@ -298,6 +298,11 @@ extraction::meta_model::artefact assistant::make_artefact() const {
     r.path(artefact_properties_.file_path());
     r.overwrite(artefact_properties_.overwrite());
 
+    extraction::meta_model::operation op;
+    using ot = extraction::meta_model::operation_type;
+    op.type(r.overwrite() ? ot::write : ot::create_only);
+    r.operation(op);
+
     return r;
 }
 

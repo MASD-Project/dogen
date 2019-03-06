@@ -712,14 +712,10 @@ extraction::meta_model::artefact assistant::make_artefact() const {
     r.overwrite(i->second.overwrite());
 
     extraction::meta_model::operation op;
-    using extraction::meta_model::operation_type;
-    using extraction::meta_model::operation_reason;
-    if (r.overwrite())
-        op.type(operation_type::create_only);
-    else
-        op.type(operation_type::write);
-
+    using ot = extraction::meta_model::operation_type;
+    op.type(r.overwrite() ? ot::write : ot::create_only);
     r.operation(op);
+
     return r;
 }
 

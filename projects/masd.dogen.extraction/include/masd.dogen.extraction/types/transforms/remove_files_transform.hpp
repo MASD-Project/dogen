@@ -25,24 +25,18 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.extraction/types/transforms/context.hpp"
+#include "masd.dogen.extraction/types/meta_model/model.hpp"
 
 namespace masd::dogen::extraction::transforms {
 
+/**
+ * @brief Removes all files that are associated with artefacts marked
+ * with an operation of "remove".
+ */
 class remove_files_transform final {
 public:
-    remove_files_transform() = default;
-    remove_files_transform(const remove_files_transform&) = default;
-    remove_files_transform(remove_files_transform&&) = default;
-    ~remove_files_transform() = default;
-    remove_files_transform& operator=(const remove_files_transform&) = default;
-
-public:
-    bool operator==(const remove_files_transform& rhs) const;
-    bool operator!=(const remove_files_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const context& ctx, const meta_model::model& m);
 };
 
 }
