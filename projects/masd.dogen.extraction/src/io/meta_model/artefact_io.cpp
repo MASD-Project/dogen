@@ -22,6 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.extraction/io/meta_model/artefact_io.hpp"
+#include "masd.dogen.extraction/io/meta_model/operation_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -60,7 +61,8 @@ std::ostream& operator<<(std::ostream& s, const artefact& v) {
       << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\"" << ", "
       << "\"overwrite\": " << v.overwrite() << ", "
       << "\"dependencies\": " << v.dependencies() << ", "
-      << "\"unified_diff\": " << "\"" << tidy_up_string(v.unified_diff()) << "\""
+      << "\"unified_diff\": " << "\"" << tidy_up_string(v.unified_diff()) << "\"" << ", "
+      << "\"operation\": " << v.operation()
       << " }";
     return(s);
 }

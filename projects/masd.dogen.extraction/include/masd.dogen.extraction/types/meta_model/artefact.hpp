@@ -29,6 +29,7 @@
 #include <vector>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
+#include "masd.dogen.extraction/types/meta_model/operation.hpp"
 
 namespace masd::dogen::extraction::meta_model {
 
@@ -52,7 +53,8 @@ public:
         const std::string& content,
         const bool overwrite,
         const std::vector<boost::filesystem::path>& dependencies,
-        const std::string& unified_diff);
+        const std::string& unified_diff,
+        const masd::dogen::extraction::meta_model::operation& operation);
 
 public:
     /**
@@ -106,6 +108,11 @@ public:
     void unified_diff(const std::string&& v);
     /**@}*/
 
+    const masd::dogen::extraction::meta_model::operation& operation() const;
+    masd::dogen::extraction::meta_model::operation& operation();
+    void operation(const masd::dogen::extraction::meta_model::operation& v);
+    void operation(const masd::dogen::extraction::meta_model::operation&& v);
+
 public:
     bool operator==(const artefact& rhs) const;
     bool operator!=(const artefact& rhs) const {
@@ -122,6 +129,7 @@ private:
     bool overwrite_;
     std::vector<boost::filesystem::path> dependencies_;
     std::string unified_diff_;
+    masd::dogen::extraction::meta_model::operation operation_;
 };
 
 }

@@ -30,19 +30,22 @@ artefact::artefact(artefact&& rhs)
       content_(std::move(rhs.content_)),
       overwrite_(std::move(rhs.overwrite_)),
       dependencies_(std::move(rhs.dependencies_)),
-      unified_diff_(std::move(rhs.unified_diff_)) { }
+      unified_diff_(std::move(rhs.unified_diff_)),
+      operation_(std::move(rhs.operation_)) { }
 
 artefact::artefact(
     const boost::filesystem::path& path,
     const std::string& content,
     const bool overwrite,
     const std::vector<boost::filesystem::path>& dependencies,
-    const std::string& unified_diff)
+    const std::string& unified_diff,
+    const masd::dogen::extraction::meta_model::operation& operation)
     : path_(path),
       content_(content),
       overwrite_(overwrite),
       dependencies_(dependencies),
-      unified_diff_(unified_diff) { }
+      unified_diff_(unified_diff),
+      operation_(operation) { }
 
 void artefact::swap(artefact& other) noexcept {
     using std::swap;
@@ -51,6 +54,7 @@ void artefact::swap(artefact& other) noexcept {
     swap(overwrite_, other.overwrite_);
     swap(dependencies_, other.dependencies_);
     swap(unified_diff_, other.unified_diff_);
+    swap(operation_, other.operation_);
 }
 
 bool artefact::operator==(const artefact& rhs) const {
@@ -58,7 +62,8 @@ bool artefact::operator==(const artefact& rhs) const {
         content_ == rhs.content_ &&
         overwrite_ == rhs.overwrite_ &&
         dependencies_ == rhs.dependencies_ &&
-        unified_diff_ == rhs.unified_diff_;
+        unified_diff_ == rhs.unified_diff_ &&
+        operation_ == rhs.operation_;
 }
 
 artefact& artefact::operator=(artefact other) {
@@ -137,6 +142,22 @@ void artefact::unified_diff(const std::string& v) {
 
 void artefact::unified_diff(const std::string&& v) {
     unified_diff_ = std::move(v);
+}
+
+const masd::dogen::extraction::meta_model::operation& artefact::operation() const {
+    return operation_;
+}
+
+masd::dogen::extraction::meta_model::operation& artefact::operation() {
+    return operation_;
+}
+
+void artefact::operation(const masd::dogen::extraction::meta_model::operation& v) {
+    operation_ = v;
+}
+
+void artefact::operation(const masd::dogen::extraction::meta_model::operation&& v) {
+    operation_ = std::move(v);
 }
 
 }

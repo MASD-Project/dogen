@@ -18,30 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTRACTION_IO_ALL_IO_HPP
-#define MASD_DOGEN_EXTRACTION_IO_ALL_IO_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "masd.dogen.extraction/io/editors_io.hpp"
-#include "masd.dogen.extraction/io/licence_io.hpp"
-#include "masd.dogen.extraction/io/modeline_io.hpp"
-#include "masd.dogen.extraction/io/repository_io.hpp"
-#include "masd.dogen.extraction/io/quote_types_io.hpp"
-#include "masd.dogen.extraction/io/spacing_types_io.hpp"
-#include "masd.dogen.extraction/io/comment_styles_io.hpp"
-#include "masd.dogen.extraction/io/modeline_field_io.hpp"
-#include "masd.dogen.extraction/io/modeline_group_io.hpp"
-#include "masd.dogen.extraction/io/meta_model/model_io.hpp"
-#include "masd.dogen.extraction/io/modeline_locations_io.hpp"
-#include "masd.dogen.extraction/io/infix_configuration_io.hpp"
-#include "masd.dogen.extraction/io/meta_model/artefact_io.hpp"
+#include <ostream>
 #include "masd.dogen.extraction/io/meta_model/operation_io.hpp"
-#include "masd.dogen.extraction/io/decoration_properties_io.hpp"
-#include "masd.dogen.extraction/io/decoration_configuration_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/operation_type_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/operation_reason_io.hpp"
 
-#endif
+namespace masd::dogen::extraction::meta_model {
+
+std::ostream& operator<<(std::ostream& s, const operation& v) {
+    s << " { "
+      << "\"__type__\": " << "\"masd::dogen::extraction::meta_model::operation\"" << ", "
+      << "\"type\": " << v.type() << ", "
+      << "\"reason\": " << v.reason()
+      << " }";
+    return(s);
+}
+
+}

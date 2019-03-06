@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_DIFFING_TRANSFORM_HPP
-#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_DIFFING_TRANSFORM_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_REMOVE_FILES_TRANSFORM_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_REMOVE_FILES_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,17 +29,17 @@
 
 namespace masd::dogen::extraction::transforms {
 
-class diffing_transform final {
+class remove_files_transform final {
 public:
-    diffing_transform() = default;
-    diffing_transform(const diffing_transform&) = default;
-    diffing_transform(diffing_transform&&) = default;
-    ~diffing_transform() = default;
-    diffing_transform& operator=(const diffing_transform&) = default;
+    remove_files_transform() = default;
+    remove_files_transform(const remove_files_transform&) = default;
+    remove_files_transform(remove_files_transform&&) = default;
+    ~remove_files_transform() = default;
+    remove_files_transform& operator=(const remove_files_transform&) = default;
 
 public:
-    bool operator==(const diffing_transform& rhs) const;
-    bool operator!=(const diffing_transform& rhs) const {
+    bool operator==(const remove_files_transform& rhs) const;
+    bool operator!=(const remove_files_transform& rhs) const {
         return !this->operator==(rhs);
     }
 

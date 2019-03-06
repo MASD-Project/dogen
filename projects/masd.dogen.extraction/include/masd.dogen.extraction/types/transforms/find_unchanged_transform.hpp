@@ -18,12 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.extraction/types/transforms/diffing_transform.hpp"
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_FIND_UNCHANGED_TRANSFORM_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_FIND_UNCHANGED_TRANSFORM_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <algorithm>
 
 namespace masd::dogen::extraction::transforms {
 
-bool diffing_transform::operator==(const diffing_transform& /*rhs*/) const {
-    return true;
-}
+class find_unchanged_transform final {
+public:
+    find_unchanged_transform() = default;
+    find_unchanged_transform(const find_unchanged_transform&) = default;
+    find_unchanged_transform(find_unchanged_transform&&) = default;
+    ~find_unchanged_transform() = default;
+    find_unchanged_transform& operator=(const find_unchanged_transform&) = default;
+
+public:
+    bool operator==(const find_unchanged_transform& rhs) const;
+    bool operator!=(const find_unchanged_transform& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
 
 }
+
+#endif
