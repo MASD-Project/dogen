@@ -31,6 +31,7 @@
 #include "masd.dogen.utility/types/io/forward_list_io.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.utility/types/io/forward_list_io.hpp"
+#include "masd.dogen.extraction/io/helpers/files_by_status_io.hpp"
 #include "masd.dogen.extraction/types/helpers/file_status_collector.hpp"
 
 namespace {
@@ -72,8 +73,8 @@ std::list<boost::filesystem::path> file_status_collector::diff_expected_with_act
     return r;
 }
 
-std::list<boost::filesystem::path>
-file_status_collector::filter(const std::vector<std::string>& patterns,
+files_by_status file_status_collector::
+bucket_by_status(const std::vector<std::string>& patterns,
     const std::list<boost::filesystem::path>& files) {
 
     std::vector<std::regex> regexes;
@@ -83,7 +84,7 @@ file_status_collector::filter(const std::vector<std::string>& patterns,
         regexes.push_back(std::regex(p));
     }
 
-    std::list<boost::filesystem::path> r;
+    files_by_status r;
     for (const auto& f : files) {
         bool ignore(false);
         const auto gs(f.generic_string());
@@ -99,20 +100,20 @@ file_status_collector::filter(const std::vector<std::string>& patterns,
         }
 
         if (ignore) {
+            r.ignored().push_back(f);
             BOOST_LOG_SEV(lg, debug) << "Ignoring file: " << gs;
             continue;
         }
 
         BOOST_LOG_SEV(lg, debug) << "Not ignoring file: " << gs;
-        r.push_front(f);
+        r.unexpected().push_back(f);
     }
 
-    BOOST_LOG_SEV(lg, info) << "Delta after filtering ignores: " << r;
     return r;
 }
 
-std::list<boost::filesystem::path> file_status_collector::
-lint(const meta_model::model& m) {
+files_by_status
+file_status_collector::collect(const meta_model::model& m) {
     BOOST_LOG_SEV(lg, info) << "Started linting text model.";
 
     /*
@@ -137,8 +138,7 @@ lint(const meta_model::model& m) {
      * supplied regular expressions. Whatever is left is the model's
      * lint - candidates for removal.
      */
-    const auto r(filter(m.ignore_files_matching_regex(), delta));
-
+    const auto r(bucket_by_status(m.ignore_files_matching_regex(), delta));
     BOOST_LOG_SEV(lg, info) << "Finished linting text model. Lint: " << r;
     return r;
 }

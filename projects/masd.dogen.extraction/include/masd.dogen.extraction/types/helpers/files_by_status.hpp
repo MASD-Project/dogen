@@ -40,16 +40,10 @@ public:
 
 public:
     files_by_status(
-        const std::list<boost::filesystem::path>& expected,
         const std::list<boost::filesystem::path>& unexpected,
         const std::list<boost::filesystem::path>& ignored);
 
 public:
-    const std::list<boost::filesystem::path>& expected() const;
-    std::list<boost::filesystem::path>& expected();
-    void expected(const std::list<boost::filesystem::path>& v);
-    void expected(const std::list<boost::filesystem::path>&& v);
-
     const std::list<boost::filesystem::path>& unexpected() const;
     std::list<boost::filesystem::path>& unexpected();
     void unexpected(const std::list<boost::filesystem::path>& v);
@@ -71,7 +65,6 @@ public:
     files_by_status& operator=(files_by_status other);
 
 private:
-    std::list<boost::filesystem::path> expected_;
     std::list<boost::filesystem::path> unexpected_;
     std::list<boost::filesystem::path> ignored_;
 };

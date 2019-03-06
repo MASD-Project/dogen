@@ -23,23 +23,19 @@
 namespace masd::dogen::extraction::helpers {
 
 files_by_status::files_by_status(
-    const std::list<boost::filesystem::path>& expected,
     const std::list<boost::filesystem::path>& unexpected,
     const std::list<boost::filesystem::path>& ignored)
-    : expected_(expected),
-      unexpected_(unexpected),
+    : unexpected_(unexpected),
       ignored_(ignored) { }
 
 void files_by_status::swap(files_by_status& other) noexcept {
     using std::swap;
-    swap(expected_, other.expected_);
     swap(unexpected_, other.unexpected_);
     swap(ignored_, other.ignored_);
 }
 
 bool files_by_status::operator==(const files_by_status& rhs) const {
-    return expected_ == rhs.expected_ &&
-        unexpected_ == rhs.unexpected_ &&
+    return unexpected_ == rhs.unexpected_ &&
         ignored_ == rhs.ignored_;
 }
 
@@ -47,22 +43,6 @@ files_by_status& files_by_status::operator=(files_by_status other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const std::list<boost::filesystem::path>& files_by_status::expected() const {
-    return expected_;
-}
-
-std::list<boost::filesystem::path>& files_by_status::expected() {
-    return expected_;
-}
-
-void files_by_status::expected(const std::list<boost::filesystem::path>& v) {
-    expected_ = v;
-}
-
-void files_by_status::expected(const std::list<boost::filesystem::path>&& v) {
-    expected_ = std::move(v);
 }
 
 const std::list<boost::filesystem::path>& files_by_status::unexpected() const {

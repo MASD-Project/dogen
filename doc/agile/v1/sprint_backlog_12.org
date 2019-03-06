@@ -12,23 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-06 Wed 15:05]
+#+CAPTION: Clock summary at [2019-03-06 Wed 15:22]
 | <75>                                                         |         |       |       |       |
 | Headline                                                     | Time    |       |       |     % |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                 | *53:32* |       |       | 100.0 |
+| *Total time*                                                 | *53:49* |       |       | 100.0 |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                      | 53:32   |       |       | 100.0 |
-| Active                                                       |         | 53:32 |       | 100.0 |
+| Stories                                                      | 53:49   |       |       | 100.0 |
+| Active                                                       |         | 53:49 |       | 100.0 |
 | Edit release notes for previous sprint                       |         |       |  1:27 |   2.7 |
 | Sprint and product backlog grooming                          |         |       |  1:03 |   2.0 |
 | Implement text model generation chain in generation          |         |       |  3:45 |   7.0 |
-| Move generation model out of coding                          |         |       |  4:22 |   8.2 |
+| Move generation model out of coding                          |         |       |  4:22 |   8.1 |
 | Rename endomodel to just model                               |         |       |  2:11 |   4.1 |
 | Remove exomodel remnants                                     |         |       |  0:03 |   0.1 |
 | Consider adding a dot graph of the transforms to probing     |         |       |  1:47 |   3.3 |
 | Split annotations processing into two phases                 |         |       |  3:10 |   5.9 |
-| Move injection processing out of coding                      |         |       | 18:39 |  34.8 |
+| Move injection processing out of coding                      |         |       | 18:39 |  34.7 |
 | Create a extraction model post-processing chain              |         |       |  0:56 |   1.7 |
 | Move coding to generation model transform into orchestration |         |       |  0:33 |   1.0 |
 | Add option for northwind tests                               |         |       |  0:54 |   1.7 |
@@ -36,8 +36,8 @@
 | Remove coding options                                        |         |       |  3:59 |   7.4 |
 | Rename the =transform= method to =apply=                     |         |       |  0:05 |   0.2 |
 | Try to fix valgrind warning on =find_files=                  |         |       |  0:20 |   0.6 |
-| Add basic "diff mode"                                        |         |       |  1:57 |   3.6 |
-| Fix northwind tests on OSX and Windows                       |         |       |  3:06 |   5.8 |
+| Add basic "diff mode"                                        |         |       |  4:16 |   7.9 |
+| Fix northwind tests on OSX and Windows                       |         |       |  1:04 |   2.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -713,6 +713,8 @@ We seem to be doing something wrong with directory iterators:
 
 *** STARTED Add basic "diff mode"                                     :story:
     :LOGBOOK:
+    CLOCK: [2019-03-06 Wed 15:05]--[2019-03-06 Wed 15:22] =>  0:17
+    CLOCK: [2019-03-06 Wed 13:02]--[2019-03-06 Wed 15:04] =>  2:02
     CLOCK: [2019-03-06 Wed 12:01]--[2019-03-06 Wed 12:06] =>  0:05
     CLOCK: [2019-03-06 Wed 11:31]--[2019-03-06 Wed 12:00] =>  0:29
     CLOCK: [2019-03-05 Tue 15:07]--[2019-03-05 Tue 15:19] =>  0:12
@@ -794,7 +796,6 @@ We could use something like the [[https://code.google.com/p/dtl-cpp/wiki/Tutoria
 
 *** STARTED Fix northwind tests on OSX and Windows                    :story:
     :LOGBOOK:
-    CLOCK: [2019-03-06 Wed 13:02]--[2019-03-06 Wed 15:04] =>  2:02
     CLOCK: [2019-03-06 Wed 12:07]--[2019-03-06 Wed 12:11] =>  0:04
     CLOCK: [2019-03-06 Wed 08:00]--[2019-03-06 Wed 09:00] =>  1:00
     :END:

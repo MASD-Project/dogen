@@ -23,6 +23,7 @@
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.extraction/io/helpers/files_by_status_io.hpp"
 #include "masd.dogen.extraction/types/helpers/file_status_collector.hpp"
 #include "masd.dogen.extraction/types/transforms/gather_external_artefacts_transform.hpp"
 
@@ -48,11 +49,11 @@ transform(const context& ctx, const meta_model::model& m) {
     if (!m.delete_extra_files())
         return;
 
-    const auto lint(helpers::file_status_collector::lint(m));
-    if (!lint.empty())
-        utility::filesystem::remove(lint);
+    const auto fbs(helpers::file_status_collector::collect(m));
+    if (!fbs.unexpected().empty())
+        utility::filesystem::remove(fbs.unexpected());
 
-    stp.end_transform(lint);
+    stp.end_transform(fbs);
 }
 
 }

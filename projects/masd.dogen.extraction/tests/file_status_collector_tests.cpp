@@ -78,8 +78,8 @@ BOOST_AUTO_TEST_CASE(when_all_files_are_present_file_status_collector_does_not_f
     };
     const auto tm(create_model(files, ignored_files));
     using masd::dogen::extraction::helpers::file_status_collector;
-    const auto result(file_status_collector::lint(tm));
-    BOOST_CHECK(result.empty());
+    const auto r(file_status_collector::collect(tm));
+    BOOST_CHECK(r.unexpected().empty());
 }
 
 BOOST_AUTO_TEST_CASE(when_extra_files_are_present_file_status_collector_finds_the_extra_files) {
@@ -92,14 +92,14 @@ BOOST_AUTO_TEST_CASE(when_extra_files_are_present_file_status_collector_finds_th
     };
     const auto tm(create_model(files, ignored_files));
     using masd::dogen::extraction::helpers::file_status_collector;
-    const auto result(file_status_collector::lint(tm));
+    const auto r(file_status_collector::collect(tm));
 
-    BOOST_REQUIRE(result.size() == 2);
+    BOOST_REQUIRE(r.unexpected().size() == 2);
     BOOST_CHECK(
-        (result.front() == tds_test_good::expected_file_1_txt() &&
-            result.back() == tds_test_good::expected_file_2_txt()) ||
-        (result.back() == tds_test_good::expected_file_1_txt() &&
-            result.front() == tds_test_good::expected_file_2_txt()));
+        (r.unexpected().front() == tds_test_good::expected_file_1_txt() &&
+            r.unexpected().back() == tds_test_good::expected_file_2_txt()) ||
+        (r.unexpected().back() == tds_test_good::expected_file_1_txt() &&
+            r.unexpected().front() == tds_test_good::expected_file_2_txt()));
 }
 
 BOOST_AUTO_TEST_CASE(ignored_files_are_not_deleted) {
@@ -114,10 +114,10 @@ BOOST_AUTO_TEST_CASE(ignored_files_are_not_deleted) {
     const std::vector<std::string> ignores({".*/file_1.*"});
     const auto tm(create_model(files, ignores));
     using masd::dogen::extraction::helpers::file_status_collector;
-    const auto result(file_status_collector::lint(tm));
+    const auto r(file_status_collector::collect(tm));
 
     BOOST_CHECK([&]{
-            for (const auto& f : result)
+            for (const auto& f : r.unexpected())
                 if (f == tds_test_good::expected_file_1_txt())
                     return false;
             return true;

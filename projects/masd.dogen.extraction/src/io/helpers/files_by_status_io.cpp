@@ -40,7 +40,6 @@ namespace masd::dogen::extraction::helpers {
 std::ostream& operator<<(std::ostream& s, const files_by_status& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::extraction::helpers::files_by_status\"" << ", "
-      << "\"expected\": " << v.expected() << ", "
       << "\"unexpected\": " << v.unexpected() << ", "
       << "\"ignored\": " << v.ignored()
       << " }";

@@ -29,6 +29,7 @@
 #include <list>
 #include <vector>
 #include <boost/filesystem/path.hpp>
+#include "masd.dogen.extraction/types/helpers/files_by_status.hpp"
 #include "masd.dogen.extraction/types/meta_model/model.hpp"
 
 namespace masd::dogen::extraction::helpers {
@@ -59,18 +60,17 @@ private:
         const std::set<boost::filesystem::path>& actual);
 
     /**
-     * @brief Returns all files in the original list which do not
-     * match any of the supplied ignore patterns.
+     * @brief Buckets all files by their status as either ignored or
+     * unexpected.
      *
      * @pre Ignore patterns must be valid regular expressions.
      */
-    static std::list<boost::filesystem::path>
-    filter(const std::vector<std::string>& patterns,
+    static files_by_status bucket_by_status(
+        const std::vector<std::string>& patterns,
         const std::list<boost::filesystem::path>& files);
 
 public:
-    static std::list<boost::filesystem::path>
-    lint(const meta_model::model& m);
+    static files_by_status collect(const meta_model::model& m);
 };
 
 }
