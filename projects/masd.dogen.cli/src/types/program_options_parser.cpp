@@ -161,7 +161,8 @@ options_description make_top_level_visible_options_description() {
 
     options_description dod("Diffing");
     dod.add_options()
-        ("diffing-enabled", "Generate diffs against files in the filesystem.")
+        ("diffing-enabled", "Generate diffs against files in the filesystem. "
+            "When enabled, dogen is in dry-run mode.")
         ("diffing-style",  value<std::string>(), "Style to use in the diff. "
             "Valid values: brief, unified.")
         ("diffing-destination",  value<std::string>(), "Where to write the "
@@ -251,8 +252,7 @@ options_description make_weave_options_description() {
  * @brief ensures the supplied command is a valid command. If not,
  * reports the erros into stream and throws.
  */
-void validate_command_name(const std::string& command_name,
-    std::ostream& err) {
+void validate_command_name(const std::string& command_name) {
     const bool is_valid_command_name(
         command_name == generate_command_name ||
         command_name == convert_command_name ||
@@ -260,9 +260,6 @@ void validate_command_name(const std::string& command_name,
 
     if (is_valid_command_name)
         return;
-
-    err << usage_error_msg << "'" << command_name << "' is not a valid command. "
-        << more_information  << std::endl;
 
     BOOST_THROW_EXCEPTION(parser_exception(invalid_command + command_name));
 }
@@ -350,14 +347,12 @@ void version(std::ostream& s) {
  */
 boost::optional<configuration>
 handle_no_command(const bool has_version, const bool has_help,
-    const options_description& od, std::ostream& info, std::ostream& err) {
+    const options_description& od, std::ostream& info) {
     /*
      * The only valid options are help or version, so if those are
      * not present we can safely throw.
      */
     if (!has_version && !has_help) {
-        err << usage_error_msg << no_command_msg
-            << more_information << std::endl;
         BOOST_THROW_EXCEPTION(parser_exception(no_command_msg));
     }
 
@@ -699,8 +694,8 @@ handle_command(const std::string& command_name, const bool has_help,
     return r;
 }
 
-boost::optional<configuration> parse(const std::vector<std::string>& arguments,
-    std::ostream& info, std::ostream& err) {
+boost::optional<configuration>
+parse(const std::vector<std::string>& arguments, std::ostream& info) {
     /*
      * Create the top-level command line options, parse them and
      * retrieve the results of the parsing. Note that we split then
@@ -733,14 +728,14 @@ boost::optional<configuration> parse(const std::vector<std::string>& arguments,
      * supplied. Note that we only supply the visible options here.
      */
     if (!has_command)
-        return handle_no_command(has_version, has_help, visible, info, err);
+        return handle_no_command(has_version, has_help, visible, info);
 
     /*
      * If the user supplied a command, we need to retrieve it and
      * ensure it is valid.
      */
     const auto command_name(vm[command_arg].as<std::string>());
-    validate_command_name(command_name, err);
+    validate_command_name(command_name);
 
     /*
      * Copying the same approach as git, we also consider version to
@@ -749,12 +744,8 @@ boost::optional<configuration> parse(const std::vector<std::string>& arguments,
      * the (supposedly valid, according to program options) version
      * command and throw.
      */
-    if (has_version) {
-        err << "Error: unrecognised option for command '" << command_name
-            << "'. " << more_information  << std::endl;
-
+    if (has_version)
         BOOST_THROW_EXCEPTION(parser_exception(invalid_option + "version"));
-    }
 
     /*
      * We can now process the command. Notice that we are suppliying
@@ -774,7 +765,7 @@ program_options_parser::parse(const std::vector<std::string>& arguments,
     std::ostream& info, std::ostream& err) const {
 
     try {
-        return ::parse(arguments, info, err);
+        return ::parse(arguments, info);
     } catch(const parser_exception& e) {
         err << usage_error_msg << e.what() << std::endl
             << more_information << std::endl;
