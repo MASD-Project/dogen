@@ -26,12 +26,8 @@
 #endif
 
 #include <vector>
-#include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include <boost/filesystem/path.hpp>
 #include "masd.dogen.tracing/types/tracer_fwd.hpp"
-#include "masd.dogen.coding/types/transforms/options.hpp"
-#include "masd.dogen.extraction/types/repository_fwd.hpp"
 #include "masd.dogen.annotations/types/type_repository_fwd.hpp"
 #include "masd.dogen.annotations/types/annotation_factory_fwd.hpp"
 #include "masd.dogen.annotations/types/annotation_expander_fwd.hpp"
@@ -59,27 +55,14 @@ public:
 
 public:
     context(
-        const std::vector<boost::filesystem::path>& data_directories,
-        const masd::dogen::coding::transforms::options& transform_options,
         const boost::shared_ptr<masd::dogen::annotations::type_repository>& type_repository,
         const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& archetype_location_repository,
         const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& annotation_factory,
         const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& annotation_expander,
         const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& mapping_repository,
-        const boost::shared_ptr<masd::dogen::extraction::repository>& formatting_repository,
         const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer);
 
 public:
-    const std::vector<boost::filesystem::path>& data_directories() const;
-    std::vector<boost::filesystem::path>& data_directories();
-    void data_directories(const std::vector<boost::filesystem::path>& v);
-    void data_directories(const std::vector<boost::filesystem::path>&& v);
-
-    const masd::dogen::coding::transforms::options& transform_options() const;
-    masd::dogen::coding::transforms::options& transform_options();
-    void transform_options(const masd::dogen::coding::transforms::options& v);
-    void transform_options(const masd::dogen::coding::transforms::options&& v);
-
     const boost::shared_ptr<masd::dogen::annotations::type_repository>& type_repository() const;
     boost::shared_ptr<masd::dogen::annotations::type_repository>& type_repository();
     void type_repository(const boost::shared_ptr<masd::dogen::annotations::type_repository>& v);
@@ -105,25 +88,17 @@ public:
     void mapping_repository(const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& v);
     void mapping_repository(const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>&& v);
 
-    const boost::shared_ptr<masd::dogen::extraction::repository>& formatting_repository() const;
-    boost::shared_ptr<masd::dogen::extraction::repository>& formatting_repository();
-    void formatting_repository(const boost::shared_ptr<masd::dogen::extraction::repository>& v);
-    void formatting_repository(const boost::shared_ptr<masd::dogen::extraction::repository>&& v);
-
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer() const;
     boost::shared_ptr<masd::dogen::tracing::tracer>& tracer();
     void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v);
     void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>&& v);
 
 private:
-    std::vector<boost::filesystem::path> data_directories_;
-    masd::dogen::coding::transforms::options transform_options_;
     boost::shared_ptr<masd::dogen::annotations::type_repository> type_repository_;
     boost::shared_ptr<masd::dogen::annotations::archetype_location_repository> archetype_location_repository_;
     boost::shared_ptr<masd::dogen::annotations::annotation_factory> annotation_factory_;
     boost::shared_ptr<masd::dogen::annotations::annotation_expander> annotation_expander_;
     boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository> mapping_repository_;
-    boost::shared_ptr<masd::dogen::extraction::repository> formatting_repository_;
     boost::shared_ptr<masd::dogen::tracing::tracer> tracer_;
 };
 

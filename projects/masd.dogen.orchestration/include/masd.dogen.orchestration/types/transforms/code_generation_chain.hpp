@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <boost/filesystem/path.hpp>
 #include "masd.dogen.extraction/types/meta_model/model.hpp"
 #include "masd.dogen.orchestration/types/transforms/context_fwd.hpp"
 
@@ -58,7 +59,8 @@ namespace masd::dogen::orchestration::transforms {
  */
 class code_generation_chain final {
 public:
-    static void transform(const context& ctx);
+    static void transform(const context& ctx,
+        const boost::filesystem::path& target);
 };
 
 }

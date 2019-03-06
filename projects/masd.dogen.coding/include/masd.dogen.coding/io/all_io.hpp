@@ -36,7 +36,6 @@
 #include "masd.dogen.coding/io/meta_model/builtin_io.hpp"
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.coding/io/meta_model/visitor_io.hpp"
-#include "masd.dogen.coding/io/transforms/options_io.hpp"
 #include "masd.dogen.coding/io/helpers/mapping_set_io.hpp"
 #include "masd.dogen.coding/io/meta_model/location_io.hpp"
 #include "masd.dogen.coding/io/meta_model/attribute_io.hpp"

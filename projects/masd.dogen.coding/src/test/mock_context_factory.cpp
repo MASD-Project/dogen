@@ -27,7 +27,6 @@
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
 #include "masd.dogen.annotations/types/type_repository_factory.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
-#include "masd.dogen.extraction/types/repository_factory.hpp"
 #include "masd.dogen.tracing/types/tracer.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
 #include "masd.dogen.coding/test/mock_context_factory.hpp"
@@ -44,43 +43,30 @@ namespace masd::dogen::coding::test {
 transforms::context mock_context_factory::make() {
     BOOST_LOG_SEV(lg, debug) << "Creating the mock context.";
 
-    masd::dogen::coding::transforms::options o;
-
+    transforms::context r;
     auto alrp(boost::make_shared<annotations::archetype_location_repository>());
+    r.archetype_location_repository(alrp);
 
-    /*
-     * Obtain all the data structures required to make a context, and
-     * create the context.
-     */
+    annotations::type_repository_factory atrpf;
     const auto data_dir(utility::filesystem::data_files_directory());
     const auto data_dirs(std::vector<boost::filesystem::path>{ data_dir });
+    const auto atrp(boost::make_shared<annotations::type_repository>(
+            atrpf.make(*alrp, data_dirs)));
+    r.type_repository(atrp);
 
     helpers::mapping_set_repository_factory msrpf;
     const auto msrp(boost::make_shared<
         helpers::mapping_set_repository>(msrpf.make(data_dirs)));
+    r.mapping_repository(msrp);
 
-    annotations::type_repository_factory atrpf;
-    const auto atrp(boost::make_shared<annotations::type_repository>(
-            atrpf.make(*alrp, data_dirs)));
-
-    extraction::repository_factory frpf;
-    const auto frp(boost::make_shared<extraction::repository>(
-            frpf.make(data_dirs)));
-
+    boost::optional<tracing_configuration> tcfg;
     auto tracer(boost::make_shared<tracing::tracer>(
-            *alrp, *atrp, o.probe_directory(), o.tracing()));
+            *alrp, *atrp, tcfg));
+    r.tracer(tracer);
 
     const auto af(boost::make_shared<annotations::annotation_factory>(
-                *alrp, *atrp, o.compatibility_mode()));
-
-    transforms::context r;
-    r.data_directories(data_dirs);
-    r.transform_options(o);
-    r.archetype_location_repository(alrp);
-    r.type_repository(atrp);
-    r.mapping_repository(msrp);
-    r.formatting_repository(frp);
-    r.tracer(tracer);
+            *alrp, *atrp, false/*compatibility_mode*/));
+    r.annotation_factory(af);
 
     BOOST_LOG_SEV(lg, debug) << "Created the context.";
     return r;

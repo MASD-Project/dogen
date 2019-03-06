@@ -48,14 +48,13 @@ public:
 public:
     tracer(const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
-        const boost::filesystem::path& tracing_directory,
         const boost::optional<tracing_configuration>& cfg);
 
 private:
     void validate() const;
     bool tracing_enabled() const;
     bool detailed_tracing_enabled() const;
-    void handle_tracing_directory() const;
+    void handle_output_directory() const;
     void handle_current_directory() const;
     void ensure_transform_position_not_empty() const;
 
@@ -141,7 +140,6 @@ public:
 
 private:
     const boost::optional<tracing_configuration> configuration_;
-    const boost::filesystem::path tracing_directory_;
     mutable metrics_builder builder_;
     mutable std::stack<unsigned int> transform_position_;
     mutable boost::filesystem::path current_directory_;

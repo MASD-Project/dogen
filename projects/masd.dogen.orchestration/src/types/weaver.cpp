@@ -37,13 +37,15 @@ const std::string unsupported_extension("Extension is unsupported: ");
 
 namespace masd::dogen::orchestration {
 
-void weaver::weave(const configuration& /*cfg*/,
-    const boost::filesystem::path& target,
-    const boost::filesystem::path& /*tracing_output_directory*/) const {
+void weaver::weave(const configuration& cfg,
+    const boost::filesystem::path& target) const {
     BOOST_LOG_SEV(lg, debug) << "Started weaving.";
 
-    masd::dogen::templating::stitch::workflow w(false/*compatibility_mode*/);
+    const bool cm(cfg.error_handling() &&
+        cfg.error_handling()->compatibility_mode_enabled());
+    masd::dogen::templating::stitch::workflow w(cm);
     w.execute(target);
+
     BOOST_LOG_SEV(lg, debug) << "Started weaving.";
 }
 

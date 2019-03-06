@@ -29,7 +29,6 @@
 #include "masd.dogen.tracing/types/tracer.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.extraction/types/repository_factory.hpp"
-#include "masd.dogen.coding/types/transforms/options_validator.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
@@ -51,7 +50,7 @@ using generation::transforms::model_to_extraction_model_transform_registrar;
 
 std::unordered_map<std::string,
                    generation::meta_model::intra_backend_segment_properties>
-create_intra_backend_segment_properties(const coding::transforms::options& o,
+create_intra_backend_segment_properties(
     const model_to_extraction_model_transform_registrar& rg) {
     std::unordered_map<
         std::string,
@@ -65,7 +64,7 @@ create_intra_backend_segment_properties(const coding::transforms::options& o,
      */
     for (const auto& pair : rg.transforms_by_language()) {
         const auto& t(*pair.second);
-        for (const auto& pair : t.intra_backend_segment_properties(o)) {
+        for (const auto& pair : t.intra_backend_segment_properties()) {
             const auto inserted(r.insert(pair).second);
             if (!inserted) {
                 BOOST_LOG_SEV(lg, error) << duplicate_segment << pair.first;
@@ -92,23 +91,63 @@ create_archetype_location_repository(
     return boost::make_shared<archetype_location_repository>(b.build());
 }
 
-orchestration::transforms::context
-context_factory::make_context(const coding::transforms::options& o,
-    const bool enable_validation) {
+injection::transforms::context context_factory::
+make_injection_context(const configuration& cfg) {
     BOOST_LOG_SEV(lg, debug) << "Creating the context.";
 
-    if (enable_validation) {
-        /*
-         * Before anything else, lets make sure the transform options make
-         * sense. No point in proceeding otherwise.
-         */
-        coding::transforms::options_validator v;
-        v.validate(o);
-    }
+    /*
+     * Obtain the transform registrar and ensure it has been setup.
+     */
+    using generation::transforms::model_to_extraction_model_chain;
+    const auto& rg = model_to_extraction_model_chain::registrar();
+    rg.validate();
+
+    /*
+     * Obtain the data directories.
+     */
+    injection::transforms::context r;
+    const auto data_dir(utility::filesystem::data_files_directory());
+    const auto data_dirs(std::vector<boost::filesystem::path>{ data_dir });
+    r.data_directories(data_dirs);
+
+    /*
+     * Setup the annotations related data structures.
+     */
+    const auto alrp(create_archetype_location_repository(rg));
+    r.archetype_location_repository(alrp);
+
+    annotations::type_repository_factory atrpf;
+    const auto atrp(boost::make_shared<annotations::type_repository>(
+            atrpf.make(*alrp, data_dirs)));
+    r.type_repository(atrp);
+
+    /*
+     * Setup the annotations related factories.
+     */
+    const bool cm(cfg.error_handling() &&
+        cfg.error_handling()->compatibility_mode_enabled());
+    const auto af(boost::make_shared<annotations::annotation_factory>(
+                *alrp, *atrp, cm));
+    r.annotation_factory(af);
+
+    /*
+     * Setup the tracer. Note that we do it regardless of whether
+     * tracing is enabled or not - its the tracer job to handle that.
+     */
+    const auto tracer(
+        boost::make_shared<tracing::tracer>(*alrp, *atrp, cfg.tracing()));
+    r.tracer(tracer);
+
+    return r;
+
+}
+
+context context_factory::make_context(const configuration& cfg,
+    const boost::filesystem::path& output_directory) {
+    BOOST_LOG_SEV(lg, debug) << "Creating the context.";
 
     orchestration::transforms::context r;
-    r.coding_context().transform_options(o);
-    r.generation_context().output_directory_path(o.output_directory_path());
+    r.generation_context().output_directory_path(output_directory);
 
     /*
      * Obtain the transform registrar and ensure it has been setup.
@@ -123,7 +162,6 @@ context_factory::make_context(const coding::transforms::options& o,
     const auto data_dir(utility::filesystem::data_files_directory());
     const auto data_dirs(std::vector<boost::filesystem::path>{ data_dir });
     r.injection_context().data_directories(data_dirs);
-    r.coding_context().data_directories(data_dirs);
 
     /*
      * Setup the annotations related data structures.
@@ -143,21 +181,24 @@ context_factory::make_context(const coding::transforms::options& o,
     /*
      * Setup the annotations related factories.
      */
+    const bool cm(cfg.error_handling() ?
+        cfg.error_handling()->compatibility_mode_enabled() :
+        false);
     const auto af(boost::make_shared<annotations::annotation_factory>(
-                *alrp, *atrp, o.compatibility_mode()));
+                *alrp, *atrp, cm));
     r.injection_context().annotation_factory(af);
     r.coding_context().annotation_factory(af);
     r.generation_context().annotation_factory(af);
 
     const auto ae(boost::make_shared<annotations::annotation_expander>(
-            data_dirs, *alrp, *atrp, o.compatibility_mode()));
+            data_dirs, *alrp, *atrp, cm));
     r.coding_context().annotation_expander(ae);
     r.generation_context().annotation_expander(ae);
 
     /*
      * Setup the intrabackend segment properties.
      */
-    const auto ibsp(create_intra_backend_segment_properties(o, rg));
+    const auto ibsp(create_intra_backend_segment_properties(rg));
     r.generation_context().intra_backend_segment_properties(ibsp);
 
     coding::helpers::mapping_set_repository_factory msrpf;
@@ -172,14 +213,14 @@ context_factory::make_context(const coding::transforms::options& o,
     extraction::repository_factory frpf;
     const auto frp(
         boost::make_shared<extraction::repository>(frpf.make(data_dirs)));
-    r.coding_context().formatting_repository(frp);
     r.generation_context().formatting_repository(frp);
 
     /*
-     * Setup the tracer.
+     * Setup the tracer. Note that we do it regardless of whether
+     * tracing is enabled or not - its the tracer job to handle that.
      */
-    const auto tracer(boost::make_shared<tracing::tracer>
-        (*alrp, *atrp, o.probe_directory(), o.tracing()));
+    const auto tracer(
+        boost::make_shared<tracing::tracer>(*alrp, *atrp, cfg.tracing()));
     r.injection_context().tracer(tracer);
     r.coding_context().tracer(tracer);
     r.generation_context().tracer(tracer);

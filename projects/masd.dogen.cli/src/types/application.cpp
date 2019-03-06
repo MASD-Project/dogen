@@ -47,19 +47,17 @@ public:
 
 public:
     void operator()(const weaving_configuration& cfg) const {
-        weaver_.weave(configuration_.api(), cfg.target(),
-            configuration_.cli().tracing_output_directory());
+        weaver_.weave(configuration_.api(), cfg.target());
     }
 
     void operator()(const conversion_configuration& cfg) const {
         converter_.convert(configuration_.api(), cfg.source(),
-            cfg.destination(), configuration_.cli().tracing_output_directory());
+            cfg.destination());
     }
 
     void operator()(const generation_configuration& cfg) const {
         generator_.generate(configuration_.api(), cfg.target(),
-            cfg.output_directory(),
-            configuration_.cli().tracing_output_directory());
+            cfg.output_directory());
     }
 
 private:
@@ -80,6 +78,10 @@ application(const weaver& w, const converter& c, const generator& g)
 void application::run(const configuration& cfg) const {
     BOOST_LOG_SEV(lg, debug) << "Application started.";
 
+    /*
+     * Before anything else, lets make sure the configuration makes
+     * sense. No point in proceeding otherwise.
+     */
     configuration_validator::validate(cfg);
     activity_dispatcher d(weaver_, converter_, generator_, cfg);
     boost::apply_visitor(d, cfg.cli().activity());

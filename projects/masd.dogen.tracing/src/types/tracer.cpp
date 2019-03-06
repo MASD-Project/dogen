@@ -61,21 +61,21 @@ namespace masd::dogen::tracing {
 
 tracer::tracer(const annotations::archetype_location_repository& alrp,
     const annotations::type_repository& atrp,
-    const boost::filesystem::path& tracing_directory,
     const boost::optional<tracing_configuration>& cfg) :
     configuration_(cfg),
-    tracing_directory_(tracing_directory),
     builder_(configuration_ ?
         configuration_->logging_impact() : empty,
         detailed_tracing_enabled()),
-    current_directory_(tracing_directory) {
+    current_directory_(configuration_ ?
+        cfg->output_directory() :
+        boost::filesystem::path()) {
 
     validate();
 
     if (!tracing_enabled())
         return;
 
-    handle_tracing_directory();
+    handle_output_directory();
 
     if (!detailed_tracing_enabled())
         return;
@@ -89,15 +89,13 @@ void tracer::validate() const {
      * If data tracing was requested, we must have a directory in
      * which to place the data.
      */
-    if (tracing_enabled() && tracing_directory_.empty()) {
+    if (tracing_enabled() && configuration_->output_directory().empty()) {
         BOOST_LOG_SEV(lg, error) << directory_missing;
         BOOST_THROW_EXCEPTION(tracing_error(directory_missing));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Tracer initialised. Configuration: "
                              << configuration_;
-    BOOST_LOG_SEV(lg, debug) << "Tracing directory: '"
-                             << tracing_directory_.generic_string() << "'";
 }
 
 bool tracer::tracing_enabled() const {
@@ -110,30 +108,31 @@ bool tracer::detailed_tracing_enabled() const {
         configuration_->level() == tracing_level::detail;
 }
 
-void tracer::handle_tracing_directory() const {
-    BOOST_LOG_SEV(lg, debug) << "Handling tracing directory.";
+void tracer::handle_output_directory() const {
+    BOOST_LOG_SEV(lg, debug) << "Handling output directory.";
 
-    if (boost::filesystem::exists(tracing_directory_)) {
-        BOOST_LOG_SEV(lg, debug) << "Tracing directory already exists: "
-                                 << tracing_directory_.generic_string();
+    const auto& od(configuration_->output_directory());
+    if (boost::filesystem::exists(od)) {
+        BOOST_LOG_SEV(lg, debug) << "Output directory already exists: "
+                                 << od.generic_string();
 
         boost::system::error_code ec;
-        boost::filesystem::remove_all(tracing_directory_, ec);
+        boost::filesystem::remove_all(od, ec);
         if (ec) {
             BOOST_LOG_SEV(lg, error) << failed_delete;
             BOOST_THROW_EXCEPTION(tracing_error(failed_delete));
         }
-        BOOST_LOG_SEV(lg, debug) << "Deleted tracer data directory.";
+        BOOST_LOG_SEV(lg, debug) << "Deleted output data directory.";
     }
 
     boost::system::error_code ec;
-    boost::filesystem::create_directories(tracing_directory_, ec);
+    boost::filesystem::create_directories(od, ec);
     if (ec) {
         BOOST_LOG_SEV(lg, error) << failed_create;
         BOOST_THROW_EXCEPTION(tracing_error(failed_create));
     }
-    BOOST_LOG_SEV(lg, debug) << "Created tracer data directory: "
-                             << tracing_directory_.generic_string();
+    BOOST_LOG_SEV(lg, debug) << "Created output data directory: "
+                             << od.generic_string();
 }
 
 void tracer::handle_current_directory() const {
@@ -303,10 +302,11 @@ void tracer::end_tracing() const {
     const auto tf(configuration_->format());
     const bool dg(!configuration_->guids_enabled());
     const auto s(metrics_printer::print(dg, tf, tm));
-    BOOST_LOG_SEV(lg, debug) << "Writing to tracing directory: '"
-                             << tracing_directory_.generic_string() << "'";
+    const auto& od(configuration_->output_directory());
+    BOOST_LOG_SEV(lg, debug) << "Writing to output directory: '"
+                             << od.generic_string() << "'";
 
-    boost::filesystem::path p(tracing_directory_);
+    boost::filesystem::path p(od);
     const std::string fn("transform_stats");
     switch(tf) {
     case tracing_format::plain:

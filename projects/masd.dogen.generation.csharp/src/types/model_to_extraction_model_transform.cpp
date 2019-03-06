@@ -103,8 +103,7 @@ model_to_extraction_model_transform::language() const {
 
 std::unordered_map<std::string,
                    generation::meta_model::intra_backend_segment_properties>
-model_to_extraction_model_transform::intra_backend_segment_properties(
-    const coding::transforms::options& /*o*/) const {
+model_to_extraction_model_transform::intra_backend_segment_properties() const {
     using namespace coding::meta_model;
     generation::meta_model::intra_backend_segment_properties project;
 

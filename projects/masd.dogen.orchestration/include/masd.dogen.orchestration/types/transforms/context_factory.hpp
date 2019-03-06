@@ -25,8 +25,10 @@
 #pragma once
 #endif
 
+#include <boost/filesystem/path.hpp>
+#include "masd.dogen/types/configuration.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository.hpp"
-#include "masd.dogen.coding/types/transforms/options.hpp"
+#include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.orchestration/types/transforms/context.hpp"
 
 namespace masd::dogen::orchestration::transforms {
@@ -36,9 +38,11 @@ namespace masd::dogen::orchestration::transforms {
  */
 class context_factory final {
 public:
-    static orchestration::transforms::context
-    make_context(const coding::transforms::options& o,
-        const bool enable_validation = true);
+    static injection::transforms::context
+    make_injection_context(const configuration& cfg);
+
+    static context make_context(const configuration& cfg,
+        const boost::filesystem::path& output_directory);
 };
 
 }

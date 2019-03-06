@@ -43,25 +43,22 @@ auto lg(logger_factory(transform_id));
 
 namespace masd::dogen::orchestration::transforms {
 
-void code_generation_chain::transform(const context& ctx) {
+void code_generation_chain::transform(const context& ctx,
+    const boost::filesystem::path& target) {
     BOOST_LOG_SEV(lg, info) << "Starting code generation.";
+    BOOST_LOG_SEV(lg, debug) << "Target: " << target.generic();
 
-    const auto& o(ctx.coding_context().transform_options());
-    const auto model_name(o.target().filename().string());
+    const auto model_name(target.filename().string());
     const auto& tracer(*ctx.injection_context().tracer());
     tracing::scoped_chain_tracer stp(lg, "code generation chain",
         transform_id, model_name, tracer);
-
-    const auto& to(ctx.coding_context().transform_options());
-    BOOST_LOG_SEV(lg, debug) << "Target: " << to.target().generic();
 
     /*
      * Obtain the injection model set.
      */
     using injection::transforms::model_set_production_chain;
     const auto ims(model_set_production_chain::transform(
-            ctx.injection_context(),
-            ctx.coding_context().transform_options().target()));
+            ctx.injection_context(), target));
 
     /*
      * Convert the injection model set into a coding model set.

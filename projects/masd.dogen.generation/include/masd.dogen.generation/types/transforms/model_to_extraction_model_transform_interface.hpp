@@ -32,7 +32,6 @@
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.annotations/types/archetype_locations_group.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository_parts.hpp"
-#include "masd.dogen.coding/types/transforms/options.hpp"
 #include "masd.dogen.coding/types/meta_model/languages.hpp"
 #include "masd.dogen.generation/types/meta_model/intra_backend_segment_properties.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
@@ -101,8 +100,7 @@ public:
     virtual std::unordered_map<
         std::string,
         generation::meta_model::intra_backend_segment_properties>
-    intra_backend_segment_properties(
-        const coding::transforms::options& o) const = 0;
+    intra_backend_segment_properties() const = 0;
 
     /**
      * @brief Generates the text model representation for this

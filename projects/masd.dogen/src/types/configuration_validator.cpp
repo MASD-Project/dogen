@@ -45,6 +45,7 @@ validate(const boost::optional<error_handling_configuration>& ocfg) {
 
     const auto& cfg(*ocfg);
     BOOST_LOG_SEV(lg, debug) << cfg;
+    // FIXME: implement validation
     BOOST_LOG_SEV(lg, debug) << "Error handling configuration is valid.";
 }
 
@@ -59,6 +60,7 @@ validate(const boost::optional<tracing_configuration>& ocfg) {
 
     const auto& cfg(*ocfg);
     BOOST_LOG_SEV(lg, debug) << cfg;
+    // FIXME: implement validation
     BOOST_LOG_SEV(lg, debug) << "Tracing configuration is valid.";
 }
 
@@ -72,6 +74,7 @@ validate(const boost::optional<diffing_configuration>& ocfg) {
 
     const auto& cfg(*ocfg);
     BOOST_LOG_SEV(lg, debug) << cfg;
+    // FIXME: implement validation
     BOOST_LOG_SEV(lg, debug) << "Diffing configuration is valid.";
 }
 

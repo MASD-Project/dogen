@@ -40,8 +40,7 @@ public:
 
 public:
     virtual void weave(const configuration& cfg,
-        const boost::filesystem::path& target,
-        const boost::filesystem::path& tracing_output_directory) const = 0;
+        const boost::filesystem::path& target) const = 0;
 };
 
 }

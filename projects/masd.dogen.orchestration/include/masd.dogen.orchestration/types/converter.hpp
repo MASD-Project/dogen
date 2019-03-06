@@ -40,8 +40,7 @@ public:
 public:
     void convert(const configuration& cfg,
         const boost::filesystem::path& target,
-        const boost::filesystem::path& destination,
-        const boost::filesystem::path& tracing_output_directory) const override;
+        const boost::filesystem::path& destination) const override;
 };
 
 }

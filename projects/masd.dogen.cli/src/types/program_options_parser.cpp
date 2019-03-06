@@ -58,6 +58,7 @@ const std::string version_arg("version");
 const std::string command_arg("command");
 const std::string logging_log_enabled_arg("log-enabled");
 const std::string logging_log_directory_arg("log-directory");
+const std::string logging_log_to_console_arg("log-to-console");
 const std::string logging_log_level_arg("log-level");
 const std::string logging_log_level_trace("trace");
 const std::string logging_log_level_debug("debug");
@@ -78,6 +79,16 @@ const std::string tracing_format_graphviz("graphviz");
 const std::string tracing_output_directory_arg("tracing-output-directory");
 const std::string tracing_default_directory("tracing");
 
+const std::string diffing_enabled_arg("diffing-enabled");
+const std::string diffing_style_arg("diffing-style");
+const std::string diffing_destination_arg("diffing-destination");
+const std::string diffing_report_unchanged_arg("diffing-report-unchanged");
+const std::string diffing_output_directory_arg("diffing-output-directory");
+const std::string diffing_style_brief("brief");
+const std::string diffing_style_unified("unified");
+const std::string diffing_destination_file("file");
+const std::string diffing_destination_console("console");
+
 const std::string error_handling_compatibility_mode_arg(
     "compatibility-mode-enabled");
 
@@ -93,6 +104,10 @@ const std::string missing_target("Mandatory parameter target is missing. ");
 const std::string invalid_tracing_level("Tracing level is invalid: ");
 const std::string invalid_log_level("Tracing level is invalid: ");
 const std::string invalid_format("Tracing format is invalid: ");
+const std::string invalid_diffing_style(
+    "Diffing style is invalid or unsupported: ");
+const std::string invalid_diffing_destination(
+    "Diffing destination is invalid or unsupported: ");
 
 using boost::program_options::value;
 using boost::program_options::variables_map;
@@ -126,7 +141,9 @@ options_description make_top_level_visible_options_description() {
             "Directory to place the log file in. Defaults to 'log'.")
         ("log-level,l", value<std::string>(),
             "What level to use for logging. Valid values: trace, debug, info, "
-            "warn, error. Defaults to 'info'.");
+            "warn, error. Defaults to 'info'.")
+        ("log-to-console", value<std::string>(),
+            "Output logging to the console, as well as to file.");
     r.add(lod);
 
     options_description tod("Tracing");
@@ -141,6 +158,17 @@ options_description make_top_level_visible_options_description() {
         ("tracing-output-directory", value<std::string>(), "Directory in which "
             "to dump probe data. Only used if transforms tracing is enabled.");
     r.add(tod);
+
+    options_description dod("Diffing");
+    dod.add_options()
+        ("diffing-enabled", "Generate diffs against files in the filesystem.")
+        ("diffing-style",  value<std::string>(), "Style to use in the diff. "
+            "Valid values: brief, unified.")
+        ("diffing-destination",  value<std::string>(), "Where to write the "
+            " diff output. Valid values: file, console.")
+        ("diffing-output-directory", value<std::string>(), "Directory in which "
+            "to dump the diff file. Only used when outputting to file.");
+    r.add(dod);
 
     options_description ehod("Error Handling");
     ehod.add_options()
@@ -401,13 +429,41 @@ read_error_handling_configuration(const variables_map& vm) {
 }
 
 boost::optional<masd::dogen::diffing_configuration>
-read_diffing_configuration(const variables_map& /*vm*/) {
-    // FIXME: waiting for diffing implementation
-    // const bool enabled(vm.count(tracing_enabled_arg) != 0);
-    // if (!enabled)
-    //     return boost::optional<masd::dogen::diffing_configuration>();
+read_diffing_configuration(const variables_map& vm) {
+    const bool enabled(vm.count(diffing_enabled_arg) != 0);
+    if (!enabled)
+        return boost::optional<masd::dogen::diffing_configuration>();
 
+    using masd::dogen::diffing_style;
     masd::dogen::diffing_configuration r;
+    r.report_unchanged_files(vm.count(diffing_report_unchanged_arg) != 0);
+
+    if (vm.count(diffing_style_arg)) {
+        const auto s(vm[diffing_style_arg].as<std::string>());
+
+        if (s == diffing_style_brief)
+            r.style(diffing_style::brief);
+        else if (s == diffing_style_unified)
+            r.style(diffing_style::unified);
+        else
+            BOOST_THROW_EXCEPTION(parser_exception(invalid_diffing_style + s));
+    } else if (enabled)
+        r.style(diffing_style::unified);
+
+    using masd::dogen::diffing_destination;
+    if (vm.count(diffing_destination_arg)) {
+        const auto s(vm[diffing_destination_arg].as<std::string>());
+
+        if (s == diffing_destination_file)
+            r.destination(diffing_destination::file);
+        else if (s == diffing_destination_console)
+            r.destination(diffing_destination::console);
+        else
+            BOOST_THROW_EXCEPTION(
+                parser_exception(invalid_diffing_destination + s));
+    } else if (enabled)
+        r.style(diffing_style::unified);
+
     return r;
 }
 
@@ -439,6 +495,7 @@ boost::optional<logging_configuration> read_logging_configuration(
 
     logging_configuration r;
     r.filename(run_identifier);
+    r.output_to_console(vm.count(logging_log_to_console_arg) != 0);
 
     if (vm.count(logging_log_level_arg)) {
         const auto s(vm[logging_log_level_arg].as<std::string>());
@@ -454,7 +511,7 @@ boost::optional<logging_configuration> read_logging_configuration(
             r.severity(severity_level::error);
         else
             BOOST_THROW_EXCEPTION(parser_exception(invalid_log_level + s));
-    } else  if (enabled)
+    } else if (enabled)
         r.severity(severity_level::info);
 
     const boost::filesystem::path out_dir =
@@ -604,7 +661,7 @@ handle_command(const std::string& command_name, const bool has_help,
     r.api().error_handling(read_error_handling_configuration(vm));
 
     const auto run_identifier(compute_run_identifier(command_name, target));
-    const auto out_dir =
+    const auto tracing_out_dir =
         [&]() {
             using boost::filesystem::absolute;
             if (vm.count(tracing_output_directory_arg) == 0) {
@@ -616,7 +673,28 @@ handle_command(const std::string& command_name, const bool has_help,
             const auto s(vm[tracing_output_directory_arg].as<std::string>());
             return absolute(s) / run_identifier;
         }();
-    r.cli().tracing_output_directory(out_dir);
+    r.cli().tracing_output_directory(tracing_out_dir);
+
+    if (r.api().tracing())
+        r.api().tracing()->output_directory(tracing_out_dir);
+
+    const auto diffing_out_dir =
+        [&]() {
+            using boost::filesystem::absolute;
+            if (vm.count(diffing_output_directory_arg) == 0) {
+                if (!r.api().diffing())
+                    return boost::filesystem::path();
+                return absolute(tracing_default_directory) / run_identifier;
+            }
+
+            const auto s(vm[diffing_output_directory_arg].as<std::string>());
+            return absolute(s) / run_identifier;
+        }();
+    r.cli().diffing_output_directory(diffing_out_dir);
+
+    if (r.api().diffing())
+        r.api().diffing()->output_directory(tracing_out_dir);
+
     r.logging(read_logging_configuration(run_identifier, vm));
     return r;
 }

@@ -122,8 +122,7 @@ public:
 
     std::unordered_map<std::string,
                        generation::meta_model::intra_backend_segment_properties>
-    intra_backend_segment_properties(
-        const coding::transforms::options& o) const override;
+    intra_backend_segment_properties() const override;
 
     extraction::meta_model::model
     transform(const generation::transforms::context& ctx,

@@ -30,42 +30,18 @@ namespace {
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory("orchestration.converter"));
 
-using masd::dogen::coding::transforms::options;
-options make_options(const masd::dogen::configuration& cfg,
-    const boost::filesystem::path& source,
-    const boost::filesystem::path& tracing_output_directory) {
-    options r;
-
-    r.target(source);
-
-    if (cfg.error_handling()) {
-        const auto& eh(*cfg.error_handling());
-        r.compatibility_mode(eh.compatibility_mode_enabled());
-    }
-
-    if (cfg.tracing()) {
-        r.tracing(cfg.tracing());
-        r.probe_directory(tracing_output_directory);
-    }
-
-    return r;
-}
-
 }
 
 namespace masd::dogen::orchestration {
 
 void converter::convert(const configuration& cfg,
     const boost::filesystem::path& source,
-    const boost::filesystem::path& destination,
-    const boost::filesystem::path& tracing_output_directory) const {
+    const boost::filesystem::path& destination) const {
     BOOST_LOG_SEV(lg, debug) << "Started conversion.";
 
-    const auto o(make_options(cfg, source, tracing_output_directory));
-    const auto ctx(transforms::context_factory::make_context(o));
-
+    const auto ctx(transforms::context_factory::make_injection_context(cfg));
     using namespace masd::dogen::injection::transforms;
-    model_to_model_chain::transform(ctx.injection_context(), source, destination);
+    model_to_model_chain::transform(ctx, source, destination);
 
     BOOST_LOG_SEV(lg, debug) << "Finished conversion.";
 }

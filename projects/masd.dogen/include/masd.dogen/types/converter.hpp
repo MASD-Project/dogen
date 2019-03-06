@@ -41,8 +41,7 @@ public:
 public:
     virtual void convert(const configuration& cfg,
         const boost::filesystem::path& source,
-        const boost::filesystem::path& destination,
-        const boost::filesystem::path& tracing_output_directory) const = 0;
+        const boost::filesystem::path& destination) const = 0;
 };
 
 }
