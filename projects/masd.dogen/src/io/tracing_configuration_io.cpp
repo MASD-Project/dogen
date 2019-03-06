@@ -48,7 +48,8 @@ std::ostream& operator<<(std::ostream& s, const tracing_configuration& v) {
       << "\"format\": " << v.format() << ", "
       << "\"guids_enabled\": " << v.guids_enabled() << ", "
       << "\"logging_impact\": " << "\"" << tidy_up_string(v.logging_impact()) << "\"" << ", "
-      << "\"use_short_names\": " << v.use_short_names()
+      << "\"use_short_names\": " << v.use_short_names() << ", "
+      << "\"output_directory\": " << "\"" << v.output_directory().generic_string() << "\""
       << " }";
     return(s);
 }

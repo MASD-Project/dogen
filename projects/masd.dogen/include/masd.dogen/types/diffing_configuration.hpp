@@ -26,7 +26,9 @@
 #endif
 
 #include <algorithm>
+#include <boost/filesystem/path.hpp>
 #include "masd.dogen/types/diffing_style.hpp"
+#include "masd.dogen/types/diffing_destination.hpp"
 
 namespace masd::dogen {
 
@@ -36,16 +38,20 @@ namespace masd::dogen {
 class diffing_configuration final {
 public:
     diffing_configuration(const diffing_configuration&) = default;
-    diffing_configuration(diffing_configuration&&) = default;
     ~diffing_configuration() = default;
 
 public:
     diffing_configuration();
 
 public:
+    diffing_configuration(diffing_configuration&& rhs);
+
+public:
     diffing_configuration(
         const masd::dogen::diffing_style style,
-        const bool report_unchanged_files);
+        const bool report_unchanged_files,
+        const masd::dogen::diffing_destination destination,
+        const boost::filesystem::path& output_directory);
 
 public:
     /**
@@ -64,6 +70,14 @@ public:
     diffing_configuration& report_unchanged_files(const bool v);
     /**@}*/
 
+    masd::dogen::diffing_destination destination() const;
+    diffing_configuration& destination(const masd::dogen::diffing_destination v);
+
+    const boost::filesystem::path& output_directory() const;
+    boost::filesystem::path& output_directory();
+    diffing_configuration& output_directory(const boost::filesystem::path& v);
+    diffing_configuration& output_directory(const boost::filesystem::path&& v);
+
 public:
     bool operator==(const diffing_configuration& rhs) const;
     bool operator!=(const diffing_configuration& rhs) const {
@@ -77,6 +91,8 @@ public:
 private:
     masd::dogen::diffing_style style_;
     bool report_unchanged_files_;
+    masd::dogen::diffing_destination destination_;
+    boost::filesystem::path output_directory_;
 };
 
 }

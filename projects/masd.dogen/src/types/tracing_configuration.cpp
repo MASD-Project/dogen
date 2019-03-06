@@ -28,17 +28,27 @@ tracing_configuration::tracing_configuration()
       guids_enabled_(static_cast<bool>(0)),
       use_short_names_(static_cast<bool>(0)) { }
 
+tracing_configuration::tracing_configuration(tracing_configuration&& rhs)
+    : level_(std::move(rhs.level_)),
+      format_(std::move(rhs.format_)),
+      guids_enabled_(std::move(rhs.guids_enabled_)),
+      logging_impact_(std::move(rhs.logging_impact_)),
+      use_short_names_(std::move(rhs.use_short_names_)),
+      output_directory_(std::move(rhs.output_directory_)) { }
+
 tracing_configuration::tracing_configuration(
     const masd::dogen::tracing_level level,
     const masd::dogen::tracing_format format,
     const bool guids_enabled,
     const std::string& logging_impact,
-    const bool use_short_names)
+    const bool use_short_names,
+    const boost::filesystem::path& output_directory)
     : level_(level),
       format_(format),
       guids_enabled_(guids_enabled),
       logging_impact_(logging_impact),
-      use_short_names_(use_short_names) { }
+      use_short_names_(use_short_names),
+      output_directory_(output_directory) { }
 
 void tracing_configuration::swap(tracing_configuration& other) noexcept {
     using std::swap;
@@ -47,6 +57,7 @@ void tracing_configuration::swap(tracing_configuration& other) noexcept {
     swap(guids_enabled_, other.guids_enabled_);
     swap(logging_impact_, other.logging_impact_);
     swap(use_short_names_, other.use_short_names_);
+    swap(output_directory_, other.output_directory_);
 }
 
 bool tracing_configuration::operator==(const tracing_configuration& rhs) const {
@@ -54,7 +65,8 @@ bool tracing_configuration::operator==(const tracing_configuration& rhs) const {
         format_ == rhs.format_ &&
         guids_enabled_ == rhs.guids_enabled_ &&
         logging_impact_ == rhs.logging_impact_ &&
-        use_short_names_ == rhs.use_short_names_;
+        use_short_names_ == rhs.use_short_names_ &&
+        output_directory_ == rhs.output_directory_;
 }
 
 tracing_configuration& tracing_configuration::operator=(tracing_configuration other) {
@@ -114,6 +126,24 @@ bool tracing_configuration::use_short_names() const {
 
 tracing_configuration& tracing_configuration::use_short_names(const bool v) {
     use_short_names_ = v;
+    return *this;
+}
+
+const boost::filesystem::path& tracing_configuration::output_directory() const {
+    return output_directory_;
+}
+
+boost::filesystem::path& tracing_configuration::output_directory() {
+    return output_directory_;
+}
+
+tracing_configuration& tracing_configuration::output_directory(const boost::filesystem::path& v) {
+    output_directory_ = v;
+    return *this;
+}
+
+tracing_configuration& tracing_configuration::output_directory(const boost::filesystem::path&& v) {
+    output_directory_ = std::move(v);
     return *this;
 }
 

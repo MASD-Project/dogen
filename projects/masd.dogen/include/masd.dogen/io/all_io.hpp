@@ -30,6 +30,7 @@
 #include "masd.dogen/io/tracing_level_io.hpp"
 #include "masd.dogen/io/weaving_style_io.hpp"
 #include "masd.dogen/io/tracing_format_io.hpp"
+#include "masd.dogen/io/diffing_destination_io.hpp"
 #include "masd.dogen/io/diffing_configuration_io.hpp"
 #include "masd.dogen/io/tracing_configuration_io.hpp"
 #include "masd.dogen/io/error_handling_configuration_io.hpp"

@@ -27,6 +27,7 @@
 
 #include <string>
 #include <algorithm>
+#include <boost/filesystem/path.hpp>
 #include "masd.dogen/types/tracing_level.hpp"
 #include "masd.dogen/types/tracing_format.hpp"
 
@@ -38,11 +39,13 @@ namespace masd::dogen {
 class tracing_configuration final {
 public:
     tracing_configuration(const tracing_configuration&) = default;
-    tracing_configuration(tracing_configuration&&) = default;
     ~tracing_configuration() = default;
 
 public:
     tracing_configuration();
+
+public:
+    tracing_configuration(tracing_configuration&& rhs);
 
 public:
     tracing_configuration(
@@ -50,7 +53,8 @@ public:
         const masd::dogen::tracing_format format,
         const bool guids_enabled,
         const std::string& logging_impact,
-        const bool use_short_names);
+        const bool use_short_names,
+        const boost::filesystem::path& output_directory);
 
 public:
     /**
@@ -101,6 +105,11 @@ public:
     tracing_configuration& use_short_names(const bool v);
     /**@}*/
 
+    const boost::filesystem::path& output_directory() const;
+    boost::filesystem::path& output_directory();
+    tracing_configuration& output_directory(const boost::filesystem::path& v);
+    tracing_configuration& output_directory(const boost::filesystem::path&& v);
+
 public:
     bool operator==(const tracing_configuration& rhs) const;
     bool operator!=(const tracing_configuration& rhs) const {
@@ -117,6 +126,7 @@ private:
     bool guids_enabled_;
     std::string logging_impact_;
     bool use_short_names_;
+    boost::filesystem::path output_directory_;
 };
 
 }

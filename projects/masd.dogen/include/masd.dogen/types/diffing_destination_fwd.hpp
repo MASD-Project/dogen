@@ -18,35 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_TYPES_INVALID_CONFIGURATION_HPP
-#define MASD_DOGEN_TYPES_INVALID_CONFIGURATION_HPP
+#ifndef MASD_DOGEN_TYPES_DIFFING_DESTINATION_FWD_HPP
+#define MASD_DOGEN_TYPES_DIFFING_DESTINATION_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <boost/exception/info.hpp>
-
 namespace masd::dogen {
 
-/**
- * @brief The values supplied for the configuration are not valid.
- */
-class invalid_configuration : public virtual std::exception, public virtual boost::exception {
-public:
-    invalid_configuration() = default;
-    ~invalid_configuration() noexcept = default;
-
-public:
-    explicit invalid_configuration(const std::string& message) : message_(message) { }
-
-public:
-    const char* what() const noexcept { return(message_.c_str()); }
-
-private:
-    const std::string message_;
-};
+enum class diffing_destination : unsigned int;
 
 }
 

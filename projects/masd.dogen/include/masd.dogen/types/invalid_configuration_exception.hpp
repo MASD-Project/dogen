@@ -18,29 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "masd.dogen/io/diffing_style_io.hpp"
-#include "masd.dogen/io/diffing_destination_io.hpp"
-#include "masd.dogen/io/diffing_configuration_io.hpp"
+#ifndef MASD_DOGEN_TYPES_INVALID_CONFIGURATION_EXCEPTION_HPP
+#define MASD_DOGEN_TYPES_INVALID_CONFIGURATION_EXCEPTION_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace masd::dogen {
 
-std::ostream& operator<<(std::ostream& s, const diffing_configuration& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
+/**
+ * @brief The values supplied for the configuration are not valid.
+ */
+class invalid_configuration_exception : public virtual std::exception, public virtual boost::exception {
+public:
+    invalid_configuration_exception() = default;
+    ~invalid_configuration_exception() noexcept = default;
 
-    s << " { "
-      << "\"__type__\": " << "\"masd::dogen::diffing_configuration\"" << ", "
-      << "\"style\": " << v.style() << ", "
-      << "\"report_unchanged_files\": " << v.report_unchanged_files() << ", "
-      << "\"destination\": " << v.destination() << ", "
-      << "\"output_directory\": " << "\"" << v.output_directory().generic_string() << "\""
-      << " }";
-    return(s);
+public:
+    explicit invalid_configuration_exception(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
 }
 
-}
+#endif
