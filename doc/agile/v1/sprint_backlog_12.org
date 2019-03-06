@@ -713,6 +713,7 @@ We seem to be doing something wrong with directory iterators:
 
 *** STARTED Add basic "diff mode"                                     :story:
     :LOGBOOK:
+    CLOCK: [2019-03-06 Wed 15:23]--[2019-03-06 Wed 16:10] =>  0:47
     CLOCK: [2019-03-06 Wed 15:05]--[2019-03-06 Wed 15:22] =>  0:17
     CLOCK: [2019-03-06 Wed 13:02]--[2019-03-06 Wed 15:04] =>  2:02
     CLOCK: [2019-03-06 Wed 12:01]--[2019-03-06 Wed 12:06] =>  0:05

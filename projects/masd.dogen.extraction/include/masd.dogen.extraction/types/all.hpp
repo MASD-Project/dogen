@@ -73,6 +73,7 @@
 #include "masd.dogen.extraction/types/helpers/file_status_collector.hpp"
 #include "masd.dogen.extraction/types/code_generation_marker_factory.hpp"
 #include "masd.dogen.extraction/types/cpp/scoped_namespace_formatter.hpp"
+#include "masd.dogen.extraction/types/transforms/transform_exception.hpp"
 #include "masd.dogen.extraction/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "masd.dogen.extraction/types/csharp/scoped_namespace_formatter.hpp"
 #include "masd.dogen.extraction/types/helpers/artefact_writer_interface.hpp"
@@ -82,9 +83,8 @@
 #include "masd.dogen.extraction/types/transforms/generate_diffs_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/generate_patch_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/write_artefacts_transform.hpp"
-#include "masd.dogen.extraction/types/transforms/mark_force_write_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/mock_content_filler_transform.hpp"
-#include "masd.dogen.extraction/types/transforms/find_unchanged_artefacts_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/gather_external_artefacts_transform.hpp"
+#include "masd.dogen.extraction/types/transforms/determine_operation_reason_transform.hpp"
 
 #endif

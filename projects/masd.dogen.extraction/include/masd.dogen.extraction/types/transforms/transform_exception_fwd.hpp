@@ -18,32 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_MARK_FORCE_WRITE_TRANSFORM_HPP
-#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_MARK_FORCE_WRITE_TRANSFORM_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_TRANSFORM_EXCEPTION_FWD_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_TRANSFORM_EXCEPTION_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
-
 namespace masd::dogen::extraction::transforms {
 
-class mark_force_write_transform final {
-public:
-    mark_force_write_transform() = default;
-    mark_force_write_transform(const mark_force_write_transform&) = default;
-    mark_force_write_transform(mark_force_write_transform&&) = default;
-    ~mark_force_write_transform() = default;
-    mark_force_write_transform& operator=(const mark_force_write_transform&) = default;
-
-public:
-    bool operator==(const mark_force_write_transform& rhs) const;
-    bool operator!=(const mark_force_write_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-};
+class transform_exception;
 
 }
 

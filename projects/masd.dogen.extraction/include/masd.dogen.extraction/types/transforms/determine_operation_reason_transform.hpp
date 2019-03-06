@@ -18,31 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_FIND_UNCHANGED_ARTEFACTS_TRANSFORM_HPP
-#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_FIND_UNCHANGED_ARTEFACTS_TRANSFORM_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_DETERMINE_OPERATION_REASON_TRANSFORM_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_DETERMINE_OPERATION_REASON_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.extraction/types/transforms/context.hpp"
+#include "masd.dogen.extraction/types/meta_model/model.hpp"
 
 namespace masd::dogen::extraction::transforms {
 
-class find_unchanged_artefacts_transform final {
+/**
+ * @brief Performs a binary diff between the artefact and the file in
+ * the filesystem, if any exists, and marks the artefact accordingly -
+ * as changed or unchanged.
+ */
+class determine_operation_reason_transform final {
 public:
-    find_unchanged_artefacts_transform() = default;
-    find_unchanged_artefacts_transform(const find_unchanged_artefacts_transform&) = default;
-    find_unchanged_artefacts_transform(find_unchanged_artefacts_transform&&) = default;
-    ~find_unchanged_artefacts_transform() = default;
-    find_unchanged_artefacts_transform& operator=(const find_unchanged_artefacts_transform&) = default;
-
-public:
-    bool operator==(const find_unchanged_artefacts_transform& rhs) const;
-    bool operator!=(const find_unchanged_artefacts_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const context& ctx, meta_model::model& m);
 };
 
 }

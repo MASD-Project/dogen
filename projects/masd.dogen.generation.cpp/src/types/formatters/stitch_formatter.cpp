@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem/operations.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
@@ -74,6 +73,15 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
 
         extraction::meta_model::artefact r;
         r.overwrite(a.new_artefact_properties().overwrite());
+
+        extraction::meta_model::operation op;
+        using extraction::meta_model::operation_type;
+        using extraction::meta_model::operation_reason;
+        if (r.overwrite())
+            op.type(operation_type::create_only);
+        else
+            op.type(operation_type::write);
+
         return r;
     }
 
@@ -82,6 +90,15 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
      */
     auto r(instantiator_.instantiate(stitch_template));
     r.overwrite(a.new_artefact_properties().overwrite());
+
+    extraction::meta_model::operation op;
+    using extraction::meta_model::operation_type;
+    using extraction::meta_model::operation_reason;
+    if (r.overwrite())
+        op.type(operation_type::create_only);
+    else
+        op.type(operation_type::write);
+
     r.dependencies().push_back(stitch_template);
     return r;
 }

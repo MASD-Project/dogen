@@ -35,9 +35,10 @@ enum class operation_reason : unsigned int {
     newly_generated = 1, ///< Artefact will produce a new generated file.
     changed_generated = 2, ///< Artefact will produce a changed generated file.
     unchanged_generated = 3, ///< Generated artefact contents match file contents.
-    ignore_generated = 4, ///< User requested artefact to be ignored.
-    force_write = 5, ///< User requested to always write generated artefacts.
-    lint = 6 ///< Artefact represents an unexpected file in project.
+    already_exists = 4, ///< The file already exists and we we're asked to create only.
+    ignore_generated = 5, ///< User requested artefact to be ignored.
+    force_write = 6, ///< User requested to always write generated artefacts.
+    lint = 7 ///< Artefact represents an unexpected file in project.
 };
 
 }

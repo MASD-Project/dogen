@@ -42,6 +42,9 @@ std::ostream& operator<<(std::ostream& s, const operation_reason& v) {
     case operation_reason::unchanged_generated:
         attr = "\"unchanged_generated\"";
         break;
+    case operation_reason::already_exists:
+        attr = "\"already_exists\"";
+        break;
     case operation_reason::ignore_generated:
         attr = "\"ignore_generated\"";
         break;

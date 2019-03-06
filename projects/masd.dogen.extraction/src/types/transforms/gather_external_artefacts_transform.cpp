@@ -29,7 +29,8 @@
 
 namespace {
 
-const std::string transform_id("extraction.transforms.gather_external_artefacts_transform");
+const std::string transform_id(
+    "extraction.transforms.gather_external_artefacts_transform");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -40,7 +41,8 @@ namespace masd::dogen::extraction::transforms {
 
 void gather_external_artefacts_transform::
 transform(const context& ctx, const meta_model::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "linting transform",
+    tracing::scoped_transform_tracer stp(lg,
+        "gatehr external artefacts transform",
         transform_id, m.name(), *ctx.tracer());
 
     /*

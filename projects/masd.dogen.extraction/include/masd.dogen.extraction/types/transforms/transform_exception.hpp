@@ -18,12 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.extraction/types/transforms/mark_force_write_transform.hpp"
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_TRANSFORM_EXCEPTION_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_TRANSFORM_EXCEPTION_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace masd::dogen::extraction::transforms {
 
-bool mark_force_write_transform::operator==(const mark_force_write_transform& /*rhs*/) const {
-    return true;
-}
+class transform_exception : public virtual std::exception, public virtual boost::exception {
+public:
+    transform_exception() = default;
+    ~transform_exception() noexcept = default;
+
+public:
+    explicit transform_exception(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
 
 }
+
+#endif
