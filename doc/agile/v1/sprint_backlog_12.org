@@ -713,6 +713,7 @@ We seem to be doing something wrong with directory iterators:
 
 *** STARTED Add basic "diff mode"                                     :story:
     :LOGBOOK:
+    CLOCK: [2019-03-06 Wed 18:02]--[2019-03-06 Wed 18:12] =>  0:10
     CLOCK: [2019-03-06 Wed 17:12]--[2019-03-06 Wed 18:01] =>  0:49
     CLOCK: [2019-03-06 Wed 16:11]--[2019-03-06 Wed 17:12] =>  1:01
     CLOCK: [2019-03-06 Wed 15:23]--[2019-03-06 Wed 16:10] =>  0:47
@@ -751,6 +752,7 @@ Notes:
 - it seems there is no use case for having both a diff and also
   writing files. So we should just rename diffing to dry-run. When
   enabled, it disables writing.
+- stitch workflow is still using artefact writer.
 
 Merged Stories:
 
