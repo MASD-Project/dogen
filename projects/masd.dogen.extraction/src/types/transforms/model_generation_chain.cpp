@@ -50,15 +50,17 @@ transform(const context& ctx, meta_model::model& m) {
     operation_transform::transform(ctx, m);
 
     /*
-     * Then we need to find all the external artefacts in the
-     * filesystem and figure out which ones are expected.
-     */
-    gather_external_artefacts_transform::transform(ctx, m);
-
-    /*
      * Now write all of the artefacts that require writing.
      */
     write_artefacts_transform::transform(ctx, m);
+
+    /*
+     * Find all the external artefacts in the filesystem and figure
+     * out which ones are not expected. Note that we perform this step
+     * after writing. This is just so that the project directory has
+     * already been created.
+     */
+    gather_external_artefacts_transform::transform(ctx, m);
 
     /*
      * Finally, remove all of the unexpected files.
