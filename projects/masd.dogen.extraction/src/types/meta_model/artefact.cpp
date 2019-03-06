@@ -29,17 +29,20 @@ artefact::artefact(artefact&& rhs)
     : path_(std::move(rhs.path_)),
       content_(std::move(rhs.content_)),
       overwrite_(std::move(rhs.overwrite_)),
-      dependencies_(std::move(rhs.dependencies_)) { }
+      dependencies_(std::move(rhs.dependencies_)),
+      unified_diff_(std::move(rhs.unified_diff_)) { }
 
 artefact::artefact(
     const boost::filesystem::path& path,
     const std::string& content,
     const bool overwrite,
-    const std::vector<boost::filesystem::path>& dependencies)
+    const std::vector<boost::filesystem::path>& dependencies,
+    const std::string& unified_diff)
     : path_(path),
       content_(content),
       overwrite_(overwrite),
-      dependencies_(dependencies) { }
+      dependencies_(dependencies),
+      unified_diff_(unified_diff) { }
 
 void artefact::swap(artefact& other) noexcept {
     using std::swap;
@@ -47,13 +50,15 @@ void artefact::swap(artefact& other) noexcept {
     swap(content_, other.content_);
     swap(overwrite_, other.overwrite_);
     swap(dependencies_, other.dependencies_);
+    swap(unified_diff_, other.unified_diff_);
 }
 
 bool artefact::operator==(const artefact& rhs) const {
     return path_ == rhs.path_ &&
         content_ == rhs.content_ &&
         overwrite_ == rhs.overwrite_ &&
-        dependencies_ == rhs.dependencies_;
+        dependencies_ == rhs.dependencies_ &&
+        unified_diff_ == rhs.unified_diff_;
 }
 
 artefact& artefact::operator=(artefact other) {
@@ -116,6 +121,22 @@ void artefact::dependencies(const std::vector<boost::filesystem::path>& v) {
 
 void artefact::dependencies(const std::vector<boost::filesystem::path>&& v) {
     dependencies_ = std::move(v);
+}
+
+const std::string& artefact::unified_diff() const {
+    return unified_diff_;
+}
+
+std::string& artefact::unified_diff() {
+    return unified_diff_;
+}
+
+void artefact::unified_diff(const std::string& v) {
+    unified_diff_ = v;
+}
+
+void artefact::unified_diff(const std::string&& v) {
+    unified_diff_ = std::move(v);
 }
 
 }

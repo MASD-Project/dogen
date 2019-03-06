@@ -59,7 +59,8 @@ std::ostream& operator<<(std::ostream& s, const artefact& v) {
       << "\"path\": " << "\"" << v.path().generic_string() << "\"" << ", "
       << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\"" << ", "
       << "\"overwrite\": " << v.overwrite() << ", "
-      << "\"dependencies\": " << v.dependencies()
+      << "\"dependencies\": " << v.dependencies() << ", "
+      << "\"unified_diff\": " << "\"" << tidy_up_string(v.unified_diff()) << "\""
       << " }";
     return(s);
 }

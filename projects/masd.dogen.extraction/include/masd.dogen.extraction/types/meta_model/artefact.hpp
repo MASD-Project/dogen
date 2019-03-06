@@ -51,7 +51,8 @@ public:
         const boost::filesystem::path& path,
         const std::string& content,
         const bool overwrite,
-        const std::vector<boost::filesystem::path>& dependencies);
+        const std::vector<boost::filesystem::path>& dependencies,
+        const std::string& unified_diff);
 
 public:
     /**
@@ -95,6 +96,16 @@ public:
     void dependencies(const std::vector<boost::filesystem::path>&& v);
     /**@}*/
 
+    /**
+     * @brief Unified diff between the in-memory artefact and the file in the filesystem.
+     */
+    /**@{*/
+    const std::string& unified_diff() const;
+    std::string& unified_diff();
+    void unified_diff(const std::string& v);
+    void unified_diff(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const artefact& rhs) const;
     bool operator!=(const artefact& rhs) const {
@@ -110,6 +121,7 @@ private:
     std::string content_;
     bool overwrite_;
     std::vector<boost::filesystem::path> dependencies_;
+    std::string unified_diff_;
 };
 
 }
