@@ -226,6 +226,11 @@ context context_factory::make_context(const configuration& cfg,
     r.generation_context().tracer(tracer);
     r.extraction_context().tracer(tracer);
 
+    /*
+     * Setup the diffing configuration.
+     */
+    r.extraction_context().diffing_configuration(cfg.diffing());
+
     return r;
 }
 

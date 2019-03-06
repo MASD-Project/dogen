@@ -26,8 +26,10 @@
 #endif
 
 #include <algorithm>
+#include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.tracing/types/tracer_fwd.hpp"
+#include "masd.dogen/types/diffing_configuration.hpp"
 
 namespace masd::dogen::extraction::transforms {
 
@@ -35,11 +37,15 @@ class context final {
 public:
     context() = default;
     // context(const context&) = default;
-    // context(context&&) = default;
     ~context() = default;
 
 public:
-    explicit context(const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer);
+    // context(context&& rhs);
+
+public:
+    context(
+        const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer,
+        const boost::optional<masd::dogen::diffing_configuration>& diffing_configuration);
 
 public:
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer() const;
@@ -47,8 +53,14 @@ public:
     void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v);
     void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>&& v);
 
+    const boost::optional<masd::dogen::diffing_configuration>& diffing_configuration() const;
+    boost::optional<masd::dogen::diffing_configuration>& diffing_configuration();
+    void diffing_configuration(const boost::optional<masd::dogen::diffing_configuration>& v);
+    void diffing_configuration(const boost::optional<masd::dogen::diffing_configuration>&& v);
+
 private:
     boost::shared_ptr<masd::dogen::tracing::tracer> tracer_;
+    boost::optional<masd::dogen::diffing_configuration> diffing_configuration_;
 };
 
 }

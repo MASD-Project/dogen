@@ -23,8 +23,11 @@
 
 namespace masd::dogen::extraction::transforms {
 
-context::context(const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer)
-    : tracer_(tracer) { }
+context::context(
+    const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer,
+    const boost::optional<masd::dogen::diffing_configuration>& diffing_configuration)
+    : tracer_(tracer),
+      diffing_configuration_(diffing_configuration) { }
 
 const boost::shared_ptr<masd::dogen::tracing::tracer>& context::tracer() const {
     return tracer_;
@@ -40,6 +43,22 @@ void context::tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v) {
 
 void context::tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>&& v) {
     tracer_ = std::move(v);
+}
+
+const boost::optional<masd::dogen::diffing_configuration>& context::diffing_configuration() const {
+    return diffing_configuration_;
+}
+
+boost::optional<masd::dogen::diffing_configuration>& context::diffing_configuration() {
+    return diffing_configuration_;
+}
+
+void context::diffing_configuration(const boost::optional<masd::dogen::diffing_configuration>& v) {
+    diffing_configuration_ = v;
+}
+
+void context::diffing_configuration(const boost::optional<masd::dogen::diffing_configuration>&& v) {
+    diffing_configuration_ = std::move(v);
 }
 
 }
