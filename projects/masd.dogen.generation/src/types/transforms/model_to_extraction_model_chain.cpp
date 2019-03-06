@@ -112,10 +112,8 @@ transform(const generation::transforms::context& ctx,
      */
     const bool ekd(m.extraction_properties().enable_backend_directories());
     auto r(t.transform(ctx, ekd, m));
-    BOOST_LOG_SEV(lg, debug) << "Generated files for : " << id
-                             << ". Total files: "
-                             << std::distance(r.artefacts().begin(),
-                                 r.artefacts().end());
+    BOOST_LOG_SEV(lg, debug) << "Generated artefacts for : " << id
+                             << ". Total artefacts: " << r.artefacts().size();
 
     BOOST_LOG_SEV(lg, debug) << "Transformed model.";
     return r;
