@@ -22,11 +22,12 @@
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"
 #include "masd.dogen.extraction/types/helpers/filesystem_writer.hpp"
-#include "masd.dogen.extraction/types/transforms/writing_transform.hpp"
+#include "masd.dogen.extraction/types/transforms/write_artefacts_transform.hpp"
 
 namespace {
 
-const std::string transform_id("extraction.transforms.writing_transform");
+const std::string transform_id(
+    "extraction.transforms.write_artefacts_transform");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -35,7 +36,7 @@ auto lg(logger_factory(transform_id));
 
 namespace masd::dogen::extraction::transforms {
 
-void writing_transform::
+void write_artefacts_transform::
 transform(const context& ctx, const meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "writting transform",
         transform_id, m.name(), *ctx.tracer(), m);

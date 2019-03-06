@@ -24,16 +24,16 @@
 #include "masd.dogen.utility/types/test_data/validating_resolver.hpp"
 #include "masd.dogen.utility/types/test_data/tds_test_good.hpp"
 #include "masd.dogen.utility/types/test/logging.hpp"
-#include "masd.dogen.extraction/types/helpers/file_linter.hpp"
+#include "masd.dogen.extraction/types/helpers/file_status_collector.hpp"
 
 namespace  {
 
-const std::string test_suite("file_linter_tests");
+const std::string test_suite("file_status_collector_tests");
 const std::string test_module("masd.dogen.extraction.tests");
-const std::string fl_tds_expected("file_linter/expected");
-const std::string fl_tds_actual_f1("file_linter/actual/file_1.txt");
-const std::string fl_tds_actual_f2("file_linter/actual/file_2.txt");
-const std::string fl_tds_actual("file_linter/actual");
+const std::string fl_tds_expected("file_status_collector/expected");
+const std::string fl_tds_actual_f1("file_status_collector/actual/file_1.txt");
+const std::string fl_tds_actual_f2("file_status_collector/actual/file_2.txt");
+const std::string fl_tds_actual("file_status_collector/actual");
 
 const std::vector<std::string> ignored_files;
 
@@ -64,10 +64,10 @@ create_model(const std::list<boost::filesystem::path>& files,
 
 }
 
-BOOST_AUTO_TEST_SUITE(file_linter_tests)
+BOOST_AUTO_TEST_SUITE(file_status_collector_tests)
 
-BOOST_AUTO_TEST_CASE(when_all_files_are_present_file_linter_does_not_find_extra_files) {
-    SETUP_TEST_LOG("when_all_files_are_present_file_linter_does_not_find_extra_files");
+BOOST_AUTO_TEST_CASE(when_all_files_are_present_file_status_collector_does_not_find_extra_files) {
+    SETUP_TEST_LOG("when_all_files_are_present_file_status_collector_does_not_find_extra_files");
     using masd::dogen::utility::test_data::tds_test_good;
     const std::list<boost::filesystem::path> files = {
         tds_test_good::expected_file_1_txt(),
@@ -77,13 +77,13 @@ BOOST_AUTO_TEST_CASE(when_all_files_are_present_file_linter_does_not_find_extra_
         tds_test_good::expected_empty_file_txt()
     };
     const auto tm(create_model(files, ignored_files));
-    using masd::dogen::extraction::helpers::file_linter;
-    const auto result(file_linter::lint(tm));
+    using masd::dogen::extraction::helpers::file_status_collector;
+    const auto result(file_status_collector::lint(tm));
     BOOST_CHECK(result.empty());
 }
 
-BOOST_AUTO_TEST_CASE(when_extra_files_are_present_file_linter_finds_the_extra_files) {
-    SETUP_TEST_LOG("when_extra_files_are_present_file_linter_finds_the_extra_files");
+BOOST_AUTO_TEST_CASE(when_extra_files_are_present_file_status_collector_finds_the_extra_files) {
+    SETUP_TEST_LOG("when_extra_files_are_present_file_status_collector_finds_the_extra_files");
     using masd::dogen::utility::test_data::tds_test_good;
     const std::list<boost::filesystem::path> files = {
         tds_test_good::expected_test_serializer_xmltst(),
@@ -91,8 +91,8 @@ BOOST_AUTO_TEST_CASE(when_extra_files_are_present_file_linter_finds_the_extra_fi
         tds_test_good::expected_empty_file_txt()
     };
     const auto tm(create_model(files, ignored_files));
-    using masd::dogen::extraction::helpers::file_linter;
-    const auto result(file_linter::lint(tm));
+    using masd::dogen::extraction::helpers::file_status_collector;
+    const auto result(file_status_collector::lint(tm));
 
     BOOST_REQUIRE(result.size() == 2);
     BOOST_CHECK(
@@ -113,8 +113,8 @@ BOOST_AUTO_TEST_CASE(ignored_files_are_not_deleted) {
 
     const std::vector<std::string> ignores({".*/file_1.*"});
     const auto tm(create_model(files, ignores));
-    using masd::dogen::extraction::helpers::file_linter;
-    const auto result(file_linter::lint(tm));
+    using masd::dogen::extraction::helpers::file_status_collector;
+    const auto result(file_status_collector::lint(tm));
 
     BOOST_CHECK([&]{
             for (const auto& f : result)

@@ -31,18 +31,18 @@
 #include "masd.dogen.utility/types/io/forward_list_io.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.utility/types/io/forward_list_io.hpp"
-#include "masd.dogen.extraction/types/helpers/file_linter.hpp"
+#include "masd.dogen.extraction/types/helpers/file_status_collector.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("coding.helpers.file_linter"));
+auto lg(logger_factory("coding.helpers.file_status_collector"));
 
 }
 
 namespace masd::dogen::extraction::helpers {
 
-std::set<boost::filesystem::path> file_linter::
+std::set<boost::filesystem::path> file_status_collector::
 obtain_expected_files(const meta_model::model& m) {
     std::set<boost::filesystem::path> r;
     for (const auto a : m.artefacts()) {
@@ -55,7 +55,7 @@ obtain_expected_files(const meta_model::model& m) {
     return r;
 }
 
-std::set<boost::filesystem::path> file_linter::obtain_actual_files(
+std::set<boost::filesystem::path> file_status_collector::obtain_actual_files(
     const std::list<boost::filesystem::path>& managed_directories) {
     using utility::filesystem::find_files;
     const auto r(find_files(managed_directories));
@@ -63,7 +63,7 @@ std::set<boost::filesystem::path> file_linter::obtain_actual_files(
     return r;
 }
 
-std::list<boost::filesystem::path> file_linter::diff_expected_with_actual(
+std::list<boost::filesystem::path> file_status_collector::diff_expected_with_actual(
     const std::set<boost::filesystem::path>& expected,
     const std::set<boost::filesystem::path>& actual) {
     std::list<boost::filesystem::path> r;
@@ -73,7 +73,7 @@ std::list<boost::filesystem::path> file_linter::diff_expected_with_actual(
 }
 
 std::list<boost::filesystem::path>
-file_linter::filter(const std::vector<std::string>& patterns,
+file_status_collector::filter(const std::vector<std::string>& patterns,
     const std::list<boost::filesystem::path>& files) {
 
     std::vector<std::regex> regexes;
@@ -111,7 +111,7 @@ file_linter::filter(const std::vector<std::string>& patterns,
     return r;
 }
 
-std::list<boost::filesystem::path> file_linter::
+std::list<boost::filesystem::path> file_status_collector::
 lint(const meta_model::model& m) {
     BOOST_LOG_SEV(lg, info) << "Started linting text model.";
 

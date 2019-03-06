@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTRACTION_TYPES_HELPERS_FILE_LINTER_HPP
-#define MASD_DOGEN_EXTRACTION_TYPES_HELPERS_FILE_LINTER_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_HELPERS_FILE_STATUS_COLLECTOR_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_HELPERS_FILE_STATUS_COLLECTOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,7 +36,7 @@ namespace masd::dogen::extraction::helpers {
 /**
  * @brief Creates a list of all the lint on a model.
  */
-class file_linter final {
+class file_status_collector final {
 private:
     /**
      * @brief Obtains a list of expected files for the supplied model.

@@ -23,12 +23,12 @@
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.extraction/types/helpers/file_linter.hpp"
-#include "masd.dogen.extraction/types/transforms/linting_transform.hpp"
+#include "masd.dogen.extraction/types/helpers/file_status_collector.hpp"
+#include "masd.dogen.extraction/types/transforms/gather_external_artefacts_transform.hpp"
 
 namespace {
 
-const std::string transform_id("extraction.transforms.linting_transform");
+const std::string transform_id("extraction.transforms.gather_external_artefacts_transform");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -37,7 +37,7 @@ auto lg(logger_factory(transform_id));
 
 namespace masd::dogen::extraction::transforms {
 
-void linting_transform::
+void gather_external_artefacts_transform::
 transform(const context& ctx, const meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "linting transform",
         transform_id, m.name(), *ctx.tracer());
@@ -48,7 +48,7 @@ transform(const context& ctx, const meta_model::model& m) {
     if (!m.delete_extra_files())
         return;
 
-    const auto lint(helpers::file_linter::lint(m));
+    const auto lint(helpers::file_status_collector::lint(m));
     if (!lint.empty())
         utility::filesystem::remove(lint);
 

@@ -18,12 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.extraction/types/transforms/find_unchanged_transform.hpp"
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_HELPERS_FILES_BY_STATUS_FWD_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_HELPERS_FILES_BY_STATUS_FWD_HPP
 
-namespace masd::dogen::extraction::transforms {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-bool find_unchanged_transform::operator==(const find_unchanged_transform& /*rhs*/) const {
-    return true;
+namespace masd::dogen::extraction::helpers {
+
+class files_by_status;
+
 }
 
-}
+#endif

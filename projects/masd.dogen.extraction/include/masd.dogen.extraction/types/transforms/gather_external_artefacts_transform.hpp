@@ -18,31 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.extraction/io/meta_model/model_io.hpp"
-#include "masd.dogen.extraction/types/transforms/write_artefacts_transform.hpp"
-#include "masd.dogen.extraction/types/transforms/gather_external_artefacts_transform.hpp"
-#include "masd.dogen.extraction/types/transforms/model_generation_chain.hpp"
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_GATHER_EXTERNAL_ARTEFACTS_TRANSFORM_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_GATHER_EXTERNAL_ARTEFACTS_TRANSFORM_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-const std::string transform_id("extraction.transforms.model_generation_chain");
-
-using namespace masd::dogen::utility::log;
-auto lg(logger_factory(transform_id));
-
-}
+#include "masd.dogen.extraction/types/transforms/context.hpp"
+#include "masd.dogen.extraction/types/meta_model/model.hpp"
 
 namespace masd::dogen::extraction::transforms {
 
-void model_generation_chain::
-transform(const context& ctx, const meta_model::model& m) {
-    tracing::scoped_chain_tracer stp(lg, "model generation chain",
-        transform_id, m.name(), *ctx.tracer(), m);
+/**
+ * @brief Handles any extraneous files which should be removed.
+ */
+class gather_external_artefacts_transform final {
+public:
+    static void transform(const context& ctx, const meta_model::model& m);
+};
 
-    write_artefacts_transform::transform(ctx, m);
-    gather_external_artefacts_transform::transform(ctx, m);
 }
 
-}
+#endif

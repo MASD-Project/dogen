@@ -18,31 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_FIND_UNCHANGED_TRANSFORM_HPP
-#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_FIND_UNCHANGED_TRANSFORM_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_WRITE_ARTEFACTS_TRANSFORM_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_WRITE_ARTEFACTS_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.extraction/types/meta_model/model.hpp"
+#include "masd.dogen.extraction/types/transforms/context.hpp"
 
 namespace masd::dogen::extraction::transforms {
 
-class find_unchanged_transform final {
+class write_artefacts_transform final {
 public:
-    find_unchanged_transform() = default;
-    find_unchanged_transform(const find_unchanged_transform&) = default;
-    find_unchanged_transform(find_unchanged_transform&&) = default;
-    ~find_unchanged_transform() = default;
-    find_unchanged_transform& operator=(const find_unchanged_transform&) = default;
-
-public:
-    bool operator==(const find_unchanged_transform& rhs) const;
-    bool operator!=(const find_unchanged_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const context& ctx, const meta_model::model& m);
 };
 
 }
