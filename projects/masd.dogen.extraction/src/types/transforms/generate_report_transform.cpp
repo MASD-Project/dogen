@@ -22,16 +22,16 @@
 #include <boost/filesystem.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include "masd.dogen/io/diffing_destination_io.hpp"
+#include "masd.dogen/io/reporting_style_io.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.extraction/types/transforms/transform_exception.hpp"
-#include "masd.dogen.extraction/types/transforms/generate_operation_report_transform.hpp"
+#include "masd.dogen.extraction/types/transforms/generate_report_transform.hpp"
 
 namespace {
 
 const std::string transform_id(
-    "extraction.transforms.generate_operation_report_transform");
+    "extraction.transforms.generate_report_transform");
 
 const std::string reason_invalid("invalid");
 const std::string reason_newly_generated("newly generated");
@@ -55,6 +55,8 @@ const std::string unexpected_operation_reason(
     "Operation reason is invalid or unsupported.");
 const std::string unexpected_destination(
     "Destination is invalid or unsupported: ");
+const std::string unexpected_reporting_style(
+    "Reporting style is invalid or unsupported: ");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -124,11 +126,52 @@ void print_operation_reason(const operation_reason reason, std::ostream& s) {
     s << "] ";
 }
 
+void print_plain_report(std::ostream& s,
+    const masd::dogen::extraction::meta_model::model& m) {
+    const auto base(m.managed_directories().front());
+    for (auto& a : m.artefacts()) {
+        // FIXME: HACK: we seemt to have some blank artefacts atm.
+        if (a.path().empty())
+            continue;
+
+        BOOST_LOG_SEV(lg, debug) << "Processing arefact: "
+                                 << a.path().filename();
+
+        print_operation_type(a.operation().type(), s);
+        print_operation_reason(a.operation().reason(), s);
+
+        auto rp(a.path().lexically_relative(base));
+        const auto gs(rp.generic_string());
+        s << gs << std::endl;
+    }
+}
+
+void print_org_mode_report(std::ostream& /*s*/,
+    const masd::dogen::extraction::meta_model::model& /*m*/) {
+}
+
+void write_report(const std::string& contents, const std::string& model_name,
+    const boost::filesystem::path& output_directory) {
+    BOOST_LOG_SEV(lg, debug) << "Outputting report to: " << output_directory;
+
+    using boost::filesystem::create_directories;
+    create_directories(output_directory);
+
+    boost::filesystem::path p(output_directory);
+    p /= model_name + "_report.txt";
+
+    BOOST_LOG_SEV(lg, debug) << "Writing report file: " << p.generic()
+                             << ". Size: " << contents.size();
+
+    using masd::dogen::utility::filesystem::write_file_content;
+    write_file_content(p, contents);
+}
+
 }
 
 namespace masd::dogen::extraction::transforms {
 
-void generate_operation_report_transform::
+void generate_report_transform::
 transform(const context& ctx, const meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "generate operation report transform", transform_id, m.name(),
@@ -142,43 +185,29 @@ transform(const context& ctx, const meta_model::model& m) {
         return;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Creating patch for model: " << m.name();
+    BOOST_LOG_SEV(lg, debug) << "Creating report for model: " << m.name();
     std::ostringstream ss;
-    const auto base(m.managed_directories().front());
-    for (auto& a : m.artefacts()) {
-        // FIXME: HACK: we seemt to have some blank artefacts atm.
-        if (a.path().empty())
-            continue;
+    const auto& cfg(*ctx.reporting_configuration());
+    BOOST_LOG_SEV(lg, debug) << "Style requested: " << cfg.style();
 
-        BOOST_LOG_SEV(lg, debug) << "Processing arefact: "
-                                 << a.path().filename();
-
-        print_operation_type(a.operation().type(), ss);
-        print_operation_reason(a.operation().reason(), ss);
-
-        auto rp(a.path().lexically_relative(base));
-        const auto gs(rp.generic_string());
-        ss << gs << std::endl;
-    }
+    switch(cfg.style()) {
+    case reporting_style::plain:
+        print_plain_report(ss, m);
+        break;
+    case reporting_style::org_mode:
+        print_org_mode_report(ss, m);
+        break;
+    default: {
+        const auto s(boost::lexical_cast<std::string>(cfg.style()));
+        BOOST_LOG_SEV(lg, error) << unexpected_reporting_style << s;
+        BOOST_THROW_EXCEPTION(
+            transform_exception(unexpected_reporting_style + s));
+    } }
 
     const auto c(ss.str());
-    const auto& cfg(*ctx.reporting_configuration());
-    const auto od(cfg.output_directory());
-    BOOST_LOG_SEV(lg, debug) << "Outputting report to: " << od;
+    write_report(c, m.name(), cfg.output_directory());
 
-    using boost::filesystem::create_directories;
-    create_directories(cfg.output_directory());
-
-    boost::filesystem::path p(cfg.output_directory());
-    p /= m.name() + "_operation_report.txt";
-
-    BOOST_LOG_SEV(lg, debug) << "Writing report file: " << p.generic()
-                             << ". Size: " << c.size();
-
-    using masd::dogen::utility::filesystem::write_file_content;
-    write_file_content(p, c);
-
-    BOOST_LOG_SEV(lg, debug) << "Finished generating patch";
+    BOOST_LOG_SEV(lg, debug) << "Finished generating operational report.";
 }
 
 }

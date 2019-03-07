@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_GENERATE_OPERATION_REPORT_TRANSFORM_HPP
-#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_GENERATE_OPERATION_REPORT_TRANSFORM_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_GENERATE_REPORT_TRANSFORM_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_GENERATE_REPORT_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,7 +34,7 @@ namespace masd::dogen::extraction::transforms {
  * @brief Generates a report with all of the intended operations on
  * artefacts.
  */
-class generate_operation_report_transform final {
+class generate_report_transform final {
 public:
     static void transform(const context& ctx, const meta_model::model& m);
 };

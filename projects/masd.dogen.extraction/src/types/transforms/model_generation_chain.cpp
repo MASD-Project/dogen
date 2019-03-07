@@ -25,7 +25,7 @@
 #include "masd.dogen.extraction/types/transforms/gather_external_artefacts_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/generate_diffs_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/generate_patch_transform.hpp"
-#include "masd.dogen.extraction/types/transforms/generate_operation_report_transform.hpp"
+#include "masd.dogen.extraction/types/transforms/generate_report_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/write_artefacts_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/remove_files_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/model_generation_chain.hpp"
@@ -77,7 +77,7 @@ transform(const context& ctx, meta_model::model& m) {
      * If brief diffs were requested, we will generate a report of all
      * the operations for this set of artefacts.
      */
-    generate_operation_report_transform::transform(ctx, m);
+    generate_report_transform::transform(ctx, m);
 
     /*
      * Write all of the artefacts that require writing.
