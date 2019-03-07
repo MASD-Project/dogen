@@ -12,32 +12,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-07 Thu 12:04]
+#+CAPTION: Clock summary at [2019-03-07 Thu 14:02]
 | <75>                                                         |         |       |       |       |
 | Headline                                                     | Time    |       |       |     % |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                 | *60:42* |       |       | 100.0 |
+| *Total time*                                                 | *62:07* |       |       | 100.0 |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                      | 60:42   |       |       | 100.0 |
-| Active                                                       |         | 60:42 |       | 100.0 |
-| Edit release notes for previous sprint                       |         |       |  1:27 |   2.4 |
-| Sprint and product backlog grooming                          |         |       |  1:03 |   1.7 |
-| Implement text model generation chain in generation          |         |       |  3:45 |   6.2 |
-| Move generation model out of coding                          |         |       |  4:22 |   7.2 |
-| Rename endomodel to just model                               |         |       |  2:11 |   3.6 |
+| Stories                                                      | 62:07   |       |       | 100.0 |
+| Active                                                       |         | 62:07 |       | 100.0 |
+| Edit release notes for previous sprint                       |         |       |  1:27 |   2.3 |
+| Sprint and product backlog grooming                          |         |       |  1:17 |   2.1 |
+| Implement text model generation chain in generation          |         |       |  3:45 |   6.0 |
+| Move generation model out of coding                          |         |       |  4:22 |   7.0 |
+| Rename endomodel to just model                               |         |       |  2:11 |   3.5 |
 | Remove exomodel remnants                                     |         |       |  0:03 |   0.1 |
 | Consider adding a dot graph of the transforms to probing     |         |       |  1:47 |   2.9 |
-| Split annotations processing into two phases                 |         |       |  3:10 |   5.2 |
-| Move injection processing out of coding                      |         |       | 18:39 |  30.7 |
+| Split annotations processing into two phases                 |         |       |  3:10 |   5.1 |
+| Move injection processing out of coding                      |         |       | 18:39 |  30.0 |
 | Create a extraction model post-processing chain              |         |       |  0:56 |   1.5 |
 | Move coding to generation model transform into orchestration |         |       |  0:33 |   0.9 |
-| Add option for northwind tests                               |         |       |  0:54 |   1.5 |
-| Add DTL to vcpkg                                             |         |       |  5:15 |   8.6 |
-| Remove coding options                                        |         |       |  3:59 |   6.6 |
+| Add option for northwind tests                               |         |       |  0:54 |   1.4 |
+| Add DTL to vcpkg                                             |         |       |  5:15 |   8.5 |
+| Remove coding options                                        |         |       |  3:59 |   6.4 |
+| Add basic "diff mode"                                        |         |       | 12:02 |  19.4 |
 | Rename the =transform= method to =apply=                     |         |       |  0:05 |   0.1 |
 | Try to fix valgrind warning on =find_files=                  |         |       |  0:20 |   0.5 |
-| Add basic "diff mode"                                        |         |       | 11:09 |  18.4 |
-| Fix northwind tests on OSX and Windows                       |         |       |  1:04 |   1.8 |
+| Fix northwind tests on OSX and Windows                       |         |       |  1:04 |   1.7 |
+| Update metrics in OpenHub                                    |         |       |  0:18 |   0.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -204,6 +205,9 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-03-07 Thu 14:02]--[2019-03-07 Thu 14:17] =>  0:15
+    CLOCK: [2019-03-07 Thu 13:50]--[2019-03-07 Thu 14:01] =>  0:11
+    CLOCK: [2019-03-07 Thu 13:46]--[2019-03-07 Thu 13:49] =>  0:03
     CLOCK: [2019-03-04 Mon 18:31]--[2019-03-04 Mon 18:41] =>  0:10
     CLOCK: [2019-03-04 Mon 18:14]--[2019-03-04 Mon 18:25] =>  0:11
     CLOCK: [2019-03-01 Fri 11:43]--[2019-03-01 Fri 12:07] =>  0:24
@@ -682,36 +686,8 @@ Notes:
 
 - transform options and formatting repository are not used in coding.
 
-*** STARTED Rename the =transform= method to =apply=                  :story:
-    :LOGBOOK:
-    CLOCK: [2019-03-04 Mon 18:25]--[2019-03-04 Mon 18:30] =>  0:05
-    :END:
-
-Its a bit silly to name classes =x_transform= and then to have their
-main method also called =transform=. We should rename these to
-something like =apply=.
-
-We should work on this once the system tests are back and running, as
-we may break a lot of things with a "simple" tidy-up.
-
-*** STARTED Try to fix valgrind warning on =find_files=               :story:
-    :LOGBOOK:
-    CLOCK: [2019-02-27 Wed 17:25]--[2019-02-27 Wed 17:45] =>  0:20
-    :END:
-
-We seem to be doing something wrong with directory iterators:
-
-: UMC ==7755== Conditional jump or move depends on uninitialised value(s)
-: ==7755==    at 0xA0FAFB: (anonymous namespace)::dir_itr_increment(void*&, void*&, std::__cxx11::basic_string, std::allocator >&, boost::filesystem::file_status&, boost::filesystem::file_status&) (operations.cpp:2163)
-: ==7755==    by 0xA101B5: boost::filesystem::detail::directory_iterator_increment(boost::filesystem::directory_iterator&, boost::system::error_code*) (operations.cpp:2374)
-: ==7755==    by 0xA1002E: boost::filesystem::detail::directory_iterator_construct(boost::filesystem::directory_iterator&, boost::filesystem::path const&, boost::system::error_code*) (operations.cpp:2354)
-: ==7755==    by 0x6F2AF6: boost::filesystem::directory_iterator::directory_iterator(boost::filesystem::path const&) (operations.hpp:905)
-: ==7755==    by 0x6F2462: boost::filesystem::recursive_directory_iterator::recursive_directory_iterator(boost::filesystem::path const&) (operations.hpp:1174)
-: ==7755==    by 0x6F0E15: masd::dogen::utility::filesystem::find_files(boost::filesystem::path const&) (file.cpp:85)
-: ==7755==    by 0x6ADB4B: masd::dogen::coding::helpers::mapping_set_repository_factory::obtain_mappings[abi:cxx11](std::vector > const&) const (mapping_set_repository_factory.cpp:66)
-: ==7755==    by 0x6AF507: masd::dogen::coding::helpers::mapping_set_repository_factory::make(std::vector > const&) const (mapping_set_repository_factory.cpp:172)
-
-*** STARTED Add basic "diff mode"                                     :story:
+*** COMPLETED Add basic "diff mode"                                   :story:
+    CLOSED: [2019-03-07 Thu 13:45]
     :LOGBOOK:
     CLOCK: [2019-03-07 Thu 12:46]--[2019-03-07 Thu 13:39] =>  0:53
     CLOCK: [2019-03-07 Thu 11:58]--[2019-03-07 Thu 12:04] =>  0:06
@@ -810,6 +786,35 @@ diagram.
 
 We could use something like the [[https://code.google.com/p/dtl-cpp/wiki/Tutorial][DTL library]].
 
+*** STARTED Rename the =transform= method to =apply=                  :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-04 Mon 18:25]--[2019-03-04 Mon 18:30] =>  0:05
+    :END:
+
+Its a bit silly to name classes =x_transform= and then to have their
+main method also called =transform=. We should rename these to
+something like =apply=.
+
+We should work on this once the system tests are back and running, as
+we may break a lot of things with a "simple" tidy-up.
+
+*** STARTED Try to fix valgrind warning on =find_files=               :story:
+    :LOGBOOK:
+    CLOCK: [2019-02-27 Wed 17:25]--[2019-02-27 Wed 17:45] =>  0:20
+    :END:
+
+We seem to be doing something wrong with directory iterators:
+
+: UMC ==7755== Conditional jump or move depends on uninitialised value(s)
+: ==7755==    at 0xA0FAFB: (anonymous namespace)::dir_itr_increment(void*&, void*&, std::__cxx11::basic_string, std::allocator >&, boost::filesystem::file_status&, boost::filesystem::file_status&) (operations.cpp:2163)
+: ==7755==    by 0xA101B5: boost::filesystem::detail::directory_iterator_increment(boost::filesystem::directory_iterator&, boost::system::error_code*) (operations.cpp:2374)
+: ==7755==    by 0xA1002E: boost::filesystem::detail::directory_iterator_construct(boost::filesystem::directory_iterator&, boost::filesystem::path const&, boost::system::error_code*) (operations.cpp:2354)
+: ==7755==    by 0x6F2AF6: boost::filesystem::directory_iterator::directory_iterator(boost::filesystem::path const&) (operations.hpp:905)
+: ==7755==    by 0x6F2462: boost::filesystem::recursive_directory_iterator::recursive_directory_iterator(boost::filesystem::path const&) (operations.hpp:1174)
+: ==7755==    by 0x6F0E15: masd::dogen::utility::filesystem::find_files(boost::filesystem::path const&) (file.cpp:85)
+: ==7755==    by 0x6ADB4B: masd::dogen::coding::helpers::mapping_set_repository_factory::obtain_mappings[abi:cxx11](std::vector > const&) const (mapping_set_repository_factory.cpp:66)
+: ==7755==    by 0x6AF507: masd::dogen::coding::helpers::mapping_set_repository_factory::make(std::vector > const&) const (mapping_set_repository_factory.cpp:172)
+
 *** STARTED Fix northwind tests on OSX and Windows                    :story:
     :LOGBOOK:
     CLOCK: [2019-03-06 Wed 12:07]--[2019-03-06 Wed 12:11] =>  0:04
@@ -846,11 +851,90 @@ bit silly yo have to have two flags for this.
 
 *** STARTED Update metrics in OpenHub                                 :story:
     :LOGBOOK:
+    CLOCK: [2019-03-07 Thu 13:40]--[2019-03-07 Thu 13:45] =>  0:05
     CLOCK: [2019-03-07 Thu 12:05]--[2019-03-07 Thu 12:18] =>  0:13
     :END:
 
 For some reason our metrics are stuck at 5 months ago or so. It is
 actually mildly useful to know the number of lines of code etc.
+
+*** STARTED Split operation reports from patches                      :story:
+
+We stated by making the reports mutually exclusive from patch
+generation but in truth we tend to look at both: the report to get an
+overview of the changes and the diff to see the detail. Its painful to
+have to run dogen twice to get that view. Change the options to allow
+creating both in one go.
+
+*** Add org mode support to diff reports                              :story:
+
+Its good to have a flat view for grepping for specific files, but its
+not ideal when trying to get an overview of the changes. We really
+need two styles of reports: plain and org mode.
+
+*** Add dry mode                                                      :story:
+
+With this option we will perform all the work in memory but not
+actually output generated code. It is intended to be used with diffing
+and tracing. Some activities may not support it (e.g. conversion?).
+
+*** Create a "run byproducts" directory                               :story:
+
+We are now outputting quite a lot of different things:
+
+- logs
+- tracing
+- diffing
+- reports
+
+This means we are creating a whole load of random files for each
+run. Ideally we want them all placed under a sensible directory
+structure with the following properties:
+
+- its easy to delete everything in one go, without deleting anything
+  important by mistake such as generated and/or handcrafted code.
+- for each "run", there is a top level directory aggregating the
+  byproducts. Its annoying to have to go to a top-level log directory,
+  top-level tracing directory etc and then look for a run.
+- its easy to move them all out of the way with little configuration
+  (e.g. not having to change N different directories, one at a time).
+
+*** Log file per transform                                            :story:
+
+At present we have a good view of the graph of the chain when tracing
+is enabled. We then use the GUIDs to find the details of the
+transformation in the log. It would be even easier if somehow it was
+possible to have sinks in boost log that are added for each transform
+and removed at the end of it. This way we could generate "mini log
+files" that contain all of the activity that occurred in that
+transform.
+
+Boost log seems to be setup for it, we'd just have to manipulate the
+logger from within the tracer. One slight problem is that we'd only
+want to log from "leaf transforms". This probably means that we need
+to make sure that only transform chains can call other transforms.
+
+In theory all we'd have to do is to get the tracer to do the hooking
+and unhooking for each transform. It should already know about chains
+vs transforms.
+
+*** Logging at info is very messy                                     :story:
+
+Ideally when logging at info we want to see the spine of the program,
+showing all transforms with their start and finishes and some
+information about what they are processing (e.g. model).
+
+
+*** Rework the system tests using diff mode                           :story:
+
+Once we have diff mode, we need to find some kind of workflow for
+tests:
+
+- each product is composed of a git URL and a list of models.
+- we git clone all repos as part of the build process.
+- directories and model locations are hard-coded in each test.
+- test runs against the model and hard-coded location, produces the
+  diff. Test asserts of the diff being non-zero.
 
 *** Fabric generates forward decls with no path                       :story:
 
@@ -895,17 +979,6 @@ The same problem applies to boost linking.
 Since we only need these during generation, seems like the more
 logical place. This should be done when (after) we move all of the
 meta-elements that live in formatter into coding.
-
-*** Rework the system tests using diff mode                           :story:
-
-Once we have diff mode, we need to find some kind of workflow for
-tests:
-
-- each product is composed of a git URL and a list of models.
-- we git clone all repos as part of the build process.
-- directories and model locations are hard-coded in each test.
-- test runs against the model and hard-coded location, produces the
-  diff. Test asserts of the diff being non-zero.
 
 *** Code generation of tests for dogen models                         :story:
 
