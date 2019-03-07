@@ -403,7 +403,18 @@ if (DOGEN_CLI_EXECUTABLE)
     # set(DOGEN_TRACING_OPTIONS ${DOGEN_TRACING_OPTIONS} --tracing-format org-mode)
     # set(DOGEN_TRACING_OPTIONS ${DOGEN_TRACING_OPTIONS} --tracing-guids-enabled)
 
-    set(DOGEN_COMMON_OPTIONS ${DOGEN_LOG_OPTIONS} ${DOGEN_TRACING_OPTIONS})
+    set(DOGEN_DIFFING_OPTIONS "")
+    # uncomment to enable diffing and reporting
+    # set(DOGEN_DIFFING_OPTIONS ${DOGEN_DIFFING_OPTIONS} --diffing-enabled)
+    # set(DOGEN_DIFFING_OPTIONS ${DOGEN_DIFFING_OPTIONS}
+    #    --diffing-destination console)
+    # set(DOGEN_DIFFING_OPTIONS ${DOGEN_DIFFING_OPTIONS} --dry-run-mode-enabled)
+    # set(DOGEN_DIFFING_OPTIONS ${DOGEN_DIFFING_OPTIONS} --reporting-enabled)
+    # set(DOGEN_DIFFING_OPTIONS ${DOGEN_DIFFING_OPTIONS}
+    #    --reporting-style org-mode )
+    # set(DOGEN_COMMON_OPTIONS ${DOGEN_LOG_OPTIONS} ${DOGEN_TRACING_OPTIONS}
+    #    ${DOGEN_DIFFING_OPTIONS})
+
     # uncomment the next line if you require compatibility support
     # set(DOGEN_COMMON_OPTIONS ${DOGEN_COMMON_OPTIONS} --compatibility-mode)
 

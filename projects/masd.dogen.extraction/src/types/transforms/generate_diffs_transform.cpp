@@ -66,6 +66,12 @@ transform(const context& ctx, meta_model::model& m) {
 
     bool found_diffs(false);
     for (auto& a : m.artefacts()) {
+        if (a.path().empty()) {
+            // FIXME: throw
+            BOOST_LOG_SEV(lg, error) << "Empty file name supplied.";
+            continue;
+        }
+
         BOOST_LOG_SEV(lg, debug) << "Processing arefact: "
                                  << a.path().filename();
         BOOST_LOG_SEV(lg, debug) << "Arefact operation: " << a.operation();

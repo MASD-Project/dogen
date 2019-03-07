@@ -81,7 +81,7 @@ transform(const context& ctx, const meta_model::model& m) {
         const auto gs(a.path().generic_string());
         BOOST_LOG_SEV(lg, debug) << "Writing file: " << gs;
 
-        if (gs.empty()) {
+        if (a.path().empty()) {
             // FIXME: throw
             BOOST_LOG_SEV(lg, error) << "Empty file name supplied.";
             continue;
