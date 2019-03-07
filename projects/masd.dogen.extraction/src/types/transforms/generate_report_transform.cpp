@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <set>
 #include <iostream> // FIXME
 #include <boost/filesystem.hpp>
 #include <boost/lexical_cast.hpp>
@@ -25,6 +26,8 @@
 #include "masd.dogen/io/reporting_style_io.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.extraction/hash/meta_model/operation_type_hash.hpp"
+#include "masd.dogen.extraction/hash/meta_model/operation_reason_hash.hpp"
 #include "masd.dogen.extraction/types/transforms/transform_exception.hpp"
 #include "masd.dogen.extraction/types/transforms/generate_report_transform.hpp"
 
@@ -58,13 +61,19 @@ const std::string unexpected_destination(
 const std::string unexpected_reporting_style(
     "Reporting style is invalid or unsupported: ");
 
+const std::string org_extension(".org");
+const std::string text_extension(".txt");
+
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 using masd::dogen::extraction::transforms::transform_exception;
 using masd::dogen::extraction::meta_model::operation_type;
-void print_operation_type(const operation_type ot, std::ostream& s) {
-    s << "[";
+void print_operation_type(const bool add_brackets,
+    const operation_type ot, std::ostream& s) {
+    if (add_brackets)
+        s << "[";
+
     switch(ot) {
     case operation_type::invalid:
         s << type_invalid;
@@ -85,12 +94,17 @@ void print_operation_type(const operation_type ot, std::ostream& s) {
         BOOST_LOG_SEV(lg, error) << unexpected_operation_type;
         BOOST_THROW_EXCEPTION(transform_exception(unexpected_operation_type));
     }
-    s << "] ";
+
+    if (add_brackets)
+        s << "] ";
 }
 
 using masd::dogen::extraction::meta_model::operation_reason;
-void print_operation_reason(const operation_reason reason, std::ostream& s) {
-    s << "[";
+void print_operation_reason(const bool add_brackets,
+    const operation_reason reason, std::ostream& s) {
+    if (add_brackets)
+        s << "[";
+
     switch(reason) {
     case operation_reason::invalid:
         s << reason_invalid;
@@ -123,7 +137,9 @@ void print_operation_reason(const operation_reason reason, std::ostream& s) {
         BOOST_LOG_SEV(lg, error) << unexpected_operation_reason;
         BOOST_THROW_EXCEPTION(transform_exception(unexpected_operation_reason));
     }
-    s << "] ";
+
+    if (add_brackets)
+        s << "] ";
 }
 
 void print_plain_report(std::ostream& s,
@@ -137,8 +153,8 @@ void print_plain_report(std::ostream& s,
         BOOST_LOG_SEV(lg, debug) << "Processing arefact: "
                                  << a.path().filename();
 
-        print_operation_type(a.operation().type(), s);
-        print_operation_reason(a.operation().reason(), s);
+        print_operation_type(true/*add_brackets*/, a.operation().type(), s);
+        print_operation_reason(true/*add_brackets*/, a.operation().reason(), s);
 
         auto rp(a.path().lexically_relative(base));
         const auto gs(rp.generic_string());
@@ -152,7 +168,7 @@ void print_org_mode_report(std::ostream& s,
     using namespace masd::dogen::extraction;
     std::unordered_map<operation_type,
                        std::unordered_map<operation_reason,
-                                          std::list<std::string>
+                                          std::set<std::string>
                                           >
                        > map;
 
@@ -167,24 +183,33 @@ void print_org_mode_report(std::ostream& s,
 
         const auto& op(a.operation());
         auto rp(a.path().lexically_relative(base));
-        map[op.type()][op.reason()].push_back(rp.generic_string());
+        map[op.type()][op.reason()].insert(rp.generic_string());
     }
 
+    s << "* All Operations (" << m.artefacts().size() << ")" << std::endl;
     for (const auto& first_pair : map) {
-        s << "* ";
-        print_operation_type(first_pair.first, s);
-        s << std::endl;
+        s << "** Operation: ";
+        print_operation_type(false/*add_brackets*/, first_pair.first, s);
+
+        unsigned int count(0);
+        for (const auto& second_pair : first_pair.second)
+            count += second_pair.second.size();
+
+        s << "(" << count << ")" << std::endl;
+
         for (const auto& second_pair : first_pair.second) {
-            s << "** ";
-            print_operation_reason(second_pair.first, s);
-            s << std::endl;
+            s << "*** Reason: ";
+            print_operation_reason(false/*add_brackets*/, second_pair.first, s);
+            s << " (" << second_pair.second.size() << ")" << std::endl;
+
             for (const auto& l : second_pair.second)
-                s << l << std::endl;
+                s << "- " << l << std::endl;
         }
     }
 }
 
 void write_report(const std::string& contents, const std::string& model_name,
+    const std::string& extension,
     const boost::filesystem::path& output_directory) {
     BOOST_LOG_SEV(lg, debug) << "Outputting report to: " << output_directory;
 
@@ -192,7 +217,7 @@ void write_report(const std::string& contents, const std::string& model_name,
     create_directories(output_directory);
 
     boost::filesystem::path p(output_directory);
-    p /= model_name + "_report.txt";
+    p /= model_name + "_report" + extension;
 
     BOOST_LOG_SEV(lg, debug) << "Writing report file: " << p.generic()
                              << ". Size: " << contents.size();
@@ -224,12 +249,15 @@ transform(const context& ctx, const meta_model::model& m) {
     const auto& cfg(*ctx.reporting_configuration());
     BOOST_LOG_SEV(lg, debug) << "Style requested: " << cfg.style();
 
+    std::string extension;
     switch(cfg.style()) {
     case reporting_style::plain:
         print_plain_report(ss, m);
+        extension = text_extension;
         break;
     case reporting_style::org_mode:
         print_org_mode_report(ss, m);
+        extension = org_extension;
         break;
     default: {
         const auto s(boost::lexical_cast<std::string>(cfg.style()));
@@ -239,7 +267,7 @@ transform(const context& ctx, const meta_model::model& m) {
     } }
 
     const auto c(ss.str());
-    write_report(c, m.name(), cfg.output_directory());
+    write_report(c, m.name(), extension, cfg.output_directory());
 
     BOOST_LOG_SEV(lg, debug) << "Finished generating operational report.";
 }

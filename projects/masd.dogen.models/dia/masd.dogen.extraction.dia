@@ -14339,7 +14339,9 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Operation to perform to a given artefact.#</dia:string>
+        <dia:string>#Operation to perform to a given artefact.
+
+#DOGEN masd.extraction.cpp.hash.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14543,7 +14545,9 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Reasons for performing an operation.#</dia:string>
+        <dia:string>#Reasons for performing an operation.
+
+#DOGEN masd.extraction.cpp.hash.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
