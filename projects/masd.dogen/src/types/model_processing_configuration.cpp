@@ -18,36 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen/types/error_handling_configuration.hpp"
+#include "masd.dogen/types/model_processing_configuration.hpp"
 
 namespace masd::dogen {
 
-error_handling_configuration::error_handling_configuration()
+model_processing_configuration::model_processing_configuration()
     : compatibility_mode_enabled_(static_cast<bool>(0)) { }
 
-error_handling_configuration::error_handling_configuration(const bool compatibility_mode_enabled)
+model_processing_configuration::model_processing_configuration(const bool compatibility_mode_enabled)
     : compatibility_mode_enabled_(compatibility_mode_enabled) { }
 
-void error_handling_configuration::swap(error_handling_configuration& other) noexcept {
+void model_processing_configuration::swap(model_processing_configuration& other) noexcept {
     using std::swap;
     swap(compatibility_mode_enabled_, other.compatibility_mode_enabled_);
 }
 
-bool error_handling_configuration::operator==(const error_handling_configuration& rhs) const {
+bool model_processing_configuration::operator==(const model_processing_configuration& rhs) const {
     return compatibility_mode_enabled_ == rhs.compatibility_mode_enabled_;
 }
 
-error_handling_configuration& error_handling_configuration::operator=(error_handling_configuration other) {
+model_processing_configuration& model_processing_configuration::operator=(model_processing_configuration other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-bool error_handling_configuration::compatibility_mode_enabled() const {
+bool model_processing_configuration::compatibility_mode_enabled() const {
     return compatibility_mode_enabled_;
 }
 
-void error_handling_configuration::compatibility_mode_enabled(const bool v) {
+void model_processing_configuration::compatibility_mode_enabled(const bool v) {
     compatibility_mode_enabled_ = v;
 }
 

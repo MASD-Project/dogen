@@ -18,24 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "masd.dogen/io/error_handling_configuration_io.hpp"
+#ifndef MASD_DOGEN_IO_MODEL_PROCESSING_CONFIGURATION_IO_HPP
+#define MASD_DOGEN_IO_MODEL_PROCESSING_CONFIGURATION_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "masd.dogen/types/model_processing_configuration.hpp"
 
 namespace masd::dogen {
 
-std::ostream& operator<<(std::ostream& s, const error_handling_configuration& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
-    s << " { "
-      << "\"__type__\": " << "\"masd::dogen::error_handling_configuration\"" << ", "
-      << "\"compatibility_mode_enabled\": " << v.compatibility_mode_enabled()
-      << " }";
-    return(s);
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const masd::dogen::model_processing_configuration& v);
 
 }
+
+#endif

@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/optional_io.hpp"
-#include "masd.dogen/io/error_handling_configuration_io.hpp"
+#include "masd.dogen/io/model_processing_configuration_io.hpp"
 #include "masd.dogen/io/tracing_configuration_io.hpp"
 #include "masd.dogen/io/diffing_configuration_io.hpp"
 #include "masd.dogen/types/configuration_validator.hpp"
@@ -35,7 +35,7 @@ auto lg(logger_factory("configuration_validator"));
 namespace masd::dogen {
 
 void configuration_validator::
-validate(const boost::optional<error_handling_configuration>& ocfg) {
+validate(const boost::optional<model_processing_configuration>& ocfg) {
     BOOST_LOG_SEV(lg, debug) << "Validating error handling configuration.";
 
     if (!ocfg) {
@@ -81,7 +81,10 @@ validate(const boost::optional<diffing_configuration>& ocfg) {
 void configuration_validator::validate(const configuration& cfg) {
     BOOST_LOG_SEV(lg, debug) << "Validating API configuration.";
 
-    validate(cfg.error_handling());
+    // FIXME: cannot log to console and diff to console at the same
+    // time.
+
+    validate(cfg.model_processing());
     validate(cfg.tracing());
     validate(cfg.diffing());
 

@@ -41,8 +41,8 @@ void weaver::weave(const configuration& cfg,
     const boost::filesystem::path& target) const {
     BOOST_LOG_SEV(lg, debug) << "Started weaving.";
 
-    const bool cm(cfg.error_handling() &&
-        cfg.error_handling()->compatibility_mode_enabled());
+    const bool cm(cfg.model_processing() &&
+        cfg.model_processing()->compatibility_mode_enabled());
     masd::dogen::templating::stitch::workflow w(cm);
     w.execute(target);
 

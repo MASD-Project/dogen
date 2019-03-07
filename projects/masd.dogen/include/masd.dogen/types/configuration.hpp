@@ -30,7 +30,8 @@
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen/types/diffing_configuration.hpp"
 #include "masd.dogen/types/tracing_configuration.hpp"
-#include "masd.dogen/types/error_handling_configuration.hpp"
+#include "masd.dogen/types/model_processing_configuration.hpp"
+#include "masd.dogen/types/operational_reporting_configuration.hpp"
 
 namespace masd::dogen {
 
@@ -45,16 +46,17 @@ public:
 
 public:
     configuration(
-        const boost::optional<masd::dogen::error_handling_configuration>& error_handling,
+        const boost::optional<masd::dogen::model_processing_configuration>& model_processing,
         const boost::optional<masd::dogen::tracing_configuration>& tracing,
         const boost::optional<masd::dogen::diffing_configuration>& diffing,
+        const boost::optional<masd::dogen::operational_reporting_configuration>& operational_reporting,
         const boost::filesystem::path& byproduct_directory);
 
 public:
-    const boost::optional<masd::dogen::error_handling_configuration>& error_handling() const;
-    boost::optional<masd::dogen::error_handling_configuration>& error_handling();
-    configuration& error_handling(const boost::optional<masd::dogen::error_handling_configuration>& v);
-    configuration& error_handling(const boost::optional<masd::dogen::error_handling_configuration>&& v);
+    const boost::optional<masd::dogen::model_processing_configuration>& model_processing() const;
+    boost::optional<masd::dogen::model_processing_configuration>& model_processing();
+    configuration& model_processing(const boost::optional<masd::dogen::model_processing_configuration>& v);
+    configuration& model_processing(const boost::optional<masd::dogen::model_processing_configuration>&& v);
 
     /**
      * @brief Configuration for tracing.
@@ -70,6 +72,11 @@ public:
     boost::optional<masd::dogen::diffing_configuration>& diffing();
     configuration& diffing(const boost::optional<masd::dogen::diffing_configuration>& v);
     configuration& diffing(const boost::optional<masd::dogen::diffing_configuration>&& v);
+
+    const boost::optional<masd::dogen::operational_reporting_configuration>& operational_reporting() const;
+    boost::optional<masd::dogen::operational_reporting_configuration>& operational_reporting();
+    configuration& operational_reporting(const boost::optional<masd::dogen::operational_reporting_configuration>& v);
+    configuration& operational_reporting(const boost::optional<masd::dogen::operational_reporting_configuration>&& v);
 
     /**
      * @brief Directory in which to place all files not directly related to generated code.
@@ -92,9 +99,10 @@ public:
     configuration& operator=(configuration other);
 
 private:
-    boost::optional<masd::dogen::error_handling_configuration> error_handling_;
+    boost::optional<masd::dogen::model_processing_configuration> model_processing_;
     boost::optional<masd::dogen::tracing_configuration> tracing_;
     boost::optional<masd::dogen::diffing_configuration> diffing_;
+    boost::optional<masd::dogen::operational_reporting_configuration> operational_reporting_;
     boost::filesystem::path byproduct_directory_;
 };
 

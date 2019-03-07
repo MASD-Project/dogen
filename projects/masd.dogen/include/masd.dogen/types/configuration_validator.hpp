@@ -44,7 +44,7 @@ public:
 
 public:
     static void validate(
-        const boost::optional<error_handling_configuration>& ocfg);
+        const boost::optional<model_processing_configuration>& ocfg);
     static void validate(const boost::optional<tracing_configuration>& ocfg);
     static void validate(const boost::optional<diffing_configuration>& ocfg);
 

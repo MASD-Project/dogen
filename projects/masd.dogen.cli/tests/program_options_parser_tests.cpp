@@ -320,7 +320,7 @@ BOOST_AUTO_TEST_CASE(supplying_log_options_results_in_options_with_expected_log_
     BOOST_CHECK(l.severity() == severity_level::info);
 
     using boost::algorithm::ends_with;
-    const auto fn("masd.dogen.cli.generate." + target_value_arg);
+    const auto fn("cli.generate." + target_value_arg);
 
     BOOST_LOG_SEV(lg, debug) << "expected to end with: " << fn;
     BOOST_CHECK(ends_with(l.filename(), fn));

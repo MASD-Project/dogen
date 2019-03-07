@@ -18,23 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_IO_ALL_IO_HPP
-#define MASD_DOGEN_IO_ALL_IO_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "masd.dogen/io/configuration_io.hpp"
-#include "masd.dogen/io/diffing_style_io.hpp"
-#include "masd.dogen/io/tracing_level_io.hpp"
-#include "masd.dogen/io/weaving_style_io.hpp"
-#include "masd.dogen/io/tracing_format_io.hpp"
-#include "masd.dogen/io/diffing_destination_io.hpp"
-#include "masd.dogen/io/diffing_configuration_io.hpp"
-#include "masd.dogen/io/tracing_configuration_io.hpp"
+#include <string>
+#include <ostream>
+#include <stdexcept>
 #include "masd.dogen/io/operational_reporting_style_io.hpp"
-#include "masd.dogen/io/model_processing_configuration_io.hpp"
-#include "masd.dogen/io/operational_reporting_configuration_io.hpp"
 
-#endif
+namespace masd::dogen {
+
+std::ostream& operator<<(std::ostream& s, const operational_reporting_style& v) {
+    s << "{ " << "\"__type__\": " << "\"operational_reporting_style\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
+    case operational_reporting_style::invalid:
+        attr = "\"invalid\"";
+        break;
+    case operational_reporting_style::plain:
+        attr = "\"plain\"";
+        break;
+    case operational_reporting_style::org_mode:
+        attr = "\"org_mode\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for operational_reporting_style");
+    }
+    s << attr << " }";
+    return s;
+}
+
+}

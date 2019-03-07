@@ -18,23 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_IO_ALL_IO_HPP
-#define MASD_DOGEN_IO_ALL_IO_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "masd.dogen/io/configuration_io.hpp"
-#include "masd.dogen/io/diffing_style_io.hpp"
-#include "masd.dogen/io/tracing_level_io.hpp"
-#include "masd.dogen/io/weaving_style_io.hpp"
-#include "masd.dogen/io/tracing_format_io.hpp"
-#include "masd.dogen/io/diffing_destination_io.hpp"
-#include "masd.dogen/io/diffing_configuration_io.hpp"
-#include "masd.dogen/io/tracing_configuration_io.hpp"
-#include "masd.dogen/io/operational_reporting_style_io.hpp"
+#include <ostream>
+#include <boost/io/ios_state.hpp>
 #include "masd.dogen/io/model_processing_configuration_io.hpp"
-#include "masd.dogen/io/operational_reporting_configuration_io.hpp"
 
-#endif
+namespace masd::dogen {
+
+std::ostream& operator<<(std::ostream& s, const model_processing_configuration& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
+    s << " { "
+      << "\"__type__\": " << "\"masd::dogen::model_processing_configuration\"" << ", "
+      << "\"compatibility_mode_enabled\": " << v.compatibility_mode_enabled()
+      << " }";
+    return(s);
+}
+
+}

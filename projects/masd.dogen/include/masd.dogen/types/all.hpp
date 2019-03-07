@@ -42,7 +42,9 @@
 #include "masd.dogen/types/diffing_configuration.hpp"
 #include "masd.dogen/types/tracing_configuration.hpp"
 #include "masd.dogen/types/configuration_validator.hpp"
-#include "masd.dogen/types/error_handling_configuration.hpp"
+#include "masd.dogen/types/operational_reporting_style.hpp"
+#include "masd.dogen/types/model_processing_configuration.hpp"
 #include "masd.dogen/types/invalid_configuration_exception.hpp"
+#include "masd.dogen/types/operational_reporting_configuration.hpp"
 
 #endif

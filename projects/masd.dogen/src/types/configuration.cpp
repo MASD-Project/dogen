@@ -23,33 +23,38 @@
 namespace masd::dogen {
 
 configuration::configuration(configuration&& rhs)
-    : error_handling_(std::move(rhs.error_handling_)),
+    : model_processing_(std::move(rhs.model_processing_)),
       tracing_(std::move(rhs.tracing_)),
       diffing_(std::move(rhs.diffing_)),
+      operational_reporting_(std::move(rhs.operational_reporting_)),
       byproduct_directory_(std::move(rhs.byproduct_directory_)) { }
 
 configuration::configuration(
-    const boost::optional<masd::dogen::error_handling_configuration>& error_handling,
+    const boost::optional<masd::dogen::model_processing_configuration>& model_processing,
     const boost::optional<masd::dogen::tracing_configuration>& tracing,
     const boost::optional<masd::dogen::diffing_configuration>& diffing,
+    const boost::optional<masd::dogen::operational_reporting_configuration>& operational_reporting,
     const boost::filesystem::path& byproduct_directory)
-    : error_handling_(error_handling),
+    : model_processing_(model_processing),
       tracing_(tracing),
       diffing_(diffing),
+      operational_reporting_(operational_reporting),
       byproduct_directory_(byproduct_directory) { }
 
 void configuration::swap(configuration& other) noexcept {
     using std::swap;
-    swap(error_handling_, other.error_handling_);
+    swap(model_processing_, other.model_processing_);
     swap(tracing_, other.tracing_);
     swap(diffing_, other.diffing_);
+    swap(operational_reporting_, other.operational_reporting_);
     swap(byproduct_directory_, other.byproduct_directory_);
 }
 
 bool configuration::operator==(const configuration& rhs) const {
-    return error_handling_ == rhs.error_handling_ &&
+    return model_processing_ == rhs.model_processing_ &&
         tracing_ == rhs.tracing_ &&
         diffing_ == rhs.diffing_ &&
+        operational_reporting_ == rhs.operational_reporting_ &&
         byproduct_directory_ == rhs.byproduct_directory_;
 }
 
@@ -59,21 +64,21 @@ configuration& configuration::operator=(configuration other) {
     return *this;
 }
 
-const boost::optional<masd::dogen::error_handling_configuration>& configuration::error_handling() const {
-    return error_handling_;
+const boost::optional<masd::dogen::model_processing_configuration>& configuration::model_processing() const {
+    return model_processing_;
 }
 
-boost::optional<masd::dogen::error_handling_configuration>& configuration::error_handling() {
-    return error_handling_;
+boost::optional<masd::dogen::model_processing_configuration>& configuration::model_processing() {
+    return model_processing_;
 }
 
-configuration& configuration::error_handling(const boost::optional<masd::dogen::error_handling_configuration>& v) {
-    error_handling_ = v;
+configuration& configuration::model_processing(const boost::optional<masd::dogen::model_processing_configuration>& v) {
+    model_processing_ = v;
     return *this;
 }
 
-configuration& configuration::error_handling(const boost::optional<masd::dogen::error_handling_configuration>&& v) {
-    error_handling_ = std::move(v);
+configuration& configuration::model_processing(const boost::optional<masd::dogen::model_processing_configuration>&& v) {
+    model_processing_ = std::move(v);
     return *this;
 }
 
@@ -110,6 +115,24 @@ configuration& configuration::diffing(const boost::optional<masd::dogen::diffing
 
 configuration& configuration::diffing(const boost::optional<masd::dogen::diffing_configuration>&& v) {
     diffing_ = std::move(v);
+    return *this;
+}
+
+const boost::optional<masd::dogen::operational_reporting_configuration>& configuration::operational_reporting() const {
+    return operational_reporting_;
+}
+
+boost::optional<masd::dogen::operational_reporting_configuration>& configuration::operational_reporting() {
+    return operational_reporting_;
+}
+
+configuration& configuration::operational_reporting(const boost::optional<masd::dogen::operational_reporting_configuration>& v) {
+    operational_reporting_ = v;
+    return *this;
+}
+
+configuration& configuration::operational_reporting(const boost::optional<masd::dogen::operational_reporting_configuration>&& v) {
+    operational_reporting_ = std::move(v);
     return *this;
 }
 

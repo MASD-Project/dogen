@@ -18,23 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_IO_ALL_IO_HPP
-#define MASD_DOGEN_IO_ALL_IO_HPP
+#ifndef MASD_DOGEN_TYPES_OPERATIONAL_REPORTING_STYLE_FWD_HPP
+#define MASD_DOGEN_TYPES_OPERATIONAL_REPORTING_STYLE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen/io/configuration_io.hpp"
-#include "masd.dogen/io/diffing_style_io.hpp"
-#include "masd.dogen/io/tracing_level_io.hpp"
-#include "masd.dogen/io/weaving_style_io.hpp"
-#include "masd.dogen/io/tracing_format_io.hpp"
-#include "masd.dogen/io/diffing_destination_io.hpp"
-#include "masd.dogen/io/diffing_configuration_io.hpp"
-#include "masd.dogen/io/tracing_configuration_io.hpp"
-#include "masd.dogen/io/operational_reporting_style_io.hpp"
-#include "masd.dogen/io/model_processing_configuration_io.hpp"
-#include "masd.dogen/io/operational_reporting_configuration_io.hpp"
+namespace masd::dogen {
+
+enum class operational_reporting_style : unsigned int;
+
+}
 
 #endif

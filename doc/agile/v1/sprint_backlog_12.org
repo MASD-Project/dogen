@@ -907,6 +907,7 @@ actually mildly useful to know the number of lines of code etc.
 
 *** STARTED Split operation reports from patches                      :story:
     :LOGBOOK:
+    CLOCK: [2019-03-07 Thu 16:15]--[2019-03-07 Thu 16:43] =>  0:28
     CLOCK: [2019-03-07 Thu 14:16]--[2019-03-07 Thu 14:22] =>  0:06
     :END:
 

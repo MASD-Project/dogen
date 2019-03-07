@@ -86,7 +86,7 @@ const std::string diffing_style_unified("unified");
 const std::string diffing_destination_file("file");
 const std::string diffing_destination_console("console");
 
-const std::string error_handling_compatibility_mode_arg(
+const std::string model_processing_compatibility_mode_arg(
     "compatibility-mode-enabled");
 
 const std::string output_byproduct_directory_arg(
@@ -176,7 +176,7 @@ options_description make_top_level_visible_options_description() {
             " diff output. Valid values: file, console.");
     r.add(dod);
 
-    options_description ehod("Error Handling");
+    options_description ehod("Model Processing");
     ehod.add_options()
         ("compatibility-mode-enabled",
             "Try to process models even if there are errors.");
@@ -430,14 +430,14 @@ read_tracing_configuration(const variables_map& vm,
     return r;
 }
 
-boost::optional<masd::dogen::error_handling_configuration>
-read_error_handling_configuration(const variables_map& vm) {
+boost::optional<masd::dogen::model_processing_configuration>
+read_model_processing_configuration(const variables_map& vm) {
     const bool compatibility_mode(
-        vm.count(error_handling_compatibility_mode_arg) != 0);
+        vm.count(model_processing_compatibility_mode_arg) != 0);
     if (!compatibility_mode)
-        return boost::optional<masd::dogen::error_handling_configuration>();
+        return boost::optional<masd::dogen::model_processing_configuration>();
 
-    masd::dogen::error_handling_configuration r;
+    masd::dogen::model_processing_configuration r;
     r.compatibility_mode_enabled(compatibility_mode);
     return r;
 }
@@ -693,7 +693,7 @@ handle_command(const std::string& command_name, const bool has_help,
     const auto li(compute_logging_impact(r.logging()));
     r.api().tracing(read_tracing_configuration(vm, li));
     r.api().diffing(read_diffing_configuration(vm));
-    r.api().error_handling(read_error_handling_configuration(vm));
+    r.api().model_processing(read_model_processing_configuration(vm));
 
     if (r.api().tracing()) {
         const auto tracing_dir(bp / tracing_default_directory);

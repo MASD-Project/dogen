@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_TYPES_ERROR_HANDLING_CONFIGURATION_HPP
-#define MASD_DOGEN_TYPES_ERROR_HANDLING_CONFIGURATION_HPP
+#ifndef MASD_DOGEN_TYPES_MODEL_PROCESSING_CONFIGURATION_HPP
+#define MASD_DOGEN_TYPES_MODEL_PROCESSING_CONFIGURATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,20 +30,19 @@
 namespace masd::dogen {
 
 /**
- * @brief Configuration related to the behaviour of Dogen in the presence of errors and
- * warnings.
+ * @brief Configuration related to the behaviour of Dogen whilst processing models.
  */
-class error_handling_configuration final {
+class model_processing_configuration final {
 public:
-    error_handling_configuration(const error_handling_configuration&) = default;
-    error_handling_configuration(error_handling_configuration&&) = default;
-    ~error_handling_configuration() = default;
+    model_processing_configuration(const model_processing_configuration&) = default;
+    model_processing_configuration(model_processing_configuration&&) = default;
+    ~model_processing_configuration() = default;
 
 public:
-    error_handling_configuration();
+    model_processing_configuration();
 
 public:
-    explicit error_handling_configuration(const bool compatibility_mode_enabled);
+    explicit model_processing_configuration(const bool compatibility_mode_enabled);
 
 public:
     /**
@@ -58,14 +57,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const error_handling_configuration& rhs) const;
-    bool operator!=(const error_handling_configuration& rhs) const {
+    bool operator==(const model_processing_configuration& rhs) const;
+    bool operator!=(const model_processing_configuration& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(error_handling_configuration& other) noexcept;
-    error_handling_configuration& operator=(error_handling_configuration other);
+    void swap(model_processing_configuration& other) noexcept;
+    model_processing_configuration& operator=(model_processing_configuration other);
 
 private:
     bool compatibility_mode_enabled_;
@@ -77,8 +76,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::error_handling_configuration& lhs,
-    masd::dogen::error_handling_configuration& rhs) {
+    masd::dogen::model_processing_configuration& lhs,
+    masd::dogen::model_processing_configuration& rhs) {
     lhs.swap(rhs);
 }
 

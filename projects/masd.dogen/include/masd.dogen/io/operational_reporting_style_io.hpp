@@ -18,16 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_TYPES_ERROR_HANDLING_CONFIGURATION_FWD_HPP
-#define MASD_DOGEN_TYPES_ERROR_HANDLING_CONFIGURATION_FWD_HPP
+#ifndef MASD_DOGEN_IO_OPERATIONAL_REPORTING_STYLE_IO_HPP
+#define MASD_DOGEN_IO_OPERATIONAL_REPORTING_STYLE_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "masd.dogen/types/operational_reporting_style.hpp"
+
 namespace masd::dogen {
 
-class error_handling_configuration;
+std::ostream& operator<<(std::ostream& s, const operational_reporting_style& v);
 
 }
 

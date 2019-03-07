@@ -124,8 +124,8 @@ make_injection_context(const configuration& cfg) {
     /*
      * Setup the annotations related factories.
      */
-    const bool cm(cfg.error_handling() &&
-        cfg.error_handling()->compatibility_mode_enabled());
+    const bool cm(cfg.model_processing() &&
+        cfg.model_processing()->compatibility_mode_enabled());
     const auto af(boost::make_shared<annotations::annotation_factory>(
                 *alrp, *atrp, cm));
     r.annotation_factory(af);
@@ -181,8 +181,8 @@ context context_factory::make_context(const configuration& cfg,
     /*
      * Setup the annotations related factories.
      */
-    const bool cm(cfg.error_handling() ?
-        cfg.error_handling()->compatibility_mode_enabled() :
+    const bool cm(cfg.model_processing() ?
+        cfg.model_processing()->compatibility_mode_enabled() :
         false);
     const auto af(boost::make_shared<annotations::annotation_factory>(
                 *alrp, *atrp, cm));
