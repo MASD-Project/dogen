@@ -111,7 +111,7 @@ int execute_cli_workflow(const int argc, const char* argv[],
      */
     const auto& cfg(*ocfg);
     slm.initialise(cfg.logging());
-    BOOST_LOG_SEV(lg, debug) << "Command line arguments: " << args;
+    BOOST_LOG_SEV(lg, info) << "Command line arguments: " << args;
     BOOST_LOG_SEV(lg, debug) << "Configuration: " << cfg;
 
     /*
