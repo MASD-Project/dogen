@@ -44,10 +44,10 @@ void compose_header(const boost::filesystem::path& base,
 
     auto rp(a_path.lexically_relative(base));
     const auto gs(rp.generic().generic_string());
-    s << "diff -u a/" << gs << " b/" << gs << std::endl
+    s << "diff -u " << gs << " " << gs << std::endl
       << info << std::endl
-      << "---  a/" << gs << std::endl
-      << "+++  b/" << gs << std::endl;
+      << "---  " << gs << std::endl
+      << "+++  " << gs << std::endl;
 }
 
 void compose_diff(const std::vector<std::string>& a,
