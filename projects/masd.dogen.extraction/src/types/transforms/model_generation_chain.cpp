@@ -51,6 +51,13 @@ transform(const context& ctx, meta_model::model& m) {
     operation_transform::transform(ctx, m);
 
     /*
+     * Now find all the external artefacts in the filesystem and
+     * figure out which ones are not expected. This must be done
+     * before we generate diffs.
+     */
+    gather_external_artefacts_transform::transform(ctx, m);
+
+    /*
      * If diffing is enabled, we will now compute unified diffs
      * between the files in the filesystem and the generated
      * artefacts. This must be done before writing.
@@ -61,14 +68,6 @@ transform(const context& ctx, meta_model::model& m) {
      * Now write all of the artefacts that require writing.
      */
     write_artefacts_transform::transform(ctx, m);
-
-    /*
-     * Find all the external artefacts in the filesystem and figure
-     * out which ones are not expected. Note that we perform this step
-     * after writing. This is just so that the project directory has
-     * already been created.
-     */
-    gather_external_artefacts_transform::transform(ctx, m);
 
     /*
      * Finally, remove all of the unexpected files.

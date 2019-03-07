@@ -56,15 +56,26 @@ obtain_expected_files(const meta_model::model& m) {
     return r;
 }
 
+std::list<boost::filesystem::path> file_status_collector::
+filter_by_existence(const std::list<boost::filesystem::path>& dirs) {
+    std::list<boost::filesystem::path> r;
+    for (const auto& d : dirs) {
+        if (boost::filesystem::exists(d))
+            r.push_back(d);
+    }
+    return r;
+}
+
 std::set<boost::filesystem::path> file_status_collector::obtain_actual_files(
-    const std::list<boost::filesystem::path>& managed_directories) {
+    const std::list<boost::filesystem::path>& dirs) {
     using utility::filesystem::find_files;
-    const auto r(find_files(managed_directories));
+    const auto r(find_files(dirs));
     BOOST_LOG_SEV(lg, debug) << "Actual files: " << r;
     return r;
 }
 
-std::list<boost::filesystem::path> file_status_collector::diff_expected_with_actual(
+std::list<boost::filesystem::path>
+file_status_collector::diff_expected_with_actual(
     const std::set<boost::filesystem::path>& expected,
     const std::set<boost::filesystem::path>& actual) {
     std::list<boost::filesystem::path> r;
@@ -116,6 +127,19 @@ files_by_status
 file_status_collector::collect(const meta_model::model& m) {
     BOOST_LOG_SEV(lg, info) << "Started collecting status for model: "
                             << m.name();
+    BOOST_LOG_SEV(lg, debug) << "Initial directories: "
+                             << m.managed_directories();
+
+    /*
+     * We only care about those directories that exist. This handles
+     * the case where we are generating the model for the first time.
+     */
+    const auto dirs(filter_by_existence(m.managed_directories()));
+    BOOST_LOG_SEV(lg, debug) << "Filtered directories: " << dirs;
+    if (dirs.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "No directories to analyse.";
+        return files_by_status();
+    }
 
     /*
      * First we obtain the set of files expected, given the contents
@@ -127,7 +151,7 @@ file_status_collector::collect(const meta_model::model& m) {
      * Then we find out which files are actually available in the file
      * system, in the directories managed by the text model.
      */
-    const auto actual(obtain_actual_files(m.managed_directories()));
+    const auto actual(obtain_actual_files(dirs));
 
     /*
      * We then compute the difference between the two sets.

@@ -47,11 +47,17 @@ private:
     obtain_expected_files(const meta_model::model& m);
 
     /**
-     * @brief Returns all files in all managed directories.
+     * @brief Filters the directories to only those that exist at
+     * present.
+     */
+    static std::list<boost::filesystem::path>
+    filter_by_existence(const std::list<boost::filesystem::path>& dirs);
+
+    /**
+     * @brief Returns all files in all the supplied directories.
      */
     static std::set<boost::filesystem::path> obtain_actual_files(
-        const std::list<boost::filesystem::path>& managed_directories);
-
+        const std::list<boost::filesystem::path>& dirs);
 
     /**
      * @brief Returns all files that are not expected.
