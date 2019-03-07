@@ -76,13 +76,13 @@ transform(const context& ctx, const meta_model::model& m) {
         if (gs.empty()) {
             // FIXME: throw
             BOOST_LOG_SEV(lg, error) << "Empty file name supplied.";
-            return;
+            continue;
         }
 
         using extraction::meta_model::operation_type;
         const auto ot(a.operation().type());
         if (ot != operation_type::write) {
-            BOOST_LOG_SEV(lg, error) << "Ignoring operation: " << ot;
+            BOOST_LOG_SEV(lg, trace) << "Ignoring operation: " << ot;
             continue;
         }
 
