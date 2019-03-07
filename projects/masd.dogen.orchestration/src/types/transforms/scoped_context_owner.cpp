@@ -18,31 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.tracing/types/tracer.hpp"
+#include "masd.dogen.orchestration/types/transforms/context_factory.hpp"
 #include "masd.dogen.orchestration/types/transforms/scoped_context_owner.hpp"
-#include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
-#include "masd.dogen.orchestration/types/generator.hpp"
 
-namespace {
+namespace masd::dogen::orchestration::transforms {
 
-using namespace masd::dogen::utility::log;
-auto lg(logger_factory("orchestration.generator"));
+scoped_context_owner::scoped_context_owner(
+    const configuration& cfg,
+    const boost::filesystem::path& output_directory) :
+    context_(context_factory::make_context(cfg, output_directory)) {}
 
+scoped_context_owner::~scoped_context_owner() {
+    if (context_.injection_context().tracer())
+        context_.injection_context().tracer()->end_tracing();
 }
 
-namespace masd::dogen::orchestration {
-
-void generator::generate(const configuration& cfg,
-    const boost::filesystem::path& target,
-    const boost::filesystem::path& output_directory) const {
-
-    BOOST_LOG_SEV(lg, debug) << "Started generation.";
-
-    using namespace transforms;
-    scoped_context_owner sco(cfg, output_directory);
-    code_generation_chain::transform(sco.context(), target);
-
-    BOOST_LOG_SEV(lg, debug) << "Finished generation.";
+const transforms::context& scoped_context_owner::context() const {
+    return context_;
 }
 
 }

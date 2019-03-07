@@ -38,6 +38,7 @@
 #include "masd.dogen.orchestration/types/transforms/factory_exception.hpp"
 #include "masd.dogen.orchestration/types/transforms/transform_exception.hpp"
 #include "masd.dogen.orchestration/types/transforms/naming_configuration.hpp"
+#include "masd.dogen.orchestration/types/transforms/scoped_context_owner.hpp"
 #include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
 #include "masd.dogen.orchestration/types/helpers/stereotypes_conversion_result.hpp"
 #include "masd.dogen.orchestration/types/transforms/injection_model_to_coding_model_transform.hpp"

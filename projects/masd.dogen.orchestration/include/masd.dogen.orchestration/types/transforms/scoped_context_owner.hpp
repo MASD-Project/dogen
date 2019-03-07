@@ -18,31 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.orchestration/types/transforms/scoped_context_owner.hpp"
-#include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
-#include "masd.dogen.orchestration/types/generator.hpp"
+#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_SCOPED_CONTEXT_OWNER_HPP
+#define MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_SCOPED_CONTEXT_OWNER_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-using namespace masd::dogen::utility::log;
-auto lg(logger_factory("orchestration.generator"));
+#include <boost/filesystem/path.hpp>
+#include "masd.dogen/types/configuration.hpp"
+#include "masd.dogen.orchestration/types/transforms/context.hpp"
+
+namespace masd::dogen::orchestration::transforms {
+
+class scoped_context_owner final {
+public:
+    scoped_context_owner(const configuration& cfg,
+        const boost::filesystem::path& output_directory);
+    ~scoped_context_owner();
+
+public:
+    const transforms::context& context() const;
+
+private:
+    const transforms::context context_;
+};
 
 }
 
-namespace masd::dogen::orchestration {
-
-void generator::generate(const configuration& cfg,
-    const boost::filesystem::path& target,
-    const boost::filesystem::path& output_directory) const {
-
-    BOOST_LOG_SEV(lg, debug) << "Started generation.";
-
-    using namespace transforms;
-    scoped_context_owner sco(cfg, output_directory);
-    code_generation_chain::transform(sco.context(), target);
-
-    BOOST_LOG_SEV(lg, debug) << "Finished generation.";
-}
-
-}
+#endif
