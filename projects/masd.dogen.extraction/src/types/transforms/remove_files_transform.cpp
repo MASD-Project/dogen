@@ -40,6 +40,22 @@ transform(const context& ctx, const meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "remove files transform", transform_id, m.name(), *ctx.tracer());
 
+    /*
+     * If we don't have any artefacts then we're done.
+     */
+    if (m.artefacts().empty()) {
+        BOOST_LOG_SEV(lg, warn) << "No artefacts were generated.";
+        return;
+    }
+
+    /*
+     * If the user requested a dry run, we cannot execute.
+     */
+    if (ctx.dry_run_mode_enabled()) {
+        BOOST_LOG_SEV(lg, warn) << "Dry run mode is enabled, not executing.";
+        return;
+    }
+
     std::list<boost::filesystem::path> unexpected;
     for (const auto& a : m.artefacts()) {
         using extraction::meta_model::operation_type;

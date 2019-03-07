@@ -42,7 +42,9 @@ public:
     model_processing_configuration();
 
 public:
-    explicit model_processing_configuration(const bool compatibility_mode_enabled);
+    model_processing_configuration(
+        const bool compatibility_mode_enabled,
+        const bool dry_run_mode_enabled);
 
 public:
     /**
@@ -54,6 +56,14 @@ public:
     /**@{*/
     bool compatibility_mode_enabled() const;
     void compatibility_mode_enabled(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, all transforms wil be executed but no code will be emitted.
+     */
+    /**@{*/
+    bool dry_run_mode_enabled() const;
+    void dry_run_mode_enabled(const bool v);
     /**@}*/
 
 public:
@@ -68,6 +78,7 @@ public:
 
 private:
     bool compatibility_mode_enabled_;
+    bool dry_run_mode_enabled_;
 };
 
 }

@@ -30,7 +30,7 @@ configuration::configuration(configuration&& rhs)
       byproduct_directory_(std::move(rhs.byproduct_directory_)) { }
 
 configuration::configuration(
-    const boost::optional<masd::dogen::model_processing_configuration>& model_processing,
+    const masd::dogen::model_processing_configuration& model_processing,
     const boost::optional<masd::dogen::tracing_configuration>& tracing,
     const boost::optional<masd::dogen::diffing_configuration>& diffing,
     const boost::optional<masd::dogen::reporting_configuration>& reporting,
@@ -64,20 +64,20 @@ configuration& configuration::operator=(configuration other) {
     return *this;
 }
 
-const boost::optional<masd::dogen::model_processing_configuration>& configuration::model_processing() const {
+const masd::dogen::model_processing_configuration& configuration::model_processing() const {
     return model_processing_;
 }
 
-boost::optional<masd::dogen::model_processing_configuration>& configuration::model_processing() {
+masd::dogen::model_processing_configuration& configuration::model_processing() {
     return model_processing_;
 }
 
-configuration& configuration::model_processing(const boost::optional<masd::dogen::model_processing_configuration>& v) {
+configuration& configuration::model_processing(const masd::dogen::model_processing_configuration& v) {
     model_processing_ = v;
     return *this;
 }
 
-configuration& configuration::model_processing(const boost::optional<masd::dogen::model_processing_configuration>&& v) {
+configuration& configuration::model_processing(const masd::dogen::model_processing_configuration&& v) {
     model_processing_ = std::move(v);
     return *this;
 }

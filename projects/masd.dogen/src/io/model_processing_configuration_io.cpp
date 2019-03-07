@@ -33,7 +33,8 @@ std::ostream& operator<<(std::ostream& s, const model_processing_configuration& 
 
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::model_processing_configuration\"" << ", "
-      << "\"compatibility_mode_enabled\": " << v.compatibility_mode_enabled()
+      << "\"compatibility_mode_enabled\": " << v.compatibility_mode_enabled() << ", "
+      << "\"dry_run_mode_enabled\": " << v.dry_run_mode_enabled()
       << " }";
     return(s);
 }

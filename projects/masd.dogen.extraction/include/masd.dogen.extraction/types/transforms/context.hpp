@@ -47,7 +47,8 @@ public:
     context(
         const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer,
         const boost::optional<masd::dogen::diffing_configuration>& diffing_configuration,
-        const boost::optional<masd::dogen::reporting_configuration>& reporting_configuration);
+        const boost::optional<masd::dogen::reporting_configuration>& reporting_configuration,
+        const bool dry_run_mode_enabled);
 
 public:
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer() const;
@@ -65,10 +66,14 @@ public:
     void reporting_configuration(const boost::optional<masd::dogen::reporting_configuration>& v);
     void reporting_configuration(const boost::optional<masd::dogen::reporting_configuration>&& v);
 
+    bool dry_run_mode_enabled() const;
+    void dry_run_mode_enabled(const bool v);
+
 private:
     boost::shared_ptr<masd::dogen::tracing::tracer> tracer_;
     boost::optional<masd::dogen::diffing_configuration> diffing_configuration_;
     boost::optional<masd::dogen::reporting_configuration> reporting_configuration_;
+    bool dry_run_mode_enabled_;
 };
 
 }

@@ -23,18 +23,24 @@
 namespace masd::dogen {
 
 model_processing_configuration::model_processing_configuration()
-    : compatibility_mode_enabled_(static_cast<bool>(0)) { }
+    : compatibility_mode_enabled_(static_cast<bool>(0)),
+      dry_run_mode_enabled_(static_cast<bool>(0)) { }
 
-model_processing_configuration::model_processing_configuration(const bool compatibility_mode_enabled)
-    : compatibility_mode_enabled_(compatibility_mode_enabled) { }
+model_processing_configuration::model_processing_configuration(
+    const bool compatibility_mode_enabled,
+    const bool dry_run_mode_enabled)
+    : compatibility_mode_enabled_(compatibility_mode_enabled),
+      dry_run_mode_enabled_(dry_run_mode_enabled) { }
 
 void model_processing_configuration::swap(model_processing_configuration& other) noexcept {
     using std::swap;
     swap(compatibility_mode_enabled_, other.compatibility_mode_enabled_);
+    swap(dry_run_mode_enabled_, other.dry_run_mode_enabled_);
 }
 
 bool model_processing_configuration::operator==(const model_processing_configuration& rhs) const {
-    return compatibility_mode_enabled_ == rhs.compatibility_mode_enabled_;
+    return compatibility_mode_enabled_ == rhs.compatibility_mode_enabled_ &&
+        dry_run_mode_enabled_ == rhs.dry_run_mode_enabled_;
 }
 
 model_processing_configuration& model_processing_configuration::operator=(model_processing_configuration other) {
@@ -49,6 +55,14 @@ bool model_processing_configuration::compatibility_mode_enabled() const {
 
 void model_processing_configuration::compatibility_mode_enabled(const bool v) {
     compatibility_mode_enabled_ = v;
+}
+
+bool model_processing_configuration::dry_run_mode_enabled() const {
+    return dry_run_mode_enabled_;
+}
+
+void model_processing_configuration::dry_run_mode_enabled(const bool v) {
+    dry_run_mode_enabled_ = v;
 }
 
 }

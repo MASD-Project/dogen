@@ -66,6 +66,14 @@ transform(const context& ctx, const meta_model::model& m) {
     }
 
     /*
+     * If the user requested a dry run, we cannot execute.
+     */
+    if (ctx.dry_run_mode_enabled()) {
+        BOOST_LOG_SEV(lg, warn) << "Dry run mode is enabled, not executing.";
+        return;
+    }
+
+    /*
      * Write each artefact that has been marked with a "write"
      * operation to the filesystem. Ignore all other artefacts.
      */

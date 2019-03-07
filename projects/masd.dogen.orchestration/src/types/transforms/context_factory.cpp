@@ -124,8 +124,7 @@ make_injection_context(const configuration& cfg) {
     /*
      * Setup the annotations related factories.
      */
-    const bool cm(cfg.model_processing() &&
-        cfg.model_processing()->compatibility_mode_enabled());
+    const bool cm(cfg.model_processing().compatibility_mode_enabled());
     const auto af(boost::make_shared<annotations::annotation_factory>(
                 *alrp, *atrp, cm));
     r.annotation_factory(af);
@@ -181,9 +180,7 @@ context context_factory::make_context(const configuration& cfg,
     /*
      * Setup the annotations related factories.
      */
-    const bool cm(cfg.model_processing() ?
-        cfg.model_processing()->compatibility_mode_enabled() :
-        false);
+    const bool cm(cfg.model_processing().compatibility_mode_enabled());
     const auto af(boost::make_shared<annotations::annotation_factory>(
                 *alrp, *atrp, cm));
     r.injection_context().annotation_factory(af);
@@ -231,6 +228,12 @@ context context_factory::make_context(const configuration& cfg,
      */
     r.extraction_context().diffing_configuration(cfg.diffing());
     r.extraction_context().reporting_configuration(cfg.reporting());
+
+    /*
+     * Populate dry run mode.
+     */
+    const auto drm(cfg.model_processing().dry_run_mode_enabled());
+    r.extraction_context().dry_run_mode_enabled(drm);
 
     return r;
 }

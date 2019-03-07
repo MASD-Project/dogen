@@ -862,6 +862,16 @@ Its good to have a flat view for grepping for specific files, but its
 not ideal when trying to get an overview of the changes. We really
 need two styles of reports: plain and org mode.
 
+*** COMPLETED Add dry mode                                            :story:
+    CLOSED: [2019-03-07 Thu 21:31]
+    :LOGBOOK:
+    CLOCK: [2019-03-07 Thu 21:08]--[2019-03-07 Thu 21:31] =>  0:23
+    :END:
+
+With this option we will perform all the work in memory but not
+actually output generated code. It is intended to be used with diffing
+and tracing. Some activities may not support it (e.g. conversion?).
+
 *** STARTED Rename the =transform= method to =apply=                  :story:
     :LOGBOOK:
     CLOCK: [2019-03-04 Mon 18:25]--[2019-03-04 Mon 18:30] =>  0:05
@@ -933,12 +943,6 @@ bit silly yo have to have two flags for this.
 
 For some reason our metrics are stuck at 5 months ago or so. It is
 actually mildly useful to know the number of lines of code etc.
-
-*** Add dry mode                                                      :story:
-
-With this option we will perform all the work in memory but not
-actually output generated code. It is intended to be used with diffing
-and tracing. Some activities may not support it (e.g. conversion?).
 
 *** Log file per transform                                            :story:
 

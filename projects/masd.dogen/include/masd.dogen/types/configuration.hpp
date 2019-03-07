@@ -46,17 +46,17 @@ public:
 
 public:
     configuration(
-        const boost::optional<masd::dogen::model_processing_configuration>& model_processing,
+        const masd::dogen::model_processing_configuration& model_processing,
         const boost::optional<masd::dogen::tracing_configuration>& tracing,
         const boost::optional<masd::dogen::diffing_configuration>& diffing,
         const boost::optional<masd::dogen::reporting_configuration>& reporting,
         const boost::filesystem::path& byproduct_directory);
 
 public:
-    const boost::optional<masd::dogen::model_processing_configuration>& model_processing() const;
-    boost::optional<masd::dogen::model_processing_configuration>& model_processing();
-    configuration& model_processing(const boost::optional<masd::dogen::model_processing_configuration>& v);
-    configuration& model_processing(const boost::optional<masd::dogen::model_processing_configuration>&& v);
+    const masd::dogen::model_processing_configuration& model_processing() const;
+    masd::dogen::model_processing_configuration& model_processing();
+    configuration& model_processing(const masd::dogen::model_processing_configuration& v);
+    configuration& model_processing(const masd::dogen::model_processing_configuration&& v);
 
     /**
      * @brief Configuration for tracing.
@@ -99,7 +99,7 @@ public:
     configuration& operator=(configuration other);
 
 private:
-    boost::optional<masd::dogen::model_processing_configuration> model_processing_;
+    masd::dogen::model_processing_configuration model_processing_;
     boost::optional<masd::dogen::tracing_configuration> tracing_;
     boost::optional<masd::dogen::diffing_configuration> diffing_;
     boost::optional<masd::dogen::reporting_configuration> reporting_;

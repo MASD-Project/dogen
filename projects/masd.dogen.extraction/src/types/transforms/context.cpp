@@ -26,10 +26,12 @@ namespace masd::dogen::extraction::transforms {
 context::context(
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer,
     const boost::optional<masd::dogen::diffing_configuration>& diffing_configuration,
-    const boost::optional<masd::dogen::reporting_configuration>& reporting_configuration)
+    const boost::optional<masd::dogen::reporting_configuration>& reporting_configuration,
+    const bool dry_run_mode_enabled)
     : tracer_(tracer),
       diffing_configuration_(diffing_configuration),
-      reporting_configuration_(reporting_configuration) { }
+      reporting_configuration_(reporting_configuration),
+      dry_run_mode_enabled_(dry_run_mode_enabled) { }
 
 const boost::shared_ptr<masd::dogen::tracing::tracer>& context::tracer() const {
     return tracer_;
@@ -77,6 +79,14 @@ void context::reporting_configuration(const boost::optional<masd::dogen::reporti
 
 void context::reporting_configuration(const boost::optional<masd::dogen::reporting_configuration>&& v) {
     reporting_configuration_ = std::move(v);
+}
+
+bool context::dry_run_mode_enabled() const {
+    return dry_run_mode_enabled_;
+}
+
+void context::dry_run_mode_enabled(const bool v) {
+    dry_run_mode_enabled_ = v;
 }
 
 }

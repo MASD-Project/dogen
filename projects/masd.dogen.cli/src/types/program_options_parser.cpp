@@ -90,6 +90,8 @@ const std::string diffing_destination_console("console");
 
 const std::string model_processing_compatibility_mode_arg(
     "compatibility-mode-enabled");
+const std::string model_processing_dry_run_mode_enabled_arg(
+    "dry-run-mode-enabled");
 
 const std::string output_byproduct_directory_arg(
     "byproduct-directory");
@@ -107,8 +109,6 @@ const std::string missing_target("Mandatory parameter target is missing. ");
 const std::string invalid_tracing_level("Tracing level is invalid: ");
 const std::string invalid_log_level("Tracing level is invalid: ");
 const std::string invalid_format("Tracing format is invalid: ");
-const std::string invalid_diffing_style(
-    "Diffing style is invalid or unsupported: ");
 const std::string invalid_diffing_destination(
     "Diffing destination is invalid or unsupported: ");
 const std::string invalid_reporting_style(
@@ -181,16 +181,17 @@ options_description make_top_level_visible_options_description() {
     options_description dod("Diffing");
     dod.add_options()
         ("diffing-enabled", "Generate diffs against files in the filesystem.")
-        ("diffing-style",  value<std::string>(), "Style to use in the diff. "
-            "Valid values: brief, unified.")
         ("diffing-destination",  value<std::string>(), "Where to write the "
             " diff output. Valid values: file, console. Defaults to file.");
     r.add(dod);
 
-    options_description ehod("Model Processing");
+    options_description ehod("Processing");
     ehod.add_options()
         ("compatibility-mode-enabled",
-            "Try to process models even if there are errors.");
+            "Try to process models even if there are errors.")
+        ("dry-run-mode-enabled",
+            "Executes all transforms but does not emit generated code.");
+
     r.add(ehod);
 
     return r;
@@ -445,15 +446,18 @@ read_tracing_configuration(const variables_map& vm,
     return r;
 }
 
-boost::optional<masd::dogen::model_processing_configuration>
+masd::dogen::model_processing_configuration
 read_model_processing_configuration(const variables_map& vm) {
     const bool compatibility_mode(
         vm.count(model_processing_compatibility_mode_arg) != 0);
-    if (!compatibility_mode)
-        return boost::optional<masd::dogen::model_processing_configuration>();
 
     masd::dogen::model_processing_configuration r;
     r.compatibility_mode_enabled(compatibility_mode);
+
+    const bool dry_run(
+        vm.count(model_processing_dry_run_mode_enabled_arg) != 0);
+    r.dry_run_mode_enabled(dry_run);
+
     return r;
 }
 
