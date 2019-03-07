@@ -24,28 +24,23 @@ namespace masd::dogen::cli {
 
 cli_configuration::cli_configuration(cli_configuration&& rhs)
     : activity_(std::move(rhs.activity_)),
-      tracing_output_directory_(std::move(rhs.tracing_output_directory_)),
-      diffing_output_directory_(std::move(rhs.diffing_output_directory_)) { }
+      byproduct_directory_(std::move(rhs.byproduct_directory_)) { }
 
 cli_configuration::cli_configuration(
     const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& activity,
-    const boost::filesystem::path& tracing_output_directory,
-    const boost::filesystem::path& diffing_output_directory)
+    const boost::filesystem::path& byproduct_directory)
     : activity_(activity),
-      tracing_output_directory_(tracing_output_directory),
-      diffing_output_directory_(diffing_output_directory) { }
+      byproduct_directory_(byproduct_directory) { }
 
 void cli_configuration::swap(cli_configuration& other) noexcept {
     using std::swap;
     swap(activity_, other.activity_);
-    swap(tracing_output_directory_, other.tracing_output_directory_);
-    swap(diffing_output_directory_, other.diffing_output_directory_);
+    swap(byproduct_directory_, other.byproduct_directory_);
 }
 
 bool cli_configuration::operator==(const cli_configuration& rhs) const {
     return activity_ == rhs.activity_ &&
-        tracing_output_directory_ == rhs.tracing_output_directory_ &&
-        diffing_output_directory_ == rhs.diffing_output_directory_;
+        byproduct_directory_ == rhs.byproduct_directory_;
 }
 
 cli_configuration& cli_configuration::operator=(cli_configuration other) {
@@ -72,39 +67,21 @@ cli_configuration& cli_configuration::activity(const boost::variant<masd::dogen:
     return *this;
 }
 
-const boost::filesystem::path& cli_configuration::tracing_output_directory() const {
-    return tracing_output_directory_;
+const boost::filesystem::path& cli_configuration::byproduct_directory() const {
+    return byproduct_directory_;
 }
 
-boost::filesystem::path& cli_configuration::tracing_output_directory() {
-    return tracing_output_directory_;
+boost::filesystem::path& cli_configuration::byproduct_directory() {
+    return byproduct_directory_;
 }
 
-cli_configuration& cli_configuration::tracing_output_directory(const boost::filesystem::path& v) {
-    tracing_output_directory_ = v;
+cli_configuration& cli_configuration::byproduct_directory(const boost::filesystem::path& v) {
+    byproduct_directory_ = v;
     return *this;
 }
 
-cli_configuration& cli_configuration::tracing_output_directory(const boost::filesystem::path&& v) {
-    tracing_output_directory_ = std::move(v);
-    return *this;
-}
-
-const boost::filesystem::path& cli_configuration::diffing_output_directory() const {
-    return diffing_output_directory_;
-}
-
-boost::filesystem::path& cli_configuration::diffing_output_directory() {
-    return diffing_output_directory_;
-}
-
-cli_configuration& cli_configuration::diffing_output_directory(const boost::filesystem::path& v) {
-    diffing_output_directory_ = v;
-    return *this;
-}
-
-cli_configuration& cli_configuration::diffing_output_directory(const boost::filesystem::path&& v) {
-    diffing_output_directory_ = std::move(v);
+cli_configuration& cli_configuration::byproduct_directory(const boost::filesystem::path&& v) {
+    byproduct_directory_ = std::move(v);
     return *this;
 }
 

@@ -49,8 +49,7 @@ public:
 public:
     cli_configuration(
         const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& activity,
-        const boost::filesystem::path& tracing_output_directory,
-        const boost::filesystem::path& diffing_output_directory);
+        const boost::filesystem::path& byproduct_directory);
 
 public:
     const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& activity() const;
@@ -58,15 +57,15 @@ public:
     cli_configuration& activity(const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& v);
     cli_configuration& activity(const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>&& v);
 
-    const boost::filesystem::path& tracing_output_directory() const;
-    boost::filesystem::path& tracing_output_directory();
-    cli_configuration& tracing_output_directory(const boost::filesystem::path& v);
-    cli_configuration& tracing_output_directory(const boost::filesystem::path&& v);
-
-    const boost::filesystem::path& diffing_output_directory() const;
-    boost::filesystem::path& diffing_output_directory();
-    cli_configuration& diffing_output_directory(const boost::filesystem::path& v);
-    cli_configuration& diffing_output_directory(const boost::filesystem::path&& v);
+    /**
+     * @brief Directory in which to place all files not directly related to generated code.
+     */
+    /**@{*/
+    const boost::filesystem::path& byproduct_directory() const;
+    boost::filesystem::path& byproduct_directory();
+    cli_configuration& byproduct_directory(const boost::filesystem::path& v);
+    cli_configuration& byproduct_directory(const boost::filesystem::path&& v);
+    /**@}*/
 
 public:
     bool operator==(const cli_configuration& rhs) const;
@@ -80,8 +79,7 @@ public:
 
 private:
     boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration> activity_;
-    boost::filesystem::path tracing_output_directory_;
-    boost::filesystem::path diffing_output_directory_;
+    boost::filesystem::path byproduct_directory_;
 };
 
 }

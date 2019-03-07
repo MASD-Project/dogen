@@ -12,33 +12,35 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-07 Thu 14:02]
+#+CAPTION: Clock summary at [2019-03-07 Thu 15:22]
 | <75>                                                         |         |       |       |       |
 | Headline                                                     | Time    |       |       |     % |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                 | *62:07* |       |       | 100.0 |
+| *Total time*                                                 | *63:29* |       |       | 100.0 |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                      | 62:07   |       |       | 100.0 |
-| Active                                                       |         | 62:07 |       | 100.0 |
+| Stories                                                      | 63:29   |       |       | 100.0 |
+| Active                                                       |         | 63:29 |       | 100.0 |
 | Edit release notes for previous sprint                       |         |       |  1:27 |   2.3 |
-| Sprint and product backlog grooming                          |         |       |  1:17 |   2.1 |
-| Implement text model generation chain in generation          |         |       |  3:45 |   6.0 |
-| Move generation model out of coding                          |         |       |  4:22 |   7.0 |
-| Rename endomodel to just model                               |         |       |  2:11 |   3.5 |
+| Sprint and product backlog grooming                          |         |       |  1:32 |   2.4 |
+| Implement text model generation chain in generation          |         |       |  3:45 |   5.9 |
+| Move generation model out of coding                          |         |       |  4:22 |   6.9 |
+| Rename endomodel to just model                               |         |       |  2:11 |   3.4 |
 | Remove exomodel remnants                                     |         |       |  0:03 |   0.1 |
-| Consider adding a dot graph of the transforms to probing     |         |       |  1:47 |   2.9 |
-| Split annotations processing into two phases                 |         |       |  3:10 |   5.1 |
-| Move injection processing out of coding                      |         |       | 18:39 |  30.0 |
+| Consider adding a dot graph of the transforms to probing     |         |       |  1:47 |   2.8 |
+| Split annotations processing into two phases                 |         |       |  3:10 |   5.0 |
+| Move injection processing out of coding                      |         |       | 18:39 |  29.4 |
 | Create a extraction model post-processing chain              |         |       |  0:56 |   1.5 |
 | Move coding to generation model transform into orchestration |         |       |  0:33 |   0.9 |
 | Add option for northwind tests                               |         |       |  0:54 |   1.4 |
-| Add DTL to vcpkg                                             |         |       |  5:15 |   8.5 |
-| Remove coding options                                        |         |       |  3:59 |   6.4 |
-| Add basic "diff mode"                                        |         |       | 12:02 |  19.4 |
+| Add DTL to vcpkg                                             |         |       |  5:15 |   8.3 |
+| Remove coding options                                        |         |       |  3:59 |   6.3 |
+| Add basic "diff mode"                                        |         |       | 12:02 |  19.0 |
+| Create a "run byproducts" directory                          |         |       |  1:01 |   1.6 |
 | Rename the =transform= method to =apply=                     |         |       |  0:05 |   0.1 |
 | Try to fix valgrind warning on =find_files=                  |         |       |  0:20 |   0.5 |
 | Fix northwind tests on OSX and Windows                       |         |       |  1:04 |   1.7 |
 | Update metrics in OpenHub                                    |         |       |  0:18 |   0.5 |
+| Split operation reports from patches                         |         |       |  0:06 |   0.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -786,6 +788,42 @@ diagram.
 
 We could use something like the [[https://code.google.com/p/dtl-cpp/wiki/Tutorial][DTL library]].
 
+*** COMPLETED Create a "run byproducts" directory                     :story:
+    CLOSED: [2019-03-07 Thu 15:19]
+    :LOGBOOK:
+    CLOCK: [2019-03-07 Thu 14:22]--[2019-03-07 Thu 15:23] =>  1:01
+    :END:
+
+We are now outputting quite a lot of different things:
+
+- logs
+- tracing
+- diffing
+- reports
+- reference graph (eventually)
+- ...
+
+This means we are creating a whole load of random files for each
+run. Ideally we want them all placed under a sensible directory
+structure with the following properties:
+
+- its easy to delete everything in one go, without deleting anything
+  important by mistake such as generated and/or handcrafted code.
+- for each "run", there is a top level directory aggregating the
+  byproducts. Its annoying to have to go to a top-level log directory,
+  top-level tracing directory etc and then look for a run.
+- its easy to move them all out of the way with little configuration
+  (e.g. not having to change N different directories, one at a time).
+- its good to have the run id in filenames because we tend to have a
+  lot of them open at the same time. This applies to logs, patches,
+  etc.
+
+Directory structure:
+
+- dogen.byproduct
+- run ID
+- folder if needed, e.g. tracing. Otherwise, file: log, patch etc.
+
 *** STARTED Rename the =transform= method to =apply=                  :story:
     :LOGBOOK:
     CLOCK: [2019-03-04 Mon 18:25]--[2019-03-04 Mon 18:30] =>  0:05
@@ -859,12 +897,19 @@ For some reason our metrics are stuck at 5 months ago or so. It is
 actually mildly useful to know the number of lines of code etc.
 
 *** STARTED Split operation reports from patches                      :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-07 Thu 14:16]--[2019-03-07 Thu 14:22] =>  0:06
+    :END:
 
 We stated by making the reports mutually exclusive from patch
 generation but in truth we tend to look at both: the report to get an
 overview of the changes and the diff to see the detail. Its painful to
 have to run dogen twice to get that view. Change the options to allow
 creating both in one go.
+
+*** Logging impact in tracing is blank                                :story:
+
+This should be set to the logging level.
 
 *** Add org mode support to diff reports                              :story:
 
@@ -877,27 +922,6 @@ need two styles of reports: plain and org mode.
 With this option we will perform all the work in memory but not
 actually output generated code. It is intended to be used with diffing
 and tracing. Some activities may not support it (e.g. conversion?).
-
-*** Create a "run byproducts" directory                               :story:
-
-We are now outputting quite a lot of different things:
-
-- logs
-- tracing
-- diffing
-- reports
-
-This means we are creating a whole load of random files for each
-run. Ideally we want them all placed under a sensible directory
-structure with the following properties:
-
-- its easy to delete everything in one go, without deleting anything
-  important by mistake such as generated and/or handcrafted code.
-- for each "run", there is a top level directory aggregating the
-  byproducts. Its annoying to have to go to a top-level log directory,
-  top-level tracing directory etc and then look for a run.
-- its easy to move them all out of the way with little configuration
-  (e.g. not having to change N different directories, one at a time).
 
 *** Log file per transform                                            :story:
 

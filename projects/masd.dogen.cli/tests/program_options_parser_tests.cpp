@@ -69,8 +69,6 @@ const std::string invalid_value_arg("invalid-value");
 const std::string log_enabled_arg("--log-enabled");
 const std::string log_level_arg("--log-level");
 const std::string log_level_value_arg("info");
-const std::string log_directory_arg("--log-directory");
-const std::string log_directory_value_arg("some_dir");
 
 const std::string target_arg("--target");
 const std::string target_value_arg("some_target");
@@ -313,8 +311,7 @@ BOOST_AUTO_TEST_CASE(supplying_log_options_results_in_options_with_expected_log_
         generate_command_arg,
         target_arg, target_value_arg,
         log_enabled_arg,
-        log_level_arg, log_level_value_arg,
-        log_directory_arg, log_directory_value_arg
+        log_level_arg, log_level_value_arg
     };
     const auto o(check_valid_arguments(args));
     BOOST_LOG_SEV(lg, debug) << "options: " << o;
@@ -325,12 +322,8 @@ BOOST_AUTO_TEST_CASE(supplying_log_options_results_in_options_with_expected_log_
     using boost::algorithm::ends_with;
     const auto fn("masd.dogen.cli.generate." + target_value_arg);
 
-    // log_directory_value_arg +
     BOOST_LOG_SEV(lg, debug) << "expected to end with: " << fn;
     BOOST_CHECK(ends_with(l.filename(), fn));
-
-    BOOST_CHECK(ends_with(l.output_directory().generic_string(),
-            log_directory_value_arg));
 }
 
 BOOST_AUTO_TEST_CASE(not_supplying_log_level_results_in_disabling_logging) {

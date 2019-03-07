@@ -25,27 +25,32 @@ namespace masd::dogen {
 configuration::configuration(configuration&& rhs)
     : error_handling_(std::move(rhs.error_handling_)),
       tracing_(std::move(rhs.tracing_)),
-      diffing_(std::move(rhs.diffing_)) { }
+      diffing_(std::move(rhs.diffing_)),
+      byproduct_directory_(std::move(rhs.byproduct_directory_)) { }
 
 configuration::configuration(
     const boost::optional<masd::dogen::error_handling_configuration>& error_handling,
     const boost::optional<masd::dogen::tracing_configuration>& tracing,
-    const boost::optional<masd::dogen::diffing_configuration>& diffing)
+    const boost::optional<masd::dogen::diffing_configuration>& diffing,
+    const boost::filesystem::path& byproduct_directory)
     : error_handling_(error_handling),
       tracing_(tracing),
-      diffing_(diffing) { }
+      diffing_(diffing),
+      byproduct_directory_(byproduct_directory) { }
 
 void configuration::swap(configuration& other) noexcept {
     using std::swap;
     swap(error_handling_, other.error_handling_);
     swap(tracing_, other.tracing_);
     swap(diffing_, other.diffing_);
+    swap(byproduct_directory_, other.byproduct_directory_);
 }
 
 bool configuration::operator==(const configuration& rhs) const {
     return error_handling_ == rhs.error_handling_ &&
         tracing_ == rhs.tracing_ &&
-        diffing_ == rhs.diffing_;
+        diffing_ == rhs.diffing_ &&
+        byproduct_directory_ == rhs.byproduct_directory_;
 }
 
 configuration& configuration::operator=(configuration other) {
@@ -105,6 +110,24 @@ configuration& configuration::diffing(const boost::optional<masd::dogen::diffing
 
 configuration& configuration::diffing(const boost::optional<masd::dogen::diffing_configuration>&& v) {
     diffing_ = std::move(v);
+    return *this;
+}
+
+const boost::filesystem::path& configuration::byproduct_directory() const {
+    return byproduct_directory_;
+}
+
+boost::filesystem::path& configuration::byproduct_directory() {
+    return byproduct_directory_;
+}
+
+configuration& configuration::byproduct_directory(const boost::filesystem::path& v) {
+    byproduct_directory_ = v;
+    return *this;
+}
+
+configuration& configuration::byproduct_directory(const boost::filesystem::path&& v) {
+    byproduct_directory_ = std::move(v);
     return *this;
 }
 

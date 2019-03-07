@@ -76,7 +76,8 @@ std::ostream& operator<<(std::ostream& s, const configuration& v) {
       << "\"__type__\": " << "\"masd::dogen::configuration\"" << ", "
       << "\"error_handling\": " << v.error_handling() << ", "
       << "\"tracing\": " << v.tracing() << ", "
-      << "\"diffing\": " << v.diffing()
+      << "\"diffing\": " << v.diffing() << ", "
+      << "\"byproduct_directory\": " << "\"" << v.byproduct_directory().generic_string() << "\""
       << " }";
     return(s);
 }

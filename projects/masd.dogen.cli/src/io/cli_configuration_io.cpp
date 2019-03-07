@@ -64,8 +64,7 @@ std::ostream& operator<<(std::ostream& s, const cli_configuration& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::cli::cli_configuration\"" << ", "
       << "\"activity\": " << v.activity() << ", "
-      << "\"tracing_output_directory\": " << "\"" << v.tracing_output_directory().generic_string() << "\"" << ", "
-      << "\"diffing_output_directory\": " << "\"" << v.diffing_output_directory().generic_string() << "\""
+      << "\"byproduct_directory\": " << "\"" << v.byproduct_directory().generic_string() << "\""
       << " }";
     return(s);
 }

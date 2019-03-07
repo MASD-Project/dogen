@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include <boost/optional.hpp>
+#include <boost/filesystem/path.hpp>
 #include "masd.dogen/types/diffing_configuration.hpp"
 #include "masd.dogen/types/tracing_configuration.hpp"
 #include "masd.dogen/types/error_handling_configuration.hpp"
@@ -46,7 +47,8 @@ public:
     configuration(
         const boost::optional<masd::dogen::error_handling_configuration>& error_handling,
         const boost::optional<masd::dogen::tracing_configuration>& tracing,
-        const boost::optional<masd::dogen::diffing_configuration>& diffing);
+        const boost::optional<masd::dogen::diffing_configuration>& diffing,
+        const boost::filesystem::path& byproduct_directory);
 
 public:
     const boost::optional<masd::dogen::error_handling_configuration>& error_handling() const;
@@ -69,6 +71,16 @@ public:
     configuration& diffing(const boost::optional<masd::dogen::diffing_configuration>& v);
     configuration& diffing(const boost::optional<masd::dogen::diffing_configuration>&& v);
 
+    /**
+     * @brief Directory in which to place all files not directly related to generated code.
+     */
+    /**@{*/
+    const boost::filesystem::path& byproduct_directory() const;
+    boost::filesystem::path& byproduct_directory();
+    configuration& byproduct_directory(const boost::filesystem::path& v);
+    configuration& byproduct_directory(const boost::filesystem::path&& v);
+    /**@}*/
+
 public:
     bool operator==(const configuration& rhs) const;
     bool operator!=(const configuration& rhs) const {
@@ -83,6 +95,7 @@ private:
     boost::optional<masd::dogen::error_handling_configuration> error_handling_;
     boost::optional<masd::dogen::tracing_configuration> tracing_;
     boost::optional<masd::dogen::diffing_configuration> diffing_;
+    boost::filesystem::path byproduct_directory_;
 };
 
 }

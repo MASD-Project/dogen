@@ -3025,7 +3025,7 @@ infrastructure. To be removed.#</dia:string>
         <dia:point val="71,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="70.95,25.95;110.05,31.25"/>
+        <dia:rectangle val="70.95,25.95;110.05,30.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="71,26"/>
@@ -3034,7 +3034,7 @@ infrastructure. To be removed.#</dia:string>
         <dia:real val="39"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#cli_configuration#</dia:string>
@@ -3149,7 +3149,7 @@ infrastructure. To be removed.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#tracing_output_directory#</dia:string>
+            <dia:string>#byproduct_directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boost::filesystem::path#</dia:string>
@@ -3158,30 +3158,7 @@ infrastructure. To be removed.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#diffing_output_directory#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#boost::filesystem::path#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Directory in which to place all files not directly related to generated code.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3312,7 +3289,7 @@ infrastructure. To be removed.#</dia:string>
         <dia:point val="68.37,36.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="67.62,31.15;90.7,37.7"/>
+        <dia:rectangle val="67.62,30.35;90.7,37.7"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3320,7 +3297,7 @@ infrastructure. To be removed.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="68.37,36.9"/>
         <dia:point val="90.5,36.9"/>
-        <dia:point val="90.5,31.2"/>
+        <dia:point val="90.5,30.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>

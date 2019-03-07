@@ -30,8 +30,9 @@
 
 namespace {
 
+const std::string empty;
 const std::string indent("   ");
-const std::string run_identifier_prefix("masd.dogen.cli.");
+const std::string run_identifier_prefix("cli.");
 
 const std::string more_information("Try --help' for more information.");
 const std::string knitter_product("MASD Dogen v" DOGEN_VERSION);
@@ -57,7 +58,6 @@ const std::string help_arg("help");
 const std::string version_arg("version");
 const std::string command_arg("command");
 const std::string logging_log_enabled_arg("log-enabled");
-const std::string logging_log_directory_arg("log-directory");
 const std::string logging_log_to_console_arg("log-to-console");
 const std::string logging_log_level_arg("log-level");
 const std::string logging_log_level_trace("trace");
@@ -65,7 +65,6 @@ const std::string logging_log_level_debug("debug");
 const std::string logging_log_level_info("info");
 const std::string logging_log_level_warn("warn");
 const std::string logging_log_level_error("error");
-const std::string logging_default_log_directory("log");
 
 const std::string tracing_enabled_arg("tracing-enabled");
 const std::string tracing_level_arg("tracing-level");
@@ -76,22 +75,23 @@ const std::string tracing_format_arg("tracing-format");
 const std::string tracing_format_plain("plain");
 const std::string tracing_format_org_mode("org-mode");
 const std::string tracing_format_graphviz("graphviz");
-const std::string tracing_output_directory_arg("tracing-output-directory");
 const std::string tracing_default_directory("tracing");
 
 const std::string diffing_enabled_arg("diffing-enabled");
 const std::string diffing_style_arg("diffing-style");
 const std::string diffing_destination_arg("diffing-destination");
 const std::string diffing_report_unchanged_arg("diffing-report-unchanged");
-const std::string diffing_output_directory_arg("diffing-output-directory");
 const std::string diffing_style_brief("brief");
 const std::string diffing_style_unified("unified");
 const std::string diffing_destination_file("file");
 const std::string diffing_destination_console("console");
-const std::string diffing_default_directory("diffing");
 
 const std::string error_handling_compatibility_mode_arg(
     "compatibility-mode-enabled");
+
+const std::string output_byproduct_directory_arg(
+    "byproduct-directory");
+const std::string output_default_byproduct_directory("masd.dogen.byproducts");
 
 const std::string generate_target_arg("target");
 const std::string generate_output_dir_arg("output-directory");
@@ -135,11 +135,15 @@ options_description make_top_level_visible_options_description() {
     options_description r;
     r.add(god);
 
+    options_description bod("Output");
+    bod.add_options()
+        ("byproduct-directory", "Directory in which to place all of the "
+            "byproducts of the run such as log files, traces, etc.");
+    r.add(bod);
+
     options_description lod("Logging");
     lod.add_options()
         ("log-enabled,e", "Generate a log file.")
-        ("log-directory,g", value<std::string>(),
-            "Directory to place the log file in. Defaults to 'log'.")
         ("log-level,l", value<std::string>(),
             "What level to use for logging. Valid values: trace, debug, info, "
             "warn, error. Defaults to 'info'.")
@@ -155,9 +159,7 @@ options_description make_top_level_visible_options_description() {
         ("tracing-guids-enabled", "Use guids in tracing metrics, Not"
             "  recommended when making comparisons between runs.")
         ("tracing-format", value<std::string>(), "Format to use for tracing"
-            " metrics. Valid values: org-mode, text")
-        ("tracing-output-directory", value<std::string>(), "Directory in which "
-            "to dump probe data. Only used if transforms tracing is enabled.");
+            " metrics. Valid values: org-mode, text");
     r.add(tod);
 
     options_description dod("Diffing");
@@ -167,9 +169,7 @@ options_description make_top_level_visible_options_description() {
         ("diffing-style",  value<std::string>(), "Style to use in the diff. "
             "Valid values: brief, unified.")
         ("diffing-destination",  value<std::string>(), "Where to write the "
-            " diff output. Valid values: file, console.")
-        ("diffing-output-directory", value<std::string>(), "Directory in which "
-            "to dump the diff file. Only used when outputting to file.");
+            " diff output. Valid values: file, console.");
     r.add(dod);
 
     options_description ehod("Error Handling");
@@ -484,7 +484,8 @@ std::string compute_run_identifier(const std::string& command,
  * @brief Reads the tracing configuration from the variables map.
  */
 boost::optional<logging_configuration> read_logging_configuration(
-    const std::string& run_identifier, const variables_map& vm) {
+    const std::string& run_identifier, const variables_map& vm,
+    const boost::filesystem::path& byproduct_dir) {
     const auto enabled(vm.count(logging_log_enabled_arg) != 0);
     if (!enabled)
         return boost::optional<logging_configuration>();
@@ -510,19 +511,7 @@ boost::optional<logging_configuration> read_logging_configuration(
     } else if (enabled)
         r.severity(severity_level::info);
 
-    const boost::filesystem::path out_dir =
-        [&]() {
-            using boost::filesystem::absolute;
-            if (vm.count(logging_log_directory_arg) == 0) {
-                if (!enabled)
-                    return boost::filesystem::path();
-                return absolute(logging_default_log_directory);
-            }
-
-            const auto s(vm[logging_log_directory_arg].as<std::string>());
-            return absolute(s);
-        }();
-    r.output_directory(out_dir);
+    r.output_directory(byproduct_dir);
 
     return r;
 }
@@ -585,6 +574,32 @@ weaving_configuration read_weaving_configuration(const variables_map& vm) {
     }
 
     return r;
+}
+
+boost::filesystem::path read_byproduct_directory(
+    const variables_map& vm, const std::string& run_identifier) {
+
+    using boost::filesystem::absolute;
+    if (vm.count(output_byproduct_directory_arg) != 0) {
+        /*
+         * First the simplest case: if the user has supplied a
+         * byproduct output directory, we just honour it. The only
+         * thing we need to do is to convert it to absolute. Note that
+         * we do not partition this directory by run id - we assume
+         * the user knows what it is doing.
+         */
+        const auto s(vm[output_byproduct_directory_arg].as<std::string>());
+        return absolute(s);
+    }
+
+    /*
+     * If the user as asked us to use the default directory, we need
+     * to partition it by run id. This is so that we can have multiple
+     * runs on the same directory.
+     */
+    auto p(absolute(output_default_byproduct_directory));
+    p /= run_identifier;
+    return p;
 }
 
 /**
@@ -652,46 +667,23 @@ handle_command(const std::string& command_name, const bool has_help,
      * Now process the common options. We must do this at the end
      * because we require the model name.
      */
+    const auto run_id(compute_run_identifier(command_name, target));
+    const auto bp(read_byproduct_directory(vm, run_id));
+    r.api().byproduct_directory(bp);
     r.api().tracing(read_tracing_configuration(vm));
     r.api().diffing(read_diffing_configuration(vm));
     r.api().error_handling(read_error_handling_configuration(vm));
 
-    const auto run_identifier(compute_run_identifier(command_name, target));
-    const auto tracing_out_dir =
-        [&]() {
-            using boost::filesystem::absolute;
-            if (vm.count(tracing_output_directory_arg) == 0) {
-                if (!r.api().tracing())
-                    return boost::filesystem::path();
-                return absolute(tracing_default_directory) / run_identifier;
-            }
+    if (r.api().tracing()) {
+        const auto tracing_dir(bp / tracing_default_directory);
+        r.api().tracing()->output_directory(tracing_dir);
+    }
 
-            const auto s(vm[tracing_output_directory_arg].as<std::string>());
-            return absolute(s) / run_identifier;
-        }();
-    r.cli().tracing_output_directory(tracing_out_dir);
+    if (r.api().diffing()) {
+        r.api().diffing()->output_directory(bp);
+    }
 
-    if (r.api().tracing())
-        r.api().tracing()->output_directory(tracing_out_dir);
-
-    const auto diffing_out_dir =
-        [&]() {
-            using boost::filesystem::absolute;
-            if (vm.count(diffing_output_directory_arg) == 0) {
-                if (!r.api().diffing())
-                    return boost::filesystem::path();
-                return absolute(diffing_default_directory) / run_identifier;
-            }
-
-            const auto s(vm[diffing_output_directory_arg].as<std::string>());
-            return absolute(s) / run_identifier;
-        }();
-    r.cli().diffing_output_directory(diffing_out_dir);
-
-    if (r.api().diffing())
-        r.api().diffing()->output_directory(diffing_out_dir);
-
-    r.logging(read_logging_configuration(run_identifier, vm));
+    r.logging(read_logging_configuration(run_id, vm, bp));
     return r;
 }
 
