@@ -191,7 +191,7 @@ void print_org_mode_report(std::ostream& s,
         s << "** Operation: ";
         print_operation_type(false/*add_brackets*/, first_pair.first, s);
 
-        unsigned int count(0);
+        std::size_t count(0);
         for (const auto& second_pair : first_pair.second)
             count += second_pair.second.size();
 
