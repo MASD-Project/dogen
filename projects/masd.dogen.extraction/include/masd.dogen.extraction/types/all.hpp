@@ -58,6 +58,7 @@
 #include "masd.dogen.extraction/types/helpers/writing_error.hpp"
 #include "masd.dogen.extraction/types/licence_text_hydrator.hpp"
 #include "masd.dogen.extraction/types/csharp/using_formatter.hpp"
+#include "masd.dogen.extraction/types/helpers/unified_differ.hpp"
 #include "masd.dogen.extraction/types/cpp/namespace_formatter.hpp"
 #include "masd.dogen.extraction/types/helpers/files_by_status.hpp"
 #include "masd.dogen.extraction/types/modeline_group_hydrator.hpp"

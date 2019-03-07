@@ -111,6 +111,11 @@ if (ZLIB_FOUND)
     set(LIBS ${LIBS} ${ZLIB_LIBRARY_DIR})
 endif()
 
+find_package(DTL REQUIRED)
+if (DTL_FOUND)
+    message(STATUS "Found DTL...")
+endif()
+
 # rapidjson
 find_package(RapidJSON)
 if (RAPIDJSON_FOUND)

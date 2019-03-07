@@ -114,7 +114,8 @@ bucket_by_status(const std::vector<std::string>& patterns,
 
 files_by_status
 file_status_collector::collect(const meta_model::model& m) {
-    BOOST_LOG_SEV(lg, info) << "Started linting text model.";
+    BOOST_LOG_SEV(lg, info) << "Started collecting status for model: "
+                            << m.name();
 
     /*
      * First we obtain the set of files expected, given the contents
@@ -136,10 +137,10 @@ file_status_collector::collect(const meta_model::model& m) {
     /*
      * Finally, we can filter out any expected differences, as per
      * supplied regular expressions. Whatever is left is the model's
-     * lint - candidates for removal.
+     * lint - candidates for removal, bucketed by status.
      */
     const auto r(bucket_by_status(m.ignore_files_matching_regex(), delta));
-    BOOST_LOG_SEV(lg, info) << "Finished linting text model. Lint: " << r;
+    BOOST_LOG_SEV(lg, info) << "Finished collecting status. Result: " << r;
     return r;
 }
 

@@ -18,21 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_GENERATE_DIFFS_TRANSFORM_HPP
-#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_GENERATE_DIFFS_TRANSFORM_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_HELPERS_UNIFIED_DIFFER_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_HELPERS_UNIFIED_DIFFER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.extraction/types/transforms/context.hpp"
-#include "masd.dogen.extraction/types/meta_model/model.hpp"
+#include <string>
+#include <boost/filesystem/path.hpp>
 
-namespace masd::dogen::extraction::transforms {
+namespace masd::dogen::extraction::helpers {
 
-class generate_diffs_transform final {
+class unified_differ final {
 public:
-    static void transform(const context& ctx, meta_model::model& m);
+    static std::string diff(const std::string& a, const std::string& b,
+        const boost::filesystem::path& base,
+        const boost::filesystem::path& a_path,
+        const std::string& info);
 };
 
 }

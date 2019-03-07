@@ -35,7 +35,8 @@
 namespace masd::dogen::extraction::helpers {
 
 /**
- * @brief Creates a list of all the lint on a model.
+ * @brief Creates a list of all the lint on a model, bucketed by
+ * status.
  */
 class file_status_collector final {
 private:

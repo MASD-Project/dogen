@@ -25,6 +25,7 @@
 #include "masd.dogen.extraction/types/transforms/remove_files_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/write_artefacts_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/gather_external_artefacts_transform.hpp"
+#include "masd.dogen.extraction/types/transforms/generate_diffs_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/model_generation_chain.hpp"
 
 namespace {
@@ -48,6 +49,13 @@ transform(const context& ctx, meta_model::model& m) {
      * subsequent transforms know what to do with them.
      */
     operation_transform::transform(ctx, m);
+
+    /*
+     * If diffing is enabled, we will now compute unified diffs
+     * between the files in the filesystem and the generated
+     * artefacts. This must be done before writing.
+     */
+    generate_diffs_transform::transform(ctx, m);
 
     /*
      * Now write all of the artefacts that require writing.
