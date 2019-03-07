@@ -34,8 +34,8 @@ namespace masd::dogen::tracing {
 
 class metrics_builder final {
 public:
-    metrics_builder(const std::string& log_level,
-        const bool writing_probe_data);
+    metrics_builder(const std::string& logging_impact,
+        const std::string& tracing_impact);
 
 private:
     void ensure_stack_not_empty() const;

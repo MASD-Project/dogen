@@ -55,6 +55,35 @@ const std::string unexpected_empty("The stack must not be empty.");
 const std::string invalid_tracing_format(
     "Invalid or unsupported tracing format: ");
 
+const std::string tracing_impact_moderate("none");
+const std::string tracing_impact_severe("severe");
+
+std::string get_logging_impact(
+    const boost::optional<masd::dogen::tracing_configuration>& cfg) {
+    if (!cfg)
+        return empty;
+
+    return cfg->logging_impact();
+}
+
+std::string get_tracing_impact(
+    const boost::optional<masd::dogen::tracing_configuration>& cfg) {
+    if (!cfg)
+        return empty;
+
+    if (cfg->level() == masd::dogen::tracing_level::detail)
+        return tracing_impact_severe;
+    return tracing_impact_moderate;
+}
+
+boost::filesystem::path get_current_directory(
+    const boost::optional<masd::dogen::tracing_configuration>& cfg) {
+    if (!cfg)
+        return boost::filesystem::path();
+
+    return cfg->output_directory();
+}
+
 }
 
 namespace masd::dogen::tracing {
@@ -63,12 +92,8 @@ tracer::tracer(const annotations::archetype_location_repository& alrp,
     const annotations::type_repository& atrp,
     const boost::optional<tracing_configuration>& cfg) :
     configuration_(cfg),
-    builder_(configuration_ ?
-        configuration_->logging_impact() : empty,
-        detailed_tracing_enabled()),
-    current_directory_(configuration_ ?
-        cfg->output_directory() :
-        boost::filesystem::path()) {
+    builder_(get_logging_impact(cfg), get_tracing_impact(cfg)),
+    current_directory_(get_current_directory(cfg)) {
 
     validate();
 

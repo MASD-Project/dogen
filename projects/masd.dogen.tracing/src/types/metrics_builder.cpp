@@ -46,16 +46,13 @@ const std::string unmatch_start_end(
 
 namespace masd::dogen::tracing {
 
-metrics_builder::
-metrics_builder(const std::string& log_level, const bool writing_probe_data) {
+metrics_builder::metrics_builder(const std::string& logging_impact,
+    const std::string& tracing_impact) {
     BOOST_LOG_SEV(lg, debug) << "Initialising.";
     std::ostringstream s;
     s << "version: v" << DOGEN_VERSION << ", "
-      << "log: " << log_level;
-    if (writing_probe_data)
-        s << ", tracing: on";
-    else
-        s << ", tracing: off";
+      << "logging impact: " << logging_impact << ", "
+      << "tracing impact: " << tracing_impact;
 
     stack_.push(create_metrics(root_id, s.str()));
     BOOST_LOG_SEV(lg, debug) << "Stack size: " << stack_.size();
