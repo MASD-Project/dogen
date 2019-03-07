@@ -27,7 +27,6 @@
 
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen/types/diffing_style.hpp"
 #include "masd.dogen/types/diffing_destination.hpp"
 
 namespace masd::dogen {
@@ -48,28 +47,10 @@ public:
 
 public:
     diffing_configuration(
-        const masd::dogen::diffing_style style,
-        const bool report_unchanged_files,
         const masd::dogen::diffing_destination destination,
         const boost::filesystem::path& output_directory);
 
 public:
-    /**
-     * @brief What style to use when producing diffs.
-     */
-    /**@{*/
-    masd::dogen::diffing_style style() const;
-    diffing_configuration& style(const masd::dogen::diffing_style v);
-    /**@}*/
-
-    /**
-     * @brief If true, reports files that have not changed as well.
-     */
-    /**@{*/
-    bool report_unchanged_files() const;
-    diffing_configuration& report_unchanged_files(const bool v);
-    /**@}*/
-
     masd::dogen::diffing_destination destination() const;
     diffing_configuration& destination(const masd::dogen::diffing_destination v);
 
@@ -89,8 +70,6 @@ public:
     diffing_configuration& operator=(diffing_configuration other);
 
 private:
-    masd::dogen::diffing_style style_;
-    bool report_unchanged_files_;
     masd::dogen::diffing_destination destination_;
     boost::filesystem::path output_directory_;
 };

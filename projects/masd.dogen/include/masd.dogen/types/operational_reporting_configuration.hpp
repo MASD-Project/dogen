@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include <boost/filesystem/path.hpp>
 #include "masd.dogen/types/operational_reporting_style.hpp"
 
 namespace masd::dogen {
@@ -36,18 +37,27 @@ namespace masd::dogen {
 class operational_reporting_configuration final {
 public:
     operational_reporting_configuration(const operational_reporting_configuration&) = default;
-    operational_reporting_configuration(operational_reporting_configuration&&) = default;
     ~operational_reporting_configuration() = default;
 
 public:
     operational_reporting_configuration();
 
 public:
-    explicit operational_reporting_configuration(const masd::dogen::operational_reporting_style style);
+    operational_reporting_configuration(operational_reporting_configuration&& rhs);
+
+public:
+    operational_reporting_configuration(
+        const masd::dogen::operational_reporting_style style,
+        const boost::filesystem::path& output_directory);
 
 public:
     masd::dogen::operational_reporting_style style() const;
     void style(const masd::dogen::operational_reporting_style v);
+
+    const boost::filesystem::path& output_directory() const;
+    boost::filesystem::path& output_directory();
+    void output_directory(const boost::filesystem::path& v);
+    void output_directory(const boost::filesystem::path&& v);
 
 public:
     bool operator==(const operational_reporting_configuration& rhs) const;
@@ -61,6 +71,7 @@ public:
 
 private:
     masd::dogen::operational_reporting_style style_;
+    boost::filesystem::path output_directory_;
 };
 
 }

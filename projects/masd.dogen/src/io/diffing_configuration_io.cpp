@@ -19,24 +19,14 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "masd.dogen/io/diffing_style_io.hpp"
 #include "masd.dogen/io/diffing_destination_io.hpp"
 #include "masd.dogen/io/diffing_configuration_io.hpp"
 
 namespace masd::dogen {
 
 std::ostream& operator<<(std::ostream& s, const diffing_configuration& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::diffing_configuration\"" << ", "
-      << "\"style\": " << v.style() << ", "
-      << "\"report_unchanged_files\": " << v.report_unchanged_files() << ", "
       << "\"destination\": " << v.destination() << ", "
       << "\"output_directory\": " << "\"" << v.output_directory().generic_string() << "\""
       << " }";

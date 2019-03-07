@@ -23,62 +23,32 @@
 namespace masd::dogen {
 
 diffing_configuration::diffing_configuration()
-    : style_(static_cast<masd::dogen::diffing_style>(0)),
-      report_unchanged_files_(static_cast<bool>(0)),
-      destination_(static_cast<masd::dogen::diffing_destination>(0)) { }
+    : destination_(static_cast<masd::dogen::diffing_destination>(0)) { }
 
 diffing_configuration::diffing_configuration(diffing_configuration&& rhs)
-    : style_(std::move(rhs.style_)),
-      report_unchanged_files_(std::move(rhs.report_unchanged_files_)),
-      destination_(std::move(rhs.destination_)),
+    : destination_(std::move(rhs.destination_)),
       output_directory_(std::move(rhs.output_directory_)) { }
 
 diffing_configuration::diffing_configuration(
-    const masd::dogen::diffing_style style,
-    const bool report_unchanged_files,
     const masd::dogen::diffing_destination destination,
     const boost::filesystem::path& output_directory)
-    : style_(style),
-      report_unchanged_files_(report_unchanged_files),
-      destination_(destination),
+    : destination_(destination),
       output_directory_(output_directory) { }
 
 void diffing_configuration::swap(diffing_configuration& other) noexcept {
     using std::swap;
-    swap(style_, other.style_);
-    swap(report_unchanged_files_, other.report_unchanged_files_);
     swap(destination_, other.destination_);
     swap(output_directory_, other.output_directory_);
 }
 
 bool diffing_configuration::operator==(const diffing_configuration& rhs) const {
-    return style_ == rhs.style_ &&
-        report_unchanged_files_ == rhs.report_unchanged_files_ &&
-        destination_ == rhs.destination_ &&
+    return destination_ == rhs.destination_ &&
         output_directory_ == rhs.output_directory_;
 }
 
 diffing_configuration& diffing_configuration::operator=(diffing_configuration other) {
     using std::swap;
     swap(*this, other);
-    return *this;
-}
-
-masd::dogen::diffing_style diffing_configuration::style() const {
-    return style_;
-}
-
-diffing_configuration& diffing_configuration::style(const masd::dogen::diffing_style v) {
-    style_ = v;
-    return *this;
-}
-
-bool diffing_configuration::report_unchanged_files() const {
-    return report_unchanged_files_;
-}
-
-diffing_configuration& diffing_configuration::report_unchanged_files(const bool v) {
-    report_unchanged_files_ = v;
     return *this;
 }
 

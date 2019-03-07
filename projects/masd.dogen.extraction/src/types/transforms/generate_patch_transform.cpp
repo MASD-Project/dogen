@@ -64,14 +64,6 @@ transform(const context& ctx, const meta_model::model& m) {
         return;
     }
 
-    /*
-     * If the user requested brief diffs, there is nothing to do as
-     * the transform only cares about unified diffs.
-     */
-    const auto style(ctx.diffing_configuration()->style());
-    if (style != diffing_style::unified)
-        return;
-
     std::ostringstream ss;
     for (auto& a : m.artefacts()) {
         BOOST_LOG_SEV(lg, debug) << "Processing arefact: "

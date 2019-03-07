@@ -30,7 +30,6 @@
 #include "masd.dogen/types/converter.hpp"
 #include "masd.dogen/types/generator.hpp"
 #include "masd.dogen/types/configuration.hpp"
-#include "masd.dogen/types/diffing_style.hpp"
 #include "masd.dogen/types/tracing_level.hpp"
 #include "masd.dogen/types/weaving_style.hpp"
 #include "masd.dogen/types/tracing_format.hpp"

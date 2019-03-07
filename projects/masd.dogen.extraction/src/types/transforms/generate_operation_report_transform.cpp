@@ -137,19 +137,10 @@ transform(const context& ctx, const meta_model::model& m) {
     /*
      * If the user did not request diffing, there is nothing to do.
      */
-    if (!ctx.diffing_configuration()) {
-        BOOST_LOG_SEV(lg, debug) << "Diffing not enabled.";
+    if (!ctx.operational_reporting_configuration()) {
+        BOOST_LOG_SEV(lg, debug) << "Operatinal reporting not enabled.";
         return;
     }
-
-    /*
-     * If the user requested brief diffs, there is nothing to do as
-     * the transform only cares about unified diffs.
-     */
-    const auto& cfg(*ctx.diffing_configuration());
-    const auto style(cfg.style());
-    if (style != diffing_style::brief)
-        return;
 
     BOOST_LOG_SEV(lg, debug) << "Creating patch for model: " << m.name();
     std::ostringstream ss;
@@ -171,34 +162,21 @@ transform(const context& ctx, const meta_model::model& m) {
     }
 
     const auto c(ss.str());
-    const auto dest(cfg.destination());
-    switch(dest) {
-    case diffing_destination::file: {
-        const auto od(cfg.output_directory());
-        BOOST_LOG_SEV(lg, debug) << "Outputting diffs to: " << od;
+    const auto& cfg(*ctx.operational_reporting_configuration());
+    const auto od(cfg.output_directory());
+    BOOST_LOG_SEV(lg, debug) << "Outputting report to: " << od;
 
-        using boost::filesystem::create_directories;
-        create_directories(cfg.output_directory());
+    using boost::filesystem::create_directories;
+    create_directories(cfg.output_directory());
 
-        boost::filesystem::path p(cfg.output_directory());
-        p /= m.name() + "_operation_report.txt";
+    boost::filesystem::path p(cfg.output_directory());
+    p /= m.name() + "_operation_report.txt";
 
-        BOOST_LOG_SEV(lg, debug) << "Writing patch file: " << p.generic()
-                                 << ". Size: " << c.size();
-        using masd::dogen::utility::filesystem::write_file_content;
-        write_file_content(p, c);
-        break;
-    }
-    case diffing_destination::console:
-        BOOST_LOG_SEV(lg, debug) << "Outputting patch to console.";
+    BOOST_LOG_SEV(lg, debug) << "Writing report file: " << p.generic()
+                             << ". Size: " << c.size();
 
-        std::cout << c;
-        break;
-    default: {
-        const auto s(boost::lexical_cast<std::string>(dest));
-        BOOST_LOG_SEV(lg, error) << unexpected_destination << s;
-        BOOST_THROW_EXCEPTION(transform_exception(unexpected_destination + s));
-    } }
+    using masd::dogen::utility::filesystem::write_file_content;
+    write_file_content(p, c);
 
     BOOST_LOG_SEV(lg, debug) << "Finished generating patch";
 }

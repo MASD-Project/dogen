@@ -27,7 +27,8 @@ namespace masd::dogen {
 std::ostream& operator<<(std::ostream& s, const operational_reporting_configuration& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::operational_reporting_configuration\"" << ", "
-      << "\"style\": " << v.style()
+      << "\"style\": " << v.style() << ", "
+      << "\"output_directory\": " << "\"" << v.output_directory().generic_string() << "\""
       << " }";
     return(s);
 }

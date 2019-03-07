@@ -227,9 +227,11 @@ context context_factory::make_context(const configuration& cfg,
     r.extraction_context().tracer(tracer);
 
     /*
-     * Setup the diffing configuration.
+     * Setup the diffing and operational reporting configuration.
      */
     r.extraction_context().diffing_configuration(cfg.diffing());
+    r.extraction_context().operational_reporting_configuration(
+        cfg.operational_reporting());
 
     return r;
 }

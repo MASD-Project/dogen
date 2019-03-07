@@ -77,12 +77,16 @@ const std::string tracing_format_org_mode("org-mode");
 const std::string tracing_format_graphviz("graphviz");
 const std::string tracing_default_directory("tracing");
 
+const std::string operational_reporting_enabled_arg(
+    "operational-reporting-enabled");
+const std::string operational_reporting_style_arg(
+    "operational-reporting-style");
+const std::string operational_reporting_style_org_mode("org-mode");
+const std::string operational_reporting_style_plain("plain");
+
 const std::string diffing_enabled_arg("diffing-enabled");
-const std::string diffing_style_arg("diffing-style");
 const std::string diffing_destination_arg("diffing-destination");
 const std::string diffing_report_unchanged_arg("diffing-report-unchanged");
-const std::string diffing_style_brief("brief");
-const std::string diffing_style_unified("unified");
 const std::string diffing_destination_file("file");
 const std::string diffing_destination_console("console");
 
@@ -109,6 +113,8 @@ const std::string invalid_diffing_style(
     "Diffing style is invalid or unsupported: ");
 const std::string invalid_diffing_destination(
     "Diffing destination is invalid or unsupported: ");
+const std::string invalid_operational_reporting_style(
+    "Operational reporting style is invalid or unsupported: ");
 
 const std::string logging_impact_none("none");
 const std::string logging_impact_moderate("none");
@@ -150,7 +156,7 @@ options_description make_top_level_visible_options_description() {
         ("log-enabled,e", "Generate a log file.")
         ("log-level,l", value<std::string>(),
             "What level to use for logging. Valid values: trace, debug, info, "
-            "warn, error. Defaults to 'info'.")
+            "warn, error. Defaults to info.")
         ("log-to-console",
             "Output logging to the console, as well as to file.");
     r.add(lod);
@@ -159,21 +165,29 @@ options_description make_top_level_visible_options_description() {
     tod.add_options()
         ("tracing-enabled", "Generate metrics about executed transforms.")
         ("tracing-level",  value<std::string>(), "Level at which to trace."
-            "Valid values: detail, summary.")
+            "Valid values: detail, summary. Defaults to summary.")
         ("tracing-guids-enabled", "Use guids in tracing metrics, Not"
             "  recommended when making comparisons between runs.")
         ("tracing-format", value<std::string>(), "Format to use for tracing"
-            " metrics. Valid values: org-mode, text");
+            " metrics. Valid values: org-mode, plain. Defaults to org-mode.");
     r.add(tod);
+
+    options_description orod("Operational Reporting");
+    orod.add_options()
+        ("operational-reporting-enabled",
+            "Generate a report detailing operations")
+        ("operational-reporting-style",  value<std::string>(),
+            "Style to use in the operational report. "
+            "Valid values: org-mode, plain. Defaults to org-mode");
+    r.add(orod);
 
     options_description dod("Diffing");
     dod.add_options()
-        ("diffing-enabled", "Generate diffs against files in the filesystem. "
-            "When enabled, dogen is in dry-run mode.")
+        ("diffing-enabled", "Generate diffs against files in the filesystem.")
         ("diffing-style",  value<std::string>(), "Style to use in the diff. "
             "Valid values: brief, unified.")
         ("diffing-destination",  value<std::string>(), "Where to write the "
-            " diff output. Valid values: file, console.");
+            " diff output. Valid values: file, console. Defaults to file.");
     r.add(dod);
 
     options_description ehod("Model Processing");
@@ -390,7 +404,8 @@ compute_logging_impact(const boost::optional<logging_configuration> cfg) {
  */
 boost::optional<masd::dogen::tracing_configuration>
 read_tracing_configuration(const variables_map& vm,
-    const std::string& logging_impact) {
+    const std::string& logging_impact,
+    const boost::filesystem::path& byproduct_dir) {
 
     const bool enabled(vm.count(tracing_enabled_arg) != 0);
     if (!enabled)
@@ -427,6 +442,9 @@ read_tracing_configuration(const variables_map& vm,
     } else if (enabled)
         r.format(tracing_format::org_mode);
 
+    const auto tracing_dir(byproduct_dir / tracing_default_directory);
+    r.output_directory(tracing_dir);
+
     return r;
 }
 
@@ -443,27 +461,13 @@ read_model_processing_configuration(const variables_map& vm) {
 }
 
 boost::optional<masd::dogen::diffing_configuration>
-read_diffing_configuration(const variables_map& vm) {
+read_diffing_configuration(const variables_map& vm,
+    const boost::filesystem::path& byproduct_dir) {
     const bool enabled(vm.count(diffing_enabled_arg) != 0);
     if (!enabled)
         return boost::optional<masd::dogen::diffing_configuration>();
 
-    using masd::dogen::diffing_style;
     masd::dogen::diffing_configuration r;
-    r.report_unchanged_files(vm.count(diffing_report_unchanged_arg) != 0);
-
-    if (vm.count(diffing_style_arg)) {
-        const auto s(vm[diffing_style_arg].as<std::string>());
-
-        if (s == diffing_style_brief)
-            r.style(diffing_style::brief);
-        else if (s == diffing_style_unified)
-            r.style(diffing_style::unified);
-        else
-            BOOST_THROW_EXCEPTION(parser_exception(invalid_diffing_style + s));
-    } else if (enabled)
-        r.style(diffing_style::unified);
-
     using masd::dogen::diffing_destination;
     if (vm.count(diffing_destination_arg)) {
         const auto s(vm[diffing_destination_arg].as<std::string>());
@@ -477,6 +481,37 @@ read_diffing_configuration(const variables_map& vm) {
                 parser_exception(invalid_diffing_destination + s));
     } else if (enabled)
         r.destination(diffing_destination::file);
+
+    r.output_directory(byproduct_dir);
+
+    return r;
+}
+
+boost::optional<masd::dogen::operational_reporting_configuration>
+read_operational_reporting_configuration(const variables_map& vm,
+    const boost::filesystem::path& byproduct_dir) {
+    using masd::dogen::operational_reporting_configuration;
+    const bool enabled(vm.count(operational_reporting_enabled_arg) != 0);
+    if (!enabled)
+        return boost::optional<operational_reporting_configuration>();
+
+    using masd::dogen::operational_reporting_style;
+    operational_reporting_configuration r;
+
+    if (vm.count(operational_reporting_style_arg)) {
+        const auto s(vm[operational_reporting_style_arg].as<std::string>());
+
+        if (s == operational_reporting_style_org_mode)
+            r.style(operational_reporting_style::org_mode);
+        else if (s == operational_reporting_style_plain)
+            r.style(operational_reporting_style::plain);
+        else
+            BOOST_THROW_EXCEPTION(parser_exception(
+                    invalid_operational_reporting_style + s));
+    } else if (enabled)
+        r.style(operational_reporting_style::org_mode);
+
+    r.output_directory(byproduct_dir);
 
     return r;
 }
@@ -682,26 +717,24 @@ handle_command(const std::string& command_name, const bool has_help,
     }
 
     /*
-     * Now process the common options. We must do this at the end
-     * because we require the model name.
+     * Compute the byproduct directory, where all non-generated code
+     * related stuff will be placed.
      */
     const auto run_id(compute_run_identifier(command_name, target));
     const auto bp(read_byproduct_directory(vm, run_id));
     r.api().byproduct_directory(bp);
 
+    /*
+     * Now process the common options. We must do this at the end
+     * because we require the model name.
+     */
     r.logging(read_logging_configuration(run_id, vm, bp));
     const auto li(compute_logging_impact(r.logging()));
-    r.api().tracing(read_tracing_configuration(vm, li));
-    r.api().diffing(read_diffing_configuration(vm));
-    r.api().model_processing(read_model_processing_configuration(vm));
-
-    if (r.api().tracing()) {
-        const auto tracing_dir(bp / tracing_default_directory);
-        r.api().tracing()->output_directory(tracing_dir);
-    }
-
-    if (r.api().diffing())
-        r.api().diffing()->output_directory(bp);
+    auto& a(r.api());
+    a.tracing(read_tracing_configuration(vm, li, bp));
+    a.operational_reporting(read_operational_reporting_configuration(vm, bp));
+    a.diffing(read_diffing_configuration(vm, bp));
+    a.model_processing(read_model_processing_configuration(vm));
 
     return r;
 }
