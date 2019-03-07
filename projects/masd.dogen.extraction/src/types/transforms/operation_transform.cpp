@@ -57,7 +57,7 @@ transform(const context& ctx, meta_model::model& m) {
         const auto gs(a.path().generic());
         BOOST_LOG_SEV(lg, trace) << "Processing: " << gs;
 
-        // HACK: we seemt to have some blank artefacts atm.
+        // FIXME: HACK: we seemt to have some blank artefacts atm.
         if (a.path().empty())
             continue;
 

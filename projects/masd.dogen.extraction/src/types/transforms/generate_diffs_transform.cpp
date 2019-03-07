@@ -69,7 +69,7 @@ transform(const context& ctx, meta_model::model& m) {
      * the transform only cares about unified diffs.
      */
     const auto style(ctx.diffing_configuration()->style());
-    if (style == diffing_style::brief)
+    if (style != diffing_style::unified)
         return;
 
     bool found_diffs(false);

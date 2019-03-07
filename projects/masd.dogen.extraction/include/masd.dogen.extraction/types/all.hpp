@@ -87,5 +87,6 @@
 #include "masd.dogen.extraction/types/transforms/write_artefacts_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/mock_content_filler_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/gather_external_artefacts_transform.hpp"
+#include "masd.dogen.extraction/types/transforms/generate_operation_report_transform.hpp"
 
 #endif

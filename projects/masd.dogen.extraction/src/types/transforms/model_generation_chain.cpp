@@ -25,6 +25,7 @@
 #include "masd.dogen.extraction/types/transforms/gather_external_artefacts_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/generate_diffs_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/generate_patch_transform.hpp"
+#include "masd.dogen.extraction/types/transforms/generate_operation_report_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/write_artefacts_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/remove_files_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/model_generation_chain.hpp"
@@ -59,17 +60,24 @@ transform(const context& ctx, meta_model::model& m) {
     gather_external_artefacts_transform::transform(ctx, m);
 
     /*
-     * If diffing is enabled, we will now compute unified diffs
-     * between the files in the filesystem and the generated
-     * artefacts. This must be done before writing and generating a
-     * patch.
+     * If diffing is enabled and the user requested unified diffs, we
+     * will now compute unified diffs between the files in the
+     * filesystem and the generated artefacts. This must be done
+     * before writing and generating a patch.
      */
     generate_diffs_transform::transform(ctx, m);
 
     /*
-     * Now that we got the unified diffs, we can create a patch file.
+     * If unified diffs were generated, we can now create a patch
+     * file.
      */
     generate_patch_transform::transform(ctx, m);
+
+    /*
+     * If brief diffs were requested, we will generate a report of all
+     * the operations for this set of artefacts.
+     */
+    generate_operation_report_transform::transform(ctx, m);
 
     /*
      * Write all of the artefacts that require writing.

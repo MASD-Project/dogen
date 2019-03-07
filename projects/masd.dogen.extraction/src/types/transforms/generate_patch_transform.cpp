@@ -49,7 +49,7 @@ const std::string using_dir_message("Using directory: ");
 namespace masd::dogen::extraction::transforms {
 
 void generate_patch_transform::
-transform(const context& ctx, meta_model::model& m) {
+transform(const context& ctx, const meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "generate patch transform", transform_id, m.name(),
         *ctx.tracer());
@@ -63,6 +63,14 @@ transform(const context& ctx, meta_model::model& m) {
         BOOST_LOG_SEV(lg, debug) << "Diffing not enabled.";
         return;
     }
+
+    /*
+     * If the user requested brief diffs, there is nothing to do as
+     * the transform only cares about unified diffs.
+     */
+    const auto style(ctx.diffing_configuration()->style());
+    if (style != diffing_style::unified)
+        return;
 
     std::ostringstream ss;
     for (auto& a : m.artefacts()) {
