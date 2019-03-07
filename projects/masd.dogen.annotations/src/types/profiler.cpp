@@ -82,7 +82,7 @@ std::list<profile> profiler::hydrate_profiles(
     for (const auto& f : files) {
         const auto fn(f.filename().generic_string());
         if (!boost::starts_with(fn, profile_prefix)) {
-            BOOST_LOG_SEV(lg, info) << "Ignoring file: " << f.filename();
+            BOOST_LOG_SEV(lg, debug) << "Ignoring file: " << f.filename();
             continue;
         }
 

@@ -50,29 +50,29 @@ namespace masd::dogen::annotations {
 
 std::list<type_template> type_repository_factory::hydrate_templates(
     const std::vector<boost::filesystem::path>& data_dirs) const {
-    BOOST_LOG_SEV(lg, info) << "Input data directories: " << data_dirs;
+    BOOST_LOG_SEV(lg, debug) << "Input data directories: " << data_dirs;
     std::vector<boost::filesystem::path> annotation_dirs;
     annotation_dirs.reserve(data_dirs.size());
     for (const auto& dir : data_dirs)
         annotation_dirs.push_back(dir / annotations_dir);
 
-    BOOST_LOG_SEV(lg, info) << "Finding all files in: " << annotation_dirs;
+    BOOST_LOG_SEV(lg, trace) << "Finding all files in: " << annotation_dirs;
     const auto files(dogen::utility::filesystem::find_files(annotation_dirs));
-    BOOST_LOG_SEV(lg, info) << "Files found: " << files;
+    BOOST_LOG_SEV(lg, trace) << "Files found: " << files;
 
     type_templates_hydrator h;
     std::list<type_template> r;
     for (const auto& f : files) {
         const auto fn(f.filename().generic_string());
         if (!boost::starts_with(fn, annotations_prefix)) {
-            BOOST_LOG_SEV(lg, info) << "Ignoring file: " << f.filename();
+            BOOST_LOG_SEV(lg, debug) << "Ignoring file: " << f.filename();
             continue;
         }
 
         auto tts(h.hydrate(f));
         r.splice(r.end(), tts);
     }
-    BOOST_LOG_SEV(lg, info) << "Finished hydrating all files.";
+    BOOST_LOG_SEV(lg, debug) << "Finished hydrating all files.";
     return r;
 }
 
@@ -140,7 +140,8 @@ type_repository type_repository_factory::make(
     const auto instantiated(instantiate_templates(alrp, original));
     const auto r(create_repository(instantiated));
 
-    BOOST_LOG_SEV(lg, info) << "Generated repository: " << r;
+    BOOST_LOG_SEV(lg, info) << "Generated repository.";
+    BOOST_LOG_SEV(lg, trace) << "Repository contents: " << r;
     return r;
 }
 
