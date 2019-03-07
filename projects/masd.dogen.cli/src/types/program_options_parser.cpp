@@ -88,6 +88,7 @@ const std::string diffing_style_brief("brief");
 const std::string diffing_style_unified("unified");
 const std::string diffing_destination_file("file");
 const std::string diffing_destination_console("console");
+const std::string diffing_default_directory("diffing");
 
 const std::string error_handling_compatibility_mode_arg(
     "compatibility-mode-enabled");
@@ -457,7 +458,7 @@ read_diffing_configuration(const variables_map& vm) {
             BOOST_THROW_EXCEPTION(
                 parser_exception(invalid_diffing_destination + s));
     } else if (enabled)
-        r.style(diffing_style::unified);
+        r.destination(diffing_destination::file);
 
     return r;
 }
@@ -679,7 +680,7 @@ handle_command(const std::string& command_name, const bool has_help,
             if (vm.count(diffing_output_directory_arg) == 0) {
                 if (!r.api().diffing())
                     return boost::filesystem::path();
-                return absolute(tracing_default_directory) / run_identifier;
+                return absolute(diffing_default_directory) / run_identifier;
             }
 
             const auto s(vm[diffing_output_directory_arg].as<std::string>());
@@ -688,7 +689,7 @@ handle_command(const std::string& command_name, const bool has_help,
     r.cli().diffing_output_directory(diffing_out_dir);
 
     if (r.api().diffing())
-        r.api().diffing()->output_directory(tracing_out_dir);
+        r.api().diffing()->output_directory(diffing_out_dir);
 
     r.logging(read_logging_configuration(run_identifier, vm));
     return r;

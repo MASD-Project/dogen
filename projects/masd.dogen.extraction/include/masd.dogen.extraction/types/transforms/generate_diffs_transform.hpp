@@ -30,6 +30,10 @@
 
 namespace masd::dogen::extraction::transforms {
 
+/**
+ * @brief Populates artefacts with a unified diff representation
+ * between files in the filesystem and the generated content.
+ */
 class generate_diffs_transform final {
 public:
     static void transform(const context& ctx, meta_model::model& m);

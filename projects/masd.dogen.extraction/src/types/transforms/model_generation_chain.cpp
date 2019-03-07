@@ -22,10 +22,11 @@
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"
 #include "masd.dogen.extraction/types/transforms/operation_transform.hpp"
-#include "masd.dogen.extraction/types/transforms/remove_files_transform.hpp"
-#include "masd.dogen.extraction/types/transforms/write_artefacts_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/gather_external_artefacts_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/generate_diffs_transform.hpp"
+#include "masd.dogen.extraction/types/transforms/generate_patch_transform.hpp"
+#include "masd.dogen.extraction/types/transforms/write_artefacts_transform.hpp"
+#include "masd.dogen.extraction/types/transforms/remove_files_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/model_generation_chain.hpp"
 
 namespace {
@@ -60,12 +61,18 @@ transform(const context& ctx, meta_model::model& m) {
     /*
      * If diffing is enabled, we will now compute unified diffs
      * between the files in the filesystem and the generated
-     * artefacts. This must be done before writing.
+     * artefacts. This must be done before writing and generating a
+     * patch.
      */
     generate_diffs_transform::transform(ctx, m);
 
     /*
-     * Now write all of the artefacts that require writing.
+     * Now that we got the unified diffs, we can create a patch file.
+     */
+    generate_patch_transform::transform(ctx, m);
+
+    /*
+     * Write all of the artefacts that require writing.
      */
     write_artefacts_transform::transform(ctx, m);
 

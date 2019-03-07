@@ -62,9 +62,8 @@ transform(const context& ctx, meta_model::model& m) {
             continue;
 
         /*
-         * We only expect artefacts with a limited range of
-         * operations. If this artefact is aksing for anything else,
-         * throw.
+         * We only expect artefacts with a limited range of operation
+         * types. If this artefact is aksing for anything else, throw.
          */
         using extraction::meta_model::operation_type;
         const auto ot(a.operation().type());

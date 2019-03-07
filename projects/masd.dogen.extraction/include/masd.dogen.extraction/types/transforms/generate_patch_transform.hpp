@@ -25,24 +25,18 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.extraction/types/transforms/context.hpp"
+#include "masd.dogen.extraction/types/meta_model/model.hpp"
 
 namespace masd::dogen::extraction::transforms {
 
+/**
+ * @brief Creates a patch file that, if applied to the current state
+ * of the filesystem, would make it the same as the generated model.
+ */
 class generate_patch_transform final {
 public:
-    generate_patch_transform() = default;
-    generate_patch_transform(const generate_patch_transform&) = default;
-    generate_patch_transform(generate_patch_transform&&) = default;
-    ~generate_patch_transform() = default;
-    generate_patch_transform& operator=(const generate_patch_transform&) = default;
-
-public:
-    bool operator==(const generate_patch_transform& rhs) const;
-    bool operator!=(const generate_patch_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const context& ctx, meta_model::model& m);
 };
 
 }

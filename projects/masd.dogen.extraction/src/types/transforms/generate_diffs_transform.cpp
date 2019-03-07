@@ -39,6 +39,10 @@ using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 const std::string empty;
+const std::string reason_new("Reason: New generated file.");
+const std::string reason_changed("Reason: Changed generated file.");
+const std::string reason_unexpected("Reason: unexpected file.");
+const std::string reason_other("Reason: Other.");
 
 }
 
@@ -47,7 +51,7 @@ namespace masd::dogen::extraction::transforms {
 void generate_diffs_transform::
 transform(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
-        "gather external artefacts transform", transform_id, m.name(),
+        "generate diffs transform", transform_id, m.name(),
         *ctx.tracer(), m);
 
     BOOST_LOG_SEV(lg, debug) << "Finding diffs for model: " << m.name();
@@ -55,8 +59,10 @@ transform(const context& ctx, meta_model::model& m) {
     /*
      * If the user did not request diffing, there is nothing to do.
      */
-    if (!ctx.diffing_configuration())
+    if (!ctx.diffing_configuration()) {
+        BOOST_LOG_SEV(lg, debug) << "Diffing not enabled.";
         return;
+    }
 
     /*
      * If the user requested brief diffs, there is nothing to do as
@@ -75,10 +81,9 @@ transform(const context& ctx, meta_model::model& m) {
         /*
          * Ensure the artefact can contribute to the diff.
          */
-        const auto reason(a.operation().reason());
-        using extraction::meta_model::operation_reason;
-        if (reason != operation_reason::newly_generated &&
-            reason != operation_reason::changed_generated)
+        const auto ot(a.operation().type());
+        using extraction::meta_model::operation_type;
+        if (ot != operation_type::write && ot != operation_type::remove)
             continue;
 
         found_diffs = true;
@@ -86,6 +91,8 @@ transform(const context& ctx, meta_model::model& m) {
         /*
          * If the file already exists, obtain its current content.
          */
+        using extraction::meta_model::operation_reason;
+        const auto reason(a.operation().reason());
         using masd::dogen::utility::filesystem::read_file_content;
         const std::string c(reason == operation_reason::newly_generated ?
             empty : read_file_content(a.path()));
@@ -94,9 +101,22 @@ transform(const context& ctx, meta_model::model& m) {
          * Diff the content of the file against the artefact,
          * producing a unified diff.
          */
+        const std::string info(
+            [&]() {
+                switch(reason) {
+                case operation_reason::newly_generated:
+                    return reason_new;
+                case operation_reason::changed_generated:
+                    return reason_changed;
+                case operation_reason::unexpected:
+                    return reason_unexpected;
+                default:
+                    return reason_other;
+                }
+            }());
+
         const auto ud(helpers::unified_differ::diff(c, a.content(),
-                m.managed_directories().front(), a.path(),
-                "Changed generated file"));
+                m.managed_directories().front(), a.path(), info));
         a.unified_diff(ud);
     }
 

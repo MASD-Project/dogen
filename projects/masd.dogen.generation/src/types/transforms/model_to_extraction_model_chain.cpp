@@ -138,6 +138,7 @@ transform(const generation::transforms::context& ctx,
      * the processing pipeline.
      */
     const auto ep(models.front().extraction_properties());
+    r.name(models.front().name().simple());
     r.force_write(ep.force_write());
     r.delete_extra_files(ep.delete_extra_files());
     r.ignore_files_matching_regex(ep.ignore_files_matching_regex());
