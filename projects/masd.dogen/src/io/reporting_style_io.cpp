@@ -21,26 +21,26 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "masd.dogen/io/operational_reporting_style_io.hpp"
+#include "masd.dogen/io/reporting_style_io.hpp"
 
 namespace masd::dogen {
 
-std::ostream& operator<<(std::ostream& s, const operational_reporting_style& v) {
-    s << "{ " << "\"__type__\": " << "\"operational_reporting_style\", " << "\"value\": ";
+std::ostream& operator<<(std::ostream& s, const reporting_style& v) {
+    s << "{ " << "\"__type__\": " << "\"reporting_style\", " << "\"value\": ";
 
     std::string attr;
     switch (v) {
-    case operational_reporting_style::invalid:
+    case reporting_style::invalid:
         attr = "\"invalid\"";
         break;
-    case operational_reporting_style::plain:
+    case reporting_style::plain:
         attr = "\"plain\"";
         break;
-    case operational_reporting_style::org_mode:
+    case reporting_style::org_mode:
         attr = "\"org_mode\"";
         break;
     default:
-        throw std::invalid_argument("Invalid value for operational_reporting_style");
+        throw std::invalid_argument("Invalid value for reporting_style");
     }
     s << attr << " }";
     return s;

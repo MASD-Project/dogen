@@ -18,61 +18,61 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen/types/operational_reporting_configuration.hpp"
+#include "masd.dogen/types/reporting_configuration.hpp"
 
 namespace masd::dogen {
 
-operational_reporting_configuration::operational_reporting_configuration()
-    : style_(static_cast<masd::dogen::operational_reporting_style>(0)) { }
+reporting_configuration::reporting_configuration()
+    : style_(static_cast<masd::dogen::reporting_style>(0)) { }
 
-operational_reporting_configuration::operational_reporting_configuration(operational_reporting_configuration&& rhs)
+reporting_configuration::reporting_configuration(reporting_configuration&& rhs)
     : style_(std::move(rhs.style_)),
       output_directory_(std::move(rhs.output_directory_)) { }
 
-operational_reporting_configuration::operational_reporting_configuration(
-    const masd::dogen::operational_reporting_style style,
+reporting_configuration::reporting_configuration(
+    const masd::dogen::reporting_style style,
     const boost::filesystem::path& output_directory)
     : style_(style),
       output_directory_(output_directory) { }
 
-void operational_reporting_configuration::swap(operational_reporting_configuration& other) noexcept {
+void reporting_configuration::swap(reporting_configuration& other) noexcept {
     using std::swap;
     swap(style_, other.style_);
     swap(output_directory_, other.output_directory_);
 }
 
-bool operational_reporting_configuration::operator==(const operational_reporting_configuration& rhs) const {
+bool reporting_configuration::operator==(const reporting_configuration& rhs) const {
     return style_ == rhs.style_ &&
         output_directory_ == rhs.output_directory_;
 }
 
-operational_reporting_configuration& operational_reporting_configuration::operator=(operational_reporting_configuration other) {
+reporting_configuration& reporting_configuration::operator=(reporting_configuration other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-masd::dogen::operational_reporting_style operational_reporting_configuration::style() const {
+masd::dogen::reporting_style reporting_configuration::style() const {
     return style_;
 }
 
-void operational_reporting_configuration::style(const masd::dogen::operational_reporting_style v) {
+void reporting_configuration::style(const masd::dogen::reporting_style v) {
     style_ = v;
 }
 
-const boost::filesystem::path& operational_reporting_configuration::output_directory() const {
+const boost::filesystem::path& reporting_configuration::output_directory() const {
     return output_directory_;
 }
 
-boost::filesystem::path& operational_reporting_configuration::output_directory() {
+boost::filesystem::path& reporting_configuration::output_directory() {
     return output_directory_;
 }
 
-void operational_reporting_configuration::output_directory(const boost::filesystem::path& v) {
+void reporting_configuration::output_directory(const boost::filesystem::path& v) {
     output_directory_ = v;
 }
 
-void operational_reporting_configuration::output_directory(const boost::filesystem::path&& v) {
+void reporting_configuration::output_directory(const boost::filesystem::path&& v) {
     output_directory_ = std::move(v);
 }
 

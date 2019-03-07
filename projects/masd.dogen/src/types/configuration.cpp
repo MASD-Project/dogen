@@ -26,19 +26,19 @@ configuration::configuration(configuration&& rhs)
     : model_processing_(std::move(rhs.model_processing_)),
       tracing_(std::move(rhs.tracing_)),
       diffing_(std::move(rhs.diffing_)),
-      operational_reporting_(std::move(rhs.operational_reporting_)),
+      reporting_(std::move(rhs.reporting_)),
       byproduct_directory_(std::move(rhs.byproduct_directory_)) { }
 
 configuration::configuration(
     const boost::optional<masd::dogen::model_processing_configuration>& model_processing,
     const boost::optional<masd::dogen::tracing_configuration>& tracing,
     const boost::optional<masd::dogen::diffing_configuration>& diffing,
-    const boost::optional<masd::dogen::operational_reporting_configuration>& operational_reporting,
+    const boost::optional<masd::dogen::reporting_configuration>& reporting,
     const boost::filesystem::path& byproduct_directory)
     : model_processing_(model_processing),
       tracing_(tracing),
       diffing_(diffing),
-      operational_reporting_(operational_reporting),
+      reporting_(reporting),
       byproduct_directory_(byproduct_directory) { }
 
 void configuration::swap(configuration& other) noexcept {
@@ -46,7 +46,7 @@ void configuration::swap(configuration& other) noexcept {
     swap(model_processing_, other.model_processing_);
     swap(tracing_, other.tracing_);
     swap(diffing_, other.diffing_);
-    swap(operational_reporting_, other.operational_reporting_);
+    swap(reporting_, other.reporting_);
     swap(byproduct_directory_, other.byproduct_directory_);
 }
 
@@ -54,7 +54,7 @@ bool configuration::operator==(const configuration& rhs) const {
     return model_processing_ == rhs.model_processing_ &&
         tracing_ == rhs.tracing_ &&
         diffing_ == rhs.diffing_ &&
-        operational_reporting_ == rhs.operational_reporting_ &&
+        reporting_ == rhs.reporting_ &&
         byproduct_directory_ == rhs.byproduct_directory_;
 }
 
@@ -118,21 +118,21 @@ configuration& configuration::diffing(const boost::optional<masd::dogen::diffing
     return *this;
 }
 
-const boost::optional<masd::dogen::operational_reporting_configuration>& configuration::operational_reporting() const {
-    return operational_reporting_;
+const boost::optional<masd::dogen::reporting_configuration>& configuration::reporting() const {
+    return reporting_;
 }
 
-boost::optional<masd::dogen::operational_reporting_configuration>& configuration::operational_reporting() {
-    return operational_reporting_;
+boost::optional<masd::dogen::reporting_configuration>& configuration::reporting() {
+    return reporting_;
 }
 
-configuration& configuration::operational_reporting(const boost::optional<masd::dogen::operational_reporting_configuration>& v) {
-    operational_reporting_ = v;
+configuration& configuration::reporting(const boost::optional<masd::dogen::reporting_configuration>& v) {
+    reporting_ = v;
     return *this;
 }
 
-configuration& configuration::operational_reporting(const boost::optional<masd::dogen::operational_reporting_configuration>&& v) {
-    operational_reporting_ = std::move(v);
+configuration& configuration::reporting(const boost::optional<masd::dogen::reporting_configuration>&& v) {
+    reporting_ = std::move(v);
     return *this;
 }
 

@@ -77,12 +77,10 @@ const std::string tracing_format_org_mode("org-mode");
 const std::string tracing_format_graphviz("graphviz");
 const std::string tracing_default_directory("tracing");
 
-const std::string operational_reporting_enabled_arg(
-    "operational-reporting-enabled");
-const std::string operational_reporting_style_arg(
-    "operational-reporting-style");
-const std::string operational_reporting_style_org_mode("org-mode");
-const std::string operational_reporting_style_plain("plain");
+const std::string reporting_enabled_arg("reporting-enabled");
+const std::string reporting_style_arg("reporting-style");
+const std::string reporting_style_org_mode("org-mode");
+const std::string reporting_style_plain("plain");
 
 const std::string diffing_enabled_arg("diffing-enabled");
 const std::string diffing_destination_arg("diffing-destination");
@@ -113,8 +111,8 @@ const std::string invalid_diffing_style(
     "Diffing style is invalid or unsupported: ");
 const std::string invalid_diffing_destination(
     "Diffing destination is invalid or unsupported: ");
-const std::string invalid_operational_reporting_style(
-    "Operational reporting style is invalid or unsupported: ");
+const std::string invalid_reporting_style(
+    "Reporting style is invalid or unsupported: ");
 
 const std::string logging_impact_none("none");
 const std::string logging_impact_moderate("none");
@@ -172,13 +170,12 @@ options_description make_top_level_visible_options_description() {
             " metrics. Valid values: org-mode, plain. Defaults to org-mode.");
     r.add(tod);
 
-    options_description orod("Operational Reporting");
+    options_description orod("Reporting");
     orod.add_options()
-        ("operational-reporting-enabled",
-            "Generate a report detailing operations")
-        ("operational-reporting-style",  value<std::string>(),
+        ("reporting-enabled", "Generate a report detailing operations.")
+        ("reporting-style",  value<std::string>(),
             "Style to use in the operational report. "
-            "Valid values: org-mode, plain. Defaults to org-mode");
+            "Valid values: org-mode, plain. Defaults to org-mode.");
     r.add(orod);
 
     options_description dod("Diffing");
@@ -487,29 +484,29 @@ read_diffing_configuration(const variables_map& vm,
     return r;
 }
 
-boost::optional<masd::dogen::operational_reporting_configuration>
-read_operational_reporting_configuration(const variables_map& vm,
+boost::optional<masd::dogen::reporting_configuration>
+read_reporting_configuration(const variables_map& vm,
     const boost::filesystem::path& byproduct_dir) {
-    using masd::dogen::operational_reporting_configuration;
-    const bool enabled(vm.count(operational_reporting_enabled_arg) != 0);
+    using masd::dogen::reporting_configuration;
+    const bool enabled(vm.count(reporting_enabled_arg) != 0);
     if (!enabled)
-        return boost::optional<operational_reporting_configuration>();
+        return boost::optional<reporting_configuration>();
 
-    using masd::dogen::operational_reporting_style;
-    operational_reporting_configuration r;
+    using masd::dogen::reporting_style;
+    reporting_configuration r;
 
-    if (vm.count(operational_reporting_style_arg)) {
-        const auto s(vm[operational_reporting_style_arg].as<std::string>());
+    if (vm.count(reporting_style_arg)) {
+        const auto s(vm[reporting_style_arg].as<std::string>());
 
-        if (s == operational_reporting_style_org_mode)
-            r.style(operational_reporting_style::org_mode);
-        else if (s == operational_reporting_style_plain)
-            r.style(operational_reporting_style::plain);
+        if (s == reporting_style_org_mode)
+            r.style(reporting_style::org_mode);
+        else if (s == reporting_style_plain)
+            r.style(reporting_style::plain);
         else
             BOOST_THROW_EXCEPTION(parser_exception(
-                    invalid_operational_reporting_style + s));
+                    invalid_reporting_style + s));
     } else if (enabled)
-        r.style(operational_reporting_style::org_mode);
+        r.style(reporting_style::org_mode);
 
     r.output_directory(byproduct_dir);
 
@@ -732,7 +729,7 @@ handle_command(const std::string& command_name, const bool has_help,
     const auto li(compute_logging_impact(r.logging()));
     auto& a(r.api());
     a.tracing(read_tracing_configuration(vm, li, bp));
-    a.operational_reporting(read_operational_reporting_configuration(vm, bp));
+    a.reporting(read_reporting_configuration(vm, bp));
     a.diffing(read_diffing_configuration(vm, bp));
     a.model_processing(read_model_processing_configuration(vm));
 

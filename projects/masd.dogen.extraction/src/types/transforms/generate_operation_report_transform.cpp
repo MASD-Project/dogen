@@ -137,7 +137,7 @@ transform(const context& ctx, const meta_model::model& m) {
     /*
      * If the user did not request diffing, there is nothing to do.
      */
-    if (!ctx.operational_reporting_configuration()) {
+    if (!ctx.reporting_configuration()) {
         BOOST_LOG_SEV(lg, debug) << "Operatinal reporting not enabled.";
         return;
     }
@@ -162,7 +162,7 @@ transform(const context& ctx, const meta_model::model& m) {
     }
 
     const auto c(ss.str());
-    const auto& cfg(*ctx.operational_reporting_configuration());
+    const auto& cfg(*ctx.reporting_configuration());
     const auto od(cfg.output_directory());
     BOOST_LOG_SEV(lg, debug) << "Outputting report to: " << od;
 

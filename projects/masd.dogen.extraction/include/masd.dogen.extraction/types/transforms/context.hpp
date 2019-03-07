@@ -30,7 +30,7 @@
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.tracing/types/tracer_fwd.hpp"
 #include "masd.dogen/types/diffing_configuration.hpp"
-#include "masd.dogen/types/operational_reporting_configuration.hpp"
+#include "masd.dogen/types/reporting_configuration.hpp"
 
 namespace masd::dogen::extraction::transforms {
 
@@ -47,7 +47,7 @@ public:
     context(
         const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer,
         const boost::optional<masd::dogen::diffing_configuration>& diffing_configuration,
-        const boost::optional<masd::dogen::operational_reporting_configuration>& operational_reporting_configuration);
+        const boost::optional<masd::dogen::reporting_configuration>& reporting_configuration);
 
 public:
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer() const;
@@ -60,15 +60,15 @@ public:
     void diffing_configuration(const boost::optional<masd::dogen::diffing_configuration>& v);
     void diffing_configuration(const boost::optional<masd::dogen::diffing_configuration>&& v);
 
-    const boost::optional<masd::dogen::operational_reporting_configuration>& operational_reporting_configuration() const;
-    boost::optional<masd::dogen::operational_reporting_configuration>& operational_reporting_configuration();
-    void operational_reporting_configuration(const boost::optional<masd::dogen::operational_reporting_configuration>& v);
-    void operational_reporting_configuration(const boost::optional<masd::dogen::operational_reporting_configuration>&& v);
+    const boost::optional<masd::dogen::reporting_configuration>& reporting_configuration() const;
+    boost::optional<masd::dogen::reporting_configuration>& reporting_configuration();
+    void reporting_configuration(const boost::optional<masd::dogen::reporting_configuration>& v);
+    void reporting_configuration(const boost::optional<masd::dogen::reporting_configuration>&& v);
 
 private:
     boost::shared_ptr<masd::dogen::tracing::tracer> tracer_;
     boost::optional<masd::dogen::diffing_configuration> diffing_configuration_;
-    boost::optional<masd::dogen::operational_reporting_configuration> operational_reporting_configuration_;
+    boost::optional<masd::dogen::reporting_configuration> reporting_configuration_;
 };
 
 }

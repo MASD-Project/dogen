@@ -18,19 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "masd.dogen/io/operational_reporting_style_io.hpp"
-#include "masd.dogen/io/operational_reporting_configuration_io.hpp"
+#ifndef MASD_DOGEN_TYPES_REPORTING_STYLE_FWD_HPP
+#define MASD_DOGEN_TYPES_REPORTING_STYLE_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace masd::dogen {
 
-std::ostream& operator<<(std::ostream& s, const operational_reporting_configuration& v) {
-    s << " { "
-      << "\"__type__\": " << "\"masd::dogen::operational_reporting_configuration\"" << ", "
-      << "\"style\": " << v.style() << ", "
-      << "\"output_directory\": " << "\"" << v.output_directory().generic_string() << "\""
-      << " }";
-    return(s);
-}
+enum class reporting_style : unsigned int;
 
 }
+
+#endif

@@ -33,6 +33,7 @@
 #include "masd.dogen/types/tracing_level.hpp"
 #include "masd.dogen/types/weaving_style.hpp"
 #include "masd.dogen/types/tracing_format.hpp"
+#include "masd.dogen/types/reporting_style.hpp"
 #include "masd.dogen/types/weaving_exception.hpp"
 #include "masd.dogen/types/diffing_destination.hpp"
 #include "masd.dogen/types/conversion_exception.hpp"
@@ -41,9 +42,8 @@
 #include "masd.dogen/types/diffing_configuration.hpp"
 #include "masd.dogen/types/tracing_configuration.hpp"
 #include "masd.dogen/types/configuration_validator.hpp"
-#include "masd.dogen/types/operational_reporting_style.hpp"
+#include "masd.dogen/types/reporting_configuration.hpp"
 #include "masd.dogen/types/model_processing_configuration.hpp"
 #include "masd.dogen/types/invalid_configuration_exception.hpp"
-#include "masd.dogen/types/operational_reporting_configuration.hpp"
 
 #endif

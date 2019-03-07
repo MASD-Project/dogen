@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_TYPES_OPERATIONAL_REPORTING_CONFIGURATION_HPP
-#define MASD_DOGEN_TYPES_OPERATIONAL_REPORTING_CONFIGURATION_HPP
+#ifndef MASD_DOGEN_TYPES_REPORTING_CONFIGURATION_HPP
+#define MASD_DOGEN_TYPES_REPORTING_CONFIGURATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,32 +27,32 @@
 
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen/types/operational_reporting_style.hpp"
+#include "masd.dogen/types/reporting_style.hpp"
 
 namespace masd::dogen {
 
 /**
  * @brief Configuration related to operational reports.
  */
-class operational_reporting_configuration final {
+class reporting_configuration final {
 public:
-    operational_reporting_configuration(const operational_reporting_configuration&) = default;
-    ~operational_reporting_configuration() = default;
+    reporting_configuration(const reporting_configuration&) = default;
+    ~reporting_configuration() = default;
 
 public:
-    operational_reporting_configuration();
+    reporting_configuration();
 
 public:
-    operational_reporting_configuration(operational_reporting_configuration&& rhs);
+    reporting_configuration(reporting_configuration&& rhs);
 
 public:
-    operational_reporting_configuration(
-        const masd::dogen::operational_reporting_style style,
+    reporting_configuration(
+        const masd::dogen::reporting_style style,
         const boost::filesystem::path& output_directory);
 
 public:
-    masd::dogen::operational_reporting_style style() const;
-    void style(const masd::dogen::operational_reporting_style v);
+    masd::dogen::reporting_style style() const;
+    void style(const masd::dogen::reporting_style v);
 
     const boost::filesystem::path& output_directory() const;
     boost::filesystem::path& output_directory();
@@ -60,17 +60,17 @@ public:
     void output_directory(const boost::filesystem::path&& v);
 
 public:
-    bool operator==(const operational_reporting_configuration& rhs) const;
-    bool operator!=(const operational_reporting_configuration& rhs) const {
+    bool operator==(const reporting_configuration& rhs) const;
+    bool operator!=(const reporting_configuration& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(operational_reporting_configuration& other) noexcept;
-    operational_reporting_configuration& operator=(operational_reporting_configuration other);
+    void swap(reporting_configuration& other) noexcept;
+    reporting_configuration& operator=(reporting_configuration other);
 
 private:
-    masd::dogen::operational_reporting_style style_;
+    masd::dogen::reporting_style style_;
     boost::filesystem::path output_directory_;
 };
 
@@ -80,8 +80,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::operational_reporting_configuration& lhs,
-    masd::dogen::operational_reporting_configuration& rhs) {
+    masd::dogen::reporting_configuration& lhs,
+    masd::dogen::reporting_configuration& rhs) {
     lhs.swap(rhs);
 }
 

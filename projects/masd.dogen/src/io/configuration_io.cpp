@@ -22,8 +22,8 @@
 #include "masd.dogen/io/configuration_io.hpp"
 #include "masd.dogen/io/diffing_configuration_io.hpp"
 #include "masd.dogen/io/tracing_configuration_io.hpp"
+#include "masd.dogen/io/reporting_configuration_io.hpp"
 #include "masd.dogen/io/model_processing_configuration_io.hpp"
-#include "masd.dogen/io/operational_reporting_configuration_io.hpp"
 
 namespace boost {
 
@@ -72,7 +72,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dog
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::operational_reporting_configuration>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::reporting_configuration>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -93,7 +93,7 @@ std::ostream& operator<<(std::ostream& s, const configuration& v) {
       << "\"model_processing\": " << v.model_processing() << ", "
       << "\"tracing\": " << v.tracing() << ", "
       << "\"diffing\": " << v.diffing() << ", "
-      << "\"operational_reporting\": " << v.operational_reporting() << ", "
+      << "\"reporting\": " << v.reporting() << ", "
       << "\"byproduct_directory\": " << "\"" << v.byproduct_directory().generic_string() << "\""
       << " }";
     return(s);

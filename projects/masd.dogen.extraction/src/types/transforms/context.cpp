@@ -26,10 +26,10 @@ namespace masd::dogen::extraction::transforms {
 context::context(
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer,
     const boost::optional<masd::dogen::diffing_configuration>& diffing_configuration,
-    const boost::optional<masd::dogen::operational_reporting_configuration>& operational_reporting_configuration)
+    const boost::optional<masd::dogen::reporting_configuration>& reporting_configuration)
     : tracer_(tracer),
       diffing_configuration_(diffing_configuration),
-      operational_reporting_configuration_(operational_reporting_configuration) { }
+      reporting_configuration_(reporting_configuration) { }
 
 const boost::shared_ptr<masd::dogen::tracing::tracer>& context::tracer() const {
     return tracer_;
@@ -63,20 +63,20 @@ void context::diffing_configuration(const boost::optional<masd::dogen::diffing_c
     diffing_configuration_ = std::move(v);
 }
 
-const boost::optional<masd::dogen::operational_reporting_configuration>& context::operational_reporting_configuration() const {
-    return operational_reporting_configuration_;
+const boost::optional<masd::dogen::reporting_configuration>& context::reporting_configuration() const {
+    return reporting_configuration_;
 }
 
-boost::optional<masd::dogen::operational_reporting_configuration>& context::operational_reporting_configuration() {
-    return operational_reporting_configuration_;
+boost::optional<masd::dogen::reporting_configuration>& context::reporting_configuration() {
+    return reporting_configuration_;
 }
 
-void context::operational_reporting_configuration(const boost::optional<masd::dogen::operational_reporting_configuration>& v) {
-    operational_reporting_configuration_ = v;
+void context::reporting_configuration(const boost::optional<masd::dogen::reporting_configuration>& v) {
+    reporting_configuration_ = v;
 }
 
-void context::operational_reporting_configuration(const boost::optional<masd::dogen::operational_reporting_configuration>&& v) {
-    operational_reporting_configuration_ = std::move(v);
+void context::reporting_configuration(const boost::optional<masd::dogen::reporting_configuration>&& v) {
+    reporting_configuration_ = std::move(v);
 }
 
 }

@@ -18,19 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_IO_OPERATIONAL_REPORTING_STYLE_IO_HPP
-#define MASD_DOGEN_IO_OPERATIONAL_REPORTING_STYLE_IO_HPP
+#ifndef MASD_DOGEN_TYPES_REPORTING_STYLE_HPP
+#define MASD_DOGEN_TYPES_REPORTING_STYLE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "masd.dogen/types/operational_reporting_style.hpp"
-
 namespace masd::dogen {
 
-std::ostream& operator<<(std::ostream& s, const operational_reporting_style& v);
+/**
+ * @brief Available formats for operational reports.
+ */
+enum class reporting_style : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    plain = 1, ///< Plain text format.
+    org_mode = 2 ///< Emacs Org mode.
+};
 
 }
 
