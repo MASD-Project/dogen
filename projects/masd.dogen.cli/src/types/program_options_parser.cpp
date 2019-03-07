@@ -143,7 +143,7 @@ options_description make_top_level_visible_options_description() {
         ("log-level,l", value<std::string>(),
             "What level to use for logging. Valid values: trace, debug, info, "
             "warn, error. Defaults to 'info'.")
-        ("log-to-console", value<std::string>(),
+        ("log-to-console",
             "Output logging to the console, as well as to file.");
     r.add(lod);
 
