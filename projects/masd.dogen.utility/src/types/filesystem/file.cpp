@@ -46,10 +46,15 @@ std::string read_file_content(std::istream& s) {
     std::string r(
         (std::istreambuf_iterator<char>(s)),
         std::istreambuf_iterator<char>());
+
+    BOOST_LOG_SEV(lg, trace) << "Total bytes read:" << r.size();
     return r;
 }
 
 std::string read_file_content(const boost::filesystem::path& path) {
+    BOOST_LOG_SEV(lg, trace) << "Reading content for path:"
+                             << path.generic();
+
     if (!boost::filesystem::exists(path)) {
         const auto gs(path.generic_string());
         BOOST_LOG_SEV(lg, error) << ::file_not_found << gs;
