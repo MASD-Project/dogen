@@ -110,6 +110,10 @@ const std::string invalid_diffing_style(
 const std::string invalid_diffing_destination(
     "Diffing destination is invalid or unsupported: ");
 
+const std::string logging_impact_none("none");
+const std::string logging_impact_moderate("none");
+const std::string logging_impact_severe("severe");
+
 using boost::program_options::value;
 using boost::program_options::variables_map;
 using boost::program_options::options_description;
@@ -369,11 +373,24 @@ handle_no_command(const bool has_version, const bool has_help,
     return boost::optional<configuration>();
 }
 
+std::string
+compute_logging_impact(const boost::optional<logging_configuration> cfg) {
+
+    if (!cfg)
+        return logging_impact_none;
+
+    if (cfg->severity() == severity_level::info)
+        return logging_impact_moderate;
+
+    return logging_impact_severe;
+}
+
 /**
  * @brief Reads the tracing configuration from the variables map.
  */
 boost::optional<masd::dogen::tracing_configuration>
-read_tracing_configuration(const variables_map& vm) {
+read_tracing_configuration(const variables_map& vm,
+    const std::string& logging_impact) {
 
     const bool enabled(vm.count(tracing_enabled_arg) != 0);
     if (!enabled)
@@ -381,6 +398,7 @@ read_tracing_configuration(const variables_map& vm) {
 
     masd::dogen::tracing_configuration r;
     r.guids_enabled(vm.count(tracing_guids_enabled_arg) != 0);
+    r.logging_impact(logging_impact);
 
     using masd::dogen::tracing_level;
     if (vm.count(tracing_level_arg)) {
@@ -670,7 +688,10 @@ handle_command(const std::string& command_name, const bool has_help,
     const auto run_id(compute_run_identifier(command_name, target));
     const auto bp(read_byproduct_directory(vm, run_id));
     r.api().byproduct_directory(bp);
-    r.api().tracing(read_tracing_configuration(vm));
+
+    r.logging(read_logging_configuration(run_id, vm, bp));
+    const auto li(compute_logging_impact(r.logging()));
+    r.api().tracing(read_tracing_configuration(vm, li));
     r.api().diffing(read_diffing_configuration(vm));
     r.api().error_handling(read_error_handling_configuration(vm));
 
@@ -679,11 +700,9 @@ handle_command(const std::string& command_name, const bool has_help,
         r.api().tracing()->output_directory(tracing_dir);
     }
 
-    if (r.api().diffing()) {
+    if (r.api().diffing())
         r.api().diffing()->output_directory(bp);
-    }
 
-    r.logging(read_logging_configuration(run_id, vm, bp));
     return r;
 }
 
