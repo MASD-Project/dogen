@@ -146,8 +146,42 @@ void print_plain_report(std::ostream& s,
     }
 }
 
-void print_org_mode_report(std::ostream& /*s*/,
-    const masd::dogen::extraction::meta_model::model& /*m*/) {
+void print_org_mode_report(std::ostream& s,
+    const masd::dogen::extraction::meta_model::model& m) {
+
+    using namespace masd::dogen::extraction;
+    std::unordered_map<operation_type,
+                       std::unordered_map<operation_reason,
+                                          std::list<std::string>
+                                          >
+                       > map;
+
+    const auto base(m.managed_directories().front());
+    for (auto& a : m.artefacts()) {
+        // FIXME: HACK: we seemt to have some blank artefacts atm.
+        if (a.path().empty())
+            continue;
+
+        BOOST_LOG_SEV(lg, debug) << "Processing arefact: "
+                                 << a.path().filename();
+
+        const auto& op(a.operation());
+        auto rp(a.path().lexically_relative(base));
+        map[op.type()][op.reason()].push_back(rp.generic_string());
+    }
+
+    for (const auto& first_pair : map) {
+        s << "* ";
+        print_operation_type(first_pair.first, s);
+        s << std::endl;
+        for (const auto& second_pair : first_pair.second) {
+            s << "** ";
+            print_operation_reason(second_pair.first, s);
+            s << std::endl;
+            for (const auto& l : second_pair.second)
+                s << l << std::endl;
+        }
+    }
 }
 
 void write_report(const std::string& contents, const std::string& model_name,
