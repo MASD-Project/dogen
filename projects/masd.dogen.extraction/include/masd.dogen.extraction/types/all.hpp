@@ -80,6 +80,7 @@
 #include "masd.dogen.extraction/types/csharp/scoped_namespace_formatter.hpp"
 #include "masd.dogen.extraction/types/helpers/artefact_writer_interface.hpp"
 #include "masd.dogen.extraction/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.extraction/types/transforms/model_production_chain.hpp"
 #include "masd.dogen.extraction/types/transforms/remove_files_transform.hpp"
 #include "masd.dogen.extraction/types/csharp/scoped_boilerplate_formatter.hpp"
 #include "masd.dogen.extraction/types/transforms/generate_diffs_transform.hpp"

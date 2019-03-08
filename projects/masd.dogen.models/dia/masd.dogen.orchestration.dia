@@ -3823,13 +3823,13 @@ user defined stereotypes.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O27">
       <dia:attribute name="obj_pos">
-        <dia:point val="52,30"/>
+        <dia:point val="54,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,29.95;74.495,33.65"/>
+        <dia:rectangle val="53.95,29.95;76.495,33.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="52,30"/>
+        <dia:point val="54,30"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="22.445"/>
@@ -4019,17 +4019,17 @@ user defined stereotypes.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="52,33.6"/>
+        <dia:point val="54,33.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="48.445,32.85;52.75,40.6"/>
+        <dia:rectangle val="48.445,32.85;54.75,40.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="52,33.6"/>
-        <dia:point val="52,36"/>
+        <dia:point val="54,33.6"/>
+        <dia:point val="54,36"/>
         <dia:point val="48.495,36"/>
         <dia:point val="48.495,39"/>
       </dia:attribute>
@@ -4091,17 +4091,17 @@ user defined stereotypes.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="74.445,33.6"/>
+        <dia:point val="76.445,33.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="73.695,32.85;81.235,40.6"/>
+        <dia:rectangle val="75.695,32.85;81.235,40.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="74.445,33.6"/>
-        <dia:point val="74.445,36"/>
+        <dia:point val="76.445,33.6"/>
+        <dia:point val="76.445,36"/>
         <dia:point val="81.035,36"/>
         <dia:point val="81.035,39"/>
       </dia:attribute>
@@ -4238,7 +4238,7 @@ user defined stereotypes.#</dia:string>
         <dia:point val="47.405,21.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.655,20.85;63.4225,31.6"/>
+        <dia:rectangle val="46.655,20.85;65.4225,31.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4246,8 +4246,8 @@ user defined stereotypes.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="47.405,21.6"/>
         <dia:point val="47.405,27"/>
-        <dia:point val="63.2225,27"/>
-        <dia:point val="63.2225,30"/>
+        <dia:point val="65.2225,27"/>
+        <dia:point val="65.2225,30"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
