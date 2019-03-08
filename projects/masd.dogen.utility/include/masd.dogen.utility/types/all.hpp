@@ -82,6 +82,7 @@
 #include "masd.dogen.utility/types/filesystem/file_not_found.hpp"
 #include "masd.dogen.utility/types/log/logging_configuration.hpp"
 #include "masd.dogen.utility/types/test/serialization_tester.hpp"
+#include "masd.dogen.utility/types/test_data/dogen_generation.hpp"
 #include "masd.dogen.utility/types/test_data/filesystem_tests.hpp"
 #include "masd.dogen.utility/types/exception/utility_exception.hpp"
 #include "masd.dogen.utility/types/serialization/archive_types.hpp"
@@ -94,6 +95,8 @@
 #include "masd.dogen.utility/types/test_data/validating_resolver.hpp"
 #include "masd.dogen.utility/types/test/move_assignment_copy_tester.hpp"
 #include "masd.dogen.utility/types/log/invalid_logging_configuration.hpp"
+#include "masd.dogen.utility/types/test_data/cpp_ref_impl_generation.hpp"
 #include "masd.dogen.utility/types/log/logging_configuration_validator.hpp"
+#include "masd.dogen.utility/types/test_data/csharp_ref_impl_generation.hpp"
 
 #endif
