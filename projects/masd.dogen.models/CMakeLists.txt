@@ -60,11 +60,15 @@ if (DOGEN_CLI_EXECUTABLE)
         set(model_name "")
         get_filename_component(model_name ${model} NAME)
 
+        set(destination_name ${output_dir}/${model_name})
+        string(REGEX REPLACE ".dia$" ".json" destination_name
+            ${destination_name})
+
         add_custom_target(convert_${model_name}
             COMMENT "Converting ${model_name}."
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${DOGEN_CLI_EXECUTABLE} convert
-            --source ${model} --destination ${output_dir}/${model_name}.json
+            --source ${model} --destination ${destination_name}
             ${DOGEN_COMMON_OPTIONS})
         add_dependencies(convert_all convert_${model_name})
     endforeach()
