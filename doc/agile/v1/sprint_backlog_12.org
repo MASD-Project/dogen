@@ -12,38 +12,39 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-07 Thu 21:36]
+#+CAPTION: Clock summary at [2019-03-08 Fri 07:20]
 | <75>                                                         |         |       |       |       |
 | Headline                                                     | Time    |       |       |     % |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                 | *67:12* |       |       | 100.0 |
+| *Total time*                                                 | *68:19* |       |       | 100.0 |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                      | 67:12   |       |       | 100.0 |
-| Active                                                       |         | 67:12 |       | 100.0 |
-| Edit release notes for previous sprint                       |         |       |  1:27 |   2.2 |
-| Sprint and product backlog grooming                          |         |       |  1:32 |   2.3 |
-| Implement text model generation chain in generation          |         |       |  3:45 |   5.6 |
-| Move generation model out of coding                          |         |       |  4:22 |   6.5 |
+| Stories                                                      | 68:19   |       |       | 100.0 |
+| Active                                                       |         | 68:19 |       | 100.0 |
+| Edit release notes for previous sprint                       |         |       |  1:27 |   2.1 |
+| Sprint and product backlog grooming                          |         |       |  1:32 |   2.2 |
+| Implement text model generation chain in generation          |         |       |  3:45 |   5.5 |
+| Move generation model out of coding                          |         |       |  4:22 |   6.4 |
 | Rename endomodel to just model                               |         |       |  2:11 |   3.2 |
 | Remove exomodel remnants                                     |         |       |  0:03 |   0.1 |
-| Consider adding a dot graph of the transforms to probing     |         |       |  1:47 |   2.7 |
-| Split annotations processing into two phases                 |         |       |  3:10 |   4.7 |
-| Move injection processing out of coding                      |         |       | 18:39 |  27.8 |
+| Consider adding a dot graph of the transforms to probing     |         |       |  1:47 |   2.6 |
+| Split annotations processing into two phases                 |         |       |  3:10 |   4.6 |
+| Move injection processing out of coding                      |         |       | 18:39 |  27.3 |
 | Create a extraction model post-processing chain              |         |       |  0:56 |   1.4 |
 | Move coding to generation model transform into orchestration |         |       |  0:33 |   0.8 |
 | Add option for northwind tests                               |         |       |  0:54 |   1.3 |
-| Add DTL to vcpkg                                             |         |       |  5:15 |   7.8 |
-| Remove coding options                                        |         |       |  3:59 |   5.9 |
-| Add basic "diff mode"                                        |         |       | 12:02 |  17.9 |
+| Add DTL to vcpkg                                             |         |       |  5:15 |   7.7 |
+| Remove coding options                                        |         |       |  3:59 |   5.8 |
+| Add basic "diff mode"                                        |         |       | 12:02 |  17.6 |
 | Create a "run byproducts" directory                          |         |       |  1:01 |   1.5 |
 | Logging impact in tracing is blank                           |         |       |  0:50 |   1.2 |
-| Split operation reports from patches                         |         |       |  1:19 |   2.0 |
+| Split operation reports from patches                         |         |       |  1:19 |   1.9 |
 | Add org mode support to diff reports                         |         |       |  1:13 |   1.8 |
 | Add dry mode                                                 |         |       |  0:27 |   0.7 |
 | Rename the =transform= method to =apply=                     |         |       |  0:05 |   0.1 |
 | Try to fix valgrind warning on =find_files=                  |         |       |  0:20 |   0.5 |
 | Fix northwind tests on OSX and Windows                       |         |       |  1:04 |   1.6 |
 | Update metrics in OpenHub                                    |         |       |  0:18 |   0.4 |
+| Rework the system tests using diff mode                      |         |       |  1:07 |   1.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -946,6 +947,99 @@ bit silly yo have to have two flags for this.
 For some reason our metrics are stuck at 5 months ago or so. It is
 actually mildly useful to know the number of lines of code etc.
 
+*** STARTED Rework the system tests using diff mode                   :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-08 Fri 06:13]--[2019-03-08 Fri 07:20] =>  1:07
+    :END:
+
+Once we have diff mode, we need to find some kind of workflow for
+tests:
+
+- each product is composed of a git URL and a list of models.
+- we git clone all repos as part of the build process.
+- directories and model locations are hard-coded in each test.
+- test runs against the model and hard-coded location, produces the
+  diff. Test asserts of the diff being non-zero.
+
+The problem with this approach is that we now have to do git checkouts
+of external projects in order to build and run the product. This is
+not ideal. Another approach is:
+
+- for the models of dogen itself, discover the models.
+- for external models, use environment variables. For the reference
+  models, if not defined then error. This is because the code
+  generator should not break the reference models.
+- for other project models, these can be ignored if not defined. This
+  is so we don't have to get all external projects when developing
+  locally, but the build machine will still validate them.
+
+Notes:
+
+- create a new test data set for each procuct (dogen, ref models).
+- test data set looks for an env variable. If not defined, throws.
+- test data set has hard-coded paths to each model, and to their
+  output.
+- test runs main orchestration transform against model then checks for
+  no writes or removes. prints out first 5 diffs to console.
+- enable diffing, reporting.
+- check how byproduct directory works with tests.
+
+*** Consider adding tests for pipeline components                     :story:
+
+With regards to the existing injection.dia/injection.json test data
+set: this is actually not a bad idea. Basically what we are saying is
+that there is value in freezing a set of inputs in time and then use
+them to check parts of the pipeline. These are not expected to move
+(because the model contents are frozen). We could take the existing
+reference models and copy them for this. We could also extend this
+approach to the other parts of the pipeline. We would only update
+these frozen models very infrequently, at which point we'd have to
+rebaseline all data files. The only downside is that we'd need
+serialisation for all models (coding, generation, formatting). These
+models would break every time we change something in the pipeline (add
+new fields, change formatters, etc).
+
+In the past these tests were a bit painful and broke a lot. Also, it
+was not entirely clear how to rebase the data files - required a lot
+of black magic every time it happened and did not happen often enough
+to build muscle memory.
+
+However the tests are very useful: when we are making internal
+changes, its good to see the breaks and look into the diffs to ensure
+only what we expect has changed.
+
+*** Add support for ignoring types and models                         :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to ignore certain types I am working
+on so that I can evolve my diagram over time, whilst still being able
+to commit it.
+#+end_quote
+
+Sometimes when changing a diagram it may be useful to set some types
+to "ignore", i.e. make dogen pretend they don't exist at all. For
+instance one may want to introduce new types one at a time. It would
+be nice to have a dynamic extension flag for ignoring.
+
+We should probably have some kind of warning to ensure users are aware
+of the types being ignored.
+
+Isn't this just using "enable=false" for all formatters?
+
+In a world where we can define bundles of meta-types, and import them
+from system models, we could possibly just define a bundle called
+=Ignored= with all formatters set to false.
+
+This should be a stereotype to make it really visible. Also, the type
+should have a colour that is easy to spot like light gray. Actually
+this is ok, we can just add a profile.
+
+This is also useful at the model level so that the model is not used
+either for tests or for generation. This is more than just formatting:
+its basically "act as if this type was not defined in the input" or
+"this model did not exist". It should result in resolution failures if
+anyone is referring to the model/type.
+
 *** Log file per transform                                            :story:
 
 At present we have a good view of the graph of the chain when tracing
@@ -970,17 +1064,6 @@ vs transforms.
 Ideally when logging at info we want to see the spine of the program,
 showing all transforms with their start and finishes and some
 information about what they are processing (e.g. model).
-
-*** Rework the system tests using diff mode                           :story:
-
-Once we have diff mode, we need to find some kind of workflow for
-tests:
-
-- each product is composed of a git URL and a list of models.
-- we git clone all repos as part of the build process.
-- directories and model locations are hard-coded in each test.
-- test runs against the model and hard-coded location, produces the
-  diff. Test asserts of the diff being non-zero.
 
 *** Fabric generates forward decls with no path                       :story:
 

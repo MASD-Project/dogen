@@ -2042,31 +2042,6 @@ then declares which version it is using in the model. If the user
 attempts to use types that are not available for that version we
 should throw.
 
-*** Add support for ignoring types                                    :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to ignore certain types I am working
-on so that I can evolve my diagram over time, whilst still being able
-to commit it.
-#+end_quote
-
-Sometimes when changing a diagram it may be useful to set some types
-to "ignore", i.e. make dogen pretend they don't exist at all. For
-instance one may want to introduce new types one at a time. It would
-be nice to have a dynamic extension flag for ignoring.
-
-We should probably have some kind of warning to ensure users are aware
-of the types being ignored.
-
-Isn't this just using "enable=false" for all formatters?
-
-In a world where we can define bundles of meta-types, and import them
-from system models, we could possibly just define a bundle called
-=Ignored= with all formatters set to false.
-
-This should be a stereotype to make it really visible. Also, the type
-should have a colour that is easy to spot like light gray.
-
 *** Rename yarn types that clash with reserved keywords               :story:
 
 When we added the new validation rules, yarn did not pass
