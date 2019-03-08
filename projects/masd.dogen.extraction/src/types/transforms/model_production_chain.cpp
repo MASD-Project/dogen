@@ -18,12 +18,63 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.extraction/io/meta_model/model_io.hpp"
+#include "masd.dogen.extraction/types/transforms/operation_transform.hpp"
+#include "masd.dogen.extraction/types/transforms/gather_external_artefacts_transform.hpp"
+#include "masd.dogen.extraction/types/transforms/generate_diffs_transform.hpp"
+#include "masd.dogen.extraction/types/transforms/generate_patch_transform.hpp"
+#include "masd.dogen.extraction/types/transforms/generate_report_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/model_production_chain.hpp"
+
+namespace {
+
+const std::string transform_id("extraction.transforms.model_production_chain");
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace masd::dogen::extraction::transforms {
 
-bool model_production_chain::operator==(const model_production_chain& /*rhs*/) const {
-    return true;
+void model_production_chain::
+transform(const context& ctx, meta_model::model& m) {
+    tracing::scoped_chain_tracer stp(lg, "model production chain",
+        transform_id, m.name(), *ctx.tracer(), m);
+    /*
+     * First we need to update the operations on all artefacts so that
+     * subsequent transforms know what to do with them.
+     */
+    operation_transform::transform(ctx, m);
+
+    /*
+     * Now find all the external artefacts in the filesystem and
+     * figure out which ones are not expected. This must be done
+     * before we generate diffs.
+     */
+    gather_external_artefacts_transform::transform(ctx, m);
+
+    /*
+     * If diffing is enabled and the user requested unified diffs, we
+     * will now compute unified diffs between the files in the
+     * filesystem and the generated artefacts. This must be done
+     * before writing and generating a patch.
+     */
+    generate_diffs_transform::transform(ctx, m);
+
+    /*
+     * If unified diffs were generated, we can now create a patch
+     * file.
+     */
+    generate_patch_transform::transform(ctx, m);
+
+    /*
+     * If brief diffs were requested, we will generate a report of all
+     * the operations for this set of artefacts.
+     */
+    generate_report_transform::transform(ctx, m);
 }
 
 }
