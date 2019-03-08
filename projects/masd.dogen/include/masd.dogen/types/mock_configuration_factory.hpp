@@ -25,15 +25,20 @@
 #pragma once
 #endif
 
+#include <string>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen/types/configuration.hpp"
 
 namespace masd::dogen {
 
+/**
+ * @brief Creates a configuration suitable for use in tests.
+ */
 class mock_configuration_factory final {
 public:
     static configuration
-    make(const boost::filesystem::path& target, bool enable_tracing);
+    make(const boost::filesystem::path& target, const bool enable_tracing,
+        const std::string& activity);
 };
 
 }

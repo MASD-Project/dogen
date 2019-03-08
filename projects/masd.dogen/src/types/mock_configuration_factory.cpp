@@ -30,7 +30,7 @@ auto lg(logger_factory("mock_configuration_factory"));
 
 const std::string byproduct_directory("masd.dogen.byproducts/");
 const std::string tracing_directory("tracing");
-const std::string run_identifier_prefix("tests");
+const std::string run_identifier_prefix("tests.");
 
 }
 
@@ -38,7 +38,8 @@ namespace masd::dogen {
 
 configuration
 mock_configuration_factory::
-make(const boost::filesystem::path& target, bool enable_tracing) {
+make(const boost::filesystem::path& target, bool enable_tracing,
+    const std::string& activity) {
     BOOST_LOG_SEV(lg, debug) << "Creating mock configuration.";
     BOOST_LOG_SEV(lg, debug) << "Target: " << target.generic_string()
                              << " enable_tracing: " << enable_tracing;
@@ -47,7 +48,7 @@ make(const boost::filesystem::path& target, bool enable_tracing) {
     configuration r;
 
     std::ostringstream s;
-    s << run_identifier_prefix;
+    s << run_identifier_prefix << activity;
 
     const auto fn(target.filename().string());
     if (!fn.empty())
