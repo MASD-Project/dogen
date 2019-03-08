@@ -68,7 +68,7 @@
         <dia:point val="-66,-121"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-66.05,-121.05;-38.1,-104.05"/>
+        <dia:rectangle val="-66.05,-121.05;-38.1,-101.65"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="27.850000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="16.900000000000002"/>
+        <dia:real val="19.300000000000004"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -2140,7 +2140,7 @@ to the content of entries.#</dia:string>
         <dia:point val="117,-95"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="106.858,-98.8;117.75,-94.2"/>
+        <dia:rectangle val="106.857,-98.8;117.75,-94.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11642,7 +11642,7 @@ associated properties.#</dia:string>
         <dia:point val="-21,-65.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-25.235,-67.95;-20.25,-64.3"/>
+        <dia:rectangle val="-25.235,-68.7;-20.25,-65.1"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11889,7 +11889,7 @@ associated properties.#</dia:string>
         <dia:point val="103.683,-77.551"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="81.95,-78.301;104.433,-67.4"/>
+        <dia:rectangle val="81.95,-78.301;104.433,-68.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

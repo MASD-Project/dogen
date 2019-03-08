@@ -22,11 +22,12 @@
 #include <boost/test/unit_test.hpp>
 #include "masd.dogen.utility/types/test/logging.hpp"
 #include "masd.dogen.utility/types/test/fixture.hpp"
+#include "masd.dogen.utility/types/test_data/dogen_generation.hpp"
 #include "masd.dogen.generation.csharp/types/initializer.hpp"
 #include "masd.dogen.generation.cpp/types/initializer.hpp"
 #include "masd.dogen.injection.json/types/initializer.hpp"
 #include "masd.dogen.injection.dia/types/initializer.hpp"
-#include "masd.dogen.utility/types/test/fixture.hpp"
+
 
 namespace  {
 
@@ -40,6 +41,7 @@ struct initializer {
         masd::dogen::injection::dia::initializer::initialize();
         masd::dogen::generation::csharp::initializer::initialize();
         masd::dogen::generation::cpp::initializer::initialize();
+        masd::dogen::utility::test_data::dogen_generation::initialize();
     }
 };
 

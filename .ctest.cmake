@@ -103,6 +103,22 @@ set(build_folder "${compiler}/${CTEST_CONFIGURATION_TYPE}")
 set(CTEST_BINARY_DIRECTORY
     "${CMAKE_CURRENT_SOURCE_DIR}/build/output/${build_folder}")
 
+#
+# Setup environment required by system tests. Note that you need to
+# manually setup other external projects such as the reference models.
+#
+set(ENV{MASD_DOGEN_PROJECT_DIRECTORY}
+    ${CMAKE_CURRENT_SOURCE_DIR}/projects)
+
+if (DEFINED ENV{})
+    message(STATUS
+        "MASD_DOGEN_PROJECT_DIRECTORY=$ENV{MASD_DOGEN_PROJECT_DIRECTORY}")
+else()
+    message(FATAL_ERROR
+        "MASD_DOGEN_PROJECT_DIRECTORY env variable not defined")
+endif()
+
+
 if(DEFINED number_of_jobs)
     set(CTEST_BUILD_FLAGS -j${number_of_jobs})
 endif()

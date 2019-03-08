@@ -46,8 +46,13 @@ scoped_lifecycle_manager_factory(std::string test_module,
     using namespace masd::dogen::utility::log;
     logging_configuration cfg;
     cfg.filename(s.str());
-    cfg.severity(severity_level::debug);
 
+    /*
+     * We keep the log files light to make test execution snappy for
+     * the happy path. Set it to trace when investigating test breaks,
+     * but remember to set it back afterwards!
+    */
+    cfg.severity(severity_level::info);
     return scoped_lifecycle_manager(cfg);
 }
 

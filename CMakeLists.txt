@@ -26,6 +26,17 @@ message(STATUS "CMake Version: ${CMAKE_VERSION}")
 enable_testing()
 
 #
+# Check environment
+#
+if (DEFINED ENV{MASD_DOGEN_PROJECT_DIRECTORY})
+    message(STATUS
+        "MASD_DOGEN_PROJECT_DIRECTORY=$ENV{MASD_DOGEN_PROJECT_DIRECTORY}")
+else()
+    message(FATAL_ERROR
+        "MASD_DOGEN_PROJECT_DIRECTORY env variable not defined")
+endif()
+
+#
 # Setup CCache
 #
 find_program(CCACHE_PROGRAM ccache)

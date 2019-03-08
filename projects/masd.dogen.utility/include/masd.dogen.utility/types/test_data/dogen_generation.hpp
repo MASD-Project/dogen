@@ -38,10 +38,10 @@ public:
     dogen_generation& operator=(const dogen_generation&) = delete;
 
 public:
-    static void initialise();
+    static void initialize();
 
 private:
-    static void ensure_initialised();
+    static void ensure_initialized();
 
 public:
     static boost::filesystem::path project_directory();
