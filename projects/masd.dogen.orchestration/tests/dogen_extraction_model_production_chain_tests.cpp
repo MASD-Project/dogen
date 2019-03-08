@@ -22,6 +22,7 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/test/unit_test_monitor.hpp>
+#include "masd.dogen/types/mock_configuration_factory.hpp"
 #include "masd.dogen.utility/types/test/logging.hpp"
 #include "masd.dogen.utility/types/test_data/dogen_generation.hpp"
 #include "masd.dogen.extraction/io/meta_model/operation_io.hpp"
@@ -42,56 +43,12 @@ namespace  {
 const std::string test_module("masd.dogen.orchestration.tests");
 const std::string test_suite("dogen_extraction_model_production_chain_tests");
 
-const std::string byproduct_directory("masd.dogen.byproducts/");
-const std::string tracing_directory("tracing");
-const std::string run_identifier_prefix("tests");
-
 /*
  * Set this flag to true if you want to dump tracing information for
  * all tests. It should normally be set to false, unless we are
  * diagnosing some kind of problem. Don't check it in as true.
  */
 const bool enable_tracing_globally(false);
-
-masd::dogen::configuration
-make_configuration(const boost::filesystem::path& target,
-    bool enable_tracing_locally) {
-    using namespace masd::dogen;
-    configuration r;
-
-    std::ostringstream s;
-    s << run_identifier_prefix;
-
-    const auto fn(target.filename().string());
-    if (!fn.empty())
-        s << "." << fn;
-
-    const auto run_id(s.str());
-    using boost::filesystem::absolute;
-    r.byproduct_directory(absolute(byproduct_directory + run_id));
-
-    diffing_configuration dcfg;
-    dcfg.destination(diffing_destination::file);
-    dcfg.output_directory(r.byproduct_directory());
-    r.diffing(dcfg);
-
-    if (enable_tracing_globally ||enable_tracing_locally) {
-        tracing_configuration tcfg;
-        tcfg.level(tracing_level::detail);
-        tcfg.format(tracing_format::org_mode);
-        tcfg.guids_enabled(true);
-        tcfg.logging_impact("severe");
-        tcfg.output_directory(r.byproduct_directory() / tracing_directory);
-        r.tracing(tcfg);
-    }
-
-    reporting_configuration rcfg;
-    rcfg.style(reporting_style::org_mode);
-    rcfg.output_directory(r.byproduct_directory());
-    r.reporting(rcfg);
-
-    return r;
-}
 
 void print_lines(const std::string& content, const unsigned int total,
     std::ostream& os) {
@@ -106,20 +63,33 @@ void print_lines(const std::string& content, const unsigned int total,
 }
 
 bool test_code_generation(const boost::filesystem::path& target,
-    const boost::filesystem::path& output_dir, bool enable_tracing) {
-    const auto cfg(make_configuration(target, enable_tracing));
+    const boost::filesystem::path& output_dir, bool enable_tracing_locally) {
+    using masd::dogen::mock_configuration_factory;
+    /*
+     * Create the context.
+     */
+    const bool et(enable_tracing_globally || enable_tracing_locally);
+    const auto cfg(mock_configuration_factory::make(target, et));
 
     using namespace masd::dogen::orchestration::transforms;
     scoped_context_manager sco(cfg, output_dir);
     const auto ctx(sco.context());
 
+    /*
+     * Produce the extraction model.
+     */
     const auto m(extraction_model_production_chain::transform(ctx, target));
 
+    /*
+     * Locate any differences.
+     */
     unsigned int diffs_found(0);
     for (const auto& a : m.artefacts()) {
         using namespace masd::dogen::extraction::meta_model;
-        // FIXME: we seem to be generating empty paths. Needs to be
-        // investigated. Hack for now
+        /*
+         * FIXME: we seem to be generating empty paths. Needs to be
+         * investigated. Hack for now
+         */
         if (a.path().empty())
             continue;
 
