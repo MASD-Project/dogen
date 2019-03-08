@@ -31,6 +31,9 @@
 
 namespace masd::dogen::orchestration::transforms {
 
+/**
+ * @brief Manages the overall context.
+ */
 class scoped_context_manager final {
 public:
     scoped_context_manager(const configuration& cfg,
@@ -42,6 +45,21 @@ public:
 
 private:
     const transforms::context context_;
+};
+
+/**
+ * @brief Manages just the injection context.
+ */
+class scoped_injection_context_manager final {
+public:
+    scoped_injection_context_manager(const configuration& cfg);
+    ~scoped_injection_context_manager();
+
+public:
+    const injection::transforms::context& context() const;
+
+private:
+    const injection::transforms::context context_;
 };
 
 }

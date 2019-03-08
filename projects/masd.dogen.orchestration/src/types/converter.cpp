@@ -19,7 +19,7 @@
  *
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.orchestration/types/transforms/context_factory.hpp"
+#include "masd.dogen.orchestration/types/transforms/scoped_context_manager.hpp"
 #include "masd.dogen.injection.json/types/initializer.hpp"
 #include "masd.dogen.injection.dia/types/initializer.hpp"
 #include "masd.dogen.injection/types/transforms/model_to_model_chain.hpp"
@@ -39,9 +39,12 @@ void converter::convert(const configuration& cfg,
     const boost::filesystem::path& destination) const {
     BOOST_LOG_SEV(lg, debug) << "Started conversion.";
 
-    const auto ctx(transforms::context_factory::make_injection_context(cfg));
-    using namespace masd::dogen::injection::transforms;
-    model_to_model_chain::transform(ctx, source, destination);
+    {
+        using namespace transforms;
+        scoped_injection_context_manager scim(cfg);
+        using namespace masd::dogen::injection::transforms;
+        model_to_model_chain::transform(scim.context(), source, destination);
+    }
 
     BOOST_LOG_SEV(lg, debug) << "Finished conversion.";
 }

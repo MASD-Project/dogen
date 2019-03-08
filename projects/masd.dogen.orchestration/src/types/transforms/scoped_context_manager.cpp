@@ -38,4 +38,18 @@ const transforms::context& scoped_context_manager::context() const {
     return context_;
 }
 
+scoped_injection_context_manager::scoped_injection_context_manager(
+    const configuration& cfg) :
+    context_(context_factory::make_injection_context(cfg)) {}
+
+scoped_injection_context_manager::~scoped_injection_context_manager() {
+    if (context_.tracer())
+        context_.tracer()->end_tracing();
+}
+
+const injection::transforms::context&
+scoped_injection_context_manager::context() const {
+    return context_;
+}
+
 }
