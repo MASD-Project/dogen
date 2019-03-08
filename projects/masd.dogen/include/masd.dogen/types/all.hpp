@@ -43,6 +43,7 @@
 #include "masd.dogen/types/tracing_configuration.hpp"
 #include "masd.dogen/types/configuration_validator.hpp"
 #include "masd.dogen/types/reporting_configuration.hpp"
+#include "masd.dogen/types/mock_configuration_factory.hpp"
 #include "masd.dogen/types/model_processing_configuration.hpp"
 #include "masd.dogen/types/invalid_configuration_exception.hpp"
 

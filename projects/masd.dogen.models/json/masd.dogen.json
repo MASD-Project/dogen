@@ -308,6 +308,13 @@
           "documentation": "Emacs Org mode.\n"
         }
       ]
+    },
+    {
+      "name": "mock_configuration_factory",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
