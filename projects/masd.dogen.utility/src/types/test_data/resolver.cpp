@@ -39,9 +39,8 @@ boost::filesystem::path resolver::test_data_directory() {
     const auto r(ed / relative_path_to_td_dir);
 
     if (!boost::filesystem::exists(r)) {
-        using dogen::utility::test_data::exception;
         BOOST_THROW_EXCEPTION(
-            exception(test_data_dir_not_found + r.string()));
+            test_data_exception(test_data_dir_not_found + r.string()));
     }
     return r;
 }

@@ -18,27 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_UTILITY_TEST_DATA_EXCEPTION_HPP
-#define MASD_DOGEN_UTILITY_TEST_DATA_EXCEPTION_HPP
+#ifndef MASD_DOGEN_UTILITY_TYPES_TEST_DATA_TEST_DATA_EXCEPTION_HPP
+#define MASD_DOGEN_UTILITY_TYPES_TEST_DATA_TEST_DATA_EXCEPTION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.utility/types/exception/utility_exception.hpp"
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace masd::dogen::utility::test_data {
 
-class exception : public dogen::utility::exception::exception {
+/**
+ * @brief An error occurred whilst obtaining the test data.
+ */
+class test_data_exception : public virtual std::exception, public virtual boost::exception {
 public:
-    /**
-     * @param message Error message. Must be a string literal.
-     */
-    exception(std::string message)
-        : dogen::utility::exception::exception(message) { }
-    exception() { }
+    test_data_exception() = default;
+    ~test_data_exception() noexcept = default;
 
-    virtual ~exception() throw() {}
+public:
+    explicit test_data_exception(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
 };
 
 }

@@ -18,23 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/filesystem.hpp>
-#include <boost/throw_exception.hpp>
-#include <boost/filesystem/operations.hpp>
-#include "masd.dogen.utility/types/filesystem/file_not_found.hpp"
-#include "masd.dogen.utility/types/test_data/resolver.hpp"
-#include "masd.dogen.utility/types/test_data/validating_resolver.hpp"
+#ifndef MASD_DOGEN_UTILITY_TYPES_TEST_DATA_TEST_DATA_EXCEPTION_FWD_HPP
+#define MASD_DOGEN_UTILITY_TYPES_TEST_DATA_TEST_DATA_EXCEPTION_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace masd::dogen::utility::test_data {
 
-boost::filesystem::path
-validating_resolver::resolve(boost::filesystem::path relative) {
-    boost::filesystem::path r(resolver::resolve(relative));
-    if (boost::filesystem::exists(r))
-        return r;
-
-    using dogen::utility::filesystem::file_not_found;
-    BOOST_THROW_EXCEPTION(file_not_found(r.string()));
-}
+class test_data_exception;
 
 }
+
+#endif
