@@ -40,8 +40,6 @@ namespace {
 const std::string test_module("masd.dogen.dia.tests");
 const std::string test_suite("hydrator_tests");
 
-
-
 bool test_hydrator(
     boost::filesystem::path input_path,
     boost::filesystem::path expected_path,
