@@ -33,6 +33,7 @@ install:
 
 before_build:
   - if DEFINED msvc_setup_path call "%msvc_setup_path%" %msvc_setup_arg%
+  - set MASD_DOGEN_PROJECT_DIRECTORY=%APPVEYOR_BUILD_FOLDER%
   - cd %APPVEYOR_BUILD_FOLDER%
 
 build_script:
