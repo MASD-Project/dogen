@@ -37,7 +37,7 @@
 namespace  {
 
 const std::string test_module("masd.dogen.coding.tests");
-const std::string test_suite("dogen_code_generation_chain_tests");
+const std::string test_suite("dogen_extraction_model_production_chain_tests");
 
 /*
  * Set this flag to true if you want to dump tracing information for

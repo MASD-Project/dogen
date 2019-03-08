@@ -101,9 +101,9 @@ transform(const context& ctx,
         ctx.extraction_context(), r);
 
     stp.end_chain(r);
+    BOOST_LOG_SEV(lg, info) << "Finished extraction model production.";
 
     return r;
-    BOOST_LOG_SEV(lg, info) << "Finished extraction model production.";
 }
 
 
