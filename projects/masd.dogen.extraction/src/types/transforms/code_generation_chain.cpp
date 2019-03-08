@@ -21,14 +21,13 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"
-#include "masd.dogen.extraction/types/transforms/model_production_chain.hpp"
 #include "masd.dogen.extraction/types/transforms/write_artefacts_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/remove_files_transform.hpp"
-#include "masd.dogen.extraction/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.extraction/types/transforms/code_generation_chain.hpp"
 
 namespace {
 
-const std::string transform_id("extraction.transforms.model_generation_chain");
+const std::string transform_id("extraction.transforms.code_generation_chain");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -37,16 +36,10 @@ auto lg(logger_factory(transform_id));
 
 namespace masd::dogen::extraction::transforms {
 
-void model_generation_chain::
-transform(const context& ctx, meta_model::model& m) {
-    tracing::scoped_chain_tracer stp(lg, "model generation chain",
+void code_generation_chain::
+transform(const context& ctx, const meta_model::model& m) {
+    tracing::scoped_chain_tracer stp(lg, "code generation chain",
         transform_id, m.name(), *ctx.tracer(), m);
-
-    /*
-     * First we execute the model production chain to get the
-     * extraction model in the required state for generation.
-     */
-    model_production_chain::transform(ctx, m);
 
     /*
      * Write all of the artefacts that require writing.
@@ -54,7 +47,7 @@ transform(const context& ctx, meta_model::model& m) {
     write_artefacts_transform::transform(ctx, m);
 
     /*
-     * Finally, remove all of the unexpected files.
+     * Remove all of the unexpected files.
      */
     remove_files_transform::transform(ctx, m);
 }

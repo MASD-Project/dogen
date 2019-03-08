@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_MODEL_GENERATION_CHAIN_HPP
-#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_MODEL_GENERATION_CHAIN_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_CODE_GENERATION_CHAIN_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_TRANSFORMS_CODE_GENERATION_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,9 +30,15 @@
 
 namespace masd::dogen::extraction::transforms {
 
-class model_generation_chain final {
+/**
+ * @brief Generates code for an extraction model.
+ *
+ * @pre Extraction model must have already been through the production
+ * chain.
+ */
+class code_generation_chain final {
 public:
-    static void transform(const context& ctx, meta_model::model& m);
+    static void transform(const context& ctx, const meta_model::model& m);
 };
 
 }

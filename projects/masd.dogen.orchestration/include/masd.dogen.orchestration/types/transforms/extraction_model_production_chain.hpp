@@ -25,24 +25,16 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <boost/filesystem/path.hpp>
+#include "masd.dogen.extraction/types/meta_model/model.hpp"
+#include "masd.dogen.orchestration/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::orchestration::transforms {
 
 class extraction_model_production_chain final {
 public:
-    extraction_model_production_chain() = default;
-    extraction_model_production_chain(const extraction_model_production_chain&) = default;
-    extraction_model_production_chain(extraction_model_production_chain&&) = default;
-    ~extraction_model_production_chain() = default;
-    extraction_model_production_chain& operator=(const extraction_model_production_chain&) = default;
-
-public:
-    bool operator==(const extraction_model_production_chain& rhs) const;
-    bool operator!=(const extraction_model_production_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static extraction::meta_model::model transform(const context& ctx,
+        const boost::filesystem::path& target);
 };
 
 }

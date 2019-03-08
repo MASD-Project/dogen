@@ -13603,13 +13603,13 @@ only be written to the filesystem if it does not exist.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O98">
       <dia:attribute name="obj_pos">
-        <dia:point val="17,41"/>
+        <dia:point val="22,41"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="16.95,40.95;31.795,44.65"/>
+        <dia:rectangle val="21.95,40.95;36.795,44.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="17,41"/>
+        <dia:point val="22,41"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -13799,17 +13799,17 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-4,44.6"/>
+        <dia:point val="-10,44.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-6.255,43.85;-3.25,50.8"/>
+        <dia:rectangle val="-10.75,43.85;-6.005,50.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-4,44.6"/>
-        <dia:point val="-4,48"/>
+        <dia:point val="-10,44.6"/>
+        <dia:point val="-10,48"/>
         <dia:point val="-6.205,48"/>
         <dia:point val="-6.205,50"/>
       </dia:attribute>
@@ -13943,19 +13943,19 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="21.59,35.6"/>
+        <dia:point val="14.795,35.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="20.84,34.85;24.5725,41.8"/>
+        <dia:rectangle val="14.045,34.85;29.5725,41.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="21.59,35.6"/>
-        <dia:point val="21.59,38"/>
-        <dia:point val="24.3725,38"/>
-        <dia:point val="24.3725,41"/>
+        <dia:point val="14.795,35.6"/>
+        <dia:point val="14.795,38"/>
+        <dia:point val="29.3725,38"/>
+        <dia:point val="29.3725,41"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -13972,7 +13972,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O95" connection="7"/>
+        <dia:connection handle="0" to="O95" connection="6"/>
         <dia:connection handle="1" to="O98" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O94"/>
@@ -15220,13 +15220,13 @@ only be written to the filesystem if it does not exist.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O110">
       <dia:attribute name="obj_pos">
-        <dia:point val="9,50"/>
+        <dia:point val="12,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="8.95,49.95;23.795,53.65"/>
+        <dia:rectangle val="11.95,49.95;26.795,53.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="9,50"/>
+        <dia:point val="12,50"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -15488,19 +15488,19 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="13.825,44.6"/>
+        <dia:point val="16.68,44.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.075,43.85;16.5725,50.8"/>
+        <dia:rectangle val="15.93,43.85;19.5725,50.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="13.825,44.6"/>
-        <dia:point val="13.825,48"/>
-        <dia:point val="16.3725,48"/>
-        <dia:point val="16.3725,50"/>
+        <dia:point val="16.68,44.6"/>
+        <dia:point val="16.68,48"/>
+        <dia:point val="19.3725,48"/>
+        <dia:point val="19.3725,50"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -16805,22 +16805,22 @@ only be written to the filesystem if it does not exist.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O123">
       <dia:attribute name="obj_pos">
-        <dia:point val="-4,41"/>
+        <dia:point val="-10,41"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-4.05,40.95;13.875,44.65"/>
+        <dia:rectangle val="-10.05,40.95;16.73,44.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-4,41"/>
+        <dia:point val="-10,41"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.824999999999999"/>
+        <dia:real val="26.68"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#model_generation_chain#</dia:string>
+        <dia:string>#code_generation_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>
@@ -16954,6 +16954,23 @@ only be written to the filesystem if it does not exist.#</dia:string>
                 <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
+                <dia:string>#m#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#meta_model::model#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="1"/>
+              </dia:attribute>
+            </dia:composite>
           </dia:attribute>
         </dia:composite>
       </dia:attribute>
@@ -16961,78 +16978,6 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O94"/>
-    </dia:object>
-    <dia:object type="UML - Association" version="2" id="O124">
-      <dia:attribute name="name">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="direction">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="show_direction">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="assoc_type">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="role_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_a">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_a">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="role_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_b">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_b">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="obj_pos">
-        <dia:point val="4.9125,41"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="4.1625,35.55;8.2,42.6"/>
-      </dia:attribute>
-      <dia:attribute name="meta">
-        <dia:composite type="dict"/>
-      </dia:attribute>
-      <dia:attribute name="orth_points">
-        <dia:point val="4.9125,41"/>
-        <dia:point val="4.9125,38"/>
-        <dia:point val="8,38"/>
-        <dia:point val="8,35.6"/>
-      </dia:attribute>
-      <dia:attribute name="orth_orient">
-        <dia:enum val="1"/>
-        <dia:enum val="0"/>
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="orth_autoroute">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="text_colour">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="line_colour">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:connections>
-        <dia:connection handle="0" to="O123" connection="1"/>
-        <dia:connection handle="1" to="O95" connection="5"/>
-      </dia:connections>
       <dia:childnode parent="O94"/>
     </dia:object>
   </dia:layer>
