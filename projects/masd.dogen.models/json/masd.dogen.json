@@ -4,6 +4,11 @@
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "masd.dogen",
     "masd.injection.input_language": "cpp",
+    "masd.injection.reference": "cpp.builtins",
+    "masd.injection.reference": "cpp.std",
+    "masd.injection.reference": "cpp.boost",
+    "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
+    "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
     "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
     "masd.extraction.delete_extra_files": "true",
     "masd.extraction.cpp.enabled": "true",
@@ -23,8 +28,8 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "error_handling",
-          "type": "boost::optional<error_handling_configuration>"
+          "name": "model_processing",
+          "type": "model_processing_configuration"
         },
         {
           "name": "tracing",
@@ -34,6 +39,15 @@
         {
           "name": "diffing",
           "type": "boost::optional<diffing_configuration>"
+        },
+        {
+          "name": "reporting",
+          "type": "boost::optional<reporting_configuration>"
+        },
+        {
+          "name": "byproduct_directory",
+          "type": "boost::filesystem::path",
+          "documentation": "Directory in which to place all files not directly related to generated code.\n"
         }
       ]
     },
@@ -87,6 +101,10 @@
           "name": "use_short_names",
           "type": "bool",
           "documentation": "Use short directory and file names. Useful mainly on windows due to path\nsize limitations.\n"
+        },
+        {
+          "name": "output_directory",
+          "type": "boost::filesystem::path"
         }
       ]
     },
@@ -99,14 +117,19 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
+          "name": "plain",
+          "type": "",
+          "documentation": "Plain text format.\n"
+        },
+        {
           "name": "org_mode",
           "type": "",
           "documentation": "Emacs Org mode.\n"
         },
         {
-          "name": "markdown",
+          "name": "graphviz",
           "type": "",
-          "documentation": "Markdown text format.\n"
+          "documentation": "Dot notation for GraphViz\n"
         }
       ]
     },
@@ -127,14 +150,12 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "style",
-          "type": "diffing_style",
-          "documentation": "What style to use when producing diffs.\n"
+          "name": "destination",
+          "type": "diffing_destination"
         },
         {
-          "name": "report_identical_files",
-          "type": "bool",
-          "documentation": "If true, reports files that have not changed as well.\n"
+          "name": "output_directory",
+          "type": "boost::filesystem::path"
         }
       ]
     },
@@ -164,38 +185,24 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "error_handling_configuration",
-      "documentation": "Configuration related to the behaviour of Dogen in the presence of errors and\nwarnings.\n",
+      "name": "model_processing_configuration",
+      "documentation": "Configuration related to the behaviour of Dogen whilst processing models.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "compatibility_mode_enabled",
           "type": "bool",
-          "documentation": "Try to process diagram even if there are errors.\n\nOnly a certain class of errors are allowed, believed to be caused by backwards or\nforwards compatibility problems: missing types or types that do not exist.\n"
-        }
-      ]
-    },
-    {
-      "name": "diffing_style",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "minimal",
-          "type": "",
-          "documentation": "Reports only if a file is different or not.\n"
+          "documentation": "Try to process models even if there are errors.\n\nOnly a certain class of errors are allowed, believed to be caused by backwards or\nforwards compatibility problems: missing types or types that do not exist.\n"
         },
         {
-          "name": "unified_diff",
-          "type": "",
-          "documentation": "Produces unified diffs for each file that differs.\n"
+          "name": "dry_run_mode_enabled",
+          "type": "bool",
+          "documentation": "If true, all transforms wil be executed but no code will be emitted.\n"
         }
       ]
     },
     {
-      "name": "invalid_configuration",
+      "name": "invalid_configuration_exception",
       "documentation": "The values supplied for the configuration are not valid.\n",
       "stereotypes": [
         "masd::exception"
@@ -225,6 +232,82 @@
         "masd::interface"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "generation_exception",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "weaving_exception",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "conversion_exception",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "diffing_destination",
+      "documentation": "Where to place the diffing results.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "file",
+          "type": "",
+          "documentation": "Generates a patch file.\n"
+        },
+        {
+          "name": "console",
+          "type": "",
+          "documentation": "Outputs the diff to the console.\n"
+        }
+      ]
+    },
+    {
+      "name": "reporting_configuration",
+      "documentation": "Configuration related to operational reports.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "style",
+          "type": "reporting_style"
+        },
+        {
+          "name": "output_directory",
+          "type": "boost::filesystem::path"
+        }
+      ]
+    },
+    {
+      "name": "reporting_style",
+      "documentation": "Available formats for operational reports.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "plain",
+          "type": "",
+          "documentation": "Plain text format.\n"
+        },
+        {
+          "name": "org_mode",
+          "type": "",
+          "documentation": "Emacs Org mode.\n"
+        }
+      ]
     }
   ]
 }

@@ -4,6 +4,12 @@
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "masd.dogen.extraction",
     "masd.injection.input_language": "cpp",
+    "masd.injection.reference": "cpp.builtins",
+    "masd.injection.reference": "cpp.std",
+    "masd.injection.reference": "cpp.boost",
+    "masd.injection.reference": "masd.dogen.tracing",
+    "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
+    "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
     "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
     "masd.extraction.delete_extra_files": "true",
     "masd.extraction.cpp.enabled": "true",
@@ -12,7 +18,7 @@
     "masd.extraction.cpp.visual_studio.project.enabled": "false",
     "masd.extraction.cpp.visual_studio.solution.enabled": "false",
     "masd.extraction.csharp.enabled": "false",
-    "masd.annotations.profile": "dogen.disable_odb_cmake"
+    "masd.annotations.profile": "dogen.disable_common_facets"
   },
   "elements": [
     {
@@ -619,6 +625,14 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
+          "name": "name",
+          "type": "std::string"
+        },
+        {
+          "name": "language",
+          "type": "std::string"
+        },
+        {
           "name": "artefacts",
           "type": "std::list<artefact>"
         },
@@ -672,8 +686,254 @@
           "name": "dependencies",
           "type": "std::vector<boost::filesystem::path>",
           "documentation": "Files in the project directory that this file depends on, but which are not generated.\n"
+        },
+        {
+          "name": "unified_diff",
+          "type": "std::string",
+          "documentation": "Unified diff between the in-memory artefact and the file in the filesystem.\n"
+        },
+        {
+          "name": "operation",
+          "type": "operation"
         }
       ]
+    },
+    {
+      "name": "helpers::file_status_collector",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "transforms::model_production_chain",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::write_artefacts_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::gather_external_artefacts_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::generate_diffs_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::context",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "tagged_values": {
+        "masd.extraction.cpp.types.forward_declarations.enabled": "true"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "tracer",
+          "type": "boost::shared_ptr<tracing::tracer>"
+        },
+        {
+          "name": "diffing_configuration",
+          "type": "boost::optional<diffing_configuration>"
+        },
+        {
+          "name": "reporting",
+          "type": "boost::optional<reporting_configuration>"
+        },
+        {
+          "name": "dry_run_mode_enabled",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::operation",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "type",
+          "type": "operation_type"
+        },
+        {
+          "name": "reason",
+          "type": "operation_reason"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::operation_type",
+      "documentation": "Operation to perform to a given artefact.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "tagged_values": {
+        "masd.extraction.cpp.hash.enabled": "true"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "create_only",
+          "type": "",
+          "documentation": "Creates a file from an artefact only if it does not yet exist.\n"
+        },
+        {
+          "name": "write",
+          "type": "",
+          "documentation": "Unconditionally writes an artefact into file.\n"
+        },
+        {
+          "name": "ignore",
+          "type": "",
+          "documentation": "Ingores an artefact.\n"
+        },
+        {
+          "name": "remove",
+          "type": "",
+          "documentation": "Deletes a file.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::operation_reason",
+      "documentation": "Reasons for performing an operation.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "tagged_values": {
+        "masd.extraction.cpp.hash.enabled": "true"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "newly_generated",
+          "type": "",
+          "documentation": "Artefact will produce a new generated file.\n"
+        },
+        {
+          "name": "changed_generated",
+          "type": "",
+          "documentation": "Artefact will produce a changed generated file.\n"
+        },
+        {
+          "name": "unchanged_generated",
+          "type": "",
+          "documentation": "Generated artefact contents match file contents.\n"
+        },
+        {
+          "name": "already_exists",
+          "type": "",
+          "documentation": "The file already exists and we we're asked to create only.\n"
+        },
+        {
+          "name": "ignore_generated",
+          "type": "",
+          "documentation": "User requested artefact to be ignored.\n"
+        },
+        {
+          "name": "force_write",
+          "type": "",
+          "documentation": "User requested to always write generated artefacts.\n"
+        },
+        {
+          "name": "unexpected",
+          "type": "",
+          "documentation": "Artefact represents an unexpected file in project.\n"
+        },
+        {
+          "name": "ignore_unexpected",
+          "type": "",
+          "documentation": "File is unexpected but the user asked us to ignore it.\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::operation_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::remove_files_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::generate_patch_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::mock_content_filler_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::files_by_status",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "unexpected",
+          "type": "std::list<boost::filesystem::path>"
+        },
+        {
+          "name": "ignored",
+          "type": "std::list<boost::filesystem::path>"
+        }
+      ]
+    },
+    {
+      "name": "transforms::transform_exception",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::unified_differ",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::generate_report_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::code_generation_chain",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

@@ -49,8 +49,8 @@ scoped_lifecycle_manager_factory(std::string test_module,
 
     /*
      * We keep the log files light to make test execution snappy for
-     * the happy path. Set it to trace when investigating test breaks,
-     * but remember to set it back afterwards!
+     * the happy path. Set it to trace when investigating test breaks.
+     * WARNING: remember to set it back afterwards.
     */
     cfg.severity(severity_level::info);
     return scoped_lifecycle_manager(cfg);

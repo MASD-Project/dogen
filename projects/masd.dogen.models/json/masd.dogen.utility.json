@@ -4,6 +4,11 @@
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "masd.dogen.utility",
     "masd.injection.input_language": "cpp",
+    "masd.injection.reference": "cpp.builtins",
+    "masd.injection.reference": "cpp.std",
+    "masd.injection.reference": "cpp.boost",
+    "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
+    "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
     "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
     "masd.extraction.delete_extra_files": "true",
     "masd.extraction.cpp.enabled": "true",
@@ -430,13 +435,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "test_data::seam",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "test_data::sequence",
       "stereotypes": [
         "masd::cpp::header_only"
@@ -454,13 +452,6 @@
       "name": "test_data::tds_test_good",
       "stereotypes": [
         "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "test_data::test_data_exception",
-      "stereotypes": [
-        "masd::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -572,6 +563,35 @@
       "name": "log::logging_configuration_validator",
       "stereotypes": [
         "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "test_data::dogen_generation",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "test_data::cpp_ref_impl_generation",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "test_data::csharp_ref_impl_generation",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "test_data::test_data_exception",
+      "documentation": "An error occurred whilst obtaining the test data.\n",
+      "stereotypes": [
+        "masd::exception"
       ],
       "fallback_element_type": "masd::object"
     }

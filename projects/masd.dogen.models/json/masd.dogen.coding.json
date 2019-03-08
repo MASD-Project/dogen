@@ -1,10 +1,18 @@
 {
-  "documentation": "Yarn is the Dogen meta-model.\n\n@section coding_0 Overview\n\nCoding is a meta-model that provides a programming-language-neutral\ntype representation, designed for code generation. There are two core\ntypes in coding: @e model and @e model. Intermediate models are\nobtained via @frontends and post-processed until they form a cohesive\nwhole. They are then transformed into a final model representation, at\nwhich point they are suitable for code generation.\n\n@section coding_0 Mission\n\nCoding's objectives are:\n\n@li to provide a set of constructs that the frontends can map to\neasily, as well as the machinery for frontend management\n(registration, etc.).\n\n@li to provide the tooling required to combine multiple intermediate\ncoding models together into a bigger model - called the intermediate\n@e merged model.\n\n@li to ensure the consistency of the intermediate merged model via\nvalidation rules (such as verifying that all types have a definitions,\netc.).\n\n@li to provide all the information required to build the final model\nand to build it.\n",
+  "documentation": "Coding is the core Dogen meta-model representing software entities.\n\n@section coding_0 Overview\n\nCoding is a meta-model that provides a programming-language-neutral\ntype representation, designed for code generation. Intermediate models\nare obtained via frontends and post-processed until they form a\ncohesive whole. They are then suitable to be sent down the\npipeline for further processing.\n\n@section coding_0 Mission\n\nCoding's objectives are:\n\n@li to represent all high-level entities that exist across a number\nof technical spaces used in software engineering. These entities\nare not necessarily limited to programming language entities, though\nof course, these form the core set of elements we're interested in.\nAdditional entities such as build sytems and high-level patterns\nsuch as GoF and others are also captured.\n\n@li to provide the tooling required to combine multiple coding\nmodels together into a bigger model - called the @e merged model.\n\n@li to ensure the consistency of the merged model via validation\nrules (such as verifying that all types have a definitions,\netc.).\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "masd.dogen.coding",
-    "masd.injection.reference": "masd.dogen.tracing.json",
+    "masd.injection.reference": "cpp.builtins",
+    "masd.injection.reference": "cpp.std",
+    "masd.injection.reference": "cpp.boost",
+    "masd.injection.reference": "masd.dogen",
+    "masd.injection.reference": "masd.dogen.annotations",
+    "masd.injection.reference": "masd.dogen.tracing",
+    "masd.injection.reference": "masd.dogen.extraction",
     "masd.injection.input_language": "cpp",
+    "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
+    "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
     "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
     "masd.extraction.delete_extra_files": "true",
     "masd.extraction.cpp.enabled": "true",
@@ -571,76 +579,6 @@
     },
     {
       "name": "meta_model::model",
-      "documentation": "Coding model.\n",
-      "stereotypes": [
-        "Nameable",
-        "MetaNameable"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "references",
-          "type": "std::unordered_map<name,origin_types>",
-          "documentation": "All other models that this model depends on, mapped to their origin.\n"
-        },
-        {
-          "name": "leaves",
-          "type": "std::unordered_set<name>",
-          "documentation": "All leaf types in this model.\n\nLeaves are types concrete types which have a parent.\n"
-        },
-        {
-          "name": "elements",
-          "type": "std::vector<boost::shared_ptr<element>>"
-        },
-        {
-          "name": "root_module",
-          "type": "boost::shared_ptr<module>",
-          "documentation": "The module that represents the model.\n"
-        },
-        {
-          "name": "module_ids",
-          "type": "std::unordered_set<std::string>",
-          "documentation": "IDs of all of the model elements which are modules.\n"
-        },
-        {
-          "name": "has_generatable_types",
-          "type": "bool",
-          "documentation": "If true the intermediate model has at least one generable type, false otherwise.\n"
-        },
-        {
-          "name": "input_language",
-          "type": "languages",
-          "documentation": "Language in which this model was written.\n"
-        },
-        {
-          "name": "output_language",
-          "type": "languages",
-          "documentation": "Language in which to output the model.\n"
-        },
-        {
-          "name": "orm_properties",
-          "type": "boost::optional<orm_model_properties>"
-        },
-        {
-          "name": "enabled_archetype_for_element",
-          "type": "std::unordered_set<element_archetype>"
-        },
-        {
-          "name": "locator_properties",
-          "type": "locator_properties"
-        },
-        {
-          "name": "global_archetype_location_properties",
-          "type": "global_archetype_location_properties"
-        },
-        {
-          "name": "extraction_properties",
-          "type": "extraction_properties"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::model",
       "documentation": "Intermediate representation of a masd model.\n",
       "stereotypes": [
         "Nameable",
@@ -1201,6 +1139,7 @@
     },
     {
       "name": "transforms::context",
+      "documentation": "\nContext for all coding transformations.\n\nContains all of the external data required for the transformations\nto execute. It's not ideal to have a huge \"global\" class, with lots\nof unrelated state; however, over time, we found that a number of\narguments were being supplied across the call graph, resulting in a\nlot of repetitive code. The context gathers together all of these.\n",
       "stereotypes": [
         "masd::handcrafted"
       ],
@@ -1210,66 +1149,40 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "data_directories",
-          "type": "std::vector<boost::filesystem::path>"
-        },
-        {
-          "name": "transform_options",
-          "type": "options"
-        },
-        {
           "name": "type_repository",
-          "type": "annotations::type_repository"
+          "type": "boost::shared_ptr<annotations::type_repository>"
         },
         {
           "name": "archetype_location_repository",
-          "type": "annotations::archetype_location_repository"
+          "type": "boost::shared_ptr<annotations::archetype_location_repository>"
         },
         {
           "name": "annotation_factory",
-          "type": "annotations::annotation_factory"
+          "type": "boost::shared_ptr<annotations::annotation_factory>"
+        },
+        {
+          "name": "annotation_expander",
+          "type": "boost::shared_ptr<annotations::annotation_expander>"
         },
         {
           "name": "mapping_repository",
-          "type": "helpers::mapping_set_repository"
-        },
-        {
-          "name": "formatting_repository",
-          "type": "extraction::repository"
+          "type": "boost::shared_ptr<helpers::mapping_set_repository>"
         },
         {
           "name": "tracer",
-          "type": "tracing::tracer"
-        },
-        {
-          "name": "intra_backend_segment_properties",
-          "type": "std::unordered_map<std::string, meta_model::intra_backend_segment_properties>"
+          "type": "boost::shared_ptr<tracing::tracer>"
         }
       ]
     },
     {
-      "name": "transforms::initial_target_chain",
+      "name": "transforms::model_set_pre_processing_chain",
       "stereotypes": [
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::model_pre_processing_chain",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::model_generation_chain",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::references_chain",
+      "name": "transforms::model_production_chain",
       "stereotypes": [
         "masd::handcrafted"
       ],
@@ -1389,78 +1302,6 @@
     },
     {
       "name": "transforms::associations_transform",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::generability_transform",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::dynamic_transforms_chain",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::dynamic_transform_interface",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::dynamic_transform_registrar",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::model_to_text_model_chain",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::model_to_text_model_transform_interface",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::model_to_text_model_transform_registrar",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "tagged_values": {
-        "masd.extraction.cpp.types.forward_declarations.enabled": "true"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "transforms_by_language_",
-          "type": "std::unordered_map<meta_model::languages, std::shared_ptr<model_to_text_model_transform_interface>>"
-        }
-      ]
-    },
-    {
-      "name": "transforms::model_to_model_transform",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::context_factory",
       "stereotypes": [
         "masd::handcrafted"
       ],
@@ -1589,13 +1430,6 @@
       "documentation": "An error occurred while trying to resolve a type.\n",
       "stereotypes": [
         "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::reference_paths_extractor",
-      "stereotypes": [
-        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1927,45 +1761,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::enablement_transform",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "meta_model::facet_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "enabled",
-          "type": "bool",
-          "documentation": "If true, this facet is enabled.\n"
-        },
-        {
-          "name": "overwrite",
-          "type": "bool"
-        },
-        {
-          "name": "directory",
-          "type": "std::string",
-          "documentation": "Directory in which to place artefacts that belong to this facet.\n"
-        },
-        {
-          "name": "postfix",
-          "type": "std::string",
-          "documentation": "Postfix to use in file names of artefacts that belong to this facet.\n"
-        }
-      ]
-    },
-    {
-      "name": "transforms::artefact_properties_transform",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::meta_naming_transform",
       "stereotypes": [
         "masd::handcrafted"
@@ -1980,20 +1775,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::naming_configuration",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "external_modules",
-          "type": "std::string"
-        },
-        {
-          "name": "model_modules",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
       "name": "helpers::location_builder",
       "stereotypes": [
         "masd::handcrafted"
@@ -2005,416 +1786,6 @@
           "type": "meta_model::location"
         }
       ]
-    },
-    {
-      "name": "meta_model::element_archetype",
-      "tagged_values": {
-        "masd.extraction.cpp.hash.enabled": "true"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "element",
-          "type": "std::string"
-        },
-        {
-          "name": "archetype",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": "transforms::options",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "log_file",
-          "type": "boost::filesystem::path",
-          "documentation": "Full path to the log file.\n"
-        },
-        {
-          "name": "log_level",
-          "type": "std::string",
-          "documentation": "What level of logging to log at.\n"
-        },
-        {
-          "name": "target",
-          "type": "boost::filesystem::path",
-          "documentation": "Full path to the model to generate.\n"
-        },
-        {
-          "name": "output_directory_path",
-          "type": "boost::filesystem::path",
-          "documentation": "Full path to the directory in which to place the generated code.\n"
-        },
-        {
-          "name": "compatibility_mode",
-          "type": "bool",
-          "documentation": "Try to process diagram even if there are errors.\n\nOnly a certain class of errors are allowed, believed to be caused by backwards or\nforwards compatibility problems: missing types or types that do not exist.\n"
-        },
-        {
-          "name": "probe_stats",
-          "type": "bool",
-          "documentation": "Enable tracing for statistics around transforms.\n"
-        },
-        {
-          "name": "probe_stats_disable_guids",
-          "type": "bool",
-          "documentation": "Disable guids in probe stats, to make comparisons easier.\n"
-        },
-        {
-          "name": "probe_stats_org_mode",
-          "type": "bool",
-          "documentation": "Output the stats as an org-mode document.\n"
-        },
-        {
-          "name": "probe_all",
-          "type": "bool",
-          "documentation": "Enable all tracing.\n"
-        },
-        {
-          "name": "probe_directory",
-          "type": "boost::filesystem::path",
-          "documentation": "Full path to the directory in which to place probe information.\n"
-        },
-        {
-          "name": "probe_use_short_names",
-          "type": "bool",
-          "documentation": "Use short directory and file names. Useful mainly on windows due to path\nsize limitations.\n"
-        },
-        {
-          "name": "tracing",
-          "type": "tracing_configuration"
-        }
-      ]
-    },
-    {
-      "name": "transforms::options_validator",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::validation_error",
-      "documentation": "An error occurred when validating options.\n",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::formatting_transform",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::formatting_configuration",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "style",
-          "type": "meta_model::formatting_styles"
-        },
-        {
-          "name": "input",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": "transforms::model_generation_chain",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::model_post_processing_chain",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::code_generation_chain",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "meta_model::text_model",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "artefacts",
-          "type": "std::list<artefact>"
-        },
-        {
-          "name": "managed_directories",
-          "type": "std::list<boost::filesystem::path>"
-        },
-        {
-          "name": "force_write",
-          "type": "bool",
-          "documentation": "Always write files, even when there are no differences.\n"
-        },
-        {
-          "name": "delete_extra_files",
-          "type": "bool",
-          "documentation": "If true, deletes any files that are not known to Dogen .\n"
-        },
-        {
-          "name": "ignore_files_matching_regex",
-          "type": "std::vector<std::string>",
-          "documentation": "Files matching the supplied regular expressions will be ignored by Dogen.\n\nOnly applicable when deleting extra files.\n"
-        },
-        {
-          "name": "cpp_headers_output_directory",
-          "type": "boost::filesystem::path",
-          "documentation": "Directory in which to place C++ header files. Must be a relative path.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::locator_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "directory_structure_style",
-          "type": "directory_structure_styles"
-        },
-        {
-          "name": "name_separator",
-          "type": "std::string",
-          "documentation": "Separator to use when concatenating sub-components of a path component.\n"
-        },
-        {
-          "name": "model_segment_properties",
-          "type": "model_segment_properties"
-        },
-        {
-          "name": "intra_backend_segment_properties",
-          "type": "std::unordered_map<std::string, intra_backend_segment_properties>"
-        },
-        {
-          "name": "archetype_family_properties",
-          "type": "std::unordered_map<std::string, archetype_family_properties>"
-        },
-        {
-          "name": "force_backend_directory",
-          "type": "bool",
-          "documentation": "If true, the backend directory will be expressed, even when there is only one\nbackend enabled.\n"
-        },
-        {
-          "name": "disable_facet_directories",
-          "type": "bool",
-          "documentation": "If true, directories for facets are not generated.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::directory_structure_styles",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "structured",
-          "type": "",
-          "documentation": "Create the standard directory structure.\n"
-        },
-        {
-          "name": "completely_flat",
-          "type": "",
-          "documentation": "Suppress the generation of all directories.\n"
-        },
-        {
-          "name": "flatten_facets",
-          "type": "",
-          "documentation": "Flatten only the facets but preserve remaining structure.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::model_segment_properties",
-      "documentation": "Properties related to the model segment of the path.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "directory",
-          "type": "std::string",
-          "documentation": "If supplied, the override directory name will take precedence and all other\nsettings will be ignored.\n\nIf not supplied the model path segment is computed from the remaining settings.\n"
-        },
-        {
-          "name": "external_modules",
-          "type": "path_contribution_types",
-          "documentation": "What kind of contribution do the external modules make to the final path.\n"
-        },
-        {
-          "name": "model_modules",
-          "type": "path_contribution_types",
-          "documentation": "What kind of contribution do the model modules make to the final path.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::path_contribution_types",
-      "documentation": "Different kinds of contributions that can be made to the final path computation.\n",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "none",
-          "type": "",
-          "documentation": "The item does not contribute at all to the path.\n"
-        },
-        {
-          "name": "as_folders",
-          "type": "",
-          "documentation": "The itemcontributes folders to the path.\n"
-        },
-        {
-          "name": "as_path_components",
-          "type": "",
-          "documentation": "The item contributes a single folder to the path, as a delimited string.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::backend_properties",
-      "documentation": "Properties related to the backend.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "enabled",
-          "type": "bool",
-          "documentation": "If true, this backend is enabled.\n"
-        },
-        {
-          "name": "directory",
-          "type": "std::string",
-          "documentation": "Backend specific directory name, if any.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::intra_backend_segment_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "override_parent_path",
-          "type": "boost::filesystem::path",
-          "documentation": "If supplied, this path is used as the parent path instead of the output path.\n\nThis is useful for example when you want to place the include files outside of the\nmodel directory.\n"
-        },
-        {
-          "name": "path_segment",
-          "type": "boost::filesystem::path",
-          "documentation": "Path segment to use for this intra-backend segment.\n"
-        },
-        {
-          "name": "external_modules",
-          "type": "path_contribution_types",
-          "documentation": "What kind of contribution do the external modules make to the final path.\n"
-        },
-        {
-          "name": "model_modules",
-          "type": "path_contribution_types",
-          "documentation": "What kind of contribution do the model modules make to the final path.\n"
-        },
-        {
-          "name": "internal_modules",
-          "type": "path_contribution_types",
-          "documentation": "What kind of contribution do the internal modules make to the final path.\n"
-        },
-        {
-          "name": "facet",
-          "type": "path_contribution_types",
-          "documentation": "What kind of contribution does the facet make to the final path.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::archetype_family_properties",
-      "documentation": "Properties pertaining to families of archetypes, related to the path computation.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "extension",
-          "type": "std::string",
-          "documentation": "Extension to use for files of this group. Includes the leading dot.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::archetype_properties",
-      "documentation": "Archetype level properties, applicable to all instances of this archetype.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "enabled",
-          "type": "bool",
-          "documentation": "If false, will disable all instances of this archetype.\n"
-        },
-        {
-          "name": "overwrite",
-          "type": "boost::optional<bool>"
-        },
-        {
-          "name": "postfix",
-          "type": "std::string",
-          "documentation": "Postfix to use for artefacts of this archetype.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::global_archetype_location_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "backend_properties",
-          "type": "std::unordered_map<std::string, backend_properties>"
-        },
-        {
-          "name": "facet_properties",
-          "type": "std::unordered_map<std::string, facet_properties>"
-        },
-        {
-          "name": "archetype_properties",
-          "type": "std::unordered_map<std::string, archetype_properties>"
-        },
-        {
-          "name": "denormalised_archetype_properties",
-          "type": "std::unordered_map<std::string, denormalised_archetype_properties>"
-        }
-      ]
-    },
-    {
-      "name": "transforms::archetype_location_properties_transform",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::text_model_generation_chain",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::file_linter",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
     },
     {
       "name": "meta_model::local_archetype_location_properties",
@@ -2437,130 +1808,6 @@
           "type": "boost::optional<bool>"
         }
       ]
-    },
-    {
-      "name": "meta_model::denormalised_archetype_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "backend_enabled",
-          "type": "bool"
-        },
-        {
-          "name": "backend_directory",
-          "type": "std::string"
-        },
-        {
-          "name": "facet_enabled",
-          "type": "bool"
-        },
-        {
-          "name": "facet_overwrite",
-          "type": "bool"
-        },
-        {
-          "name": "facet_directory",
-          "type": "std::string"
-        },
-        {
-          "name": "facet_postfix",
-          "type": "std::string"
-        },
-        {
-          "name": "archetype_enabled",
-          "type": "bool"
-        },
-        {
-          "name": "archetype_overwrite",
-          "type": "boost::optional<bool>"
-        },
-        {
-          "name": "archetype_postfix",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": "transforms::building_error",
-      "documentation": "An error occurred whilst the factory was building.\n",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "meta_model::artefact",
-      "documentation": "Artefact in a text model.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "path",
-          "type": "boost::filesystem::path",
-          "documentation": "Absolute path to the file, indicating the location in the filesystem where it will be written.\n"
-        },
-        {
-          "name": "content",
-          "type": "std::string",
-          "documentation": "Content of the file.\n"
-        },
-        {
-          "name": "overwrite",
-          "type": "bool",
-          "documentation": "Determines when to write the file.\n\nIf true, the file will always be written to the filesystem; if false, the file will\nonly be written to the filesystem if it does not exist.\n"
-        },
-        {
-          "name": "dependencies",
-          "type": "std::vector<boost::filesystem::path>",
-          "documentation": "Files in the project directory that this file depends on, but which are not generated.\n"
-        }
-      ]
-    },
-    {
-      "name": "helpers::artefact_writer_interface",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::filesystem_writer",
-      "parents": [
-        "helpers::artefact_writer_interface"
-      ],
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "force_write_",
-          "type": "bool"
-        }
-      ]
-    },
-    {
-      "name": "helpers::stream_writer",
-      "parents": [
-        "helpers::artefact_writer_interface"
-      ],
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "stream_",
-          "type": "std::ostream"
-        }
-      ]
-    },
-    {
-      "name": "helpers::writing_error",
-      "documentation": "An error ocrurred whilst writing.\n",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
     },
     {
       "name": "meta_model::static_stereotypes",
@@ -2621,56 +1868,6 @@
       ]
     },
     {
-      "name": "helpers::stereotypes_helper",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::stereotypes_conversion_result",
-      "documentation": "Aggregates the result of parsing a CSV string with well-known stereotypes and user\ndefined stereotypes.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "static_stereotypes",
-          "type": "std::list<meta_model::static_stereotypes>"
-        },
-        {
-          "name": "dynamic_stereotypes",
-          "type": "std::list<std::string>"
-        }
-      ]
-    },
-    {
-      "name": "helpers::adaptation_error",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::external_model_to_model_transform",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::new_adapter",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::registrar_error",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "meta_model::extraction_properties",
       "documentation": "Properties related to extraction.\n",
       "fallback_element_type": "masd::object",
@@ -2711,6 +1908,20 @@
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::model_set",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "target",
+          "type": "model"
+        },
+        {
+          "name": "references",
+          "type": "std::list<model>"
+        }
+      ]
     }
   ]
 }

@@ -2,11 +2,17 @@
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "masd.dogen.generation",
-    "masd.injection.reference": "masd.dogen.annotations.json",
-    "masd.injection.reference": "masd.dogen.coding.json",
-    "masd.injection.reference": "masd.dogen.tracing.json",
-    "masd.injection.reference": "masd.dogen.extraction.json",
+    "masd.injection.reference": "cpp.builtins",
+    "masd.injection.reference": "cpp.boost",
+    "masd.injection.reference": "cpp.std",
+    "masd.injection.reference": "masd.dogen",
+    "masd.injection.reference": "masd.dogen.annotations",
+    "masd.injection.reference": "masd.dogen.tracing",
+    "masd.injection.reference": "masd.dogen.coding",
+    "masd.injection.reference": "masd.dogen.extraction",
     "masd.injection.input_language": "cpp",
+    "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
+    "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
     "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
     "masd.extraction.delete_extra_files": "true",
     "masd.extraction.cpp.enabled": "true",
@@ -85,6 +91,10 @@
         {
           "name": "global_archetype_location_properties",
           "type": "global_archetype_location_properties"
+        },
+        {
+          "name": "extraction_properties",
+          "type": "coding::meta_model::extraction_properties"
         }
       ]
     },
@@ -153,20 +163,6 @@
         {
           "name": "archetype",
           "type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::text_model",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "artefacts",
-          "type": "std::list<artefact>"
-        },
-        {
-          "name": "managed_directories",
-          "type": "std::list<boost::filesystem::path>"
         }
       ]
     },
@@ -430,33 +426,6 @@
       ]
     },
     {
-      "name": "meta_model::artefact",
-      "documentation": "Artefact in a text model.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "path",
-          "type": "boost::filesystem::path",
-          "documentation": "Absolute path to the file, indicating the location in the filesystem where it will be written.\n"
-        },
-        {
-          "name": "content",
-          "type": "std::string",
-          "documentation": "Content of the file.\n"
-        },
-        {
-          "name": "overwrite",
-          "type": "bool",
-          "documentation": "Determines when to write the file.\n\nIf true, the file will always be written to the filesystem; if false, the file will\nonly be written to the filesystem if it does not exist.\n"
-        },
-        {
-          "name": "dependencies",
-          "type": "std::vector<boost::filesystem::path>",
-          "documentation": "Files in the project directory that this file depends on, but which are not generated.\n"
-        }
-      ]
-    },
-    {
       "name": "meta_model::facet_properties",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -580,14 +549,14 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::model_to_text_model_chain",
+      "name": "transforms::model_to_extraction_model_chain",
       "stereotypes": [
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::model_to_text_model_transform_interface",
+      "name": "transforms::model_to_extraction_model_transform_interface",
       "stereotypes": [
         "masd::handcrafted"
       ],
@@ -597,7 +566,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::model_to_text_model_transform_registrar",
+      "name": "transforms::model_to_extraction_model_transform_registrar",
       "stereotypes": [
         "masd::handcrafted"
       ],
@@ -608,21 +577,7 @@
       "attributes": [
         {
           "name": "transforms_by_language_",
-          "type": "std::unordered_map<coding::meta_model::languages, std::shared_ptr<model_to_text_model_transform_interface>>"
-        }
-      ]
-    },
-    {
-      "name": "transforms::configuration",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "enabled_backends",
-          "type": "std::unordered_set<std::string>"
-        },
-        {
-          "name": "enable_backend_directories",
-          "type": "bool"
+          "type": "std::unordered_map<coding::meta_model::languages, std::shared_ptr<model_to_extraction_model_transform_interface>>"
         }
       ]
     },
@@ -669,13 +624,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::model_post_processing_chain",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::archetype_location_properties_transform",
       "stereotypes": [
         "masd::handcrafted"
@@ -690,98 +638,53 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::text_model_generation_chain",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::context",
       "stereotypes": [
         "masd::handcrafted"
       ],
+      "tagged_values": {
+        "masd.extraction.cpp.types.forward_declarations.enabled": "true"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "type_repository",
-          "type": "annotations::type_repository"
+          "type": "boost::shared_ptr<annotations::type_repository>"
         },
         {
           "name": "archetype_location_repository",
-          "type": "annotations::archetype_location_repository"
+          "type": "boost::shared_ptr<annotations::archetype_location_repository>"
+        },
+        {
+          "name": "annotation_factory",
+          "type": "boost::shared_ptr<annotations::annotation_factory>"
+        },
+        {
+          "name": "annotation_expander",
+          "type": "boost::shared_ptr<annotations::annotation_expander>"
         },
         {
           "name": "formatting_repository",
-          "type": "extraction::repository"
+          "type": "boost::shared_ptr<extraction::repository>"
         },
         {
           "name": "tracer",
-          "type": "tracing::tracer"
+          "type": "boost::shared_ptr<tracing::tracer>"
         },
         {
           "name": "intra_backend_segment_properties",
-          "type": "std::unordered_map<std::string, coding::meta_model::intra_backend_segment_properties>"
+          "type": "std::unordered_map<std::string, generation::meta_model::intra_backend_segment_properties>"
+        },
+        {
+          "name": "output_directory_path",
+          "type": "boost::filesystem::path",
+          "documentation": "FIXME: to be removed\n"
         }
       ]
-    },
-    {
-      "name": "transforms::coding_model_to_generation_model_transform",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
     },
     {
       "name": "helpers",
       "fallback_element_type": "masd::module"
-    },
-    {
-      "name": "helpers::artefact_writer_interface",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::filesystem_writer",
-      "parents": [
-        "helpers::artefact_writer_interface"
-      ],
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "force_write_",
-          "type": "bool"
-        }
-      ]
-    },
-    {
-      "name": "helpers::stream_writer",
-      "parents": [
-        "helpers::artefact_writer_interface"
-      ],
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "stream_",
-          "type": "std::ostream"
-        }
-      ]
-    },
-    {
-      "name": "helpers::writing_error",
-      "documentation": "An error ocrurred whilst writing.\n",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::transformation_error",
@@ -795,6 +698,13 @@
       "name": "traits",
       "stereotypes": [
         "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::registrar_error",
+      "stereotypes": [
+        "masd::exception"
       ],
       "fallback_element_type": "masd::object"
     }

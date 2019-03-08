@@ -35,8 +35,7 @@
  * mistake.
  */
 #define ENABLE_DIA_TESTS
-// #define ENABLE_JSON_TESTS
-// #define ENABLE_CSHARP_TESTS
+#define ENABLE_JSON_TESTS
 
 namespace  {
 
@@ -304,5 +303,153 @@ BOOST_AUTO_TEST_CASE(masd_dogen_utility_dia_produces_expected_model) {
 }
 
 #endif // ENABLE_DIA_TESTS
+
+#ifdef ENABLE_JSON_TESTS
+
+BOOST_AUTO_TEST_CASE(masd_dogen_annotations_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_dogen_annotations_json_produces_expected_model");
+    using masd::dogen::utility::test_data::dogen_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(dogen_generation::input_masd_dogen_annotations_json());
+    const auto od(dogen_generation::project_directory());
+    BOOST_CHECK(test_code_generation(t, od, ep));
+}
+
+BOOST_AUTO_TEST_CASE(masd_dogen_cli_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_dogen_cli_json_produces_expected_model");
+    using masd::dogen::utility::test_data::dogen_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(dogen_generation::input_masd_dogen_cli_json());
+    const auto od(dogen_generation::project_directory());
+    BOOST_CHECK(test_code_generation(t, od, ep));
+}
+
+BOOST_AUTO_TEST_CASE(masd_dogen_coding_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_dogen_coding_json_produces_expected_model");
+    using masd::dogen::utility::test_data::dogen_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(dogen_generation::input_masd_dogen_coding_json());
+    const auto od(dogen_generation::project_directory());
+    BOOST_CHECK(test_code_generation(t, od, ep));
+}
+
+BOOST_AUTO_TEST_CASE(masd_dogen_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_dogen_json_produces_expected_model");
+    using masd::dogen::utility::test_data::dogen_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(dogen_generation::input_masd_dogen_json());
+    const auto od(dogen_generation::project_directory());
+    BOOST_CHECK(test_code_generation(t, od, ep));
+}
+
+BOOST_AUTO_TEST_CASE(masd_dogen_dia_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_dogen_dia_json_produces_expected_model");
+    using masd::dogen::utility::test_data::dogen_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(dogen_generation::input_masd_dogen_dia_json());
+    const auto od(dogen_generation::project_directory());
+    BOOST_CHECK(test_code_generation(t, od, ep));
+}
+
+BOOST_AUTO_TEST_CASE(masd_dogen_extraction_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_dogen_extraction_json_produces_expected_model");
+    using masd::dogen::utility::test_data::dogen_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(dogen_generation::input_masd_dogen_extraction_json());
+    const auto od(dogen_generation::project_directory());
+    BOOST_CHECK(test_code_generation(t, od, ep));
+}
+
+BOOST_AUTO_TEST_CASE(masd_dogen_generation_cpp_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_dogen_generation_cpp_json_produces_expected_model");
+    using masd::dogen::utility::test_data::dogen_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(dogen_generation::input_masd_dogen_generation_cpp_json());
+    const auto od(dogen_generation::project_directory());
+    BOOST_CHECK(test_code_generation(t, od, ep));
+}
+
+BOOST_AUTO_TEST_CASE(masd_dogen_generation_csharp_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_dogen_generation_csharp_json_produces_expected_model");
+    using masd::dogen::utility::test_data::dogen_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(dogen_generation::input_masd_dogen_generation_csharp_json());
+    const auto od(dogen_generation::project_directory());
+    BOOST_CHECK(test_code_generation(t, od, ep));
+}
+
+BOOST_AUTO_TEST_CASE(masd_dogen_generation_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_dogen_generation_json_produces_expected_model");
+    using masd::dogen::utility::test_data::dogen_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(dogen_generation::input_masd_dogen_generation_json());
+    const auto od(dogen_generation::project_directory());
+    BOOST_CHECK(test_code_generation(t, od, ep));
+}
+
+BOOST_AUTO_TEST_CASE(masd_dogen_injection_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_dogen_generation_json_produces_expected_model");
+    using masd::dogen::utility::test_data::dogen_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(dogen_generation::input_masd_dogen_injection_json());
+    const auto od(dogen_generation::project_directory());
+    BOOST_CHECK(test_code_generation(t, od, ep));
+}
+
+BOOST_AUTO_TEST_CASE(masd_dogen_injection_dia_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_dogen_injection_dia_json_produces_expected_model");
+    using masd::dogen::utility::test_data::dogen_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(dogen_generation::input_masd_dogen_injection_dia_json());
+    const auto od(dogen_generation::project_directory());
+    BOOST_CHECK(test_code_generation(t, od, ep));
+}
+
+BOOST_AUTO_TEST_CASE(masd_dogen_injection_json_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_dogen_injection_json_json_produces_expected_model");
+    using masd::dogen::utility::test_data::dogen_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(dogen_generation::input_masd_dogen_injection_json_json());
+    const auto od(dogen_generation::project_directory());
+    BOOST_CHECK(test_code_generation(t, od, ep));
+}
+
+BOOST_AUTO_TEST_CASE(masd_dogen_orchestration_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_dogen_orchestration_json_produces_expected_model");
+    using masd::dogen::utility::test_data::dogen_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(dogen_generation::input_masd_dogen_orchestration_json());
+    const auto od(dogen_generation::project_directory());
+    BOOST_CHECK(test_code_generation(t, od, ep));
+}
+
+BOOST_AUTO_TEST_CASE(masd_dogen_templating_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_dogen_templating_json_produces_expected_model");
+    using masd::dogen::utility::test_data::dogen_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(dogen_generation::input_masd_dogen_templating_json());
+    const auto od(dogen_generation::project_directory());
+    BOOST_CHECK(test_code_generation(t, od, ep));
+}
+
+BOOST_AUTO_TEST_CASE(masd_dogen_tracing_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_dogen_tracing_json_produces_expected_model");
+    using masd::dogen::utility::test_data::dogen_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(dogen_generation::input_masd_dogen_tracing_json());
+    const auto od(dogen_generation::project_directory());
+    BOOST_CHECK(test_code_generation(t, od, ep));
+}
+
+BOOST_AUTO_TEST_CASE(masd_dogen_utility_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_dogen_utility_json_produces_expected_model");
+    using masd::dogen::utility::test_data::dogen_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(dogen_generation::input_masd_dogen_utility_json());
+    const auto od(dogen_generation::project_directory());
+    BOOST_CHECK(test_code_generation(t, od, ep));
+}
+
+#endif // ENABLE_JSON_TESTS
 
 BOOST_AUTO_TEST_SUITE_END()

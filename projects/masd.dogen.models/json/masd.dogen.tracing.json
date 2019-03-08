@@ -4,7 +4,13 @@
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "masd.dogen.tracing",
     "masd.injection.input_language": "cpp",
-    "masd.injection.reference": "masd.dogen.json",
+    "masd.injection.reference": "cpp.builtins",
+    "masd.injection.reference": "cpp.boost",
+    "masd.injection.reference": "cpp.std",
+    "masd.injection.reference": "masd.dogen",
+    "masd.injection.reference": "masd.dogen.annotations",
+    "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
+    "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
     "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
     "masd.extraction.delete_extra_files": "true",
     "masd.extraction.force_write": "false",
@@ -22,6 +28,9 @@
       "stereotypes": [
         "masd::handcrafted"
       ],
+      "tagged_values": {
+        "masd.extraction.cpp.types.forward_declarations.enabled": "true"
+      },
       "fallback_element_type": "masd::object"
     },
     {

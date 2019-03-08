@@ -1,12 +1,15 @@
 {
-  "documentation": "Provides support for encoding and decoding exogenous models.\n\nAn exogenous model is defined as:\n\n- a third-party format that is not owned or controlled by\n  Dogen, such as Dia\n- a Dogen format designed for interoperability (JSON).\n",
+  "documentation": "Provides support for encoding and decoding of external models.\n\nAn external model is defined as:\n\n- a third-party format that is not owned or controlled by\n  Dogen, such as Dia\n- a Dogen format designed for interoperability (JSON).\n\nExternal models are converted into an intermediate format called\nthe @e injection model, at which point they are in a suitable\nform to be injected into Dogen for further processing. A @e codec\nmust be created for each external model, providing a transformation\nbetween these native formats and the injection model.\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "masd.dogen.injection",
     "masd.injection.input_language": "cpp",
-    "masd.injection.model_modules": "masd.dogen.injection.dia",
-    "masd.injection.reference": "masd.dogen.tracing.json",
-    "masd.injection.reference": "masd.dogen.injection.json",
+    "masd.injection.reference": "cpp.builtins",
+    "masd.injection.reference": "cpp.std",
+    "masd.injection.reference": "cpp.boost",
+    "masd.injection.reference": "masd.dogen.tracing",
+    "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
+    "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
     "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
     "masd.extraction.delete_extra_files": "true",
     "masd.extraction.cpp.enabled": "true",
@@ -45,7 +48,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::model_generation_chain",
+      "name": "transforms::model_production_chain",
       "stereotypes": [
         "masd::handcrafted"
       ],
@@ -66,16 +69,21 @@
       "name": "meta_model::model",
       "documentation": "Represents an external model.\n",
       "stereotypes": [
-        "Nameable",
-        "Documentable",
-        "Taggable",
-        "Stereotypable"
+        "Element"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "elements",
           "type": "std::list<element>"
+        },
+        {
+          "name": "input_language",
+          "type": "std::string"
+        },
+        {
+          "name": "references",
+          "type": "std::list<std::string>"
         }
       ]
     },
@@ -83,10 +91,7 @@
       "name": "meta_model::element",
       "documentation": "Represents an element from an external model.\n",
       "stereotypes": [
-        "Nameable",
-        "Documentable",
-        "Taggable",
-        "Stereotypable"
+        "Element"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -132,10 +137,7 @@
     {
       "name": "meta_model::attribute",
       "stereotypes": [
-        "Nameable",
-        "Documentable",
-        "Taggable",
-        "Stereotypable"
+        "Element"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -144,6 +146,123 @@
           "type": "std::string"
         }
       ]
+    },
+    {
+      "name": "transforms::context",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "tagged_values": {
+        "masd.extraction.cpp.types.forward_declarations.enabled": "true"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "data_directories",
+          "type": "std::vector<boost::filesystem::path>"
+        },
+        {
+          "name": "type_repository",
+          "type": "boost::shared_ptr<annotations::type_repository>"
+        },
+        {
+          "name": "archetype_location_repository",
+          "type": "boost::shared_ptr<annotations::archetype_location_repository>"
+        },
+        {
+          "name": "annotation_factory",
+          "type": "boost::shared_ptr<annotations::annotation_factory>"
+        },
+        {
+          "name": "tracer",
+          "type": "boost::shared_ptr<tracing::tracer>"
+        },
+        {
+          "name": "compatibility_mode",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "transforms::transformation_error",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::decoding_transform_interface",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::model_set",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "target",
+          "type": "model"
+        },
+        {
+          "name": "references",
+          "type": "std::list<model>"
+        }
+      ]
+    },
+    {
+      "name": "helpers",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "helpers::references_resolver",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::model_set_production_chain",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::input_language_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::references_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::reference_resolution_exception",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "traits",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::annotations_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "meta_model::Taggable",
@@ -203,32 +322,32 @@
       ]
     },
     {
-      "name": "transforms::context",
+      "name": "meta_model::Annotatable",
+      "documentation": "Ability to have meta-data associated.\n",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::object_template"
       ],
-      "tagged_values": {
-        "masd.extraction.cpp.types.forward_declarations.enabled": "true"
-      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "tracer",
-          "type": "tracing::tracer"
+          "name": "annotation",
+          "type": "annotations::annotation",
+          "documentation": "Annotation for this element.\n"
         }
       ]
     },
     {
-      "name": "transforms::transformation_error",
-      "stereotypes": [
-        "masd::exception"
+      "name": "meta_model::Element",
+      "parents": [
+        "meta_model::Taggable",
+        "meta_model::Stereotypable",
+        "meta_model::Documentable",
+        "meta_model::Nameable",
+        "meta_model::Annotatable"
       ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::decoding_transform_interface",
+      "documentation": "Consolidates a number of related object templates.\n",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::object_template"
       ],
       "fallback_element_type": "masd::object"
     }

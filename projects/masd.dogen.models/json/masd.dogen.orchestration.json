@@ -2,9 +2,20 @@
   "documentation": "Orchestration-based imlementation of the Dogen product API.\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
-    "masd.injection.reference": "masd.dogen.json",
     "masd.injection.model_modules": "masd.dogen.orchestration",
+    "masd.injection.reference": "cpp.builtins",
+    "masd.injection.reference": "cpp.boost",
+    "masd.injection.reference": "cpp.std",
+    "masd.injection.reference": "masd.dogen",
+    "masd.injection.reference": "masd.dogen.annotations",
+    "masd.injection.reference": "masd.dogen.tracing",
+    "masd.injection.reference": "masd.dogen.injection",
+    "masd.injection.reference": "masd.dogen.coding",
+    "masd.injection.reference": "masd.dogen.generation",
+    "masd.injection.reference": "masd.dogen.extraction",
     "masd.injection.input_language": "cpp",
+    "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
+    "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
     "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
     "masd.extraction.delete_extra_files": "true",
     "masd.extraction.cpp.enabled": "true",
@@ -55,6 +66,152 @@
       "tagged_values": {
         "masd.generalization.parent": "masd::dogen::converter"
       },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "injector_factory",
+      "stereotypes": [
+        "masd::cpp::header_only"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::context",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "tagged_values": {
+        "masd.extraction.cpp.types.forward_declarations.enabled": "true"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "injection_context",
+          "type": "injection::transforms::context"
+        },
+        {
+          "name": "coding_context",
+          "type": "coding::transforms::context"
+        },
+        {
+          "name": "generation_context",
+          "type": "generation::transforms::context"
+        },
+        {
+          "name": "extraction_context",
+          "type": "extraction::transforms::context"
+        }
+      ]
+    },
+    {
+      "name": "transforms::context_factory",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::factory_exception",
+      "documentation": "An error occurred in the factory whilst making.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::injection_model_to_coding_model_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::injection_model_set_to_coding_model_set_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "helpers::adaptation_exception",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::adapter",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::naming_configuration",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "external_modules",
+          "type": "std::string"
+        },
+        {
+          "name": "model_modules",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "helpers::stereotypes_helper",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::stereotypes_conversion_result",
+      "documentation": "Aggregates the result of parsing a CSV string with well-known stereotypes and\nuser defined stereotypes.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "static_stereotypes",
+          "type": "std::list<coding::meta_model::static_stereotypes>"
+        },
+        {
+          "name": "dynamic_stereotypes",
+          "type": "std::list<std::string>"
+        }
+      ]
+    },
+    {
+      "name": "transforms::transform_exception",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::coding_model_to_generation_model_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::scoped_context_manager",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::extraction_model_production_chain",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
       "fallback_element_type": "masd::object"
     }
   ]
