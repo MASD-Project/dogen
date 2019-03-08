@@ -20,21 +20,21 @@
  */
 #include "masd.dogen.tracing/types/tracer.hpp"
 #include "masd.dogen.orchestration/types/transforms/context_factory.hpp"
-#include "masd.dogen.orchestration/types/transforms/scoped_context_owner.hpp"
+#include "masd.dogen.orchestration/types/transforms/scoped_context_manager.hpp"
 
 namespace masd::dogen::orchestration::transforms {
 
-scoped_context_owner::scoped_context_owner(
+scoped_context_manager::scoped_context_manager(
     const configuration& cfg,
     const boost::filesystem::path& output_directory) :
     context_(context_factory::make_context(cfg, output_directory)) {}
 
-scoped_context_owner::~scoped_context_owner() {
+scoped_context_manager::~scoped_context_manager() {
     if (context_.injection_context().tracer())
         context_.injection_context().tracer()->end_tracing();
 }
 
-const transforms::context& scoped_context_owner::context() const {
+const transforms::context& scoped_context_manager::context() const {
     return context_;
 }
 

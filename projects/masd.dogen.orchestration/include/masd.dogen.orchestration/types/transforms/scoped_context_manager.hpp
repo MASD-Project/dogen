@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_SCOPED_CONTEXT_OWNER_HPP
-#define MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_SCOPED_CONTEXT_OWNER_HPP
+#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_SCOPED_CONTEXT_MANAGER_HPP
+#define MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_SCOPED_CONTEXT_MANAGER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,11 +31,11 @@
 
 namespace masd::dogen::orchestration::transforms {
 
-class scoped_context_owner final {
+class scoped_context_manager final {
 public:
-    scoped_context_owner(const configuration& cfg,
+    scoped_context_manager(const configuration& cfg,
         const boost::filesystem::path& output_directory);
-    ~scoped_context_owner();
+    ~scoped_context_manager();
 
 public:
     const transforms::context& context() const;

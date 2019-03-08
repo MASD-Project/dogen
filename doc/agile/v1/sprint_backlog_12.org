@@ -987,6 +987,17 @@ Notes:
 - enable diffing, reporting.
 - check how byproduct directory works with tests.
 
+*** STARTED Split extraction model generation from code generation    :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-08 Fri 11:40]
+    :END:
+
+In order to make the models testable, we need access to the extraction
+model. However, we do not want to create a custom pipeline just for
+testing because we'd end up testing different things. Refactor the
+existing code such that the generation pipeline makes use of the
+extraction pipeline.
+
 *** Consider adding tests for pipeline components                     :story:
 
 With regards to the existing injection.dia/injection.json test data

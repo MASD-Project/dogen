@@ -22,7 +22,7 @@
 #include <boost/test/unit_test_monitor.hpp>
 #include "masd.dogen.utility/types/test/logging.hpp"
 #include "masd.dogen.utility/types/test_data/dogen_generation.hpp"
-#include "masd.dogen.orchestration/types/transforms/scoped_context_owner.hpp"
+#include "masd.dogen.orchestration/types/transforms/scoped_context_manager.hpp"
 #include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
 
 /*
@@ -56,7 +56,7 @@ const std::string test_suite("dogen_code_generation_chain_tests");
 // bool test_code_generation(const boost::filesystem::path& target,
 //     const std::string& output_dir, bool enable_tracing) {
 //     const auto cfg(make_configuration(target, output_dir, enable_tracing));
-//     scoped_context_owner sco(cfg, output_directory);
+//     scoped_context_manager sco(cfg, output_directory);
 //     code_generation_chain::transform(sco.context(), target);
 
     
