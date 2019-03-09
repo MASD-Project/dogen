@@ -25,24 +25,72 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <boost/filesystem/path.hpp>
 
 namespace masd::dogen::utility::test_data {
 
 class cpp_ref_impl_generation final {
 public:
-    cpp_ref_impl_generation() = default;
-    cpp_ref_impl_generation(const cpp_ref_impl_generation&) = default;
-    cpp_ref_impl_generation(cpp_ref_impl_generation&&) = default;
-    ~cpp_ref_impl_generation() = default;
-    cpp_ref_impl_generation& operator=(const cpp_ref_impl_generation&) = default;
+    cpp_ref_impl_generation() = delete;
+    cpp_ref_impl_generation(const cpp_ref_impl_generation&) = delete;
+    cpp_ref_impl_generation(cpp_ref_impl_generation&&) = delete;
+    ~cpp_ref_impl_generation() = delete;
+    cpp_ref_impl_generation& operator=(const cpp_ref_impl_generation&) = delete;
 
 public:
-    bool operator==(const cpp_ref_impl_generation& rhs) const;
-    bool operator!=(const cpp_ref_impl_generation& rhs) const {
-        return !this->operator==(rhs);
-    }
+    static void initialize();
 
+private:
+    static void ensure_initialized();
+
+public:
+    static boost::filesystem::path project_directory();
+    static boost::filesystem::path output_directory();
+
+public:
+    static boost::filesystem::path input_masd_cpp_ref_impl_boost_model_dia();
+    static boost::filesystem::path input_masd_cpp_ref_impl_colours_dia();
+    static boost::filesystem::path input_masd_cpp_ref_impl_compressed_dia();
+    static boost::filesystem::path input_masd_cpp_ref_impl_cpp_98_dia();
+    static boost::filesystem::path input_masd_cpp_ref_impl_cpp_model_dia();
+    static boost::filesystem::path input_masd_cpp_ref_impl_directory_settings_dia();
+    static boost::filesystem::path input_masd_cpp_ref_impl_disable_cmakelists_dia();
+    static boost::filesystem::path input_masd_cpp_ref_impl_disable_facet_folders_dia();
+    static boost::filesystem::path input_masd_cpp_ref_impl_enable_facet_hash_dia();
+    static boost::filesystem::path input_masd_cpp_ref_impl_enable_facet_io_dia();
+    static boost::filesystem::path input_masd_cpp_ref_impl_enable_facet_serialization_dia();
+    static boost::filesystem::path input_masd_cpp_ref_impl_enable_facet_types_dia();
+    static boost::filesystem::path input_masd_cpp_ref_impl_flat_directory_mode_dia();
+    static boost::filesystem::path input_masd_cpp_ref_impl_lam_model_dia();
+    static boost::filesystem::path input_masd_cpp_ref_impl_northwind_dia();
+    static boost::filesystem::path input_masd_cpp_ref_impl_split_project_dia();
+    static boost::filesystem::path input_masd_cpp_ref_impl_std_model_dia();
+    static boost::filesystem::path input_masd_cpp_ref_impl_two_layers_with_objects_dia();
+
+    static boost::filesystem::path input_masd_cpp_ref_impl_boost_model_json();
+    static boost::filesystem::path input_masd_cpp_ref_impl_colours_json();
+    static boost::filesystem::path input_masd_cpp_ref_impl_compressed_json();
+    static boost::filesystem::path input_masd_cpp_ref_impl_cpp_98_json();
+    static boost::filesystem::path input_masd_cpp_ref_impl_cpp_model_json();
+    static boost::filesystem::path input_masd_cpp_ref_impl_directory_settings_json();
+    static boost::filesystem::path input_masd_cpp_ref_impl_disable_cmakelists_json();
+    static boost::filesystem::path input_masd_cpp_ref_impl_disable_facet_folders_json();
+    static boost::filesystem::path input_masd_cpp_ref_impl_enable_facet_hash_json();
+    static boost::filesystem::path input_masd_cpp_ref_impl_enable_facet_io_json();
+    static boost::filesystem::path input_masd_cpp_ref_impl_enable_facet_serialization_json();
+    static boost::filesystem::path input_masd_cpp_ref_impl_enable_facet_types_json();
+    static boost::filesystem::path input_masd_cpp_ref_impl_flat_directory_mode_json();
+    static boost::filesystem::path input_masd_cpp_ref_impl_lam_model_json();
+    static boost::filesystem::path input_masd_cpp_ref_impl_northwind_json();
+    static boost::filesystem::path input_masd_cpp_ref_impl_split_project_json();
+    static boost::filesystem::path input_masd_cpp_ref_impl_std_model_json();
+    static boost::filesystem::path input_masd_cpp_ref_impl_two_layers_with_objects_json();
+
+private:
+    static boost::filesystem::path project_directory_;
+    static boost::filesystem::path dia_models_directory_;
+    static boost::filesystem::path json_models_directory_;
+    static boost::filesystem::path output_directory_;
 };
 
 }
