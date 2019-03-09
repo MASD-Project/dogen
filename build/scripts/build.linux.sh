@@ -50,7 +50,6 @@ product_dir=$(readlink -f ${dir}/../..)
 echo "* Product directory: ${product_dir}"
 
 projects_dir="${product_dir}/projects/"
-export MASD_DOGEN_PROJECT_DIRECTORY="${projects_dir}"
 
 #
 # Compiler

@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include <cstdlib>
 #include <boost/filesystem.hpp>
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/environment/variable_reader.hpp"
 #include "masd.dogen.utility/types/test_data/test_data_exception.hpp"
 #include "masd.dogen.utility/types/test_data/dogen_generation.hpp"
 
@@ -30,10 +30,8 @@ namespace {
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory("utility.dogen_generation"));
 
-const std::string dogen_project_directory_env("MASD_DOGEN_PROJECT_DIRECTORY");
+const std::string dogen_project_directory_env("MASD_DOGEN_PROJECTS_DIRECTORY");
 
-const std::string environment_variable_not_defined(
-    "Expected environment variable not defined: ");
 const std::string project_dir_not_found(
     "Could not find project directory: ");
 const std::string not_initialized("Test data set is not initialized");
@@ -79,11 +77,6 @@ const std::string path_masd_dogen_templating_json("masd.dogen.templating.json");
 const std::string path_masd_dogen_tracing_json("masd.dogen.tracing.json");
 const std::string path_masd_dogen_utility_json("masd.dogen.utility.json");
 
-std::string get_env_var(const std::string& var_name) {
-    const char* val = std::getenv(var_name.c_str());
-    return val == NULL ? std::string() : std::string(val);
-}
-
 }
 
 using boost::filesystem::path;
@@ -91,17 +84,15 @@ using boost::filesystem::path;
 namespace masd::dogen::utility::test_data {
 
 boost::filesystem::path dogen_generation::project_directory_;
+boost::filesystem::path dogen_generation::dia_models_directory_;
+boost::filesystem::path dogen_generation::json_models_directory_;
 boost::filesystem::path dogen_generation::output_directory_;
 
 void dogen_generation::initialize() {
-    const std::string proj_dir_env(get_env_var(dogen_project_directory_env));
-    if (proj_dir_env.empty()) {
-        BOOST_LOG_SEV(lg, error) << environment_variable_not_defined
-                                 << dogen_project_directory_env;
-        BOOST_THROW_EXCEPTION(
-            test_data_exception(environment_variable_not_defined +
-                dogen_project_directory_env));
-    }
+    using environment::variable_reader;
+    const std::string proj_dir_env(
+        variable_reader::strict_read_environment_variable(
+            dogen_project_directory_env));
 
     project_directory_ = path(proj_dir_env);
     if (!boost::filesystem::exists(project_directory_)) {
@@ -110,6 +101,9 @@ void dogen_generation::initialize() {
         BOOST_THROW_EXCEPTION(
             test_data_exception(project_dir_not_found + proj_dir_env));
     }
+
+    dia_models_directory_ = project_directory_ / models_dia_dir;
+    json_models_directory_ = project_directory_ / models_json_dir;
 
     output_directory_ = boost::filesystem::absolute(output_dir);
     if (boost::filesystem::exists(output_directory_)) {
@@ -152,177 +146,162 @@ path dogen_generation::output_directory() {
 
 path dogen_generation::input_masd_dogen_annotations_dia() {
     ensure_initialized();
-    return project_directory_ / models_dia_dir /
-        path_masd_dogen_annotations_dia;
+    return dia_models_directory_ / path_masd_dogen_annotations_dia;
 }
 
 path dogen_generation::input_masd_dogen_cli_dia() {
     ensure_initialized();
-    return project_directory_ / models_dia_dir / path_masd_dogen_cli_dia;
+    return dia_models_directory_ / path_masd_dogen_cli_dia;
 }
 
 path dogen_generation::input_masd_dogen_coding_dia() {
     ensure_initialized();
-    return project_directory_ / models_dia_dir / path_masd_dogen_coding_dia;
+    return dia_models_directory_ / path_masd_dogen_coding_dia;
 }
 
 path dogen_generation::input_masd_dogen_dia() {
     ensure_initialized();
-    return project_directory_ / models_dia_dir / path_masd_dogen_dia;
+    return dia_models_directory_ / path_masd_dogen_dia;
 }
 
 path dogen_generation::input_masd_dogen_dia_dia() {
     ensure_initialized();
-    return project_directory_ / models_dia_dir / path_masd_dogen_dia_dia;
+    return dia_models_directory_ / path_masd_dogen_dia_dia;
 }
 
 path dogen_generation::input_masd_dogen_extraction_dia() {
     ensure_initialized();
-    return project_directory_ / models_dia_dir / path_masd_dogen_extraction_dia;
+    return dia_models_directory_ / path_masd_dogen_extraction_dia;
 }
 
 path dogen_generation::input_masd_dogen_generation_cpp_dia() {
     ensure_initialized();
-    return project_directory_ / models_dia_dir /
-        path_masd_dogen_generation_cpp_dia;
+    return dia_models_directory_ / path_masd_dogen_generation_cpp_dia;
 }
 
 path dogen_generation::input_masd_dogen_generation_csharp_dia() {
     ensure_initialized();
-    return project_directory_ / models_dia_dir /
-        path_masd_dogen_generation_csharp_dia;
+    return dia_models_directory_ / path_masd_dogen_generation_csharp_dia;
 }
 
 path dogen_generation::input_masd_dogen_generation_dia() {
     ensure_initialized();
-    return project_directory_ / models_dia_dir / path_masd_dogen_generation_dia;
+    return dia_models_directory_ / path_masd_dogen_generation_dia;
 }
 
 path dogen_generation::input_masd_dogen_injection_dia() {
     ensure_initialized();
-    return project_directory_ / models_dia_dir / path_masd_dogen_injection_dia;
+    return dia_models_directory_ / path_masd_dogen_injection_dia;
 }
 
 path dogen_generation::input_masd_dogen_injection_dia_dia() {
     ensure_initialized();
-    return project_directory_ / models_dia_dir /
-        path_masd_dogen_injection_dia_dia;
+    return dia_models_directory_ / path_masd_dogen_injection_dia_dia;
 }
 
 path dogen_generation::input_masd_dogen_injection_json_dia() {
     ensure_initialized();
-    return project_directory_ / models_dia_dir /
-        path_masd_dogen_injection_json_dia;
+    return dia_models_directory_ / path_masd_dogen_injection_json_dia;
 }
 
 path dogen_generation::input_masd_dogen_orchestration_dia() {
     ensure_initialized();
-    return project_directory_ / models_dia_dir / path_masd_dogen_orchestration_dia;
+    return dia_models_directory_ / path_masd_dogen_orchestration_dia;
 }
 
 path dogen_generation::input_masd_dogen_templating_dia() {
     ensure_initialized();
-    return project_directory_ / models_dia_dir / path_masd_dogen_templating_dia;
+    return dia_models_directory_ / path_masd_dogen_templating_dia;
 }
 
 path dogen_generation::input_masd_dogen_tracing_dia() {
     ensure_initialized();
-    return project_directory_ / models_dia_dir / path_masd_dogen_tracing_dia;
+    return dia_models_directory_ / path_masd_dogen_tracing_dia;
 }
 
 path dogen_generation::input_masd_dogen_utility_dia() {
     ensure_initialized();
-    return project_directory_ / models_dia_dir / path_masd_dogen_utility_dia;
+    return dia_models_directory_ / path_masd_dogen_utility_dia;
 }
 
 path dogen_generation::input_masd_dogen_annotations_json() {
     ensure_initialized();
-    return project_directory_ / models_json_dir /
-        path_masd_dogen_annotations_json;
+    return json_models_directory_ / path_masd_dogen_annotations_json;
 }
 
 path dogen_generation::input_masd_dogen_cli_json() {
     ensure_initialized();
-    return project_directory_ / models_json_dir / path_masd_dogen_cli_json;
+    return json_models_directory_ / path_masd_dogen_cli_json;
 }
 
 path dogen_generation::input_masd_dogen_coding_json() {
     ensure_initialized();
-    return project_directory_ / models_json_dir / path_masd_dogen_coding_json;
+    return json_models_directory_ / path_masd_dogen_coding_json;
 }
 
 path dogen_generation::input_masd_dogen_json() {
     ensure_initialized();
-    return project_directory_ / models_json_dir / path_masd_dogen_json;
+    return json_models_directory_ / path_masd_dogen_json;
 }
 
 path dogen_generation::input_masd_dogen_dia_json() {
     ensure_initialized();
-    return project_directory_ / models_json_dir / path_masd_dogen_dia_json;
+    return json_models_directory_ / path_masd_dogen_dia_json;
 }
 
 path dogen_generation::input_masd_dogen_extraction_json() {
     ensure_initialized();
-    return project_directory_ / models_json_dir /
-        path_masd_dogen_extraction_json;
+    return json_models_directory_ / path_masd_dogen_extraction_json;
 }
 
 path dogen_generation::input_masd_dogen_generation_cpp_json() {
     ensure_initialized();
-    return project_directory_ / models_json_dir /
-        path_masd_dogen_generation_cpp_json;
+    return json_models_directory_ / path_masd_dogen_generation_cpp_json;
 }
 
 path dogen_generation::input_masd_dogen_generation_csharp_json() {
     ensure_initialized();
-    return project_directory_ / models_json_dir /
-        path_masd_dogen_generation_csharp_json;
+    return json_models_directory_ / path_masd_dogen_generation_csharp_json;
 }
 
 path dogen_generation::input_masd_dogen_generation_json() {
     ensure_initialized();
-    return project_directory_ / models_json_dir /
-        path_masd_dogen_generation_json;
+    return json_models_directory_ / path_masd_dogen_generation_json;
 }
 
 path dogen_generation::input_masd_dogen_injection_json() {
     ensure_initialized();
-    return project_directory_ / models_json_dir /
-        path_masd_dogen_injection_json;
+    return json_models_directory_ / path_masd_dogen_injection_json;
 }
 
 path dogen_generation::input_masd_dogen_injection_dia_json() {
     ensure_initialized();
-    return project_directory_ / models_json_dir /
-        path_masd_dogen_injection_dia_json;
+    return json_models_directory_ / path_masd_dogen_injection_dia_json;
 }
 
 path dogen_generation::input_masd_dogen_injection_json_json() {
     ensure_initialized();
-    return project_directory_ / models_json_dir /
-        path_masd_dogen_injection_json_json;
+    return json_models_directory_ / path_masd_dogen_injection_json_json;
 }
 
 path dogen_generation::input_masd_dogen_orchestration_json() {
     ensure_initialized();
-    return project_directory_ / models_json_dir /
-        path_masd_dogen_orchestration_json;
+    return json_models_directory_ / path_masd_dogen_orchestration_json;
 }
 
 path dogen_generation::input_masd_dogen_templating_json() {
     ensure_initialized();
-    return project_directory_ / models_json_dir /
-        path_masd_dogen_templating_json;
+    return json_models_directory_ / path_masd_dogen_templating_json;
 }
 
 path dogen_generation::input_masd_dogen_tracing_json() {
     ensure_initialized();
-    return project_directory_ / models_json_dir / path_masd_dogen_tracing_json;
+    return json_models_directory_ / path_masd_dogen_tracing_json;
 }
 
 path dogen_generation::input_masd_dogen_utility_json() {
     ensure_initialized();
-    return project_directory_ / models_json_dir / path_masd_dogen_utility_json;
+    return json_models_directory_ / path_masd_dogen_utility_json;
 }
 
 }

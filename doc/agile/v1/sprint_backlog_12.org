@@ -13,40 +13,40 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-08 Fri 18:42]
+#+CAPTION: Clock summary at [2019-03-09 Sat 07:23]
 | <75>                                                         |         |       |       |       |
 | Headline                                                     | Time    |       |       |     % |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                 | *77:06* |       |       | 100.0 |
+| *Total time*                                                 | *79:27* |       |       | 100.0 |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                      | 77:06   |       |       | 100.0 |
-| Active                                                       |         | 77:06 |       | 100.0 |
-| Edit release notes for previous sprint                       |         |       |  1:27 |   1.9 |
-| Sprint and product backlog grooming                          |         |       |  1:32 |   2.0 |
-| Implement text model generation chain in generation          |         |       |  3:45 |   4.9 |
-| Move generation model out of coding                          |         |       |  4:22 |   5.7 |
-| Rename endomodel to just model                               |         |       |  2:11 |   2.8 |
+| Stories                                                      | 79:27   |       |       | 100.0 |
+| Active                                                       |         | 79:27 |       | 100.0 |
+| Edit release notes for previous sprint                       |         |       |  1:27 |   1.8 |
+| Sprint and product backlog grooming                          |         |       |  1:32 |   1.9 |
+| Implement text model generation chain in generation          |         |       |  3:45 |   4.7 |
+| Move generation model out of coding                          |         |       |  4:22 |   5.5 |
+| Rename endomodel to just model                               |         |       |  2:11 |   2.7 |
 | Remove exomodel remnants                                     |         |       |  0:03 |   0.1 |
-| Consider adding a dot graph of the transforms to probing     |         |       |  1:47 |   2.3 |
-| Split annotations processing into two phases                 |         |       |  3:10 |   4.1 |
-| Move injection processing out of coding                      |         |       | 18:39 |  24.2 |
+| Consider adding a dot graph of the transforms to probing     |         |       |  1:47 |   2.2 |
+| Split annotations processing into two phases                 |         |       |  3:10 |   4.0 |
+| Move injection processing out of coding                      |         |       | 18:39 |  23.5 |
 | Create a extraction model post-processing chain              |         |       |  0:56 |   1.2 |
 | Move coding to generation model transform into orchestration |         |       |  0:33 |   0.7 |
-| Add option for northwind tests                               |         |       |  0:54 |   1.2 |
-| Add DTL to vcpkg                                             |         |       |  5:15 |   6.8 |
-| Remove coding options                                        |         |       |  3:59 |   5.2 |
-| Add basic "diff mode"                                        |         |       | 12:02 |  15.6 |
+| Add option for northwind tests                               |         |       |  0:54 |   1.1 |
+| Add DTL to vcpkg                                             |         |       |  5:15 |   6.6 |
+| Remove coding options                                        |         |       |  3:59 |   5.0 |
+| Add basic "diff mode"                                        |         |       | 12:02 |  15.1 |
 | Create a "run byproducts" directory                          |         |       |  1:01 |   1.3 |
-| Logging impact in tracing is blank                           |         |       |  0:50 |   1.1 |
+| Logging impact in tracing is blank                           |         |       |  0:50 |   1.0 |
 | Split operation reports from patches                         |         |       |  1:19 |   1.7 |
-| Add org mode support to diff reports                         |         |       |  1:13 |   1.6 |
+| Add org mode support to diff reports                         |         |       |  1:13 |   1.5 |
 | Add dry mode                                                 |         |       |  0:27 |   0.6 |
 | Split extraction model generation from code generation       |         |       |  0:29 |   0.6 |
 | Rename the =transform= method to =apply=                     |         |       |  0:05 |   0.1 |
 | Try to fix valgrind warning on =find_files=                  |         |       |  0:20 |   0.4 |
-| Fix northwind tests on OSX and Windows                       |         |       |  1:04 |   1.4 |
+| Fix northwind tests on OSX and Windows                       |         |       |  1:04 |   1.3 |
 | Update metrics in OpenHub                                    |         |       |  0:18 |   0.4 |
-| Rework the system tests using diff mode                      |         |       |  9:25 |  12.2 |
+| Rework the system tests using diff mode                      |         |       | 11:46 |  14.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -987,6 +987,9 @@ actually mildly useful to know the number of lines of code etc.
 
 *** STARTED Rework the system tests using diff mode                   :story:
     :LOGBOOK:
+    CLOCK: [2019-03-09 Sat 07:15]--[2019-03-09 Sat 07:23] =>  0:08
+    CLOCK: [2019-03-09 Sat 06:06]--[2019-03-09 Sat 07:14] =>  1:08
+    CLOCK: [2019-03-08 Fri 19:14]--[2019-03-08 Fri 20:19] =>  1:05
     CLOCK: [2019-03-08 Fri 17:52]--[2019-03-08 Fri 18:41] =>  0:49
     CLOCK: [2019-03-08 Fri 17:22]--[2019-03-08 Fri 17:51] =>  0:29
     CLOCK: [2019-03-08 Fri 15:03]--[2019-03-08 Fri 17:02] =>  1:59

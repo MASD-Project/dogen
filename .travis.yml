@@ -63,7 +63,7 @@ addons:
       - ubuntu-toolchain-r-test
 
 install:
-  - export MASD_DOGEN_PROJECT_DIRECTORY=${TRAVIS_BUILD_DIR}/projects
+  - export MASD_DOGEN_PROJECTS_DIRECTORY=${TRAVIS_BUILD_DIR}/projects
   - export STAGE_DIR=${TRAVIS_BUILD_DIR}/build/output/${compiler}/${configuration}/stage
   - export SCRIPTS_DIR=${TRAVIS_BUILD_DIR}/build/scripts
   - source ${SCRIPTS_DIR}/travis.install.${TRAVIS_OS_NAME}.sh

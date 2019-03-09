@@ -85,6 +85,8 @@ public:
 
 private:
     static boost::filesystem::path project_directory_;
+    static boost::filesystem::path dia_models_directory_;
+    static boost::filesystem::path json_models_directory_;
     static boost::filesystem::path output_directory_;
 };
 
