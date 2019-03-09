@@ -93,4 +93,4 @@ Write-Host "URL: $csharp_ref_impl_input_location"
 Write-Host "Download location: $csharp_ref_impl_downloads_location"
 Set-Location -Path $csharp_ref_impl_installs_dir | Out-Null
 7z x $csharp_ref_impl_downloads_location > $null
-Get-ChildItem csharp_ref_impl_installs_dir
+Get-ChildItem $csharp_ref_impl_installs_dir
