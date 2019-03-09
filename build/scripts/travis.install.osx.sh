@@ -34,3 +34,18 @@ curl -L -o ${vcpkg_output_location} ${vcpkg_input_location}
 unzip -q ${vcpkg_output_location} -d ${vcpkg_extract_dir}
 mv ${vcpkg_extract_dir}/${vcpkg_folder} ${vcpkg_extract_dir}/${vcpkg_final_folder}
 echo "vcpkg version: ${vcpkg_folder}"
+
+#
+# Reference models
+#
+cpp_ref_impl_input_location="https://github.com/MASD-Project/cpp_ref_impl/archive/master.zip"
+cpp_ref_impl_output_location="/tmp/cpp_ref_impl.zip"
+cpp_ref_impl_extract_dir="/tmp"
+curl -L -o ${cpp_ref_impl_output_location} ${cpp_ref_impl_input_location}
+unzip -q ${cpp_ref_impl_output_location} -d ${cpp_ref_impl_extract_dir}
+
+csharp_ref_impl_input_location="https://github.com/MASD-Project/csharp_ref_impl/archive/master.zip"
+csharp_ref_impl_output_location="/tmp/csharp_ref_impl.zip"
+csharp_ref_impl_extract_dir="/tmp"
+curl -L -o ${csharp_ref_impl_output_location} ${csharp_ref_impl_input_location}
+unzip -q ${csharp_ref_impl_output_location} -d ${csharp_ref_impl_extract_dir}
