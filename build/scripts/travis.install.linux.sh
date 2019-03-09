@@ -120,13 +120,13 @@ echo "Cleaned cache."
 # Reference models
 #
 cpp_ref_impl_input_location="https://github.com/MASD-Project/cpp_ref_impl/archive/master.zip"
-cpp_ref_impl_output_location="/tmp/"
+cpp_ref_impl_output_location="/tmp/cpp_ref_impl.zip"
 cpp_ref_impl_extract_dir="/tmp"
 wget --no-check-certificate ${cpp_ref_impl_input_location} -O ${cpp_ref_impl_output_location}
 unzip -q ${cpp_ref_impl_output_location} -d ${cpp_ref_impl_extract_dir}
 
 csharp_ref_impl_input_location="https://github.com/MASD-Project/csharp_ref_impl/archive/master.zip"
-csharp_ref_impl_output_location="/tmp/"
+csharp_ref_impl_output_location="/tmp/csharp_ref_impl.zip"
 csharp_ref_impl_extract_dir="/tmp"
 wget --no-check-certificate ${csharp_ref_impl_input_location} -O ${csharp_ref_impl_output_location}
 unzip -q ${csharp_ref_impl_output_location} -d ${csharp_ref_impl_extract_dir}
