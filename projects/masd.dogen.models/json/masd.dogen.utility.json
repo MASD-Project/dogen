@@ -594,6 +594,25 @@
         "masd::exception"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "environment",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "environment::environment_exception",
+      "documentation": "There was an error reading an environment variable.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "environment::variable_reader",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
