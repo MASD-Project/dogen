@@ -25,24 +25,43 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <boost/filesystem/path.hpp>
 
 namespace masd::dogen::utility::test_data {
 
 class csharp_ref_impl_generation final {
 public:
-    csharp_ref_impl_generation() = default;
-    csharp_ref_impl_generation(const csharp_ref_impl_generation&) = default;
-    csharp_ref_impl_generation(csharp_ref_impl_generation&&) = default;
-    ~csharp_ref_impl_generation() = default;
-    csharp_ref_impl_generation& operator=(const csharp_ref_impl_generation&) = default;
+    csharp_ref_impl_generation() = delete;
+    csharp_ref_impl_generation(const csharp_ref_impl_generation&) = delete;
+    csharp_ref_impl_generation(csharp_ref_impl_generation&&) = delete;
+    ~csharp_ref_impl_generation() = delete;
+    csharp_ref_impl_generation& operator=(const csharp_ref_impl_generation&) = delete;
 
 public:
-    bool operator==(const csharp_ref_impl_generation& rhs) const;
-    bool operator!=(const csharp_ref_impl_generation& rhs) const {
-        return !this->operator==(rhs);
-    }
+    static void initialize();
 
+private:
+    static void ensure_initialized();
+
+public:
+    static boost::filesystem::path project_directory();
+    static boost::filesystem::path output_directory();
+
+public:
+    static boost::filesystem::path input_masd_csharprefimpl_csharpmodel_dia();
+    static boost::filesystem::path input_masd_csharprefimpl_directorysettings_dia();
+    static boost::filesystem::path input_masd_csharprefimpl_lammodel_dia();
+
+    static boost::filesystem::path input_masd_csharprefimpl_csharpmodel_json();
+    static boost::filesystem::path 
+input_masd_csharprefimpl_directorysettings_json();
+    static boost::filesystem::path input_masd_csharprefimpl_lammodel_json();
+
+private:
+    static boost::filesystem::path project_directory_;
+    static boost::filesystem::path dia_models_directory_;
+    static boost::filesystem::path json_models_directory_;
+    static boost::filesystem::path output_directory_;
 };
 
 }

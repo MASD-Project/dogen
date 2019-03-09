@@ -174,7 +174,6 @@ void cpp_ref_impl_generation::initialize() {
     }
     BOOST_LOG_SEV(lg, debug) << "Created output data directory: "
                              << output_directory_.generic_string();
-
 }
 
 void cpp_ref_impl_generation::ensure_initialized() {
