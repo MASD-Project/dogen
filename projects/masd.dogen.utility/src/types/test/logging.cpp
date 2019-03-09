@@ -24,6 +24,19 @@
 #include "masd.dogen.utility/types/log/logging_configuration.hpp"
 #include "masd.dogen.utility/types/test/logging.hpp"
 
+namespace {
+
+/*
+ * By default we don't do any logging to make test execution snappy
+ * for the happy path. Set on when investigating test breaks.
+ * WARNING: remember to set it back afterwards.
+ */
+bool logging_enabled(false);
+using masd::dogen::utility::log::severity_level;
+const severity_level severity(severity_level::trace);
+
+}
+
 namespace masd::dogen::utility::test {
 
 void log_if_test_has_failed() {
@@ -40,19 +53,19 @@ dogen::utility::log::scoped_lifecycle_manager
 scoped_lifecycle_manager_factory(std::string test_module,
     std::string test_suite, std::string function_name) {
 
+    using namespace masd::dogen::utility::log;
+    if (!logging_enabled) {
+        boost::optional<logging_configuration> cfg;
+        return scoped_lifecycle_manager(cfg);
+    }
+
     std::ostringstream s;
     s << "log/" << test_module << "/" << test_suite << "/" << function_name;
 
-    using namespace masd::dogen::utility::log;
     logging_configuration cfg;
     cfg.filename(s.str());
+    cfg.severity(severity);
 
-    /*
-     * We keep the log files light to make test execution snappy for
-     * the happy path. Set it to trace when investigating test breaks.
-     * WARNING: remember to set it back afterwards.
-    */
-    cfg.severity(severity_level::info);
     return scoped_lifecycle_manager(cfg);
 }
 
