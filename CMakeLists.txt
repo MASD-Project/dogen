@@ -45,6 +45,15 @@ else()
         "MASD_CPP_REF_IMPL_PROJECTS_DIRECTORY env variable not defined, disabling reference implementation tests.")
 endif()
 
+if (DEFINED ENV{MASD_CSHARP_REF_IMPL_PROJECTS_DIRECTORY})
+    message(STATUS
+        "MASD_CSHARP_REF_IMPL_PROJECTS_DIRECTORY=$ENV{MASD_CSHARP_REF_IMPL_PROJECTS_DIRECTORY}")
+    add_compile_definitions(ENABLE_CSHARP_REF_IMPL_TESTS)
+else()
+    message(STATUS
+        "MASD_CSHARP_REF_IMPL_PROJECTS_DIRECTORY env variable not defined, disabling reference implementation tests.")
+endif()
+
 #
 # Setup CCache
 #

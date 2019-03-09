@@ -24,6 +24,7 @@
 #include "masd.dogen.utility/types/test/fixture.hpp"
 #include "masd.dogen.utility/types/test_data/dogen_generation.hpp"
 #include "masd.dogen.utility/types/test_data/cpp_ref_impl_generation.hpp"
+#include "masd.dogen.utility/types/test_data/csharp_ref_impl_generation.hpp"
 #include "masd.dogen.generation.csharp/types/initializer.hpp"
 #include "masd.dogen.generation.cpp/types/initializer.hpp"
 #include "masd.dogen.injection.json/types/initializer.hpp"
@@ -43,7 +44,12 @@ struct initializer {
         masd::dogen::generation::csharp::initializer::initialize();
         masd::dogen::generation::cpp::initializer::initialize();
         masd::dogen::utility::test_data::dogen_generation::initialize();
+#ifdef ENABLE_CPP_REF_IMPL_TESTS
         masd::dogen::utility::test_data::cpp_ref_impl_generation::initialize();
+#endif // ENABLE_CPP_REF_IMPL_TESTS
+#ifdef ENABLE_CSHARP_REF_IMPL_TESTS
+        masd::dogen::utility::test_data::csharp_ref_impl_generation::initialize();
+#endif // ENABLE_CSHARP_REF_IMPL_TESTS
     }
 };
 

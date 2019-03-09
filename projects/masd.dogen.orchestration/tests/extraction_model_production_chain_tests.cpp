@@ -26,6 +26,7 @@
 #include "masd.dogen.utility/types/test/logging.hpp"
 #include "masd.dogen.utility/types/test_data/dogen_generation.hpp"
 #include "masd.dogen.utility/types/test_data/cpp_ref_impl_generation.hpp"
+#include "masd.dogen.utility/types/test_data/csharp_ref_impl_generation.hpp"
 #include "masd.dogen.extraction/io/meta_model/operation_io.hpp"
 #include "masd.dogen.orchestration/types/transforms/scoped_context_manager.hpp"
 #include "masd.dogen.orchestration/types/transforms/extraction_model_production_chain.hpp"
@@ -436,6 +437,37 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_two_layers_with_objects_dia_produces_expe
 
 #endif // ENABLE_CPP_REF_IMPL_TESTS
 
+#ifdef ENABLE_CSHARP_REF_IMPL_TESTS
+
+BOOST_AUTO_TEST_CASE(masd_csharprefimpl_csharpmodel_dia_produces_expected_model) {
+    SETUP_TEST_LOG("masd_csharprefimpl_csharpmodel_dia_produces_expected_model");
+    using masd::dogen::utility::test_data::csharp_ref_impl_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(csharp_ref_impl_generation::input_masd_csharprefimpl_csharpmodel_dia());
+    const auto od(csharp_ref_impl_generation::project_directory());
+    BOOST_CHECK(test_extraction_model_production(t, od, ep));
+}
+
+BOOST_AUTO_TEST_CASE(masd_csharprefimpl_directorysettings_dia_produces_expected_model) {
+    SETUP_TEST_LOG("masd_csharprefimpl_directorysettings_dia_produces_expected_model");
+    using masd::dogen::utility::test_data::csharp_ref_impl_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(csharp_ref_impl_generation::input_masd_csharprefimpl_directorysettings_dia());
+    const auto od(csharp_ref_impl_generation::project_directory());
+    BOOST_CHECK(test_extraction_model_production(t, od, ep));
+}
+
+BOOST_AUTO_TEST_CASE(masd_csharprefimpl_lammodel_dia_produces_expected_model) {
+    SETUP_TEST_LOG("masd_csharprefimpl_lammodel_dia_produces_expected_model");
+    using masd::dogen::utility::test_data::csharp_ref_impl_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(csharp_ref_impl_generation::input_masd_csharprefimpl_lammodel_dia());
+    const auto od(csharp_ref_impl_generation::project_directory());
+    BOOST_CHECK(test_extraction_model_production(t, od, ep));
+}
+
+#endif // ENABLE_CSHARP_REF_IMPL_TESTS
+
 #endif // ENABLE_DIA_TESTS
 
 #ifdef ENABLE_JSON_TESTS
@@ -741,6 +773,36 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_two_layers_with_objects_json_produces_exp
 
 #endif // ENABLE_CPP_REF_IMPL_TESTS
 
+#ifdef ENABLE_CSHARP_REF_IMPL_TESTS
+
+BOOST_AUTO_TEST_CASE(masd_csharprefimpl_csharpmodel_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_csharprefimpl_csharpmodel_json_produces_expected_model");
+    using masd::dogen::utility::test_data::csharp_ref_impl_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(csharp_ref_impl_generation::input_masd_csharprefimpl_csharpmodel_json());
+    const auto od(csharp_ref_impl_generation::project_directory());
+    BOOST_CHECK(test_extraction_model_production(t, od, ep));
+}
+
+BOOST_AUTO_TEST_CASE(masd_csharprefimpl_directorysettings_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_csharprefimpl_directorysettings_json_produces_expected_model");
+    using masd::dogen::utility::test_data::csharp_ref_impl_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(csharp_ref_impl_generation::input_masd_csharprefimpl_directorysettings_json());
+    const auto od(csharp_ref_impl_generation::project_directory());
+    BOOST_CHECK(test_extraction_model_production(t, od, ep));
+}
+
+BOOST_AUTO_TEST_CASE(masd_csharprefimpl_lammodel_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_csharprefimpl_lammodel_json_produces_expected_model");
+    using masd::dogen::utility::test_data::csharp_ref_impl_generation;
+    const bool ep(false/*enable tracing locally*/);
+    const auto t(csharp_ref_impl_generation::input_masd_csharprefimpl_lammodel_json());
+    const auto od(csharp_ref_impl_generation::project_directory());
+    BOOST_CHECK(test_extraction_model_production(t, od, ep));
+}
+
+#endif // ENABLE_CSHARP_REF_IMPL_TESTS
 
 #endif // ENABLE_JSON_TESTS
 
