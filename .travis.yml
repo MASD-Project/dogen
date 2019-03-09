@@ -64,6 +64,8 @@ addons:
 
 install:
   - export MASD_DOGEN_PROJECTS_DIRECTORY=${TRAVIS_BUILD_DIR}/projects
+  - export MASD_CPP_REF_IMPL_PROJECTS_DIRECTORY=/tmp/cpp_ref_impl-master/projects
+  - export MASD_CSHARP_REF_IMPL_SRC_DIRECTORY=/tmp/csharp_ref_impl-master/Src/
   - export STAGE_DIR=${TRAVIS_BUILD_DIR}/build/output/${compiler}/${configuration}/stage
   - export SCRIPTS_DIR=${TRAVIS_BUILD_DIR}/build/scripts
   - source ${SCRIPTS_DIR}/travis.install.${TRAVIS_OS_NAME}.sh
