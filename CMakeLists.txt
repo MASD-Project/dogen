@@ -30,10 +30,19 @@ enable_testing()
 #
 if (DEFINED ENV{MASD_DOGEN_PROJECTS_DIRECTORY})
     message(STATUS
-        "MASD_DOGEN_PROJECT_DIRECTORY=$ENV{MASD_DOGEN_PROJECT_DIRECTORY}")
+        "MASD_DOGEN_PROJECTS_DIRECTORY=$ENV{MASD_DOGEN_PROJECTS_DIRECTORY}")
 else()
     message(FATAL_ERROR
         "MASD_DOGEN_PROJECT_DIRECTORY env variable not defined")
+endif()
+
+if (DEFINED ENV{MASD_CPP_REF_IMPL_PROJECTS_DIRECTORY})
+    message(STATUS
+        "MASD_CPP_REF_IMPL_PROJECTS_DIRECTORY=$ENV{MASD_CPP_REF_IMPL_PROJECTS_DIRECTORY}")
+    add_compile_definitions(ENABLE_CPP_REF_IMPL_TESTS)
+else()
+    message(STATUS
+        "MASD_CPP_REF_IMPL_PROJECTS_DIRECTORY env variable not defined, disabling reference implementation tests.")
 endif()
 
 #
