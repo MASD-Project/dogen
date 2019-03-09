@@ -35,8 +35,8 @@ const std::string dogen_project_directory_env("MASD_DOGEN_PROJECTS_DIRECTORY");
 const std::string project_dir_not_found(
     "Could not find project directory: ");
 const std::string not_initialized("Test data set is not initialized");
-const std::string failed_delete("Failed to delete tracer data directory.");
-const std::string failed_create("Failed to create tracer data directory.");
+const std::string failed_delete("Failed to delete output directory.");
+const std::string failed_create("Failed to create output directory.");
 
 const std::string output_dir("masd.dogen.code_generation_test_output");
 
@@ -83,10 +83,10 @@ using boost::filesystem::path;
 
 namespace masd::dogen::utility::test_data {
 
-boost::filesystem::path dogen_generation::project_directory_;
-boost::filesystem::path dogen_generation::dia_models_directory_;
-boost::filesystem::path dogen_generation::json_models_directory_;
-boost::filesystem::path dogen_generation::output_directory_;
+path dogen_generation::project_directory_;
+path dogen_generation::dia_models_directory_;
+path dogen_generation::json_models_directory_;
+path dogen_generation::output_directory_;
 
 void dogen_generation::initialize() {
     using environment::variable_reader;
