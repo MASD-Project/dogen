@@ -27,12 +27,11 @@
 
 #include <string>
 #include "masd.dogen.injection/types/meta_model/model.hpp"
-#include "masd.dogen.injection/types/transforms/decoding_transform_interface.hpp"
+#include "masd.dogen.injection/types/transforms/decoding_transform.hpp"
 
 namespace masd::dogen::injection::json {
 
-class decoding_transform final
-    : public transforms::decoding_transform_interface {
+class decoding_transform final : public transforms::decoding_transform {
 public:
     decoding_transform() = default;
     decoding_transform(const decoding_transform&) = delete;
@@ -41,7 +40,7 @@ public:
 public:
     std::string extension() const;
 
-    meta_model::model transform(const transforms::context& ctx,
+    meta_model::model apply(const transforms::context& ctx,
         const boost::filesystem::path& p);
 };
 

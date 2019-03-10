@@ -33,6 +33,11 @@
 
 namespace masd::dogen::injection::transforms {
 
+/**
+ * @brief Reads the input language from the model.
+ *
+ * @pre Annotations transform must have been applied.
+ */
 class input_language_transform final {
 private:
     struct type_group {
@@ -45,7 +50,7 @@ private:
         const annotations::annotation& a);
 
 public:
-    static void transform(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

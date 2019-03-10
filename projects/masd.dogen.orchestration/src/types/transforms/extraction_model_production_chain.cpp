@@ -41,7 +41,6 @@ auto lg(logger_factory(transform_id));
 
 }
 
-
 namespace masd::dogen::orchestration::transforms {
 
 extraction::meta_model::model extraction_model_production_chain::
@@ -59,7 +58,7 @@ transform(const context& ctx,
      * Obtain the injection model set.
      */
     using injection::transforms::model_set_production_chain;
-    const auto ims(model_set_production_chain::transform(
+    const auto ims(model_set_production_chain::apply(
             ctx.injection_context(), target));
 
     /*

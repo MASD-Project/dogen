@@ -121,8 +121,8 @@ std::string decoding_transform::extension() const {
     return ::extension;
 }
 
-injection::meta_model::model decoding_transform::
-transform(const injection::transforms::context& ctx,
+injection::meta_model::model
+decoding_transform::apply(const injection::transforms::context& ctx,
     const boost::filesystem::path& p) {
 
     BOOST_LOG_SEV(lg, debug) << "Reading Dia diagram.";

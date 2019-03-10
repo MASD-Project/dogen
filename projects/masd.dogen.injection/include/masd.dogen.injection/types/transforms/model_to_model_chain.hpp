@@ -29,25 +29,28 @@
 #include <boost/tuple/tuple.hpp>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.injection/types/transforms/context_fwd.hpp"
-#include "masd.dogen.injection/types/transforms/encoding_transform_interface.hpp"
-#include "masd.dogen.injection/types/transforms/decoding_transform_interface.hpp"
+#include "masd.dogen.injection/types/transforms/encoding_transform.hpp"
+#include "masd.dogen.injection/types/transforms/decoding_transform.hpp"
 
 namespace masd::dogen::injection::transforms {
 
+/**
+ * @brief Converts an external model of a given type into another
+ * external model of another type.
+ */
 class model_to_model_chain final {
 public:
     /**
      * @note Using boost tuple as we can't get pair to work with
      * references.
      */
-    static boost::tuple<decoding_transform_interface&,
-                        encoding_transform_interface&>
+    static boost::tuple<decoding_transform&, encoding_transform&>
     obtain_transforms(
         const boost::filesystem::path& src_path,
         const boost::filesystem::path& dst_path);
 
 public:
-    static void transform(const transforms::context& ctx,
+    static void apply(const transforms::context& ctx,
         const boost::filesystem::path& src_path,
         const boost::filesystem::path& dst_path);
 };

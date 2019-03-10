@@ -43,7 +43,7 @@ void converter::convert(const configuration& cfg,
         using namespace transforms;
         scoped_injection_context_manager scim(cfg);
         using namespace masd::dogen::injection::transforms;
-        model_to_model_chain::transform(scim.context(), source, destination);
+        model_to_model_chain::apply(scim.context(), source, destination);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished conversion.";

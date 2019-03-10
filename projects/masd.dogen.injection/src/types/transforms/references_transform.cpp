@@ -76,7 +76,7 @@ make_references(const type_group& tg, const annotations::annotation& a) {
     return std::list<std::string>{};
 }
 
-void references_transform::transform(const context& ctx, meta_model::model& m) {
+void references_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "references transform",
         transform_id, m.name(), *ctx.tracer(), m);
 

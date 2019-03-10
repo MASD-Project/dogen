@@ -33,6 +33,9 @@
 
 namespace masd::dogen::injection::transforms {
 
+/**
+ * @brief Produces an injection model set.
+ */
 class model_set_production_chain final {
 private:
     static std::list<boost::filesystem::path>
@@ -46,7 +49,7 @@ private:
 
 public:
     static meta_model::model_set
-    transform(const context& ctx, const boost::filesystem::path& p);
+    apply(const context& ctx, const boost::filesystem::path& p);
 };
 
 }

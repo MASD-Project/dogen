@@ -66,7 +66,7 @@ model_set_production_chain::transform(const context& ctx,
     BOOST_LOG_SEV(lg, trace) << "Processing: " << p.generic();
 
     std::list<meta_model::model> r;
-    r.push_back(model_production_chain::transform(ctx, p));
+    r.push_back(model_production_chain::apply(ctx, p));
     BOOST_LOG_SEV(lg, trace) << "References: " << r.front().references();
     for (const auto& ref : r.front().references()) {
         BOOST_LOG_SEV(lg, trace) << "Attempting to process reference: " << ref;
@@ -86,7 +86,7 @@ model_set_production_chain::transform(const context& ctx,
 }
 
 meta_model::model_set
-model_set_production_chain::transform(const context& ctx,
+model_set_production_chain::apply(const context& ctx,
     const boost::filesystem::path& p) {
     const auto mn(p.filename().string());
     tracing::scoped_chain_tracer stp(lg, "injection model set production chain",

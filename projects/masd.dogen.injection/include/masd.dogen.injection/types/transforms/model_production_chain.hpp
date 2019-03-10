@@ -42,7 +42,7 @@ private:
      * @brief Given a path to an external model, returns the
      * appropriate decoding transform for it.
      */
-    static decoding_transform_interface&
+    static decoding_transform&
     transform_for_model(const boost::filesystem::path& p);
 
 public:
@@ -60,7 +60,7 @@ public:
      * external model.
      */
     static meta_model::model
-    transform(const context& ctx, const boost::filesystem::path& p);
+    apply(const context& ctx, const boost::filesystem::path& p);
 
 private:
     static std::shared_ptr<transforms::registrar> registrar_;

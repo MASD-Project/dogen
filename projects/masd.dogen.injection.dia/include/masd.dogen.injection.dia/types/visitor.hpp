@@ -41,8 +41,7 @@ public:
     visitor(visitor&&) = default;
 
 public:
-    explicit visitor(builder& b);
-
+    explicit visitor(builder& b) : builder_(b) {}
 public:
     template<typename Vertex, typename Graph>
     void finish_vertex(const Vertex& u, const Graph& g) {

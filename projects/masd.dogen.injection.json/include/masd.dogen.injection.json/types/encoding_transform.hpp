@@ -26,12 +26,11 @@
 #endif
 
 #include "masd.dogen.injection/types/meta_model/model.hpp"
-#include "masd.dogen.injection/types/transforms/encoding_transform_interface.hpp"
+#include "masd.dogen.injection/types/transforms/encoding_transform.hpp"
 
 namespace masd::dogen::injection::json {
 
-class encoding_transform final
-    : public transforms::encoding_transform_interface {
+class encoding_transform final : public transforms::encoding_transform {
 public:
     encoding_transform() = default;
     encoding_transform(const encoding_transform&) = delete;
@@ -40,7 +39,7 @@ public:
 public:
     std::string extension() const;
 
-    void transform(const transforms::context& ctx,
+    void apply(const transforms::context& ctx,
         const meta_model::model& m, const boost::filesystem::path& p);
 };
 

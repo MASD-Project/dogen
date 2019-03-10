@@ -31,14 +31,22 @@
  * An external model is defined as:
  *
  * - a third-party format that is not owned or controlled by
- *   Dogen, such as Dia
+ *   Dogen, such as Dia;
  * - a Dogen format designed for interoperability (JSON).
  *
  * External models are converted into an intermediate format called
- * the @e injection model, at which point they are in a suitable
- * form to be injected into Dogen for further processing. A @e codec
- * must be created for each external model, providing a transformation
- * between these native formats and the injection model.
+ * the @e injection model, because it is the original entry point into
+ * the dogen processing pipeline. It also reflects the notion that we
+ * are injecting external technical spaces into the MASD technical
+ * technical space.
+ *
+ * A @e codec must be created for each external model that is to be
+ * injected, providing a transformation between the native formats
+ * and the injection model. The codecs are created in their own models,
+ * following the naming convention injection.X for a given codec X.
+ * They then register against the injection registrar. Note that for a
+ * given file extension, there can only be one and only one codec to
+ * manage it.
  */
 namespace masd::dogen::injection {
 }

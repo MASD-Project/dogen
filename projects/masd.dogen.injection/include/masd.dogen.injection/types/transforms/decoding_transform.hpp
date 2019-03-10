@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_DECODING_TRANSFORM_INTERFACE_HPP
-#define MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_DECODING_TRANSFORM_INTERFACE_HPP
+#ifndef MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_DECODING_TRANSFORM_HPP
+#define MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_DECODING_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,14 +33,14 @@
 namespace masd::dogen::injection::transforms {
 
 /**
- * @brief Transform that converts exogenous models into our injection
+ * @brief Transform that converts extennal models into our injection
  * model representation.
  */
-class decoding_transform_interface {
+class decoding_transform {
 public:
-    decoding_transform_interface() = default;
-    decoding_transform_interface(const decoding_transform_interface&) = delete;
-    virtual ~decoding_transform_interface() noexcept = 0;
+    decoding_transform() = default;
+    decoding_transform(const decoding_transform&) = delete;
+    virtual ~decoding_transform() noexcept = default;
 
 public:
     /**
@@ -51,9 +51,10 @@ public:
 
     /**
      * @brief Transforms the model at the supplied path into our
-     * internal representation of an injection model.
+     * internal representation of an injection model. The extension is
+     * used to find the appropriate decoding code.
      *
-     * @param p Path to an injection model.
+     * @param p Path to an external model.
      *
      * @pre Model must conform to the format supported by the
      * transform.
@@ -66,10 +67,9 @@ public:
      * transform implementations cannot cope with string
      * processing. In the future this will change to a string.
      */
-    virtual meta_model::model transform(const context& ctx,
+    virtual meta_model::model apply(const context& ctx,
         const boost::filesystem::path& p) = 0;
 };
-
 
 }
 

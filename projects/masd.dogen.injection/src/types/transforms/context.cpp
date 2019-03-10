@@ -42,23 +42,11 @@ const std::vector<boost::filesystem::path>& context::data_directories() const {
     return data_directories_;
 }
 
-std::vector<boost::filesystem::path>& context::data_directories() {
-    return data_directories_;
-}
-
 void context::data_directories(const std::vector<boost::filesystem::path>& v) {
     data_directories_ = v;
 }
 
-void context::data_directories(const std::vector<boost::filesystem::path>&& v) {
-    data_directories_ = std::move(v);
-}
-
 const boost::shared_ptr<masd::dogen::annotations::type_repository>& context::type_repository() const {
-    return type_repository_;
-}
-
-boost::shared_ptr<masd::dogen::annotations::type_repository>& context::type_repository() {
     return type_repository_;
 }
 
@@ -66,15 +54,7 @@ void context::type_repository(const boost::shared_ptr<masd::dogen::annotations::
     type_repository_ = v;
 }
 
-void context::type_repository(const boost::shared_ptr<masd::dogen::annotations::type_repository>&& v) {
-    type_repository_ = std::move(v);
-}
-
 const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& context::archetype_location_repository() const {
-    return archetype_location_repository_;
-}
-
-boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& context::archetype_location_repository() {
     return archetype_location_repository_;
 }
 
@@ -82,15 +62,7 @@ void context::archetype_location_repository(const boost::shared_ptr<masd::dogen:
     archetype_location_repository_ = v;
 }
 
-void context::archetype_location_repository(const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>&& v) {
-    archetype_location_repository_ = std::move(v);
-}
-
 const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& context::annotation_factory() const {
-    return annotation_factory_;
-}
-
-boost::shared_ptr<masd::dogen::annotations::annotation_factory>& context::annotation_factory() {
     return annotation_factory_;
 }
 
@@ -98,24 +70,12 @@ void context::annotation_factory(const boost::shared_ptr<masd::dogen::annotation
     annotation_factory_ = v;
 }
 
-void context::annotation_factory(const boost::shared_ptr<masd::dogen::annotations::annotation_factory>&& v) {
-    annotation_factory_ = std::move(v);
-}
-
 const boost::shared_ptr<masd::dogen::tracing::tracer>& context::tracer() const {
-    return tracer_;
-}
-
-boost::shared_ptr<masd::dogen::tracing::tracer>& context::tracer() {
     return tracer_;
 }
 
 void context::tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v) {
     tracer_ = v;
-}
-
-void context::tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>&& v) {
-    tracer_ = std::move(v);
 }
 
 }

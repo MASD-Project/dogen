@@ -76,7 +76,6 @@ const location empty_location = location();
 
 }
 
-
 namespace masd::dogen::orchestration::transforms {
 
 template<typename Element>
@@ -163,8 +162,10 @@ create_location(const naming_configuration& nc) {
     return r;
 }
 
-coding::meta_model::static_stereotypes injection_model_to_coding_model_transform::
-compute_element_type(const std::list<coding::meta_model::static_stereotypes>& st,
+coding::meta_model::static_stereotypes
+injection_model_to_coding_model_transform::
+compute_element_type(
+    const std::list<coding::meta_model::static_stereotypes>& st,
     const std::string& fallback_element_type) {
 
     /*
@@ -197,7 +198,8 @@ compute_element_type(const std::list<coding::meta_model::static_stereotypes>& st
 }
 
 void injection_model_to_coding_model_transform::
-process_element(const helpers::adapter& ad, const coding::meta_model::location& l,
+process_element(const helpers::adapter& ad,
+    const coding::meta_model::location& l,
     const injection::meta_model::element& e, coding::meta_model::model& em) {
 
     helpers::stereotypes_helper h;

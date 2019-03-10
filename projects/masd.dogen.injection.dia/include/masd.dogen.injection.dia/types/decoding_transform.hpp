@@ -32,12 +32,12 @@
 #include "masd.dogen.injection.dia/types/grapher.hpp"
 #include "masd.dogen.injection.dia/types/validator.hpp"
 #include "masd.dogen.injection.dia/types/processed_object.hpp"
-#include "masd.dogen.injection/types/transforms/decoding_transform_interface.hpp"
+#include "masd.dogen.injection/types/transforms/decoding_transform.hpp"
 
 namespace masd::dogen::injection::dia {
 
 class decoding_transform final
-    : public injection::transforms::decoding_transform_interface {
+    : public injection::transforms::decoding_transform {
 public:
     decoding_transform() = default;
     decoding_transform(const decoding_transform&) = delete;
@@ -62,7 +62,7 @@ public:
     std::string extension() const;
 
     meta_model::model
-    transform(const transforms::context& ctx, const boost::filesystem::path& p);
+    apply(const transforms::context& ctx, const boost::filesystem::path& p);
 };
 
 }

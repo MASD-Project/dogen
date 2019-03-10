@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_ENCODING_TRANSFORM_INTERFACE_HPP
-#define MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_ENCODING_TRANSFORM_INTERFACE_HPP
+#ifndef MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_ENCODING_TRANSFORM_HPP
+#define MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_ENCODING_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,11 +36,11 @@ namespace masd::dogen::injection::transforms {
  * @brief Transform that converts models in our injection model
  * representation to an exogenous format.
  */
-class encoding_transform_interface {
+class encoding_transform {
 public:
-    encoding_transform_interface() = default;
-    encoding_transform_interface(const encoding_transform_interface&) = delete;
-    virtual ~encoding_transform_interface() noexcept = 0;
+    encoding_transform() = default;
+    encoding_transform(const encoding_transform&) = delete;
+    virtual ~encoding_transform() noexcept = default;
 
 public:
     /**
@@ -64,7 +64,7 @@ public:
      * exogenous transformers cannot cope with string processing. In
      * the future this will change to returning a string.
      */
-    virtual void transform(const context& ctx, const meta_model::model& m,
+    virtual void apply(const context& ctx, const meta_model::model& m,
         const boost::filesystem::path& p) = 0;
 };
 

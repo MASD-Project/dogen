@@ -57,7 +57,7 @@ std::string input_language_transform::make_input_language(const type_group& tg,
 }
 
 void input_language_transform::
-transform(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "language transform",
         transform_id, m.name(), *ctx.tracer(), m);
 

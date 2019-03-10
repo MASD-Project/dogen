@@ -35,13 +35,14 @@ static logger lg(logger_factory(transform_id));
 
 namespace masd::dogen::injection::transforms {
 
-void annotations_transform::transform(const transforms::context& ctx,
+void annotations_transform::apply(const transforms::context& ctx,
     meta_model::model& m) {
 
     tracing::scoped_transform_tracer stp(lg, "annotations transform",
         transform_id, m.name(), *ctx.tracer(), m);
 
-    BOOST_LOG_SEV(lg, debug) << "Total elements: " << m.elements().size();
+    BOOST_LOG_SEV(lg, debug) << "Transforming model: " << m.name()
+                             << "Total elements: " << m.elements().size();
 
     const auto& f(*ctx.annotation_factory());
     using masd::dogen::annotations::scope_types;
@@ -55,6 +56,8 @@ void annotations_transform::transform(const transforms::context& ctx,
     }
 
     stp.end_transform(m);
+    BOOST_LOG_SEV(lg, debug) << "Transformed model.";
+
 }
 
 }

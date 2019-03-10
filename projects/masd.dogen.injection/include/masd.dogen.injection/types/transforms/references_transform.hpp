@@ -33,6 +33,11 @@
 
 namespace masd::dogen::injection::transforms {
 
+/**
+ * @brief Reads the model references from the annotation.
+ *
+ * @pre annotations transform must have already been applied.
+ */
 class references_transform final {
 private:
     struct type_group {
@@ -47,7 +52,7 @@ private:
         const annotations::annotation& a);
 
 public:
-    static void transform(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

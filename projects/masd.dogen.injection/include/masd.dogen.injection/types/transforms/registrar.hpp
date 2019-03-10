@@ -28,8 +28,8 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
-#include "masd.dogen.injection/types/transforms/decoding_transform_interface.hpp"
-#include "masd.dogen.injection/types/transforms/encoding_transform_interface.hpp"
+#include "masd.dogen.injection/types/transforms/decoding_transform.hpp"
+#include "masd.dogen.injection/types/transforms/encoding_transform.hpp"
 
 namespace masd::dogen::injection::transforms {
 
@@ -63,7 +63,7 @@ public:
      * @pre Pointer must not be null.
      */
     void register_encoding_transform(
-        std::shared_ptr<encoding_transform_interface> t);
+        std::shared_ptr<encoding_transform> t);
 
     /**
      * @brief Registers a decoding transform.
@@ -71,8 +71,7 @@ public:
      * @pre Encoding transform is not yet registered.
      * @pre Pointer must not be null.
      */
-    void register_decoding_transform(
-        std::shared_ptr<decoding_transform_interface> t);
+    void register_decoding_transform(std::shared_ptr<decoding_transform> t);
 
     /**
      * @brief Returns the encoding transform that handles the
@@ -81,7 +80,7 @@ public:
      * @pre An encoding transform must have been registered for this
      * extension.
      */
-    encoding_transform_interface&
+    encoding_transform&
     encoding_transform_for_extension(const std::string& ext);
 
     /**
@@ -91,7 +90,7 @@ public:
      * @pre A decoding transform must have been registered for this
      * extension.
      */
-    decoding_transform_interface&
+    decoding_transform&
     decoding_transform_for_extension(const std::string& ext);
 
     /**
@@ -101,7 +100,7 @@ public:
      * @pre An encoding transform must have been registered for this
      * extension.
      */
-    encoding_transform_interface&
+    encoding_transform&
     encoding_transform_for_path(const boost::filesystem::path& p);
 
     /**
@@ -111,15 +110,13 @@ public:
      * @pre An decoding transform must have been registered for this
      * extension.
      */
-    decoding_transform_interface&
+    decoding_transform&
     decoding_transform_for_path(const boost::filesystem::path& p);
 
 private:
-    std::unordered_map<std::string,
-                       std::shared_ptr<encoding_transform_interface>>
+    std::unordered_map<std::string, std::shared_ptr<encoding_transform>>
     encoding_transforms_;
-    std::unordered_map<std::string,
-                       std::shared_ptr<decoding_transform_interface>>
+    std::unordered_map<std::string, std::shared_ptr<decoding_transform>>
     decoding_transforms_;
 };
 

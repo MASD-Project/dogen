@@ -89,7 +89,7 @@ std::list<std::string> registrar::registered_decoding_extensions() const {
 }
 
 void registrar::
-register_encoding_transform(std::shared_ptr<encoding_transform_interface> t) {
+register_encoding_transform(std::shared_ptr<encoding_transform> t) {
     BOOST_LOG_SEV(lg, debug) << "Registering encoding transform.";
 
     /*
@@ -124,7 +124,7 @@ register_encoding_transform(std::shared_ptr<encoding_transform_interface> t) {
 }
 
 void registrar::
-register_decoding_transform(std::shared_ptr<decoding_transform_interface> t) {
+register_decoding_transform(std::shared_ptr<decoding_transform> t) {
     BOOST_LOG_SEV(lg, debug) << "Registering decoding transform.";
 
     /*
@@ -158,7 +158,7 @@ register_decoding_transform(std::shared_ptr<decoding_transform_interface> t) {
     BOOST_LOG_SEV(lg, debug) << "Registrered encoding transform.";
 }
 
-encoding_transform_interface&
+encoding_transform&
 registrar::encoding_transform_for_extension(const std::string& ext) {
     validate_extension(ext);
     BOOST_LOG_SEV(lg, debug) << "Looking for encoding transform for extension: "
@@ -175,7 +175,7 @@ registrar::encoding_transform_for_extension(const std::string& ext) {
     return r;
 }
 
-decoding_transform_interface&
+decoding_transform&
 registrar::decoding_transform_for_extension(const std::string& ext) {
     validate_extension(ext);
     BOOST_LOG_SEV(lg, debug) << "Looking for decoding transform for extension: "
@@ -192,7 +192,7 @@ registrar::decoding_transform_for_extension(const std::string& ext) {
     return r;
 }
 
-encoding_transform_interface&
+encoding_transform&
 registrar::encoding_transform_for_path(const boost::filesystem::path& p) {
     const auto gs(p.generic_string());
     const auto ext(p.extension().generic_string());
@@ -202,7 +202,7 @@ registrar::encoding_transform_for_path(const boost::filesystem::path& p) {
     return encoding_transform_for_extension(ext);
 }
 
-decoding_transform_interface&
+decoding_transform&
 registrar::decoding_transform_for_path(const boost::filesystem::path& p) {
     const auto gs(p.generic_string());
     const auto ext(p.extension().generic_string());

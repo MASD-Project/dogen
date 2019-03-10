@@ -39,8 +39,6 @@ namespace masd::dogen::injection::transforms {
 class context final {
 public:
     context() = default;
-    // context(const context&) = default;
-    // context(context&&) = default;
     ~context() = default;
 
 public:
@@ -53,29 +51,19 @@ public:
 
 public:
     const std::vector<boost::filesystem::path>& data_directories() const;
-    std::vector<boost::filesystem::path>& data_directories();
     void data_directories(const std::vector<boost::filesystem::path>& v);
-    void data_directories(const std::vector<boost::filesystem::path>&& v);
 
     const boost::shared_ptr<masd::dogen::annotations::type_repository>& type_repository() const;
-    boost::shared_ptr<masd::dogen::annotations::type_repository>& type_repository();
     void type_repository(const boost::shared_ptr<masd::dogen::annotations::type_repository>& v);
-    void type_repository(const boost::shared_ptr<masd::dogen::annotations::type_repository>&& v);
 
     const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& archetype_location_repository() const;
-    boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& archetype_location_repository();
     void archetype_location_repository(const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& v);
-    void archetype_location_repository(const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>&& v);
 
     const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& annotation_factory() const;
-    boost::shared_ptr<masd::dogen::annotations::annotation_factory>& annotation_factory();
     void annotation_factory(const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& v);
-    void annotation_factory(const boost::shared_ptr<masd::dogen::annotations::annotation_factory>&& v);
 
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer() const;
-    boost::shared_ptr<masd::dogen::tracing::tracer>& tracer();
     void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v);
-    void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>&& v);
 
 private:
     std::vector<boost::filesystem::path> data_directories_;

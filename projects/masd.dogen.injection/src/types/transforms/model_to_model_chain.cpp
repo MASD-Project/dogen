@@ -39,11 +39,10 @@ const std::string transform_not_supported("Cannot transform into: ");
 
 namespace masd::dogen::injection::transforms {
 
-boost::tuple<decoding_transform_interface&, encoding_transform_interface&>
-model_to_model_chain::obtain_transforms(
-    const boost::filesystem::path& src_path,
-    const boost::filesystem::path& dst_path) {
+using boost::filesystem::path;
 
+boost::tuple<decoding_transform&, encoding_transform&>
+model_to_model_chain::obtain_transforms(const path& src, const path& dst) {
     /*
      * Start by ensuring the registrar is in a good place.
      */
@@ -56,13 +55,12 @@ model_to_model_chain::obtain_transforms(
      * continuing.
      */
     return boost::tie(
-        rg.decoding_transform_for_path(src_path),
-        rg.encoding_transform_for_path(dst_path));
+        rg.decoding_transform_for_path(src),
+        rg.encoding_transform_for_path(dst));
 }
 
-void model_to_model_chain::transform(const transforms::context& ctx,
-    const boost::filesystem::path& src_path,
-    const boost::filesystem::path& dst_path) {
+void model_to_model_chain::apply(const transforms::context& ctx,
+    const path& src, const path& dst) {
     tracing::scoped_chain_tracer stp(lg, "model to model chain",
         transform_id, *ctx.tracer());
 
@@ -70,15 +68,15 @@ void model_to_model_chain::transform(const transforms::context& ctx,
      * Obtain a tuple containing the source and destination
      * transforms.
      */
-    BOOST_LOG_SEV(lg, info) << " Transforming: " << src_path.generic_string()
-                            << " to: " << dst_path.generic_string();
-    auto tuple(obtain_transforms(src_path, dst_path));
-    auto src(tuple.get<0>().transform(ctx, src_path));
+    BOOST_LOG_SEV(lg, info) << " Transforming: " << src.generic_string()
+                            << " to: " << dst.generic_string();
+    auto tuple(obtain_transforms(src, dst));
+    auto src_model(tuple.get<0>().apply(ctx, src));
 
     /*
      * Transform the model to the requested representation.
      */
-    tuple.get<1>().transform(ctx, src, dst_path);
+    tuple.get<1>().apply(ctx, src_model, dst);
 }
 
 }

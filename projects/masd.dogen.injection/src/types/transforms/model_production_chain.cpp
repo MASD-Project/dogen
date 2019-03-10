@@ -40,8 +40,8 @@ namespace masd::dogen::injection::transforms {
 
 std::shared_ptr<registrar> model_production_chain::registrar_;
 
-decoding_transform_interface& model_production_chain::
-transform_for_model(const boost::filesystem::path& p) {
+decoding_transform&
+model_production_chain::transform_for_model(const boost::filesystem::path& p) {
     /*
      * Ensure the registrar is in a valid state before we proceed.
      */
@@ -58,33 +58,33 @@ transforms::registrar& model_production_chain::registrar() {
 }
 
 meta_model::model model_production_chain::
-transform(const context& ctx, const boost::filesystem::path& p) {
+apply(const context& ctx, const boost::filesystem::path& p) {
     const auto model_name(p.filename().generic_string());
     tracing::scoped_chain_tracer stp(lg, "injection model production chain",
         transform_id, model_name, *ctx.tracer());
 
     /*
-     * Transform the exogenous model - in whatever supported exogenous
-     * representation it may be in, Dia, JSON, etc - into the internal
-     * representation of an exogenous model.
+     * Transform the external model in whatever supported exogenous
+     * representation it may be in - Dia, JSON, etc - into the
+     * internal representation of an exogenous model.
      */
     auto& t(transform_for_model(p));
-    auto r(t.transform(ctx, p));
+    auto r(t.apply(ctx, p));
 
     /*
      * Process all annotations.
      */
-    annotations_transform::transform(ctx, r);
+    annotations_transform::apply(ctx, r);
 
     /*
      * Read the input language.
      */
-    input_language_transform::transform(ctx, r);
+    input_language_transform::apply(ctx, r);
 
     /*
      * Read the model references.
      */
-    references_transform::transform(ctx, r);
+    references_transform::apply(ctx, r);
 
     stp.end_chain(r);
     return r;

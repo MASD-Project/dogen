@@ -31,9 +31,17 @@
 
 namespace masd::dogen::injection::transforms {
 
+/**
+ * @brief Transforms the tagged values as read from the external model
+ * into an annotation. No expansion is made at this point, just a type
+ * transformation into annotation types.
+ *
+ * @pre Requires tagged values to have been populated by the decoding
+ * codec.
+ */
 class annotations_transform final {
 public:
-    static void transform(const transforms::context& ctx,
+    static void apply(const transforms::context& ctx,
         meta_model::model& m);
 };
 
