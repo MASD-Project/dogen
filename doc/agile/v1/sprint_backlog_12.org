@@ -13,38 +13,38 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-10 Sun 07:48]
+#+CAPTION: Clock summary at [2019-03-10 Sun 08:34]
 | <75>                                                         |         |       |       |       |
 | Headline                                                     | Time    |       |       |     % |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                 | *82:38* |       |       | 100.0 |
+| *Total time*                                                 | *83:22* |       |       | 100.0 |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                      | 82:38   |       |       | 100.0 |
-| Active                                                       |         | 82:38 |       | 100.0 |
-| Edit release notes for previous sprint                       |         |       |  1:27 |   1.8 |
-| Sprint and product backlog grooming                          |         |       |  1:32 |   1.9 |
+| Stories                                                      | 83:22   |       |       | 100.0 |
+| Active                                                       |         | 83:22 |       | 100.0 |
+| Edit release notes for previous sprint                       |         |       |  1:27 |   1.7 |
+| Sprint and product backlog grooming                          |         |       |  2:16 |   2.7 |
 | Implement text model generation chain in generation          |         |       |  3:45 |   4.5 |
-| Move generation model out of coding                          |         |       |  4:22 |   5.3 |
+| Move generation model out of coding                          |         |       |  4:22 |   5.2 |
 | Rename endomodel to just model                               |         |       |  2:11 |   2.6 |
 | Remove exomodel remnants                                     |         |       |  0:03 |   0.1 |
-| Consider adding a dot graph of the transforms to probing     |         |       |  1:47 |   2.2 |
+| Consider adding a dot graph of the transforms to probing     |         |       |  1:47 |   2.1 |
 | Split annotations processing into two phases                 |         |       |  3:10 |   3.8 |
-| Move injection processing out of coding                      |         |       | 18:39 |  22.6 |
+| Move injection processing out of coding                      |         |       | 18:39 |  22.4 |
 | Create a extraction model post-processing chain              |         |       |  0:56 |   1.1 |
 | Move coding to generation model transform into orchestration |         |       |  0:33 |   0.7 |
 | Add option for northwind tests                               |         |       |  0:54 |   1.1 |
-| Add DTL to vcpkg                                             |         |       |  5:15 |   6.4 |
+| Add DTL to vcpkg                                             |         |       |  5:15 |   6.3 |
 | Remove coding options                                        |         |       |  3:59 |   4.8 |
-| Add basic "diff mode"                                        |         |       | 12:02 |  14.6 |
+| Add basic "diff mode"                                        |         |       | 12:02 |  14.4 |
 | Create a "run byproducts" directory                          |         |       |  1:01 |   1.2 |
 | Logging impact in tracing is blank                           |         |       |  0:50 |   1.0 |
 | Split operation reports from patches                         |         |       |  1:19 |   1.6 |
 | Add org mode support to diff reports                         |         |       |  1:13 |   1.5 |
 | Add dry mode                                                 |         |       |  0:27 |   0.5 |
 | Split extraction model generation from code generation       |         |       |  0:29 |   0.6 |
-| Rework the system tests using diff mode                      |         |       | 14:57 |  18.1 |
-| Rename the =transform= method to =apply=                     |         |       |  0:05 |   0.1 |
+| Rework the system tests using diff mode                      |         |       | 14:57 |  17.9 |
 | Try to fix valgrind warning on =find_files=                  |         |       |  0:20 |   0.4 |
+| Rename the =transform= method to =apply=                     |         |       |  0:05 |   0.1 |
 | Fix northwind tests on OSX and Windows                       |         |       |  1:04 |   1.3 |
 | Update metrics in OpenHub                                    |         |       |  0:18 |   0.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
@@ -213,6 +213,8 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-03-10 Sun 08:13]--[2019-03-10 Sun 08:34] =>  0:21
+    CLOCK: [2019-03-10 Sun 07:49]--[2019-03-10 Sun 08:12] =>  0:23
     CLOCK: [2019-03-07 Thu 14:02]--[2019-03-07 Thu 14:17] =>  0:15
     CLOCK: [2019-03-07 Thu 13:50]--[2019-03-07 Thu 14:01] =>  0:11
     CLOCK: [2019-03-07 Thu 13:46]--[2019-03-07 Thu 13:49] =>  0:03
@@ -972,19 +974,8 @@ Notes:
 - we must now remember to always keep JSON models up to date or tests
   will fail. This is probably a good thing.
 
-*** STARTED Rename the =transform= method to =apply=                  :story:
-    :LOGBOOK:
-    CLOCK: [2019-03-04 Mon 18:25]--[2019-03-04 Mon 18:30] =>  0:05
-    :END:
-
-Its a bit silly to name classes =x_transform= and then to have their
-main method also called =transform=. We should rename these to
-something like =apply=.
-
-We should work on this once the system tests are back and running, as
-we may break a lot of things with a "simple" tidy-up.
-
-*** STARTED Try to fix valgrind warning on =find_files=               :story:
+*** COMPLETED Try to fix valgrind warning on =find_files=             :story:
+    CLOSED: [2019-03-10 Sun 08:14]
     :LOGBOOK:
     CLOCK: [2019-02-27 Wed 17:25]--[2019-02-27 Wed 17:45] =>  0:20
     :END:
@@ -1000,6 +991,20 @@ We seem to be doing something wrong with directory iterators:
 : ==7755==    by 0x6F0E15: masd::dogen::utility::filesystem::find_files(boost::filesystem::path const&) (file.cpp:85)
 : ==7755==    by 0x6ADB4B: masd::dogen::coding::helpers::mapping_set_repository_factory::obtain_mappings[abi:cxx11](std::vector > const&) const (mapping_set_repository_factory.cpp:66)
 : ==7755==    by 0x6AF507: masd::dogen::coding::helpers::mapping_set_repository_factory::make(std::vector > const&) const (mapping_set_repository_factory.cpp:172)
+
+Not clear why this is coming out so we just ignored it for now.
+
+*** STARTED Rename the =transform= method to =apply=                  :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-04 Mon 18:25]--[2019-03-04 Mon 18:30] =>  0:05
+    :END:
+
+Its a bit silly to name classes =x_transform= and then to have their
+main method also called =transform=. We should rename these to
+something like =apply=.
+
+We should work on this once the system tests are back and running, as
+we may break a lot of things with a "simple" tidy-up.
 
 *** STARTED Fix northwind tests on OSX and Windows                    :story:
     :LOGBOOK:
@@ -1035,6 +1040,10 @@ server) with the building of the tests (which we should always do
 whenever we find all the required dependencies). However, it seems a
 bit silly yo have to have two flags for this.
 
+At present we have linking failures on both OSX and windows. It is not
+entirely clear what is causing these failures. We need to revisit this
+when we clean up the linking across dogen.
+
 *** STARTED Update metrics in OpenHub                                 :story:
     :LOGBOOK:
     CLOCK: [2019-03-07 Thu 13:40]--[2019-03-07 Thu 13:45] =>  0:05
@@ -1043,6 +1052,12 @@ bit silly yo have to have two flags for this.
 
 For some reason our metrics are stuck at 5 months ago or so. It is
 actually mildly useful to know the number of lines of code etc.
+
+*** Create a video demo for the sprint's features                     :story:
+
+Our video is extremely old and misleading. We need to get back into
+the habit of doing a video demo at the end of every sprint talking
+about the work of the sprint.
 
 *** Consider adding tests for pipeline components                     :story:
 
@@ -1067,6 +1082,12 @@ to build muscle memory.
 However the tests are very useful: when we are making internal
 changes, its good to see the breaks and look into the diffs to ensure
 only what we expect has changed.
+
+*** Add tests for tracing and reporting                               :story:
+
+At present its easy to break tracing and reporting without noticing
+it. Add a simple set of tests that verify the existence of the files
+and perform some basic sanity checks on the content.
 
 *** Add support for ignoring types and models                         :story:
 
@@ -1099,6 +1120,52 @@ either for tests or for generation. This is more than just formatting:
 its basically "act as if this type was not defined in the input" or
 "this model did not exist". It should result in resolution failures if
 anyone is referring to the model/type.
+
+*** Code generation of tests for dogen models                         :story:
+
+We probably already have a story for this. At present we are manually
+generating tests for each model (serialisation, etc). The structure of
+the tests is very predictable. In a world where tests are a facet, we
+could have some options to control the generation of tests. This would
+also allow end users to generate tests for their models and report the
+results. We would need to generate the utility model for this - or
+perhaps we could code generate tests in a way that no longer requires
+templates - its all "hard-coded". This would make the tests easier to
+follow, but we would generate a lot of code.
+
+We could separate dogen specific tests from user tests by naming them
+differently, e.g. =abc_dogen_test.cpp=. We can then create two
+different test binaries, one for dogen tests and another for user
+tests, so that users don't have to run dogen tests unless something
+has gone wrong.
+
+Interestingly we could even set rules to ignore tests that are known
+to fail:
+
+- if object has no members do not do equality tests
+- if object has some kind of recursion do not do tests
+- etc.
+
+These can be marked as known limitations. At present the tests require
+Boost.Test but it should be possible to target other frameworks
+(meta-data option).
+
+Merged stories:
+
+*Consider creating a "test" facet*
+
+Whilst we can't really generate tests, we can at least create the
+stubs for them. For this we could have a =test= facet that uses a
+stereotype, e.g. =test_suite=. Users mark classes with
+these. Attributes are the test cases. At the model level users can
+choose the test framework. For example for Boost.Test, it generates
+the main file with fixture initialisation, etc. We could then have one
+of two approaches:
+
+- protected regions, where the test contents are protected and perhaps
+  an area at the top for globals etc.
+- stubs only, were we generate the original content but then users
+  subsequently manage the files.
 
 *** Log file per transform                                            :story:
 
@@ -1168,52 +1235,6 @@ The same problem applies to boost linking.
 Since we only need these during generation, seems like the more
 logical place. This should be done when (after) we move all of the
 meta-elements that live in formatter into coding.
-
-*** Code generation of tests for dogen models                         :story:
-
-We probably already have a story for this. At present we are manually
-generating tests for each model (serialisation, etc). The structure of
-the tests is very predictable. In a world where tests are a facet, we
-could have some options to control the generation of tests. This would
-also allow end users to generate tests for their models and report the
-results. We would need to generate the utility model for this - or
-perhaps we could code generate tests in a way that no longer requires
-templates - its all "hard-coded". This would make the tests easier to
-follow, but we would generate a lot of code.
-
-We could separate dogen specific tests from user tests by naming them
-differently, e.g. =abc_dogen_test.cpp=. We can then create two
-different test binaries, one for dogen tests and another for user
-tests, so that users don't have to run dogen tests unless something
-has gone wrong.
-
-Interestingly we could even set rules to ignore tests that are known
-to fail:
-
-- if object has no members do not do equality tests
-- if object has some kind of recursion do not do tests
-- etc.
-
-These can be marked as known limitations. At present the tests require
-Boost.Test but it should be possible to target other frameworks
-(meta-data option).
-
-Merged stories:
-
-*Consider creating a "test" facet*
-
-Whilst we can't really generate tests, we can at least create the
-stubs for them. For this we could have a =test= facet that uses a
-stereotype, e.g. =test_suite=. Users mark classes with
-these. Attributes are the test cases. At the model level users can
-choose the test framework. For example for Boost.Test, it generates
-the main file with fixture initialisation, etc. We could then have one
-of two approaches:
-
-- protected regions, where the test contents are protected and perhaps
-  an area at the top for globals etc.
-- stubs only, were we generate the original content but then users
-  subsequently manage the files.
 
 *** Add warning for unused references                                 :story:
 
