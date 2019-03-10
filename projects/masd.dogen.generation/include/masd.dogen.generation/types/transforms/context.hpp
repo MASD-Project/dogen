@@ -43,11 +43,7 @@ namespace masd::dogen::generation::transforms {
 class context final {
 public:
     context() = default;
-    // context(const context&) = default;
     ~context() = default;
-
-public:
-    // context(context&& rhs);
 
 public:
     context(
@@ -62,48 +58,32 @@ public:
 
 public:
     const boost::shared_ptr<masd::dogen::annotations::type_repository>& type_repository() const;
-    boost::shared_ptr<masd::dogen::annotations::type_repository>& type_repository();
     void type_repository(const boost::shared_ptr<masd::dogen::annotations::type_repository>& v);
-    void type_repository(const boost::shared_ptr<masd::dogen::annotations::type_repository>&& v);
 
     const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& archetype_location_repository() const;
-    boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& archetype_location_repository();
     void archetype_location_repository(const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& v);
-    void archetype_location_repository(const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>&& v);
 
     const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& annotation_factory() const;
-    boost::shared_ptr<masd::dogen::annotations::annotation_factory>& annotation_factory();
     void annotation_factory(const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& v);
-    void annotation_factory(const boost::shared_ptr<masd::dogen::annotations::annotation_factory>&& v);
 
     const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& annotation_expander() const;
-    boost::shared_ptr<masd::dogen::annotations::annotation_expander>& annotation_expander();
     void annotation_expander(const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& v);
-    void annotation_expander(const boost::shared_ptr<masd::dogen::annotations::annotation_expander>&& v);
 
     const boost::shared_ptr<masd::dogen::extraction::repository>& formatting_repository() const;
-    boost::shared_ptr<masd::dogen::extraction::repository>& formatting_repository();
     void formatting_repository(const boost::shared_ptr<masd::dogen::extraction::repository>& v);
-    void formatting_repository(const boost::shared_ptr<masd::dogen::extraction::repository>&& v);
 
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer() const;
-    boost::shared_ptr<masd::dogen::tracing::tracer>& tracer();
     void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v);
-    void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>&& v);
 
     const std::unordered_map<std::string, masd::dogen::generation::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties() const;
-    std::unordered_map<std::string, masd::dogen::generation::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties();
     void intra_backend_segment_properties(const std::unordered_map<std::string, masd::dogen::generation::meta_model::intra_backend_segment_properties>& v);
-    void intra_backend_segment_properties(const std::unordered_map<std::string, masd::dogen::generation::meta_model::intra_backend_segment_properties>&& v);
 
     /**
      * @brief FIXME: to be removed
      */
     /**@{*/
     const boost::filesystem::path& output_directory_path() const;
-    boost::filesystem::path& output_directory_path();
     void output_directory_path(const boost::filesystem::path& v);
-    void output_directory_path(const boost::filesystem::path&& v);
     /**@}*/
 
 private:

@@ -38,11 +38,11 @@ public:
     dynamic_transform_interface() = default;
     dynamic_transform_interface(const dynamic_transform_interface&) = delete;
     dynamic_transform_interface(dynamic_transform_interface&&) = default;
-    virtual ~dynamic_transform_interface() noexcept = 0;
+    virtual ~dynamic_transform_interface() noexcept = default;
 
 public:
     virtual std::string id() const = 0;
-    virtual void transform(const context& ctx,
+    virtual void apply(const context& ctx,
         const masd::dogen::extraction::decoration_properties_factory& dpf,
         meta_model::model& m) const = 0;
 };

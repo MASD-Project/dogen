@@ -63,7 +63,7 @@ merge(extraction::meta_model::model&& src, extraction::meta_model::model& dst) {
 }
 
 extraction::meta_model::model model_to_extraction_model_chain::
-transform(const generation::transforms::context& ctx,
+apply(const generation::transforms::context& ctx,
     const generation::meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Transforming model: " << m.name().id();
 
@@ -111,7 +111,7 @@ transform(const generation::transforms::context& ctx,
      * Generate artefacts for all elements in model.
      */
     const bool ekd(m.extraction_properties().enable_backend_directories());
-    auto r(t.transform(ctx, ekd, m));
+    auto r(t.apply(ctx, ekd, m));
     BOOST_LOG_SEV(lg, debug) << "Generated artefacts for : " << id
                              << ". Total artefacts: " << r.artefacts().size();
 
@@ -120,15 +120,15 @@ transform(const generation::transforms::context& ctx,
 }
 
 extraction::meta_model::model model_to_extraction_model_chain::
-transform(const generation::transforms::context& ctx,
-    const std::list<generation::meta_model::model>& models) {
+apply(const generation::transforms::context& ctx,
+    const std::list<generation::meta_model::model>& ms) {
     tracing::scoped_chain_tracer stp(lg, "model to extraction model chain",
         transform_id, *ctx.tracer());
 
-    BOOST_LOG_SEV(lg, debug) << "Transforming models: " << models.size();
+    BOOST_LOG_SEV(lg, debug) << "Transforming models: " << ms.size();
 
     extraction::meta_model::model r;
-    if (models.empty())
+    if (ms.empty())
         return r;
 
     /*
@@ -137,8 +137,8 @@ transform(const generation::transforms::context& ctx,
      * from the original target. This will be cleaned up when we fix
      * the processing pipeline.
      */
-    const auto ep(models.front().extraction_properties());
-    r.name(models.front().name().simple());
+    const auto ep(ms.front().extraction_properties());
+    r.name(ms.front().name().simple());
     r.force_write(ep.force_write());
     r.delete_extra_files(ep.delete_extra_files());
     r.ignore_files_matching_regex(ep.ignore_files_matching_regex());
@@ -147,8 +147,8 @@ transform(const generation::transforms::context& ctx,
     /*
      * Now transform the models into artefacts.
      */
-    for (const auto& m : models)
-        merge(transform(ctx, m), r);
+    for (const auto& m : ms)
+        merge(apply(ctx, m), r);
 
     return r;
 }

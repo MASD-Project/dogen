@@ -42,55 +42,55 @@ static logger lg(logger_factory(transform_id));
 
 namespace masd::dogen::generation::transforms {
 
-void model_generation_chain::transform(const context& ctx,
-    std::list<meta_model::model>& gms) {
+void model_generation_chain::apply(const context& ctx,
+    std::list<meta_model::model>& ms) {
     tracing::scoped_chain_tracer stp(lg, "model generation chain",
         transform_id, *ctx.tracer());
 
     /*
      * Apply all of the post-processing transforms to the model.
      */
-    for (auto& m : gms) {
+    for (auto& m : ms) {
         /*
          * Perform dynamic expansion first. These are backend specific.
          */
-        dynamic_transforms_chain::transform(ctx, m);
+        dynamic_transforms_chain::apply(ctx, m);
 
         /*
          * Next we apply the generability transform. We do this after
          * dynamic transforms to cater for any new elements they may have
          * inserted.
          */
-        generability_transform::transform(ctx, m);
+        generability_transform::apply(ctx, m);
 
         /*
          * Expand the artefact properties against the suitable archetype
          * locations. Must be done before enablement transform and any
          * other transform that populates these properties.
          */
-        artefact_properties_transform::transform(ctx, m);
+        artefact_properties_transform::apply(ctx, m);
 
         /*
          * The archetype location properties transform must be executed
          * before the enablement transform.
          */
-        archetype_location_properties_transform::transform(ctx, m);
+        archetype_location_properties_transform::apply(ctx, m);
 
         /*
          * Enablement transform must be applied after the dynamic
          * transform chain as it needs to compute enablement for any
          * backend specific types that might have been added.
          */
-        enablement_transform::transform(ctx, m);
+        enablement_transform::apply(ctx, m);
 
         /*
          * The formatting transform and the locator properties transform
          * have no dependencies in the post-processing chain.
          */
-        formatting_transform::transform(ctx, m);
+        formatting_transform::apply(ctx, m);
     }
 
-    stp.end_chain(gms);
+    stp.end_chain(ms);
 }
 
 }

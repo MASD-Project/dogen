@@ -475,7 +475,7 @@ populate_local_archetype_location_properties(
 }
 
 void archetype_location_properties_transform::
-transform(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "archetype location properties transform",
         transform_id, m.name().id(), *ctx.tracer(), m);

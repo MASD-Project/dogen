@@ -132,7 +132,7 @@ formatting_transform::make_formatting_configuration(
 }
 
 void formatting_transform::
-transform_element(const std::unordered_map<std::string, type_group> tgs,
+apply(const std::unordered_map<std::string, type_group> tgs,
     coding::meta_model::element& e) {
     BOOST_LOG_SEV(lg, debug) << "Transforming element: " << e.name().id();
 
@@ -168,8 +168,7 @@ transform_element(const std::unordered_map<std::string, type_group> tgs,
     BOOST_LOG_SEV(lg, debug) << "Finished transforming element";;
 }
 
-void formatting_transform::
-transform(const context& ctx, meta_model::model& m) {
+void formatting_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "formatting transform",
         transform_id, m.name().id(), *ctx.tracer(), m);
 
@@ -178,7 +177,7 @@ transform(const context& ctx, meta_model::model& m) {
     const auto tgs(make_type_groups(atrp, als));
 
     for(auto& ptr : m.elements())
-        transform_element(tgs, *ptr);
+        apply(tgs, *ptr);
 
     stp.end_transform(m);
 }

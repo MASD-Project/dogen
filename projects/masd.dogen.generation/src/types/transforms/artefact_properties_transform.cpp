@@ -88,7 +88,7 @@ update_element(const context& ctx, coding::meta_model::element& e) {
 }
 
 void artefact_properties_transform::
-transform(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "artefact properties transform",
         transform_id, m.name().id(), *ctx.tracer(), m);
 

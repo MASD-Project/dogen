@@ -60,7 +60,7 @@ has_generatable_types(const meta_model::model& m) {
 }
 
 void generability_transform::
-transform(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "generability transform",
         transform_id, m.name().id(), *ctx.tracer(), m);
     m.has_generatable_types(has_generatable_types(m));

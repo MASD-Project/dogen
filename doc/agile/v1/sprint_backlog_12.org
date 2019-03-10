@@ -996,6 +996,7 @@ Not clear why this is coming out so we just ignored it for now.
 
 *** STARTED Rename the =transform= method to =apply=                  :story:
     :LOGBOOK:
+    CLOCK: [2019-03-10 Sun 21:42]
     CLOCK: [2019-03-10 Sun 21:15]--[2019-03-10 Sun 21:41] =>  0:26
     CLOCK: [2019-03-10 Sun 14:12]--[2019-03-10 Sun 15:00] =>  0:48
     CLOCK: [2019-03-10 Sun 14:05]--[2019-03-10 Sun 14:11] =>  0:06

@@ -119,7 +119,7 @@ model_to_extraction_model_transform::intra_backend_segment_properties() const {
 }
 
 extraction::meta_model::model
-model_to_extraction_model_transform::transform(
+model_to_extraction_model_transform::apply(
     const generation::transforms::context& ctx,
     const bool enable_backend_directories,
     const generation::meta_model::model& m) const {

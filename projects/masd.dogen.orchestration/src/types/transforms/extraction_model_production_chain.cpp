@@ -84,13 +84,13 @@ transform(const context& ctx,
      * Run all the generation transforms agains the generation models.
      */
     generation::transforms::model_generation_chain::
-        transform(ctx.generation_context(), gms);
+        apply(ctx.generation_context(), gms);
 
     /*
      * Obtain the extraction models.
      */
     using generation::transforms::model_to_extraction_model_chain;
-    auto r(model_to_extraction_model_chain::transform(
+    auto r(model_to_extraction_model_chain::apply(
             ctx.generation_context(), gms));
 
     /*

@@ -51,11 +51,11 @@ private:
 
 public:
     static extraction::meta_model::model
-    transform(const generation::transforms::context& ctx,
+    apply(const generation::transforms::context& ctx,
         const generation::meta_model::model& m);
     static extraction::meta_model::model
-    transform(const generation::transforms::context& ctx,
-        const std::list<generation::meta_model::model>& models);
+    apply(const generation::transforms::context& ctx,
+        const std::list<generation::meta_model::model>& ms);
 
 private:
     static std::shared_ptr<model_to_extraction_model_transform_registrar>

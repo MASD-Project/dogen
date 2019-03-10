@@ -143,13 +143,13 @@ model_to_extraction_model_transform::
 intra_backend_segment_properties() const {
     // coding::meta_model::intra_backend_segment_properties include;
     // coding::meta_model::intra_backend_segment_properties implementation;
-    std::unordered_map<std::string,
-                       generation::meta_model::intra_backend_segment_properties> r;
+    std::unordered_map<
+        std::string,
+        generation::meta_model::intra_backend_segment_properties> r;
     return r;
 }
 
-extraction::meta_model::model
-model_to_extraction_model_transform::transform(
+extraction::meta_model::model model_to_extraction_model_transform::apply(
     const generation::transforms::context& ctx,
     const bool enable_backend_directories,
     const generation::meta_model::model& m) const {
@@ -166,7 +166,8 @@ model_to_extraction_model_transform::transform(
     const auto& atrp(*ctx.type_repository());
     const auto& ra(m.root_module()->annotation());
     const auto& frp(formatters_repository());
-    const auto l(make_locator(odp, atrp, ra, frp, enable_backend_directories, m));
+    const auto l(make_locator(
+            odp, atrp, ra, frp, enable_backend_directories, m));
 
     /*
      * Generate the formattables model.

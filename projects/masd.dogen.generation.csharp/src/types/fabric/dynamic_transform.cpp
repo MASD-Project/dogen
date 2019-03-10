@@ -68,7 +68,7 @@ std::string dynamic_transform::id() const {
     return ::id;
 }
 
-void dynamic_transform:: transform(const generation::transforms::context& ctx,
+void dynamic_transform::apply(const generation::transforms::context& ctx,
     const dogen::extraction::decoration_properties_factory& dpf,
     generation::meta_model::model& m) const {
 

@@ -60,7 +60,7 @@ dynamic_transforms_chain::create_decoration_properties_factory(
 }
 
 void dynamic_transforms_chain::
-transform(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_chain_tracer stp(lg, "dynamic transforms chain",
         transform_id, m.name().id(), *ctx.tracer(), m);
 
@@ -70,7 +70,7 @@ transform(const context& ctx, meta_model::model& m) {
     const auto& ra(m.root_module()->annotation());
     const auto dpf(create_decoration_properties_factory(ctx, ra));
     for (const auto& dt : rg.dynamic_transforms())
-        dt->transform(ctx, dpf, m);
+        dt->apply(ctx, dpf, m);
 
     stp.end_chain(m);
 }

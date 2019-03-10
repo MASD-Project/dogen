@@ -27,6 +27,7 @@
 
 #include <string>
 #include <boost/optional.hpp>
+#include "masd.dogen.annotations/types/type.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.generation/types/meta_model/element_archetype.hpp"
@@ -129,7 +130,7 @@ private:
         meta_model::model& m);
 
 public:
-    static void transform(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

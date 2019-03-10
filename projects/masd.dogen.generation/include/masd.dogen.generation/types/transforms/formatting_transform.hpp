@@ -27,6 +27,7 @@
 
 #include <string>
 #include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/meta_model/formatting_styles.hpp"
@@ -55,12 +56,11 @@ private:
         const std::unordered_map<std::string, type_group>& tgs,
         const annotations::annotation& a);
 
-    static void transform_element(
-        const std::unordered_map<std::string, type_group> tgs,
+    static void apply(const std::unordered_map<std::string, type_group> tgs,
         coding::meta_model::element& e);
 
 public:
-    static void transform(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

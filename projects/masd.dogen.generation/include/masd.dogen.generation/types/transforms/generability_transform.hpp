@@ -36,7 +36,7 @@ private:
     static bool has_generatable_types(const meta_model::model& m);
 
 public:
-    static void transform(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

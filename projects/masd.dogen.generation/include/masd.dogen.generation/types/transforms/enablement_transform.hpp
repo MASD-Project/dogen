@@ -64,7 +64,7 @@ private:
         enabled_archetype_for_element, coding::meta_model::element& e);
 
 public:
-    static void transform(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

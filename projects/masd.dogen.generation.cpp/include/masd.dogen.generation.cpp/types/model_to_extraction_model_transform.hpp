@@ -125,7 +125,7 @@ public:
     intra_backend_segment_properties() const override;
 
     extraction::meta_model::model
-    transform(const generation::transforms::context& ctx,
+    apply(const generation::transforms::context& ctx,
         const bool enable_backend_directories,
         const generation::meta_model::model& m) const override;
 };

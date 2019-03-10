@@ -313,7 +313,7 @@ void enablement_transform::compute_enablement_for_element(
 }
 
 void enablement_transform::
-transform(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "enablement new_transform",
         transform_id, m.name().id(), *ctx.tracer(), m);
 

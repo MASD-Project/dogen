@@ -45,7 +45,7 @@ private:
 
 public:
     std::string id() const override;
-    void transform(const generation::transforms::context& ctx,
+    void apply(const generation::transforms::context& ctx,
         const dogen::extraction::decoration_properties_factory& dpf,
         generation::meta_model::model& m) const override;
 };

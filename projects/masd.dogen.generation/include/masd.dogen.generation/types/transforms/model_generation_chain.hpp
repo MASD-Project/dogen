@@ -33,8 +33,7 @@ namespace masd::dogen::generation::transforms {
 
 class model_generation_chain final {
 public:
-    static void transform(const context& ctx,
-        std::list<meta_model::model>& ms);
+    static void apply(const context& ctx, std::list<meta_model::model>& ms);
 };
 
 }

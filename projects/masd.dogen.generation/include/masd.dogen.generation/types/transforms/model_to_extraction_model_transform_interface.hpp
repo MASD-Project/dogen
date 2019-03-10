@@ -51,7 +51,7 @@ public:
         const model_to_extraction_model_transform_interface&) = delete;
     model_to_extraction_model_transform_interface(
         model_to_extraction_model_transform_interface&&) = default;
-    virtual ~model_to_extraction_model_transform_interface() noexcept = 0;
+    virtual ~model_to_extraction_model_transform_interface() noexcept = default;
 
 public:
     /**
@@ -107,7 +107,7 @@ public:
      * transform.
      */
     virtual extraction::meta_model::model
-    transform(const generation::transforms::context& ctx,
+    apply(const generation::transforms::context& ctx,
         const bool requires_backend_directory,
         const generation::meta_model::model& m) const = 0;
 };

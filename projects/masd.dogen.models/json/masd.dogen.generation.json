@@ -537,7 +537,7 @@
     {
       "name": "transforms::dynamic_transform_interface",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::interface"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -558,7 +558,7 @@
     {
       "name": "transforms::model_to_extraction_model_transform_interface",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::interface"
       ],
       "tagged_values": {
         "masd.extraction.cpp.types.forward_declarations.enabled": "true"
