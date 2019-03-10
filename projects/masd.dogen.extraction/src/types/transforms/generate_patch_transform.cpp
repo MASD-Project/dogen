@@ -49,7 +49,7 @@ const std::string using_dir_message("Using directory: ");
 namespace masd::dogen::extraction::transforms {
 
 void generate_patch_transform::
-transform(const context& ctx, const meta_model::model& m) {
+apply(const context& ctx, const meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "generate patch transform", transform_id, m.name(),
         *ctx.tracer());

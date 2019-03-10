@@ -53,7 +53,7 @@ void write_artefacts_transform::create_directories(
 }
 
 void write_artefacts_transform::
-transform(const context& ctx, const meta_model::model& m) {
+apply(const context& ctx, const meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "writting transform",
         transform_id, m.name(), *ctx.tracer(), m);
 

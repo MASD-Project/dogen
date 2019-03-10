@@ -231,7 +231,7 @@ void write_report(const std::string& contents, const std::string& model_name,
 namespace masd::dogen::extraction::transforms {
 
 void generate_report_transform::
-transform(const context& ctx, const meta_model::model& m) {
+apply(const context& ctx, const meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "generate operation report transform", transform_id, m.name(),
         *ctx.tracer());

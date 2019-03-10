@@ -47,8 +47,7 @@ const std::string unexpected_operation(
 
 namespace masd::dogen::extraction::transforms {
 
-void operation_transform::
-transform(const context& ctx, meta_model::model& m) {
+void operation_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "operation transform", transform_id, m.name(),
         *ctx.tracer(), m);

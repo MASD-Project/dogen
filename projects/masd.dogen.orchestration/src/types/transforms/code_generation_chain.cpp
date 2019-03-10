@@ -58,7 +58,7 @@ void code_generation_chain::transform(const context& ctx,
      * Runn all of the extraction transforms against the extraction models.
      */
     using extraction::transforms::code_generation_chain;
-    code_generation_chain::transform(ctx.extraction_context(), m);
+    code_generation_chain::apply(ctx.extraction_context(), m);
 
     stp.end_chain(m);
 

@@ -40,21 +40,21 @@ auto lg(logger_factory(transform_id));
 namespace masd::dogen::extraction::transforms {
 
 void model_production_chain::
-transform(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_chain_tracer stp(lg, "model production chain",
         transform_id, m.name(), *ctx.tracer(), m);
     /*
      * First we need to update the operations on all artefacts so that
      * subsequent transforms know what to do with them.
      */
-    operation_transform::transform(ctx, m);
+    operation_transform::apply(ctx, m);
 
     /*
      * Now find all the external artefacts in the filesystem and
      * figure out which ones are not expected. This must be done
      * before we generate diffs.
      */
-    gather_external_artefacts_transform::transform(ctx, m);
+    gather_external_artefacts_transform::apply(ctx, m);
 
     /*
      * If diffing is enabled and the user requested unified diffs, we
@@ -62,19 +62,19 @@ transform(const context& ctx, meta_model::model& m) {
      * filesystem and the generated artefacts. This must be done
      * before writing and generating a patch.
      */
-    generate_diffs_transform::transform(ctx, m);
+    generate_diffs_transform::apply(ctx, m);
 
     /*
      * If unified diffs were generated, we can now create a patch
      * file.
      */
-    generate_patch_transform::transform(ctx, m);
+    generate_patch_transform::apply(ctx, m);
 
     /*
      * If brief diffs were requested, we will generate a report of all
      * the operations for this set of artefacts.
      */
-    generate_report_transform::transform(ctx, m);
+    generate_report_transform::apply(ctx, m);
 }
 
 }

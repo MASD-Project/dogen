@@ -37,23 +37,11 @@ const boost::shared_ptr<masd::dogen::tracing::tracer>& context::tracer() const {
     return tracer_;
 }
 
-boost::shared_ptr<masd::dogen::tracing::tracer>& context::tracer() {
-    return tracer_;
-}
-
 void context::tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v) {
     tracer_ = v;
 }
 
-void context::tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>&& v) {
-    tracer_ = std::move(v);
-}
-
 const boost::optional<masd::dogen::diffing_configuration>& context::diffing_configuration() const {
-    return diffing_configuration_;
-}
-
-boost::optional<masd::dogen::diffing_configuration>& context::diffing_configuration() {
     return diffing_configuration_;
 }
 
@@ -61,24 +49,12 @@ void context::diffing_configuration(const boost::optional<masd::dogen::diffing_c
     diffing_configuration_ = v;
 }
 
-void context::diffing_configuration(const boost::optional<masd::dogen::diffing_configuration>&& v) {
-    diffing_configuration_ = std::move(v);
-}
-
 const boost::optional<masd::dogen::reporting_configuration>& context::reporting_configuration() const {
-    return reporting_configuration_;
-}
-
-boost::optional<masd::dogen::reporting_configuration>& context::reporting_configuration() {
     return reporting_configuration_;
 }
 
 void context::reporting_configuration(const boost::optional<masd::dogen::reporting_configuration>& v) {
     reporting_configuration_ = v;
-}
-
-void context::reporting_configuration(const boost::optional<masd::dogen::reporting_configuration>&& v) {
-    reporting_configuration_ = std::move(v);
 }
 
 bool context::dry_run_mode_enabled() const {

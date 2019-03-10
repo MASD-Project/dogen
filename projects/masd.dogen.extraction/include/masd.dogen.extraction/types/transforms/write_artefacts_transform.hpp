@@ -40,7 +40,7 @@ private:
     create_directories(const boost::filesystem::path& file_path);
 
 public:
-    static void transform(const context& ctx, const meta_model::model& m);
+    static void apply(const context& ctx, const meta_model::model& m);
 };
 
 }

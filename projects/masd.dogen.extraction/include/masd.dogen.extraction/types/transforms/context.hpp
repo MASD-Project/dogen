@@ -37,11 +37,7 @@ namespace masd::dogen::extraction::transforms {
 class context final {
 public:
     context() = default;
-    // context(const context&) = default;
     ~context() = default;
-
-public:
-    // context(context&& rhs);
 
 public:
     context(
@@ -52,19 +48,13 @@ public:
 
 public:
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer() const;
-    boost::shared_ptr<masd::dogen::tracing::tracer>& tracer();
     void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v);
-    void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>&& v);
 
     const boost::optional<masd::dogen::diffing_configuration>& diffing_configuration() const;
-    boost::optional<masd::dogen::diffing_configuration>& diffing_configuration();
     void diffing_configuration(const boost::optional<masd::dogen::diffing_configuration>& v);
-    void diffing_configuration(const boost::optional<masd::dogen::diffing_configuration>&& v);
 
     const boost::optional<masd::dogen::reporting_configuration>& reporting_configuration() const;
-    boost::optional<masd::dogen::reporting_configuration>& reporting_configuration();
     void reporting_configuration(const boost::optional<masd::dogen::reporting_configuration>& v);
-    void reporting_configuration(const boost::optional<masd::dogen::reporting_configuration>&& v);
 
     bool dry_run_mode_enabled() const;
     void dry_run_mode_enabled(const bool v);

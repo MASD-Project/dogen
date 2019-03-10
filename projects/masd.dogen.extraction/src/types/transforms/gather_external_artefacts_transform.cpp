@@ -41,7 +41,7 @@ auto lg(logger_factory(transform_id));
 namespace masd::dogen::extraction::transforms {
 
 void gather_external_artefacts_transform::
-transform(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "gather external artefacts transform", transform_id, m.name(),
         *ctx.tracer(), m);

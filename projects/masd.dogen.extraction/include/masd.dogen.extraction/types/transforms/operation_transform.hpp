@@ -35,7 +35,7 @@ namespace masd::dogen::extraction::transforms {
  */
 class operation_transform final {
 public:
-    static void transform(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

@@ -46,7 +46,7 @@ std::string create_hacked_contents(const std::string file_name) {
 namespace masd::dogen::extraction::transforms {
 
 void mock_content_filler_transform::
-transform(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "mock content filler transform", transform_id, m.name(), *ctx.tracer());
 

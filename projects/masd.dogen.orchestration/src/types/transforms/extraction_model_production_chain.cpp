@@ -74,9 +74,8 @@ transform(const context& ctx,
         apply(ctx.coding_context(), cmset));
 
     /*
-     * Obtain the generation models.
+     * Obtain the generation model set.
      */
-
     auto gms(transforms::coding_model_to_generation_model_transform::
         transform(ctx.generation_context(), cms));
 
@@ -96,8 +95,8 @@ transform(const context& ctx,
     /*
      * Runn all of the extraction transforms against the extraction models.
      */
-    extraction::transforms::model_production_chain::transform(
-        ctx.extraction_context(), r);
+    extraction::transforms::model_production_chain::
+        apply(ctx.extraction_context(), r);
 
     stp.end_chain(r);
     BOOST_LOG_SEV(lg, info) << "Finished extraction model production.";

@@ -49,7 +49,7 @@ const std::string reason_other("Reason: Other.");
 namespace masd::dogen::extraction::transforms {
 
 void generate_diffs_transform::
-transform(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "generate diffs transform", transform_id, m.name(),
         *ctx.tracer(), m);
