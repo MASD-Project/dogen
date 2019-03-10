@@ -38,7 +38,7 @@ auto lg(logger_factory(transform_id));
 
 namespace masd::dogen::orchestration::transforms {
 
-void code_generation_chain::transform(const context& ctx,
+void code_generation_chain::apply(const context& ctx,
     const boost::filesystem::path& target) {
     BOOST_LOG_SEV(lg, info) << "Starting code generation.";
     BOOST_LOG_SEV(lg, debug) << "Target: " << target.generic();
@@ -52,7 +52,7 @@ void code_generation_chain::transform(const context& ctx,
      * Obtain the extraction model.
      */
     using transforms::extraction_model_production_chain;
-    const auto m(extraction_model_production_chain::transform(ctx, target));
+    const auto m(extraction_model_production_chain::apply(ctx, target));
 
     /*
      * Runn all of the extraction transforms against the extraction models.

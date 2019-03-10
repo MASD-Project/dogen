@@ -122,7 +122,7 @@ bool test_extraction_model_production(const boost::filesystem::path& target,
     /*
      * Produce the extraction model.
      */
-    const auto m(extraction_model_production_chain::transform(ctx, target));
+    const auto m(extraction_model_production_chain::apply(ctx, target));
 
     /*
      * Locate any differences.

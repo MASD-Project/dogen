@@ -58,8 +58,8 @@ namespace masd::dogen::orchestration::transforms {
  */
 class code_generation_chain final {
 public:
-    static void transform(const context& ctx,
-        const boost::filesystem::path& target);
+    static void
+    apply(const context& ctx, const boost::filesystem::path& target);
 };
 
 }

@@ -994,8 +994,10 @@ We seem to be doing something wrong with directory iterators:
 
 Not clear why this is coming out so we just ignored it for now.
 
-*** STARTED Rename the =transform= method to =apply=                  :story:
+*** COMPLETED Rename the =transform= method to =apply=                :story:
+    CLOSED: [2019-03-10 Sun 22:24]
     :LOGBOOK:
+    CLOCK: [2019-03-10 Sun 22:16]--[2019-03-10 Sun 22:24] =>  0:08
     CLOCK: [2019-03-10 Sun 21:42]--[2019-03-10 Sun 22:15] =>  0:33
     CLOCK: [2019-03-10 Sun 21:15]--[2019-03-10 Sun 21:41] =>  0:26
     CLOCK: [2019-03-10 Sun 14:12]--[2019-03-10 Sun 15:00] =>  0:48

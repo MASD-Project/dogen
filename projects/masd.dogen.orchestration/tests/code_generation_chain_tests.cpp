@@ -101,7 +101,7 @@ void test_code_generation(const boost::filesystem::path& target,
      * Execute the code generation transform.
      */
     using namespace masd::dogen::extraction::transforms;
-    code_generation_chain::transform(ctx, target);
+    code_generation_chain::apply(ctx, target);
 }
 
 }

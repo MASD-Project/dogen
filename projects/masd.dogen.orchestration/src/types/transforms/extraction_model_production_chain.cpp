@@ -43,8 +43,8 @@ auto lg(logger_factory(transform_id));
 
 namespace masd::dogen::orchestration::transforms {
 
-extraction::meta_model::model extraction_model_production_chain::
-transform(const context& ctx,
+extraction::meta_model::model
+extraction_model_production_chain::apply(const context& ctx,
     const boost::filesystem::path& target) {
     BOOST_LOG_SEV(lg, info) << "Starting extraction model production.";
     BOOST_LOG_SEV(lg, debug) << "Target: " << target.generic();
@@ -65,7 +65,7 @@ transform(const context& ctx,
      * Convert the injection model set into a coding model set.
      */
     const auto cmset(injection_model_set_to_coding_model_set_transform::
-        transform(ctx.coding_context(), ims));
+        apply(ctx.coding_context(), ims));
 
     /*
      * Run all the coding transforms against the model set.
@@ -77,7 +77,7 @@ transform(const context& ctx,
      * Obtain the generation model set.
      */
     auto gms(transforms::coding_model_to_generation_model_transform::
-        transform(ctx.generation_context(), cms));
+        apply(ctx.generation_context(), cms));
 
     /*
      * Run all the generation transforms agains the generation models.

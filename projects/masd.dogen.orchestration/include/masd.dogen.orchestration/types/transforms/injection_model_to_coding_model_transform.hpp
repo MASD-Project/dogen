@@ -71,7 +71,7 @@ private:
 
 public:
     static coding::meta_model::model
-    transform(const coding::transforms::context& ctx,
+    apply(const coding::transforms::context& ctx,
         const injection::meta_model::model& im);
 };
 

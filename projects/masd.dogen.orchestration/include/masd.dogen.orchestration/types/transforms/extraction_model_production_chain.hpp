@@ -33,7 +33,7 @@ namespace masd::dogen::orchestration::transforms {
 
 class extraction_model_production_chain final {
 public:
-    static extraction::meta_model::model transform(const context& ctx,
+    static extraction::meta_model::model apply(const context& ctx,
         const boost::filesystem::path& target);
 };
 

@@ -38,11 +38,11 @@ private:
     compute_total_size(const coding::meta_model::model& em);
 
     static generation::meta_model::model
-    transform(const coding::meta_model::model& em);
+    apply(const coding::meta_model::model& m);
 
 public:
     static std::list<generation::meta_model::model>
-    transform(const generation::transforms::context& ctx,
+    apply(const generation::transforms::context& ctx,
         const std::list<coding::meta_model::model>& cms);
 };
 

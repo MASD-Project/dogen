@@ -40,7 +40,7 @@ namespace masd::dogen::orchestration::transforms {
 class injection_model_set_to_coding_model_set_transform final {
 public:
     static coding::meta_model::model_set
-    transform(const coding::transforms::context& ctx,
+    apply(const coding::transforms::context& ctx,
         const injection::meta_model::model_set& ms);
 };
 

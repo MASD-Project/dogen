@@ -38,7 +38,7 @@ namespace masd::dogen::orchestration::transforms {
 
 coding::meta_model::model_set
 injection_model_set_to_coding_model_set_transform::
-transform(const coding::transforms::context& ctx,
+apply(const coding::transforms::context& ctx,
     const injection::meta_model::model_set& ms) {
     const auto model_name(ms.target().name());
     tracing::scoped_chain_tracer stp(lg,
@@ -53,14 +53,14 @@ transform(const coding::transforms::context& ctx,
      */
     coding::meta_model::model_set r;
     using tf = injection_model_to_coding_model_transform;
-    r.target(tf::transform(ctx, ms.target()));
+    r.target(tf::apply(ctx, ms.target()));
     r.target().origin_type(coding::meta_model::origin_types::target);
 
     /*
      * Now we do the same thing to the reference models.
      */
     for (const auto& ref : ms.references())
-        r.references().push_back(tf::transform(ctx, ref));
+        r.references().push_back(tf::apply(ctx, ref));
 
     return r;
 }

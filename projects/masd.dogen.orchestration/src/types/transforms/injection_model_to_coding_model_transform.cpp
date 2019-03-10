@@ -238,7 +238,7 @@ process_element(const helpers::adapter& ad,
 }
 
 coding::meta_model::model injection_model_to_coding_model_transform::
-transform(const coding::transforms::context& ctx,
+apply(const coding::transforms::context& ctx,
     const injection::meta_model::model& im) {
     tracing::scoped_transform_tracer stp(lg,
         "injection model to coding model transform", transform_id, im.name(),

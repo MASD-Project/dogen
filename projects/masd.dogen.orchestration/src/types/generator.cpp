@@ -41,7 +41,7 @@ void generator::generate(const configuration& cfg,
     {
         using namespace transforms;
         scoped_context_manager scm(cfg, output_directory);
-        code_generation_chain::transform(scm.context(), target);
+        code_generation_chain::apply(scm.context(), target);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished generation.";

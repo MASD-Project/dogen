@@ -148,7 +148,7 @@ compute_total_size(const coding::meta_model::model& em) {
 }
 
 generation::meta_model::model coding_model_to_generation_model_transform::
-transform(const coding::meta_model::model& m) {
+apply(const coding::meta_model::model& m) {
     generation::meta_model::model r;
     r.name(m.name());
     r.meta_name(coding::helpers::meta_name_factory::make_model_name());
@@ -181,7 +181,7 @@ transform(const coding::meta_model::model& m) {
 
 std::list<generation::meta_model::model>
 coding_model_to_generation_model_transform::
-transform(const generation::transforms::context& ctx,
+apply(const generation::transforms::context& ctx,
     const std::list<coding::meta_model::model>& ms) {
     tracing::scoped_transform_tracer stp(lg,
         "coding model to generation model transform",
@@ -189,7 +189,7 @@ transform(const generation::transforms::context& ctx,
 
     std::list<generation::meta_model::model> r;
     for(const auto& m : ms)
-        r.push_back(transform(m));
+        r.push_back(apply(m));
 
     stp.end_transform(r);
     return r;
