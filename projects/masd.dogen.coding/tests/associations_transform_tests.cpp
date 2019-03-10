@@ -73,7 +73,7 @@ BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_associations_transform) {
     BOOST_REQUIRE(a.objects().empty());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
-    associations_transform::transform(mock_context_factory::make(), a);
+    associations_transform::apply(mock_context_factory::make(), a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -86,7 +86,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_as
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
     BOOST_REQUIRE(a.objects().size() == 1);
 
-    associations_transform::transform(mock_context_factory::make(), a);
+    associations_transform::apply(mock_context_factory::make(), a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -100,7 +100,7 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_results_in_expected_associat
             attribute_types::unsigned_int));
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    associations_transform::transform(mock_context_factory::make(), m);
+    associations_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     BOOST_REQUIRE(m.objects().size() == 1);
@@ -118,7 +118,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_object_templates_is_untouched_by_associat
     BOOST_REQUIRE(a.objects().empty());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
-    associations_transform::transform(mock_context_factory::make(), a);
+    associations_transform::apply(mock_context_factory::make(), a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -129,7 +129,7 @@ BOOST_AUTO_TEST_CASE(model_with_more_than_one_attribute_of_the_same_type_results
     auto m(factory.make_first_degree_object_templates_model());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    associations_transform::transform(mock_context_factory::make(), m);
+    associations_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     BOOST_REQUIRE(m.objects().size() == 2);
@@ -151,7 +151,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_typ
     auto m(factory.object_with_group_of_attributes_of_different_types());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    associations_transform::transform(mock_context_factory::make(), m);
+    associations_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     bool found0(false), found1(false), found3(false);
@@ -210,7 +210,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_typ
             origin_types::target, true/*repeat_group*/));
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    associations_transform::transform(mock_context_factory::make(), m);
+    associations_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     bool found0(false), found1(false), found3(false);
@@ -272,7 +272,7 @@ BOOST_AUTO_TEST_CASE(object_with_unsigned_int_attribute_results_in_expected_asso
     BOOST_REQUIRE(m.objects().begin()->second->local_attributes().size() == 1);
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    associations_transform::transform(mock_context_factory::make(), m);
+    associations_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     BOOST_REQUIRE(m.objects().size() == 1);
@@ -301,7 +301,7 @@ BOOST_AUTO_TEST_CASE(object_with_bool_attribute_results_in_expected_associations
     BOOST_REQUIRE(m.objects().begin()->second->local_attributes().size() == 1);
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    associations_transform::transform(mock_context_factory::make(), m);
+    associations_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     BOOST_REQUIRE(m.objects().size() == 1);
@@ -329,7 +329,7 @@ BOOST_AUTO_TEST_CASE(object_with_object_attribute_results_in_expected_associatio
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_REQUIRE(m.objects().size() == 2);
 
-    associations_transform::transform(mock_context_factory::make(), m);
+    associations_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
     for (const auto& pair : m.objects()) {
         const auto& o(*pair.second);
@@ -357,7 +357,7 @@ BOOST_AUTO_TEST_CASE(object_with_std_pair_attribute_results_in_expected_associat
     auto m(factory.object_with_attribute(ot, objt, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
 
-    associations_transform::transform(mock_context_factory::make(), m);
+    associations_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     bool found(false);
@@ -392,7 +392,7 @@ BOOST_AUTO_TEST_CASE(object_with_boost_variant_attribute_results_in_expected_ass
     BOOST_REQUIRE(m.builtins().size() == 2);
 
     bool found(false);
-    associations_transform::transform(mock_context_factory::make(), m);
+    associations_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     for (const auto& pair : m.objects()) {
@@ -432,7 +432,7 @@ BOOST_AUTO_TEST_CASE(object_with_std_string_attribute_results_in_expected_associ
     auto m(factory.object_with_attribute(ot, objt, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
 
-    associations_transform::transform(mock_context_factory::make(), m);
+    associations_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     bool found(false);
@@ -463,7 +463,7 @@ BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_attribute_results_in_expected_
     BOOST_REQUIRE(m.objects().size() == 3);
 
     bool found(false);
-    associations_transform::transform(mock_context_factory::make(), m);
+    associations_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     for (const auto& pair : m.objects()) {
@@ -494,7 +494,7 @@ BOOST_AUTO_TEST_CASE(object_with_both_regular_and_opaque_associations_results_in
     BOOST_REQUIRE(m.objects().size() == 5);
 
     bool found(false);
-    associations_transform::transform(mock_context_factory::make(), m);
+    associations_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     for (const auto& pair : m.objects()) {

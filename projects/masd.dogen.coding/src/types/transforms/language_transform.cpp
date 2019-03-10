@@ -88,7 +88,7 @@ language_transform::make_output_languages(const type_group& tg,
 }
 
 void language_transform::
-transform(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "language transform",
         transform_id, m.name().id(), *ctx.tracer(), m);
 

@@ -92,8 +92,7 @@ void merge_transform::merge(const meta_model::model& src,
     dst.references().insert(p);
 }
 
-meta_model::model
-merge_transform::transform(const context& ctx,
+meta_model::model merge_transform::apply(const context& ctx,
     const meta_model::model& target,
     const std::list<meta_model::model>& refs) {
     tracing::scoped_transform_tracer stp(lg, "merge transform",

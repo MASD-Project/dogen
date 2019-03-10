@@ -301,10 +301,10 @@ void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
     e.enumerators(enumerators);
 }
 
-void enumerations_transform::transform(const context& ctx,
-    meta_model::model& em) {
+void enumerations_transform::apply(const context& ctx,
+    meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "enumerations transform",
-        transform_id, em.name().id(), *ctx.tracer(), em);
+        transform_id, m.name().id(), *ctx.tracer(), m);
 
     /*
      * If no enumerations exist, we can just exit. This means we can
@@ -312,14 +312,14 @@ void enumerations_transform::transform(const context& ctx,
      * do not use enumerations. Otherwise, we'd fail when searching
      * for the default underlying element name.
      */
-    if (em.enumerations().empty())
+    if (m.enumerations().empty())
         return;
 
-    const auto l(em.input_language());
+    const auto l(m.input_language());
     const auto tg(make_type_group(*ctx.type_repository()));
-    const auto duen(obtain_enumeration_default_underlying_element_name(em));
+    const auto duen(obtain_enumeration_default_underlying_element_name(m));
 
-    for (auto& pair : em.enumerations()) {
+    for (auto& pair : m.enumerations()) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Expanding: " << id;
 
@@ -329,7 +329,7 @@ void enumerations_transform::transform(const context& ctx,
         expand_enumerators(tg.enumerator, l, e);
     }
 
-    stp.end_transform(em);
+    stp.end_transform(m);
 }
 
 }

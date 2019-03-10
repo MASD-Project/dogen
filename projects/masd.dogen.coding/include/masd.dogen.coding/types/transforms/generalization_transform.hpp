@@ -36,6 +36,9 @@
 
 namespace masd::dogen::coding::transforms {
 
+/**
+ * @brief Expands generalisation relationships in model.
+ */
 class generalization_transform final {
 private:
     struct type_group {
@@ -50,21 +53,21 @@ private:
 private:
     static std::unordered_set<std::string>
     update_and_collect_parent_ids(const helpers::indices& idx,
-        meta_model::model& em);
+        meta_model::model& m);
 
     static void populate_properties_up_the_generalization_tree(
         const type_group& tg, const meta_model::name& leaf,
-        meta_model::model& em, meta_model::object& o);
+        meta_model::model& m, meta_model::object& o);
 
     static void populate_generalizable_properties(const type_group& tg,
         const std::unordered_set<std::string>& parent_ids,
-        meta_model::model& em);
+        meta_model::model& m);
 
-    static void sort_leaves(meta_model::model& em);
+    static void sort_leaves(meta_model::model& m);
 
 public:
-    static void transform(const context& ctx, const helpers::indices& idx,
-        meta_model::model& em);
+    static void apply(const context& ctx, const helpers::indices& idx,
+        meta_model::model& m);
 };
 
 }

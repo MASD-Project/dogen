@@ -42,13 +42,13 @@ private:
      * @brief Applies all of the pre-processing transforms to the
      * supplied model.
      */
-    static void transform(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, meta_model::model& m);
 
 public:
     /**
      * @brief Transform the supplied model set.
      */
-    static void transform(const context& ctx, meta_model::model_set& ms);
+    static void apply(const context& ctx, meta_model::model_set& ms);
 };
 
 }

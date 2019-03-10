@@ -79,13 +79,12 @@ populate_from_annotations(const type_group& tg, meta_model::primitive& p) {
     p.use_type_aliasing(s.get_boolean_content_or_default(tg.use_type_aliasing));
 }
 
-void primitives_transform::
-transform(const context& ctx, meta_model::model& em) {
+void primitives_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "primitives transform",
-        transform_id, em.name().id(), *ctx.tracer(), em);
+        transform_id, m.name().id(), *ctx.tracer(), m);
 
     const auto tg(make_type_group(*ctx.type_repository()));
-    for (auto& pair : em.primitives()) {
+    for (auto& pair : m.primitives()) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Transforming: " << id;
 
@@ -93,7 +92,7 @@ transform(const context& ctx, meta_model::model& em) {
         populate_from_annotations(tg, p);
     }
 
-    stp.end_transform(em);
+    stp.end_transform(m);
 }
 
 }

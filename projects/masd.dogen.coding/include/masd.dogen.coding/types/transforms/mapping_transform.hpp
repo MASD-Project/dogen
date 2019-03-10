@@ -36,7 +36,7 @@ public:
     static bool is_mappable(const meta_model::languages from,
         const meta_model::languages to);
 
-    static meta_model::model transform(const context& ctx,
+    static meta_model::model apply(const context& ctx,
         const meta_model::model& src, const meta_model::languages to);
 };
 

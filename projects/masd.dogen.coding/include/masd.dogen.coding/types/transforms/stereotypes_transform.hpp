@@ -61,14 +61,14 @@ private:
      * exist.
      */
     static void transform_static_stereotypes(meta_model::object& o,
-        meta_model::model& em);
+        meta_model::model& m);
 
     /**
      * @brief Transforms the dynamic stereotypes of the object, if any
      * exist.
      */
     static void transform_dynamic_stereotypes(meta_model::object& o,
-        meta_model::model& em);
+        const meta_model::model& m);
 
 private:
     struct visitor_details {
@@ -85,7 +85,7 @@ private:
 
     static void add_visitor_to_model(
         const boost::shared_ptr<meta_model::visitor> v,
-        meta_model::model& em);
+        meta_model::model& m);
 
     /**
      * @brief Create a visitor for the object o.
@@ -105,37 +105,35 @@ private:
      * the supplied object and all its leaves.
      */
     static void update_visited_leaves(const std::list<meta_model::name>& leaves,
-        const visitor_details& vd, meta_model::model& em);
+        const visitor_details& vd, meta_model::model& m);
 
     /**
      * @brief Performs the expansion of the visitable stereotype.
      */
-    static void expand_visitable(meta_model::object& o,
-        meta_model::model& em);
+    static void expand_visitable(meta_model::object& o, meta_model::model& m);
 
     /**
      * @brief Try to expand the stereotype as an object
      * template. Returns true on success, false otherwise.
      */
     static bool try_as_object_template(const std::string& s,
-        meta_model::object& o, const meta_model::model& em);
+        meta_model::object& o, const meta_model::model& m);
 
     /**
      * @brief Transforms all stereotypes for the object.
      */
-    static void transform(meta_model::object& o,
-        meta_model::model& em);
+    static void apply(meta_model::object& o, meta_model::model& m);
 
     /**
      * @brief Transforms all stereotypes for the primitive.
      */
-    static void transform(meta_model::primitive& p);
+    static void apply(meta_model::primitive& p);
 
 public:
     /**
      * @brief Expands all stereotypes used in model.
      */
-    static void transform(const context& ctx, meta_model::model& em);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

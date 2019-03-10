@@ -53,7 +53,7 @@ private:
         meta_model::primitive& p);
 
 public:
-    static void transform(const context& ctx, meta_model::model& im);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

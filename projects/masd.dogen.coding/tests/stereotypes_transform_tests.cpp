@@ -69,7 +69,7 @@ BOOST_AUTO_TEST_CASE(expanding_non_visitable_type_does_nothing) {
     BOOST_REQUIRE(a.object_templates().empty());
     BOOST_REQUIRE(a.visitors().empty());
 
-    stereotypes_transform::transform(mock_context_factory::make(), a);
+    stereotypes_transform::apply(mock_context_factory::make(), a);
 
     BOOST_CHECK(a.objects().size() == 1);
     BOOST_CHECK(a.visitors().empty());
@@ -93,7 +93,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {
     const auto ctx(mock_context_factory::make());
     contains_checker<transformation_error> c(no_leaves);
     BOOST_CHECK_EXCEPTION(
-        stereotypes_transform::transform(ctx, m), transformation_error, c);
+        stereotypes_transform::apply(ctx, m), transformation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
@@ -113,7 +113,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     BOOST_LOG_SEV(lg, debug) << "before: " << m;
 
     const auto ctx(mock_context_factory::make());
-    stereotypes_transform::transform(ctx, m);
+    stereotypes_transform::apply(ctx, m);
     BOOST_LOG_SEV(lg, debug) << "after: " << m;
 
     BOOST_CHECK(m.objects().size() == 2);

@@ -89,7 +89,7 @@ const std::unordered_map<std::string, std::list<std::string>>&
 
 class updater {
 public:
-    updater(meta_model::model& im) : model_(im) { }
+    updater(meta_model::model& m) : model_(m) { }
 
 private:
     boost::optional<meta_model::name>
@@ -199,39 +199,38 @@ void updater::update(meta_model::element& e) {
 }
 
 void modules_transform::
-create_missing_modules(meta_model::model& im) {
+create_missing_modules(meta_model::model& m) {
     internal_modules_builder b;
-    meta_model::elements_traversal(im, b);
+    meta_model::elements_traversal(m, b);
 
     for (const auto& pair : b.result()) {
         helpers::name_factory f;
         const auto& ipp(pair.second);
-        const auto n(f.build_module_name(im.name(), ipp));
-        const auto i(im.modules().find(n.id()));
-        if (i == im.modules().end()) {
-            auto m(boost::make_shared<meta_model::module>());
-            m->name(n);
-            m->origin_type(im.origin_type());
-            im.modules().insert(std::make_pair(n.id(), m));
+        const auto n(f.build_module_name(m.name(), ipp));
+        const auto i(m.modules().find(n.id()));
+        if (i == m.modules().end()) {
+            auto mod(boost::make_shared<meta_model::module>());
+            mod->name(n);
+            mod->origin_type(m.origin_type());
+            m.modules().insert(std::make_pair(n.id(), mod));
         }
     }
 }
 
 void modules_transform::
-expand_containing_module(meta_model::model& im) {
-    updater u(im);
-    meta_model::elements_traversal(im, u);
+expand_containing_module(meta_model::model& m) {
+    updater u(m);
+    meta_model::elements_traversal(m, u);
 }
 
-void modules_transform::
-transform(const context& ctx, meta_model::model& em) {
+void modules_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "modules transform",
-        transform_id, em.name().id(), *ctx.tracer(), em);
+        transform_id, m.name().id(), *ctx.tracer(), m);
 
-    create_missing_modules(em);
-    expand_containing_module(em);
+    create_missing_modules(m);
+    expand_containing_module(m);
 
-    stp.end_transform(em);
+    stp.end_transform(m);
     BOOST_LOG_SEV(lg, debug) << "Finished modules transform.";
 }
 

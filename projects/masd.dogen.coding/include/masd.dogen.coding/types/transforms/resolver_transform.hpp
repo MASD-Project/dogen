@@ -35,8 +35,8 @@ namespace masd::dogen::coding::transforms {
 
 class resolver_transform final {
 public:
-    static void transform(const context& ctx, const helpers::indices& idx,
-        meta_model::model& em);
+    static void apply(const context& ctx, const helpers::indices& idx,
+        meta_model::model& m);
 };
 
 }

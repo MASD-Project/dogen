@@ -79,7 +79,7 @@ BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_object_templates_transform) {
     BOOST_CHECK(a.objects().empty());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
-    object_templates_transform::transform(mock_context_factory::make(), a);
+    object_templates_transform::apply(mock_context_factory::make(), a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -92,7 +92,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_ob
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
     BOOST_CHECK(a.objects().size() == 1);
 
-    object_templates_transform::transform(mock_context_factory::make(), a);
+    object_templates_transform::apply(mock_context_factory::make(), a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -119,7 +119,7 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_is_untouched_by_object_templ
     BOOST_CHECK(o.all_attributes().empty());
     BOOST_CHECK(o.object_templates().empty());
 
-    object_templates_transform::transform(mock_context_factory::make(), a);
+    object_templates_transform::apply(mock_context_factory::make(), a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -139,7 +139,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_object_template_is_untouched_by_object_te
     const auto& c(*(a.object_templates().begin()->second));
     BOOST_CHECK(c.parents().empty());
 
-    object_templates_transform::transform(mock_context_factory::make(), a);
+    object_templates_transform::apply(mock_context_factory::make(), a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -182,7 +182,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_object_template_inheritance_results
             BOOST_FAIL("Unexpected object template: " << n.id());
     }
 
-    object_templates_transform::transform(mock_context_factory::make(), m);
+    object_templates_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     for (const auto& pair : m.object_templates()) {
@@ -258,7 +258,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_object_template_inheritance_result
             BOOST_FAIL("Unexpected object template: " << n.id());
     }
 
-    object_templates_transform::transform(mock_context_factory::make(), m);
+    object_templates_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     for (const auto& pair : m.object_templates()) {
@@ -337,7 +337,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_object_template_inheritance_results_in_e
             BOOST_FAIL("Unexpected object template: " << n.id());
     }
 
-    object_templates_transform::transform(mock_context_factory::make(), m);
+    object_templates_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
     BOOST_CHECK(m.object_templates().size() == 4);
     for (const auto& pair : m.object_templates()) {
@@ -386,7 +386,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_parent_that_does_not_model_object_templat
     BOOST_REQUIRE(a.objects().size() == 2);
     BOOST_REQUIRE(a.object_templates().empty());
 
-    object_templates_transform::transform(mock_context_factory::make(), a);
+    object_templates_transform::apply(mock_context_factory::make(), a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -401,7 +401,7 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_obj
     BOOST_REQUIRE(a.objects().size() == 4);
     BOOST_REQUIRE(a.object_templates().empty());
 
-    object_templates_transform::transform(mock_context_factory::make(), a);
+    object_templates_transform::apply(mock_context_factory::make(), a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -443,7 +443,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_object_temp
             BOOST_FAIL("Unexpected object: " << n.id());
     }
 
-    object_templates_transform::transform(mock_context_factory::make(), a);
+    object_templates_transform::apply(mock_context_factory::make(), a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -487,7 +487,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
             BOOST_FAIL("Unexpected object: " << n.id());
     }
 
-    object_templates_transform::transform(mock_context_factory::make(), m);
+    object_templates_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     BOOST_CHECK(m.object_templates().size() == 2);
@@ -550,7 +550,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_template_that_parents_missing_object_temp
 
     contains_checker<transformation_error> c(object_template_not_found);
     const auto ctx(mock_context_factory::make());
-    BOOST_CHECK_EXCEPTION(object_templates_transform::transform(ctx, m),
+    BOOST_CHECK_EXCEPTION(object_templates_transform::apply(ctx, m),
         transformation_error, c);
 }
 
@@ -576,7 +576,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_object_template_throw
     contains_checker<transformation_error> c(object_template_not_found);
     const auto ctx(mock_context_factory::make());
     BOOST_CHECK_EXCEPTION(
-        object_templates_transform::transform(ctx, m), transformation_error, c);
+        object_templates_transform::apply(ctx, m), transformation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
@@ -616,7 +616,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
     contains_checker<transformation_error> c(object_not_found);
     const auto ctx(mock_context_factory::make());
     BOOST_CHECK_EXCEPTION(
-        object_templates_transform::transform(ctx, m), transformation_error, c);
+        object_templates_transform::apply(ctx, m), transformation_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -78,9 +78,10 @@ private:
 
 public:
     /**
-     * Execute the extraction properties transform.
+     * Applies the extraction properties transform to the supplied
+     * model.
      */
-    static void transform(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

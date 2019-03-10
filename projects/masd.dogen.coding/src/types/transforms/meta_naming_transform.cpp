@@ -92,16 +92,16 @@ public:
 };
 
 void meta_naming_transform::
-transform(const context& ctx, meta_model::model& em) {
+apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "meta-naming transform",
-        transform_id, em.name().id(), *ctx.tracer(), em);
+        transform_id, m.name().id(), *ctx.tracer(), m);
 
-    em.meta_name(meta_name_factory::make_model_name());
+    m.meta_name(meta_name_factory::make_model_name());
 
     updater u;
-    meta_model::elements_traversal(em, u);
+    meta_model::elements_traversal(m, u);
 
-    stp.end_transform(em);
+    stp.end_transform(m);
 }
 
 }

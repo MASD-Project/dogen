@@ -75,7 +75,7 @@ private:
      * @brief Walks through the name tree, picking up associations as
      * it goes along.
      */
-    static void walk_name_tree(const meta_model::model& em,
+    static void walk_name_tree(const meta_model::model& m,
         meta_model::object& o, const meta_model::name_tree& nt,
         const bool inherit_opaqueness_from_parent);
 
@@ -83,14 +83,14 @@ private:
     /**
      * @brief Processes a specific object.
      */
-    static void process_object(const meta_model::model& em,
+    static void process_object(const meta_model::model& m,
         meta_model::object& o);
 
 public:
     /**
      * @brief Transforms all association relationships on all objects.
      */
-    static void transform(const context& ctx, meta_model::model& em);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

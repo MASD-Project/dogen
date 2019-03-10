@@ -154,7 +154,7 @@ make_extraction_properties(const context& ctx,
     return r;
 }
 
-void extraction_properties_transform::transform(const context& ctx,
+void extraction_properties_transform::apply(const context& ctx,
     meta_model::model& m) {
 
     const auto& ra(m.root_module()->annotation());

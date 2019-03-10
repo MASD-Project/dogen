@@ -80,18 +80,17 @@ expand_type_parameters(const type_group& tg, meta_model::object& o) {
     o.type_parameters(tp);
 }
 
-void type_params_transform::
-transform(const context& ctx, meta_model::model& em) {
+void type_params_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "type params transform",
-        transform_id, em.name().id(), *ctx.tracer(), em);
+        transform_id, m.name().id(), *ctx.tracer(), m);
 
     const auto tg(make_type_group(*ctx.type_repository()));
-    for (auto& pair : em.objects()) {
+    for (auto& pair : m.objects()) {
         auto& o(*pair.second);
         expand_type_parameters(tg, o);
     }
 
-    stp.end_transform(em);
+    stp.end_transform(m);
 }
 
 }

@@ -79,12 +79,12 @@ generalization_transform::make_is_final(const type_group& tg,
 
 std::unordered_set<std::string>
 generalization_transform::update_and_collect_parent_ids(
-    const helpers::indices& idx, meta_model::model& em) {
+    const helpers::indices& idx, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Updating and collecting parent ids.";
 
     using helpers::resolver;
     std::unordered_set<std::string> r;
-    for (auto& pair : em.objects()) {
+    for (auto& pair : m.objects()) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
 
@@ -103,7 +103,7 @@ generalization_transform::update_and_collect_parent_ids(
          */
         std::list<meta_model::name> resolved_parents;
         for (const auto& pn : o.parents()) {
-            const auto resolved_pn(resolver::resolve(em, idx, o.name(), pn));
+            const auto resolved_pn(resolver::resolve(m, idx, o.name(), pn));
             r.insert(resolved_pn.id());
             resolved_parents.push_back(resolved_pn);
         }
@@ -175,9 +175,9 @@ void generalization_transform::populate_properties_up_the_generalization_tree(
 void generalization_transform::
 populate_generalizable_properties(const type_group& tg,
     const std::unordered_set<std::string>& parent_ids,
-    meta_model::model& em) {
+    meta_model::model& m) {
 
-    for (auto& pair : em.objects()) {
+    for (auto& pair : m.objects()) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
 
@@ -232,28 +232,28 @@ populate_generalizable_properties(const type_group& tg,
          if (!o.is_leaf())
              continue;
 
-         populate_properties_up_the_generalization_tree(tg, o.name(), em, o);
+         populate_properties_up_the_generalization_tree(tg, o.name(), m, o);
     }
 }
 
-void generalization_transform::sort_leaves(meta_model::model& em) {
-    for (auto& pair : em.objects()) {
+void generalization_transform::sort_leaves(meta_model::model& m) {
+    for (auto& pair : m.objects()) {
         auto& o(*pair.second);
         o.leaves().sort();
     }
 }
 
-void generalization_transform::transform(const context& ctx,
-    const helpers::indices& idx, meta_model::model& em) {
+void generalization_transform::apply(const context& ctx,
+    const helpers::indices& idx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "generalization transform",
-        transform_id, em.name().id(), *ctx.tracer(), em);
+        transform_id, m.name().id(), *ctx.tracer(), m);
 
-    const auto parent_ids(update_and_collect_parent_ids(idx, em));
+    const auto parent_ids(update_and_collect_parent_ids(idx, m));
     const auto tg(make_type_group(*ctx.type_repository()));
-    populate_generalizable_properties(tg, parent_ids, em);
-    sort_leaves(em);
+    populate_generalizable_properties(tg, parent_ids, m);
+    sort_leaves(m);
 
-    stp.end_transform(em);
+    stp.end_transform(m);
 }
 
 }

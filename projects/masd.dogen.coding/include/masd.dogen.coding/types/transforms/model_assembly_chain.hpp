@@ -37,7 +37,7 @@ namespace masd::dogen::coding::transforms {
  */
 class model_assembly_chain final {
 public:
-    static meta_model::model transform(const context& ctx,
+    static meta_model::model apply(const context& ctx,
         const meta_model::languages l,
         const meta_model::model& target,
         const std::list<meta_model::model>& refs);

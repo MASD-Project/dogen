@@ -91,7 +91,7 @@ private:
         const meta_model::languages l, meta_model::enumeration& e);
 
 public:
-    static void transform(const context& ctx, meta_model::model& em);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

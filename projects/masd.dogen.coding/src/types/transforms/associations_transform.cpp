@@ -66,7 +66,7 @@ void associations_transform::remove_duplicates(
 }
 
 void associations_transform::
-walk_name_tree(const meta_model::model& em, meta_model::object& o,
+walk_name_tree(const meta_model::model& m, meta_model::object& o,
     const meta_model::name_tree& nt,
     const bool inherit_opaqueness_from_parent) {
 
@@ -87,26 +87,26 @@ walk_name_tree(const meta_model::model& em, meta_model::object& o,
      * properties to set (see above).
      */
     bool is_first(true);
-    const auto i(em.objects().find(n.id()));
-    const auto is_associative_container(i != em.objects().end() &&
+    const auto i(m.objects().find(n.id()));
+    const auto is_associative_container(i != m.objects().end() &&
         i->second->is_associative_container());
 
     for (const auto c : nt.children()) {
         if (is_first && is_associative_container)
             o.associative_container_keys().push_back(c.current());
 
-        walk_name_tree(em, o, c, nt.are_children_opaque());
+        walk_name_tree(m, o, c, nt.are_children_opaque());
         is_first = false;
     }
 }
 
 void associations_transform::
-process_object(const meta_model::model& em, meta_model::object& o) {
+process_object(const meta_model::model& m, meta_model::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Expand object: " << o.name().id();
 
     for (const auto& p : o.local_attributes()) {
         const auto& nt(p.parsed_type());
-        walk_name_tree(em, o, nt, false/*inherit_opaqueness_from_parent*/);
+        walk_name_tree(m, o, nt, false/*inherit_opaqueness_from_parent*/);
     }
 
     std::unordered_set<meta_model::name> transparent_associations;
@@ -129,16 +129,16 @@ process_object(const meta_model::model& em, meta_model::object& o) {
 }
 
 void associations_transform::
-transform(const context& ctx, meta_model::model& em) {
+apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "associations transform",
-        transform_id, em.name().id(), *ctx.tracer(), em);
+        transform_id, m.name().id(), *ctx.tracer(), m);
 
-    BOOST_LOG_SEV(lg, debug) << "Total objects: " << em.objects().size();
+    BOOST_LOG_SEV(lg, debug) << "Total objects: " << m.objects().size();
 
-    for (auto& pair : em.objects())
-        process_object(em, *pair.second);
+    for (auto& pair : m.objects())
+        process_object(m, *pair.second);
 
-    stp.end_transform(em);
+    stp.end_transform(m);
 }
 
 }

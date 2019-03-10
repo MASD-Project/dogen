@@ -369,10 +369,10 @@ transform_objects(const type_group& tg, meta_model::model& em) {
 }
 
 void orm_transform::
-transform_object_templates(const type_group& tg, meta_model::model& em) {
+transform_object_templates(const type_group& tg, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Started transforming object templates.";
 
-    for (auto& pair : em.object_templates()) {
+    for (auto& pair : m.object_templates()) {
         auto& c(*pair.second);
         for (auto& attr : c.local_attributes()) {
             const auto& a(attr.annotation());
@@ -383,16 +383,16 @@ transform_object_templates(const type_group& tg, meta_model::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Finished transforming object templates.";
 }
 
-void orm_transform::transform_primitives(
-    const type_group& tg, meta_model::model& em) {
+void orm_transform::
+transform_primitives(const type_group& tg, meta_model::model& m) {
 
     BOOST_LOG_SEV(lg, debug) << "Started transforming primitives.";
 
     boost::optional<meta_model::letter_cases> lc;
-    if (em.orm_properties())
-        lc = em.orm_properties()->letter_case();
+    if (m.orm_properties())
+        lc = m.orm_properties()->letter_case();
 
-    for (auto& pair : em.primitives()) {
+    for (auto& pair : m.primitives()) {
         /*
          * If we do not have a configuration, there is nothing to be
          * done for this primitive. Configurations are setup during
@@ -424,17 +424,17 @@ void orm_transform::transform_primitives(
 }
 
 void orm_transform::
-transform_modules(const type_group& tg, meta_model::model& em) {
+transform_modules(const type_group& tg, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Started transforming modules.";
 
-    for (auto& pair : em.modules()) {
-        auto& m(*pair.second);
-        const auto& a(m.annotation());
+    for (auto& pair : m.modules()) {
+        auto& mod(*pair.second);
+        const auto& a(mod.annotation());
         auto cfg(make_module_properties(tg, a));
         if (!cfg)
             continue;
 
-        m.orm_properties(cfg);
+        mod.orm_properties(cfg);
 
         /*
          * If we do not have a schema name at the module level we have
@@ -451,11 +451,11 @@ transform_modules(const type_group& tg, meta_model::model& em) {
          * update all objects that do not have a schema name to use
          * it's containing module's schema name.
          */
-        for (const auto& id : m.members()) {
+        for (const auto& id : mod.members()) {
             BOOST_LOG_SEV(lg, debug) << "Processing member: " << id;
 
-            const auto i(em.objects().find(id));
-            if (i != em.objects().end()) {
+            const auto i(m.objects().find(id));
+            if (i != m.objects().end()) {
                 auto& o(*i->second);
                 auto& cfg(o.orm_properties());
                 const bool update_schema_name(cfg && cfg->schema_name().empty()
@@ -468,8 +468,8 @@ transform_modules(const type_group& tg, meta_model::model& em) {
                                          << " to: " << sn;
                 cfg->schema_name(sn);
             } else {
-                const auto j(em.primitives().find(id));
-                if (j == em.primitives().end())
+                const auto j(m.primitives().find(id));
+                if (j == m.primitives().end())
                     continue;
 
                 auto& p(*j->second);
@@ -490,21 +490,20 @@ transform_modules(const type_group& tg, meta_model::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Finished transforming modules.";
 }
 
-void orm_transform::
-transform(const context& ctx, meta_model::model& em) {
+void orm_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "orm transform",
-        transform_id, em.name().id(), *ctx.tracer(), em);
+        transform_id, m.name().id(), *ctx.tracer(), m);
 
     const auto tg(make_type_group(*ctx.type_repository()));
-    const auto& rm(*em.root_module());
-    em.orm_properties(make_model_properties(tg, rm.annotation()));
+    const auto& rm(*m.root_module());
+    m.orm_properties(make_model_properties(tg, rm.annotation()));
 
-    transform_objects(tg, em);
-    transform_object_templates(tg, em);
-    transform_primitives(tg, em);
-    transform_modules(tg, em);
+    transform_objects(tg, m);
+    transform_object_templates(tg, m);
+    transform_primitives(tg, m);
+    transform_modules(tg, m);
 
-    stp.end_transform(em);
+    stp.end_transform(m);
 }
 
 }

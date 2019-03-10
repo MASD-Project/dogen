@@ -52,10 +52,10 @@ const std::string object_template_not_found(
 namespace masd::dogen::coding::transforms {
 
 meta_model::object& attributes_transform::
-find_object(const meta_model::name& n, meta_model::model& em) {
+find_object(const meta_model::name& n, meta_model::model& m) {
     const auto id(n.id());
-    auto i(em.objects().find(id));
-    if (i == em.objects().end()) {
+    auto i(m.objects().find(id));
+    if (i == m.objects().end()) {
         BOOST_LOG_SEV(lg, error) << object_not_found << id;
         BOOST_THROW_EXCEPTION(transformation_error(object_not_found + id));
     }
@@ -63,10 +63,10 @@ find_object(const meta_model::name& n, meta_model::model& em) {
 }
 
 meta_model::object_template& attributes_transform::
-find_object_template(const meta_model::name& n, meta_model::model& em) {
+find_object_template(const meta_model::name& n, meta_model::model& m) {
     const auto& id(n.id());
-    auto i(em.object_templates().find(id));
-    if (i == em.object_templates().end()) {
+    auto i(m.object_templates().find(id));
+    if (i == m.object_templates().end()) {
         BOOST_LOG_SEV(lg, error) << object_template_not_found << id;
         BOOST_THROW_EXCEPTION(
             transformation_error(object_template_not_found + id));
@@ -75,7 +75,7 @@ find_object_template(const meta_model::name& n, meta_model::model& em) {
 }
 
 void attributes_transform::expand_object(meta_model::object& o,
-    meta_model::model& em, std::unordered_set<std::string>& processed_ids) {
+    meta_model::model& m, std::unordered_set<std::string>& processed_ids) {
     const auto id(o.name().id());
     BOOST_LOG_SEV(lg, debug) << "Expanding object: " << id;
 
@@ -85,7 +85,8 @@ void attributes_transform::expand_object(meta_model::object& o,
     }
 
     /*
-     * Setup fluency and immutability on all local attributes.
+     * Setup fluency and immutability on all local attributes. These
+     * are obtained from the object itself.
      */
     if (o.is_fluent() || o.is_immutable()) {
         for (auto& attr : o.local_attributes()) {
@@ -102,7 +103,7 @@ void attributes_transform::expand_object(meta_model::object& o,
      */
     std::list<meta_model::attribute> object_template_attributes;
     for (const auto& otn : o.object_templates()) {
-        auto& ot(find_object_template(otn, em));
+        auto& ot(find_object_template(otn, m));
         const auto& p(ot.local_attributes());
         object_template_attributes.insert(object_template_attributes.end(),
             p.begin(), p.end());
@@ -146,8 +147,8 @@ void attributes_transform::expand_object(meta_model::object& o,
      * new properties are added to the descendant.
      */
     for (const auto& pn : o.parents()) {
-        auto& parent(find_object(pn, em));
-        expand_object(parent, em, processed_ids);
+        auto& parent(find_object(pn, m));
+        expand_object(parent, m, processed_ids);
 
         /*
          * Note that we insert the parent and its attributes
@@ -180,7 +181,7 @@ void attributes_transform::expand_objects(meta_model::model& em) {
 }
 
 void attributes_transform::expand_object_template(
-    meta_model::object_template& ot, meta_model::model& em,
+    meta_model::object_template& ot, meta_model::model& m,
     std::unordered_set<std::string>& processed_ids) {
     const auto id(ot.name().id());
     BOOST_LOG_SEV(lg, debug) << "Expanding object template:" << id;
@@ -207,8 +208,8 @@ void attributes_transform::expand_object_template(
         ot.local_attributes().begin(), ot.local_attributes().end());
 
     for (const auto& n : ot.parents()) {
-        auto& parent(find_object_template(n, em));
-        expand_object_template(parent, em, processed_ids);
+        auto& parent(find_object_template(n, m));
+        expand_object_template(parent, m, processed_ids);
 
         ot.inherited_attributes().insert(
             std::make_pair(parent.name(), parent.local_attributes()));
@@ -219,26 +220,26 @@ void attributes_transform::expand_object_template(
     processed_ids.insert(id);
 }
 
-void attributes_transform::expand_object_templates(meta_model::model& em) {
+void attributes_transform::expand_object_templates(meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Expanding object templates: "
-                             << em.object_templates().size();
+                             << m.object_templates().size();
 
     std::unordered_set<std::string> processed_ids;
-    for (auto& pair : em.object_templates()) {
+    for (auto& pair : m.object_templates()) {
         auto& otp(*pair.second);
-        expand_object_template(otp, em, processed_ids);
+        expand_object_template(otp, m, processed_ids);
     }
 }
 
 void attributes_transform::
-transform(const context& ctx, meta_model::model& em) {
+apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "attributes transform",
-        transform_id, em.name().id(), *ctx.tracer(), em);
+        transform_id, m.name().id(), *ctx.tracer(), m);
 
-    expand_object_templates(em);
-    expand_objects(em);
+    expand_object_templates(m);
+    expand_objects(m);
 
-    stp.end_transform(em);
+    stp.end_transform(m);
 }
 
 }

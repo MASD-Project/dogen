@@ -49,16 +49,16 @@ auto lg(logger_factory(transform_id));
 namespace masd::dogen::coding::transforms {
 
 void model_post_processing_chain::
-transform(const context& ctx, meta_model::model& em) {
+apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_chain_tracer stp(lg, "model post-processing chain",
-        transform_id, em.name().id(), *ctx.tracer(), em);
+        transform_id, m.name().id(), *ctx.tracer(), m);
 
     /*
      * Enumeration transform must be done after merging as we need the
      * built-in types; these are required in order to find the default
      * enumeration underlying element.
      */
-    enumerations_transform::transform(ctx, em);
+    enumerations_transform::apply(ctx, m);
 
     /*
      * Create all indices first as its needed by generalisation. Note
@@ -66,7 +66,7 @@ transform(const context& ctx, meta_model::model& em) {
      * part of indices, which is not ideal - but for now, its not a
      * major problem.
      */
-    const auto idx(helpers::indexer::index(em));
+    const auto idx(helpers::indexer::index(m));
 
     /*
      * We must expand generalisation relationships before we apply the
@@ -75,16 +75,16 @@ transform(const context& ctx, meta_model::model& em) {
      * must be expanded after merging models because we may inherit
      * across models.
      */
-    generalization_transform::transform(ctx, idx, em);
+    generalization_transform::apply(ctx, idx, m);
 
     /*
      * Stereotypes transform must be done before object templates
      * because we obtain object template information from the
      * stereotypes.
      */
-    stereotypes_transform::transform(ctx, em);
-    object_templates_transform::transform(ctx, em);
-    containment_transform::transform(ctx, em);
+    stereotypes_transform::apply(ctx, m);
+    object_templates_transform::apply(ctx, m);
+    containment_transform::apply(ctx, m);
 
     /*
      * Meta-name transform must be applied after all transforms that
@@ -92,13 +92,13 @@ transform(const context& ctx, meta_model::model& em) {
      * is stereotypes and containment transforms. This is also why we
      * cannot apply this transform at the model level.
      */
-    meta_naming_transform::transform(ctx, em);
+    meta_naming_transform::apply(ctx, m);
 
     /*
      * ORM properties must be expanded after stereotypes and
      * containment.
      */
-    orm_transform::transform(ctx, em);
+    orm_transform::apply(ctx, m);
 
     /*
      * Resolution must be done after system elements have been
@@ -106,7 +106,7 @@ transform(const context& ctx, meta_model::model& em) {
      * any references to those elements. This is done in stereotype
      * expansion.
      */
-    resolver_transform::transform(ctx, idx, em);
+    resolver_transform::apply(ctx, idx, m);
 
     /*
      * We can only expand attributes after we've expanded:
@@ -117,21 +117,21 @@ transform(const context& ctx, meta_model::model& em) {
      *   fluency to be populated.
      *  - resolution, else we will copy unresolved attributes.
      */
-    attributes_transform::transform(ctx, em);
+    attributes_transform::apply(ctx, m);
 
     /*
      * We must expand associations after attributes have been expanded
      * as it relies on the various attribute containers being
      * populated.
      */
-    associations_transform::transform(ctx, em);
+    associations_transform::apply(ctx, m);
 
     /*
      * Ensure the model is valid.
      */
-    helpers::model_post_processing_validator::validate(idx, em);
+    helpers::model_post_processing_validator::validate(idx, m);
 
-    stp.end_chain(em);
+    stp.end_chain(m);
 }
 
 }

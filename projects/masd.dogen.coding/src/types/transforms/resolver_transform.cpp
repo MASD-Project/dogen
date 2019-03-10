@@ -35,12 +35,12 @@ static logger lg(logger_factory(transform_id));
 
 namespace masd::dogen::coding::transforms {
 
-void resolver_transform::transform(const context& ctx,
-    const helpers::indices& idx, meta_model::model& em) {
+void resolver_transform::apply(const context& ctx,
+    const helpers::indices& idx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "resolver transform",
-        transform_id, em.name().id(), *ctx.tracer(), em);
-    helpers::resolver::resolve(idx, em);
-    stp.end_transform(em);
+        transform_id, m.name().id(), *ctx.tracer(), m);
+    helpers::resolver::resolve(idx, m);
+    stp.end_transform(m);
 }
 
 }

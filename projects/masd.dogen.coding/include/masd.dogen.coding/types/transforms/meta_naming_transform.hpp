@@ -44,7 +44,7 @@ public:
      * internally as they are generated. We only concern ourselves
      * with well-known meta-model elements from coding.
      */
-    static void transform(const context& ctx, meta_model::model& em);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

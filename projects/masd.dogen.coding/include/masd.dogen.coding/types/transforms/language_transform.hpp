@@ -51,7 +51,7 @@ private:
         const annotations::annotation& a);
 
 public:
-    static void transform(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

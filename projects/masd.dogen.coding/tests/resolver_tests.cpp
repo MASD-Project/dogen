@@ -139,7 +139,7 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_different_model_results_in_su
 
     const std::list<model> refs = { m[1] };
     const auto ctx(mock_context_factory::make());
-    auto combined(merge_transform::transform(ctx, m[0], refs));
+    auto combined(merge_transform::apply(ctx, m[0], refs));
     BOOST_CHECK(combined.objects().size() == 2);
     BOOST_CHECK(combined.builtins().empty());
 
@@ -179,7 +179,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
 
     const std::list<model> refs;
     const auto ctx(mock_context_factory::make());
-    auto combined(merge_transform::transform(ctx, m, refs));
+    auto combined(merge_transform::apply(ctx, m, refs));
     BOOST_CHECK(combined.objects().size() == 2);
     BOOST_CHECK(combined.builtins().empty());
 
@@ -211,7 +211,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
 
     const std::list<model> refs = { m[1] };
     const auto ctx(mock_context_factory::make());
-    auto combined(merge_transform::transform(ctx, m[0], refs));
+    auto combined(merge_transform::apply(ctx, m[0], refs));
     BOOST_CHECK(combined.objects().size() == 2);
     BOOST_CHECK(combined.builtins().empty());
 
@@ -241,7 +241,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
     const std::list<model> refs;
 
     const auto ctx(mock_context_factory::make());
-    auto combined(merge_transform::transform(ctx, m, refs));
+    auto combined(merge_transform::apply(ctx, m, refs));
     BOOST_CHECK(combined.objects().size() == 4);
     BOOST_CHECK(combined.builtins().empty());
 
@@ -292,7 +292,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
     const std::list<model> refs = { a[1], a[2], a[3] };
 
     const auto ctx(mock_context_factory::make());
-    auto combined(merge_transform::transform(ctx, a[0], refs));
+    auto combined(merge_transform::apply(ctx, a[0], refs));
     BOOST_CHECK(combined.objects().size() == 4);
     BOOST_CHECK(combined.builtins().empty());
 
@@ -323,7 +323,7 @@ BOOST_AUTO_TEST_CASE(object_with_missing_third_degree_parent_in_different_models
 
     const auto ctx(mock_context_factory::make());
     const std::list<model> refs = { a[1], a[2] };
-    auto combined(merge_transform::transform(ctx, a[0], refs));
+    auto combined(merge_transform::apply(ctx, a[0], refs));
 
     contains_checker<resolution_error> c(missing_parent);
     BOOST_CHECK_EXCEPTION(

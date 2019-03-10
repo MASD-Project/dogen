@@ -105,7 +105,7 @@ is_element_type(const meta_model::static_stereotypes ss) {
 }
 
 void stereotypes_transform::
-transform_static_stereotypes(meta_model::object& o, meta_model::model& em) {
+transform_static_stereotypes(meta_model::object& o, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Static  stereotypes: "
                              << o.static_stereotypes();
 
@@ -124,7 +124,7 @@ transform_static_stereotypes(meta_model::object& o, meta_model::model& em) {
              */
             continue;
         } else if (ss == static_stereotypes::visitable)
-            expand_visitable(o, em);
+            expand_visitable(o, m);
         else if (ss == static_stereotypes::fluent)
             o.is_fluent(true);
         else if (ss == static_stereotypes::immutable)
@@ -155,7 +155,7 @@ transform_static_stereotypes(meta_model::object& o, meta_model::model& em) {
 }
 
 void stereotypes_transform::transform_dynamic_stereotypes(meta_model::object& o,
-    meta_model::model& em) {
+    const meta_model::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Dynamic stereotypes: "
                              << o.dynamic_stereotypes();
 
@@ -389,10 +389,10 @@ expand_visitable(meta_model::object& o, meta_model::model& em) {
 }
 
 bool stereotypes_transform::try_as_object_template(const std::string& s,
-    meta_model::object& o, const meta_model::model& em) {
+    meta_model::object& o, const meta_model::model& m) {
 
     using helpers::resolver;
-    const auto oot(resolver::try_resolve_object_template_name(o.name(), s, em));
+    const auto oot(resolver::try_resolve_object_template_name(o.name(), s, m));
     if (!oot)
         return false;
 
@@ -400,8 +400,7 @@ bool stereotypes_transform::try_as_object_template(const std::string& s,
     return true;
 }
 
-void stereotypes_transform::transform(meta_model::object& o,
-    meta_model::model& em) {
+void stereotypes_transform::apply(meta_model::object& o, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << o.name().id();
 
     /*
@@ -413,11 +412,11 @@ void stereotypes_transform::transform(meta_model::object& o,
         return;
     }
 
-    transform_static_stereotypes(o, em);
-    transform_dynamic_stereotypes(o, em);
+    transform_static_stereotypes(o, m);
+    transform_dynamic_stereotypes(o, m);
 }
 
-void stereotypes_transform::transform(meta_model::primitive& p) {
+void stereotypes_transform::apply(meta_model::primitive& p) {
     const auto id(p.name().id());
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << id;
 
@@ -476,18 +475,17 @@ void stereotypes_transform::transform(meta_model::primitive& p) {
     }
 }
 
-void stereotypes_transform::
-transform(const context& ctx, meta_model::model& em) {
+void stereotypes_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "stereotypes transform",
-        transform_id, em.name().id(), *ctx.tracer(), em);
+        transform_id, m.name().id(), *ctx.tracer(), m);
 
-    for (auto& pair : em.objects())
-        transform(*pair.second, em);
+    for (auto& pair : m.objects())
+        apply(*pair.second, m);
 
-    for (auto& pair : em.primitives())
-        transform(*pair.second);
+    for (auto& pair : m.primitives())
+        apply(*pair.second);
 
-    stp.end_transform(em);
+    stp.end_transform(m);
 }
 
 }

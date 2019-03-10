@@ -77,7 +77,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     }
 
     const auto ctx(mock_context_factory::make());
-    const auto combined(merge_transform::transform(ctx, target, ims));
+    const auto combined(merge_transform::apply(ctx, target, ims));
 
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << combined;
 
@@ -135,7 +135,7 @@ BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
 
     const std::list<model> ims;
     const auto ctx(mock_context_factory::make());
-    const auto combined(merge_transform::transform(ctx, m, ims));
+    const auto combined(merge_transform::apply(ctx, m, ims));
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << combined;
 
     BOOST_CHECK(combined.objects().empty());

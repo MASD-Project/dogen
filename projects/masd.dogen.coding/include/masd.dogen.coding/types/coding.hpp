@@ -36,7 +36,7 @@
  * cohesive whole. They are then suitable to be sent down the
  * pipeline for further processing.
  *
- * @section coding_0 Mission
+ * @section coding_1 Mission
  *
  * Coding's objectives are:
  *

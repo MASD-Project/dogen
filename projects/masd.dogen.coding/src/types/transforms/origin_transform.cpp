@@ -90,27 +90,26 @@ make_type_group(const annotations::type_repository& atrp) {
 }
 
 bool origin_transform::
-is_proxy_model(const type_group& tg, const meta_model::model& em) {
-    const auto& o(em.root_module()->annotation());
+is_proxy_model(const type_group& tg, const meta_model::model& m) {
+    const auto& o(m.root_module()->annotation());
     const annotations::entry_selector s(o);
     const bool r(s.get_boolean_content_or_default(tg.is_proxy_model));
     BOOST_LOG_SEV(lg, debug) << "Read is proxy model: " << r
-                             << " for model: " << em.name().id();
+                             << " for model: " << m.name().id();
     return r;
 }
 
-meta_model::origin_types
-origin_transform::compute_origin_types(const meta_model::model& em,
-    const bool is_proxy_model) {
+meta_model::origin_types origin_transform::
+compute_origin_types(const meta_model::model& m, const bool is_proxy_model) {
     using meta_model::origin_types;
-    if (is_proxy_model && em.origin_type() == origin_types::target) {
-        const auto& id(em.name().id());
+    if (is_proxy_model && m.origin_type() == origin_types::target) {
+        const auto& id(m.name().id());
         BOOST_LOG_SEV(lg, error) << target_cannot_be_proxy << id;
         BOOST_THROW_EXCEPTION(
             transformation_error(target_cannot_be_proxy + id));
     }
 
-    if (em.origin_type() == origin_types::target)
+    if (m.origin_type() == origin_types::target)
         return origin_types::target;
     else if (is_proxy_model)
         return origin_types::proxy_reference;
@@ -119,19 +118,19 @@ origin_transform::compute_origin_types(const meta_model::model& em,
 }
 
 void origin_transform::
-transform(const context& ctx, meta_model::model& em) {
+apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "origin transform",
-        transform_id, em.name().id(), *ctx.tracer(), em);
+        transform_id, m.name().id(), *ctx.tracer(), m);
 
     const auto tg(make_type_group(*ctx.type_repository()));
-    const auto ipm(is_proxy_model(tg, em));
-    const auto ot(compute_origin_types(em, ipm));
-    em.origin_type(ot);
+    const auto ipm(is_proxy_model(tg, m));
+    const auto ot(compute_origin_types(m, ipm));
+    m.origin_type(ot);
 
     updater g(ot);
-    meta_model::elements_traversal(em, g);
+    meta_model::elements_traversal(m, g);
 
-    stp.end_transform(em);
+    stp.end_transform(m);
 }
 
 }

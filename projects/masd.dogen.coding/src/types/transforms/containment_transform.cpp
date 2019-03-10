@@ -22,6 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/builtin.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
@@ -30,7 +31,6 @@
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
-#include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/helpers/name_builder.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
 #include "masd.dogen.coding/types/transforms/containment_transform.hpp"
@@ -72,41 +72,41 @@ containment_transform::create_global_module(const meta_model::origin_types ot) {
 }
 
 void containment_transform::
-inject_global_module(meta_model::model& em) {
+inject_global_module(meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Injecting global module for: "
-                             << em.name().id();
+                             << m.name().id();
 
-    const auto gm(create_global_module(em.origin_type()));
+    const auto gm(create_global_module(m.origin_type()));
     const auto gmn(gm->name());
-    const auto i(em.modules().find(gmn.id()));
-    if (i != em.modules().end()) {
-        const auto id(em.name().id());
+    const auto i(m.modules().find(gmn.id()));
+    if (i != m.modules().end()) {
+        const auto id(m.name().id());
         BOOST_LOG_SEV(lg, error) << model_already_has_global_module << id;
         BOOST_THROW_EXCEPTION(
             transformation_error(model_already_has_global_module + id));
     }
-    em.modules().insert(std::make_pair(gmn.id(), gm));
+    m.modules().insert(std::make_pair(gmn.id(), gm));
 
-    add_containing_module_to_non_contained_entities(gmn, em.modules());
-    add_containing_module_to_non_contained_entities(gmn, em.object_templates());
-    add_containing_module_to_non_contained_entities(gmn, em.builtins());
-    add_containing_module_to_non_contained_entities(gmn, em.enumerations());
-    add_containing_module_to_non_contained_entities(gmn, em.objects());
-    add_containing_module_to_non_contained_entities(gmn, em.exceptions());
-    add_containing_module_to_non_contained_entities(gmn, em.visitors());
-    add_containing_module_to_non_contained_entities(gmn, em.primitives());
+    add_containing_module_to_non_contained_entities(gmn, m.modules());
+    add_containing_module_to_non_contained_entities(gmn, m.object_templates());
+    add_containing_module_to_non_contained_entities(gmn, m.builtins());
+    add_containing_module_to_non_contained_entities(gmn, m.enumerations());
+    add_containing_module_to_non_contained_entities(gmn, m.objects());
+    add_containing_module_to_non_contained_entities(gmn, m.exceptions());
+    add_containing_module_to_non_contained_entities(gmn, m.visitors());
+    add_containing_module_to_non_contained_entities(gmn, m.primitives());
 
     BOOST_LOG_SEV(lg, debug) << "Done injecting global module";
 }
 
 void containment_transform::
-transform(const context& ctx, meta_model::model& em) {
+apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "containment transform",
-        transform_id, em.name().id(), *ctx.tracer(), em);
+        transform_id, m.name().id(), *ctx.tracer(), m);
 
-    inject_global_module(em);
+    inject_global_module(m);
 
-    stp.end_transform(em);
+    stp.end_transform(m);
 }
 
 }

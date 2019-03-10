@@ -30,8 +30,9 @@
 #include <vector>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_model_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_object_properties.hpp"
@@ -96,16 +97,16 @@ private:
 
 private:
     static void transform_objects(const type_group& tg,
-        meta_model::model& em);
+        meta_model::model& m);
     static void transform_object_templates(const type_group& tg,
-        meta_model::model& em);
+        meta_model::model& m);
     static void transform_primitives(const type_group& tg,
-        meta_model::model& em);
+        meta_model::model& m);
     static void transform_modules(const type_group& tg,
-        meta_model::model& em);
+        meta_model::model& m);
 
 public:
-    static void transform(const context& ctx, meta_model::model& em);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

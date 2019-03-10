@@ -36,20 +36,20 @@ namespace masd::dogen::coding::transforms {
  * @brief Transform that specialises in indexing
  * object-template-related relationships across the model.
  *
- * @section coding_object_templates_expander_0 Model requirements
+ * @section coding_object_templates_transform_0 Model requirements
  *
  * The object templates transform expects to receive a merged
  * endmodel, but in practice it makes no requirements in terms of any
  * dependent transforms.
  *
- * @section coding_object_templates_exapnder_1 Transformation
+ * @section coding_object_templates_transform_1 Transformation
  *
  * The object templates expander only touches two types of model
  * elements: object templates and objects. This is because these are
  * the only two elements involved in relationships that deal with
  * object templates. Each of these are processed differently.
  *
- * @subsection coding_object_templates_expander_11 First stage: expanding object templates
+ * @subsection coding_object_templates_transform_11 First stage: expanding object templates
   *
  * The object templates transform starts by processing all object
  * templates. Each object template goes through two steps: @e
@@ -71,7 +71,7 @@ namespace masd::dogen::coding::transforms {
  * every time any alteration is done to the object templates
  * hierarchy.
  *
- * @subsection coding_object_templates_expander_12 Second stage: expand objects
+ * @subsection coding_object_templates_transform_12 Second stage: expand objects
  *
  * The object templates expander is also responsible for updating the
  * instantiated object templates in an object - if any. Thus, only
@@ -104,7 +104,7 @@ private:
      * @brief Returns the object with the given name, or throws.
      */
     static  meta_model::object& find_object(const meta_model::name& n,
-        meta_model::model& em);
+        meta_model::model& m);
 
     /**
      * @brief Returns the object template with the given name, or
@@ -113,7 +113,7 @@ private:
     static meta_model::object_template& resolve_object_template(
         const meta_model::name& owner,
         const meta_model::name& object_template_name,
-        meta_model::model& em);
+        meta_model::model& m);
 
     /**
      * @brief Removes duplicate names, preserving the original order
@@ -126,32 +126,32 @@ private:
      * @brief Expands a specific object.
      */
     static void expand_object(meta_model::object& o,
-        meta_model::model& em,
+        meta_model::model& m,
         std::unordered_set<meta_model::name>& processed_names);
 
     /**
      * @brief Expands all objects in the model.
      */
-    static void expand_objects(meta_model::model& em);
+    static void expand_objects(meta_model::model& m);
 
     /**
      * @brief Expands an object template.
      */
     static void
     expand_object_template(meta_model::object_template& otp,
-        meta_model::model& em,
+        meta_model::model& m,
         std::unordered_set<meta_model::name>& processed_names);
 
     /**
      * @brief Expands all object templates in the model.
      */
-    static void expand_object_templates(meta_model::model& em);
+    static void expand_object_templates(meta_model::model& m);
 
 public:
     /**
      * @brief Transforms the object templates the supplied model.
      */
-    static void transform(const context& ctx, meta_model::model& em);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

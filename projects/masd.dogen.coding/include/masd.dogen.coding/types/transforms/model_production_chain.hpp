@@ -39,8 +39,8 @@ namespace masd::dogen::coding::transforms {
  */
 class model_production_chain final {
 public:
-    static std::list<meta_model::model> transform(const context& ctx,
-        coding::meta_model::model_set cmset);
+    static std::list<meta_model::model>
+    apply(const context& ctx, coding::meta_model::model_set ms);
 };
 
 }

@@ -52,7 +52,7 @@ private:
         meta_model::object& o);
 
 public:
-    static void transform(const context& ctx, meta_model::model& em);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

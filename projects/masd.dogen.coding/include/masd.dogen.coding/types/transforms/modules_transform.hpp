@@ -35,11 +35,11 @@ namespace masd::dogen::coding::transforms {
  */
 class modules_transform final {
 private:
-    static void create_missing_modules(meta_model::model& em);
-    static void expand_containing_module(meta_model::model& em);
+    static void create_missing_modules(meta_model::model& m);
+    static void expand_containing_module(meta_model::model& m);
 
 public:
-    static void transform(const context& ctx, meta_model::model& em);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

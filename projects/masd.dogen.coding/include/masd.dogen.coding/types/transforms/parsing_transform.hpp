@@ -105,7 +105,7 @@ public:
     /**
      * Execute the property expansion against the model.
      */
-    static void transform(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

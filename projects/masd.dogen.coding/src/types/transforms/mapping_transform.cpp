@@ -40,7 +40,7 @@ bool mapping_transform::is_mappable(const meta_model::languages from,
     return helpers::mapper::is_mappable(from, to);
 }
 
-meta_model::model mapping_transform::transform(const context& ctx,
+meta_model::model mapping_transform::apply(const context& ctx,
     const meta_model::model& src, const meta_model::languages to) {
     tracing::scoped_transform_tracer stp(lg, "mapping transform",
         transform_id, src.name().id(), *ctx.tracer(), src);

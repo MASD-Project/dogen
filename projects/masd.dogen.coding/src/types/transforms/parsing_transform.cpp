@@ -242,15 +242,14 @@ void parsing_transform::parse_underlying_element(const type_group& tg,
     p.value_attribute(attr);
 }
 
-void parsing_transform::
-transform(const context& ctx, meta_model::model& em) {
+void parsing_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "parsing transform",
-        transform_id, em.name().id(), *ctx.tracer(), em);
+        transform_id, m.name().id(), *ctx.tracer(), m);
 
     const auto tg(make_type_group(*ctx.type_repository()));
-    const auto l(em.input_language());
+    const auto l(m.input_language());
 
-    for (auto& pair : em.objects()) {
+    for (auto& pair : m.objects()) {
         auto& o(*pair.second);
         const auto id(o.name().id());
 
@@ -263,7 +262,7 @@ transform(const context& ctx, meta_model::model& em) {
         }
     }
 
-    for (auto& pair : em.object_templates()) {
+    for (auto& pair : m.object_templates()) {
         auto& c(*pair.second);
         const auto id(c.name().id());
 
@@ -275,7 +274,7 @@ transform(const context& ctx, meta_model::model& em) {
         }
     }
 
-    for (auto& pair : em.enumerations()) {
+    for (auto& pair : m.enumerations()) {
         auto& e(*pair.second);
         const auto id(e.name().id());
 
@@ -287,7 +286,7 @@ transform(const context& ctx, meta_model::model& em) {
         }
     }
 
-    for (auto& pair : em.primitives()) {
+    for (auto& pair : m.primitives()) {
         auto& p(*pair.second);
         const auto id(p.name().id());
 
@@ -299,7 +298,7 @@ transform(const context& ctx, meta_model::model& em) {
         }
     }
 
-    stp.end_transform(em);
+    stp.end_transform(m);
 }
 
 }

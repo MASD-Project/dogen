@@ -48,16 +48,16 @@ static logger lg(logger_factory(transform_id));
 namespace masd::dogen::coding::transforms {
 
 std::list<meta_model::model>
-model_production_chain::transform(const context& ctx,
-    coding::meta_model::model_set cms) {
+model_production_chain::apply(const context& ctx,
+    coding::meta_model::model_set ms) {
     tracing::scoped_chain_tracer stp(lg, "coding model production chain",
-        transform_id, cms.target().name().id(), *ctx.tracer(), cms);
+        transform_id, ms.target().name().id(), *ctx.tracer(), ms);
 
     /*
      * Then we apply a set of post-processing transforms to the model
      * set.
      */
-    model_set_pre_processing_chain::transform(ctx, cms);
+    model_set_pre_processing_chain::apply(ctx, ms);
 
     /*
      * Note that we've obtained the target given the user options;
@@ -87,19 +87,18 @@ model_production_chain::transform(const context& ctx,
      * performing mapping as required.
      */
     std::list<meta_model::model> r;
-    for (const auto ol : cms.target().output_languages()) {
+    for (const auto ol : ms.target().output_languages()) {
         /*
          * Execute the assembly chain for each of the requested output
          * languages.
          */
-        auto m(model_assembly_chain::transform(ctx, ol, cms.target(),
-                cms.references()));
+        auto m(model_assembly_chain::apply(ctx, ol, ms.target(), ms.references()));
 
         /*
          * Then apply all of the post-processing transforms to the
          * assembled model.
          */
-        model_post_processing_chain::transform(ctx, m);
+        model_post_processing_chain::apply(ctx, m);
         r.push_back(m);
     }
 

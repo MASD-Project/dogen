@@ -71,7 +71,7 @@ transform(const context& ctx,
      * Run all the coding transforms against the model set.
      */
     const auto cms(coding::transforms::model_production_chain::
-        transform(ctx.coding_context(), cmset));
+        apply(ctx.coding_context(), cmset));
 
     /*
      * Obtain the generation models.

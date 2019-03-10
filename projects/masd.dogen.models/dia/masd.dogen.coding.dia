@@ -821,7 +821,7 @@ are obtained via frontends and post-processed until they form a
 cohesive whole. They are then suitable to be sent down the
 pipeline for further processing.
 
-@section coding_0 Mission
+@section coding_1 Mission
 
 Coding's objectives are:
 
@@ -11161,16 +11161,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O82">
       <dia:attribute name="obj_pos">
-        <dia:point val="-177,28"/>
+        <dia:point val="-176,28"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-177.05,27.95;-159.51,31.65"/>
+        <dia:rectangle val="-176.05,27.95;-159.665,31.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-177,28"/>
+        <dia:point val="-176,28"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.440000000000001"/>
+        <dia:real val="16.285"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -11266,7 +11266,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -11298,7 +11298,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11307,7 +11307,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
@@ -11315,7 +11315,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#ms#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#model_set&amp;#</dia:string>
+                <dia:string>#model_set#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11324,7 +11324,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="3"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -11338,16 +11338,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O83">
       <dia:attribute name="obj_pos">
-        <dia:point val="-179,42"/>
+        <dia:point val="-177,42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-179.05,41.95;-155.35,45.65"/>
+        <dia:rectangle val="-177.05,41.95;-156.43,45.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-179,42"/>
+        <dia:point val="-177,42"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="23.600000000000001"/>
+        <dia:real val="20.52"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -11443,7 +11443,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -11475,7 +11475,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11484,7 +11484,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -11498,19 +11498,19 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O84">
       <dia:attribute name="obj_pos">
-        <dia:point val="-230,48"/>
+        <dia:point val="-238,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-230.05,47.95;-207.12,52.45"/>
+        <dia:rectangle val="-238.05,47.95;-207.035,51.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-230,48"/>
+        <dia:point val="-238,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.830000000000002"/>
+        <dia:real val="30.914999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#model_assembly_chain#</dia:string>
@@ -11603,7 +11603,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -11635,7 +11635,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11644,7 +11644,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
@@ -11652,7 +11652,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#l#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const languages&amp;#</dia:string>
+                <dia:string>#languages#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11661,15 +11661,15 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#ems#</dia:string>
+                <dia:string>#ms#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::list&lt;meta_model::model&gt;&amp;#</dia:string>
+                <dia:string>#std::list&lt;meta_model::model&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11678,7 +11678,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -11695,13 +11695,13 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:point val="-178,57"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-178.05,56.95;-157.43,60.65"/>
+        <dia:rectangle val="-178.05,56.95;-158.97,60.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-178,57"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.52"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -11797,7 +11797,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -11829,7 +11829,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11838,15 +11838,15 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#em#</dia:string>
+                <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model&amp;#</dia:string>
+                <dia:string>#meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11855,7 +11855,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="3"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -11869,16 +11869,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O86">
       <dia:attribute name="obj_pos">
-        <dia:point val="-233,38"/>
+        <dia:point val="-244,38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-233.05,37.95;-205.5,41.65"/>
+        <dia:rectangle val="-244.05,37.95;-219.965,41.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-233,38"/>
+        <dia:point val="-244,38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.449999999999999"/>
+        <dia:real val="23.984999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -11974,7 +11974,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -12003,10 +12003,10 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#ems#</dia:string>
+                <dia:string>#ms#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::list&lt;meta_model::model&gt;&amp;#</dia:string>
+                <dia:string>#std::list&lt;meta_model::model&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -12015,7 +12015,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -12029,7 +12029,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O87">
       <dia:attribute name="name">
-        <dia:string>#&lt; merges models for#</dia:string>
+        <dia:string>#merges models for &gt;#</dia:string>
       </dia:attribute>
       <dia:attribute name="direction">
         <dia:enum val="1"/>
@@ -12065,19 +12065,19 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-230,48"/>
+        <dia:point val="-222.542,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-230.75,41.55;-219.075,48.8"/>
+        <dia:rectangle val="-232.058,41.55;-221.792,48.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-230,48"/>
-        <dia:point val="-230,45"/>
-        <dia:point val="-219.275,45"/>
-        <dia:point val="-219.275,41.6"/>
+        <dia:point val="-222.542,48"/>
+        <dia:point val="-222.542,45"/>
+        <dia:point val="-232.007,45"/>
+        <dia:point val="-232.007,41.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -12094,23 +12094,23 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O84" connection="0"/>
+        <dia:connection handle="0" to="O84" connection="1"/>
         <dia:connection handle="1" to="O86" connection="6"/>
       </dia:connections>
       <dia:childnode parent="O80"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O88">
       <dia:attribute name="obj_pos">
-        <dia:point val="-196,33"/>
+        <dia:point val="-202,33"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-196.05,32.95;-182.745,36.65"/>
+        <dia:rectangle val="-202.05,32.95;-182.97,36.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-196,33"/>
+        <dia:point val="-202,33"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.205"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -12206,7 +12206,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -12235,10 +12235,10 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#em#</dia:string>
+                <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model&amp;#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -12247,7 +12247,24 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
+              </dia:attribute>
+            </dia:composite>
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
+                <dia:string>#m#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#meta_model::model#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="3"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -12261,16 +12278,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O89">
       <dia:attribute name="obj_pos">
-        <dia:point val="-154,28"/>
+        <dia:point val="-153,28"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-154.05,27.95;-133.43,31.65"/>
+        <dia:rectangle val="-153.05,27.95;-133.97,31.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-154,28"/>
+        <dia:point val="-153,28"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.52"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -12366,7 +12383,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -12398,7 +12415,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -12407,15 +12424,15 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#em#</dia:string>
+                <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model&amp;#</dia:string>
+                <dia:string>#meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -12424,7 +12441,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="3"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -12438,16 +12455,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O90">
       <dia:attribute name="obj_pos">
-        <dia:point val="-203,28"/>
+        <dia:point val="-201,28"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-203.05,27.95;-182.43,31.65"/>
+        <dia:rectangle val="-201.05,27.95;-183.125,31.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-203,28"/>
+        <dia:point val="-201,28"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.52"/>
+        <dia:real val="17.824999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -12543,7 +12560,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -12575,7 +12592,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -12584,15 +12601,15 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#em#</dia:string>
+                <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model&amp;#</dia:string>
+                <dia:string>#meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -12601,7 +12618,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -12651,19 +12668,19 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-177,28"/>
+        <dia:point val="-176,28"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-182.53,27.2;-176.25,29.9"/>
+        <dia:rectangle val="-183.225,27.2;-175.25,29.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-177,28"/>
+        <dia:point val="-176,28"/>
         <dia:point val="-181,28"/>
         <dia:point val="-181,29.1"/>
-        <dia:point val="-182.48,29.1"/>
+        <dia:point val="-183.175,29.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -12723,19 +12740,19 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-177,29.1"/>
+        <dia:point val="-176,29.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-182.845,28.3;-176.25,34.9"/>
+        <dia:rectangle val="-183.07,28.3;-175.25,34.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-177,29.1"/>
+        <dia:point val="-176,29.1"/>
         <dia:point val="-180,29.1"/>
         <dia:point val="-180,34.1"/>
-        <dia:point val="-182.795,34.1"/>
+        <dia:point val="-183.02,34.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -12795,19 +12812,19 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-159.56,28"/>
+        <dia:point val="-159.715,28"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-160.31,27.2;-153.95,29.9"/>
+        <dia:rectangle val="-160.465,27.2;-152.95,29.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-159.56,28"/>
+        <dia:point val="-159.715,28"/>
         <dia:point val="-155,28"/>
         <dia:point val="-155,29.1"/>
-        <dia:point val="-154,29.1"/>
+        <dia:point val="-153,29.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -12831,16 +12848,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O94">
       <dia:attribute name="obj_pos">
-        <dia:point val="-154,33"/>
+        <dia:point val="-153,33"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-154.05,32.95;-133.43,36.65"/>
+        <dia:rectangle val="-153.05,32.95;-133.97,36.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-154,33"/>
+        <dia:point val="-153,33"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.52"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -12936,7 +12953,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -12968,7 +12985,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -12977,15 +12994,15 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#em#</dia:string>
+                <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model&amp;#</dia:string>
+                <dia:string>#meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -12994,7 +13011,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="3"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -13044,19 +13061,19 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-159.56,29.1"/>
+        <dia:point val="-159.715,29.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-160.31,28.3;-153.95,34.9"/>
+        <dia:rectangle val="-160.465,28.3;-152.95,34.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-159.56,29.1"/>
+        <dia:point val="-159.715,29.1"/>
         <dia:point val="-156,29.1"/>
         <dia:point val="-156,34.1"/>
-        <dia:point val="-154,34.1"/>
+        <dia:point val="-153,34.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -13080,16 +13097,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O96">
       <dia:attribute name="obj_pos">
-        <dia:point val="-203,38"/>
+        <dia:point val="-202,38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-203.05,37.95;-182.43,41.65"/>
+        <dia:rectangle val="-202.05,37.95;-182.97,41.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-203,38"/>
+        <dia:point val="-202,38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.52"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -13185,7 +13202,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -13217,7 +13234,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13226,15 +13243,15 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#em#</dia:string>
+                <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model&amp;#</dia:string>
+                <dia:string>#meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13243,7 +13260,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="3"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -13257,16 +13274,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O97">
       <dia:attribute name="obj_pos">
-        <dia:point val="-154,38"/>
+        <dia:point val="-153,38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-154.05,37.95;-133.43,41.65"/>
+        <dia:rectangle val="-153.05,37.95;-133.97,41.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-154,38"/>
+        <dia:point val="-153,38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.52"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -13362,7 +13379,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -13394,7 +13411,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13403,15 +13420,15 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#em#</dia:string>
+                <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model&amp;#</dia:string>
+                <dia:string>#meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13420,7 +13437,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="3"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -13491,13 +13508,13 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:point val="-196,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-196.05,47.95;-180.05,51.65"/>
+        <dia:rectangle val="-196.05,47.95;-181.59,51.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-196,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.9"/>
+        <dia:real val="14.359999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -13593,7 +13610,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -13625,7 +13642,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13634,15 +13651,15 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#im#</dia:string>
+                <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#model&amp;#</dia:string>
+                <dia:string>#model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13651,7 +13668,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="3"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -13665,16 +13682,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O100">
       <dia:attribute name="obj_pos">
-        <dia:point val="-152,48"/>
+        <dia:point val="-153,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-152.05,47.95;-136.05,51.65"/>
+        <dia:rectangle val="-153.05,47.95;-133.97,51.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-152,48"/>
+        <dia:point val="-153,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.9"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -13770,7 +13787,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -13802,7 +13819,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13811,15 +13828,15 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#im#</dia:string>
+                <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#model&amp;#</dia:string>
+                <dia:string>#meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13828,7 +13845,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="3"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -13842,16 +13859,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O101">
       <dia:attribute name="obj_pos">
-        <dia:point val="-151,57"/>
+        <dia:point val="-152,57"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-151.05,56.95;-130.43,60.65"/>
+        <dia:rectangle val="-152.05,56.95;-134.125,60.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-151,57"/>
+        <dia:point val="-152,57"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.52"/>
+        <dia:real val="17.824999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -13947,7 +13964,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -13979,7 +13996,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13993,10 +14010,10 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#em#</dia:string>
+                <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model&amp;#</dia:string>
+                <dia:string>#meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14005,7 +14022,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="3"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -14019,16 +14036,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O102">
       <dia:attribute name="obj_pos">
-        <dia:point val="-204,62"/>
+        <dia:point val="-203,62"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-204.05,61.95;-183.43,65.65"/>
+        <dia:rectangle val="-203.05,61.95;-183.97,65.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-204,62"/>
+        <dia:point val="-203,62"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.52"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -14124,7 +14141,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -14156,7 +14173,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14165,15 +14182,15 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#em#</dia:string>
+                <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model&amp;#</dia:string>
+                <dia:string>#meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14182,7 +14199,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="3"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -14196,16 +14213,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O103">
       <dia:attribute name="obj_pos">
-        <dia:point val="-151,67"/>
+        <dia:point val="-152,67"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-151.05,66.95;-130.43,70.65"/>
+        <dia:rectangle val="-152.05,66.95;-132.97,70.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-151,67"/>
+        <dia:point val="-152,67"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.52"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -14301,7 +14318,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -14333,7 +14350,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14342,15 +14359,15 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#em#</dia:string>
+                <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model&amp;#</dia:string>
+                <dia:string>#meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14359,7 +14376,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="3"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -14373,16 +14390,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O104">
       <dia:attribute name="obj_pos">
-        <dia:point val="-204,57"/>
+        <dia:point val="-203,57"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-204.05,56.95;-183.43,60.65"/>
+        <dia:rectangle val="-203.05,56.95;-183.97,60.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-204,57"/>
+        <dia:point val="-203,57"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.52"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -14478,7 +14495,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -14510,7 +14527,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14519,15 +14536,15 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#em#</dia:string>
+                <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model&amp;#</dia:string>
+                <dia:string>#meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14536,7 +14553,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="3"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -14550,16 +14567,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O105">
       <dia:attribute name="obj_pos">
-        <dia:point val="-151,62"/>
+        <dia:point val="-152,62"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-151.05,61.95;-130.43,65.65"/>
+        <dia:rectangle val="-152.05,61.95;-132.97,65.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-151,62"/>
+        <dia:point val="-152,62"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.52"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -14655,7 +14672,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -14687,7 +14704,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14696,15 +14713,15 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#em#</dia:string>
+                <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model&amp;#</dia:string>
+                <dia:string>#meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14713,7 +14730,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="3"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -14727,16 +14744,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O106">
       <dia:attribute name="obj_pos">
-        <dia:point val="-204,72"/>
+        <dia:point val="-202,72"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-204.05,71.95;-183.43,75.65"/>
+        <dia:rectangle val="-202.05,71.95;-184.125,75.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-204,72"/>
+        <dia:point val="-202,72"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.52"/>
+        <dia:real val="17.824999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -14832,7 +14849,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -14864,7 +14881,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14878,10 +14895,10 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#em#</dia:string>
+                <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model&amp;#</dia:string>
+                <dia:string>#meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14890,7 +14907,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="3"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -14940,19 +14957,19 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-157.48,57"/>
+        <dia:point val="-159.02,57"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-158.23,51.55;-143.85,57.8"/>
+        <dia:rectangle val="-159.77,51.55;-143.31,57.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-157.48,57"/>
-        <dia:point val="-157.48,54"/>
-        <dia:point val="-144.05,54"/>
-        <dia:point val="-144.05,51.6"/>
+        <dia:point val="-159.02,57"/>
+        <dia:point val="-159.02,54"/>
+        <dia:point val="-143.51,54"/>
+        <dia:point val="-143.51,51.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -15015,7 +15032,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:point val="-178,57"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-188.1,51.55;-177.25,57.8"/>
+        <dia:rectangle val="-188.87,51.55;-177.25,57.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15023,8 +15040,8 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-178,57"/>
         <dia:point val="-178,54"/>
-        <dia:point val="-188.05,54"/>
-        <dia:point val="-188.05,51.6"/>
+        <dia:point val="-188.82,54"/>
+        <dia:point val="-188.82,51.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -15084,19 +15101,19 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-157.48,57"/>
+        <dia:point val="-159.02,57"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-158.23,56.2;-150.95,58.9"/>
+        <dia:rectangle val="-159.77,56.2;-151.95,58.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-157.48,57"/>
+        <dia:point val="-159.02,57"/>
         <dia:point val="-153,57"/>
         <dia:point val="-153,58.1"/>
-        <dia:point val="-151,58.1"/>
+        <dia:point val="-152,58.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -15231,16 +15248,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O111">
       <dia:attribute name="obj_pos">
-        <dia:point val="-204,67"/>
+        <dia:point val="-203,67"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-204.05,66.95;-183.43,70.65"/>
+        <dia:rectangle val="-203.05,66.95;-183.97,70.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-204,67"/>
+        <dia:point val="-203,67"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.52"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -15336,7 +15353,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -15368,7 +15385,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -15377,15 +15394,15 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#em#</dia:string>
+                <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model&amp;#</dia:string>
+                <dia:string>#meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -15394,7 +15411,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="3"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -15444,19 +15461,19 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-157.48,60.1"/>
+        <dia:point val="-159.02,60.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-158.23,59.3;-150.95,68.9"/>
+        <dia:rectangle val="-159.77,59.3;-151.95,68.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-157.48,60.1"/>
-        <dia:point val="-155,60.1"/>
-        <dia:point val="-155,68.1"/>
-        <dia:point val="-151,68.1"/>
+        <dia:point val="-159.02,60.1"/>
+        <dia:point val="-156,60.1"/>
+        <dia:point val="-156,68.1"/>
+        <dia:point val="-152,68.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -17138,7 +17155,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:point val="-178,60.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-183.53,59.3;-177.25,68.9"/>
+        <dia:rectangle val="-184.07,59.3;-177.25,68.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17147,7 +17164,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:point val="-178,60.1"/>
         <dia:point val="-180,60.1"/>
         <dia:point val="-180,68.1"/>
-        <dia:point val="-183.48,68.1"/>
+        <dia:point val="-184.02,68.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -17813,16 +17830,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:point val="-178,57"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-183.53,56.2;-177.25,58.9"/>
+        <dia:rectangle val="-184.07,56.2;-177.25,58.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="-178,57"/>
-        <dia:point val="-182,57"/>
-        <dia:point val="-182,58.1"/>
-        <dia:point val="-183.48,58.1"/>
+        <dia:point val="-183,57"/>
+        <dia:point val="-183,58.1"/>
+        <dia:point val="-184.02,58.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -17885,16 +17902,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:point val="-178,58.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-183.53,57.3;-177.25,63.9"/>
+        <dia:rectangle val="-184.07,57.3;-177.25,63.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="-178,58.1"/>
-        <dia:point val="-181,58.1"/>
-        <dia:point val="-181,63.1"/>
-        <dia:point val="-183.48,63.1"/>
+        <dia:point val="-182,58.1"/>
+        <dia:point val="-182,63.1"/>
+        <dia:point val="-184.02,63.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -20649,16 +20666,16 @@ another.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O157">
       <dia:attribute name="obj_pos">
-        <dia:point val="-232,57"/>
+        <dia:point val="-237,57"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-232.05,56.95;-211.045,61.45"/>
+        <dia:rectangle val="-237.05,56.95;-218.355,61.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-232,57"/>
+        <dia:point val="-237,57"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.905000000000001"/>
+        <dia:real val="18.594999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -20754,13 +20771,13 @@ another.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#map#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#const model&amp;#</dia:string>
+            <dia:string>#meta_model::model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -20786,7 +20803,7 @@ another.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -20795,7 +20812,7 @@ another.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
@@ -20803,7 +20820,7 @@ another.#</dia:string>
                 <dia:string>#src#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const meta_model::model&amp;#</dia:string>
+                <dia:string>#meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -20812,7 +20829,7 @@ another.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
@@ -20820,7 +20837,7 @@ another.#</dia:string>
                 <dia:string>#to#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const languages#</dia:string>
+                <dia:string>#languages#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -20829,7 +20846,7 @@ another.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -20879,19 +20896,19 @@ another.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-218.585,52.4503"/>
+        <dia:point val="-222.542,51.6497"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-221.598,51.7003;-217.835,57.8"/>
+        <dia:rectangle val="-227.752,50.8997;-221.792,57.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-218.585,52.4503"/>
-        <dia:point val="-218.585,55"/>
-        <dia:point val="-221.548,55"/>
-        <dia:point val="-221.548,57"/>
+        <dia:point val="-222.542,51.6497"/>
+        <dia:point val="-222.542,55"/>
+        <dia:point val="-227.702,55"/>
+        <dia:point val="-227.702,57"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -25342,19 +25359,19 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-157.48,58.1"/>
+        <dia:point val="-159.02,58.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-158.23,57.3;-150.95,63.9"/>
+        <dia:rectangle val="-159.77,57.3;-151.95,63.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-157.48,58.1"/>
+        <dia:point val="-159.02,58.1"/>
         <dia:point val="-154,58.1"/>
         <dia:point val="-154,63.1"/>
-        <dia:point val="-151,63.1"/>
+        <dia:point val="-152,63.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -25627,16 +25644,16 @@ Temporary data structure used to build trees of names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O188">
       <dia:attribute name="obj_pos">
-        <dia:point val="-151,72"/>
+        <dia:point val="-152,72"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-151.05,71.95;-130.43,75.65"/>
+        <dia:rectangle val="-152.05,71.95;-132.97,75.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-151,72"/>
+        <dia:point val="-152,72"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.52"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -25732,7 +25749,7 @@ Temporary data structure used to build trees of names.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -25764,7 +25781,7 @@ Temporary data structure used to build trees of names.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const context&amp;#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -25773,15 +25790,15 @@ Temporary data structure used to build trees of names.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="1"/>
               </dia:attribute>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#em#</dia:string>
+                <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model&amp;#</dia:string>
+                <dia:string>#meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -25790,7 +25807,7 @@ Temporary data structure used to build trees of names.#</dia:string>
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="3"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -26850,19 +26867,19 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-167.74,57"/>
+        <dia:point val="-168.51,57"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-167.95,44.85;-166.45,57.8"/>
+        <dia:rectangle val="-168.56,44.85;-165.99,57.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-167.74,57"/>
-        <dia:point val="-167.74,54"/>
-        <dia:point val="-167.2,54"/>
-        <dia:point val="-167.2,45.6"/>
+        <dia:point val="-168.51,57"/>
+        <dia:point val="-168.51,54"/>
+        <dia:point val="-166.74,54"/>
+        <dia:point val="-166.74,45.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -28093,13 +28110,13 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:point val="-176,19"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-176.05,18.95;-155.045,22.65"/>
+        <dia:rectangle val="-176.05,18.95;-156.97,22.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-176,19"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.905000000000001"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -28195,7 +28212,7 @@ Only applicable when deleting extra files.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -28244,7 +28261,7 @@ Only applicable when deleting extra files.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model&amp;#</dia:string>
+                <dia:string>#meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -28303,19 +28320,19 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-168.28,28"/>
+        <dia:point val="-167.857,28"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-169.03,22.55;-165.348,28.8"/>
+        <dia:rectangle val="-168.607,22.55;-166.31,28.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-168.28,28"/>
-        <dia:point val="-168.28,25"/>
-        <dia:point val="-165.548,25"/>
-        <dia:point val="-165.548,22.6"/>
+        <dia:point val="-167.857,28"/>
+        <dia:point val="-167.857,25"/>
+        <dia:point val="-166.51,25"/>
+        <dia:point val="-166.51,22.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -28819,19 +28836,19 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-177,31.1"/>
+        <dia:point val="-176,31.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-182.53,30.3;-176.25,39.9"/>
+        <dia:rectangle val="-183.07,30.3;-175.25,39.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-177,31.1"/>
+        <dia:point val="-176,31.1"/>
         <dia:point val="-179,31.1"/>
         <dia:point val="-179,39.1"/>
-        <dia:point val="-182.48,39.1"/>
+        <dia:point val="-183.02,39.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -28891,19 +28908,19 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-159.56,31.1"/>
+        <dia:point val="-159.715,31.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-160.31,30.3;-153.95,39.9"/>
+        <dia:rectangle val="-160.465,30.3;-152.95,39.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-159.56,31.1"/>
+        <dia:point val="-159.715,31.1"/>
         <dia:point val="-157,31.1"/>
         <dia:point val="-157,39.1"/>
-        <dia:point val="-154,39.1"/>
+        <dia:point val="-153,39.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -28966,7 +28983,7 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:point val="-178,60.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-183.53,60.5293;-177.45,73.9"/>
+        <dia:rectangle val="-184.225,60.5293;-177.45,73.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -28975,7 +28992,7 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:point val="-178,60.6"/>
         <dia:point val="-178,60.6"/>
         <dia:point val="-178,73.1"/>
-        <dia:point val="-183.48,73.1"/>
+        <dia:point val="-184.175,73.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -29035,18 +29052,18 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-157.48,60.6"/>
+        <dia:point val="-159.02,60.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-158.23,59.85;-150.95,73.9"/>
+        <dia:rectangle val="-159.77,59.85;-151.95,73.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-157.48,60.6"/>
-        <dia:point val="-157.48,73.1"/>
-        <dia:point val="-151,73.1"/>
+        <dia:point val="-159.02,60.6"/>
+        <dia:point val="-159.02,73.1"/>
+        <dia:point val="-152,73.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -29105,19 +29122,19 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-167.2,42"/>
+        <dia:point val="-166.74,42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-168.33,31.55;-166.45,42.8"/>
+        <dia:rectangle val="-167.907,31.55;-165.99,42.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-167.2,42"/>
-        <dia:point val="-167.2,34"/>
-        <dia:point val="-168.28,34"/>
-        <dia:point val="-168.28,31.6"/>
+        <dia:point val="-166.74,42"/>
+        <dia:point val="-166.74,34"/>
+        <dia:point val="-167.857,34"/>
+        <dia:point val="-167.857,31.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -29177,19 +29194,19 @@ Only applicable when deleting extra files.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-179,43.1"/>
+        <dia:point val="-177,43.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-207.22,42.35;-178.25,50.7"/>
+        <dia:rectangle val="-207.135,42.3;-176.25,49.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-179,43.1"/>
+        <dia:point val="-177,43.1"/>
         <dia:point val="-203,43.1"/>
         <dia:point val="-203,49.1"/>
-        <dia:point val="-207.17,49.1"/>
+        <dia:point val="-207.085,49.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>

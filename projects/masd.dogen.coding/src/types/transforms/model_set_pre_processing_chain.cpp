@@ -46,29 +46,29 @@ static logger lg(logger_factory(transform_id));
 namespace masd::dogen::coding::transforms {
 
 void model_set_pre_processing_chain::
-transform(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, meta_model::model& m) {
     /*
      * Module transform must be done before origin and language
      * transforms to get these properties populated on the new
      * modules.
      */
-    modules_transform::transform(ctx, m);
-    language_transform::transform(ctx, m);
+    modules_transform::apply(ctx, m);
+    language_transform::apply(ctx, m);
 
     /*
      * There are no particular dependencies on the next set of
      * transforms.
      */
-    origin_transform::transform(ctx, m);
-    type_params_transform::transform(ctx, m);
-    parsing_transform::transform(ctx, m);
-    extraction_properties_transform::transform(ctx, m);
+    origin_transform::apply(ctx, m);
+    type_params_transform::apply(ctx, m);
+    parsing_transform::apply(ctx, m);
+    extraction_properties_transform::apply(ctx, m);
 
     /*
      * Primitive expansion requires parsing expansion to populate the
      * underlying elements.
      */
-    primitives_transform::transform(ctx, m);
+    primitives_transform::apply(ctx, m);
 
     /*
      * Ensure the model is valid.
@@ -77,20 +77,20 @@ transform(const context& ctx, meta_model::model& m) {
 }
 
 void model_set_pre_processing_chain::
-transform(const context& ctx, meta_model::model_set& ms) {
+apply(const context& ctx, meta_model::model_set& ms) {
     tracing::scoped_chain_tracer stp(lg, "model set pre-processing chain",
         transform_id, ms.target().name().id(), *ctx.tracer(), ms);
 
     /*
      * Apply all of the pre-processing transforms to the target.
      */
-    transform(ctx, ms.target());
+    apply(ctx, ms.target());
 
     /*
      * Now we do the same thing but for the reference models.
      */
     for (auto& ref : ms.references())
-        transform(ctx, ref);
+        apply(ctx, ref);
 
     stp.end_chain(ms);
 }

@@ -36,12 +36,12 @@ namespace masd::dogen::coding::transforms {
  * @brief Transformation that specialises in expanding attributes
  * across the model.
  *
- * @section coding_attributes_expander_0 Model requirements
+ * @section coding_attributes_transform_0 Model requirements
  *
  * The basic expansion of local attributes and of object templates is
  * expected to have taken place.
  *
- * @section coding_attributes_expander_1 Types of attributes
+ * @section coding_attributes_transform_1 Types of attributes
  *
  * There are three sets of attributes the expander is interested in:
  *
@@ -51,7 +51,7 @@ namespace masd::dogen::coding::transforms {
  *
  * Lets cover each of these in more details.
  *
- * @subsection coding_attributes_expander_11 Local attributes
+ * @subsection coding_attributes_transform_11 Local attributes
  *
  * On a natural, pre-expanded state, local attributes encompass only
  * the attributes defined on the class directly. The transform behaves
@@ -81,7 +81,7 @@ namespace masd::dogen::coding::transforms {
  * source code - say as C++ concepts - all we require is the set of
  * all attributes for that object template (see below).
  *
- * @subsection coding_attributes_expander_12 Inherited attributes
+ * @subsection coding_attributes_transform_12 Inherited attributes
  *
  * These provide an easy way to look-up which attributes one has
  * inherited and from whom. For objects, the inherited attributes are
@@ -93,7 +93,7 @@ namespace masd::dogen::coding::transforms {
  * attributes of the parent. However, we haven't yet found a good use
  * case for them.
  *
- * @subsection coding_attributes_expander_13 All attributes
+ * @subsection coding_attributes_transform_13 All attributes
  *
  * The "all attribute" set contains every single attribute. It is the
  * sum all the local attributes with all of the inherited
@@ -108,45 +108,45 @@ private:
      * @brief Returns the object with the given name, or throws.
      */
     static meta_model::object& find_object(const meta_model::name& n,
-        meta_model::model& em);
+        meta_model::model& m);
 
     /**
      * @brief Returns the object template with the given name, or
      * throws.
      */
     static meta_model::object_template&
-    find_object_template(const meta_model::name& n, meta_model::model& em);
+    find_object_template(const meta_model::name& n, meta_model::model& m);
 
 private:
     /**
      * @brief Expands a specific object.
      */
     static void expand_object(meta_model::object& o,
-        meta_model::model& em,
+        meta_model::model& m,
         std::unordered_set<std::string>& processed_ids);
 
     /**
      * @brief Expands all objects in the model.
      */
-    static void expand_objects(meta_model::model& em);
+    static void expand_objects(meta_model::model& m);
 
     /**
      * @brief Expands a specific object template
      */
     static void expand_object_template(meta_model::object_template& ot,
-        meta_model::model& em,
+        meta_model::model& m,
         std::unordered_set<std::string>& processed_ids);
 
     /**
      * @brief Expands all object templates in the model.
      */
-    static void expand_object_templates(meta_model::model& em);
+    static void expand_object_templates(meta_model::model& m);
 
 public:
     /**
      * @brief Indexes the supplied model.
      */
-    static void transform(const context& ctx, meta_model::model& em);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

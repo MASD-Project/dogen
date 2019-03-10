@@ -26,13 +26,17 @@
 #endif
 
 #include <boost/shared_ptr.hpp>
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/meta_model/origin_types.hpp"
-#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 
 namespace masd::dogen::coding::transforms {
 
+/**
+ * @brief Handles object containment such as modules containing
+ * elements.
+ */
 class containment_transform final {
 private:
     /**
@@ -45,16 +49,14 @@ private:
      * @brief Injects the global module, and makes all modules that do
      * not have a containing namespace be contained by it.
      */
-    static void inject_global_module(meta_model::model& im);
+    static void inject_global_module(meta_model::model& m);
 
 public:
 
     /**
      * @brief Updates the containment relationships in the model.
-     *
-     * @param m Yarn model to operate on.
      */
-    static void transform(const context& ctx, meta_model::model& im);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

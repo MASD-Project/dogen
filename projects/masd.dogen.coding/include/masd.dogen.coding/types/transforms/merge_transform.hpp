@@ -35,28 +35,25 @@
 namespace masd::dogen::coding::transforms {
 
 /**
- * @brief Combines a number of intermediate models into a single
- * intermediate model.
+ * @brief Combines a number of models into a single model.
  *
- * The role of the merger is to aggregate a number of intermediate
- * models into a single, coherent model called the intermediate
- * @e merged model.
+ * The role of the merger is to aggregate a number of models into a
+ * single, coherent model called the @e merged model.
  *
- * There are two kinds of intermediate models:
+ * There are two kinds of models:
  *
- * @li the intermediate @e target model: the model which the user is
- * focusing on, most likely with the intention of code generating
- * it. There can only be one target model for a given merge.
+ * @li the @e target model: the model which the user is focusing on,
+ * most likely with the intention of code generating it. There can
+ * only be one target model for a given merge.
  *
- * @li the intermediate @e reference models; a model is a reference
- * model if the target model refers to one or more of its types - or a
- * model referred to by the target model refers to its types and so
- * on.
+ * @li the @e reference models; a model is a reference model if the
+ * target model refers to one or more of its types - or a model
+ * referred to by the target model refers to its types and so on.
  *
  * In summary, the target model cannot be evaluated without the
  * definition of all models it references, directly or
- * indirectly. Merging will fail if one or more of the referenced
- * models have not been supplied.
+ * indirectly. Name resolution will fail if one or more of the
+ * referenced models have not been supplied.
  */
 class merge_transform final {
 private:
@@ -64,7 +61,7 @@ private:
         meta_model::model& dst);
 
 public:
-    static meta_model::model transform(const context& ctx,
+    static meta_model::model apply(const context& ctx,
         const meta_model::model& target,
         const std::list<meta_model::model>& refs);
 };

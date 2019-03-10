@@ -37,7 +37,7 @@ static logger lg(logger_factory(transform_id));
 
 namespace masd::dogen::coding::transforms {
 
-meta_model::model model_assembly_chain::transform(const context& ctx,
+meta_model::model model_assembly_chain::apply(const context& ctx,
     const meta_model::languages l, const meta_model::model& target,
     const std::list<meta_model::model>& refs) {
     tracing::scoped_chain_tracer stp(lg, "model assembly chain",
@@ -47,7 +47,7 @@ meta_model::model model_assembly_chain::transform(const context& ctx,
      * Perform all the language mapping required for target and
      * references.
      */
-    const auto mapped_target(mapping_transform::transform(ctx, target, l));
+    const auto mapped_target(mapping_transform::apply(ctx, target, l));
 
     /*
      * Now do the same for the references.
@@ -66,13 +66,13 @@ meta_model::model model_assembly_chain::transform(const context& ctx,
                                      << ref.name().id();
             continue;
         }
-        mapped_refs.push_back(mapping_transform::transform(ctx, ref, l));
+        mapped_refs.push_back(mapping_transform::apply(ctx, ref, l));
     }
 
     /*
      * Merge the mapped models.
      */
-    const auto r(merge_transform::transform(ctx, mapped_target, mapped_refs));
+    const auto r(merge_transform::apply(ctx, mapped_target, mapped_refs));
 
     stp.end_chain(r);
     return r;

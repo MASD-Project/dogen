@@ -49,8 +49,6 @@ namespace masd::dogen::coding::transforms {
 class context final {
 public:
     context() = default;
-    // context(const context&) = default;
-    // context(context&&) = default;
     ~context() = default;
 
 public:
@@ -64,34 +62,22 @@ public:
 
 public:
     const boost::shared_ptr<masd::dogen::annotations::type_repository>& type_repository() const;
-    boost::shared_ptr<masd::dogen::annotations::type_repository>& type_repository();
     void type_repository(const boost::shared_ptr<masd::dogen::annotations::type_repository>& v);
-    void type_repository(const boost::shared_ptr<masd::dogen::annotations::type_repository>&& v);
 
     const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& archetype_location_repository() const;
-    boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& archetype_location_repository();
     void archetype_location_repository(const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& v);
-    void archetype_location_repository(const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>&& v);
 
     const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& annotation_factory() const;
-    boost::shared_ptr<masd::dogen::annotations::annotation_factory>& annotation_factory();
     void annotation_factory(const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& v);
-    void annotation_factory(const boost::shared_ptr<masd::dogen::annotations::annotation_factory>&& v);
 
     const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& annotation_expander() const;
-    boost::shared_ptr<masd::dogen::annotations::annotation_expander>& annotation_expander();
     void annotation_expander(const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& v);
-    void annotation_expander(const boost::shared_ptr<masd::dogen::annotations::annotation_expander>&& v);
 
     const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& mapping_repository() const;
-    boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& mapping_repository();
     void mapping_repository(const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& v);
-    void mapping_repository(const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>&& v);
 
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer() const;
-    boost::shared_ptr<masd::dogen::tracing::tracer>& tracer();
     void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v);
-    void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>&& v);
 
 private:
     boost::shared_ptr<masd::dogen::annotations::type_repository> type_repository_;
