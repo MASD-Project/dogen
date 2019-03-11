@@ -14,167 +14,171 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-11 Mon 06:43]
-| <75>                                |        |      |      |       |
-| Headline                            | Time   |      |      |     % |
-|-------------------------------------+--------+------+------+-------|
-| *Total time*                        | *0:30* |      |      | 100.0 |
-|-------------------------------------+--------+------+------+-------|
-| Stories                             | 0:30   |      |      | 100.0 |
-| Active                              |        | 0:30 |      | 100.0 |
-| Sprint and product backlog grooming |        |      | 0:12 |  40.0 |
-| Update metrics in OpenHub           |        |      | 0:18 |  60.0 |
+#+CAPTION: Clock summary at [2019-03-11 Mon 11:07]
+| <75>                                          |        |      |      |       |
+| Headline                                      | Time   |      |      |     % |
+|-----------------------------------------------+--------+------+------+-------|
+| *Total time*                                  | *3:41* |      |      | 100.0 |
+|-----------------------------------------------+--------+------+------+-------|
+| Stories                                       | 3:41   |      |      | 100.0 |
+| Active                                        |        | 3:41 |      | 100.0 |
+| Edit release notes for previous sprint        |        |      | 1:37 |  43.9 |
+| Sprint and product backlog grooming           |        |      | 1:42 |  46.2 |
+| Create a video demo for the sprint's features |        |      | 0:22 |  10.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
-*** Edit release notes for previous sprint                            :story:
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2019-03-11 Mon 10:44]
+    :LOGBOOK:
+    CLOCK: [2019-03-11 Mon 09:07]--[2019-03-11 Mon 10:44] =>  1:37
+    :END:
 
- Add github release notes for previous sprint.
+Add github release notes for previous sprint.
 
- Title: Dogen v1.0.11, "Moçamedes"
+Title: Dogen v1.0.12, "Estádio"
 
 #+begin_src markdown
-![Moçamedes](https://www.portaldeangola.com/wp-content/uploads/2018/02/namibe.jpg)
-_Município de Moçamedes, capital da província do Namibe. [(C) 2018 Portal de Angola](https://www.portaldeangola.com/2018/08/03/mocamedes-completa-169-anos-com-mais-espacos-verdes/)_.
+![Estádio](https://imgs.sapo.pt/jornaldeangola/img/thumb1/20181222123311moraris.jpg)
+_Estádio Joaquim Morais, Moçamedes, Namibe. [(C) 2018 Jornal de Angola](http://jornaldeangola.sapo.ao/desporto/joaquim_morais__beneficia_de_obras__de_restauracao)_.
 
 # Overview
 
-Sprint 11 was yet another "never ending" sprint, lasting several months and is packed full of work. By far, the largest contributor for this oversized sprint was the work on the PhD thesis, which lays the theoretical foundations of MASD. All of the preliminary reviews of the PhD have now been completed, and we have now reached the "business end" towards the delivery of the dissertation. This is good news for the Dogen development, because it means that the theoretical model is now close to completion and we can once more focus on coding. The downside is that after many months of theory without giving the code the proper attention, it is now quite far away from the theory. Towards the end of the sprint some coding work did get done though, adding some interesting features.
+With Sprint 12 we are hoping to finally return to a regular release cadence. This was much more predictable two-week sprint, which largely delivered on the sprint's mission statement of cleaning up the mess of refactors and reactivating system testing. As such, it was not a particularly exciting sprint in terms of end user features, but still got us very excited because we are finally paying off years of technical debt in a manner that respects established MDE theory. Of this work, we'd like to highlight the following.
 
-## Infrastructure Cleanup
+## Complete the orchestration refactor
 
-Continuing from the previous sprint, we worked on a number of small housekeeping tasks that have been outstanding for a while
+We have now finally got a proper pipeline of tasks, with well-defined roles and terminology:
 
-- Nightly builds have now returned. We still have a number of false positives that need to be suppressed, but we're closing in on those.
-- Clang-cl build is no longer experimental. Dogen now builds and runs all tests, and the C++ reference implementation has only one test failure. We've also made some inroads in improving CDash's support for clang-cl (https://github.com/Kitware/CDash/issues/733). We are now very close to shipping our Windows binaries from clang-cl.
-- Assorted vcpkg updates: Boost is now at v1.69 across all operative systems, ODB is now at v2.5.
+- **injection**: responsible for importing external models into MASD. The name "injection" comes from the MDE concept of injecting external technical spaces into a technical space.
+- **coding**: meta-model responsible for modeling software engineering entities.
+- **generation**: meta-model responsible for the expansion into facets, providing a multidimensional extension to the coding model. The role of generation is to get the meta-model as close as possible to the requirements of code-generation.
+- **extraction**: responsible for extracting a model out of MASD into an external technical space. Again, the name "extraction" comes from the MDE notion of extracting content from one technical space into another.
 
-## Reference Models Cleanup
+The biggest advantage of this architecture is that we now have a simple pipeline of transformations, taking us from the original external model into the final generated code:
 
-A number of small fixes were done to the reference models, improving our confidence in the build process:
+![Processing pipeline](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/orchestration_pipeline.png)
 
-- Update all models to latest Dogen, including sync'ing the JSON models to the latest Dia models.
-- Update the ```northwind``` model to latest ODB, and add tests to connect to a postgres database on travis (Linux only). We are now validating our ORM support.
-- Added a colour palette test model to exercise all stereotypes that have an associated colour to ensure the palette is consistent.
+This orchestration pipeline is conceptually similar to the architecture of a compiler, and each of these high-level transforms can be thought of as a "lowering phase" where we move to lower and lower levels of abstraction. However, for a proper technical explanation of the approach you'll have to wait for the PhD thesis to be published.
 
-## Codebase Cleanup
+This work has enabled us to do a number of important clean ups, such as:
 
-Continuing with our overall code cleanup, a number of refactors were made:
+- core models now have a uniform structure, with distinct meta-models, transform-sets and transform contexts. We don't have special cases any more.
+- all of the mix-and-match processing that occurred inside of the coding model is now gone (e.g. injection work, extraction work, etc).
+- the creation of the extraction transform pipeline made things significantly easier to implement features such as diffing and the dry run mode (see user visible changes).
 
-- the utility model is now a regular model. Together with the "single binary" work (see below), this now means that Dogen is made entirely of Dogen models.
-- reduce the number of generated files that are unused. We've removed many forward declarations and other facets that were generated for no good reason.  This work resulted in cleaning up some bugs for corner cases in facet enablement.
-- clean up temporary profiles, created when we were trying to get rid of unnecessary facets. We now have only one temporary profile, that can only be removed when we fix a bug in Dogen.
-- start using Boost.DI for dependency injection instead of rolling our own code. We still need to replace all the registrars and so forth, but we've made a start.
+## Reactivate all system tests
+
+One of the biggest problems we faced of late has been a lack of adequate testing. Whilst we were experimenting with the architecture, we had to disable all system tests as they became completely out of sync with the ([admittedly crazy](http://mcraveiro.blogspot.com/2018/01/nerd-food-refactoring-quagmire.html)) experiments we were carrying out. However, before we can enter the last few refactors, we desperately needed to have system tests again.
+
+This sprint saw a lot of infrastructural work to enable a more sensible approach to system testing; one that takes into account both reference models (C++ and C#) as well as using dogen's own models. In order to make this practical, we ended up having to improve the conversion of Dia models into JSON as well. On the plus side, our code coverage has experienced a marked uptick:
+
+![Coverage over time](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/code_coverage_after_system_tests.png)
+
+However, analysis reveals that we are still not testing a fair bit of the generated code, so next sprint the objective is to close the gap further in code coverage and testing.
+
+As usual, for more details of the work carried out this sprint, see [the sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_12.org).
 
 # User visible changes
 
-A number of user visible changes were made with this release. These are all **breaking changes** and require updates in order for existing models to continue working.
+A number of user visible changes were made with this release.
 
-## Complete MASD namespace rename
+## Improvements on handling of references
 
-All of the profiles and meta-data are now in the MASD namespace. With this release we tidied up missed items such as: ```masd.decoration.licence_name```, ```masd.decoration.copyright_notice``` etc that had been missed previously.
-
-## Move command line options to metadata
-
-A number of command line options have been moved into the meta-data section of the model. This is because these options were really model properties. With this change we now make it easier to regenerate models in a reproducible manner. Example options:
+There were two key changes on how references are processed. First, we no longer automatically include system models. From now on, these are treated just like any other model and must be included manually. As an example, a C++ model using the STL, C++ built-in types and boost would now need to have the following references:
 
 ```
-#DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
-#DOGEN masd.extraction.delete_extra_files=true
-#DOGEN masd.extraction.force_write=true
+#DOGEN masd.injection.reference=cpp.builtins
+#DOGEN masd.injection.reference=cpp.std
+#DOGEN masd.injection.reference=cpp.boost
 ```
 
-## Create a single Dogen binary
+Whilst it is a bit of an inconvenience to have to add these to every other model (specially ```builtins``` and ```std```), this does mean that there are now no special cases and no need for "speculative processing" of models. In the past we loaded all system models and there was a lot of extra logic to determine which ones where needed by whom (e.g. do not load C# system models for a C++ model, but maybe load it for a LAM model, etc). We have now placed the onus of determining what should be loaded onto the user, who knows what models to load.
 
-When we started Dogen we created a number of tiny binaries that worked as frontends to specific transformations such as ```knitter```, ```stitcher``` and so forth. However, as we better understood the problem domain, it became clear that there was lots of duplication between binaries for no real advantage. With this release, we implemented the git approach of having a single binary with a "command" interface. The help screen explains this new approach:
+A second related change is that references are now transitive. This means that if model A depends on model B which depends on model C, you no longer need to add a reference to model C in model A as you had to in the past; the reference from model B to model C will be honoured. Sounds like a trivial change, but in reality this was only possible because of the move towards a simplified pipeline (as outlined in the previous section).
 
-```
-$ ./masd.dogen.cli --help
-Dogen is a Model Driven Engineering tool that processes models encoded in supported codecs.
-Dogen is created by the MASD project.
-Dogen uses a command-based interface: <command> <options>.
-See below for a list of valid commands.
+## Dry-run mode
 
-Global options:
+One of the biggest annoyances we've had is the need to code generate in order to see what _would_ change. The problem with C++ is that, if the generated code is not what you'd expect - a fairly common occurrence when you are developing the code generator, as it turns out - you end up with a large number of rebuilt translation units for no good reason. Thus we copied the idea from vcpkg and others of a "dry-run mode": in effect, do all the transforms and produce all the generated code, but don't actually write it to the filesystem. Of course, the logical conclusion is that some kind of diffing mechanism is required in order to see what would change. For this we relied on the nifty [Diff Template Library](https://github.com/cubicdaiya/dtl), which provides a very simple way of producing unified diffs from C++. Sadly it was not on vcpkg, but the most excellent vcpkg developers responded [quickly to our PR](https://github.com/Microsoft/vcpkg/pull/5541), so you if you'd like to use it, you can now simply ```vcpkg install dtl```.
 
-General:
-  -h [ --help ]                   Display usage and exit.
-  -v [ --version ]                Output version information and exit.
-
-Logging:
-  -e [ --log-enabled ]            Generate a log file.
-  -g [ --log-directory ] arg      Directory to place the log file in. Defaults
-                                  to 'log'.
-  -l [ --log-level ] arg          What level to use for logging. Valid values:
-                                  trace, debug, info, warn, error. Defaults to
-                                  'info'.
-
-Tracing:
-  --tracing-enabled               Generate metrics about executed transforms.
-  --tracing-level arg             Level at which to trace.Valid values: detail,
-                                  summary.
-  --tracing-guids-enabled         Use guids in tracing metrics, Not
-                                  recommended when making comparisons between
-                                  runs.
-  --tracing-format arg            Format to use for tracing metrics. Valid
-                                  values: org-mode, text
-  --tracing-output-directory arg  Directory in which to dump probe data. Only
-                                  used if transforms tracing is enabled.
-
-Error Handling:
-  --compatibility-mode-enabled    Try to process models even if there are
-                                  errors.
-
-Commands:
-
-   generate       Generates source code from input models.
-   convert        Converts a model from one codec to another.
-   weave          Weaves one or more template files into its final output.
-
-For command specific options, type <command> --help.
-```
-
-And then for say the ```generate``` command, we now have:
+As a result, with a fairly simple incantation, you can now see what dogen would like to do to your current state. For example, say we've updated the comment for ```property``` attribute of the ```hello_world.dia``` test model; to check our changes, we could do:
 
 ```
-$ ./masd.dogen.cli generate --help
-Dogen is a Model Driven Engineering tool that processes models encoded in supported codecs.
-Dogen is created by the MASD project.
-Displaying options specific to the generate command.
-For global options, type --help.
+$ ./masd.dogen.cli generate --target hello_world.dia --dry-run-mode-enabled --diffing-enabled --diffing-destination console
+diff -u include/dogen.hello_world/types/one_property.hpp include/dogen.hello_world/types/one_property.hpp
+Reason: Changed generated file.
+---  include/dogen.hello_world/types/one_property.hpp
++++  include/dogen.hello_world/types/one_property.hpp
+@@ -33,7 +33,7 @@
 
-Generation:
-  -t [ --target ] arg           Model to generate code for, in any of the
-                                supported formats.
-  -o [ --output-directory ] arg Output directory for the generated code.
-                                Defaults to the current working directory.
+ public:
+     /**
+-     * @brief This is a sample property.
++     * @brief This is a sample property. Test diff
+      */
+     /**@{*/
+     const std::string& property() const;
 ```
 
-This approach cleaned significantly the internals, resulting in the deletion of a number of model-lets and coalescing all of their functionality in a much cleaner way in a single model: ```masd.dogen.cli```.
+Whilst the arguments required may appear a bit excessive at this point, we decided to roll out the feature as is to gain a better understanding of how we use it. We will then clean up the arguments as required (for example, should dry run mode default to ```--diffing-enabled --diffing-destination console```?).
 
-## New stereotypes
+As an added bonus, if you choose to output to file instead of console, we generate a patch file which can be patched on the command line via ```patch```. We don't have a particular use case for this as of yet, but it just seems nice.
 
-A small number of stereotypes has been added:
+## Reporting
 
-- ```masd::cpp::header_only```: handcrafted type that has only a header file.
-- ```masd::entry_point```: handcrafted type that has only an implementation file.
-- ```masd::interface```: handcrafted type that has only a header file.
+A feature that is related to dry-run mode is reporting. We originally merged the two together but then realised that reporting might be useful even when you don't require a diff or a dry run, so we ended up implementing it stand alone. Reporting provides an overview of the operations dogen performed (or would have performed, if you are in dry run mode) to your file system. And, as with tracing, you can visualise it on org mode, making it really easy to navigate if you are a vi or emacs user:
 
-In the future we will bind different templates to these stereotypes to provide a more suitable starting state.
+![Reporting in org-mode](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/dogen_reporting_mode_org_mode.png)
 
-For more details of the work carried out this sprint, see [the sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_11.org).
+However, if you'd like to grep for specific types of operations, you can use the plain report instead:
+
+![Reporting in plain text](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/dogen_reporting_mode_plain.png)
+
+To enable reporting, simply do:
+
+```
+./masd.dogen.cli generate --target hello_world.dia --dry-run-mode-enabled --reporting-enabled --reporting-style org-mode
+```
+
+Replacing ```org-mode``` with ```plain``` as required.
+
+## Byproducts directory
+
+Even before the advent of diffing and reporting, we were already generating a large number of non-code related files, all of which were fairly randomly placed in the filesystem. With this release, we just couldn't continue with this approach so, instead, all of the non-generated files are now created under a "byproducts" directory. This includes:
+
+- log files
+- traces
+- diff reports, when outputting to file
+- reports
+
+And any future functionality we may add. This means that you can now safely delete the byproducts directory and know that you have got rid of all files. We write to ```masd.dogen.byproducts``` by default, but if you'd like to place it elsewhere, use ```--byproduct-directory```. The directory is organised by "run identifier", allowing you to generate multiple models into the same directory:
+
+```
+$ tree
+.
+├── cli.generate.hello_world.dia
+│   ├── cli.generate.hello_world.dia.log
+│   ├── hello_world_report.org
+│   └── hello_world_report.txt
+├── tests.code_generation.masd.dogen.annotations.dia
+│   ├── annotations.patch
+│   └── annotations_report.org
+├── tests.code_generation.masd.dogen.annotations.json
+│   ├── annotations.patch
+│   └── annotations_report.org
+```
 
 # Next Sprint
 
-We are now in full refactoring mode in Dogen. The objective of the next sprint is to implement the orchestration model properly, removing all of the (many) experiments that have been attempted over the last few years.
+Now that we have the testing in place, our key objective for next sprint is to move all of the decoration related code into the meta-model. This means that much of what currently exists as assorted files that dogen loads on startup would become regular model entities, paving the way for a much more configurable model.
 
 # Binaries
 
 You can download binaries from [Bintray](https://bintray.com/masd-project/main/dogen) for OSX, Linux and Windows (all 64-bit):
 
-- [dogen_1.0.11_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.11/dogen_1.0.11_amd64-applications.deb)
-- [dogen-1.0.11-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.11/dogen-1.0.11-Darwin-x86_64.dmg)
-- [dogen-1.0.11-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/dogen-1.0.11-Windows-AMD64.msi)
+- [dogen_1.0.12_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.12/dogen_1.0.12_amd64-applications.deb)
+- [dogen-1.0.12-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.12/dogen-1.0.12-Darwin-x86_64.dmg)
+- [dogen-1.0.12-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/dogen-1.0.12-Windows-AMD64.msi)
 
 For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
 #+end_src
@@ -348,7 +352,10 @@ For some reason we are unable to compile the serialisation test for
 the test model which focuses only on the serialisation facet. Test is
 ignored for the moment.
 
-*** Create a video demo for the sprint's features                     :story:
+*** STARTED Create a video demo for the sprint's features             :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-11 Mon 10:45]--[2019-03-11 Mon 11:07] =>  0:22
+    :END:
 
 Our video is extremely old and misleading. We need to get back into
 the habit of doing a video demo at the end of every sprint talking

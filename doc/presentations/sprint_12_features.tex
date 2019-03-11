@@ -1,0 +1,124 @@
+\documentclass{beamer}
+\mode<presentation>
+{ \usetheme{boxes} }
+
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{csquotes}
+\usepackage[backend=bibtex]{biblatex}
+
+\title{Dogen v1.0.12, \enquote{Estádio do Atlético}}
+
+\author{Marco Craveiro \\
+  Domain Driven Development
+}
+\date{\today}
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\bibliography{sprint_12_features}
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Dry-run mode}
+
+\begin{itemize}
+
+\item Useful when you'd like to know what would be changed by running
+  code generation against the current state of the model.
+
+  \pause
+
+\item Dogen can report a unified diff, to file or console. The unified
+  diff can be used to create a patch for review or for application.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Transitive References}
+
+\begin{itemize}
+
+\item In the past you had to manually add all references to the
+  top-level model. This was a lazy way to get things working.
+
+  \pause
+
+\item With v1.0.12, Dogen correctly resolves transitive references, so
+  you no longer need to do this.
+
+  \pause
+
+\item In the future, we'll add warnings to let you know when a
+  reference is not required.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Reporting}
+
+\begin{itemize}
+
+\item It is sometimes useful to know what all the operations are that
+  Dogen has carried out or, in the case of dry run, will carry out.
+
+  \pause
+
+\item This is particularly useful for Dogen development, but may also
+  be useful to end users.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Byproducts directory}
+
+\begin{itemize}
+
+\item Files were scattered across the filesystem, making it difficult
+  to find them.
+
+  \pause
+
+\item All files are now placed in a top-level byproducts directory,
+  making it easy to both find and get rid of all non-code related
+  files.
+
+  \pause
+
+\item Directory is organised by model so that you can have multiple
+  runs of different models.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Next Sprint}
+
+\begin{itemize}
+\item \textbf{Mission statement}: Move all of the decoration related
+  code into the meta-model. This means that much of what currently
+  exists as assorted files that dogen loads on startup would become
+  regular model entities, paving the way for a much more configurable
+  model.
+\end{itemize}
+
+\end{frame}
+
+\end{document}
