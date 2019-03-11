@@ -167,7 +167,8 @@ options_description make_top_level_visible_options_description() {
         ("tracing-guids-enabled", "Use guids in tracing metrics, Not"
             "  recommended when making comparisons between runs.")
         ("tracing-format", value<std::string>(), "Format to use for tracing"
-            " metrics. Valid values: org-mode, plain. Defaults to org-mode.");
+            " metrics. Valid values: plain, org-mode, graphviz. "
+            "Defaults to org-mode.");
     r.add(tod);
 
     options_description orod("Reporting");
@@ -175,7 +176,7 @@ options_description make_top_level_visible_options_description() {
         ("reporting-enabled", "Generate a report detailing operations.")
         ("reporting-style",  value<std::string>(),
             "Style to use in the operational report. "
-            "Valid values: org-mode, plain. Defaults to org-mode.");
+            "Valid values: plain, org-mode. Defaults to org-mode.");
     r.add(orod);
 
     options_description dod("Diffing");
