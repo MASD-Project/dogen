@@ -14,17 +14,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-11 Mon 16:22]
-| <75>                                          |        |      |      |       |
-| Headline                                      | Time   |      |      |     % |
-|-----------------------------------------------+--------+------+------+-------|
-| *Total time*                                  | *7:20* |      |      | 100.0 |
-|-----------------------------------------------+--------+------+------+-------|
-| Stories                                       | 7:20   |      |      | 100.0 |
-| Active                                        |        | 7:20 |      | 100.0 |
-| Edit release notes for previous sprint        |        |      | 1:51 |  25.2 |
-| Sprint and product backlog grooming           |        |      | 1:42 |  23.2 |
-| Create a video demo for the sprint's features |        |      | 3:47 |  51.6 |
+#+CAPTION: Clock summary at [2019-03-11 Mon 17:08]
+| <75>                                                     |        |      |      |       |
+| Headline                                                 | Time   |      |      |     % |
+|----------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                             | *8:05* |      |      | 100.0 |
+|----------------------------------------------------------+--------+------+------+-------|
+| Stories                                                  | 8:05   |      |      | 100.0 |
+| Active                                                   |        | 8:05 |      | 100.0 |
+| Edit release notes for previous sprint                   |        |      | 1:51 |  22.9 |
+| Sprint and product backlog grooming                      |        |      | 1:42 |  21.0 |
+| Create a video demo for the sprint's features            |        |      | 3:47 |  46.8 |
+| Clang-cl builds are failing due to memory leak reporting |        |      | 0:45 |   9.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -398,6 +399,22 @@ ignored for the moment.
 Our video is extremely old and misleading. We need to get back into
 the habit of doing a video demo at the end of every sprint talking
 about the work of the sprint.
+
+*** STARTED Clang-cl builds are failing due to memory leak reporting  :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-11 Mon 16:23]--[2019-03-11 Mon 17:08] =>  0:45
+    :END:
+
+It seems our clang-cl debug builds are taking longer and longer due to
+some memory leaks. The leaks are showing on MSVC as well. We are not
+always exceeding maximum build time, so sometimes it goes unnoticed.
+
+Links:
+
+- [[https://docs.microsoft.com/en-us/visualstudio/debugger/finding-memory-leaks-using-the-crt-library?view=vs-2017][Find memory leaks with the CRT library]]
+- [[https://social.msdn.microsoft.com/Forums/vstudio/en-US/0e6746b9-b042-4402-84ba-d3e38a65a6f4/how-to-disable-memory-leaks-dumping-in-ms-vs?forum=vsdebug][How to disable Memory leaks dumping in MS VS?]]
+- [[https://github.com/SaschaWillems/Vulkan/issues/111][Replace this code at WinMain() to enable memory checks on windows
+  builds]]
 
 *** Updates to package                                                :story:
 

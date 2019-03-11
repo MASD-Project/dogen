@@ -39,6 +39,21 @@ const std::string test_module("masd.dogen.orchestration.tests");
 struct initializer {
     initializer() {
         SETUP_TEST_LOG("initializer");
+
+#if defined (_WIN32)
+#if defined(DEBUG) || defined(_DEBUG)
+        /*
+         * To enable the debug dumps, uncomment the two lines below
+         * and comment the last line. Leave it commented out as it
+         * causes builds to time out and we can't really investigate
+         * the problem.
+         */
+// #define _CRTDBG_MAP_ALLOC
+//        _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_CHECK_CRT_DF | _CRTDBG_DELAY_FREE_MEM_DF | _CRTDBG_LEAK_CHECK_DF); //_CRTDBG_CHECK_ALWAYS_DF)
+        _CrtSetDbgFlag(0)
+#endif
+#endif
+
         masd::dogen::injection::json::initializer::initialize();
         masd::dogen::injection::dia::initializer::initialize();
         masd::dogen::generation::csharp::initializer::initialize();
