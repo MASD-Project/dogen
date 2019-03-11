@@ -50,7 +50,7 @@ struct initializer {
          */
 // #define _CRTDBG_MAP_ALLOC
 //        _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_CHECK_CRT_DF | _CRTDBG_DELAY_FREE_MEM_DF | _CRTDBG_LEAK_CHECK_DF); //_CRTDBG_CHECK_ALWAYS_DF)
-        _CrtSetDbgFlag(0)
+        _CrtSetDbgFlag(0);
 #endif
 #endif
 

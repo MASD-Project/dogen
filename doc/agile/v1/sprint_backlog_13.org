@@ -14,18 +14,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-11 Mon 17:08]
+#+CAPTION: Clock summary at [2019-03-11 Mon 18:46]
 | <75>                                                     |        |      |      |       |
 | Headline                                                 | Time   |      |      |     % |
 |----------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                             | *8:05* |      |      | 100.0 |
+| *Total time*                                             | *8:35* |      |      | 100.0 |
 |----------------------------------------------------------+--------+------+------+-------|
-| Stories                                                  | 8:05   |      |      | 100.0 |
-| Active                                                   |        | 8:05 |      | 100.0 |
-| Edit release notes for previous sprint                   |        |      | 1:51 |  22.9 |
-| Sprint and product backlog grooming                      |        |      | 1:42 |  21.0 |
-| Create a video demo for the sprint's features            |        |      | 3:47 |  46.8 |
-| Clang-cl builds are failing due to memory leak reporting |        |      | 0:45 |   9.3 |
+| Stories                                                  | 8:35   |      |      | 100.0 |
+| Active                                                   |        | 8:35 |      | 100.0 |
+| Edit release notes for previous sprint                   |        |      | 1:51 |  21.6 |
+| Sprint and product backlog grooming                      |        |      | 1:42 |  19.8 |
+| Create a video demo for the sprint's features            |        |      | 3:47 |  44.1 |
+| Clang-cl builds are failing due to memory leak reporting |        |      | 0:45 |   8.7 |
+| Code generation of tests for dogen models                |        |      | 0:30 |   5.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -418,7 +419,7 @@ Links:
 
 *** STARTED Code generation of tests for dogen models                 :story:
     :LOGBOOK:
-    CLOCK: [2019-03-11 Mon 17:17]--[2019-03-11 Mon 17:40] =>  0:23
+    CLOCK: [2019-03-11 Mon 17:17]--[2019-03-11 Mon 17:47] =>  0:30
     :END:
 
 At present we are manually generating tests for each model
