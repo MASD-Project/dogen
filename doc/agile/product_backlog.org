@@ -410,6 +410,1225 @@ vision. The V2 vision is to finish the dogen API and implement all
 functionality in terms of metamodel elements - e.g. no special cases
 such as profiles, licences etc.
 
+*** Create a video demo for the sprint's features                     :story:
+
+Our video is extremely old and misleading. We need to get back into
+the habit of doing a video demo at the end of every sprint talking
+about the work of the sprint.
+
+*** Consider adding tests for pipeline components                     :story:
+
+With regards to the existing injection.dia/injection.json test data
+set: this is actually not a bad idea. Basically what we are saying is
+that there is value in freezing a set of inputs in time and then use
+them to check parts of the pipeline. These are not expected to move
+(because the model contents are frozen). We could take the existing
+reference models and copy them for this. We could also extend this
+approach to the other parts of the pipeline. We would only update
+these frozen models very infrequently, at which point we'd have to
+rebaseline all data files. The only downside is that we'd need
+serialisation for all models (coding, generation, formatting). These
+models would break every time we change something in the pipeline (add
+new fields, change formatters, etc).
+
+In the past these tests were a bit painful and broke a lot. Also, it
+was not entirely clear how to rebase the data files - required a lot
+of black magic every time it happened and did not happen often enough
+to build muscle memory.
+
+However the tests are very useful: when we are making internal
+changes, its good to see the breaks and look into the diffs to ensure
+only what we expect has changed.
+
+*** Add tests for tracing and reporting                               :story:
+
+At present its easy to break tracing and reporting without noticing
+it. Add a simple set of tests that verify the existence of the files
+and perform some basic sanity checks on the content.
+
+*** Add support for ignoring types and models                         :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to ignore certain types I am working
+on so that I can evolve my diagram over time, whilst still being able
+to commit it.
+#+end_quote
+
+Sometimes when changing a diagram it may be useful to set some types
+to "ignore", i.e. make dogen pretend they don't exist at all. For
+instance one may want to introduce new types one at a time. It would
+be nice to have a dynamic extension flag for ignoring.
+
+We should probably have some kind of warning to ensure users are aware
+of the types being ignored.
+
+Isn't this just using "enable=false" for all formatters?
+
+In a world where we can define bundles of meta-types, and import them
+from system models, we could possibly just define a bundle called
+=Ignored= with all formatters set to false.
+
+This should be a stereotype to make it really visible. Also, the type
+should have a colour that is easy to spot like light gray. Actually
+this is ok, we can just add a profile.
+
+This is also useful at the model level so that the model is not used
+either for tests or for generation. This is more than just formatting:
+its basically "act as if this type was not defined in the input" or
+"this model did not exist". It should result in resolution failures if
+anyone is referring to the model/type.
+
+*** Update all exception names to match framework guiidelines         :story:
+
+Exceptions should end with "exception".
+
+*** Use DI in injection model                                         :story:
+
+We need to use the boost.di injector in the injector model to register
+the encoding and decoding transforms. This means we need to receive
+lists of codecs in the main transform and then setup the reigstrar
+internally. It also means we need state, which means we need to
+propagate the DI pattern all the way to the top.
+
+*** Code generation of tests for dogen models                         :story:
+
+We probably already have a story for this. At present we are manually
+generating tests for each model (serialisation, etc). The structure of
+the tests is very predictable. In a world where tests are a facet, we
+could have some options to control the generation of tests. This would
+also allow end users to generate tests for their models and report the
+results. We would need to generate the utility model for this - or
+perhaps we could code generate tests in a way that no longer requires
+templates - its all "hard-coded". This would make the tests easier to
+follow, but we would generate a lot of code.
+
+We could separate dogen specific tests from user tests by naming them
+differently, e.g. =abc_dogen_test.cpp=. We can then create two
+different test binaries, one for dogen tests and another for user
+tests, so that users don't have to run dogen tests unless something
+has gone wrong.
+
+Interestingly we could even set rules to ignore tests that are known
+to fail:
+
+- if object has no members do not do equality tests
+- if object has some kind of recursion do not do tests
+- etc.
+
+These can be marked as known limitations. At present the tests require
+Boost.Test but it should be possible to target other frameworks
+(meta-data option).
+
+Merged stories:
+
+*Consider creating a "test" facet*
+
+Whilst we can't really generate tests, we can at least create the
+stubs for them. For this we could have a =test= facet that uses a
+stereotype, e.g. =test_suite=. Users mark classes with
+these. Attributes are the test cases. At the model level users can
+choose the test framework. For example for Boost.Test, it generates
+the main file with fixture initialisation, etc. We could then have one
+of two approaches:
+
+- protected regions, where the test contents are protected and perhaps
+  an area at the top for globals etc.
+- stubs only, were we generate the original content but then users
+  subsequently manage the files.
+
+*** Log file per transform                                            :story:
+
+At present we have a good view of the graph of the chain when tracing
+is enabled. We then use the GUIDs to find the details of the
+transformation in the log. It would be even easier if somehow it was
+possible to have sinks in boost log that are added for each transform
+and removed at the end of it. This way we could generate "mini log
+files" that contain all of the activity that occurred in that
+transform.
+
+Boost log seems to be setup for it, we'd just have to manipulate the
+logger from within the tracer. One slight problem is that we'd only
+want to log from "leaf transforms". This probably means that we need
+to make sure that only transform chains can call other transforms.
+
+In theory all we'd have to do is to get the tracer to do the hooking
+and unhooking for each transform. It should already know about chains
+vs transforms.
+
+*** Logging at info is very messy                                     :story:
+
+Ideally when logging at info we want to see the spine of the program,
+showing all transforms with their start and finishes and some
+information about what they are processing (e.g. model).
+
+*** Fabric generates forward decls with no path                       :story:
+
+The following looks strange:
+
+: 2019-03-06 17:30:20.074618 [DEBUG] [quit.cpp.formatters.workflow] Procesing element: <dogen><hello_world><transformation_error>
+: 2019-03-06 17:30:20.074627 [DEBUG] [quit.cpp.formatters.workflow] Meta name: <dogen><generation><cpp><fabric><forward_declarations>
+: 2019-03-06 17:30:20.074636 [DEBUG] [quit.cpp.formatters.workflow] Using the stock formatter: masd.extraction.cpp.serialization.forward_declarations
+: 2019-03-06 17:30:20.074647 [DEBUG] [generation.cpp.formatters.assistant] Processing element: <dogen><hello_world><transformation_error> for archetype: masd.extraction.cpp.serialization.forward_declarations
+: 2019-03-06 17:30:20.074659 [DEBUG] [quit.cpp.formatters.workflow] Formatted artefact. Path: ""
+
+*** Rename =transformation_error= to =transform_exception=            :story:
+
+In keeping with the framework guidelines for naming exceptions.
+
+*** Consider replacing the associations against object templates      :story:
+
+Object templates are really a higher level concept when compared to
+objects, etc. We should not be using associations to denote the notion
+of an object instantiating an object template. Perhaps the "implements
+an interface" relationship is more appropriate. Check the UML books.
+
+*** ODB linking is incorrect for generated code                       :story:
+
+At present we are adding the libraries in the test instead of the
+model using ODB. The following should be part of the generated code:
+
+:    ${Boost_LIBRARIES}
+:    ${ODB_PGSQL_LIBRARIES}
+:    ${ODB_SQLITE_LIBRARIES}
+:    ${ODB_BOOST_LIBRARIES}
+:    ${ODB_LIBODB_LIBRARIES}
+:    ${PostgreSQL_LIBRARIES}
+:    ${OPENSSL_LIBRARIES}
+:    resolv
+:    ${SQLite3_LIBRARY}
+
+The same problem applies to boost linking.
+
+*** Move all formatters in extraction to generation                   :story:
+
+Since we only need these during generation, seems like the more
+logical place. This should be done when (after) we move all of the
+meta-elements that live in formatter into coding.
+
+*** Add warning for unused references                                 :story:
+
+It would be nice if we could figure out if the user has added some
+references to a model that are not required. This could be done as a
+byproduct of resolution. However, we need to be careful when we
+introduce two-passes as we may use a model for say profiles or
+concepts but nothing else. One way of addressing this is to have a
+container of "used references"; whenever we find a type from a
+reference, we add that reference to the list. In the end we diff that
+container against the global refs.
+
+*** Generate model dependency graph                                   :story:
+
+It would be nice to generate a tracing of the model dependencies. This
+may not necessarily be part of tracing.
+
+*** LAM name resolution should be PIM only                            :story:
+
+With the current approach, we are not resolving any names until after
+we've mapped LAM models into a PSM. This possibly means that users can
+provide a model with non-LAM types. Ideally we should not allow
+this. Check to see if we are validating this in the present mapping
+code.
+
+*** Rename =fallback_element_type=                                    :story:
+
+Our JSON uses a very strangely named attribute to carry the meta-type:
+
+:       "fallback_element_type": "masd::object",
+
+Its not at all obvious what this is meant to do. It should just be the
+=element_type=.
+
+We introduced this because users can set the stereotype,
+e.g. =masd::object= - but don't always have to (e.g. when converting a
+model from Dia). In this case, the fallback element type is
+used. Perhaps we can keep the "fallback" logic internally, but just
+call it element type?
+
+One possible solution is to simply populate the stereotypes with the
+inferred metamodel type. For this we need to check against a list of
+metamodel types ("has the user already defined a stereotype?") and if
+not, use the default one. This means our conversion will not roundtrip
+without differences, but at least it produces more sensible models.
+
+*** Adding reference to itself results in resolution errors           :story:
+
+Whilst trying to fix the JSON models we inadvertently added a
+self-reference in =dogen.generation.json=:
+
+:    "yarn.reference": "dogen.generation.json",
+
+This resulted in some puzzling errors:
+
+: 2018-10-18 19:15:00.861210 [ERROR] [yarn.transforms.enablement_transform] Duplicate element archetype: quilt.cpp.serialization.registrar_implementation <dogen><generation><registrar>
+
+Ideally we should either warn and ignore or fail to process models
+with self-references.
+
+*** Add model sources and sinks in Dogen                              :story:
+
+At present we are reading and writing to files inside the
+workflows. This means that if we want to use databases in the future
+we will have to update the entire code base to cope with this. A
+better approach is to perform IO via some interface, which can be
+implemented to target either the filesystem or a database, cache, etc.
+
+Notes:
+
+- add workflow that takes in a string, path, etc and creates a model
+  set. It will need to read references and language from the model
+  annotations.
+- add model source into injection
+- add model set into injection, with target and references
+- add model set into coding.
+- add a new model: coding.injection. Create a class that converts from
+  one model set to another.
+
+*** Consider renaming log level =trace=                               :story:
+
+Its slightly confusing given that we also have =tracing=.
+
+*** Consider making =disabled= a trace/log level                      :story:
+
+At present we have two knobs to control tracing/logging:
+
+- enabled
+- level
+
+According to the rule of making invalid states unrepresentable, we
+should just have a log level of disabled, so that its not possible to
+set the trace/log level when logging is disabled.
+
+*** Throw on profiles that refer to invalid fields                    :story:
+
+At present during profile instantiation, if we detect a field which
+does not exist we skip the profile. This was done in the past because
+we had different binaries for stitch, knit etc, which meant that we
+could either split profiles by application or skip errors
+silently. Now we have a single binary, we could enable this
+validation. However, the stitch tests still rely on this
+behaviour. The right solution for this is to have some kind of
+override flag ("compatibility mode" springs to mind) which is off by
+default but can be used (judiciously).
+
+We put a fix in but it seems weave is still borked. The problem
+appears to be that we do something in the generation path that is not
+done for weaving (and presumably for conversion). The hack was put
+back in for now.
+
+*** Fix clang-cl warnings                                             :story:
+
+We also have a number of warnings left to clean up, all related to
+boost.log:
+
+: masd.dogen.utility.lib(lifecycle_manager.cpp.obj) : warning LNK4217: locally defined symbol
+: ?get_tss_data@detail@boost@@YAPEAXPEBX@Z (void * __cdecl boost::detail::get_tss_data(void const *))
+: imported in function "public: struct boost::log::v2s_mt_nt6::sinks::basic_formatting_sink_frontend<char>::formatting_context * __cdecl boost::thread_specific_ptr<struct boost::log::v2s_mt_nt6::sinks::basic_formatting_sink_frontend<char>::formatting_context>::get(void)const " (?get@?$thread_specific_ptr@Uformatting_context@?$basic_formatting_sink_frontend@D@sinks@v2s_mt_nt6@log@boost@@@boost@@QEBAPEAUformatting_context@?$basic_formatting_sink_frontend@D@sinks@v2s_mt_nt6@log@2@XZ)
+
+Notes:
+
+- opened issue: [[https://github.com/Microsoft/vcpkg/issues/5336][Building with clang-cl on windows generates warnings
+  from vcpkg-installed libraries]]
+- it seems that the log files show a lot more warnings than those
+  reported by cdash,
+- Updated issue on CDash parsing problems for clang-cl: [[https://github.com/Kitware/CDash/issues/733][Parsing of
+  errors and warnings from clang-cl]]
+- Sent email to clang mailinglist: [[http://lists.llvm.org/pipermail/cfe-dev/2019-February/061326.html][Clang-cl - errors and warning
+  messages slightly different from MSVC]]. Clang [[http://lists.llvm.org/pipermail/cfe-dev/2019-February/061339.html][have patched]] the diffs
+  now.
+
+*** Implement configuration validator                                 :story:
+
+At present we are not performing any validation to the new
+configuration classes in the API.
+
+*** Create transforms for templating                                  :story:
+
+At present we are using workflows to convert stitch and wale
+templates. In reality, these are just tranforms. We need to figure out
+if there should just be a high-level transform in orchestrator that
+encapsulates these or if the templating model itself should follow the
+naming convention.
+
+*** Add support for "directory mode" in conversion                    :story:
+
+The real use case we have for conversion is to point it to a directory
+with models and give it a destination "type" (e.g. json) and a output
+directory, and then have it convert all models to that type and place
+them in the output directory.
+
+A second but related use case is to point it to a model, supply a
+destination "type" and then output it into a directory, without having
+to supply a destination file.
+
+In effect, this is a common use case for all commands (generate and
+weaving as well). We could probably deduce it: if the user supplied a
+directory as a target, we should do it in directory mode.
+
+*** Add stereotype for IoC containers                                 :story:
+
+At present we are marking IoC containers with either handcrafted or
+header only. In reality, they should have their own stereotype and
+colours as, in the future, we want to code generate them. However, we
+can only do this once we get rid of the initialisers because they are
+also a form of IoC containers, but with different requirements.
+
+Proposed stereotype: =masd::ioc::container=.
+
+Actually, this is not quite right. We are not creating the IoC
+containers themselves, but the wiring code that sets up these
+containers. We need to figure out the correct term for
+these. Suggestions:
+
+- [[https://github.com/avao/Qart/blob/master/Src/Qart.CyberTester/Bootstrapper.cs][bootstrapper]], with a =Bootstrapper.CreateContainer= method;
+  e.g. =masd::ioc::bootstrapper=.
+
+*** Handling of forward declarations on generated types               :story:
+
+At present, if we disable forward declarations globally (in a profile,
+say), the code fails to build with errors on visitors. This is because
+we need forward declarations for:
+
+- the visitable type;
+- all of its descendants;
+- the visitor.
+
+This is a hard requirement because, without these the code does not
+make sense. We need some way of "forcing" enablement for some features
+where there is such a hard dependency. This is probably something we
+need to look at when we implement "computable enablement". We then
+need some way of telling the system about these dependencies:
+e.g. visitor requires enablement x, y, z.
+
+A second problem is that, at present, there is no way to manually
+enable (force) forward declarations on visitors. We can enable them on
+all model elements but not on the generated type. Because of this we
+are generating forward declarations for all types, for no reason.
+
+*** Disable global hashing on coding                                  :story:
+
+We are generating hash for all types at present in coding but we only
+need it for two types: name and location. Try to switch it off
+globally and on just for those two types.
+
+*** Stitch does not have a force write flag                           :story:
+
+At present the stitch workflow is hardcoded not to force write. The
+correct solution is to allow the template to have a force write
+parameter.
+
+*** Contents change check is done twice                               :story:
+
+We seem to check twice if a file has changed:
+
+: 2015-04-26 12:37:28.451464 [DEBUG] [formatters.filesystem_writer] File contents have not changed, and force write is false so not writing.
+: 2015-04-26 12:37:28.451486 [DEBUG] [formatters.filesystem_writer] File contents have not changed, and force write is false so not writing.
+
+This is in stitch but it should be the same for knit.
+
+*** Convert utility exceptions into dogen exceptions                  :story:
+
+At present the utility model has a number of hand-crafted
+exceptions. We need to convert them to dogen exceptions. We also need
+to get rid of the invalid enum exception and use the
+=std::argument...= exception instead.
+
+*** JSON models in dogen are out of sync                              :story:
+
+Problems:
+
+- tailor generation results in files with the wrong name (=dia.json=)
+- input models were copied into test data.
+
+*** Move generation element properties back into formattables         :story:
+
+We moved a number of properties out of formattables. Move them
+back. By the end of this refactor we should end up with no references
+to facets in coding.
+
+*** Move fabric types into generation                                 :story:
+
+- copy across the fabric types from cpp and csharp into generation.
+- update formatters to use the types from generation.
+- delete them from original models.
+
+*** Move formattables into generation                                 :story:
+
+- first, update the generation model with formattable properties from
+  cpp: add a formattable type to the generation model and container
+  for it, add the formattable population logic. Then remove the
+  formattable logic from cpp.
+- repeat the exercise with csharp. We should end up with two new
+  namespaces in generation handling the fabric meta-types and their
+  processing.
+- by the end of this refactor, cpp and csharp should contain only the
+  formatters.
+
+*** Create =generation.extraction= model                              :story:
+
+- rename =generation.cpp= to =generation.extraction=.
+- rename =formatters= namespace to =cpp=.
+- ensure the logic for processing one tech space will work for
+  multiple tech spaces. For example, we could move the existing
+  workflow into the =cpp= namespace and register the text generation
+  chain from there.
+- repeat the exercise with the csharp model.
+- by the end of this refactor we should end up with a single
+  =generation.extraction= containing both the csharp and cpp
+  formatters.
+- consider renaming formatters to model to text transforms.
+
+*** Inheriting from oneself causes segfault                           :story:
+
+If you set an object to inherit from itself, say via metadata:
+
+: #DOGEN masd.generalization.parent=in_memory_weaver
+
+Dogen segfaults due to recursion. We need to test this via UML
+inheritance as well.
+
+*** Implement the new dogen product API                               :story:
+
+Now the API has been designed and generated, we need to implement it.
+
+*** Fix cmake emacs variable for tab width                            :story:
+
+We need to replace uses of =tab-width= in cmake files with
+=cmake-tab-width=, as explained here:
+
+[[http://stackoverflow.com/questions/25751408/controlling-the-indent-offset-for-cmake-in-emacs][Controlling the indent/offset for CMake in emacs]]
+
+We need to do this for both code generated and manually generated
+files.
+
+*** Fix =cp= error on cmake with local third-party packages           :story:
+
+We are getting strange errors in cmake:
+
+: cp: cannot stat ‘/usr/lib/i386-linux-gnu/libpthread.so.1.54.0’: No such file or directory
+
+*** Assorted improvements to CMake files                               :epic:
+
+It seems we are not using proper CMake idioms to pick up compiler
+features, as explained here:
+
+- [[http://unclejimbo.github.io/2018/06/08/Modern-CMake-for-Library-Developers/][Modern CMake for Library Developers]]
+- [[http://www.slideshare.net/DanielPfeifer1/cmake-48475415][CMake - Introduction and best practices]]
+- [[https://datascience.lanl.gov/data/151208-LANL-Hoffman-Science.pdf][Building Science with CMake]]
+- [[http://voices.canonical.com/jussi.pakkanen/2013/03/26/a-list-of-common-cmake-antipatterns/][A list of common CMake antipatterns]]
+- [[https://rix0r.nl/blog/2015/08/13/cmake-guide/][The Ultimate Guide to Modern CMake]]
+- [[https://github.com/crezefire/cxp][CXP: C++ Cross Platform]]: A template project for creating a cross
+  platform C++ CMake project using modern CMake syntax and transitive
+  dependencies.
+
+We need to implement this using proper CMake idioms.
+
+Notes:
+
+- Add version and language to project.
+- start using [[https://cmake.org/cmake/help/v3.3/command/target_compile_options.html][target compile options]] for each target. We will have to
+  repeat the same flags; this could be avoided by passing in a
+  variable. See also [[http://stackoverflow.com/questions/23995019/what-is-the-modern-method-for-setting-general-compile-flags-in-cmake][What is the modern method for setting general
+  compile flags in CMake?]]
+- define qualified aliases for all libraries, including nested
+  aliasing for =dogen::test_models=. Ensure all linking is done
+  against qualified names.
+- use target include directories for each target and only add the
+  required include directories to each target. Mark them with the
+  appropriate visibility, including using =interface=. We should then
+  remove all duplication of libraries in the specs.
+- try replacing calls to =-std=c++-14= with compiler feature
+  detection. We need to create a list of all C++-14 features we're
+  using.
+- remove all of the debug/release compilation options and start using
+  =CMAKE_BUILD_TYPE= instead. See [[http://pastebin.com/jCDW5Aa9][this]] example. We added build type
+  support to our builds, but as a result, the binaries moved from
+  =stage/bin= to =bin=. There is no obvious explanation for this.
+- remove =STATIC= on all libraries and let users specify which linkage
+  to use. We already have a story to capture this work.
+- remove the stage folder and use the traditional CMake
+  directories. This will also fix the problems we have with
+  BUILD_TYPE.
+- consider buying the CMake book: https://crascit.com/professional-cmake/.
+
+Merged stories:
+
+*Usage of external module path in cmakelists*                       :story:
+
+It seems like we are not populating the target names
+properly. Originally the target name for test model all built-ins was:
+
+: dogen_all_builtins
+
+When we moved the test models into =test_models= the target name did
+not change. It should have changed to:
+
+: dogen_test_models_all_builtins
+
+*** Support for cmake components and groups                           :story:
+
+#+begin_quote
+*Story*: As a dogen user, I need to integrate the generated models
+with my existing packaging code.
+#+end_quote
+
+We recently added support for creating multiple packages from a single
+source tree. We need generated models to have a new top-level cmake file:
+
+: add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
+: add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests)
+:
+: install(
+:     DIRECTORY include/
+:     DESTINATION include
+:     COMPONENT headers
+:     FILES_MATCHING PATTERN "*.hpp")
+
+And the =src= cmake file:
+
+: install(TARGETS dia ARCHIVE DESTINATION lib COMPONENT libraries)
+
+*** Mop-up nested namespaces using legacy syntax                      :story:
+
+It seems we still have a number of places in the templates where we
+are using the legacy nested namespaces. Its probably only in
+serialisation, given that's the only place where we've hard-coded the
+namespaces and they are more than one level deep (we have a lot of
+=std= but that's not affected):
+
+: namespace boost {
+: namespace serialization {
+
+We need to wrap these in if's for C++ 17 and add nested namespaces.
+
+*** Add tests for external and model modules                          :story:
+
+At present we do not have tests exercising different combinations of
+external and model modules.
+
+Tests:
+
+- 0-3 levels of external modules
+- 1-3 levels of model modules
+
+*** Rewrite name resolution in terms of lists                         :story:
+
+Even since we did the external modules / model modules change we broke
+code generation; this is because we do not go up the model modules
+during name resolution. We did a quick hack to fix this but it needs
+to be done properly.
+
+Let's walk through a simple example:. Name cames in as:
+
+- model module: =probing=
+- simple: =prober=
+
+We are in model:
+
+- model module: =dogen.external=
+
+Expected behaviour is to try all combinations of model modules:
+
+- =dogen.external.probing=
+- =dogen.probing
+- =probing=
+
+This highlights a fundamental problem with resolution: we view the
+{external, model, internal} modules as if they are separate entities
+but in reality, for the purposes of resolution, there is only one
+thing that is relevant: the module path. If it matches because of
+{external, model, internal} modules, well that is not relevant to
+resolution. Other users of =name= do need to know this information
+(for example to generate directories or file names) but not the
+resolver.
+
+Interestingly, because we are only looking for an id, it doesn't
+really matter how we get to it (in terms of the internal composition
+of the name), as long as it matches bitwise. This means we can look at
+the process slightly differently:
+
+- start off with the name as the user provided it. Extract all strings
+  from it to create a list, in order: external, model, internal,
+  simple. Try to resolve that. Call it user list.
+- then create a second list from model / context: external, model,
+  internal. Call it model list.
+- try concantenating model list and user list, pretty printing and
+  resolving it. If it fails, pop model list and concatenate again. Try
+  until model list is empty.
+
+Tasks:
+
+- first add a quick hack just to get the code generator working
+  again. For example, take the first model module of the model and try
+  resolving with that. Then worry about fixing this properly.
+- split the conversion of name into list from pretty printer. Printer
+  should merely take a string or list of strings and do its thing. We
+  need to find a good location for this method, since (for now) we
+  cannot place it in the right location which is the name class
+  itself.
+- change resolver to obtain the lists as per above. The to list
+  machinery can be used for this, though we need to handle model names
+  somehow. We can copy the =model_name_mode= logic from printer.
+- drop all of the logic in resolver at present and use the list logic
+  as per above. Do not check references, etc.
+
+Notes:
+
+- there are a few useful functions here:
+  - subtraction: given a base list, subtract another list. Fro
+    example, given =masd::dogen::annotations::annotation=, subtract
+    =masd::dogen::annotations=. This is useful when determining the
+    right qualification inside a class.
+  - addition: concatenate a list with another.
+  - combination: given a base list, create all possible permutations
+    for a second list. For example: =masd::dogen::annotations= and
+    =some::type=, we want =masd::dogen::annotations::some::type=,
+    =masd::dogen::some::type=, =masd::some::type=, =some::type=. We
+    are iterating upwards the first list.
+  - make id: given a list, generate an ID. This was we don't even need
+    to go though the whole "name building" exercise, we simply go from
+    lists into ID's and check the containers.
+- we probably should introduce a type for this: =flat_location=?
+  something that can be converted from a =location= (but not the
+  opposite) and has the properties defined above. Or we could have a
+  "location flattener" that performs these actions, but this is less
+  clean as we now need a few of these helpers.
+- there are two fundamental concepts: a path (which is what we call a
+  location) and an address (which is what we call an ID). Path implies
+  an hierarchical space, which is what modeling and generation space
+  are. Address is flat and unique. There is a function to go from
+  paths to addresses but not vice-versa. Given two paths we can
+  generate all possible addresses by performing a "climb" in the
+  hierarchical space.
+- we could make addresses URIs, and preserve almost all of the
+  information: =masd://some.model.name/a/b.c=. The problem is we
+  cannot tell the difference between model modules and external
+  modules. However, we could simplify this and say model modules and
+  external modules are all the same thing; users can choose to express
+  external modules as part of the file name or not. (e.g. "express
+  full path" or some such flag). We can also choose to express
+  external modules as directories or as a dotted path. URIs may not be
+  the best of ideas because models exist in contexts (workspaces,
+  servers, users) rather than in one universal space. However, we
+  could use URLs as a way to identify resources once we clear up the
+  REST story.
+
+*** Default model modules from filename                               :story:
+
+It would be nice to be able to not have to supply model modules when
+its obvious from the filename.
+
+*** Nested external model path results in strange references          :story:
+
+Note: we have probably already implemented a solution for this, need
+to check the resolver.
+
+The external model path does not contribute to path resolution in a
+model. Up til now that has actually been a feature; it would have been
+annoying to have to dype =dogen::= on every type for every
+model. Instead, we refer to say =dogen::a::b= as simply =a::b= in all
+models that use =a=. However this masks a deeper problem: this is not
+the desired behaviour at all times. We saw this problem when we
+created multiple models under dynamic: =dynamic::schema= and
+=dynamic::expansion=. In this case, users of these models referred to
+them as =schema= and =expansion= respectively, and this was not
+ideal. In general:
+
+- external module path should contribute to references just like
+  internal module path does - there should be no difference;
+- dogen should be clever enough to determine if two models share a
+  top-level namespace (regardless if it was obtained from the external
+  or internal module path) that there is no need to have an absolute
+  path. So in the case of =dogen=, since every model has =dogen= as
+  their external module path, according to this rule we should not
+  have to type it.
+
+*** Move hello world model from models directory                      :story:
+
+It is confusing to have it mixed up with product models. Use a regular
+dogen model to test the package. We could have it on the reference
+model as a stand alone example, or we could create a "hello dogen"
+product for a trivial example of dogen usage.
+
+*** Move from doxygen to standardese                                  :story:
+
+We should try to use standardese to generate the documentation for
+dogen. Seems easier to use and CMake friendly. Also, it seems more c++
+compliant because it uses libclang.
+
+Once the move is done, we should update dogen to generate comments in
+either markup via a meta-data parameter (documentation markup?).
+
+Links:
+
+- https://github.com/foonathan/standardese
+
+*** Consider creating a test build for all facets                     :story:
+
+In the past we had enabled a lot of facets on the dogen models to
+serve as part of the testing infrastructure. However, its no longer
+feasible to do this because the build is taking too long. However, the
+reference models just can't capture all of the complexity of a
+codebase like dogen's so we lost some testability with this move. What
+would be really nice is if we could create "test builds":
+
+- given a set of test models, copy them somewhere, generate a product
+  configuration with some kind of override that enables all facets
+  everywhere. some will just not come through like ORM.
+- build the product. all handcrafted code is now blank but all facets
+  are coming though.
+- this could be part of the ctest script, as a "mode" - product
+  generation test. Every time there is a commit to a product the build
+  kicks in.
+
+Notes:
+
+- one way to achieve this would be to force the profile of the
+  model. However, we are moving away from profiles, and in the future
+  there will be a list of stereotypes associated with the model. Then
+  it will be much harder to figure out what stereotypes do what and to
+  overwrite them.
+- an alternative would be to have some kind of "test mode"; when
+  handling enablement, we'd check the "mode". If we're in test mode,
+  we simply enable all and ignore any other settings. We could have a
+  "force enable" flag or some such like we do for
+  overwriting. However, we may then hit another problem: enabling all
+  facets may result in non-buildable models:
+  - facets may be incompatible. This is not a problem at present.
+  - handcrafted classes may result in code that does not
+    compile. Shouldn't though because we are still checking the status
+    of the attributes.
+- the key thing though is the overall build time must be below the
+  threshold. Maybe we can have this on a nightly, running on our own
+  hardware.
+
+Conclusions:
+
+- create a new flag: =force-enablement=. When set to true, we ignore
+  all enablement settings and generate all facets. We do not generate
+  all kernels though (e.g. the kernel must be on in the model).
+- create a script that copies the models to a new product and
+  generates them with fore-enablement. This will only work when we can
+  generate products.
+- as facets are enabled, tests are automatically generated for them.
+- build the result and run all tests.
+
+Merged stories:
+
+*New approach to model testing*                                    :story:*
+
+In the beginning we generated all models with all facets, even the
+dogen core models. The idea was to test the generator even though
+these facets were not useful for the product. This was really useful
+because the dogen models are much more realistic than the test models
+and due to this we picked up a number of bugs. However, we have now
+hit the maximum build times on travis and we need to start removing
+all ballast. This will mean we lose these valuable tests. The
+alternative is to create these tests on the fly:
+
+- create a new override flag that forces all facets to be emitted.
+- create a new test facet with templates that are dependent on the
+  enabled facets; each test tests the dependent facet.
+- create a ctest nightly build that generates code using these new
+  facets, compiles it and runs all tests.
+- we need some meta-data to "ignore" some modeling elements for
+  certain facets such as composition which are known to be broken. Or
+  maybe we should just leave the tests as red so we know.
+- the tests should be designed not to use templates etc to make the
+  debug dumps really obvious (unlike the existing tests). It may even
+  make more sense to test each type individually so that when the test
+  fails its really obvious:
+
+: MY_TYPE_serialisation_roundtrips_correctly
+
+  this way when we look at CDash we know exactly which types failed to
+  serialise.
+
+During the transition phase, we will remove all of the existing tests.
+
+*** Add support for multiple profile binds per modeling element       :story:
+
+At present we can only bind an element to one profile. The reason why
+is because we've already expanded the profile graphs into a flat
+annotation and if we were to apply two of these expanded annotations
+with common parents, the second application would overwrite the
+first. Of course, we bumped into the exact same problem when doing
+profile inheritance; there it was solved by ensuring each parent
+profile is applied only once for each graph.
+
+One possible solution for this problem is to consider each model
+element as a "dynamic profile" (for want of a better name; on the fly
+profile?). We would create a profile which is named after each of the
+profiles it includes, e.g. say we include =dogen::hashable= and
+=dogen::pretty_printable= for model element e0. Then the "on the fly
+profile" would be:
+
+: dogen::hashable_dogen::pretty_printable
+
+It would be generated by the profiler, with parents =dogen::hashable=
+and =dogen::pretty_printable=, and cached so that if anyone shows up
+with that same profile we can reuse it. Because of the additive nature
+of profile graphs this would have the desired result. Actually we
+could probably have a two pass-process; first identify all of the
+required dynamic profiles and generate them; then process them. This
+way we can rely on a const data structure.
+
+This will all be made easier when we have a two-pass pipeline because
+we can do the profile processing on the first pass, and we can even
+generate the "dynamic profiles" as real meta-model elements, created
+on the fly.
+
+*** Facet enablement and model references is buggy                    :story:
+
+At present we are processing enablement as part of the
+post-processing. This means that we are using the target model's
+annotation profile in order to determine the facet enablement. This
+can cause problems as follows: say we enable hashing on a model via
+the model profile of M0. We then consume that model as a reference and
+disable hashing on M1. When processing types from M0 for M1 we will
+disable hashing for them as well. Thus, no includes for hashing will
+be generated even if a hash map is used.
+
+Actually this is not quite right. We are expanding annotations at the
+external model transform level; this means the enablement on the
+reference must be correct. However, somehow we seem to be looking at
+the element on the target model when deciding to include the hash file
+from reference model.
+
+*** Create some basic naming guidelines                               :story:
+
+As per Framework Design Guidelines, we need some basic guidelines for
+naming in Dogen. We don't need to go overboard, we just need something
+to get us started and evolve it as we go along.
+
+Links:
+
+- [[https://isocpp.org/wiki/faq/coding-standards][C++ Coding Standards]]
+- [[http://wiki.c2.com/?CapitalizationRules][Capitalization Rules]]
+- [[https://en.wikipedia.org/wiki/Snake_case][Snake Case]]
+- [[http://cs.smu.ca/~porter/csc/ref/stl/naming_conventions.html][Naming Conventions for these STL Reference Pages]]
+- [[https://style-guides.readthedocs.io/en/latest/cpp.html][C++ coding style guide]]
+- [[https://stxxl.org/tags/1.4.1/coding_style.html][Coding Style Guidelines]]
+- [[https://www.fluentcpp.com/2018/04/24/following-conventions-stl/][Make Your Containers Follow the Conventions of the STL]]
+
+*** Consider generating program options code                          :story:
+
+If there was a syntax to describe boost program options, we should be
+able to generate most of the code for it:
+
+- the code that initialises the options;
+- the domain objects that will store the options;
+- the copying of values from program options objects into domain
+  objects.
+
+This would mean that creating a command line tool would be a matter of
+just supplying an options file. We could then have a stereotype for
+this (name to be yet identified). Marking a type with this stereotype
+and supplying the appropriate meta-data so one could locate the
+options file would cause dogen to emit the program options binding
+code.
+
+A similar concept seems to exist for python: [[http://docopt.org/][docopt]]. We should keep
+the same syntax. We just need to have a well defined domain object for
+these. The aim would be to replace config.
+
+For models such as these, the dia representation is just overhead. It
+would be great if we could do it using just JSON.
+
+Actually even better would be if we could have a text file in docopt
+format and parse it and then use it to generate the code described
+above.
+
+Actually maybe we are just making this too complicated. We probably
+just need some very trivial meta-data extensions that express the
+required concept:
+
+- create a yarn element to model this new meta-class. We basically
+  need to model the structure of program options with option groups
+  and options.
+- define a stereotype for the new yarn elements, say
+  =CommandLineOptionGroup=.
+- for types facet we simply generate the regular c++ code. But in
+  addition, we also generate a new facet that: a) injects the
+  propertties into boost program options b) instantiates the c++
+  objects from boost program options.
+- this means that instead of creating a new meta-type, we need to
+  augment =yarn::object= with command line options stuff.
+
+Notes:
+
+- create stereotypes for options group, options; allow users to define
+  members of type options in options group. Or should the options just
+  be member variables? In which case we could have
+  =command_line::options= as the stereotype.
+- generate the options classes.
+- inject a hand-crafted validator or consider generating the validator
+  given the meta-data supplied by the user (mandatory, at most X
+  times, etc).
+- generate an options builder that takes on the building
+  responsibilities from the parser.
+- generate a parser that hooks the builder and copies data from the
+  options map into the options.
+- allow users to supply the help text and the version text as
+  parameters; these should probably be done in a similar way to what
+  we do with the modeline etc.
+- allow users to set default values in the options attributes and set
+  them in generated code. This is probably just adding default value
+  support to dogen, for which we have a separate story.
+- one very useful way in which to use program options is via
+  projections. That is a given model M0 defines the configuration and
+  a second model M1 defines the options parsing. In this case the
+  options defined in M0 already has the required shape:
+  - there is a top-level class housing all options, traditionally
+    called "configuration";
+  - the top-level class contains meta-data with the product blurb;
+  - attributes of that class can be annotated as "modes", "groups" or
+    nothing. A mode will result in a modal CLI interface. Groups
+    result in top-level groupings of options. Nothing means the
+    attribute must be of a simple type and will be a global option
+    (e.g. =help=, =version=, etc).
+  - attributes have a description, etc associated as meta-data. They
+    also have other useful annotations such as optional, mandatory
+    etc. These are used in validation. Interestingly this may mean we
+    can also automatically generate a validator.
+  - dogen generates in M1 a set of chained program option parsers
+    (assuming a modal interface; otherwise just one) which generate
+    the M0 options.
+  - in M1, users define a class with attribute
+    =masd::command_line_options=, associated with an options class.
+  - users can choose the "backend": boost program options, etc. Each
+    is implemented as a separate template.
+  - dogen generates a parser with an associated exception
+    (parser_validation_error). The exception is simply injected as a
+    type.
+
+Links:
+
+- [[https://github.com/abolz/CmdLine2][CmdLine2]]: alternative library to program options.
+
+*** Exclude profiles from stereotypes processing                      :story:
+
+At present we are manually excluding profiles from the stereotypes
+transform. This was just a quick hack to get us going. We need to
+replace this with a call to annotations to get a list of profile names
+and exclude those.
+
+We should also rename =is_stereotype_handled_externally= to something
+more like "is profile" or "matches profile name".
+
+Actually the right thing may even be to just remove all of the profile
+stereotypes during annotations processing. However, we should wait
+until we complete the exomodel work since that will remove scribble
+groups, etc. Its all in the annotations transform.
+
+*** Multiple entries of the same key is invalid in JSON               :story:
+
+We directly mapped KVPs in UML to JSON, e.g.:
+
+: #DOGEN masd.injection.model_modules=Masd.CSharpRefImpl.CSharpModel
+: #DOGEN masd.injection.input_language=csharp
+: #DOGEN masd.injection.reference=csharp.builtins
+: #DOGEN masd.injection.reference=csharp.system.collections.generic
+: #DOGEN masd.injection.reference=csharp.system.collections
+: #DOGEN masd.injection.reference=csharp.system
+: ...
+
+maps to:
+
+: {
+:  "tagged_values": {
+:    "masd.injection.dia.comment": "true",
+:    "masd.injection.model_modules": "Masd.CSharpRefImpl.CSharpModel",
+:    "masd.injection.input_language": "csharp",
+:    "masd.injection.reference": "csharp.builtins",
+:    "masd.injection.reference": "csharp.system.collections.generic",
+:    "masd.injection.reference": "csharp.system.collections",
+:    "masd.injection.reference": "csharp.system",
+: ...
+
+However, we cannot have duplicate keys in JSON, resulting in problems
+when we indent models: the indenter removes all duplicate keys but
+one. This means we have to massage models post indentation every
+time. Solutions:
+
+- use a JSON container for container keys. The problem with this is
+  that our internal representation does not have a container but a
+  list of KVPs. We need to somehow convert to and from this container
+  representation. We also need to be able to dynamically determine if
+  the value is a container or just a plain value when deserialising
+  from JSON. If it's a container, we need to flatten it.
+
+*** Warn on transitive references to models used directly             :story:
+
+At present, when we reference a model B, we get all of the models it
+references. However, if model A (the target) is using types of say
+model C, it should reference it directly rather than via B. If B
+changes, A will break. It would be nice to have a warning for these
+types of referencing.
+
+*** Error on duplicate references                                     :story:
+
+We need to check to see what happens if you enter the same reference
+multiple times. We should error.
+
+*** Update static strings to string views                             :story:
+
+Now we're on C++17 we can start making use of its new features. One
+low hanging fruit is string view. We use static strings quite a lot
+for logging etc. We can just replace these with string views.
+
+Links:
+
+- [[https://www.bfilipek.com/2018/10/strings17talk.html][Let's Talk About String Operations in C++17]]
+
+*** Consider adding compiler name to package                          :story:
+
+At present we are not uploading clang packages into bintray. This is
+because they have the same name as the GCC and MSVC packages. If we
+add the compiler name to the package we can then upload them too. This
+would be good because we can then test to make sure all packages are
+working correctly.
+
+*** Fix clang-cl broken test                                          :story:
+
+We have one test failing on clang-cl, ref impl:
+
+: Running 1 test case...
+: unknown location(0): fatal error: in "boost_model_tests/validate_serialisation": class boost::archive::archive_exception: unregistered void cast class masd::cpp_ref_impl::boost_model::class_derived<-class masd::cpp_ref_impl::boost_model::class_base
+: ..\..\..\..\projects\masd.cpp_ref_impl.test_model_sanitizer\tests\boost_model_tests.cpp(56): last checkpoint: validate_serialisation
+:
+: *** 1 failure is detected in the test module "test_model_sanitizer_tests"
+
+It seems that the boost registration is failing on debug. This is very
+strange as it works on MSVC and Linux, release and debug but fails on
+clang-cl release.
+
+*** Move element segmentation into yarn                               :story:
+
+We've added the notion that an element can be composed of other
+elements in quilt, in order to handle forward declarations. However,
+with a little bit of effort we can generalise it into yarn. It would
+be useful for other things such as inner classes. We don't need to
+actually implement inner classes right now but we should make sure the
+moving of this feature into yarn is compatible with it.
+
+Notes:
+
+- seems like we have two use cases: a) we need all elements, master
+  and extensions and we don't really care about which is which. b) we
+  only want masters. However, we must be able to access the same
+  element properties from either the master or the extension. Having
+  said all that, it seems we don't really need all of the element
+  properties for both - forward declarations probably only need:
+  decoration and artefact properties.
+- we don't seem to use the map in formattables model anywhere, other
+  than to find master/extension elements.
+- Yarn model could have two simple list containers (masters and
+  all). Or maybe we don't even need this to start off with, we can
+  just iterate and skip extensions where required.
+- so in conclusion, we to move decoration, enablement and dependencies
+  into yarn (basically decoration and artefact properties) first and
+  then see where segmentation ends.
+
+Tasks:
+
+- add a concept for element extensions: =Extensible=. Contains a list
+  of element pointers.
+- populate it with the extensions.
+- change enablement to merge all element properties of extensible
+  elements.
+
+*** Create a yarn locator                                             :story:
+
+We need to move all functionality which is not kernel specific into
+yarn for the locator. This will exist in the helpers namespace. We
+then need to implement the C++ locator as a composite of yarn
+locator. It will live in fabric.
+
+*Other Notes*
+
+At present we have multiple calls in locator, which are a bit
+ad-hoc. We could potentially create a pattern. Say for C++, we have
+the following parameters:
+
+- relative or full path
+- include or implementation: this is simultaneously used to determine
+  the placement (below) and the extension.
+- meta-model element:
+- "placement": top-level project directory, source directory or
+  "natural" location inside of facet.
+- archetype location: used to determine the facet and archetype
+  postfixes.
+
+E.g.:
+
+: make_full_path_for_enumeration_implementation
+
+Interestingly, the "placement" is a function of the archetype location
+(a given artefact has a fixed placement). So a naive approach to this
+seems to imply one could create a data driven locator, that works for
+all languages if supplied suitable configuration data. To generalise:
+
+- project directory is common to all languages.
+- source or include directories become "project
+  sub-directories". There is a mapping between the artefact location
+  and a project sub-directory.
+- there is a mapping between the artefact location and the facet and
+  artefact postfixes.
+- extensions are a slight complication: a) we want to allow users to
+  override header/implementation extensions, but to do it so for the
+  entire project (except maybe for ODB files). However, what yarn's
+  locator needs is a mapping of artefact location to  extension. It
+  would be a tad cumbersome to have to specify extensions one artefact
+  location at a time. So someone has to read a kernel level
+  configuration parameter with the artefact extensions and expand it
+  to the required mappings. Whilst dealing with this we also have the
+  issue of elements which have extension in their names such as visual
+  studio projects and solutions. The correct solution is to implement
+  these using element extensions, and to remove the extension from the
+  element name.
+- each kernel can supply its configuration to yarn's locator via the
+  kernel interface. This is fairly static so it can be supplied early
+  on during initialisation.
+- there is still something not quite right. We are performing a
+  mapping between some logical space (the modeling space) and the
+  physical space (paths in the filesystem). Some modeling elements
+  such as the various CMakeLists.txt do not have enough information at
+  the logical level to tell us about their location; at present the
+  formatter itself gives us this hint ("include cmakelists" or "source
+  cmakelists"?). It would be annoying to have to split these into
+  multiple archetypes just so we can have a function between the
+  archetype location and the physical space. Although, if this is the
+  only case of a modeling element not mapping uniquely, perhaps we
+  should do exactly this.
+- However, we still have inclusion paths to worry about. As we done
+  with the source/include directories, we need to somehow create a
+  concept of inclusion path which is not language specific; "relative
+  path" and "requires relative path" perhaps? These could be a
+  function of archetype location.
+
+*** Tidy-up of inclusion terminology                                  :story:
+
+Random notes:
+
+- imports and exports
+- some types support both (headers)
+- some support imports only (cpp)
+- some support neither (cmakelists, etc).
+
+*** Consider adding =artefact_set= to formatters' model               :story:
+
+We are using collections of artefacts quite a bit, and it makes sense
+to create an abstraction for it such as a =artefact_set=. However, for
+this to work properly we need to add at least one basic behaviour: the
+ability to merge two artefact sets. Or else we will end up having to
+unpack the artefacts, then merging them, then creating a new artefact
+set.
+
+Problem is, we either create the artefact set as a non-generatable
+type - not ideal - or we create it as generatable and need to add this
+as a free function. We need to wait until dogen has support for
+merging code generation.
+
 *** Mapping of third-party dependencies                               :story:
 
 System models should follow the physical structure of
