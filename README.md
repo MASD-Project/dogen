@@ -225,10 +225,20 @@ contains all of the logs, under the directory ```log```.
 
 # Videos
 
-We don't really have any recent videos for Dogen, but this very old
-one should at least give you an idea of its workflow:
+There are a limited number of videos available about Dogen, though we
+are trying to get into the habit of demoing new features at the end of
+each sprint.
 
-[![Alt text](https://img.youtube.com/vi/Z7k8qbImXkU/0.jpg)](https://youtu.be/Z7k8qbImXkU)
+## v1.0.12 Demo
+
+[![Sprint 1.0.12 Demo](https://img.youtube.com/vi/Tt34P3JXzeE/0.jpg)](https://www.youtube.com/watch?v=Tt34P3JXzeE)
+
+## Old Demos
+
+In addition, there is also a very old video that should at least give you an idea
+of its workflow:
+
+[![Sprint 0.0.20 Demo](https://img.youtube.com/vi/Z7k8qbImXkU/0.jpg)](https://youtu.be/Z7k8qbImXkU)
 
 # Blog Posts
 
