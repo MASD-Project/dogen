@@ -14,17 +14,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-11 Mon 11:07]
+#+CAPTION: Clock summary at [2019-03-11 Mon 16:07]
 | <75>                                          |        |      |      |       |
 | Headline                                      | Time   |      |      |     % |
 |-----------------------------------------------+--------+------+------+-------|
-| *Total time*                                  | *3:41* |      |      | 100.0 |
+| *Total time*                                  | *7:06* |      |      | 100.0 |
 |-----------------------------------------------+--------+------+------+-------|
-| Stories                                       | 3:41   |      |      | 100.0 |
-| Active                                        |        | 3:41 |      | 100.0 |
-| Edit release notes for previous sprint        |        |      | 1:37 |  43.9 |
-| Sprint and product backlog grooming           |        |      | 1:42 |  46.2 |
-| Create a video demo for the sprint's features |        |      | 0:22 |  10.0 |
+| Stories                                       | 7:06   |      |      | 100.0 |
+| Active                                        |        | 7:06 |      | 100.0 |
+| Edit release notes for previous sprint        |        |      | 1:37 |  22.8 |
+| Sprint and product backlog grooming           |        |      | 1:42 |  23.9 |
+| Create a video demo for the sprint's features |        |      | 3:47 |  53.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -352,14 +352,29 @@ For some reason we are unable to compile the serialisation test for
 the test model which focuses only on the serialisation facet. Test is
 ignored for the moment.
 
-*** STARTED Create a video demo for the sprint's features             :story:
+*** COMPLETED Create a video demo for the sprint's features           :story:
+    CLOSED: [2019-03-11 Mon 16:06]
     :LOGBOOK:
+    CLOCK: [2019-03-11 Mon 15:55]--[2019-03-11 Mon 16:06] =>  0:11
+    CLOCK: [2019-03-11 Mon 14:32]--[2019-03-11 Mon 14:50] =>  0:18
+    CLOCK: [2019-03-11 Mon 12:34]--[2019-03-11 Mon 14:31] =>  1:57
+    CLOCK: [2019-03-11 Mon 11:08]--[2019-03-11 Mon 12:07] =>  0:59
     CLOCK: [2019-03-11 Mon 10:45]--[2019-03-11 Mon 11:07] =>  0:22
     :END:
 
 Our video is extremely old and misleading. We need to get back into
 the habit of doing a video demo at the end of every sprint talking
 about the work of the sprint.
+
+*** Updates to package                                                :story:
+
+- shared folder is =dogen= not =masd.dogen=
+- no hello world sample; need json and dia versions
+
+*** Single reporting format option                                    :story:
+
+- use org-mode for tracing and reporting etc
+- byproducts dir does not have =cli=
 
 *** Add tests for tracing and reporting                               :story:
 
