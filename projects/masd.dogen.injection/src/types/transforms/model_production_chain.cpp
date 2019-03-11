@@ -64,9 +64,9 @@ apply(const context& ctx, const boost::filesystem::path& p) {
         transform_id, model_name, *ctx.tracer());
 
     /*
-     * Transform the external model in whatever supported exogenous
+     * Transform the external model in whatever supported external
      * representation it may be in - Dia, JSON, etc - into the
-     * internal representation of an exogenous model.
+     * internal representation of an injection model.
      */
     auto& t(transform_for_model(p));
     auto r(t.apply(ctx, p));

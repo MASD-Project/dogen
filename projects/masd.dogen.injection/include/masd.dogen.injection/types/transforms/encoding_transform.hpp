@@ -34,7 +34,7 @@ namespace masd::dogen::injection::transforms {
 
 /**
  * @brief Transform that converts models in our injection model
- * representation to an exogenous format.
+ * representation to an external format.
  */
 class encoding_transform {
 public:
@@ -60,9 +60,9 @@ public:
      * encoding transforms have state.
      *
      * @note This function is receiving a path to the model, rather
-     * than return the file contents because at the moment the
-     * exogenous transformers cannot cope with string processing. In
-     * the future this will change to returning a string.
+     * than return the file contents because at the moment the codecs
+     * cannot cope with string processing. In the future this will
+     * change to returning a string.
      */
     virtual void apply(const context& ctx, const meta_model::model& m,
         const boost::filesystem::path& p) = 0;
