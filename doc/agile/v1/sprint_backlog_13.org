@@ -14,23 +14,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-11 Mon 16:07]
+#+CAPTION: Clock summary at [2019-03-11 Mon 16:22]
 | <75>                                          |        |      |      |       |
 | Headline                                      | Time   |      |      |     % |
 |-----------------------------------------------+--------+------+------+-------|
-| *Total time*                                  | *7:06* |      |      | 100.0 |
+| *Total time*                                  | *7:20* |      |      | 100.0 |
 |-----------------------------------------------+--------+------+------+-------|
-| Stories                                       | 7:06   |      |      | 100.0 |
-| Active                                        |        | 7:06 |      | 100.0 |
-| Edit release notes for previous sprint        |        |      | 1:37 |  22.8 |
-| Sprint and product backlog grooming           |        |      | 1:42 |  23.9 |
-| Create a video demo for the sprint's features |        |      | 3:47 |  53.3 |
+| Stories                                       | 7:20   |      |      | 100.0 |
+| Active                                        |        | 7:20 |      | 100.0 |
+| Edit release notes for previous sprint        |        |      | 1:51 |  25.2 |
+| Sprint and product backlog grooming           |        |      | 1:42 |  23.2 |
+| Create a video demo for the sprint's features |        |      | 3:47 |  51.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2019-03-11 Mon 10:44]
     :LOGBOOK:
+    CLOCK: [2019-03-11 Mon 16:18]--[2019-03-11 Mon 16:22] =>  0:04
+    CLOCK: [2019-03-11 Mon 16:07]--[2019-03-11 Mon 16:17] =>  0:10
     CLOCK: [2019-03-11 Mon 09:07]--[2019-03-11 Mon 10:44] =>  1:37
     :END:
 
@@ -44,7 +46,11 @@ _Estádio Joaquim Morais, Moçamedes, Namibe. [(C) 2018 Jornal de Angola](http:/
 
 # Overview
 
-With Sprint 12 we are hoping to finally return to a regular release cadence. This was much more predictable two-week sprint, which largely delivered on the sprint's mission statement of cleaning up the mess of refactors and reactivating system testing. As such, it was not a particularly exciting sprint in terms of end user features, but still got us very excited because we are finally paying off years of technical debt in a manner that respects established MDE theory. Of this work, we'd like to highlight the following.
+With Sprint 12 we are hoping to finally return to a regular release cadence. This was a much more predictable two-week sprint, which largely delivered on the sprint's mission statement of cleaning up the mess of refactors and reactivating system testing. As such, it was not a particularly exciting sprint in terms of end user features, but still got us very excited because we are finally paying off years of technical debt in a manner that respects established MDE theory.
+
+# Internal Changes
+
+The key internal changes are described in the next sections.
 
 ## Complete the orchestration refactor
 
@@ -77,11 +83,13 @@ This sprint saw a lot of infrastructural work to enable a more sensible approach
 
 However, analysis reveals that we are still not testing a fair bit of the generated code, so next sprint the objective is to close the gap further in code coverage and testing.
 
-As usual, for more details of the work carried out this sprint, see [the sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_12.org).
-
 # User visible changes
 
-A number of user visible changes were made with this release.
+The key user visible changes are described in the next sections. In addition, we've finally got round creating a video to demo the user visible features added in this sprint:
+
+[![Sprint 1.0.12 Demo](https://img.youtube.com/vi/Tt34P3JXzeE/0.jpg)](https://www.youtube.com/watch?v=Tt34P3JXzeE)
+
+Hopefully this will become a habit from now on.
 
 ## Improvements on handling of references
 
@@ -168,6 +176,29 @@ $ tree
 │   └── annotations_report.org
 ```
 
+## Graph of Transforms
+
+A minor feature that was added this sprint was the ability to print a [GraphViz](https://www.graphviz.org/) graph of transforms. This is done by exporting tracing information with the dot format, e.g.:
+
+```
+./masd.dogen.cli   generate --target hello_world.dia --dry-run-mode-enabled --reporting-enabled --reporting-style plain  --log-enabled  --tracing-enabled --tracing-format graphviz
+```
+
+The output can then be post processed with dot to generate a PDF:
+
+```
+$ cd masd.dogen.byproducts/cli.generate.hello_world.dia/tracing/
+$ dot -Tpdf transform_stats.dot -O
+```
+
+The PDF is quite large because the transform graph is getting extremely complex. This small sample is representative of the output:
+
+![Graph of transforms](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/graph_of_transforms.png)
+
+## Other
+
+As usual, for more details of the work carried out this sprint, see [the sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_12.org).
+
 # Next Sprint
 
 Now that we have the testing in place, our key objective for next sprint is to move all of the decoration related code into the meta-model. This means that much of what currently exists as assorted files that dogen loads on startup would become regular model entities, paving the way for a much more configurable model.
@@ -178,12 +209,14 @@ You can download binaries from [Bintray](https://bintray.com/masd-project/main/d
 
 - [dogen_1.0.12_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.12/dogen_1.0.12_amd64-applications.deb)
 - [dogen-1.0.12-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.12/dogen-1.0.12-Darwin-x86_64.dmg)
-- [dogen-1.0.12-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/dogen-1.0.12-Windows-AMD64.msi)
+- [dogen-1.0.12-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/dogen-1.0.11-Windows-AMD64.msi)
+
+**Note**: There was a bug in windows builds; the binaries are incorrectly labelled as the previous release.
 
 For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
 #+end_src
 
-- [[https://twitter.com/MarcoCraveiro/status/1100704249032462336][Tweet]]
+- [[https://twitter.com/MarcoCraveiro/status/1105141000589193216][Tweet]]
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6506470333200023552][LinkedIn]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
