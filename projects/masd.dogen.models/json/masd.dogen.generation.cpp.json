@@ -1988,6 +1988,35 @@
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::tests",
+      "documentation": "Formatters that generate tests for generated\ncode.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "formatters::tests::initializer",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::tests::traits",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::tests::class_implementation_formatter",
+      "stereotypes": [
+        "masd::cpp_artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
