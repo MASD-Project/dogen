@@ -14,20 +14,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-12 Tue 10:57]
+#+CAPTION: Clock summary at [2019-03-12 Tue 11:26]
 | <75>                                                     |         |       |      |       |
 | Headline                                                 | Time    |       |      |     % |
 |----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                             | *11:49* |       |      | 100.0 |
+| *Total time*                                             | *12:17* |       |      | 100.0 |
 |----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                  | 11:49   |       |      | 100.0 |
-| Active                                                   |         | 11:49 |      | 100.0 |
-| Edit release notes for previous sprint                   |         |       | 2:22 |  20.0 |
-| Sprint and product backlog grooming                      |         |       | 2:16 |  19.2 |
-| Create a video demo for the sprint's features            |         |       | 3:47 |  32.0 |
+| Stories                                                  | 12:17   |       |      | 100.0 |
+| Active                                                   |         | 12:17 |      | 100.0 |
+| Edit release notes for previous sprint                   |         |       | 2:22 |  19.3 |
+| Sprint and product backlog grooming                      |         |       | 2:16 |  18.5 |
+| Create a video demo for the sprint's features            |         |       | 3:47 |  30.8 |
 | Make projects directory env optional                     |         |       | 0:10 |   1.4 |
-| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   6.3 |
-| Code generation of tests for dogen models                |         |       | 2:29 |  21.0 |
+| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   6.1 |
+| Code generation of tests for dogen models                |         |       | 2:57 |  24.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -449,6 +449,7 @@ Links:
 
 *** STARTED Code generation of tests for dogen models                 :story:
     :LOGBOOK:
+    CLOCK: [2019-03-12 Tue 10:58]--[2019-03-12 Tue 11:26] =>  0:28
     CLOCK: [2019-03-12 Tue 09:27]--[2019-03-12 Tue 10:57] =>  1:30
     CLOCK: [2019-03-12 Tue 08:57]--[2019-03-12 Tue 09:26] =>  0:29
     CLOCK: [2019-03-11 Mon 17:17]--[2019-03-11 Mon 17:47] =>  0:30
@@ -1246,6 +1247,30 @@ Ideally we should have:
   descriptions so that users know whats available.
 - a check that a stereotype has not yet been registered so only one
   consumer can bind to it.
+
+*** Move wale templates from the data directory                       :story:
+
+At present we have wale templates under the data directory. This is
+not the right location. These are part of a model just like stitch
+templates. There is one slight wrinkle though: if a user attempts to
+create a dogen formatter (say if plugins were supported), then we need
+access to the template from the debian package. So whilst they should
+live in the appropriate model (e.g. =generation.cpp=,
+=generation.csharp=), they also need to be packaged and shipped.
+
+Interestingly, so will all dogen models which are defining annotations
+and profiles. We need to rethink the data directory, separating system
+models from dogen models somehow. In effect, the data directory will
+be, in the future, the system models directory.
+
+So, in conclusion, two use cases for wale templates:
+
+- regular model defines a wale template and makes use of it. Template
+  should be with the model, just like stitch templates. However,
+  unlike stitch, there should be a directory for them.
+- user model wants to define a new formatter. It will make use of
+  dogen profiles and wale templates. These must be in the future data
+  directory somehow.
 
 *** Consider making fully generated files read-only                   :story:
 
