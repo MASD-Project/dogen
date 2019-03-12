@@ -32,10 +32,26 @@ if (DEFINED ENV{MASD_DOGEN_PROJECTS_DIRECTORY})
     message(STATUS
         "MASD_DOGEN_PROJECTS_DIRECTORY=$ENV{MASD_DOGEN_PROJECTS_DIRECTORY}")
 else()
-    message(FATAL_ERROR
-        "MASD_DOGEN_PROJECT_DIRECTORY env variable not defined")
+    #
+    # If the user did not set the projects directory for dogen, we
+    # default it to the well-known projects directory. In truth, the
+    # handling of the projects directory is a bit messy: it must be
+    # set externally for cases such as running tests for coverage
+    # because we do not go via CMake. At the same time, we do not want
+    # users to have to deal with setting the variable if all they want
+    # to do is build dogen from git - they may not even want to run
+    # the system tests, so it seems a bit excessive to ask them to
+    # figure out how to set it. Due to, this we have this defaulting
+    # here.
+    #
+    set(ENV{MASD_DOGEN_PROJECTS_DIRECTORY} "${CMAKE_SOURCE_DIR}/projects")
+    message(STATUS
+        "MASD_DOGEN_PROJECTS_DIRECTORY=$ENV{MASD_DOGEN_PROJECTS_DIRECTORY} (default)")
 endif()
 
+#
+# C++ Reference Model for system tests.
+#
 if (DEFINED ENV{MASD_CPP_REF_IMPL_PROJECTS_DIRECTORY})
     message(STATUS
         "MASD_CPP_REF_IMPL_PROJECTS_DIRECTORY=$ENV{MASD_CPP_REF_IMPL_PROJECTS_DIRECTORY}")
@@ -45,6 +61,9 @@ else()
         "MASD_CPP_REF_IMPL_PROJECTS_DIRECTORY env variable not defined, disabling reference implementation tests.")
 endif()
 
+#
+# C# Reference Model for system tests.
+#
 if (DEFINED ENV{MASD_CSHARP_REF_IMPL_PROJECTS_DIRECTORY})
     message(STATUS
         "MASD_CSHARP_REF_IMPL_PROJECTS_DIRECTORY=$ENV{MASD_CSHARP_REF_IMPL_PROJECTS_DIRECTORY}")
