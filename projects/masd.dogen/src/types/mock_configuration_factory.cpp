@@ -49,7 +49,7 @@ mock_configuration_factory::mock_configuration_factory(
 }
 
 configuration mock_configuration_factory::
-make(const boost::filesystem::path& target, const std::string& activity) {
+make(const boost::filesystem::path& target, const std::string& activity) const {
     BOOST_LOG_SEV(lg, debug) << "Creating mock configuration.";
     BOOST_LOG_SEV(lg, debug) << "Target: " << target.generic_string();
 

@@ -42,8 +42,8 @@ public:
         const bool enable_diffing);
 
 public:
-    configuration
-    make(const boost::filesystem::path& target, const std::string& activity);
+    configuration make(const boost::filesystem::path& target,
+        const std::string& activity) const;
 
 private:
     const bool enable_tracing_;
