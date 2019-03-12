@@ -45,11 +45,14 @@ const std::string test_module("masd.dogen.orchestration.tests");
 const std::string test_suite("code_generation_chain_tests");
 
 /*
- * Set this flag to true if you want to dump tracing information for
- * all tests. It should normally be set to false, unless we are
- * diagnosing some kind of problem. Don't check it in as true.
+ * Set these flag to true if you want to dump information for all
+ * tests. It should normally be set to false, unless we are diagnosing
+ * some kind of problem. Don't check it in as true as it slows down
+ * the tests for no good reason.
  */
 const bool enable_tracing_globally(false);
+const bool enable_reporting_globally(false);
+const bool enable_diffing_globally(false);
 
 bool are_generated_files_healthy(const boost::filesystem::path& output_dir,
     const boost::filesystem::path& target) {
@@ -82,13 +85,21 @@ bool are_generated_files_healthy(const boost::filesystem::path& output_dir,
 }
 
 void test_code_generation(const boost::filesystem::path& target,
-    const boost::filesystem::path& output_dir, bool enable_tracing_locally) {
-    using masd::dogen::mock_configuration_factory;
+    const boost::filesystem::path& output_dir,
+    const bool enable_tracing_locally = false,
+    const bool enable_reporting_locally = false,
+    const bool enable_diffing_locally = false) {
+
+
     /*
      * Create the configuration.
      */
     const bool et(enable_tracing_globally || enable_tracing_locally);
-    const auto cfg(mock_configuration_factory::make(target, et, run_activity));
+    const bool er(enable_reporting_globally || enable_reporting_locally);
+    const bool ed(enable_diffing_globally || enable_diffing_locally);
+    using masd::dogen::mock_configuration_factory;
+    mock_configuration_factory f(et, er, ed);
+    const auto cfg(f.make(target, run_activity));
 
     /*
      * Create the context.
@@ -113,10 +124,9 @@ BOOST_AUTO_TEST_SUITE(code_generation_chain_tests)
 BOOST_AUTO_TEST_CASE(masd_dogen_annotations_dia_produces_expected_code) {
     SETUP_TEST_LOG("masd_dogen_annotations_dia_produces_expected_model");
     using masd::dogen::utility::test_data::dogen_generation;
-    const bool ep(false/*enable tracing locally*/);
     const auto t(dogen_generation::input_masd_dogen_annotations_dia());
     const auto od(dogen_generation::output_directory());
-    test_code_generation(t, od, ep);
+    test_code_generation(t, od);
     BOOST_CHECK(are_generated_files_healthy(od, t));
 }
 
@@ -127,10 +137,9 @@ BOOST_AUTO_TEST_CASE(masd_dogen_annotations_dia_produces_expected_code) {
 BOOST_AUTO_TEST_CASE(masd_dogen_coding_json_produces_expected_model) {
     SETUP_TEST_LOG("masd_dogen_coding_json_produces_expected_model");
     using masd::dogen::utility::test_data::dogen_generation;
-    const bool ep(false/*enable tracing locally*/);
     const auto t(dogen_generation::input_masd_dogen_coding_json());
     const auto od(dogen_generation::output_directory());
-    test_code_generation(t, od, ep);
+    test_code_generation(t, od);
     BOOST_CHECK(are_generated_files_healthy(od, t));
 }
 
