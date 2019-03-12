@@ -18,12 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.generation.cpp/types/traits.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/tests/traits.hpp"
 
 namespace masd::dogen::generation::cpp::formatters::tests {
 
-bool traits::operator==(const traits& /*rhs*/) const {
-    return true;
+std::string traits::facet() {
+    static std::string r(cpp::traits::backend() + ".tests");
+    return r;
+}
+
+std::string traits::canonical_archetype() {
+    static std::string r(traits::facet() + ".canonical_archetype");
+    return r;
+}
+
+std::string traits::class_implementation_archetype() {
+    static std::string r(traits::facet() + ".class_implementation");
+    return r;
+}
+
+std::string traits::enum_implementation_archetype() {
+    static std::string r(traits::facet() + ".enum_implementation");
+    return r;
 }
 
 }

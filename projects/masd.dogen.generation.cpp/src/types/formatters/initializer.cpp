@@ -29,6 +29,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/io/initializer.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/test_data/initializer.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/serialization/initializer.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/tests/initializer.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/initializer.hpp"
 
 namespace masd::dogen::generation::cpp::formatters {
@@ -46,6 +47,7 @@ void initializer::initialize(registrar& rg) {
     io::initializer::initialize(rg);
     test_data::initializer::initialize(rg);
     serialization::initializer::initialize(rg);
+    tests::initializer::initialize(rg);
 }
 
 }

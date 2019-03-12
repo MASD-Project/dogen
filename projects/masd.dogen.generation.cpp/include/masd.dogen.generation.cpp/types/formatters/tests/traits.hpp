@@ -25,24 +25,30 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
 
 namespace masd::dogen::generation::cpp::formatters::tests {
 
-class traits final {
-public:
-    traits() = default;
-    traits(const traits&) = default;
-    traits(traits&&) = default;
-    ~traits() = default;
-    traits& operator=(const traits&) = default;
+struct traits {
+    /**
+     * @brief Name of this facet.
+     */
+    static std::string facet();
 
-public:
-    bool operator==(const traits& rhs) const;
-    bool operator!=(const traits& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Name of the canonical archetype
+     */
+    static std::string canonical_archetype();
 
+    /**
+     * @brief Name of the class implementation archetype.
+     */
+    static std::string class_implementation_archetype();
+
+    /**
+     * @brief Name of the enumeration implementation archetype.
+     */
+    static std::string enum_implementation_archetype();
 };
 
 }

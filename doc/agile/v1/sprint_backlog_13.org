@@ -14,25 +14,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-11 Mon 18:46]
-| <75>                                                     |        |      |      |       |
-| Headline                                                 | Time   |      |      |     % |
-|----------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                             | *8:35* |      |      | 100.0 |
-|----------------------------------------------------------+--------+------+------+-------|
-| Stories                                                  | 8:35   |      |      | 100.0 |
-| Active                                                   |        | 8:35 |      | 100.0 |
-| Edit release notes for previous sprint                   |        |      | 1:51 |  21.6 |
-| Sprint and product backlog grooming                      |        |      | 1:42 |  19.8 |
-| Create a video demo for the sprint's features            |        |      | 3:47 |  44.1 |
-| Clang-cl builds are failing due to memory leak reporting |        |      | 0:45 |   8.7 |
-| Code generation of tests for dogen models                |        |      | 0:30 |   5.8 |
+#+CAPTION: Clock summary at [2019-03-12 Tue 10:57]
+| <75>                                                     |         |       |      |       |
+| Headline                                                 | Time    |       |      |     % |
+|----------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                             | *11:49* |       |      | 100.0 |
+|----------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                  | 11:49   |       |      | 100.0 |
+| Active                                                   |         | 11:49 |      | 100.0 |
+| Edit release notes for previous sprint                   |         |       | 2:22 |  20.0 |
+| Sprint and product backlog grooming                      |         |       | 2:16 |  19.2 |
+| Create a video demo for the sprint's features            |         |       | 3:47 |  32.0 |
+| Make projects directory env optional                     |         |       | 0:10 |   1.4 |
+| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   6.3 |
+| Code generation of tests for dogen models                |         |       | 2:29 |  21.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2019-03-11 Mon 10:44]
     :LOGBOOK:
+    CLOCK: [2019-03-12 Tue 08:11]--[2019-03-12 Tue 08:42] =>  0:31
     CLOCK: [2019-03-11 Mon 16:18]--[2019-03-11 Mon 16:22] =>  0:04
     CLOCK: [2019-03-11 Mon 16:07]--[2019-03-11 Mon 16:17] =>  0:10
     CLOCK: [2019-03-11 Mon 09:07]--[2019-03-11 Mon 10:44] =>  1:37
@@ -224,6 +226,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-03-12 Tue 08:43]--[2019-03-12 Tue 08:56] =>  0:13
     CLOCK: [2019-03-11 Mon 18:46]--[2019-03-11 Mon 19:07] =>  0:21
     CLOCK: [2019-03-11 Mon 08:02]--[2019-03-11 Mon 08:53] =>  0:51
     CLOCK: [2019-03-11 Mon 07:15]--[2019-03-11 Mon 07:24] =>  0:09
@@ -409,6 +412,25 @@ about the work of the sprint.
 
 Now the API has been designed and generated, we need to implement it.
 
+*** COMPLETED Make projects directory env optional                    :story:
+    CLOSED: [2019-03-12 Tue 09:36]
+    :LOGBOOK:
+    CLOCK: [2019-03-12 Tue 09:26]--[2019-03-12 Tue 09:36] =>  0:10
+    :END:
+
+We are now stopping the build if the projects directory is not
+defined:
+
+: * Starting C++ build.
+: -- CMake Version: 3.13.4
+: CMake Error at CMakeLists.txt:35 (message):
+:  MASD_DOGEN_PROJECT_DIRECTORY env variable not defined
+
+This means that a user that just wants to compile dogen out of git
+will now be stuck trying to figure out what this is. In reality the
+projects directory for Dogen is always known to CMake. We should just
+set it from CMake.
+
 *** STARTED Clang-cl builds are failing due to memory leak reporting  :story:
     :LOGBOOK:
     CLOCK: [2019-03-11 Mon 16:23]--[2019-03-11 Mon 17:08] =>  0:45
@@ -427,6 +449,8 @@ Links:
 
 *** STARTED Code generation of tests for dogen models                 :story:
     :LOGBOOK:
+    CLOCK: [2019-03-12 Tue 09:27]--[2019-03-12 Tue 10:57] =>  1:30
+    CLOCK: [2019-03-12 Tue 08:57]--[2019-03-12 Tue 09:26] =>  0:29
     CLOCK: [2019-03-11 Mon 17:17]--[2019-03-11 Mon 17:47] =>  0:30
     :END:
 
@@ -457,6 +481,15 @@ These can be marked as known limitations. At present the tests require
 Boost.Test but it should be possible to target other frameworks
 (meta-data option).
 
+Notes:
+
+- we've bumped into a problem: at present we created a number of
+  profiles that are used by test models to enable and disable facets,
+  as required by the tests. This means that in order to setup the new
+  facet, we will have to update all of these profiles manually until
+  the tests are ready to be tested. As a quick hack, we've disabled
+  the facet from the dogen profile.
+
 Merged stories:
 
 *Consider creating a "test" facet*
@@ -479,6 +512,19 @@ of two approaches:
 If an object has pointers, the canned tests will not perform a deep
 copy of the object. We need to [[*Add%20support%20for%20object%20cloning][implement cloning]] and then use it in
 canned tests.
+
+*** Formatters have been incorrectly placed under extraction          :story:
+
+When we did the big meta-data rename, we placed facets and formatters
+in the following in extraction:
+
+: masd.extraction.cpp.cmake.enabled
+
+However, this is not entirely correct: facet space is a property of
+generation; the formatters are model to text transformations in
+generation space that produce the extraction model. When you are
+enabling and disabling formatters, you are in the generation space. We
+need to update these keys.
 
 *** Handcrafted templates                                             :story:
 

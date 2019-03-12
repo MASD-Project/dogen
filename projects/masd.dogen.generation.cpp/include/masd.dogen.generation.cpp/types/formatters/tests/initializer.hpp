@@ -25,24 +25,16 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.generation.cpp/types/formatters/registrar.hpp"
 
 namespace masd::dogen::generation::cpp::formatters::tests {
 
-class initializer final {
+/**
+ * @brief Initialises the tests facet.
+ */
+class initializer {
 public:
-    initializer() = default;
-    initializer(const initializer&) = default;
-    initializer(initializer&&) = default;
-    ~initializer() = default;
-    initializer& operator=(const initializer&) = default;
-
-public:
-    bool operator==(const initializer& rhs) const;
-    bool operator!=(const initializer& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void initialize(registrar& r);
 };
 
 }

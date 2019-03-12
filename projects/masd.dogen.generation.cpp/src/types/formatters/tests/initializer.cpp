@@ -18,12 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.generation.cpp/types/formatters/tests/class_implementation_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/tests/initializer.hpp"
 
 namespace masd::dogen::generation::cpp::formatters::tests {
 
-bool initializer::operator==(const initializer& /*rhs*/) const {
-    return true;
+void initializer::initialize(registrar& rg) {
+    register_formatter<class_implementation_formatter>(rg);
 }
 
 }

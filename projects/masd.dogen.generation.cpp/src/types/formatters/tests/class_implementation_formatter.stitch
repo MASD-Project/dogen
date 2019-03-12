@@ -1,0 +1,70 @@
+<#@ masd.annotations.profile=dogen.stitch #>
+<#@ masd.stitch.containing_namespaces=masd::dogen::generation::cpp::formatters::tests #>
+<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.coding/types/meta_model/object.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.coding/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.extraction/types/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/inclusion_constants.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/formatting_error.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/tests/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/tests/class_implementation_formatter.hpp" #>
+<#@ masd.stitch.wale.template=cpp_artefact_formatter_implementation.wale #>
+<#@ masd.stitch.wale.kvp.class.simple_name=class_implementation_formatter #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=class_implementation #>
+<#@ masd.stitch.wale.kvp.yarn_element=coding::meta_model::object #>
+<#@ masd.stitch.wale.kvp.meta_element=object #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=coding::helpers::meta_name_factory #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+std::list<std::string> class_implementation_formatter::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& f,
+    const coding::meta_model::element& e) const {
+
+    const auto& o(assistant::as<coding::meta_model::object>(e));
+    const auto carch(traits::canonical_archetype());
+    auto builder(f.make());
+    builder.add(o.name(), carch);
+
+    builder.add(o.transparent_associations(), carch);
+    builder.add(o.opaque_associations(), carch);
+    builder.add(o.parents(), carch);
+
+//#include <boost/test/unit_test.hpp>
+//#include "masd.dogen.utility/types/test/logging.hpp"
+
+
+    return builder.build();
+}
+
+extraction::meta_model::artefact class_implementation_formatter::
+format(const context& ctx, const coding::meta_model::element& e) const {
+    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    const auto& o(a.as<coding::meta_model::object>(e));
+    {
+        auto sbf(a.make_scoped_boilerplate_formatter(o));
+#>
+namespace {
+
+const std::string test_module("masd.dogen.generation.cpp.tests");
+const std::string test_suite("fake_tests");
+
+}
+
+BOOST_AUTO_TEST_SUITE(<#= o.name().identifiable() #>_tests)
+
+BOOST_AUTO_TEST_CASE(test) {
+    SETUP_TEST_LOG("test");
+}
+
+BOOST_AUTO_TEST_SUITE_END()
+<#+
+    } // sbf
+    return a.make_artefact();
+}
+#>

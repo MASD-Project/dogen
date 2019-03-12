@@ -1,0 +1,80 @@
+[
+  {
+    "name": {
+      "simple": "directory",
+      "qualified": "masd.extraction.cpp.tests.directory"
+    },
+    "archetype_location": {
+      "kernel": "masd",
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.tests"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": "tests"
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "masd.extraction.cpp.tests.postfix"
+    },
+    "archetype_location": {
+      "kernel": "masd",
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.tests"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": "tests"
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "masd.extraction.cpp.tests.class_implementation.postfix"
+    },
+    "archetype_location": {
+      "kernel": "masd",
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.tests",
+      "archetype": "masd.extraction.cpp.tests.class_implementation"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "masd.extraction.cpp.tests.enum_implementation.postfix"
+    },
+    "archetype_location": {
+      "kernel": "masd",
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.tests",
+      "archetype": "masd.extraction.cpp.tests.enum_implementation"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "masd.extraction.cpp.tests.master_header.postfix"
+    },
+    "archetype_location": {
+      "kernel": "masd",
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.tests",
+      "archetype": "masd.extraction.cpp.tests.master_header"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  }
+]
