@@ -460,6 +460,18 @@ boost::filesystem::path locator::make_relative_implementation_path_for_facet(
     return r;
 }
 
+boost::filesystem::path locator::make_full_path_for_tests_cpp_implementation(
+    const coding::meta_model::name& n, const std::string& archetype) const {
+    auto r(project_path_);
+
+    const auto& cfg(configuration_);
+    const auto extension(cfg.implementation_file_extension());
+    const auto facet_path(make_facet_path(archetype, extension, n));
+    r /= facet_path;
+
+    return r;
+}
+
 boost::filesystem::path locator::make_full_path_for_cpp_implementation(
     const coding::meta_model::name& n, const std::string& archetype) const {
 

@@ -234,6 +234,12 @@ public:
         const std::string& facet) const;
 
     /**
+     * @brief Generate the full path for C++ implementation for tests
+     */
+    boost::filesystem::path make_full_path_for_tests_cpp_implementation(
+        const coding::meta_model::name& n, const std::string& archetype) const;
+
+    /**
      * @brief Generate the full path for C++ implementation.
      */
     boost::filesystem::path make_full_path_for_cpp_implementation(
