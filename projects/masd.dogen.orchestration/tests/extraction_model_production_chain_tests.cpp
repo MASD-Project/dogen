@@ -130,7 +130,8 @@ bool check_for_differences(const boost::filesystem::path& output_dir,
     return diffs_found == 0;
 }
 
-bool test_extraction_model_production(const boost::filesystem::path& target,
+masd::dogen::extraction::meta_model::model
+apply_extraction_model_production(const boost::filesystem::path& target,
     const boost::filesystem::path& output_dir,
     const bool enable_tracing_locally = false,
     const bool enable_reporting_locally = false,
@@ -156,12 +157,8 @@ bool test_extraction_model_production(const boost::filesystem::path& target,
     /*
      * Produce the extraction model.
      */
-    const auto m(extraction_model_production_chain::apply(ctx, target));
-
-    /*
-     * Locate any differences.
-     */
-    return check_for_differences(output_dir, m);
+    const auto r(extraction_model_production_chain::apply(ctx, target));
+    return r;
 }
 
 }
@@ -173,7 +170,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_annotations_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_annotations_dia());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_cli_dia_produces_expected_model) {
@@ -181,7 +179,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_cli_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_cli_dia());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_coding_dia_produces_expected_model) {
@@ -189,7 +188,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_coding_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_coding_dia());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_dia_produces_expected_model) {
@@ -197,7 +197,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_dia());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_dia_dia_produces_expected_model) {
@@ -205,7 +206,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_dia_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_dia_dia());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_extraction_dia_produces_expected_model) {
@@ -213,7 +215,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_extraction_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_extraction_dia());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_generation_cpp_dia_produces_expected_model) {
@@ -221,7 +224,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_generation_cpp_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_generation_cpp_dia());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_generation_csharp_dia_produces_expected_model) {
@@ -229,7 +233,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_generation_csharp_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_generation_csharp_dia());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_generation_dia_produces_expected_model) {
@@ -237,7 +242,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_generation_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_generation_dia());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_injection_dia_produces_expected_model) {
@@ -245,7 +251,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_injection_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_injection_dia());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_injection_dia_dia_produces_expected_model) {
@@ -253,7 +260,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_injection_dia_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_injection_dia_dia());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_injection_json_dia_produces_expected_model) {
@@ -261,7 +269,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_injection_json_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_injection_json_dia());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_orchestration_dia_produces_expected_model) {
@@ -269,7 +278,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_orchestration_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_orchestration_dia());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_templating_dia_produces_expected_model) {
@@ -277,7 +287,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_templating_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_templating_dia());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_tracing_dia_produces_expected_model) {
@@ -285,7 +296,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_tracing_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_tracing_dia());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_utility_dia_produces_expected_model) {
@@ -293,7 +305,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_utility_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_utility_dia());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 #ifdef ENABLE_CPP_REF_IMPL_TESTS
@@ -303,7 +316,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_boost_model_dia_produces_expected_model) 
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_boost_model_dia());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_compressed_dia_produces_expected_model) {
@@ -311,7 +325,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_compressed_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_compressed_dia());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_cpp_98_dia_produces_expected_model) {
@@ -319,7 +334,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_cpp_98_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_cpp_98_dia());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_cpp_model_dia_produces_expected_model) {
@@ -327,7 +343,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_cpp_model_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_cpp_model_dia());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_directory_settings_dia_produces_expected_model) {
@@ -335,7 +352,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_directory_settings_dia_produces_expected_
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_directory_settings_dia());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_disable_cmakelists_dia_produces_expected_model) {
@@ -343,7 +361,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_disable_cmakelists_dia_produces_expected_
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_disable_cmakelists_dia());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_disable_facet_folders_dia_produces_expected_model) {
@@ -351,7 +370,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_disable_facet_folders_dia_produces_expect
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_disable_facet_folders_dia());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_enable_facet_hash_dia_produces_expected_model) {
@@ -359,7 +379,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_enable_facet_hash_dia_produces_expected_m
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_hash_dia());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_enable_facet_io_dia_produces_expected_model) {
@@ -367,7 +388,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_enable_facet_io_dia_produces_expected_mod
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_io_dia());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_enable_facet_serialization_dia_produces_expected_model) {
@@ -375,7 +397,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_enable_facet_serialization_dia_produces_e
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_serialization_dia());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_enable_facet_types_dia_produces_expected_model) {
@@ -383,7 +406,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_enable_facet_types_dia_produces_expected_
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_types_dia());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_flat_directory_mode_dia_produces_expected_model) {
@@ -391,7 +415,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_flat_directory_mode_dia_produces_expected
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_flat_directory_mode_dia());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_lam_model_dia_produces_expected_model) {
@@ -399,7 +424,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_lam_model_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_lam_model_dia());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_northwind_dia_produces_expected_model) {
@@ -407,7 +433,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_northwind_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_northwind_dia());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_split_project_dia_produces_expected_model) {
@@ -415,7 +442,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_split_project_dia_produces_expected_model
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_split_project_dia());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_std_model_dia_produces_expected_model) {
@@ -423,7 +451,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_std_model_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_std_model_dia());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_two_layers_with_objects_dia_produces_expected_model) {
@@ -431,7 +460,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_two_layers_with_objects_dia_produces_expe
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_two_layers_with_objects_dia());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 #endif // ENABLE_CPP_REF_IMPL_TESTS
@@ -443,7 +473,8 @@ BOOST_AUTO_TEST_CASE(masd_csharprefimpl_csharpmodel_dia_produces_expected_model)
     using masd::dogen::utility::test_data::csharp_ref_impl_generation;
     const auto t(csharp_ref_impl_generation::input_masd_csharprefimpl_csharpmodel_dia());
     const auto od(csharp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_csharprefimpl_directorysettings_dia_produces_expected_model) {
@@ -451,7 +482,8 @@ BOOST_AUTO_TEST_CASE(masd_csharprefimpl_directorysettings_dia_produces_expected_
     using masd::dogen::utility::test_data::csharp_ref_impl_generation;
     const auto t(csharp_ref_impl_generation::input_masd_csharprefimpl_directorysettings_dia());
     const auto od(csharp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_csharprefimpl_lammodel_dia_produces_expected_model) {
@@ -459,7 +491,8 @@ BOOST_AUTO_TEST_CASE(masd_csharprefimpl_lammodel_dia_produces_expected_model) {
     using masd::dogen::utility::test_data::csharp_ref_impl_generation;
     const auto t(csharp_ref_impl_generation::input_masd_csharprefimpl_lammodel_dia());
     const auto od(csharp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 #endif // ENABLE_CSHARP_REF_IMPL_TESTS
@@ -469,7 +502,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_annotations_json_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_annotations_json());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_cli_json_produces_expected_model) {
@@ -477,7 +511,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_cli_json_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_cli_json());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_coding_json_produces_expected_model) {
@@ -485,7 +520,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_coding_json_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_coding_json());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_json_produces_expected_model) {
@@ -493,7 +529,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_json_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_json());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_dia_json_produces_expected_model) {
@@ -501,7 +538,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_dia_json_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_dia_json());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_extraction_json_produces_expected_model) {
@@ -509,7 +547,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_extraction_json_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_extraction_json());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_generation_cpp_json_produces_expected_model) {
@@ -517,7 +556,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_generation_cpp_json_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_generation_cpp_json());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_generation_csharp_json_produces_expected_model) {
@@ -525,7 +565,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_generation_csharp_json_produces_expected_model) 
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_generation_csharp_json());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_generation_json_produces_expected_model) {
@@ -533,7 +574,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_generation_json_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_generation_json());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_injection_json_produces_expected_model) {
@@ -541,7 +583,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_injection_json_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_injection_json());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_injection_dia_json_produces_expected_model) {
@@ -549,7 +592,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_injection_dia_json_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_injection_dia_json());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_injection_json_json_produces_expected_model) {
@@ -557,7 +601,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_injection_json_json_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_injection_json_json());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_orchestration_json_produces_expected_model) {
@@ -565,7 +610,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_orchestration_json_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_orchestration_json());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_templating_json_produces_expected_model) {
@@ -573,7 +619,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_templating_json_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_templating_json());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_tracing_json_produces_expected_model) {
@@ -581,7 +628,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_tracing_json_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_tracing_json());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_dogen_utility_json_produces_expected_model) {
@@ -589,7 +637,8 @@ BOOST_AUTO_TEST_CASE(masd_dogen_utility_json_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_utility_json());
     const auto od(dogen_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 #ifdef ENABLE_CPP_REF_IMPL_TESTS
@@ -599,7 +648,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_boost_model_json_produces_expected_model)
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_boost_model_json());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_compressed_json_produces_expected_model) {
@@ -607,7 +657,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_compressed_json_produces_expected_model) 
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_compressed_json());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_cpp_98_json_produces_expected_model) {
@@ -615,7 +666,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_cpp_98_json_produces_expected_model) {
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_cpp_98_json());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_cpp_model_json_produces_expected_model) {
@@ -623,7 +675,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_cpp_model_json_produces_expected_model) {
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_cpp_model_json());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_directory_settings_json_produces_expected_model) {
@@ -631,7 +684,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_directory_settings_json_produces_expected
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_directory_settings_json());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_disable_cmakelists_json_produces_expected_model) {
@@ -639,7 +693,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_disable_cmakelists_json_produces_expected
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_disable_cmakelists_json());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_disable_facet_folders_json_produces_expected_model) {
@@ -647,7 +702,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_disable_facet_folders_json_produces_expec
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_disable_facet_folders_json());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_enable_facet_hash_json_produces_expected_model) {
@@ -655,7 +711,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_enable_facet_hash_json_produces_expected_
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_hash_json());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_enable_facet_io_json_produces_expected_model) {
@@ -663,7 +720,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_enable_facet_io_json_produces_expected_mo
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_io_json());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_enable_facet_serialization_json_produces_expected_model) {
@@ -671,7 +729,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_enable_facet_serialization_json_produces_
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_serialization_json());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_enable_facet_types_json_produces_expected_model) {
@@ -679,7 +738,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_enable_facet_types_json_produces_expected
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_types_json());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_flat_directory_mode_json_produces_expected_model) {
@@ -687,7 +747,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_flat_directory_mode_json_produces_expecte
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_flat_directory_mode_json());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_lam_model_json_produces_expected_model) {
@@ -695,7 +756,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_lam_model_json_produces_expected_model) {
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_lam_model_json());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_northwind_json_produces_expected_model) {
@@ -703,7 +765,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_northwind_json_produces_expected_model) {
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_northwind_json());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_split_project_json_produces_expected_model) {
@@ -711,7 +774,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_split_project_json_produces_expected_mode
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_split_project_json());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_std_model_json_produces_expected_model) {
@@ -719,7 +783,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_std_model_json_produces_expected_model) {
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_std_model_json());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_two_layers_with_objects_json_produces_expected_model) {
@@ -727,7 +792,8 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_two_layers_with_objects_json_produces_exp
     using masd::dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_two_layers_with_objects_json());
     const auto od(cpp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 #endif // ENABLE_CPP_REF_IMPL_TESTS
@@ -739,7 +805,8 @@ BOOST_AUTO_TEST_CASE(masd_csharprefimpl_csharpmodel_json_produces_expected_model
     using masd::dogen::utility::test_data::csharp_ref_impl_generation;
     const auto t(csharp_ref_impl_generation::input_masd_csharprefimpl_csharpmodel_json());
     const auto od(csharp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_csharprefimpl_directorysettings_json_produces_expected_model) {
@@ -747,7 +814,8 @@ BOOST_AUTO_TEST_CASE(masd_csharprefimpl_directorysettings_json_produces_expected
     using masd::dogen::utility::test_data::csharp_ref_impl_generation;
     const auto t(csharp_ref_impl_generation::input_masd_csharprefimpl_directorysettings_json());
     const auto od(csharp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(masd_csharprefimpl_lammodel_json_produces_expected_model) {
@@ -755,7 +823,8 @@ BOOST_AUTO_TEST_CASE(masd_csharprefimpl_lammodel_json_produces_expected_model) {
     using masd::dogen::utility::test_data::csharp_ref_impl_generation;
     const auto t(csharp_ref_impl_generation::input_masd_csharprefimpl_lammodel_json());
     const auto od(csharp_ref_impl_generation::project_directory());
-    BOOST_CHECK(test_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
 }
 
 #endif // ENABLE_CSHARP_REF_IMPL_TESTS
