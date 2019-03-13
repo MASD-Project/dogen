@@ -14,22 +14,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-13 Wed 07:19]
+#+CAPTION: Clock summary at [2019-03-13 Wed 10:04]
 | <75>                                                     |         |       |      |       |
 | Headline                                                 | Time    |       |      |     % |
 |----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                             | *16:47* |       |      | 100.0 |
+| *Total time*                                             | *18:33* |       |      | 100.0 |
 |----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                  | 16:47   |       |      | 100.0 |
-| Active                                                   |         | 16:47 |      | 100.0 |
-| Edit release notes for previous sprint                   |         |       | 2:22 |  14.1 |
-| Sprint and product backlog grooming                      |         |       | 2:16 |  13.5 |
-| Create a video demo for the sprint's features            |         |       | 3:47 |  22.5 |
-| Make projects directory env optional                     |         |       | 0:10 |   1.0 |
-| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   4.5 |
-| Code generation of tests for dogen models                |         |       | 3:33 |  21.2 |
-| Delete extra files appears broken at present             |         |       | 0:34 |   3.4 |
-| Add tests for tracing, reporting and logging             |         |       | 3:20 |  19.9 |
+| Stories                                                  | 18:33   |       |      | 100.0 |
+| Active                                                   |         | 18:33 |      | 100.0 |
+| Edit release notes for previous sprint                   |         |       | 2:22 |  12.8 |
+| Sprint and product backlog grooming                      |         |       | 2:16 |  12.2 |
+| Create a video demo for the sprint's features            |         |       | 3:47 |  20.4 |
+| Make projects directory env optional                     |         |       | 0:10 |   0.9 |
+| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   4.0 |
+| Add tests for tracing, reporting and diffing             |         |       | 5:06 |  27.5 |
+| Code generation of tests for dogen models                |         |       | 3:33 |  19.1 |
+| Delete extra files appears broken at present             |         |       | 0:34 |   3.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -454,6 +454,20 @@ Links:
 - [[https://github.com/SaschaWillems/Vulkan/issues/111][Replace this code at WinMain() to enable memory checks on windows
   builds]]
 
+*** COMPLETED Add tests for tracing, reporting and diffing            :story:
+    CLOSED: [2019-03-13 Wed 10:03]
+    :LOGBOOK:
+    CLOCK: [2019-03-13 Wed 09:32]--[2019-03-13 Wed 10:03] =>  0:31
+    CLOCK: [2019-03-13 Wed 08:10]--[2019-03-13 Wed 09:25] =>  1:15
+    CLOCK: [2019-03-13 Wed 06:24]--[2019-03-13 Wed 07:18] =>  0:54
+    CLOCK: [2019-03-12 Tue 15:37]--[2019-03-12 Tue 17:40] =>  2:03
+    CLOCK: [2019-03-12 Tue 18:15]--[2019-03-12 Tue 18:38] =>  0:23
+    :END:
+
+At present its easy to break tracing and reporting without noticing
+it. Add a simple set of tests that verify the existence of the files
+and perform some basic sanity checks on the content.
+
 *** STARTED Code generation of tests for dogen models                 :story:
     :LOGBOOK:
     CLOCK: [2019-03-12 Tue 11:56]--[2019-03-12 Tue 12:04] =>  0:08
@@ -539,17 +553,11 @@ Notes:
 - add test that validates the flag on and off. No need to check the
   deletion itself, we can trust remove files transform.
 
-*** STARTED Add tests for tracing, reporting and logging              :story:
-    :LOGBOOK:
-    CLOCK: [2019-03-13 Wed 08:10]--[2019-03-13 Wed 09:25] =>  1:15
-    CLOCK: [2019-03-13 Wed 06:24]--[2019-03-13 Wed 07:18] =>  0:54
-    CLOCK: [2019-03-12 Tue 15:37]--[2019-03-12 Tue 17:40] =>  2:03
-    CLOCK: [2019-03-12 Tue 18:15]--[2019-03-12 Tue 18:38] =>  0:23
-    :END:
+*** Extraction model name is the simple name                          :story:
 
-At present its easy to break tracing and reporting without noticing
-it. Add a simple set of tests that verify the existence of the files
-and perform some basic sanity checks on the content.
+At present we are setting up the extraction model name from the simple
+name of the model. It should really be the qualified name. Hopefully
+this will only affect tracing and diffing.
 
 *** Empty directories should be deleted                               :story:
 

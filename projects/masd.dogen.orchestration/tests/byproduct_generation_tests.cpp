@@ -32,11 +32,15 @@ const std::string injection_transform_postfix("-input.json");
 const std::regex tracing_regex(".*/tracing/.*");
 const std::regex guid_regex(
     "[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}");
+const std::string diff_fn("dogen.patch");
+const std::string report_org_mode_fn("dogen_report.org");
+const std::string report_plain_fn("dogen_report.txt");
 
 using boost::filesystem::path;
 using masd::dogen::configuration;
 using masd::dogen::tracing_level;
 using masd::dogen::tracing_format;
+using masd::dogen::reporting_style;
 using masd::dogen::mock_configuration_factory;
 using masd::dogen::utility::test_data::dogen_generation;
 
@@ -56,36 +60,55 @@ void remove_byproducts_directory(const configuration& cfg) {
 /**
  * @brief Sets up the configuration for testing tracing.
  *
- * @note We also ensure the byproduct directory is empty.
+ * @note we disable all other byproduct output.
  */
 configuration setup_tracing_configuration(const path& target,
     const std::string& additional_identifier, const tracing_level tl,
     const tracing_format tf, const bool enable_guids = false,
     const bool use_short_names = false) {
-    /*
-     * First, we setup the factory to enable tracing and _nothing_
-     * else. Note that we don't worry about logging because by default
-     * logs go into a testing specific logs directory.
-     */
+
     const mock_configuration_factory f(true/*enable_tracing*/,
         false/*enable_reporting*/, false/*enable_diffing*/);
 
-    /*
-     * Setup the target and get the config. Note that we target a
-     * small model as we don't particularly care about the code
-     * generation itself.
-     */
     auto r(f.make(target, run_activity + "." + additional_identifier));
-
-    /*
-     * Now we costumise the configuration to make sure it meets the
-     * needs of the test.
-     */
     r.tracing()->level(tl);
     r.tracing()->format(tf);
     r.tracing()->guids_enabled(enable_guids);
     r.tracing()->use_short_names(use_short_names);
 
+    return r;
+}
+
+/**
+ * @brief Sets up the configuration for testing diffing.
+ *
+ * @note we disable all other byproduct output.
+ */
+configuration setup_diffing_configuration(const path& target,
+    const std::string& additional_identifier) {
+    const mock_configuration_factory f(false/*enable_tracing*/,
+        false/*enable_reporting*/, true/*enable_diffing*/);
+
+    auto r(f.make(target, run_activity + "." + additional_identifier));
+    using masd::dogen::diffing_destination;
+    r.diffing()->destination(diffing_destination::file);
+
+    return r;
+}
+
+/**
+ * @brief Sets up the configuration for testing reporting.
+ *
+ * @note we disable all other byproduct output.
+ */
+configuration setup_reporting_configuration(const path& target,
+    const std::string& additional_identifier,
+    const reporting_style rs) {
+    const mock_configuration_factory f(false/*enable_tracing*/,
+        true/*enable_reporting*/, false/*enable_diffing*/);
+
+    auto r(f.make(target, run_activity + "." + additional_identifier));
+    r.reporting()->style(rs);
     return r;
 }
 
@@ -281,6 +304,71 @@ BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_short_names_results_in_expec
     apply_transforms(cfg, od, t);
 
     BOOST_CHECK(are_tracing_files_healthy(cfg));
+}
+
+BOOST_AUTO_TEST_CASE(enabling_diffing_results_in_expected_trace_files) {
+    SETUP_TEST_LOG("enabling_diffing_results_in_expected_trace_files");
+
+    const auto t(dogen_generation::input_masd_dogen_dia());
+    const std::string id("diffing");
+    const auto cfg(setup_diffing_configuration(t, id));
+
+    const auto od(dogen_generation::output_directory() / id);
+    apply_transforms(cfg, od, t);
+
+    BOOST_REQUIRE(boost::filesystem::exists(cfg.byproduct_directory()));
+
+    using masd::dogen::utility::filesystem::find_files;
+    const auto files(find_files(cfg.byproduct_directory()));
+    BOOST_REQUIRE(files.size() == 1);
+
+    const auto f(*files.begin());
+    const auto fn(f.filename().string());
+    BOOST_REQUIRE(fn == diff_fn);
+}
+
+BOOST_AUTO_TEST_CASE(enabling_reporting_org_mode_style_results_in_expected_trace_files) {
+    SETUP_TEST_LOG("enabling_reporting_org_mode_style_results_in_expected_trace_files");
+
+    const auto t(dogen_generation::input_masd_dogen_dia());
+    const std::string id("reporting_org_mode");
+    const auto rs(reporting_style::org_mode);
+    const auto cfg(setup_reporting_configuration(t, id, rs));
+
+    const auto od(dogen_generation::output_directory() / id);
+    apply_transforms(cfg, od, t);
+
+    BOOST_REQUIRE(boost::filesystem::exists(cfg.byproduct_directory()));
+
+    using masd::dogen::utility::filesystem::find_files;
+    const auto files(find_files(cfg.byproduct_directory()));
+    BOOST_REQUIRE(files.size() == 1);
+
+    const auto f(*files.begin());
+    const auto fn(f.filename().string());
+    BOOST_REQUIRE(fn == report_org_mode_fn);
+}
+
+BOOST_AUTO_TEST_CASE(enabling_reporting_plain_style_results_in_expected_trace_files) {
+    SETUP_TEST_LOG("enabling_reporting_plain_style_results_in_expected_trace_files");
+
+    const auto t(dogen_generation::input_masd_dogen_dia());
+    const std::string id("reporting_plain");
+    const auto rs(reporting_style::plain);
+    const auto cfg(setup_reporting_configuration(t, id, rs));
+
+    const auto od(dogen_generation::output_directory() / id);
+    apply_transforms(cfg, od, t);
+
+    BOOST_REQUIRE(boost::filesystem::exists(cfg.byproduct_directory()));
+
+    using masd::dogen::utility::filesystem::find_files;
+    const auto files(find_files(cfg.byproduct_directory()));
+    BOOST_REQUIRE(files.size() == 1);
+
+    const auto f(*files.begin());
+    const auto fn(f.filename().string());
+    BOOST_REQUIRE(fn == report_plain_fn);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
