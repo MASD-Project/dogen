@@ -14550,7 +14550,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:point val="-39,47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.05,46.95;-30.365,56.25"/>
+        <dia:rectangle val="-39.05,46.95;-30.365,57.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-39,47"/>
@@ -14559,7 +14559,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="9.2000000000000011"/>
+        <dia:real val="10"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#operation_reason#</dia:string>
@@ -14823,7 +14823,30 @@ only be written to the filesystem if it does not exist.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#File is unexpected but the user asked us to ignore it.#</dia:string>
+            <dia:string>#File is unexpected but the user asked us not to delete it.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#ignore_regex#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#File is unexpected but the user asked us to ignore it via regexes.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

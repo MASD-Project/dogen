@@ -861,7 +861,12 @@
         {
           "name": "ignore_unexpected",
           "type": "",
-          "documentation": "File is unexpected but the user asked us to ignore it.\n"
+          "documentation": "File is unexpected but the user asked us not to delete it.\n"
+        },
+        {
+          "name": "ignore_regex",
+          "type": "",
+          "documentation": "File is unexpected but the user asked us to ignore it via regexes.\n"
         }
       ]
     },

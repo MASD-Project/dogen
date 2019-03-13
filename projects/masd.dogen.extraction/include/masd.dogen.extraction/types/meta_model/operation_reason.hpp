@@ -39,7 +39,8 @@ enum class operation_reason : unsigned int {
     ignore_generated = 5, ///< User requested artefact to be ignored.
     force_write = 6, ///< User requested to always write generated artefacts.
     unexpected = 7, ///< Artefact represents an unexpected file in project.
-    ignore_unexpected = 8 ///< File is unexpected but the user asked us to ignore it.
+    ignore_unexpected = 8, ///< File is unexpected but the user asked us not to delete it.
+    ignore_regex = 9 ///< File is unexpected but the user asked us to ignore it via regexes.
 };
 
 }

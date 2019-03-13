@@ -57,6 +57,9 @@ std::ostream& operator<<(std::ostream& s, const operation_reason& v) {
     case operation_reason::ignore_unexpected:
         attr = "\"ignore_unexpected\"";
         break;
+    case operation_reason::ignore_regex:
+        attr = "\"ignore_regex\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for operation_reason");
     }
