@@ -28,6 +28,9 @@ const std::string injection_transform_prefix(
     "001-injection.dia.decoding_transform-");
 const std::string injection_transform_postfix("-input.json");
 const std::regex tracing_regex(".*/tracing/.*");
+const std::regex guid_regex(
+    "[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}");
+
 
 /**
  * @brief Sets up a tracing test.
@@ -101,6 +104,7 @@ bool are_tracing_files_healthy(const masd::dogen::configuration& cfg) {
      */
     if (!boost::filesystem::exists(cfg.byproduct_directory()))
         return false;
+    std::cout << "Directory exists." << std::endl;
 
     /*
      * Ensure we have created the minimum number of expected files.
@@ -110,6 +114,7 @@ bool are_tracing_files_healthy(const masd::dogen::configuration& cfg) {
     const auto files(find_files(cfg.byproduct_directory()));
     if (files.size() < minimum_number)
         return false;
+    std::cout << "Files." << files.size() << std::endl;
 
     /*
      * Ensure all files have the minimum content size and find a
@@ -123,14 +128,17 @@ bool are_tracing_files_healthy(const masd::dogen::configuration& cfg) {
          * Ensure files have a minimum size.
          */
         const boost::uintmax_t minimum_size(50);
-        const auto s(boost::filesystem::file_size(f));
-        if (s < minimum_size)
+        const auto sz(boost::filesystem::file_size(f));
+        std::cout << "Size." << sz << std::endl;
+        if (sz < minimum_size)
             return false;
 
         /*
          * We only expect files inside the tracing directory.
          */
-        if (!std::regex_match(f.generic_string(), tracing_regex))
+        const auto gs(f.generic_string());
+        std::cout << "gs." << gs << std::endl;
+        if (!std::regex_match(gs, tracing_regex))
             return false;
 
         /*
@@ -145,6 +153,7 @@ bool are_tracing_files_healthy(const masd::dogen::configuration& cfg) {
         else if (boost::starts_with(fn, injection_transform_prefix) &&
             boost::ends_with(fn, injection_transform_postfix)) {
             found_injection_dia_transform = true;
+            std::cout << "Found injection." << std::endl;
 
             /*
              * Ensure filenames have a guid (since we requested it in
@@ -153,11 +162,15 @@ bool are_tracing_files_healthy(const masd::dogen::configuration& cfg) {
             auto guid(fn);
             boost::erase_first(guid, injection_transform_prefix);
             boost::erase_first(guid, injection_transform_postfix);
+            std::cout << "guid:" << guid << std::endl;
             if (guid.size() != 36)
                 return false;
 
-            if (!(guid[8] == '-' && guid[13] == '-' && guid[18] == '-'))
+            std::cout << "before regex match" << std::endl;
+            if (!std::regex_match(guid, guid_regex))
                 return false;
+
+            std::cout << "after regex match" << std::endl;
         }
     }
     return
