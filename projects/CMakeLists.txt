@@ -18,6 +18,9 @@
 # MA 02110-1301, USA.
 #
 
+# parameters for boost tests
+set(boost_test_parameters "--log_level=message")
+
 #
 # macro to create CTest tests for each boost unit tests
 #
@@ -38,7 +41,7 @@ macro(add_boost_tests test_module)
             set(tests_cmd ${stage_bin_dir}/${test_module})
             add_test(${test_module}/${test_suite}/${test_name}
                 ${CMAKE_COMMAND} -E chdir ${stage_bin_dir}
-                ${tests_cmd} --run_test=${test_suite}/${test_name})
+                ${tests_cmd} --run_test=${test_suite}/${test_name} ${boost_test_parameters})
         endforeach()
     endforeach()
 endmacro()
@@ -222,9 +225,6 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC" OR
     set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO}" CACHE STRING "MSVC CXX Release MT flags " FORCE)
 
 endif()
-
-# parameters for boost tests
-set(boost_test_parameters "--log_level=error")
 
 # user includes
 include_directories(
