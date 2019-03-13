@@ -33,23 +33,40 @@ const std::regex tracing_regex(".*/tracing/.*");
 const std::regex guid_regex(
     "[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}");
 
+using boost::filesystem::path;
+using masd::dogen::configuration;
+using masd::dogen::tracing_level;
+using masd::dogen::tracing_format;
+using masd::dogen::mock_configuration_factory;
+using masd::dogen::utility::test_data::dogen_generation;
+
+/*
+ * @brief Recreate the byproducts directory to ensure we start with a
+ * clean slate.
+ *
+ * Note that the byproduct directory has a run id and we add an
+ * additional postfix here so we should not affect anyone else.
+ */
+void remove_byproducts_directory(const configuration& cfg) {
+    using namespace boost::filesystem;
+    if (exists(cfg.byproduct_directory()))
+        remove_all(cfg.byproduct_directory());
+}
 
 /**
- * @brief Sets up a tracing test.
+ * @brief Sets up the configuration for testing tracing.
+ *
+ * @note We also ensure the byproduct directory is empty.
  */
-masd::dogen::configuration
-setup_tracing_configuration(const boost::filesystem::path& target,
-    const std::string& additional_identifier,
-    const masd::dogen::tracing_level tl,
-    const masd::dogen::tracing_format tf,
-    const bool enable_guids = false,
+configuration setup_tracing_configuration(const path& target,
+    const std::string& additional_identifier, const tracing_level tl,
+    const tracing_format tf, const bool enable_guids = false,
     const bool use_short_names = false) {
     /*
      * First, we setup the factory to enable tracing and _nothing_
      * else. Note that we don't worry about logging because by default
      * logs go into a testing specific logs directory.
      */
-    using masd::dogen::mock_configuration_factory;
     const mock_configuration_factory f(true/*enable_tracing*/,
         false/*enable_reporting*/, false/*enable_diffing*/);
 
@@ -61,23 +78,10 @@ setup_tracing_configuration(const boost::filesystem::path& target,
     auto r(f.make(target, run_activity + "." + additional_identifier));
 
     /*
-     * Recreate the byproducts directory to ensure we start with a
-     * clean slate. Note that the byproduct directory has a run id and
-     * we add an additional postfix here so we should not affect
-     * anyone else.
-     */
-    if (boost::filesystem::exists(r.byproduct_directory()))
-        boost::filesystem::remove_all(r.byproduct_directory());
-
-    /*
      * Now we costumise the configuration to make sure it meets the
-     * need of the first assertions: logging at detailed level with
-     * guids generates the exptected files.
+     * needs of the test.
      */
-    using masd::dogen::tracing_level;
     r.tracing()->level(tl);
-
-    using masd::dogen::tracing_format;
     r.tracing()->format(tf);
     r.tracing()->guids_enabled(enable_guids);
     r.tracing()->use_short_names(use_short_names);
@@ -88,9 +92,8 @@ setup_tracing_configuration(const boost::filesystem::path& target,
 /**
  * @brief Applies the transform chains.
  */
-void apply_transforms(const masd::dogen::configuration& cfg,
-    const boost::filesystem::path& output_dir,
-    const boost::filesystem::path& target) {
+void apply_transforms(const configuration& cfg, const path& output_dir,
+    const path& target) {
 
     using namespace masd::dogen::orchestration::transforms;
     scoped_context_manager sco(cfg, output_dir);
@@ -102,11 +105,12 @@ void apply_transforms(const masd::dogen::configuration& cfg,
     const auto m(extraction_model_production_chain::apply(ctx, target));
 }
 
-bool are_tracing_files_healthy(const masd::dogen::configuration& cfg) {
+bool are_tracing_files_healthy(const configuration& cfg) {
     /*
      * Ensure we have created a byproducts directory.
      */
-    if (!boost::filesystem::exists(cfg.byproduct_directory()))
+    using namespace boost::filesystem;
+    if (!exists(cfg.byproduct_directory()))
         return false;
     BOOST_TEST_MESSAGE("Directory exists.");
 
@@ -132,7 +136,7 @@ bool are_tracing_files_healthy(const masd::dogen::configuration& cfg) {
          * Ensure files have a minimum size.
          */
         const boost::uintmax_t minimum_size(50);
-        const auto sz(boost::filesystem::file_size(f));
+        const auto sz(file_size(f));
         BOOST_TEST_MESSAGE("Size." << sz);
         if (sz < minimum_size)
             return false;
@@ -199,38 +203,29 @@ BOOST_AUTO_TEST_SUITE(byproduct_generation_tests)
 BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_org_mode_results_in_expected_trace_files) {
     SETUP_TEST_LOG("enabling_detailed_tracing_with_org_moderesults_in_expected_trace_files");
 
-    using masd::dogen::tracing_level;
-    const auto tl(tracing_level::detail);
-
-    using masd::dogen::tracing_format;
-    const auto tf(tracing_format::org_mode);
-
-    using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_dia());
-
     const std::string id("detailed_tracing_org_mode");
+    const auto tl(tracing_level::detail);
+    const auto tf(tracing_format::org_mode);
     const bool eg(true/*enable_guids*/);
     const auto cfg(setup_tracing_configuration(t, id, tl, tf, eg));
+    remove_byproducts_directory(cfg);
 
     const auto od(dogen_generation::output_directory() / id);
     apply_transforms(cfg, od, t);
+
     BOOST_CHECK(are_tracing_files_healthy(cfg));
 }
 
 BOOST_AUTO_TEST_CASE(enabling_summary_tracing_with_plain_text_results_in_expected_trace_files) {
     SETUP_TEST_LOG("enabling_summary_tracing_with_plain_text_results_in_expected_trace_files");
 
-    using masd::dogen::tracing_level;
-    const auto tl(tracing_level::summary);
-
-    using masd::dogen::tracing_format;
-    const auto tf(tracing_format::plain);
-
-    using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_dia());
-
     const std::string id("summary_tracing_plain");
+    const auto tl(tracing_level::summary);
+    const auto tf(tracing_format::plain);
     const auto cfg(setup_tracing_configuration(t, id, tl, tf));
+    remove_byproducts_directory(cfg);
 
     const auto od(dogen_generation::output_directory() / id);
     apply_transforms(cfg, od, t);
@@ -249,17 +244,12 @@ BOOST_AUTO_TEST_CASE(enabling_summary_tracing_with_plain_text_results_in_expecte
 BOOST_AUTO_TEST_CASE(enabling_summary_tracing_with_graphviz_results_in_expected_trace_files) {
     SETUP_TEST_LOG("enabling_summary_tracing_with_graphviz_results_in_expected_trace_files");
 
-    using masd::dogen::tracing_level;
-    const auto tl(tracing_level::summary);
-
-    using masd::dogen::tracing_format;
-    const auto tf(tracing_format::graphviz);
-
-    using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_dia());
-
     const std::string id("summary_tracing_graphviz");
+    const auto tl(tracing_level::summary);
+    const auto tf(tracing_format::graphviz);
     const auto cfg(setup_tracing_configuration(t, id, tl, tf));
+    remove_byproducts_directory(cfg);
 
     const auto od(dogen_generation::output_directory() / id);
     apply_transforms(cfg, od, t);
@@ -278,19 +268,14 @@ BOOST_AUTO_TEST_CASE(enabling_summary_tracing_with_graphviz_results_in_expected_
 BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_short_names_results_in_expected_trace_files) {
     SETUP_TEST_LOG("enabling_detailed_tracing_with_short_names_results_in_expected_trace_files");
 
-    using masd::dogen::tracing_level;
-    const auto tl(tracing_level::detail);
-
-    using masd::dogen::tracing_format;
-    const auto tf(tracing_format::org_mode);
-
-    using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_dia());
-
     const std::string id("detail_tracing_short_names");
+    const auto tl(tracing_level::detail);
+    const auto tf(tracing_format::org_mode);
     const bool eg(false/*enable_guids*/);
     const bool usn(true/*use_short_names*/);
     const auto cfg(setup_tracing_configuration(t, id, tl, tf, eg, usn));
+    remove_byproducts_directory(cfg);
 
     const auto od(dogen_generation::output_directory() / id);
     apply_transforms(cfg, od, t);
