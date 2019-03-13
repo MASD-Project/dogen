@@ -34,6 +34,9 @@ namespace masd::dogen::extraction::transforms {
  * @brief Updates the operation property of the artefacts.
  */
 class operation_transform final {
+private:
+    static void apply(meta_model::artefact& a, const bool force_write);
+
 public:
     static void apply(const context& ctx, meta_model::model& m);
 };

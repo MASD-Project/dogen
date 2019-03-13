@@ -14,22 +14,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-13 Wed 10:04]
+#+CAPTION: Clock summary at [2019-03-13 Wed 10:34]
 | <75>                                                     |         |       |      |       |
 | Headline                                                 | Time    |       |      |     % |
 |----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                             | *18:33* |       |      | 100.0 |
+| *Total time*                                             | *19:02* |       |      | 100.0 |
 |----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                  | 18:33   |       |      | 100.0 |
-| Active                                                   |         | 18:33 |      | 100.0 |
-| Edit release notes for previous sprint                   |         |       | 2:22 |  12.8 |
-| Sprint and product backlog grooming                      |         |       | 2:16 |  12.2 |
-| Create a video demo for the sprint's features            |         |       | 3:47 |  20.4 |
+| Stories                                                  | 19:02   |       |      | 100.0 |
+| Active                                                   |         | 19:02 |      | 100.0 |
+| Edit release notes for previous sprint                   |         |       | 2:22 |  12.4 |
+| Sprint and product backlog grooming                      |         |       | 2:16 |  11.9 |
+| Create a video demo for the sprint's features            |         |       | 3:47 |  19.9 |
 | Make projects directory env optional                     |         |       | 0:10 |   0.9 |
-| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   4.0 |
-| Add tests for tracing, reporting and diffing             |         |       | 5:06 |  27.5 |
-| Code generation of tests for dogen models                |         |       | 3:33 |  19.1 |
-| Delete extra files appears broken at present             |         |       | 0:34 |   3.1 |
+| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   3.9 |
+| Add tests for tracing, reporting and diffing             |         |       | 5:30 |  28.9 |
+| Code generation of tests for dogen models                |         |       | 3:33 |  18.7 |
+| Delete extra files appears broken at present             |         |       | 0:39 |   3.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -457,6 +457,7 @@ Links:
 *** COMPLETED Add tests for tracing, reporting and diffing            :story:
     CLOSED: [2019-03-13 Wed 10:03]
     :LOGBOOK:
+    CLOCK: [2019-03-13 Wed 10:04]--[2019-03-13 Wed 10:28] =>  0:24
     CLOCK: [2019-03-13 Wed 09:32]--[2019-03-13 Wed 10:03] =>  0:31
     CLOCK: [2019-03-13 Wed 08:10]--[2019-03-13 Wed 09:25] =>  1:15
     CLOCK: [2019-03-13 Wed 06:24]--[2019-03-13 Wed 07:18] =>  0:54
@@ -539,6 +540,7 @@ canned tests.
 
 *** STARTED Delete extra files appears broken at present              :story:
     :LOGBOOK:
+    CLOCK: [2019-03-13 Wed 10:29]--[2019-03-13 Wed 10:34] =>  0:05
     CLOCK: [2019-03-12 Tue 15:20]--[2019-03-12 Tue 15:36] =>  0:16
     CLOCK: [2019-03-12 Tue 12:41]--[2019-03-12 Tue 12:59] =>  0:18
     :END:
@@ -552,12 +554,6 @@ Notes:
   ignore, reason user requested not to delete extra files .
 - add test that validates the flag on and off. No need to check the
   deletion itself, we can trust remove files transform.
-
-*** Extraction model name is the simple name                          :story:
-
-At present we are setting up the extraction model name from the simple
-name of the model. It should really be the qualified name. Hopefully
-this will only affect tracing and diffing.
 
 *** Empty directories should be deleted                               :story:
 
@@ -579,6 +575,12 @@ against the managed directories.
 Links:
 
 - [[https://www.codeproject.com/Questions/454944/how-to-remove-empty-folders-in-a-directory-using-b][How to remove empty folders in a directory using boost]]
+
+*** Make extraction model name a qualified name                       :story:
+
+At present we are setting up the extraction model name from the simple
+name of the model. It should really be the qualified name. Hopefully
+this will only affect tracing and diffing.
 
 *** Formatters have been incorrectly placed under extraction          :story:
 
