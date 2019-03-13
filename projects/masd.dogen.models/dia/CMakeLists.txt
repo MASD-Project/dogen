@@ -24,7 +24,6 @@ if (DOGEN_CLI_EXECUTABLE)
         set(target ${model})
         set(target_ext ${target}.${frontend})
         set(target_path ${models_dir}/${target_ext})
-        message(STATUS generate_${target_ext})
         add_custom_target(generate_${target_ext}
             COMMENT "Generating ${target_ext} model" VERBATIM
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
