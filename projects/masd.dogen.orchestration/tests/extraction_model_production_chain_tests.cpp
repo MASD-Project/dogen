@@ -31,19 +31,12 @@
 #include "masd.dogen.orchestration/types/transforms/scoped_context_manager.hpp"
 #include "masd.dogen.orchestration/types/transforms/extraction_model_production_chain.hpp"
 
-/*
- * Comment these out as required if testing only one frontend. These
- * should all be enabled in git, do not check them in commented out by
- * mistake.
- */
-#define ENABLE_DIA_TESTS
-#define ENABLE_JSON_TESTS
-
 namespace  {
 
-const std::string run_activity("extraction_production");
 const std::string test_module("masd.dogen.orchestration.tests");
 const std::string test_suite("extraction_model_production_chain_tests");
+
+const std::string run_activity("extraction_production");
 
 /*
  * Set these flag to true if you want to dump information for all
@@ -146,8 +139,6 @@ bool test_extraction_model_production(const boost::filesystem::path& target,
 }
 
 BOOST_AUTO_TEST_SUITE(extraction_model_production_chain_tests)
-
-#ifdef ENABLE_DIA_TESTS
 
 BOOST_AUTO_TEST_CASE(masd_dogen_annotations_dia_produces_expected_model) {
     SETUP_TEST_LOG("masd_dogen_annotations_dia_produces_expected_model");
@@ -445,10 +436,6 @@ BOOST_AUTO_TEST_CASE(masd_csharprefimpl_lammodel_dia_produces_expected_model) {
 
 #endif // ENABLE_CSHARP_REF_IMPL_TESTS
 
-#endif // ENABLE_DIA_TESTS
-
-#ifdef ENABLE_JSON_TESTS
-
 BOOST_AUTO_TEST_CASE(masd_dogen_annotations_json_produces_expected_model) {
     SETUP_TEST_LOG("masd_dogen_annotations_json_produces_expected_model");
     using masd::dogen::utility::test_data::dogen_generation;
@@ -744,7 +731,5 @@ BOOST_AUTO_TEST_CASE(masd_csharprefimpl_lammodel_json_produces_expected_model) {
 }
 
 #endif // ENABLE_CSHARP_REF_IMPL_TESTS
-
-#endif // ENABLE_JSON_TESTS
 
 BOOST_AUTO_TEST_SUITE_END()
