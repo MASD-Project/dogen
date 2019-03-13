@@ -27,8 +27,7 @@ file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-set(test_files ${files})
-add_executable(${tests_target_name} ${test_files})
+add_executable(${tests_target_name} ${files})
 
 set_target_properties(${tests_target_name}
     PROPERTIES OUTPUT_NAME ${tests_binary_name})
@@ -73,6 +72,6 @@ if(WITH_BENCHMARKS)
     add_dependencies(benchmark_all benchmark_${tests_target_name})
 endif()
 
-add_boost_tests(${tests_binary_name} ${test_files})
+add_boost_tests(${tests_binary_name} ${files})
 
 install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
