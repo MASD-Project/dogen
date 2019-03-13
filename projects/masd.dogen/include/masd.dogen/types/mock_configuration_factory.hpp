@@ -41,8 +41,7 @@ public:
 
 public:
     configuration make(const boost::filesystem::path& target,
-        const std::string& activity,
-        const bool output_to_temp_dir = false) const;
+        const std::string& activity) const;
 
 private:
     const bool enable_tracing_;

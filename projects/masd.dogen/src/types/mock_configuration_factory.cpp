@@ -49,8 +49,7 @@ mock_configuration_factory::mock_configuration_factory(
 }
 
 configuration mock_configuration_factory::
-make(const boost::filesystem::path& target, const std::string& activity,
-    const bool output_to_temp_dir) const {
+make(const boost::filesystem::path& target, const std::string& activity) const {
     BOOST_LOG_SEV(lg, debug) << "Creating mock configuration.";
     BOOST_LOG_SEV(lg, debug) << "Target: " << target.generic_string();
 
@@ -67,13 +66,7 @@ make(const boost::filesystem::path& target, const std::string& activity,
 
     const auto run_id(s.str());
     using boost::filesystem::absolute;
-
-    if (output_to_temp_dir) {
-        auto bdir(boost::filesystem::temp_directory_path());
-        bdir /= byproduct_directory + run_id;
-        r.byproduct_directory(bdir);
-    } else
-        r.byproduct_directory(absolute(byproduct_directory + run_id));
+    r.byproduct_directory(absolute(byproduct_directory + run_id));
 
     if (enable_diffing_) {
         diffing_configuration dcfg;
