@@ -14,22 +14,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-13 Wed 13:31]
+#+CAPTION: Clock summary at [2019-03-13 Wed 17:57]
 | <75>                                                     |         |       |      |       |
 | Headline                                                 | Time    |       |      |     % |
 |----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                             | *20:42* |       |      | 100.0 |
+| *Total time*                                             | *25:05* |       |      | 100.0 |
 |----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                  | 20:42   |       |      | 100.0 |
-| Active                                                   |         | 20:42 |      | 100.0 |
-| Edit release notes for previous sprint                   |         |       | 2:22 |  11.4 |
-| Sprint and product backlog grooming                      |         |       | 2:16 |  11.0 |
-| Create a video demo for the sprint's features            |         |       | 3:47 |  18.3 |
-| Make projects directory env optional                     |         |       | 0:10 |   0.8 |
-| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   3.6 |
-| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  27.9 |
-| Code generation of tests for dogen models                |         |       | 3:33 |  17.1 |
-| Delete extra files appears broken at present             |         |       | 2:03 |   9.9 |
+| Stories                                                  | 25:05   |       |      | 100.0 |
+| Active                                                   |         | 25:05 |      | 100.0 |
+| Edit release notes for previous sprint                   |         |       | 2:22 |   9.4 |
+| Sprint and product backlog grooming                      |         |       | 2:16 |   9.0 |
+| Create a video demo for the sprint's features            |         |       | 3:47 |  15.1 |
+| Make projects directory env optional                     |         |       | 0:10 |   0.7 |
+| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   3.0 |
+| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  23.0 |
+| Delete extra files appears broken at present             |         |       | 6:26 |  25.6 |
+| Code generation of tests for dogen models                |         |       | 3:33 |  14.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -294,7 +294,6 @@ what went wrong. We should also keep track of the model that was
 generated (e.g. its location and git commit) so we can download it and
 reproduce it locally.
 
-
 *** COMPLETED Load system models based on language prefix             :story:
     CLOSED: [2019-03-11 Mon 07:19]
 
@@ -372,7 +371,6 @@ would show all the timings for all the components.
 
 It should also be possible to support some kind of uploading of
 metrics to a metrics server with a database etc.
-
 
 *** COMPLETED Re-enable schema updates in database model              :story:
     CLOSED: [2019-03-11 Mon 08:49]
@@ -470,6 +468,28 @@ At present its easy to break tracing and reporting without noticing
 it. Add a simple set of tests that verify the existence of the files
 and perform some basic sanity checks on the content.
 
+*** COMPLETED Delete extra files appears broken at present            :story:
+    CLOSED: [2019-03-13 Wed 17:57]
+    :LOGBOOK:
+    CLOCK: [2019-03-13 Wed 16:04]--[2019-03-13 Wed 17:57] =>  1:53
+    CLOCK: [2019-03-13 Wed 15:27]--[2019-03-13 Wed 16:03] =>  0:36
+    CLOCK: [2019-03-13 Wed 13:32]--[2019-03-13 Wed 15:26] =>  1:54
+    CLOCK: [2019-03-13 Wed 10:35]--[2019-03-13 Wed 11:59] =>  1:24
+    CLOCK: [2019-03-13 Wed 10:29]--[2019-03-13 Wed 10:34] =>  0:05
+    CLOCK: [2019-03-12 Tue 15:20]--[2019-03-12 Tue 15:36] =>  0:16
+    CLOCK: [2019-03-12 Tue 12:41]--[2019-03-12 Tue 12:59] =>  0:18
+    :END:
+
+Can't find any evidence of code in extraction to handle the case where
+the flag is set to false.
+
+Notes:
+
+- implement it in terms of the existing operations, e.g. set it to
+  ignore, reason user requested not to delete extra files .
+- add test that validates the flag on and off. No need to check the
+  deletion itself, we can trust remove files transform.
+
 *** STARTED Code generation of tests for dogen models                 :story:
     :LOGBOOK:
     CLOCK: [2019-03-12 Tue 11:56]--[2019-03-12 Tue 12:04] =>  0:08
@@ -538,24 +558,6 @@ of two approaches:
 If an object has pointers, the canned tests will not perform a deep
 copy of the object. We need to [[*Add%20support%20for%20object%20cloning][implement cloning]] and then use it in
 canned tests.
-
-*** STARTED Delete extra files appears broken at present              :story:
-    :LOGBOOK:
-    CLOCK: [2019-03-13 Wed 10:35]--[2019-03-13 Wed 11:59] =>  1:24
-    CLOCK: [2019-03-13 Wed 10:29]--[2019-03-13 Wed 10:34] =>  0:05
-    CLOCK: [2019-03-12 Tue 15:20]--[2019-03-12 Tue 15:36] =>  0:16
-    CLOCK: [2019-03-12 Tue 12:41]--[2019-03-12 Tue 12:59] =>  0:18
-    :END:
-
-Can't find any evidence of code in extraction to handle the case where
-the flag is set to false.
-
-Notes:
-
-- implement it in terms of the existing operations, e.g. set it to
-  ignore, reason user requested not to delete extra files .
-- add test that validates the flag on and off. No need to check the
-  deletion itself, we can trust remove files transform.
 
 *** Empty directories should be deleted                               :story:
 

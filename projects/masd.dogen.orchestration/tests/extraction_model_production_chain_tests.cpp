@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <regex>
 #include <sstream>
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem/operations.hpp>
@@ -38,6 +39,10 @@ const std::string test_module("masd.dogen.orchestration.tests");
 const std::string test_suite("extraction_model_production_chain_tests");
 
 const std::string run_activity("extraction_production");
+const std::string unexpected_ignore_fn("unexpected_ignore.hpp");
+const std::string expected_ignore_fn("expected_ignore.hpp");
+const std::string changed_handcrafted_hpp_fn("changed_handcrafted.hpp");
+const std::string changed_handcrafted_cpp_fn("changed_handcrafted.cpp");
 
 /*
  * Set these flag to true if you want to dump information for all
@@ -63,6 +68,37 @@ void print_lines(const std::string& content, const unsigned int total,
         os << line << std::endl;
         ++i;
     }
+}
+
+masd::dogen::extraction::meta_model::model
+apply_extraction_model_production(const boost::filesystem::path& target,
+    const boost::filesystem::path& output_dir,
+    const bool enable_tracing_locally = false,
+    const bool enable_reporting_locally = false,
+    const bool enable_diffing_locally = false) {
+
+    /*
+     * Create the configuration.
+     */
+    const bool et(enable_tracing_globally || enable_tracing_locally);
+    const bool er(enable_reporting_globally || enable_reporting_locally);
+    const bool ed(enable_diffing_globally || enable_diffing_locally);
+    using masd::dogen::mock_configuration_factory;
+    mock_configuration_factory f(et, er, ed);
+    const auto cfg(f.make(target, run_activity));
+
+    /*
+     * Create the context.
+     */
+    using namespace masd::dogen::orchestration::transforms;
+    scoped_context_manager sco(cfg, output_dir);
+    const auto ctx(sco.context());
+
+    /*
+     * Produce the extraction model.
+     */
+    const auto r(extraction_model_production_chain::apply(ctx, target));
+    return r;
 }
 
 /**
@@ -107,58 +143,285 @@ bool check_for_differences(const boost::filesystem::path& output_dir,
             break;
 
         const auto rel(a.path().lexically_relative(output_dir));
+        const auto gs(rel.generic_string());
         if (a.operation().type() == operation_type::remove)
-            std::cout << "Unexpected file (remove): " << rel << std::endl;
+            std::cout << "Unexpected file (remove): " << gs << std::endl;
         else if (a.operation().type() == operation_type::write) {
             if (a.operation().reason() == operation_reason::newly_generated)
-                std::cout << "New file: " << rel << std::endl;
+                std::cout << "New file: " << gs << std::endl;
             else
                 print_lines(a.unified_diff(), 20, std::cout);
         } else if (a.operation().type() == operation_type::ignore) {
             if (a.operation().reason() == operation_reason::ignore_unexpected)
-                std::cout << "Unexpected file (ignore): " << rel << std::endl;
+                std::cout << "Unexpected file (ignore): " << gs << std::endl;
             else {
                 std::cout << "Unexpected file, unexpected reason: "
                           << a.operation().reason() << ". File: "
-                          << rel << std::endl;
+                          << gs << std::endl;
             }
         } else {
             std::cout << "Unexpected operation: " << a.operation()
-                      << " File: " << rel << std::endl;
+                      << " File: " << gs << std::endl;
         }
     }
     return diffs_found == 0;
 }
 
-masd::dogen::extraction::meta_model::model
-apply_extraction_model_production(const boost::filesystem::path& target,
-    const boost::filesystem::path& output_dir,
-    const bool enable_tracing_locally = false,
-    const bool enable_reporting_locally = false,
-    const bool enable_diffing_locally = false) {
+/**
+ * @brief Performs a set of checks for the delete extra scenario.
+ */
+bool check_for_delete_extra(const boost::filesystem::path& output_dir,
+    const masd::dogen::extraction::meta_model::model& m) {
+    unsigned int diffs_found(0);
+    for (const auto& a : m.artefacts()) {
+        /*
+         * FIXME: we seem to be generating empty paths. Needs to be
+         * investigated. Hack for now
+         */
+        if (a.path().empty())
+            continue;
 
-    /*
-     * Create the configuration.
-     */
-    const bool et(enable_tracing_globally || enable_tracing_locally);
-    const bool er(enable_reporting_globally || enable_reporting_locally);
-    const bool ed(enable_diffing_globally || enable_diffing_locally);
-    using masd::dogen::mock_configuration_factory;
-    mock_configuration_factory f(et, er, ed);
-    const auto cfg(f.make(target, run_activity));
+        if (diffs_found > 5)
+            break;
 
-    /*
-     * Create the context.
-     */
-    using namespace masd::dogen::orchestration::transforms;
-    scoped_context_manager sco(cfg, output_dir);
-    const auto ctx(sco.context());
+        const auto fn(a.path().filename().generic_string());
+        const auto ot(a.operation().type());
+        const auto rsn(a.operation().reason());
+        const auto rel(a.path().lexically_relative(output_dir));
+        const auto gs(rel.generic_string());
 
-    /*
-     * Produce the extraction model.
-     */
-    const auto r(extraction_model_production_chain::apply(ctx, target));
-    return r;
+        using namespace masd::dogen::extraction::meta_model;
+        if (fn == unexpected_ignore_fn) {
+            /*
+             * File should be removed because it is unexpected and
+             * delete extra files is on.
+             */
+            if (ot != operation_type::remove ||
+                rsn != operation_reason::unexpected) {
+                ++diffs_found;
+                std::cout << "Expected remove of file: " << gs
+                          << " Operation: " << a.operation() << std::endl;
+            }
+        } else if (fn == expected_ignore_fn) {
+            /*
+             * File should be ignored because it is on the list of
+             * ignore files matching regex.
+             */
+            if (ot != operation_type::ignore ||
+                rsn != operation_reason::ignore_regex) {
+                ++diffs_found;
+                std::cout << "Expected ignore of file: " << gs
+                          << " Operation: " << a.operation() << std::endl;
+            }
+        } else {
+            /*
+             * All other files should be generated and unchanged.
+             */
+            if (ot != operation_type::ignore ||
+                rsn != operation_reason::unchanged_generated) {
+                ++diffs_found;
+                std::cout << "Expected ignore of generated file: " << gs
+                          << " Operation: " << a.operation() << std::endl;
+            }
+        }
+    }
+    return diffs_found == 0;
+}
+
+/**
+ * @brief Performs a set of checks for the delete extra scenario.
+ */
+bool check_for_ignore_extra(const boost::filesystem::path& output_dir,
+    const masd::dogen::extraction::meta_model::model& m) {
+    unsigned int diffs_found(0);
+    for (const auto& a : m.artefacts()) {
+        /*
+         * FIXME: we seem to be generating empty paths. Needs to be
+         * investigated. Hack for now
+         */
+        if (a.path().empty())
+            continue;
+
+        if (diffs_found > 5)
+            break;
+
+        const auto fn(a.path().filename().generic_string());
+        const auto ot(a.operation().type());
+        const auto rsn(a.operation().reason());
+        const auto rel(a.path().lexically_relative(output_dir));
+        const auto gs(rel.generic_string());
+
+        using namespace masd::dogen::extraction::meta_model;
+        if (fn == unexpected_ignore_fn) {
+            /*
+             * File should not be removed because whilst it is
+             * unexpected, delete extra files is off.
+             */
+            if (ot != operation_type::ignore ||
+                rsn != operation_reason::ignore_unexpected) {
+                ++diffs_found;
+                std::cout << "Expected remove of file: " << gs
+                          << " Operation: " << a.operation() << std::endl;
+            }
+        } else if (fn == expected_ignore_fn) {
+            /*
+             * File should be ignored because it is on the list of
+             * ignore files matching regex.
+             */
+            if (ot != operation_type::ignore ||
+                rsn != operation_reason::ignore_regex) {
+                ++diffs_found;
+                std::cout << "Expected ignore of file: " << gs
+                          << " Operation: " << a.operation() << std::endl;
+            }
+        } else {
+            /*
+             * All other files should be generated and unchanged.
+             */
+            if (ot != operation_type::ignore ||
+                rsn != operation_reason::unchanged_generated) {
+                ++diffs_found;
+                std::cout << "Expected ignore of generated file: " << gs
+                          << " Operation: " << a.operation() << std::endl;
+            }
+        }
+    }
+    return diffs_found == 0;
+}
+
+/**
+ * @brief Performs a set of checks for the delete extra scenario.
+ */
+bool check_for_force_write(const boost::filesystem::path& output_dir,
+    const masd::dogen::extraction::meta_model::model& m) {
+    unsigned int diffs_found(0);
+    for (const auto& a : m.artefacts()) {
+        /*
+         * FIXME: we seem to be generating empty paths. Needs to be
+         * investigated. Hack for now
+         */
+        if (a.path().empty())
+            continue;
+
+        if (diffs_found > 5)
+            break;
+
+        const auto fn(a.path().filename().generic_string());
+        const auto ot(a.operation().type());
+        const auto rsn(a.operation().reason());
+        const auto rel(a.path().lexically_relative(output_dir));
+        const auto gs(rel.generic_string());
+
+        using namespace masd::dogen::extraction::meta_model;
+        if (fn == changed_handcrafted_hpp_fn ||
+            fn == changed_handcrafted_cpp_fn) {
+            /*
+             * Files with overwrite should be ignored, even when
+             * force write is on.
+             */
+            if (ot != operation_type::ignore ||
+                rsn != operation_reason::already_exists) {
+                ++diffs_found;
+                std::cout << "Expected ignore of file: " << gs
+                          << " Operation: " << a.operation() << std::endl;
+            }
+        } else {
+            /*
+             * All other files should be generated and written because
+             * force write is on.
+             */
+            if (ot != operation_type::write ||
+                rsn != operation_reason::force_write) {
+                ++diffs_found;
+                std::cout << "Expected write of generated file: " << gs
+                          << " Operation: " << a.operation() << std::endl;
+            }
+        }
+    }
+    return diffs_found == 0;
+}
+
+/**
+ * @brief Performs a set of checks for the model out of sync scenario.
+ */
+bool check_out_of_sync(const boost::filesystem::path& output_dir,
+    const masd::dogen::extraction::meta_model::model& m) {
+    unsigned int diffs_found(0);
+    for (const auto& a : m.artefacts()) {
+        /*
+         * FIXME: we seem to be generating empty paths. Needs to be
+         * investigated. Hack for now
+         */
+        if (a.path().empty())
+            continue;
+
+        if (diffs_found > 5)
+            break;
+
+        const auto ot(a.operation().type());
+        const auto rsn(a.operation().reason());
+        const auto rel(a.path().lexically_relative(output_dir /
+                "masd.cpp_ref_impl.out_of_sync"));
+        const auto gs(rel.generic_string());
+        using namespace masd::dogen::extraction::meta_model;
+        if (gs == "include/masd.cpp_ref_impl.out_of_sync/types/all.hpp" ||
+            gs == "include/masd.cpp_ref_impl.out_of_sync/types/changed_generated.hpp" ||
+            gs == "src/hash/changed_generated_hash.cpp" ||
+            gs == "src/io/changed_generated_io.cpp" ||
+            gs == "src/serialization/changed_generated_ser.cpp" ||
+            gs == "src/test_data/changed_generated_td.cpp" ||
+            gs == "src/types/changed_generated.cpp") {
+            /*
+             * Generated files which have changed should be written.
+             */
+            if (ot != operation_type::write ||
+                rsn != operation_reason::changed_generated) {
+                ++diffs_found;
+                std::cout << "Expected write for file: " << gs
+                          << " Operation: " << a.operation() << std::endl;
+            }
+        } else if (
+            gs == "include/masd.cpp_ref_impl.out_of_sync/types/changed_handcrafted.hpp" ||
+            gs == "include/masd.cpp_ref_impl.out_of_sync/types/unchanged_handcrafted.hpp" ||
+            gs == "src/types/changed_handcrafted.cpp" ||
+            gs == "src/types/unchanged_handcrafted.cpp") {
+            /*
+             * Files with the overwrite flag that already exist should
+             * be ignored.
+             */
+            if (ot != operation_type::ignore ||
+                rsn != operation_reason::already_exists) {
+                ++diffs_found;
+                std::cout << "Expected ignore for file: " << gs
+                          << " Operation: " << a.operation() << std::endl;
+            }
+        } else if (
+            gs == "include/masd.cpp_ref_impl.out_of_sync/types/handcrafted_new.hpp" ||
+            gs == "src/types/handcrafted_new.cpp") {
+            /*
+             * Files with the overwrite flag that don't yet exist
+             * should be created.
+             */
+            if (ot != operation_type::write ||
+                rsn != operation_reason::newly_generated) {
+                ++diffs_found;
+                std::cout << "Expected write for file: " << gs
+                          << " Operation: " << a.operation() << std::endl;
+            }
+        } else {
+            /*
+             * Generated files that have not changed should be ignored
+             * because force write flag is off.
+             */
+            if (ot != operation_type::ignore ||
+                rsn != operation_reason::unchanged_generated) {
+                ++diffs_found;
+                std::cout << "Expected ignore of file: " << gs
+                          << " Operation: " << a.operation() << std::endl;
+            }
+        }
+    }
+    return diffs_found == 0;
 }
 
 }
@@ -462,6 +725,50 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_two_layers_with_objects_dia_produces_expe
     const auto od(cpp_ref_impl_generation::project_directory());
     const auto m(apply_extraction_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
+}
+
+BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_delete_extra_dia_produces_expected_model) {
+    SETUP_TEST_LOG("masd_cpp_ref_impl_delete_extra_dia_produces_expected_model");
+    using masd::dogen::utility::test_data::cpp_ref_impl_generation;
+    const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_delete_extra_dia());
+    const auto od(cpp_ref_impl_generation::project_directory());
+    const auto et(false/*enable_tracing_locally*/);
+    const auto er(true/*enable_reporting_locally*/);
+    const auto m(apply_extraction_model_production(t, od, et, er));
+    BOOST_CHECK(check_for_delete_extra(od, m));
+}
+
+BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_force_write_dia_produces_expected_model) {
+    SETUP_TEST_LOG("masd_cpp_ref_impl_two_layers_with_objects_dia_produces_expected_model");
+    using masd::dogen::utility::test_data::cpp_ref_impl_generation;
+    const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_force_write_dia());
+    const auto od(cpp_ref_impl_generation::project_directory());
+    const auto et(false/*enable_tracing_locally*/);
+    const auto er(true/*enable_reporting_locally*/);
+    const auto m(apply_extraction_model_production(t, od, et, er));
+    BOOST_CHECK(check_for_force_write(od, m));
+}
+
+BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_ignore_extra_dia_produces_expected_model) {
+    SETUP_TEST_LOG("masd_cpp_ref_impl_ignore_extra_dia_produces_expected_model");
+    using masd::dogen::utility::test_data::cpp_ref_impl_generation;
+    const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_ignore_extra_dia());
+    const auto od(cpp_ref_impl_generation::project_directory());
+    const auto et(false/*enable_tracing_locally*/);
+    const auto er(true/*enable_reporting_locally*/);
+    const auto m(apply_extraction_model_production(t, od, et, er));
+    BOOST_CHECK(check_for_ignore_extra(od, m));
+}
+
+BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_out_of_sync_dia_produces_expected_model) {
+    SETUP_TEST_LOG("masd_cpp_ref_impl_out_of_sync_dia_produces_expected_model");
+    using masd::dogen::utility::test_data::cpp_ref_impl_generation;
+    const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_out_of_sync_dia());
+    const auto od(cpp_ref_impl_generation::project_directory());
+    const auto et(false/*enable_tracing_locally*/);
+    const auto er(true/*enable_reporting_locally*/);
+    const auto m(apply_extraction_model_production(t, od, et, er));
+    BOOST_CHECK(check_out_of_sync(od, m));
 }
 
 #endif // ENABLE_CPP_REF_IMPL_TESTS
@@ -794,6 +1101,50 @@ BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_two_layers_with_objects_json_produces_exp
     const auto od(cpp_ref_impl_generation::project_directory());
     const auto m(apply_extraction_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
+}
+
+BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_delete_extra_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_cpp_ref_impl_delete_extra_json_produces_expected_model");
+    using masd::dogen::utility::test_data::cpp_ref_impl_generation;
+    const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_delete_extra_json());
+    const auto od(cpp_ref_impl_generation::project_directory());
+    const auto et(false/*enable_tracing_locally*/);
+    const auto er(true/*enable_reporting_locally*/);
+    const auto m(apply_extraction_model_production(t, od, et, er));
+    BOOST_CHECK(check_for_delete_extra(od, m));
+}
+
+BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_force_write_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_cpp_ref_impl_two_layers_with_objects_json_produces_expected_model");
+    using masd::dogen::utility::test_data::cpp_ref_impl_generation;
+    const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_force_write_json());
+    const auto od(cpp_ref_impl_generation::project_directory());
+    const auto et(false/*enable_tracing_locally*/);
+    const auto er(true/*enable_reporting_locally*/);
+    const auto m(apply_extraction_model_production(t, od, et, er));
+    BOOST_CHECK(check_for_force_write(od, m));
+}
+
+BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_ignore_extra_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_cpp_ref_impl_ignore_extra_json_produces_expected_model");
+    using masd::dogen::utility::test_data::cpp_ref_impl_generation;
+    const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_ignore_extra_json());
+    const auto od(cpp_ref_impl_generation::project_directory());
+    const auto et(false/*enable_tracing_locally*/);
+    const auto er(true/*enable_reporting_locally*/);
+    const auto m(apply_extraction_model_production(t, od, et, er));
+    BOOST_CHECK(check_for_ignore_extra(od, m));
+}
+
+BOOST_AUTO_TEST_CASE(masd_cpp_ref_impl_out_of_sync_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_cpp_ref_impl_out_of_sync_json_produces_expected_model");
+    using masd::dogen::utility::test_data::cpp_ref_impl_generation;
+    const auto t(cpp_ref_impl_generation::input_masd_cpp_ref_impl_out_of_sync_json());
+    const auto od(cpp_ref_impl_generation::project_directory());
+    const auto et(false/*enable_tracing_locally*/);
+    const auto er(true/*enable_reporting_locally*/);
+    const auto m(apply_extraction_model_production(t, od, et, er));
+    BOOST_CHECK(check_out_of_sync(od, m));
 }
 
 #endif // ENABLE_CPP_REF_IMPL_TESTS

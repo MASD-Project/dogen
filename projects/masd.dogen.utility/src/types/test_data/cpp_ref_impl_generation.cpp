@@ -80,6 +80,14 @@ const std::string path_masd_cpp_ref_impl_std_model_dia(
     "masd.cpp_ref_impl.std_model.dia");
 const std::string path_masd_cpp_ref_impl_two_layers_with_objects_dia(
     "masd.cpp_ref_impl.two_layers_with_objects.dia");
+const std::string path_masd_cpp_ref_impl_delete_extra_dia(
+    "masd.cpp_ref_impl.delete_extra.dia");
+const std::string path_masd_cpp_ref_impl_ignore_extra_dia(
+    "masd.cpp_ref_impl.ignore_extra.dia");
+const std::string path_masd_cpp_ref_impl_force_write_dia(
+    "masd.cpp_ref_impl.force_write.dia");
+const std::string path_masd_cpp_ref_impl_out_of_sync_dia(
+    "masd.cpp_ref_impl.out_of_sync.dia");
 
 const std::string path_masd_cpp_ref_impl_boost_model_json(
     "masd.cpp_ref_impl.boost_model.json");
@@ -117,6 +125,14 @@ const std::string path_masd_cpp_ref_impl_std_model_json(
     "masd.cpp_ref_impl.std_model.json");
 const std::string path_masd_cpp_ref_impl_two_layers_with_objects_json(
     "masd.cpp_ref_impl.two_layers_with_objects.json");
+const std::string path_masd_cpp_ref_impl_delete_extra_json(
+    "masd.cpp_ref_impl.delete_extra.json");
+const std::string path_masd_cpp_ref_impl_ignore_extra_json(
+    "masd.cpp_ref_impl.ignore_extra.json");
+const std::string path_masd_cpp_ref_impl_force_write_json(
+    "masd.cpp_ref_impl.force_write.json");
+const std::string path_masd_cpp_ref_impl_out_of_sync_json(
+    "masd.cpp_ref_impl.out_of_sync.json");
 
 }
 
@@ -181,194 +197,238 @@ void cpp_ref_impl_generation::ensure_initialized() {
         BOOST_THROW_EXCEPTION(test_data_exception(not_initialized));
 }
 
-boost::filesystem::path cpp_ref_impl_generation::project_directory() {
+path cpp_ref_impl_generation::project_directory() {
     ensure_initialized();
     return project_directory_;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::output_directory() {
+path cpp_ref_impl_generation::output_directory() {
     ensure_initialized();
     return output_directory_;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_boost_model_dia() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_boost_model_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_masd_cpp_ref_impl_boost_model_dia;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_colours_dia() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_colours_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_masd_cpp_ref_impl_colours_dia;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_compressed_dia() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_compressed_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_masd_cpp_ref_impl_compressed_dia;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_cpp_98_dia() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_cpp_98_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_masd_cpp_ref_impl_cpp_98_dia;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_cpp_model_dia() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_cpp_model_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_masd_cpp_ref_impl_cpp_model_dia;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_directory_settings_dia() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_directory_settings_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_masd_cpp_ref_impl_directory_settings_dia;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_disable_cmakelists_dia() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_disable_cmakelists_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_masd_cpp_ref_impl_disable_cmakelists_dia;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_disable_facet_folders_dia() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_disable_facet_folders_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_masd_cpp_ref_impl_disable_facet_folders_dia;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_hash_dia() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_hash_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_masd_cpp_ref_impl_enable_facet_hash_dia;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_io_dia() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_io_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_masd_cpp_ref_impl_enable_facet_io_dia;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_serialization_dia() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_serialization_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_masd_cpp_ref_impl_enable_facet_serialization_dia;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_types_dia() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_types_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_masd_cpp_ref_impl_enable_facet_types_dia;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_flat_directory_mode_dia() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_flat_directory_mode_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_masd_cpp_ref_impl_flat_directory_mode_dia;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_lam_model_dia() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_lam_model_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_masd_cpp_ref_impl_lam_model_dia;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_northwind_dia() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_northwind_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_masd_cpp_ref_impl_northwind_dia;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_split_project_dia() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_split_project_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_masd_cpp_ref_impl_split_project_dia;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_std_model_dia() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_std_model_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_masd_cpp_ref_impl_std_model_dia;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_two_layers_with_objects_dia() {
+path cpp_ref_impl_generation::
+input_masd_cpp_ref_impl_two_layers_with_objects_dia() {
     ensure_initialized();
-    return dia_models_directory_ / path_masd_cpp_ref_impl_two_layers_with_objects_dia;
+    return dia_models_directory_ /
+        path_masd_cpp_ref_impl_two_layers_with_objects_dia;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_boost_model_json() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_delete_extra_dia() {
+    ensure_initialized();
+    return dia_models_directory_ / path_masd_cpp_ref_impl_delete_extra_dia;
+}
+
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_ignore_extra_dia() {
+    ensure_initialized();
+    return dia_models_directory_ / path_masd_cpp_ref_impl_ignore_extra_dia;
+}
+
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_force_write_dia() {
+    ensure_initialized();
+    return dia_models_directory_ / path_masd_cpp_ref_impl_force_write_dia;
+}
+
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_out_of_sync_dia() {
+    ensure_initialized();
+    return dia_models_directory_ / path_masd_cpp_ref_impl_out_of_sync_dia;
+}
+
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_boost_model_json() {
     ensure_initialized();
     return json_models_directory_ / path_masd_cpp_ref_impl_boost_model_json;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_colours_json() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_colours_json() {
     ensure_initialized();
     return json_models_directory_ / path_masd_cpp_ref_impl_colours_json;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_compressed_json() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_compressed_json() {
     ensure_initialized();
     return json_models_directory_ / path_masd_cpp_ref_impl_compressed_json;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_cpp_98_json() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_cpp_98_json() {
     ensure_initialized();
     return json_models_directory_ / path_masd_cpp_ref_impl_cpp_98_json;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_cpp_model_json() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_cpp_model_json() {
     ensure_initialized();
     return json_models_directory_ / path_masd_cpp_ref_impl_cpp_model_json;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_directory_settings_json() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_directory_settings_json() {
     ensure_initialized();
     return json_models_directory_ / path_masd_cpp_ref_impl_directory_settings_json;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_disable_cmakelists_json() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_disable_cmakelists_json() {
     ensure_initialized();
     return json_models_directory_ / path_masd_cpp_ref_impl_disable_cmakelists_json;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_disable_facet_folders_json() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_disable_facet_folders_json() {
     ensure_initialized();
     return json_models_directory_ / path_masd_cpp_ref_impl_disable_facet_folders_json;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_hash_json() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_hash_json() {
     ensure_initialized();
     return json_models_directory_ / path_masd_cpp_ref_impl_enable_facet_hash_json;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_io_json() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_io_json() {
     ensure_initialized();
     return json_models_directory_ / path_masd_cpp_ref_impl_enable_facet_io_json;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_serialization_json() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_serialization_json() {
     ensure_initialized();
     return json_models_directory_ / path_masd_cpp_ref_impl_enable_facet_serialization_json;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_types_json() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_enable_facet_types_json() {
     ensure_initialized();
     return json_models_directory_ / path_masd_cpp_ref_impl_enable_facet_types_json;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_flat_directory_mode_json() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_flat_directory_mode_json() {
     ensure_initialized();
     return json_models_directory_ / path_masd_cpp_ref_impl_flat_directory_mode_json;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_lam_model_json() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_lam_model_json() {
     ensure_initialized();
     return json_models_directory_ / path_masd_cpp_ref_impl_lam_model_json;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_northwind_json() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_northwind_json() {
     ensure_initialized();
     return json_models_directory_ / path_masd_cpp_ref_impl_northwind_json;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_split_project_json() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_split_project_json() {
     ensure_initialized();
     return json_models_directory_ / path_masd_cpp_ref_impl_split_project_json;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_std_model_json() {
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_std_model_json() {
     ensure_initialized();
     return json_models_directory_ / path_masd_cpp_ref_impl_std_model_json;
 }
 
-boost::filesystem::path cpp_ref_impl_generation::input_masd_cpp_ref_impl_two_layers_with_objects_json() {
+path cpp_ref_impl_generation::
+input_masd_cpp_ref_impl_two_layers_with_objects_json() {
     ensure_initialized();
-    return json_models_directory_ / path_masd_cpp_ref_impl_two_layers_with_objects_json;
+    return json_models_directory_ /
+        path_masd_cpp_ref_impl_two_layers_with_objects_json;
+}
+
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_delete_extra_json() {
+    ensure_initialized();
+    return json_models_directory_ / path_masd_cpp_ref_impl_delete_extra_json;
+}
+
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_ignore_extra_json() {
+    ensure_initialized();
+    return json_models_directory_ / path_masd_cpp_ref_impl_ignore_extra_json;
+}
+
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_force_write_json() {
+    ensure_initialized();
+    return json_models_directory_ / path_masd_cpp_ref_impl_force_write_json;
+}
+
+path cpp_ref_impl_generation::input_masd_cpp_ref_impl_out_of_sync_json() {
+    ensure_initialized();
+    return json_models_directory_ / path_masd_cpp_ref_impl_out_of_sync_json;
 }
 
 }
