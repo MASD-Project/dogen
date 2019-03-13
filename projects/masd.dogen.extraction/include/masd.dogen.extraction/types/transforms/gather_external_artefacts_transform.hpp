@@ -34,6 +34,11 @@ namespace masd::dogen::extraction::transforms {
  * @brief Handles any extraneous files which should be removed.
  */
 class gather_external_artefacts_transform final {
+private:
+    static meta_model::artefact make_artefact(const boost::filesystem::path& p,
+        const meta_model::operation_type ot,
+        const meta_model::operation_reason rsn);
+
 public:
     static void apply(const context& ctx, meta_model::model& m);
 };

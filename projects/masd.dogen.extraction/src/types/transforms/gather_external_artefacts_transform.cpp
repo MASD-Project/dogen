@@ -40,6 +40,19 @@ auto lg(logger_factory(transform_id));
 
 namespace masd::dogen::extraction::transforms {
 
+meta_model::artefact gather_external_artefacts_transform::make_artefact(
+    const boost::filesystem::path& p,
+    const meta_model::operation_type ot,
+    const meta_model::operation_reason rsn) {
+
+    meta_model::artefact r;
+    r.path(p);
+    r.operation().type(ot);
+    r.operation().reason(rsn);
+
+    return r;
+}
+
 void gather_external_artefacts_transform::
 apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
@@ -47,8 +60,8 @@ apply(const context& ctx, meta_model::model& m) {
         *ctx.tracer(), m);
 
     /*
-     * First, collect all files with a status worth looking at. If
-     * nothing turns up, we're done.
+     * Collect all files with a status worth looking at. If nothing
+     * turns up, we're done.
      */
     const auto fbs(helpers::file_status_collector::collect(m));
     if (fbs.unexpected().empty() && fbs.ignored().empty()) {
@@ -56,34 +69,32 @@ apply(const context& ctx, meta_model::model& m) {
         return;
     }
 
+    using meta_model::operation_type;
+    using meta_model::operation_reason;
+    using meta_model::artefact;
+
     /*
      * Now, for each file, generate artefacts with the appropriate
-     * operations and add them to the model.
+     * operations and add them to the model. First, we mark files that
+     * are ignored because the suer supplied regexes for them.
      */
     for (const auto& f : fbs.ignored()) {
-        meta_model::artefact a;
-        a.path(f);
-
-        using meta_model::operation_type;
-        a.operation().type(operation_type::ignore);
-
-        using meta_model::operation_reason;
-        a.operation().reason(operation_reason::ignore_unexpected);
-
-        m.artefacts().push_back(a);
+        const auto ot(operation_type::ignore);
+        const auto rsn(operation_reason::ignore_regex);
+        m.artefacts().push_back(make_artefact(f, ot, rsn));
     }
 
+    /*
+     * Finally, we handle unexpected files. If the user asked us to
+     * delete extra files, we need to mark them for removal;
+     * otherwise, they should be ignored (for the right reasons).
+     */
+    const auto def(m.delete_extra_files());
     for (const auto& f : fbs.unexpected()) {
-        meta_model::artefact a;
-        a.path(f);
-
-        using meta_model::operation_type;
-        a.operation().type(operation_type::remove);
-
-        using meta_model::operation_reason;
-        a.operation().reason(operation_reason::unexpected);
-
-        m.artefacts().push_back(a);
+        const auto ot(def ? operation_type::remove : operation_type::ignore);
+        const auto rsn(def ? operation_reason::unexpected :
+            operation_reason::ignore_unexpected);
+        m.artefacts().push_back(make_artefact(f, ot, rsn));
     }
 
     stp.end_transform(fbs);

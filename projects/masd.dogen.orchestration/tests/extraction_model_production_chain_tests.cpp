@@ -28,6 +28,7 @@
 #include "masd.dogen.utility/types/test_data/cpp_ref_impl_generation.hpp"
 #include "masd.dogen.utility/types/test_data/csharp_ref_impl_generation.hpp"
 #include "masd.dogen.extraction/io/meta_model/operation_io.hpp"
+#include "masd.dogen.extraction/io/meta_model/operation_reason_io.hpp"
 #include "masd.dogen.orchestration/types/transforms/scoped_context_manager.hpp"
 #include "masd.dogen.orchestration/types/transforms/extraction_model_production_chain.hpp"
 
@@ -84,6 +85,14 @@ bool check_for_differences(const boost::filesystem::path& output_dir,
         if (a.path().empty())
             continue;
 
+        /*
+         * We can safely ignore all files the user provided regexes
+         * for.
+         */
+        if (a.operation().type() == operation_type::ignore &&
+            a.operation().reason() == operation_reason::ignore_regex)
+            continue;
+
         if (a.operation().type() != operation_type::write &&
             a.operation().type() != operation_type::remove)
             continue;
@@ -97,17 +106,25 @@ bool check_for_differences(const boost::filesystem::path& output_dir,
         if (diffs_found > 5)
             break;
 
-        if (a.operation().type() == operation_type::remove) {
-            std::cout << "Unexpected file: "
-                      << a.path().lexically_relative(output_dir)
-                      << std::endl;
-        } else if (a.operation().type() == operation_type::write) {
-            if (a.operation().reason() == operation_reason::newly_generated) {
-                std::cout << "New file: "
-                          << a.path().lexically_relative(output_dir)
-                          << std::endl;
-            } else
+        const auto rel(a.path().lexically_relative(output_dir));
+        if (a.operation().type() == operation_type::remove)
+            std::cout << "Unexpected file (remove): " << rel << std::endl;
+        else if (a.operation().type() == operation_type::write) {
+            if (a.operation().reason() == operation_reason::newly_generated)
+                std::cout << "New file: " << rel << std::endl;
+            else
                 print_lines(a.unified_diff(), 20, std::cout);
+        } else if (a.operation().type() == operation_type::ignore) {
+            if (a.operation().reason() == operation_reason::ignore_unexpected)
+                std::cout << "Unexpected file (ignore): " << rel << std::endl;
+            else {
+                std::cout << "Unexpected file, unexpected reason: "
+                          << a.operation().reason() << ". File: "
+                          << rel << std::endl;
+            }
+        } else {
+            std::cout << "Unexpected operation: " << a.operation()
+                      << " File: " << rel << std::endl;
         }
     }
     return diffs_found == 0;
