@@ -541,6 +541,7 @@ Notes:
 
 *** STARTED Add tests for tracing, reporting and logging              :story:
     :LOGBOOK:
+    CLOCK: [2019-03-13 Wed 08:10]--[2019-03-13 Wed 09:25] =>  1:15
     CLOCK: [2019-03-13 Wed 06:24]--[2019-03-13 Wed 07:18] =>  0:54
     CLOCK: [2019-03-12 Tue 15:37]--[2019-03-12 Tue 17:40] =>  2:03
     CLOCK: [2019-03-12 Tue 18:15]--[2019-03-12 Tue 18:38] =>  0:23

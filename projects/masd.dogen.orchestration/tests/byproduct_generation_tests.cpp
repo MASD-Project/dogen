@@ -26,6 +26,8 @@ const std::string archetype_location_fn(
     "000-archetype_location_repository.json");
 const std::string injection_transform_prefix(
     "001-injection.dia.decoding_transform-");
+const std::string first_short_name("000.json");
+const std::string second_short_name("001.json");
 const std::string injection_transform_postfix("-input.json");
 const std::regex tracing_regex(".*/tracing/.*");
 const std::regex guid_regex(
@@ -40,7 +42,8 @@ setup_tracing_configuration(const boost::filesystem::path& target,
     const std::string& additional_identifier,
     const masd::dogen::tracing_level tl,
     const masd::dogen::tracing_format tf,
-    const bool enable_guids = false) {
+    const bool enable_guids = false,
+    const bool use_short_names = false) {
     /*
      * First, we setup the factory to enable tracing and _nothing_
      * else. Note that we don't worry about logging because by default
@@ -76,8 +79,9 @@ setup_tracing_configuration(const boost::filesystem::path& target,
 
     using masd::dogen::tracing_format;
     r.tracing()->format(tf);
-
     r.tracing()->guids_enabled(enable_guids);
+    r.tracing()->use_short_names(use_short_names);
+
     return r;
 }
 
@@ -104,7 +108,7 @@ bool are_tracing_files_healthy(const masd::dogen::configuration& cfg) {
      */
     if (!boost::filesystem::exists(cfg.byproduct_directory()))
         return false;
-    std::cout << "Directory exists." << std::endl;
+    BOOST_TEST_MESSAGE("Directory exists.");
 
     /*
      * Ensure we have created the minimum number of expected files.
@@ -114,7 +118,7 @@ bool are_tracing_files_healthy(const masd::dogen::configuration& cfg) {
     const auto files(find_files(cfg.byproduct_directory()));
     if (files.size() < minimum_number)
         return false;
-    std::cout << "Files." << files.size() << std::endl;
+    BOOST_TEST_MESSAGE("Files." << files.size());
 
     /*
      * Ensure all files have the minimum content size and find a
@@ -129,7 +133,7 @@ bool are_tracing_files_healthy(const masd::dogen::configuration& cfg) {
          */
         const boost::uintmax_t minimum_size(50);
         const auto sz(boost::filesystem::file_size(f));
-        std::cout << "Size." << sz << std::endl;
+        BOOST_TEST_MESSAGE("Size." << sz);
         if (sz < minimum_size)
             return false;
 
@@ -137,7 +141,7 @@ bool are_tracing_files_healthy(const masd::dogen::configuration& cfg) {
          * We only expect files inside the tracing directory.
          */
         const auto gs(f.generic_string());
-        std::cout << "gs." << gs << std::endl;
+        BOOST_TEST_MESSAGE("gs." << gs);
         if (!std::regex_match(gs, tracing_regex))
             return false;
 
@@ -146,31 +150,40 @@ bool are_tracing_files_healthy(const masd::dogen::configuration& cfg) {
          * we're not looking at some other spurious content.
          */
         const auto fn(f.filename().string());
-        if (fn == transform_stats_org_fn)
-            found_transform_stats = true;
-        else if (fn == archetype_location_fn)
-            found_archetype_location = true;
-        else if (boost::starts_with(fn, injection_transform_prefix) &&
-            boost::ends_with(fn, injection_transform_postfix)) {
-            found_injection_dia_transform = true;
-            std::cout << "Found injection." << std::endl;
+        if (cfg.tracing()->use_short_names()) {
+            if (fn == transform_stats_org_fn)
+                found_transform_stats = true;
+            else if (fn == first_short_name)
+                found_archetype_location = true;
+            else if (fn == second_short_name)
+                found_injection_dia_transform = true;
+        } else {
+            if (fn == transform_stats_org_fn)
+                found_transform_stats = true;
+            else if (fn == archetype_location_fn)
+                found_archetype_location = true;
+            else if (boost::starts_with(fn, injection_transform_prefix) &&
+                boost::ends_with(fn, injection_transform_postfix)) {
+                found_injection_dia_transform = true;
+                BOOST_TEST_MESSAGE("Found injection.");
 
-            /*
-             * Ensure filenames have a guid (since we requested it in
-             * the config) and the guid is valid.
-             */
-            auto guid(fn);
-            boost::erase_first(guid, injection_transform_prefix);
-            boost::erase_first(guid, injection_transform_postfix);
-            std::cout << "guid:" << guid << std::endl;
-            if (guid.size() != 36)
-                return false;
+                /*
+                 * Ensure filenames have a guid (since we requested it in
+                 * the config) and the guid is valid.
+                 */
+                auto guid(fn);
+                boost::erase_first(guid, injection_transform_prefix);
+                boost::erase_first(guid, injection_transform_postfix);
+                BOOST_TEST_MESSAGE("guid:" << guid);
+                if (guid.size() != 36)
+                    return false;
 
-            std::cout << "before regex match" << std::endl;
-            if (!std::regex_match(guid, guid_regex))
-                return false;
+                BOOST_TEST_MESSAGE("before regex match");
+                if (!std::regex_match(guid, guid_regex))
+                    return false;
 
-            std::cout << "after regex match" << std::endl;
+                BOOST_TEST_MESSAGE("after regex match");
+            }
         }
     }
     return
@@ -183,7 +196,7 @@ bool are_tracing_files_healthy(const masd::dogen::configuration& cfg) {
 
 BOOST_AUTO_TEST_SUITE(byproduct_generation_tests)
 
-BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_org_moderesults_in_expected_trace_files) {
+BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_org_mode_results_in_expected_trace_files) {
     SETUP_TEST_LOG("enabling_detailed_tracing_with_org_moderesults_in_expected_trace_files");
 
     using masd::dogen::tracing_level;
@@ -196,7 +209,7 @@ BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_org_moderesults_in_expected_
     const auto t(dogen_generation::input_masd_dogen_dia());
 
     const std::string id("detailed_tracing_org_mode");
-    const bool eg(true); /*enable_guids*/
+    const bool eg(true/*enable_guids*/);
     const auto cfg(setup_tracing_configuration(t, id, tl, tf, eg));
 
     const auto od(dogen_generation::output_directory() / id);
@@ -260,6 +273,29 @@ BOOST_AUTO_TEST_CASE(enabling_summary_tracing_with_graphviz_results_in_expected_
     const auto f(*files.begin());
     const auto fn(f.filename().string());
     BOOST_REQUIRE(fn == transform_stats_graphviz_fn);
+}
+
+BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_short_names_results_in_expected_trace_files) {
+    SETUP_TEST_LOG("enabling_detailed_tracing_with_short_names_results_in_expected_trace_files");
+
+    using masd::dogen::tracing_level;
+    const auto tl(tracing_level::detail);
+
+    using masd::dogen::tracing_format;
+    const auto tf(tracing_format::org_mode);
+
+    using masd::dogen::utility::test_data::dogen_generation;
+    const auto t(dogen_generation::input_masd_dogen_dia());
+
+    const std::string id("detail_tracing_short_names");
+    const bool eg(false/*enable_guids*/);
+    const bool usn(true/*use_short_names*/);
+    const auto cfg(setup_tracing_configuration(t, id, tl, tf, eg, usn));
+
+    const auto od(dogen_generation::output_directory() / id);
+    apply_transforms(cfg, od, t);
+
+    BOOST_CHECK(are_tracing_files_healthy(cfg));
 }
 
 BOOST_AUTO_TEST_SUITE_END()
