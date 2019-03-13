@@ -19,7 +19,7 @@
 #
 
 # parameters for boost tests
-set(boost_test_parameters "--log_level=message")
+set(boost_test_parameters "--log_level=error")
 
 #
 # macro to create CTest tests for each boost unit tests

@@ -48,6 +48,10 @@ const bool enable_tracing_globally(false);
 const bool enable_reporting_globally(false);
 const bool enable_diffing_globally(false);
 
+/**
+ * @brief Prints a limited number of lines from content. Used to
+ * ensure we don't spam the build logs.
+ */
 void print_lines(const std::string& content, const unsigned int total,
     std::ostream& os) {
 
@@ -60,6 +64,13 @@ void print_lines(const std::string& content, const unsigned int total,
     }
 }
 
+/**
+ * @brief Checks to see if the model contains any artefacts which are
+ * different from the files in the filesystem.
+ *
+ * @note We're using std::cout here by design as we always want the
+ * output to show up in CDash.
+ */
 bool check_for_differences(const boost::filesystem::path& output_dir,
     const masd::dogen::extraction::meta_model::model& m) {
 

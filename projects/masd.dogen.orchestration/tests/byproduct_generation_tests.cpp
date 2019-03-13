@@ -70,7 +70,18 @@ configuration setup_tracing_configuration(const path& target,
     const mock_configuration_factory f(true/*enable_tracing*/,
         false/*enable_reporting*/, false/*enable_diffing*/);
 
-    auto r(f.make(target, run_activity + "." + additional_identifier));
+    /*
+     * On windows we breach filename limitations when we output with
+     * long times and guids. So we do a quick hack and output to the
+     * temp directory instead.
+     */
+#if defined (_WIN32)
+    const bool use_td(use_short_names ? false : true);
+#else
+    const bool use_td(false);
+#endif
+
+    auto r(f.make(target, run_activity + "." + additional_identifier, use_td));
     r.tracing()->level(tl);
     r.tracing()->format(tf);
     r.tracing()->guids_enabled(enable_guids);

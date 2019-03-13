@@ -36,14 +36,13 @@ namespace masd::dogen {
  */
 class mock_configuration_factory final {
 public:
-    mock_configuration_factory(
-        const bool enable_tracing,
-        const bool enable_reporting,
-        const bool enable_diffing);
+    mock_configuration_factory(const bool enable_tracing,
+        const bool enable_reporting, const bool enable_diffing);
 
 public:
     configuration make(const boost::filesystem::path& target,
-        const std::string& activity) const;
+        const std::string& activity,
+        const bool output_to_temp_dir = false) const;
 
 private:
     const bool enable_tracing_;
