@@ -45,6 +45,7 @@ const std::string reason_ignore_generated("ignore generated");
 const std::string reason_force_write("force write");
 const std::string reason_unexpected("unexpected");
 const std::string reason_ignore_unexpected("ignore unexpected");
+const std::string reason_ignore_regex("ignore regex");
 
 const std::string type_invalid("invalid");
 const std::string type_create_only("create_only");
@@ -132,6 +133,9 @@ void print_operation_reason(const bool add_brackets,
         break;
     case operation_reason::ignore_unexpected:
         s << reason_ignore_unexpected;
+        break;
+    case operation_reason::ignore_regex:
+        s << reason_ignore_regex;
         break;
     default:
         BOOST_LOG_SEV(lg, error) << unexpected_operation_reason;
