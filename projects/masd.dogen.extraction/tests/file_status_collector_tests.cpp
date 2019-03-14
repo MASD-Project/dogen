@@ -54,7 +54,7 @@ const masd::dogen::extraction::meta_model::model
 create_model(const std::list<boost::filesystem::path>& files,
     const std::vector<std::string>& ignored_files) {
     masd::dogen::extraction::meta_model::model r;
-    r.ignore_files_matching_regex(ignored_files);
+    r.outputting_properties().ignore_files_matching_regex(ignored_files);
     r.managed_directories(managed_directories());
     for(const auto& f : files)
         r.artefacts().push_back(to_artefact(f));

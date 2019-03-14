@@ -649,31 +649,6 @@
           "type": "std::list<boost::filesystem::path>"
         },
         {
-          "name": "force_write",
-          "type": "bool",
-          "documentation": "Always write files, even when there are no differences.\n"
-        },
-        {
-          "name": "delete_extra_files",
-          "type": "bool",
-          "documentation": "If true, deletes any files that are not known to Dogen .\n"
-        },
-        {
-          "name": "ignore_files_matching_regex",
-          "type": "std::vector<std::string>",
-          "documentation": "Files matching the supplied regular expressions will be ignored by Dogen.\n\nOnly applicable when deleting extra files.\n"
-        },
-        {
-          "name": "cpp_headers_output_directory",
-          "type": "boost::filesystem::path",
-          "documentation": "Directory in which to place C++ header files. Must be a relative path.\n"
-        },
-        {
-          "name": "delete_empty_directories",
-          "type": "bool",
-          "documentation": "If true, deletes all empty directories inside the project.\n"
-        },
-        {
           "name": "outputting_properties",
           "type": "outputting_properties"
         }
