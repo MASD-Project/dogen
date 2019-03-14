@@ -14,23 +14,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-14 Thu 06:39]
+#+CAPTION: Clock summary at [2019-03-14 Thu 07:03]
 | <75>                                                     |         |       |      |       |
 | Headline                                                 | Time    |       |      |     % |
 |----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                             | *25:16* |       |      | 100.0 |
+| *Total time*                                             | *25:38* |       |      | 100.0 |
 |----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                  | 25:16   |       |      | 100.0 |
-| Active                                                   |         | 25:16 |      | 100.0 |
-| Edit release notes for previous sprint                   |         |       | 2:22 |   9.4 |
-| Sprint and product backlog grooming                      |         |       | 2:16 |   9.0 |
-| Create a video demo for the sprint's features            |         |       | 3:47 |  15.0 |
+| Stories                                                  | 25:38   |       |      | 100.0 |
+| Active                                                   |         | 25:38 |      | 100.0 |
+| Edit release notes for previous sprint                   |         |       | 2:22 |   9.2 |
+| Sprint and product backlog grooming                      |         |       | 2:16 |   8.8 |
+| Create a video demo for the sprint's features            |         |       | 3:47 |  14.8 |
 | Make projects directory env optional                     |         |       | 0:10 |   0.7 |
-| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   3.0 |
-| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  22.8 |
-| Delete extra files appears broken at present             |         |       | 6:26 |  25.5 |
-| Code generation of tests for dogen models                |         |       | 3:33 |  14.1 |
-| Empty directories should be deleted                      |         |       | 0:11 |   0.7 |
+| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   2.9 |
+| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  22.5 |
+| Delete extra files appears broken at present             |         |       | 6:26 |  25.1 |
+| Code generation of tests for dogen models                |         |       | 3:33 |  13.8 |
+| Empty directories should be deleted                      |         |       | 0:33 |   2.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -562,6 +562,8 @@ canned tests.
 
 *** STARTED Empty directories should be deleted                       :story:
     :LOGBOOK:
+    CLOCK: [2019-03-14 Thu 06:59]--[2019-03-14 Thu 07:03] =>  0:04
+    CLOCK: [2019-03-14 Thu 06:40]--[2019-03-14 Thu 06:58] =>  0:18
     CLOCK: [2019-03-14 Thu 06:28]--[2019-03-14 Thu 06:39] =>  0:11
     :END:
 
@@ -583,6 +585,17 @@ against the managed directories.
 Links:
 
 - [[https://www.codeproject.com/Questions/454944/how-to-remove-empty-folders-in-a-directory-using-b][How to remove empty folders in a directory using boost]]
+
+*** Consider adding an indent JSON transform                          :story:
+
+Once we start making use of a proper JSON library, we should output
+indented JSON models as part of conversion. We always have to indent
+manually anyway. For extra bonus points, it would be nice if the
+indent could cope with our invalid JSON (not deleting duplicate keys).
+
+We could even expose it as an activity/command so that we could indent
+external files without going through conversion; this would be useful
+for library models.
 
 *** Make extraction model name a qualified name                       :story:
 

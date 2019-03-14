@@ -78,6 +78,7 @@
 #include "masd.dogen.extraction/types/transforms/operation_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/transform_exception.hpp"
 #include "masd.dogen.extraction/types/cpp/scoped_boilerplate_formatter.hpp"
+#include "masd.dogen.extraction/types/helpers/outputting_configuration.hpp"
 #include "masd.dogen.extraction/types/transforms/code_generation_chain.hpp"
 #include "masd.dogen.extraction/types/csharp/scoped_namespace_formatter.hpp"
 #include "masd.dogen.extraction/types/helpers/artefact_writer_interface.hpp"
@@ -90,5 +91,6 @@
 #include "masd.dogen.extraction/types/transforms/write_artefacts_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/mock_content_filler_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/gather_external_artefacts_transform.hpp"
+#include "masd.dogen.extraction/types/transforms/update_outputting_properties_transform.hpp"
 
 #endif

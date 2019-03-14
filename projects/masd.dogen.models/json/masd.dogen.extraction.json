@@ -948,6 +948,35 @@
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::outputting_configuration",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "force_write",
+          "type": "bool"
+        },
+        {
+          "name": "delete_extra_files",
+          "type": "bool"
+        },
+        {
+          "name": "ignore_files_matching_regex",
+          "type": "std::vector<std::string>"
+        },
+        {
+          "name": "delete_empty_directories",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "transforms::update_outputting_properties_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

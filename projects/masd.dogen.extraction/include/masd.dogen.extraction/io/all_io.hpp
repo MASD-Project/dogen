@@ -44,5 +44,6 @@
 #include "masd.dogen.extraction/io/decoration_configuration_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/operation_type_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/operation_reason_io.hpp"
+#include "masd.dogen.extraction/io/helpers/outputting_configuration_io.hpp"
 
 #endif
