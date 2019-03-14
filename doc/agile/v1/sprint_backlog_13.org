@@ -14,23 +14,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-14 Thu 12:12]
+#+CAPTION: Clock summary at [2019-03-14 Thu 14:05]
 | <75>                                                     |         |       |      |       |
 | Headline                                                 | Time    |       |      |     % |
 |----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                             | *29:58* |       |      | 100.0 |
+| *Total time*                                             | *30:42* |       |      | 100.0 |
 |----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                  | 29:58   |       |      | 100.0 |
-| Active                                                   |         | 29:58 |      | 100.0 |
-| Edit release notes for previous sprint                   |         |       | 2:22 |   7.9 |
-| Sprint and product backlog grooming                      |         |       | 2:16 |   7.6 |
-| Create a video demo for the sprint's features            |         |       | 3:47 |  12.6 |
-| Make projects directory env optional                     |         |       | 0:10 |   0.6 |
-| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   2.5 |
-| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  19.2 |
-| Delete extra files appears broken at present             |         |       | 6:26 |  21.5 |
-| Code generation of tests for dogen models                |         |       | 3:33 |  11.8 |
-| Empty directories should be deleted                      |         |       | 4:53 |  16.3 |
+| Stories                                                  | 30:42   |       |      | 100.0 |
+| Active                                                   |         | 30:42 |      | 100.0 |
+| Edit release notes for previous sprint                   |         |       | 2:22 |   7.7 |
+| Sprint and product backlog grooming                      |         |       | 2:16 |   7.4 |
+| Create a video demo for the sprint's features            |         |       | 3:47 |  12.3 |
+| Make projects directory env optional                     |         |       | 0:10 |   0.5 |
+| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   2.4 |
+| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  18.8 |
+| Delete extra files appears broken at present             |         |       | 6:26 |  21.0 |
+| Empty directories should be deleted                      |         |       | 5:37 |  18.3 |
+| Code generation of tests for dogen models                |         |       | 3:33 |  11.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -491,6 +491,43 @@ Notes:
 - add test that validates the flag on and off. No need to check the
   deletion itself, we can trust remove files transform.
 
+*** COMPLETED Empty directories should be deleted                     :story:
+    CLOSED: [2019-03-14 Thu 14:05]
+    :LOGBOOK:
+    CLOCK: [2019-03-14 Thu 13:26]--[2019-03-14 Thu 14:05] =>  0:39
+    CLOCK: [2019-03-14 Thu 12:13]--[2019-03-14 Thu 12:18] =>  0:05
+    CLOCK: [2019-03-14 Thu 11:24]--[2019-03-14 Thu 12:12] =>  0:48
+    CLOCK: [2019-03-14 Thu 10:16]--[2019-03-14 Thu 11:23] =>  1:07
+    CLOCK: [2019-03-14 Thu 09:59]--[2019-03-14 Thu 10:15] =>  0:16
+    CLOCK: [2019-03-14 Thu 09:11]--[2019-03-14 Thu 09:58] =>  0:47
+    CLOCK: [2019-03-14 Thu 08:55]--[2019-03-14 Thu 09:10] =>  0:15
+    CLOCK: [2019-03-14 Thu 08:33]--[2019-03-14 Thu 08:54] =>  0:21
+    CLOCK: [2019-03-14 Thu 08:02]--[2019-03-14 Thu 08:32] =>  0:30
+    CLOCK: [2019-03-14 Thu 07:04]--[2019-03-14 Thu 07:20] =>  0:16
+    CLOCK: [2019-03-14 Thu 06:59]--[2019-03-14 Thu 07:03] =>  0:04
+    CLOCK: [2019-03-14 Thu 06:40]--[2019-03-14 Thu 06:58] =>  0:18
+    CLOCK: [2019-03-14 Thu 06:28]--[2019-03-14 Thu 06:39] =>  0:11
+    :END:
+
+#+begin_quote
+*Story*: As a dogen user, I want empty directories to be removed so
+that I don't have to do it manually.
+#+end_quote
+
+When housekeeper finishes deleting all extra files, it should check
+all of the processed directories to see if they are empty. If they
+are, it should delete the directory.
+
+We should probably have a command line option to control this
+behaviour.
+
+This can be implemented as a transform in extracton that executes
+against the managed directories.
+
+Links:
+
+- [[https://www.codeproject.com/Questions/454944/how-to-remove-empty-folders-in-a-directory-using-b][How to remove empty folders in a directory using boost]]
+
 *** STARTED Code generation of tests for dogen models                 :story:
     :LOGBOOK:
     CLOCK: [2019-03-12 Tue 11:56]--[2019-03-12 Tue 12:04] =>  0:08
@@ -559,40 +596,6 @@ of two approaches:
 If an object has pointers, the canned tests will not perform a deep
 copy of the object. We need to [[*Add%20support%20for%20object%20cloning][implement cloning]] and then use it in
 canned tests.
-
-*** STARTED Empty directories should be deleted                       :story:
-    :LOGBOOK:
-    CLOCK: [2019-03-14 Thu 11:24]--[2019-03-14 Thu 12:12] =>  0:48
-    CLOCK: [2019-03-14 Thu 10:16]--[2019-03-14 Thu 11:23] =>  1:07
-    CLOCK: [2019-03-14 Thu 09:59]--[2019-03-14 Thu 10:15] =>  0:16
-    CLOCK: [2019-03-14 Thu 09:11]--[2019-03-14 Thu 09:58] =>  0:47
-    CLOCK: [2019-03-14 Thu 08:55]--[2019-03-14 Thu 09:10] =>  0:15
-    CLOCK: [2019-03-14 Thu 08:33]--[2019-03-14 Thu 08:54] =>  0:21
-    CLOCK: [2019-03-14 Thu 08:02]--[2019-03-14 Thu 08:32] =>  0:30
-    CLOCK: [2019-03-14 Thu 07:04]--[2019-03-14 Thu 07:20] =>  0:16
-    CLOCK: [2019-03-14 Thu 06:59]--[2019-03-14 Thu 07:03] =>  0:04
-    CLOCK: [2019-03-14 Thu 06:40]--[2019-03-14 Thu 06:58] =>  0:18
-    CLOCK: [2019-03-14 Thu 06:28]--[2019-03-14 Thu 06:39] =>  0:11
-    :END:
-
-#+begin_quote
-*Story*: As a dogen user, I want empty directories to be removed so
-that I don't have to do it manually.
-#+end_quote
-
-When housekeeper finishes deleting all extra files, it should check
-all of the processed directories to see if they are empty. If they
-are, it should delete the directory.
-
-We should probably have a command line option to control this
-behaviour.
-
-This can be implemented as a transform in extracton that executes
-against the managed directories.
-
-Links:
-
-- [[https://www.codeproject.com/Questions/454944/how-to-remove-empty-folders-in-a-directory-using-b][How to remove empty folders in a directory using boost]]
 
 *** Consider adding an indent JSON transform                          :story:
 

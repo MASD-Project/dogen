@@ -28,6 +28,7 @@
 #include "masd.dogen.utility/types/test/logging.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.utility/types/test_data/dogen_generation.hpp"
+#include "masd.dogen.utility/types/test_data/cpp_ref_impl_generation.hpp"
 #include "masd.dogen.extraction/io/meta_model/operation_io.hpp"
 #include "masd.dogen.orchestration/types/transforms/scoped_context_manager.hpp"
 #include "masd.dogen.orchestration/types/transforms/code_generation_chain.hpp"
@@ -175,6 +176,34 @@ BOOST_AUTO_TEST_CASE(empty_folders_are_deleted_when_delete_empty_folders_flag_is
 
     const path first_empty_folder(model_dir / first_folder);
     BOOST_CHECK(!exists(first_empty_folder));
+}
+
+BOOST_AUTO_TEST_CASE(empty_folders_are_not_deleted_when_delete_empty_folders_flag_is_off) {
+    SETUP_TEST_LOG("empty_folders_are_not_when_delete_empty_folders_flag_is_off");
+
+    using masd::dogen::utility::test_data::cpp_ref_impl_generation;
+    const auto t(cpp_ref_impl_generation::
+        input_masd_cpp_ref_impl_do_not_delete_empty_dirs_json());
+    const auto od(cpp_ref_impl_generation::output_directory());
+    execute_code_generation_transform(t, od);
+    BOOST_REQUIRE(are_generated_files_healthy(od, t, 20/*minimum_number*/));
+
+    auto n(t.filename().stem());
+    const auto model_dir(od / n);
+
+    using namespace boost::filesystem;
+    const path first_empty_folders(model_dir / first_folders_path);
+    create_directories(first_empty_folders);
+    BOOST_CHECK(exists(first_empty_folders));
+
+    const path second_empty_folders(model_dir / second_folders_path);
+    create_directories(second_empty_folders);
+    BOOST_CHECK(exists(second_empty_folders));
+
+    execute_code_generation_transform(t, od);
+
+    BOOST_CHECK(exists(first_empty_folders));
+    BOOST_CHECK(exists(second_empty_folders));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

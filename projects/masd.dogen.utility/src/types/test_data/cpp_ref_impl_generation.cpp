@@ -44,6 +44,9 @@ const std::string output_dir("masd.cpp_ref_impl.code_generation_test_output");
 const std::string models_dia_dir("masd.cpp_ref_impl.models/dia");
 const std::string models_json_dir("masd.cpp_ref_impl.models/json");
 
+/*
+ * Dia
+ */
 const std::string path_masd_cpp_ref_impl_boost_model_dia(
     "masd.cpp_ref_impl.boost_model.dia");
 const std::string path_masd_cpp_ref_impl_colours_dia(
@@ -88,7 +91,12 @@ const std::string path_masd_cpp_ref_impl_force_write_dia(
     "masd.cpp_ref_impl.force_write.dia");
 const std::string path_masd_cpp_ref_impl_out_of_sync_dia(
     "masd.cpp_ref_impl.out_of_sync.dia");
+const std::string path_masd_cpp_ref_impl_do_not_delete_empty_dirs_dia(
+    "masd.cpp_ref_impl.do_not_delete_empty_dirs.dia");
 
+/*
+ * JSON
+ */
 const std::string path_masd_cpp_ref_impl_boost_model_json(
     "masd.cpp_ref_impl.boost_model.json");
 const std::string path_masd_cpp_ref_impl_colours_json(
@@ -133,6 +141,8 @@ const std::string path_masd_cpp_ref_impl_force_write_json(
     "masd.cpp_ref_impl.force_write.json");
 const std::string path_masd_cpp_ref_impl_out_of_sync_json(
     "masd.cpp_ref_impl.out_of_sync.json");
+const std::string path_masd_cpp_ref_impl_do_not_delete_empty_dirs_json(
+    "masd.cpp_ref_impl.do_not_delete_empty_dirs.json");
 
 }
 
@@ -207,6 +217,9 @@ path cpp_ref_impl_generation::output_directory() {
     return output_directory_;
 }
 
+/*
+ * Dia
+ */
 path cpp_ref_impl_generation::input_masd_cpp_ref_impl_boost_model_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_masd_cpp_ref_impl_boost_model_dia;
@@ -319,6 +332,16 @@ path cpp_ref_impl_generation::input_masd_cpp_ref_impl_out_of_sync_dia() {
     return dia_models_directory_ / path_masd_cpp_ref_impl_out_of_sync_dia;
 }
 
+path cpp_ref_impl_generation::
+input_masd_cpp_ref_impl_do_not_delete_empty_dirs_dia() {
+    ensure_initialized();
+    return dia_models_directory_ / path_masd_cpp_ref_impl_do_not_delete_empty_dirs_dia;
+}
+
+/*
+ * JSON
+ */
+
 path cpp_ref_impl_generation::input_masd_cpp_ref_impl_boost_model_json() {
     ensure_initialized();
     return json_models_directory_ / path_masd_cpp_ref_impl_boost_model_json;
@@ -429,6 +452,13 @@ path cpp_ref_impl_generation::input_masd_cpp_ref_impl_force_write_json() {
 path cpp_ref_impl_generation::input_masd_cpp_ref_impl_out_of_sync_json() {
     ensure_initialized();
     return json_models_directory_ / path_masd_cpp_ref_impl_out_of_sync_json;
+}
+
+path cpp_ref_impl_generation::
+input_masd_cpp_ref_impl_do_not_delete_empty_dirs_json() {
+    ensure_initialized();
+    return json_models_directory_ /
+        path_masd_cpp_ref_impl_do_not_delete_empty_dirs_json;
 }
 
 }

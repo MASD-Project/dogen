@@ -70,6 +70,7 @@ public:
     static boost::filesystem::path input_masd_cpp_ref_impl_ignore_extra_dia();
     static boost::filesystem::path input_masd_cpp_ref_impl_force_write_dia();
     static boost::filesystem::path input_masd_cpp_ref_impl_out_of_sync_dia();
+    static boost::filesystem::path input_masd_cpp_ref_impl_do_not_delete_empty_dirs_dia();
 
     static boost::filesystem::path input_masd_cpp_ref_impl_boost_model_json();
     static boost::filesystem::path input_masd_cpp_ref_impl_colours_json();
@@ -93,6 +94,7 @@ public:
     static boost::filesystem::path input_masd_cpp_ref_impl_ignore_extra_json();
     static boost::filesystem::path input_masd_cpp_ref_impl_force_write_json();
     static boost::filesystem::path input_masd_cpp_ref_impl_out_of_sync_json();
+    static boost::filesystem::path input_masd_cpp_ref_impl_do_not_delete_empty_dirs_json();
 
 private:
     static boost::filesystem::path project_directory_;
