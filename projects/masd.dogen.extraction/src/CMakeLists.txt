@@ -35,6 +35,7 @@ set_target_properties(${lib_target_name}
 
 target_link_libraries(${lib_target_name}
     masd.dogen.utility.lib
+    masd.dogen.annotations.lib
     ${Boost_LIBRARIES})
 
 install(TARGETS ${lib_target_name} ARCHIVE DESTINATION lib COMPONENT libraries)

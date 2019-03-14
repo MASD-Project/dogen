@@ -22,6 +22,26 @@
 
 namespace masd::dogen::extraction {
 
+std::string traits::extraction::force_write() {
+    static std::string r("masd.extraction.force_write");
+    return r;
+}
+
+std::string traits::extraction::delete_extra_files() {
+    static std::string r("masd.extraction.delete_extra_files");
+    return r;
+}
+
+std::string traits::extraction::ignore_files_matching_regex() {
+    static std::string r("masd.extraction.ignore_files_matching_regex");
+    return r;
+}
+
+std::string traits::extraction::delete_empty_directories() {
+    static std::string r("masd.extraction.delete_empty_directories");
+    return r;
+}
+
 std::string traits::decoration::generate_decoration() {
     static std::string r("masd.decoration.generate_decoration");
     return r;

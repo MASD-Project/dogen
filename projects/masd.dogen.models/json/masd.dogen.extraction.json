@@ -8,6 +8,7 @@
     "masd.injection.reference": "cpp.std",
     "masd.injection.reference": "cpp.boost",
     "masd.injection.reference": "masd.dogen.tracing",
+    "masd.injection.reference": "masd.dogen.annotations",
     "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
     "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
     "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
@@ -626,6 +627,9 @@
     },
     {
       "name": "meta_model::model",
+      "stereotypes": [
+        "Annotatable"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -980,6 +984,21 @@
         {
           "name": "delete_empty_directories",
           "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::Annotatable",
+      "documentation": "Ability to have meta-data associated.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "annotation",
+          "type": "annotations::annotation",
+          "documentation": "Annotation for this element.\n"
         }
       ]
     }

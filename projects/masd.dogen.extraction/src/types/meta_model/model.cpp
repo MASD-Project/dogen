@@ -28,7 +28,8 @@ model::model()
       delete_empty_directories_(static_cast<bool>(0)) { }
 
 model::model(model&& rhs)
-    : name_(std::move(rhs.name_)),
+    : annotation_(std::move(rhs.annotation_)),
+      name_(std::move(rhs.name_)),
       language_(std::move(rhs.language_)),
       artefacts_(std::move(rhs.artefacts_)),
       managed_directories_(std::move(rhs.managed_directories_)),
@@ -40,6 +41,7 @@ model::model(model&& rhs)
       outputting_properties_(std::move(rhs.outputting_properties_)) { }
 
 model::model(
+    const masd::dogen::annotations::annotation& annotation,
     const std::string& name,
     const std::string& language,
     const std::list<masd::dogen::extraction::meta_model::artefact>& artefacts,
@@ -50,7 +52,8 @@ model::model(
     const boost::filesystem::path& cpp_headers_output_directory,
     const bool delete_empty_directories,
     const masd::dogen::extraction::meta_model::outputting_properties& outputting_properties)
-    : name_(name),
+    : annotation_(annotation),
+      name_(name),
       language_(language),
       artefacts_(artefacts),
       managed_directories_(managed_directories),
@@ -63,6 +66,7 @@ model::model(
 
 void model::swap(model& other) noexcept {
     using std::swap;
+    swap(annotation_, other.annotation_);
     swap(name_, other.name_);
     swap(language_, other.language_);
     swap(artefacts_, other.artefacts_);
@@ -76,7 +80,8 @@ void model::swap(model& other) noexcept {
 }
 
 bool model::operator==(const model& rhs) const {
-    return name_ == rhs.name_ &&
+    return annotation_ == rhs.annotation_ &&
+        name_ == rhs.name_ &&
         language_ == rhs.language_ &&
         artefacts_ == rhs.artefacts_ &&
         managed_directories_ == rhs.managed_directories_ &&
@@ -92,6 +97,22 @@ model& model::operator=(model other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const masd::dogen::annotations::annotation& model::annotation() const {
+    return annotation_;
+}
+
+masd::dogen::annotations::annotation& model::annotation() {
+    return annotation_;
+}
+
+void model::annotation(const masd::dogen::annotations::annotation& v) {
+    annotation_ = v;
+}
+
+void model::annotation(const masd::dogen::annotations::annotation&& v) {
+    annotation_ = std::move(v);
 }
 
 const std::string& model::name() const {

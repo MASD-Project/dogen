@@ -30,6 +30,13 @@
 namespace masd::dogen::extraction {
 
 struct traits {
+    struct extraction {
+        static std::string force_write();
+        static std::string delete_extra_files();
+        static std::string ignore_files_matching_regex();
+        static std::string delete_empty_directories();
+    };
+
     struct decoration {
         /**
          * @brief Whether to generate the decoration or not.

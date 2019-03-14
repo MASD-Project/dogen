@@ -25,24 +25,46 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.extraction/types/transforms/context.hpp"
+#include "masd.dogen.extraction/types/meta_model/model.hpp"
+#include "masd.dogen.extraction/types/meta_model/outputting_properties.hpp"
 
 namespace masd::dogen::extraction::transforms {
 
+/**
+ * @brief Populates the outputting properties of the model.
+ */
 class update_outputting_properties_transform final {
-public:
-    update_outputting_properties_transform() = default;
-    update_outputting_properties_transform(const update_outputting_properties_transform&) = default;
-    update_outputting_properties_transform(update_outputting_properties_transform&&) = default;
-    ~update_outputting_properties_transform() = default;
-    update_outputting_properties_transform& operator=(const update_outputting_properties_transform&) = default;
+private:
+    struct type_group {
+        annotations::type force_write;
+        annotations::type delete_extra_files;
+        annotations::type ignore_files_matching_regex;
+        annotations::type delete_empty_directories;
+    };
+
+    static type_group make_type_group(const annotations::type_repository& atrp);
+
+    static bool obtain_force_write(const type_group& tg,
+        const annotations::annotation& ra);
+
+    static bool obtain_delete_extra_files(const type_group& tg,
+        const annotations::annotation& ra);
+
+    static std::vector<std::string> obtain_ignore_files_matching_regex(
+        const type_group& tg, const annotations::annotation& ra);
+
+    static bool obtain_delete_empty_directories(const type_group& tg,
+        const annotations::annotation& ra);
+
+    static meta_model::outputting_properties make_outputting_properties(
+        const context& ctx, const annotations::annotation& ra);
 
 public:
-    bool operator==(const update_outputting_properties_transform& rhs) const;
-    bool operator!=(const update_outputting_properties_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

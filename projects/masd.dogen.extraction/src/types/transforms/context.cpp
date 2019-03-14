@@ -19,19 +19,30 @@
  *
  */
 #include "masd.dogen.tracing/types/tracer.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.extraction/types/transforms/context.hpp"
 
 namespace masd::dogen::extraction::transforms {
 
 context::context(
+    const boost::shared_ptr<masd::dogen::annotations::type_repository>& type_repository,
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer,
     const boost::optional<masd::dogen::diffing_configuration>& diffing_configuration,
     const boost::optional<masd::dogen::reporting_configuration>& reporting_configuration,
     const bool dry_run_mode_enabled)
-    : tracer_(tracer),
+    : type_repository_(type_repository),
+      tracer_(tracer),
       diffing_configuration_(diffing_configuration),
       reporting_configuration_(reporting_configuration),
       dry_run_mode_enabled_(dry_run_mode_enabled) { }
+
+const boost::shared_ptr<masd::dogen::annotations::type_repository>& context::type_repository() const {
+    return type_repository_;
+}
+
+void context::type_repository(const boost::shared_ptr<masd::dogen::annotations::type_repository>& v) {
+    type_repository_ = v;
+}
 
 const boost::shared_ptr<masd::dogen::tracing::tracer>& context::tracer() const {
     return tracer_;

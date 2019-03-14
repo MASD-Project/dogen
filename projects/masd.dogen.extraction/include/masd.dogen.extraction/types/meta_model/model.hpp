@@ -30,6 +30,7 @@
 #include <vector>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
+#include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.extraction/types/meta_model/outputting_properties.hpp"
 
@@ -48,6 +49,7 @@ public:
 
 public:
     model(
+        const masd::dogen::annotations::annotation& annotation,
         const std::string& name,
         const std::string& language,
         const std::list<masd::dogen::extraction::meta_model::artefact>& artefacts,
@@ -60,6 +62,16 @@ public:
         const masd::dogen::extraction::meta_model::outputting_properties& outputting_properties);
 
 public:
+    /**
+     * @brief Annotation for this element.
+     */
+    /**@{*/
+    const masd::dogen::annotations::annotation& annotation() const;
+    masd::dogen::annotations::annotation& annotation();
+    void annotation(const masd::dogen::annotations::annotation& v);
+    void annotation(const masd::dogen::annotations::annotation&& v);
+    /**@}*/
+
     const std::string& name() const;
     std::string& name();
     void name(const std::string& v);
@@ -142,6 +154,7 @@ public:
     model& operator=(model other);
 
 private:
+    masd::dogen::annotations::annotation annotation_;
     std::string name_;
     std::string language_;
     std::list<masd::dogen::extraction::meta_model::artefact> artefacts_;

@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
+#include "masd.dogen.annotations/io/annotation_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/artefact_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/outputting_properties_io.hpp"
@@ -86,6 +87,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
 
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::extraction::meta_model::model\"" << ", "
+      << "\"annotation\": " << v.annotation() << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"language\": " << "\"" << tidy_up_string(v.language()) << "\"" << ", "
       << "\"artefacts\": " << v.artefacts() << ", "

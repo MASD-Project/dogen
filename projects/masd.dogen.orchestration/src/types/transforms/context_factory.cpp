@@ -176,6 +176,7 @@ context context_factory::make_context(const configuration& cfg,
     r.injection_context().type_repository(atrp);
     r.coding_context().type_repository(atrp);
     r.generation_context().type_repository(atrp);
+    r.extraction_context().type_repository(atrp);
 
     /*
      * Setup the annotations related factories.
