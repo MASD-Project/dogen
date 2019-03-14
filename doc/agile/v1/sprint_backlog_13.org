@@ -14,23 +14,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-14 Thu 11:23]
+#+CAPTION: Clock summary at [2019-03-14 Thu 12:12]
 | <75>                                                     |         |       |      |       |
 | Headline                                                 | Time    |       |      |     % |
 |----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                             | *29:10* |       |      | 100.0 |
+| *Total time*                                             | *29:58* |       |      | 100.0 |
 |----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                  | 29:10   |       |      | 100.0 |
-| Active                                                   |         | 29:10 |      | 100.0 |
-| Edit release notes for previous sprint                   |         |       | 2:22 |   8.1 |
-| Sprint and product backlog grooming                      |         |       | 2:16 |   7.8 |
-| Create a video demo for the sprint's features            |         |       | 3:47 |  13.0 |
+| Stories                                                  | 29:58   |       |      | 100.0 |
+| Active                                                   |         | 29:58 |      | 100.0 |
+| Edit release notes for previous sprint                   |         |       | 2:22 |   7.9 |
+| Sprint and product backlog grooming                      |         |       | 2:16 |   7.6 |
+| Create a video demo for the sprint's features            |         |       | 3:47 |  12.6 |
 | Make projects directory env optional                     |         |       | 0:10 |   0.6 |
-| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   2.6 |
-| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  19.8 |
-| Delete extra files appears broken at present             |         |       | 6:26 |  22.1 |
-| Code generation of tests for dogen models                |         |       | 3:33 |  12.2 |
-| Empty directories should be deleted                      |         |       | 4:05 |  14.0 |
+| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   2.5 |
+| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  19.2 |
+| Delete extra files appears broken at present             |         |       | 6:26 |  21.5 |
+| Code generation of tests for dogen models                |         |       | 3:33 |  11.8 |
+| Empty directories should be deleted                      |         |       | 4:53 |  16.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -562,6 +562,7 @@ canned tests.
 
 *** STARTED Empty directories should be deleted                       :story:
     :LOGBOOK:
+    CLOCK: [2019-03-14 Thu 11:24]--[2019-03-14 Thu 12:12] =>  0:48
     CLOCK: [2019-03-14 Thu 10:16]--[2019-03-14 Thu 11:23] =>  1:07
     CLOCK: [2019-03-14 Thu 09:59]--[2019-03-14 Thu 10:15] =>  0:16
     CLOCK: [2019-03-14 Thu 09:11]--[2019-03-14 Thu 09:58] =>  0:47
