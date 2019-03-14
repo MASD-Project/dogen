@@ -14,23 +14,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-14 Thu 14:05]
+#+CAPTION: Clock summary at [2019-03-14 Thu 15:52]
 | <75>                                                     |         |       |      |       |
 | Headline                                                 | Time    |       |      |     % |
 |----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                             | *30:42* |       |      | 100.0 |
+| *Total time*                                             | *31:16* |       |      | 100.0 |
 |----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                  | 30:42   |       |      | 100.0 |
-| Active                                                   |         | 30:42 |      | 100.0 |
-| Edit release notes for previous sprint                   |         |       | 2:22 |   7.7 |
-| Sprint and product backlog grooming                      |         |       | 2:16 |   7.4 |
-| Create a video demo for the sprint's features            |         |       | 3:47 |  12.3 |
+| Stories                                                  | 31:16   |       |      | 100.0 |
+| Active                                                   |         | 31:16 |      | 100.0 |
+| Edit release notes for previous sprint                   |         |       | 2:22 |   7.6 |
+| Sprint and product backlog grooming                      |         |       | 2:50 |   9.1 |
+| Create a video demo for the sprint's features            |         |       | 3:47 |  12.1 |
 | Make projects directory env optional                     |         |       | 0:10 |   0.5 |
 | Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   2.4 |
-| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  18.8 |
-| Delete extra files appears broken at present             |         |       | 6:26 |  21.0 |
-| Empty directories should be deleted                      |         |       | 5:37 |  18.3 |
-| Code generation of tests for dogen models                |         |       | 3:33 |  11.6 |
+| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  18.4 |
+| Delete extra files appears broken at present             |         |       | 6:26 |  20.6 |
+| Empty directories should be deleted                      |         |       | 5:37 |  18.0 |
+| Code generation of tests for dogen models                |         |       | 3:33 |  11.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -229,6 +229,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-03-14 Thu 15:18]--[2019-03-14 Thu 15:52] =>  0:34
     CLOCK: [2019-03-12 Tue 08:43]--[2019-03-12 Tue 08:56] =>  0:13
     CLOCK: [2019-03-11 Mon 18:46]--[2019-03-11 Mon 19:07] =>  0:21
     CLOCK: [2019-03-11 Mon 08:02]--[2019-03-11 Mon 08:53] =>  0:51
@@ -471,25 +472,25 @@ and perform some basic sanity checks on the content.
 
 *** COMPLETED Delete extra files appears broken at present            :story:
     CLOSED: [2019-03-13 Wed 17:57]
-    :LOGBOOK:
-    CLOCK: [2019-03-13 Wed 16:04]--[2019-03-13 Wed 17:57] =>  1:53
-    CLOCK: [2019-03-13 Wed 15:27]--[2019-03-13 Wed 16:03] =>  0:36
-    CLOCK: [2019-03-13 Wed 13:32]--[2019-03-13 Wed 15:26] =>  1:54
-    CLOCK: [2019-03-13 Wed 10:35]--[2019-03-13 Wed 11:59] =>  1:24
-    CLOCK: [2019-03-13 Wed 10:29]--[2019-03-13 Wed 10:34] =>  0:05
-    CLOCK: [2019-03-12 Tue 15:20]--[2019-03-12 Tue 15:36] =>  0:16
-    CLOCK: [2019-03-12 Tue 12:41]--[2019-03-12 Tue 12:59] =>  0:18
-    :END:
+     :LOGBOOK:
+     CLOCK: [2019-03-13 Wed 16:04]--[2019-03-13 Wed 17:57] =>  1:53
+     CLOCK: [2019-03-13 Wed 15:27]--[2019-03-13 Wed 16:03] =>  0:36
+     CLOCK: [2019-03-13 Wed 13:32]--[2019-03-13 Wed 15:26] =>  1:54
+     CLOCK: [2019-03-13 Wed 10:35]--[2019-03-13 Wed 11:59] =>  1:24
+     CLOCK: [2019-03-13 Wed 10:29]--[2019-03-13 Wed 10:34] =>  0:05
+     CLOCK: [2019-03-12 Tue 15:20]--[2019-03-12 Tue 15:36] =>  0:16
+     CLOCK: [2019-03-12 Tue 12:41]--[2019-03-12 Tue 12:59] =>  0:18
+     :END:
 
-Can't find any evidence of code in extraction to handle the case where
-the flag is set to false.
+ Can't find any evidence of code in extraction to handle the case where
+ the flag is set to false.
 
-Notes:
+ Notes:
 
-- implement it in terms of the existing operations, e.g. set it to
-  ignore, reason user requested not to delete extra files .
-- add test that validates the flag on and off. No need to check the
-  deletion itself, we can trust remove files transform.
+ - implement it in terms of the existing operations, e.g. set it to
+   ignore, reason user requested not to delete extra files .
+ - add test that validates the flag on and off. No need to check the
+   deletion itself, we can trust remove files transform.
 
 *** COMPLETED Empty directories should be deleted                     :story:
     CLOSED: [2019-03-14 Thu 14:05]
@@ -596,6 +597,41 @@ of two approaches:
 If an object has pointers, the canned tests will not perform a deep
 copy of the object. We need to [[*Add%20support%20for%20object%20cloning][implement cloning]] and then use it in
 canned tests.
+
+*** Handling of inclusion constants needs reviewing                   :story:
+
+At present we hard-coded "inclusion_constants" in C++ formatters for
+common includes such as string, etc. However, what we are really
+trying to say is that a given model type for a given facet should have
+a resolver level dependency against a type on a PDM.
+
+This is not so straightforward: up to now the idea was that you'd
+declare the types level dependency between types. In effect, we have
+one big upfront association between types at the coding level and
+then we use that to determine what it means in terms of associations
+between facets. Now, we already have some hacks to deal with the
+relationships between facets:
+
+- types needs types;
+- most other facets need themselves and types, but not all.
+
+This is handled via the =inclusion_dependencies= functions in each
+formatter, which also injects additional includes via
+inclusion_constants. However, the problem with this approach is that
+we have a silent dependency against models such as boost model and
+system model. The right solution would be something like:
+
+- formatters know what models they require and at the beginning of
+  processing we inject all model references from the formatters.
+- coding has a new type of association: implicit dependencies. These
+  are functions with a name and a facet that map to a facet. Example:
+  serialisation requires (=std::string=, types). The formatter injects
+  all of these relationships to each object (by meta-type).
+- this container is taken into account when computing the includes.
+- it is also taken into account when resolving names.
+- coding could provide an interface against which the formatters could
+  register to provide this information. This is somewhat similar to
+  what we do with dynamic transforms.
 
 *** Consider adding an indent JSON transform                          :story:
 
