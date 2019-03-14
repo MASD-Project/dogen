@@ -14,22 +14,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-13 Wed 17:57]
+#+CAPTION: Clock summary at [2019-03-14 Thu 06:39]
 | <75>                                                     |         |       |      |       |
 | Headline                                                 | Time    |       |      |     % |
 |----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                             | *25:05* |       |      | 100.0 |
+| *Total time*                                             | *25:16* |       |      | 100.0 |
 |----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                  | 25:05   |       |      | 100.0 |
-| Active                                                   |         | 25:05 |      | 100.0 |
+| Stories                                                  | 25:16   |       |      | 100.0 |
+| Active                                                   |         | 25:16 |      | 100.0 |
 | Edit release notes for previous sprint                   |         |       | 2:22 |   9.4 |
 | Sprint and product backlog grooming                      |         |       | 2:16 |   9.0 |
-| Create a video demo for the sprint's features            |         |       | 3:47 |  15.1 |
+| Create a video demo for the sprint's features            |         |       | 3:47 |  15.0 |
 | Make projects directory env optional                     |         |       | 0:10 |   0.7 |
 | Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   3.0 |
-| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  23.0 |
-| Delete extra files appears broken at present             |         |       | 6:26 |  25.6 |
-| Code generation of tests for dogen models                |         |       | 3:33 |  14.2 |
+| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  22.8 |
+| Delete extra files appears broken at present             |         |       | 6:26 |  25.5 |
+| Code generation of tests for dogen models                |         |       | 3:33 |  14.1 |
+| Empty directories should be deleted                      |         |       | 0:11 |   0.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -559,7 +560,10 @@ If an object has pointers, the canned tests will not perform a deep
 copy of the object. We need to [[*Add%20support%20for%20object%20cloning][implement cloning]] and then use it in
 canned tests.
 
-*** Empty directories should be deleted                               :story:
+*** STARTED Empty directories should be deleted                       :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-14 Thu 06:28]--[2019-03-14 Thu 06:39] =>  0:11
+    :END:
 
 #+begin_quote
 *Story*: As a dogen user, I want empty directories to be removed so

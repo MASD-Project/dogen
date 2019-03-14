@@ -54,7 +54,8 @@ public:
         const bool force_write,
         const bool delete_extra_files,
         const std::vector<std::string>& ignore_files_matching_regex,
-        const boost::filesystem::path& cpp_headers_output_directory);
+        const boost::filesystem::path& cpp_headers_output_directory,
+        const bool delete_empty_directories);
 
 public:
     const std::string& name() const;
@@ -115,6 +116,14 @@ public:
     void cpp_headers_output_directory(const boost::filesystem::path&& v);
     /**@}*/
 
+    /**
+     * @brief If true, deletes all empty directories inside the project.
+     */
+    /**@{*/
+    bool delete_empty_directories() const;
+    void delete_empty_directories(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -134,6 +143,7 @@ private:
     bool delete_extra_files_;
     std::vector<std::string> ignore_files_matching_regex_;
     boost::filesystem::path cpp_headers_output_directory_;
+    bool delete_empty_directories_;
 };
 
 }

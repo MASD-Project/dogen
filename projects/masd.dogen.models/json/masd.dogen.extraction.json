@@ -618,6 +618,10 @@
     },
     {
       "name": "meta_model",
+      "documentation": "The extraction meta-model captures the entities required\nto transport information from the MASD technical space to\nexternal technical spaces.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
@@ -659,6 +663,11 @@
           "name": "cpp_headers_output_directory",
           "type": "boost::filesystem::path",
           "documentation": "Directory in which to place C++ header files. Must be a relative path.\n"
+        },
+        {
+          "name": "delete_empty_directories",
+          "type": "bool",
+          "documentation": "If true, deletes all empty directories inside the project.\n"
         }
       ]
     },

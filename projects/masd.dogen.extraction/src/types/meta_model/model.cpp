@@ -24,7 +24,8 @@ namespace masd::dogen::extraction::meta_model {
 
 model::model()
     : force_write_(static_cast<bool>(0)),
-      delete_extra_files_(static_cast<bool>(0)) { }
+      delete_extra_files_(static_cast<bool>(0)),
+      delete_empty_directories_(static_cast<bool>(0)) { }
 
 model::model(model&& rhs)
     : name_(std::move(rhs.name_)),
@@ -34,7 +35,8 @@ model::model(model&& rhs)
       force_write_(std::move(rhs.force_write_)),
       delete_extra_files_(std::move(rhs.delete_extra_files_)),
       ignore_files_matching_regex_(std::move(rhs.ignore_files_matching_regex_)),
-      cpp_headers_output_directory_(std::move(rhs.cpp_headers_output_directory_)) { }
+      cpp_headers_output_directory_(std::move(rhs.cpp_headers_output_directory_)),
+      delete_empty_directories_(std::move(rhs.delete_empty_directories_)) { }
 
 model::model(
     const std::string& name,
@@ -44,7 +46,8 @@ model::model(
     const bool force_write,
     const bool delete_extra_files,
     const std::vector<std::string>& ignore_files_matching_regex,
-    const boost::filesystem::path& cpp_headers_output_directory)
+    const boost::filesystem::path& cpp_headers_output_directory,
+    const bool delete_empty_directories)
     : name_(name),
       language_(language),
       artefacts_(artefacts),
@@ -52,7 +55,8 @@ model::model(
       force_write_(force_write),
       delete_extra_files_(delete_extra_files),
       ignore_files_matching_regex_(ignore_files_matching_regex),
-      cpp_headers_output_directory_(cpp_headers_output_directory) { }
+      cpp_headers_output_directory_(cpp_headers_output_directory),
+      delete_empty_directories_(delete_empty_directories) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -64,6 +68,7 @@ void model::swap(model& other) noexcept {
     swap(delete_extra_files_, other.delete_extra_files_);
     swap(ignore_files_matching_regex_, other.ignore_files_matching_regex_);
     swap(cpp_headers_output_directory_, other.cpp_headers_output_directory_);
+    swap(delete_empty_directories_, other.delete_empty_directories_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -74,7 +79,8 @@ bool model::operator==(const model& rhs) const {
         force_write_ == rhs.force_write_ &&
         delete_extra_files_ == rhs.delete_extra_files_ &&
         ignore_files_matching_regex_ == rhs.ignore_files_matching_regex_ &&
-        cpp_headers_output_directory_ == rhs.cpp_headers_output_directory_;
+        cpp_headers_output_directory_ == rhs.cpp_headers_output_directory_ &&
+        delete_empty_directories_ == rhs.delete_empty_directories_;
 }
 
 model& model::operator=(model other) {
@@ -193,6 +199,14 @@ void model::cpp_headers_output_directory(const boost::filesystem::path& v) {
 
 void model::cpp_headers_output_directory(const boost::filesystem::path&& v) {
     cpp_headers_output_directory_ = std::move(v);
+}
+
+bool model::delete_empty_directories() const {
+    return delete_empty_directories_;
+}
+
+void model::delete_empty_directories(const bool v) {
+    delete_empty_directories_ = v;
 }
 
 }

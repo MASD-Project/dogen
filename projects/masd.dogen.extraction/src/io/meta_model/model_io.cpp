@@ -92,7 +92,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"force_write\": " << v.force_write() << ", "
       << "\"delete_extra_files\": " << v.delete_extra_files() << ", "
       << "\"ignore_files_matching_regex\": " << v.ignore_files_matching_regex() << ", "
-      << "\"cpp_headers_output_directory\": " << "\"" << v.cpp_headers_output_directory().generic_string() << "\""
+      << "\"cpp_headers_output_directory\": " << "\"" << v.cpp_headers_output_directory().generic_string() << "\"" << ", "
+      << "\"delete_empty_directories\": " << v.delete_empty_directories()
       << " }";
     return(s);
 }
