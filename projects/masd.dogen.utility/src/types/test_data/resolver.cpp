@@ -19,13 +19,17 @@
  *
  */
 #include <boost/filesystem.hpp>
-#include <boost/filesystem/operations.hpp>
 #include <boost/throw_exception.hpp>
+#include <boost/filesystem/operations.hpp>
+#include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/test_data/test_data_exception.hpp"
 #include "masd.dogen.utility/types/test_data/resolver.hpp"
 
 namespace {
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory("utility.test_data.resolver"));
 
 const std::string test_data_dir_not_found("Test data directory not found");
 const std::string relative_path_to_td_dir("../test_data");
@@ -39,8 +43,10 @@ boost::filesystem::path resolver::test_data_directory() {
     const auto r(ed / relative_path_to_td_dir);
 
     if (!boost::filesystem::exists(r)) {
+        const auto gs(r.generic_string());
+        BOOST_LOG_SEV(lg, error) << test_data_dir_not_found << gs;
         BOOST_THROW_EXCEPTION(
-            test_data_exception(test_data_dir_not_found + r.string()));
+            test_data_exception(test_data_dir_not_found + gs));
     }
     return r;
 }

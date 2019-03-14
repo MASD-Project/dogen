@@ -21,9 +21,19 @@
 #include <boost/filesystem.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/operations.hpp>
+#include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/filesystem/file_not_found.hpp"
 #include "masd.dogen.utility/types/test_data/resolver.hpp"
 #include "masd.dogen.utility/types/test_data/validating_resolver.hpp"
+
+namespace {
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory("utility.test_data.validating_resolver"));
+
+const std::string file_not_found_msg("File not found: ");
+
+}
 
 namespace masd::dogen::utility::test_data {
 
@@ -33,8 +43,11 @@ validating_resolver::resolve(boost::filesystem::path relative) {
     if (boost::filesystem::exists(r))
         return r;
 
+    const auto gs(r.generic_string());
+    BOOST_LOG_SEV(lg, error) << file_not_found_msg << gs;
+
     using dogen::utility::filesystem::file_not_found;
-    BOOST_THROW_EXCEPTION(file_not_found(r.string()));
+    BOOST_THROW_EXCEPTION(file_not_found(file_not_found_msg + gs));
 }
 
 }

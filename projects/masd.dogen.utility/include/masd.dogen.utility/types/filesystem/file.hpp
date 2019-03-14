@@ -72,13 +72,6 @@ inline void write(const boost::filesystem::path& path,
 }
 
 /**
- * @brief Returns all files available in directory, recursively.
- *
- * Returned paths are absolute paths.
- */
-std::set<boost::filesystem::path> find_files(const boost::filesystem::path& d);
-
-/**
  * @brief Returns all files available in all input directories, recursively.
  *
  * Returned paths are absolute paths. If you supply the same directory
@@ -86,6 +79,8 @@ std::set<boost::filesystem::path> find_files(const boost::filesystem::path& d);
  * on once in the set.
  */
 /**@{*/
+std::set<boost::filesystem::path>
+find_files(const boost::filesystem::path& dir);
 std::set<boost::filesystem::path>
 find_files(const std::vector<boost::filesystem::path>& dirs);
 std::set<boost::filesystem::path>
@@ -104,6 +99,14 @@ boost::filesystem::path find_file_recursively_upwards(
  * @brief Deletes all files in the supplied list.
  */
 void remove(const std::list<boost::filesystem::path>& files);
+
+/**
+ * @brief Removes all empty directories, recursively.
+ */
+/**@{*/
+void remove_empty_directories(const boost::filesystem::path& dir);
+void remove_empty_directories(const std::list<boost::filesystem::path>& dirs);
+/**@}*/
 
 }
 

@@ -18,30 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_UTILITY_FILESYSTEM_IO_ERROR_HPP
-#define MASD_DOGEN_UTILITY_FILESYSTEM_IO_ERROR_HPP
+#ifndef MASD_DOGEN_UTILITY_TYPES_FILESYSTEM_IO_ERROR_HPP
+#define MASD_DOGEN_UTILITY_TYPES_FILESYSTEM_IO_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.utility/types/exception/utility_exception.hpp"
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace masd::dogen::utility::filesystem {
 
 /**
- * @brief An error occurred whilst reading or writing.
- *
+ * @brief An error occurred whilst performing an IO operation.
  */
-class io_error : public dogen::utility::exception::exception {
+class io_error : public virtual std::exception, public virtual boost::exception {
 public:
-    /**
-     * @param message Error message. Must be a string literal.
-     */
-    io_error(std::string message);
-    io_error() { }
+    io_error() = default;
+    ~io_error() noexcept = default;
 
-    virtual ~io_error() throw() {}
+public:
+    explicit io_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
 };
 
 }

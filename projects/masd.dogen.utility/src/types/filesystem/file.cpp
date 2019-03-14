@@ -23,6 +23,7 @@
 #include <boost/filesystem/operations.hpp>
 #include <boost/range/iterator_range.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/filesystem/io_error.hpp"
 #include "masd.dogen.utility/types/filesystem/file_not_found.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 
@@ -32,9 +33,8 @@ using namespace masd::dogen::utility::log;
 auto lg(logger_factory("utility.filesystem.file"));
 
 const std::string invalid_directory("Not a directory: ");
-const std::string file_not_found("File not found: ");
+const std::string file_not_found_msg("File not found: ");
 const std::string directory_not_found("Could not find directory: ");
-
 const std::string dot(".");
 
 }
@@ -57,8 +57,8 @@ std::string read_file_content(const boost::filesystem::path& path) {
 
     if (!boost::filesystem::exists(path)) {
         const auto gs(path.generic_string());
-        BOOST_LOG_SEV(lg, error) << ::file_not_found << gs;
-        BOOST_THROW_EXCEPTION(file_not_found(gs));
+        BOOST_LOG_SEV(lg, error) << file_not_found_msg << gs;
+        BOOST_THROW_EXCEPTION(file_not_found(file_not_found_msg + gs));
     }
 
     boost::filesystem::ifstream s(path);
@@ -72,28 +72,31 @@ void write_file_content(const boost::filesystem::path& path,
     stream << content;
 }
 
-std::set<boost::filesystem::path> find_files(const boost::filesystem::path& d) {
-    std::set<boost::filesystem::path> r;
+std::set<boost::filesystem::path> find_files(const boost::filesystem::path& dir) {
+    using namespace boost::filesystem;
+    std::set<path> r;
 
-    if (!boost::filesystem::exists(d)) {
-        const auto gs(d.generic_string());
+    if (!exists(dir)) {
+        const auto gs(dir.generic_string());
         BOOST_LOG_SEV(lg, error) << directory_not_found << gs;
         BOOST_THROW_EXCEPTION(file_not_found(directory_not_found + gs));
     }
 
-    if (!boost::filesystem::is_directory(d)) {
-        const auto gs(d.generic_string());
+    if (!is_directory(dir)) {
+        const auto gs(dir.generic_string());
         BOOST_LOG_SEV(lg, error) << invalid_directory << gs;
         BOOST_THROW_EXCEPTION(file_not_found(invalid_directory + gs));
     }
 
-    using boost::filesystem::recursive_directory_iterator;
-    const auto begin = recursive_directory_iterator(d);
-    const auto end = recursive_directory_iterator();
-    for (const auto& p: boost::make_iterator_range(begin, end)) {
-        const auto& abs(boost::filesystem::absolute(p));
-        if (boost::filesystem::is_regular_file(abs))
+
+    recursive_directory_iterator i(dir);
+    const recursive_directory_iterator end;
+    while (i != end) {
+        const auto p(i->path());
+        const auto abs(boost::filesystem::absolute(p));
+        if (is_regular_file(abs))
             r.insert(abs);
+        ++i;
     }
     return r;
 }
@@ -172,6 +175,29 @@ void remove(const std::list<boost::filesystem::path>& files) {
         BOOST_LOG_SEV(lg, debug) << "Removing file: " << f.generic_string();
         boost::filesystem::remove(f);
     }
+}
+
+void remove_empty_directories(const boost::filesystem::path& dir) {
+    using namespace boost::filesystem;
+    if (!is_directory(dir)) {
+        const auto gs(dir.generic_string());
+        BOOST_LOG_SEV(lg, error) << invalid_directory << gs;
+        BOOST_THROW_EXCEPTION(io_error(invalid_directory + gs));
+    }
+
+    recursive_directory_iterator i(dir);
+    const recursive_directory_iterator end;
+    while (i != end) {
+        const auto p(i->path());
+        ++i;
+        if (is_directory(p) && is_empty(p))
+            remove(p);
+    }
+}
+
+void remove_empty_directories(const std::list<boost::filesystem::path>& dirs) {
+    for (const auto& dir : dirs)
+        remove_empty_directories(dir);
 }
 
 }

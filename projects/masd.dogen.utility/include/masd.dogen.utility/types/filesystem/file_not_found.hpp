@@ -18,30 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_UTILITY_FILESYSTEM_FILE_NOT_FOUND_HPP
-#define MASD_DOGEN_UTILITY_FILESYSTEM_FILE_NOT_FOUND_HPP
+#ifndef MASD_DOGEN_UTILITY_TYPES_FILESYSTEM_FILE_NOT_FOUND_HPP
+#define MASD_DOGEN_UTILITY_TYPES_FILESYSTEM_FILE_NOT_FOUND_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.utility/types/exception/utility_exception.hpp"
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace masd::dogen::utility::filesystem {
 
 /**
- * @brief A file requested by the user could not be located.
- *
+ * @brief File was not found.
  */
-class file_not_found : public dogen::utility::exception::exception {
+class file_not_found : public virtual std::exception, public virtual boost::exception {
 public:
-    /**
-     * @param message Error message. Must be a string literal.
-     */
-    file_not_found(std::string message);
-    file_not_found() { }
+    file_not_found() = default;
+    ~file_not_found() noexcept = default;
 
-    virtual ~file_not_found() throw() {}
+public:
+    explicit file_not_found(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
 };
 
 }

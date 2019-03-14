@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.utility/types/filesystem/file_not_found.hpp"
+#ifndef MASD_DOGEN_UTILITY_TYPES_FILESYSTEM_IO_ERROR_FWD_HPP
+#define MASD_DOGEN_UTILITY_TYPES_FILESYSTEM_IO_ERROR_FWD_HPP
 
-namespace {
-
-const std::string file_not_found("File not found: ");
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace masd::dogen::utility::filesystem {
 
-file_not_found::file_not_found(std::string message)
-    : dogen::utility::exception::exception(::file_not_found + message) { }
+class io_error;
 
 }
+
+#endif

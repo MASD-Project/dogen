@@ -51,15 +51,17 @@
     },
     {
       "name": "filesystem::file_not_found",
+      "documentation": "File was not found.\n",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::exception"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "filesystem::io_error",
+      "documentation": "An error occurred whilst performing an IO operation.\n",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::exception"
       ],
       "fallback_element_type": "masd::object"
     },

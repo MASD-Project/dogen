@@ -44,7 +44,7 @@ apply(const context& ctx, const meta_model::model& m) {
      * If we don't have any artefacts then we're done.
      */
     if (m.artefacts().empty()) {
-        BOOST_LOG_SEV(lg, warn) << "No artefacts were generated.";
+        BOOST_LOG_SEV(lg, info) << "No artefacts were generated.";
         return;
     }
 
@@ -52,7 +52,7 @@ apply(const context& ctx, const meta_model::model& m) {
      * If the user requested a dry run, we cannot execute.
      */
     if (ctx.dry_run_mode_enabled()) {
-        BOOST_LOG_SEV(lg, warn) << "Dry run mode is enabled, not executing.";
+        BOOST_LOG_SEV(lg, info) << "Dry run mode is enabled, not executing.";
         return;
     }
 
