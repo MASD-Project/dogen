@@ -56,6 +56,9 @@ apply(const context& ctx, const meta_model::model& m) {
         return;
     }
 
+    /*
+     * Collect all the files to remove across the model.
+     */
     std::list<boost::filesystem::path> unexpected;
     for (const auto& a : m.artefacts()) {
         using extraction::meta_model::operation_type;
@@ -63,11 +66,41 @@ apply(const context& ctx, const meta_model::model& m) {
             unexpected.push_back(a.path());
     }
 
+    /**
+     * @brief If no files were found, we're done. Note that we don't
+     * bother removing empty directories if we did not remove any
+     * files.
+     */
     if (unexpected.empty()) {
         BOOST_LOG_SEV(lg, debug) << "No files found to remove.";
         return;
     }
+
+    /**
+     * @brief Remove all unwanted files.
+     */
+    BOOST_LOG_SEV(lg, debug) << "Starting to remove files.";
     utility::filesystem::remove(unexpected);
+    BOOST_LOG_SEV(lg, debug) << "Removed files.";
+
+    /**
+     * @brief If requested by the user, get rid of any empty
+     * directories caused by the file removal. Note that this is
+     * implemented in a bit of an optimistic way:
+     *
+     * - we can remove empty directories created by the user that are
+     *   not related to code generation.
+     *
+     * - we are not honouring ignore regexes. We probably should not
+     *   remove a directory if it matches a ignore regex.
+     *
+     * For now this approach is good enough.
+     */
+    if (m.outputting_properties().delete_empty_directories()) {
+        BOOST_LOG_SEV(lg, debug) << "Starting to remove empty directories.";
+        utility::filesystem::remove_empty_directories(m.managed_directories());
+        BOOST_LOG_SEV(lg, debug) << "Removed empty directories.";
+    }
 }
 
 }

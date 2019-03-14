@@ -190,8 +190,11 @@ void remove_empty_directories(const boost::filesystem::path& dir) {
     while (i != end) {
         const auto p(i->path());
         ++i;
-        if (is_directory(p) && is_empty(p))
+        if (is_directory(p) && is_empty(p)) {
+            BOOST_LOG_SEV(lg, debug) << "Removing empty directory: "
+                                     << p.generic_string();
             remove(p);
+        }
     }
 }
 
