@@ -20,6 +20,7 @@
  */
 #include "masd.dogen.generation.cpp/types/formatters/tests/class_implementation_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/tests/traits.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/test_data/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/types/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/formatting_error.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/inclusion_constants.hpp"
@@ -86,18 +87,15 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const coding::meta_model::element& e) const {
 
-    const auto& o(assistant::as<coding::meta_model::object>(e));
-    const auto carch(traits::canonical_archetype());
+    using coding::meta_model::object;
+    const auto& o(assistant::as<object>(e));
     auto builder(f.make());
-    builder.add(o.name(), carch);
+    builder.add(o.name(), types::traits::class_header_archetype());
+    builder.add(o.name(), test_data::traits::class_header_archetype());
 
-    builder.add(o.transparent_associations(), carch);
-    builder.add(o.opaque_associations(), carch);
-    builder.add(o.parents(), carch);
-
-//#include <boost/test/unit_test.hpp>
-//#include "masd.dogen.utility/types/test/logging.hpp"
-
+    using ic = inclusion_constants;
+    builder.add(ic::std::string());
+    builder.add(ic::boost::test::unit_test());
 
     return builder.build();
 }
@@ -108,17 +106,34 @@ format(const context& ctx, const coding::meta_model::element& e) const {
     const auto& o(a.as<coding::meta_model::object>(e));
     {
         auto sbf(a.make_scoped_boilerplate_formatter(o));
-a.stream() << "namespace {" << std::endl;
-a.stream() << std::endl;
-a.stream() << "const std::string test_module(\"masd.dogen.generation.cpp.tests\");" << std::endl;
-a.stream() << "const std::string test_suite(\"fake_tests\");" << std::endl;
-a.stream() << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+        const auto qn(a.get_qualified_name(o.name()));
 a.stream() << "BOOST_AUTO_TEST_SUITE(" << o.name().identifiable() << "_tests)" << std::endl;
 a.stream() << std::endl;
-a.stream() << "BOOST_AUTO_TEST_CASE(test) {" << std::endl;
-a.stream() << "    SETUP_TEST_LOG(\"test\");" << std::endl;
+a.stream() << "BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {" << std::endl;
+a.stream() << "    " << qn << "_generator g;" << std::endl;
+a.stream() << "    const auto a(g());" << std::endl;
+a.stream() << "    const auto b(a);" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    BOOST_CHECK(a == b);" << std::endl;
+a.stream() << "    BOOST_CHECK(b == a);" << std::endl;
+a.stream() << "    BOOST_CHECK(!(a != b));" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << "BOOST_AUTO_TEST_CASE(an_object_is_equal_to_itself) {" << std::endl;
+a.stream() << "    " << qn << "_generator g;" << std::endl;
+a.stream() << "    const auto a(g());" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    BOOST_CHECK(a == a);" << std::endl;
+a.stream() << "    BOOST_CHECK(!(a != a));" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << "BOOST_AUTO_TEST_CASE(an_object_is_equal_to_itself) {" << std::endl;
+a.stream() << "    " << qn << "_generator g;" << std::endl;
+a.stream() << "    const auto a(g());" << std::endl;
+a.stream() << "    const auto b(g());" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    BOOST_CHECK(!(a == b));" << std::endl;
+a.stream() << "    BOOST_CHECK(a != b);" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
 a.stream() << "BOOST_AUTO_TEST_SUITE_END()" << std::endl;

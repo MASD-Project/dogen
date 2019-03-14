@@ -117,4 +117,9 @@ std::string inclusion_constants::boost::exception::info() {
     return r;
 }
 
+std::string inclusion_constants::boost::test::unit_test() {
+    static ::std::string r("<boost/test/unit_test.hpp>");
+    return r;
+}
+
 }

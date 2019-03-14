@@ -69,6 +69,10 @@ struct inclusion_constants {
         struct exception {
             static ::std::string info();
         };
+
+        struct test {
+            static ::std::string unit_test();
+        };
     };
 };
 

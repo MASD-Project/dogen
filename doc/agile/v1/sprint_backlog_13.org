@@ -14,23 +14,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-14 Thu 15:52]
+#+CAPTION: Clock summary at [2019-03-14 Thu 19:00]
 | <75>                                                     |         |       |      |       |
 | Headline                                                 | Time    |       |      |     % |
 |----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                             | *31:16* |       |      | 100.0 |
+| *Total time*                                             | *31:46* |       |      | 100.0 |
 |----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                  | 31:16   |       |      | 100.0 |
-| Active                                                   |         | 31:16 |      | 100.0 |
-| Edit release notes for previous sprint                   |         |       | 2:22 |   7.6 |
-| Sprint and product backlog grooming                      |         |       | 2:50 |   9.1 |
-| Create a video demo for the sprint's features            |         |       | 3:47 |  12.1 |
+| Stories                                                  | 31:46   |       |      | 100.0 |
+| Active                                                   |         | 31:46 |      | 100.0 |
+| Edit release notes for previous sprint                   |         |       | 2:22 |   7.5 |
+| Sprint and product backlog grooming                      |         |       | 2:50 |   8.9 |
+| Create a video demo for the sprint's features            |         |       | 3:47 |  11.9 |
 | Make projects directory env optional                     |         |       | 0:10 |   0.5 |
 | Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   2.4 |
-| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  18.4 |
-| Delete extra files appears broken at present             |         |       | 6:26 |  20.6 |
-| Empty directories should be deleted                      |         |       | 5:37 |  18.0 |
-| Code generation of tests for dogen models                |         |       | 3:33 |  11.4 |
+| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  18.2 |
+| Delete extra files appears broken at present             |         |       | 6:26 |  20.3 |
+| Empty directories should be deleted                      |         |       | 5:37 |  17.7 |
+| Code generation of tests for dogen models                |         |       | 4:03 |  12.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -531,6 +531,7 @@ Links:
 
 *** STARTED Code generation of tests for dogen models                 :story:
     :LOGBOOK:
+    CLOCK: [2019-03-14 Thu 18:31]--[2019-03-14 Thu 19:01] =>  0:30
     CLOCK: [2019-03-12 Tue 11:56]--[2019-03-12 Tue 12:04] =>  0:08
     CLOCK: [2019-03-12 Tue 11:27]--[2019-03-12 Tue 11:55] =>  0:28
     CLOCK: [2019-03-12 Tue 10:58]--[2019-03-12 Tue 11:26] =>  0:28
@@ -574,6 +575,7 @@ Notes:
   facet, we will have to update all of these profiles manually until
   the tests are ready to be tested. As a quick hack, we've disabled
   the facet from the dogen profile.
+- if an object has no attributes, we need to disable testing for it.
 
 Merged stories:
 
@@ -632,6 +634,9 @@ system model. The right solution would be something like:
 - coding could provide an interface against which the formatters could
   register to provide this information. This is somewhat similar to
   what we do with dynamic transforms.
+- logging (if really required) is another special case. This is
+  because for each model we'll have a different logging
+  implementation. We need to somehow map to it.
 
 *** Consider adding an indent JSON transform                          :story:
 
