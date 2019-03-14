@@ -139,6 +139,7 @@ apply(const generation::transforms::context& ctx,
      */
     const auto ep(ms.front().extraction_properties());
     r.name(ms.front().name().simple());
+    r.annotation(ms.front().root_module()->annotation());
     r.force_write(ep.force_write());
     r.delete_extra_files(ep.delete_extra_files());
     r.ignore_files_matching_regex(ep.ignore_files_matching_regex());

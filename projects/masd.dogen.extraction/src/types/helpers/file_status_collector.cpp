@@ -163,7 +163,8 @@ file_status_collector::collect(const meta_model::model& m) {
      * supplied regular expressions. Whatever is left is the model's
      * lint - candidates for removal, bucketed by status.
      */
-    const auto r(bucket_by_status(m.ignore_files_matching_regex(), delta));
+    const auto ifmr(m.outputting_properties().ignore_files_matching_regex());
+    const auto r(bucket_by_status(ifmr, delta));
     BOOST_LOG_SEV(lg, info) << "Finished collecting status. Result: " << r;
     return r;
 }

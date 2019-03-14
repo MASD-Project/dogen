@@ -12068,7 +12068,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:point val="-222.542,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-232.058,41.55;-221.792,48.8"/>
+        <dia:rectangle val="-232.057,41.55;-221.792,48.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

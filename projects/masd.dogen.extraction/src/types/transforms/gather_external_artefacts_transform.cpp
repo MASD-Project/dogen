@@ -89,7 +89,7 @@ apply(const context& ctx, meta_model::model& m) {
      * delete extra files, we need to mark them for removal;
      * otherwise, they should be ignored (for the right reasons).
      */
-    const auto def(m.delete_extra_files());
+    const auto def(m.outputting_properties().delete_extra_files());
     for (const auto& f : fbs.unexpected()) {
         const auto ot(def ? operation_type::remove : operation_type::ignore);
         const auto rsn(def ? operation_reason::unexpected :

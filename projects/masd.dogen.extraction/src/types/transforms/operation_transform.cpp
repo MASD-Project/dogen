@@ -134,7 +134,7 @@ void operation_transform::apply(const context& ctx, meta_model::model& m) {
         *ctx.tracer(), m);
 
     for (auto& a : m.artefacts())
-        apply(a, m.force_write());
+        apply(a, m.outputting_properties().force_write());
 
     stp.end_transform(m);
 }

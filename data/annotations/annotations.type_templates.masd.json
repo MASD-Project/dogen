@@ -51,6 +51,19 @@
   },
   {
     "name": {
+      "simple": "delete_empty_directories",
+      "qualified": "masd.extraction.delete_empty_directories"
+    },
+    "archetype_location": {
+      "kernel": "masd"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": false
+  },
+  {
+    "name": {
       "simple": "cpp_headers_output_directory",
       "qualified": "masd.extraction.cpp_headers_output_directory"
     },

@@ -21,6 +21,7 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"
+#include "masd.dogen.extraction/types/transforms/update_outputting_properties_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/operation_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/gather_external_artefacts_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/generate_diffs_transform.hpp"
@@ -43,9 +44,17 @@ void model_production_chain::
 apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_chain_tracer stp(lg, "model production chain",
         transform_id, m.name(), *ctx.tracer(), m);
+
     /*
-     * First we need to update the operations on all artefacts so that
-     * subsequent transforms know what to do with them.
+     * We start by reading the outputting properties. We don't need
+     * this until later on but its probably wise to get the meta-data
+     * out of the way first.
+     */
+    update_outputting_properties_transform::apply(ctx, m);
+
+    /*
+     * Update the operations on all artefacts so that subsequent
+     * transforms know what to do with them.
      */
     operation_transform::apply(ctx, m);
 
