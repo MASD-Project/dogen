@@ -42,9 +42,6 @@ namespace masd::dogen::coding::transforms {
 class extraction_properties_transform final {
 private:
     struct type_group {
-        annotations::type force_write;
-        annotations::type delete_extra_files;
-        annotations::type ignore_files_matching_regex;
         annotations::type cpp_headers_output_directory;
         annotations::type enable_backend_directories;
         std::list<annotations::type> enabled;
@@ -52,15 +49,6 @@ private:
 
     static type_group make_type_group(const annotations::type_repository& atrp,
         const std::list<annotations::archetype_location>& als);
-
-    static bool obtain_force_write(const type_group& tg,
-        const annotations::annotation& ra);
-
-    static bool obtain_delete_extra_files(const type_group& tg,
-        const annotations::annotation& ra);
-
-    static std::vector<std::string> obtain_ignore_files_matching_regex(
-        const type_group& tg, const annotations::annotation& ra);
 
     static boost::filesystem::path obtain_cpp_headers_output_directory(
         const type_group& tg, const annotations::annotation& ra);

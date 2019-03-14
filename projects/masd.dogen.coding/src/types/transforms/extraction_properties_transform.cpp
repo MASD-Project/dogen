@@ -44,15 +44,6 @@ extraction_properties_transform::make_type_group(
     type_group r;
     const annotations::type_repository_selector rs(atrp);
 
-    const auto fw(traits::extraction::force_write());
-    r.force_write = rs.select_type_by_name(fw);
-
-    const auto def(traits::extraction::delete_extra_files());
-    r.delete_extra_files = rs.select_type_by_name(def);
-
-    const auto ifmr(traits::extraction::ignore_files_matching_regex());
-    r.ignore_files_matching_regex = rs.select_type_by_name(ifmr);
-
     const auto chod(traits::extraction::cpp_headers_output_directory());
     r.cpp_headers_output_directory = rs.select_type_by_name(chod);
 
@@ -66,34 +57,6 @@ extraction_properties_transform::make_type_group(
         r.enabled.push_back(rs.select_type_by_name(backend, en));
     }
 
-    return r;
-}
-
-bool extraction_properties_transform::obtain_force_write(const type_group& tg,
-    const annotations::annotation& ra) {
-    const annotations::entry_selector s(ra);
-    return s.get_boolean_content_or_default(tg.force_write);
-}
-
-bool extraction_properties_transform::obtain_delete_extra_files(
-    const type_group& tg, const annotations::annotation& ra) {
-    const annotations::entry_selector s(ra);
-    return s.get_boolean_content_or_default(tg.delete_extra_files);
-}
-
-std::vector<std::string> extraction_properties_transform::
-obtain_ignore_files_matching_regex(const type_group& tg,
-    const annotations::annotation& ra) {
-    const annotations::entry_selector s(ra);
-
-    if (!s.has_entry(tg.ignore_files_matching_regex))
-        return std::vector<std::string>();
-
-    const auto c(s.get_text_collection_content(tg.ignore_files_matching_regex));
-    std::vector<std::string> r;
-    r.reserve(c.size());
-    for (const auto& e : c)
-        r.push_back(e);
     return r;
 }
 
@@ -137,9 +100,6 @@ make_extraction_properties(const context& ctx,
 
     const auto tg(make_type_group(*ctx.type_repository(), als));
     meta_model::extraction_properties r;
-    r.force_write(obtain_force_write(tg, ra));
-    r.delete_extra_files(obtain_delete_extra_files(tg, ra));
-    r.ignore_files_matching_regex(obtain_ignore_files_matching_regex(tg, ra));
     r.cpp_headers_output_directory(obtain_cpp_headers_output_directory(tg, ra));
 
     r.enabled_backends(obtain_enabled_backends(tg, ra));

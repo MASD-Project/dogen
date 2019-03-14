@@ -33,20 +33,6 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -70,9 +56,6 @@ std::ostream& operator<<(std::ostream& s, const extraction_properties& v) {
 
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::coding::meta_model::extraction_properties\"" << ", "
-      << "\"force_write\": " << v.force_write() << ", "
-      << "\"delete_extra_files\": " << v.delete_extra_files() << ", "
-      << "\"ignore_files_matching_regex\": " << v.ignore_files_matching_regex() << ", "
       << "\"cpp_headers_output_directory\": " << "\"" << v.cpp_headers_output_directory().generic_string() << "\"" << ", "
       << "\"enabled_backends\": " << v.enabled_backends() << ", "
       << "\"enable_backend_directories\": " << v.enable_backend_directories()

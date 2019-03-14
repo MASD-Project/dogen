@@ -26,7 +26,6 @@
 #endif
 
 #include <string>
-#include <vector>
 #include <algorithm>
 #include <unordered_set>
 #include <boost/filesystem/path.hpp>
@@ -49,42 +48,11 @@ public:
 
 public:
     extraction_properties(
-        const bool force_write,
-        const bool delete_extra_files,
-        const std::vector<std::string>& ignore_files_matching_regex,
         const boost::filesystem::path& cpp_headers_output_directory,
         const std::unordered_set<std::string>& enabled_backends,
         const bool enable_backend_directories);
 
 public:
-    /**
-     * @brief Always write files, even when there are no differences.
-     */
-    /**@{*/
-    bool force_write() const;
-    void force_write(const bool v);
-    /**@}*/
-
-    /**
-     * @brief If true, deletes any files that are not known to Dogen .
-     */
-    /**@{*/
-    bool delete_extra_files() const;
-    void delete_extra_files(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Files matching the supplied regular expressions will be ignored by Dogen.
-     *
-     * Only applicable when deleting extra files.
-     */
-    /**@{*/
-    const std::vector<std::string>& ignore_files_matching_regex() const;
-    std::vector<std::string>& ignore_files_matching_regex();
-    void ignore_files_matching_regex(const std::vector<std::string>& v);
-    void ignore_files_matching_regex(const std::vector<std::string>&& v);
-    /**@}*/
-
     /**
      * @brief Directory in which to place C++ header files. Must be a relative path.
      */
@@ -114,9 +82,6 @@ public:
     extraction_properties& operator=(extraction_properties other);
 
 private:
-    bool force_write_;
-    bool delete_extra_files_;
-    std::vector<std::string> ignore_files_matching_regex_;
     boost::filesystem::path cpp_headers_output_directory_;
     std::unordered_set<std::string> enabled_backends_;
     bool enable_backend_directories_;
