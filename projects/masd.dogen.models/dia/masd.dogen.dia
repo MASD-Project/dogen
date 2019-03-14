@@ -1028,7 +1028,7 @@ size limitations.#</dia:string>
         <dia:point val="-87,-83"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-87.05,-83.05;-59.87,-66.85"/>
+        <dia:rectangle val="-87.05,-83.05;-59.87,-66.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1040,7 +1040,7 @@ size limitations.#</dia:string>
         <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="16.100000000000001"/>
+        <dia:real val="16.900000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -4962,7 +4962,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
         <dia:point val="-18.48,-52.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-19.23,-53.65;24.1125,-44.4"/>
+        <dia:rectangle val="-19.23,-53.7;24.1125,-45.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
