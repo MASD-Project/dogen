@@ -35,6 +35,62 @@ auto lg(logger_factory(transform_id));
 
 namespace masd::dogen::extraction::transforms {
 
+void remove_files_transform::delete_extra_files(const meta_model::model& m) {
+    /*
+     * If the user did not ask to delete extra files, do nothing.
+     */
+    if (!m.outputting_properties().delete_extra_files()) {
+        BOOST_LOG_SEV(lg, debug) << "Delete extra files is off.";
+        return;
+    }
+
+    /*
+     * Collect all the files to remove across the model.
+     */
+    std::list<boost::filesystem::path> unexpected;
+    for (const auto& a : m.artefacts()) {
+        using extraction::meta_model::operation_type;
+        if (a.operation().type() == operation_type::remove)
+            unexpected.push_back(a.path());
+    }
+
+    /*
+     * Remove all unwanted files
+     */
+    if (unexpected.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "No files found to remove.";
+        return;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Starting to remove files.";
+    utility::filesystem::remove(unexpected);
+    BOOST_LOG_SEV(lg, debug) << "Removed files.";
+}
+
+void remove_files_transform::
+delete_empty_directories(const meta_model::model& m) {
+    if (!m.outputting_properties().delete_empty_directories()) {
+        BOOST_LOG_SEV(lg, debug) << "Delete empty directories is off.";
+        return;
+    }
+
+    /*
+     * Get rid of any empty directories. Note that this is implemented
+     * in a bit of an optimistic way:
+     *
+     * - we can remove empty directories created by the user that are
+     *   not related to code generation.
+     *
+     * - we are not honouring ignore regexes. We probably should not
+     *   remove a directory if it matches a ignore regex.
+     *
+     * For now this approach is good enough.
+     */
+    BOOST_LOG_SEV(lg, debug) << "Starting to remove empty directories.";
+    utility::filesystem::remove_empty_directories(m.managed_directories());
+    BOOST_LOG_SEV(lg, debug) << "Removed empty directories.";
+}
+
 void remove_files_transform::
 apply(const context& ctx, const meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
@@ -49,7 +105,7 @@ apply(const context& ctx, const meta_model::model& m) {
     }
 
     /*
-     * If the user requested a dry run, we cannot execute.
+     * If the user requested a dry run, do nothng.
      */
     if (ctx.dry_run_mode_enabled()) {
         BOOST_LOG_SEV(lg, info) << "Dry run mode is enabled, not executing.";
@@ -57,50 +113,10 @@ apply(const context& ctx, const meta_model::model& m) {
     }
 
     /*
-     * Collect all the files to remove across the model.
+     * Execute the transform.
      */
-    std::list<boost::filesystem::path> unexpected;
-    for (const auto& a : m.artefacts()) {
-        using extraction::meta_model::operation_type;
-        if (a.operation().type() == operation_type::remove)
-            unexpected.push_back(a.path());
-    }
-
-    /**
-     * @brief If no files were found, we're done. Note that we don't
-     * bother removing empty directories if we did not remove any
-     * files.
-     */
-    if (unexpected.empty()) {
-        BOOST_LOG_SEV(lg, debug) << "No files found to remove.";
-        return;
-    }
-
-    /**
-     * @brief Remove all unwanted files.
-     */
-    BOOST_LOG_SEV(lg, debug) << "Starting to remove files.";
-    utility::filesystem::remove(unexpected);
-    BOOST_LOG_SEV(lg, debug) << "Removed files.";
-
-    /**
-     * @brief If requested by the user, get rid of any empty
-     * directories caused by the file removal. Note that this is
-     * implemented in a bit of an optimistic way:
-     *
-     * - we can remove empty directories created by the user that are
-     *   not related to code generation.
-     *
-     * - we are not honouring ignore regexes. We probably should not
-     *   remove a directory if it matches a ignore regex.
-     *
-     * For now this approach is good enough.
-     */
-    if (m.outputting_properties().delete_empty_directories()) {
-        BOOST_LOG_SEV(lg, debug) << "Starting to remove empty directories.";
-        utility::filesystem::remove_empty_directories(m.managed_directories());
-        BOOST_LOG_SEV(lg, debug) << "Removed empty directories.";
-    }
+    delete_extra_files(m);
+    delete_empty_directories(m);
 }
 
 }

@@ -35,6 +35,10 @@ namespace masd::dogen::extraction::transforms {
  * with an operation of "remove".
  */
 class remove_files_transform final {
+private:
+    static void delete_extra_files(const meta_model::model& m);
+    static void delete_empty_directories(const meta_model::model& m);
+
 public:
     static void apply(const context& ctx, const meta_model::model& m);
 };
