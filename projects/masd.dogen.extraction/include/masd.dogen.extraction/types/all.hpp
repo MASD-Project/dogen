@@ -78,7 +78,7 @@
 #include "masd.dogen.extraction/types/transforms/operation_transform.hpp"
 #include "masd.dogen.extraction/types/transforms/transform_exception.hpp"
 #include "masd.dogen.extraction/types/cpp/scoped_boilerplate_formatter.hpp"
-#include "masd.dogen.extraction/types/helpers/outputting_configuration.hpp"
+#include "masd.dogen.extraction/types/meta_model/outputting_properties.hpp"
 #include "masd.dogen.extraction/types/transforms/code_generation_chain.hpp"
 #include "masd.dogen.extraction/types/csharp/scoped_namespace_formatter.hpp"
 #include "masd.dogen.extraction/types/helpers/artefact_writer_interface.hpp"

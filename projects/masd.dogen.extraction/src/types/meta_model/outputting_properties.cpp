@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.extraction/types/helpers/outputting_configuration.hpp"
+#include "masd.dogen.extraction/types/meta_model/outputting_properties.hpp"
 
-namespace masd::dogen::extraction::helpers {
+namespace masd::dogen::extraction::meta_model {
 
-outputting_configuration::outputting_configuration()
+outputting_properties::outputting_properties()
     : force_write_(static_cast<bool>(0)),
       delete_extra_files_(static_cast<bool>(0)),
       delete_empty_directories_(static_cast<bool>(0)) { }
 
-outputting_configuration::outputting_configuration(
+outputting_properties::outputting_properties(
     const bool force_write,
     const bool delete_extra_files,
     const std::vector<std::string>& ignore_files_matching_regex,
@@ -37,7 +37,7 @@ outputting_configuration::outputting_configuration(
       ignore_files_matching_regex_(ignore_files_matching_regex),
       delete_empty_directories_(delete_empty_directories) { }
 
-void outputting_configuration::swap(outputting_configuration& other) noexcept {
+void outputting_properties::swap(outputting_properties& other) noexcept {
     using std::swap;
     swap(force_write_, other.force_write_);
     swap(delete_extra_files_, other.delete_extra_files_);
@@ -45,56 +45,56 @@ void outputting_configuration::swap(outputting_configuration& other) noexcept {
     swap(delete_empty_directories_, other.delete_empty_directories_);
 }
 
-bool outputting_configuration::operator==(const outputting_configuration& rhs) const {
+bool outputting_properties::operator==(const outputting_properties& rhs) const {
     return force_write_ == rhs.force_write_ &&
         delete_extra_files_ == rhs.delete_extra_files_ &&
         ignore_files_matching_regex_ == rhs.ignore_files_matching_regex_ &&
         delete_empty_directories_ == rhs.delete_empty_directories_;
 }
 
-outputting_configuration& outputting_configuration::operator=(outputting_configuration other) {
+outputting_properties& outputting_properties::operator=(outputting_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-bool outputting_configuration::force_write() const {
+bool outputting_properties::force_write() const {
     return force_write_;
 }
 
-void outputting_configuration::force_write(const bool v) {
+void outputting_properties::force_write(const bool v) {
     force_write_ = v;
 }
 
-bool outputting_configuration::delete_extra_files() const {
+bool outputting_properties::delete_extra_files() const {
     return delete_extra_files_;
 }
 
-void outputting_configuration::delete_extra_files(const bool v) {
+void outputting_properties::delete_extra_files(const bool v) {
     delete_extra_files_ = v;
 }
 
-const std::vector<std::string>& outputting_configuration::ignore_files_matching_regex() const {
+const std::vector<std::string>& outputting_properties::ignore_files_matching_regex() const {
     return ignore_files_matching_regex_;
 }
 
-std::vector<std::string>& outputting_configuration::ignore_files_matching_regex() {
+std::vector<std::string>& outputting_properties::ignore_files_matching_regex() {
     return ignore_files_matching_regex_;
 }
 
-void outputting_configuration::ignore_files_matching_regex(const std::vector<std::string>& v) {
+void outputting_properties::ignore_files_matching_regex(const std::vector<std::string>& v) {
     ignore_files_matching_regex_ = v;
 }
 
-void outputting_configuration::ignore_files_matching_regex(const std::vector<std::string>&& v) {
+void outputting_properties::ignore_files_matching_regex(const std::vector<std::string>&& v) {
     ignore_files_matching_regex_ = std::move(v);
 }
 
-bool outputting_configuration::delete_empty_directories() const {
+bool outputting_properties::delete_empty_directories() const {
     return delete_empty_directories_;
 }
 
-void outputting_configuration::delete_empty_directories(const bool v) {
+void outputting_properties::delete_empty_directories(const bool v) {
     delete_empty_directories_ = v;
 }
 

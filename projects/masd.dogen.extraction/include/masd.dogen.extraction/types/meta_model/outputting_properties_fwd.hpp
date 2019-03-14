@@ -18,21 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTRACTION_IO_HELPERS_OUTPUTTING_CONFIGURATION_IO_HPP
-#define MASD_DOGEN_EXTRACTION_IO_HELPERS_OUTPUTTING_CONFIGURATION_IO_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_META_MODEL_OUTPUTTING_PROPERTIES_FWD_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_META_MODEL_OUTPUTTING_PROPERTIES_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "masd.dogen.extraction/types/helpers/outputting_configuration.hpp"
+namespace masd::dogen::extraction::meta_model {
 
-namespace masd::dogen::extraction::helpers {
-
-std::ostream&
-operator<<(std::ostream& s,
-     const masd::dogen::extraction::helpers::outputting_configuration& v);
+class outputting_properties;
 
 }
 

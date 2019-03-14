@@ -31,6 +31,7 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
+#include "masd.dogen.extraction/types/meta_model/outputting_properties.hpp"
 
 namespace masd::dogen::extraction::meta_model {
 
@@ -55,7 +56,8 @@ public:
         const bool delete_extra_files,
         const std::vector<std::string>& ignore_files_matching_regex,
         const boost::filesystem::path& cpp_headers_output_directory,
-        const bool delete_empty_directories);
+        const bool delete_empty_directories,
+        const masd::dogen::extraction::meta_model::outputting_properties& outputting_properties);
 
 public:
     const std::string& name() const;
@@ -124,6 +126,11 @@ public:
     void delete_empty_directories(const bool v);
     /**@}*/
 
+    const masd::dogen::extraction::meta_model::outputting_properties& outputting_properties() const;
+    masd::dogen::extraction::meta_model::outputting_properties& outputting_properties();
+    void outputting_properties(const masd::dogen::extraction::meta_model::outputting_properties& v);
+    void outputting_properties(const masd::dogen::extraction::meta_model::outputting_properties&& v);
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -144,6 +151,7 @@ private:
     std::vector<std::string> ignore_files_matching_regex_;
     boost::filesystem::path cpp_headers_output_directory_;
     bool delete_empty_directories_;
+    masd::dogen::extraction::meta_model::outputting_properties outputting_properties_;
 };
 
 }

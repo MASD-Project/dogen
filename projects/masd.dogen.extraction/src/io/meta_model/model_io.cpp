@@ -23,6 +23,7 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/artefact_io.hpp"
+#include "masd.dogen.extraction/io/meta_model/outputting_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -93,7 +94,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"delete_extra_files\": " << v.delete_extra_files() << ", "
       << "\"ignore_files_matching_regex\": " << v.ignore_files_matching_regex() << ", "
       << "\"cpp_headers_output_directory\": " << "\"" << v.cpp_headers_output_directory().generic_string() << "\"" << ", "
-      << "\"delete_empty_directories\": " << v.delete_empty_directories()
+      << "\"delete_empty_directories\": " << v.delete_empty_directories() << ", "
+      << "\"outputting_properties\": " << v.outputting_properties()
       << " }";
     return(s);
 }

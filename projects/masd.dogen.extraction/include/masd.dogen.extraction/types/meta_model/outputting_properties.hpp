@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTRACTION_TYPES_HELPERS_OUTPUTTING_CONFIGURATION_HPP
-#define MASD_DOGEN_EXTRACTION_TYPES_HELPERS_OUTPUTTING_CONFIGURATION_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_META_MODEL_OUTPUTTING_PROPERTIES_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_META_MODEL_OUTPUTTING_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,19 +29,22 @@
 #include <vector>
 #include <algorithm>
 
-namespace masd::dogen::extraction::helpers {
+namespace masd::dogen::extraction::meta_model {
 
-class outputting_configuration final {
+/**
+ * @brief Properties related to outputting.
+ */
+class outputting_properties final {
 public:
-    outputting_configuration(const outputting_configuration&) = default;
-    outputting_configuration(outputting_configuration&&) = default;
-    ~outputting_configuration() = default;
+    outputting_properties(const outputting_properties&) = default;
+    outputting_properties(outputting_properties&&) = default;
+    ~outputting_properties() = default;
 
 public:
-    outputting_configuration();
+    outputting_properties();
 
 public:
-    outputting_configuration(
+    outputting_properties(
         const bool force_write,
         const bool delete_extra_files,
         const std::vector<std::string>& ignore_files_matching_regex,
@@ -63,14 +66,14 @@ public:
     void delete_empty_directories(const bool v);
 
 public:
-    bool operator==(const outputting_configuration& rhs) const;
-    bool operator!=(const outputting_configuration& rhs) const {
+    bool operator==(const outputting_properties& rhs) const;
+    bool operator!=(const outputting_properties& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(outputting_configuration& other) noexcept;
-    outputting_configuration& operator=(outputting_configuration other);
+    void swap(outputting_properties& other) noexcept;
+    outputting_properties& operator=(outputting_properties other);
 
 private:
     bool force_write_;
@@ -85,8 +88,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::extraction::helpers::outputting_configuration& lhs,
-    masd::dogen::extraction::helpers::outputting_configuration& rhs) {
+    masd::dogen::extraction::meta_model::outputting_properties& lhs,
+    masd::dogen::extraction::meta_model::outputting_properties& rhs) {
     lhs.swap(rhs);
 }
 

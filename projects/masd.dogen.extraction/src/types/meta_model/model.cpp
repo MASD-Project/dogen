@@ -36,7 +36,8 @@ model::model(model&& rhs)
       delete_extra_files_(std::move(rhs.delete_extra_files_)),
       ignore_files_matching_regex_(std::move(rhs.ignore_files_matching_regex_)),
       cpp_headers_output_directory_(std::move(rhs.cpp_headers_output_directory_)),
-      delete_empty_directories_(std::move(rhs.delete_empty_directories_)) { }
+      delete_empty_directories_(std::move(rhs.delete_empty_directories_)),
+      outputting_properties_(std::move(rhs.outputting_properties_)) { }
 
 model::model(
     const std::string& name,
@@ -47,7 +48,8 @@ model::model(
     const bool delete_extra_files,
     const std::vector<std::string>& ignore_files_matching_regex,
     const boost::filesystem::path& cpp_headers_output_directory,
-    const bool delete_empty_directories)
+    const bool delete_empty_directories,
+    const masd::dogen::extraction::meta_model::outputting_properties& outputting_properties)
     : name_(name),
       language_(language),
       artefacts_(artefacts),
@@ -56,7 +58,8 @@ model::model(
       delete_extra_files_(delete_extra_files),
       ignore_files_matching_regex_(ignore_files_matching_regex),
       cpp_headers_output_directory_(cpp_headers_output_directory),
-      delete_empty_directories_(delete_empty_directories) { }
+      delete_empty_directories_(delete_empty_directories),
+      outputting_properties_(outputting_properties) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -69,6 +72,7 @@ void model::swap(model& other) noexcept {
     swap(ignore_files_matching_regex_, other.ignore_files_matching_regex_);
     swap(cpp_headers_output_directory_, other.cpp_headers_output_directory_);
     swap(delete_empty_directories_, other.delete_empty_directories_);
+    swap(outputting_properties_, other.outputting_properties_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -80,7 +84,8 @@ bool model::operator==(const model& rhs) const {
         delete_extra_files_ == rhs.delete_extra_files_ &&
         ignore_files_matching_regex_ == rhs.ignore_files_matching_regex_ &&
         cpp_headers_output_directory_ == rhs.cpp_headers_output_directory_ &&
-        delete_empty_directories_ == rhs.delete_empty_directories_;
+        delete_empty_directories_ == rhs.delete_empty_directories_ &&
+        outputting_properties_ == rhs.outputting_properties_;
 }
 
 model& model::operator=(model other) {
@@ -207,6 +212,22 @@ bool model::delete_empty_directories() const {
 
 void model::delete_empty_directories(const bool v) {
     delete_empty_directories_ = v;
+}
+
+const masd::dogen::extraction::meta_model::outputting_properties& model::outputting_properties() const {
+    return outputting_properties_;
+}
+
+masd::dogen::extraction::meta_model::outputting_properties& model::outputting_properties() {
+    return outputting_properties_;
+}
+
+void model::outputting_properties(const masd::dogen::extraction::meta_model::outputting_properties& v) {
+    outputting_properties_ = v;
+}
+
+void model::outputting_properties(const masd::dogen::extraction::meta_model::outputting_properties&& v) {
+    outputting_properties_ = std::move(v);
 }
 
 }

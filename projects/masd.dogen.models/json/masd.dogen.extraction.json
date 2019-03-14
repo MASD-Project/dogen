@@ -668,6 +668,10 @@
           "name": "delete_empty_directories",
           "type": "bool",
           "documentation": "If true, deletes all empty directories inside the project.\n"
+        },
+        {
+          "name": "outputting_properties",
+          "type": "outputting_properties"
         }
       ]
     },
@@ -950,7 +954,15 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "helpers::outputting_configuration",
+      "name": "transforms::update_outputting_properties_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::outputting_properties",
+      "documentation": "Properties related to outputting.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -970,13 +982,6 @@
           "type": "bool"
         }
       ]
-    },
-    {
-      "name": "transforms::update_outputting_properties_transform",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
     }
   ]
 }

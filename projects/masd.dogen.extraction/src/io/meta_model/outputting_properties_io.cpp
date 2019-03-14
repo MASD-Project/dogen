@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.extraction/io/helpers/outputting_configuration_io.hpp"
+#include "masd.dogen.extraction/io/meta_model/outputting_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -45,9 +45,9 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>&
 
 }
 
-namespace masd::dogen::extraction::helpers {
+namespace masd::dogen::extraction::meta_model {
 
-std::ostream& operator<<(std::ostream& s, const outputting_configuration& v) {
+std::ostream& operator<<(std::ostream& s, const outputting_properties& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -55,7 +55,7 @@ std::ostream& operator<<(std::ostream& s, const outputting_configuration& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::extraction::helpers::outputting_configuration\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::extraction::meta_model::outputting_properties\"" << ", "
       << "\"force_write\": " << v.force_write() << ", "
       << "\"delete_extra_files\": " << v.delete_extra_files() << ", "
       << "\"ignore_files_matching_regex\": " << v.ignore_files_matching_regex() << ", "
