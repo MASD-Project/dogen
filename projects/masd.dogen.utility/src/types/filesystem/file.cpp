@@ -179,23 +179,36 @@ void remove(const std::list<boost::filesystem::path>& files) {
 
 void remove_empty_directories(const boost::filesystem::path& dir) {
     using namespace boost::filesystem;
+    const auto gs(dir.generic_string());
+    if (!exists(dir)) {
+        BOOST_LOG_SEV(lg, error) << directory_not_found << gs;
+        BOOST_THROW_EXCEPTION(file_not_found(directory_not_found + gs));
+    }
+
     if (!is_directory(dir)) {
-        const auto gs(dir.generic_string());
         BOOST_LOG_SEV(lg, error) << invalid_directory << gs;
         BOOST_THROW_EXCEPTION(io_error(invalid_directory + gs));
     }
 
-    recursive_directory_iterator i(dir);
-    const recursive_directory_iterator end;
+    directory_iterator end;
+    directory_iterator i(dir);
     while (i != end) {
-        const auto p(i->path());
-        ++i;
-        if (is_directory(p) && is_empty(p)) {
-            BOOST_LOG_SEV(lg, debug) << "Removing empty directory: "
-                                     << p.generic_string();
-            remove(p);
+        if (is_directory(i->status())) {
+            const auto p(i->path());
+            ++i;
+            remove_empty_directories(p);
+        } else {
+            ++i;
         }
     }
+
+    if (is_empty(dir)) {
+        BOOST_LOG_SEV(lg, debug) << "Removing empty directory: " << gs;
+        remove(dir);
+        return;
+    }
+
+    BOOST_LOG_SEV(lg, trace) << "Ignoring non-empty directory: " << gs;
 }
 
 void remove_empty_directories(const std::list<boost::filesystem::path>& dirs) {
