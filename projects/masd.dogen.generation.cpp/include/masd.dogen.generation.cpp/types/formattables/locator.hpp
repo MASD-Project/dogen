@@ -144,6 +144,8 @@ private:
      */
     boost::filesystem::path make_facet_path(const std::string& archetype,
         const std::string& extension, const coding::meta_model::name& n) const;
+    boost::filesystem::path make_facet_path_temp(const std::string& archetype,
+        const std::string& file_name, const coding::meta_model::name& n) const;
 
     /**
      * @brief Makes the first part of the inclusion path.
@@ -261,6 +263,12 @@ public:
      * @brief Generate the full path for cmakelists in source.
      */
     boost::filesystem::path make_full_path_for_source_cmakelists(
+        const coding::meta_model::name& n, const std::string& archetype) const;
+
+    /**
+     * @brief Generate the full path for cmakelists in tests.
+     */
+    boost::filesystem::path make_full_path_for_tests_cmakelists(
         const coding::meta_model::name& n, const std::string& archetype) const;
 
     /**

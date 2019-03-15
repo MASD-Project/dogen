@@ -14,24 +14,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-15 Fri 16:42]
+#+CAPTION: Clock summary at [2019-03-15 Fri 17:20]
 | <75>                                                     |         |       |      |       |
 | Headline                                                 | Time    |       |      |     % |
 |----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                             | *38:19* |       |      | 100.0 |
+| *Total time*                                             | *38:56* |       |      | 100.0 |
 |----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                  | 38:19   |       |      | 100.0 |
-| Active                                                   |         | 38:19 |      | 100.0 |
-| Edit release notes for previous sprint                   |         |       | 2:22 |   6.2 |
-| Sprint and product backlog grooming                      |         |       | 4:41 |  12.2 |
-| Create a video demo for the sprint's features            |         |       | 3:47 |   9.9 |
+| Stories                                                  | 38:56   |       |      | 100.0 |
+| Active                                                   |         | 38:56 |      | 100.0 |
+| Edit release notes for previous sprint                   |         |       | 2:22 |   6.1 |
+| Sprint and product backlog grooming                      |         |       | 4:41 |  12.0 |
+| Create a video demo for the sprint's features            |         |       | 3:47 |   9.7 |
 | Make projects directory env optional                     |         |       | 0:10 |   0.4 |
-| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   2.0 |
-| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  15.1 |
-| Delete extra files appears broken at present             |         |       | 6:26 |  16.8 |
-| Empty directories should be deleted                      |         |       | 5:37 |  14.7 |
+| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   1.9 |
+| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  14.8 |
+| Delete extra files appears broken at present             |         |       | 6:26 |  16.5 |
+| Empty directories should be deleted                      |         |       | 5:37 |  14.4 |
 | Changes to stitch templates are not reported correctly   |         |       | 1:09 |   3.0 |
-| Code generation of tests for dogen models                |         |       | 7:36 |  19.8 |
+| Code generation of tests for dogen models                |         |       | 8:13 |  21.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -605,6 +605,7 @@ Problems:
 
 *** STARTED Code generation of tests for dogen models                 :story:
     :LOGBOOK:
+    CLOCK: [2019-03-15 Fri 16:43]--[2019-03-15 Fri 17:20] =>  0:37
     CLOCK: [2019-03-15 Fri 16:30]--[2019-03-15 Fri 16:42] =>  0:12
     CLOCK: [2019-03-15 Fri 16:01]--[2019-03-15 Fri 16:29] =>  0:28
     CLOCK: [2019-03-15 Fri 14:28]--[2019-03-15 Fri 14:50] =>  0:22
@@ -695,6 +696,18 @@ we do nothing.
 
 If a project has tests (see story above) we should automatically
 ignore the test regular expressions.
+
+*** Formatters can only belong to one facet                           :story:
+
+Up to know there was an agreement that generation space was
+hierarchical and formatters could only belong to one facet. This has
+been true until now, but with the addition of CMake support to tests,
+we now have an exception: we need to honour both the tests facet and
+the cmake facet. If either of them are off, then we should not emit
+the CMake file. This means that we need to somehow map one formatter
+to multiple facets. For now we just hacked it and used one of the
+facets. It means that if you disable CMake but enable testing you'll
+still end up with the testing CMake file.
 
 *** Element extensions considered harmful                             :story:
 

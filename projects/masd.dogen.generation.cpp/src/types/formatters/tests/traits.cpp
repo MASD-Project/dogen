@@ -49,4 +49,9 @@ std::string traits::main_archetype() {
     return r;
 }
 
+std::string traits::source_cmakelists_archetype() {
+    static std::string r(traits::facet() + ".source_cmakelists");
+    return r;
+}
+
 }

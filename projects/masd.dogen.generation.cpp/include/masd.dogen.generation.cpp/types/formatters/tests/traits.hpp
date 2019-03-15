@@ -54,6 +54,11 @@ struct traits {
      * @brief Name of the entry point.
      */
     static std::string main_archetype();
+
+   /**
+    * @brief Name of the cmakelists formatter.
+    */
+    static std::string source_cmakelists_archetype();
 };
 
 }

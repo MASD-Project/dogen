@@ -20,6 +20,7 @@
  */
 #include "masd.dogen.generation.cpp/types/formatters/tests/source_cmakelists_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/formatting_error.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/tests/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/cmakelists.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
@@ -34,7 +35,7 @@
 namespace masd::dogen::generation::cpp::formatters::tests {
 
 std::string source_cmakelists_formatter::static_id() {
-    return traits::source_cmakelists_archetype();
+    return tests::traits::source_cmakelists_archetype();
 }
 
 std::string source_cmakelists_formatter::id() const {
@@ -45,7 +46,7 @@ annotations::archetype_location source_cmakelists_formatter::
 archetype_location() const {
     static annotations::archetype_location
         r(cpp::traits::kernel(), cpp::traits::backend(),
-          traits::cmake_facet(),
+          traits::facet(),
           source_cmakelists_formatter::static_id());
     return r;
 }
@@ -79,7 +80,7 @@ boost::filesystem::path source_cmakelists_formatter::inclusion_path(
 
 boost::filesystem::path source_cmakelists_formatter::full_path(
     const formattables::locator& l, const coding::meta_model::name& n) const {
-    return l.make_full_path_for_source_cmakelists(n, static_id());
+    return l.make_full_path_for_tests_cmakelists(n, static_id());
 }
 
 std::list<std::string> source_cmakelists_formatter::inclusion_dependencies(
