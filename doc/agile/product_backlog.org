@@ -9037,14 +9037,12 @@ Links:
 - [[https://stackoverflow.com/questions/21295935/can-a-c-enum-class-have-methods][Can a C++ enum class have methods?]]
 
 
-
 *** Allow renaming =invalid= enumerator                               :story:
 
 At present we issue the =invalid= enumerator to signal no
 choice. However, in certain cases there are domain specific options
 that are better suited (such as =none=, etc). Users should be able to
 change the name of the enumerator.
-
 
 *** Bitmask enumeration                                               :story:
 
@@ -9997,6 +9995,129 @@ has been pointed out, keys should be immutable; having pointers as
 keys opens the doors to all sorts of problems. We need to throw an
 error at model building time if an user tries to do this.
 
+*** Add support for =smartref=                                        :story:
+
+This seems like an interesting library. Not exactly clear how to use
+it, but to support it should be easy: add generated code that
+registers user defined types:
+
+: class Person
+: {
+: public:
+:    auto first_name() {...}
+:    auto last_name() {...}
+: };
+: REFLECTABLE(first_name);
+: REFLECTABLE(last_name);
+
+However, to properly use it we probably need support for protected
+regions so that we can overload calls manually.
+
+Links:
+
+- [[https://github.com/erikvalkering/smartref][GitHub]]
+- [[https://medium.com/@eejv/on-the-origin-of-smartref-proxy-pattern-f6fe53f41286][On the Origin of smartref: Proxy Pattern]]
+
+
+*** Add support for MetaStuff                                         :story:
+
+Interesting serialisation library:
+
+- https://github.com/eliasdaler/MetaStuff.
+
+Links:
+
+- [[https://eliasdaler.github.io/meta-stuff/][How my little C++ meta-serialization library works and how I wrote
+  it]]
+
+*** Add support for Franca IDL                                        :story:
+
+Franca is an IDL language for which there is an XText definition and a
+C++ (spirit) implementation [[https://github.com/martinhaefner/franca][here]]. It may be useful as a gateway for
+other IDLs.
+
+*** Consider creating a TextUML injector                              :story:
+
+We could create a frontend that reads TextUML files:
+
+- https://github.com/abstratt/textuml
+
+Example (copied from the [[http://abstratt.github.io/textuml/docs/tutorial.html][tutorial]]):
+
+#+begin_example
+package payment;
+
+class PaymentMethod
+end;
+
+class Cheque specializes PaymentMethod
+end;
+#+end_example
+
+Now that we are thinking about moving to XMI, this may make slightly
+less sense, but nevertheless, its worth capturing the idea.
+
+Links:
+
+- [[https://blog.abstratt.com/2007/11/01/uml-101-the-templates-package/][UML 101 with TextUML: the Templates package]]
+
+*** Add support for the fmt library                                   :story:
+
+We could add a facet for fmt that acts like the iostreams
+facet.
+
+Links:
+
+- https://accu.org/index.php/journals/2509
+- https://github.com/fmtlib/fmt
+
+*** Add support for D-Bus                                             :story:
+
+[[https://en.wikipedia.org/wiki/D-Bus][D-Bus]] is an RPC mechanism used on Linux.
+
+Links:
+
+- [[https://github.com/dbus-asio/dbus-asio][dbus-asio]]: DBus C++ implementation based on boost asio. [[https://fosdem.org/2019/schedule/event/dbus_asio/][FOSDEM talk]].
+- [[https://gitlab.freedesktop.org/dbus/dbus][libdbus]]: original D-Bus C library.
+
+*** Add support for Microsoft Bond                                     :epic:
+
+More of a placeholder - will require further investigation. Seems like
+Microsoft has their own Thrift/ProtoBuf-like implementation called
+[[https://github.com/Microsoft/bond/][Bond]]. It supports [[https://microsoft.github.io/bond/manual/bond_cpp.html][C++]]. Once could conceive Dogen support for it.
+
+*** Add support for Aeron                                             :story:
+
+Yet another RPC like framework.
+
+Links:
+
+- https://github.com/real-logic/aeron
+
+*** Consider adding support for Boost.Operators                       :story:
+
+It may or may not make sense to add support for [[http://www.boost.org/doc/libs/1_58_0/libs/utility/operators.htm][Boost.Operators]]. There
+is a bit of boilerplate which seems easy to code-generate; however,
+the point of adding operators is surely that one needs some
+hand-crafted functionality. At any rate, this story keeps track of the
+thinking on this topic. Articles:
+
+- [[http://arne-mertz.de/2015/01/operator-overloading-the-basics/][Operator Overloading: The Basics]]
+- [[http://arne-mertz.de/2015/01/operator-overloading-common-practice/][Operator Overloading: Common Practice]]
+- [[http://arne-mertz.de/2015/02/operator-overloading-introduction-to-boost-operators-part-1/][Operator Overloading – Introduction to Boost.Operators, Part 1]]
+- [[http://arne-mertz.de/2015/02/operator-overloading-introduction-to-boost-operators-part-2/][Operator Overloading – Introduction to Boost.Operators, Part 2]]
+- [[http://arne-mertz.de/2015/03/operator-overloading-introduction-to-boost-operators-part-3/][Operator Overloading – Introduction to Boost.Operators, Part 3]]
+
+*** Support for COM/CORBA                                              :epic:
+
+#+begin_quote
+*Story*: As a dogen user, I want to make use of COM/CORBA so that I
+can create code to interface with legacy systems.
+#+end_quote
+
+We should investigate how hard it is to add support for these IDLs.
+
+
 ** Useful improvements but lacking use cases
 
 This bucket contains stories with ideas that have potential but for
@@ -10861,29 +10982,6 @@ Links:
 - [[http://www.boost.org/community/feature_model_diagrams.html][Feature Model Diagrams in text and HTML]]
 - [[https://github.com/EmilianoSanchez/Feature-Model-Optimization][Feature-Model-Optimization]]
 
-*** Add support for =smartref=                                        :story:
-
-This seems like an interesting library. Not exactly clear how to use
-it, but to support it should be easy: add generated code that
-registers user defined types:
-
-: class Person
-: {
-: public:
-:    auto first_name() {...}
-:    auto last_name() {...}
-: };
-: REFLECTABLE(first_name);
-: REFLECTABLE(last_name);
-
-However, to properly use it we probably need support for protected
-regions so that we can overload calls manually.
-
-Links:
-
-- [[https://github.com/erikvalkering/smartref][GitHub]]
-- [[https://medium.com/@eejv/on-the-origin-of-smartref-proxy-pattern-f6fe53f41286][On the Origin of smartref: Proxy Pattern]]
-
 *** Make more use of stack instead of heap                            :story:
 
 We should do some analysis as to how the following classes are being
@@ -10935,17 +11033,6 @@ out data structures that are more suitable for this. We should also
 measure the cache hits / misses before and after the changes, as well
 as the memory sizes.
 
-*** Add support for MetaStuff                                         :story:
-
-Interesting serialisation library:
-
-- https://github.com/eliasdaler/MetaStuff.
-
-Links:
-
-- [[https://eliasdaler.github.io/meta-stuff/][How my little C++ meta-serialization library works and how I wrote
-  it]]
-
 *** Add support for field renaming in annotations                     :story:
 
 At present if a field changes its name between dogen releases,
@@ -10961,20 +11048,10 @@ With this change, dogen stopped working. We need some way to
 "remember" the previous name before a rename so that previous versions
 still work.
 
-*** Transform probe coordinates                                       :story:
+*** Transform tracing "coordinates"                                   :story:
 
 Allow users to supply coordinates to transforms in some form so that
 we only dump a subset of the transform data.
-
-*** Run "changed" tests only                                          :story:
-
-Random idea: can we have a target that just runs "changed" tests? That
-is, tests that are impacted by the files that were changed since we
-last executed the tests.
-
-For this to work we need to create a file with every execution of
-tests and then use that as a dependency. There must be some prior art
-for this with CMake.
 
 *** Build dogen docker images from travis                             :story:
 
@@ -11021,31 +11098,6 @@ cooler if we could directly upload the model into nuget after the
 build and supply the user with the nuget commands required to get the
 model. However, the only problem may be that we'd end up with a lot of
 dodgy code in nuget, so maybe this is not ideal.
-
-*** Consider creating a TextUML frontend                              :story:
-
-We could create a frontend that reads TextUML files:
-
-- https://github.com/abstratt/textuml
-
-Example (copied from the [[http://abstratt.github.io/textuml/docs/tutorial.html][tutorial]]):
-
-#+begin_example
-package payment;
-
-class PaymentMethod
-end;
-
-class Cheque specializes PaymentMethod
-end;
-#+end_example
-
-Now that we are thinking about moving to XMI, this may make slightly
-less sense, but nevertheless, its worth capturing the idea.
-
-Links:
-
-- [[https://blog.abstratt.com/2007/11/01/uml-101-the-templates-package/][UML 101 with TextUML: the Templates package]]
 
 *** Add support for UML profiles and XMI                               :epic:
 
@@ -11338,20 +11390,6 @@ Links:
 - [[https://github.com/pantor/inja][inja]]
 - [[https://github.com/jrziviani/amps][amps]]
 
-*** Add support for XText                                             :story:
-
-XText is a java technology that allows defining simple EBNF grammars
-and then code-generates both the parser and classes to store the
-AST. We could have a spirit equivalent. This is probably not
-horrendously difficult, but we do not have any use cases.
-
-Links:
-
-- [[http://www.eclipse.org/Xtext/][XText site]] and [[https://eclipse.org/Xtext/documentation/][documentation]]
-- [[%5B%5Bhttp://eclipsecon.org/summiteurope2006/presentations/ESE2006-EclipseModelingSymposium12_xTextFramework.pdf%5D%5D][oAW xText: A framework for textual DSLs]]
-- Franca: some IDL language for which there is an XText
-  definition. C++ (spirit) implementation [[https://github.com/martinhaefner/franca][here]].
-
 *** Model anonymizer and slicer                                       :story:
 
 A user may create a model which triggers a problem in dogen. For
@@ -11385,23 +11423,6 @@ collapse all references of external models (non-proxy) into the same
 model.
 
 Users could run the slicer first and then the anonymizer.
-
-*** Consider moving the doc folder into its own branch                :story:
-
-At present we are generating builds whenever we update the docs
-(agile, manual, etc). It probably makes more sense to have one or more
-orphan branches with documentation. We can then use git worktrees to
-manage these folders.
-
-*** Add support for the fmt library                                   :story:
-
-We could add a facet for fmt that acts like the iostreams
-facet.
-
-Links:
-
-- https://accu.org/index.php/journals/2509
-- https://github.com/fmtlib/fmt
 
 *** Consider using the fmt library instead of iostreams               :story:
 
@@ -11509,34 +11530,6 @@ if there are other changes, etc.
 
 Another useful use case, is the renaming of attributes.
 
-*** Generate tests skeleton                                           :story:
-
-When we create a dogen project for the first time, we should be able
-to, optionally, add the tests directory with skeleton code and a
-sample test. If the directory already exists (or if the option is off)
-we do nothing.
-
-*** Automatically ignore tests                                        :story:
-
-If a project has tests (see story above) we should automatically
-ignore the test regular expressions.
-
-*** Easy addition of facets and formatters                             :epic:
-
-The ideal state of the world is one where:
-
-- the facet directory contains a small JSON file with the fields
-  specific to a facet, including defaults, etc.
-- the facet directory is made up of a number of stitch templates and
-  their expansion into c++ (e.g. no separation of template and
-  formatter).
-- the backend model has an entity marked as =Stitch= or =Stitchable=
-  and linked to a stitch meta-template. Ideally one should be able to
-  create a concept for it so that we can define these properties only
-  once.
-- the template should have all of the parameters required such as
-  types of variables.
-
 *** Overuse of =std::set=, =std::map=, etc                            :story:
 
 According to this paper by Matt Austern we should see if we really
@@ -11625,202 +11618,6 @@ projects with the name =cogen= so we may need to find a better
 name. Alternatively we can maintain the name dogen, but take away its
 meaning (i.e. no longer "The Domain Generator").
 
-*** Consider adding a meta-meta-model                                 :story:
-
-This story is just a very vague placeholder for ideas around the DSL
-space.
-
-We could create a meta-meta-model that would allow us to describe
-meta-models in general. The concepts of the meta-meta-model would be
-more or less those defined in here:
-
-- [[http://www2.informatik.hu-berlin.de/sam/lehre/MDA-UML/UML-Infra-03-09-15.pdf][UML 2.0 Infrastructure Specification]]
-
-With a meta-meta-model we could then allow users to describe their own
-meta-models, which are DSLs. This could be done graphically (say using
-Dia). The GME story explains what the end-game of such an approach
-would be and its more or less realised by GME in its current form.
-
-The meta-meta-model would also allow us to think about model-to-model
-transformations using a language such as [[https://eclipse.org/atl/][ATL]]. This would then mean
-that we could transform a meta-model created by the user into one of
-our meta-models used for code generation.
-
-Meta-meta-models are vaguely related to binding.
-
-On further thought, we should probably make a clear separation of
-responsibilities. A few notes on this:
-
-- there are two separate, but interrelated problem domains:
-  meta-modeling and modeling.
-- UML is a tool for modeling. It sits in the M2 to M1 space. M2
-  because its meta-model is extensible, M1 because we spend most of
-  our time defining user models.
-- Dogen also sits in the M2 to M1 space. M2 because it defines its own
-  meta-model, not entirely MOF compatible. It also allows user
-  extensions with share some very basic similarities with profiles. M1
-  is the core of the work.
-- modeling is a huge domain. Dogen only concerns itself with the code
-  generation aspects of modeling; as such it provides a set of
-  "adapters" that convert models from other technologies (one could
-  say DSLs) into its meta-models. These adapters are
-  hand-crafted/hard-coded and they will always remain that way.
-- Dogen does not and will not concern itself with: a) UIs for modeling
-  (we will always rely on the existing tools) b) automated model
-  transformation via some transformation language (we will always
-  hand-craft them) c) management of the model life-cycle (these will
-  be left to the users).
-- there is a need for a separate product that lives a layer up from
-  Dogen: M3 to M2. This is equivalent to GME. The idea is that we need
-  to define a meta-meta-model and a constraint language. We can then
-  allow users to create their own meta-models.
-- lets call the tool Memod (Meta-modeler).
-- the job of Memod is to do meta-meta-modeling and then modeling
-  according to the defined meta-model. One can imagine Dogen as a
-  special case of this, where we hard-coded the meta-model. One could
-  of course describe Dogen's meta-model in Memod. In fact one could
-  describe all of Dogen's meta-models in Memod (including the ones we
-  adapt). However this is of limited use because there already is a
-  good language to perform modeling in (UML). One vaguely useful use
-  case is to automate the model transformations, but the effort
-  required in describing every single detail of the models and the
-  mapping is equivalent (if not greater) than hand-crafting the
-  model. However, it is useful to have a Memod description of just the
-  Dogen main meta-model (yarn).
-- for other domains Memod would be useful though. Examples: a)
-  finance: we could model all structured products using a financial
-  products meta-model. The rules that describe how each composite
-  product work must be described via the constraint language (is it
-  sufficient?). For example, one could state that a Risk Reversal is
-  made up of two Vanilla options, and describe the constraints in
-  terms of Expiry Date, Strike etc via the language. With this one can
-  create a Finance DSL. The canonical user for this tool would be the
-  structuring desk. b) Computational Neuroscience: NeuroML is a DSL
-  that describes neurons, topologies, etc. One can imagine a UI,
-  similar to NEURON, which allows one to describe specific neurons and
-  neuronal networks.
-- Once we have a Memod meta-model, we could define transformation
-  rules into Dogen's meta-model. Taking finance as an example, if we
-  had a) a Memod representation of the Dogen meta-model b) an instance
-  of the Dogen meta-model with the domain specific concepts
-  (e.g. Financial Products) c) a Memod meta-model for finance and d) a
-  user defined instance of the Memod meta-model for finance,
-  describing structured products we could then code-generate
-  user-defined structured products. Having said that, this still seems
-  like an extremely large amount of work for something that does not
-  change that frequently and could be spec'd and passed over to
-  developers rather than automated. Finally, it would be quite tricky
-  to get it right to the point one could put the output of this
-  process into production.
-
-*** Investigate the Generic Modeling Environment                      :story:
-
-[[http://www.isis.vanderbilt.edu/projects/gme/][GME]] - Generic Modeling Environment - is a complete environment for
-meta-modeling. It seems that they have already dealt with a lot of the
-problems we are now facing. However, note that this is not a modeling
-environment - it is a meta-modeling environment.
-
-#+begin_quote
-The Generic Modeling Environment is a configurable toolkit for
-creating domain-specific modeling and program synthesis
-environments. The configuration is accomplished through metamodels
-specifying the modeling paradigm (modeling language) of the
-application domain. The modeling paradigm contains all the syntactic,
-semantic, and presentation information regarding the domain; which
-concepts will be used to construct models, what relationships may
-exist among those concepts, how the concepts may be organized and
-viewed by the modeler, and rules governing the construction of
-models. The modeling paradigm defines the family of models that can be
-created using the resultant modeling environment
-#+end_quote
-
-Source code is available [[http://repo.isis.vanderbilt.edu/GME/old/15.5.8/][here]].
-
-*** Random notes on domodl                                             :epic:
-
-eCore and GME seem to point out that there is a companion product to
-dogen at the meta-modeling level. A tool that allows one to define
-metamodels and instances of those metamodels. Name: domodl (domain
-modeler).
-
-For example, for finance we could define a structure like so:
-
-- M3: GME or eCore, some kind of reflexive meta-metamodel.
-- M2: instrument taxonomy (? building blocks): define the basic
-  building blocks for all instruments in finance. Examples: barriers
-  by type (american, parisian, etc), triggerable, monitoring,
-  settlement types,
-- M1: instruments: using the M2 building blocks, create instruments
-  such as spot, forward. This is a dogen model that is code
-  generated.
-- M0: actual finance system.
-
-To some extent we already started doing this by introducing the notion
-of object templates / concepts: these are in effect a bridge to the
-modeling layer above, joining two distinct layers in a single
-diagram. This is not a good idea according to the literature, but we
-can leave it there with a warning. However, there is something that is
-still not quite right: if we define say =ForwardAmountExchange= as
-inheriting from =Class= and then say that a =forward= is an instance
-of =ForwardAmountExchange= then there is an expectation that we should
-supply say =forward_points= when we define the model just like we
-supply a class name when we define a class. However, what we are
-saying is more like "this is the shape of the forward that you will
-instantiate". We need to understand how to express this in eCore.
-
-From a dia perspective, a domodl diagram uses the metamodel instances
-as profiles/stereotypes
-
-Features:
-
-- ability to read eCore diagrams
-- ability to read dia diagrams and parse them as eCore diagrams. We
-  need the merging (simultaneous loading) of both the metamodel and
-  the model so that we can make sense of the diagram. We also need to
-  understand how do expose concepts of Mn at Mn-1 - is it always
-  profiles/stereotypes? or perhaps the dia model must have the correct
-  metamodel stereotypes (e.g. =Class, etc=).
-- ability to "flatten" the read models into a dogen external
-  model. There is a dependency on dogen for this, but that's only for
-  the export.
-- we also need to somehow create an XSD and a spirit parser for the
-  instances of the metamodel. These are then used to generate a binary
-  that reads these instances and creates dogen models. In an ideal
-  world these could be injected into dogen as plugins, able to read an
-  extension (in effect, new frontends/externals). So domodl actually
-  somehow code generates these dogen plugins. Once we have dart, then
-  we have all the tools required to create build files etc. The user
-  can then create a git repo for the plugin, build it and inject it
-  into dogen. From then on dogen can parse their DSL and generate code
-  for it.
-- for completeness we should generate spirit parsing code so that we
-  could have syntax other than XML. This seems hard as it must need
-  some kind of EBNF interfacing. We should see what [[https://www.eclipse.org/Xtext/][XText]] does. The
-  parser can then be plugged in to the plugin and becomes in effect a
-  "compiler" for the new DSL. The errors should be outputted using
-  emacs/vi compliant syntax so that flycheck will automatically work.
-  XText even has LSP support.
-- it would also be ideal if we could generate emacs/vim syntax
-  highlighting.
-- we need to somehow be able to "transport" metadata into the
-  models. For example, instruments need to support ORM, etc. The
-  generated languages must have a way of supplying stereotypes so that
-  dogen knows what to generate.
-- it should be possible to just output the dogen model so that the
-  user can see what domodl is doing. It should always be possible to
-  manually replicate it (and bypass it).
-- domodl parsing code etc. should be as good as if written by hand.
-
-Notes:
-
-- users should start by creating dogen models and then try to
-  generalise them into a DSL.
-- interestingly, dogen's external model input format could be seen as
-  one such DSL. It would be great to have syntax highlighting,
-  flycheck integration etc for model development. Completion would be
-  great too (for example, get a list of types of elements, including
-  external models, etc).
-
 *** Consider introducing formatter "location strings"                 :story:
 
 In MDSD, we have the notion of "location strngs":
@@ -11853,12 +11650,6 @@ starting point on this are these papers:
 - [[http://www.infosun.fim.uni-passau.de/publications/docs/PTD%2B14.pdf][Coevolution of Variability Models and Related Software Artifacts]]
 - [[http://homepages.dcc.ufmg.br/~mtov/pub/2015_modularity.pdf][Feature Scattering in the Large: A Longitudinal Study of Linux
   Kernel Device Drivers]]
-
-*** Support for transactional writes                                  :story:
-
-It would be nice if dogen either generated all files or didn't touch
-the directory at all, at least as an option. We could simply generate
-into a temporary directory and then swap them at the end.
 
 *** Supporting user defined generic types                             :story:
 
@@ -12311,29 +12102,6 @@ dump a size report and make it visualisable in a tool such as baobab
 (or in a manner similar to baobab) so that users can, at any time, get
 a break down of where the objects are. Of course this would imply we
 need a top-level object that contains all objects.
-
-*** Add support for D-Bus                                             :story:
-
-[[https://en.wikipedia.org/wiki/D-Bus][D-Bus]] is an RPC mechanism used on Linux.
-
-Links:
-
-- [[https://github.com/dbus-asio/dbus-asio][dbus-asio]]: DBus C++ implementation based on boost asio. [[https://fosdem.org/2019/schedule/event/dbus_asio/][FOSDEM talk]].
-- [[https://gitlab.freedesktop.org/dbus/dbus][libdbus]]: original D-Bus C library.
-
-*** Add support for Microsoft Bond                                     :epic:
-
-More of a placeholder - will require further investigation. Seems like
-Microsoft has their own Thrift/ProtoBuf-like implementation called
-[[https://github.com/Microsoft/bond/][Bond]]. It supports [[https://microsoft.github.io/bond/manual/bond_cpp.html][C++]]. Once could conceive Dogen support for it.
-
-*** Add support for Aeron                                             :story:
-
-Yet another RPC like framework.
-
-Links:
-
-- https://github.com/real-logic/aeron
 
 *** Add cling support                                                 :story:
 
@@ -12919,20 +12687,6 @@ Links:
 - [[https://blog.esciencecenter.nl/irregular-data-in-pandas-using-c-88ce311cb9ef][50 times faster data loading for Pandas: no problem]]: talks about
   integration of c++ with python (cookie cutterk).
 
-*** Consider adding support for Boost.Operators                       :story:
-
-It may or may not make sense to add support for [[http://www.boost.org/doc/libs/1_58_0/libs/utility/operators.htm][Boost.Operators]]. There
-is a bit of boilerplate which seems easy to code-generate; however,
-the point of adding operators is surely that one needs some
-hand-crafted functionality. At any rate, this story keeps track of the
-thinking on this topic. Articles:
-
-- [[http://arne-mertz.de/2015/01/operator-overloading-the-basics/][Operator Overloading: The Basics]]
-- [[http://arne-mertz.de/2015/01/operator-overloading-common-practice/][Operator Overloading: Common Practice]]
-- [[http://arne-mertz.de/2015/02/operator-overloading-introduction-to-boost-operators-part-1/][Operator Overloading – Introduction to Boost.Operators, Part 1]]
-- [[http://arne-mertz.de/2015/02/operator-overloading-introduction-to-boost-operators-part-2/][Operator Overloading – Introduction to Boost.Operators, Part 2]]
-- [[http://arne-mertz.de/2015/03/operator-overloading-introduction-to-boost-operators-part-3/][Operator Overloading – Introduction to Boost.Operators, Part 3]]
-
 *** Add yuml markup language support                                  :story:
 
 #+begin_quote
@@ -13098,15 +12852,6 @@ that I can create "bridge" APIs.
 
 Once we have proper C support, it should be doable to have a C++ facet
 that automatically exposes a C interface.
-
-*** Support for COM/CORBA                                              :epic:
-
-#+begin_quote
-*Story*: As a dogen user, I want to make use of COM/CORBA so that I
-can create code to interface with legacy systems.
-#+end_quote
-
-We should investigate how hard it is to add support for these IDLs.
 
 *** Investigate support for automatic diagram updates                  :epic:
 
@@ -13484,6 +13229,10 @@ This article by Fowler has some interesting ideas:
 
 It is not clear how it applies to code generation, if at all. This
 story is to bookmark the article so we can mine it later for ideas.
+
+Note that we would not use feature toggles directly in dogen, because
+we are already using feature models for this. But we could conceivably
+generate code for applications to use feature toggles.
 
 *** Write blog post on reflexive programming                          :story:
 

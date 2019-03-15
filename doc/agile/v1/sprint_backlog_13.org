@@ -14,23 +14,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-14 Thu 19:00]
+#+CAPTION: Clock summary at [2019-03-15 Fri 11:13]
 | <75>                                                     |         |       |      |       |
 | Headline                                                 | Time    |       |      |     % |
 |----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                             | *31:46* |       |      | 100.0 |
+| *Total time*                                             | *34:14* |       |      | 100.0 |
 |----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                  | 31:46   |       |      | 100.0 |
-| Active                                                   |         | 31:46 |      | 100.0 |
-| Edit release notes for previous sprint                   |         |       | 2:22 |   7.5 |
-| Sprint and product backlog grooming                      |         |       | 2:50 |   8.9 |
-| Create a video demo for the sprint's features            |         |       | 3:47 |  11.9 |
+| Stories                                                  | 34:14   |       |      | 100.0 |
+| Active                                                   |         | 34:14 |      | 100.0 |
+| Edit release notes for previous sprint                   |         |       | 2:22 |   6.9 |
+| Sprint and product backlog grooming                      |         |       | 4:28 |  13.0 |
+| Create a video demo for the sprint's features            |         |       | 3:47 |  11.1 |
 | Make projects directory env optional                     |         |       | 0:10 |   0.5 |
-| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   2.4 |
-| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  18.2 |
-| Delete extra files appears broken at present             |         |       | 6:26 |  20.3 |
-| Empty directories should be deleted                      |         |       | 5:37 |  17.7 |
-| Code generation of tests for dogen models                |         |       | 4:03 |  12.7 |
+| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   2.2 |
+| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  16.8 |
+| Delete extra files appears broken at present             |         |       | 6:26 |  18.8 |
+| Empty directories should be deleted                      |         |       | 5:37 |  16.4 |
+| Code generation of tests for dogen models                |         |       | 4:53 |  14.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -229,6 +229,12 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-03-15 Fri 11:00]--[2019-03-15 Fri 11:13] =>  0:13
+    CLOCK: [2019-03-15 Fri 10:44]--[2019-03-15 Fri 10:59] =>  0:15
+    CLOCK: [2019-03-15 Fri 10:20]--[2019-03-15 Fri 10:43] =>  0:23
+    CLOCK: [2019-03-15 Fri 09:56]--[2019-03-15 Fri 10:19] =>  0:23
+    CLOCK: [2019-03-15 Fri 08:18]--[2019-03-15 Fri 08:35] =>  0:17
+    CLOCK: [2019-03-15 Fri 08:11]--[2019-03-15 Fri 08:18] =>  0:07
     CLOCK: [2019-03-14 Thu 15:18]--[2019-03-14 Thu 15:52] =>  0:34
     CLOCK: [2019-03-12 Tue 08:43]--[2019-03-12 Tue 08:56] =>  0:13
     CLOCK: [2019-03-11 Mon 18:46]--[2019-03-11 Mon 19:07] =>  0:21
@@ -529,8 +535,28 @@ Links:
 
 - [[https://www.codeproject.com/Questions/454944/how-to-remove-empty-folders-in-a-directory-using-b][How to remove empty folders in a directory using boost]]
 
+*** COMPLETED Easy addition of facets and formatters                   :epic:
+    CLOSED: [2019-03-15 Fri 08:23]
+
+*Rationale*: most of this work has been carried out already.
+
+The ideal state of the world is one where:
+
+- the facet directory contains a small JSON file with the fields
+  specific to a facet, including defaults, etc.
+- the facet directory is made up of a number of stitch templates and
+  their expansion into c++ (e.g. no separation of template and
+  formatter).
+- the backend model has an entity marked as =Stitch= or =Stitchable=
+  and linked to a stitch meta-template. Ideally one should be able to
+  create a concept for it so that we can define these properties only
+  once.
+- the template should have all of the parameters required such as
+  types of variables.
+
 *** STARTED Code generation of tests for dogen models                 :story:
     :LOGBOOK:
+    CLOCK: [2019-03-15 Fri 08:45]--[2019-03-15 Fri 09:35] =>  0:50
     CLOCK: [2019-03-14 Thu 18:31]--[2019-03-14 Thu 19:01] =>  0:30
     CLOCK: [2019-03-12 Tue 11:56]--[2019-03-12 Tue 12:04] =>  0:08
     CLOCK: [2019-03-12 Tue 11:27]--[2019-03-12 Tue 11:55] =>  0:28
@@ -575,7 +601,9 @@ Notes:
   facet, we will have to update all of these profiles manually until
   the tests are ready to be tested. As a quick hack, we've disabled
   the facet from the dogen profile.
-- if an object has no attributes, we need to disable testing for it.
+- if an object has no attributes, we need to disable testing for
+  it. For now we will just hack it by disabling tests on these classes
+  manually. Write story to fix it properly.
 
 Merged stories:
 
@@ -599,6 +627,128 @@ of two approaches:
 If an object has pointers, the canned tests will not perform a deep
 copy of the object. We need to [[*Add%20support%20for%20object%20cloning][implement cloning]] and then use it in
 canned tests.
+
+*Generate tests skeleton*
+
+When we create a dogen project for the first time, we should be able
+to, optionally, add the tests directory with skeleton code and a
+sample test. If the directory already exists (or if the option is off)
+we do nothing.
+
+*Automatically ignore tests*
+
+If a project has tests (see story above) we should automatically
+ignore the test regular expressions.
+
+*** Element extensions considered harmful                             :story:
+
+When we implemented forward declarations we created them as "element
+extensions"; that is, some kind of hack where we'd have two model
+elements stuck together (the main model element and its "extension",
+the forward declaration). In reality, they are just projections of the
+same model element. We need to handle them just as we handle class
+header / implementation. We just need to use the formatter specific
+postfix to distinguish between files.
+
+The problem with this approach, of course, is that we now need to
+create many formatters (per element type). A possible solution is to
+factor them out into a formatting helper function that they call. We
+still need all of the common machinery to formatters
+though. Nevertheless, this is a price worth paying in order to keep
+the meta-model simple (e.g. none of the hacks we introduced for
+element extensions).
+
+Notes:
+
+- add forward declaration formatters for each type. Create common
+  formatting function.
+- remove element extensions across the code base.
+- remove forward declaration element in fabric.
+
+*** Disable facets on element state                                   :story:
+
+In certain cases it may not make sense to enable a facet. The main use
+case is for testing: we should not bother testing an object if there
+are no attributes. This can be achieved with a small hack: add a
+container in archetype repository of all archetypes that require
+objects to have properties. Then, augment =is_element_disabled= to
+perform this check. We just need formatters to supply this information
+when building the repository.
+
+A much more robust version would be to have formatters return a
+function that takes in the element and returns true or false. We could
+default all formatters to just return true. However, we do not have
+support for boost/std function so this would mean manually coding the
+repository. We'd have a similar problem if we add an interface.
+
+*** Create the notion of project destinations                         :story:
+
+At present we have conflated the notion of a facet, which is a logical
+concept, with the notion of the folders in which files are placed - a
+physical concept. We started thinking about addressing this problem by
+adding the "intra-backend segment properties", but as the name
+indicates, we were not thinking about this the right way. In truth,
+what we really need is to map facets (better: archetype locations) to
+"destinations".
+
+For example, we could define a few project destinations:
+
+: masd.generation.destination.name="types_headers"
+: masd.generation.destination.folder="include/masd.cpp_ref_impl.northwind/types"
+: masd.generation.destination.name=top_level (global?)
+: masd.generation.destination.folder=""
+: masd.generation.destination.name="types_src"
+: masd.generation.destination.folder="src/types"
+: masd.generation.destination.name="tests"
+: masd.generation.destination.folder="tests"
+
+And so on. Then we can associate each formatter with a destination:
+
+: masd.generation.cpp.types.class_header.destination=types_headers
+
+Notes:
+
+- with this we can now map any formatter to any folder, particularly
+  if this is done at the element level. That is, you can easily define
+  a global mapping for all formatters, and then override it
+  locally. This solves the long standing problem of creating say types
+  in tests and so forth. With this approach you can create anything
+  anywhere.
+- we need to have some tests that ensure we don't end up with multiple
+  files with the same name at the same destination. This is a
+  particular problem for CMake. One alternative is to allow the
+  merging of CMake files, but we don't yet have a use case for
+  this. The solution would be to have a "merged file flag" and then
+  disable all other facets.
+- this will work very nicely with profiles: we can create a few out of
+  the box profiles for users such as flat project, common facets and
+  so on. Users can simply apply the stereotype to their models. These
+  are akin to "destination themes". However, we will also need some
+  kind of "variable replacement" so we can support cases like
+  =include/masd.cpp_ref_impl.northwind/types=. In fact, we also have
+  the same problem when it comes to modules. A proper path is
+  something like:
+  - =include/${model_modules_as_dots}/types/${internal_modules_as_folders}=
+  - =include/${model_modules_as_dots}/types/${internal_modules_as_dots}.=
+  - =include/${model_modules_as_dots}/types/${internal_modules_as_underscores}_=
+
+  This is *extremely* flexible. The user can now create a folder
+  structure that depends on package names etc or choose to flatten it
+  and can do so for one or all facets. This means for example that we
+  could use nested folders for =include=, not use model modules for
+  =src= and then flatten it all for =tests=.
+- actually it is a bit of a mistake to think of these destinations as
+  purely physical. In reality, we may also need them to contribute to
+  namespaces. For example, in java the folders and namespaces must
+  match. We could solve this by having a "module contribution" in the
+  destination. These would then be used to construct the namespace for
+  a given facet. Look for java story on backlog for this.
+- this also addresses the issue of having multiple serialisation
+  formats and choosing one, but having sensible folder names. For
+  example, we could have boost serialisation mapped to a destination
+  called =serialisation=. Or we could map it to say RapidJSON
+  serialisation. Or we could support two methods of serialisation for
+  the same project. The user chooses where to place them.
 
 *** Handling of inclusion constants needs reviewing                   :story:
 
@@ -1527,3 +1677,256 @@ don't have any changes around it. A simple test would be to generate
 code for a test model, read the timestamp of a file (or even all
 files), then regenerate the model and compare the timestamps. If there
 are changes, the test would fail.
+*** CANCELLED Random notes on domodl                                   :epic:
+    CLOSED: [2019-03-15 Fri 08:21]
+
+*Rationale*: metametamodeling is deemed to be outside of the scope of
+dogen. This can be done using other tools and then exported into an
+injactable model.
+
+eCore and GME seem to point out that there is a companion product to
+dogen at the meta-modeling level. A tool that allows one to define
+metamodels and instances of those metamodels. Name: domodl (domain
+modeler).
+
+For example, for finance we could define a structure like so:
+
+- M3: GME or eCore, some kind of reflexive meta-metamodel.
+- M2: instrument taxonomy (? building blocks): define the basic
+  building blocks for all instruments in finance. Examples: barriers
+  by type (american, parisian, etc), triggerable, monitoring,
+  settlement types,
+- M1: instruments: using the M2 building blocks, create instruments
+  such as spot, forward. This is a dogen model that is code
+  generated.
+- M0: actual finance system.
+
+To some extent we already started doing this by introducing the notion
+of object templates / concepts: these are in effect a bridge to the
+modeling layer above, joining two distinct layers in a single
+diagram. This is not a good idea according to the literature, but we
+can leave it there with a warning. However, there is something that is
+still not quite right: if we define say =ForwardAmountExchange= as
+inheriting from =Class= and then say that a =forward= is an instance
+of =ForwardAmountExchange= then there is an expectation that we should
+supply say =forward_points= when we define the model just like we
+supply a class name when we define a class. However, what we are
+saying is more like "this is the shape of the forward that you will
+instantiate". We need to understand how to express this in eCore.
+
+From a dia perspective, a domodl diagram uses the metamodel instances
+as profiles/stereotypes
+
+Features:
+
+- ability to read eCore diagrams
+- ability to read dia diagrams and parse them as eCore diagrams. We
+  need the merging (simultaneous loading) of both the metamodel and
+  the model so that we can make sense of the diagram. We also need to
+  understand how do expose concepts of Mn at Mn-1 - is it always
+  profiles/stereotypes? or perhaps the dia model must have the correct
+  metamodel stereotypes (e.g. =Class, etc=).
+- ability to "flatten" the read models into a dogen external
+  model. There is a dependency on dogen for this, but that's only for
+  the export.
+- we also need to somehow create an XSD and a spirit parser for the
+  instances of the metamodel. These are then used to generate a binary
+  that reads these instances and creates dogen models. In an ideal
+  world these could be injected into dogen as plugins, able to read an
+  extension (in effect, new frontends/externals). So domodl actually
+  somehow code generates these dogen plugins. Once we have dart, then
+  we have all the tools required to create build files etc. The user
+  can then create a git repo for the plugin, build it and inject it
+  into dogen. From then on dogen can parse their DSL and generate code
+  for it.
+- for completeness we should generate spirit parsing code so that we
+  could have syntax other than XML. This seems hard as it must need
+  some kind of EBNF interfacing. We should see what [[https://www.eclipse.org/Xtext/][XText]] does. The
+  parser can then be plugged in to the plugin and becomes in effect a
+  "compiler" for the new DSL. The errors should be outputted using
+  emacs/vi compliant syntax so that flycheck will automatically work.
+  XText even has LSP support.
+- it would also be ideal if we could generate emacs/vim syntax
+  highlighting.
+- we need to somehow be able to "transport" metadata into the
+  models. For example, instruments need to support ORM, etc. The
+  generated languages must have a way of supplying stereotypes so that
+  dogen knows what to generate.
+- it should be possible to just output the dogen model so that the
+  user can see what domodl is doing. It should always be possible to
+  manually replicate it (and bypass it).
+- domodl parsing code etc. should be as good as if written by hand.
+
+Notes:
+
+- users should start by creating dogen models and then try to
+  generalise them into a DSL.
+- interestingly, dogen's external model input format could be seen as
+  one such DSL. It would be great to have syntax highlighting,
+  flycheck integration etc for model development. Completion would be
+  great too (for example, get a list of types of elements, including
+  external models, etc).
+*** CANCELLED Investigate the Generic Modeling Environment            :story:
+    CLOSED: [2019-03-15 Fri 08:22]
+
+*Rationale*: outside of the bounds of dogen.
+
+[[http://www.isis.vanderbilt.edu/projects/gme/][GME]] - Generic Modeling Environment - is a complete environment for
+meta-modeling. It seems that they have already dealt with a lot of the
+problems we are now facing. However, note that this is not a modeling
+environment - it is a meta-modeling environment.
+
+#+begin_quote
+The Generic Modeling Environment is a configurable toolkit for
+creating domain-specific modeling and program synthesis
+environments. The configuration is accomplished through metamodels
+specifying the modeling paradigm (modeling language) of the
+application domain. The modeling paradigm contains all the syntactic,
+semantic, and presentation information regarding the domain; which
+concepts will be used to construct models, what relationships may
+exist among those concepts, how the concepts may be organized and
+viewed by the modeler, and rules governing the construction of
+models. The modeling paradigm defines the family of models that can be
+created using the resultant modeling environment
+#+end_quote
+
+Source code is available [[http://repo.isis.vanderbilt.edu/GME/old/15.5.8/][here]].
+
+*** CANCELLED Consider adding a meta-meta-model                       :story:
+    CLOSED: [2019-03-15 Fri 08:22]
+
+*Rationale*: outside of the bounds of dogen.
+
+This story is just a very vague placeholder for ideas around the DSL
+space.
+
+We could create a meta-meta-model that would allow us to describe
+meta-models in general. The concepts of the meta-meta-model would be
+more or less those defined in here:
+
+- [[http://www2.informatik.hu-berlin.de/sam/lehre/MDA-UML/UML-Infra-03-09-15.pdf][UML 2.0 Infrastructure Specification]]
+
+With a meta-meta-model we could then allow users to describe their own
+meta-models, which are DSLs. This could be done graphically (say using
+Dia). The GME story explains what the end-game of such an approach
+would be and its more or less realised by GME in its current form.
+
+The meta-meta-model would also allow us to think about model-to-model
+transformations using a language such as [[https://eclipse.org/atl/][ATL]]. This would then mean
+that we could transform a meta-model created by the user into one of
+our meta-models used for code generation.
+
+Meta-meta-models are vaguely related to binding.
+
+On further thought, we should probably make a clear separation of
+responsibilities. A few notes on this:
+
+- there are two separate, but interrelated problem domains:
+  meta-modeling and modeling.
+- UML is a tool for modeling. It sits in the M2 to M1 space. M2
+  because its meta-model is extensible, M1 because we spend most of
+  our time defining user models.
+- Dogen also sits in the M2 to M1 space. M2 because it defines its own
+  meta-model, not entirely MOF compatible. It also allows user
+  extensions with share some very basic similarities with profiles. M1
+  is the core of the work.
+- modeling is a huge domain. Dogen only concerns itself with the code
+  generation aspects of modeling; as such it provides a set of
+  "adapters" that convert models from other technologies (one could
+  say DSLs) into its meta-models. These adapters are
+  hand-crafted/hard-coded and they will always remain that way.
+- Dogen does not and will not concern itself with: a) UIs for modeling
+  (we will always rely on the existing tools) b) automated model
+  transformation via some transformation language (we will always
+  hand-craft them) c) management of the model life-cycle (these will
+  be left to the users).
+- there is a need for a separate product that lives a layer up from
+  Dogen: M3 to M2. This is equivalent to GME. The idea is that we need
+  to define a meta-meta-model and a constraint language. We can then
+  allow users to create their own meta-models.
+- lets call the tool Memod (Meta-modeler).
+- the job of Memod is to do meta-meta-modeling and then modeling
+  according to the defined meta-model. One can imagine Dogen as a
+  special case of this, where we hard-coded the meta-model. One could
+  of course describe Dogen's meta-model in Memod. In fact one could
+  describe all of Dogen's meta-models in Memod (including the ones we
+  adapt). However this is of limited use because there already is a
+  good language to perform modeling in (UML). One vaguely useful use
+  case is to automate the model transformations, but the effort
+  required in describing every single detail of the models and the
+  mapping is equivalent (if not greater) than hand-crafting the
+  model. However, it is useful to have a Memod description of just the
+  Dogen main meta-model (yarn).
+- for other domains Memod would be useful though. Examples: a)
+  finance: we could model all structured products using a financial
+  products meta-model. The rules that describe how each composite
+  product work must be described via the constraint language (is it
+  sufficient?). For example, one could state that a Risk Reversal is
+  made up of two Vanilla options, and describe the constraints in
+  terms of Expiry Date, Strike etc via the language. With this one can
+  create a Finance DSL. The canonical user for this tool would be the
+  structuring desk. b) Computational Neuroscience: NeuroML is a DSL
+  that describes neurons, topologies, etc. One can imagine a UI,
+  similar to NEURON, which allows one to describe specific neurons and
+  neuronal networks.
+- Once we have a Memod meta-model, we could define transformation
+  rules into Dogen's meta-model. Taking finance as an example, if we
+  had a) a Memod representation of the Dogen meta-model b) an instance
+  of the Dogen meta-model with the domain specific concepts
+  (e.g. Financial Products) c) a Memod meta-model for finance and d) a
+  user defined instance of the Memod meta-model for finance,
+  describing structured products we could then code-generate
+  user-defined structured products. Having said that, this still seems
+  like an extremely large amount of work for something that does not
+  change that frequently and could be spec'd and passed over to
+  developers rather than automated. Finally, it would be quite tricky
+  to get it right to the point one could put the output of this
+  process into production.
+*** CANCELLED Consider moving the doc folder into its own branch      :story:
+    CLOSED: [2019-03-15 Fri 08:24]
+
+*Rationale*: in the present setup this is not practical.
+
+At present we are generating builds whenever we update the docs
+(agile, manual, etc). It probably makes more sense to have one or more
+orphan branches with documentation. We can then use git worktrees to
+manage these folders.
+
+*** CANCELLED Add support for XText                                   :story:
+    CLOSED: [2019-03-15 Fri 08:25]
+
+*Rationale*: outside of the bounds of dogen.
+
+XText is a java technology that allows defining simple EBNF grammars
+and then code-generates both the parser and classes to store the
+AST. We could have a spirit equivalent. This is probably not
+horrendously difficult, but we do not have any use cases.
+
+Links:
+
+- [[http://www.eclipse.org/Xtext/][XText site]] and [[https://eclipse.org/Xtext/documentation/][documentation]]
+- [[%5B%5Bhttp://eclipsecon.org/summiteurope2006/presentations/ESE2006-EclipseModelingSymposium12_xTextFramework.pdf%5D%5D][oAW xText: A framework for textual DSLs]]
+- Franca: some IDL language for which there is an XText
+  definition. C++ (spirit) implementation [[https://github.com/martinhaefner/franca][here]].
+
+*** CANCELLED Run "changed" tests only                                :story:
+    CLOSED: [2019-03-15 Fri 08:28]
+
+*Rationale*: this is too complicated for C++.
+
+Random idea: can we have a target that just runs "changed" tests? That
+is, tests that are impacted by the files that were changed since we
+last executed the tests.
+
+For this to work we need to create a file with every execution of
+tests and then use that as a dependency. There must be some prior art
+for this with CMake.
+
+*** CANCELLED Support for transactional writes                        :story:
+    CLOSED: [2019-03-15 Fri 08:31]
+
+*Rationale*: this is not practical. Users should be on version control.
+
+It would be nice if dogen either generated all files or didn't touch
+the directory at all, at least as an option. We could simply generate
+into a temporary directory and then swap them at the end.
