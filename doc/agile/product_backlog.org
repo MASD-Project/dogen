@@ -625,6 +625,108 @@ vision. The V2 vision is to finish the dogen API and implement all
 functionality in terms of metamodel elements - e.g. no special cases
 such as profiles, licences etc.
 
+*** Move generation element properties back into formattables         :story:
+
+We moved a number of properties out of formattables. Move them
+back. By the end of this refactor we should end up with no references
+to facets in coding.
+
+*** Move fabric types into generation                                 :story:
+
+- copy across the fabric types from cpp and csharp into generation.
+- update formatters to use the types from generation.
+- delete them from original models.
+
+At present we are always generating the fabric types via the injctor
+and then asking the user to disable them as required via the
+enablement settings. This is very silly. The approach should now be
+that we look for elements with the correct stereotypes,
+e.g. =masd::cmakelists= and so forth and use those to generate these
+elements. This must be done as part of the work to move fabric types
+into the metamodel. We should also take this opportunity to merge
+common types between C# and C++, if any exist.
+
+This will also address the naming of types such as registrar.
+
+*** Move formattables into generation                                 :story:
+
+- first, update the generation model with formattable properties from
+  cpp: add a formattable type to the generation model and container
+  for it, add the formattable population logic. Then remove the
+  formattable logic from cpp.
+- repeat the exercise with csharp. We should end up with two new
+  namespaces in generation handling the fabric meta-types and their
+  processing.
+- by the end of this refactor, cpp and csharp should contain only the
+  formatters.
+
+*** Make visitor an explicit type                                     :story:
+
+Instead of automatically generating visitors via the visitable
+stereotype, we should:
+
+- create a new stereotype =masd::visitor=. It triggers the creation of
+  the visitor meta-model element.
+- visitor must have a target via meta-data. This points to the element
+  to visit.
+
+We need to make sure we don't break cross model visitation with this change.
+
+*** Consider allowing renaming of "internal" types                    :story:
+
+Users may want to change the =_visitor= postfix for visitors or the
+boost serialisation registrar name. This could be achieved via
+meta-data.
+
+Merged stories:
+
+*Consider renaming registrar in boost serialisation*
+
+At present we have a registrar formatter that does the boost
+serialisation work. However, the name =registrar= is a bit too
+generic; we may for example add formatters for static registrars. We
+should rename this formatter to something more meaningful. Also the
+name registrar is already well understood to mean static registrar.
+
+This is a big problem now that we cannot add a type with the name
+registrar to the main model as it clashes with the serialisation
+registrar.
+
+We could simply name it serialisation registrar or some such name that
+is very unlikely to clash. We should then have a validation rule that
+stops users from defining types with that name.
+
+We need to go through all of the renamed registrars and fix them.
+
+Another option is to allow users to supply a name via meta-data to
+avoid name clashes. We could error when the user has defined a type.
+
+Actually, since the clash is only internal - the names we are
+generating on the fly are clashing with the user defined names - we
+should probably have a "postfix" that can be added in case of
+clashes. The generated code will not cause problems, its just the
+formattables pipeline.
+
+*Allow renaming of visitor*                                         :story:*
+
+At present the visitor is named by dogen. There is nothing stopping us
+from allowing users to rename it via meta-data. We don't have a use
+case yet.
+
+*** Create =generation.extraction= model                              :story:
+
+- rename =generation.cpp= to =generation.extraction=.
+- rename =formatters= namespace to =cpp=.
+- ensure the logic for processing one tech space will work for
+  multiple tech spaces. For example, we could move the existing
+  workflow into the =cpp= namespace and register the text generation
+  chain from there.
+- repeat the exercise with the csharp model.
+- by the end of this refactor we should end up with a single
+  =generation.extraction= containing both the csharp and cpp
+  formatters.
+- consider renaming formatters to model to text transforms.
+
 *** Add support for operations                                        :story:
 
 #+begin_quote
@@ -846,16 +948,6 @@ Ideally when logging at info we want to see the spine of the program,
 showing all transforms with their start and finishes and some
 information about what they are processing (e.g. model).
 
-*** Fabric generates forward decls with no path                       :story:
-
-The following looks strange:
-
-: 2019-03-06 17:30:20.074618 [DEBUG] [quit.cpp.formatters.workflow] Procesing element: <dogen><hello_world><transformation_error>
-: 2019-03-06 17:30:20.074627 [DEBUG] [quit.cpp.formatters.workflow] Meta name: <dogen><generation><cpp><fabric><forward_declarations>
-: 2019-03-06 17:30:20.074636 [DEBUG] [quit.cpp.formatters.workflow] Using the stock formatter: masd.extraction.cpp.serialization.forward_declarations
-: 2019-03-06 17:30:20.074647 [DEBUG] [generation.cpp.formatters.assistant] Processing element: <dogen><hello_world><transformation_error> for archetype: masd.extraction.cpp.serialization.forward_declarations
-: 2019-03-06 17:30:20.074659 [DEBUG] [quit.cpp.formatters.workflow] Formatted artefact. Path: ""
-
 *** Rename =transformation_error= to =transform_exception=            :story:
 
 In keeping with the framework guidelines for naming exceptions.
@@ -1044,44 +1136,6 @@ At present the utility model has a number of hand-crafted
 exceptions. We need to convert them to dogen exceptions. We also need
 to get rid of the invalid enum exception and use the
 =std::argument...= exception instead.
-
-*** Move generation element properties back into formattables         :story:
-
-We moved a number of properties out of formattables. Move them
-back. By the end of this refactor we should end up with no references
-to facets in coding.
-
-*** Move fabric types into generation                                 :story:
-
-- copy across the fabric types from cpp and csharp into generation.
-- update formatters to use the types from generation.
-- delete them from original models.
-
-*** Move formattables into generation                                 :story:
-
-- first, update the generation model with formattable properties from
-  cpp: add a formattable type to the generation model and container
-  for it, add the formattable population logic. Then remove the
-  formattable logic from cpp.
-- repeat the exercise with csharp. We should end up with two new
-  namespaces in generation handling the fabric meta-types and their
-  processing.
-- by the end of this refactor, cpp and csharp should contain only the
-  formatters.
-
-*** Create =generation.extraction= model                              :story:
-
-- rename =generation.cpp= to =generation.extraction=.
-- rename =formatters= namespace to =cpp=.
-- ensure the logic for processing one tech space will work for
-  multiple tech spaces. For example, we could move the existing
-  workflow into the =cpp= namespace and register the text generation
-  chain from there.
-- repeat the exercise with the csharp model.
-- by the end of this refactor we should end up with a single
-  =generation.extraction= containing both the csharp and cpp
-  formatters.
-- consider renaming formatters to model to text transforms.
 
 *** Fix =cp= error on cmake with local third-party packages           :story:
 
@@ -4692,47 +4746,6 @@ The right thing to do is to throw a more sensible exception such as
 
 Once we have a use case for default values in text collections we
 should add it.
-
-*** Consider allowing renaming of "internal" types                    :story:
-
-Users may want to change the =_visitor= postfix for visitors or the
-boost serialisation registrar name. This could be achieved via
-meta-data.
-
-Merged stories:
-
-*Consider renaming registrar in boost serialisation*
-
-At present we have a registrar formatter that does the boost
-serialisation work. However, the name =registrar= is a bit too
-generic; we may for example add formatters for static registrars. We
-should rename this formatter to something more meaningful. Also the
-name registrar is already well understood to mean static registrar.
-
-This is a big problem now that we cannot add a type with the name
-registrar to the main model as it clashes with the serialisation
-registrar.
-
-We could simply name it serialisation registrar or some such name that
-is very unlikely to clash. We should then have a validation rule that
-stops users from defining types with that name.
-
-We need to go through all of the renamed registrars and fix them.
-
-Another option is to allow users to supply a name via meta-data to
-avoid name clashes. We could error when the user has defined a type.
-
-Actually, since the clash is only internal - the names we are
-generating on the fly are clashing with the user defined names - we
-should probably have a "postfix" that can be added in case of
-clashes. The generated code will not cause problems, its just the
-formattables pipeline.
-
-*Allow renaming of visitor*                                         :story:*
-
-At present the visitor is named by dogen. There is nothing stopping us
-from allowing users to rename it via meta-data. We don't have a use
-case yet.
 
 *** Add =interface= meta-model element                                :story:
 
