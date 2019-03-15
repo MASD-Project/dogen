@@ -73,7 +73,23 @@ if (DOGEN_CLI_EXECUTABLE)
         add_dependencies(convert_all convert_${model_name})
     endforeach()
 
-    # main input models
+    #
+    # Model Weaving
+    #
+    set(models masd.dogen.generation.cpp masd.dogen.generation.csharp)
+    foreach(model ${models})
+        set(target ${projects_dir}/${model})
+        add_custom_target(weave_${model}
+            COMMENT "Weaving ${model}."
+            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+            COMMAND ${DOGEN_CLI_EXECUTABLE} weave
+            --target ${target} ${DOGEN_COMMON_OPTIONS})
+        add_dependencies(weave_all weave_${model})
+    endforeach()
+
+    #
+    # Input models for generation
+    #
     set(prefix "masd.dogen")
     set(models ${prefix})
     set(models ${models} ${prefix}.annotations)
