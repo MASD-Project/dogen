@@ -47,6 +47,7 @@ public:
     static coding::meta_model::name make_object_odb_options_name();
     static coding::meta_model::name make_registrar_name();
     static coding::meta_model::name make_forward_declarations_name();
+    static coding::meta_model::name make_entry_point_name();
 };
 
 }

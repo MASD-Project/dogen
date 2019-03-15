@@ -25,24 +25,21 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <boost/make_shared.hpp>
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/entry_point_fwd.hpp"
+#include "masd.dogen.generation/types/meta_model/model.hpp"
 
 namespace masd::dogen::generation::cpp::fabric {
 
 class entry_point_factory final {
-public:
-    entry_point_factory() = default;
-    entry_point_factory(const entry_point_factory&) = default;
-    entry_point_factory(entry_point_factory&&) = default;
-    ~entry_point_factory() = default;
-    entry_point_factory& operator=(const entry_point_factory&) = default;
+private:
+    boost::shared_ptr<fabric::entry_point>
+    make(const coding::meta_model::name& model_name) const;
 
 public:
-    bool operator==(const entry_point_factory& rhs) const;
-    bool operator!=(const entry_point_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    boost::shared_ptr<coding::meta_model::element>
+    make(const generation::meta_model::model& m) const;
 };
 
 }

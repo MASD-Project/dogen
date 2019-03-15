@@ -85,4 +85,9 @@ coding::meta_model::name meta_name_factory::make_forward_declarations_name() {
     return r;
 }
 
+coding::meta_model::name meta_name_factory::make_entry_point_name() {
+    static const auto r(make_name("entry_point"));
+    return r;
+}
+
 }
