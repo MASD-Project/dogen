@@ -19,13 +19,13 @@
  *
  */
 #include <ostream>
+#include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.generation.cpp/io/fabric/entry_point_io.hpp"
 
 namespace masd::dogen::generation::cpp::fabric {
 
-std::ostream& operator<<(std::ostream& s, const entry_point&) {
-    s << " { "
-      << "\"__type__\": " << "\"masd::dogen::generation::cpp::fabric::entry_point\"" << " }";
+std::ostream& operator<<(std::ostream& s, const entry_point& v) {
+    v.to_stream(s);
     return(s);
 }
 

@@ -2021,6 +2021,9 @@
     },
     {
       "name": "fabric::entry_point",
+      "tagged_values": {
+        "masd.generalization.parent": "coding::meta_model::element"
+      },
       "fallback_element_type": "masd::object"
     },
     {
