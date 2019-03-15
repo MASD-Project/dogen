@@ -472,6 +472,23 @@ boost::filesystem::path locator::make_full_path_for_tests_cpp_implementation(
     return r;
 }
 
+boost::filesystem::path locator::make_full_path_for_tests_cpp_main(
+    const coding::meta_model::name& n, const std::string& archetype) const {
+
+    auto r(project_path_);
+
+    const auto& cfg(configuration_);
+    const auto extension(cfg.implementation_file_extension());
+
+    // FIXME: hack
+    auto new_name(n);
+    new_name.simple("main");
+    const auto facet_path(make_facet_path(archetype, extension, new_name));
+    r /= facet_path;
+
+    return r;
+}
+
 boost::filesystem::path locator::make_full_path_for_cpp_implementation(
     const coding::meta_model::name& n, const std::string& archetype) const {
 

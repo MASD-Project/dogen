@@ -240,6 +240,12 @@ public:
         const coding::meta_model::name& n, const std::string& archetype) const;
 
     /**
+     * @brief Generate the full path for entry point under tests.
+     */
+    boost::filesystem::path make_full_path_for_tests_cpp_main(
+        const coding::meta_model::name& n, const std::string& archetype) const;
+
+    /**
      * @brief Generate the full path for C++ implementation.
      */
     boost::filesystem::path make_full_path_for_cpp_implementation(
