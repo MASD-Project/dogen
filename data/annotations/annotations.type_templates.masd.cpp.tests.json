@@ -76,5 +76,21 @@
     "template_kind": "instance",
     "scope": "root_module",
     "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "masd.extraction.cpp.tests.main.postfix"
+    },
+    "archetype_location": {
+      "kernel": "masd",
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.tests",
+      "archetype": "masd.extraction.cpp.tests.main"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
   }
 ]
