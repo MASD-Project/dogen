@@ -44,4 +44,9 @@ std::string traits::enum_implementation_archetype() {
     return r;
 }
 
+std::string traits::main_archetype() {
+    static std::string r(traits::facet() + ".main");
+    return r;
+}
+
 }

@@ -49,6 +49,11 @@ struct traits {
      * @brief Name of the enumeration implementation archetype.
      */
     static std::string enum_implementation_archetype();
+
+    /**
+     * @brief Name of the entry point.
+     */
+    static std::string main_archetype();
 };
 
 }

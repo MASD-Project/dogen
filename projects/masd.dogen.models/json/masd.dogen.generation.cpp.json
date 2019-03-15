@@ -2032,6 +2032,13 @@
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::tests::main_formatter",
+      "stereotypes": [
+        "masd::cpp_artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

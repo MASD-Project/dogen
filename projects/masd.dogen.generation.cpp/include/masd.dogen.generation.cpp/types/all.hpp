@@ -128,6 +128,7 @@
 #include "masd.dogen.generation.cpp/types/formattables/streaming_expander.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/hash/optional_helper.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/serialization/traits.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/tests/main_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/artefact_properties.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/rapidjson/initializer.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/test_data/bool_helper.hpp"
