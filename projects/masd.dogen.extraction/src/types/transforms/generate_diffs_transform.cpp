@@ -72,19 +72,22 @@ apply(const context& ctx, meta_model::model& m) {
             continue;
         }
 
-        BOOST_LOG_SEV(lg, debug) << "Processing arefact: "
+        BOOST_LOG_SEV(lg, trace) << "Processing arefact: "
                                  << a.path().filename();
-        BOOST_LOG_SEV(lg, debug) << "Arefact operation: " << a.operation();
+        BOOST_LOG_SEV(lg, trace) << "Arefact operation: " << a.operation();
 
         /*
          * Ensure the artefact can contribute to the diff.
          */
         const auto ot(a.operation().type());
         using extraction::meta_model::operation_type;
-        if (ot != operation_type::write && ot != operation_type::remove)
+        if (ot != operation_type::write && ot != operation_type::remove) {
+            BOOST_LOG_SEV(lg, trace) << "Operation will not produce diffs.";
             continue;
+        }
 
         found_diffs = true;
+        BOOST_LOG_SEV(lg, debug) << "Arefact has diffs.";
 
         /*
          * If the file already exists, obtain its current content.

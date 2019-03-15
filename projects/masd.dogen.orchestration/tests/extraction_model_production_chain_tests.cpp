@@ -46,13 +46,13 @@ const std::string changed_handcrafted_cpp_fn("changed_handcrafted.cpp");
 
 /*
  * Set these flag to true if you want to dump information for all
- * tests. It should normally be set to false, unless we are diagnosing
- * some kind of problem. Don't check it in as true as it slows down
- * the tests for no good reason.
+ * tests. All except for diffing should normally be set to false,
+ * unless we are diagnosing some kind of problem. Don't check it in as
+ * true as it slows down the tests for no good reason.
  */
 const bool enable_tracing_globally(false);
-const bool enable_reporting_globally(false);
-const bool enable_diffing_globally(false);
+const bool enable_reporting_globally(true);
+const bool enable_diffing_globally(true);
 
 /**
  * @brief Prints a limited number of lines from content. Used to
@@ -863,7 +863,7 @@ BOOST_AUTO_TEST_CASE(masd_dogen_generation_cpp_json_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_generation_cpp_json());
     const auto od(dogen_generation::project_directory());
-    const auto m(apply_extraction_model_production(t, od));
+    const auto m(apply_extraction_model_production(t, od, true));
     BOOST_CHECK(check_for_differences(od, m));
 }
 

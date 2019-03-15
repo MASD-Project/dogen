@@ -45,7 +45,7 @@ namespace masd::dogen::generation::transforms {
 void model_generation_chain::apply(const context& ctx,
     std::list<meta_model::model>& ms) {
     tracing::scoped_chain_tracer stp(lg, "model generation chain",
-        transform_id, *ctx.tracer());
+        transform_id, "FIXME", *ctx.tracer(), ms);
 
     /*
      * Apply all of the post-processing transforms to the model.

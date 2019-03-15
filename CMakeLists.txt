@@ -463,9 +463,9 @@ if (DOGEN_CLI_EXECUTABLE)
 
     set(DOGEN_REPORTING_OPTIONS "")
     # uncomment to enable reporting
-    # set(DOGEN_REPORTING_OPTIONS ${DOGEN_REPORTING_OPTIONS} --reporting-enabled)
-    # set(DOGEN_REPORTING_OPTIONS ${DOGEN_REPORTING_OPTIONS}
-    #     --reporting-style org-mode )
+    set(DOGEN_REPORTING_OPTIONS ${DOGEN_REPORTING_OPTIONS} --reporting-enabled)
+    set(DOGEN_REPORTING_OPTIONS ${DOGEN_REPORTING_OPTIONS}
+        --reporting-style org-mode )
 
     set(DOGEN_COMMON_OPTIONS ${DOGEN_LOGGING_OPTIONS} ${DOGEN_TRACING_OPTIONS}
         ${DOGEN_DIFFING_OPTIONS} ${DOGEN_REPORTING_OPTIONS})

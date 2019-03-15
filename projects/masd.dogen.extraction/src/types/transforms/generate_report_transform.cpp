@@ -26,6 +26,7 @@
 #include "masd.dogen/io/reporting_style_io.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.extraction/io/meta_model/model_io.hpp"
 #include "masd.dogen.extraction/hash/meta_model/operation_type_hash.hpp"
 #include "masd.dogen.extraction/hash/meta_model/operation_reason_hash.hpp"
 #include "masd.dogen.extraction/types/transforms/transform_exception.hpp"
@@ -238,7 +239,7 @@ void generate_report_transform::
 apply(const context& ctx, const meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "generate operation report transform", transform_id, m.name(),
-        *ctx.tracer());
+        *ctx.tracer(), m);
 
     /*
      * If the user did not request diffing, there is nothing to do.

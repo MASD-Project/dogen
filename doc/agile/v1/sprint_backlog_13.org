@@ -14,23 +14,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-15 Fri 14:50]
+#+CAPTION: Clock summary at [2019-03-15 Fri 16:00]
 | <75>                                                     |         |       |      |       |
 | Headline                                                 | Time    |       |      |     % |
 |----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                             | *36:30* |       |      | 100.0 |
+| *Total time*                                             | *37:39* |       |      | 100.0 |
 |----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                  | 36:30   |       |      | 100.0 |
-| Active                                                   |         | 36:30 |      | 100.0 |
-| Edit release notes for previous sprint                   |         |       | 2:22 |   6.5 |
-| Sprint and product backlog grooming                      |         |       | 4:41 |  12.8 |
-| Create a video demo for the sprint's features            |         |       | 3:47 |  10.4 |
-| Make projects directory env optional                     |         |       | 0:10 |   0.5 |
-| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   2.1 |
-| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  15.8 |
-| Delete extra files appears broken at present             |         |       | 6:26 |  17.6 |
-| Empty directories should be deleted                      |         |       | 5:37 |  15.4 |
-| Code generation of tests for dogen models                |         |       | 6:56 |  19.0 |
+| Stories                                                  | 37:39   |       |      | 100.0 |
+| Active                                                   |         | 37:39 |      | 100.0 |
+| Edit release notes for previous sprint                   |         |       | 2:22 |   6.3 |
+| Sprint and product backlog grooming                      |         |       | 4:41 |  12.4 |
+| Create a video demo for the sprint's features            |         |       | 3:47 |  10.0 |
+| Make projects directory env optional                     |         |       | 0:10 |   0.4 |
+| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   2.0 |
+| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  15.3 |
+| Delete extra files appears broken at present             |         |       | 6:26 |  17.1 |
+| Empty directories should be deleted                      |         |       | 5:37 |  14.9 |
+| Changes to stitch templates are not reported correctly   |         |       | 1:09 |   3.1 |
+| Code generation of tests for dogen models                |         |       | 6:56 |  18.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -580,6 +581,28 @@ cannot reproduce it any longer.
  But clearly something untowards is happening with some of the
  templates.
 
+*** COMPLETED Changes to stitch templates are not reported correctly  :story:
+    CLOSED: [2019-03-15 Fri 16:00]
+    :LOGBOOK:
+    CLOCK: [2019-03-15 Fri 14:51]--[2019-03-15 Fri 16:00] =>  1:09
+    :END:
+
+At the moment if we make a change to a template but forget to weave we
+get errors in tests but nothing shows up on the diffs or in the
+operations report.
+
+Problems:
+
+- we do not produce a trace of the inputs to the reporting transform
+  even when reporting is on. Fixed.
+- when diffing is off and reporting is on, we do not get a write
+  operation in report. This was because report was out of sync.
+- diffs are not produced if diffing is off. The problem is that we
+  have only one knob to control the generation of diffs and the
+  production of patches. We should always generate diffs for tests
+  because it allows us to troubleshoot the build machines. For now we
+  can simply enable diffing on all extraction chain tests.
+
 *** STARTED Code generation of tests for dogen models                 :story:
     :LOGBOOK:
     CLOCK: [2019-03-15 Fri 14:28]--[2019-03-15 Fri 14:50] =>  0:22
@@ -670,13 +693,6 @@ we do nothing.
 
 If a project has tests (see story above) we should automatically
 ignore the test regular expressions.
-
-*** Changes to stitch templates are not reported correctly            :story:
-
-At the moment if we make a change to a template but forget to weave we
-get errors in tests but nothing shows up on the diffs or in the
-operations report.
-
 
 *** Element extensions considered harmful                             :story:
 

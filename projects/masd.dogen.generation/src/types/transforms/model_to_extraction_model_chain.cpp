@@ -19,10 +19,13 @@
  *
  */
 #include <boost/lexical_cast.hpp>
+#include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.extraction/io/meta_model/model_io.hpp"
+#include "masd.dogen.generation/io/meta_model/model_io.hpp"
 #include "masd.dogen.generation/types/transforms/transformation_error.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 
@@ -123,7 +126,7 @@ extraction::meta_model::model model_to_extraction_model_chain::
 apply(const generation::transforms::context& ctx,
     const std::list<generation::meta_model::model>& ms) {
     tracing::scoped_chain_tracer stp(lg, "model to extraction model chain",
-        transform_id, *ctx.tracer());
+        transform_id, "FIXME", *ctx.tracer(), ms);
 
     BOOST_LOG_SEV(lg, debug) << "Transforming models: " << ms.size();
 
@@ -147,6 +150,7 @@ apply(const generation::transforms::context& ctx,
     for (const auto& m : ms)
         merge(apply(ctx, m), r);
 
+    stp.end_chain(r);
     return r;
 }
 
