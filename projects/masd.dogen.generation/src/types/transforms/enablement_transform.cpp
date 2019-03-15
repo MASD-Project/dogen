@@ -254,7 +254,8 @@ void enablement_transform::compute_enablement_for_element(
     const auto& cal(j->second.canonical_archetype_locations());
 
     /*
-     * Now, for each element, obtain the local configuration.
+     * Now, for each element, obtain the global and local
+     * configuration.
      */
     const auto& galp(global_archetype_location_properties);
     const auto lalp(e.archetype_location_properties());
@@ -262,7 +263,7 @@ void enablement_transform::compute_enablement_for_element(
     /*
      * Once we got both the global and the local configuration, we can
      * then compute the enablement values for this formattable, across
-     * all the supported formatting.
+     * all the supported formatters.
      */
     auto& eafe(enabled_archetype_for_element);
     for (auto& pair : e.artefact_properties()) {

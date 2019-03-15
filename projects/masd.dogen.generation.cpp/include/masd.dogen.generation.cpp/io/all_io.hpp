@@ -28,6 +28,7 @@
 #include "masd.dogen.generation.cpp/io/fabric/registrar_io.hpp"
 #include "masd.dogen.generation.cpp/io/fabric/cmakelists_io.hpp"
 #include "masd.dogen.generation.cpp/io/fabric/odb_target_io.hpp"
+#include "masd.dogen.generation.cpp/io/fabric/entry_point_io.hpp"
 #include "masd.dogen.generation.cpp/io/fabric/odb_targets_io.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/model_io.hpp"
 #include "masd.dogen.generation.cpp/io/fabric/master_header_io.hpp"

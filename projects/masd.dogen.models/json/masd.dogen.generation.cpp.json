@@ -2018,6 +2018,17 @@
         "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "fabric::entry_point",
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "fabric::entry_point_factory",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
