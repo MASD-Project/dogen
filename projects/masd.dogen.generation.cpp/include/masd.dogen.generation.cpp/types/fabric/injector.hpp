@@ -54,6 +54,8 @@ private:
         generation::meta_model::model& m) const;
     void inject_forward_declarations(
         generation::meta_model::model& m) const;
+    void inject_entry_point(
+        generation::meta_model::model& m) const;
 
 public:
     void inject(const annotations::type_repository& atrp,
