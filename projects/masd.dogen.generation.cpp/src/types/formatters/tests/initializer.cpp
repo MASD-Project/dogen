@@ -19,12 +19,14 @@
  *
  */
 #include "masd.dogen.generation.cpp/types/formatters/tests/class_implementation_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/tests/main_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/tests/initializer.hpp"
 
 namespace masd::dogen::generation::cpp::formatters::tests {
 
 void initializer::initialize(registrar& rg) {
     register_formatter<class_implementation_formatter>(rg);
+    register_formatter<main_formatter>(rg);
 }
 
 }
