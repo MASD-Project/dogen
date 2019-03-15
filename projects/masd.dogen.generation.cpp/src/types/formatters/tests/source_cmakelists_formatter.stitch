@@ -1,0 +1,109 @@
+<#@ masd.annotations.profile=dogen.stitch #>
+<#@ masd.stitch.containing_namespaces=masd::dogen::generation::cpp::formatters::tests #>
+<#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+<#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.extraction/types/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/fabric/cmakelists.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/formatting_error.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/tests/source_cmakelists_formatter.hpp" #>
+<#+
+
+std::string source_cmakelists_formatter::static_id() {
+    return traits::source_cmakelists_archetype();
+}
+
+std::string source_cmakelists_formatter::id() const {
+    return static_id();
+}
+
+annotations::archetype_location source_cmakelists_formatter::
+archetype_location() const {
+    static annotations::archetype_location
+        r(cpp::traits::kernel(), cpp::traits::backend(),
+          traits::cmake_facet(),
+          source_cmakelists_formatter::static_id());
+    return r;
+}
+
+const coding::meta_model::name& source_cmakelists_formatter::meta_name() const {
+    static auto r(fabric::meta_name_factory::make_cmakelists_name());
+    return r;
+}
+
+std::string source_cmakelists_formatter::family() const {
+    return cpp::traits::cmake_family();
+}
+
+inclusion_support_types source_cmakelists_formatter::
+inclusion_support_type() const {
+    return inclusion_support_types::not_supported;
+}
+
+boost::filesystem::path source_cmakelists_formatter::inclusion_path(
+    const formattables::locator& /*l*/, const coding::meta_model::name& n) const {
+
+    using namespace masd::dogen::utility::log;
+    using namespace masd::dogen::generation::cpp::formatters;
+    static logger lg(logger_factory(source_cmakelists_formatter::static_id()));
+
+    static const std::string not_supported("Inclusion path is not supported: ");
+
+    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
+}
+
+boost::filesystem::path source_cmakelists_formatter::full_path(
+    const formattables::locator& l, const coding::meta_model::name& n) const {
+    return l.make_full_path_for_source_cmakelists(n, static_id());
+}
+
+std::list<std::string> source_cmakelists_formatter::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& /*f*/,
+    const coding::meta_model::element& /*e*/) const {
+    static std::list<std::string> r;
+    return r;
+}
+
+extraction::meta_model::artefact source_cmakelists_formatter::
+format(const context& ctx, const coding::meta_model::element& e) const {
+    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    const auto& c(a.as<fabric::cmakelists>(e));
+
+    {
+        const auto cs(dogen::extraction::comment_styles::shell_style);
+        a.make_decoration_preamble(cs, e);
+        const auto model_name(a.get_identifiable_model_name(c.name()));
+        const auto product_name(a.get_product_name(c.name()));
+#>
+set(files "")
+file(GLOB_RECURSE files RELATIVE
+    "${CMAKE_CURRENT_SOURCE_DIR}/"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.<#= c.implementation_file_extension() #>")
+
+<#+
+        if (a.is_odb_facet_enabled() && !c.odb_targets().targets().empty()) {
+#>
+if(NOT ODB_LIBODB_FOUND)
+    message(FATAL "ODB include directories not defined.")
+endif()
+
+set(odb_files "")
+file(GLOB_RECURSE odb_files RELATIVE
+   "${CMAKE_CURRENT_SOURCE_DIR}/"
+   "${CMAKE_CURRENT_SOURCE_DIR}/*.cxx")
+set(files ${files} ${odb_files})
+
+add_library(<#= model_name #> STATIC ${files})
+set_target_properties(<#= model_name #> PROPERTIES
+<#+
+        }
+    } // sbf
+        return a.make_artefact();
+}
+#>

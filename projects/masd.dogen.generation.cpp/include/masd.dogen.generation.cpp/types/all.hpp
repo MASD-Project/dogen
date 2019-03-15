@@ -214,6 +214,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/hash/associative_container_helper.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/io/class_implementation_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/io/inserter_implementation_helper.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/tests/source_cmakelists_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/test_data/builtin_header_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/hash/class_implementation_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/serialization/enum_header_formatter.hpp"
