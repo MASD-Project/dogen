@@ -37,6 +37,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/io/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/odb/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/hash/traits.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/tests/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/types/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/test_data/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/serialization/traits.hpp"
@@ -358,6 +359,11 @@ bool assistant::is_io_enabled() const {
 
 bool assistant::is_odb_facet_enabled() const {
     using formatters::odb::traits;
+    return is_facet_enabled(traits::facet());
+}
+
+bool assistant::is_tests_facet_enabled() const {
+    using formatters::tests::traits;
     return is_facet_enabled(traits::facet());
 }
 

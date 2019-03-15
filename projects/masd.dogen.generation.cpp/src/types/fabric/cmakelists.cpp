@@ -53,7 +53,8 @@ cmakelists::cmakelists(
     const std::string& source_directory_name,
     const std::string& header_file_extension,
     const std::string& implementation_file_extension,
-    const masd::dogen::generation::cpp::fabric::odb_targets& odb_targets)
+    const masd::dogen::generation::cpp::fabric::odb_targets& odb_targets,
+    const std::string& tests_directory_name)
     : masd::dogen::coding::meta_model::element(
       name,
       documentation,
@@ -72,7 +73,8 @@ cmakelists::cmakelists(
       source_directory_name_(source_directory_name),
       header_file_extension_(header_file_extension),
       implementation_file_extension_(implementation_file_extension),
-      odb_targets_(odb_targets) { }
+      odb_targets_(odb_targets),
+      tests_directory_name_(tests_directory_name) { }
 
 void cmakelists::accept(const masd::dogen::coding::meta_model::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
@@ -112,7 +114,8 @@ void cmakelists::to_stream(std::ostream& s) const {
       << "\"source_directory_name\": " << "\"" << tidy_up_string(source_directory_name_) << "\"" << ", "
       << "\"header_file_extension\": " << "\"" << tidy_up_string(header_file_extension_) << "\"" << ", "
       << "\"implementation_file_extension\": " << "\"" << tidy_up_string(implementation_file_extension_) << "\"" << ", "
-      << "\"odb_targets\": " << odb_targets_
+      << "\"odb_targets\": " << odb_targets_ << ", "
+      << "\"tests_directory_name\": " << "\"" << tidy_up_string(tests_directory_name_) << "\""
       << " }";
 }
 
@@ -125,6 +128,7 @@ void cmakelists::swap(cmakelists& other) noexcept {
     swap(header_file_extension_, other.header_file_extension_);
     swap(implementation_file_extension_, other.implementation_file_extension_);
     swap(odb_targets_, other.odb_targets_);
+    swap(tests_directory_name_, other.tests_directory_name_);
 }
 
 bool cmakelists::equals(const masd::dogen::coding::meta_model::element& other) const {
@@ -139,7 +143,8 @@ bool cmakelists::operator==(const cmakelists& rhs) const {
         source_directory_name_ == rhs.source_directory_name_ &&
         header_file_extension_ == rhs.header_file_extension_ &&
         implementation_file_extension_ == rhs.implementation_file_extension_ &&
-        odb_targets_ == rhs.odb_targets_;
+        odb_targets_ == rhs.odb_targets_ &&
+        tests_directory_name_ == rhs.tests_directory_name_;
 }
 
 cmakelists& cmakelists::operator=(cmakelists other) {
@@ -226,6 +231,22 @@ void cmakelists::odb_targets(const masd::dogen::generation::cpp::fabric::odb_tar
 
 void cmakelists::odb_targets(const masd::dogen::generation::cpp::fabric::odb_targets&& v) {
     odb_targets_ = std::move(v);
+}
+
+const std::string& cmakelists::tests_directory_name() const {
+    return tests_directory_name_;
+}
+
+std::string& cmakelists::tests_directory_name() {
+    return tests_directory_name_;
+}
+
+void cmakelists::tests_directory_name(const std::string& v) {
+    tests_directory_name_ = v;
+}
+
+void cmakelists::tests_directory_name(const std::string&& v) {
+    tests_directory_name_ = std::move(v);
 }
 
 }

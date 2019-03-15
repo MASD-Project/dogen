@@ -116,6 +116,9 @@ locator::make_type_group(const annotations::type_repository& atrp,
     const auto& sdn(traits::cpp::source_directory_name());
     r.source_directory_name = s.select_type_by_name(sdn);
 
+    const auto& tdn(traits::cpp::tests_directory_name());
+    r.tests_directory_name = s.select_type_by_name(tdn);
+
     const auto& hde(traits::cpp::header_file_extension());
     r.header_file_extension = s.select_type_by_name(hde);
 
@@ -179,6 +182,9 @@ locator_configuration locator::make_configuration(
 
     const auto& sdn(tg.source_directory_name);
     r.source_directory_name(s.get_text_content_or_default(sdn));
+
+    const auto& tdn(tg.tests_directory_name);
+    r.tests_directory_name(s.get_text_content_or_default(tdn));
 
     const auto& dt(tg.disable_facet_directories);
     r.disable_facet_directories(s.get_boolean_content_or_default(dt));
@@ -417,6 +423,10 @@ std::string locator::include_directory_name() const {
 
 std::string locator::source_directory_name() const {
     return configuration_.source_directory_name();
+}
+
+std::string locator::tests_directory_name() const {
+    return configuration_.tests_directory_name();
 }
 
 boost::filesystem::path locator::

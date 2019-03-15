@@ -60,7 +60,8 @@ public:
         const std::string& source_directory_name,
         const std::string& header_file_extension,
         const std::string& implementation_file_extension,
-        const masd::dogen::generation::cpp::fabric::odb_targets& odb_targets);
+        const masd::dogen::generation::cpp::fabric::odb_targets& odb_targets,
+        const std::string& tests_directory_name);
 
 public:
     using masd::dogen::coding::meta_model::element::accept;
@@ -98,6 +99,11 @@ public:
     void odb_targets(const masd::dogen::generation::cpp::fabric::odb_targets& v);
     void odb_targets(const masd::dogen::generation::cpp::fabric::odb_targets&& v);
 
+    const std::string& tests_directory_name() const;
+    std::string& tests_directory_name();
+    void tests_directory_name(const std::string& v);
+    void tests_directory_name(const std::string&& v);
+
 public:
     bool operator==(const cmakelists& rhs) const;
     bool operator!=(const cmakelists& rhs) const {
@@ -117,6 +123,7 @@ private:
     std::string header_file_extension_;
     std::string implementation_file_extension_;
     masd::dogen::generation::cpp::fabric::odb_targets odb_targets_;
+    std::string tests_directory_name_;
 };
 
 }

@@ -255,6 +255,11 @@ public:
     bool is_odb_facet_enabled() const;
 
     /**
+     * @brief Returns true if tests is enabled globally.
+     */
+    bool is_tests_facet_enabled() const;
+
+    /**
      * @brief Returns true if the current formatter belongs to the io
      * facet.
      */

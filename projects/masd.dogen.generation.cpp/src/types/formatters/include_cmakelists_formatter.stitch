@@ -80,6 +80,13 @@ format(const context& ctx, const coding::meta_model::element& e) const {
         a.make_decoration_preamble(cs, e);
 #>
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/<#= c.source_directory_name() #>)
+<#+
+       if (a.is_tests_facet_enabled()) {
+#>
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/<#= c.tests_directory_name() #>)
+<#+
+       }
+#>
 
 install(
     DIRECTORY <#= c.include_directory_path() #>/

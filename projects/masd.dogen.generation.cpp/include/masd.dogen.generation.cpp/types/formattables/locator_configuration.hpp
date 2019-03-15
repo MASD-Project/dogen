@@ -51,7 +51,8 @@ public:
         const bool disable_facet_directories,
         const std::string& header_file_extension,
         const std::string& implementation_file_extension,
-        const std::string& backend_directory_name);
+        const std::string& backend_directory_name,
+        const std::string& tests_directory_name);
 
 public:
     const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::locator_facet_configuration>& facet_configurations() const;
@@ -92,6 +93,11 @@ public:
     void backend_directory_name(const std::string& v);
     void backend_directory_name(const std::string&& v);
 
+    const std::string& tests_directory_name() const;
+    std::string& tests_directory_name();
+    void tests_directory_name(const std::string& v);
+    void tests_directory_name(const std::string&& v);
+
 public:
     bool operator==(const locator_configuration& rhs) const;
     bool operator!=(const locator_configuration& rhs) const {
@@ -111,6 +117,7 @@ private:
     std::string header_file_extension_;
     std::string implementation_file_extension_;
     std::string backend_directory_name_;
+    std::string tests_directory_name_;
 };
 
 }

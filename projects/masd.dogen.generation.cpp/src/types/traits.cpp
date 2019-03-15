@@ -157,6 +157,11 @@ std::string traits::cpp::source_directory_name() {
     return r;
 }
 
+std::string traits::cpp::tests_directory_name() {
+    static std::string r("masd.extraction.cpp.tests_directory_name");
+    return r;
+}
+
 std::string traits::cpp::backend_directory_name() {
     static std::string r("masd.extraction.cpp.directory");
     return r;

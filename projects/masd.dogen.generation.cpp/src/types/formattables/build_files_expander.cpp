@@ -193,6 +193,7 @@ void build_files_updater::visit(fabric::cmakelists& c) {
     c.odb_targets(targets_);
     c.include_directory_path(locator_.include_directory_name());
     c.source_directory_name(locator_.source_directory_name());
+    c.tests_directory_name(locator_.tests_directory_name());
     c.header_file_extension(locator_.header_file_extension());
     c.implementation_file_extension(locator_.implementation_file_extension());
 }

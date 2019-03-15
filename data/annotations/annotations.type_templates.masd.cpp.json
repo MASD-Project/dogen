@@ -135,6 +135,20 @@
   },
   {
     "name": {
+      "simple": "tests_directory_name",
+      "qualified": "masd.extraction.cpp.tests_directory_name"
+    },
+    "archetype_location": {
+      "kernel": "masd",
+      "backend": "masd.extraction.cpp"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": "tests"
+  },
+  {
+    "name": {
       "simple": "header_file_extension",
       "qualified": "masd.extraction.cpp.header_file_extension"
     },

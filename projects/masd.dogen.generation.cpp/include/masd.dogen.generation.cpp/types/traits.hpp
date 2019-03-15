@@ -150,6 +150,11 @@ struct traits {
         static std::string source_directory_name();
 
         /**
+         * @brief Name of the directory containing the test files.
+         */
+        static std::string tests_directory_name();
+
+        /**
          * @brief Name of the directory housing the backend.
          */
         static std::string backend_directory_name();

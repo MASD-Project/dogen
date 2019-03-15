@@ -74,6 +74,7 @@ private:
         annotations::type implementation_file_extension;
         annotations::type include_directory_name;
         annotations::type source_directory_name;
+        annotations::type tests_directory_name;
         annotations::type disable_facet_directories;
         annotations::type backend_directory_name;
     };
@@ -186,6 +187,11 @@ public:
      * @brief Name of the source directory.
      */
     std::string source_directory_name() const;
+
+    /**
+     * @brief Name of the tests directory.
+     */
+    std::string tests_directory_name() const;
 
 public:
     /**

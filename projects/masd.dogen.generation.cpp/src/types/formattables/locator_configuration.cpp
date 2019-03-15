@@ -33,7 +33,8 @@ locator_configuration::locator_configuration(
     const bool disable_facet_directories,
     const std::string& header_file_extension,
     const std::string& implementation_file_extension,
-    const std::string& backend_directory_name)
+    const std::string& backend_directory_name,
+    const std::string& tests_directory_name)
     : facet_configurations_(facet_configurations),
       archetype_configurations_(archetype_configurations),
       include_directory_name_(include_directory_name),
@@ -41,7 +42,8 @@ locator_configuration::locator_configuration(
       disable_facet_directories_(disable_facet_directories),
       header_file_extension_(header_file_extension),
       implementation_file_extension_(implementation_file_extension),
-      backend_directory_name_(backend_directory_name) { }
+      backend_directory_name_(backend_directory_name),
+      tests_directory_name_(tests_directory_name) { }
 
 void locator_configuration::swap(locator_configuration& other) noexcept {
     using std::swap;
@@ -53,6 +55,7 @@ void locator_configuration::swap(locator_configuration& other) noexcept {
     swap(header_file_extension_, other.header_file_extension_);
     swap(implementation_file_extension_, other.implementation_file_extension_);
     swap(backend_directory_name_, other.backend_directory_name_);
+    swap(tests_directory_name_, other.tests_directory_name_);
 }
 
 bool locator_configuration::operator==(const locator_configuration& rhs) const {
@@ -63,7 +66,8 @@ bool locator_configuration::operator==(const locator_configuration& rhs) const {
         disable_facet_directories_ == rhs.disable_facet_directories_ &&
         header_file_extension_ == rhs.header_file_extension_ &&
         implementation_file_extension_ == rhs.implementation_file_extension_ &&
-        backend_directory_name_ == rhs.backend_directory_name_;
+        backend_directory_name_ == rhs.backend_directory_name_ &&
+        tests_directory_name_ == rhs.tests_directory_name_;
 }
 
 locator_configuration& locator_configuration::operator=(locator_configuration other) {
@@ -190,6 +194,22 @@ void locator_configuration::backend_directory_name(const std::string& v) {
 
 void locator_configuration::backend_directory_name(const std::string&& v) {
     backend_directory_name_ = std::move(v);
+}
+
+const std::string& locator_configuration::tests_directory_name() const {
+    return tests_directory_name_;
+}
+
+std::string& locator_configuration::tests_directory_name() {
+    return tests_directory_name_;
+}
+
+void locator_configuration::tests_directory_name(const std::string& v) {
+    tests_directory_name_ = v;
+}
+
+void locator_configuration::tests_directory_name(const std::string&& v) {
+    tests_directory_name_ = std::move(v);
 }
 
 }
