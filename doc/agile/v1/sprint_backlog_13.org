@@ -14,24 +14,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-16 Sat 06:44]
-| <75>                                                     |         |       |      |       |
-| Headline                                                 | Time    |       |      |     % |
-|----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                             | *40:31* |       |      | 100.0 |
-|----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                  | 40:31   |       |      | 100.0 |
-| Active                                                   |         | 40:31 |      | 100.0 |
-| Edit release notes for previous sprint                   |         |       | 2:22 |   5.8 |
-| Sprint and product backlog grooming                      |         |       | 4:41 |  11.6 |
-| Create a video demo for the sprint's features            |         |       | 3:47 |   9.3 |
-| Make projects directory env optional                     |         |       | 0:10 |   0.4 |
-| Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   1.9 |
-| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  14.2 |
-| Delete extra files appears broken at present             |         |       | 6:26 |  15.9 |
-| Empty directories should be deleted                      |         |       | 5:37 |  13.9 |
-| Changes to stitch templates are not reported correctly   |         |       | 1:09 |   2.8 |
-| Code generation of tests for dogen models                |         |       | 9:48 |  24.2 |
+#+CAPTION: Clock summary at [2019-03-16 Sat 07:30]
+| <75>                                                     |         |       |       |       |
+| Headline                                                 | Time    |       |       |     % |
+|----------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                             | *41:16* |       |       | 100.0 |
+|----------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                  | 41:16   |       |       | 100.0 |
+| Active                                                   |         | 41:16 |       | 100.0 |
+| Edit release notes for previous sprint                   |         |       |  2:22 |   5.7 |
+| Sprint and product backlog grooming                      |         |       |  4:41 |  11.3 |
+| Create a video demo for the sprint's features            |         |       |  3:47 |   9.2 |
+| Make projects directory env optional                     |         |       |  0:10 |   0.4 |
+| Clang-cl builds are failing due to memory leak reporting |         |       |  0:45 |   1.8 |
+| Add tests for tracing, reporting and diffing             |         |       |  5:46 |  14.0 |
+| Delete extra files appears broken at present             |         |       |  6:26 |  15.6 |
+| Empty directories should be deleted                      |         |       |  5:37 |  13.6 |
+| Changes to stitch templates are not reported correctly   |         |       |  1:09 |   2.8 |
+| Code generation of tests for dogen models                |         |       | 10:33 |  25.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -605,6 +605,7 @@ Problems:
 
 *** STARTED Code generation of tests for dogen models                 :story:
     :LOGBOOK:
+    CLOCK: [2019-03-16 Sat 06:45]--[2019-03-16 Sat 07:30] =>  0:45
     CLOCK: [2019-03-16 Sat 05:33]--[2019-03-16 Sat 06:44] =>  1:11
     CLOCK: [2019-03-15 Fri 17:21]--[2019-03-15 Fri 17:45] =>  0:24
     CLOCK: [2019-03-15 Fri 16:43]--[2019-03-15 Fri 17:20] =>  0:37
@@ -666,6 +667,7 @@ Notes:
 - rename =class_implementation_formatter=. This is more like
   =class_test_suite=.
 - drop source prefix in =source_cmakelists=.
+- need a way to add include of logging and json validator.
 
 Merged stories:
 
