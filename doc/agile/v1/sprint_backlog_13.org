@@ -14,24 +14,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-16 Sat 07:30]
+#+CAPTION: Clock summary at [2019-03-16 Sat 21:30]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *41:16* |       |       | 100.0 |
+| *Total time*                                             | *42:12* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 41:16   |       |       | 100.0 |
-| Active                                                   |         | 41:16 |       | 100.0 |
-| Edit release notes for previous sprint                   |         |       |  2:22 |   5.7 |
-| Sprint and product backlog grooming                      |         |       |  4:41 |  11.3 |
-| Create a video demo for the sprint's features            |         |       |  3:47 |   9.2 |
+| Stories                                                  | 42:12   |       |       | 100.0 |
+| Active                                                   |         | 42:12 |       | 100.0 |
+| Edit release notes for previous sprint                   |         |       |  2:22 |   5.6 |
+| Sprint and product backlog grooming                      |         |       |  5:13 |  12.4 |
+| Create a video demo for the sprint's features            |         |       |  3:47 |   9.0 |
 | Make projects directory env optional                     |         |       |  0:10 |   0.4 |
 | Clang-cl builds are failing due to memory leak reporting |         |       |  0:45 |   1.8 |
-| Add tests for tracing, reporting and diffing             |         |       |  5:46 |  14.0 |
-| Delete extra files appears broken at present             |         |       |  6:26 |  15.6 |
-| Empty directories should be deleted                      |         |       |  5:37 |  13.6 |
-| Changes to stitch templates are not reported correctly   |         |       |  1:09 |   2.8 |
-| Code generation of tests for dogen models                |         |       | 10:33 |  25.6 |
+| Add tests for tracing, reporting and diffing             |         |       |  5:46 |  13.7 |
+| Delete extra files appears broken at present             |         |       |  6:26 |  15.2 |
+| Empty directories should be deleted                      |         |       |  5:37 |  13.3 |
+| Changes to stitch templates are not reported correctly   |         |       |  1:09 |   2.7 |
+| Code generation of tests for dogen models                |         |       | 10:57 |  25.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -230,6 +230,8 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-03-16 Sat 21:12]--[2019-03-16 Sat 21:30] =>  0:18
+    CLOCK: [2019-03-16 Sat 20:48]--[2019-03-16 Sat 21:02] =>  0:14
     CLOCK: [2019-03-15 Fri 11:44]--[2019-03-15 Fri 11:50] =>  0:06
     CLOCK: [2019-03-15 Fri 11:36]--[2019-03-15 Fri 11:43] =>  0:07
     CLOCK: [2019-03-15 Fri 11:00]--[2019-03-15 Fri 11:13] =>  0:13
@@ -603,8 +605,68 @@ Problems:
   because it allows us to troubleshoot the build machines. For now we
   can simply enable diffing on all extraction chain tests.
 
+*** COMPLETED Add ODB to the build machine                            :story:
+    CLOSED: [2019-03-16 Sat 21:26]
+
+*Rationale*: completed on the main. We will not add oracle support due
+to the overhead.
+
+At present we are only compiling and running the ODB tests
+locally. Now that ODB is becoming a core dependency, we need to make
+sure we are running these tests on the build machines - Windows and
+Linux at least.
+
+However, at present we are already running out of time for the main
+build. If we simply add ODB to Linux we will not complete the build in
+the allocated slot. One way to achieve this is to have a build that
+does ODB only.
+
+We should also add oracle OCI to the dogen dependencies package so
+that we test oracle support as well as postgres. However, to run the
+tests we need some way to configure postgres to allow connections. It
+is also possible to install oracle by copying the DEB to dropbox and
+creating a simple installation script that sets up the users etc. We
+could make similar scripts for postgres and oracle. However, we need
+to convert the oracle schema into postgres.
+
+*** COMPLETED Load system models intelligently                         :epic:
+    CLOSED: [2019-03-16 Sat 21:29]
+
+*Rationale*: this was addressed with the transitive references work.
+
+#+begin_quote
+*Story*: As a dogen user, I want to load only the system models
+required for the model I want to generate so that generation is as
+quick as possible.
+#+end_quote
+
+At present we are loading all library models. This is not a problem
+because they are small and there are only a few of them. However, in a
+distant future, one can imagine a very large number of system models,
+each of which with large number of types (say the C# system models,
+the C++ system models, etc). In this world we may need to disable the
+loading of some system models: either by programming language or more
+explicitly by choosing individual models in a given language.
+
+It may even make more sense to load just what is required: load the
+target model, infer all of its dependencies (including at the
+programming language level) and then load only the system models that
+are required for those languages.
+
+This may not be as hard as it seems: we already infer that all models
+the target depends on are present by looking at the list of distinct
+model names required by the target qualified names. We could use the
+same logic to determine what system models to load. The only exception
+is the hardware model, which must always be loaded (or we need some
+kind of mapping between "empty" model name and the hardware model).
+
+We should keep in mind the model groups too; not all models are
+applicable to all model groups. We should only consider compatible
+models.
+
 *** STARTED Code generation of tests for dogen models                 :story:
     :LOGBOOK:
+    CLOCK: [2019-03-16 Sat 16:11]--[2019-03-16 Sat 16:35] =>  0:24
     CLOCK: [2019-03-16 Sat 06:45]--[2019-03-16 Sat 07:30] =>  0:45
     CLOCK: [2019-03-16 Sat 05:33]--[2019-03-16 Sat 06:44] =>  1:11
     CLOCK: [2019-03-15 Fri 17:21]--[2019-03-15 Fri 17:45] =>  0:24
@@ -668,6 +730,8 @@ Notes:
   =class_test_suite=.
 - drop source prefix in =source_cmakelists=.
 - need a way to add include of logging and json validator.
+- if test data is disabled we should let the users know and output
+  fake tests. Same with no properties.
 
 Merged stories:
 
@@ -712,7 +776,11 @@ there are only two use cases:
 - dot separated: C#, CMake, etc.
 - double-colon separated: C++.
 
-We could just have these two as simple strings.
+We could just have these two as simple strings. In addition, we also
+need to versions of identifiable:
+
+- simple
+- qualified
 
 *** Add support for facet dependencies                                :story:
 
@@ -2040,3 +2108,278 @@ for this with CMake.
 It would be nice if dogen either generated all files or didn't touch
 the directory at all, at least as an option. We could simply generate
 into a temporary directory and then swap them at the end.
+*** CANCELLED Windows build release test failures                      :epic:
+    CLOSED: [2019-03-16 Sat 21:20]
+
+*Rationale*: most of these have been addressed already, many don't
+make sense any longer.
+
+Dia tests:
+
+: [00:27:30] C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets(171,5): error MSB6006: "cmd.exe" exited with code -1073741515. [C:\projects\dogen\build\output\projects\dia\tests\run_dia.tests.vcxproj]
+
+Dia hydrator tests:
+
+: [00:27:31] unknown location : fatal error : in "modeline_group_hydrator_tests/hydrating_emacs_modeline_group_results_in_expected_modelines": class std::runtime_error: Error during test [C:\projects\dogen\build\output\projects\formatters\tests\run_formatters.tests.vcx
+: [00:27:31] proj]
+: [00:27:31]   C:\projects\dogen\projects\formatters\tests\modeline_group_hydrator_tests.cpp(142): last checkpoint: hydrating_emacs_modeline_group_results_in_expected_modelines
+: [00:27:31]
+: [00:27:31]   *** 1 failure is detected in the test module "formatters_tests"
+
+Knit:
+
+: [00:27:35] C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets(171,5): error MSB6006: "cmd.exe" exited with code -1073741515. [C:\projects\dogen\build\output\projects\knit\tests\run_knit.tests.vcxproj]
+: [00:27:35] Done Building Project "C:\projects\dogen\build\output\projects\knit\tests\run_knit.tests.vcxproj" (default targets) -- FAILED.
+
+Stitch:
+: [00:27:36]   C:\projects\dogen\projects\utility\src\test_data\validating_resolver.cpp(39): Throw in function class boost::filesystem::path __cdecl dogen::utility::test_data::validating_resolver::resolve(class boost::filesystem::path)
+: [00:27:36]   Dynamic exception type: class boost::exception_detail::clone_impl<class dogen::utility::filesystem::file_not_found>
+: [00:27:36]   std::exception::what: File not found: C:\projects\dogen\build\output\bin\../test_data\stitch/input/simple_template.stitch
+: [00:27:36] unknown location : fatal error : in "workflow_tests/simple_template_results_in_expected_output": class std::runtime_error: Error during test [C:\projects\dogen\build\output\projects\stitch\tests\run_stitch.tests.vcxproj]
+: [00:27:36]   C:\projects\dogen\projects\stitch\tests\workflow_tests.cpp(48): last checkpoint: simple_template_results_in_expected_output
+: [00:27:36]
+: [00:27:36]   C:\projects\dogen\projects\utility\src\test_data\validating_resolver.cpp(39): Throw in function class boost::filesystem::path __cdecl dogen::utility::test_data::validating_resolver::resolve(class boost::filesystem::path)
+: [00:27:36]   Dynamic exception type: class boost::exception_detail::clone_impl<class dogen::utility::filesystem::file_not_found>
+: [00:27:36]   std::exception::what: File not found: C:\projects\dogen\build\output\bin\../test_data\stitch/input/complex_template.stitch
+: [00:27:36]
+: [00:27:36]   C:\projects\dogen\projects\utility\src\test_data\validating_resolver.cpp(39): Throw in function class boost::filesystem::path __cdecl dogen::utility::test_data::validating_resolver::resolve(class boost::filesystem::path)
+: [00:27:36]   Dynamic exception type: class boost::exception_detail::clone_impl<class dogen::utility::filesystem::file_not_found>
+: [00:27:36]   std::exception::what: File not found: C:\projects\dogen\build\output\bin\../test_data\stitch/input/empty_template.stitch
+: [00:27:36]
+: [00:27:36]   *** 3 failures are detected in the test module "stitch_tests"
+<snip>
+
+Test model sanitizer:
+
+: [00:27:39]   CMake does not need to re-run because C:\projects\dogen\build\output\projects\test_models\test_model_sanitizer\tests\CMakeFiles\generate.stamp is up-to-date.
+: [00:27:39]   Running 127 test cases...
+: [00:27:39] C:/projects/dogen/projects/utility/include/dogen/utility/test/hash_tester.hpp(57): error : in "std_model_tests/validate_hashing": check hasher(a) == hasher(b) has failed [C:\projects\dogen\build\output\projects\test_models\test_model_sanitizer\tests\run_test_model_sanitizer.tests.vcxproj]
+: [00:27:39] C:/projects/dogen/projects/utility/include/dogen/utility/test/hash_tester.hpp(57): error : in "std_model_tests/validate_hashing": check hasher(a) == hasher(b) has failed [C:\projects\dogen\build\output\projects\test_models\test_model_sanitizer\tests\run_te
+: [00:27:39] st_model_sanitizer.tests.vcxproj]
+: [00:27:40]
+: [00:27:40]   *** 2 failures are detected in the test module "test_model_sanitizer_tests"
+
+Yarn.dia:
+
+: [00:27:42]   C:\projects\dogen\projects\utility\src\test_data\validating_resolver.cpp(39): Throw in function class boost::filesystem::path __cdecl dogen::utility::test_data::validating_resolver::resolve(class boost::filesystem::path)
+: [00:27:42]   Dynamic exception type: class boost::exception_detail::clone_impl<class dogen::utility::filesystem::file_not_found>
+: [00:27:42]   std::exception::what: File not found: C:\projects\dogen\build\output\bin\../test_data\yarn.dia/expected/class_in_a_package.diaxml
+: [00:27:42] unknown location : fatal error : in "workflow_tests/class_in_a_package_dia_transforms_into_expected_yarn": class std::runtime_error: Error during test [C:\projects\dogen\build\output\projects\yarn.dia\tests\run_yarn.dia.tests.vcxproj]
+: [00:27:42]   C:\projects\dogen\projects\yarn.dia\tests\workflow_tests.cpp(85): last checkpoint: class_in_a_package_dia_transforms_into_expected_yarn
+
+Yarn.Json
+
+: [00:27:42]   Building Custom Rule C:/projects/dogen/projects/yarn.json/tests/CMakeLists.txt
+: [00:27:42]   CMake does not need to re-run because C:\projects\dogen\build\output\projects\yarn.json\tests\CMakeFiles\generate.stamp is up-to-date.
+: [00:27:42]   Running 12 test cases...
+: [00:27:42]
+: [00:27:42]   C:\projects\dogen\projects\yarn.json\src\types\hydrator.cpp(251): Throw in function class dogen::yarn::intermediate_model __cdecl dogen::yarn::json::hydrator::hydrate(class std::basic_istream<char,struct std::char_traits<char> > &) const
+: [00:27:42]   Dynamic exception type: class boost::exception_detail::clone_impl<class dogen::yarn::json::hydration_error>
+: [00:27:42]   std::exception::what: Failed to parse JSON file<unspecified file>(1): expected value
+: [00:27:42] unknown location : fatal error : in "hydrator_tests/cpp_std_model_hydrates_into_expected_model": class std::runtime_error: Error during test [C:\projects\dogen\build\output\projects\yarn.json\tests\run_yarn.json.tests.vcxproj]
+: [00:27:42]   C:\projects\dogen\projects\yarn.json\tests\hydrator_tests.cpp(386): last checkpoint: cpp_std_model_hydrates_into_expected_model
+
+Yarn:
+
+: [00:27:42] C:/projects/dogen/projects/utility/include/dogen/utility/test/hash_tester.hpp(57): error : in "hashing_tests/validate_hashing": check hasher(a) == hasher(b) has failed [C:\projects\dogen\build\output\projects\yarn\tests\run_yarn.tests.vcxproj]
+: [00:27:42] C:/projects/dogen/projects/utility/include/dogen/utility/test/hash_tester.hpp(57): error : in "hashing_tests/validate_hashing": check hasher(a) == hasher(b) has failed [C:\projects\dogen\build\output\projects\yarn\tests\run_yarn.tests.vcxproj]
+: [00:27:42] C:/projects/dogen/projects/utility/include/dogen/utility/test/hash_tester.hpp(57): error : in "hashing_tests/validate_hashing": check hasher(a) == hasher(b) has failed [C:\projects\dogen\build\output\projects\yarn\tests\run_yarn.tests.vcxproj]
+: [00:27:44]
+: [00:27:44]   *** 3 failures are detected in the test module "yarn_tests"
+
+Utility:
+
+:  Building Custom Rule C:/projects/dogen/projects/utility/tests/CMakeLists.txt
+:  CMake does not need to re-run because C:\projects\dogen\build\output\msvc\Debug\projects\utility\tests\CMakeFiles\generate.stamp is up-to-date.
+:  Running utility.tests
+: C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets(171,5): error MSB6006: "cmd.exe" exited with code -1073741515. [C:\projects\dogen\build\output\msvc\Debug\projects\utility\tests\run_utility.tests.vcxproj]
+: Done Building Project "C:\projects\dogen\build\output\msvc\Debug\projects\utility\tests\run_utility.tests.vcxproj" (default targets) -- FAILED.
+: Done Building Project "C:\projects\dogen\build\output\msvc\Debug\run_windows_green_tests.vcxproj" (default targets) -- FAILED.
+: Build FAILED.
+: "C:\projects\dogen\build\output\msvc\Debug\run_windows_green_tests.vcxproj" (default target) (1) ->
+
+*** CANCELLED Fix the dynamic linker errors in OSX when running tests :story:
+    CLOSED: [2019-03-16 Sat 21:21]
+
+*Rationale*: most of these have been addressed already, many don't
+make sense any longer.
+
+
+At present we are building for OSX but not running the tests. Most of
+the tests should actually pass, if only we could run them. The problem
+is that DYLD_LIBRARY_PATH is not being supplied to make, resulting in
+dynamic linker errors:
+
+: dyld: Library not loaded: /Users/marco/Development/local/lib/libxml2.2.dylib
+:  Referenced from: /Users/travis/build/DomainDrivenConsulting/dogen/build/output/clang/Release/stage/bin/dogen.utility.tests
+:  Reason: Incompatible library version: dogen.utility.tests requires version 12.0.0 or later, but libxml2.2.dylib provides version 10.0.0
+: /bin/sh: line 1:  1692 Trace/BPT trap: 5       /Users/travis/build/DomainDrivenConsulting/dogen/build/output/clang/Release/stage/bin/dogen.utility.tests
+
+We tried both =DYLD_LIBRARY_PATH= and =DYLD_FALLBACK_LIBRARY_PATH=.
+If we do run the tests manually inside the main script we get the
+linking to work, as proved in [[https://travis-ci.org/DomainDrivenConsulting/dogen/jobs/164335824][this build]].
+
+- [[https://forums.developer.apple.com/thread/9233][DYLD_LIBRARY_PATH and make]]: according to this article, fallback
+  should have fixed the problem but didn't.
+
+*** CANCELLED Add support for uploading packages in cloud storage     :story:
+    CLOSED: [2019-03-16 Sat 21:22]
+
+*Rationale*: we are going to just continue relying on BinTray.
+
+We need to upload the packages created by each build to a public
+Google Drive (GDrive) location or to DropBox
+
+- Google drive folder created [[https://drive.google.com/folderview?id%3D0B4sIAJ9bC4XecFBOTE1LZEpINUE&usp%3Dsharing][here]].
+- See [[https://developers.google.com/drive/quickstart-ruby][this article]].
+- [[http://stackoverflow.com/questions/15798141/create-folder-in-google-drive-with-google-drive-ruby-gem][Create folders]] to represent the different types of uploads:
+  =tag_x.y.z=, =last=, =previous=. maybe we should only have latest
+  and tag as this would require no complex logic: if tag create new
+  folder, if latest, delete then create.
+
+We are uploading the tag packages to GitHub already, but ideally we
+should test all packages for all commits.
+
+*** CANCELLED Add Travis support for 32-bits                          :story:
+    CLOSED: [2019-03-16 Sat 21:23]
+
+*Rationale*: the overhead of having more builds is too high (vcpkg
+etc). We will not support 32-bits.
+
+It seems its fairly straightforward to add 32-bit support to Travis,
+as per RapidJSON:
+
+https://github.com/miloyip/rapidjson/blob/master/.travis.yml
+
+*** CANCELLED Enable package installation tests for Linux              :epic:
+    CLOSED: [2019-03-16 Sat 21:23]
+
+*Rationale*: we are presently installing the package after building
+and using dogen to generate hello world. This is sufficient.
+
+Now that we will be using docker, we could create a simple =systemd=
+ctest script that runs as root in a docker container:
+
+- build package and drop them on a well known location;
+- Create a batch script that polls this location for new packages;
+  when one is found run package installer. Looks for files that match
+  a given regular expression (e.g. we need to make sure we match the
+  bitness and the platform)
+- if it finds one, it installs it and runs sanity scripts (see story
+  for sanity scripts).
+- it then uninstalls it and makes sure the docker image is identical
+  to how we started (however that is done in docker)
+
+*** CANCELLED Travis deployment of tags fails                         :story:
+    CLOSED: [2019-03-16 Sat 21:24]
+
+*Rationale*: this has already been addressed.
+
+As per [[https://github.com/travis-ci/travis-ci/issues/2577][issue 2577]] in travis, it does not support wildcards at the
+moment. We need to find another way to upload packages into GitHub
+without using wildcards.
+
+Error:
+
+: dpl.1
+: Installing deploy dependencies
+: Fetching: addressable-2.3.6.gem (100%)
+: Successfully installed addressable-2.3.6
+: Fetching: multipart-post-2.0.0.gem (100%)
+: Successfully installed multipart-post-2.0.0
+: Fetching: faraday-0.9.0.gem (100%)
+: Successfully installed faraday-0.9.0
+: Fetching: sawyer-0.5.5.gem (100%)
+: Successfully installed sawyer-0.5.5
+: Fetching: octokit-3.5.2.gem (100%)
+: Successfully installed octokit-3.5.2
+: 5 gems installed
+: Fetching: mime-types-2.4.3.gem (100%)
+: Successfully installed mime-types-2.4.3
+: 1 gem installed
+: error: could not lock config file .git/config: No such file or directory
+: error: could not lock config file .git/config: No such file or directory
+: dpl.2
+: Preparing deploy
+: Logged in as Marco Craveiro
+: Deploying to repo: DomainDrivenConsulting/dogen
+: Current tag is: v0.56.2767
+: dpl.3
+: Deploying application
+: /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/octokit-3.5.2/lib/octokit/client/releases.rb:86:in `initialize': No such file or directory - stage/pkg/*.deb (Errno::ENOENT)
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/octokit-3.5.2/lib/octokit/client/releases.rb:86:in `new'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/octokit-3.5.2/lib/octokit/client/releases.rb:86:in `upload_asset'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/provider/releases.rb:118:in `block in push_app'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/provider/releases.rb:102:in `each'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/provider/releases.rb:102:in `push_app'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/provider.rb:122:in `block in deploy'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/cli.rb:41:in `fold'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/provider.rb:122:in `deploy'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/cli.rb:32:in `run'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/lib/dpl/cli.rb:7:in `run'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/gems/dpl-1.7.6/bin/dpl:5:in `<top (required)>'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/bin/dpl:23:in `load'
+:     from /home/travis/.rvm/gems/ruby-1.9.3-p550/bin/dpl:23:in `<main>'
+: failed to deploy
+
+We solved this for now by just uploading the application packages.
+
+*** CANCELLED Check that custom targets in CMake have correct dependencies :story:
+    CLOSED: [2019-03-16 Sat 21:26]
+
+*Rationale*: these targets have been removed now it seems.
+
+At present we have a number of custom targets, which create a new Make
+target. These are good because they do not require re-running CMake to
+manage the files in the output directory; however, we do not have the
+correct dependencies between the targets and the target
+dependencies. For example, create_scripts should check to see if any
+script has changed before re-generating the tarball; it seems to have
+no dependencies so it will always regenerate the tarball. We need to:
+
+- check all custom targets and see what their current behaviour is:
+  a) change a dependency and rebuild the target and see if the
+  change is picked up or not; b) change no dependencies and re-run the
+  target and ensure that nothing happens.
+- add dependencies as required.
+*** CANCELLED Add prefetch support to ODB                             :story:
+    CLOSED: [2019-03-16 Sat 21:27]
+
+*Rationale*: this is no longer required.
+
+As per Boris email:
+
+#+begin_quote
+Hm, I am not sure the bulk approach (with a compiler-time pragma) is
+right in this case. There we don't really have a choice since we need
+to know the "batch buffer" size.
+
+But here it is all runtime. Plus, you may want to have different
+prefetch for different queries of the same object. In fact, you
+can already customize it for queries (but not for object loads)
+by using prepared queries (Section 4.5 in the manual):
+
+1. Create prepared query.
+
+2. Get its statement (statement()).
+
+3. Cast it to odb::oracle::select_statement.
+
+4. Call handle() on the result to get OCIStmt*.
+
+5. Set custom OCI_ATTR_PREFETCH_ROWS.
+
+6. Execute the query.
+
+The problems with this approach are: (1) it is tedious and (2) it
+doesn't work for non-query SELECT's (e.g., database::load()). So
+perhaps the way to do it is:
+
+1. Provide prefetch() functions on oracle::database() and
+   oracle::connection() that can be used to modify database-wide
+   and connection-wide prefetch values. Also set it to some
+   reasonable default (say 512?)
+
+2. Provide oracle::select_statement::prefetch() to make the
+   prepared query approach less tedious.
+#+end_quote
