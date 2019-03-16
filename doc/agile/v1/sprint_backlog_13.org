@@ -14,24 +14,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-15 Fri 17:45]
+#+CAPTION: Clock summary at [2019-03-16 Sat 06:44]
 | <75>                                                     |         |       |      |       |
 | Headline                                                 | Time    |       |      |     % |
 |----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                             | *39:20* |       |      | 100.0 |
+| *Total time*                                             | *40:31* |       |      | 100.0 |
 |----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                  | 39:20   |       |      | 100.0 |
-| Active                                                   |         | 39:20 |      | 100.0 |
-| Edit release notes for previous sprint                   |         |       | 2:22 |   6.0 |
-| Sprint and product backlog grooming                      |         |       | 4:41 |  11.9 |
-| Create a video demo for the sprint's features            |         |       | 3:47 |   9.6 |
+| Stories                                                  | 40:31   |       |      | 100.0 |
+| Active                                                   |         | 40:31 |      | 100.0 |
+| Edit release notes for previous sprint                   |         |       | 2:22 |   5.8 |
+| Sprint and product backlog grooming                      |         |       | 4:41 |  11.6 |
+| Create a video demo for the sprint's features            |         |       | 3:47 |   9.3 |
 | Make projects directory env optional                     |         |       | 0:10 |   0.4 |
 | Clang-cl builds are failing due to memory leak reporting |         |       | 0:45 |   1.9 |
-| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  14.7 |
-| Delete extra files appears broken at present             |         |       | 6:26 |  16.4 |
-| Empty directories should be deleted                      |         |       | 5:37 |  14.3 |
-| Changes to stitch templates are not reported correctly   |         |       | 1:09 |   2.9 |
-| Code generation of tests for dogen models                |         |       | 8:37 |  21.9 |
+| Add tests for tracing, reporting and diffing             |         |       | 5:46 |  14.2 |
+| Delete extra files appears broken at present             |         |       | 6:26 |  15.9 |
+| Empty directories should be deleted                      |         |       | 5:37 |  13.9 |
+| Changes to stitch templates are not reported correctly   |         |       | 1:09 |   2.8 |
+| Code generation of tests for dogen models                |         |       | 9:48 |  24.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -605,6 +605,7 @@ Problems:
 
 *** STARTED Code generation of tests for dogen models                 :story:
     :LOGBOOK:
+    CLOCK: [2019-03-16 Sat 05:33]--[2019-03-16 Sat 06:44] =>  1:11
     CLOCK: [2019-03-15 Fri 17:21]--[2019-03-15 Fri 17:45] =>  0:24
     CLOCK: [2019-03-15 Fri 16:43]--[2019-03-15 Fri 17:20] =>  0:37
     CLOCK: [2019-03-15 Fri 16:30]--[2019-03-15 Fri 16:42] =>  0:12
@@ -662,6 +663,9 @@ Notes:
 - if an object has no attributes, we need to disable testing for
   it. For now we will just hack it by disabling tests on these classes
   manually. Write story to fix it properly.
+- rename =class_implementation_formatter=. This is more like
+  =class_test_suite=.
+- drop source prefix in =source_cmakelists=.
 
 Merged stories:
 
@@ -697,6 +701,26 @@ we do nothing.
 
 If a project has tests (see story above) we should automatically
 ignore the test regular expressions.
+
+*** Simplify qualified name                                           :story:
+
+At present we have a map of languages to qualified name, but in truth
+there are only two use cases:
+
+- dot separated: C#, CMake, etc.
+- double-colon separated: C++.
+
+We could just have these two as simple strings.
+
+*** Add support for facet dependencies                                :story:
+
+At present we left it as an exercise to the user to ensure facets are
+enabled to meet dependencies. In reality we need a solver for
+this. Look for other solver story in backlog. In addition, we also
+need to have a way to declare facet dependencies:
+
+- all facets other than types depend on types.
+- tests depends on at least types and test data.
 
 *** Formatters can only belong to one facet                           :story:
 

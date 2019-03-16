@@ -109,6 +109,16 @@ format(const context& ctx, const coding::meta_model::element& e) const {
         const auto qn(a.get_qualified_name(o.name()));
 a.stream() << "BOOST_AUTO_TEST_SUITE(" << o.name().identifiable() << "_tests)" << std::endl;
 a.stream() << std::endl;
+        /*
+         * If we have no attributes at all, we cannot test this
+         * type. Insert a fake test for now. The real solution will be
+         * to filter based on element state.
+         */
+        if (o.all_attributes().empty()) {
+a.stream() << "BOOST_AUTO_TEST_CASE(fake_test) {" << std::endl;
+a.stream() << "    BOOST_CHECK(true);" << std::endl;
+a.stream() << "}" << std::endl;
+        } else {
 a.stream() << "BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {" << std::endl;
 a.stream() << "    " << qn << "_generator g;" << std::endl;
 a.stream() << "    const auto a(g());" << std::endl;
@@ -127,7 +137,7 @@ a.stream() << "    BOOST_CHECK(a == a);" << std::endl;
 a.stream() << "    BOOST_CHECK(!(a != a));" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
-a.stream() << "BOOST_AUTO_TEST_CASE(an_object_is_equal_to_itself) {" << std::endl;
+a.stream() << "BOOST_AUTO_TEST_CASE(distinct_objects_are_unequal) {" << std::endl;
 a.stream() << "    " << qn << "_generator g;" << std::endl;
 a.stream() << "    const auto a(g());" << std::endl;
 a.stream() << "    const auto b(g());" << std::endl;
@@ -137,6 +147,7 @@ a.stream() << "    BOOST_CHECK(a != b);" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
 a.stream() << "BOOST_AUTO_TEST_SUITE_END()" << std::endl;
+        }
     } // sbf
     return a.make_artefact();
 }

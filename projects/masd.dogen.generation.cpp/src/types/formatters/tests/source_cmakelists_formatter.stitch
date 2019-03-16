@@ -82,28 +82,54 @@ format(const context& ctx, const coding::meta_model::element& e) const {
         const auto model_name(a.get_identifiable_model_name(c.name()));
         const auto product_name(a.get_product_name(c.name()));
 #>
+set(name "<#= model_name #>")
+set(lib_target_name ${name}.lib)
+set(tests_binary_name ${name}.tests)
+set(tests_target_name ${name}.tests)
+
 set(files "")
 file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
-    "${CMAKE_CURRENT_SOURCE_DIR}/*.<#= c.implementation_file_extension() #>")
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-<#+
-        if (a.is_odb_facet_enabled() && !c.odb_targets().targets().empty()) {
-#>
-if(NOT ODB_LIBODB_FOUND)
-    message(FATAL "ODB include directories not defined.")
+add_executable(${tests_target_name} ${files})
+
+set_target_properties(${tests_target_name}
+    PROPERTIES OUTPUT_NAME ${tests_binary_name})
+
+target_link_libraries(${tests_target_name}
+    ${lib_target_name}
+    ${Boost_LIBRARIES}
+    ${CMAKE_REQUIRED_LIBRARIES}
+    ${CMAKE_THREAD_LIBS_INIT})
+
+set(command $<TARGET_FILE:${tests_target_name}> ${boost_test_parameters})
+
+add_custom_target(run_${tests_target_name}
+    COMMENT "Running ${tests_target_name}" VERBATIM
+    COMMAND ${command}
+    WORKING_DIRECTORY ${stage_bin_dir}
+    DEPENDS ${tests_target_name})
+
+add_dependencies(run_all_tests run_${tests_target_name})
+
+if(WITH_BENCHMARKS)
+    set(benchmark_file
+        ${benchmark_directory}/${benchmark_prefix}${tests_target_name}.csv)
+    add_custom_target(benchmark_${tests_target_name}
+        COMMENT "Benchmarking testing ${tests_target_name}" VERBATIM
+        COMMAND ${benchmark_command} ${benchmark_repeats} ${benchmark_file}
+        ${command}
+        WORKING_DIRECTORY ${stage_bin_dir}
+        DEPENDS ${tests_target_name})
+
+    add_dependencies(benchmark_all benchmark_${tests_target_name})
 endif()
 
-set(odb_files "")
-file(GLOB_RECURSE odb_files RELATIVE
-   "${CMAKE_CURRENT_SOURCE_DIR}/"
-   "${CMAKE_CURRENT_SOURCE_DIR}/*.cxx")
-set(files ${files} ${odb_files})
+add_boost_tests(${tests_binary_name} ${files})
 
-add_library(<#= model_name #> STATIC ${files})
-set_target_properties(<#= model_name #> PROPERTIES
+install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
 <#+
-        }
     } // sbf
         return a.make_artefact();
 }

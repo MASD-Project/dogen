@@ -42,6 +42,11 @@ std::string inclusion_constants::std::ostream() {
     return r;
 }
 
+std::string inclusion_constants::std::iostream() {
+    static ::std::string r("<iostream>");
+    return r;
+}
+
 std::string inclusion_constants::std::functional() {
     static ::std::string r("<functional>");
     return r;
@@ -117,8 +122,18 @@ std::string inclusion_constants::boost::exception::info() {
     return r;
 }
 
+std::string inclusion_constants::boost::exception::diagnostic_information() {
+    static ::std::string r("<boost/exception/diagnostic_information.hpp>");
+    return r;
+}
+
 std::string inclusion_constants::boost::test::unit_test() {
     static ::std::string r("<boost/test/unit_test.hpp>");
+    return r;
+}
+
+std::string inclusion_constants::boost::test::unit_test_monitor() {
+    static ::std::string r("<boost/test/unit_test_monitor.hpp>");
     return r;
 }
 

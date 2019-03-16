@@ -40,6 +40,7 @@ struct inclusion_constants {
         static ::std::string iosfwd();
         static ::std::string algorithm();
         static ::std::string ostream();
+        static ::std::string iostream();
         static ::std::string functional();
         static ::std::string stdexcept();
     };
@@ -68,10 +69,12 @@ struct inclusion_constants {
 
         struct exception {
             static ::std::string info();
+            static ::std::string diagnostic_information();
         };
 
         struct test {
             static ::std::string unit_test();
+            static ::std::string unit_test_monitor();
         };
     };
 };

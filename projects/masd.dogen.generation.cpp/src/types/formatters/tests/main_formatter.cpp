@@ -91,12 +91,9 @@ std::list<std::string> main_formatter::inclusion_dependencies(
 
     using ic = inclusion_constants;
     builder.add(ic::boost::test::unit_test());
-    // #include <boost/test/unit_test.hpp>
-// #include <iostream>
-// #include <boost/exception/info.hpp>
-// #include <boost/test/unit_test_monitor.hpp>
-// #include <boost/exception/diagnostic_information.hpp>
-// #include "masd.dogen.utility/types/test/fixture.hpp"
+    builder.add(ic::boost::exception::info());
+    builder.add(ic::std::iostream());
+    builder.add(ic::boost::exception::diagnostic_information());
 
     return builder.build();
 }
