@@ -1025,22 +1025,22 @@ size limitations.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O6">
       <dia:attribute name="obj_pos">
-        <dia:point val="-87,-83"/>
+        <dia:point val="-87,-86"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-87.05,-83.05;-59.87,-66.05"/>
+        <dia:rectangle val="-87.05,-86.05;-59.87,-65.85"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-87,-83"/>
+        <dia:point val="-87,-86"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="16.900000000000002"/>
+        <dia:real val="20.100000000000005"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -1073,7 +1073,11 @@ size limitations.#</dia:string>
 #DOGEN masd.extraction.cpp.visual_studio.project.enabled=false
 #DOGEN masd.extraction.cpp.visual_studio.solution.enabled=false
 #DOGEN masd.extraction.csharp.enabled=false
-#DOGEN masd.annotations.profile=dogen.disable_common_facets#</dia:string>
+#DOGEN masd.annotations.profile=dogen.disable_common_facets
+#DOGEN masd.extraction.cpp.tests.enabled=true
+#DOGEN masd.extraction.cpp.test_data.enabled=true
+#DOGEN masd.extraction.cpp.tests.main.enabled=false
+#DOGEN masd.extraction.cpp.tests.source_cmakelists.enabled=false#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -1082,7 +1086,7 @@ size limitations.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-86.65,-81.755"/>
+            <dia:point val="-86.65,-84.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
