@@ -23,7 +23,7 @@
 #include "masd.dogen/types/reporting_configuration.hpp"
 #include "masd.dogen/test_data/reporting_configuration_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(masd_dogen_reporting_configuration_tests)
+BOOST_AUTO_TEST_SUITE(reporting_configuration_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::reporting_configuration_generator g;

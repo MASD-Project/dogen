@@ -23,7 +23,7 @@
 #include "masd.dogen/types/tracing_configuration.hpp"
 #include "masd.dogen/test_data/tracing_configuration_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(masd_dogen_tracing_configuration_tests)
+BOOST_AUTO_TEST_SUITE(tracing_configuration_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::tracing_configuration_generator g;

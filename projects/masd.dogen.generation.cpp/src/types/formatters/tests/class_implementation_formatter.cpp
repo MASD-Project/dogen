@@ -107,7 +107,7 @@ format(const context& ctx, const coding::meta_model::element& e) const {
     {
         auto sbf(a.make_scoped_boilerplate_formatter(o));
         const auto qn(a.get_qualified_name(o.name()));
-a.stream() << "BOOST_AUTO_TEST_SUITE(" << o.name().identifiable() << "_tests)" << std::endl;
+a.stream() << "BOOST_AUTO_TEST_SUITE(" << o.name().simple() << "_tests)" << std::endl;
 a.stream() << std::endl;
         /*
          * If we have no attributes at all, we cannot test this

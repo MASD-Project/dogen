@@ -785,7 +785,7 @@ supported languages.#</dia:string>
         <dia:point val="-278,-90"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-278.05,-90.05;-250.1,-49.85"/>
+        <dia:rectangle val="-278.05,-90.05;-250.1,-49.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -797,7 +797,7 @@ supported languages.#</dia:string>
         <dia:real val="27.850000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="40.100000000000001"/>
+        <dia:real val="40.899999999999999"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>

@@ -23,7 +23,7 @@
 #include "masd.dogen/types/configuration.hpp"
 #include "masd.dogen/test_data/configuration_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(masd_dogen_configuration_tests)
+BOOST_AUTO_TEST_SUITE(configuration_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::configuration_generator g;

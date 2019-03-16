@@ -23,7 +23,7 @@
 #include "masd.dogen/types/diffing_configuration.hpp"
 #include "masd.dogen/test_data/diffing_configuration_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(masd_dogen_diffing_configuration_tests)
+BOOST_AUTO_TEST_SUITE(diffing_configuration_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::diffing_configuration_generator g;

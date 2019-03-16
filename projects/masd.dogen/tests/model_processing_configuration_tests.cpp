@@ -23,7 +23,7 @@
 #include "masd.dogen/types/model_processing_configuration.hpp"
 #include "masd.dogen/test_data/model_processing_configuration_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(masd_dogen_model_processing_configuration_tests)
+BOOST_AUTO_TEST_SUITE(model_processing_configuration_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::model_processing_configuration_generator g;
