@@ -53,7 +53,7 @@ BOOST_AUTO_TEST_CASE(distinct_objects_are_unequal) {
 }
 
 BOOST_AUTO_TEST_CASE(assigning_an_object_to_itself_results_in_the_same_object) {
-#ifdef __clang__
+#if defined __clang__ && !defined __apple_build_version__  && __clang_major__ >= 7
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wself-assign-overloaded"
 #endif

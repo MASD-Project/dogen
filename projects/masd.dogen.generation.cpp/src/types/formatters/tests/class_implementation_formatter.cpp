@@ -147,7 +147,7 @@ a.stream() << "    BOOST_CHECK(a != b);" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
 a.stream() << "BOOST_AUTO_TEST_CASE(assigning_an_object_to_itself_results_in_the_same_object) {" << std::endl;
-a.stream() << "#ifdef __clang__" << std::endl;
+a.stream() << "#if defined __clang__ && !defined __apple_build_version__  && __clang_major__ >= 7" << std::endl;
 a.stream() << "#pragma clang diagnostic push" << std::endl;
 a.stream() << "#pragma clang diagnostic ignored \"-Wself-assign-overloaded\"" << std::endl;
 a.stream() << "#endif" << std::endl;
