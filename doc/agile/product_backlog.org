@@ -4285,6 +4285,39 @@ initial vectors for a given element. We just need to stop DFS'ing when
 we find a cycle. We can also cache the initial vectors for each
 element.
 
+Notes:
+
+- we can greatly simplify this story if we do not allow for cycles. We
+  can simply create a graph of all dependencies and then iterate the
+  graph from the leaves. Call Ev the enablement vector for each
+  element; we can descend the graph and perform an OR of Ev at each
+  level. Consider element e0, which is a child of a set of elements E;
+  for each entry in the set, we'd OR the element vector of e0 (and of
+  all of its descendants). As a result, its values would be the
+  superset of all of the enabled values on each leaf element.
+- since we do not allow cycles, we should detect them and break with
+  an error. We should provide the cycle path to the user and then
+  allow users to remove certain types from this computation via
+  meta-data. If a type is set not to contribute to the graph, we can
+  simply skip it. The user is then responsible for manually setting
+  that type.
+- since we can only alter generatable types, we should detect when we
+  reach an element which is not generatable. If the OR'ing of that
+  element does not produce its current enablement vector we should
+  simply error and tell the user the current enablement requirements
+  are not satisfiable. The user is then responsible for addressing the
+  issue by either changing enablement requirements, ignoring types,
+  updating reference models manually or providing helper types. To
+  make life easier we could state what are the enablement requirements
+  that have not been met so that users can quickly decide what to do.
+- once we compute the dependency graph we can also check to see what
+  types are on it. Any type which is absent can be removed from the
+  model. We could also compute the models that are on the graph and
+  compare them to the list of references. If the list of references at
+  present only includes references of the target model, we can figure
+  out any unnecessary references. Sadly we cannot do the opposite:
+  (lost the train of thought).
+
 Merged stories:
 
 *Formatters need different =enabled= defaults*
@@ -11876,57 +11909,6 @@ cases where we fail to resolve - e.g. second pass after all has
 failed.
 
 We should also do this for command line options.
-
-*** Consider using a graph in yarn for indexing and other tasks        :story:
-
-To keep things simple we created a number of specialised indexers,
-each performing a complete loop, recursion, etc over the merged
-model. A better way of doing things would be to do a DAG of the model
-that includes both concepts and objects and then DFS it; at each
-vertex we could plug in a set of indexers, each acting on the
-vertex. We could also have dependencies between the indexers (for
-example concept indexing must take place before property indexing and
-so on). This could also be extended to the quilt models, provided we
-could express dependencies. We just need a simple interface that any
-indexer can implement. Of course we also have to worry about indexers
-which need to see the intermediate results of other indexers.
-
-In addition, for this to work properly we need to remove all of the
-frontend workflow processing and make these work off of the merged
-model. Property expansion for example could be done by splitting
-modules by model. The good thing about this approach is that we could
-setup the graph in such a way that any type that does not link back to
-the target model can be dropped so we would do very little work for
-these - other than the original front end loading. Its not easy to
-avoid loading models which we will not use because we only know which
-models we need after resolution, and that requires having the model
-loaded.
-
-We did something similar with the consumer interface, which was never
-used. The graph could probably be reused as is. See:
-
-: 5db6524 * sml: remove consumer workflow and associated classes
-
-One possible approach is to use [[http://www.nuget.org/packages/RxCpp/][Rx]]. Each of the indexers is a stream
-which does some processing. Streams are linked to each other based on
-the indexer dependencies, such that we pass on the processed types
-once we are finished with it. They are passed on up all the way to
-quilt indexers. We need to come up with a streams architecture linking
-all indexers. We then use the graph to determine the order in which
-yarn type are being passed in to the stream pipeline.
-
-More thoughts: what we really want is to have a "transfomers" pipeline
-("indexers" seems too limited a name) that is designed to generate the
-inputs for the formatters. This means that by the end of the pipeline
-we end up with properties, settings and the yarn type. And of course
-we could take this one step further and then say that the formatters
-themselves are also in the pipeline and the ultimate result of the
-pipeline is a file.
-
-We should not tackle this task until we have support for a few
-languages other than C++ because we may be hacking things for C++
-which wont work for those languages. It will be much harder to change
-the code once we have a graph + pipeline.
 
 *** Consider C++ itself as a front-end                                 :epic:
 
