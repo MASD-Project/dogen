@@ -21,6 +21,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/tests/class_implementation_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/tests/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/test_data/traits.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/serialization/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/io/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/types/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/formatting_error.hpp"
@@ -29,6 +30,7 @@
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "masd.dogen.extraction/types/sequence_formatter.hpp"
+#include "masd.dogen.coding/types/helpers/name_factory.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
@@ -106,6 +108,30 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
         builder.add(ic::boost::property_tree::ptree());
         builder.add(ic::boost::property_tree::json_parser());
     }
+
+    using ser = formatters::serialization::traits;
+    const auto ser_arch(ser::class_header_archetype());
+    const bool ser_enabled(builder.is_enabled(o.name(), ser_arch));
+    if (ser_enabled) {
+        builder.add(o.name(), ser_arch);
+
+        // FIXME: hack for registrar
+        coding::helpers::name_factory nf;
+        auto n(o.name());
+        n.location().internal_modules().clear();
+        const auto rn(nf.build_element_in_model(n, "registrar"));
+        builder.add(rn, ser::registrar_header_archetype());
+
+        builder.add(ic::boost::archive::text_iarchive());
+        builder.add(ic::boost::archive::text_oarchive());
+        builder.add(ic::boost::archive::binary_iarchive());
+        builder.add(ic::boost::archive::binary_oarchive());
+        builder.add(ic::boost::archive::polymorphic_iarchive());
+        builder.add(ic::boost::archive::polymorphic_oarchive());
+        builder.add(ic::boost::serialization::nvp());
+        builder.add(ic::boost::archive::xml_iarchive());
+        builder.add(ic::boost::archive::xml_oarchive());
+    }
     return builder.build();
 }
 
@@ -126,6 +152,9 @@ a.stream() << std::endl;
          * based on element state.
          */
         if (o.all_attributes().empty() || !a.is_test_data_enabled()) {
+            /*
+             * No tests.
+             */
 a.stream() << "BOOST_AUTO_TEST_CASE(fake_test) {" << std::endl;
 a.stream() << "    BOOST_CHECK(true);" << std::endl;
 a.stream() << "}" << std::endl;
@@ -224,6 +253,84 @@ a.stream() << "    s << a;" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    boost::property_tree::ptree pt;" << std::endl;
 a.stream() << "    BOOST_REQUIRE_NO_THROW(read_json(s, pt));" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+            }
+
+            if (a.is_serialization_enabled()) {
+                /*
+                 * Serialization tests.
+                 */
+                // FIXME: hack for register_types
+                coding::helpers::name_factory nf;
+                auto n(o.name());
+                n.location().internal_modules().clear();
+                const auto rn(nf.build_element_in_model(n, "register_types"));
+                const auto registrar_qn(a.get_qualified_name(rn));
+a.stream() << "BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {" << std::endl;
+a.stream() << "    " << qn << "_generator g;" << std::endl;
+a.stream() << "    const auto a(g());" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    using namespace boost::archive;" << std::endl;
+a.stream() << "    std::ostringstream os;" << std::endl;
+a.stream() << "    {" << std::endl;
+a.stream() << "        xml_oarchive oa(os);" << std::endl;
+a.stream() << "        " << registrar_qn << "<xml_oarchive>(oa);" << std::endl;
+a.stream() << "        oa << BOOST_SERIALIZATION_NVP(a);" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    " << qn << " b = " << qn << "();" << std::endl;
+a.stream() << "    std::istringstream is(os.str());" << std::endl;
+a.stream() << "    {" << std::endl;
+a.stream() << "        xml_iarchive ia(is);" << std::endl;
+a.stream() << "        " << registrar_qn << "<xml_iarchive>(ia);" << std::endl;
+a.stream() << "        ia >> BOOST_SERIALIZATION_NVP(b);" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << "    BOOST_CHECK(a == b);" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << "BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {" << std::endl;
+a.stream() << "    " << qn << "_generator g;" << std::endl;
+a.stream() << "    const auto a(g());" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    using namespace boost::archive;" << std::endl;
+a.stream() << "    std::ostringstream os;" << std::endl;
+a.stream() << "    {" << std::endl;
+a.stream() << "        xml_oarchive oa(os);" << std::endl;
+a.stream() << "        " << registrar_qn << "<xml_oarchive>(oa);" << std::endl;
+a.stream() << "        oa << BOOST_SERIALIZATION_NVP(a);" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    " << qn << " b = " << qn << "();" << std::endl;
+a.stream() << "    std::istringstream is(os.str());" << std::endl;
+a.stream() << "    {" << std::endl;
+a.stream() << "        xml_iarchive ia(is);" << std::endl;
+a.stream() << "        " << registrar_qn << "<xml_iarchive>(ia);" << std::endl;
+a.stream() << "        ia >> BOOST_SERIALIZATION_NVP(b);" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << "    BOOST_CHECK(a == b);" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << "BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {" << std::endl;
+a.stream() << "    " << qn << "_generator g;" << std::endl;
+a.stream() << "    const auto a(g());" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    using namespace boost::archive;" << std::endl;
+a.stream() << "    std::ostringstream os;" << std::endl;
+a.stream() << "    {" << std::endl;
+a.stream() << "        text_oarchive oa(os);" << std::endl;
+a.stream() << "        " << registrar_qn << "<text_oarchive>(oa);" << std::endl;
+a.stream() << "        oa << a;" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    " << qn << " b = " << qn << "();" << std::endl;
+a.stream() << "    std::istringstream is(os.str());" << std::endl;
+a.stream() << "    {" << std::endl;
+a.stream() << "        text_iarchive ia(is);" << std::endl;
+a.stream() << "        " << registrar_qn << "<text_iarchive>(ia);" << std::endl;
+a.stream() << "        ia >> b;" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << "    BOOST_CHECK(a == b);" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
             }

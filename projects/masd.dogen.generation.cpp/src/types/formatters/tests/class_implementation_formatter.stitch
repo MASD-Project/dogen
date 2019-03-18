@@ -4,6 +4,7 @@
 <#@ masd.stitch.inclusion_dependency="masd.dogen.utility/types/log/logger.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.coding/types/meta_model/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.coding/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.coding/types/helpers/name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.extraction/types/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/traits.hpp" #>
@@ -12,6 +13,7 @@
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/serialization/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/test_data/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/tests/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/tests/class_implementation_formatter.hpp" #>
@@ -87,6 +89,30 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
         builder.add(ic::boost::property_tree::ptree());
         builder.add(ic::boost::property_tree::json_parser());
     }
+
+    using ser = formatters::serialization::traits;
+    const auto ser_arch(ser::class_header_archetype());
+    const bool ser_enabled(builder.is_enabled(o.name(), ser_arch));
+    if (ser_enabled) {
+        builder.add(o.name(), ser_arch);
+
+        // FIXME: hack for registrar
+        coding::helpers::name_factory nf;
+        auto n(o.name());
+        n.location().internal_modules().clear();
+        const auto rn(nf.build_element_in_model(n, "registrar"));
+        builder.add(rn, ser::registrar_header_archetype());
+
+        builder.add(ic::boost::archive::text_iarchive());
+        builder.add(ic::boost::archive::text_oarchive());
+        builder.add(ic::boost::archive::binary_iarchive());
+        builder.add(ic::boost::archive::binary_oarchive());
+        builder.add(ic::boost::archive::polymorphic_iarchive());
+        builder.add(ic::boost::archive::polymorphic_oarchive());
+        builder.add(ic::boost::serialization::nvp());
+        builder.add(ic::boost::archive::xml_iarchive());
+        builder.add(ic::boost::archive::xml_oarchive());
+    }
     return builder.build();
 }
 
@@ -109,6 +135,9 @@ BOOST_AUTO_TEST_SUITE(<#= o.name().simple() #>_tests)
          * based on element state.
          */
         if (o.all_attributes().empty() || !a.is_test_data_enabled()) {
+            /*
+             * No tests.
+             */
 #>
 BOOST_AUTO_TEST_CASE(fake_test) {
     BOOST_CHECK(true);
@@ -212,6 +241,86 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+<#+
+            }
+
+            if (a.is_serialization_enabled()) {
+                /*
+                 * Serialization tests.
+                 */
+                // FIXME: hack for register_types
+                coding::helpers::name_factory nf;
+                auto n(o.name());
+                n.location().internal_modules().clear();
+                const auto rn(nf.build_element_in_model(n, "register_types"));
+                const auto registrar_qn(a.get_qualified_name(rn));
+#>
+BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {
+    <#= qn #>_generator g;
+    const auto a(g());
+
+    using namespace boost::archive;
+    std::ostringstream os;
+    {
+        xml_oarchive oa(os);
+        <#= registrar_qn #><xml_oarchive>(oa);
+        oa << BOOST_SERIALIZATION_NVP(a);
+    }
+
+    <#= qn #> b = <#= qn #>();
+    std::istringstream is(os.str());
+    {
+        xml_iarchive ia(is);
+        <#= registrar_qn #><xml_iarchive>(ia);
+        ia >> BOOST_SERIALIZATION_NVP(b);
+    }
+    BOOST_CHECK(a == b);
+}
+
+BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {
+    <#= qn #>_generator g;
+    const auto a(g());
+
+    using namespace boost::archive;
+    std::ostringstream os;
+    {
+        xml_oarchive oa(os);
+        <#= registrar_qn #><xml_oarchive>(oa);
+        oa << BOOST_SERIALIZATION_NVP(a);
+    }
+
+    <#= qn #> b = <#= qn #>();
+    std::istringstream is(os.str());
+    {
+        xml_iarchive ia(is);
+        <#= registrar_qn #><xml_iarchive>(ia);
+        ia >> BOOST_SERIALIZATION_NVP(b);
+    }
+    BOOST_CHECK(a == b);
+}
+
+BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {
+    <#= qn #>_generator g;
+    const auto a(g());
+
+    using namespace boost::archive;
+    std::ostringstream os;
+    {
+        text_oarchive oa(os);
+        <#= registrar_qn #><text_oarchive>(oa);
+        oa << a;
+    }
+
+    <#= qn #> b = <#= qn #>();
+    std::istringstream is(os.str());
+    {
+        text_iarchive ia(is);
+        <#= registrar_qn #><text_iarchive>(ia);
+        ia >> b;
+    }
+    BOOST_CHECK(a == b);
 }
 
 <#+
