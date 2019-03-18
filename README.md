@@ -184,7 +184,7 @@ ninja -j${CORES}
 On Windows, the incantation is slightly different:
 
 ```
-cmake -DCMAKE_TOOLCHAIN_FILE=${PATH_TO_VCPKG_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows-static ../.. -DCMAKE_BUILD_TYPE=Release -G 'Visual Studio 15 2017 Win64'
+cmake -DCMAKE_TOOLCHAIN_FILE=${PATH_TO_VCPKG_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows-static ../.. -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 15 2017 Win64"
 cmake --build . --config Release --target ALL_BUILD
 ```
 
@@ -198,7 +198,16 @@ cmake --build . --config Release --target ALL_BUILD
 CMAKE_INCLUDE_PATH=/my/boost/include/path CMAKE_LIBRARY_PATH=/my/boost/lib/path cmake ../..
 ```
 
-- If you are using vcpkg in Windows, **make sure** you are targeting the right triplet. As explained above. We tend to use ```x64-windows-static```. If you have installed all the libraries (or you are using our export) but somehow CMake just doesn't seem to be able to find them, the likely cause is the wrong vcpkg triplet.
+- If you are using vcpkg in Windows, **make sure** you are targeting
+the right triplet. As explained above. We tend to use
+```x64-windows-static```. If you have installed all the libraries (or
+you are using our export) but somehow CMake just doesn't seem to be
+able to find them, the likely cause is the wrong vcpkg triplet.
+- Note that we are targeting 64-bit builds (e.g. ```"Visual Studio 15
+2017 Win64"```). If you want to do a 32-bit build, you will need to
+have a vcpkg export built for 32-bits. Note also that if you forget to set the
+generator, it will default to 32-bits and you'll experience weird and
+wonderful linker errors.
 
 ---
 
