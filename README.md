@@ -81,7 +81,7 @@ above).
 ---
 **Notes**
 
-The OSX installer provides you with a DMG. Once you open it in Finder,
+- The OSX installer provides you with a DMG. Once you open it in Finder,
 it mounts under ```/Volumes/```, e.g.:
 
 ```
@@ -138,19 +138,20 @@ and then install packages by running:
 
 - The default vcpkg triplet on Windows [is 32-bit
 dynamic](https://github.com/Microsoft/vcpkg/issues/1254) whereas we
-build with ```--triplet x64-windows-static```. If you are experiencing
-[weird and wonderful build
-errors](https://github.com/Microsoft/vcpkg/issues/4447), check your
-triplet.
+build with ```--triplet x64-windows-static``` (e.g. add this to the
+line above if you are on Windows). If you are experiencing [weird and
+wonderful errors](https://github.com/Microsoft/vcpkg/issues/4447)
+building Dogen, check your triplet.
 - If you are on OSX, you probably should rely on the system's LibXML2
 (e.g. remove it from the vcpkg list above) or else you may see [some
 interesting linking
-errors](https://github.com/Microsoft/vcpkg/issues/4476) related to ```iconv```.
-- Remember that the recommended compiler for OSX is Homebrew's GCC. If
-  you do decide to use Clang, beware that for some reason [boost does
+errors](https://github.com/Microsoft/vcpkg/issues/4476) related to
+```iconv```.
+- Remember that the recommended compiler for vcpkg on OSX is Homebrew's GCC. If
+  you do decide to use XCode Clang or LLVM Clang, be ready to handle [some pain](https://github.com/Microsoft/vcpkg/issues/4476). In addition, beware that for some reason [boost does
   not
   default](https://github.com/Microsoft/vcpkg/issues/4476#issuecomment-430175834)
-  to C++ 14. You'll need to add ```cxxstd=14```.
+  to C++ 14. You'll need to add ```cxxstd=14```. Our vcpkg repo has fixes for this.
 
 ---
 
@@ -183,20 +184,21 @@ ninja -j${CORES}
 On Windows, the incantation is slightly different:
 
 ```
-cmake -DCMAKE_TOOLCHAIN_FILE=${PATH_TO_VCPKG_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake ../.. -DCMAKE_BUILD_TYPE=Release -G 'Visual Studio 15 2017 Win64'
+cmake -DCMAKE_TOOLCHAIN_FILE=${PATH_TO_VCPKG_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows-static ../.. -DCMAKE_BUILD_TYPE=Release -G 'Visual Studio 15 2017 Win64'
 cmake --build . --config Release --target ALL_BUILD
 ```
 
 ---
 **Notes**
 
-If you are **not** using vcpkg, you can omit ```-DCMAKE_TOOLCHAIN_FILE```.
-However if the dependencies are not on the standard paths, you must then set
+- If you are **not** using vcpkg, you can omit ```-DCMAKE_TOOLCHAIN_FILE``` and ```-DVCPKG_TARGET_TRIPLET```. However if the dependencies are not on the standard paths, you must then set
 ```CMAKE_INCLUDE_PATH``` and ```CMAKE_LIBRARY_PATH``` accordingly, e.g.:
 
 ```
 CMAKE_INCLUDE_PATH=/my/boost/include/path CMAKE_LIBRARY_PATH=/my/boost/lib/path cmake ../..
 ```
+
+- If you are using vcpkg in Windows, **make sure** you are targeting the right triplet. As explained above. We tend to use ```x64-windows-static```. If you have installed all the libraries (or you are using our export) but somehow CMake just doesn't seem to be able to find them, the likely cause is the wrong vcpkg triplet.
 
 ---
 
