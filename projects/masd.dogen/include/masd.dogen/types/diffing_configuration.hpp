@@ -28,6 +28,7 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen/types/diffing_destination.hpp"
+#include "masd.dogen/serialization/diffing_configuration_fwd_ser.hpp"
 
 namespace masd::dogen {
 
@@ -49,6 +50,13 @@ public:
     diffing_configuration(
         const masd::dogen::diffing_destination destination,
         const boost::filesystem::path& output_directory);
+
+private:
+    template<typename Archive>
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::diffing_configuration& v, unsigned int version);
+
+    template<typename Archive>
+    friend void boost::serialization::load(Archive& ar, masd::dogen::diffing_configuration& v, unsigned int version);
 
 public:
     masd::dogen::diffing_destination destination() const;

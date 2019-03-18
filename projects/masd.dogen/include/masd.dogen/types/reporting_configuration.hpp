@@ -28,6 +28,7 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen/types/reporting_style.hpp"
+#include "masd.dogen/serialization/reporting_configuration_fwd_ser.hpp"
 
 namespace masd::dogen {
 
@@ -49,6 +50,13 @@ public:
     reporting_configuration(
         const masd::dogen::reporting_style style,
         const boost::filesystem::path& output_directory);
+
+private:
+    template<typename Archive>
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::reporting_configuration& v, unsigned int version);
+
+    template<typename Archive>
+    friend void boost::serialization::load(Archive& ar, masd::dogen::reporting_configuration& v, unsigned int version);
 
 public:
     masd::dogen::reporting_style style() const;

@@ -21,11 +21,22 @@
 #include <string>
 #include <sstream>
 #include <boost/test/unit_test.hpp>
+#include <boost/serialization/nvp.hpp>
 #include <boost/property_tree/ptree.hpp>
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
 #include <boost/property_tree/json_parser.hpp>
+#include <boost/archive/polymorphic_iarchive.hpp>
+#include <boost/archive/polymorphic_oarchive.hpp>
 #include "masd.dogen/io/tracing_configuration_io.hpp"
+#include "masd.dogen/serialization/registrar_ser.hpp"
 #include "masd.dogen/types/tracing_configuration.hpp"
 #include "masd.dogen/test_data/tracing_configuration_td.hpp"
+#include "masd.dogen/serialization/tracing_configuration_ser.hpp"
 
 BOOST_AUTO_TEST_SUITE(tracing_configuration_tests)
 
@@ -115,6 +126,72 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {
+    masd::dogen::tracing_configuration_generator g;
+    const auto a(g());
+
+    using namespace boost::archive;
+    std::ostringstream os;
+    {
+        xml_oarchive oa(os);
+        masd::dogen::register_types<xml_oarchive>(oa);
+        oa << BOOST_SERIALIZATION_NVP(a);
+    }
+
+    masd::dogen::tracing_configuration b = masd::dogen::tracing_configuration();
+    std::istringstream is(os.str());
+    {
+        xml_iarchive ia(is);
+        masd::dogen::register_types<xml_iarchive>(ia);
+        ia >> BOOST_SERIALIZATION_NVP(b);
+    }
+    BOOST_CHECK(a == b);
+}
+
+BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {
+    masd::dogen::tracing_configuration_generator g;
+    const auto a(g());
+
+    using namespace boost::archive;
+    std::ostringstream os;
+    {
+        xml_oarchive oa(os);
+        masd::dogen::register_types<xml_oarchive>(oa);
+        oa << BOOST_SERIALIZATION_NVP(a);
+    }
+
+    masd::dogen::tracing_configuration b = masd::dogen::tracing_configuration();
+    std::istringstream is(os.str());
+    {
+        xml_iarchive ia(is);
+        masd::dogen::register_types<xml_iarchive>(ia);
+        ia >> BOOST_SERIALIZATION_NVP(b);
+    }
+    BOOST_CHECK(a == b);
+}
+
+BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {
+    masd::dogen::tracing_configuration_generator g;
+    const auto a(g());
+
+    using namespace boost::archive;
+    std::ostringstream os;
+    {
+        text_oarchive oa(os);
+        masd::dogen::register_types<text_oarchive>(oa);
+        oa << a;
+    }
+
+    masd::dogen::tracing_configuration b = masd::dogen::tracing_configuration();
+    std::istringstream is(os.str());
+    {
+        text_iarchive ia(is);
+        masd::dogen::register_types<text_iarchive>(ia);
+        ia >> b;
+    }
+    BOOST_CHECK(a == b);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
