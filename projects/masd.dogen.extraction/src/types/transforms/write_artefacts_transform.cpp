@@ -77,9 +77,10 @@ apply(const context& ctx, const meta_model::model& m) {
      * Write each artefact that has been marked with a "write"
      * operation to the filesystem. Ignore all other artefacts.
      */
+    unsigned int files_written(0);
     for (const auto& a : m.artefacts()) {
         const auto gs(a.path().generic_string());
-        BOOST_LOG_SEV(lg, debug) << "Writing file: " << gs;
+        BOOST_LOG_SEV(lg, trace) << "Processing file: " << gs;
 
         if (a.path().empty()) {
             // FIXME: throw
@@ -94,10 +95,14 @@ apply(const context& ctx, const meta_model::model& m) {
             continue;
         }
 
+        ++files_written;
+        BOOST_LOG_SEV(lg, trace) << "Writing file.";
         create_directories(a.path());
         using masd::dogen::utility::filesystem::write_file_content;
         write_file_content(a.path(), a.content());
     }
+
+    BOOST_LOG_SEV(lg, info) << "Total files written: " << files_written;
 
     stp.end_transform(m);
 }
