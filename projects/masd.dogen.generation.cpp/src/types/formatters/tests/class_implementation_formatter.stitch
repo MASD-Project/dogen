@@ -145,7 +145,7 @@ BOOST_AUTO_TEST_CASE(assigning_an_object_to_itself_results_in_the_same_object) {
     a = a;
     BOOST_CHECK(a == b);
     BOOST_CHECK(a != c);
-#ifdef __clang__
+#if defined(__clang__) && !defined(__apple_build_version__)  && (__clang_major__ >= 7)
 #pragma clang diagnostic pop
 #endif
 }
