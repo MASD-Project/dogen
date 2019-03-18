@@ -87,6 +87,7 @@ BOOST_AUTO_TEST_CASE(assigning_an_object_to_itself_results_in_the_same_object) {
 
 BOOST_AUTO_TEST_CASE(moved_objects_are_equal) {
     masd::dogen::dia::font_generator g;
+    g();
     auto a(g());
     const auto b = masd::dogen::dia::font();
     const auto c(a);
@@ -100,6 +101,7 @@ BOOST_AUTO_TEST_CASE(moved_objects_are_equal) {
 
 BOOST_AUTO_TEST_CASE(assigned_objects_are_equal) {
     masd::dogen::dia::font_generator g;
+    g();
     const auto a(g());
     masd::dogen::dia::font b;
     BOOST_CHECK(a != b);
@@ -110,6 +112,7 @@ BOOST_AUTO_TEST_CASE(assigned_objects_are_equal) {
 
 BOOST_AUTO_TEST_CASE(copy_constructed_objects_are_equal) {
     masd::dogen::dia::font_generator g;
+    g();
     const auto a(g());
     auto b(a);
     BOOST_CHECK(a == b);
