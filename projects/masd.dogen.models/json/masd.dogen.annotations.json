@@ -18,7 +18,11 @@
     "masd.extraction.cpp.visual_studio.project.enabled": "false",
     "masd.extraction.cpp.visual_studio.solution.enabled": "false",
     "masd.extraction.csharp.enabled": "false",
-    "masd.annotations.profile": "dogen.disable_common_facets"
+    "masd.annotations.profile": "dogen.disable_common_facets",
+    "masd.extraction.cpp.tests.enabled": "true",
+    "masd.extraction.cpp.test_data.enabled": "true",
+    "masd.extraction.cpp.tests.main.enabled": "false",
+    "masd.extraction.cpp.tests.source_cmakelists.enabled": "false"
   },
   "elements": [
     {
