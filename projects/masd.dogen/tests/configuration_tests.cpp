@@ -19,7 +19,11 @@
  *
  */
 #include <string>
+#include <sstream>
 #include <boost/test/unit_test.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include "masd.dogen/io/configuration_io.hpp"
 #include "masd.dogen/types/configuration.hpp"
 #include "masd.dogen/test_data/configuration_td.hpp"
 
@@ -101,6 +105,16 @@ BOOST_AUTO_TEST_CASE(copy_constructed_objects_are_equal) {
 
     b = masd::dogen::configuration();
     BOOST_CHECK(a != b);
+}
+
+BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
+    masd::dogen::configuration_generator g;
+    const auto a(g());
+    std::stringstream s;
+    s << a;
+
+    boost::property_tree::ptree pt;
+    BOOST_REQUIRE_NO_THROW(read_json(s, pt));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

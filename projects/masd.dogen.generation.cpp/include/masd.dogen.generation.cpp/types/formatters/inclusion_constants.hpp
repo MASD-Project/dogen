@@ -41,11 +41,17 @@ struct inclusion_constants {
         static ::std::string algorithm();
         static ::std::string ostream();
         static ::std::string iostream();
+        static ::std::string sstream();
         static ::std::string functional();
         static ::std::string stdexcept();
     };
 
     struct boost {
+        struct property_tree {
+            static ::std::string ptree();
+            static ::std::string json_parser();
+        };
+
         struct type_traits {
             static ::std::string is_virtual_base_of();
         };

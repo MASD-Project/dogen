@@ -362,8 +362,13 @@ bool assistant::is_odb_facet_enabled() const {
     return is_facet_enabled(traits::facet());
 }
 
-bool assistant::is_tests_facet_enabled() const {
+bool assistant::is_tests_enabled() const {
     using formatters::tests::traits;
+    return is_facet_enabled(traits::facet());
+}
+
+bool assistant::is_test_data_enabled() const {
+    using formatters::test_data::traits;
     return is_facet_enabled(traits::facet());
 }
 

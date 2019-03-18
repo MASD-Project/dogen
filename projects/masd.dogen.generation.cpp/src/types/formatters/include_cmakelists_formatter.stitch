@@ -81,7 +81,7 @@ format(const context& ctx, const coding::meta_model::element& e) const {
 #>
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/<#= c.source_directory_name() #>)
 <#+
-       if (a.is_tests_facet_enabled()) {
+       if (a.is_tests_enabled()) {
 #>
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/<#= c.tests_directory_name() #>)
 <#+

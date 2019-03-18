@@ -47,6 +47,11 @@ std::string inclusion_constants::std::iostream() {
     return r;
 }
 
+std::string inclusion_constants::std::sstream() {
+    static ::std::string r("<sstream>");
+    return r;
+}
+
 std::string inclusion_constants::std::functional() {
     static ::std::string r("<functional>");
     return r;
@@ -54,6 +59,16 @@ std::string inclusion_constants::std::functional() {
 
 std::string inclusion_constants::std::stdexcept() {
     static ::std::string r("<stdexcept>");
+    return r;
+}
+
+std::string inclusion_constants::boost::property_tree::ptree() {
+    static ::std::string r("<boost/property_tree/ptree.hpp>");
+    return r;
+}
+
+std::string inclusion_constants::boost::property_tree::json_parser() {
+    static ::std::string r("<boost/property_tree/json_parser.hpp>");
     return r;
 }
 

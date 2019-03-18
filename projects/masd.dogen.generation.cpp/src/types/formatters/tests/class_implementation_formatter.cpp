@@ -21,6 +21,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/tests/class_implementation_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/tests/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/test_data/traits.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/io/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/types/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/formatting_error.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/inclusion_constants.hpp"
@@ -97,6 +98,14 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     builder.add(ic::std::string());
     builder.add(ic::boost::test::unit_test());
 
+    const auto io_arch(io::traits::class_header_archetype());
+    const bool io_enabled(builder.is_enabled(o.name(), io_arch));
+    if (io_enabled) {
+        builder.add(o.name(), io_arch);
+        builder.add(ic::std::sstream());
+        builder.add(ic::boost::property_tree::ptree());
+        builder.add(ic::boost::property_tree::json_parser());
+    }
     return builder.build();
 }
 
@@ -111,14 +120,20 @@ a.stream() << "BOOST_AUTO_TEST_SUITE(" << o.name().simple() << "_tests)" << std:
 a.stream() << std::endl;
         /*
          * If we have no attributes at all, we cannot test this
-         * type. Insert a fake test for now. The real solution will be
-         * to filter based on element state.
+         * type. Similarly, if test data is not enabled, none of the
+         * tests can be generated. In either case, we need to insert a
+         * fake test for now. The real solution will be to filter
+         * based on element state.
          */
-        if (o.all_attributes().empty()) {
+        if (o.all_attributes().empty() || !a.is_test_data_enabled()) {
 a.stream() << "BOOST_AUTO_TEST_CASE(fake_test) {" << std::endl;
 a.stream() << "    BOOST_CHECK(true);" << std::endl;
 a.stream() << "}" << std::endl;
+a.stream() << std::endl;
         } else {
+            /*
+             * Types tests.
+             */
 a.stream() << "BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {" << std::endl;
 a.stream() << "    " << qn << "_generator g;" << std::endl;
 a.stream() << "    const auto a(g());" << std::endl;
@@ -197,8 +212,23 @@ a.stream() << "    b = " << qn << "();" << std::endl;
 a.stream() << "    BOOST_CHECK(a != b);" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
-a.stream() << "BOOST_AUTO_TEST_SUITE_END()" << std::endl;
+            if (a.is_io_enabled()) {
+                /*
+                 * IO tests.
+                 */
+a.stream() << "BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {" << std::endl;
+a.stream() << "    " << qn << "_generator g;" << std::endl;
+a.stream() << "    const auto a(g());" << std::endl;
+a.stream() << "    std::stringstream s;" << std::endl;
+a.stream() << "    s << a;" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    boost::property_tree::ptree pt;" << std::endl;
+a.stream() << "    BOOST_REQUIRE_NO_THROW(read_json(s, pt));" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+            }
         }
+a.stream() << "BOOST_AUTO_TEST_SUITE_END()" << std::endl;
     } // sbf
     return a.make_artefact();
 }
