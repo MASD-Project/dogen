@@ -531,7 +531,7 @@
       "attributes": [
         {
           "name": "severity",
-          "type": "severity_level",
+          "type": "std::string",
           "documentation": "Level at which to log.\n"
         },
         {

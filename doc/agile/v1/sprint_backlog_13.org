@@ -694,6 +694,7 @@ Notes:
 
 *** STARTED Code generation of tests for dogen models                 :story:
     :LOGBOOK:
+    CLOCK: [2019-03-18 Mon 16:37]--[2019-03-18 Mon 17:15] =>  0:38
     CLOCK: [2019-03-18 Mon 16:34]--[2019-03-18 Mon 16:36] =>  0:02
     CLOCK: [2019-03-18 Mon 16:19]--[2019-03-18 Mon 16:33] =>  0:14
     CLOCK: [2019-03-18 Mon 16:06]--[2019-03-18 Mon 16:18] =>  0:12

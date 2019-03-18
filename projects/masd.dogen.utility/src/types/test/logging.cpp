@@ -33,7 +33,7 @@ namespace {
  */
 bool logging_enabled(false);
 using masd::dogen::utility::log::severity_level;
-const severity_level severity(severity_level::trace);
+const std::string severity("trace");
 
 }
 

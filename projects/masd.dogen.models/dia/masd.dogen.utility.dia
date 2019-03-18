@@ -7967,7 +7967,7 @@
             <dia:string>#severity#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#severity_level#</dia:string>
+            <dia:string>#std::string#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -8208,79 +8208,7 @@ If empty, file logging is disabled.#</dia:string>
       </dia:connections>
       <dia:childnode parent="O27"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O79">
-      <dia:attribute name="name">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="direction">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="show_direction">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="assoc_type">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="role_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_a">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_a">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="role_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_b">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_b">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="obj_pos">
-        <dia:point val="42,63"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="38.535,54.95;42.75,63.8"/>
-      </dia:attribute>
-      <dia:attribute name="meta">
-        <dia:composite type="dict"/>
-      </dia:attribute>
-      <dia:attribute name="orth_points">
-        <dia:point val="42,63"/>
-        <dia:point val="42,60"/>
-        <dia:point val="38.585,60"/>
-        <dia:point val="38.585,55"/>
-      </dia:attribute>
-      <dia:attribute name="orth_orient">
-        <dia:enum val="1"/>
-        <dia:enum val="0"/>
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="orth_autoroute">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="text_colour">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="line_colour">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:connections>
-        <dia:connection handle="0" to="O76" connection="0"/>
-        <dia:connection handle="1" to="O31" connection="7"/>
-      </dia:connections>
-      <dia:childnode parent="O27"/>
-    </dia:object>
-    <dia:object type="UML - Class" version="0" id="O80">
+    <dia:object type="UML - Class" version="0" id="O79">
       <dia:attribute name="obj_pos">
         <dia:point val="65,75"/>
       </dia:attribute>
@@ -8393,7 +8321,7 @@ If empty, file logging is disabled.#</dia:string>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O27"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O81">
+    <dia:object type="UML - Class" version="0" id="O80">
       <dia:attribute name="obj_pos">
         <dia:point val="62,63"/>
       </dia:attribute>
@@ -8553,7 +8481,7 @@ If empty, file logging is disabled.#</dia:string>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O27"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O82">
+    <dia:object type="UML - Association" version="2" id="O81">
       <dia:attribute name="name">
         <dia:string>#&lt; throws#</dia:string>
       </dia:attribute>
@@ -8620,12 +8548,12 @@ If empty, file logging is disabled.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O81" connection="7"/>
-        <dia:connection handle="1" to="O80" connection="1"/>
+        <dia:connection handle="0" to="O80" connection="7"/>
+        <dia:connection handle="1" to="O79" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O27"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O83">
+    <dia:object type="UML - Association" version="2" id="O82">
       <dia:attribute name="name">
         <dia:string>#&lt; validates#</dia:string>
       </dia:attribute>
@@ -8692,11 +8620,11 @@ If empty, file logging is disabled.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O81" connection="5"/>
+        <dia:connection handle="0" to="O80" connection="5"/>
         <dia:connection handle="1" to="O76" connection="16"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O84">
+    <dia:object type="UML - Association" version="2" id="O83">
       <dia:attribute name="name">
         <dia:string>#&lt; validates config using#</dia:string>
       </dia:attribute>
@@ -8764,13 +8692,13 @@ If empty, file logging is disabled.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O29" connection="7"/>
-        <dia:connection handle="1" to="O81" connection="1"/>
+        <dia:connection handle="1" to="O80" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O27"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O85">
+    <dia:object type="UML - Association" version="2" id="O84">
       <dia:attribute name="name">
-        <dia:string>#&lt; logs at a#</dia:string>
+        <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="direction">
         <dia:enum val="1"/>
@@ -8809,7 +8737,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:point val="35.2925,63"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.95,54.95;36.0425,63.8"/>
+        <dia:rectangle val="34.2425,54.95;36.0425,63.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8817,8 +8745,8 @@ If empty, file logging is disabled.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="35.2925,63"/>
         <dia:point val="35.2925,60"/>
-        <dia:point val="30,60"/>
-        <dia:point val="30,55"/>
+        <dia:point val="34.2925,60"/>
+        <dia:point val="34.2925,55"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -8836,11 +8764,11 @@ If empty, file logging is disabled.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O28" connection="1"/>
-        <dia:connection handle="1" to="O31" connection="5"/>
+        <dia:connection handle="1" to="O31" connection="6"/>
       </dia:connections>
       <dia:childnode parent="O27"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O86">
+    <dia:object type="UML - Class" version="0" id="O85">
       <dia:attribute name="obj_pos">
         <dia:point val="135,30"/>
       </dia:attribute>
@@ -8951,7 +8879,7 @@ If empty, file logging is disabled.#</dia:string>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O56"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O87">
+    <dia:object type="UML - Class" version="0" id="O86">
       <dia:attribute name="obj_pos">
         <dia:point val="135,35"/>
       </dia:attribute>
@@ -9062,7 +8990,7 @@ If empty, file logging is disabled.#</dia:string>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O56"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O88">
+    <dia:object type="UML - Class" version="0" id="O87">
       <dia:attribute name="obj_pos">
         <dia:point val="120,40"/>
       </dia:attribute>
@@ -9173,7 +9101,7 @@ If empty, file logging is disabled.#</dia:string>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O56"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O89">
+    <dia:object type="UML - Class" version="0" id="O88">
       <dia:attribute name="obj_pos">
         <dia:point val="135,20"/>
       </dia:attribute>
@@ -9284,7 +9212,7 @@ If empty, file logging is disabled.#</dia:string>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O56"/>
     </dia:object>
-    <dia:object type="UML - LargePackage" version="0" id="O90">
+    <dia:object type="UML - LargePackage" version="0" id="O89">
       <dia:attribute name="obj_pos">
         <dia:point val="118,47"/>
       </dia:attribute>
@@ -9322,7 +9250,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:string>#environment#</dia:string>
       </dia:attribute>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O91">
+    <dia:object type="UML - Class" version="0" id="O90">
       <dia:attribute name="obj_pos">
         <dia:point val="136,49"/>
       </dia:attribute>
@@ -9431,9 +9359,9 @@ If empty, file logging is disabled.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O90"/>
+      <dia:childnode parent="O89"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O92">
+    <dia:object type="UML - Class" version="0" id="O91">
       <dia:attribute name="obj_pos">
         <dia:point val="121,57"/>
       </dia:attribute>
@@ -9639,9 +9567,9 @@ If empty, file logging is disabled.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O90"/>
+      <dia:childnode parent="O89"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O93">
+    <dia:object type="UML - Association" version="2" id="O92">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -9708,10 +9636,10 @@ If empty, file logging is disabled.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O92" connection="1"/>
-        <dia:connection handle="1" to="O91" connection="6"/>
+        <dia:connection handle="0" to="O91" connection="1"/>
+        <dia:connection handle="1" to="O90" connection="6"/>
       </dia:connections>
-      <dia:childnode parent="O90"/>
+      <dia:childnode parent="O89"/>
     </dia:object>
   </dia:layer>
 </dia:diagram>

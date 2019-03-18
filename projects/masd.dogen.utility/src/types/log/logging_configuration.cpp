@@ -32,7 +32,7 @@ logging_configuration::logging_configuration(logging_configuration&& rhs)
       output_directory_(std::move(rhs.output_directory_)) { }
 
 logging_configuration::logging_configuration(
-    const masd::dogen::utility::log::severity_level& severity,
+    const std::string& severity,
     const std::string& filename,
     const bool output_to_console,
     const boost::filesystem::path& output_directory)
@@ -62,20 +62,20 @@ logging_configuration& logging_configuration::operator=(logging_configuration ot
     return *this;
 }
 
-const masd::dogen::utility::log::severity_level& logging_configuration::severity() const {
+const std::string& logging_configuration::severity() const {
     return severity_;
 }
 
-masd::dogen::utility::log::severity_level& logging_configuration::severity() {
+std::string& logging_configuration::severity() {
     return severity_;
 }
 
-logging_configuration& logging_configuration::severity(const masd::dogen::utility::log::severity_level& v) {
+logging_configuration& logging_configuration::severity(const std::string& v) {
     severity_ = v;
     return *this;
 }
 
-logging_configuration& logging_configuration::severity(const masd::dogen::utility::log::severity_level&& v) {
+logging_configuration& logging_configuration::severity(const std::string&& v) {
     severity_ = std::move(v);
     return *this;
 }

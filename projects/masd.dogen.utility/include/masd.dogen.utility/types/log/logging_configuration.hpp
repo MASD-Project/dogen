@@ -28,7 +28,6 @@
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.utility/types/log/severity_level.hpp"
 
 namespace masd::dogen::utility::log {
 
@@ -48,7 +47,7 @@ public:
 
 public:
     logging_configuration(
-        const masd::dogen::utility::log::severity_level& severity,
+        const std::string& severity,
         const std::string& filename,
         const bool output_to_console,
         const boost::filesystem::path& output_directory);
@@ -58,10 +57,10 @@ public:
      * @brief Level at which to log.
      */
     /**@{*/
-    const masd::dogen::utility::log::severity_level& severity() const;
-    masd::dogen::utility::log::severity_level& severity();
-    logging_configuration& severity(const masd::dogen::utility::log::severity_level& v);
-    logging_configuration& severity(const masd::dogen::utility::log::severity_level&& v);
+    const std::string& severity() const;
+    std::string& severity();
+    logging_configuration& severity(const std::string& v);
+    logging_configuration& severity(const std::string&& v);
     /**@}*/
 
     /**
@@ -105,7 +104,7 @@ public:
     logging_configuration& operator=(logging_configuration other);
 
 private:
-    masd::dogen::utility::log::severity_level severity_;
+    std::string severity_;
     std::string filename_;
     bool output_to_console_;
     boost::filesystem::path output_directory_;

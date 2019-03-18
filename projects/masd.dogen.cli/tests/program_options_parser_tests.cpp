@@ -56,6 +56,7 @@ const std::string missing_target_msg("Mandatory parameter target is missing");
 const std::string invalid_command_msg("Command is invalid or unsupported:");
 const std::string invalid_argument_msg("unrecognised option");
 const std::string invalid_option_msg("Option is not valid");
+const std::string invalid_log_level_msg("Log level is invalid");
 
 const std::string invalid_command_arg("invalid-command");
 const std::string generate_command_arg("generate");
@@ -69,6 +70,7 @@ const std::string invalid_value_arg("invalid-value");
 const std::string log_enabled_arg("--log-enabled");
 const std::string log_level_arg("--log-level");
 const std::string log_level_value_arg("info");
+const std::string log_level_invalid_value_arg("invalid");
 
 const std::string target_arg("--target");
 const std::string target_value_arg("some_target");
@@ -317,13 +319,26 @@ BOOST_AUTO_TEST_CASE(supplying_log_options_results_in_options_with_expected_log_
     BOOST_LOG_SEV(lg, debug) << "options: " << o;
     BOOST_REQUIRE(o.logging());
     const auto& l(*o.logging());
-    BOOST_CHECK(l.severity() == severity_level::info);
+    BOOST_CHECK(l.severity() == log_level_value_arg);
 
     using boost::algorithm::ends_with;
     const auto fn("cli.generate." + target_value_arg);
 
     BOOST_LOG_SEV(lg, debug) << "expected to end with: " << fn;
     BOOST_CHECK(ends_with(l.filename(), fn));
+}
+
+BOOST_AUTO_TEST_CASE(supplying_invalid_log_options_throws) {
+    SETUP_TEST_LOG_SOURCE("supplying_invalid_log_options_throws");
+
+    const std::vector<std::string> args = {
+        generate_command_arg,
+        target_arg, target_value_arg,
+        log_enabled_arg,
+        log_level_arg, log_level_invalid_value_arg
+    };
+
+    check_exception(args, invalid_log_level_msg);
 }
 
 BOOST_AUTO_TEST_CASE(not_supplying_log_level_results_in_disabling_logging) {

@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/operations.hpp>
+#include "masd.dogen.utility/types/log/severity_level.hpp"
 #include "masd.dogen.utility/types/log/invalid_logging_configuration.hpp"
 #include "masd.dogen.utility/types/log/logging_configuration_validator.hpp"
 
@@ -49,6 +50,11 @@ validate(const logging_configuration& cfg) {
      */
     if (cfg.filename().empty() && !cfg.output_directory().empty())
         BOOST_THROW_EXCEPTION(invalid_logging_configuration(unexpected_dir));
+
+    /*
+     * Attempt to convert severity. Function throws if invalid.
+     */
+    to_severity_level(cfg.severity());
 }
 
 }

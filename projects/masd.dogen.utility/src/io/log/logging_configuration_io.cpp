@@ -42,7 +42,7 @@ std::ostream& operator<<(std::ostream& s, const logging_configuration& v) {
 
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::utility::log::logging_configuration\"" << ", "
-      << "\"severity\": " << v.severity() << ", "
+      << "\"severity\": " << "\"" << tidy_up_string(v.severity()) << "\"" << ", "
       << "\"filename\": " << "\"" << tidy_up_string(v.filename()) << "\"" << ", "
       << "\"output_to_console\": " << v.output_to_console() << ", "
       << "\"output_directory\": " << "\"" << v.output_directory().generic_string() << "\""

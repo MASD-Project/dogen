@@ -24,6 +24,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/operations.hpp>
 #include "masd.dogen/version.hpp"
+#include "masd.dogen.utility/types/log/severity_level.hpp"
 #include "masd.dogen.utility/types/log/logging_configuration.hpp"
 #include "masd.dogen.cli/types/parser_exception.hpp"
 #include "masd.dogen.cli/types/program_options_parser.hpp"
@@ -107,7 +108,7 @@ const std::string invalid_option("Option is not valid for command: ");
 const std::string invalid_command("Command is invalid or unsupported: ");
 const std::string missing_target("Mandatory parameter target is missing. ");
 const std::string invalid_tracing_level("Tracing level is invalid: ");
-const std::string invalid_log_level("Tracing level is invalid: ");
+const std::string invalid_log_level("Log level is invalid: ");
 const std::string invalid_format("Tracing format is invalid: ");
 const std::string invalid_diffing_destination(
     "Diffing destination is invalid or unsupported: ");
@@ -128,7 +129,6 @@ using masd::dogen::cli::weaving_configuration;
 using masd::dogen::cli::generation_configuration;
 using masd::dogen::cli::conversion_configuration;
 using masd::dogen::utility::log::logging_configuration;
-using masd::dogen::utility::log::severity_level;
 
 /**
  * @brief Creates the the top-level option descriptions that are
@@ -392,7 +392,7 @@ compute_logging_impact(const boost::optional<logging_configuration> cfg) {
     if (!cfg)
         return logging_impact_none;
 
-    if (cfg->severity() == severity_level::info)
+    if (cfg->severity() == logging_log_level_info)
         return logging_impact_moderate;
 
     return logging_impact_severe;
@@ -548,26 +548,22 @@ boost::optional<logging_configuration> read_logging_configuration(
     logging_configuration r;
     r.filename(run_identifier);
     r.output_to_console(vm.count(logging_log_to_console_arg) != 0);
-
-    if (vm.count(logging_log_level_arg)) {
-        const auto s(vm[logging_log_level_arg].as<std::string>());
-        if (s == logging_log_level_trace)
-            r.severity(severity_level::trace);
-        else if (s == logging_log_level_debug)
-            r.severity(severity_level::debug);
-        else if (s == logging_log_level_info)
-            r.severity(severity_level::info);
-        else if (s == logging_log_level_warn)
-            r.severity(severity_level::warn);
-        else if (s == logging_log_level_error)
-            r.severity(severity_level::error);
-        else
-            BOOST_THROW_EXCEPTION(parser_exception(invalid_log_level + s));
-    } else if (enabled)
-        r.severity(severity_level::info);
-
     r.output_directory(byproduct_dir);
 
+    const bool log_level_set(vm.count(logging_log_level_arg) != 0);
+    if (!log_level_set) {
+        r.severity(logging_log_level_info);
+        return r;
+    }
+
+    const auto s(vm[logging_log_level_arg].as<std::string>());
+    try {
+        using masd::dogen::utility::log::to_severity_level;
+        to_severity_level(s);
+        r.severity(s);
+    } catch(const std::exception&) {
+        BOOST_THROW_EXCEPTION(parser_exception(invalid_log_level + s));
+    }
     return r;
 }
 

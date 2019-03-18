@@ -111,7 +111,7 @@ BOOST_AUTO_TEST_CASE(exercise_log_lifecycle_manager) {
     logging_configuration cfg1;
     cfg1.filename(log_file_name("exercise_log_lifecycle_manager", 1));
     cfg1.output_directory(log_dir / test_module / test_suite);
-    cfg1.severity(severity_level::debug);
+    cfg1.severity("debug");
     lifecycle_manager::initialise(cfg1);
 
     using namespace boost::log;
@@ -138,7 +138,7 @@ BOOST_AUTO_TEST_CASE(exercise_log_lifecycle_manager) {
     logging_configuration cfg2;
     cfg2.filename(log_file_name("exercise_log_lifecycle_manager", 2));
     cfg2.output_directory(log_dir / test_module / test_suite);
-    cfg2.severity(severity_level::warn);
+    cfg2.severity("warn");
     lifecycle_manager::initialise(cfg2);
 
     BOOST_LOG_SEV(lg, debug) << "this statement should not appear";
@@ -153,7 +153,7 @@ BOOST_AUTO_TEST_CASE(exercise_scoped_log_lifecycle_manager) {
     {
         logging_configuration cfg;
         cfg.filename(log_file_name("exercise_scoped_log_lifecycle_manager", 1));
-        cfg.severity(severity_level::debug);
+        cfg.severity("debug");
         cfg.output_directory(log_dir / test_module / test_suite);
         scoped_lifecycle_manager slcm(cfg);
         BOOST_LOG_SEV(lg, trace) << "scoped1: "
@@ -166,7 +166,7 @@ BOOST_AUTO_TEST_CASE(exercise_scoped_log_lifecycle_manager) {
         logging_configuration cfg;
         cfg.filename(log_file_name("exercise_scoped_log_lifecycle_manager", 2));
         cfg.output_directory(log_dir / test_module / test_suite);
-        cfg.severity(severity_level::trace);
+        cfg.severity("trace");
         scoped_lifecycle_manager slcm(cfg);
         BOOST_LOG_SEV(lg, trace) << "scoped3: "
                                  << "this statement should appear";

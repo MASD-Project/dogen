@@ -118,12 +118,13 @@ initialise(const boost::optional<logging_configuration>& ocfg) {
     /*
      * Use the configuration to setup the logging infrastructure.
      */
+    const auto sl(to_severity_level(cfg.severity()));
     if (cfg.output_to_console())
-        create_console_backend(cfg.severity());
+        create_console_backend(sl);
 
     if (!cfg.filename().empty()) {
         const auto path(cfg.output_directory() / cfg.filename());
-        create_file_backend(path, cfg.severity());
+        create_file_backend(path, sl);
     }
 
     boost::log::core::get()->add_global_attribute(time_stamp_attr,
