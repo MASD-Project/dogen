@@ -238,11 +238,14 @@ additional models (```SOME_PATH``` being your local directory):
 
 ```
 
+Executing the ```run_all_tests``` target will now also include the
+reference implementations. Make sure your changes do not break these models.
+
 ## Regenerating Models
 
 If you'd like to run Dogen to regenerate all of its models, you can do
-so by using the target ```generate_all``` or its abbreviation
-```ga```. This is useful, for example, to update the models to the
+so by using the target ```generate_all_dia``` or its abbreviation
+```gad```. This is useful, for example, to update the models to the
 latest version of Dogen, or just to see how Dogen works. By default
 Dogen uses the current built version, but you can also use
 another. For this you may need to tell CMake of its location by
