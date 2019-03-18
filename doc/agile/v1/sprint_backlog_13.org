@@ -14,24 +14,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-17 Sun 18:04]
+#+CAPTION: Clock summary at [2019-03-18 Mon 10:44]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *43:43* |       |       | 100.0 |
+| *Total time*                                             | *45:24* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 43:43   |       |       | 100.0 |
-| Active                                                   |         | 43:43 |       | 100.0 |
-| Edit release notes for previous sprint                   |         |       |  2:22 |   5.4 |
-| Sprint and product backlog grooming                      |         |       |  5:13 |  11.9 |
-| Create a video demo for the sprint's features            |         |       |  3:47 |   8.7 |
+| Stories                                                  | 45:24   |       |       | 100.0 |
+| Active                                                   |         | 45:24 |       | 100.0 |
+| Edit release notes for previous sprint                   |         |       |  2:22 |   5.2 |
+| Sprint and product backlog grooming                      |         |       |  5:21 |  11.8 |
+| Create a video demo for the sprint's features            |         |       |  3:47 |   8.3 |
 | Make projects directory env optional                     |         |       |  0:10 |   0.4 |
 | Clang-cl builds are failing due to memory leak reporting |         |       |  0:45 |   1.7 |
-| Add tests for tracing, reporting and diffing             |         |       |  5:46 |  13.2 |
-| Delete extra files appears broken at present             |         |       |  6:26 |  14.7 |
-| Empty directories should be deleted                      |         |       |  5:37 |  12.8 |
-| Changes to stitch templates are not reported correctly   |         |       |  1:09 |   2.6 |
-| Code generation of tests for dogen models                |         |       | 12:28 |  28.5 |
+| Add tests for tracing, reporting and diffing             |         |       |  5:46 |  12.7 |
+| Delete extra files appears broken at present             |         |       |  6:26 |  14.2 |
+| Empty directories should be deleted                      |         |       |  5:37 |  12.4 |
+| Changes to stitch templates are not reported correctly   |         |       |  1:09 |   2.5 |
+| Code generation of tests for dogen models                |         |       | 12:28 |  27.5 |
+| Orchestration test is broken on Windows                  |         |       |  1:33 |   3.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -230,6 +231,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-03-18 Mon 10:36]--[2019-03-18 Mon 10:44] =>  0:08
     CLOCK: [2019-03-16 Sat 21:12]--[2019-03-16 Sat 21:30] =>  0:18
     CLOCK: [2019-03-16 Sat 20:48]--[2019-03-16 Sat 21:02] =>  0:14
     CLOCK: [2019-03-15 Fri 11:44]--[2019-03-15 Fri 11:50] =>  0:06
@@ -772,6 +774,32 @@ we do nothing.
 
 If a project has tests (see story above) we should automatically
 ignore the test regular expressions.
+
+*** STARTED Orchestration test is broken on Windows                   :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-18 Mon 09:02]--[2019-03-18 Mon 10:35] =>  1:33
+    :END:
+
+The following test is breaking on all builds for Windows:
+
+: masd.dogen.orchestration.tests/extraction_model_production_chain_tests/masd_dogen_generation_cpp_json_produces_expected_model
+
+It works on all other builds.
+
+Notes:
+
+- running the Windows dogen binaries against this model does not
+  reproduce the problem.
+- the problem does not happen with the corresponding Dia model.
+
+*** Line endings could cause rewrites                                 :story:
+
+At present if we git clone a repo with UNIX line endings and then
+re-run dogen on Windows, even though nothing has changed in the model,
+all generated files will get rewritten with windows line endings. We
+should have a setting that enforces one set of line endings at the
+model level. Interestingly, at present almost all extraction and
+generation tests are green, implying we do not see any diffs.
 
 *** Simplify qualified name                                           :story:
 

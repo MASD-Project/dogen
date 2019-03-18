@@ -205,7 +205,38 @@ CMAKE_INCLUDE_PATH=/my/boost/include/path CMAKE_LIBRARY_PATH=/my/boost/lib/path 
 ## Running Tests
 
 If you'd like to run the project tests, execute the target
-```run_all_tests``` or its abbreviation ```rat```.
+```run_all_tests``` or its abbreviation ```rat```. This is sufficient
+if you just need to gain some confidence on the code generator as we
+perform tests against Dogen's own models. However, if you are trying
+to submit a PR that changes the behaviour of the code generator, you
+must also run the tests against the C++ and C# reference
+implementation models. For this you need to download the zips or clone
+the repositories locally:
+
+- [C++ Reference Implementation](https://github.com/MASD-Project/cpp_ref_impl)
+- [C# Reference Implementation](https://github.com/MASD-Project/csharp_ref_impl)
+
+Then, point the corresponding environment variables to the respective
+projects directory, e.g.:
+
+```
+export MASD_CPP_REF_IMPL_PROJECTS_DIRECTORY=${DIR}/cpp_ref_impl/projects
+export MASD_CSHARP_REF_IMPL_PROJECTS_DIRECTORY=${DIR}/csharp_ref_impl/Src
+```
+
+Where ```DIR``` is set to the local directory where you placed the
+repositories. You should then ensure Dogen correctly recognises the
+additional models (```SOME_PATH``` being your local directory):
+
+```
+...
+-- CMake Version: 3.13.4
+-- MASD_DOGEN_PROJECTS_DIRECTORY=SOME_PATH/dogen/projects
+-- MASD_CPP_REF_IMPL_PROJECTS_DIRECTORY=SOME_PATH/cpp_ref_impl/integration/projects
+-- MASD_CSHARP_REF_IMPL_PROJECTS_DIRECTORY=SOME_PATH/csharp_ref_impl/master/Src
+...
+
+```
 
 ## Regenerating Models
 
