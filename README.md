@@ -269,10 +269,10 @@ each sprint.
 
 [![Sprint 1.0.12 Demo](https://img.youtube.com/vi/Tt34P3JXzeE/0.jpg)](https://www.youtube.com/watch?v=Tt34P3JXzeE)
 
-## Old Demos
+## v0.0.20 Demo (very old)
 
-In addition, there is also a very old video that should at least give you an idea
-of its workflow:
+In addition, there is also a very old video that should at least give
+you an idea of its workflow:
 
 [![Sprint 0.0.20 Demo](https://img.youtube.com/vi/Z7k8qbImXkU/0.jpg)](https://youtu.be/Z7k8qbImXkU)
 
