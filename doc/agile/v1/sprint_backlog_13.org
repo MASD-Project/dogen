@@ -14,25 +14,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-18 Mon 13:05]
+#+CAPTION: Clock summary at [2019-03-18 Mon 13:45]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *47:22* |       |       | 100.0 |
+| *Total time*                                             | *48:00* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 47:22   |       |       | 100.0 |
-| Active                                                   |         | 47:22 |       | 100.0 |
-| Edit release notes for previous sprint                   |         |       |  2:22 |   5.0 |
-| Sprint and product backlog grooming                      |         |       |  5:21 |  11.3 |
-| Create a video demo for the sprint's features            |         |       |  3:47 |   8.0 |
-| Make projects directory env optional                     |         |       |  0:10 |   0.4 |
+| Stories                                                  | 48:00   |       |       | 100.0 |
+| Active                                                   |         | 48:00 |       | 100.0 |
+| Edit release notes for previous sprint                   |         |       |  2:22 |   4.9 |
+| Sprint and product backlog grooming                      |         |       |  5:21 |  11.1 |
+| Create a video demo for the sprint's features            |         |       |  3:47 |   7.9 |
+| Make projects directory env optional                     |         |       |  0:10 |   0.3 |
 | Clang-cl builds are failing due to memory leak reporting |         |       |  0:45 |   1.6 |
-| Add tests for tracing, reporting and diffing             |         |       |  5:46 |  12.2 |
-| Delete extra files appears broken at present             |         |       |  6:26 |  13.6 |
-| Empty directories should be deleted                      |         |       |  5:37 |  11.9 |
+| Add tests for tracing, reporting and diffing             |         |       |  5:46 |  12.0 |
+| Delete extra files appears broken at present             |         |       |  6:26 |  13.4 |
+| Empty directories should be deleted                      |         |       |  5:37 |  11.7 |
 | Changes to stitch templates are not reported correctly   |         |       |  1:09 |   2.4 |
-| Code generation of tests for dogen models                |         |       | 13:57 |  29.5 |
-| Orchestration test is broken on Windows                  |         |       |  2:02 |   4.3 |
+| Orchestration test is broken on Windows                  |         |       |  2:40 |   5.6 |
+| Code generation of tests for dogen models                |         |       | 13:57 |  29.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -666,6 +666,32 @@ We should keep in mind the model groups too; not all models are
 applicable to all model groups. We should only consider compatible
 models.
 
+*** COMPLETED Orchestration test is broken on Windows                 :story:
+    CLOSED: [2019-03-18 Mon 13:45]
+    :LOGBOOK:
+    CLOCK: [2019-03-18 Mon 13:06]--[2019-03-18 Mon 13:44] =>  0:38
+    CLOCK: [2019-03-18 Mon 10:56]--[2019-03-18 Mon 11:25] =>  0:29
+    CLOCK: [2019-03-18 Mon 09:02]--[2019-03-18 Mon 10:35] =>  1:33
+    :END:
+
+The following test is breaking on all builds for Windows:
+
+: masd.dogen.orchestration.tests/extraction_model_production_chain_tests/masd_dogen_generation_cpp_json_produces_expected_model
+
+It works on all other builds.
+
+Notes:
+
+- running the Windows dogen binaries against this model does not
+  reproduce the problem.
+- the problem does not happen with the corresponding Dia model.
+- detailed tracing test must be ifdef'd. We are still running it if we
+  fire the binary from the command line. This is not ideal as it is
+  how most users will run the tests (e.g. =rat= from readme).
+- the test was broken because we locally enabled tracing whilst
+  debugging and checked it in by mistake; tracing with long names
+  fails on windows.
+
 *** STARTED Code generation of tests for dogen models                 :story:
     :LOGBOOK:
     CLOCK: [2019-03-18 Mon 13:00]--[2019-03-18 Mon 13:05] =>  0:05
@@ -778,24 +804,6 @@ we do nothing.
 
 If a project has tests (see story above) we should automatically
 ignore the test regular expressions.
-
-*** STARTED Orchestration test is broken on Windows                   :story:
-    :LOGBOOK:
-    CLOCK: [2019-03-18 Mon 10:56]--[2019-03-18 Mon 11:25] =>  0:29
-    CLOCK: [2019-03-18 Mon 09:02]--[2019-03-18 Mon 10:35] =>  1:33
-    :END:
-
-The following test is breaking on all builds for Windows:
-
-: masd.dogen.orchestration.tests/extraction_model_production_chain_tests/masd_dogen_generation_cpp_json_produces_expected_model
-
-It works on all other builds.
-
-Notes:
-
-- running the Windows dogen binaries against this model does not
-  reproduce the problem.
-- the problem does not happen with the corresponding Dia model.
 
 *** Line endings could cause rewrites                                 :story:
 

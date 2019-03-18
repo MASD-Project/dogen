@@ -226,10 +226,16 @@ BOOST_AUTO_TEST_SUITE(byproduct_generation_tests)
 /*
  * This test fails on windows. This is because we are generating paths
  * that are too large for windows. We tried moving it to TEMP but even
- * then the test still fails. The test is set to ignore from the
- * CMakeLists that adds boost tests. This is because ignoring it with
- * macros in source code is not very practical.
+ * then the test still fails. The test is set to ignore in two places:
+ *
+ * - here, via macros. This means you cannot run the test on windows
+ *   from the binary. It stops users from complaining the tests are
+ *   broken.
+ * - from the CMakeLists that adds boost tests. It stops the build
+ *   machine from trying to run the test and then failing because the
+ *   test is not on the windows binary.
  */
+#ifndef _WIN32
 BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_org_mode_results_in_expected_trace_files) {
     SETUP_TEST_LOG("enabling_detailed_tracing_with_org_moderesults_in_expected_trace_files");
 
@@ -246,6 +252,7 @@ BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_org_mode_results_in_expected
 
     BOOST_CHECK(are_tracing_files_healthy(cfg));
 }
+#endif
 
 BOOST_AUTO_TEST_CASE(enabling_summary_tracing_with_plain_text_results_in_expected_trace_files) {
     SETUP_TEST_LOG("enabling_summary_tracing_with_plain_text_results_in_expected_trace_files");

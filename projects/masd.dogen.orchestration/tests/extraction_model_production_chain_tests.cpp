@@ -863,7 +863,7 @@ BOOST_AUTO_TEST_CASE(masd_dogen_generation_cpp_json_produces_expected_model) {
     using masd::dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_masd_dogen_generation_cpp_json());
     const auto od(dogen_generation::project_directory());
-    const auto m(apply_extraction_model_production(t, od, true));
+    const auto m(apply_extraction_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
