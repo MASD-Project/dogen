@@ -14,25 +14,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-18 Mon 16:05]
+#+CAPTION: Clock summary at [2019-03-18 Mon 16:18]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *50:14* |       |       | 100.0 |
+| *Total time*                                             | *50:26* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 50:14   |       |       | 100.0 |
-| Active                                                   |         | 50:14 |       | 100.0 |
+| Stories                                                  | 50:26   |       |       | 100.0 |
+| Active                                                   |         | 50:26 |       | 100.0 |
 | Edit release notes for previous sprint                   |         |       |  2:22 |   4.7 |
-| Sprint and product backlog grooming                      |         |       |  5:21 |  10.7 |
+| Sprint and product backlog grooming                      |         |       |  5:21 |  10.6 |
 | Create a video demo for the sprint's features            |         |       |  3:47 |   7.5 |
 | Make projects directory env optional                     |         |       |  0:10 |   0.3 |
 | Clang-cl builds are failing due to memory leak reporting |         |       |  0:45 |   1.5 |
-| Add tests for tracing, reporting and diffing             |         |       |  5:46 |  11.5 |
+| Add tests for tracing, reporting and diffing             |         |       |  5:46 |  11.4 |
 | Delete extra files appears broken at present             |         |       |  6:26 |  12.8 |
-| Empty directories should be deleted                      |         |       |  5:37 |  11.2 |
+| Empty directories should be deleted                      |         |       |  5:37 |  11.1 |
 | Changes to stitch templates are not reported correctly   |         |       |  1:09 |   2.3 |
 | Orchestration test is broken on Windows                  |         |       |  2:40 |   5.3 |
-| Code generation of tests for dogen models                |         |       | 16:11 |  32.2 |
+| Code generation of tests for dogen models                |         |       | 16:23 |  32.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -694,6 +694,7 @@ Notes:
 
 *** STARTED Code generation of tests for dogen models                 :story:
     :LOGBOOK:
+    CLOCK: [2019-03-18 Mon 16:06]--[2019-03-18 Mon 16:18] =>  0:12
     CLOCK: [2019-03-18 Mon 16:04]--[2019-03-18 Mon 16:05] =>  0:01
     CLOCK: [2019-03-18 Mon 15:33]--[2019-03-18 Mon 16:01] =>  0:28
     CLOCK: [2019-03-18 Mon 15:30]--[2019-03-18 Mon 15:32] =>  0:02
