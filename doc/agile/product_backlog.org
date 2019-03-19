@@ -11479,24 +11479,6 @@ projects with the name =cogen= so we may need to find a better
 name. Alternatively we can maintain the name dogen, but take away its
 meaning (i.e. no longer "The Domain Generator").
 
-*** Consider introducing formatter "location strings"                 :story:
-
-In MDSD, we have the notion of "location strngs":
-
-#+begin_quote
-A third and very useful technique is the application of location
-strings that identify the transformation or the template used, as well
-as the underlying model elements in the generated code. A location
-string might look like this:
-
-: [2003-10-04 17:05:36]
-: GENERATED FROM TEMPLATE SomeTemplate
-: MODEL ELEMENT aPackage::aClass::SomeOperation().
-#+end_quote
-
-This may be a useful thing. However, adding dates and dogen version
-etc will cause spurious diffs.
-
 *** Consider adding support for OCL                                   :story:
 
 UML supports adding constraints via [[http://www.omg.org/spec/OCL/2.4/][OCL]], the Object Constraint

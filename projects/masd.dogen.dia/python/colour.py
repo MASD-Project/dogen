@@ -27,7 +27,13 @@ for layer in dia.active_display().diagram.data.layers:
             continue;
 
         if object.type.name == "UML - LargePackage":
-            object.properties["fill_colour"] = "#F5F5F5"
+            stereotype = object.properties["stereotype"].value
+            if "masd::decoration::modeline_group" in stereotype:
+                object.properties["fill_colour"] = "#FFEFFE"
+            elif "masd::decoration::licence_text_group" in stereotype:
+                object.properties["fill_colour"] = "#AEAEE1"
+            else:
+                object.properties["fill_colour"] = "#F5F5F5"
             continue;
 
         if object.type.name != "UML - Class":
@@ -54,6 +60,16 @@ for layer in dia.active_display().diagram.data.layers:
         elif "masd::entry_point" in stereotype:
             object.properties["fill_colour"] = "#B2E2E2"
 
+        #
+        # Theme: Decorations
+        #
+        elif "masd::decoration::modeline" in stereotype:
+            object.properties["fill_colour"] = "#DDB7B7"
+        elif "masd::decoration::licence_text" in stereotype:
+            object.properties["fill_colour"] = "#DDB7DD"
+        elif "masd::decoration::marker" in stereotype:
+            object.properties["fill_colour"] = "#ACACBB"
+            
         #
         # Theme: Core meta-elements
         #

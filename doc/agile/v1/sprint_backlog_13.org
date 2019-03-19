@@ -883,6 +883,102 @@ Notes:
   future.
 - enable_unique_file_names: are we using this?
 
+*** STARTED Modeline groups as meta-model elements                    :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-19 Tue 15:31]--[2019-03-19 Tue 17:40] =>  2:09
+    :END:
+
+As with mappings, profiles and templates, we should make modeline
+groups meta-model elements too. It may require a little bit of
+thinking because they are not simple KVPs - but we also have support
+for arrays in annotations.
+
+The final destination is for users to create modeline configurations
+or reuse the dogen ones.
+
+In theory we should be able to load modelines incrementally, as they
+are only needed for code generation. However, order of references will
+matter because we need to validate references to modelines.
+
+Notes:
+
+- though it is probably overkill, it would be nice to be able to
+  inherit from modelines; then we could define all the common fields
+  on a parent.
+- decoration repository moves to become properties of the model
+  itself.
+- decoration properties becomes just decoration. Can stay property of
+  the element, though perhaps we need to distinguish between
+  decoratable elements and those that are not. Make them optional?
+- modeline_group, modeline, modeline_field, licence_text, marker (real
+  name: location strings) become meta-model entities.
+
+*** Consider introducing formatter "location strings"                 :story:
+
+In MDSD, we have the notion of "location strngs":
+
+#+begin_quote
+A third and very useful technique is the application of location
+strings that identify the transformation or the template used, as well
+as the underlying model elements in the generated code. A location
+string might look like this:
+
+: [2003-10-04 17:05:36]
+: GENERATED FROM TEMPLATE SomeTemplate
+: MODEL ELEMENT aPackage::aClass::SomeOperation().
+#+end_quote
+
+This may be a useful thing. However, adding dates and dogen version
+etc will cause spurious diffs.
+
+
+*** Location of =--byproduct-directory= not respected                 :story:
+
+It seems that at present we are not honouring the directory supplied
+by the user.
+
+*** Rename "language" to "technical space"                            :story:
+
+We are using the word "language" in several places:
+
+- input language
+- output language
+
+What we really mean is technical space:
+
+- input technical space
+- output technical space
+
+*** Colours test model is invalid at present                          :story:
+
+We should probably generate this model; at the moment, we have many
+missing elements/meta-data, causing dogen to choke.
+
+*** Element extensions considered harmful                             :story:
+
+When we implemented forward declarations we created them as "element
+extensions"; that is, some kind of hack where we'd have two model
+elements stuck together (the main model element and its "extension",
+the forward declaration). In reality, they are just projections of the
+same model element. We need to handle them just as we handle class
+header / implementation. We just need to use the formatter specific
+postfix to distinguish between files.
+
+The problem with this approach, of course, is that we now need to
+create many formatters (per element type). A possible solution is to
+factor them out into a formatting helper function that they call. We
+still need all of the common machinery to formatters
+though. Nevertheless, this is a price worth paying in order to keep
+the meta-model simple (e.g. none of the hacks we introduced for
+element extensions).
+
+Notes:
+
+- add forward declaration formatters for each type. Create common
+  formatting function.
+- remove element extensions across the code base.
+- remove forward declaration element in fabric.
+
 *** Disabling facet after regeneration does not delete file           :story:
 
 Steps to reproduce:
@@ -963,31 +1059,6 @@ the CMake file. This means that we need to somehow map one formatter
 to multiple facets. For now we just hacked it and used one of the
 facets. It means that if you disable CMake but enable testing you'll
 still end up with the testing CMake file.
-
-*** Element extensions considered harmful                             :story:
-
-When we implemented forward declarations we created them as "element
-extensions"; that is, some kind of hack where we'd have two model
-elements stuck together (the main model element and its "extension",
-the forward declaration). In reality, they are just projections of the
-same model element. We need to handle them just as we handle class
-header / implementation. We just need to use the formatter specific
-postfix to distinguish between files.
-
-The problem with this approach, of course, is that we now need to
-create many formatters (per element type). A possible solution is to
-factor them out into a formatting helper function that they call. We
-still need all of the common machinery to formatters
-though. Nevertheless, this is a price worth paying in order to keep
-the meta-model simple (e.g. none of the hacks we introduced for
-element extensions).
-
-Notes:
-
-- add forward declaration formatters for each type. Create common
-  formatting function.
-- remove element extensions across the code base.
-- remove forward declaration element in fabric.
 
 *** Fabric generates forward decls with no path                       :story:
 
@@ -1567,20 +1638,6 @@ chooses the mapping set to use.
 In keeping with the idea that profiles are model-level concepts,
 mappings should be too. We should be able to import mappings in a UML
 diagram and override them or define new ones too.
-
-*** Modeline groups as meta-model elements                            :story:
-
-As with mappings, profiles and templates, we should make modeline
-groups meta-model elements too. It may require a little bit of
-thinking because they are not simple KVPs - but we also have support
-for arrays in annotations.
-
-The final destination is for users to create modeline configurations
-or reuse the dogen ones.
-
-In theory we should be able to load modelines incrementally, as they
-are only needed for code generation. However, order of references will
-matter because we need to validate references to modelines.
 
 *** Licences as meta-model elements                                   :story:
 
