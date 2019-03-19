@@ -18,19 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.generation.cpp/types/formatters/tests/class_implementation_formatter.hpp"
-#include "masd.dogen.generation.cpp/types/formatters/tests/enum_implementation_formatter.hpp"
-#include "masd.dogen.generation.cpp/types/formatters/tests/cmakelists_formatter.hpp"
-#include "masd.dogen.generation.cpp/types/formatters/tests/main_formatter.hpp"
-#include "masd.dogen.generation.cpp/types/formatters/tests/initializer.hpp"
+#include <string>
+#include <sstream>
+#include <boost/test/unit_test.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include "masd.dogen.generation/io/meta_model/path_contribution_types_io.hpp"
+#include "masd.dogen.generation/types/meta_model/path_contribution_types.hpp"
+#include "masd.dogen.generation/test_data/meta_model/path_contribution_types_td.hpp"
 
-namespace masd::dogen::generation::cpp::formatters::tests {
+BOOST_AUTO_TEST_SUITE(path_contribution_types_tests)
 
-void initializer::initialize(registrar& rg) {
-    register_formatter<cmakelists_formatter>(rg);
-    register_formatter<class_implementation_formatter>(rg);
-    register_formatter<enum_implementation_formatter>(rg);
-    register_formatter<main_formatter>(rg);
+BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
+    masd::dogen::generation::meta_model::path_contribution_types_generator g;
+    const auto a(g());
+    std::stringstream s;
+    s << a;
+
+    boost::property_tree::ptree pt;
+    BOOST_REQUIRE_NO_THROW(read_json(s, pt));
 }
 
-}
+BOOST_AUTO_TEST_SUITE_END()
