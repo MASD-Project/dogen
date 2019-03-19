@@ -64,10 +64,6 @@ macro(add_boost_tests test_module)
                  if (${test_name} IN_LIST boost_tests_ignore)
                      message(STATUS "Ignoring test: ${test_name}")
                  else()
-                     # set(filename "")
-                     # get_filename_component(filename ${cpp_file} NAME)
-                     # string(REPLACE "_tests.cpp" "_tests" test_suite ${filename})
-
                      set(tests_cmd ${stage_bin_dir}/${test_module})
                      add_test(${test_module}/${test_suite}/${test_name}
                          ${CMAKE_COMMAND} -E chdir ${stage_bin_dir}
