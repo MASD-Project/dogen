@@ -29,6 +29,7 @@
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.coding/types/meta_model/exception.hpp"
 #include "masd.dogen.coding/types/meta_model/visitor.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/entry_point.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/registrar.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/cmakelists.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/master_header.hpp"
@@ -83,6 +84,7 @@ public:
     void visit(object_odb_options& ooo) { update(ooo, odb_modeline_name); }
     void visit(msbuild_targets& mt) { update(mt, xml_modeline_name); }
     void visit(registrar& rg) { update(rg); }
+    void visit(entry_point& ep) { update(ep); }
 
 private:
     const dogen::extraction::decoration_properties_factory& factory_;

@@ -14,25 +14,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-19 Tue 12:15]
+#+CAPTION: Clock summary at [2019-03-19 Tue 15:04]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *57:09* |       |       | 100.0 |
+| *Total time*                                             | *58:33* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 57:09   |       |       | 100.0 |
-| Active                                                   |         | 57:09 |       | 100.0 |
-| Edit release notes for previous sprint                   |         |       |  2:22 |   4.1 |
-| Sprint and product backlog grooming                      |         |       |  6:43 |  11.8 |
-| Create a video demo for the sprint's features            |         |       |  3:47 |   6.6 |
+| Stories                                                  | 58:33   |       |       | 100.0 |
+| Active                                                   |         | 58:33 |       | 100.0 |
+| Edit release notes for previous sprint                   |         |       |  2:22 |   4.0 |
+| Sprint and product backlog grooming                      |         |       |  6:43 |  11.5 |
+| Create a video demo for the sprint's features            |         |       |  3:47 |   6.5 |
 | Make projects directory env optional                     |         |       |  0:10 |   0.3 |
 | Clang-cl builds are failing due to memory leak reporting |         |       |  0:45 |   1.3 |
-| Add tests for tracing, reporting and diffing             |         |       |  5:46 |  10.1 |
-| Delete extra files appears broken at present             |         |       |  6:26 |  11.3 |
-| Empty directories should be deleted                      |         |       |  5:37 |   9.8 |
+| Add tests for tracing, reporting and diffing             |         |       |  5:46 |   9.8 |
+| Delete extra files appears broken at present             |         |       |  6:26 |  11.0 |
+| Empty directories should be deleted                      |         |       |  5:37 |   9.6 |
 | Changes to stitch templates are not reported correctly   |         |       |  1:09 |   2.0 |
-| Orchestration test is broken on Windows                  |         |       |  2:40 |   4.7 |
-| Code generation of tests for dogen models                |         |       | 21:44 |  38.0 |
+| Orchestration test is broken on Windows                  |         |       |  2:40 |   4.6 |
+| Code generation of tests for dogen models                |         |       | 23:08 |  39.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -694,8 +694,11 @@ Notes:
   debugging and checked it in by mistake; tracing with long names
   fails on windows.
 
-*** STARTED Code generation of tests for dogen models                 :story:
+*** COMPLETED Code generation of tests for dogen models               :story:
+    CLOSED: [2019-03-19 Tue 15:04]
     :LOGBOOK:
+    CLOCK: [2019-03-19 Tue 13:53]--[2019-03-19 Tue 15:04] =>  1:11
+    CLOCK: [2019-03-19 Tue 12:49]--[2019-03-19 Tue 13:02] =>  0:13
     CLOCK: [2019-03-19 Tue 12:14]--[2019-03-19 Tue 12:15] =>  0:01
     CLOCK: [2019-03-19 Tue 12:04]--[2019-03-19 Tue 12:13] =>  0:09
     CLOCK: [2019-03-19 Tue 11:46]--[2019-03-19 Tue 12:03] =>  0:17
@@ -866,6 +869,20 @@ files, regardless of whether the facet is enabled or not. However,
 this is not always the case because we've proven that enabling and
 disabling a facet correctly results in the deletion of files. It must
 be something to do with how local enablement is handled.
+
+*** Pre-includes defines                                              :story:
+
+For boost test, we need the ability to define a macro before any of
+the includes: =BOOST_TEST_MODULE=. At present, the decorations have
+both the licence and the includes, and its not possible to place
+something in between the two. So we are doing the easy thing and
+adding the define before the preamble. In an ideal world we should be
+able to inject pre and post includes defines. These can be done by the
+formatter or even by the user.
+
+Links:
+
+- [[https://www.boost.org/doc/libs/1_69_0/libs/test/doc/html/boost_test/utf_reference/link_references/link_boost_test_module_macro.html][BOOST_TEST_MODULE]]
 
 *** Line endings could cause rewrites                                 :story:
 

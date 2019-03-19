@@ -83,7 +83,7 @@ format(const context& ctx, const coding::meta_model::element& e) const {
         const auto product_name(a.get_product_name(c.name()));
 #>
 set(name "<#= model_name #>")
-set(lib_target_name ${name}.lib)
+set(lib_target_name ${name}) # .lib
 set(tests_binary_name ${name}.tests)
 set(tests_target_name ${name}.tests)
 

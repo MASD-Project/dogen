@@ -20,8 +20,8 @@
  */
 #define BOOST_TEST_MODULE masd.dogen.coding.tests
 #include <boost/test/unit_test.hpp>
-#include "masd.dogen.utility/types/test/logging.hpp"
 #include "masd.dogen.utility/types/test/fixture.hpp"
 
 using namespace masd::dogen::utility::test;
 BOOST_GLOBAL_FIXTURE(exception_fixture);
+

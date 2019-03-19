@@ -91,6 +91,7 @@ std::list<std::string> main_formatter::inclusion_dependencies(
 
     using ic = inclusion_constants;
     builder.add(ic::boost::test::unit_test());
+    builder.add(ic::boost::test::unit_test_monitor());
     builder.add(ic::boost::exception::info());
     builder.add(ic::std::iostream());
     builder.add(ic::boost::exception::diagnostic_information());
@@ -102,10 +103,11 @@ extraction::meta_model::artefact main_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& ep(a.as<fabric::entry_point>(e));
+    const auto qn(a.get_qualified_name(ep.name()));
+a.stream() << "#define BOOST_TEST_MODULE " << qn << std::endl;
+a.stream() << std::endl;
     {
         auto sbf(a.make_scoped_boilerplate_formatter(ep));
-        const auto qn(a.get_qualified_name(ep.name()));
-a.stream() << "#define BOOST_TEST_MODULE " << qn << std::endl;
 a.stream() << std::endl;
 a.stream() << "namespace  {" << std::endl;
 a.stream() << std::endl;
@@ -123,6 +125,8 @@ a.stream() << "        using boost::unit_test::unit_test_monitor;" << std::endl;
 a.stream() << "        unit_test_monitor.register_exception_translator<exception>(&translate);" << std::endl;
 a.stream() << "    }" << std::endl;
 a.stream() << "};" << std::endl;
+a.stream() << std::endl;
+a.stream() << "}" << std::endl;
 a.stream() << std::endl;
 a.stream() << "BOOST_GLOBAL_FIXTURE(exception_fixture);" << std::endl;
     } // sbf
