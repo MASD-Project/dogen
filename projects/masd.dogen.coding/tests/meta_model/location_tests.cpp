@@ -25,6 +25,7 @@
 #include <boost/property_tree/json_parser.hpp>
 #include "masd.dogen.coding/io/meta_model/location_io.hpp"
 #include "masd.dogen.coding/types/meta_model/location.hpp"
+#include "masd.dogen.coding/hash/meta_model/location_hash.hpp"
 #include "masd.dogen.coding/test_data/meta_model/location_td.hpp"
 
 BOOST_AUTO_TEST_SUITE(location_tests)
@@ -118,6 +119,26 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(equal_objects_generate_the_same_hash) {
+    masd::dogen::coding::meta_model::location_generator g;
+    g();
+    const auto a(g());
+    const auto b(a);
+
+    std::hash<masd::dogen::coding::meta_model::location> hasher;
+    BOOST_CHECK(hasher(a) == hasher(b));
+}
+
+BOOST_AUTO_TEST_CASE(different_objects_generate_different_hashes) {
+    masd::dogen::coding::meta_model::location_generator g;
+    g();
+    const auto a(g());
+    const auto b(g());
+
+    std::hash<masd::dogen::coding::meta_model::location> hasher;
+    BOOST_CHECK(hasher(a) != hasher(b));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

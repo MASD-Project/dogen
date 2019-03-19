@@ -260,6 +260,11 @@ public:
     bool is_tests_enabled() const;
 
     /**
+     * @brief Returns true if hash is enabled locally.
+     */
+    bool is_hash_enabled() const;
+
+    /**
      * @brief Returns true if test data is enabled globally.
      */
     bool is_test_data_enabled() const;

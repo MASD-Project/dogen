@@ -367,6 +367,11 @@ bool assistant::is_tests_enabled() const {
     return is_facet_enabled(traits::facet());
 }
 
+bool assistant::is_hash_enabled() const {
+    using formatters::hash::traits;
+    return is_archetype_enabled(traits::canonical_archetype());
+}
+
 bool assistant::is_test_data_enabled() const {
     using formatters::test_data::traits;
     return is_facet_enabled(traits::facet());

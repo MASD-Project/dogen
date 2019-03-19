@@ -22,6 +22,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/tests/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/test_data/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/serialization/traits.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/hash/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/io/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/types/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/formatting_error.hpp"
@@ -132,6 +133,13 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
         builder.add(ic::boost::archive::xml_iarchive());
         builder.add(ic::boost::archive::xml_oarchive());
     }
+
+    using hash = formatters::hash::traits;
+    const auto hash_arch(hash::class_header_archetype());
+    const bool hash_enabled(builder.is_enabled(o.name(), hash_arch));
+    if (hash_enabled)
+        builder.add(o.name(), hash_arch);
+
     return builder.build();
 }
 
@@ -334,6 +342,32 @@ a.stream() << "        " << registrar_qn << "<text_iarchive>(ia);" << std::endl;
 a.stream() << "        ia >> b;" << std::endl;
 a.stream() << "    }" << std::endl;
 a.stream() << "    BOOST_CHECK(a == b);" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+            }
+
+             if (a.is_hash_enabled()) {
+                 /*
+                  * hash tests.
+                  */
+a.stream() << "BOOST_AUTO_TEST_CASE(equal_objects_generate_the_same_hash) {" << std::endl;
+a.stream() << "    " << qn << "_generator g;" << std::endl;
+a.stream() << "    g();" << std::endl;
+a.stream() << "    const auto a(g());" << std::endl;
+a.stream() << "    const auto b(a);" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    std::hash<" << qn << "> hasher;" << std::endl;
+a.stream() << "    BOOST_CHECK(hasher(a) == hasher(b));" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << "BOOST_AUTO_TEST_CASE(different_objects_generate_different_hashes) {" << std::endl;
+a.stream() << "    " << qn << "_generator g;" << std::endl;
+a.stream() << "    g();" << std::endl;
+a.stream() << "    const auto a(g());" << std::endl;
+a.stream() << "    const auto b(g());" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    std::hash<" << qn << "> hasher;" << std::endl;
+a.stream() << "    BOOST_CHECK(hasher(a) != hasher(b));" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
             }

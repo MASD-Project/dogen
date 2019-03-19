@@ -25,6 +25,7 @@
 #include <boost/property_tree/json_parser.hpp>
 #include "masd.dogen.generation/io/meta_model/element_archetype_io.hpp"
 #include "masd.dogen.generation/types/meta_model/element_archetype.hpp"
+#include "masd.dogen.generation/hash/meta_model/element_archetype_hash.hpp"
 #include "masd.dogen.generation/test_data/meta_model/element_archetype_td.hpp"
 
 BOOST_AUTO_TEST_SUITE(element_archetype_tests)
@@ -118,6 +119,26 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(equal_objects_generate_the_same_hash) {
+    masd::dogen::generation::meta_model::element_archetype_generator g;
+    g();
+    const auto a(g());
+    const auto b(a);
+
+    std::hash<masd::dogen::generation::meta_model::element_archetype> hasher;
+    BOOST_CHECK(hasher(a) == hasher(b));
+}
+
+BOOST_AUTO_TEST_CASE(different_objects_generate_different_hashes) {
+    masd::dogen::generation::meta_model::element_archetype_generator g;
+    g();
+    const auto a(g());
+    const auto b(g());
+
+    std::hash<masd::dogen::generation::meta_model::element_archetype> hasher;
+    BOOST_CHECK(hasher(a) != hasher(b));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

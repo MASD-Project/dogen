@@ -13,6 +13,7 @@
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/hash/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/serialization/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/test_data/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/tests/traits.hpp" #>
@@ -113,6 +114,13 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
         builder.add(ic::boost::archive::xml_iarchive());
         builder.add(ic::boost::archive::xml_oarchive());
     }
+
+    using hash = formatters::hash::traits;
+    const auto hash_arch(hash::class_header_archetype());
+    const bool hash_enabled(builder.is_enabled(o.name(), hash_arch));
+    if (hash_enabled)
+        builder.add(o.name(), hash_arch);
+
     return builder.build();
 }
 
@@ -324,6 +332,34 @@ BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {
         ia >> b;
     }
     BOOST_CHECK(a == b);
+}
+
+<#+
+            }
+
+             if (a.is_hash_enabled()) {
+                 /*
+                  * hash tests.
+                  */
+#>
+BOOST_AUTO_TEST_CASE(equal_objects_generate_the_same_hash) {
+    <#= qn #>_generator g;
+    g();
+    const auto a(g());
+    const auto b(a);
+
+    std::hash<<#= qn #>> hasher;
+    BOOST_CHECK(hasher(a) == hasher(b));
+}
+
+BOOST_AUTO_TEST_CASE(different_objects_generate_different_hashes) {
+    <#= qn #>_generator g;
+    g();
+    const auto a(g());
+    const auto b(g());
+
+    std::hash<<#= qn #>> hasher;
+    BOOST_CHECK(hasher(a) != hasher(b));
 }
 
 <#+
