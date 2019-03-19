@@ -284,7 +284,7 @@ a.stream() << std::endl;
 a.stream() << "BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {" << std::endl;
                 if (o.is_parent()) {
 a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    const boost::shared_ptr<" << qn << " a(g.create_ptr(1));" << std::endl;
+a.stream() << "    const boost::shared_ptr<" << qn << "> a(g.create_ptr(1));" << std::endl;
 a.stream() << "    std::stringstream s;" << std::endl;
 a.stream() << "    s << *a;" << std::endl;
 a.stream() << std::endl;

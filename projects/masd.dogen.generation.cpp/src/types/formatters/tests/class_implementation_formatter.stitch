@@ -274,7 +274,7 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
                 if (o.is_parent()) {
 #>
     <#= qn #>_generator g;
-    const boost::shared_ptr<<#= qn #> a(g.create_ptr(1));
+    const boost::shared_ptr<<#= qn #>> a(g.create_ptr(1));
     std::stringstream s;
     s << *a;
 

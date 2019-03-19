@@ -43,9 +43,15 @@ format(const context& ctx, const coding::meta_model::element& e) const {
 #>
 
 class <#= sn #>_generator {
+<#+
+            if (!o.is_parent()) {
+#>
 public:
     <#= sn #>_generator();
 
+<#+
+            }
+#>
 public:
     typedef <#= qn #> result_type;
 

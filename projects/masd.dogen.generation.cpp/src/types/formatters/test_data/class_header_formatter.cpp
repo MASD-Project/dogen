@@ -94,9 +94,11 @@ format(const context& ctx, const coding::meta_model::element& e) const {
             auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
 a.stream() << "class " << sn << "_generator {" << std::endl;
+            if (!o.is_parent()) {
 a.stream() << "public:" << std::endl;
 a.stream() << "    " << sn << "_generator();" << std::endl;
 a.stream() << std::endl;
+            }
 a.stream() << "public:" << std::endl;
 a.stream() << "    typedef " << qn << " result_type;" << std::endl;
 a.stream() << std::endl;

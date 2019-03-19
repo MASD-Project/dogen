@@ -18,27 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ANNOTATIONS_TEST_DATA_VALUE_TD_HPP
-#define MASD_DOGEN_ANNOTATIONS_TEST_DATA_VALUE_TD_HPP
+#include <string>
+#include <sstream>
+#include <boost/shared_ptr.hpp>
+#include <boost/test/unit_test.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include "masd.dogen.coding/io/meta_model/element_io.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/test_data/meta_model/element_td.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+BOOST_AUTO_TEST_SUITE(element_tests)
 
-#include "masd.dogen.annotations/types/value.hpp"
+BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
+    masd::dogen::coding::meta_model::element_generator g;
+    const boost::shared_ptr<masd::dogen::coding::meta_model::element> a(g.create_ptr(1));
+    std::stringstream s;
+    s << *a;
 
-namespace masd::dogen::annotations {
-
-class value_generator {
-public:
-    typedef masd::dogen::annotations::value result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
-
+    boost::property_tree::ptree pt;
+    BOOST_REQUIRE_NO_THROW(read_json(s, pt));
 }
 
-#endif
+BOOST_AUTO_TEST_SUITE_END()

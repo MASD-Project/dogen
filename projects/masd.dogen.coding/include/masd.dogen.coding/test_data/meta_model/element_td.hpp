@@ -31,9 +31,6 @@ namespace masd::dogen::coding::meta_model {
 
 class element_generator {
 public:
-    element_generator();
-
-public:
     typedef masd::dogen::coding::meta_model::element result_type;
 
 public:

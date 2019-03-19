@@ -119,9 +119,6 @@
         "masd::visitable",
         "Element"
       ],
-      "tagged_values": {
-        "masd.extraction.cpp.tests.enabled": "false"
-      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
