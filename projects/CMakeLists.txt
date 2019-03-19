@@ -39,29 +39,43 @@ endif()
 macro(add_boost_tests test_module)
     foreach(cpp_file ${ARGN})
         file(READ "${cpp_file}" contents)
-        string(REGEX MATCHALL "BOOST_AUTO_TEST_CASE\\(([A-Za-z_0-9]+)\\)"
-            found_tests ${contents})
 
-        foreach(hit ${found_tests})
-            string(REGEX REPLACE "BOOST_AUTO_TEST_CASE(\\([A-Za-z_0-9]+\\))"
-                "\\1" test_name ${hit})
-            string(REPLACE "(" "" test_name ${test_name})
-            string(REPLACE ")" "" test_name ${test_name})
+        string(REGEX MATCHALL "BOOST_AUTO_TEST_SUITE(\\([A-Za-z_0-9]+\\))"
+            found_suites ${contents})
 
-            if (${test_name} IN_LIST boost_tests_ignore)
-                message(STATUS "Ignoring test: ${test_name}")
-            else()
-                set(filename "")
-                get_filename_component(filename ${cpp_file} NAME)
-                string(REPLACE "_tests.cpp" "_tests" test_suite ${filename})
+        list(LENGTH found_suites total_suites)
+         if (total_suites GREATER 1)
+             message(FATAL_ERROR "Only one test suite per file is supported. File: ${cpp_file}")
+         elseif (total_suites EQUAL 1)
+             list (GET found_suites 0 test_suite)
+             string(REGEX REPLACE "BOOST_AUTO_TEST_SUITE(\\([A-Za-z_0-9]+\\))"
+                 "\\1" test_suite ${test_suite})
+             string(REPLACE "(" "" test_suite ${test_suite})
+             string(REPLACE ")" "" test_suite ${test_suite})
 
-                set(tests_cmd ${stage_bin_dir}/${test_module})
-                add_test(${test_module}/${test_suite}/${test_name}
-                    ${CMAKE_COMMAND} -E chdir ${stage_bin_dir}
-                    ${tests_cmd} --run_test=${test_suite}/${test_name}
-                    ${boost_test_parameters})
-            endif()
-        endforeach()
+             string(REGEX MATCHALL "BOOST_AUTO_TEST_CASE\\(([A-Za-z_0-9]+)\\)"
+                 found_tests ${contents})
+             foreach(hit ${found_tests})
+                 string(REGEX REPLACE "BOOST_AUTO_TEST_CASE(\\([A-Za-z_0-9]+\\))"
+                     "\\1" test_name ${hit})
+                 string(REPLACE "(" "" test_name ${test_name})
+                 string(REPLACE ")" "" test_name ${test_name})
+
+                 if (${test_name} IN_LIST boost_tests_ignore)
+                     message(STATUS "Ignoring test: ${test_name}")
+                 else()
+                     # set(filename "")
+                     # get_filename_component(filename ${cpp_file} NAME)
+                     # string(REPLACE "_tests.cpp" "_tests" test_suite ${filename})
+
+                     set(tests_cmd ${stage_bin_dir}/${test_module})
+                     add_test(${test_module}/${test_suite}/${test_name}
+                         ${CMAKE_COMMAND} -E chdir ${stage_bin_dir}
+                         ${tests_cmd} --run_test=${test_suite}/${test_name}
+                         ${boost_test_parameters})
+                 endif()
+             endforeach()
+         endif()
     endforeach()
 endmacro()
 
