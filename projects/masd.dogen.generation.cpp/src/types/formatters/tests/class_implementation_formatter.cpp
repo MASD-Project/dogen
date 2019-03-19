@@ -119,14 +119,12 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     if (ser_enabled) {
         builder.add(o.name(), ser_arch);
 
-        if (o.is_parent()) {
-            // FIXME: hack for registrar
-            coding::helpers::name_factory nf;
-            auto n(o.name());
-            n.location().internal_modules().clear();
-            const auto rn(nf.build_element_in_model(n, "registrar"));
-            builder.add(rn, ser::registrar_header_archetype());
-        }
+        // FIXME: hack for registrar
+        coding::helpers::name_factory nf;
+        auto n(o.name());
+        n.location().internal_modules().clear();
+        const auto rn(nf.build_element_in_model(n, "registrar"));
+        builder.add(rn, ser::registrar_header_archetype());
 
         builder.add(ic::boost::archive::text_iarchive());
         builder.add(ic::boost::archive::text_oarchive());
@@ -137,6 +135,9 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
         builder.add(ic::boost::serialization::nvp());
         builder.add(ic::boost::archive::xml_iarchive());
         builder.add(ic::boost::archive::xml_oarchive());
+
+        if (o.is_parent())
+            builder.add(ic::boost::serialization::shared_ptr());
     }
 
     using hash = formatters::hash::traits;
@@ -312,6 +313,85 @@ a.stream() << std::endl;
                 n.location().internal_modules().clear();
                 const auto rn(nf.build_element_in_model(n, "register_types"));
                 const auto registrar_qn(a.get_qualified_name(rn));
+
+                if (o.is_parent()) {
+a.stream() << "BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {" << std::endl;
+a.stream() << "    " << qn << "_generator g;" << std::endl;
+a.stream() << "    const boost::shared_ptr<" << qn << "> a(g.create_ptr(1));" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    using namespace boost::archive;" << std::endl;
+a.stream() << "    std::ostringstream os;" << std::endl;
+a.stream() << "    {" << std::endl;
+a.stream() << "        xml_oarchive oa(os);" << std::endl;
+a.stream() << "        " << registrar_qn << "<xml_oarchive>(oa);" << std::endl;
+a.stream() << "        oa << BOOST_SERIALIZATION_NVP(a);" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    boost::shared_ptr<" << qn << "> b;" << std::endl;
+a.stream() << "    std::istringstream is(os.str());" << std::endl;
+a.stream() << "    {" << std::endl;
+a.stream() << "        xml_iarchive ia(is);" << std::endl;
+a.stream() << "        " << registrar_qn << "<xml_iarchive>(ia);" << std::endl;
+a.stream() << "        ia >> BOOST_SERIALIZATION_NVP(b);" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    BOOST_REQUIRE(a);" << std::endl;
+a.stream() << "    BOOST_REQUIRE(b);" << std::endl;
+a.stream() << "    BOOST_CHECK(*a == *b);" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << "BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {" << std::endl;
+a.stream() << "    " << qn << "_generator g;" << std::endl;
+a.stream() << "    const boost::shared_ptr<" << qn << "> a(g.create_ptr(1));" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    using namespace boost::archive;" << std::endl;
+a.stream() << "    std::ostringstream os;" << std::endl;
+a.stream() << "    {" << std::endl;
+a.stream() << "        text_oarchive oa(os);" << std::endl;
+a.stream() << "        " << registrar_qn << "<text_oarchive>(oa);" << std::endl;
+a.stream() << "        oa << a;" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    boost::shared_ptr<" << qn << "> b;" << std::endl;
+a.stream() << "    std::istringstream is(os.str());" << std::endl;
+a.stream() << "    {" << std::endl;
+a.stream() << "        text_iarchive ia(is);" << std::endl;
+a.stream() << "        " << registrar_qn << "<text_iarchive>(ia);" << std::endl;
+a.stream() << "        ia >> b;" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    BOOST_REQUIRE(a);" << std::endl;
+a.stream() << "    BOOST_REQUIRE(b);" << std::endl;
+a.stream() << "    BOOST_CHECK(*a == *b);" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << "BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {" << std::endl;
+a.stream() << "    " << qn << "_generator g;" << std::endl;
+a.stream() << "    const boost::shared_ptr<" << qn << "> a(g.create_ptr(1));" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    using namespace boost::archive;" << std::endl;
+a.stream() << "    std::ostringstream os;" << std::endl;
+a.stream() << "    {" << std::endl;
+a.stream() << "        binary_oarchive oa(os);" << std::endl;
+a.stream() << "        " << registrar_qn << "<binary_oarchive>(oa);" << std::endl;
+a.stream() << "        oa << a;" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    boost::shared_ptr<" << qn << "> b;" << std::endl;
+a.stream() << "    std::istringstream is(os.str());" << std::endl;
+a.stream() << "    {" << std::endl;
+a.stream() << "        binary_iarchive ia(is);" << std::endl;
+a.stream() << "        " << registrar_qn << "<binary_iarchive>(ia);" << std::endl;
+a.stream() << "        ia >> b;" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    BOOST_REQUIRE(a);" << std::endl;
+a.stream() << "    BOOST_REQUIRE(b);" << std::endl;
+a.stream() << "    BOOST_CHECK(*a == *b);" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+                } else {
+
 a.stream() << "BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {" << std::endl;
 a.stream() << "    " << qn << "_generator g;" << std::endl;
 a.stream() << "    const auto a(g());" << std::endl;
@@ -320,6 +400,7 @@ a.stream() << "    using namespace boost::archive;" << std::endl;
 a.stream() << "    std::ostringstream os;" << std::endl;
 a.stream() << "    {" << std::endl;
 a.stream() << "        xml_oarchive oa(os);" << std::endl;
+a.stream() << "        " << registrar_qn << "<xml_oarchive>(oa);" << std::endl;
 a.stream() << "        oa << BOOST_SERIALIZATION_NVP(a);" << std::endl;
 a.stream() << "    }" << std::endl;
 a.stream() << std::endl;
@@ -327,6 +408,7 @@ a.stream() << "    " << qn << " b = " << qn << "();" << std::endl;
 a.stream() << "    std::istringstream is(os.str());" << std::endl;
 a.stream() << "    {" << std::endl;
 a.stream() << "        xml_iarchive ia(is);" << std::endl;
+a.stream() << "        " << registrar_qn << "<xml_iarchive>(ia);" << std::endl;
 a.stream() << "        ia >> BOOST_SERIALIZATION_NVP(b);" << std::endl;
 a.stream() << "    }" << std::endl;
 a.stream() << std::endl;
@@ -341,6 +423,7 @@ a.stream() << "    using namespace boost::archive;" << std::endl;
 a.stream() << "    std::ostringstream os;" << std::endl;
 a.stream() << "    {" << std::endl;
 a.stream() << "        text_oarchive oa(os);" << std::endl;
+a.stream() << "        " << registrar_qn << "<text_oarchive>(oa);" << std::endl;
 a.stream() << "        oa << a;" << std::endl;
 a.stream() << "    }" << std::endl;
 a.stream() << std::endl;
@@ -348,6 +431,7 @@ a.stream() << "    " << qn << " b = " << qn << "();" << std::endl;
 a.stream() << "    std::istringstream is(os.str());" << std::endl;
 a.stream() << "    {" << std::endl;
 a.stream() << "        text_iarchive ia(is);" << std::endl;
+a.stream() << "        " << registrar_qn << "<text_iarchive>(ia);" << std::endl;
 a.stream() << "        ia >> b;" << std::endl;
 a.stream() << "    }" << std::endl;
 a.stream() << std::endl;
@@ -361,20 +445,22 @@ a.stream() << std::endl;
 a.stream() << "    using namespace boost::archive;" << std::endl;
 a.stream() << "    std::ostringstream os;" << std::endl;
 a.stream() << "    {" << std::endl;
-a.stream() << "        text_oarchive oa(os);" << std::endl;
+a.stream() << "        binary_oarchive oa(os);" << std::endl;
+a.stream() << "        " << registrar_qn << "<binary_oarchive>(oa);" << std::endl;
 a.stream() << "        oa << a;" << std::endl;
 a.stream() << "    }" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    " << qn << " b = " << qn << "();" << std::endl;
 a.stream() << "    std::istringstream is(os.str());" << std::endl;
 a.stream() << "    {" << std::endl;
-a.stream() << "        text_iarchive ia(is);" << std::endl;
+a.stream() << "        binary_iarchive ia(is);" << std::endl;
+a.stream() << "        " << registrar_qn << "<binary_iarchive>(ia);" << std::endl;
 a.stream() << "        ia >> b;" << std::endl;
 a.stream() << "    }" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    BOOST_CHECK(a == b);" << std::endl;
 a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+                }
             }
 
             if (a.is_hash_enabled() && !o.is_parent()) {

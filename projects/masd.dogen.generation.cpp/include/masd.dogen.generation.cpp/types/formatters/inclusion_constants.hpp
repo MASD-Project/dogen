@@ -73,6 +73,7 @@ struct inclusion_constants {
             static ::std::string nvp();
             static ::std::string split_free();
             static ::std::string assume_abstract();
+            static ::std::string shared_ptr();
         };
 
         struct exception {

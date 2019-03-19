@@ -137,6 +137,11 @@ std::string inclusion_constants::boost::serialization::assume_abstract() {
     return r;
 }
 
+std::string inclusion_constants::boost::serialization::shared_ptr() {
+    static ::std::string r("<boost/serialization/shared_ptr.hpp>");
+    return r;
+}
+
 std::string inclusion_constants::boost::exception::info() {
     static ::std::string r("<boost/exception/info.hpp>");
     return r;
