@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-19 Tue 12:13]
+#+CAPTION: Clock summary at [2019-03-19 Tue 12:15]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *57:08* |       |       | 100.0 |
+| *Total time*                                             | *57:09* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 57:08   |       |       | 100.0 |
-| Active                                                   |         | 57:08 |       | 100.0 |
+| Stories                                                  | 57:09   |       |       | 100.0 |
+| Active                                                   |         | 57:09 |       | 100.0 |
 | Edit release notes for previous sprint                   |         |       |  2:22 |   4.1 |
 | Sprint and product backlog grooming                      |         |       |  6:43 |  11.8 |
 | Create a video demo for the sprint's features            |         |       |  3:47 |   6.6 |
@@ -32,7 +32,7 @@
 | Empty directories should be deleted                      |         |       |  5:37 |   9.8 |
 | Changes to stitch templates are not reported correctly   |         |       |  1:09 |   2.0 |
 | Orchestration test is broken on Windows                  |         |       |  2:40 |   4.7 |
-| Code generation of tests for dogen models                |         |       | 21:43 |  38.0 |
+| Code generation of tests for dogen models                |         |       | 21:44 |  38.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -696,6 +696,7 @@ Notes:
 
 *** STARTED Code generation of tests for dogen models                 :story:
     :LOGBOOK:
+    CLOCK: [2019-03-19 Tue 12:14]--[2019-03-19 Tue 12:15] =>  0:01
     CLOCK: [2019-03-19 Tue 12:04]--[2019-03-19 Tue 12:13] =>  0:09
     CLOCK: [2019-03-19 Tue 11:46]--[2019-03-19 Tue 12:03] =>  0:17
     CLOCK: [2019-03-19 Tue 11:23]--[2019-03-19 Tue 11:45] =>  0:22

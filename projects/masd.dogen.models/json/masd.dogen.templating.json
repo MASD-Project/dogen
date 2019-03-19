@@ -28,9 +28,6 @@
     },
     {
       "name": "wale::text_template",
-      "tagged_values": {
-        "masd.extraction.cpp.tests.enabled": "false"
-      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -45,9 +42,6 @@
     },
     {
       "name": "wale::properties",
-      "tagged_values": {
-        "masd.extraction.cpp.tests.enabled": "false"
-      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
