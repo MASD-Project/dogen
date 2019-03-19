@@ -252,6 +252,21 @@ a.stream() << "    b = " << qn << "();" << std::endl;
 a.stream() << "    BOOST_CHECK(a != b);" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
+a.stream() << "BOOST_AUTO_TEST_CASE(swapping_objects_results_in_the_expected_state) {" << std::endl;
+a.stream() << "    " << qn << "_generator g;" << std::endl;
+a.stream() << "    const auto a(g());" << std::endl;
+a.stream() << "    const auto b(g());" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    auto c(a);" << std::endl;
+a.stream() << "    auto d(b);" << std::endl;
+a.stream() << "    BOOST_CHECK(c == a);" << std::endl;
+a.stream() << "    BOOST_CHECK(d == b);" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    std::swap(c, d);" << std::endl;
+a.stream() << "    BOOST_CHECK(c == b);" << std::endl;
+a.stream() << "    BOOST_CHECK(d == a);" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
             if (a.is_io_enabled()) {
                 /*
                  * IO tests.

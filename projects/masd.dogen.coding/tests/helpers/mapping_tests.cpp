@@ -110,6 +110,21 @@ BOOST_AUTO_TEST_CASE(copy_constructed_objects_are_equal) {
     BOOST_CHECK(a != b);
 }
 
+BOOST_AUTO_TEST_CASE(swapping_objects_results_in_the_expected_state) {
+    masd::dogen::coding::helpers::mapping_generator g;
+    const auto a(g());
+    const auto b(g());
+
+    auto c(a);
+    auto d(b);
+    BOOST_CHECK(c == a);
+    BOOST_CHECK(d == b);
+
+    std::swap(c, d);
+    BOOST_CHECK(c == b);
+    BOOST_CHECK(d == a);
+}
+
 BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
     masd::dogen::coding::helpers::mapping_generator g;
     const auto a(g());
