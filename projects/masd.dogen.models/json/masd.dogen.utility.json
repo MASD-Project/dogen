@@ -280,27 +280,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "test::canned_tests",
-      "stereotypes": [
-        "masd::cpp::header_only"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "test::construction_tester",
-      "stereotypes": [
-        "masd::cpp::header_only"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "test::equality_tester",
-      "stereotypes": [
-        "masd::cpp::header_only"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "test::file_asserter",
       "stereotypes": [
         "masd::cpp::header_only"
@@ -308,30 +287,9 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "test::hash_tester",
-      "stereotypes": [
-        "masd::cpp::header_only"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "test::json_validator",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "test::logging",
       "stereotypes": [
         "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "test::move_assignment_copy_tester",
-      "stereotypes": [
-        "masd::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -357,28 +315,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "test::io_tester",
-      "stereotypes": [
-        "masd::cpp::header_only"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "test::less_than_tester",
-      "stereotypes": [
-        "masd::cpp::header_only"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "test::macros",
-      "stereotypes": [
-        "masd::cpp::header_only"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "test::serialization_tester",
       "stereotypes": [
         "masd::cpp::header_only"
       ],

@@ -21,7 +21,6 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include "masd.dogen.utility/types/test/logging.hpp"
-#include "masd.dogen.utility/types/test/canned_tests.hpp"
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"

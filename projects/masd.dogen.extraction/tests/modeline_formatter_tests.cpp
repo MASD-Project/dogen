@@ -21,7 +21,6 @@
 #include <boost/test/unit_test.hpp>
 #include "masd.dogen.utility/types/test/asserter.hpp"
 #include "masd.dogen.utility/types/test/logging.hpp"
-#include "masd.dogen.utility/types/test/canned_tests.hpp"
 #include "masd.dogen.extraction/types/modeline.hpp"
 #include "masd.dogen.extraction/types/modeline_formatter.hpp"
 #include "masd.dogen.extraction/types/formatting_error.hpp"

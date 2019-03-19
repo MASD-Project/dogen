@@ -35,7 +35,6 @@
 #include "masd.dogen.utility/types/log/scoped_lifecycle_manager.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/exception/utility_exception.hpp"
-#include "masd.dogen.utility/types/test/json_validator.hpp"
 
 namespace this_is_a_test {
 
@@ -100,7 +99,6 @@ std::string log_file_name(std::string function, unsigned int postfix = 0) {
 
 }
 
-using masd::dogen::utility::test::json_validator;
 using masd::dogen::utility::streaming::jsonify;
 using namespace masd::dogen::utility::log;
 
@@ -284,22 +282,6 @@ BOOST_AUTO_TEST_CASE(exercise_jsonify_inserter) {
     BOOST_LOG_SEV(lg, debug) << "float: " << jsonify((float)12.123);
     BOOST_LOG_SEV(lg, debug) << "double: " << jsonify((double)3.14);
     BOOST_CHECK(true);
-}
-
-BOOST_AUTO_TEST_CASE(valid_json_parses_successfully) {
-    SETUP_TEST_LOG_SOURCE("valid_json_parses_successfully");
-
-    std::stringstream s;
-    s << "{ \"__type__\": \"class_b\", \"prop_0\":  { \"__type__\": \"class_a\", \"prop_0\": 0, \"versioned_key\":  { \"__type__\": \"versioned_key\", \"id\": 1, \"version\": 2 } }, \"versioned_key\":  { \"__type__\": \"versioned_key\", \"id\": 0, \"version\": 1 } }";
-    BOOST_CHECK(json_validator::validate(s));
-}
-
-BOOST_AUTO_TEST_CASE(invalid_json_fails_to_parse) {
-    SETUP_TEST_LOG_SOURCE("invalid_json_fails_to_parse");
-
-    std::stringstream s;
-    s << "{ \"__type__\": \"class_b\", \"prop_0\":  { \"__type__\": \"class_a\", \"prop_0\": 0, \"versioned_key\":  { \"__type__\": \"versioned_key\", \"id\": 1, \"version\": 2 } }, \"versioned_key\":  { \"__type__\": \"versioned_key\", \"id\": 0, \"version\": 1";
-    BOOST_CHECK(!json_validator::validate(s));
 }
 
 BOOST_AUTO_TEST_SUITE_END()
