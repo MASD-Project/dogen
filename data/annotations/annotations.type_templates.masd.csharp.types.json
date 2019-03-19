@@ -2,12 +2,12 @@
   {
     "name": {
       "simple": "directory",
-      "qualified": "masd.extraction.csharp.types.directory"
+      "qualified": "masd.generation.csharp.types.directory"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.csharp",
-      "facet": "masd.extraction.csharp.types"
+      "backend": "masd.generation.csharp",
+      "facet": "masd.generation.csharp.types"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -17,12 +17,12 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.csharp.types.postfix"
+      "qualified": "masd.generation.csharp.types.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.csharp",
-      "facet": "masd.extraction.csharp.types"
+      "backend": "masd.generation.csharp",
+      "facet": "masd.generation.csharp.types"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -32,13 +32,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.csharp.types.class.postfix"
+      "qualified": "masd.generation.csharp.types.class.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.csharp",
-      "facet": "masd.extraction.csharp.types",
-      "archetype": "masd.extraction.csharp.types.class"
+      "backend": "masd.generation.csharp",
+      "facet": "masd.generation.csharp.types",
+      "archetype": "masd.generation.csharp.types.class"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -48,13 +48,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.csharp.types.enum.postfix"
+      "qualified": "masd.generation.csharp.types.enum.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.csharp",
-      "facet": "masd.extraction.csharp.types",
-      "archetype": "masd.extraction.csharp.types.enum"
+      "backend": "masd.generation.csharp",
+      "facet": "masd.generation.csharp.types",
+      "archetype": "masd.generation.csharp.types.enum"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -64,13 +64,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.csharp.types.primitive.postfix"
+      "qualified": "masd.generation.csharp.types.primitive.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.csharp",
-      "facet": "masd.extraction.csharp.types",
-      "archetype": "masd.extraction.csharp.types.primitive"
+      "backend": "masd.generation.csharp",
+      "facet": "masd.generation.csharp.types",
+      "archetype": "masd.generation.csharp.types.primitive"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -80,13 +80,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.csharp.types.builtin.postfix"
+      "qualified": "masd.generation.csharp.types.builtin.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.csharp",
-      "facet": "masd.extraction.csharp.types",
-      "archetype": "masd.extraction.csharp.types.builtin"
+      "backend": "masd.generation.csharp",
+      "facet": "masd.generation.csharp.types",
+      "archetype": "masd.generation.csharp.types.builtin"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -96,13 +96,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.csharp.types.exception.postfix"
+      "qualified": "masd.generation.csharp.types.exception.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.csharp",
-      "facet": "masd.extraction.csharp.types",
-      "archetype": "masd.extraction.csharp.exception.builtin"
+      "backend": "masd.generation.csharp",
+      "facet": "masd.generation.csharp.types",
+      "archetype": "masd.generation.csharp.exception.builtin"
     },
     "value_type": "text",
     "template_kind": "instance",

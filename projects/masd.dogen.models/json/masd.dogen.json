@@ -17,7 +17,7 @@
     "masd.generation.cpp.msbuild.enabled": "false",
     "masd.generation.cpp.visual_studio.project.enabled": "false",
     "masd.generation.cpp.visual_studio.solution.enabled": "false",
-    "masd.extraction.csharp.enabled": "false",
+    "masd.generation.csharp.enabled": "false",
     "masd.annotations.profile": "dogen.disable_common_facets"
   },
   "elements": [

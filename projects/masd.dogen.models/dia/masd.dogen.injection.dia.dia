@@ -2501,7 +2501,7 @@ For details on the stereotypes see the MASD UML profile.
 #DOGEN masd.generation.cpp.msbuild.enabled=false
 #DOGEN masd.generation.cpp.visual_studio.project.enabled=false
 #DOGEN masd.generation.cpp.visual_studio.solution.enabled=false
-#DOGEN masd.extraction.csharp.enabled=false
+#DOGEN masd.generation.csharp.enabled=false
 #DOGEN masd.annotations.profile=dogen.disable_common_facets#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
