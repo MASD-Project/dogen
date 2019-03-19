@@ -27,7 +27,7 @@
 #include "masd.dogen.injection/types/meta_model/attribute.hpp"
 #include "masd.dogen.injection/test_data/meta_model/attribute_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(attribute_tests)
+BOOST_AUTO_TEST_SUITE(meta_model_attribute_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::injection::meta_model::attribute_generator g;

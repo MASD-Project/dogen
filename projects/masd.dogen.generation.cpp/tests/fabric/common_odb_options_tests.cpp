@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.cpp/types/fabric/common_odb_options.hpp"
 #include "masd.dogen.generation.cpp/test_data/fabric/common_odb_options_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(common_odb_options_tests)
+BOOST_AUTO_TEST_SUITE(fabric_common_odb_options_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::cpp::fabric::common_odb_options_generator g;

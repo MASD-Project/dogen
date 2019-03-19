@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.cpp/types/formattables/element_properties.hpp"
 #include "masd.dogen.generation.cpp/test_data/formattables/element_properties_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(element_properties_tests)
+BOOST_AUTO_TEST_SUITE(formattables_element_properties_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::cpp::formattables::element_properties_generator g;

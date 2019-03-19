@@ -27,7 +27,7 @@
 #include "masd.dogen.coding/types/meta_model/orm_primitive_properties.hpp"
 #include "masd.dogen.coding/test_data/meta_model/orm_primitive_properties_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(orm_primitive_properties_tests)
+BOOST_AUTO_TEST_SUITE(meta_model_orm_primitive_properties_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::coding::meta_model::orm_primitive_properties_generator g;

@@ -27,7 +27,7 @@
 #include "masd.dogen.utility/types/log/logging_configuration.hpp"
 #include "masd.dogen.utility/test_data/log/logging_configuration_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(logging_configuration_tests)
+BOOST_AUTO_TEST_SUITE(log_logging_configuration_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::utility::log::logging_configuration_generator g;

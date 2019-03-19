@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.cpp/types/formattables/locator_facet_configuration.hpp"
 #include "masd.dogen.generation.cpp/test_data/formattables/locator_facet_configuration_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(locator_facet_configuration_tests)
+BOOST_AUTO_TEST_SUITE(formattables_locator_facet_configuration_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::cpp::formattables::locator_facet_configuration_generator g;

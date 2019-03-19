@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.cpp/types/formattables/odb_properties.hpp"
 #include "masd.dogen.generation.cpp/test_data/formattables/odb_properties_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(odb_properties_tests)
+BOOST_AUTO_TEST_SUITE(formattables_odb_properties_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::cpp::formattables::odb_properties_generator g;

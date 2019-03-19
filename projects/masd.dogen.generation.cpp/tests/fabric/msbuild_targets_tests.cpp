@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.cpp/types/fabric/msbuild_targets.hpp"
 #include "masd.dogen.generation.cpp/test_data/fabric/msbuild_targets_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(msbuild_targets_tests)
+BOOST_AUTO_TEST_SUITE(fabric_msbuild_targets_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::cpp::fabric::msbuild_targets_generator g;

@@ -27,7 +27,7 @@
 #include "masd.dogen.coding/types/meta_model/model_set.hpp"
 #include "masd.dogen.coding/test_data/meta_model/model_set_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(model_set_tests)
+BOOST_AUTO_TEST_SUITE(meta_model_model_set_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::coding::meta_model::model_set_generator g;

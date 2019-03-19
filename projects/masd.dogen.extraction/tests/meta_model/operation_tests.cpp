@@ -27,7 +27,7 @@
 #include "masd.dogen.extraction/types/meta_model/operation.hpp"
 #include "masd.dogen.extraction/test_data/meta_model/operation_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(operation_tests)
+BOOST_AUTO_TEST_SUITE(meta_model_operation_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::extraction::meta_model::operation_generator g;

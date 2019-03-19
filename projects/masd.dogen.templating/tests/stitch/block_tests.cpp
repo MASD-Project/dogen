@@ -27,7 +27,7 @@
 #include "masd.dogen.templating/types/stitch/block.hpp"
 #include "masd.dogen.templating/test_data/stitch/block_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(block_tests)
+BOOST_AUTO_TEST_SUITE(stitch_block_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::templating::stitch::block_generator g;

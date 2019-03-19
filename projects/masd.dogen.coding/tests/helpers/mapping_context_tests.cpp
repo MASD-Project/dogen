@@ -27,7 +27,7 @@
 #include "masd.dogen.coding/types/helpers/mapping_context.hpp"
 #include "masd.dogen.coding/test_data/helpers/mapping_context_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(mapping_context_tests)
+BOOST_AUTO_TEST_SUITE(helpers_mapping_context_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::coding::helpers::mapping_context_generator g;

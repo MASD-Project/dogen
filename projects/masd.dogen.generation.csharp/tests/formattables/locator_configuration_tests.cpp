@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.csharp/types/formattables/locator_configuration.hpp"
 #include "masd.dogen.generation.csharp/test_data/formattables/locator_configuration_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(locator_configuration_tests)
+BOOST_AUTO_TEST_SUITE(formattables_locator_configuration_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::csharp::formattables::locator_configuration_generator g;

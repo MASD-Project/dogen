@@ -27,7 +27,7 @@
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.coding/test_data/meta_model/primitive_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(primitive_tests)
+BOOST_AUTO_TEST_SUITE(meta_model_primitive_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::coding::meta_model::primitive_generator g;

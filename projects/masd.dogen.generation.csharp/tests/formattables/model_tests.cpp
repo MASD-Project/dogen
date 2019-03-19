@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.csharp/types/formattables/model.hpp"
 #include "masd.dogen.generation.csharp/test_data/formattables/model_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(model_tests)
+BOOST_AUTO_TEST_SUITE(formattables_model_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::csharp::formattables::model_generator g;

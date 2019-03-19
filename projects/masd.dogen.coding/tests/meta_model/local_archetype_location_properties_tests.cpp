@@ -27,7 +27,7 @@
 #include "masd.dogen.coding/types/meta_model/local_archetype_location_properties.hpp"
 #include "masd.dogen.coding/test_data/meta_model/local_archetype_location_properties_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(local_archetype_location_properties_tests)
+BOOST_AUTO_TEST_SUITE(meta_model_local_archetype_location_properties_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::coding::meta_model::local_archetype_location_properties_generator g;

@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.csharp/types/formattables/artefact_properties.hpp"
 #include "masd.dogen.generation.csharp/test_data/formattables/artefact_properties_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(artefact_properties_tests)
+BOOST_AUTO_TEST_SUITE(formattables_artefact_properties_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::csharp::formattables::artefact_properties_generator g;

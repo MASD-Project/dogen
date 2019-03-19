@@ -27,7 +27,7 @@
 #include "masd.dogen.coding/types/meta_model/visitor.hpp"
 #include "masd.dogen.coding/test_data/meta_model/visitor_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(visitor_tests)
+BOOST_AUTO_TEST_SUITE(meta_model_visitor_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::coding::meta_model::visitor_generator g;

@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.cpp/types/fabric/entry_point.hpp"
 #include "masd.dogen.generation.cpp/test_data/fabric/entry_point_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(entry_point_tests)
+BOOST_AUTO_TEST_SUITE(fabric_entry_point_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::cpp::fabric::entry_point_generator g;

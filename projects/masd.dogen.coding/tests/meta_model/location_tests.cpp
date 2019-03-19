@@ -28,7 +28,7 @@
 #include "masd.dogen.coding/hash/meta_model/location_hash.hpp"
 #include "masd.dogen.coding/test_data/meta_model/location_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(location_tests)
+BOOST_AUTO_TEST_SUITE(meta_model_location_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::coding::meta_model::location_generator g;

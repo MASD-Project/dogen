@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.cpp/types/formattables/directive_group_repository.hpp"
 #include "masd.dogen.generation.cpp/test_data/formattables/directive_group_repository_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(directive_group_repository_tests)
+BOOST_AUTO_TEST_SUITE(formattables_directive_group_repository_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::cpp::formattables::directive_group_repository_generator g;

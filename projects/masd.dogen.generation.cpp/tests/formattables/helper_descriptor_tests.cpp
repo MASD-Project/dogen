@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.cpp/types/formattables/helper_descriptor.hpp"
 #include "masd.dogen.generation.cpp/test_data/formattables/helper_descriptor_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(helper_descriptor_tests)
+BOOST_AUTO_TEST_SUITE(formattables_helper_descriptor_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::cpp::formattables::helper_descriptor_generator g;

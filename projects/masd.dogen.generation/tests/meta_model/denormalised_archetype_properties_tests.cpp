@@ -27,7 +27,7 @@
 #include "masd.dogen.generation/types/meta_model/denormalised_archetype_properties.hpp"
 #include "masd.dogen.generation/test_data/meta_model/denormalised_archetype_properties_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(denormalised_archetype_properties_tests)
+BOOST_AUTO_TEST_SUITE(meta_model_denormalised_archetype_properties_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::meta_model::denormalised_archetype_properties_generator g;

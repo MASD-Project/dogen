@@ -27,7 +27,7 @@
 #include "masd.dogen.templating/types/stitch/properties.hpp"
 #include "masd.dogen.templating/test_data/stitch/properties_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(properties_tests)
+BOOST_AUTO_TEST_SUITE(stitch_properties_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::templating::stitch::properties_generator g;

@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.csharp/types/fabric/assembly_info.hpp"
 #include "masd.dogen.generation.csharp/test_data/fabric/assembly_info_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(assembly_info_tests)
+BOOST_AUTO_TEST_SUITE(fabric_assembly_info_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::csharp::fabric::assembly_info_generator g;

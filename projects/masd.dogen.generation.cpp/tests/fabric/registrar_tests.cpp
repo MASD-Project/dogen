@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.cpp/types/fabric/registrar.hpp"
 #include "masd.dogen.generation.cpp/test_data/fabric/registrar_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(registrar_tests)
+BOOST_AUTO_TEST_SUITE(fabric_registrar_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::cpp::fabric::registrar_generator g;

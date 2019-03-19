@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.csharp/types/formattables/helper_configuration.hpp"
 #include "masd.dogen.generation.csharp/test_data/formattables/helper_configuration_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(helper_configuration_tests)
+BOOST_AUTO_TEST_SUITE(formattables_helper_configuration_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::csharp::formattables::helper_configuration_generator g;

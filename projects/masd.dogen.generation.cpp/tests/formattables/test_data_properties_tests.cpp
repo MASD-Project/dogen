@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.cpp/types/formattables/test_data_properties.hpp"
 #include "masd.dogen.generation.cpp/test_data/formattables/test_data_properties_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(test_data_properties_tests)
+BOOST_AUTO_TEST_SUITE(formattables_test_data_properties_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::cpp::formattables::test_data_properties_generator g;

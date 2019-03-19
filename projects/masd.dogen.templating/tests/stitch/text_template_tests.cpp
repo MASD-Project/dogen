@@ -27,7 +27,7 @@
 #include "masd.dogen.templating/types/stitch/text_template.hpp"
 #include "masd.dogen.templating/test_data/stitch/text_template_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(text_template_tests)
+BOOST_AUTO_TEST_SUITE(stitch_text_template_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::templating::stitch::text_template_generator g;

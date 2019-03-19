@@ -27,7 +27,7 @@
 #include "masd.dogen.templating/types/stitch/line.hpp"
 #include "masd.dogen.templating/test_data/stitch/line_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(line_tests)
+BOOST_AUTO_TEST_SUITE(stitch_line_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::templating::stitch::line_generator g;

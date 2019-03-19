@@ -27,7 +27,7 @@
 #include "masd.dogen.extraction/types/helpers/files_by_status.hpp"
 #include "masd.dogen.extraction/test_data/helpers/files_by_status_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(files_by_status_tests)
+BOOST_AUTO_TEST_SUITE(helpers_files_by_status_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::extraction::helpers::files_by_status_generator g;

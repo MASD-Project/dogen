@@ -28,7 +28,7 @@
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/test_data/meta_model/element_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(element_tests)
+BOOST_AUTO_TEST_SUITE(meta_model_element_tests)
 
 BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
     masd::dogen::coding::meta_model::element_generator g;

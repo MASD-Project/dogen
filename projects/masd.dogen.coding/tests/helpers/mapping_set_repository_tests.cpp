@@ -27,7 +27,7 @@
 #include "masd.dogen.coding/types/helpers/mapping_set_repository.hpp"
 #include "masd.dogen.coding/test_data/helpers/mapping_set_repository_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(mapping_set_repository_tests)
+BOOST_AUTO_TEST_SUITE(helpers_mapping_set_repository_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::coding::helpers::mapping_set_repository_generator g;

@@ -27,7 +27,7 @@
 #include "masd.dogen.injection/types/meta_model/element.hpp"
 #include "masd.dogen.injection/test_data/meta_model/element_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(element_tests)
+BOOST_AUTO_TEST_SUITE(meta_model_element_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::injection::meta_model::element_generator g;

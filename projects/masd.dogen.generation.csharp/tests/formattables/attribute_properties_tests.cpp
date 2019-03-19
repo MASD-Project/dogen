@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.csharp/types/formattables/attribute_properties.hpp"
 #include "masd.dogen.generation.csharp/test_data/formattables/attribute_properties_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(attribute_properties_tests)
+BOOST_AUTO_TEST_SUITE(formattables_attribute_properties_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::csharp::formattables::attribute_properties_generator g;

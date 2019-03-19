@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.csharp/types/fabric/assistant.hpp"
 #include "masd.dogen.generation.csharp/test_data/fabric/assistant_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(assistant_tests)
+BOOST_AUTO_TEST_SUITE(fabric_assistant_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::csharp::fabric::assistant_generator g;

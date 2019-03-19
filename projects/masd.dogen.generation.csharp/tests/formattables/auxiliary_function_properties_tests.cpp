@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.csharp/types/formattables/auxiliary_function_properties.hpp"
 #include "masd.dogen.generation.csharp/test_data/formattables/auxiliary_function_properties_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(auxiliary_function_properties_tests)
+BOOST_AUTO_TEST_SUITE(formattables_auxiliary_function_properties_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::csharp::formattables::auxiliary_function_properties_generator g;

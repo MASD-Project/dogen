@@ -1,6 +1,7 @@
 <#@ masd.annotations.profile=dogen.stitch #>
 <#@ masd.stitch.containing_namespaces=masd::dogen::generation::cpp::formatters::tests #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+<#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/join.hpp>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.utility/types/log/logger.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.coding/types/meta_model/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.coding/types/helpers/meta_name_factory.hpp" #>
@@ -137,8 +138,11 @@ format(const context& ctx, const coding::meta_model::element& e) const {
     {
         auto sbf(a.make_scoped_boilerplate_formatter(o));
         const auto qn(a.get_qualified_name(o.name()));
+        auto list(e.name().location().internal_modules());
+        list.push_back(o.name().simple());
+        const std::string test_suite_name(boost::join(list, "_"));
 #>
-BOOST_AUTO_TEST_SUITE(<#= o.name().simple() #>_tests)
+BOOST_AUTO_TEST_SUITE(<#= test_suite_name #>_tests)
 
 <#+
         /*

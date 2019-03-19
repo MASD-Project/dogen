@@ -35,6 +35,7 @@
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
+#include <boost/algorithm/string/join.hpp>
 #include <boost/throw_exception.hpp>
 
 namespace masd::dogen::generation::cpp::formatters::tests {
@@ -156,7 +157,10 @@ format(const context& ctx, const coding::meta_model::element& e) const {
     {
         auto sbf(a.make_scoped_boilerplate_formatter(o));
         const auto qn(a.get_qualified_name(o.name()));
-a.stream() << "BOOST_AUTO_TEST_SUITE(" << o.name().simple() << "_tests)" << std::endl;
+        auto list(e.name().location().internal_modules());
+        list.push_back(o.name().simple());
+        const std::string test_suite_name(boost::join(list, "_"));
+a.stream() << "BOOST_AUTO_TEST_SUITE(" << test_suite_name << "_tests)" << std::endl;
 a.stream() << std::endl;
         /*
          * If we have no attributes at all, we cannot test this

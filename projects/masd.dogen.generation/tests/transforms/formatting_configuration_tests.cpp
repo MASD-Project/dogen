@@ -27,7 +27,7 @@
 #include "masd.dogen.generation/types/transforms/formatting_configuration.hpp"
 #include "masd.dogen.generation/test_data/transforms/formatting_configuration_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(formatting_configuration_tests)
+BOOST_AUTO_TEST_SUITE(transforms_formatting_configuration_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::transforms::formatting_configuration_generator g;

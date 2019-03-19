@@ -27,7 +27,7 @@
 #include "masd.dogen.coding/types/meta_model/type_parameters.hpp"
 #include "masd.dogen.coding/test_data/meta_model/type_parameters_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(type_parameters_tests)
+BOOST_AUTO_TEST_SUITE(meta_model_type_parameters_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::coding::meta_model::type_parameters_generator g;

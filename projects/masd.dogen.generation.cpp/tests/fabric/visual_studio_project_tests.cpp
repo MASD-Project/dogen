@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.cpp/types/fabric/visual_studio_project.hpp"
 #include "masd.dogen.generation.cpp/test_data/fabric/visual_studio_project_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(visual_studio_project_tests)
+BOOST_AUTO_TEST_SUITE(fabric_visual_studio_project_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::cpp::fabric::visual_studio_project_generator g;

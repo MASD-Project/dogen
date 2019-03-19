@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.cpp/types/formattables/streaming_properties.hpp"
 #include "masd.dogen.generation.cpp/test_data/formattables/streaming_properties_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(streaming_properties_tests)
+BOOST_AUTO_TEST_SUITE(formattables_streaming_properties_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::cpp::formattables::streaming_properties_generator g;

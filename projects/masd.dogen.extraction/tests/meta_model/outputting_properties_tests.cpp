@@ -27,7 +27,7 @@
 #include "masd.dogen.extraction/types/meta_model/outputting_properties.hpp"
 #include "masd.dogen.extraction/test_data/meta_model/outputting_properties_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(outputting_properties_tests)
+BOOST_AUTO_TEST_SUITE(meta_model_outputting_properties_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::extraction::meta_model::outputting_properties_generator g;

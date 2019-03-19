@@ -27,7 +27,7 @@
 #include "masd.dogen.orchestration/types/helpers/stereotypes_conversion_result.hpp"
 #include "masd.dogen.orchestration/test_data/helpers/stereotypes_conversion_result_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(stereotypes_conversion_result_tests)
+BOOST_AUTO_TEST_SUITE(helpers_stereotypes_conversion_result_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::orchestration::helpers::stereotypes_conversion_result_generator g;

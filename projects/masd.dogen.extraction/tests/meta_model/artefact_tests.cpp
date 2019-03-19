@@ -27,7 +27,7 @@
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.extraction/test_data/meta_model/artefact_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(artefact_tests)
+BOOST_AUTO_TEST_SUITE(meta_model_artefact_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::extraction::meta_model::artefact_generator g;

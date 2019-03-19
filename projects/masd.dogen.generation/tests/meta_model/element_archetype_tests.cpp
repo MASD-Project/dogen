@@ -28,7 +28,7 @@
 #include "masd.dogen.generation/hash/meta_model/element_archetype_hash.hpp"
 #include "masd.dogen.generation/test_data/meta_model/element_archetype_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(element_archetype_tests)
+BOOST_AUTO_TEST_SUITE(meta_model_element_archetype_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::meta_model::element_archetype_generator g;

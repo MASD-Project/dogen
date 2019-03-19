@@ -27,7 +27,7 @@
 #include "masd.dogen.coding/types/helpers/node.hpp"
 #include "masd.dogen.coding/test_data/helpers/node_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(node_tests)
+BOOST_AUTO_TEST_SUITE(helpers_node_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::coding::helpers::node_generator g;

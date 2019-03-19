@@ -27,7 +27,7 @@
 #include "masd.dogen.orchestration/types/transforms/naming_configuration.hpp"
 #include "masd.dogen.orchestration/test_data/transforms/naming_configuration_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(naming_configuration_tests)
+BOOST_AUTO_TEST_SUITE(transforms_naming_configuration_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::orchestration::transforms::naming_configuration_generator g;

@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.cpp/types/fabric/odb_target.hpp"
 #include "masd.dogen.generation.cpp/test_data/fabric/odb_target_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(odb_target_tests)
+BOOST_AUTO_TEST_SUITE(fabric_odb_target_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::cpp::fabric::odb_target_generator g;

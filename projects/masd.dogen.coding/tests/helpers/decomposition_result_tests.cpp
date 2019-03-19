@@ -27,7 +27,7 @@
 #include "masd.dogen.coding/types/helpers/decomposition_result.hpp"
 #include "masd.dogen.coding/test_data/helpers/decomposition_result_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(decomposition_result_tests)
+BOOST_AUTO_TEST_SUITE(helpers_decomposition_result_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::coding::helpers::decomposition_result_generator g;

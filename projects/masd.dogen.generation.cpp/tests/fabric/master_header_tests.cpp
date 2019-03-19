@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.cpp/types/fabric/master_header.hpp"
 #include "masd.dogen.generation.cpp/test_data/fabric/master_header_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(master_header_tests)
+BOOST_AUTO_TEST_SUITE(fabric_master_header_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::cpp::fabric::master_header_generator g;

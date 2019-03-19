@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.cpp/types/fabric/forward_declarations.hpp"
 #include "masd.dogen.generation.cpp/test_data/fabric/forward_declarations_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(forward_declarations_tests)
+BOOST_AUTO_TEST_SUITE(fabric_forward_declarations_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::cpp::fabric::forward_declarations_generator g;

@@ -27,7 +27,7 @@
 #include "masd.dogen.generation/types/meta_model/model_segment_properties.hpp"
 #include "masd.dogen.generation/test_data/meta_model/model_segment_properties_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(model_segment_properties_tests)
+BOOST_AUTO_TEST_SUITE(meta_model_model_segment_properties_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     masd::dogen::generation::meta_model::model_segment_properties_generator g;
