@@ -11,11 +11,11 @@
     {
       "name": {
         "simple": "enabled",
-        "qualified": "masd.extraction.cpp.types.enabled"
+        "qualified": "masd.generation.cpp.types.enabled"
       },
       "archetype_location": {
         "kernel": "masd",
-        "backend": "masd.extraction.cpp"
+        "backend": "masd.generation.cpp"
       },
       "template_kind": "instance",
       "untyped_value": [
@@ -25,11 +25,11 @@
     {
       "name": {
         "simple": "enabled",
-        "qualified": "masd.extraction.cpp.hash.enabled"
+        "qualified": "masd.generation.cpp.hash.enabled"
       },
       "archetype_location": {
         "kernel": "masd",
-        "backend": "masd.extraction.cpp"
+        "backend": "masd.generation.cpp"
       },
       "template_kind": "instance",
       "untyped_value": [

@@ -83,7 +83,7 @@ std::string traits::extraction::ignore_files_matching_regex() {
 }
 
 std::string traits::extraction::cpp_headers_output_directory() {
-    static std::string r("masd.extraction.cpp_headers_output_directory");
+    static std::string r("masd.generation.cpp_headers_output_directory");
     return r;
 }
 

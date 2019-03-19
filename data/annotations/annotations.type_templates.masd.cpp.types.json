@@ -2,12 +2,12 @@
   {
     "name": {
       "simple": "directory",
-      "qualified": "masd.extraction.cpp.types.directory"
+      "qualified": "masd.generation.cpp.types.directory"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.cpp",
-      "facet": "masd.extraction.cpp.types"
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.types"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -17,12 +17,12 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.cpp.types.postfix"
+      "qualified": "masd.generation.cpp.types.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.cpp",
-      "facet": "masd.extraction.cpp.types"
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.types"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -32,13 +32,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.cpp.types.class_header.postfix"
+      "qualified": "masd.generation.cpp.types.class_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.cpp",
-      "facet": "masd.extraction.cpp.types",
-      "archetype": "masd.extraction.cpp.types.class_header"
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.types",
+      "archetype": "masd.generation.cpp.types.class_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -48,13 +48,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.cpp.types.class_implementation.postfix"
+      "qualified": "masd.generation.cpp.types.class_implementation.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.cpp",
-      "facet": "masd.extraction.cpp.types",
-      "archetype": "masd.extraction.cpp.types.class_implementation"
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.types",
+      "archetype": "masd.generation.cpp.types.class_implementation"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -64,13 +64,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.cpp.types.enum_header.postfix"
+      "qualified": "masd.generation.cpp.types.enum_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.cpp",
-      "facet": "masd.extraction.cpp.types",
-      "archetype": "masd.extraction.cpp.types.enum_header"
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.types",
+      "archetype": "masd.generation.cpp.types.enum_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -80,13 +80,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.cpp.types.enum_implementation.postfix"
+      "qualified": "masd.generation.cpp.types.enum_implementation.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.cpp",
-      "facet": "masd.extraction.cpp.types",
-      "archetype": "masd.extraction.cpp.types.enum_implementation"
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.types",
+      "archetype": "masd.generation.cpp.types.enum_implementation"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -96,13 +96,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.cpp.types.primitive_header.postfix"
+      "qualified": "masd.generation.cpp.types.primitive_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.cpp",
-      "facet": "masd.extraction.cpp.types",
-      "archetype": "masd.extraction.cpp.types.primitive_header"
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.types",
+      "archetype": "masd.generation.cpp.types.primitive_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -112,13 +112,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.cpp.types.primitive_implementation.postfix"
+      "qualified": "masd.generation.cpp.types.primitive_implementation.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.cpp",
-      "facet": "masd.extraction.cpp.types",
-      "archetype": "masd.extraction.cpp.types.primitive_implementation"
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.types",
+      "archetype": "masd.generation.cpp.types.primitive_implementation"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -128,13 +128,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.cpp.types.exception_header.postfix"
+      "qualified": "masd.generation.cpp.types.exception_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.cpp",
-      "facet": "masd.extraction.cpp.types",
-      "archetype": "masd.extraction.cpp.types.exception_header"
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.types",
+      "archetype": "masd.generation.cpp.types.exception_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -144,13 +144,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.cpp.types.namespace_header.postfix"
+      "qualified": "masd.generation.cpp.types.namespace_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.cpp",
-      "facet": "masd.extraction.cpp.types",
-      "archetype": "masd.extraction.cpp.types.namespace_header"
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.types",
+      "archetype": "masd.generation.cpp.types.namespace_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -160,13 +160,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.cpp.types.visitor_header.postfix"
+      "qualified": "masd.generation.cpp.types.visitor_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.cpp",
-      "facet": "masd.extraction.cpp.types",
-      "archetype": "masd.extraction.cpp.types.visitor_header"
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.types",
+      "archetype": "masd.generation.cpp.types.visitor_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -176,13 +176,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.cpp.types.forward_declarations.postfix"
+      "qualified": "masd.generation.cpp.types.forward_declarations.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.cpp",
-      "facet": "masd.extraction.cpp.types",
-      "archetype": "masd.extraction.cpp.types.forward_declarations"
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.types",
+      "archetype": "masd.generation.cpp.types.forward_declarations"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -192,13 +192,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.cpp.types.master_header.postfix"
+      "qualified": "masd.generation.cpp.types.master_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.cpp",
-      "facet": "masd.extraction.cpp.types",
-      "archetype": "masd.extraction.cpp.types.master_header"
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.types",
+      "archetype": "masd.generation.cpp.types.master_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -208,13 +208,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.cpp.types.builtin_header.postfix"
+      "qualified": "masd.generation.cpp.types.builtin_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.cpp",
-      "facet": "masd.extraction.cpp.types",
-      "archetype": "masd.extraction.cpp.types.builtin_header"
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.types",
+      "archetype": "masd.generation.cpp.types.builtin_header"
     },
     "value_type": "text",
     "template_kind": "instance",

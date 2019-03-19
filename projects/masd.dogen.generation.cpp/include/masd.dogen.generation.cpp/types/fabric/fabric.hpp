@@ -26,7 +26,7 @@
 #endif
 
 /**
- * @brief Houses the masd.extraction.cpp extensions to masd.
+ * @brief Houses the masd.generation.cpp extensions to masd.
  */
 namespace masd::dogen::generation::cpp {
 }

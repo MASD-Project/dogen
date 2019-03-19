@@ -14,10 +14,10 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "Character",
-        "masd.extraction.cpp.streaming.requires_quoting": true,
-        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true,
-        "masd.extraction.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
+        "masd.generation.cpp.helper.family": "Character",
+        "masd.generation.cpp.streaming.requires_quoting": true,
+        "masd.generation.cpp.aspect.requires_manual_default_constructor": true,
+        "masd.generation.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
       }
     },
     {
@@ -27,9 +27,9 @@
       ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "Number",
-        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true,
-        "masd.extraction.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
+        "masd.generation.cpp.helper.family": "Number",
+        "masd.generation.cpp.aspect.requires_manual_default_constructor": true,
+        "masd.generation.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
       }
     },
     {
@@ -39,9 +39,9 @@
       ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "Number",
-        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true,
-        "masd.extraction.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
+        "masd.generation.cpp.helper.family": "Number",
+        "masd.generation.cpp.aspect.requires_manual_default_constructor": true,
+        "masd.generation.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
       }
     },
     {
@@ -51,9 +51,9 @@
       ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "Number",
-        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true,
-        "masd.extraction.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
+        "masd.generation.cpp.helper.family": "Number",
+        "masd.generation.cpp.aspect.requires_manual_default_constructor": true,
+        "masd.generation.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
       }
     },
     {
@@ -63,10 +63,10 @@
       ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "Character",
-        "masd.extraction.cpp.streaming.requires_quoting": true,
-        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true,
-        "masd.extraction.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
+        "masd.generation.cpp.helper.family": "Character",
+        "masd.generation.cpp.streaming.requires_quoting": true,
+        "masd.generation.cpp.aspect.requires_manual_default_constructor": true,
+        "masd.generation.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
       }
     },
     {
@@ -76,9 +76,9 @@
       ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "Number",
-        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true,
-        "masd.extraction.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
+        "masd.generation.cpp.helper.family": "Number",
+        "masd.generation.cpp.aspect.requires_manual_default_constructor": true,
+        "masd.generation.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
       }
     },
     {
@@ -88,9 +88,9 @@
       ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "Number",
-        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true,
-        "masd.extraction.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
+        "masd.generation.cpp.helper.family": "Number",
+        "masd.generation.cpp.aspect.requires_manual_default_constructor": true,
+        "masd.generation.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
       }
     },
     {
@@ -100,196 +100,196 @@
       ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "Number",
-        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true,
-        "masd.extraction.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
+        "masd.generation.cpp.helper.family": "Number",
+        "masd.generation.cpp.aspect.requires_manual_default_constructor": true,
+        "masd.generation.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
       }
     },
     {
       "name": "string",
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "String",
-        "masd.extraction.cpp.streaming.remove_unprintable_characters": true,
-        "masd.extraction.cpp.types.class_header.primary_inclusion_directive": "<string>",
-        "masd.extraction.cpp.types.primitive_header.primary_inclusion_directive": "<string>",
-        "masd.extraction.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/string.hpp>",
-        "masd.extraction.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/serialization/string.hpp>",
-        "masd.extraction.cpp.io.class_header.primary_inclusion_directive": "<boost/algorithm/string.hpp>",
-        "masd.extraction.cpp.io.primitive_header.primary_inclusion_directive": "<boost/algorithm/string.hpp>",
-        "masd.extraction.cpp.test_data.class_header.primary_inclusion_directive": "<sstream>",
-        "masd.extraction.cpp.test_data.primitive_header.primary_inclusion_directive": "<sstream>"
+        "masd.generation.cpp.helper.family": "String",
+        "masd.generation.cpp.streaming.remove_unprintable_characters": true,
+        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<string>",
+        "masd.generation.cpp.types.primitive_header.primary_inclusion_directive": "<string>",
+        "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/string.hpp>",
+        "masd.generation.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/serialization/string.hpp>",
+        "masd.generation.cpp.io.class_header.primary_inclusion_directive": "<boost/algorithm/string.hpp>",
+        "masd.generation.cpp.io.primitive_header.primary_inclusion_directive": "<boost/algorithm/string.hpp>",
+        "masd.generation.cpp.test_data.class_header.primary_inclusion_directive": "<sstream>",
+        "masd.generation.cpp.test_data.primitive_header.primary_inclusion_directive": "<sstream>"
       }
     },
     {
       "name": "vector",
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "SequenceContainer",
+        "masd.generation.cpp.helper.family": "SequenceContainer",
         "masd.type_parameters.count": 1,
-        "masd.extraction.cpp.types.class_header.primary_inclusion_directive": "<vector>",
-        "masd.extraction.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/vector.hpp>"
+        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<vector>",
+        "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/vector.hpp>"
       }
     },
     {
       "name": "deque",
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "SequenceContainer",
+        "masd.generation.cpp.helper.family": "SequenceContainer",
         "masd.type_parameters.count": 1,
-        "masd.extraction.cpp.types.class_header.primary_inclusion_directive": "<deque>",
-        "masd.extraction.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/deque.hpp>"
+        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<deque>",
+        "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/deque.hpp>"
       }
     },
     {
       "name": "array",
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "SequenceContainer",
+        "masd.generation.cpp.helper.family": "SequenceContainer",
         "masd.type_parameters.count": 1,
-        "masd.extraction.cpp.types.class_header.primary_inclusion_directive": "<array>"
+        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<array>"
       }
     },
     {
       "name": "list",
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "SequenceContainer",
+        "masd.generation.cpp.helper.family": "SequenceContainer",
         "masd.type_parameters.count": 1,
-        "masd.extraction.cpp.types.class_header.primary_inclusion_directive": "<list>",
-        "masd.extraction.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/list.hpp>"
+        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<list>",
+        "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/list.hpp>"
       }
     },
     {
       "name": "forward_list",
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "SequenceContainer",
+        "masd.generation.cpp.helper.family": "SequenceContainer",
         "masd.type_parameters.count": 1,
-        "masd.extraction.cpp.types.class_header.primary_inclusion_directive": "<forward_list>"
+        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<forward_list>"
       }
     },
     {
       "name": "set",
       "is_associative_container": true,
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "AssociativeContainer",
+        "masd.generation.cpp.helper.family": "AssociativeContainer",
         "masd.type_parameters.count": 1,
-        "masd.extraction.cpp.types.class_header.primary_inclusion_directive": "<set>",
-        "masd.extraction.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/set.hpp>"
+        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<set>",
+        "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/set.hpp>"
       }
     },
     {
       "name": "multiset",
       "is_associative_container": true,
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "SequenceContainer",
+        "masd.generation.cpp.helper.family": "SequenceContainer",
         "masd.type_parameters.count": 1,
-        "masd.extraction.cpp.types.class_header.primary_inclusion_directive": "<multiset>",
-        "masd.extraction.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/multiset.hpp>"
+        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<multiset>",
+        "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/multiset.hpp>"
       }
     },
     {
       "name": "unordered_set",
       "is_associative_container": true,
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "AssociativeContainer",
+        "masd.generation.cpp.helper.family": "AssociativeContainer",
         "masd.type_parameters.count": 1,
-        "masd.extraction.cpp.types.class_header.primary_inclusion_directive": "<unordered_set>",
-        "masd.extraction.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/unordered_set.hpp>"
+        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<unordered_set>",
+        "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/unordered_set.hpp>"
       }
     },
     {
       "name": "map",
       "is_associative_container": true,
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "AssociativeContainer",
+        "masd.generation.cpp.helper.family": "AssociativeContainer",
         "masd.type_parameters.count": 2,
-        "masd.extraction.cpp.types.class_header.primary_inclusion_directive": "<map>",
-        "masd.extraction.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/map.hpp>"
+        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<map>",
+        "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/map.hpp>"
       }
     },
     {
       "name": "multimap",
       "is_associative_container": true,
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "AssociativeContainer",
+        "masd.generation.cpp.helper.family": "AssociativeContainer",
         "masd.type_parameters.count": 2,
-        "masd.extraction.cpp.types.class_header.primary_inclusion_directive": "<multimap>",
-        "masd.extraction.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/multimap.hpp>"
+        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<multimap>",
+        "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/multimap.hpp>"
       }
     },
     {
       "name": "unordered_map",
       "is_associative_container": true,
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "AssociativeContainer",
+        "masd.generation.cpp.helper.family": "AssociativeContainer",
         "masd.type_parameters.count": 2,
-        "masd.extraction.cpp.types.class_header.primary_inclusion_directive": "<unordered_map>",
-        "masd.extraction.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/unordered_map.hpp>"
+        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<unordered_map>",
+        "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/unordered_map.hpp>"
       }
     },
     {
       "name": "pair",
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "Pair",
+        "masd.generation.cpp.helper.family": "Pair",
         "masd.type_parameters.count": 2,
-        "masd.extraction.cpp.types.class_header.primary_inclusion_directive": "<utility>",
-        "masd.extraction.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/utility.hpp>"
+        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<utility>",
+        "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/utility.hpp>"
       }
     },
     {
       "name": "shared_ptr",
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "SmartPointer",
+        "masd.generation.cpp.helper.family": "SmartPointer",
         "masd.type_parameters.count": 1,
         "masd.type_parameters.always_in_heap": true,
-        "masd.extraction.cpp.types.class_header.primary_inclusion_directive": "<memory>"
+        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<memory>"
       }
     },
     {
       "name": "weak_ptr",
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "SmartPointer",
+        "masd.generation.cpp.helper.family": "SmartPointer",
         "masd.type_parameters.count": 1,
         "masd.type_parameters.always_in_heap": true,
-        "masd.extraction.cpp.types.class_header.primary_inclusion_directive": "<memory>"
+        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<memory>"
       }
     },
     {
       "name": "unique_ptr",
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "SmartPointer",
+        "masd.generation.cpp.helper.family": "SmartPointer",
         "masd.type_parameters.count": 1,
         "masd.type_parameters.always_in_heap": true,
-        "masd.extraction.cpp.types.class_header.primary_inclusion_directive": "<memory>"
+        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<memory>"
       }
     },
     {
       "name": "function",
       "tagged_values": {
-        "masd.extraction.cpp.types.class_header.primary_inclusion_directive": "<functional>"
+        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<functional>"
       }
     },
     {
       "name": "optional",
       "tagged_values": {
-        "masd.extraction.cpp.helper.family": "Optional",
+        "masd.generation.cpp.helper.family": "Optional",
         "masd.type_parameters.count": 1,
-        "masd.extraction.cpp.types.class_header.primary_inclusion_directive": "<functional>"
+        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<functional>"
       }
     },
     {
       "name": "ostream",
       "tagged_values": {
-        "masd.extraction.cpp.types.class_header.primary_inclusion_directive": "<ostream>"
+        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<ostream>"
       }
     },
     {
       "name": "ostringstream",
       "tagged_values": {
-        "masd.extraction.cpp.types.class_header.primary_inclusion_directive": "<sstream>"
+        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<sstream>"
       }
     },
     {
       "name": "type_index",
       "tagged_values": {
-        "masd.extraction.cpp.types.class_header.primary_inclusion_directive": "<typeindex>"
+        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<typeindex>"
       }
     }
   ]

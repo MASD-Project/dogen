@@ -2,12 +2,12 @@
   {
     "name": {
       "simple": "directory",
-      "qualified": "masd.extraction.cpp.tests.directory"
+      "qualified": "masd.generation.cpp.tests.directory"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.cpp",
-      "facet": "masd.extraction.cpp.tests"
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.tests"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -17,12 +17,12 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.cpp.tests.postfix"
+      "qualified": "masd.generation.cpp.tests.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.cpp",
-      "facet": "masd.extraction.cpp.tests"
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.tests"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -32,13 +32,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.cpp.tests.class_implementation.postfix"
+      "qualified": "masd.generation.cpp.tests.class_implementation.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.cpp",
-      "facet": "masd.extraction.cpp.tests",
-      "archetype": "masd.extraction.cpp.tests.class_implementation"
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.tests",
+      "archetype": "masd.generation.cpp.tests.class_implementation"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -48,13 +48,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.cpp.tests.enum_implementation.postfix"
+      "qualified": "masd.generation.cpp.tests.enum_implementation.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.cpp",
-      "facet": "masd.extraction.cpp.tests",
-      "archetype": "masd.extraction.cpp.tests.enum_implementation"
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.tests",
+      "archetype": "masd.generation.cpp.tests.enum_implementation"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -64,13 +64,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.cpp.tests.master_header.postfix"
+      "qualified": "masd.generation.cpp.tests.master_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.cpp",
-      "facet": "masd.extraction.cpp.tests",
-      "archetype": "masd.extraction.cpp.tests.master_header"
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.tests",
+      "archetype": "masd.generation.cpp.tests.master_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -80,13 +80,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.cpp.tests.main.postfix"
+      "qualified": "masd.generation.cpp.tests.main.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.cpp",
-      "facet": "masd.extraction.cpp.tests",
-      "archetype": "masd.extraction.cpp.tests.main"
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.tests",
+      "archetype": "masd.generation.cpp.tests.main"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -96,13 +96,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.cpp.tests.cmakelists.postfix"
+      "qualified": "masd.generation.cpp.tests.cmakelists.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.extraction.cpp",
-      "facet": "masd.extraction.cpp.tests",
-      "archetype": "masd.extraction.cpp.tests.cmakelists.postfix"
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.tests",
+      "archetype": "masd.generation.cpp.tests.cmakelists.postfix"
     },
     "value_type": "text",
     "template_kind": "instance",

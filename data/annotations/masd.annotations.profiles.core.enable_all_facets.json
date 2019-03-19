@@ -11,7 +11,7 @@
       },
       "archetype_location": {
         "kernel": "masd",
-        "backend": "masd.extraction.cpp"
+        "backend": "masd.generation.cpp"
       },
       "template_kind": "facet_template",
       "untyped_value": [

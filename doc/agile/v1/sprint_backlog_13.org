@@ -14,25 +14,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-19 Tue 15:04]
+#+CAPTION: Clock summary at [2019-03-19 Tue 15:25]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *58:33* |       |       | 100.0 |
+| *Total time*                                             | *58:52* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 58:33   |       |       | 100.0 |
-| Active                                                   |         | 58:33 |       | 100.0 |
+| Stories                                                  | 58:52   |       |       | 100.0 |
+| Active                                                   |         | 58:52 |       | 100.0 |
 | Edit release notes for previous sprint                   |         |       |  2:22 |   4.0 |
-| Sprint and product backlog grooming                      |         |       |  6:43 |  11.5 |
-| Create a video demo for the sprint's features            |         |       |  3:47 |   6.5 |
+| Sprint and product backlog grooming                      |         |       |  6:43 |  11.4 |
+| Create a video demo for the sprint's features            |         |       |  3:47 |   6.4 |
 | Make projects directory env optional                     |         |       |  0:10 |   0.3 |
 | Clang-cl builds are failing due to memory leak reporting |         |       |  0:45 |   1.3 |
 | Add tests for tracing, reporting and diffing             |         |       |  5:46 |   9.8 |
-| Delete extra files appears broken at present             |         |       |  6:26 |  11.0 |
-| Empty directories should be deleted                      |         |       |  5:37 |   9.6 |
+| Delete extra files appears broken at present             |         |       |  6:26 |  10.9 |
+| Empty directories should be deleted                      |         |       |  5:37 |   9.5 |
 | Changes to stitch templates are not reported correctly   |         |       |  1:09 |   2.0 |
-| Orchestration test is broken on Windows                  |         |       |  2:40 |   4.6 |
-| Code generation of tests for dogen models                |         |       | 23:08 |  39.5 |
+| Orchestration test is broken on Windows                  |         |       |  2:40 |   4.5 |
+| Code generation of tests for dogen models                |         |       | 23:08 |  39.3 |
+| Formatters have been incorrectly placed under extraction |         |       |  0:19 |   0.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -849,6 +850,37 @@ we do nothing.
 If a project has tests (see story above) we should automatically
 ignore the test regular expressions.
 
+*** STARTED Formatters have been incorrectly placed under extraction  :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-19 Tue 15:06]--[2019-03-19 Tue 15:25] =>  0:19
+    :END:
+
+When we did the big meta-data rename, we placed facets and formatters
+in the following in extraction:
+
+: masd.extraction.cpp.cmake.enabled
+
+However, this is not entirely correct: facet space is a property of
+generation; the formatters are model to text transformations in
+generation space that produce the extraction model. When you are
+enabling and disabling formatters, you are in the generation space. We
+need to update these keys.
+
+This highlights a more relevant point: we are exposing the internals
+of the pipeline to the end user at the meta-model / UML profile level;
+should we really mention which component of the pipeline owns the key?
+On the plus side, we are not expecting to have fields move again given
+that this is the "final" architecture.
+
+Notes:
+
+- update extraction_properties in coding model. In fact, move them to
+  the generation model.
+- update most of the extraction keys in JSON and all models. Actually
+  for now update all. We need to look at them more carefully in the
+  future.
+- enable_unique_file_names: are we using this?
+
 *** Disabling facet after regeneration does not delete file           :story:
 
 Steps to reproduce:
@@ -1108,25 +1140,6 @@ for library models.
 At present we are setting up the extraction model name from the simple
 name of the model. It should really be the qualified name. Hopefully
 this will only affect tracing and diffing.
-
-*** Formatters have been incorrectly placed under extraction          :story:
-
-When we did the big meta-data rename, we placed facets and formatters
-in the following in extraction:
-
-: masd.extraction.cpp.cmake.enabled
-
-However, this is not entirely correct: facet space is a property of
-generation; the formatters are model to text transformations in
-generation space that produce the extraction model. When you are
-enabling and disabling formatters, you are in the generation space. We
-need to update these keys.
-
-Notes:
-
-- update extraction_properties in coding model. In fact, move them to
-  the generation model.
-- update most of the extraction keys in JSON and all models.
 
 *** Handcrafted templates                                             :story:
 

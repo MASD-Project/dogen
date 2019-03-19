@@ -65,7 +65,7 @@
   {
     "name": {
       "simple": "cpp_headers_output_directory",
-      "qualified": "masd.extraction.cpp_headers_output_directory"
+      "qualified": "masd.generation.cpp_headers_output_directory"
     },
     "archetype_location": {
       "kernel": "masd"

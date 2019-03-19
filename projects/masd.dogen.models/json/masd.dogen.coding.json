@@ -16,11 +16,11 @@
     "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
     "masd.extraction.delete_extra_files": "true",
     "masd.extraction.delete_empty_directories": "true",
-    "masd.extraction.cpp.enabled": "true",
-    "masd.extraction.cpp.standard": "c++-17",
-    "masd.extraction.cpp.msbuild.enabled": "false",
-    "masd.extraction.cpp.visual_studio.project.enabled": "false",
-    "masd.extraction.cpp.visual_studio.solution.enabled": "false",
+    "masd.generation.cpp.enabled": "true",
+    "masd.generation.cpp.standard": "c++-17",
+    "masd.generation.cpp.msbuild.enabled": "false",
+    "masd.generation.cpp.visual_studio.project.enabled": "false",
+    "masd.generation.cpp.visual_studio.solution.enabled": "false",
     "masd.extraction.csharp.enabled": "false",
     "masd.annotations.profile": "dogen.disable_common_facets"
   },
@@ -452,7 +452,7 @@
       "name": "meta_model::name",
       "documentation": "Name of an element in coding space.\n\nA name represents a point in coding space, and this point can only be\nused by one coding element. Names can be uniquely identified by their\nqualified ID.\n\nName has the following properties: a) two different points in element space\ncannot have the same name and b) the same point in element space can only\nhave one and only one name.\n\nNames are required in addition to just using the qualfied ID representation\nbecause we use them to infer all sorts of properties for an element (namespaces,\nnaming files, etc).\n",
       "tagged_values": {
-        "masd.extraction.cpp.hash.enabled": "true"
+        "masd.generation.cpp.hash.enabled": "true"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -552,7 +552,7 @@
       "name": "meta_model::location",
       "documentation": "Identifies a hierarchy of containment within the coding space.\n\nElements exist at unique points within the coding space called @e\naddresses.  However, certain elements have the ability to contain\nother elements, creating in effect new dimensions in coding space. The\nlocation class keeps track of these dimensions. Note that the\nattributes of this class are hierarchical, i.e.  external modules\ncontain model modules and so forth. These attributes are best thought\nof as a single linked list, where segments of that linked list have\ndifferent meaning. However, because we care about these meanings, we\nimplemented the type with a number of linked lists, one per meaning.\n\nA location is not necessarily connected to modules, although these are\nthe main model elements that provide containment. For example, inner\nclasses are contained within classes; in coding terms it means a\nlocation should also have an \"object\" attribute to represent this\nrelationship.\n\nAlso, note that the location class itself encodes the address of the\nelement that owns that location; returning to the linked list idea,\nthe tail of the linked list is the name of the element, and the\nremaining linked list provides the location of the element.\n",
       "tagged_values": {
-        "masd.extraction.cpp.hash.enabled": "true"
+        "masd.generation.cpp.hash.enabled": "true"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -865,7 +865,7 @@
         "masd::enumeration"
       ],
       "tagged_values": {
-        "masd.extraction.cpp.hash.enabled": "true"
+        "masd.generation.cpp.hash.enabled": "true"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -923,7 +923,7 @@
         "masd::enumeration"
       ],
       "tagged_values": {
-        "masd.extraction.cpp.hash.enabled": "true"
+        "masd.generation.cpp.hash.enabled": "true"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1145,7 +1145,7 @@
         "masd::handcrafted"
       ],
       "tagged_values": {
-        "masd.extraction.cpp.types.forward_declarations.enabled": "true"
+        "masd.generation.cpp.types.forward_declarations.enabled": "true"
       },
       "fallback_element_type": "masd::object",
       "attributes": [

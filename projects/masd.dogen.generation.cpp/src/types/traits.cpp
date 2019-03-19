@@ -28,7 +28,7 @@ std::string traits::kernel() {
 }
 
 std::string traits::backend() {
-    static std::string r("masd.extraction.cpp");
+    static std::string r("masd.generation.cpp");
     return r;
 }
 
@@ -133,98 +133,98 @@ std::string traits::cpp::formatting_input() {
 }
 
 std::string traits::cpp::inclusion_required() {
-    static std::string r("masd.extraction.cpp.inclusion_required");
+    static std::string r("masd.generation.cpp.inclusion_required");
     return r;
 }
 
 std::string traits::cpp::header_file_extension() {
-    static std::string r("masd.extraction.cpp.header_file_extension");
+    static std::string r("masd.generation.cpp.header_file_extension");
     return r;
 }
 
 std::string traits::cpp::implementation_file_extension() {
-    static std::string r("masd.extraction.cpp.implementation_file_extension");
+    static std::string r("masd.generation.cpp.implementation_file_extension");
     return r;
 }
 
 std::string traits::cpp::include_directory_name() {
-    static std::string r("masd.extraction.cpp.include_directory_name");
+    static std::string r("masd.generation.cpp.include_directory_name");
     return r;
 }
 
 std::string traits::cpp::source_directory_name() {
-    static std::string r("masd.extraction.cpp.source_directory_name");
+    static std::string r("masd.generation.cpp.source_directory_name");
     return r;
 }
 
 std::string traits::cpp::tests_directory_name() {
-    static std::string r("masd.extraction.cpp.tests_directory_name");
+    static std::string r("masd.generation.cpp.tests_directory_name");
     return r;
 }
 
 std::string traits::cpp::backend_directory_name() {
-    static std::string r("masd.extraction.cpp.directory");
+    static std::string r("masd.generation.cpp.directory");
     return r;
 }
 
 std::string traits::cpp::disable_facet_directories() {
-    static std::string r("masd.extraction.cpp.disable_facet_directories");
+    static std::string r("masd.generation.cpp.disable_facet_directories");
     return r;
 }
 
 std::string traits::cpp::standard() {
-    static std::string r("masd.extraction.cpp.standard");
+    static std::string r("masd.generation.cpp.standard");
     return r;
 }
 
 std::string traits::cpp::helper::family() {
-    static std::string r("masd.extraction.cpp.helper.family");
+    static std::string r("masd.generation.cpp.helper.family");
     return r;
 }
 
 std::string traits::cpp::streaming::string_conversion_method() {
-    static std::string r("masd.extraction.cpp.streaming.string_conversion_method");
+    static std::string r("masd.generation.cpp.streaming.string_conversion_method");
     return r;
 }
 
 std::string traits::cpp::streaming::requires_quoting() {
-    static std::string r("masd.extraction.cpp.streaming.requires_quoting");
+    static std::string r("masd.generation.cpp.streaming.requires_quoting");
     return r;
 }
 
 std::string traits::cpp::streaming::remove_unprintable_characters() {
-    static std::string r("masd.extraction.cpp.streaming.remove_unprintable_characters");
+    static std::string r("masd.generation.cpp.streaming.remove_unprintable_characters");
     return r;
 }
 
 std::string traits::cpp::streaming::requires_dereferencing() {
-    static std::string r("masd.extraction.cpp.streaming.requires_dereferencing");
+    static std::string r("masd.generation.cpp.streaming.requires_dereferencing");
     return r;
 }
 
 std::string traits::cpp::aspect::disable_complete_constructor() {
-    static std::string r("masd.extraction.cpp.aspect.disable_complete_constructor");
+    static std::string r("masd.generation.cpp.aspect.disable_complete_constructor");
     return r;
 }
 
 std::string traits::cpp::aspect::disable_xml_serialization() {
-    static std::string r("masd.extraction.cpp.aspect.disable_xml_serialization");
+    static std::string r("masd.generation.cpp.aspect.disable_xml_serialization");
     return r;
 }
 
 std::string traits::cpp::aspect::requires_manual_default_constructor() {
     static std::string r(
-        "masd.extraction.cpp.aspect.requires_manual_default_constructor");
+        "masd.generation.cpp.aspect.requires_manual_default_constructor");
     return r;
 }
 
 std::string traits::cpp::aspect::requires_manual_move_constructor() {
-    static std::string r("masd.extraction.cpp.aspect.requires_manual_move_constructor");
+    static std::string r("masd.generation.cpp.aspect.requires_manual_move_constructor");
     return r;
 }
 
 std::string traits::cpp::aspect::requires_stream_manipulators() {
-    static std::string r("masd.extraction.cpp.aspect.requires_stream_manipulators");
+    static std::string r("masd.generation.cpp.aspect.requires_stream_manipulators");
     return r;
 }
 
