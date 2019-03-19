@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.generation.cpp/types/formatters/tests/source_cmakelists_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/tests/class_implementation_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/tests/cmakelists_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/tests/main_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/tests/initializer.hpp"
 
 namespace masd::dogen::generation::cpp::formatters::tests {
 
 void initializer::initialize(registrar& rg) {
-    register_formatter<source_cmakelists_formatter>(rg);
+    register_formatter<cmakelists_formatter>(rg);
     register_formatter<class_implementation_formatter>(rg);
     register_formatter<main_formatter>(rg);
 }

@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.generation.cpp/types/formatters/tests/source_cmakelists_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/tests/cmakelists_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/formatting_error.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/tests/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/assistant.hpp"
@@ -34,43 +34,43 @@
 
 namespace masd::dogen::generation::cpp::formatters::tests {
 
-std::string source_cmakelists_formatter::static_id() {
-    return tests::traits::source_cmakelists_archetype();
+std::string cmakelists_formatter::static_id() {
+    return tests::traits::cmakelists_archetype();
 }
 
-std::string source_cmakelists_formatter::id() const {
+std::string cmakelists_formatter::id() const {
     return static_id();
 }
 
-annotations::archetype_location source_cmakelists_formatter::
+annotations::archetype_location cmakelists_formatter::
 archetype_location() const {
     static annotations::archetype_location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(),
-          source_cmakelists_formatter::static_id());
+          cmakelists_formatter::static_id());
     return r;
 }
 
-const coding::meta_model::name& source_cmakelists_formatter::meta_name() const {
+const coding::meta_model::name& cmakelists_formatter::meta_name() const {
     static auto r(fabric::meta_name_factory::make_cmakelists_name());
     return r;
 }
 
-std::string source_cmakelists_formatter::family() const {
+std::string cmakelists_formatter::family() const {
     return cpp::traits::cmake_family();
 }
 
-inclusion_support_types source_cmakelists_formatter::
+inclusion_support_types cmakelists_formatter::
 inclusion_support_type() const {
     return inclusion_support_types::not_supported;
 }
 
-boost::filesystem::path source_cmakelists_formatter::inclusion_path(
+boost::filesystem::path cmakelists_formatter::inclusion_path(
     const formattables::locator& /*l*/, const coding::meta_model::name& n) const {
 
     using namespace masd::dogen::utility::log;
     using namespace masd::dogen::generation::cpp::formatters;
-    static logger lg(logger_factory(source_cmakelists_formatter::static_id()));
+    static logger lg(logger_factory(cmakelists_formatter::static_id()));
 
     static const std::string not_supported("Inclusion path is not supported: ");
 
@@ -78,19 +78,19 @@ boost::filesystem::path source_cmakelists_formatter::inclusion_path(
     BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
 }
 
-boost::filesystem::path source_cmakelists_formatter::full_path(
+boost::filesystem::path cmakelists_formatter::full_path(
     const formattables::locator& l, const coding::meta_model::name& n) const {
     return l.make_full_path_for_tests_cmakelists(n, static_id());
 }
 
-std::list<std::string> source_cmakelists_formatter::inclusion_dependencies(
+std::list<std::string> cmakelists_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
     const coding::meta_model::element& /*e*/) const {
     static std::list<std::string> r;
     return r;
 }
 
-extraction::meta_model::artefact source_cmakelists_formatter::
+extraction::meta_model::artefact cmakelists_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& c(a.as<fabric::cmakelists>(e));

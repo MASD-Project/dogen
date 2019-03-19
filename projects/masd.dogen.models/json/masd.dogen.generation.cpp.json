@@ -2049,7 +2049,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::tests::source_cmakelists_formatter",
+      "name": "formatters::tests::cmakelists_formatter",
       "stereotypes": [
         "masd::cpp_artefact_formatter"
       ],

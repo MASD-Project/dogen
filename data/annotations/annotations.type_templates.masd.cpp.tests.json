@@ -96,13 +96,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.extraction.cpp.tests.source_cmakelists.postfix"
+      "qualified": "masd.extraction.cpp.tests.cmakelists.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
       "backend": "masd.extraction.cpp",
       "facet": "masd.extraction.cpp.tests",
-      "archetype": "masd.extraction.cpp.tests.source_cmakelists.postfix"
+      "archetype": "masd.extraction.cpp.tests.cmakelists.postfix"
     },
     "value_type": "text",
     "template_kind": "instance",

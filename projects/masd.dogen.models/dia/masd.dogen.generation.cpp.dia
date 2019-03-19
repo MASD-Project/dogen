@@ -34703,7 +34703,7 @@ an "odd" formatter.#</dia:string>
         <dia:point val="361.858,74.0833"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="361.108,64.4333;372.48,74.8833"/>
+        <dia:rectangle val="361.108,64.4333;372.481,74.8833"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -34711,8 +34711,8 @@ an "odd" formatter.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="361.858,74.0833"/>
         <dia:point val="361.858,68.9333"/>
-        <dia:point val="372.28,68.9333"/>
-        <dia:point val="372.28,64.4833"/>
+        <dia:point val="372.281,68.9333"/>
+        <dia:point val="372.281,64.4833"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -37808,7 +37808,7 @@ code.
         <dia:point val="325.198,75.1833"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="324.448,63.6333;356.983,76.7833"/>
+        <dia:rectangle val="324.448,63.6333;356.983,75.9833"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -37878,7 +37878,7 @@ code.
         <dia:point val="356.783,60.0833"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="356.033,54.2333;359.864,61.6833"/>
+        <dia:rectangle val="356.033,54.2333;359.864,60.8833"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -38025,19 +38025,19 @@ code.
         <dia:point val="6,323"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="5.95,322.95;19.5075,326.05"/>
+        <dia:rectangle val="5.95,322.95;18.87,326.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="6,323"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.4575"/>
+        <dia:real val="12.82"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#source_cmakelists_formatter#</dia:string>
+        <dia:string>#cmakelists_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::cpp_artefact_formatter#</dia:string>

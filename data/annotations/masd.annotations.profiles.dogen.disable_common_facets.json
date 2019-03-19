@@ -92,7 +92,7 @@
     {
       "name": {
         "simple": "enabled",
-        "qualified": "masd.extraction.cpp.tests.source_cmakelists.enabled"
+        "qualified": "masd.extraction.cpp.tests.cmakelists.enabled"
       },
       "archetype_location": {
         "kernel": "masd",
