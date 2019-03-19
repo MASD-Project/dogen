@@ -2054,6 +2054,13 @@
         "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::tests::enum_implementation_formatter",
+      "stereotypes": [
+        "masd::cpp_artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

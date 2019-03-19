@@ -219,6 +219,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/hash/class_implementation_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/serialization/enum_header_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/test_data/sequence_container_helper.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/tests/enum_implementation_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/directive_group_repository_factory.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/serialization/class_header_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/test_data/primitive_header_formatter.hpp"
