@@ -30,7 +30,6 @@
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen/types/tracing_level.hpp"
 #include "masd.dogen/types/tracing_format.hpp"
-#include "masd.dogen/serialization/tracing_configuration_fwd_ser.hpp"
 
 namespace masd::dogen {
 
@@ -56,13 +55,6 @@ public:
         const std::string& logging_impact,
         const bool use_short_names,
         const boost::filesystem::path& output_directory);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const masd::dogen::tracing_configuration& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, masd::dogen::tracing_configuration& v, unsigned int version);
 
 public:
     /**

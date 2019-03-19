@@ -31,7 +31,6 @@
 #include "masd.dogen/types/diffing_configuration.hpp"
 #include "masd.dogen/types/tracing_configuration.hpp"
 #include "masd.dogen/types/reporting_configuration.hpp"
-#include "masd.dogen/serialization/configuration_fwd_ser.hpp"
 #include "masd.dogen/types/model_processing_configuration.hpp"
 
 namespace masd::dogen {
@@ -52,13 +51,6 @@ public:
         const boost::optional<masd::dogen::diffing_configuration>& diffing,
         const boost::optional<masd::dogen::reporting_configuration>& reporting,
         const boost::filesystem::path& byproduct_directory);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const masd::dogen::configuration& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, masd::dogen::configuration& v, unsigned int version);
 
 public:
     const masd::dogen::model_processing_configuration& model_processing() const;

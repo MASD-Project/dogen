@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include "masd.dogen/serialization/model_processing_configuration_fwd_ser.hpp"
 
 namespace masd::dogen {
 
@@ -46,13 +45,6 @@ public:
     model_processing_configuration(
         const bool compatibility_mode_enabled,
         const bool dry_run_mode_enabled);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const masd::dogen::model_processing_configuration& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, masd::dogen::model_processing_configuration& v, unsigned int version);
 
 public:
     /**
