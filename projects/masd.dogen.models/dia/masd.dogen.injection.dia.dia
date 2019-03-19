@@ -2502,11 +2502,7 @@ For details on the stereotypes see the MASD UML profile.
 #DOGEN masd.extraction.cpp.visual_studio.project.enabled=false
 #DOGEN masd.extraction.cpp.visual_studio.solution.enabled=false
 #DOGEN masd.extraction.csharp.enabled=false
-#DOGEN masd.annotations.profile=dogen.disable_common_facets
-#DOGEN masd.extraction.cpp.tests.enabled=true
-#DOGEN masd.extraction.cpp.test_data.enabled=true
-#DOGEN masd.extraction.cpp.tests.main.enabled=false
-#DOGEN masd.extraction.cpp.tests.source_cmakelists.enabled=false#</dia:string>
+#DOGEN masd.annotations.profile=dogen.disable_common_facets#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
