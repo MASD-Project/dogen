@@ -57,7 +57,7 @@ enum_implementation_formatter::archetype_location() const {
 
 const coding::meta_model::name& enum_implementation_formatter::meta_name() const {
     using coding::helpers::meta_name_factory;
-    static auto r(meta_name_factory::make_object_name());
+    static auto r(meta_name_factory::make_enumeration_name());
     return r;
 }
 
@@ -125,7 +125,7 @@ std::list<std::string> enum_implementation_formatter::inclusion_dependencies(
     }
 
     using hash = formatters::hash::traits;
-    const auto hash_arch(hash::class_header_archetype());
+    const auto hash_arch(hash::enum_header_archetype());
     const bool hash_enabled(builder.is_enabled(e.name(), hash_arch));
     if (hash_enabled)
         builder.add(e.name(), hash_arch);
@@ -242,7 +242,7 @@ a.stream() << std::endl;
                  /*
                   * hash tests.
                   */
-a.stream() << "BOOST_AUTO_TEST_CASE(equal_objects_generate_the_same_hash) {" << std::endl;
+a.stream() << "BOOST_AUTO_TEST_CASE(equal_enums_generate_the_same_hash) {" << std::endl;
 a.stream() << "    " << qn << "_generator g;" << std::endl;
 a.stream() << "    g();" << std::endl;
 a.stream() << "    const auto a(g());" << std::endl;
@@ -252,7 +252,7 @@ a.stream() << "    std::hash<" << qn << "> hasher;" << std::endl;
 a.stream() << "    BOOST_CHECK(hasher(a) == hasher(b));" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
-a.stream() << "BOOST_AUTO_TEST_CASE(different_objects_generate_different_hashes) {" << std::endl;
+a.stream() << "BOOST_AUTO_TEST_CASE(different_enums_generate_different_hashes) {" << std::endl;
 a.stream() << "    " << qn << "_generator g;" << std::endl;
 a.stream() << "    g();" << std::endl;
 a.stream() << "    const auto a(g());" << std::endl;
