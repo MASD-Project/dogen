@@ -14,25 +14,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-18 Mon 19:00]
+#+CAPTION: Clock summary at [2019-03-19 Tue 07:01]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *51:42* |       |       | 100.0 |
+| *Total time*                                             | *52:41* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 51:42   |       |       | 100.0 |
-| Active                                                   |         | 51:42 |       | 100.0 |
-| Edit release notes for previous sprint                   |         |       |  2:22 |   4.6 |
-| Sprint and product backlog grooming                      |         |       |  5:21 |  10.3 |
-| Create a video demo for the sprint's features            |         |       |  3:47 |   7.3 |
+| Stories                                                  | 52:41   |       |       | 100.0 |
+| Active                                                   |         | 52:41 |       | 100.0 |
+| Edit release notes for previous sprint                   |         |       |  2:22 |   4.5 |
+| Sprint and product backlog grooming                      |         |       |  6:20 |  12.0 |
+| Create a video demo for the sprint's features            |         |       |  3:47 |   7.2 |
 | Make projects directory env optional                     |         |       |  0:10 |   0.3 |
-| Clang-cl builds are failing due to memory leak reporting |         |       |  0:45 |   1.5 |
-| Add tests for tracing, reporting and diffing             |         |       |  5:46 |  11.2 |
-| Delete extra files appears broken at present             |         |       |  6:26 |  12.4 |
-| Empty directories should be deleted                      |         |       |  5:37 |  10.9 |
+| Clang-cl builds are failing due to memory leak reporting |         |       |  0:45 |   1.4 |
+| Add tests for tracing, reporting and diffing             |         |       |  5:46 |  10.9 |
+| Delete extra files appears broken at present             |         |       |  6:26 |  12.2 |
+| Empty directories should be deleted                      |         |       |  5:37 |  10.7 |
 | Changes to stitch templates are not reported correctly   |         |       |  1:09 |   2.2 |
-| Orchestration test is broken on Windows                  |         |       |  2:40 |   5.2 |
-| Code generation of tests for dogen models                |         |       | 17:39 |  34.1 |
+| Orchestration test is broken on Windows                  |         |       |  2:40 |   5.1 |
+| Code generation of tests for dogen models                |         |       | 17:39 |  33.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -231,6 +231,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-03-19 Tue 06:02]--[2019-03-19 Tue 07:01] =>  0:59
     CLOCK: [2019-03-18 Mon 10:36]--[2019-03-18 Mon 10:44] =>  0:08
     CLOCK: [2019-03-16 Sat 21:12]--[2019-03-16 Sat 21:30] =>  0:18
     CLOCK: [2019-03-16 Sat 20:48]--[2019-03-16 Sat 21:02] =>  0:14
@@ -2527,3 +2528,11 @@ We should not tackle this task until we have support for a few
 languages other than C++ because we may be hacking things for C++
 which wont work for those languages. It will be much harder to change
 the code once we have a graph + pipeline.
+*** CANCELLED Consider generating the diagram targets from files in directory :story:
+    CLOSED: [2019-03-19 Tue 06:26]
+
+*Rationale*: superseded by projects.
+
+Once references are supplied as meta-data, we could conceivably create
+a loop in CMake to generates all of the knitting targets based on the
+contents of the diagrams directory.
