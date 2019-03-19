@@ -82,6 +82,9 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     builder.add(ic::std::string());
     builder.add(ic::boost::test::unit_test());
 
+    if (o.is_parent())
+        builder.add(ic::boost::shared_ptr());
+
     const auto io_arch(io::traits::class_header_archetype());
     const bool io_enabled(builder.is_enabled(o.name(), io_arch));
     if (io_enabled) {
@@ -97,12 +100,14 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     if (ser_enabled) {
         builder.add(o.name(), ser_arch);
 
-        // FIXME: hack for registrar
-        coding::helpers::name_factory nf;
-        auto n(o.name());
-        n.location().internal_modules().clear();
-        const auto rn(nf.build_element_in_model(n, "registrar"));
-        builder.add(rn, ser::registrar_header_archetype());
+        if (o.is_parent()) {
+            // FIXME: hack for registrar
+            coding::helpers::name_factory nf;
+            auto n(o.name());
+            n.location().internal_modules().clear();
+            const auto rn(nf.build_element_in_model(n, "registrar"));
+            builder.add(rn, ser::registrar_header_archetype());
+        }
 
         builder.add(ic::boost::archive::text_iarchive());
         builder.add(ic::boost::archive::text_oarchive());
@@ -154,8 +159,10 @@ BOOST_AUTO_TEST_CASE(fake_test) {
 <#+
         } else {
             /*
-             * Types tests.
+             * Types tests. These cannot be performed to parents as
+             * they are abstract.
              */
+            if (!o.is_parent()) {
 #>
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     <#= qn #>_generator g;
@@ -254,12 +261,27 @@ BOOST_AUTO_TEST_CASE(swapping_objects_results_in_the_expected_state) {
 }
 
 <#+
+            }
+
             if (a.is_io_enabled()) {
                 /*
                  * IO tests.
                  */
 #>
 BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
+<#+
+                if (o.is_parent()) {
+#>
+    <#= qn #>_generator g;
+    const boost::shared_ptr<<#= qn #> a(g.create_ptr(1));
+    std::stringstream s;
+    s << *a;
+
+    boost::property_tree::ptree pt;
+    BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+<#+
+                } else {
+#>
     <#= qn #>_generator g;
     const auto a(g());
     std::stringstream s;
@@ -267,6 +289,9 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+<#+
+                }
+#>
 }
 
 <#+
@@ -291,7 +316,6 @@ BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {
     std::ostringstream os;
     {
         xml_oarchive oa(os);
-        <#= registrar_qn #><xml_oarchive>(oa);
         oa << BOOST_SERIALIZATION_NVP(a);
     }
 
@@ -299,9 +323,9 @@ BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {
     std::istringstream is(os.str());
     {
         xml_iarchive ia(is);
-        <#= registrar_qn #><xml_iarchive>(ia);
         ia >> BOOST_SERIALIZATION_NVP(b);
     }
+
     BOOST_CHECK(a == b);
 }
 
@@ -312,18 +336,17 @@ BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {
     using namespace boost::archive;
     std::ostringstream os;
     {
-        xml_oarchive oa(os);
-        <#= registrar_qn #><xml_oarchive>(oa);
-        oa << BOOST_SERIALIZATION_NVP(a);
+        text_oarchive oa(os);
+        oa << a;
     }
 
     <#= qn #> b = <#= qn #>();
     std::istringstream is(os.str());
     {
-        xml_iarchive ia(is);
-        <#= registrar_qn #><xml_iarchive>(ia);
-        ia >> BOOST_SERIALIZATION_NVP(b);
+        text_iarchive ia(is);
+        ia >> b;
     }
+
     BOOST_CHECK(a == b);
 }
 
@@ -335,7 +358,6 @@ BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {
     std::ostringstream os;
     {
         text_oarchive oa(os);
-        <#= registrar_qn #><text_oarchive>(oa);
         oa << a;
     }
 
@@ -343,19 +365,19 @@ BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {
     std::istringstream is(os.str());
     {
         text_iarchive ia(is);
-        <#= registrar_qn #><text_iarchive>(ia);
         ia >> b;
     }
+
     BOOST_CHECK(a == b);
 }
 
 <#+
             }
 
-             if (a.is_hash_enabled()) {
-                 /*
-                  * hash tests.
-                  */
+            if (a.is_hash_enabled() && !o.is_parent()) {
+                /*
+                 * hash tests.
+                 */
 #>
 BOOST_AUTO_TEST_CASE(equal_objects_generate_the_same_hash) {
     <#= qn #>_generator g;

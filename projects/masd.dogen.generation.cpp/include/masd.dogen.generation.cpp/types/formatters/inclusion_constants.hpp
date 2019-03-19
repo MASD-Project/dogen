@@ -47,6 +47,8 @@ struct inclusion_constants {
     };
 
     struct boost {
+        static ::std::string shared_ptr();
+
         struct property_tree {
             static ::std::string ptree();
             static ::std::string json_parser();

@@ -62,6 +62,11 @@ std::string inclusion_constants::std::stdexcept() {
     return r;
 }
 
+std::string inclusion_constants::boost::shared_ptr() {
+    static ::std::string r("<boost/shared_ptr.hpp>");
+    return r;
+}
+
 std::string inclusion_constants::boost::property_tree::ptree() {
     static ::std::string r("<boost/property_tree/ptree.hpp>");
     return r;
