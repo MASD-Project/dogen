@@ -69,6 +69,18 @@ std::ostream& operator<<(std::ostream& s, const static_stereotypes& v) {
     case static_stereotypes::orm_value:
         attr = "\"orm_value\"";
         break;
+    case static_stereotypes::modeline_group:
+        attr = "\"modeline_group\"";
+        break;
+    case static_stereotypes::modeline:
+        attr = "\"modeline\"";
+        break;
+    case static_stereotypes::generation_marker:
+        attr = "\"generation_marker\"";
+        break;
+    case static_stereotypes::licence:
+        attr = "\"licence\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for static_stereotypes");
     }

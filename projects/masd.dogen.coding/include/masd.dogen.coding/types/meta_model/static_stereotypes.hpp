@@ -43,7 +43,11 @@ enum class static_stereotypes : unsigned int {
     fluent = 9,
     immutable = 10,
     orm_object = 11,
-    orm_value = 12
+    orm_value = 12,
+    modeline_group = 13,
+    modeline = 14,
+    generation_marker = 15,
+    licence = 16
 };
 
 }
