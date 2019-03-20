@@ -7,10 +7,64 @@
 
 This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/product-backlog][product backlog]] for Dogen.
 
-** Bad bugs and key limitations
+** Bugs and limitations
 
 Things we should address as soon as possible because they impact dogen
 usage. Urgent things that are going to annoy users.
+
+*** Exception classes should allow inheritance                        :story:
+
+#+begin_quote
+*Story*: As a dogen user, I need to generate object graphs for my
+exception classes so that I can model my domain better.
+#+end_quote
+
+We need to have a form of inheriting from a base exception for a given
+model. We also need to be able to inherit from other exceptions in a
+model. At present exceptions are not objects so the dependency graph
+support is not there.
+
+When we do this we need to split relatable into "associatable" and
+"generalisable" and get exceptions to model generalisable.
+
+*** Returning optional of base class results in invalid code          :story:
+
+When defining a model with a type with a field of =boost::optional<x>=
+where =x= is an abstract base class, we get compilation errors in test
+data. The problem appears to be that our test data factories try to
+instantiate =x= rather than go through the abstract base class
+machinery. We need to build a test model for this and fix the code.
+
+We should also question if this is a valid scenario - if not we must
+add it to the validation rules.
+
+*** Investigate current support for =std::set= and =std::map=         :story:
+
+It seems that we do not support sets and maps at present. When we
+tried to use a set, we got errors in the guts of test data generation:
+
+: /usr/bin/../lib/gcc/x86_64-linux-gnu/4.9/../../../../include/c++/4.9/bits/stl_function.h:371:20: error: invalid operands to binary expression ('const dogen::sml::qname' and 'const dogen::sml::qname')
+:       { return __x < __y; }
+
+This could be a bug (e.g. we are placing the =operator<= in the wrong
+place etc). Or it could be that we just never needed ordered maps and
+sets so we never added proper support.
+
+*** Format doubles, floats and bools properly                         :story:
+
+At present we are using IO state savers but not actually setting the
+formatting on the stream depending on the built-in type.
+
+Ideally we should pass in some dynamic extensions to determine the
+formatting. We should also consider using =boost::format= for this.
+
+*** Private properties should be ignored                              :story:
+
+At present we treat private properties as if they were public; we
+should ignore them. We need to go through all the models and change
+the private ones to public before we do this.
+
+We should also log a warning.
 
 *** Identifiable needs to use camel case in C#                        :story:
 
@@ -633,6 +687,25 @@ multiple times. We should error.
 
 Things we are not testing at present but should, validation that could
 provide helpful errors to end users but is not being performed yet.
+
+*** Ensure an error info tag is not set already before we set it      :story:
+
+Now that we will start making use of error info tags in anger, one
+problem we have spotted is that some times we reset the same tag:
+i.e. when an exception has been thrown, we do not want to set the same
+tag multiple times because it overwrites it. There should be a way to
+either allow multiple bits of information to be associated with the
+same tag, or a way to check if the tag has been already set. But if it
+is, what then? We can't throw.
+
+*** Add more validation to stitch                                     :story:
+
+Missing validation:
+
+- check that directive an has end marker.
+- start control block marker inside of an inline control block.
+- profile cannot have the same type instantiated more than once.
+- type definition cannot define the same type more than once.
 
 *** Tests for error conditions in libxml                              :story:
 
@@ -3463,6 +3536,21 @@ well.
 
 Merged stories:
 
+*Generalise persister and remove serialisation helpers*
+
+With the move of the knit persister into each model, it became obvious
+that users need a way to hydrate and dehydrate certain types by just
+supplying a path. The ideal setup would be where each supported
+serialisation mechanism registers a number of extensions with an
+hydrator / dehydrator and the user can supply a path; the path gets
+dispatched to the correct serialisation. In this world we wouldn't
+need the XML serialisation helper (in utilities) because we would code
+generate a complete serialisation solution. This only works for files
+(and not for streams) because we infer the format from the
+extension. Having said that, if there was a way to supply an enum or
+such-like with the stream, we could create a class for streams and
+then implement the file one as an adaptor to the stream class.
+
 *Persisters only support XML*
 
 Persister should support all archive types. At present it always
@@ -5764,6 +5852,197 @@ could be replaced with =has_swap=, or perhaps even =has_public_swap= /
 At the moment we use extensions such as =xmlyarn=. It should really be
 =.xml.yarn= or something of the kind.
 
+
+** Technical debt, improvements
+
+Ideas to improve the code base.
+
+*** Investigate the integration of =boost::log= with throw exception  :story:
+
+At present we write a lot of code like this:
+
+: BOOST_LOG_SEV(lg, error) << object_not_found << qn;
+: BOOST_THROW_EXCEPTION(indexing_error(object_not_found +
+:     boost::lexical_cast<std::string>(qn)));
+
+This is to ensure we log the fact that an exception occurred to make
+debugging problems easier. However, it leads to a lot of duplicated
+code. We need to figure out a way of simplifying this, most likely
+through a macro.
+
+Actually an even easier way would be to generate IO for exceptions; we
+could simply create the exception, populate all data values, dump it
+to the log file and then throw the exception.
+
+We can then create a helper in utility to throw exceptions that
+performs both the throwing and the logging. It could be a function
+that assumes lg to be in the global namespace, as that is how we
+normally use it. We just need to populate the exception up front.
+
+*** Consider computing hashes only once for immutable types           :story:
+
+if a type is immutable the hash should be computed once at
+construction and then cached. Not quite sure how this would be
+implemented though since we have hashing as a totally separate aspect
+from types.
+
+*** Change stitch's standard control block start marker to match t4   :story:
+
+For some reason we used =<#+= as the start marker for standard control
+blocks; t4 uses =<#=. We should use the same as t4. One disadvantage
+of t4's choice is that we now need to ensure we are not in the
+presence of a expression block. We could check for expression blocks
+first and if not, then check for standard control blocks.
+
+*** Improve stitch's processing of inline statements                  :story:
+
+At present we have very different handling for the different kinds of
+inline statements:
+
+- directives
+- expression blocks
+- standard control blocks
+
+However, they follow the same pattern and could be implemented with
+largely the same algorithm:
+
+Generic processing of an inline statement:
+
+- check start and end markers: =validate_start_and_end_markers=.
+- strip start and end markers: =strip_start_and_end_markers=.
+- check for any marker, if present error: has_markers=.
+- if directive, check for kvp form.
+
+There is no need for looping etc.
+
+*** Consider moving =add_model_module= to flags                       :story:
+
+When we implemented support for =add_model_module= in yarn mock factory
+we added the flag to all relevant methods. We could have added it to
+the flags instead. The downside of this approach is that we have
+static factories in specs, so all tests will have the same set of
+flags. Still, intuitively it sounds like all tests should have it
+either on or off for a given class being tested. Patch:
+
+: @@ -82,7 +82,8 @@ public:
+:              const bool resolved = false,
+:              const bool concepts_indexed = false,
+:              const bool properties_indexed = false,
+: -            const bool associations_indexed = false);
+: +            const bool associations_indexed = false,
+: +            const bool add_model_module = false);
+:
+:      public:
+:          /**
+: @@ -139,6 +140,14 @@ public:
+:          void associations_indexed(const bool v);
+:          /**@}*/
+:
+: +        /**
+: +         * @brief If true, adds a module for the model.
+: +         */
+: +        /**@{*/
+: +        bool add_model_module() const;
+: +        void add_model_module(const bool v);
+: +        /**@}*/
+: +
+:      private:
+:          bool tagged_;
+:          bool merged_;
+: @@ -146,6 +155,7 @@ public:
+:          bool concepts_indexed_;
+:          bool properties_indexed_;
+:          bool associations_indexed_;
+: +        bool add_model_module_;
+:      };
+
+*** Add a configuration class to yarn mock factory                    :story:
+
+Every time we need to extend the mock factory we are finding we need
+to modify every single function. This is particularly painful due to
+the fact we rely on defaults. For example, we can't easily add an
+external module path because we need to modify every single method. We
+need to look into patterns for this. One option would be to create a
+factory configuration class that has the super set of all parameters
+required and pass that configuration to each function.
+
+We did add the flags to the constructor, but it would be better if we
+could pass in the configuration for each method invocation rather than
+for the entire factory.
+
+
+
+*** Consider using boost pointer container for formatters             :story:
+
+At present we are using a container of shared pointers to house the
+different formatter types. These are then encased on a "container"
+class. However, in reality we are passing around references to that
+container class; it seems we do not need shared pointers at all. We
+should look into using a [[http://www.boost.org/doc/libs/1_57_0/libs/ptr_container/doc/ptr_container.html#motivation][boost pointer container]]. We do not have dogen
+support for this so we would have to add it first.
+
+*** Clean up stitch terminology using markup fundamentals             :story:
+
+We came up with a number of quick definitions for stitch because we
+needed them for our use cases. However, the names we chose were fairly
+random. We should look into the theory around markup languages to name
+these things properly.
+
+Links:
+
+- [[https://en.wikipedia.org/wiki/Markup_language][Wikipedia's page on Markup Languages]]
+
+*** Consider adding stitch support for class feature control blocks   :story:
+
+T4 supports an additional type of control blocks called class
+features. These permit declaring methods on the class (external
+functions for us) that can then be called by the standard control
+blocks.
+
+From a stitch perspective we don't necessarily need these, because the
+stitch template is not bound to a given function (such as the
+transform function in the T4 case); rather, one has to declare the
+function that wraps the template within the template itself.
+
+At any rate, this story is a place holder for further analysis on this
+in case there is a sensible way to use these class feature control
+blocks within stitch.
+
+One interesting twist to this is that class feature blocks can also
+contain text blocks. This means we would have two separate cases of
+mixed blocks.
+
+Links:
+
+- [[http://www.olegsych.com/2008/02/t4-class-feature-blocks/][Understanding T4: Class Feature Blocks]]
+- [[https://msdn.microsoft.com/en-us/library/bb126478.aspx][Writing a t4 template]] (section Class feature control blocks).
+
+*** Improve formatters code generation marker                         :story:
+
+Things the marker can/should have:
+
+- model level version;
+- the dogen version too. However, this will make all our tests break
+  every time there is a new commit so perhaps we need to have this
+  switched off by default.
+
+*** Inline comments in =comment_formatter= are a hack                 :story:
+
+We need to tidy-up comment formatter. We had introduced
+=documenting_previous_identifier= rather than "comment inline" but in
+reality we do need to distinguish these two use cases. If there are
+several lines, we want to finish each line with a new line. However,
+if thee is just one line, as is the case with enumerations, we do not
+want to add any new lines. This is because the stitch template will
+add new lines so we end up with too many of them.
+
+
+** Feature Heap
+
+Features for which there is no urgency but we'd like to see them
+implemented at some point. They may require some alterations to the
+core, but not fundamental rethinking.
+
 *** Support only specific attributes for certain facets               :story:
 
 Whenever an object has a unique identifier, it may make sense to make
@@ -5831,72 +6110,23 @@ codes. This would allow us to code generate them. The only problem is
 if multiple exceptions share an error code, but this should probably
 not happen?
 
-*** Investigate the integration of =boost::log= with throw exception  :story:
-
-At present we write a lot of code like this:
-
-: BOOST_LOG_SEV(lg, error) << object_not_found << qn;
-: BOOST_THROW_EXCEPTION(indexing_error(object_not_found +
-:     boost::lexical_cast<std::string>(qn)));
-
-This is to ensure we log the fact that an exception occurred to make
-debugging problems easier. However, it leads to a lot of duplicated
-code. We need to figure out a way of simplifying this, most likely
-through a macro.
-
-Actually an even easier way would be to generate IO for exceptions; we
-could simply create the exception, populate all data values, dump it
-to the log file and then throw the exception.
-
-We can then create a helper in utility to throw exceptions that
-performs both the throwing and the logging. It could be a function
-that assumes lg to be in the global namespace, as that is how we
-normally use it. We just need to populate the exception up front.
-
-*** Ensure an error info tag is not set already before we set it      :story:
-
-Now that we will start making use of error info tags in anger, one
-problem we have spotted is that some times we reset the same tag:
-i.e. when an exception has been thrown, we do not want to set the same
-tag multiple times because it overwrites it. There should be a way to
-either allow multiple bits of information to be associated with the
-same tag, or a way to check if the tag has been already set. But if it
-is, what then? We can't throw.
-
-*** Exception classes should allow inheritance                        :story:
+*** Add an includer for all includers                                 :story:
 
 #+begin_quote
-*Story*: As a dogen user, I need to generate object graphs for my
-exception classes so that I can model my domain better.
+*Story*: As a dogen user, I need a quick and dirty way of including
+all files in a model so that I can test them without having to
+include every file manually.
 #+end_quote
 
-We need to have a form of inheriting from a base exception for a given
-model. We also need to be able to inherit from other exceptions in a
-model. At present exceptions are not objects so the dependency graph
-support is not there.
+It would be nice to totally include a model. For that we need an
+includer that includes all other includers. This should be as easy as
+keeping track of the different includers for each facet in the map
+inside of the includer service.
 
-When we do this we need to split relatable into "associatable" and
-"generalisable" and get exceptions to model generalisable.
+We need to find a good use case for this.
 
-*** Consider computing hashes only once for immutable types           :story:
-
-if a type is immutable the hash should be computed once at
-construction and then cached. Not quite sure how this would be
-implemented though since we have hashing as a totally separate aspect
-from types.
-
-*** Support for locations other than filesystems                      :story:
-
-It would be nice to be able to point to a yarn intermediate model
-anywhere, such as for example in github and generate it. For this we
-just need to detect the protocol in the path and if supported, read in
-the file; the frontend implementations should take in a stream rather
-than a file path. For cases such as LibXML, we may need to read up all
-of the data first and then create a stringstream for it.
-
-We should not implement this story unless we need it such as for
-example when we have a site/service. At that point it would be nice to
-allow users to just point to their models in github.
+Taking into account the "[[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#consider-renaming-includers][master header]]" rename, this would be a
+"master master include" file?
 
 *** Private and public includes                                       :story:
 
@@ -5980,55 +6210,6 @@ of the features that EMF has, but it seems a better way to demo Dogen
 rather than just talk about the code structure. We could add this
 after the section on authoring diagrams.
 
-*** Change stitch's standard control block start marker to match t4   :story:
-
-For some reason we used =<#+= as the start marker for standard control
-blocks; t4 uses =<#=. We should use the same as t4. One disadvantage
-of t4's choice is that we now need to ensure we are not in the
-presence of a expression block. We could check for expression blocks
-first and if not, then check for standard control blocks.
-
-*** Improve stitch's processing of inline statements                  :story:
-
-At present we have very different handling for the different kinds of
-inline statements:
-
-- directives
-- expression blocks
-- standard control blocks
-
-However, they follow the same pattern and could be implemented with
-largely the same algorithm:
-
-Generic processing of an inline statement:
-
-- check start and end markers: =validate_start_and_end_markers=.
-- strip start and end markers: =strip_start_and_end_markers=.
-- check for any marker, if present error: has_markers=.
-- if directive, check for kvp form.
-
-There is no need for looping etc.
-
-*** Add more validation to stitch                                     :story:
-
-Missing validation:
-
-- check that directive an has end marker.
-- start control block marker inside of an inline control block.
-- profile cannot have the same type instantiated more than once.
-- type definition cannot define the same type more than once.
-
-*** Clean up stitch terminology using markup fundamentals             :story:
-
-We came up with a number of quick definitions for stitch because we
-needed them for our use cases. However, the names we chose were fairly
-random. We should look into the theory around markup languages to name
-these things properly.
-
-Links:
-
-- [[https://en.wikipedia.org/wiki/Markup_language][Wikipedia's page on Markup Languages]]
-
 *** Consider adding include directive to stitch                       :story:
 
 T4 supports including templates from templates. At present we are
@@ -6039,50 +6220,6 @@ types in a class to figure out if the inclusion is needed or not).
 
 Nevertheless, this story is a placeholder for furhter investigation in
 case we can find a use case for this.
-
-*** Consider adding stitch support for class feature control blocks   :story:
-
-T4 supports an additional type of control blocks called class
-features. These permit declaring methods on the class (external
-functions for us) that can then be called by the standard control
-blocks.
-
-From a stitch perspective we don't necessarily need these, because the
-stitch template is not bound to a given function (such as the
-transform function in the T4 case); rather, one has to declare the
-function that wraps the template within the template itself.
-
-At any rate, this story is a place holder for further analysis on this
-in case there is a sensible way to use these class feature control
-blocks within stitch.
-
-One interesting twist to this is that class feature blocks can also
-contain text blocks. This means we would have two separate cases of
-mixed blocks.
-
-Links:
-
-- [[http://www.olegsych.com/2008/02/t4-class-feature-blocks/][Understanding T4: Class Feature Blocks]]
-- [[https://msdn.microsoft.com/en-us/library/bb126478.aspx][Writing a t4 template]] (section Class feature control blocks).
-
-*** Improve formatters code generation marker                         :story:
-
-Things the marker can/should have:
-
-- model level version;
-- the dogen version too. However, this will make all our tests break
-  every time there is a new commit so perhaps we need to have this
-  switched off by default.
-
-*** Inline comments in =comment_formatter= are a hack                 :story:
-
-We need to tidy-up comment formatter. We had introduced
-=documenting_previous_identifier= rather than "comment inline" but in
-reality we do need to distinguish these two use cases. If there are
-several lines, we want to finish each line with a new line. However,
-if thee is just one line, as is the case with enumerations, we do not
-want to add any new lines. This is because the stitch template will
-add new lines so we end up with too many of them.
 
 *** Consider adding =with= support for fluent properties              :story:
 
@@ -6112,108 +6249,6 @@ user to give us a value for a given type (probably much more
 sensible).
 
 Stereotype: =masd::buildable=.
-
-*** Consider using boost pointer container for formatters             :story:
-
-At present we are using a container of shared pointers to house the
-different formatter types. These are then encased on a "container"
-class. However, in reality we are passing around references to that
-container class; it seems we do not need shared pointers at all. We
-should look into using a [[http://www.boost.org/doc/libs/1_57_0/libs/ptr_container/doc/ptr_container.html#motivation][boost pointer container]]. We do not have dogen
-support for this so we would have to add it first.
-
-*** Returning optional of base class results in invalid code          :story:
-
-When defining a model with a type with a field of =boost::optional<x>=
-where =x= is an abstract base class, we get compilation errors in test
-data. The problem appears to be that our test data factories try to
-instantiate =x= rather than go through the abstract base class
-machinery. We need to build a test model for this and fix the code.
-
-We should also question if this is a valid scenario - if not we must
-add it to the validation rules.
-
-*** Investigate current support for =std::set= and =std::map=         :story:
-
-It seems that we do not support sets and maps at present. When we
-tried to use a set, we got errors in the guts of test data generation:
-
-: /usr/bin/../lib/gcc/x86_64-linux-gnu/4.9/../../../../include/c++/4.9/bits/stl_function.h:371:20: error: invalid operands to binary expression ('const dogen::sml::qname' and 'const dogen::sml::qname')
-:       { return __x < __y; }
-
-This could be a bug (e.g. we are placing the =operator<= in the wrong
-place etc). Or it could be that we just never needed ordered maps and
-sets so we never added proper support.
-
-*** Generalise persister and remove serialisation helpers             :story:
-
-With the move of the knit persister into each model, it became obvious
-that users need a way to hydrate and dehydrate certain types by just
-supplying a path. The ideal setup would be where each supported
-serialisation mechanism registers a number of extensions with an
-hydrator / dehydrator and the user can supply a path; the path gets
-dispatched to the correct serialisation. In this world we wouldn't
-need the XML serialisation helper (in utilities) because we would code
-generate a complete serialisation solution. This only works for files
-(and not for streams) because we infer the format from the
-extension. Having said that, if there was a way to supply an enum or
-such-like with the stream, we could create a class for streams and
-then implement the file one as an adaptor to the stream class.
-
-*** Consider moving =add_model_module= to flags                       :story:
-
-When we implemented support for =add_model_module= in yarn mock factory
-we added the flag to all relevant methods. We could have added it to
-the flags instead. The downside of this approach is that we have
-static factories in specs, so all tests will have the same set of
-flags. Still, intuitively it sounds like all tests should have it
-either on or off for a given class being tested. Patch:
-
-: @@ -82,7 +82,8 @@ public:
-:              const bool resolved = false,
-:              const bool concepts_indexed = false,
-:              const bool properties_indexed = false,
-: -            const bool associations_indexed = false);
-: +            const bool associations_indexed = false,
-: +            const bool add_model_module = false);
-:
-:      public:
-:          /**
-: @@ -139,6 +140,14 @@ public:
-:          void associations_indexed(const bool v);
-:          /**@}*/
-:
-: +        /**
-: +         * @brief If true, adds a module for the model.
-: +         */
-: +        /**@{*/
-: +        bool add_model_module() const;
-: +        void add_model_module(const bool v);
-: +        /**@}*/
-: +
-:      private:
-:          bool tagged_;
-:          bool merged_;
-: @@ -146,6 +155,7 @@ public:
-:          bool concepts_indexed_;
-:          bool properties_indexed_;
-:          bool associations_indexed_;
-: +        bool add_model_module_;
-:      };
-
-*** Add a configuration class to yarn mock factory                    :story:
-
-Every time we need to extend the mock factory we are finding we need
-to modify every single function. This is particularly painful due to
-the fact we rely on defaults. For example, we can't easily add an
-external module path because we need to modify every single method. We
-need to look into patterns for this. One option would be to create a
-factory configuration class that has the super set of all parameters
-required and pass that configuration to each function.
-
-We did add the flags to the constructor, but it would be better if we
-could pass in the configuration for each method invocation rather than
-for the entire factory.
 
 *** Make test data generator more configurable                        :story:
 
@@ -6246,77 +6281,6 @@ We should look at these articles for ideas on how to create generators
 that use coroutines.
 
 - [[https://kirit.com/How%2520C%252B%252B%2520coroutines%2520work/Generating%2520Iterators][Generating Iterators]]
-
-*** Format doubles, floats and bools properly                         :story:
-
-At present we are using IO state savers but not actually setting the
-formatting on the stream depending on the built-in type.
-
-Ideally we should pass in some dynamic extensions to determine the
-formatting. We should also consider using =boost::format= for this.
-
-*** Private properties should be ignored                              :story:
-
-At present we treat private properties as if they were public; we
-should ignore them. We need to go through all the models and change
-the private ones to public before we do this.
-
-We should also log a warning.
-
-*** Generator usage in template tests needs to be cleaned             :story:
-
-At present some template tests in =utility/test= ask for a
-generator, other for instances. We should only have one way of doing
-this. We should probably always ask for generators as this means less
-boiler plate code in tests. It does mean a fixed dependency on
-generators.
-
-*** Add an includer for all includers                                 :story:
-
-#+begin_quote
-*Story*: As a dogen user, I need a quick and dirty way of including
-all files in a model so that I can test them without having to
-include every file manually.
-#+end_quote
-
-It would be nice to totally include a model. For that we need an
-includer that includes all other includers. This should be as easy as
-keeping track of the different includers for each facet in the map
-inside of the includer service.
-
-We need to find a good use case for this.
-
-Taking into account the "[[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#consider-renaming-includers][master header]]" rename, this would be a
-"master master include" file?
-
-** Feature Heap
-
-Features for which there is no urgency but we'd like to see them
-implemented at some point. They may require some alterations to the
-core, but not fundamental rethinking.
-
-*** Grepping non-generated code                                       :story:
-
-In order to determine if a type is no longer used, it would be really
-useful to grep non-generated code. This could be an option in dogen
-itself: given a project or set of projects, it determines the list of
-non-generated files and then runs grep on those.
-
-Notes:
-
-- this could be implemented as an activity, e.g. =grep=. It would take
-  as input either a model, a project or a directory with models; it
-  would load up all models, figure out the list of handcrafted files
-  and then run grep on those.
-- we probably need specific transform chains for these, to avoid doing
-  lots of unnecessary work. However, unpicking transforms won't be
-  trivial.
-- think of code as a graph, where handcrafted files are leaves and
-  generated files are non-leafs.
-
-Links:
-
-- [[https://www.boost.org/doc/libs/1_61_0/libs/regex/example/grep/grep.cpp][Grep in c++ using boost regex]]
 
 *** Allow placing types in the global module in Dia                   :story:
 
@@ -6554,83 +6518,6 @@ Links:
 - [[https://github.com/OAI/OpenAPI-Specification/tree/master/examples/v3.0][OpenAPI examples]]: YAML documents with examples.
 - [[https://github.com/matt-42/silicon][silicon]]: yet another C++ HTTP framework.
 - [[https://github.com/qicosmos/cinatra][cinatra]]: another HTTP framework. Example site: http://purecpp.org/
-
-*** HTTP API support                                                  :story:
-
-It should be possible to define a few classes in a diagram, annotate
-them as HTTP and have dogen generate all of the restful
-infrastructure. We should take a similar approach to ServiceStack.
-
-Notes:
-
-- the user should supply the routes as meta-data against each object,
-  as well as the HTTP verbs supported (PUT, GET, etc).
-- we should also allow the user to pair request and responses
-  DTOs. This is also done via meta-data.
-- the user should also define a top-level service class, with the
-  comments that are to be displayed on the web-page that we
-  automatically generate. The attributes of the service are the DTOs
-  it supports. However, since the service contains the implementation,
-  we can't code generate it really. We could either treat it as a
-  concept or create an interface for it that the user has to
-  implement. We could use the "lambda approach": the user just has to
-  initialise the generated code by supplying lambdas that do the
-  processing; we automatically generate all of the HTTP
-  machinery. However, we then have to worry about state.
-- we should support both XML and JSON via the same API as service
-  stack:
-
-: http://localhost:/students?format=json
-
-- it should support multiple backends, chosen via meta-data. Example:
-  casablanca/RestSDK, Boost.Beast.
-- things like hostname, port etc must be handled outside the generated
-  code.
-- insane idea: we can use stitch templates to generate HTML just like
-  with razor. Example razor template:
-
-: @using StudentReports.Models
-: @inherits ViewPage<ienumerable<student>>
-:
-: @{
-:     ViewBag.Title = "Student List";
-: }
-:
-: <div class=""row"">
-:     <div class=""panel" panel-default"="">
-:
-:                 @{
-:                     foreach (var item in Model)
-:                     {
-:
-:                     }
-:                 }
-
-- if we use stitch this means we can define classes (or even profiles)
-  and associate them with stitch and wale templates just like we do
-  with formatters. We then generate code to bind these to the API. The
-  objective is to make an interactive view of the API, not to replace
-  Wt.
-
-Links:
-
-- [[http://www.dotnetcurry.com/aspnet/1056/introducing-service-stack-tutorial][Introducing ServiceStack]]
-- See also the story on Swagger/OpenAPI
-- [[https://docs.microsoft.com/en-gb/teamblog/announcing-rest-improvements?WT.mc_id=docsmsft-twitter][Announcing Updates to the REST API Experience]]: microsoft has created
-  a centralised place to try all REST APIs. We should be able to code
-  generate something similar. However, we need a way to create a
-  single site with all APIs - this is not so easy because we'd have to
-  load up shared objects from different models. It would be nicer to
-  have some kind of tree with all the products on the left and then
-  all of the internal APIs for each product (perhaps grouped by
-  top-level functionality?). Then, when you click on a request you get
-  the documentation for the end point as well as an interactive "try
-  it" environment. This should work even without a login. The MSFT
-  documentation includes a description of all of the returned types as
-  well as the input parameters and the return codes. These contain
-  documentation from the types and their attributes. The graph is
-  expanded to aggregate types so that there is a link to the aggregate
-  type. Primitive types have their documentation inline.
 
 *** Factory method instead of complete constructor                    :story:
 
@@ -7546,6 +7433,8 @@ There are several aspects:
 - the relationships between them
 - functions for the dynamic dependencies that take in an element
 - the computation of the enablement.
+
+Actually this should be implemented in terms of profiles.
 
 *** Add support for Visual Studio C++ projects                        :story:
 
@@ -10442,6 +10331,119 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Support for locations other than filesystems                      :story:
+
+It would be nice to be able to point to a yarn intermediate model
+anywhere, such as for example in github and generate it. For this we
+just need to detect the protocol in the path and if supported, read in
+the file; the frontend implementations should take in a stream rather
+than a file path. For cases such as LibXML, we may need to read up all
+of the data first and then create a stringstream for it.
+
+We should not implement this story unless we need it such as for
+example when we have a site/service. At that point it would be nice to
+allow users to just point to their models in github.
+
+*** HTTP API support                                                  :story:
+
+It should be possible to define a few classes in a diagram, annotate
+them as HTTP and have dogen generate all of the restful
+infrastructure. We should take a similar approach to ServiceStack.
+
+Notes:
+
+- the user should supply the routes as meta-data against each object,
+  as well as the HTTP verbs supported (PUT, GET, etc).
+- we should also allow the user to pair request and responses
+  DTOs. This is also done via meta-data.
+- the user should also define a top-level service class, with the
+  comments that are to be displayed on the web-page that we
+  automatically generate. The attributes of the service are the DTOs
+  it supports. However, since the service contains the implementation,
+  we can't code generate it really. We could either treat it as a
+  concept or create an interface for it that the user has to
+  implement. We could use the "lambda approach": the user just has to
+  initialise the generated code by supplying lambdas that do the
+  processing; we automatically generate all of the HTTP
+  machinery. However, we then have to worry about state.
+- we should support both XML and JSON via the same API as service
+  stack:
+
+: http://localhost:/students?format=json
+
+- it should support multiple backends, chosen via meta-data. Example:
+  casablanca/RestSDK, Boost.Beast.
+- things like hostname, port etc must be handled outside the generated
+  code.
+- insane idea: we can use stitch templates to generate HTML just like
+  with razor. Example razor template:
+
+: @using StudentReports.Models
+: @inherits ViewPage<ienumerable<student>>
+:
+: @{
+:     ViewBag.Title = "Student List";
+: }
+:
+: <div class=""row"">
+:     <div class=""panel" panel-default"="">
+:
+:                 @{
+:                     foreach (var item in Model)
+:                     {
+:
+:                     }
+:                 }
+
+- if we use stitch this means we can define classes (or even profiles)
+  and associate them with stitch and wale templates just like we do
+  with formatters. We then generate code to bind these to the API. The
+  objective is to make an interactive view of the API, not to replace
+  Wt.
+
+Links:
+
+- [[http://www.dotnetcurry.com/aspnet/1056/introducing-service-stack-tutorial][Introducing ServiceStack]]
+- See also the story on Swagger/OpenAPI
+- [[https://docs.microsoft.com/en-gb/teamblog/announcing-rest-improvements?WT.mc_id=docsmsft-twitter][Announcing Updates to the REST API Experience]]: microsoft has created
+  a centralised place to try all REST APIs. We should be able to code
+  generate something similar. However, we need a way to create a
+  single site with all APIs - this is not so easy because we'd have to
+  load up shared objects from different models. It would be nicer to
+  have some kind of tree with all the products on the left and then
+  all of the internal APIs for each product (perhaps grouped by
+  top-level functionality?). Then, when you click on a request you get
+  the documentation for the end point as well as an interactive "try
+  it" environment. This should work even without a login. The MSFT
+  documentation includes a description of all of the returned types as
+  well as the input parameters and the return codes. These contain
+  documentation from the types and their attributes. The graph is
+  expanded to aggregate types so that there is a link to the aggregate
+  type. Primitive types have their documentation inline.
+
+*** Grepping non-generated code                                       :story:
+
+In order to determine if a type is no longer used, it would be really
+useful to grep non-generated code. This could be an option in dogen
+itself: given a project or set of projects, it determines the list of
+non-generated files and then runs grep on those.
+
+Notes:
+
+- this could be implemented as an activity, e.g. =grep=. It would take
+  as input either a model, a project or a directory with models; it
+  would load up all models, figure out the list of handcrafted files
+  and then run grep on those.
+- we probably need specific transform chains for these, to avoid doing
+  lots of unnecessary work. However, unpicking transforms won't be
+  trivial.
+- think of code as a graph, where handcrafted files are leaves and
+  generated files are non-leafs.
+
+Links:
+
+- [[https://www.boost.org/doc/libs/1_61_0/libs/regex/example/grep/grep.cpp][Grep in c++ using boost regex]]
 
 *** Add support for data anonymisation                                :story:
 
