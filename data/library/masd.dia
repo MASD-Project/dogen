@@ -103,13 +103,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O1">
       <dia:attribute name="obj_pos">
-        <dia:point val="4,3"/>
+        <dia:point val="4,2.92857"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.95,2.95;16.1,9.05"/>
+        <dia:rectangle val="3.95,2.87857;16.1,8.97857"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="4,3"/>
+        <dia:point val="4,2.92857"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.050000000000001"/>
@@ -126,7 +126,9 @@
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.decoration.modeline.editor=emacs
 #DOGEN masd.decoration.modeline.location=top
-#</dia:string>
+#DOGEN masd.decoration.modeline.language=cpp
+#DOGEN masd.decoration.modeline.element=masd::coding::meta_model::object
+#DOGEN masd.decoration.modeline.element=masd::coding::meta_model::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -212,10 +214,10 @@
             <dia:string>#mode#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#c++#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#c++#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -235,10 +237,10 @@
             <dia:string>#tab-width#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -258,10 +260,10 @@
             <dia:string>#indent-tabs-mode#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#nil#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#nil#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -281,10 +283,10 @@
             <dia:string>#c-basic-offset#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -418,10 +420,10 @@
             <dia:string>#mode#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#csharp#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#csharp#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -441,10 +443,10 @@
             <dia:string>#tab-width#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -464,10 +466,10 @@
             <dia:string>#indent-tabs-mode#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#nil#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#nil#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -487,10 +489,10 @@
             <dia:string>#c-basic-offset#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -624,10 +626,10 @@
             <dia:string>#mode#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#cmake#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#cmake#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -647,10 +649,10 @@
             <dia:string>#tab-width#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -670,10 +672,10 @@
             <dia:string>#indent-tabs-mode#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#nil#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#nil#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -807,10 +809,10 @@
             <dia:string>#mode#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#sh#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#sh#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -830,10 +832,10 @@
             <dia:string>#tab-width#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -853,10 +855,10 @@
             <dia:string>#indent-tabs-mode#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#nil#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#nil#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -990,10 +992,10 @@
             <dia:string>#mode#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#nxml#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#nxml#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -1013,10 +1015,10 @@
             <dia:string>#tab-width#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -1036,10 +1038,10 @@
             <dia:string>#indent-tabs-mode#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#nil#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#nil#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -1211,10 +1213,10 @@
             <dia:string>#ft#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#xml#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#xml#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -1234,10 +1236,10 @@
             <dia:string>#tabstop#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -1280,10 +1282,10 @@
             <dia:string>#shiftwidth#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -1303,10 +1305,10 @@
             <dia:string>#softtabstop#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -1440,10 +1442,10 @@
             <dia:string>#ft#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#sh#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#sh#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -1463,10 +1465,10 @@
             <dia:string>#tabstop#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -1509,10 +1511,10 @@
             <dia:string>#shiftwidth#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -1532,10 +1534,10 @@
             <dia:string>#softtabstop#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -1669,10 +1671,10 @@
             <dia:string>#ft#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#cmake#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#cmake#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -1692,10 +1694,10 @@
             <dia:string>#tabstop#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -1738,10 +1740,10 @@
             <dia:string>#shiftwidth#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -1761,10 +1763,10 @@
             <dia:string>#softtabstop#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -1898,10 +1900,10 @@
             <dia:string>#ft#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#csharp#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#csharp#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -1921,10 +1923,10 @@
             <dia:string>#tabstop#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -1967,10 +1969,10 @@
             <dia:string>#shiftwidth#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -1990,10 +1992,10 @@
             <dia:string>#softtabstop#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -2127,10 +2129,10 @@
             <dia:string>#ft#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#cpp#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#cpp#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -2150,10 +2152,10 @@
             <dia:string>#tabstop#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -2196,10 +2198,10 @@
             <dia:string>#shiftwidth#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -2219,10 +2221,10 @@
             <dia:string>#softtabstop#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#4#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#4#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -2312,13 +2314,13 @@ keep it language agnostic.
         <dia:point val="30,-21"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.95,-21.05;43.64,-16.55"/>
+        <dia:rectangle val="29.95,-21.05;41.715,-16.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="30,-21"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -2327,7 +2329,7 @@ keep it language agnostic.
         <dia:string>#apache_v2_0#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::decoration::licence_text#</dia:string>
+        <dia:string>#masd::decoration::licence#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2413,7 +2415,7 @@ keep it language agnostic.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#short#</dia:string>
+            <dia:string>#short_form#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -2450,7 +2452,7 @@ permissions and limitations under the License.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#long#</dia:string>
+            <dia:string>#long_form#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -2681,16 +2683,16 @@ permissions and limitations under the License.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O14">
       <dia:attribute name="obj_pos">
-        <dia:point val="47,-21"/>
+        <dia:point val="45,-21"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.95,-21.05;60.64,-16.55"/>
+        <dia:rectangle val="44.95,-21.05;56.715,-16.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="47,-21"/>
+        <dia:point val="45,-21"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -2699,7 +2701,7 @@ permissions and limitations under the License.
         <dia:string>#bsl_v1_0#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::decoration::licence_text#</dia:string>
+        <dia:string>#masd::decoration::licence#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2785,7 +2787,7 @@ permissions and limitations under the License.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#short#</dia:string>
+            <dia:string>#short_form#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -2813,7 +2815,7 @@ See www.boost.org/libs/asio for documentation.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#long#</dia:string>
+            <dia:string>#long_form#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -2868,13 +2870,13 @@ DEALINGS IN THE SOFTWARE.#</dia:string>
         <dia:point val="30,-14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.95,-14.05;43.64,-9.55"/>
+        <dia:rectangle val="29.95,-14.05;41.715,-9.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="30,-14"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -2883,7 +2885,7 @@ DEALINGS IN THE SOFTWARE.#</dia:string>
         <dia:string>#gpl_v2#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::decoration::licence_text#</dia:string>
+        <dia:string>#masd::decoration::licence#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2969,7 +2971,7 @@ DEALINGS IN THE SOFTWARE.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#short#</dia:string>
+            <dia:string>#short_form#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -3005,7 +3007,7 @@ MA 02110-1301, USA.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#long#</dia:string>
+            <dia:string>#long_form#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -3373,16 +3375,16 @@ Public License instead of this License.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O16">
       <dia:attribute name="obj_pos">
-        <dia:point val="47,-14"/>
+        <dia:point val="45,-14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.95,-14.05;60.64,-9.55"/>
+        <dia:rectangle val="44.95,-14.05;56.715,-9.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="47,-14"/>
+        <dia:point val="45,-14"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -3391,7 +3393,7 @@ Public License instead of this License.#</dia:string>
         <dia:string>#gpl_v3#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::decoration::licence_text#</dia:string>
+        <dia:string>#masd::decoration::licence#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3477,7 +3479,7 @@ Public License instead of this License.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#short#</dia:string>
+            <dia:string>#short_form#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -3514,7 +3516,7 @@ MA 02110-1301, USA.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#long#</dia:string>
+            <dia:string>#long_form#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -4225,13 +4227,13 @@ Public License instead of this License.  But first, please read
         <dia:point val="30,-7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.95,-7.05;43.64,-2.55"/>
+        <dia:rectangle val="29.95,-7.05;41.715,-2.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="30,-7"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -4240,7 +4242,7 @@ Public License instead of this License.  But first, please read
         <dia:string>#proprietary#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::decoration::licence_text#</dia:string>
+        <dia:string>#masd::decoration::licence#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4326,7 +4328,7 @@ Public License instead of this License.  But first, please read
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#short#</dia:string>
+            <dia:string>#short_form#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -4359,7 +4361,7 @@ obtained from the copyright holder.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#long#</dia:string>
+            <dia:string>#long_form#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -4399,16 +4401,16 @@ obtained from the copyright holder.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O18">
       <dia:attribute name="obj_pos">
-        <dia:point val="67,-21"/>
+        <dia:point val="60,-21"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="66.95,-21.05;78.33,-17.95"/>
+        <dia:rectangle val="59.95,-21.05;75.565,-17.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="67,-21"/>
+        <dia:point val="60,-21"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.279999999999999"/>
+        <dia:real val="15.515000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4417,7 +4419,7 @@ obtained from the copyright holder.
         <dia:string>#basic#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::decoration::marker#</dia:string>
+        <dia:string>#masd::decoration::generation_marker#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.decoration.marker.add_date_time=false
