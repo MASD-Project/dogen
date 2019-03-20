@@ -26,6 +26,7 @@
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/io/meta_model/origin_types_io.hpp"
 #include "masd.dogen.extraction/io/decoration_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/local_decoration_io.hpp"
 #include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
 #include "masd.dogen.coding/io/meta_model/artefact_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/local_archetype_location_properties_io.hpp"
@@ -117,6 +118,21 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::local_decoration>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace masd::dogen::coding::meta_model {
 
 element::element()
@@ -137,7 +153,8 @@ element::element(element&& rhs)
       is_element_extension_(std::move(rhs.is_element_extension_)),
       decoration_properties_(std::move(rhs.decoration_properties_)),
       artefact_properties_(std::move(rhs.artefact_properties_)),
-      archetype_location_properties_(std::move(rhs.archetype_location_properties_)) { }
+      archetype_location_properties_(std::move(rhs.archetype_location_properties_)),
+      decoration_(std::move(rhs.decoration_)) { }
 
 element::element(
     const masd::dogen::coding::meta_model::name& name,
@@ -152,7 +169,8 @@ element::element(
     const bool is_element_extension,
     const masd::dogen::extraction::decoration_properties& decoration_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties)
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
+    const boost::optional<masd::dogen::coding::meta_model::local_decoration>& decoration)
     : name_(name),
       documentation_(documentation),
       annotation_(annotation),
@@ -165,7 +183,8 @@ element::element(
       is_element_extension_(is_element_extension),
       decoration_properties_(decoration_properties),
       artefact_properties_(artefact_properties),
-      archetype_location_properties_(archetype_location_properties) { }
+      archetype_location_properties_(archetype_location_properties),
+      decoration_(decoration) { }
 
 void element::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -188,7 +207,8 @@ void element::to_stream(std::ostream& s) const {
       << "\"is_element_extension\": " << is_element_extension_ << ", "
       << "\"decoration_properties\": " << decoration_properties_ << ", "
       << "\"artefact_properties\": " << artefact_properties_ << ", "
-      << "\"archetype_location_properties\": " << archetype_location_properties_
+      << "\"archetype_location_properties\": " << archetype_location_properties_ << ", "
+      << "\"decoration\": " << decoration_
       << " }";
 }
 
@@ -207,6 +227,7 @@ void element::swap(element& other) noexcept {
     swap(decoration_properties_, other.decoration_properties_);
     swap(artefact_properties_, other.artefact_properties_);
     swap(archetype_location_properties_, other.archetype_location_properties_);
+    swap(decoration_, other.decoration_);
 }
 
 bool element::compare(const element& rhs) const {
@@ -222,7 +243,8 @@ bool element::compare(const element& rhs) const {
         is_element_extension_ == rhs.is_element_extension_ &&
         decoration_properties_ == rhs.decoration_properties_ &&
         artefact_properties_ == rhs.artefact_properties_ &&
-        archetype_location_properties_ == rhs.archetype_location_properties_;
+        archetype_location_properties_ == rhs.archetype_location_properties_ &&
+        decoration_ == rhs.decoration_;
 }
 
 const masd::dogen::coding::meta_model::name& element::name() const {
@@ -407,6 +429,22 @@ void element::archetype_location_properties(const std::unordered_map<std::string
 
 void element::archetype_location_properties(const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>&& v) {
     archetype_location_properties_ = std::move(v);
+}
+
+const boost::optional<masd::dogen::coding::meta_model::local_decoration>& element::decoration() const {
+    return decoration_;
+}
+
+boost::optional<masd::dogen::coding::meta_model::local_decoration>& element::decoration() {
+    return decoration_;
+}
+
+void element::decoration(const boost::optional<masd::dogen::coding::meta_model::local_decoration>& v) {
+    decoration_ = v;
+}
+
+void element::decoration(const boost::optional<masd::dogen::coding::meta_model::local_decoration>&& v) {
+    decoration_ = std::move(v);
 }
 
 }

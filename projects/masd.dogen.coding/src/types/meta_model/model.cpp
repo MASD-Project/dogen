@@ -120,6 +120,9 @@ model::model(model&& rhs)
       objects_(std::move(rhs.objects_)),
       exceptions_(std::move(rhs.exceptions_)),
       visitors_(std::move(rhs.visitors_)),
+      modeline_groups_(std::move(rhs.modeline_groups_)),
+      licences_(std::move(rhs.licences_)),
+      generation_markers_(std::move(rhs.generation_markers_)),
       root_module_(std::move(rhs.root_module_)),
       input_language_(std::move(rhs.input_language_)),
       output_languages_(std::move(rhs.output_languages_)),
@@ -140,6 +143,9 @@ model::model(
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object> >& objects,
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::exception> >& exceptions,
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::visitor> >& visitors,
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline_group>& modeline_groups,
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::licence>& licences,
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::generation_marker>& generation_markers,
     const boost::shared_ptr<masd::dogen::coding::meta_model::module>& root_module,
     const masd::dogen::coding::meta_model::languages input_language,
     const std::list<masd::dogen::coding::meta_model::languages>& output_languages,
@@ -158,6 +164,9 @@ model::model(
       objects_(objects),
       exceptions_(exceptions),
       visitors_(visitors),
+      modeline_groups_(modeline_groups),
+      licences_(licences),
+      generation_markers_(generation_markers),
       root_module_(root_module),
       input_language_(input_language),
       output_languages_(output_languages),
@@ -179,6 +188,9 @@ void model::swap(model& other) noexcept {
     swap(objects_, other.objects_);
     swap(exceptions_, other.exceptions_);
     swap(visitors_, other.visitors_);
+    swap(modeline_groups_, other.modeline_groups_);
+    swap(licences_, other.licences_);
+    swap(generation_markers_, other.generation_markers_);
     swap(root_module_, other.root_module_);
     swap(input_language_, other.input_language_);
     swap(output_languages_, other.output_languages_);
@@ -200,6 +212,9 @@ bool model::operator==(const model& rhs) const {
         objects_ == rhs.objects_ &&
         exceptions_ == rhs.exceptions_ &&
         visitors_ == rhs.visitors_ &&
+        modeline_groups_ == rhs.modeline_groups_ &&
+        licences_ == rhs.licences_ &&
+        generation_markers_ == rhs.generation_markers_ &&
         root_module_ == rhs.root_module_ &&
         input_language_ == rhs.input_language_ &&
         output_languages_ == rhs.output_languages_ &&
@@ -411,6 +426,54 @@ void model::visitors(const std::unordered_map<std::string, boost::shared_ptr<mas
 
 void model::visitors(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::visitor> >&& v) {
     visitors_ = std::move(v);
+}
+
+const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline_group>& model::modeline_groups() const {
+    return modeline_groups_;
+}
+
+std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline_group>& model::modeline_groups() {
+    return modeline_groups_;
+}
+
+void model::modeline_groups(const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline_group>& v) {
+    modeline_groups_ = v;
+}
+
+void model::modeline_groups(const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline_group>&& v) {
+    modeline_groups_ = std::move(v);
+}
+
+const std::unordered_map<std::string, masd::dogen::coding::meta_model::licence>& model::licences() const {
+    return licences_;
+}
+
+std::unordered_map<std::string, masd::dogen::coding::meta_model::licence>& model::licences() {
+    return licences_;
+}
+
+void model::licences(const std::unordered_map<std::string, masd::dogen::coding::meta_model::licence>& v) {
+    licences_ = v;
+}
+
+void model::licences(const std::unordered_map<std::string, masd::dogen::coding::meta_model::licence>&& v) {
+    licences_ = std::move(v);
+}
+
+const std::unordered_map<std::string, masd::dogen::coding::meta_model::generation_marker>& model::generation_markers() const {
+    return generation_markers_;
+}
+
+std::unordered_map<std::string, masd::dogen::coding::meta_model::generation_marker>& model::generation_markers() {
+    return generation_markers_;
+}
+
+void model::generation_markers(const std::unordered_map<std::string, masd::dogen::coding::meta_model::generation_marker>& v) {
+    generation_markers_ = v;
+}
+
+void model::generation_markers(const std::unordered_map<std::string, masd::dogen::coding::meta_model::generation_marker>&& v) {
+    generation_markers_ = std::move(v);
 }
 
 const boost::shared_ptr<masd::dogen::coding::meta_model::module>& model::root_module() const {

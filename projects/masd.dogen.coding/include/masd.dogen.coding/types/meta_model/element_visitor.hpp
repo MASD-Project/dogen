@@ -28,11 +28,14 @@
 #include "masd.dogen.coding/types/meta_model/module_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/object_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/builtin_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/licence_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/visitor_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/exception_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/primitive_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/modeline_group_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/generation_marker_fwd.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
@@ -72,6 +75,36 @@ public:
     virtual void visit(const masd::dogen::coding::meta_model::exception&) { }
     virtual void visit(masd::dogen::coding::meta_model::exception&) const { }
     virtual void visit(masd::dogen::coding::meta_model::exception&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type masd::dogen::coding::meta_model::generation_marker
+     */
+    /**@{*/
+    virtual void visit(const masd::dogen::coding::meta_model::generation_marker&) const { }
+    virtual void visit(const masd::dogen::coding::meta_model::generation_marker&) { }
+    virtual void visit(masd::dogen::coding::meta_model::generation_marker&) const { }
+    virtual void visit(masd::dogen::coding::meta_model::generation_marker&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type masd::dogen::coding::meta_model::licence
+     */
+    /**@{*/
+    virtual void visit(const masd::dogen::coding::meta_model::licence&) const { }
+    virtual void visit(const masd::dogen::coding::meta_model::licence&) { }
+    virtual void visit(masd::dogen::coding::meta_model::licence&) const { }
+    virtual void visit(masd::dogen::coding::meta_model::licence&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type masd::dogen::coding::meta_model::modeline_group
+     */
+    /**@{*/
+    virtual void visit(const masd::dogen::coding::meta_model::modeline_group&) const { }
+    virtual void visit(const masd::dogen::coding::meta_model::modeline_group&) { }
+    virtual void visit(masd::dogen::coding::meta_model::modeline_group&) const { }
+    virtual void visit(masd::dogen::coding::meta_model::modeline_group&) { }
     /**@}*/
 
     /**

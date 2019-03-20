@@ -943,6 +943,11 @@ string might look like this:
 This may be a useful thing. However, adding dates and dogen version
 etc will cause spurious diffs.
 
+*** Split library into JSON and dia                                   :story:
+
+We should supply the core models as both. This is a good test for PDMs
+to make sure that all functionality is available on both.
+
 *** LAM types should exist as a model                                 :story:
 
 At present we use LAM as a conceptual device: we don't even have a LAM

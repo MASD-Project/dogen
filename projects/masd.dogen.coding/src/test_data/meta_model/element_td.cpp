@@ -25,13 +25,17 @@
 #include "masd.dogen.coding/test_data/meta_model/object_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/builtin_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/element_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/licence_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/visitor_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/exception_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/primitive_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/enumeration_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/origin_types_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/modeline_group_td.hpp"
 #include "masd.dogen.extraction/test_data/decoration_properties_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/object_template_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/local_decoration_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/generation_marker_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/static_stereotypes_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/artefact_properties_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/local_archetype_location_properties_td.hpp"
@@ -122,6 +126,18 @@ std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype
     return r;
 }
 
+masd::dogen::coding::meta_model::local_decoration
+create_masd_dogen_coding_meta_model_local_decoration(const unsigned int position) {
+    return masd::dogen::coding::meta_model::local_decoration_generator::create(position);
+}
+
+boost::optional<masd::dogen::coding::meta_model::local_decoration>
+create_boost_optional_masd_dogen_coding_meta_model_local_decoration(unsigned int position) {
+    boost::optional<masd::dogen::coding::meta_model::local_decoration> r(
+        create_masd_dogen_coding_meta_model_local_decoration(position));
+    return r;
+}
+
 }
 
 namespace masd::dogen::coding::meta_model {
@@ -141,23 +157,30 @@ populate(const unsigned int position, result_type& v) {
     v.decoration_properties(create_masd_dogen_extraction_decoration_properties(position + 10));
     v.artefact_properties(create_std_unordered_map_std_string_masd_dogen_coding_meta_model_artefact_properties(position + 11));
     v.archetype_location_properties(create_std_unordered_map_std_string_masd_dogen_coding_meta_model_local_archetype_location_properties(position + 12));
+    v.decoration(create_boost_optional_masd_dogen_coding_meta_model_local_decoration(position + 13));
 }
 
 element_generator::result_type*
 element_generator::create_ptr(const unsigned int position) {
-    if ((position % 7) == 0)
+    if ((position % 10) == 0)
         return masd::dogen::coding::meta_model::enumeration_generator::create_ptr(position);
-    if ((position % 7) == 1)
+    if ((position % 10) == 1)
         return masd::dogen::coding::meta_model::exception_generator::create_ptr(position);
-    if ((position % 7) == 2)
+    if ((position % 10) == 2)
+        return masd::dogen::coding::meta_model::generation_marker_generator::create_ptr(position);
+    if ((position % 10) == 3)
+        return masd::dogen::coding::meta_model::licence_generator::create_ptr(position);
+    if ((position % 10) == 4)
+        return masd::dogen::coding::meta_model::modeline_group_generator::create_ptr(position);
+    if ((position % 10) == 5)
         return masd::dogen::coding::meta_model::module_generator::create_ptr(position);
-    if ((position % 7) == 3)
+    if ((position % 10) == 6)
         return masd::dogen::coding::meta_model::object_generator::create_ptr(position);
-    if ((position % 7) == 4)
+    if ((position % 10) == 7)
         return masd::dogen::coding::meta_model::object_template_generator::create_ptr(position);
-    if ((position % 7) == 5)
+    if ((position % 10) == 8)
         return masd::dogen::coding::meta_model::primitive_generator::create_ptr(position);
-    if ((position % 7) == 6)
+    if ((position % 10) == 9)
         return masd::dogen::coding::meta_model::visitor_generator::create_ptr(position);
     return masd::dogen::coding::meta_model::builtin_generator::create_ptr(position);
 }

@@ -33,6 +33,7 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.coding/types/meta_model/name.hpp"
+#include "masd.dogen.coding/types/meta_model/licence.hpp"
 #include "masd.dogen.coding/hash/meta_model/name_hash.hpp"
 #include "masd.dogen.coding/types/meta_model/languages.hpp"
 #include "masd.dogen.coding/types/meta_model/module_fwd.hpp"
@@ -42,7 +43,9 @@
 #include "masd.dogen.coding/types/meta_model/origin_types.hpp"
 #include "masd.dogen.coding/types/meta_model/exception_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/primitive_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_model_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/extraction_properties.hpp"
@@ -78,6 +81,9 @@ public:
         const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object> >& objects,
         const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::exception> >& exceptions,
         const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::visitor> >& visitors,
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline_group>& modeline_groups,
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::licence>& licences,
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::generation_marker>& generation_markers,
         const boost::shared_ptr<masd::dogen::coding::meta_model::module>& root_module,
         const masd::dogen::coding::meta_model::languages input_language,
         const std::list<masd::dogen::coding::meta_model::languages>& output_languages,
@@ -216,6 +222,21 @@ public:
     void visitors(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::visitor> >&& v);
     /**@}*/
 
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline_group>& modeline_groups() const;
+    std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline_group>& modeline_groups();
+    void modeline_groups(const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline_group>& v);
+    void modeline_groups(const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline_group>&& v);
+
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::licence>& licences() const;
+    std::unordered_map<std::string, masd::dogen::coding::meta_model::licence>& licences();
+    void licences(const std::unordered_map<std::string, masd::dogen::coding::meta_model::licence>& v);
+    void licences(const std::unordered_map<std::string, masd::dogen::coding::meta_model::licence>&& v);
+
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::generation_marker>& generation_markers() const;
+    std::unordered_map<std::string, masd::dogen::coding::meta_model::generation_marker>& generation_markers();
+    void generation_markers(const std::unordered_map<std::string, masd::dogen::coding::meta_model::generation_marker>& v);
+    void generation_markers(const std::unordered_map<std::string, masd::dogen::coding::meta_model::generation_marker>&& v);
+
     const boost::shared_ptr<masd::dogen::coding::meta_model::module>& root_module() const;
     boost::shared_ptr<masd::dogen::coding::meta_model::module>& root_module();
     void root_module(const boost::shared_ptr<masd::dogen::coding::meta_model::module>& v);
@@ -273,6 +294,9 @@ private:
     std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object> > objects_;
     std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::exception> > exceptions_;
     std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::visitor> > visitors_;
+    std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline_group> modeline_groups_;
+    std::unordered_map<std::string, masd::dogen::coding::meta_model::licence> licences_;
+    std::unordered_map<std::string, masd::dogen::coding::meta_model::generation_marker> generation_markers_;
     boost::shared_ptr<masd::dogen::coding::meta_model::module> root_module_;
     masd::dogen::coding::meta_model::languages input_language_;
     std::list<masd::dogen::coding::meta_model::languages> output_languages_;

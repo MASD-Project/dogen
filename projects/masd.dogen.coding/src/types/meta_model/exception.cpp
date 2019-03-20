@@ -38,7 +38,8 @@ exception::exception(
     const bool is_element_extension,
     const masd::dogen::extraction::decoration_properties& decoration_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties)
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
+    const boost::optional<masd::dogen::coding::meta_model::local_decoration>& decoration)
     : masd::dogen::coding::meta_model::element(
       name,
       documentation,
@@ -52,7 +53,8 @@ exception::exception(
       is_element_extension,
       decoration_properties,
       artefact_properties,
-      archetype_location_properties) { }
+      archetype_location_properties,
+      decoration) { }
 
 void exception::accept(const element_visitor& v) const {
     v.visit(*this);

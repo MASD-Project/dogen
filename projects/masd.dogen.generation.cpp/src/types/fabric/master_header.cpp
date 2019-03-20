@@ -99,6 +99,7 @@ master_header::master_header(
     const masd::dogen::extraction::decoration_properties& decoration_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
+    const boost::optional<masd::dogen::coding::meta_model::local_decoration>& decoration,
     const std::unordered_map<std::string, std::unordered_map<std::string, std::list<masd::dogen::coding::meta_model::name> > >& inclusion_by_facet)
     : masd::dogen::coding::meta_model::element(
       name,
@@ -113,7 +114,8 @@ master_header::master_header(
       is_element_extension,
       decoration_properties,
       artefact_properties,
-      archetype_location_properties),
+      archetype_location_properties,
+      decoration),
       inclusion_by_facet_(inclusion_by_facet) { }
 
 void master_header::accept(const masd::dogen::coding::meta_model::element_visitor& v) const {

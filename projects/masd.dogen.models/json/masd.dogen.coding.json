@@ -137,6 +137,11 @@
         {
           "name": "archetype_location_properties",
           "type": "std::unordered_map<std::string, local_archetype_location_properties>"
+        },
+        {
+          "name": "decoration",
+          "type": "boost::optional<local_decoration>",
+          "documentation": "If set, decoration will be added to each generated file.\n"
         }
       ]
     },
@@ -637,6 +642,18 @@
           "name": "visitors",
           "type": "std::unordered_map<std::string, boost::shared_ptr<visitor>>",
           "documentation": "All visitors in this model.\n"
+        },
+        {
+          "name": "modeline_groups",
+          "type": "std::unordered_map<std::string, modeline_group>"
+        },
+        {
+          "name": "licences",
+          "type": "std::unordered_map<std::string, licence>"
+        },
+        {
+          "name": "generation_markers",
+          "type": "std::unordered_map<std::string, generation_marker>"
         },
         {
           "name": "root_module",
@@ -1906,6 +1923,233 @@
         {
           "name": "references",
           "type": "std::list<model>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::modeline_group",
+      "parents": [
+        "meta_model::element"
+      ],
+      "documentation": "Group of modelines, logically associated.\n\nFor example, one may choose to have a set of modelines for @e emacs , or for\n@e vi, etc.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "label",
+          "type": "std::string",
+          "documentation": "Label of the modeline group. Must be unique.\n"
+        },
+        {
+          "name": "modelines",
+          "type": "std::unordered_map<std::string, modeline>",
+          "documentation": "All the modelines for this group.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::modeline",
+      "documentation": "Groups all the fields representing editor variables for emacs, vi, etc.\n\nA field is a key-value pair (KVP), where name is the first element and its value\nthe second.\n\nExample: -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-\n\nIn this particular case, both prefix and postfix are @e -*-; @e mode is the first\nfield name and its value is @e c++; the KVP separator is @e : and the field\nseparator is @e ;.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "documentation": "Name of the modeline. Must be unique within a group.\n"
+        },
+        {
+          "name": "editor",
+          "type": "editor",
+          "documentation": "The modeline will use the syntax for this editor.\n"
+        },
+        {
+          "name": "location",
+          "type": "modeline_location",
+          "documentation": "Where to place the modeline.\n"
+        },
+        {
+          "name": "fields",
+          "type": "std::list<modeline_field>",
+          "documentation": "List of all the parameters in the preamble, in order of appearence.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::modeline_field",
+      "documentation": "Entry in a modeline.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "documentation": "Name of the field.\n"
+        },
+        {
+          "name": "value",
+          "type": "std::string",
+          "documentation": "Value of the field.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::editor",
+      "documentation": "Supported editors for modelines.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "emacs",
+          "type": "",
+          "documentation": "The emacs editor\n"
+        },
+        {
+          "name": "vi",
+          "type": "",
+          "documentation": "The generic vi editor\n"
+        },
+        {
+          "name": "vim",
+          "type": "",
+          "documentation": "The vi-like editor vim.\n"
+        },
+        {
+          "name": "ex",
+          "type": "",
+          "documentation": "The old ex editor.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::modeline_location",
+      "documentation": "Location in the file to place the modeline.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "top",
+          "type": "",
+          "documentation": "Very first line in file.\n"
+        },
+        {
+          "name": "bottom",
+          "type": "",
+          "documentation": "Very last line in file.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::licence",
+      "parents": [
+        "meta_model::element"
+      ],
+      "documentation": "Represents legal licence for software projects.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "short_form",
+          "type": "std::string",
+          "documentation": "Short version of the licence, for inclusion in project files.\n"
+        },
+        {
+          "name": "long_form",
+          "type": "std::string",
+          "documentation": "Long form of the licence text, suitable for generation of LICENCE files.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::generation_marker",
+      "parents": [
+        "meta_model::element"
+      ],
+      "documentation": "Properties of the \"generation marker\" to add to generated files.\n\nThese are also known as \"location strings\".\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "add_date_time",
+          "type": "bool",
+          "documentation": "If true, the location strings will include the date and time of generation.\n\nThis is not recomended for models that are generated often as it will trigger\nrebuilds for no good reason.\n"
+        },
+        {
+          "name": "add_dogen_version",
+          "type": "bool",
+          "documentation": "If true, adds the version of dogen used to generate the code.\n"
+        },
+        {
+          "name": "add_model_to_text_transform_details",
+          "type": "bool",
+          "documentation": "If true, adds information about the transform used to generate the file.\n"
+        },
+        {
+          "name": "add_warning",
+          "type": "bool",
+          "documentation": "If true, warns users that the file was code-generated.\n"
+        },
+        {
+          "name": "message",
+          "type": "std::string",
+          "documentation": "Custom message to add to each generated file.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::local_decoration",
+      "documentation": "Configuration pertaining to file decoration at the elment level.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "top_modeline",
+          "type": "std::string",
+          "documentation": "Modeline to use in this file, if any.\n"
+        },
+        {
+          "name": "bottom_modeline",
+          "type": "std::string"
+        },
+        {
+          "name": "copyrights",
+          "type": "std::list<std::string>",
+          "documentation": "All copyright notices for the current element.\n"
+        },
+        {
+          "name": "licence_short_form",
+          "type": "std::string",
+          "documentation": "Licence to use in this file, if any.\n"
+        },
+        {
+          "name": "generation_marker",
+          "type": "std::string",
+          "documentation": "Code generation marker to use for this element, if any.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::global_decoration",
+      "documentation": "Configuration pertaining to file decoration, applicable to all model elements which\ndo not provide an override.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "copyrights",
+          "type": "std::list<std::string>",
+          "documentation": "All copyright notices for the current element.\n"
+        },
+        {
+          "name": "licence_short_form",
+          "type": "std::string",
+          "documentation": "Licence to use by default for files in this model, if any.\n"
+        },
+        {
+          "name": "licence_long_form",
+          "type": "std::string",
+          "documentation": "Licence to use in this model, if any.\n"
+        },
+        {
+          "name": "generation_marker",
+          "type": "std::string",
+          "documentation": "Code generation marker to use for this model, if any.\n"
         }
       ]
     }
