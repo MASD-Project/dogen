@@ -1213,7 +1213,16 @@ elements. This must be done as part of the work to move fabric types
 into the metamodel. We should also take this opportunity to merge
 common types between C# and C++, if any exist.
 
-This will also address the naming of types such as registrar.
+Notes:
+
+- this will also address the naming of types such as registrar.
+- we need to remove all top-level knobs that are controlling the
+  enablement of meta-types such as visual studio, etc. In addition, at
+  present when we enable say ODB we automatically get ODB options,
+  etc. In this world, we would need to create the element in the
+  model. This is a bit confusing because users won't know this is a
+  requirement. Perhaps we need to have a combination of implicit and
+  explicit types?
 
 *** Move formattables into generation                                 :story:
 

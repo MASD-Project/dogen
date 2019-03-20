@@ -14,27 +14,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-20 Wed 08:33]
+#+CAPTION: Clock summary at [2019-03-20 Wed 12:02]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *62:22* |       |       | 100.0 |
+| *Total time*                                             | *65:50* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 62:22   |       |       | 100.0 |
-| Active                                                   |         | 62:22 |       | 100.0 |
-| Edit release notes for previous sprint                   |         |       |  2:22 |   3.8 |
-| Sprint and product backlog grooming                      |         |       |  7:46 |  12.5 |
-| Create a video demo for the sprint's features            |         |       |  3:47 |   6.1 |
+| Stories                                                  | 65:50   |       |       | 100.0 |
+| Active                                                   |         | 65:50 |       | 100.0 |
+| Edit release notes for previous sprint                   |         |       |  2:22 |   3.6 |
+| Sprint and product backlog grooming                      |         |       |  7:46 |  11.8 |
+| Create a video demo for the sprint's features            |         |       |  3:47 |   5.7 |
 | Make projects directory env optional                     |         |       |  0:10 |   0.3 |
-| Clang-cl builds are failing due to memory leak reporting |         |       |  0:45 |   1.2 |
-| Add tests for tracing, reporting and diffing             |         |       |  5:46 |   9.2 |
-| Delete extra files appears broken at present             |         |       |  6:26 |  10.3 |
-| Empty directories should be deleted                      |         |       |  5:37 |   9.0 |
-| Changes to stitch templates are not reported correctly   |         |       |  1:09 |   1.8 |
-| Orchestration test is broken on Windows                  |         |       |  2:40 |   4.3 |
-| Code generation of tests for dogen models                |         |       | 23:22 |  37.5 |
+| Clang-cl builds are failing due to memory leak reporting |         |       |  0:45 |   1.1 |
+| Add tests for tracing, reporting and diffing             |         |       |  5:46 |   8.8 |
+| Delete extra files appears broken at present             |         |       |  6:26 |   9.8 |
+| Empty directories should be deleted                      |         |       |  5:37 |   8.5 |
+| Changes to stitch templates are not reported correctly   |         |       |  1:09 |   1.7 |
+| Orchestration test is broken on Windows                  |         |       |  2:40 |   4.1 |
+| Code generation of tests for dogen models                |         |       | 23:22 |  35.5 |
 | Formatters have been incorrectly placed under extraction |         |       |  0:23 |   0.6 |
-| Modeline groups as meta-model elements                   |         |       |  2:09 |   3.4 |
+| Modeline groups as meta-model elements                   |         |       |  5:37 |   8.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -890,6 +890,7 @@ Notes:
 
 *** STARTED Modeline groups as meta-model elements                    :story:
     :LOGBOOK:
+    CLOCK: [2019-03-20 Wed 08:34]--[2019-03-20 Wed 12:02] =>  3:28
     CLOCK: [2019-03-19 Tue 15:31]--[2019-03-19 Tue 17:40] =>  2:09
     :END:
 
@@ -917,10 +918,16 @@ Notes:
   decoratable elements and those that are not. Make them optional?
 - modeline_group, modeline, modeline_field, licence_text, marker (real
   name: location strings) become meta-model entities.
+- decoration is a mapping of meta-type to modeline name. All coding
+  elements for a kernel map to the technical space, except for build
+  files, etc. This could be achieved by adding some meta-data. The
+  good thing about this approach is that we can create a profile for
+  these and make it transparent to users
+  (=masd::standard_modelines=?).
 
 *** Consider introducing formatter "location strings"                 :story:
 
-In MDSD, we have the notion of "location strngs":
+In MDSD, we have the notion of "location strngs" (volter, p.153):
 
 #+begin_quote
 A third and very useful technique is the application of location
@@ -936,6 +943,17 @@ string might look like this:
 This may be a useful thing. However, adding dates and dogen version
 etc will cause spurious diffs.
 
+*** LAM types should exist as a model                                 :story:
+
+At present we use LAM as a conceptual device: we don't even have a LAM
+model. Users create attributes with LAM types and we map them to
+concrete technical spaces such as C++ and C#. However, this means we
+do not even resolve lam types, nor do we tell users what types are
+available. A better approach would be to create a LAM model with types
+and make the mappings properties of the types themselves. these can
+now be placed under the =masd= namespace: =masd::lannguage_agnostic=,
+=masd::la= or maybe =masd::pim=. This should be done when we place
+mappings in the meta-model.
 
 *** Location of =--byproduct-directory= not respected                 :story:
 
@@ -1359,6 +1377,27 @@ time. Solutions:
   representation. We also need to be able to dynamically determine if
   the value is a container or just a plain value when deserialising
   from JSON. If it's a container, we need to flatten it.
+- actually, now that we added annotations to the injection model, we
+  can first perform the annotations transform; this would convert the
+  keys to the right types. We can then convert to JSON using the
+  annotations. However, the one downside of this approach is that the
+  JSON representation of injection would be at a higher level of
+  abstraction.
+- the final solution for this is to make the map a container of
+  pairs. In effect that is what the container is in the first place,
+  we just mapped it incorrectly into JSON. So instead of
+
+:  "tagged_values": {
+:    "masd.injection.reference": "cpp.builtins",
+:    "masd.injection.reference": "cpp.std",
+:    "masd.injection.reference": "cpp.boost",
+
+  we'd have:
+
+:  "tagged_values": [
+:    { "masd.injection.reference": "cpp.builtins" },
+:    { "masd.injection.reference": "cpp.std" },
+:    { "masd.injection.reference": "cpp.boost" },
 
 Merged stories:
 
