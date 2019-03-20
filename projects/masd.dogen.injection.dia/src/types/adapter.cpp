@@ -63,6 +63,7 @@ adapter::adapt(const processed_attribute& a) {
     injection::meta_model::attribute r;
     r.name(a.name());
     r.type(a.type());
+    r.value(a.value());
     r.documentation(a.comment().documentation());
     r.tagged_values(a.comment().tagged_values());
     return r;

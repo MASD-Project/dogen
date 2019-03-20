@@ -46,6 +46,7 @@ static logger lg(logger_factory("injection.dia.processed_object_factory"));
 const std::string dia_string("string");
 const std::string dia_name("name");
 const std::string dia_type("type");
+const std::string dia_value("value");
 const std::string dia_text("text");
 const std::string dia_comment("comment");
 const std::string dia_stereotype("stereotype");
@@ -264,6 +265,8 @@ void  processed_object_factory::parse_as_class_attributes(
                 pa.name(parse_string_attribute(*a));
             else if (a->name() == dia_type)
                 pa.type(parse_string_attribute(*a));
+            else if (a->name() == dia_value)
+                pa.value(parse_string_attribute(*a));
             else if (a->name() == dia_comment)
                 pa.comment(create_processed_comment(*a));
             else

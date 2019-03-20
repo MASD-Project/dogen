@@ -1120,6 +1120,12 @@ Validation rules:
 - property can only have a default value if built-in
 - property default value must be castable to built-in type.
 
+Notes:
+
+- we have now implemented support for values at the dia and injection
+  level (not JSON). We just need to propagate it into coding and
+  express it on the model to text transforms.
+
 *** Add support for interfaces                                         :epic:
 
 It would be great to be able to mark a type as an interface, add all

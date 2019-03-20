@@ -14,27 +14,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-20 Wed 14:23]
+#+CAPTION: Clock summary at [2019-03-20 Wed 14:33]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *65:58* |       |       | 100.0 |
+| *Total time*                                             | *66:07* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 65:58   |       |       | 100.0 |
-| Active                                                   |         | 65:58 |       | 100.0 |
+| Stories                                                  | 66:07   |       |       | 100.0 |
+| Active                                                   |         | 66:07 |       | 100.0 |
 | Edit release notes for previous sprint                   |         |       |  2:22 |   3.6 |
-| Sprint and product backlog grooming                      |         |       |  7:46 |  11.8 |
+| Sprint and product backlog grooming                      |         |       |  7:46 |  11.7 |
 | Create a video demo for the sprint's features            |         |       |  3:47 |   5.7 |
 | Make projects directory env optional                     |         |       |  0:10 |   0.3 |
 | Clang-cl builds are failing due to memory leak reporting |         |       |  0:45 |   1.1 |
 | Add tests for tracing, reporting and diffing             |         |       |  5:46 |   8.7 |
-| Delete extra files appears broken at present             |         |       |  6:26 |   9.8 |
+| Delete extra files appears broken at present             |         |       |  6:26 |   9.7 |
 | Empty directories should be deleted                      |         |       |  5:37 |   8.5 |
 | Changes to stitch templates are not reported correctly   |         |       |  1:09 |   1.7 |
 | Orchestration test is broken on Windows                  |         |       |  2:40 |   4.0 |
-| Code generation of tests for dogen models                |         |       | 23:22 |  35.4 |
+| Code generation of tests for dogen models                |         |       | 23:22 |  35.3 |
 | Formatters have been incorrectly placed under extraction |         |       |  0:23 |   0.6 |
-| Modeline groups as meta-model elements                   |         |       |  5:45 |   8.7 |
+| Modeline groups as meta-model elements                   |         |       |  5:54 |   8.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -890,6 +890,7 @@ Notes:
 
 *** STARTED Modeline groups as meta-model elements                    :story:
     :LOGBOOK:
+    CLOCK: [2019-03-20 Wed 14:24]--[2019-03-20 Wed 14:33] =>  0:09
     CLOCK: [2019-03-20 Wed 14:15]--[2019-03-20 Wed 14:23] =>  0:08
     CLOCK: [2019-03-20 Wed 08:34]--[2019-03-20 Wed 12:02] =>  3:28
     CLOCK: [2019-03-19 Tue 15:31]--[2019-03-19 Tue 17:40] =>  2:09
