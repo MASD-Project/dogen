@@ -166,9 +166,9 @@ void builder::add(const processed_object& po) {
     }
 
     /*
-     * For all other cases other than UML notes, we know we need to
-     * generate a element. For these, the first thing we need to do is
-     * to figure out the containment of the current process object.
+     * For all cases other than UML notes, we know we need to generate
+     * an element. For these, the first thing we need to do is to
+     * figure out the containment of the current process object.
      */
     const auto& id(po.id());
     const auto cby(contained_by(po.child_node_id()));
@@ -181,7 +181,7 @@ void builder::add(const processed_object& po) {
     BOOST_LOG_SEV(lg, debug) << "Parents: " << p;
 
     /*
-     * Now we can adapt the processed object and add it to the model.
+     * Adapt the processed object and add it to the model.
      */
     const auto e(adapter::adapt(po, cby, p));
     model_.elements().push_back(e);
