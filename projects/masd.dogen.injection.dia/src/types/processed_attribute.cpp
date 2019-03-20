@@ -25,22 +25,26 @@ namespace masd::dogen::injection::dia {
 processed_attribute::processed_attribute(
     const std::string& name,
     const std::string& type,
-    const masd::dogen::injection::dia::processed_comment& comment)
+    const masd::dogen::injection::dia::processed_comment& comment,
+    const std::string& value)
     : name_(name),
       type_(type),
-      comment_(comment) { }
+      comment_(comment),
+      value_(value) { }
 
 void processed_attribute::swap(processed_attribute& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(type_, other.type_);
     swap(comment_, other.comment_);
+    swap(value_, other.value_);
 }
 
 bool processed_attribute::operator==(const processed_attribute& rhs) const {
     return name_ == rhs.name_ &&
         type_ == rhs.type_ &&
-        comment_ == rhs.comment_;
+        comment_ == rhs.comment_ &&
+        value_ == rhs.value_;
 }
 
 processed_attribute& processed_attribute::operator=(processed_attribute other) {
@@ -95,6 +99,22 @@ void processed_attribute::comment(const masd::dogen::injection::dia::processed_c
 
 void processed_attribute::comment(const masd::dogen::injection::dia::processed_comment&& v) {
     comment_ = std::move(v);
+}
+
+const std::string& processed_attribute::value() const {
+    return value_;
+}
+
+std::string& processed_attribute::value() {
+    return value_;
+}
+
+void processed_attribute::value(const std::string& v) {
+    value_ = v;
+}
+
+void processed_attribute::value(const std::string&& v) {
+    value_ = std::move(v);
 }
 
 }

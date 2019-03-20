@@ -46,6 +46,7 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
     v.type(create_std_string(position + 1));
     v.comment(create_masd_dogen_injection_dia_processed_comment(position + 2));
+    v.value(create_std_string(position + 3));
 }
 
 processed_attribute_generator::result_type

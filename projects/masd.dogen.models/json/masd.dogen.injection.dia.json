@@ -81,6 +81,10 @@
           "name": "comment",
           "type": "processed_comment",
           "documentation": "Any comments associated with the property.\n"
+        },
+        {
+          "name": "value",
+          "type": "std::string"
         }
       ]
     },

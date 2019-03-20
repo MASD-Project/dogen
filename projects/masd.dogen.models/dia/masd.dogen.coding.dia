@@ -7154,19 +7154,19 @@ This is used to break cycles where required.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O51">
       <dia:attribute name="obj_pos">
-        <dia:point val="-180,-83"/>
+        <dia:point val="-177,-85"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-180.05,-83.05;-162.11,-80.45"/>
+        <dia:rectangle val="-177.05,-85.05;-164.885,-82.45"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-180,-83"/>
+        <dia:point val="-177,-85"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.840000000000003"/>
+        <dia:real val="12.065000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -7183,8 +7183,8 @@ This is used to break cycles where required.#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Defines positions of names in coding element
-space.#</dia:string>
+            <dia:string>#Defines positions of names in
+coding element space.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -7193,7 +7193,7 @@ space.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-179.65,-81.755"/>
+            <dia:point val="-176.65,-83.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -7207,17 +7207,17 @@ space.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O52">
       <dia:attribute name="obj_pos">
-        <dia:point val="-162.16,-81.75"/>
+        <dia:point val="-164.935,-83.75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-162.216,-82.4531;-159.739,-81.2"/>
+        <dia:rectangle val="-164.997,-83.8121;-159.839,-81.9021"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="-162.16,-81.75"/>
-        <dia:point val="-159.84,-82.05"/>
+        <dia:point val="-164.935,-83.75"/>
+        <dia:point val="-160,-82.3"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -7232,10 +7232,11 @@ space.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="-161,-81.4"/>
+        <dia:point val="-162.468,-82.525"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O51" connection="4"/>
+        <dia:connection handle="1" to="O32" connection="10"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>

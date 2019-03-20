@@ -38,7 +38,8 @@ std::ostream& operator<<(std::ostream& s, const processed_attribute& v) {
       << "\"__type__\": " << "\"masd::dogen::injection::dia::processed_attribute\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"type\": " << "\"" << tidy_up_string(v.type()) << "\"" << ", "
-      << "\"comment\": " << v.comment()
+      << "\"comment\": " << v.comment() << ", "
+      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
       << " }";
     return(s);
 }

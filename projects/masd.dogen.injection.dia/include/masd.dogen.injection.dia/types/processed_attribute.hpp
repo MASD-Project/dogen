@@ -42,7 +42,8 @@ public:
     processed_attribute(
         const std::string& name,
         const std::string& type,
-        const masd::dogen::injection::dia::processed_comment& comment);
+        const masd::dogen::injection::dia::processed_comment& comment,
+        const std::string& value);
 
 public:
     /**
@@ -75,6 +76,11 @@ public:
     void comment(const masd::dogen::injection::dia::processed_comment&& v);
     /**@}*/
 
+    const std::string& value() const;
+    std::string& value();
+    void value(const std::string& v);
+    void value(const std::string&& v);
+
 public:
     bool operator==(const processed_attribute& rhs) const;
     bool operator!=(const processed_attribute& rhs) const {
@@ -89,6 +95,7 @@ private:
     std::string name_;
     std::string type_;
     masd::dogen::injection::dia::processed_comment comment_;
+    std::string value_;
 };
 
 }
