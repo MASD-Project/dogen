@@ -683,6 +683,49 @@ from reference model.
 We need to check to see what happens if you enter the same reference
 multiple times. We should error.
 
+*** Stitch does not handle directories very well                      :story:
+
+At present we seem to generate log files called =.= when we use stitch
+against a directory. This should only happen if we use =.= on the
+target parameter, e.g.:
+
+: --target .
+
+Not sure why it is happening when we call stitch from CMake since it
+should use the full path to the =cpp= directory.
+
+*** Serialisation support for C++-11 specific containers              :story:
+
+We can't add =std::array= or =std::forward_list= because there is no
+serialisation support in boost 1.49. A mail was sent to the list to
+see if this has changed in latter versions:
+
+http://lists.boost.org/boost-users/2012/11/76458.php
+
+However, it should be pretty trivial to generate serialisation code by
+hand at least for =std::array= or to use a solution similar to
+=std::unordered_map=.
+
+*** Shared pointers to built-in types                                 :story:
+
+At present we do not support shared pointers to built-in types. This
+is because they require special handling in serialisation. See:
+
+http://boost.2283326.n4.nabble.com/Serialization-of-boost-shared-ptr-lt-int-gt-td2554242.html
+
+We probably need to iterate through all the nested types and find out
+if there is a shared pointer to built-in; if there is, put in:
+
+: // defined a "special kind of integer"
+: BOOST_STRONG_TYPEDEF(int, tracked_int)
+:
+: // define serialization for a tracked int
+: template<class Archive>
+: void serialize(Archive &ar, tracked_int & ti, const unsigned int version){
+:     // serialize the underlying int
+:     ar & static_cast<int &>(ti);
+: }
+
 ** Missing tests and validation
 
 Things we are not testing at present but should, validation that could
@@ -706,6 +749,8 @@ Missing validation:
 - start control block marker inside of an inline control block.
 - profile cannot have the same type instantiated more than once.
 - type definition cannot define the same type more than once.
+- directives cannot be used in lines with mixed content;
+- variables cannot be used in lines with mixed content;
 
 *** Tests for error conditions in libxml                              :story:
 
@@ -5666,25 +5711,9 @@ but our tests expect:
 
 This must be part of a refactoring that wasn't completed properly.
 
-*** Shared pointers to built-in types                                 :story:
+** Technical debt, improvements
 
-At present we do not support shared pointers to built-in types. This
-is because they require special handling in serialisation. See:
-
-http://boost.2283326.n4.nabble.com/Serialization-of-boost-shared-ptr-lt-int-gt-td2554242.html
-
-We probably need to iterate through all the nested types and find out
-if there is a shared pointer to built-in; if there is, put in:
-
-: // defined a "special kind of integer"
-: BOOST_STRONG_TYPEDEF(int, tracked_int)
-:
-: // define serialization for a tracked int
-: template<class Archive>
-: void serialize(Archive &ar, tracked_int & ti, const unsigned int version){
-:     // serialize the underlying int
-:     ar & static_cast<int &>(ti);
-: }
+Ideas to improve the code base.
 
 *** Full constructor parameter comments                               :story:
 
@@ -5697,18 +5726,6 @@ We could use the comments in properties to populate the comments for
 the full constructor for each parameter. This would require taking the
 first line of the documentation of each property and then stitching
 them together for the full constructor.
-
-*** Serialisation support for C++-11 specific containers              :story:
-
-We can't add =std::array= or =std::forward_list= because there is no
-serialisation support in boost 1.49. A mail was sent to the list to
-see if this has changed in latter versions:
-
-http://lists.boost.org/boost-users/2012/11/76458.php
-
-However, it should be pretty trivial to generate serialisation code by
-hand at least for =std::array= or to use a solution similar to
-=std::unordered_map=.
 
 *** Header only models shall not generate projects                    :story:
 
@@ -5726,23 +5743,22 @@ makefile if there are no implementation files generated.
 At present we are depending on the types header but it seems we could
 depend only on the forward declarations.
 
-** In the longer term
+*** Improve streaming of empty expressions in stitch                  :story:
 
-If we have enough time and disposition, we may sneak some of these
-in. This release is all about getting the architecture right.
+We have a problem with empty expressions:
 
-*** Add a file format parameter to tracing for model dumps            :story:
+: <#= #>
 
-At present we are dumping all models in probing as JSON. It would be
-nice to be able to dump them as boost serialisation so we can plug
-them into tests or to reproduce some problem. It would be even nicer
-if we could plug that data back in to dogen but its not obvious how
-that would work; we need to have some kind of concept of "stages", and
-then supply the inputs and the stage so that dogen could continue from
-there.
+Results in:
 
-One slight downside of this is that we'd need serialisation support
-for all core models. But its still very useful.
+: s << <<
+
+We need to ignore empty expressions.
+
+*** Rename sequence formatter                                         :story:
+
+The =sequence_formatter= is actually not a formatter, but a helper or
+assistant.
 
 *** Improvements to dia model                                         :story:
 
@@ -5777,63 +5793,6 @@ Assorted notes on cleaning-up the dia model:
 - alternative: create an XML schema from the DTD and use it with the
   XSD tool to create the model.
 
-*** Add full support for type_index                                   :story:
-
-At present we cannot create containers using =std::type_index= as a
-key because we do not have hashing, IO and serialisation support.
-
-Links:
-
-- [[http://stackoverflow.com/questions/36219532/serializing-stdtype-index][Serializing `std::type_index`]]
-
-*** Rename sequence formatter                                         :story:
-
-The =sequence_formatter= is actually not a formatter, but a helper or
-assistant.
-
-*** Improve validation in stitch                                      :story:
-
-A few things we should check but are not at present:
-
-- directives cannot be used in lines with mixed content;
-- variables cannot be used in lines with mixed content;
-
-*** Improve streaming of empty expressions in stitch                  :story:
-
-We have a problem with empty expressions:
-
-: <#= #>
-
-Results in:
-
-: s << <<
-
-We need to ignore empty expressions.
-
-*** Stitch does not handle directories very well                      :story:
-
-At present we seem to generate log files called =.= when we use stitch
-against a directory. This should only happen if we use =.= on the
-target parameter, e.g.:
-
-: --target .
-
-Not sure why it is happening when we call stitch from CMake since it
-should use the full path to the =cpp= directory.
-
-*** Use pointer container                                             :story:
-
-We should look for cases where we can simplify things using pointer
-containers. Two use cases spring to mind:
-
-- at present we are using shared pointers on all registrars. This
-  makes no sense as the pointer ownership is clear (the registrar owns
-  the pointer). We should use a boost pointer container and pass
-  references around, via reference wrapper where required.
-- model has a container of shared pointer of element. We don't really
-  need the shared pointer abilities; once allocated these are pretty
-  const.
-
 *** Create more "utility" members for formatters                       :epic:
 
 One way of making the templates a bit more manageable is to avoid
@@ -5851,11 +5810,6 @@ could be replaced with =has_swap=, or perhaps even =has_public_swap= /
 
 At the moment we use extensions such as =xmlyarn=. It should really be
 =.xml.yarn= or something of the kind.
-
-
-** Technical debt, improvements
-
-Ideas to improve the code base.
 
 *** Investigate the integration of =boost::log= with throw exception  :story:
 
@@ -5971,7 +5925,6 @@ could pass in the configuration for each method invocation rather than
 for the entire factory.
 
 
-
 *** Consider using boost pointer container for formatters             :story:
 
 At present we are using a container of shared pointers to house the
@@ -6036,12 +5989,33 @@ if thee is just one line, as is the case with enumerations, we do not
 want to add any new lines. This is because the stitch template will
 add new lines so we end up with too many of them.
 
-
 ** Feature Heap
 
 Features for which there is no urgency but we'd like to see them
 implemented at some point. They may require some alterations to the
 core, but not fundamental rethinking.
+
+*** Add support for type_index                                        :story:
+
+At present we cannot create containers using =std::type_index= as a
+key because we do not have hashing, IO and serialisation support.
+
+Links:
+
+- [[http://stackoverflow.com/questions/36219532/serializing-stdtype-index][Serializing `std::type_index`]]
+
+*** Add a file format parameter to tracing for model dumps            :story:
+
+At present we are dumping all models in probing as JSON. It would be
+nice to be able to dump them as boost serialisation so we can plug
+them into tests or to reproduce some problem. It would be even nicer
+if we could plug that data back in to dogen but its not obvious how
+that would work; we need to have some kind of concept of "stages", and
+then supply the inputs and the stage so that dogen could continue from
+there.
+
+One slight downside of this is that we'd need serialisation support
+for all core models. But its still very useful.
 
 *** Support only specific attributes for certain facets               :story:
 
@@ -7305,6 +7279,19 @@ We already have serialisation support for all containers.
 Links:
 
 - [[http://www.boost.org/doc/libs/1_64_0/libs/ptr_container/doc/headers.html][Pointer Container Library - Library Headers]]
+
+*** Use pointer container                                             :story:
+
+We should look for cases where we can simplify things using pointer
+containers. Two use cases spring to mind:
+
+- at present we are using shared pointers on all registrars. This
+  makes no sense as the pointer ownership is clear (the registrar owns
+  the pointer). We should use a boost pointer container and pass
+  references around, via reference wrapper where required.
+- model has a container of shared pointer of element. We don't really
+  need the shared pointer abilities; once allocated these are pretty
+  const.
 
 *** Add support to foreign keys in ORM                                :story:
 
