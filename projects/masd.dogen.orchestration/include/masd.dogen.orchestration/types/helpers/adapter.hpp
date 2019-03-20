@@ -44,10 +44,17 @@
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/meta_model/builtin.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
+#include "masd.dogen.coding/types/meta_model/modeline.hpp"
+#include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
+#include "masd.dogen.coding/types/meta_model/licence.hpp"
 #include "masd.dogen.orchestration/types/helpers/stereotypes_conversion_result.hpp"
 
 namespace masd::dogen::orchestration::helpers {
 
+/**
+ * @brief Adapts types from the injection model into the coding model.
+ */
 class adapter final {
 public:
     explicit adapter(const annotations::annotation_expander& e);
@@ -63,7 +70,9 @@ private:
      * @brief Creates a coding name using the element name provided, and
      * places it in the location provided.
      *
-     * n may be a simple name or a qualified name.
+     * @param l location for the name.
+     * @param n may be a simple name or a qualified name, via a scope
+     * operator.
      *
      * @pre n must not be empty.
      */
@@ -100,8 +109,8 @@ private:
 
 public:
     /**
-     * @brief Converts an exoelement with a stereotype of coding::object
-     * to a coding object.
+     * @brief Converts an injection element with a stereotype of
+     * masd::object to a coding object.
      */
     boost::shared_ptr<coding::meta_model::object>
     to_object(const coding::meta_model::location& l,
@@ -110,7 +119,7 @@ public:
 
     /**
      * @brief Converts an exoelement with a stereotype of
-     * coding::object_template to a coding object template.
+     * masd::object_template to a coding object template.
      */
     boost::shared_ptr<coding::meta_model::object_template>
     to_object_template(const coding::meta_model::location& l,
@@ -159,6 +168,42 @@ public:
      */
     boost::shared_ptr<coding::meta_model::builtin>
     to_builtin(const coding::meta_model::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::meta_model::element& ie) const;
+
+    /**
+     * @brief Converts an exoelement with a stereotype of
+     * coding::module to a coding module.
+     */
+    boost::shared_ptr<coding::meta_model::builtin>
+    to_modeline_group(const coding::meta_model::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::meta_model::element& ie) const;
+
+    /**
+     * @brief Converts an exoelement with a stereotype of
+     * coding::module to a coding module.
+     */
+    boost::shared_ptr<coding::meta_model::builtin>
+    to_modeline(const coding::meta_model::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::meta_model::element& ie) const;
+
+    /**
+     * @brief Converts an exoelement with a stereotype of
+     * coding::module to a coding module.
+     */
+    boost::shared_ptr<coding::meta_model::builtin>
+    to_generation_marker(const coding::meta_model::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::meta_model::element& ie) const;
+
+    /**
+     * @brief Converts an exoelement with a stereotype of
+     * coding::module to a coding module.
+     */
+    boost::shared_ptr<coding::meta_model::builtin>
+    to_licence(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 

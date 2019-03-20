@@ -105,7 +105,8 @@ adapter::to_enumerator(const coding::meta_model::location& /*l*/,
 
 void adapter::populate_element(const coding::meta_model::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie, coding::meta_model::element& e) const {
+    const injection::meta_model::element& ie,
+    coding::meta_model::element& e) const {
     e.name(to_name(l, ie.name()));
     e.origin_type(coding::meta_model::origin_types::not_yet_determined);
     e.documentation(ie.documentation());

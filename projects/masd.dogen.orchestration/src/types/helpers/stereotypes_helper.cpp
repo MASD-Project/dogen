@@ -48,7 +48,12 @@ const std::string stereotype_fluent("masd::fluent");
 const std::string stereotype_immutable("masd::immutable");
 const std::string stereotype_orm_object("masd::orm::object");
 const std::string stereotype_orm_value("masd::orm::value");
-
+const std::string stereotype_modeline_group(
+    "masd::decoration::modeline_group");
+const std::string stereotype_modeline("masd::decoration::modeline");
+const std::string stereotype_generation_marker(
+    "masd::decoration::generation_marker");
+const std::string stereotype_licence("masd::decoration::licence");
 const std::string unsupported_stereotype("Invalid or unsupported stereotype: ");
 
 }
@@ -84,6 +89,14 @@ static_stereotypes stereotypes_helper::from_string(const std::string& s) const {
         return static_stereotypes::orm_object;
     else if (s == stereotype_orm_value)
         return static_stereotypes::orm_value;
+    else if (s == stereotype_modeline_group)
+        return static_stereotypes::modeline_group;
+    else if (s == stereotype_modeline)
+        return static_stereotypes::modeline;
+    else if (s == stereotype_generation_marker)
+        return static_stereotypes::generation_marker;
+    else if (s == stereotype_licence)
+        return static_stereotypes::licence;
 
     BOOST_LOG_SEV(lg, error) << "Could not convert stereotype.";
 
@@ -133,6 +146,12 @@ to_string(const static_stereotypes ss) const {
     case static_stereotypes::immutable: return stereotype_immutable;
     case static_stereotypes::orm_object: return stereotype_orm_object;
     case static_stereotypes::orm_value: return stereotype_orm_value;
+    case static_stereotypes::modeline_group: return stereotype_modeline_group;
+    case static_stereotypes::modeline: return stereotype_modeline;
+    case static_stereotypes::generation_marker:
+        return stereotype_generation_marker;
+    case static_stereotypes::licence: return stereotype_licence;
+
     default: {
         const std::string s(boost::lexical_cast<std::string>(ss));
         BOOST_LOG_SEV(lg, error) << unsupported_stereotype << s;
@@ -150,7 +169,11 @@ is_element_type(const static_stereotypes ss) const {
         ss == static_stereotypes::primitive ||
         ss == static_stereotypes::enumeration ||
         ss == static_stereotypes::module ||
-        ss == static_stereotypes::builtin;
+        ss == static_stereotypes::builtin ||
+        ss == static_stereotypes::modeline_group ||
+        ss == static_stereotypes::modeline ||
+        ss == static_stereotypes::generation_marker ||
+        ss == static_stereotypes::licence;
 }
 
 std::list<static_stereotypes> stereotypes_helper::extract_element_types(
