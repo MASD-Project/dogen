@@ -82,7 +82,8 @@ std::ostream& operator<<(std::ostream& s, const attribute& v) {
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"annotation\": " << v.annotation() << ", "
-      << "\"type\": " << "\"" << tidy_up_string(v.type()) << "\""
+      << "\"type\": " << "\"" << tidy_up_string(v.type()) << "\"" << ", "
+      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
       << " }";
     return(s);
 }

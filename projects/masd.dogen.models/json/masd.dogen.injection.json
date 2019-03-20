@@ -145,6 +145,11 @@
         {
           "name": "type",
           "type": "std::string"
+        },
+        {
+          "name": "value",
+          "type": "std::string",
+          "documentation": "Default value for this attribute, if any.\n"
         }
       ]
     },

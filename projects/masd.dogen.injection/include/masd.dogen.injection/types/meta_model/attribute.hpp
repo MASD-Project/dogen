@@ -47,7 +47,8 @@ public:
         const std::string& documentation,
         const std::string& name,
         const masd::dogen::annotations::annotation& annotation,
-        const std::string& type);
+        const std::string& type,
+        const std::string& value);
 
 public:
     const std::list<std::pair<std::string, std::string> >& tagged_values() const;
@@ -94,6 +95,16 @@ public:
     void type(const std::string& v);
     void type(const std::string&& v);
 
+    /**
+     * @brief Default value for this attribute, if any.
+     */
+    /**@{*/
+    const std::string& value() const;
+    std::string& value();
+    void value(const std::string& v);
+    void value(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const attribute& rhs) const;
     bool operator!=(const attribute& rhs) const {
@@ -111,6 +122,7 @@ private:
     std::string name_;
     masd::dogen::annotations::annotation annotation_;
     std::string type_;
+    std::string value_;
 };
 
 }

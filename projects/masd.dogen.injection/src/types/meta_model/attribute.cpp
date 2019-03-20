@@ -28,13 +28,15 @@ attribute::attribute(
     const std::string& documentation,
     const std::string& name,
     const masd::dogen::annotations::annotation& annotation,
-    const std::string& type)
+    const std::string& type,
+    const std::string& value)
     : tagged_values_(tagged_values),
       stereotypes_(stereotypes),
       documentation_(documentation),
       name_(name),
       annotation_(annotation),
-      type_(type) { }
+      type_(type),
+      value_(value) { }
 
 void attribute::swap(attribute& other) noexcept {
     using std::swap;
@@ -44,6 +46,7 @@ void attribute::swap(attribute& other) noexcept {
     swap(name_, other.name_);
     swap(annotation_, other.annotation_);
     swap(type_, other.type_);
+    swap(value_, other.value_);
 }
 
 bool attribute::operator==(const attribute& rhs) const {
@@ -52,7 +55,8 @@ bool attribute::operator==(const attribute& rhs) const {
         documentation_ == rhs.documentation_ &&
         name_ == rhs.name_ &&
         annotation_ == rhs.annotation_ &&
-        type_ == rhs.type_;
+        type_ == rhs.type_ &&
+        value_ == rhs.value_;
 }
 
 attribute& attribute::operator=(attribute other) {
@@ -155,6 +159,22 @@ void attribute::type(const std::string& v) {
 
 void attribute::type(const std::string&& v) {
     type_ = std::move(v);
+}
+
+const std::string& attribute::value() const {
+    return value_;
+}
+
+std::string& attribute::value() {
+    return value_;
+}
+
+void attribute::value(const std::string& v) {
+    value_ = v;
+}
+
+void attribute::value(const std::string&& v) {
+    value_ = std::move(v);
 }
 
 }

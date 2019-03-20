@@ -73,6 +73,7 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 3));
     v.annotation(create_masd_dogen_annotations_annotation(position + 4));
     v.type(create_std_string(position + 5));
+    v.value(create_std_string(position + 6));
 }
 
 attribute_generator::result_type
