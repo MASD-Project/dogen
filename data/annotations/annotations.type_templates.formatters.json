@@ -82,5 +82,53 @@
     "value_type": "text",
     "template_kind": "instance",
     "scope": "any"
+  },
+  {
+    "name": {
+      "simple": "editor",
+      "qualified": "masd.decoration.modeline.editor"
+    },
+    "archetype_location": {
+      "kernel": "formatters"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "any"
+  },
+  {
+    "name": {
+      "simple": "location",
+      "qualified": "masd.decoration.modeline.location"
+    },
+    "archetype_location": {
+      "kernel": "formatters"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "any"
+  },
+  {
+    "name": {
+      "simple": "language",
+      "qualified": "masd.decoration.modeline.language"
+    },
+    "archetype_location": {
+      "kernel": "formatters"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "any"
+  },
+  {
+    "name": {
+      "simple": "element",
+      "qualified": "masd.decoration.modeline.element"
+    },
+    "archetype_location": {
+      "kernel": "formatters"
+    },
+    "value_type": "text_collection",
+    "template_kind": "instance",
+    "scope": "any"
   }
 ]
