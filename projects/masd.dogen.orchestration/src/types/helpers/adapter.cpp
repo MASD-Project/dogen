@@ -32,8 +32,21 @@ namespace {
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("orchestration.helpers.adapter"));
 
+const std::string short_form_attr_name("short_form");
+const std::string long_form_attr_name("long_form");
+const std::string add_date_time_attr_name("add_date_time");
+const std::string add_dogen_version_attr_name("add_dogen_version");
+const std::string add_model_to_text_transform_details_attr_name(
+    "add_model_to_text_transform_details");
+const std::string add_warning_attr_name("add_warning");
+const std::string add_message_attr_name("message");
+const std::string true_value("true");
+const std::string false_value("false");
+
 const std::string empty_name("Name is empty.");
 const std::string enumerator_with_type("Enumerators cannot have a type: ");
+const std::string unsupported_attribute("Attribute is not supported: ");
+const std::string unsupported_value("Unsupported attribute value: ");
 
 }
 
@@ -70,13 +83,23 @@ coding::meta_model::name adapter::to_name(const coding::meta_model::location& l,
     return b.build();
 }
 
+coding::meta_model::modeline_field
+adapter::to_modeline_field(const injection::meta_model::attribute& ia) const {
+    ensure_not_empty(ia.name());
+    ensure_not_empty(ia.value());
+
+    coding::meta_model::modeline_field r;
+    r.name(ia.name());
+    r.value(ia.value());
+    return r;
+}
+
 coding::meta_model::attribute
-adapter::to_attribute(const coding::meta_model::location& /*l*/,
-    const injection::meta_model::attribute& ia) const {
+adapter::to_attribute(const injection::meta_model::attribute& ia) const {
     ensure_not_empty(ia.name());
 
     coding::meta_model::attribute r;
-    r.name().simple(ia.name()); // FIXME
+    r.name().simple(ia.name());
     r.unparsed_type(ia.type());
     r.documentation(ia.documentation());
     r.annotation(annotation_expander_.expand(ia.annotation()));
@@ -85,8 +108,7 @@ adapter::to_attribute(const coding::meta_model::location& /*l*/,
 }
 
 coding::meta_model::enumerator
-adapter::to_enumerator(const coding::meta_model::location& /*l*/,
-    const injection::meta_model::attribute& ia) const {
+adapter::to_enumerator(const injection::meta_model::attribute& ia) const {
     ensure_not_empty(ia.name());
 
     if (!ia.type().empty()) {
@@ -96,7 +118,7 @@ adapter::to_enumerator(const coding::meta_model::location& /*l*/,
     }
 
     coding::meta_model::enumerator r;
-    r.name().simple(ia.name()); // FIXME
+    r.name().simple(ia.name());
     r.documentation(ia.documentation());
     r.annotation(annotation_expander_.expand(ia.annotation()));
 
@@ -132,7 +154,7 @@ adapter::to_object(const coding::meta_model::location& l,
     r->can_be_primitive_underlier(ie.can_be_primitive_underlier());
 
     for (const auto& attr : ie.attributes())
-        r->local_attributes().push_back(to_attribute(l, attr));
+        r->local_attributes().push_back(to_attribute(attr));
 
     for (const auto& p : ie.parents())
         r->parents().push_back(to_name(l, p));
@@ -151,7 +173,7 @@ adapter::to_object_template(const coding::meta_model::location& l,
     populate_element(l, scr, ie, *r);
 
     for (const auto& attr : ie.attributes())
-        r->local_attributes().push_back(to_attribute(l, attr));
+        r->local_attributes().push_back(to_attribute(attr));
 
     for (const auto& p : ie.parents())
         r->parents().push_back(to_name(l, p));
@@ -194,7 +216,7 @@ adapter::to_enumeration(const coding::meta_model::location& l,
     populate_element(l, scr, ie, *r);
 
     for (const auto& attr : ie.attributes())
-        r->enumerators().push_back(to_enumerator(l, attr));
+        r->enumerators().push_back(to_enumerator(attr));
 
     return r;
 }
@@ -225,6 +247,94 @@ adapter::to_builtin(const coding::meta_model::location& l,
     r->is_default_enumeration_type(ie.is_default_enumeration_type());
     r->is_floating_point(ie.is_floating_point());
     r->can_be_enumeration_underlier(ie.can_be_enumeration_underlier());
+
+    return r;
+}
+
+boost::shared_ptr<coding::meta_model::modeline_group>
+adapter::to_modeline_group(const coding::meta_model::location& l,
+    const stereotypes_conversion_result& scr,
+    const injection::meta_model::element& ie) const {
+    auto r(boost::make_shared<coding::meta_model::modeline_group>());
+    populate_element(l, scr, ie, *r);
+    return r;
+}
+
+boost::shared_ptr<coding::meta_model::modeline>
+adapter::to_modeline(const coding::meta_model::location& l,
+    const stereotypes_conversion_result& scr,
+    const injection::meta_model::element& ie) const {
+    auto r(boost::make_shared<coding::meta_model::modeline>());
+    populate_element(l, scr, ie, *r);
+
+    for (const auto& attr : ie.attributes())
+        r->fields().push_back(to_modeline_field(attr));
+
+    return r;
+}
+
+boost::shared_ptr<coding::meta_model::generation_marker>
+adapter::to_generation_marker(const coding::meta_model::location& l,
+    const stereotypes_conversion_result& scr,
+    const injection::meta_model::element& ie) const {
+    auto r(boost::make_shared<coding::meta_model::generation_marker>());
+    populate_element(l, scr, ie, *r);
+
+    const auto str_to_bool(
+        [](const std::string& s) {
+            if (s == true_value) return true;
+            if (s == false_value) return false;
+            BOOST_LOG_SEV(lg, error) << unsupported_value << s;
+            BOOST_THROW_EXCEPTION(adaptation_exception(unsupported_value + s));
+        });
+
+    for (const auto& attr : ie.attributes()) {
+        const auto n(attr.name());
+        ensure_not_empty(n);
+
+        const auto v(attr.value());
+        if (n == add_date_time_attr_name)
+            r->add_date_time(str_to_bool(v));
+        else if (n == add_dogen_version_attr_name)
+            r->add_dogen_version(str_to_bool(v));
+        else if (n == add_model_to_text_transform_details_attr_name)
+            r->add_model_to_text_transform_details(str_to_bool(v));
+        else if (n == add_warning_attr_name)
+            r->add_warning(str_to_bool(v));
+        else if (n == add_message_attr_name)
+            r->message(attr.documentation());
+        else {
+            BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
+            BOOST_THROW_EXCEPTION(
+                adaptation_exception(unsupported_attribute + n));
+        }
+    }
+
+    return r;
+}
+
+boost::shared_ptr<coding::meta_model::licence>
+adapter::to_licence(const coding::meta_model::location& l,
+    const stereotypes_conversion_result& scr,
+    const injection::meta_model::element& ie) const {
+    auto r(boost::make_shared<coding::meta_model::licence>());
+    populate_element(l, scr, ie, *r);
+
+    for (const auto& attr : ie.attributes()) {
+        const auto n(attr.name());
+        ensure_not_empty(n);
+
+        const auto v(attr.value());
+        if (n == short_form_attr_name)
+            r->short_form(v);
+        else if (n == long_form_attr_name)
+            r->long_form(v);
+        else {
+            BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
+            BOOST_THROW_EXCEPTION(
+                adaptation_exception(unsupported_attribute + n));
+        }
+    }
 
     return r;
 }

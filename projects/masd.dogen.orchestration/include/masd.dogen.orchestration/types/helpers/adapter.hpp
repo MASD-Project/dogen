@@ -80,22 +80,30 @@ private:
         const std::string& n) const;
 
     /**
+     * @brief Converts an injection attribute to a modeline field.
+     *
+     * @pre name and value of the injector attribute must not be empty.
+     * @pre value of the injector attribute must be empty.
+     */
+    coding::meta_model::modeline_field
+    to_modeline_field(const injection::meta_model::attribute& ia) const;
+
+    /**
      * @brief Converts an injection attribute to an coding attribute.
      *
-     * @pre name and type of the injector attribute must not be empty.
+     * @pre name of the injector attribute must not be empty.
      */
-    coding::meta_model::attribute to_attribute(
-        const coding::meta_model::location& l,
-        const injection::meta_model::attribute& ia) const;
+    coding::meta_model::attribute
+    to_attribute(const injection::meta_model::attribute& ia) const;
 
     /**
      * @brief Converts an injector attribute to an coding enumerator.
      *
-     * @pre name and type of the injector attribute must not be empty.
+     * @pre name of the injector attribute must not be empty.
+     * @pre type and value of the injector attribute must be empty.
      */
     coding::meta_model::enumerator
-    to_enumerator(const coding::meta_model::location& l,
-        const injection::meta_model::attribute& ia) const;
+    to_enumerator(const injection::meta_model::attribute& ia) const;
 
 private:
     /**
@@ -118,7 +126,7 @@ public:
         const injection::meta_model::element& ie) const;
 
     /**
-     * @brief Converts an exoelement with a stereotype of
+     * @brief Converts an injection element with a stereotype of
      * masd::object_template to a coding object template.
      */
     boost::shared_ptr<coding::meta_model::object_template>
@@ -127,7 +135,7 @@ public:
         const injection::meta_model::element& ie) const;
 
     /**
-     * @brief Converts an exoelement with a stereotype of
+     * @brief Converts an injection element with a stereotype of
      * coding::exception to a coding exception.
      */
     boost::shared_ptr<coding::meta_model::exception>
@@ -136,7 +144,7 @@ public:
         const injection::meta_model::element& ie) const;
 
     /**
-     * @brief Converts an exoelement with a stereotype of
+     * @brief Converts an injection element with a stereotype of
      * coding::primitive to a coding primitive.
      */
     boost::shared_ptr<coding::meta_model::primitive>
@@ -145,7 +153,7 @@ public:
         const injection::meta_model::element& ie) const;
 
     /**
-     * @brief Converts an exoelement with a stereotype of
+     * @brief Converts an injection element with a stereotype of
      * coding::enumeration to a coding enumeration.
      */
     boost::shared_ptr<coding::meta_model::enumeration>
@@ -154,7 +162,7 @@ public:
         const injection::meta_model::element& ie) const;
 
     /**
-     * @brief Converts an exoelement with a stereotype of
+     * @brief Converts an injection element with a stereotype of
      * coding::module to a coding module.
      */
     boost::shared_ptr<coding::meta_model::module>
@@ -163,7 +171,7 @@ public:
         const injection::meta_model::element& ie) const;
 
     /**
-     * @brief Converts an exoelement with a stereotype of
+     * @brief Converts an injection element with a stereotype of
      * coding::module to a coding module.
      */
     boost::shared_ptr<coding::meta_model::builtin>
@@ -172,37 +180,37 @@ public:
         const injection::meta_model::element& ie) const;
 
     /**
-     * @brief Converts an exoelement with a stereotype of
-     * coding::module to a coding module.
+     * @brief Converts an injection element with a stereotype of
+     * coding::modeline_group to a coding module.
      */
-    boost::shared_ptr<coding::meta_model::builtin>
+    boost::shared_ptr<coding::meta_model::modeline_group>
     to_modeline_group(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
     /**
-     * @brief Converts an exoelement with a stereotype of
-     * coding::module to a coding module.
+     * @brief Converts an injection element with a stereotype of
+     * coding::modeline to a coding module.
      */
-    boost::shared_ptr<coding::meta_model::builtin>
+    boost::shared_ptr<coding::meta_model::modeline>
     to_modeline(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
     /**
-     * @brief Converts an exoelement with a stereotype of
-     * coding::module to a coding module.
+     * @brief Converts an injection element with a stereotype of
+     * coding::generation_marker to a coding module.
      */
-    boost::shared_ptr<coding::meta_model::builtin>
+    boost::shared_ptr<coding::meta_model::generation_marker>
     to_generation_marker(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
     /**
-     * @brief Converts an exoelement with a stereotype of
-     * coding::module to a coding module.
+     * @brief Converts an injection element with a stereotype of
+     * coding::licence to a coding module.
      */
-    boost::shared_ptr<coding::meta_model::builtin>
+    boost::shared_ptr<coding::meta_model::licence>
     to_licence(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
