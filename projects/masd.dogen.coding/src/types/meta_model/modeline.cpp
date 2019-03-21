@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "masd.dogen.coding/io/meta_model/name_io.hpp"
+#include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/editor_io.hpp"
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline.hpp"
@@ -41,13 +41,21 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::co
 
 }
 
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << *i;
+        s << "\"" << tidy_up_string(*i) << "\"";
     }
     s << "] ";
     return s;
@@ -79,7 +87,7 @@ modeline::modeline(
     const masd::dogen::coding::meta_model::editor editor,
     const masd::dogen::coding::meta_model::modeline_location location,
     const std::list<masd::dogen::coding::meta_model::modeline_field>& fields,
-    const std::list<masd::dogen::coding::meta_model::name>& applicable_meta_elements)
+    const std::list<std::string>& applicable_meta_elements)
     : masd::dogen::coding::meta_model::element(
       name,
       documentation,
@@ -191,19 +199,19 @@ void modeline::fields(const std::list<masd::dogen::coding::meta_model::modeline_
     fields_ = std::move(v);
 }
 
-const std::list<masd::dogen::coding::meta_model::name>& modeline::applicable_meta_elements() const {
+const std::list<std::string>& modeline::applicable_meta_elements() const {
     return applicable_meta_elements_;
 }
 
-std::list<masd::dogen::coding::meta_model::name>& modeline::applicable_meta_elements() {
+std::list<std::string>& modeline::applicable_meta_elements() {
     return applicable_meta_elements_;
 }
 
-void modeline::applicable_meta_elements(const std::list<masd::dogen::coding::meta_model::name>& v) {
+void modeline::applicable_meta_elements(const std::list<std::string>& v) {
     applicable_meta_elements_ = v;
 }
 
-void modeline::applicable_meta_elements(const std::list<masd::dogen::coding::meta_model::name>&& v) {
+void modeline::applicable_meta_elements(const std::list<std::string>&& v) {
     applicable_meta_elements_ = std::move(v);
 }
 

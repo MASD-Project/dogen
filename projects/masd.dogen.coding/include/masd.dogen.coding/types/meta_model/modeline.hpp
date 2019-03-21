@@ -27,8 +27,8 @@
 
 #include <list>
 #include <iosfwd>
+#include <string>
 #include <algorithm>
-#include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/editor.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_field.hpp"
@@ -77,7 +77,7 @@ public:
         const masd::dogen::coding::meta_model::editor editor,
         const masd::dogen::coding::meta_model::modeline_location location,
         const std::list<masd::dogen::coding::meta_model::modeline_field>& fields,
-        const std::list<masd::dogen::coding::meta_model::name>& applicable_meta_elements);
+        const std::list<std::string>& applicable_meta_elements);
 
 public:
     using element::accept;
@@ -120,10 +120,10 @@ public:
      * @brief Meta-names for all of the elements to which this modeline can be applied to.
      */
     /**@{*/
-    const std::list<masd::dogen::coding::meta_model::name>& applicable_meta_elements() const;
-    std::list<masd::dogen::coding::meta_model::name>& applicable_meta_elements();
-    void applicable_meta_elements(const std::list<masd::dogen::coding::meta_model::name>& v);
-    void applicable_meta_elements(const std::list<masd::dogen::coding::meta_model::name>&& v);
+    const std::list<std::string>& applicable_meta_elements() const;
+    std::list<std::string>& applicable_meta_elements();
+    void applicable_meta_elements(const std::list<std::string>& v);
+    void applicable_meta_elements(const std::list<std::string>&& v);
     /**@}*/
 
 public:
@@ -143,7 +143,7 @@ private:
     masd::dogen::coding::meta_model::editor editor_;
     masd::dogen::coding::meta_model::modeline_location location_;
     std::list<masd::dogen::coding::meta_model::modeline_field> fields_;
-    std::list<masd::dogen::coding::meta_model::name> applicable_meta_elements_;
+    std::list<std::string> applicable_meta_elements_;
 };
 
 }

@@ -1982,7 +1982,7 @@
         },
         {
           "name": "applicable_meta_elements",
-          "type": "std::list<name>",
+          "type": "std::list<std::string>",
           "documentation": "Meta-names for all of the elements to which this modeline can be applied to.\n"
         }
       ]

@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-21 Thu 15:30]
+#+CAPTION: Clock summary at [2019-03-21 Thu 15:35]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *73:43* |       |       | 100.0 |
+| *Total time*                                             | *73:47* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 73:43   |       |       | 100.0 |
-| Active                                                   |         | 73:43 |       | 100.0 |
+| Stories                                                  | 73:47   |       |       | 100.0 |
+| Active                                                   |         | 73:47 |       | 100.0 |
 | Edit release notes for previous sprint                   |         |       |  2:22 |   3.2 |
 | Sprint and product backlog grooming                      |         |       |  9:57 |  13.5 |
 | Create a video demo for the sprint's features            |         |       |  3:47 |   5.1 |
@@ -34,7 +34,7 @@
 | Orchestration test is broken on Windows                  |         |       |  2:40 |   3.6 |
 | Code generation of tests for dogen models                |         |       | 23:22 |  31.7 |
 | Formatters have been incorrectly placed under extraction |         |       |  0:23 |   0.5 |
-| Promote extraction entities to meta-model elements       |         |       | 11:19 |  15.4 |
+| Promote extraction entities to meta-model elements       |         |       | 11:23 |  15.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -894,6 +894,7 @@ Notes:
 
 *** STARTED Promote extraction entities to meta-model elements        :story:
     :LOGBOOK:
+    CLOCK: [2019-03-21 Thu 15:31]--[2019-03-21 Thu 15:35] =>  0:04
     CLOCK: [2019-03-21 Thu 14:55]--[2019-03-21 Thu 15:30] =>  0:35
     CLOCK: [2019-03-21 Thu 14:46]--[2019-03-21 Thu 14:54] =>  0:08
     CLOCK: [2019-03-21 Thu 14:43]--[2019-03-21 Thu 14:45] =>  0:02
@@ -967,7 +968,7 @@ Tasks:
   names
 - move dynamic transforms into coding again.
 - implement decoration transform in post assembly chain after dynamic
-  transform.
+  transform. Use the qualified name to find the correct modeline.
 - implement the decoration formatters in generation.
 - remvoe legacy decoration code in extraction.
 
