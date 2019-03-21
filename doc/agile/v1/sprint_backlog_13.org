@@ -14,27 +14,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-20 Wed 18:10]
+#+CAPTION: Clock summary at [2019-03-21 Thu 06:59]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *67:32* |       |       | 100.0 |
+| *Total time*                                             | *68:31* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 67:32   |       |       | 100.0 |
-| Active                                                   |         | 67:32 |       | 100.0 |
+| Stories                                                  | 68:31   |       |       | 100.0 |
+| Active                                                   |         | 68:31 |       | 100.0 |
 | Edit release notes for previous sprint                   |         |       |  2:22 |   3.5 |
-| Sprint and product backlog grooming                      |         |       |  7:46 |  11.5 |
-| Create a video demo for the sprint's features            |         |       |  3:47 |   5.6 |
+| Sprint and product backlog grooming                      |         |       |  8:45 |  12.8 |
+| Create a video demo for the sprint's features            |         |       |  3:47 |   5.5 |
 | Make projects directory env optional                     |         |       |  0:10 |   0.2 |
 | Clang-cl builds are failing due to memory leak reporting |         |       |  0:45 |   1.1 |
-| Add tests for tracing, reporting and diffing             |         |       |  5:46 |   8.5 |
-| Delete extra files appears broken at present             |         |       |  6:26 |   9.5 |
-| Empty directories should be deleted                      |         |       |  5:37 |   8.3 |
+| Add tests for tracing, reporting and diffing             |         |       |  5:46 |   8.4 |
+| Delete extra files appears broken at present             |         |       |  6:26 |   9.4 |
+| Empty directories should be deleted                      |         |       |  5:37 |   8.2 |
 | Changes to stitch templates are not reported correctly   |         |       |  1:09 |   1.7 |
 | Orchestration test is broken on Windows                  |         |       |  2:40 |   3.9 |
-| Code generation of tests for dogen models                |         |       | 23:22 |  34.6 |
+| Code generation of tests for dogen models                |         |       | 23:22 |  34.1 |
 | Formatters have been incorrectly placed under extraction |         |       |  0:23 |   0.6 |
-| Modeline groups as meta-model elements                   |         |       |  7:19 |  10.8 |
+| Modeline groups as meta-model elements                   |         |       |  7:19 |  10.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -233,6 +233,8 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-03-21 Thu 06:09]--[2019-03-21 Thu 06:58] =>  0:49
+    CLOCK: [2019-03-20 Wed 20:05]--[2019-03-20 Wed 20:15] =>  0:10
     CLOCK: [2019-03-20 Wed 08:25]--[2019-03-20 Wed 08:33] =>  0:08
     CLOCK: [2019-03-20 Wed 06:31]--[2019-03-20 Wed 07:10] =>  0:39
     CLOCK: [2019-03-18 Tue 20:02]--[2019-03-18 Tue 20:18] =>  0:23
@@ -930,6 +932,20 @@ Notes:
   these and make it transparent to users
   (=masd::standard_modelines=?).
 
+*** Read =generate_preamble= from dynamic object                      :story:
+
+We need to generate the field definitions and update the general
+settings factory.
+
+*** Improve formatters code generation marker                         :story:
+
+Things the marker can/should have:
+
+- model level version;
+- the dogen version too. However, this will make all our tests break
+  every time there is a new commit so perhaps we need to have this
+  switched off by default.
+
 *** Consider introducing formatter "location strings"                 :story:
 
 In MDSD, we have the notion of "location strngs" (volter, p.153):
@@ -1070,6 +1086,15 @@ need to versions of identifiable:
 
 - simple
 - qualified
+
+Merged stories:
+
+*Use an unordered map in qualified name*
+
+For some reason we are using a map, but its not clear that we need
+sorting. Change it to unordered and see what breaks.
+
+It seems we get errors in serialisation when using the map.
 
 *** Add support for facet dependencies                                :story:
 
@@ -2049,6 +2074,11 @@ descriptions so that users know what's available.
 
 This should be sorted by qualified name.
 
+*** Check if enable kernel directories on extraction                  :story:
+
+When we moved the kernel logic into yarn from quilt, we did not rename
+the traits.
+
 ** Deprecated
 *** CANCELLED Add tests for yarn main workflow                        :story:
     CLOSED: [2019-03-11 Mon 08:16]
@@ -2707,3 +2737,78 @@ generator, other for instances. We should only have one way of doing
 this. We should probably always ask for generators as this means less
 boiler plate code in tests. It does mean a fixed dependency on
 generators.
+*** CANCELLED Unordered map of user type in package fails             :story:
+    CLOSED: [2019-03-21 Thu 06:10]
+
+*Rationale*: no longer an issue (we have maps of name to element in
+coding).
+
+We seem to have a strange bug whereby creating a
+=std::unordered_map<E1,E2>= fails sanity checks if E1 is in a
+package. This appears to be some misunderstanding in namespacing
+rules.
+
+*** CANCELLED Type resolution in referenced models                    :story:
+    CLOSED: [2019-03-21 Thu 06:28]
+
+*Rationale*: we are now processing all types in resolver.
+
+We did a hack a while ago whereby if a type is of a referenced model,
+we don't bother resolving it. As an optimisation this is probably
+fine, but however, it hides a bug which is that we fail to resolve
+properties of referenced models properly. The reason why is that these
+properties have a blank model name. We could simply force it to be the
+name of the referenced model but then it would fail to find
+built-ins. So we leave it blank during the dia to sml translation and
+then if it gets to the resolver, it will not be able to resolve the
+type. We could add yet another layer of try-logic (e.g. try every
+model name in the references) but it seems that this is just another
+hack to solve a more fundamental problem. The sort of errors one gets
+due to this are like so:
+
+: 2013-06-29 23:10:34.831009 [ERROR] [sml.resolver] Object has property with undefined type:  { "__type__": "dogen::sml::qname", "model_name": "", "external_module_path": [ ] , "module_path": [ ] , "type_name": "qname", "meta_type": { "__type__": "meta_types", "value": "invalid" } }
+: 2013-06-29 23:10:34.831294 [FATAL] [dogen] Error: /home/marco/Development/kitanda/dogen/projects/sml/src/types/resolver.cpp(202): Throw in function dogen::sml::qname dogen::sml::resolver::resolve_partial_type(const dogen::sml::qname&) const
+: Dynamic exception type: boost::exception_detail::clone_impl<dogen::sml::resolution_error>
+*** CANCELLED Cross model referencing tests                           :story:
+    CLOSED: [2019-03-21 Thu 06:38]
+
+*Rationale*: dogen models are now used in system tests.
+
+At present we do not have any tests were a object in one model makes use
+of types defined in another model. This works fine but we should
+really have tests at the dogen level.
+
+*** CANCELLED Incorrect application of formatter templates in field expansion :story:
+    CLOSED: [2019-03-21 Thu 06:40]
+
+*Rationale*: story bit-rotted; we have these formatters and things seem
+to be working just fine.
+
+At present we are applying formatter templates across all formatters
+in C++ mode; this only makes sense because we do not have CMake and
+ODB formatters. However, when these are added we will need to filter
+the formatters further. For example, C++ formatters (both headers and
+implementation) need inclusion dependencies but CMake files don't.
+
+*** CANCELLED Dump container of files in formatter workflow           :story:
+    CLOSED: [2019-03-21 Thu 06:45]
+
+*Rationale*: addressed with tracing.
+
+At present we are polluting the log file with lots of entries for each
+file name in formatter's workflow. Ideally we want a single entry with
+a container of file names. The problem is, if we dump the entire
+container we will also get the file contents. But if we create a
+temporary container we will have to pay the cost even though log level
+may not be enabled.
+
+*** CANCELLED "Assistant" type found in test model                    :story:
+    CLOSED: [2019-03-21 Thu 06:51]
+
+*Rationale*: model no longer exists.
+
+We seem to be generating an "Assistant" type on the =primitve= test model:
+
+: 2017-02-01 10:28:44.513705 [DEBUG] [quilt.cpp.formattables.helper_expander] Procesing element: <dogen><test_models><primitive><Assistant>
+
+Figure out what this type is and why its appearing on this test model.

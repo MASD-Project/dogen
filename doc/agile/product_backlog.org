@@ -12,6 +12,134 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 Things we should address as soon as possible because they impact dogen
 usage. Urgent things that are going to annoy users.
 
+*** Postfix and directory fields in annotations look weird            :story:
+
+Why are we manually instantiating postfix and directory for each
+formatter/facet instead of using templates? This is one of the main
+reasons for breaks/errors when adding a new formatter.
+
+*** Setting include and source directory to empty                     :story:
+
+At present it does not seem possible to set either the include or
+source directories to empty. This probably just requires annotations
+to understand empty values, e.g.
+
+: a.b.c=
+
+*** Incorrect generation of forward declarations for all facets       :story:
+
+Up to know we generated forward declarations for all facets for all
+types that needed a =types= forward declaration. This was not a
+problem for enumerations, objects, exceptions and so forth because
+they were all serialisable. However with the introduction of visitor
+forward declarations, we are now generating an invalid serialisation
+forward declaration (because visitors are not serialisable). We need
+to find a way to determine when to generate a forward declaration for
+a facet. This could be done via enablement, but we don't want to do
+too much hard-coding (e.g. if visitor then disable serialisation
+facet, etc).
+
+Ideally we should support some kind of "on-demand" generation: if
+anyone references a forward declaration we generate it, if no one does
+we don't. Users are still free to force a forward declaration to be
+generated via meta-data.
+
+This could be achieved by keeping track of usage in include
+builder. Formatters would have an additional knob: generate always,
+generate if referenced. If "generate if referenced", we would wait for
+at least one reference in include builder.
+
+*** Character member variables are not tidied up on io                :story:
+
+At present there is no code to convert non-printable chars into
+something acceptable in JSON. We probably never noticed this before
+because test data generates printable chars. Code generated is as
+follows (all built-in model):
+
+: << "\"char_property\": " << "\"" << v.char_property() << "\"" << ", "
+
+We need a "tidy-up char" function to handle this properly.
+
+For now we've hacked this and set =remove_unprintable_characters= to
+false to keep backwards compatibility with legacy.
+
+*** Lists of strings are not properly tidied up on io                 :story:
+
+In the log file, when we dump include dependencies we see invalid
+JSON:
+
+: [ "<iosfwd>", ""dogen/sml/types/merger.hpp"" ]
+
+This implies we are not calling =tidy_up_string=. This can be tested
+by creating a container of =filesystem::path=.
+
+*** Use of disabled facets in non-generatable types                   :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to know when I try to use a disabled
+facet in a non-generatable type so that I don't generate
+non-compilable code.
+#+end_quote
+
+It would be useful to set facets to disabled on non-generatable types,
+when there are generatable types that depend on them. For example, if
+we create some non-generatable types for which there is only a =types=
+facet, we may still want to create generatable types that make use of
+them. In this case, we would like Dogen to automatically disable all
+facets except for =types=. Also, if a type is non-generatable, all
+facets should be automatically disabled and its up to the user to
+enable the ones he is interested in manually.
+
+*** Type with the same name as the project does not compile           :story:
+
+It seems that if we create a type with exactly the same name as the
+model, we get strange compilation errors:
+
+: /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.4/stage/bin/dogen_examples/source/hello_world/include/hello_world/test_data/hello_world_td.hpp:37:13: error: ‘hello_world::hello_world::hello_world’ names the constructor, not the type
+:     typedef hello_world::hello_world result_type;
+             ^
+We should do a test case for this and fix the errors.
+
+*** Allow for generation of class with the same name as package       :story:
+
+At present its not possible to generate a class inside a package with
+the same name of that package, if the package documentation is being
+generated. This is because they will both have the exact same file
+name.
+
+*** Partial matching of built-ins doesn't work for certain types      :story:
+
+We introduced a fix that allows users to create types that partially
+match built-ins types such as =in= or =integer=. The fix was copied
+from the spirit documentation:
+
+[[http://www.boost.org/doc/libs/1_52_0/libs/spirit/repository/doc/html/spirit_repository/qi_components/directives/distinct.html][- Qi Distinct Parser Directive]]
+- [[http://www.boost.org/doc/libs/1_52_0/libs/spirit/repository/test/qi/distinct.cpp][distinct.cpp]]
+
+Seems like the thing to do here is to create a keyword parser and nest
+it with the existing parsers:
+
+- [[http://stackoverflow.com/questions/21960167/prevent-the-boost-spirit-symbol-parser-from-accepting-a-keyword-too-early][Prevent the Boost Spirit Symbol parser from accepting a keyword too early]]
+- [[http://www.boost.org/doc/libs/1_53_0/libs/spirit/repository/doc/html/spirit_repository/qi_components/directives/kwd.html][Qi Keyword Parser Directive]]
+
+The new parser has a fix for these problems but was not completed so
+cannot yet replace the legacy parser.
+
+*** Naming of saved yarn/Dia files is incorrect                       :story:
+
+For some random reason when we use dogen to save yarn/Dia files the
+names look like this:
+
+: test_data/dia_sml/expected/boost_model.xmldia
+: test_data/dia_sml/expected/std_model.xmldia
+
+but our tests expect:
+
+: test_data/dia_sml/expected/boost_model.diaxml
+: test_data/dia_sml/expected/std_model.diaxml
+
+This must be part of a refactoring that wasn't completed properly.
+
 *** Exception classes should allow inheritance                        :story:
 
 #+begin_quote
@@ -731,6 +859,184 @@ if there is a shared pointer to built-in; if there is, put in:
 Things we are not testing at present but should, validation that could
 provide helpful errors to end users but is not being performed yet.
 
+*** Spirit: Improve error reporting                                   :story:
+
+# Overview
+
+At present when the parser fails we give the user no idea as to why it
+failed; we just return the failed state. In theory we should be
+reporting errors:
+
+#+begin_example
+        on_error<fail>
+            (
+                type_name,
+                std::cout << val("Error! Expecting ")
+                << _4                             // what failed?
+                << val(" here: \"")
+                << construct<std::string>(_3, _2) // iterators to error-pos, end
+                << val("\"")
+                << std::endl
+                );
+#+end_example
+
+In practice this never does anything.
+
+# Requirements
+
+- get the =on_error= expression to trigger when an error occurs
+- raise an exception with the contents that we are sending to
+  std::cout at present.
+
+*** Add validation for helper families                                :story:
+
+At present we are checking that the name tree has the expected number
+of type arguments:
+
+:    const auto children(t.children());
+:    if (children.size() != 1) {
+:        BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
+:        BOOST_THROW_EXCEPTION(formatting_error(invalid_smart_pointer));
+:    }
+:    smart_pointer_helper_stitch(fa, t);
+
+In the future with dynamic helpers we will remove these checks. In
+order to implement them we need to declare the type families up front
+in a JSON file, with a name and number of type arguments. When
+constructing the type helpers, we can check the name tree to make sure
+the number of type arguments is correct.
+
+This can be done as a helper setting (number of type arguments?).
+
+Actually this is a core yarn property. So:
+
+- add number of type arguments to object;
+- read this as a dynamic field;
+- during validation, check that all name trees that instantiate this
+  object have the expected number of type arguments.
+- in order to cope with cases such as variant we also need some kind
+  of enum, e.g. type parameterisation: none, variable, fixed. if
+  fixed, then number of type parameters must be non-zero.
+
+*** Add validation for field definitions                              :story:
+
+Perform some validation in repository workflow:
+
+- that formatter fields are not duplicated on simple name.
+- fields are not duplicated on qualified name.
+- instances have qualified name populated.
+- only instances are left after instantiation.
+
+*** Add test with smart pointer in base class                         :story:
+
+At present we have the following helper formatters registered against
+SmartPointer:
+
+:      {
+:        "quilt.cpp.types.class_implementation_formatter": [
+:          "<quilt.cpp.types><smart_pointer_helper>",
+:          "<quilt.cpp.io><smart_pointer_helper>"
+:        ]
+:      }
+
+This should have caused something to break. It didn't because we don't
+seem to have a test case with a smart pointer on the base class. This
+raises the interesting point: do we ever need more than one helper for
+a given family and a given file formatter? If so, we should change it
+from a list to a single shared pointer.
+
+Interestingly, for AssociativeContainer we have:
+
+:    "AssociativeContainer": [
+:      {
+:        "quilt.cpp.types.class_implementation_formatter": [
+:          "<quilt.cpp.io><associative_container_helper>"
+:        ]
+:      },
+:      {
+:        "quilt.cpp.io.class_implementation_formatter": [
+:          "<quilt.cpp.io><associative_container_helper>"
+:        ]
+:      },
+
+*** Improve error reporting around JSON                               :story:
+
+At present when we break the JSON we get errors like so:
+
+: Error: Failed to parse JSON file<unspecified file>(75): expected object name.
+
+These are not very useful in diagnosing the problem. In the log file
+we do a bit better:
+
+: 2015-03-30 12:02:12.897202 [DEBUG] [dynamic.schema.json_hydrator] Parsing JSON file: /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../data/fields/cpp.json
+: 2015-03-30 12:02:12.897216 [DEBUG] [dynamic.schema.json_hydrator] Parsing JSON stream.
+: 2015-03-30 12:02:12.897450 [ERROR] [dynamic.schema.json_hydrator] Failed to parse JSON file: <unspecified file>(75): expected object name
+: 2015-03-30 12:02:12.897515 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/dynamic/schema/src/types/json_hydrator.cpp(226): Throw in function std::list<field_definition> dogen::dynamic::schema::json_hydrator::hydrate(std::istream &) const
+: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen7dynamic6schema15hydration_errorEEE
+: std::exception::what: Failed to parse JSON file<unspecified file>(75): expected object name
+: [P12tag_workflow] = Code generation failure.
+
+But it requires a lot of context to know whats going on. We need to
+append more details to the exception.
+
+Merged stories:
+
+*Duplicate fields in JSON result in non-intuitive errors*
+
+By mistake we added the same field twice in JSON:
+
+:            "extensions" : {
+:                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree.hpp>",
+:                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree_serialization.hpp>",
+:                "cpp.io.class_header_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
+:                "cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
+:                "cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
+:                "cpp.hash.class_header_formatter.inclusion_required" : false
+
+The resulting error message was not particularly helpful:
+
+: 2015-06-17 13:56:06.658500 [DEBUG] [sml.json_hydrator] Processing type: <boost><property_tree><ptree>
+: 2015-06-17 13:56:06.658519 [ERROR] [dynamic.field_instance_factory] Expected at most one element
+
+*** Failed facet dependencies should be treated as errors             :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to know when I try to use a
+non-supported facet from a system type so that I don't generate
+non-compilable code.
+#+end_quote
+
+if a facet is not supported in a system module and the user tries to
+make use of it, we should error. The user must then go and disable
+explicitly the facet on the affected object via the meta data. We
+should not silently disable facets.
+
+*** Detect invalid child nodes in dia diagram                         :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to know when there are invalid child
+nodes in diagram so that I can fix them.
+#+end_quote
+
+When copying a set of classes from a diagram, where these classes
+where contained in a package, dia seems to copy across the =childnode=
+id. This is a problem because when pasted in a new diagram, if those
+classes are not in a package there is now the potential for total
+mismatching - for instance, they could be children of an
+association. Dogen should validate that children belong to UML
+elements which can have children, and if not issue good error
+messages - perhaps even talking about the possible cause for the
+error.
+
+*** Add comments to test model sanitizer                              :story:
+
+We should explain why we decided to create a test model sanitizer
+instead of just adding specs to the test models themselves. The
+rationale behind it was that it would break the current diffing and
+rebaselining logic; we would either have to ignore specs on the diff
+or find a way to copy them after code generation. Both options are a
+bit of a hack. So instead we created a model with all the specs.
+
 *** Ensure an error info tag is not set already before we set it      :story:
 
 Now that we will start making use of error info tags in anger, one
@@ -1010,6 +1316,231 @@ vision. The V2 vision is to finish the dogen API and implement all
 functionality in terms of metamodel elements - e.g. no special cases
 such as profiles, licences etc.
 
+*** Computation of enablement values                                   :epic:
+
+Note: this story is still *very* sketchy.
+
+At present we have a very simple way of determining what formatters
+are enabled: if a facet has been enabled by the user then all
+formatters on that facet are enabled. This is a good starting point
+but results in a lot of manual work:
+
+- if we add a type which does not support all facets, we will generate
+  invalid code. Users should be able to mark which facets are
+  supported and then the graph of dependencies should do the right
+  thing, propagating the disabled status.
+- we are enabling all formatters in a facet. For hashing and forward
+  declarations, it would make more sense to have a "dependency based
+  enablement": if we determine that someone in the model needs that
+  feature, we enable it, if not its disabled. Users can always
+  override this and force it to be globally enabled.
+- if a user creates a "service", all facets other than types are
+  disabled. Ideally we should be able to define "enablement profiles"
+  and then set an element's enablement profile. Each enablement
+  profile is made up of a set of enabled facets. They could be
+  supplied as a KVP. In fairness we probably just need "types and io"
+  or "default".
+
+One way to think of this problem is to imagine a matrix for each
+element in element space. Each matrix is two-dimensional: one
+dimension is the facets and the other are "dependent elements". These
+are effectively made up of all attributes for each element, with a
+name tree expansion. Each value of the matrix can either be 0
+(disabled), 1 (enabled) or 2 (not computable). Not computable is a
+hack to cope with cycles in the graph of dependencies.
+
+Each value is computed by looking up an element's matrix and looking
+for zeros. If there is one or more zero against a facet, the element's
+value for that facet is zero. If there is a two we need to do a
+two-pass whereby we first compute the matrix ignoring all the two's;
+then, for each cycle we create a list of all the elements on that path
+and the pair of elements that causes the cycle. We then compute the
+enablement for this pair with a simple table (OR the computed
+enablement values). We then traverse the cycle in reverse, updating
+the twos to real values.
+
+We could start with one large matrix with rows by element and columns
+by feature. All values on this matrix are set to 1. We would then
+multiply it against the global enablement matrix. We would then
+multiply it by the local enablement matrix, for each element. We would
+then compute the dependency matrices for all elements only taking into
+account facets that are still enabled. We need to find the linear
+algebra operation that takes a column with zeros and ones and returns
+one if all rows are one and zero otherwise.
+
+This produces the enabled facets. We then need to worry about the
+formatters. There are a few sources of information:
+
+- the facet enablement.
+- the user local or global decision for that formatter.
+- some kind of default formatter property (e.g. disabled by default).
+- dependencies.
+
+For these we need to create a "get dependencies" method in
+each formatter which returns dependent formatters. For example, the
+visitor formatter depends on the forward declarations formatter. This
+is a static dependency. The more complex case is where there are
+dynamic dependencies. For example, if hashing is detected for a given
+type, we then need to enable the hashing facet for the containee. We
+should probably hard-code this scenario for now.
+
+We may want to make these computations disableable. For example: a)
+all: no computation, everything is enabled b) all supported: all that
+is supported is enabled c) by dependencies.
+
+Requested help from FB. Core of the email:
+
+#+begin_quote
+Lets start with the simple case. Let G be a DAG. For each vertex of G
+there is an associated vector over a field F. Now I would say F is
+GF(2), which suits my needs (as you will see below). The objective is
+to compute, for each vertex, the value of its associated vector, as
+follows:
+
+- first we go through the vertices in any order and setup its initial
+  values according to a predetermined heuristic. Different nodes will
+  have different values, and the heuristic has no dependency on G.
+- then we iterate through G using DFS. If a vertex has no children
+  then the final value of its vertex is the initial value. If a vertex
+  has children, the value of its vector is obtained by multiplying the
+  initial value against the values of the vectors of its child
+  vertices. Multiplication under GF(2) is just a logical AND which is
+  great for my purposes.
+
+Just to make sure I'm explaining my self correctly, lets look at it in
+layperson's terms: if a vertex has a 1 at position zero of its vector,
+and all of its children also have a 1 at position zero, then the final
+value for position zero will be 1. If there is a 0 anywhere at
+position zero then the value is 0. So far so good, this works as
+expected.
+
+However! The problem is, G is actually not always a DAG. Sometimes
+there may be cycles, which are detectable during DFS. My question is:
+is there anything I can do to still perform this heuristic (or some
+approximation of it) with a graph that has cycles? For example:
+
+- record the path to the cycle and perform several passes. This seems
+  to breakdown when there are several cycles because I seem to hit
+  some kind of recursive problem.
+- ignore the cycle. Of course, the problem with this approach is that
+  if there was a zero at either side of the cycle, I would be
+  incorrectly computing the node, but maybe that's the best one can
+  do?
+#+end_quote
+
+Actually maybe we are looking at this the wrong way. Lets imagine that
+for each element there is a vector v in GF(2) called the initial
+vector. The objective is to compute u, the output vector. The output
+vector is made up of the initial vector of the element, times the
+output vectors of all the elements the element depends on. However,
+these can be formulated in terms of initial vectors too (e.g. the
+initial vector of the depended element times the initial vectors of
+the elements it depends on times the initial vectors of the elements
+they depend on and so forth). Thus for each element there is an
+expansion that just relies on initial vectors. For the cases where
+there are cycles: its not a problem since multiplying n times by
+the same vector (in GF(2)) produces the same result as multiplying
+just once.
+
+It would still be useful to have a graph though, to find all of the
+initial vectors for a given element. We just need to stop DFS'ing when
+we find a cycle. We can also cache the initial vectors for each
+element.
+
+Notes:
+
+- we can greatly simplify this story if we do not allow for cycles. We
+  can simply create a graph of all dependencies and then iterate the
+  graph from the leaves. Call Ev the enablement vector for each
+  element; we can descend the graph and perform an OR of Ev at each
+  level. Consider element e0, which is a child of a set of elements E;
+  for each entry in the set, we'd OR the element vector of e0 (and of
+  all of its descendants). As a result, its values would be the
+  superset of all of the enabled values on each leaf element.
+- since we do not allow cycles, we should detect them and break with
+  an error. We should provide the cycle path to the user and then
+  allow users to remove certain types from this computation via
+  meta-data. If a type is set not to contribute to the graph, we can
+  simply skip it. The user is then responsible for manually setting
+  that type.
+- since we can only alter generatable types, we should detect when we
+  reach an element which is not generatable. If the OR'ing of that
+  element does not produce its current enablement vector we should
+  simply error and tell the user the current enablement requirements
+  are not satisfiable. The user is then responsible for addressing the
+  issue by either changing enablement requirements, ignoring types,
+  updating reference models manually or providing helper types. To
+  make life easier we could state what are the enablement requirements
+  that have not been met so that users can quickly decide what to do.
+- once we compute the dependency graph we can also check to see what
+  types are on it. Any type which is absent can be removed from the
+  model. We could also compute the models that are on the graph and
+  compare them to the list of references. If the list of references at
+  present only includes references of the target model, we can figure
+  out any unnecessary references. Sadly we cannot do the opposite:
+  (lost the train of thought).
+
+Merged stories:
+
+*Formatters need different =enabled= defaults*
+
+We should be able to disable some formatters such as forward
+declarations. Some users may not require them. We can do this using
+dynamic extensions. We can either implement it in the backend or make
+all the formatters return an =std::optional<dogen::formatters::file>=
+and internally look for a =enabled= trait.
+
+We need to be able to distinguish "optional" formatters - those that
+can be disabled - and "mandatory" formatters - those that cannot. If a
+user requests the disabling of a mandatory formatter, we must
+throw. This must be handled in enabler.
+
+This story was merged with a previous one: Parameter to disable cpp
+file.
+
+#+begin_quote
+*Story*: As a dogen user, I want to disable cpp files so that I don't
+generate files with dummy content when I'm not using them.
+#+end_quote
+
+It would be really useful to define a implementation specific
+parameter which disables the generation of a cpp file for a
+service. This would stop us from having to create noddy translation
+units with dummy functions just to avoid having to define exclusion
+regexes.
+
+In some cases we may need a "enable by usage". For example,
+it would be great to be able to enable forward declarations only for
+those types for which we required them. Same with hash. We can detect
+this by looking at the generated include dependencies. However,
+because the include dependency only has a directive, we cannot tell
+which formatter it belonged to. This would require some augmenting of
+the directive to record the "origination" formatter.
+
+*** Update copyright notices                                          :story:
+
+We need to update all notices to reflect personal ownership until DDC
+was formed, and then ownership by DDC.
+
+- first update to personal ownership has been done, but we need to
+  test if multiple copyright entries is properly supported.
+
+*** Add frontends and backends to =info= command line option          :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to know what frontends and backends
+are available in my dogen version so that I don't try to use features
+that are not present.
+#+end_quote
+
+With the static registration of importers and backends, we should add
+some kind of mechanism to display whats on offer in the command line,
+via the =--info= option. This is slightly tricky because the fronend
+and backend models do not know of the command line. We need a method
+in the frontend that returns a description and a method in the
+workflow that returns all descriptions. These must be static. Then
+knitter can then call these methods and build the info text.
+
 *** Ignore ODB files automatically                                    :story:
 
 At present we are adding the following regular expressions to knitter
@@ -1136,6 +1667,19 @@ because we may want to add one or more concrete methods to the ABC.
 
 We need support for operations for this to work. We also need support
 for pointers, references and const.
+
+Merged stories:
+
+*Add =interface= meta-model element*
+
+Even though we can't generate much outside of plain types, we should
+already have support for a stereotype of =interface=. In the future we
+may be able to code generate the interface. This should be implemented
+in coding as a type on its own right.
+
+- add an interface which is: element, operatable, relatable. Not
+  stateful. We should also have a "is abstract" flag
+  somewhere. Perhaps in relatable?
 
 *** Add support for private and protected attributes                  :story:
 
@@ -3634,44 +4178,6 @@ We should:
 - pass the archive type into persister;
 - throw if the archive type is not supported.
 
-*** Add test with smart pointer in base class                         :story:
-
-At present we have the following helper formatters registered against
-SmartPointer:
-
-:      {
-:        "quilt.cpp.types.class_implementation_formatter": [
-:          "<quilt.cpp.types><smart_pointer_helper>",
-:          "<quilt.cpp.io><smart_pointer_helper>"
-:        ]
-:      }
-
-This should have caused something to break. It didn't because we don't
-seem to have a test case with a smart pointer on the base class. This
-raises the interesting point: do we ever need more than one helper for
-a given family and a given file formatter? If so, we should change it
-from a list to a single shared pointer.
-
-Interestingly, for AssociativeContainer we have:
-
-:    "AssociativeContainer": [
-:      {
-:        "quilt.cpp.types.class_implementation_formatter": [
-:          "<quilt.cpp.io><associative_container_helper>"
-:        ]
-:      },
-:      {
-:        "quilt.cpp.io.class_implementation_formatter": [
-:          "<quilt.cpp.io><associative_container_helper>"
-:        ]
-:      },
-
-*** Cross model referencing tests                                     :story:
-
-At present we do not have any tests were a object in one model makes use
-of types defined in another model. This works fine but we should
-really have tests at the dogen level.
-
 ** Required for V3
 
 Stories that need to be implemented in order to complete the V3
@@ -3711,151 +4217,9 @@ once for all types in a facet.
 
 However, we are very far from this at present.
 
-** Can go in any sprint or release
+** Technical debt, improvements
 
-Stories that are not part of the vision of a release, and so can be
-picked up whenever we fancy.
-
-*** Exceptions with stream to build exception message                 :story:
-
-Consider adding some functionality to exceptions whereby we could
-create the exception with a stream:
-
-: exception e;
-: e << "some blurb" << 123;
-: throw e;
-
-Or maybe we need an exception builder that takes in a type T:
-
-: exception_builder<exception> b;
-: b << "some blurb" << 123;
-: throw b.build();
-
-This is a really common use case.
-
-*** Add additional reference directories                              :story:
-
-At present we expect the reference models to be either on the data
-directory (for system models) or on the same directory as the
-target. Presumably, users may also want to have models on other
-directories. For example, if one were to extend Dogen with a different
-project, it would be required to load models from the dogen
-directory.
-
-We could simply add a command line argument for reference directories;
-if the reference is not found in the target model directory, we would
-then try all available reference directories.
-
-Merged Stories:
-
-*Add additional data files directories*
-
-#+begin_quote
-*Story*: As a dogen user, I want dogen to use my own private data
-libraries so that I don't have to supply them as diagrams.
-#+end_quote
-
-Users should be able to provide directories for their own JSON
-models. We just need to add a new parameter to the knitter and
-transport it all the way to OM's workflow.
-
-In the future, when everything is a model, data file directories and
-reference directories will become one and the same.
-
-*** Add support for proper JSON serialisation in C++                  :story:
-
-We need to add support for JSON in C++. It will eventually have to
-roundtrip to JSON in C# but that will be handled as two separate
-stories. We need to support multiple available backends because there
-are so many c++ libraries available. Different users may have
-different needs (e.g. if you are already using boost spirit it may
-make sense to use it, if you have casablanca you may want its support
-etc.). This does complicate things for testing. We should limit
-ourselves to libraries that have vcpkg ports. Tests can roundtrip
-between different implementations.
-
-We will not replace the current IO implementation; it should continue
-to exist as is, requiring no external dependencies.
-
-We should consider supporting multiple JSON libraries: instead of
-making the mistake we did with serialisation where we bound the name
-=serialization= with boost serialisation, we should call it by its
-real name, e.g. =json_spirit= etc. Then when a user creates a
-stereotype for a profile such as =Serializable= it can choose which
-serialisation codecs to enable for which language. This means that the
-same stereotypes can have different meanings in different
-architectures, which is the desired behaviour.
-
-We should create a serialise / deserialise functions following the
-same logic as boost:
-
-#+begin_src c++
-void serialize(Value& v, const object& o);
-void serialize(Value& v, const base& b);
-
-void deserialize(const Value& v, object& o);
-base* deserialize(const Value& v);
-#+end_src
-
-Or perhaps even better, we can make the above the internal methods and
-use =operator<<= and =operator>>= as the external methods:
-
-#+begin_src c++
-void operator<<(Value& v, const object& o);
-void operator>>(const Value& v, object& o);
-#+end_src
-
-Notes:
-
-- create a registrar with a map for each base type. The function
-  returns a base type pointer.
-- when you deserialize a base type pointer, you call the pointer
-  deserialize above. Same for when you have a pointer to an object. It
-  will internally call the registrar (if its a base type) and get the
-  right function.
-- this means we only need to look at type for inheritance. Although we
-  should probably always do it for validation? However, what happens
-  if we want to make a model so we can read external JSON? It won't
-  contain type markings.
-- =operator>>= will not be defined for pointers or base classes.
-- this wont work for the case of =doc << base=. For this we need a map
-  that looks up on type_index.
-
-Links:
-
-- [[https://bitbucket.org/sobjectizerteam/json_dto-0.2/src/default/#markdown-header-what-is-json_dto][JSON DTO]]
-- [[https://github.com/Tencent/rapidjson][RapidJSON]]
-- [[https://github.com/nlohmann/json][JSON]]
-- [[https://github.com/open-source-parsers/jsoncpp][JSON CPP]]
-- [[https://github.com/Donerkebap13/DonerSerializer][DonerSerializer]]
-- [[https://www.codeproject.com/Articles/20027/JSON-Spirit-A-C-JSON-Parser-Generator-Implemented][JSON Spirit]]
-- [[https://github.com/miloyip/nativejson-benchmark][nativejson-benchmark]]: project comparing JSON libraries.
-- [[https://github.com/dropbox/json11][Json11]]
-
-Merged stories:
-
-*Rapid JSON support*
-
-For the previous attempt to integrate RapidJson see this commit:
-
-b2cce41 * third party: remove includes and rapid json
-
-*Add support for JSON serialisation*
-
-We should have proper JSON serialisation support, for both reading and
-writing. We can then implement IO in terms of JSON.
-
-*Raw JSON vs cooked JSON*
-
-If we do implement customisable JSON serialisation, we should still
-use the raw format in streaming. We need a way to disable the cooked
-JSON internally. We should also re-implement streaming in terms of
-this JSON mode.
-
-*Add serialisation support for JSON*
-
-It seems we do not yet have a story for this. The idea is to have some
-basic JSON roundtripping support. The user can configure the backend.
+Ideas to improve the code base.
 
 *** Investigate current implementation of the origin transform        :story:
 
@@ -3913,11 +4277,6 @@ Tasks:
   etc and then supplies that to the registrar. The registrar itself is
   no longer static, just a member of the workflow.
 
-*** Postfix and directory fields in annotations look weird            :story:
-
-Why are we manually instantiating postfix and directory for each
-formatter/facet instead of using templates?
-
 *** Use element ids for associations                                  :story:
 
 There doesn't seem a need for having entire names for associations;
@@ -3967,31 +4326,6 @@ Once we got these opaque properties, we can then create "kernel
 specific expanders" which are passed in to the yarn workflow. These
 populate the opaque properties.
 
-*** Add support for qualified class names in dia                      :story:
-
-#+begin_quote
-*Story*: As a dogen user, I don't want to have to define packages in
-certain cases.
-#+end_quote
-
-It has become apparent that creating large packages in dia and placing
-all classes in a large package is cumbersome:
-
-- there are issues with the large package implementation in dia,
-  making copying and pasting a dark art; its not very obvious how one
-  copies into a package (e.g. populating the child node id correctly).
-- models do not always have a neat division between packages; in
-  dogen, where packages would be useful, there are all sorts of
-  connections (e.g. inheritance, association) between the package and
-  the model "package" or other packages. Thus is very difficult to
-  produce a representative diagram.
-
-A solution to this problem would be to support qualified names in
-class names; these would be interpreted as being part of the current
-model. One would still have to define a large package, but it could be
-empty, or contain only the types which only have connections inside
-the package, plus comments for the package, etc.
-
 *** Dump transforms as serialisable data                              :story:
 
 Now we have detailed transform information, it would be great if we
@@ -4015,185 +4349,6 @@ code-generationa as a service.
 During the exogenous model work, yarn's =Nameable= concept moved
 position. We need to look at how the parent changes were done to see
 if they are stable or not.
-
-*** Enable kernel directories trait is on quilt                       :story:
-
-When we moved the kernel logic into yarn from quilt, we did not rename
-the traits.
-
-*** Spirit: Improve error reporting                                   :story:
-
-# Overview
-
-At present when the parser fails we give the user no idea as to why it
-failed; we just return the failed state. In theory we should be
-reporting errors:
-
-#+begin_example
-        on_error<fail>
-            (
-                type_name,
-                std::cout << val("Error! Expecting ")
-                << _4                             // what failed?
-                << val(" here: \"")
-                << construct<std::string>(_3, _2) // iterators to error-pos, end
-                << val("\"")
-                << std::endl
-                );
-#+end_example
-
-In practice this never does anything.
-
-# Requirements
-
-- get the =on_error= expression to trigger when an error occurs
-- raise an exception with the contents that we are sending to
-  std::cout at present.
-
-*** Spirit: Add support for "native" arrays                           :story:
-
-At present our parser does not support arrays such as:
-
-#+begin_example
-int[50];
-#+end_example
-
-This should result on a name with a size associated with it. The
-parser cannot cope with this. Ideally one should be able to declare a
-const for the size on the class too:
-
-#+begin_example
-            static const int maxLimit = 50;
-            int objects[maxLimit];
-#+end_example
-
-So that we'd just recall the size parameter as a string in the name
-tree rather than just expect it to be an integer.
-
-*** Rename main Dogen package in Debian                               :story:
-
-At present we seem to have called our package =dogen-applications=:
-
-: $ apt-cache search dogen-applications
-: dogen-applications - The Domain Generator - Generates source code for domain driven development.
-
-We should try to call it just =dogen=.
-
-*** Setting include and source directory to empty                     :story:
-
-At present it does not seem possible to set either the include or
-source directories to empty. This probably just requires annotations
-to understand empty values, e.g.
-
-: a.b.c=
-
-*** "Assistant" type found in test model                              :story:
-
-We seem to be generating an "Assistant" type on the =primitve= test model:
-
-: 2017-02-01 10:28:44.513705 [DEBUG] [quilt.cpp.formattables.helper_expander] Procesing element: <dogen><test_models><primitive><Assistant>
-
-Figure out what this type is and why its appearing on this test model.
-
-*** Finish adding support for Language Agnostic Models (LAM)          :story:
-
-Tasks:
-
-- add the missing types to LAM.
-- add optional to the list of types. This is actually quite
-  complicated because for some types in C# you want to map it to
-  nullable, to others just a pointer will do.
-
-LAM type map:
-
-| Type                            | C++                              | C#                                                |
-|---------------------------------+----------------------------------+---------------------------------------------------+
-| lam::byte                       | unsigned char                    | uchar                                             |
-| lam::character                  | char                             | char                                              |
-| lam::integer8                   | std::int8_t                      | sbyte                                             |
-| lam::integer16                  | std::int16_t                     | System.Int16                                      |
-| lam::integer32                  | std::int32_t                     | System.Int32                                      |
-| lam::integer64                  | std::int64_t                     | System.Int64                                      |
-| lam::integer                    | int                              | int                                               |
-| lam::single_floating            | float                            | float                                             |
-| lam::double_floating            | double                           | double                                            |
-| lam::boolean                    | bool                             | bool                                              |
-| lam::string                     | std::string                      | string                                            |
-| lam::date                       | boost::gregorian::date           | System.DateTime                                   |
-| lam::time                       | boost::posix_time::time_duration | System.TimeSpan                                   |
-| lam::date_time                  | boost::posix_time::ptime         | System.DateTime                                   |
-| lam::decimal                    | std::decimal                     | System.Decimal                                    |
-| lam::dynamic_array<T>           | std::vector<T>                   | System.Collections.Generic.List<T>                |
-| lam::static_array<T>            | std::array<T>                    | System.Collections.Generic.Array<T>               |
-| lam::unordered_dictionary<K, V> | std::unordered_map<K, V>         | System.Collections.Generic.Dictionary<K, V>       |
-| lam::ordered_dictionary<K, V>   | std::map<K, V>                   | System.Collections.Generic.SortedDictionary<K, V> |
-| lam::unordered_set<K>           | std::unordered_set<K>            | System.Collections.Generic.HashSet<T>             |
-| lam::ordered_set<K>             | std::set<K>                      | System.Collections.Generic.SortedSet<T>           |
-| lam::queue<T>                   | std::queue<T>                    | System.Collections.Generic.Queue<T>               |
-| lam::stack<T>                   | std::stack<T>                    | System.Collections.Generic.Stack<T>               |
-| lam::linked_list<T>             | std::list<T>                     | System.Collections.Generic.LinkedList<T>          |
-| lam::pointer<T>                 | boost::shared_ptr<T>             | <erase>                                           |
-
-*Previous Understanding*
-
-When we start supporting more than one language, one interesting
-feature would be to be able to define a model once and have it
-generated for all supported languages. This would be achieved by
-having a system model (or set of system models) that define all the
-key types in a language agnostic manner. For example:
-
-: lam::string
-: lam::int
-: lam::int16
-
-Each of these types then has a set of meta-data fields that map them
-to a type in a supported language:
-
-: lam:string: cpp.concrete_type_mapping = std::string
-: lam:string: csharp.concrete_type_mapping = string
-
-And so on. We load the user model that makes use of LAM, we generate
-the merged model still with LAM types and then we perform a
-translation for each of the supported and enabled languages: for every
-LAM type, we replace all its references with the corresponding
-concrete type. We need to split the supplied mapping into a QName, use
-the QName to load the system models for that language, look up the
-type and replace it. After the translation no LAM types are left. We
-end up with N yarn merged models where N is the number of supported and
-enabled languages.
-
-Each of these models is then sent down to code generation. This should
-be equivalent to manually generating models per language - we could
-use this as a test.
-
-Once we have LAM, it would be great to be able to exchange data
-between languages. This could be done as follows:
-
-- XML: create a "LAM" XML schema, and a set of formatters that read
-  and write from it. This is kind of like reverse mapping the types
-  back to LAM types when writing the XML.
-- JSON: similar approach to XML, minus the schema.
-- POF: use the coherence libraries to dump the models into POF.
-
-Tasks:
-
-- create the LAM model with a set of basic types.
-- add a set of mapping fields into yarn: =yarn.mapping.csharp=, etc
-  and populate the types with entries for each supported language.
-- create a notion of mapping of intermediate models into
-  languages. The input is the merged intermediate model and the output
-  is N models one per language. We also need a way to associate
-  backends with languages. Each model is sent down to its backend.
-- note that reverse mapping is possible: we should be able to
-  associate a type on a given language with it's lam type. This means
-  that, given a model in say C#, we could reconstruct a yarn lam model
-  (or tell the user about the list of failures to map). This should be
-  logged as a separate story.
-
-Links:
-
-- [[http://stackoverflow.com/questions/741054/mapping-between-stl-c-and-c-sharp-containers][Mapping between stl C++ and C# containers]]
-- [[http://stackoverflow.com/questions/3659044/comparison-of-c-stl-collections-and-c-sharp-collections][Comparison of C++ STL collections and C# collections?]]
 
 *** Tidy-up "is floating point"                                       :story:
 
@@ -4230,18 +4385,6 @@ present that try to figure out the meta-model element because they are
 related to resolution. But for any other cases it may result in
 slightly more performant code. We need to look at all the use cases.
 
-*** Add support for "naming rules"                                    :story:
-
-The framework design guidelines has a number of suggestions for how
-naming should be done for different meta-types such as enums, etc. We
-could have "naming profiles" that validate that the user is following
-those guidelines. We could also have a "dictionary" that checks the
-spelling, looking for things such as log_in vs login etc.
-
-We should have numbers (or names) for each of these warnings and add a
-convention such as =-W= and =-Wno= so that users can enable and
-disable warnings. These can be placed globally or locally on elements.
-
 *** Initialise formatters in the formatter's translation unit         :story:
 
 At present we are initialising the formatters in each of the facet
@@ -4249,14 +4392,6 @@ initialisers. However, it makes more sense to initialise them on the
 translation unit for each formatter. This will also make life easier
 when we move to a mustache world where there may not be a formatter
 header file at all.
-
-*** Add knobs to control output of constructors and operators         :story:
-
-At present we are outputting all of the default constructors and the
-operators in the handcrafted templates. Ideally it should just be the
-class name. We need a way of controlling all of the default
-constructors and all of the operators in one go so we can set it on
-the handcrafted profile.
 
 *** Use templates for directory and prefix fields                     :story:
 
@@ -4289,117 +4424,6 @@ Tasks:
 - make directory a recursive field at facet level,  adding default
   values to profiles.
 
-*** Create a tool to generate product skeletons                       :story:
-
-Now that dogen is evolving to a MDSD tool, it would be great to be
-able to create a complete product skeleton from a tool. This would
-entail:
-
-- directory structure. We should document our standard product
-  directory structure as part of this exercise. Initial document added
-  to manual as "project_structure.org".
-- licence: user can choose one.
-- copyright: input by user, used in CMakeFiles, etc. added to the
-  licence.
-- CI support: travis, appveyor
-- CMake support: top-level CMakefiles, CPack. versioning
-  templates, valgrind, doxygen. For CTest we should also generate a
-  "setup cron" and "setup windows scheduler" scripts. User can just
-  run these from the build machine and it will start running CTest.
-- vcpkg support: add "ports" code? user could point to vcpkg directory
-  and a ports directory is created.
-- agile with first sprint
-- README with emblems.
-
-Name for the tool: dart.
-
-Tool should have different "template sets" so that we could have a
-"standard dogen product" but users can come up with other project
-structures.
-
-Tool should add FindODB if user wants ODB support. Similar for EOS
-when we support it again. We should probably have HTTP links to the
-sources of these packages and download them on the fly.
-
-Tool should also create git repo and do first commit (optional).
-
-For extra bonus points, we should create a project in GitHub, Travis
-and AppVeyor from dart.
-
-We should also generate a RPM/Deb installation script for at least
-boost, doxygen, build essentials, clang.
-
-We should also consider a "refresh" or "force" statement, perhaps on a
-file-by-file basis, which would allow one to regenerate all of these
-files. This would be useful to pick-up changes in travis files, etc.
-
-One problem with travis files is that each project has its own
-dependencies. We should move these over to a shell script and call
-these. The script is not generated or perhaps we just generate a
-skeleton. This also highlights the issue that we have different kinds
-of files:
-
-- files that we generate and expect the user to modify;
-- files that we generate but don't expect user modifications;
-- files that the user generates.
-
-We need a way to classify these.
-
-Dart should use stitch templates to generate files.
-
-We may need some options such as "generate boost test ctest
-integration", etc.
-
-Notes:
-
-- [[https://github.com/elbeno/skeleton][Skeleton]]: project to generate c++ project skeletons.
-- split all of the configuration of CMake dependencies from main CMake
-  file. Possible name: ConfigureX? ConfigureODB, etc. See how find_X
-  is implemented.
-- detect all projects by looping through directories.
-- fix CMake generation so that most projects are generated by Dogen.
-- add option to Dogen to generate test skeleton.
-- detect all input models and generate targets by looping through
-  them.
-- add CMake file to find knitter etc and include those files in
-  package. We probably should install dogen now and have dogen rely on
-  installed dogen first, with an option to switch to "built" dogen.
-- generate git ignore files with common regexes. See [[https://github.com/github/gitignore][A collection of
-  useful .gitignore templates]]
-- generate top-level CMake, allowing user to enter dependencies and
-  their versions (e.g. Boost 1.62 etc) and CMake version.
-- inject dogen support automatically to CMake (on a feature switch).
-- determine the list of projects by looking at the contents of the
-  input models directory.
-- user to enter copyright, github URL.
-- we probably need to create a kernel for dart due to the
-  peculiarities of the directory structure.
-
-*Directory Themes*
-
-It seems obvious no one in C++ will agree with a single way of
-structuring projects. The best way out is to start a taxonomy of these
-project layouts (directory structure themes?) and add this to the
-project generator as a theme. At present there are several already
-available:
-
-- [[https://github.com/vector-of-bool/vector-of-bool.github.io/blob/master/_drafts/project-layout.md][Project Layout]]: see also discussion in [[https://old.reddit.com/r/cpp/comments/996q8o/prepare_thy_pitchforks_a_de_facto_standard/][reddit]]. Also: [[https://vector-of-bool.github.io/2018/09/16/layout-survey.html][Project
-  Layout - Survey Results and Updates]]
-- [[https://build2.org/][Build2]]: the packaging system seems to have a preferred directory
-  layout. In particular, see [[https://build2.org/build2-toolchain/doc/build2-toolchain-intro.xhtml#proj-struct][Canonical Project Structure]].
-- GNU: gnu projects seem to have a well-defined structure, if not the
-  most sensible.
-
-Links:
-
-- [[https://github.com/bkaradzic/GENie][GENie - Project generator tool]]
-- see [[https://github.com/cginternals/cmake-init][cmake-init]] for ideas.
-- [[https://github.com/premake/premake-core][Premake: powerfully simple build configuration.]]
-- [[https://jgcoded.github.io/CMakeStarter/][CMake Starter]]: "This website is a simple tool to help C++ developers
-  quickly start new CMake-based projects. The tool generates an entire
-  C++ project with boiler-plate CMake files and source code, and the
-  generated project can be downloaded as a zip file."
-
 *** Merge properties factory with stitching factory                   :story:
 
 In stitch we still have a few classes that are light on
@@ -4412,13 +4436,6 @@ factory.
 Comment formatter is now a mess of ifs and boolean variables. We need
 to create a proper state machine describing its internals and then
 implement it.
-
-*** Use an unordered map in qualified name                            :story:
-
-For some reason we are using a map, but its not clear that we need
-sorting. Change it to unordered and see what breaks.
-
-It seems we get errors in serialisation when using the map.
 
 *** Language namespaces and modeling element locations                :story:
 
@@ -4532,17 +4549,6 @@ the dumpers.
 With the introduction of assistants in C#, we now have overloaded the
 term. We need to find another name to refer to the formatting
 assistant in C++ so avoid confusion.
-
-*** Add conversion support for Dia                                    :story:
-
-It would be nice if one could take a JSON model and generate a dia
-diagram for it. This is non-trivial because it would require computing
-all of the sizes and locations for all UML elements. But if we did
-manage to do this, we could then allow users to submit models in say
-JSON, eCore etc and produce a PNG of the model so they could visualise
-it. We could also try to consume dia as a shared library instead of
-running the full program - e.g. create a service that takes in a dia
-diagram and returns the PNG.
 
 *** Implement qualified name efficiently                              :story:
 
@@ -4689,269 +4695,6 @@ Not all helpers are bound to a type. We have the case of inserter
 helper in io which is used by main formatters directly. We need to
 make this distinction in the manual.
 
-*** Dump container of files in formatter workflow                     :story:
-
-At present we are polluting the log file with lots of entries for each
-file name in formatter's workflow. Ideally we want a single entry with
-a container of file names. The problem is, if we dump the entire
-container we will also get the file contents. But if we create a
-temporary container we will have to pay the cost even though log level
-may not be enabled.
-
-*** Add validation for helper families                                :story:
-
-At present we are checking that the name tree has the expected number
-of type arguments:
-
-:    const auto children(t.children());
-:    if (children.size() != 1) {
-:        BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
-:        BOOST_THROW_EXCEPTION(formatting_error(invalid_smart_pointer));
-:    }
-:    smart_pointer_helper_stitch(fa, t);
-
-In the future with dynamic helpers we will remove these checks. In
-order to implement them we need to declare the type families up front
-in a JSON file, with a name and number of type arguments. When
-constructing the type helpers, we can check the name tree to make sure
-the number of type arguments is correct.
-
-This can be done as a helper setting (number of type arguments?).
-
-Actually this is a core yarn property. So:
-
-- add number of type arguments to object;
-- read this as a dynamic field;
-- during validation, check that all name trees that instantiate this
-  object have the expected number of type arguments.
-- in order to cope with cases such as variant we also need some kind
-  of enum, e.g. type parameterisation: none, variable, fixed. if
-  fixed, then number of type parameters must be non-zero.
-
-*** Incorrect generation of forward declarations for all facets       :story:
-
-Up to know we generated forward declarations for all facets for all
-types that needed a =types= forward declaration. This was not a
-problem for enumerations, objects, exceptions and so forth because
-they were all serialisable. However with the introduction of visitor
-forward declarations, we are now generating an invalid serialisation
-forward declaration (because visitors are not serialisable). We need
-to find a way to determine when to generate a forward declaration for
-a facet. This could be done via enablement, but we don't want to do
-too much hard-coding (e.g. if visitor then disable serialisation
-facet, etc).
-
-Ideally we should support some kind of "on-demand" generation: if
-anyone references a forward declaration we generate it, if no one does
-we don't. Users are still free to force a forward declaration to be
-generated via meta-data.
-
-This could be achieved by keeping track of usage in include
-builder. Formatters would have an additional knob: generate always,
-generate if referenced. If "generate if referenced", we would wait for
-at least one reference in include builder.
-
-*** Computation of enablement values                                   :epic:
-
-Note: this story is still *very* sketchy.
-
-At present we have a very simple way of determining what formatters
-are enabled: if a facet has been enabled by the user then all
-formatters on that facet are enabled. This is a good starting point
-but results in a lot of manual work:
-
-- if we add a type which does not support all facets, we will generate
-  invalid code. Users should be able to mark which facets are
-  supported and then the graph of dependencies should do the right
-  thing, propagating the disabled status.
-- we are enabling all formatters in a facet. For hashing and forward
-  declarations, it would make more sense to have a "dependency based
-  enablement": if we determine that someone in the model needs that
-  feature, we enable it, if not its disabled. Users can always
-  override this and force it to be globally enabled.
-- if a user creates a "service", all facets other than types are
-  disabled. Ideally we should be able to define "enablement profiles"
-  and then set an element's enablement profile. Each enablement
-  profile is made up of a set of enabled facets. They could be
-  supplied as a KVP. In fairness we probably just need "types and io"
-  or "default".
-
-One way to think of this problem is to imagine a matrix for each
-element in element space. Each matrix is two-dimensional: one
-dimension is the facets and the other are "dependent elements". These
-are effectively made up of all attributes for each element, with a
-name tree expansion. Each value of the matrix can either be 0
-(disabled), 1 (enabled) or 2 (not computable). Not computable is a
-hack to cope with cycles in the graph of dependencies.
-
-Each value is computed by looking up an element's matrix and looking
-for zeros. If there is one or more zero against a facet, the element's
-value for that facet is zero. If there is a two we need to do a
-two-pass whereby we first compute the matrix ignoring all the two's;
-then, for each cycle we create a list of all the elements on that path
-and the pair of elements that causes the cycle. We then compute the
-enablement for this pair with a simple table (OR the computed
-enablement values). We then traverse the cycle in reverse, updating
-the twos to real values.
-
-We could start with one large matrix with rows by element and columns
-by feature. All values on this matrix are set to 1. We would then
-multiply it against the global enablement matrix. We would then
-multiply it by the local enablement matrix, for each element. We would
-then compute the dependency matrices for all elements only taking into
-account facets that are still enabled. We need to find the linear
-algebra operation that takes a column with zeros and ones and returns
-one if all rows are one and zero otherwise.
-
-This produces the enabled facets. We then need to worry about the
-formatters. There are a few sources of information:
-
-- the facet enablement.
-- the user local or global decision for that formatter.
-- some kind of default formatter property (e.g. disabled by default).
-- dependencies.
-
-For these we need to create a "get dependencies" method in
-each formatter which returns dependent formatters. For example, the
-visitor formatter depends on the forward declarations formatter. This
-is a static dependency. The more complex case is where there are
-dynamic dependencies. For example, if hashing is detected for a given
-type, we then need to enable the hashing facet for the containee. We
-should probably hard-code this scenario for now.
-
-We may want to make these computations disableable. For example: a)
-all: no computation, everything is enabled b) all supported: all that
-is supported is enabled c) by dependencies.
-
-Requested help from FB. Core of the email:
-
-#+begin_quote
-Lets start with the simple case. Let G be a DAG. For each vertex of G
-there is an associated vector over a field F. Now I would say F is
-GF(2), which suits my needs (as you will see below). The objective is
-to compute, for each vertex, the value of its associated vector, as
-follows:
-
-- first we go through the vertices in any order and setup its initial
-  values according to a predetermined heuristic. Different nodes will
-  have different values, and the heuristic has no dependency on G.
-- then we iterate through G using DFS. If a vertex has no children
-  then the final value of its vertex is the initial value. If a vertex
-  has children, the value of its vector is obtained by multiplying the
-  initial value against the values of the vectors of its child
-  vertices. Multiplication under GF(2) is just a logical AND which is
-  great for my purposes.
-
-Just to make sure I'm explaining my self correctly, lets look at it in
-layperson's terms: if a vertex has a 1 at position zero of its vector,
-and all of its children also have a 1 at position zero, then the final
-value for position zero will be 1. If there is a 0 anywhere at
-position zero then the value is 0. So far so good, this works as
-expected.
-
-However! The problem is, G is actually not always a DAG. Sometimes
-there may be cycles, which are detectable during DFS. My question is:
-is there anything I can do to still perform this heuristic (or some
-approximation of it) with a graph that has cycles? For example:
-
-- record the path to the cycle and perform several passes. This seems
-  to breakdown when there are several cycles because I seem to hit
-  some kind of recursive problem.
-- ignore the cycle. Of course, the problem with this approach is that
-  if there was a zero at either side of the cycle, I would be
-  incorrectly computing the node, but maybe that's the best one can
-  do?
-#+end_quote
-
-Actually maybe we are looking at this the wrong way. Lets imagine that
-for each element there is a vector v in GF(2) called the initial
-vector. The objective is to compute u, the output vector. The output
-vector is made up of the initial vector of the element, times the
-output vectors of all the elements the element depends on. However,
-these can be formulated in terms of initial vectors too (e.g. the
-initial vector of the depended element times the initial vectors of
-the elements it depends on times the initial vectors of the elements
-they depend on and so forth). Thus for each element there is an
-expansion that just relies on initial vectors. For the cases where
-there are cycles: its not a problem since multiplying n times by
-the same vector (in GF(2)) produces the same result as multiplying
-just once.
-
-It would still be useful to have a graph though, to find all of the
-initial vectors for a given element. We just need to stop DFS'ing when
-we find a cycle. We can also cache the initial vectors for each
-element.
-
-Notes:
-
-- we can greatly simplify this story if we do not allow for cycles. We
-  can simply create a graph of all dependencies and then iterate the
-  graph from the leaves. Call Ev the enablement vector for each
-  element; we can descend the graph and perform an OR of Ev at each
-  level. Consider element e0, which is a child of a set of elements E;
-  for each entry in the set, we'd OR the element vector of e0 (and of
-  all of its descendants). As a result, its values would be the
-  superset of all of the enabled values on each leaf element.
-- since we do not allow cycles, we should detect them and break with
-  an error. We should provide the cycle path to the user and then
-  allow users to remove certain types from this computation via
-  meta-data. If a type is set not to contribute to the graph, we can
-  simply skip it. The user is then responsible for manually setting
-  that type.
-- since we can only alter generatable types, we should detect when we
-  reach an element which is not generatable. If the OR'ing of that
-  element does not produce its current enablement vector we should
-  simply error and tell the user the current enablement requirements
-  are not satisfiable. The user is then responsible for addressing the
-  issue by either changing enablement requirements, ignoring types,
-  updating reference models manually or providing helper types. To
-  make life easier we could state what are the enablement requirements
-  that have not been met so that users can quickly decide what to do.
-- once we compute the dependency graph we can also check to see what
-  types are on it. Any type which is absent can be removed from the
-  model. We could also compute the models that are on the graph and
-  compare them to the list of references. If the list of references at
-  present only includes references of the target model, we can figure
-  out any unnecessary references. Sadly we cannot do the opposite:
-  (lost the train of thought).
-
-Merged stories:
-
-*Formatters need different =enabled= defaults*
-
-We should be able to disable some formatters such as forward
-declarations. Some users may not require them. We can do this using
-dynamic extensions. We can either implement it in the backend or make
-all the formatters return an =std::optional<dogen::formatters::file>=
-and internally look for a =enabled= trait.
-
-We need to be able to distinguish "optional" formatters - those that
-can be disabled - and "mandatory" formatters - those that cannot. If a
-user requests the disabling of a mandatory formatter, we must
-throw. This must be handled in enabler.
-
-This story was merged with a previous one: Parameter to disable cpp
-file.
-
-#+begin_quote
-*Story*: As a dogen user, I want to disable cpp files so that I don't
-generate files with dummy content when I'm not using them.
-#+end_quote
-
-It would be really useful to define a implementation specific
-parameter which disables the generation of a cpp file for a
-service. This would stop us from having to create noddy translation
-units with dummy functions just to avoid having to define exclusion
-regexes.
-
-In some cases we may need a "enable by usage". For example,
-it would be great to be able to enable forward declarations only for
-those types for which we required them. Same with hash. We can detect
-this by looking at the generated include dependencies. However,
-because the include dependency only has a directive, we cannot tell
-which formatter it belonged to. This would require some augmenting of
-the directive to record the "origination" formatter.
-
 *** Identifier parser has hard-coded built-ins                        :story:
 
 Instead of using the hardware model, we have hard-coded all of the
@@ -4976,14 +4719,6 @@ unparsed types before merging. There is a circular dependency here.
 We somehow need a first pass to obtain all the built-ins and a second
 pass to parse.
 
-*** Update copyright notices                                          :story:
-
-We need to update all notices to reflect personal ownership until DDC
-was formed, and then ownership by DDC.
-
-- first update to personal ownership has been done, but we need to
-  test if multiple copyright entries is properly supported.
-
 *** "current" is not the best of names in name tree                   :story:
 
 We need to find a slightly more meaningful name for the "current" name
@@ -4997,31 +4732,6 @@ We could call it just "data" and drop "current" from flag.
 We have a variety of names for the methods parsing name trees
 recursively. The best one seems to be =walk_name_tree=. We should use
 this name consistently.
-
-*** Add support for selectively disabling helpers on a family         :story:
-
-At present when a type belongs to a helper family it must provide all
-helpers across all facets. This means that we can't support the cases
-where a helper is required for one facet for one type but not for
-others. For example, we cannot create a family for =Dereferenceable=
-including both smart pointers and optionals because optional does not
-need a helper for =types=.
-
-One solution for this is to allow disabling the helper for a given
-type on a given facet. However, our templating mechanism in dynamic is
-not able to cope with this use case. Changes required:
-
-- add a "component" to ownership hierarchy. This would be "helper" in
-  our case. We should also set "type" which has been hacked via the
-  qualified name.
-- create a supported/enabled field with a component of helper and a
-  facet template. We could change this to formatter template if
-  required in the future.
-- merge the families of optional and smart pointer into
-  =Dereferenceable=.
-- disable the helper for types for optional.
-- update the helper settings to read this new field.
-- enabled method now checks the helper properties.
 
 *** Add new c++ warnings to compilation                               :story:
 
@@ -5089,30 +4799,6 @@ supported types and add the includes to the meta-data; regenerate and
 see what breaks. It could be related to the ordering of template
 functions or some such problem. If so we need to document this in
 manual. We should also do a quick search in backlog for this.
-
-*** Character member variables are not tidied up on io                :story:
-
-At present there is no code to convert non-printable chars into
-something acceptable in JSON. We probably never noticed this before
-because test data generates printable chars. Code generated is as
-follows (all built-in model):
-
-: << "\"char_property\": " << "\"" << v.char_property() << "\"" << ", "
-
-We need a "tidy-up char" function to handle this properly.
-
-For now we've hacked this and set =remove_unprintable_characters= to
-false to keep backwards compatibility with legacy.
-
-*** Lists of strings are not properly tidied up on io                 :story:
-
-In the log file, when we dump include dependencies we see invalid
-JSON:
-
-: [ "<iosfwd>", ""dogen/sml/types/merger.hpp"" ]
-
-This implies we are not calling =tidy_up_string=. This can be tested
-by creating a container of =filesystem::path=.
 
 *** Helper methods should have their own includes                     :story:
 
@@ -5227,125 +4913,6 @@ annotation rename.
 This may even be a more wide-ranging question: why do users need to
 know who owns the field? e.g. =dia.comment=, do I care?
 
-*** Add validation for field definitions                              :story:
-
-Perform some validation in repository workflow:
-
-- that formatter fields are not duplicated on simple name.
-- fields are not duplicated on qualified name.
-- instances have qualified name populated.
-- only instances are left after instantiation.
-
-*** Incorrect application of formatter templates in field expansion   :story:
-
-At present we are applying formatter templates across all formatters
-in C++ mode; this only makes sense because we do not have CMake and
-ODB formatters. However, when these are added we will need to filter
-the formatters further. For example, C++ formatters (both headers and
-implementation) need inclusion dependencies but CMake files don't.
-
-*** Improve error reporting around JSON                               :story:
-
-At present when we break the JSON we get errors like so:
-
-: Error: Failed to parse JSON file<unspecified file>(75): expected object name.
-
-These are not very useful in diagnosing the problem. In the log file
-we do a bit better:
-
-: 2015-03-30 12:02:12.897202 [DEBUG] [dynamic.schema.json_hydrator] Parsing JSON file: /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../data/fields/cpp.json
-: 2015-03-30 12:02:12.897216 [DEBUG] [dynamic.schema.json_hydrator] Parsing JSON stream.
-: 2015-03-30 12:02:12.897450 [ERROR] [dynamic.schema.json_hydrator] Failed to parse JSON file: <unspecified file>(75): expected object name
-: 2015-03-30 12:02:12.897515 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/dynamic/schema/src/types/json_hydrator.cpp(226): Throw in function std::list<field_definition> dogen::dynamic::schema::json_hydrator::hydrate(std::istream &) const
-: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen7dynamic6schema15hydration_errorEEE
-: std::exception::what: Failed to parse JSON file<unspecified file>(75): expected object name
-: [P12tag_workflow] = Code generation failure.
-
-But it requires a lot of context to know whats going on. We need to
-append more details to the exception.
-
-Merged stories:
-
-*Duplicate fields in JSON result in non-intuitive errors*
-
-By mistake we added the same field twice in JSON:
-
-:            "extensions" : {
-:                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree.hpp>",
-:                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree_serialization.hpp>",
-:                "cpp.io.class_header_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
-:                "cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
-:                "cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
-:                "cpp.hash.class_header_formatter.inclusion_required" : false
-
-The resulting error message was not particularly helpful:
-
-: 2015-06-17 13:56:06.658500 [DEBUG] [sml.json_hydrator] Processing type: <boost><property_tree><ptree>
-: 2015-06-17 13:56:06.658519 [ERROR] [dynamic.field_instance_factory] Expected at most one element
-
-*** Read =generate_preamble= from dynamic object                      :story:
-
-We need to generate the field definitions and update the general
-settings factory.
-
-*** Add frontends and backends to =info= command line option          :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to know what frontends and backends
-are available in my dogen version so that I don't try to use features
-that are not present.
-#+end_quote
-
-With the static registration of importers and backends, we should add
-some kind of mechanism to display whats on offer in the command line,
-via the =--info= option. This is slightly tricky because the fronend
-and backend models do not know of the command line. We need a method
-in the frontend that returns a description and a method in the
-workflow that returns all descriptions. These must be static. Then
-knitter can then call these methods and build the info text.
-
-*** Add stitch section in manual                                      :story:
-
-We need to document stitch:
-
-- formal definition of the language and its limitations;
-- command line usage of the tool.
-- describe the t4 grammar, our similarities and differences. See the
-  stories around using t4 terminology in sprint 64 and 68 (most
-  important bits copied below).
-- describe available directives.
-- note on how we don't support class feature blocks and how we use the
-  class feature block start marker to mean standard control block
-  start marker.
-
-Relevant comments from previous stories:
-
-We found [[https://msdn.microsoft.com/en-us/library/bb126478.aspx][a page]] documenting the elements of T4. These are:
-
-- *Directives*: Text template directives provide general instructions to
-  the text templating engine about how to generate the transformation
-  code and the output file.
-- *Text blocks*: A text block inserts text directly into the output
-  file. There is no special formatting for text blocks.
-- *Control blocks*: Control blocks are sections of program code that
-  are used to transform the templates. Two types:
-  - *Standard control blocks*: A standard control block is a section
-    of program code that generates part of the output file.
-  - *Expression control blocks*: An expression control block evaluates
-    an expression and converts it to a string.
-
-Additional definitions we made up because we could not find anything
-suitable in documentation:
-
-- *Block*: one of: text block, control block or any of its descendants.
-- *Statement*: either a directive or a control block.
-- *Inline statement*: statement that starts and ends in one line.
-- *Marker*: one of <#, <#@, <#=, #>. Mark-up that delimits statements.
-- *Start Marker*: one of <#, <#@, <#=. Can also be specialised to
-  "start X marker", e.g. start control block marker is <#, and so on.
-- *End Marker*: #>. Can also be specialised to "end X marker",
-  e.g. end directive marker is #>.
-
 *** Consider removing filtering ostream                               :story:
 
 Originally we added a boost based stream to handle
@@ -5390,12 +4957,6 @@ and so forth.
 We lost the C# use case for this though, as we managed to make the API
 symmetric for both use cases.
 
-** In the medium term
-
-The release will not be made unless these stories are closed, but we
-won't be addressing them in the near term. This release is all about
-getting the architecture right.
-
 *** Attribute types are always fully qualified                        :story:
 
 When we code generate non-built-ins attributes we always fully qualify
@@ -5427,17 +4988,6 @@ The right thing to do is to throw a more sensible exception such as
 Once we have a use case for default values in text collections we
 should add it.
 
-*** Add =interface= meta-model element                                :story:
-
-Even though we can't generate much outside of plain types, we should
-already have support for a stereotype of =interface=. In the future we
-may be able to code generate the interface. This should be implemented
-in coding as a type on its own right.
-
-- add an interface which is: element, operatable, relatable. Not
-  stateful. We should also have a "is abstract" flag
-  somewhere. Perhaps in relatable?
-
 *** Protect against double-initialisation                             :story:
 
 We need to look into static initialisation and make sure the code can
@@ -5455,6 +5005,8 @@ initialise function so we can see the dependencies at the top-level.
 A second related problem is the lack of initialisation. We need to
 have some really meaningful exception that tells users when they
 forgot to initialise the framework.
+
+This story will eventually become irrelevant once we move to Boost.DI.
 
 *** Field definition templates do not support facet specific defaults :story:
 
@@ -5490,60 +5042,6 @@ logging and the exception message.
 In addition we should be using =string_converter= for qnames now
 instead of io'ing them directly.
 
-*** Use of disabled facets in non-generatable types                   :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to know when I try to use a disabled
-facet in a non-generatable type so that I don't generate
-non-compilable code.
-#+end_quote
-
-It would be useful to set facets to disabled on non-generatable types,
-when there are generatable types that depend on them. For example, if
-we create some non-generatable types for which there is only a =types=
-facet, we may still want to create generatable types that make use of
-them. In this case, we would like Dogen to automatically disable all
-facets except for =types=. Also, if a type is non-generatable, all
-facets should be automatically disabled and its up to the user to
-enable the ones he is interested in manually.
-
-*** Failed facet dependencies should be treated as errors             :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to know when I try to use a
-non-supported facet from a system type so that I don't generate
-non-compilable code.
-#+end_quote
-
-if a facet is not supported in a system module and the user tries to
-make use of it, we should error. The user must then go and disable
-explicitly the facet on the affected object via the meta data. We
-should not silently disable facets.
-
-*** Allow for generation of class with the same name as package       :story:
-
-At present its not possible to generate a class inside a package with
-the same name of that package, if the package documentation is being
-generated. This is because they will both have the exact same file
-name.
-
-*** Type with the same name as the project does not compile           :story:
-
-It seems that if we create a type with exactly the same name as the
-model, we get strange compilation errors:
-
-: /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.4/stage/bin/dogen_examples/source/hello_world/include/hello_world/test_data/hello_world_td.hpp:37:13: error: ‘hello_world::hello_world::hello_world’ names the constructor, not the type
-:     typedef hello_world::hello_world result_type;
-             ^
-We should do a test case for this and fix the errors.
-
-*** Diagrams used in manual should be in sanity and in docs           :story:
-
-Users should be able to follow the examples in the manual by using a
-set of diagrams supplied in the dogen package. However, to ensure
-these samples are actually working we need to test them as part of
-sanity. This means we need the same diagrams packaged twice.
-
 *** Consider moving the mock factories into the test_data directory   :story:
 
 There is no good conceptual reason to split the mock factories from
@@ -5566,7 +5064,7 @@ We are going to take the easy approach as we did for serialisation and
 make all the code artefacts American. Documentation etc is not that
 important.
 
-*** Clean up yarn resolver tests by extending mock factory            :story:
+*** Clean up coding resolver tests by extending mock factory          :story:
 
 Now that the mock factory has the concept of "stages" of processing,
 we need to create a "stage" for merged but unresolved models and
@@ -5574,7 +5072,7 @@ remove the merger from the resolver tests. The flag for this has been
 added, we just need to go through the different scenarios and add
 handling code for them.
 
-*** Refactor yarn mock factory method names                           :story:
+*** Refactor coding mock factory method names                         :story:
 
 We have a zoo of naming conventions, some starting with =build_=, some
 starting with =object_= etc.
@@ -5608,127 +5106,20 @@ We need a =is_floating_point_like= method to be able to distinguish
 between them, and then the associated changes in the generators to
 create floating point numbers.
 
-*** Create different kinds of master header files                     :story:
+*** Inline comments in =comment_formatter= are a hack                 :story:
 
-#+begin_quote
-*Story*: As a dogen user, I don't want to include every object in a
-model when I use includers.
-#+end_quote
-
-At present we are using the facet includers in unit tests. This is not
-ideal because it means that every time we do a change in a service
-header, all tests recompile. In reality we should have two types of
-inclusions:
-
-- canned tests should include only value objects, etc - e.g. no
-  services.
-- service tests should include the header for the service and any
-  additional dependencies the service may require.
-
-Perhaps we could have a second type of includer that only has value
-objects, etc.
-
-Another way to look at this is that there should be user-configurable
-master header files:
-
-#+begin_quote
-*Story*: As a dogen user, I want to create master header files for
-user defined sets of files so that I don't have to do it manually.
-#+end_quote
-
-*** Detect invalid child nodes in dia diagram                         :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to know when there are invalid child
-nodes in diagram so that I can fix them.
-#+end_quote
-
-When copying a set of classes from a diagram, where these classes
-where contained in a package, dia seems to copy across the =childnode=
-id. This is a problem because when pasted in a new diagram, if those
-classes are not in a package there is now the potential for total
-mismatching - for instance, they could be children of an
-association. Dogen should validate that children belong to UML
-elements which can have children, and if not issue good error
-messages - perhaps even talking about the possible cause for the
-error.
-
-*** Type resolution in referenced models                              :story:
-
-We did a hack a while ago whereby if a type is of a referenced model,
-we don't bother resolving it. As an optimisation this is probably
-fine, but however, it hides a bug which is that we fail to resolve
-properties of referenced models properly. The reason why is that these
-properties have a blank model name. We could simply force it to be the
-name of the referenced model but then it would fail to find
-built-ins. So we leave it blank during the dia to sml translation and
-then if it gets to the resolver, it will not be able to resolve the
-type. We could add yet another layer of try-logic (e.g. try every
-model name in the references) but it seems that this is just another
-hack to solve a more fundamental problem. The sort of errors one gets
-due to this are like so:
-
-: 2013-06-29 23:10:34.831009 [ERROR] [sml.resolver] Object has property with undefined type:  { "__type__": "dogen::sml::qname", "model_name": "", "external_module_path": [ ] , "module_path": [ ] , "type_name": "qname", "meta_type": { "__type__": "meta_types", "value": "invalid" } }
-: 2013-06-29 23:10:34.831294 [FATAL] [dogen] Error: /home/marco/Development/kitanda/dogen/projects/sml/src/types/resolver.cpp(202): Throw in function dogen::sml::qname dogen::sml::resolver::resolve_partial_type(const dogen::sml::qname&) const
-: Dynamic exception type: boost::exception_detail::clone_impl<dogen::sml::resolution_error>
+We need to tidy-up comment formatter. We had introduced
+=documenting_previous_identifier= rather than "comment inline" but in
+reality we do need to distinguish these two use cases. If there are
+several lines, we want to finish each line with a new line. However,
+if thee is just one line, as is the case with enumerations, we do not
+want to add any new lines. This is because the stitch template will
+add new lines so we end up with too many of them.
 
 *** Assignment operator should be protected in ABC                    :story:
 
 As per MEC 33. We should probably do the same for the move and copy
 constructors.
-
-*** Add comments to test model sanitizer                              :story:
-
-We should explain why we decided to create a test model sanitizer
-instead of just adding specs to the test models themselves. The
-rationale behind it was that it would break the current diffing and
-rebaselining logic; we would either have to ignore specs on the diff
-or find a way to copy them after code generation. Both options are a
-bit of a hack. So instead we created a model with all the specs.
-
-*** Partial matching of built-ins doesn't work for certain types      :story:
-
-We introduced a fix that allows users to create types that partially
-match built-ins types such as =in= or =integer=. The fix was copied
-from the spirit documentation:
-
-[[http://www.boost.org/doc/libs/1_52_0/libs/spirit/repository/doc/html/spirit_repository/qi_components/directives/distinct.html][- Qi Distinct Parser Directive]]
-- [[http://www.boost.org/doc/libs/1_52_0/libs/spirit/repository/test/qi/distinct.cpp][distinct.cpp]]
-
-Seems like the thing to do here is to create a keyword parser and nest
-it with the existing parsers:
-
-- [[http://stackoverflow.com/questions/21960167/prevent-the-boost-spirit-symbol-parser-from-accepting-a-keyword-too-early][Prevent the Boost Spirit Symbol parser from accepting a keyword too early]]
-- [[http://www.boost.org/doc/libs/1_53_0/libs/spirit/repository/doc/html/spirit_repository/qi_components/directives/kwd.html][Qi Keyword Parser Directive]]
-
-The new parser has a fix for these problems but was not completed so
-cannot yet replace the legacy parser.
-
-*** Unordered map of user type in package fails                       :story:
-
-We seem to have a strange bug whereby creating a
-=std::unordered_map<E1,E2>= fails sanity checks if E1 is in a
-package. This appears to be some misunderstanding in namespacing
-rules.
-
-*** Naming of saved yarn/Dia files is incorrect                       :story:
-
-For some random reason when we use dogen to save yarn/Dia files the
-names look like this:
-
-: test_data/dia_sml/expected/boost_model.xmldia
-: test_data/dia_sml/expected/std_model.xmldia
-
-but our tests expect:
-
-: test_data/dia_sml/expected/boost_model.diaxml
-: test_data/dia_sml/expected/std_model.diaxml
-
-This must be part of a refactoring that wasn't completed properly.
-
-** Technical debt, improvements
-
-Ideas to improve the code base.
 
 *** Full constructor parameter comments                               :story:
 
@@ -5939,7 +5330,6 @@ We did add the flags to the constructor, but it would be better if we
 could pass in the configuration for each method invocation rather than
 for the entire factory.
 
-
 *** Consider using boost pointer container for formatters             :story:
 
 At present we are using a container of shared pointers to house the
@@ -5985,30 +5375,464 @@ Links:
 - [[http://www.olegsych.com/2008/02/t4-class-feature-blocks/][Understanding T4: Class Feature Blocks]]
 - [[https://msdn.microsoft.com/en-us/library/bb126478.aspx][Writing a t4 template]] (section Class feature control blocks).
 
-*** Improve formatters code generation marker                         :story:
-
-Things the marker can/should have:
-
-- model level version;
-- the dogen version too. However, this will make all our tests break
-  every time there is a new commit so perhaps we need to have this
-  switched off by default.
-
-*** Inline comments in =comment_formatter= are a hack                 :story:
-
-We need to tidy-up comment formatter. We had introduced
-=documenting_previous_identifier= rather than "comment inline" but in
-reality we do need to distinguish these two use cases. If there are
-several lines, we want to finish each line with a new line. However,
-if thee is just one line, as is the case with enumerations, we do not
-want to add any new lines. This is because the stitch template will
-add new lines so we end up with too many of them.
-
 ** Feature Heap
 
 Features for which there is no urgency but we'd like to see them
 implemented at some point. They may require some alterations to the
 core, but not fundamental rethinking.
+
+*** Exceptions with stream to build exception message                 :story:
+
+Consider adding some functionality to exceptions whereby we could
+create the exception with a stream:
+
+: exception e;
+: e << "some blurb" << 123;
+: throw e;
+
+Or maybe we need an exception builder that takes in a type T:
+
+: exception_builder<exception> b;
+: b << "some blurb" << 123;
+: throw b.build();
+
+This is a really common use case.
+
+*** Add additional reference directories                              :story:
+
+At present we expect the reference models to be either on the data
+directory (for system models) or on the same directory as the
+target. Presumably, users may also want to have models on other
+directories. For example, if one were to extend Dogen with a different
+project, it would be required to load models from the dogen
+directory.
+
+We could simply add a command line argument for reference directories;
+if the reference is not found in the target model directory, we would
+then try all available reference directories.
+
+Merged Stories:
+
+*Add additional data files directories*
+
+#+begin_quote
+*Story*: As a dogen user, I want dogen to use my own private data
+libraries so that I don't have to supply them as diagrams.
+#+end_quote
+
+Users should be able to provide directories for their own JSON
+models. We just need to add a new parameter to the knitter and
+transport it all the way to OM's workflow.
+
+In the future, when everything is a model, data file directories and
+reference directories will become one and the same.
+
+*** Add support for proper JSON serialisation in C++                  :story:
+
+We need to add support for JSON in C++. It will eventually have to
+roundtrip to JSON in C# but that will be handled as two separate
+stories. We need to support multiple available backends because there
+are so many c++ libraries available. Different users may have
+different needs (e.g. if you are already using boost spirit it may
+make sense to use it, if you have casablanca you may want its support
+etc.). This does complicate things for testing. We should limit
+ourselves to libraries that have vcpkg ports. Tests can roundtrip
+between different implementations.
+
+We will not replace the current IO implementation; it should continue
+to exist as is, requiring no external dependencies.
+
+We should consider supporting multiple JSON libraries: instead of
+making the mistake we did with serialisation where we bound the name
+=serialization= with boost serialisation, we should call it by its
+real name, e.g. =json_spirit= etc. Then when a user creates a
+stereotype for a profile such as =Serializable= it can choose which
+serialisation codecs to enable for which language. This means that the
+same stereotypes can have different meanings in different
+architectures, which is the desired behaviour.
+
+We should create a serialise / deserialise functions following the
+same logic as boost:
+
+#+begin_src c++
+void serialize(Value& v, const object& o);
+void serialize(Value& v, const base& b);
+
+void deserialize(const Value& v, object& o);
+base* deserialize(const Value& v);
+#+end_src
+
+Or perhaps even better, we can make the above the internal methods and
+use =operator<<= and =operator>>= as the external methods:
+
+#+begin_src c++
+void operator<<(Value& v, const object& o);
+void operator>>(const Value& v, object& o);
+#+end_src
+
+Notes:
+
+- create a registrar with a map for each base type. The function
+  returns a base type pointer.
+- when you deserialize a base type pointer, you call the pointer
+  deserialize above. Same for when you have a pointer to an object. It
+  will internally call the registrar (if its a base type) and get the
+  right function.
+- this means we only need to look at type for inheritance. Although we
+  should probably always do it for validation? However, what happens
+  if we want to make a model so we can read external JSON? It won't
+  contain type markings.
+- =operator>>= will not be defined for pointers or base classes.
+- this wont work for the case of =doc << base=. For this we need a map
+  that looks up on type_index.
+
+Links:
+
+- [[https://bitbucket.org/sobjectizerteam/json_dto-0.2/src/default/#markdown-header-what-is-json_dto][JSON DTO]]
+- [[https://github.com/Tencent/rapidjson][RapidJSON]]
+- [[https://github.com/nlohmann/json][JSON]]
+- [[https://github.com/open-source-parsers/jsoncpp][JSON CPP]]
+- [[https://github.com/Donerkebap13/DonerSerializer][DonerSerializer]]
+- [[https://www.codeproject.com/Articles/20027/JSON-Spirit-A-C-JSON-Parser-Generator-Implemented][JSON Spirit]]
+- [[https://github.com/miloyip/nativejson-benchmark][nativejson-benchmark]]: project comparing JSON libraries.
+- [[https://github.com/dropbox/json11][Json11]]
+
+Merged stories:
+
+*Rapid JSON support*
+
+For the previous attempt to integrate RapidJson see this commit:
+
+b2cce41 * third party: remove includes and rapid json
+
+*Add support for JSON serialisation*
+
+We should have proper JSON serialisation support, for both reading and
+writing. We can then implement IO in terms of JSON.
+
+*Raw JSON vs cooked JSON*
+
+If we do implement customisable JSON serialisation, we should still
+use the raw format in streaming. We need a way to disable the cooked
+JSON internally. We should also re-implement streaming in terms of
+this JSON mode.
+
+*Add serialisation support for JSON*
+
+It seems we do not yet have a story for this. The idea is to have some
+basic JSON roundtripping support. The user can configure the backend.
+
+*** Add support for qualified class names in dia                      :story:
+
+#+begin_quote
+*Story*: As a dogen user, I don't want to have to define packages in
+certain cases.
+#+end_quote
+
+It has become apparent that creating large packages in dia and placing
+all classes in a large package is cumbersome:
+
+- there are issues with the large package implementation in dia,
+  making copying and pasting a dark art; its not very obvious how one
+  copies into a package (e.g. populating the child node id correctly).
+- models do not always have a neat division between packages; in
+  dogen, where packages would be useful, there are all sorts of
+  connections (e.g. inheritance, association) between the package and
+  the model "package" or other packages. Thus is very difficult to
+  produce a representative diagram.
+
+A solution to this problem would be to support qualified names in
+class names; these would be interpreted as being part of the current
+model. One would still have to define a large package, but it could be
+empty, or contain only the types which only have connections inside
+the package, plus comments for the package, etc.
+
+*** Spirit: Add support for "native" arrays                           :story:
+
+At present our parser does not support arrays such as:
+
+#+begin_example
+int[50];
+#+end_example
+
+This should result on a name with a size associated with it. The
+parser cannot cope with this. Ideally one should be able to declare a
+const for the size on the class too:
+
+#+begin_example
+            static const int maxLimit = 50;
+            int objects[maxLimit];
+#+end_example
+
+So that we'd just recall the size parameter as a string in the name
+tree rather than just expect it to be an integer.
+
+*** Finish adding support for Language Agnostic Models (LAM)          :story:
+
+Tasks:
+
+- add the missing types to LAM.
+- add optional to the list of types. This is actually quite
+  complicated because for some types in C# you want to map it to
+  nullable, to others just a pointer will do.
+
+LAM type map:
+
+| Type                            | C++                              | C#                                                |
+|---------------------------------+----------------------------------+---------------------------------------------------+
+| lam::byte                       | unsigned char                    | uchar                                             |
+| lam::character                  | char                             | char                                              |
+| lam::integer8                   | std::int8_t                      | sbyte                                             |
+| lam::integer16                  | std::int16_t                     | System.Int16                                      |
+| lam::integer32                  | std::int32_t                     | System.Int32                                      |
+| lam::integer64                  | std::int64_t                     | System.Int64                                      |
+| lam::integer                    | int                              | int                                               |
+| lam::single_floating            | float                            | float                                             |
+| lam::double_floating            | double                           | double                                            |
+| lam::boolean                    | bool                             | bool                                              |
+| lam::string                     | std::string                      | string                                            |
+| lam::date                       | boost::gregorian::date           | System.DateTime                                   |
+| lam::time                       | boost::posix_time::time_duration | System.TimeSpan                                   |
+| lam::date_time                  | boost::posix_time::ptime         | System.DateTime                                   |
+| lam::decimal                    | std::decimal                     | System.Decimal                                    |
+| lam::dynamic_array<T>           | std::vector<T>                   | System.Collections.Generic.List<T>                |
+| lam::static_array<T>            | std::array<T>                    | System.Collections.Generic.Array<T>               |
+| lam::unordered_dictionary<K, V> | std::unordered_map<K, V>         | System.Collections.Generic.Dictionary<K, V>       |
+| lam::ordered_dictionary<K, V>   | std::map<K, V>                   | System.Collections.Generic.SortedDictionary<K, V> |
+| lam::unordered_set<K>           | std::unordered_set<K>            | System.Collections.Generic.HashSet<T>             |
+| lam::ordered_set<K>             | std::set<K>                      | System.Collections.Generic.SortedSet<T>           |
+| lam::queue<T>                   | std::queue<T>                    | System.Collections.Generic.Queue<T>               |
+| lam::stack<T>                   | std::stack<T>                    | System.Collections.Generic.Stack<T>               |
+| lam::linked_list<T>             | std::list<T>                     | System.Collections.Generic.LinkedList<T>          |
+| lam::pointer<T>                 | boost::shared_ptr<T>             | <erase>                                           |
+
+*Previous Understanding*
+
+When we start supporting more than one language, one interesting
+feature would be to be able to define a model once and have it
+generated for all supported languages. This would be achieved by
+having a system model (or set of system models) that define all the
+key types in a language agnostic manner. For example:
+
+: lam::string
+: lam::int
+: lam::int16
+
+Each of these types then has a set of meta-data fields that map them
+to a type in a supported language:
+
+: lam:string: cpp.concrete_type_mapping = std::string
+: lam:string: csharp.concrete_type_mapping = string
+
+And so on. We load the user model that makes use of LAM, we generate
+the merged model still with LAM types and then we perform a
+translation for each of the supported and enabled languages: for every
+LAM type, we replace all its references with the corresponding
+concrete type. We need to split the supplied mapping into a QName, use
+the QName to load the system models for that language, look up the
+type and replace it. After the translation no LAM types are left. We
+end up with N yarn merged models where N is the number of supported and
+enabled languages.
+
+Each of these models is then sent down to code generation. This should
+be equivalent to manually generating models per language - we could
+use this as a test.
+
+Once we have LAM, it would be great to be able to exchange data
+between languages. This could be done as follows:
+
+- XML: create a "LAM" XML schema, and a set of formatters that read
+  and write from it. This is kind of like reverse mapping the types
+  back to LAM types when writing the XML.
+- JSON: similar approach to XML, minus the schema.
+- POF: use the coherence libraries to dump the models into POF.
+
+Tasks:
+
+- create the LAM model with a set of basic types.
+- add a set of mapping fields into yarn: =yarn.mapping.csharp=, etc
+  and populate the types with entries for each supported language.
+- create a notion of mapping of intermediate models into
+  languages. The input is the merged intermediate model and the output
+  is N models one per language. We also need a way to associate
+  backends with languages. Each model is sent down to its backend.
+- note that reverse mapping is possible: we should be able to
+  associate a type on a given language with it's lam type. This means
+  that, given a model in say C#, we could reconstruct a yarn lam model
+  (or tell the user about the list of failures to map). This should be
+  logged as a separate story.
+
+Links:
+
+- [[http://stackoverflow.com/questions/741054/mapping-between-stl-c-and-c-sharp-containers][Mapping between stl C++ and C# containers]]
+- [[http://stackoverflow.com/questions/3659044/comparison-of-c-stl-collections-and-c-sharp-collections][Comparison of C++ STL collections and C# collections?]]
+
+*** Add support for "naming rules"                                    :story:
+
+The framework design guidelines has a number of suggestions for how
+naming should be done for different meta-types such as enums, etc. We
+could have "naming profiles" that validate that the user is following
+those guidelines. We could also have a "dictionary" that checks the
+spelling, looking for things such as log_in vs login etc.
+
+We should have numbers (or names) for each of these warnings and add a
+convention such as =-W= and =-Wno= so that users can enable and
+disable warnings. These can be placed globally or locally on elements.
+
+*** Add knobs to control output of constructors and operators         :story:
+
+At present we are outputting all of the default constructors and the
+operators in the handcrafted templates. Ideally it should just be the
+class name. We need a way of controlling all of the default
+constructors and all of the operators in one go so we can set it on
+the handcrafted profile.
+
+*** Add support for product skeleton generation                       :story:
+
+Now that dogen is evolving to a MDSD tool, it would be great to be
+able to create a complete product skeleton from a tool. This would
+entail:
+
+- directory structure. We should document our standard product
+  directory structure as part of this exercise. Initial document added
+  to manual as "project_structure.org".
+- licence: user can choose one.
+- copyright: input by user, used in CMakeFiles, etc. added to the
+  licence.
+- CI support: travis, appveyor
+- CMake support: top-level CMakefiles, CPack. versioning
+  templates, valgrind, doxygen. For CTest we should also generate a
+  "setup cron" and "setup windows scheduler" scripts. User can just
+  run these from the build machine and it will start running CTest.
+- vcpkg support: add "ports" code? user could point to vcpkg directory
+  and a ports directory is created.
+- agile with first sprint
+- README with emblems.
+
+Name for the tool: dart.
+
+Tool should have different "template sets" so that we could have a
+"standard dogen product" but users can come up with other project
+structures.
+
+Tool should add FindODB if user wants ODB support. Similar for EOS
+when we support it again. We should probably have HTTP links to the
+sources of these packages and download them on the fly.
+
+Tool should also create git repo and do first commit (optional).
+
+For extra bonus points, we should create a project in GitHub, Travis
+and AppVeyor from dart.
+
+We should also generate a RPM/Deb installation script for at least
+boost, doxygen, build essentials, clang.
+
+We should also consider a "refresh" or "force" statement, perhaps on a
+file-by-file basis, which would allow one to regenerate all of these
+files. This would be useful to pick-up changes in travis files, etc.
+
+One problem with travis files is that each project has its own
+dependencies. We should move these over to a shell script and call
+these. The script is not generated or perhaps we just generate a
+skeleton. This also highlights the issue that we have different kinds
+of files:
+
+- files that we generate and expect the user to modify;
+- files that we generate but don't expect user modifications;
+- files that the user generates.
+
+We need a way to classify these.
+
+Dart should use stitch templates to generate files.
+
+We may need some options such as "generate boost test ctest
+integration", etc.
+
+Notes:
+
+- [[https://github.com/elbeno/skeleton][Skeleton]]: project to generate c++ project skeletons.
+- split all of the configuration of CMake dependencies from main CMake
+  file. Possible name: ConfigureX? ConfigureODB, etc. See how find_X
+  is implemented.
+- detect all projects by looping through directories.
+- fix CMake generation so that most projects are generated by Dogen.
+- add option to Dogen to generate test skeleton.
+- detect all input models and generate targets by looping through
+  them.
+- add CMake file to find knitter etc and include those files in
+  package. We probably should install dogen now and have dogen rely on
+  installed dogen first, with an option to switch to "built" dogen.
+- generate git ignore files with common regexes. See [[https://github.com/github/gitignore][A collection of
+  useful .gitignore templates]]
+- generate top-level CMake, allowing user to enter dependencies and
+  their versions (e.g. Boost 1.62 etc) and CMake version.
+- inject dogen support automatically to CMake (on a feature switch).
+- determine the list of projects by looking at the contents of the
+  input models directory.
+- user to enter copyright, github URL.
+- we probably need to create a kernel for dart due to the
+  peculiarities of the directory structure.
+
+*Directory Themes*
+
+It seems obvious no one in C++ will agree with a single way of
+structuring projects. The best way out is to start a taxonomy of these
+project layouts (directory structure themes?) and add this to the
+project generator as a theme. At present there are several already
+available:
+
+- [[https://github.com/vector-of-bool/vector-of-bool.github.io/blob/master/_drafts/project-layout.md][Project Layout]]: see also discussion in [[https://old.reddit.com/r/cpp/comments/996q8o/prepare_thy_pitchforks_a_de_facto_standard/][reddit]]. Also: [[https://vector-of-bool.github.io/2018/09/16/layout-survey.html][Project
+  Layout - Survey Results and Updates]]
+- [[https://build2.org/][Build2]]: the packaging system seems to have a preferred directory
+  layout. In particular, see [[https://build2.org/build2-toolchain/doc/build2-toolchain-intro.xhtml#proj-struct][Canonical Project Structure]].
+- GNU: gnu projects seem to have a well-defined structure, if not the
+  most sensible.
+
+Links:
+
+- [[https://github.com/bkaradzic/GENie][GENie - Project generator tool]]
+- see [[https://github.com/cginternals/cmake-init][cmake-init]] for ideas.
+- [[https://github.com/premake/premake-core][Premake: powerfully simple build configuration.]]
+- [[https://jgcoded.github.io/CMakeStarter/][CMake Starter]]: "This website is a simple tool to help C++ developers
+  quickly start new CMake-based projects. The tool generates an entire
+  C++ project with boiler-plate CMake files and source code, and the
+  generated project can be downloaded as a zip file."
+
+*** Add conversion (encoding) support for Dia                         :story:
+
+It would be nice if one could take a JSON model and generate a dia
+diagram for it. This is non-trivial because it would require computing
+all of the sizes and locations for all UML elements. But if we did
+manage to do this, we could then allow users to submit models in say
+JSON, eCore etc and produce a PNG of the model so they could visualise
+it. We could also try to consume dia as a shared library instead of
+running the full program - e.g. create a service that takes in a dia
+diagram and returns the PNG.
+
+*** Add support for selectively disabling helpers on a family         :story:
+
+At present when a type belongs to a helper family it must provide all
+helpers across all facets. This means that we can't support the cases
+where a helper is required for one facet for one type but not for
+others. For example, we cannot create a family for =Dereferenceable=
+including both smart pointers and optionals because optional does not
+need a helper for =types=.
+
+One solution for this is to allow disabling the helper for a given
+type on a given facet. However, our templating mechanism in dynamic is
+not able to cope with this use case. Changes required:
+
+- add a "component" to ownership hierarchy. This would be "helper" in
+  our case. We should also set "type" which has been hacked via the
+  qualified name.
+- create a supported/enabled field with a component of helper and a
+  facet template. We could change this to formatter template if
+  required in the future.
+- merge the families of optional and smart pointer into
+  =Dereferenceable=.
+- disable the helper for types for optional.
+- update the helper settings to read this new field.
+- enabled method now checks the helper properties.
 
 *** Add support for type_index                                        :story:
 
@@ -6099,7 +5923,37 @@ codes. This would allow us to code generate them. The only problem is
 if multiple exceptions share an error code, but this should probably
 not happen?
 
-*** Add an includer for all includers                                 :story:
+*** Create different kinds of master header files                     :story:
+
+#+begin_quote
+*Story*: As a dogen user, I don't want to include every object in a
+model when I use includers.
+#+end_quote
+
+At present we are using the facet includers in unit tests. This is not
+ideal because it means that every time we do a change in a service
+header, all tests recompile. In reality we should have two types of
+inclusions:
+
+- canned tests should include only value objects, etc - e.g. no
+  services.
+- service tests should include the header for the service and any
+  additional dependencies the service may require.
+
+Perhaps we could have a second type of includer that only has value
+objects, etc.
+
+Another way to look at this is that there should be user-configurable
+master header files:
+
+#+begin_quote
+*Story*: As a dogen user, I want to create master header files for
+user defined sets of files so that I don't have to do it manually.
+#+end_quote
+
+Merged stories:
+
+*Add an includer for all includers*
 
 #+begin_quote
 *Story*: As a dogen user, I need a quick and dirty way of including
@@ -9687,6 +9541,64 @@ We should investigate how hard it is to add support for these IDLs.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen. Tooling, infrastructure, blog posts, etc. However,
 they must still be in keeping with the vision, so not too left field.
+
+*** Rename main Dogen package in Debian                               :story:
+
+At present we seem to have called our package =dogen-applications=:
+
+: $ apt-cache search dogen-applications
+: dogen-applications - The Domain Generator - Generates source code for domain driven development.
+
+We should try to call it just =dogen=.
+
+*** Add stitch section in manual                                      :story:
+
+We need to document stitch:
+
+- formal definition of the language and its limitations;
+- command line usage of the tool.
+- describe the t4 grammar, our similarities and differences. See the
+  stories around using t4 terminology in sprint 64 and 68 (most
+  important bits copied below).
+- describe available directives.
+- note on how we don't support class feature blocks and how we use the
+  class feature block start marker to mean standard control block
+  start marker.
+
+Relevant comments from previous stories:
+
+We found [[https://msdn.microsoft.com/en-us/library/bb126478.aspx][a page]] documenting the elements of T4. These are:
+
+- *Directives*: Text template directives provide general instructions to
+  the text templating engine about how to generate the transformation
+  code and the output file.
+- *Text blocks*: A text block inserts text directly into the output
+  file. There is no special formatting for text blocks.
+- *Control blocks*: Control blocks are sections of program code that
+  are used to transform the templates. Two types:
+  - *Standard control blocks*: A standard control block is a section
+    of program code that generates part of the output file.
+  - *Expression control blocks*: An expression control block evaluates
+    an expression and converts it to a string.
+
+Additional definitions we made up because we could not find anything
+suitable in documentation:
+
+- *Block*: one of: text block, control block or any of its descendants.
+- *Statement*: either a directive or a control block.
+- *Inline statement*: statement that starts and ends in one line.
+- *Marker*: one of <#, <#@, <#=, #>. Mark-up that delimits statements.
+- *Start Marker*: one of <#, <#@, <#=. Can also be specialised to
+  "start X marker", e.g. start control block marker is <#, and so on.
+- *End Marker*: #>. Can also be specialised to "end X marker",
+  e.g. end directive marker is #>.
+
+*** Diagrams used in manual should be in sanity and in docs           :story:
+
+Users should be able to follow the examples in the manual by using a
+set of diagrams supplied in the dogen package. However, to ensure
+these samples are actually working we need to test them as part of
+sanity. This means we need the same diagrams packaged twice.
 
 *** Build dogen from docker                                           :story:
 
