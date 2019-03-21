@@ -65,22 +65,22 @@
   <dia:layer name="Background" visible="true" active="true">
     <dia:object type="UML - Note" version="0" id="O0">
       <dia:attribute name="obj_pos">
-        <dia:point val="-17,-119"/>
+        <dia:point val="-17,-127"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.05,-119.05;10.13,-101.25"/>
+        <dia:rectangle val="-17.05,-127.05;10.13,-105.25"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-17,-119"/>
+        <dia:point val="-17,-127"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="17.700000000000003"/>
+        <dia:real val="21.700000000000003"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -106,6 +106,7 @@
 #DOGEN masd.injection.reference=masd.dogen.tracing
 #DOGEN masd.injection.reference=masd.dogen.coding
 #DOGEN masd.injection.reference=masd.dogen.extraction
+#DOGEN masd.injection.reference=masd
 #DOGEN masd.injection.input_language=cpp
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
@@ -127,7 +128,7 @@
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-16.65,-117.755"/>
+            <dia:point val="-16.65,-125.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -9404,13 +9405,13 @@
         <dia:point val="220,-65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="219.95,-65.05;236.335,-61.35"/>
+        <dia:rectangle val="219.95,-65.05;234.795,-61.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="220,-65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.285"/>
+        <dia:real val="14.744999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -9708,13 +9709,13 @@
         <dia:point val="168,-65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="167.95,-65.05;184.335,-61.35"/>
+        <dia:rectangle val="167.95,-65.05;182.795,-61.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="168,-65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.285"/>
+        <dia:real val="14.744999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -14092,13 +14093,13 @@
         <dia:point val="195,-65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="194.95,-65.05;211.335,-61.35"/>
+        <dia:rectangle val="194.95,-65.05;209.795,-61.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="195,-65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.285"/>
+        <dia:real val="14.744999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
