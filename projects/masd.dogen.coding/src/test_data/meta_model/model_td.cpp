@@ -232,54 +232,82 @@ std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_mode
     return r;
 }
 
-masd::dogen::coding::meta_model::modeline_group
-create_masd_dogen_coding_meta_model_modeline_group(const unsigned int position) {
-    return masd::dogen::coding::meta_model::modeline_group_generator::create(position);
+masd::dogen::coding::meta_model::modeline_group*
+create_masd_dogen_coding_meta_model_modeline_group_ptr(const unsigned int position) {
+    return masd::dogen::coding::meta_model::modeline_group_generator::create_ptr(position);
 }
 
-std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline_group> create_std_unordered_map_std_string_masd_dogen_coding_meta_model_modeline_group(unsigned int position) {
-    std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline_group> r;
+boost::shared_ptr<masd::dogen::coding::meta_model::modeline_group>
+create_boost_shared_ptr_masd_dogen_coding_meta_model_modeline_group(unsigned int position) {
+    boost::shared_ptr<masd::dogen::coding::meta_model::modeline_group> r(
+        create_masd_dogen_coding_meta_model_modeline_group_ptr(position));
+    return r;
+}
+
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::modeline_group> > create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_modeline_group(unsigned int position) {
+    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::modeline_group> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_masd_dogen_coding_meta_model_modeline_group(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_boost_shared_ptr_masd_dogen_coding_meta_model_modeline_group(position + i)));
     }
     return r;
 }
 
-masd::dogen::coding::meta_model::modeline
-create_masd_dogen_coding_meta_model_modeline(const unsigned int position) {
-    return masd::dogen::coding::meta_model::modeline_generator::create(position);
+masd::dogen::coding::meta_model::modeline*
+create_masd_dogen_coding_meta_model_modeline_ptr(const unsigned int position) {
+    return masd::dogen::coding::meta_model::modeline_generator::create_ptr(position);
 }
 
-std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline> create_std_unordered_map_std_string_masd_dogen_coding_meta_model_modeline(unsigned int position) {
-    std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline> r;
+boost::shared_ptr<masd::dogen::coding::meta_model::modeline>
+create_boost_shared_ptr_masd_dogen_coding_meta_model_modeline(unsigned int position) {
+    boost::shared_ptr<masd::dogen::coding::meta_model::modeline> r(
+        create_masd_dogen_coding_meta_model_modeline_ptr(position));
+    return r;
+}
+
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::modeline> > create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_modeline(unsigned int position) {
+    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::modeline> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_masd_dogen_coding_meta_model_modeline(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_boost_shared_ptr_masd_dogen_coding_meta_model_modeline(position + i)));
     }
     return r;
 }
 
-masd::dogen::coding::meta_model::licence
-create_masd_dogen_coding_meta_model_licence(const unsigned int position) {
-    return masd::dogen::coding::meta_model::licence_generator::create(position);
+masd::dogen::coding::meta_model::licence*
+create_masd_dogen_coding_meta_model_licence_ptr(const unsigned int position) {
+    return masd::dogen::coding::meta_model::licence_generator::create_ptr(position);
 }
 
-std::unordered_map<std::string, masd::dogen::coding::meta_model::licence> create_std_unordered_map_std_string_masd_dogen_coding_meta_model_licence(unsigned int position) {
-    std::unordered_map<std::string, masd::dogen::coding::meta_model::licence> r;
+boost::shared_ptr<masd::dogen::coding::meta_model::licence>
+create_boost_shared_ptr_masd_dogen_coding_meta_model_licence(unsigned int position) {
+    boost::shared_ptr<masd::dogen::coding::meta_model::licence> r(
+        create_masd_dogen_coding_meta_model_licence_ptr(position));
+    return r;
+}
+
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> > create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_licence(unsigned int position) {
+    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_masd_dogen_coding_meta_model_licence(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_boost_shared_ptr_masd_dogen_coding_meta_model_licence(position + i)));
     }
     return r;
 }
 
-masd::dogen::coding::meta_model::generation_marker
-create_masd_dogen_coding_meta_model_generation_marker(const unsigned int position) {
-    return masd::dogen::coding::meta_model::generation_marker_generator::create(position);
+masd::dogen::coding::meta_model::generation_marker*
+create_masd_dogen_coding_meta_model_generation_marker_ptr(const unsigned int position) {
+    return masd::dogen::coding::meta_model::generation_marker_generator::create_ptr(position);
 }
 
-std::unordered_map<std::string, masd::dogen::coding::meta_model::generation_marker> create_std_unordered_map_std_string_masd_dogen_coding_meta_model_generation_marker(unsigned int position) {
-    std::unordered_map<std::string, masd::dogen::coding::meta_model::generation_marker> r;
+boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker>
+create_boost_shared_ptr_masd_dogen_coding_meta_model_generation_marker(unsigned int position) {
+    boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> r(
+        create_masd_dogen_coding_meta_model_generation_marker_ptr(position));
+    return r;
+}
+
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> > create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_generation_marker(unsigned int position) {
+    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_masd_dogen_coding_meta_model_generation_marker(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_boost_shared_ptr_masd_dogen_coding_meta_model_generation_marker(position + i)));
     }
     return r;
 }
@@ -335,10 +363,10 @@ populate(const unsigned int position, result_type& v) {
     v.objects(create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_object(position + 10));
     v.exceptions(create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_exception(position + 11));
     v.visitors(create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_visitor(position + 12));
-    v.modeline_groups(create_std_unordered_map_std_string_masd_dogen_coding_meta_model_modeline_group(position + 13));
-    v.modelines(create_std_unordered_map_std_string_masd_dogen_coding_meta_model_modeline(position + 14));
-    v.licences(create_std_unordered_map_std_string_masd_dogen_coding_meta_model_licence(position + 15));
-    v.generation_markers(create_std_unordered_map_std_string_masd_dogen_coding_meta_model_generation_marker(position + 16));
+    v.modeline_groups(create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_modeline_group(position + 13));
+    v.modelines(create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_modeline(position + 14));
+    v.licences(create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_licence(position + 15));
+    v.generation_markers(create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_generation_marker(position + 16));
     v.root_module(create_boost_shared_ptr_masd_dogen_coding_meta_model_module(position + 17));
     v.input_language(create_masd_dogen_coding_meta_model_languages(position + 18));
     v.output_languages(create_std_list_masd_dogen_coding_meta_model_languages(position + 19));

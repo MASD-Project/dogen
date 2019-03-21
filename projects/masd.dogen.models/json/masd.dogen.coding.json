@@ -645,19 +645,19 @@
         },
         {
           "name": "modeline_groups",
-          "type": "std::unordered_map<std::string, modeline_group>"
+          "type": "std::unordered_map<std::string, boost::shared_ptr<modeline_group>>"
         },
         {
           "name": "modelines",
-          "type": "std::unordered_map<std::string, modeline>"
+          "type": "std::unordered_map<std::string, boost::shared_ptr<modeline>>"
         },
         {
           "name": "licences",
-          "type": "std::unordered_map<std::string, licence>"
+          "type": "std::unordered_map<std::string, boost::shared_ptr<licence>>"
         },
         {
           "name": "generation_markers",
-          "type": "std::unordered_map<std::string, generation_marker>"
+          "type": "std::unordered_map<std::string, boost::shared_ptr<generation_marker>>"
         },
         {
           "name": "root_module",
