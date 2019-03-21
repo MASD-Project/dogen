@@ -14,27 +14,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-21 Thu 11:57]
+#+CAPTION: Clock summary at [2019-03-21 Thu 14:11]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *71:26* |       |       | 100.0 |
+| *Total time*                                             | *72:28* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 71:26   |       |       | 100.0 |
-| Active                                                   |         | 71:26 |       | 100.0 |
+| Stories                                                  | 72:28   |       |       | 100.0 |
+| Active                                                   |         | 72:28 |       | 100.0 |
 | Edit release notes for previous sprint                   |         |       |  2:22 |   3.3 |
-| Sprint and product backlog grooming                      |         |       |  9:57 |  13.9 |
-| Create a video demo for the sprint's features            |         |       |  3:47 |   5.3 |
+| Sprint and product backlog grooming                      |         |       |  9:57 |  13.7 |
+| Create a video demo for the sprint's features            |         |       |  3:47 |   5.2 |
 | Make projects directory env optional                     |         |       |  0:10 |   0.2 |
 | Clang-cl builds are failing due to memory leak reporting |         |       |  0:45 |   1.0 |
-| Add tests for tracing, reporting and diffing             |         |       |  5:46 |   8.1 |
-| Delete extra files appears broken at present             |         |       |  6:26 |   9.0 |
-| Empty directories should be deleted                      |         |       |  5:37 |   7.9 |
+| Add tests for tracing, reporting and diffing             |         |       |  5:46 |   8.0 |
+| Delete extra files appears broken at present             |         |       |  6:26 |   8.9 |
+| Empty directories should be deleted                      |         |       |  5:37 |   7.8 |
 | Changes to stitch templates are not reported correctly   |         |       |  1:09 |   1.6 |
 | Orchestration test is broken on Windows                  |         |       |  2:40 |   3.7 |
-| Code generation of tests for dogen models                |         |       | 23:22 |  32.7 |
+| Code generation of tests for dogen models                |         |       | 23:22 |  32.2 |
 | Formatters have been incorrectly placed under extraction |         |       |  0:23 |   0.5 |
-| Promote extraction entities to meta-model elements       |         |       |  9:02 |  12.6 |
+| Promote extraction entities to meta-model elements       |         |       | 10:04 |  13.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -894,6 +894,7 @@ Notes:
 
 *** STARTED Promote extraction entities to meta-model elements        :story:
     :LOGBOOK:
+    CLOCK: [2019-03-21 Thu 13:09]--[2019-03-21 Thu 14:11] =>  1:02
     CLOCK: [2019-03-21 Thu 11:54]--[2019-03-21 Thu 12:00] =>  0:06
     CLOCK: [2019-03-21 Thu 10:16]--[2019-03-21 Thu 11:53] =>  1:37
     CLOCK: [2019-03-20 Wed 17:55]--[2019-03-20 Wed 18:10] =>  0:15
@@ -936,6 +937,9 @@ Notes:
   good thing about this approach is that we can create a profile for
   these and make it transparent to users
   (=masd::standard_modelines=?).
+- decoration of elements must be done after mapping has taken
+  place. We will rely on the output language to determine the correct
+  modeline.
 
 Merged stories:
 

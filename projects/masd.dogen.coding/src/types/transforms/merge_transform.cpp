@@ -84,6 +84,10 @@ void merge_transform::merge(const meta_model::model& src,
     copy(src.objects(), dst.objects());
     copy(src.exceptions(), dst.exceptions());
     copy(src.visitors(), dst.visitors());
+    copy(src.modeline_groups(), dst.modeline_groups());
+    copy(src.modelines(), dst.modelines());
+    copy(src.generation_markers(), dst.generation_markers());
+    copy(src.licences(), dst.licences());
 
     /*
      * Update the references of the merged model.
