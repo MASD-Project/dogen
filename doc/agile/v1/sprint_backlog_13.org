@@ -14,27 +14,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-21 Thu 06:59]
+#+CAPTION: Clock summary at [2019-03-21 Thu 10:15]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *68:31* |       |       | 100.0 |
+| *Total time*                                             | *69:43* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 68:31   |       |       | 100.0 |
-| Active                                                   |         | 68:31 |       | 100.0 |
-| Edit release notes for previous sprint                   |         |       |  2:22 |   3.5 |
-| Sprint and product backlog grooming                      |         |       |  8:45 |  12.8 |
-| Create a video demo for the sprint's features            |         |       |  3:47 |   5.5 |
+| Stories                                                  | 69:43   |       |       | 100.0 |
+| Active                                                   |         | 69:43 |       | 100.0 |
+| Edit release notes for previous sprint                   |         |       |  2:22 |   3.4 |
+| Sprint and product backlog grooming                      |         |       |  9:57 |  14.3 |
+| Create a video demo for the sprint's features            |         |       |  3:47 |   5.4 |
 | Make projects directory env optional                     |         |       |  0:10 |   0.2 |
 | Clang-cl builds are failing due to memory leak reporting |         |       |  0:45 |   1.1 |
-| Add tests for tracing, reporting and diffing             |         |       |  5:46 |   8.4 |
-| Delete extra files appears broken at present             |         |       |  6:26 |   9.4 |
-| Empty directories should be deleted                      |         |       |  5:37 |   8.2 |
-| Changes to stitch templates are not reported correctly   |         |       |  1:09 |   1.7 |
-| Orchestration test is broken on Windows                  |         |       |  2:40 |   3.9 |
-| Code generation of tests for dogen models                |         |       | 23:22 |  34.1 |
-| Formatters have been incorrectly placed under extraction |         |       |  0:23 |   0.6 |
-| Modeline groups as meta-model elements                   |         |       |  7:19 |  10.7 |
+| Add tests for tracing, reporting and diffing             |         |       |  5:46 |   8.3 |
+| Delete extra files appears broken at present             |         |       |  6:26 |   9.2 |
+| Empty directories should be deleted                      |         |       |  5:37 |   8.1 |
+| Changes to stitch templates are not reported correctly   |         |       |  1:09 |   1.6 |
+| Orchestration test is broken on Windows                  |         |       |  2:40 |   3.8 |
+| Code generation of tests for dogen models                |         |       | 23:22 |  33.5 |
+| Formatters have been incorrectly placed under extraction |         |       |  0:23 |   0.5 |
+| Modeline groups as meta-model elements                   |         |       |  7:19 |  10.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -233,6 +233,8 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-03-21 Thu 09:57]--[2019-03-21 Thu 10:15] =>  0:18
+    CLOCK: [2019-03-21 Thu 09:02]--[2019-03-21 Thu 09:56] =>  0:54
     CLOCK: [2019-03-21 Thu 06:09]--[2019-03-21 Thu 06:58] =>  0:49
     CLOCK: [2019-03-20 Wed 20:05]--[2019-03-20 Wed 20:15] =>  0:10
     CLOCK: [2019-03-20 Wed 08:25]--[2019-03-20 Wed 08:33] =>  0:08
@@ -932,6 +934,31 @@ Notes:
   these and make it transparent to users
   (=masd::standard_modelines=?).
 
+*** Code generate all contexts                                        :story:
+
+At present we are manually generating the transform contexts across
+all models. The main reason for this is that tracer does not support
+IO. There may be other reasons such as the annotations factory and
+annotation expander. We should just add IO support for all types that
+need it and code generate the contexts.
+
+*** Add "ioable" handcrafted types                                    :story:
+
+Whenever we need to mix and match generated types with handcrafted
+types, it would be really useful to create the missing facets. The
+main one is IO, but we probably also need test data support because
+the tests would fail. We could simply handcraft the types on those
+facets. It would be nice to have profiles like:
+
+: masd::handcrafted_types
+: masd::handcrafted_io
+: masd::handcrafted_test_data
+
+We could do with a simpler word for handcrafted. Check the literature.
+
+Once this is in place, we could have some top-level stereotype that
+aggregates all three (=masd::???=) and we can then tag types with it.
+
 *** Read =generate_preamble= from dynamic object                      :story:
 
 We need to generate the field definitions and update the general
@@ -967,7 +994,8 @@ etc will cause spurious diffs.
 *** Split library into JSON and dia                                   :story:
 
 We should supply the core models as both. This is a good test for PDMs
-to make sure that all functionality is available on both.
+to make sure that all functionality is available on both. Actually
+this story may be superseded by the work on the core library.
 
 *** LAM types should exist as a model                                 :story:
 

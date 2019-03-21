@@ -3279,6 +3279,10 @@ that some modeling elements are language specific, but the metamodel
 will merge them all into one space. We should also have them inherit
 from common base classes where possible.
 
+Note: not all meta-model elements will be available on all technical
+spaces. We need a way to make sure they are compatible. Perhaps the
+element could have a list of compatible TSs.
+
 Merged Stories:
 
 *Handcrafted support for fabric types*
@@ -6489,6 +6493,27 @@ companies (certain patterns with names may only appear in say small
 businesses). So company names is the class, with a default bundle, but
 there may be multiple bundles.
 
+*More ideas*
+
+Fountains are code generated from CSV files, themselves created from
+massaging external project files. The fountains could have a structure
+like:
+
+- =masd/core/fountain/phone_number_fountain.hpp=
+
+Each fountain could have additional meta-data configuration,
+e.g. country, partial phone numbers, etc. These are supplied by users
+as meta-data when they make use of a fountain. For example, consider
+primitive =phone_number= with underlying type string associated with
+fountain =phone_number_fountain=. It would have meta-data setting the
+country, etc. Or maybe we should just allow specialised fountains
+(full phone number, partial phone number, invalid phone number,
+etc). This means we could even create a composite fountain that takes
+in a set of fountains and a random number distribution and then reads
+from each fountain using the distribution (e.g. uniform, etc). We
+could also handle countries this way (e.g. use iso codes for phone
+numbers, =en_phone_numbers= etc.).
+
 Links:
 
 - https://mockaroo.com/
@@ -8163,6 +8188,107 @@ using templates.
 For the previous attempt to create the needle library see this commit:
 
 feb4750 * integration needle: remove project and includes
+
+We have analysed this idea from many angles. The key trade-offs we
+have are as follows:
+
+- original idea was to create models with zero dependencies; users
+  should be able to code generate and compile. This would make the
+  barrier to entry very low.
+- however, there are downsides to this approach:
+  - utility is needed on pretty much every product (logging, IO,
+    etc). This means we still need some kind of hack to get things to
+    work. The present solution was to somehow code generate utility
+    itself. Whilst this could work, it is non-trivial because we now
+    have "moving references" to utility types. This means a) we cannot
+    add logging to tests because of it b) in order to solve this
+    problem, we will have to add a lot of complexity to dogen.
+  - helpers: we need to generate helpers for types that are sourced
+    from PDMs. This means that every time you add a new type to Dogen
+    which is not directly supported, you need to extend the code
+    generator. It is very hard to add new types this way. In addition,
+    the logic for assistants (families, etc) is very complex and
+    complicates the code base quite a lot. In addition, there is a lot
+    of duplication because we generate code specific to each use of a
+    container in a model; if you have a list of strings and a list of
+    ints in two types you end up with two helper methods per type. In
+    reality this could all be compressed to one helper method across
+    the two types.
+  - the problem is only going to get worse going forward as we add
+    more functionality that needs this kind of support. For example,
+    data fountains would require lots of helpers per type.
+
+In summary, it seems that the engineering trade-offs are clearly
+tipping towards having a shared model for this functionality. This
+being the case we could look at it as a product: =masd::core=. We
+could then add types for the PDMs in a sensible way: in types we'd
+create namespaces for each model, e.g. =std=, =boost=, etc. We'd then
+disable types facet for these types and set all other (required)
+facets to override. For example:
+
+- =masd/core/io/std/list_io.hpp=: std::list IO support.
+- =masd/core/test_data/std/list_td.hpp=: std::list test data support.
+
+And so forth. It would still be a peculiar product in that we'd only
+have a single dogen model. In addition, it is a "strange" model in
+that users are not expected to reference it; if you did, you'd end up
+being able to create a type like =masd::core::std::list=, which is
+just a mapping type. Perhaps we should have a way of identifying these
+types as "mapping only types"? This is important because we may want
+to reference other types.
+
+The core model would also contain the data fountains. It seems like
+=core= is a product, made up of models:
+
+- PDM extensions: IO, test data, serialisation, hash. Name: ext,
+  extensions, etc.
+- fountain: all data fountains.
+- utility: logging, file, string, XML, environment, testing.
+
+This would also mean that we can now have "model types" such as PDM
+extensions, which are not "referrable" - e.g. we can throw if the user
+attempts to reference it. Or, better yet, why have two PDM models?
+Applying this approach naively would mean we'd need the =std= model to
+define the types, and then the core model to provide the mappings. But
+why have two models? Why not define a model in the namespace of the
+original model? For example, if we had a =std= model defined in core
+(and violating the principles around product and model naming), we
+could place all the =std= types in it, set types to disabled and other
+facets to enabled as required (e.g. IO). Then it would generate say
+=std/io/list_io.hpp=. We would still keep all of the dependency
+machinery we have at present so that we can point to say =<list>=
+instead of =std/types/list.hpp=. We may also need some kind of hackery
+around enablement because we do not want to generate a types file but
+we do want users to be able to reference the overriden type. This
+approach is *very* regular:
+
+- PDMs now become very similar to dogen models. Interestingly, this
+  also means we do not need the =library= folder any longer. This is
+  because dogen will not work without the code that comes with the
+  PDMs so you will need to git clone it anyway. In effect, the PDMs
+  become just like any other Dogen model, so you'll have to install
+  them and then point to them in order to code generate.
+- we need PDMs per technical space: C++, C#, etc. Each would have its
+  own product, etc.
+- PDMs can contain all the required linking information. However, we
+  probably should have a PDM per linking library (e.g. one for each
+  linkable boost library). Else it will be hard to know what libraries
+  to link against depending on usage.
+- users can add a new PDM with very little knownledge of Dogen: add a
+  new model following the existing pattern (copy and paste).
+- no changes are required to dogen itself: it would automatically pick
+  up the new PDMs (just need to git update core).
+- all PDM code could have tests in the core model to ensure it all
+  works in isolation (test data, IO, etc). We may even be able to
+  reuse the generated tests for these types.
+
+This approach is very elegant, but its not very nice to start creating
+types in the =std= namespace. Perhaps we should instead to have "name
+mapping" or alisaing? A way to associate a name with a type. Then the
+PDM would follow the usual dogen naming rules, but when you load up
+the model for referencing, it would export the aliases. The crux
+though is that we just want a single model for both exporting the PDM
+types and implementing the glue code.
 
 *** Concepts, immutability and fluency                                :story:
 
