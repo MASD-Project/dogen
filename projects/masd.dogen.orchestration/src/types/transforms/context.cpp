@@ -18,19 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.annotations/types/annotation_expander.hpp"
 #include "masd.dogen.orchestration/types/transforms/context.hpp"
 
 namespace masd::dogen::orchestration::transforms {
 
 context::context(
+    const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& annotation_expander,
     const masd::dogen::injection::transforms::context& injection_context,
     const masd::dogen::coding::transforms::context& coding_context,
     const masd::dogen::generation::transforms::context& generation_context,
     const masd::dogen::extraction::transforms::context& extraction_context)
-    : injection_context_(injection_context),
+    : annotation_expander_(annotation_expander),
+      injection_context_(injection_context),
       coding_context_(coding_context),
       generation_context_(generation_context),
       extraction_context_(extraction_context) { }
+
+const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& context::annotation_expander() const {
+    return annotation_expander_;
+}
+
+void context::annotation_expander(const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& v) {
+    annotation_expander_ = v;
+}
 
 const masd::dogen::injection::transforms::context& context::injection_context() const {
     return injection_context_;

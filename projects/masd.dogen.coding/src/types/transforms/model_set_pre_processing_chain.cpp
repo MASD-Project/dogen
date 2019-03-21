@@ -65,7 +65,7 @@ apply(const context& ctx, meta_model::model& m) {
     extraction_properties_transform::apply(ctx, m);
 
     /*
-     * Primitive expansion requires parsing expansion to populate the
+     * Primitive transform requires parsing transform to populate the
      * underlying elements.
      */
     primitives_transform::apply(ctx, m);

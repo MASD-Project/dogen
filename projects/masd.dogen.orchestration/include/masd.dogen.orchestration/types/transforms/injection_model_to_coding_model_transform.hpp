@@ -37,7 +37,7 @@
 #include "masd.dogen.coding/types/meta_model/location.hpp"
 #include "masd.dogen.coding/types/meta_model/attribute.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
-#include "masd.dogen.coding/types/transforms/context_fwd.hpp"
+#include "masd.dogen.orchestration/types/transforms/context_fwd.hpp"
 #include "masd.dogen.orchestration/types/helpers/adapter.hpp"
 #include "masd.dogen.orchestration/types/transforms/naming_configuration.hpp"
 
@@ -67,12 +67,12 @@ private:
 
     static void process_element(const helpers::adapter& ad,
         const coding::meta_model::location& l,
-        const injection::meta_model::element& ie, coding::meta_model::model& cm);
+        const injection::meta_model::element& ie,
+        coding::meta_model::model& cm);
 
 public:
     static coding::meta_model::model
-    apply(const coding::transforms::context& ctx,
-        const injection::meta_model::model& im);
+    apply(const context& ctx, const injection::meta_model::model& im);
 };
 
 }

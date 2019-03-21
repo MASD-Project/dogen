@@ -87,6 +87,10 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
+          "name": "annotation_expander",
+          "type": "boost::shared_ptr<annotations::annotation_expander>"
+        },
+        {
           "name": "injection_context",
           "type": "injection::transforms::context"
         },

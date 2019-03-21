@@ -190,7 +190,7 @@ context context_factory::make_context(const configuration& cfg,
 
     const auto ae(boost::make_shared<annotations::annotation_expander>(
             data_dirs, *alrp, *atrp, cm));
-    r.coding_context().annotation_expander(ae);
+    r.annotation_expander(ae);
     r.generation_context().annotation_expander(ae);
 
     /*

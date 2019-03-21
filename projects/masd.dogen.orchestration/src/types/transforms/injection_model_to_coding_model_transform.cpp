@@ -46,7 +46,7 @@
 #include "masd.dogen.coding/types/helpers/location_builder.hpp"
 #include "masd.dogen.orchestration/io/helpers/stereotypes_conversion_result_io.hpp"
 #include "masd.dogen.orchestration/types/helpers/stereotypes_helper.hpp"
-#include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.orchestration/types/transforms/context.hpp"
 #include "masd.dogen.orchestration/types/transforms/transform_exception.hpp"
 #include "masd.dogen.orchestration/types/transforms/injection_model_to_coding_model_transform.hpp"
 
@@ -250,22 +250,22 @@ process_element(const helpers::adapter& ad,
 }
 
 coding::meta_model::model injection_model_to_coding_model_transform::
-apply(const coding::transforms::context& ctx,
-    const injection::meta_model::model& im) {
+apply(const context& ctx, const injection::meta_model::model& im) {
     tracing::scoped_transform_tracer stp(lg,
         "injection model to coding model transform", transform_id, im.name(),
-        *ctx.tracer(), im);
+        *ctx.coding_context().tracer(), im);
 
     helpers::stereotypes_helper h;
     const auto scr(h.from_string(im.stereotypes()));
-    const auto& f(*ctx.annotation_factory());
+    const auto& f(*ctx.coding_context().annotation_factory());
     const auto scope(annotations::scope_types::root_module);
     const auto ra1(f.make(im.tagged_values(), scope));
 
     const auto& e(*ctx.annotation_expander());
     const auto ra(e.expand(scr.dynamic_stereotypes(), ra1));
 
-    const auto tg(make_type_group(*ctx.type_repository()));
+    const auto& atrp(*ctx.coding_context().type_repository());
+    const auto tg(make_type_group(atrp));
     const auto nc(make_naming_configuration(tg, ra));
     const auto model_location(create_location(nc));
 

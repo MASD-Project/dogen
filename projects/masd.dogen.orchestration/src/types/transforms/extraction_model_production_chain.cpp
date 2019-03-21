@@ -65,7 +65,7 @@ extraction_model_production_chain::apply(const context& ctx,
      * Convert the injection model set into a coding model set.
      */
     const auto cmset(injection_model_set_to_coding_model_set_transform::
-        apply(ctx.coding_context(), ims));
+        apply(ctx, ims));
 
     /*
      * Run all the coding transforms against the model set.

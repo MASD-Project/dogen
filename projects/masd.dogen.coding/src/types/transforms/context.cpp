@@ -23,7 +23,6 @@
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
-#include "masd.dogen.annotations/types/annotation_expander.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository.hpp"
 
@@ -33,13 +32,11 @@ context::context(
     const boost::shared_ptr<masd::dogen::annotations::type_repository>& type_repository,
     const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& archetype_location_repository,
     const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& annotation_factory,
-    const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& annotation_expander,
     const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& mapping_repository,
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer)
     : type_repository_(type_repository),
       archetype_location_repository_(archetype_location_repository),
       annotation_factory_(annotation_factory),
-      annotation_expander_(annotation_expander),
       mapping_repository_(mapping_repository),
       tracer_(tracer) { }
 
@@ -65,14 +62,6 @@ const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& context::
 
 void context::annotation_factory(const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& v) {
     annotation_factory_ = v;
-}
-
-const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& context::annotation_expander() const {
-    return annotation_expander_;
-}
-
-void context::annotation_expander(const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& v) {
-    annotation_expander_ = v;
 }
 
 const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& context::mapping_repository() const {

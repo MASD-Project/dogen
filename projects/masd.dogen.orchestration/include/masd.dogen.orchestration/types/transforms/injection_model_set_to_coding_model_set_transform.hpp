@@ -27,7 +27,7 @@
 
 #include "masd.dogen.injection/types/meta_model/model_set.hpp"
 #include "masd.dogen.coding/types/meta_model/model_set.hpp"
-#include "masd.dogen.coding/types/transforms/context_fwd.hpp"
+#include "masd.dogen.orchestration/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::orchestration::transforms {
 
@@ -40,8 +40,7 @@ namespace masd::dogen::orchestration::transforms {
 class injection_model_set_to_coding_model_set_transform final {
 public:
     static coding::meta_model::model_set
-    apply(const coding::transforms::context& ctx,
-        const injection::meta_model::model_set& ms);
+    apply(const context& ctx, const injection::meta_model::model_set& ms);
 };
 
 }

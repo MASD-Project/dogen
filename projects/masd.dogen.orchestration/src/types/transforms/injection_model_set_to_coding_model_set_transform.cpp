@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.orchestration/types/transforms/context.hpp"
 #include "masd.dogen.orchestration/types/transforms/injection_model_to_coding_model_transform.hpp"
 #include "masd.dogen.orchestration/types/transforms/injection_model_set_to_coding_model_set_transform.hpp"
 
@@ -38,12 +38,11 @@ namespace masd::dogen::orchestration::transforms {
 
 coding::meta_model::model_set
 injection_model_set_to_coding_model_set_transform::
-apply(const coding::transforms::context& ctx,
-    const injection::meta_model::model_set& ms) {
+apply(const context& ctx, const injection::meta_model::model_set& ms) {
     const auto model_name(ms.target().name());
     tracing::scoped_chain_tracer stp(lg,
         "injection model set to coding model set", transform_id, model_name,
-        *ctx.tracer());
+        *ctx.coding_context().tracer());
 
     /*
      * First we convert the target injection model into a coding

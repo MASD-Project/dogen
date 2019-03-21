@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include "masd.dogen.annotations/types/annotation_expander_fwd.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
@@ -42,12 +43,16 @@ public:
 
 public:
     context(
+        const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& annotation_expander,
         const masd::dogen::injection::transforms::context& injection_context,
         const masd::dogen::coding::transforms::context& coding_context,
         const masd::dogen::generation::transforms::context& generation_context,
         const masd::dogen::extraction::transforms::context& extraction_context);
 
 public:
+    const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& annotation_expander() const;
+    void annotation_expander(const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& v);
+
     const masd::dogen::injection::transforms::context& injection_context() const;
     masd::dogen::injection::transforms::context& injection_context();
     void injection_context(const masd::dogen::injection::transforms::context& v);
@@ -69,6 +74,7 @@ public:
     void extraction_context(const masd::dogen::extraction::transforms::context&& v);
 
 private:
+    boost::shared_ptr<masd::dogen::annotations::annotation_expander> annotation_expander_;
     masd::dogen::injection::transforms::context injection_context_;
     masd::dogen::coding::transforms::context coding_context_;
     masd::dogen::generation::transforms::context generation_context_;
