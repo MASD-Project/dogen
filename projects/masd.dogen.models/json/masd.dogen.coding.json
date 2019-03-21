@@ -648,6 +648,10 @@
           "type": "std::unordered_map<std::string, modeline_group>"
         },
         {
+          "name": "modelines",
+          "type": "std::unordered_map<std::string, modeline>"
+        },
+        {
           "name": "licences",
           "type": "std::unordered_map<std::string, licence>"
         },
@@ -1951,13 +1955,8 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "label",
-          "type": "std::string",
-          "documentation": "Label of the modeline group. Must be unique.\n"
-        },
-        {
-          "name": "modelines",
-          "type": "std::unordered_map<std::string, modeline>",
+          "name": "modelines_for_meta_element",
+          "type": "std::unordered_map<std::string, name>",
           "documentation": "All the modelines for this group.\n"
         }
       ]
@@ -1984,6 +1983,11 @@
           "name": "fields",
           "type": "std::list<modeline_field>",
           "documentation": "List of all the parameters in the preamble, in order of appearence.\n"
+        },
+        {
+          "name": "applicable_meta_elements",
+          "type": "std::list<name>",
+          "documentation": "Meta-names for all of the elements to which this modeline can be applied to.\n"
         }
       ]
     },

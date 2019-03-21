@@ -27,6 +27,7 @@
 #include "masd.dogen.coding/io/meta_model/builtin_io.hpp"
 #include "masd.dogen.coding/io/meta_model/licence_io.hpp"
 #include "masd.dogen.coding/io/meta_model/visitor_io.hpp"
+#include "masd.dogen.coding/io/meta_model/modeline_io.hpp"
 #include "masd.dogen.coding/io/meta_model/exception_io.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.coding/io/meta_model/primitive_io.hpp"
@@ -370,6 +371,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace std {
+
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::coding::meta_model::licence>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -452,6 +471,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"exceptions\": " << v.exceptions() << ", "
       << "\"visitors\": " << v.visitors() << ", "
       << "\"modeline_groups\": " << v.modeline_groups() << ", "
+      << "\"modelines\": " << v.modelines() << ", "
       << "\"licences\": " << v.licences() << ", "
       << "\"generation_markers\": " << v.generation_markers() << ", "
       << "\"root_module\": " << v.root_module() << ", "

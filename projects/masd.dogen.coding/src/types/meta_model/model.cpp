@@ -121,6 +121,7 @@ model::model(model&& rhs)
       exceptions_(std::move(rhs.exceptions_)),
       visitors_(std::move(rhs.visitors_)),
       modeline_groups_(std::move(rhs.modeline_groups_)),
+      modelines_(std::move(rhs.modelines_)),
       licences_(std::move(rhs.licences_)),
       generation_markers_(std::move(rhs.generation_markers_)),
       root_module_(std::move(rhs.root_module_)),
@@ -144,6 +145,7 @@ model::model(
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::exception> >& exceptions,
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::visitor> >& visitors,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline_group>& modeline_groups,
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline>& modelines,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::licence>& licences,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::generation_marker>& generation_markers,
     const boost::shared_ptr<masd::dogen::coding::meta_model::module>& root_module,
@@ -165,6 +167,7 @@ model::model(
       exceptions_(exceptions),
       visitors_(visitors),
       modeline_groups_(modeline_groups),
+      modelines_(modelines),
       licences_(licences),
       generation_markers_(generation_markers),
       root_module_(root_module),
@@ -189,6 +192,7 @@ void model::swap(model& other) noexcept {
     swap(exceptions_, other.exceptions_);
     swap(visitors_, other.visitors_);
     swap(modeline_groups_, other.modeline_groups_);
+    swap(modelines_, other.modelines_);
     swap(licences_, other.licences_);
     swap(generation_markers_, other.generation_markers_);
     swap(root_module_, other.root_module_);
@@ -213,6 +217,7 @@ bool model::operator==(const model& rhs) const {
         exceptions_ == rhs.exceptions_ &&
         visitors_ == rhs.visitors_ &&
         modeline_groups_ == rhs.modeline_groups_ &&
+        modelines_ == rhs.modelines_ &&
         licences_ == rhs.licences_ &&
         generation_markers_ == rhs.generation_markers_ &&
         root_module_ == rhs.root_module_ &&
@@ -442,6 +447,22 @@ void model::modeline_groups(const std::unordered_map<std::string, masd::dogen::c
 
 void model::modeline_groups(const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline_group>&& v) {
     modeline_groups_ = std::move(v);
+}
+
+const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline>& model::modelines() const {
+    return modelines_;
+}
+
+std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline>& model::modelines() {
+    return modelines_;
+}
+
+void model::modelines(const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline>& v) {
+    modelines_ = v;
+}
+
+void model::modelines(const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline>&& v) {
+    modelines_ = std::move(v);
 }
 
 const std::unordered_map<std::string, masd::dogen::coding::meta_model::licence>& model::licences() const {

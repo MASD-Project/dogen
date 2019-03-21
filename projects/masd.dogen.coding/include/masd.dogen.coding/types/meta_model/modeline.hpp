@@ -28,6 +28,7 @@
 #include <list>
 #include <iosfwd>
 #include <algorithm>
+#include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/editor.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_field.hpp"
@@ -75,7 +76,8 @@ public:
         const boost::optional<masd::dogen::coding::meta_model::local_decoration>& decoration,
         const masd::dogen::coding::meta_model::editor editor,
         const masd::dogen::coding::meta_model::modeline_location location,
-        const std::list<masd::dogen::coding::meta_model::modeline_field>& fields);
+        const std::list<masd::dogen::coding::meta_model::modeline_field>& fields,
+        const std::list<masd::dogen::coding::meta_model::name>& applicable_meta_elements);
 
 public:
     using element::accept;
@@ -114,6 +116,16 @@ public:
     void fields(const std::list<masd::dogen::coding::meta_model::modeline_field>&& v);
     /**@}*/
 
+    /**
+     * @brief Meta-names for all of the elements to which this modeline can be applied to.
+     */
+    /**@{*/
+    const std::list<masd::dogen::coding::meta_model::name>& applicable_meta_elements() const;
+    std::list<masd::dogen::coding::meta_model::name>& applicable_meta_elements();
+    void applicable_meta_elements(const std::list<masd::dogen::coding::meta_model::name>& v);
+    void applicable_meta_elements(const std::list<masd::dogen::coding::meta_model::name>&& v);
+    /**@}*/
+
 public:
     bool operator==(const modeline& rhs) const;
     bool operator!=(const modeline& rhs) const {
@@ -131,6 +143,7 @@ private:
     masd::dogen::coding::meta_model::editor editor_;
     masd::dogen::coding::meta_model::modeline_location location_;
     std::list<masd::dogen::coding::meta_model::modeline_field> fields_;
+    std::list<masd::dogen::coding::meta_model::name> applicable_meta_elements_;
 };
 
 }

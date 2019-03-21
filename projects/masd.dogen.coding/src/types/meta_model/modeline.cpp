@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/io/meta_model/editor_io.hpp"
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline.hpp"
@@ -29,6 +30,20 @@
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::modeline_field>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -63,7 +78,8 @@ modeline::modeline(
     const boost::optional<masd::dogen::coding::meta_model::local_decoration>& decoration,
     const masd::dogen::coding::meta_model::editor editor,
     const masd::dogen::coding::meta_model::modeline_location location,
-    const std::list<masd::dogen::coding::meta_model::modeline_field>& fields)
+    const std::list<masd::dogen::coding::meta_model::modeline_field>& fields,
+    const std::list<masd::dogen::coding::meta_model::name>& applicable_meta_elements)
     : masd::dogen::coding::meta_model::element(
       name,
       documentation,
@@ -81,7 +97,8 @@ modeline::modeline(
       decoration),
       editor_(editor),
       location_(location),
-      fields_(fields) { }
+      fields_(fields),
+      applicable_meta_elements_(applicable_meta_elements) { }
 
 void modeline::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -107,7 +124,8 @@ void modeline::to_stream(std::ostream& s) const {
     s << ", "
       << "\"editor\": " << editor_ << ", "
       << "\"location\": " << location_ << ", "
-      << "\"fields\": " << fields_
+      << "\"fields\": " << fields_ << ", "
+      << "\"applicable_meta_elements\": " << applicable_meta_elements_
       << " }";
 }
 
@@ -118,6 +136,7 @@ void modeline::swap(modeline& other) noexcept {
     swap(editor_, other.editor_);
     swap(location_, other.location_);
     swap(fields_, other.fields_);
+    swap(applicable_meta_elements_, other.applicable_meta_elements_);
 }
 
 bool modeline::equals(const masd::dogen::coding::meta_model::element& other) const {
@@ -130,7 +149,8 @@ bool modeline::operator==(const modeline& rhs) const {
     return masd::dogen::coding::meta_model::element::compare(rhs) &&
         editor_ == rhs.editor_ &&
         location_ == rhs.location_ &&
-        fields_ == rhs.fields_;
+        fields_ == rhs.fields_ &&
+        applicable_meta_elements_ == rhs.applicable_meta_elements_;
 }
 
 modeline& modeline::operator=(modeline other) {
@@ -169,6 +189,22 @@ void modeline::fields(const std::list<masd::dogen::coding::meta_model::modeline_
 
 void modeline::fields(const std::list<masd::dogen::coding::meta_model::modeline_field>&& v) {
     fields_ = std::move(v);
+}
+
+const std::list<masd::dogen::coding::meta_model::name>& modeline::applicable_meta_elements() const {
+    return applicable_meta_elements_;
+}
+
+std::list<masd::dogen::coding::meta_model::name>& modeline::applicable_meta_elements() {
+    return applicable_meta_elements_;
+}
+
+void modeline::applicable_meta_elements(const std::list<masd::dogen::coding::meta_model::name>& v) {
+    applicable_meta_elements_ = v;
+}
+
+void modeline::applicable_meta_elements(const std::list<masd::dogen::coding::meta_model::name>&& v) {
+    applicable_meta_elements_ = std::move(v);
 }
 
 }

@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/io/meta_model/editor_io.hpp"
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.coding/io/meta_model/modeline_io.hpp"

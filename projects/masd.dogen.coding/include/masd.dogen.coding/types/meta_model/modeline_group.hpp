@@ -29,8 +29,8 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
+#include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/types/meta_model/modeline.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
@@ -64,8 +64,7 @@ public:
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const boost::optional<masd::dogen::coding::meta_model::local_decoration>& decoration,
-        const std::string& label,
-        const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline>& modelines);
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& modelines_for_meta_element);
 
 public:
     using element::accept;
@@ -79,23 +78,13 @@ public:
 
 public:
     /**
-     * @brief Label of the modeline group. Must be unique.
-     */
-    /**@{*/
-    const std::string& label() const;
-    std::string& label();
-    void label(const std::string& v);
-    void label(const std::string&& v);
-    /**@}*/
-
-    /**
      * @brief All the modelines for this group.
      */
     /**@{*/
-    const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline>& modelines() const;
-    std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline>& modelines();
-    void modelines(const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline>& v);
-    void modelines(const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline>&& v);
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& modelines_for_meta_element() const;
+    std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& modelines_for_meta_element();
+    void modelines_for_meta_element(const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& v);
+    void modelines_for_meta_element(const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>&& v);
     /**@}*/
 
 public:
@@ -112,8 +101,7 @@ public:
     modeline_group& operator=(modeline_group other);
 
 private:
-    std::string label_;
-    std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline> modelines_;
+    std::unordered_map<std::string, masd::dogen::coding::meta_model::name> modelines_for_meta_element_;
 };
 
 }

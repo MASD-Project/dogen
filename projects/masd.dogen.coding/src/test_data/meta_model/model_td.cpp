@@ -26,6 +26,7 @@
 #include "masd.dogen.coding/test_data/meta_model/builtin_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/licence_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/visitor_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/modeline_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/exception_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/languages_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/primitive_td.hpp"
@@ -244,6 +245,19 @@ std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline_group>
     return r;
 }
 
+masd::dogen::coding::meta_model::modeline
+create_masd_dogen_coding_meta_model_modeline(const unsigned int position) {
+    return masd::dogen::coding::meta_model::modeline_generator::create(position);
+}
+
+std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline> create_std_unordered_map_std_string_masd_dogen_coding_meta_model_modeline(unsigned int position) {
+    std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_masd_dogen_coding_meta_model_modeline(position + i)));
+    }
+    return r;
+}
+
 masd::dogen::coding::meta_model::licence
 create_masd_dogen_coding_meta_model_licence(const unsigned int position) {
     return masd::dogen::coding::meta_model::licence_generator::create(position);
@@ -322,13 +336,14 @@ populate(const unsigned int position, result_type& v) {
     v.exceptions(create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_exception(position + 11));
     v.visitors(create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_visitor(position + 12));
     v.modeline_groups(create_std_unordered_map_std_string_masd_dogen_coding_meta_model_modeline_group(position + 13));
-    v.licences(create_std_unordered_map_std_string_masd_dogen_coding_meta_model_licence(position + 14));
-    v.generation_markers(create_std_unordered_map_std_string_masd_dogen_coding_meta_model_generation_marker(position + 15));
-    v.root_module(create_boost_shared_ptr_masd_dogen_coding_meta_model_module(position + 16));
-    v.input_language(create_masd_dogen_coding_meta_model_languages(position + 17));
-    v.output_languages(create_std_list_masd_dogen_coding_meta_model_languages(position + 18));
-    v.orm_properties(create_boost_optional_masd_dogen_coding_meta_model_orm_model_properties(position + 19));
-    v.extraction_properties(create_masd_dogen_coding_meta_model_extraction_properties(position + 20));
+    v.modelines(create_std_unordered_map_std_string_masd_dogen_coding_meta_model_modeline(position + 14));
+    v.licences(create_std_unordered_map_std_string_masd_dogen_coding_meta_model_licence(position + 15));
+    v.generation_markers(create_std_unordered_map_std_string_masd_dogen_coding_meta_model_generation_marker(position + 16));
+    v.root_module(create_boost_shared_ptr_masd_dogen_coding_meta_model_module(position + 17));
+    v.input_language(create_masd_dogen_coding_meta_model_languages(position + 18));
+    v.output_languages(create_std_list_masd_dogen_coding_meta_model_languages(position + 19));
+    v.orm_properties(create_boost_optional_masd_dogen_coding_meta_model_orm_model_properties(position + 20));
+    v.extraction_properties(create_masd_dogen_coding_meta_model_extraction_properties(position + 21));
 }
 
 model_generator::result_type

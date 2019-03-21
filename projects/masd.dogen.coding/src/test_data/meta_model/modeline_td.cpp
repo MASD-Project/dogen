@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.coding/test_data/meta_model/name_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/editor_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/element_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/modeline_td.hpp"
@@ -49,6 +50,19 @@ std::list<masd::dogen::coding::meta_model::modeline_field> create_std_list_masd_
     return r;
 }
 
+masd::dogen::coding::meta_model::name
+create_masd_dogen_coding_meta_model_name(const unsigned int position) {
+    return masd::dogen::coding::meta_model::name_generator::create(position);
+}
+
+std::list<masd::dogen::coding::meta_model::name> create_std_list_masd_dogen_coding_meta_model_name(unsigned int position) {
+    std::list<masd::dogen::coding::meta_model::name> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_masd_dogen_coding_meta_model_name(position + i));
+    }
+    return r;
+}
+
 }
 
 namespace masd::dogen::coding::meta_model {
@@ -61,6 +75,7 @@ populate(const unsigned int position, result_type& v) {
     v.editor(create_masd_dogen_coding_meta_model_editor(position + 0));
     v.location(create_masd_dogen_coding_meta_model_modeline_location(position + 1));
     v.fields(create_std_list_masd_dogen_coding_meta_model_modeline_field(position + 2));
+    v.applicable_meta_elements(create_std_list_masd_dogen_coding_meta_model_name(position + 3));
 }
 
 modeline_generator::result_type

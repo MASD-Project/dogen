@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
-#include "masd.dogen.coding/io/meta_model/modeline_io.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
 
@@ -35,7 +35,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -68,8 +68,7 @@ modeline_group::modeline_group(
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const boost::optional<masd::dogen::coding::meta_model::local_decoration>& decoration,
-    const std::string& label,
-    const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline>& modelines)
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& modelines_for_meta_element)
     : masd::dogen::coding::meta_model::element(
       name,
       documentation,
@@ -85,8 +84,7 @@ modeline_group::modeline_group(
       artefact_properties,
       archetype_location_properties,
       decoration),
-      label_(label),
-      modelines_(modelines) { }
+      modelines_for_meta_element_(modelines_for_meta_element) { }
 
 void modeline_group::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -110,8 +108,7 @@ void modeline_group::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     masd::dogen::coding::meta_model::element::to_stream(s);
     s << ", "
-      << "\"label\": " << "\"" << tidy_up_string(label_) << "\"" << ", "
-      << "\"modelines\": " << modelines_
+      << "\"modelines_for_meta_element\": " << modelines_for_meta_element_
       << " }";
 }
 
@@ -119,8 +116,7 @@ void modeline_group::swap(modeline_group& other) noexcept {
     masd::dogen::coding::meta_model::element::swap(other);
 
     using std::swap;
-    swap(label_, other.label_);
-    swap(modelines_, other.modelines_);
+    swap(modelines_for_meta_element_, other.modelines_for_meta_element_);
 }
 
 bool modeline_group::equals(const masd::dogen::coding::meta_model::element& other) const {
@@ -131,8 +127,7 @@ bool modeline_group::equals(const masd::dogen::coding::meta_model::element& othe
 
 bool modeline_group::operator==(const modeline_group& rhs) const {
     return masd::dogen::coding::meta_model::element::compare(rhs) &&
-        label_ == rhs.label_ &&
-        modelines_ == rhs.modelines_;
+        modelines_for_meta_element_ == rhs.modelines_for_meta_element_;
 }
 
 modeline_group& modeline_group::operator=(modeline_group other) {
@@ -141,36 +136,20 @@ modeline_group& modeline_group::operator=(modeline_group other) {
     return *this;
 }
 
-const std::string& modeline_group::label() const {
-    return label_;
+const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& modeline_group::modelines_for_meta_element() const {
+    return modelines_for_meta_element_;
 }
 
-std::string& modeline_group::label() {
-    return label_;
+std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& modeline_group::modelines_for_meta_element() {
+    return modelines_for_meta_element_;
 }
 
-void modeline_group::label(const std::string& v) {
-    label_ = v;
+void modeline_group::modelines_for_meta_element(const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& v) {
+    modelines_for_meta_element_ = v;
 }
 
-void modeline_group::label(const std::string&& v) {
-    label_ = std::move(v);
-}
-
-const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline>& modeline_group::modelines() const {
-    return modelines_;
-}
-
-std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline>& modeline_group::modelines() {
-    return modelines_;
-}
-
-void modeline_group::modelines(const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline>& v) {
-    modelines_ = v;
-}
-
-void modeline_group::modelines(const std::unordered_map<std::string, masd::dogen::coding::meta_model::modeline>&& v) {
-    modelines_ = std::move(v);
+void modeline_group::modelines_for_meta_element(const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>&& v) {
+    modelines_for_meta_element_ = std::move(v);
 }
 
 }
