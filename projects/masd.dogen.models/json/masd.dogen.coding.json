@@ -1964,14 +1964,12 @@
     },
     {
       "name": "meta_model::modeline",
+      "parents": [
+        "meta_model::element"
+      ],
       "documentation": "Groups all the fields representing editor variables for emacs, vi, etc.\n\nA field is a key-value pair (KVP), where name is the first element and its value\nthe second.\n\nExample: -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-\n\nIn this particular case, both prefix and postfix are @e -*-; @e mode is the first\nfield name and its value is @e c++; the KVP separator is @e : and the field\nseparator is @e ;.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "name",
-          "type": "std::string",
-          "documentation": "Name of the modeline. Must be unique within a group.\n"
-        },
         {
           "name": "editor",
           "type": "editor",

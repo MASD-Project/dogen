@@ -18,19 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
 #include "masd.dogen.coding/test_data/meta_model/editor_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/element_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/modeline_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/modeline_field_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/modeline_location_td.hpp"
 
 namespace {
-
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
-}
 
 masd::dogen::coding::meta_model::editor
 create_masd_dogen_coding_meta_model_editor(const unsigned int position) {
@@ -63,10 +57,10 @@ modeline_generator::modeline_generator() : position_(0) { }
 
 void modeline_generator::
 populate(const unsigned int position, result_type& v) {
-    v.name(create_std_string(position + 0));
-    v.editor(create_masd_dogen_coding_meta_model_editor(position + 1));
-    v.location(create_masd_dogen_coding_meta_model_modeline_location(position + 2));
-    v.fields(create_std_list_masd_dogen_coding_meta_model_modeline_field(position + 3));
+    masd::dogen::coding::meta_model::element_generator::populate(position, v);
+    v.editor(create_masd_dogen_coding_meta_model_editor(position + 0));
+    v.location(create_masd_dogen_coding_meta_model_modeline_location(position + 1));
+    v.fields(create_std_list_masd_dogen_coding_meta_model_modeline_field(position + 2));
 }
 
 modeline_generator::result_type

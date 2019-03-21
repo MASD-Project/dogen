@@ -27,6 +27,7 @@
 #include "masd.dogen.coding/test_data/meta_model/element_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/licence_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/visitor_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/modeline_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/exception_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/primitive_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/enumeration_td.hpp"
@@ -162,25 +163,27 @@ populate(const unsigned int position, result_type& v) {
 
 element_generator::result_type*
 element_generator::create_ptr(const unsigned int position) {
-    if ((position % 10) == 0)
+    if ((position % 11) == 0)
         return masd::dogen::coding::meta_model::enumeration_generator::create_ptr(position);
-    if ((position % 10) == 1)
+    if ((position % 11) == 1)
         return masd::dogen::coding::meta_model::exception_generator::create_ptr(position);
-    if ((position % 10) == 2)
+    if ((position % 11) == 2)
         return masd::dogen::coding::meta_model::generation_marker_generator::create_ptr(position);
-    if ((position % 10) == 3)
+    if ((position % 11) == 3)
         return masd::dogen::coding::meta_model::licence_generator::create_ptr(position);
-    if ((position % 10) == 4)
+    if ((position % 11) == 4)
+        return masd::dogen::coding::meta_model::modeline_generator::create_ptr(position);
+    if ((position % 11) == 5)
         return masd::dogen::coding::meta_model::modeline_group_generator::create_ptr(position);
-    if ((position % 10) == 5)
+    if ((position % 11) == 6)
         return masd::dogen::coding::meta_model::module_generator::create_ptr(position);
-    if ((position % 10) == 6)
+    if ((position % 11) == 7)
         return masd::dogen::coding::meta_model::object_generator::create_ptr(position);
-    if ((position % 10) == 7)
+    if ((position % 11) == 8)
         return masd::dogen::coding::meta_model::object_template_generator::create_ptr(position);
-    if ((position % 10) == 8)
+    if ((position % 11) == 9)
         return masd::dogen::coding::meta_model::primitive_generator::create_ptr(position);
-    if ((position % 10) == 9)
+    if ((position % 11) == 10)
         return masd::dogen::coding::meta_model::visitor_generator::create_ptr(position);
     return masd::dogen::coding::meta_model::builtin_generator::create_ptr(position);
 }

@@ -30,6 +30,7 @@
 #include "masd.dogen.coding/types/meta_model/builtin_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/licence_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/visitor_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/modeline_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/exception_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/primitive_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration_fwd.hpp"
@@ -95,6 +96,16 @@ public:
     virtual void visit(const masd::dogen::coding::meta_model::licence&) { }
     virtual void visit(masd::dogen::coding::meta_model::licence&) const { }
     virtual void visit(masd::dogen::coding::meta_model::licence&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type masd::dogen::coding::meta_model::modeline
+     */
+    /**@{*/
+    virtual void visit(const masd::dogen::coding::meta_model::modeline&) const { }
+    virtual void visit(const masd::dogen::coding::meta_model::modeline&) { }
+    virtual void visit(masd::dogen::coding::meta_model::modeline&) const { }
+    virtual void visit(masd::dogen::coding::meta_model::modeline&) { }
     /**@}*/
 
     /**

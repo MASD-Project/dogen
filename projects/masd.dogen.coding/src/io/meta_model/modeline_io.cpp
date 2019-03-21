@@ -19,44 +19,16 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/editor_io.hpp"
+#include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.coding/io/meta_model/modeline_io.hpp"
 #include "masd.dogen.coding/io/meta_model/modeline_field_io.hpp"
 #include "masd.dogen.coding/io/meta_model/modeline_location_io.hpp"
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::modeline_field>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace masd::dogen::coding::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const modeline& v) {
-    s << " { "
-      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::modeline\"" << ", "
-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"editor\": " << v.editor() << ", "
-      << "\"location\": " << v.location() << ", "
-      << "\"fields\": " << v.fields()
-      << " }";
+    v.to_stream(s);
     return(s);
 }
 

@@ -26,9 +26,10 @@
 #endif
 
 #include <list>
-#include <string>
+#include <iosfwd>
 #include <algorithm>
 #include "masd.dogen.coding/types/meta_model/editor.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_field.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_location.hpp"
 
@@ -46,33 +47,47 @@ namespace masd::dogen::coding::meta_model {
  * field name and its value is @e c++; the KVP separator is @e : and the field
  * separator is @e ;.
  */
-class modeline final {
+class modeline final : public masd::dogen::coding::meta_model::element {
 public:
     modeline(const modeline&) = default;
     modeline(modeline&&) = default;
-    ~modeline() = default;
 
 public:
     modeline();
 
+    virtual ~modeline() noexcept { }
+
 public:
     modeline(
-        const std::string& name,
+        const masd::dogen::coding::meta_model::name& name,
+        const std::string& documentation,
+        const masd::dogen::annotations::annotation& annotation,
+        const masd::dogen::coding::meta_model::origin_types origin_type,
+        const boost::optional<masd::dogen::coding::meta_model::name>& contained_by,
+        const bool in_global_module,
+        const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<std::string>& dynamic_stereotypes,
+        const masd::dogen::coding::meta_model::name& meta_name,
+        const bool is_element_extension,
+        const masd::dogen::extraction::decoration_properties& decoration_properties,
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
+        const boost::optional<masd::dogen::coding::meta_model::local_decoration>& decoration,
         const masd::dogen::coding::meta_model::editor editor,
         const masd::dogen::coding::meta_model::modeline_location location,
         const std::list<masd::dogen::coding::meta_model::modeline_field>& fields);
 
 public:
-    /**
-     * @brief Name of the modeline. Must be unique within a group.
-     */
-    /**@{*/
-    const std::string& name() const;
-    std::string& name();
-    void name(const std::string& v);
-    void name(const std::string&& v);
-    /**@}*/
+    using element::accept;
 
+    virtual void accept(const element_visitor& v) const override;
+    virtual void accept(element_visitor& v) const override;
+    virtual void accept(const element_visitor& v) override;
+    virtual void accept(element_visitor& v) override;
+public:
+    void to_stream(std::ostream& s) const override;
+
+public:
     /**
      * @brief The modeline will use the syntax for this editor.
      */
@@ -106,11 +121,13 @@ public:
     }
 
 public:
+    bool equals(const masd::dogen::coding::meta_model::element& other) const override;
+
+public:
     void swap(modeline& other) noexcept;
     modeline& operator=(modeline other);
 
 private:
-    std::string name_;
     masd::dogen::coding::meta_model::editor editor_;
     masd::dogen::coding::meta_model::modeline_location location_;
     std::list<masd::dogen::coding::meta_model::modeline_field> fields_;
