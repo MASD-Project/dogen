@@ -59,62 +59,61 @@ typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 namespace masd::dogen::coding::helpers {
 
 bool resolver::
-is_floating_point(const meta_model::model& im,
-    const meta_model::name& n) {
-    auto i(im.builtins().find(n.id()));
-    return i != im.builtins().end() && i->second->is_floating_point();
+is_floating_point(const meta_model::model& m, const meta_model::name& n) {
+    auto i(m.builtins().find(n.id()));
+    return i != m.builtins().end() && i->second->is_floating_point();
 }
 
-bool resolver::is_builtin(const meta_model::model& im,
-    const meta_model::name& n) {
+bool resolver::
+is_builtin(const meta_model::model& m, const meta_model::name& n) {
 
-    auto i(im.builtins().find(n.id()));
-    if (i != im.builtins().end()) {
-        BOOST_LOG_SEV(lg, debug) << "Name belongs to a built-in in model.";
+    auto i(m.builtins().find(n.id()));
+    if (i != m.builtins().end()) {
+        BOOST_LOG_SEV(lg, trace) << "Name belongs to a built-in in model.";
         return true;
     }
     return false;
 }
 
-bool resolver::is_primitive(const meta_model::model& im,
-    const meta_model::name& n) {
+bool resolver::
+is_primitive(const meta_model::model& m, const meta_model::name& n) {
 
-    auto i(im.primitives().find(n.id()));
-    if (i != im.primitives().end()) {
-        BOOST_LOG_SEV(lg, debug) << "Name belongs to a primitive in model.";
+    auto i(m.primitives().find(n.id()));
+    if (i != m.primitives().end()) {
+        BOOST_LOG_SEV(lg, trace) << "Name belongs to a primitive in model.";
         return true;
     }
     return false;
 }
 
-bool resolver::is_enumeration(const meta_model::model& im,
-    const meta_model::name& n) {
+bool resolver::
+is_enumeration(const meta_model::model& m, const meta_model::name& n) {
 
-    auto i(im.enumerations().find(n.id()));
-    if (i != im.enumerations().end()) {
-        BOOST_LOG_SEV(lg, debug) << "Name belongs to an enumeration in model.";
+    auto i(m.enumerations().find(n.id()));
+    if (i != m.enumerations().end()) {
+        BOOST_LOG_SEV(lg, trace) << "Name belongs to an enumeration in model.";
         return true;
     }
     return false;
 }
 
-bool resolver::is_object(const meta_model::model& im,
-    const meta_model::name& n) {
+bool resolver::
+is_object(const meta_model::model& m, const meta_model::name& n) {
 
-    auto i(im.objects().find(n.id()));
-    if (i != im.objects().end()) {
-        BOOST_LOG_SEV(lg, debug) << "Name belongs to an object in model.";
+    auto i(m.objects().find(n.id()));
+    if (i != m.objects().end()) {
+        BOOST_LOG_SEV(lg, trace) << "Name belongs to an object in model.";
         return true;
     }
     return false;
 }
 
-bool resolver::is_object_template(const meta_model::model& im,
-    const meta_model::name& n) {
+bool resolver::
+is_object_template(const meta_model::model& m, const meta_model::name& n) {
 
-    auto i(im.object_templates().find(n.id()));
-    if (i != im.object_templates().end()) {
-        BOOST_LOG_SEV(lg, debug) << "Name belongs to a object_template in model.";
+    auto i(m.object_templates().find(n.id()));
+    if (i != m.object_templates().end()) {
+        BOOST_LOG_SEV(lg, trace) << "Name belongs to object_template in model.";
         return true;
     }
     return false;
@@ -122,18 +121,18 @@ bool resolver::is_object_template(const meta_model::model& im,
 
 bool resolver::
 is_name_referable(const indices& idx, const meta_model::name& n) {
-    BOOST_LOG_SEV(lg, debug) << "Checking to see if name is referable:" << n;
+    BOOST_LOG_SEV(lg, trace) << "Checking to see if name is referable:" << n;
 
     const auto i(idx.elements_referable_by_attributes().find(n.id()));
     if (i != idx.elements_referable_by_attributes().end())
         return true;
 
-    BOOST_LOG_SEV(lg, debug) << "Name not found in model or its not referable.";
+    BOOST_LOG_SEV(lg, trace) << "Name not found in model or its not referable.";
     return false;
 }
 
 meta_model::name resolver::resolve_name_with_internal_modules(
-    const meta_model::model& im, const indices& idx,
+    const meta_model::model& m, const indices& idx,
     const meta_model::name& ctx, const meta_model::name& n) {
 
     /*
@@ -153,10 +152,10 @@ meta_model::name resolver::resolve_name_with_internal_modules(
     name_factory nf;
     auto r(nf.build_combined_element_name(ctx, n,
             true/*populate_model_modules_if_blank*/));
-    BOOST_LOG_SEV(lg, debug) << "Resolving with internal modules: " << r;
+    BOOST_LOG_SEV(lg, trace) << "Resolving with internal modules: " << r;
 
     if (is_name_referable(idx, r)) {
-        BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
+        BOOST_LOG_SEV(lg, trace) << "Resolution succeeded.";
         return r;
     }
 
@@ -176,7 +175,7 @@ meta_model::name resolver::resolve_name_with_internal_modules(
      * check for the internal module, and if that fails (above), we
      * then check for the model module.
      */
-    BOOST_LOG_SEV(lg, debug) << "Resolving using internal module promotion.";
+    BOOST_LOG_SEV(lg, trace) << "Resolving using internal module promotion.";
 
     {
         /*
@@ -184,11 +183,11 @@ meta_model::name resolver::resolve_name_with_internal_modules(
          * relying on external modules at all. This catches the
          * classic "std::string" et al. scenarios.
          */
-        BOOST_LOG_SEV(lg, debug) << "Trying promotion on its own.";
+        BOOST_LOG_SEV(lg, trace) << "Trying promotion on its own.";
 
         auto r(nf.build_promoted_module_name(n));
         if (is_name_referable(idx, r)) {
-            BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
+            BOOST_LOG_SEV(lg, trace) << "Resolution succeeded.";
             return r;
         }
     }
@@ -200,11 +199,11 @@ meta_model::name resolver::resolve_name_with_internal_modules(
          * to the current model - it would fail because of the missing
          * external modules.
          */
-        BOOST_LOG_SEV(lg, debug) << "Resolving using model: " << im.name();
+        BOOST_LOG_SEV(lg, trace) << "Resolving using model: " << m.name();
 
-        auto r(nf.build_promoted_module_name(im.name(), n));
+        auto r(nf.build_promoted_module_name(m.name(), n));
         if (is_name_referable(idx, r)) {
-            BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
+            BOOST_LOG_SEV(lg, trace) << "Resolution succeeded.";
             return r;
         }
     }
@@ -223,11 +222,11 @@ meta_model::name resolver::resolve_name_with_internal_modules(
      * humongous hack and needs to be replaced with list comparisons
      * (already backloged).
      */
-    BOOST_LOG_SEV(lg, debug) << "Resolving using hacked name: " << im.name();
-    if (!im.name().location().model_modules().empty()) {
-        auto r(nf.build_hacked_combined_element_name(im.name(), n));
+    BOOST_LOG_SEV(lg, trace) << "Resolving using hacked name: " << m.name();
+    if (!m.name().location().model_modules().empty()) {
+        auto r(nf.build_hacked_combined_element_name(m.name(), n));
         if (is_name_referable(idx, r)) {
-            BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
+            BOOST_LOG_SEV(lg, trace) << "Resolution succeeded.";
             return r;
         }
     }
@@ -238,14 +237,13 @@ meta_model::name resolver::resolve_name_with_internal_modules(
      * could simply slot the references into a set and see if the
      * internal module path maps any of the references.
      */
-    for (const auto& pair : im.references()) {
+    for (const auto& pair : m.references()) {
         const auto& ref(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Resolving using reference: "
-                                 << ref;
+        BOOST_LOG_SEV(lg, trace) << "Resolving using reference: " << ref;
 
         auto r(nf.build_promoted_module_name(ctx, n));
         if (is_name_referable(idx, r)) {
-            BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
+            BOOST_LOG_SEV(lg, trace) << "Resolution succeeded.";
             return r;
         }
     }
@@ -261,7 +259,7 @@ boost::optional<meta_model::name> resolver::
 try_resolve_name_with_context_internal_modules(const indices& idx,
     meta_model::name ctx, const meta_model::name& n) {
 
-    BOOST_LOG_SEV(lg, debug) << "Context has internal modules.";
+    BOOST_LOG_SEV(lg, trace) << "Context has internal modules.";
 
     /*
      * If we do not have an internal module path set but the
@@ -278,10 +276,10 @@ try_resolve_name_with_context_internal_modules(const indices& idx,
             true/*populate_model_modules_if_blank*/,
             true/*populate_internal_modules_if_blank*/));
 
-    BOOST_LOG_SEV(lg, debug) << "Internal modules climb: " << r;
+    BOOST_LOG_SEV(lg, trace) << "Internal modules climb: " << r;
 
     if (is_name_referable(idx, r)) {
-        BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
+        BOOST_LOG_SEV(lg, trace) << "Resolution succeeded.";
         return r;
     }
 
@@ -292,10 +290,10 @@ try_resolve_name_with_context_internal_modules(const indices& idx,
             true/*populate_model_modules_if_blank*/,
             true/*populate_internal_modules_if_blank*/);
 
-        BOOST_LOG_SEV(lg, debug) << "Internal modules climb: " << r;
+        BOOST_LOG_SEV(lg, trace) << "Internal modules climb: " << r;
 
         if (is_name_referable(idx, r)) {
-            BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
+            BOOST_LOG_SEV(lg, trace) << "Resolution succeeded.";
             return r;
         }
     } while (!ctx.location().internal_modules().empty());
@@ -311,7 +309,7 @@ boost::optional<meta_model::name> resolver::
 try_resolve_name_with_context_model_modules(const indices& idx,
     meta_model::name ctx, const meta_model::name& n) {
 
-    BOOST_LOG_SEV(lg, debug) << "Context has model modules.";
+    BOOST_LOG_SEV(lg, trace) << "Context has model modules.";
 
     /*
      * If we do not have an internal module path set but the
@@ -328,10 +326,10 @@ try_resolve_name_with_context_model_modules(const indices& idx,
             true/*populate_model_modules_if_blank*/,
             false/*populate_internal_modules_if_blank*/));
 
-    BOOST_LOG_SEV(lg, debug) << "Internal modules climb: " << r;
+    BOOST_LOG_SEV(lg, trace) << "Internal modules climb: " << r;
 
     if (is_name_referable(idx, r)) {
-        BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
+        BOOST_LOG_SEV(lg, trace) << "Resolution succeeded.";
         return r;
     }
 
@@ -342,10 +340,10 @@ try_resolve_name_with_context_model_modules(const indices& idx,
             true/*populate_model_modules_if_blank*/,
             false/*populate_internal_modules_if_blank*/);
 
-        BOOST_LOG_SEV(lg, debug) << "Model modules climb: " << r;
+        BOOST_LOG_SEV(lg, trace) << "Model modules climb: " << r;
 
         if (is_name_referable(idx, r)) {
-            BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
+            BOOST_LOG_SEV(lg, trace) << "Resolution succeeded.";
             return r;
         }
     } while (!ctx.location().model_modules().empty());
@@ -358,36 +356,36 @@ try_resolve_name_with_context_model_modules(const indices& idx,
 }
 
 meta_model::name resolver::
-resolve_name(const meta_model::model& im, const indices& idx,
+resolve_name(const meta_model::model& m, const indices& idx,
     const meta_model::name& ctx, const meta_model::name& n) {
 
-    BOOST_LOG_SEV(lg, debug) << "Resolving name: " << n.id();
-    BOOST_LOG_SEV(lg, debug) << "Initial state: " << n;
-    BOOST_LOG_SEV(lg, debug) << "Context: " << ctx;
+    BOOST_LOG_SEV(lg, trace) << "Resolving name: " << n.id();
+    BOOST_LOG_SEV(lg, trace) << "Initial state: " << n;
+    BOOST_LOG_SEV(lg, trace) << "Context: " << ctx;
 
     /*
      * If the user has supplied internal modules we must use those, to
      * the exclusion of everything else.
      */
     if (!n.location().internal_modules().empty()) {
-        BOOST_LOG_SEV(lg, debug) << "Name has internal modules.";
-        return resolve_name_with_internal_modules(im, idx, ctx, n);
+        BOOST_LOG_SEV(lg, trace) << "Name has internal modules.";
+        return resolve_name_with_internal_modules(m, idx, ctx, n);
     }
 
     /*
      * If the context has internal modules we should try to use those
      * and see if anything comes up.
      */
-    BOOST_LOG_SEV(lg, debug) << "Name does not have internal modules.";
+    BOOST_LOG_SEV(lg, trace) << "Name does not have internal modules.";
     if (!ctx.location().internal_modules().empty()) {
         auto r(try_resolve_name_with_context_internal_modules(idx, ctx, n));
         if (r)
             return *r;
 
-        BOOST_LOG_SEV(lg, debug) << "Failed to resolve with context's "
+        BOOST_LOG_SEV(lg, trace) << "Failed to resolve with context's "
                                  << "internal modules.";
     } else
-        BOOST_LOG_SEV(lg, debug) << "Context does not have internal modules.";
+        BOOST_LOG_SEV(lg, trace) << "Context does not have internal modules.";
 
     /*
      * Perhaps the user just wants to refer to a type in the current
@@ -402,7 +400,7 @@ resolve_name(const meta_model::model& im, const indices& idx,
                 true/*populate_model_modules_if_blank*/));
 
         if (is_name_referable(idx, r)) {
-            BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
+            BOOST_LOG_SEV(lg, trace) << "Resolution succeeded.";
             return r;
         }
     }
@@ -416,10 +414,10 @@ resolve_name(const meta_model::model& im, const indices& idx,
         if (r)
             return *r;
 
-        BOOST_LOG_SEV(lg, debug) << "Failed to resolve with context's "
+        BOOST_LOG_SEV(lg, trace) << "Failed to resolve with context's "
                                  << "model modules.";
     } else
-        BOOST_LOG_SEV(lg, debug) << "Context does not have model modules.";
+        BOOST_LOG_SEV(lg, trace) << "Context does not have model modules.";
 
     /*
      * Finally, the only other possibility is that the name is on the
@@ -427,7 +425,7 @@ resolve_name(const meta_model::model& im, const indices& idx,
      */
     BOOST_LOG_SEV(lg, debug) << "Trying global module.";
     if (is_name_referable(idx, n)) {
-        BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
+        BOOST_LOG_SEV(lg, trace) << "Resolution succeeded.";
         return n;
     }
 
@@ -438,20 +436,20 @@ resolve_name(const meta_model::model& im, const indices& idx,
     BOOST_THROW_EXCEPTION(resolution_error(undefined_type + n.id()));
 }
 
-void resolver::resolve_name_tree(const meta_model::model& im,
+void resolver::resolve_name_tree(const meta_model::model& m,
     const indices& idx, const meta_model::name& owner,
     meta_model::name_tree& nt) {
 
-    const meta_model::name n(resolve_name(im, idx, owner, nt.current()));
+    const meta_model::name n(resolve_name(m, idx, owner, nt.current()));
 
     BOOST_LOG_SEV(lg, debug) << "Resolved name: " << nt.current().id()
                              << " to: " << n.id();
     nt.current(n);
-    if (is_builtin(im, n)) {
+    if (is_builtin(m, n)) {
         nt.is_current_simple_type(true);
-        nt.is_floating_point(is_floating_point(im, n));
+        nt.is_floating_point(is_floating_point(m, n));
     } else
-        nt.is_current_simple_type(is_enumeration(im, n));
+        nt.is_current_simple_type(is_enumeration(m, n));
 
     const auto i(idx.objects_always_in_heap().find(n.id()));
     nt.are_children_opaque(i != idx.objects_always_in_heap().end());
@@ -472,7 +470,7 @@ void resolver::resolve_name_tree(const meta_model::model& im,
     }
 
     for (auto& c : nt.children()) {
-        resolve_name_tree(im, idx, owner, c);
+        resolve_name_tree(m, idx, owner, c);
         iqb.add(c);
     }
 
@@ -481,12 +479,12 @@ void resolver::resolve_name_tree(const meta_model::model& im,
     nt.qualified(iq.second);
 }
 
-void resolver::resolve_attribute(const meta_model::model& im,
+void resolver::resolve_attribute(const meta_model::model& m,
     const indices& idx, const meta_model::name& owner,
     meta_model::attribute& attr) {
 
     try {
-        resolve_name_tree(im, idx, owner, attr.parsed_type());
+        resolve_name_tree(m, idx, owner, attr.parsed_type());
 
         /*
          * We must rely on simple names as attribute expansion has not
@@ -504,23 +502,22 @@ void resolver::resolve_attribute(const meta_model::model& im,
     }
 }
 
-void resolver::resolve_attributes(const meta_model::model& im,
+void resolver::resolve_attributes(const meta_model::model& m,
     const indices& idx, const meta_model::name& owner,
     std::list<meta_model::attribute>& attributes) {
 
     for (auto& attr : attributes)
-        resolve_attribute(im, idx, owner, attr);
+        resolve_attribute(m, idx, owner, attr);
 }
 
-void resolver::
-validate_inheritance_graph(const meta_model::model& im,
+void resolver::validate_inheritance_graph(const meta_model::model& m,
     const meta_model::object& o) {
     /*
      * Ensure that all parents and original parents exist as objects.
      */
     const auto id(o.name().id());
     for (const auto& pn : o.parents()) {
-        if (is_object(im, pn))
+        if (is_object(m, pn))
             continue;
 
         std::ostringstream s;
@@ -531,7 +528,7 @@ validate_inheritance_graph(const meta_model::model& im,
     }
 
     for (const auto& rp : o.root_parents()) {
-        if (is_object(im, rp))
+        if (is_object(m, rp))
             continue;
 
         std::ostringstream s;
@@ -543,10 +540,10 @@ validate_inheritance_graph(const meta_model::model& im,
 }
 
 void resolver::validate_object_template_inheritance(
-    const meta_model::model& im, const meta_model::object_template& otp) {
+    const meta_model::model& m, const meta_model::object_template& otp) {
     const auto id(otp.name().id());
     for (const auto& n : otp.parents()) {
-        if (is_object_template(im, n))
+        if (is_object_template(m, n))
             continue;
 
         std::ostringstream stream;
@@ -559,49 +556,48 @@ void resolver::validate_object_template_inheritance(
 }
 
 void resolver::
-resolve_object_templates(const indices& idx, meta_model::model& im) {
+resolve_object_templates(const indices& idx, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Resolving object templates. Size: "
-                             << im.object_templates().size();
+                             << m.object_templates().size();
 
-    for (auto& pair : im.object_templates()) {
+    for (auto& pair : m.object_templates()) {
         auto& otp(pair.second);
 
-        BOOST_LOG_SEV(lg, debug) << "Resolving object template: "
+        BOOST_LOG_SEV(lg, trace) << "Resolving object template: "
                                  << otp->name().id();
-        resolve_attributes(im, idx, otp->name(), otp->local_attributes());
-        validate_object_template_inheritance(im, *otp);
-        BOOST_LOG_SEV(lg, debug) << "Resolved object template.";
+        resolve_attributes(m, idx, otp->name(), otp->local_attributes());
+        validate_object_template_inheritance(m, *otp);
+        BOOST_LOG_SEV(lg, trace) << "Resolved object template.";
     }
 
     BOOST_LOG_SEV(lg, debug) << "Resolved object templates.";
 }
 
-void resolver::
-resolve_objects(const indices& idx, meta_model::model& im) {
+void resolver::resolve_objects(const indices& idx, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Resolving objects. Size: "
-                             << im.objects().size();
+                             << m.objects().size();
 
-    for (auto& pair : im.objects()) {
+    for (auto& pair : m.objects()) {
         auto& o(*pair.second);
 
-        BOOST_LOG_SEV(lg, debug) << "Resolving object: " << o.name().id();
-        validate_inheritance_graph(im, o);
-        resolve_attributes(im, idx, o.name(), o.local_attributes());
-        BOOST_LOG_SEV(lg, debug) << "Resolved object.";
+        BOOST_LOG_SEV(lg, trace) << "Resolving object: " << o.name().id();
+        validate_inheritance_graph(m, o);
+        resolve_attributes(m, idx, o.name(), o.local_attributes());
+        BOOST_LOG_SEV(lg, trace) << "Resolved object.";
     }
 
     BOOST_LOG_SEV(lg, debug) << "Resolved objects.";
 }
 
 void resolver::
-resolve_enumerations(const indices& idx, meta_model::model& im) {
+resolve_enumerations(const indices& idx, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Resolving enumerations. Size: "
-                             << im.enumerations().size();
+                             << m.enumerations().size();
 
-    for (auto& pair : im.enumerations()) {
+    for (auto& pair : m.enumerations()) {
         auto& e(*pair.second);
 
-        BOOST_LOG_SEV(lg, debug) << "Resolving enumeration: " << e.name().id();
+        BOOST_LOG_SEV(lg, trace) << "Resolving enumeration: " << e.name().id();
 
         /*
          * If we're not relying on the underlying element, we don't
@@ -612,7 +608,7 @@ resolve_enumerations(const indices& idx, meta_model::model& im) {
 
         const auto ue(e.underlying_element());
         const auto ue_id(ue.id());
-        BOOST_LOG_SEV(lg, debug) << "Underlying element: '" << ue_id << "'";
+        BOOST_LOG_SEV(lg, trace) << "Underlying element: '" << ue_id << "'";
 
         const auto i(idx.enumeration_underliers().find(ue_id));
         if (i == idx.enumeration_underliers().end()) {
@@ -621,21 +617,21 @@ resolve_enumerations(const indices& idx, meta_model::model& im) {
             BOOST_THROW_EXCEPTION(
                 resolution_error(invalid_underlying_type + ue_id));
         }
-        BOOST_LOG_SEV(lg, debug) << "Resolved enumeration.";
+        BOOST_LOG_SEV(lg, trace) << "Resolved enumeration.";
     }
 
     BOOST_LOG_SEV(lg, debug) << "Resolved enumerations.";
 }
 
 void resolver::
-resolve_primitives(const indices& idx, meta_model::model& im) {
+resolve_primitives(const indices& idx, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Resolving primitives. Size: "
-                             << im.primitives().size();
+                             << m.primitives().size();
 
-    for (auto& pair : im.primitives()) {
+    for (auto& pair : m.primitives()) {
         auto& p(*pair.second);
 
-        BOOST_LOG_SEV(lg, debug) << "Resolving primitive: " << p.name().id();
+        BOOST_LOG_SEV(lg, trace) << "Resolving primitive: " << p.name().id();
 
         /*
          * We must resolve the attribute as well as validate it
@@ -643,7 +639,7 @@ resolve_primitives(const indices& idx, meta_model::model& im) {
          * resolution.
          */
         auto& attr(p.value_attribute());
-        resolve_attribute(im, idx, p.name(), attr);
+        resolve_attribute(m, idx, p.name(), attr);
 
         const auto& ue_id(attr.parsed_type().current().id());
         const auto i(idx.primitive_underliers().find(ue_id));
@@ -653,27 +649,27 @@ resolve_primitives(const indices& idx, meta_model::model& im) {
             BOOST_THROW_EXCEPTION(
                 resolution_error(invalid_underlying_type + ue_id));
         }
-        BOOST_LOG_SEV(lg, debug) << "Resolved primitive.";
+        BOOST_LOG_SEV(lg, trace) << "Resolved primitive.";
     }
 
     BOOST_LOG_SEV(lg, debug) << "Resolved primitives.";
 }
 
 meta_model::name resolver::
-resolve(const meta_model::model& im, const indices& idx,
+resolve(const meta_model::model& m, const indices& idx,
     const meta_model::name& ctx, const meta_model::name& n) {
 
-    const auto r(resolve_name(im, idx, ctx, n));
-    BOOST_LOG_SEV(lg, debug) << "Resolved name: " << n.id()
+    const auto r(resolve_name(m, idx, ctx, n));
+    BOOST_LOG_SEV(lg, trace) << "Resolved name: " << n.id()
                              << " to: " << r.id();
     return r;
 }
 
 boost::optional<meta_model::name> resolver::
 try_resolve_object_template_name(meta_model::name ctx, const std::string& s,
-    const meta_model::model& im) {
+    const meta_model::model& m) {
 
-    BOOST_LOG_SEV(lg, debug) << "Resolving object template name: " << s;
+    BOOST_LOG_SEV(lg, trace) << "Resolving object template name: " << s;
 
     /*
      * We first start at the same level as the context, including any
@@ -687,14 +683,14 @@ try_resolve_object_template_name(meta_model::name ctx, const std::string& s,
             true/*populate_model_modules_if_blank*/,
             true/*populate_internal_modules_if_blank*/));
 
-    BOOST_LOG_SEV(lg, debug) << "Internal modules climb: " << r;
+    BOOST_LOG_SEV(lg, trace) << "Internal modules climb: " << r;
 
-    auto i(im.object_templates().find(r.id()));
-    if (i != im.object_templates().end()) {
-        BOOST_LOG_SEV(lg, debug) << "Found object template.";
+    auto i(m.object_templates().find(r.id()));
+    if (i != m.object_templates().end()) {
+        BOOST_LOG_SEV(lg, trace) << "Found object template.";
         return r;
     }
-    BOOST_LOG_SEV(lg, debug) << "Resolution failed.";
+    BOOST_LOG_SEV(lg, trace) << "Resolution failed.";
 
     /*
      * If we did not have any luck and there are internal modules, we
@@ -709,11 +705,11 @@ try_resolve_object_template_name(meta_model::name ctx, const std::string& s,
                 true/*populate_model_modules_if_blank*/,
                 true/*populate_internal_modules_if_blank*/);
 
-            BOOST_LOG_SEV(lg, debug) << "Internal modules climb: " << r;
+            BOOST_LOG_SEV(lg, trace) << "Internal modules climb: " << r;
 
-            i = im.object_templates().find(r.id());
-            if (i != im.object_templates().end()) {
-                BOOST_LOG_SEV(lg, debug) << "Found object templates.";
+            i = m.object_templates().find(r.id());
+            if (i != m.object_templates().end()) {
+                BOOST_LOG_SEV(lg, trace) << "Found object templates.";
                 return r;
             }
         } while (!ctx.location().internal_modules().empty());
@@ -723,25 +719,26 @@ try_resolve_object_template_name(meta_model::name ctx, const std::string& s,
      * There are no object templates in this model which match the
      * stereotype name.
      */
-    BOOST_LOG_SEV(lg, debug) << "Could not find a object template with tentative name.";
+    BOOST_LOG_SEV(lg, warn) << "Could not find object template with name: "
+                             << s;
     return boost::optional<meta_model::name>();
 }
 
 boost::optional<meta_model::name>
 resolver::try_resolve_object_template_name(const meta_model::name& ctx,
-    const meta_model::name& n, const meta_model::model& im) {
+    const meta_model::name& n, const meta_model::model& m) {
     // FIXME: hack for now, just take simple name. Requires a bit more
     // thinking.
-    return try_resolve_object_template_name(ctx, n.simple(), im);
+    return try_resolve_object_template_name(ctx, n.simple(), m);
 }
 
-void resolver::resolve(const indices& idx, meta_model::model& im) {
-    BOOST_LOG_SEV(lg, debug) << "Resolving model: " << im.name().id();
+void resolver::resolve(const indices& idx, meta_model::model& m) {
+    BOOST_LOG_SEV(lg, debug) << "Resolving model: " << m.name().id();
 
-    resolve_object_templates(idx, im);
-    resolve_objects(idx, im);
-    resolve_enumerations(idx, im);
-    resolve_primitives(idx, im);
+    resolve_object_templates(idx, m);
+    resolve_objects(idx, m);
+    resolve_enumerations(idx, m);
+    resolve_primitives(idx, m);
 
     BOOST_LOG_SEV(lg, debug) << "Resolved model.";
 }
