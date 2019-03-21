@@ -230,6 +230,18 @@ process_element(const helpers::adapter& ad,
     case static_stereotypes::builtin:
         insert(ad.to_builtin(l, scr, e), em.builtins());
         break;
+    case static_stereotypes::modeline_group:
+        insert(ad.to_modeline_group(l, scr, e), em.modeline_groups());
+        break;
+    case static_stereotypes::modeline:
+        insert(ad.to_modeline(l, scr, e), em.modelines());
+        break;
+    case static_stereotypes::generation_marker:
+        insert(ad.to_generation_marker(l, scr, e), em.generation_markers());
+        break;
+    case static_stereotypes::licence:
+        insert(ad.to_licence(l, scr, e), em.licences());
+        break;
     default: {
         const auto s(boost::lexical_cast<std::string>(et));
         BOOST_LOG_SEV(lg, error) << invalid_element_type << s;;

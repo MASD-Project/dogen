@@ -86,7 +86,6 @@ coding::meta_model::name adapter::to_name(const coding::meta_model::location& l,
 coding::meta_model::modeline_field
 adapter::to_modeline_field(const injection::meta_model::attribute& ia) const {
     ensure_not_empty(ia.name());
-    ensure_not_empty(ia.value());
 
     coding::meta_model::modeline_field r;
     r.name(ia.name());
