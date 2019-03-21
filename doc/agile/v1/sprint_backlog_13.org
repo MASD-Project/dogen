@@ -14,27 +14,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-21 Thu 14:54]
+#+CAPTION: Clock summary at [2019-03-21 Thu 15:30]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *73:08* |       |       | 100.0 |
+| *Total time*                                             | *73:43* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 73:08   |       |       | 100.0 |
-| Active                                                   |         | 73:08 |       | 100.0 |
+| Stories                                                  | 73:43   |       |       | 100.0 |
+| Active                                                   |         | 73:43 |       | 100.0 |
 | Edit release notes for previous sprint                   |         |       |  2:22 |   3.2 |
-| Sprint and product backlog grooming                      |         |       |  9:57 |  13.6 |
-| Create a video demo for the sprint's features            |         |       |  3:47 |   5.2 |
+| Sprint and product backlog grooming                      |         |       |  9:57 |  13.5 |
+| Create a video demo for the sprint's features            |         |       |  3:47 |   5.1 |
 | Make projects directory env optional                     |         |       |  0:10 |   0.2 |
 | Clang-cl builds are failing due to memory leak reporting |         |       |  0:45 |   1.0 |
-| Add tests for tracing, reporting and diffing             |         |       |  5:46 |   7.9 |
-| Delete extra files appears broken at present             |         |       |  6:26 |   8.8 |
-| Empty directories should be deleted                      |         |       |  5:37 |   7.7 |
+| Add tests for tracing, reporting and diffing             |         |       |  5:46 |   7.8 |
+| Delete extra files appears broken at present             |         |       |  6:26 |   8.7 |
+| Empty directories should be deleted                      |         |       |  5:37 |   7.6 |
 | Changes to stitch templates are not reported correctly   |         |       |  1:09 |   1.6 |
 | Orchestration test is broken on Windows                  |         |       |  2:40 |   3.6 |
-| Code generation of tests for dogen models                |         |       | 23:22 |  32.0 |
+| Code generation of tests for dogen models                |         |       | 23:22 |  31.7 |
 | Formatters have been incorrectly placed under extraction |         |       |  0:23 |   0.5 |
-| Promote extraction entities to meta-model elements       |         |       | 10:44 |  14.7 |
+| Promote extraction entities to meta-model elements       |         |       | 11:19 |  15.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -894,6 +894,7 @@ Notes:
 
 *** STARTED Promote extraction entities to meta-model elements        :story:
     :LOGBOOK:
+    CLOCK: [2019-03-21 Thu 14:55]--[2019-03-21 Thu 15:30] =>  0:35
     CLOCK: [2019-03-21 Thu 14:46]--[2019-03-21 Thu 14:54] =>  0:08
     CLOCK: [2019-03-21 Thu 14:43]--[2019-03-21 Thu 14:45] =>  0:02
     CLOCK: [2019-03-21 Thu 14:12]--[2019-03-21 Thu 14:42] =>  0:30
@@ -943,6 +944,32 @@ Notes:
 - decoration of elements must be done after mapping has taken
   place. We will rely on the output language to determine the correct
   modeline.
+- due to the fact that fabric types are still not in coding, we need
+  to do decoration expansion as a two-phase process. We need to have
+  the exact same transform present in both generation and coding. This
+  is a bit painful and since its only temporary, a waste of time
+  really. A better alternative would be to move all of fabric types
+  into coding first - the simplest possible way, e.g. copy and paste,
+  rename. We could use the injector as is in fabric. Then as the last
+  step in coding, we could do the decoration transform. A simpler
+  alternative is to just move the dynamic transform chain to
+  coding. This means we don't have to touch fabric at all. We can add
+  it to the post-assembly chain. Then we can execute the decoration
+  transform. It must be done post mapping so that we have a concrete
+  language set on the model. This is required both by the dynamic
+  transform as well as the decoration transform.
+
+Tasks:
+
+- update qname in modeline group to string.
+- implement modeline transform.
+- update name to have dot separated and colon separated qualified
+  names
+- move dynamic transforms into coding again.
+- implement decoration transform in post assembly chain after dynamic
+  transform.
+- implement the decoration formatters in generation.
+- remvoe legacy decoration code in extraction.
 
 Merged stories:
 
