@@ -24,11 +24,11 @@
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/mapping_transform.hpp"
 #include "masd.dogen.coding/types/transforms/merge_transform.hpp"
-#include "masd.dogen.coding/types/transforms/model_assembly_chain.hpp"
+#include "masd.dogen.coding/types/transforms/assembly_chain.hpp"
 
 namespace {
 
-const std::string transform_id("coding.transforms.model_assembly_chain");
+const std::string transform_id("coding.transforms.assembly_chain");
 
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -37,7 +37,7 @@ static logger lg(logger_factory(transform_id));
 
 namespace masd::dogen::coding::transforms {
 
-meta_model::model model_assembly_chain::apply(const context& ctx,
+meta_model::model assembly_chain::apply(const context& ctx,
     const meta_model::languages l, const meta_model::model& target,
     const std::list<meta_model::model>& refs) {
     tracing::scoped_chain_tracer stp(lg, "model assembly chain",

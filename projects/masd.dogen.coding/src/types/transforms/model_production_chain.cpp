@@ -31,9 +31,9 @@
 #include "masd.dogen.coding/io/meta_model/model_set_io.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
-#include "masd.dogen.coding/types/transforms/model_assembly_chain.hpp"
-#include "masd.dogen.coding/types/transforms/model_post_processing_chain.hpp"
-#include "masd.dogen.coding/types/transforms/model_set_pre_processing_chain.hpp"
+#include "masd.dogen.coding/types/transforms/assembly_chain.hpp"
+#include "masd.dogen.coding/types/transforms/post_assembly_chain.hpp"
+#include "masd.dogen.coding/types/transforms/pre_assembly_chain.hpp"
 #include "masd.dogen.coding/types/transforms/model_production_chain.hpp"
 
 namespace {
@@ -54,10 +54,10 @@ model_production_chain::apply(const context& ctx,
         transform_id, ms.target().name().id(), *ctx.tracer(), ms);
 
     /*
-     * Then we apply a set of post-processing transforms to the model
-     * set.
+     * We start by applying a set of pre-processing transforms to the
+     * model set, in order to get it into shape for assembly.
      */
-    model_set_pre_processing_chain::apply(ctx, ms);
+    pre_assembly_chain::apply(ctx, ms);
 
     /*
      * Note that we've obtained the target given the user options;
@@ -92,13 +92,13 @@ model_production_chain::apply(const context& ctx,
          * Execute the assembly chain for each of the requested output
          * languages.
          */
-        auto m(model_assembly_chain::apply(ctx, ol, ms.target(), ms.references()));
+        auto m(assembly_chain::apply(ctx, ol, ms.target(), ms.references()));
 
         /*
          * Then apply all of the post-processing transforms to the
          * assembled model.
          */
-        model_post_processing_chain::apply(ctx, m);
+        post_assembly_chain::apply(ctx, m);
         r.push_back(m);
     }
 

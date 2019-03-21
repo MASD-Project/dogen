@@ -10982,7 +10982,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#model_set_pre_processing_chain#</dia:string>
+        <dia:string>#pre_assembly_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>
@@ -11304,13 +11304,13 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O80">
       <dia:attribute name="obj_pos">
-        <dia:point val="-238,48"/>
+        <dia:point val="-237.929,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-238.05,47.95;-207.035,51.65"/>
+        <dia:rectangle val="-237.979,47.95;-206.964,51.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-238,48"/>
+        <dia:point val="-237.929,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="30.914999999999999"/>
@@ -11319,7 +11319,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#model_assembly_chain#</dia:string>
+        <dia:string>#assembly_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>
@@ -11513,7 +11513,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#model_post_processing_chain#</dia:string>
+        <dia:string>#post_assembly_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>
@@ -11871,17 +11871,17 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-222.542,48"/>
+        <dia:point val="-222.471,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-232.057,41.55;-221.792,48.8"/>
+        <dia:rectangle val="-232.057,41.55;-221.721,48.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-222.542,48"/>
-        <dia:point val="-222.542,45"/>
+        <dia:point val="-222.471,48"/>
+        <dia:point val="-222.471,45"/>
         <dia:point val="-232.007,45"/>
         <dia:point val="-232.007,41.6"/>
       </dia:attribute>
@@ -20702,17 +20702,17 @@ another.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-222.542,51.6497"/>
+        <dia:point val="-222.471,51.6497"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-227.752,50.8997;-221.792,57.8"/>
+        <dia:rectangle val="-227.752,50.8997;-221.721,57.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-222.542,51.6497"/>
-        <dia:point val="-222.542,55"/>
+        <dia:point val="-222.471,51.6497"/>
+        <dia:point val="-222.471,55"/>
         <dia:point val="-227.702,55"/>
         <dia:point val="-227.702,57"/>
       </dia:attribute>
@@ -28522,7 +28522,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-177,43.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-207.135,42.3;-176.25,49.9"/>
+        <dia:rectangle val="-207.064,42.3;-176.25,49.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -28531,7 +28531,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-177,43.1"/>
         <dia:point val="-203,43.1"/>
         <dia:point val="-203,49.1"/>
-        <dia:point val="-207.085,49.1"/>
+        <dia:point val="-207.014,49.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>

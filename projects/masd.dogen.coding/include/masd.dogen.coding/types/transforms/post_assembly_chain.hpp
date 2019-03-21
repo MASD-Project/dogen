@@ -18,37 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_MODEL_SET_PRE_PROCESSING_CHAIN_HPP
-#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_MODEL_SET_PRE_PROCESSING_CHAIN_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_ENDOPOST_ASSEMBLY_CHAIN_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_ENDOPOST_ASSEMBLY_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <unordered_set>
 #include "masd.dogen.coding/types/meta_model/model.hpp"
-#include "masd.dogen.coding/types/meta_model/model_set.hpp"
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::coding::transforms {
 
 /**
- * @brief Performs a set of pre-processing transforms to a model set.
+ * @brief Set of transforms to be performed after the merged model has
+ * been assembled.
  */
-class model_set_pre_processing_chain final {
-private:
-    /**
-     * @brief Applies all of the pre-processing transforms to the
-     * supplied model.
-     */
-    static void apply(const context& ctx, meta_model::model& m);
-
+class post_assembly_chain final {
 public:
-    /**
-     * @brief Transform the supplied model set.
-     */
-    static void apply(const context& ctx, meta_model::model_set& ms);
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

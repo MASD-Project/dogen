@@ -34,12 +34,12 @@
 #include "masd.dogen.coding/types/transforms/attributes_transform.hpp"
 #include "masd.dogen.coding/types/transforms/associations_transform.hpp"
 #include "masd.dogen.coding/types/transforms/meta_naming_transform.hpp"
-#include "masd.dogen.coding/types/transforms/model_post_processing_chain.hpp"
+#include "masd.dogen.coding/types/transforms/post_assembly_chain.hpp"
 
 namespace {
 
 const std::string transform_id(
-    "coding.transforms.model_post_processing_chain");
+    "coding.transforms.post_assembly_chain");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -48,8 +48,7 @@ auto lg(logger_factory(transform_id));
 
 namespace masd::dogen::coding::transforms {
 
-void model_post_processing_chain::
-apply(const context& ctx, meta_model::model& m) {
+void post_assembly_chain::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_chain_tracer stp(lg, "model post-processing chain",
         transform_id, m.name().id(), *ctx.tracer(), m);
 

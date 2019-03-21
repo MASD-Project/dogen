@@ -31,12 +31,11 @@
 #include "masd.dogen.coding/types/transforms/parsing_transform.hpp"
 #include "masd.dogen.coding/types/transforms/primitives_transform.hpp"
 #include "masd.dogen.coding/types/transforms/extraction_properties_transform.hpp"
-#include "masd.dogen.coding/types/transforms/model_set_pre_processing_chain.hpp"
+#include "masd.dogen.coding/types/transforms/pre_assembly_chain.hpp"
 
 namespace {
 
-const std::string transform_id(
-    "coding.transforms.model_set_pre_processing_chain");
+const std::string transform_id("coding.transforms.pre_assembly_chain");
 
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -45,8 +44,7 @@ static logger lg(logger_factory(transform_id));
 
 namespace masd::dogen::coding::transforms {
 
-void model_set_pre_processing_chain::
-apply(const context& ctx, meta_model::model& m) {
+void pre_assembly_chain::apply(const context& ctx, meta_model::model& m) {
     /*
      * Module transform must be done before origin and language
      * transforms to get these properties populated on the new
@@ -76,8 +74,7 @@ apply(const context& ctx, meta_model::model& m) {
     helpers::model_pre_processing_validator::validate(m);
 }
 
-void model_set_pre_processing_chain::
-apply(const context& ctx, meta_model::model_set& ms) {
+void pre_assembly_chain::apply(const context& ctx, meta_model::model_set& ms) {
     tracing::scoped_chain_tracer stp(lg, "model set pre-processing chain",
         transform_id, ms.target().name().id(), *ctx.tracer(), ms);
 

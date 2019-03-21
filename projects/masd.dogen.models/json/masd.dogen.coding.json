@@ -1193,7 +1193,7 @@
       ]
     },
     {
-      "name": "transforms::model_set_pre_processing_chain",
+      "name": "transforms::pre_assembly_chain",
       "stereotypes": [
         "masd::handcrafted"
       ],
@@ -1207,14 +1207,14 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::model_assembly_chain",
+      "name": "transforms::assembly_chain",
       "stereotypes": [
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::model_post_processing_chain",
+      "name": "transforms::post_assembly_chain",
       "stereotypes": [
         "masd::handcrafted"
       ],
