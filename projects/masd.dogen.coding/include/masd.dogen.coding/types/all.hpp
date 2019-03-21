@@ -104,6 +104,7 @@
 #include "masd.dogen.coding/types/transforms/resolver_transform.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/artefact_properties.hpp"
+#include "masd.dogen.coding/types/transforms/modelines_transform.hpp"
 #include "masd.dogen.coding/types/helpers/legacy_name_tree_parser.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_database_systems.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_model_properties.hpp"

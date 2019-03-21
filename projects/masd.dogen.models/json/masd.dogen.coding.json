@@ -1183,10 +1183,6 @@
           "type": "boost::shared_ptr<annotations::annotation_factory>"
         },
         {
-          "name": "annotation_expander",
-          "type": "boost::shared_ptr<annotations::annotation_expander>"
-        },
-        {
           "name": "mapping_repository",
           "type": "boost::shared_ptr<helpers::mapping_set_repository>"
         },
@@ -2170,6 +2166,13 @@
           "documentation": "Code generation marker to use for this model, if any.\n"
         }
       ]
+    },
+    {
+      "name": "transforms::modelines_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
