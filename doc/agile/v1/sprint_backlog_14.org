@@ -13,17 +13,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-25 Mon 15:45]
+#+CAPTION: Clock summary at [2019-03-25 Mon 18:41]
 | <75>                                                   |        |      |      |       |
 | Headline                                               | Time   |      |      |     % |
 |--------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                           | *5:07* |      |      | 100.0 |
+| *Total time*                                           | *6:38* |      |      | 100.0 |
 |--------------------------------------------------------+--------+------+------+-------|
-| Stories                                                | 5:07   |      |      | 100.0 |
-| Active                                                 |        | 5:07 |      | 100.0 |
-| Edit release notes for previous sprint                 |        |      | 1:47 |  34.9 |
-| Sprint and product backlog grooming                    |        |      | 0:09 |   2.9 |
-| Create a video demo for the previous sprint's features |        |      | 3:11 |  62.2 |
+| Stories                                                | 6:38   |      |      | 100.0 |
+| Active                                                 |        | 6:38 |      | 100.0 |
+| Edit release notes for previous sprint                 |        |      | 1:47 |  26.9 |
+| Sprint and product backlog grooming                    |        |      | 0:09 |   2.3 |
+| Create a video demo for the previous sprint's features |        |      | 3:11 |  48.0 |
+| Promote extraction entities to meta-model elements     |        |      | 1:31 |  22.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -34,9 +35,9 @@
     CLOCK: [2019-03-25 Mon 10:18]--[2019-03-25 Mon 11:22] =>  1:04
     :END:
 
-    Add github release notes for previous sprint.
+Add github release notes for previous sprint.
 
-    Title: Dogen v1.0.13, "Clube Náutico"
+Title: Dogen v1.0.13, "Clube Náutico"
 
 #+begin_src markdown
 ![Clube Náutico](https://restauranteclubenauticomocamedes.files.wordpress.com/2010/07/nautico_023.jpg)
@@ -155,89 +156,99 @@ Updates to sprint and product backlog.
 
 Demo the delete empty directories feature.
 
-*** Promote extraction entities to meta-model elements                :story:
+*** STARTED Promote extraction entities to meta-model elements        :story:
+:LOGBOOK:
+CLOCK: [2019-03-25 Mon 18:27]--[2019-03-25 Mon 18:41] =>  0:14
+CLOCK: [2019-03-25 Mon 17:27]--[2019-03-25 Mon 18:02] =>  0:35
+CLOCK: [2019-03-25 Mon 16:43]--[2019-03-25 Mon 17:15] =>  0:32
+CLOCK: [2019-03-25 Mon 16:32]--[2019-03-25 Mon 16:42] =>  0:10
+:END:
 
-    As with mappings, profiles and templates, we should make modelines,
-    modeline groups, licences and location strings meta-model elements
-    too. It may require a little bit of thinking because they are not
-    simple KVPs - but we also have support for arrays in annotations.
+As with mappings, profiles and templates, we should make modelines,
+modeline groups, licences and location strings meta-model elements
+too. It may require a little bit of thinking because they are not
+simple KVPs - but we also have support for arrays in annotations.
 
-    The final destination is for users to create modeline configurations
-    or reuse the dogen ones.
+The final destination is for users to create modeline configurations
+or reuse the dogen ones.
 
-    Notes:
+Notes:
 
-    - In theory we should be able to load modelines incrementally, as they
-      are only needed for code generation. However, order of references
-      will matter because we need to validate references to
-      modelines. Actually this is not a problem because we will process
-      them after merging. Decorations can be generated at the very end.
-    - though it is probably overkill, it would be nice to be able to
-      inherit from modelines; then we could define all the common fields
-      on a parent.
-    - decoration repository moves to become properties of the model
-      itself.
-    - decoration properties becomes just decoration. Can stay property of
-      the element, though perhaps we need to distinguish between
-      decoratable elements and those that are not. Make them optional?
-    - modeline_group, modeline, modeline_field, licence_text, marker (real
-      name: location strings) become meta-model entities.
-    - decoration is a mapping of meta-type to modeline name. All coding
-      elements for a kernel map to the technical space, except for build
-      files, etc. This could be achieved by adding some meta-data. The
-      good thing about this approach is that we can create a profile for
-      these and make it transparent to users
-      (=masd::standard_modelines=?).
-    - decoration of elements must be done after mapping has taken
-      place. We will rely on the output language to determine the correct
-      modeline.
-    - due to the fact that fabric types are still not in coding, we need
-      to do decoration expansion as a two-phase process. We need to have
-      the exact same transform present in both generation and coding. This
-      is a bit painful and since its only temporary, a waste of time
-      really. A better alternative would be to move all of fabric types
-      into coding first - the simplest possible way, e.g. copy and paste,
-      rename. We could use the injector as is in fabric. Then as the last
-      step in coding, we could do the decoration transform. A simpler
-      alternative is to just move the dynamic transform chain to
-      coding. This means we don't have to touch fabric at all. We can add
-      it to the post-assembly chain. Then we can execute the decoration
-      transform. It must be done post mapping so that we have a concrete
-      language set on the model. This is required both by the dynamic
-      transform as well as the decoration transform.
+- In theory we should be able to load modelines incrementally, as they
+  are only needed for code generation. However, order of references
+  will matter because we need to validate references to
+  modelines. Actually this is not a problem because we will process
+  them after merging. Decorations can be generated at the very end.
+- though it is probably overkill, it would be nice to be able to
+  inherit from modelines; then we could define all the common fields
+  on a parent.
+- decoration repository moves to become properties of the model
+  itself.
+- decoration properties becomes just decoration. Can stay property of
+  the element, though perhaps we need to distinguish between
+  decoratable elements and those that are not. Make them optional?
+- modeline_group, modeline, modeline_field, licence_text, marker (real
+  name: location strings) become meta-model entities.
+- decoration is a mapping of meta-type to modeline name. All coding
+  elements for a kernel map to the technical space, except for build
+  files, etc. This could be achieved by adding some meta-data. The
+  good thing about this approach is that we can create a profile for
+  these and make it transparent to users
+  (=masd::standard_modelines=?).
+- decoration of elements must be done after mapping has taken
+  place. We will rely on the output language to determine the correct
+  modeline.
+- due to the fact that fabric types are still not in coding, we need
+  to do decoration expansion as a two-phase process. We need to have
+  the exact same transform present in both generation and coding. This
+  is a bit painful and since its only temporary, a waste of time
+  really. A better alternative would be to move all of fabric types
+  into coding first - the simplest possible way, e.g. copy and paste,
+  rename. We could use the injector as is in fabric. Then as the last
+  step in coding, we could do the decoration transform. A simpler
+  alternative is to just move the dynamic transform chain to
+  coding. This means we don't have to touch fabric at all. We can add
+  it to the post-assembly chain. Then we can execute the decoration
+  transform. It must be done post mapping so that we have a concrete
+  language set on the model. This is required both by the dynamic
+  transform as well as the decoration transform.
+- actually, we can only perform decoration expansion after we done the
+  mapping to the output language. We need this information to
+  determine the modelines. We need to unwind all the work on moving
+  dynamic factories into coding.
 
-    Tasks:
+Tasks:
 
-    - update qname in modeline group to string.
-    - implement modeline transform.
-    - update name to have dot separated and colon separated qualified
-      names
-    - move dynamic transforms into coding again.
-    - implement decoration transform in post assembly chain after dynamic
-      transform. Use the qualified name to find the correct modeline.
-    - implement the decoration formatters in generation.
-    - remvoe legacy decoration code in extraction.
+- update qname in modeline group to string.
+- implement modeline transform.
+- update name to have dot separated and colon separated qualified
+  names
+- move dynamic transforms into coding again.
+- implement decoration transform in post assembly chain after dynamic
+  transform. Use the qualified name to find the correct modeline.
+- implement the decoration formatters in generation.
+- remvoe legacy decoration code in extraction.
 
-    Merged stories:
+Merged stories:
 
-    *Licences as meta-model elements*
+*Licences as meta-model elements*
 
-    Continuing the trend, licences are also moeta-model elements. We can
-    use the comments of a class to convey the licence text. The name
-    becomes the license name. Users use named configurations to assign
-    licences to elements. All artefacts produced across all facets for an
-    element will share the same licence. Users can easily add their own
-    licence (at whichever level they choose, product line, product,
-    component) and then refer to it. The only change is that they must now
-    prefix it with the model name (e.g. =masd::licenses::gpl_v2=).
+Continuing the trend, licences are also moeta-model elements. We can
+use the comments of a class to convey the licence text. The name
+becomes the license name. Users use named configurations to assign
+licences to elements. All artefacts produced across all facets for an
+element will share the same licence. Users can easily add their own
+licence (at whichever level they choose, product line, product,
+component) and then refer to it. The only change is that they must now
+prefix it with the model name (e.g. =masd::licenses::gpl_v2=).
 
-    In theory we should be able to load licences incrementally, as they
-    are only needed for code generation. However, order of references will
-    matter because we need to validate references to licences.
+In theory we should be able to load licences incrementally, as they
+are only needed for code generation. However, order of references will
+matter because we need to validate references to licences.
 
-    We should also allow for both:
+We should also allow for both:
 
-    - full licence: used later at the product level.
-    - licence summary: used for preambles in files.
+- full licence: used later at the product level.
+- licence summary: used for preambles in files.
 
 ** Deprecated
