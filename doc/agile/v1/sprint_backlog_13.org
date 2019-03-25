@@ -14,27 +14,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-21 Thu 15:35]
+#+CAPTION: Clock summary at [2019-03-25 Mon 09:38]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *73:47* |       |       | 100.0 |
+| *Total time*                                             | *75:29* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 73:47   |       |       | 100.0 |
-| Active                                                   |         | 73:47 |       | 100.0 |
-| Edit release notes for previous sprint                   |         |       |  2:22 |   3.2 |
-| Sprint and product backlog grooming                      |         |       |  9:57 |  13.5 |
-| Create a video demo for the sprint's features            |         |       |  3:47 |   5.1 |
+| Stories                                                  | 75:29   |       |       | 100.0 |
+| Active                                                   |         | 75:29 |       | 100.0 |
+| Edit release notes for previous sprint                   |         |       |  2:22 |   3.1 |
+| Sprint and product backlog grooming                      |         |       | 11:22 |  15.1 |
+| Create a video demo for the sprint's features            |         |       |  3:47 |   5.0 |
 | Make projects directory env optional                     |         |       |  0:10 |   0.2 |
 | Clang-cl builds are failing due to memory leak reporting |         |       |  0:45 |   1.0 |
-| Add tests for tracing, reporting and diffing             |         |       |  5:46 |   7.8 |
-| Delete extra files appears broken at present             |         |       |  6:26 |   8.7 |
-| Empty directories should be deleted                      |         |       |  5:37 |   7.6 |
-| Changes to stitch templates are not reported correctly   |         |       |  1:09 |   1.6 |
-| Orchestration test is broken on Windows                  |         |       |  2:40 |   3.6 |
-| Code generation of tests for dogen models                |         |       | 23:22 |  31.7 |
+| Add tests for tracing, reporting and diffing             |         |       |  5:46 |   7.6 |
+| Delete extra files appears broken at present             |         |       |  6:26 |   8.5 |
+| Empty directories should be deleted                      |         |       |  5:37 |   7.4 |
+| Changes to stitch templates are not reported correctly   |         |       |  1:09 |   1.5 |
+| Orchestration test is broken on Windows                  |         |       |  2:40 |   3.5 |
+| Code generation of tests for dogen models                |         |       | 23:22 |  31.0 |
 | Formatters have been incorrectly placed under extraction |         |       |  0:23 |   0.5 |
-| Promote extraction entities to meta-model elements       |         |       | 11:23 |  15.4 |
+| Generate binaries from clang-cl                          |         |       |  0:17 |   0.4 |
+| Promote extraction entities to meta-model elements       |         |       | 11:23 |  15.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -233,6 +234,8 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-03-25 Mon 09:01]--[2019-03-25 Mon 09:19] =>  0:18
+    CLOCK: [2019-03-23 Sat 16:12]--[2019-03-23 Sat 17:19] =>  1:07
     CLOCK: [2019-03-21 Thu 09:57]--[2019-03-21 Thu 10:15] =>  0:18
     CLOCK: [2019-03-21 Thu 09:02]--[2019-03-21 Thu 09:56] =>  0:54
     CLOCK: [2019-03-21 Thu 06:09]--[2019-03-21 Thu 06:58] =>  0:49
@@ -892,6 +895,25 @@ Notes:
   future.
 - enable_unique_file_names: are we using this?
 
+*** STARTED Generate binaries from clang-cl                           :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-25 Mon 09:20]--[2019-03-25 Mon 09:37] =>  0:17
+    :END:
+
+It seems MSVC builds cannot run all tests. We need to ship some
+binaries on windows, so since clang-cl is looking ok ship those
+binaries instead.
+
+Merged stories:
+
+*Consider adding compiler name to package*
+
+At present we are not uploading clang packages into bintray. This is
+because they have the same name as the GCC and MSVC packages. If we
+add the compiler name to the package we can then upload them too. This
+would be good because we can then test to make sure all packages are
+working correctly.
+
 *** STARTED Promote extraction entities to meta-model elements        :story:
     :LOGBOOK:
     CLOCK: [2019-03-21 Thu 15:31]--[2019-03-21 Thu 15:35] =>  0:04
@@ -993,6 +1015,49 @@ We should also allow for both:
 
 - full licence: used later at the product level.
 - licence summary: used for preambles in files.
+
+*** Configuration classes with traits                                 :story:
+
+There are several aspects related to configuration:
+
+- the c++ class itself
+- the fields with names and types for annotations. These are
+  static-like functions that will inject the field definition into the
+  annotation repository via initialisers / Boost.DI. We could have a
+  top-level class that includes all of these classes and takes in the
+  annotation repository and asks each of them to register. The class
+  is code-generated by looking for each class in the model. e.g. a
+  registrar but for the
+  meta-data. =masd::configuration_registrar=. Top-level, one per
+  model. has a list of names marked as config or config factory.
+- the "factory" class which reads the fields to create the c++
+  class. In effect the factory class should contain both the fields,
+  registration etc. as well as the reading the C++ from
+  meta-data. Users can then create two related types:
+  =masd::configuration= and =masd::configuration_factory=, with the
+  factory pointing to the configuration. The configuration must
+  contain the mappings to annotation types. Actually the configuration
+  should provide the static method for registration so that we may
+  register fields even without a factory. This is useful for cases
+  such as enablement where we use templates and may not instantiate
+  the class directly. Or if we could fuse the factory with the class,
+  that would make life even easier. Classes should also have
+  associated "field documentation". We should be able to call a method
+  in annotations and produce all of the field documentation.
+- the transform which uses the factory to populate meta-model
+  elements.
+
+When we start code-generating the first tree, we should allow users to
+enter the type name and other field related parameters as
+configuration on the meta-element.
+
+*** Make use of association relationships                             :story:
+
+When we start having to create element such as visitor etc. it would
+be nice to rely on the association between visitor and visitable to
+figure out what the visitor is visiting. This and other simple cases
+can be inferred simply by looking at the end points of the
+association.
 
 *** Code generate all contexts                                        :story:
 
@@ -1105,6 +1170,10 @@ What we really mean is technical space:
 
 - input technical space
 - output technical space
+
+When this is done we should also introduce the concept of
+=masd.technical_space= which then toggles knobs. For example, if set
+to C++, both input and output TS become C++.
 
 *** Colours test model is invalid at present                          :story:
 

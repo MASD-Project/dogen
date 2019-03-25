@@ -2620,14 +2620,6 @@ Links:
 
 - [[https://www.bfilipek.com/2018/10/strings17talk.html][Let's Talk About String Operations in C++17]]
 
-*** Consider adding compiler name to package                          :story:
-
-At present we are not uploading clang packages into bintray. This is
-because they have the same name as the GCC and MSVC packages. If we
-add the compiler name to the package we can then upload them too. This
-would be good because we can then test to make sure all packages are
-working correctly.
-
 *** Fix clang-cl broken test                                          :story:
 
 We have one test failing on clang-cl, ref impl:
