@@ -272,18 +272,11 @@ contains all of the logs, under the directory ```log```.
 
 There are a limited number of videos available about Dogen, though we
 are trying to get into the habit of demoing new features at the end of
-each sprint.
+each sprint. The videos are gathered under the [MASD -
+Dogen](https://www.youtube.com/playlist?list=PLwfrwe216gF0RmXOv8yCinHfv9QeSRDcm)
+playlist. The demo of the latest sprint is available here:
 
-## v1.0.12 Demo
-
-[![Sprint 1.0.12 Demo](https://img.youtube.com/vi/Tt34P3JXzeE/0.jpg)](https://www.youtube.com/watch?v=Tt34P3JXzeE)
-
-## v0.0.20 Demo (very old)
-
-In addition, there is also a very old video that should at least give
-you an idea of its workflow:
-
-[![Sprint 0.0.20 Demo](https://img.youtube.com/vi/Z7k8qbImXkU/0.jpg)](https://youtu.be/Z7k8qbImXkU)
+[![Sprint 1.0.12 Demo](https://img.youtube.com/vi/yerm2xiKBqA/0.jpg)](https://youtu.be/yerm2xiKBqA)
 
 # Blog Posts
 
