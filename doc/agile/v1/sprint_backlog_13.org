@@ -14,7 +14,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-25 Mon 10:07]
+#+CAPTION: Clock summary at [2019-03-25 Mon 10:08]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
@@ -232,7 +232,8 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6506470333200023552][LinkedIn]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2019-03-25 Mon 10:08]
     :LOGBOOK:
     CLOCK: [2019-03-25 Mon 09:38]--[2019-03-25 Mon 10:07] =>  0:29
     CLOCK: [2019-03-25 Mon 09:01]--[2019-03-25 Mon 09:19] =>  0:18
@@ -896,7 +897,8 @@ Notes:
   future.
 - enable_unique_file_names: are we using this?
 
-*** STARTED Generate binaries from clang-cl                           :story:
+*** COMPLETED Generate binaries from clang-cl                         :story:
+    CLOSED: [2019-03-25 Mon 10:08]
     :LOGBOOK:
     CLOCK: [2019-03-25 Mon 09:20]--[2019-03-25 Mon 09:37] =>  0:17
     :END:
@@ -915,7 +917,8 @@ add the compiler name to the package we can then upload them too. This
 would be good because we can then test to make sure all packages are
 working correctly.
 
-*** STARTED Promote extraction entities to meta-model elements        :story:
+*** POSTPONED Promote extraction entities to meta-model elements      :story:
+    CLOSED: [2019-03-25 Mon 10:08]
     :LOGBOOK:
     CLOCK: [2019-03-21 Thu 15:31]--[2019-03-21 Thu 15:35] =>  0:04
     CLOCK: [2019-03-21 Thu 14:55]--[2019-03-21 Thu 15:30] =>  0:35
