@@ -3638,7 +3638,7 @@ model directory.#</dia:string>
         <dia:point val="162.5,39"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="153.478,31.15;163.25,39.8"/>
+        <dia:rectangle val="153.477,31.15;163.25,39.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4029,7 +4029,7 @@ model directory.#</dia:string>
         <dia:point val="138.77,44.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="138.02,43.45;152.728,59.8"/>
+        <dia:rectangle val="138.02,43.45;152.727,59.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4450,7 +4450,7 @@ model directory.#</dia:string>
         <dia:point val="3,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,21.95;30.13,40.55"/>
+        <dia:rectangle val="2.95,21.95;30.13,41.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4462,7 +4462,7 @@ model directory.#</dia:string>
         <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="18.500000000000004"/>
+        <dia:real val="19.300000000000004"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -5082,7 +5082,7 @@ model directory.#</dia:string>
         <dia:point val="162.5,43.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="161.75,42.65;173.573,59.7498"/>
+        <dia:rectangle val="161.75,42.65;173.572,59.7498"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
