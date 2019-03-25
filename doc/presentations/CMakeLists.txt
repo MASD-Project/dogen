@@ -44,7 +44,6 @@ if (WITH_LATEX)
             configure_file(${CMAKE_CURRENT_SOURCE_DIR}/${file}
               ${presentation_dir}/${file})
 
-            message(STATUS "${presentation_dir}/${file_name}.pdf")
             add_custom_target(presentation_${file} ALL
                 COMMENT "Generating presentation ${file}"
                 DEPENDS ${presentation_dir}/${file}

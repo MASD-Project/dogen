@@ -1,0 +1,81 @@
+\documentclass{beamer}
+\mode<presentation>
+{ \usetheme{boxes} }
+
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{csquotes}
+\usepackage[backend=bibtex]{biblatex}
+
+\title{Dogen v1.0.13, \enquote{Clube Náutico}}
+
+\author{Marco Craveiro \\
+  Domain Driven Development
+}
+\date{\today}
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\bibliography{sprint_13_features}
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Tests facet}
+
+\begin{itemize}
+
+  \pause
+
+\item Created mainly for internal purposes, but since it is a facet,
+  it is exposed to end users.
+
+  \pause
+
+\item You can enable it on your own models if you want to test dogen
+  types, but most likely you'll want it disabled. However, it may be
+  useful to report problems.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Delete empty directories}
+
+\begin{itemize}
+
+  \pause
+
+\item Enabling and disabling facets results in the creation of lots of
+  empty directories. These are not picked up by git.
+
+  \pause
+
+\item New setting now allows the clean up of empty directories.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Next Sprint}
+
+\begin{itemize}
+\item \textbf{Mission statement}: Move decoration related elements
+  into metamodel. Start work on moving annotation profiles into
+  metamodel.
+\end{itemize}
+
+\end{frame}
+
+\end{document}
