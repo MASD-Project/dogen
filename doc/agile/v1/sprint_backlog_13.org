@@ -267,7 +267,7 @@ For all other architectures and/or operative systems, you will need to build Dog
     CLOCK: [2019-03-11 Mon 06:31]--[2019-03-11 Mon 06:43] =>  0:12
     :END:
 
- Updates to sprint and product backlog.
+Updates to sprint and product backlog.
 
 *** COMPLETED Disable global hashing on coding                        :story:
     CLOSED: [2019-03-11 Mon 06:47]

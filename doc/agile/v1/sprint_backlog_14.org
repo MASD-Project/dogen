@@ -1,0 +1,195 @@
+#+title: Sprint Backlog 14
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) }
+
+* Mission Statement
+
+- Finish work on moving decorations to metamodel.
+- Start work on moving profiles to metamodel.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2019-03-25 Mon 11:23]
+| <75>                                   |        |      |      |       |
+| Headline                               | Time   |      |      |     % |
+|----------------------------------------+--------+------+------+-------|
+| *Total time*                           | *1:13* |      |      | 100.0 |
+|----------------------------------------+--------+------+------+-------|
+| Stories                                | 1:13   |      |      | 100.0 |
+| Active                                 |        | 1:13 |      | 100.0 |
+| Edit release notes for previous sprint |        |      | 1:04 |  87.7 |
+| Sprint and product backlog grooming    |        |      | 0:09 |  12.3 |
+#+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
+#+end:
+
+*** STARTED Edit release notes for previous sprint                    :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-25 Mon 10:18]--[2019-03-25 Mon 11:22] =>  1:04
+    :END:
+
+Add github release notes for previous sprint.
+
+Title: Dogen v1.0.13, "Clube Náutico"
+
+#+begin_src markdown
+![Clube Náutico](https://restauranteclubenauticomocamedes.files.wordpress.com/2010/07/nautico_023.jpg)
+_Esplanada do Clube Náutico, Moçamedes, Namibe Province, Angola. (C) 2019 [Nautico Club Site](https://restauranteclubenauticomocamedes.wordpress.com)_.
+
+# Overview
+
+Sprint 13 offered yet another 2-week effort, with the main emphasis on solving the unit testing of generated code. If you recall, we had some sparse manual tests for these, delightfully called "the canned tests". There weren't brilliant, but provided _some_ coverage. Sadly, we ended up having to disable them due to weird and wonderful failures on OSX and Windows which we could not reproduce on Linux, and were rather difficult to get to the bottom of via CI because of the way the tests were designed. As the next few sprints are all about very (hard-)core changes, we had to make sure a strong testing base is in place before we can proceed with the refactoring. As usual, the work was much harder than expected, taking us two sprints to get into a good place: sprint 12 was all about the system test story, and sprint 13 is all about the unit tests story. Fortunately, we still managed to sneak in one user facing feature, for which there is a simple demo below.
+
+The below chart breaks down the cost of each story worked percentage-wise in terms of the overall sprint time.
+
+The next sections provide a summary of the most significant stories.
+
+# Internal Changes
+
+## Code generation of tests for dogen models
+
+This story had started on the previous sprint, but, as always, proved to be much more complicated than anticipated. Though in theory adding tests seems just like adding another facet - and since we have quite a few of these, we were pretty confident - in practice there were subtle differences that caused large problems. These in turn forced some changes to the core of dogen. On the plus side, the pain seems to be worth it, as we are now testing pretty much all facets for all generated objects, across both Dogen itself and the Reference Implementation on all supported platforms, and they are all green:
+
+The downside of it is that the build time has gone up quite considerably, given that we now need to generate the test data facet for all of these types, plus the tests too:
+
+Sadly, as a result of this increase, MSVC is no longer able to complete the builds within the allotted time. Fortunately our clang-cl builds are deemed good enough (only one test failure across some 2.7k tests) so we'll be shipping that to users from now on.
+
+## Sprint and product backlog grooming
+
+In this sprint we spent quite a lot of time grooming the backlogs. This is something which never gets much of a mention, but which I believe is one of the most important aspects of Agile: [you need to keep your product backlog in good shape](http://mcraveiro.blogspot.com/2016/01/nerd-food-on-product-backlogs.html). Perhaps 15% of a sprint may be a tad excessive, but we do have a [hefty product backlog](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org), with over 550 user stories at various levels of detail. Also, given that we have just finished a massive rewrite of the theoretical basis for dogen, it is no surprise that a lot of the stories started to bit-rot. This clean up was mainly to look for low hanging fruit and remove all stories which are completely deprecated; subsequent clean-ups will delve more into the detail of the stories.
+
+# User visible changes
+
+There was one user visible change this sprint: handling of empty directories. The sprint demo shows how it works.
+
+[![Sprint 1.0.12 Demo](https://img.youtube.com/vi/Tt34P3JXzeE/0.jpg)](https://www.youtube.com/watch?v=Tt34P3JXzeE)
+
+## Delete empty directories
+
+In the past we used to generate all facets for all models, Dogen and Reference Implementation. However, over time we ended up having to disable most facets as the build time was getting out of control. Dogen correctly deleted all of the generated files when the facets were disabled, but left behind a number of empty directories. Worse: because git does not care about empty directories, we weren't even aware of their existence until some speculative filesystem browsing revealed them. This sprint adds a new knob to delete any empty directory under the project: ```delete_empty_directories```. Together with ```delete_extra_files```, this should mean that most generated lint is taken care of now.
+
+```
+#DOGEN masd.extraction.delete_extra_files=true
+#DOGEN masd.extraction.delete_empty_directories=true
+```
+# Next Sprint
+
+We risk repeating the same words as we used on Sprint 12, but here it goes any way: that we have the testing in place, our key objective for next sprint is to move all of the decoration related code into the meta-model. We started work on this in the previous sprint but sadly ran out of time. In addition, we hope to finally make some  inroads against moving annotations to the metamodel. This will be a significant major feature, at long last.
+
+# Binaries
+
+You can download binaries from [Bintray](https://bintray.com/masd-project/main/dogen) for OSX, Linux and Windows (all 64-bit):
+
+- [dogen_1.0.13_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.13/dogen_1.0.13_amd64-applications.deb)
+- [dogen-1.0.13-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.13/dogen-1.0.13-Darwin-x86_64.dmg)
+- [dogen-1.0.13-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/dogen-1.0.13-Windows-AMD64.msi)
+
+**Note**: Windows builds are now generated using clang-cl rather than MSVC.
+
+For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
+#+end_src
+
+- [[https://twitter.com/MarcoCraveiro/status/1105141000589193216][Tweet]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6506470333200023552][LinkedIn]]
+- [[https://gitter.im/MASD-Project/Lobby][Gitter]]
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-25 Mon 10:08]--[2019-03-25 Mon 10:17] =>  0:09
+    :END:
+
+Updates to sprint and product backlog.
+
+*** Create a video demo for the previous sprint's features            :story:
+
+Demo the delete empty directories feature.
+
+*** Promote extraction entities to meta-model elements                :story:
+
+As with mappings, profiles and templates, we should make modelines,
+modeline groups, licences and location strings meta-model elements
+too. It may require a little bit of thinking because they are not
+simple KVPs - but we also have support for arrays in annotations.
+
+The final destination is for users to create modeline configurations
+or reuse the dogen ones.
+
+Notes:
+
+- In theory we should be able to load modelines incrementally, as they
+  are only needed for code generation. However, order of references
+  will matter because we need to validate references to
+  modelines. Actually this is not a problem because we will process
+  them after merging. Decorations can be generated at the very end.
+- though it is probably overkill, it would be nice to be able to
+  inherit from modelines; then we could define all the common fields
+  on a parent.
+- decoration repository moves to become properties of the model
+  itself.
+- decoration properties becomes just decoration. Can stay property of
+  the element, though perhaps we need to distinguish between
+  decoratable elements and those that are not. Make them optional?
+- modeline_group, modeline, modeline_field, licence_text, marker (real
+  name: location strings) become meta-model entities.
+- decoration is a mapping of meta-type to modeline name. All coding
+  elements for a kernel map to the technical space, except for build
+  files, etc. This could be achieved by adding some meta-data. The
+  good thing about this approach is that we can create a profile for
+  these and make it transparent to users
+  (=masd::standard_modelines=?).
+- decoration of elements must be done after mapping has taken
+  place. We will rely on the output language to determine the correct
+  modeline.
+- due to the fact that fabric types are still not in coding, we need
+  to do decoration expansion as a two-phase process. We need to have
+  the exact same transform present in both generation and coding. This
+  is a bit painful and since its only temporary, a waste of time
+  really. A better alternative would be to move all of fabric types
+  into coding first - the simplest possible way, e.g. copy and paste,
+  rename. We could use the injector as is in fabric. Then as the last
+  step in coding, we could do the decoration transform. A simpler
+  alternative is to just move the dynamic transform chain to
+  coding. This means we don't have to touch fabric at all. We can add
+  it to the post-assembly chain. Then we can execute the decoration
+  transform. It must be done post mapping so that we have a concrete
+  language set on the model. This is required both by the dynamic
+  transform as well as the decoration transform.
+
+Tasks:
+
+- update qname in modeline group to string.
+- implement modeline transform.
+- update name to have dot separated and colon separated qualified
+  names
+- move dynamic transforms into coding again.
+- implement decoration transform in post assembly chain after dynamic
+  transform. Use the qualified name to find the correct modeline.
+- implement the decoration formatters in generation.
+- remvoe legacy decoration code in extraction.
+
+Merged stories:
+
+*Licences as meta-model elements*
+
+Continuing the trend, licences are also moeta-model elements. We can
+use the comments of a class to convey the licence text. The name
+becomes the license name. Users use named configurations to assign
+licences to elements. All artefacts produced across all facets for an
+element will share the same licence. Users can easily add their own
+licence (at whichever level they choose, product line, product,
+component) and then refer to it. The only change is that they must now
+prefix it with the model name (e.g. =masd::licenses::gpl_v2=).
+
+In theory we should be able to load licences incrementally, as they
+are only needed for code generation. However, order of references will
+matter because we need to validate references to licences.
+
+We should also allow for both:
+
+- full licence: used later at the product level.
+- licence summary: used for preambles in files.
+
+** Deprecated
