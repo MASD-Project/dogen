@@ -14,6 +14,10 @@ environment:
       generator: Visual Studio 15 2017 Win64
       build_group: Continuous
 
+matrix:
+  allow_failures:
+    - compiler: msvc
+
 configuration:
   - Release
   - Debug
@@ -46,7 +50,7 @@ build_script:
   - ps: ctest --extra-verbose --script ".ctest.cmake,configuration_type=$env:configuration,generator=$env:generator,compiler=$env:compiler,build_group=$env:build_group,minimal_packaging=1";
 
 artifacts:
-  - path: build/output/msvc/Release/stage/pkg/dogen-1.0.13-Windows-AMD64.msi
+  - path: build/output/clang-cl/Release/stage/pkg/DOGEN-1.0.13-Windows-AMD64.msi
     name: x86_64 MSI
 
 notifications:
@@ -70,7 +74,7 @@ deploy:
     subject: masd-project
     repo: main
     package: dogen
-    artifact: build/output/msvc/Release/stage/pkg/dogen-1.0.13-Windows-AMD64.msi
+    artifact: build/output/clang-cl/Release/stage/pkg/DOGEN-1.0.13-Windows-AMD64.msi
     version: 1.0.13
     publish: true
     override: true
