@@ -60,63 +60,6 @@ figure out what the visitor is visiting. This and other simple cases
 can be inferred simply by looking at the end points of the
 association.
 
-*** Code generate all contexts                                        :story:
-
-At present we are manually generating the transform contexts across
-all models. The main reason for this is that tracer does not support
-IO. There may be other reasons such as the annotations factory and
-annotation expander. We should just add IO support for all types that
-need it and code generate the contexts.
-
-*** Add "ioable" handcrafted types                                    :story:
-
-Whenever we need to mix and match generated types with handcrafted
-types, it would be really useful to create the missing facets. The
-main one is IO, but we probably also need test data support because
-the tests would fail. We could simply handcraft the types on those
-facets. It would be nice to have profiles like:
-
-: masd::handcrafted_types
-: masd::handcrafted_io
-: masd::handcrafted_test_data
-
-We could do with a simpler word for handcrafted. Check the literature.
-
-Once this is in place, we could have some top-level stereotype that
-aggregates all three (=masd::???=) and we can then tag types with it.
-
-*** Read =generate_preamble= from dynamic object                      :story:
-
-We need to generate the field definitions and update the general
-settings factory.
-
-*** Improve formatters code generation marker                         :story:
-
-Things the marker can/should have:
-
-- model level version;
-- the dogen version too. However, this will make all our tests break
-  every time there is a new commit so perhaps we need to have this
-  switched off by default.
-
-*** Consider introducing formatter "location strings"                 :story:
-
-In MDSD, we have the notion of "location strngs" (volter, p.153):
-
-#+begin_quote
-A third and very useful technique is the application of location
-strings that identify the transformation or the template used, as well
-as the underlying model elements in the generated code. A location
-string might look like this:
-
-: [2003-10-04 17:05:36]
-: GENERATED FROM TEMPLATE SomeTemplate
-: MODEL ELEMENT aPackage::aClass::SomeOperation().
-#+end_quote
-
-This may be a useful thing. However, adding dates and dogen version
-etc will cause spurious diffs.
-
 *** Clean up injection element properties                             :story:
 
 When PDMs were deemed a hack, we did a number of quick hacks to
@@ -155,11 +98,6 @@ now be placed under the =masd= namespace: =masd::lannguage_agnostic=,
 =masd::la= or maybe =masd::pim=. This should be done when we place
 mappings in the meta-model.
 
-*** Location of =--byproduct-directory= not respected                 :story:
-
-It seems that at present we are not honouring the directory supplied
-by the user.
-
 *** Rename "language" to "technical space"                            :story:
 
 We are using the word "language" in several places:
@@ -180,27 +118,6 @@ to C++, both input and output TS become C++.
 
 We should probably generate this model; at the moment, we have many
 missing elements/meta-data, causing dogen to choke.
-
-*** Disabling facet after regeneration does not delete file           :story:
-
-Steps to reproduce:
-
-- enable tests for all types.
-- generate model.
-- disable tests for one type.
-- generate model.
-
-Expected that disabling tests for type would result in file
-deletion. Instead nothing happens. However, if one deletes the
-generated file for the type, then the next generation will correctly
-not generate code for the type.
-
-It seems there is some weird mismatch between enablement and lint
-removal: we are probably adding the file to the list of expected
-files, regardless of whether the facet is enabled or not. However,
-this is not always the case because we've proven that enabling and
-disabling a facet correctly results in the deletion of files. It must
-be something to do with how local enablement is handled.
 
 *** Pre-includes defines                                              :story:
 
@@ -270,20 +187,6 @@ the CMake file. This means that we need to somehow map one formatter
 to multiple facets. For now we just hacked it and used one of the
 facets. It means that if you disable CMake but enable testing you'll
 still end up with the testing CMake file.
-
-*** Fabric generates forward decls with no path                       :story:
-
-The following looks strange:
-
-: 2019-03-06 17:30:20.074618 [DEBUG] [quit.cpp.formatters.workflow] Procesing element: <dogen><hello_world><transformation_error>
-: 2019-03-06 17:30:20.074627 [DEBUG] [quit.cpp.formatters.workflow] Meta name: <dogen><generation><cpp><fabric><forward_declarations>
-: 2019-03-06 17:30:20.074636 [DEBUG] [quit.cpp.formatters.workflow] Using the stock formatter: masd.extraction.cpp.serialization.forward_declarations
-: 2019-03-06 17:30:20.074647 [DEBUG] [generation.cpp.formatters.assistant] Processing element: <dogen><hello_world><transformation_error> for archetype: masd.extraction.cpp.serialization.forward_declarations
-: 2019-03-06 17:30:20.074659 [DEBUG] [quit.cpp.formatters.workflow] Formatted artefact. Path: ""
-
-This could help explain the problems we're having with empty
-artefacts. This should be fixed with the new approach to forward
-declarations.
 
 *** Disable facets on element state                                   :story:
 
@@ -488,25 +391,10 @@ we can do the profile processing on the first pass, and we can even
 generate the "dynamic profiles" as real meta-model elements, created
 on the fly.
 
-*** Updates to debian package                                         :story:
-
-There are several problems with the debian package:
-
-- shared folder is =dogen= not =masd.dogen=
-- no hello world sample; need json and dia versions
-- package name is =dogen-applications=, should be masd...
-
 *** Single reporting format option                                    :story:
 
 - use org-mode for tracing and reporting etc
 - byproducts dir does not have =cli=
-
-*** Update metrics in OpenHub                                         :story:
-
-For some reason our metrics are stuck at 5 months ago or so. It is
-actually mildly useful to know the number of lines of code etc.
-
-We probably need to delete and re-add the project.
 
 *** Rename =fallback_element_type=                                    :story:
 
@@ -1126,30 +1014,6 @@ Ideally we should have:
 - a check that a stereotype has not yet been registered so only one
   consumer can bind to it.
 
-*** Move wale templates from the data directory                       :story:
-
-At present we have wale templates under the data directory. This is
-not the right location. These are part of a model just like stitch
-templates. There is one slight wrinkle though: if a user attempts to
-create a dogen formatter (say if plugins were supported), then we need
-access to the template from the debian package. So whilst they should
-live in the appropriate model (e.g. =generation.cpp=,
-=generation.csharp=), they also need to be packaged and shipped.
-
-Interestingly, so will all dogen models which are defining annotations
-and profiles. We need to rethink the data directory, separating system
-models from dogen models somehow. In effect, the data directory will
-be, in the future, the system models directory.
-
-So, in conclusion, two use cases for wale templates:
-
-- regular model defines a wale template and makes use of it. Template
-  should be with the model, just like stitch templates. However,
-  unlike stitch, there should be a directory for them.
-- user model wants to define a new formatter. It will make use of
-  dogen profiles and wale templates. These must be in the future data
-  directory somehow.
-
 *** Consider making fully generated files read-only                   :story:
 
 We could add emacs/vi tags to make fully generated files read-only -
@@ -1182,20 +1046,6 @@ Once we support JSON fully we should go through all of the uses of
 JSON we have at present and replace them with the JSON serialised
 version of the types.
 
-*** Add support for decoration configuration overrides                :story:
-
-At present we have hard-coded the decoration configuration to be read
-from the root object only. In an ideal world, we should be able to
-override some of these such as the copyrights. It may not make sense
-to be able to override them all though.
-
-*** Copyright holders is scalar when it should be an array            :story:
-
-At present its only possible to specify a single copyright holder. It
-should be handled the same was as odb parameters, but because that is
-done with a massive hack, we are not going to extend the hack to
-copyright holders.
-
 *** Add annotation types description                                  :story:
 
 It would be useful to have a description of the purpose of the field
@@ -1205,11 +1055,6 @@ ideally we need a command line argument to dump all fields and their
 descriptions so that users know what's available.
 
 This should be sorted by qualified name.
-
-*** Check if enable kernel directories on extraction                  :story:
-
-When we moved the kernel logic into yarn from quilt, we did not rename
-the traits.
 
 *** Computation of enablement values                                   :epic:
 
@@ -1412,80 +1257,6 @@ because the include dependency only has a directive, we cannot tell
 which formatter it belonged to. This would require some augmenting of
 the directive to record the "origination" formatter.
 
-*** Update copyright notices                                          :story:
-
-We need to update all notices to reflect personal ownership until DDC
-was formed, and then ownership by DDC.
-
-- first update to personal ownership has been done, but we need to
-  test if multiple copyright entries is properly supported.
-
-*** Add frontends and backends to =info= command line option          :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to know what frontends and backends
-are available in my dogen version so that I don't try to use features
-that are not present.
-#+end_quote
-
-With the static registration of importers and backends, we should add
-some kind of mechanism to display whats on offer in the command line,
-via the =--info= option. This is slightly tricky because the fronend
-and backend models do not know of the command line. We need a method
-in the frontend that returns a description and a method in the
-workflow that returns all descriptions. These must be static. Then
-knitter can then call these methods and build the info text.
-
-*** Ignore ODB files automatically                                    :story:
-
-At present we are adding the following regular expressions to knitter
-whenever we are using ODB with dogen:
-
-:        --ignore-files-matching-regex .*sql
-:        --ignore-files-matching-regex .*-odb.*)
-
-We should inject the ODB files automatically into the list of expected
-files. For a given element =foreign_key=, we will have a dogen file
-
-: foreign_key_pragmas.hpp
-
-We will also have the following ODB files:
-
-: foreign_key-odb.cxx
-: foreign_key-odb.hxx
-: foreign_key-odb.ixx
-
-The first file can either be on the =include/odb= directory or on the
-=src/odb= directory (it is moved by the ODB target). All other files
-are placed in the =include/odb= folder. Note that at present we are
-using =cpp= extension rather than =cxx=.
-
-In addition, on a multi-database environment we also have:
-
-- =repository-odb-oracle.hxx=
-- =repository-odb-pgsql.hxx=
-- ...
-
-Ideally we should also add the ODB include files to the master
-includes. However, we probably need a separate master include file
-just for ODB files.
-
-One of the amazing side-effects of this approach is that we will
-automatically delete any ODB files which are no longer required
-(because we will not generate ignores for them). At present we are
-manually deleting them.
-
-This also means we can add the ODB files to the visual studio project
-even before they get generated.
-
-*** Add visibility to coding attributes                               :story:
-
-We need to be able to mark yarn attributes as:
-
-- public
-- private
-- protected
-
 *** Add "is abstract" to coding                                       :story:
 
 With C# we have started deciding if a class is abstract or not on the
@@ -1495,147 +1266,6 @@ the current logic of parents are abstract).
 
 We then need to review the C++ templates and figure out where we were
 also inferring "abstractness", and use the new flag.
-
-*** Add support for formatter and facet dependencies                  :story:
-
-Once we are finished with the refactoring of the C++ model, we should
-add a way of declaring dependencies between facets and between
-formatters. We may not need dependencies between facets as these are
-actually a manifestation of the formatter dependencies.
-
-These are required to ensure users have not chosen some invalid
-combination of formatters (for example disable serialisation when a
-formatter requires it). It is also required when a given
-facet/formatter is not supported (for example when an STL type does
-not support serialisation out of the box).
-
-Note that the dependencies are not just static. For example, the types
-facet depends on the hash facet if the user decides to add a
-=std::unordered_map= of a user defined type to another user defined
-type. We need to make sure we take these run-time dependencies into
-account too.
-
-*** Add support for default values                                    :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to set default values for certain
-built-ins so that I can model my domain more accurately.
-#+end_quote
-
-It would be nice to be able to add a default value in Dia and have it
-set on the default constructor, if the type is a built-in or a
-=std::string=.
-
-These could be added as dynamic extensions; however, they should not
-be model specific - the same defaults should apply to all
-languages. However, note that in certain cases the default values may
-be language specific (e.g. =0.0f= for float, etc). We should have a
-language independent way to express defaults and then interpret them
-in language specific ways at the template level.
-
-Note also that there are two levels of default values: the type-level
-(all built-ins of type =x= default to =y=) and the property level
-(instances of type =x= in class =z= default to =y=). The meta-data can
-be applied at each level to achieve the desired effect.
-
-Defaults are also useful with const properties, both if the class is
-immutable, or if just the defaulted property is immutable.
-
-Validation rules:
-
-- property can only have a default value if built-in
-- property default value must be castable to built-in type.
-
-Notes:
-
-- we have now implemented support for values at the dia and injection
-  level (not JSON). We just need to propagate it into coding and
-  express it on the model to text transforms.
-
-*** Add support for interfaces                                         :epic:
-
-It would be great to be able to mark a type as an interface, add all
-methods that the interface has, and have dogen fully code-generate the
-interface, marking all methods as pure virtual, override, etc. We
-would want to distinguish this from the abstract base class case,
-because we may want to add one or more concrete methods to the ABC.
-
-We need support for operations for this to work. We also need support
-for pointers, references and const.
-
-Merged stories:
-
-*Add =interface= meta-model element*
-
-Even though we can't generate much outside of plain types, we should
-already have support for a stereotype of =interface=. In the future we
-may be able to code generate the interface. This should be implemented
-in coding as a type on its own right.
-
-- add an interface which is: element, operatable, relatable. Not
-  stateful. We should also have a "is abstract" flag
-  somewhere. Perhaps in relatable?
-
-*** Add support for private and protected attributes                  :story:
-
-#+begin_quote
-*Story*: As a dogen user, I would like to define properties as
-protected so that I only expose them to derived types.
-#+end_quote
-
-We need to distinguish between public and protected attributes when in
-the presence of inheritance. If not, issue a warning.
-
-Another interesting use case for protected and private attributes is
-extensions. This is not yet supported by C++, but one can envision a
-time where it will be possible to extend the code generated classes
-with manually crafted code; these extensions may have access to
-protected/private state, thus allowing for encapsulation.
-
-*** Add support for error info augmenting of exceptions               :story:
-
-When we declare a boost exception, we some times need to augment it
-with additional data. This is explained [[http://www.boost.org/doc/libs/1_58_0/libs/exception/doc/tutorial_transporting_data.html][here]]. We should be able to add
-these tags to the exception class and have dogen generate the
-=error_info= boilerplate in the exception header.
-
-Note that we can have many tags associated with a given
-exception. They all need to have meaningful names. They should all
-have globally unique names, unless the name makes sense in the context
-of more than one exception. We could make the tags a property of the
-exception (e.g. inner class). Or we could simply have a global class
-that declares all of the application tags in one go. If most tags are
-exception specific, then the first approach is better. If many tags
-are shared, the latter is preferable.
-
-In terms of dia/frontend, we can simply add these as attributes of the
-exception and have the code generator do the right thing for
-C++. Other languages would/could have different implementations.
-
-Once we implement this we need to go through all exceptions and add
-all the needed attributes; in many cases we are being lazy and logging
-one message but throwing a less informative one. This should really be
-captured in the exception type.
-
-We should probably support some meta-data to enable/disable this
-behaviour, in case someone wants real attributes in an exception.
-
-*** Add support for deprecation                                       :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to mark certain properties, classes
-or methods as deprecated so that I can tell my users to stop using
-them.
-#+end_quote
-
-We should be able to mark classes and properties as deprecated and
-have that reflected in both doxygen and C++-11 deprecated attributes.
-
-Note that at present nothing stops the users from adding the marker
-themselves.
-
-Perhaps we should add general support for attributes. This would be
-useful for languages like C# and Java, to control serialisation, etc.
 
 *** Move generation element properties back into formattables         :story:
 
@@ -1754,26 +1384,6 @@ case yet.
   formatters.
 - consider renaming formatters to model to text transforms.
 
-*** Add support for operations                                        :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to specify operations via the
-frontend so that I dogen can generate the header file and I can
-manually add the implementation.
-#+end_quote
-
-This story is a requirement in order to implement merging support.
-
-When we did the expansion and indexing work for properties, we omitted
-operations altogether. This is fine for now, as we only have a
-half-baked support for them anyway, but will need to be revisited as
-we start to use it in anger. In particular:
-
-- we need sets of operations: local, inherited, all
-- we need an operations indexer
-
-Actually we removed the half-baked support.
-
 *** Report validation errors like compilers do                        :story:
 
 It would be very useful to output validation errors like a compiler,
@@ -1783,128 +1393,6 @@ could also have "reporting themes" such as visual studio or
 GCC. Finally, we should support validation warnings, using the same
 conventions as compilers (-Wall, etc). Though perhaps these are better
 defined as part of the metamodel rather than command-line arguments.
-
-*** Additional validation rules for yarn                               :epic:
-
-Now that we have introduced the basic validation infrastructure
-([[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_95.org][sprint 95]]), we should start adding more and more checks. This story
-keeps track of all ideas around validation. We should convert these
-ideas into stories and add them as we go along.
-
-*Dia level checks*:
-
-- exceptions and enumerations can't inherit
-- exceptions shouldn't have properties.
-
-*Intermediate model checks*:
-
-- For C# models: attribute that start with lower case will cause
-  problems because the property name will match the argument name,
-  resulting in warnings in the complete constructor (argument assigned
-  to itself). A simple validation check is to error if a user add an
-  attribute that starts with lower case in C#.
-- enumeration values should be valid according to its type. Basically
-  cast to int.
-- if =use_implementation_defined_underlier= is true then
-  =underlying_element= must be empty and vice-versa
-- primitive =underlying_element= must not be empty.
-- if =use_implementation_defined_enumerator_values= is true then
-  enumerator's value must be empty.
-- enumeration must have at least one enumerator. warning?
-- external module path of the model matches all objects, etc in
-  current model.
-- documentation does not have non-printable characters.
-- number of type arguments is consistent with objects type.
-- Test relationships between objects and other meta types: We should
-  validate that objects are only related to other objects - e.g. they
-  cannot inherit from exception or enumeration or vice-versa. Add
-  tests for this.
-- Its not possible to be immutable and fluent.
-- it is not possible to be immutable and be in an inheritance
-  relationship. FIXME: why is that?
-- user models cannot have stereotype of "builtins". Actually do we
-  even need to validate this since it would do nothing.
-- we don't support generic types so we should throw if a user attempts
-  to use them.
-- a type marked as final cannot have descendants.
-- types in global namespace must have an empty location.
-- if model module path is empty, location must also be empty.
-- check the number of type parameters in the type definition and
-  ensure that all name trees have the expected number of type
-  parameters.
-- properties of types in other models result in dependencies.
-- concepts that don't refine must have at least one property (or
-  method). Maybe just warn?
-- issue error when a property is a value of an abstract class
-- properties exist in merged model.
-- vistor is only supported at the base class level: due to
-  implementation constraints, we only support visitable at the base
-  class level. Add an exception if users attempt to use visitable
-  stereotype in a class that has parents. Note: is this true? We are
-  using derived visitable in C++ model.
-- there must be at least one element for a given id with
-  =is_element_extension= set to false.
-- for interfaces, etc: if a user overloads a method, check to see if
-  arguments to the method with the same name are in the same order for
-  all overloads (framework design guidelines p. 124).
-
-Existing validation code:
-
-:    if ((o.is_parent() || o.is_child()) && p.is_immutable())  {
-:        BOOST_LOG_SEV(lg, error) << immutabilty_with_inheritance
-:                                 << o.name().id();
-:
-:        BOOST_THROW_EXCEPTION(
-:            transformation_error(immutabilty_with_inheritance +
-:                o.name().id()));
-:    }
-
-: BOOST_AUTO_TEST_CASE(inheritance_with_immutability_throws) {
-:     SETUP_TEST_LOG_SOURCE("inheritance_with_immutability_throws");
-:     auto c(mock_context(model_name));
-:
-:     const auto po(mock_processed_object_factory::make_generalization());
-:     const auto con(po[0].connection());
-:     BOOST_REQUIRE(con);
-:     const auto parents = std::list<std::string> { con->first };
-:     c.child_id_to_parent_ids().insert(std::make_pair(con->second, parents));
-:
-:     transform(c, {po[1]});
-:
-:     auto po1(po[2]);
-:     po1.stereotype(immutable_stereotype);
-:     const auto op1(mock_profile(po1));
-:     contains_checker<transformation_error> cc(immutability_inheritance);
-:     BOOST_CHECK_EXCEPTION(transform(c, po1, op1), transformation_error, cc);
-:
-:     c.child_id_to_parent_ids().clear();
-:     auto po2(po[1]);
-:     po2.stereotype(immutable_stereotype);
-:     const auto op2(mock_profile(po2));
-:     BOOST_CHECK_EXCEPTION(transform(c, po2, op2), transformation_error, cc);
-: }
-
-Merged stories:
-
-*Add warning support for validation*
-
-Once we implement a validator, we will soon run into warnings: cases
-where the user has done something silly but we still want to code
-generate. These are best handled as warnings rather than errors.
-
-This story keeps track of things we think should be a warning.  List
-of known warnings:
-
-- unconnected dia object
-- comment greater than 80 columns
-
-We will probably soon need a way to enable/disable warnings. We could
-use a similar scheme as GCC: =-Wname= and =-Wno-name=.
-
-*Warn if value or entity has methods*
-
-We should issue a warning if a user defines methods in value or entity
-objects as its most likely by mistake.
 
 *** Add support for ignoring types and models                         :story:
 
@@ -2164,12 +1652,6 @@ exceptions. We need to convert them to dogen exceptions. We also need
 to get rid of the invalid enum exception and use the
 =std::argument...= exception instead.
 
-*** Fix =cp= error on cmake with local third-party packages           :story:
-
-We are getting strange errors in cmake:
-
-: cp: cannot stat ‘/usr/lib/i386-linux-gnu/libpthread.so.1.54.0’: No such file or directory
-
 *** Assorted improvements to CMake files                               :epic:
 
 It seems we are not using proper CMake idioms to pick up compiler
@@ -2299,101 +1781,6 @@ Links:
 - [[https://style-guides.readthedocs.io/en/latest/cpp.html][C++ coding style guide]]
 - [[https://stxxl.org/tags/1.4.1/coding_style.html][Coding Style Guidelines]]
 - [[https://www.fluentcpp.com/2018/04/24/following-conventions-stl/][Make Your Containers Follow the Conventions of the STL]]
-
-*** Consider generating program options code                          :story:
-
-If there was a syntax to describe boost program options, we should be
-able to generate most of the code for it:
-
-- the code that initialises the options;
-- the domain objects that will store the options;
-- the copying of values from program options objects into domain
-  objects.
-
-This would mean that creating a command line tool would be a matter of
-just supplying an options file. We could then have a stereotype for
-this (name to be yet identified). Marking a type with this stereotype
-and supplying the appropriate meta-data so one could locate the
-options file would cause dogen to emit the program options binding
-code.
-
-A similar concept seems to exist for python: [[http://docopt.org/][docopt]]. We should keep
-the same syntax. We just need to have a well defined domain object for
-these. The aim would be to replace config.
-
-For models such as these, the dia representation is just overhead. It
-would be great if we could do it using just JSON.
-
-Actually even better would be if we could have a text file in docopt
-format and parse it and then use it to generate the code described
-above.
-
-Actually maybe we are just making this too complicated. We probably
-just need some very trivial meta-data extensions that express the
-required concept:
-
-- create a yarn element to model this new meta-class. We basically
-  need to model the structure of program options with option groups
-  and options.
-- define a stereotype for the new yarn elements, say
-  =CommandLineOptionGroup=.
-- for types facet we simply generate the regular c++ code. But in
-  addition, we also generate a new facet that: a) injects the
-  propertties into boost program options b) instantiates the c++
-  objects from boost program options.
-- this means that instead of creating a new meta-type, we need to
-  augment =yarn::object= with command line options stuff.
-
-Notes:
-
-- create stereotypes for options group, options; allow users to define
-  members of type options in options group. Or should the options just
-  be member variables? In which case we could have
-  =command_line::options= as the stereotype.
-- generate the options classes.
-- inject a hand-crafted validator or consider generating the validator
-  given the meta-data supplied by the user (mandatory, at most X
-  times, etc).
-- generate an options builder that takes on the building
-  responsibilities from the parser.
-- generate a parser that hooks the builder and copies data from the
-  options map into the options.
-- allow users to supply the help text and the version text as
-  parameters; these should probably be done in a similar way to what
-  we do with the modeline etc.
-- allow users to set default values in the options attributes and set
-  them in generated code. This is probably just adding default value
-  support to dogen, for which we have a separate story.
-- one very useful way in which to use program options is via
-  projections. That is a given model M0 defines the configuration and
-  a second model M1 defines the options parsing. In this case the
-  options defined in M0 already has the required shape:
-  - there is a top-level class housing all options, traditionally
-    called "configuration";
-  - the top-level class contains meta-data with the product blurb;
-  - attributes of that class can be annotated as "modes", "groups" or
-    nothing. A mode will result in a modal CLI interface. Groups
-    result in top-level groupings of options. Nothing means the
-    attribute must be of a simple type and will be a global option
-    (e.g. =help=, =version=, etc).
-  - attributes have a description, etc associated as meta-data. They
-    also have other useful annotations such as optional, mandatory
-    etc. These are used in validation. Interestingly this may mean we
-    can also automatically generate a validator.
-  - dogen generates in M1 a set of chained program option parsers
-    (assuming a modal interface; otherwise just one) which generate
-    the M0 options.
-  - in M1, users define a class with attribute
-    =masd::command_line_options=, associated with an options class.
-  - users can choose the "backend": boost program options, etc. Each
-    is implemented as a separate template.
-  - dogen generates a parser with an associated exception
-    (parser_validation_error). The exception is simply injected as a
-    type.
-
-Links:
-
-- [[https://github.com/abolz/CmdLine2][CmdLine2]]: alternative library to program options.
 
 *** Warn on transitive references to models used directly             :story:
 
@@ -2597,6 +1984,71 @@ should be part of the file name. However, maybe we need to distinguish
 between TS version (11, 17, etc) from library version.
 
 Merged stories:
+
+*Platform description models*
+
+We should consider integrating all of the information regarding
+"platforms" into platform description models (PDMs). These include:
+
+- all types available in a library (proxy models) and their mapping in
+  terms of aspects. We could make the mapping a bit clearer by
+  designing platform description models that are not part of
+  modeling. We don't really need support for attributes, operations
+  etc. However, we need some kind of "adaptor" that extracts all the
+  type information (or some other way of making resolution work across
+  different model types).
+- name of the library, supported language (e.g. for Boost, C++ etc),
+  versions of the library. We must associate the types with a version
+  (e.g. introduced on version X, deprecated on version Y) so that when
+  the user is using a given version it errors if a type is not
+  available.
+- packaging support: mapping to the name used on most common packaging
+  systems such as DEB, RPM etc. Also, mapping on language specific
+  package managers such as build2, vcpkg, conan, nuget, etc. User can
+  decide what package manager to use overall or for a specific library
+  (e.g. possible to mix-and-match package manager). It should also
+  have a mapping for CMake support that includes "in CMake library
+  from version X" and "available on an external source" with a URL. If
+  the user selects the latter, Dogen can download the CMake file (or
+  maybe Dogen should include the external CMake files to guarantee a
+  stable behaviour).
+
+Notes:
+
+- with this we can now move away from the bad modeling used with proxy
+  models, where it was not quite clear what they were. We can create
+  a different file format (e.g. *.pdm* )that can share some
+  similarities with existing JSON models but is not stuck with all the
+  baggage needed to represent user models.
+- however, PDMs are just regular models. Users should be able to make
+  use of the PDM stereotypes to define PDM types in a regular UML
+  model. Interestingly, a PDM from this perspective is similar to a
+  named configuration. The difference is that it introduces a new type
+  into the type system rather than a new stereotype. But with this we
+  can now make use of named configurations, making PDMs a lot less
+  verbose (e.g. define a named config and share it across multiple
+  types, like SmartPointer etc). We could even share it across
+  multiple platform models!
+- PDMs should be organised by language (e.g. folder for cpp, etc). Top
+  level directory is PDM rather than library.
+- users declare references to PDMs just like normal models. PDMs have
+  an attribute for "auto-loading". If on, we load regardless. Else it
+  must be referenced. This is useful for say STL, hardware types.
+- users can supply their own PDMs, although they are encouraged to
+  submit them if they are general enough.
+- if users choose CMake as the build system, we automatically add all
+  the boilerplate required to add the library to CMake. In an ideal
+  world, the PDM should contain the CMake snippets, with "macros"
+  where required (e.g. version, etc). This would mean we wouldn't have
+  to change templates when new libraries are added. We could also have
+  a "standard" CMake snippet that works for most libraries.
+- different libraries may have different types of support (e.g. a
+  library may not exist in a package manager, etc)
+- we could now create an installation script that sets up all
+  dependencies (e.g. DEB/RPM). It cannot be a target because the build
+  would fail (e.g. CMake would not find all dependencies).
+- now that =library= can be renamed to =pdm=, we could call the
+  top-level directory =library=.
 
 *Adding linking libraries is not handled*
 
@@ -3118,71 +2570,6 @@ This is a variation on the general problem of feature propagation
 It would also be nice to have a meta-data parameter to determine if
 the "auto-propagation" is on or off.
 
-*** Platform description models                                       :story:
-
-We should consider integrating all of the information regarding
-"platforms" into platform description models (PDMs). These include:
-
-- all types available in a library (proxy models) and their mapping in
-  terms of aspects. We could make the mapping a bit clearer by
-  designing platform description models that are not part of
-  modeling. We don't really need support for attributes, operations
-  etc. However, we need some kind of "adaptor" that extracts all the
-  type information (or some other way of making resolution work across
-  different model types).
-- name of the library, supported language (e.g. for Boost, C++ etc),
-  versions of the library. We must associate the types with a version
-  (e.g. introduced on version X, deprecated on version Y) so that when
-  the user is using a given version it errors if a type is not
-  available.
-- packaging support: mapping to the name used on most common packaging
-  systems such as DEB, RPM etc. Also, mapping on language specific
-  package managers such as build2, vcpkg, conan, nuget, etc. User can
-  decide what package manager to use overall or for a specific library
-  (e.g. possible to mix-and-match package manager). It should also
-  have a mapping for CMake support that includes "in CMake library
-  from version X" and "available on an external source" with a URL. If
-  the user selects the latter, Dogen can download the CMake file (or
-  maybe Dogen should include the external CMake files to guarantee a
-  stable behaviour).
-
-Notes:
-
-- with this we can now move away from the bad modeling used with proxy
-  models, where it was not quite clear what they were. We can create
-  a different file format (e.g. *.pdm* )that can share some
-  similarities with existing JSON models but is not stuck with all the
-  baggage needed to represent user models.
-- however, PDMs are just regular models. Users should be able to make
-  use of the PDM stereotypes to define PDM types in a regular UML
-  model. Interestingly, a PDM from this perspective is similar to a
-  named configuration. The difference is that it introduces a new type
-  into the type system rather than a new stereotype. But with this we
-  can now make use of named configurations, making PDMs a lot less
-  verbose (e.g. define a named config and share it across multiple
-  types, like SmartPointer etc). We could even share it across
-  multiple platform models!
-- PDMs should be organised by language (e.g. folder for cpp, etc). Top
-  level directory is PDM rather than library.
-- users declare references to PDMs just like normal models. PDMs have
-  an attribute for "auto-loading". If on, we load regardless. Else it
-  must be referenced. This is useful for say STL, hardware types.
-- users can supply their own PDMs, although they are encouraged to
-  submit them if they are general enough.
-- if users choose CMake as the build system, we automatically add all
-  the boilerplate required to add the library to CMake. In an ideal
-  world, the PDM should contain the CMake snippets, with "macros"
-  where required (e.g. version, etc). This would mean we wouldn't have
-  to change templates when new libraries are added. We could also have
-  a "standard" CMake snippet that works for most libraries.
-- different libraries may have different types of support (e.g. a
-  library may not exist in a package manager, etc)
-- we could now create an installation script that sets up all
-  dependencies (e.g. DEB/RPM). It cannot be a target because the build
-  would fail (e.g. CMake would not find all dependencies).
-- now that =library= can be renamed to =pdm=, we could call the
-  top-level directory =library=.
-
 *** Simplify argument parsing for operations                          :story:
 
 One of the main stumbling blocks for adding support for operations has
@@ -3347,48 +2734,6 @@ Notes:
 - for extra bonus points: it would be nice if the extensions could be
   made a class with access to private properties in the "extended"
   object. This would allow us to encapsulate state.
-
-*** Consider splitting transforms into rules                          :story:
-
-According to MDE, transforms are split out into several parts:
-
-- the filtering of the targets of the transform.
-- the application of the transform.
-
-For example, we seem to loop through the model and then find elements
-of interest to mutate. They seem to suggest we should first
-query/filter the model using a rule and then apply the mutation to the
-result of the query/filter. This would perhaps improve the code. The
-query result could be a typed container (pointer container?) with the
-elements that match. That means we can then start to converge towards
-a rule engine. However, we'd have to go through all the transforms and
-see if they would all benefit from this split.
-
-We don't really have a need for a flexible rules application engine
-that schedules rules and so forth, but we could take on the aspects
-that make the code cleaner.
-
-In [[https://gsd.uwaterloo.ca/sites/default/files/ibm06.pdf][Feature-Based Survey of Model Transformation Approaches]], Czarnecki
-and Helsen state:
-
-#+begin_quote
-Transformation rules. In this paper, transformation rules are
-understood as a broad term describing the smallest units of
-transformation. Rewrite rules with a left-hand side (LHS) and a
-right-hand side (RHS) are obvious examples of transformation rules;
-however, we also consider a function or a procedure implementing some
-transformation step as a transformation rule. In fact, the boundary
-between rules and functions is not so clear-cut;
-#+end_quote
-
-Notes:
-
-- our source-target relationship is chosen based on the needs of the
-  transform. Sometimes we use in-place, in other cases (such as
-  merging and translation) we use distinct source and targets. We
-  should probably add comments to each transform describing these
-  properties.
--
 
 *** Add models for the executables                                    :story:
 
@@ -3648,13 +2993,6 @@ Actually, we did find [[https://github.com/DomainDrivenConsulting/dogen/blob/mas
 In general, this is a variation of the problem of the graph of
 dependencies between facets at the element level.
 
-*** Add support for inlining                                          :story:
-
-We should be able to set a model-wide property that tells dogen to
-generate inline methods for properties. We could be more flexible and
-allow inlining at class level or just for a single property. We don't
-have any use cases for these at present.
-
 *** Improving use of exceptions                                        :epic:
 
 Exceptions in dogen are not providing enough contextual
@@ -3738,6 +3076,132 @@ services.
 We would have to extend yarn to understand member variables as well as
 properties.
 
+** Feature Heap
+
+New features for this release.
+
+*** Add support for inlining                                          :story:
+
+We should be able to set a model-wide property that tells dogen to
+generate inline methods for properties. We could be more flexible and
+allow inlining at class level or just for a single property. We don't
+have any use cases for these at present.
+
+*** Consider generating program options code                          :story:
+
+If there was a syntax to describe boost program options, we should be
+able to generate most of the code for it:
+
+- the code that initialises the options;
+- the domain objects that will store the options;
+- the copying of values from program options objects into domain
+  objects.
+
+This would mean that creating a command line tool would be a matter of
+just supplying an options file. We could then have a stereotype for
+this (name to be yet identified). Marking a type with this stereotype
+and supplying the appropriate meta-data so one could locate the
+options file would cause dogen to emit the program options binding
+code.
+
+A similar concept seems to exist for python: [[http://docopt.org/][docopt]]. We should keep
+the same syntax. We just need to have a well defined domain object for
+these. The aim would be to replace config.
+
+For models such as these, the dia representation is just overhead. It
+would be great if we could do it using just JSON.
+
+Actually even better would be if we could have a text file in docopt
+format and parse it and then use it to generate the code described
+above.
+
+Actually maybe we are just making this too complicated. We probably
+just need some very trivial meta-data extensions that express the
+required concept:
+
+- create a yarn element to model this new meta-class. We basically
+  need to model the structure of program options with option groups
+  and options.
+- define a stereotype for the new yarn elements, say
+  =CommandLineOptionGroup=.
+- for types facet we simply generate the regular c++ code. But in
+  addition, we also generate a new facet that: a) injects the
+  propertties into boost program options b) instantiates the c++
+  objects from boost program options.
+- this means that instead of creating a new meta-type, we need to
+  augment =yarn::object= with command line options stuff.
+
+Notes:
+
+- create stereotypes for options group, options; allow users to define
+  members of type options in options group. Or should the options just
+  be member variables? In which case we could have
+  =command_line::options= as the stereotype.
+- generate the options classes.
+- inject a hand-crafted validator or consider generating the validator
+  given the meta-data supplied by the user (mandatory, at most X
+  times, etc).
+- generate an options builder that takes on the building
+  responsibilities from the parser.
+- generate a parser that hooks the builder and copies data from the
+  options map into the options.
+- allow users to supply the help text and the version text as
+  parameters; these should probably be done in a similar way to what
+  we do with the modeline etc.
+- allow users to set default values in the options attributes and set
+  them in generated code. This is probably just adding default value
+  support to dogen, for which we have a separate story.
+- one very useful way in which to use program options is via
+  projections. That is a given model M0 defines the configuration and
+  a second model M1 defines the options parsing. In this case the
+  options defined in M0 already has the required shape:
+  - there is a top-level class housing all options, traditionally
+    called "configuration";
+  - the top-level class contains meta-data with the product blurb;
+  - attributes of that class can be annotated as "modes", "groups" or
+    nothing. A mode will result in a modal CLI interface. Groups
+    result in top-level groupings of options. Nothing means the
+    attribute must be of a simple type and will be a global option
+    (e.g. =help=, =version=, etc).
+  - attributes have a description, etc associated as meta-data. They
+    also have other useful annotations such as optional, mandatory
+    etc. These are used in validation. Interestingly this may mean we
+    can also automatically generate a validator.
+  - dogen generates in M1 a set of chained program option parsers
+    (assuming a modal interface; otherwise just one) which generate
+    the M0 options.
+  - in M1, users define a class with attribute
+    =masd::command_line_options=, associated with an options class.
+  - users can choose the "backend": boost program options, etc. Each
+    is implemented as a separate template.
+  - dogen generates a parser with an associated exception
+    (parser_validation_error). The exception is simply injected as a
+    type.
+
+Links:
+
+- [[https://github.com/abolz/CmdLine2][CmdLine2]]: alternative library to program options.
+
+*** Add support for operations                                        :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to specify operations via the
+frontend so that I dogen can generate the header file and I can
+manually add the implementation.
+#+end_quote
+
+This story is a requirement in order to implement merging support.
+
+When we did the expansion and indexing work for properties, we omitted
+operations altogether. This is fine for now, as we only have a
+half-baked support for them anyway, but will need to be revisited as
+we start to use it in anger. In particular:
+
+- we need sets of operations: local, inherited, all
+- we need an operations indexer
+
+Actually we removed the half-baked support.
+
 *** Code-generate a "one-shot" serialisation API                      :story:
 
 For the dia model we manually generated a class called
@@ -3804,10 +3268,259 @@ We should:
 - pass the archive type into persister;
 - throw if the archive type is not supported.
 
+*** Add frontends and backends to =info= command line option          :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to know what frontends and backends
+are available in my dogen version so that I don't try to use features
+that are not present.
+#+end_quote
+
+With the static registration of importers and backends, we should add
+some kind of mechanism to display whats on offer in the command line,
+via the =--info= option. This is slightly tricky because the fronend
+and backend models do not know of the command line. We need a method
+in the frontend that returns a description and a method in the
+workflow that returns all descriptions. These must be static. Then
+knitter can then call these methods and build the info text.
+
+*** Ignore ODB files automatically                                    :story:
+
+At present we are adding the following regular expressions to knitter
+whenever we are using ODB with dogen:
+
+:        --ignore-files-matching-regex .*sql
+:        --ignore-files-matching-regex .*-odb.*)
+
+We should inject the ODB files automatically into the list of expected
+files. For a given element =foreign_key=, we will have a dogen file
+
+: foreign_key_pragmas.hpp
+
+We will also have the following ODB files:
+
+: foreign_key-odb.cxx
+: foreign_key-odb.hxx
+: foreign_key-odb.ixx
+
+The first file can either be on the =include/odb= directory or on the
+=src/odb= directory (it is moved by the ODB target). All other files
+are placed in the =include/odb= folder. Note that at present we are
+using =cpp= extension rather than =cxx=.
+
+In addition, on a multi-database environment we also have:
+
+- =repository-odb-oracle.hxx=
+- =repository-odb-pgsql.hxx=
+- ...
+
+Ideally we should also add the ODB include files to the master
+includes. However, we probably need a separate master include file
+just for ODB files.
+
+One of the amazing side-effects of this approach is that we will
+automatically delete any ODB files which are no longer required
+(because we will not generate ignores for them). At present we are
+manually deleting them.
+
+This also means we can add the ODB files to the visual studio project
+even before they get generated.
+
+*** Add visibility to coding attributes                               :story:
+
+We need to be able to mark yarn attributes as:
+
+- public
+- private
+- protected
+
+*** Add support for formatter and facet dependencies                  :story:
+
+Once we are finished with the refactoring of the C++ model, we should
+add a way of declaring dependencies between facets and between
+formatters. We may not need dependencies between facets as these are
+actually a manifestation of the formatter dependencies.
+
+These are required to ensure users have not chosen some invalid
+combination of formatters (for example disable serialisation when a
+formatter requires it). It is also required when a given
+facet/formatter is not supported (for example when an STL type does
+not support serialisation out of the box).
+
+Note that the dependencies are not just static. For example, the types
+facet depends on the hash facet if the user decides to add a
+=std::unordered_map= of a user defined type to another user defined
+type. We need to make sure we take these run-time dependencies into
+account too.
+
+*** Add support for default values                                    :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to set default values for certain
+built-ins so that I can model my domain more accurately.
+#+end_quote
+
+It would be nice to be able to add a default value in Dia and have it
+set on the default constructor, if the type is a built-in or a
+=std::string=.
+
+These could be added as dynamic extensions; however, they should not
+be model specific - the same defaults should apply to all
+languages. However, note that in certain cases the default values may
+be language specific (e.g. =0.0f= for float, etc). We should have a
+language independent way to express defaults and then interpret them
+in language specific ways at the template level.
+
+Note also that there are two levels of default values: the type-level
+(all built-ins of type =x= default to =y=) and the property level
+(instances of type =x= in class =z= default to =y=). The meta-data can
+be applied at each level to achieve the desired effect.
+
+Defaults are also useful with const properties, both if the class is
+immutable, or if just the defaulted property is immutable.
+
+Validation rules:
+
+- property can only have a default value if built-in
+- property default value must be castable to built-in type.
+
+Notes:
+
+- we have now implemented support for values at the dia and injection
+  level (not JSON). We just need to propagate it into coding and
+  express it on the model to text transforms.
+
+*** Add support for interfaces                                         :epic:
+
+It would be great to be able to mark a type as an interface, add all
+methods that the interface has, and have dogen fully code-generate the
+interface, marking all methods as pure virtual, override, etc. We
+would want to distinguish this from the abstract base class case,
+because we may want to add one or more concrete methods to the ABC.
+
+We need support for operations for this to work. We also need support
+for pointers, references and const.
+
+Merged stories:
+
+*Add =interface= meta-model element*
+
+Even though we can't generate much outside of plain types, we should
+already have support for a stereotype of =interface=. In the future we
+may be able to code generate the interface. This should be implemented
+in coding as a type on its own right.
+
+- add an interface which is: element, operatable, relatable. Not
+  stateful. We should also have a "is abstract" flag
+  somewhere. Perhaps in relatable?
+
+*** Add support for private and protected attributes                  :story:
+
+#+begin_quote
+*Story*: As a dogen user, I would like to define properties as
+protected so that I only expose them to derived types.
+#+end_quote
+
+We need to distinguish between public and protected attributes when in
+the presence of inheritance. If not, issue a warning.
+
+Another interesting use case for protected and private attributes is
+extensions. This is not yet supported by C++, but one can envision a
+time where it will be possible to extend the code generated classes
+with manually crafted code; these extensions may have access to
+protected/private state, thus allowing for encapsulation.
+
+*** Add support for error info augmenting of exceptions               :story:
+
+When we declare a boost exception, we some times need to augment it
+with additional data. This is explained [[http://www.boost.org/doc/libs/1_58_0/libs/exception/doc/tutorial_transporting_data.html][here]]. We should be able to add
+these tags to the exception class and have dogen generate the
+=error_info= boilerplate in the exception header.
+
+Note that we can have many tags associated with a given
+exception. They all need to have meaningful names. They should all
+have globally unique names, unless the name makes sense in the context
+of more than one exception. We could make the tags a property of the
+exception (e.g. inner class). Or we could simply have a global class
+that declares all of the application tags in one go. If most tags are
+exception specific, then the first approach is better. If many tags
+are shared, the latter is preferable.
+
+In terms of dia/frontend, we can simply add these as attributes of the
+exception and have the code generator do the right thing for
+C++. Other languages would/could have different implementations.
+
+Once we implement this we need to go through all exceptions and add
+all the needed attributes; in many cases we are being lazy and logging
+one message but throwing a less informative one. This should really be
+captured in the exception type.
+
+We should probably support some meta-data to enable/disable this
+behaviour, in case someone wants real attributes in an exception.
+
+*** Add support for deprecation                                       :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to mark certain properties, classes
+or methods as deprecated so that I can tell my users to stop using
+them.
+#+end_quote
+
+We should be able to mark classes and properties as deprecated and
+have that reflected in both doxygen and C++-11 deprecated attributes.
+
+Note that at present nothing stops the users from adding the marker
+themselves.
+
+Perhaps we should add general support for attributes. This would be
+useful for languages like C# and Java, to control serialisation, etc.
+
+
+
 ** Bugs and limitations
 
 Things we should address as soon as possible because they impact dogen
 usage. Urgent things that are going to annoy users.
+
+*** Fabric generates forward decls with no path                       :story:
+
+The following looks strange:
+
+: 2019-03-06 17:30:20.074618 [DEBUG] [quit.cpp.formatters.workflow] Procesing element: <dogen><hello_world><transformation_error>
+: 2019-03-06 17:30:20.074627 [DEBUG] [quit.cpp.formatters.workflow] Meta name: <dogen><generation><cpp><fabric><forward_declarations>
+: 2019-03-06 17:30:20.074636 [DEBUG] [quit.cpp.formatters.workflow] Using the stock formatter: masd.extraction.cpp.serialization.forward_declarations
+: 2019-03-06 17:30:20.074647 [DEBUG] [generation.cpp.formatters.assistant] Processing element: <dogen><hello_world><transformation_error> for archetype: masd.extraction.cpp.serialization.forward_declarations
+: 2019-03-06 17:30:20.074659 [DEBUG] [quit.cpp.formatters.workflow] Formatted artefact. Path: ""
+
+This could help explain the problems we're having with empty
+artefacts. This should be fixed with the new approach to forward
+declarations.
+
+*** Disabling facet after regeneration does not delete file           :story:
+
+Steps to reproduce:
+
+- enable tests for all types.
+- generate model.
+- disable tests for one type.
+- generate model.
+
+Expected that disabling tests for type would result in file
+deletion. Instead nothing happens. However, if one deletes the
+generated file for the type, then the next generation will correctly
+not generate code for the type.
+
+It seems there is some weird mismatch between enablement and lint
+removal: we are probably adding the file to the list of expected
+files, regardless of whether the facet is enabled or not. However,
+this is not always the case because we've proven that enabling and
+disabling a facet correctly results in the deletion of files. It must
+be something to do with how local enablement is handled.
+
+*** Location of =--byproduct-directory= not respected                 :story:
+
+It seems that at present we are not honouring the directory supplied
+by the user.
 
 *** Postfix and directory fields in annotations look weird            :story:
 
@@ -4302,6 +4015,15 @@ inherits from enable all facets; when we merge against "disable cmake"
 we do not know that cmake was enabled via "enable all facets" and so
 this takes priority.
 
+We could add some validation that checks to see if we'd "revert"
+changes depending on order. This is not very easy because it may
+actually be the user's intention. We need to find some useful but
+simple heuristic that indicates problems. Example:
+
+- changing a given knob more than twice?
+- updating a given knob in more than one place at the same level of
+  the hierarchy? This is a good candidate because its easy to detect.
+
 *** Reference to non-existent dynamic fields produce unhelpful errors :story:
 
 When renaming fields, we get the following dogen errors:
@@ -4655,6 +4377,128 @@ if there is a shared pointer to built-in; if there is, put in:
 
 Things we are not testing at present but should, validation that could
 provide helpful errors to end users but is not being performed yet.
+
+*** Additional validation rules for yarn                               :epic:
+
+Now that we have introduced the basic validation infrastructure
+([[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_95.org][sprint 95]]), we should start adding more and more checks. This story
+keeps track of all ideas around validation. We should convert these
+ideas into stories and add them as we go along.
+
+*Dia level checks*:
+
+- exceptions and enumerations can't inherit
+- exceptions shouldn't have properties.
+
+*Intermediate model checks*:
+
+- For C# models: attribute that start with lower case will cause
+  problems because the property name will match the argument name,
+  resulting in warnings in the complete constructor (argument assigned
+  to itself). A simple validation check is to error if a user add an
+  attribute that starts with lower case in C#.
+- enumeration values should be valid according to its type. Basically
+  cast to int.
+- if =use_implementation_defined_underlier= is true then
+  =underlying_element= must be empty and vice-versa
+- primitive =underlying_element= must not be empty.
+- if =use_implementation_defined_enumerator_values= is true then
+  enumerator's value must be empty.
+- enumeration must have at least one enumerator. warning?
+- external module path of the model matches all objects, etc in
+  current model.
+- documentation does not have non-printable characters.
+- number of type arguments is consistent with objects type.
+- Test relationships between objects and other meta types: We should
+  validate that objects are only related to other objects - e.g. they
+  cannot inherit from exception or enumeration or vice-versa. Add
+  tests for this.
+- Its not possible to be immutable and fluent.
+- it is not possible to be immutable and be in an inheritance
+  relationship. FIXME: why is that?
+- user models cannot have stereotype of "builtins". Actually do we
+  even need to validate this since it would do nothing.
+- we don't support generic types so we should throw if a user attempts
+  to use them.
+- a type marked as final cannot have descendants.
+- types in global namespace must have an empty location.
+- if model module path is empty, location must also be empty.
+- check the number of type parameters in the type definition and
+  ensure that all name trees have the expected number of type
+  parameters.
+- properties of types in other models result in dependencies.
+- concepts that don't refine must have at least one property (or
+  method). Maybe just warn?
+- issue error when a property is a value of an abstract class
+- properties exist in merged model.
+- vistor is only supported at the base class level: due to
+  implementation constraints, we only support visitable at the base
+  class level. Add an exception if users attempt to use visitable
+  stereotype in a class that has parents. Note: is this true? We are
+  using derived visitable in C++ model.
+- there must be at least one element for a given id with
+  =is_element_extension= set to false.
+- for interfaces, etc: if a user overloads a method, check to see if
+  arguments to the method with the same name are in the same order for
+  all overloads (framework design guidelines p. 124).
+
+Existing validation code:
+
+:    if ((o.is_parent() || o.is_child()) && p.is_immutable())  {
+:        BOOST_LOG_SEV(lg, error) << immutabilty_with_inheritance
+:                                 << o.name().id();
+:
+:        BOOST_THROW_EXCEPTION(
+:            transformation_error(immutabilty_with_inheritance +
+:                o.name().id()));
+:    }
+
+: BOOST_AUTO_TEST_CASE(inheritance_with_immutability_throws) {
+:     SETUP_TEST_LOG_SOURCE("inheritance_with_immutability_throws");
+:     auto c(mock_context(model_name));
+:
+:     const auto po(mock_processed_object_factory::make_generalization());
+:     const auto con(po[0].connection());
+:     BOOST_REQUIRE(con);
+:     const auto parents = std::list<std::string> { con->first };
+:     c.child_id_to_parent_ids().insert(std::make_pair(con->second, parents));
+:
+:     transform(c, {po[1]});
+:
+:     auto po1(po[2]);
+:     po1.stereotype(immutable_stereotype);
+:     const auto op1(mock_profile(po1));
+:     contains_checker<transformation_error> cc(immutability_inheritance);
+:     BOOST_CHECK_EXCEPTION(transform(c, po1, op1), transformation_error, cc);
+:
+:     c.child_id_to_parent_ids().clear();
+:     auto po2(po[1]);
+:     po2.stereotype(immutable_stereotype);
+:     const auto op2(mock_profile(po2));
+:     BOOST_CHECK_EXCEPTION(transform(c, po2, op2), transformation_error, cc);
+: }
+
+Merged stories:
+
+*Add warning support for validation*
+
+Once we implement a validator, we will soon run into warnings: cases
+where the user has done something silly but we still want to code
+generate. These are best handled as warnings rather than errors.
+
+This story keeps track of things we think should be a warning.  List
+of known warnings:
+
+- unconnected dia object
+- comment greater than 80 columns
+
+We will probably soon need a way to enable/disable warnings. We could
+use a similar scheme as GCC: =-Wname= and =-Wno-name=.
+
+*Warn if value or entity has methods*
+
+We should issue a warning if a user defines methods in value or entity
+objects as its most likely by mistake.
 
 *** Check for incompatibility between input language and kernels      :story:
 
@@ -5110,10 +4954,6 @@ Detect if a diagram defines the same class or package multiple
 times. Should throw an exception. We should also detect multiple
 properties with the same name.
 
-*** Missing =enable_facet_XYZ= tests                                  :story:
-
-- test data
-
 *** Add run spec targets for each test                                :story:
 
 We could piggy back on the ctest functionality and add a target for
@@ -5147,7 +4987,7 @@ check that an invalid type doesn't work.
 
 Stories that will not be handled on the current major release.
 
-** Technical debt, improvements
+** Technical debt
 
 Ideas to improve the code base.
 
@@ -10858,6 +10698,14 @@ Stuff that is not directly related to the problem domain but its
 needed by Dogen. Tooling, infrastructure, blog posts, etc. However,
 they must still be in keeping with the vision, so not too left field.
 
+*** Updates to debian package                                         :story:
+
+There are several problems with the debian package:
+
+- shared folder is =dogen= not =masd.dogen=
+- no hello world sample; need json and dia versions
+- package name is =dogen-applications=, should be masd...
+
 *** Rename main Dogen package in Debian                               :story:
 
 At present we seem to have called our package =dogen-applications=:
@@ -11561,6 +11409,48 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Consider splitting transforms into rules                          :story:
+
+According to MDE, transforms are split out into several parts:
+
+- the filtering of the targets of the transform.
+- the application of the transform.
+
+For example, we seem to loop through the model and then find elements
+of interest to mutate. They seem to suggest we should first
+query/filter the model using a rule and then apply the mutation to the
+result of the query/filter. This would perhaps improve the code. The
+query result could be a typed container (pointer container?) with the
+elements that match. That means we can then start to converge towards
+a rule engine. However, we'd have to go through all the transforms and
+see if they would all benefit from this split.
+
+We don't really have a need for a flexible rules application engine
+that schedules rules and so forth, but we could take on the aspects
+that make the code cleaner.
+
+In [[https://gsd.uwaterloo.ca/sites/default/files/ibm06.pdf][Feature-Based Survey of Model Transformation Approaches]], Czarnecki
+and Helsen state:
+
+#+begin_quote
+Transformation rules. In this paper, transformation rules are
+understood as a broad term describing the smallest units of
+transformation. Rewrite rules with a left-hand side (LHS) and a
+right-hand side (RHS) are obvious examples of transformation rules;
+however, we also consider a function or a procedure implementing some
+transformation step as a transformation rule. In fact, the boundary
+between rules and functions is not so clear-cut;
+#+end_quote
+
+Notes:
+
+- our source-target relationship is chosen based on the needs of the
+  transform. Sometimes we use in-place, in other cases (such as
+  merging and translation) we use distinct source and targets. We
+  should probably add comments to each transform describing these
+  properties.
+-
 
 *** Create a new data-driven architecture for dogen                    :epic:
 

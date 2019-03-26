@@ -5,26 +5,26 @@
 
 * Mission Statement
 
-  - Finish work on moving decorations to metamodel.
-  - Start work on moving profiles to metamodel.
+- Finish work on moving decorations to metamodel.
+- Start work on moving profiles to metamodel.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-25 Mon 18:41]
+#+CAPTION: Clock summary at [2019-03-26 Tue 06:52]
 | <75>                                                   |        |      |      |       |
 | Headline                                               | Time   |      |      |     % |
 |--------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                           | *6:38* |      |      | 100.0 |
+| *Total time*                                           | *7:15* |      |      | 100.0 |
 |--------------------------------------------------------+--------+------+------+-------|
-| Stories                                                | 6:38   |      |      | 100.0 |
-| Active                                                 |        | 6:38 |      | 100.0 |
-| Edit release notes for previous sprint                 |        |      | 1:47 |  26.9 |
-| Sprint and product backlog grooming                    |        |      | 0:09 |   2.3 |
-| Create a video demo for the previous sprint's features |        |      | 3:11 |  48.0 |
-| Promote extraction entities to meta-model elements     |        |      | 1:31 |  22.9 |
+| Stories                                                | 7:15   |      |      | 100.0 |
+| Active                                                 |        | 7:15 |      | 100.0 |
+| Edit release notes for previous sprint                 |        |      | 1:47 |  24.6 |
+| Sprint and product backlog grooming                    |        |      | 0:46 |  10.6 |
+| Create a video demo for the previous sprint's features |        |      | 3:11 |  43.9 |
+| Promote extraction entities to meta-model elements     |        |      | 1:31 |  20.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -140,6 +140,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-03-26 Tue 06:15]--[2019-03-26 Tue 06:52] =>  0:37
     CLOCK: [2019-03-25 Mon 10:08]--[2019-03-25 Mon 10:17] =>  0:09
     :END:
 
@@ -251,4 +252,138 @@ We should also allow for both:
 - full licence: used later at the product level.
 - licence summary: used for preambles in files.
 
+*** Add support for decoration configuration overrides                :story:
+
+At present we have hard-coded the decoration configuration to be read
+from the root object only. In an ideal world, we should be able to
+override some of these such as the copyrights. It may not make sense
+to be able to override them all though.
+
+*** Copyright holders is scalar when it should be an array            :story:
+
+At present its only possible to specify a single copyright holder. It
+should be handled the same was as odb parameters, but because that is
+done with a massive hack, we are not going to extend the hack to
+copyright holders.
+
+*** Update copyright notices                                          :story:
+
+We need to update all notices to reflect personal ownership until DDC
+was formed, and then ownership by DDC.
+
+- first update to personal ownership has been done, but we need to
+  test if multiple copyright entries is properly supported.
+
+*** Check if enable kernel directories is on extraction               :story:
+
+When we moved the kernel logic into yarn from quilt, we did not rename
+the traits.
+
+*** Update metrics in OpenHub                                         :story:
+
+For some reason our metrics are stuck at 5 months ago or so. It is
+actually mildly useful to know the number of lines of code etc.
+
+We probably need to delete and re-add the project.
+
+*** Code generate all contexts                                        :story:
+
+At present we are manually generating the transform contexts across
+all models. The main reason for this is that tracer does not support
+IO. There may be other reasons such as the annotations factory and
+annotation expander. We should just add IO support for all types that
+need it and code generate the contexts.
+
+
+
+*** Add "ioable" handcrafted types                                    :story:
+
+Whenever we need to mix and match generated types with handcrafted
+types, it would be really useful to create the missing facets. The
+main one is IO, but we probably also need test data support because
+the tests would fail. We could simply handcraft the types on those
+facets. It would be nice to have profiles like:
+
+: masd::handcrafted_types
+: masd::handcrafted_io
+: masd::handcrafted_test_data
+
+We could do with a simpler word for handcrafted. Check the literature.
+
+Once this is in place, we could have some top-level stereotype that
+aggregates all three (=masd::???=) and we can then tag types with it.
+
+*** Read =generate_preamble= from dynamic object                      :story:
+
+We need to generate the field definitions and update the general
+settings factory.
+
+*** Improve formatters code generation marker                         :story:
+
+Things the marker can/should have:
+
+- model level version;
+- the dogen version too. However, this will make all our tests break
+  every time there is a new commit so perhaps we need to have this
+  switched off by default.
+
+*** Consider introducing formatter "location strings"                 :story:
+
+In MDSD, we have the notion of "location strngs" (volter, p.153):
+
+#+begin_quote
+A third and very useful technique is the application of location
+strings that identify the transformation or the template used, as well
+as the underlying model elements in the generated code. A location
+string might look like this:
+
+: [2003-10-04 17:05:36]
+: GENERATED FROM TEMPLATE SomeTemplate
+: MODEL ELEMENT aPackage::aClass::SomeOperation().
+#+end_quote
+
+This may be a useful thing. However, adding dates and dogen version
+etc will cause spurious diffs.
+
+*** Move wale templates from the data directory                       :story:
+
+At present we have wale templates under the data directory. This is
+not the right location. These are part of a model just like stitch
+templates. There is one slight wrinkle though: if a user attempts to
+create a dogen formatter (say if plugins were supported), then we need
+access to the template from the debian package. So whilst they should
+live in the appropriate model (e.g. =generation.cpp=,
+=generation.csharp=), they also need to be packaged and shipped.
+
+Interestingly, so will all dogen models which are defining annotations
+and profiles. We need to rethink the data directory, separating system
+models from dogen models somehow. In effect, the data directory will
+be, in the future, the system models directory.
+
+So, in conclusion, two use cases for wale templates:
+
+- regular model defines a wale template and makes use of it. Template
+  should be with the model, just like stitch templates. However,
+  unlike stitch, there should be a directory for them.
+- user model wants to define a new formatter. It will make use of
+  dogen profiles and wale templates. These must be in the future data
+  directory somehow.
+
+
 ** Deprecated
+*** CANCELLED Fix =cp= error on cmake with local third-party packages :story:
+    CLOSED: [2019-03-26 Tue 06:31]
+
+*Rationale*: we are no longer copying this file.
+
+We are getting strange errors in cmake:
+
+: cp: cannot stat ‘/usr/lib/i386-linux-gnu/libpthread.so.1.54.0’: No such file or directory
+
+*** CANCELLED Missing =enable_facet_XYZ= tests                        :story:
+    CLOSED: [2019-03-26 Tue 06:44]
+
+*Rationale*: with code-generated tests, we now have lots of uses of
+the test data facet. No need for a special test.
+
+- test data
