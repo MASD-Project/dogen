@@ -13,19 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-26 Tue 11:48]
-| <75>                                                                        |        |      |      |       |
-| Headline                                                                    | Time   |      |      |     % |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *9:57* |      |      | 100.0 |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 9:57   |      |      | 100.0 |
-| Active                                                                      |        | 9:57 |      | 100.0 |
-| Edit release notes for previous sprint                                      |        |      | 1:47 |  17.9 |
-| Sprint and product backlog grooming                                         |        |      | 0:46 |   7.7 |
-| Create a video demo for the previous sprint's features                      |        |      | 3:11 |  32.0 |
-| Fix issues with emacs                                                       |        |      | 2:42 |  27.1 |
-| Promote extraction entities to meta-model elements                          |        |      | 1:31 |  15.2 |
+#+CAPTION: Clock summary at [2019-03-27 Wed 11:11]
+| <75>                                                   |         |       |      |       |
+| Headline                                               | Time    |       |      |     % |
+|--------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                           | *13:41* |       |      | 100.0 |
+|--------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                | 13:41   |       |      | 100.0 |
+| Active                                                 |         | 13:41 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 1:47 |  13.0 |
+| Sprint and product backlog grooming                    |         |       | 0:46 |   5.6 |
+| Create a video demo for the previous sprint's features |         |       | 3:11 |  23.3 |
+| Fix issues with emacs                                  |         |       | 2:42 |  19.7 |
+| Create a basic "project plan"                          |         |       | 2:08 |  15.6 |
+| Promote extraction entities to meta-model elements     |         |       | 3:01 |  22.0 |
+| Rename "language" to "technical space"                 |         |       | 0:06 |   0.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -175,8 +177,21 @@ time to sort them out:
 - update prelude to latest
 - install treemacs (neotree is not that useful)
 
+*** COMPLETED Create a basic "project plan"                           :story:
+    CLOSED: [2019-03-27 Wed 11:10]
+    :LOGBOOK:
+    CLOCK: [2019-03-27 Wed 09:02]--[2019-03-27 Wed 11:10] =>  2:08
+    :END:
+
+We now have a number of sprints with associated major tasks that are
+needed in order to fulfil the V2 vision. We need to capture these in
+some form of Gantt-chart like plan, and keep it up-to-date. It doesn't
+have to be very precise, just allow us to see how the big tasks hang
+together.
+
 *** STARTED Promote extraction entities to meta-model elements        :story:
     :LOGBOOK:
+    CLOCK: [2019-03-26 Tue 13:01]--[2019-03-26 Tue 14:31] =>  1:30
     CLOCK: [2019-03-25 Mon 18:27]--[2019-03-25 Mon 18:41] =>  0:14
     CLOCK: [2019-03-25 Mon 17:27]--[2019-03-25 Mon 18:02] =>  0:35
     CLOCK: [2019-03-25 Mon 16:43]--[2019-03-25 Mon 17:15] =>  0:32
@@ -235,6 +250,7 @@ Notes:
   mapping to the output language. We need this information to
   determine the modelines. We need to unwind all the work on moving
   dynamic factories into coding.
+- add resolver checks to ensure all modelines in a group can be found.
 
 Tasks:
 
@@ -269,6 +285,34 @@ We should also allow for both:
 
 - full licence: used later at the product level.
 - licence summary: used for preambles in files.
+
+*** Rename "language" to "technical space"                            :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-26 Tue 14:32]--[2019-03-26 Tue 14:38] =>  0:06
+    :END:
+
+We are using the word "language" in several places:
+
+- input language
+- output language
+
+What we really mean is technical space:
+
+- input technical space
+- output technical space
+
+When this is done we should also introduce the concept of
+=masd.technical_space= which then toggles knobs. For example, if set
+to C++, both input and output TS become C++. Actually this is best
+left to profiles. We can have profiles such as "windows c++
+development", etc.
+
+Tasks:
+
+- add technical spaces to elements. They start with the input TS, and
+  then are updated after mapping. Only if mapping did something to
+  element.
+-
 
 *** Add support for decoration configuration overrides                :story:
 

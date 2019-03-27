@@ -1,0 +1,146 @@
+#+title: Project Plan
+#+options: date:nil toc:nil author:nil num:nil
+#+property: Effort_ALL 1d 2d 5d 10d 20d 30d 35d 50d
+#+property: allocate_ALL dev
+#+columns: %50ITEM(Task) %Effort %allocate %BLOCKER %ORDERED
+
+* V2 Release                                            :taskjuggler_project:
+
+Contains all the major tasks required to finish the V2 release. These
+are not stories per se, but more like epics.
+
+** Software Development
+
+*** Extraction clean-up
+   :PROPERTIES:
+   :EFFORT:   2d
+   :BLOCKER:  start
+   :allocate: s14
+   :END:
+
+- move modelines, licences, etc into meta-model.
+- create transforms to assemble decoration in generation.
+- move formatters into generation.
+- move utility formatters into generation.
+- Sprint 14.
+
+*** Annotations profile clean-up
+   :PROPERTIES:
+   :EFFORT:   2d
+   :BLOCKER:  previous-sibling
+   :allocate: s14
+   :END:
+
+- create types to represent profiles and profile inheritance in
+  coding.
+- create transforms that use the coding types to instantiate
+  annotations infrastructure.
+- update context factories to read annotation information from the
+  model itself.
+
+*** Annotations types clean-up
+   :PROPERTIES:
+   :EFFORT:   2d
+   :BLOCKER:  previous-sibling
+   :allocate: s15
+   :END:
+
+- create templates to generate types and associated annotation type
+  infrastructure (e.g. fields, etc), as well as methods to read these
+  from annotations.
+- replace existing code with generated code.
+- add infrastructure to register these types.
+
+*** Fabric clean-up
+   :PROPERTIES:
+   :EFFORT:   2d
+   :BLOCKER:  previous-sibling
+   :allocate: s15
+   :END:
+
+- move all C++ fabric types into coding.
+- move all C# fabric types into coding.
+
+*** Generation meta-model clean-up
+   :PROPERTIES:
+   :EFFORT:   2d
+   :BLOCKER:  previous-sibling
+   :allocate: s16
+   :END:
+
+- remove all types that are in coding but are related to generation
+  space to generation, making sure they are properly copied across.
+
+*** Formattables clean-up
+   :PROPERTIES:
+   :EFFORT:   2d
+   :BLOCKER:  previous-sibling
+   :allocate: s16
+   :END:
+
+- move formattables concepts into generation, generalising them. This
+  includes dependencies, etc.
+
+*** Generation extraction model
+   :PROPERTIES:
+   :EFFORT:   2d
+   :BLOCKER:  previous-sibling
+   :allocate: s17
+   :END:
+
+- when C++ and C# models only have formatters, merge them into one
+  model.
+
+*** Makefiles clean up
+   :PROPERTIES:
+   :EFFORT:   2d
+   :BLOCKER:  previous-sibling
+   :allocate: s17
+   :END:
+
+- update all CMake templates with latest layout from hand-crafted
+  files.
+
+*** Product generation
+   :PROPERTIES:
+   :EFFORT:   2d
+   :BLOCKER:  previous-sibling
+   :allocate: s18
+   :END:
+
+- add proudct and product family level entities to coding.
+
+** Milestones
+*** Project start
+    :PROPERTIES:
+    :task_id:  start
+    :END:
+
+* Sprints                                              :taskjuggler_resource:
+
+Sprints for the project plan.
+
+** Sprint 14
+   :PROPERTIES:
+   :resource_id: s14
+   :END:
+
+** Sprint 15
+   :PROPERTIES:
+   :resource_id: s15
+   :END:
+
+** Sprint 16
+   :PROPERTIES:
+   :resource_id: s16
+   :END:
+
+** Sprint 17
+   :PROPERTIES:
+   :resource_id: s17
+   :END:
+
+** Sprint 18
+   :PROPERTIES:
+   :resource_id: s18
+   :END:

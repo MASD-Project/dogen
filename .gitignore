@@ -35,3 +35,7 @@ poly-stitch.elc
 # cquery
 .cquery_cached_index
 compile_commands.json
+
+# Task Juggler
+doc/agile/reports
+*.tjp

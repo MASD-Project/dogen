@@ -98,22 +98,6 @@ now be placed under the =masd= namespace: =masd::lannguage_agnostic=,
 =masd::la= or maybe =masd::pim=. This should be done when we place
 mappings in the meta-model.
 
-*** Rename "language" to "technical space"                            :story:
-
-We are using the word "language" in several places:
-
-- input language
-- output language
-
-What we really mean is technical space:
-
-- input technical space
-- output technical space
-
-When this is done we should also introduce the concept of
-=masd.technical_space= which then toggles knobs. For example, if set
-to C++, both input and output TS become C++.
-
 *** Colours test model is invalid at present                          :story:
 
 We should probably generate this model; at the moment, we have many
@@ -3475,8 +3459,6 @@ themselves.
 Perhaps we should add general support for attributes. This would be
 useful for languages like C# and Java, to control serialisation, etc.
 
-
-
 ** Bugs and limitations
 
 Things we should address as soon as possible because they impact dogen
@@ -4981,7 +4963,6 @@ become very readable.
 
 At present we are validating that all built-in types work but we don't
 check that an invalid type doesn't work.
-
 
 * Future Releases
 
