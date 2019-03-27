@@ -11391,6 +11391,54 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Improving boost test support with org-mode                        :story:
+
+This story is somewhat random at present but there is a kernel of
+usefulness to it. At present we are using [[https://github.com/sgoericke/boost-test][boost-test mode]] in emacs to
+run boost tests and visualise a test report. This mode has its
+shortcomings - its more of a report viewer. In an ideal world, we
+would like to have an org-mode file with all test suites in a given
+product, and then with the output of each test suite inside a
+tree. Then, we need some kind of way to execute nodes of the
+tree. Org-mode has [[https://orgmode.org/worg/org-contrib/babel/intro.html][babel support]] for this. Thing is dogen may help
+code-generate this org-mode file:
+
+- dogen is alreay aware if boost test is being used or not. Dogen also
+  knows of all projects in a product.
+- at present we are using a hacked CMake macro to detect tests and add
+  them to CTest. A better way would be to have dogen code generate the
+  code to do this. This code could also be used to generate the
+  org-mode file. We could even make use of top-level arguments such as
+  =log_level=, etc. These are set at the model level.
+- another way of looking at the problem is to create a separate tool
+  that takes the boost.test XML and uses it to create the org-mode
+  file. The advantage is that we can then take into account things
+  like timings, etc. It is also dogen independent. We could create an
+  XSD for the XML and then use XSD tool to generate C++ code for
+  it. The tool would then be responsible for converting the result to
+  an org file. Dogen could be responsible for creating a "project
+  file" telling the tool about the location of the tests (though its
+  not clear how it would know about this).
+- we could use labels for generated tests, or add them to a separate
+  tree.
+- you can execute all blocks using =org-babel-execute-buffer=.
+- if we could have a "test location" variable somewhere in the
+  org-file, we could create a single org-mode file and then execute it
+  against the different configurations.
+- we could look into how boost-test parses the XML; maybe the output
+  of boost test could be parsed and used to compute things in the
+  org-mode file such as pass/fail, timings, etc. We could even build a
+  org-mode table with the timings at each level: product, test suite,
+  etc.
+- for extra bonus points we could insert file links that take you to
+  the original c++ file for the test, test suite etc.
+
+Links:
+
+- [[http://fgiasson.com/blog/index.php/2016/05/30/creating-and-running-unit-tests-directly-in-source-files-with-org-mode/][Creating and Running Unit Tests Directly in Source Files with Org-mode]]
+- [[https://github.com/structureddynamics/org-mode-clj-tests-utils][Clojure test utilities for Org-mode]]
+- [[https://irreal.org/blog/?p=5297][Running Unit Test with Org Mode]]
+
 *** Consider splitting transforms into rules                          :story:
 
 According to MDE, transforms are split out into several parts:
