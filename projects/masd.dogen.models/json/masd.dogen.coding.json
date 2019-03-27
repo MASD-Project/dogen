@@ -901,6 +901,18 @@
         {
           "name": "language_agnostic",
           "type": ""
+        },
+        {
+          "name": "cmake",
+          "type": ""
+        },
+        {
+          "name": "xml",
+          "type": ""
+        },
+        {
+          "name": "odb",
+          "type": ""
         }
       ]
     },

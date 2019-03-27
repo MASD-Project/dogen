@@ -34,7 +34,10 @@ enum class languages : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     cpp = 1,
     csharp = 2,
-    language_agnostic = 3
+    language_agnostic = 3,
+    cmake = 4,
+    xml = 5,
+    odb = 6
 };
 
 }
