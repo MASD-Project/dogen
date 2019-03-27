@@ -57,7 +57,7 @@ public:
         const masd::dogen::extraction::decoration_properties& decoration_properties,
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
-        const boost::optional<masd::dogen::coding::meta_model::local_decoration>& decoration,
+        const boost::optional<masd::dogen::coding::meta_model::decoration>& decoration,
         const bool is_enum,
         const masd::dogen::coding::meta_model::name& underlying_element,
         const bool is_exception);

@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "masd.dogen.coding/test_data/meta_model/local_decoration_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/decoration_td.hpp"
 
 namespace {
 
@@ -41,9 +41,9 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
 
 namespace masd::dogen::coding::meta_model {
 
-local_decoration_generator::local_decoration_generator() : position_(0) { }
+decoration_generator::decoration_generator() : position_(0) { }
 
-void local_decoration_generator::
+void decoration_generator::
 populate(const unsigned int position, result_type& v) {
     v.top_modeline(create_std_string(position + 0));
     v.bottom_modeline(create_std_string(position + 1));
@@ -52,22 +52,22 @@ populate(const unsigned int position, result_type& v) {
     v.generation_marker(create_std_string(position + 4));
 }
 
-local_decoration_generator::result_type
-local_decoration_generator::create(const unsigned int position) {
-    local_decoration r;
-    local_decoration_generator::populate(position, r);
+decoration_generator::result_type
+decoration_generator::create(const unsigned int position) {
+    decoration r;
+    decoration_generator::populate(position, r);
     return r;
 }
 
-local_decoration_generator::result_type*
-local_decoration_generator::create_ptr(const unsigned int position) {
-    local_decoration* p = new local_decoration();
-    local_decoration_generator::populate(position, *p);
+decoration_generator::result_type*
+decoration_generator::create_ptr(const unsigned int position) {
+    decoration* p = new decoration();
+    decoration_generator::populate(position, *p);
     return p;
 }
 
-local_decoration_generator::result_type
-local_decoration_generator::operator()() {
+decoration_generator::result_type
+decoration_generator::operator()() {
     return create(position_++);
 }
 

@@ -1730,7 +1730,7 @@ for Java, etc.#</dia:string>
         <dia:point val="-188.553,-59.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-189.403,-59.45;-180.887,-50.9996"/>
+        <dia:rectangle val="-189.403,-59.45;-180.888,-50.9996"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2626,7 +2626,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="-192.5,-31.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-232.213,-31.25;-191.65,-19.95"/>
+        <dia:rectangle val="-232.212,-31.25;-191.65,-19.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3900,7 +3900,7 @@ formatting.#</dia:string>
         <dia:point val="-196.745,-72.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-197.595,-72.45;-180.887,-50.95"/>
+        <dia:rectangle val="-197.595,-72.45;-180.888,-50.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4100,7 +4100,7 @@ formatting.#</dia:string>
         <dia:point val="-198.64,-58.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-199.49,-58.65;-180.887,-50.95"/>
+        <dia:rectangle val="-199.49,-58.65;-180.888,-50.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4581,13 +4581,13 @@ meta-types (object templates) and non-types (modules and backend specific entiti
             <dia:string>#decoration#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;local_decoration&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;decoration&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If set, decoration will be added to each generated file.#</dia:string>
+            <dia:string>#If set, decoration to be added to each generated file.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6743,7 +6743,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-225.665,-58.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-226.515,-58.65;-217.887,-50.95"/>
+        <dia:rectangle val="-226.515,-58.65;-217.888,-50.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6785,7 +6785,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-236.243,-69.857"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-237.093,-69.907;-217.887,-50.9996"/>
+        <dia:rectangle val="-237.093,-69.907;-217.888,-50.9996"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7138,7 +7138,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-192.5,-31.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-211.588,-31.25;-191.65,-26.95"/>
+        <dia:rectangle val="-211.587,-31.25;-191.65,-26.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9566,7 +9566,7 @@ model.#</dia:string>
         <dia:point val="-232.162,-12.3613"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-235.523,-13.1113;-231.412,-7.2"/>
+        <dia:rectangle val="-235.522,-13.1114;-231.412,-7.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10253,7 +10253,7 @@ model.#</dia:string>
         <dia:point val="-207.585,-14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-213.523,-14.75;-206.835,-7.25022"/>
+        <dia:rectangle val="-213.522,-14.75;-206.835,-7.25022"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30707,13 +30707,13 @@ rebuilds for no good reason.#</dia:string>
         <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#local_decoration#</dia:string>
+        <dia:string>#decoration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Configuration pertaining to file decoration at the elment level.#</dia:string>
+        <dia:string>#Decoration for this element.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -31030,7 +31030,7 @@ rebuilds for no good reason.#</dia:string>
         <dia:point val="-212,-38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-234.523,-45.85;-211.25,-37.2"/>
+        <dia:rectangle val="-234.522,-45.85;-211.25,-37.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

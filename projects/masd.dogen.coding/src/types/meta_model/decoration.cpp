@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.coding/types/meta_model/local_decoration.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
-local_decoration::local_decoration(
+decoration::decoration(
     const std::string& top_modeline,
     const std::string& bottom_modeline,
     const std::list<std::string>& copyrights,
@@ -34,7 +34,7 @@ local_decoration::local_decoration(
       licence_short_form_(licence_short_form),
       generation_marker_(generation_marker) { }
 
-void local_decoration::swap(local_decoration& other) noexcept {
+void decoration::swap(decoration& other) noexcept {
     using std::swap;
     swap(top_modeline_, other.top_modeline_);
     swap(bottom_modeline_, other.bottom_modeline_);
@@ -43,7 +43,7 @@ void local_decoration::swap(local_decoration& other) noexcept {
     swap(generation_marker_, other.generation_marker_);
 }
 
-bool local_decoration::operator==(const local_decoration& rhs) const {
+bool decoration::operator==(const decoration& rhs) const {
     return top_modeline_ == rhs.top_modeline_ &&
         bottom_modeline_ == rhs.bottom_modeline_ &&
         copyrights_ == rhs.copyrights_ &&
@@ -51,89 +51,89 @@ bool local_decoration::operator==(const local_decoration& rhs) const {
         generation_marker_ == rhs.generation_marker_;
 }
 
-local_decoration& local_decoration::operator=(local_decoration other) {
+decoration& decoration::operator=(decoration other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::string& local_decoration::top_modeline() const {
+const std::string& decoration::top_modeline() const {
     return top_modeline_;
 }
 
-std::string& local_decoration::top_modeline() {
+std::string& decoration::top_modeline() {
     return top_modeline_;
 }
 
-void local_decoration::top_modeline(const std::string& v) {
+void decoration::top_modeline(const std::string& v) {
     top_modeline_ = v;
 }
 
-void local_decoration::top_modeline(const std::string&& v) {
+void decoration::top_modeline(const std::string&& v) {
     top_modeline_ = std::move(v);
 }
 
-const std::string& local_decoration::bottom_modeline() const {
+const std::string& decoration::bottom_modeline() const {
     return bottom_modeline_;
 }
 
-std::string& local_decoration::bottom_modeline() {
+std::string& decoration::bottom_modeline() {
     return bottom_modeline_;
 }
 
-void local_decoration::bottom_modeline(const std::string& v) {
+void decoration::bottom_modeline(const std::string& v) {
     bottom_modeline_ = v;
 }
 
-void local_decoration::bottom_modeline(const std::string&& v) {
+void decoration::bottom_modeline(const std::string&& v) {
     bottom_modeline_ = std::move(v);
 }
 
-const std::list<std::string>& local_decoration::copyrights() const {
+const std::list<std::string>& decoration::copyrights() const {
     return copyrights_;
 }
 
-std::list<std::string>& local_decoration::copyrights() {
+std::list<std::string>& decoration::copyrights() {
     return copyrights_;
 }
 
-void local_decoration::copyrights(const std::list<std::string>& v) {
+void decoration::copyrights(const std::list<std::string>& v) {
     copyrights_ = v;
 }
 
-void local_decoration::copyrights(const std::list<std::string>&& v) {
+void decoration::copyrights(const std::list<std::string>&& v) {
     copyrights_ = std::move(v);
 }
 
-const std::string& local_decoration::licence_short_form() const {
+const std::string& decoration::licence_short_form() const {
     return licence_short_form_;
 }
 
-std::string& local_decoration::licence_short_form() {
+std::string& decoration::licence_short_form() {
     return licence_short_form_;
 }
 
-void local_decoration::licence_short_form(const std::string& v) {
+void decoration::licence_short_form(const std::string& v) {
     licence_short_form_ = v;
 }
 
-void local_decoration::licence_short_form(const std::string&& v) {
+void decoration::licence_short_form(const std::string&& v) {
     licence_short_form_ = std::move(v);
 }
 
-const std::string& local_decoration::generation_marker() const {
+const std::string& decoration::generation_marker() const {
     return generation_marker_;
 }
 
-std::string& local_decoration::generation_marker() {
+std::string& decoration::generation_marker() {
     return generation_marker_;
 }
 
-void local_decoration::generation_marker(const std::string& v) {
+void decoration::generation_marker(const std::string& v) {
     generation_marker_ = v;
 }
 
-void local_decoration::generation_marker(const std::string&& v) {
+void decoration::generation_marker(const std::string&& v) {
     generation_marker_ = std::move(v);
 }
 

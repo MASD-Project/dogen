@@ -140,8 +140,8 @@
         },
         {
           "name": "decoration",
-          "type": "boost::optional<local_decoration>",
-          "documentation": "If set, decoration will be added to each generated file.\n"
+          "type": "boost::optional<decoration>",
+          "documentation": "If set, decoration to be added to each generated file.\n"
         }
       ]
     },
@@ -2110,8 +2110,8 @@
       ]
     },
     {
-      "name": "meta_model::local_decoration",
-      "documentation": "Configuration pertaining to file decoration at the elment level.\n",
+      "name": "meta_model::decoration",
+      "documentation": "Decoration for this element.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {

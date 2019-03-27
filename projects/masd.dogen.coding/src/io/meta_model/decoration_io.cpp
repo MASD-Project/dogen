@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.coding/io/meta_model/local_decoration_io.hpp"
+#include "masd.dogen.coding/io/meta_model/decoration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -46,9 +46,9 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 namespace masd::dogen::coding::meta_model {
 
-std::ostream& operator<<(std::ostream& s, const local_decoration& v) {
+std::ostream& operator<<(std::ostream& s, const decoration& v) {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::local_decoration\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::decoration\"" << ", "
       << "\"top_modeline\": " << "\"" << tidy_up_string(v.top_modeline()) << "\"" << ", "
       << "\"bottom_modeline\": " << "\"" << tidy_up_string(v.bottom_modeline()) << "\"" << ", "
       << "\"copyrights\": " << v.copyrights() << ", "

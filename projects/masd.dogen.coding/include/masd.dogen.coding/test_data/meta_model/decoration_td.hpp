@@ -18,16 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_LOCAL_DECORATION_FWD_HPP
-#define MASD_DOGEN_CODING_TYPES_META_MODEL_LOCAL_DECORATION_FWD_HPP
+#ifndef MASD_DOGEN_CODING_TEST_DATA_META_MODEL_DECORATION_TD_HPP
+#define MASD_DOGEN_CODING_TEST_DATA_META_MODEL_DECORATION_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include "masd.dogen.coding/types/meta_model/decoration.hpp"
+
 namespace masd::dogen::coding::meta_model {
 
-class local_decoration;
+class decoration_generator {
+public:
+    decoration_generator();
+
+public:
+    typedef masd::dogen::coding::meta_model::decoration result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 }
 

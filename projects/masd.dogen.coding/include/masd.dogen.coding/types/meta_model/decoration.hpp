@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_LOCAL_DECORATION_HPP
-#define MASD_DOGEN_CODING_TYPES_META_MODEL_LOCAL_DECORATION_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_DECORATION_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_DECORATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,17 +32,17 @@
 namespace masd::dogen::coding::meta_model {
 
 /**
- * @brief Configuration pertaining to file decoration at the elment level.
+ * @brief Decoration for this element.
  */
-class local_decoration final {
+class decoration final {
 public:
-    local_decoration() = default;
-    local_decoration(const local_decoration&) = default;
-    local_decoration(local_decoration&&) = default;
-    ~local_decoration() = default;
+    decoration() = default;
+    decoration(const decoration&) = default;
+    decoration(decoration&&) = default;
+    ~decoration() = default;
 
 public:
-    local_decoration(
+    decoration(
         const std::string& top_modeline,
         const std::string& bottom_modeline,
         const std::list<std::string>& copyrights,
@@ -96,14 +96,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const local_decoration& rhs) const;
-    bool operator!=(const local_decoration& rhs) const {
+    bool operator==(const decoration& rhs) const;
+    bool operator!=(const decoration& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(local_decoration& other) noexcept;
-    local_decoration& operator=(local_decoration other);
+    void swap(decoration& other) noexcept;
+    decoration& operator=(decoration other);
 
 private:
     std::string top_modeline_;
@@ -119,8 +119,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::coding::meta_model::local_decoration& lhs,
-    masd::dogen::coding::meta_model::local_decoration& rhs) {
+    masd::dogen::coding::meta_model::decoration& lhs,
+    masd::dogen::coding::meta_model::decoration& rhs) {
     lhs.swap(rhs);
 }
 

@@ -30,12 +30,12 @@
 #include "masd.dogen.coding/test_data/meta_model/modeline_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/exception_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/primitive_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/decoration_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/enumeration_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/origin_types_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/modeline_group_td.hpp"
 #include "masd.dogen.extraction/test_data/decoration_properties_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/object_template_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/local_decoration_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/generation_marker_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/static_stereotypes_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/artefact_properties_td.hpp"
@@ -127,15 +127,15 @@ std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype
     return r;
 }
 
-masd::dogen::coding::meta_model::local_decoration
-create_masd_dogen_coding_meta_model_local_decoration(const unsigned int position) {
-    return masd::dogen::coding::meta_model::local_decoration_generator::create(position);
+masd::dogen::coding::meta_model::decoration
+create_masd_dogen_coding_meta_model_decoration(const unsigned int position) {
+    return masd::dogen::coding::meta_model::decoration_generator::create(position);
 }
 
-boost::optional<masd::dogen::coding::meta_model::local_decoration>
-create_boost_optional_masd_dogen_coding_meta_model_local_decoration(unsigned int position) {
-    boost::optional<masd::dogen::coding::meta_model::local_decoration> r(
-        create_masd_dogen_coding_meta_model_local_decoration(position));
+boost::optional<masd::dogen::coding::meta_model::decoration>
+create_boost_optional_masd_dogen_coding_meta_model_decoration(unsigned int position) {
+    boost::optional<masd::dogen::coding::meta_model::decoration> r(
+        create_masd_dogen_coding_meta_model_decoration(position));
     return r;
 }
 
@@ -158,7 +158,7 @@ populate(const unsigned int position, result_type& v) {
     v.decoration_properties(create_masd_dogen_extraction_decoration_properties(position + 10));
     v.artefact_properties(create_std_unordered_map_std_string_masd_dogen_coding_meta_model_artefact_properties(position + 11));
     v.archetype_location_properties(create_std_unordered_map_std_string_masd_dogen_coding_meta_model_local_archetype_location_properties(position + 12));
-    v.decoration(create_boost_optional_masd_dogen_coding_meta_model_local_decoration(position + 13));
+    v.decoration(create_boost_optional_masd_dogen_coding_meta_model_decoration(position + 13));
 }
 
 element_generator::result_type*
