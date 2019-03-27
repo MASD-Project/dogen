@@ -6848,6 +6848,7 @@ key because we do not have hashing, IO and serialisation support.
 Links:
 
 - [[http://stackoverflow.com/questions/36219532/serializing-stdtype-index][Serializing `std::type_index`]]
+- [[https://www.boost.org/doc/libs/1_69_0/doc/html/boost_typeindex.html][Boost typeindex]]
 
 *** Add a file format parameter to tracing for model dumps            :story:
 
