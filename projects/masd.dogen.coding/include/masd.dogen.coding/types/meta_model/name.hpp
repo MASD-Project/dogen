@@ -62,7 +62,9 @@ public:
         const std::string& simple,
         const std::map<masd::dogen::coding::meta_model::languages, std::string>& qualified,
         const masd::dogen::coding::meta_model::location& location,
-        const std::string& identifiable);
+        const std::string& identifiable,
+        const std::string& dot_qualified,
+        const std::string& colon_qualified);
 
 public:
     /**
@@ -124,6 +126,26 @@ public:
     void identifiable(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Qualified name using "." as the separator.
+     */
+    /**@{*/
+    const std::string& dot_qualified() const;
+    std::string& dot_qualified();
+    void dot_qualified(const std::string& v);
+    void dot_qualified(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Qualified name using "::" as the separator.
+     */
+    /**@{*/
+    const std::string& colon_qualified() const;
+    std::string& colon_qualified();
+    void colon_qualified(const std::string& v);
+    void colon_qualified(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const name& rhs) const;
     bool operator!=(const name& rhs) const {
@@ -140,6 +162,8 @@ private:
     std::map<masd::dogen::coding::meta_model::languages, std::string> qualified_;
     masd::dogen::coding::meta_model::location location_;
     std::string identifiable_;
+    std::string dot_qualified_;
+    std::string colon_qualified_;
 };
 
 }

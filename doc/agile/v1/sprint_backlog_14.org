@@ -13,21 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-27 Wed 17:09]
+#+CAPTION: Clock summary at [2019-03-27 Wed 17:34]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *16:57* |       |      | 100.0 |
+| *Total time*                                           | *17:21* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 16:57   |       |      | 100.0 |
-| Active                                                 |         | 16:57 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 1:47 |  10.5 |
-| Sprint and product backlog grooming                    |         |       | 1:51 |  10.9 |
-| Create a video demo for the previous sprint's features |         |       | 3:11 |  18.8 |
-| Fix issues with emacs                                  |         |       | 2:42 |  15.9 |
-| Create a basic "project plan"                          |         |       | 2:08 |  12.6 |
-| Promote extraction entities to meta-model elements     |         |       | 3:01 |  17.8 |
-| Rename "language" to "technical space"                 |         |       | 2:17 |  13.5 |
+| Stories                                                | 17:21   |       |      | 100.0 |
+| Active                                                 |         | 17:21 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 1:47 |  10.3 |
+| Sprint and product backlog grooming                    |         |       | 1:51 |  10.7 |
+| Create a video demo for the previous sprint's features |         |       | 3:11 |  18.3 |
+| Fix issues with emacs                                  |         |       | 2:42 |  15.6 |
+| Create a basic "project plan"                          |         |       | 2:08 |  12.3 |
+| Promote extraction entities to meta-model elements     |         |       | 3:01 |  17.4 |
+| Rename "language" to "technical space"                 |         |       | 2:17 |  13.2 |
+| Simplify qualified name                                |         |       | 0:24 |   2.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -318,6 +319,32 @@ Tasks:
   then are updated after mapping. Only if mapping did something to
   element.
 -
+
+*** STARTED Simplify qualified name                                   :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-27 Wed 17:10]--[2019-03-27 Wed 17:34] =>  0:24
+    :END:
+
+At present we have a map of languages to qualified name, but in truth
+there are only two use cases:
+
+- dot separated: C#, CMake, etc.
+- double-colon separated: C++.
+
+We could just have these two as simple strings. In addition, we also
+need to versions of identifiable:
+
+- simple
+- qualified
+
+Merged stories:
+
+*Use an unordered map in qualified name*
+
+For some reason we are using a map, but its not clear that we need
+sorting. Change it to unordered and see what breaks.
+
+It seems we get errors in serialisation when using the map.
 
 *** Add support for decoration configuration overrides                :story:
 

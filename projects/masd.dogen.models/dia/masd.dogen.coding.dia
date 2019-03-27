@@ -921,7 +921,7 @@ etc.).
         <dia:point val="-170.938,-63"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-171.688,-70.05;-166.8,-62.2"/>
+        <dia:rectangle val="-171.688,-68.45;-166.8,-62.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -930,7 +930,7 @@ etc.).
         <dia:point val="-170.938,-63"/>
         <dia:point val="-170.938,-67"/>
         <dia:point val="-167,-67"/>
-        <dia:point val="-167,-70"/>
+        <dia:point val="-167,-68.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -2995,7 +2995,7 @@ decided instead to use the word object.#</dia:string>
         <dia:point val="-167,-76"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-167.05,-76.05;-149.51,-69.95"/>
+        <dia:rectangle val="-167.05,-76.05;-149.51,-68.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-167,-76"/>
@@ -3004,7 +3004,7 @@ decided instead to use the word object.#</dia:string>
         <dia:real val="17.440000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6"/>
+        <dia:real val="7.5999999999999996"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#name#</dia:string>
@@ -3221,6 +3221,52 @@ The simple name must be unique for a given location.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#Representation of the name that can usable as an identifier on all of the supported
 languages, using the entire name structure.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#dot_qualified#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Qualified name using "." as the separator.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#colon_qualified#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Qualified name using "::" as the separator.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -25486,7 +25532,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-142.938,-63"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-149.61,-70.05;-142.188,-62.2"/>
+        <dia:rectangle val="-149.61,-68.45;-142.188,-62.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -25495,7 +25541,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-142.938,-63"/>
         <dia:point val="-142.938,-67"/>
         <dia:point val="-149.56,-67"/>
-        <dia:point val="-149.56,-70"/>
+        <dia:point val="-149.56,-68.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

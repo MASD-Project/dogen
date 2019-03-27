@@ -62,6 +62,8 @@ populate(const unsigned int position, result_type& v) {
     v.qualified(create_std_map_masd_dogen_coding_meta_model_languages_std_string(position + 2));
     v.location(create_masd_dogen_coding_meta_model_location(position + 3));
     v.identifiable(create_std_string(position + 4));
+    v.dot_qualified(create_std_string(position + 5));
+    v.colon_qualified(create_std_string(position + 6));
 }
 
 name_generator::result_type

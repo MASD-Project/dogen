@@ -51,6 +51,8 @@ std::size_t name_hasher::hash(const name& v) {
     combine(seed, hash_std_map_masd_dogen_coding_meta_model_languages_std_string(v.qualified()));
     combine(seed, v.location());
     combine(seed, v.identifiable());
+    combine(seed, v.dot_qualified());
+    combine(seed, v.colon_qualified());
 
     return seed;
 }

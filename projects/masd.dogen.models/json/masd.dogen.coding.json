@@ -485,6 +485,16 @@
           "name": "identifiable",
           "type": "std::string",
           "documentation": "Representation of the name that can usable as an identifier on all of the supported\nlanguages, using the entire name structure.\n"
+        },
+        {
+          "name": "dot_qualified",
+          "type": "std::string",
+          "documentation": "Qualified name using \".\" as the separator.\n"
+        },
+        {
+          "name": "colon_qualified",
+          "type": "std::string",
+          "documentation": "Qualified name using \"::\" as the separator.\n"
         }
       ]
     },

@@ -27,12 +27,16 @@ name::name(
     const std::string& simple,
     const std::map<masd::dogen::coding::meta_model::languages, std::string>& qualified,
     const masd::dogen::coding::meta_model::location& location,
-    const std::string& identifiable)
+    const std::string& identifiable,
+    const std::string& dot_qualified,
+    const std::string& colon_qualified)
     : id_(id),
       simple_(simple),
       qualified_(qualified),
       location_(location),
-      identifiable_(identifiable) { }
+      identifiable_(identifiable),
+      dot_qualified_(dot_qualified),
+      colon_qualified_(colon_qualified) { }
 
 void name::swap(name& other) noexcept {
     using std::swap;
@@ -41,6 +45,8 @@ void name::swap(name& other) noexcept {
     swap(qualified_, other.qualified_);
     swap(location_, other.location_);
     swap(identifiable_, other.identifiable_);
+    swap(dot_qualified_, other.dot_qualified_);
+    swap(colon_qualified_, other.colon_qualified_);
 }
 
 bool name::operator==(const name& rhs) const {
@@ -48,7 +54,9 @@ bool name::operator==(const name& rhs) const {
         simple_ == rhs.simple_ &&
         qualified_ == rhs.qualified_ &&
         location_ == rhs.location_ &&
-        identifiable_ == rhs.identifiable_;
+        identifiable_ == rhs.identifiable_ &&
+        dot_qualified_ == rhs.dot_qualified_ &&
+        colon_qualified_ == rhs.colon_qualified_;
 }
 
 name& name::operator=(name other) {
@@ -135,6 +143,38 @@ void name::identifiable(const std::string& v) {
 
 void name::identifiable(const std::string&& v) {
     identifiable_ = std::move(v);
+}
+
+const std::string& name::dot_qualified() const {
+    return dot_qualified_;
+}
+
+std::string& name::dot_qualified() {
+    return dot_qualified_;
+}
+
+void name::dot_qualified(const std::string& v) {
+    dot_qualified_ = v;
+}
+
+void name::dot_qualified(const std::string&& v) {
+    dot_qualified_ = std::move(v);
+}
+
+const std::string& name::colon_qualified() const {
+    return colon_qualified_;
+}
+
+std::string& name::colon_qualified() {
+    return colon_qualified_;
+}
+
+void name::colon_qualified(const std::string& v) {
+    colon_qualified_ = v;
+}
+
+void name::colon_qualified(const std::string&& v) {
+    colon_qualified_ = std::move(v);
 }
 
 }
