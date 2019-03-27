@@ -2141,33 +2141,6 @@
       ]
     },
     {
-      "name": "meta_model::global_decoration",
-      "documentation": "Configuration pertaining to file decoration, applicable to all model elements which\ndo not provide an override.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "copyrights",
-          "type": "std::list<std::string>",
-          "documentation": "All copyright notices for the current element.\n"
-        },
-        {
-          "name": "licence_short_form",
-          "type": "std::string",
-          "documentation": "Licence to use by default for files in this model, if any.\n"
-        },
-        {
-          "name": "licence_long_form",
-          "type": "std::string",
-          "documentation": "Licence to use in this model, if any.\n"
-        },
-        {
-          "name": "generation_marker",
-          "type": "std::string",
-          "documentation": "Code generation marker to use for this model, if any.\n"
-        }
-      ]
-    },
-    {
       "name": "transforms::modelines_transform",
       "stereotypes": [
         "masd::handcrafted"

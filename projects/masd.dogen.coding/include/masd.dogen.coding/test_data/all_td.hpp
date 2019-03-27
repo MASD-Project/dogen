@@ -62,7 +62,6 @@
 #include "masd.dogen.coding/test_data/helpers/decomposition_result_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/formatting_styles_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/generation_marker_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/global_decoration_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/modeline_location_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/static_stereotypes_td.hpp"
 #include "masd.dogen.coding/test_data/helpers/mapping_set_repository_td.hpp"

@@ -94,7 +94,6 @@
 #include "masd.dogen.coding/types/helpers/new_name_tree_parser.hpp"
 #include "masd.dogen.coding/types/meta_model/formatting_styles.hpp"
 #include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
-#include "masd.dogen.coding/types/meta_model/global_decoration.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_location.hpp"
 #include "masd.dogen.coding/types/transforms/mapping_transform.hpp"
 #include "masd.dogen.coding/types/transforms/modules_transform.hpp"

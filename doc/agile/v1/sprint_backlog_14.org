@@ -13,21 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-27 Wed 12:16]
+#+CAPTION: Clock summary at [2019-03-27 Wed 15:39]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *14:46* |       |      | 100.0 |
+| *Total time*                                           | *15:29* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 14:46   |       |      | 100.0 |
-| Active                                                 |         | 14:46 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 1:47 |  12.1 |
-| Sprint and product backlog grooming                    |         |       | 1:51 |  12.5 |
-| Create a video demo for the previous sprint's features |         |       | 3:11 |  21.6 |
-| Fix issues with emacs                                  |         |       | 2:42 |  18.3 |
-| Create a basic "project plan"                          |         |       | 2:08 |  14.4 |
-| Promote extraction entities to meta-model elements     |         |       | 3:01 |  20.4 |
-| Rename "language" to "technical space"                 |         |       | 0:06 |   0.7 |
+| Stories                                                | 15:29   |       |      | 100.0 |
+| Active                                                 |         | 15:29 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 1:47 |  11.5 |
+| Sprint and product backlog grooming                    |         |       | 1:51 |  11.9 |
+| Create a video demo for the previous sprint's features |         |       | 3:11 |  20.6 |
+| Fix issues with emacs                                  |         |       | 2:42 |  17.4 |
+| Create a basic "project plan"                          |         |       | 2:08 |  13.8 |
+| Promote extraction entities to meta-model elements     |         |       | 3:01 |  19.5 |
+| Rename "language" to "technical space"                 |         |       | 0:49 |   5.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -287,8 +287,10 @@ We should also allow for both:
 - full licence: used later at the product level.
 - licence summary: used for preambles in files.
 
-*** Rename "language" to "technical space"                            :story:
+*** STARTED Rename "language" to "technical space"                    :story:
     :LOGBOOK:
+    CLOCK: [2019-03-27 Wed 15:03]--[2019-03-27 Wed 15:39] =>  0:36
+    CLOCK: [2019-03-27 Wed 14:55]--[2019-03-27 Wed 15:02] =>  0:07
     CLOCK: [2019-03-26 Tue 14:32]--[2019-03-26 Tue 14:38] =>  0:06
     :END:
 

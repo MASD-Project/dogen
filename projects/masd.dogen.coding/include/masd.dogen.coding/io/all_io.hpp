@@ -62,7 +62,6 @@
 #include "masd.dogen.coding/io/helpers/decomposition_result_io.hpp"
 #include "masd.dogen.coding/io/meta_model/formatting_styles_io.hpp"
 #include "masd.dogen.coding/io/meta_model/generation_marker_io.hpp"
-#include "masd.dogen.coding/io/meta_model/global_decoration_io.hpp"
 #include "masd.dogen.coding/io/meta_model/modeline_location_io.hpp"
 #include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
 #include "masd.dogen.coding/io/helpers/mapping_set_repository_io.hpp"
