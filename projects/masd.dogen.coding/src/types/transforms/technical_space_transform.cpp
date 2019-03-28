@@ -30,11 +30,11 @@
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
-#include "masd.dogen.coding/types/transforms/language_transform.hpp"
+#include "masd.dogen.coding/types/transforms/technical_space_transform.hpp"
 
 namespace {
 
-const std::string transform_id("coding.transforms.language_transform");
+const std::string transform_id("coding.transforms.technical_space_transform");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -52,7 +52,7 @@ const std::string unsupported_technical_space(
 namespace masd::dogen::coding::transforms {
 
 meta_model::technical_space
-language_transform::to_language(const std::string& s) {
+technical_space_transform::to_technical_space(const std::string& s) {
     using meta_model::technical_space;
     if (s == cpp_technical_space)
         return technical_space::cpp;
@@ -66,16 +66,17 @@ language_transform::to_language(const std::string& s) {
         transformation_error(unsupported_technical_space + s));
 }
 
-language_transform::type_group language_transform::
+technical_space_transform::type_group technical_space_transform::
 make_type_group(const annotations::type_repository& atrp) {
     type_group r;
     const annotations::type_repository_selector s(atrp);
-    r.output_technical_space = s.select_type_by_name(traits::output_technical_space());
+    r.output_technical_space =
+        s.select_type_by_name(traits::output_technical_space());
     return r;
 }
 
 std::list<meta_model::technical_space>
-language_transform::make_output_technical_space(const type_group& tg,
+technical_space_transform::make_output_technical_space(const type_group& tg,
     const annotations::annotation& a) {
     const annotations::entry_selector s(a);
 
@@ -85,14 +86,14 @@ language_transform::make_output_technical_space(const type_group& tg,
 
     const auto ots(s.get_text_collection_content(tg.output_technical_space));
     for (const auto ts : ots)
-        r.push_back(to_language(ts));
+        r.push_back(to_technical_space(ts));
 
     return r;
 }
 
-void language_transform::
+void technical_space_transform::
 apply(const context& ctx, meta_model::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "language transform",
+    tracing::scoped_transform_tracer stp(lg, "technical space transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     /*

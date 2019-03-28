@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_LANGUAGE_TRANSFORM_HPP
-#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_LANGUAGE_TRANSFORM_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_TECHNICAL_SPACE_TRANSFORM_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_TECHNICAL_SPACE_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,9 +35,9 @@
 
 namespace masd::dogen::coding::transforms {
 
-class language_transform final {
+class technical_space_transform final {
 private:
-    static meta_model::technical_space to_language(const std::string& s);
+    static meta_model::technical_space to_technical_space(const std::string& s);
 
 private:
     struct type_group {

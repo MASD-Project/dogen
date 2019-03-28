@@ -25,7 +25,7 @@
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/modules_transform.hpp"
 #include "masd.dogen.coding/types/transforms/origin_transform.hpp"
-#include "masd.dogen.coding/types/transforms/language_transform.hpp"
+#include "masd.dogen.coding/types/transforms/technical_space_transform.hpp"
 #include "masd.dogen.coding/types/transforms/type_params_transform.hpp"
 #include "masd.dogen.coding/types/transforms/parsing_transform.hpp"
 #include "masd.dogen.coding/types/transforms/primitives_transform.hpp"
@@ -45,12 +45,12 @@ namespace masd::dogen::coding::transforms {
 
 void pre_assembly_chain::apply(const context& ctx, meta_model::model& m) {
     /*
-     * Module transform must be done before origin and language
+     * Module transform must be done before origin and technical space
      * transforms to get these properties populated on the new
      * modules.
      */
     modules_transform::apply(ctx, m);
-    language_transform::apply(ctx, m);
+    technical_space_transform::apply(ctx, m);
 
     /*
      * There are no particular dependencies on the next set of

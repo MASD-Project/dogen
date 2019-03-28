@@ -1683,7 +1683,7 @@ for Java, etc.#</dia:string>
         <dia:point val="-187.553,-58.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-188.403,-58.45;-179.887,-49.9996"/>
+        <dia:rectangle val="-188.403,-58.45;-179.888,-49.9996"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2579,7 +2579,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="-191.5,-30.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-231.213,-30.25;-190.65,-18.95"/>
+        <dia:rectangle val="-231.212,-30.25;-190.65,-18.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3777,7 +3777,7 @@ formatting.#</dia:string>
         <dia:point val="-195.745,-71.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-196.595,-71.45;-179.887,-49.95"/>
+        <dia:rectangle val="-196.595,-71.45;-179.888,-49.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3977,7 +3977,7 @@ formatting.#</dia:string>
         <dia:point val="-197.64,-57.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-198.49,-57.65;-179.887,-49.95"/>
+        <dia:rectangle val="-198.49,-57.65;-179.888,-49.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6620,7 +6620,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-224.665,-57.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-225.515,-57.65;-216.887,-49.95"/>
+        <dia:rectangle val="-225.515,-57.65;-216.888,-49.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6662,7 +6662,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-235.243,-68.857"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-236.093,-68.907;-216.887,-49.9996"/>
+        <dia:rectangle val="-236.093,-68.907;-216.888,-49.9996"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7015,7 +7015,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-191.5,-30.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-210.588,-30.25;-190.65,-25.95"/>
+        <dia:rectangle val="-210.587,-30.25;-190.65,-25.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9512,7 +9512,7 @@ model.#</dia:string>
         <dia:point val="-231.162,-11.3613"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-234.523,-12.1113;-230.412,-6.2"/>
+        <dia:rectangle val="-234.522,-12.1114;-230.412,-6.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10199,7 +10199,7 @@ model.#</dia:string>
         <dia:point val="-206.585,-13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-212.523,-13.75;-205.835,-6.25022"/>
+        <dia:rectangle val="-212.522,-13.75;-205.835,-6.25022"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12222,7 +12222,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#language_transform#</dia:string>
+        <dia:string>#technical_space_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>
@@ -30976,7 +30976,7 @@ rebuilds for no good reason.#</dia:string>
         <dia:point val="-211,-37"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-233.523,-44.85;-210.25,-36.2"/>
+        <dia:rectangle val="-233.522,-44.85;-210.25,-36.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
