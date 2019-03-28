@@ -32,7 +32,7 @@
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.annotations/types/archetype_locations_group.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository_parts.hpp"
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.generation/types/meta_model/intra_backend_segment_properties.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
@@ -42,7 +42,7 @@ namespace masd::dogen::generation::transforms {
 
 /**
  * @brief Performs a model to text transformation of a meta-model,
- * into its supported language.
+ * into its supported technical space.
  */
 class model_to_extraction_model_transform_interface {
 public:
@@ -90,9 +90,9 @@ public:
     archetype_location_repository_parts() const = 0;
 
     /**
-     * @brief Language supported by this transform.
+     * @brief Technical space supported by this transform.
      */
-    virtual coding::meta_model::languages language() const = 0;
+    virtual coding::meta_model::technical_space technical_space() const = 0;
 
     /**
      * @brief Returns all intra-backend segment properties.

@@ -206,9 +206,7 @@ validate(const meta_model::model& im) {
     using meta_model::origin_types;
     const bool ipr(im.origin_type() == origin_types::proxy_reference);
 
-    using meta_model::languages;
     validator v(im.name(), ipr);
-
     for (const auto& pair : im.modules())
         v.validate(pair.first, *pair.second);
 

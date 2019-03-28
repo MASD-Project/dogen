@@ -30,7 +30,7 @@
 #include "masd.dogen.annotations/types/type.hpp"
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
@@ -78,17 +78,17 @@ private:
 
 private:
     static meta_model::name obtain_enumeration_default_underlying_element_name(
-        const meta_model::model& em);
+        const meta_model::model& m);
     static std::string obtain_invalid_enumerator_simple_name(
-        const meta_model::languages l);
+        const meta_model::technical_space ts);
     static meta_model::enumerator make_invalid_enumerator(
-        const meta_model::name& n, const meta_model::languages l);
+        const meta_model::name& n, const meta_model::technical_space ts);
 
     static void expand_default_underlying_element(
         const meta_model::name& default_underlying_element_name,
         meta_model::enumeration& e);
     static void expand_enumerators(const enumerator_type_group& tg,
-        const meta_model::languages l, meta_model::enumeration& e);
+        const meta_model::technical_space ts, meta_model::enumeration& e);
 
 public:
     static void apply(const context& ctx, meta_model::model& m);

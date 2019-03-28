@@ -23,7 +23,6 @@
 #include "masd.dogen.extraction/types/indent_filter.hpp"
 #include "masd.dogen.extraction/types/comment_formatter.hpp"
 #include "masd.dogen.coding/types/helpers/name_flattener.hpp"
-#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.generation.csharp/io/formattables/helper_properties_io.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/formatting_error.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/assistant.hpp"

@@ -20,7 +20,6 @@
  */
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.coding/types/helpers/building_error.hpp"
 #include "masd.dogen.coding/types/helpers/string_processor.hpp"
 #include "masd.dogen.coding/types/helpers/fully_qualified_representation_builder.hpp"
@@ -29,8 +28,6 @@ namespace {
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory("coding.helpers.fully_qualified_representation_builder"));
-
-const std::string qn_missing("Could not find qualified name for language: ");
 
 }
 

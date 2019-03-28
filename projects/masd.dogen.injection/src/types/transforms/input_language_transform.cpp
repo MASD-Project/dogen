@@ -63,7 +63,7 @@ apply(const context& ctx, meta_model::model& m) {
 
     const auto& tg(make_type_group(*ctx.type_repository()));
     const auto ra(m.annotation());
-    m.input_language(make_input_language(tg, ra));
+    m.input_technical_space(make_input_language(tg, ra));
 
     stp.end_transform(m);
 }

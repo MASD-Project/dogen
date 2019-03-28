@@ -18,26 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.coding/test_data/meta_model/languages_td.hpp"
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_TECHNICAL_SPACE_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_TECHNICAL_SPACE_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace masd::dogen::coding::meta_model {
 
-languages_generator::languages_generator() : position_(0) { }
-void languages_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<languages>(position % 7);
-}
-
-languages_generator::result_type
-languages_generator::create(const unsigned int  position) {
-    result_type r;
-    languages_generator::populate(position, r);
-    return r;
-}
-
-languages_generator::result_type
-languages_generator::operator()() {
-    return create(position_++);
-}
+/**
+ * @brief Models need to declare upfront the programming language they will target.
+ */
+enum class technical_space : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    cpp = 1,
+    csharp = 2,
+    language_agnostic = 3,
+    cmake = 4,
+    xml = 5,
+    odb = 6
+};
 
 }
+
+#endif

@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <unordered_set>
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/types/meta_model/location.hpp"
 #include "masd.dogen.coding/types/meta_model/name_tree.hpp"
 
@@ -45,7 +45,8 @@ public:
      *
      * @param language what programming language syntax to use.
      */
-    explicit legacy_name_tree_parser(const meta_model::languages language);
+    explicit legacy_name_tree_parser(
+        const meta_model::technical_space ts);
 
 public:
     /**
@@ -54,7 +55,7 @@ public:
     meta_model::name_tree parse(const std::string& s) const;
 
 private:
-    const meta_model::languages language_;
+    const meta_model::technical_space technical_space_;
 };
 
 }

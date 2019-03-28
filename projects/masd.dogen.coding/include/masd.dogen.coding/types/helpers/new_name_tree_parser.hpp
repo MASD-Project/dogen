@@ -26,8 +26,10 @@
 #endif
 
 #include <functional>
+#include <boost/optional.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
+#include <boost/phoenix/bind/bind_function.hpp>
 #include <boost/spirit/include/qi.hpp>
 #include <boost/spirit/include/phoenix_function.hpp>
 #include <boost/spirit/include/phoenix_stl.hpp>
@@ -36,12 +38,8 @@
 #include <boost/spirit/include/phoenix_operator.hpp>
 #include <boost/spirit/include/phoenix_object.hpp>
 #include <boost/spirit/repository/include/qi_distinct.hpp>
-#include <boost/optional.hpp>
-
-#include <boost/phoenix/bind/bind_function.hpp>
-
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/io/meta_model/name_tree_io.hpp"
 #include "masd.dogen.coding/types/helpers/parsing_error.hpp"
 #include "masd.dogen.coding/types/helpers/name_tree_builder.hpp"
@@ -49,10 +47,11 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg = logger_factory("coding.name_tree_parser");
+auto lg = logger_factory("coding.new_name_tree_parser");
 
-const std::string unsupported_language = "Invalid or unsupported language: ";
-const std::string error_msg = "Failed to parse string: ";
+const std::string unsupported_technical_space(
+    "Invalid or unsupported technical space: ");
+const std::string error_msg("Failed to parse string: ");
 using namespace boost::spirit;
 
 using masd::dogen::coding::helpers::name_tree_builder;
@@ -97,7 +96,8 @@ struct name_tree_listener
     bool is_const    = false;
     bool is_volatile = false;
     //NOTE: Might need mutable, too. and thread_local also exists.
-    //this is optional, because `char`, `signed char` and `unsigned char` are three types -> essentially a tristate bool.
+    //this is optional, because `char`, `signed char` and `unsigned
+    //char` are three types -> essentially a tristate bool.
     boost::optional<bool> sign;
 
     /*
@@ -128,7 +128,8 @@ struct name_tree_listener
 
     bool set_volatile()
     {
-        bool & volatile_ = pointers.empty() ? is_volatile : pointers.back().is_volatile;
+        bool & volatile_ = pointers.empty() ? is_volatile :
+            pointers.back().is_volatile;
         if (volatile_)
             return false;
         else
@@ -175,7 +176,8 @@ struct name_tree_listener
             type_name = "int";
             return true;
         }
-        else if ((type_name == "long") || (type_name == "long long") || (type_name == "short"))
+        else if ((type_name == "long") || (type_name == "long long") ||
+            (type_name == "short"))
             return true;
         else
             return false;
@@ -282,15 +284,19 @@ struct custom_type_grammar : qi::grammar<Iterator, Skipper>
     }
 
 
-    std::string scope_operator_for_language(const masd::dogen::coding::meta_model::languages l) {
-        switch (l) {
-        case masd::dogen::coding::meta_model::languages::csharp:  return ".";
-        case masd::dogen::coding::meta_model::languages::cpp:     return "::";
+    std::string scope_operator_for_language(
+        const masd::dogen::coding::meta_model::technical_space ts) {
+        switch (ts) {
+        case masd::dogen::coding::meta_model::technical_space::csharp:
+            return ".";
+        case masd::dogen::coding::meta_model::technical_space::cpp:
+            return "::";
         default: {
-            const auto s(boost::lexical_cast<std::string>(l));
-            BOOST_LOG_SEV(lg, error) << unsupported_language << s;
+            const auto s(boost::lexical_cast<std::string>(ts));
+            BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;
             BOOST_THROW_EXCEPTION(
-                masd::dogen::coding::helpers::parsing_error(unsupported_language + s));
+                masd::dogen::coding::helpers::parsing_error(
+                    unsupported_technical_space + s));
             return "";
         } }
     }
@@ -313,8 +319,10 @@ struct custom_type_grammar : qi::grammar<Iterator, Skipper>
     }
 
     std::string scope_str;
-    custom_type_grammar(name_tree_listener<NameTreeBuilder> * listener, const masd::dogen::coding::meta_model::languages l)
-          : custom_type_grammar::base_type(custom_type), listener(listener), scope_str(scope_operator_for_language(l))
+    custom_type_grammar(name_tree_listener<NameTreeBuilder> * listener,
+        const masd::dogen::coding::meta_model::technical_space ts)
+          : custom_type_grammar::base_type(custom_type), listener(listener),
+            scope_str(scope_operator_for_language(ts))
     {
         namespace phoenix = boost::phoenix;
         scope = scope_str;
@@ -330,7 +338,8 @@ struct grammar : qi::grammar<Iterator, Skipper> {
 
     typedef name_tree_listener<NameTreeBuilder> listener_t;
     listener_t * listener;
-    std::function<void(qi::unused_type, qi::unused_type, bool & pass)> make_attribute_setter(bool (listener_t::* ptr)())
+    std::function<void(qi::unused_type, qi::unused_type, bool & pass)>
+    make_attribute_setter(bool (listener_t::* ptr)())
     {
         return [this, ptr](qi::unused_type, qi::unused_type, bool & pass)
         {
@@ -338,7 +347,8 @@ struct grammar : qi::grammar<Iterator, Skipper> {
         };
     }
 
-    std::function<void(qi::unused_type)> make_attribute_setter(void (listener_t::* ptr)())
+    std::function<void(qi::unused_type)>
+    make_attribute_setter(void (listener_t::* ptr)())
     {
         return [this, ptr](qi::unused_type)
         {
@@ -399,8 +409,9 @@ struct grammar : qi::grammar<Iterator, Skipper> {
     }
 
     grammar(listener_t &l,
-        const masd::dogen::coding::meta_model::languages language)
-                : grammar::base_type(type_name), listener(&l), custom_type{ &l , language } {
+        const masd::dogen::coding::meta_model::technical_space language)
+                : grammar::base_type(type_name), listener(&l),
+                  custom_type{ &l , language } {
         setup_functors();
         using qi::on_error;
         using qi::fail;

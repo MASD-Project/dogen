@@ -90,7 +90,7 @@ public:
     const annotations::archetype_location_repository_parts&
     archetype_location_repository_parts() const override;
 
-    coding::meta_model::languages language() const override;
+    coding::meta_model::technical_space technical_space() const override;
 
     std::unordered_map<std::string,
                        generation::meta_model::intra_backend_segment_properties>

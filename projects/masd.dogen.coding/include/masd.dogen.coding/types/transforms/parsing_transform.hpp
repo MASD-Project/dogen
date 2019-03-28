@@ -29,7 +29,7 @@
 #include "masd.dogen.annotations/types/type.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/types/meta_model/name_tree.hpp"
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.coding/types/meta_model/attribute.hpp"
@@ -73,13 +73,13 @@ private:
 
 private:
     static std::string
-    obtain_value_attribute_simple_name(const meta_model::languages l);
+    obtain_value_attribute_simple_name(const meta_model::technical_space ts);
 
 private:
     /**
      * @brief Parses all attributes in the supplied attribute list..
      */
-    static void parse_attributes(const meta_model::languages l,
+    static void parse_attributes(const meta_model::technical_space ts,
         std::list<meta_model::attribute>& attrs);
 
     /**
@@ -98,7 +98,7 @@ private:
      * @brief Parses underlying element in the supplied primitive.
      */
     static void parse_underlying_element(
-        const type_group& tg, const meta_model::languages l,
+        const type_group& tg, const meta_model::technical_space ts,
         meta_model::primitive& p);
 
 public:

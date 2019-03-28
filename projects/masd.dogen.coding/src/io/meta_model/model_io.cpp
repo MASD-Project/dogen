@@ -29,12 +29,12 @@
 #include "masd.dogen.coding/io/meta_model/visitor_io.hpp"
 #include "masd.dogen.coding/io/meta_model/modeline_io.hpp"
 #include "masd.dogen.coding/io/meta_model/exception_io.hpp"
-#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.coding/io/meta_model/primitive_io.hpp"
 #include "masd.dogen.coding/io/meta_model/enumeration_io.hpp"
 #include "masd.dogen.coding/io/meta_model/origin_types_io.hpp"
 #include "masd.dogen.coding/io/meta_model/modeline_group_io.hpp"
 #include "masd.dogen.coding/io/meta_model/object_template_io.hpp"
+#include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/io/meta_model/generation_marker_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_model_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/extraction_properties_io.hpp"
@@ -489,7 +489,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::languages>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::technical_space>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -539,8 +539,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"licences\": " << v.licences() << ", "
       << "\"generation_markers\": " << v.generation_markers() << ", "
       << "\"root_module\": " << v.root_module() << ", "
-      << "\"input_language\": " << v.input_language() << ", "
-      << "\"output_languages\": " << v.output_languages() << ", "
+      << "\"input_technical_space\": " << v.input_technical_space() << ", "
+      << "\"output_technical_spaces\": " << v.output_technical_spaces() << ", "
       << "\"orm_properties\": " << v.orm_properties() << ", "
       << "\"extraction_properties\": " << v.extraction_properties()
       << " }";

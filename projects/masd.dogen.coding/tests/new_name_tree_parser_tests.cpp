@@ -23,7 +23,7 @@
 #include "masd.dogen.utility/types/test/logging.hpp"
 #include "masd.dogen.utility/types/test/asserter.hpp"
 #include "masd.dogen.utility/types/io/list_io.hpp"
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 
 /*
 #include "masd.dogen.coding/types/name_builder.hpp"
@@ -46,7 +46,7 @@ const std::string empty;
 const std::string test_module("masd.dogen.coding.tests");
 const std::string test_suite("name_tree_parser_tests");
 
-const auto cpp(masd::dogen::coding::meta_model::languages::cpp);
+const auto cpp(masd::dogen::coding::meta_model::technical_space::cpp);
 
 const auto top_level_modules = std::unordered_set<std::string>();
 const auto model_location = masd::dogen::coding::meta_model::location();

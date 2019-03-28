@@ -29,7 +29,7 @@ model::model(
     const std::string& name,
     const masd::dogen::annotations::annotation& annotation,
     const std::list<masd::dogen::injection::meta_model::element>& elements,
-    const std::string& input_language,
+    const std::string& input_technical_space,
     const std::list<std::string>& references)
     : tagged_values_(tagged_values),
       stereotypes_(stereotypes),
@@ -37,7 +37,7 @@ model::model(
       name_(name),
       annotation_(annotation),
       elements_(elements),
-      input_language_(input_language),
+      input_technical_space_(input_technical_space),
       references_(references) { }
 
 void model::swap(model& other) noexcept {
@@ -48,7 +48,7 @@ void model::swap(model& other) noexcept {
     swap(name_, other.name_);
     swap(annotation_, other.annotation_);
     swap(elements_, other.elements_);
-    swap(input_language_, other.input_language_);
+    swap(input_technical_space_, other.input_technical_space_);
     swap(references_, other.references_);
 }
 
@@ -59,7 +59,7 @@ bool model::operator==(const model& rhs) const {
         name_ == rhs.name_ &&
         annotation_ == rhs.annotation_ &&
         elements_ == rhs.elements_ &&
-        input_language_ == rhs.input_language_ &&
+        input_technical_space_ == rhs.input_technical_space_ &&
         references_ == rhs.references_;
 }
 
@@ -165,20 +165,20 @@ void model::elements(const std::list<masd::dogen::injection::meta_model::element
     elements_ = std::move(v);
 }
 
-const std::string& model::input_language() const {
-    return input_language_;
+const std::string& model::input_technical_space() const {
+    return input_technical_space_;
 }
 
-std::string& model::input_language() {
-    return input_language_;
+std::string& model::input_technical_space() {
+    return input_technical_space_;
 }
 
-void model::input_language(const std::string& v) {
-    input_language_ = v;
+void model::input_technical_space(const std::string& v) {
+    input_technical_space_ = v;
 }
 
-void model::input_language(const std::string&& v) {
-    input_language_ = std::move(v);
+void model::input_technical_space(const std::string&& v) {
+    input_technical_space_ = std::move(v);
 }
 
 const std::list<std::string>& model::references() const {

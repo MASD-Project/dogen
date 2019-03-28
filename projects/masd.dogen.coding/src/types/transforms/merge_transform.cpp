@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/transforms/merge_transform.hpp"
 
@@ -46,21 +46,20 @@ void copy(const ElementAssociativeContainer& src,
 
 namespace masd::dogen::coding::transforms {
 
-void merge_transform::merge(const meta_model::model& src,
-    meta_model::model& dst) {
-
+void
+merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
     /*
-     * Skip any reference models for which the input language does
-     * not match.
+     * Skip any reference models for which the input technical_space
+     * does not match.
      *
      * FIXME: we should just throw.
      */
     const auto& id(src.name().qualified().dot());
-    if (src.input_language() != dst.input_language()) {
-        BOOST_LOG_SEV(lg, debug) << "Skipping model as language does "
-                                 << " not match target's. Model: "
-                                 << id << " Input language: "
-                                 << src.input_language();
+    if (src.input_technical_space() != dst.input_technical_space()) {
+        BOOST_LOG_SEV(lg, warn) << "Skipping model as technical space does "
+                                << " not match the target's. Model: "
+                                << id << " Input technical_space: "
+                                << src.input_technical_space();
         return;
     }
 

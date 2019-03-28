@@ -37,8 +37,8 @@ auto lg(logger_factory("coding.helpers.mapping_hydrator"));
 
 const std::string empty;
 const std::string lam_id_key("lam_id");
-const std::string language_key("language");
-const std::string names_by_language_key("names_by_language");
+const std::string technical_space_key("language");
+const std::string names_by_technical_space_key("names_by_language");
 const std::string default_name_key("default_name");
 const std::string mapping_action_key("mapping_action");
 const std::string simple_key("simple");
@@ -49,20 +49,23 @@ const std::string default_mapping_action("translate");
 const std::string translate_mapping_action("translate");
 const std::string erase_mapping_action("erase");
 
-const std::string cpp_language("cpp");
-const std::string csharp_language("csharp");
-const std::string la_language("language_agnostic");
+const std::string cpp_technical_space("cpp");
+const std::string csharp_technical_space("csharp");
+const std::string la_technical_space("language_agnostic");
 
 const std::string invalid_json_file("Failed to parse JSON file");
 const std::string invalid_option_in_json_file(
     "Failed to read option in JSON file: ");
 const std::string invalid_path("Failed to find JSON path: ");
 const std::string failed_to_open_file("Failed to open file: ");
-const std::string unsupported_lanugage("Language is not supported: ");
+const std::string unsupported_technical_space(
+    "Technical space is not supported: ");
 const std::string unsupported_mapping_action(
     "Mapping action is not supported: ");
-const std::string missing_names("Could not find names by language in JSON.");
-const std::string duplicate_language("Language mapped more than once: ");
+const std::string missing_names(
+    "Could not find names by technical space in JSON.");
+const std::string duplicate_technical_space(
+    "Technical space mapped more than once: ");
 
 }
 
@@ -79,16 +82,17 @@ mappings_hydrator::to_mapping_action(const std::string& s) const {
     BOOST_THROW_EXCEPTION(hydration_error(unsupported_mapping_action + s));
 }
 
-meta_model::languages mappings_hydrator::to_language(const std::string& s) const {
-    if (s == cpp_language)
-        return meta_model::languages::cpp;
-    else if (s == csharp_language)
-        return meta_model::languages::csharp;
-    else if (s == la_language)
-        return meta_model::languages::language_agnostic;
+meta_model::technical_space
+mappings_hydrator::to_technical_space(const std::string& s) const {
+    if (s == cpp_technical_space)
+        return meta_model::technical_space::cpp;
+    else if (s == csharp_technical_space)
+        return meta_model::technical_space::csharp;
+    else if (s == la_technical_space)
+        return meta_model::technical_space::language_agnostic;
 
-    BOOST_LOG_SEV(lg, error) << unsupported_lanugage << s;
-    BOOST_THROW_EXCEPTION(hydration_error(unsupported_lanugage + s));
+    BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;
+    BOOST_THROW_EXCEPTION(hydration_error(unsupported_technical_space + s));
 }
 
 meta_model::name
@@ -109,14 +113,15 @@ mappings_hydrator::read_name(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-std::unordered_map<meta_model::languages, mapping_value> mappings_hydrator::
+std::unordered_map<meta_model::technical_space, mapping_value>
+mappings_hydrator::
 read_mapping_values(const boost::property_tree::ptree& pt) const {
-    std::unordered_map<meta_model::languages, mapping_value> r;
+    std::unordered_map<meta_model::technical_space, mapping_value> r;
 
     for (auto i(pt.begin()); i != pt.end(); ++i) {
         const auto& apt(i->second);
-        const auto s(apt.get<std::string>(language_key));
-        const auto l(to_language(s));
+        const auto s(apt.get<std::string>(technical_space_key));
+        const auto l(to_technical_space(s));
 
         mapping_value mv;
         const auto& mak(mapping_action_key);
@@ -130,8 +135,9 @@ read_mapping_values(const boost::property_tree::ptree& pt) const {
         const auto pair(std::make_pair(l, mv));
         const auto inserted(r.insert(pair).second);
         if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_language << s;
-            BOOST_THROW_EXCEPTION(hydration_error(duplicate_language + s));
+            BOOST_LOG_SEV(lg, error) << duplicate_technical_space << s;
+            BOOST_THROW_EXCEPTION(
+                hydration_error(duplicate_technical_space + s));
         }
     }
     return r;
@@ -147,7 +153,7 @@ mappings_hydrator::read_stream(std::istream& s) const {
         mapping m;
         m.lam_id(i->second.get<std::string>(lam_id_key));
 
-        const auto j(i->second.find(names_by_language_key));
+        const auto j(i->second.find(names_by_technical_space_key));
         if (j == i->second.not_found() || j->second.empty()) {
             BOOST_LOG_SEV(lg, error) << missing_names;
             BOOST_THROW_EXCEPTION(hydration_error(missing_names));

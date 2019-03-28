@@ -23,7 +23,7 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
-#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"
 #include "masd.dogen.generation/io/meta_model/model_io.hpp"
 #include "masd.dogen.generation/types/transforms/transformation_error.hpp"
@@ -36,10 +36,10 @@ const std::string transform_id(
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
-const std::string unsupported_language(
-    "Could not find transform for language: ");
+const std::string unsupported_technical_space(
+    "Could not find transform for technical space: ");
 const std::string disabled_transform(
-    "Transform for requested language is disabled: ");
+    "Transform for requested technical space is disabled: ");
 
 }
 
@@ -68,7 +68,8 @@ merge(extraction::meta_model::model&& src, extraction::meta_model::model& dst) {
 extraction::meta_model::model model_to_extraction_model_chain::
 apply(const generation::transforms::context& ctx,
     const generation::meta_model::model& m) {
-    BOOST_LOG_SEV(lg, debug) << "Transforming model: " << m.name().qualified().dot();
+    BOOST_LOG_SEV(lg, debug) << "Transforming model: "
+                             << m.name().qualified().dot();
 
     /*
      * No point in proceeding if the model has not types to
@@ -80,17 +81,19 @@ apply(const generation::transforms::context& ctx,
     }
 
     /*
-     * Look for the required model to text transfrom. If none is
-     * available, throw to let the user know it requested an
-     * unsupported transformation.
+     * Look for the required model extractor. If none is available,
+     * throw to let the user know it requested an unsupported
+     * transformation.
      */
-    const auto ol(m.output_language());
-    BOOST_LOG_SEV(lg, debug) << "Looking for a transform for language: " << ol;
-    const auto ptr(registrar().transform_for_language(ol));
+    const auto ts(m.output_technical_space());
+    BOOST_LOG_SEV(lg, debug) << "Looking for a transform for technical space: "
+                             << ts;
+    const auto ptr(registrar().transform_for_technical_space(ts));
     if (!ptr) {
-        const auto s(boost::lexical_cast<std::string>(ol));
-        BOOST_LOG_SEV(lg, error) << unsupported_language << s;
-        BOOST_THROW_EXCEPTION(transformation_error(unsupported_language + s));
+        const auto s(boost::lexical_cast<std::string>(ts));
+        BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(unsupported_technical_space + s));
     }
 
     const auto& t(*ptr);
@@ -98,10 +101,11 @@ apply(const generation::transforms::context& ctx,
     BOOST_LOG_SEV(lg, debug) << "Found transform: " << id;
 
     /*
-     * Ensure the transform for the requested language is marked as
-     * enabled. If it is disabled, the user has requested conflicting
-     * options - output on language X but disable backend for language
-     * X - so we need to throw to let it know.
+     * Ensure the transform for the requested technical space is
+     * marked as enabled. If it is disabled, the user has requested
+     * conflicting options - output on technical_space X but disable
+     * backend for technical space X - so we need to throw to let the
+     * user know.
      */
     const auto& ek(m.extraction_properties().enabled_backends());
     const auto is_enabled(ek.find(id) != ek.end());

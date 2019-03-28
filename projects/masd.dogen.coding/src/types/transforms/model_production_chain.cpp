@@ -29,7 +29,7 @@
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/io/meta_model/model_set_io.hpp"
-#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/assembly_chain.hpp"
 #include "masd.dogen.coding/types/transforms/post_assembly_chain.hpp"
@@ -62,10 +62,10 @@ model_production_chain::apply(const context& ctx,
     /*
      * Note that we've obtained the target given the user options;
      * that is, the target is either a Platform Specific Model (PSM) -
-     * in which case the input language and the output language are
-     * one and the same - or it is a Platform Independent Model (PIM),
-     * making use of LAM types (the Language Agnostic Model) and thus
-     * requiring mapping to a PSM.
+     * in which case input and output technical spaces are one and the
+     * same - or it is a Platform Independent Model (PIM), making use
+     * of LAM types (the Language Agnostic Model) and thus requiring
+     * mapping to a PSM.
      *
      * With regards to the references, note that we are not filtering
      * them at all; we include all references that the user deemed
@@ -78,21 +78,21 @@ model_production_chain::apply(const context& ctx,
      *
      * - the target model is a PIM, and the reference model is a PSM
      *   in a language which the user is interested in - i.e. its one
-     *   of the target model's output language.
+     *   of the target model's output technical spaces.
      *
      * - the target model is a PSM and the reference model is also a
-     *   PSM, and they share the same language.
+     *   PSM, and they share the same technical space.
      *
      * The below code takes into account all of these permutations,
      * performing mapping as required.
      */
     std::list<meta_model::model> r;
-    for (const auto ol : ms.target().output_languages()) {
+    for (const auto ots : ms.target().output_technical_spaces()) {
         /*
          * Execute the assembly chain for each of the requested output
-         * languages.
+         * technical spaces.
          */
-        auto m(assembly_chain::apply(ctx, ol, ms.target(), ms.references()));
+        auto m(assembly_chain::apply(ctx, ots, ms.target(), ms.references()));
 
         /*
          * Then apply all of the post-processing transforms to the

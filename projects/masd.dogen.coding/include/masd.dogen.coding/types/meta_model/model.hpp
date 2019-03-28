@@ -34,7 +34,6 @@
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/hash/meta_model/name_hash.hpp"
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
 #include "masd.dogen.coding/types/meta_model/module_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/object_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/builtin_fwd.hpp"
@@ -45,6 +44,7 @@
 #include "masd.dogen.coding/types/meta_model/exception_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/primitive_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_group_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_model_properties.hpp"
@@ -87,8 +87,8 @@ public:
         const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >& licences,
         const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> >& generation_markers,
         const boost::shared_ptr<masd::dogen::coding::meta_model::module>& root_module,
-        const masd::dogen::coding::meta_model::languages input_language,
-        const std::list<masd::dogen::coding::meta_model::languages>& output_languages,
+        const masd::dogen::coding::meta_model::technical_space input_technical_space,
+        const std::list<masd::dogen::coding::meta_model::technical_space>& output_technical_spaces,
         const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties,
         const masd::dogen::coding::meta_model::extraction_properties& extraction_properties);
 
@@ -250,21 +250,21 @@ public:
     void root_module(const boost::shared_ptr<masd::dogen::coding::meta_model::module>&& v);
 
     /**
-     * @brief Language in which this model was written.
+     * @brief Technical space in which this model was written.
      */
     /**@{*/
-    masd::dogen::coding::meta_model::languages input_language() const;
-    void input_language(const masd::dogen::coding::meta_model::languages v);
+    masd::dogen::coding::meta_model::technical_space input_technical_space() const;
+    void input_technical_space(const masd::dogen::coding::meta_model::technical_space v);
     /**@}*/
 
     /**
-     * @brief Languages in which to output the final model.
+     * @brief Technical spaces into which to extract the final model.
      */
     /**@{*/
-    const std::list<masd::dogen::coding::meta_model::languages>& output_languages() const;
-    std::list<masd::dogen::coding::meta_model::languages>& output_languages();
-    void output_languages(const std::list<masd::dogen::coding::meta_model::languages>& v);
-    void output_languages(const std::list<masd::dogen::coding::meta_model::languages>&& v);
+    const std::list<masd::dogen::coding::meta_model::technical_space>& output_technical_spaces() const;
+    std::list<masd::dogen::coding::meta_model::technical_space>& output_technical_spaces();
+    void output_technical_spaces(const std::list<masd::dogen::coding::meta_model::technical_space>& v);
+    void output_technical_spaces(const std::list<masd::dogen::coding::meta_model::technical_space>&& v);
     /**@}*/
 
     const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties() const;
@@ -306,8 +306,8 @@ private:
     std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> > licences_;
     std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> > generation_markers_;
     boost::shared_ptr<masd::dogen::coding::meta_model::module> root_module_;
-    masd::dogen::coding::meta_model::languages input_language_;
-    std::list<masd::dogen::coding::meta_model::languages> output_languages_;
+    masd::dogen::coding::meta_model::technical_space input_technical_space_;
+    std::list<masd::dogen::coding::meta_model::technical_space> output_technical_spaces_;
     boost::optional<masd::dogen::coding::meta_model::orm_model_properties> orm_properties_;
     masd::dogen::coding::meta_model::extraction_properties extraction_properties_;
 };

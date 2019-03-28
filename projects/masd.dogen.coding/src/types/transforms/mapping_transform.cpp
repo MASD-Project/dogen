@@ -35,18 +35,18 @@ static logger lg(logger_factory(transform_id));
 
 namespace masd::dogen::coding::transforms {
 
-bool mapping_transform::is_mappable(const meta_model::languages from,
-    const meta_model::languages to) {
+bool mapping_transform::is_mappable(const meta_model::technical_space from,
+    const meta_model::technical_space to) {
     return helpers::mapper::is_mappable(from, to);
 }
 
 meta_model::model mapping_transform::apply(const context& ctx,
-    const meta_model::model& src, const meta_model::languages to) {
+    const meta_model::model& src, const meta_model::technical_space to) {
     tracing::scoped_transform_tracer stp(lg, "mapping transform",
         transform_id, src.name().qualified().dot(), *ctx.tracer(), src);
 
     const helpers::mapper mp(*ctx.mapping_repository());
-    auto r(mp.map(src.input_language(), to, src));
+    auto r(mp.map(src.input_technical_space(), to, src));
 
     stp.end_transform(r);
     return r;

@@ -18,33 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TEST_DATA_META_MODEL_LANGUAGES_TD_HPP
-#define MASD_DOGEN_CODING_TEST_DATA_META_MODEL_LANGUAGES_TD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/test_data/meta_model/technical_space_td.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
-class languages_generator {
-public:
-    languages_generator();
-
-public:
-    typedef masd::dogen::coding::meta_model::languages result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-};
-
+technical_space_generator::technical_space_generator() : position_(0) { }
+void technical_space_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<technical_space>(position % 7);
 }
 
-#endif
+technical_space_generator::result_type
+technical_space_generator::create(const unsigned int  position) {
+    result_type r;
+    technical_space_generator::populate(position, r);
+    return r;
+}
+
+technical_space_generator::result_type
+technical_space_generator::operator()() {
+    return create(position_++);
+}
+
+}

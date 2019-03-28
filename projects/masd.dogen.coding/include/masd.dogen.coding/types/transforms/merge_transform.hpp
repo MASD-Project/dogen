@@ -28,7 +28,6 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 

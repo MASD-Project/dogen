@@ -22,9 +22,9 @@
 #include "masd.dogen.coding/test_data/meta_model/name_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/module_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/element_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/languages_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/model_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/origin_types_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/technical_space_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/orm_model_properties_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/extraction_properties_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/element_archetype_td.hpp"
@@ -109,9 +109,9 @@ bool create_bool(const unsigned int position) {
     return (position % 2) != 0;
 }
 
-masd::dogen::coding::meta_model::languages
-create_masd_dogen_coding_meta_model_languages(const unsigned int position) {
-    return masd::dogen::coding::meta_model::languages_generator::create(position);
+masd::dogen::coding::meta_model::technical_space
+create_masd_dogen_coding_meta_model_technical_space(const unsigned int position) {
+    return masd::dogen::coding::meta_model::technical_space_generator::create(position);
 }
 
 masd::dogen::coding::meta_model::orm_model_properties
@@ -170,8 +170,8 @@ populate(const unsigned int position, result_type& v) {
     v.root_module(create_boost_shared_ptr_masd_dogen_coding_meta_model_module(position + 5));
     v.module_ids(create_std_unordered_set_std_string(position + 6));
     v.has_generatable_types(create_bool(position + 7));
-    v.input_language(create_masd_dogen_coding_meta_model_languages(position + 8));
-    v.output_language(create_masd_dogen_coding_meta_model_languages(position + 9));
+    v.input_technical_space(create_masd_dogen_coding_meta_model_technical_space(position + 8));
+    v.output_technical_space(create_masd_dogen_coding_meta_model_technical_space(position + 9));
     v.orm_properties(create_boost_optional_masd_dogen_coding_meta_model_orm_model_properties(position + 10));
     v.enabled_archetype_for_element(create_std_unordered_set_masd_dogen_generation_meta_model_element_archetype(position + 11));
     v.locator_properties(create_masd_dogen_generation_meta_model_locator_properties(position + 12));

@@ -79,8 +79,9 @@
           "type": "std::list<element>"
         },
         {
-          "name": "input_language",
-          "type": "std::string"
+          "name": "input_technical_space",
+          "type": "std::string",
+          "documentation": "Technical space to which the model belongs, within the injection space.\n"
         },
         {
           "name": "references",

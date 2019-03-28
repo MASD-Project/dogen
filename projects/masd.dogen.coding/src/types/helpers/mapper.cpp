@@ -21,7 +21,7 @@
 #include <boost/lexical_cast.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/list_io.hpp"
-#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/meta_model/builtin.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
@@ -42,8 +42,9 @@ auto lg(logger_factory("coding.helpers.mapper"));
 
 const std::string lam_pointer("lam.pointer");
 
-const std::string missing_mapping("Mapping not found for LAM ID: ");
-const std::string unsupported_lanugage("Language is not supported: ");
+const std::string missing_mapping("Mapping not found for ID: ");
+const std::string unsupported_technical_space(
+    "Technical space is not supported: ");
 const std::string unexpected_number_of__children("Expected exactly one child.");
 
 }
@@ -54,54 +55,61 @@ mapper::mapper(const mapping_set_repository& msrp)
     : mapping_set_repository_(msrp) { }
 
 meta_model::model mapper::
-clone(const meta_model::model& im) const {
-    auto r(im);
-    r.modules(clone(im.modules()));
-    r.object_templates(clone(im.object_templates()));
-    r.builtins(clone(im.builtins()));
-    r.enumerations(clone(im.enumerations()));
-    r.primitives(clone(im.primitives()));
-    r.objects(clone(im.objects()));
-    r.exceptions(clone(im.exceptions()));
-    r.visitors(clone(im.visitors()));
+clone(const meta_model::model& m) const {
+    auto r(m);
+
+    /*
+     * Create deep copies of each element type. This needs to be
+     * replaced by a proper clone implementation by the code
+     * generator.
+     */
+    r.modules(clone(m.modules()));
+    r.object_templates(clone(m.object_templates()));
+    r.builtins(clone(m.builtins()));
+    r.enumerations(clone(m.enumerations()));
+    r.primitives(clone(m.primitives()));
+    r.objects(clone(m.objects()));
+    r.exceptions(clone(m.exceptions()));
+    r.visitors(clone(m.visitors()));
     return r;
 }
 
 const std::unordered_map<std::string, meta_model::name>&
-mapper::translations_for_language(const mapping_set& ms,
-    const meta_model::languages from, const meta_model::languages to) const {
-    if (from == meta_model::languages::language_agnostic) {
+mapper::translations_for_technical_space(const mapping_set& ms,
+    const meta_model::technical_space from,
+    const meta_model::technical_space to) const {
+    if (from == meta_model::technical_space::language_agnostic) {
         const auto& blai(ms.by_language_agnostic_id());
         const auto i(blai.find(to));
         if (i != blai.end())
             return i->second;
 
         const auto s(boost::lexical_cast<std::string>(to));
-        BOOST_LOG_SEV(lg, error) << unsupported_lanugage << s;
-        BOOST_THROW_EXCEPTION(mapping_error(unsupported_lanugage + s));
+        BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;
+        BOOST_THROW_EXCEPTION(mapping_error(unsupported_technical_space + s));
     }
 
     const auto s(boost::lexical_cast<std::string>(from));
-    BOOST_LOG_SEV(lg, error) << unsupported_lanugage << s;
-    BOOST_THROW_EXCEPTION(mapping_error(unsupported_lanugage + s));
+    BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;
+    BOOST_THROW_EXCEPTION(mapping_error(unsupported_technical_space + s));
 }
 
 std::unordered_map<std::string, meta_model::name>
-mapper::injections_for_language(const mapping_set& ms,
-    const meta_model::languages l,
-    const meta_model::model& im) const {
+mapper::injections_for_technical_space(const mapping_set& ms,
+    const meta_model::technical_space ts,
+    const meta_model::model& m) const {
 
     std::unordered_map<std::string, meta_model::name> r;
-    const auto cpp(meta_model::languages::cpp);
-    if (l != cpp)
+    const auto cpp(meta_model::technical_space::cpp);
+    if (ts != cpp)
         return r;
 
     const auto& blai(ms.by_language_agnostic_id());
     const auto i(blai.find(cpp));
     if (i == blai.end()) {
         const auto s(boost::lexical_cast<std::string>(cpp));
-        BOOST_LOG_SEV(lg, error) << unsupported_lanugage << s;
-        BOOST_THROW_EXCEPTION(mapping_error(unsupported_lanugage + s));
+        BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;
+        BOOST_THROW_EXCEPTION(mapping_error(unsupported_technical_space + s));
     }
 
     const auto& map(i->second);
@@ -111,7 +119,7 @@ mapper::injections_for_language(const mapping_set& ms,
         BOOST_THROW_EXCEPTION(mapping_error(missing_mapping + lam_pointer));
     }
     const auto& n(j->second);
-    for (const auto& pair : im.objects()) {
+    for (const auto& pair : m.objects()) {
         const auto& o(pair.second);
         for (const auto& pn : o->parents()) {
             const auto pair(std::make_pair(pn.qualified().dot(), n));
@@ -123,11 +131,11 @@ mapper::injections_for_language(const mapping_set& ms,
 }
 
 mapping_context mapper::create_mapping_context(const mapping_set& ms,
-    const meta_model::languages from, const meta_model::languages to,
-    const meta_model::model& im) const {
+    const meta_model::technical_space from,
+    const meta_model::technical_space to, const meta_model::model& m) const {
     mapping_context r;
-    r.translations(translations_for_language(ms, from, to));
-    r.injections(injections_for_language(ms, to, im));
+    r.translations(translations_for_technical_space(ms, from, to));
+    r.injections(injections_for_technical_space(ms, to, m));
 
     const auto i(ms.erasures_by_language().find(to));
     if (i != ms.erasures_by_language().end())
@@ -144,7 +152,7 @@ meta_model::name_tree mapper::walk_name_tree(const mapping_context& mc,
          * We need to erase this type from the name tree. We do this
          * by skipping it. Note that, for erasures, only one child is
          * permitted. An erasure is required, for example, for
-         * language agnostic pointers in languages where all objects
+         * language agnostic pointers in technical_space where all objects
          * are pointers anyway (such as C#).
          */
         if (nt.children().size() != 1) {
@@ -206,20 +214,20 @@ void mapper::map_attributes(const mapping_context& mc,
         attr.parsed_type(walk_name_tree(mc, attr.parsed_type()));
 }
 
-bool mapper::
-is_mappable(const meta_model::languages from, const meta_model::languages to) {
-    return from == to || from == meta_model::languages::language_agnostic;
+bool mapper::is_mappable(const meta_model::technical_space from,
+    const meta_model::technical_space to) {
+    return from == to || from == meta_model::technical_space::language_agnostic;
 }
 
-meta_model::model
-mapper::map(const meta_model::languages from, const meta_model::languages to,
-    const meta_model::model& im) const {
+meta_model::model mapper::map(const meta_model::technical_space from,
+    const meta_model::technical_space to,
+    const meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started mapping. Model: "
-                             << im.name().qualified().dot();
+                             << m.name().qualified().dot();
     BOOST_LOG_SEV(lg, debug) << "Mapping from: " << from << " to: " << to;
     if (from == to) {
         BOOST_LOG_SEV(lg, debug) << "No mapping required";
-        return im;
+        return m;
     }
 
     /*
@@ -228,14 +236,14 @@ mapper::map(const meta_model::languages from, const meta_model::languages to,
      * would be pointing to the same elements, causing confusion and
      * chaos.
      */
-    auto r(clone(im));
+    auto r(clone(m));
 
     /*
      * For now we always use the default mapping set. In the future
      * this will be configurable via annotations.
      */
     const auto& ms(mapping_set_repository_.default_mapping_set());
-    const auto mc(create_mapping_context(ms, from, to, im));
+    const auto mc(create_mapping_context(ms, from, to, m));
     BOOST_LOG_SEV(lg, debug) << "Mapping context: " << mc;
 
     for (auto& pair : r.objects())
@@ -244,11 +252,12 @@ mapper::map(const meta_model::languages from, const meta_model::languages to,
     for (auto& pair : r.object_templates())
         map_attributes(mc, pair.second->local_attributes());
 
-    r.input_language(to);
-    r.output_languages().clear();
-    r.output_languages().push_back(to);
+    r.input_technical_space(to);
+    r.output_technical_spaces().clear();
+    r.output_technical_spaces().push_back(to);
 
-    BOOST_LOG_SEV(lg, debug) << "Output language: " << r.output_languages();
+    BOOST_LOG_SEV(lg, debug) << "Output technical spaces: "
+                             << r.output_technical_spaces();
     BOOST_LOG_SEV(lg, debug) << "Finished mapping.";
 
     return r;

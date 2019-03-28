@@ -144,7 +144,7 @@ namespace masd::dogen::coding::meta_model {
 
 model::model()
     : origin_type_(static_cast<masd::dogen::coding::meta_model::origin_types>(0)),
-      input_language_(static_cast<masd::dogen::coding::meta_model::languages>(0)) { }
+      input_technical_space_(static_cast<masd::dogen::coding::meta_model::technical_space>(0)) { }
 
 model::model(model&& rhs)
     : name_(std::move(rhs.name_)),
@@ -165,8 +165,8 @@ model::model(model&& rhs)
       licences_(std::move(rhs.licences_)),
       generation_markers_(std::move(rhs.generation_markers_)),
       root_module_(std::move(rhs.root_module_)),
-      input_language_(std::move(rhs.input_language_)),
-      output_languages_(std::move(rhs.output_languages_)),
+      input_technical_space_(std::move(rhs.input_technical_space_)),
+      output_technical_spaces_(std::move(rhs.output_technical_spaces_)),
       orm_properties_(std::move(rhs.orm_properties_)),
       extraction_properties_(std::move(rhs.extraction_properties_)) { }
 
@@ -189,8 +189,8 @@ model::model(
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >& licences,
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> >& generation_markers,
     const boost::shared_ptr<masd::dogen::coding::meta_model::module>& root_module,
-    const masd::dogen::coding::meta_model::languages input_language,
-    const std::list<masd::dogen::coding::meta_model::languages>& output_languages,
+    const masd::dogen::coding::meta_model::technical_space input_technical_space,
+    const std::list<masd::dogen::coding::meta_model::technical_space>& output_technical_spaces,
     const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties,
     const masd::dogen::coding::meta_model::extraction_properties& extraction_properties)
     : name_(name),
@@ -211,8 +211,8 @@ model::model(
       licences_(licences),
       generation_markers_(generation_markers),
       root_module_(root_module),
-      input_language_(input_language),
-      output_languages_(output_languages),
+      input_technical_space_(input_technical_space),
+      output_technical_spaces_(output_technical_spaces),
       orm_properties_(orm_properties),
       extraction_properties_(extraction_properties) { }
 
@@ -236,8 +236,8 @@ void model::swap(model& other) noexcept {
     swap(licences_, other.licences_);
     swap(generation_markers_, other.generation_markers_);
     swap(root_module_, other.root_module_);
-    swap(input_language_, other.input_language_);
-    swap(output_languages_, other.output_languages_);
+    swap(input_technical_space_, other.input_technical_space_);
+    swap(output_technical_spaces_, other.output_technical_spaces_);
     swap(orm_properties_, other.orm_properties_);
     swap(extraction_properties_, other.extraction_properties_);
 }
@@ -261,8 +261,8 @@ bool model::operator==(const model& rhs) const {
         licences_ == rhs.licences_ &&
         generation_markers_ == rhs.generation_markers_ &&
         root_module_ == rhs.root_module_ &&
-        input_language_ == rhs.input_language_ &&
-        output_languages_ == rhs.output_languages_ &&
+        input_technical_space_ == rhs.input_technical_space_ &&
+        output_technical_spaces_ == rhs.output_technical_spaces_ &&
         orm_properties_ == rhs.orm_properties_ &&
         extraction_properties_ == rhs.extraction_properties_;
 }
@@ -553,28 +553,28 @@ void model::root_module(const boost::shared_ptr<masd::dogen::coding::meta_model:
     root_module_ = std::move(v);
 }
 
-masd::dogen::coding::meta_model::languages model::input_language() const {
-    return input_language_;
+masd::dogen::coding::meta_model::technical_space model::input_technical_space() const {
+    return input_technical_space_;
 }
 
-void model::input_language(const masd::dogen::coding::meta_model::languages v) {
-    input_language_ = v;
+void model::input_technical_space(const masd::dogen::coding::meta_model::technical_space v) {
+    input_technical_space_ = v;
 }
 
-const std::list<masd::dogen::coding::meta_model::languages>& model::output_languages() const {
-    return output_languages_;
+const std::list<masd::dogen::coding::meta_model::technical_space>& model::output_technical_spaces() const {
+    return output_technical_spaces_;
 }
 
-std::list<masd::dogen::coding::meta_model::languages>& model::output_languages() {
-    return output_languages_;
+std::list<masd::dogen::coding::meta_model::technical_space>& model::output_technical_spaces() {
+    return output_technical_spaces_;
 }
 
-void model::output_languages(const std::list<masd::dogen::coding::meta_model::languages>& v) {
-    output_languages_ = v;
+void model::output_technical_spaces(const std::list<masd::dogen::coding::meta_model::technical_space>& v) {
+    output_technical_spaces_ = v;
 }
 
-void model::output_languages(const std::list<masd::dogen::coding::meta_model::languages>&& v) {
-    output_languages_ = std::move(v);
+void model::output_technical_spaces(const std::list<masd::dogen::coding::meta_model::technical_space>&& v) {
+    output_technical_spaces_ = std::move(v);
 }
 
 const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& model::orm_properties() const {

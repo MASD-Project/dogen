@@ -22,7 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/io/helpers/mapping_set_io.hpp"
-#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -52,7 +52,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<masd::dogen::coding::meta_model::languages, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -84,7 +84,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<masd::dogen::coding::meta_model::languages, std::unordered_set<std::string> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

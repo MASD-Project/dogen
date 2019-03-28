@@ -30,15 +30,16 @@
 #include <memory>
 #include <unordered_map>
 #include "masd.dogen.annotations/types/archetype_location.hpp"
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
-#include "masd.dogen.coding/hash/meta_model/languages_hash.hpp"
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
+#include "masd.dogen.coding/hash/meta_model/technical_space_hash.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_interface.hpp"
 
 namespace masd::dogen::generation::transforms {
 
 /**
  * @brief Keeps track of all the available model to text model
- * transforms. These are implemented by language-specific backends.
+ * transforms. These are implemented by technical space-specific
+ * backends.
  */
 class model_to_extraction_model_transform_registrar {
 public:
@@ -56,24 +57,25 @@ public:
 
 public:
     /**
-     * @brief Returns the transform for the supplied language, if any
-     * exists. Otherwise returns a null shared pointer.
+     * @brief Returns the transform for the supplied technical space,
+     * if any exists. Otherwise returns a null shared pointer.
      */
     std::shared_ptr<model_to_extraction_model_transform_interface>
-    transform_for_language(const coding::meta_model::languages l) const;
+    transform_for_technical_space(
+        const coding::meta_model::technical_space ts) const;
 
     /**
-     * @brief Returns all available transforms, by language.
+     * @brief Returns all available transforms, by technical space.
      */
     const std::unordered_map<
-        coding::meta_model::languages,
+        coding::meta_model::technical_space,
         std::shared_ptr<model_to_extraction_model_transform_interface>>&
-    transforms_by_language() const;
+    transforms_by_technical_space() const;
 
 private:
-    std::unordered_map<coding::meta_model::languages,
+    std::unordered_map<coding::meta_model::technical_space,
     std::shared_ptr<model_to_extraction_model_transform_interface>>
-    transforms_by_language_;
+    transforms_by_technical_space_;
 };
 
 }

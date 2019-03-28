@@ -44,8 +44,8 @@ namespace masd::dogen::generation::meta_model {
 
 model::model()
     : has_generatable_types_(static_cast<bool>(0)),
-      input_language_(static_cast<masd::dogen::coding::meta_model::languages>(0)),
-      output_language_(static_cast<masd::dogen::coding::meta_model::languages>(0)) { }
+      input_technical_space_(static_cast<masd::dogen::coding::meta_model::technical_space>(0)),
+      output_technical_space_(static_cast<masd::dogen::coding::meta_model::technical_space>(0)) { }
 
 model::model(model&& rhs)
     : name_(std::move(rhs.name_)),
@@ -56,8 +56,8 @@ model::model(model&& rhs)
       root_module_(std::move(rhs.root_module_)),
       module_ids_(std::move(rhs.module_ids_)),
       has_generatable_types_(std::move(rhs.has_generatable_types_)),
-      input_language_(std::move(rhs.input_language_)),
-      output_language_(std::move(rhs.output_language_)),
+      input_technical_space_(std::move(rhs.input_technical_space_)),
+      output_technical_space_(std::move(rhs.output_technical_space_)),
       orm_properties_(std::move(rhs.orm_properties_)),
       enabled_archetype_for_element_(std::move(rhs.enabled_archetype_for_element_)),
       locator_properties_(std::move(rhs.locator_properties_)),
@@ -73,8 +73,8 @@ model::model(
     const boost::shared_ptr<masd::dogen::coding::meta_model::module>& root_module,
     const std::unordered_set<std::string>& module_ids,
     const bool has_generatable_types,
-    const masd::dogen::coding::meta_model::languages input_language,
-    const masd::dogen::coding::meta_model::languages output_language,
+    const masd::dogen::coding::meta_model::technical_space input_technical_space,
+    const masd::dogen::coding::meta_model::technical_space output_technical_space,
     const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties,
     const std::unordered_set<masd::dogen::generation::meta_model::element_archetype>& enabled_archetype_for_element,
     const masd::dogen::generation::meta_model::locator_properties& locator_properties,
@@ -88,8 +88,8 @@ model::model(
       root_module_(root_module),
       module_ids_(module_ids),
       has_generatable_types_(has_generatable_types),
-      input_language_(input_language),
-      output_language_(output_language),
+      input_technical_space_(input_technical_space),
+      output_technical_space_(output_technical_space),
       orm_properties_(orm_properties),
       enabled_archetype_for_element_(enabled_archetype_for_element),
       locator_properties_(locator_properties),
@@ -106,8 +106,8 @@ void model::swap(model& other) noexcept {
     swap(root_module_, other.root_module_);
     swap(module_ids_, other.module_ids_);
     swap(has_generatable_types_, other.has_generatable_types_);
-    swap(input_language_, other.input_language_);
-    swap(output_language_, other.output_language_);
+    swap(input_technical_space_, other.input_technical_space_);
+    swap(output_technical_space_, other.output_technical_space_);
     swap(orm_properties_, other.orm_properties_);
     swap(enabled_archetype_for_element_, other.enabled_archetype_for_element_);
     swap(locator_properties_, other.locator_properties_);
@@ -124,8 +124,8 @@ bool model::operator==(const model& rhs) const {
         root_module_ == rhs.root_module_ &&
         module_ids_ == rhs.module_ids_ &&
         has_generatable_types_ == rhs.has_generatable_types_ &&
-        input_language_ == rhs.input_language_ &&
-        output_language_ == rhs.output_language_ &&
+        input_technical_space_ == rhs.input_technical_space_ &&
+        output_technical_space_ == rhs.output_technical_space_ &&
         orm_properties_ == rhs.orm_properties_ &&
         enabled_archetype_for_element_ == rhs.enabled_archetype_for_element_ &&
         locator_properties_ == rhs.locator_properties_ &&
@@ -259,20 +259,20 @@ void model::has_generatable_types(const bool v) {
     has_generatable_types_ = v;
 }
 
-masd::dogen::coding::meta_model::languages model::input_language() const {
-    return input_language_;
+masd::dogen::coding::meta_model::technical_space model::input_technical_space() const {
+    return input_technical_space_;
 }
 
-void model::input_language(const masd::dogen::coding::meta_model::languages v) {
-    input_language_ = v;
+void model::input_technical_space(const masd::dogen::coding::meta_model::technical_space v) {
+    input_technical_space_ = v;
 }
 
-masd::dogen::coding::meta_model::languages model::output_language() const {
-    return output_language_;
+masd::dogen::coding::meta_model::technical_space model::output_technical_space() const {
+    return output_technical_space_;
 }
 
-void model::output_language(const masd::dogen::coding::meta_model::languages v) {
-    output_language_ = v;
+void model::output_technical_space(const masd::dogen::coding::meta_model::technical_space v) {
+    output_technical_space_ = v;
 }
 
 const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& model::orm_properties() const {

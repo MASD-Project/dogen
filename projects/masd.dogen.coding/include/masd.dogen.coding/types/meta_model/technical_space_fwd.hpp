@@ -18,44 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include <string>
-#include <ostream>
-#include <stdexcept>
-#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_TECHNICAL_SPACE_FWD_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_TECHNICAL_SPACE_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace masd::dogen::coding::meta_model {
 
-std::ostream& operator<<(std::ostream& s, const languages& v) {
-    s << "{ " << "\"__type__\": " << "\"languages\", " << "\"value\": ";
-
-    std::string attr;
-    switch (v) {
-    case languages::invalid:
-        attr = "\"invalid\"";
-        break;
-    case languages::cpp:
-        attr = "\"cpp\"";
-        break;
-    case languages::csharp:
-        attr = "\"csharp\"";
-        break;
-    case languages::language_agnostic:
-        attr = "\"language_agnostic\"";
-        break;
-    case languages::cmake:
-        attr = "\"cmake\"";
-        break;
-    case languages::xml:
-        attr = "\"xml\"";
-        break;
-    case languages::odb:
-        attr = "\"odb\"";
-        break;
-    default:
-        throw std::invalid_argument("Invalid value for languages");
-    }
-    s << attr << " }";
-    return s;
-}
+enum class technical_space : unsigned int;
 
 }
+
+#endif

@@ -58,9 +58,9 @@ const std::string transform_id(
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
-const std::string cpp_language("cpp");
-const std::string csharp_language("csharp");
-const std::string la_language("language_agnostic");
+const std::string cpp_technical_space("cpp");
+const std::string csharp_technical_space("csharp");
+const std::string agnostic_technical_space("language_agnostic");
 
 const std::string duplicate_element("Element id already exists: ");
 const std::string missing_model_modules("Must supply model modules.");
@@ -69,7 +69,8 @@ const std::string invalid_element_type(
     "Invalid or usupported masd element type: ");
 const std::string too_many_element_types(
     "Attempting to set the masd type more than once.");
-const std::string unsupported_lanugage("Language is not supported: ");
+const std::string unsupported_technical_space(
+    "Technical space is not supported: ");
 
 using masd::dogen::coding::meta_model::location;
 const location empty_location = location();
@@ -102,17 +103,17 @@ std::ostream& operator<<(std::ostream& s,
     return s;
 }
 
-coding::meta_model::languages to_language(const std::string& s) {
-    using coding::meta_model::languages;
-    if (s == cpp_language)
-        return languages::cpp;
-    else if (s == csharp_language)
-        return languages::csharp;
-    else if (s == la_language)
-        return languages::language_agnostic;
+coding::meta_model::technical_space to_technical_space(const std::string& s) {
+    using coding::meta_model::technical_space;
+    if (s == cpp_technical_space)
+        return technical_space::cpp;
+    else if (s == csharp_technical_space)
+        return technical_space::csharp;
+    else if (s == agnostic_technical_space)
+        return technical_space::language_agnostic;
 
-    BOOST_LOG_SEV(lg, error) << unsupported_lanugage << s;
-    BOOST_THROW_EXCEPTION(transform_exception(unsupported_lanugage + s));
+    BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;
+    BOOST_THROW_EXCEPTION(transform_exception(unsupported_technical_space + s));
 }
 
 
@@ -250,16 +251,16 @@ process_element(const helpers::adapter& ad,
 }
 
 coding::meta_model::model injection_model_to_coding_model_transform::
-apply(const context& ctx, const injection::meta_model::model& im) {
+apply(const context& ctx, const injection::meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
-        "injection model to coding model transform", transform_id, im.name(),
-        *ctx.coding_context().tracer(), im);
+        "injection model to coding model transform", transform_id, m.name(),
+        *ctx.coding_context().tracer(), m);
 
     helpers::stereotypes_helper h;
-    const auto scr(h.from_string(im.stereotypes()));
+    const auto scr(h.from_string(m.stereotypes()));
     const auto& f(*ctx.coding_context().annotation_factory());
     const auto scope(annotations::scope_types::root_module);
-    const auto ra1(f.make(im.tagged_values(), scope));
+    const auto ra1(f.make(m.tagged_values(), scope));
 
     const auto& e(*ctx.annotation_expander());
     const auto ra(e.expand(scr.dynamic_stereotypes(), ra1));
@@ -276,9 +277,9 @@ apply(const context& ctx, const injection::meta_model::model& im) {
     r.name(b.build());
     BOOST_LOG_SEV(lg, debug) << "Computed model name: " << r.name();
 
-    r.input_language(to_language(im.input_language()));
+    r.input_technical_space(to_technical_space(m.input_technical_space()));
     const helpers::adapter ad(*ctx.annotation_expander());
-    for (const auto& e : im.elements()) {
+    for (const auto& e : m.elements()) {
         const auto l(e.in_global_module() ? empty_location : model_location);
         process_element(ad, l, e, r);
     }
@@ -292,7 +293,7 @@ apply(const context& ctx, const injection::meta_model::model& im) {
     r.root_module(boost::make_shared<coding::meta_model::module>());
     r.root_module()->name(r.name());
     r.root_module()->annotation(ra);
-    r.root_module()->documentation(im.documentation());
+    r.root_module()->documentation(m.documentation());
     insert(r.root_module(), r.modules());
 
     stp.end_transform(r);

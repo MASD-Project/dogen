@@ -347,16 +347,16 @@ Leaves are types concrete types which have a parent.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#input_language#</dia:string>
+            <dia:string>#input_technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#coding::meta_model::languages#</dia:string>
+            <dia:string>#coding::meta_model::technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Language in which this model was written.#</dia:string>
+            <dia:string>#Technical space which this model used originally.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -370,16 +370,16 @@ Leaves are types concrete types which have a parent.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#output_language#</dia:string>
+            <dia:string>#output_technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#coding::meta_model::languages#</dia:string>
+            <dia:string>#coding::meta_model::technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Language in which to output the model.#</dia:string>
+            <dia:string>#Technical space into which to output the model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3638,7 +3638,7 @@ model directory.#</dia:string>
         <dia:point val="162.5,39"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="153.477,31.15;163.25,39.8"/>
+        <dia:rectangle val="153.478,31.15;163.25,39.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4029,7 +4029,7 @@ model directory.#</dia:string>
         <dia:point val="138.77,44.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="138.02,43.45;152.727,59.8"/>
+        <dia:rectangle val="138.02,43.45;152.728,59.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5082,7 +5082,7 @@ model directory.#</dia:string>
         <dia:point val="162.5,43.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="161.75,42.65;173.572,59.7498"/>
+        <dia:rectangle val="161.75,42.65;173.573,59.7498"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6868,13 +6868,13 @@ model directory.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#language#</dia:string>
+            <dia:string>#technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#coding::meta_model::languages#</dia:string>
+            <dia:string>#coding::meta_model::technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6990,13 +6990,13 @@ model directory.#</dia:string>
         <dia:point val="131,112"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="130.95,111.95;185.065,119.45"/>
+        <dia:rectangle val="130.95,111.95;190.07,119.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="131,112"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="54.015000000000001"/>
+        <dia:real val="59.020000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.4000000000000004"/>
@@ -7091,10 +7091,10 @@ model directory.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#transforms_by_language_#</dia:string>
+            <dia:string>#transforms_by_technical_space_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;coding::meta_model::languages, std::shared_ptr&lt;model_to_extraction_model_transform_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;coding::meta_model::technical_space, std::shared_ptr&lt;model_to_extraction_model_transform_interface&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -7194,7 +7194,7 @@ model directory.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform_for_language#</dia:string>
+            <dia:string>#transform_for_technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -7223,10 +7223,10 @@ model directory.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#l#</dia:string>
+                <dia:string>#ts#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#languages#</dia:string>
+                <dia:string>#coding::meta_model::technical_space#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -7242,13 +7242,13 @@ model directory.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transforms_by_language#</dia:string>
+            <dia:string>#transforms_by_technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;meta_model::languages, std::shared_ptr&lt;model_to_extraction_model_transform_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;coding::meta_model::technical_space, std::shared_ptr&lt;model_to_extraction_model_transform_interface&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7387,17 +7387,17 @@ model directory.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="185.015,119.4"/>
+        <dia:point val="190.02,119.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="184.265,118.65;192.12,126.8"/>
+        <dia:rectangle val="189.27,118.65;192.12,126.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="185.015,119.4"/>
-        <dia:point val="185.015,122"/>
+        <dia:point val="190.02,119.4"/>
+        <dia:point val="190.02,122"/>
         <dia:point val="191.92,122"/>
         <dia:point val="191.92,126"/>
       </dia:attribute>

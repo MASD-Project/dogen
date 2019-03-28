@@ -20,8 +20,8 @@
  */
 #include <sstream>
 #include "masd.dogen.coding/test_data/helpers/mapping_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/languages_td.hpp"
 #include "masd.dogen.coding/test_data/helpers/mapping_value_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/technical_space_td.hpp"
 
 namespace {
 
@@ -31,9 +31,9 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-masd::dogen::coding::meta_model::languages
-create_masd_dogen_coding_meta_model_languages(const unsigned int position) {
-    return masd::dogen::coding::meta_model::languages_generator::create(position);
+masd::dogen::coding::meta_model::technical_space
+create_masd_dogen_coding_meta_model_technical_space(const unsigned int position) {
+    return masd::dogen::coding::meta_model::technical_space_generator::create(position);
 }
 
 masd::dogen::coding::helpers::mapping_value
@@ -41,10 +41,10 @@ create_masd_dogen_coding_helpers_mapping_value(const unsigned int position) {
     return masd::dogen::coding::helpers::mapping_value_generator::create(position);
 }
 
-std::unordered_map<masd::dogen::coding::meta_model::languages, masd::dogen::coding::helpers::mapping_value> create_std_unordered_map_masd_dogen_coding_meta_model_languages_masd_dogen_coding_helpers_mapping_value(unsigned int position) {
-    std::unordered_map<masd::dogen::coding::meta_model::languages, masd::dogen::coding::helpers::mapping_value> r;
+std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value> create_std_unordered_map_masd_dogen_coding_meta_model_technical_space_masd_dogen_coding_helpers_mapping_value(unsigned int position) {
+    std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_masd_dogen_coding_meta_model_languages(position + i), create_masd_dogen_coding_helpers_mapping_value(position + i)));
+        r.insert(std::make_pair(create_masd_dogen_coding_meta_model_technical_space(position + i), create_masd_dogen_coding_helpers_mapping_value(position + i)));
     }
     return r;
 }
@@ -58,7 +58,7 @@ mapping_generator::mapping_generator() : position_(0) { }
 void mapping_generator::
 populate(const unsigned int position, result_type& v) {
     v.lam_id(create_std_string(position + 0));
-    v.by_language(create_std_unordered_map_masd_dogen_coding_meta_model_languages_masd_dogen_coding_helpers_mapping_value(position + 1));
+    v.by_language(create_std_unordered_map_masd_dogen_coding_meta_model_technical_space_masd_dogen_coding_helpers_mapping_value(position + 1));
 }
 
 mapping_generator::result_type

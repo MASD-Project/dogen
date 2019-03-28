@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
@@ -41,12 +41,12 @@ namespace masd::dogen::generation::csharp::fabric {
 
 bool dynamic_transform::
 requires_expansion(const generation::meta_model::model& m) const {
-    const auto l(m.output_language());
-    const auto r(l == coding::meta_model::languages::csharp);
+    const auto l(m.output_technical_space());
+    const auto r(l == coding::meta_model::technical_space::csharp);
     if (!r) {
         BOOST_LOG_SEV(lg, debug) << "Expansion not required: "
                                  << m.name().qualified().dot()
-                                 << " for language: " << l;
+                                 << " for technical space: " << l;
     }
     return r;
 }

@@ -23,7 +23,7 @@
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
-#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/io/helpers/mapping_io.hpp"
 #include "masd.dogen.coding/io/helpers/mapping_set_io.hpp"
 #include "masd.dogen.coding/io/helpers/mapping_set_repository_io.hpp"
@@ -31,7 +31,6 @@
 #include "masd.dogen.coding/types/helpers/building_error.hpp"
 #include "masd.dogen.coding/types/helpers/mappings_hydrator.hpp"
 #include "masd.dogen.coding/types/helpers/mappings_validator.hpp"
-#include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
 
 namespace {
@@ -95,10 +94,11 @@ void mapping_set_repository_factory::validate_mappings(
 
 void mapping_set_repository_factory::
 insert(const std::string& lam_id, const meta_model::name& n,
-    const meta_model::languages l, std::unordered_map<meta_model::languages,
-    std::unordered_map<std::string, meta_model::name>>& by_languages) const {
+    const meta_model::technical_space ts,
+    std::unordered_map<meta_model::technical_space,
+    std::unordered_map<std::string, meta_model::name>>& map) const {
 
-    auto& by_id(by_languages[l]);
+    auto& by_id(map[ts]);
     const auto pair(std::make_pair(lam_id, n));
     const auto inserted(by_id.insert(pair).second);
     if (!inserted) {

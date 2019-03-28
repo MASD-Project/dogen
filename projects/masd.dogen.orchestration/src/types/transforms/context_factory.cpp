@@ -62,7 +62,7 @@ create_intra_backend_segment_properties(
      * unique globally. Then merge them all into a single container of
      * segment properties.
      */
-    for (const auto& pair : rg.transforms_by_language()) {
+    for (const auto& pair : rg.transforms_by_technical_space()) {
         const auto& t(*pair.second);
         for (const auto& pair : t.intra_backend_segment_properties()) {
             const auto inserted(r.insert(pair).second);
@@ -82,7 +82,7 @@ create_archetype_location_repository(
 
     using namespace annotations;
     archetype_location_repository_builder b;
-    for (const auto& pair : rg.transforms_by_language()) {
+    for (const auto& pair : rg.transforms_by_technical_space()) {
         const auto& t(*pair.second);
         b.add(t.archetype_locations_by_meta_name());
         b.add(t.archetype_locations_by_family());

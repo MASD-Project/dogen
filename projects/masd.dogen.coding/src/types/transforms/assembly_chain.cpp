@@ -38,16 +38,16 @@ static logger lg(logger_factory(transform_id));
 namespace masd::dogen::coding::transforms {
 
 meta_model::model assembly_chain::apply(const context& ctx,
-    const meta_model::languages l, const meta_model::model& target,
+    const meta_model::technical_space ts, const meta_model::model& target,
     const std::list<meta_model::model>& refs) {
     tracing::scoped_chain_tracer stp(lg, "model assembly chain",
         transform_id, target.name().qualified().dot(), *ctx.tracer());
 
     /*
-     * Perform all the language mapping required for target and
-     * references.
+     * Perform all the technical space mapping required for the target
+     * model.
      */
-    const auto mapped_target(mapping_transform::apply(ctx, target, l));
+    const auto mapped_target(mapping_transform::apply(ctx, target, ts));
 
     /*
      * Now do the same for the references.
@@ -55,18 +55,18 @@ meta_model::model assembly_chain::apply(const context& ctx,
     std::list<meta_model::model> mapped_refs;
     for (const auto& ref : refs) {
         /*
-         * We have all references for all the output languages
-         * requested by the target model. We are only concerned with
-         * l, a member of that set. We need to exclude all models
-         * which are not mappable to l such as for example the system
-         * models for some of the output languages.
+         * Note that we have all references for all the output
+         * technical spaces requested by the target model. We are only
+         * concerned with those that require mapping into ts - i.e., a
+         * subset of that set. We need to exclude all models which are
+         * not mappable to ts, such as for example the system models.
          */
-        if (!mapping_transform::is_mappable(ref.input_language(), l)) {
-            BOOST_LOG_SEV(lg, debug) << "Reference is not mappable: "
+        if (!mapping_transform::is_mappable(ref.input_technical_space(), ts)) {
+            BOOST_LOG_SEV(lg, debug) << "Skipping reference: "
                                      << ref.name().qualified().dot();
             continue;
         }
-        mapped_refs.push_back(mapping_transform::apply(ctx, ref, l));
+        mapped_refs.push_back(mapping_transform::apply(ctx, ref, ts));
     }
 
     /*

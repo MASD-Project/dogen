@@ -31,7 +31,7 @@
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include "masd.dogen.coding/types/meta_model/name.hpp"
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_actions.hpp"
 #include "masd.dogen.coding/types/helpers/mapping.hpp"
 
@@ -40,12 +40,12 @@ namespace masd::dogen::coding::helpers {
 class mappings_hydrator final {
 private:
     mapping_actions to_mapping_action(const std::string& s) const;
-    meta_model::languages to_language(const std::string& s) const;
+    meta_model::technical_space to_technical_space(const std::string& s) const;
 
 private:
     meta_model::name read_name(const boost::property_tree::ptree& pt) const;
 
-    std::unordered_map<meta_model::languages, mapping_value>
+    std::unordered_map<meta_model::technical_space, mapping_value>
     read_mapping_values(const boost::property_tree::ptree& pt) const;
 
     std::list<mapping> read_stream(std::istream& s) const;

@@ -43,8 +43,8 @@ private:
     /**
      * @brief Obtains all the element id mappings.
      */
-    std::unordered_map<std::string, std::list<mapping>> obtain_mappings(
-        const std::vector<boost::filesystem::path>& dirs) const;
+    std::unordered_map<std::string, std::list<mapping>>
+    obtain_mappings(const std::vector<boost::filesystem::path>& dirs) const;
 
     /**
      * @brief Ensures the mappings are valid.
@@ -54,7 +54,8 @@ private:
 
 private:
     void insert(const std::string& lam_id, const meta_model::name& n,
-        const meta_model::languages l, std::unordered_map<meta_model::languages,
+        const meta_model::technical_space ts,
+        std::unordered_map<meta_model::technical_space,
         std::unordered_map<std::string, meta_model::name>>& map) const;
 
     void populate_mapping_set(const std::list<mapping>& mappings,
@@ -65,8 +66,8 @@ private:
         std::list<mapping>>& mappings_by_set_name) const;
 
 public:
-    mapping_set_repository make(
-        const std::vector<boost::filesystem::path>& dirs) const;
+    mapping_set_repository
+    make(const std::vector<boost::filesystem::path>& dirs) const;
 };
 
 }

@@ -26,7 +26,7 @@
 #endif
 
 #include <list>
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
@@ -38,7 +38,7 @@ namespace masd::dogen::coding::transforms {
 class assembly_chain final {
 public:
     static meta_model::model apply(const context& ctx,
-        const meta_model::languages l,
+        const meta_model::technical_space ts,
         const meta_model::model& target,
         const std::list<meta_model::model>& refs);
 };

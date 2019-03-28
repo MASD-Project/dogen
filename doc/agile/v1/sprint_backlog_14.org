@@ -13,22 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-28 Thu 12:06]
+#+CAPTION: Clock summary at [2019-03-28 Thu 16:15]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *20:52* |       |      | 100.0 |
+| *Total time*                                           | *23:36* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 20:52   |       |      | 100.0 |
-| Active                                                 |         | 20:52 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 1:47 |   8.5 |
-| Sprint and product backlog grooming                    |         |       | 2:39 |  12.7 |
-| Create a video demo for the previous sprint's features |         |       | 3:11 |  15.3 |
-| Fix issues with emacs                                  |         |       | 2:42 |  12.9 |
-| Create a basic "project plan"                          |         |       | 2:08 |  10.2 |
-| Simplify qualified name                                |         |       | 3:07 |  14.9 |
-| Promote extraction entities to meta-model elements     |         |       | 3:01 |  14.5 |
-| Rename "language" to "technical space"                 |         |       | 2:17 |  10.9 |
+| Stories                                                | 23:36   |       |      | 100.0 |
+| Active                                                 |         | 23:36 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 1:47 |   7.6 |
+| Sprint and product backlog grooming                    |         |       | 2:39 |  11.2 |
+| Create a video demo for the previous sprint's features |         |       | 3:11 |  13.5 |
+| Fix issues with emacs                                  |         |       | 2:42 |  11.4 |
+| Create a basic "project plan"                          |         |       | 2:08 |   9.0 |
+| Simplify qualified name                                |         |       | 3:39 |  15.5 |
+| Rename "language" to "technical space"                 |         |       | 4:29 |  19.0 |
+| Promote extraction entities to meta-model elements     |         |       | 3:01 |  12.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -196,6 +196,7 @@ together.
 *** COMPLETED Simplify qualified name                                 :story:
     CLOSED: [2019-03-28 Thu 12:00]
     :LOGBOOK:
+    CLOCK: [2019-03-28 Thu 12:48]--[2019-03-28 Thu 13:20] =>  0:32
     CLOCK: [2019-03-28 Thu 09:17]--[2019-03-28 Thu 12:00] =>  2:43
     CLOCK: [2019-03-27 Wed 17:10]--[2019-03-27 Wed 17:34] =>  0:24
     :END:
@@ -222,6 +223,40 @@ For some reason we are using a map, but its not clear that we need
 sorting. Change it to unordered and see what breaks.
 
 It seems we get errors in serialisation when using the map.
+
+*** STARTED Rename "language" to "technical space"                    :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-28 Thu 16:10]--[2019-03-28 Thu 16:15] =>  0:05
+    CLOCK: [2019-03-28 Thu 14:02]--[2019-03-28 Thu 16:09] =>  2:07
+    CLOCK: [2019-03-27 Wed 15:54]--[2019-03-27 Wed 17:09] =>  1:15
+    CLOCK: [2019-03-27 Wed 15:40]--[2019-03-27 Wed 15:53] =>  0:13
+    CLOCK: [2019-03-27 Wed 15:03]--[2019-03-27 Wed 15:39] =>  0:36
+    CLOCK: [2019-03-27 Wed 14:55]--[2019-03-27 Wed 15:02] =>  0:07
+    CLOCK: [2019-03-26 Tue 14:32]--[2019-03-26 Tue 14:38] =>  0:06
+    :END:
+
+We are using the word "language" in several places:
+
+- input language
+- output language
+
+What we really mean is technical space:
+
+- input technical space
+- output technical space
+
+When this is done we should also introduce the concept of
+=masd.technical_space= which then toggles knobs. For example, if set
+to C++, both input and output TS become C++. Actually this is best
+left to profiles. We can have profiles such as "windows c++
+development", etc.
+
+Tasks:
+
+- add technical spaces to elements. They start with the input TS, and
+  then are updated after mapping. Only if mapping did something to
+  element.
+-
 
 *** STARTED Promote extraction entities to meta-model elements        :story:
     :LOGBOOK:
@@ -319,38 +354,6 @@ We should also allow for both:
 
 - full licence: used later at the product level.
 - licence summary: used for preambles in files.
-
-*** STARTED Rename "language" to "technical space"                    :story:
-    :LOGBOOK:
-    CLOCK: [2019-03-27 Wed 15:54]--[2019-03-27 Wed 17:09] =>  1:15
-    CLOCK: [2019-03-27 Wed 15:40]--[2019-03-27 Wed 15:53] =>  0:13
-    CLOCK: [2019-03-27 Wed 15:03]--[2019-03-27 Wed 15:39] =>  0:36
-    CLOCK: [2019-03-27 Wed 14:55]--[2019-03-27 Wed 15:02] =>  0:07
-    CLOCK: [2019-03-26 Tue 14:32]--[2019-03-26 Tue 14:38] =>  0:06
-    :END:
-
-We are using the word "language" in several places:
-
-- input language
-- output language
-
-What we really mean is technical space:
-
-- input technical space
-- output technical space
-
-When this is done we should also introduce the concept of
-=masd.technical_space= which then toggles knobs. For example, if set
-to C++, both input and output TS become C++. Actually this is best
-left to profiles. We can have profiles such as "windows c++
-development", etc.
-
-Tasks:
-
-- add technical spaces to elements. They start with the input TS, and
-  then are updated after mapping. Only if mapping did something to
-  element.
--
 
 *** Make extraction model name a qualified name                       :story:
 

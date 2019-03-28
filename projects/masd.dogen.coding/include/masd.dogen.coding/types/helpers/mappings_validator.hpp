@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_value.hpp"
 #include "masd.dogen.coding/types/helpers/mapping.hpp"
 
@@ -36,7 +36,8 @@ namespace masd::dogen::coding::helpers {
 
 class mappings_validator final {
 private:
-    void validate(const meta_model::languages l, const mapping_value& mv) const;
+    void validate(const meta_model::technical_space ts,
+        const mapping_value& mv) const;
     void validate(const mapping& m) const;
 
 public:

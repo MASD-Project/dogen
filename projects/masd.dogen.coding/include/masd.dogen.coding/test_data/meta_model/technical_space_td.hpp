@@ -18,16 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_LANGUAGES_FWD_HPP
-#define MASD_DOGEN_CODING_TYPES_META_MODEL_LANGUAGES_FWD_HPP
+#ifndef MASD_DOGEN_CODING_TEST_DATA_META_MODEL_TECHNICAL_SPACE_TD_HPP
+#define MASD_DOGEN_CODING_TEST_DATA_META_MODEL_TECHNICAL_SPACE_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
+
 namespace masd::dogen::coding::meta_model {
 
-enum class languages : unsigned int;
+class technical_space_generator {
+public:
+    technical_space_generator();
+
+public:
+    typedef masd::dogen::coding::meta_model::technical_space result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+};
 
 }
 

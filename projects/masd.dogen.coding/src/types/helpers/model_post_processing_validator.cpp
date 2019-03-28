@@ -109,7 +109,7 @@ const std::string duplicate_element("Element has an ID already defined: ");
 const std::string invalid_string(
     "String is not valid according to the identifier regular expression: ");
 const std::string reserved_keyword(
-    "String matches a resvered keyword on one of the supported languages: ");
+    "String matches a reserved keyword in a supported technical space: ");
 const std::string builtin_name("String matches the name of a built in type: ");
 const std::string abstract_instance(
     "Attempt to instantiate an abstract type: ");
@@ -130,8 +130,8 @@ inline void check_not_in_container(const Container& c, const std::string& str,
 }
 
 bool model_post_processing_validator::
-allow_spaces_in_built_in_types(const meta_model::languages l) {
-    return l == meta_model::languages::cpp;
+allow_spaces_in_built_in_types(const meta_model::technical_space l) {
+    return l == meta_model::technical_space::cpp;
 }
 
 void model_post_processing_validator::validate_string(const std::string& s,
@@ -140,7 +140,7 @@ void model_post_processing_validator::validate_string(const std::string& s,
 
     /*
      * String must match the regular expression for a valid
-     * identifier across all supported languages.
+     * identifier across all supported technical_space.
      */
     if (!std::regex_match(s, regex)) {
         BOOST_LOG_SEV(lg, error) << invalid_string << "'" << s << "'";
@@ -203,8 +203,8 @@ void model_post_processing_validator::validate_name(const meta_model::name& n,
     /*
      * Sanity check all of the components of the name. Bit of a hack
      * here: if we are at global namespace and our model is in a
-     * language where built-ins can have spaces, we split the name on
-     * space and validate each component separately.
+     * technical space where built-ins can have spaces, we split the
+     * name on space and validate each component separately.
      */
     BOOST_LOG_SEV(lg, debug) << "at_global_namespace: "
                              << at_global_namespace
@@ -230,7 +230,7 @@ void model_post_processing_validator::validate_name(const meta_model::name& n,
 
 void model_post_processing_validator::
 validate_names(const std::list<std::pair<std::string, meta_model::name>>& names,
-    const meta_model::languages l) {
+    const meta_model::technical_space l) {
     BOOST_LOG_SEV(lg, debug) << "Sanity checking names.";
     std::unordered_set<std::string> ids_done;
 
@@ -279,11 +279,11 @@ validate_injected_names(
      *   injected types represent in many cases file names -
      *   e.g. CMakeLists, Visual Studio solutions and project files,
      *   etc. These may require things such as dashes and dots. All
-     *   other model types which map to programming language
-     *   constructs do not allow these characters. So to make our life
-     *   easier we use strict validation for most model types and the
-     *   loose validation for the injected types. This is, of course,
-     *   not strictly correct, because in theory one can inject fabric
+     *   other model types which map to technical space constructs do
+     *   not allow these characters. So to make our life easier we use
+     *   strict validation for most model types and the loose
+     *   validation for the injected types. This is, of course, not
+     *   strictly correct, because in theory one can inject fabric
      *   types which do not correspond to a file - e.g. serialisation
      *   registrar in c++). However, this is a good enough
      *   approximation for now.
@@ -353,7 +353,7 @@ void model_post_processing_validator::validate_meta_names(
 
 void model_post_processing_validator::
 validate_name_tree(const std::unordered_set<std::string>& abstract_elements,
-    const meta_model::languages l, const meta_model::name_tree& nt,
+    const meta_model::technical_space ts, const meta_model::name_tree& nt,
     const bool inherit_opaqueness_from_parent) {
 
     const auto& ae(abstract_elements);
@@ -365,22 +365,22 @@ validate_name_tree(const std::unordered_set<std::string>& abstract_elements,
     }
 
     for (const auto& c : nt.children())
-        validate_name_tree(ae, l, c, nt.are_children_opaque());
+        validate_name_tree(ae, ts, c, nt.are_children_opaque());
 }
 
 void model_post_processing_validator::validate_name_trees(
     const std::unordered_set<std::string>& abstract_elements,
-    const meta_model::languages l,
+    const meta_model::technical_space ts,
     const std::list<std::pair<std::string, meta_model::name_tree>>& nts) {
 
     /*
      * The only validation we perform on name trees at present is done
-     * just for c++, so we can ignore all other languages. Note that
+     * just for c++, so we can ignore all other technical_space. Note that
      * we already resolve all of the names in the name tree so we know
      * they are valid. These are just additional checks we perform on
      * these names.
      */
-    if (l != meta_model::languages::cpp)
+    if (ts != meta_model::technical_space::cpp)
         return;
 
     for (const auto& pair : nts) {
@@ -390,7 +390,7 @@ void model_post_processing_validator::validate_name_trees(
                                  << nt.qualified().identifiable() << "'";
 
         try {
-            validate_name_tree(abstract_elements, l, nt);
+            validate_name_tree(abstract_elements, ts, nt);
         } catch (boost::exception& e) {
             e << errmsg_validation_owner(owner);
             throw;
@@ -399,16 +399,16 @@ void model_post_processing_validator::validate_name_trees(
 }
 
 void model_post_processing_validator::
-validate(const indices& idx, const meta_model::model& im) {
+validate(const indices& idx, const meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: "
-                             << im.name().qualified().dot();
+                             << m.name().qualified().dot();
 
-    const auto l(im.input_language());
-    const auto dr(decomposer::decompose(im));
-    validate_names(dr.names(), l);
+    const auto ts(m.input_technical_space());
+    const auto dr(decomposer::decompose(m));
+    validate_names(dr.names(), ts);
     validate_injected_names(dr.injected_names());
     validate_meta_names(dr.meta_names());
-    validate_name_trees(idx.abstract_elements(), l, dr.name_trees());
+    validate_name_trees(idx.abstract_elements(), ts, dr.name_trees());
 
     BOOST_LOG_SEV(lg, debug) << "Finished validation.";
 }

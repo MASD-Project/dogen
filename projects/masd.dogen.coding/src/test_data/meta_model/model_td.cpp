@@ -28,12 +28,12 @@
 #include "masd.dogen.coding/test_data/meta_model/visitor_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/modeline_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/exception_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/languages_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/primitive_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/enumeration_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/origin_types_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/modeline_group_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/object_template_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/technical_space_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/generation_marker_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/orm_model_properties_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/extraction_properties_td.hpp"
@@ -312,15 +312,15 @@ std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_mode
     return r;
 }
 
-masd::dogen::coding::meta_model::languages
-create_masd_dogen_coding_meta_model_languages(const unsigned int position) {
-    return masd::dogen::coding::meta_model::languages_generator::create(position);
+masd::dogen::coding::meta_model::technical_space
+create_masd_dogen_coding_meta_model_technical_space(const unsigned int position) {
+    return masd::dogen::coding::meta_model::technical_space_generator::create(position);
 }
 
-std::list<masd::dogen::coding::meta_model::languages> create_std_list_masd_dogen_coding_meta_model_languages(unsigned int position) {
-    std::list<masd::dogen::coding::meta_model::languages> r;
+std::list<masd::dogen::coding::meta_model::technical_space> create_std_list_masd_dogen_coding_meta_model_technical_space(unsigned int position) {
+    std::list<masd::dogen::coding::meta_model::technical_space> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_masd_dogen_coding_meta_model_languages(position + i));
+        r.push_back(create_masd_dogen_coding_meta_model_technical_space(position + i));
     }
     return r;
 }
@@ -368,8 +368,8 @@ populate(const unsigned int position, result_type& v) {
     v.licences(create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_licence(position + 15));
     v.generation_markers(create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_generation_marker(position + 16));
     v.root_module(create_boost_shared_ptr_masd_dogen_coding_meta_model_module(position + 17));
-    v.input_language(create_masd_dogen_coding_meta_model_languages(position + 18));
-    v.output_languages(create_std_list_masd_dogen_coding_meta_model_languages(position + 19));
+    v.input_technical_space(create_masd_dogen_coding_meta_model_technical_space(position + 18));
+    v.output_technical_spaces(create_std_list_masd_dogen_coding_meta_model_technical_space(position + 19));
     v.orm_properties(create_boost_optional_masd_dogen_coding_meta_model_orm_model_properties(position + 20));
     v.extraction_properties(create_masd_dogen_coding_meta_model_extraction_properties(position + 21));
 }

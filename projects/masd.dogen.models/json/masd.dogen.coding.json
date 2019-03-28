@@ -645,14 +645,14 @@
           "type": "boost::shared_ptr<module>"
         },
         {
-          "name": "input_language",
-          "type": "languages",
-          "documentation": "Language in which this model was written.\n"
+          "name": "input_technical_space",
+          "type": "technical_space",
+          "documentation": "Technical space in which this model was written.\n"
         },
         {
-          "name": "output_languages",
-          "type": "std::list<languages>",
-          "documentation": "Languages in which to output the final model.\n"
+          "name": "output_technical_spaces",
+          "type": "std::list<technical_space>",
+          "documentation": "Technical spaces into which to extract the final model.\n"
         },
         {
           "name": "orm_properties",
@@ -861,7 +861,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::languages",
+      "name": "meta_model::technical_space",
       "documentation": "Models need to declare upfront the programming language they will target.\n",
       "stereotypes": [
         "masd::enumeration"
@@ -1488,11 +1488,11 @@
         },
         {
           "name": "by_language_agnostic_id",
-          "type": "std::unordered_map<meta_model::languages, std::unordered_map<std::string, meta_model::name>>"
+          "type": "std::unordered_map<meta_model::technical_space, std::unordered_map<std::string, meta_model::name>>"
         },
         {
           "name": "erasures_by_language",
-          "type": "std::unordered_map<meta_model::languages, std::unordered_set<std::string>>"
+          "type": "std::unordered_map<meta_model::technical_space, std::unordered_set<std::string>>"
         }
       ]
     },
@@ -1537,8 +1537,8 @@
         },
         {
           "name": "by_language",
-          "type": "std::unordered_map<meta_model::languages, mapping_value>",
-          "documentation": "Values of the mapping, by language.\n"
+          "type": "std::unordered_map<meta_model::technical_space, mapping_value>",
+          "documentation": "Values of the mapping, by technical space.\n"
         }
       ]
     },

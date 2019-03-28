@@ -24,7 +24,7 @@
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
@@ -39,50 +39,53 @@ const std::string transform_id("coding.transforms.language_transform");
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
-const std::string cpp_language("cpp");
-const std::string csharp_language("csharp");
-const std::string la_language("language_agnostic");
+const std::string cpp_technical_space("cpp");
+const std::string csharp_technical_space("csharp");
+const std::string agnostic_technical_space("language_agnostic");
 
-const std::string lanugage_not_set("Input language must be set.");
-const std::string unsupported_lanugage("Language is not supported: ");
+const std::string technical_space_not_set("Input technical space must be set.");
+const std::string unsupported_technical_space(
+    "Technical space is not supported: ");
 
 }
 
 namespace masd::dogen::coding::transforms {
 
-meta_model::languages language_transform::to_language(const std::string& s) {
-    using meta_model::languages;
-    if (s == cpp_language)
-        return languages::cpp;
-    else if (s == csharp_language)
-        return languages::csharp;
-    else if (s == la_language)
-        return languages::language_agnostic;
+meta_model::technical_space
+language_transform::to_language(const std::string& s) {
+    using meta_model::technical_space;
+    if (s == cpp_technical_space)
+        return technical_space::cpp;
+    else if (s == csharp_technical_space)
+        return technical_space::csharp;
+    else if (s == agnostic_technical_space)
+        return technical_space::language_agnostic;
 
-    BOOST_LOG_SEV(lg, error) << unsupported_lanugage << s;
-    BOOST_THROW_EXCEPTION(transformation_error(unsupported_lanugage + s));
+    BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;
+    BOOST_THROW_EXCEPTION(
+        transformation_error(unsupported_technical_space + s));
 }
 
 language_transform::type_group language_transform::
 make_type_group(const annotations::type_repository& atrp) {
     type_group r;
     const annotations::type_repository_selector s(atrp);
-    r.output_language = s.select_type_by_name(traits::output_language());
+    r.output_technical_space = s.select_type_by_name(traits::output_language());
     return r;
 }
 
-std::list<meta_model::languages>
-language_transform::make_output_languages(const type_group& tg,
+std::list<meta_model::technical_space>
+language_transform::make_output_technical_space(const type_group& tg,
     const annotations::annotation& a) {
     const annotations::entry_selector s(a);
 
-    std::list<meta_model::languages> r;
-    if (!s.has_entry(tg.output_language))
+    std::list<meta_model::technical_space> r;
+    if (!s.has_entry(tg.output_technical_space))
         return r;
 
-    const auto lang_str(s.get_text_collection_content(tg.output_language));
-    for (const auto s : lang_str)
-        r.push_back(to_language(s));
+    const auto ots(s.get_text_collection_content(tg.output_technical_space));
+    for (const auto ts : ots)
+        r.push_back(to_language(ts));
 
     return r;
 }
@@ -93,46 +96,47 @@ apply(const context& ctx, meta_model::model& m) {
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     /*
-     * Ensure the input language has been set by now.
+     * Ensure the input technical space has been set by now.
      */
-    using meta_model::languages;
-    const bool has_input_language(m.input_language() != languages::invalid);
-    if (!has_input_language) {
-        BOOST_LOG_SEV(lg, error) << lanugage_not_set;
-        BOOST_THROW_EXCEPTION(transformation_error(lanugage_not_set));
+    const auto inv(meta_model::technical_space::invalid);
+    const bool has_input_ts(m.input_technical_space() != inv);
+    if (!has_input_ts) {
+        BOOST_LOG_SEV(lg, error) << technical_space_not_set;
+        BOOST_THROW_EXCEPTION(transformation_error(technical_space_not_set));
     }
 
     /*
-     * If we've already got output languages, there is no work
+     * If we've already got output technical_space, there is no work
      * required.
      */
-    if (!m.output_languages().empty()) {
-        BOOST_LOG_SEV(lg, debug) << "Model already has output languages: "
-                                 << m.output_languages();
+    if (!m.output_technical_spaces().empty()) {
+        BOOST_LOG_SEV(lg, debug) << "Model has output technical spaces set: "
+                                 << m.output_technical_spaces();
         return; // not ending tracing by design as there are no changes.
     }
 
     /*
-     * Read the output languages requested by the user.
+     * Read the output technical_space requested by the user.
      */
     const auto ra(m.root_module()->annotation());
     const auto tg(make_type_group(*ctx.type_repository()));
-    const auto ol(make_output_languages(tg, ra));
+    const auto ol(make_output_technical_space(tg, ra));
 
     /*
-     * If the user did not set an output language, assume the input as
-     * output. Validator will ensure this language is legal (e.g. the
-     * output language does not result in a PIM).
+     * If the user did not set an output technical space, assume the
+     * input as output. Validator will ensure this technical space is
+     * legal - e.g. the output technical space is not abstract but can
+     * be extracted into a concrete technical space.
      */
     if (ol.empty()) {
-        m.output_languages().push_back(m.input_language());
-        BOOST_LOG_SEV(lg, debug) << "No output language overrides found. "
-                                 << "Defaulting to input languae: "
-                                 << m.output_languages();
+        m.output_technical_spaces().push_back(m.input_technical_space());
+        BOOST_LOG_SEV(lg, debug) << "No overrides for output technical space "
+                                 << "  found. Defaulting to input: "
+                                 << m.output_technical_spaces();
     } else {
-        m.output_languages(ol);
-        BOOST_LOG_SEV(lg, debug) << "Expanded output languages to: "
-                                 << m.output_languages();
+        m.output_technical_spaces(ol);
+        BOOST_LOG_SEV(lg, debug) << "Expanded output technical spaces to: "
+                                 << m.output_technical_spaces();
     }
 
     stp.end_transform(m);

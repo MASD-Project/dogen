@@ -25,19 +25,19 @@
 #pragma once
 #endif
 
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::coding::transforms {
 
 class mapping_transform final {
 public:
-    static bool is_mappable(const meta_model::languages from,
-        const meta_model::languages to);
+    static bool is_mappable(const meta_model::technical_space from,
+        const meta_model::technical_space to);
 
     static meta_model::model apply(const context& ctx,
-        const meta_model::model& src, const meta_model::languages to);
+        const meta_model::model& src, const meta_model::technical_space to);
 };
 
 }

@@ -37,7 +37,7 @@
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
-#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/helpers/name_builder.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
@@ -65,7 +65,8 @@ const std::string parent_name_conflict(
     "Parent name is defined in both meta-data and structure of model: ");
 const std::string missing_underlier(
     "Primitive does not have an underlying element name: ");
-const std::string unsupported_language("Invalid or unsupported language: ");
+const std::string unsupported_technical_space(
+    "Invalid or unsupported technical space: ");
 const std::string underlying_element_conflict(
     "Underlying element name is already defined: ");
 
@@ -117,21 +118,22 @@ std::string parsing_transform::make_primitive_underlying_element(
 }
 
 std::string parsing_transform::
-obtain_value_attribute_simple_name(const meta_model::languages l) {
-    using meta_model::languages;
-    switch(l) {
-    case languages::csharp: return csharp_value;
-    case languages::cpp: return cpp_value;
+obtain_value_attribute_simple_name(const meta_model::technical_space ts) {
+    using meta_model::technical_space;
+    switch(ts) {
+    case technical_space::csharp: return csharp_value;
+    case technical_space::cpp: return cpp_value;
     default: {
-        const auto s(boost::lexical_cast<std::string>(l));
-        BOOST_LOG_SEV(lg, error) << unsupported_language << s;
-        BOOST_THROW_EXCEPTION(transformation_error(unsupported_language + s));
+        const auto s(boost::lexical_cast<std::string>(ts));
+        BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(unsupported_technical_space + s));
     } }
 }
 
-void parsing_transform::parse_attributes(const meta_model::languages language,
+void parsing_transform::parse_attributes(const meta_model::technical_space ts,
     std::list<meta_model::attribute>& attrs) {
-    const helpers::legacy_name_tree_parser ntp(language);
+    const helpers::legacy_name_tree_parser ntp(ts);
     for (auto& attr : attrs) {
         const auto ut(boost::algorithm::trim_copy(attr.unparsed_type()));
 
@@ -179,7 +181,6 @@ parse_parent(const type_group& tg, meta_model::object& o) {
 
 void parsing_transform::
 parse_underlying_element(const type_group& tg, meta_model::enumeration& e) {
-
     /*
      * Obtain the underlying element name from the meta-data. If there
      * is none, there is nothing to do.
@@ -208,7 +209,7 @@ parse_underlying_element(const type_group& tg, meta_model::enumeration& e) {
 }
 
 void parsing_transform::parse_underlying_element(const type_group& tg,
-    const meta_model::languages l, meta_model::primitive& p) {
+    const meta_model::technical_space ts, meta_model::primitive& p) {
 
     const auto id(p.name().qualified().dot());
 
@@ -228,14 +229,14 @@ void parsing_transform::parse_underlying_element(const type_group& tg,
      */
     helpers::name_factory nf;
     const auto& n(p.name());
-    const auto sn(obtain_value_attribute_simple_name(l));
+    const auto sn(obtain_value_attribute_simple_name(ts));
 
     meta_model::attribute attr;
     attr.name(nf.build_attribute_name(n, sn));
     attr.unparsed_type(ut);
     attr.documentation(documentation);
 
-    const helpers::legacy_name_tree_parser ntp(l);
+    const helpers::legacy_name_tree_parser ntp(ts);
     auto nt(ntp.parse(ut));
     attr.parsed_type(nt);
 
@@ -247,14 +248,14 @@ void parsing_transform::apply(const context& ctx, meta_model::model& m) {
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto tg(make_type_group(*ctx.type_repository()));
-    const auto l(m.input_language());
+    const auto ts(m.input_technical_space());
 
     for (auto& pair : m.objects()) {
         auto& o(*pair.second);
         const auto id(o.name().qualified().dot());
 
         try {
-            parse_attributes(l, o.local_attributes());
+            parse_attributes(ts, o.local_attributes());
             parse_parent(tg, o);
         } catch (boost::exception& e) {
             e << errmsg_parsing_owner(id);
@@ -267,7 +268,7 @@ void parsing_transform::apply(const context& ctx, meta_model::model& m) {
         const auto id(c.name().qualified().dot());
 
         try {
-            parse_attributes(l, c.local_attributes());
+            parse_attributes(ts, c.local_attributes());
         } catch (boost::exception& e) {
             e << errmsg_parsing_owner(id);
             throw;
@@ -291,7 +292,7 @@ void parsing_transform::apply(const context& ctx, meta_model::model& m) {
         const auto id(p.name().qualified().dot());
 
         try {
-            parse_underlying_element(tg, l, p);
+            parse_underlying_element(tg, ts, p);
         } catch (boost::exception& e) {
             e << errmsg_parsing_owner(id);
             throw;

@@ -46,11 +46,11 @@ const std::string unexpected_default_value(
 namespace masd::dogen::coding::helpers {
 
 void mappings_validator::
-validate(const meta_model::languages l, const mapping_value& mv) const {
+validate(const meta_model::technical_space ts, const mapping_value& mv) const {
     /*
      * Cannot map LAM to LAM.
      */
-    if (l == meta_model::languages::language_agnostic) {
+    if (ts == meta_model::technical_space::language_agnostic) {
         BOOST_LOG_SEV(lg, error) << invalid_language;
         BOOST_THROW_EXCEPTION(validation_error(invalid_lam_id));
     }

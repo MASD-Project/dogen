@@ -21,7 +21,7 @@
 #include <sstream>
 #include "masd.dogen.coding/test_data/meta_model/name_td.hpp"
 #include "masd.dogen.coding/test_data/helpers/mapping_set_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/languages_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/technical_space_td.hpp"
 
 namespace {
 
@@ -31,9 +31,9 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-masd::dogen::coding::meta_model::languages
-create_masd_dogen_coding_meta_model_languages(const unsigned int position) {
-    return masd::dogen::coding::meta_model::languages_generator::create(position);
+masd::dogen::coding::meta_model::technical_space
+create_masd_dogen_coding_meta_model_technical_space(const unsigned int position) {
+    return masd::dogen::coding::meta_model::technical_space_generator::create(position);
 }
 
 masd::dogen::coding::meta_model::name
@@ -49,10 +49,10 @@ std::unordered_map<std::string, masd::dogen::coding::meta_model::name> create_st
     return r;
 }
 
-std::unordered_map<masd::dogen::coding::meta_model::languages, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> > create_std_unordered_map_masd_dogen_coding_meta_model_languages_std_unordered_map_std_string_masd_dogen_coding_meta_model_name(unsigned int position) {
-    std::unordered_map<masd::dogen::coding::meta_model::languages, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> > r;
+std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> > create_std_unordered_map_masd_dogen_coding_meta_model_technical_space_std_unordered_map_std_string_masd_dogen_coding_meta_model_name(unsigned int position) {
+    std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_masd_dogen_coding_meta_model_languages(position + i), create_std_unordered_map_std_string_masd_dogen_coding_meta_model_name(position + i)));
+        r.insert(std::make_pair(create_masd_dogen_coding_meta_model_technical_space(position + i), create_std_unordered_map_std_string_masd_dogen_coding_meta_model_name(position + i)));
     }
     return r;
 }
@@ -65,10 +65,10 @@ std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int
     return r;
 }
 
-std::unordered_map<masd::dogen::coding::meta_model::languages, std::unordered_set<std::string> > create_std_unordered_map_masd_dogen_coding_meta_model_languages_std_unordered_set_std_string(unsigned int position) {
-    std::unordered_map<masd::dogen::coding::meta_model::languages, std::unordered_set<std::string> > r;
+std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> > create_std_unordered_map_masd_dogen_coding_meta_model_technical_space_std_unordered_set_std_string(unsigned int position) {
+    std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_masd_dogen_coding_meta_model_languages(position + i), create_std_unordered_set_std_string(position + i)));
+        r.insert(std::make_pair(create_masd_dogen_coding_meta_model_technical_space(position + i), create_std_unordered_set_std_string(position + i)));
     }
     return r;
 }
@@ -82,8 +82,8 @@ mapping_set_generator::mapping_set_generator() : position_(0) { }
 void mapping_set_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
-    v.by_language_agnostic_id(create_std_unordered_map_masd_dogen_coding_meta_model_languages_std_unordered_map_std_string_masd_dogen_coding_meta_model_name(position + 1));
-    v.erasures_by_language(create_std_unordered_map_masd_dogen_coding_meta_model_languages_std_unordered_set_std_string(position + 2));
+    v.by_language_agnostic_id(create_std_unordered_map_masd_dogen_coding_meta_model_technical_space_std_unordered_map_std_string_masd_dogen_coding_meta_model_name(position + 1));
+    v.erasures_by_language(create_std_unordered_map_masd_dogen_coding_meta_model_technical_space_std_unordered_set_std_string(position + 2));
 }
 
 mapping_set_generator::result_type

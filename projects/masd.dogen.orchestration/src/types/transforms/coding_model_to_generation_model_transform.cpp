@@ -34,7 +34,7 @@
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
-#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
 #include "masd.dogen.coding/types/meta_model/elements_traversal.hpp"
 #include "masd.dogen.generation/io/meta_model/model_io.hpp"
@@ -50,8 +50,8 @@ static logger lg(logger_factory(transform_id));
 
 const std::string empty;
 const std::string duplicate_qualified_name("Duplicate qualified name: ");
-const std::string expected_one_output_language(
-    "Expected exactly one output language.");
+const std::string expected_one_output_technical_space(
+    "Expected exactly one output technical space.");
 
 }
 
@@ -153,16 +153,16 @@ apply(const coding::meta_model::model& m) {
     r.name(m.name());
     r.meta_name(coding::helpers::meta_name_factory::make_model_name());
 
-    r.input_language(m.input_language());
-    if (m.output_languages().size() != 1) {
-        BOOST_LOG_SEV(lg, error) << expected_one_output_language
-                                 << " Output languages: "
-                                 << m.output_languages();
+    r.input_technical_space(m.input_technical_space());
+    if (m.output_technical_spaces().size() != 1) {
+        BOOST_LOG_SEV(lg, error) << expected_one_output_technical_space
+                                 << " Output technical spaces: "
+                                 << m.output_technical_spaces();
         BOOST_THROW_EXCEPTION(
-            transform_exception(expected_one_output_language));
+            transform_exception(expected_one_output_technical_space));
     }
-    const auto ol(m.output_languages().front());
-    r.output_language(ol);
+    const auto ts(m.output_technical_spaces().front());
+    r.output_technical_space(ts);
 
     r.leaves(m.leaves());
     r.references(m.references());

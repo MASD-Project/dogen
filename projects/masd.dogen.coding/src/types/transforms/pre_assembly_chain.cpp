@@ -20,7 +20,6 @@
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.coding/io/meta_model/model_set_io.hpp"
 #include "masd.dogen.coding/types/helpers/model_pre_processing_validator.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
@@ -75,7 +74,7 @@ void pre_assembly_chain::apply(const context& ctx, meta_model::model& m) {
 }
 
 void pre_assembly_chain::apply(const context& ctx, meta_model::model_set& ms) {
-    tracing::scoped_chain_tracer stp(lg, "model set pre-processing chain",
+    tracing::scoped_chain_tracer stp(lg, "pre-assembly chain",
         transform_id, ms.target().name().qualified().dot(), *ctx.tracer(), ms);
 
     /*

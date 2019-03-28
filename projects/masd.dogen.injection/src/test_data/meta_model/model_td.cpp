@@ -87,7 +87,7 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 3));
     v.annotation(create_masd_dogen_annotations_annotation(position + 4));
     v.elements(create_std_list_masd_dogen_injection_meta_model_element(position + 5));
-    v.input_language(create_std_string(position + 6));
+    v.input_technical_space(create_std_string(position + 6));
     v.references(create_std_list_std_string(position + 7));
 }
 

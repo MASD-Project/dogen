@@ -29,7 +29,7 @@
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
@@ -37,17 +37,17 @@ namespace masd::dogen::coding::transforms {
 
 class language_transform final {
 private:
-    static meta_model::languages to_language(const std::string& s);
+    static meta_model::technical_space to_language(const std::string& s);
 
 private:
     struct type_group {
-        annotations::type output_language;
+        annotations::type output_technical_space;
     };
 
     static type_group make_type_group(const annotations::type_repository& atrp);
 
-    static std::list<meta_model::languages>
-    make_output_languages(const type_group& tg,
+    static std::list<meta_model::technical_space>
+    make_output_technical_space(const type_group& tg,
         const annotations::annotation& a);
 
 public:

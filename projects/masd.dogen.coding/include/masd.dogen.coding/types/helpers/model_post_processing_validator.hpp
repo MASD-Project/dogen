@@ -31,7 +31,7 @@
 #include <utility>
 #include <unordered_set>
 #include "masd.dogen.coding/types/meta_model/name.hpp"
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/helpers/indices.hpp"
 #include "masd.dogen.coding/types/helpers/decomposition_result.hpp"
@@ -40,7 +40,8 @@ namespace masd::dogen::coding::helpers {
 
 class model_post_processing_validator final {
 private:
-    static bool allow_spaces_in_built_in_types(const meta_model::languages l);
+    static bool allow_spaces_in_built_in_types(
+        const meta_model::technical_space ts);
 
 private:
     static void validate_string(const std::string& s,
@@ -51,23 +52,23 @@ private:
         const std::regex& regex, const bool allow_spaces_in_built_in_types);
     static void validate_names(
         const std::list<std::pair<std::string, meta_model::name>>& names,
-        const meta_model::languages l);
+        const meta_model::technical_space ts);
     static void validate_injected_names(
         const std::list<std::pair<std::string, meta_model::name>>& names);
     static void validate_meta_names(
         const std::list<std::pair<std::string, meta_model::name>>& meta_names);
 
     static void validate_name_tree(const std::unordered_set<std::string>&
-        abstract_elements, const meta_model::languages l,
+        abstract_elements, const meta_model::technical_space ts,
         const meta_model::name_tree& nt,
         const bool inherit_opaqueness_from_parent = false);
     static void validate_name_trees(
         const std::unordered_set<std::string>& abstract_elements,
-        const meta_model::languages l,
+        const meta_model::technical_space ts,
         const std::list<std::pair<std::string, meta_model::name_tree>>& nts);
 
 public:
-    static void validate(const indices& idx, const meta_model::model& im);
+    static void validate(const indices& idx, const meta_model::model& m);
 };
 
 }

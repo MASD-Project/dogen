@@ -32,13 +32,17 @@
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/name_tree.hpp"
 #include "masd.dogen.coding/types/meta_model/attribute.hpp"
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_context.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository.hpp"
 
 namespace masd::dogen::coding::helpers {
 
+/**
+ * @brief Responsible for mapping types from a technical space to
+ * another. Requires those mappings to exist.
+ */
 class mapper final {
 public:
     explicit mapper(const mapping_set_repository& msrp);
@@ -55,20 +59,23 @@ private:
     }
 
     meta_model::model
-    clone(const meta_model::model& im) const;
+    clone(const meta_model::model& m) const;
 
 private:
     const std::unordered_map<std::string, meta_model::name>&
-    translations_for_language(const mapping_set& ms,
-        const meta_model::languages from, const meta_model::languages to) const;
+    translations_for_technical_space(const mapping_set& ms,
+        const meta_model::technical_space from,
+        const meta_model::technical_space to) const;
 
-    std::unordered_map<std::string, meta_model::name> injections_for_language(
-        const mapping_set& ms, const meta_model::languages l,
-        const meta_model::model& im) const;
+    std::unordered_map<std::string, meta_model::name>
+    injections_for_technical_space(const mapping_set& ms,
+        const meta_model::technical_space ts,
+        const meta_model::model& m) const;
 
     mapping_context create_mapping_context(const mapping_set& ms,
-        const meta_model::languages from, const meta_model::languages to,
-        const meta_model::model& im) const;
+        const meta_model::technical_space from,
+        const meta_model::technical_space to,
+        const meta_model::model& m) const;
 
 private:
     meta_model::name_tree walk_name_tree(const mapping_context& mc,
@@ -78,11 +85,11 @@ private:
         std::list<meta_model::attribute>& attrs) const;
 
 public:
-    static bool is_mappable(const meta_model::languages from,
-        const meta_model::languages to);
-    meta_model::model map(const meta_model::languages from,
-        const meta_model::languages to,
-        const meta_model::model& im) const;
+    static bool is_mappable(const meta_model::technical_space from,
+        const meta_model::technical_space to);
+    meta_model::model map(const meta_model::technical_space from,
+        const meta_model::technical_space to,
+        const meta_model::model& m) const;
 
 private:
     const mapping_set_repository& mapping_set_repository_;

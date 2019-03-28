@@ -32,7 +32,7 @@
 #include <boost/spirit/include/phoenix_object.hpp>
 #include <boost/spirit/repository/include/qi_distinct.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/io/meta_model/name_tree_io.hpp"
 #include "masd.dogen.coding/types/helpers/parsing_error.hpp"
 #include "masd.dogen.coding/types/helpers/name_tree_builder.hpp"
@@ -43,7 +43,7 @@ namespace {
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory("coding.helpers.legacy_name_tree_parser"));
 
-const std::string unsupported_language("Invalid or unsupported language: ");
+const std::string unsupported_technical_space("Invalid or unsupported language: ");
 const std::string error_msg("Failed to parse string: ");
 using namespace boost::spirit;
 
@@ -83,6 +83,9 @@ const keyword_tag_type keyword = distinct_spec(char_spec(keyword_spec));
 
 }
 
+using masd::dogen::coding::meta_model::technical_space;
+using masd::dogen::coding::helpers::parsing_error;
+
 template<typename Iterator>
 struct grammar : qi::grammar<Iterator> {
     std::shared_ptr<name_tree_builder> builder;
@@ -111,22 +114,21 @@ struct grammar : qi::grammar<Iterator> {
         end_template_ = std::bind(&grammar::end_template, this);
     }
 
-    std::string scope_operator_for_language(
-        const masd::dogen::coding::meta_model::languages l) {
-        switch (l) {
-        case masd::dogen::coding::meta_model::languages::csharp: return ".";
-        case masd::dogen::coding::meta_model::languages::cpp:
-        case masd::dogen::coding::meta_model::languages::language_agnostic: return "::";
+    std::string scope_operator_for_language(const technical_space ts) {
+        switch (ts) {
+        case technical_space::csharp: return ".";
+        case technical_space::cpp:
+        case technical_space::language_agnostic: return "::";
         default: {
-            const auto s(boost::lexical_cast<std::string>(l));
-            BOOST_LOG_SEV(lg, error) << unsupported_language << s;
+            const auto s(boost::lexical_cast<std::string>(ts));
+            BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;
             BOOST_THROW_EXCEPTION(
-                masd::dogen::coding::helpers::parsing_error(unsupported_language + s));
+                parsing_error(unsupported_technical_space + s));
         } }
     }
 
     grammar(std::shared_ptr<name_tree_builder> b,
-        const masd::dogen::coding::meta_model::languages language)
+        const technical_space ts)
         : grammar::base_type(type_name), builder(b) {
         setup_functors();
         using qi::on_error;
@@ -143,7 +145,7 @@ struct grammar : qi::grammar<Iterator> {
         alphanum = boost::spirit::qi::alnum | string("_");
         nondigit = boost::spirit::qi::alpha | string("_");
         name %= lexeme[nondigit >> *(alphanum)];
-        scope_operator = scope_operator_for_language(language);
+        scope_operator = scope_operator_for_language(ts);
 
         name_tree = name[add_name_tree_]
             >> *(scope_operator >> name[add_name_tree_]);
@@ -204,15 +206,15 @@ struct grammar : qi::grammar<Iterator> {
 namespace masd::dogen::coding::helpers {
 
 legacy_name_tree_parser::
-legacy_name_tree_parser(const meta_model::languages language)
-    : language_(language) {}
+legacy_name_tree_parser(const meta_model::technical_space ts)
+    : technical_space_(ts) {}
 
 meta_model::name_tree
 legacy_name_tree_parser::parse(const std::string& s) const {
     BOOST_LOG_SEV(lg, debug) << "parsing name: " << s;
 
     auto builder(std::make_shared<name_tree_builder>());
-    grammar<std::string::const_iterator> g(builder, language_);
+    grammar<std::string::const_iterator> g(builder, technical_space_);
 
     std::string::const_iterator i(s.begin());
     std::string::const_iterator end(s.end());

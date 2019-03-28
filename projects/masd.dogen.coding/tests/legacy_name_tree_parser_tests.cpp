@@ -41,7 +41,7 @@ const std::string empty;
 const std::string test_module("masd.dogen.coding.tests");
 const std::string test_suite("legacy_name_tree_parser_tests");
 
-const auto cpp(masd::dogen::coding::meta_model::languages::cpp);
+const auto cpp(masd::dogen::coding::meta_model::technical_space::cpp);
 
 name_tree make(const masd::dogen::coding::meta_model::name& n) {
     name_tree r;

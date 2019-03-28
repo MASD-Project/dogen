@@ -68,14 +68,14 @@
           "documentation": "If true the intermediate model has at least one generable type, false otherwise.\n"
         },
         {
-          "name": "input_language",
-          "type": "coding::meta_model::languages",
-          "documentation": "Language in which this model was written.\n"
+          "name": "input_technical_space",
+          "type": "coding::meta_model::technical_space",
+          "documentation": "Technical space which this model used originally.\n"
         },
         {
-          "name": "output_language",
-          "type": "coding::meta_model::languages",
-          "documentation": "Language in which to output the model.\n"
+          "name": "output_technical_space",
+          "type": "coding::meta_model::technical_space",
+          "documentation": "Technical space into which to output the model.\n"
         },
         {
           "name": "orm_properties",
@@ -577,8 +577,8 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "transforms_by_language_",
-          "type": "std::unordered_map<coding::meta_model::languages, std::shared_ptr<model_to_extraction_model_transform_interface>>"
+          "name": "transforms_by_technical_space_",
+          "type": "std::unordered_map<coding::meta_model::technical_space, std::shared_ptr<model_to_extraction_model_transform_interface>>"
         }
       ]
     },

@@ -28,9 +28,9 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_value.hpp"
-#include "masd.dogen.coding/hash/meta_model/languages_hash.hpp"
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
+#include "masd.dogen.coding/hash/meta_model/technical_space_hash.hpp"
 
 namespace masd::dogen::coding::helpers {
 
@@ -47,7 +47,7 @@ public:
 public:
     mapping(
         const std::string& lam_id,
-        const std::unordered_map<masd::dogen::coding::meta_model::languages, masd::dogen::coding::helpers::mapping_value>& by_language);
+        const std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>& by_language);
 
 public:
     /**
@@ -61,13 +61,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Values of the mapping, by language.
+     * @brief Values of the mapping, by technical space.
      */
     /**@{*/
-    const std::unordered_map<masd::dogen::coding::meta_model::languages, masd::dogen::coding::helpers::mapping_value>& by_language() const;
-    std::unordered_map<masd::dogen::coding::meta_model::languages, masd::dogen::coding::helpers::mapping_value>& by_language();
-    void by_language(const std::unordered_map<masd::dogen::coding::meta_model::languages, masd::dogen::coding::helpers::mapping_value>& v);
-    void by_language(const std::unordered_map<masd::dogen::coding::meta_model::languages, masd::dogen::coding::helpers::mapping_value>&& v);
+    const std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>& by_language() const;
+    std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>& by_language();
+    void by_language(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>& v);
+    void by_language(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>&& v);
     /**@}*/
 
 public:
@@ -82,7 +82,7 @@ public:
 
 private:
     std::string lam_id_;
-    std::unordered_map<masd::dogen::coding::meta_model::languages, masd::dogen::coding::helpers::mapping_value> by_language_;
+    std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value> by_language_;
 };
 
 }

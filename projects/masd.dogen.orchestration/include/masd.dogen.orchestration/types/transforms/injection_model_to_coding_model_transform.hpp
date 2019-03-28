@@ -72,7 +72,7 @@ private:
 
 public:
     static coding::meta_model::model
-    apply(const context& ctx, const injection::meta_model::model& im);
+    apply(const context& ctx, const injection::meta_model::model& m);
 };
 
 }

@@ -52,7 +52,7 @@ public:
         const std::string& name,
         const masd::dogen::annotations::annotation& annotation,
         const std::list<masd::dogen::injection::meta_model::element>& elements,
-        const std::string& input_language,
+        const std::string& input_technical_space,
         const std::list<std::string>& references);
 
 public:
@@ -100,10 +100,15 @@ public:
     void elements(const std::list<masd::dogen::injection::meta_model::element>& v);
     void elements(const std::list<masd::dogen::injection::meta_model::element>&& v);
 
-    const std::string& input_language() const;
-    std::string& input_language();
-    void input_language(const std::string& v);
-    void input_language(const std::string&& v);
+    /**
+     * @brief Technical space to which the model belongs, within the injection space.
+     */
+    /**@{*/
+    const std::string& input_technical_space() const;
+    std::string& input_technical_space();
+    void input_technical_space(const std::string& v);
+    void input_technical_space(const std::string&& v);
+    /**@}*/
 
     const std::list<std::string>& references() const;
     std::list<std::string>& references();
@@ -127,7 +132,7 @@ private:
     std::string name_;
     masd::dogen::annotations::annotation annotation_;
     std::list<masd::dogen::injection::meta_model::element> elements_;
-    std::string input_language_;
+    std::string input_technical_space_;
     std::list<std::string> references_;
 };
 

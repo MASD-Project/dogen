@@ -27,7 +27,7 @@
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
@@ -49,7 +49,8 @@ const std::string csharp_invalid("Invalid");
 const std::string cpp_invalid("invalid");
 
 const std::string duplicate_enumerator("Duplicate enumerator name: ");
-const std::string unsupported_language("Invalid or unsupported language: ");
+const std::string unsupported_technical_space(
+    "Invalid or unsupported technical space: ");
 const std::string too_many_defaults(
     "Model has more than one default enumeration: ");
 const std::string missing_default(
@@ -177,16 +178,15 @@ void enumerations_transform::populate_from_annotations(
     }
 }
 
-meta_model::name
-enumerations_transform::obtain_enumeration_default_underlying_element_name(
-    const meta_model::model& em) {
+meta_model::name enumerations_transform::
+obtain_enumeration_default_underlying_element_name(const meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Obtaining default enumeration underlying "
                              << "element name for model: "
-                             << em.name().qualified().dot();
+                             << m.name().qualified().dot();
 
     meta_model::name r;
     bool found(false);
-    for (const auto& pair : em.builtins()) {
+    for (const auto& pair : m.builtins()) {
         const auto b(*pair.second);
         const auto id(b.name().qualified().dot());
         if (b.is_default_enumeration_type()) {
@@ -204,7 +204,7 @@ enumerations_transform::obtain_enumeration_default_underlying_element_name(
     }
 
     if (!found) {
-        const auto id(em.name().qualified().dot());
+        const auto id(m.name().qualified().dot());
         BOOST_LOG_SEV(lg, error) << missing_default << id;
         BOOST_THROW_EXCEPTION(transformation_error(missing_default + id));
     }
@@ -215,19 +215,20 @@ enumerations_transform::obtain_enumeration_default_underlying_element_name(
 }
 
 std::string enumerations_transform::
-obtain_invalid_enumerator_simple_name(const meta_model::languages l) {
-    switch(l) {
-    case meta_model::languages::csharp: return csharp_invalid;
-    case meta_model::languages::cpp: return cpp_invalid;
+obtain_invalid_enumerator_simple_name(const meta_model::technical_space ts) {
+    switch(ts) {
+    case meta_model::technical_space::csharp: return csharp_invalid;
+    case meta_model::technical_space::cpp: return cpp_invalid;
     default: {
-        const auto s(boost::lexical_cast<std::string>(l));
-        BOOST_LOG_SEV(lg, error) << unsupported_language << s;
-        BOOST_THROW_EXCEPTION(transformation_error(unsupported_language + s));
+        const auto s(boost::lexical_cast<std::string>(ts));
+        BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(unsupported_technical_space + s));
     } }
 }
 
 meta_model::enumerator enumerations_transform::make_invalid_enumerator(
-    const meta_model::name& n, const meta_model::languages l) {
+    const meta_model::name& n, const meta_model::technical_space l) {
     meta_model::enumerator r;
     r.documentation("Represents an uninitialised enum");
     r.value("0");
@@ -250,17 +251,18 @@ void enumerations_transform::expand_default_underlying_element(
         return;
 
     BOOST_LOG_SEV(lg, debug) << "Defaulting enumeration to type: "
-                             << default_underlying_element_name.qualified().dot();
+                             << default_underlying_element_name.
+        qualified().dot();
     e.underlying_element(default_underlying_element_name);
 }
 
 void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
-    const meta_model::languages l, meta_model::enumeration& e) {
+    const meta_model::technical_space ts, meta_model::enumeration& e) {
     std::vector<meta_model::enumerator> enumerators;
 
     if (e.add_invalid_enumerator()) {
         enumerators.reserve(e.enumerators().size() + 1/*invalid*/);
-        enumerators.push_back(make_invalid_enumerator(e.name(), l));
+        enumerators.push_back(make_invalid_enumerator(e.name(), ts));
     } else
         enumerators.reserve(e.enumerators().size());
 
@@ -317,7 +319,7 @@ void enumerations_transform::apply(const context& ctx,
     if (m.enumerations().empty())
         return;
 
-    const auto l(m.input_language());
+    const auto l(m.input_technical_space());
     const auto tg(make_type_group(*ctx.type_repository()));
     const auto duen(obtain_enumeration_default_underlying_element_name(m));
 
