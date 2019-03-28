@@ -31,6 +31,7 @@
 #include <unordered_map>
 #include "masd.dogen.annotations/types/archetype_location.hpp"
 #include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/hash/meta_model/languages_hash.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_interface.hpp"
 
 namespace masd::dogen::generation::transforms {
