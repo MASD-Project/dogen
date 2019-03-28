@@ -213,7 +213,7 @@ stereotypes_transform::create_visitor(const meta_model::object& o,
     b.location(l);
 
     const auto n(b.build());
-    BOOST_LOG_SEV(lg, debug) << "Creating visitor: " << n.id();
+    BOOST_LOG_SEV(lg, debug) << "Creating visitor: " << n.qualified().dot();
 
     auto r(boost::make_shared<meta_model::visitor>());
     r->name(n);
@@ -221,28 +221,30 @@ stereotypes_transform::create_visitor(const meta_model::object& o,
     r->documentation(visitor_doc + o.name().simple());
 
     if (leaves.empty()) {
-        BOOST_LOG_SEV(lg, error) << no_visitees << n.id();
-        BOOST_THROW_EXCEPTION(transformation_error(no_visitees + n.id()));
+        const auto id(n.qualified().dot());
+        BOOST_LOG_SEV(lg, error) << no_visitees << id;
+        BOOST_THROW_EXCEPTION(transformation_error(no_visitees + id));
     }
 
     for (const auto& l : leaves)
         r->visits().push_back(l);
 
-    BOOST_LOG_SEV(lg, debug) << "Created visitor: " << n.id();
+    BOOST_LOG_SEV(lg, debug) << "Created visitor: " << n.qualified().dot();
     return r;
 }
 
 void stereotypes_transform::
 update_visited_leaves(const std::list<meta_model::name>& leaves,
     const visitor_details& vd, meta_model::model& m) {
-    BOOST_LOG_SEV(lg, debug) << "Updating leaves for: " << vd.base.id();
+    BOOST_LOG_SEV(lg, debug) << "Updating leaves for: "
+                             << vd.base.qualified().dot();
 
     for (const auto& l : leaves) {
-        auto i(m.objects().find(l.id()));
+        auto i(m.objects().find(l.qualified().dot()));
         if (i == m.objects().end()) {
-            BOOST_LOG_SEV(lg, error) << leaf_not_found << l.id();
+            BOOST_LOG_SEV(lg, error) << leaf_not_found << l.qualified().dot();
             BOOST_THROW_EXCEPTION(
-                transformation_error(leaf_not_found + l.id()));
+                transformation_error(leaf_not_found + l.qualified().dot()));
         }
 
         auto& o(*i->second);
@@ -257,7 +259,7 @@ update_visited_leaves(const std::list<meta_model::name>& leaves,
 void stereotypes_transform::
 add_visitor_to_model(const boost::shared_ptr<meta_model::visitor> v,
     meta_model::model& em) {
-    const auto id(v->name().id());
+    const auto id(v->name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Adding visitor: " << id;
 
     const auto pair(std::make_pair(id, v));
@@ -271,19 +273,20 @@ add_visitor_to_model(const boost::shared_ptr<meta_model::visitor> v,
 
 void stereotypes_transform::
 expand_visitable(meta_model::object& o, meta_model::model& em) {
-    BOOST_LOG_SEV(lg, debug) << "Expanding visitable for: " << o.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Expanding visitable for: "
+                             << o.name().qualified().dot();
 
     /*
      * The visitable stereotype can only be applied to the root of
      * an inheritance tree - it's an error otherwise.
      */
-    const auto id(o.name().id());
+    const auto id(o.name().qualified().dot());
     if (o.is_child()) {
         BOOST_LOG_SEV(lg, error) << visitable_child << id;
         BOOST_THROW_EXCEPTION(transformation_error(visitable_child + id));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Found visitation root: " << o.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Found visitation root: " << o.name().qualified().dot();
 
     /*
      * Visitable types must have at least one leaf. We probably
@@ -312,7 +315,7 @@ expand_visitable(meta_model::object& o, meta_model::model& em) {
     auto bucketed_leaves(bucket_leaves_by_location(o.leaves()));
     auto j(bucketed_leaves.find(o.name().location()));
     if (j == bucketed_leaves.end()) {
-        const auto id(o.name().id());
+        const auto id(o.name().qualified().dot());
         BOOST_LOG_SEV(lg, error) << leaves_not_found << id;
         BOOST_THROW_EXCEPTION(transformation_error(leaves_not_found + id));
     }
@@ -401,7 +404,7 @@ bool stereotypes_transform::try_as_object_template(const std::string& s,
 }
 
 void stereotypes_transform::apply(meta_model::object& o, meta_model::model& m) {
-    BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << o.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << o.name().qualified().dot();
 
     /*
      * If there are no stereotypes of either type, then there is no
@@ -417,7 +420,7 @@ void stereotypes_transform::apply(meta_model::object& o, meta_model::model& m) {
 }
 
 void stereotypes_transform::apply(meta_model::primitive& p) {
-    const auto id(p.name().id());
+    const auto id(p.name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << id;
 
     /*
@@ -477,7 +480,7 @@ void stereotypes_transform::apply(meta_model::primitive& p) {
 
 void stereotypes_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "stereotypes transform",
-        transform_id, m.name().id(), *ctx.tracer(), m);
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     for (auto& pair : m.objects())
         apply(*pair.second, m);

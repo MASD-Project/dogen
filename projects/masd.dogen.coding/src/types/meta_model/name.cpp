@@ -23,40 +23,24 @@
 namespace masd::dogen::coding::meta_model {
 
 name::name(
-    const std::string& id,
+    const masd::dogen::coding::meta_model::fully_qualified_representation& qualified,
     const std::string& simple,
-    const std::map<masd::dogen::coding::meta_model::languages, std::string>& qualified,
-    const masd::dogen::coding::meta_model::location& location,
-    const std::string& identifiable,
-    const std::string& dot_qualified,
-    const std::string& colon_qualified)
-    : id_(id),
+    const masd::dogen::coding::meta_model::location& location)
+    : qualified_(qualified),
       simple_(simple),
-      qualified_(qualified),
-      location_(location),
-      identifiable_(identifiable),
-      dot_qualified_(dot_qualified),
-      colon_qualified_(colon_qualified) { }
+      location_(location) { }
 
 void name::swap(name& other) noexcept {
     using std::swap;
-    swap(id_, other.id_);
-    swap(simple_, other.simple_);
     swap(qualified_, other.qualified_);
+    swap(simple_, other.simple_);
     swap(location_, other.location_);
-    swap(identifiable_, other.identifiable_);
-    swap(dot_qualified_, other.dot_qualified_);
-    swap(colon_qualified_, other.colon_qualified_);
 }
 
 bool name::operator==(const name& rhs) const {
-    return id_ == rhs.id_ &&
+    return qualified_ == rhs.qualified_ &&
         simple_ == rhs.simple_ &&
-        qualified_ == rhs.qualified_ &&
-        location_ == rhs.location_ &&
-        identifiable_ == rhs.identifiable_ &&
-        dot_qualified_ == rhs.dot_qualified_ &&
-        colon_qualified_ == rhs.colon_qualified_;
+        location_ == rhs.location_;
 }
 
 name& name::operator=(name other) {
@@ -65,20 +49,20 @@ name& name::operator=(name other) {
     return *this;
 }
 
-const std::string& name::id() const {
-    return id_;
+const masd::dogen::coding::meta_model::fully_qualified_representation& name::qualified() const {
+    return qualified_;
 }
 
-std::string& name::id() {
-    return id_;
+masd::dogen::coding::meta_model::fully_qualified_representation& name::qualified() {
+    return qualified_;
 }
 
-void name::id(const std::string& v) {
-    id_ = v;
+void name::qualified(const masd::dogen::coding::meta_model::fully_qualified_representation& v) {
+    qualified_ = v;
 }
 
-void name::id(const std::string&& v) {
-    id_ = std::move(v);
+void name::qualified(const masd::dogen::coding::meta_model::fully_qualified_representation&& v) {
+    qualified_ = std::move(v);
 }
 
 const std::string& name::simple() const {
@@ -97,22 +81,6 @@ void name::simple(const std::string&& v) {
     simple_ = std::move(v);
 }
 
-const std::map<masd::dogen::coding::meta_model::languages, std::string>& name::qualified() const {
-    return qualified_;
-}
-
-std::map<masd::dogen::coding::meta_model::languages, std::string>& name::qualified() {
-    return qualified_;
-}
-
-void name::qualified(const std::map<masd::dogen::coding::meta_model::languages, std::string>& v) {
-    qualified_ = v;
-}
-
-void name::qualified(const std::map<masd::dogen::coding::meta_model::languages, std::string>&& v) {
-    qualified_ = std::move(v);
-}
-
 const masd::dogen::coding::meta_model::location& name::location() const {
     return location_;
 }
@@ -127,54 +95,6 @@ void name::location(const masd::dogen::coding::meta_model::location& v) {
 
 void name::location(const masd::dogen::coding::meta_model::location&& v) {
     location_ = std::move(v);
-}
-
-const std::string& name::identifiable() const {
-    return identifiable_;
-}
-
-std::string& name::identifiable() {
-    return identifiable_;
-}
-
-void name::identifiable(const std::string& v) {
-    identifiable_ = v;
-}
-
-void name::identifiable(const std::string&& v) {
-    identifiable_ = std::move(v);
-}
-
-const std::string& name::dot_qualified() const {
-    return dot_qualified_;
-}
-
-std::string& name::dot_qualified() {
-    return dot_qualified_;
-}
-
-void name::dot_qualified(const std::string& v) {
-    dot_qualified_ = v;
-}
-
-void name::dot_qualified(const std::string&& v) {
-    dot_qualified_ = std::move(v);
-}
-
-const std::string& name::colon_qualified() const {
-    return colon_qualified_;
-}
-
-std::string& name::colon_qualified() {
-    return colon_qualified_;
-}
-
-void name::colon_qualified(const std::string& v) {
-    colon_qualified_ = v;
-}
-
-void name::colon_qualified(const std::string&& v) {
-    colon_qualified_ = std::move(v);
 }
 
 }

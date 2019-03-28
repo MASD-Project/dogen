@@ -54,10 +54,10 @@ update_element(const context& ctx, coding::meta_model::element& e) {
      * Check to see if the element has any archetypes. Some elements
      * such as object templates do not have any at present.
      */
-    const auto id(e.name().id());
+    const auto id(e.name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Updating element: " << id;
 
-    const auto mn(e.meta_name().id());
+    const auto mn(e.meta_name().qualified().dot());
     const auto& alrp(*ctx.archetype_location_repository());
     const auto& c(alrp.archetype_locations_by_meta_name());
     const auto i(c.find(mn));
@@ -75,7 +75,8 @@ update_element(const context& ctx, coding::meta_model::element& e) {
     auto& ap(e.artefact_properties());
     for (const auto& al : i->second.archetype_locations()) {
         const auto a(al.archetype());
-        const auto pair(std::make_pair(a, coding::meta_model::artefact_properties()));
+        using coding::meta_model::artefact_properties;
+        const auto pair(std::make_pair(a, artefact_properties()));
         const auto inserted(ap.insert(pair).second);
         if (inserted) {
             BOOST_LOG_SEV(lg, debug) << "Added archetype location: " << a;
@@ -90,7 +91,7 @@ update_element(const context& ctx, coding::meta_model::element& e) {
 void artefact_properties_transform::
 apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "artefact properties transform",
-        transform_id, m.name().id(), *ctx.tracer(), m);
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     for(auto& ptr : m.elements())
         update_element(ctx, *ptr);

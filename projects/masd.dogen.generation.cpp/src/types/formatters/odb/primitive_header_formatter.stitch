@@ -63,7 +63,7 @@ format(const context& ctx, const coding::meta_model::element& e) const {
 <#+
 
                 bool is_first(true);
-                const auto attr_level_pragmas(a.get_odb_pragmas(attr.name().id()));
+                const auto attr_level_pragmas(a.get_odb_pragmas(attr.name().qualified().dot()));
                 for (const auto pg : attr_level_pragmas) {
                         if (is_first)
 #>

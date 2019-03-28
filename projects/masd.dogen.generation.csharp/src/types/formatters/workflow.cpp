@@ -47,16 +47,16 @@ csharp::formatters::registrar& workflow::registrar() {
 std::list<extraction::meta_model::artefact>
 workflow::execute(const formattables::model& fm) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Started formatting. Model " << fm.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Started formatting. Model " << fm.name().qualified().dot();
     std::list<extraction::meta_model::artefact> r;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
 
         const auto& e(*formattable.element());
-        const auto id(e.name().id());
+        const auto id(e.name().qualified().dot());
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
-        const auto mn(e.meta_name().id());
+        const auto mn(e.meta_name().qualified().dot());
         BOOST_LOG_SEV(lg, debug) << "Meta name: " << mn;
 
         const auto& frp(registrar().formatter_repository());

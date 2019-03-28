@@ -50,7 +50,7 @@ namespace masd::dogen::coding::transforms {
 
 void post_assembly_chain::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_chain_tracer stp(lg, "model post-processing chain",
-        transform_id, m.name().id(), *ctx.tracer(), m);
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     /*
      * Enumeration transform must be done after merging as we need the

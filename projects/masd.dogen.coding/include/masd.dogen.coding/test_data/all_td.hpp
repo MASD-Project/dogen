@@ -73,6 +73,7 @@
 #include "masd.dogen.coding/test_data/meta_model/orm_object_properties_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/orm_attribute_properties_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/orm_primitive_properties_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/fully_qualified_representation_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/local_archetype_location_properties_td.hpp"
 
 #endif

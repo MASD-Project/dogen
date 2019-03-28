@@ -57,7 +57,7 @@ format(const context& ctx, const coding::meta_model::element& e) const {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));
-        a.add_helper_methods(p.name().id());
+        a.add_helper_methods(p.name().qualified().dot());
 
         {
             const auto ns(a.make_namespaces(p.name()));

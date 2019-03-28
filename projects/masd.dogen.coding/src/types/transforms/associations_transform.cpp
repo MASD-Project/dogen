@@ -87,7 +87,7 @@ walk_name_tree(const meta_model::model& m, meta_model::object& o,
      * properties to set (see above).
      */
     bool is_first(true);
-    const auto i(m.objects().find(n.id()));
+    const auto i(m.objects().find(n.qualified().dot()));
     const auto is_associative_container(i != m.objects().end() &&
         i->second->is_associative_container());
 
@@ -102,7 +102,7 @@ walk_name_tree(const meta_model::model& m, meta_model::object& o,
 
 void associations_transform::
 process_object(const meta_model::model& m, meta_model::object& o) {
-    BOOST_LOG_SEV(lg, debug) << "Expand object: " << o.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Expand object: " << o.name().qualified().dot();
 
     for (const auto& p : o.local_attributes()) {
         const auto& nt(p.parsed_type());
@@ -131,7 +131,7 @@ process_object(const meta_model::model& m, meta_model::object& o) {
 void associations_transform::
 apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "associations transform",
-        transform_id, m.name().id(), *ctx.tracer(), m);
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     BOOST_LOG_SEV(lg, debug) << "Total objects: " << m.objects().size();
 

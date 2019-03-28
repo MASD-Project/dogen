@@ -29,7 +29,6 @@ namespace {
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory("coding.helpers.mappings_validator"));
 
-const std::string lam_id_prefix("<lam>");
 const std::string default_mapping_set_name("default.mapping_set");
 
 const std::string invalid_lam_id("LAM ID is not valid: ");
@@ -82,13 +81,11 @@ void mappings_validator::validate(const mapping& m) const {
     BOOST_LOG_SEV(lg, trace) << "Validating LAM ID: " << lam_id;
 
     /*
-     * LAM ID must not be empty and must start with predefined
-     * prefix.
+     * LAM ID must not be empty.
      */
-    if (lam_id.empty() || !boost::starts_with(lam_id, lam_id_prefix)) {
+    if (lam_id.empty()) {
         BOOST_LOG_SEV(lg, error) << invalid_lam_id << lam_id;
-        BOOST_THROW_EXCEPTION(
-            validation_error(invalid_lam_id + lam_id));
+        BOOST_THROW_EXCEPTION(validation_error(invalid_lam_id + lam_id));
     }
 
     for (const auto& pair : m.by_language())

@@ -46,9 +46,6 @@ class name_builder {
 public:
     explicit name_builder(const bool model_name_mode_ = false);
 
-private:
-    std::string compute_id();
-
 public:
     void simple_name(const std::string& sn);
     void model_name(const std::string& mn);

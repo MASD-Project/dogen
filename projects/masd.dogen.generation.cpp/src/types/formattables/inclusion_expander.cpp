@@ -110,7 +110,7 @@ inclusion_expander::compute_inclusion_dependencies(
     const dependencies_builder_factory& df,
     const coding::meta_model::element& e) const {
 
-    const auto id(e.name().id());
+    const auto id(e.name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Creating inclusion dependencies for: " << id;
 
     /*
@@ -127,7 +127,7 @@ inclusion_expander::compute_inclusion_dependencies(
      * element and the formatters that support it.
      */
     element_inclusion_dependencies_type r;
-    const auto mn(e.meta_name().id());
+    const auto mn(e.meta_name().qualified().dot());
     const auto i(frp.stock_artefact_formatters_by_meta_name().find(mn));
     if (i == frp.stock_artefact_formatters_by_meta_name().end()) {
         BOOST_LOG_SEV(lg, debug) << "No formatters for type: " << mn;

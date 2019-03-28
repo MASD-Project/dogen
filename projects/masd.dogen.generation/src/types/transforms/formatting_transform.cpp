@@ -134,7 +134,7 @@ formatting_transform::make_formatting_configuration(
 void formatting_transform::
 apply(const std::unordered_map<std::string, type_group> tgs,
     coding::meta_model::element& e) {
-    BOOST_LOG_SEV(lg, debug) << "Transforming element: " << e.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Transforming element: " << e.name().qualified().dot();
 
     const auto cfgs(make_formatting_configuration(tgs, e.annotation()));
     auto& ap(e.artefact_properties());
@@ -152,6 +152,7 @@ apply(const std::unordered_map<std::string, type_group> tgs,
         // FIXME: mega hack until we move artefact stuff into
         // generation
         auto lambda([](meta_model::formatting_styles fs) {
+                        using meta_model::formatting_styles;
                         if (fs == meta_model::formatting_styles::wale)
                             return coding::meta_model::formatting_styles::wale;
                         else if (fs == meta_model::formatting_styles::stitch)
@@ -170,7 +171,7 @@ apply(const std::unordered_map<std::string, type_group> tgs,
 
 void formatting_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "formatting transform",
-        transform_id, m.name().id(), *ctx.tracer(), m);
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto& atrp(*ctx.type_repository());
     const auto& als(ctx.archetype_location_repository()->archetype_locations());

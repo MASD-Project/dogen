@@ -193,7 +193,7 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
     /*
      * Handle the meta-type collection of archetype locations.
      */
-    const auto mn(f->meta_name().id());
+    const auto mn(f->meta_name().qualified().dot());
     auto& alg(archetype_locations_by_meta_name_[mn]);
     alg.archetype_locations().push_back(al);
     auto& albf(archetype_locations_by_family_[f->family()]);

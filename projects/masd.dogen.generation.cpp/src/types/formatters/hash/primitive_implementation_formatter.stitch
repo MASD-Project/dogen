@@ -56,7 +56,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 }
 <#+
 
-        a.add_helper_methods(p.name().id());
+        a.add_helper_methods(p.name().qualified().dot());
 #>
 
 }
@@ -75,7 +75,7 @@ std::size_t <#= sn #>_hasher::hash(const <#= sn #>& v) {
 <#+
             if (a.requires_hashing_helper_method(attr))
 #>
-    combine(seed, hash_<#= attr.parsed_type().identifiable() #>(v.<#= attr.name().simple() #>()));
+    combine(seed, hash_<#= attr.parsed_type().qualified().identifiable() #>(v.<#= attr.name().simple() #>()));
 <#+
             else
 #>

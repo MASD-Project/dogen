@@ -82,7 +82,7 @@ template<typename Element>
 inline void
 insert(const boost::shared_ptr<Element>& e,
     std::unordered_map<std::string, boost::shared_ptr<Element>>& dst) {
-    const auto id(e->name().id());
+    const auto id(e->name().qualified().dot());
     bool inserted(dst.insert(std::make_pair(id, e)).second);
     if (!inserted) {
         BOOST_LOG_SEV(lg, error) << duplicate_element << id;

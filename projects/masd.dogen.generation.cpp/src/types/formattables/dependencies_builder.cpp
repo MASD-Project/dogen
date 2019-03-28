@@ -61,7 +61,7 @@ boost::optional<directive_group>
 dependencies_builder::get_directive_group(
     const coding::meta_model::name& n, const std::string& archetype) const {
     const auto& c(repository_.by_id());
-    const auto i(c.find(n.id()));
+    const auto i(c.find(n.qualified().dot()));
     if (i == c.end())
         return boost::optional<directive_group>();
 
@@ -74,7 +74,8 @@ dependencies_builder::get_directive_group(
 
 bool dependencies_builder::is_enabled(const coding::meta_model::name& n,
     const std::string& archetype) const {
-    generation::meta_model::element_archetype ea(n.id(), archetype);
+    generation::meta_model::element_archetype
+        ea(n.qualified().dot(), archetype);
     const auto i(enabled_archetype_for_element_.find(ea));
     const bool is_disabled(i == enabled_archetype_for_element_.end());
     return !is_disabled;
@@ -99,7 +100,7 @@ add(const std::list<std::string>& inclusion_directives) {
 
 void dependencies_builder::
 add(const coding::meta_model::name& n, const std::string& archetype) {
-    BOOST_LOG_SEV(lg, debug) << "Adding name: " << n.id();
+    BOOST_LOG_SEV(lg, debug) << "Adding name: " << n.qualified().dot();
 
     if (!is_enabled(n, archetype)) {
         BOOST_LOG_SEV(lg, trace) << "Archetype not enabled: " << archetype;

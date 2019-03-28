@@ -251,7 +251,7 @@ compute_directives(const type_group& tg, const coding::meta_model::element& e,
     directive_group_repository& dgrp) const {
 
     const auto& n(e.name());
-    const auto id(n.id());
+    const auto id(n.qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Started computing inclusion directives for: "
                              << id;
 
@@ -376,8 +376,8 @@ directive_group_repository_factory::make(const type_group& tg,
 
         for (const auto& segment : formattable.all_segments()) {
             const auto& e(*segment);
-            const auto id(e.name().id());
-            const auto mt(e.meta_name().id());
+            const auto id(e.name().qualified().dot());
+            const auto mt(e.meta_name().qualified().dot());
 
             const auto i(afmt.find(mt));
             if (i == afmt.end() || i->second.empty()) {

@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.coding/hash/meta_model/name_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/location_hash.hpp"
-#include "masd.dogen.coding/hash/meta_model/languages_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/fully_qualified_representation_hash.hpp"
 
 namespace {
 
@@ -30,15 +30,6 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_map_masd_dogen_coding_meta_model_languages_std_string(const std::map<masd::dogen::coding::meta_model::languages, std::string>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
-    return seed;
-}
-
 }
 
 namespace masd::dogen::coding::meta_model {
@@ -46,13 +37,9 @@ namespace masd::dogen::coding::meta_model {
 std::size_t name_hasher::hash(const name& v) {
     std::size_t seed(0);
 
-    combine(seed, v.id());
+    combine(seed, v.qualified());
     combine(seed, v.simple());
-    combine(seed, hash_std_map_masd_dogen_coding_meta_model_languages_std_string(v.qualified()));
     combine(seed, v.location());
-    combine(seed, v.identifiable());
-    combine(seed, v.dot_qualified());
-    combine(seed, v.colon_qualified());
 
     return seed;
 }

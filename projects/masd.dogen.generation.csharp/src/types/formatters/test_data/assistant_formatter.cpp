@@ -67,7 +67,7 @@ inclusion_dependencies(const coding::meta_model::element& /*e*/) const {
 
 extraction::meta_model::artefact assistant_formatter::format(
     const context& ctx, const coding::meta_model::element& e) const {
-    const auto id(e.name().id());
+    const auto id(e.name().qualified().dot());
     assistant a(ctx, archetype_location(), id);
     {
         const auto sn(e.name().simple());

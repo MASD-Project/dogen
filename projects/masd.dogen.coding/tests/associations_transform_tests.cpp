@@ -141,7 +141,7 @@ BOOST_AUTO_TEST_CASE(model_with_more_than_one_attribute_of_the_same_type_results
             BOOST_CHECK(o.transparent_associations().size() == 1);
             BOOST_CHECK(o.opaque_associations().empty());
         } else
-            BOOST_FAIL("Unexpected object: " << n.id());
+            BOOST_FAIL("Unexpected object: " << n.qualified().dot());
     }
 }
 
@@ -286,7 +286,7 @@ BOOST_AUTO_TEST_CASE(object_with_unsigned_int_attribute_results_in_expected_asso
             BOOST_CHECK(sn == "unsigned int");
             BOOST_CHECK(o.opaque_associations().empty());
         } else
-            BOOST_FAIL("Unexpected object: " << n.id());
+            BOOST_FAIL("Unexpected object: " << n.qualified().dot());
     }
 }
 
@@ -315,7 +315,7 @@ BOOST_AUTO_TEST_CASE(object_with_bool_attribute_results_in_expected_associations
             BOOST_CHECK(sn == "bool");
             BOOST_CHECK(o.opaque_associations().empty());
         } else
-            BOOST_FAIL("Unexpected object: " << n.id());
+            BOOST_FAIL("Unexpected object: " << n.qualified().dot());
     }
 }
 
@@ -344,7 +344,7 @@ BOOST_AUTO_TEST_CASE(object_with_object_attribute_results_in_expected_associatio
             BOOST_CHECK(o.transparent_associations().empty());
             BOOST_CHECK(o.opaque_associations().empty());
         } else
-            BOOST_FAIL("Unexpected object: " << n.id());
+            BOOST_FAIL("Unexpected object: " << n.qualified().dot());
     }
 }
 
@@ -401,7 +401,7 @@ BOOST_AUTO_TEST_CASE(object_with_boost_variant_attribute_results_in_expected_ass
 
         if (factory.is_type_name_n(0, n)) {
             found = true;
-            BOOST_LOG_SEV(lg, debug) << "found object: " << n.id();
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified().dot();
 
             BOOST_REQUIRE(o.transparent_associations().size() == 3);
             bool found_uint(false), found_bool(false), found_variant(false);
@@ -472,7 +472,7 @@ BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_attribute_results_in_expected_
 
         if (factory.is_type_name_n(0, n)) {
             found = true;
-            BOOST_LOG_SEV(lg, debug) << "found object: " << n.id();
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified().dot();
 
             BOOST_REQUIRE(o.transparent_associations().size() == 1);
             const auto sn(o.transparent_associations().front().simple());
@@ -503,7 +503,7 @@ BOOST_AUTO_TEST_CASE(object_with_both_regular_and_opaque_associations_results_in
 
         if (factory.is_type_name_n(0, n)) {
             found = true;
-            BOOST_LOG_SEV(lg, debug) << "found object: " << n.id();
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified().dot();
 
             BOOST_REQUIRE(o.transparent_associations().size() == 3);
             std::vector<bool> found;

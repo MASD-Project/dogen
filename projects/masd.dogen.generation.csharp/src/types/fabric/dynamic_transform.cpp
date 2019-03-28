@@ -45,7 +45,8 @@ requires_expansion(const generation::meta_model::model& m) const {
     const auto r(l == coding::meta_model::languages::csharp);
     if (!r) {
         BOOST_LOG_SEV(lg, debug) << "Expansion not required: "
-                                 << m.name().id() << " for language: " << l;
+                                 << m.name().qualified().dot()
+                                 << " for language: " << l;
     }
     return r;
 }
@@ -74,7 +75,7 @@ void dynamic_transform::apply(const generation::transforms::context& ctx,
 
     if (!requires_expansion(m)) {
         BOOST_LOG_SEV(lg, debug) << "Expansion not required: "
-                                 << m.name().id();
+                                 << m.name().qualified().dot();
         return;
     }
 

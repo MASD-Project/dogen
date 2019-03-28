@@ -66,16 +66,16 @@ void decomposer::decompose_attributes(const std::string& owner,
 }
 
 void decomposer::decompose_element(const meta_model::element& e) {
-    add_name(e.name().id(), e.name());
-    add_meta_name(e.name().id(), e.meta_name());
+    add_name(e.name().qualified().dot(), e.name());
+    add_meta_name(e.name().qualified().dot(), e.meta_name());
 }
 
 void decomposer::operator()(const meta_model::element& e) {
     /*
      * Injected names go to a separate validation bucket.
      */
-    add_injected_name(e.name().id(), e.name());
-    add_meta_name(e.name().id(), e.meta_name());
+    add_injected_name(e.name().qualified().dot(), e.name());
+    add_meta_name(e.name().qualified().dot(), e.meta_name());
 }
 
 void decomposer::operator()(const meta_model::module& m) {
@@ -92,7 +92,7 @@ void decomposer::operator()(const meta_model::module& m) {
 
 void decomposer::operator()(const meta_model::object_template& ot) {
     decompose_element(ot);
-    decompose_attributes(ot.name().id(), ot.local_attributes());
+    decompose_attributes(ot.name().qualified().dot(), ot.local_attributes());
 }
 
 void decomposer::operator()(const meta_model::builtin& b) {
@@ -102,7 +102,7 @@ void decomposer::operator()(const meta_model::builtin& b) {
 void decomposer::operator()(const meta_model::enumeration& e) {
     decompose_element(e);
     for (const auto& en : e.enumerators())
-        add_name(e.name().id(), en.name());
+        add_name(e.name().qualified().dot(), en.name());
 }
 
 void decomposer::operator()(const meta_model::primitive& p) {
@@ -111,7 +111,7 @@ void decomposer::operator()(const meta_model::primitive& p) {
 
 void decomposer::operator()(const meta_model::object& o) {
     decompose_element(o);
-    decompose_attributes(o.name().id(), o.local_attributes());
+    decompose_attributes(o.name().qualified().dot(), o.local_attributes());
 }
 
 void decomposer::operator()(const meta_model::exception& e) {
@@ -128,7 +128,8 @@ const decomposition_result& decomposer::result() const {
 
 decomposition_result
 decomposer::decompose(const meta_model::model& em) {
-    BOOST_LOG_SEV(lg, debug) << "Decomposing model: " << em.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Decomposing model: "
+                             << em.name().qualified().dot();
 
     decomposer dc;
     meta_model::elements_traversal(em, dc);

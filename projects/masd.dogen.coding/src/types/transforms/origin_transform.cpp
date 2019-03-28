@@ -95,7 +95,7 @@ is_proxy_model(const type_group& tg, const meta_model::model& m) {
     const annotations::entry_selector s(o);
     const bool r(s.get_boolean_content_or_default(tg.is_proxy_model));
     BOOST_LOG_SEV(lg, debug) << "Read is proxy model: " << r
-                             << " for model: " << m.name().id();
+                             << " for model: " << m.name().qualified().dot();
     return r;
 }
 
@@ -103,7 +103,7 @@ meta_model::origin_types origin_transform::
 compute_origin_types(const meta_model::model& m, const bool is_proxy_model) {
     using meta_model::origin_types;
     if (is_proxy_model && m.origin_type() == origin_types::target) {
-        const auto& id(m.name().id());
+        const auto& id(m.name().qualified().dot());
         BOOST_LOG_SEV(lg, error) << target_cannot_be_proxy << id;
         BOOST_THROW_EXCEPTION(
             transformation_error(target_cannot_be_proxy + id));
@@ -120,7 +120,7 @@ compute_origin_types(const meta_model::model& m, const bool is_proxy_model) {
 void origin_transform::
 apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "origin transform",
-        transform_id, m.name().id(), *ctx.tracer(), m);
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto tg(make_type_group(*ctx.type_repository()));
     const auto ipm(is_proxy_model(tg, m));

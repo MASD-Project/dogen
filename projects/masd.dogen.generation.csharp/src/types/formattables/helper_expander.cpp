@@ -61,18 +61,6 @@ public:
         const helper_expander::facets_for_family_type& fff);
 
 private:
-    template<typename Qualified>
-    std::string get_qualified(const Qualified& iaq) const {
-        using coding::meta_model::languages;
-        const auto i(iaq.qualified().find(languages::cpp));
-        if (i == iaq.qualified().end()) {
-            BOOST_LOG_SEV(lg, error) << qn_missing << languages::cpp;
-            BOOST_THROW_EXCEPTION(expansion_error(qn_missing));
-        }
-        return i->second;
-    }
-
-private:
     std::string helper_family_for_id(const helper_configuration& cfg,
         const std::string& id) const;
 
@@ -153,10 +141,11 @@ boost::optional<helper_descriptor>
 helper_properties_generator::walk_name_tree(const helper_configuration& cfg,
     const helper_expander::facets_for_family_type& fff,
     const bool in_inheritance_relationship,
-    const coding::meta_model::name_tree& nt, std::unordered_set<std::string>& done,
+    const coding::meta_model::name_tree& nt,
+    std::unordered_set<std::string>& done,
     std::list<helper_properties>& hps) const {
 
-    const auto id(nt.current().id());
+    const auto id(nt.current().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
 
     helper_descriptor r;
@@ -167,10 +156,10 @@ helper_properties_generator::walk_name_tree(const helper_configuration& cfg,
     const auto fam(helper_family_for_id(cfg, id));
     r.family(fam);
 
-    r.name_identifiable(nt.current().identifiable());
-    r.name_qualified(get_qualified(nt.current()));
-    r.name_tree_identifiable(nt.identifiable());
-    r.name_tree_qualified(get_qualified(nt));
+    r.name_identifiable(nt.current().qualified().identifiable());
+    r.name_qualified(nt.current().qualified().dot());
+    r.name_tree_identifiable(nt.qualified().identifiable());
+    r.name_tree_qualified(nt.qualified().dot());
     r.is_circular_dependency(nt.is_circular_dependency());
 
     helper_properties hp;

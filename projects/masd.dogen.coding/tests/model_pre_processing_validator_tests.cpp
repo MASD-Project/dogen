@@ -79,7 +79,10 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
 
     const auto ot(origin_types::target);
     auto m(factory.make_multi_type_model(0, 2, ot));
-    m.objects().begin()->second->name().id(invalid_id);
+
+    using masd::dogen::coding::meta_model::fully_qualified_representation;
+    const fully_qualified_representation fqr(invalid_id, invalid_id, invalid_id);
+    m.objects().begin()->second->name().qualified(fqr);
     m.input_language(languages::cpp);
     BOOST_LOG_SEV(lg, debug) << "Model: " << m;
 

@@ -13,22 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-27 Wed 17:34]
+#+CAPTION: Clock summary at [2019-03-28 Thu 12:01]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *17:21* |       |      | 100.0 |
+| *Total time*                                           | *20:47* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 17:21   |       |      | 100.0 |
-| Active                                                 |         | 17:21 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 1:47 |  10.3 |
-| Sprint and product backlog grooming                    |         |       | 1:51 |  10.7 |
-| Create a video demo for the previous sprint's features |         |       | 3:11 |  18.3 |
-| Fix issues with emacs                                  |         |       | 2:42 |  15.6 |
-| Create a basic "project plan"                          |         |       | 2:08 |  12.3 |
-| Promote extraction entities to meta-model elements     |         |       | 3:01 |  17.4 |
-| Rename "language" to "technical space"                 |         |       | 2:17 |  13.2 |
-| Simplify qualified name                                |         |       | 0:24 |   2.3 |
+| Stories                                                | 20:47   |       |      | 100.0 |
+| Active                                                 |         | 20:47 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 1:47 |   8.6 |
+| Sprint and product backlog grooming                    |         |       | 2:34 |  12.3 |
+| Create a video demo for the previous sprint's features |         |       | 3:11 |  15.3 |
+| Fix issues with emacs                                  |         |       | 2:42 |  13.0 |
+| Create a basic "project plan"                          |         |       | 2:08 |  10.3 |
+| Simplify qualified name                                |         |       | 3:07 |  15.0 |
+| Promote extraction entities to meta-model elements     |         |       | 3:01 |  14.5 |
+| Rename "language" to "technical space"                 |         |       | 2:17 |  11.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -192,6 +192,36 @@ some form of Gantt-chart like plan, and keep it up-to-date. It doesn't
 have to be very precise, just allow us to see how the big tasks hang
 together.
 
+*** COMPLETED Simplify qualified name                                 :story:
+    CLOSED: [2019-03-28 Thu 12:00]
+    :LOGBOOK:
+    CLOCK: [2019-03-28 Thu 09:17]--[2019-03-28 Thu 12:00] =>  2:43
+    CLOCK: [2019-03-27 Wed 17:10]--[2019-03-27 Wed 17:34] =>  0:24
+    :END:
+
+At present we have a map of languages to qualified name, but in truth
+there are only two use cases:
+
+- dot separated: C#, CMake, etc.
+- double-colon separated: C++.
+
+We could just have these two as simple strings. In addition, we also
+need to versions of identifiable:
+
+- simple
+- qualified
+
+Actually we don't even need simple, just qualified.
+
+Merged stories:
+
+*Use an unordered map in qualified name*
+
+For some reason we are using a map, but its not clear that we need
+sorting. Change it to unordered and see what breaks.
+
+It seems we get errors in serialisation when using the map.
+
 *** STARTED Promote extraction entities to meta-model elements        :story:
     :LOGBOOK:
     CLOCK: [2019-03-26 Tue 13:01]--[2019-03-26 Tue 14:31] =>  1:30
@@ -321,32 +351,6 @@ Tasks:
   element.
 -
 
-*** STARTED Simplify qualified name                                   :story:
-    :LOGBOOK:
-    CLOCK: [2019-03-27 Wed 17:10]--[2019-03-27 Wed 17:34] =>  0:24
-    :END:
-
-At present we have a map of languages to qualified name, but in truth
-there are only two use cases:
-
-- dot separated: C#, CMake, etc.
-- double-colon separated: C++.
-
-We could just have these two as simple strings. In addition, we also
-need to versions of identifiable:
-
-- simple
-- qualified
-
-Merged stories:
-
-*Use an unordered map in qualified name*
-
-For some reason we are using a map, but its not clear that we need
-sorting. Change it to unordered and see what breaks.
-
-It seems we get errors in serialisation when using the map.
-
 *** Add support for decoration configuration overrides                :story:
 
 At present we have hard-coded the decoration configuration to be read
@@ -461,7 +465,6 @@ So, in conclusion, two use cases for wale templates:
 - user model wants to define a new formatter. It will make use of
   dogen profiles and wale templates. These must be in the future data
   directory somehow.
-
 
 ** Deprecated
 *** CANCELLED Fix =cp= error on cmake with local third-party packages :story:

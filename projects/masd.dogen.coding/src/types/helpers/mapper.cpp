@@ -40,7 +40,7 @@ namespace {
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory("coding.helpers.mapper"));
 
-const std::string lam_pointer("<lam><pointer>");
+const std::string lam_pointer("lam.pointer");
 
 const std::string missing_mapping("Mapping not found for LAM ID: ");
 const std::string unsupported_lanugage("Language is not supported: ");
@@ -114,7 +114,7 @@ mapper::injections_for_language(const mapping_set& ms,
     for (const auto& pair : im.objects()) {
         const auto& o(pair.second);
         for (const auto& pn : o->parents()) {
-            const auto pair(std::make_pair(pn.id(), n));
+            const auto pair(std::make_pair(pn.qualified().dot(), n));
             r.insert(pair);
         }
     }
@@ -138,7 +138,7 @@ mapping_context mapper::create_mapping_context(const mapping_set& ms,
 
 meta_model::name_tree mapper::walk_name_tree(const mapping_context& mc,
     const meta_model::name_tree& nt, const bool skip_injection) const {
-    const auto id(nt.current().id());
+    const auto id(nt.current().qualified().dot());
     if (mc.erasures().find(id) != mc.erasures().end()) {
         /*
          * We need to erase this type from the name tree. We do this
@@ -185,7 +185,7 @@ meta_model::name_tree mapper::walk_name_tree(const mapping_context& mc,
     if (i != mc.translations().end()) {
         r.current(i->second);
         BOOST_LOG_SEV(lg, debug) << "Mapping from: " << id
-                                 << " to: " << i->second.id();
+                                 << " to: " << i->second.qualified().dot();
     } else {
         BOOST_LOG_SEV(lg, debug) << "No translation for: " << id;
         r.current(nt.current());
@@ -214,7 +214,8 @@ is_mappable(const meta_model::languages from, const meta_model::languages to) {
 meta_model::model
 mapper::map(const meta_model::languages from, const meta_model::languages to,
     const meta_model::model& im) const {
-    BOOST_LOG_SEV(lg, debug) << "Started mapping. Model: " << im.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Started mapping. Model: "
+                             << im.name().qualified().dot();
     BOOST_LOG_SEV(lg, debug) << "Mapping from: " << from << " to: " << to;
     if (from == to) {
         BOOST_LOG_SEV(lg, debug) << "No mapping required";

@@ -73,8 +73,8 @@ boost::filesystem::path primitive_implementation_formatter::inclusion_path(
         logger_factory(primitive_implementation_formatter::static_id()));
     static const std::string not_supported("Inclusion path is not supported: ");
 
-    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
+    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
 }
 
 boost::filesystem::path primitive_implementation_formatter::full_path(
@@ -114,7 +114,7 @@ a.stream() << "    std::hash<HashableType> hasher;" << std::endl;
 a.stream() << "    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);" << std::endl;
 a.stream() << "}" << std::endl;
 
-        a.add_helper_methods(p.name().id());
+        a.add_helper_methods(p.name().qualified().dot());
 a.stream() << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
@@ -128,7 +128,7 @@ a.stream() << std::endl;
 a.stream() << "std::size_t " << sn << "_hasher::hash(const " << sn << "& v) {" << std::endl;
 a.stream() << "    std::size_t seed(0);" << std::endl;
             if (a.requires_hashing_helper_method(attr))
-a.stream() << "    combine(seed, hash_" << attr.parsed_type().identifiable() << "(v." << attr.name().simple() << "()));" << std::endl;
+a.stream() << "    combine(seed, hash_" << attr.parsed_type().qualified().identifiable() << "(v." << attr.name().simple() << "()));" << std::endl;
             else
 a.stream() << "    combine(seed, v." << attr.name().simple() << "());" << std::endl;
 a.stream() << "    return seed;" << std::endl;

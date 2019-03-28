@@ -61,7 +61,7 @@ registrar_factory::make(const generation::meta_model::model& m) const {
 
     const auto lambda([](const coding::meta_model::name& a,
             const coding::meta_model::name& b) {
-            return a.id() < b.id();
+            return a.qualified().dot() < b.qualified().dot();
         });
     rg->leaves().sort(lambda);
 

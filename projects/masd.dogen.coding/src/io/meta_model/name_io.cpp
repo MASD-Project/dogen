@@ -22,7 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/io/meta_model/location_io.hpp"
-#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/meta_model/fully_qualified_representation_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -32,36 +32,14 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::map<masd::dogen::coding::meta_model::languages, std::string>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->second) << "\"";
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
 namespace masd::dogen::coding::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const name& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::coding::meta_model::name\"" << ", "
-      << "\"id\": " << "\"" << tidy_up_string(v.id()) << "\"" << ", "
-      << "\"simple\": " << "\"" << tidy_up_string(v.simple()) << "\"" << ", "
       << "\"qualified\": " << v.qualified() << ", "
-      << "\"location\": " << v.location() << ", "
-      << "\"identifiable\": " << "\"" << tidy_up_string(v.identifiable()) << "\"" << ", "
-      << "\"dot_qualified\": " << "\"" << tidy_up_string(v.dot_qualified()) << "\"" << ", "
-      << "\"colon_qualified\": " << "\"" << tidy_up_string(v.colon_qualified()) << "\""
+      << "\"simple\": " << "\"" << tidy_up_string(v.simple()) << "\"" << ", "
+      << "\"location\": " << v.location()
       << " }";
     return(s);
 }

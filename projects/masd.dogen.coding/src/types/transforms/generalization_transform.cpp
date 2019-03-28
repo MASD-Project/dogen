@@ -50,7 +50,7 @@ const std::string incompatible_is_final(
 namespace masd::dogen::coding::meta_model {
 
 inline bool operator<(const name& lhs, const name& rhs) {
-    return lhs.id() < rhs.id();
+    return lhs.qualified().dot() < rhs.qualified().dot();
 }
 
 }
@@ -104,7 +104,7 @@ generalization_transform::update_and_collect_parent_ids(
         std::list<meta_model::name> resolved_parents;
         for (const auto& pn : o.parents()) {
             const auto resolved_pn(resolver::resolve(m, idx, o.name(), pn));
-            r.insert(resolved_pn.id());
+            r.insert(resolved_pn.qualified().dot());
             resolved_parents.push_back(resolved_pn);
         }
 
@@ -144,11 +144,11 @@ void generalization_transform::populate_properties_up_the_generalization_tree(
     }
 
     for (const auto& pn : o.parents()) {
-        auto i(em.objects().find(pn.id()));
+        auto i(em.objects().find(pn.qualified().dot()));
         if (i == em.objects().end()) {
-            BOOST_LOG_SEV(lg, error) << parent_not_found << pn.id();
+            BOOST_LOG_SEV(lg, error) << parent_not_found << pn.qualified().dot();
             BOOST_THROW_EXCEPTION(
-                transformation_error(parent_not_found + pn.id()));
+                transformation_error(parent_not_found + pn.qualified().dot()));
         }
 
         auto& parent(*i->second);
@@ -246,7 +246,7 @@ void generalization_transform::sort_leaves(meta_model::model& m) {
 void generalization_transform::apply(const context& ctx,
     const helpers::indices& idx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "generalization transform",
-        transform_id, m.name().id(), *ctx.tracer(), m);
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto parent_ids(update_and_collect_parent_ids(idx, m));
     const auto tg(make_type_group(*ctx.type_repository()));

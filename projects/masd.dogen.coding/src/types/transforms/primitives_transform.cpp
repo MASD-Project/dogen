@@ -81,7 +81,7 @@ populate_from_annotations(const type_group& tg, meta_model::primitive& p) {
 
 void primitives_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "primitives transform",
-        transform_id, m.name().id(), *ctx.tracer(), m);
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto tg(make_type_group(*ctx.type_repository()));
     for (auto& pair : m.primitives()) {

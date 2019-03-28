@@ -46,7 +46,7 @@ adapter::adapt(const formatters::repository& frp,
         fbl.element(ptr);
 
         const auto& e(*ptr);
-        const auto id(e.name().id());
+        const auto id(e.name().qualified().dot());
         BOOST_LOG_SEV(lg, debug) << "Processing element: " << id;
 
         /*
@@ -59,7 +59,7 @@ adapter::adapt(const formatters::repository& frp,
         /*
          * Check to see if the element has any formatters.
          */
-        const auto mn(e.meta_name().id());
+        const auto mn(e.meta_name().qualified().dot());
         const auto j(frp.stock_artefact_formatters_by_meta_name().find(mn));
         if (j == frp.stock_artefact_formatters_by_meta_name().end()) {
             BOOST_LOG_SEV(lg, debug) << "Element has no formatters: " << id;

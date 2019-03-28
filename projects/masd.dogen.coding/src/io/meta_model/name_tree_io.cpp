@@ -20,10 +20,9 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
-#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.coding/io/meta_model/name_tree_io.hpp"
+#include "masd.dogen.coding/io/meta_model/fully_qualified_representation_io.hpp"
 
 namespace std {
 
@@ -34,32 +33,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::co
         s << *i;
     }
     s << "] ";
-    return s;
-}
-
-}
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::map<masd::dogen::coding::meta_model::languages, std::string>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->second) << "\"";
-        s << " } ]";
-    }
-    s << " ] ";
     return s;
 }
 
@@ -76,12 +49,11 @@ std::ostream& operator<<(std::ostream& s, const name_tree& v) {
 
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::coding::meta_model::name_tree\"" << ", "
+      << "\"qualified\": " << v.qualified() << ", "
       << "\"current\": " << v.current() << ", "
       << "\"children\": " << v.children() << ", "
       << "\"are_children_opaque\": " << v.are_children_opaque() << ", "
       << "\"is_circular_dependency\": " << v.is_circular_dependency() << ", "
-      << "\"qualified\": " << v.qualified() << ", "
-      << "\"identifiable\": " << "\"" << tidy_up_string(v.identifiable()) << "\"" << ", "
       << "\"is_current_simple_type\": " << v.is_current_simple_type() << ", "
       << "\"is_floating_point\": " << v.is_floating_point()
       << " }";

@@ -441,7 +441,7 @@ populate_local_archetype_location_properties(
                        std::list<boost::shared_ptr<coding::meta_model::element>>>
         bucketed_elements;
     for (auto ptr : m.elements())
-        bucketed_elements[ptr->meta_name().id()].push_back(ptr);
+        bucketed_elements[ptr->meta_name().qualified().dot()].push_back(ptr);
 
     for (auto& pair : bucketed_elements) {
         /*
@@ -478,7 +478,7 @@ void archetype_location_properties_transform::
 apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "archetype location properties transform",
-        transform_id, m.name().id(), *ctx.tracer(), m);
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto& atrp(*ctx.type_repository());
     const auto& alrp(*ctx.archetype_location_repository());

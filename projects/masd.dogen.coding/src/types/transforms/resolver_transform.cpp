@@ -38,7 +38,7 @@ namespace masd::dogen::coding::transforms {
 void resolver_transform::apply(const context& ctx,
     const helpers::indices& idx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "resolver transform",
-        transform_id, m.name().id(), *ctx.tracer(), m);
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
     helpers::resolver::resolve(idx, m);
     stp.end_transform(m);
 }

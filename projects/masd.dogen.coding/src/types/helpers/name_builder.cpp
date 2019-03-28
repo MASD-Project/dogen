@@ -30,7 +30,7 @@
 #include "masd.dogen.coding/types/helpers/building_error.hpp"
 #include "masd.dogen.coding/types/helpers/string_processor.hpp"
 #include "masd.dogen.coding/types/helpers/pretty_printer.hpp"
-#include "masd.dogen.coding/types/helpers/identifiable_and_qualified_builder.hpp"
+#include "masd.dogen.coding/types/helpers/fully_qualified_representation_builder.hpp"
 #include "masd.dogen.coding/types/helpers/name_builder.hpp"
 
 namespace {
@@ -47,14 +47,6 @@ namespace masd::dogen::coding::helpers {
 
 name_builder::name_builder(const bool model_name_mode)
     : model_name_mode_(model_name_mode) { }
-
-std::string name_builder::compute_id() {
-    helpers::pretty_printer pp;
-    pp.add(name_, model_name_mode_);
-    const auto r(pp.print());
-    BOOST_LOG_SEV(lg, debug) << "Computed id: " << r;
-    return r;
-}
 
 void name_builder::simple_name(const std::string& sn) {
     if (model_name_mode_) {
@@ -115,12 +107,9 @@ meta_model::name name_builder::build() {
     if (model_name_mode_)
         name_.simple(*name_.location().model_modules().rbegin());
 
-    name_.id(compute_id());
-
-    identifiable_and_qualified_builder iqb;
-    const auto iq(iqb.build(name_, model_name_mode_));
-    name_.identifiable(iq.first);
-    name_.qualified(iq.second);
+    fully_qualified_representation_builder b;
+    const auto fqr(b.build(name_, model_name_mode_));
+    name_.qualified(fqr);
 
     BOOST_LOG_SEV(lg, debug) << "Built name: " << name_;
     return name_;

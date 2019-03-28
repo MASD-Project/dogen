@@ -51,7 +51,7 @@ std::list<meta_model::model>
 model_production_chain::apply(const context& ctx,
     coding::meta_model::model_set ms) {
     tracing::scoped_chain_tracer stp(lg, "coding model production chain",
-        transform_id, ms.target().name().id(), *ctx.tracer(), ms);
+        transform_id, ms.target().name().qualified().dot(), *ctx.tracer(), ms);
 
     /*
      * We start by applying a set of pre-processing transforms to the

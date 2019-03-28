@@ -386,12 +386,12 @@ void parent_to_child(const bool attributes_indexed,
 template<typename Nameable>
 void insert_nameable(std::unordered_map<std::string, Nameable>& map,
     const Nameable& n) {
-    map.insert(std::make_pair(n->name().id(), n));
+    map.insert(std::make_pair(n->name().qualified().dot(), n));
 }
 
 void insert_object(meta_model::model& m,
     const boost::shared_ptr<meta_model::object>& o) {
-    m.objects().insert(std::make_pair(o->name().id(), o));
+    m.objects().insert(std::make_pair(o->name().qualified().dot(), o));
 }
 
 void add_test_annotationss(annotations::annotation& a) {
@@ -801,7 +801,7 @@ make_single_object_template_model(const meta_model::origin_types ot,
     meta_model::model r(make_empty_model(ot, n, add_model_module));
 
     auto ui(test::make_builtin(unsigned_int));
-    r.builtins().insert(std::make_pair(ui->name().id(), ui));
+    r.builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
 
     auto otp(make_object_template(0, r.name(), ot));
     add_attribute(*otp, flags_.attributes_indexed(), flags_.types_parsed());
@@ -822,7 +822,7 @@ make_first_degree_object_templates_model(const meta_model::origin_types ot,
     meta_model::model r(make_empty_model(ot, n, add_model_module));
 
     auto ui(test::make_builtin(unsigned_int));
-    r.builtins().insert(std::make_pair(ui->name().id(), ui));
+    r.builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
 
     auto otp0(make_object_template(0, r.name(), ot));
     add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
@@ -856,7 +856,7 @@ make_second_degree_object_templates_model(const meta_model::origin_types ot,
     meta_model::model r(make_empty_model(ot, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
-    r.builtins().insert(std::make_pair(ui->name().id(), ui));
+    r.builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
 
     auto otp0(make_object_template(0, r.name(), ot));
     add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
@@ -906,7 +906,7 @@ make_multiple_inheritance_object_templates_model(
     meta_model::model r(make_empty_model(ot, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
-    r.builtins().insert(std::make_pair(ui->name().id(), ui));
+    r.builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
 
     auto otp0(make_object_template(0, r.name(), ot));
     add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
@@ -935,7 +935,7 @@ make_diamond_inheritance_object_templates_model(
     auto r(make_empty_model(ot, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
-    r.builtins().insert(std::make_pair(ui->name().id(), ui));
+    r.builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
 
     auto otp0(make_object_template(0, r.name(), ot));
     add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
@@ -978,7 +978,7 @@ make_object_with_parent_that_instantiates_object_template(
     auto r(make_empty_model(ot, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
-    r.builtins().insert(std::make_pair(ui->name().id(), ui));
+    r.builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
 
     auto otp0(make_object_template(0, r.name(), ot));
     add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
@@ -1004,7 +1004,7 @@ make_object_with_parent_that_instantiates_a_child_object_template(
     auto r(make_empty_model(ot, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
-    r.builtins().insert(std::make_pair(ui->name().id(), ui));
+    r.builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
 
     auto otp0(make_object_template(0, r.name(), ot));
     add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
@@ -1050,7 +1050,7 @@ make_object_that_instantiates_missing_object_template(
     auto r(make_empty_model(ot, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
-    r.builtins().insert(std::make_pair(ui->name().id(), ui));
+    r.builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
 
     auto otp0(make_object_template(0, r.name(), ot));
     add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
@@ -1069,7 +1069,7 @@ make_object_that_instantiates_object_template_with_missing_parent(
     auto r(make_empty_model(ot, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
-    r.builtins().insert(std::make_pair(ui->name().id(), ui));
+    r.builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
 
     auto otp0(make_object_template(0, r.name(), ot));
     add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
@@ -1197,7 +1197,7 @@ object_with_attribute(const meta_model::origin_types ot,
 
     } else if (pt == attribute_types::std_pair) {
         const auto b(test::make_builtin(boolean));
-        r.builtins().insert(std::make_pair(b->name().id(), b));
+        r.builtins().insert(std::make_pair(b->name().qualified().dot(), b));
 
         if (flags_.associations_indexed())
             o0->transparent_associations().push_back(b->name());
@@ -1211,13 +1211,13 @@ object_with_attribute(const meta_model::origin_types ot,
         insert_object(r, o2);
     } else if (pt == attribute_types::boost_variant) {
         const auto b(test::make_builtin(boolean));
-        r.builtins().insert(std::make_pair(b->name().id(), b));
+        r.builtins().insert(std::make_pair(b->name().qualified().dot(), b));
 
         if (flags_.associations_indexed())
             o0->transparent_associations().push_back(b->name());
 
         const auto ui(test::make_builtin(unsigned_int));
-        r.builtins().insert(std::make_pair(ui->name().id(), ui));
+        r.builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
 
         if (flags_.associations_indexed())
             o0->transparent_associations().push_back(ui->name());
@@ -1291,7 +1291,7 @@ object_with_parent_in_the_same_model(const meta_model::origin_types ot,
     auto r(make_empty_model(ot, 0, add_model_module));
     if (has_attribute) {
         const auto ui(test::make_builtin(unsigned_int));
-        r.builtins().insert(std::make_pair(ui->name().id(), ui));
+        r.builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
     }
 
     auto o0(make_object(0, mn, ot));
@@ -1377,7 +1377,7 @@ object_with_third_degree_parent_in_same_model(const meta_model::origin_types ot,
     auto r(make_empty_model(ot, 0, add_model_module));
     if (has_attribute) {
         const auto ui(test::make_builtin(unsigned_int));
-        r.builtins().insert(std::make_pair(ui->name().id(), ui));
+        r.builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
     }
 
     auto o3(make_object(3, mn, ot));

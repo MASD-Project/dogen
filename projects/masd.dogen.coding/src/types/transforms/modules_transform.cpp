@@ -114,13 +114,13 @@ public:
 boost::optional<meta_model::name>
 updater::containing_module(const meta_model::name& n) {
     BOOST_LOG_SEV(lg, debug) << "Finding containing module for: "
-                             << n.id();
+                             << n.qualified().dot();
 
     const bool in_global_namespace(n.location().model_modules().empty());
     if (in_global_namespace) {
         BOOST_LOG_SEV(lg, debug) << "Type is in global module so, it has"
                                  << " no containing module yet. Type: "
-                                 << n.id();
+                                 << n.qualified().dot();
         return boost::optional<meta_model::name>();
     }
 
@@ -129,7 +129,7 @@ updater::containing_module(const meta_model::name& n) {
     if (at_model_level && n.simple() == mn) {
         BOOST_LOG_SEV(lg, debug) << "Type is a model module, so containing "
                                  << "module will be handled later. Type: "
-                                 << n.id();
+                                 << n.qualified().dot();
         return boost::optional<meta_model::name>();
     }
 
@@ -167,18 +167,18 @@ updater::containing_module(const meta_model::name& n) {
     }
 
     const auto module_n(b.build());
-    const auto i(model_.modules().find(module_n.id()));
+    const auto i(model_.modules().find(module_n.qualified().dot()));
     if (i != model_.modules().end()) {
         BOOST_LOG_SEV(lg, debug) << "Adding type to module. Type: '"
-                                 << n.id()
-                                 << "' Module: '" << module_n.id();
+                                 << n.qualified().dot()
+                                 << "' Module: '" << module_n.qualified().dot();
         auto& o(*i->second);
-        o.members().push_back(n.id());
+        o.members().push_back(n.qualified().dot());
         return module_n;
     }
 
     BOOST_LOG_SEV(lg, warn) << "Could not find containing module: "
-                            << module_n.id();
+                            << module_n.qualified().dot();
     return boost::optional<meta_model::name>();
 }
 
@@ -188,7 +188,7 @@ void updater::update(meta_model::element& e) {
     if (!e.contained_by())
         return;
 
-    auto i(model_.modules().find(e.contained_by()->id()));
+    auto i(model_.modules().find(e.contained_by()->qualified().dot()));
     if (i == model_.modules().end()) {
         const auto sn(e.contained_by()->simple());
         BOOST_LOG_SEV(lg, error) << missing_module << sn;
@@ -207,12 +207,12 @@ create_missing_modules(meta_model::model& m) {
         helpers::name_factory f;
         const auto& ipp(pair.second);
         const auto n(f.build_module_name(m.name(), ipp));
-        const auto i(m.modules().find(n.id()));
+        const auto i(m.modules().find(n.qualified().dot()));
         if (i == m.modules().end()) {
             auto mod(boost::make_shared<meta_model::module>());
             mod->name(n);
             mod->origin_type(m.origin_type());
-            m.modules().insert(std::make_pair(n.id(), mod));
+            m.modules().insert(std::make_pair(n.qualified().dot(), mod));
         }
     }
 }
@@ -225,7 +225,7 @@ expand_containing_module(meta_model::model& m) {
 
 void modules_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "modules transform",
-        transform_id, m.name().id(), *ctx.tracer(), m);
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     create_missing_modules(m);
     expand_containing_module(m);

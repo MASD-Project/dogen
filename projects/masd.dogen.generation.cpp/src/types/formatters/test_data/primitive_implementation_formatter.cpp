@@ -73,8 +73,8 @@ boost::filesystem::path primitive_implementation_formatter::inclusion_path(
         logger_factory(primitive_implementation_formatter::static_id()));
     static const std::string not_supported("Inclusion path is not supported: ");
 
-    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
+    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
 }
 
 boost::filesystem::path primitive_implementation_formatter::full_path(
@@ -107,7 +107,7 @@ format(const context& ctx, const coding::meta_model::element& e) const {
 
         auto sbf(a.make_scoped_boilerplate_formatter(e));
 a.stream() << "namespace {" << std::endl;
-        a.add_helper_methods(p.name().id());
+        a.add_helper_methods(p.name().qualified().dot());
 a.stream() << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
@@ -128,7 +128,7 @@ a.stream() << sn << "_generator::" << sn << "_generator() : position_(0) { }" <<
 a.stream() << std::endl;
 a.stream() << "void " << sn << "_generator::" << std::endl;
 a.stream() << "populate(const unsigned int position, result_type& v) {" << std::endl;
-a.stream() << "    v." << attr.name().simple() << "(create_" << attr.parsed_type().identifiable() << "(position + 1));" << std::endl;
+a.stream() << "    v." << attr.name().simple() << "(create_" << attr.parsed_type().qualified().identifiable() << "(position + 1));" << std::endl;
 a.stream() << "}" << std::endl;
             }
 
@@ -139,7 +139,7 @@ a.stream() << std::endl;
 a.stream() << sn << "_generator::result_type" << std::endl;
 a.stream() << sn << "_generator::create(const unsigned int position) {" << std::endl;
             if (p.is_immutable()) {
-a.stream() << "    return " << sn << "(create_" << attr.parsed_type().identifiable() << "(position + 1));" << std::endl;
+a.stream() << "    return " << sn << "(create_" << attr.parsed_type().qualified().identifiable() << "(position + 1));" << std::endl;
             } else {
 a.stream() << "    " << sn << " r;" << std::endl;
 a.stream() << "    " << sn << "_generator::populate(position, r);" << std::endl;

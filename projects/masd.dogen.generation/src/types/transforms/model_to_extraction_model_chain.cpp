@@ -68,7 +68,7 @@ merge(extraction::meta_model::model&& src, extraction::meta_model::model& dst) {
 extraction::meta_model::model model_to_extraction_model_chain::
 apply(const generation::transforms::context& ctx,
     const generation::meta_model::model& m) {
-    BOOST_LOG_SEV(lg, debug) << "Transforming model: " << m.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Transforming model: " << m.name().qualified().dot();
 
     /*
      * No point in proceeding if the model has not types to
@@ -106,7 +106,7 @@ apply(const generation::transforms::context& ctx,
     const auto& ek(m.extraction_properties().enabled_backends());
     const auto is_enabled(ek.find(id) != ek.end());
     if (!is_enabled) {
-        BOOST_LOG_SEV(lg, error) << disabled_transform << t.id();
+        BOOST_LOG_SEV(lg, error) << disabled_transform << id;
         BOOST_THROW_EXCEPTION(transformation_error(disabled_transform + id));
     }
 

@@ -38,13 +38,13 @@ project_items_expander::meta_names_for_project_items() {
     std::unordered_set<std::string> r;
 
     using ymnf = coding::helpers::meta_name_factory;
-    r.insert(ymnf::make_enumeration_name().id());
-    r.insert(ymnf::make_primitive_name().id());
-    r.insert(ymnf::make_exception_name().id());
-    r.insert(ymnf::make_object_name().id());
-    r.insert(ymnf::make_builtin_name().id());
-    r.insert(ymnf::make_visitor_name().id());
-    r.insert(fabric::meta_name_factory::make_assistant_name().id());
+    r.insert(ymnf::make_enumeration_name().qualified().dot());
+    r.insert(ymnf::make_primitive_name().qualified().dot());
+    r.insert(ymnf::make_exception_name().qualified().dot());
+    r.insert(ymnf::make_object_name().qualified().dot());
+    r.insert(ymnf::make_builtin_name().qualified().dot());
+    r.insert(ymnf::make_visitor_name().qualified().dot());
+    r.insert(fabric::meta_name_factory::make_assistant_name().qualified().dot());
 
     return r;
 }
@@ -62,7 +62,7 @@ void project_items_expander::expand(model& fm) const {
         const auto& formattable(pair.second);
         const auto& e(*formattable.element());
 
-        const auto mt(e.meta_name().id());
+        const auto mt(e.meta_name().qualified().dot());
         if (!is_project_item(mt))
             continue;
 

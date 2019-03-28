@@ -59,7 +59,7 @@ namespace masd::dogen::coding::meta_model {
  * set difference.
  */
 inline bool operator<(const name& lhs, const name& rhs) {
-    return lhs.id() < rhs.id();
+    return lhs.qualified().dot() < rhs.qualified().dot();
 }
 
 }
@@ -68,10 +68,11 @@ namespace masd::dogen::coding::transforms {
 
 meta_model::object& object_templates_transform::
 find_object(const meta_model::name& n, meta_model::model& m) {
-    auto i(m.objects().find(n.id()));
+    auto i(m.objects().find(n.qualified().dot()));
     if (i == m.objects().end()) {
-        BOOST_LOG_SEV(lg, error) << object_not_found << n.id();
-        BOOST_THROW_EXCEPTION(transformation_error(object_not_found +  n.id()));
+        const auto id(n.qualified().dot());
+        BOOST_LOG_SEV(lg, error) << object_not_found << id;
+        BOOST_THROW_EXCEPTION(transformation_error(object_not_found +  id));
     }
     return *i->second;
 }
@@ -83,15 +84,15 @@ resolve_object_template(const meta_model::name& owner,
     const auto& n(object_template_name);
     const auto on(resolver::try_resolve_object_template_name(owner, n, m));
     if (!on) {
-        const auto id(n.id());
+        const auto id(n.qualified().dot());
         BOOST_LOG_SEV(lg, error) << object_template_not_found << id;
         BOOST_THROW_EXCEPTION(
             transformation_error(object_template_not_found + id));
     }
 
-    auto i(m.object_templates().find(on->id()));
+    auto i(m.object_templates().find(on->qualified().dot()));
     if (i == m.object_templates().end()) {
-        const auto id(on->id());
+        const auto id(on->qualified().dot());
         BOOST_LOG_SEV(lg, error) << object_template_not_found << id;
         BOOST_THROW_EXCEPTION(
             transformation_error(object_template_not_found + id));
@@ -125,7 +126,7 @@ remove_duplicates(std::list<meta_model::name>& names) {
 void object_templates_transform::
 expand_object(meta_model::object& o, meta_model::model& m,
     std::unordered_set<meta_model::name>& processed_names) {
-    BOOST_LOG_SEV(lg, debug) << "Expanding object: " << o.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Expanding object: " << o.name().qualified().dot();
 
     if (processed_names.find(o.name()) != processed_names.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object already processed.";
@@ -220,7 +221,8 @@ void object_templates_transform::
 expand_object_template(meta_model::object_template& otp,
     meta_model::model& m,
     std::unordered_set<meta_model::name>& processed_names) {
-    BOOST_LOG_SEV(lg, debug) << "Expand object template: " << otp.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Expand object template: "
+                             << otp.name().qualified().dot();
 
     if (processed_names.find(otp.name()) != processed_names.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object template already processed.";
@@ -262,7 +264,7 @@ void object_templates_transform::expand_object_templates(meta_model::model& m) {
 void object_templates_transform::
 apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "object templates transform",
-        transform_id, m.name().id(), *ctx.tracer(), m);
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     /*
      * We must expand object templates before we expand objects as we

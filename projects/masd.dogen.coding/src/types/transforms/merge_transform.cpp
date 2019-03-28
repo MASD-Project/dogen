@@ -55,7 +55,7 @@ void merge_transform::merge(const meta_model::model& src,
      *
      * FIXME: we should just throw.
      */
-    const auto& id(src.name().id());
+    const auto& id(src.name().qualified().dot());
     if (src.input_language() != dst.input_language()) {
         BOOST_LOG_SEV(lg, debug) << "Skipping model as language does "
                                  << " not match target's. Model: "
@@ -65,7 +65,7 @@ void merge_transform::merge(const meta_model::model& src,
     }
 
     BOOST_LOG_SEV(lg, debug) << "Merging source model: '"
-                             << src.name().id()
+                             << src.name().qualified().dot()
                              << " modules: " << src.modules().size()
                              << " object templates: "
                              << src.object_templates().size()
@@ -100,7 +100,7 @@ meta_model::model merge_transform::apply(const context& ctx,
     const meta_model::model& target,
     const std::list<meta_model::model>& refs) {
     tracing::scoped_transform_tracer stp(lg, "merge transform",
-        transform_id, target.name().id(), *ctx.tracer());
+        transform_id, target.name().qualified().dot(), *ctx.tracer());
 
     /*
      * We start by making a complete copy of the target model, which

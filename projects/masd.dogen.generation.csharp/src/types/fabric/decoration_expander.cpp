@@ -54,7 +54,7 @@ public:
 private:
     void update(coding::meta_model::element& e,
         const std::string & modeline_name = cs_modeline_name) {
-        BOOST_LOG_SEV(lg, debug) << "Processing element: " << e.name().id();
+        BOOST_LOG_SEV(lg, debug) << "Processing element: " << e.name().qualified().dot();
         e.decoration_properties(factory_.make(modeline_name));
     }
 

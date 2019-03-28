@@ -285,7 +285,7 @@ boost::filesystem::path locator::make_project_path(
 boost::filesystem::path locator::make_facet_path(
     const std::string& archetype, const std::string& extension,
     const coding::meta_model::name& n) const {
-    BOOST_LOG_SEV(lg, debug) << "Making facet path for: " << n.id();
+    BOOST_LOG_SEV(lg, debug) << "Making facet path for: " << n.qualified().dot();
 
     boost::filesystem::path r;
 
@@ -309,7 +309,7 @@ boost::filesystem::path locator::make_facet_path(
      * names to the directories.
      */
     if (n != model_name_) {
-        const auto i(module_ids_.find(n.id()));
+        const auto i(module_ids_.find(n.qualified().dot()));
         if (i != module_ids_.end())
             r /= n.simple();
     }
@@ -338,7 +338,7 @@ boost::filesystem::path locator::make_facet_path(
 boost::filesystem::path locator::make_facet_path_temp(
     const std::string& archetype, const std::string& file_name,
     const coding::meta_model::name& n) const {
-    BOOST_LOG_SEV(lg, debug) << "Making facet path for: " << n.id();
+    BOOST_LOG_SEV(lg, debug) << "Making facet path for: " << n.qualified().dot();
 
     boost::filesystem::path r;
 
@@ -362,7 +362,7 @@ boost::filesystem::path locator::make_facet_path_temp(
      * names to the directories.
      */
     if (n != model_name_) {
-        const auto i(module_ids_.find(n.id()));
+        const auto i(module_ids_.find(n.qualified().dot()));
         if (i != module_ids_.end())
             r /= n.simple();
     }
@@ -566,7 +566,7 @@ boost::filesystem::path locator::make_full_path_for_include_cmakelists(
 }
 
 boost::filesystem::path locator::make_full_path_for_source_cmakelists(
-    const coding::meta_model::name& n, const std::string& /*archetype*/) const {    
+    const coding::meta_model::name& n, const std::string& /*archetype*/) const {
     auto r(make_full_path_to_implementation_directory());
     r /= n.simple() + ".txt"; // FIXME: hack for extension
     return r;

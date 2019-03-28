@@ -47,7 +47,6 @@ namespace {
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.formattables.helper_expander"));
 
-const std::string qn_missing("Could not find qualified name for language.");
 const std::string descriptor_expected(
     "Child name tree has no associated helper descriptor");
 const std::string missing_helper_family("Helper family not found for: ");
@@ -62,18 +61,6 @@ class helper_properties_generator : public coding::meta_model::element_visitor {
 public:
     helper_properties_generator(const helper_configuration& cfg,
         const helper_expander::facets_for_family_type& fff);
-
-private:
-    template<typename Qualified>
-    std::string get_qualified(const Qualified& iaq) const {
-        using coding::meta_model::languages;
-        const auto i(iaq.qualified().find(languages::cpp));
-        if (i == iaq.qualified().end()) {
-            BOOST_LOG_SEV(lg, error) << qn_missing << languages::cpp;
-            BOOST_THROW_EXCEPTION(expansion_error(qn_missing));
-        }
-        return i->second;
-    }
 
 private:
     bool requires_hashing_helper(
@@ -181,7 +168,7 @@ helper_properties_generator::walk_name_tree(const helper_configuration& cfg,
     std::unordered_set<std::string>& done,
     std::list<helper_properties>& hps) const {
 
-    const auto id(nt.current().id());
+    const auto id(nt.current().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
 
     helper_descriptor r;
@@ -197,10 +184,10 @@ helper_properties_generator::walk_name_tree(const helper_configuration& cfg,
     r.family(fam);
     r.requires_hashing_helper(requires_hashing_helper(fff, fam));
 
-    r.name_identifiable(nt.current().identifiable());
-    r.name_qualified(get_qualified(nt.current()));
-    r.name_tree_identifiable(nt.identifiable());
-    r.name_tree_qualified(get_qualified(nt));
+    r.name_identifiable(nt.current().qualified().identifiable());
+    r.name_qualified(nt.current().qualified().colon());
+    r.name_tree_identifiable(nt.qualified().identifiable());
+    r.name_tree_qualified(nt.qualified().colon());
     r.is_circular_dependency(nt.is_circular_dependency());
     r.is_pointer(inherit_opaqueness_from_parent);
 

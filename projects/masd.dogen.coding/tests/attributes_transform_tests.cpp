@@ -68,7 +68,7 @@ bool has_duplicate_attribute_names(const Stateful& s,
 
     using namespace masd::dogen::utility::log;
     BOOST_LOG_SEV(lg, debug) << "Inherited/local attributes for "
-                             << s.name().id() << ": " << count;
+                             << s.name().qualified().dot() << ": " << count;
 
     for (const auto& pair : count)
         if (pair.second > 1)
@@ -79,7 +79,7 @@ bool has_duplicate_attribute_names(const Stateful& s,
         count[p.name().simple()]++;
 
     BOOST_LOG_SEV(lg, debug) << "All attributes for "
-                             << s.name().id() << ": " << count;
+                             << s.name().qualified().dot() << ": " << count;
 
     for (const auto& pair : count)
         if (pair.second > 1)
@@ -197,7 +197,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_object_templates_inheritance_result
             BOOST_CHECK(ot.local_attributes().size() == 1);
             BOOST_CHECK(!has_duplicate_attribute_names(ot, lg));
         } else
-            BOOST_FAIL("Unexpected object template: " << n.id());
+            BOOST_FAIL("Unexpected object template: " << n.qualified().dot());
     }
 
     BOOST_REQUIRE(m.objects().size() == 2);
@@ -215,7 +215,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_object_templates_inheritance_result
             BOOST_CHECK(o.local_attributes().size() == 3);
             BOOST_CHECK(!has_duplicate_attribute_names(o, lg));
         } else
-            BOOST_FAIL("Unexpected object: " << n.id());
+            BOOST_FAIL("Unexpected object: " << n.qualified().dot());
     }
 }
 
@@ -257,7 +257,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_object_templates_inheritance_resul
             BOOST_CHECK(ot.parents().size() == 2);
             BOOST_CHECK(!has_duplicate_attribute_names(ot, lg));
         } else
-            BOOST_FAIL("Unexpected object template: " << n.id());
+            BOOST_FAIL("Unexpected object template: " << n.qualified().dot());
     }
 
     BOOST_REQUIRE(m.objects().size() == 3);
@@ -280,7 +280,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_object_templates_inheritance_resul
             BOOST_CHECK(o.all_attributes().size() == 4);
             BOOST_CHECK(!has_duplicate_attribute_names(o, lg));
         } else
-            BOOST_FAIL("Unexpected object: " << n.id());
+            BOOST_FAIL("Unexpected object: " << n.qualified().dot());
     }
 }
 
@@ -326,7 +326,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_object_template_inheritance_results_in_e
             BOOST_CHECK(ot.all_attributes().size() == 4);
             BOOST_CHECK(!has_duplicate_attribute_names(ot, lg));
         } else
-            BOOST_FAIL("Unexpected object template: " << n.id());
+            BOOST_FAIL("Unexpected object template: " << n.qualified().dot());
     }
 
     BOOST_REQUIRE(m.objects().size() == 1);
@@ -430,7 +430,7 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_instantia
             BOOST_CHECK(o.all_attributes().size() == 4);
             BOOST_CHECK(!has_duplicate_attribute_names(o, lg));
         } else
-            BOOST_FAIL("Unexpected object: " << n.id());
+            BOOST_FAIL("Unexpected object: " << n.qualified().dot());
     }
 }
 
@@ -453,7 +453,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_instantiates_objec
             BOOST_CHECK(c.local_attributes().size() == 1);
             BOOST_CHECK(c.all_attributes() == c.local_attributes());
         } else
-            BOOST_FAIL("Unexpected object template: " << n.id());
+            BOOST_FAIL("Unexpected object template: " << n.qualified().dot());
     }
 
     BOOST_REQUIRE(m.objects().size() == 2);
@@ -473,7 +473,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_instantiates_objec
             BOOST_CHECK(o.local_attributes().empty());
             BOOST_CHECK(o.all_attributes().size() == 1);
         } else
-            BOOST_FAIL("Unexpected object: " << n.id());
+            BOOST_FAIL("Unexpected object: " << n.qualified().dot());
     }
 }
 
@@ -504,7 +504,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_instantiates_
             BOOST_CHECK(c.all_attributes().size() == 2);
             BOOST_CHECK(!has_duplicate_attribute_names(c, lg));
         } else
-            BOOST_FAIL("Unexpected object template: " << n.id());
+            BOOST_FAIL("Unexpected object template: " << n.qualified().dot());
     }
 
     BOOST_REQUIRE(m.objects().size() == 2);
@@ -526,7 +526,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_instantiates_
             BOOST_CHECK(o.all_attributes().size() == 2);
             BOOST_CHECK(!has_duplicate_attribute_names(o, lg));
         } else
-            BOOST_FAIL("Unexpected object: " << n.id());
+            BOOST_FAIL("Unexpected object: " << n.qualified().dot());
     }
 }
 

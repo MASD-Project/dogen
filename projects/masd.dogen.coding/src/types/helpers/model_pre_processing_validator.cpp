@@ -97,15 +97,16 @@ validate_name(const std::string& id, const bool in_global_module,
         nl.model_modules() != ml.model_modules()) {
         std::ostringstream s;
         s << "Type does not belong to this model. Model name: '"
-          << model_name_.id() << "'. Type name: " << n.id();
+          << model_name_.qualified().dot() << "'. Type name: "
+          << n.qualified().dot();
         BOOST_LOG_SEV(lg, warn) << s.str();
         BOOST_THROW_EXCEPTION(validation_error(s.str()));
     }
 
-    if (id != n.id()) {
+    if (id != n.qualified().dot()) {
         std::ostringstream s;
         s << "Inconsistency between key and value ids: "
-          << " key: " << id << " value: " << n.id();
+          << " key: " << id << " value: " << n.qualified().dot();
 
         BOOST_LOG_SEV(lg, error) << s.str();
         BOOST_THROW_EXCEPTION(validation_error(s.str()));
@@ -140,7 +141,7 @@ validate(const std::string& id, const meta_model::object& o) const {
      * Only proxy reference models can have multiple inheritance.
      */
     if (o.parents().size() > 1 && !is_proxy_reference_) {
-        const auto id(o.name().id());
+        const auto id(o.name().qualified().dot());
         BOOST_LOG_SEV(lg, error) << multiple_inheritance_not_supported << id;
         BOOST_THROW_EXCEPTION(validation_error(
                 multiple_inheritance_not_supported + id));
@@ -200,7 +201,7 @@ validate(const std::string& id, const meta_model::module& m) const {
 
 void model_pre_processing_validator::
 validate(const meta_model::model& im) {
-    BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << im.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << im.name().qualified().dot();
 
     using meta_model::origin_types;
     const bool ipr(im.origin_type() == origin_types::proxy_reference);

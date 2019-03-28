@@ -39,14 +39,14 @@ namespace masd::dogen::generation::cpp::formattables {
 void canonical_archetype_expander::expand(const formatters::repository& frp,
     formattables::element_properties& eprops,
     const coding::meta_model::element& e) const {
-    BOOST_LOG_SEV(lg, debug) << "Procesing element: " << e.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Procesing element: " << e.name().qualified().dot();
     const auto cs(formatters::inclusion_support_types::canonical_support);
     const auto& safmt(frp.stock_artefact_formatters_by_meta_name());
 
     /*
      * For each element segment, find the corresponding formatters.
      */
-    const auto mt(e.meta_name().id());
+    const auto mt(e.meta_name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Meta-type: " << mt;
 
     /*

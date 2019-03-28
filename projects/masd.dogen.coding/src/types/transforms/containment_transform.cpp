@@ -63,8 +63,10 @@ inline void add_containing_module_to_non_contained_entities(
 
 boost::shared_ptr<meta_model::module>
 containment_transform::create_global_module(const meta_model::origin_types ot) {
+    const std::string gm("global_module");
+    const meta_model::fully_qualified_representation fqr(gm, gm, gm);
     auto r(boost::make_shared<meta_model::module>());
-    r->name().id("<global module>");
+    r->name().qualified(fqr);
     r->origin_type(ot);
     r->documentation(global_module_doc);
     r->is_global_module(true);
@@ -74,18 +76,18 @@ containment_transform::create_global_module(const meta_model::origin_types ot) {
 void containment_transform::
 inject_global_module(meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Injecting global module for: "
-                             << m.name().id();
+                             << m.name().qualified().dot();
 
     const auto gm(create_global_module(m.origin_type()));
     const auto gmn(gm->name());
-    const auto i(m.modules().find(gmn.id()));
+    const auto i(m.modules().find(gmn.qualified().dot()));
     if (i != m.modules().end()) {
-        const auto id(m.name().id());
+        const auto id(m.name().qualified().dot());
         BOOST_LOG_SEV(lg, error) << model_already_has_global_module << id;
         BOOST_THROW_EXCEPTION(
             transformation_error(model_already_has_global_module + id));
     }
-    m.modules().insert(std::make_pair(gmn.id(), gm));
+    m.modules().insert(std::make_pair(gmn.qualified().dot(), gm));
 
     add_containing_module_to_non_contained_entities(gmn, m.modules());
     add_containing_module_to_non_contained_entities(gmn, m.object_templates());
@@ -102,7 +104,7 @@ inject_global_module(meta_model::model& m) {
 void containment_transform::
 apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "containment transform",
-        transform_id, m.name().id(), *ctx.tracer(), m);
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     inject_global_module(m);
 

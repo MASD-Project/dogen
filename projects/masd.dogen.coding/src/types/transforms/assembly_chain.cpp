@@ -41,7 +41,7 @@ meta_model::model assembly_chain::apply(const context& ctx,
     const meta_model::languages l, const meta_model::model& target,
     const std::list<meta_model::model>& refs) {
     tracing::scoped_chain_tracer stp(lg, "model assembly chain",
-        transform_id, target.name().id(), *ctx.tracer());
+        transform_id, target.name().qualified().dot(), *ctx.tracer());
 
     /*
      * Perform all the language mapping required for target and
@@ -63,7 +63,7 @@ meta_model::model assembly_chain::apply(const context& ctx,
          */
         if (!mapping_transform::is_mappable(ref.input_language(), l)) {
             BOOST_LOG_SEV(lg, debug) << "Reference is not mappable: "
-                                     << ref.name().id();
+                                     << ref.name().qualified().dot();
             continue;
         }
         mapped_refs.push_back(mapping_transform::apply(ctx, ref, l));

@@ -73,8 +73,8 @@ boost::filesystem::path enum_implementation_formatter::inclusion_path(
         logger_factory(enum_implementation_formatter::static_id()));
     static const std::string not_supported("Inclusion path is not supported: ");
 
-    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
+    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
 }
 
 boost::filesystem::path enum_implementation_formatter::full_path(

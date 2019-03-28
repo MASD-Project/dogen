@@ -62,7 +62,7 @@ dynamic_transforms_chain::create_decoration_properties_factory(
 void dynamic_transforms_chain::
 apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_chain_tracer stp(lg, "dynamic transforms chain",
-        transform_id, m.name().id(), *ctx.tracer(), m);
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     auto& rg(registrar());
     rg.validate();

@@ -72,8 +72,8 @@ boost::filesystem::path class_implementation_formatter::inclusion_path(
         logger_factory(class_implementation_formatter::static_id()));
     static const std::string not_supported("Inclusion path is not supported: ");
 
-    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
+    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
 }
 
 boost::filesystem::path class_implementation_formatter::full_path(
@@ -119,7 +119,7 @@ format(const context& ctx, const coding::meta_model::element& e) const {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));
-        a.add_helper_methods(o.name().id());
+        a.add_helper_methods(o.name().qualified().dot());
 
         const auto qn(a.get_qualified_name(o.name()));
         const bool has_attributes(!o.local_attributes().empty());

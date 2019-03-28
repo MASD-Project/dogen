@@ -53,7 +53,7 @@ namespace masd::dogen::coding::transforms {
 
 meta_model::object& attributes_transform::
 find_object(const meta_model::name& n, meta_model::model& m) {
-    const auto id(n.id());
+    const auto id(n.qualified().dot());
     auto i(m.objects().find(id));
     if (i == m.objects().end()) {
         BOOST_LOG_SEV(lg, error) << object_not_found << id;
@@ -64,7 +64,7 @@ find_object(const meta_model::name& n, meta_model::model& m) {
 
 meta_model::object_template& attributes_transform::
 find_object_template(const meta_model::name& n, meta_model::model& m) {
-    const auto& id(n.id());
+    const auto& id(n.qualified().dot());
     auto i(m.object_templates().find(id));
     if (i == m.object_templates().end()) {
         BOOST_LOG_SEV(lg, error) << object_template_not_found << id;
@@ -76,7 +76,7 @@ find_object_template(const meta_model::name& n, meta_model::model& m) {
 
 void attributes_transform::expand_object(meta_model::object& o,
     meta_model::model& m, std::unordered_set<std::string>& processed_ids) {
-    const auto id(o.name().id());
+    const auto id(o.name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Expanding object: " << id;
 
     if (processed_ids.find(id) != processed_ids.end()) {
@@ -183,10 +183,10 @@ void attributes_transform::expand_objects(meta_model::model& em) {
 void attributes_transform::expand_object_template(
     meta_model::object_template& ot, meta_model::model& m,
     std::unordered_set<std::string>& processed_ids) {
-    const auto id(ot.name().id());
+    const auto id(ot.name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Expanding object template:" << id;
 
-    if (processed_ids.find(ot.name().id()) != processed_ids.end()) {
+    if (processed_ids.find(ot.name().qualified().dot()) != processed_ids.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object already processed:" << id;
         return;
     }
@@ -234,7 +234,7 @@ void attributes_transform::expand_object_templates(meta_model::model& m) {
 void attributes_transform::
 apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "attributes transform",
-        transform_id, m.name().id(), *ctx.tracer(), m);
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     expand_object_templates(m);
     expand_objects(m);

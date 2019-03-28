@@ -112,20 +112,22 @@ void aspect_properties_generator::handle_aspect_properties(
     result_[id] = ap;
 }
 
-void aspect_properties_generator::visit(const coding::meta_model::enumeration& e) {
-    handle_aspect_properties(e.annotation(), e.name().id());
+void aspect_properties_generator::
+visit(const coding::meta_model::enumeration& e) {
+    handle_aspect_properties(e.annotation(), e.name().qualified().dot());
 }
 
-void aspect_properties_generator::visit(const coding::meta_model::exception& e) {
-    handle_aspect_properties(e.annotation(), e.name().id());
+void aspect_properties_generator::
+visit(const coding::meta_model::exception& e) {
+    handle_aspect_properties(e.annotation(), e.name().qualified().dot());
 }
 
 void aspect_properties_generator::visit(const coding::meta_model::object& o) {
-    handle_aspect_properties(o.annotation(), o.name().id());
+    handle_aspect_properties(o.annotation(), o.name().qualified().dot());
 }
 
 void aspect_properties_generator::visit(const coding::meta_model::builtin& p) {
-    handle_aspect_properties(p.annotation(), p.name().id());
+    handle_aspect_properties(p.annotation(), p.name().qualified().dot());
 }
 
 const std::unordered_map<std::string, formattables::aspect_properties>&

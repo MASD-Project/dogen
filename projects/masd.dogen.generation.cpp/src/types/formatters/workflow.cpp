@@ -76,10 +76,10 @@ workflow::format(
     const coding::meta_model::element& e,
     const formattables::element_properties& ep) const {
 
-    const auto id(e.name().id());
+    const auto id(e.name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
-    const auto mn(e.meta_name().id());
+    const auto mn(e.meta_name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Meta name: " << mn;
 
     std::list<extraction::meta_model::artefact> r;
@@ -144,7 +144,7 @@ workflow::format(
 std::list<extraction::meta_model::artefact> workflow::
 execute(const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element, const formattables::model& fm) const {
-    BOOST_LOG_SEV(lg, debug) << "Started formatting. Model " << fm.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Started formatting. Model " << fm.name().qualified().dot();
     std::list<extraction::meta_model::artefact> r;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);

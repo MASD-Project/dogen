@@ -183,7 +183,7 @@ void model_post_processing_validator::validate_name(const meta_model::name& n,
     /*
      * All names must have a non-empty id.
      */
-    if (n.id().empty()) {
+    if (n.qualified().dot().empty()) {
         BOOST_LOG_SEV(lg, error) << invalid_empty_id;
         BOOST_THROW_EXCEPTION(validation_error(invalid_empty_id));
     }
@@ -238,7 +238,7 @@ validate_names(const std::list<std::pair<std::string, meta_model::name>>& names,
     for (const auto& pair : names) {
         const auto& owner(pair.first);
         const auto& n(pair.second);
-        const auto& id(n.id());
+        const auto& id(n.qualified().dot());
         BOOST_LOG_SEV(lg, debug) << "Validating: '" << id << "'";
 
         try {
@@ -303,7 +303,7 @@ validate_injected_names(
     for (const auto& pair : names) {
         const auto& owner(pair.first);
         const auto& n(pair.second);
-        const auto& id(n.id());
+        const auto& id(n.qualified().dot());
         BOOST_LOG_SEV(lg, debug) << "Validating: '" << id << "'";
 
         try {
@@ -333,7 +333,7 @@ void model_post_processing_validator::validate_meta_names(
     for (const auto& pair : meta_names) {
         const auto& owner(pair.first);
         const auto& n(pair.second);
-        const auto& id(n.id());
+        const auto& id(n.qualified().dot());
         BOOST_LOG_SEV(lg, debug) << "Validating: '" << id << "'";
 
         try {
@@ -357,7 +357,7 @@ validate_name_tree(const std::unordered_set<std::string>& abstract_elements,
     const bool inherit_opaqueness_from_parent) {
 
     const auto& ae(abstract_elements);
-    const auto id(nt.current().id());
+    const auto id(nt.current().qualified().dot());
     const bool is_abstract(ae.find(id) != ae.end());
     if (is_abstract && !inherit_opaqueness_from_parent) {
         BOOST_LOG_SEV(lg, error) << abstract_instance << id;
@@ -386,7 +386,8 @@ void model_post_processing_validator::validate_name_trees(
     for (const auto& pair : nts) {
         const auto& owner(pair.first);
         const auto& nt(pair.second);
-        BOOST_LOG_SEV(lg, trace) << "Validating: '" << nt.identifiable() << "'";
+        BOOST_LOG_SEV(lg, trace) << "Validating: '"
+                                 << nt.qualified().identifiable() << "'";
 
         try {
             validate_name_tree(abstract_elements, l, nt);
@@ -399,7 +400,8 @@ void model_post_processing_validator::validate_name_trees(
 
 void model_post_processing_validator::
 validate(const indices& idx, const meta_model::model& im) {
-    BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << im.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Started validation. Model: "
+                             << im.name().qualified().dot();
 
     const auto l(im.input_language());
     const auto dr(decomposer::decompose(im));

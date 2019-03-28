@@ -76,8 +76,8 @@ boost::filesystem::path common_odb_options_formatter::inclusion_path(
 
         const std::string not_supported("Inclusion path is not supported: ");
 
-    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
+    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
 }
 
 boost::filesystem::path common_odb_options_formatter::full_path(

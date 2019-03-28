@@ -72,7 +72,7 @@ is_element_disabled(const coding::meta_model::element& e) {
      */
     if (m.documentation().empty()) {
         BOOST_LOG_SEV(lg, debug) << "Module does not have documentation. "
-                                 << "Disabling it. Id: " << m.name().id();
+                                 << "Disabling it. Id: " << m.name().qualified().dot();
         return true;
     }
     return false;
@@ -219,7 +219,7 @@ void enablement_transform::compute_enablement_for_element(
     std::unordered_set<meta_model::element_archetype>&
     enabled_archetype_for_element, coding::meta_model::element& e) {
 
-    const auto id(e.name().id());
+    const auto id(e.name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Started computing enablement: " << id;
 
     /*
@@ -229,7 +229,7 @@ void enablement_transform::compute_enablement_for_element(
     if (is_element_disabled(e))
         return;
 
-    const auto mt(e.meta_name().id());
+    const auto mt(e.meta_name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Meta-type: " << mt;
 
     /*
@@ -245,11 +245,11 @@ void enablement_transform::compute_enablement_for_element(
     }
 
     const auto& mn(e.meta_name());
-    const auto j(archetype_locations_by_meta_name.find(mn.id()));
+    const auto j(archetype_locations_by_meta_name.find(mn.qualified().dot()));
     if (j == archetype_locations_by_meta_name.end()) {
-        BOOST_LOG_SEV(lg, error) << meta_name_not_found << mn.id();
+        BOOST_LOG_SEV(lg, error) << meta_name_not_found << mn.qualified().dot();
         BOOST_THROW_EXCEPTION(
-            transformation_error(meta_name_not_found + mn.id()));
+            transformation_error(meta_name_not_found + mn.qualified().dot()));
     }
     const auto& cal(j->second.canonical_archetype_locations());
 
@@ -316,7 +316,7 @@ void enablement_transform::compute_enablement_for_element(
 void enablement_transform::
 apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "enablement new_transform",
-        transform_id, m.name().id(), *ctx.tracer(), m);
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto& alrp(*ctx.archetype_location_repository());
     const auto& albmn(alrp.archetype_locations_by_meta_name());

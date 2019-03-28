@@ -46,7 +46,7 @@ boost::shared_ptr<coding::meta_model::element> odb_options_factory::
 make(const coding::meta_model::name& n,
     const coding::meta_model::origin_types& ot,
     const annotations::annotation& a) const {
-    const auto id(n.id());
+    const auto id(n.qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
 
     auto r(boost::make_shared<object_odb_options>());

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_IDENTIFIABLE_AND_QUALIFIED_BUILDER_HPP
-#define MASD_DOGEN_CODING_TYPES_HELPERS_IDENTIFIABLE_AND_QUALIFIED_BUILDER_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_FULLY_QUALIFIED_REPRESENTATION_BUILDER_HPP
+#define MASD_DOGEN_CODING_TYPES_HELPERS_FULLY_QUALIFIED_REPRESENTATION_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,34 +27,45 @@
 
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/name_tree.hpp"
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
 #include "masd.dogen.coding/types/helpers/pretty_printer.hpp"
+#include "masd.dogen.coding/types/meta_model/fully_qualified_representation.hpp"
 
 namespace masd::dogen::coding::helpers {
 
-class identifiable_and_qualified_builder final {
+/**
+ * @brief Builds a fully qualified representation of a qualifiable
+ * model element such as a name or a name tree.
+ */
+class fully_qualified_representation_builder final {
 public:
-    identifiable_and_qualified_builder();
-
-private:
-    std::string obtain_qualified(
-        const std::map<meta_model::languages, std::string>& map,
-        const meta_model::languages& l) const;
+    fully_qualified_representation_builder();
 
 public:
+    /**
+     * @brief Adds the qualifiable model element to the pretty printers.
+     */
+    /**@{*/
     void add(const meta_model::name& n);
     void add(const meta_model::name_tree& nt);
+    /**@}*/
 
 public:
-    std::pair<std::string, std::map<meta_model::languages, std::string>>
-    build();
+    /**
+     * @brief Builds the representation.
+     *
+     * @pre Add must have been called at least once.
+     */
+    meta_model::fully_qualified_representation build();
 
-    std::pair<std::string, std::map<meta_model::languages, std::string>>
+    /**
+     * @brief Builds the representation for the supplied name.
+     */
+    meta_model::fully_qualified_representation
     build(const meta_model::name& n, const bool model_name_mode);
 
 private:
-    pretty_printer csharp_pp_;
-    pretty_printer cpp_pp_;
+    pretty_printer dot_printer_;
+    pretty_printer colon_printer_;
 };
 
 }

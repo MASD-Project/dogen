@@ -80,7 +80,7 @@ private:
          * elements must have unique element ids.
          */
         if (!e->is_element_extension()) {
-            const auto id(e->name().id());
+            const auto id(e->name().qualified().dot());
             ensure_not_yet_processed(id);
             processed_ids_.insert(id);
         }
@@ -90,7 +90,7 @@ private:
 public:
     void operator()(boost::shared_ptr<coding::meta_model::element>) { }
     void operator()(boost::shared_ptr<coding::meta_model::module> m) {
-        result_.module_ids().insert(m->name().id());
+        result_.module_ids().insert(m->name().qualified().dot());
         add(m);
     }
     void operator()

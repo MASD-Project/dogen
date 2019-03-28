@@ -74,8 +74,8 @@ boost::filesystem::path class_implementation_formatter::inclusion_path(
         logger_factory(class_implementation_formatter::static_id()));
     static const std::string not_supported("Inclusion path is not supported: ");
 
-    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
+    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
 }
 
 boost::filesystem::path class_implementation_formatter::full_path(
@@ -111,7 +111,7 @@ format(const context& ctx, const coding::meta_model::element& e) const {
         auto sbf(a.make_scoped_boilerplate_formatter(e));
         if (!o.local_attributes().empty()) {
 a.stream() << "namespace {" << std::endl;
-        a.add_helper_methods(o.name().id());
+        a.add_helper_methods(o.name().qualified().dot());
 a.stream() << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
@@ -151,7 +151,7 @@ a.stream() << "    " << pqn << "_generator::populate(position, v);" << std::endl
                 }
                 unsigned int i(0);
                 for (const auto attr : o.local_attributes()) {
-a.stream() << "    v." << attr.name().simple() << "(create_" << attr.parsed_type().identifiable() << "(position + " << i << "));" << std::endl;
+a.stream() << "    v." << attr.name().simple() << "(create_" << attr.parsed_type().qualified().identifiable() << "(position + " << i << "));" << std::endl;
                     ++i;
                 }
 a.stream() << "}" << std::endl;
@@ -172,7 +172,7 @@ a.stream() << std::endl;
                     else {
                         dogen::extraction::sequence_formatter sf(o.local_attributes().size());
                         for (const auto attr : o.local_attributes()) {
-a.stream() << "        create_" << attr.parsed_type().identifiable() << "(position + " << sf.current_position() << ")" << sf.postfix() << std::endl;
+a.stream() << "        create_" << attr.parsed_type().qualified().identifiable() << "(position + " << sf.current_position() << ")" << sf.postfix() << std::endl;
                             sf.next();
                         }
                     }

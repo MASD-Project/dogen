@@ -158,11 +158,12 @@ void generator::process_element(const coding::meta_model::element& e) {
     if (e.origin_type() != coding::meta_model::origin_types::target)
         return;
 
-    BOOST_LOG_SEV(lg, debug) << "Processing element: " << e.name().id();
-    const auto mt(e.meta_name().id());
+    BOOST_LOG_SEV(lg, debug) << "Processing element: "
+                             << e.name().qualified().dot();
+    const auto mt(e.meta_name().qualified().dot());
     const auto i(file_formatters_by_meta_name_.find(mt));
     if (i == file_formatters_by_meta_name_.end()) {
-        const auto id(e.name().id());
+        const auto id(e.name().qualified().dot());
         BOOST_LOG_SEV(lg, error) << formatter_not_found_for_type << id;
         BOOST_THROW_EXCEPTION(
             coding::helpers::building_error(formatter_not_found_for_type + id));

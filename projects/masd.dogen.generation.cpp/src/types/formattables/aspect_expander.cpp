@@ -142,7 +142,7 @@ void aspect_expander::walk_name_tree(const coding::meta_model::name_tree& nt,
     if (is_top_level && nt.is_current_simple_type())
         ap.requires_manual_default_constructor(true);
 
-    const auto i(element_aps.find(nt.current().id()));
+    const auto i(element_aps.find(nt.current().qualified().dot()));
     if (i == element_aps.end())
         return;
 

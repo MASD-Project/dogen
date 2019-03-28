@@ -29,42 +29,38 @@ name_tree::name_tree()
       is_floating_point_(static_cast<bool>(0)) { }
 
 name_tree::name_tree(
+    const masd::dogen::coding::meta_model::fully_qualified_representation& qualified,
     const masd::dogen::coding::meta_model::name& current,
     const std::list<masd::dogen::coding::meta_model::name_tree>& children,
     const bool are_children_opaque,
     const bool is_circular_dependency,
-    const std::map<masd::dogen::coding::meta_model::languages, std::string>& qualified,
-    const std::string& identifiable,
     const bool is_current_simple_type,
     const bool is_floating_point)
-    : current_(current),
+    : qualified_(qualified),
+      current_(current),
       children_(children),
       are_children_opaque_(are_children_opaque),
       is_circular_dependency_(is_circular_dependency),
-      qualified_(qualified),
-      identifiable_(identifiable),
       is_current_simple_type_(is_current_simple_type),
       is_floating_point_(is_floating_point) { }
 
 void name_tree::swap(name_tree& other) noexcept {
     using std::swap;
+    swap(qualified_, other.qualified_);
     swap(current_, other.current_);
     swap(children_, other.children_);
     swap(are_children_opaque_, other.are_children_opaque_);
     swap(is_circular_dependency_, other.is_circular_dependency_);
-    swap(qualified_, other.qualified_);
-    swap(identifiable_, other.identifiable_);
     swap(is_current_simple_type_, other.is_current_simple_type_);
     swap(is_floating_point_, other.is_floating_point_);
 }
 
 bool name_tree::operator==(const name_tree& rhs) const {
-    return current_ == rhs.current_ &&
+    return qualified_ == rhs.qualified_ &&
+        current_ == rhs.current_ &&
         children_ == rhs.children_ &&
         are_children_opaque_ == rhs.are_children_opaque_ &&
         is_circular_dependency_ == rhs.is_circular_dependency_ &&
-        qualified_ == rhs.qualified_ &&
-        identifiable_ == rhs.identifiable_ &&
         is_current_simple_type_ == rhs.is_current_simple_type_ &&
         is_floating_point_ == rhs.is_floating_point_;
 }
@@ -73,6 +69,22 @@ name_tree& name_tree::operator=(name_tree other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const masd::dogen::coding::meta_model::fully_qualified_representation& name_tree::qualified() const {
+    return qualified_;
+}
+
+masd::dogen::coding::meta_model::fully_qualified_representation& name_tree::qualified() {
+    return qualified_;
+}
+
+void name_tree::qualified(const masd::dogen::coding::meta_model::fully_qualified_representation& v) {
+    qualified_ = v;
+}
+
+void name_tree::qualified(const masd::dogen::coding::meta_model::fully_qualified_representation&& v) {
+    qualified_ = std::move(v);
 }
 
 const masd::dogen::coding::meta_model::name& name_tree::current() const {
@@ -121,38 +133,6 @@ bool name_tree::is_circular_dependency() const {
 
 void name_tree::is_circular_dependency(const bool v) {
     is_circular_dependency_ = v;
-}
-
-const std::map<masd::dogen::coding::meta_model::languages, std::string>& name_tree::qualified() const {
-    return qualified_;
-}
-
-std::map<masd::dogen::coding::meta_model::languages, std::string>& name_tree::qualified() {
-    return qualified_;
-}
-
-void name_tree::qualified(const std::map<masd::dogen::coding::meta_model::languages, std::string>& v) {
-    qualified_ = v;
-}
-
-void name_tree::qualified(const std::map<masd::dogen::coding::meta_model::languages, std::string>&& v) {
-    qualified_ = std::move(v);
-}
-
-const std::string& name_tree::identifiable() const {
-    return identifiable_;
-}
-
-std::string& name_tree::identifiable() {
-    return identifiable_;
-}
-
-void name_tree::identifiable(const std::string& v) {
-    identifiable_ = v;
-}
-
-void name_tree::identifiable(const std::string&& v) {
-    identifiable_ = std::move(v);
 }
 
 bool name_tree::is_current_simple_type() const {

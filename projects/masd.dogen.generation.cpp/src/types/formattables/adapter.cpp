@@ -122,7 +122,7 @@ model adapter::adapt(const formatters::repository& frp,
 
     for (const auto& ptr : m.elements()) {
         const auto& e(*ptr);
-        const auto id(e.name().id());
+        const auto id(e.name().qualified().dot());
         BOOST_LOG_SEV(lg, debug) << "Processing element: " << id;
 
         /*
@@ -158,7 +158,7 @@ model adapter::adapt(const formatters::repository& frp,
          * elements such as object templates do not have formatters at
          * present.
          */
-        const auto mt(e.meta_name().id());
+        const auto mt(e.meta_name().qualified().dot());
         const auto j(frp.stock_artefact_formatters_by_meta_name().find(mt));
         if (j == frp.stock_artefact_formatters_by_meta_name().end()) {
             BOOST_LOG_SEV(lg, debug) << "Element has no formatters: " << id;

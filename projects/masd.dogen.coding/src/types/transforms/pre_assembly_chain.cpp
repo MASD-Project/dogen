@@ -76,7 +76,7 @@ void pre_assembly_chain::apply(const context& ctx, meta_model::model& m) {
 
 void pre_assembly_chain::apply(const context& ctx, meta_model::model_set& ms) {
     tracing::scoped_chain_tracer stp(lg, "model set pre-processing chain",
-        transform_id, ms.target().name().id(), *ctx.tracer(), ms);
+        transform_id, ms.target().name().qualified().dot(), *ctx.tracer(), ms);
 
     /*
      * Apply all of the pre-processing transforms to the target.

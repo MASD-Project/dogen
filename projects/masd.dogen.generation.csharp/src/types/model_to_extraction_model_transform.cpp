@@ -124,7 +124,7 @@ model_to_extraction_model_transform::apply(
     const bool enable_backend_directories,
     const generation::meta_model::model& m) const {
     tracing::scoped_transform_tracer stp(lg,
-        "C# model to text transform", transform_id, m.name().id(),
+        "C# model to text transform", transform_id, m.name().qualified().dot(),
         *ctx.tracer());
 
     BOOST_LOG_SEV(lg, debug) << "Started backend.";

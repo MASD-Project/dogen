@@ -53,7 +53,7 @@ format(const context& ctx, const coding::meta_model::element& e) const {
 #>
 namespace {
 <#+
-        a.add_helper_methods(o.name().id());
+        a.add_helper_methods(o.name().qualified().dot());
 #>
 
 }
@@ -104,7 +104,7 @@ populate(const unsigned int position, result_type& v) {
                 unsigned int i(0);
                 for (const auto attr : o.local_attributes()) {
 #>
-    v.<#= attr.name().simple() #>(create_<#= attr.parsed_type().identifiable() #>(position + <#= i #>));
+    v.<#= attr.name().simple() #>(create_<#= attr.parsed_type().qualified().identifiable() #>(position + <#= i #>));
 <#+
                     ++i;
                 }
@@ -135,7 +135,7 @@ populate(const unsigned int position, result_type& v) {
                         dogen::extraction::sequence_formatter sf(o.local_attributes().size());
                         for (const auto attr : o.local_attributes()) {
 #>
-        create_<#= attr.parsed_type().identifiable() #>(position + <#= sf.current_position() #>)<#= sf.postfix() #>
+        create_<#= attr.parsed_type().qualified().identifiable() #>(position + <#= sf.current_position() #>)<#= sf.postfix() #>
 <#+
                             sf.next();
                         }

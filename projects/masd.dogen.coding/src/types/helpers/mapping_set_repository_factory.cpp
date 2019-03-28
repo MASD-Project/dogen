@@ -107,7 +107,7 @@ insert(const std::string& lam_id, const meta_model::name& n,
     }
 
     BOOST_LOG_SEV(lg, debug) << "Mapped: '" << lam_id << "' to '"
-                             << n.id() << "'";
+                             << n.qualified().dot() << "'";
 }
 
 void mapping_set_repository_factory::populate_mapping_set(

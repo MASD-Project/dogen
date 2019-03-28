@@ -79,37 +79,25 @@ const std::string facet_directory_missing(
 const std::string kernel_not_found("Kernel not found: ");
 const std::string element_not_found("Element not found: ");
 const std::string no_helpers_for_family("No helpers found for family: ");
-const std::string qn_missing("Could not find qualified name for language.");
 const std::string helpless_family("No registered helpers found for family: ");
 
 }
 
 namespace masd::dogen::generation::cpp::formatters {
 
-template<typename IdentifiableAndQualified>
-inline std::pair<std::string, std::string>
-get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
-    using coding::meta_model::languages;
-    const auto i(iaq.qualified().find(languages::cpp));
-    if (i == iaq.qualified().end()) {
-        BOOST_LOG_SEV(lg, error) << qn_missing << languages::cpp;
-        BOOST_THROW_EXCEPTION(formatting_error(qn_missing));
-    }
-
-    return std::make_pair(iaq.identifiable(), i->second);
-}
-
 assistant::
 assistant(const context& ctx, const coding::meta_model::element& e,
     const annotations::archetype_location& al, const bool requires_header_guard)
     : element_(e), context_(ctx),
       artefact_properties_(
-        obtain_artefact_properties(element_.name().id(), al.archetype())),
+        obtain_artefact_properties(element_.name().qualified().dot(),
+            al.archetype())),
       new_artefact_properties_(
           obtain_new_artefact_properties(e, al.archetype())),
     archetype_location_(al), requires_header_guard_(requires_header_guard) {
 
-    BOOST_LOG_SEV(lg, debug) << "Processing element: " << element_.name().id()
+    BOOST_LOG_SEV(lg, debug) << "Processing element: "
+                             << element_.name().qualified().dot()
                              << " for archetype: " << al.archetype();
 
     dogen::extraction::indent_filter::push(filtering_stream_, 4);
@@ -177,23 +165,22 @@ make_setter_return_type(const std::string& containing_type_name,
 
 std::string
 assistant::get_qualified_name(const coding::meta_model::name& n) const {
-    const auto pair(get_identifiable_and_qualified(n));
-    return pair.second;
+    return n.qualified().colon();
 }
 
 std::string
 assistant::get_qualified_name(const coding::meta_model::name_tree& nt) const {
-    const auto pair(get_identifiable_and_qualified(nt));
-    return pair.second;
+    return nt.qualified().colon();
 }
 
-std::string
-assistant::get_identifiable_model_name(const coding::meta_model::name& n) const {
+std::string assistant::
+get_identifiable_model_name(const coding::meta_model::name& n) const {
     using boost::algorithm::join;
     return join(n.location().model_modules(), underscore);
 }
 
-std::string assistant::get_product_name(const coding::meta_model::name& n) const {
+std::string
+assistant::get_product_name(const coding::meta_model::name& n) const {
     if (n.location().external_modules().empty())
         return empty;
 
@@ -203,7 +190,7 @@ std::string assistant::get_product_name(const coding::meta_model::name& n) const
 const formattables::element_properties& assistant::obtain_element_properties(
     const std::string& element_id) const {
 
-    if (element_id == element_.name().id())
+    if (element_id == element_.name().qualified().dot())
         return context_.element_properties();
 
     const auto& formattables(context_.model().formattables());
@@ -273,7 +260,8 @@ assistant::make_namespaces(const coding::meta_model::name& n,
 }
 
 bool assistant::is_archetype_enabled(const std::string& archetype) const {
-    generation::meta_model::element_archetype ea(element_.name().id(), archetype);
+    generation::meta_model::element_archetype
+        ea(element_.name().qualified().dot(), archetype);
     const auto& eafe(context_.enabled_archetype_for_element());
     const auto i(eafe.find(ea));
     const bool is_disabled(i == eafe.end());
@@ -610,7 +598,7 @@ std::string assistant::streaming_for_type(const coding::meta_model::name& n,
     const std::string& s) const {
 
     const auto str_propss(context_.model().streaming_properties());
-    const auto i(str_propss.find(n.id()));
+    const auto i(str_propss.find(n.qualified().dot()));
     if (i == str_propss.end())
         return s;
 
@@ -628,11 +616,11 @@ streaming_for_type(const formattables::helper_descriptor& hd,
     return streaming_for_type(*sp, s);
 }
 
-bool assistant::
-requires_hashing_helper_method(const coding::meta_model::attribute& attr) const {
+bool assistant::requires_hashing_helper_method(
+    const coding::meta_model::attribute& attr) const {
     const auto& eprops(context_.element_properties());
     for (const auto& hlp_props : eprops.helper_properties()) {
-        const auto ident(attr.parsed_type().identifiable());
+        const auto ident(attr.parsed_type().qualified().identifiable());
         const auto& desc(hlp_props.current());
         if (ident != desc.name_tree_identifiable())
             continue;
@@ -683,7 +671,7 @@ names_with_enabled_archetype(const std::string& archetype,
     const std::list<coding::meta_model::name> names) const {
     std::list<coding::meta_model::name> r;
     for (const auto& n : names) {
-        const auto id(n.id());
+        const auto id(n.qualified().dot());
         BOOST_LOG_SEV(lg, debug) << "Checking enablement for name: " << id;
 
         generation::meta_model::element_archetype ea(id, archetype);

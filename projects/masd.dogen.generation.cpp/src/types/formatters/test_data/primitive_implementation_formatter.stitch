@@ -49,7 +49,7 @@ format(const context& ctx, const coding::meta_model::element& e) const {
 #>
 namespace {
 <#+
-        a.add_helper_methods(p.name().id());
+        a.add_helper_methods(p.name().qualified().dot());
 #>
 
 }
@@ -75,7 +75,7 @@ namespace {
 
 void <#= sn #>_generator::
 populate(const unsigned int position, result_type& v) {
-    v.<#= attr.name().simple() #>(create_<#= attr.parsed_type().identifiable() #>(position + 1));
+    v.<#= attr.name().simple() #>(create_<#= attr.parsed_type().qualified().identifiable() #>(position + 1));
 }
 <#+
             }
@@ -90,7 +90,7 @@ populate(const unsigned int position, result_type& v) {
 <#+
             if (p.is_immutable()) {
 #>
-    return <#= sn #>(create_<#= attr.parsed_type().identifiable() #>(position + 1));
+    return <#= sn #>(create_<#= attr.parsed_type().qualified().identifiable() #>(position + 1));
 <#+
             } else {
 #>

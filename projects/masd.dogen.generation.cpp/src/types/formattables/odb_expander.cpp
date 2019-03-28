@@ -167,7 +167,7 @@ void updator::visit(coding::meta_model::object& o) {
     op.top_level_odb_pragmas(top_level_pragmas);
 
     for (const auto& attr : o.local_attributes()) {
-        const auto id(attr.name().id());
+        const auto id(attr.name().qualified().dot());
         auto attr_pragmas(make_odb_pragmas(type_group_, attr.annotation()));
 
         if (attr.orm_properties()) {
@@ -265,7 +265,7 @@ void updator::visit(coding::meta_model::primitive& p) {
     const auto& attr(p.value_attribute());
     const auto pragmas(std::list<std::string> { empty_column_attribute });
 
-    const auto id(attr.name().id());
+    const auto id(attr.name().qualified().dot());
     op.attribute_level_odb_pragmas()[id] = pragmas;
     result_ = op;
 }

@@ -164,7 +164,7 @@ parse_parent(const type_group& tg, meta_model::object& o) {
      * two conflicting sources of parenting information so bomb out.
      */
     if (!o.parents().empty()) {
-        const auto& id(o.name().id());
+        const auto& id(o.name().qualified().dot());
         BOOST_LOG_SEV(lg, error) << parent_name_conflict << id;
         BOOST_THROW_EXCEPTION(transformation_error(parent_name_conflict + id));
     }
@@ -193,7 +193,7 @@ parse_underlying_element(const type_group& tg, meta_model::enumeration& e) {
      * there are now two conflicting sources of information.
      */
     if (!e.underlying_element().simple().empty()) {
-        const auto& id(e.name().id());
+        const auto& id(e.name().qualified().dot());
         BOOST_LOG_SEV(lg, error) << underlying_element_conflict << id;
         BOOST_THROW_EXCEPTION(
             transformation_error(underlying_element_conflict + id));
@@ -210,7 +210,7 @@ parse_underlying_element(const type_group& tg, meta_model::enumeration& e) {
 void parsing_transform::parse_underlying_element(const type_group& tg,
     const meta_model::languages l, meta_model::primitive& p) {
 
-    const auto id(p.name().id());
+    const auto id(p.name().qualified().dot());
 
     /*
      * Obtain the underlying element name from the meta-data. If there
@@ -244,14 +244,14 @@ void parsing_transform::parse_underlying_element(const type_group& tg,
 
 void parsing_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "parsing transform",
-        transform_id, m.name().id(), *ctx.tracer(), m);
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto tg(make_type_group(*ctx.type_repository()));
     const auto l(m.input_language());
 
     for (auto& pair : m.objects()) {
         auto& o(*pair.second);
-        const auto id(o.name().id());
+        const auto id(o.name().qualified().dot());
 
         try {
             parse_attributes(l, o.local_attributes());
@@ -264,7 +264,7 @@ void parsing_transform::apply(const context& ctx, meta_model::model& m) {
 
     for (auto& pair : m.object_templates()) {
         auto& c(*pair.second);
-        const auto id(c.name().id());
+        const auto id(c.name().qualified().dot());
 
         try {
             parse_attributes(l, c.local_attributes());
@@ -276,7 +276,7 @@ void parsing_transform::apply(const context& ctx, meta_model::model& m) {
 
     for (auto& pair : m.enumerations()) {
         auto& e(*pair.second);
-        const auto id(e.name().id());
+        const auto id(e.name().qualified().dot());
 
         try {
             parse_underlying_element(tg, e);
@@ -288,7 +288,7 @@ void parsing_transform::apply(const context& ctx, meta_model::model& m) {
 
     for (auto& pair : m.primitives()) {
         auto& p(*pair.second);
-        const auto id(p.name().id());
+        const auto id(p.name().qualified().dot());
 
         try {
             parse_underlying_element(tg, l, p);

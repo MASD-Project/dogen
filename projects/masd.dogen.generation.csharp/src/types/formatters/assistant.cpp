@@ -46,7 +46,6 @@ const std::string static_reference_equals("object");
 const std::string artefact_properties_missing(
     "Could not find formatter configuration for formatter: ");
 const std::string no_helpers_for_family("No helpers found for family: ");
-const std::string qn_missing("Could not find qualified name for language.");
 const std::string helpless_family("No registered helpers found for family: ");
 const std::string attribute_with_no_simple_name(
     "Attribute has empty simple name.");
@@ -55,29 +54,14 @@ const std::string attribute_with_no_simple_name(
 
 namespace masd::dogen::generation::csharp::formatters {
 
-template<typename IdentifiableAndQualified>
-inline std::pair<std::string, std::string>
-get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
-    const auto l(coding::meta_model::languages::csharp);
-    const auto i(iaq.qualified().find(l));
-    if (i == iaq.qualified().end()) {
-        BOOST_LOG_SEV(lg, error) << qn_missing << l;
-        BOOST_THROW_EXCEPTION(formatting_error(qn_missing));
-    }
-
-    return std::make_pair(iaq.identifiable(), i->second);
-}
-
 std::string
 assistant::get_qualified_name(const coding::meta_model::name& n) const {
-    const auto pair(get_identifiable_and_qualified(n));
-    return pair.second;
+    return n.qualified().dot();
 }
 
 std::string
 assistant::get_qualified_name(const coding::meta_model::name_tree& nt) const {
-    const auto pair(get_identifiable_and_qualified(nt));
-    return pair.second;
+    return nt.qualified().dot();
 }
 
 assistant::
@@ -146,7 +130,7 @@ std::string
 assistant::reference_equals(const coding::meta_model::attribute& attr) const {
     const auto& c(context_.model().aspect_properties());
     const auto n(attr.parsed_type().current());
-    const auto i(c.find(n.id()));
+    const auto i(c.find(n.qualified().dot()));
 
     bool requires_static_reference_equals(i == c.end() ?
         false : i->second.requires_static_reference_equals());
@@ -249,7 +233,7 @@ boost::optional<formattables::assistant_properties> assistant::
 get_assistant_properties(const coding::meta_model::attribute& attr) const {
 
     const auto& ap(context_.model().assistant_properties());
-    const auto i(ap.find(attr.parsed_type().current().id()));
+    const auto i(ap.find(attr.parsed_type().current().qualified().dot()));
     if (i == ap.end())
         return boost::optional<formattables::assistant_properties>();
 

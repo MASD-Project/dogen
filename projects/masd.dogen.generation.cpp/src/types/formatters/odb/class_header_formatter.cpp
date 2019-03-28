@@ -116,7 +116,7 @@ a.stream() << "#pragma db " << a.get_odb_type() << "(" << sn << ") " << pg << st
 
                 bool is_first(true);
                 for (const auto& attr : o.local_attributes()) {
-                    const auto attr_level_pragmas(a.get_odb_pragmas(attr.name().id()));
+                    const auto attr_level_pragmas(a.get_odb_pragmas(attr.name().qualified().dot()));
                     for (const auto pg : attr_level_pragmas) {
                         if (is_first)
 a.stream() << std::endl;

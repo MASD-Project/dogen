@@ -26,13 +26,10 @@
 #endif
 
 #include <list>
-#include <string>
 #include <algorithm>
-#include <map>
 #include "masd.dogen.coding/types/meta_model/name.hpp"
-#include "masd.dogen.coding/types/meta_model/languages.hpp"
 #include "masd.dogen.coding/types/meta_model/name_tree.hpp"
-#include "masd.dogen.coding/hash/meta_model/languages_hash.hpp"
+#include "masd.dogen.coding/types/meta_model/fully_qualified_representation.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
@@ -55,16 +52,20 @@ public:
 
 public:
     name_tree(
+        const masd::dogen::coding::meta_model::fully_qualified_representation& qualified,
         const masd::dogen::coding::meta_model::name& current,
         const std::list<masd::dogen::coding::meta_model::name_tree>& children,
         const bool are_children_opaque,
         const bool is_circular_dependency,
-        const std::map<masd::dogen::coding::meta_model::languages, std::string>& qualified,
-        const std::string& identifiable,
         const bool is_current_simple_type,
         const bool is_floating_point);
 
 public:
+    const masd::dogen::coding::meta_model::fully_qualified_representation& qualified() const;
+    masd::dogen::coding::meta_model::fully_qualified_representation& qualified();
+    void qualified(const masd::dogen::coding::meta_model::fully_qualified_representation& v);
+    void qualified(const masd::dogen::coding::meta_model::fully_qualified_representation&& v);
+
     /**
      * @brief Name for the current level of the tree.
      */
@@ -106,27 +107,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Qualified name in a language specific representation.
-     */
-    /**@{*/
-    const std::map<masd::dogen::coding::meta_model::languages, std::string>& qualified() const;
-    std::map<masd::dogen::coding::meta_model::languages, std::string>& qualified();
-    void qualified(const std::map<masd::dogen::coding::meta_model::languages, std::string>& v);
-    void qualified(const std::map<masd::dogen::coding::meta_model::languages, std::string>&& v);
-    /**@}*/
-
-    /**
-     * @brief Representation of the named tree that can usable as an identifier across all
-     * supported languages.
-     */
-    /**@{*/
-    const std::string& identifiable() const;
-    std::string& identifiable();
-    void identifiable(const std::string& v);
-    void identifiable(const std::string&& v);
-    /**@}*/
-
-    /**
      * @brief Returns true if @e current is a simple type such as a built-in or an enumeration.
      */
     /**@{*/
@@ -153,12 +133,11 @@ public:
     name_tree& operator=(name_tree other);
 
 private:
+    masd::dogen::coding::meta_model::fully_qualified_representation qualified_;
     masd::dogen::coding::meta_model::name current_;
     std::list<masd::dogen::coding::meta_model::name_tree> children_;
     bool are_children_opaque_;
     bool is_circular_dependency_;
-    std::map<masd::dogen::coding::meta_model::languages, std::string> qualified_;
-    std::string identifiable_;
     bool is_current_simple_type_;
     bool is_floating_point_;
 };

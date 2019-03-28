@@ -130,8 +130,9 @@
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
 #include "masd.dogen.coding/types/helpers/model_pre_processing_validator.hpp"
 #include "masd.dogen.coding/types/helpers/model_post_processing_validator.hpp"
-#include "masd.dogen.coding/types/helpers/identifiable_and_qualified_builder.hpp"
+#include "masd.dogen.coding/types/meta_model/fully_qualified_representation.hpp"
 #include "masd.dogen.coding/types/transforms/extraction_properties_transform.hpp"
+#include "masd.dogen.coding/types/helpers/fully_qualified_representation_builder.hpp"
 #include "masd.dogen.coding/types/meta_model/local_archetype_location_properties.hpp"
 
 #endif

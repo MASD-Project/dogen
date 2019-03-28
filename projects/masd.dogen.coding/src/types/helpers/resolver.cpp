@@ -36,7 +36,7 @@
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
-#include "masd.dogen.coding/types/helpers/identifiable_and_qualified_builder.hpp"
+#include "masd.dogen.coding/types/helpers/fully_qualified_representation_builder.hpp"
 #include "masd.dogen.coding/types/helpers/resolution_error.hpp"
 #include "masd.dogen.coding/types/helpers/resolver.hpp"
 
@@ -60,14 +60,14 @@ namespace masd::dogen::coding::helpers {
 
 bool resolver::
 is_floating_point(const meta_model::model& m, const meta_model::name& n) {
-    auto i(m.builtins().find(n.id()));
+    auto i(m.builtins().find(n.qualified().dot()));
     return i != m.builtins().end() && i->second->is_floating_point();
 }
 
 bool resolver::
 is_builtin(const meta_model::model& m, const meta_model::name& n) {
 
-    auto i(m.builtins().find(n.id()));
+    auto i(m.builtins().find(n.qualified().dot()));
     if (i != m.builtins().end()) {
         BOOST_LOG_SEV(lg, trace) << "Name belongs to a built-in in model.";
         return true;
@@ -78,7 +78,7 @@ is_builtin(const meta_model::model& m, const meta_model::name& n) {
 bool resolver::
 is_primitive(const meta_model::model& m, const meta_model::name& n) {
 
-    auto i(m.primitives().find(n.id()));
+    auto i(m.primitives().find(n.qualified().dot()));
     if (i != m.primitives().end()) {
         BOOST_LOG_SEV(lg, trace) << "Name belongs to a primitive in model.";
         return true;
@@ -89,7 +89,7 @@ is_primitive(const meta_model::model& m, const meta_model::name& n) {
 bool resolver::
 is_enumeration(const meta_model::model& m, const meta_model::name& n) {
 
-    auto i(m.enumerations().find(n.id()));
+    auto i(m.enumerations().find(n.qualified().dot()));
     if (i != m.enumerations().end()) {
         BOOST_LOG_SEV(lg, trace) << "Name belongs to an enumeration in model.";
         return true;
@@ -100,7 +100,7 @@ is_enumeration(const meta_model::model& m, const meta_model::name& n) {
 bool resolver::
 is_object(const meta_model::model& m, const meta_model::name& n) {
 
-    auto i(m.objects().find(n.id()));
+    auto i(m.objects().find(n.qualified().dot()));
     if (i != m.objects().end()) {
         BOOST_LOG_SEV(lg, trace) << "Name belongs to an object in model.";
         return true;
@@ -111,7 +111,7 @@ is_object(const meta_model::model& m, const meta_model::name& n) {
 bool resolver::
 is_object_template(const meta_model::model& m, const meta_model::name& n) {
 
-    auto i(m.object_templates().find(n.id()));
+    auto i(m.object_templates().find(n.qualified().dot()));
     if (i != m.object_templates().end()) {
         BOOST_LOG_SEV(lg, trace) << "Name belongs to object_template in model.";
         return true;
@@ -123,7 +123,7 @@ bool resolver::
 is_name_referable(const indices& idx, const meta_model::name& n) {
     BOOST_LOG_SEV(lg, trace) << "Checking to see if name is referable:" << n;
 
-    const auto i(idx.elements_referable_by_attributes().find(n.id()));
+    const auto i(idx.elements_referable_by_attributes().find(n.qualified().dot()));
     if (i != idx.elements_referable_by_attributes().end())
         return true;
 
@@ -251,8 +251,9 @@ meta_model::name resolver::resolve_name_with_internal_modules(
     /*
      * The name cannot cannot be resolved.
      */
-    BOOST_LOG_SEV(lg, error) << undefined_type << n.id();
-    BOOST_THROW_EXCEPTION(resolution_error(undefined_type + n.id()));
+    const auto id(n.qualified().dot());
+    BOOST_LOG_SEV(lg, error) << undefined_type << id;
+    BOOST_THROW_EXCEPTION(resolution_error(undefined_type + id));
 }
 
 boost::optional<meta_model::name> resolver::
@@ -359,7 +360,7 @@ meta_model::name resolver::
 resolve_name(const meta_model::model& m, const indices& idx,
     const meta_model::name& ctx, const meta_model::name& n) {
 
-    BOOST_LOG_SEV(lg, trace) << "Resolving name: " << n.id();
+    BOOST_LOG_SEV(lg, trace) << "Resolving name: " << n.qualified().dot();
     BOOST_LOG_SEV(lg, trace) << "Initial state: " << n;
     BOOST_LOG_SEV(lg, trace) << "Context: " << ctx;
 
@@ -432,8 +433,9 @@ resolve_name(const meta_model::model& m, const indices& idx,
     /*
      * The name cannot cannot be resolved.
      */
-    BOOST_LOG_SEV(lg, error) << undefined_type << n.id();
-    BOOST_THROW_EXCEPTION(resolution_error(undefined_type + n.id()));
+    const auto id(n.qualified().dot());
+    BOOST_LOG_SEV(lg, error) << undefined_type << id;
+    BOOST_THROW_EXCEPTION(resolution_error(undefined_type + id));
 }
 
 void resolver::resolve_name_tree(const meta_model::model& m,
@@ -441,9 +443,9 @@ void resolver::resolve_name_tree(const meta_model::model& m,
     meta_model::name_tree& nt) {
 
     const meta_model::name n(resolve_name(m, idx, owner, nt.current()));
-
-    BOOST_LOG_SEV(lg, debug) << "Resolved name: " << nt.current().id()
-                             << " to: " << n.id();
+    BOOST_LOG_SEV(lg, debug) << "Resolved name: "
+                             << nt.current().qualified().dot()
+                             << " to: " << n.qualified().dot();
     nt.current(n);
     if (is_builtin(m, n)) {
         nt.is_current_simple_type(true);
@@ -451,11 +453,11 @@ void resolver::resolve_name_tree(const meta_model::model& m,
     } else
         nt.is_current_simple_type(is_enumeration(m, n));
 
-    const auto i(idx.objects_always_in_heap().find(n.id()));
+    const auto i(idx.objects_always_in_heap().find(n.qualified().dot()));
     nt.are_children_opaque(i != idx.objects_always_in_heap().end());
 
-    identifiable_and_qualified_builder iqb;
-    iqb.add(n);
+    fully_qualified_representation_builder b;
+    b.add(n);
 
     /*
      * Strictly speaking this is not directly related to
@@ -466,17 +468,16 @@ void resolver::resolve_name_tree(const meta_model::model& m,
     if (owner == nt.current()) {
         nt.is_circular_dependency(true);
         BOOST_LOG_SEV(lg, debug) << "Found circular dependency. Owner: "
-                                 << owner.id();
+                                 << owner.qualified().dot();
     }
 
     for (auto& c : nt.children()) {
         resolve_name_tree(m, idx, owner, c);
-        iqb.add(c);
+        b.add(c);
     }
 
-    const auto iq(iqb.build());
-    nt.identifiable(iq.first);
-    nt.qualified(iq.second);
+    const auto fqr(b.build());
+    nt.qualified(fqr);
 }
 
 void resolver::resolve_attribute(const meta_model::model& m,
@@ -494,7 +495,7 @@ void resolver::resolve_attribute(const meta_model::model& m,
                                  << attr.name().simple();
     } catch (boost::exception& e) {
         std::ostringstream s;
-        s << "Owner type name: " << owner.id()
+        s << "Owner type name: " << owner.qualified().dot()
           << " Attribute name: " << attr.name()
           << " Attribute type: " << attr.parsed_type();
         e << errmsg_info(s.str());
@@ -515,13 +516,14 @@ void resolver::validate_inheritance_graph(const meta_model::model& m,
     /*
      * Ensure that all parents and original parents exist as objects.
      */
-    const auto id(o.name().id());
+    const auto id(o.name().qualified().dot());
     for (const auto& pn : o.parents()) {
         if (is_object(m, pn))
             continue;
 
         std::ostringstream s;
-        s << orphan_object << ": " << id << ". Parent: " << pn.id();
+        s << orphan_object << ": " << id << ". Parent: "
+          << pn.qualified().dot();
 
         BOOST_LOG_SEV(lg, error) << s.str();
         BOOST_THROW_EXCEPTION(resolution_error(s.str()));
@@ -532,7 +534,8 @@ void resolver::validate_inheritance_graph(const meta_model::model& m,
             continue;
 
         std::ostringstream s;
-        s << orphan_object << ": " << id << ". Root parent: " << rp.id();
+        s << orphan_object << ": " << id << ". Root parent: "
+          << rp.qualified().dot();
 
         BOOST_LOG_SEV(lg, error) << s.str();
         BOOST_THROW_EXCEPTION(resolution_error(s.str()));
@@ -541,14 +544,14 @@ void resolver::validate_inheritance_graph(const meta_model::model& m,
 
 void resolver::validate_object_template_inheritance(
     const meta_model::model& m, const meta_model::object_template& otp) {
-    const auto id(otp.name().id());
+    const auto id(otp.name().qualified().dot());
     for (const auto& n : otp.parents()) {
         if (is_object_template(m, n))
             continue;
 
         std::ostringstream stream;
         stream << orphan_object_template << ". Object template: " << id
-               << ". Inherited object template: " << n.id();
+               << ". Inherited object template: " << n.qualified().dot();
 
         BOOST_LOG_SEV(lg, error) << stream.str();
         BOOST_THROW_EXCEPTION(resolution_error(stream.str()));
@@ -564,7 +567,7 @@ resolve_object_templates(const indices& idx, meta_model::model& m) {
         auto& otp(pair.second);
 
         BOOST_LOG_SEV(lg, trace) << "Resolving object template: "
-                                 << otp->name().id();
+                                 << otp->name().qualified().dot();
         resolve_attributes(m, idx, otp->name(), otp->local_attributes());
         validate_object_template_inheritance(m, *otp);
         BOOST_LOG_SEV(lg, trace) << "Resolved object template.";
@@ -580,7 +583,8 @@ void resolver::resolve_objects(const indices& idx, meta_model::model& m) {
     for (auto& pair : m.objects()) {
         auto& o(*pair.second);
 
-        BOOST_LOG_SEV(lg, trace) << "Resolving object: " << o.name().id();
+        BOOST_LOG_SEV(lg, trace) << "Resolving object: "
+                                 << o.name().qualified().dot();
         validate_inheritance_graph(m, o);
         resolve_attributes(m, idx, o.name(), o.local_attributes());
         BOOST_LOG_SEV(lg, trace) << "Resolved object.";
@@ -597,7 +601,8 @@ resolve_enumerations(const indices& idx, meta_model::model& m) {
     for (auto& pair : m.enumerations()) {
         auto& e(*pair.second);
 
-        BOOST_LOG_SEV(lg, trace) << "Resolving enumeration: " << e.name().id();
+        BOOST_LOG_SEV(lg, trace) << "Resolving enumeration: "
+                                 << e.name().qualified().dot();
 
         /*
          * If we're not relying on the underlying element, we don't
@@ -607,13 +612,14 @@ resolve_enumerations(const indices& idx, meta_model::model& m) {
             continue;
 
         const auto ue(e.underlying_element());
-        const auto ue_id(ue.id());
+        const auto ue_id(ue.qualified().dot());
         BOOST_LOG_SEV(lg, trace) << "Underlying element: '" << ue_id << "'";
 
         const auto i(idx.enumeration_underliers().find(ue_id));
         if (i == idx.enumeration_underliers().end()) {
             BOOST_LOG_SEV(lg, error) << invalid_underlying_type << ue_id
-                                     << " for enumeration: " << e.name().id();
+                                     << " for enumeration: "
+                                     << e.name().qualified().dot();
             BOOST_THROW_EXCEPTION(
                 resolution_error(invalid_underlying_type + ue_id));
         }
@@ -631,7 +637,8 @@ resolve_primitives(const indices& idx, meta_model::model& m) {
     for (auto& pair : m.primitives()) {
         auto& p(*pair.second);
 
-        BOOST_LOG_SEV(lg, trace) << "Resolving primitive: " << p.name().id();
+        BOOST_LOG_SEV(lg, trace) << "Resolving primitive: "
+                                 << p.name().qualified().dot();
 
         /*
          * We must resolve the attribute as well as validate it
@@ -641,11 +648,12 @@ resolve_primitives(const indices& idx, meta_model::model& m) {
         auto& attr(p.value_attribute());
         resolve_attribute(m, idx, p.name(), attr);
 
-        const auto& ue_id(attr.parsed_type().current().id());
+        const auto& ue_id(attr.parsed_type().current().qualified().dot());
         const auto i(idx.primitive_underliers().find(ue_id));
         if (i == idx.primitive_underliers().end()) {
             BOOST_LOG_SEV(lg, error) << invalid_underlying_type << ue_id
-                                     << " for primitive: " << p.name().id();
+                                     << " for primitive: "
+                                     << p.name().qualified().dot();
             BOOST_THROW_EXCEPTION(
                 resolution_error(invalid_underlying_type + ue_id));
         }
@@ -660,8 +668,8 @@ resolve(const meta_model::model& m, const indices& idx,
     const meta_model::name& ctx, const meta_model::name& n) {
 
     const auto r(resolve_name(m, idx, ctx, n));
-    BOOST_LOG_SEV(lg, trace) << "Resolved name: " << n.id()
-                             << " to: " << r.id();
+    BOOST_LOG_SEV(lg, trace) << "Resolved name: " << n.qualified().dot()
+                             << " to: " << r.qualified().dot();
     return r;
 }
 
@@ -685,7 +693,7 @@ try_resolve_object_template_name(meta_model::name ctx, const std::string& s,
 
     BOOST_LOG_SEV(lg, trace) << "Internal modules climb: " << r;
 
-    auto i(m.object_templates().find(r.id()));
+    auto i(m.object_templates().find(r.qualified().dot()));
     if (i != m.object_templates().end()) {
         BOOST_LOG_SEV(lg, trace) << "Found object template.";
         return r;
@@ -707,7 +715,7 @@ try_resolve_object_template_name(meta_model::name ctx, const std::string& s,
 
             BOOST_LOG_SEV(lg, trace) << "Internal modules climb: " << r;
 
-            i = m.object_templates().find(r.id());
+            i = m.object_templates().find(r.qualified().dot());
             if (i != m.object_templates().end()) {
                 BOOST_LOG_SEV(lg, trace) << "Found object templates.";
                 return r;
@@ -733,7 +741,8 @@ resolver::try_resolve_object_template_name(const meta_model::name& ctx,
 }
 
 void resolver::resolve(const indices& idx, meta_model::model& m) {
-    BOOST_LOG_SEV(lg, debug) << "Resolving model: " << m.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Resolving model: "
+                             << m.name().qualified().dot();
 
     resolve_object_templates(idx, m);
     resolve_objects(idx, m);

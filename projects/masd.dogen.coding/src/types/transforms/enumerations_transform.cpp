@@ -181,13 +181,14 @@ meta_model::name
 enumerations_transform::obtain_enumeration_default_underlying_element_name(
     const meta_model::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Obtaining default enumeration underlying "
-                             << "element name for model: " << em.name().id();
+                             << "element name for model: "
+                             << em.name().qualified().dot();
 
     meta_model::name r;
     bool found(false);
     for (const auto& pair : em.builtins()) {
         const auto b(*pair.second);
-        const auto id(b.name().id());
+        const auto id(b.name().qualified().dot());
         if (b.is_default_enumeration_type()) {
             BOOST_LOG_SEV(lg, debug) << "Found default enumeration underlying "
                                      << " element name:" << id;
@@ -203,7 +204,7 @@ enumerations_transform::obtain_enumeration_default_underlying_element_name(
     }
 
     if (!found) {
-        const auto id(em.name().id());
+        const auto id(em.name().qualified().dot());
         BOOST_LOG_SEV(lg, error) << missing_default << id;
         BOOST_THROW_EXCEPTION(transformation_error(missing_default + id));
     }
@@ -242,13 +243,14 @@ void enumerations_transform::expand_default_underlying_element(
     const meta_model::name& default_underlying_element_name,
     meta_model::enumeration& e) {
     const auto ue(e.underlying_element());
-    BOOST_LOG_SEV(lg, debug) << "Underlying type: '" << ue.id() << "'";
+    BOOST_LOG_SEV(lg, debug) << "Underlying type: '"
+                             << ue.qualified().dot() << "'";
 
     if (!ue.simple().empty())
         return;
 
     BOOST_LOG_SEV(lg, debug) << "Defaulting enumeration to type: "
-                             << default_underlying_element_name.id();
+                             << default_underlying_element_name.qualified().dot();
     e.underlying_element(default_underlying_element_name);
 }
 
@@ -304,7 +306,7 @@ void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
 void enumerations_transform::apply(const context& ctx,
     meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "enumerations transform",
-        transform_id, m.name().id(), *ctx.tracer(), m);
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     /*
      * If no enumerations exist, we can just exit. This means we can
