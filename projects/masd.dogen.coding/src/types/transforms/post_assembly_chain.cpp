@@ -22,7 +22,7 @@
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/helpers/indexer.hpp"
-#include "masd.dogen.coding/types/helpers/model_post_processing_validator.hpp"
+#include "masd.dogen.coding/types/helpers/post_assembly_validator.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/enumerations_transform.hpp"
 #include "masd.dogen.coding/types/transforms/generalization_transform.hpp"
@@ -128,7 +128,7 @@ void post_assembly_chain::apply(const context& ctx, meta_model::model& m) {
     /*
      * Ensure the model is valid.
      */
-    helpers::model_post_processing_validator::validate(idx, m);
+    helpers::post_assembly_validator::validate(idx, m);
 
     stp.end_chain(m);
 }

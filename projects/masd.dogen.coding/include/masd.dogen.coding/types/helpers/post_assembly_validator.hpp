@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_ENDOMODEL_POST_PROCESSING_VALIDATOR_HPP
-#define MASD_DOGEN_CODING_TYPES_HELPERS_ENDOMODEL_POST_PROCESSING_VALIDATOR_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_POST_ASSEMBLY_VALIDATOR_HPP
+#define MASD_DOGEN_CODING_TYPES_HELPERS_POST_ASSEMBLY_VALIDATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -38,7 +38,7 @@
 
 namespace masd::dogen::coding::helpers {
 
-class model_post_processing_validator final {
+class post_assembly_validator final {
 private:
     static bool allow_spaces_in_built_in_types(
         const meta_model::technical_space ts);

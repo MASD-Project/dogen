@@ -21,7 +21,7 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/io/meta_model/model_set_io.hpp"
-#include "masd.dogen.coding/types/helpers/model_pre_processing_validator.hpp"
+#include "masd.dogen.coding/types/helpers/pre_assembly_validator.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/modules_transform.hpp"
 #include "masd.dogen.coding/types/transforms/origin_transform.hpp"
@@ -70,7 +70,7 @@ void pre_assembly_chain::apply(const context& ctx, meta_model::model& m) {
     /*
      * Ensure the model is valid.
      */
-    helpers::model_pre_processing_validator::validate(m);
+    helpers::pre_assembly_validator::validate(m);
 }
 
 void pre_assembly_chain::apply(const context& ctx, meta_model::model_set& ms) {

@@ -1367,7 +1367,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "helpers::model_post_processing_validator",
+      "name": "helpers::post_assembly_validator",
       "stereotypes": [
         "masd::handcrafted"
       ],
@@ -1382,7 +1382,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "helpers::model_pre_processing_validator",
+      "name": "helpers::pre_assembly_validator",
       "stereotypes": [
         "masd::handcrafted"
       ],

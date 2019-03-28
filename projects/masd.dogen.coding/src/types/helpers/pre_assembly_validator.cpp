@@ -28,12 +28,12 @@
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
 #include "masd.dogen.coding/types/helpers/validation_error.hpp"
-#include "masd.dogen.coding/types/helpers/model_pre_processing_validator.hpp"
+#include "masd.dogen.coding/types/helpers/pre_assembly_validator.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("coding.helpers.model_pre_processing_validator"));
+auto lg(logger_factory("coding.helpers.pre_assembly_validator"));
 
 const std::string multiple_inheritance_not_supported(
     "Multiple inheritance is not supported on target models: ");
@@ -199,33 +199,34 @@ validate(const std::string& id, const meta_model::module& m) const {
     validate_name(id, m.in_global_module(), m.name());
 }
 
-void model_pre_processing_validator::
-validate(const meta_model::model& im) {
-    BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << im.name().qualified().dot();
+void pre_assembly_validator::
+validate(const meta_model::model& m) {
+    BOOST_LOG_SEV(lg, debug) << "Started validation. Model: "
+                             << m.name().qualified().dot();
 
     using meta_model::origin_types;
-    const bool ipr(im.origin_type() == origin_types::proxy_reference);
+    const bool ipr(m.origin_type() == origin_types::proxy_reference);
 
-    validator v(im.name(), ipr);
-    for (const auto& pair : im.modules())
+    validator v(m.name(), ipr);
+    for (const auto& pair : m.modules())
         v.validate(pair.first, *pair.second);
 
-    for (const auto& pair : im.object_templates())
+    for (const auto& pair : m.object_templates())
         v.validate(pair.first, *pair.second);
 
-    for (const auto& pair : im.builtins())
+    for (const auto& pair : m.builtins())
         v.validate(pair.first, *pair.second);
 
-    for (const auto& pair : im.enumerations())
+    for (const auto& pair : m.enumerations())
         v.validate(pair.first, *pair.second);
 
-    for (const auto& pair : im.objects())
+    for (const auto& pair : m.objects())
         v.validate(pair.first, *pair.second);
 
-    for (const auto& pair : im.exceptions())
+    for (const auto& pair : m.exceptions())
         v.validate(pair.first, *pair.second);
 
-    for (const auto& pair : im.visitors())
+    for (const auto& pair : m.visitors())
         v.validate(pair.first, *pair.second);
 
     BOOST_LOG_SEV(lg, debug) << "Finished validation.";

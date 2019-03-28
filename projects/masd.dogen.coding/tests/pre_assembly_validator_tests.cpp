@@ -31,12 +31,12 @@
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/helpers/validation_error.hpp"
 #include "masd.dogen.coding/test/mock_model_factory.hpp"
-#include "masd.dogen.coding/types/helpers/model_pre_processing_validator.hpp"
+#include "masd.dogen.coding/types/helpers/pre_assembly_validator.hpp"
 
 namespace {
 
 const std::string test_module("masd.dogen.coding.tests");
-const std::string test_suite("model_pre_processing_validator_tests");
+const std::string test_suite("pre_assembly_validator_tests");
 
 using masd::dogen::coding::test::mock_model_factory;
 const mock_model_factory::flags flags;
@@ -54,10 +54,10 @@ using masd::dogen::utility::test::contains_checker;
 using masd::dogen::coding::helpers::validation_error;
 using masd::dogen::coding::meta_model::origin_types;
 using masd::dogen::coding::meta_model::technical_space;
-using masd::dogen::coding::helpers::model_pre_processing_validator;
+using masd::dogen::coding::helpers::pre_assembly_validator;
 
 
-BOOST_AUTO_TEST_SUITE(model_pre_processing_validator_tests)
+BOOST_AUTO_TEST_SUITE(pre_assembly_validator_tests)
 
 BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
     SETUP_TEST_LOG_SOURCE("type_with_incorrect_model_name_throws");
@@ -71,7 +71,7 @@ BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
 
     contains_checker<validation_error> c(incorrect_model);
     BOOST_CHECK_EXCEPTION(
-        model_pre_processing_validator::validate(m), validation_error, c);
+        pre_assembly_validator::validate(m), validation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
@@ -81,14 +81,14 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
     auto m(factory.make_multi_type_model(0, 2, ot));
 
     using masd::dogen::coding::meta_model::fully_qualified_representation;
-    const fully_qualified_representation fqr(invalid_id, invalid_id, invalid_id);
+    const fully_qualified_representation
+        fqr(invalid_id, invalid_id, invalid_id);
     m.objects().begin()->second->name().qualified(fqr);
     m.input_technical_space(technical_space::cpp);
     BOOST_LOG_SEV(lg, debug) << "Model: " << m;
 
     contains_checker<validation_error> c(inconsistent_kvp);
-    BOOST_CHECK_EXCEPTION(
-        model_pre_processing_validator::validate(m), validation_error, c);
+    BOOST_CHECK_EXCEPTION(pre_assembly_validator::validate(m), validation_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
