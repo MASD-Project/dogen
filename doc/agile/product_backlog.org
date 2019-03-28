@@ -472,7 +472,7 @@ analysis on this.
 
 Notes:
 
-- [[http://json-schema.org/][JSON Schema]]
+- [[http://json-schema.org/][JSON Schema]], [[https://modeling-languages.com/jsonschema-uml-tool-generate-diagrams-json/][JSONSchema To UML]]
 - [[https://github.com/aspnet/Home/wiki/Project.json-file][Project.Json]]
 - yarn.dia.comment is no longer necessary, just look for the
   markers.
@@ -13664,6 +13664,8 @@ Links:
 
 - http://plantuml.com/sitemap-language-specification: specs
 - https://github.com/plantuml/plantuml
+- [[http://plantuml.com/class-diagram][Class Diagrams]]
+- [[https://github.com/skuro/plantuml-mode][plantuml-mode]]: emacs mode for plantuml.
 
 *** Code generation as a service                                       :epic:
 
@@ -13964,6 +13966,7 @@ See also:
 - [[https://github.com/tklab-tud/uscxml][uscxml]]
 - There are two possible implementations in boost: [[https://www.boost.org/doc/libs/1_67_0/libs/msm/doc/HTML/index.html][MSM]] and [[https://www.boost.org/doc/libs/1_67_0/libs/statechart/doc/index.html][StateChart]].
 - See ragel as well: http://www.colm.net/open-source/ragel/
+- [[https://github.com/josteink/wsd-mode][Web Sequence Diagrams emacs mode]]: not exactly directly related.
 
 *** Add reflection support by using model and type enums               :epic:
 
@@ -14143,3 +14146,11 @@ Notes:
   (changing makefile manually and then reverting the change).
 - there should be a way of passing in the database name as an
   environment variable into the CMake
+*** User interface generation                                          :epic:
+
+We have not really thought about it that deeply but it should be
+possible to use dogen to generate some basic UIs, for example for Wt.
+
+Links:
+
+- [[http://plantuml.com/salt][Salt]]: plantuml wireframe language.
