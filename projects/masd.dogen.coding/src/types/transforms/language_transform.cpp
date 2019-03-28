@@ -70,7 +70,7 @@ language_transform::type_group language_transform::
 make_type_group(const annotations::type_repository& atrp) {
     type_group r;
     const annotations::type_repository_selector s(atrp);
-    r.output_technical_space = s.select_type_by_name(traits::output_language());
+    r.output_technical_space = s.select_type_by_name(traits::output_technical_space());
     return r;
 }
 

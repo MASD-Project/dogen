@@ -47,8 +47,8 @@ std::string traits::overwrite() {
     return r;
 }
 
-std::string traits::output_language() {
-    static std::string r("masd.extraction.output_language");
+std::string traits::output_technical_space() {
+    static std::string r("masd.extraction.output_technical_space");
     return r;
 }
 
