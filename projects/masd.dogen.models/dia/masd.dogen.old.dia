@@ -1689,7 +1689,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
 
 #DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=masd.dogen
-#DOGEN masd.injection.input_language=cpp
+#DOGEN masd.injection.input_technical_space=cpp
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*

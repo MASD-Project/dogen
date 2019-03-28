@@ -507,7 +507,7 @@
             <dia:string>##DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=cpp_model
 #DOGEN masd.injection.external_modules=dogen::test_models
-#DOGEN masd.input_language=cpp
+#DOGEN masd.injection.input_technical_space=cpp
 #DOGEN masd.extraction.cpp.enabled=true
 #DOGEN masd.extraction.cpp.msbuild.enabled=false
 #DOGEN masd.extraction.cpp.visual_studio.project_guid=876B2828-8A0B-495F-8340-0357690162E4

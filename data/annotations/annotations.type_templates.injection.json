@@ -176,8 +176,8 @@
   },
   {
     "name": {
-      "simple": "input_language",
-      "qualified": "masd.injection.input_language"
+      "simple": "input_technical_space",
+      "qualified": "masd.injection.input_technical_space"
     },
     "archetype_location": {
       "kernel": "masd"

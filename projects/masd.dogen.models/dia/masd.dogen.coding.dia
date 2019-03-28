@@ -801,7 +801,7 @@ etc.).
 #DOGEN masd.injection.reference=masd.dogen.annotations
 #DOGEN masd.injection.reference=masd.dogen.tracing
 #DOGEN masd.injection.reference=masd.dogen.extraction
-#DOGEN masd.injection.input_language=cpp
+#DOGEN masd.injection.input_technical_space=cpp
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
@@ -29768,17 +29768,17 @@ separator is @e ;.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-155,-36.9"/>
+        <dia:point val="-155,-40.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-172.05,-37.7;-154.25,-33.5"/>
+        <dia:rectangle val="-172.05,-40.9;-154.25,-33.5"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-155,-36.9"/>
-        <dia:point val="-168,-36.9"/>
+        <dia:point val="-155,-40.1"/>
+        <dia:point val="-168,-40.1"/>
         <dia:point val="-168,-34.3"/>
         <dia:point val="-172,-34.3"/>
       </dia:attribute>
@@ -29797,7 +29797,7 @@ separator is @e ;.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O36" connection="34"/>
+        <dia:connection handle="0" to="O36" connection="26"/>
         <dia:connection handle="1" to="O33" connection="9"/>
       </dia:connections>
       <dia:childnode parent="O0"/>

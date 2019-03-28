@@ -1058,7 +1058,7 @@ size limitations.#</dia:string>
 
 #DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=masd.dogen
-#DOGEN masd.injection.input_language=cpp
+#DOGEN masd.injection.input_technical_space=cpp
 #DOGEN masd.injection.reference=cpp.builtins
 #DOGEN masd.injection.reference=cpp.std
 #DOGEN masd.injection.reference=cpp.boost

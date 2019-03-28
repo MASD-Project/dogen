@@ -270,7 +270,7 @@
             <dia:string>##DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=lam_model
 #DOGEN masd.injection.external_modules=dogen::test_models
-#DOGEN masd.input_language=language_agnostic
+#DOGEN masd.injection.input_technical_space=language_agnostic
 #DOGEN masd.extraction.output_language=cpp
 #DOGEN masd.extraction.output_language=csharp
 #DOGEN masd.extraction.cpp.enabled=true

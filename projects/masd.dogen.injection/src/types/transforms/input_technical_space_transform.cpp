@@ -29,11 +29,12 @@
 #include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/transformation_error.hpp"
-#include "masd.dogen.injection/types/transforms/input_language_transform.hpp"
+#include "masd.dogen.injection/types/transforms/input_technical_space_transform.hpp"
 
 namespace {
 
-const std::string transform_id("injection.transforms.input_language_transform");
+const std::string transform_id(
+    "injection.transforms.input_technical_space_transform");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -42,28 +43,29 @@ auto lg(logger_factory(transform_id));
 
 namespace masd::dogen::injection::transforms {
 
-input_language_transform::type_group input_language_transform::
+input_technical_space_transform::type_group input_technical_space_transform::
 make_type_group(const annotations::type_repository& atrp) {
     type_group r;
     const annotations::type_repository_selector s(atrp);
-    r.input_language = s.select_type_by_name(traits::input_language());
+    r.input_technical_space = s.select_type_by_name(traits::input_technical_space());
     return r;
 }
 
-std::string input_language_transform::make_input_language(const type_group& tg,
+std::string input_technical_space_transform::
+make_input_technical_space(const type_group& tg,
     const annotations::annotation& a) {
     const annotations::entry_selector s(a);
-    return s.get_text_content_or_default(tg.input_language);
+    return s.get_text_content_or_default(tg.input_technical_space);
 }
 
-void input_language_transform::
+void input_technical_space_transform::
 apply(const context& ctx, meta_model::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "language transform",
+    tracing::scoped_transform_tracer stp(lg, "technical space transform",
         transform_id, m.name(), *ctx.tracer(), m);
 
     const auto& tg(make_type_group(*ctx.type_repository()));
     const auto ra(m.annotation());
-    m.input_technical_space(make_input_language(tg, ra));
+    m.input_technical_space(make_input_technical_space(tg, ra));
 
     stp.end_transform(m);
 }

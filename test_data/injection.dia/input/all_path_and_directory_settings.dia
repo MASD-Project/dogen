@@ -273,7 +273,7 @@
 #DOGEN masd.injection.model_modules=all_path_and_directory_settings
 #DOGEN masd.injection.external_modules=dogen::test_models
 #DOGEN annotations.profile=dogen
-#DOGEN masd.input_language=language_agnostic
+#DOGEN masd.injection.input_technical_space=language_agnostic
 #DOGEN masd.extraction.output_language=cpp
 #DOGEN masd.extraction.output_language=csharp
 #DOGEN masd.extraction.cpp.enabled=true

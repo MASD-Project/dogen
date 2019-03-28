@@ -3,7 +3,7 @@
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "masd.dogen.injection",
-    "masd.injection.input_language": "cpp",
+    "masd.injection.input_technical_space": "cpp",
     "masd.injection.reference": "cpp.builtins",
     "masd.injection.reference": "cpp.std",
     "masd.injection.reference": "cpp.boost",
@@ -237,7 +237,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::input_language_transform",
+      "name": "transforms::input_technical_space_transform",
       "stereotypes": [
         "masd::handcrafted"
       ],

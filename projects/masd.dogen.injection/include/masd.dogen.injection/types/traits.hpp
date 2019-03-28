@@ -31,7 +31,7 @@ namespace masd::dogen::injection {
 
 class traits final {
 public:
-    static std::string input_language();
+    static std::string input_technical_space();
     static std::string reference();
 };
 

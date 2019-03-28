@@ -557,7 +557,7 @@ This is a remark.#</dia:string>
             <dia:string>##DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=CSharpModel
 #DOGEN masd.injection.external_modules=Dogen.TestModels
-#DOGEN masd.input_language=csharp
+#DOGEN masd.injection.input_technical_space=csharp
 #DOGEN masd.extraction.csharp.enabled=true
 #DOGEN masd.extraction.cpp.enabled=false
 #DOGEN masd.extraction.csharp.visual_studio.project_guid=9E645ACD-C04A-4734-AB23-C3FCC0F7981B

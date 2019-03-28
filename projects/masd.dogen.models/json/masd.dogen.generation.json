@@ -10,7 +10,7 @@
     "masd.injection.reference": "masd.dogen.tracing",
     "masd.injection.reference": "masd.dogen.coding",
     "masd.injection.reference": "masd.dogen.extraction",
-    "masd.injection.input_language": "cpp",
+    "masd.injection.input_technical_space": "cpp",
     "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
     "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
     "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",

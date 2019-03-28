@@ -3,7 +3,7 @@
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "lam_model",
     "masd.injection.external_modules": "dogen::test_models",
-    "masd.input_language": "language_agnostic",
+    "masd.injection.input_technical_space": "language_agnostic",
     "masd.extraction.output_language": "csharp",
     "masd.extraction.output_language": "cpp",
     "masd.extraction.cpp.enabled": "true",

@@ -293,7 +293,7 @@
             <dia:string>##DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=disable_all_kernels
 #DOGEN masd.injection.external_modules=dogen::test_models
-#DOGEN masd.input_language=cpp
+#DOGEN masd.injection.input_technical_space=cpp
 #DOGEN masd.extraction.cpp.enabled=false
 #DOGEN masd.extraction.csharp.enabled=false#</dia:string>
           </dia:attribute>

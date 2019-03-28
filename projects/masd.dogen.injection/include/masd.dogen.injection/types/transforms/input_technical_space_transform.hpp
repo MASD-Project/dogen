@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_INPUT_LANGUAGE_TRANSFORM_HPP
-#define MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_INPUT_LANGUAGE_TRANSFORM_HPP
+#ifndef MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_INPUT_TECHNICAL_SPACE_TRANSFORM_HPP
+#define MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_INPUT_TECHNICAL_SPACE_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,19 +34,19 @@
 namespace masd::dogen::injection::transforms {
 
 /**
- * @brief Reads the input language from the model.
+ * @brief Reads the input technical space from the model.
  *
  * @pre Annotations transform must have been applied.
  */
-class input_language_transform final {
+class input_technical_space_transform final {
 private:
     struct type_group {
-        annotations::type input_language;
+        annotations::type input_technical_space;
     };
 
     static type_group make_type_group(const annotations::type_repository& atrp);
 
-    static std::string make_input_language(const type_group& tg,
+    static std::string make_input_technical_space(const type_group& tg,
         const annotations::annotation& a);
 
 public:

@@ -22,7 +22,7 @@
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
-#include "masd.dogen.injection/types/transforms/input_language_transform.hpp"
+#include "masd.dogen.injection/types/transforms/input_technical_space_transform.hpp"
 #include "masd.dogen.injection/types/transforms/references_transform.hpp"
 #include "masd.dogen.injection/types/transforms/annotations_transform.hpp"
 #include "masd.dogen.injection/types/transforms/model_production_chain.hpp"
@@ -79,7 +79,7 @@ apply(const context& ctx, const boost::filesystem::path& p) {
     /*
      * Read the input language.
      */
-    input_language_transform::apply(ctx, r);
+    input_technical_space_transform::apply(ctx, r);
 
     /*
      * Read the model references.

@@ -2,7 +2,7 @@
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "masd.dogen.dia",
-    "masd.injection.input_language": "cpp",
+    "masd.injection.input_technical_space": "cpp",
     "masd.injection.reference": "cpp.builtins",
     "masd.injection.reference": "cpp.std",
     "masd.injection.reference": "cpp.boost",

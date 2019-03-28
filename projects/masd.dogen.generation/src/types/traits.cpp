@@ -47,38 +47,7 @@ std::string traits::overwrite() {
     return r;
 }
 
-std::string traits::input_language() {
-    static std::string r("yarn.input_language");
-    return r;
-}
-
-std::string traits::output_language() {
-    static std::string r("yarn.output_language");
-    return r;
-}
-
-std::string traits::is_proxy_model() {
-    static std::string r("yarn.is_proxy_model");
-    return r;
-}
-
-std::string traits::reference() {
-    static std::string r("yarn.reference");
-    return r;
-}
-
-std::string traits::external_modules() {
-    static std::string r("yarn.external_modules");
-    return r;
-}
-
-std::string traits::model_modules() {
-    static std::string r("yarn.model_modules");
-    return r;
-}
-
 std::string traits::enable_backend_directories() {
-    // FIXME: rename to yarn
     static std::string r("masd.enable_backend_directories");
     return r;
 }

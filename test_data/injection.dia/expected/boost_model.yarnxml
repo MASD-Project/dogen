@@ -19,7 +19,7 @@
 			<second>dogen::test_models</second>
 		</item>
 		<item>
-			<first>masd.input_language</first>
+			<first>masd.injection.input_technical_space</first>
 			<second>cpp</second>
 		</item>
 		<item>

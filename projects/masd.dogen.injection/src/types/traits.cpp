@@ -22,8 +22,8 @@
 
 namespace masd::dogen::injection {
 
-std::string traits::input_language() {
-    static std::string r("masd.injection.input_language");
+std::string traits::input_technical_space() {
+    static std::string r("masd.injection.input_technical_space");
     return r;
 }
 

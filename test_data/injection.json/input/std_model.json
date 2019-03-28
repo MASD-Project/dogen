@@ -3,7 +3,7 @@
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "std_model",
     "masd.injection.external_modules": "dogen::test_models",
-    "masd.input_language": "cpp",
+    "masd.injection.input_technical_space": "cpp",
     "masd.extraction.cpp.enabled": "true",
     "masd.extraction.cpp.msbuild.enabled": "false",
     "masd.extraction.cpp.visual_studio.project.enabled": "false",

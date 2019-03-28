@@ -5,7 +5,7 @@
     "masd.injection.model_modules": "all_path_and_directory_settings",
     "masd.injection.external_modules": "dogen::test_models",
     "annotations.profile": "dogen",
-    "masd.input_language": "language_agnostic",
+    "masd.injection.input_technical_space": "language_agnostic",
     "masd.extraction.output_language": "csharp",
     "masd.extraction.output_language": "cpp",
     "masd.extraction.cpp.enabled": "true",
