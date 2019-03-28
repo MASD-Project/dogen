@@ -13,22 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-28 Thu 12:01]
+#+CAPTION: Clock summary at [2019-03-28 Thu 12:06]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *20:47* |       |      | 100.0 |
+| *Total time*                                           | *20:52* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 20:47   |       |      | 100.0 |
-| Active                                                 |         | 20:47 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 1:47 |   8.6 |
-| Sprint and product backlog grooming                    |         |       | 2:34 |  12.3 |
+| Stories                                                | 20:52   |       |      | 100.0 |
+| Active                                                 |         | 20:52 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 1:47 |   8.5 |
+| Sprint and product backlog grooming                    |         |       | 2:39 |  12.7 |
 | Create a video demo for the previous sprint's features |         |       | 3:11 |  15.3 |
-| Fix issues with emacs                                  |         |       | 2:42 |  13.0 |
-| Create a basic "project plan"                          |         |       | 2:08 |  10.3 |
-| Simplify qualified name                                |         |       | 3:07 |  15.0 |
+| Fix issues with emacs                                  |         |       | 2:42 |  12.9 |
+| Create a basic "project plan"                          |         |       | 2:08 |  10.2 |
+| Simplify qualified name                                |         |       | 3:07 |  14.9 |
 | Promote extraction entities to meta-model elements     |         |       | 3:01 |  14.5 |
-| Rename "language" to "technical space"                 |         |       | 2:17 |  11.0 |
+| Rename "language" to "technical space"                 |         |       | 2:17 |  10.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -144,6 +144,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-03-28 Thu 12:01]--[2019-03-28 Thu 12:06] =>  0:05
     CLOCK: [2019-03-28 Thu 08:33]--[2019-03-28 Thu 09:16] =>  0:43
     CLOCK: [2019-03-27 Wed 11:11]--[2019-03-27 Wed 12:16] =>  1:05
     CLOCK: [2019-03-26 Tue 06:15]--[2019-03-26 Tue 06:52] =>  0:37
@@ -351,6 +352,12 @@ Tasks:
   element.
 -
 
+*** Make extraction model name a qualified name                       :story:
+
+At present we are setting up the extraction model name from the simple
+name of the model. It should really be the qualified name. Hopefully
+this will only affect tracing and diffing.
+
 *** Add support for decoration configuration overrides                :story:
 
 At present we have hard-coded the decoration configuration to be read
@@ -483,3 +490,49 @@ We are getting strange errors in cmake:
 the test data facet. No need for a special test.
 
 - test data
+*** CANCELLED Implement qualified name efficiently                    :story:
+    CLOSED: [2019-03-28 Thu 12:04]
+
+*Rationale*: changes around qualified name are good enough.
+
+We should move qualified names to quilt. We can create a simple map of
+id to qualified name and add that to the formattables model.
+
+In addition we are using a map instead of unordered map due to some
+weird differences when serialising (the yarn serialisation tests are
+failing for some reason). This needs to be investigated. We've added a
+patch: =change_qualified_to_unordered_map.patch=.
+
+*Previous Understanding*
+
+We used a =std::map= to store qualified names. In practice, we don't
+need something this expensive.
+
+- instead of mapping names to languages, we could map them to
+  "styles". There are only a few "styles" across all programming
+  languages (e.g. =.= separated, =::= separated and so on).
+- we can also create an array of these styles. We know up front how
+  many styles there are.
+- finally we can create a enumeration to access the array. At present
+  this is not possible because we cannot disable invalid, nor is it
+  possible to move it to a different position (e.g. last). Also we
+  will have to static cast the enum to access the int, which is not
+  very pretty.
+
+Once all of this is done we can simply do, at O(1):
+
+: name.qualified[static_cast<unsigned int>(styles::double_colon_separated_style)]
+
+We can prettify it a bit: [[http://stackoverflow.com/questions/8357240/how-to-automatically-convert-strongly-typed-enum-into-int][How to automatically convert strongly typed
+enum into int?]]
+
+: template <typename E>
+: constexpr typename std::underlying_type<E>::type to_underlying(E e) {
+:     return static_cast<typename std::underlying_type<E>::type>(e);
+: }
+:
+: std::cout << foo(to_underlying(b::B2)) << std::endl;
+
+Giving us:
+
+: name.qualified[to_underlying(styles::double_colon_separated_style)]

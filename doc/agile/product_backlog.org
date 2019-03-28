@@ -283,12 +283,6 @@ We could even expose it as an activity/command so that we could indent
 external files without going through conversion; this would be useful
 for library models.
 
-*** Make extraction model name a qualified name                       :story:
-
-At present we are setting up the extraction model name from the simple
-name of the model. It should really be the qualified name. Hopefully
-this will only affect tracing and diffing.
-
 *** Handcrafted templates                                             :story:
 
 At present we generate constructors, swap, etc. for handcrafted
@@ -5532,50 +5526,6 @@ the dumpers.
 With the introduction of assistants in C#, we now have overloaded the
 term. We need to find another name to refer to the formatting
 assistant in C++ so avoid confusion.
-
-*** Implement qualified name efficiently                              :story:
-
-We should move qualified names to quilt. We can create a simple map of
-id to qualified name and add that to the formattables model.
-
-In addition we are using a map instead of unordered map due to some
-weird differences when serialising (the yarn serialisation tests are
-failing for some reason). This needs to be investigated. We've added a
-patch: =change_qualified_to_unordered_map.patch=.
-
-*Previous Understanding*
-
-We used a =std::map= to store qualified names. In practice, we don't
-need something this expensive.
-
-- instead of mapping names to languages, we could map them to
-  "styles". There are only a few "styles" across all programming
-  languages (e.g. =.= separated, =::= separated and so on).
-- we can also create an array of these styles. We know up front how
-  many styles there are.
-- finally we can create a enumeration to access the array. At present
-  this is not possible because we cannot disable invalid, nor is it
-  possible to move it to a different position (e.g. last). Also we
-  will have to static cast the enum to access the int, which is not
-  very pretty.
-
-Once all of this is done we can simply do, at O(1):
-
-: name.qualified[static_cast<unsigned int>(styles::double_colon_separated_style)]
-
-We can prettify it a bit: [[http://stackoverflow.com/questions/8357240/how-to-automatically-convert-strongly-typed-enum-into-int][How to automatically convert strongly typed
-enum into int?]]
-
-: template <typename E>
-: constexpr typename std::underlying_type<E>::type to_underlying(E e) {
-:     return static_cast<typename std::underlying_type<E>::type>(e);
-: }
-:
-: std::cout << foo(to_underlying(b::B2)) << std::endl;
-
-Giving us:
-
-: name.qualified[to_underlying(styles::double_colon_separated_style)]
 
 *** Order of headers is hard-coded                                    :story:
 
