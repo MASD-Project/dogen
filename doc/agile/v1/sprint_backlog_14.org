@@ -13,23 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-29 Fri 11:06]
+#+CAPTION: Clock summary at [2019-03-29 Fri 11:38]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *27:11* |       |      | 100.0 |
+| *Total time*                                           | *27:41* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 27:11   |       |      | 100.0 |
-| Active                                                 |         | 27:11 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 1:47 |   6.6 |
-| Sprint and product backlog grooming                    |         |       | 2:39 |   9.7 |
-| Create a video demo for the previous sprint's features |         |       | 3:11 |  11.7 |
-| Fix issues with emacs                                  |         |       | 2:42 |   9.9 |
-| Create a basic "project plan"                          |         |       | 2:08 |   7.8 |
-| Simplify qualified name                                |         |       | 3:39 |  13.4 |
-| Rename "language" to "technical space"                 |         |       | 7:22 |  27.1 |
-| Add intrinsic technical space ownership                |         |       | 0:42 |   2.6 |
-| Promote extraction entities to meta-model elements     |         |       | 3:01 |  11.1 |
+| Stories                                                | 27:41   |       |      | 100.0 |
+| Active                                                 |         | 27:41 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 1:47 |   6.4 |
+| Sprint and product backlog grooming                    |         |       | 2:39 |   9.6 |
+| Create a video demo for the previous sprint's features |         |       | 3:11 |  11.5 |
+| Fix issues with emacs                                  |         |       | 2:42 |   9.8 |
+| Create a basic "project plan"                          |         |       | 2:08 |   7.7 |
+| Simplify qualified name                                |         |       | 3:39 |  13.2 |
+| Rename "language" to "technical space"                 |         |       | 7:22 |  26.6 |
+| Add intrinsic technical space ownership                |         |       | 1:12 |   4.3 |
+| Promote extraction entities to meta-model elements     |         |       | 3:01 |  10.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -274,8 +274,10 @@ Tasks:
 - modeline
 - extraction model
 
-*** STARTED Add intrinsic technical space ownership                   :story:
+*** COMPLETED Add intrinsic technical space ownership                 :story:
+    CLOSED: [2019-03-29 Fri 11:38]
     :LOGBOOK:
+    CLOCK: [2019-03-29 Fri 11:07]--[2019-03-29 Fri 11:37] =>  0:30
     CLOCK: [2019-03-29 Fri 10:55]--[2019-03-29 Fri 11:06] =>  0:11
     CLOCK: [2019-03-29 Fri 10:23]--[2019-03-29 Fri 10:54] =>  0:31
     :END:

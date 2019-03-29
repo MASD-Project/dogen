@@ -6427,7 +6427,8 @@ Notes:
 
 Links:
 
-- [[https://bitbucket.org/sobjectizerteam/json_dto-0.2/src/default/#markdown-header-what-is-json_dto][JSON DTO]]
+- [[https://bitbucket.org/sobjectizerteam/json_dto-0.2/src/default/#markdown-header-what-is-json_dto][JSON DTO]]: "json_dto library is a small header-only helper for
+  converting data between json representation and c++ structs."
 - [[https://github.com/Tencent/rapidjson][RapidJSON]]
 - [[https://github.com/nlohmann/json][JSON]]
 - [[https://github.com/open-source-parsers/jsoncpp][JSON CPP]]
