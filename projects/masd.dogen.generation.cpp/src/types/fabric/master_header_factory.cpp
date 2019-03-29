@@ -51,6 +51,9 @@ const std::string formatter_not_found_for_type(
 
 namespace masd::dogen::generation::cpp::fabric {
 
+using coding::meta_model::origin_types;
+using coding::meta_model::technical_space;
+
 namespace {
 
 class generator final : public coding::meta_model::element_visitor {
@@ -112,7 +115,8 @@ generator::create_master_header(const coding::meta_model::name& model_name) {
     coding::helpers::name_factory f;
     r->name(f.build_element_in_model(model_name, master_header_name));
     r->meta_name(meta_name_factory::make_master_header_name());
-    r->origin_type(coding::meta_model::origin_types::target);
+    r->origin_type(origin_types::target);
+    r->intrinsic_technical_space(technical_space::cpp);
     return r;
 }
 
@@ -155,7 +159,7 @@ generator::filter_file_formatters_by_meta_name(
 }
 
 void generator::process_element(const coding::meta_model::element& e) {
-    if (e.origin_type() != coding::meta_model::origin_types::target)
+    if (e.origin_type() != origin_types::target)
         return;
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: "

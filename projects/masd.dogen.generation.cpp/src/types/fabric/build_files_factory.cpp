@@ -42,6 +42,9 @@ const std::string msbuild_targets_name("msbuild_targets");
 
 namespace masd::dogen::generation::cpp::fabric {
 
+using coding::meta_model::origin_types;
+using coding::meta_model::technical_space;
+
 boost::shared_ptr<coding::meta_model::element> build_files_factory::
 make_cmakelists(const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating CMakeLists.";
@@ -51,7 +54,8 @@ make_cmakelists(const generation::meta_model::model& m) const {
     auto r(boost::make_shared<cmakelists>());
     r->name(n);
     r->meta_name(meta_name_factory::make_cmakelists_name());
-    r->origin_type(coding::meta_model::origin_types::target);
+    r->origin_type(origin_types::target);
+    r->intrinsic_technical_space(technical_space::cmake);
 
     BOOST_LOG_SEV(lg, debug) << "Generated CMakeLists.";
     return r;
@@ -66,7 +70,8 @@ make_msbuild_targets(const generation::meta_model::model& m) const {
     auto r(boost::make_shared<msbuild_targets>());
     r->name(n);
     r->meta_name(meta_name_factory::make_msbuild_targets_name());
-    r->origin_type(coding::meta_model::origin_types::target);
+    r->origin_type(origin_types::target);
+    r->intrinsic_technical_space(technical_space::xml);
 
     BOOST_LOG_SEV(lg, debug) << "Generated MSBuild Targets.";
     return r;

@@ -37,6 +37,9 @@ const std::string module_name("Properties");
 
 namespace masd::dogen::generation::csharp::fabric {
 
+using coding::meta_model::origin_types;
+using coding::meta_model::technical_space;
+
 boost::shared_ptr<coding::meta_model::element> assembly_info_factory::
 make(const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Assembly Info.";
@@ -48,7 +51,8 @@ make(const generation::meta_model::model& m) const {
     auto r(boost::make_shared<assembly_info>());
     r->name(n);
     r->meta_name(meta_name_factory::make_assembly_info_name());
-    r->origin_type(coding::meta_model::origin_types::target);
+    r->origin_type(origin_types::target);
+    r->intrinsic_technical_space(technical_space::csharp);
 
     BOOST_LOG_SEV(lg, debug) << "Generated Assembly Info.";
     return r;

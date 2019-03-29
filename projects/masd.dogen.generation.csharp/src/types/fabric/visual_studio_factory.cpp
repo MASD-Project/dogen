@@ -46,6 +46,9 @@ const std::string sln_extension(".sln");
 
 namespace masd::dogen::generation::csharp::fabric {
 
+using coding::meta_model::origin_types;
+using coding::meta_model::technical_space;
+
 visual_studio_factory::type_group visual_studio_factory::make_type_group(
     const annotations::type_repository& atrp) const {
 
@@ -109,7 +112,8 @@ make_solution(const visual_studio_configuration cfg,
     auto r(boost::make_shared<visual_studio_solution>());
     r->name(n);
     r->meta_name(meta_name_factory::make_visual_studio_solution_name());
-    r->origin_type(coding::meta_model::origin_types::target);
+    r->origin_type(origin_types::target);
+    r->intrinsic_technical_space(technical_space::sln);
     r->project_name(project_name);
     r->project_guid(cfg.project_guid());
     r->project_solution_guid(cfg.project_solution_guid());
@@ -132,7 +136,8 @@ make_project(const visual_studio_configuration cfg,
     auto r(boost::make_shared<visual_studio_project>());
     r->name(n);
     r->meta_name(meta_name_factory::make_visual_studio_project_name());
-    r->origin_type(coding::meta_model::origin_types::target);
+    r->origin_type(origin_types::target);
+    r->intrinsic_technical_space(technical_space::xml);
     r->project_name(project_name);
     r->project_guid(cfg.project_guid());
 

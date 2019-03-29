@@ -32,6 +32,9 @@ const std::string assistant_name("Assistant");
 
 namespace masd::dogen::generation::csharp::fabric {
 
+using coding::meta_model::origin_types;
+using coding::meta_model::technical_space;
+
 boost::shared_ptr<coding::meta_model::element>
 assistant_factory::make(const generation::meta_model::model& m) const {
     coding::helpers::name_factory nf;
@@ -40,7 +43,8 @@ assistant_factory::make(const generation::meta_model::model& m) const {
     auto r(boost::make_shared<assistant>());
     r->name(n);
     r->meta_name(meta_name_factory::make_assistant_name());
-    r->origin_type(coding::meta_model::origin_types::target);
+    r->origin_type(origin_types::target);
+    r->intrinsic_technical_space(technical_space::csharp);
 
     return r;
 }

@@ -42,6 +42,9 @@ const std::string common_odb_options_name("common");
 
 namespace masd::dogen::generation::cpp::fabric {
 
+using coding::meta_model::origin_types;
+using coding::meta_model::technical_space;
+
 boost::shared_ptr<coding::meta_model::element> odb_options_factory::
 make(const coding::meta_model::name& n,
     const coding::meta_model::origin_types& ot,
@@ -55,6 +58,7 @@ make(const coding::meta_model::name& n,
     r->origin_type(ot);
     r->annotation(a);
     r->is_element_extension(true);
+    r->intrinsic_technical_space(technical_space::odb);
     return r;
 }
 
@@ -62,7 +66,6 @@ std::list<boost::shared_ptr<coding::meta_model::element>>
 odb_options_factory::make(const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating ODB Options.";
 
-    using coding::meta_model::origin_types;
     std::list<boost::shared_ptr<coding::meta_model::element>> r;
     for (const auto& ptr : m.elements()) {
         /*
@@ -109,6 +112,7 @@ odb_options_factory::make(const generation::meta_model::model& m) const {
     coo->name(n);
     coo->meta_name(meta_name_factory::make_common_odb_options_name());
     coo->origin_type(origin_types::target);
+    coo->intrinsic_technical_space(technical_space::odb);
     r.push_back(coo);
 
     BOOST_LOG_SEV(lg, debug) << "Generated ODB Options.";

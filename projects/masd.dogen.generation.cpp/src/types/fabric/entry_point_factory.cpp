@@ -35,6 +35,9 @@ const std::string simple_name("entry_point");
 
 namespace masd::dogen::generation::cpp::fabric {
 
+using coding::meta_model::origin_types;
+using coding::meta_model::technical_space;
+
 boost::shared_ptr<fabric::entry_point> entry_point_factory::
 make(const coding::meta_model::name& model_name) const {
     coding::helpers::name_factory nf;
@@ -42,17 +45,17 @@ make(const coding::meta_model::name& model_name) const {
     auto r(boost::make_shared<entry_point>());
     r->name(n);
     r->meta_name(meta_name_factory::make_entry_point_name());
+    r->origin_type(origin_types::target);
+    r->intrinsic_technical_space(technical_space::agnostic);
+
     return r;
 }
-
 
 boost::shared_ptr<coding::meta_model::element> entry_point_factory::
 make(const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating entry point.";
 
-    auto r(make(m.name()));
-    using coding::meta_model::origin_types;
-    r->origin_type(origin_types::target);
+    const auto r(make(m.name()));
 
     BOOST_LOG_SEV(lg, debug) << "Finished generating entry point.";
     return r;

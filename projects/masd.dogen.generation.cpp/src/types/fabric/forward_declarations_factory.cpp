@@ -41,6 +41,8 @@ lg(logger_factory("generation.cpp.fabric.forward_declarations_factory"));
 
 namespace masd::dogen::generation::cpp::fabric {
 
+using coding::meta_model::technical_space;
+
 class generator final : public coding::meta_model::element_visitor {
 private:
     template<typename Element>
@@ -51,6 +53,7 @@ private:
         r->origin_type(e.origin_type());
         r->annotation(e.annotation());
         r->is_element_extension(true);
+        r->intrinsic_technical_space(technical_space::cpp);
         return r;
     }
 
@@ -68,6 +71,7 @@ public:
         const auto fd(create(e));
         fd->is_enum(true);
         fd->underlying_element(e.underlying_element());
+        fd->intrinsic_technical_space(technical_space::cpp);
         result_.push_back(fd);
     }
 
@@ -82,6 +86,7 @@ public:
     void visit(coding::meta_model::exception& e) {
         const auto fd(create(e));
         fd->is_exception(true);
+        fd->intrinsic_technical_space(technical_space::cpp);
         result_.push_back(fd);
     }
 
