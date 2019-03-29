@@ -126,7 +126,7 @@
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.decoration.modeline.editor=emacs
 #DOGEN masd.decoration.modeline.location=top
-#DOGEN masd.decoration.modeline.language=cpp
+#DOGEN masd.decoration.modeline.technical_space=cpp
 #DOGEN masd.decoration.modeline.element=masd::coding::meta_model::object
 #DOGEN masd.decoration.modeline.element=masd::coding::meta_model::enumeration#</dia:string>
       </dia:attribute>
@@ -2283,8 +2283,8 @@
 This model is not intended to be generated. If generated,
 should not produce any output.
 
-You should be able to reference this model from any language;
-keep it language agnostic.
+You should be able to reference this model from any technical space;
+keep it technical space agnostic.
 
 #DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=masd

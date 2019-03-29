@@ -109,8 +109,8 @@
   },
   {
     "name": {
-      "simple": "language",
-      "qualified": "masd.decoration.modeline.language"
+      "simple": "technical_space",
+      "qualified": "masd.decoration.modeline.technical_space"
     },
     "archetype_location": {
       "kernel": "formatters"
