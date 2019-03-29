@@ -2283,8 +2283,8 @@
 This model is not intended to be generated. If generated,
 should not produce any output.
 
-You should be able to reference this model from any technical space;
-keep it technical space agnostic.
+You should be able to reference this model from any technical
+space; keep it technical space agnostic.
 
 #DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=masd
@@ -2312,13 +2312,13 @@ keep it technical space agnostic.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="44,-7"/>
+        <dia:point val="44,-8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.95,-7.05;55.715,-2.55"/>
+        <dia:rectangle val="43.95,-8.05;55.715,-3.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="44,-7"/>
+        <dia:point val="44,-8"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="11.665000000000001"/>
@@ -2684,13 +2684,13 @@ permissions and limitations under the License.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O14">
       <dia:attribute name="obj_pos">
-        <dia:point val="44,-21"/>
+        <dia:point val="44,-22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.95,-21.05;55.715,-16.55"/>
+        <dia:rectangle val="43.95,-22.05;55.715,-17.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="44,-21"/>
+        <dia:point val="44,-22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="11.665000000000001"/>
@@ -2868,13 +2868,13 @@ DEALINGS IN THE SOFTWARE.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O15">
       <dia:attribute name="obj_pos">
-        <dia:point val="29,-14"/>
+        <dia:point val="29,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.95,-14.05;40.715,-9.55"/>
+        <dia:rectangle val="28.95,-15.05;40.715,-10.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="29,-14"/>
+        <dia:point val="29,-15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="11.665000000000001"/>
@@ -3376,13 +3376,13 @@ Public License instead of this License.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O16">
       <dia:attribute name="obj_pos">
-        <dia:point val="44,-14"/>
+        <dia:point val="44,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.95,-14.05;55.715,-9.55"/>
+        <dia:rectangle val="43.95,-15.05;55.715,-10.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="44,-14"/>
+        <dia:point val="44,-15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="11.665000000000001"/>
@@ -4225,13 +4225,13 @@ Public License instead of this License.  But first, please read
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O17">
       <dia:attribute name="obj_pos">
-        <dia:point val="29,-7"/>
+        <dia:point val="29,-8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.95,-7.05;40.715,-2.55"/>
+        <dia:rectangle val="28.95,-8.05;40.715,-3.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="29,-7"/>
+        <dia:point val="29,-8"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="11.665000000000001"/>
@@ -4402,13 +4402,13 @@ obtained from the copyright holder.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O18">
       <dia:attribute name="obj_pos">
-        <dia:point val="59,-14"/>
+        <dia:point val="59,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.95,-14.05;74.565,-8.75"/>
+        <dia:rectangle val="58.95,-15.05;74.565,-9.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="59,-14"/>
+        <dia:point val="59,-15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -4582,13 +4582,13 @@ obtained from the copyright holder.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O19">
       <dia:attribute name="obj_pos">
-        <dia:point val="59,-21"/>
+        <dia:point val="59,-22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.95,-21.05;74.565,-16.55"/>
+        <dia:rectangle val="58.95,-22.05;74.565,-17.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="59,-21"/>
+        <dia:point val="59,-22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -4739,13 +4739,13 @@ obtained from the copyright holder.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O20">
       <dia:attribute name="obj_pos">
-        <dia:point val="59,-7"/>
+        <dia:point val="59,-8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.95,-7.05;74.565,-1.75"/>
+        <dia:rectangle val="58.95,-8.05;74.565,-2.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="59,-7"/>
+        <dia:point val="59,-8"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -4919,13 +4919,13 @@ obtained from the copyright holder.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O21">
       <dia:attribute name="obj_pos">
-        <dia:point val="29,-21"/>
+        <dia:point val="29,-22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.95,-21.05;40.715,-16.55"/>
+        <dia:rectangle val="28.95,-22.05;40.715,-17.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="29,-21"/>
+        <dia:point val="29,-22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="11.665000000000001"/>
