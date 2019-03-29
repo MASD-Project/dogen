@@ -2288,7 +2288,7 @@ keep it language agnostic.
 
 #DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=masd
-#DOGEN masd.injection.input_technical_space=language_agnostic
+#DOGEN masd.injection.input_technical_space=agnostic
 #DOGEN masd.generation.cpp.enabled=false
 #DOGEN masd.generation.csharp.enabled=false#</dia:string>
           </dia:attribute>

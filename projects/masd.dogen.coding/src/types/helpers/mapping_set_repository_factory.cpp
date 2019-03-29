@@ -129,7 +129,7 @@ void mapping_set_repository_factory::populate_mapping_set(
             }
 
             const auto n(*mv.default_name());
-            insert(lam_id, n, l, ms.by_language_agnostic_id());
+            insert(lam_id, n, l, ms.by_agnostic_id());
         }
     }
 }

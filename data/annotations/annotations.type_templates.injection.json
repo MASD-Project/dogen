@@ -185,7 +185,7 @@
     "value_type": "text",
     "template_kind": "instance",
     "scope": "root_module",
-    "default_value": "language_agnostic"
+    "default_value": "agnostic"
   },
   {
     "name": {

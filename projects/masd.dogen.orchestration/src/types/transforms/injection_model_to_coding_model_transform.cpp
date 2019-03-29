@@ -60,7 +60,7 @@ static logger lg(logger_factory(transform_id));
 
 const std::string cpp_technical_space("cpp");
 const std::string csharp_technical_space("csharp");
-const std::string agnostic_technical_space("language_agnostic");
+const std::string agnostic_technical_space("agnostic");
 
 const std::string duplicate_element("Element id already exists: ");
 const std::string missing_model_modules("Must supply model modules.");
@@ -110,7 +110,7 @@ coding::meta_model::technical_space to_technical_space(const std::string& s) {
     else if (s == csharp_technical_space)
         return technical_space::csharp;
     else if (s == agnostic_technical_space)
-        return technical_space::language_agnostic;
+        return technical_space::agnostic;
 
     BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;
     BOOST_THROW_EXCEPTION(transform_exception(unsupported_technical_space + s));

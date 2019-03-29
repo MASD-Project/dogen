@@ -51,7 +51,7 @@ const std::string erase_mapping_action("erase");
 
 const std::string cpp_technical_space("cpp");
 const std::string csharp_technical_space("csharp");
-const std::string la_technical_space("language_agnostic");
+const std::string agnostic_technical_space("agnostic");
 
 const std::string invalid_json_file("Failed to parse JSON file");
 const std::string invalid_option_in_json_file(
@@ -88,8 +88,8 @@ mappings_hydrator::to_technical_space(const std::string& s) const {
         return meta_model::technical_space::cpp;
     else if (s == csharp_technical_space)
         return meta_model::technical_space::csharp;
-    else if (s == la_technical_space)
-        return meta_model::technical_space::language_agnostic;
+    else if (s == agnostic_technical_space)
+        return meta_model::technical_space::agnostic;
 
     BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;
     BOOST_THROW_EXCEPTION(hydration_error(unsupported_technical_space + s));

@@ -872,15 +872,15 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
+          "name": "agnostic",
+          "type": ""
+        },
+        {
           "name": "cpp",
           "type": ""
         },
         {
           "name": "csharp",
-          "type": ""
-        },
-        {
-          "name": "language_agnostic",
           "type": ""
         },
         {
@@ -1487,7 +1487,7 @@
           "type": "std::string"
         },
         {
-          "name": "by_language_agnostic_id",
+          "name": "by_agnostic_id",
           "type": "std::unordered_map<meta_model::technical_space, std::unordered_map<std::string, meta_model::name>>"
         },
         {

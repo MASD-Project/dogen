@@ -78,8 +78,8 @@ const std::unordered_map<std::string, meta_model::name>&
 mapper::translations_for_technical_space(const mapping_set& ms,
     const meta_model::technical_space from,
     const meta_model::technical_space to) const {
-    if (from == meta_model::technical_space::language_agnostic) {
-        const auto& blai(ms.by_language_agnostic_id());
+    if (from == meta_model::technical_space::agnostic) {
+        const auto& blai(ms.by_agnostic_id());
         const auto i(blai.find(to));
         if (i != blai.end())
             return i->second;
@@ -104,7 +104,7 @@ mapper::injections_for_technical_space(const mapping_set& ms,
     if (ts != cpp)
         return r;
 
-    const auto& blai(ms.by_language_agnostic_id());
+    const auto& blai(ms.by_agnostic_id());
     const auto i(blai.find(cpp));
     if (i == blai.end()) {
         const auto s(boost::lexical_cast<std::string>(cpp));
@@ -216,7 +216,7 @@ void mapper::map_attributes(const mapping_context& mc,
 
 bool mapper::is_mappable(const meta_model::technical_space from,
     const meta_model::technical_space to) {
-    return from == to || from == meta_model::technical_space::language_agnostic;
+    return from == to || from == meta_model::technical_space::agnostic;
 }
 
 meta_model::model mapper::map(const meta_model::technical_space from,

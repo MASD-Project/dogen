@@ -41,7 +41,7 @@ auto lg(logger_factory(transform_id));
 
 const std::string cpp_technical_space("cpp");
 const std::string csharp_technical_space("csharp");
-const std::string agnostic_technical_space("language_agnostic");
+const std::string agnostic_technical_space("agnostic");
 
 const std::string technical_space_not_set("Input technical space must be set.");
 const std::string unsupported_technical_space(
@@ -59,7 +59,7 @@ technical_space_transform::to_technical_space(const std::string& s) {
     else if (s == csharp_technical_space)
         return technical_space::csharp;
     else if (s == agnostic_technical_space)
-        return technical_space::language_agnostic;
+        return technical_space::agnostic;
 
     BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;
     BOOST_THROW_EXCEPTION(

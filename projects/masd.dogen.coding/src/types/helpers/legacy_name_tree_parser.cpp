@@ -118,7 +118,7 @@ struct grammar : qi::grammar<Iterator> {
         switch (ts) {
         case technical_space::csharp: return ".";
         case technical_space::cpp:
-        case technical_space::language_agnostic: return "::";
+        case technical_space::agnostic: return "::";
         default: {
             const auto s(boost::lexical_cast<std::string>(ts));
             BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;

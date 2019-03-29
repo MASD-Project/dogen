@@ -106,7 +106,7 @@ std::ostream& operator<<(std::ostream& s, const mapping_set& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::coding::helpers::mapping_set\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"by_language_agnostic_id\": " << v.by_language_agnostic_id() << ", "
+      << "\"by_agnostic_id\": " << v.by_agnostic_id() << ", "
       << "\"erasures_by_language\": " << v.erasures_by_language()
       << " }";
     return(s);

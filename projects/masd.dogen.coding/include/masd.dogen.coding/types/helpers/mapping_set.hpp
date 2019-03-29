@@ -49,7 +49,7 @@ public:
 public:
     mapping_set(
         const std::string& name,
-        const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> >& by_language_agnostic_id,
+        const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> >& by_agnostic_id,
         const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >& erasures_by_language);
 
 public:
@@ -58,10 +58,10 @@ public:
     void name(const std::string& v);
     void name(const std::string&& v);
 
-    const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> >& by_language_agnostic_id() const;
-    std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> >& by_language_agnostic_id();
-    void by_language_agnostic_id(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> >& v);
-    void by_language_agnostic_id(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> >&& v);
+    const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> >& by_agnostic_id() const;
+    std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> >& by_agnostic_id();
+    void by_agnostic_id(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> >& v);
+    void by_agnostic_id(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> >&& v);
 
     const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >& erasures_by_language() const;
     std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >& erasures_by_language();
@@ -80,7 +80,7 @@ public:
 
 private:
     std::string name_;
-    std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> > by_language_agnostic_id_;
+    std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> > by_agnostic_id_;
     std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> > erasures_by_language_;
 };
 

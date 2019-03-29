@@ -32,9 +32,9 @@ namespace masd::dogen::coding::meta_model {
  */
 enum class technical_space : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
-    cpp = 1,
-    csharp = 2,
-    language_agnostic = 3,
+    agnostic = 1,
+    cpp = 2,
+    csharp = 3,
     cmake = 4,
     xml = 5,
     odb = 6

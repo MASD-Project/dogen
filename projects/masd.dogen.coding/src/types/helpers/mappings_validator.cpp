@@ -50,7 +50,7 @@ validate(const meta_model::technical_space ts, const mapping_value& mv) const {
     /*
      * Cannot map LAM to LAM.
      */
-    if (ts == meta_model::technical_space::language_agnostic) {
+    if (ts == meta_model::technical_space::agnostic) {
         BOOST_LOG_SEV(lg, error) << invalid_language;
         BOOST_THROW_EXCEPTION(validation_error(invalid_lam_id));
     }

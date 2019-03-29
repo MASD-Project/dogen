@@ -33,14 +33,14 @@ std::ostream& operator<<(std::ostream& s, const technical_space& v) {
     case technical_space::invalid:
         attr = "\"invalid\"";
         break;
+    case technical_space::agnostic:
+        attr = "\"agnostic\"";
+        break;
     case technical_space::cpp:
         attr = "\"cpp\"";
         break;
     case technical_space::csharp:
         attr = "\"csharp\"";
-        break;
-    case technical_space::language_agnostic:
-        attr = "\"language_agnostic\"";
         break;
     case technical_space::cmake:
         attr = "\"cmake\"";
