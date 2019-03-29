@@ -28,6 +28,7 @@
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/types/meta_model/elements_traversal.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
 #include "masd.dogen.coding/types/transforms/technical_space_transform.hpp"
@@ -51,9 +52,10 @@ const std::string unsupported_technical_space(
 
 namespace masd::dogen::coding::transforms {
 
+using meta_model::technical_space;
+
 meta_model::technical_space
 technical_space_transform::to_technical_space(const std::string& s) {
-    using meta_model::technical_space;
     if (s == cpp_technical_space)
         return technical_space::cpp;
     else if (s == csharp_technical_space)
@@ -92,9 +94,23 @@ technical_space_transform::make_output_technical_space(const type_group& tg,
 }
 
 void technical_space_transform::
+setup_intrinsic_technical_space(meta_model::model& m) {
+    meta_model::elements_traversal(m,
+        [](meta_model::element& e) {
+            e.intrinsic_technical_space(technical_space::agnostic);
+        });
+}
+
+void technical_space_transform::
 apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "technical space transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+
+    /*
+     * Update the intrinsic technical space on all modeling elements
+     * available thus far.
+     */
+    setup_intrinsic_technical_space(m);
 
     /*
      * Ensure the input technical space has been set by now.

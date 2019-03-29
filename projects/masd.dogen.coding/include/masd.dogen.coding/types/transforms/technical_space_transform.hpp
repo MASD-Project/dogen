@@ -35,6 +35,10 @@
 
 namespace masd::dogen::coding::transforms {
 
+/**
+ * @brief Updates the technical space fields of the model and its
+ * elements.
+ */
 class technical_space_transform final {
 private:
     static meta_model::technical_space to_technical_space(const std::string& s);
@@ -49,6 +53,12 @@ private:
     static std::list<meta_model::technical_space>
     make_output_technical_space(const type_group& tg,
         const annotations::annotation& a);
+
+    /**
+     * @brief Sets up the intrinsic technical space for all model
+     * elements.
+     */
+    static void setup_intrinsic_technical_space(meta_model::model& m);
 
 public:
     static void apply(const context& ctx, meta_model::model& m);
