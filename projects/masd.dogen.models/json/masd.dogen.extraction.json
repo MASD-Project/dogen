@@ -1,5 +1,5 @@
 {
-  "documentation": "Provides the basic extraction primitives.\n\nThis model is the repository of all extraction related code which is\nnot language specific. Language-specific models can then make use of\nit.\n",
+  "documentation": "Provides the basic extraction primitives.\n\nThis model is the repository of all extraction related code which is\nnot technical space specific.\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "masd.dogen.extraction",
@@ -638,8 +638,9 @@
           "type": "std::string"
         },
         {
-          "name": "language",
-          "type": "std::string"
+          "name": "technical_space",
+          "type": "std::string",
+          "documentation": "Primary technical space that this model belongs to.\n"
         },
         {
           "name": "artefacts",

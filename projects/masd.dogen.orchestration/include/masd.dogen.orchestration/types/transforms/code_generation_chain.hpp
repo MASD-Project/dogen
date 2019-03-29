@@ -32,7 +32,7 @@ namespace masd::dogen::orchestration::transforms {
 
 /**
  * @brief Responsible for transforming a high-level representation of
- * a domain into code, in one or more programming languages.
+ * a domain into code, in one or more primary technical spaces.
  *
  * The model which one intends to transform is known as the @e target
  * model. The transform starts by invoking the correct front-end to

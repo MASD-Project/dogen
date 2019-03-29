@@ -46,7 +46,7 @@ public:
     model(
         const masd::dogen::annotations::annotation& annotation,
         const std::string& name,
-        const std::string& language,
+        const std::string& technical_space,
         const std::list<masd::dogen::extraction::meta_model::artefact>& artefacts,
         const std::list<boost::filesystem::path>& managed_directories,
         const masd::dogen::extraction::meta_model::outputting_properties& outputting_properties);
@@ -67,10 +67,15 @@ public:
     void name(const std::string& v);
     void name(const std::string&& v);
 
-    const std::string& language() const;
-    std::string& language();
-    void language(const std::string& v);
-    void language(const std::string&& v);
+    /**
+     * @brief Primary technical space that this model belongs to.
+     */
+    /**@{*/
+    const std::string& technical_space() const;
+    std::string& technical_space();
+    void technical_space(const std::string& v);
+    void technical_space(const std::string&& v);
+    /**@}*/
 
     const std::list<masd::dogen::extraction::meta_model::artefact>& artefacts() const;
     std::list<masd::dogen::extraction::meta_model::artefact>& artefacts();
@@ -100,7 +105,7 @@ public:
 private:
     masd::dogen::annotations::annotation annotation_;
     std::string name_;
-    std::string language_;
+    std::string technical_space_;
     std::list<masd::dogen::extraction::meta_model::artefact> artefacts_;
     std::list<boost::filesystem::path> managed_directories_;
     masd::dogen::extraction::meta_model::outputting_properties outputting_properties_;

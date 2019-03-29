@@ -80,7 +80,7 @@ void model_generator::
 populate(const unsigned int position, result_type& v) {
     v.annotation(create_masd_dogen_annotations_annotation(position + 0));
     v.name(create_std_string(position + 1));
-    v.language(create_std_string(position + 2));
+    v.technical_space(create_std_string(position + 2));
     v.artefacts(create_std_list_masd_dogen_extraction_meta_model_artefact(position + 3));
     v.managed_directories(create_std_list_boost_filesystem_path(position + 4));
     v.outputting_properties(create_masd_dogen_extraction_meta_model_outputting_properties(position + 5));

@@ -25,13 +25,13 @@ namespace masd::dogen::extraction::meta_model {
 model::model(
     const masd::dogen::annotations::annotation& annotation,
     const std::string& name,
-    const std::string& language,
+    const std::string& technical_space,
     const std::list<masd::dogen::extraction::meta_model::artefact>& artefacts,
     const std::list<boost::filesystem::path>& managed_directories,
     const masd::dogen::extraction::meta_model::outputting_properties& outputting_properties)
     : annotation_(annotation),
       name_(name),
-      language_(language),
+      technical_space_(technical_space),
       artefacts_(artefacts),
       managed_directories_(managed_directories),
       outputting_properties_(outputting_properties) { }
@@ -40,7 +40,7 @@ void model::swap(model& other) noexcept {
     using std::swap;
     swap(annotation_, other.annotation_);
     swap(name_, other.name_);
-    swap(language_, other.language_);
+    swap(technical_space_, other.technical_space_);
     swap(artefacts_, other.artefacts_);
     swap(managed_directories_, other.managed_directories_);
     swap(outputting_properties_, other.outputting_properties_);
@@ -49,7 +49,7 @@ void model::swap(model& other) noexcept {
 bool model::operator==(const model& rhs) const {
     return annotation_ == rhs.annotation_ &&
         name_ == rhs.name_ &&
-        language_ == rhs.language_ &&
+        technical_space_ == rhs.technical_space_ &&
         artefacts_ == rhs.artefacts_ &&
         managed_directories_ == rhs.managed_directories_ &&
         outputting_properties_ == rhs.outputting_properties_;
@@ -93,20 +93,20 @@ void model::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-const std::string& model::language() const {
-    return language_;
+const std::string& model::technical_space() const {
+    return technical_space_;
 }
 
-std::string& model::language() {
-    return language_;
+std::string& model::technical_space() {
+    return technical_space_;
 }
 
-void model::language(const std::string& v) {
-    language_ = v;
+void model::technical_space(const std::string& v) {
+    technical_space_ = v;
 }
 
-void model::language(const std::string&& v) {
-    language_ = std::move(v);
+void model::technical_space(const std::string&& v) {
+    technical_space_ = std::move(v);
 }
 
 const std::list<masd::dogen::extraction::meta_model::artefact>& model::artefacts() const {

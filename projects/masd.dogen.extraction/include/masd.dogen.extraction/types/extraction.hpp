@@ -29,8 +29,7 @@
  * @brief Provides the basic extraction primitives.
  *
  * This model is the repository of all extraction related code which is
- * not language specific. Language-specific models can then make use of
- * it.
+ * not technical space specific.
  */
 namespace masd::dogen::extraction {
 }

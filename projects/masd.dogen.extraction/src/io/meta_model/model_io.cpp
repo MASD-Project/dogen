@@ -68,7 +68,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"__type__\": " << "\"masd::dogen::extraction::meta_model::model\"" << ", "
       << "\"annotation\": " << v.annotation() << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"language\": " << "\"" << tidy_up_string(v.language()) << "\"" << ", "
+      << "\"technical_space\": " << "\"" << tidy_up_string(v.technical_space()) << "\"" << ", "
       << "\"artefacts\": " << v.artefacts() << ", "
       << "\"managed_directories\": " << v.managed_directories() << ", "
       << "\"outputting_properties\": " << v.outputting_properties()
