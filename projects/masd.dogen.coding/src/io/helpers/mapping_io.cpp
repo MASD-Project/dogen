@@ -55,8 +55,8 @@ namespace masd::dogen::coding::helpers {
 std::ostream& operator<<(std::ostream& s, const mapping& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::coding::helpers::mapping\"" << ", "
-      << "\"lam_id\": " << "\"" << tidy_up_string(v.lam_id()) << "\"" << ", "
-      << "\"by_language\": " << v.by_language()
+      << "\"agnostic_id\": " << "\"" << tidy_up_string(v.agnostic_id()) << "\"" << ", "
+      << "\"by_technical_space\": " << v.by_technical_space()
       << " }";
     return(s);
 }

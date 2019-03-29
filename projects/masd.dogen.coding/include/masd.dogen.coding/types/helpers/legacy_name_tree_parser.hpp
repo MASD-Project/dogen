@@ -43,10 +43,9 @@ public:
     /**
      * @brief Initialises the parser.
      *
-     * @param language what programming language syntax to use.
+     * @param ts what technical space syntax to use.
      */
-    explicit legacy_name_tree_parser(
-        const meta_model::technical_space ts);
+    explicit legacy_name_tree_parser(const meta_model::technical_space ts);
 
 public:
     /**

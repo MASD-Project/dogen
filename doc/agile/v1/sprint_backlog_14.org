@@ -13,22 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-29 Fri 09:45]
+#+CAPTION: Clock summary at [2019-03-29 Fri 10:02]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *25:55* |       |      | 100.0 |
+| *Total time*                                           | *26:11* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 25:55   |       |      | 100.0 |
-| Active                                                 |         | 25:55 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 1:47 |   6.9 |
-| Sprint and product backlog grooming                    |         |       | 2:39 |  10.2 |
-| Create a video demo for the previous sprint's features |         |       | 3:11 |  12.3 |
-| Fix issues with emacs                                  |         |       | 2:42 |  10.4 |
-| Create a basic "project plan"                          |         |       | 2:08 |   8.2 |
-| Simplify qualified name                                |         |       | 3:39 |  14.1 |
-| Rename "language" to "technical space"                 |         |       | 6:48 |  26.2 |
-| Promote extraction entities to meta-model elements     |         |       | 3:01 |  11.6 |
+| Stories                                                | 26:11   |       |      | 100.0 |
+| Active                                                 |         | 26:11 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 1:47 |   6.8 |
+| Sprint and product backlog grooming                    |         |       | 2:39 |  10.1 |
+| Create a video demo for the previous sprint's features |         |       | 3:11 |  12.2 |
+| Fix issues with emacs                                  |         |       | 2:42 |  10.3 |
+| Create a basic "project plan"                          |         |       | 2:08 |   8.1 |
+| Simplify qualified name                                |         |       | 3:39 |  13.9 |
+| Rename "language" to "technical space"                 |         |       | 7:04 |  27.0 |
+| Promote extraction entities to meta-model elements     |         |       | 3:01 |  11.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -226,6 +226,7 @@ It seems we get errors in serialisation when using the map.
 
 *** STARTED Rename "language" to "technical space"                    :story:
     :LOGBOOK:
+    CLOCK: [2019-03-29 Fri 09:46]--[2019-03-29 Fri 10:02] =>  0:16
     CLOCK: [2019-03-29 Fri 09:28]--[2019-03-29 Fri 09:45] =>  0:17
     CLOCK: [2019-03-29 Fri 09:16]--[2019-03-29 Fri 09:27] =>  0:11
     CLOCK: [2019-03-29 Fri 09:04]--[2019-03-29 Fri 09:15] =>  0:11

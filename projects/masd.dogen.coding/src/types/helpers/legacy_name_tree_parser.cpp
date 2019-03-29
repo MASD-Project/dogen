@@ -43,7 +43,8 @@ namespace {
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory("coding.helpers.legacy_name_tree_parser"));
 
-const std::string unsupported_technical_space("Invalid or unsupported language: ");
+const std::string unsupported_technical_space(
+    "Invalid or unsupported technical space: ");
 const std::string error_msg("Failed to parse string: ");
 using namespace boost::spirit;
 
@@ -114,7 +115,7 @@ struct grammar : qi::grammar<Iterator> {
         end_template_ = std::bind(&grammar::end_template, this);
     }
 
-    std::string scope_operator_for_language(const technical_space ts) {
+    std::string scope_operator_for_technical_space(const technical_space ts) {
         switch (ts) {
         case technical_space::csharp: return ".";
         case technical_space::cpp:
@@ -145,7 +146,7 @@ struct grammar : qi::grammar<Iterator> {
         alphanum = boost::spirit::qi::alnum | string("_");
         nondigit = boost::spirit::qi::alpha | string("_");
         name %= lexeme[nondigit >> *(alphanum)];
-        scope_operator = scope_operator_for_language(ts);
+        scope_operator = scope_operator_for_technical_space(ts);
 
         name_tree = name[add_name_tree_]
             >> *(scope_operator >> name[add_name_tree_]);

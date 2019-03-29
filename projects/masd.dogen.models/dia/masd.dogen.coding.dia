@@ -770,7 +770,7 @@ C++ pointers, references and so on.#</dia:string>
 
 Coding is a meta-model that strives to provide a technical-space agnostic
 type representation, designed for code generation. Injection models
-are obtained via frontends and processed until they form a cohesive 
+are obtained via frontends and processed until they form a cohesive
 whole. They are then suitable to be sent down the pipeline for further
 processing.
 
@@ -782,7 +782,7 @@ Coding's objectives are:
 of technical spaces used in software engineering. These entities
 are not necessarily limited to programming entities, though, of course,
 these form the core set of elements we're interested in. Additional
-entities such as build sytems and high-level patterns such as GoF 
+entities such as build sytems and high-level patterns such as GoF
 and others are also captured.
 
 @li to provide the tooling required to combine multiple coding
@@ -11401,10 +11401,10 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#l#</dia:string>
+                <dia:string>#ts#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#languages#</dia:string>
+                <dia:string>#meta_model::technical_space#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -17983,7 +17983,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#from#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#languages#</dia:string>
+                <dia:string>#meta_model::technical_space#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -18000,7 +18000,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
                 <dia:string>#to#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#languages#</dia:string>
+                <dia:string>#meta_model::technical_space#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -18386,8 +18386,8 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Consistent unit of mapping that can be used to translate a model from a language to
-another.#</dia:string>
+        <dia:string>#Consistent unit of mapping that can be used to translate a model from one technical
+space to another.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -18516,7 +18516,7 @@ another.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#erasures_by_language#</dia:string>
+            <dia:string>#erasures_by_technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_map&lt;meta_model::technical_space, std::unordered_set&lt;std::string&gt;&gt;#</dia:string>
@@ -19081,13 +19081,13 @@ another.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O141">
       <dia:attribute name="obj_pos">
-        <dia:point val="71,38"/>
+        <dia:point val="78,37"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="70.95,37.95;88.875,41.65"/>
+        <dia:rectangle val="77.95,36.95;95.875,40.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="71,38"/>
+        <dia:point val="78,37"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.824999999999999"/>
@@ -19241,16 +19241,16 @@ another.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O142">
       <dia:attribute name="obj_pos">
-        <dia:point val="44,48"/>
+        <dia:point val="42,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.95,47.95;73.81,51.65"/>
+        <dia:rectangle val="41.95,47.95;74.505,51.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="44,48"/>
+        <dia:point val="42,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="29.760000000000002"/>
+        <dia:real val="32.454999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -19262,7 +19262,8 @@ another.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Stores the mapping of a key (the element id) to its values, organised by language.#</dia:string>
+        <dia:string>#Stores the mapping of a key (the element id) to its values, organised by technical
+space.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -19345,7 +19346,7 @@ another.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#lam_id#</dia:string>
+            <dia:string>#agnostic_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -19354,7 +19355,7 @@ another.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Language agnostic ID of the element we're mapping from.#</dia:string>
+            <dia:string>#Technical space agnostic ID of the element we're mapping from.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -19368,7 +19369,7 @@ another.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#by_language#</dia:string>
+            <dia:string>#by_technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_map&lt;meta_model::technical_space, mapping_value&gt;#</dia:string>
@@ -19435,19 +19436,19 @@ another.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="73.76,48"/>
+        <dia:point val="74.455,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="73.01,41.55;80.1125,48.8"/>
+        <dia:rectangle val="73.705,40.55;87.1125,48.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="73.76,48"/>
-        <dia:point val="73.76,46"/>
-        <dia:point val="79.9125,46"/>
-        <dia:point val="79.9125,41.6"/>
+        <dia:point val="74.455,48"/>
+        <dia:point val="74.455,46"/>
+        <dia:point val="86.9125,46"/>
+        <dia:point val="86.9125,40.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -19629,13 +19630,13 @@ another.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O145">
       <dia:attribute name="obj_pos">
-        <dia:point val="76,48"/>
+        <dia:point val="78,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="75.95,47.95;84.635,52.45"/>
+        <dia:rectangle val="77.95,47.95;86.635,52.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="76,48"/>
+        <dia:point val="78,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.5849999999999991"/>
@@ -19823,17 +19824,17 @@ another.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="58.88,51.6"/>
+        <dia:point val="58.2275,51.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,50.85;59.63,59.8"/>
+        <dia:rectangle val="49.95,50.85;58.9775,59.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="58.88,51.6"/>
-        <dia:point val="58.88,56"/>
+        <dia:point val="58.2275,51.6"/>
+        <dia:point val="58.2275,56"/>
         <dia:point val="50,56"/>
         <dia:point val="50,59"/>
       </dia:attribute>
@@ -20055,17 +20056,17 @@ another.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="44,48"/>
+        <dia:point val="42,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="26.135,45.2;44.75,48.8"/>
+        <dia:rectangle val="26.135,45.2;42.75,48.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="44,48"/>
-        <dia:point val="44,46"/>
+        <dia:point val="42,48"/>
+        <dia:point val="42,46"/>
         <dia:point val="26.185,46"/>
         <dia:point val="26.185,48"/>
       </dia:attribute>
@@ -20313,7 +20314,7 @@ another.#</dia:string>
         <dia:point val="68.98,59"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="68.23,52.3993;80.4925,59.8"/>
+        <dia:rectangle val="68.23,52.3993;82.4925,59.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20321,8 +20322,8 @@ another.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="68.98,59"/>
         <dia:point val="68.98,56"/>
-        <dia:point val="80.2925,56"/>
-        <dia:point val="80.2925,52.4493"/>
+        <dia:point val="82.2925,56"/>
+        <dia:point val="82.2925,52.4493"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -20385,7 +20386,7 @@ another.#</dia:string>
         <dia:point val="51.26,42.4493"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.51,41.6993;59.08,48.8"/>
+        <dia:rectangle val="50.51,41.6993;58.4275,48.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20393,8 +20394,8 @@ another.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="51.26,42.4493"/>
         <dia:point val="51.26,46"/>
-        <dia:point val="58.88,46"/>
-        <dia:point val="58.88,48"/>
+        <dia:point val="58.2275,46"/>
+        <dia:point val="58.2275,48"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -20589,7 +20590,7 @@ another.#</dia:string>
                 <dia:string>#to#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#languages#</dia:string>
+                <dia:string>#meta_model::technical_space#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

@@ -23,20 +23,20 @@
 namespace masd::dogen::coding::helpers {
 
 mapping::mapping(
-    const std::string& lam_id,
-    const std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>& by_language)
-    : lam_id_(lam_id),
-      by_language_(by_language) { }
+    const std::string& agnostic_id,
+    const std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>& by_technical_space)
+    : agnostic_id_(agnostic_id),
+      by_technical_space_(by_technical_space) { }
 
 void mapping::swap(mapping& other) noexcept {
     using std::swap;
-    swap(lam_id_, other.lam_id_);
-    swap(by_language_, other.by_language_);
+    swap(agnostic_id_, other.agnostic_id_);
+    swap(by_technical_space_, other.by_technical_space_);
 }
 
 bool mapping::operator==(const mapping& rhs) const {
-    return lam_id_ == rhs.lam_id_ &&
-        by_language_ == rhs.by_language_;
+    return agnostic_id_ == rhs.agnostic_id_ &&
+        by_technical_space_ == rhs.by_technical_space_;
 }
 
 mapping& mapping::operator=(mapping other) {
@@ -45,36 +45,36 @@ mapping& mapping::operator=(mapping other) {
     return *this;
 }
 
-const std::string& mapping::lam_id() const {
-    return lam_id_;
+const std::string& mapping::agnostic_id() const {
+    return agnostic_id_;
 }
 
-std::string& mapping::lam_id() {
-    return lam_id_;
+std::string& mapping::agnostic_id() {
+    return agnostic_id_;
 }
 
-void mapping::lam_id(const std::string& v) {
-    lam_id_ = v;
+void mapping::agnostic_id(const std::string& v) {
+    agnostic_id_ = v;
 }
 
-void mapping::lam_id(const std::string&& v) {
-    lam_id_ = std::move(v);
+void mapping::agnostic_id(const std::string&& v) {
+    agnostic_id_ = std::move(v);
 }
 
-const std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>& mapping::by_language() const {
-    return by_language_;
+const std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>& mapping::by_technical_space() const {
+    return by_technical_space_;
 }
 
-std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>& mapping::by_language() {
-    return by_language_;
+std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>& mapping::by_technical_space() {
+    return by_technical_space_;
 }
 
-void mapping::by_language(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>& v) {
-    by_language_ = v;
+void mapping::by_technical_space(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>& v) {
+    by_technical_space_ = v;
 }
 
-void mapping::by_language(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>&& v) {
-    by_language_ = std::move(v);
+void mapping::by_technical_space(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>&& v) {
+    by_technical_space_ = std::move(v);
 }
 
 }

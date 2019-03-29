@@ -36,7 +36,7 @@ using namespace masd::dogen::utility::log;
 auto lg(logger_factory("coding.helpers.mapping_hydrator"));
 
 const std::string empty;
-const std::string lam_id_key("lam_id");
+const std::string agnostic_id_key("lam_id");
 const std::string technical_space_key("technical_space");
 const std::string names_by_technical_space_key("names_by_technical_space");
 const std::string default_name_key("default_name");
@@ -151,14 +151,14 @@ mappings_hydrator::read_stream(std::istream& s) const {
 
     for (auto i(pt.begin()); i != pt.end(); ++i) {
         mapping m;
-        m.lam_id(i->second.get<std::string>(lam_id_key));
+        m.agnostic_id(i->second.get<std::string>(agnostic_id_key));
 
         const auto j(i->second.find(names_by_technical_space_key));
         if (j == i->second.not_found() || j->second.empty()) {
             BOOST_LOG_SEV(lg, error) << missing_names;
             BOOST_THROW_EXCEPTION(hydration_error(missing_names));
         }
-        m.by_language(read_mapping_values(j->second));
+        m.by_technical_space(read_mapping_values(j->second));
         r.push_back(m);
     }
 

@@ -31,11 +31,11 @@ auto lg(logger_factory("coding.helpers.mappings_validator"));
 
 const std::string default_mapping_set_name("default.mapping_set");
 
-const std::string invalid_lam_id("LAM ID is not valid: ");
+const std::string invalid_agnostic_id("Agnostic ID is not valid: ");
 const std::string empty_mapping_set("Mapping set has no entries: ");
 const std::string missing_default_mapping_set(
     "Could not find the default mapping set: " + default_mapping_set_name);
-const std::string invalid_language("Cannot map language agnostic to itself.");
+const std::string invalid_technical_space("Cannot map agnostic to itself.");
 const std::string missing_default_value(
     "Default value must be supplied when translating.");
 const std::string unexpected_default_value(
@@ -48,11 +48,11 @@ namespace masd::dogen::coding::helpers {
 void mappings_validator::
 validate(const meta_model::technical_space ts, const mapping_value& mv) const {
     /*
-     * Cannot map LAM to LAM.
+     * Cannot map agnostic technical space to itself.
      */
     if (ts == meta_model::technical_space::agnostic) {
-        BOOST_LOG_SEV(lg, error) << invalid_language;
-        BOOST_THROW_EXCEPTION(validation_error(invalid_lam_id));
+        BOOST_LOG_SEV(lg, error) << invalid_technical_space;
+        BOOST_THROW_EXCEPTION(validation_error(invalid_agnostic_id));
     }
 
     /*
@@ -77,18 +77,18 @@ validate(const meta_model::technical_space ts, const mapping_value& mv) const {
 void mappings_validator::validate(const mapping& m) const {
     BOOST_LOG_SEV(lg, trace) << "Started validating mapping.";
 
-    const auto lam_id(m.lam_id());
-    BOOST_LOG_SEV(lg, trace) << "Validating LAM ID: " << lam_id;
+    const auto id(m.agnostic_id());
+    BOOST_LOG_SEV(lg, trace) << "Validating agnostic ID: " << id;
 
     /*
-     * LAM ID must not be empty.
+     * Agnostic ID must not be empty.
      */
-    if (lam_id.empty()) {
-        BOOST_LOG_SEV(lg, error) << invalid_lam_id << lam_id;
-        BOOST_THROW_EXCEPTION(validation_error(invalid_lam_id + lam_id));
+    if (id.empty()) {
+        BOOST_LOG_SEV(lg, error) << invalid_agnostic_id << id;
+        BOOST_THROW_EXCEPTION(validation_error(invalid_agnostic_id + id));
     }
 
-    for (const auto& pair : m.by_language())
+    for (const auto& pair : m.by_technical_space())
         validate(pair.first, pair.second);
 
     BOOST_LOG_SEV(lg, trace) << "Finished validating mapping.";

@@ -137,8 +137,8 @@ mapping_context mapper::create_mapping_context(const mapping_set& ms,
     r.translations(translations_for_technical_space(ms, from, to));
     r.injections(injections_for_technical_space(ms, to, m));
 
-    const auto i(ms.erasures_by_language().find(to));
-    if (i != ms.erasures_by_language().end())
+    const auto i(ms.erasures_by_technical_space().find(to));
+    if (i != ms.erasures_by_technical_space().end())
         r.erasures(i->second);
 
     return r;
@@ -152,8 +152,8 @@ meta_model::name_tree mapper::walk_name_tree(const mapping_context& mc,
          * We need to erase this type from the name tree. We do this
          * by skipping it. Note that, for erasures, only one child is
          * permitted. An erasure is required, for example, for
-         * language agnostic pointers in technical_space where all objects
-         * are pointers anyway (such as C#).
+         * technical space agnostic pointers in technical_space where
+         * all objects are pointers anyway (such as C#).
          */
         if (nt.children().size() != 1) {
             BOOST_LOG_SEV(lg, error) << unexpected_number_of__children

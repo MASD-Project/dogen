@@ -36,8 +36,8 @@
 namespace masd::dogen::coding::helpers {
 
 /**
- * @brief Consistent unit of mapping that can be used to translate a model from a language to
- * another.
+ * @brief Consistent unit of mapping that can be used to translate a model from one technical
+ * space to another.
  */
 class mapping_set final {
 public:
@@ -50,7 +50,7 @@ public:
     mapping_set(
         const std::string& name,
         const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> >& by_agnostic_id,
-        const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >& erasures_by_language);
+        const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >& erasures_by_technical_space);
 
 public:
     const std::string& name() const;
@@ -63,10 +63,10 @@ public:
     void by_agnostic_id(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> >& v);
     void by_agnostic_id(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> >&& v);
 
-    const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >& erasures_by_language() const;
-    std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >& erasures_by_language();
-    void erasures_by_language(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >& v);
-    void erasures_by_language(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >&& v);
+    const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >& erasures_by_technical_space() const;
+    std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >& erasures_by_technical_space();
+    void erasures_by_technical_space(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >& v);
+    void erasures_by_technical_space(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >&& v);
 
 public:
     bool operator==(const mapping_set& rhs) const;
@@ -81,7 +81,7 @@ public:
 private:
     std::string name_;
     std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> > by_agnostic_id_;
-    std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> > erasures_by_language_;
+    std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> > erasures_by_technical_space_;
 };
 
 }

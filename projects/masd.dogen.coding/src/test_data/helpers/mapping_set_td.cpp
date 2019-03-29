@@ -83,7 +83,7 @@ void mapping_set_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
     v.by_agnostic_id(create_std_unordered_map_masd_dogen_coding_meta_model_technical_space_std_unordered_map_std_string_masd_dogen_coding_meta_model_name(position + 1));
-    v.erasures_by_language(create_std_unordered_map_masd_dogen_coding_meta_model_technical_space_std_unordered_set_std_string(position + 2));
+    v.erasures_by_technical_space(create_std_unordered_map_masd_dogen_coding_meta_model_technical_space_std_unordered_set_std_string(position + 2));
 }
 
 mapping_set_generator::result_type

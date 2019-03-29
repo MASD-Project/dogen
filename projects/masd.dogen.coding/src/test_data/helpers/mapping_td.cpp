@@ -57,8 +57,8 @@ mapping_generator::mapping_generator() : position_(0) { }
 
 void mapping_generator::
 populate(const unsigned int position, result_type& v) {
-    v.lam_id(create_std_string(position + 0));
-    v.by_language(create_std_unordered_map_masd_dogen_coding_meta_model_technical_space_masd_dogen_coding_helpers_mapping_value(position + 1));
+    v.agnostic_id(create_std_string(position + 0));
+    v.by_technical_space(create_std_unordered_map_masd_dogen_coding_meta_model_technical_space_masd_dogen_coding_helpers_mapping_value(position + 1));
 }
 
 mapping_generator::result_type

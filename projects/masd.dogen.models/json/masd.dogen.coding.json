@@ -1,5 +1,5 @@
 {
-  "documentation": "Coding is the core Dogen meta-model representing software entities.\n\n@section coding_0 Overview\n\nCoding is a meta-model that strives to provide a technical-space agnostic\ntype representation, designed for code generation. Injection models\nare obtained via frontends and processed until they form a cohesive \nwhole. They are then suitable to be sent down the pipeline for further\nprocessing.\n\n@section coding_1 Mission\n\nCoding's objectives are:\n\n@li to represent all high-level entities that exist across a number\nof technical spaces used in software engineering. These entities\nare not necessarily limited to programming entities, though, of course,\nthese form the core set of elements we're interested in. Additional\nentities such as build sytems and high-level patterns such as GoF \nand others are also captured.\n\n@li to provide the tooling required to combine multiple coding\nmodels together into a bigger model - called the @e merged model.\n\n@li to ensure the consistency of the merged model via validation\nrules (such as verifying that all types have a definitions,\netc.).\n",
+  "documentation": "Coding is the core Dogen meta-model representing software entities.\n\n@section coding_0 Overview\n\nCoding is a meta-model that strives to provide a technical-space agnostic\ntype representation, designed for code generation. Injection models\nare obtained via frontends and processed until they form a cohesive\nwhole. They are then suitable to be sent down the pipeline for further\nprocessing.\n\n@section coding_1 Mission\n\nCoding's objectives are:\n\n@li to represent all high-level entities that exist across a number\nof technical spaces used in software engineering. These entities\nare not necessarily limited to programming entities, though, of course,\nthese form the core set of elements we're interested in. Additional\nentities such as build sytems and high-level patterns such as GoF\nand others are also captured.\n\n@li to provide the tooling required to combine multiple coding\nmodels together into a bigger model - called the @e merged model.\n\n@li to ensure the consistency of the merged model via validation\nrules (such as verifying that all types have a definitions,\netc.).\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "masd.dogen.coding",
@@ -1479,7 +1479,7 @@
     },
     {
       "name": "helpers::mapping_set",
-      "documentation": "Consistent unit of mapping that can be used to translate a model from a language to\nanother.\n",
+      "documentation": "Consistent unit of mapping that can be used to translate a model from one technical\nspace to another.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -1491,7 +1491,7 @@
           "type": "std::unordered_map<meta_model::technical_space, std::unordered_map<std::string, meta_model::name>>"
         },
         {
-          "name": "erasures_by_language",
+          "name": "erasures_by_technical_space",
           "type": "std::unordered_map<meta_model::technical_space, std::unordered_set<std::string>>"
         }
       ]
@@ -1527,16 +1527,16 @@
     },
     {
       "name": "helpers::mapping",
-      "documentation": "Stores the mapping of a key (the element id) to its values, organised by language.\n",
+      "documentation": "Stores the mapping of a key (the element id) to its values, organised by technical\nspace.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "lam_id",
+          "name": "agnostic_id",
           "type": "std::string",
-          "documentation": "Language agnostic ID of the element we're mapping from.\n"
+          "documentation": "Technical space agnostic ID of the element we're mapping from.\n"
         },
         {
-          "name": "by_language",
+          "name": "by_technical_space",
           "type": "std::unordered_map<meta_model::technical_space, mapping_value>",
           "documentation": "Values of the mapping, by technical space.\n"
         }

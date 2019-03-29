@@ -25,22 +25,22 @@ namespace masd::dogen::coding::helpers {
 mapping_set::mapping_set(
     const std::string& name,
     const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_map<std::string, masd::dogen::coding::meta_model::name> >& by_agnostic_id,
-    const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >& erasures_by_language)
+    const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >& erasures_by_technical_space)
     : name_(name),
       by_agnostic_id_(by_agnostic_id),
-      erasures_by_language_(erasures_by_language) { }
+      erasures_by_technical_space_(erasures_by_technical_space) { }
 
 void mapping_set::swap(mapping_set& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(by_agnostic_id_, other.by_agnostic_id_);
-    swap(erasures_by_language_, other.erasures_by_language_);
+    swap(erasures_by_technical_space_, other.erasures_by_technical_space_);
 }
 
 bool mapping_set::operator==(const mapping_set& rhs) const {
     return name_ == rhs.name_ &&
         by_agnostic_id_ == rhs.by_agnostic_id_ &&
-        erasures_by_language_ == rhs.erasures_by_language_;
+        erasures_by_technical_space_ == rhs.erasures_by_technical_space_;
 }
 
 mapping_set& mapping_set::operator=(mapping_set other) {
@@ -81,20 +81,20 @@ void mapping_set::by_agnostic_id(const std::unordered_map<masd::dogen::coding::m
     by_agnostic_id_ = std::move(v);
 }
 
-const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >& mapping_set::erasures_by_language() const {
-    return erasures_by_language_;
+const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >& mapping_set::erasures_by_technical_space() const {
+    return erasures_by_technical_space_;
 }
 
-std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >& mapping_set::erasures_by_language() {
-    return erasures_by_language_;
+std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >& mapping_set::erasures_by_technical_space() {
+    return erasures_by_technical_space_;
 }
 
-void mapping_set::erasures_by_language(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >& v) {
-    erasures_by_language_ = v;
+void mapping_set::erasures_by_technical_space(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >& v) {
+    erasures_by_technical_space_ = v;
 }
 
-void mapping_set::erasures_by_language(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >&& v) {
-    erasures_by_language_ = std::move(v);
+void mapping_set::erasures_by_technical_space(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, std::unordered_set<std::string> >&& v) {
+    erasures_by_technical_space_ = std::move(v);
 }
 
 }

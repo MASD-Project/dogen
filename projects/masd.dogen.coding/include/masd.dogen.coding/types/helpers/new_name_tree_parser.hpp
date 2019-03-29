@@ -284,7 +284,7 @@ struct custom_type_grammar : qi::grammar<Iterator, Skipper>
     }
 
 
-    std::string scope_operator_for_language(
+    std::string scope_operator_for_technical_space(
         const masd::dogen::coding::meta_model::technical_space ts) {
         switch (ts) {
         case masd::dogen::coding::meta_model::technical_space::csharp:
@@ -322,7 +322,7 @@ struct custom_type_grammar : qi::grammar<Iterator, Skipper>
     custom_type_grammar(name_tree_listener<NameTreeBuilder> * listener,
         const masd::dogen::coding::meta_model::technical_space ts)
           : custom_type_grammar::base_type(custom_type), listener(listener),
-            scope_str(scope_operator_for_language(ts))
+            scope_str(scope_operator_for_technical_space(ts))
     {
         namespace phoenix = boost::phoenix;
         scope = scope_str;
@@ -409,9 +409,9 @@ struct grammar : qi::grammar<Iterator, Skipper> {
     }
 
     grammar(listener_t &l,
-        const masd::dogen::coding::meta_model::technical_space language)
+        const masd::dogen::coding::meta_model::technical_space ts)
                 : grammar::base_type(type_name), listener(&l),
-                  custom_type{ &l , language } {
+                  custom_type{ &l , ts } {
         setup_functors();
         using qi::on_error;
         using qi::fail;

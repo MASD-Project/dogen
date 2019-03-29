@@ -70,15 +70,16 @@ model_production_chain::apply(const context& ctx,
      * With regards to the references, note that we are not filtering
      * them at all; we include all references that the user deemed
      * necessary, regardlesss of compatibility with the target
-     * language. In practice, the reference and target permutations
-     * should fall into the one of the following categories:
+     * technical space. In practice, the reference and target
+     * permutations should fall into the one of the following
+     * categories:
      *
      * - the target model is a PIM and the reference is also a PIM,
      *   thus both require mapping to a PSM.
      *
      * - the target model is a PIM, and the reference model is a PSM
-     *   in a language which the user is interested in - i.e. its one
-     *   of the target model's output technical spaces.
+     *   in a technical space which the user is interested in -
+     *   i.e. its one of the target model's output technical spaces.
      *
      * - the target model is a PSM and the reference model is also a
      *   PSM, and they share the same technical space.

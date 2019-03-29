@@ -35,7 +35,8 @@
 namespace masd::dogen::coding::helpers {
 
 /**
- * @brief Stores the mapping of a key (the element id) to its values, organised by language.
+ * @brief Stores the mapping of a key (the element id) to its values, organised by technical
+ * space.
  */
 class mapping final {
 public:
@@ -46,28 +47,28 @@ public:
 
 public:
     mapping(
-        const std::string& lam_id,
-        const std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>& by_language);
+        const std::string& agnostic_id,
+        const std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>& by_technical_space);
 
 public:
     /**
-     * @brief Language agnostic ID of the element we're mapping from.
+     * @brief Technical space agnostic ID of the element we're mapping from.
      */
     /**@{*/
-    const std::string& lam_id() const;
-    std::string& lam_id();
-    void lam_id(const std::string& v);
-    void lam_id(const std::string&& v);
+    const std::string& agnostic_id() const;
+    std::string& agnostic_id();
+    void agnostic_id(const std::string& v);
+    void agnostic_id(const std::string&& v);
     /**@}*/
 
     /**
      * @brief Values of the mapping, by technical space.
      */
     /**@{*/
-    const std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>& by_language() const;
-    std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>& by_language();
-    void by_language(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>& v);
-    void by_language(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>&& v);
+    const std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>& by_technical_space() const;
+    std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>& by_technical_space();
+    void by_technical_space(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>& v);
+    void by_technical_space(const std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value>&& v);
     /**@}*/
 
 public:
@@ -81,8 +82,8 @@ public:
     mapping& operator=(mapping other);
 
 private:
-    std::string lam_id_;
-    std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value> by_language_;
+    std::string agnostic_id_;
+    std::unordered_map<masd::dogen::coding::meta_model::technical_space, masd::dogen::coding::helpers::mapping_value> by_technical_space_;
 };
 
 }

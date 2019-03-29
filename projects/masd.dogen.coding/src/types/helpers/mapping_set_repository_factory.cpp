@@ -38,12 +38,12 @@ namespace {
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory("coding.helpers.mapping_set_repository_factory"));
 
-const std::string duplicate_lam_id("Duplicate language agnostic id: ");
+const std::string mappings_dir("mappings");
+
+const std::string duplicate_agnostic_id("Duplicate agnostic id: ");
 const std::string default_mapping_set_name("default.mapping_set");
 const std::string duplicate_mapping_set(
     "Found more than one mapping set with name: ");
-
-const std::string mappings_dir("mappings");
 
 }
 
@@ -93,30 +93,31 @@ void mapping_set_repository_factory::validate_mappings(
 }
 
 void mapping_set_repository_factory::
-insert(const std::string& lam_id, const meta_model::name& n,
+insert(const std::string& agnostic_id, const meta_model::name& n,
     const meta_model::technical_space ts,
     std::unordered_map<meta_model::technical_space,
     std::unordered_map<std::string, meta_model::name>>& map) const {
 
     auto& by_id(map[ts]);
-    const auto pair(std::make_pair(lam_id, n));
+    const auto pair(std::make_pair(agnostic_id, n));
     const auto inserted(by_id.insert(pair).second);
     if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_lam_id << lam_id;
-        BOOST_THROW_EXCEPTION(building_error(duplicate_lam_id + lam_id));
+        BOOST_LOG_SEV(lg, error) << duplicate_agnostic_id << agnostic_id;
+        BOOST_THROW_EXCEPTION(
+            building_error(duplicate_agnostic_id + agnostic_id));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Mapped: '" << lam_id << "' to '"
-                             << n.qualified().dot() << "'";
+    BOOST_LOG_SEV(lg, debug) << "Mapped: '" << agnostic_id
+                             << "' to '" << n.qualified().dot() << "'";
 }
 
 void mapping_set_repository_factory::populate_mapping_set(
     const std::list<mapping>& mappings, mapping_set& ms) const {
 
     for (const auto& mapping : mappings) {
-        const auto lam_id(mapping.lam_id());
+        const auto agnostic_id(mapping.agnostic_id());
 
-        for (const auto& pair : mapping.by_language()) {
+        for (const auto& pair : mapping.by_technical_space()) {
             const auto l(pair.first);
             const auto& mv(pair.second);
 
@@ -124,12 +125,12 @@ void mapping_set_repository_factory::populate_mapping_set(
                                      << mv.mapping_action();
 
             if (mv.mapping_action() == mapping_actions::erase) {
-                ms.erasures_by_language()[l].insert(lam_id);
+                ms.erasures_by_technical_space()[l].insert(agnostic_id);
                 continue;
             }
 
             const auto n(*mv.default_name());
-            insert(lam_id, n, l, ms.by_agnostic_id());
+            insert(agnostic_id, n, l, ms.by_agnostic_id());
         }
     }
 }
