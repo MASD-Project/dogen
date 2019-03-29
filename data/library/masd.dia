@@ -103,13 +103,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O1">
       <dia:attribute name="obj_pos">
-        <dia:point val="4,3.92857"/>
+        <dia:point val="4,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.95,3.87857;16.1,9.97857"/>
+        <dia:rectangle val="3.95,3.95;16.1,10.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="4,3.92857"/>
+        <dia:point val="4,4"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.050000000000001"/>
@@ -126,9 +126,7 @@
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.decoration.modeline.editor=emacs
 #DOGEN masd.decoration.modeline.location=top
-#DOGEN masd.decoration.modeline.technical_space=cpp
-#DOGEN masd.decoration.modeline.element=masd::coding::meta_model::object
-#DOGEN masd.decoration.modeline.element=masd::coding::meta_model::enumeration#</dia:string>
+#DOGEN masd.decoration.modeline.technical_space=cpp#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -334,7 +332,7 @@
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.decoration.modeline.editor=emacs
 #DOGEN masd.decoration.modeline.location=top
-#</dia:string>
+#DOGEN masd.decoration.modeline.technical_space=csharp#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -540,7 +538,7 @@
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.decoration.modeline.editor=emacs
 #DOGEN masd.decoration.modeline.location=top
-#</dia:string>
+#DOGEN masd.decoration.modeline.technical_space=cmake#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -723,7 +721,7 @@
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.decoration.modeline.editor=emacs
 #DOGEN masd.decoration.modeline.location=top
-#</dia:string>
+#DOGEN masd.decoration.modeline.technical_space=odb#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -906,7 +904,7 @@
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.decoration.modeline.editor=emacs
 #DOGEN masd.decoration.modeline.location=top
-#</dia:string>
+#DOGEN masd.decoration.modeline.technical_space=xml#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1127,7 +1125,7 @@
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.decoration.modeline.editor=vim
 #DOGEN masd.decoration.modeline.location=top
-#</dia:string>
+#DOGEN masd.decoration.modeline.technical_space=xml#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1356,7 +1354,7 @@
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.decoration.modeline.editor=vim
 #DOGEN masd.decoration.modeline.location=top
-#</dia:string>
+#DOGEN masd.decoration.modeline.technical_space=odb#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1585,7 +1583,7 @@
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.decoration.modeline.editor=vim
 #DOGEN masd.decoration.modeline.location=top
-#</dia:string>
+#DOGEN masd.decoration.modeline.technical_space=cmake#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1814,7 +1812,7 @@
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.decoration.modeline.editor=vim
 #DOGEN masd.decoration.modeline.location=top
-#</dia:string>
+#DOGEN masd.decoration.modeline.technical_space=csharp#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2043,7 +2041,7 @@
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.decoration.modeline.editor=vim
 #DOGEN masd.decoration.modeline.location=top
-#</dia:string>
+#DOGEN masd.decoration.modeline.technical_space=cpp#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

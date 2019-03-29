@@ -118,17 +118,5 @@
     "value_type": "text",
     "template_kind": "instance",
     "scope": "any"
-  },
-  {
-    "name": {
-      "simple": "element",
-      "qualified": "masd.decoration.modeline.element"
-    },
-    "archetype_location": {
-      "kernel": "formatters"
-    },
-    "value_type": "text_collection",
-    "template_kind": "instance",
-    "scope": "any"
   }
 ]
