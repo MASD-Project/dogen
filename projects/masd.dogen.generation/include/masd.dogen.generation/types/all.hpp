@@ -45,6 +45,7 @@
 #include "masd.dogen.generation/types/transforms/model_generation_chain.hpp"
 #include "masd.dogen.generation/types/meta_model/path_contribution_types.hpp"
 #include "masd.dogen.generation/types/meta_model/model_segment_properties.hpp"
+#include "masd.dogen.generation/types/transforms/decoration_configuration.hpp"
 #include "masd.dogen.generation/types/transforms/dynamic_transforms_chain.hpp"
 #include "masd.dogen.generation/types/transforms/formatting_configuration.hpp"
 #include "masd.dogen.generation/types/meta_model/directory_structure_styles.hpp"

@@ -18,22 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_DECORATION_TRANSFORM_HPP
-#define MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_DECORATION_TRANSFORM_HPP
+#ifndef MASD_DOGEN_GENERATION_IO_TRANSFORMS_DECORATION_CONFIGURATION_IO_HPP
+#define MASD_DOGEN_GENERATION_IO_TRANSFORMS_DECORATION_CONFIGURATION_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.generation/types/transforms/context.hpp"
-#include "masd.dogen.generation/types/meta_model/model.hpp"
+#include <iosfwd>
+#include "masd.dogen.generation/types/transforms/decoration_configuration.hpp"
 
 namespace masd::dogen::generation::transforms {
 
-class decoration_transform final {
-public:
-    static void apply(const context& ctx, meta_model::model& m);
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const masd::dogen::generation::transforms::decoration_configuration& v);
 
 }
 

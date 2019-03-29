@@ -18,21 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_DECORATION_TRANSFORM_HPP
-#define MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_DECORATION_TRANSFORM_HPP
+#ifndef MASD_DOGEN_GENERATION_TEST_DATA_TRANSFORMS_DECORATION_CONFIGURATION_TD_HPP
+#define MASD_DOGEN_GENERATION_TEST_DATA_TRANSFORMS_DECORATION_CONFIGURATION_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.generation/types/transforms/context.hpp"
-#include "masd.dogen.generation/types/meta_model/model.hpp"
+#include "masd.dogen.generation/types/transforms/decoration_configuration.hpp"
 
 namespace masd::dogen::generation::transforms {
 
-class decoration_transform final {
+class decoration_configuration_generator {
 public:
-    static void apply(const context& ctx, meta_model::model& m);
+    decoration_configuration_generator();
+
+public:
+    typedef masd::dogen::generation::transforms::decoration_configuration result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 }

@@ -715,6 +715,32 @@
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::decoration_configuration",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "generate_decoration",
+          "type": "boost::optional<bool>"
+        },
+        {
+          "name": "copyright_notices",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "licence_name",
+          "type": "std::string"
+        },
+        {
+          "name": "modeline_group_name",
+          "type": "std::string"
+        },
+        {
+          "name": "marker_name",
+          "type": "std::string"
+        }
+      ]
     }
   ]
 }

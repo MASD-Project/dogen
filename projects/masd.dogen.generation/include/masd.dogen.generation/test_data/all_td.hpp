@@ -36,6 +36,7 @@
 #include "masd.dogen.generation/test_data/meta_model/generatable_properties_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/path_contribution_types_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/model_segment_properties_td.hpp"
+#include "masd.dogen.generation/test_data/transforms/decoration_configuration_td.hpp"
 #include "masd.dogen.generation/test_data/transforms/formatting_configuration_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/directory_structure_styles_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/archetype_family_properties_td.hpp"

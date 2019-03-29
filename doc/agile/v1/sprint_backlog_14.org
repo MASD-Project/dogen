@@ -13,23 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-29 Fri 17:38]
+#+CAPTION: Clock summary at [2019-03-29 Fri 18:21]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *32:05* |       |      | 100.0 |
+| *Total time*                                           | *32:45* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 32:05   |       |      | 100.0 |
-| Active                                                 |         | 32:05 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 1:47 |   5.6 |
-| Sprint and product backlog grooming                    |         |       | 5:38 |  17.6 |
-| Create a video demo for the previous sprint's features |         |       | 3:11 |   9.9 |
-| Fix issues with emacs                                  |         |       | 2:42 |   8.4 |
-| Create a basic "project plan"                          |         |       | 2:08 |   6.6 |
-| Simplify qualified name                                |         |       | 3:39 |  11.4 |
-| Rename "language" to "technical space"                 |         |       | 7:22 |  23.0 |
+| Stories                                                | 32:45   |       |      | 100.0 |
+| Active                                                 |         | 32:45 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 1:47 |   5.4 |
+| Sprint and product backlog grooming                    |         |       | 5:38 |  17.2 |
+| Create a video demo for the previous sprint's features |         |       | 3:11 |   9.7 |
+| Fix issues with emacs                                  |         |       | 2:42 |   8.2 |
+| Create a basic "project plan"                          |         |       | 2:08 |   6.5 |
+| Simplify qualified name                                |         |       | 3:39 |  11.1 |
+| Rename "language" to "technical space"                 |         |       | 7:22 |  22.5 |
 | Add intrinsic technical space ownership                |         |       | 1:12 |   3.7 |
-| Promote extraction entities to meta-model elements     |         |       | 4:26 |  13.8 |
+| Promote extraction entities to meta-model elements     |         |       | 5:06 |  15.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -289,8 +289,21 @@ We need to have the ability to associate meta-model elements to a
 technical space, in an intrinsic manner. Types such as fabric types
 cannot be mapped to other technical spaces.
 
+*** COMPLETED Update metrics in OpenHub                               :story:
+    CLOSED: [2019-03-29 Fri 17:58]
+
+*Rationale*: it seems metrics have finally settled down.
+
+For some reason our metrics are stuck at 5 months ago or so. It is
+actually mildly useful to know the number of lines of code etc.
+
+We probably need to delete and re-add the project.
+
 *** STARTED Promote extraction entities to meta-model elements        :story:
     :LOGBOOK:
+    CLOCK: [2019-03-29 Fri 18:19]--[2019-03-29 Fri 18:21] =>  0:02
+    CLOCK: [2019-03-29 Fri 18:00]--[2019-03-29 Fri 18:18] =>  0:18
+    CLOCK: [2019-03-29 Fri 17:39]--[2019-03-29 Fri 17:59] =>  0:20
     CLOCK: [2019-03-29 Fri 13:31]--[2019-03-29 Fri 14:36] =>  1:05
     CLOCK: [2019-03-29 Fri 11:50]--[2019-03-29 Fri 12:00] =>  0:10
     CLOCK: [2019-03-29 Fri 11:39]--[2019-03-29 Fri 11:49] =>  0:10
@@ -497,13 +510,6 @@ was formed, and then ownership by DDC.
 
 When we moved the kernel logic into yarn from quilt, we did not rename
 the traits.
-
-*** Update metrics in OpenHub                                         :story:
-
-For some reason our metrics are stuck at 5 months ago or so. It is
-actually mildly useful to know the number of lines of code etc.
-
-We probably need to delete and re-add the project.
 
 *** Code generate all contexts                                        :story:
 

@@ -22,8 +22,9 @@
 
 namespace masd::dogen::generation::transforms {
 
-bool decoration_transform::operator==(const decoration_transform& /*rhs*/) const {
-    return true;
+void decoration_transform::
+apply(const context& /*ctx*/, meta_model::model& /*m*/) {
+
 }
 
 }
