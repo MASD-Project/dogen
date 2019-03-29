@@ -23,6 +23,7 @@
 #include "masd.dogen.coding/io/meta_model/model_set_io.hpp"
 #include "masd.dogen.coding/types/helpers/pre_assembly_validator.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.coding/types/transforms/modelines_transform.hpp"
 #include "masd.dogen.coding/types/transforms/modules_transform.hpp"
 #include "masd.dogen.coding/types/transforms/origin_transform.hpp"
 #include "masd.dogen.coding/types/transforms/technical_space_transform.hpp"
@@ -44,6 +45,12 @@ static logger lg(logger_factory(transform_id));
 namespace masd::dogen::coding::transforms {
 
 void pre_assembly_chain::apply(const context& ctx, meta_model::model& m) {
+    /*
+     * Modelines transform can be done anywhere as its dependencies
+     * are not within coding transforms at present.
+     */
+    modelines_transform::apply(ctx, m);
+
     /*
      * Module transform must be done before origin and technical space
      * transforms to get these properties populated on the new

@@ -636,6 +636,12 @@ Are supplied as parameters to the engine. These may need to take into
 account facets as well, so that we can bind each facet to a different
 template and supply different parameters.
 
+Notes:
+
+- one really useful feature would be to bind an enumeration to a
+  string field, such that we'd automatically convert the string into a
+  valid value of the enumeration (or throw).
+
 *Previous Understanding*
 
 Tasks:

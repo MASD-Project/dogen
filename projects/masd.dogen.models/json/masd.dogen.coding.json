@@ -2000,9 +2000,9 @@
           "documentation": "List of all the parameters in the preamble, in order of appearence.\n"
         },
         {
-          "name": "applicable_meta_elements",
-          "type": "std::list<std::string>",
-          "documentation": "Meta-names for all of the elements to which this modeline can be applied to.\n"
+          "name": "technical_space",
+          "type": "technical_space",
+          "documentation": "Technical space that this modeline targets.\n"
         }
       ]
     },

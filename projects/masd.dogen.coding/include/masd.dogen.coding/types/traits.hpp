@@ -88,6 +88,14 @@ struct traits {
         static std::string type_override();
         static std::string is_composite();
     };
+
+    struct decoration {
+        struct modeline {
+            static std::string editor();
+            static std::string location();
+            static std::string technical_space();
+        };
+    };
 };
 
 }

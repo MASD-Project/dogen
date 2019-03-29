@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
 #include "masd.dogen.coding/test_data/meta_model/editor_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/element_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/modeline_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/modeline_field_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/technical_space_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/modeline_location_td.hpp"
 
 namespace {
@@ -50,18 +50,9 @@ std::list<masd::dogen::coding::meta_model::modeline_field> create_std_list_masd_
     return r;
 }
 
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
-}
-
-std::list<std::string> create_std_list_std_string(unsigned int position) {
-    std::list<std::string> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_string(position + i));
-    }
-    return r;
+masd::dogen::coding::meta_model::technical_space
+create_masd_dogen_coding_meta_model_technical_space(const unsigned int position) {
+    return masd::dogen::coding::meta_model::technical_space_generator::create(position);
 }
 
 }
@@ -76,7 +67,7 @@ populate(const unsigned int position, result_type& v) {
     v.editor(create_masd_dogen_coding_meta_model_editor(position + 0));
     v.location(create_masd_dogen_coding_meta_model_modeline_location(position + 1));
     v.fields(create_std_list_masd_dogen_coding_meta_model_modeline_field(position + 2));
-    v.applicable_meta_elements(create_std_list_std_string(position + 3));
+    v.technical_space(create_masd_dogen_coding_meta_model_technical_space(position + 3));
 }
 
 modeline_generator::result_type
