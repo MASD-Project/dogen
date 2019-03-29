@@ -32,12 +32,13 @@ namespace masd::dogen::coding::meta_model {
  */
 enum class technical_space : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
-    agnostic = 1,
-    cpp = 2,
-    csharp = 3,
-    cmake = 4,
-    xml = 5,
-    odb = 6
+    agnostic = 1, ///< Abstract technical space which is mapped to concrete technical spaces.
+    cpp = 2, ///< The C++ programming language.
+    csharp = 3, ///< The C# programming language.
+    cmake = 4, ///< CMake meta build system.
+    xml = 5, ///< Extensible Markup Language.
+    odb = 6, ///< ODB options.
+    sln = 7 ///< Visual studio solution.
 };
 
 }

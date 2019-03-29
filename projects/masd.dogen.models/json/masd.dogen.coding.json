@@ -888,27 +888,38 @@
       "attributes": [
         {
           "name": "agnostic",
-          "type": ""
+          "type": "",
+          "documentation": "Abstract technical space which is mapped to concrete technical spaces.\n"
         },
         {
           "name": "cpp",
-          "type": ""
+          "type": "",
+          "documentation": "The C++ programming language.\n"
         },
         {
           "name": "csharp",
-          "type": ""
+          "type": "",
+          "documentation": "The C# programming language.\n"
         },
         {
           "name": "cmake",
-          "type": ""
+          "type": "",
+          "documentation": "CMake meta build system.\n"
         },
         {
           "name": "xml",
-          "type": ""
+          "type": "",
+          "documentation": "Extensible Markup Language.\n"
         },
         {
           "name": "odb",
-          "type": ""
+          "type": "",
+          "documentation": "ODB options.\n"
+        },
+        {
+          "name": "sln",
+          "type": "",
+          "documentation": "Visual studio solution.\n"
         }
       ]
     },

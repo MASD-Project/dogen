@@ -25,7 +25,7 @@ namespace masd::dogen::coding::meta_model {
 technical_space_generator::technical_space_generator() : position_(0) { }
 void technical_space_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<technical_space>(position % 7);
+    v = static_cast<technical_space>(position % 8);
 }
 
 technical_space_generator::result_type
