@@ -1,15 +1,15 @@
 [
     {
         "lam_id" : "lam.byte",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "unsigned char"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "byte"
                 }
@@ -18,15 +18,15 @@
     },
     {
         "lam_id" : "lam.character",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "char"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "char"
                 }
@@ -35,16 +35,16 @@
     },
     {
         "lam_id" : "lam.integer8",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "int8_t",
                     "model_modules": "std"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "sbyte"
                 }
@@ -53,16 +53,16 @@
     },
     {
         "lam_id" : "lam.integer16",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "int16_t",
                     "model_modules": "std"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "Int16",
                     "model_modules": "System"
@@ -72,16 +72,16 @@
     },
     {
         "lam_id" : "lam.integer32",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "int32_t",
                     "model_modules": "std"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "Int32",
                     "model_modules": "System"
@@ -91,16 +91,16 @@
     },
     {
         "lam_id" : "lam.integer64",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "int64_t",
                     "model_modules": "std"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "Int64",
                     "model_modules": "System"
@@ -110,15 +110,15 @@
     },
     {
         "lam_id" : "lam.integer",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "int"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "int"
                 }
@@ -127,15 +127,15 @@
     },
     {
         "lam_id" : "lam.single_floating",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "float"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "float"
                 }
@@ -144,15 +144,15 @@
     },
     {
         "lam_id" : "lam.double_floating",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "double"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "double"
                 }
@@ -161,15 +161,15 @@
     },
     {
         "lam_id" : "lam.boolean",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "bool"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "bool"
                 }
@@ -178,16 +178,16 @@
     },
     {
         "lam_id" : "lam.string",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "string",
                     "model_modules": "std"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "string"
                 }
@@ -196,9 +196,9 @@
     },
     {
         "lam_id" : "lam.date",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "date",
                     "model_modules": "boost",
@@ -206,7 +206,7 @@
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "DateTime",
                     "model_modules": "System"
@@ -216,9 +216,9 @@
     },
     {
         "lam_id" : "lam.time",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "time_duration",
                     "model_modules": "boost",
@@ -226,7 +226,7 @@
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "TimeSpan",
                     "model_modules": "System"
@@ -236,9 +236,9 @@
     },
     {
         "lam_id" : "lam.date_time",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "ptime",
                     "model_modules": "boost",
@@ -246,7 +246,7 @@
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "DateTime",
                     "model_modules": "boost"
@@ -256,16 +256,16 @@
     },
     {
         "lam_id" : "lam.decimal",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "decimal",
                     "model_modules": "std"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "Decimal",
                     "model_modules": "System"
@@ -275,16 +275,16 @@
     },
     {
         "lam_id" : "lam.dynamic_array",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "vector",
                     "model_modules": "std"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "Array",
                     "model_modules": "System.Collections.Generic"
@@ -294,16 +294,16 @@
     },
     {
         "lam_id" : "lam.static_array",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "array",
                     "model_modules": "std"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "Array",
                     "model_modules": "System.Collections.Generic"
@@ -313,16 +313,16 @@
     },
     {
         "lam_id" : "lam.unordered_dictionary",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "unordered_map",
                     "model_modules": "std"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "Dictionary",
                     "model_modules": "System.Collections.Generic"
@@ -332,16 +332,16 @@
     },
     {
         "lam_id" : "lam.ordered_dictionary",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "map",
                     "model_modules": "std"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "SortedDictionary",
                     "model_modules": "System.Collections.Generic"
@@ -351,16 +351,16 @@
     },
     {
         "lam_id" : "lam.unordered_set",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "unordered_set",
                     "model_modules": "std"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "HashSet",
                     "model_modules": "System.Collections.Generic"
@@ -370,16 +370,16 @@
     },
     {
         "lam_id" : "lam.ordered_set",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "set",
                     "model_modules": "std"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "SortedSet",
                     "model_modules": "System.Collections.Generic"
@@ -389,16 +389,16 @@
     },
     {
         "lam_id" : "lam.queue",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "queue",
                     "model_modules": "std"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "Queue",
                     "model_modules": "System.Collections.Generic"
@@ -408,16 +408,16 @@
     },
     {
         "lam_id" : "lam.stack",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "stack",
                     "model_modules": "std"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "Stack",
                     "model_modules": "System.Collections.Generic"
@@ -427,16 +427,16 @@
     },
     {
         "lam_id" : "lam.linked_list",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "list",
                     "model_modules": "std"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "LinkedList",
                     "model_modules": "System.Collections.Generic"
@@ -446,16 +446,16 @@
     },
     {
         "lam_id" : "lam.object",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "string",
                     "model_modules": "std"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "default_name" : {
                     "simple": "object"
                 }
@@ -464,16 +464,16 @@
     },
     {
         "lam_id" : "lam.pointer",
-        "names_by_language" : [
+        "names_by_technical_space" : [
             {
-                "language" : "cpp",
+                "technical_space" : "cpp",
                 "default_name" : {
                     "simple": "shared_ptr",
                     "model_modules": "boost"
                 }
             },
             {
-                "language" : "csharp",
+                "technical_space" : "csharp",
                 "mapping_action" : "erase"
             }
         ]

@@ -37,8 +37,8 @@ auto lg(logger_factory("coding.helpers.mapping_hydrator"));
 
 const std::string empty;
 const std::string lam_id_key("lam_id");
-const std::string technical_space_key("language");
-const std::string names_by_technical_space_key("names_by_language");
+const std::string technical_space_key("technical_space");
+const std::string names_by_technical_space_key("names_by_technical_space");
 const std::string default_name_key("default_name");
 const std::string mapping_action_key("mapping_action");
 const std::string simple_key("simple");
