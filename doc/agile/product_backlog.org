@@ -1751,9 +1751,15 @@ Now we're on C++17 we can start making use of its new features. One
 low hanging fruit is string view. We use static strings quite a lot
 for logging etc. We can just replace these with string views.
 
+Example:
+
+: #include <string_view>
+: constexpr std::string_view foo("abc");
+
 Links:
 
 - [[https://www.bfilipek.com/2018/10/strings17talk.html][Let's Talk About String Operations in C++17]]
+- [[https://developercommunity.visualstudio.com/content/problem/24487/constexpr-stdstring-view-from-string-literal.html][constexpr std::string_view from string literal]]
 
 *** Element extensions considered harmful                             :story:
 
@@ -2816,7 +2822,7 @@ We may need to solve the stereotype registration problem though, since
 only C++ would know of this facet. Or we could hard-code it in yarn
 for now.
 
-Motes:
+Notes:
 
 - how does the initialiser know the formatter is a =quilt.cpp=
   formatter rather than say a C# formatter? this could be done via the
@@ -10040,6 +10046,10 @@ mappings). Note that it is not necessarily the case that the mapping
 is bidirectional - i.e. "to string" is not required to be the inverse
 function of "from string" and vice-versa.
 
+Notes:
+
+- Use =string_view= on c++ 17.
+
 *** Enumeration string dumps could be configurable                    :story:
 
 #+begin_quote
@@ -12732,6 +12742,8 @@ straight forward to add it. We just need meta-data support to enable
 the feature and then take it into account when generating the file
 names (e.g. instead of using =/= as a separator, use =.=).
 
+See also the story on destinations.
+
 *** Allow manual overrides to facets                                  :story:
 
 #+begin_quote
@@ -13006,21 +13018,6 @@ using a model type, PK is a marker on a property). procedural only
 allows built-ins plus model types. we will need pointer support for
 this. object oriented is the current mode. the modes are validated in
 the middle end.
-
-*** Consider creating a UI for editing type libraries                 :story:
-
-At present we have to edit the JSON files by hand; this is becoming
-increasingly painful as we rely more and more on the meta-data. It
-would be great to be able to edit these files in some sort of UI that
-would make repetitive operations quicker. This story captures all of
-the use cases for the UI.
-
-- there are many cases of types that require an inclusion directive
-  for the types facet but none for all other facets. It is really
-  painful to set each of the other facets to =inclusion_required=
-  false. However, perhaps a more sensible way to handle this is to
-  default inclusion required to false on all cases other than those
-  provided. Story will be raised for this.
 
 *** Add memory measurements support                                   :story:
 
@@ -13685,7 +13682,7 @@ Links:
   generation, with language options; formatting; etc. Each is a
   distinct end point.
 
-Motes:
+Notes:
 
 - we must cache system models so we don't reload them for every
   request.
@@ -13885,12 +13882,6 @@ take one of those schemas and generate an yarn representation for them.
 More generally, it would be great if dogen was able to create a domain
 model off of an XML schema. However, we already have the Code
 Synthesis [[http://www.codesynthesis.com/products/xsd/][XSD tool]] for that, so maybe this is just scope creep.
-
-*** Add support for GtkBuilder / Glade XML files                       :epic:
-
-There is nothing stopping us from using a GtkBuilder / Glade XML file
-to do the boiler plate setup of the UI. With a bit more work one could
-potentially even generate the bindings for a presentation model.
 
 *** Generate state diagrams                                            :epic:
 
@@ -14104,3 +14095,11 @@ possible to use dogen to generate some basic UIs, for example for Wt.
 Links:
 
 - [[http://plantuml.com/salt][Salt]]: plantuml wireframe language.
+
+Merged stories:
+
+*Add support for GtkBuilder / Glade XML files*
+
+There is nothing stopping us from using a GtkBuilder / Glade XML file
+to do the boiler plate setup of the UI. With a bit more work one could
+potentially even generate the bindings for a presentation model.

@@ -13,22 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-28 Thu 17:28]
+#+CAPTION: Clock summary at [2019-03-29 Fri 08:59]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *24:46* |       |      | 100.0 |
+| *Total time*                                           | *25:13* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 24:46   |       |      | 100.0 |
-| Active                                                 |         | 24:46 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 1:47 |   7.2 |
-| Sprint and product backlog grooming                    |         |       | 2:39 |  10.7 |
-| Create a video demo for the previous sprint's features |         |       | 3:11 |  12.9 |
-| Fix issues with emacs                                  |         |       | 2:42 |  10.9 |
-| Create a basic "project plan"                          |         |       | 2:08 |   8.6 |
-| Simplify qualified name                                |         |       | 3:39 |  14.7 |
-| Rename "language" to "technical space"                 |         |       | 5:39 |  22.8 |
-| Promote extraction entities to meta-model elements     |         |       | 3:01 |  12.2 |
+| Stories                                                | 25:13   |       |      | 100.0 |
+| Active                                                 |         | 25:13 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 1:47 |   7.1 |
+| Sprint and product backlog grooming                    |         |       | 2:39 |  10.5 |
+| Create a video demo for the previous sprint's features |         |       | 3:11 |  12.6 |
+| Fix issues with emacs                                  |         |       | 2:42 |  10.7 |
+| Create a basic "project plan"                          |         |       | 2:08 |   8.5 |
+| Simplify qualified name                                |         |       | 3:39 |  14.5 |
+| Rename "language" to "technical space"                 |         |       | 6:06 |  24.2 |
+| Promote extraction entities to meta-model elements     |         |       | 3:01 |  12.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -226,6 +226,7 @@ It seems we get errors in serialisation when using the map.
 
 *** STARTED Rename "language" to "technical space"                    :story:
     :LOGBOOK:
+    CLOCK: [2019-03-29 Fri 08:32]--[2019-03-29 Fri 08:59] =>  0:27
     CLOCK: [2019-03-28 Thu 17:10]--[2019-03-28 Thu 17:28] =>  0:18
     CLOCK: [2019-03-28 Thu 16:52]--[2019-03-28 Thu 17:09] =>  0:17
     CLOCK: [2019-03-28 Thu 16:16]--[2019-03-28 Thu 16:51] =>  0:35
@@ -259,7 +260,9 @@ Tasks:
 - add technical spaces to elements. They start with the input TS, and
   then are updated after mapping. Only if mapping did something to
   element.
--
+- language agnostic enum
+- mappings
+- modeline
 
 *** STARTED Promote extraction entities to meta-model elements        :story:
     :LOGBOOK:
@@ -542,3 +545,20 @@ enum into int?]]
 Giving us:
 
 : name.qualified[to_underlying(styles::double_colon_separated_style)]
+*** CANCELLED Consider creating a UI for editing type libraries  :story:
+    CLOSED: [2019-03-29 Fri 08:51]
+
+*Rationale*: this is deemed to be outside the scope of dogen.
+
+At present we have to edit the JSON files by hand; this is becoming
+increasingly painful as we rely more and more on the meta-data. It
+would be great to be able to edit these files in some sort of UI that
+would make repetitive operations quicker. This story captures all of
+the use cases for the UI.
+
+- there are many cases of types that require an inclusion directive
+  for the types facet but none for all other facets. It is really
+  painful to set each of the other facets to =inclusion_required=
+  false. However, perhaps a more sensible way to handle this is to
+  default inclusion required to false on all cases other than those
+  provided. Story will be raised for this.
