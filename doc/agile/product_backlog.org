@@ -3461,6 +3461,9 @@ This could help explain the problems we're having with empty
 artefacts. This should be fixed with the new approach to forward
 declarations.
 
+Another related problem is that we are not setting the path when
+creating stitch templates for the first time in the stitch formatter.
+
 *** Disabling facet after regeneration does not delete file           :story:
 
 Steps to reproduce:
@@ -14110,3 +14113,115 @@ Merged stories:
 There is nothing stopping us from using a GtkBuilder / Glade XML file
 to do the boiler plate setup of the UI. With a bit more work one could
 potentially even generate the bindings for a presentation model.
+*** Generative models                                                  :epic:
+
+We started by conflating two very different kinds of models:
+
+- models that generate models
+- models that generate code for the end user.
+
+These models appeared similar because we needed to generate some
+"helper types" in order to perform the generative parts; we had things
+like fabric, formattables and so forth. However, now that we have
+started to remove all of the helper parts, the main thing that is left
+in generative models is just the formatters. Another way of thinking
+about this problem is to imagine that a generative model could
+register what it offers:
+
+- the dominant technical space;
+- all of the available facets;
+- all of the available formatters;
+- all aspects within each formatter.
+
+Then, from a non-generative model - assuming some kind of plugin
+mechanism which would load the generative models - we could then make
+use of all that was defined in the generative model. In order for this
+to work (and assuming all classes for technical spaces, etc exist),
+the code generator would have to generate all of the infrastructure
+needed for a generative model:
+
+- some kind of top-level transform (e.g. "model to extraction model
+  transform"), and associated machinery to register the transform.
+- stereotypes to declare facets and formatters. The formatter elements
+  need to have a meta-model element as meta-data.
+- for the first generation, we'd use wale templates to initialise the
+  stitch templates for each element. Once these exist, we'd simply
+  expand them.
+
+We need to decide if the generative model is still in the same space
+as the non-generative model, or if it exists on a separate
+dimension. If it is in the same space, then facets, etc will come out
+of types. We could easily suppress IO, hashing etc as required. The
+advantage of this approach is that we can now mix non-generative types
+with generative types, so that we could provide helper classes etc
+easily. However, the folder structure will be confusing; this is
+exactly the current problem we have with say generation.cpp, with
+folders like =types/formaters/types= and the like. In this case, we'd
+have =types/types=, =types/hash= and so forth.
+
+The other downside is the current approach where we need to associate
+a "formatter style" with the model element and facet (e.g. stitch,
+stock, etc). However, as we do at present, we can perform the
+association via profiles, so that users need not be aware of this
+mapping. Nonetheless, its good to force users to declare up front if
+they are creating a generative model so that there are no
+surprises. In fact, a much better way to handle this is to create
+different meta-model elements to represent these entities: facet,
+formatter etc. These then bind to the wale and stitch templates rather
+than to c++ code. This then means that the formatting style now
+becomes bound at the meta-model level rather than allowing users to
+manually bind it (likely causing hard to debug problems). In addition,
+we should make it so that all meta-model elements that are not
+code-generated can have a wale template associated. This means that
+stitch is no longer special. It also means that "overwrite" may not be
+a good name for the flag that determines if something is hand-crafted
+or not. Check for stories on this flag.
+
+Variations:
+
+- additive generative model: we want to add facets to an existing
+  technical space.
+- new generative model: we want to create a new technical space.
+
+Notes:
+
+- the generative models are always going to generate C++ code.
+- once we have support for products, we could create a product type of
+  "dogen plugin", which generates all of the infrastructure to make
+  the plugin (e.g. vcpkg to fetch dogen headers, etc). This could even
+  include the targets that call dogen, registering the plugin and
+  generating the "test models" - i.e. models created by the user to
+  exercise the generative model.
+- this approach closely mirrors the injection model. If we call these
+  "extractors" we could have a registrar against the technical space
+  which produces the extraction model. The only difference is that we
+  need access to the generation model in order to call the
+  extractor. This makes it unsuitable to live in the extraction model
+  itself.
+- once we are able to generate annotations machinery, the creation of
+  aspects will be easy; we can just bind against the annotation and
+  extract the configuration.
+- note that we have two uses for meta-model elements such as technical
+  space, facet etc. The first use is as a "validator". They bind to
+  the configuration of the model, so if there are no generators
+  exporting the expected values for these meta-model elements,
+  generation will fail. The second role is generative; if the user
+  declared a facet in the target model, we will then project the facet
+  through the types facet for facets and generate the code needed to
+  register the facet as part of a generative model (a
+  generator). Similarly with all other types such as formatters,
+  technical spaces etc. We can look at the "generatable" flag to
+  determine if generation is needed or not. We need to make sure that
+  when we inject these, they are marked as non-generatable. Problem:
+  what happens when you are generating the generating model for a
+  technical space? There is a conflict; we will add the same facets,
+  technical spaces etc twice: once from the model itself and then a
+  second time from the generator. We need to somehow split these two
+  roles into different meta-model elements to make it really clear
+  they represent different roles. In fact, from the perspective of
+  registration/checks, we could even argue that these are no longer
+  meta-model elements - the point of the meta-model is to generate
+  code. By the same token, elements such as decoration would also be
+  incongruent though. We need to make sure we do not create a loop
+  when we are changing an existing generator, whereby we can no longer
+  generate code because the new state is not valid.

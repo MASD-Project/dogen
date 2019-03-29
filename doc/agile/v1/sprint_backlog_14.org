@@ -13,23 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-29 Fri 14:36]
+#+CAPTION: Clock summary at [2019-03-29 Fri 17:38]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *29:06* |       |      | 100.0 |
+| *Total time*                                           | *32:05* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 29:06   |       |      | 100.0 |
-| Active                                                 |         | 29:06 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 1:47 |   6.1 |
-| Sprint and product backlog grooming                    |         |       | 2:39 |   9.1 |
-| Create a video demo for the previous sprint's features |         |       | 3:11 |  10.9 |
-| Fix issues with emacs                                  |         |       | 2:42 |   9.3 |
-| Create a basic "project plan"                          |         |       | 2:08 |   7.3 |
-| Simplify qualified name                                |         |       | 3:39 |  12.5 |
-| Rename "language" to "technical space"                 |         |       | 7:22 |  25.3 |
-| Add intrinsic technical space ownership                |         |       | 1:12 |   4.1 |
-| Promote extraction entities to meta-model elements     |         |       | 4:26 |  15.2 |
+| Stories                                                | 32:05   |       |      | 100.0 |
+| Active                                                 |         | 32:05 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 1:47 |   5.6 |
+| Sprint and product backlog grooming                    |         |       | 5:38 |  17.6 |
+| Create a video demo for the previous sprint's features |         |       | 3:11 |   9.9 |
+| Fix issues with emacs                                  |         |       | 2:42 |   8.4 |
+| Create a basic "project plan"                          |         |       | 2:08 |   6.6 |
+| Simplify qualified name                                |         |       | 3:39 |  11.4 |
+| Rename "language" to "technical space"                 |         |       | 7:22 |  23.0 |
+| Add intrinsic technical space ownership                |         |       | 1:12 |   3.7 |
+| Promote extraction entities to meta-model elements     |         |       | 4:26 |  13.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -145,6 +145,9 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-03-29 Fri 17:29]--[2019-03-29 Fri 17:38] =>  0:09
+    CLOCK: [2019-03-29 Fri 17:17]--[2019-03-29 Fri 17:28] =>  0:11
+    CLOCK: [2019-03-29 Fri 14:37]--[2019-03-29 Fri 17:16] =>  2:39
     CLOCK: [2019-03-28 Thu 12:01]--[2019-03-28 Thu 12:06] =>  0:05
     CLOCK: [2019-03-28 Thu 08:33]--[2019-03-28 Thu 09:16] =>  0:43
     CLOCK: [2019-03-27 Wed 11:11]--[2019-03-27 Wed 12:16] =>  1:05
@@ -385,6 +388,82 @@ We should also allow for both:
 
 - full licence: used later at the product level.
 - licence summary: used for preambles in files.
+
+*** Split wale out of stitch templates                                :story:
+
+Stitch requires extra work in order to split out decoration. This is
+because in the past we relied on profiles to populate decoration. It
+worked because we were reading the same simple JSON files. Now we are
+relying on model references and meta-model entities, so this is no
+longer viable: they do not exist at the template level.
+
+One possible solution is to have a "reference" command line argument
+that loads up the user supplied model. We then need some kind of chain
+that applies the decoration transforms. The only solution is to create
+a temporary model that has some kind of coding element on it; this
+model is then supplied to the pipeline:
+
+- injection: needed to read the MASD model with decoration.
+- coding: needed to assemble the temp model with the MASD model and
+  to obtain the decoration.
+- generation: needed to populate the decoration properties.
+
+At this point we can then supply the annotations to the decoration
+formatter. This means that stitch now has a hard dependency on the
+rest of the dogen pipeline. Ideally we should try to split out
+weaving from stitching so that "weaving" becomes this complex
+pipeline but stitching just means the previous processing we did on
+templates. This could even mean we could remove annotations from
+stitching altogether and then have model to text transforms that
+join the stitch template output with the decoration.
+
+If we take this idea to the limit, what we are saying is that stitch
+templates can have KVPs associated with them, with multiple sources:
+
+- wale (as at present)
+- decorations. We need at least two: preamble and postamble.
+
+Note that operations (hand-crafted code to merge into the generated
+code) cannot be handled by the KVPs. This is because we are generating
+the stitch template itself, not the user facing code; we are
+generating the generator, so we are one level removed from the code
+generator. These can be handled as before, via a post-processing step
+that replaces guids with contents from the file system.
+
+To start off with we can just deprecate weaving for now. It is only
+used to quickly weave the model without code generation, but the
+generator is so quick that it does not make a lot of difference.
+
+It is important to note that we still have a two-level set of
+annotations:
+
+- the element annotations which contain the decoration. These are
+  processed prior to calling the stitch template instantiator to
+  generate the preamble and postamble KVPs (as well as the wale KVPs).
+- the annotation of the template itself. This contains the stitch
+  fields such as includes, etc. These will not contain any fields
+  related to decoration (e.g. it is no longer possible to decorate
+  from within stitch itself).
+
+This means that we need to remove all code from stitch that handles
+annotation expansion and just leave the annotation factory.
+
+We also need to look into how the wale keys were implemented - likely
+we've hard-coded it so that its always the same name:
+
+: <#$ stitch.wale.template_instantiation_result #>
+
+With a bit of luck its just a variable. If so we can then add at the
+top and bottom of each template:
+
+: <#$ stitch.decoration.preamble #>
+: ...
+: <#$ stitch.decoration.postamble #>
+
+It is *very important* to understand that this is the decoration of
+the output of the stitch template *itself*, not of the code it will
+generate. The decoration of the generated code will be handled as at
+present, by manually calling the decoration formatters.
 
 *** Make extraction model name a qualified name                       :story:
 
