@@ -27,6 +27,7 @@
 #include "masd.dogen.coding/io/meta_model/decoration_io.hpp"
 #include "masd.dogen.coding/io/meta_model/origin_types_io.hpp"
 #include "masd.dogen.extraction/io/decoration_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
 #include "masd.dogen.coding/io/meta_model/artefact_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/local_archetype_location_properties_io.hpp"
@@ -138,6 +139,7 @@ namespace masd::dogen::coding::meta_model {
 element::element()
     : origin_type_(static_cast<masd::dogen::coding::meta_model::origin_types>(0)),
       in_global_module_(static_cast<bool>(0)),
+      intrinsic_technical_space_(static_cast<masd::dogen::coding::meta_model::technical_space>(0)),
       is_element_extension_(static_cast<bool>(0)) { }
 
 element::element(element&& rhs)
@@ -150,6 +152,7 @@ element::element(element&& rhs)
       static_stereotypes_(std::move(rhs.static_stereotypes_)),
       dynamic_stereotypes_(std::move(rhs.dynamic_stereotypes_)),
       meta_name_(std::move(rhs.meta_name_)),
+      intrinsic_technical_space_(std::move(rhs.intrinsic_technical_space_)),
       is_element_extension_(std::move(rhs.is_element_extension_)),
       decoration_properties_(std::move(rhs.decoration_properties_)),
       artefact_properties_(std::move(rhs.artefact_properties_)),
@@ -166,6 +169,7 @@ element::element(
     const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
     const std::list<std::string>& dynamic_stereotypes,
     const masd::dogen::coding::meta_model::name& meta_name,
+    const masd::dogen::coding::meta_model::technical_space intrinsic_technical_space,
     const bool is_element_extension,
     const masd::dogen::extraction::decoration_properties& decoration_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
@@ -180,6 +184,7 @@ element::element(
       static_stereotypes_(static_stereotypes),
       dynamic_stereotypes_(dynamic_stereotypes),
       meta_name_(meta_name),
+      intrinsic_technical_space_(intrinsic_technical_space),
       is_element_extension_(is_element_extension),
       decoration_properties_(decoration_properties),
       artefact_properties_(artefact_properties),
@@ -204,6 +209,7 @@ void element::to_stream(std::ostream& s) const {
       << "\"static_stereotypes\": " << static_stereotypes_ << ", "
       << "\"dynamic_stereotypes\": " << dynamic_stereotypes_ << ", "
       << "\"meta_name\": " << meta_name_ << ", "
+      << "\"intrinsic_technical_space\": " << intrinsic_technical_space_ << ", "
       << "\"is_element_extension\": " << is_element_extension_ << ", "
       << "\"decoration_properties\": " << decoration_properties_ << ", "
       << "\"artefact_properties\": " << artefact_properties_ << ", "
@@ -223,6 +229,7 @@ void element::swap(element& other) noexcept {
     swap(static_stereotypes_, other.static_stereotypes_);
     swap(dynamic_stereotypes_, other.dynamic_stereotypes_);
     swap(meta_name_, other.meta_name_);
+    swap(intrinsic_technical_space_, other.intrinsic_technical_space_);
     swap(is_element_extension_, other.is_element_extension_);
     swap(decoration_properties_, other.decoration_properties_);
     swap(artefact_properties_, other.artefact_properties_);
@@ -240,6 +247,7 @@ bool element::compare(const element& rhs) const {
         static_stereotypes_ == rhs.static_stereotypes_ &&
         dynamic_stereotypes_ == rhs.dynamic_stereotypes_ &&
         meta_name_ == rhs.meta_name_ &&
+        intrinsic_technical_space_ == rhs.intrinsic_technical_space_ &&
         is_element_extension_ == rhs.is_element_extension_ &&
         decoration_properties_ == rhs.decoration_properties_ &&
         artefact_properties_ == rhs.artefact_properties_ &&
@@ -373,6 +381,14 @@ void element::meta_name(const masd::dogen::coding::meta_model::name& v) {
 
 void element::meta_name(const masd::dogen::coding::meta_model::name&& v) {
     meta_name_ = std::move(v);
+}
+
+masd::dogen::coding::meta_model::technical_space element::intrinsic_technical_space() const {
+    return intrinsic_technical_space_;
+}
+
+void element::intrinsic_technical_space(const masd::dogen::coding::meta_model::technical_space v) {
+    intrinsic_technical_space_ = v;
 }
 
 bool element::is_element_extension() const {

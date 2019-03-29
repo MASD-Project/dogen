@@ -304,6 +304,20 @@
       ]
     },
     {
+      "name": "meta_model::TechnicalSpaceRelationship",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "intrinsic_technical_space",
+          "type": "technical_space",
+          "documentation": "Describes the intrinsic nature of the modeling element with regards to technical\nspaces.\n\nIf the element can be mapped to a technical space then its intrinsic nature is\nagnostic. Otherwise, the element belongs to a concrete technical space.\n"
+        }
+      ]
+    },
+    {
       "name": "meta_model::Element",
       "parents": [
         "meta_model::Nameable",
@@ -312,7 +326,8 @@
         "meta_model::DeterminableOrigin",
         "meta_model::Containable",
         "meta_model::Stereotypable",
-        "meta_model::MetaNameable"
+        "meta_model::MetaNameable",
+        "meta_model::TechnicalSpaceRelationship"
       ],
       "documentation": "A unit of coding that can be code generated.\n\nWe define the Element object template purely to make our life easier\nwhen creating the element class. It is not required for any other\npurpose.\n",
       "stereotypes": [

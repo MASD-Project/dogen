@@ -36,6 +36,7 @@
 #include "masd.dogen.coding/types/meta_model/decoration.hpp"
 #include "masd.dogen.coding/types/meta_model/origin_types.hpp"
 #include "masd.dogen.extraction/types/decoration_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/types/meta_model/static_stereotypes.hpp"
 #include "masd.dogen.coding/types/meta_model/artefact_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor_fwd.hpp"
@@ -73,6 +74,7 @@ public:
         const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
         const masd::dogen::coding::meta_model::name& meta_name,
+        const masd::dogen::coding::meta_model::technical_space intrinsic_technical_space,
         const bool is_element_extension,
         const masd::dogen::extraction::decoration_properties& decoration_properties,
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
@@ -181,6 +183,18 @@ public:
     /**@}*/
 
     /**
+     * @brief Describes the intrinsic nature of the modeling element with regards to technical
+     * spaces.
+     *
+     * If the element can be mapped to a technical space then its intrinsic nature is
+     * agnostic. Otherwise, the element belongs to a concrete technical space.
+     */
+    /**@{*/
+    masd::dogen::coding::meta_model::technical_space intrinsic_technical_space() const;
+    void intrinsic_technical_space(const masd::dogen::coding::meta_model::technical_space v);
+    /**@}*/
+
+    /**
      * @brief If true, this element extends another element with the same id.
      */
     /**@{*/
@@ -231,6 +245,7 @@ private:
     std::list<masd::dogen::coding::meta_model::static_stereotypes> static_stereotypes_;
     std::list<std::string> dynamic_stereotypes_;
     masd::dogen::coding::meta_model::name meta_name_;
+    masd::dogen::coding::meta_model::technical_space intrinsic_technical_space_;
     bool is_element_extension_;
     masd::dogen::extraction::decoration_properties decoration_properties_;
     std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties> artefact_properties_;

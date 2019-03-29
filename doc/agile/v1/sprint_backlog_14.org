@@ -13,22 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-29 Fri 10:22]
+#+CAPTION: Clock summary at [2019-03-29 Fri 10:54]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *26:29* |       |      | 100.0 |
+| *Total time*                                           | *27:00* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 26:29   |       |      | 100.0 |
-| Active                                                 |         | 26:29 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 1:47 |   6.7 |
-| Sprint and product backlog grooming                    |         |       | 2:39 |  10.0 |
-| Create a video demo for the previous sprint's features |         |       | 3:11 |  12.0 |
-| Fix issues with emacs                                  |         |       | 2:42 |  10.2 |
-| Create a basic "project plan"                          |         |       | 2:08 |   8.1 |
-| Simplify qualified name                                |         |       | 3:39 |  13.8 |
-| Rename "language" to "technical space"                 |         |       | 7:22 |  27.8 |
-| Promote extraction entities to meta-model elements     |         |       | 3:01 |  11.4 |
+| Stories                                                | 27:00   |       |      | 100.0 |
+| Active                                                 |         | 27:00 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 1:47 |   6.6 |
+| Sprint and product backlog grooming                    |         |       | 2:39 |   9.8 |
+| Create a video demo for the previous sprint's features |         |       | 3:11 |  11.8 |
+| Fix issues with emacs                                  |         |       | 2:42 |  10.0 |
+| Create a basic "project plan"                          |         |       | 2:08 |   7.9 |
+| Simplify qualified name                                |         |       | 3:39 |  13.5 |
+| Rename "language" to "technical space"                 |         |       | 7:22 |  27.3 |
+| Add intrinsic technical space ownership                |         |       | 0:31 |   1.9 |
+| Promote extraction entities to meta-model elements     |         |       | 3:01 |  11.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -224,7 +225,8 @@ sorting. Change it to unordered and see what breaks.
 
 It seems we get errors in serialisation when using the map.
 
-*** STARTED Rename "language" to "technical space"                    :story:
+*** COMPLETED Rename "language" to "technical space"                  :story:
+    CLOSED: [2019-03-29 Fri 10:37]
     :LOGBOOK:
     CLOCK: [2019-03-29 Fri 10:13]--[2019-03-29 Fri 10:22] =>  0:09
     CLOCK: [2019-03-29 Fri 10:03]--[2019-03-29 Fri 10:12] =>  0:09
@@ -271,6 +273,15 @@ Tasks:
 - mappings
 - modeline
 - extraction model
+
+*** STARTED Add intrinsic technical space ownership                   :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-29 Fri 10:23]--[2019-03-29 Fri 10:54] =>  0:31
+    :END:
+
+We need to have the ability to associate meta-model elements to a
+technical space, in an intrinsic manner. Types such as fabric types
+cannot be mapped to other technical spaces.
 
 *** STARTED Promote extraction entities to meta-model elements        :story:
     :LOGBOOK:
