@@ -27,7 +27,7 @@
 
 /**
  * @brief Formatters for the boost serialisation
- * facet of the C++ language.
+ * facet of the C++ technical space.
  */
 namespace masd::dogen::generation::cpp::formatters {
 }

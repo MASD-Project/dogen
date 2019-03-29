@@ -310,7 +310,7 @@
         {
           "name": "documentation",
           "type": "std::string",
-          "documentation": "Code comments.\n\nThese are expected to follow the grammar of the comment processing tools\nof the programming language in question, e.g. Doxygen for C++, JavaDoc\nfor Java, etc.\n"
+          "documentation": "Code comments.\n\nThese are expected to follow the grammar of the comment processing tools\nof the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.\n"
         }
       ]
     },

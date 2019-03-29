@@ -1054,13 +1054,13 @@
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#language#</dia:string>
+            <dia:string>#ts#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#coding::meta_model::languages#</dia:string>
+            <dia:string>#coding::meta_model::technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3955,7 +3955,7 @@
 
 Takes types in the C++ model and creates a file
 representation of these types according to the
-grammar of the C++-11 programming language.
+grammar of the C++ technical space.
 
 #DOGEN masd.injection.dia.comment=true#</dia:string>
           </dia:attribute>
@@ -4010,7 +4010,7 @@ grammar of the C++-11 programming language.
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>#Formatters for the types facet of the
-C++ language.
+C++ technical space.
 
 #DOGEN masd.injection.dia.comment=true#</dia:string>
           </dia:attribute>
@@ -4065,7 +4065,7 @@ C++ language.
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>#Formatters for the hash facet of the
-C++ language.
+C++ technical space.
 
 #DOGEN masd.injection.dia.comment=true#</dia:string>
           </dia:attribute>
@@ -4120,7 +4120,7 @@ C++ language.
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>#Formatters for the test_data facet
-of the C++ language.
+of the C++ technical space.
 
 #DOGEN masd.injection.dia.comment=true#</dia:string>
           </dia:attribute>
@@ -4175,7 +4175,7 @@ of the C++ language.
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>#Formatters for the io facet of the
-C++ language.
+C++ technical space.
 
 #DOGEN masd.injection.dia.comment=true#</dia:string>
           </dia:attribute>
@@ -4230,7 +4230,7 @@ C++ language.
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>#Formatters for the odb facet of the
-C++ language.
+C++ technical space.
 
 #DOGEN masd.injection.dia.comment=true#</dia:string>
           </dia:attribute>
@@ -4285,7 +4285,7 @@ C++ language.
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>#Formatters for the boost serialisation
-facet of the C++ language.
+facet of the C++ technical space.
 
 #DOGEN masd.injection.dia.comment=true#</dia:string>
           </dia:attribute>

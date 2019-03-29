@@ -42,7 +42,6 @@ using namespace masd::dogen::utility::log;
 static logger
 lg(logger_factory("generation.csharp.formattables.helper_expander"));
 
-const std::string qn_missing("Could not find qualified name for language.");
 const std::string descriptor_expected(
     "Child name tree has no associated helper descriptor");
 const std::string missing_helper_family("Helper family not found for: ");

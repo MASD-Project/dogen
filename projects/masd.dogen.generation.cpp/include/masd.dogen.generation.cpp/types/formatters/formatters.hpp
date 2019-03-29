@@ -30,7 +30,7 @@
  *
  * Takes types in the C++ model and creates a file
  * representation of these types according to the
- * grammar of the C++-11 programming language.
+ * grammar of the C++ technical space.
  */
 namespace masd::dogen::generation::cpp {
 }

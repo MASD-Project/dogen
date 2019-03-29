@@ -27,7 +27,7 @@
 
 /**
  * @brief Formatters for the test_data facet
- * of the C++ language.
+ * of the C++ technical space.
  */
 namespace masd::dogen::generation::cpp::formatters {
 }

@@ -2445,8 +2445,7 @@ main stereotypes.#</dia:string>
             <dia:string>#Code comments.
 
 These are expected to follow the grammar of the comment processing tools
-of the programming language in question, e.g. Doxygen for C++, JavaDoc
-for Java, etc.#</dia:string>
+of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

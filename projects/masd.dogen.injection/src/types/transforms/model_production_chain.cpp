@@ -77,7 +77,7 @@ apply(const context& ctx, const boost::filesystem::path& p) {
     annotations_transform::apply(ctx, r);
 
     /*
-     * Read the input language.
+     * Read the input technical space.
      */
     input_technical_space_transform::apply(ctx, r);
 

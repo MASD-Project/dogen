@@ -27,7 +27,7 @@
 
 /**
  * @brief Formatters for the hash facet of the
- * C++ language.
+ * C++ technical space.
  */
 namespace masd::dogen::generation::cpp::formatters {
 }
