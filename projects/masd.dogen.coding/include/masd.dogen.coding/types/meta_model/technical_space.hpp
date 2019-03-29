@@ -28,7 +28,7 @@
 namespace masd::dogen::coding::meta_model {
 
 /**
- * @brief Models need to declare upfront the programming language they will target.
+ * @brief Models need to declare upfront the technical space they will target.
  */
 enum class technical_space : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum

@@ -101,7 +101,7 @@ public:
     /**@}*/
 
     /**
-     * @brief If true and if the programming language supports it, it uses type aliases
+     * @brief If set to true, and if the owning technical space supports it, use type aliasing.
      */
     /**@{*/
     bool use_type_aliasing() const;

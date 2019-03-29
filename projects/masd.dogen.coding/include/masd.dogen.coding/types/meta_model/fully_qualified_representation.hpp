@@ -69,7 +69,7 @@ public:
 
     /**
      * @brief Representation of the identifier that can usable as an identifier on all of the
-     * supported languages, using the entire name structure.
+     * supported technical spaces, using the entire name structure.
      */
     /**@{*/
     const std::string& identifiable() const;

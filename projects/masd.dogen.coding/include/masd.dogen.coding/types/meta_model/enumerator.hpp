@@ -56,8 +56,8 @@ public:
      * @brief Code comments.
      *
      * These are expected to follow the grammar of the comment processing tools
-     * of the programming language in question, e.g. Doxygen for C++, JavaDoc
-     * for Java, etc.
+     * of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java,
+     * etc.
      */
     /**@{*/
     const std::string& documentation() const;

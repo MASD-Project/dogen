@@ -30,11 +30,11 @@
  *
  * @section coding_0 Overview
  *
- * Coding is a meta-model that provides a programming-language-neutral
- * type representation, designed for code generation. Intermediate models
- * are obtained via frontends and post-processed until they form a
- * cohesive whole. They are then suitable to be sent down the
- * pipeline for further processing.
+ * Coding is a meta-model that strives to provide a technical-space agnostic
+ * type representation, designed for code generation. Injection models
+ * are obtained via frontends and processed until they form a cohesive
+ * whole. They are then suitable to be sent down the pipeline for further
+ * processing.
  *
  * @section coding_1 Mission
  *
@@ -42,10 +42,10 @@
  *
  * @li to represent all high-level entities that exist across a number
  * of technical spaces used in software engineering. These entities
- * are not necessarily limited to programming language entities, though
- * of course, these form the core set of elements we're interested in.
- * Additional entities such as build sytems and high-level patterns
- * such as GoF and others are also captured.
+ * are not necessarily limited to programming entities, though, of course,
+ * these form the core set of elements we're interested in. Additional
+ * entities such as build sytems and high-level patterns such as GoF
+ * and others are also captured.
  *
  * @li to provide the tooling required to combine multiple coding
  * models together into a bigger model - called the @e merged model.

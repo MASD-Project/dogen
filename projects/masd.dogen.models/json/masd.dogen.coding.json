@@ -1,5 +1,5 @@
 {
-  "documentation": "Coding is the core Dogen meta-model representing software entities.\n\n@section coding_0 Overview\n\nCoding is a meta-model that provides a programming-language-neutral\ntype representation, designed for code generation. Intermediate models\nare obtained via frontends and post-processed until they form a\ncohesive whole. They are then suitable to be sent down the\npipeline for further processing.\n\n@section coding_1 Mission\n\nCoding's objectives are:\n\n@li to represent all high-level entities that exist across a number\nof technical spaces used in software engineering. These entities\nare not necessarily limited to programming language entities, though\nof course, these form the core set of elements we're interested in.\nAdditional entities such as build sytems and high-level patterns\nsuch as GoF and others are also captured.\n\n@li to provide the tooling required to combine multiple coding\nmodels together into a bigger model - called the @e merged model.\n\n@li to ensure the consistency of the merged model via validation\nrules (such as verifying that all types have a definitions,\netc.).\n",
+  "documentation": "Coding is the core Dogen meta-model representing software entities.\n\n@section coding_0 Overview\n\nCoding is a meta-model that strives to provide a technical-space agnostic\ntype representation, designed for code generation. Injection models\nare obtained via frontends and processed until they form a cohesive \nwhole. They are then suitable to be sent down the pipeline for further\nprocessing.\n\n@section coding_1 Mission\n\nCoding's objectives are:\n\n@li to represent all high-level entities that exist across a number\nof technical spaces used in software engineering. These entities\nare not necessarily limited to programming entities, though, of course,\nthese form the core set of elements we're interested in. Additional\nentities such as build sytems and high-level patterns such as GoF \nand others are also captured.\n\n@li to provide the tooling required to combine multiple coding\nmodels together into a bigger model - called the @e merged model.\n\n@li to ensure the consistency of the merged model via validation\nrules (such as verifying that all types have a definitions,\netc.).\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "masd.dogen.coding",
@@ -216,7 +216,7 @@
         {
           "name": "documentation",
           "type": "std::string",
-          "documentation": "Code comments.\n\nThese are expected to follow the grammar of the comment processing tools\nof the programming language in question, e.g. Doxygen for C++, JavaDoc\nfor Java, etc.\n"
+          "documentation": "Code comments.\n\nThese are expected to follow the grammar of the comment processing tools\nof the technical space in question, e.g. Doxygen for C++, JavaDoc for Java,\netc.\n"
         }
       ]
     },
@@ -862,7 +862,7 @@
     },
     {
       "name": "meta_model::technical_space",
-      "documentation": "Models need to declare upfront the programming language they will target.\n",
+      "documentation": "Models need to declare upfront the technical space they will target.\n",
       "stereotypes": [
         "masd::enumeration"
       ],
@@ -918,7 +918,7 @@
         {
           "name": "use_type_aliasing",
           "type": "bool",
-          "documentation": "If true and if the programming language supports it, it uses type aliases\n"
+          "documentation": "If set to true, and if the owning technical space supports it, use type aliasing.\n"
         },
         {
           "name": "is_immutable",
@@ -2161,7 +2161,7 @@
         {
           "name": "identifiable",
           "type": "std::string",
-          "documentation": "Representation of the identifier that can usable as an identifier on all of the\nsupported languages, using the entire name structure.\n"
+          "documentation": "Representation of the identifier that can usable as an identifier on all of the\nsupported technical spaces, using the entire name structure.\n"
         }
       ]
     },
