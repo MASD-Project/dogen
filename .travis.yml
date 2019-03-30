@@ -85,6 +85,9 @@ script:
         ${SCRIPTS_DIR}/test_package.linux.sh ${configuration} ${compiler};
     fi
 
+after_script:
+  - python <(curl -s https://report.ci/upload.py)
+    
 after_success:
   - if [[ "x${coverage}" == "x1" ]]; then
        ${SCRIPTS_DIR}/coverage.linux.sh ${STAGE_DIR} /tmp/kcov ${TRAVIS_JOB_ID};
