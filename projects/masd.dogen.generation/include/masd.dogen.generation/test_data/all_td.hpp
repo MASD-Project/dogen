@@ -26,6 +26,7 @@
 #endif
 
 #include "masd.dogen.generation/test_data/meta_model/model_td.hpp"
+#include "masd.dogen.generation/test_data/formatters/comment_style_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/facet_properties_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/element_archetype_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/formatting_styles_td.hpp"

@@ -13,23 +13,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-30 Sat 07:47]
-| <75>                                                   |         |       |      |       |
-| Headline                                               | Time    |       |      |     % |
-|--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *33:21* |       |      | 100.0 |
-|--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 33:21   |       |      | 100.0 |
-| Active                                                 |         | 33:21 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 1:47 |   5.3 |
-| Sprint and product backlog grooming                    |         |       | 5:38 |  16.9 |
-| Create a video demo for the previous sprint's features |         |       | 3:11 |   9.5 |
-| Fix issues with emacs                                  |         |       | 2:42 |   8.1 |
-| Create a basic "project plan"                          |         |       | 2:08 |   6.4 |
-| Simplify qualified name                                |         |       | 3:39 |  10.9 |
-| Rename "language" to "technical space"                 |         |       | 7:22 |  22.1 |
-| Add intrinsic technical space ownership                |         |       | 1:12 |   3.6 |
-| Promote extraction entities to meta-model elements     |         |       | 5:42 |  17.1 |
+#+CAPTION: Clock summary at [2019-03-30 Sat 14:06]
+| <75>                                                      |         |       |      |       |
+| Headline                                                  | Time    |       |      |     % |
+|-----------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                              | *34:01* |       |      | 100.0 |
+|-----------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                   | 34:01   |       |      | 100.0 |
+| Active                                                    |         | 34:01 |      | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 1:47 |   5.2 |
+| Sprint and product backlog grooming                       |         |       | 5:38 |  16.6 |
+| Create a video demo for the previous sprint's features    |         |       | 3:11 |   9.4 |
+| Fix issues with emacs                                     |         |       | 2:42 |   7.9 |
+| Create a basic "project plan"                             |         |       | 2:08 |   6.3 |
+| Simplify qualified name                                   |         |       | 3:39 |  10.7 |
+| Rename "language" to "technical space"                    |         |       | 7:22 |  21.7 |
+| Add intrinsic technical space ownership                   |         |       | 1:12 |   3.5 |
+| Promote extraction entities to meta-model elements        |         |       | 5:55 |  17.4 |
+| Move all utility formatters from extraction to generation |         |       | 0:27 |   1.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -404,7 +405,10 @@ We should also allow for both:
 - full licence: used later at the product level.
 - licence summary: used for preambles in files.
 
-*** Move all utility formatters from extraction to generation         :story:
+*** STARTED Move all utility formatters from extraction to generation :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-30 Sat 13:39]--[2019-03-30 Sat 14:06] =>  0:27
+    :END:
 
 We need to move all formatters into generation and update templates to
 point to new location. This must be done after decoration has been
