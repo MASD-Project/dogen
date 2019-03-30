@@ -301,6 +301,7 @@ We probably need to delete and re-add the project.
 
 *** STARTED Promote extraction entities to meta-model elements        :story:
     :LOGBOOK:
+    CLOCK: [2019-03-30 Sat 07:47]--[2019-03-30 Sat 08:00] =>  0:13
     CLOCK: [2019-03-30 Sat 07:10]--[2019-03-30 Sat 07:46] =>  0:36
     CLOCK: [2019-03-29 Fri 18:19]--[2019-03-29 Fri 18:21] =>  0:02
     CLOCK: [2019-03-29 Fri 18:00]--[2019-03-29 Fri 18:18] =>  0:18
@@ -406,7 +407,8 @@ We should also allow for both:
 *** Move all utility formatters from extraction to generation         :story:
 
 We need to move all formatters into generation and update templates to
-point to new location.
+point to new location. This must be done after decoration has been
+updated to use the new modeling elements.
 
 *** Stitch is still using artefact writer                             :story:
 

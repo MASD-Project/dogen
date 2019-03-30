@@ -2134,28 +2134,14 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "top_modeline",
+          "name": "preamble",
           "type": "std::string",
-          "documentation": "Modeline to use in this file, if any.\n"
+          "documentation": "Preamble for all artefacts created from this element.\n\nThe preamble is located at the top of an artefact and includes elements such as a\nmodeline, licence,  copyrights, etc.\n"
         },
         {
-          "name": "bottom_modeline",
-          "type": "std::string"
-        },
-        {
-          "name": "copyrights",
-          "type": "std::list<std::string>",
-          "documentation": "All copyright notices for the current element.\n"
-        },
-        {
-          "name": "licence_short_form",
+          "name": "postamble",
           "type": "std::string",
-          "documentation": "Licence to use in this file, if any.\n"
-        },
-        {
-          "name": "generation_marker",
-          "type": "std::string",
-          "documentation": "Code generation marker to use for this element, if any.\n"
+          "documentation": "Postamble for all artefacts created from this element.\n\nThe postamble is located at the bottom of an artefact and includes elements such\nas a modeline.\n"
         }
       ]
     },
