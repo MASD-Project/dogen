@@ -548,14 +548,6 @@ enable/disable this behaviour.
 It would be nice to generate a tracing of the model dependencies. This
 may not necessarily be part of tracing.
 
-*** Stitch is still using artefact writer                             :story:
-
-Create a templating transform that is similar to the approach used by
-extraction - in fact, stitch should probably be using a transform in
-extraction.
-
-Delete artefact writer.
-
 *** Fix cmake emacs variable for tab width                            :story:
 
 We need to replace uses of =tab-width= in cmake files with
