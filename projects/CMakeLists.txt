@@ -19,7 +19,7 @@
 #
 
 # parameters for boost tests
-set(boost_test_parameters "--log_level=error --log_format=XML --report_format=XML")
+set(boost_test_parameters "--log_level=error" "--log_format=XML" "--report_format=XML")
 
 # tests to ignore
 set(boost_tests_ignore "")
