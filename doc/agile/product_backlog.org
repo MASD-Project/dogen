@@ -12744,29 +12744,38 @@ straight forward to add it. We just need meta-data support to enable
 the feature and then take it into account when generating the file
 names (e.g. instead of using =/= as a separator, use =.=).
 
-See also the story on destinations.
+Actually this is _almost_ already possible: we provide a facet folder
+meta-data that is always used to generate a new folder. If however
+there was a way for it to not generate a folder we could achieve
+this. For example, say we had to supply:
 
-*** Allow manual overrides to facets                                  :story:
+: /types/
 
-#+begin_quote
-*Story*: As a dogen user, I sometimes want to provide my own
-implementation for a given facet.
-#+end_quote
+as the facet folder. Then the user could simply supply instead:
 
-Sometimes it may make sense to provide a user-supplied implementation
-for a given facet. For example for qname it may make sense to use the
-string converter approach to do the actual JSON serialisation. However
-its not possible to just disable code generation of a given type's
-inserters and then provide a manual implementation. This could easily
-be achieved via dynamic extensions: we could provide a meta-data
-parameter for each facet such as "generation type", manual or
-automatic. This can be done once we get rid of the current use of
-generation types for full/partial/no generation.
+: types_
+: types.
+
+And no folder would be created.
+
+Notes:
+
+- see also the story on destinations.
+- consider splitting this story into two: one is about how folder
+  layout (physical) may need to match namespace layout (logical);
+  another is related to allowing users to flatten facet
+  directories. They have some connection, but its not obvious how much
+  they overlap.
 
 *** Investigate ribosome for ideas                                    :story:
 
-[[http://ribosome.ch/][Ribosome]] seems like a templating tool with a simple syntax. May have
+Ribosome seems like a templating tool with a simple syntax. May have
 some ideas useful for stitch.
+
+Links:
+
+- http://sustrik.github.io/ribosome/: website
+- https://github.com/sustrik/ribosome
 
 *** Add merging code generation support                                :epic:
 
@@ -12892,6 +12901,27 @@ code must be inserted into generated code directly, the introduction
 of protected areas is inevitable. Please do this only if such
 exceptional conditions require this approach!
 #+end_quote
+
+- We will need to support multiple merging strategies, depending on
+  the use case:
+  - simple extension: when we just want to add a method or two to an
+    otherwise generated object. For this, protected regions at the
+    function level is probably enough.
+  - large extensions: when we want to add lots of functionality but
+    there is a small component of code generation. For this we want
+    some large blocks of protected regions that the user manages
+    (includes, anonymous namespace, class, etc. The user can then put
+    whatever it wants in those).
+  - private inheritance: we could create a private/internal base class
+    with all of the generated code and then inherit privately from it
+    in a hand-crafted file. Only available on C++.
+  - partial classes: one definition is code generated, the other
+    hand-crafted. Only available in C#.
+
+Links:
+
+- [[https://arxiv.org/pdf/1509.04498.pdf][A comparison of mechanisms for integrating handwritten and generated
+  code for object-oriented programming languages]]
 
 *** Add support for languages available in Dia2Code                    :epic:
 

@@ -13,23 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-30 Sat 14:06]
+#+CAPTION: Clock summary at [2019-03-31 Sun 10:23]
 | <75>                                                      |         |       |      |       |
 | Headline                                                  | Time    |       |      |     % |
 |-----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                              | *34:01* |       |      | 100.0 |
+| *Total time*                                              | *34:34* |       |      | 100.0 |
 |-----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                   | 34:01   |       |      | 100.0 |
-| Active                                                    |         | 34:01 |      | 100.0 |
+| Stories                                                   | 34:34   |       |      | 100.0 |
+| Active                                                    |         | 34:34 |      | 100.0 |
 | Edit release notes for previous sprint                    |         |       | 1:47 |   5.2 |
-| Sprint and product backlog grooming                       |         |       | 5:38 |  16.6 |
-| Create a video demo for the previous sprint's features    |         |       | 3:11 |   9.4 |
-| Fix issues with emacs                                     |         |       | 2:42 |   7.9 |
-| Create a basic "project plan"                             |         |       | 2:08 |   6.3 |
-| Simplify qualified name                                   |         |       | 3:39 |  10.7 |
-| Rename "language" to "technical space"                    |         |       | 7:22 |  21.7 |
+| Sprint and product backlog grooming                       |         |       | 6:11 |  17.9 |
+| Create a video demo for the previous sprint's features    |         |       | 3:11 |   9.2 |
+| Fix issues with emacs                                     |         |       | 2:42 |   7.8 |
+| Create a basic "project plan"                             |         |       | 2:08 |   6.2 |
+| Simplify qualified name                                   |         |       | 3:39 |  10.6 |
+| Rename "language" to "technical space"                    |         |       | 7:22 |  21.3 |
 | Add intrinsic technical space ownership                   |         |       | 1:12 |   3.5 |
-| Promote extraction entities to meta-model elements        |         |       | 5:55 |  17.4 |
+| Promote extraction entities to meta-model elements        |         |       | 5:55 |  17.1 |
 | Move all utility formatters from extraction to generation |         |       | 0:27 |   1.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -146,6 +146,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-03-31 Sun 09:50]--[2019-03-31 Sun 10:23] =>  0:33
     CLOCK: [2019-03-29 Fri 17:29]--[2019-03-29 Fri 17:38] =>  0:09
     CLOCK: [2019-03-29 Fri 17:17]--[2019-03-29 Fri 17:28] =>  0:11
     CLOCK: [2019-03-29 Fri 14:37]--[2019-03-29 Fri 17:16] =>  2:39
@@ -299,6 +300,27 @@ For some reason our metrics are stuck at 5 months ago or so. It is
 actually mildly useful to know the number of lines of code etc.
 
 We probably need to delete and re-add the project.
+
+*** COMPLETED Allow manual overrides to facets                        :story:
+    CLOSED: [2019-03-31 Sun 10:09]
+
+*Rationale*: this is already possible by using a combination of
+enabled and override flags.
+
+#+begin_quote
+*Story*: As a dogen user, I sometimes want to provide my own
+implementation for a given facet.
+#+end_quote
+
+Sometimes it may make sense to provide a user-supplied implementation
+for a given facet. For example for qname it may make sense to use the
+string converter approach to do the actual JSON serialisation. However
+its not possible to just disable code generation of a given type's
+inserters and then provide a manual implementation. This could easily
+be achieved via dynamic extensions: we could provide a meta-data
+parameter for each facet such as "generation type", manual or
+automatic. This can be done once we get rid of the current use of
+generation types for full/partial/no generation.
 
 *** STARTED Promote extraction entities to meta-model elements        :story:
     :LOGBOOK:
