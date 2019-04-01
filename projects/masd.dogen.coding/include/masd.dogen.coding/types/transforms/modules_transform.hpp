@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include <list>
+#include <string>
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 
@@ -34,6 +36,22 @@ namespace masd::dogen::coding::transforms {
  * @brief Generates all of the modules implied by the defined types.
  */
 class modules_transform final {
+private:
+    /**
+     * @brief Gathers all internal modules referred to by model
+     * elements.
+     */
+    static std::unordered_map<std::string, std::list<std::string>>
+    gather_internal_modules(meta_model::model& m);
+
+    /**
+     * @brief Creates modules for the internal modules which are not
+     * yet in model.
+     */
+    static void create_modules(const std::unordered_map<std::string,
+        std::list<std::string>>& internal_modules,
+        meta_model::model& m);
+
 public:
     static void apply(const context& ctx, meta_model::model& m);
 };
