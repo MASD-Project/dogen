@@ -684,10 +684,6 @@
       ]
     },
     {
-      "name": "helpers",
-      "fallback_element_type": "masd::module"
-    },
-    {
       "name": "transforms::transformation_error",
       "documentation": "An error occurred whilst applying a transformation.\n",
       "stereotypes": [
@@ -798,6 +794,27 @@
           "name": "xml_style",
           "type": "",
           "documentation": "Comments using XML syntax.\n"
+        }
+      ]
+    },
+    {
+      "name": "helpers",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "helpers::modeline_repository_factory",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::modeline_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "modelines_by_group_by_technical_space",
+          "type": "std::unordered_map<std::string, std::unordered_map<coding::meta_model::technical_space, coding::meta_model::modeline>>"
         }
       ]
     }
