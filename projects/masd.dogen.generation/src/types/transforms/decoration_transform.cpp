@@ -52,6 +52,7 @@ namespace masd::dogen::generation::transforms {
  */
 class modelines_aggregator : public coding::meta_model::element_visitor {
 public:
+    using coding::meta_model::element_visitor::visit;
     void visit(const coding::meta_model::modeline_group& mg);
 
 public:
