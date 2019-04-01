@@ -2372,13 +2372,13 @@ or a string.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O19">
       <dia:attribute name="obj_pos">
-        <dia:point val="-211,6"/>
+        <dia:point val="-211,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-211.05,5.95;-195.435,9.65"/>
+        <dia:rectangle val="-211.05,4.95;-195.435,8.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-211,6"/>
+        <dia:point val="-211,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -30103,16 +30103,16 @@ rebuilds for no good reason.#</dia:string>
         <dia:point val="-190.74,0"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-203.293,-0.75;-189.99,6.8"/>
+        <dia:rectangle val="-203.293,-0.75;-189.99,5.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="-190.74,0"/>
-        <dia:point val="-190.74,3.35"/>
-        <dia:point val="-203.243,3.35"/>
-        <dia:point val="-203.243,6"/>
+        <dia:point val="-190.74,3"/>
+        <dia:point val="-203.243,3"/>
+        <dia:point val="-203.243,5"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -30120,7 +30120,7 @@ rebuilds for no good reason.#</dia:string>
         <dia:enum val="1"/>
       </dia:attribute>
       <dia:attribute name="orth_autoroute">
-        <dia:boolean val="true"/>
+        <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>

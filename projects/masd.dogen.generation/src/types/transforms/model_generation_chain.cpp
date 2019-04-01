@@ -28,6 +28,7 @@
 #include "masd.dogen.generation/types/transforms/enablement_transform.hpp"
 #include "masd.dogen.generation/types/transforms/formatting_transform.hpp"
 #include "masd.dogen.generation/types/transforms/archetype_location_properties_transform.hpp"
+#include "masd.dogen.generation/types/transforms/decoration_transform.hpp"
 #include "masd.dogen.generation/types/transforms/model_generation_chain.hpp"
 
 namespace {
@@ -55,6 +56,12 @@ void model_generation_chain::apply(const context& ctx,
          * Perform dynamic expansion first. These are backend specific.
          */
         dynamic_transforms_chain::apply(ctx, m);
+
+        /*
+         * Decoration transform must be applied after dynamic
+         * transform because we need the new model elements.
+         */
+        decoration_transform::apply(ctx, m);
 
         /*
          * Next we apply the generability transform. We do this after

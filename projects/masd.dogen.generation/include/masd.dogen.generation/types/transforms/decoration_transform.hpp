@@ -27,12 +27,27 @@
 
 #include <string>
 #include <unordered_map>
+#include <boost/shared_ptr.hpp>
+#include "masd.dogen.coding/types/meta_model/modeline.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 
 namespace masd::dogen::generation::transforms {
 
+/**
+ * @brief Updates the decoration of all modeling elements.
+ */
 class decoration_transform final {
+private:
+    static std::unordered_map<
+    std::string,
+    std::unordered_map<coding::meta_model::technical_space,
+                       boost::shared_ptr<
+                           coding::meta_model::modeline>
+                       >
+    >
+    aggregate_modelines(meta_model::model& m);
+
 public:
     static void apply(const context& ctx, meta_model::model& m);
 };
