@@ -225,7 +225,7 @@ void updater::update_containing_element(const meta_model::name& container,
     /*
      * Now we check to see if it is a modeline group.
      */
-    BOOST_LOG_SEV(lg, debug) << "Could not find module: '"
+    BOOST_LOG_SEV(lg, trace) << "Could not find module: '"
                              << container_id << "'. "
                              << "Trying as a modeline group.";
     inserted = try_insert(model_.modeline_groups(), container_id, containee_id);
@@ -241,21 +241,29 @@ void updater::update_containing_element(const meta_model::name& container,
 }
 
 void updater::update(meta_model::element& e) {
+    BOOST_LOG_SEV(lg, trace) << "Processing element: "
+                             << e.name().qualified().dot();
+
     /*
      * First we must determine what the containing element should look
      * like - or if it should even exist at all.
      */
     const auto n(create_containing_element_name(e.name()));
-    if (!n)
+    if (!n) {
+        BOOST_LOG_SEV(lg, trace) << "Element is not contained.";
         return;
+    }
 
     /*
      * If we did find a containing element name, we need to update the
      * containment relationship with that element and also its
      * reciprocal.
      */
+    const auto container_id(n->qualified().dot());
     update_containing_element(*n, e.name());
-    e.contained_by(n->qualified().dot());
+    e.contained_by(container_id);
+    BOOST_LOG_SEV(lg, trace) << "Element is contained by: "
+                             << container_id;
 }
 
 }
