@@ -56,13 +56,13 @@ inline void add_containing_module_to_non_contained_entities(
     AssociativeContainerOfContainable& c) {
     for (auto& pair : c) {
         auto& s(*pair.second);
-        if (!s.contained_by())
-            s.contained_by(container_name);
+        if (s.contained_by().empty())
+            s.contained_by(container_name.qualified().dot());
     }
 }
 
-boost::shared_ptr<meta_model::module>
-global_module_transform::create_global_module(const meta_model::origin_types ot) {
+boost::shared_ptr<meta_model::module> global_module_transform::
+create_global_module(const meta_model::origin_types ot) {
     const std::string gm("global_module");
     const meta_model::fully_qualified_representation fqr(gm, gm, gm);
     auto r(boost::make_shared<meta_model::module>());

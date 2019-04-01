@@ -49,7 +49,7 @@ public:
         const std::string& documentation,
         const masd::dogen::annotations::annotation& annotation,
         const masd::dogen::coding::meta_model::origin_types origin_type,
-        const boost::optional<masd::dogen::coding::meta_model::name>& contained_by,
+        const std::string& contained_by,
         const bool in_global_module,
         const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,

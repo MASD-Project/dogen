@@ -255,7 +255,7 @@ void updater::update(meta_model::element& e) {
      * reciprocal.
      */
     update_containing_element(*n, e.name());
-    e.contained_by(n);
+    e.contained_by(n->qualified().dot());
 }
 
 }

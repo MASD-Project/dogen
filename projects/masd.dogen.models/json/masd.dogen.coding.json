@@ -258,8 +258,8 @@
       "attributes": [
         {
           "name": "contained_by",
-          "type": "boost::optional<name>",
-          "documentation": "Name of the module in which we are contained.\n"
+          "type": "std::string",
+          "documentation": "Name of the module in which we are contained, if any.\n"
         },
         {
           "name": "in_global_module",
