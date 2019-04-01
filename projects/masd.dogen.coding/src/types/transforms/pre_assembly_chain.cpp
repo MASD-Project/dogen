@@ -47,18 +47,19 @@ namespace masd::dogen::coding::transforms {
 
 void pre_assembly_chain::apply(const context& ctx, meta_model::model& m) {
     /*
-     * Modelines transform can be done anywhere as its dependencies
-     * are not within coding transforms at present.
-     */
-    modelines_transform::apply(ctx, m);
-
-    /*
      * Module transform must be done before origin and technical space
      * transforms to get these properties populated on the new
-     * modules.
+     * modules; it must be done before the containment transform
+     * because we rely on implicit modules being present.
      */
     modules_transform::apply(ctx, m);
     containment_transform::apply(ctx, m);
+
+    /*
+     * Modelines transform must be done after the containment
+     * transform to ensure we can see the modelines for a group.
+     */
+    modelines_transform::apply(ctx, m);
 
     /*
      * There are no particular dependencies on the next set of

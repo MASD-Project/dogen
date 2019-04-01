@@ -26,6 +26,7 @@
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline.hpp"
+#include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
 #include "masd.dogen.coding/types/transforms/modelines_transform.hpp"
@@ -52,6 +53,8 @@ const std::string technical_space_xml("xml");
 const std::string technical_space_odb("odb");
 const std::string technical_space_sln("sln");
 
+const std::string missing_container("Modeline does not have a container: ");
+const std::string missing_group("Cannot find modeline group: ");
 const std::string invalid_editor("Editor is invalid or unsupported: ");
 const std::string invalid_modeline_location(
     "Modeline location is invalid or unsupported: ");
@@ -121,7 +124,6 @@ modelines_transform::make_type_group(const annotations::type_repository& atrp) {
     return r;
 }
 
-
 meta_model::editor modelines_transform::
 make_editor(const type_group& tg, const annotations::annotation& a) {
     const annotations::entry_selector s(a);
@@ -158,6 +160,20 @@ void modelines_transform::apply(const context& ctx, meta_model::model& m) {
         ml.editor(make_editor(tg, a));
         ml.location(make_modeline_location(tg, a));
         ml.technical_space(make_technical_space(tg, a));
+
+        if (ml.contained_by().empty()) {
+            BOOST_LOG_SEV(lg, error) << missing_container << id;
+            BOOST_THROW_EXCEPTION(transformation_error(missing_container + id));
+        }
+
+        auto& mgs(m.modeline_groups());
+        const auto i(mgs.find(ml.contained_by()));
+        if (i == mgs.end()) {
+            BOOST_LOG_SEV(lg, error) << missing_group << ml.contained_by();
+            BOOST_THROW_EXCEPTION(
+                transformation_error(missing_group + ml.contained_by()));
+        }
+        i->second->modelines().push_back(pair.second);
     }
 
     stp.end_transform(m);
