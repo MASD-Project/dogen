@@ -14254,3 +14254,12 @@ Notes:
   incongruent though. We need to make sure we do not create a loop
   when we are changing an existing generator, whereby we can no longer
   generate code because the new state is not valid.
+*** Consider adding support for sandbox-api                           :story:
+
+It is not entirely clear how this works or how it would be integrated
+with Dogen, but it would be nice to have a top-level flag that would
+generate the glue code for sandbox-api.
+
+Links:
+
+- https://github.com/google/sandboxed-api
