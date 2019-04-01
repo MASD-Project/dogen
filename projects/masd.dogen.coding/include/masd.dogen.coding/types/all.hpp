@@ -117,6 +117,7 @@
 #include "masd.dogen.coding/types/meta_model/extraction_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_module_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_object_properties.hpp"
+#include "masd.dogen.coding/types/transforms/containment_transform.hpp"
 #include "masd.dogen.coding/types/transforms/meta_naming_transform.hpp"
 #include "masd.dogen.coding/types/transforms/stereotypes_transform.hpp"
 #include "masd.dogen.coding/types/transforms/type_params_transform.hpp"

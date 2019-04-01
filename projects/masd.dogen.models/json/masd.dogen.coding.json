@@ -2195,6 +2195,13 @@
           "type": "fully_qualified_representation"
         }
       ]
+    },
+    {
+      "name": "transforms::containment_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
