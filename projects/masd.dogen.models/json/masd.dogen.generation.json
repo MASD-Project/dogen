@@ -684,10 +684,6 @@
       ]
     },
     {
-      "name": "helpers",
-      "fallback_element_type": "masd::module"
-    },
-    {
       "name": "transforms::transformation_error",
       "documentation": "An error occurred whilst applying a transformation.\n",
       "stereotypes": [
@@ -800,6 +796,39 @@
           "documentation": "Comments using XML syntax.\n"
         }
       ]
+    },
+    {
+      "name": "helpers",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "helpers::decoration_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "modelines_by_modeline_group_by_technical_space",
+          "type": "std::unordered_map<std::string, std::unordered_map<coding::meta_model::technical_space, boost::shared_ptr<coding::meta_model::modeline>>>"
+        },
+        {
+          "name": "licences_short_form_by_name",
+          "type": "std::unordered_map<std::string, std::string>"
+        },
+        {
+          "name": "licences_long_form_by_name",
+          "type": "std::unordered_map<std::string, std::string>"
+        },
+        {
+          "name": "generation_markers_by_name",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<coding::meta_model::generation_marker>>"
+        }
+      ]
+    },
+    {
+      "name": "helpers::decoration_repository_factory",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

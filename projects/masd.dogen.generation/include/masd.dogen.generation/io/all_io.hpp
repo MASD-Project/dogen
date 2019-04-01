@@ -30,6 +30,7 @@
 #include "masd.dogen.generation/io/meta_model/facet_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/element_archetype_io.hpp"
 #include "masd.dogen.generation/io/meta_model/formatting_styles_io.hpp"
+#include "masd.dogen.generation/io/helpers/decoration_repository_io.hpp"
 #include "masd.dogen.generation/io/meta_model/backend_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/locator_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/artefact_properties_io.hpp"

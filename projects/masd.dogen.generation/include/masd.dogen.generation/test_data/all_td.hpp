@@ -30,6 +30,7 @@
 #include "masd.dogen.generation/test_data/meta_model/facet_properties_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/element_archetype_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/formatting_styles_td.hpp"
+#include "masd.dogen.generation/test_data/helpers/decoration_repository_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/backend_properties_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/locator_properties_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/artefact_properties_td.hpp"
