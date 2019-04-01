@@ -10119,6 +10119,16 @@ Validation:
 
 - objects marked as is comparable must follow the [[*Add%20is%20comparable%20to%20yarn][comparison rules]].
 
+Notes:
+
+- maybe we need to have multiple strategies for =operator<=. The
+  simplest case is the user marks the properties in the class and we
+  call =operator<= on those in the defined order. The second case is
+  where the user wants to create a key from those properties, as an
+  external class. Another case is where the user wants to hand-craft
+  the operator using merging support (any of the several possible
+  merging strategies).
+
 *Merged with ordered containers story:*
 
 In order to provide support for ordered containers such as maps and
