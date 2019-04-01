@@ -29,6 +29,7 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.coding/types/meta_model/modeline.hpp"
+#include "masd.dogen.coding/hash/meta_model/technical_space_hash.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 
