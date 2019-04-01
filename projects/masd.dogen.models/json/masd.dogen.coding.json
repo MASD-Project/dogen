@@ -1970,9 +1970,14 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "modelines_for_meta_element",
-          "type": "std::unordered_map<std::string, name>",
-          "documentation": "All the modelines for this group.\n"
+          "name": "modeline_ids",
+          "type": "std::unordered_set<std::string>",
+          "documentation": "All the IDs for the modelines that belong to this group.\n"
+        },
+        {
+          "name": "modelines",
+          "type": "std::list<boost::shared_ptr<modeline>>",
+          "documentation": "Modelines that make up the group.\n"
         }
       ]
     },

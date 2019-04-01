@@ -324,6 +324,7 @@ generation types for full/partial/no generation.
 
 *** STARTED Promote extraction entities to meta-model elements        :story:
     :LOGBOOK:
+    CLOCK: [2019-04-01 Mon 11:06]--[2019-04-01 Mon 11:09] =>  0:03
     CLOCK: [2019-04-01 Mon 10:48]--[2019-04-01 Mon 11:05] =>  0:17
     CLOCK: [2019-04-01 Mon 10:02]--[2019-04-01 Mon 10:47] =>  0:45
     CLOCK: [2019-03-30 Sat 07:47]--[2019-03-30 Sat 08:00] =>  0:13

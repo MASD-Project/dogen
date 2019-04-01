@@ -20,8 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
+#include "masd.dogen.coding/io/meta_model/modeline_io.hpp"
+#include "masd.dogen.coding/types/meta_model/modeline.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
 
@@ -35,17 +36,52 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& v) {
-    s << "[";
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
+    s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
+        s << "\"" << tidy_up_string(*i) << "\"";
     }
-    s << " ] ";
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::modeline>& lhs,
+const boost::shared_ptr<masd::dogen::coding::meta_model::modeline>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::coding::meta_model::modeline>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_ptr<masd::dogen::coding::meta_model::modeline> >& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
     return s;
 }
 
@@ -69,7 +105,8 @@ modeline_group::modeline_group(
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const boost::optional<masd::dogen::coding::meta_model::decoration>& decoration,
-    const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& modelines_for_meta_element)
+    const std::unordered_set<std::string>& modeline_ids,
+    const std::list<boost::shared_ptr<masd::dogen::coding::meta_model::modeline> >& modelines)
     : masd::dogen::coding::meta_model::element(
       name,
       documentation,
@@ -86,7 +123,8 @@ modeline_group::modeline_group(
       artefact_properties,
       archetype_location_properties,
       decoration),
-      modelines_for_meta_element_(modelines_for_meta_element) { }
+      modeline_ids_(modeline_ids),
+      modelines_(modelines) { }
 
 void modeline_group::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -110,7 +148,8 @@ void modeline_group::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     masd::dogen::coding::meta_model::element::to_stream(s);
     s << ", "
-      << "\"modelines_for_meta_element\": " << modelines_for_meta_element_
+      << "\"modeline_ids\": " << modeline_ids_ << ", "
+      << "\"modelines\": " << modelines_
       << " }";
 }
 
@@ -118,7 +157,8 @@ void modeline_group::swap(modeline_group& other) noexcept {
     masd::dogen::coding::meta_model::element::swap(other);
 
     using std::swap;
-    swap(modelines_for_meta_element_, other.modelines_for_meta_element_);
+    swap(modeline_ids_, other.modeline_ids_);
+    swap(modelines_, other.modelines_);
 }
 
 bool modeline_group::equals(const masd::dogen::coding::meta_model::element& other) const {
@@ -129,7 +169,8 @@ bool modeline_group::equals(const masd::dogen::coding::meta_model::element& othe
 
 bool modeline_group::operator==(const modeline_group& rhs) const {
     return masd::dogen::coding::meta_model::element::compare(rhs) &&
-        modelines_for_meta_element_ == rhs.modelines_for_meta_element_;
+        modeline_ids_ == rhs.modeline_ids_ &&
+        modelines_ == rhs.modelines_;
 }
 
 modeline_group& modeline_group::operator=(modeline_group other) {
@@ -138,20 +179,36 @@ modeline_group& modeline_group::operator=(modeline_group other) {
     return *this;
 }
 
-const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& modeline_group::modelines_for_meta_element() const {
-    return modelines_for_meta_element_;
+const std::unordered_set<std::string>& modeline_group::modeline_ids() const {
+    return modeline_ids_;
 }
 
-std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& modeline_group::modelines_for_meta_element() {
-    return modelines_for_meta_element_;
+std::unordered_set<std::string>& modeline_group::modeline_ids() {
+    return modeline_ids_;
 }
 
-void modeline_group::modelines_for_meta_element(const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& v) {
-    modelines_for_meta_element_ = v;
+void modeline_group::modeline_ids(const std::unordered_set<std::string>& v) {
+    modeline_ids_ = v;
 }
 
-void modeline_group::modelines_for_meta_element(const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>&& v) {
-    modelines_for_meta_element_ = std::move(v);
+void modeline_group::modeline_ids(const std::unordered_set<std::string>&& v) {
+    modeline_ids_ = std::move(v);
+}
+
+const std::list<boost::shared_ptr<masd::dogen::coding::meta_model::modeline> >& modeline_group::modelines() const {
+    return modelines_;
+}
+
+std::list<boost::shared_ptr<masd::dogen::coding::meta_model::modeline> >& modeline_group::modelines() {
+    return modelines_;
+}
+
+void modeline_group::modelines(const std::list<boost::shared_ptr<masd::dogen::coding::meta_model::modeline> >& v) {
+    modelines_ = v;
+}
+
+void modeline_group::modelines(const std::list<boost::shared_ptr<masd::dogen::coding::meta_model::modeline> >&& v) {
+    modelines_ = std::move(v);
 }
 
 }
