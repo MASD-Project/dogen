@@ -4338,7 +4338,7 @@ if there is a shared pointer to built-in; if there is, put in:
 Things we are not testing at present but should, validation that could
 provide helpful errors to end users but is not being performed yet.
 
-*** Additional validation rules for yarn                               :epic:
+*** Additional validation rules for coding                             :epic:
 
 Now that we have introduced the basic validation infrastructure
 ([[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_95.org][sprint 95]]), we should start adding more and more checks. This story
@@ -4437,6 +4437,13 @@ Existing validation code:
 :     const auto op2(mock_profile(po2));
 :     BOOST_CHECK_EXCEPTION(transform(c, po2, op2), transformation_error, cc);
 : }
+
+*Decoration elements*
+
+- modeline groups must be defined at the top-level.
+- modeline groups cannot contain any modeling element other than modelines.
+- modelines must be defined inside of modeline groups.
+- licences and generation markers must be defined at the top-level.
 
 Merged stories:
 
