@@ -21,6 +21,10 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/licence.hpp"
+#include "masd.dogen.coding/types/meta_model/modeline.hpp"
+#include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
+#include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
 #include "masd.dogen.coding/types/meta_model/elements_traversal.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
@@ -89,6 +93,27 @@ public:
         static const auto n(meta_name_factory::make_visitor_name());
         v.meta_name(n);
     }
+
+    void operator()(meta_model::licence& l) {
+        static const auto n(meta_name_factory::make_licence_name());
+        l.meta_name(n);
+    }
+
+    void operator()(meta_model::modeline& ml) {
+        static const auto n(meta_name_factory::make_modeline_name());
+        ml.meta_name(n);
+    }
+
+    void operator()(meta_model::modeline_group& mg) {
+        static const auto n(meta_name_factory::make_visitor_name());
+        mg.meta_name(n);
+    }
+
+    void operator()(meta_model::generation_marker& gm) {
+        static const auto n(meta_name_factory::make_visitor_name());
+        gm.meta_name(n);
+    }
+
 };
 
 void meta_naming_transform::
