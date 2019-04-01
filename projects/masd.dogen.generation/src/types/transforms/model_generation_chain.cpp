@@ -45,8 +45,19 @@ namespace masd::dogen::generation::transforms {
 
 void model_generation_chain::apply(const context& ctx,
     std::list<meta_model::model>& ms) {
+
+    /*
+     * If we don't have any models in the set, there is nothing to
+     * do. Don't even bother setup the tracer.
+     */
+    if (ms.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "Model set is empty, nothing to do.";
+        return;
+    }
+
+    const auto id(ms.front().name().qualified().dot());
     tracing::scoped_chain_tracer stp(lg, "model generation chain",
-        transform_id, "FIXME", *ctx.tracer(), ms);
+        transform_id, id, *ctx.tracer(), ms);
 
     /*
      * Apply all of the post-processing transforms to the model.
