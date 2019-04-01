@@ -114,7 +114,6 @@ void modules_transform::create_modules(const std::unordered_map<std::string,
     }
 }
 
-
 void modules_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "modules transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
@@ -123,7 +122,6 @@ void modules_transform::apply(const context& ctx, meta_model::model& m) {
     create_modules(im, m);
 
     stp.end_transform(m);
-    BOOST_LOG_SEV(lg, debug) << "Finished modules transform.";
 }
 
 }

@@ -284,12 +284,6 @@ apply(const context& ctx, const injection::meta_model::model& m) {
         process_element(ad, l, e, r);
     }
 
-    /*
-     * FIXME: For now, we must inject the root module into the element
-     * collection manually. This is not ideal - we should probably
-     * just process it from the root_module member variable - but this
-     * will be mopped up during the formattables clean up.
-     */
     r.root_module(boost::make_shared<coding::meta_model::module>());
     r.root_module()->name(r.name());
     r.root_module()->annotation(ra);
