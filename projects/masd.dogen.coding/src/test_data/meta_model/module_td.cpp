@@ -31,10 +31,10 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-std::list<std::string> create_std_list_std_string(unsigned int position) {
-    std::list<std::string> r;
+std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int position) {
+    std::unordered_set<std::string> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_string(position + i));
+        r.insert(create_std_string(position + i));
     }
     return r;
 }
@@ -64,7 +64,7 @@ module_generator::module_generator() : position_(0) { }
 void module_generator::
 populate(const unsigned int position, result_type& v) {
     masd::dogen::coding::meta_model::element_generator::populate(position, v);
-    v.members(create_std_list_std_string(position + 0));
+    v.contains(create_std_unordered_set_std_string(position + 0));
     v.is_root(create_bool(position + 1));
     v.is_global_module(create_bool(position + 2));
     v.orm_properties(create_boost_optional_masd_dogen_coding_meta_model_orm_module_properties(position + 3));

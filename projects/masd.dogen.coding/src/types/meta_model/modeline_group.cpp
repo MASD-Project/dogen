@@ -105,7 +105,7 @@ modeline_group::modeline_group(
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const boost::optional<masd::dogen::coding::meta_model::decoration>& decoration,
-    const std::unordered_set<std::string>& modeline_ids,
+    const std::unordered_set<std::string>& contains,
     const std::list<boost::shared_ptr<masd::dogen::coding::meta_model::modeline> >& modelines)
     : masd::dogen::coding::meta_model::element(
       name,
@@ -123,7 +123,7 @@ modeline_group::modeline_group(
       artefact_properties,
       archetype_location_properties,
       decoration),
-      modeline_ids_(modeline_ids),
+      contains_(contains),
       modelines_(modelines) { }
 
 void modeline_group::accept(const element_visitor& v) const {
@@ -148,7 +148,7 @@ void modeline_group::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     masd::dogen::coding::meta_model::element::to_stream(s);
     s << ", "
-      << "\"modeline_ids\": " << modeline_ids_ << ", "
+      << "\"contains\": " << contains_ << ", "
       << "\"modelines\": " << modelines_
       << " }";
 }
@@ -157,7 +157,7 @@ void modeline_group::swap(modeline_group& other) noexcept {
     masd::dogen::coding::meta_model::element::swap(other);
 
     using std::swap;
-    swap(modeline_ids_, other.modeline_ids_);
+    swap(contains_, other.contains_);
     swap(modelines_, other.modelines_);
 }
 
@@ -169,7 +169,7 @@ bool modeline_group::equals(const masd::dogen::coding::meta_model::element& othe
 
 bool modeline_group::operator==(const modeline_group& rhs) const {
     return masd::dogen::coding::meta_model::element::compare(rhs) &&
-        modeline_ids_ == rhs.modeline_ids_ &&
+        contains_ == rhs.contains_ &&
         modelines_ == rhs.modelines_;
 }
 
@@ -179,20 +179,20 @@ modeline_group& modeline_group::operator=(modeline_group other) {
     return *this;
 }
 
-const std::unordered_set<std::string>& modeline_group::modeline_ids() const {
-    return modeline_ids_;
+const std::unordered_set<std::string>& modeline_group::contains() const {
+    return contains_;
 }
 
-std::unordered_set<std::string>& modeline_group::modeline_ids() {
-    return modeline_ids_;
+std::unordered_set<std::string>& modeline_group::contains() {
+    return contains_;
 }
 
-void modeline_group::modeline_ids(const std::unordered_set<std::string>& v) {
-    modeline_ids_ = v;
+void modeline_group::contains(const std::unordered_set<std::string>& v) {
+    contains_ = v;
 }
 
-void modeline_group::modeline_ids(const std::unordered_set<std::string>&& v) {
-    modeline_ids_ = std::move(v);
+void modeline_group::contains(const std::unordered_set<std::string>&& v) {
+    contains_ = std::move(v);
 }
 
 const std::list<boost::shared_ptr<masd::dogen::coding::meta_model::modeline> >& modeline_group::modelines() const {

@@ -144,13 +144,11 @@
         "meta_model::element"
       ],
       "documentation": "Container for other coding elements.\n\nAggregates a group of logically related elements into a unit.\n",
+      "stereotypes": [
+        "Container"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "members",
-          "type": "std::list<std::string>",
-          "documentation": "All the model elements contained in this module.\n"
-        },
         {
           "name": "is_root",
           "type": "bool",
@@ -1967,13 +1965,11 @@
         "meta_model::element"
       ],
       "documentation": "Group of modelines, logically associated.\n\nFor example, one may choose to have a set of modelines for @e emacs , or for\n@e vi, etc.\n",
+      "stereotypes": [
+        "Container"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "modeline_ids",
-          "type": "std::unordered_set<std::string>",
-          "documentation": "All the IDs for the modelines that belong to this group.\n"
-        },
         {
           "name": "modelines",
           "type": "std::list<boost::shared_ptr<modeline>>",
@@ -2202,6 +2198,20 @@
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::Container",
+      "documentation": "Has the ability to contain other elements.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "contains",
+          "type": "std::unordered_set<std::string>"
+        }
+      ]
     }
   ]
 }

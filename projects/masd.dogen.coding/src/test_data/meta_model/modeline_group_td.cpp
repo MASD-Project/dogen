@@ -68,7 +68,7 @@ modeline_group_generator::modeline_group_generator() : position_(0) { }
 void modeline_group_generator::
 populate(const unsigned int position, result_type& v) {
     masd::dogen::coding::meta_model::element_generator::populate(position, v);
-    v.modeline_ids(create_std_unordered_set_std_string(position + 0));
+    v.contains(create_std_unordered_set_std_string(position + 0));
     v.modelines(create_std_list_boost_shared_ptr_masd_dogen_coding_meta_model_modeline(position + 1));
 }
 

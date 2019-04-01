@@ -67,7 +67,7 @@ public:
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const boost::optional<masd::dogen::coding::meta_model::decoration>& decoration,
-        const std::unordered_set<std::string>& modeline_ids,
+        const std::unordered_set<std::string>& contains,
         const std::list<boost::shared_ptr<masd::dogen::coding::meta_model::modeline> >& modelines);
 
 public:
@@ -81,15 +81,10 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    /**
-     * @brief All the IDs for the modelines that belong to this group.
-     */
-    /**@{*/
-    const std::unordered_set<std::string>& modeline_ids() const;
-    std::unordered_set<std::string>& modeline_ids();
-    void modeline_ids(const std::unordered_set<std::string>& v);
-    void modeline_ids(const std::unordered_set<std::string>&& v);
-    /**@}*/
+    const std::unordered_set<std::string>& contains() const;
+    std::unordered_set<std::string>& contains();
+    void contains(const std::unordered_set<std::string>& v);
+    void contains(const std::unordered_set<std::string>&& v);
 
     /**
      * @brief Modelines that make up the group.
@@ -115,7 +110,7 @@ public:
     modeline_group& operator=(modeline_group other);
 
 private:
-    std::unordered_set<std::string> modeline_ids_;
+    std::unordered_set<std::string> contains_;
     std::list<boost::shared_ptr<masd::dogen::coding::meta_model::modeline> > modelines_;
 };
 

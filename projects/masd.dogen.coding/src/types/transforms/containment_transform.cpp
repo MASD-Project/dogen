@@ -44,8 +44,8 @@ auto lg(logger_factory(transform_id));
 
 const std::string separator(".");
 const std::string missing_container("Could not find containing element: ");
-const std::string duplicate_modeline(
-    "Found more than one modeline with the same id: ");
+const std::string duplicate_element(
+    "Found more than one element with the same id: ");
 
 }
 
@@ -61,6 +61,33 @@ public:
     updater(meta_model::model& m) : model_(m) { }
 
 private:
+    /**
+     * @brief Try to insert containee ID into the container, if one
+     * can be located in the container map.
+     */
+    template<typename Container>
+    bool try_insert(std::unordered_map<std::string, Container>& cm,
+        const std::string& container_id, const std::string& containee_id) {
+        const auto i(cm.find(container_id));
+        if (i == cm.end()) {
+            BOOST_LOG_SEV(lg, debug) << "Could not find container: '"
+                                     << container_id << "'. ";
+            return false;
+        }
+
+        BOOST_LOG_SEV(lg, debug) << "Adding element.  Containee: '"
+                                 << containee_id
+                                 << "' Container: '" << container_id;
+        auto& container(*i->second);
+        const bool inserted(container.contains().insert(containee_id).second);
+        if (inserted)
+            return true;
+
+        BOOST_LOG_SEV(lg, error) << duplicate_element << containee_id;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(duplicate_element + containee_id));
+    }
+
     /**
      * @brief Creates the name of the containing element, derived from
      * the element's name.
@@ -191,43 +218,22 @@ void updater::update_containing_element(const meta_model::name& container,
      * First we check to see if the container is a module. If it is,
      * update the module membership list.
      */
-    auto& mods(model_.modules());
-    const auto i(mods.find(container_id));
-    if (i != mods.end()) {
-        BOOST_LOG_SEV(lg, debug) << "Adding type to module. Type: '"
-                                 << containee_id
-                                 << "' Module: '" << container_id;
-        auto& module(*i->second);
-        module.members().push_back( containee_id);
+    bool inserted = try_insert(model_.modules(), container_id, containee_id);
+    if (inserted)
         return;
-    } else {
-        BOOST_LOG_SEV(lg, debug) << "Could not find module: '"
-                                 << container_id << "'. "
-                                 << "Trying as a modeline group.";
-    }
 
     /*
      * Now we check to see if it is a modeline group.
      */
-    auto& mgs(model_.modeline_groups());
-    const auto j(mgs.find(container_id));
-    if (j != mgs.end()) {
-        BOOST_LOG_SEV(lg, debug) << "Adding type to modeline group. Type: '"
-                                 << containee_id
-                                 << "' Module: '" << container_id;
-
-        auto& mg(*j->second);
-        const bool inserted(mg.modeline_ids().insert(containee_id).second);
-        if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_modeline << containee_id;
-            BOOST_THROW_EXCEPTION(
-                transformation_error(duplicate_modeline + containee_id));
-        }
+    BOOST_LOG_SEV(lg, debug) << "Could not find module: '"
+                             << container_id << "'. "
+                             << "Trying as a modeline group.";
+    inserted = try_insert(model_.modeline_groups(), container_id, containee_id);
+    if (inserted)
         return;
-    }
 
     /*
-     * If we could not find the containing elements, we need to throw.
+     * If we could not find the containing element, we need to throw.
      */
     BOOST_LOG_SEV(lg, error) << missing_container << container_id;
     BOOST_THROW_EXCEPTION(
