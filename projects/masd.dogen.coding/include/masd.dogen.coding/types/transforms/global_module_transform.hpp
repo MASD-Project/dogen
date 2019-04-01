@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_CONTAINMENT_TRANSFORM_HPP
-#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_CONTAINMENT_TRANSFORM_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_GLOBAL_MODULE_TRANSFORM_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_GLOBAL_MODULE_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,10 +34,11 @@
 namespace masd::dogen::coding::transforms {
 
 /**
- * @brief Handles object containment such as modules containing
- * elements.
+ * @brief Handles the creation of the global module and the updating
+ * of containment of all module elements that belong to the global
+ * module.
  */
-class containment_transform final {
+class global_module_transform final {
 private:
     /**
      * @brief Creates the module to represent the global namespace.
@@ -49,12 +50,18 @@ private:
      * @brief Injects the global module, and makes all modules that do
      * not have a containing namespace be contained by it.
      */
-    static void inject_global_module(meta_model::model& m);
-
-public:
+    static meta_model::name inject_global_module(meta_model::model& m);
 
     /**
-     * @brief Updates the containment relationships in the model.
+     * @brief Updates the containment relationships in the model
+     * related to the global module.
+     */
+    static void update_element_containment(
+        const meta_model::name& global_module_name, meta_model::model& m);
+
+public:
+    /**
+     * @brief Applies the transform.
      */
     static void apply(const context& ctx, meta_model::model& m);
 };

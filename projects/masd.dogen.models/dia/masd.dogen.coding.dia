@@ -13827,7 +13827,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#containment_transform#</dia:string>
+        <dia:string>#global_module_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>

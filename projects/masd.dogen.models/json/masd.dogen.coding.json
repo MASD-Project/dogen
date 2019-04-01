@@ -1310,7 +1310,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::containment_transform",
+      "name": "transforms::global_module_transform",
       "stereotypes": [
         "masd::handcrafted"
       ],

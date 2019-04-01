@@ -33,11 +33,11 @@
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
 #include "masd.dogen.coding/types/helpers/name_builder.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
-#include "masd.dogen.coding/types/transforms/containment_transform.hpp"
+#include "masd.dogen.coding/types/transforms/global_module_transform.hpp"
 
 namespace {
 
-const std::string transform_id("coding.transforms.containment_transform");
+const std::string transform_id("coding.transforms.global_module_transform");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -62,7 +62,7 @@ inline void add_containing_module_to_non_contained_entities(
 }
 
 boost::shared_ptr<meta_model::module>
-containment_transform::create_global_module(const meta_model::origin_types ot) {
+global_module_transform::create_global_module(const meta_model::origin_types ot) {
     const std::string gm("global_module");
     const meta_model::fully_qualified_representation fqr(gm, gm, gm);
     auto r(boost::make_shared<meta_model::module>());
@@ -73,22 +73,32 @@ containment_transform::create_global_module(const meta_model::origin_types ot) {
     return r;
 }
 
-void containment_transform::
+meta_model::name global_module_transform::
 inject_global_module(meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Injecting global module for: "
                              << m.name().qualified().dot();
 
     const auto gm(create_global_module(m.origin_type()));
-    const auto gmn(gm->name());
-    const auto i(m.modules().find(gmn.qualified().dot()));
+    const auto r(gm->name());
+    const auto i(m.modules().find(r.qualified().dot()));
     if (i != m.modules().end()) {
         const auto id(m.name().qualified().dot());
         BOOST_LOG_SEV(lg, error) << model_already_has_global_module << id;
         BOOST_THROW_EXCEPTION(
             transformation_error(model_already_has_global_module + id));
     }
-    m.modules().insert(std::make_pair(gmn.qualified().dot(), gm));
+    m.modules().insert(std::make_pair(r.qualified().dot(), gm));
 
+    BOOST_LOG_SEV(lg, debug) << "Done injecting global module";
+    return r;
+}
+
+void global_module_transform::
+update_element_containment(const meta_model::name& global_module_name,
+    meta_model::model& m) {
+    BOOST_LOG_SEV(lg, debug) << "Updating element containment.";
+
+    const auto& gmn(global_module_name);
     add_containing_module_to_non_contained_entities(gmn, m.modules());
     add_containing_module_to_non_contained_entities(gmn, m.object_templates());
     add_containing_module_to_non_contained_entities(gmn, m.builtins());
@@ -98,15 +108,16 @@ inject_global_module(meta_model::model& m) {
     add_containing_module_to_non_contained_entities(gmn, m.visitors());
     add_containing_module_to_non_contained_entities(gmn, m.primitives());
 
-    BOOST_LOG_SEV(lg, debug) << "Done injecting global module";
+    BOOST_LOG_SEV(lg, debug) << "Finished updating element containment.";
 }
 
-void containment_transform::
+void global_module_transform::
 apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "containment transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    inject_global_module(m);
+    const auto gmn(inject_global_module(m));
+    update_element_containment(gmn, m);
 
     stp.end_transform(m);
 }
