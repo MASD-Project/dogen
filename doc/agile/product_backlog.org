@@ -1172,6 +1172,12 @@ Notes:
   present only includes references of the target model, we can figure
   out any unnecessary references. Sadly we cannot do the opposite:
   (lost the train of thought).
+- it would be nice to have "enablement requirements". For example, if
+  the user used =std::unordered_map= against a dogen type, it should
+  trigger the generation of hash for that type (and all dependent
+  types). Similarly, for =std::map= it should trigger the creation of
+  =operator<=. If we could declare upfront that a type's types facet
+  depends on another facet, this could be computed.
 
 Merged stories:
 
