@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include <string>
+#include <unordered_map>
 #include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 
