@@ -87,119 +87,12 @@ const std::unordered_map<std::string, std::list<std::string>>&
     return distinct_internal_moduless_;
 }
 
-class updater {
-public:
-    updater(meta_model::model& m) : model_(m) { }
-
-private:
-    boost::optional<meta_model::name>
-    containing_module(const meta_model::name& n);
-    void update(meta_model::element& e);
-
-public:
-    void operator()(meta_model::element&) { }
-    void operator()(meta_model::module& m) { update(m); }
-    void operator()(meta_model::object_template& ot) { update(ot); }
-    void operator()(meta_model::builtin& b) { update(b); }
-    void operator()(meta_model::enumeration& e) { update(e); }
-    void operator()(meta_model::primitive& p) { update(p); }
-    void operator()(meta_model::object& o) { update(o); }
-    void operator()(meta_model::exception& e) { update(e); }
-    void operator()(meta_model::visitor& v) { update(v); }
-
-public:
-    meta_model::model& model_;
-};
-
-boost::optional<meta_model::name>
-updater::containing_module(const meta_model::name& n) {
-    BOOST_LOG_SEV(lg, debug) << "Finding containing module for: "
-                             << n.qualified().dot();
-
-    const bool in_global_namespace(n.location().model_modules().empty());
-    if (in_global_namespace) {
-        BOOST_LOG_SEV(lg, debug) << "Type is in global module so, it has"
-                                 << " no containing module yet. Type: "
-                                 << n.qualified().dot();
-        return boost::optional<meta_model::name>();
-    }
-
-    const bool at_model_level(n.location().internal_modules().empty());
-    const auto mn(n.location().model_modules().back());
-    if (at_model_level && n.simple() == mn) {
-        BOOST_LOG_SEV(lg, debug) << "Type is a model module, so containing "
-                                 << "module will be handled later. Type: "
-                                 << n.qualified().dot();
-        return boost::optional<meta_model::name>();
-    }
-
-    helpers::name_builder b;
-
-    /* we can always take the external modules regardless because these
-     * do not contribute to the modules in the model.
-     */
-     b.external_modules(n.location().external_modules());
-
-    auto imp(n.location().internal_modules());
-    if (imp.empty()) {
-        /* if there are no internal modules, we must be at the
-         * top-level, so take the model name.
-         */
-        b.simple_name(mn);
-
-        /* the model name may be composite. If so, we need to make
-         * sure we add the remaining components.
-         */
-        if (!n.location().model_modules().empty()) {
-            auto remaining_model_modules(n.location().model_modules());
-            remaining_model_modules.pop_back();
-            b.model_modules(remaining_model_modules);
-        }
-    } else {
-        /* if we are an internal module, we can take the module name
-         * and use that as our simple name. We need to add the
-         * remaining internal module names to our location.
-         */
-        b.model_modules(n.location().model_modules());
-        b.simple_name(imp.back());
-        imp.pop_back();
-        b.internal_modules(imp);
-    }
-
-    const auto module_n(b.build());
-    const auto i(model_.modules().find(module_n.qualified().dot()));
-    if (i != model_.modules().end()) {
-        BOOST_LOG_SEV(lg, debug) << "Adding type to module. Type: '"
-                                 << n.qualified().dot()
-                                 << "' Module: '" << module_n.qualified().dot();
-        auto& o(*i->second);
-        o.members().push_back(n.qualified().dot());
-        return module_n;
-    }
-
-    BOOST_LOG_SEV(lg, warn) << "Could not find containing module: "
-                            << module_n.qualified().dot();
-    return boost::optional<meta_model::name>();
 }
 
-void updater::update(meta_model::element& e) {
-    e.contained_by(containing_module(e.name()));
+void modules_transform::apply(const context& ctx, meta_model::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "modules transform",
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    if (!e.contained_by())
-        return;
-
-    auto i(model_.modules().find(e.contained_by()->qualified().dot()));
-    if (i == model_.modules().end()) {
-        const auto sn(e.contained_by()->simple());
-        BOOST_LOG_SEV(lg, error) << missing_module << sn;
-        BOOST_THROW_EXCEPTION(transformation_error(missing_module + sn));
-    }
-}
-
-}
-
-void modules_transform::
-create_missing_modules(meta_model::model& m) {
     internal_modules_builder b;
     meta_model::elements_traversal(m, b);
 
@@ -215,20 +108,6 @@ create_missing_modules(meta_model::model& m) {
             m.modules().insert(std::make_pair(n.qualified().dot(), mod));
         }
     }
-}
-
-void modules_transform::
-expand_containing_module(meta_model::model& m) {
-    updater u(m);
-    meta_model::elements_traversal(m, u);
-}
-
-void modules_transform::apply(const context& ctx, meta_model::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "modules transform",
-        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
-
-    create_missing_modules(m);
-    expand_containing_module(m);
 
     stp.end_transform(m);
     BOOST_LOG_SEV(lg, debug) << "Finished modules transform.";

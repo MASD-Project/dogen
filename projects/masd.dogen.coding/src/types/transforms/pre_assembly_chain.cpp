@@ -30,6 +30,7 @@
 #include "masd.dogen.coding/types/transforms/type_params_transform.hpp"
 #include "masd.dogen.coding/types/transforms/parsing_transform.hpp"
 #include "masd.dogen.coding/types/transforms/primitives_transform.hpp"
+#include "masd.dogen.coding/types/transforms/containment_transform.hpp"
 #include "masd.dogen.coding/types/transforms/extraction_properties_transform.hpp"
 #include "masd.dogen.coding/types/transforms/pre_assembly_chain.hpp"
 
@@ -57,12 +58,13 @@ void pre_assembly_chain::apply(const context& ctx, meta_model::model& m) {
      * modules.
      */
     modules_transform::apply(ctx, m);
-    technical_space_transform::apply(ctx, m);
+    containment_transform::apply(ctx, m);
 
     /*
      * There are no particular dependencies on the next set of
      * transforms.
      */
+    technical_space_transform::apply(ctx, m);
     origin_transform::apply(ctx, m);
     type_params_transform::apply(ctx, m);
     parsing_transform::apply(ctx, m);

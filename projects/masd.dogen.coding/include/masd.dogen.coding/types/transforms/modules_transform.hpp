@@ -34,10 +34,6 @@ namespace masd::dogen::coding::transforms {
  * @brief Generates all of the modules implied by the defined types.
  */
 class modules_transform final {
-private:
-    static void create_missing_modules(meta_model::model& m);
-    static void expand_containing_module(meta_model::model& m);
-
 public:
     static void apply(const context& ctx, meta_model::model& m);
 };

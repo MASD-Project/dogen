@@ -25,24 +25,17 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
 
 namespace masd::dogen::coding::transforms {
 
+/**
+ * @brief Update element containment relationships.
+ */
 class containment_transform final {
 public:
-    containment_transform() = default;
-    containment_transform(const containment_transform&) = default;
-    containment_transform(containment_transform&&) = default;
-    ~containment_transform() = default;
-    containment_transform& operator=(const containment_transform&) = default;
-
-public:
-    bool operator==(const containment_transform& rhs) const;
-    bool operator!=(const containment_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }
