@@ -40,21 +40,6 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::name>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
-    return s;
-}
-
-}
-
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::static_stereotypes>& v) {
@@ -164,7 +149,7 @@ element::element(
     const std::string& documentation,
     const masd::dogen::annotations::annotation& annotation,
     const masd::dogen::coding::meta_model::origin_types origin_type,
-    const boost::optional<masd::dogen::coding::meta_model::name>& contained_by,
+    const std::string& contained_by,
     const bool in_global_module,
     const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
     const std::list<std::string>& dynamic_stereotypes,
@@ -204,7 +189,7 @@ void element::to_stream(std::ostream& s) const {
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
       << "\"annotation\": " << annotation_ << ", "
       << "\"origin_type\": " << origin_type_ << ", "
-      << "\"contained_by\": " << contained_by_ << ", "
+      << "\"contained_by\": " << "\"" << tidy_up_string(contained_by_) << "\"" << ", "
       << "\"in_global_module\": " << in_global_module_ << ", "
       << "\"static_stereotypes\": " << static_stereotypes_ << ", "
       << "\"dynamic_stereotypes\": " << dynamic_stereotypes_ << ", "
@@ -311,19 +296,19 @@ void element::origin_type(const masd::dogen::coding::meta_model::origin_types v)
     origin_type_ = v;
 }
 
-const boost::optional<masd::dogen::coding::meta_model::name>& element::contained_by() const {
+const std::string& element::contained_by() const {
     return contained_by_;
 }
 
-boost::optional<masd::dogen::coding::meta_model::name>& element::contained_by() {
+std::string& element::contained_by() {
     return contained_by_;
 }
 
-void element::contained_by(const boost::optional<masd::dogen::coding::meta_model::name>& v) {
+void element::contained_by(const std::string& v) {
     contained_by_ = v;
 }
 
-void element::contained_by(const boost::optional<masd::dogen::coding::meta_model::name>&& v) {
+void element::contained_by(const std::string&& v) {
     contained_by_ = std::move(v);
 }
 

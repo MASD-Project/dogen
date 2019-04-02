@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "masd.dogen.coding/test_data/meta_model/name_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/element_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/modeline_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/modeline_group_td.hpp"
 
 namespace {
@@ -31,15 +31,30 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-masd::dogen::coding::meta_model::name
-create_masd_dogen_coding_meta_model_name(const unsigned int position) {
-    return masd::dogen::coding::meta_model::name_generator::create(position);
+std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int position) {
+    std::unordered_set<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(create_std_string(position + i));
+    }
+    return r;
 }
 
-std::unordered_map<std::string, masd::dogen::coding::meta_model::name> create_std_unordered_map_std_string_masd_dogen_coding_meta_model_name(unsigned int position) {
-    std::unordered_map<std::string, masd::dogen::coding::meta_model::name> r;
+masd::dogen::coding::meta_model::modeline*
+create_masd_dogen_coding_meta_model_modeline_ptr(const unsigned int position) {
+    return masd::dogen::coding::meta_model::modeline_generator::create_ptr(position);
+}
+
+boost::shared_ptr<masd::dogen::coding::meta_model::modeline>
+create_boost_shared_ptr_masd_dogen_coding_meta_model_modeline(unsigned int position) {
+    boost::shared_ptr<masd::dogen::coding::meta_model::modeline> r(
+        create_masd_dogen_coding_meta_model_modeline_ptr(position));
+    return r;
+}
+
+std::list<boost::shared_ptr<masd::dogen::coding::meta_model::modeline> > create_std_list_boost_shared_ptr_masd_dogen_coding_meta_model_modeline(unsigned int position) {
+    std::list<boost::shared_ptr<masd::dogen::coding::meta_model::modeline> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_masd_dogen_coding_meta_model_name(position + i)));
+        r.push_back(create_boost_shared_ptr_masd_dogen_coding_meta_model_modeline(position + i));
     }
     return r;
 }
@@ -53,7 +68,8 @@ modeline_group_generator::modeline_group_generator() : position_(0) { }
 void modeline_group_generator::
 populate(const unsigned int position, result_type& v) {
     masd::dogen::coding::meta_model::element_generator::populate(position, v);
-    v.modelines_for_meta_element(create_std_unordered_map_std_string_masd_dogen_coding_meta_model_name(position + 0));
+    v.contains(create_std_unordered_set_std_string(position + 0));
+    v.modelines(create_std_list_boost_shared_ptr_masd_dogen_coding_meta_model_modeline(position + 1));
 }
 
 modeline_group_generator::result_type

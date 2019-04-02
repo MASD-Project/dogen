@@ -13,23 +13,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-03-29 Fri 12:00]
-| <75>                                                   |         |       |      |       |
-| Headline                                               | Time    |       |      |     % |
-|--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *28:01* |       |      | 100.0 |
-|--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 28:01   |       |      | 100.0 |
-| Active                                                 |         | 28:01 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 1:47 |   6.4 |
-| Sprint and product backlog grooming                    |         |       | 2:39 |   9.5 |
-| Create a video demo for the previous sprint's features |         |       | 3:11 |  11.4 |
-| Fix issues with emacs                                  |         |       | 2:42 |   9.6 |
-| Create a basic "project plan"                          |         |       | 2:08 |   7.6 |
-| Simplify qualified name                                |         |       | 3:39 |  13.0 |
-| Rename "language" to "technical space"                 |         |       | 7:22 |  26.3 |
-| Add intrinsic technical space ownership                |         |       | 1:12 |   4.3 |
-| Promote extraction entities to meta-model elements     |         |       | 3:21 |  12.0 |
+#+CAPTION: Clock summary at [2019-04-01 Mon 19:00]
+| <75>                                                      |         |       |       |       |
+| Headline                                                  | Time    |       |       |     % |
+|-----------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                              | *41:53* |       |       | 100.0 |
+|-----------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                   | 41:53   |       |       | 100.0 |
+| Active                                                    |         | 41:53 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  1:47 |   4.3 |
+| Sprint and product backlog grooming                       |         |       |  6:11 |  14.8 |
+| Create a video demo for the previous sprint's features    |         |       |  3:11 |   7.6 |
+| Fix issues with emacs                                     |         |       |  2:42 |   6.4 |
+| Create a basic "project plan"                             |         |       |  2:08 |   5.1 |
+| Simplify qualified name                                   |         |       |  3:39 |   8.7 |
+| Rename "language" to "technical space"                    |         |       |  7:22 |  17.6 |
+| Add intrinsic technical space ownership                   |         |       |  1:12 |   2.9 |
+| Promote extraction entities to meta-model elements        |         |       | 13:14 |  31.6 |
+| Move all utility formatters from extraction to generation |         |       |  0:27 |   1.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -145,6 +146,10 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-03-31 Sun 09:50]--[2019-03-31 Sun 10:23] =>  0:33
+    CLOCK: [2019-03-29 Fri 17:29]--[2019-03-29 Fri 17:38] =>  0:09
+    CLOCK: [2019-03-29 Fri 17:17]--[2019-03-29 Fri 17:28] =>  0:11
+    CLOCK: [2019-03-29 Fri 14:37]--[2019-03-29 Fri 17:16] =>  2:39
     CLOCK: [2019-03-28 Thu 12:01]--[2019-03-28 Thu 12:06] =>  0:05
     CLOCK: [2019-03-28 Thu 08:33]--[2019-03-28 Thu 09:16] =>  0:43
     CLOCK: [2019-03-27 Wed 11:11]--[2019-03-27 Wed 12:16] =>  1:05
@@ -286,8 +291,59 @@ We need to have the ability to associate meta-model elements to a
 technical space, in an intrinsic manner. Types such as fabric types
 cannot be mapped to other technical spaces.
 
+*** COMPLETED Update metrics in OpenHub                               :story:
+    CLOSED: [2019-03-29 Fri 17:58]
+
+*Rationale*: it seems metrics have finally settled down.
+
+For some reason our metrics are stuck at 5 months ago or so. It is
+actually mildly useful to know the number of lines of code etc.
+
+We probably need to delete and re-add the project.
+
+*** COMPLETED Allow manual overrides to facets                        :story:
+    CLOSED: [2019-03-31 Sun 10:09]
+
+*Rationale*: this is already possible by using a combination of
+enabled and override flags.
+
+#+begin_quote
+*Story*: As a dogen user, I sometimes want to provide my own
+implementation for a given facet.
+#+end_quote
+
+Sometimes it may make sense to provide a user-supplied implementation
+for a given facet. For example for qname it may make sense to use the
+string converter approach to do the actual JSON serialisation. However
+its not possible to just disable code generation of a given type's
+inserters and then provide a manual implementation. This could easily
+be achieved via dynamic extensions: we could provide a meta-data
+parameter for each facet such as "generation type", manual or
+automatic. This can be done once we get rid of the current use of
+generation types for full/partial/no generation.
+
 *** STARTED Promote extraction entities to meta-model elements        :story:
     :LOGBOOK:
+    CLOCK: [2019-04-01 Mon 18:25]--[2019-04-01 Mon 19:00] =>  0:35
+    CLOCK: [2019-04-01 Mon 17:10]--[2019-04-01 Mon 17:51] =>  0:41
+    CLOCK: [2019-04-01 Mon 16:53]--[2019-04-01 Mon 17:09] =>  0:16
+    CLOCK: [2019-04-01 Mon 15:41]--[2019-04-01 Mon 16:52] =>  1:11
+    CLOCK: [2019-04-01 Mon 15:27]--[2019-04-01 Mon 15:40] =>  0:13
+    CLOCK: [2019-04-01 Mon 14:42]--[2019-04-01 Mon 15:26] =>  0:44
+    CLOCK: [2019-04-01 Mon 14:34]--[2019-04-01 Mon 14:41] =>  0:07
+    CLOCK: [2019-04-01 Mon 13:01]--[2019-04-01 Mon 14:33] =>  1:32
+    CLOCK: [2019-04-01 Mon 12:01]--[2019-04-01 Mon 12:07] =>  0:06
+    CLOCK: [2019-04-01 Mon 11:54]--[2019-04-01 Mon 12:00] =>  0:06
+    CLOCK: [2019-04-01 Mon 11:10]--[2019-04-01 Mon 11:53] =>  0:43
+    CLOCK: [2019-04-01 Mon 11:06]--[2019-04-01 Mon 11:09] =>  0:03
+    CLOCK: [2019-04-01 Mon 10:48]--[2019-04-01 Mon 11:05] =>  0:17
+    CLOCK: [2019-04-01 Mon 10:02]--[2019-04-01 Mon 10:47] =>  0:45
+    CLOCK: [2019-03-30 Sat 07:47]--[2019-03-30 Sat 08:00] =>  0:13
+    CLOCK: [2019-03-30 Sat 07:10]--[2019-03-30 Sat 07:46] =>  0:36
+    CLOCK: [2019-03-29 Fri 18:19]--[2019-03-29 Fri 18:21] =>  0:02
+    CLOCK: [2019-03-29 Fri 18:00]--[2019-03-29 Fri 18:18] =>  0:18
+    CLOCK: [2019-03-29 Fri 17:39]--[2019-03-29 Fri 17:59] =>  0:20
+    CLOCK: [2019-03-29 Fri 13:31]--[2019-03-29 Fri 14:36] =>  1:05
     CLOCK: [2019-03-29 Fri 11:50]--[2019-03-29 Fri 12:00] =>  0:10
     CLOCK: [2019-03-29 Fri 11:39]--[2019-03-29 Fri 11:49] =>  0:10
     CLOCK: [2019-03-26 Tue 13:01]--[2019-03-26 Tue 14:31] =>  1:30
@@ -385,6 +441,112 @@ We should also allow for both:
 - full licence: used later at the product level.
 - licence summary: used for preambles in files.
 
+*** STARTED Move all utility formatters from extraction to generation :story:
+    :LOGBOOK:
+    CLOCK: [2019-03-30 Sat 13:39]--[2019-03-30 Sat 14:06] =>  0:27
+    :END:
+
+We need to move all formatters into generation and update templates to
+point to new location. This must be done after decoration has been
+updated to use the new modeling elements.
+
+*** Consider renaming orchestration to "engine"                       :story:
+
+Orchestration is a bit of a vague name. It is really the code
+generation engine of dogen. Its still very vague but slightly less so.
+
+*** Stitch is still using artefact writer                             :story:
+
+Create a templating transform that is similar to the approach used by
+extraction - in fact, stitch should probably be using a transform in
+extraction.
+
+Delete artefact writer.
+
+*** Split wale out of stitch templates                                :story:
+
+Stitch requires extra work in order to split out decoration. This is
+because in the past we relied on profiles to populate decoration. It
+worked because we were reading the same simple JSON files. Now we are
+relying on model references and meta-model entities, so this is no
+longer viable: they do not exist at the template level.
+
+One possible solution is to have a "reference" command line argument
+that loads up the user supplied model. We then need some kind of chain
+that applies the decoration transforms. The only solution is to create
+a temporary model that has some kind of coding element on it; this
+model is then supplied to the pipeline:
+
+- injection: needed to read the MASD model with decoration.
+- coding: needed to assemble the temp model with the MASD model and
+  to obtain the decoration.
+- generation: needed to populate the decoration properties.
+
+At this point we can then supply the annotations to the decoration
+formatter. This means that stitch now has a hard dependency on the
+rest of the dogen pipeline. Ideally we should try to split out
+weaving from stitching so that "weaving" becomes this complex
+pipeline but stitching just means the previous processing we did on
+templates. This could even mean we could remove annotations from
+stitching altogether and then have model to text transforms that
+join the stitch template output with the decoration.
+
+If we take this idea to the limit, what we are saying is that stitch
+templates can have KVPs associated with them, with multiple sources:
+
+- wale (as at present)
+- decorations. We need at least two: preamble and postamble.
+
+Note that operations (hand-crafted code to merge into the generated
+code) cannot be handled by the KVPs. This is because we are generating
+the stitch template itself, not the user facing code; we are
+generating the generator, so we are one level removed from the code
+generator. These can be handled as before, via a post-processing step
+that replaces guids with contents from the file system.
+
+To start off with we can just deprecate weaving for now. It is only
+used to quickly weave the model without code generation, but the
+generator is so quick that it does not make a lot of difference.
+
+It is important to note that we still have a two-level set of
+annotations:
+
+- the element annotations which contain the decoration. These are
+  processed prior to calling the stitch template instantiator to
+  generate the preamble and postamble KVPs (as well as the wale KVPs).
+- the annotation of the template itself. This contains the stitch
+  fields such as includes, etc. These will not contain any fields
+  related to decoration (e.g. it is no longer possible to decorate
+  from within stitch itself).
+
+This means that we need to remove all code from stitch that handles
+annotation expansion and just leave the annotation factory.
+
+We also need to look into how the wale keys were implemented - likely
+we've hard-coded it so that its always the same name:
+
+: <#$ stitch.wale.template_instantiation_result #>
+
+With a bit of luck its just a variable. If so we can then add at the
+top and bottom of each template:
+
+: <#$ stitch.decoration.preamble #>
+: ...
+: <#$ stitch.decoration.postamble #>
+
+It is *very important* to understand that this is the decoration of
+the output of the stitch template *itself*, not of the code it will
+generate. The decoration of the generated code will be handled as at
+present, by manually calling the decoration formatters.
+
+*** Create a tests stereotype with profiles                           :story:
+
+At present we are ignoring all of the contents of =tests=. This means
+whenever we delete a type we are left behind with its tests. A better
+solution is to create model elements for each handcrafted test marked
+as "masd::handcrafted_test". This disables all facets except for
+tests. We can then remove the regex.
+
 *** Make extraction model name a qualified name                       :story:
 
 At present we are setting up the extraction model name from the simple
@@ -417,13 +579,6 @@ was formed, and then ownership by DDC.
 
 When we moved the kernel logic into yarn from quilt, we did not rename
 the traits.
-
-*** Update metrics in OpenHub                                         :story:
-
-For some reason our metrics are stuck at 5 months ago or so. It is
-actually mildly useful to know the number of lines of code etc.
-
-We probably need to delete and re-add the project.
 
 *** Code generate all contexts                                        :story:
 

@@ -25,24 +25,32 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <boost/shared_ptr.hpp>
+#include "masd.dogen.coding/types/meta_model/modeline.hpp"
+#include "masd.dogen.coding/hash/meta_model/technical_space_hash.hpp"
+#include "masd.dogen.generation/types/transforms/context.hpp"
+#include "masd.dogen.generation/types/meta_model/model.hpp"
 
 namespace masd::dogen::generation::transforms {
 
+/**
+ * @brief Updates the decoration of all modeling elements.
+ */
 class decoration_transform final {
-public:
-    decoration_transform() = default;
-    decoration_transform(const decoration_transform&) = default;
-    decoration_transform(decoration_transform&&) = default;
-    ~decoration_transform() = default;
-    decoration_transform& operator=(const decoration_transform&) = default;
+private:
+    static std::unordered_map<
+    std::string,
+    std::unordered_map<coding::meta_model::technical_space,
+                       boost::shared_ptr<
+                           coding::meta_model::modeline>
+                       >
+    >
+    aggregate_modelines(meta_model::model& m);
 
 public:
-    bool operator==(const decoration_transform& rhs) const;
-    bool operator!=(const decoration_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

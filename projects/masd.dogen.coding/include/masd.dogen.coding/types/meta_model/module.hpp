@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
-#include <list>
 #include <iosfwd>
 #include <string>
 #include <algorithm>
+#include <unordered_set>
 #include <boost/optional.hpp>
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_module_properties.hpp"
@@ -58,7 +58,7 @@ public:
         const std::string& documentation,
         const masd::dogen::annotations::annotation& annotation,
         const masd::dogen::coding::meta_model::origin_types origin_type,
-        const boost::optional<masd::dogen::coding::meta_model::name>& contained_by,
+        const std::string& contained_by,
         const bool in_global_module,
         const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
@@ -69,7 +69,7 @@ public:
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const boost::optional<masd::dogen::coding::meta_model::decoration>& decoration,
-        const std::list<std::string>& members,
+        const std::unordered_set<std::string>& contains,
         const bool is_root,
         const bool is_global_module,
         const boost::optional<masd::dogen::coding::meta_model::orm_module_properties>& orm_properties);
@@ -85,15 +85,10 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    /**
-     * @brief All the model elements contained in this module.
-     */
-    /**@{*/
-    const std::list<std::string>& members() const;
-    std::list<std::string>& members();
-    void members(const std::list<std::string>& v);
-    void members(const std::list<std::string>&& v);
-    /**@}*/
+    const std::unordered_set<std::string>& contains() const;
+    std::unordered_set<std::string>& contains();
+    void contains(const std::unordered_set<std::string>& v);
+    void contains(const std::unordered_set<std::string>&& v);
 
     /**
      * @brief If true, this module is thee root module of the model.
@@ -130,7 +125,7 @@ public:
     module& operator=(module other);
 
 private:
-    std::list<std::string> members_;
+    std::unordered_set<std::string> contains_;
     bool is_root_;
     bool is_global_module_;
     boost::optional<masd::dogen::coding::meta_model::orm_module_properties> orm_properties_;

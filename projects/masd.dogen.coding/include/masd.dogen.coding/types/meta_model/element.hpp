@@ -69,7 +69,7 @@ public:
         const std::string& documentation,
         const masd::dogen::annotations::annotation& annotation,
         const masd::dogen::coding::meta_model::origin_types origin_type,
-        const boost::optional<masd::dogen::coding::meta_model::name>& contained_by,
+        const std::string& contained_by,
         const bool in_global_module,
         const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
@@ -134,13 +134,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Name of the module in which we are contained.
+     * @brief Name of the module in which we are contained, if any.
      */
     /**@{*/
-    const boost::optional<masd::dogen::coding::meta_model::name>& contained_by() const;
-    boost::optional<masd::dogen::coding::meta_model::name>& contained_by();
-    void contained_by(const boost::optional<masd::dogen::coding::meta_model::name>& v);
-    void contained_by(const boost::optional<masd::dogen::coding::meta_model::name>&& v);
+    const std::string& contained_by() const;
+    std::string& contained_by();
+    void contained_by(const std::string& v);
+    void contained_by(const std::string&& v);
     /**@}*/
 
     /**
@@ -240,7 +240,7 @@ private:
     std::string documentation_;
     masd::dogen::annotations::annotation annotation_;
     masd::dogen::coding::meta_model::origin_types origin_type_;
-    boost::optional<masd::dogen::coding::meta_model::name> contained_by_;
+    std::string contained_by_;
     bool in_global_module_;
     std::list<masd::dogen::coding::meta_model::static_stereotypes> static_stereotypes_;
     std::list<std::string> dynamic_stereotypes_;

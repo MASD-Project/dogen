@@ -33,6 +33,10 @@
 #include "masd.dogen.coding/types/meta_model/exception.hpp"
 #include "masd.dogen.coding/types/meta_model/visitor.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/types/meta_model/licence.hpp"
+#include "masd.dogen.coding/types/meta_model/modeline.hpp"
+#include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
+#include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
 
 namespace masd::dogen::coding::meta_model {
@@ -68,6 +72,18 @@ inline void elements_traversal(const meta_model::model& m,
 
     for (const auto& pair : m.visitors())
         v(*pair.second);
+
+    for (const auto& pair : m.licences())
+        v(*pair.second);
+
+    for (const auto& pair : m.modelines())
+        v(*pair.second);
+
+    for (const auto& pair : m.modeline_groups())
+        v(*pair.second);
+
+    for (const auto& pair : m.generation_markers())
+        v(*pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -96,6 +112,18 @@ inline void elements_traversal(const meta_model::model& m,
 
     for (auto& pair : m.visitors())
         v(*pair.second);
+
+    for (const auto& pair : m.licences())
+        v(*pair.second);
+
+    for (const auto& pair : m.modelines())
+        v(*pair.second);
+
+    for (const auto& pair : m.modeline_groups())
+        v(*pair.second);
+
+    for (const auto& pair : m.generation_markers())
+        v(*pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -123,6 +151,18 @@ inline void elements_traversal(meta_model::model& m,
         v(*pair.second);
 
     for (auto& pair : m.visitors())
+        v(*pair.second);
+
+    for (const auto& pair : m.licences())
+        v(*pair.second);
+
+    for (const auto& pair : m.modelines())
+        v(*pair.second);
+
+    for (const auto& pair : m.modeline_groups())
+        v(*pair.second);
+
+    for (const auto& pair : m.generation_markers())
         v(*pair.second);
 }
 /**@}*/
@@ -158,6 +198,18 @@ inline void shared_elements_traversal(const meta_model::model& m,
 
     for (const auto& pair : m.visitors())
         v(pair.second);
+
+    for (const auto& pair : m.licences())
+        v(pair.second);
+
+    for (const auto& pair : m.modelines())
+        v(pair.second);
+
+    for (const auto& pair : m.modeline_groups())
+        v(pair.second);
+
+    for (const auto& pair : m.generation_markers())
+        v(pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -186,6 +238,18 @@ inline void shared_elements_traversal(const meta_model::model& m,
 
     for (auto& pair : m.visitors())
         v(pair.second);
+
+    for (const auto& pair : m.licences())
+        v(pair.second);
+
+    for (const auto& pair : m.modelines())
+        v(pair.second);
+
+    for (const auto& pair : m.modeline_groups())
+        v(pair.second);
+
+    for (const auto& pair : m.generation_markers())
+        v(pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -213,6 +277,18 @@ inline void shared_elements_traversal(meta_model::model& m,
         v(pair.second);
 
     for (auto& pair : m.visitors())
+        v(pair.second);
+
+    for (const auto& pair : m.licences())
+        v(pair.second);
+
+    for (const auto& pair : m.modelines())
+        v(pair.second);
+
+    for (const auto& pair : m.modeline_groups())
+        v(pair.second);
+
+    for (const auto& pair : m.generation_markers())
         v(pair.second);
 }
 /**@}*/

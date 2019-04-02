@@ -23,32 +23,20 @@
 namespace masd::dogen::coding::meta_model {
 
 decoration::decoration(
-    const std::string& top_modeline,
-    const std::string& bottom_modeline,
-    const std::list<std::string>& copyrights,
-    const std::string& licence_short_form,
-    const std::string& generation_marker)
-    : top_modeline_(top_modeline),
-      bottom_modeline_(bottom_modeline),
-      copyrights_(copyrights),
-      licence_short_form_(licence_short_form),
-      generation_marker_(generation_marker) { }
+    const std::string& preamble,
+    const std::string& postamble)
+    : preamble_(preamble),
+      postamble_(postamble) { }
 
 void decoration::swap(decoration& other) noexcept {
     using std::swap;
-    swap(top_modeline_, other.top_modeline_);
-    swap(bottom_modeline_, other.bottom_modeline_);
-    swap(copyrights_, other.copyrights_);
-    swap(licence_short_form_, other.licence_short_form_);
-    swap(generation_marker_, other.generation_marker_);
+    swap(preamble_, other.preamble_);
+    swap(postamble_, other.postamble_);
 }
 
 bool decoration::operator==(const decoration& rhs) const {
-    return top_modeline_ == rhs.top_modeline_ &&
-        bottom_modeline_ == rhs.bottom_modeline_ &&
-        copyrights_ == rhs.copyrights_ &&
-        licence_short_form_ == rhs.licence_short_form_ &&
-        generation_marker_ == rhs.generation_marker_;
+    return preamble_ == rhs.preamble_ &&
+        postamble_ == rhs.postamble_;
 }
 
 decoration& decoration::operator=(decoration other) {
@@ -57,84 +45,36 @@ decoration& decoration::operator=(decoration other) {
     return *this;
 }
 
-const std::string& decoration::top_modeline() const {
-    return top_modeline_;
+const std::string& decoration::preamble() const {
+    return preamble_;
 }
 
-std::string& decoration::top_modeline() {
-    return top_modeline_;
+std::string& decoration::preamble() {
+    return preamble_;
 }
 
-void decoration::top_modeline(const std::string& v) {
-    top_modeline_ = v;
+void decoration::preamble(const std::string& v) {
+    preamble_ = v;
 }
 
-void decoration::top_modeline(const std::string&& v) {
-    top_modeline_ = std::move(v);
+void decoration::preamble(const std::string&& v) {
+    preamble_ = std::move(v);
 }
 
-const std::string& decoration::bottom_modeline() const {
-    return bottom_modeline_;
+const std::string& decoration::postamble() const {
+    return postamble_;
 }
 
-std::string& decoration::bottom_modeline() {
-    return bottom_modeline_;
+std::string& decoration::postamble() {
+    return postamble_;
 }
 
-void decoration::bottom_modeline(const std::string& v) {
-    bottom_modeline_ = v;
+void decoration::postamble(const std::string& v) {
+    postamble_ = v;
 }
 
-void decoration::bottom_modeline(const std::string&& v) {
-    bottom_modeline_ = std::move(v);
-}
-
-const std::list<std::string>& decoration::copyrights() const {
-    return copyrights_;
-}
-
-std::list<std::string>& decoration::copyrights() {
-    return copyrights_;
-}
-
-void decoration::copyrights(const std::list<std::string>& v) {
-    copyrights_ = v;
-}
-
-void decoration::copyrights(const std::list<std::string>&& v) {
-    copyrights_ = std::move(v);
-}
-
-const std::string& decoration::licence_short_form() const {
-    return licence_short_form_;
-}
-
-std::string& decoration::licence_short_form() {
-    return licence_short_form_;
-}
-
-void decoration::licence_short_form(const std::string& v) {
-    licence_short_form_ = v;
-}
-
-void decoration::licence_short_form(const std::string&& v) {
-    licence_short_form_ = std::move(v);
-}
-
-const std::string& decoration::generation_marker() const {
-    return generation_marker_;
-}
-
-std::string& decoration::generation_marker() {
-    return generation_marker_;
-}
-
-void decoration::generation_marker(const std::string& v) {
-    generation_marker_ = v;
-}
-
-void decoration::generation_marker(const std::string&& v) {
-    generation_marker_ = std::move(v);
+void decoration::postamble(const std::string&& v) {
+    postamble_ = std::move(v);
 }
 
 }

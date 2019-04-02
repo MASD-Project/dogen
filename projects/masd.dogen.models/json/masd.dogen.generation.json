@@ -684,10 +684,6 @@
       ]
     },
     {
-      "name": "helpers",
-      "fallback_element_type": "masd::module"
-    },
-    {
       "name": "transforms::transformation_error",
       "documentation": "An error occurred whilst applying a transformation.\n",
       "stereotypes": [
@@ -711,6 +707,124 @@
     },
     {
       "name": "transforms::decoration_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::decoration_configuration",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "generate_decoration",
+          "type": "boost::optional<bool>"
+        },
+        {
+          "name": "copyright_notices",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "licence_name",
+          "type": "std::string"
+        },
+        {
+          "name": "modeline_group_name",
+          "type": "std::string"
+        },
+        {
+          "name": "marker_name",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "formatters",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "formatters::comment_formatter",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::formatting_error",
+      "documentation": "An error has occurred while formatting.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::comment_style",
+      "documentation": "Supported styles of comments.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "c_style",
+          "type": "",
+          "documentation": "Original C programming language style.\n"
+        },
+        {
+          "name": "cpp_style",
+          "type": "",
+          "documentation": "One line, C++ style.\n"
+        },
+        {
+          "name": "csharp_style",
+          "type": "",
+          "documentation": "C# programming language style.\n"
+        },
+        {
+          "name": "shell_style",
+          "type": "",
+          "documentation": "UNIX shell scripting comments.\n"
+        },
+        {
+          "name": "sql_style",
+          "type": "",
+          "documentation": "Comments start with a double-dash.\n"
+        },
+        {
+          "name": "xml_style",
+          "type": "",
+          "documentation": "Comments using XML syntax.\n"
+        }
+      ]
+    },
+    {
+      "name": "helpers",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "helpers::decoration_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "modelines_by_modeline_group_by_technical_space",
+          "type": "std::unordered_map<std::string, std::unordered_map<coding::meta_model::technical_space, boost::shared_ptr<coding::meta_model::modeline>>>"
+        },
+        {
+          "name": "licences_short_form_by_name",
+          "type": "std::unordered_map<std::string, std::string>"
+        },
+        {
+          "name": "licences_long_form_by_name",
+          "type": "std::unordered_map<std::string, std::string>"
+        },
+        {
+          "name": "generation_markers_by_name",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<coding::meta_model::generation_marker>>"
+        }
+      ]
+    },
+    {
+      "name": "helpers::decoration_repository_factory",
       "stereotypes": [
         "masd::handcrafted"
       ],

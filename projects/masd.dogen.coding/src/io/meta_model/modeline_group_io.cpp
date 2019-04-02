@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
+#include "masd.dogen.coding/io/meta_model/modeline_io.hpp"
 #include "masd.dogen.coding/io/meta_model/modeline_group_io.hpp"
 
 namespace masd::dogen::coding::meta_model {

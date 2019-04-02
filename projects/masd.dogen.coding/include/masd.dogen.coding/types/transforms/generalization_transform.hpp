@@ -26,8 +26,8 @@
 #endif
 
 #include <unordered_set>
-#include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
