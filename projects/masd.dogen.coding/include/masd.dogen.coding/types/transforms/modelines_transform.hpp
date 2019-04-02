@@ -25,24 +25,46 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.coding/types/meta_model/editor.hpp"
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
+#include "masd.dogen.coding/types/meta_model/modeline_location.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::coding::transforms {
 
+/**
+ * @brief Reads all meta-data related to modelines.
+ */
 class modelines_transform final {
-public:
-    modelines_transform() = default;
-    modelines_transform(const modelines_transform&) = default;
-    modelines_transform(modelines_transform&&) = default;
-    ~modelines_transform() = default;
-    modelines_transform& operator=(const modelines_transform&) = default;
+private:
+    static meta_model::editor to_editor(const std::string& s);
+    static meta_model::modeline_location
+    to_modeline_location(const std::string& s);
+    static meta_model::technical_space to_technical_space(const std::string& s);
+
+private:
+    struct type_group {
+        annotations::type editor;
+        annotations::type modeline_location;
+        annotations::type technical_space;
+    };
+
+    static type_group make_type_group(const annotations::type_repository& atrp);
+
+    static meta_model::editor
+    make_editor(const type_group& tg, const annotations::annotation& a);
+    static meta_model::technical_space
+    make_technical_space(const type_group& tg,
+        const annotations::annotation& a);
+    static meta_model::modeline_location make_modeline_location(
+        const type_group& tg, const annotations::annotation& a);
 
 public:
-    bool operator==(const modelines_transform& rhs) const;
-    bool operator!=(const modelines_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

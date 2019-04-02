@@ -27,11 +27,11 @@
 
 #include <list>
 #include <iosfwd>
-#include <string>
 #include <algorithm>
 #include "masd.dogen.coding/types/meta_model/editor.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_field.hpp"
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_location.hpp"
 
 namespace masd::dogen::coding::meta_model {
@@ -64,7 +64,7 @@ public:
         const std::string& documentation,
         const masd::dogen::annotations::annotation& annotation,
         const masd::dogen::coding::meta_model::origin_types origin_type,
-        const boost::optional<masd::dogen::coding::meta_model::name>& contained_by,
+        const std::string& contained_by,
         const bool in_global_module,
         const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
@@ -78,7 +78,7 @@ public:
         const masd::dogen::coding::meta_model::editor editor,
         const masd::dogen::coding::meta_model::modeline_location location,
         const std::list<masd::dogen::coding::meta_model::modeline_field>& fields,
-        const std::list<std::string>& applicable_meta_elements);
+        const masd::dogen::coding::meta_model::technical_space technical_space);
 
 public:
     using element::accept;
@@ -118,13 +118,11 @@ public:
     /**@}*/
 
     /**
-     * @brief Meta-names for all of the elements to which this modeline can be applied to.
+     * @brief Technical space that this modeline targets.
      */
     /**@{*/
-    const std::list<std::string>& applicable_meta_elements() const;
-    std::list<std::string>& applicable_meta_elements();
-    void applicable_meta_elements(const std::list<std::string>& v);
-    void applicable_meta_elements(const std::list<std::string>&& v);
+    masd::dogen::coding::meta_model::technical_space technical_space() const;
+    void technical_space(const masd::dogen::coding::meta_model::technical_space v);
     /**@}*/
 
 public:
@@ -144,7 +142,7 @@ private:
     masd::dogen::coding::meta_model::editor editor_;
     masd::dogen::coding::meta_model::modeline_location location_;
     std::list<masd::dogen::coding::meta_model::modeline_field> fields_;
-    std::list<std::string> applicable_meta_elements_;
+    masd::dogen::coding::meta_model::technical_space technical_space_;
 };
 
 }

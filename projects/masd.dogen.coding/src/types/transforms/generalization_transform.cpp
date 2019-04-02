@@ -36,7 +36,7 @@
 
 namespace {
 
-const std::string transform_id("coding.transforms.generalization_transforms");
+const std::string transform_id("coding.transforms.generalization_transform");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));

@@ -36,7 +36,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -72,7 +72,7 @@ module::module()
 module::module(module&& rhs)
     : masd::dogen::coding::meta_model::element(
         std::forward<masd::dogen::coding::meta_model::element>(rhs)),
-      members_(std::move(rhs.members_)),
+      contains_(std::move(rhs.contains_)),
       is_root_(std::move(rhs.is_root_)),
       is_global_module_(std::move(rhs.is_global_module_)),
       orm_properties_(std::move(rhs.orm_properties_)) { }
@@ -82,7 +82,7 @@ module::module(
     const std::string& documentation,
     const masd::dogen::annotations::annotation& annotation,
     const masd::dogen::coding::meta_model::origin_types origin_type,
-    const boost::optional<masd::dogen::coding::meta_model::name>& contained_by,
+    const std::string& contained_by,
     const bool in_global_module,
     const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
     const std::list<std::string>& dynamic_stereotypes,
@@ -93,7 +93,7 @@ module::module(
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const boost::optional<masd::dogen::coding::meta_model::decoration>& decoration,
-    const std::list<std::string>& members,
+    const std::unordered_set<std::string>& contains,
     const bool is_root,
     const bool is_global_module,
     const boost::optional<masd::dogen::coding::meta_model::orm_module_properties>& orm_properties)
@@ -113,7 +113,7 @@ module::module(
       artefact_properties,
       archetype_location_properties,
       decoration),
-      members_(members),
+      contains_(contains),
       is_root_(is_root),
       is_global_module_(is_global_module),
       orm_properties_(orm_properties) { }
@@ -146,7 +146,7 @@ void module::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     masd::dogen::coding::meta_model::element::to_stream(s);
     s << ", "
-      << "\"members\": " << members_ << ", "
+      << "\"contains\": " << contains_ << ", "
       << "\"is_root\": " << is_root_ << ", "
       << "\"is_global_module\": " << is_global_module_ << ", "
       << "\"orm_properties\": " << orm_properties_
@@ -157,7 +157,7 @@ void module::swap(module& other) noexcept {
     masd::dogen::coding::meta_model::element::swap(other);
 
     using std::swap;
-    swap(members_, other.members_);
+    swap(contains_, other.contains_);
     swap(is_root_, other.is_root_);
     swap(is_global_module_, other.is_global_module_);
     swap(orm_properties_, other.orm_properties_);
@@ -171,7 +171,7 @@ bool module::equals(const masd::dogen::coding::meta_model::element& other) const
 
 bool module::operator==(const module& rhs) const {
     return masd::dogen::coding::meta_model::element::compare(rhs) &&
-        members_ == rhs.members_ &&
+        contains_ == rhs.contains_ &&
         is_root_ == rhs.is_root_ &&
         is_global_module_ == rhs.is_global_module_ &&
         orm_properties_ == rhs.orm_properties_;
@@ -183,20 +183,20 @@ module& module::operator=(module other) {
     return *this;
 }
 
-const std::list<std::string>& module::members() const {
-    return members_;
+const std::unordered_set<std::string>& module::contains() const {
+    return contains_;
 }
 
-std::list<std::string>& module::members() {
-    return members_;
+std::unordered_set<std::string>& module::contains() {
+    return contains_;
 }
 
-void module::members(const std::list<std::string>& v) {
-    members_ = v;
+void module::contains(const std::unordered_set<std::string>& v) {
+    contains_ = v;
 }
 
-void module::members(const std::list<std::string>&& v) {
-    members_ = std::move(v);
+void module::contains(const std::unordered_set<std::string>&& v) {
+    contains_ = std::move(v);
 }
 
 bool module::is_root() const {

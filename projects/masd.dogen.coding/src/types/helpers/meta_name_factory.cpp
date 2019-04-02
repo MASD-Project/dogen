@@ -84,4 +84,24 @@ meta_model::name meta_name_factory::make_visitor_name() {
     return r;
 }
 
+meta_model::name meta_name_factory::make_licence_name() {
+    static const auto r(make_name("licence"));
+    return r;
+}
+
+meta_model::name meta_name_factory::make_modeline_name() {
+    static const auto r(make_name("modeline"));
+    return r;
+}
+
+meta_model::name meta_name_factory::make_modeline_group_name() {
+    static const auto r(make_name("modeline_group"));
+    return r;
+}
+
+meta_model::name meta_name_factory::make_generation_marker_name() {
+    static const auto r(make_name("generation_marker"));
+    return r;
+}
+
 }

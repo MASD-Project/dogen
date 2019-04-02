@@ -62,7 +62,7 @@ BOOST_AUTO_TEST_CASE(expanding_non_visitable_type_does_nothing) {
 
     auto a(factory.make_single_type_model());
     BOOST_REQUIRE(a.objects().size() == 1);
-    BOOST_CHECK(!a.objects().begin()->second->contained_by());
+    BOOST_CHECK(a.objects().begin()->second->contained_by().empty());
     BOOST_REQUIRE(a.modules().empty());
     BOOST_REQUIRE(a.builtins().empty());
     BOOST_REQUIRE(a.enumerations().empty());

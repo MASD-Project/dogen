@@ -72,6 +72,8 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
                                  << fp.generic_string();
 
         extraction::meta_model::artefact r;
+        // FIXME: what is the name/path for the artefact?! This may
+        // FIXME: explain empty artefacts!
         r.overwrite(a.new_artefact_properties().overwrite());
 
         extraction::meta_model::operation op;

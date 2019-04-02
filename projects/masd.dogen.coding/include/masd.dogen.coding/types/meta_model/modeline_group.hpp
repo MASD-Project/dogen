@@ -25,12 +25,14 @@
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include <unordered_map>
-#include "masd.dogen.coding/types/meta_model/name.hpp"
+#include <unordered_set>
+#include <boost/shared_ptr.hpp>
 #include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/modeline_fwd.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
@@ -54,7 +56,7 @@ public:
         const std::string& documentation,
         const masd::dogen::annotations::annotation& annotation,
         const masd::dogen::coding::meta_model::origin_types origin_type,
-        const boost::optional<masd::dogen::coding::meta_model::name>& contained_by,
+        const std::string& contained_by,
         const bool in_global_module,
         const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
@@ -65,7 +67,8 @@ public:
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const boost::optional<masd::dogen::coding::meta_model::decoration>& decoration,
-        const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& modelines_for_meta_element);
+        const std::unordered_set<std::string>& contains,
+        const std::list<boost::shared_ptr<masd::dogen::coding::meta_model::modeline> >& modelines);
 
 public:
     using element::accept;
@@ -78,14 +81,19 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
+    const std::unordered_set<std::string>& contains() const;
+    std::unordered_set<std::string>& contains();
+    void contains(const std::unordered_set<std::string>& v);
+    void contains(const std::unordered_set<std::string>&& v);
+
     /**
-     * @brief All the modelines for this group.
+     * @brief Modelines that make up the group.
      */
     /**@{*/
-    const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& modelines_for_meta_element() const;
-    std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& modelines_for_meta_element();
-    void modelines_for_meta_element(const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& v);
-    void modelines_for_meta_element(const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>&& v);
+    const std::list<boost::shared_ptr<masd::dogen::coding::meta_model::modeline> >& modelines() const;
+    std::list<boost::shared_ptr<masd::dogen::coding::meta_model::modeline> >& modelines();
+    void modelines(const std::list<boost::shared_ptr<masd::dogen::coding::meta_model::modeline> >& v);
+    void modelines(const std::list<boost::shared_ptr<masd::dogen::coding::meta_model::modeline> >&& v);
     /**@}*/
 
 public:
@@ -102,7 +110,8 @@ public:
     modeline_group& operator=(modeline_group other);
 
 private:
-    std::unordered_map<std::string, masd::dogen::coding::meta_model::name> modelines_for_meta_element_;
+    std::unordered_set<std::string> contains_;
+    std::list<boost::shared_ptr<masd::dogen::coding::meta_model::modeline> > modelines_;
 };
 
 }

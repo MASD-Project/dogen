@@ -46,6 +46,10 @@ public:
     static meta_model::name make_object_name();
     static meta_model::name make_exception_name();
     static meta_model::name make_visitor_name();
+    static meta_model::name make_licence_name();
+    static meta_model::name make_modeline_name();
+    static meta_model::name make_modeline_group_name();
+    static meta_model::name make_generation_marker_name();
 };
 
 }

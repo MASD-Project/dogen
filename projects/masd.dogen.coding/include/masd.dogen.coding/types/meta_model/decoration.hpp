@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
 #include <algorithm>
 
@@ -43,56 +42,34 @@ public:
 
 public:
     decoration(
-        const std::string& top_modeline,
-        const std::string& bottom_modeline,
-        const std::list<std::string>& copyrights,
-        const std::string& licence_short_form,
-        const std::string& generation_marker);
+        const std::string& preamble,
+        const std::string& postamble);
 
 public:
     /**
-     * @brief Modeline to use in this file, if any.
+     * @brief Preamble for all artefacts created from this element.
+     *
+     * The preamble is located at the top of an artefact and includes elements such as a
+     * modeline, licence,  copyrights, etc.
      */
     /**@{*/
-    const std::string& top_modeline() const;
-    std::string& top_modeline();
-    void top_modeline(const std::string& v);
-    void top_modeline(const std::string&& v);
-    /**@}*/
-
-    const std::string& bottom_modeline() const;
-    std::string& bottom_modeline();
-    void bottom_modeline(const std::string& v);
-    void bottom_modeline(const std::string&& v);
-
-    /**
-     * @brief All copyright notices for the current element.
-     */
-    /**@{*/
-    const std::list<std::string>& copyrights() const;
-    std::list<std::string>& copyrights();
-    void copyrights(const std::list<std::string>& v);
-    void copyrights(const std::list<std::string>&& v);
+    const std::string& preamble() const;
+    std::string& preamble();
+    void preamble(const std::string& v);
+    void preamble(const std::string&& v);
     /**@}*/
 
     /**
-     * @brief Licence to use in this file, if any.
+     * @brief Postamble for all artefacts created from this element.
+     *
+     * The postamble is located at the bottom of an artefact and includes elements such
+     * as a modeline.
      */
     /**@{*/
-    const std::string& licence_short_form() const;
-    std::string& licence_short_form();
-    void licence_short_form(const std::string& v);
-    void licence_short_form(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Code generation marker to use for this element, if any.
-     */
-    /**@{*/
-    const std::string& generation_marker() const;
-    std::string& generation_marker();
-    void generation_marker(const std::string& v);
-    void generation_marker(const std::string&& v);
+    const std::string& postamble() const;
+    std::string& postamble();
+    void postamble(const std::string& v);
+    void postamble(const std::string&& v);
     /**@}*/
 
 public:
@@ -106,11 +83,8 @@ public:
     decoration& operator=(decoration other);
 
 private:
-    std::string top_modeline_;
-    std::string bottom_modeline_;
-    std::list<std::string> copyrights_;
-    std::string licence_short_form_;
-    std::string generation_marker_;
+    std::string preamble_;
+    std::string postamble_;
 };
 
 }

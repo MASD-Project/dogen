@@ -28,7 +28,7 @@
 #include "masd.dogen.coding/types/transforms/generalization_transform.hpp"
 #include "masd.dogen.coding/types/transforms/stereotypes_transform.hpp"
 #include "masd.dogen.coding/types/transforms/object_templates_transform.hpp"
-#include "masd.dogen.coding/types/transforms/containment_transform.hpp"
+#include "masd.dogen.coding/types/transforms/global_module_transform.hpp"
 #include "masd.dogen.coding/types/transforms/orm_transform.hpp"
 #include "masd.dogen.coding/types/transforms/resolver_transform.hpp"
 #include "masd.dogen.coding/types/transforms/attributes_transform.hpp"
@@ -83,7 +83,12 @@ void post_assembly_chain::apply(const context& ctx, meta_model::model& m) {
      */
     stereotypes_transform::apply(ctx, m);
     object_templates_transform::apply(ctx, m);
-    containment_transform::apply(ctx, m);
+
+    /*
+     * Global module transform must be done in the post-assembly phase
+     * as we only want a single global module for all models.
+     */
+    global_module_transform::apply(ctx, m);
 
     /*
      * Meta-name transform must be applied after all transforms that

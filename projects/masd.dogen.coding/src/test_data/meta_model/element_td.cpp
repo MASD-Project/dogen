@@ -65,13 +65,6 @@ create_masd_dogen_coding_meta_model_origin_types(const unsigned int position) {
     return masd::dogen::coding::meta_model::origin_types_generator::create(position);
 }
 
-boost::optional<masd::dogen::coding::meta_model::name>
-create_boost_optional_masd_dogen_coding_meta_model_name(unsigned int position) {
-    boost::optional<masd::dogen::coding::meta_model::name> r(
-        create_masd_dogen_coding_meta_model_name(position));
-    return r;
-}
-
 bool create_bool(const unsigned int position) {
     return (position % 2) != 0;
 }
@@ -155,7 +148,7 @@ populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 1));
     v.annotation(create_masd_dogen_annotations_annotation(position + 2));
     v.origin_type(create_masd_dogen_coding_meta_model_origin_types(position + 3));
-    v.contained_by(create_boost_optional_masd_dogen_coding_meta_model_name(position + 4));
+    v.contained_by(create_std_string(position + 4));
     v.in_global_module(create_bool(position + 5));
     v.static_stereotypes(create_std_list_masd_dogen_coding_meta_model_static_stereotypes(position + 6));
     v.dynamic_stereotypes(create_std_list_std_string(position + 7));

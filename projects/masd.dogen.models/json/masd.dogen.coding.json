@@ -144,13 +144,11 @@
         "meta_model::element"
       ],
       "documentation": "Container for other coding elements.\n\nAggregates a group of logically related elements into a unit.\n",
+      "stereotypes": [
+        "Container"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "members",
-          "type": "std::list<std::string>",
-          "documentation": "All the model elements contained in this module.\n"
-        },
         {
           "name": "is_root",
           "type": "bool",
@@ -260,8 +258,8 @@
       "attributes": [
         {
           "name": "contained_by",
-          "type": "boost::optional<name>",
-          "documentation": "Name of the module in which we are contained.\n"
+          "type": "std::string",
+          "documentation": "Name of the module in which we are contained, if any.\n"
         },
         {
           "name": "in_global_module",
@@ -1310,7 +1308,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::containment_transform",
+      "name": "transforms::global_module_transform",
       "stereotypes": [
         "masd::handcrafted"
       ],
@@ -1967,12 +1965,15 @@
         "meta_model::element"
       ],
       "documentation": "Group of modelines, logically associated.\n\nFor example, one may choose to have a set of modelines for @e emacs , or for\n@e vi, etc.\n",
+      "stereotypes": [
+        "Container"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "modelines_for_meta_element",
-          "type": "std::unordered_map<std::string, name>",
-          "documentation": "All the modelines for this group.\n"
+          "name": "modelines",
+          "type": "std::list<boost::shared_ptr<modeline>>",
+          "documentation": "Modelines that make up the group.\n"
         }
       ]
     },
@@ -2000,9 +2001,9 @@
           "documentation": "List of all the parameters in the preamble, in order of appearence.\n"
         },
         {
-          "name": "applicable_meta_elements",
-          "type": "std::list<std::string>",
-          "documentation": "Meta-names for all of the elements to which this modeline can be applied to.\n"
+          "name": "technical_space",
+          "type": "technical_space",
+          "documentation": "Technical space that this modeline targets.\n"
         }
       ]
     },
@@ -2134,28 +2135,14 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "top_modeline",
+          "name": "preamble",
           "type": "std::string",
-          "documentation": "Modeline to use in this file, if any.\n"
+          "documentation": "Preamble for all artefacts created from this element.\n\nThe preamble is located at the top of an artefact and includes elements such as a\nmodeline, licence,  copyrights, etc.\n"
         },
         {
-          "name": "bottom_modeline",
-          "type": "std::string"
-        },
-        {
-          "name": "copyrights",
-          "type": "std::list<std::string>",
-          "documentation": "All copyright notices for the current element.\n"
-        },
-        {
-          "name": "licence_short_form",
+          "name": "postamble",
           "type": "std::string",
-          "documentation": "Licence to use in this file, if any.\n"
-        },
-        {
-          "name": "generation_marker",
-          "type": "std::string",
-          "documentation": "Code generation marker to use for this element, if any.\n"
+          "documentation": "Postamble for all artefacts created from this element.\n\nThe postamble is located at the bottom of an artefact and includes elements such\nas a modeline.\n"
         }
       ]
     },
@@ -2202,6 +2189,27 @@
         {
           "name": "qualified",
           "type": "fully_qualified_representation"
+        }
+      ]
+    },
+    {
+      "name": "transforms::containment_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::Container",
+      "documentation": "Has the ability to contain other elements.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "contains",
+          "type": "std::unordered_set<std::string>"
         }
       ]
     }

@@ -451,8 +451,8 @@ transform_modules(const type_group& tg, meta_model::model& m) {
          * update all objects that do not have a schema name to use
          * it's containing module's schema name.
          */
-        for (const auto& id : mod.members()) {
-            BOOST_LOG_SEV(lg, debug) << "Processing member: " << id;
+        for (const auto& id : mod.contains()) {
+            BOOST_LOG_SEV(lg, debug) << "Processing contained element: " << id;
 
             const auto i(m.objects().find(id));
             if (i != m.objects().end()) {

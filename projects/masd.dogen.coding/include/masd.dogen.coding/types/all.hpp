@@ -124,6 +124,7 @@
 #include "masd.dogen.coding/types/transforms/associations_transform.hpp"
 #include "masd.dogen.coding/types/transforms/enumerations_transform.hpp"
 #include "masd.dogen.coding/types/transforms/model_production_chain.hpp"
+#include "masd.dogen.coding/types/transforms/global_module_transform.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_attribute_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_primitive_properties.hpp"
 #include "masd.dogen.coding/types/transforms/generalization_transform.hpp"

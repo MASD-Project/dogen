@@ -23,12 +23,14 @@
 #include "masd.dogen.coding/io/meta_model/model_set_io.hpp"
 #include "masd.dogen.coding/types/helpers/pre_assembly_validator.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.coding/types/transforms/modelines_transform.hpp"
 #include "masd.dogen.coding/types/transforms/modules_transform.hpp"
 #include "masd.dogen.coding/types/transforms/origin_transform.hpp"
 #include "masd.dogen.coding/types/transforms/technical_space_transform.hpp"
 #include "masd.dogen.coding/types/transforms/type_params_transform.hpp"
 #include "masd.dogen.coding/types/transforms/parsing_transform.hpp"
 #include "masd.dogen.coding/types/transforms/primitives_transform.hpp"
+#include "masd.dogen.coding/types/transforms/containment_transform.hpp"
 #include "masd.dogen.coding/types/transforms/extraction_properties_transform.hpp"
 #include "masd.dogen.coding/types/transforms/pre_assembly_chain.hpp"
 
@@ -47,15 +49,23 @@ void pre_assembly_chain::apply(const context& ctx, meta_model::model& m) {
     /*
      * Module transform must be done before origin and technical space
      * transforms to get these properties populated on the new
-     * modules.
+     * modules; it must be done before the containment transform
+     * because we rely on implicit modules being present.
      */
     modules_transform::apply(ctx, m);
-    technical_space_transform::apply(ctx, m);
+    containment_transform::apply(ctx, m);
+
+    /*
+     * Modelines transform must be done after the containment
+     * transform to ensure we can see the modelines for a group.
+     */
+    modelines_transform::apply(ctx, m);
 
     /*
      * There are no particular dependencies on the next set of
      * transforms.
      */
+    technical_space_transform::apply(ctx, m);
     origin_transform::apply(ctx, m);
     type_params_transform::apply(ctx, m);
     parsing_transform::apply(ctx, m);

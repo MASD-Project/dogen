@@ -206,7 +206,7 @@ void post_assembly_validator::validate_name(const meta_model::name& n,
      * technical space where built-ins can have spaces, we split the
      * name on space and validate each component separately.
      */
-    BOOST_LOG_SEV(lg, debug) << "at_global_namespace: "
+    BOOST_LOG_SEV(lg, trace) << "at_global_namespace: "
                              << at_global_namespace
                              << " allow_spaces_in_built_in_types: "
                              << allow_spaces_in_built_in_types;
@@ -214,7 +214,7 @@ void post_assembly_validator::validate_name(const meta_model::name& n,
     if (at_global_namespace && allow_spaces_in_built_in_types) {
         using utility::string::splitter;
         const auto splitted(splitter::split_delimited(n.simple(), space));
-        BOOST_LOG_SEV(lg, debug) << "Splitted simple name: " << splitted;
+        BOOST_LOG_SEV(lg, trace) << "Splitted simple name: " << splitted;
         for (const auto& s : splitted)
             validate_string(s, regex, check_not_builtin);
     } else
@@ -231,7 +231,7 @@ void post_assembly_validator::validate_name(const meta_model::name& n,
 void post_assembly_validator::
 validate_names(const std::list<std::pair<std::string, meta_model::name>>& names,
     const meta_model::technical_space l) {
-    BOOST_LOG_SEV(lg, debug) << "Sanity checking names.";
+    BOOST_LOG_SEV(lg, debug) << "Validating names.";
     std::unordered_set<std::string> ids_done;
 
     const bool allow_spaces(allow_spaces_in_built_in_types(l));
@@ -239,7 +239,8 @@ validate_names(const std::list<std::pair<std::string, meta_model::name>>& names,
         const auto& owner(pair.first);
         const auto& n(pair.second);
         const auto& id(n.qualified().dot());
-        BOOST_LOG_SEV(lg, debug) << "Validating: '" << id << "'";
+        BOOST_LOG_SEV(lg, trace) << "Validating: '" << id << "'"
+                                 << " owner id: '" << owner << "'";
 
         try {
             /*
@@ -257,7 +258,7 @@ validate_names(const std::list<std::pair<std::string, meta_model::name>>& names,
              */
             validate_name(n, strict_name_regex, allow_spaces);
 
-            BOOST_LOG_SEV(lg, debug) << "Name is valid.";
+            BOOST_LOG_SEV(lg, trace) << "Name is valid.";
         } catch (boost::exception& e) {
             e << errmsg_validation_owner(owner);
             throw;
@@ -304,7 +305,8 @@ validate_injected_names(
         const auto& owner(pair.first);
         const auto& n(pair.second);
         const auto& id(n.qualified().dot());
-        BOOST_LOG_SEV(lg, debug) << "Validating: '" << id << "'";
+        BOOST_LOG_SEV(lg, trace) << "Validating: '" << id << "'"
+                                 << " owner id: '" << owner << "'";
 
         try {
             /*
@@ -312,7 +314,7 @@ validate_injected_names(
              */
             validate_name(n, loose_name_regex, false/*allow_spaces*/);
 
-            BOOST_LOG_SEV(lg, debug) << "Name is valid.";
+            BOOST_LOG_SEV(lg, trace) << "Name is valid.";
         } catch (boost::exception& e) {
             e << errmsg_validation_owner(owner);
             throw;
@@ -323,7 +325,7 @@ validate_injected_names(
 
 void post_assembly_validator::validate_meta_names(
     const std::list<std::pair<std::string, meta_model::name>>& meta_names) {
-    BOOST_LOG_SEV(lg, debug) << "Sanity checking all meta-names.";
+    BOOST_LOG_SEV(lg, debug) << "Validating all meta-names.";
 
     /*
      * Note that we can't just simply call validate_names here because
@@ -334,7 +336,8 @@ void post_assembly_validator::validate_meta_names(
         const auto& owner(pair.first);
         const auto& n(pair.second);
         const auto& id(n.qualified().dot());
-        BOOST_LOG_SEV(lg, debug) << "Validating: '" << id << "'";
+        BOOST_LOG_SEV(lg, trace) << "Validating: '" << id << "'"
+                                 << " owner id: '" << owner << "'";
 
         try {
             /*
@@ -342,7 +345,7 @@ void post_assembly_validator::validate_meta_names(
              */
             validate_name(n, strict_name_regex, false/*allow_spaces*/);
 
-            BOOST_LOG_SEV(lg, debug) << "Name is valid.";
+            BOOST_LOG_SEV(lg, trace) << "Name is valid.";
         } catch (boost::exception& e) {
             e << errmsg_validation_owner(owner);
             throw;
@@ -355,7 +358,6 @@ void post_assembly_validator::
 validate_name_tree(const std::unordered_set<std::string>& abstract_elements,
     const meta_model::technical_space ts, const meta_model::name_tree& nt,
     const bool inherit_opaqueness_from_parent) {
-
     const auto& ae(abstract_elements);
     const auto id(nt.current().qualified().dot());
     const bool is_abstract(ae.find(id) != ae.end());
@@ -372,13 +374,14 @@ void post_assembly_validator::validate_name_trees(
     const std::unordered_set<std::string>& abstract_elements,
     const meta_model::technical_space ts,
     const std::list<std::pair<std::string, meta_model::name_tree>>& nts) {
+    BOOST_LOG_SEV(lg, debug) << "Validating name trees.";
 
     /*
      * The only validation we perform on name trees at present is done
-     * just for c++, so we can ignore all other technical_space. Note that
-     * we already resolve all of the names in the name tree so we know
-     * they are valid. These are just additional checks we perform on
-     * these names.
+     * just for c++, so we can ignore all other technical_space. Note
+     * that we already resolve all of the names in the name tree so we
+     * know they are valid. These are just additional checks we
+     * perform on these names.
      */
     if (ts != meta_model::technical_space::cpp)
         return;
@@ -387,7 +390,7 @@ void post_assembly_validator::validate_name_trees(
         const auto& owner(pair.first);
         const auto& nt(pair.second);
         BOOST_LOG_SEV(lg, trace) << "Validating: '"
-                                 << nt.qualified().identifiable() << "'";
+                                 << nt.qualified().dot() << "'";
 
         try {
             validate_name_tree(abstract_elements, ts, nt);
@@ -396,6 +399,7 @@ void post_assembly_validator::validate_name_trees(
             throw;
         }
     }
+    BOOST_LOG_SEV(lg, debug) << "Validated name trees.";
 }
 
 void post_assembly_validator::

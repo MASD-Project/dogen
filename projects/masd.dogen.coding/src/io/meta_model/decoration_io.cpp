@@ -30,30 +30,13 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace masd::dogen::coding::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const decoration& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::coding::meta_model::decoration\"" << ", "
-      << "\"top_modeline\": " << "\"" << tidy_up_string(v.top_modeline()) << "\"" << ", "
-      << "\"bottom_modeline\": " << "\"" << tidy_up_string(v.bottom_modeline()) << "\"" << ", "
-      << "\"copyrights\": " << v.copyrights() << ", "
-      << "\"licence_short_form\": " << "\"" << tidy_up_string(v.licence_short_form()) << "\"" << ", "
-      << "\"generation_marker\": " << "\"" << tidy_up_string(v.generation_marker()) << "\""
+      << "\"preamble\": " << "\"" << tidy_up_string(v.preamble()) << "\"" << ", "
+      << "\"postamble\": " << "\"" << tidy_up_string(v.postamble()) << "\""
       << " }";
     return(s);
 }

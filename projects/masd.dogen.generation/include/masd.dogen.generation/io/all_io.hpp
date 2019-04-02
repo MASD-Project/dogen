@@ -26,9 +26,11 @@
 #endif
 
 #include "masd.dogen.generation/io/meta_model/model_io.hpp"
+#include "masd.dogen.generation/io/formatters/comment_style_io.hpp"
 #include "masd.dogen.generation/io/meta_model/facet_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/element_archetype_io.hpp"
 #include "masd.dogen.generation/io/meta_model/formatting_styles_io.hpp"
+#include "masd.dogen.generation/io/helpers/decoration_repository_io.hpp"
 #include "masd.dogen.generation/io/meta_model/backend_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/locator_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/artefact_properties_io.hpp"
@@ -36,6 +38,7 @@
 #include "masd.dogen.generation/io/meta_model/generatable_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/path_contribution_types_io.hpp"
 #include "masd.dogen.generation/io/meta_model/model_segment_properties_io.hpp"
+#include "masd.dogen.generation/io/transforms/decoration_configuration_io.hpp"
 #include "masd.dogen.generation/io/transforms/formatting_configuration_io.hpp"
 #include "masd.dogen.generation/io/meta_model/directory_structure_styles_io.hpp"
 #include "masd.dogen.generation/io/meta_model/archetype_family_properties_io.hpp"
