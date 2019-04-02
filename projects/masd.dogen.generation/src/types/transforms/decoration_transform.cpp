@@ -21,7 +21,10 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
+#include "masd.dogen.generation/types/traits.hpp"
 #include "masd.dogen.generation/io/meta_model/model_io.hpp"
 #include "masd.dogen.generation/types/transforms/transformation_error.hpp"
 #include "masd.dogen.generation/types/helpers/decoration_repository_factory.hpp"
@@ -37,6 +40,31 @@ auto lg(logger_factory(transform_id));
 }
 
 namespace masd::dogen::generation::transforms {
+
+decoration_transform::type_group decoration_transform::
+make_type_group(const annotations::type_repository& atrp) {
+    type_group r;
+    const annotations::type_repository_selector s(atrp);
+
+    r.enabled = s.select_type_by_name(traits::decoration::enabled());
+    r.copyright_notice =
+        s.select_type_by_name(traits::decoration::copyright_notice());
+    r.licence_name = s.select_type_by_name(traits::decoration::licence_name());;
+    r.marker_name = s.select_type_by_name(traits::decoration::marker_name());;
+
+    return r;
+}
+
+decoration_configuration decoration_transform::read_decoration_configuration(
+    const type_group& tg, const annotations::annotation& a) {
+
+    const annotations::entry_selector s(a);
+    decoration_configuration r;
+    if (s.has_entry(tg.enabled))
+        r.enabled(s.get_boolean_content(tg.enabled));
+
+    return r;
+}
 
 void decoration_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "decoration transform",

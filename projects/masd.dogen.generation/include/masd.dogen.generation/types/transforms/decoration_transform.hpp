@@ -25,7 +25,14 @@
 #pragma once
 #endif
 
+
+#include <list>
+#include <string>
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
+#include "masd.dogen.generation/types/transforms/decoration_configuration.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 
 namespace masd::dogen::generation::transforms {
@@ -34,6 +41,25 @@ namespace masd::dogen::generation::transforms {
  * @brief Updates the decoration of all modeling elements.
  */
 class decoration_transform final {
+private:
+    struct type_group {
+        annotations::type enabled;
+        annotations::type copyright_notice;
+        annotations::type licence_name;
+        annotations::type marker_name;
+    };
+
+    /**
+     * @brief Creates the type group for decoration.
+     */
+    static type_group make_type_group(const annotations::type_repository& atrp);
+
+    /**
+     * @brief Reads the decoration configuration from the supplied annotation.
+     */
+    static decoration_configuration read_decoration_configuration(
+        const type_group& tg, const annotations::annotation& a);
+
 public:
     static void apply(const context& ctx, meta_model::model& m);
 };
