@@ -22,6 +22,8 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.coding/types/meta_model/licence.hpp"
+#include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
@@ -31,11 +33,13 @@
 
 namespace {
 
-const std::string transform_id("coding.transforms.technical_space_transform");
+const std::string transform_id("coding.helpers.decoration_repository_factory");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
+const std::string duplicate_licence("Duplicate id for licence: ");
+const std::string duplicate_marker("Duplicate id for generation marker: ");
 const std::string duplicate_technical_space(
     "More than one modeline defined for technical space: ");
 const std::string duplicate_modeline_group(
@@ -50,29 +54,64 @@ namespace masd::dogen::generation::helpers {
 bool decoration_repository_factory::
 is_meta_element(const coding::meta_model::name& me,
     const coding::meta_model::element& e) const {
-
     const auto mid(me.qualified().dot());
     const auto eid(e.meta_name().qualified().dot());
     return mid == eid;
 }
 
 void decoration_repository_factory::handle_licence(
-    const boost::shared_ptr<coding::meta_model::element> /*e*/,
-    decoration_repository& /*drp*/) const {
+    const boost::shared_ptr<coding::meta_model::element> e,
+    decoration_repository& drp) const {
 
+    BOOST_LOG_SEV(lg, trace) << "Processing licence.";
+    const auto id(e->name().qualified().dot());
+    using coding::meta_model::licence;
+    const auto l(boost::dynamic_pointer_cast<licence>(e));
+    if (!l) {
+        BOOST_LOG_SEV(lg, error) << inconsistent_meta_name << id;
+        BOOST_THROW_EXCEPTION(building_exception(inconsistent_meta_name + id));
+    }
 
+    const auto pair(std::make_pair(id, l));
+    auto& map(drp.licences_by_name());
+    const bool inserted(map.insert(pair).second);
+    if (!inserted) {
+        BOOST_LOG_SEV(lg, error) << duplicate_licence << id;
+        BOOST_THROW_EXCEPTION(building_exception(duplicate_licence + id));
+    }
+
+    BOOST_LOG_SEV(lg, trace) << "Finished processing licence.";
 }
 
 void decoration_repository_factory::handle_generation_marker(
-    const boost::shared_ptr<coding::meta_model::element> /*e*/,
-    decoration_repository& /*drp*/) const {
+    const boost::shared_ptr<coding::meta_model::element> e,
+    decoration_repository& drp) const {
+    BOOST_LOG_SEV(lg, trace) << "Processing generation marker.";
 
+    const auto id(e->name().qualified().dot());
+    using coding::meta_model::generation_marker;
+    const auto gm(boost::dynamic_pointer_cast<generation_marker>(e));
+    if (!gm) {
+        BOOST_LOG_SEV(lg, error) << inconsistent_meta_name << id;
+        BOOST_THROW_EXCEPTION(building_exception(inconsistent_meta_name + id));
+    }
 
+    const auto pair(std::make_pair(id, gm));
+    auto& map(drp.generation_markers_by_name());
+    const bool inserted(map.insert(pair).second);
+    if (!inserted) {
+        BOOST_LOG_SEV(lg, error) << duplicate_marker << id;
+        BOOST_THROW_EXCEPTION(building_exception(duplicate_marker + id));
+    }
+
+    BOOST_LOG_SEV(lg, trace) << "Finished processing generation marker.";
 }
 
 void decoration_repository_factory::handle_modeline_group(
     const boost::shared_ptr<coding::meta_model::element> e,
     decoration_repository& drp) const {
+
+    BOOST_LOG_SEV(lg, trace) << "Processing modeline group.";
 
     const auto id(e->name().qualified().dot());
     using coding::meta_model::modeline_group;
@@ -99,6 +138,9 @@ void decoration_repository_factory::handle_modeline_group(
         }
     }
 
+    BOOST_LOG_SEV(lg, trace) << "Total annotations for modeline group: "
+                             << map.size();
+
     const auto gid(mg->name().qualified().dot());
     const auto pair(std::make_pair(gid, map));
     auto& ml_map(drp.modelines_by_modeline_group_by_technical_space());
@@ -108,10 +150,15 @@ void decoration_repository_factory::handle_modeline_group(
         BOOST_THROW_EXCEPTION(
             building_exception(duplicate_modeline_group + gid));
     }
+
+    BOOST_LOG_SEV(lg, trace) << "Finished processing modeline group.";
 }
 
 decoration_repository
 decoration_repository_factory::make(const meta_model::model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating decoration repository for model: "
+                             << m.name().qualified().dot();
+
     using mnf = coding::helpers::meta_name_factory;
     const auto licence_name(mnf::make_licence_name());
     const auto generation_marker_name(mnf::make_generation_marker_name());
@@ -120,6 +167,11 @@ decoration_repository_factory::make(const meta_model::model& m) const {
     decoration_repository r;
     for (const auto& ptr : m.elements()) {
         const auto& e(*ptr);
+        BOOST_LOG_SEV(lg, trace) << "Processing element: "
+                                 << e.name().qualified().dot()
+                                 << " meta-element name: "
+                                 << e.meta_name().qualified().dot();
+
         if (is_meta_element(licence_name, e))
             handle_licence(ptr, r);
         else if (is_meta_element(generation_marker_name, e))
@@ -127,6 +179,17 @@ decoration_repository_factory::make(const meta_model::model& m) const {
         else if (is_meta_element(modeline_group_name, e))
             handle_modeline_group(ptr, r);
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Modeline groups: "
+                             << r.modelines_by_modeline_group_by_technical_space()
+        .size();
+    BOOST_LOG_SEV(lg, debug) << "Licences: " << r.licences_by_name().size();
+    BOOST_LOG_SEV(lg, debug) << "Generation markers: "
+                             << r.generation_markers_by_name().size();
+
+    BOOST_LOG_SEV(lg, debug) << "Finished creating decoration repository.";
+
+
     return r;
 }
 

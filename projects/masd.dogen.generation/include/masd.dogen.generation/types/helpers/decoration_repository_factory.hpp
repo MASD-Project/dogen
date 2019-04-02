@@ -44,6 +44,11 @@ private:
     void handle_generation_marker(
         const boost::shared_ptr<coding::meta_model::element> e,
         decoration_repository& drp) const;
+
+    /**
+     * @brief Organises all modelines by modeline group and by
+     * technical space.
+     */
     void handle_modeline_group(
         const boost::shared_ptr<coding::meta_model::element> e,
         decoration_repository& drp) const;
