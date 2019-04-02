@@ -118,6 +118,10 @@ set(CTEST_CUSTOM_MAXIMUM_NUMBER_OF_WARNINGS 50)
 # Defines for CMake.
 #
 set(cmake_defines "")
+if(DEFINED boost_test_reporting)
+    set(cmake_defines ${cmake_defines} "-DWITH_BOOST_TEST_REPORTING=On")
+endif()
+
 if(DEFINED minimal_packaging)
     set(cmake_defines ${cmake_defines} "-DWITH_MINIMAL_PACKAGING=On")
 endif()

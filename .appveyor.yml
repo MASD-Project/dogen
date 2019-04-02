@@ -47,11 +47,11 @@ build_script:
   - ps: $env:BUILD_COMMIT = $env:APPVEYOR_REPO_COMMIT
   - ps: $env:BUILD_NUMBER = $env:APPVEYOR_BUILD_VERSION
   - ps: $env:BUILD_TIMESTAMP = Get-Date -format "yyyy/MM/dd HH:mm:ss"
-  - ps: ctest --extra-verbose --script ".ctest.cmake,configuration_type=$env:configuration,generator=$env:generator,compiler=$env:compiler,build_group=$env:build_group,minimal_packaging=1";
+  - ps: ctest --extra-verbose --script ".ctest.cmake,configuration_type=$env:configuration,generator=$env:generator,compiler=$env:compiler,build_group=$env:build_group,minimal_packaging=1,boost_test_reporting=1";
 
 on_finish:
   - ps: Invoke-WebRequest https://report.ci/upload.py | Select-Object -ExpandProperty Content | python - --name "Windows $env:compiler $env:configuration"
-  
+
 artifacts:
   - path: build/output/clang-cl/Release/stage/pkg/DOGEN-1.0.14-Windows-AMD64.msi
     name: x86_64 MSI

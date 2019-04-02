@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-02 Tue 10:54]
+#+CAPTION: Clock summary at [2019-04-02 Tue 11:03]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *44:16* |       |       | 100.0 |
+| *Total time*                                              | *44:25* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 44:16   |       |       | 100.0 |
-| Active                                                    |         | 44:16 |       | 100.0 |
+| Stories                                                   | 44:25   |       |       | 100.0 |
+| Active                                                    |         | 44:25 |       | 100.0 |
 | Edit release notes for previous sprint                    |         |       |  1:47 |   4.0 |
 | Sprint and product backlog grooming                       |         |       |  6:34 |  14.8 |
 | Create a video demo for the previous sprint's features    |         |       |  3:11 |   7.2 |
@@ -29,8 +29,8 @@
 | Simplify qualified name                                   |         |       |  3:39 |   8.2 |
 | Rename "language" to "technical space"                    |         |       |  7:22 |  16.6 |
 | Add intrinsic technical space ownership                   |         |       |  1:12 |   2.7 |
-| Integrate report-ci with dogen                            |         |       |  2:00 |   4.5 |
-| Promote extraction entities to meta-model elements        |         |       | 13:14 |  29.9 |
+| Integrate report-ci with dogen                            |         |       |  2:09 |   4.8 |
+| Promote extraction entities to meta-model elements        |         |       | 13:14 |  29.8 |
 | Move all utility formatters from extraction to generation |         |       |  0:27 |   1.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -326,6 +326,7 @@ generation types for full/partial/no generation.
 
 *** STARTED Integrate report-ci with dogen                            :story:
     :LOGBOOK:
+    CLOCK: [2019-04-02 Tue 10:54]--[2019-04-02 Tue 11:03] =>  0:09
     CLOCK: [2019-04-02 Tue 10:19]--[2019-04-02 Tue 10:29] =>  0:10
     CLOCK: [2019-04-02 Tue 10:09]--[2019-04-02 Tue 10:18] =>  0:09
     CLOCK: [2019-04-02 Tue 09:07]--[2019-04-02 Tue 10:08] =>  1:01
