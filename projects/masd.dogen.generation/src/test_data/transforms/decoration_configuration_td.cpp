@@ -56,7 +56,7 @@ decoration_configuration_generator::decoration_configuration_generator() : posit
 
 void decoration_configuration_generator::
 populate(const unsigned int position, result_type& v) {
-    v.generate_decoration(create_boost_optional_bool(position + 0));
+    v.enabled(create_boost_optional_bool(position + 0));
     v.copyright_notices(create_std_list_std_string(position + 1));
     v.licence_name(create_std_string(position + 2));
     v.modeline_group_name(create_std_string(position + 3));

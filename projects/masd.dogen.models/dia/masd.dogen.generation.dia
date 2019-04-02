@@ -10138,13 +10138,13 @@ model directory.#</dia:string>
         <dia:point val="40,153"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.95,152.95;57.105,159.05"/>
+        <dia:rectangle val="39.95,152.95;56.72,159.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="40,153"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.055"/>
+        <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6"/>
@@ -10239,7 +10239,7 @@ model directory.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#generate_decoration#</dia:string>
+            <dia:string>#enabled#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boost::optional&lt;bool&gt;#</dia:string>
@@ -10401,7 +10401,7 @@ model directory.#</dia:string>
         <dia:point val="55.49,147.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="48.4775,146.85;56.24,153.75"/>
+        <dia:rectangle val="48.285,146.85;56.24,153.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10409,8 +10409,8 @@ model directory.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="55.49,147.6"/>
         <dia:point val="55.49,151"/>
-        <dia:point val="48.5275,151"/>
-        <dia:point val="48.5275,152.95"/>
+        <dia:point val="48.335,151"/>
+        <dia:point val="48.335,152.95"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

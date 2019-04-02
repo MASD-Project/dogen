@@ -717,7 +717,7 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "generate_decoration",
+          "name": "enabled",
           "type": "boost::optional<bool>"
         },
         {

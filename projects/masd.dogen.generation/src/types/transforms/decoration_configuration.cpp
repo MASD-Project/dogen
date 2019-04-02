@@ -23,19 +23,19 @@
 namespace masd::dogen::generation::transforms {
 
 decoration_configuration::decoration_configuration(decoration_configuration&& rhs)
-    : generate_decoration_(std::move(rhs.generate_decoration_)),
+    : enabled_(std::move(rhs.enabled_)),
       copyright_notices_(std::move(rhs.copyright_notices_)),
       licence_name_(std::move(rhs.licence_name_)),
       modeline_group_name_(std::move(rhs.modeline_group_name_)),
       marker_name_(std::move(rhs.marker_name_)) { }
 
 decoration_configuration::decoration_configuration(
-    const boost::optional<bool>& generate_decoration,
+    const boost::optional<bool>& enabled,
     const std::list<std::string>& copyright_notices,
     const std::string& licence_name,
     const std::string& modeline_group_name,
     const std::string& marker_name)
-    : generate_decoration_(generate_decoration),
+    : enabled_(enabled),
       copyright_notices_(copyright_notices),
       licence_name_(licence_name),
       modeline_group_name_(modeline_group_name),
@@ -43,7 +43,7 @@ decoration_configuration::decoration_configuration(
 
 void decoration_configuration::swap(decoration_configuration& other) noexcept {
     using std::swap;
-    swap(generate_decoration_, other.generate_decoration_);
+    swap(enabled_, other.enabled_);
     swap(copyright_notices_, other.copyright_notices_);
     swap(licence_name_, other.licence_name_);
     swap(modeline_group_name_, other.modeline_group_name_);
@@ -51,7 +51,7 @@ void decoration_configuration::swap(decoration_configuration& other) noexcept {
 }
 
 bool decoration_configuration::operator==(const decoration_configuration& rhs) const {
-    return generate_decoration_ == rhs.generate_decoration_ &&
+    return enabled_ == rhs.enabled_ &&
         copyright_notices_ == rhs.copyright_notices_ &&
         licence_name_ == rhs.licence_name_ &&
         modeline_group_name_ == rhs.modeline_group_name_ &&
@@ -64,20 +64,20 @@ decoration_configuration& decoration_configuration::operator=(decoration_configu
     return *this;
 }
 
-const boost::optional<bool>& decoration_configuration::generate_decoration() const {
-    return generate_decoration_;
+const boost::optional<bool>& decoration_configuration::enabled() const {
+    return enabled_;
 }
 
-boost::optional<bool>& decoration_configuration::generate_decoration() {
-    return generate_decoration_;
+boost::optional<bool>& decoration_configuration::enabled() {
+    return enabled_;
 }
 
-void decoration_configuration::generate_decoration(const boost::optional<bool>& v) {
-    generate_decoration_ = v;
+void decoration_configuration::enabled(const boost::optional<bool>& v) {
+    enabled_ = v;
 }
 
-void decoration_configuration::generate_decoration(const boost::optional<bool>&& v) {
-    generate_decoration_ = std::move(v);
+void decoration_configuration::enabled(const boost::optional<bool>&& v) {
+    enabled_ = std::move(v);
 }
 
 const std::list<std::string>& decoration_configuration::copyright_notices() const {

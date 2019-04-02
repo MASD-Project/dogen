@@ -71,7 +71,7 @@ std::ostream& operator<<(std::ostream& s, const decoration_configuration& v) {
 
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::generation::transforms::decoration_configuration\"" << ", "
-      << "\"generate_decoration\": " << v.generate_decoration() << ", "
+      << "\"enabled\": " << v.enabled() << ", "
       << "\"copyright_notices\": " << v.copyright_notices() << ", "
       << "\"licence_name\": " << "\"" << tidy_up_string(v.licence_name()) << "\"" << ", "
       << "\"modeline_group_name\": " << "\"" << tidy_up_string(v.modeline_group_name()) << "\"" << ", "

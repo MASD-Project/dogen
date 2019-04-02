@@ -43,17 +43,17 @@ public:
 
 public:
     decoration_configuration(
-        const boost::optional<bool>& generate_decoration,
+        const boost::optional<bool>& enabled,
         const std::list<std::string>& copyright_notices,
         const std::string& licence_name,
         const std::string& modeline_group_name,
         const std::string& marker_name);
 
 public:
-    const boost::optional<bool>& generate_decoration() const;
-    boost::optional<bool>& generate_decoration();
-    void generate_decoration(const boost::optional<bool>& v);
-    void generate_decoration(const boost::optional<bool>&& v);
+    const boost::optional<bool>& enabled() const;
+    boost::optional<bool>& enabled();
+    void enabled(const boost::optional<bool>& v);
+    void enabled(const boost::optional<bool>&& v);
 
     const std::list<std::string>& copyright_notices() const;
     std::list<std::string>& copyright_notices();
@@ -86,7 +86,7 @@ public:
     decoration_configuration& operator=(decoration_configuration other);
 
 private:
-    boost::optional<bool> generate_decoration_;
+    boost::optional<bool> enabled_;
     std::list<std::string> copyright_notices_;
     std::string licence_name_;
     std::string modeline_group_name_;
