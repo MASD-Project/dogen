@@ -33,29 +33,29 @@ matrix:
     - os: osx
       compiler: clang
       osx_image: xcode10
-      env: deploy="1" configuration=Release compiler="clang" generator="Unix Makefiles" build_group="Continuous"
+      env: deploy="1" configuration=Release compiler="clang" generator="Unix Makefiles" build_group="Continuous" report_name="OSX Clang Release"
     - os: osx
       compiler: clang
       osx_image: xcode10
-      env: configuration=Debug compiler="clang" generator="Unix Makefiles" build_group="Continuous"
+      env: configuration=Debug compiler="clang" generator="Unix Makefiles" build_group="Continuous" report_name="OSX Clang Debug"
     #
     # Linux GCC
     #
     - os: linux
       compiler: gcc
-      env: deploy="1" configuration=Release compiler="gcc8" generator="Ninja" build_group="Continuous"
+      env: deploy="1" configuration=Release compiler="gcc8" generator="Ninja" build_group="Continuous" report_name="Linux Gcc Releases"
     - os: linux
       compiler: gcc
-      env: configuration=Debug compiler="gcc8" generator="Ninja" build_group="Continuous"
+      env: configuration=Debug compiler="gcc8" generator="Ninja" build_group="Continuous"  report_name="Linux Gcc Debug"
     #
     # Linux Clang
     #
     - os: linux
       compiler: clang
-      env: configuration=Release compiler="clang7" generator="Ninja" build_group="Continuous"
+      env: configuration=Release compiler="clang7" generator="Ninja" build_group="Continuous" report_name="Linux Clang Release"
     - os: linux
       compiler: clang
-      env: coverage=1 configuration=Debug compiler="clang7" generator="Ninja" build_group="Continuous"
+      env: coverage=1 configuration=Debug compiler="clang7" generator="Ninja" build_group="Continuous" report_name="Linux Clang Debug"
 
 addons:
   apt:
@@ -85,6 +85,9 @@ script:
         ${SCRIPTS_DIR}/test_package.linux.sh ${configuration} ${compiler};
     fi
 
+after_script:
+  - curl -s https://report.ci/upload.py | python - --name "${report_name}"
+    
 after_success:
   - if [[ "x${coverage}" == "x1" ]]; then
        ${SCRIPTS_DIR}/coverage.linux.sh ${STAGE_DIR} /tmp/kcov ${TRAVIS_JOB_ID};
