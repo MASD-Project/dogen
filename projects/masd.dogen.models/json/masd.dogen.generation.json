@@ -825,6 +825,13 @@
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::building_exception",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

@@ -13,24 +13,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-02 Tue 11:03]
+#+CAPTION: Clock summary at [2019-04-02 Tue 11:57]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *44:25* |       |       | 100.0 |
+| *Total time*                                              | *45:18* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 44:25   |       |       | 100.0 |
-| Active                                                    |         | 44:25 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       |  1:47 |   4.0 |
-| Sprint and product backlog grooming                       |         |       |  6:34 |  14.8 |
-| Create a video demo for the previous sprint's features    |         |       |  3:11 |   7.2 |
-| Fix issues with emacs                                     |         |       |  2:42 |   6.1 |
-| Create a basic "project plan"                             |         |       |  2:08 |   4.8 |
-| Simplify qualified name                                   |         |       |  3:39 |   8.2 |
-| Rename "language" to "technical space"                    |         |       |  7:22 |  16.6 |
-| Add intrinsic technical space ownership                   |         |       |  1:12 |   2.7 |
-| Integrate report-ci with dogen                            |         |       |  2:09 |   4.8 |
-| Promote extraction entities to meta-model elements        |         |       | 13:14 |  29.8 |
+| Stories                                                   | 45:18   |       |       | 100.0 |
+| Active                                                    |         | 45:18 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  1:47 |   3.9 |
+| Sprint and product backlog grooming                       |         |       |  6:34 |  14.5 |
+| Create a video demo for the previous sprint's features    |         |       |  3:11 |   7.0 |
+| Fix issues with emacs                                     |         |       |  2:42 |   6.0 |
+| Create a basic "project plan"                             |         |       |  2:08 |   4.7 |
+| Simplify qualified name                                   |         |       |  3:39 |   8.1 |
+| Rename "language" to "technical space"                    |         |       |  7:22 |  16.3 |
+| Add intrinsic technical space ownership                   |         |       |  1:12 |   2.6 |
+| Integrate report-ci with dogen                            |         |       |  2:09 |   4.7 |
+| Promote extraction entities to meta-model elements        |         |       | 14:07 |  31.2 |
 | Move all utility formatters from extraction to generation |         |       |  0:27 |   1.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -339,6 +339,7 @@ submitted a PR. Help him integrate it with Dogen.
 
 *** STARTED Promote extraction entities to meta-model elements        :story:
     :LOGBOOK:
+    CLOCK: [2019-04-02 Tue 11:04]--[2019-04-02 Tue 11:57] =>  0:53
     CLOCK: [2019-04-01 Mon 18:25]--[2019-04-01 Mon 19:00] =>  0:35
     CLOCK: [2019-04-01 Mon 17:10]--[2019-04-01 Mon 17:51] =>  0:41
     CLOCK: [2019-04-01 Mon 16:53]--[2019-04-01 Mon 17:09] =>  0:16

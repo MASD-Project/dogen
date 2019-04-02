@@ -25,24 +25,31 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.coding/types/meta_model/name.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.generation/types/meta_model/model.hpp"
+#include "masd.dogen.generation/types/helpers/decoration_repository.hpp"
 
 namespace masd::dogen::generation::helpers {
 
 class decoration_repository_factory final {
-public:
-    decoration_repository_factory() = default;
-    decoration_repository_factory(const decoration_repository_factory&) = default;
-    decoration_repository_factory(decoration_repository_factory&&) = default;
-    ~decoration_repository_factory() = default;
-    decoration_repository_factory& operator=(const decoration_repository_factory&) = default;
+private:
+    bool is_meta_element(const coding::meta_model::name& me,
+        const coding::meta_model::element& e) const;
+
+private:
+    void handle_licence(
+        const boost::shared_ptr<coding::meta_model::element> e,
+        decoration_repository& drp) const;
+    void handle_generation_marker(
+        const boost::shared_ptr<coding::meta_model::element> e,
+        decoration_repository& drp) const;
+    void handle_modeline_group(
+        const boost::shared_ptr<coding::meta_model::element> e,
+        decoration_repository& drp) const;
 
 public:
-    bool operator==(const decoration_repository_factory& rhs) const;
-    bool operator!=(const decoration_repository_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    decoration_repository make(const meta_model::model& m) const;
 };
 
 }

@@ -29,6 +29,7 @@
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/formatters/comment_style.hpp"
+#include "masd.dogen.generation/types/helpers/building_exception.hpp"
 #include "masd.dogen.generation/types/transforms/registrar_error.hpp"
 #include "masd.dogen.generation/types/formatters/formatting_error.hpp"
 #include "masd.dogen.generation/types/meta_model/facet_properties.hpp"
