@@ -147,7 +147,8 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
          * annotation object and use it to generate the properties.
          */
         const auto st(annotations::scope_types::root_module);
-        const auto original(annotation_factory_.make(r.body().tagged_values(), st));
+        const auto& tv(r.body().tagged_values());
+        const auto original(annotation_factory_.make(tv, st));
         const auto expanded(annotation_expander_.expand(original));
         BOOST_LOG_SEV(lg, debug) << "Annotation: " << expanded;
         r.properties(properties_factory_.make(expanded));
