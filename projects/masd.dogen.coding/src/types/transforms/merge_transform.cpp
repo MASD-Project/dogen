@@ -73,7 +73,13 @@ merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
                              << " primitives: " << src.primitives().size()
                              << " objects: " << src.objects().size()
                              << " exceptions: " << src.exceptions().size()
-                             << " visitors: " << src.visitors().size();
+                             << " visitors: " << src.visitors().size()
+                             << " modeline_groups: "
+                             << src.modeline_groups().size()
+                             << " modeline: " << src.modelines().size()
+                             << " generation markers: "
+                             << src.generation_markers().size()
+                             << " licences: " << src.licences().size();
 
     copy(src.modules(), dst.modules());
     copy(src.object_templates(), dst.object_templates());

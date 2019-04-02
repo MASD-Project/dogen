@@ -13,25 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-02 Tue 11:57]
+#+CAPTION: Clock summary at [2019-04-02 Tue 17:25]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *45:18* |       |       | 100.0 |
+| *Total time*                                              | *48:23* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 45:18   |       |       | 100.0 |
-| Active                                                    |         | 45:18 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       |  1:47 |   3.9 |
-| Sprint and product backlog grooming                       |         |       |  6:34 |  14.5 |
-| Create a video demo for the previous sprint's features    |         |       |  3:11 |   7.0 |
-| Fix issues with emacs                                     |         |       |  2:42 |   6.0 |
-| Create a basic "project plan"                             |         |       |  2:08 |   4.7 |
-| Simplify qualified name                                   |         |       |  3:39 |   8.1 |
-| Rename "language" to "technical space"                    |         |       |  7:22 |  16.3 |
-| Add intrinsic technical space ownership                   |         |       |  1:12 |   2.6 |
-| Integrate report-ci with dogen                            |         |       |  2:09 |   4.7 |
-| Promote extraction entities to meta-model elements        |         |       | 14:07 |  31.2 |
-| Move all utility formatters from extraction to generation |         |       |  0:27 |   1.0 |
+| Stories                                                   | 48:23   |       |       | 100.0 |
+| Active                                                    |         | 48:23 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  1:47 |   3.7 |
+| Sprint and product backlog grooming                       |         |       |  6:34 |  13.6 |
+| Create a video demo for the previous sprint's features    |         |       |  3:11 |   6.6 |
+| Fix issues with emacs                                     |         |       |  2:42 |   5.6 |
+| Create a basic "project plan"                             |         |       |  2:08 |   4.4 |
+| Simplify qualified name                                   |         |       |  3:39 |   7.5 |
+| Rename "language" to "technical space"                    |         |       |  7:22 |  15.2 |
+| Add intrinsic technical space ownership                   |         |       |  1:12 |   2.5 |
+| Integrate report-ci with dogen                            |         |       |  2:09 |   4.4 |
+| Promote extraction entities to meta-model elements        |         |       | 17:12 |  35.5 |
+| Move all utility formatters from extraction to generation |         |       |  0:27 |   0.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -339,6 +339,7 @@ submitted a PR. Help him integrate it with Dogen.
 
 *** STARTED Promote extraction entities to meta-model elements        :story:
     :LOGBOOK:
+    CLOCK: [2019-04-02 Tue 14:20]--[2019-04-02 Tue 17:25] =>  3:05
     CLOCK: [2019-04-02 Tue 11:04]--[2019-04-02 Tue 11:57] =>  0:53
     CLOCK: [2019-04-01 Mon 18:25]--[2019-04-01 Mon 19:00] =>  0:35
     CLOCK: [2019-04-01 Mon 17:10]--[2019-04-01 Mon 17:51] =>  0:41
@@ -422,6 +423,9 @@ Notes:
   determine the modelines. We need to unwind all the work on moving
   dynamic factories into coding.
 - add resolver checks to ensure all modelines in a group can be found.
+- query for element names in generated model:
+
+: jq ."elements"[]."data"."__parent_0__"."name"."qualified"."dot"
 
 Tasks:
 

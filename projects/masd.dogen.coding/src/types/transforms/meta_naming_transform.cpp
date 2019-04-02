@@ -105,15 +105,14 @@ public:
     }
 
     void operator()(meta_model::modeline_group& mg) {
-        static const auto n(meta_name_factory::make_visitor_name());
+        static const auto n(meta_name_factory::make_modeline_group_name());
         mg.meta_name(n);
     }
 
     void operator()(meta_model::generation_marker& gm) {
-        static const auto n(meta_name_factory::make_visitor_name());
+        static const auto n(meta_name_factory::make_generation_marker_name());
         gm.meta_name(n);
     }
-
 };
 
 void meta_naming_transform::

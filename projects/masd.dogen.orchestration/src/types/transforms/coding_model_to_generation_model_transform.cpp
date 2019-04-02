@@ -33,6 +33,10 @@
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/types/meta_model/licence.hpp"
+#include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
+#include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
+#include "masd.dogen.coding/types/meta_model/modeline.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
@@ -93,8 +97,7 @@ public:
         result_.module_ids().insert(m->name().qualified().dot());
         add(m);
     }
-    void operator()
-    (boost::shared_ptr<coding::meta_model::object_template> ot) {
+    void operator()(boost::shared_ptr<coding::meta_model::object_template> ot) {
         add(ot);
     }
     void operator()(boost::shared_ptr<coding::meta_model::builtin> b) {
@@ -114,6 +117,19 @@ public:
     }
     void operator()(boost::shared_ptr<coding::meta_model::visitor> v) {
         add(v);
+    }
+    void operator()(boost::shared_ptr<coding::meta_model::licence> l) {
+        add(l);
+    }
+    void operator()
+    (boost::shared_ptr<coding::meta_model::generation_marker> gm) {
+        add(gm);
+    }
+    void operator()(boost::shared_ptr<coding::meta_model::modeline_group> mg) {
+        add(mg);
+    }
+    void operator()(boost::shared_ptr<coding::meta_model::modeline> m) {
+        add(m);
     }
 
 public:
@@ -144,6 +160,10 @@ compute_total_size(const coding::meta_model::model& em) {
     r += em.objects().size();
     r += em.exceptions().size();
     r += em.visitors().size();
+    r += em.licences().size();
+    r += em.generation_markers().size();
+    r += em.modeline_groups().size();
+    r += em.modelines().size();
     return r;
 }
 
