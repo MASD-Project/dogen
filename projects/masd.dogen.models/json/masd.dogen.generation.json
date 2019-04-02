@@ -810,12 +810,8 @@
           "type": "std::unordered_map<std::string, std::unordered_map<coding::meta_model::technical_space, boost::shared_ptr<coding::meta_model::modeline>>>"
         },
         {
-          "name": "licences_short_form_by_name",
-          "type": "std::unordered_map<std::string, std::string>"
-        },
-        {
-          "name": "licences_long_form_by_name",
-          "type": "std::unordered_map<std::string, std::string>"
+          "name": "licences_by_name",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<coding::meta_model::licence>>"
         },
         {
           "name": "generation_markers_by_name",

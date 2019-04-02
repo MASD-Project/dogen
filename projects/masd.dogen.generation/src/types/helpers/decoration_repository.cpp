@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.coding/types/meta_model/licence.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline.hpp"
 #include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
 #include "masd.dogen.generation/types/helpers/decoration_repository.hpp"
@@ -26,6 +27,15 @@ namespace boost {
 
 inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::modeline>& lhs,
 const boost::shared_ptr<masd::dogen::coding::meta_model::modeline>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::licence>& lhs,
+const boost::shared_ptr<masd::dogen::coding::meta_model::licence>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -44,26 +54,22 @@ namespace masd::dogen::generation::helpers {
 
 decoration_repository::decoration_repository(
     const std::unordered_map<std::string, std::unordered_map<masd::dogen::coding::meta_model::technical_space, boost::shared_ptr<masd::dogen::coding::meta_model::modeline> > >& modelines_by_modeline_group_by_technical_space,
-    const std::unordered_map<std::string, std::string>& licences_short_form_by_name,
-    const std::unordered_map<std::string, std::string>& licences_long_form_by_name,
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >& licences_by_name,
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> >& generation_markers_by_name)
     : modelines_by_modeline_group_by_technical_space_(modelines_by_modeline_group_by_technical_space),
-      licences_short_form_by_name_(licences_short_form_by_name),
-      licences_long_form_by_name_(licences_long_form_by_name),
+      licences_by_name_(licences_by_name),
       generation_markers_by_name_(generation_markers_by_name) { }
 
 void decoration_repository::swap(decoration_repository& other) noexcept {
     using std::swap;
     swap(modelines_by_modeline_group_by_technical_space_, other.modelines_by_modeline_group_by_technical_space_);
-    swap(licences_short_form_by_name_, other.licences_short_form_by_name_);
-    swap(licences_long_form_by_name_, other.licences_long_form_by_name_);
+    swap(licences_by_name_, other.licences_by_name_);
     swap(generation_markers_by_name_, other.generation_markers_by_name_);
 }
 
 bool decoration_repository::operator==(const decoration_repository& rhs) const {
     return modelines_by_modeline_group_by_technical_space_ == rhs.modelines_by_modeline_group_by_technical_space_ &&
-        licences_short_form_by_name_ == rhs.licences_short_form_by_name_ &&
-        licences_long_form_by_name_ == rhs.licences_long_form_by_name_ &&
+        licences_by_name_ == rhs.licences_by_name_ &&
         generation_markers_by_name_ == rhs.generation_markers_by_name_;
 }
 
@@ -89,36 +95,20 @@ void decoration_repository::modelines_by_modeline_group_by_technical_space(const
     modelines_by_modeline_group_by_technical_space_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::string>& decoration_repository::licences_short_form_by_name() const {
-    return licences_short_form_by_name_;
+const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >& decoration_repository::licences_by_name() const {
+    return licences_by_name_;
 }
 
-std::unordered_map<std::string, std::string>& decoration_repository::licences_short_form_by_name() {
-    return licences_short_form_by_name_;
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >& decoration_repository::licences_by_name() {
+    return licences_by_name_;
 }
 
-void decoration_repository::licences_short_form_by_name(const std::unordered_map<std::string, std::string>& v) {
-    licences_short_form_by_name_ = v;
+void decoration_repository::licences_by_name(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >& v) {
+    licences_by_name_ = v;
 }
 
-void decoration_repository::licences_short_form_by_name(const std::unordered_map<std::string, std::string>&& v) {
-    licences_short_form_by_name_ = std::move(v);
-}
-
-const std::unordered_map<std::string, std::string>& decoration_repository::licences_long_form_by_name() const {
-    return licences_long_form_by_name_;
-}
-
-std::unordered_map<std::string, std::string>& decoration_repository::licences_long_form_by_name() {
-    return licences_long_form_by_name_;
-}
-
-void decoration_repository::licences_long_form_by_name(const std::unordered_map<std::string, std::string>& v) {
-    licences_long_form_by_name_ = v;
-}
-
-void decoration_repository::licences_long_form_by_name(const std::unordered_map<std::string, std::string>&& v) {
-    licences_long_form_by_name_ = std::move(v);
+void decoration_repository::licences_by_name(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >&& v) {
+    licences_by_name_ = std::move(v);
 }
 
 const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> >& decoration_repository::generation_markers_by_name() const {

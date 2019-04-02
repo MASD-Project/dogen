@@ -11485,7 +11485,7 @@ model directory.#</dia:string>
         <dia:point val="208,113"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="207.95,112.95;280.16,118.25"/>
+        <dia:rectangle val="207.95,112.95;280.16,117.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="208,113"/>
@@ -11494,7 +11494,7 @@ model directory.#</dia:string>
         <dia:real val="72.109999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#decoration_repository#</dia:string>
@@ -11609,33 +11609,10 @@ model directory.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#licences_short_form_by_name#</dia:string>
+            <dia:string>#licences_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::string&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#licences_long_form_by_name#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::string&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;coding::meta_model::licence&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -11885,7 +11862,7 @@ model directory.#</dia:string>
         <dia:point val="227.26,124"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="226.51,118.15;244.255,124.8"/>
+        <dia:rectangle val="226.51,117.35;244.255,124.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11894,7 +11871,7 @@ model directory.#</dia:string>
         <dia:point val="227.26,124"/>
         <dia:point val="227.26,121"/>
         <dia:point val="244.055,121"/>
-        <dia:point val="244.055,118.2"/>
+        <dia:point val="244.055,117.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

@@ -29,6 +29,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
+#include "masd.dogen.coding/types/meta_model/licence_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/hash/meta_model/technical_space_hash.hpp"
@@ -46,8 +47,7 @@ public:
 public:
     decoration_repository(
         const std::unordered_map<std::string, std::unordered_map<masd::dogen::coding::meta_model::technical_space, boost::shared_ptr<masd::dogen::coding::meta_model::modeline> > >& modelines_by_modeline_group_by_technical_space,
-        const std::unordered_map<std::string, std::string>& licences_short_form_by_name,
-        const std::unordered_map<std::string, std::string>& licences_long_form_by_name,
+        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >& licences_by_name,
         const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> >& generation_markers_by_name);
 
 public:
@@ -56,15 +56,10 @@ public:
     void modelines_by_modeline_group_by_technical_space(const std::unordered_map<std::string, std::unordered_map<masd::dogen::coding::meta_model::technical_space, boost::shared_ptr<masd::dogen::coding::meta_model::modeline> > >& v);
     void modelines_by_modeline_group_by_technical_space(const std::unordered_map<std::string, std::unordered_map<masd::dogen::coding::meta_model::technical_space, boost::shared_ptr<masd::dogen::coding::meta_model::modeline> > >&& v);
 
-    const std::unordered_map<std::string, std::string>& licences_short_form_by_name() const;
-    std::unordered_map<std::string, std::string>& licences_short_form_by_name();
-    void licences_short_form_by_name(const std::unordered_map<std::string, std::string>& v);
-    void licences_short_form_by_name(const std::unordered_map<std::string, std::string>&& v);
-
-    const std::unordered_map<std::string, std::string>& licences_long_form_by_name() const;
-    std::unordered_map<std::string, std::string>& licences_long_form_by_name();
-    void licences_long_form_by_name(const std::unordered_map<std::string, std::string>& v);
-    void licences_long_form_by_name(const std::unordered_map<std::string, std::string>&& v);
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >& licences_by_name() const;
+    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >& licences_by_name();
+    void licences_by_name(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >& v);
+    void licences_by_name(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >&& v);
 
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> >& generation_markers_by_name() const;
     std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> >& generation_markers_by_name();
@@ -83,8 +78,7 @@ public:
 
 private:
     std::unordered_map<std::string, std::unordered_map<masd::dogen::coding::meta_model::technical_space, boost::shared_ptr<masd::dogen::coding::meta_model::modeline> > > modelines_by_modeline_group_by_technical_space_;
-    std::unordered_map<std::string, std::string> licences_short_form_by_name_;
-    std::unordered_map<std::string, std::string> licences_long_form_by_name_;
+    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> > licences_by_name_;
     std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> > generation_markers_by_name_;
 };
 

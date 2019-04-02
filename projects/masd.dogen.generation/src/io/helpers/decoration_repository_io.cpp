@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "masd.dogen.coding/io/meta_model/licence_io.hpp"
 #include "masd.dogen.coding/io/meta_model/modeline_io.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/io/meta_model/generation_marker_io.hpp"
@@ -85,16 +86,32 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::coding::meta_model::licence>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
         s << "\"" << tidy_up_string(i->first) << "\"";
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->second) << "\"";
+        s << i->second;
         s << " } ]";
     }
     s << " ] ";
@@ -143,8 +160,7 @@ std::ostream& operator<<(std::ostream& s, const decoration_repository& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::generation::helpers::decoration_repository\"" << ", "
       << "\"modelines_by_modeline_group_by_technical_space\": " << v.modelines_by_modeline_group_by_technical_space() << ", "
-      << "\"licences_short_form_by_name\": " << v.licences_short_form_by_name() << ", "
-      << "\"licences_long_form_by_name\": " << v.licences_long_form_by_name() << ", "
+      << "\"licences_by_name\": " << v.licences_by_name() << ", "
       << "\"generation_markers_by_name\": " << v.generation_markers_by_name()
       << " }";
     return(s);
