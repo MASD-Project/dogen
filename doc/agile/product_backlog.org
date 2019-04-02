@@ -14279,3 +14279,22 @@ generate the glue code for sandbox-api.
 Links:
 
 - https://github.com/google/sandboxed-api
+*** Consider adding support for draw.io                               :story:
+
+As pointed out by Klemens Morgenstern, this is a web-based diagramming
+tool:
+
+https://draw.io
+
+It can export into XML, but the XML seems to be at a very low-level:
+
+:    <mxCell id="5d2195bd80daf111-8" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;Name&lt;/b&gt;" style="html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeColor=#000000;strokeWidth=1;fillColor=#ffffff;fontFamily=Verdana;fontSize=10;fontColor=#000000;align=center;" parent="1" vertex="1">
+:      <mxGeometry x="490" y="1004" width="110" height="50" as="geometry"/>
+:    </mxCell>
+
+In order to use this format, the injector would have to have a lot of
+cleverness to assemble the objects into UML elements.
+
+Links:
+
+- https://about.draw.io/features/import-export/
