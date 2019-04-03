@@ -114,6 +114,14 @@ create_masd_dogen_coding_meta_model_technical_space(const unsigned int position)
     return masd::dogen::coding::meta_model::technical_space_generator::create(position);
 }
 
+std::unordered_set<masd::dogen::coding::meta_model::technical_space> create_std_unordered_set_masd_dogen_coding_meta_model_technical_space(unsigned int position) {
+    std::unordered_set<masd::dogen::coding::meta_model::technical_space> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(create_masd_dogen_coding_meta_model_technical_space(position + i));
+    }
+    return r;
+}
+
 masd::dogen::coding::meta_model::orm_model_properties
 create_masd_dogen_coding_meta_model_orm_model_properties(const unsigned int position) {
     return masd::dogen::coding::meta_model::orm_model_properties_generator::create(position);
@@ -172,11 +180,12 @@ populate(const unsigned int position, result_type& v) {
     v.has_generatable_types(create_bool(position + 7));
     v.input_technical_space(create_masd_dogen_coding_meta_model_technical_space(position + 8));
     v.output_technical_space(create_masd_dogen_coding_meta_model_technical_space(position + 9));
-    v.orm_properties(create_boost_optional_masd_dogen_coding_meta_model_orm_model_properties(position + 10));
-    v.enabled_archetype_for_element(create_std_unordered_set_masd_dogen_generation_meta_model_element_archetype(position + 11));
-    v.locator_properties(create_masd_dogen_generation_meta_model_locator_properties(position + 12));
-    v.global_archetype_location_properties(create_masd_dogen_generation_meta_model_global_archetype_location_properties(position + 13));
-    v.extraction_properties(create_masd_dogen_coding_meta_model_extraction_properties(position + 14));
+    v.all_technical_spaces(create_std_unordered_set_masd_dogen_coding_meta_model_technical_space(position + 10));
+    v.orm_properties(create_boost_optional_masd_dogen_coding_meta_model_orm_model_properties(position + 11));
+    v.enabled_archetype_for_element(create_std_unordered_set_masd_dogen_generation_meta_model_element_archetype(position + 12));
+    v.locator_properties(create_masd_dogen_generation_meta_model_locator_properties(position + 13));
+    v.global_archetype_location_properties(create_masd_dogen_generation_meta_model_global_archetype_location_properties(position + 14));
+    v.extraction_properties(create_masd_dogen_coding_meta_model_extraction_properties(position + 15));
 }
 
 model_generator::result_type

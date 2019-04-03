@@ -78,6 +78,11 @@
           "documentation": "Technical space into which to output the model.\n"
         },
         {
+          "name": "all_technical_spaces",
+          "type": "std::unordered_set<coding::meta_model::technical_space>",
+          "documentation": "Set of all technical concrete spaces involved in generating this model.\n\nIncludes the primary technical space (e.g. the output technical space) as well as\nall of the secondary technical spaces. Does not include any abstract technical\nspaces.\n"
+        },
+        {
           "name": "orm_properties",
           "type": "boost::optional<coding::meta_model::orm_model_properties>"
         },
@@ -849,6 +854,13 @@
     },
     {
       "name": "formatters::generation_marker_formatter",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::technical_space_transform",
       "stereotypes": [
         "masd::handcrafted"
       ],

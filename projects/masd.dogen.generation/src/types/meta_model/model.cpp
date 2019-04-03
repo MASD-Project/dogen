@@ -58,6 +58,7 @@ model::model(model&& rhs)
       has_generatable_types_(std::move(rhs.has_generatable_types_)),
       input_technical_space_(std::move(rhs.input_technical_space_)),
       output_technical_space_(std::move(rhs.output_technical_space_)),
+      all_technical_spaces_(std::move(rhs.all_technical_spaces_)),
       orm_properties_(std::move(rhs.orm_properties_)),
       enabled_archetype_for_element_(std::move(rhs.enabled_archetype_for_element_)),
       locator_properties_(std::move(rhs.locator_properties_)),
@@ -75,6 +76,7 @@ model::model(
     const bool has_generatable_types,
     const masd::dogen::coding::meta_model::technical_space input_technical_space,
     const masd::dogen::coding::meta_model::technical_space output_technical_space,
+    const std::unordered_set<masd::dogen::coding::meta_model::technical_space>& all_technical_spaces,
     const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties,
     const std::unordered_set<masd::dogen::generation::meta_model::element_archetype>& enabled_archetype_for_element,
     const masd::dogen::generation::meta_model::locator_properties& locator_properties,
@@ -90,6 +92,7 @@ model::model(
       has_generatable_types_(has_generatable_types),
       input_technical_space_(input_technical_space),
       output_technical_space_(output_technical_space),
+      all_technical_spaces_(all_technical_spaces),
       orm_properties_(orm_properties),
       enabled_archetype_for_element_(enabled_archetype_for_element),
       locator_properties_(locator_properties),
@@ -108,6 +111,7 @@ void model::swap(model& other) noexcept {
     swap(has_generatable_types_, other.has_generatable_types_);
     swap(input_technical_space_, other.input_technical_space_);
     swap(output_technical_space_, other.output_technical_space_);
+    swap(all_technical_spaces_, other.all_technical_spaces_);
     swap(orm_properties_, other.orm_properties_);
     swap(enabled_archetype_for_element_, other.enabled_archetype_for_element_);
     swap(locator_properties_, other.locator_properties_);
@@ -126,6 +130,7 @@ bool model::operator==(const model& rhs) const {
         has_generatable_types_ == rhs.has_generatable_types_ &&
         input_technical_space_ == rhs.input_technical_space_ &&
         output_technical_space_ == rhs.output_technical_space_ &&
+        all_technical_spaces_ == rhs.all_technical_spaces_ &&
         orm_properties_ == rhs.orm_properties_ &&
         enabled_archetype_for_element_ == rhs.enabled_archetype_for_element_ &&
         locator_properties_ == rhs.locator_properties_ &&
@@ -273,6 +278,22 @@ masd::dogen::coding::meta_model::technical_space model::output_technical_space()
 
 void model::output_technical_space(const masd::dogen::coding::meta_model::technical_space v) {
     output_technical_space_ = v;
+}
+
+const std::unordered_set<masd::dogen::coding::meta_model::technical_space>& model::all_technical_spaces() const {
+    return all_technical_spaces_;
+}
+
+std::unordered_set<masd::dogen::coding::meta_model::technical_space>& model::all_technical_spaces() {
+    return all_technical_spaces_;
+}
+
+void model::all_technical_spaces(const std::unordered_set<masd::dogen::coding::meta_model::technical_space>& v) {
+    all_technical_spaces_ = v;
+}
+
+void model::all_technical_spaces(const std::unordered_set<masd::dogen::coding::meta_model::technical_space>&& v) {
+    all_technical_spaces_ = std::move(v);
 }
 
 const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& model::orm_properties() const {

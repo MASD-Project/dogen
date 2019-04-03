@@ -133,6 +133,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::s
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<masd::dogen::coding::meta_model::technical_space>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace boost {
 
 inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& v) {
@@ -183,6 +197,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"has_generatable_types\": " << v.has_generatable_types() << ", "
       << "\"input_technical_space\": " << v.input_technical_space() << ", "
       << "\"output_technical_space\": " << v.output_technical_space() << ", "
+      << "\"all_technical_spaces\": " << v.all_technical_spaces() << ", "
       << "\"orm_properties\": " << v.orm_properties() << ", "
       << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element() << ", "
       << "\"locator_properties\": " << v.locator_properties() << ", "

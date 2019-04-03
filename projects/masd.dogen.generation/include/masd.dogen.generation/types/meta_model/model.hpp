@@ -38,6 +38,7 @@
 #include "masd.dogen.coding/types/meta_model/element_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/origin_types.hpp"
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
+#include "masd.dogen.coding/hash/meta_model/technical_space_hash.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_model_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/extraction_properties.hpp"
 #include "masd.dogen.generation/types/meta_model/element_archetype.hpp"
@@ -73,6 +74,7 @@ public:
         const bool has_generatable_types,
         const masd::dogen::coding::meta_model::technical_space input_technical_space,
         const masd::dogen::coding::meta_model::technical_space output_technical_space,
+        const std::unordered_set<masd::dogen::coding::meta_model::technical_space>& all_technical_spaces,
         const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties,
         const std::unordered_set<masd::dogen::generation::meta_model::element_archetype>& enabled_archetype_for_element,
         const masd::dogen::generation::meta_model::locator_properties& locator_properties,
@@ -161,6 +163,20 @@ public:
     void output_technical_space(const masd::dogen::coding::meta_model::technical_space v);
     /**@}*/
 
+    /**
+     * @brief Set of all technical concrete spaces involved in generating this model.
+     *
+     * Includes the primary technical space (e.g. the output technical space) as well as
+     * all of the secondary technical spaces. Does not include any abstract technical
+     * spaces.
+     */
+    /**@{*/
+    const std::unordered_set<masd::dogen::coding::meta_model::technical_space>& all_technical_spaces() const;
+    std::unordered_set<masd::dogen::coding::meta_model::technical_space>& all_technical_spaces();
+    void all_technical_spaces(const std::unordered_set<masd::dogen::coding::meta_model::technical_space>& v);
+    void all_technical_spaces(const std::unordered_set<masd::dogen::coding::meta_model::technical_space>&& v);
+    /**@}*/
+
     const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties() const;
     boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties();
     void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& v);
@@ -207,6 +223,7 @@ private:
     bool has_generatable_types_;
     masd::dogen::coding::meta_model::technical_space input_technical_space_;
     masd::dogen::coding::meta_model::technical_space output_technical_space_;
+    std::unordered_set<masd::dogen::coding::meta_model::technical_space> all_technical_spaces_;
     boost::optional<masd::dogen::coding::meta_model::orm_model_properties> orm_properties_;
     std::unordered_set<masd::dogen::generation::meta_model::element_archetype> enabled_archetype_for_element_;
     masd::dogen::generation::meta_model::locator_properties locator_properties_;

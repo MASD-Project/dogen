@@ -55,6 +55,7 @@
 #include "masd.dogen.generation/types/transforms/decoration_configuration.hpp"
 #include "masd.dogen.generation/types/transforms/dynamic_transforms_chain.hpp"
 #include "masd.dogen.generation/types/transforms/formatting_configuration.hpp"
+#include "masd.dogen.generation/types/transforms/technical_space_transform.hpp"
 #include "masd.dogen.generation/types/helpers/decoration_repository_factory.hpp"
 #include "masd.dogen.generation/types/meta_model/directory_structure_styles.hpp"
 #include "masd.dogen.generation/types/formatters/generation_marker_formatter.hpp"
