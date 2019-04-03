@@ -36,8 +36,8 @@ const std::string indent("   ");
 const std::string run_identifier_prefix("cli.");
 
 const std::string more_information("Try --help' for more information.");
-const std::string knitter_product("MASD Dogen v" DOGEN_VERSION);
-const std::string knitter_build_info(DOGEN_BUILD_INFO);
+const std::string product_version("MASD Dogen v" DOGEN_VERSION);
+const std::string build_info(DOGEN_BUILD_INFO);
 const std::string usage_error_msg("Usage error: ");
 const std::string fatal_error_msg("Fatal Error: " );
 const std::string no_command_msg("No command supplied. ");
@@ -341,7 +341,7 @@ void print_help_command(const std::string& command_name,
  * @param s info stream.
  */
 void version(std::ostream& s) {
-    s << knitter_product << std::endl
+    s << product_version << std::endl
       << "Copyright (C) 2015-2017 Domain Driven Consulting Plc."
       << std::endl
       << "Copyright (C) 2012-2015 Marco Craveiro." << std::endl
@@ -352,8 +352,8 @@ void version(std::ostream& s) {
       << std::endl;
 
 
-    if (!knitter_build_info.empty()) {
-        s << knitter_build_info << std::endl;
+    if (!build_info.empty()) {
+        s << build_info << std::endl;
         s << "IMPORTANT: build details are NOT for security purposes."
           << std::endl;
     }
