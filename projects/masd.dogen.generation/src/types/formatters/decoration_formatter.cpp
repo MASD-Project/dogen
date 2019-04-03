@@ -65,9 +65,9 @@ add_marker(std::list<std::string>& content,
 }
 
 void decoration_formatter::
-add_copyright_holders(std::list<std::string>& content,
-    std::list<std::string> copyright_holders) const {
-    content.splice(content.end(), copyright_holders);
+add_copyright_notices(std::list<std::string>& content,
+    std::list<std::string> copyright_notices) const {
+    content.splice(content.end(), copyright_notices);
 }
 
 void decoration_formatter::add_licence(std::list<std::string>& content,
@@ -79,7 +79,7 @@ void decoration_formatter::add_licence(std::list<std::string>& content,
 void decoration_formatter::format_preamble(
     std::ostream& s, const comment_style& single_line_cs,
     const comment_style& multi_line_cs, const std::string& licence_text,
-    const std::list<std::string>& copyright_holders,
+    const std::list<std::string>& copyright_notices,
     const boost::shared_ptr<coding::meta_model::modeline> ml, const
     boost::shared_ptr<coding::meta_model::generation_marker> gm) const {
 
@@ -103,7 +103,7 @@ void decoration_formatter::format_preamble(
 
     add_marker(content, gm);
     add_licence(content, licence_text);
-    add_copyright_holders(content, copyright_holders);
+    add_copyright_notices(content, copyright_notices);
 
     if (content.empty())
         return;
@@ -132,10 +132,10 @@ void decoration_formatter::format_preamble(
 void decoration_formatter::
 format_preamble(std::ostream& s, const comment_style& cs,
     const std::string& licence_text,
-    const std::list<std::string>& copyright_holders,
+    const std::list<std::string>& copyright_notices,
     const boost::shared_ptr<coding::meta_model::modeline> ml,
     const boost::shared_ptr<coding::meta_model::generation_marker> gm) const {
-    format_preamble(s, cs, cs, licence_text, copyright_holders, ml, gm);
+    format_preamble(s, cs, cs, licence_text, copyright_notices, ml, gm);
 }
 
 void decoration_formatter::

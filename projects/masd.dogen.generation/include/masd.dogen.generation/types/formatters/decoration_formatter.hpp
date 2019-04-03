@@ -53,10 +53,10 @@ private:
         boost::shared_ptr<coding::meta_model::generation_marker> gm) const;
 
     /**
-     * @brief Adds the copyright holders to the content.
+     * @brief Adds the copyright notices to the content.
      */
-    void add_copyright_holders(std::list<std::string>& content,
-        std::list<std::string> copyright_holders) const;
+    void add_copyright_notices(std::list<std::string>& content,
+        std::list<std::string> copyright_notices) const;
 
     /**
      * @brief Adds the licence text to the content.
@@ -67,13 +67,13 @@ private:
 public:
     void format_preamble(std::ostream& s, const comment_style& single_line_cs,
         const comment_style& multi_line_cs, const std::string& licence_text,
-        const std::list<std::string>& copyright_holders,
+        const std::list<std::string>& copyright_notices,
         const boost::shared_ptr<coding::meta_model::modeline> ml, const
         boost::shared_ptr<coding::meta_model::generation_marker> gm) const;
 
     void format_preamble(std::ostream& s, const comment_style& cs,
         const std::string& licence_text,
-        const std::list<std::string>& copyright_holders,
+        const std::list<std::string>& copyright_notices,
         const boost::shared_ptr<coding::meta_model::modeline> ml, const
         boost::shared_ptr<coding::meta_model::generation_marker> gm) const;
 
