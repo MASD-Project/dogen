@@ -128,6 +128,53 @@ is_generatable(const coding::meta_model::name& meta_name) {
         id == gmn.qualified().dot();
 }
 
+boost::optional<coding::meta_model::decoration>
+decoration_transform::make_decoration(const std::string& licence_text,
+    const boost::shared_ptr<coding::meta_model::modeline> ml,
+    const boost::shared_ptr<coding::meta_model::generation_marker> gm,
+    const std::list<std::string>& copyright_notices,
+    const coding::meta_model::technical_space ts) {
+
+    /*
+     * Create the preamble and postamble for the decoration, taking
+     * into account the element's technical space.
+     */
+    using formatters::comment_style;
+    using coding::meta_model::technical_space;
+
+    std::ostringstream preamble_stream;
+    formatters::decoration_formatter df;
+    if (ts == technical_space::cpp) {
+        df.format_preamble(preamble_stream,
+            comment_style::cpp_style/*single line*/,
+            comment_style::c_style/*multi-line*/,
+            licence_text, copyright_notices,  ml, gm);
+    } else if (ts == technical_space::csharp) {
+        df.format_preamble(preamble_stream,
+            comment_style::csharp_style,
+            licence_text, copyright_notices,  ml, gm);
+    } else if (ts == technical_space::cmake || ts == technical_space::odb) {
+        df.format_preamble(preamble_stream,
+            comment_style::shell_style, licence_text,
+            copyright_notices,  ml, gm);
+    } else if (ts == technical_space::xml) {
+        df.format_preamble(preamble_stream,
+            comment_style::xml_style, licence_text,
+            copyright_notices,  ml, gm);
+    }
+
+    std::ostringstream postamble_stream;
+    if (ts == technical_space::cpp)
+        df.format_postamble(postamble_stream, comment_style::c_style, ml);
+    else if (ts == technical_space::csharp)
+        df.format_postamble(postamble_stream, comment_style::csharp_style, ml);
+
+    coding::meta_model::decoration r;
+    r.preamble(preamble_stream.str());
+    r.postamble(postamble_stream.str());
+    return r;
+}
+
 std::string decoration_transform::
 get_short_form_licence(const helpers::decoration_repository drp,
     const std::string& licence_name) {
@@ -221,50 +268,12 @@ make_global_decoration(const helpers::decoration_repository drp,
         return boost::optional<coding::meta_model::decoration>();
 
     /*
-     * Obtain all decoration inputs.
+     * Obtain all decoration inputs and create the decoration.
      */
     const auto l(get_short_form_licence(drp, dc.licence_name()));
     const auto ml(get_modeline(drp, dc.modeline_group_name(), ts));
     const auto gm(get_generation_marker(drp, dc.marker_name()));
-
-    /*
-     * Create the preamble and postamble for the decoration, taking
-     * into account the element's technical space.
-     */
-    using formatters::comment_style;
-    using coding::meta_model::technical_space;
-
-    std::ostringstream preamble_stream;
-    formatters::decoration_formatter df;
-    if (ts == technical_space::cpp) {
-        df.format_preamble(preamble_stream,
-            comment_style::cpp_style/*single line*/,
-            comment_style::c_style/*multi-line*/,
-            l, dc.copyright_notices(),  ml, gm);
-    } else if (ts == technical_space::csharp) {
-        df.format_preamble(preamble_stream,
-            comment_style::csharp_style,
-            l, dc.copyright_notices(),  ml, gm);
-    } else if (ts == technical_space::cmake || ts == technical_space::odb) {
-        df.format_preamble(preamble_stream,
-            comment_style::shell_style, l,
-            dc.copyright_notices(),  ml, gm);
-    } else if (ts == technical_space::xml) {
-        df.format_preamble(preamble_stream,
-            comment_style::xml_style, l,
-            dc.copyright_notices(),  ml, gm);
-    }
-
-    std::ostringstream postamble_stream;
-    if (ts == technical_space::cpp)
-        df.format_postamble(postamble_stream, comment_style::c_style, ml);
-    else if (ts == technical_space::csharp)
-        df.format_postamble(postamble_stream, comment_style::csharp_style, ml);
-
-    coding::meta_model::decoration r;
-    r.preamble(preamble_stream.str());
-    r.postamble(postamble_stream.str());
-
+    const auto r(make_decoration(l, ml, gm, dc.copyright_notices(), ts));
     return r;
 }
 
@@ -318,10 +327,24 @@ decoration_transform::make_local_decoration(
      * have to worry about overrides, just with processing local
      * decoration configuration.
      */
-    // if (!root_dc) {
-    // }
+    if (!root_dc) {
+        const auto r(make_decoration(ol, oml, ogm, dc.copyright_notices(), ts));
+        return r;
+    }
 
-    coding::meta_model::decoration r;
+    /*
+     * Handle the global overrides.
+     */
+    const auto overriden_licence(!ol.empty() ? ol :
+        get_short_form_licence(drp, root_dc->licence_name()));
+    const auto overriden_modeline(oml ? oml :
+        get_modeline(drp, root_dc->modeline_group_name(), ts));
+    const auto overriden_marker(ogm ? ogm :
+        get_generation_marker(drp, root_dc->marker_name()));
+    const auto overriden_copyright_notices(!dc.copyright_notices().empty() ?
+        dc.copyright_notices() : root_dc->copyright_notices());
+    const auto r(make_decoration(overriden_licence, overriden_modeline,
+            overriden_marker, overriden_copyright_notices, ts));
     return r;
 }
 

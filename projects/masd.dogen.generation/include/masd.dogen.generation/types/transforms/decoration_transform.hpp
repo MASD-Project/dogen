@@ -101,6 +101,14 @@ private:
     static bool is_generatable(const coding::meta_model::name& meta_name);
 
 private:
+    static boost::optional<coding::meta_model::decoration>
+    make_decoration(const std::string& licence_text,
+        const boost::shared_ptr<coding::meta_model::modeline> ml,
+        const boost::shared_ptr<coding::meta_model::generation_marker> gm,
+        const std::list<std::string>& copyright_notices,
+        const coding::meta_model::technical_space ts);
+
+private:
     /**
      * @brief Creates the global decoration.
      */
