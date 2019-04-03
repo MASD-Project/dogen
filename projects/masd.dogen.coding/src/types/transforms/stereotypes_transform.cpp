@@ -219,6 +219,7 @@ stereotypes_transform::create_visitor(const meta_model::object& o,
     r->name(n);
     r->origin_type(ot);
     r->documentation(visitor_doc + o.name().simple());
+    r->intrinsic_technical_space(meta_model::technical_space::cpp);
 
     if (leaves.empty()) {
         const auto id(n.qualified().dot());

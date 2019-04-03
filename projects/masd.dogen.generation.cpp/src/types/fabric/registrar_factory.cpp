@@ -44,6 +44,7 @@ make(const coding::meta_model::name& model_name) const {
     auto r(boost::make_shared<registrar>());
     r->name(n);
     r->meta_name(meta_name_factory::make_registrar_name());
+    r->intrinsic_technical_space(coding::meta_model::technical_space::cpp);
     return r;
 }
 

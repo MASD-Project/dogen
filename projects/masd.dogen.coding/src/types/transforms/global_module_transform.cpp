@@ -70,6 +70,7 @@ create_global_module(const meta_model::origin_types ot) {
     r->origin_type(ot);
     r->documentation(global_module_doc);
     r->is_global_module(true);
+    r->intrinsic_technical_space(meta_model::technical_space::agnostic);
     return r;
 }
 
