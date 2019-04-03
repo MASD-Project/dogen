@@ -28,10 +28,13 @@
 
 #include <list>
 #include <string>
+#include <boost/optional.hpp>
 #include "masd.dogen.annotations/types/type.hpp"
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
+#include "masd.dogen.generation/types/helpers/decoration_repository.hpp"
 #include "masd.dogen.generation/types/transforms/decoration_configuration.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 
@@ -46,6 +49,7 @@ private:
         annotations::type enabled;
         annotations::type copyright_notice;
         annotations::type licence_name;
+        annotations::type modeline_group_name;
         annotations::type marker_name;
     };
 
@@ -57,8 +61,63 @@ private:
     /**
      * @brief Reads the decoration configuration from the supplied annotation.
      */
-    static decoration_configuration read_decoration_configuration(
-        const type_group& tg, const annotations::annotation& a);
+    static boost::optional<decoration_configuration>
+    read_decoration_configuration(const type_group& tg,
+        const annotations::annotation& a);
+
+private:
+    /**
+     * @brief Obtains the short-form licence text for a given licence
+     * name.
+     *
+     * @pre If non-empty, licence name must exist in the decoration
+     * repository.
+     */
+    static std::string
+    get_short_form_licence(const helpers::decoration_repository drp,
+        const std::string& licence_name);
+
+    /**
+     * @brief Retrieves the modeline for the supplied technical space
+     * and modeline group.
+     */
+    static boost::shared_ptr<coding::meta_model::modeline> get_modeline(
+        const helpers::decoration_repository drp,
+        const std::string& modeline_group_name,
+        const coding::meta_model::technical_space ts);
+
+    /**
+     * @brief Retrieves the generation marker for the supplied name.
+     */
+    static boost::shared_ptr<coding::meta_model::generation_marker>
+    get_generation_marker(const helpers::decoration_repository drp,
+        const std::string& generation_marker_name);
+
+private:
+    /**
+     * @brief Returns true if the meta-model element can be generated,
+     * false otherwise.
+     */
+    static bool is_generatable(const coding::meta_model::name& meta_name);
+
+private:
+    /**
+     * @brief Creates the global decoration.
+     */
+    static boost::optional<coding::meta_model::decoration>
+    make_global_decoration(const helpers::decoration_repository drp,
+        const boost::optional<decoration_configuration> root_dc,
+        const coding::meta_model::technical_space ts);
+
+    /**
+     * @brief Creates a local decoration.
+     */
+    static boost::optional<coding::meta_model::decoration>
+    make_local_decoration(const helpers::decoration_repository drp,
+        const boost::optional<decoration_configuration> root_dc,
+        const boost::optional<coding::meta_model::decoration> global_decoration,
+        const boost::optional<decoration_configuration> element_dc,
+        const coding::meta_model::technical_space ts);
 
 public:
     static void apply(const context& ctx, meta_model::model& m);

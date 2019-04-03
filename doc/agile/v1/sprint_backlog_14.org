@@ -13,25 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-02 Tue 17:56]
+#+CAPTION: Clock summary at [2019-04-03 Wed 12:06]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *48:52* |       |       | 100.0 |
+| *Total time*                                              | *53:03* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 48:52   |       |       | 100.0 |
-| Active                                                    |         | 48:52 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       |  1:47 |   3.6 |
-| Sprint and product backlog grooming                       |         |       |  6:34 |  13.4 |
-| Create a video demo for the previous sprint's features    |         |       |  3:11 |   6.5 |
-| Fix issues with emacs                                     |         |       |  2:42 |   5.5 |
-| Create a basic "project plan"                             |         |       |  2:08 |   4.4 |
-| Simplify qualified name                                   |         |       |  3:39 |   7.5 |
-| Rename "language" to "technical space"                    |         |       |  7:22 |  15.1 |
-| Add intrinsic technical space ownership                   |         |       |  1:12 |   2.5 |
-| Integrate report-ci with dogen                            |         |       |  2:09 |   4.4 |
-| Promote extraction entities to meta-model elements        |         |       | 17:41 |  36.2 |
-| Move all utility formatters from extraction to generation |         |       |  0:27 |   0.9 |
+| Stories                                                   | 53:03   |       |       | 100.0 |
+| Active                                                    |         | 53:03 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  1:47 |   3.4 |
+| Sprint and product backlog grooming                       |         |       |  6:34 |  12.4 |
+| Create a video demo for the previous sprint's features    |         |       |  3:11 |   6.0 |
+| Fix issues with emacs                                     |         |       |  2:42 |   5.1 |
+| Create a basic "project plan"                             |         |       |  2:08 |   4.0 |
+| Simplify qualified name                                   |         |       |  3:39 |   6.9 |
+| Rename "language" to "technical space"                    |         |       |  7:22 |  13.9 |
+| Add intrinsic technical space ownership                   |         |       |  1:12 |   2.3 |
+| Integrate report-ci with dogen                            |         |       |  2:09 |   4.1 |
+| Promote extraction entities to meta-model elements        |         |       | 21:52 |  41.2 |
+| Move all utility formatters from extraction to generation |         |       |  0:27 |   0.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -339,6 +339,8 @@ submitted a PR. Help him integrate it with Dogen.
 
 *** STARTED Promote extraction entities to meta-model elements        :story:
     :LOGBOOK:
+    CLOCK: [2019-04-03 Wed 08:51]--[2019-04-03 Wed 12:06] =>  3:15
+    CLOCK: [2019-04-02 Tue 18:25]--[2019-04-02 Tue 19:21] =>  0:56
     CLOCK: [2019-04-02 Tue 17:26]--[2019-04-02 Tue 17:55] =>  0:29
     CLOCK: [2019-04-02 Tue 14:20]--[2019-04-02 Tue 17:25] =>  3:05
     CLOCK: [2019-04-02 Tue 11:04]--[2019-04-02 Tue 11:57] =>  0:53
@@ -681,6 +683,33 @@ So, in conclusion, two use cases for wale templates:
 - user model wants to define a new formatter. It will make use of
   dogen profiles and wale templates. These must be in the future data
   directory somehow.
+
+*** Handling of =invalid= in enumeration is incorrect                 :story:
+
+At present we are injecting the invalid enumerator transparently via
+meta-data switches. This is not a good idea. Users should instead have
+some kind of "enumeration template" from which they can inherit which
+will give them the required enumerators. We should not do anything
+special for invalid.
+
+*** Generating a meta-model for dogen                                 :story:
+
+We are making use of coding meta-types a fair bit in dogen:
+
+- we have meta-names, which we use for things such as indexing,
+  formatter discovery etc.
+- we need to know which types are generatable.
+- we are associating meta-types with technical spaces (intrinsic).
+
+It would be nice if somehow we were able to generate some basic
+reflection code that enabled us to ask for a meta-model's element
+meta-class. For example, given an element, we should be able to do:
+
+: element.meta_class().intrinsic_technical_space()
+
+The =meta_class()= method should be static and code-generated by
+dogen. This still requires a lot of thinking though. Look for
+reflection stories in backlog.
 
 ** Deprecated
 *** CANCELLED Fix =cp= error on cmake with local third-party packages :story:
