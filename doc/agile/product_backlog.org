@@ -13569,6 +13569,11 @@ third-party library to perform the serialisation. We should check that
 the types only have simple types. We should also provide some dynamic
 extensions for options such as "use quoted strings", etc.
 
+Links:
+
+- [[https://github.com/vincentlaucsb/csv-parser][csv-parser]]: very promising CSV parsing library, with read and write
+  support.
+
 *** Consider generation of validators                                  :epic:
 
 It would be nice if we could constraint the domain of a type via some
