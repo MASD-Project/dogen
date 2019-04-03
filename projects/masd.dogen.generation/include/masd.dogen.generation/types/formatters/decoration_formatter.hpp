@@ -25,24 +25,60 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include <iosfwd>
+#include <boost/shared_ptr.hpp>
+#include "masd.dogen.coding/types/meta_model/modeline.hpp"
+#include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
+#include "masd.dogen.generation/types/formatters/comment_style.hpp"
 
 namespace masd::dogen::generation::formatters {
 
+/**
+ * @brief Formats decorations into a stream.
+ */
 class decoration_formatter final {
-public:
-    decoration_formatter() = default;
-    decoration_formatter(const decoration_formatter&) = default;
-    decoration_formatter(decoration_formatter&&) = default;
-    ~decoration_formatter() = default;
-    decoration_formatter& operator=(const decoration_formatter&) = default;
+private:
+    /**
+     * @brief Adds the formatted modeline to the content.
+     */
+    void add_modeline(std::list<std::string>& content,
+        const boost::shared_ptr<coding::meta_model::modeline> ml) const;
+
+    /**
+     * @brief Adds the formatted modeline to the content.
+     */
+    void add_marker(std::list<std::string>& content, const
+        boost::shared_ptr<coding::meta_model::generation_marker> gm) const;
+
+    /**
+     * @brief Adds the copyright holders to the content.
+     */
+    void add_copyright_holders(std::list<std::string>& content,
+        std::list<std::string> copyright_holders) const;
+
+    /**
+     * @brief Adds the licence text to the content.
+     */
+    void add_licence(std::list<std::string>& content,
+        const std::string& licence_text) const;
 
 public:
-    bool operator==(const decoration_formatter& rhs) const;
-    bool operator!=(const decoration_formatter& rhs) const {
-        return !this->operator==(rhs);
-    }
+    void format_preamble(std::ostream& s, const comment_style& single_line_cs,
+        const comment_style& multi_line_cs, const std::string& licence_text,
+        const std::list<std::string>& copyright_holders,
+        const boost::shared_ptr<coding::meta_model::modeline> ml, const
+        boost::shared_ptr<coding::meta_model::generation_marker> gm) const;
 
+    void format_preamble(std::ostream& s, const comment_style& cs,
+        const std::string& licence_text,
+        const std::list<std::string>& copyright_holders,
+        const boost::shared_ptr<coding::meta_model::modeline> ml, const
+        boost::shared_ptr<coding::meta_model::generation_marker> gm) const;
+
+    void format_postamble(std::ostream& s, const comment_style& cs,
+        const boost::shared_ptr<coding::meta_model::modeline> ml) const;
 };
 
 }

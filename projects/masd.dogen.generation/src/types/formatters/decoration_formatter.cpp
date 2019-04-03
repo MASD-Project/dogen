@@ -18,12 +18,146 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
+#include <ostream>
+#include "masd.dogen.generation/types/formatters/comment_formatter.hpp"
+#include "masd.dogen.generation/types/formatters/modeline_formatter.hpp"
+#include "masd.dogen.generation/types/formatters/generation_marker_formatter.hpp"
 #include "masd.dogen.generation/types/formatters/decoration_formatter.hpp"
+
+namespace {
+
+const bool start_on_first_line(true);
+const bool use_documentation_tool_markup(true);
+const bool last_line_is_blank(true);
+const bool line_between_blocks(true);
+const bool documenting_previous_identifier(true);
+
+const std::string xml_declaration("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+
+}
 
 namespace masd::dogen::generation::formatters {
 
-bool decoration_formatter::operator==(const decoration_formatter& /*rhs*/) const {
-    return true;
+void decoration_formatter::
+add_modeline(std::list<std::string>& content,
+    const boost::shared_ptr<coding::meta_model::modeline> ml) const {
+    if (!ml)
+        return;
+
+    std::ostringstream s;
+    modeline_formatter f;
+    f.format(s, *ml);
+    content.push_back(s.str());
+}
+
+void decoration_formatter::
+add_marker(std::list<std::string>& content,
+    const boost::shared_ptr<coding::meta_model::generation_marker> gm) const {
+
+    if (!gm)
+        return;
+
+    std::ostringstream s;
+    generation_marker_formatter f;
+    f.format(s, *gm);
+    content.push_back(s.str());
+}
+
+void decoration_formatter::
+add_copyright_holders(std::list<std::string>& content,
+    std::list<std::string> copyright_holders) const {
+    content.splice(content.end(), copyright_holders);
+}
+
+void decoration_formatter::add_licence(std::list<std::string>& content,
+    const std::string& licence) const {
+    if (!licence.empty())
+        content.push_back(licence);
+}
+
+void decoration_formatter::format_preamble(
+    std::ostream& s, const comment_style& single_line_cs,
+    const comment_style& multi_line_cs, const std::string& licence_text,
+    const std::list<std::string>& copyright_holders,
+    const boost::shared_ptr<coding::meta_model::modeline> ml, const
+    boost::shared_ptr<coding::meta_model::generation_marker> gm) const {
+
+    if (single_line_cs == comment_style::xml_style) {
+        /*
+         * If we're in XML, add the XML declaration.
+         */
+        s << xml_declaration << std::endl;
+    }
+
+    bool is_top(false);
+    const auto top(coding::meta_model::modeline_location::top);
+    bool has_modeline((bool)ml);
+    std::list<std::string> content;
+    if (has_modeline) {
+        is_top = ml->location() == top;
+
+        if (is_top)
+            add_modeline(content, ml);
+    }
+
+    add_marker(content, gm);
+    add_licence(content, licence_text);
+    add_copyright_holders(content, copyright_holders);
+
+    if (content.empty())
+        return;
+
+    if (has_modeline && is_top && content.size() == 1) {
+        comment_formatter cf(
+            start_on_first_line,
+            !use_documentation_tool_markup,
+            !documenting_previous_identifier,
+            single_line_cs,
+            !last_line_is_blank);
+
+        cf.format(s, content, !line_between_blocks);
+    } else {
+        comment_formatter cf(
+            is_top ? start_on_first_line : !start_on_first_line,
+            !use_documentation_tool_markup,
+            !documenting_previous_identifier,
+            multi_line_cs,
+            last_line_is_blank);
+
+        cf.format(s, content, line_between_blocks);
+    }
+}
+
+void decoration_formatter::
+format_preamble(std::ostream& s, const comment_style& cs,
+    const std::string& licence_text,
+    const std::list<std::string>& copyright_holders,
+    const boost::shared_ptr<coding::meta_model::modeline> ml,
+    const boost::shared_ptr<coding::meta_model::generation_marker> gm) const {
+    format_preamble(s, cs, cs, licence_text, copyright_holders, ml, gm);
+}
+
+void decoration_formatter::
+format_postamble(std::ostream& s, const comment_style& cs,
+    const boost::shared_ptr<coding::meta_model::modeline> ml) const {
+
+    if (!ml)
+        return;
+
+    if (ml->location() == coding::meta_model::modeline_location::bottom) {
+        std::list<std::string> content;
+        add_modeline(content, ml);
+
+        comment_formatter cf(
+            !start_on_first_line,
+            !use_documentation_tool_markup,
+            !documenting_previous_identifier,
+            cs,
+            !last_line_is_blank);
+
+        cf.format(s, content);
+    }
 }
 
 }
