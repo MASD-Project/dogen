@@ -34,9 +34,9 @@ namespace masd::dogen::generation::formatters {
 /**
  * @brief Creates a modeline, ready to be wrapped in comments.
  *
- * Note that the name @modeline is slightly misleading because a
- * bottom modeline may actually have more than one line. To wrap it
- * into comments one must iterate through the lines.
+ * Note that the name modeline is slightly misleading because a bottom
+ * modeline may actually have more than one line. To wrap it into
+ * comments one must iterate through the lines.
  *
  */
 class modeline_formatter final {
