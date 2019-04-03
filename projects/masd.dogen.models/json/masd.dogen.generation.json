@@ -839,6 +839,20 @@
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::modeline_formatter",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::generation_marker_formatter",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
