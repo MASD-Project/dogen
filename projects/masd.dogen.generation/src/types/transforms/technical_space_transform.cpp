@@ -24,6 +24,7 @@
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/hash/meta_model/technical_space_hash.hpp"
+#include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.generation/io/meta_model/model_io.hpp"
 #include "masd.dogen.generation/types/transforms/technical_space_transform.hpp"
 
@@ -45,10 +46,30 @@ apply(const context& ctx, meta_model::model& m) {
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     auto& ats(m.all_technical_spaces());
-    ats.insert(m.input_technical_space());
-    ats.insert(m.output_technical_space());
-    for (const auto& ptr : m.elements())
-        ats.insert(ptr->intrinsic_technical_space());
+    const auto its(m.input_technical_space());
+    ats.insert(its);
+    BOOST_LOG_SEV(lg, trace) << "Input technical space: " << its;
+
+    const auto ots(m.output_technical_space());
+    ats.insert(ots);
+    BOOST_LOG_SEV(lg, trace) << "Output technical space: " << ots;
+
+    for (const auto& ptr : m.elements()) {
+        const auto id(ptr->name().qualified().dot());
+        const auto ts(ptr->intrinsic_technical_space());
+
+        /*
+         * Skip agnostic as it is an abstract technical space.
+         */
+        if (ts == coding::meta_model::technical_space::agnostic)
+            continue;
+
+        const auto i(ats.insert(ts));
+        if (i.second) {
+            BOOST_LOG_SEV(lg, trace) << "Inserted technical space: " << ts
+                                     << " from element: " << id;
+        }
+    }
 
     stp.end_transform(m);
 }
