@@ -118,5 +118,65 @@
     "value_type": "text",
     "template_kind": "instance",
     "scope": "any"
+  },
+  {
+    "name": {
+      "simple": "enabled",
+      "qualified": "masd.generation.decoration.enabled"
+    },
+    "archetype_location": {
+      "kernel": "generation"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "any"
+  },
+  {
+    "name": {
+      "simple": "copyright_notice",
+      "qualified": "masd.generation.decoration.copyright_notice"
+    },
+    "archetype_location": {
+      "kernel": "generation"
+    },
+    "value_type": "text_collection",
+    "template_kind": "instance",
+    "scope": "any"
+  },
+  {
+    "name": {
+      "simple": "licence_name",
+      "qualified": "masd.generation.decoration.licence_name"
+    },
+    "archetype_location": {
+      "kernel": "decoration"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "any"
+  },
+  {
+    "name": {
+      "simple": "modeline_group_name",
+      "qualified": "masd.generation.decoration.modeline_group_name"
+    },
+    "archetype_location": {
+      "kernel": "decoration"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "any"
+  },
+  {
+    "name": {
+      "simple": "marker_name",
+      "qualified": "masd.generation.decoration.marker_name"
+    },
+    "archetype_location": {
+      "kernel": "generation"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "any"
   }
 ]
