@@ -323,11 +323,10 @@ adapter::to_licence(const coding::meta_model::location& l,
         const auto n(attr.name());
         ensure_not_empty(n);
 
-        const auto v(attr.value());
         if (n == short_form_attr_name)
-            r->short_form(v);
+            r->short_form(attr.documentation());
         else if (n == long_form_attr_name)
-            r->long_form(v);
+            r->long_form(attr.documentation());
         else {
             BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
             BOOST_THROW_EXCEPTION(
