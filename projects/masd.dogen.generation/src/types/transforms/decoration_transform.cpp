@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <unordered_map>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/io/optional_io.hpp"
@@ -31,6 +32,7 @@
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
 #include "masd.dogen.coding/io/meta_model/decoration_io.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
+#include "masd.dogen.coding/hash/meta_model/technical_space_hash.hpp"
 #include "masd.dogen.generation/types/traits.hpp"
 #include "masd.dogen.generation/io/meta_model/model_io.hpp"
 #include "masd.dogen.generation/types/transforms/transformation_error.hpp"
@@ -117,20 +119,20 @@ decoration_transform::read_decoration_configuration(const type_group& tg,
 bool decoration_transform::
 is_generatable(const coding::meta_model::name& meta_name) {
     // FIXME: massive hack for now.
-    using coding::helpers::meta_name_factory;
-    static const auto otn(meta_name_factory::make_object_template_name());
-    static const auto ln(meta_name_factory::make_licence_name());
-    static const auto mln(meta_name_factory::make_modeline_name());
-    static const auto mgn(meta_name_factory::make_modeline_group_name());
-    static const auto gmn(meta_name_factory::make_generation_marker_name());
+    using mnf = coding::helpers::meta_name_factory;
+    static const auto otn(mnf::make_object_template_name());
+    static const auto ln(mnf::make_licence_name());
+    static const auto mln(mnf::make_modeline_name());
+    static const auto mgn(mnf::make_modeline_group_name());
+    static const auto gmn(mnf::make_generation_marker_name());
 
     const auto id(meta_name.qualified().dot());
     return
-        id == otn.qualified().dot() ||
-        id == ln.qualified().dot() ||
-        id == mln.qualified().dot() ||
-        id == mgn.qualified().dot() ||
-        id == gmn.qualified().dot();
+        id != otn.qualified().dot() &&
+        id != ln.qualified().dot() &&
+        id != mln.qualified().dot() &&
+        id != mgn.qualified().dot() &&
+        id != gmn.qualified().dot();
 }
 
 boost::optional<coding::meta_model::decoration>
@@ -379,48 +381,91 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
     const auto tg(make_type_group(*ctx.type_repository()));
     auto& rm(*m.root_module());
     const auto& ra(rm.annotation());
-    const auto root_id(rm.name().qualified().dot());
     const auto root_dc(read_decoration_configuration(tg, ra));
 
     /*
      * With the default configuration, we can create the global
-     * decoration and apply it to the root module. Note that we know
-     * that the root module does not need a technical space override,
-     * so we can safely default it to the model technical space.
+     * decoration for each of the required technical spaces. We can
+     * also apply the global configuration to the root module. Note
+     * that we know that the root module does not need a technical
+     * space override, so we can safely default it to the model
+     * technical space.
      */
     const auto mts(m.output_technical_space());
-    const auto gd(make_global_decoration(drp, root_dc, mts));
-    rm.decoration(gd);
+    std::unordered_map<coding::meta_model::technical_space,
+                       boost::optional<coding::meta_model::decoration>
+                       > root_decorations;
+    BOOST_LOG_SEV(lg, trace) << "Generating all global decorations";
+    for (const auto ts : m.all_technical_spaces()) {
+        BOOST_LOG_SEV(lg, trace) << "Generating global decoration for "
+                                 <<  "technical space: " << ts;
+
+        const auto gd(make_global_decoration(drp, root_dc, ts));
+        root_decorations[ts] = gd;
+
+        BOOST_LOG_SEV(lg, trace) << "Generated: " << gd;
+        if (ts == mts) {
+            BOOST_LOG_SEV(lg, trace) << "Populating the root module "
+                                     <<  "decoration.";
+            rm.decoration(gd);
+        }
+    }
+    BOOST_LOG_SEV(lg, trace) << "Generated all global decorations.";
 
     /*
      * Now we loop through all model elements. We obtain each
      * element's decoration configuration, if any, and use it and the
      * root decoration configuration to build the elements decoration.
      */
+    const auto root_id(rm.name().qualified().dot());
     const auto ats(coding::meta_model::technical_space::agnostic);
     for (auto& e : m.elements()) {
+        const auto id(e->name().qualified().dot());
+        BOOST_LOG_SEV(lg, trace) << "Processing element: " << id;
+
+        if (e->origin_type() != coding::meta_model::origin_types::target) {
+            BOOST_LOG_SEV(lg, trace) << "Element is not in target model.";
+            continue;
+        }
+
         /*
          * If the meta-element is intrinsically not generatable, there
          * is no point in creating a decoration for it.
          */
-        if (!is_generatable(e->meta_name()))
+        if (!is_generatable(e->meta_name())) {
+            BOOST_LOG_SEV(lg, trace) << "Element is not generatable: "
+                                     << e->meta_name().qualified().dot();
             continue;
+        }
 
         /*
          * The root module decoration was already handled and it is
          * different from the rest of the model elements; if we detect
          * it, we need to skip it.
          */
-        if (e->name().qualified().dot() == root_id)
+        if (e->name().qualified().dot() == root_id) {
+            BOOST_LOG_SEV(lg, trace) << "Element is root module, skipping.";
             continue;
+        }
 
         /*
          * Model elements may not belong to the dominant technical
          * space. If that's the case, we need to ensure we use the
          * element's technical space instead.
          */
-        const auto ts(e->intrinsic_technical_space() == ats ?
-            mts : e->intrinsic_technical_space());
+        const auto its(e->intrinsic_technical_space());
+        const auto ts(its == ats ? mts : its);
+        BOOST_LOG_SEV(lg, trace) << "Element intrinsic technical space: " << its
+                                 << " Model technical space: " << mts;
+
+        const auto i(root_decorations.find(ts));
+        if (i == root_decorations.end()) {
+            const auto s(boost::lexical_cast<std::string>(ts));
+            BOOST_LOG_SEV(lg, error) << technical_space_not_found << s;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(technical_space_not_found +s ));
+        }
+        const auto& gd(i->second);
 
         /*
          * For all elements (other than the root module), we need to
