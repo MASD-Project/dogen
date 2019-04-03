@@ -20,6 +20,7 @@
  */
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
+#include "masd.dogen.utility/types/io/optional_io.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
@@ -28,12 +29,14 @@
 #include "masd.dogen.coding/types/meta_model/licence.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
+#include "masd.dogen.coding/io/meta_model/decoration_io.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.generation/types/traits.hpp"
 #include "masd.dogen.generation/io/meta_model/model_io.hpp"
 #include "masd.dogen.generation/types/transforms/transformation_error.hpp"
 #include "masd.dogen.generation/types/helpers/decoration_repository_factory.hpp"
 #include "masd.dogen.generation/types/formatters/decoration_formatter.hpp"
+#include "masd.dogen.generation/io/transforms/decoration_configuration_io.hpp"
 #include "masd.dogen.generation/types/transforms/decoration_transform.hpp"
 
 namespace {
@@ -103,8 +106,10 @@ decoration_transform::read_decoration_configuration(const type_group& tg,
         has_configuration = true;
     }
 
-    if (has_configuration)
+    if (has_configuration) {
+        BOOST_LOG_SEV(lg, debug) << "Read decoration configuration: " << r;
         return r;
+    }
 
     return boost::optional<decoration_configuration>();
 }
@@ -245,7 +250,6 @@ boost::optional<coding::meta_model::decoration> decoration_transform::
 make_global_decoration(const helpers::decoration_repository drp,
     const boost::optional<decoration_configuration> root_dc,
     const coding::meta_model::technical_space ts) {
-
     /*
      * If there is no decoration configuration there shall be no
      * decoration either.
@@ -274,6 +278,8 @@ make_global_decoration(const helpers::decoration_repository drp,
     const auto ml(get_modeline(drp, dc.modeline_group_name(), ts));
     const auto gm(get_generation_marker(drp, dc.marker_name()));
     const auto r(make_decoration(l, ml, gm, dc.copyright_notices(), ts));
+
+    BOOST_LOG_SEV(lg, debug) << "Created global decoration: " << r;
     return r;
 }
 
@@ -284,7 +290,6 @@ decoration_transform::make_local_decoration(
     const boost::optional<coding::meta_model::decoration> global_decoration,
     const boost::optional<decoration_configuration> element_dc,
     const coding::meta_model::technical_space ts) {
-
     /*
      * If there is no local decoration configuration, we just default
      * to the global one whatever it may be - i.e. it may itself not
@@ -329,6 +334,8 @@ decoration_transform::make_local_decoration(
      */
     if (!root_dc) {
         const auto r(make_decoration(ol, oml, ogm, dc.copyright_notices(), ts));
+        BOOST_LOG_SEV(lg, debug) << "Created local decoration without "
+                                 << "overrides: " << r;
         return r;
     }
 
@@ -345,6 +352,9 @@ decoration_transform::make_local_decoration(
         dc.copyright_notices() : root_dc->copyright_notices());
     const auto r(make_decoration(overriden_licence, overriden_modeline,
             overriden_marker, overriden_copyright_notices, ts));
+
+    BOOST_LOG_SEV(lg, debug) << "Created local decoration with overrides: "
+                             << r;
     return r;
 }
 
@@ -359,6 +369,7 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
      */
     helpers::decoration_repository_factory f;
     const auto drp(f.make(m));
+    BOOST_LOG_SEV(lg, debug) << "Created decoration repository factory.";
 
     /*
      * Then we obtain the decoration configuration for the root
