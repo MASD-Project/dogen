@@ -50,6 +50,8 @@ const std::string xml_modeline_name("xml");
 const std::string cmake_modeline_name("cmake");
 const std::string odb_modeline_name("odb");
 
+const std::string empty;
+
 }
 
 namespace masd::dogen::generation::cpp::fabric {
@@ -63,8 +65,13 @@ public:
 private:
     void update(coding::meta_model::element& e,
         const std::string & modeline_name = cpp_modeline_name) {
-        BOOST_LOG_SEV(lg, debug) << "Processing element: " << e.name().qualified().dot();
+        BOOST_LOG_SEV(lg, debug) << "Processing element: "
+                                 << e.name().qualified().dot();
         e.decoration_properties(factory_.make(modeline_name));
+        e.decoration_properties().preamble(
+            e.decoration() ? e.decoration()->preamble() : empty);
+        e.decoration_properties().postamble(
+            e.decoration() ? e.decoration()->postamble() : empty);
     }
 
 public:

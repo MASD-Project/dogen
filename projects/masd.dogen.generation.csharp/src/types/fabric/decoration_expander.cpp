@@ -40,6 +40,7 @@ static logger lg(logger_factory("generation.csharp.fabric.decoration_expander"))
 
 const std::string cs_modeline_name("cs");
 const std::string xml_modeline_name("xml");
+const std::string empty;
 
 }
 
@@ -54,8 +55,13 @@ public:
 private:
     void update(coding::meta_model::element& e,
         const std::string & modeline_name = cs_modeline_name) {
-        BOOST_LOG_SEV(lg, debug) << "Processing element: " << e.name().qualified().dot();
+        BOOST_LOG_SEV(lg, debug) << "Processing element: "
+                                 << e.name().qualified().dot();
         e.decoration_properties(factory_.make(modeline_name));
+        e.decoration_properties().preamble(
+            e.decoration() ? e.decoration()->preamble() : empty);
+        e.decoration_properties().postamble(
+            e.decoration() ? e.decoration()->postamble() : empty);
     }
 
 public:
