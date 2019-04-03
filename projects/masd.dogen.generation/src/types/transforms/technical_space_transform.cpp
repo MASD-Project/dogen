@@ -18,12 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
+#include <unordered_map>
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
+#include "masd.dogen.coding/hash/meta_model/technical_space_hash.hpp"
+#include "masd.dogen.generation/io/meta_model/model_io.hpp"
 #include "masd.dogen.generation/types/transforms/technical_space_transform.hpp"
+
+namespace {
+
+const std::string
+transform_id("generation.transforms.technical_space_transform");
+
+using namespace masd::dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
 
 namespace masd::dogen::generation::transforms {
 
-bool technical_space_transform::operator==(const technical_space_transform& /*rhs*/) const {
-    return true;
+void technical_space_transform::
+apply(const context& ctx, meta_model::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "technical space transform",
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+
+    auto& ats(m.all_technical_spaces());
+    ats.insert(m.input_technical_space());
+    ats.insert(m.output_technical_space());
+    for (const auto& ptr : m.elements())
+        ats.insert(ptr->intrinsic_technical_space());
+
+    stp.end_transform(m);
 }
 
 }

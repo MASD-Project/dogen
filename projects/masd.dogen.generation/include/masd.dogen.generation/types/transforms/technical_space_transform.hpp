@@ -25,24 +25,17 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.generation/types/meta_model/model.hpp"
+#include "masd.dogen.generation/types/transforms/context.hpp"
 
 namespace masd::dogen::generation::transforms {
 
+/**
+ * @brief Collects all technical spaces in the model.
+ */
 class technical_space_transform final {
 public:
-    technical_space_transform() = default;
-    technical_space_transform(const technical_space_transform&) = default;
-    technical_space_transform(technical_space_transform&&) = default;
-    ~technical_space_transform() = default;
-    technical_space_transform& operator=(const technical_space_transform&) = default;
-
-public:
-    bool operator==(const technical_space_transform& rhs) const;
-    bool operator!=(const technical_space_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }
