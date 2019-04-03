@@ -14303,3 +14303,20 @@ cleverness to assemble the objects into UML elements.
 Links:
 
 - https://about.draw.io/features/import-export/
+*** Consider adding "sidecar" service functionality                   :story:
+
+A new trend emerging for HTTP based services is to have "sidecars"
+that run next to the application providing common
+functionality. Examples are envoy, kong. The idea of sidecars is that
+most of the functionality is kept separate from the application
+itself, making application code simpler. Upgrading the sidecar can now
+be done transparently without impacting the application (in theory at
+least). However, another way to look at this is to consider this
+functionality to be facets of the product which can be code generated
+on demand.
+
+Links:
+
+- [[https://medium.com/@far3ns/kong-the-microservice-api-gateway-526c4ca0cfa6][KONG - The Microservice API Gateway]]
+- [[https://docs.konghq.com/hub/kong-inc/oauth2/][kong oauth2 plugin]]
+- [[https://docs.konghq.com/hub/kong-inc/jwt/][kong jwt plugin]]
