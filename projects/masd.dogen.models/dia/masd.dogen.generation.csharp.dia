@@ -65,22 +65,22 @@
   <dia:layer name="Background" visible="true" active="true">
     <dia:object type="UML - Note" version="0" id="O0">
       <dia:attribute name="obj_pos">
-        <dia:point val="-17,-127"/>
+        <dia:point val="-17,-132"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.05,-127.05;10.13,-105.25"/>
+        <dia:rectangle val="-17.05,-132.05;28.61,-106.25"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-17,-127"/>
+        <dia:point val="-17,-132"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.080000000000002"/>
+        <dia:real val="45.560000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="21.700000000000003"/>
+        <dia:real val="25.700000000000003"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -119,7 +119,12 @@
 #DOGEN masd.generation.cpp.visual_studio.project.enabled=false
 #DOGEN masd.generation.cpp.visual_studio.solution.enabled=false
 #DOGEN masd.generation.csharp.enabled=false
-#DOGEN masd.annotations.profile=dogen.disable_common_facets#</dia:string>
+#DOGEN masd.annotations.profile=dogen.disable_common_facets
+#DOGEN masd.generation.decoration.enabled=true
+#DOGEN masd.generation.decoration.licence_name=masd.gpl_v3
+#DOGEN masd.generation.decoration.modeline_group_name=masd.emacs
+#DOGEN masd.generation.decoration.copyright_notice=Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;
+#DOGEN masd.generation.decoration.marker_name=masd.basic#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -128,7 +133,7 @@
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-16.65,-125.755"/>
+            <dia:point val="-16.65,-130.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
