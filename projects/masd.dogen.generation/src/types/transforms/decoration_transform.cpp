@@ -220,7 +220,6 @@ make_global_decoration(const helpers::decoration_repository drp,
     if (!dc.enabled() || !(*dc.enabled()))
         return boost::optional<coding::meta_model::decoration>();
 
-
     /*
      * Obtain all decoration inputs.
      */
@@ -229,24 +228,43 @@ make_global_decoration(const helpers::decoration_repository drp,
     const auto gm(get_generation_marker(drp, dc.marker_name()));
 
     /*
-     * Create the decoration.
-     * FIXME: check TS. make sure fabric elements have the right TS.
-     * map TS to comment style. check c# boilerplate.
+     * Create the preamble and postamble for the decoration, taking
+     * into account the element's technical space.
      */
+    using formatters::comment_style;
+    using coding::meta_model::technical_space;
 
-    // decoration_formatter af;
-    // af.format_preamble(s, comment_styles::cpp_style/*single line*/,
-    //     comment_styles::c_style/*multi-line*/, dc);
+    std::ostringstream preamble_stream;
+    formatters::decoration_formatter df;
+    if (ts == technical_space::cpp) {
+        df.format_preamble(preamble_stream,
+            comment_style::cpp_style/*single line*/,
+            comment_style::c_style/*multi-line*/,
+            l, dc.copyright_notices(),  ml, gm);
+    } else if (ts == technical_space::csharp) {
+        df.format_preamble(preamble_stream,
+            comment_style::csharp_style,
+            l, dc.copyright_notices(),  ml, gm);
+    } else if (ts == technical_space::cmake || ts == technical_space::odb) {
+        df.format_preamble(preamble_stream,
+            comment_style::shell_style, l,
+            dc.copyright_notices(),  ml, gm);
+    } else if (ts == technical_space::xml) {
+        df.format_preamble(preamble_stream,
+            comment_style::xml_style, l,
+            dc.copyright_notices(),  ml, gm);
+    }
 
-
-    // formatters::decoration_formatter df;
-    // std::ostringstream preamble;
-    // // df.format_preamble(preamble, comment_style
-    // std::ostringstream postamble;
-
-    // af.format_postamble(s, comment_styles::c_style, dc);
+    std::ostringstream postamble_stream;
+    if (ts == technical_space::cpp)
+        df.format_postamble(postamble_stream, comment_style::c_style, ml);
+    else if (ts == technical_space::csharp)
+        df.format_postamble(postamble_stream, comment_style::csharp_style, ml);
 
     coding::meta_model::decoration r;
+    r.preamble(preamble_stream.str());
+    r.postamble(postamble_stream.str());
+
     return r;
 }
 
