@@ -25,24 +25,20 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <iosfwd>
+#include <string>
+#include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
 
 namespace masd::dogen::generation::formatters {
 
+/**
+ * @brief Creates the generation marker, ready to be wrapped in
+ * comments.
+ */
 class generation_marker_formatter final {
 public:
-    generation_marker_formatter() = default;
-    generation_marker_formatter(const generation_marker_formatter&) = default;
-    generation_marker_formatter(generation_marker_formatter&&) = default;
-    ~generation_marker_formatter() = default;
-    generation_marker_formatter& operator=(const generation_marker_formatter&) = default;
-
-public:
-    bool operator==(const generation_marker_formatter& rhs) const;
-    bool operator!=(const generation_marker_formatter& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    void format(std::ostream& s,
+        const coding::meta_model::generation_marker& gm) const;
 };
 
 }
