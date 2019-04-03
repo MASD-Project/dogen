@@ -71,6 +71,8 @@ populate(const unsigned int position, result_type& v) {
     v.modeline(create_boost_optional_masd_dogen_extraction_modeline(position + 1));
     v.licence(create_boost_optional_masd_dogen_extraction_licence(position + 2));
     v.code_generation_marker(create_std_string(position + 3));
+    v.preamble(create_std_string(position + 4));
+    v.postamble(create_std_string(position + 5));
 }
 
 decoration_properties_generator::result_type

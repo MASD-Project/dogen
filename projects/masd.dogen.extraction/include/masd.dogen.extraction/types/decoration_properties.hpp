@@ -52,7 +52,9 @@ public:
         const bool generate_decoration,
         const boost::optional<masd::dogen::extraction::modeline>& modeline,
         const boost::optional<masd::dogen::extraction::licence>& licence,
-        const std::string& code_generation_marker);
+        const std::string& code_generation_marker,
+        const std::string& preamble,
+        const std::string& postamble);
 
 public:
     /**
@@ -93,6 +95,16 @@ public:
     void code_generation_marker(const std::string&& v);
     /**@}*/
 
+    const std::string& preamble() const;
+    std::string& preamble();
+    void preamble(const std::string& v);
+    void preamble(const std::string&& v);
+
+    const std::string& postamble() const;
+    std::string& postamble();
+    void postamble(const std::string& v);
+    void postamble(const std::string&& v);
+
 public:
     bool operator==(const decoration_properties& rhs) const;
     bool operator!=(const decoration_properties& rhs) const {
@@ -108,6 +120,8 @@ private:
     boost::optional<masd::dogen::extraction::modeline> modeline_;
     boost::optional<masd::dogen::extraction::licence> licence_;
     std::string code_generation_marker_;
+    std::string preamble_;
+    std::string postamble_;
 };
 
 }

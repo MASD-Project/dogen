@@ -111,7 +111,7 @@ make_decoration_properties(const modeline_locations ml,
     const auto m(make_modeline(ml));
     const auto l(make_licence(use_empty_licence, use_multiline_licence));
     const auto mk(make_marker(use_empty_marker));
-    return decoration_properties(true/*generate_preamble*/, m, l, mk);
+    return decoration_properties(true/*generate_preamble*/, m, l, mk, "", "");
 }
 
 decoration_properties mock_decoration_properties_factory::
@@ -119,7 +119,7 @@ make_empty_decoration_properties() const {
     const modeline m;
     licence l;
     const auto mk(make_marker(true/*empty_marker*/));
-    return decoration_properties(true/*generate_preamble*/, m, l, mk);
+    return decoration_properties(true/*generate_preamble*/, m, l, mk, "", "");
 }
 
 }

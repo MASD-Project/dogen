@@ -233,7 +233,7 @@ BOOST_AUTO_TEST_CASE(licence_with_holder_but_no_text_is_formatted_correctly) {
     licence l;
     l.copyright_notices().push_back("a_holder");
     const decoration_properties dc(true/*generate_preamble*/, m, l,
-        factory_.make_marker());
+        factory_.make_marker(), "", "");
     const auto us(factory_.make_usings(true/*is_empty*/));
     const auto r(format(dc, us));
 
@@ -249,7 +249,7 @@ BOOST_AUTO_TEST_CASE(licence_with_text_but_no_copyright_notices_is_formatted_cor
     licence l;
     l.text("licence text");
     const decoration_properties dc(true/*generate_preamble*/, m, l,
-        factory_.make_marker());
+        factory_.make_marker(), "", "");
     const auto us(factory_.make_usings(true/*is_empty*/));
     const auto r(format(dc, us));
 

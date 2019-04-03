@@ -247,7 +247,7 @@ decoration_properties_factory::make(const std::string& modeline_name,
     const auto licence(get_licence(fa));
     const auto marker(get_marker_or_default(fa));
     const bool gd(get_generate_decoration_or_default(fa));
-    decoration_properties r(gd, modeline, licence, marker);
+    decoration_properties r(gd, modeline, licence, marker, "", "");
     return r;
 }
 

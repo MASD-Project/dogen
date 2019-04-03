@@ -29,17 +29,23 @@ decoration_properties::decoration_properties(decoration_properties&& rhs)
     : generate_decoration_(std::move(rhs.generate_decoration_)),
       modeline_(std::move(rhs.modeline_)),
       licence_(std::move(rhs.licence_)),
-      code_generation_marker_(std::move(rhs.code_generation_marker_)) { }
+      code_generation_marker_(std::move(rhs.code_generation_marker_)),
+      preamble_(std::move(rhs.preamble_)),
+      postamble_(std::move(rhs.postamble_)) { }
 
 decoration_properties::decoration_properties(
     const bool generate_decoration,
     const boost::optional<masd::dogen::extraction::modeline>& modeline,
     const boost::optional<masd::dogen::extraction::licence>& licence,
-    const std::string& code_generation_marker)
+    const std::string& code_generation_marker,
+    const std::string& preamble,
+    const std::string& postamble)
     : generate_decoration_(generate_decoration),
       modeline_(modeline),
       licence_(licence),
-      code_generation_marker_(code_generation_marker) { }
+      code_generation_marker_(code_generation_marker),
+      preamble_(preamble),
+      postamble_(postamble) { }
 
 void decoration_properties::swap(decoration_properties& other) noexcept {
     using std::swap;
@@ -47,13 +53,17 @@ void decoration_properties::swap(decoration_properties& other) noexcept {
     swap(modeline_, other.modeline_);
     swap(licence_, other.licence_);
     swap(code_generation_marker_, other.code_generation_marker_);
+    swap(preamble_, other.preamble_);
+    swap(postamble_, other.postamble_);
 }
 
 bool decoration_properties::operator==(const decoration_properties& rhs) const {
     return generate_decoration_ == rhs.generate_decoration_ &&
         modeline_ == rhs.modeline_ &&
         licence_ == rhs.licence_ &&
-        code_generation_marker_ == rhs.code_generation_marker_;
+        code_generation_marker_ == rhs.code_generation_marker_ &&
+        preamble_ == rhs.preamble_ &&
+        postamble_ == rhs.postamble_;
 }
 
 decoration_properties& decoration_properties::operator=(decoration_properties other) {
@@ -116,6 +126,38 @@ void decoration_properties::code_generation_marker(const std::string& v) {
 
 void decoration_properties::code_generation_marker(const std::string&& v) {
     code_generation_marker_ = std::move(v);
+}
+
+const std::string& decoration_properties::preamble() const {
+    return preamble_;
+}
+
+std::string& decoration_properties::preamble() {
+    return preamble_;
+}
+
+void decoration_properties::preamble(const std::string& v) {
+    preamble_ = v;
+}
+
+void decoration_properties::preamble(const std::string&& v) {
+    preamble_ = std::move(v);
+}
+
+const std::string& decoration_properties::postamble() const {
+    return postamble_;
+}
+
+std::string& decoration_properties::postamble() {
+    return postamble_;
+}
+
+void decoration_properties::postamble(const std::string& v) {
+    postamble_ = v;
+}
+
+void decoration_properties::postamble(const std::string&& v) {
+    postamble_ = std::move(v);
 }
 
 }

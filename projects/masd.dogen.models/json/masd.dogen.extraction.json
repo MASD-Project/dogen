@@ -271,6 +271,14 @@
           "name": "code_generation_marker",
           "type": "std::string",
           "documentation": "Code generation marker to use in this file.\n"
+        },
+        {
+          "name": "preamble",
+          "type": "std::string"
+        },
+        {
+          "name": "postamble",
+          "type": "std::string"
         }
       ]
     },

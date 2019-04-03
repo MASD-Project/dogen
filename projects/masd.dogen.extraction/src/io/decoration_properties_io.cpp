@@ -77,7 +77,9 @@ std::ostream& operator<<(std::ostream& s, const decoration_properties& v) {
       << "\"generate_decoration\": " << v.generate_decoration() << ", "
       << "\"modeline\": " << v.modeline() << ", "
       << "\"licence\": " << v.licence() << ", "
-      << "\"code_generation_marker\": " << "\"" << tidy_up_string(v.code_generation_marker()) << "\""
+      << "\"code_generation_marker\": " << "\"" << tidy_up_string(v.code_generation_marker()) << "\"" << ", "
+      << "\"preamble\": " << "\"" << tidy_up_string(v.preamble()) << "\"" << ", "
+      << "\"postamble\": " << "\"" << tidy_up_string(v.postamble()) << "\""
       << " }";
     return(s);
 }
