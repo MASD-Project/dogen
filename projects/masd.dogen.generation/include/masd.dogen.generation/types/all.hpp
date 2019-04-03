@@ -40,6 +40,7 @@
 #include "masd.dogen.generation/types/meta_model/backend_properties.hpp"
 #include "masd.dogen.generation/types/meta_model/locator_properties.hpp"
 #include "masd.dogen.generation/types/meta_model/artefact_properties.hpp"
+#include "masd.dogen.generation/types/formatters/decoration_formatter.hpp"
 #include "masd.dogen.generation/types/meta_model/archetype_properties.hpp"
 #include "masd.dogen.generation/types/transforms/decoration_transform.hpp"
 #include "masd.dogen.generation/types/transforms/enablement_transform.hpp"
