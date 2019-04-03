@@ -42,6 +42,7 @@ struct traits {
         static std::string enabled();
         static std::string copyright_notice();
         static std::string licence_name();
+        static std::string  modeline_group_name();
         static std::string marker_name();
     };
 };

@@ -72,6 +72,11 @@ std::string traits::decoration::licence_name() {
     return r;
 }
 
+std::string traits::decoration::modeline_group_name() {
+    static std::string r("masd.generation.decoration.modeline_group_name");
+    return r;
+}
+
 std::string traits::decoration::marker_name() {
     static std::string r("masd.generation.decoration.marker_name");
     return r;
