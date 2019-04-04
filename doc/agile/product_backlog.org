@@ -7465,6 +7465,37 @@ from each fountain using the distribution (e.g. uniform, etc). We
 could also handle countries this way (e.g. use iso codes for phone
 numbers, =en_phone_numbers= etc.).
 
+*More Ideas*
+
+Actually a better take on this would be to create an actual
+product. We could have one repository which is made up of simple test
+data files, with some form of organisation. Then we could add support
+to dogen to generate data generators based on those files. These could
+be for any language that dogen supports. Then we'd create a product
+for each language that export these generators, with a PDM mapping
+that exports these so that models could consume them. This means
+anyone could use the product outside of dogen and dogen binds to
+it. It could live in the MASD umbrella or perhaps have its own
+organisation (since we will have many languages it may just pollute
+MASD). Interestingly, there is some kind of weird correlation between
+"regular" PDMs and the generators. For example:
+
+- the boost PDM exports a type such as date time.
+- the generator could contain dates, say birthdays, holiday calendars,
+  etc. These then can be expressed in a number of types, depending on
+  the library you are using. Therefore in an ideal world, the boost
+  PDM library should have a dependency (as far as test data generation
+  goes) on this new product. We could use a simple interface for this
+  (for example all dates are exported in some type supported by the C
+  library). Then the PDM uses a wrapper on top of the original
+  exporter to generate data in the boost format:
+
+  C time -> boost time
+
+  Of course, users may then want dates as strings, etc. The key thing
+  is to allow for arbitrary composition of these data streams (a-la Rx
+  event streams, in a way).
+
 Links:
 
 - https://mockaroo.com/
@@ -7480,6 +7511,11 @@ Links:
 - [[https://github.com/dariusk/corpora][corpora]]: A collection of small corpuses of interesting data for the
   creation of bots and similar stuff.
 - [[https://github.com/joke2k/faker][faker]]: Faker is a Python package that generates fake data for you.
+- [[https://github.com/schoentoon/cxxfaker][cxxfaker]]: basic C++ faker.
+- [[https://github.com/vrok/randodo][randodo]]: random strings generator
+- [[https://github.com/emirozer/fake2db][fake2db]]: Generate fake but valid data filled databases for test
+  purposes using most popular patterns.
+- [[https://devarea.com/python-understanding-generators/#.XKX5tXVKiV4][Python – understanding generators]]
 
 **** Example Types
 
@@ -14320,3 +14356,33 @@ Links:
 - [[https://medium.com/@far3ns/kong-the-microservice-api-gateway-526c4ca0cfa6][KONG - The Microservice API Gateway]]
 - [[https://docs.konghq.com/hub/kong-inc/oauth2/][kong oauth2 plugin]]
 - [[https://docs.konghq.com/hub/kong-inc/jwt/][kong jwt plugin]]
+*** Scripts for loading traces into postgres                          :story:
+
+It would be really nice if as part of the tracing generation we also
+generated a set of SQL scripts that:
+
+- created a number of tables
+- copied all of the generated data into the database
+- added a number of utility functions such as get elements in model, etc.
+
+Over time we could build up functionality but to start off with we
+just want something really simple that copies all of the
+files. Interestingly this "looks" like a job for dogen. It would be
+nice to have a meta-model element for this etc.
+
+In the future it would be nice to have a think about the schema so
+that we could do joins etc. For example:
+
+- show me all transforms with element of type X (the state of the
+  element at each transform).
+
+We should also take into account multiple runs. Perhaps a more
+adequate solution is to create a dogen library that has the ORM
+support for this. Once we have proper JSON serialisation we can store
+the objects as JSON serialisable, allowing us to re-run transforms,
+etc.
+
+Notes:
+
+- ensure we upload the file name or at least the coordinates to the
+  transform graph with the data so that we know what it refers to.
