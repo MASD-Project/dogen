@@ -65,13 +65,9 @@ public:
 private:
     void update(coding::meta_model::element& e,
         const std::string & modeline_name = cpp_modeline_name) {
-        BOOST_LOG_SEV(lg, debug) << "Processing element: "
+        BOOST_LOG_SEV(lg, trace) << "Processing element: "
                                  << e.name().qualified().dot();
         e.decoration_properties(factory_.make(modeline_name));
-        e.decoration_properties().preamble(
-            e.decoration() ? e.decoration()->preamble() : empty);
-        e.decoration_properties().postamble(
-            e.decoration() ? e.decoration()->postamble() : empty);
     }
 
 public:

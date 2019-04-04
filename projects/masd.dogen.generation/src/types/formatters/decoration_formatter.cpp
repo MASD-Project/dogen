@@ -102,8 +102,8 @@ void decoration_formatter::format_preamble(
     }
 
     add_marker(content, gm);
-    add_licence(content, licence_text);
     add_copyright_notices(content, copyright_notices);
+    add_licence(content, licence_text);
 
     if (content.empty())
         return;

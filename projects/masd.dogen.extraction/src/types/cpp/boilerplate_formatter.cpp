@@ -24,6 +24,12 @@
 #include "masd.dogen.extraction/types/cpp/header_guard_formatter.hpp"
 #include "masd.dogen.extraction/types/cpp/boilerplate_formatter.hpp"
 
+namespace {
+
+bool use_new_decoration = false;
+
+}
+
 namespace masd::dogen::extraction::cpp {
 
 boilerplate_formatter::boilerplate_formatter(
@@ -36,9 +42,13 @@ format_preamble(std::ostream& s, const decoration_properties& dc) const {
     if (!generate_preamble_)
         return;
 
-    decoration_formatter af;
-    af.format_preamble(s, comment_styles::cpp_style/*single line*/,
-        comment_styles::c_style/*multi-line*/, dc);
+    if (use_new_decoration)
+        s << dc.preamble();
+    else {
+        decoration_formatter af;
+        af.format_preamble(s, comment_styles::cpp_style/*single line*/,
+            comment_styles::c_style/*multi-line*/, dc);
+    }
 }
 
 void boilerplate_formatter::
@@ -80,8 +90,12 @@ format_begin(std::ostream& s, const decoration_properties& dc,
 
 void boilerplate_formatter::
 format_postamble(std::ostream& s, const decoration_properties& dc) const {
-    decoration_formatter af;
-    af.format_postamble(s, comment_styles::c_style, dc);
+    if (use_new_decoration)
+        s << dc.postamble();
+    else {
+        decoration_formatter af;
+        af.format_postamble(s, comment_styles::c_style, dc);
+    }
 }
 
 void boilerplate_formatter::

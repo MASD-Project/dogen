@@ -68,7 +68,7 @@
         <dia:point val="-17,-132"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.05,-132.05;28.61,-106.25"/>
+        <dia:rectangle val="-17.05,-132.05;28.61,-107.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="45.560000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="25.700000000000003"/>
+        <dia:real val="24.900000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -123,8 +123,7 @@
 #DOGEN masd.generation.decoration.enabled=true
 #DOGEN masd.generation.decoration.licence_name=masd.gpl_v3
 #DOGEN masd.generation.decoration.modeline_group_name=masd.emacs
-#DOGEN masd.generation.decoration.copyright_notice=Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;
-#DOGEN masd.generation.decoration.marker_name=masd.basic#</dia:string>
+#DOGEN masd.generation.decoration.copyright_notice=Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
