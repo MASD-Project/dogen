@@ -292,13 +292,19 @@ decoration_transform::make_local_decoration(
     const boost::optional<coding::meta_model::decoration> global_decoration,
     const boost::optional<decoration_configuration> element_dc,
     const coding::meta_model::technical_space ts) {
+
+    BOOST_LOG_SEV(lg, trace) << "Creating local decoration.";
+
     /*
      * If there is no local decoration configuration, we just default
      * to the global one whatever it may be - i.e. it may itself not
      * exist either.
      */
-    if (!element_dc)
+    if (!element_dc) {
+        BOOST_LOG_SEV(lg, trace) << "No element decoration. "
+                                 << "Using global decoration.";
         return global_decoration;
+    }
 
     /*
      * If the user specifically disabled decoration for this modeling
@@ -310,8 +316,13 @@ decoration_transform::make_local_decoration(
     const bool disabled_locally(dc.enabled() && !(*dc.enabled()));
     const bool enabled_globally(root_dc && root_dc->enabled() &&
         *root_dc->enabled());
-    if (disabled_locally || (!enabled_locally && !enabled_globally))
+    if (disabled_locally || (!enabled_locally && !enabled_globally)) {
+        BOOST_LOG_SEV(lg, trace) << "Decoration not enabled. "
+                                 << " enabled_locally: " << enabled_locally
+                                 << " disabled_locally: " << disabled_locally
+                                 << " enabled_globally: " << enabled_globally;
         return boost::optional<coding::meta_model::decoration>();
+    }
 
     /*
      * If there are no local overrides, then just use the global
@@ -319,8 +330,10 @@ decoration_transform::make_local_decoration(
      */
     if (dc.copyright_notices().empty() &&
         dc.licence_name().empty() && dc.modeline_group_name().empty() &&
-        dc.marker_name().empty())
+        dc.marker_name().empty()) {
+        BOOST_LOG_SEV(lg, trace) << "No overiddes. Using global decoration.";
         return global_decoration;
+    }
 
     /*
      * Retrieve the local decoration inputs.
@@ -336,7 +349,7 @@ decoration_transform::make_local_decoration(
      */
     if (!root_dc) {
         const auto r(make_decoration(ol, oml, ogm, dc.copyright_notices(), ts));
-        BOOST_LOG_SEV(lg, debug) << "Created local decoration without "
+        BOOST_LOG_SEV(lg, trace) << "Created local decoration without "
                                  << "overrides: " << r;
         return r;
     }
@@ -355,8 +368,7 @@ decoration_transform::make_local_decoration(
     const auto r(make_decoration(overriden_licence, overriden_modeline,
             overriden_marker, overriden_copyright_notices, ts));
 
-    BOOST_LOG_SEV(lg, debug) << "Created local decoration with overrides: "
-                             << r;
+    BOOST_LOG_SEV(lg, trace) << "Created local decoration with overrides: " << r;
     return r;
 }
 
@@ -419,7 +431,7 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
      */
     const auto root_id(rm.name().qualified().dot());
     const auto ats(coding::meta_model::technical_space::agnostic);
-    for (auto& e : m.elements()) {
+    for (auto e : m.elements()) {
         const auto id(e->name().qualified().dot());
         BOOST_LOG_SEV(lg, trace) << "Processing element: " << id;
 
