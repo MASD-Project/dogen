@@ -26,6 +26,7 @@
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.annotations/io/annotation_io.hpp"
 #include "masd.dogen.templating/types/wale/workflow.hpp"
+#include "masd.dogen.templating/types/helpers/kvp_validator.hpp"
 #include "masd.dogen.templating/types/stitch/instantiation_error.hpp"
 #include "masd.dogen.templating/types/stitch/parser.hpp"
 #include "masd.dogen.templating/types/stitch/properties.hpp"
@@ -87,6 +88,20 @@ read_text_template(const boost::filesystem::path& input_path) const {
     return r;
 }
 
+void instantiator::update_expected_keys(text_template& tt) const {
+    /*
+     * Locate all variable blocks and extract the variable names from
+     * them. Put these in the expected keys container.
+     */
+    auto& e(tt.expected_keys());
+    for (const auto& l : tt.body().lines()) {
+        for (const auto& b : l.blocks()) {
+            if (b.type() == block_types::variable_block)
+                e.insert(b.content());
+        }
+    }
+}
+
 void instantiator::handle_wale_template(text_template& tt) const {
     /*
      * Check if we have an associated wale template. If we don't,
@@ -119,6 +134,11 @@ void instantiator::handle_wale_template(text_template& tt) const {
     }
 }
 
+void instantiator::validate_kvps(text_template& tt) const {
+    helpers::kvp_validator v;
+    v.validate(tt.expected_keys(), tt.supplied_kvps());
+}
+
 text_template
 instantiator::create_text_template(const boost::filesystem::path& input_path,
     const std::string& text_template_as_string) const {
@@ -134,6 +154,11 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
         parser p;
         text_template r;
         r.body(p.parse(text_template_as_string));
+
+        /*
+         * Get all of the variables used by the template.
+         */
+        update_expected_keys(r);
 
         /*
          * The input path is the location from where we read the
@@ -158,8 +183,11 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
          */
         handle_wale_template(r);
 
-
-
+        /*
+         * Ensure that all referenced variables are present in the KVP
+         * map.
+         */
+        validate_kvps(r);
 
         /*
          * Finally, we compute an output path for our template,

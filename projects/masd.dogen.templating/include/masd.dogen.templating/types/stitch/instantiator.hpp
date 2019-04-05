@@ -65,9 +65,20 @@ private:
     std::string read_text_template(const boost::filesystem::path& p) const;
 
     /**
+     * @brief Finds all of the variable blocks in the template, and
+     * uses them to update the expected keys.
+     */
+    void update_expected_keys(text_template& tt) const;
+
+    /**
      * @brief Instantiates the wale template, if configured.
      */
     void handle_wale_template(text_template& tt) const;
+
+    /**
+     * @brief Validate the supplied KVPs.
+     */
+    void validate_kvps(text_template& tt) const;
 
     /**
      * @brief Creates the text template.
