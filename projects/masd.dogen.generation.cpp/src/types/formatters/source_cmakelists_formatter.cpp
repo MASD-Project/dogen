@@ -95,8 +95,7 @@ format(const context& ctx, const coding::meta_model::element& e) const {
     const auto& c(a.as<fabric::cmakelists>(e));
 
     {
-        const auto cs(dogen::extraction::comment_styles::shell_style);
-        a.make_decoration_preamble(cs, e);
+        a.make_decoration_preamble(e);
         const auto model_name(a.get_identifiable_model_name(c.name()));
         const auto product_name(a.get_product_name(c.name()));
 a.stream() << "set(files \"\")" << std::endl;

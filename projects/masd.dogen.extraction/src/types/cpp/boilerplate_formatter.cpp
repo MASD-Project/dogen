@@ -31,11 +31,11 @@ boilerplate_formatter::boilerplate_formatter(
       generate_header_guards_(generate_header_guards) { }
 
 void boilerplate_formatter::
-format_preamble(std::ostream& s, const decoration_properties& dc) const {
+format_preamble(std::ostream& s, const std::string& preamble) const {
     if (!generate_preamble_)
         return;
 
-    s << dc.preamble();
+    s << preamble;
 }
 
 void boilerplate_formatter::
@@ -66,24 +66,27 @@ format_includes(std::ostream& s, const std::list<std::string>& includes) const {
 }
 
 void boilerplate_formatter::
-format_begin(std::ostream& s, const decoration_properties& dc,
+format_begin(std::ostream& s, const std::string& preamble,
     const std::list<std::string>& includes,
     const std::string& header_guard) const {
 
-    format_preamble(s, dc);
+    format_preamble(s, preamble);
     format_guards_begin(s, header_guard);
     format_includes(s, includes);
 }
 
 void boilerplate_formatter::
-format_postamble(std::ostream& s, const decoration_properties& dc) const {
-    s << dc.postamble();
+format_postamble(std::ostream& s, const std::string& postamble) const {
+    if (!generate_preamble_)
+        return;
+
+    s << postamble;
 }
 
 void boilerplate_formatter::
-format_end(std::ostream& s, const decoration_properties& dc,
+format_end(std::ostream& s, const std::string& postamble,
     const std::string& header_guard) const {
-    format_postamble(s, dc);
+    format_postamble(s, postamble);
     format_guards_end(s, header_guard);
 }
 

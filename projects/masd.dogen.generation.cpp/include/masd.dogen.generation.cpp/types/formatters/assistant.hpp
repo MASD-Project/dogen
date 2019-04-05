@@ -281,13 +281,6 @@ public:
      */
     bool is_streaming_enabled(const formattables::helper_properties& hp) const;
 
-private:
-    /**
-     * @brief Returns the decoration properties for a given yarn element.
-     */
-    const dogen::extraction::decoration_properties&
-    get_decoration_properties(const coding::meta_model::element& e) const;
-
 public:
     /**
      * @brief Returns a scoped boilerplate formatter.
@@ -304,14 +297,7 @@ public:
     /**
      * @brief Creates the decoration preamble.
      */
-    /**@{*/
-    void make_decoration_preamble(
-        const dogen::extraction::comment_styles cs,
-        const coding::meta_model::element& e);
-    void make_decoration_preamble(
-        const dogen::extraction::comment_styles cs,
-        const boost::optional<dogen::extraction::decoration_properties> dc);
-    /**@}*/
+    void make_decoration_preamble(const coding::meta_model::element& e);
 
 public:
     /**

@@ -29,7 +29,6 @@
 #include <iosfwd>
 #include <string>
 #include <boost/optional.hpp>
-#include "masd.dogen.extraction/types/decoration_properties.hpp"
 #include "masd.dogen.extraction/types/csharp/boilerplate_formatter.hpp"
 
 namespace masd::dogen::extraction::csharp {
@@ -40,15 +39,15 @@ namespace masd::dogen::extraction::csharp {
 class scoped_boilerplate_formatter {
 public:
     scoped_boilerplate_formatter(
-        std::ostream& s,
-        const boost::optional<decoration_properties>& odp,
-        const std::list<std::string>& usings);
+        std::ostream& s, const std::string& preamble,
+        const std::string& postamble, const std::list<std::string>& usings);
 
     ~scoped_boilerplate_formatter();
 
 private:
     std::ostream& stream_;
-    const boost::optional<decoration_properties> decoration_properties_;
+    const std::string preamble_;
+    const std::string postamble_;
     const std::list<std::string> usings_;
     const boilerplate_formatter formatter_;
 };

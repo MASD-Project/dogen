@@ -98,19 +98,16 @@ obtain_artefact_properties(const std::string& archetype) const {
     return i->second;
 }
 
-const dogen::extraction::decoration_properties& assistant::
-get_decoration_properties(const coding::meta_model::element& e) const {
-    return e.decoration_properties();
-}
-
 dogen::extraction::csharp::scoped_boilerplate_formatter assistant::
 make_scoped_boilerplate_formatter(const coding::meta_model::element& e) {
-    const auto& dp(get_decoration_properties(e));
     const auto& art_props(artefact_properties_);
     const auto& deps(art_props.using_dependencies());
 
     using dogen::extraction::csharp::scoped_boilerplate_formatter;
-    return scoped_boilerplate_formatter(stream(), dp, deps);
+    return scoped_boilerplate_formatter(stream(),
+        e.decoration() ? e.decoration()->preamble() : empty,
+        e.decoration() ? e.decoration()->postamble() : empty,
+        deps);
 }
 
 dogen::extraction::csharp::scoped_namespace_formatter

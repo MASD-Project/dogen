@@ -24,23 +24,14 @@
 namespace masd::dogen::extraction::csharp {
 
 scoped_boilerplate_formatter::scoped_boilerplate_formatter(std::ostream& s,
-    const boost::optional<decoration_properties>& odp,
+    const std::string& preamble, const std::string& postamble,
     const std::list<std::string>& usings)
-    : stream_(s), decoration_properties_(odp), usings_(usings) {
-
-    if (!decoration_properties_)
-        return;
-
-    const auto& dc(*decoration_properties_);
-    formatter_.format_begin(stream_, dc, usings);
+    : stream_(s), preamble_(preamble), postamble_(postamble), usings_(usings) {
+    formatter_.format_begin(stream_, preamble_, usings);
 }
 
 scoped_boilerplate_formatter::~scoped_boilerplate_formatter() {
-    if (!decoration_properties_)
-        return;
-
-    const auto& dc(*decoration_properties_);
-    formatter_.format_end(stream_, dc);
+    formatter_.format_end(stream_, postamble_);
 }
 
 }

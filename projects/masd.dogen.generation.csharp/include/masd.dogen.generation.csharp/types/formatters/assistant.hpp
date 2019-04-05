@@ -74,15 +74,9 @@ public:
      */
     /**@{*/
     std::string get_qualified_name(const coding::meta_model::name& n) const;
-    std::string get_qualified_name(const coding::meta_model::name_tree& nt) const;
+    std::string
+    get_qualified_name(const coding::meta_model::name_tree& nt) const;
     /**@}*/
-
-private:
-    /**
-     * @brief Returns the decoration properties for a given yarn element.
-     */
-    const dogen::extraction::decoration_properties&
-    get_decoration_properties(const coding::meta_model::element& e) const;
 
 public:
     /**
@@ -105,7 +99,8 @@ public:
     make_namespaces(const coding::meta_model::name& n) const;
 
 public:
-    std::string reference_equals(const coding::meta_model::attribute& attr) const;
+    std::string
+    reference_equals(const coding::meta_model::attribute& attr) const;
 
 public:
     /**

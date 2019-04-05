@@ -28,7 +28,6 @@
 #include <list>
 #include <iosfwd>
 #include <string>
-#include "masd.dogen.extraction/types/decoration_properties.hpp"
 
 namespace masd::dogen::extraction::cpp {
 
@@ -61,16 +60,14 @@ private:
      * The preamble is made up of the modeline, any potential code
      * generation marker and the licence.
      */
-    void format_preamble(std::ostream& s,
-        const decoration_properties& dc) const;
+    void format_preamble(std::ostream& s, const std::string& preamble) const;
 
     /**
      * @brief Formats the file's postamble.
      *
      * The postamble is composed of a bottom modeline, if any.
      */
-    void format_postamble(std::ostream& s,
-        const decoration_properties& dc) const;
+    void format_postamble(std::ostream& s, const std::string& postamble) const;
 
     /**
      * @brief Formats the starting part of the header guards.
@@ -94,14 +91,14 @@ public:
     /**
      * @brief Formats the initial section of boilerplate.
      */
-    void format_begin(std::ostream& s, const decoration_properties& dc,
+    void format_begin(std::ostream& s, const std::string& preamble,
         const std::list<std::string>& includes,
         const std::string& header_guard) const;
 
     /**
      * @brief Formats the end of the boilerplate.
      */
-    void format_end(std::ostream& s, const decoration_properties& dc,
+    void format_end(std::ostream& s, const std::string& postamble,
         const std::string& header_guard) const;
 
 private:

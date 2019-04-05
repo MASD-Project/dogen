@@ -363,20 +363,17 @@ bool assistant::is_test_data_enabled() const {
     return is_facet_enabled(traits::facet());
 }
 
-const dogen::extraction::decoration_properties& assistant::
-get_decoration_properties(const coding::meta_model::element& e) const {
-    return e.decoration_properties();
-}
-
 dogen::extraction::cpp::scoped_boilerplate_formatter assistant::
 make_scoped_boilerplate_formatter(const coding::meta_model::element& e) {
-    const auto dp(get_decoration_properties(e));
     const auto& art_props(artefact_properties_);
     const auto& deps(art_props.inclusion_dependencies());
     const auto& hg(art_props.header_guard());
 
     using dogen::extraction::cpp::scoped_boilerplate_formatter;
-    return scoped_boilerplate_formatter(stream(), dp, deps, hg);
+    return scoped_boilerplate_formatter(stream(),
+        e.decoration() ? e.decoration()->preamble() : empty,
+        e.decoration() ? e.decoration()->postamble() : empty,
+        deps, hg);
 }
 
 dogen::extraction::cpp::scoped_namespace_formatter
@@ -386,20 +383,11 @@ assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
         true/*add_new_line*/, requires_nested_namespaces());
 }
 
-void assistant::
-make_decoration_preamble(const dogen::extraction::comment_styles cs,
-    const coding::meta_model::element& e) {
-    const auto dp(get_decoration_properties(e));
-    make_decoration_preamble(cs, dp);
-}
-
-void assistant::make_decoration_preamble(
-    const dogen::extraction::comment_styles /*cs*/,
-    const boost::optional<dogen::extraction::decoration_properties> dc) {
-    if (!dc)
+void assistant::make_decoration_preamble(const coding::meta_model::element& e) {
+    if (!e.decoration())
         return;
 
-    stream() << dc->preamble();
+    stream() << e.decoration()->preamble();
 }
 
 void assistant::comment(const std::string& c) {

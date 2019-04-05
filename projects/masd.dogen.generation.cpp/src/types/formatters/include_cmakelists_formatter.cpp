@@ -96,8 +96,7 @@ format(const context& ctx, const coding::meta_model::element& e) const {
     const auto& c(a.as<fabric::cmakelists>(e));
 
     {
-        const auto cs(dogen::extraction::comment_styles::shell_style);
-        a.make_decoration_preamble(cs, e);
+        a.make_decoration_preamble(e);
 a.stream() << "add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/" << c.source_directory_name() << ")" << std::endl;
        if (a.is_tests_enabled()) {
 a.stream() << "add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/" << c.tests_directory_name() << ")" << std::endl;

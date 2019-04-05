@@ -76,8 +76,7 @@ format(const context& ctx, const coding::meta_model::element& e) const {
     const auto& c(a.as<fabric::cmakelists>(e));
 
     {
-        const auto cs(dogen::extraction::comment_styles::shell_style);
-        a.make_decoration_preamble(cs, e);
+        a.make_decoration_preamble(e);
 #>
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/<#= c.source_directory_name() #>)
 <#+

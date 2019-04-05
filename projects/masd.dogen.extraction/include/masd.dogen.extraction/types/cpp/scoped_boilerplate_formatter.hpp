@@ -28,8 +28,6 @@
 #include <list>
 #include <iosfwd>
 #include <string>
-#include <boost/optional.hpp>
-#include "masd.dogen.extraction/types/decoration_properties.hpp"
 #include "masd.dogen.extraction/types/cpp/boilerplate_formatter.hpp"
 
 namespace masd::dogen::extraction::cpp {
@@ -41,7 +39,7 @@ class scoped_boilerplate_formatter {
 public:
     scoped_boilerplate_formatter(
         std::ostream& s,
-        const boost::optional<decoration_properties>& odp,
+        const std::string& preamble, const std::string& postamble,
         const std::list<std::string>& includes,
         const std::string& header_guard);
 
@@ -49,7 +47,8 @@ public:
 
 private:
     std::ostream& stream_;
-    const boost::optional<decoration_properties> decoration_properties_;
+    const std::string preamble_;
+    const std::string postamble_;
     const std::list<std::string> includes_;
     const std::string header_guard_;
     const boilerplate_formatter formatter_;
