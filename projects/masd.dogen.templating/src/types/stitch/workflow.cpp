@@ -124,13 +124,13 @@ workflow::create_artefacts(const annotations::type_repository& atrp,
     const annotations::annotation_factory& af,
     const annotations::annotation_expander& ae,
     const masd::dogen::extraction::repository& drp, const std::forward_list<
-    boost::filesystem::path>& text_template_paths) const {
+    boost::filesystem::path>& text_template_paths,
+    const std::unordered_map<std::string, std::string>& kvps) const {
 
-    const auto external_keys = std::unordered_map<std::string, std::string>();
     std::list<extraction::meta_model::artefact> r;
     const instantiator inst(atrp, af, ae, drp);
     for (const auto& p : text_template_paths)
-        r.push_front(inst.instantiate(p, external_keys));
+        r.push_front(inst.instantiate(p, kvps));
 
     return r;
 }
@@ -145,7 +145,8 @@ void workflow::write_artefacts(
     BOOST_LOG_SEV(lg, debug) << "Finished writing.";
 }
 
-void workflow::execute(const boost::filesystem::path& p) const {
+void workflow::execute(const boost::filesystem::path& p,
+    const std::unordered_map<std::string, std::string>& kvps) const {
     BOOST_LOG_SEV(lg, debug) << "Executing workflow against: "
                              << p.generic_string();
 
@@ -162,7 +163,7 @@ void workflow::execute(const boost::filesystem::path& p) const {
     annotations::annotation_expander ae(data_dirs, alrp, atrp, cm);
 
     properties_factory pf(atrp, frp);
-    const auto artefacts(create_artefacts(atrp, af, ae, frp, paths));
+    const auto artefacts(create_artefacts(atrp, af, ae, frp, paths, kvps));
     write_artefacts(artefacts);
 
     BOOST_LOG_SEV(lg, debug) << "Finished executing workflow.";

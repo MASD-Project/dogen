@@ -5,6 +5,7 @@
     "masd.injection.model_modules": "dogen.hello_world",
     "masd.injection.input_technical_space": "cpp",
     "masd.injection.reference": "cpp.std",
+    "masd.injection.reference": "masd",
     "masd.extraction.delete_extra_files": "true",
     "masd.extraction.delete_empty_directories": "true",
     "masd.generation.cpp.enabled": "true",

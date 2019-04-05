@@ -24,12 +24,7 @@
     "masd.generation.cpp.visual_studio.project.enabled": "false",
     "masd.generation.cpp.visual_studio.solution.enabled": "false",
     "masd.generation.csharp.enabled": "false",
-    "masd.annotations.profile": "dogen.disable_common_facets",
-    "masd.generation.decoration.enabled": "true",
-    "masd.generation.decoration.licence_name": "masd.gpl_v3",
-    "masd.generation.decoration.modeline_group_name": "masd.emacs",
-    "masd.generation.decoration.copyright_notice": "Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>",
-    "masd.generation.decoration.marker_name": "masd.basic"
+    "masd.annotations.profile": "dogen.disable_common_facets"
   },
   "elements": [
     {

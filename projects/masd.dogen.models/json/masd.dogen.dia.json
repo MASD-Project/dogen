@@ -6,6 +6,7 @@
     "masd.injection.reference": "cpp.builtins",
     "masd.injection.reference": "cpp.std",
     "masd.injection.reference": "cpp.boost",
+    "masd.injection.reference": "masd",
     "masd.extraction.delete_extra_files": "true",
     "masd.extraction.delete_empty_directories": "true",
     "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",

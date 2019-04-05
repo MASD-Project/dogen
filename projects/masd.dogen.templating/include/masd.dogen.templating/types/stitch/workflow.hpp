@@ -29,6 +29,7 @@
 #include <vector>
 #include <string>
 #include <forward_list>
+#include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
@@ -105,7 +106,8 @@ private:
         const annotations::annotation_expander& ae,
         const masd::dogen::extraction::repository& drp,
         const std::forward_list<boost::filesystem::path>&
-        text_template_paths) const;
+        text_template_paths,
+        const std::unordered_map<std::string, std::string>& kvps) const;
 
     /**
      * @brief Writes all of the artefacts to the filesystem.
@@ -125,7 +127,8 @@ public:
      *
      * @li if @code p is a file, code-generates the stitch template.
      */
-    void execute(const boost::filesystem::path& p) const;
+    void execute(const boost::filesystem::path& p,
+        const std::unordered_map<std::string, std::string>& kvps) const;
 
 private:
     const bool compatibility_mode_;

@@ -104,6 +104,7 @@
 #DOGEN masd.injection.reference=cpp.std
 #DOGEN masd.injection.reference=masd.dogen
 #DOGEN masd.injection.reference=masd.dogen.annotations
+#DOGEN masd.injection.reference=masd
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*

@@ -6,6 +6,7 @@
     "masd.injection.reference": "cpp.boost",
     "masd.injection.reference": "cpp.std",
     "masd.injection.reference": "masd.dogen.extraction",
+    "masd.injection.reference": "masd",
     "masd.injection.input_technical_space": "cpp",
     "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
     "masd.extraction.ignore_files_matching_regex": ".*/test/.*",

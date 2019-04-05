@@ -119,11 +119,7 @@
 #DOGEN masd.generation.cpp.visual_studio.project.enabled=false
 #DOGEN masd.generation.cpp.visual_studio.solution.enabled=false
 #DOGEN masd.generation.csharp.enabled=false
-#DOGEN masd.annotations.profile=dogen.disable_common_facets
-#DOGEN masd.generation.decoration.enabled=true
-#DOGEN masd.generation.decoration.licence_name=masd.gpl_v3
-#DOGEN masd.generation.decoration.modeline_group_name=masd.emacs
-#DOGEN masd.generation.decoration.copyright_notice=Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;#</dia:string>
+#DOGEN masd.annotations.profile=dogen.disable_common_facets#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

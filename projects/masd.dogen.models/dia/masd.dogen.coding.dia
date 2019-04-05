@@ -801,6 +801,7 @@ etc.).
 #DOGEN masd.injection.reference=masd.dogen.annotations
 #DOGEN masd.injection.reference=masd.dogen.tracing
 #DOGEN masd.injection.reference=masd.dogen.extraction
+#DOGEN masd.injection.reference=masd
 #DOGEN masd.injection.input_technical_space=cpp
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*

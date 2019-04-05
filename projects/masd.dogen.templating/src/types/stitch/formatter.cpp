@@ -53,7 +53,7 @@ const std::string empty_line("Line has no content.");
 const std::string unsupported_block_type("Block type is unsupported: ");
 
 // FIXME: hacks for now
-// #define USE_NEW_DECORATION
+#define USE_NEW_DECORATION
 const std::string include("#include ");
 const std::string decoration_preamble_key(
     "masd.generation.decoration.preamble");
@@ -196,6 +196,7 @@ formatter::format(const text_template& tt) const {
             s, ss.containing_namespaces(), false/*create_anonymous_namespace*/,
             true/*add_new_line_*/, true/*nested_namespaces*/);
 
+        BOOST_LOG_SEV(lg, debug) << "Total lines: " << tt.body().lines().size();
         for (const auto& l : tt.body().lines()) {
             if (l.blocks().empty()) {
                 BOOST_LOG_SEV(lg, error) << empty_line;

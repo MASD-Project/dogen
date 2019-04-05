@@ -238,6 +238,7 @@ level.
 #DOGEN masd.injection.model_modules=dogen.hello_world
 #DOGEN masd.injection.input_technical_space=cpp
 #DOGEN masd.injection.reference=cpp.std
+#DOGEN masd.injection.reference=masd
 #DOGEN masd.extraction.delete_extra_files=true
 #DOGEN masd.extraction.delete_empty_directories=true
 #DOGEN masd.generation.cpp.enabled=true

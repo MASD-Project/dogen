@@ -33,6 +33,16 @@ auto lg(logger_factory("orchestration.generator"));
 const std::string stitch_ext(".stitch");
 const std::string unsupported_extension("Extension is unsupported: ");
 
+const std::string empty;
+const std::string decoration_preamble_key(
+    "masd.generation.decoration.preamble");
+const std::string decoration_postamble_key(
+    "masd.generation.decoration.postamble");
+const auto kvps = std::unordered_map<std::string, std::string> {
+    { decoration_preamble_key, empty },
+    { decoration_postamble_key, empty }
+};
+
 }
 
 namespace masd::dogen::orchestration {
@@ -43,7 +53,7 @@ void weaver::weave(const configuration& cfg,
 
     const bool cm(cfg.model_processing().compatibility_mode_enabled());
     masd::dogen::templating::stitch::workflow w(cm);
-    w.execute(target);
+    w.execute(target, kvps);
 
     BOOST_LOG_SEV(lg, debug) << "Started weaving.";
 }

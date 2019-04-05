@@ -48,7 +48,7 @@ namespace {
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.formatters.assistant"));
 
-const bool use_new_decoration = false;
+const bool use_new_decoration = true;
 
 const std::string empty;
 const std::string by_ref_text("&");

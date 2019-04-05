@@ -54,6 +54,58 @@
       "untyped_value": [
         "false"
       ]
+    },
+    {
+      "name": {
+        "simple": "enabled",
+        "qualified": "masd.generation.decoration.enabled"
+      },
+      "archetype_location": {
+        "kernel": "formatters"
+      },
+      "template_kind": "instance",
+      "untyped_value": [
+        "true"
+      ]
+    },
+    {
+      "name": {
+        "simple": "licence_name",
+        "qualified": "masd.generation.decoration.licence_name"
+      },
+      "archetype_location": {
+        "kernel": "formatters"
+      },
+      "template_kind": "instance",
+      "untyped_value": [
+        "masd.gpl_v3"
+      ]
+    },
+    {
+      "name": {
+        "simple": "modeline_group_name",
+        "qualified": "masd.generation.decoration.modeline_group_name"
+      },
+      "archetype_location": {
+        "kernel": "formatters"
+      },
+      "template_kind": "instance",
+      "untyped_value": [
+        "masd.emacs"
+      ]
+    },
+    {
+      "name": {
+        "simple": "copyright_notice",
+        "qualified": "masd.generation.decoration.copyright_notice"
+      },
+      "archetype_location": {
+        "kernel": "formatters"
+      },
+      "template_kind": "instance",
+      "untyped_value": [
+        "Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>"
+      ]
     }
   ]
 }

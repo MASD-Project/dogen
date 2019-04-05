@@ -36,6 +36,15 @@ const std::string second_text_block_in_mixed_line("End mixed line.");
 const std::string expression_block("some_function()");
 const std::string standard_control_block("unsigned int i");
 
+const std::string decoration_preamble_key(
+    "masd.generation.decoration.preamble");
+const std::string decoration_postamble_key(
+    "masd.generation.decoration.postamble");
+const auto external_keys = std::unordered_map<std::string, std::string> {
+    { decoration_preamble_key, empty },
+    { decoration_postamble_key, empty }
+};
+
 }
 
 namespace masd::dogen::templating::test {
@@ -49,6 +58,7 @@ make_text_template_with_trivial_properties() const {
 
     text_template r;
     r.properties().stitching_properties(sp);
+    r.supplied_kvps(external_keys);
     return r;
 }
 

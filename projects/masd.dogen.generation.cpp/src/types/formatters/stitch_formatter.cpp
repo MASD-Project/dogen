@@ -98,7 +98,7 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
         {
             decoration_postamble_key,
             e.decoration() ?  e.decoration()->postamble() : empty
-        },
+        }
     };
 
     auto r(instantiator_.instantiate(stitch_template, external_keys));
