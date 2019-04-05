@@ -158,6 +158,9 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
          */
         handle_wale_template(r);
 
+
+
+
         /*
          * Finally, we compute an output path for our template,
          * taking into account its input path and any relevant

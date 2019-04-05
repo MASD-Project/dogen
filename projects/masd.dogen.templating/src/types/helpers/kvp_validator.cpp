@@ -18,12 +18,45 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/unordered_set_io.hpp"
+#include "masd.dogen.templating/types/helpers/validation_error.hpp"
 #include "masd.dogen.templating/types/helpers/kvp_validator.hpp"
+
+namespace {
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory("templating.helpers.validator"));
+
+const std::string key_error("Expected key not supplied: ");
+
+}
 
 namespace masd::dogen::templating::helpers {
 
-bool kvp_validator::operator==(const kvp_validator& /*rhs*/) const {
-    return true;
+void kvp_validator::
+validate(const std::unordered_set<std::string>& expected_keys,
+    const std::unordered_map<std::string, std::string>& kvps) const {
+
+    std::unordered_set<std::string> s;
+    for (const auto& kvp : kvps)
+        s.insert(kvp.first);
+
+    BOOST_LOG_SEV(lg, debug) << " Supplied keys: " << s;
+    BOOST_LOG_SEV(lg, debug) << " Expected keys: " << expected_keys;
+
+    /*
+     * Ensure that all expected keys have been supplied. We may have
+     * received additional keys, but we don't care about those.
+     */
+    for (const auto ek : expected_keys) {
+        const auto i(s.find(ek));
+        if (i == s.end()) {
+            BOOST_LOG_SEV(lg, error) << key_error + ek;
+            BOOST_THROW_EXCEPTION(validation_error(key_error + ek));
+        }
+    }
 }
 
 }

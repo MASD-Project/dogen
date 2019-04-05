@@ -18,12 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.templating/types/helpers/resolution_error.hpp"
 #include "masd.dogen.templating/types/helpers/kvp_resolver.hpp"
+
+namespace {
+
+using namespace masd::dogen::utility::log;
+static logger lg(logger_factory("templating.helpers.resolver"));
+
+const std::string key_not_found("Key not found: ");
+
+}
 
 namespace masd::dogen::templating::helpers {
 
-bool kvp_resolver::operator==(const kvp_resolver& /*rhs*/) const {
-    return true;
+kvp_resolver::
+kvp_resolver(const std::unordered_map<std::string, std::string>& kvps)
+    : kvps_(kvps) {}
+
+std::string kvp_resolver::resolve(const std::string& k) const {
+    const auto i (kvps_.find(k));
+    if (i == kvps_.end()) {
+        BOOST_LOG_SEV(lg, error) << key_not_found << k;
+        BOOST_THROW_EXCEPTION(resolution_error(key_not_found + k));
+    }
+    return i->second;
 }
 
 }

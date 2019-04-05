@@ -25,24 +25,20 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <unordered_map>
 
 namespace masd::dogen::templating::helpers {
 
 class kvp_resolver final {
 public:
-    kvp_resolver() = default;
-    kvp_resolver(const kvp_resolver&) = default;
-    kvp_resolver(kvp_resolver&&) = default;
-    ~kvp_resolver() = default;
-    kvp_resolver& operator=(const kvp_resolver&) = default;
+    kvp_resolver(const std::unordered_map<std::string, std::string>& kvps);
 
 public:
-    bool operator==(const kvp_resolver& rhs) const;
-    bool operator!=(const kvp_resolver& rhs) const {
-        return !this->operator==(rhs);
-    }
+    std::string resolve(const std::string& k) const;
 
+private:
+    const std::unordered_map<std::string, std::string>& kvps_;
 };
 
 }

@@ -25,24 +25,16 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <unordered_set>
+#include <unordered_map>
 
 namespace masd::dogen::templating::helpers {
 
 class kvp_validator final {
 public:
-    kvp_validator() = default;
-    kvp_validator(const kvp_validator&) = default;
-    kvp_validator(kvp_validator&&) = default;
-    ~kvp_validator() = default;
-    kvp_validator& operator=(const kvp_validator&) = default;
-
-public:
-    bool operator==(const kvp_validator& rhs) const;
-    bool operator!=(const kvp_validator& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    void validate(const std::unordered_set<std::string>& expected_keys,
+        const std::unordered_map<std::string, std::string>& kvps) const;
 };
 
 }
