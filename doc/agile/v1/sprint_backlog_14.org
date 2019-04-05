@@ -12,14 +12,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-05 Fri 11:44]
+#+CAPTION: Clock summary at [2019-04-05 Fri 12:05]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *66:15* |       |       | 100.0 |
+| *Total time*                                              | *66:37* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 66:15   |       |       | 100.0 |
-| Active                                                    |         | 66:15 |       | 100.0 |
+| Stories                                                   | 66:37   |       |       | 100.0 |
+| Active                                                    |         | 66:37 |       | 100.0 |
 | Edit release notes for previous sprint                    |         |       |  1:47 |   2.7 |
 | Sprint and product backlog grooming                       |         |       |  7:07 |  10.7 |
 | Create a video demo for the previous sprint's features    |         |       |  3:11 |   4.8 |
@@ -29,10 +29,10 @@
 | Rename "language" to "technical space"                    |         |       |  7:22 |  11.1 |
 | Add intrinsic technical space ownership                   |         |       |  1:12 |   1.8 |
 | Integrate report-ci with dogen                            |         |       |  2:09 |   3.2 |
-| Promote extraction entities to meta-model elements        |         |       | 30:56 |  46.7 |
+| Promote extraction entities to meta-model elements        |         |       | 30:56 |  46.4 |
 | Move all utility formatters from extraction to generation |         |       |  0:27 |   0.7 |
 | Remove annotations from stitch templates                  |         |       |  1:17 |   1.9 |
-| Supply decorations as a stitch parameter                  |         |       |  2:18 |   3.5 |
+| Supply decorations as a stitch parameter                  |         |       |  2:40 |   4.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -515,6 +515,7 @@ includes with model elements. This is captured as a separate story.
 
 *** STARTED Supply decorations as a stitch parameter                  :story:
      :LOGBOOK:
+     CLOCK: [2019-04-05 Fri 11:43]--[2019-04-05 Fri 12:05] =>  0:22
      CLOCK: [2019-04-05 Fri 10:38]--[2019-04-05 Fri 11:42] =>  1:04
      CLOCK: [2019-04-05 Fri 10:24]--[2019-04-05 Fri 10:37] =>  0:13
      CLOCK: [2019-04-05 Fri 10:08]--[2019-04-05 Fri 10:23] =>  0:15
@@ -534,6 +535,8 @@ Notes:
   how that's done in wale.
 - add a way to supply KVPs from the outside world into stitch template
   instantiation.
+- no decoration for root module
+- cmake files are not going via boilerplate.
 
 *** Associate includes with model elements                            :story:
 

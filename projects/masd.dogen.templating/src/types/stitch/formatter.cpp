@@ -179,7 +179,7 @@ formatter::format(const text_template& tt) const {
 #ifdef USE_NEW_DECORATION
         const auto preamble(rs.resolve(decoration_preamble_key));
         if (!preamble.empty())
-            s << preamble << std::endl;
+            s << preamble;
 
         for (const auto& inc : id)
             s << include << inc << std::endl;

@@ -48,6 +48,8 @@ namespace {
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.formatters.assistant"));
 
+const bool use_new_decoration = false;
+
 const std::string empty;
 const std::string by_ref_text("&");
 const std::string void_keyword_text("void");
@@ -400,8 +402,12 @@ void assistant::make_decoration_preamble(
     if (!dc)
         return;
 
-    dogen::extraction::decoration_formatter fmt;
-    fmt.format_preamble(stream(), cs, *dc);
+    if (use_new_decoration)
+        stream() << dc->preamble();
+    else {
+        dogen::extraction::decoration_formatter fmt;
+        fmt.format_preamble(stream(), cs, *dc);
+    }
 }
 
 void assistant::comment(const std::string& c) {
