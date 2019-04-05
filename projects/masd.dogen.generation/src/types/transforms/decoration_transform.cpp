@@ -281,7 +281,7 @@ make_global_decoration(const helpers::decoration_repository drp,
     const auto gm(get_generation_marker(drp, dc.marker_name()));
     const auto r(make_decoration(l, ml, gm, dc.copyright_notices(), ts));
 
-    BOOST_LOG_SEV(lg, debug) << "Created global decoration: " << r;
+    BOOST_LOG_SEV(lg, trace) << "Created global decoration: " << r;
     return r;
 }
 
@@ -415,7 +415,6 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
         const auto gd(make_global_decoration(drp, root_dc, ts));
         root_decorations[ts] = gd;
 
-        BOOST_LOG_SEV(lg, trace) << "Generated: " << gd;
         if (ts == mts) {
             BOOST_LOG_SEV(lg, trace) << "Populating the root module "
                                      <<  "decoration.";
