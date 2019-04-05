@@ -87,7 +87,7 @@ format_expression_block_line(const std::string& stream_name,
 }
 
 void formatter::format_variable_block_line(const std::string& l,
-    const resolver& rs, std::ostream& s) const {
+    const helpers::kvp_resolver& rs, std::ostream& s) const {
     const auto v(rs.resolve(l));
     s << v;
 }
@@ -121,7 +121,7 @@ void formatter::format_mixed_content_line(const std::string& stream_name,
 }
 
 void formatter::format_line_with_single_block(const std::string& stream_name,
-    const line& l, const resolver& rs, std::ostream& s) const {
+    const line& l, const helpers::kvp_resolver& rs, std::ostream& s) const {
     const auto& b(l.blocks().front());
     const auto& c(b.content());
     switch(b.type()) {
@@ -163,7 +163,7 @@ formatter::format(const text_template& tt) const {
         BOOST_THROW_EXCEPTION(formatting_error(empty_stream_name));
     }
 
-    resolver rs(tt.supplied_kvps());
+    helpers::kvp_resolver rs(tt.supplied_kvps());
     std::ostringstream s;
     {
         const auto& id(ss.inclusion_dependencies());

@@ -28,9 +28,9 @@
 #include <iosfwd>
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.annotations/types/archetype_location.hpp"
+#include "masd.dogen.templating/types/helpers/kvp_resolver.hpp"
 #include "masd.dogen.templating/types/stitch/line.hpp"
 #include "masd.dogen.templating/types/stitch/text_template.hpp"
-#include "masd.dogen.templating/types/stitch/resolver.hpp"
 
 namespace masd::dogen::templating::stitch {
 
@@ -56,7 +56,7 @@ private:
      * @brief Formats a line with just a variable block.
      */
     void format_variable_block_line(const std::string& l,
-        const resolver& rs, std::ostream& s) const;
+        const helpers::kvp_resolver& rs, std::ostream& s) const;
 
     /**
      * @brief Formats a line with just a standard control block.
@@ -76,7 +76,7 @@ private:
      * @brief Formats a line with a single block.
      */
     void format_line_with_single_block(const std::string& stream_name,
-        const line& l, const resolver& rs, std::ostream& s) const;
+        const line& l, const helpers::kvp_resolver& rs, std::ostream& s) const;
 
 public:
     /**

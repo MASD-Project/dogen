@@ -319,21 +319,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "stitch::resolver",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "stitch::resolution_error",
-      "documentation": "An error occurred when trying to resolve a key.\n",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "ConfigurableViaKvps",
       "documentation": "Element has the ability to recieve configuration arguments as a set of KVPs.\n",
       "stereotypes": [

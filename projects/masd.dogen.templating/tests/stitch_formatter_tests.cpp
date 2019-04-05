@@ -25,7 +25,7 @@
 #include "masd.dogen.extraction/io/meta_model/artefact_io.hpp"
 #include "masd.dogen.templating/test/mock_text_template_factory.hpp"
 #include "masd.dogen.templating/io/stitch/text_template_io.hpp"
-#include "masd.dogen.templating/types/stitch/resolution_error.hpp"
+#include "masd.dogen.templating/types/helpers/resolution_error.hpp"
 #include "masd.dogen.templating/types/stitch/formatting_error.hpp"
 #include "masd.dogen.templating/types/stitch/formatter.hpp"
 
@@ -45,10 +45,12 @@ const std::string multiple_text_lines_content(
 stream_ << "This is line numnber: 1" << std::endl;
 )");
 
-const std::string single_expression_block_line(R"(stream_ << some_function() << std::endl;
+const std::string single_expression_block_line(
+    R"(stream_ << some_function() << std::endl;
 )");
 
-const std::string multiple_expression_block_lines(R"(stream_ << some_function() + i0 << std::endl;
+const std::string multiple_expression_block_lines(
+    R"(stream_ << some_function() + i0 << std::endl;
 stream_ << some_function() + i1 << std::endl;
 )");
 
@@ -59,17 +61,20 @@ const std::string multiple_standard_control_block_lines(R"(unsigned int i0;
 unsigned int i1;
 )");
 
-const std::string text_expression_text_single_line(R"(stream_ << "This is line numnber: 0" << std::endl;
+const std::string text_expression_text_single_line(
+    R"(stream_ << "This is line numnber: 0" << std::endl;
 stream_ << some_function() << std::endl;
 stream_ << "This is line numnber: 0" << std::endl;
 )");
 
-const std::string expression_text_expression_single_line(R"(stream_ << some_function() << std::endl;
+const std::string expression_text_expression_single_line(
+    R"(stream_ << some_function() << std::endl;
 stream_ << "This is line numnber: 0" << std::endl;
 stream_ << some_function() << std::endl;
 )");
 
-const std::string text_expression_text_multi_line(R"(stream_ << "This is line numnber: 0" << std::endl;
+const std::string text_expression_text_multi_line(
+    R"(stream_ << "This is line numnber: 0" << std::endl;
 stream_ << "This is line numnber: 1" << std::endl;
 stream_ << some_function() + i0 << std::endl;
 stream_ << some_function() + i1 << std::endl;
@@ -77,7 +82,8 @@ stream_ << "This is line numnber: 0" << std::endl;
 stream_ << "This is line numnber: 1" << std::endl;
 )");
 
-const std::string expression_text_expression_multi_line(R"(stream_ << some_function() + i0 << std::endl;
+const std::string expression_text_expression_multi_line(
+    R"(stream_ << some_function() + i0 << std::endl;
 stream_ << some_function() + i1 << std::endl;
 stream_ << "This is line numnber: 0" << std::endl;
 stream_ << "This is line numnber: 1" << std::endl;
@@ -85,17 +91,20 @@ stream_ << some_function() + i0 << std::endl;
 stream_ << some_function() + i1 << std::endl;
 )");
 
-const std::string text_standard_control_text_single_line(R"(stream_ << "This is line numnber: 0" << std::endl;
+const std::string text_standard_control_text_single_line(
+    R"(stream_ << "This is line numnber: 0" << std::endl;
 unsigned int i0;
 stream_ << "This is line numnber: 0" << std::endl;
 )");
 
-const std::string standard_control_text_standard_control_single_line(R"(unsigned int i0;
+const std::string standard_control_text_standard_control_single_line(
+    R"(unsigned int i0;
 stream_ << "This is line numnber: 0" << std::endl;
 unsigned int i0;
 )");
 
-const std::string text_standard_control_text_multi_line(R"(stream_ << "This is line numnber: 0" << std::endl;
+const std::string text_standard_control_text_multi_line(
+    R"(stream_ << "This is line numnber: 0" << std::endl;
 stream_ << "This is line numnber: 1" << std::endl;
 unsigned int i0;
 unsigned int i1;
@@ -103,7 +112,8 @@ stream_ << "This is line numnber: 0" << std::endl;
 stream_ << "This is line numnber: 1" << std::endl;
 )");
 
-const std::string standard_control_text_standard_control_multi_line(R"(unsigned int i0;
+const std::string standard_control_text_standard_control_multi_line(
+    R"(unsigned int i0;
 unsigned int i1;
 stream_ << "This is line numnber: 0" << std::endl;
 stream_ << "This is line numnber: 1" << std::endl;
@@ -120,7 +130,8 @@ const std::string mixed_content_multi_line(
 stream_ << "Start mixed line." << my_variable.print() << "End mixed line." << std::endl;
 )");
 
-const std::string complex_structure(R"(stream_ << "This is line numnber: 0" << std::endl;
+const std::string complex_structure(
+    R"(stream_ << "This is line numnber: 0" << std::endl;
 stream_ << "This is line numnber: 1" << std::endl;
 stream_ << "This is line numnber: 2" << std::endl;
 unsigned int i0;
@@ -180,7 +191,7 @@ masd::dogen::templating::test::mock_text_template_factory factory;
 
 using masd::dogen::utility::test::contains_checker;
 using masd::dogen::templating::stitch::formatting_error;
-using masd::dogen::templating::stitch::resolution_error;
+using masd::dogen::templating::helpers::resolution_error;
 
 BOOST_AUTO_TEST_SUITE(stitch_formatter_tests)
 
