@@ -19,7 +19,6 @@
  *
  */
 #include "masd.dogen.tracing/types/tracer.hpp"
-#include "masd.dogen.extraction/types/repository.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
@@ -33,7 +32,6 @@ context::context(
     const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& archetype_location_repository,
     const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& annotation_factory,
     const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& annotation_expander,
-    const boost::shared_ptr<masd::dogen::extraction::repository>& formatting_repository,
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer,
     const std::unordered_map<std::string, masd::dogen::generation::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties,
     const boost::filesystem::path& output_directory_path)
@@ -41,7 +39,6 @@ context::context(
       archetype_location_repository_(archetype_location_repository),
       annotation_factory_(annotation_factory),
       annotation_expander_(annotation_expander),
-      formatting_repository_(formatting_repository),
       tracer_(tracer),
       intra_backend_segment_properties_(intra_backend_segment_properties),
       output_directory_path_(output_directory_path) { }
@@ -76,14 +73,6 @@ const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& context:
 
 void context::annotation_expander(const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& v) {
     annotation_expander_ = v;
-}
-
-const boost::shared_ptr<masd::dogen::extraction::repository>& context::formatting_repository() const {
-    return formatting_repository_;
-}
-
-void context::formatting_repository(const boost::shared_ptr<masd::dogen::extraction::repository>& v) {
-    formatting_repository_ = v;
 }
 
 const boost::shared_ptr<masd::dogen::tracing::tracer>& context::tracer() const {

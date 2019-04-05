@@ -54,7 +54,6 @@
 #include "masd.dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/formattable.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/io/initializer.hpp"
-#include "masd.dogen.generation.csharp/types/fabric/decoration_expander.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/registrar_error.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/location_error.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/model_expander.hpp"

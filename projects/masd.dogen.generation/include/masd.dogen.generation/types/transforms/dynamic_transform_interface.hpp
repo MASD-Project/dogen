@@ -27,7 +27,6 @@
 
 #include <string>
 #include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.extraction/types/decoration_properties_factory.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.generation/types/transforms/context_fwd.hpp"
 
@@ -42,9 +41,7 @@ public:
 
 public:
     virtual std::string id() const = 0;
-    virtual void apply(const context& ctx,
-        const masd::dogen::extraction::decoration_properties_factory& dpf,
-        meta_model::model& m) const = 0;
+    virtual void apply(const context& ctx, meta_model::model& m) const = 0;
 };
 
 }

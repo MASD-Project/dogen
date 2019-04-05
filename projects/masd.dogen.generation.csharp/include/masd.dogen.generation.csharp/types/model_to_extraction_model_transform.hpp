@@ -34,7 +34,6 @@
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
-#include "masd.dogen.extraction/types/repository.hpp"
 #include "masd.dogen.extraction/types/decoration_properties_factory.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
@@ -70,7 +69,6 @@ private:
     std::list<extraction::meta_model::artefact>
     format(const annotations::type_repository& atrp,
         const annotations::annotation_factory& af,
-        const dogen::extraction::repository& drp,
         const formattables::model& fm) const;
 
 public:

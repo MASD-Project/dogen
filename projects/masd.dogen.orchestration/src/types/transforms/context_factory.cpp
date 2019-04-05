@@ -28,7 +28,6 @@
 #include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
 #include "masd.dogen.tracing/types/tracer.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
-#include "masd.dogen.extraction/types/repository_factory.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
@@ -204,14 +203,6 @@ context context_factory::make_context(const configuration& cfg,
         boost::make_shared<coding::helpers::mapping_set_repository>(
             msrpf.make(data_dirs)));
     r.coding_context().mapping_repository(msrp);
-
-    /*
-     * Setup the extraction repository.
-     */
-    extraction::repository_factory frpf;
-    const auto frp(
-        boost::make_shared<extraction::repository>(frpf.make(data_dirs)));
-    r.generation_context().formatting_repository(frp);
 
     /*
      * Setup the tracer. Note that we do it regardless of whether

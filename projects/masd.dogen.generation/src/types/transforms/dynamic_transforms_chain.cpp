@@ -50,15 +50,6 @@ dynamic_transform_registrar& dynamic_transforms_chain::registrar() {
     return *registrar_;
 }
 
-dogen::extraction::decoration_properties_factory
-dynamic_transforms_chain::create_decoration_properties_factory(
-    const context& ctx, const annotations::annotation& ra) {
-    using masd::dogen::extraction::decoration_properties_factory;
-    decoration_properties_factory
-        r(*ctx.type_repository(), *ctx.formatting_repository(), ra);
-    return r;
-}
-
 void dynamic_transforms_chain::
 apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_chain_tracer stp(lg, "dynamic transforms chain",
@@ -67,10 +58,8 @@ apply(const context& ctx, meta_model::model& m) {
     auto& rg(registrar());
     rg.validate();
 
-    const auto& ra(m.root_module()->annotation());
-    const auto dpf(create_decoration_properties_factory(ctx, ra));
     for (const auto& dt : rg.dynamic_transforms())
-        dt->apply(ctx, dpf, m);
+        dt->apply(ctx, m);
 
     stp.end_chain(m);
 }

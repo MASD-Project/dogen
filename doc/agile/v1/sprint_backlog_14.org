@@ -12,24 +12,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-05 Fri 19:24]
+#+CAPTION: Clock summary at [2019-04-05 Fri 19:41]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *72:25* |       |       | 100.0 |
+| *Total time*                                              | *72:41* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 72:25   |       |       | 100.0 |
-| Active                                                    |         | 72:25 |       | 100.0 |
+| Stories                                                   | 72:41   |       |       | 100.0 |
+| Active                                                    |         | 72:41 |       | 100.0 |
 | Edit release notes for previous sprint                    |         |       |  1:47 |   2.5 |
 | Sprint and product backlog grooming                       |         |       |  7:07 |   9.8 |
 | Create a video demo for the previous sprint's features    |         |       |  3:11 |   4.4 |
 | Fix issues with emacs                                     |         |       |  2:42 |   3.7 |
 | Create a basic "project plan"                             |         |       |  2:08 |   2.9 |
 | Simplify qualified name                                   |         |       |  3:39 |   5.0 |
-| Rename "language" to "technical space"                    |         |       |  7:22 |  10.2 |
+| Rename "language" to "technical space"                    |         |       |  7:22 |  10.1 |
 | Add intrinsic technical space ownership                   |         |       |  1:12 |   1.7 |
 | Integrate report-ci with dogen                            |         |       |  2:09 |   3.0 |
-| Promote extraction entities to meta-model elements        |         |       | 34:55 |  48.2 |
+| Promote extraction entities to meta-model elements        |         |       | 35:11 |  48.4 |
 | Move all utility formatters from extraction to generation |         |       |  0:27 |   0.6 |
 | Remove annotations from stitch templates                  |         |       |  1:17 |   1.8 |
 | Supply decorations as a stitch parameter                  |         |       |  4:29 |   6.2 |
@@ -341,6 +341,7 @@ submitted a PR. Help him integrate it with Dogen.
 
 *** STARTED Promote extraction entities to meta-model elements        :story:
     :LOGBOOK:
+    CLOCK: [2019-04-05 Fri 19:25]--[2019-04-05 Fri 19:41] =>  0:16
     CLOCK: [2019-04-05 Fri 18:30]--[2019-04-05 Fri 19:24] =>  0:54
     CLOCK: [2019-04-05 Fri 14:51]--[2019-04-05 Fri 17:56] =>  3:05
     CLOCK: [2019-04-04 Thu 14:13]--[2019-04-04 Thu 14:49] =>  0:36

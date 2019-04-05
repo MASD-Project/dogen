@@ -60,10 +60,10 @@ std::string model_to_extraction_model_transform::id() const {
     return traits::backend();
 }
 
-std::list<extraction::meta_model::artefact> model_to_extraction_model_transform::
+std::list<extraction::meta_model::artefact>
+model_to_extraction_model_transform::
 format(const annotations::type_repository& /*atrp*/,
     const annotations::annotation_factory& /*af*/,
-    const dogen::extraction::repository& /*drp*/,
     const formattables::model& fm) const {
     formatters::workflow wf;
     return wf.execute(fm);
@@ -149,9 +149,8 @@ model_to_extraction_model_transform::apply(
      * Code-generate all artefacts.
      */
     extraction::meta_model::model r;
-    const auto& drp(*ctx.formatting_repository());
     const auto& af(*ctx.annotation_factory());
-    r.artefacts(format(atrp, af, drp, fm));
+    r.artefacts(format(atrp, af, fm));
     r.managed_directories().push_back(l.project_path());
 
     BOOST_LOG_SEV(lg, debug) << "Finished backend.";

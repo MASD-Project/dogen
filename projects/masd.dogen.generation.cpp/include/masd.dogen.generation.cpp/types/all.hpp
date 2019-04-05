@@ -77,7 +77,6 @@
 #include "masd.dogen.generation.cpp/types/formatters/io/pair_helper.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/wale_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/build_files_factory.hpp"
-#include "masd.dogen.generation.cpp/types/fabric/decoration_expander.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/entry_point_factory.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/odb_options_factory.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/cpp_standards.hpp"

@@ -896,13 +896,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "fabric::decoration_expander",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "fabric::dynamic_transform",
       "stereotypes": [
         "masd::handcrafted"

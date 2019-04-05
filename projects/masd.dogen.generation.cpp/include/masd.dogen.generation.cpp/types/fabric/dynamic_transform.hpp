@@ -39,14 +39,9 @@ private:
     void expand_injection(const annotations::type_repository& atrp,
         generation::meta_model::model& m) const;
 
-    void expand_decoration(
-        const dogen::extraction::decoration_properties_factory& dpf,
-        generation::meta_model::model& m) const;
-
 public:
     std::string id() const override;
     void apply(const generation::transforms::context& ctx,
-        const dogen::extraction::decoration_properties_factory& dpf,
         generation::meta_model::model& m) const override;
 };
 

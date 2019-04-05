@@ -31,7 +31,6 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.tracing/types/tracer_fwd.hpp"
-#include "masd.dogen.extraction/types/repository_fwd.hpp"
 #include "masd.dogen.annotations/types/type_repository_fwd.hpp"
 #include "masd.dogen.annotations/types/annotation_factory_fwd.hpp"
 #include "masd.dogen.annotations/types/annotation_expander_fwd.hpp"
@@ -51,7 +50,6 @@ public:
         const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& archetype_location_repository,
         const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& annotation_factory,
         const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& annotation_expander,
-        const boost::shared_ptr<masd::dogen::extraction::repository>& formatting_repository,
         const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer,
         const std::unordered_map<std::string, masd::dogen::generation::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties,
         const boost::filesystem::path& output_directory_path);
@@ -68,9 +66,6 @@ public:
 
     const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& annotation_expander() const;
     void annotation_expander(const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& v);
-
-    const boost::shared_ptr<masd::dogen::extraction::repository>& formatting_repository() const;
-    void formatting_repository(const boost::shared_ptr<masd::dogen::extraction::repository>& v);
 
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer() const;
     void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v);
@@ -91,7 +86,6 @@ private:
     boost::shared_ptr<masd::dogen::annotations::archetype_location_repository> archetype_location_repository_;
     boost::shared_ptr<masd::dogen::annotations::annotation_factory> annotation_factory_;
     boost::shared_ptr<masd::dogen::annotations::annotation_expander> annotation_expander_;
-    boost::shared_ptr<masd::dogen::extraction::repository> formatting_repository_;
     boost::shared_ptr<masd::dogen::tracing::tracer> tracer_;
     std::unordered_map<std::string, masd::dogen::generation::meta_model::intra_backend_segment_properties> intra_backend_segment_properties_;
     boost::filesystem::path output_directory_path_;

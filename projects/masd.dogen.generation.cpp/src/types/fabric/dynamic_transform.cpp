@@ -24,7 +24,6 @@
 #include "masd.dogen.generation/types/transforms/transformation_error.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/injector.hpp"
-#include "masd.dogen.generation.cpp/types/fabric/decoration_expander.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/dynamic_transform.hpp"
 
 namespace {
@@ -57,26 +56,17 @@ void dynamic_transform::expand_injection(
     i.inject(atrp, m);
 }
 
-void dynamic_transform::expand_decoration(
-    const dogen::extraction::decoration_properties_factory& dpf,
-    generation::meta_model::model& m) const {
-    decoration_expander de;
-    de.expand(dpf, m);
-}
-
 std::string dynamic_transform::id() const {
     return ::id;
 }
 
 void dynamic_transform::apply(const generation::transforms::context& ctx,
-    const dogen::extraction::decoration_properties_factory& dpf,
     generation::meta_model::model& m) const {
 
     if (!requires_expansion(m))
         return;
 
     expand_injection(*ctx.type_repository(), m);
-    expand_decoration(dpf, m);
 }
 
 }
