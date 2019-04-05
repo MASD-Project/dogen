@@ -44,25 +44,35 @@ public:
 
 public:
     properties(
-        const boost::filesystem::path& template_path,
         const std::unordered_set<std::string>& expected_keys,
-        const std::unordered_map<std::string, std::string>& supplied_kvps);
+        const std::unordered_map<std::string, std::string>& supplied_kvps,
+        const boost::filesystem::path& template_path);
 
 public:
-    const boost::filesystem::path& template_path() const;
-    boost::filesystem::path& template_path();
-    void template_path(const boost::filesystem::path& v);
-    void template_path(const boost::filesystem::path&& v);
-
+    /**
+     * @brief Set of keys that are expected to be supplied.
+     */
+    /**@{*/
     const std::unordered_set<std::string>& expected_keys() const;
     std::unordered_set<std::string>& expected_keys();
     void expected_keys(const std::unordered_set<std::string>& v);
     void expected_keys(const std::unordered_set<std::string>&& v);
+    /**@}*/
 
+    /**
+     * @brief Key value pairs that were supplied for instantiation.
+     */
+    /**@{*/
     const std::unordered_map<std::string, std::string>& supplied_kvps() const;
     std::unordered_map<std::string, std::string>& supplied_kvps();
     void supplied_kvps(const std::unordered_map<std::string, std::string>& v);
     void supplied_kvps(const std::unordered_map<std::string, std::string>&& v);
+    /**@}*/
+
+    const boost::filesystem::path& template_path() const;
+    boost::filesystem::path& template_path();
+    void template_path(const boost::filesystem::path& v);
+    void template_path(const boost::filesystem::path&& v);
 
 public:
     bool operator==(const properties& rhs) const;
@@ -75,9 +85,9 @@ public:
     properties& operator=(properties other);
 
 private:
-    boost::filesystem::path template_path_;
     std::unordered_set<std::string> expected_keys_;
     std::unordered_map<std::string, std::string> supplied_kvps_;
+    boost::filesystem::path template_path_;
 };
 
 }

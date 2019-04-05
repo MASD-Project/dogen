@@ -23,13 +23,6 @@
 
 namespace {
 
-boost::filesystem::path
-create_boost_filesystem_path(const unsigned int position) {
-    std::ostringstream s;
-    s << "/a/path/number_" << position;
-    return boost::filesystem::path(s.str());
-}
-
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
@@ -52,6 +45,13 @@ std::unordered_map<std::string, std::string> create_std_unordered_map_std_string
     return r;
 }
 
+boost::filesystem::path
+create_boost_filesystem_path(const unsigned int position) {
+    std::ostringstream s;
+    s << "/a/path/number_" << position;
+    return boost::filesystem::path(s.str());
+}
+
 }
 
 namespace masd::dogen::templating::wale {
@@ -60,9 +60,9 @@ properties_generator::properties_generator() : position_(0) { }
 
 void properties_generator::
 populate(const unsigned int position, result_type& v) {
-    v.template_path(create_boost_filesystem_path(position + 0));
-    v.expected_keys(create_std_unordered_set_std_string(position + 1));
-    v.supplied_kvps(create_std_unordered_map_std_string_std_string(position + 2));
+    v.expected_keys(create_std_unordered_set_std_string(position + 0));
+    v.supplied_kvps(create_std_unordered_map_std_string_std_string(position + 1));
+    v.template_path(create_boost_filesystem_path(position + 2));
 }
 
 properties_generator::result_type

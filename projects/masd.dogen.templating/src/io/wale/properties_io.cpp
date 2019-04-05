@@ -67,9 +67,9 @@ namespace masd::dogen::templating::wale {
 std::ostream& operator<<(std::ostream& s, const properties& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::templating::wale::properties\"" << ", "
-      << "\"template_path\": " << "\"" << v.template_path().generic_string() << "\"" << ", "
       << "\"expected_keys\": " << v.expected_keys() << ", "
-      << "\"supplied_kvps\": " << v.supplied_kvps()
+      << "\"supplied_kvps\": " << v.supplied_kvps() << ", "
+      << "\"template_path\": " << "\"" << v.template_path().generic_string() << "\""
       << " }";
     return(s);
 }

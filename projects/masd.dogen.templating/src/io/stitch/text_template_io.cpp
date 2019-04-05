@@ -34,6 +34,20 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -55,6 +69,8 @@ namespace masd::dogen::templating::stitch {
 std::ostream& operator<<(std::ostream& s, const text_template& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::templating::stitch::text_template\"" << ", "
+      << "\"expected_keys\": " << v.expected_keys() << ", "
+      << "\"supplied_kvps\": " << v.supplied_kvps() << ", "
       << "\"input_path\": " << "\"" << v.input_path().generic_string() << "\"" << ", "
       << "\"output_path\": " << "\"" << v.output_path().generic_string() << "\"" << ", "
       << "\"properties\": " << v.properties() << ", "

@@ -125,7 +125,6 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
 
     BOOST_LOG_SEV(lg, debug) << "Processing: " << input_path.generic_string();
 
-    text_template r;
     try {
         /*
          * We first start by parsing the raw text templates into their
@@ -133,6 +132,7 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
          * tagged values portions of the text template.
          */
         parser p;
+        text_template r;
         r.body(p.parse(text_template_as_string));
 
         /*

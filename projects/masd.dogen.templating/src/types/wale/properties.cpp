@@ -23,51 +23,35 @@
 namespace masd::dogen::templating::wale {
 
 properties::properties(properties&& rhs)
-    : template_path_(std::move(rhs.template_path_)),
-      expected_keys_(std::move(rhs.expected_keys_)),
-      supplied_kvps_(std::move(rhs.supplied_kvps_)) { }
+    : expected_keys_(std::move(rhs.expected_keys_)),
+      supplied_kvps_(std::move(rhs.supplied_kvps_)),
+      template_path_(std::move(rhs.template_path_)) { }
 
 properties::properties(
-    const boost::filesystem::path& template_path,
     const std::unordered_set<std::string>& expected_keys,
-    const std::unordered_map<std::string, std::string>& supplied_kvps)
-    : template_path_(template_path),
-      expected_keys_(expected_keys),
-      supplied_kvps_(supplied_kvps) { }
+    const std::unordered_map<std::string, std::string>& supplied_kvps,
+    const boost::filesystem::path& template_path)
+    : expected_keys_(expected_keys),
+      supplied_kvps_(supplied_kvps),
+      template_path_(template_path) { }
 
 void properties::swap(properties& other) noexcept {
     using std::swap;
-    swap(template_path_, other.template_path_);
     swap(expected_keys_, other.expected_keys_);
     swap(supplied_kvps_, other.supplied_kvps_);
+    swap(template_path_, other.template_path_);
 }
 
 bool properties::operator==(const properties& rhs) const {
-    return template_path_ == rhs.template_path_ &&
-        expected_keys_ == rhs.expected_keys_ &&
-        supplied_kvps_ == rhs.supplied_kvps_;
+    return expected_keys_ == rhs.expected_keys_ &&
+        supplied_kvps_ == rhs.supplied_kvps_ &&
+        template_path_ == rhs.template_path_;
 }
 
 properties& properties::operator=(properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const boost::filesystem::path& properties::template_path() const {
-    return template_path_;
-}
-
-boost::filesystem::path& properties::template_path() {
-    return template_path_;
-}
-
-void properties::template_path(const boost::filesystem::path& v) {
-    template_path_ = v;
-}
-
-void properties::template_path(const boost::filesystem::path&& v) {
-    template_path_ = std::move(v);
 }
 
 const std::unordered_set<std::string>& properties::expected_keys() const {
@@ -100,6 +84,22 @@ void properties::supplied_kvps(const std::unordered_map<std::string, std::string
 
 void properties::supplied_kvps(const std::unordered_map<std::string, std::string>&& v) {
     supplied_kvps_ = std::move(v);
+}
+
+const boost::filesystem::path& properties::template_path() const {
+    return template_path_;
+}
+
+boost::filesystem::path& properties::template_path() {
+    return template_path_;
+}
+
+void properties::template_path(const boost::filesystem::path& v) {
+    template_path_ = v;
+}
+
+void properties::template_path(const boost::filesystem::path&& v) {
+    template_path_ = std::move(v);
 }
 
 }

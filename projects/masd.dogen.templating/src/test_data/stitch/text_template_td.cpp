@@ -25,6 +25,28 @@
 
 namespace {
 
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
+
+std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int position) {
+    std::unordered_set<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(create_std_string(position + i));
+    }
+    return r;
+}
+
+std::unordered_map<std::string, std::string> create_std_unordered_map_std_string_std_string(unsigned int position) {
+    std::unordered_map<std::string, std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_std_string(position + i)));
+    }
+    return r;
+}
+
 boost::filesystem::path
 create_boost_filesystem_path(const unsigned int position) {
     std::ostringstream s;
@@ -35,20 +57,6 @@ create_boost_filesystem_path(const unsigned int position) {
 masd::dogen::templating::stitch::properties
 create_masd_dogen_templating_stitch_properties(const unsigned int position) {
     return masd::dogen::templating::stitch::properties_generator::create(position);
-}
-
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
-}
-
-std::unordered_map<std::string, std::string> create_std_unordered_map_std_string_std_string(unsigned int position) {
-    std::unordered_map<std::string, std::string> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_std_string(position + i)));
-    }
-    return r;
 }
 
 masd::dogen::templating::stitch::text_template_body
@@ -64,11 +72,13 @@ text_template_generator::text_template_generator() : position_(0) { }
 
 void text_template_generator::
 populate(const unsigned int position, result_type& v) {
-    v.input_path(create_boost_filesystem_path(position + 0));
-    v.output_path(create_boost_filesystem_path(position + 1));
-    v.properties(create_masd_dogen_templating_stitch_properties(position + 2));
-    v.variables(create_std_unordered_map_std_string_std_string(position + 3));
-    v.body(create_masd_dogen_templating_stitch_text_template_body(position + 4));
+    v.expected_keys(create_std_unordered_set_std_string(position + 0));
+    v.supplied_kvps(create_std_unordered_map_std_string_std_string(position + 1));
+    v.input_path(create_boost_filesystem_path(position + 2));
+    v.output_path(create_boost_filesystem_path(position + 3));
+    v.properties(create_masd_dogen_templating_stitch_properties(position + 4));
+    v.variables(create_std_unordered_map_std_string_std_string(position + 5));
+    v.body(create_masd_dogen_templating_stitch_text_template_body(position + 6));
 }
 
 text_template_generator::result_type

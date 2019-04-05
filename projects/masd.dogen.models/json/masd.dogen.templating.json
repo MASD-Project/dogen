@@ -42,19 +42,14 @@
     },
     {
       "name": "wale::properties",
+      "stereotypes": [
+        "ConfigurableViaKvps"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "template_path",
           "type": "boost::filesystem::path"
-        },
-        {
-          "name": "expected_keys",
-          "type": "std::unordered_set<std::string>"
-        },
-        {
-          "name": "supplied_kvps",
-          "type": "std::unordered_map<std::string, std::string>"
         }
       ]
     },
@@ -152,6 +147,9 @@
     {
       "name": "stitch::text_template",
       "documentation": "Domain representation of a stitch template.\n",
+      "stereotypes": [
+        "ConfigurableViaKvps"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -354,6 +352,26 @@
         "masd::exception"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "ConfigurableViaKvps",
+      "documentation": "Element has the ability to recieve configuration arguments as a set of KVPs.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "expected_keys",
+          "type": "std::unordered_set<std::string>",
+          "documentation": "Set of keys that are expected to be supplied.\n"
+        },
+        {
+          "name": "supplied_kvps",
+          "type": "std::unordered_map<std::string, std::string>",
+          "documentation": "Key value pairs that were supplied for instantiation.\n"
+        }
+      ]
     }
   ]
 }

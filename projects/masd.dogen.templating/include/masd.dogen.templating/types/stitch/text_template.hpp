@@ -28,6 +28,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
+#include <unordered_set>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.templating/types/stitch/properties.hpp"
 #include "masd.dogen.templating/types/stitch/text_template_body.hpp"
@@ -48,6 +49,8 @@ public:
 
 public:
     text_template(
+        const std::unordered_set<std::string>& expected_keys,
+        const std::unordered_map<std::string, std::string>& supplied_kvps,
         const boost::filesystem::path& input_path,
         const boost::filesystem::path& output_path,
         const masd::dogen::templating::stitch::properties& properties,
@@ -55,6 +58,26 @@ public:
         const masd::dogen::templating::stitch::text_template_body& body);
 
 public:
+    /**
+     * @brief Set of keys that are expected to be supplied.
+     */
+    /**@{*/
+    const std::unordered_set<std::string>& expected_keys() const;
+    std::unordered_set<std::string>& expected_keys();
+    void expected_keys(const std::unordered_set<std::string>& v);
+    void expected_keys(const std::unordered_set<std::string>&& v);
+    /**@}*/
+
+    /**
+     * @brief Key value pairs that were supplied for instantiation.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, std::string>& supplied_kvps() const;
+    std::unordered_map<std::string, std::string>& supplied_kvps();
+    void supplied_kvps(const std::unordered_map<std::string, std::string>& v);
+    void supplied_kvps(const std::unordered_map<std::string, std::string>&& v);
+    /**@}*/
+
     /**
      * @brief Path where the template was read out from, if any.
      */
@@ -116,6 +139,8 @@ public:
     text_template& operator=(text_template other);
 
 private:
+    std::unordered_set<std::string> expected_keys_;
+    std::unordered_map<std::string, std::string> supplied_kvps_;
     boost::filesystem::path input_path_;
     boost::filesystem::path output_path_;
     masd::dogen::templating::stitch::properties properties_;
