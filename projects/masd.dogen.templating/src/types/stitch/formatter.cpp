@@ -22,6 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.extraction/types/utility_formatter.hpp"
+#include "masd.dogen.extraction/types/indent_filter.hpp"
 #include "masd.dogen.extraction/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "masd.dogen.extraction/types/cpp/scoped_namespace_formatter.hpp"
 #include "masd.dogen.templating/io/stitch/block_types_io.hpp"
@@ -50,6 +51,14 @@ const std::string endl("std::endl;");
 const std::string empty_stream_name("Stream name cannot be empty.");
 const std::string empty_line("Line has no content.");
 const std::string unsupported_block_type("Block type is unsupported: ");
+
+// FIXME: hacks for now
+// #define USE_NEW_DECORATION
+const std::string include("#include ");
+const std::string decoration_preamble_key(
+    "masd.generation.decoration.preamble");
+const std::string decoration_postamble_key(
+    "masd.generation.decoration.postamble");
 
 }
 
@@ -167,9 +176,21 @@ formatter::format(const text_template& tt) const {
     std::ostringstream s;
     {
         const auto& id(ss.inclusion_dependencies());
+#ifdef USE_NEW_DECORATION
+        const auto preamble(rs.resolve(decoration_preamble_key));
+        if (!preamble.empty())
+            s << preamble << std::endl;
+
+        for (const auto& inc : id)
+            s << include << inc << std::endl;
+
+        if (!id.empty())
+            s << masd::dogen::extraction::manage_blank_lines << std::endl;
+#else
         masd::dogen::extraction::cpp::scoped_boilerplate_formatter
             sbf(s, tt.properties().decoration_properties(), id,
                 empty_header_guard);
+#endif
 
         masd::dogen::extraction::cpp::scoped_namespace_formatter snf(
             s, ss.containing_namespaces(), false/*create_anonymous_namespace*/,
@@ -184,6 +205,12 @@ formatter::format(const text_template& tt) const {
             else
                 format_mixed_content_line(stream_variable_name, l, s);
         }
+
+#ifdef USE_NEW_DECORATION
+        const auto postamble(rs.resolve(decoration_postamble_key));
+        if (!postamble.empty())
+            s << postamble << std::endl;
+#endif
     }
 
     extraction::meta_model::artefact r;

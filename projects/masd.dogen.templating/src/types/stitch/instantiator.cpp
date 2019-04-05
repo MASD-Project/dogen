@@ -43,6 +43,7 @@ const std::string wale_key("stitch.wale.template_instantiation_result");
 
 const std::string empty_template("Template has no content: ");
 const std::string duplicate_variable("Attempt to insert duplicate variable: ");
+const std::string duplicate_key("Attempt to insert duplicate key: ");
 
 }
 
@@ -134,6 +135,20 @@ void instantiator::handle_wale_template(text_template& tt) const {
     }
 }
 
+void instantiator::
+merge_kvps(const std::unordered_map<std::string, std::string>& kvps,
+    text_template& tt) const {
+
+    for (const auto& pair : kvps) {
+        const auto inserted(tt.supplied_kvps().insert(pair).second);
+        if (!inserted) {
+            const auto& k(pair.first);
+            BOOST_LOG_SEV(lg, error) << duplicate_key << k;
+            BOOST_THROW_EXCEPTION(instantiation_error(duplicate_key + k));
+        }
+    }
+}
+
 void instantiator::validate_kvps(text_template& tt) const {
     helpers::kvp_validator v;
     v.validate(tt.expected_keys(), tt.supplied_kvps());
@@ -141,7 +156,8 @@ void instantiator::validate_kvps(text_template& tt) const {
 
 text_template
 instantiator::create_text_template(const boost::filesystem::path& input_path,
-    const std::string& text_template_as_string) const {
+    const std::string& text_template_as_string,
+    const std::unordered_map<std::string, std::string>& kvps) const {
 
     BOOST_LOG_SEV(lg, debug) << "Processing: " << input_path.generic_string();
 
@@ -154,6 +170,12 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
         parser p;
         text_template r;
         r.body(p.parse(text_template_as_string));
+
+        /*
+         * Merge in all of the externally supplied KVPs, if any.
+         */
+        if (!kvps.empty())
+            merge_kvps(kvps, r);
 
         /*
          * Get all of the variables used by the template.
@@ -211,12 +233,13 @@ instantiator::format_text_template(const text_template& tt) const {
 }
 
 extraction::meta_model::artefact
-instantiator::instantiate(const boost::filesystem::path& input_path) const {
+instantiator::instantiate(const boost::filesystem::path& input_path,
+    const std::unordered_map<std::string, std::string>& kvps) const {
     BOOST_LOG_SEV(lg, debug) << "Instantiating: "
                              << input_path.generic_string();
 
     const auto s(read_text_template(input_path));
-    const auto tt(create_text_template(input_path, s));
+    const auto tt(create_text_template(input_path, s, kvps));
     const auto r(format_text_template(tt));
 
     BOOST_LOG_SEV(lg, debug) << "Instantiated.";

@@ -31,7 +31,10 @@ static logger lg(logger_factory("generation.cpp.formatters.stitch_formatter"));
 
 const std::string empty;
 const std::string stitch_extension(".stitch");
-
+const std::string decoration_preamble_key(
+    "masd.generation.decoration.preamble");
+const std::string decoration_postamble_key(
+    "masd.generation.decoration.postamble");
 
 }
 
@@ -87,7 +90,18 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
     /*
      * Since the template exists, we can instantiate it.
      */
-    auto r(instantiator_.instantiate(stitch_template));
+    const auto external_keys = std::unordered_map<std::string, std::string> {
+        {
+            decoration_preamble_key,
+            e.decoration() ?  e.decoration()->preamble() : empty
+        },
+        {
+            decoration_postamble_key,
+            e.decoration() ?  e.decoration()->postamble() : empty
+        },
+    };
+
+    auto r(instantiator_.instantiate(stitch_template, external_keys));
     r.overwrite(a.new_artefact_properties().overwrite());
 
     extraction::meta_model::operation op;

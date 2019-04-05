@@ -26,6 +26,7 @@
 #endif
 
 #include <string>
+#include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
@@ -76,6 +77,12 @@ private:
     void handle_wale_template(text_template& tt) const;
 
     /**
+     * @brief Merge external KVPs with existing KVPs.
+     */
+    void merge_kvps(const std::unordered_map<std::string, std::string>& kvps,
+        text_template& tt) const;
+
+    /**
      * @brief Validate the supplied KVPs.
      */
     void validate_kvps(text_template& tt) const;
@@ -85,7 +92,8 @@ private:
      */
     text_template create_text_template(
         const boost::filesystem::path& input_path,
-        const std::string& text_template_as_string) const;
+        const std::string& text_template_as_string,
+        const std::unordered_map<std::string, std::string>& kvps) const;
 
     /**
      * @brief Formats the supplied text template.
@@ -95,7 +103,8 @@ private:
 
 public:
     extraction::meta_model::artefact
-    instantiate(const boost::filesystem::path& input_path) const;
+    instantiate(const boost::filesystem::path& input_path,
+        const std::unordered_map<std::string, std::string>& kvps) const;
 
 private:
     const annotations::annotation_factory& annotation_factory_;

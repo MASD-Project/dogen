@@ -26,7 +26,7 @@
 
 namespace {
 
-bool use_new_decoration = false;
+const bool use_new_decoration = false;
 
 }
 

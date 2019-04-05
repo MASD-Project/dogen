@@ -126,10 +126,11 @@ workflow::create_artefacts(const annotations::type_repository& atrp,
     const masd::dogen::extraction::repository& drp, const std::forward_list<
     boost::filesystem::path>& text_template_paths) const {
 
+    const auto external_keys = std::unordered_map<std::string, std::string>();
     std::list<extraction::meta_model::artefact> r;
     const instantiator inst(atrp, af, ae, drp);
     for (const auto& p : text_template_paths)
-        r.push_front(inst.instantiate(p));
+        r.push_front(inst.instantiate(p, external_keys));
 
     return r;
 }

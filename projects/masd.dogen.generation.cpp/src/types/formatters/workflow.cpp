@@ -57,8 +57,9 @@ cpp::formatters::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-const coding::meta_model::artefact_properties& workflow::get_artefact_properties(
-    const coding::meta_model::element& e, const std::string& archetype) const {
+const coding::meta_model::artefact_properties&
+workflow::get_artefact_properties(const coding::meta_model::element& e,
+    const std::string& archetype) const {
 
     const auto& ap(e.artefact_properties());
     const auto i(ap.find(archetype));
@@ -144,7 +145,8 @@ workflow::format(
 std::list<extraction::meta_model::artefact> workflow::
 execute(const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element, const formattables::model& fm) const {
-    BOOST_LOG_SEV(lg, debug) << "Started formatting. Model " << fm.name().qualified().dot();
+    BOOST_LOG_SEV(lg, debug) << "Started formatting. Model "
+                             << fm.name().qualified().dot();
     std::list<extraction::meta_model::artefact> r;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
