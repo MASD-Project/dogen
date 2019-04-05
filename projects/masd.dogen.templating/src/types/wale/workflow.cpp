@@ -25,7 +25,7 @@
 #include "masd.dogen.templating/io/wale/properties_io.hpp"
 #include "masd.dogen.templating/types/wale/key_extractor.hpp"
 #include "masd.dogen.templating/types/wale/formatter.hpp"
-#include "masd.dogen.templating/types/wale/validator.hpp"
+#include "masd.dogen.templating/types/helpers/kvp_validator.hpp"
 #include "masd.dogen.templating/types/wale/workflow.hpp"
 
 namespace {
@@ -83,8 +83,9 @@ std::string workflow::format(const text_template& tt) const {
 }
 
 void workflow::validate(const text_template& tt) const {
-    validator v;
-    v.validate(tt);
+    helpers::kvp_validator v;
+    const auto& p(tt.properties());
+    v.validate(p.expected_keys(), p.supplied_kvps());
 }
 
 text_template workflow::create_text_template(const properties& props) const {

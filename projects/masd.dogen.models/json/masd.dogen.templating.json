@@ -75,21 +75,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "wale::validator",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "wale::validation_error",
-      "documentation": "An error occurred whilst validating.\n",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "wale::formatting_error",
       "documentation": "An error occurred whilst formatting.\n",
       "stereotypes": [
