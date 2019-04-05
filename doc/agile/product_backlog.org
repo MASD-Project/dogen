@@ -3879,6 +3879,47 @@ interfaces from other types (e.g. =interface= stereotype).
 
 Registrar coming out even when there is no inheritance.
 
+*** Registrar assumes references have serialisation enabled           :story:
+
+At present we are assuming that all references that are nom-proxy
+references have serialisation enabled. This is a problem because:
+
+- we re now disabling serialisation where possible unless we need it
+- as we move from the data directory into real models we will have a
+  number of models that will not require generation and so will not
+  have a registrar.
+
+We need to figure out a way to obtain an enablement map of referenced
+types. In theory we already have this because we do not add includes
+when a facet is off. However, something is not working quite right
+with registrar because we are including this file. Sample diff:
+
+: diff -u src/serialization/registrar_ser.cpp src/serialization/registrar_ser.cpp
+: Reason: Changed generated file.
+: ---  src/serialization/registrar_ser.cpp
+: +++  src/serialization/registrar_ser.cpp
+: @@ -26,6 +26,7 @@
+:  #include <boost/archive/binary_oarchive.hpp>
+:  #include <boost/archive/polymorphic_iarchive.hpp>
+:  #include <boost/archive/polymorphic_oarchive.hpp>
+: +#include "masd/serialization/registrar_ser.hpp"
+:  #include "masd.cpp_ref_impl.two_layers_with_objects/serialization/registrar_ser.hpp"
+:
+:  namespace masd::cpp_ref_impl::two_layers_with_objects {
+: @@ -32,18 +33,19 @@
+:
+:  template<typename Archive>
+: -void register_types(Archive&) {
+: +void register_types(Archive& ar) {
+: +    masd::register_types(ar);
+:  }
+:
+
+For now we did a quick hack to solve this problem and marked the MASD
+model as proxy:
+
+:    "masd.injection.is_proxy_model": true,
+
 *** Add meta-data to trigger inclusion/generation of =stdafx=         :story:
 
 No setting to add include for precompiled headers: =stdafx.h=

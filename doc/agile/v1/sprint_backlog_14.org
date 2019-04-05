@@ -515,6 +515,7 @@ includes with model elements. This is captured as a separate story.
 
 *** STARTED Supply decorations as a stitch parameter                  :story:
      :LOGBOOK:
+     CLOCK: [2019-04-05 Fri 13:01]--[2019-04-05 Fri 14:50] =>  1:49
      CLOCK: [2019-04-05 Fri 11:43]--[2019-04-05 Fri 12:05] =>  0:22
      CLOCK: [2019-04-05 Fri 10:38]--[2019-04-05 Fri 11:42] =>  1:04
      CLOCK: [2019-04-05 Fri 10:24]--[2019-04-05 Fri 10:37] =>  0:13
