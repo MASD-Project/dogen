@@ -28,7 +28,6 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "masd.dogen.extraction/types/decoration_properties.hpp"
 #include "masd.dogen.generation/types/meta_model/artefact_properties.hpp"
 #include "masd.dogen.generation/types/meta_model/local_archetype_location_properties.hpp"
 
@@ -46,16 +45,10 @@ public:
 
 public:
     generatable_properties(
-        const masd::dogen::extraction::decoration_properties& decoration_properties,
         const std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, masd::dogen::generation::meta_model::local_archetype_location_properties>& archetype_location_properties);
 
 public:
-    const masd::dogen::extraction::decoration_properties& decoration_properties() const;
-    masd::dogen::extraction::decoration_properties& decoration_properties();
-    void decoration_properties(const masd::dogen::extraction::decoration_properties& v);
-    void decoration_properties(const masd::dogen::extraction::decoration_properties&& v);
-
     const std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties>& artefact_properties() const;
     std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties>& artefact_properties();
     void artefact_properties(const std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties>& v);
@@ -77,7 +70,6 @@ public:
     generatable_properties& operator=(generatable_properties other);
 
 private:
-    masd::dogen::extraction::decoration_properties decoration_properties_;
     std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties> artefact_properties_;
     std::unordered_map<std::string, masd::dogen::generation::meta_model::local_archetype_location_properties> archetype_location_properties_;
 };

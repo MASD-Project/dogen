@@ -19,17 +19,11 @@
  *
  */
 #include <sstream>
-#include "masd.dogen.extraction/test_data/decoration_properties_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/artefact_properties_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/generatable_properties_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/local_archetype_location_properties_td.hpp"
 
 namespace {
-
-masd::dogen::extraction::decoration_properties
-create_masd_dogen_extraction_decoration_properties(const unsigned int position) {
-    return masd::dogen::extraction::decoration_properties_generator::create(position);
-}
 
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
@@ -71,9 +65,8 @@ generatable_properties_generator::generatable_properties_generator() : position_
 
 void generatable_properties_generator::
 populate(const unsigned int position, result_type& v) {
-    v.decoration_properties(create_masd_dogen_extraction_decoration_properties(position + 0));
-    v.artefact_properties(create_std_unordered_map_std_string_masd_dogen_generation_meta_model_artefact_properties(position + 1));
-    v.archetype_location_properties(create_std_unordered_map_std_string_masd_dogen_generation_meta_model_local_archetype_location_properties(position + 2));
+    v.artefact_properties(create_std_unordered_map_std_string_masd_dogen_generation_meta_model_artefact_properties(position + 0));
+    v.archetype_location_properties(create_std_unordered_map_std_string_masd_dogen_generation_meta_model_local_archetype_location_properties(position + 1));
 }
 
 generatable_properties_generator::result_type

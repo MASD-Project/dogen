@@ -23,23 +23,19 @@
 namespace masd::dogen::generation::meta_model {
 
 generatable_properties::generatable_properties(
-    const masd::dogen::extraction::decoration_properties& decoration_properties,
     const std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, masd::dogen::generation::meta_model::local_archetype_location_properties>& archetype_location_properties)
-    : decoration_properties_(decoration_properties),
-      artefact_properties_(artefact_properties),
+    : artefact_properties_(artefact_properties),
       archetype_location_properties_(archetype_location_properties) { }
 
 void generatable_properties::swap(generatable_properties& other) noexcept {
     using std::swap;
-    swap(decoration_properties_, other.decoration_properties_);
     swap(artefact_properties_, other.artefact_properties_);
     swap(archetype_location_properties_, other.archetype_location_properties_);
 }
 
 bool generatable_properties::operator==(const generatable_properties& rhs) const {
-    return decoration_properties_ == rhs.decoration_properties_ &&
-        artefact_properties_ == rhs.artefact_properties_ &&
+    return artefact_properties_ == rhs.artefact_properties_ &&
         archetype_location_properties_ == rhs.archetype_location_properties_;
 }
 
@@ -47,22 +43,6 @@ generatable_properties& generatable_properties::operator=(generatable_properties
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const masd::dogen::extraction::decoration_properties& generatable_properties::decoration_properties() const {
-    return decoration_properties_;
-}
-
-masd::dogen::extraction::decoration_properties& generatable_properties::decoration_properties() {
-    return decoration_properties_;
-}
-
-void generatable_properties::decoration_properties(const masd::dogen::extraction::decoration_properties& v) {
-    decoration_properties_ = v;
-}
-
-void generatable_properties::decoration_properties(const masd::dogen::extraction::decoration_properties&& v) {
-    decoration_properties_ = std::move(v);
 }
 
 const std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties>& generatable_properties::artefact_properties() const {

@@ -34,7 +34,6 @@
 #include "masd.dogen.coding/test_data/meta_model/enumeration_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/origin_types_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/modeline_group_td.hpp"
-#include "masd.dogen.extraction/test_data/decoration_properties_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/object_template_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/technical_space_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/generation_marker_td.hpp"
@@ -95,11 +94,6 @@ create_masd_dogen_coding_meta_model_technical_space(const unsigned int position)
     return masd::dogen::coding::meta_model::technical_space_generator::create(position);
 }
 
-masd::dogen::extraction::decoration_properties
-create_masd_dogen_extraction_decoration_properties(const unsigned int position) {
-    return masd::dogen::extraction::decoration_properties_generator::create(position);
-}
-
 masd::dogen::coding::meta_model::artefact_properties
 create_masd_dogen_coding_meta_model_artefact_properties(const unsigned int position) {
     return masd::dogen::coding::meta_model::artefact_properties_generator::create(position);
@@ -155,10 +149,9 @@ populate(const unsigned int position, result_type& v) {
     v.meta_name(create_masd_dogen_coding_meta_model_name(position + 8));
     v.intrinsic_technical_space(create_masd_dogen_coding_meta_model_technical_space(position + 9));
     v.is_element_extension(create_bool(position + 10));
-    v.decoration_properties(create_masd_dogen_extraction_decoration_properties(position + 11));
-    v.artefact_properties(create_std_unordered_map_std_string_masd_dogen_coding_meta_model_artefact_properties(position + 12));
-    v.archetype_location_properties(create_std_unordered_map_std_string_masd_dogen_coding_meta_model_local_archetype_location_properties(position + 13));
-    v.decoration(create_boost_optional_masd_dogen_coding_meta_model_decoration(position + 14));
+    v.artefact_properties(create_std_unordered_map_std_string_masd_dogen_coding_meta_model_artefact_properties(position + 11));
+    v.archetype_location_properties(create_std_unordered_map_std_string_masd_dogen_coding_meta_model_local_archetype_location_properties(position + 12));
+    v.decoration(create_boost_optional_masd_dogen_coding_meta_model_decoration(position + 13));
 }
 
 element_generator::result_type*

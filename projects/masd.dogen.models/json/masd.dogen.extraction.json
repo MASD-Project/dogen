@@ -79,32 +79,9 @@
       ]
     },
     {
-      "name": "decoration_properties",
-      "documentation": "Configuration pertaining to file decoration.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "preamble",
-          "type": "std::string"
-        },
-        {
-          "name": "postamble",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
       "name": "indent_filter",
       "stereotypes": [
         "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "building_error",
-      "documentation": "An error occurred while the factory was building.\n",
-      "stereotypes": [
-        "masd::exception"
       ],
       "fallback_element_type": "masd::object"
     },

@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.extraction/io/decoration_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/artefact_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/generatable_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/local_archetype_location_properties_io.hpp"
@@ -74,7 +73,6 @@ namespace masd::dogen::generation::meta_model {
 std::ostream& operator<<(std::ostream& s, const generatable_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::generation::meta_model::generatable_properties\"" << ", "
-      << "\"decoration_properties\": " << v.decoration_properties() << ", "
       << "\"artefact_properties\": " << v.artefact_properties() << ", "
       << "\"archetype_location_properties\": " << v.archetype_location_properties()
       << " }";

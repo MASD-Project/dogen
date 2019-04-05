@@ -71,7 +71,6 @@ public:
         const masd::dogen::coding::meta_model::name& meta_name,
         const masd::dogen::coding::meta_model::technical_space intrinsic_technical_space,
         const bool is_element_extension,
-        const masd::dogen::extraction::decoration_properties& decoration_properties,
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const boost::optional<masd::dogen::coding::meta_model::decoration>& decoration,

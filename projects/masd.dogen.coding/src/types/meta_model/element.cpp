@@ -26,7 +26,6 @@
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/io/meta_model/decoration_io.hpp"
 #include "masd.dogen.coding/io/meta_model/origin_types_io.hpp"
-#include "masd.dogen.extraction/io/decoration_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
 #include "masd.dogen.coding/io/meta_model/artefact_properties_io.hpp"
@@ -139,7 +138,6 @@ element::element(element&& rhs)
       meta_name_(std::move(rhs.meta_name_)),
       intrinsic_technical_space_(std::move(rhs.intrinsic_technical_space_)),
       is_element_extension_(std::move(rhs.is_element_extension_)),
-      decoration_properties_(std::move(rhs.decoration_properties_)),
       artefact_properties_(std::move(rhs.artefact_properties_)),
       archetype_location_properties_(std::move(rhs.archetype_location_properties_)),
       decoration_(std::move(rhs.decoration_)) { }
@@ -156,7 +154,6 @@ element::element(
     const masd::dogen::coding::meta_model::name& meta_name,
     const masd::dogen::coding::meta_model::technical_space intrinsic_technical_space,
     const bool is_element_extension,
-    const masd::dogen::extraction::decoration_properties& decoration_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const boost::optional<masd::dogen::coding::meta_model::decoration>& decoration)
@@ -171,7 +168,6 @@ element::element(
       meta_name_(meta_name),
       intrinsic_technical_space_(intrinsic_technical_space),
       is_element_extension_(is_element_extension),
-      decoration_properties_(decoration_properties),
       artefact_properties_(artefact_properties),
       archetype_location_properties_(archetype_location_properties),
       decoration_(decoration) { }
@@ -196,7 +192,6 @@ void element::to_stream(std::ostream& s) const {
       << "\"meta_name\": " << meta_name_ << ", "
       << "\"intrinsic_technical_space\": " << intrinsic_technical_space_ << ", "
       << "\"is_element_extension\": " << is_element_extension_ << ", "
-      << "\"decoration_properties\": " << decoration_properties_ << ", "
       << "\"artefact_properties\": " << artefact_properties_ << ", "
       << "\"archetype_location_properties\": " << archetype_location_properties_ << ", "
       << "\"decoration\": " << decoration_
@@ -216,7 +211,6 @@ void element::swap(element& other) noexcept {
     swap(meta_name_, other.meta_name_);
     swap(intrinsic_technical_space_, other.intrinsic_technical_space_);
     swap(is_element_extension_, other.is_element_extension_);
-    swap(decoration_properties_, other.decoration_properties_);
     swap(artefact_properties_, other.artefact_properties_);
     swap(archetype_location_properties_, other.archetype_location_properties_);
     swap(decoration_, other.decoration_);
@@ -234,7 +228,6 @@ bool element::compare(const element& rhs) const {
         meta_name_ == rhs.meta_name_ &&
         intrinsic_technical_space_ == rhs.intrinsic_technical_space_ &&
         is_element_extension_ == rhs.is_element_extension_ &&
-        decoration_properties_ == rhs.decoration_properties_ &&
         artefact_properties_ == rhs.artefact_properties_ &&
         archetype_location_properties_ == rhs.archetype_location_properties_ &&
         decoration_ == rhs.decoration_;
@@ -382,22 +375,6 @@ bool element::is_element_extension() const {
 
 void element::is_element_extension(const bool v) {
     is_element_extension_ = v;
-}
-
-const masd::dogen::extraction::decoration_properties& element::decoration_properties() const {
-    return decoration_properties_;
-}
-
-masd::dogen::extraction::decoration_properties& element::decoration_properties() {
-    return decoration_properties_;
-}
-
-void element::decoration_properties(const masd::dogen::extraction::decoration_properties& v) {
-    decoration_properties_ = v;
-}
-
-void element::decoration_properties(const masd::dogen::extraction::decoration_properties&& v) {
-    decoration_properties_ = std::move(v);
 }
 
 const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& element::artefact_properties() const {

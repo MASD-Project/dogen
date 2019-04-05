@@ -121,10 +121,6 @@
           "documentation": "If true, this element extends another element with the same id.\n"
         },
         {
-          "name": "decoration_properties",
-          "type": "extraction::decoration_properties"
-        },
-        {
           "name": "artefact_properties",
           "type": "std::unordered_map<std::string, artefact_properties>"
         },

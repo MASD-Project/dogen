@@ -510,10 +510,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "decoration_properties",
-          "type": "extraction::decoration_properties"
-        },
-        {
           "name": "artefact_properties",
           "type": "std::unordered_map<std::string, artefact_properties>"
         },

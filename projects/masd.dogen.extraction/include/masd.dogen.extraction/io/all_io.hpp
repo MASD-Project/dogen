@@ -32,7 +32,6 @@
 #include "masd.dogen.extraction/io/infix_configuration_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/artefact_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/operation_io.hpp"
-#include "masd.dogen.extraction/io/decoration_properties_io.hpp"
 #include "masd.dogen.extraction/io/helpers/files_by_status_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/operation_type_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/operation_reason_io.hpp"
