@@ -89,9 +89,8 @@ format(const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element, const annotations::type_repository& atrp,
     const annotations::annotation_factory& af,
     const annotations::annotation_expander& ae,
-    const dogen::extraction::repository& drp,
     const formattables::model& fm) const {
-    formatters::workflow wf(atrp, af, ae, drp);
+    formatters::workflow wf(atrp, af, ae);
     return wf.execute(enabled_archetype_for_element, fm);
 }
 
@@ -178,12 +177,11 @@ extraction::meta_model::model model_to_extraction_model_transform::apply(
      * Code-generate all artefacts.
      */
     extraction::meta_model::model r;
-    const auto& drp(*ctx.formatting_repository());
     const auto& af(*ctx.annotation_factory());
     const auto& ae(*ctx.annotation_expander());
     const auto& eafe(m.enabled_archetype_for_element());
 
-    r.artefacts(format(eafe, atrp, af, ae, drp, fm));
+    r.artefacts(format(eafe, atrp, af, ae, fm));
     r.managed_directories(managed_directories(l));
 
     BOOST_LOG_SEV(lg, debug) << "Finished backend.";

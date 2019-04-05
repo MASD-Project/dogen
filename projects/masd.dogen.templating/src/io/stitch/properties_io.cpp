@@ -19,20 +19,44 @@
  *
  */
 #include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "masd.dogen.templating/io/stitch/properties_io.hpp"
-#include "masd.dogen.extraction/io/decoration_properties_io.hpp"
-#include "masd.dogen.templating/io/stitch/stitching_properties_io.hpp"
 
-namespace boost {
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::extraction::decoration_properties>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+namespace std {
 
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->second) << "\"";
+        s << " } ]";
+    }
+    s << " ] ";
     return s;
 }
 
@@ -43,8 +67,12 @@ namespace masd::dogen::templating::stitch {
 std::ostream& operator<<(std::ostream& s, const properties& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::templating::stitch::properties\"" << ", "
-      << "\"decoration_properties\": " << v.decoration_properties() << ", "
-      << "\"stitching_properties\": " << v.stitching_properties()
+      << "\"stream_variable_name\": " << "\"" << tidy_up_string(v.stream_variable_name()) << "\"" << ", "
+      << "\"relative_output_directory\": " << "\"" << v.relative_output_directory().generic_string() << "\"" << ", "
+      << "\"inclusion_dependencies\": " << v.inclusion_dependencies() << ", "
+      << "\"containing_namespaces\": " << v.containing_namespaces() << ", "
+      << "\"wale_template\": " << "\"" << tidy_up_string(v.wale_template()) << "\"" << ", "
+      << "\"wale_kvps\": " << v.wale_kvps()
       << " }";
     return(s);
 }

@@ -23,24 +23,44 @@
 namespace masd::dogen::templating::stitch {
 
 properties::properties(properties&& rhs)
-    : decoration_properties_(std::move(rhs.decoration_properties_)),
-      stitching_properties_(std::move(rhs.stitching_properties_)) { }
+    : stream_variable_name_(std::move(rhs.stream_variable_name_)),
+      relative_output_directory_(std::move(rhs.relative_output_directory_)),
+      inclusion_dependencies_(std::move(rhs.inclusion_dependencies_)),
+      containing_namespaces_(std::move(rhs.containing_namespaces_)),
+      wale_template_(std::move(rhs.wale_template_)),
+      wale_kvps_(std::move(rhs.wale_kvps_)) { }
 
 properties::properties(
-    const boost::optional<masd::dogen::extraction::decoration_properties>& decoration_properties,
-    const masd::dogen::templating::stitch::stitching_properties& stitching_properties)
-    : decoration_properties_(decoration_properties),
-      stitching_properties_(stitching_properties) { }
+    const std::string& stream_variable_name,
+    const boost::filesystem::path& relative_output_directory,
+    const std::list<std::string>& inclusion_dependencies,
+    const std::list<std::string>& containing_namespaces,
+    const std::string& wale_template,
+    const std::unordered_map<std::string, std::string>& wale_kvps)
+    : stream_variable_name_(stream_variable_name),
+      relative_output_directory_(relative_output_directory),
+      inclusion_dependencies_(inclusion_dependencies),
+      containing_namespaces_(containing_namespaces),
+      wale_template_(wale_template),
+      wale_kvps_(wale_kvps) { }
 
 void properties::swap(properties& other) noexcept {
     using std::swap;
-    swap(decoration_properties_, other.decoration_properties_);
-    swap(stitching_properties_, other.stitching_properties_);
+    swap(stream_variable_name_, other.stream_variable_name_);
+    swap(relative_output_directory_, other.relative_output_directory_);
+    swap(inclusion_dependencies_, other.inclusion_dependencies_);
+    swap(containing_namespaces_, other.containing_namespaces_);
+    swap(wale_template_, other.wale_template_);
+    swap(wale_kvps_, other.wale_kvps_);
 }
 
 bool properties::operator==(const properties& rhs) const {
-    return decoration_properties_ == rhs.decoration_properties_ &&
-        stitching_properties_ == rhs.stitching_properties_;
+    return stream_variable_name_ == rhs.stream_variable_name_ &&
+        relative_output_directory_ == rhs.relative_output_directory_ &&
+        inclusion_dependencies_ == rhs.inclusion_dependencies_ &&
+        containing_namespaces_ == rhs.containing_namespaces_ &&
+        wale_template_ == rhs.wale_template_ &&
+        wale_kvps_ == rhs.wale_kvps_;
 }
 
 properties& properties::operator=(properties other) {
@@ -49,36 +69,100 @@ properties& properties::operator=(properties other) {
     return *this;
 }
 
-const boost::optional<masd::dogen::extraction::decoration_properties>& properties::decoration_properties() const {
-    return decoration_properties_;
+const std::string& properties::stream_variable_name() const {
+    return stream_variable_name_;
 }
 
-boost::optional<masd::dogen::extraction::decoration_properties>& properties::decoration_properties() {
-    return decoration_properties_;
+std::string& properties::stream_variable_name() {
+    return stream_variable_name_;
 }
 
-void properties::decoration_properties(const boost::optional<masd::dogen::extraction::decoration_properties>& v) {
-    decoration_properties_ = v;
+void properties::stream_variable_name(const std::string& v) {
+    stream_variable_name_ = v;
 }
 
-void properties::decoration_properties(const boost::optional<masd::dogen::extraction::decoration_properties>&& v) {
-    decoration_properties_ = std::move(v);
+void properties::stream_variable_name(const std::string&& v) {
+    stream_variable_name_ = std::move(v);
 }
 
-const masd::dogen::templating::stitch::stitching_properties& properties::stitching_properties() const {
-    return stitching_properties_;
+const boost::filesystem::path& properties::relative_output_directory() const {
+    return relative_output_directory_;
 }
 
-masd::dogen::templating::stitch::stitching_properties& properties::stitching_properties() {
-    return stitching_properties_;
+boost::filesystem::path& properties::relative_output_directory() {
+    return relative_output_directory_;
 }
 
-void properties::stitching_properties(const masd::dogen::templating::stitch::stitching_properties& v) {
-    stitching_properties_ = v;
+void properties::relative_output_directory(const boost::filesystem::path& v) {
+    relative_output_directory_ = v;
 }
 
-void properties::stitching_properties(const masd::dogen::templating::stitch::stitching_properties&& v) {
-    stitching_properties_ = std::move(v);
+void properties::relative_output_directory(const boost::filesystem::path&& v) {
+    relative_output_directory_ = std::move(v);
+}
+
+const std::list<std::string>& properties::inclusion_dependencies() const {
+    return inclusion_dependencies_;
+}
+
+std::list<std::string>& properties::inclusion_dependencies() {
+    return inclusion_dependencies_;
+}
+
+void properties::inclusion_dependencies(const std::list<std::string>& v) {
+    inclusion_dependencies_ = v;
+}
+
+void properties::inclusion_dependencies(const std::list<std::string>&& v) {
+    inclusion_dependencies_ = std::move(v);
+}
+
+const std::list<std::string>& properties::containing_namespaces() const {
+    return containing_namespaces_;
+}
+
+std::list<std::string>& properties::containing_namespaces() {
+    return containing_namespaces_;
+}
+
+void properties::containing_namespaces(const std::list<std::string>& v) {
+    containing_namespaces_ = v;
+}
+
+void properties::containing_namespaces(const std::list<std::string>&& v) {
+    containing_namespaces_ = std::move(v);
+}
+
+const std::string& properties::wale_template() const {
+    return wale_template_;
+}
+
+std::string& properties::wale_template() {
+    return wale_template_;
+}
+
+void properties::wale_template(const std::string& v) {
+    wale_template_ = v;
+}
+
+void properties::wale_template(const std::string&& v) {
+    wale_template_ = std::move(v);
+}
+
+const std::unordered_map<std::string, std::string>& properties::wale_kvps() const {
+    return wale_kvps_;
+}
+
+std::unordered_map<std::string, std::string>& properties::wale_kvps() {
+    return wale_kvps_;
+}
+
+void properties::wale_kvps(const std::unordered_map<std::string, std::string>& v) {
+    wale_kvps_ = v;
+}
+
+void properties::wale_kvps(const std::unordered_map<std::string, std::string>&& v) {
+    wale_kvps_ = std::move(v);
 }
 
 }

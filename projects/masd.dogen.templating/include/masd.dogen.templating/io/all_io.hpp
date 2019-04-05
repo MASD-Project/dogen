@@ -33,6 +33,5 @@
 #include "masd.dogen.templating/io/wale/text_template_io.hpp"
 #include "masd.dogen.templating/io/stitch/text_template_io.hpp"
 #include "masd.dogen.templating/io/stitch/text_template_body_io.hpp"
-#include "masd.dogen.templating/io/stitch/stitching_properties_io.hpp"
 
 #endif

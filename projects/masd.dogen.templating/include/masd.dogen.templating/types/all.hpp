@@ -53,7 +53,5 @@
 #include "masd.dogen.templating/types/stitch/properties_factory.hpp"
 #include "masd.dogen.templating/types/stitch/text_template_body.hpp"
 #include "masd.dogen.templating/types/stitch/instantiation_error.hpp"
-#include "masd.dogen.templating/types/stitch/stitching_properties.hpp"
-#include "masd.dogen.templating/types/stitch/stitching_properties_factory.hpp"
 
 #endif

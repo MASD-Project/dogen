@@ -33,7 +33,6 @@
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
 #include "masd.dogen.annotations/types/annotation_expander.hpp"
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
-#include "masd.dogen.extraction/types/repository.hpp"
 #include "masd.dogen.templating/types/stitch/properties_factory.hpp"
 #include "masd.dogen.templating/types/stitch/text_template.hpp"
 
@@ -48,8 +47,7 @@ class instantiator final {
 public:
     instantiator(const annotations::type_repository& atrp,
         const annotations::annotation_factory& af,
-        const annotations::annotation_expander& ae,
-        const masd::dogen::extraction::repository& formatting_repository);
+        const annotations::annotation_expander& ae);
 
 private:
     /**

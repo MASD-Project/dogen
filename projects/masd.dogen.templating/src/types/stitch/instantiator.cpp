@@ -51,20 +51,18 @@ namespace masd::dogen::templating::stitch {
 
 instantiator::instantiator(const annotations::type_repository& atrp,
     const annotations::annotation_factory& af,
-    const annotations::annotation_expander& ae,
-    const masd::dogen::extraction::repository& frp)
+    const annotations::annotation_expander& ae)
     : annotation_factory_(af), annotation_expander_(ae),
-      properties_factory_(atrp, frp) {}
+      properties_factory_(atrp) {}
 
 boost::filesystem::path
 instantiator::compute_output_path(const boost::filesystem::path& input_path,
     const properties& props) const {
 
     boost::filesystem::path r;
-    const auto& sp(props.stitching_properties());
-    if (!sp.relative_output_directory().empty()) {
+    if (!props.relative_output_directory().empty()) {
         using namespace boost::filesystem;
-        path rel_dir(sp.relative_output_directory());
+        path rel_dir(props.relative_output_directory());
         r = absolute(rel_dir, input_path.parent_path());
     } else
         r = input_path.parent_path();
@@ -108,24 +106,24 @@ void instantiator::handle_wale_template(text_template& tt) const {
      * Check if we have an associated wale template. If we don't,
      * there is nothing to do here.
      */
-    const auto st(tt.properties().stitching_properties());
-    const auto wt(st.wale_template());
+    const auto& props(tt.properties());
+    const auto& wt(props.wale_template());
     if (wt.empty()) {
         BOOST_LOG_SEV(lg, debug) << "No wale template supplied.";
         return;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Instantiating wale template: "
-                             << st.wale_template();
+                             << props.wale_template();
     BOOST_LOG_SEV(lg, debug) << "Stitching properties kvps: "
-                             << st.wale_kvps();
+                             << props.wale_kvps();
 
     /*
      * Execute the wale workflow and store the result as a stitch
      * variable.
      */
     wale::workflow wkf;
-    const auto wale_value(wkf.execute(wt, st.wale_kvps()));
+    const auto wale_value(wkf.execute(wt, props.wale_kvps()));
     const auto pair(std::make_pair(wale_key, wale_value));
     const auto inserted(tt.supplied_kvps().insert(pair).second);
     if (!inserted) {

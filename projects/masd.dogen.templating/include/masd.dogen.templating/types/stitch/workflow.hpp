@@ -37,7 +37,6 @@
 #include "masd.dogen.annotations/types/annotation_expander.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository.hpp"
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
-#include "masd.dogen.extraction/types/repository.hpp"
 #include "masd.dogen.templating/types/stitch/properties.hpp"
 #include "masd.dogen.templating/types/stitch/text_template.hpp"
 
@@ -84,12 +83,6 @@ private:
     obtain_archetype_location_repository() const;
 
     /**
-     * @brief Creates the formatting' repository.
-     */
-    masd::dogen::extraction::repository create_formatting_repository(
-        const std::vector<boost::filesystem::path>& data_dirs) const;
-
-    /**
      * @brief Sets up the annotations repository.
      */
     annotations::type_repository create_annotations_type_repository(
@@ -104,7 +97,6 @@ private:
     create_artefacts(const annotations::type_repository& atrp,
         const annotations::annotation_factory& af,
         const annotations::annotation_expander& ae,
-        const masd::dogen::extraction::repository& drp,
         const std::forward_list<boost::filesystem::path>&
         text_template_paths,
         const std::unordered_map<std::string, std::string>& kvps) const;

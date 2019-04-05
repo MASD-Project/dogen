@@ -163,8 +163,8 @@ extraction::meta_model::artefact
 formatter::format(const text_template& tt) const {
     BOOST_LOG_SEV(lg, debug) << "Formatting text template.";
 
-    const auto& ss(tt.properties().stitching_properties());
-    const auto stream_variable_name(ss.stream_variable_name());
+    const auto& props(tt.properties());
+    const auto stream_variable_name(props.stream_variable_name());
     if (stream_variable_name.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_stream_name;
         BOOST_THROW_EXCEPTION(formatting_error(empty_stream_name));
@@ -173,7 +173,7 @@ formatter::format(const text_template& tt) const {
     helpers::kvp_resolver rs(tt.supplied_kvps());
     std::ostringstream s;
     {
-        const auto& id(ss.inclusion_dependencies());
+        const auto& id(props.inclusion_dependencies());
         const auto preamble(rs.resolve(decoration_preamble_key));
         if (!preamble.empty())
             s << preamble;
@@ -185,7 +185,7 @@ formatter::format(const text_template& tt) const {
             s << masd::dogen::extraction::manage_blank_lines << std::endl;
 
         masd::dogen::extraction::cpp::scoped_namespace_formatter snf(
-            s, ss.containing_namespaces(), false/*create_anonymous_namespace*/,
+            s, props.containing_namespaces(), false/*create_anonymous_namespace*/,
             true/*add_new_line_*/, true/*nested_namespaces*/);
 
         BOOST_LOG_SEV(lg, debug) << "Total lines: " << tt.body().lines().size();

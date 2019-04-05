@@ -18,27 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "masd.dogen.templating/test_data/stitch/properties_td.hpp"
-#include "masd.dogen.extraction/test_data/decoration_properties_td.hpp"
-#include "masd.dogen.templating/test_data/stitch/stitching_properties_td.hpp"
 
 namespace {
 
-masd::dogen::extraction::decoration_properties
-create_masd_dogen_extraction_decoration_properties(const unsigned int position) {
-    return masd::dogen::extraction::decoration_properties_generator::create(position);
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
 }
 
-boost::optional<masd::dogen::extraction::decoration_properties>
-create_boost_optional_masd_dogen_extraction_decoration_properties(unsigned int position) {
-    boost::optional<masd::dogen::extraction::decoration_properties> r(
-        create_masd_dogen_extraction_decoration_properties(position));
+boost::filesystem::path
+create_boost_filesystem_path(const unsigned int position) {
+    std::ostringstream s;
+    s << "/a/path/number_" << position;
+    return boost::filesystem::path(s.str());
+}
+
+std::list<std::string> create_std_list_std_string(unsigned int position) {
+    std::list<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_std_string(position + i));
+    }
     return r;
 }
 
-masd::dogen::templating::stitch::stitching_properties
-create_masd_dogen_templating_stitch_stitching_properties(const unsigned int position) {
-    return masd::dogen::templating::stitch::stitching_properties_generator::create(position);
+std::unordered_map<std::string, std::string> create_std_unordered_map_std_string_std_string(unsigned int position) {
+    std::unordered_map<std::string, std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_std_string(position + i)));
+    }
+    return r;
 }
 
 }
@@ -49,8 +60,12 @@ properties_generator::properties_generator() : position_(0) { }
 
 void properties_generator::
 populate(const unsigned int position, result_type& v) {
-    v.decoration_properties(create_boost_optional_masd_dogen_extraction_decoration_properties(position + 0));
-    v.stitching_properties(create_masd_dogen_templating_stitch_stitching_properties(position + 1));
+    v.stream_variable_name(create_std_string(position + 0));
+    v.relative_output_directory(create_boost_filesystem_path(position + 1));
+    v.inclusion_dependencies(create_std_list_std_string(position + 2));
+    v.containing_namespaces(create_std_list_std_string(position + 3));
+    v.wale_template(create_std_string(position + 4));
+    v.wale_kvps(create_std_unordered_map_std_string_std_string(position + 5));
 }
 
 properties_generator::result_type

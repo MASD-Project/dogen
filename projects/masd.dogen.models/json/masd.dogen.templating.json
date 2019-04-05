@@ -188,20 +188,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "decoration_properties",
-          "type": "boost::optional<extraction::decoration_properties>"
-        },
-        {
-          "name": "stitching_properties",
-          "type": "stitching_properties"
-        }
-      ]
-    },
-    {
-      "name": "stitch::stitching_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
           "name": "stream_variable_name",
           "type": "std::string"
         },
@@ -226,13 +212,6 @@
           "type": "std::unordered_map<std::string, std::string>"
         }
       ]
-    },
-    {
-      "name": "stitch::stitching_properties_factory",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
     },
     {
       "name": "stitch::building_error",

@@ -19,7 +19,6 @@
  *
  */
 #include <sstream>
-#include "masd.dogen.extraction/test/mock_decoration_properties_factory.hpp"
 #include "masd.dogen.templating/test/mock_text_template_factory.hpp"
 
 namespace {
@@ -45,6 +44,17 @@ const auto external_keys = std::unordered_map<std::string, std::string> {
     { decoration_postamble_key, empty }
 };
 
+const std::string decoration_preamble(R"(/* -*- a_field: a_value -*-
+ *
+ * this is a marker
+ *
+ * a_holder
+ *
+ * licence text
+ *
+ */
+)");
+
 }
 
 namespace masd::dogen::templating::test {
@@ -53,11 +63,11 @@ using namespace stitch;
 
 text_template mock_text_template_factory::
 make_text_template_with_trivial_properties() const {
-    stitching_properties sp;
+    properties sp;
     sp.stream_variable_name(stream_variable_name);
 
     text_template r;
-    r.properties().stitching_properties(sp);
+    r.properties(sp);
     r.supplied_kvps(external_keys);
     return r;
 }
@@ -330,11 +340,13 @@ text_template mock_text_template_factory::make_complex_structure() const {
 
 text_template mock_text_template_factory::
 make_with_decoration_properties() const {
-    masd::dogen::extraction::test::mock_decoration_properties_factory factory_;
-    const auto fp(factory_.make_decoration_properties());
-
     text_template r(make_text_template_with_trivial_properties());
-    r.properties().decoration_properties(fp);
+
+    const auto external_keys = std::unordered_map<std::string, std::string> {
+        { decoration_preamble_key, decoration_preamble },
+        { decoration_postamble_key, empty }
+    };
+    r.supplied_kvps(external_keys);
     r.body().lines(make_text_block_only_lines());
     return r;
 }
@@ -342,7 +354,7 @@ make_with_decoration_properties() const {
 text_template
 mock_text_template_factory::make_with_containing_namespace() const {
     text_template r(make_text_template_with_trivial_properties());
-    auto& cn(r.properties().stitching_properties().containing_namespaces());
+    auto& cn(r.properties().containing_namespaces());
     cn.push_back("first");
     cn.push_back("second");
     r.body().lines(make_text_block_only_lines());

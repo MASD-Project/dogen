@@ -36,11 +36,6 @@ const std::string empty;
 const std::string test_module("masd.dogen.templating.tests");
 const std::string test_suite("stitch_formatter_tests");
 
-const std::string decoration_preamble_key(
-    "masd.generation.decoration.preamble");
-const std::string decoration_postamble_key(
-    "masd.generation.decoration.postamble");
-
 const std::string single_text_line_content(
     R"(stream_ << "This is line numnber: 0" << std::endl;
 )");
@@ -147,17 +142,6 @@ stream_ << "Start mixed line." << my_variable.print() << "End mixed line." << st
 stream_ << "Start mixed line." << my_variable.print() << "End mixed line." << std::endl;
 unsigned int i0;
 stream_ << "This is line numnber: 0" << std::endl;
-)");
-
-const std::string decoration_preamble(R"(/* -*- a_field: a_value -*-
- *
- * this is a marker
- *
- * a_holder
- *
- * licence text
- *
- */
 )");
 
 const std::string with_decoration_properties(R"(/* -*- a_field: a_value -*-
@@ -464,8 +448,7 @@ BOOST_AUTO_TEST_CASE(complex_structure_results_in_expected_template) {
 BOOST_AUTO_TEST_CASE(decoration_properties_result_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("decoration_properties_result_in_expected_template");
 
-    auto tt(factory.make_with_decoration_properties());
-    tt.supplied_kvps()[decoration_preamble_key] = decoration_preamble;
+    const auto tt(factory.make_with_decoration_properties());
 
     BOOST_LOG_SEV(lg, debug) << "input: " << tt;
 

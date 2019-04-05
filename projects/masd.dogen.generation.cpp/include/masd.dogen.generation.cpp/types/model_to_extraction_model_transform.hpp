@@ -92,7 +92,6 @@ private:
         enabled_archetype_for_element, const annotations::type_repository& atrp,
         const annotations::annotation_factory& af,
         const annotations::annotation_expander& ae,
-        const dogen::extraction::repository& drp,
         const formattables::model& fm) const;
 
     /**

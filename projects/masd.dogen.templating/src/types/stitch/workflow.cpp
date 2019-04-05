@@ -106,12 +106,6 @@ workflow::obtain_archetype_location_repository() const {
     return b.build();
 }
 
-dogen::extraction::repository workflow::create_formatting_repository(
-    const std::vector<boost::filesystem::path>& data_dirs) const {
-    masd::dogen::extraction::repository_factory f;
-    return f.make(data_dirs);
-}
-
 annotations::type_repository workflow::create_annotations_type_repository(
     const std::vector<boost::filesystem::path>& data_dirs,
     const annotations::archetype_location_repository& alrp) const {
@@ -123,12 +117,11 @@ std::list<extraction::meta_model::artefact>
 workflow::create_artefacts(const annotations::type_repository& atrp,
     const annotations::annotation_factory& af,
     const annotations::annotation_expander& ae,
-    const masd::dogen::extraction::repository& drp, const std::forward_list<
-    boost::filesystem::path>& text_template_paths,
+    const std::forward_list<boost::filesystem::path>& text_template_paths,
     const std::unordered_map<std::string, std::string>& kvps) const {
 
     std::list<extraction::meta_model::artefact> r;
-    const instantiator inst(atrp, af, ae, drp);
+    const instantiator inst(atrp, af, ae);
     for (const auto& p : text_template_paths)
         r.push_front(inst.instantiate(p, kvps));
 
@@ -158,12 +151,11 @@ void workflow::execute(const boost::filesystem::path& p,
     const auto atrp(create_annotations_type_repository(data_dirs, alrp));
 
     const auto cm(compatibility_mode_);
-    const auto frp(create_formatting_repository(data_dirs));
     annotations::annotation_factory af(alrp, atrp, cm);
     annotations::annotation_expander ae(data_dirs, alrp, atrp, cm);
 
-    properties_factory pf(atrp, frp);
-    const auto artefacts(create_artefacts(atrp, af, ae, frp, paths, kvps));
+    properties_factory pf(atrp);
+    const auto artefacts(create_artefacts(atrp, af, ae, paths, kvps));
     write_artefacts(artefacts);
 
     BOOST_LOG_SEV(lg, debug) << "Finished executing workflow.";

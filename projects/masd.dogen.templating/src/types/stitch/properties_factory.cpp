@@ -18,41 +18,137 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.extraction/types/decoration_properties_factory.hpp"
-#include "masd.dogen.templating/types/stitch/stitching_properties_factory.hpp"
+#include <boost/throw_exception.hpp>
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/string/splitter.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.templating/types/stitch/traits.hpp"
+#include "masd.dogen.templating/types/stitch/building_error.hpp"
 #include "masd.dogen.templating/types/stitch/properties_factory.hpp"
 
 namespace {
 
-const std::string cpp_modeline_name("cpp");
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory("templating.stitch.properties_factory"));
+
+const std::string field_definition_not_found(
+    "Could not find expected field definition: ");
 
 }
 
 namespace masd::dogen::templating::stitch {
 
-properties_factory::properties_factory(const annotations::type_repository& atrp,
-    const masd::dogen::extraction::repository& frp)
-    : annotations_repository_(atrp),   formatting_repository_(frp) {}
+properties_factory::properties_factory(const annotations::type_repository& arp)
+    : type_group_(make_type_group(arp)) {}
 
-boost::optional<extraction::decoration_properties> properties_factory::
-make_decoration_properties(const annotations::annotation& a) const {
-    using masd::dogen::extraction::decoration_properties_factory;
-    const auto& drp(annotations_repository_);
-    decoration_properties_factory f(drp, formatting_repository_);
-    return f.make(cpp_modeline_name, a);
+properties_factory::type_group properties_factory::make_type_group(
+    const annotations::type_repository& arp) const {
+    type_group r;
+    const annotations::type_repository_selector s(arp);
+
+    const auto& svn(traits::stream_variable_name());
+    r.stream_variable_name = s.select_type_by_name(svn);
+
+    const auto& rod(traits::relative_output_directory());
+    r.relative_output_directory = s.select_type_by_name(rod);
+
+    const auto& id(traits::inclusion_dependency());
+    r.inclusion_dependency = s.select_type_by_name(id);
+
+    const auto cn(traits::containing_namespaces());
+    r.containing_namespaces = s.select_type_by_name(cn);
+
+    const auto wt(traits::wale_template());
+    r.wale_template = s.select_type_by_name(wt);
+
+    const auto wkvp(traits::wale_kvp());
+    r.wale_kvp = s.select_type_by_name(wkvp);
+
+    return r;
 }
 
-stitching_properties properties_factory::
-make_stitching_properties(const annotations::annotation& a) const {
-    stitching_properties_factory f(annotations_repository_);
-    return f.make(a);
+std::string properties_factory::
+extract_stream_variable_name(const annotations::annotation& a) const {
+    using namespace annotations;
+    const entry_selector s(a);
+    const auto& tg(type_group_);
+    return s.get_text_content_or_default(tg.stream_variable_name);
+}
+
+boost::filesystem::path properties_factory::
+extract_relative_output_directory(const annotations::annotation& a) const {
+    using namespace annotations;
+    const entry_selector s(a);
+    if (!s.has_entry(traits::relative_output_directory()))
+        return boost::filesystem::path();
+
+    const auto text(s.get_text_content(traits::relative_output_directory()));
+    return boost::filesystem::path(text);
+}
+
+std::list<std::string> properties_factory::
+extract_inclusion_dependencies(const annotations::annotation& a) const {
+    std::list<std::string> r;
+    using namespace annotations;
+    const entry_selector s(a);
+    const auto& t(type_group_.inclusion_dependency);
+    if (!s.has_entry(t))
+        return r;
+
+    return s.get_text_collection_content(t);
+}
+
+std::list<std::string> properties_factory::
+extract_containing_namespaces(const annotations::annotation& a) const {
+    std::list<std::string> r;
+    using namespace annotations;
+    const entry_selector s(a);
+    const auto& t(type_group_.containing_namespaces);
+    if (!s.has_entry(t))
+        return r;
+
+    const auto cns(s.get_text_content(t));
+    if (cns.empty())
+        return r;
+
+    using utility::string::splitter;
+    return splitter::split_scoped(cns);
+}
+
+std::string properties_factory::
+extract_wale_template(const annotations::annotation& a) const {
+    std::string r;
+    using namespace annotations;
+    const entry_selector s(a);
+    const auto& t(type_group_.wale_template);
+    if (!s.has_entry(t))
+        return r;
+
+    return s.get_text_content(t);
+}
+
+std::unordered_map<std::string, std::string> properties_factory::
+extract_wale_kvps(const annotations::annotation& a) const {
+    std::unordered_map<std::string, std::string>  r;
+    using namespace annotations;
+    const entry_selector s(a);
+    const auto& t(type_group_.wale_kvp);
+    if (!s.has_entry(t))
+        return r;
+
+    return s.get_kvp_content(t);
 }
 
 properties
 properties_factory::make(const annotations::annotation& a) const {
     properties r;
-    r.decoration_properties(make_decoration_properties(a));
-    r.stitching_properties(make_stitching_properties(a));
+    r.stream_variable_name(extract_stream_variable_name(a));
+    r.relative_output_directory(extract_relative_output_directory(a));
+    r.inclusion_dependencies(extract_inclusion_dependencies(a));
+    r.containing_namespaces(extract_containing_namespaces(a));
+    r.wale_template(extract_wale_template(a));
+    r.wale_kvps(extract_wale_kvps(a));
     return r;
 }
 

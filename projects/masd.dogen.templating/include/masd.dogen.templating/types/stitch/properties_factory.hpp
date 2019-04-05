@@ -25,46 +25,83 @@
 #pragma once
 #endif
 
+#include <string>
+#include <unordered_map>
 #include <boost/optional.hpp>
+#include <boost/filesystem/path.hpp>
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.extraction/types/repository.hpp"
-#include "masd.dogen.extraction/types/decoration_properties.hpp"
-#include "masd.dogen.templating/types/stitch/stitching_properties.hpp"
 #include "masd.dogen.templating/types/stitch/properties.hpp"
 
 namespace masd::dogen::templating::stitch {
 
 /**
- * @brief Creates the settings bundle.
+ * @brief Creates the stitching properties.
  */
 class properties_factory {
 public:
-    properties_factory(const annotations::type_repository& atrp,
-        const masd::dogen::extraction::repository& frp);
+    explicit properties_factory(const annotations::type_repository& arp);
+
+private:
+    struct type_group {
+        annotations::type stream_variable_name;
+        annotations::type relative_output_directory;
+        annotations::type inclusion_dependency;
+        annotations::type containing_namespaces;
+        annotations::type wale_template;
+        annotations::type wale_kvp;
+    };
+
+    /**
+     * @brief Creates the formatter properties.
+     */
+    type_group
+    make_type_group(const annotations::type_repository& arp) const;
 
 private:
     /**
-     * @brief Create the decoration properties.
+     * @brief Extracts the stream variable name.
      */
-    boost::optional<extraction::decoration_properties>
-    make_decoration_properties(const annotations::annotation& a) const;
+    std::string
+    extract_stream_variable_name(const annotations::annotation& a) const;
 
     /**
-     * @brief Create the stitching settings.
+     * @brief Extracts the relative output directory.
      */
-    stitching_properties
-    make_stitching_properties(const annotations::annotation& a) const;
+    boost::filesystem::path
+    extract_relative_output_directory(const annotations::annotation& a) const;
+
+    /**
+     * @brief Extracts inclusion dependencies.
+     */
+    std::list<std::string>
+    extract_inclusion_dependencies(const annotations::annotation& o) const;
+
+    /**
+     * @brief Extract containing namespaces.
+     */
+    std::list<std::string>
+    extract_containing_namespaces(const annotations::annotation& a) const;
+
+    /**
+     * @brief Extract wale template
+     */
+    std::string extract_wale_template(const annotations::annotation& a) const;
+
+    /**
+     * @brief Extract wale kvps
+     */
+    std::unordered_map<std::string, std::string>
+    extract_wale_kvps(const annotations::annotation& a) const;
 
 public:
     /**
-     * @brief Create the settings bundle.
+     * @brief Create the stitching settings.
      */
     properties make(const annotations::annotation& a) const;
 
 private:
-    const annotations::type_repository& annotations_repository_;
-    const masd::dogen::extraction::repository& formatting_repository_;
+    const type_group type_group_;
 };
 
 }

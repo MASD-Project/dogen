@@ -25,10 +25,11 @@
 #pragma once
 #endif
 
+#include <list>
+#include <string>
 #include <algorithm>
-#include <boost/optional.hpp>
-#include "masd.dogen.extraction/types/decoration_properties.hpp"
-#include "masd.dogen.templating/types/stitch/stitching_properties.hpp"
+#include <unordered_map>
+#include <boost/filesystem/path.hpp>
 
 namespace masd::dogen::templating::stitch {
 
@@ -43,19 +44,43 @@ public:
 
 public:
     properties(
-        const boost::optional<masd::dogen::extraction::decoration_properties>& decoration_properties,
-        const masd::dogen::templating::stitch::stitching_properties& stitching_properties);
+        const std::string& stream_variable_name,
+        const boost::filesystem::path& relative_output_directory,
+        const std::list<std::string>& inclusion_dependencies,
+        const std::list<std::string>& containing_namespaces,
+        const std::string& wale_template,
+        const std::unordered_map<std::string, std::string>& wale_kvps);
 
 public:
-    const boost::optional<masd::dogen::extraction::decoration_properties>& decoration_properties() const;
-    boost::optional<masd::dogen::extraction::decoration_properties>& decoration_properties();
-    void decoration_properties(const boost::optional<masd::dogen::extraction::decoration_properties>& v);
-    void decoration_properties(const boost::optional<masd::dogen::extraction::decoration_properties>&& v);
+    const std::string& stream_variable_name() const;
+    std::string& stream_variable_name();
+    void stream_variable_name(const std::string& v);
+    void stream_variable_name(const std::string&& v);
 
-    const masd::dogen::templating::stitch::stitching_properties& stitching_properties() const;
-    masd::dogen::templating::stitch::stitching_properties& stitching_properties();
-    void stitching_properties(const masd::dogen::templating::stitch::stitching_properties& v);
-    void stitching_properties(const masd::dogen::templating::stitch::stitching_properties&& v);
+    const boost::filesystem::path& relative_output_directory() const;
+    boost::filesystem::path& relative_output_directory();
+    void relative_output_directory(const boost::filesystem::path& v);
+    void relative_output_directory(const boost::filesystem::path&& v);
+
+    const std::list<std::string>& inclusion_dependencies() const;
+    std::list<std::string>& inclusion_dependencies();
+    void inclusion_dependencies(const std::list<std::string>& v);
+    void inclusion_dependencies(const std::list<std::string>&& v);
+
+    const std::list<std::string>& containing_namespaces() const;
+    std::list<std::string>& containing_namespaces();
+    void containing_namespaces(const std::list<std::string>& v);
+    void containing_namespaces(const std::list<std::string>&& v);
+
+    const std::string& wale_template() const;
+    std::string& wale_template();
+    void wale_template(const std::string& v);
+    void wale_template(const std::string&& v);
+
+    const std::unordered_map<std::string, std::string>& wale_kvps() const;
+    std::unordered_map<std::string, std::string>& wale_kvps();
+    void wale_kvps(const std::unordered_map<std::string, std::string>& v);
+    void wale_kvps(const std::unordered_map<std::string, std::string>&& v);
 
 public:
     bool operator==(const properties& rhs) const;
@@ -68,8 +93,12 @@ public:
     properties& operator=(properties other);
 
 private:
-    boost::optional<masd::dogen::extraction::decoration_properties> decoration_properties_;
-    masd::dogen::templating::stitch::stitching_properties stitching_properties_;
+    std::string stream_variable_name_;
+    boost::filesystem::path relative_output_directory_;
+    std::list<std::string> inclusion_dependencies_;
+    std::list<std::string> containing_namespaces_;
+    std::string wale_template_;
+    std::unordered_map<std::string, std::string> wale_kvps_;
 };
 
 }

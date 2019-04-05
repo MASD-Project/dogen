@@ -33,6 +33,5 @@
 #include "masd.dogen.templating/test_data/wale/text_template_td.hpp"
 #include "masd.dogen.templating/test_data/stitch/text_template_td.hpp"
 #include "masd.dogen.templating/test_data/stitch/text_template_body_td.hpp"
-#include "masd.dogen.templating/test_data/stitch/stitching_properties_td.hpp"
 
 #endif
