@@ -34,7 +34,6 @@
 #include <boost/iostreams/filtering_stream.hpp>
 #include "masd.dogen.annotations/types/archetype_location.hpp"
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
-#include "masd.dogen.extraction/types/comment_styles.hpp"
 #include "masd.dogen.extraction/types/cpp/scoped_namespace_formatter.hpp"
 #include "masd.dogen.extraction/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "masd.dogen.coding/types/meta_model/name.hpp"

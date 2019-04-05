@@ -27,7 +27,6 @@
 
 #include "masd.dogen.extraction/test_data/quote_types_td.hpp"
 #include "masd.dogen.extraction/test_data/spacing_types_td.hpp"
-#include "masd.dogen.extraction/test_data/comment_styles_td.hpp"
 #include "masd.dogen.extraction/test_data/meta_model/model_td.hpp"
 #include "masd.dogen.extraction/test_data/infix_configuration_td.hpp"
 #include "masd.dogen.extraction/test_data/meta_model/artefact_td.hpp"

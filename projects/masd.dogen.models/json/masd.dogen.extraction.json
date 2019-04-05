@@ -33,52 +33,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "comment_formatter",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "comment_styles",
-      "documentation": "Supported styles of comments.\n",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "c_style",
-          "type": "",
-          "documentation": "Original C programming language style.\n"
-        },
-        {
-          "name": "cpp_style",
-          "type": "",
-          "documentation": "One line, C++ style.\n"
-        },
-        {
-          "name": "csharp_style",
-          "type": "",
-          "documentation": "C# programming language style.\n"
-        },
-        {
-          "name": "shell_style",
-          "type": "",
-          "documentation": "Comments start with a hash.\n"
-        },
-        {
-          "name": "sql_style",
-          "type": "",
-          "documentation": "Comments start with a double-dash.\n"
-        },
-        {
-          "name": "xml_style",
-          "type": ""
-        }
-      ]
-    },
-    {
       "name": "indent_filter",
       "stereotypes": [
         "masd::handcrafted"

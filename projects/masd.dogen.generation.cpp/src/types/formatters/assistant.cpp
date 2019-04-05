@@ -25,7 +25,7 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/unordered_set_io.hpp"
 #include "masd.dogen.extraction/types/indent_filter.hpp"
-#include "masd.dogen.extraction/types/comment_formatter.hpp"
+#include "masd.dogen.generation/types/formatters/comment_formatter.hpp"
 #include "masd.dogen.extraction/types/utility_formatter.hpp"
 #include "masd.dogen.coding/io/meta_model/letter_cases_io.hpp"
 #include "masd.dogen.coding/types/helpers/name_flattener.hpp"
@@ -394,11 +394,11 @@ void assistant::comment(const std::string& c) {
     if (c.empty())
         return;
 
-    dogen::extraction::comment_formatter f(
+    generation::formatters::comment_formatter f(
         !start_on_first_line,
         use_documentation_tool_markup,
         !documenting_previous_identifier,
-        dogen::extraction::comment_styles::c_style,
+        generation::formatters::comment_style::c_style,
         !last_line_is_blank);
     f.format(stream(), c);
 }
@@ -411,11 +411,11 @@ comment_start_method_group(const std::string& documentation,
 
     {
         dogen::extraction::positive_indenter_scope pis(stream());
-        dogen::extraction::comment_formatter f(
+        generation::formatters::comment_formatter f(
             !start_on_first_line,
             use_documentation_tool_markup,
             !documenting_previous_identifier,
-            dogen::extraction::comment_styles::c_style,
+            generation::formatters::comment_style::c_style,
             !last_line_is_blank);
 
         f.format(stream(), documentation);
@@ -433,11 +433,11 @@ void assistant::comment_end_method_group(const std::string& documentation,
 
     {
         dogen::extraction::positive_indenter_scope pis(stream());
-        dogen::extraction::comment_formatter f(
+        generation::formatters::comment_formatter f(
             start_on_first_line,
             use_documentation_tool_markup,
             !documenting_previous_identifier,
-            dogen::extraction::comment_styles::c_style,
+            generation::formatters::comment_style::c_style,
             !last_line_is_blank);
 
         if (add_comment_blocks) {
@@ -453,11 +453,11 @@ std::string assistant::comment_inline(const std::string& c) const {
 
     std::ostringstream s;
     s << " ";
-    dogen::extraction::comment_formatter f(
+    generation::formatters::comment_formatter f(
         start_on_first_line,
         use_documentation_tool_markup,
         documenting_previous_identifier,
-        dogen::extraction::comment_styles::cpp_style,
+        generation::formatters::comment_style::cpp_style,
         !last_line_is_blank);
 
     f.format(s, c);
