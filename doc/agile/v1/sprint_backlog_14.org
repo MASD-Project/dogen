@@ -12,27 +12,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-05 Fri 21:21]
+#+CAPTION: Clock summary at [2019-04-05 Fri 21:44]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *73:57* |       |       | 100.0 |
+| *Total time*                                              | *74:18* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 73:57   |       |       | 100.0 |
-| Active                                                    |         | 73:57 |       | 100.0 |
+| Stories                                                   | 74:18   |       |       | 100.0 |
+| Active                                                    |         | 74:18 |       | 100.0 |
 | Edit release notes for previous sprint                    |         |       |  1:47 |   2.4 |
-| Sprint and product backlog grooming                       |         |       |  7:07 |   9.6 |
+| Sprint and product backlog grooming                       |         |       |  7:14 |   9.7 |
 | Create a video demo for the previous sprint's features    |         |       |  3:11 |   4.3 |
-| Fix issues with emacs                                     |         |       |  2:42 |   3.7 |
+| Fix issues with emacs                                     |         |       |  2:42 |   3.6 |
 | Create a basic "project plan"                             |         |       |  2:08 |   2.9 |
 | Simplify qualified name                                   |         |       |  3:39 |   4.9 |
-| Rename "language" to "technical space"                    |         |       |  7:22 |  10.0 |
+| Rename "language" to "technical space"                    |         |       |  7:22 |   9.9 |
 | Add intrinsic technical space ownership                   |         |       |  1:12 |   1.6 |
+| Promote extraction entities to meta-model elements        |         |       | 36:41 |  49.4 |
 | Integrate report-ci with dogen                            |         |       |  2:09 |   2.9 |
-| Promote extraction entities to meta-model elements        |         |       | 36:27 |  49.3 |
 | Move all utility formatters from extraction to generation |         |       |  0:27 |   0.6 |
 | Remove annotations from stitch templates                  |         |       |  1:17 |   1.7 |
-| Supply decorations as a stitch parameter                  |         |       |  4:29 |   6.1 |
+| Supply decorations as a stitch parameter                  |         |       |  4:29 |   6.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -148,6 +148,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-04-05 Fri 21:37]--[2019-04-05 Fri 21:44] =>  0:07
     CLOCK: [2019-04-05 Fri 08:46]--[2019-04-05 Fri 09:19] =>  0:33
     CLOCK: [2019-04-02 Tue 10:30]--[2019-04-02 Tue 10:53] =>  0:23
     CLOCK: [2019-03-31 Sun 09:50]--[2019-03-31 Sun 10:23] =>  0:33
@@ -326,21 +327,10 @@ parameter for each facet such as "generation type", manual or
 automatic. This can be done once we get rid of the current use of
 generation types for full/partial/no generation.
 
-*** STARTED Integrate report-ci with dogen                            :story:
+*** COMPLETED Promote extraction entities to meta-model elements      :story:
+    CLOSED: [2019-04-05 Fri 21:41]
     :LOGBOOK:
-    CLOCK: [2019-04-02 Tue 10:54]--[2019-04-02 Tue 11:03] =>  0:09
-    CLOCK: [2019-04-02 Tue 10:19]--[2019-04-02 Tue 10:29] =>  0:10
-    CLOCK: [2019-04-02 Tue 10:09]--[2019-04-02 Tue 10:18] =>  0:09
-    CLOCK: [2019-04-02 Tue 09:07]--[2019-04-02 Tue 10:08] =>  1:01
-    CLOCK: [2019-04-02 Tue 08:54]--[2019-04-02 Tue 09:06] =>  0:12
-    CLOCK: [2019-04-02 Tue 08:25]--[2019-04-02 Tue 08:53] =>  0:28
-    :END:
-
-It seems Klemens has started a new project for a CI product. He
-submitted a PR. Help him integrate it with Dogen.
-
-*** STARTED Promote extraction entities to meta-model elements        :story:
-    :LOGBOOK:
+    CLOCK: [2019-04-05 Fri 21:22]--[2019-04-05 Fri 21:36] =>  0:14
     CLOCK: [2019-04-05 Fri 20:47]--[2019-04-05 Fri 21:21] =>  0:34
     CLOCK: [2019-04-05 Fri 20:41]--[2019-04-05 Fri 20:46] =>  0:05
     CLOCK: [2019-04-05 Fri 20:15]--[2019-04-05 Fri 20:20] =>  0:05
@@ -484,6 +474,20 @@ We should also allow for both:
 
 - full licence: used later at the product level.
 - licence summary: used for preambles in files.
+
+*** COMPLETED Integrate report-ci with dogen                          :story:
+    CLOSED: [2019-04-05 Fri 21:42]
+    :LOGBOOK:
+    CLOCK: [2019-04-02 Tue 10:54]--[2019-04-02 Tue 11:03] =>  0:09
+    CLOCK: [2019-04-02 Tue 10:19]--[2019-04-02 Tue 10:29] =>  0:10
+    CLOCK: [2019-04-02 Tue 10:09]--[2019-04-02 Tue 10:18] =>  0:09
+    CLOCK: [2019-04-02 Tue 09:07]--[2019-04-02 Tue 10:08] =>  1:01
+    CLOCK: [2019-04-02 Tue 08:54]--[2019-04-02 Tue 09:06] =>  0:12
+    CLOCK: [2019-04-02 Tue 08:25]--[2019-04-02 Tue 08:53] =>  0:28
+    :END:
+
+It seems Klemens has started a new project for a CI product. He
+submitted a PR. Help him integrate it with Dogen.
 
 *** STARTED Move all utility formatters from extraction to generation :story:
     :LOGBOOK:

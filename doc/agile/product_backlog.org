@@ -5004,6 +5004,19 @@ Stories that will not be handled on the current major release.
 
 Ideas to improve the code base.
 
+*** Consider adding inheritance support to modelines                  :story:
+
+Though it is probably overkill, it would be nice to be able to
+inherit from modelines; then we could define all the common fields
+on a parent.
+
+A slightly different take is that modelines, enums, etc could benefit
+greatly from templates just like objects. However the only problem is
+we can't use the exact same approach, or we'd end up with 2N
+elements. We need some kind of way of declaring a template (what we
+will in the future call traits) and associate it with a meta-model
+element.
+
 *** Consider renaming =object=                                        :story:
 
 We started off by having the notion of "value objects" but this was
