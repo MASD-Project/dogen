@@ -22,47 +22,20 @@
 
 namespace masd::dogen::extraction {
 
-decoration_properties::decoration_properties()
-    : generate_decoration_(static_cast<bool>(0)) { }
-
-decoration_properties::decoration_properties(decoration_properties&& rhs)
-    : generate_decoration_(std::move(rhs.generate_decoration_)),
-      modeline_(std::move(rhs.modeline_)),
-      licence_(std::move(rhs.licence_)),
-      code_generation_marker_(std::move(rhs.code_generation_marker_)),
-      preamble_(std::move(rhs.preamble_)),
-      postamble_(std::move(rhs.postamble_)) { }
-
 decoration_properties::decoration_properties(
-    const bool generate_decoration,
-    const boost::optional<masd::dogen::extraction::modeline>& modeline,
-    const boost::optional<masd::dogen::extraction::licence>& licence,
-    const std::string& code_generation_marker,
     const std::string& preamble,
     const std::string& postamble)
-    : generate_decoration_(generate_decoration),
-      modeline_(modeline),
-      licence_(licence),
-      code_generation_marker_(code_generation_marker),
-      preamble_(preamble),
+    : preamble_(preamble),
       postamble_(postamble) { }
 
 void decoration_properties::swap(decoration_properties& other) noexcept {
     using std::swap;
-    swap(generate_decoration_, other.generate_decoration_);
-    swap(modeline_, other.modeline_);
-    swap(licence_, other.licence_);
-    swap(code_generation_marker_, other.code_generation_marker_);
     swap(preamble_, other.preamble_);
     swap(postamble_, other.postamble_);
 }
 
 bool decoration_properties::operator==(const decoration_properties& rhs) const {
-    return generate_decoration_ == rhs.generate_decoration_ &&
-        modeline_ == rhs.modeline_ &&
-        licence_ == rhs.licence_ &&
-        code_generation_marker_ == rhs.code_generation_marker_ &&
-        preamble_ == rhs.preamble_ &&
+    return preamble_ == rhs.preamble_ &&
         postamble_ == rhs.postamble_;
 }
 
@@ -70,62 +43,6 @@ decoration_properties& decoration_properties::operator=(decoration_properties ot
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-bool decoration_properties::generate_decoration() const {
-    return generate_decoration_;
-}
-
-void decoration_properties::generate_decoration(const bool v) {
-    generate_decoration_ = v;
-}
-
-const boost::optional<masd::dogen::extraction::modeline>& decoration_properties::modeline() const {
-    return modeline_;
-}
-
-boost::optional<masd::dogen::extraction::modeline>& decoration_properties::modeline() {
-    return modeline_;
-}
-
-void decoration_properties::modeline(const boost::optional<masd::dogen::extraction::modeline>& v) {
-    modeline_ = v;
-}
-
-void decoration_properties::modeline(const boost::optional<masd::dogen::extraction::modeline>&& v) {
-    modeline_ = std::move(v);
-}
-
-const boost::optional<masd::dogen::extraction::licence>& decoration_properties::licence() const {
-    return licence_;
-}
-
-boost::optional<masd::dogen::extraction::licence>& decoration_properties::licence() {
-    return licence_;
-}
-
-void decoration_properties::licence(const boost::optional<masd::dogen::extraction::licence>& v) {
-    licence_ = v;
-}
-
-void decoration_properties::licence(const boost::optional<masd::dogen::extraction::licence>&& v) {
-    licence_ = std::move(v);
-}
-
-const std::string& decoration_properties::code_generation_marker() const {
-    return code_generation_marker_;
-}
-
-std::string& decoration_properties::code_generation_marker() {
-    return code_generation_marker_;
-}
-
-void decoration_properties::code_generation_marker(const std::string& v) {
-    code_generation_marker_ = v;
-}
-
-void decoration_properties::code_generation_marker(const std::string&& v) {
-    code_generation_marker_ = std::move(v);
 }
 
 const std::string& decoration_properties::preamble() const {

@@ -25,176 +25,6 @@
   },
   "elements": [
     {
-      "name": "modeline",
-      "documentation": "Fields representing editor variables for emacs, vi, etc.\n\nA field is a key-value pair (KVP), where name is the first element and its value\nthe second.\n\nExample: -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-\n\nIn this particular case, both prefix and postfix are @e -*-; @e mode is the first\nfield name and its value is @e c++; the KVP separator is @e : and the field\nseparator is @e ;.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "name",
-          "type": "std::string",
-          "documentation": "Name of the modeline. Must be unique within a group.\n"
-        },
-        {
-          "name": "editor",
-          "type": "editors",
-          "documentation": "The modeline will use the syntax for this editor.\n"
-        },
-        {
-          "name": "location",
-          "type": "modeline_locations",
-          "documentation": "Where to place the modeline.\n"
-        },
-        {
-          "name": "fields",
-          "type": "std::list<modeline_field>",
-          "documentation": "List of all the parameters in the preamble, in order of appearence.\n"
-        }
-      ]
-    },
-    {
-      "name": "licence",
-      "documentation": "Licence which the file is released under.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "copyright_notices",
-          "type": "std::list<std::string>",
-          "documentation": "All copyright notices for the current file.\n"
-        },
-        {
-          "name": "text",
-          "type": "std::string",
-          "documentation": "Complete legal text for the licence.\n"
-        }
-      ]
-    },
-    {
-      "name": "licence_text_hydrator",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "code_generation_marker_factory",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "modeline_group_hydrator",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "modeline_field",
-      "documentation": "Entry in a modeline.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "name",
-          "type": "std::string",
-          "documentation": "Name of the field.\n"
-        },
-        {
-          "name": "value",
-          "type": "std::string",
-          "documentation": "Value for the field. Can be empty.\n"
-        }
-      ]
-    },
-    {
-      "name": "modeline_group",
-      "documentation": "Group of modelines, logically associated.\n\nFor example, one may choose to have a set of modelines for @e emacs , or for\n@e vi, etc.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "name",
-          "type": "std::string",
-          "documentation": "Name of the modeline group. Must be unique\n"
-        },
-        {
-          "name": "modelines",
-          "type": "std::unordered_map<std::string,modeline>",
-          "documentation": "All the modelines for this group.\n"
-        }
-      ]
-    },
-    {
-      "name": "hydration_error",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "editors",
-      "documentation": "Supported editors for modelines.\n",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "emacs",
-          "type": "",
-          "documentation": "The emacs editor\n"
-        },
-        {
-          "name": "vi",
-          "type": "",
-          "documentation": "The generic vi editor\n"
-        },
-        {
-          "name": "vim",
-          "type": "",
-          "documentation": "The vi-like editor vim.\n"
-        },
-        {
-          "name": "ex",
-          "type": "",
-          "documentation": "The old ex editor.\n"
-        }
-      ]
-    },
-    {
-      "name": "modeline_locations",
-      "documentation": "Location in the file to place the modeline.\n",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "top",
-          "type": "",
-          "documentation": "Very first line in file.\n"
-        },
-        {
-          "name": "bottom",
-          "type": "",
-          "documentation": "Very last line in file.\n"
-        }
-      ]
-    },
-    {
-      "name": "repository_factory",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "modeline_formatter",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formatting_error",
       "documentation": "An error has occurred while formatting.\n",
       "stereotypes": [
@@ -254,26 +84,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "generate_decoration",
-          "type": "bool",
-          "documentation": "If set to true, the decoration will be generated.\n"
-        },
-        {
-          "name": "modeline",
-          "type": "boost::optional<modeline>",
-          "documentation": "Modeline to use in this file, if any.\n"
-        },
-        {
-          "name": "licence",
-          "type": "boost::optional<licence>",
-          "documentation": "Licence to use in this file, if any.\n"
-        },
-        {
-          "name": "code_generation_marker",
-          "type": "std::string",
-          "documentation": "Code generation marker to use in this file.\n"
-        },
-        {
           "name": "preamble",
           "type": "std::string"
         },
@@ -285,13 +95,6 @@
     },
     {
       "name": "indent_filter",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "decoration_properties_factory",
       "stereotypes": [
         "masd::handcrafted"
       ],
@@ -311,20 +114,6 @@
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "repository",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "modeline_groups",
-          "type": "std::unordered_map<std::string,modeline_group>"
-        },
-        {
-          "name": "licence_texts",
-          "type": "std::unordered_map<std::string,std::string>"
-        }
-      ]
     },
     {
       "name": "utility_formatter",
@@ -419,10 +208,6 @@
           "type": "std::ostream"
         },
         {
-          "name": "decoration_properties_",
-          "type": "boost::optional<decoration_properties>"
-        },
-        {
           "name": "includes_",
           "type": "std::list<std::string>"
         },
@@ -499,47 +284,6 @@
           "name": "last",
           "type": "std::string",
           "documentation": "Only applicable to the last element of a sequence.\n"
-        }
-      ]
-    },
-    {
-      "name": "decoration_formatter",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "decoration_configuration",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "generate_decoration",
-          "type": "boost::optional<bool>"
-        },
-        {
-          "name": "copyright_notices",
-          "type": "std::list<std::string>"
-        },
-        {
-          "name": "licence_name",
-          "type": "std::string"
-        },
-        {
-          "name": "modeline_group_name",
-          "type": "std::string"
-        },
-        {
-          "name": "marker_add_date_time",
-          "type": "boost::optional<bool>"
-        },
-        {
-          "name": "marker_add_warning",
-          "type": "boost::optional<bool>"
-        },
-        {
-          "name": "marker_message",
-          "type": "std::string"
         }
       ]
     },

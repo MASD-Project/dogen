@@ -19,15 +19,8 @@
  *
  */
 #include <ostream>
-#include "masd.dogen.extraction/types/decoration_formatter.hpp"
 #include "masd.dogen.extraction/types/csharp/using_formatter.hpp"
 #include "masd.dogen.extraction/types/csharp/boilerplate_formatter.hpp"
-
-namespace {
-
-const bool use_new_decoration = true;
-
-}
 
 namespace masd::dogen::extraction::csharp {
 
@@ -40,9 +33,7 @@ format_preamble(std::ostream& s, const decoration_properties& dc) const {
     if (!generate_preamble_)
         return;
 
-    decoration_formatter af;
-    af.format_preamble(s, comment_styles::csharp_style/*single line*/,
-        comment_styles::csharp_style/*multi-line*/, dc);
+    s << dc.preamble();
 }
 
 void boilerplate_formatter::
@@ -55,17 +46,13 @@ void boilerplate_formatter::
 format_begin(std::ostream& s, const decoration_properties& dc,
     const std::list<std::string>& usings) const {
 
-    if (use_new_decoration)
-        s << dc.postamble();
-    else
-        format_preamble(s, dc);
+    format_preamble(s, dc);
     format_usings(s, usings);
 }
 
 void boilerplate_formatter::
 format_postamble(std::ostream& s, const decoration_properties& dc) const {
-    decoration_formatter af;
-    af.format_postamble(s, comment_styles::csharp_style, dc);
+    s << dc.postamble();
 }
 
 void boilerplate_formatter::

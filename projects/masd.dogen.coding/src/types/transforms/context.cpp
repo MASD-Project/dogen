@@ -19,7 +19,6 @@
  *
  */
 #include "masd.dogen.tracing/types/tracer.hpp"
-#include "masd.dogen.extraction/types/repository.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/annotation_factory.hpp"

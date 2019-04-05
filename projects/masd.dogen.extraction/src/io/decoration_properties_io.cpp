@@ -19,41 +19,8 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.extraction/io/licence_io.hpp"
-#include "masd.dogen.extraction/io/modeline_io.hpp"
 #include "masd.dogen.extraction/io/decoration_properties_io.hpp"
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::extraction::modeline>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::extraction::licence>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
-    return s;
-}
-
-}
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -66,18 +33,8 @@ inline std::string tidy_up_string(std::string s) {
 namespace masd::dogen::extraction {
 
 std::ostream& operator<<(std::ostream& s, const decoration_properties& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::extraction::decoration_properties\"" << ", "
-      << "\"generate_decoration\": " << v.generate_decoration() << ", "
-      << "\"modeline\": " << v.modeline() << ", "
-      << "\"licence\": " << v.licence() << ", "
-      << "\"code_generation_marker\": " << "\"" << tidy_up_string(v.code_generation_marker()) << "\"" << ", "
       << "\"preamble\": " << "\"" << tidy_up_string(v.preamble()) << "\"" << ", "
       << "\"postamble\": " << "\"" << tidy_up_string(v.postamble()) << "\""
       << " }";

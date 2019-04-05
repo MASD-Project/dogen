@@ -28,7 +28,6 @@
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.annotations/types/type_repository_factory.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
-#include "masd.dogen.extraction/types/repository_factory.hpp"
 #include "masd.dogen.extraction/io/meta_model/artefact_io.hpp"
 #include "masd.dogen.extraction/types/helpers/filesystem_writer.hpp"
 #include "masd.dogen.templating/types/stitch/parser.hpp"

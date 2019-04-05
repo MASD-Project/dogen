@@ -26,7 +26,6 @@
 #include "masd.dogen.utility/types/io/unordered_set_io.hpp"
 #include "masd.dogen.extraction/types/indent_filter.hpp"
 #include "masd.dogen.extraction/types/comment_formatter.hpp"
-#include "masd.dogen.extraction/types/decoration_formatter.hpp"
 #include "masd.dogen.extraction/types/utility_formatter.hpp"
 #include "masd.dogen.coding/io/meta_model/letter_cases_io.hpp"
 #include "masd.dogen.coding/types/helpers/name_flattener.hpp"
@@ -47,8 +46,6 @@ namespace {
 
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.formatters.assistant"));
-
-const bool use_new_decoration = true;
 
 const std::string empty;
 const std::string by_ref_text("&");
@@ -397,17 +394,12 @@ make_decoration_preamble(const dogen::extraction::comment_styles cs,
 }
 
 void assistant::make_decoration_preamble(
-    const dogen::extraction::comment_styles cs,
+    const dogen::extraction::comment_styles /*cs*/,
     const boost::optional<dogen::extraction::decoration_properties> dc) {
     if (!dc)
         return;
 
-    if (use_new_decoration)
-        stream() << dc->preamble();
-    else {
-        dogen::extraction::decoration_formatter fmt;
-        fmt.format_preamble(stream(), cs, *dc);
-    }
+    stream() << dc->preamble();
 }
 
 void assistant::comment(const std::string& c) {

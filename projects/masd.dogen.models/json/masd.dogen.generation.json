@@ -671,10 +671,6 @@
           "type": "boost::shared_ptr<annotations::annotation_expander>"
         },
         {
-          "name": "formatting_repository",
-          "type": "boost::shared_ptr<extraction::repository>"
-        },
-        {
           "name": "tracer",
           "type": "boost::shared_ptr<tracing::tracer>"
         },

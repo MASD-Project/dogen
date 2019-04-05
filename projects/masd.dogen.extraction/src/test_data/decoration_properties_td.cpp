@@ -19,39 +19,9 @@
  *
  */
 #include <sstream>
-#include "masd.dogen.extraction/test_data/licence_td.hpp"
-#include "masd.dogen.extraction/test_data/modeline_td.hpp"
 #include "masd.dogen.extraction/test_data/decoration_properties_td.hpp"
 
 namespace {
-
-bool create_bool(const unsigned int position) {
-    return (position % 2) != 0;
-}
-
-masd::dogen::extraction::modeline
-create_masd_dogen_extraction_modeline(const unsigned int position) {
-    return masd::dogen::extraction::modeline_generator::create(position);
-}
-
-boost::optional<masd::dogen::extraction::modeline>
-create_boost_optional_masd_dogen_extraction_modeline(unsigned int position) {
-    boost::optional<masd::dogen::extraction::modeline> r(
-        create_masd_dogen_extraction_modeline(position));
-    return r;
-}
-
-masd::dogen::extraction::licence
-create_masd_dogen_extraction_licence(const unsigned int position) {
-    return masd::dogen::extraction::licence_generator::create(position);
-}
-
-boost::optional<masd::dogen::extraction::licence>
-create_boost_optional_masd_dogen_extraction_licence(unsigned int position) {
-    boost::optional<masd::dogen::extraction::licence> r(
-        create_masd_dogen_extraction_licence(position));
-    return r;
-}
 
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
@@ -67,12 +37,8 @@ decoration_properties_generator::decoration_properties_generator() : position_(0
 
 void decoration_properties_generator::
 populate(const unsigned int position, result_type& v) {
-    v.generate_decoration(create_bool(position + 0));
-    v.modeline(create_boost_optional_masd_dogen_extraction_modeline(position + 1));
-    v.licence(create_boost_optional_masd_dogen_extraction_licence(position + 2));
-    v.code_generation_marker(create_std_string(position + 3));
-    v.preamble(create_std_string(position + 4));
-    v.postamble(create_std_string(position + 5));
+    v.preamble(create_std_string(position + 0));
+    v.postamble(create_std_string(position + 1));
 }
 
 decoration_properties_generator::result_type

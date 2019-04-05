@@ -27,9 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include <boost/optional.hpp>
-#include "masd.dogen.extraction/types/licence.hpp"
-#include "masd.dogen.extraction/types/modeline.hpp"
 
 namespace masd::dogen::extraction {
 
@@ -38,63 +35,17 @@ namespace masd::dogen::extraction {
  */
 class decoration_properties final {
 public:
+    decoration_properties() = default;
     decoration_properties(const decoration_properties&) = default;
+    decoration_properties(decoration_properties&&) = default;
     ~decoration_properties() = default;
 
 public:
-    decoration_properties();
-
-public:
-    decoration_properties(decoration_properties&& rhs);
-
-public:
     decoration_properties(
-        const bool generate_decoration,
-        const boost::optional<masd::dogen::extraction::modeline>& modeline,
-        const boost::optional<masd::dogen::extraction::licence>& licence,
-        const std::string& code_generation_marker,
         const std::string& preamble,
         const std::string& postamble);
 
 public:
-    /**
-     * @brief If set to true, the decoration will be generated.
-     */
-    /**@{*/
-    bool generate_decoration() const;
-    void generate_decoration(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Modeline to use in this file, if any.
-     */
-    /**@{*/
-    const boost::optional<masd::dogen::extraction::modeline>& modeline() const;
-    boost::optional<masd::dogen::extraction::modeline>& modeline();
-    void modeline(const boost::optional<masd::dogen::extraction::modeline>& v);
-    void modeline(const boost::optional<masd::dogen::extraction::modeline>&& v);
-    /**@}*/
-
-    /**
-     * @brief Licence to use in this file, if any.
-     */
-    /**@{*/
-    const boost::optional<masd::dogen::extraction::licence>& licence() const;
-    boost::optional<masd::dogen::extraction::licence>& licence();
-    void licence(const boost::optional<masd::dogen::extraction::licence>& v);
-    void licence(const boost::optional<masd::dogen::extraction::licence>&& v);
-    /**@}*/
-
-    /**
-     * @brief Code generation marker to use in this file.
-     */
-    /**@{*/
-    const std::string& code_generation_marker() const;
-    std::string& code_generation_marker();
-    void code_generation_marker(const std::string& v);
-    void code_generation_marker(const std::string&& v);
-    /**@}*/
-
     const std::string& preamble() const;
     std::string& preamble();
     void preamble(const std::string& v);
@@ -116,10 +67,6 @@ public:
     decoration_properties& operator=(decoration_properties other);
 
 private:
-    bool generate_decoration_;
-    boost::optional<masd::dogen::extraction::modeline> modeline_;
-    boost::optional<masd::dogen::extraction::licence> licence_;
-    std::string code_generation_marker_;
     std::string preamble_;
     std::string postamble_;
 };

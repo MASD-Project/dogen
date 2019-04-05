@@ -29,7 +29,6 @@
 #include <string>
 #include <unordered_set>
 #include "masd.dogen.generation/types/transforms/context_fwd.hpp"
-#include "masd.dogen.extraction/types/decoration_properties_factory.hpp"
 #include "masd.dogen.extraction/types/meta_model/model.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
 

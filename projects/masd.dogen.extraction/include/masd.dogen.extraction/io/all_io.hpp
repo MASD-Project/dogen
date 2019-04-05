@@ -25,23 +25,15 @@
 #pragma once
 #endif
 
-#include "masd.dogen.extraction/io/editors_io.hpp"
-#include "masd.dogen.extraction/io/licence_io.hpp"
-#include "masd.dogen.extraction/io/modeline_io.hpp"
-#include "masd.dogen.extraction/io/repository_io.hpp"
 #include "masd.dogen.extraction/io/quote_types_io.hpp"
 #include "masd.dogen.extraction/io/spacing_types_io.hpp"
 #include "masd.dogen.extraction/io/comment_styles_io.hpp"
-#include "masd.dogen.extraction/io/modeline_field_io.hpp"
-#include "masd.dogen.extraction/io/modeline_group_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"
-#include "masd.dogen.extraction/io/modeline_locations_io.hpp"
 #include "masd.dogen.extraction/io/infix_configuration_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/artefact_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/operation_io.hpp"
 #include "masd.dogen.extraction/io/decoration_properties_io.hpp"
 #include "masd.dogen.extraction/io/helpers/files_by_status_io.hpp"
-#include "masd.dogen.extraction/io/decoration_configuration_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/operation_type_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/operation_reason_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/outputting_properties_io.hpp"
