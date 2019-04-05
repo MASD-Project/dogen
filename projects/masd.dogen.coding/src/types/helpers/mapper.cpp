@@ -46,6 +46,7 @@ const std::string missing_mapping("Mapping not found for ID: ");
 const std::string unsupported_technical_space(
     "Technical space is not supported: ");
 const std::string unexpected_number_of__children("Expected exactly one child.");
+const std::string root_module_not_found("Root module not found: ");
 
 }
 
@@ -63,7 +64,6 @@ clone(const meta_model::model& m) const {
      * replaced by a proper clone implementation by the code
      * generator.
      */
-    r.modules(clone(m.modules()));
     r.object_templates(clone(m.object_templates()));
     r.builtins(clone(m.builtins()));
     r.enumerations(clone(m.enumerations()));
@@ -71,6 +71,19 @@ clone(const meta_model::model& m) const {
     r.objects(clone(m.objects()));
     r.exceptions(clone(m.exceptions()));
     r.visitors(clone(m.visitors()));
+
+    /*
+     * Copy across the modules, and sync up the root module.
+     */
+    r.modules(clone(m.modules()));
+    const auto rm_id(m.name().qualified().dot());
+    const auto i(r.modules().find(rm_id));
+    if (i == r.modules().end()) {
+        BOOST_LOG_SEV(lg, error) << root_module_not_found << rm_id;
+        BOOST_THROW_EXCEPTION(mapping_error(root_module_not_found + rm_id));
+    }
+    r.root_module(i->second);
+
     return r;
 }
 
