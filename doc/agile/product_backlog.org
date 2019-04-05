@@ -14427,3 +14427,30 @@ Notes:
 
 - ensure we upload the file name or at least the coordinates to the
   transform graph with the data so that we know what it refers to.
+
+*Improved understanding*
+
+Better than uploading a whole load of JSON blobs and then having to do
+a number of really complex queries, is to have a ORM schema that is
+designed to capture the data in the format we're interested in. Then
+we could do very simple queries. What we really care about is
+capturing all attributes of the model as it changes across the
+transformations. We also care about the relationships between
+transformations. We also need a way to uniquely identify elements
+across their entire lifecycle. A simple way would be to create a hash
+of the file name of the model, column and line number. We can then
+associate other IDs to this one such as dia ID, etc.
+
+We need to create a set of adaptors that convert an existing model
+(injection, coding, etc) into the ORM model and then write the ORM
+model into the database. The ORM model does not need as much detail
+and structure as a regular model; for example, names can be flattened
+or linked into IDs (e.g. name table), etc. Whatever makes sense from a
+relational perspective.
+
+It would also be nice to dump the log into the database so that we
+could do simple correlations such as "what was logged between the
+start and end of this transform?"
+
+Interestingly, this would also allow us to compare things between
+runs. The schema should be designed with this in mind.
