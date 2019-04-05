@@ -42,39 +42,4 @@ std::string traits::extraction::delete_empty_directories() {
     return r;
 }
 
-std::string traits::decoration::generate_decoration() {
-    static std::string r("masd.decoration.generate_decoration");
-    return r;
-}
-
-std::string traits::decoration::copyright_notices() {
-    static std::string r("masd.decoration.copyright_notice");
-    return r;
-}
-
-std::string traits::decoration::licence_name() {
-    static std::string r("masd.decoration.licence_name");
-    return r;
-}
-
-std::string traits::decoration::modeline_group_name() {
-    static std::string r("masd.decoration.modeline_group_name");
-    return r;
-}
-
-std::string traits::decoration::code_generation_marker::add_date_time() {
-    static std::string r("masd.decoration.code_generation_marker.add_date_time");
-    return r;
-}
-
-std::string traits::decoration::code_generation_marker::add_warning() {
-    static std::string r("masd.decoration.code_generation_marker.add_warning");
-    return r;
-}
-
-std::string traits::decoration::code_generation_marker::message() {
-    static std::string r("masd.decoration.code_generation_marker.message");
-    return r;
-}
-
 }

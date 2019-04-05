@@ -36,57 +36,6 @@ struct traits {
         static std::string ignore_files_matching_regex();
         static std::string delete_empty_directories();
     };
-
-    struct decoration {
-        /**
-         * @brief Whether to generate the decoration or not.
-         */
-        static std::string generate_decoration();
-
-        /**
-         * @brief Key used to denote copyright notices.
-         *
-         * It is expected to be repeated in a model; order is kept as
-         * provided by user.
-         */
-        static std::string copyright_notices();
-
-        /**
-         * @brief Name of the legal licence to use.
-         *
-         * Must match licences available in library.
-         */
-        static std::string licence_name();
-
-        /**
-         * @brief Name of the modeline group to use.
-         *
-         * Must match licences available in library.
-         */
-        static std::string modeline_group_name();
-
-        /**
-         * @brief Tags related to the code generation marker.
-         */
-        struct code_generation_marker {
-            /**
-             * @brief Whether to add the generation date and time to the
-             * marker or not.
-             */
-            static std::string add_date_time();
-
-            /**
-             * @brief Whether to add a warning not to modify code-generated
-             * files or not.
-             */
-            static std::string add_warning();
-
-            /**
-             * @brief Message to place on all code-generated files.
-             */
-            static std::string message();
-        };
-    };
 };
 
 }
