@@ -357,7 +357,7 @@ text_template mock_text_template_factory::
 make_with_variable(const std::string& k, const std::string& v) const {
     text_template r(make_text_template_with_trivial_properties());
     r.body().lines(make_variable_block(k));
-    r.variables()[k] = v;
+    r.supplied_kvps()[k] = v;
     return r;
 }
 

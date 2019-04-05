@@ -163,7 +163,7 @@ formatter::format(const text_template& tt) const {
         BOOST_THROW_EXCEPTION(formatting_error(empty_stream_name));
     }
 
-    resolver rs(tt.variables());
+    resolver rs(tt.supplied_kvps());
     std::ostringstream s;
     {
         const auto& id(ss.inclusion_dependencies());

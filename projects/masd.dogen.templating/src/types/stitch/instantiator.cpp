@@ -111,7 +111,7 @@ void instantiator::handle_wale_template(text_template& tt) const {
     wale::workflow wkf;
     const auto wale_value(wkf.execute(wt, st.wale_kvps()));
     const auto pair(std::make_pair(wale_key, wale_value));
-    const auto inserted(tt.variables().insert(pair).second);
+    const auto inserted(tt.supplied_kvps().insert(pair).second);
     if (!inserted) {
         BOOST_LOG_SEV(lg, error) << duplicate_variable << wale_key;
         BOOST_THROW_EXCEPTION(

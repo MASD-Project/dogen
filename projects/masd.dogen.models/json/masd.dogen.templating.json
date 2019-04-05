@@ -168,11 +168,6 @@
           "documentation": "Properties of the template.\n"
         },
         {
-          "name": "variables",
-          "type": "std::unordered_map<std::string, std::string>",
-          "documentation": "Any variables which may have been defined with the template.\n"
-        },
-        {
           "name": "body",
           "type": "text_template_body",
           "documentation": "Body of the text template.\n"

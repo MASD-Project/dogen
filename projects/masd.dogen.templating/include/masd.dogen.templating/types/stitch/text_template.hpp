@@ -54,7 +54,6 @@ public:
         const boost::filesystem::path& input_path,
         const boost::filesystem::path& output_path,
         const masd::dogen::templating::stitch::properties& properties,
-        const std::unordered_map<std::string, std::string>& variables,
         const masd::dogen::templating::stitch::text_template_body& body);
 
 public:
@@ -109,16 +108,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Any variables which may have been defined with the template.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, std::string>& variables() const;
-    std::unordered_map<std::string, std::string>& variables();
-    void variables(const std::unordered_map<std::string, std::string>& v);
-    void variables(const std::unordered_map<std::string, std::string>&& v);
-    /**@}*/
-
-    /**
      * @brief Body of the text template.
      */
     /**@{*/
@@ -144,7 +133,6 @@ private:
     boost::filesystem::path input_path_;
     boost::filesystem::path output_path_;
     masd::dogen::templating::stitch::properties properties_;
-    std::unordered_map<std::string, std::string> variables_;
     masd::dogen::templating::stitch::text_template_body body_;
 };
 

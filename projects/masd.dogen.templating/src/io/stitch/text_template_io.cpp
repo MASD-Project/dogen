@@ -74,7 +74,6 @@ std::ostream& operator<<(std::ostream& s, const text_template& v) {
       << "\"input_path\": " << "\"" << v.input_path().generic_string() << "\"" << ", "
       << "\"output_path\": " << "\"" << v.output_path().generic_string() << "\"" << ", "
       << "\"properties\": " << v.properties() << ", "
-      << "\"variables\": " << v.variables() << ", "
       << "\"body\": " << v.body()
       << " }";
     return(s);

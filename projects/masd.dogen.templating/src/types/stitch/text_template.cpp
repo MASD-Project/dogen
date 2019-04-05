@@ -28,7 +28,6 @@ text_template::text_template(text_template&& rhs)
       input_path_(std::move(rhs.input_path_)),
       output_path_(std::move(rhs.output_path_)),
       properties_(std::move(rhs.properties_)),
-      variables_(std::move(rhs.variables_)),
       body_(std::move(rhs.body_)) { }
 
 text_template::text_template(
@@ -37,14 +36,12 @@ text_template::text_template(
     const boost::filesystem::path& input_path,
     const boost::filesystem::path& output_path,
     const masd::dogen::templating::stitch::properties& properties,
-    const std::unordered_map<std::string, std::string>& variables,
     const masd::dogen::templating::stitch::text_template_body& body)
     : expected_keys_(expected_keys),
       supplied_kvps_(supplied_kvps),
       input_path_(input_path),
       output_path_(output_path),
       properties_(properties),
-      variables_(variables),
       body_(body) { }
 
 void text_template::swap(text_template& other) noexcept {
@@ -54,7 +51,6 @@ void text_template::swap(text_template& other) noexcept {
     swap(input_path_, other.input_path_);
     swap(output_path_, other.output_path_);
     swap(properties_, other.properties_);
-    swap(variables_, other.variables_);
     swap(body_, other.body_);
 }
 
@@ -64,7 +60,6 @@ bool text_template::operator==(const text_template& rhs) const {
         input_path_ == rhs.input_path_ &&
         output_path_ == rhs.output_path_ &&
         properties_ == rhs.properties_ &&
-        variables_ == rhs.variables_ &&
         body_ == rhs.body_;
 }
 
@@ -152,22 +147,6 @@ void text_template::properties(const masd::dogen::templating::stitch::properties
 
 void text_template::properties(const masd::dogen::templating::stitch::properties&& v) {
     properties_ = std::move(v);
-}
-
-const std::unordered_map<std::string, std::string>& text_template::variables() const {
-    return variables_;
-}
-
-std::unordered_map<std::string, std::string>& text_template::variables() {
-    return variables_;
-}
-
-void text_template::variables(const std::unordered_map<std::string, std::string>& v) {
-    variables_ = v;
-}
-
-void text_template::variables(const std::unordered_map<std::string, std::string>&& v) {
-    variables_ = std::move(v);
 }
 
 const masd::dogen::templating::stitch::text_template_body& text_template::body() const {

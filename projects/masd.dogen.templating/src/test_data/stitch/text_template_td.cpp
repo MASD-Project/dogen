@@ -77,8 +77,7 @@ populate(const unsigned int position, result_type& v) {
     v.input_path(create_boost_filesystem_path(position + 2));
     v.output_path(create_boost_filesystem_path(position + 3));
     v.properties(create_masd_dogen_templating_stitch_properties(position + 4));
-    v.variables(create_std_unordered_map_std_string_std_string(position + 5));
-    v.body(create_masd_dogen_templating_stitch_text_template_body(position + 6));
+    v.body(create_masd_dogen_templating_stitch_text_template_body(position + 5));
 }
 
 text_template_generator::result_type
