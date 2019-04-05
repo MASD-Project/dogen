@@ -13,25 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-04 Thu 14:49]
+#+CAPTION: Clock summary at [2019-04-05 Fri 09:19]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *62:07* |       |       | 100.0 |
+| *Total time*                                              | *63:57* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 62:07   |       |       | 100.0 |
-| Active                                                    |         | 62:07 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       |  1:47 |   2.9 |
-| Sprint and product backlog grooming                       |         |       |  6:34 |  10.6 |
-| Create a video demo for the previous sprint's features    |         |       |  3:11 |   5.1 |
-| Fix issues with emacs                                     |         |       |  2:42 |   4.3 |
-| Create a basic "project plan"                             |         |       |  2:08 |   3.4 |
-| Simplify qualified name                                   |         |       |  3:39 |   5.9 |
-| Rename "language" to "technical space"                    |         |       |  7:22 |  11.9 |
+| Stories                                                   | 63:57   |       |       | 100.0 |
+| Active                                                    |         | 63:57 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  1:47 |   2.8 |
+| Sprint and product backlog grooming                       |         |       |  7:07 |  11.1 |
+| Create a video demo for the previous sprint's features    |         |       |  3:11 |   5.0 |
+| Fix issues with emacs                                     |         |       |  2:42 |   4.2 |
+| Create a basic "project plan"                             |         |       |  2:08 |   3.3 |
+| Simplify qualified name                                   |         |       |  3:39 |   5.7 |
+| Rename "language" to "technical space"                    |         |       |  7:22 |  11.5 |
 | Add intrinsic technical space ownership                   |         |       |  1:12 |   1.9 |
-| Integrate report-ci with dogen                            |         |       |  2:09 |   3.5 |
-| Promote extraction entities to meta-model elements        |         |       | 30:56 |  49.8 |
+| Integrate report-ci with dogen                            |         |       |  2:09 |   3.4 |
+| Promote extraction entities to meta-model elements        |         |       | 30:56 |  48.4 |
 | Move all utility formatters from extraction to generation |         |       |  0:27 |   0.7 |
+| Remove annotations from stitch templates                  |         |       |  1:17 |   2.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -147,6 +148,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-04-05 Fri 08:46]--[2019-04-05 Fri 09:19] =>  0:33
     CLOCK: [2019-04-02 Tue 10:30]--[2019-04-02 Tue 10:53] =>  0:23
     CLOCK: [2019-03-31 Sun 09:50]--[2019-03-31 Sun 10:23] =>  0:33
     CLOCK: [2019-03-29 Fri 17:29]--[2019-03-29 Fri 17:38] =>  0:09
@@ -482,6 +484,96 @@ We should also allow for both:
 We need to move all formatters into generation and update templates to
 point to new location. This must be done after decoration has been
 updated to use the new modeling elements.
+
+*** STARTED Remove annotations from stitch templates                  :story:
+    :LOGBOOK:
+    CLOCK: [2019-04-05 Fri 08:31]--[2019-04-05 Fri 08:45] =>  0:14
+    CLOCK: [2019-04-04 Thu 16:57]--[2019-04-04 Thu 17:05] =>  0:08
+    CLOCK: [2019-04-04 Thu 16:02]--[2019-04-04 Thu 16:57] =>  0:55
+    :END:
+
+In the new world, stitch templates don't have all of the required
+information to build the boilerplate:
+
+- they cannot expand wale templates because the KVPs will be in the
+  element itself, not the template. Strictly speaking this is not an
+  problem we have right now though.
+- more importantly, the include dependencies cannot be computed by the
+  template. This is because the dependencies are really a function of
+  the model type we are expressing on the template. Instead, we did a
+  quick hack and supplied the includes as KVPs. So they are kind of
+  parameters but kind of not really parameters because they are
+  hard-coded to the template. It solved the immediate problem of
+  having them formatted and placed in the right part of the file, but
+  now we can see this is not the right approach.
+
+In reality, we should not have any annotations at all in
+templates. The boilerplate and includes should be supplied as KVPs and
+applied as variables. They should be composed externally with access
+to data from the model element. Thus we then need a way to associate
+includes with model elements. This is captured as a separate story.
+
+*** Associate includes with model elements                            :story:
+
+The right solution for the formatter includes is to supply them as
+meta-data in the model element. This has the advantage that we can
+then make use of profiles. At present we have one way to supply
+includes: the primary and secondary includes:
+
+: "masd.generation.cpp.io.class_header.primary_inclusion_directive": "<boost/property_tree/json_parser.hpp>",
+: "masd.generation.cpp.io.class_header.secondary_inclusion_directive": "<boost/algorithm/string.hpp>",
+
+This does a part of the job: we can associate up to two include
+directives with one facet and element. However:
+
+- by using this machinery we are effectively replacing the original
+  include.
+- the includes will occur for anyone who references the type. Though
+  however, since the includes are applicable only to the class
+  implementation this is less of a problem. Technically its still
+  incorrect though because these are not the includes needed to use
+  the type but the includes needed to define the type.
+
+For formatters, we kind of need to make the includes only happen when
+we are building the formatter. If we could have a similar machinery,
+but without adding to types referencing the type, this would give us a
+way to declare all of the formatters dependencies. Then, we could
+switch to building all of the stitch boilerplate outside of stitch and
+supplying it as a KVP.
+
+*** Meta-element configuration                                        :story:
+
+It is becoming obvious that there is a need to explicitly model
+meta-elements. A good example are the wale templates for handcrafted
+types. Say we want to associate a wale template with =entry_point=. We
+need one for C# and one for C++. We have the following alternatives:
+
+- the user needs to manually supply these as meta-data parameters
+  every time it creates an entry point.
+- next level is to have profiles: we could define a profile with these
+  parameters and the user is responsible for applying it to entry
+  points as required. This is flexible because users could choose
+  different wale templates. However, its painful that there isn't a
+  default wale template.
+- we could hard-code the default wale template into the field's value,
+  so that you'd get that value if you don't supply any. At least now
+  there is a default, but its hard-coded.
+- finally, if we could create a =<<metaclass= in a diagram, we could
+  then add the default values there _as data_.
+
+This is actually simpler than what it sounds. We just need to have a
+meta-element of type =metaclass=, with an annotation and a name. The
+name of the metaclass is the element it is configuring
+(e.g. =entry_point=). We could have a transform that sets the static
+stereotype of the element based on the name for good measure. Then,
+during the profile merging, we could simply merge first its annotation
+into all elements of this type. Then we would continue with the
+profile merging. We could also do a hack and have a =root_module=
+=metaclass= which could be used for defaults. However, it is not clear
+when we should use this as opposed to plain stereotypes. The good
+thing about stereotypes is that we make the relationships explicit,
+whereas with =metaclass= we are making them slightly less
+transparent.
 
 *** Duplicate elements in model                                       :story:
 
