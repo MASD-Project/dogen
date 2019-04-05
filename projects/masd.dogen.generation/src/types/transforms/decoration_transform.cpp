@@ -419,15 +419,6 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
             BOOST_LOG_SEV(lg, trace) << "Populating the root module "
                                      <<  "decoration.";
             rm.decoration(gd);
-
-            /*
-             * Copy across the new decorations into the legacy decoration.
-             * FIXME: hack for now.
-             */
-            rm.decoration_properties().preamble(
-                rm.decoration() ? rm.decoration()->preamble() : empty);
-            rm.decoration_properties().postamble(
-                rm.decoration() ? rm.decoration()->postamble() : empty);
         }
     }
     BOOST_LOG_SEV(lg, trace) << "Generated all global decorations.";
@@ -495,15 +486,6 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
         const auto& a(e->annotation());
         const auto element_dc(read_decoration_configuration(tg, a));
         e->decoration(make_local_decoration(drp, root_dc, gd, element_dc, ts));
-
-        /*
-         * Copy across the new decorations into the legacy decoration.
-         * FIXME: hack for now.
-         */
-        e->decoration_properties().preamble(
-            e->decoration() ? e->decoration()->preamble() : empty);
-        e->decoration_properties().postamble(
-            e->decoration() ? e->decoration()->postamble() : empty);
     }
     stp.end_transform(m);
 }
