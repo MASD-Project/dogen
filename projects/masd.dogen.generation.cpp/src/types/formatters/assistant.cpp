@@ -26,7 +26,7 @@
 #include "masd.dogen.utility/types/io/unordered_set_io.hpp"
 #include "masd.dogen.generation/types/formatters/indent_filter.hpp"
 #include "masd.dogen.generation/types/formatters/comment_formatter.hpp"
-#include "masd.dogen.extraction/types/utility_formatter.hpp"
+#include "masd.dogen.utility/types/formatters/utility_formatter.hpp"
 #include "masd.dogen.coding/io/meta_model/letter_cases_io.hpp"
 #include "masd.dogen.coding/types/helpers/name_flattener.hpp"
 #include "masd.dogen.generation/hash/meta_model/element_archetype_hash.hpp"
@@ -565,7 +565,7 @@ streaming_for_type(const formattables::streaming_properties& sp,
     const std::string& s) const {
 
     std::ostringstream stream;
-    dogen::extraction::utility_formatter uf(stream);
+    utility::formatters::utility_formatter uf(stream);
     BOOST_LOG_SEV(lg, debug) << "Streaming properties for type: " << sp;
     if (sp.remove_unprintable_characters())
         uf.insert_streamed("tidy_up_string(" + s + ")");

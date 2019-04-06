@@ -21,7 +21,7 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
-#include "masd.dogen.extraction/types/utility_formatter.hpp"
+#include "masd.dogen.utility/types/formatters/utility_formatter.hpp"
 #include "masd.dogen.injection.json/types/dehydrator.hpp"
 
 namespace {
@@ -45,7 +45,7 @@ std::string dehydrator::tidy_up_string(std::string s) {
 }
 
 void dehydrator::insert_documentation(std::ostream& s,  const std::string& d) {
-    extraction::utility_formatter uf(s);
+    utility::formatters::utility_formatter uf(s);
     uf.insert_quoted("documentation");
     s << " : ";
     uf.insert_quoted(tidy_up_string(d));
@@ -54,7 +54,7 @@ void dehydrator::insert_documentation(std::ostream& s,  const std::string& d) {
 void dehydrator::insert_tagged_values(std::ostream& s,
     const std::list<std::pair<std::string, std::string>>& tv) {
 
-    extraction::utility_formatter uf(s);
+    utility::formatters::utility_formatter uf(s);
     uf.insert_quoted("tagged_values");
     s << " : { ";
 
@@ -74,7 +74,7 @@ void dehydrator::insert_tagged_values(std::ostream& s,
 void dehydrator::insert_stereotypes(std::ostream& s,
     const std::list<std::string>& st) {
 
-    extraction::utility_formatter uf(s);
+    utility::formatters::utility_formatter uf(s);
     uf.insert_quoted("stereotypes");
     s << " : [";
 
@@ -91,7 +91,7 @@ void dehydrator::insert_stereotypes(std::ostream& s,
 void dehydrator::insert_parents(std::ostream& s,
     const std::list<std::string>& st) {
 
-    extraction::utility_formatter uf(s);
+    utility::formatters::utility_formatter uf(s);
     uf.insert_quoted("parents");
     s << " : [";
 
@@ -110,7 +110,7 @@ void dehydrator::insert_attribute(std::ostream& s,
 
     s << "{ ";
 
-    extraction::utility_formatter uf(s);
+    utility::formatters::utility_formatter uf(s);
     uf.insert_quoted("name");
     s << " : ";
     uf.insert_quoted_escaped(a.name());
@@ -142,7 +142,7 @@ void dehydrator::insert_element(std::ostream& s,
 
     s << "{ ";
 
-    extraction::utility_formatter uf(s);
+    utility::formatters::utility_formatter uf(s);
     uf.insert_quoted("name");
     s << " : ";
     uf.insert_quoted_escaped(e.name());
@@ -215,7 +215,7 @@ std::string dehydrator::dehydrate(const injection::meta_model::model& m) {
         s << comma_space;
     }
 
-    extraction::utility_formatter uf(s);
+    utility::formatters::utility_formatter uf(s);
     uf.insert_quoted("elements");
     s << " : [ ";
     bool is_first(true);

@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.extraction/types/utility_formatter.hpp"
+#include "masd.dogen.utility/types/formatters/utility_formatter.hpp"
 #include "masd.dogen.templating/io/stitch/block_types_io.hpp"
 #include "masd.dogen.templating/types/stitch/formatting_error.hpp"
 #include "masd.dogen.templating/types/stitch/formatter.hpp"
@@ -63,10 +63,10 @@ namespace masd::dogen::templating::stitch {
 
 void formatter::format_text_block_line(const std::string& stream_name,
     const std::string& l, std::ostream& s) const {
-    const auto spaces(extraction::spacing_types::left_and_right_space);
+    const auto spaces(utility::formatters::spacing_type::left_and_right_space);
     s << stream_name;
 
-    const extraction::utility_formatter u(s);
+    const utility::formatters::utility_formatter u(s);
     u.insert(inserter, spaces);
     if (!l.empty()) {
         u.insert_quoted(l, true/*escape_content*/);
@@ -81,8 +81,8 @@ format_expression_block_line(const std::string& stream_name,
     const std::string& l, std::ostream& s) const {
     s << stream_name;
 
-    const extraction::utility_formatter u(s);
-    const auto spaces(extraction::spacing_types::left_and_right_space);
+    const utility::formatters::utility_formatter u(s);
+    const auto spaces(utility::formatters::spacing_type::left_and_right_space);
     u.insert(inserter, spaces);
 
     s << l;
@@ -106,8 +106,8 @@ format_standard_control_block_line(
 
 void formatter::format_mixed_content_line(const std::string& stream_name,
     const line& l, std::ostream& s) const {
-    const auto spaces(extraction::spacing_types::left_and_right_space);
-    const extraction::utility_formatter u(s);
+    const auto spaces(utility::formatters::spacing_type::left_and_right_space);
+    const utility::formatters::utility_formatter u(s);
     bool is_first(true);
     for (const auto& b : l.blocks()) {
         if (is_first) {

@@ -897,55 +897,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::utility_formatter",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formatters::quote_type",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "single_quote",
-          "type": ""
-        },
-        {
-          "name": "double_quote",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "name": "formatters::spacing_type",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "no_space",
-          "type": ""
-        },
-        {
-          "name": "left_space",
-          "type": ""
-        },
-        {
-          "name": "right_space",
-          "type": ""
-        },
-        {
-          "name": "left_and_right_space",
-          "type": ""
-        }
-      ]
-    },
-    {
       "name": "formatters::indent_filter",
       "stereotypes": [
         "masd::cpp::header_only"

@@ -25,75 +25,11 @@
   },
   "elements": [
     {
-      "name": "formatting_error",
-      "documentation": "An error has occurred while formatting.\n",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "traits",
       "stereotypes": [
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "utility_formatter",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "stream_",
-          "type": "std::ostream"
-        }
-      ]
-    },
-    {
-      "name": "quote_types",
-      "documentation": "Types of quotes that can be used in streaming.\n",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "single_quote",
-          "type": ""
-        },
-        {
-          "name": "double_quote",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "name": "spacing_types",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "no_space",
-          "type": ""
-        },
-        {
-          "name": "left_space",
-          "type": ""
-        },
-        {
-          "name": "right_space",
-          "type": ""
-        },
-        {
-          "name": "left_and_right_space",
-          "type": ""
-        }
-      ]
     },
     {
       "name": "helpers",

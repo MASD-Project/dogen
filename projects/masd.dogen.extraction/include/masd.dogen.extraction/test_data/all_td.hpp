@@ -25,8 +25,6 @@
 #pragma once
 #endif
 
-#include "masd.dogen.extraction/test_data/quote_types_td.hpp"
-#include "masd.dogen.extraction/test_data/spacing_types_td.hpp"
 #include "masd.dogen.extraction/test_data/meta_model/model_td.hpp"
 #include "masd.dogen.extraction/test_data/meta_model/artefact_td.hpp"
 #include "masd.dogen.extraction/test_data/meta_model/operation_td.hpp"
