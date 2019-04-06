@@ -25,24 +25,78 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <ostream>
+#include "masd.dogen.utility/types/formatters/quote_type.hpp"
+#include "masd.dogen.utility/types/formatters/spacing_type.hpp"
 
 namespace masd::dogen::utility::formatters {
 
-class utility_formatter final {
+/**
+ * @brief Mixed grab-bag of formatting utilities.
+ */
+class utility_formatter {
 public:
-    utility_formatter() = default;
-    utility_formatter(const utility_formatter&) = default;
-    utility_formatter(utility_formatter&&) = default;
-    ~utility_formatter() = default;
-    utility_formatter& operator=(const utility_formatter&) = default;
+    explicit utility_formatter(std::ostream& s);
+
+private:
+    /**
+     * @brief Inserts a quote to the stream.
+     */
+    void insert_quote(const quote_type qt) const;
+
+    /**
+     * @brief Escapes a quote.
+     */
+    std::string escape_quote(const std::string& s, const quote_type qt) const;
 
 public:
-    bool operator==(const utility_formatter& rhs) const;
-    bool operator!=(const utility_formatter& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Insert content to stream, using the supplied space
+     * flags.
+     */
+    void insert(const std::string& s,
+        const spacing_type st = spacing_type::no_space) const;
 
+    /**
+     * @brief Inserts the content, but escapes any quotes.
+     */
+    void insert_escaped(const std::string& s,
+        const quote_type qt = quote_type::double_quote,
+        const spacing_type st = spacing_type::no_space) const;
+
+    /**
+     * @brief Quotes the supplied content.
+     */
+    void insert_quoted(const std::string& s,
+        const bool escape_content = false,
+        const quote_type qt = quote_type::double_quote,
+        const spacing_type st = spacing_type::no_space) const;
+
+    /**
+     * @brief Quotes the supplied content, and places it inside
+     * escaped quotes.
+     *
+     * For an input of 'a', outputs '"\"a\""'.
+     */
+    void insert_quoted_escaped(const std::string& s) const;
+
+    /**
+     * @brief Adds escapped quotes to s, with c++ streaming syntax.
+     *
+     * Using single quotes to denote the string boundary (e.g. they
+     * are not actually on the string), an s of 'a' produces the
+     * output '<< "\"" << a << "\"""'.
+     */
+    void insert_streamed(const std::string& s) const;
+
+    /**
+     * @brief Inserts end lines into the stream.
+     */
+    void insert_end_line(const unsigned int n = 1) const;
+
+public:
+    std::ostream& stream_;
 };
 
 }
