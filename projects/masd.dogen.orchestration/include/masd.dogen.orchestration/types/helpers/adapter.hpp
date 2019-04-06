@@ -61,9 +61,14 @@ public:
 
 private:
     /**
-     * @brief Ensure the name is not empty.
+     * @brief Ensure the string is not empty.
      */
-    void ensure_not_empty(const std::string& n) const;
+    void ensure_not_empty(const std::string& s) const;
+
+    /**
+     * @brief Ensure the string is empty.
+     */
+    void ensure_empty(const std::string& s) const;
 
 private:
     /**

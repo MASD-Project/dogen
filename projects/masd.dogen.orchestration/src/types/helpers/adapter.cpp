@@ -43,7 +43,9 @@ const std::string add_message_attr_name("message");
 const std::string true_value("true");
 const std::string false_value("false");
 
-const std::string empty_name("Name is empty.");
+const std::string empty_string("String is empty but expected value.");
+const std::string non_empty_string(
+    "String is not empty but did not expect value: ");
 const std::string enumerator_with_type("Enumerators cannot have a type: ");
 const std::string unsupported_attribute("Attribute is not supported: ");
 const std::string unsupported_value("Unsupported attribute value: ");
@@ -55,10 +57,17 @@ namespace masd::dogen::orchestration::helpers {
 adapter::adapter(const annotations::annotation_expander& e)
     : annotation_expander_(e) {}
 
-void adapter::ensure_not_empty(const std::string& n) const {
-    if (n.empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_name;
-        BOOST_THROW_EXCEPTION(adaptation_exception(empty_name));
+void adapter::ensure_not_empty(const std::string& s) const {
+    if (s.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_string;
+        BOOST_THROW_EXCEPTION(adaptation_exception(empty_string));
+    }
+}
+
+void adapter::ensure_empty(const std::string& s) const {
+    if (s.empty()) {
+        BOOST_LOG_SEV(lg, error) << non_empty_string << s;
+        BOOST_THROW_EXCEPTION(adaptation_exception(non_empty_string + s));
     }
 }
 
