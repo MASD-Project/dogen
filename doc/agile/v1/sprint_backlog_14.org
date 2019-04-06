@@ -12,27 +12,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-06 Sat 20:43]
+#+CAPTION: Clock summary at [2019-04-06 Sat 20:57]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *80:38* |       |       | 100.0 |
+| *Total time*                                              | *80:51* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 80:38   |       |       | 100.0 |
-| Active                                                    |         | 80:38 |       | 100.0 |
+| Stories                                                   | 80:51   |       |       | 100.0 |
+| Active                                                    |         | 80:51 |       | 100.0 |
 | Edit release notes for previous sprint                    |         |       |  1:47 |   2.2 |
-| Sprint and product backlog grooming                       |         |       |  7:14 |   9.0 |
+| Sprint and product backlog grooming                       |         |       |  7:14 |   8.9 |
 | Create a video demo for the previous sprint's features    |         |       |  3:11 |   3.9 |
 | Fix issues with emacs                                     |         |       |  2:42 |   3.3 |
 | Create a basic "project plan"                             |         |       |  2:08 |   2.6 |
 | Simplify qualified name                                   |         |       |  3:39 |   4.5 |
 | Rename "language" to "technical space"                    |         |       |  7:22 |   9.1 |
 | Add intrinsic technical space ownership                   |         |       |  1:12 |   1.5 |
-| Promote extraction entities to meta-model elements        |         |       | 37:25 |  46.4 |
+| Promote extraction entities to meta-model elements        |         |       | 37:25 |  46.3 |
 | Integrate report-ci with dogen                            |         |       |  2:09 |   2.7 |
-| Move all utility formatters from extraction to generation |         |       |  6:03 |   7.5 |
+| Move all utility formatters from extraction to generation |         |       |  6:16 |   7.8 |
 | Remove annotations from stitch templates                  |         |       |  1:17 |   1.6 |
-| Supply decorations as a stitch parameter                  |         |       |  4:29 |   5.6 |
+| Supply decorations as a stitch parameter                  |         |       |  4:29 |   5.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -492,6 +492,7 @@ submitted a PR. Help him integrate it with Dogen.
 
 *** STARTED Move all utility formatters from extraction to generation :story:
     :LOGBOOK:
+    CLOCK: [2019-04-06 Sat 20:44]--[2019-04-06 Sat 20:57] =>  0:13
     CLOCK: [2019-04-06 Sat 20:28]--[2019-04-06 Sat 20:43] =>  0:15
     CLOCK: [2019-04-06 Sat 20:20]--[2019-04-06 Sat 20:27] =>  0:07
     CLOCK: [2019-04-06 Sat 20:12]--[2019-04-06 Sat 20:19] =>  0:07
