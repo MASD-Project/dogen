@@ -96,34 +96,6 @@
       ]
     },
     {
-      "name": "cpp",
-      "fallback_element_type": "masd::module"
-    },
-    {
-      "name": "cpp::namespace_formatter",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "cpp::scoped_namespace_formatter",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "stream_",
-          "type": "std::ostream"
-        },
-        {
-          "name": "namespaces_",
-          "type": "std::list<std::string>"
-        }
-      ]
-    },
-    {
       "name": "sequence_formatter",
       "stereotypes": [
         "masd::handcrafted"
@@ -168,24 +140,6 @@
           "documentation": "Only applicable to the last element of a sequence.\n"
         }
       ]
-    },
-    {
-      "name": "csharp",
-      "fallback_element_type": "masd::module"
-    },
-    {
-      "name": "csharp::scoped_namespace_formatter",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "csharp::namespace_formatter",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
     },
     {
       "name": "helpers",

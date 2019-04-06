@@ -22,7 +22,6 @@
 #include "masd.dogen.generation.csharp/types/formattables/helper_properties.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/types/traits.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/assistant.hpp"
-#include "masd.dogen.extraction/types/csharp/scoped_namespace_formatter.hpp"
 
 namespace masd::dogen::generation::csharp::formatters::types {
 

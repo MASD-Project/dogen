@@ -1,6 +1,5 @@
 <#@ masd.annotations.profile=dogen.stitch #>
 <#@ masd.stitch.containing_namespaces=masd::dogen::generation::csharp::formatters::io #>
-<#@ masd.stitch.inclusion_dependency="masd.dogen.extraction/types/csharp/scoped_namespace_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/io/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formattables/helper_properties.hpp" #>
