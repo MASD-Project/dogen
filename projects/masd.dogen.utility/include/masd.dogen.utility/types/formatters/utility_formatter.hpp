@@ -18,15 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_UTILITY_IO_ALL_IO_HPP
-#define MASD_DOGEN_UTILITY_IO_ALL_IO_HPP
+#ifndef MASD_DOGEN_UTILITY_TYPES_FORMATTERS_UTILITY_FORMATTER_HPP
+#define MASD_DOGEN_UTILITY_TYPES_FORMATTERS_UTILITY_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.utility/io/formatters/quote_type_io.hpp"
-#include "masd.dogen.utility/io/formatters/spacing_type_io.hpp"
-#include "masd.dogen.utility/io/log/logging_configuration_io.hpp"
+#include <algorithm>
+
+namespace masd::dogen::utility::formatters {
+
+class utility_formatter final {
+public:
+    utility_formatter() = default;
+    utility_formatter(const utility_formatter&) = default;
+    utility_formatter(utility_formatter&&) = default;
+    ~utility_formatter() = default;
+    utility_formatter& operator=(const utility_formatter&) = default;
+
+public:
+    bool operator==(const utility_formatter& rhs) const;
+    bool operator!=(const utility_formatter& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
+
+}
 
 #endif

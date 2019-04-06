@@ -18,15 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_UTILITY_IO_ALL_IO_HPP
-#define MASD_DOGEN_UTILITY_IO_ALL_IO_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
+#include <string>
+#include <ostream>
+#include <stdexcept>
 #include "masd.dogen.utility/io/formatters/quote_type_io.hpp"
-#include "masd.dogen.utility/io/formatters/spacing_type_io.hpp"
-#include "masd.dogen.utility/io/log/logging_configuration_io.hpp"
 
-#endif
+namespace masd::dogen::utility::formatters {
+
+std::ostream& operator<<(std::ostream& s, const quote_type& v) {
+    s << "{ " << "\"__type__\": " << "\"quote_type\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
+    case quote_type::invalid:
+        attr = "\"invalid\"";
+        break;
+    case quote_type::single_quote:
+        attr = "\"single_quote\"";
+        break;
+    case quote_type::double_quote:
+        attr = "\"double_quote\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for quote_type");
+    }
+    s << attr << " }";
+    return s;
+}
+
+}

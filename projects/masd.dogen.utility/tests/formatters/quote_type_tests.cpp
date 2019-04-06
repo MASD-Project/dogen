@@ -18,15 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_UTILITY_IO_ALL_IO_HPP
-#define MASD_DOGEN_UTILITY_IO_ALL_IO_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
+#include <string>
+#include <sstream>
+#include <boost/test/unit_test.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
 #include "masd.dogen.utility/io/formatters/quote_type_io.hpp"
-#include "masd.dogen.utility/io/formatters/spacing_type_io.hpp"
-#include "masd.dogen.utility/io/log/logging_configuration_io.hpp"
+#include "masd.dogen.utility/types/formatters/quote_type.hpp"
+#include "masd.dogen.utility/test_data/formatters/quote_type_td.hpp"
 
-#endif
+BOOST_AUTO_TEST_SUITE(quote_type_tests)
+
+BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
+    masd::dogen::utility::formatters::quote_type_generator g;
+    const auto a(g());
+    std::stringstream s;
+    s << a;
+
+    boost::property_tree::ptree pt;
+    BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_SUITE_END()

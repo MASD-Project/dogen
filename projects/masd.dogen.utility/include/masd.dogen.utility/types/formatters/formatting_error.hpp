@@ -18,15 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_UTILITY_IO_ALL_IO_HPP
-#define MASD_DOGEN_UTILITY_IO_ALL_IO_HPP
+#ifndef MASD_DOGEN_UTILITY_TYPES_FORMATTERS_FORMATTING_ERROR_HPP
+#define MASD_DOGEN_UTILITY_TYPES_FORMATTERS_FORMATTING_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.utility/io/formatters/quote_type_io.hpp"
-#include "masd.dogen.utility/io/formatters/spacing_type_io.hpp"
-#include "masd.dogen.utility/io/log/logging_configuration_io.hpp"
+#include <string>
+#include <boost/exception/info.hpp>
+
+namespace masd::dogen::utility::formatters {
+
+/**
+ * @brief An error has occurred while formatting.
+ */
+class formatting_error : public virtual std::exception, public virtual boost::exception {
+public:
+    formatting_error() = default;
+    ~formatting_error() noexcept = default;
+
+public:
+    explicit formatting_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
+}
 
 #endif

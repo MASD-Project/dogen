@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "masd.dogen.utility/test_data/formatters/quote_type_td.hpp"
+#include "masd.dogen.utility/test_data/formatters/spacing_type_td.hpp"
 #include "masd.dogen.utility/test_data/log/logging_configuration_td.hpp"
 
 #endif

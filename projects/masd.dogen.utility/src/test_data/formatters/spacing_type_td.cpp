@@ -18,15 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_UTILITY_IO_ALL_IO_HPP
-#define MASD_DOGEN_UTILITY_IO_ALL_IO_HPP
+#include "masd.dogen.utility/test_data/formatters/spacing_type_td.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace masd::dogen::utility::formatters {
 
-#include "masd.dogen.utility/io/formatters/quote_type_io.hpp"
-#include "masd.dogen.utility/io/formatters/spacing_type_io.hpp"
-#include "masd.dogen.utility/io/log/logging_configuration_io.hpp"
+spacing_type_generator::spacing_type_generator() : position_(0) { }
+void spacing_type_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<spacing_type>(position % 5);
+}
 
-#endif
+spacing_type_generator::result_type
+spacing_type_generator::create(const unsigned int  position) {
+    result_type r;
+    spacing_type_generator::populate(position, r);
+    return r;
+}
+
+spacing_type_generator::result_type
+spacing_type_generator::operator()() {
+    return create(position_++);
+}
+
+}

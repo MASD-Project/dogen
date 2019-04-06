@@ -18,15 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_UTILITY_IO_ALL_IO_HPP
-#define MASD_DOGEN_UTILITY_IO_ALL_IO_HPP
+#ifndef MASD_DOGEN_UTILITY_TYPES_FORMATTERS_FORMATTING_ERROR_FWD_HPP
+#define MASD_DOGEN_UTILITY_TYPES_FORMATTERS_FORMATTING_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.utility/io/formatters/quote_type_io.hpp"
-#include "masd.dogen.utility/io/formatters/spacing_type_io.hpp"
-#include "masd.dogen.utility/io/log/logging_configuration_io.hpp"
+namespace masd::dogen::utility::formatters {
+
+class formatting_error;
+
+}
 
 #endif
