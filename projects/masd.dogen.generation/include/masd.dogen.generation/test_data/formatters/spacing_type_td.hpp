@@ -18,21 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_GENERATION_TYPES_FORMATTERS_SPACING_TYPES_HPP
-#define MASD_DOGEN_GENERATION_TYPES_FORMATTERS_SPACING_TYPES_HPP
+#ifndef MASD_DOGEN_GENERATION_TEST_DATA_FORMATTERS_SPACING_TYPE_TD_HPP
+#define MASD_DOGEN_GENERATION_TEST_DATA_FORMATTERS_SPACING_TYPE_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include "masd.dogen.generation/types/formatters/spacing_type.hpp"
+
 namespace masd::dogen::generation::formatters {
 
-enum class spacing_types : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    no_space = 1,
-    left_space = 2,
-    right_space = 3,
-    left_and_right_space = 4
+class spacing_type_generator {
+public:
+    spacing_type_generator();
+
+public:
+    typedef masd::dogen::generation::formatters::spacing_type result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
 };
 
 }

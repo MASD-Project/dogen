@@ -14513,7 +14513,7 @@ than one element.#</dia:string>
         <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#spacing_types#</dia:string>
+        <dia:string>#spacing_type#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::enumeration#</dia:string>

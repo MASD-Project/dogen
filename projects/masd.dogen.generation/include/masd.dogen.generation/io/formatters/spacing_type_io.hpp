@@ -18,26 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.generation/test_data/formatters/spacing_types_td.hpp"
+#ifndef MASD_DOGEN_GENERATION_IO_FORMATTERS_SPACING_TYPE_IO_HPP
+#define MASD_DOGEN_GENERATION_IO_FORMATTERS_SPACING_TYPE_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "masd.dogen.generation/types/formatters/spacing_type.hpp"
 
 namespace masd::dogen::generation::formatters {
 
-spacing_types_generator::spacing_types_generator() : position_(0) { }
-void spacing_types_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<spacing_types>(position % 5);
-}
-
-spacing_types_generator::result_type
-spacing_types_generator::create(const unsigned int  position) {
-    result_type r;
-    spacing_types_generator::populate(position, r);
-    return r;
-}
-
-spacing_types_generator::result_type
-spacing_types_generator::operator()() {
-    return create(position_++);
-}
+std::ostream& operator<<(std::ostream& s, const spacing_type& v);
 
 }
+
+#endif

@@ -18,25 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include <string>
-#include <sstream>
-#include <boost/test/unit_test.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
-#include "masd.dogen.generation/io/formatters/spacing_types_io.hpp"
-#include "masd.dogen.generation/types/formatters/spacing_types.hpp"
-#include "masd.dogen.generation/test_data/formatters/spacing_types_td.hpp"
+#ifndef MASD_DOGEN_GENERATION_TYPES_FORMATTERS_SPACING_TYPE_FWD_HPP
+#define MASD_DOGEN_GENERATION_TYPES_FORMATTERS_SPACING_TYPE_FWD_HPP
 
-BOOST_AUTO_TEST_SUITE(spacing_types_tests)
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
-    masd::dogen::generation::formatters::spacing_types_generator g;
-    const auto a(g());
-    std::stringstream s;
-    s << a;
+namespace masd::dogen::generation::formatters {
 
-    boost::property_tree::ptree pt;
-    BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+enum class spacing_type : unsigned int;
+
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+#endif

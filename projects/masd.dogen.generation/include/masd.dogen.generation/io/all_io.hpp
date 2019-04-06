@@ -27,8 +27,8 @@
 
 #include "masd.dogen.generation/io/meta_model/model_io.hpp"
 #include "masd.dogen.generation/io/formatters/quote_type_io.hpp"
+#include "masd.dogen.generation/io/formatters/spacing_type_io.hpp"
 #include "masd.dogen.generation/io/formatters/comment_style_io.hpp"
-#include "masd.dogen.generation/io/formatters/spacing_types_io.hpp"
 #include "masd.dogen.generation/io/meta_model/facet_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/element_archetype_io.hpp"
 #include "masd.dogen.generation/io/meta_model/formatting_styles_io.hpp"

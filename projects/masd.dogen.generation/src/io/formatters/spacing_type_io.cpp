@@ -18,20 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_GENERATION_IO_FORMATTERS_SPACING_TYPES_IO_HPP
-#define MASD_DOGEN_GENERATION_IO_FORMATTERS_SPACING_TYPES_IO_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <iosfwd>
-#include "masd.dogen.generation/types/formatters/spacing_types.hpp"
+#include <string>
+#include <ostream>
+#include <stdexcept>
+#include "masd.dogen.generation/io/formatters/spacing_type_io.hpp"
 
 namespace masd::dogen::generation::formatters {
 
-std::ostream& operator<<(std::ostream& s, const spacing_types& v);
+std::ostream& operator<<(std::ostream& s, const spacing_type& v) {
+    s << "{ " << "\"__type__\": " << "\"spacing_type\", " << "\"value\": ";
 
+    std::string attr;
+    switch (v) {
+    case spacing_type::invalid:
+        attr = "\"invalid\"";
+        break;
+    case spacing_type::no_space:
+        attr = "\"no_space\"";
+        break;
+    case spacing_type::left_space:
+        attr = "\"left_space\"";
+        break;
+    case spacing_type::right_space:
+        attr = "\"right_space\"";
+        break;
+    case spacing_type::left_and_right_space:
+        attr = "\"left_and_right_space\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for spacing_type");
+    }
+    s << attr << " }";
+    return s;
 }
 
-#endif
+}

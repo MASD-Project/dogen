@@ -18,33 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_GENERATION_TEST_DATA_FORMATTERS_SPACING_TYPES_TD_HPP
-#define MASD_DOGEN_GENERATION_TEST_DATA_FORMATTERS_SPACING_TYPES_TD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "masd.dogen.generation/types/formatters/spacing_types.hpp"
+#include "masd.dogen.generation/test_data/formatters/spacing_type_td.hpp"
 
 namespace masd::dogen::generation::formatters {
 
-class spacing_types_generator {
-public:
-    spacing_types_generator();
-
-public:
-    typedef masd::dogen::generation::formatters::spacing_types result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-};
-
+spacing_type_generator::spacing_type_generator() : position_(0) { }
+void spacing_type_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<spacing_type>(position % 5);
 }
 
-#endif
+spacing_type_generator::result_type
+spacing_type_generator::create(const unsigned int  position) {
+    result_type r;
+    spacing_type_generator::populate(position, r);
+    return r;
+}
+
+spacing_type_generator::result_type
+spacing_type_generator::operator()() {
+    return create(position_++);
+}
+
+}

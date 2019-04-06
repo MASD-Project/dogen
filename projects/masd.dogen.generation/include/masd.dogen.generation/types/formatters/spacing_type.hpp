@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_GENERATION_TYPES_FORMATTERS_SPACING_TYPES_FWD_HPP
-#define MASD_DOGEN_GENERATION_TYPES_FORMATTERS_SPACING_TYPES_FWD_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_FORMATTERS_SPACING_TYPE_HPP
+#define MASD_DOGEN_GENERATION_TYPES_FORMATTERS_SPACING_TYPE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,13 @@
 
 namespace masd::dogen::generation::formatters {
 
-enum class spacing_types : unsigned int;
+enum class spacing_type : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    no_space = 1,
+    left_space = 2,
+    right_space = 3,
+    left_and_right_space = 4
+};
 
 }
 

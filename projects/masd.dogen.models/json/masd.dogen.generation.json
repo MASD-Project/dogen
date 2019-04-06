@@ -928,7 +928,7 @@
       ]
     },
     {
-      "name": "formatters::spacing_types",
+      "name": "formatters::spacing_type",
       "stereotypes": [
         "masd::enumeration"
       ],
