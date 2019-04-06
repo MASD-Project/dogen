@@ -34,7 +34,7 @@
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include <boost/throw_exception.hpp>
-#include "masd.dogen.extraction/types/sequence_formatter.hpp"
+#include "masd.dogen.generation/types/formatters/sequence_formatter.hpp"
 
 namespace masd::dogen::generation::cpp::formatters::tests {
 

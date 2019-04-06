@@ -28,7 +28,7 @@
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/object_odb_options.hpp"
-#include "masd.dogen.extraction/types/sequence_formatter.hpp"
+#include "masd.dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include <boost/algorithm/string/case_conv.hpp>

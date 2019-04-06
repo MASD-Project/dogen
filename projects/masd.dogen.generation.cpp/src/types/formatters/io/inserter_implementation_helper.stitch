@@ -1,7 +1,7 @@
 <#@ masd.annotations.profile=dogen.stitch #>
 <#@ masd.stitch.containing_namespaces=masd::dogen::generation::cpp::formatters::io #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/io/inserter_implementation_helper.hpp" #>
-<#@ masd.stitch.inclusion_dependency="masd.dogen.extraction/types/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation/types/formatters/sequence_formatter.hpp" #>
 <#+
 
 void inserter_implementation_helper(
@@ -27,7 +27,7 @@ void inserter_implementation_helper(
       << "\"__type__\": " << "\"<#= qn #>\""<#= (no_parent_and_no_attributes ? " << \" }\";" : " << \", \"") #>
 <#+
 
-    dogen::extraction::sequence_formatter sf(o.parents().size());
+    generation::formatters::sequence_formatter sf(o.parents().size());
     sf.prefix_configuration().first("  << ").not_first("s << ");
     sf.element_separator("");
     if (!o.parents().empty()) {

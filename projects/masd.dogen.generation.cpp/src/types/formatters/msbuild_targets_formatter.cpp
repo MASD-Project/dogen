@@ -26,7 +26,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/msbuild_targets.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
-#include "masd.dogen.extraction/types/sequence_formatter.hpp"
+#include "masd.dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include <boost/make_shared.hpp>
 
@@ -116,7 +116,7 @@ a.stream() << std::endl;
 a.stream() << "        .OUTPUTS:" << std::endl;
 a.stream() << "    ]-->" << std::endl;
 a.stream() << "    <Target Name=\"" << targets.main_target_name() << "\"" << std::endl;
-            dogen::extraction::sequence_formatter sf(targets.targets().size());
+            generation::formatters::sequence_formatter sf(targets.targets().size());
             sf.prefix_configuration().first("          DependsOnTargets=\"")
                                      .not_first("                            ");
             sf.postfix_configuration().last("\">");

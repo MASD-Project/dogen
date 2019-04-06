@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.extraction/types/sequence_formatter.hpp"
+#include "masd.dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/io/inserter_implementation_helper.hpp"
 
 namespace masd::dogen::generation::cpp::formatters::io {
@@ -42,7 +42,7 @@ a.stream() << std::endl;
 a.stream() << "    s << \" { \"" << std::endl;
 a.stream() << "      << \"\\\"__type__\\\": \" << \"\\\"" << qn << "\\\"\"" << (no_parent_and_no_attributes ? " << \" }\";" : " << \", \"") << std::endl;
 
-    dogen::extraction::sequence_formatter sf(o.parents().size());
+    generation::formatters::sequence_formatter sf(o.parents().size());
     sf.prefix_configuration().first("  << ").not_first("s << ");
     sf.element_separator("");
     if (!o.parents().empty()) {
