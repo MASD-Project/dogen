@@ -67,9 +67,9 @@ for layer in dia.active_display().diagram.data.layers:
             object.properties["fill_colour"] = "#DDB7B7"
         elif "masd::decoration::licence_text" in stereotype:
             object.properties["fill_colour"] = "#DDB7DD"
-        elif "masd::decoration::marker" in stereotype:
+        elif "masd::decoration::generation_marker" in stereotype:
             object.properties["fill_colour"] = "#ACACBB"
-            
+
         #
         # Theme: Core meta-elements
         #
