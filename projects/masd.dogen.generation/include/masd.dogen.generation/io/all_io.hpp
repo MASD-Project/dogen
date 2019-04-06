@@ -38,6 +38,7 @@
 #include "masd.dogen.generation/io/formatters/infix_configuration_io.hpp"
 #include "masd.dogen.generation/io/meta_model/artefact_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/archetype_properties_io.hpp"
+#include "masd.dogen.generation/io/formatters/boilerplate_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/generatable_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/path_contribution_types_io.hpp"
 #include "masd.dogen.generation/io/meta_model/model_segment_properties_io.hpp"

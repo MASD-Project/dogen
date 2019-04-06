@@ -951,6 +951,74 @@
         "masd::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::namespace_formatter",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::scoped_namespace_formatter",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::boilerplate_formatter",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::scoped_boilerplate_formatter",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::dependencies_formatter",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::header_guard_formatter",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::boilerplate_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "preamble",
+          "type": "std::string"
+        },
+        {
+          "name": "postamble",
+          "type": "std::string"
+        },
+        {
+          "name": "dependencies",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "header_guard",
+          "type": "std::string"
+        },
+        {
+          "name": "technical_space",
+          "type": "coding::meta_model::technical_space"
+        }
+      ]
     }
   ]
 }
