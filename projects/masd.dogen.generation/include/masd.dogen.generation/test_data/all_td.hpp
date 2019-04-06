@@ -26,13 +26,16 @@
 #endif
 
 #include "masd.dogen.generation/test_data/meta_model/model_td.hpp"
+#include "masd.dogen.generation/test_data/formatters/quote_type_td.hpp"
 #include "masd.dogen.generation/test_data/formatters/comment_style_td.hpp"
+#include "masd.dogen.generation/test_data/formatters/spacing_types_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/facet_properties_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/element_archetype_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/formatting_styles_td.hpp"
 #include "masd.dogen.generation/test_data/helpers/decoration_repository_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/backend_properties_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/locator_properties_td.hpp"
+#include "masd.dogen.generation/test_data/formatters/infix_configuration_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/artefact_properties_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/archetype_properties_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/generatable_properties_td.hpp"
