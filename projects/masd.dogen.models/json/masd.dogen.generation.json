@@ -948,7 +948,7 @@
     {
       "name": "formatters::indent_filter",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     }
