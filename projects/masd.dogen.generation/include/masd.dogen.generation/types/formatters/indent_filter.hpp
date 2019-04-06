@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_GENERATION_TYPES_INDENT_FILTER_HPP
-#define MASD_DOGEN_GENERATION_TYPES_INDENT_FILTER_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_FORMATTERS_INDENT_FILTER_HPP
+#define MASD_DOGEN_GENERATION_TYPES_FORMATTERS_INDENT_FILTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <algorithm>
 
-namespace masd::dogen::generation {
+namespace masd::dogen::generation::formatters {
 
 class indent_filter final {
 public:

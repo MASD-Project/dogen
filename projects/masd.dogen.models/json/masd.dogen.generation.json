@@ -860,13 +860,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "indent_filter",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formatters::infix_configuration",
       "documentation": "Configuration to use for a given infix in sequence formatter.\n",
       "stereotypes": [
@@ -951,6 +944,13 @@
           "type": ""
         }
       ]
+    },
+    {
+      "name": "formatters::indent_filter",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

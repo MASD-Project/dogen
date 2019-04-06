@@ -26,12 +26,12 @@
 #endif
 
 #include "masd.dogen.generation/types/traits.hpp"
-#include "masd.dogen.generation/types/indent_filter.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/formatters/quote_type.hpp"
 #include "masd.dogen.generation/types/formatters/spacing_type.hpp"
 #include "masd.dogen.generation/types/formatters/comment_style.hpp"
+#include "masd.dogen.generation/types/formatters/indent_filter.hpp"
 #include "masd.dogen.generation/types/helpers/building_exception.hpp"
 #include "masd.dogen.generation/types/transforms/registrar_error.hpp"
 #include "masd.dogen.generation/types/formatters/formatting_error.hpp"

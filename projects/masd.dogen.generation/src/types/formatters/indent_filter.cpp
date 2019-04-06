@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.generation/types/indent_filter.hpp"
+#include "masd.dogen.generation/types/formatters/indent_filter.hpp"
 
-namespace masd::dogen::generation {
+namespace masd::dogen::generation::formatters {
 
 bool indent_filter::operator==(const indent_filter& /*rhs*/) const {
     return true;
