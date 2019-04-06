@@ -31,7 +31,7 @@
 #include "masd.dogen.annotations/types/archetype_location.hpp"
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.generation/types/formatters/scoped_boilerplate_formatter.hpp"
-#include "masd.dogen.extraction/types/csharp/scoped_namespace_formatter.hpp"
+#include "masd.dogen.generation/types/formatters/scoped_namespace_formatter.hpp"
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/attribute.hpp"
 #include "masd.dogen.coding/types/meta_model/name_tree.hpp"
@@ -88,7 +88,7 @@ public:
     /**
      * @brief Returns a scoped namespace formatter.
      */
-    dogen::extraction::csharp::scoped_namespace_formatter
+    generation::formatters::scoped_namespace_formatter
     make_scoped_namespace_formatter(const std::list<std::string>& ns);
 
 public:

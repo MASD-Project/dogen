@@ -115,10 +115,11 @@ make_scoped_boilerplate_formatter(const coding::meta_model::element& e) {
 
 }
 
-dogen::extraction::csharp::scoped_namespace_formatter
+generation::formatters::scoped_namespace_formatter
 assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
-    return dogen::extraction::csharp::scoped_namespace_formatter(
-        stream(), ns, true/*add_new_line*/);
+    return generation::formatters::scoped_namespace_formatter(
+        stream(), coding::meta_model::technical_space::csharp, ns,
+        true/*add_new_line*/);
 }
 
 std::list<std::string>
