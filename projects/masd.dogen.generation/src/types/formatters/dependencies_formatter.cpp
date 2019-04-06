@@ -18,12 +18,65 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
+#include <boost/lexical_cast.hpp>
+#include <boost/throw_exception.hpp>
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
+#include "masd.dogen.generation/types/formatters/formatting_error.hpp"
+#include "masd.dogen.generation/types/formatters/indent_filter.hpp"
 #include "masd.dogen.generation/types/formatters/dependencies_formatter.hpp"
+
+namespace {
+
+using namespace masd::dogen::utility::log;
+static logger
+lg(logger_factory("generation.formatters.dependencies_formatter"));
+
+const std::string using_keyword("using");
+const std::string include_keyword("#include ");
+
+const std::string unsupported_technical_space(
+    "Technical space is unsupported or invalid: ");
+
+}
 
 namespace masd::dogen::generation::formatters {
 
-bool dependencies_formatter::operator==(const dependencies_formatter& /*rhs*/) const {
-    return true;
+void dependencies_formatter::format_cpp_includes(std::ostream& s,
+    const std::list<std::string>& dependencies) const {
+    for (const auto& d : dependencies)
+        s << include_keyword << d << std::endl;
+}
+
+void dependencies_formatter::format_csharp_usings(std::ostream& s,
+    const std::list<std::string>& dependencies) const {
+
+    for (const auto& d : dependencies)
+        s << using_keyword <<  d<<  std::endl;
+}
+
+void dependencies_formatter::format(std::ostream& s,
+    const coding::meta_model::technical_space ts,
+    const std::list<std::string>& dependencies) const {
+
+    using coding::meta_model::technical_space;
+    switch(ts) {
+    case technical_space::cpp:
+        format_cpp_includes(s, dependencies);
+        break;
+    case technical_space::csharp:
+        format_csharp_usings(s, dependencies);
+        break;
+    default:
+        const auto s(boost::lexical_cast<std::string>(ts));
+        BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;
+        BOOST_THROW_EXCEPTION(
+            formatting_error(unsupported_technical_space + s));
+    }
+
+    if (!dependencies.empty())
+        s << manage_blank_lines << std::endl;
 }
 
 }

@@ -18,12 +18,53 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
+#include <sstream>
+#include <boost/algorithm/string.hpp>
+#include "masd.dogen.generation/types/formatters/indent_filter.hpp"
 #include "masd.dogen.generation/types/formatters/header_guard_formatter.hpp"
+
+namespace {
+
+const std::string ifndef("#ifndef ");
+const std::string define("#define ");
+const std::string endif("#endif");
+
+const std::string msvc_line_1("#if defined(_MSC_VER) && (_MSC_VER >= 1200)");
+const std::string msvc_line_2("#pragma once");
+const std::string msvc_line_3("#endif");
+
+const std::string empty;
+const std::string dot(".");
+const std::string separator("_");
+
+}
 
 namespace masd::dogen::generation::formatters {
 
-bool header_guard_formatter::operator==(const header_guard_formatter& /*rhs*/) const {
-    return true;
+header_guard_formatter::
+header_guard_formatter(std::ostream& s, const std::string& header_guard)
+    : stream_(s), header_guard_(header_guard) {}
+
+void header_guard_formatter::format_begin() {
+    if (header_guard_.empty())
+        return;
+
+    stream_ << ifndef << header_guard_;
+    stream_ << std::endl << define << header_guard_;
+
+    stream_ << std::endl << std::endl
+            << msvc_line_1 << std::endl
+            << msvc_line_2 << std::endl
+            << msvc_line_3 << std::endl
+            << manage_blank_lines << std::endl;
+}
+
+void header_guard_formatter::format_end() {
+    if (header_guard_.empty())
+        return;
+
+    stream_ << endif << std::endl;
 }
 
 }

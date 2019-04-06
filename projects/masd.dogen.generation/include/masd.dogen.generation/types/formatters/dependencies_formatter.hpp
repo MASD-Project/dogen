@@ -25,24 +25,34 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include <iosfwd>
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 
 namespace masd::dogen::generation::formatters {
 
+/**
+ * @brief Generates dependencies import statements for the requested
+ * technical space.
+ */
 class dependencies_formatter final {
-public:
-    dependencies_formatter() = default;
-    dependencies_formatter(const dependencies_formatter&) = default;
-    dependencies_formatter(dependencies_formatter&&) = default;
-    ~dependencies_formatter() = default;
-    dependencies_formatter& operator=(const dependencies_formatter&) = default;
+private:
+    /**
+     * @brief Generates preprocessor include statements.
+     */
+    void format_cpp_includes(std::ostream& s,
+        const std::list<std::string>& dependencies) const;
+
+    /**
+     * @brief Generates using statements.
+     */
+    void format_csharp_usings(std::ostream& s,
+        const std::list<std::string>& dependencies) const;
 
 public:
-    bool operator==(const dependencies_formatter& rhs) const;
-    bool operator!=(const dependencies_formatter& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    void format(std::ostream& s, const coding::meta_model::technical_space ts,
+        const std::list<std::string>& dependencies) const;
 };
 
 }

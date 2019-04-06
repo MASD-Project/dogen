@@ -1017,6 +1017,14 @@
         {
           "name": "technical_space",
           "type": "coding::meta_model::technical_space"
+        },
+        {
+          "name": "generate_preamble",
+          "type": "bool"
+        },
+        {
+          "name": "generate_header_guards",
+          "type": "bool"
         }
       ]
     }

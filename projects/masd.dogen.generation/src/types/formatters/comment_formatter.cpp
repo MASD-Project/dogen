@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <sstream>
-#include <boost/throw_exception.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.generation/io/formatters/comment_style_io.hpp"

@@ -25,24 +25,67 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <iosfwd>
+#include <string>
+#include "masd.dogen.generation/types/formatters/boilerplate_properties.hpp"
 
 namespace masd::dogen::generation::formatters {
 
+/**
+ * @brief Formats all of the boilerplate content in a file such as
+ * licence, modeline, dependencies, etc.
+ */
 class boilerplate_formatter final {
 public:
-    boilerplate_formatter() = default;
-    boilerplate_formatter(const boilerplate_formatter&) = default;
-    boilerplate_formatter(boilerplate_formatter&&) = default;
-    ~boilerplate_formatter() = default;
-    boilerplate_formatter& operator=(const boilerplate_formatter&) = default;
+    boilerplate_formatter(std::ostream& s, const boilerplate_properties& bp);
+
+private:
+    /**
+     * @brief Formats the file's preamble.
+     *
+     * The preamble is made up of the modeline, any potential code
+     * generation marker and the licence.
+     */
+    void format_preamble() const;
+
+    /**
+     * @brief Formats the file's postamble.
+     *
+     * The postamble is composed of a bottom modeline, if any.
+     */
+    void format_postamble() const;
+
+    /**
+     * @brief Formats the starting part of the header guards.
+     */
+    void format_guards_begin() const;
+
+    /**
+     * @brief Formats the ending part of the header guards.
+     */
+    void format_guards_end() const;
+
+    /**
+     * @brief Formats the preprocessor includes.
+     */
+    void format_dependencies() const;
 
 public:
-    bool operator==(const boilerplate_formatter& rhs) const;
-    bool operator!=(const boilerplate_formatter& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Formats the initial section of boilerplate.
+     */
+    void format_begin() const;
 
+    /**
+     * @brief Formats the end of the boilerplate.
+     */
+    void format_end() const;
+
+private:
+    std::ostream& stream_;
+    const boilerplate_properties boilerplate_properties_;
+    const bool supports_header_guards_;
 };
 
 }

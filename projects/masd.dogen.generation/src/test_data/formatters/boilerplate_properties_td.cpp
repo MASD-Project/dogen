@@ -43,6 +43,10 @@ create_masd_dogen_coding_meta_model_technical_space(const unsigned int position)
     return masd::dogen::coding::meta_model::technical_space_generator::create(position);
 }
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) != 0;
+}
+
 }
 
 namespace masd::dogen::generation::formatters {
@@ -56,6 +60,8 @@ populate(const unsigned int position, result_type& v) {
     v.dependencies(create_std_list_std_string(position + 2));
     v.header_guard(create_std_string(position + 3));
     v.technical_space(create_masd_dogen_coding_meta_model_technical_space(position + 4));
+    v.generate_preamble(create_bool(position + 5));
+    v.generate_header_guards(create_bool(position + 6));
 }
 
 boilerplate_properties_generator::result_type

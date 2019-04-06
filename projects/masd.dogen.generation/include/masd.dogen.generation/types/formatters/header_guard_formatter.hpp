@@ -25,24 +25,32 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <iosfwd>
+#include <string>
 
 namespace masd::dogen::generation::formatters {
 
+/**
+ * @brief Generates C++ header guards.
+ */
 class header_guard_formatter final {
 public:
-    header_guard_formatter() = default;
-    header_guard_formatter(const header_guard_formatter&) = default;
-    header_guard_formatter(header_guard_formatter&&) = default;
-    ~header_guard_formatter() = default;
-    header_guard_formatter& operator=(const header_guard_formatter&) = default;
+    header_guard_formatter(std::ostream& s, const std::string& header_guard);
 
 public:
-    bool operator==(const header_guard_formatter& rhs) const;
-    bool operator!=(const header_guard_formatter& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Creates the starting block of the header guard.
+     */
+    void format_begin();
 
+    /**
+     * @brief Creates the ending block of the header guard.
+     */
+    void format_end();
+
+public:
+    std::ostream& stream_;
+    const std::string header_guard_;
 };
 
 }

@@ -47,7 +47,9 @@ public:
         const std::string& postamble,
         const std::list<std::string>& dependencies,
         const std::string& header_guard,
-        const masd::dogen::coding::meta_model::technical_space technical_space);
+        const masd::dogen::coding::meta_model::technical_space technical_space,
+        const bool generate_preamble,
+        const bool generate_header_guards);
 
 public:
     const std::string& preamble() const;
@@ -73,6 +75,12 @@ public:
     masd::dogen::coding::meta_model::technical_space technical_space() const;
     void technical_space(const masd::dogen::coding::meta_model::technical_space v);
 
+    bool generate_preamble() const;
+    void generate_preamble(const bool v);
+
+    bool generate_header_guards() const;
+    void generate_header_guards(const bool v);
+
 public:
     bool operator==(const boilerplate_properties& rhs) const;
     bool operator!=(const boilerplate_properties& rhs) const {
@@ -89,6 +97,8 @@ private:
     std::list<std::string> dependencies_;
     std::string header_guard_;
     masd::dogen::coding::meta_model::technical_space technical_space_;
+    bool generate_preamble_;
+    bool generate_header_guards_;
 };
 
 }

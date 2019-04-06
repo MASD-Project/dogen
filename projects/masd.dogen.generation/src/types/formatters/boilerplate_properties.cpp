@@ -23,19 +23,25 @@
 namespace masd::dogen::generation::formatters {
 
 boilerplate_properties::boilerplate_properties()
-    : technical_space_(static_cast<masd::dogen::coding::meta_model::technical_space>(0)) { }
+    : technical_space_(static_cast<masd::dogen::coding::meta_model::technical_space>(0)),
+      generate_preamble_(static_cast<bool>(0)),
+      generate_header_guards_(static_cast<bool>(0)) { }
 
 boilerplate_properties::boilerplate_properties(
     const std::string& preamble,
     const std::string& postamble,
     const std::list<std::string>& dependencies,
     const std::string& header_guard,
-    const masd::dogen::coding::meta_model::technical_space technical_space)
+    const masd::dogen::coding::meta_model::technical_space technical_space,
+    const bool generate_preamble,
+    const bool generate_header_guards)
     : preamble_(preamble),
       postamble_(postamble),
       dependencies_(dependencies),
       header_guard_(header_guard),
-      technical_space_(technical_space) { }
+      technical_space_(technical_space),
+      generate_preamble_(generate_preamble),
+      generate_header_guards_(generate_header_guards) { }
 
 void boilerplate_properties::swap(boilerplate_properties& other) noexcept {
     using std::swap;
@@ -44,6 +50,8 @@ void boilerplate_properties::swap(boilerplate_properties& other) noexcept {
     swap(dependencies_, other.dependencies_);
     swap(header_guard_, other.header_guard_);
     swap(technical_space_, other.technical_space_);
+    swap(generate_preamble_, other.generate_preamble_);
+    swap(generate_header_guards_, other.generate_header_guards_);
 }
 
 bool boilerplate_properties::operator==(const boilerplate_properties& rhs) const {
@@ -51,7 +59,9 @@ bool boilerplate_properties::operator==(const boilerplate_properties& rhs) const
         postamble_ == rhs.postamble_ &&
         dependencies_ == rhs.dependencies_ &&
         header_guard_ == rhs.header_guard_ &&
-        technical_space_ == rhs.technical_space_;
+        technical_space_ == rhs.technical_space_ &&
+        generate_preamble_ == rhs.generate_preamble_ &&
+        generate_header_guards_ == rhs.generate_header_guards_;
 }
 
 boilerplate_properties& boilerplate_properties::operator=(boilerplate_properties other) {
@@ -130,6 +140,22 @@ masd::dogen::coding::meta_model::technical_space boilerplate_properties::technic
 
 void boilerplate_properties::technical_space(const masd::dogen::coding::meta_model::technical_space v) {
     technical_space_ = v;
+}
+
+bool boilerplate_properties::generate_preamble() const {
+    return generate_preamble_;
+}
+
+void boilerplate_properties::generate_preamble(const bool v) {
+    generate_preamble_ = v;
+}
+
+bool boilerplate_properties::generate_header_guards() const {
+    return generate_header_guards_;
+}
+
+void boilerplate_properties::generate_header_guards(const bool v) {
+    generate_header_guards_ = v;
 }
 
 }

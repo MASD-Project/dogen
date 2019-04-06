@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.generation/io/formatters/boilerplate_properties_io.hpp"
@@ -48,13 +49,21 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 namespace masd::dogen::generation::formatters {
 
 std::ostream& operator<<(std::ostream& s, const boilerplate_properties& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::generation::formatters::boilerplate_properties\"" << ", "
       << "\"preamble\": " << "\"" << tidy_up_string(v.preamble()) << "\"" << ", "
       << "\"postamble\": " << "\"" << tidy_up_string(v.postamble()) << "\"" << ", "
       << "\"dependencies\": " << v.dependencies() << ", "
       << "\"header_guard\": " << "\"" << tidy_up_string(v.header_guard()) << "\"" << ", "
-      << "\"technical_space\": " << v.technical_space()
+      << "\"technical_space\": " << v.technical_space() << ", "
+      << "\"generate_preamble\": " << v.generate_preamble() << ", "
+      << "\"generate_header_guards\": " << v.generate_header_guards()
       << " }";
     return(s);
 }
