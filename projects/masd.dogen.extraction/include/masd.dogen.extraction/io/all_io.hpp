@@ -28,7 +28,6 @@
 #include "masd.dogen.extraction/io/quote_types_io.hpp"
 #include "masd.dogen.extraction/io/spacing_types_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"
-#include "masd.dogen.extraction/io/infix_configuration_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/artefact_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/operation_io.hpp"
 #include "masd.dogen.extraction/io/helpers/files_by_status_io.hpp"
