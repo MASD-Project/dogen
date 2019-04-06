@@ -381,11 +381,11 @@ make_scoped_boilerplate_formatter(const coding::meta_model::element& e) {
     return scoped_boilerplate_formatter(stream(), bp);
 }
 
-dogen::extraction::cpp::scoped_namespace_formatter
+generation::formatters::scoped_namespace_formatter
 assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
-    return dogen::extraction::cpp::scoped_namespace_formatter(
-        stream(), ns, false/*create_anonymous_namespace*/,
-        true/*add_new_line*/, requires_nested_namespaces());
+    return generation::formatters::scoped_namespace_formatter(
+        stream(), coding::meta_model::technical_space::cpp,
+        ns, true/*add_new_line*/, requires_nested_namespaces());
 }
 
 void assistant::make_decoration_preamble(const coding::meta_model::element& e) {

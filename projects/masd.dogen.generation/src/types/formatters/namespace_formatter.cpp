@@ -108,6 +108,10 @@ void namespace_formatter::format_csharp_begin() {
 void namespace_formatter::format_cpp_end() {
     if (namespaces_.empty() || use_nesting_ || namespaces_.size() == 1) {
         stream_ << "}";
+
+        if (add_new_line_)
+            stream_ << std::endl;
+
         return;
     }
 
