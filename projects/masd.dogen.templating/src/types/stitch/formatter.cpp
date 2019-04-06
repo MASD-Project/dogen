@@ -20,9 +20,9 @@
  */
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string/join.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.extraction/types/utility_formatter.hpp"
-#include "masd.dogen.extraction/types/cpp/scoped_namespace_formatter.hpp"
 #include "masd.dogen.templating/io/stitch/block_types_io.hpp"
 #include "masd.dogen.templating/types/stitch/formatting_error.hpp"
 #include "masd.dogen.templating/types/stitch/formatter.hpp"
@@ -183,9 +183,10 @@ formatter::format(const text_template& tt) const {
         if (!id.empty())
             s << std::endl;
 
-        masd::dogen::extraction::cpp::scoped_namespace_formatter snf(
-            s, props.containing_namespaces(), false/*create_anonymous_namespace*/,
-            true/*add_new_line_*/, true/*nested_namespaces*/);
+        using boost::algorithm::join;
+        const auto joined(join(props.containing_namespaces(), "::"));
+        if (!joined.empty())
+            s << "namespace " << joined << " {" << std::endl;
 
         BOOST_LOG_SEV(lg, debug) << "Total lines: " << tt.body().lines().size();
         for (const auto& l : tt.body().lines()) {
@@ -201,6 +202,9 @@ formatter::format(const text_template& tt) const {
         const auto postamble(rs.resolve(decoration_postamble_key));
         if (!postamble.empty())
             s << postamble << std::endl;
+
+        if (!joined.empty())
+            s << "}" << std::endl;
     }
 
     extraction::meta_model::artefact r;
