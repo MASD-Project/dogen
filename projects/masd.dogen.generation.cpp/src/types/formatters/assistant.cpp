@@ -24,12 +24,13 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/unordered_set_io.hpp"
-#include "masd.dogen.extraction/types/indent_filter.hpp"
+#include "masd.dogen.generation/types/formatters/indent_filter.hpp"
 #include "masd.dogen.generation/types/formatters/comment_formatter.hpp"
 #include "masd.dogen.extraction/types/utility_formatter.hpp"
 #include "masd.dogen.coding/io/meta_model/letter_cases_io.hpp"
 #include "masd.dogen.coding/types/helpers/name_flattener.hpp"
 #include "masd.dogen.generation/hash/meta_model/element_archetype_hash.hpp"
+#include "masd.dogen.generation/types/formatters/boilerplate_properties.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/streaming_properties_io.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/helper_properties_io.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/io/traits.hpp"
@@ -98,7 +99,7 @@ assistant(const context& ctx, const coding::meta_model::element& e,
                              << element_.name().qualified().dot()
                              << " for archetype: " << al.archetype();
 
-    dogen::extraction::indent_filter::push(filtering_stream_, 4);
+    generation::formatters::indent_filter::push(filtering_stream_, 4);
     filtering_stream_.push(stream_);
 
     validate();
@@ -363,17 +364,21 @@ bool assistant::is_test_data_enabled() const {
     return is_facet_enabled(traits::facet());
 }
 
-dogen::extraction::cpp::scoped_boilerplate_formatter assistant::
+generation::formatters::scoped_boilerplate_formatter assistant::
 make_scoped_boilerplate_formatter(const coding::meta_model::element& e) {
-    const auto& art_props(artefact_properties_);
-    const auto& deps(art_props.inclusion_dependencies());
-    const auto& hg(art_props.header_guard());
+    generation::formatters::boilerplate_properties bp;
 
-    using dogen::extraction::cpp::scoped_boilerplate_formatter;
-    return scoped_boilerplate_formatter(stream(),
-        e.decoration() ? e.decoration()->preamble() : empty,
-        e.decoration() ? e.decoration()->postamble() : empty,
-        deps, hg);
+    const auto& art_props(artefact_properties_);
+    bp.dependencies(art_props.inclusion_dependencies());
+    bp.header_guard(art_props.header_guard());
+    bp.technical_space(coding::meta_model::technical_space::cpp);
+    bp.preamble(e.decoration() ? e.decoration()->preamble() : empty);
+    bp.postamble(e.decoration() ? e.decoration()->postamble() : empty);
+    bp.generate_preamble(true);
+    bp.generate_header_guards(true);
+
+    using generation::formatters::scoped_boilerplate_formatter;
+    return scoped_boilerplate_formatter(stream(), bp);
 }
 
 dogen::extraction::cpp::scoped_namespace_formatter
@@ -410,7 +415,7 @@ comment_start_method_group(const std::string& documentation,
         return;
 
     {
-        dogen::extraction::positive_indenter_scope pis(stream());
+        generation::formatters::positive_indenter_scope pis(stream());
         generation::formatters::comment_formatter f(
             !start_on_first_line,
             use_documentation_tool_markup,
@@ -432,7 +437,7 @@ void assistant::comment_end_method_group(const std::string& documentation,
         return;
 
     {
-        dogen::extraction::positive_indenter_scope pis(stream());
+        generation::formatters::positive_indenter_scope pis(stream());
         generation::formatters::comment_formatter f(
             start_on_first_line,
             use_documentation_tool_markup,
