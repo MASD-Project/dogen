@@ -30,7 +30,7 @@
 #include <boost/iostreams/filtering_stream.hpp>
 #include "masd.dogen.annotations/types/archetype_location.hpp"
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
-#include "masd.dogen.extraction/types/csharp/scoped_boilerplate_formatter.hpp"
+#include "masd.dogen.generation/types/formatters/scoped_boilerplate_formatter.hpp"
 #include "masd.dogen.extraction/types/csharp/scoped_namespace_formatter.hpp"
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/attribute.hpp"
@@ -82,7 +82,7 @@ public:
     /**
      * @brief Returns a scoped boilerplate formatter.
      */
-    dogen::extraction::csharp::scoped_boilerplate_formatter
+    generation::formatters::scoped_boilerplate_formatter
     make_scoped_boilerplate_formatter(const coding::meta_model::element& e);
 
     /**
