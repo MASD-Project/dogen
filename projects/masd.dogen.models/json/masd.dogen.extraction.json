@@ -33,13 +33,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "indent_filter",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "traits",
       "stereotypes": [
         "masd::handcrafted"
@@ -105,48 +98,6 @@
     {
       "name": "cpp",
       "fallback_element_type": "masd::module"
-    },
-    {
-      "name": "cpp::boilerplate_formatter",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "cpp::include_formatter",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "cpp::header_guard_formatter",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "cpp::scoped_boilerplate_formatter",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "stream_",
-          "type": "std::ostream"
-        },
-        {
-          "name": "includes_",
-          "type": "std::list<std::string>"
-        },
-        {
-          "name": "header_guard_",
-          "type": "std::string"
-        }
-      ]
     },
     {
       "name": "cpp::namespace_formatter",
@@ -221,27 +172,6 @@
     {
       "name": "csharp",
       "fallback_element_type": "masd::module"
-    },
-    {
-      "name": "csharp::boilerplate_formatter",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "csharp::scoped_boilerplate_formatter",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "csharp::using_formatter",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
     },
     {
       "name": "csharp::scoped_namespace_formatter",

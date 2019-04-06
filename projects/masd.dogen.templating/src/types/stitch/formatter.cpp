@@ -22,7 +22,6 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.extraction/types/utility_formatter.hpp"
-#include "masd.dogen.extraction/types/indent_filter.hpp"
 #include "masd.dogen.extraction/types/cpp/scoped_namespace_formatter.hpp"
 #include "masd.dogen.templating/io/stitch/block_types_io.hpp"
 #include "masd.dogen.templating/types/stitch/formatting_error.hpp"
@@ -182,7 +181,7 @@ formatter::format(const text_template& tt) const {
             s << include << inc << std::endl;
 
         if (!id.empty())
-            s << masd::dogen::extraction::manage_blank_lines << std::endl;
+            s << std::endl;
 
         masd::dogen::extraction::cpp::scoped_namespace_formatter snf(
             s, props.containing_namespaces(), false/*create_anonymous_namespace*/,

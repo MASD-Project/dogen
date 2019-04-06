@@ -22,11 +22,11 @@
 #include <boost/test/unit_test.hpp>
 #include "masd.dogen.utility/types/test/logging.hpp"
 #include "masd.dogen.utility/types/test/asserter.hpp"
-#include "masd.dogen.extraction/types/indent_filter.hpp"
+#include "masd.dogen.generation/types/formatters/indent_filter.hpp"
 
 namespace {
 
-const std::string test_module("masd.dogen.extraction.tests");
+const std::string test_module("masd.dogen.generation.tests");
 const std::string test_suite("indent_filter_tests");
 
 const std::string empty;
@@ -78,6 +78,8 @@ const std::string expected(const unsigned int indentation_level,
 
 using namespace masd::dogen::utility::test;
 using masd::dogen::utility::test::asserter;
+using masd::dogen::generation::formatters::indent_filter;
+using masd::dogen::generation::formatters::manage_blank_lines;
 
 BOOST_AUTO_TEST_SUITE(indenter_filter_tests)
 
@@ -86,7 +88,7 @@ BOOST_AUTO_TEST_CASE(default_indentation_level_does_not_indent) {
 
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    masd::dogen::extraction::indent_filter::push(fo, 4);
+    indent_filter::push(fo, 4);
     fo.push(s);
     fo << input << std::endl;
     fo.flush();
@@ -98,7 +100,7 @@ BOOST_AUTO_TEST_CASE(default_indentation_level_without_new_line_does_not_indent)
 
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    masd::dogen::extraction::indent_filter::push(fo, 4);
+    indent_filter::push(fo, 4);
     fo.push(s);
     fo << input;
     fo.flush();
@@ -110,7 +112,7 @@ BOOST_AUTO_TEST_CASE(incrementing_once_increases_indentation_level_by_one) {
 
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    masd::dogen::extraction::indent_filter::push(fo, 4);
+    indent_filter::push(fo, 4);
     fo.push(s);
     ++fo;
     fo << input << std::endl;
@@ -124,7 +126,7 @@ BOOST_AUTO_TEST_CASE(incrementing_twice_times_increases_indentation_level_by_two
 
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    masd::dogen::extraction::indent_filter::push(fo, 4);
+    indent_filter::push(fo, 4);
     fo.push(s);
     ++fo; ++fo;
     fo << input << std::endl;
@@ -138,7 +140,7 @@ BOOST_AUTO_TEST_CASE(incrementing_three_times_increases_indentation_level_by_thr
 
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    masd::dogen::extraction::indent_filter::push(fo, 4);
+    indent_filter::push(fo, 4);
     fo.push(s);
     ++fo; ++fo; ++fo;
     fo << input << std::endl;
@@ -152,7 +154,7 @@ BOOST_AUTO_TEST_CASE(decrementing_once_increases_indentation_level_by_one) {
 
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    masd::dogen::extraction::indent_filter::push(fo, 4);
+    indent_filter::push(fo, 4);
     fo.push(s);
     ++fo; ++fo; ++fo;
     fo << input << std::endl;
@@ -172,7 +174,7 @@ BOOST_AUTO_TEST_CASE(decrementing_twice_increases_indentation_level_by_two) {
 
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    masd::dogen::extraction::indent_filter::push(fo, 4);
+    indent_filter::push(fo, 4);
     fo.push(s);
     ++fo; ++fo; ++fo; ++fo;
     fo << input << std::endl;
@@ -192,7 +194,7 @@ BOOST_AUTO_TEST_CASE(decrementing_three_times_increases_indentation_level_by_thr
 
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    masd::dogen::extraction::indent_filter::push(fo, 4);
+    indent_filter::push(fo, 4);
     fo.push(s);
     ++fo; ++fo; ++fo; ++fo; ++fo; ++fo;
     fo << input << std::endl;
@@ -212,7 +214,7 @@ BOOST_AUTO_TEST_CASE(unindenting_at_zero_indentation_level_does_nothing) {
 
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    masd::dogen::extraction::indent_filter::push(fo, 4);
+    indent_filter::push(fo, 4);
     fo.push(s);
     --fo;
     fo << input << std::endl;
@@ -225,20 +227,20 @@ BOOST_AUTO_TEST_CASE(positive_indenter_scope_correctly_increases_and_decreases_i
     SETUP_TEST_LOG("positive_indenter_scope_correctly_increases_and_decreases_indentation_level");
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    masd::dogen::extraction::indent_filter::push(fo, 4);
+    indent_filter::push(fo, 4);
     fo.push(s);
     fo << input << std::endl;
     fo.flush();
     BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4), s.str()));
     s.str(empty);
     {
-        masd::dogen::extraction::positive_indenter_scope pis(fo);
+        masd::dogen::generation::formatters::positive_indenter_scope pis(fo);
         fo << input << std::endl;
         fo.flush();
         BOOST_CHECK(asserter::assert_equals_marker(expected(1, 4), s.str()));
         s.str(empty);
         {
-            masd::dogen::extraction::positive_indenter_scope pis(fo);
+            masd::dogen::generation::formatters::positive_indenter_scope pis(fo);
             fo << input << std::endl;
             fo.flush();
             BOOST_CHECK(asserter::assert_equals_marker(expected(2, 4),
@@ -260,7 +262,7 @@ BOOST_AUTO_TEST_CASE(negative_indenter_scope_correctly_decreases_and_increases_i
     SETUP_TEST_LOG_SOURCE("negative_indenter_scope_correctly_decreases_and_increases_indentation_level");
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    masd::dogen::extraction::indent_filter::push(fo, 4);
+    indent_filter::push(fo, 4);
     fo.push(s);
     ++fo; ++fo;
     fo << input << std::endl;
@@ -269,13 +271,13 @@ BOOST_AUTO_TEST_CASE(negative_indenter_scope_correctly_decreases_and_increases_i
     s.str(empty);
 
     {
-        masd::dogen::extraction::negative_indenter_scope nis(fo);
+        masd::dogen::generation::formatters::negative_indenter_scope nis(fo);
         fo << input << std::endl;
         fo.flush();
         BOOST_CHECK(asserter::assert_equals_marker(expected(1, 4), s.str()));
         s.str(empty);
         {
-            masd::dogen::extraction::negative_indenter_scope nis(fo);
+            masd::dogen::generation::formatters::negative_indenter_scope nis(fo);
             fo << input << std::endl;
             fo.flush();
             BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4),
@@ -297,14 +299,14 @@ BOOST_AUTO_TEST_CASE(negative_indenter_scope_correctly_handles_zero_indentation_
     SETUP_TEST_LOG("negative_indenter_scope_correctly_handles_zero_indentation_level");
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    masd::dogen::extraction::indent_filter::push(fo, 4);
+    indent_filter::push(fo, 4);
     fo.push(s);
     fo << input << std::endl;
     fo.flush();
     BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4), s.str()));
     s.str(empty);
     {
-        masd::dogen::extraction::negative_indenter_scope nis(fo);
+        masd::dogen::generation::formatters::negative_indenter_scope nis(fo);
         fo << input << std::endl;
         fo.flush();
         BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4), s.str()));
@@ -320,7 +322,7 @@ BOOST_AUTO_TEST_CASE(single_trailing_blank_line_is_suppressed_when_managing_blan
     SETUP_TEST_LOG("single_trailing_blank_line_is_suppressed_when_managing_blank_lines");
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    masd::dogen::extraction::indent_filter::push(fo, 4);
+    indent_filter::push(fo, 4);
     fo.push(s);
     fo << input << std::endl << std::endl;
     fo.flush();
@@ -329,7 +331,7 @@ BOOST_AUTO_TEST_CASE(single_trailing_blank_line_is_suppressed_when_managing_blan
     s.str(empty);
 
     fo << input << std::endl;
-    fo << masd::dogen::extraction::manage_blank_lines << std::endl;
+    fo << manage_blank_lines << std::endl;
     BOOST_CHECK(asserter::assert_equals_marker(without_blank_lines, s.str()));
     s.str(empty);
 }
@@ -338,7 +340,7 @@ BOOST_AUTO_TEST_CASE(multiple_trailing_blank_lines_are_suppressed_when_managing_
     SETUP_TEST_LOG("multiple_trailing_blank_lines_are_suppressed_when_managing_blank_lines");
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    masd::dogen::extraction::indent_filter::push(fo, 4);
+    indent_filter::push(fo, 4);
     fo.push(s);
     fo << input << std::endl << std::endl << std::endl;
     fo.flush();
@@ -347,7 +349,7 @@ BOOST_AUTO_TEST_CASE(multiple_trailing_blank_lines_are_suppressed_when_managing_
     s.str(empty);
 
     fo << input << std::endl;
-    fo << masd::dogen::extraction::manage_blank_lines << std::endl << std::endl;
+    fo << manage_blank_lines << std::endl << std::endl;
     BOOST_CHECK(asserter::assert_equals_marker(without_blank_lines, s.str()));
     s.str(empty);
 }
@@ -356,7 +358,7 @@ BOOST_AUTO_TEST_CASE(one_blank_line_in_between_content_is_printed_out_when_manag
     SETUP_TEST_LOG("one_blank_line_in_between_content_is_printed_out_when_managing_blank_lines");
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    masd::dogen::extraction::indent_filter::push(fo, 4);
+    indent_filter::push(fo, 4);
     fo.push(s);
     fo << input << std::endl << std::endl << other_input << std::endl;
     fo.flush();
@@ -365,7 +367,7 @@ BOOST_AUTO_TEST_CASE(one_blank_line_in_between_content_is_printed_out_when_manag
     s.str(empty);
 
     fo << input << std::endl;
-    fo << masd::dogen::extraction::manage_blank_lines << std::endl;
+    fo << manage_blank_lines << std::endl;
     fo << other_input << std::endl;
     BOOST_CHECK(asserter::assert_equals_marker(blank_line_in_between_content,
             s.str()));
@@ -376,7 +378,7 @@ BOOST_AUTO_TEST_CASE(multiple_blank_lines_in_between_content_results_in_a_single
     SETUP_TEST_LOG("multiple_blank_lines_in_between_content_results_in_a_single_blank_line_out_when_managing_blank_lines");
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    masd::dogen::extraction::indent_filter::push(fo, 4);
+    indent_filter::push(fo, 4);
     fo.push(s);
     fo << input << std::endl << std::endl << std::endl << std::endl
        << other_input << std::endl;
@@ -386,7 +388,7 @@ BOOST_AUTO_TEST_CASE(multiple_blank_lines_in_between_content_results_in_a_single
     s.str(empty);
 
     fo << input << std::endl;
-    fo << masd::dogen::extraction::manage_blank_lines << std::endl << std::endl
+    fo << manage_blank_lines << std::endl << std::endl
        << std::endl << std::endl;
     fo << other_input << std::endl;
     BOOST_CHECK(asserter::assert_equals_marker(blank_line_in_between_content,
@@ -398,7 +400,7 @@ BOOST_AUTO_TEST_CASE(single_leading_blank_line_is_not_suppressed_when_managing_b
     SETUP_TEST_LOG("single_leading_blank_line_is_not_suppressed_when_managing_blank_lines");
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    masd::dogen::extraction::indent_filter::push(fo, 4);
+    indent_filter::push(fo, 4);
     fo.push(s);
     fo << std::endl << input << std::endl;
     fo.flush();
@@ -407,7 +409,7 @@ BOOST_AUTO_TEST_CASE(single_leading_blank_line_is_not_suppressed_when_managing_b
     s.str(empty);
 
     fo << std::endl << input << std::endl;
-    fo << masd::dogen::extraction::manage_blank_lines << std::endl << std::endl;
+    fo << manage_blank_lines << std::endl << std::endl;
     BOOST_CHECK(asserter::assert_equals_marker(
             with_one_leading_blank_line, s.str()));
     s.str(empty);
