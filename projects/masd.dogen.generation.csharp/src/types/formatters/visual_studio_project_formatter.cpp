@@ -25,7 +25,7 @@
 #include "masd.dogen.generation.csharp/types/fabric/visual_studio_project.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
 #include "masd.dogen.generation.csharp/types/traits.hpp"
-#include "masd.dogen.extraction/types/sequence_formatter.hpp"
+#include "masd.dogen.generation/types/formatters/sequence_formatter.hpp"
 #include <boost/make_shared.hpp>
 
 namespace masd::dogen::generation::csharp::formatters {

@@ -2,7 +2,7 @@
 <#@ masd.stitch.containing_namespaces=masd::dogen::generation::csharp::formatters::test_data #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.coding/types/meta_model/primitive.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.coding/types/helpers/meta_name_factory.hpp" #>
-<#@ masd.stitch.inclusion_dependency="masd.dogen.extraction/types/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/test_data/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/assistant.hpp" #>

@@ -1,6 +1,6 @@
 <#@ masd.annotations.profile=dogen.stitch #>
 <#@ masd.stitch.containing_namespaces=masd::dogen::generation::csharp::formatters::test_data #>
-<#@ masd.stitch.inclusion_dependency="masd.dogen.extraction/types/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/fabric/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/fabric/meta_name_factory.hpp" #>

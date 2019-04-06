@@ -22,7 +22,7 @@
 #include "masd.dogen.generation.csharp/types/formatters/assistant.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/types/traits.hpp"
 #include "masd.dogen.generation.csharp/types/traits.hpp"
-#include "masd.dogen.extraction/types/sequence_formatter.hpp"
+#include "masd.dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
 
@@ -85,7 +85,7 @@ a.stream() << "    public enum " << sn << std::endl;
             else
 a.stream() << "    public enum " << sn << " : " << a.get_qualified_name(ye.underlying_element()) << std::endl;
 a.stream() << "    {" << std::endl;
-            dogen::extraction::sequence_formatter sf(ye.enumerators().size());
+            generation::formatters::sequence_formatter sf(ye.enumerators().size());
             for (const auto& en : ye.enumerators()) {
                 if (ye.use_implementation_defined_enumerator_values())
 a.stream() << "        " << en.name().simple() << sf.postfix() << a.comment_inline(en.documentation()) << std::endl;

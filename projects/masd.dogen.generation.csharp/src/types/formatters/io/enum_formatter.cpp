@@ -22,7 +22,7 @@
 #include "masd.dogen.generation.csharp/types/formatters/assistant.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/io/traits.hpp"
 #include "masd.dogen.generation.csharp/types/traits.hpp"
-#include "masd.dogen.extraction/types/sequence_formatter.hpp"
+#include "masd.dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
 

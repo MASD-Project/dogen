@@ -2,7 +2,7 @@
 <#@ masd.stitch.containing_namespaces=masd::dogen::generation::csharp::formatters::io #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.coding/types/meta_model/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.coding/types/helpers/meta_name_factory.hpp" #>
-<#@ masd.stitch.inclusion_dependency="masd.dogen.extraction/types/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.generation/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/io/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/assistant.hpp" #>
@@ -68,7 +68,7 @@ using System;
 <#+
                 }
 
-                dogen::extraction::sequence_formatter sf(o.local_attributes().size());
+                generation::formatters::sequence_formatter sf(o.local_attributes().size());
                 sf.element_separator("");
                 sf.postfix_configuration().not_last(", true/*withSeparator*/");
                 sf.postfix_configuration().last("");
