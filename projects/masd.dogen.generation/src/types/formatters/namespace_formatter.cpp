@@ -18,12 +18,156 @@
  * MA 02110-1301, USA.
  *
  */
+#include <iostream>
+#include <boost/lexical_cast.hpp>
+#include <boost/throw_exception.hpp>
+#include <boost/algorithm/string/join.hpp>
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
+#include "masd.dogen.generation/types/formatters/formatting_error.hpp"
 #include "masd.dogen.generation/types/formatters/namespace_formatter.hpp"
+
+namespace {
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory("generation.formatters.namespace_formatter"));
+
+const std::string empty;
+const std::string dot(".");
+const std::string colon("::");
+const std::string namespace_keyword("namespace ");
+const std::string using_keyword("using ");
+
+const std::string empty_namespace(
+    "Technical space does not support empty namespaces: ");
+const std::string invalid_technical_space(
+    "Invalid or unsupported technical space: ");
+
+}
 
 namespace masd::dogen::generation::formatters {
 
-bool namespace_formatter::operator==(const namespace_formatter& /*rhs*/) const {
-    return true;
+namespace_formatter::namespace_formatter(std::ostream& s,
+    const coding::meta_model::technical_space ts,
+    const std::list<std::string>& ns,
+    const bool add_new_line, const bool use_nesting)
+    : stream_(s), technical_space_(ts), namespaces_(ns),
+      add_new_line_(add_new_line),
+      use_nesting_(use_nesting) {}
+
+namespace_formatter::namespace_formatter(std::ostream& s,
+    const coding::meta_model::technical_space ts,
+    const std::string& ns,
+    const bool add_new_line, const bool use_nesting)
+    : namespace_formatter(s, ts,
+        ns.empty() ? std::list<std::string> { }: std::list<std::string> { ns },
+        add_new_line, use_nesting) {}
+
+namespace_formatter::namespace_formatter(std::ostream& s,
+    const coding::meta_model::technical_space ts,
+    const bool add_new_line, const bool use_nesting)
+    : namespace_formatter(s, ts, std::list<std::string> { },
+        add_new_line, use_nesting) {}
+
+void namespace_formatter::format_cpp_begin() {
+    /*
+     * Anonymous namespace.
+     */
+    if (namespaces_.empty()) {
+        stream_ << namespace_keyword << "{" << std::endl;
+        return;
+    }
+
+    /*
+     * Single namespace, Multiple namespaces, with nesting.
+     */
+    if (namespaces_.size() == 1 || use_nesting_) {
+        const auto joined(boost::algorithm::join(namespaces_, colon));
+        stream_ << namespace_keyword << joined << " {" << std::endl;
+        return;
+    }
+
+    /*
+     * Multiple namespaces, without nesting.
+     */
+    for (auto ns : namespaces_)
+        stream_ << namespace_keyword << ns << " {" << std::endl;
+}
+
+void namespace_formatter::format_csharp_begin() {
+    if (namespaces_.empty()) {
+        const auto s(boost::lexical_cast<std::string>(technical_space_));
+        BOOST_LOG_SEV(lg, error) << empty_namespace << s;
+        BOOST_THROW_EXCEPTION(formatting_error(empty_namespace + s));
+    }
+
+    const auto joined(boost::algorithm::join(namespaces_, colon));
+    stream_ << using_keyword << joined << " {" << std::endl;
+}
+
+void namespace_formatter::format_cpp_end() {
+    if (namespaces_.empty() || use_nesting_ || namespaces_.size() == 1) {
+        stream_ << "}";
+        return;
+    }
+
+    /*
+     * Multiple namespaces, without nesting.
+     */
+    bool first(true);
+    for (auto ns : namespaces_) {
+        if (!first)
+            stream_ << " ";
+
+        stream_ << "}";
+        first = false;
+    }
+
+    if (add_new_line_)
+        stream_ << std::endl;
+}
+
+
+void namespace_formatter::format_csharp_end() {
+    if (namespaces_.empty()) {
+        const auto s(boost::lexical_cast<std::string>(technical_space_));
+        BOOST_LOG_SEV(lg, error) << empty_namespace << s;
+        BOOST_THROW_EXCEPTION(formatting_error(empty_namespace + s));
+    }
+
+    stream_ << "}"; // no space and no std::endl by design
+}
+
+void namespace_formatter::format_begin() {
+    using coding::meta_model::technical_space;
+    switch(technical_space_) {
+    case technical_space::cpp:
+        format_cpp_begin();
+        break;
+    case technical_space::csharp:
+        format_csharp_begin();
+        break;
+    default: {
+        const auto s(boost::lexical_cast<std::string>(technical_space_));
+        BOOST_LOG_SEV(lg, error) << invalid_technical_space << s;
+        BOOST_THROW_EXCEPTION(formatting_error(invalid_technical_space + s));
+    } }
+}
+
+void namespace_formatter::format_end() {
+    using coding::meta_model::technical_space;
+    switch(technical_space_) {
+    case technical_space::cpp:
+        format_cpp_end();
+        break;
+    case technical_space::csharp:
+        format_csharp_end();
+        break;
+    default: {
+        const auto s(boost::lexical_cast<std::string>(technical_space_));
+        BOOST_LOG_SEV(lg, error) << invalid_technical_space << s;
+        BOOST_THROW_EXCEPTION(formatting_error(invalid_technical_space + s));
+    } }
 }
 
 }

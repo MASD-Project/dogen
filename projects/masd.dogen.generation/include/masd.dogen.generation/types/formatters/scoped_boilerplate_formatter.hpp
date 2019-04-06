@@ -25,24 +25,27 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <iosfwd>
+#include <string>
+#include <boost/optional.hpp>
+#include "masd.dogen.generation/types/formatters/boilerplate_properties.hpp"
+#include "masd.dogen.generation/types/formatters/boilerplate_formatter.hpp"
 
 namespace masd::dogen::generation::formatters {
 
+/**
+ * @brief RAII wrapper around the boilerplate formatter.
+ */
 class scoped_boilerplate_formatter final {
 public:
-    scoped_boilerplate_formatter() = default;
-    scoped_boilerplate_formatter(const scoped_boilerplate_formatter&) = default;
-    scoped_boilerplate_formatter(scoped_boilerplate_formatter&&) = default;
-    ~scoped_boilerplate_formatter() = default;
-    scoped_boilerplate_formatter& operator=(const scoped_boilerplate_formatter&) = default;
+    scoped_boilerplate_formatter(std::ostream& s,
+        const boilerplate_properties& bp);
 
-public:
-    bool operator==(const scoped_boilerplate_formatter& rhs) const;
-    bool operator!=(const scoped_boilerplate_formatter& rhs) const {
-        return !this->operator==(rhs);
-    }
+    ~scoped_boilerplate_formatter();
 
+private:
+    boilerplate_formatter formatter_;
 };
 
 }

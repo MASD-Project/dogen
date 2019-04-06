@@ -22,8 +22,17 @@
 
 namespace masd::dogen::generation::formatters {
 
-bool scoped_namespace_formatter::operator==(const scoped_namespace_formatter& /*rhs*/) const {
-    return true;
+scoped_namespace_formatter::scoped_namespace_formatter(
+    std::ostream& s, const coding::meta_model::technical_space ts,
+    const std::list<std::string>& ns,
+    const bool add_new_line,
+    const bool nested_namespace) :
+    formatter_(s, ts, ns, add_new_line, nested_namespace) {
+    formatter_.format_begin();
+}
+
+scoped_namespace_formatter::~scoped_namespace_formatter() {
+    formatter_.format_end();
 }
 
 }

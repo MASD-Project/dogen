@@ -22,8 +22,14 @@
 
 namespace masd::dogen::generation::formatters {
 
-bool scoped_boilerplate_formatter::operator==(const scoped_boilerplate_formatter& /*rhs*/) const {
-    return true;
+scoped_boilerplate_formatter::
+scoped_boilerplate_formatter(std::ostream& s, const boilerplate_properties& bp)
+    : formatter_(s, bp) {
+    formatter_.format_begin();
+}
+
+scoped_boilerplate_formatter::~scoped_boilerplate_formatter() {
+    formatter_.format_end();
 }
 
 }

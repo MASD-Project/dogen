@@ -25,24 +25,66 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <iosfwd>
+#include <string>
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 
 namespace masd::dogen::generation::formatters {
 
+/**
+ * @brief Formats namespaces for technical spaces that support them.
+ */
 class namespace_formatter final {
 public:
-    namespace_formatter() = default;
-    namespace_formatter(const namespace_formatter&) = default;
-    namespace_formatter(namespace_formatter&&) = default;
-    ~namespace_formatter() = default;
-    namespace_formatter& operator=(const namespace_formatter&) = default;
+    /**
+     * @brief Creates a namespace formatter.
+     *
+     * @param s Stream to write into.
+     * @param ts Target technical space to generate namespaces for.
+     * @param ns Namespace or namespaces, if any.
+     * @param add_new_line If true, adds a new line at the end.
+     * @param use_nesting If true and supported by the target
+     * technical space, uses nested namespaces syntax. If false,
+     * creates multiple lines per namespace.
+     */
+    /**@{*/
+    namespace_formatter(std::ostream& s,
+        const coding::meta_model::technical_space ts,
+        const std::list<std::string>& ns,
+        const bool add_new_line = false,  const bool use_nesting = false);
+    namespace_formatter(std::ostream& s,
+        const coding::meta_model::technical_space ts,
+        const std::string& ns,
+        const bool add_new_line = false,  const bool use_nesting = false);
+    namespace_formatter(std::ostream& s,
+        const coding::meta_model::technical_space ts,
+        const bool add_new_line = false,  const bool use_nesting = false);
+    /**@}*/
+
+private:
+    void format_cpp_begin();
+    void format_csharp_begin();
+    void format_cpp_end();
+    void format_csharp_end();
 
 public:
-    bool operator==(const namespace_formatter& rhs) const;
-    bool operator!=(const namespace_formatter& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Formats the opening of a namespace.
+     */
+    void format_begin();
 
+    /**
+     * @brief Formats the closing of a namespace.
+     */
+    void format_end();
+
+private:
+    std::ostream& stream_;
+    const coding::meta_model::technical_space technical_space_;
+    const std::list<std::string> namespaces_;
+    const bool add_new_line_;
+    const bool use_nesting_;
 };
 
 }

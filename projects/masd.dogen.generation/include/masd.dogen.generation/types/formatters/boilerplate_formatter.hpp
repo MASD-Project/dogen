@@ -25,9 +25,7 @@
 #pragma once
 #endif
 
-#include <list>
 #include <iosfwd>
-#include <string>
 #include "masd.dogen.generation/types/formatters/boilerplate_properties.hpp"
 
 namespace masd::dogen::generation::formatters {

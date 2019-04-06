@@ -25,24 +25,29 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <iosfwd>
+#include <string>
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
+#include "masd.dogen.generation/types/formatters/namespace_formatter.hpp"
 
 namespace masd::dogen::generation::formatters {
 
+/**
+ * @brief RAII wrapper around the namespaces formatter.
+ */
 class scoped_namespace_formatter final {
 public:
-    scoped_namespace_formatter() = default;
-    scoped_namespace_formatter(const scoped_namespace_formatter&) = default;
-    scoped_namespace_formatter(scoped_namespace_formatter&&) = default;
-    ~scoped_namespace_formatter() = default;
-    scoped_namespace_formatter& operator=(const scoped_namespace_formatter&) = default;
+    scoped_namespace_formatter(
+        std::ostream& s,
+        const coding::meta_model::technical_space ts,
+        const std::list<std::string>& ns,
+        const bool add_new_line = false,
+        const bool use_nesting = false);
+    ~scoped_namespace_formatter();
 
-public:
-    bool operator==(const scoped_namespace_formatter& rhs) const;
-    bool operator!=(const scoped_namespace_formatter& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+private:
+    namespace_formatter formatter_;
 };
 
 }
