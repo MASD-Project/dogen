@@ -14467,3 +14467,12 @@ start and end of this transform?"
 
 Interestingly, this would also allow us to compare things between
 runs. The schema should be designed with this in mind.
+*** Consider generating code for RAII wrapper                         :story:
+
+It would be nice to be able to automatically generate a RAII wrapper
+for a type. Once we have operations this may be doable. However, it is
+not clear how we would know what methods to call on construction and
+destruction. We could perhaps have some meta-data that annotates
+operations as "start RAII" and "end RAII". Then we'd generate a class
+with a constructor that matches the signature of these operations, and
+constructs an instance of the owning class.
