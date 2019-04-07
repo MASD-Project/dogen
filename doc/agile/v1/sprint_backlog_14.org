@@ -12,25 +12,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-06 Sat 21:06]
+#+CAPTION: Clock summary at [2019-04-07 Sun 10:32]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *80:59* |       |       | 100.0 |
+| *Total time*                                              | *82:15* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 80:59   |       |       | 100.0 |
-| Active                                                    |         | 80:59 |       | 100.0 |
+| Stories                                                   | 82:15   |       |       | 100.0 |
+| Active                                                    |         | 82:15 |       | 100.0 |
 | Edit release notes for previous sprint                    |         |       |  1:47 |   2.2 |
-| Sprint and product backlog grooming                       |         |       |  7:14 |   8.9 |
+| Sprint and product backlog grooming                       |         |       |  7:25 |   9.0 |
 | Create a video demo for the previous sprint's features    |         |       |  3:11 |   3.9 |
 | Fix issues with emacs                                     |         |       |  2:42 |   3.3 |
 | Create a basic "project plan"                             |         |       |  2:08 |   2.6 |
-| Simplify qualified name                                   |         |       |  3:39 |   4.5 |
-| Rename "language" to "technical space"                    |         |       |  7:22 |   9.1 |
+| Simplify qualified name                                   |         |       |  3:39 |   4.4 |
+| Rename "language" to "technical space"                    |         |       |  7:22 |   9.0 |
 | Add intrinsic technical space ownership                   |         |       |  1:12 |   1.5 |
-| Promote extraction entities to meta-model elements        |         |       | 37:25 |  46.2 |
-| Integrate report-ci with dogen                            |         |       |  2:09 |   2.7 |
-| Move all utility formatters from extraction to generation |         |       |  6:24 |   7.9 |
+| Promote extraction entities to meta-model elements        |         |       | 37:25 |  45.5 |
+| Integrate report-ci with dogen                            |         |       |  2:09 |   2.6 |
+| Move all utility formatters from extraction to generation |         |       |  7:29 |   9.1 |
 | Remove annotations from stitch templates                  |         |       |  1:17 |   1.6 |
 | Supply decorations as a stitch parameter                  |         |       |  4:29 |   5.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
@@ -148,6 +148,8 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-04-07 Sun 10:30]--[2019-04-07 Sun 10:32] =>  0:02
+    CLOCK: [2019-04-07 Sun 10:20]--[2019-04-07 Sun 10:29] =>  0:09
     CLOCK: [2019-04-05 Fri 21:37]--[2019-04-05 Fri 21:44] =>  0:07
     CLOCK: [2019-04-05 Fri 08:46]--[2019-04-05 Fri 09:19] =>  0:33
     CLOCK: [2019-04-02 Tue 10:30]--[2019-04-02 Tue 10:53] =>  0:23
@@ -490,8 +492,32 @@ We should also allow for both:
 It seems Klemens has started a new project for a CI product. He
 submitted a PR. Help him integrate it with Dogen.
 
+*** COMPLETED Consider introducing formatter "location strings"       :story:
+    CLOSED: [2019-04-07 Sun 10:30]
+
+*Rationale*: created as generation marker. Location is too overloaded
+already in the metamodel.
+
+In MDSD, we have the notion of "location strngs" (volter, p.153):
+
+#+begin_quote
+A third and very useful technique is the application of location
+strings that identify the transformation or the template used, as well
+as the underlying model elements in the generated code. A location
+string might look like this:
+
+: [2003-10-04 17:05:36]
+: GENERATED FROM TEMPLATE SomeTemplate
+: MODEL ELEMENT aPackage::aClass::SomeOperation().
+#+end_quote
+
+This may be a useful thing. However, adding dates and dogen version
+etc will cause spurious diffs.
+
 *** STARTED Move all utility formatters from extraction to generation :story:
     :LOGBOOK:
+    CLOCK: [2019-04-07 Sun 09:40]--[2019-04-07 Sun 09:52] =>  0:12
+    CLOCK: [2019-04-07 Sun 07:42]--[2019-04-07 Sun 08:35] =>  0:53
     CLOCK: [2019-04-06 Sat 20:58]--[2019-04-06 Sat 21:06] =>  0:08
     CLOCK: [2019-04-06 Sat 20:44]--[2019-04-06 Sat 20:57] =>  0:13
     CLOCK: [2019-04-06 Sat 20:28]--[2019-04-06 Sat 20:43] =>  0:15
@@ -514,6 +540,14 @@ submitted a PR. Help him integrate it with Dogen.
 We need to move all formatters into generation and update templates to
 point to new location. This must be done after decoration has been
 updated to use the new modeling elements.
+
+Notes:
+
+- we need to split boilerplate tests: the stuff testing decoration
+  generation (modeline at top, bottom, multilicence, etc) needs to go
+  to a decoration formatter test.
+- the boilerplate tests themselves are fairly simple: make sure it all
+  comes out for both c# and c++.
 
 *** STARTED Remove annotations from stitch templates                  :story:
     :LOGBOOK:
@@ -568,6 +602,34 @@ Notes:
   instantiation.
 - no decoration for root module
 - cmake files are not going via boilerplate.
+
+*** Add support for decoration configuration overrides                :story:
+
+At present we have hard-coded the decoration configuration to be read
+from the root object only. In an ideal world, we should be able to
+override some of these such as the copyrights. It may not make sense
+to be able to override them all though.
+
+This functionality has been implemented but requires tests in the test
+model.
+
+*** Copyright holders is scalar when it should be an array            :story:
+
+At present its only possible to specify a single copyright holder. It
+should be handled the same was as odb parameters, but because that is
+done with a massive hack, we are not going to extend the hack to
+copyright holders.
+
+This functionality has been implemented but requires tests in the test
+model.
+
+*** Update copyright notices                                          :story:
+
+We need to update all notices to reflect personal ownership until DDC
+was formed, and then ownership by DDC.
+
+- first update to personal ownership has been done, but we need to
+  test if multiple copyright entries is properly supported.
 
 *** Associate includes with model elements                            :story:
 
@@ -785,28 +847,6 @@ At present we are setting up the extraction model name from the simple
 name of the model. It should really be the qualified name. Hopefully
 this will only affect tracing and diffing.
 
-*** Add support for decoration configuration overrides                :story:
-
-At present we have hard-coded the decoration configuration to be read
-from the root object only. In an ideal world, we should be able to
-override some of these such as the copyrights. It may not make sense
-to be able to override them all though.
-
-*** Copyright holders is scalar when it should be an array            :story:
-
-At present its only possible to specify a single copyright holder. It
-should be handled the same was as odb parameters, but because that is
-done with a massive hack, we are not going to extend the hack to
-copyright holders.
-
-*** Update copyright notices                                          :story:
-
-We need to update all notices to reflect personal ownership until DDC
-was formed, and then ownership by DDC.
-
-- first update to personal ownership has been done, but we need to
-  test if multiple copyright entries is properly supported.
-
 *** Check if enable kernel directories is on extraction               :story:
 
 When we moved the kernel logic into yarn from quilt, we did not rename
@@ -850,24 +890,6 @@ Things the marker can/should have:
 - the dogen version too. However, this will make all our tests break
   every time there is a new commit so perhaps we need to have this
   switched off by default.
-
-*** Consider introducing formatter "location strings"                 :story:
-
-In MDSD, we have the notion of "location strngs" (volter, p.153):
-
-#+begin_quote
-A third and very useful technique is the application of location
-strings that identify the transformation or the template used, as well
-as the underlying model elements in the generated code. A location
-string might look like this:
-
-: [2003-10-04 17:05:36]
-: GENERATED FROM TEMPLATE SomeTemplate
-: MODEL ELEMENT aPackage::aClass::SomeOperation().
-#+end_quote
-
-This may be a useful thing. However, adding dates and dogen version
-etc will cause spurious diffs.
 
 *** Move wale templates from the data directory                       :story:
 
@@ -919,6 +941,12 @@ meta-class. For example, given an element, we should be able to do:
 The =meta_class()= method should be static and code-generated by
 dogen. This still requires a lot of thinking though. Look for
 reflection stories in backlog.
+
+*** Consider making editor a meta-data element                        :story:
+
+When we create meta-data elements for technical space, facet, etc we
+should also consider making one for editors. We probably only need a
+few properties such as start of modeline, etc.
 
 ** Deprecated
 *** CANCELLED Fix =cp= error on cmake with local third-party packages :story:

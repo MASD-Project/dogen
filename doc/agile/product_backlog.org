@@ -5004,6 +5004,17 @@ Stories that will not be handled on the current major release.
 
 Ideas to improve the code base.
 
+*** Create a mock factory facet                                       :story:
+
+A very common pattern we have in dogen is that for a small number of
+types we need to create a mock factory. This is normally made in a
+test folder and the file must be hand-crafted. It would be nice to
+have dogen code-generate the skeletons for the mock factories. For
+this we would need a meta-element for mock factories (with the new
+ideas on meta-model transparency, we can't just add a switch to the
+target element any longer). Ideally we would also have an associated
+walw template to give us a good head start.
+
 *** Consider adding inheritance support to modelines                  :story:
 
 Though it is probably overkill, it would be nice to be able to
