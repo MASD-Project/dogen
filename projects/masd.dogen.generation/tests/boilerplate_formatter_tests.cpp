@@ -18,229 +18,246 @@
  * MA 02110-1301, USA.
  *
  */
-// #include <boost/test/unit_test.hpp>
-// #include "masd.dogen.extraction/types/indent_filter.hpp"
-// #include "masd.dogen.utility/types/test/asserter.hpp"
-// #include "masd.dogen.utility/types/test/logging.hpp"
-// #include "masd.dogen.utility/types/io/list_io.hpp"
-// #include "masd.dogen.utility/types/filesystem/path.hpp"
-// #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
-// #include "masd.dogen.extraction/test/mock_decoration_properties_factory.hpp"
-// #include "masd.dogen.extraction/types/cpp/boilerplate_formatter.hpp"
+#include <boost/test/unit_test.hpp>
+#include "masd.dogen.utility/types/test/asserter.hpp"
+#include "masd.dogen.utility/types/test/logging.hpp"
+#include "masd.dogen.utility/types/io/list_io.hpp"
+#include "masd.dogen.utility/types/filesystem/path.hpp"
+#include "masd.dogen.utility/types/io/unordered_map_io.hpp"
+#include "masd.dogen.coding/types/meta_model/technical_space.hpp"
+#include "masd.dogen.generation/types/formatters/indent_filter.hpp"
+#include "masd.dogen.generation/test/mock_boilerplate_properties_factory.hpp"
+#include "masd.dogen.generation/io/formatters/boilerplate_properties_io.hpp"
+#include "masd.dogen.generation/types/formatters/boilerplate_formatter.hpp"
 
-// namespace {
+namespace {
 
-// const std::string test_module("masd.dogen.extraction.tests");
-// const std::string test_suite("cpp_boilerplate_formatter_tests");
-// const std::string empty;
+const std::string test_module("masd.dogen.generation.tests");
+const std::string test_suite("cpp_boilerplate_formatter_tests");
+const std::string empty;
 
-// masd::dogen::extraction::test::mock_decoration_properties_factory factory_;
 // const bool generate_premable(true);
 
-// const std::string modeline_top(R"(/* -*- a_field: a_value -*-
-//  *
-//  * this is a marker
-//  *
-//  * a_holder
-//  *
-//  * licence text
-//  *
-//  */
-// )");
+const std::string expected_cpp_modeline_top(
+    R"(/* -*- a_field: a_value -*-
+ *
+ * this is a marker
+ *
+ * a_holder
+ *
+ * licence text
+ *
+ */
+)");
 
-// const std::string multiline_licence(R"(/* -*- a_field: a_value -*-
-//  *
-//  * this is a marker
-//  *
-//  * a_holder
-//  * another_holder
-//  *
-//  * first line of licence text
-//  * second line of licence text
-//  *
-//  */
-// )");
+const std::string expected_cpp_multiline_licence(
+    R"(/* -*- a_field: a_value -*-
+ *
+ * this is a marker
+ *
+ * a_holder
+ * another_holder
+ *
+ * first line of licence text
+ * second line of licence text
+ *
+ */
+)");
 
-// const std::string modeline_bottom(R"(/*
-//  * this is a marker
-//  *
-//  * a_holder
-//  *
-//  * licence text
-//  *
-//  */
-// /*
-//  * Local variables:
-//  * a_field: a_value
-//  * End:
-//  */
-// )");
+const std::string expected_cpp_modeline_bottom(
+    R"(/*
+ * this is a marker
+ *
+ * a_holder
+ *
+ * licence text
+ *
+ */
+/*
+ * Local variables:
+ * a_field: a_value
+ * End:
+ */
+)");
 
-// const std::string no_marker(R"(/* -*- a_field: a_value -*-
-//  *
-//  * a_holder
-//  *
-//  * licence text
-//  *
-//  */
-// )");
+const std::string expected_cpp_no_marker(
+    R"(/* -*- a_field: a_value -*-
+ *
+ * a_holder
+ *
+ * licence text
+ *
+ */
+)");
 
-// const std::string no_licence(R"(/* -*- a_field: a_value -*-
-//  *
-//  * this is a marker
-//  *
-//  */
-// )");
+const std::string expected_cpp_no_licence(
+    R"(/* -*- a_field: a_value -*-
+ *
+ * this is a marker
+ *
+ */
+)");
 
-// const std::string licence_no_text(R"(/* -*- a_field: a_value -*-
-//  *
-//  * this is a marker
-//  *
-//  * a_holder
-//  *
-//  */
-// )");
+const std::string expected_cpp_licence_no_text(
+    R"(/* -*- a_field: a_value -*-
+ *
+ * this is a marker
+ *
+ * a_holder
+ *
+ */
+)");
 
-// const std::string licence_no_copyright_notices(R"(/* -*- a_field: a_value -*-
-//  *
-//  * this is a marker
-//  *
-//  * licence text
-//  *
-//  */
-// )");
+const std::string expected_cpp_licence_no_copyright_notices(
+    R"(/* -*- a_field: a_value -*-
+ *
+ * this is a marker
+ *
+ * licence text
+ *
+ */
+)");
 
-// const std::string just_marker(R"(/*
-//  * this is a marker
-//  *
-//  */
-// )");
+const std::string just_marker(R"(/*
+ * this is a marker
+ *
+ */
+)");
 
-// const std::string just_modeline_top(R"(// -*- a_field: a_value -*-
-// )");
+const std::string expected_cpp_just_modeline_top(
+    R"(// -*- a_field: a_value -*-
+)");
 
-// const std::string just_modeline_bottom(R"(/*
-//  * Local variables:
-//  * a_field: a_value
-//  * End:
-//  */
-// )");
+const std::string expected_cpp_just_modeline_bottom(
+    R"(/*
+ * Local variables:
+ * a_field: a_value
+ * End:
+ */
+)");
 
-// const std::string guards_with_top_modeline(R"(/* -*- a_field: a_value -*-
-//  *
-//  * this is a marker
-//  *
-//  * a_holder
-//  *
-//  * licence text
-//  *
-//  */
-// #ifndef A_PATH_HPP
-// #define A_PATH_HPP
+const std::string expected_cpp_guards_with_top_modeline(
+    R"(/* -*- a_field: a_value -*-
+ *
+ * this is a marker
+ *
+ * a_holder
+ *
+ * licence text
+ *
+ */
+#ifndef A_PATH_HPP
+#define A_PATH_HPP
 
-// #if defined(_MSC_VER) && (_MSC_VER >= 1200)
-// #pragma once
-// #endif
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-// #endif
-// )");
+#endif
+)");
 
-// const std::string guards_with_bottom_modeline(R"(/*
-//  * this is a marker
-//  *
-//  * a_holder
-//  *
-//  * licence text
-//  *
-//  */
-// #ifndef A_PATH_HPP
-// #define A_PATH_HPP
+const std::string expected_cpp_guards_with_bottom_modeline(
+    R"(/*
+ * this is a marker
+ *
+ * a_holder
+ *
+ * licence text
+ *
+ */
+#ifndef A_PATH_HPP
+#define A_PATH_HPP
 
-// #if defined(_MSC_VER) && (_MSC_VER >= 1200)
-// #pragma once
-// #endif
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-// /*
-//  * Local variables:
-//  * a_field: a_value
-//  * End:
-//  */
-// #endif
-// )");
+/*
+ * Local variables:
+ * a_field: a_value
+ * End:
+ */
+#endif
+)");
 
-// const std::string includes_with_top_modeline(R"(/* -*- a_field: a_value -*-
-//  *
-//  * this is a marker
-//  *
-//  * a_holder
-//  *
-//  * licence text
-//  *
-//  */
-// #ifndef A_PATH_HPP
-// #define A_PATH_HPP
+const std::string expected_cpp_includes_with_top_modeline(
+    R"(/* -*- a_field: a_value -*-
+ *
+ * this is a marker
+ *
+ * a_holder
+ *
+ * licence text
+ *
+ */
+#ifndef A_PATH_HPP
+#define A_PATH_HPP
 
-// #if defined(_MSC_VER) && (_MSC_VER >= 1200)
-// #pragma once
-// #endif
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-// #include <win32/system_inc_1>
-// #include <unix/system_inc_2>
-// #include "user_inc_1"
-// #include "user_inc_2"
+#include <win32/system_inc_1>
+#include <unix/system_inc_2>
+#include "user_inc_1"
+#include "user_inc_2"
 
-// #endif
-// )");
+#endif
+)");
 
-// const std::string disabled_preamble(R"(#ifndef A_PATH_HPP
-// #define A_PATH_HPP
+const std::string expected_cpp_disabled_preamble(
+    R"(#ifndef A_PATH_HPP
+#define A_PATH_HPP
 
-// #if defined(_MSC_VER) && (_MSC_VER >= 1200)
-// #pragma once
-// #endif
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-// #include <win32/system_inc_1>
-// #include <unix/system_inc_2>
-// #include "user_inc_1"
-// #include "user_inc_2"
+#include <win32/system_inc_1>
+#include <unix/system_inc_2>
+#include "user_inc_1"
+#include "user_inc_2"
 
-// #endif
-// )");
+#endif
+)");
 
-// std::string format(const masd::dogen::extraction::decoration_properties& dc,
-//     const std::list<std::string>& includes, const std::string& header_guard,
-//     const bool generate_premable = true) {
+using masd::dogen::generation::formatters::boilerplate_properties;
 
-//     std::ostringstream s;
-//     boost::iostreams::filtering_ostream fo;
-//     masd::dogen::extraction::indent_filter::push(fo, 4);
-//     fo.push(s);
+std::string format(const boilerplate_properties& bp) {
 
-//     masd::dogen::extraction::cpp::boilerplate_formatter f(generate_premable);
-//     f.format_begin(fo, dc, includes, header_guard);
-//     f.format_end(fo, dc, header_guard);
-//     return s.str();
-// }
+    std::ostringstream s;
+    boost::iostreams::filtering_ostream fo;
+    masd::dogen::generation::formatters::indent_filter::push(fo, 4);
+    fo.push(s);
 
-// }
+    masd::dogen::generation::formatters::boilerplate_formatter f(s, bp);
+    f.format_begin();
+    f.format_end();
+    return s.str();
+}
 
-// using namespace masd::dogen::extraction;
-// using namespace masd::dogen::utility::test;
-// using masd::dogen::utility::test::asserter;
+}
 
-// BOOST_AUTO_TEST_SUITE(cpp_boilerplate_formatter_tests)
+using namespace masd::dogen::generation::formatters;
+using namespace masd::dogen::utility::test;
+using masd::dogen::utility::test::asserter;
+using factory =
+    masd::dogen::generation::test::mock_boilerplate_properties_factory;
 
-// BOOST_IGNORE_AUTO_TEST_CASE(top_modeline_is_formatted_correctly) {
-//     SETUP_TEST_LOG_SOURCE("top_modeline_is_formatted_correctly");
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
-//     const auto dc(factory_.make_decoration_properties());
-//     const auto inc(factory_.make_includes(true/*is_empty*/));
-//     const auto hg(factory_.make_header_guard(true/*is_empty*/));
-//     const auto r(format(dc, inc, hg));
+BOOST_AUTO_TEST_SUITE(cpp_boilerplate_formatter_tests)
 
-//     BOOST_CHECK(asserter::assert_equals_marker(modeline_top, r));
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
-// }
+BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("cpp_top_modeline_is_formatted_correctly");
+
+    BOOST_LOG_SEV(lg, debug) << "Logging to disable modeline at the top.";
+    const auto bp(factory::make_cpp_top_modeline_single_line());
+
+    BOOST_LOG_SEV(lg, debug) << "Input" << bp;
+    const auto r(format(bp));
+
+    BOOST_CHECK(asserter::assert_equals_marker(expected_cpp_modeline_top, r));
+    BOOST_LOG_SEV(lg, debug) << "Logging to disable modeline at the bottom";
+}
 
 // BOOST_IGNORE_AUTO_TEST_CASE(top_modeline_and_multiline_licence_is_formatted_correctly) {
 //     SETUP_TEST_LOG_SOURCE("top_modeline_and_multiline_licence_is_formatted_correctly");
@@ -453,4 +470,4 @@
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
-// BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE_END()

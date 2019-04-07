@@ -18,20 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TEST_MOCK_CONTEXT_FACTORY_HPP
-#define MASD_DOGEN_CODING_TEST_MOCK_CONTEXT_FACTORY_HPP
+#ifndef MASD_DOGEN_GENERATION_TEST_MOCK_BOILERPLATE_PROPERTIES_FACTORY_HPP
+#define MASD_DOGEN_GENERATION_TEST_MOCK_BOILERPLATE_PROPERTIES_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.generation/types/formatters/boilerplate_properties.hpp"
 
-namespace masd::dogen::coding::test {
+namespace masd::dogen::generation::test {
 
-class mock_context_factory {
+class mock_boilerplate_properties_factory {
 public:
-    static transforms::context make();
+    static formatters::boilerplate_properties
+    make_cpp_top_modeline_single_line();
 };
 
 }
