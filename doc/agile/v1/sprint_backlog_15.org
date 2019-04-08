@@ -12,22 +12,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-08 Mon 15:09]
-| <75>                                   |        |      |      |       |
-| Headline                               | Time   |      |      |     % |
-|----------------------------------------+--------+------+------+-------|
-| *Total time*                           | *4:32* |      |      | 100.0 |
-|----------------------------------------+--------+------+------+-------|
-| Stories                                | 4:32   |      |      | 100.0 |
-| Active                                 |        | 4:32 |      | 100.0 |
-| Edit release notes for previous sprint |        |      | 2:14 |  49.3 |
-| Sprint and product backlog grooming    |        |      | 0:17 |   6.2 |
-| Fix issues with emacs                  |        |      | 2:01 |  44.5 |
+#+CAPTION: Clock summary at [2019-04-08 Mon 18:04]
+| <75>                                                   |        |      |      |       |
+| Headline                                               | Time   |      |      |     % |
+|--------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                           | *7:28* |      |      | 100.0 |
+|--------------------------------------------------------+--------+------+------+-------|
+| Stories                                                | 7:28   |      |      | 100.0 |
+| Active                                                 |        | 7:28 |      | 100.0 |
+| Edit release notes for previous sprint                 |        |      | 3:44 |  50.0 |
+| Sprint and product backlog grooming                    |        |      | 0:17 |   3.8 |
+| Create a video demo for the previous sprint's features |        |      | 1:26 |  19.2 |
+| Fix issues with emacs                                  |        |      | 2:01 |  27.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
-*** STARTED Edit release notes for previous sprint                    :story:
+*** COMPLETED COMMENT Edit release notes for previous sprint                  :story:
+    CLOSED: [2019-04-08 Mon 16:36]
     :LOGBOOK:
+    CLOCK: [2019-04-08 Mon 16:23]--[2019-04-08 Mon 16:33] =>  0:10
+    CLOCK: [2019-04-08 Mon 15:02]--[2019-04-08 Mon 16:22] =>  1:20
     CLOCK: [2019-04-08 Mon 13:51]--[2019-04-08 Mon 15:01] =>  1:18
     CLOCK: [2019-04-08 Mon 11:09]--[2019-04-08 Mon 12:13] =>  1:04
     :END:
@@ -42,93 +46,134 @@ _Dunes in the Namib Desert, Namibe Province, Angola. (C) 2012 [João P. Baptista
 
 # Introduction
 
-The sprint cadence seems to finally be establishing itself, with sprint 13 offering yet another solid 2-week effort. The main emphasis was on solving the unit testing of generated code. If you recall, we had some sparse manual tests for these, delightfully called the "canned tests". These weren't exactly brilliant, but did provide _some_ kind of coverage. Sadly, we ended up having to disable them due to weird and wonderful failures on OSX and Windows, which we could not reproduce on Linux and which were rather difficult to get to the bottom of via CI because of the way the tests were designed.
+This sprint was yet again an extremely busy affair. However, for a change, time was mainly focused on the task at hand rather than on distractions such as testing. As a result, we have finally delivered the first of a number of core meta-model changes that aim to regularise our approach to the modeling of elements across the solution space. In other words, it may appear like a small release to the untrained eye, but it feels like a giant leap to the development team.
 
-As the next few sprints are all about very (hard-)core changes, we had to make sure a strong testing base is in place before we can proceed with the refactoring. As usual, the work was much harder than expected, taking us the best part of two sprints to get into a good place: sprint 12 was all about the system test story, and sprint 13 is all about the unit tests story. Fortunately, we still managed to sneak in one useful feature.
-
-The below chart breaks down the cost of each story worked percentage-wise in terms of the overall sprint time.
-
-![Story Pie Chart](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/agile/v1/sprint_13_pie_chart.jpg)
-
-The next sections provide a summary of the most significant stories. As usual, for more details of the work carried out this sprint, see [the sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_13.org).
-
-# Internal Changes
-
-In this section we cover stories that consumed significant resources but are only visible internally.
-
-## Sprint and product backlog grooming
-
-In this sprint we spent quite a lot of time grooming the backlogs. This is something which never gets much of a mention, but which I believe is one of the most important aspects of Agile: [you need to keep your product backlog in good shape](http://mcraveiro.blogspot.com/2016/01/nerd-food-on-product-backlogs.html). Perhaps spending 15% of the total time of a sprint grooming backlogs may sound _a tad_ excessive, but in our defence we do have a [hefty product backlog](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org), with over 550 user stories at various levels of detail. Also, given that we have just finished a massive rewrite of the theoretical basis for Dogen, it is no surprise that a lot of the stories started to bit-rot. This clean up was mainly to look for low hanging fruit and remove all stories which are completely deprecated; subsequent clean-ups will delve more into the detail of the stories.
+As you will not fail to notice, the release notes have been tweaked yet again in response to feedback: we now start with the user visible changes, and proceed to discuss internal matters afterwards.
 
 # User visible changes
 
-This section covers stories that affect end users. The sprint demo provides a quick demonstration on how the user visible changes; the below sections provide more detail.
+This section covers stories that affect end users. The sprint demo provides a quick demonstration on the user visible changes, whereas the below sections provide more detail.
 
-[![Sprint 1.0.12 Demo](https://img.youtube.com/vi/yerm2xiKBqA/0.jpg)](https://youtu.be/yerm2xiKBqA)
+[![Sprint 1.0.14 Demo](https://img.youtube.com/vi/zNnzGF6VSTw/0.jpg)](https://youtu.be/zNnzGF6VSTw)
 
-## Code generation of tests for dogen models
+## Decorative elements are now in meta-model
 
-This story had started on the previous sprint, but, as always, proved to be much more complicated than anticipated. Whilst the story is user facing - in that users can enable it for their own models - its purpose is very much just to test the code generator, so its not really that helpful to end users outside of Dogen.
+Before delving into the details of the feature, it is worth providing some context. Up to now we have separated configuration from modeling proper. As a result, there are a number of little configuration files, each declared and consumed by user models via its own ad-hoc mechanisms. As [MDE theory](https://en.wikipedia.org/wiki/Model-driven_engineering) became better understood, and as the MASD approach cemented itself, it became clear that these configuration units are indeed worthy of modeling just like any other higher level concept present in a product. This release sees the start of a **long** process that, when completed, will finally move the architecture to its desired state. Sadly, it will require quite a large engineering effort to get there.
 
-Though in theory adding tests seems just like adding another facet - and since we already have quite a number of these - we were pretty confident this would be a "quick effort". In practice, there were subtle differences with tests that caused large problems. These in turn forced some changes to the core of Dogen. On the plus side, the pain seems to be worth it, as we are now testing pretty much all facets for all generated code, across both Dogen itself and the Reference Implementation on all supported platforms. Even better, they are all green:
+As for the feature itself: this release places the management of modelines, licences, location strings (known in Dogen speak as "generation markers") and other decorative elements into the meta-model. This means that instead of an assortment set of data files of varying formats, these are now contained in a "regular" model and can be extended and/or overridden by users as required.
 
-![CDash builds](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/cdash_dogen_all_builds.png)
+The ```masd``` model defines a number of these which can readily be used:
 
-Whilst coverage is extensive, unfortunately we do not yet cover ODB (C++ ORM mapping) nor C# (which still relies on canned tests). In addition, build time has gone up quite considerably, given that we now need to compile the test data facet for all of these types, plus the tests too. The following chart demonstrates this problem:
+![MASD Model](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/masd_model_screenshot.png)
 
-![Nightly build time](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/dogen_nightly_build_time.png)
-
-As a result of this increase, MSVC is no longer able to complete the builds within the allotted time. Fortunately our clang-cl builds are deemed good enough (only one test failure across some 2.7k tests) so we'll be shipping that to users from now on. In the future we will need to look into ways of decreasing build time, as we are very close to the edge on OSX and clang-cl.
-
-## Delete empty directories
-
-In the past we used to generate all facets for all models, Dogen and Reference Implementation. However, over time we ended up having to disable most facets as the build time was getting out of control. Dogen correctly deleted all of the generated files when the acets were disabled, but left behind a number of empty directories. Worse: because git does not care about empty directories, we weren't even aware of their existence until some speculative filesystem browsing revealed them. This sprint adds a new knob to delete any empty directory under the project: ```delete_empty_directories```. Together with ```delete_extra_files```, this should mean that most generated lint is taken care of now.
+In order to make use of these new model elements, you need to first define a reference to ```masd``` (assuming a Dia model):
 
 ```
-#DOGEN masd.extraction.delete_extra_files=true
-#DOGEN masd.extraction.delete_empty_directories=true
-```
-## Rename of extraction fields
-
-One user facing change was actually a bug. Some generation fields had been placed incorrectly in extraction. This was spotted and fixed in this release. The change is not backwards compatible. As an example, a model with the following fields:
-
-```
-#DOGEN masd.extraction.cpp.enabled=true
-#DOGEN masd.extraction.cpp.standard=c++-17
-#DOGEN masd.extraction.cpp.msbuild.enabled=false
-#DOGEN masd.extraction.cpp.visual_studio.project.enabled=false
-#DOGEN masd.extraction.cpp.visual_studio.solution.enabled=false
-#DOGEN masd.extraction.csharp.enabled=false
+#DOGEN masd.injection.reference=masd
 ```
 
-Now becomes:
+And then you can set up the meta-data as required:
 
 ```
-#DOGEN masd.generation.cpp.enabled=true
-#DOGEN masd.generation.cpp.standard=c++-17
-#DOGEN masd.generation.cpp.msbuild.enabled=false
-#DOGEN masd.generation.cpp.visual_studio.project.enabled=false
-#DOGEN masd.generation.cpp.visual_studio.solution.enabled=false
-#DOGEN masd.generation.csharp.enabled=false
+#DOGEN masd.generation.decoration.enabled=true
+#DOGEN masd.generation.decoration.licence_name=masd.gpl_v3
+#DOGEN masd.generation.decoration.modeline_group_name=masd.emacs
+#DOGEN masd.generation.decoration.copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
 ```
 
-This change affects all facets in C# and C++, so if you are configuring these directly you will need to manually update your models.
+As you can see, from a usage perspective these are very similar to the previous approach (modulus the field name changes). However, the advantage is that you can now define you own modeling elements (licences, etc), on either the target model or a model shared by a number of target models - as in the ```masd``` model example above.
+
+Please note that these keys were previously available with different names, so this is a breaking change. The fields have been updated from:
+
+```
+masd.decoration.enabled
+masd.decoration.licence_name
+masd.decoration.copyright_notice
+masd.decoration.modeline_group_name
+```
+
+to
+
+```
+masd.generation.decoration.enabled
+masd.generation.decoration.licence_name
+masd.generation.decoration.copyright_notice
+masd.generation.decoration.modeline_group_name
+```
+
+## Language rename
+
+Sadly, this is not the only breaking change in this release. The "language rename" is explained in more detail below on the internal section, but from a end user perspective, it is a breaking change. The following fields have been renamed:
+
+```
+#DOGEN masd.injection.input_language=cpp
+#DOGEN masd.extraction.output_language=cpp
+```
+
+Have been renamed. They must be updated to:
+
+```
+#DOGEN masd.injection.input_technical_space=cpp
+#DOGEN masd.extraction.output_technical_space=cpp
+```
+
+# Development Matters
+
+In this section we cover topics that are mainly of interest if you follow Dogen development, such as details on internal stories that consumed significant resources, important events, etc. As usual, for all the gory details of the work carried out this sprint, see the [sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_14.org).
+
+## Milestones
+
+With this release, we have made the 8888th commit to Dogen! I guess a celebration blog post is in order, though it's always difficult to justify taking more time away from coding.
+
+![Commit milestone](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/dogen_8888_commit.png)
+
+## Significant Internal Stories
+
+Several very important clean-ups were achieved this sprint:
+
+- **Move from "languages" to "technical spaces"**. This is somewhat difficult to explain without getting into the details (which my thesis will explain properly), but with this release we have started a move from mere programming languages towards [technical spaces](https://userpages.uni-koblenz.de/~laemmel/gttse/2005/pdfs/41430036.pdf) as [MDE](https://en.wikipedia.org/wiki/Model-driven_engineering) understands them. This will in time provide a much cleaner conceptual model.
+- **Simpler qualified name representation**. In the past we had relied on maps, and associated qualified names directly with programming languages. With this release we now have a cleaner representation for these.
+- **Clean-up of the extraction model**. This story is related to the user visible feature above, but from an internal perspective. We have now moved all code in the extraction model which didn't belong there. There is only one outstanding task to finish the clean-up of this model, but it already looks in a much better shape.
+
+## Resourcing
+
+Most of the sprint's time was spent towards moving extraction model entities into the coding metamodel (~45%). Around 18% of the total time was dedicated to process, with the bulk of it taken by backlog grooming (9.5%), project planning (just below 3%) and the editing of release notes and the creation of the demo for the previous sprint (~2% and ~4% respectively). We also had a couple of spikes.
+
+The first spike had a cost of around 4%, and is related to integrating Report-CI; this is the latest project by [Klemens Morgenstern](http://klemens-morgenstern.github.io), the amazing coder behind [Boost.Process](https://www.boost.org/doc/libs/master/doc/html/process.html) and other core libraries. As always, we are happy to help fellow travellers on their road to product building. In addition, integration was fairly trivial (mainly reviewing Klemens' PRs) and we've already started to see some of the benefits as we start to make use of [the reports](https://github.com/MASD-Project/dogen/runs/95903756) the tool produces.
+
+The second spike cost circa 3.3% and was related to fixes to the emacs setup. Improvements in the development environment are always welcome, and [tend to have a very positive impact](http://mcraveiro.blogspot.com/2015/05/nerd-food-prelude-of-things-to-come.html), though in ways that are somewhat difficult to measure.
+
+The complete story breakdown is as follows:
+
+![Story Pie Chart](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/agile/v1/sprint_14_pie_chart.jpg)
+
+## Planning
+
+Sprint 14 introduces a [project plan](https://github.com/MASD-Project/dogen/blob/master/doc/agile/project_plan.org). Given Dogen is on the critical path of my PhD, it seemed like a good idea to create some kind of road map that gives an inkling as to when I can start to think of completing it. It has the grandiose name of "project plan", but alas, it is nothing like a project plan for a real industry project. In truth, I've never been a great believer in the estimation process; the objective here is just to have some kind of projection, regardless of how crude, of what is left to do in order to release the [fabled v2 release](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org#required-for-v2).
+
+At the end of sprint 14, the plan looks like this:
+
+![Project Plan](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/agile/v1/sprint_14_project_plan.png)
+
+![Resource Allocation Graph](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/agile/v1/sprint_14_resource_allocation_graph.png)
+
+We will keep it updated with each release.
 
 # Next Sprint
 
-We risk repeating the same words as we used on Sprint 12, but here it goes anyway: that we have the testing in place, our key objective for next sprint is to move all of the decoration related code into the meta-model. We started work on this in the previous sprint but sadly ran out of time. In addition, we hope to finally make some  inroads against moving annotations to the metamodel. This will be a significant major feature, at long last.
+As per the project plan above, we are expecting to continue the meta-modeling work in the next sprint by tackling a very thorny issue: moving profiles into the meta-model. This is a feature of pivotal importance to make Dogen usable because it will finally mean users can define profiles such as ```serializable``` and the like on their own diagrams, associate them with user defined configuration, and ultimately apply them to element types. Profiles are key to unlocking Dogen functionality, so we are extremely excited to finally get to work on this feature.
 
 # Binaries
 
 You can download binaries from [Bintray](https://bintray.com/masd-project/main/dogen) for OSX, Linux and Windows (all 64-bit):
 
-- [dogen_1.0.13_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.13/dogen_1.0.13_amd64-applications.deb)
-- [dogen-1.0.13-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.13/dogen-1.0.13-Darwin-x86_64.dmg)
-- [dogen-1.0.13-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/DOGEN-1.0.13-Windows-AMD64.msi)
-
-**Note**: Windows builds are now generated using clang-cl rather than MSVC.
+- [dogen_1.0.14_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.14/dogen_1.0.14_amd64-applications.deb)
+- [dogen-1.0.14-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.14/dogen-1.0.14-Darwin-x86_64.dmg)
+- [dogen-1.0.14-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/DOGEN-1.0.14-Windows-AMD64.msi)
 
 For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
+
+Happy Modeling!
 #+end_src
 
 - [[https://twitter.com/MarcoCraveiro/status/1110195455487631365][Tweet]]
@@ -143,7 +188,12 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 Updates to sprint and product backlog.
 
-*** Create a video demo for the previous sprint's features            :story:
+*** COMPLETED Create a video demo for the previous sprint's features  :story:
+    CLOSED: [2019-04-08 Mon 18:04]
+    :LOGBOOK:
+    CLOCK: [2019-04-08 Mon 17:59]--[2019-04-08 Mon 18:03] =>  0:04
+    CLOCK: [2019-04-08 Mon 16:36]--[2019-04-08 Mon 17:58] =>  1:22
+    :END:
 
 Demo the delete empty directories feature.
 
