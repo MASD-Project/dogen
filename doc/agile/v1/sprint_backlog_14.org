@@ -12,27 +12,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-07 Sun 10:32]
+#+CAPTION: Clock summary at [2019-04-08 Mon 10:58]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *82:15* |       |       | 100.0 |
+| *Total time*                                              | *82:45* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 82:15   |       |       | 100.0 |
-| Active                                                    |         | 82:15 |       | 100.0 |
+| Stories                                                   | 82:45   |       |       | 100.0 |
+| Active                                                    |         | 82:45 |       | 100.0 |
 | Edit release notes for previous sprint                    |         |       |  1:47 |   2.2 |
-| Sprint and product backlog grooming                       |         |       |  7:25 |   9.0 |
-| Create a video demo for the previous sprint's features    |         |       |  3:11 |   3.9 |
+| Sprint and product backlog grooming                       |         |       |  7:55 |   9.6 |
+| Create a video demo for the previous sprint's features    |         |       |  3:11 |   3.8 |
 | Fix issues with emacs                                     |         |       |  2:42 |   3.3 |
 | Create a basic "project plan"                             |         |       |  2:08 |   2.6 |
 | Simplify qualified name                                   |         |       |  3:39 |   4.4 |
-| Rename "language" to "technical space"                    |         |       |  7:22 |   9.0 |
+| Rename "language" to "technical space"                    |         |       |  7:22 |   8.9 |
 | Add intrinsic technical space ownership                   |         |       |  1:12 |   1.5 |
-| Promote extraction entities to meta-model elements        |         |       | 37:25 |  45.5 |
+| Promote extraction entities to meta-model elements        |         |       | 37:25 |  45.2 |
 | Integrate report-ci with dogen                            |         |       |  2:09 |   2.6 |
-| Move all utility formatters from extraction to generation |         |       |  7:29 |   9.1 |
+| Move all utility formatters from extraction to generation |         |       |  7:29 |   9.0 |
 | Remove annotations from stitch templates                  |         |       |  1:17 |   1.6 |
-| Supply decorations as a stitch parameter                  |         |       |  4:29 |   5.5 |
+| Supply decorations as a stitch parameter                  |         |       |  4:29 |   5.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -146,8 +146,10 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6515961706701819904/][LinkedIn]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2019-04-08 Mon 10:58]
     :LOGBOOK:
+    CLOCK: [2019-04-08 Mon 06:21]--[2019-04-08 Mon 06:51] =>  0:30
     CLOCK: [2019-04-07 Sun 10:30]--[2019-04-07 Sun 10:32] =>  0:02
     CLOCK: [2019-04-07 Sun 10:20]--[2019-04-07 Sun 10:29] =>  0:09
     CLOCK: [2019-04-05 Fri 21:37]--[2019-04-05 Fri 21:44] =>  0:07
@@ -260,10 +262,10 @@ It seems we get errors in serialisation when using the map.
     CLOCK: [2019-03-26 Tue 14:32]--[2019-03-26 Tue 14:38] =>  0:06
     :END:
 
-We are using the word "language" in several places:
-
 - input language
 - output language
+
+We are using the word "language" in several places:
 
 What we really mean is technical space:
 
@@ -514,7 +516,8 @@ string might look like this:
 This may be a useful thing. However, adding dates and dogen version
 etc will cause spurious diffs.
 
-*** STARTED Move all utility formatters from extraction to generation :story:
+*** COMPLETED Move all utility formatters from extraction to generation :story:
+    CLOSED: [2019-04-08 Mon 10:58]
     :LOGBOOK:
     CLOCK: [2019-04-07 Sun 09:40]--[2019-04-07 Sun 09:52] =>  0:12
     CLOCK: [2019-04-07 Sun 07:42]--[2019-04-07 Sun 08:35] =>  0:53
@@ -549,7 +552,8 @@ Notes:
 - the boilerplate tests themselves are fairly simple: make sure it all
   comes out for both c# and c++.
 
-*** STARTED Remove annotations from stitch templates                  :story:
+*** POSTPONED Remove annotations from stitch templates                :story:
+    CLOSED: [2019-04-08 Mon 10:58]
     :LOGBOOK:
     CLOCK: [2019-04-05 Fri 08:31]--[2019-04-05 Fri 08:45] =>  0:14
     CLOCK: [2019-04-04 Thu 16:57]--[2019-04-04 Thu 17:05] =>  0:08
@@ -577,7 +581,8 @@ applied as variables. They should be composed externally with access
 to data from the model element. Thus we then need a way to associate
 includes with model elements. This is captured as a separate story.
 
-*** STARTED Supply decorations as a stitch parameter                  :story:
+*** POSTPONED Supply decorations as a stitch parameter                :story:
+    CLOSED: [2019-04-08 Mon 10:58]
      :LOGBOOK:
      CLOCK: [2019-04-05 Fri 13:01]--[2019-04-05 Fri 14:50] =>  1:49
      CLOCK: [2019-04-05 Fri 11:43]--[2019-04-05 Fri 12:05] =>  0:22
@@ -602,351 +607,6 @@ Notes:
   instantiation.
 - no decoration for root module
 - cmake files are not going via boilerplate.
-
-*** Add support for decoration configuration overrides                :story:
-
-At present we have hard-coded the decoration configuration to be read
-from the root object only. In an ideal world, we should be able to
-override some of these such as the copyrights. It may not make sense
-to be able to override them all though.
-
-This functionality has been implemented but requires tests in the test
-model.
-
-*** Copyright holders is scalar when it should be an array            :story:
-
-At present its only possible to specify a single copyright holder. It
-should be handled the same was as odb parameters, but because that is
-done with a massive hack, we are not going to extend the hack to
-copyright holders.
-
-This functionality has been implemented but requires tests in the test
-model.
-
-*** Update copyright notices                                          :story:
-
-We need to update all notices to reflect personal ownership until DDC
-was formed, and then ownership by DDC.
-
-- first update to personal ownership has been done, but we need to
-  test if multiple copyright entries is properly supported.
-
-*** Associate includes with model elements                            :story:
-
-The right solution for the formatter includes is to supply them as
-meta-data in the model element. This has the advantage that we can
-then make use of profiles. At present we have one way to supply
-includes: the primary and secondary includes:
-
-: "masd.generation.cpp.io.class_header.primary_inclusion_directive": "<boost/property_tree/json_parser.hpp>",
-: "masd.generation.cpp.io.class_header.secondary_inclusion_directive": "<boost/algorithm/string.hpp>",
-
-This does a part of the job: we can associate up to two include
-directives with one facet and element. However:
-
-- by using this machinery we are effectively replacing the original
-  include.
-- the includes will occur for anyone who references the type. Though
-  however, since the includes are applicable only to the class
-  implementation this is less of a problem. Technically its still
-  incorrect though because these are not the includes needed to use
-  the type but the includes needed to define the type.
-
-For formatters, we kind of need to make the includes only happen when
-we are building the formatter. If we could have a similar machinery,
-but without adding to types referencing the type, this would give us a
-way to declare all of the formatters dependencies. Then, we could
-switch to building all of the stitch boilerplate outside of stitch and
-supplying it as a KVP.
-
-*** Meta-element configuration                                        :story:
-
-It is becoming obvious that there is a need to explicitly model
-meta-elements. A good example are the wale templates for handcrafted
-types. Say we want to associate a wale template with =entry_point=. We
-need one for C# and one for C++. We have the following alternatives:
-
-- the user needs to manually supply these as meta-data parameters
-  every time it creates an entry point.
-- next level is to have profiles: we could define a profile with these
-  parameters and the user is responsible for applying it to entry
-  points as required. This is flexible because users could choose
-  different wale templates. However, its painful that there isn't a
-  default wale template.
-- we could hard-code the default wale template into the field's value,
-  so that you'd get that value if you don't supply any. At least now
-  there is a default, but its hard-coded.
-- finally, if we could create a =<<metaclass= in a diagram, we could
-  then add the default values there _as data_.
-
-This is actually simpler than what it sounds. We just need to have a
-meta-element of type =metaclass=, with an annotation and a name. The
-name of the metaclass is the element it is configuring
-(e.g. =entry_point=). We could have a transform that sets the static
-stereotype of the element based on the name for good measure. Then,
-during the profile merging, we could simply merge first its annotation
-into all elements of this type. Then we would continue with the
-profile merging. We could also do a hack and have a =root_module=
-=metaclass= which could be used for defaults. However, it is not clear
-when we should use this as opposed to plain stereotypes. The good
-thing about stereotypes is that we make the relationships explicit,
-whereas with =metaclass= we are making them slightly less
-transparent.
-
-*** Stitch extension is hard-coded                                    :story:
-
-At present we have hard-coded the file extension in the output of
-stitch templates as =cpp=. We should really supply it as part of the
-configuration. Ideally even the entire filename.
-
-*** Duplicate elements in model                                       :story:
-
-Whilst running queries on postgres against a model dumped in tracing,
-we found evidence of duplicate elements. Query:
-
-: select jsonb_pretty(
-:           jsonb_array_elements(
-:           jsonb_array_elements(data)->'elements')->'data'->'__parent_0__'->'name'->'qualified'->'dot'
-:       )
-: from traces;
-
-Snippet of results after =sort | uniq -c=
-
-:      1  "masd.dogen.generation.csharp"
-:      1  "masd.dogen.generation.csharp.all"
-:      1  "masd.dogen.generation.csharp.CMakeLists"
-:      1  "masd.dogen.generation.csharp.entry_point"
-:      1  "masd.dogen.generation.csharp.fabric"
-:      2  "masd.dogen.generation.csharp.fabric.assembly_info"
-:      2  "masd.dogen.generation.csharp.fabric.assembly_info_factory"
-:      2  "masd.dogen.generation.csharp.fabric.assistant"
-:      2  "masd.dogen.generation.csharp.fabric.assistant_factory"
-:      2  "masd.dogen.generation.csharp.fabric.decoration_expander"
-:      2  "masd.dogen.generation.csharp.fabric.dynamic_transform"
-:      2  "masd.dogen.generation.csharp.fabric.element_visitor"
-:      2  "masd.dogen.generation.csharp.fabric.initializer"
-:      2  "masd.dogen.generation.csharp.fabric.injector"
-:      2  "masd.dogen.generation.csharp.fabric.meta_name_factory"
-:      2  "masd.dogen.generation.csharp.fabric.traits"
-:      2  "masd.dogen.generation.csharp.fabric.visual_studio_configuration"
-:      2  "masd.dogen.generation.csharp.fabric.visual_studio_factory"
-
-We need to investigate the generation pipeline to understand where
-this is coming from.
-
-*** Consider renaming orchestration to "engine"                       :story:
-
-Orchestration is a bit of a vague name. It is really the code
-generation engine of dogen. Its still very vague but slightly less so.
-
-*** Stitch is still using artefact writer                             :story:
-
-Create a templating transform that is similar to the approach used by
-extraction - in fact, stitch should probably be using a transform in
-extraction.
-
-Delete artefact writer.
-
-*** Split wale out of stitch templates                                :story:
-
-Stitch requires extra work in order to split out decoration. This is
-because in the past we relied on profiles to populate decoration. It
-worked because we were reading the same simple JSON files. Now we are
-relying on model references and meta-model entities, so this is no
-longer viable: they do not exist at the template level.
-
-One possible solution is to have a "reference" command line argument
-that loads up the user supplied model. We then need some kind of chain
-that applies the decoration transforms. The only solution is to create
-a temporary model that has some kind of coding element on it; this
-model is then supplied to the pipeline:
-
-- injection: needed to read the MASD model with decoration.
-- coding: needed to assemble the temp model with the MASD model and
-  to obtain the decoration.
-- generation: needed to populate the decoration properties.
-
-At this point we can then supply the annotations to the decoration
-formatter. This means that stitch now has a hard dependency on the
-rest of the dogen pipeline. Ideally we should try to split out
-weaving from stitching so that "weaving" becomes this complex
-pipeline but stitching just means the previous processing we did on
-templates. This could even mean we could remove annotations from
-stitching altogether and then have model to text transforms that
-join the stitch template output with the decoration.
-
-If we take this idea to the limit, what we are saying is that stitch
-templates can have KVPs associated with them, with multiple sources:
-
-- wale (as at present)
-- decorations. We need at least two: preamble and postamble.
-
-Note that operations (hand-crafted code to merge into the generated
-code) cannot be handled by the KVPs. This is because we are generating
-the stitch template itself, not the user facing code; we are
-generating the generator, so we are one level removed from the code
-generator. These can be handled as before, via a post-processing step
-that replaces guids with contents from the file system.
-
-To start off with we can just deprecate weaving for now. It is only
-used to quickly weave the model without code generation, but the
-generator is so quick that it does not make a lot of difference.
-
-It is important to note that we still have a two-level set of
-annotations:
-
-- the element annotations which contain the decoration. These are
-  processed prior to calling the stitch template instantiator to
-  generate the preamble and postamble KVPs (as well as the wale KVPs).
-- the annotation of the template itself. This contains the stitch
-  fields such as includes, etc. These will not contain any fields
-  related to decoration (e.g. it is no longer possible to decorate
-  from within stitch itself).
-
-This means that we need to remove all code from stitch that handles
-annotation expansion and just leave the annotation factory.
-
-We also need to look into how the wale keys were implemented - likely
-we've hard-coded it so that its always the same name:
-
-: <#$ stitch.wale.template_instantiation_result #>
-
-With a bit of luck its just a variable. If so we can then add at the
-top and bottom of each template:
-
-: <#$ stitch.decoration.preamble #>
-: ...
-: <#$ stitch.decoration.postamble #>
-
-It is *very important* to understand that this is the decoration of
-the output of the stitch template *itself*, not of the code it will
-generate. The decoration of the generated code will be handled as at
-present, by manually calling the decoration formatters.
-
-Notes:
-
-- we also need to split out the includes from the template. At present
-  it makes sense to supply it as a stitch KVP but in reality these are
-  parameters that should be inferred from the model. What we need is a
-  way to supply include dependencies in the meta-data. Then use that
-  information to build the include dependencies within
-  generation. Then use the list of includes to build the
-  boilerplate. The stitch template is just the core of the file.
-
-*** Create a tests stereotype with profiles                           :story:
-
-At present we are ignoring all of the contents of =tests=. This means
-whenever we delete a type we are left behind with its tests. A better
-solution is to create model elements for each handcrafted test marked
-as "masd::handcrafted_test". This disables all facets except for
-tests. We can then remove the regex.
-
-*** Make extraction model name a qualified name                       :story:
-
-At present we are setting up the extraction model name from the simple
-name of the model. It should really be the qualified name. Hopefully
-this will only affect tracing and diffing.
-
-*** Check if enable kernel directories is on extraction               :story:
-
-When we moved the kernel logic into yarn from quilt, we did not rename
-the traits.
-
-*** Code generate all contexts                                        :story:
-
-At present we are manually generating the transform contexts across
-all models. The main reason for this is that tracer does not support
-IO. There may be other reasons such as the annotations factory and
-annotation expander. We should just add IO support for all types that
-need it and code generate the contexts.
-
-*** Add "ioable" handcrafted types                                    :story:
-
-Whenever we need to mix and match generated types with handcrafted
-types, it would be really useful to create the missing facets. The
-main one is IO, but we probably also need test data support because
-the tests would fail. We could simply handcraft the types on those
-facets. It would be nice to have profiles like:
-
-: masd::handcrafted_types
-: masd::handcrafted_io
-: masd::handcrafted_test_data
-
-We could do with a simpler word for handcrafted. Check the literature.
-
-Once this is in place, we could have some top-level stereotype that
-aggregates all three (=masd::???=) and we can then tag types with it.
-
-*** Read =generate_preamble= from dynamic object                      :story:
-
-We need to generate the field definitions and update the general
-settings factory.
-
-*** Improve formatters code generation marker                         :story:
-
-Things the marker can/should have:
-
-- model level version;
-- the dogen version too. However, this will make all our tests break
-  every time there is a new commit so perhaps we need to have this
-  switched off by default.
-
-*** Move wale templates from the data directory                       :story:
-
-At present we have wale templates under the data directory. This is
-not the right location. These are part of a model just like stitch
-templates. There is one slight wrinkle though: if a user attempts to
-create a dogen formatter (say if plugins were supported), then we need
-access to the template from the debian package. So whilst they should
-live in the appropriate model (e.g. =generation.cpp=,
-=generation.csharp=), they also need to be packaged and shipped.
-
-Interestingly, so will all dogen models which are defining annotations
-and profiles. We need to rethink the data directory, separating system
-models from dogen models somehow. In effect, the data directory will
-be, in the future, the system models directory.
-
-So, in conclusion, two use cases for wale templates:
-
-- regular model defines a wale template and makes use of it. Template
-  should be with the model, just like stitch templates. However,
-  unlike stitch, there should be a directory for them.
-- user model wants to define a new formatter. It will make use of
-  dogen profiles and wale templates. These must be in the future data
-  directory somehow.
-
-*** Handling of =invalid= in enumeration is incorrect                 :story:
-
-At present we are injecting the invalid enumerator transparently via
-meta-data switches. This is not a good idea. Users should instead have
-some kind of "enumeration template" from which they can inherit which
-will give them the required enumerators. We should not do anything
-special for invalid.
-
-*** Generating a meta-model for dogen                                 :story:
-
-We are making use of coding meta-types a fair bit in dogen:
-
-- we have meta-names, which we use for things such as indexing,
-  formatter discovery etc.
-- we need to know which types are generatable.
-- we are associating meta-types with technical spaces (intrinsic).
-
-It would be nice if somehow we were able to generate some basic
-reflection code that enabled us to ask for a meta-model's element
-meta-class. For example, given an element, we should be able to do:
-
-: element.meta_class().intrinsic_technical_space()
-
-The =meta_class()= method should be static and code-generated by
-dogen. This still requires a lot of thinking though. Look for
-reflection stories in backlog.
-
-*** Consider making editor a meta-data element                        :story:
-
-When we create meta-data elements for technical space, facet, etc we
-should also consider making one for editors. We probably only need a
-few properties such as start of modeline, etc.
 
 ** Deprecated
 *** CANCELLED Fix =cp= error on cmake with local third-party packages :story:
