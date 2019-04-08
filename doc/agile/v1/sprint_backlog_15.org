@@ -12,18 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-08 Mon 18:04]
+#+CAPTION: Clock summary at [2019-04-08 Mon 18:13]
 | <75>                                                   |        |      |      |       |
 | Headline                                               | Time   |      |      |     % |
 |--------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                           | *7:28* |      |      | 100.0 |
+| *Total time*                                           | *7:37* |      |      | 100.0 |
 |--------------------------------------------------------+--------+------+------+-------|
-| Stories                                                | 7:28   |      |      | 100.0 |
-| Active                                                 |        | 7:28 |      | 100.0 |
-| Edit release notes for previous sprint                 |        |      | 3:44 |  50.0 |
-| Sprint and product backlog grooming                    |        |      | 0:17 |   3.8 |
-| Create a video demo for the previous sprint's features |        |      | 1:26 |  19.2 |
-| Fix issues with emacs                                  |        |      | 2:01 |  27.0 |
+| Stories                                                | 7:37   |      |      | 100.0 |
+| Active                                                 |        | 7:37 |      | 100.0 |
+| Edit release notes for previous sprint                 |        |      | 3:44 |  49.0 |
+| Sprint and product backlog grooming                    |        |      | 0:17 |   3.7 |
+| Create a video demo for the previous sprint's features |        |      | 1:35 |  20.8 |
+| Fix issues with emacs                                  |        |      | 2:01 |  26.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -191,6 +191,7 @@ Updates to sprint and product backlog.
 *** COMPLETED Create a video demo for the previous sprint's features  :story:
     CLOSED: [2019-04-08 Mon 18:04]
     :LOGBOOK:
+    CLOCK: [2019-04-08 Mon 18:04]--[2019-04-08 Mon 18:13] =>  0:09
     CLOCK: [2019-04-08 Mon 17:59]--[2019-04-08 Mon 18:03] =>  0:04
     CLOCK: [2019-04-08 Mon 16:36]--[2019-04-08 Mon 17:58] =>  1:22
     :END:

@@ -276,9 +276,7 @@ There are a limited number of videos available about Dogen, though we
 are trying to get into the habit of demoing new features at the end of
 each sprint. The videos are gathered under the [MASD -
 Dogen](https://www.youtube.com/playlist?list=PLwfrwe216gF0RmXOv8yCinHfv9QeSRDcm)
-playlist. The demo of the latest sprint is available here:
-
-[![Sprint 1.0.12 Demo](https://img.youtube.com/vi/yerm2xiKBqA/0.jpg)](https://youtu.be/yerm2xiKBqA)
+playlist.
 
 # Blog Posts
 
