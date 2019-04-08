@@ -12,24 +12,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-08 Mon 18:13]
+#+CAPTION: Clock summary at [2019-04-08 Mon 18:35]
 | <75>                                                   |        |      |      |       |
 | Headline                                               | Time   |      |      |     % |
 |--------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                           | *7:37* |      |      | 100.0 |
+| *Total time*                                           | *7:57* |      |      | 100.0 |
 |--------------------------------------------------------+--------+------+------+-------|
-| Stories                                                | 7:37   |      |      | 100.0 |
-| Active                                                 |        | 7:37 |      | 100.0 |
-| Edit release notes for previous sprint                 |        |      | 3:44 |  49.0 |
-| Sprint and product backlog grooming                    |        |      | 0:17 |   3.7 |
-| Create a video demo for the previous sprint's features |        |      | 1:35 |  20.8 |
-| Fix issues with emacs                                  |        |      | 2:01 |  26.5 |
+| Stories                                                | 7:57   |      |      | 100.0 |
+| Active                                                 |        | 7:57 |      | 100.0 |
+| Edit release notes for previous sprint                 |        |      | 3:57 |  49.7 |
+| Sprint and product backlog grooming                    |        |      | 0:24 |   5.0 |
+| Create a video demo for the previous sprint's features |        |      | 1:35 |  19.9 |
+| Fix issues with emacs                                  |        |      | 2:01 |  25.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** COMPLETED COMMENT Edit release notes for previous sprint                  :story:
     CLOSED: [2019-04-08 Mon 16:36]
     :LOGBOOK:
+    CLOCK: [2019-04-08 Mon 18:22]--[2019-04-08 Mon 18:35] =>  0:13
     CLOCK: [2019-04-08 Mon 16:23]--[2019-04-08 Mon 16:33] =>  0:10
     CLOCK: [2019-04-08 Mon 15:02]--[2019-04-08 Mon 16:22] =>  1:20
     CLOCK: [2019-04-08 Mon 13:51]--[2019-04-08 Mon 15:01] =>  1:18
@@ -176,12 +177,13 @@ For all other architectures and/or operative systems, you will need to build Dog
 Happy Modeling!
 #+end_src
 
-- [[https://twitter.com/MarcoCraveiro/status/1110195455487631365][Tweet]]
-- [[https://www.linkedin.com/feed/update/urn:li:activity:6515961706701819904/][LinkedIn]]
+- [[https://twitter.com/MarcoCraveiro/status/1115302519067090947][Tweet]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6521068658024804352][LinkedIn]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-04-08 Mon 18:14]--[2019-04-08 Mon 18:21] =>  0:07
     CLOCK: [2019-04-08 Mon 15:02]--[2019-04-08 Mon 15:09] =>  0:07
     CLOCK: [2019-04-08 Mon 10:58]--[2019-04-08 Mon 11:08] =>  0:10
     :END:
