@@ -1,0 +1,103 @@
+\documentclass{beamer}
+\mode<presentation>
+{ \usetheme{boxes} }
+
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{csquotes}
+\usepackage[backend=bibtex]{biblatex}
+
+\title{Dogen v1.0.14, \enquote{Deserto}}
+
+\author{Marco Craveiro \\
+  Domain Driven Development
+}
+\date{\today}
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\bibliography{sprint_14_features}
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Language rename}
+
+\begin{itemize}
+
+  \pause
+
+\item The following fields have been renamed:
+  \texttt{masd.injection.input\_language} and
+  \texttt{masd.extraction.output\_language}.
+
+  \pause
+
+\item New names are \texttt{masd.injection.input\_technical\_space}
+  and \texttt{masd.extraction.output\_technical\_space}.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Decoration as meta-model elements}
+
+\begin{itemize}
+
+  \pause
+
+\item Originally we used assorted JSON files to store decoration
+  data. Each file had its own format, parsing etc.
+
+  \pause
+
+\item Lots of special handling for each different decoration type,
+  but ultimately with the same objective: consume them from the model.
+
+  \pause
+
+\item It is now clear that these are one of many examples of entities
+  that require modeling at the meta-model level.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Decoration as meta-model elements}
+
+\begin{itemize}
+
+  \pause
+
+\item We group these elements as ``decoration''.
+
+  \pause
+
+\item Demonstration on how to use the new decoration elements.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Next Sprint}
+
+\begin{itemize}
+\item \textbf{Mission statement}: Provide support for profiles at the
+  metamodel level.
+\end{itemize}
+
+\end{frame}
+
+\end{document}
