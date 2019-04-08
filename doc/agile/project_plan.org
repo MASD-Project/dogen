@@ -9,11 +9,14 @@
 Contains all the major tasks required to finish the V2 release. These
 are not stories per se, but more like epics.
 
+Sourced from [[https://orgmode.org/worg/org-tutorials/org-taskjuggler.html][Creating Gantt charts by Exporting to TaskJuggler]]. Export
+using C-c C-e J p. File is under Reports directory.
+
 ** Software Development
 
 *** Extraction clean-up
    :PROPERTIES:
-   :EFFORT:   2d
+   :EFFORT:   3d
    :BLOCKER:  start
    :allocate: s14
    :END:
@@ -26,9 +29,9 @@ are not stories per se, but more like epics.
 
 *** Annotations profile clean-up
    :PROPERTIES:
-   :EFFORT:   2d
+   :EFFORT:   3d
    :BLOCKER:  previous-sibling
-   :allocate: s14
+   :allocate: s15
    :END:
 
 - create types to represent profiles and profile inheritance in
@@ -42,7 +45,7 @@ are not stories per se, but more like epics.
    :PROPERTIES:
    :EFFORT:   2d
    :BLOCKER:  previous-sibling
-   :allocate: s15
+   :allocate: s16
    :END:
 
 - create templates to generate types and associated annotation type
@@ -53,9 +56,9 @@ are not stories per se, but more like epics.
 
 *** Fabric clean-up
    :PROPERTIES:
-   :EFFORT:   2d
+   :EFFORT:   3d
    :BLOCKER:  previous-sibling
-   :allocate: s15
+   :allocate: s17
    :END:
 
 - move all C++ fabric types into coding.
@@ -63,9 +66,9 @@ are not stories per se, but more like epics.
 
 *** Generation meta-model clean-up
    :PROPERTIES:
-   :EFFORT:   2d
+   :EFFORT:   3d
    :BLOCKER:  previous-sibling
-   :allocate: s16
+   :allocate: s17
    :END:
 
 - remove all types that are in coding but are related to generation
@@ -73,9 +76,9 @@ are not stories per se, but more like epics.
 
 *** Formattables clean-up
    :PROPERTIES:
-   :EFFORT:   2d
+   :EFFORT:   3d
    :BLOCKER:  previous-sibling
-   :allocate: s16
+   :allocate: s17
    :END:
 
 - move formattables concepts into generation, generalising them. This
@@ -85,7 +88,7 @@ are not stories per se, but more like epics.
    :PROPERTIES:
    :EFFORT:   2d
    :BLOCKER:  previous-sibling
-   :allocate: s17
+   :allocate: s18
    :END:
 
 - when C++ and C# models only have formatters, merge them into one
@@ -95,7 +98,7 @@ are not stories per se, but more like epics.
    :PROPERTIES:
    :EFFORT:   2d
    :BLOCKER:  previous-sibling
-   :allocate: s17
+   :allocate: s18
    :END:
 
 - update all CMake templates with latest layout from hand-crafted
@@ -103,9 +106,9 @@ are not stories per se, but more like epics.
 
 *** Product generation
    :PROPERTIES:
-   :EFFORT:   2d
+   :EFFORT:   3d
    :BLOCKER:  previous-sibling
-   :allocate: s18
+   :allocate: s19
    :END:
 
 - add proudct and product family level entities to coding.
@@ -114,6 +117,7 @@ are not stories per se, but more like epics.
 *** Project start
     :PROPERTIES:
     :task_id:  start
+    :start:    2019-04-25
     :END:
 
 * Sprints                                              :taskjuggler_resource:
@@ -143,4 +147,9 @@ Sprints for the project plan.
 ** Sprint 18
    :PROPERTIES:
    :resource_id: s18
+   :END:
+
+** Sprint 19
+   :PROPERTIES:
+   :resource_id: s19
    :END:
