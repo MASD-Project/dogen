@@ -52,6 +52,35 @@ enter the type name and other field related parameters as
 configuration on the meta-element.
 
 *** Multiple entries of the same key is invalid in JSON               :story:
+
+We probably have a duplicate story for this somewhere else in the
+backlog, try to locate it. The gist of it is that we have invalid JSON
+at present on our JSON models:
+
+:    "masd.injection.reference": "cpp.builtins",
+:    "masd.injection.reference": "cpp.std",
+:    "masd.injection.reference": "cpp.boost",
+:    "masd.injection.reference": "masd",
+:    "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
+:    "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
+:    "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
+:    "masd.extraction.delete_extra_files": "true",
+:    "masd.extraction.delete_empty_directories": "true",
+
+The duplicate keys in an object are not valid, which means that they
+are filtered out when we indent. A quick fix for this is to allow
+users to supply arrays in JSON but then internally map them back to
+flat key value pairs. This should be really easy to do. We should also
+at some point add some validation to stop users from adding silly
+things such as objects as values, etc.
+
+One interesting caveat is conversion from dia to JSON. If the keys on
+the Dia model are not all together, the converter needs to be clever
+enough to locate all keys with the same name and group them into the
+same container, else we will end up having exactly the same
+problem. However, we should try to preserve the order of the keys as
+much as possible because this makes troubleshooting much easier.
+
 *** Make use of association relationships                             :story:
 
 When we start having to create element such as visitor etc. it would
@@ -14487,3 +14516,46 @@ destruction. We could perhaps have some meta-data that annotates
 operations as "start RAII" and "end RAII". Then we'd generate a class
 with a constructor that matches the signature of these operations, and
 constructs an instance of the owning class.
+
+*** Tighter integration of Dogen and Emacs                            :story:
+
+There are a couple of areas where we could take advantage of code
+generation and emacs:
+
+- running of tests: generate a org-mode test file which has a tree for
+  all configurations (Debug, Release) and compilers (gcc8, clang7,
+  etc). Then, for each of these we could have the test suites and the
+  tests. It runs all the tests and builds org-tables with the total
+  times. The runs are babel snippets. It updates the entries with the
+  status of passed, failed or not run. We need to find out how to run
+  all code snippets for a given subsection. We can use org properties
+  to supply the boost test variables such as log level etc. Because
+  Dogen knows of all of the test suites (e.g. these are declared as
+  model elements), it can parse them. We can also mark tests and test
+  suites as "generated" or "handcrafted".
+- files: Dogen could also output a generation model set for all types
+  in a product using a lisp like serialisation format. This could
+  somehow be read by emacs to give it visibility of all files dogen
+  knows off. Its still not clear what we'd do with it though. Some
+  kind of integration with projectile?
+- bookmarks: we could generate a org-mode file of bookmarks for all
+  key directories in a product such as say "coding include types",
+  etc. This can also use traditional emacs bookmarking format.
+- run affected test suites: create a graph of includes per file such
+  that when you change a file, you can ask to run affected test
+  suites. This is computed based on the include graph. Won't work for
+  all technical spaces though.
+- build: it would be great if we could have the build scripts as
+  babel. However, instead of executing inside of org-mode, we want to
+  call the compilation buffer with it. This means we could have
+  bookmerks for all of the usual targets and even target combos such
+  as generate, convert and indent. For extra bonus points, once we
+  have code merging, we could have our own compilation targets added
+  manually.
+
+Links:
+
+- [[https://www.youtube.com/watch?v=dljNabciEGg][Literate Devops with Emacs]]
+- [[https://github.com/wlbr/cl-marshal][cl-marshal]]: Simple and fast marshalling of Lisp datastructures.
+- [[https://www.cliki.net/serialization][cliki]]: Libraries to translate data structures to/from a format which
+  can be stored/retrieved
