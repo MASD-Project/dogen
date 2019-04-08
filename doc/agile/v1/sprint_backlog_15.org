@@ -1,0 +1,549 @@
+#+title: Sprint Backlog 15
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) }
+
+* Mission Statement
+
+- Start work on moving profiles to metamodel.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2019-04-08 Mon 15:09]
+| <75>                                   |        |      |      |       |
+| Headline                               | Time   |      |      |     % |
+|----------------------------------------+--------+------+------+-------|
+| *Total time*                           | *4:32* |      |      | 100.0 |
+|----------------------------------------+--------+------+------+-------|
+| Stories                                | 4:32   |      |      | 100.0 |
+| Active                                 |        | 4:32 |      | 100.0 |
+| Edit release notes for previous sprint |        |      | 2:14 |  49.3 |
+| Sprint and product backlog grooming    |        |      | 0:17 |   6.2 |
+| Fix issues with emacs                  |        |      | 2:01 |  44.5 |
+#+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
+#+end:
+
+*** STARTED Edit release notes for previous sprint                    :story:
+    :LOGBOOK:
+    CLOCK: [2019-04-08 Mon 13:51]--[2019-04-08 Mon 15:01] =>  1:18
+    CLOCK: [2019-04-08 Mon 11:09]--[2019-04-08 Mon 12:13] =>  1:04
+    :END:
+
+Add github release notes for previous sprint.
+
+Title: Dogen v1.0.14, "Deserto"
+
+#+begin_src markdown
+![Deserto do Namibe](http://4.bp.blogspot.com/-LiNTT6RDryM/VOyICPXnVDI/AAAAAAAAFMs/41QA7apihtQ/s1600/IMG_0834%2Bcopy.jpg)
+_Dunes in the Namib Desert, Namibe Province, Angola. (C) 2012 [João P. Baptista](http://xamalundo.blogspot.com/2015/02/deserto-do-namibe-angola.html)_.
+
+# Introduction
+
+The sprint cadence seems to finally be establishing itself, with sprint 13 offering yet another solid 2-week effort. The main emphasis was on solving the unit testing of generated code. If you recall, we had some sparse manual tests for these, delightfully called the "canned tests". These weren't exactly brilliant, but did provide _some_ kind of coverage. Sadly, we ended up having to disable them due to weird and wonderful failures on OSX and Windows, which we could not reproduce on Linux and which were rather difficult to get to the bottom of via CI because of the way the tests were designed.
+
+As the next few sprints are all about very (hard-)core changes, we had to make sure a strong testing base is in place before we can proceed with the refactoring. As usual, the work was much harder than expected, taking us the best part of two sprints to get into a good place: sprint 12 was all about the system test story, and sprint 13 is all about the unit tests story. Fortunately, we still managed to sneak in one useful feature.
+
+The below chart breaks down the cost of each story worked percentage-wise in terms of the overall sprint time.
+
+![Story Pie Chart](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/agile/v1/sprint_13_pie_chart.jpg)
+
+The next sections provide a summary of the most significant stories. As usual, for more details of the work carried out this sprint, see [the sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_13.org).
+
+# Internal Changes
+
+In this section we cover stories that consumed significant resources but are only visible internally.
+
+## Sprint and product backlog grooming
+
+In this sprint we spent quite a lot of time grooming the backlogs. This is something which never gets much of a mention, but which I believe is one of the most important aspects of Agile: [you need to keep your product backlog in good shape](http://mcraveiro.blogspot.com/2016/01/nerd-food-on-product-backlogs.html). Perhaps spending 15% of the total time of a sprint grooming backlogs may sound _a tad_ excessive, but in our defence we do have a [hefty product backlog](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org), with over 550 user stories at various levels of detail. Also, given that we have just finished a massive rewrite of the theoretical basis for Dogen, it is no surprise that a lot of the stories started to bit-rot. This clean up was mainly to look for low hanging fruit and remove all stories which are completely deprecated; subsequent clean-ups will delve more into the detail of the stories.
+
+# User visible changes
+
+This section covers stories that affect end users. The sprint demo provides a quick demonstration on how the user visible changes; the below sections provide more detail.
+
+[![Sprint 1.0.12 Demo](https://img.youtube.com/vi/yerm2xiKBqA/0.jpg)](https://youtu.be/yerm2xiKBqA)
+
+## Code generation of tests for dogen models
+
+This story had started on the previous sprint, but, as always, proved to be much more complicated than anticipated. Whilst the story is user facing - in that users can enable it for their own models - its purpose is very much just to test the code generator, so its not really that helpful to end users outside of Dogen.
+
+Though in theory adding tests seems just like adding another facet - and since we already have quite a number of these - we were pretty confident this would be a "quick effort". In practice, there were subtle differences with tests that caused large problems. These in turn forced some changes to the core of Dogen. On the plus side, the pain seems to be worth it, as we are now testing pretty much all facets for all generated code, across both Dogen itself and the Reference Implementation on all supported platforms. Even better, they are all green:
+
+![CDash builds](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/cdash_dogen_all_builds.png)
+
+Whilst coverage is extensive, unfortunately we do not yet cover ODB (C++ ORM mapping) nor C# (which still relies on canned tests). In addition, build time has gone up quite considerably, given that we now need to compile the test data facet for all of these types, plus the tests too. The following chart demonstrates this problem:
+
+![Nightly build time](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/dogen_nightly_build_time.png)
+
+As a result of this increase, MSVC is no longer able to complete the builds within the allotted time. Fortunately our clang-cl builds are deemed good enough (only one test failure across some 2.7k tests) so we'll be shipping that to users from now on. In the future we will need to look into ways of decreasing build time, as we are very close to the edge on OSX and clang-cl.
+
+## Delete empty directories
+
+In the past we used to generate all facets for all models, Dogen and Reference Implementation. However, over time we ended up having to disable most facets as the build time was getting out of control. Dogen correctly deleted all of the generated files when the acets were disabled, but left behind a number of empty directories. Worse: because git does not care about empty directories, we weren't even aware of their existence until some speculative filesystem browsing revealed them. This sprint adds a new knob to delete any empty directory under the project: ```delete_empty_directories```. Together with ```delete_extra_files```, this should mean that most generated lint is taken care of now.
+
+```
+#DOGEN masd.extraction.delete_extra_files=true
+#DOGEN masd.extraction.delete_empty_directories=true
+```
+## Rename of extraction fields
+
+One user facing change was actually a bug. Some generation fields had been placed incorrectly in extraction. This was spotted and fixed in this release. The change is not backwards compatible. As an example, a model with the following fields:
+
+```
+#DOGEN masd.extraction.cpp.enabled=true
+#DOGEN masd.extraction.cpp.standard=c++-17
+#DOGEN masd.extraction.cpp.msbuild.enabled=false
+#DOGEN masd.extraction.cpp.visual_studio.project.enabled=false
+#DOGEN masd.extraction.cpp.visual_studio.solution.enabled=false
+#DOGEN masd.extraction.csharp.enabled=false
+```
+
+Now becomes:
+
+```
+#DOGEN masd.generation.cpp.enabled=true
+#DOGEN masd.generation.cpp.standard=c++-17
+#DOGEN masd.generation.cpp.msbuild.enabled=false
+#DOGEN masd.generation.cpp.visual_studio.project.enabled=false
+#DOGEN masd.generation.cpp.visual_studio.solution.enabled=false
+#DOGEN masd.generation.csharp.enabled=false
+```
+
+This change affects all facets in C# and C++, so if you are configuring these directly you will need to manually update your models.
+
+# Next Sprint
+
+We risk repeating the same words as we used on Sprint 12, but here it goes anyway: that we have the testing in place, our key objective for next sprint is to move all of the decoration related code into the meta-model. We started work on this in the previous sprint but sadly ran out of time. In addition, we hope to finally make some  inroads against moving annotations to the metamodel. This will be a significant major feature, at long last.
+
+# Binaries
+
+You can download binaries from [Bintray](https://bintray.com/masd-project/main/dogen) for OSX, Linux and Windows (all 64-bit):
+
+- [dogen_1.0.13_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.13/dogen_1.0.13_amd64-applications.deb)
+- [dogen-1.0.13-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.13/dogen-1.0.13-Darwin-x86_64.dmg)
+- [dogen-1.0.13-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/DOGEN-1.0.13-Windows-AMD64.msi)
+
+**Note**: Windows builds are now generated using clang-cl rather than MSVC.
+
+For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
+#+end_src
+
+- [[https://twitter.com/MarcoCraveiro/status/1110195455487631365][Tweet]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6515961706701819904/][LinkedIn]]
+- [[https://gitter.im/MASD-Project/Lobby][Gitter]]
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    :LOGBOOK:
+    CLOCK: [2019-04-08 Mon 15:02]--[2019-04-08 Mon 15:09] =>  0:07
+    CLOCK: [2019-04-08 Mon 10:58]--[2019-04-08 Mon 11:08] =>  0:10
+    :END:
+
+Updates to sprint and product backlog.
+
+*** Create a video demo for the previous sprint's features            :story:
+
+Demo the delete empty directories feature.
+
+*** COMPLETED Fix issues with emacs                                   :story:
+    CLOSED: [2019-04-08 Mon 10:57]
+    :LOGBOOK:
+    CLOCK: [2019-04-08 Mon 10:37]--[2019-04-08 Mon 10:57] =>  0:20
+    CLOCK: [2019-04-08 Mon 08:55]--[2019-04-08 Mon 10:36] =>  1:41
+    :END:
+
+Fix any pending issues with emacs left over from previous sprint.
+
+- modeline not quite displaying correctly.
+- setup treemacs in dot emacs
+- symlinks are confusing treemacs, delete them.
+- get eyebrowse mode to work properly so we can make use of desktops.
+
+*** Remove annotations from stitch templates                          :story:
+
+In the new world, stitch templates don't have all of the required
+information to build the boilerplate:
+
+- they cannot expand wale templates because the KVPs will be in the
+  element itself, not the template. Strictly speaking this is not an
+  problem we have right now though.
+- more importantly, the include dependencies cannot be computed by the
+  template. This is because the dependencies are really a function of
+  the model type we are expressing on the template. Instead, we did a
+  quick hack and supplied the includes as KVPs. So they are kind of
+  parameters but kind of not really parameters because they are
+  hard-coded to the template. It solved the immediate problem of
+  having them formatted and placed in the right part of the file, but
+  now we can see this is not the right approach.
+
+In reality, we should not have any annotations at all in
+templates. The boilerplate and includes should be supplied as KVPs and
+applied as variables. They should be composed externally with access
+to data from the model element. Thus we then need a way to associate
+includes with model elements. This is captured as a separate story.
+
+*** Supply decorations as a stitch parameter                          :story:
+
+As explained in other story at present we are creating the decoration
+inside the stitch template. This won't work with new world. We need to
+supply it as KVP. For now we will leave everything else as is.
+
+Notes:
+
+- factor out commonalities between wale and stitch into object
+  template regarding keys.
+- add validation to ensure all expected keys have been found. Look at
+  how that's done in wale.
+- add a way to supply KVPs from the outside world into stitch template
+  instantiation.
+- no decoration for root module
+- cmake files are not going via boilerplate.
+
+*** Add support for decoration configuration overrides                :story:
+
+At present we have hard-coded the decoration configuration to be read
+from the root object only. In an ideal world, we should be able to
+override some of these such as the copyrights. It may not make sense
+to be able to override them all though.
+
+This functionality has been implemented but requires tests in the test
+model.
+
+*** Copyright holders is scalar when it should be an array            :story:
+
+At present its only possible to specify a single copyright holder. It
+should be handled the same was as odb parameters, but because that is
+done with a massive hack, we are not going to extend the hack to
+copyright holders.
+
+This functionality has been implemented but requires tests in the test
+model.
+
+*** Update copyright notices                                          :story:
+
+We need to update all notices to reflect personal ownership until DDC
+was formed, and then ownership by DDC.
+
+- first update to personal ownership has been done, but we need to
+  test if multiple copyright entries is properly supported.
+
+*** Associate includes with model elements                            :story:
+
+The right solution for the formatter includes is to supply them as
+meta-data in the model element. This has the advantage that we can
+then make use of profiles. At present we have one way to supply
+includes: the primary and secondary includes:
+
+: "masd.generation.cpp.io.class_header.primary_inclusion_directive": "<boost/property_tree/json_parser.hpp>",
+: "masd.generation.cpp.io.class_header.secondary_inclusion_directive": "<boost/algorithm/string.hpp>",
+
+This does a part of the job: we can associate up to two include
+directives with one facet and element. However:
+
+- by using this machinery we are effectively replacing the original
+  include.
+- the includes will occur for anyone who references the type. Though
+  however, since the includes are applicable only to the class
+  implementation this is less of a problem. Technically its still
+  incorrect though because these are not the includes needed to use
+  the type but the includes needed to define the type.
+
+For formatters, we kind of need to make the includes only happen when
+we are building the formatter. If we could have a similar machinery,
+but without adding to types referencing the type, this would give us a
+way to declare all of the formatters dependencies. Then, we could
+switch to building all of the stitch boilerplate outside of stitch and
+supplying it as a KVP.
+
+*** Meta-element configuration                                        :story:
+
+It is becoming obvious that there is a need to explicitly model
+meta-elements. A good example are the wale templates for handcrafted
+types. Say we want to associate a wale template with =entry_point=. We
+need one for C# and one for C++. We have the following alternatives:
+
+- the user needs to manually supply these as meta-data parameters
+  every time it creates an entry point.
+- next level is to have profiles: we could define a profile with these
+  parameters and the user is responsible for applying it to entry
+  points as required. This is flexible because users could choose
+  different wale templates. However, its painful that there isn't a
+  default wale template.
+- we could hard-code the default wale template into the field's value,
+  so that you'd get that value if you don't supply any. At least now
+  there is a default, but its hard-coded.
+- finally, if we could create a =<<metaclass= in a diagram, we could
+  then add the default values there _as data_.
+
+This is actually simpler than what it sounds. We just need to have a
+meta-element of type =metaclass=, with an annotation and a name. The
+name of the metaclass is the element it is configuring
+(e.g. =entry_point=). We could have a transform that sets the static
+stereotype of the element based on the name for good measure. Then,
+during the profile merging, we could simply merge first its annotation
+into all elements of this type. Then we would continue with the
+profile merging. We could also do a hack and have a =root_module=
+=metaclass= which could be used for defaults. However, it is not clear
+when we should use this as opposed to plain stereotypes. The good
+thing about stereotypes is that we make the relationships explicit,
+whereas with =metaclass= we are making them slightly less
+transparent.
+
+*** Stitch extension is hard-coded                                    :story:
+
+At present we have hard-coded the file extension in the output of
+stitch templates as =cpp=. We should really supply it as part of the
+configuration. Ideally even the entire filename.
+
+*** Duplicate elements in model                                       :story:
+
+Whilst running queries on postgres against a model dumped in tracing,
+we found evidence of duplicate elements. Query:
+
+: select jsonb_pretty(
+:           jsonb_array_elements(
+:           jsonb_array_elements(data)->'elements')->'data'->'__parent_0__'->'name'->'qualified'->'dot'
+:       )
+: from traces;
+
+Snippet of results after =sort | uniq -c=
+
+:      1  "masd.dogen.generation.csharp"
+:      1  "masd.dogen.generation.csharp.all"
+:      1  "masd.dogen.generation.csharp.CMakeLists"
+:      1  "masd.dogen.generation.csharp.entry_point"
+:      1  "masd.dogen.generation.csharp.fabric"
+:      2  "masd.dogen.generation.csharp.fabric.assembly_info"
+:      2  "masd.dogen.generation.csharp.fabric.assembly_info_factory"
+:      2  "masd.dogen.generation.csharp.fabric.assistant"
+:      2  "masd.dogen.generation.csharp.fabric.assistant_factory"
+:      2  "masd.dogen.generation.csharp.fabric.decoration_expander"
+:      2  "masd.dogen.generation.csharp.fabric.dynamic_transform"
+:      2  "masd.dogen.generation.csharp.fabric.element_visitor"
+:      2  "masd.dogen.generation.csharp.fabric.initializer"
+:      2  "masd.dogen.generation.csharp.fabric.injector"
+:      2  "masd.dogen.generation.csharp.fabric.meta_name_factory"
+:      2  "masd.dogen.generation.csharp.fabric.traits"
+:      2  "masd.dogen.generation.csharp.fabric.visual_studio_configuration"
+:      2  "masd.dogen.generation.csharp.fabric.visual_studio_factory"
+
+We need to investigate the generation pipeline to understand where
+this is coming from.
+
+*** Consider renaming orchestration to "engine"                       :story:
+
+Orchestration is a bit of a vague name. It is really the code
+generation engine of dogen. Its still very vague but slightly less so.
+
+*** Stitch is still using artefact writer                             :story:
+
+Create a templating transform that is similar to the approach used by
+extraction - in fact, stitch should probably be using a transform in
+extraction.
+
+Delete artefact writer.
+
+*** Split wale out of stitch templates                                :story:
+
+Stitch requires extra work in order to split out decoration. This is
+because in the past we relied on profiles to populate decoration. It
+worked because we were reading the same simple JSON files. Now we are
+relying on model references and meta-model entities, so this is no
+longer viable: they do not exist at the template level.
+
+One possible solution is to have a "reference" command line argument
+that loads up the user supplied model. We then need some kind of chain
+that applies the decoration transforms. The only solution is to create
+a temporary model that has some kind of coding element on it; this
+model is then supplied to the pipeline:
+
+- injection: needed to read the MASD model with decoration.
+- coding: needed to assemble the temp model with the MASD model and
+  to obtain the decoration.
+- generation: needed to populate the decoration properties.
+
+At this point we can then supply the annotations to the decoration
+formatter. This means that stitch now has a hard dependency on the
+rest of the dogen pipeline. Ideally we should try to split out
+weaving from stitching so that "weaving" becomes this complex
+pipeline but stitching just means the previous processing we did on
+templates. This could even mean we could remove annotations from
+stitching altogether and then have model to text transforms that
+join the stitch template output with the decoration.
+
+If we take this idea to the limit, what we are saying is that stitch
+templates can have KVPs associated with them, with multiple sources:
+
+- wale (as at present)
+- decorations. We need at least two: preamble and postamble.
+
+Note that operations (hand-crafted code to merge into the generated
+code) cannot be handled by the KVPs. This is because we are generating
+the stitch template itself, not the user facing code; we are
+generating the generator, so we are one level removed from the code
+generator. These can be handled as before, via a post-processing step
+that replaces guids with contents from the file system.
+
+To start off with we can just deprecate weaving for now. It is only
+used to quickly weave the model without code generation, but the
+generator is so quick that it does not make a lot of difference.
+
+It is important to note that we still have a two-level set of
+annotations:
+
+- the element annotations which contain the decoration. These are
+  processed prior to calling the stitch template instantiator to
+  generate the preamble and postamble KVPs (as well as the wale KVPs).
+- the annotation of the template itself. This contains the stitch
+  fields such as includes, etc. These will not contain any fields
+  related to decoration (e.g. it is no longer possible to decorate
+  from within stitch itself).
+
+This means that we need to remove all code from stitch that handles
+annotation expansion and just leave the annotation factory.
+
+We also need to look into how the wale keys were implemented - likely
+we've hard-coded it so that its always the same name:
+
+: <#$ stitch.wale.template_instantiation_result #>
+
+With a bit of luck its just a variable. If so we can then add at the
+top and bottom of each template:
+
+: <#$ stitch.decoration.preamble #>
+: ...
+: <#$ stitch.decoration.postamble #>
+
+It is *very important* to understand that this is the decoration of
+the output of the stitch template *itself*, not of the code it will
+generate. The decoration of the generated code will be handled as at
+present, by manually calling the decoration formatters.
+
+Notes:
+
+- we also need to split out the includes from the template. At present
+  it makes sense to supply it as a stitch KVP but in reality these are
+  parameters that should be inferred from the model. What we need is a
+  way to supply include dependencies in the meta-data. Then use that
+  information to build the include dependencies within
+  generation. Then use the list of includes to build the
+  boilerplate. The stitch template is just the core of the file.
+
+*** Create a tests stereotype with profiles                           :story:
+
+At present we are ignoring all of the contents of =tests=. This means
+whenever we delete a type we are left behind with its tests. A better
+solution is to create model elements for each handcrafted test marked
+as "masd::handcrafted_test". This disables all facets except for
+tests. We can then remove the regex.
+
+*** Make extraction model name a qualified name                       :story:
+
+At present we are setting up the extraction model name from the simple
+name of the model. It should really be the qualified name. Hopefully
+this will only affect tracing and diffing.
+
+*** Check if enable kernel directories is on extraction               :story:
+
+When we moved the kernel logic into yarn from quilt, we did not rename
+the traits.
+
+*** Code generate all contexts                                        :story:
+
+At present we are manually generating the transform contexts across
+all models. The main reason for this is that tracer does not support
+IO. There may be other reasons such as the annotations factory and
+annotation expander. We should just add IO support for all types that
+need it and code generate the contexts.
+
+*** Add "ioable" handcrafted types                                    :story:
+
+Whenever we need to mix and match generated types with handcrafted
+types, it would be really useful to create the missing facets. The
+main one is IO, but we probably also need test data support because
+the tests would fail. We could simply handcraft the types on those
+facets. It would be nice to have profiles like:
+
+: masd::handcrafted_types
+: masd::handcrafted_io
+: masd::handcrafted_test_data
+
+We could do with a simpler word for handcrafted. Check the literature.
+
+Once this is in place, we could have some top-level stereotype that
+aggregates all three (=masd::???=) and we can then tag types with it.
+
+*** Read =generate_preamble= from dynamic object                      :story:
+
+We need to generate the field definitions and update the general
+settings factory.
+
+*** Improve formatters code generation marker                         :story:
+
+Things the marker can/should have:
+
+- model level version;
+- the dogen version too. However, this will make all our tests break
+  every time there is a new commit so perhaps we need to have this
+  switched off by default.
+
+*** Move wale templates from the data directory                       :story:
+
+At present we have wale templates under the data directory. This is
+not the right location. These are part of a model just like stitch
+templates. There is one slight wrinkle though: if a user attempts to
+create a dogen formatter (say if plugins were supported), then we need
+access to the template from the debian package. So whilst they should
+live in the appropriate model (e.g. =generation.cpp=,
+=generation.csharp=), they also need to be packaged and shipped.
+
+Interestingly, so will all dogen models which are defining annotations
+and profiles. We need to rethink the data directory, separating system
+models from dogen models somehow. In effect, the data directory will
+be, in the future, the system models directory.
+
+So, in conclusion, two use cases for wale templates:
+
+- regular model defines a wale template and makes use of it. Template
+  should be with the model, just like stitch templates. However,
+  unlike stitch, there should be a directory for them.
+- user model wants to define a new formatter. It will make use of
+  dogen profiles and wale templates. These must be in the future data
+  directory somehow.
+
+*** Handling of =invalid= in enumeration is incorrect                 :story:
+
+At present we are injecting the invalid enumerator transparently via
+meta-data switches. This is not a good idea. Users should instead have
+some kind of "enumeration template" from which they can inherit which
+will give them the required enumerators. We should not do anything
+special for invalid.
+
+*** Generating a meta-model for dogen                                 :story:
+
+We are making use of coding meta-types a fair bit in dogen:
+
+- we have meta-names, which we use for things such as indexing,
+  formatter discovery etc.
+- we need to know which types are generatable.
+- we are associating meta-types with technical spaces (intrinsic).
+
+It would be nice if somehow we were able to generate some basic
+reflection code that enabled us to ask for a meta-model's element
+meta-class. For example, given an element, we should be able to do:
+
+: element.meta_class().intrinsic_technical_space()
+
+The =meta_class()= method should be static and code-generated by
+dogen. This still requires a lot of thinking though. Look for
+reflection stories in backlog.
+
+*** Consider making editor a meta-data element                        :story:
+
+When we create meta-data elements for technical space, facet, etc we
+should also consider making one for editors. We probably only need a
+few properties such as start of modeline, etc.
+
+** Deprecated
