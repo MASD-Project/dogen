@@ -37,84 +37,13 @@
 // masd::dogen::extraction::test::mock_decoration_properties_factory factory_;
 // const bool generate_premable(true);
 
-// const std::string modeline_top(R"(// -*- a_field: a_value -*-
-// //
-// // this is a marker
-// //
-// // a_holder
-// //
-// // licence text
-// //
-// )");
 
-// const std::string multiline_licence(R"(// -*- a_field: a_value -*-
-// //
-// // this is a marker
-// //
-// // a_holder
-// // another_holder
-// //
-// // first line of licence text
-// // second line of licence text
-// //
-// )");
 
-// const std::string modeline_bottom(R"(//
-// // this is a marker
-// //
-// // a_holder
-// //
-// // licence text
-// //
-// //
-// // Local variables:
-// // a_field: a_value
-// // End:
-// )");
 
-// const std::string no_marker(R"(// -*- a_field: a_value -*-
-// //
-// // a_holder
-// //
-// // licence text
-// //
-// )");
 
-// const std::string no_licence(R"(// -*- a_field: a_value -*-
-// //
-// // this is a marker
-// //
-// )");
 
-// const std::string licence_no_text(R"(// -*- a_field: a_value -*-
-// //
-// // this is a marker
-// //
-// // a_holder
-// //
-// )");
 
-// const std::string licence_no_copyright_notices(R"(// -*- a_field: a_value -*-
-// //
-// // this is a marker
-// //
-// // licence text
-// //
-// )");
 
-// const std::string just_marker(R"(//
-// // this is a marker
-// //
-// )");
-
-// const std::string just_modeline_top(R"(// -*- a_field: a_value -*-
-// )");
-
-// const std::string just_modeline_bottom(R"(//
-// // Local variables:
-// // a_field: a_value
-// // End:
-// )");
 
 // const std::string includes_with_top_modeline(R"(// -*- a_field: a_value -*-
 // //
@@ -157,164 +86,14 @@
 
 // BOOST_AUTO_TEST_SUITE(csharp_boilerplate_formatter_tests)
 
-// BOOST_IGNORE_AUTO_TEST_CASE(top_modeline_is_formatted_correctly) {
-//     SETUP_TEST_LOG_SOURCE("top_modeline_is_formatted_correctly");
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
-//     const auto dc(factory_.make_decoration_properties());
-//     const auto us(factory_.make_usings(true/*is_empty*/));
-//     const auto hg(factory_.make_header_guard(true/*is_empty*/));
-//     const auto r(format(dc, us));
 
-//     BOOST_CHECK(asserter::assert_equals_string(modeline_top, r));
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
-// }
 
-// BOOST_IGNORE_AUTO_TEST_CASE(top_modeline_and_multiline_licence_is_formatted_correctly) {
-//     SETUP_TEST_LOG_SOURCE("top_modeline_and_multiline_licence_is_formatted_correctly");
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-//     const auto dc(factory_.make_decoration_properties(modeline_locations::top,
-//             true/*multiline licence*/));
-//     const auto us(factory_.make_usings(true/*is_empty*/));
-//     const auto r(format(dc, us));
 
-//     BOOST_CHECK(asserter::assert_equals_string(multiline_licence, r));
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
-// }
 
-// BOOST_IGNORE_AUTO_TEST_CASE(bottom_modeline_is_formatted_correctly) {
-//     SETUP_TEST_LOG_SOURCE("bottom_modeline_is_formatted_correctly");
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-//     const auto dc(factory_.make_decoration_properties(
-//             modeline_locations::bottom));
-//     const auto us(factory_.make_usings(true/*is_empty*/));
-//     const auto r(format(dc, us));
 
-//     BOOST_CHECK(asserter::assert_equals_string(modeline_bottom, r));
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
-// }
 
-// BOOST_IGNORE_AUTO_TEST_CASE(no_marker_is_formatted_correctly) {
-//     SETUP_TEST_LOG_SOURCE("no_marker_is_formatted_correctly");
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
-
-//     const auto dc(factory_.make_decoration_properties(modeline_locations::top,
-//             false/*multiline licence*/,
-//             false/*use_empty_licence*/,
-//             true/*use_empty_marker*/));
-//     const auto us(factory_.make_usings(true/*is_empty*/));
-//     const auto r(format(dc, us));
-
-//     BOOST_CHECK(asserter::assert_equals_string(no_marker, r));
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
-// }
-
-// BOOST_IGNORE_AUTO_TEST_CASE(no_licence_is_formatted_correctly) {
-//     SETUP_TEST_LOG_SOURCE("no_licence_is_formatted_correctly");
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
-
-//     const auto dc(factory_.make_decoration_properties(modeline_locations::top,
-//             false/*use_multiline licence*/,
-//             true/*use_empty_licence*/,
-//             false/*use_empty_marker*/));
-//     const auto us(factory_.make_usings(true/*is_empty*/));
-//     const auto r(format(dc, us));
-
-//     BOOST_CHECK(asserter::assert_equals_string(no_licence, r));
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
-// }
-
-// BOOST_IGNORE_AUTO_TEST_CASE(licence_with_holder_but_no_text_is_formatted_correctly) {
-//     SETUP_TEST_LOG_SOURCE("licence_with_holder_but_no_text_is_formatted_correctly");
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
-
-//     const auto m(factory_.make_modeline(modeline_locations::top));
-//     licence l;
-//     l.copyright_notices().push_back("a_holder");
-//     const decoration_properties dc(true/*generate_preamble*/, m, l,
-//         factory_.make_marker(), "", "");
-//     const auto us(factory_.make_usings(true/*is_empty*/));
-//     const auto r(format(dc, us));
-
-//     BOOST_CHECK(asserter::assert_equals_string(licence_no_text, r));
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
-// }
-
-// BOOST_IGNORE_AUTO_TEST_CASE(licence_with_text_but_no_copyright_notices_is_formatted_correctly) {
-//     SETUP_TEST_LOG_SOURCE("licence_with_text_but_no_copyright_notices_is_formatted_correctly");
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
-
-//     const auto m(factory_.make_modeline(modeline_locations::top));
-//     licence l;
-//     l.text("licence text");
-//     const decoration_properties dc(true/*generate_preamble*/, m, l,
-//         factory_.make_marker(), "", "");
-//     const auto us(factory_.make_usings(true/*is_empty*/));
-//     const auto r(format(dc, us));
-
-//     BOOST_CHECK(
-//         asserter::assert_equals_string(licence_no_copyright_notices, r));
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
-// }
-
-// BOOST_IGNORE_AUTO_TEST_CASE(preamble_with_just_marker_is_formatted_correctly) {
-//     SETUP_TEST_LOG_SOURCE("preamble_with_just_marker_is_formatted_correctly");
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
-
-//     auto dc(factory_.make_empty_decoration_properties());
-//     dc.code_generation_marker(factory_.make_marker());
-//     const auto us(factory_.make_usings(true/*is_empty*/));
-//     const auto r(format(dc, us));
-
-//     BOOST_CHECK(asserter::assert_equals_string(just_marker, r));
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
-// }
-
-// BOOST_IGNORE_AUTO_TEST_CASE(preamble_with_just_modeline_at_the_top_is_formatted_correctly) {
-//     SETUP_TEST_LOG_SOURCE("preamble_with_just_modeline_at_the_top_is_formatted_correctly");
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
-
-//     const decoration_properties dc(factory_.make_decoration_properties(
-//             modeline_locations::top,
-//             false/*use_multiline licence*/,
-//             true/*use_empty_licence*/,
-//             true/*use_empty_marker*/));
-//     const auto us(factory_.make_usings(true/*is_empty*/));
-//     const auto r(format(dc, us));
-
-//     BOOST_CHECK(asserter::assert_equals_string(just_modeline_top, r));
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
-// }
-
-// BOOST_IGNORE_AUTO_TEST_CASE(postamble_with_just_modeline_at_the_bottom_is_formatted_correctly) {
-//     SETUP_TEST_LOG_SOURCE("postamble_with_just_modeline_at_the_bottom_is_formatted_correctly");
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
-
-//     const decoration_properties dc(factory_.make_decoration_properties(
-//             modeline_locations::bottom,
-//             false/*use_multiline licence*/,
-//             true/*use_empty_licence*/,
-//             true/*use_empty_marker*/));
-//     const auto us(factory_.make_usings(true/*is_empty*/));
-//     const auto r(format(dc, us));
-
-//     BOOST_CHECK(asserter::assert_equals_string(just_modeline_bottom, r));
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
-// }
-
-// BOOST_IGNORE_AUTO_TEST_CASE(not_supplying_content_results_in_no_boilerplate) {
-//     SETUP_TEST_LOG_SOURCE("not_supplying_content_results_in_no_boilerplate");
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
-
-//     const decoration_properties
-//         dc(factory_.make_empty_decoration_properties());
-//     const auto us(factory_.make_usings(true/*is_empty*/));
-//     const auto r(format(dc, us));
-
-//     BOOST_CHECK(asserter::assert_equals_string(empty, r));
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
-// }
 
 // BOOST_IGNORE_AUTO_TEST_CASE(usings_are_formatted_correctly) {
 //     SETUP_TEST_LOG_SOURCE("usings_are_formatted_correctly");

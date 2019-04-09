@@ -38,6 +38,7 @@ namespace {
 const std::string test_module("masd.dogen.generation.tests");
 const std::string test_suite("decoration_formatter_tests");
 const std::string empty;
+const auto empty_copyright_notices = std::list<std::string> { };
 
 const std::string expected_cpp_modeline_top(
     R"(/* -*- a_field: a_value -*-
@@ -51,6 +52,166 @@ const std::string expected_cpp_modeline_top(
  */
 )");
 
+const std::string expected_cpp_multiline_licence(
+    R"(/* -*- a_field: a_value -*-
+ *
+ * this is a marker
+ *
+ * a_holder
+ * another_holder
+ *
+ * first line of licence text
+ * second line of licence text
+ *
+ */
+)");
+
+const std::string expected_cpp_modeline_bottom(
+    R"(/*
+ * this is a marker
+ *
+ * a_holder
+ *
+ * licence text
+ *
+ */
+/*
+ * Local variables:
+ * a_field: a_value
+ * End:
+ */
+)");
+
+const std::string expected_cpp_no_marker(
+    R"(/* -*- a_field: a_value -*-
+ *
+ * a_holder
+ *
+ * licence text
+ *
+ */
+)");
+
+const std::string expected_cpp_no_licence(
+    R"(/* -*- a_field: a_value -*-
+ *
+ * this is a marker
+ *
+ * a_holder
+ *
+ */
+)");
+
+const std::string expected_cpp_licence_no_copyright_notices(
+    R"(/* -*- a_field: a_value -*-
+ *
+ * this is a marker
+ *
+ * licence text
+ *
+ */
+)");
+
+const std::string expected_cpp_just_marker(R"(/*
+ * this is a marker
+ *
+ */
+)");
+
+const std::string expected_cpp_just_modeline_top(
+    R"(// -*- a_field: a_value -*-
+)");
+
+const std::string expected_cpp_just_modeline_bottom(
+    R"(/*
+ * Local variables:
+ * a_field: a_value
+ * End:
+ */
+)");
+
+const std::string expected_csharp_modeline_top(
+    R"(// -*- a_field: a_value -*-
+//
+// this is a marker
+//
+// a_holder
+//
+// licence text
+//
+)");
+
+const std::string expected_csharp_multiline_licence(
+    R"(// -*- a_field: a_value -*-
+//
+// this is a marker
+//
+// a_holder
+// another_holder
+//
+// first line of licence text
+// second line of licence text
+//
+)");
+
+const std::string expected_csharp_modeline_bottom(
+    R"(//
+// this is a marker
+//
+// a_holder
+//
+// licence text
+//
+//
+// Local variables:
+// a_field: a_value
+// End:
+)");
+
+const std::string expected_csharp_no_marker(
+    R"(// -*- a_field: a_value -*-
+//
+// a_holder
+//
+// licence text
+//
+)");
+
+const std::string expected_csharp_no_licence(
+    R"(// -*- a_field: a_value -*-
+//
+// this is a marker
+//
+// a_holder
+//
+)");
+
+const std::string expected_csharp_licence_no_copyright_notices(
+    R"(// -*- a_field: a_value -*-
+//
+// this is a marker
+//
+// licence text
+//
+)");
+
+const std::string expected_csharp_just_marker(
+    R"(//
+// this is a marker
+//
+)");
+
+const std::string expected_csharp_just_modeline_top(
+    R"(// -*- a_field: a_value -*-
+)");
+
+const std::string expected_csharp_just_modeline_bottom(
+    R"(//
+// Local variables:
+// a_field: a_value
+// End:
+)");
+
 const std::string disable_top_modeline(
     "Logging to disable modeline at the top.");
 const std::string disable_bottom_modeline(
@@ -58,14 +219,14 @@ const std::string disable_bottom_modeline(
 
 const std::string single_line_licence_text("licence text");
 const std::string multi_line_licence_text(
-    R"( * first line of licence text
- * second line of licence text
+    R"(first line of licence text
+second line of licence text
 )");
 
 const std::string copyright_holder_1("a_holder");
 const std::string copyright_holder_2("another_holder");
 const std::string first_field_name("a_field");
-const std::string first_field_value("a_value ");
+const std::string first_field_value("a_value");
 const std::string single_line_marker_message("this is a marker");
 
 std::string make_licence(const bool is_multi_line = false) {
@@ -84,6 +245,8 @@ make_copyright_notices(const bool with_multiple_holders = false) {
 }
 
 using namespace masd::dogen::coding::meta_model;
+boost::shared_ptr<generation_marker> empty_marker;
+boost::shared_ptr<modeline> empty_modeline;
 
 boost::shared_ptr<modeline>
 make_modeline(const bool is_top = true) {
@@ -117,6 +280,7 @@ std::string format_preamble(
     std::ostringstream s;
     decoration_formatter f;
     f.format_preamble(s, cs, licence_text, copyright_notices, ml, gm);
+    f.format_postamble(s, cs,  ml);
     return s.str();
 }
 
@@ -130,7 +294,6 @@ BOOST_AUTO_TEST_SUITE(decoration_formatter_tests)
 
 BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("cpp_top_modeline_is_formatted_correctly");
-
     BOOST_LOG_SEV(lg, debug) << disable_top_modeline;
 
     const auto a(format_preamble(
@@ -140,7 +303,298 @@ BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
             make_modeline(),
             make_generation_marker()));
 
-    // BOOST_CHECK(asserter::assert_equals_string(expected_cpp_modeline_top, a));
+    const auto& e(expected_cpp_modeline_top);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+
+    BOOST_LOG_SEV(lg, debug) << disable_bottom_modeline;
+}
+
+BOOST_AUTO_TEST_CASE(cpp_top_modeline_and_multiline_licence_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("cpp_top_modeline_and_multiline_licence_is_formatted_correctly");
+    BOOST_LOG_SEV(lg, debug) << disable_top_modeline;
+
+    const auto a(format_preamble(
+            comment_style::c_style,
+            make_licence(true/*is_multi_line*/),
+            make_copyright_notices(true/*with_multiple_holders*/),
+            make_modeline(),
+            make_generation_marker()));
+
+    const auto& e(expected_cpp_multiline_licence);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+
+    BOOST_LOG_SEV(lg, debug) << disable_bottom_modeline;
+}
+
+BOOST_AUTO_TEST_CASE(cpp_bottom_modeline_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("cpp_bottom_modeline_is_formatted_correctly");
+    BOOST_LOG_SEV(lg, debug) << disable_top_modeline;
+
+    const auto a(format_preamble(
+            comment_style::c_style,
+            make_licence(),
+            make_copyright_notices(),
+            make_modeline(false/*is_top*/),
+            make_generation_marker()));
+
+    const auto& e(expected_cpp_modeline_bottom);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+
+    BOOST_LOG_SEV(lg, debug) << disable_bottom_modeline;
+}
+
+BOOST_AUTO_TEST_CASE(cpp_no_marker_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("cpp_no_marker_is_formatted_correctly");
+    BOOST_LOG_SEV(lg, debug) << disable_top_modeline;
+
+    const auto a(format_preamble(
+            comment_style::c_style,
+            make_licence(),
+            make_copyright_notices(),
+            make_modeline(),
+            empty_marker));
+
+    const auto& e(expected_cpp_no_marker);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+
+    BOOST_LOG_SEV(lg, debug) << disable_bottom_modeline;
+}
+
+BOOST_AUTO_TEST_CASE(cpp_no_licence_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("cpp_no_licence_is_formatted_correctly");
+    BOOST_LOG_SEV(lg, debug) << disable_top_modeline;
+
+    const auto a(format_preamble(
+            comment_style::c_style,
+            empty,
+            make_copyright_notices(),
+            make_modeline(),
+            make_generation_marker()));
+
+    const auto& e(expected_cpp_no_licence);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+
+    BOOST_LOG_SEV(lg, debug) << disable_bottom_modeline;
+}
+
+BOOST_AUTO_TEST_CASE(cpp_licence_with_text_but_no_copyright_notices_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("cpp_licence_with_text_but_no_copyright_notices_is_formatted_correctly");
+    BOOST_LOG_SEV(lg, debug) << disable_top_modeline;
+
+    const auto a(format_preamble(
+            comment_style::c_style,
+            make_licence(),
+            empty_copyright_notices,
+            make_modeline(),
+            make_generation_marker()));
+
+    const auto& e(expected_cpp_licence_no_copyright_notices);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+
+    BOOST_LOG_SEV(lg, debug) << disable_bottom_modeline;
+}
+
+BOOST_AUTO_TEST_CASE(cpp_preamble_with_just_marker_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("cpp_preamble_with_just_marker_is_formatted_correctly");
+    BOOST_LOG_SEV(lg, debug) << disable_top_modeline;
+
+    const auto a(format_preamble(
+            comment_style::c_style,
+            empty,
+            empty_copyright_notices,
+            empty_modeline,
+            make_generation_marker()));
+
+    const auto& e(expected_cpp_just_marker);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+
+    BOOST_LOG_SEV(lg, debug) << disable_bottom_modeline;
+}
+
+BOOST_AUTO_TEST_CASE(cpp_preamble_with_just_modeline_at_the_top_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("cpp_preamble_with_just_modeline_at_the_top_is_formatted_correctly");
+    BOOST_LOG_SEV(lg, debug) << disable_top_modeline;
+
+    const auto a(format_preamble(
+            comment_style::cpp_style,
+            empty,
+            empty_copyright_notices,
+            make_modeline(),
+            empty_marker));
+
+    const auto& e(expected_cpp_just_modeline_top);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+
+    BOOST_LOG_SEV(lg, debug) << disable_bottom_modeline;
+}
+
+BOOST_AUTO_TEST_CASE(cpp_postamble_with_just_modeline_at_the_bottom_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("cpp_postamble_with_just_modeline_at_the_bottom_is_formatted_correctly");
+    BOOST_LOG_SEV(lg, debug) << disable_top_modeline;
+
+    const auto a(format_preamble(
+            comment_style::c_style,
+            empty,
+            empty_copyright_notices,
+            make_modeline(false/*is_top*/),
+            empty_marker));
+
+    const auto& e(expected_cpp_just_modeline_bottom);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+
+    BOOST_LOG_SEV(lg, debug) << disable_bottom_modeline;
+}
+
+BOOST_AUTO_TEST_CASE(not_supplying_content_results_in_no_boilerplate) {
+    SETUP_TEST_LOG_SOURCE("not_supplying_content_results_in_no_boilerplate");
+    BOOST_LOG_SEV(lg, debug) << disable_top_modeline;
+
+    const auto a(format_preamble(
+            comment_style::c_style,
+            empty,
+            empty_copyright_notices,
+            empty_modeline,
+            empty_marker));
+
+    const auto& e(empty);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+
+    BOOST_LOG_SEV(lg, debug) << disable_bottom_modeline;
+}
+
+BOOST_AUTO_TEST_CASE(csharp_top_modeline_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("csharp_top_modeline_is_formatted_correctly");
+
+    BOOST_LOG_SEV(lg, debug) << disable_top_modeline;
+
+    const auto a(format_preamble(
+            comment_style::csharp_style,
+            make_licence(),
+            make_copyright_notices(),
+            make_modeline(),
+            make_generation_marker()));
+
+    const auto& e(expected_csharp_modeline_top);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+
+    BOOST_LOG_SEV(lg, debug) << disable_bottom_modeline;
+}
+
+BOOST_AUTO_TEST_CASE(csharp_top_modeline_and_multiline_licence_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("csharp_top_modeline_and_multiline_licence_is_formatted_correctly");
+    BOOST_LOG_SEV(lg, debug) << disable_top_modeline;
+
+    const auto a(format_preamble(
+            comment_style::csharp_style,
+            make_licence(true/*is_multi_line*/),
+            make_copyright_notices(true/*with_multiple_holders*/),
+            make_modeline(),
+            make_generation_marker()));
+
+    const auto& e(expected_csharp_multiline_licence);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+
+    BOOST_LOG_SEV(lg, debug) << disable_bottom_modeline;
+}
+
+BOOST_AUTO_TEST_CASE(csharp_bottom_modeline_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("csharp_bottom_modeline_is_formatted_correctly");
+    BOOST_LOG_SEV(lg, debug) << disable_top_modeline;
+
+    const auto a(format_preamble(
+            comment_style::csharp_style,
+            make_licence(),
+            make_copyright_notices(),
+            make_modeline(false/*is_top*/),
+            make_generation_marker()));
+
+    const auto& e(expected_csharp_modeline_bottom);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+
+    BOOST_LOG_SEV(lg, debug) << disable_bottom_modeline;
+}
+
+BOOST_AUTO_TEST_CASE(csharp_no_marker_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("csharp_no_marker_is_formatted_correctly");
+    BOOST_LOG_SEV(lg, debug) << disable_top_modeline;
+
+    const auto a(format_preamble(
+            comment_style::csharp_style,
+            make_licence(),
+            make_copyright_notices(),
+            make_modeline(),
+            empty_marker));
+
+    const auto& e(expected_csharp_no_marker);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+
+    BOOST_LOG_SEV(lg, debug) << disable_bottom_modeline;
+}
+
+BOOST_AUTO_TEST_CASE(csharp_no_licence_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("csharp_no_licence_is_formatted_correctly");
+    BOOST_LOG_SEV(lg, debug) << disable_top_modeline;
+
+    const auto a(format_preamble(
+            comment_style::csharp_style,
+            empty,
+            make_copyright_notices(),
+            make_modeline(),
+            make_generation_marker()));
+
+    const auto& e(expected_csharp_no_licence);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+
+    BOOST_LOG_SEV(lg, debug) << disable_bottom_modeline;
+}
+
+BOOST_AUTO_TEST_CASE(csharp_preamble_with_just_marker_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("csharp_preamble_with_just_marker_is_formatted_correctly");
+    BOOST_LOG_SEV(lg, debug) << disable_top_modeline;
+
+    const auto a(format_preamble(
+            comment_style::csharp_style,
+            empty,
+            empty_copyright_notices,
+            empty_modeline,
+            make_generation_marker()));
+
+    const auto& e(expected_csharp_just_marker);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+
+    BOOST_LOG_SEV(lg, debug) << disable_bottom_modeline;
+}
+
+BOOST_AUTO_TEST_CASE(csharp_preamble_with_just_modeline_at_the_top_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("csharp_preamble_with_just_modeline_at_the_top_is_formatted_correctly");
+    BOOST_LOG_SEV(lg, debug) << disable_top_modeline;
+
+    const auto a(format_preamble(
+            comment_style::csharp_style,
+            empty,
+            empty_copyright_notices,
+            make_modeline(),
+            empty_marker));
+
+    const auto& e(expected_csharp_just_modeline_top);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+
+    BOOST_LOG_SEV(lg, debug) << disable_bottom_modeline;
+}
+
+BOOST_AUTO_TEST_CASE(csharp_postamble_with_just_modeline_at_the_bottom_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("csharp_postamble_with_just_modeline_at_the_bottom_is_formatted_correctly");
+    BOOST_LOG_SEV(lg, debug) << disable_top_modeline;
+
+    const auto a(format_preamble(
+            comment_style::csharp_style,
+            empty,
+            empty_copyright_notices,
+            make_modeline(false/*is_top*/),
+            empty_marker));
+
+    const auto& e(expected_csharp_just_modeline_bottom);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
 
     BOOST_LOG_SEV(lg, debug) << disable_bottom_modeline;
 }
