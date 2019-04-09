@@ -33,7 +33,7 @@
 namespace {
 
 const std::string test_module("masd.dogen.generation.tests");
-const std::string test_suite("cpp_boilerplate_formatter_tests");
+const std::string test_suite("boilerplate_formatter_tests");
 const std::string empty;
 
 // const bool generate_premable(true);
@@ -244,7 +244,7 @@ using masd::dogen::utility::test::asserter;
 using factory =
     masd::dogen::generation::test::mock_boilerplate_properties_factory;
 
-BOOST_AUTO_TEST_SUITE(cpp_boilerplate_formatter_tests)
+BOOST_AUTO_TEST_SUITE(boilerplate_formatter_tests)
 
 BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("cpp_top_modeline_is_formatted_correctly");
