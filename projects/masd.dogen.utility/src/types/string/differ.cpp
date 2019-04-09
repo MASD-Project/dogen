@@ -18,12 +18,56 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
+#include <dtl/dtl.hpp>
+#include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/string/differ.hpp"
+
+namespace {
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory("utility.string.differ"));
+
+std::vector<std::string> split_lines(const std::string& s) {
+    std::string line;
+    std::istringstream ss(s);
+    std::vector<std::string> r;
+    while (std::getline(ss, line))
+        r.push_back(line);
+
+    return r;
+}
+
+void compose_diff(const std::vector<std::string>& a,
+    const std::vector<std::string>& b, std::ostream& s) {
+
+    dtl::Diff<std::string> diff(a, b);
+    diff.onHuge();
+    diff.compose();
+    diff.composeUnifiedHunks();
+    diff.printUnifiedFormat(s);
+}
+
+}
 
 namespace masd::dogen::utility::string {
 
-bool differ::operator==(const differ& /*rhs*/) const {
-    return true;
+std::string differ::diff(const std::string& a, const std::string& b) {
+    std::ostringstream s;
+    diff(a, b, s);
+
+    const auto r(s.str());
+    BOOST_LOG_SEV(lg, debug) << "Diff: " << r;
+    return r;
+}
+
+void differ::diff(const std::string& a, const std::string& b, std::ostream& s) {
+    BOOST_LOG_SEV(lg, trace) << "Diffing. a: " << a;
+    BOOST_LOG_SEV(lg, trace) << "b: " << b;
+
+    const auto a_lines(split_lines(a));
+    const auto b_lines(split_lines(b));
+    compose_diff(a_lines, b_lines, s);
 }
 
 }

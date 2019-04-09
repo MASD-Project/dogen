@@ -25,24 +25,18 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <iosfwd>
+#include <string>
 
 namespace masd::dogen::utility::string {
 
+/**
+ * @brief Diffs two strings. Returns the result as a unified diff.
+ */
 class differ final {
 public:
-    differ() = default;
-    differ(const differ&) = default;
-    differ(differ&&) = default;
-    ~differ() = default;
-    differ& operator=(const differ&) = default;
-
-public:
-    bool operator==(const differ& rhs) const;
-    bool operator!=(const differ& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static std::string diff(const std::string& a, const std::string& b);
+    static void diff(const std::string& a, const std::string& b, std::ostream& s);
 };
 
 }
