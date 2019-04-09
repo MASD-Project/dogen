@@ -108,6 +108,8 @@ void modeline_formatter::emacs_bottom_modeline(std::ostream& s,
 
 void modeline_formatter::
 format(std::ostream& s, const coding::meta_model::modeline& ml) const {
+    BOOST_LOG_SEV(lg, trace) << "Modeline: " << ml;
+
     if (is_emacs(ml)) {
         if (is_top_line(ml))
             return emacs_top_modeline(s, ml);

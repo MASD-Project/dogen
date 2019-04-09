@@ -60,7 +60,7 @@ std::string differ::diff(const std::string& a, const std::string& b) {
     if (r.empty())
         BOOST_LOG_SEV(lg, trace) << "Diff: <empty>";
     else
-        BOOST_LOG_SEV(lg, trace) << "Diff: " << std::endl << r;
+        BOOST_LOG_SEV(lg, debug) << "Diff: " << std::endl << r;
 
     return r;
 }

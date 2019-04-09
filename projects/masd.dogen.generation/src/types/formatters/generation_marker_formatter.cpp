@@ -43,6 +43,8 @@ namespace masd::dogen::generation::formatters {
 
 void generation_marker_formatter::
 format(std::ostream& s, const coding::meta_model::generation_marker& gm) const {
+    BOOST_LOG_SEV(lg, trace) << "Marker: " << gm;
+
     if (gm.message().empty())
         s << default_message << std::endl;
     else
