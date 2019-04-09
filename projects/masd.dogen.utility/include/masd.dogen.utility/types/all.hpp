@@ -39,6 +39,7 @@
 #include "masd.dogen.utility/types/test/fixture.hpp"
 #include "masd.dogen.utility/types/test/logging.hpp"
 #include "masd.dogen.utility/types/io/jsonify_io.hpp"
+#include "masd.dogen.utility/types/string/differ.hpp"
 #include "masd.dogen.utility/types/test/asserter.hpp"
 #include "masd.dogen.utility/types/xml/exception.hpp"
 #include "masd.dogen.utility/types/hash/list_hash.hpp"
