@@ -20,12 +20,19 @@
  */
 #include <sstream>
 #include <ostream>
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/list_io.hpp"
+#include "masd.dogen.coding/io/meta_model/modeline_io.hpp"
+#include "masd.dogen.generation/io/formatters/comment_style_io.hpp"
 #include "masd.dogen.generation/types/formatters/comment_formatter.hpp"
 #include "masd.dogen.generation/types/formatters/modeline_formatter.hpp"
 #include "masd.dogen.generation/types/formatters/generation_marker_formatter.hpp"
 #include "masd.dogen.generation/types/formatters/decoration_formatter.hpp"
 
 namespace {
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory("generation.decoration_formatter"));
 
 const bool start_on_first_line(true);
 const bool use_documentation_tool_markup(true);
@@ -67,7 +74,13 @@ add_marker(std::list<std::string>& content,
 void decoration_formatter::
 add_copyright_notices(std::list<std::string>& content,
     std::list<std::string> copyright_notices) const {
-    content.splice(content.end(), copyright_notices);
+    BOOST_LOG_SEV(lg, trace) << "Copyriht notices: " << copyright_notices;
+
+    std::ostringstream s;
+    for (const auto& cn : copyright_notices)
+        s << cn << std::endl;
+
+    content.push_back(s.str());
 }
 
 void decoration_formatter::add_licence(std::list<std::string>& content,
@@ -90,16 +103,12 @@ void decoration_formatter::format_preamble(
         s << xml_declaration << std::endl;
     }
 
-    bool is_top(false);
     const auto top(coding::meta_model::modeline_location::top);
-    bool has_modeline((bool)ml);
+    const bool has_modeline((bool)ml);
+    const bool is_top(has_modeline && ml->location() == top);
     std::list<std::string> content;
-    if (has_modeline) {
-        is_top = ml->location() == top;
-
-        if (is_top)
-            add_modeline(content, ml);
-    }
+    if (is_top)
+        add_modeline(content, ml);
 
     add_marker(content, gm);
     add_copyright_notices(content, copyright_notices);
@@ -135,6 +144,8 @@ format_preamble(std::ostream& s, const comment_style& cs,
     const std::list<std::string>& copyright_notices,
     const boost::shared_ptr<coding::meta_model::modeline> ml,
     const boost::shared_ptr<coding::meta_model::generation_marker> gm) const {
+
+    BOOST_LOG_SEV(lg, trace) << "Comment style: " << cs;
     format_preamble(s, cs, cs, licence_text, copyright_notices, ml, gm);
 }
 
