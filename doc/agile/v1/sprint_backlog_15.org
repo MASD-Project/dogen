@@ -5,6 +5,7 @@
 
 * Mission Statement
 
+- finish mopping up the extraction model.
 - Start work on moving profiles to metamodel.
 
 * Stories
@@ -12,24 +13,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-08 Mon 18:35]
+#+CAPTION: Clock summary at [2019-04-09 Tue 10:34]
 | <75>                                                   |        |      |      |       |
 | Headline                                               | Time   |      |      |     % |
 |--------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                           | *7:57* |      |      | 100.0 |
+| *Total time*                                           | *9:40* |      |      | 100.0 |
 |--------------------------------------------------------+--------+------+------+-------|
-| Stories                                                | 7:57   |      |      | 100.0 |
-| Active                                                 |        | 7:57 |      | 100.0 |
-| Edit release notes for previous sprint                 |        |      | 3:57 |  49.7 |
-| Sprint and product backlog grooming                    |        |      | 0:24 |   5.0 |
-| Create a video demo for the previous sprint's features |        |      | 1:35 |  19.9 |
-| Fix issues with emacs                                  |        |      | 2:01 |  25.4 |
+| Stories                                                | 9:40   |      |      | 100.0 |
+| Active                                                 |        | 9:40 |      | 100.0 |
+| Edit release notes for previous sprint                 |        |      | 4:21 |  45.0 |
+| Sprint and product backlog grooming                    |        |      | 1:32 |  15.9 |
+| Create a video demo for the previous sprint's features |        |      | 1:35 |  16.4 |
+| Fix issues with emacs                                  |        |      | 2:01 |  20.9 |
+| Fix issues with nightly build                          |        |      | 0:08 |   1.4 |
+| Reactivate the boilerplate tests                       |        |      | 0:03 |   0.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
-*** COMPLETED COMMENT Edit release notes for previous sprint                  :story:
+*** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2019-04-08 Mon 16:36]
     :LOGBOOK:
+    CLOCK: [2019-04-09 Tue 08:02]--[2019-04-09 Tue 08:26] =>  0:24
     CLOCK: [2019-04-08 Mon 18:22]--[2019-04-08 Mon 18:35] =>  0:13
     CLOCK: [2019-04-08 Mon 16:23]--[2019-04-08 Mon 16:33] =>  0:10
     CLOCK: [2019-04-08 Mon 15:02]--[2019-04-08 Mon 16:22] =>  1:20
@@ -183,6 +187,10 @@ Happy Modeling!
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-04-09 Tue 10:13]--[2019-04-09 Tue 10:29] =>  0:16
+    CLOCK: [2019-04-09 Tue 09:55]--[2019-04-09 Tue 10:12] =>  0:17
+    CLOCK: [2019-04-09 Tue 09:35]--[2019-04-09 Tue 09:45] =>  0:10
+    CLOCK: [2019-04-09 Tue 08:55]--[2019-04-09 Tue 09:20] =>  0:25
     CLOCK: [2019-04-08 Mon 18:14]--[2019-04-08 Mon 18:21] =>  0:07
     CLOCK: [2019-04-08 Mon 15:02]--[2019-04-08 Mon 15:09] =>  0:07
     CLOCK: [2019-04-08 Mon 10:58]--[2019-04-08 Mon 11:08] =>  0:10
@@ -214,45 +222,41 @@ Fix any pending issues with emacs left over from previous sprint.
 - symlinks are confusing treemacs, delete them.
 - get eyebrowse mode to work properly so we can make use of desktops.
 
-*** Remove annotations from stitch templates                          :story:
+*** COMPLETED Fix issues with nightly build                           :story:
+    CLOSED: [2019-04-09 Tue 08:35]
+    :LOGBOOK:
+    CLOCK: [2019-04-09 Tue 08:27]--[2019-04-09 Tue 08:35] =>  0:08
+    :END:
 
-In the new world, stitch templates don't have all of the required
-information to build the boilerplate:
 
-- they cannot expand wale templates because the KVPs will be in the
-  element itself, not the template. Strictly speaking this is not an
-  problem we have right now though.
-- more importantly, the include dependencies cannot be computed by the
-  template. This is because the dependencies are really a function of
-  the model type we are expressing on the template. Instead, we did a
-  quick hack and supplied the includes as KVPs. So they are kind of
-  parameters but kind of not really parameters because they are
-  hard-coded to the template. It solved the immediate problem of
-  having them formatted and placed in the right part of the file, but
-  now we can see this is not the right approach.
+Seems like the nightly did not run due to changes in the path. Fix these.
 
-In reality, we should not have any annotations at all in
-templates. The boilerplate and includes should be supplied as KVPs and
-applied as variables. They should be composed externally with access
-to data from the model element. Thus we then need a way to associate
-includes with model elements. This is captured as a separate story.
+*** COMPLETED Read =generate_preamble= from dynamic object            :story:
+    CLOSED: [2019-04-09 Tue 10:20]
 
-*** Supply decorations as a stitch parameter                          :story:
+*Rationale*: done as part of the work in previous sprint.
 
-As explained in other story at present we are creating the decoration
-inside the stitch template. This won't work with new world. We need to
-supply it as KVP. For now we will leave everything else as is.
+We need to generate the field definitions and update the general
+settings factory.
 
-Notes:
+*** COMPLETED Improve formatters code generation marker               :story:
+    CLOSED: [2019-04-09 Tue 10:21]
 
-- factor out commonalities between wale and stitch into object
-  template regarding keys.
-- add validation to ensure all expected keys have been found. Look at
-  how that's done in wale.
-- add a way to supply KVPs from the outside world into stitch template
-  instantiation.
-- no decoration for root module
-- cmake files are not going via boilerplate.
+*Rationale*: done as part of the work in previous sprint.
+
+Things the marker can/should have:
+
+- model level version;
+- the dogen version too. However, this will make all our tests break
+  every time there is a new commit so perhaps we need to have this
+  switched off by default.
+
+*** STARTED Reactivate the boilerplate tests                          :story:
+    :LOGBOOK:
+    CLOCK: [2019-04-09 Tue 10:30]--[2019-04-09 Tue 10:33] =>  0:03
+    :END:
+
+Split these out into decoration tests and boilerplate tests.
 
 *** Add support for decoration configuration overrides                :story:
 
@@ -260,16 +264,6 @@ At present we have hard-coded the decoration configuration to be read
 from the root object only. In an ideal world, we should be able to
 override some of these such as the copyrights. It may not make sense
 to be able to override them all though.
-
-This functionality has been implemented but requires tests in the test
-model.
-
-*** Copyright holders is scalar when it should be an array            :story:
-
-At present its only possible to specify a single copyright holder. It
-should be handled the same was as odb parameters, but because that is
-done with a massive hack, we are not going to extend the hack to
-copyright holders.
 
 This functionality has been implemented but requires tests in the test
 model.
@@ -282,73 +276,15 @@ was formed, and then ownership by DDC.
 - first update to personal ownership has been done, but we need to
   test if multiple copyright entries is properly supported.
 
-*** Associate includes with model elements                            :story:
+*** Copyright holders is scalar when it should be an array            :story:
 
-The right solution for the formatter includes is to supply them as
-meta-data in the model element. This has the advantage that we can
-then make use of profiles. At present we have one way to supply
-includes: the primary and secondary includes:
+At present its only possible to specify a single copyright holder. It
+should be handled the same was as odb parameters, but because that is
+done with a massive hack, we are not going to extend the hack to
+copyright holders.
 
-: "masd.generation.cpp.io.class_header.primary_inclusion_directive": "<boost/property_tree/json_parser.hpp>",
-: "masd.generation.cpp.io.class_header.secondary_inclusion_directive": "<boost/algorithm/string.hpp>",
-
-This does a part of the job: we can associate up to two include
-directives with one facet and element. However:
-
-- by using this machinery we are effectively replacing the original
-  include.
-- the includes will occur for anyone who references the type. Though
-  however, since the includes are applicable only to the class
-  implementation this is less of a problem. Technically its still
-  incorrect though because these are not the includes needed to use
-  the type but the includes needed to define the type.
-
-For formatters, we kind of need to make the includes only happen when
-we are building the formatter. If we could have a similar machinery,
-but without adding to types referencing the type, this would give us a
-way to declare all of the formatters dependencies. Then, we could
-switch to building all of the stitch boilerplate outside of stitch and
-supplying it as a KVP.
-
-*** Meta-element configuration                                        :story:
-
-It is becoming obvious that there is a need to explicitly model
-meta-elements. A good example are the wale templates for handcrafted
-types. Say we want to associate a wale template with =entry_point=. We
-need one for C# and one for C++. We have the following alternatives:
-
-- the user needs to manually supply these as meta-data parameters
-  every time it creates an entry point.
-- next level is to have profiles: we could define a profile with these
-  parameters and the user is responsible for applying it to entry
-  points as required. This is flexible because users could choose
-  different wale templates. However, its painful that there isn't a
-  default wale template.
-- we could hard-code the default wale template into the field's value,
-  so that you'd get that value if you don't supply any. At least now
-  there is a default, but its hard-coded.
-- finally, if we could create a =<<metaclass= in a diagram, we could
-  then add the default values there _as data_.
-
-This is actually simpler than what it sounds. We just need to have a
-meta-element of type =metaclass=, with an annotation and a name. The
-name of the metaclass is the element it is configuring
-(e.g. =entry_point=). We could have a transform that sets the static
-stereotype of the element based on the name for good measure. Then,
-during the profile merging, we could simply merge first its annotation
-into all elements of this type. Then we would continue with the
-profile merging. We could also do a hack and have a =root_module=
-=metaclass= which could be used for defaults. However, it is not clear
-when we should use this as opposed to plain stereotypes. The good
-thing about stereotypes is that we make the relationships explicit,
-whereas with =metaclass= we are making them slightly less
-transparent.
-
-*** Stitch extension is hard-coded                                    :story:
-
-At present we have hard-coded the file extension in the output of
-stitch templates as =cpp=. We should really supply it as part of the
-configuration. Ideally even the entire filename.
+This functionality has been implemented but requires tests in the test
+model.
 
 *** Duplicate elements in model                                       :story:
 
@@ -390,157 +326,11 @@ this is coming from.
 Orchestration is a bit of a vague name. It is really the code
 generation engine of dogen. Its still very vague but slightly less so.
 
-*** Stitch is still using artefact writer                             :story:
-
-Create a templating transform that is similar to the approach used by
-extraction - in fact, stitch should probably be using a transform in
-extraction.
-
-Delete artefact writer.
-
-*** Split wale out of stitch templates                                :story:
-
-Stitch requires extra work in order to split out decoration. This is
-because in the past we relied on profiles to populate decoration. It
-worked because we were reading the same simple JSON files. Now we are
-relying on model references and meta-model entities, so this is no
-longer viable: they do not exist at the template level.
-
-One possible solution is to have a "reference" command line argument
-that loads up the user supplied model. We then need some kind of chain
-that applies the decoration transforms. The only solution is to create
-a temporary model that has some kind of coding element on it; this
-model is then supplied to the pipeline:
-
-- injection: needed to read the MASD model with decoration.
-- coding: needed to assemble the temp model with the MASD model and
-  to obtain the decoration.
-- generation: needed to populate the decoration properties.
-
-At this point we can then supply the annotations to the decoration
-formatter. This means that stitch now has a hard dependency on the
-rest of the dogen pipeline. Ideally we should try to split out
-weaving from stitching so that "weaving" becomes this complex
-pipeline but stitching just means the previous processing we did on
-templates. This could even mean we could remove annotations from
-stitching altogether and then have model to text transforms that
-join the stitch template output with the decoration.
-
-If we take this idea to the limit, what we are saying is that stitch
-templates can have KVPs associated with them, with multiple sources:
-
-- wale (as at present)
-- decorations. We need at least two: preamble and postamble.
-
-Note that operations (hand-crafted code to merge into the generated
-code) cannot be handled by the KVPs. This is because we are generating
-the stitch template itself, not the user facing code; we are
-generating the generator, so we are one level removed from the code
-generator. These can be handled as before, via a post-processing step
-that replaces guids with contents from the file system.
-
-To start off with we can just deprecate weaving for now. It is only
-used to quickly weave the model without code generation, but the
-generator is so quick that it does not make a lot of difference.
-
-It is important to note that we still have a two-level set of
-annotations:
-
-- the element annotations which contain the decoration. These are
-  processed prior to calling the stitch template instantiator to
-  generate the preamble and postamble KVPs (as well as the wale KVPs).
-- the annotation of the template itself. This contains the stitch
-  fields such as includes, etc. These will not contain any fields
-  related to decoration (e.g. it is no longer possible to decorate
-  from within stitch itself).
-
-This means that we need to remove all code from stitch that handles
-annotation expansion and just leave the annotation factory.
-
-We also need to look into how the wale keys were implemented - likely
-we've hard-coded it so that its always the same name:
-
-: <#$ stitch.wale.template_instantiation_result #>
-
-With a bit of luck its just a variable. If so we can then add at the
-top and bottom of each template:
-
-: <#$ stitch.decoration.preamble #>
-: ...
-: <#$ stitch.decoration.postamble #>
-
-It is *very important* to understand that this is the decoration of
-the output of the stitch template *itself*, not of the code it will
-generate. The decoration of the generated code will be handled as at
-present, by manually calling the decoration formatters.
-
-Notes:
-
-- we also need to split out the includes from the template. At present
-  it makes sense to supply it as a stitch KVP but in reality these are
-  parameters that should be inferred from the model. What we need is a
-  way to supply include dependencies in the meta-data. Then use that
-  information to build the include dependencies within
-  generation. Then use the list of includes to build the
-  boilerplate. The stitch template is just the core of the file.
-
-*** Create a tests stereotype with profiles                           :story:
-
-At present we are ignoring all of the contents of =tests=. This means
-whenever we delete a type we are left behind with its tests. A better
-solution is to create model elements for each handcrafted test marked
-as "masd::handcrafted_test". This disables all facets except for
-tests. We can then remove the regex.
-
 *** Make extraction model name a qualified name                       :story:
 
 At present we are setting up the extraction model name from the simple
 name of the model. It should really be the qualified name. Hopefully
 this will only affect tracing and diffing.
-
-*** Check if enable kernel directories is on extraction               :story:
-
-When we moved the kernel logic into yarn from quilt, we did not rename
-the traits.
-
-*** Code generate all contexts                                        :story:
-
-At present we are manually generating the transform contexts across
-all models. The main reason for this is that tracer does not support
-IO. There may be other reasons such as the annotations factory and
-annotation expander. We should just add IO support for all types that
-need it and code generate the contexts.
-
-*** Add "ioable" handcrafted types                                    :story:
-
-Whenever we need to mix and match generated types with handcrafted
-types, it would be really useful to create the missing facets. The
-main one is IO, but we probably also need test data support because
-the tests would fail. We could simply handcraft the types on those
-facets. It would be nice to have profiles like:
-
-: masd::handcrafted_types
-: masd::handcrafted_io
-: masd::handcrafted_test_data
-
-We could do with a simpler word for handcrafted. Check the literature.
-
-Once this is in place, we could have some top-level stereotype that
-aggregates all three (=masd::???=) and we can then tag types with it.
-
-*** Read =generate_preamble= from dynamic object                      :story:
-
-We need to generate the field definitions and update the general
-settings factory.
-
-*** Improve formatters code generation marker                         :story:
-
-Things the marker can/should have:
-
-- model level version;
-- the dogen version too. However, this will make all our tests break
-  every time there is a new commit so perhaps we need to have this
-  switched off by default.
 
 *** Move wale templates from the data directory                       :story:
 
@@ -566,37 +356,253 @@ So, in conclusion, two use cases for wale templates:
   dogen profiles and wale templates. These must be in the future data
   directory somehow.
 
-*** Handling of =invalid= in enumeration is incorrect                 :story:
+*** Exclude profiles from stereotypes processing                      :story:
 
-At present we are injecting the invalid enumerator transparently via
-meta-data switches. This is not a good idea. Users should instead have
-some kind of "enumeration template" from which they can inherit which
-will give them the required enumerators. We should not do anything
-special for invalid.
+At present we are manually excluding profiles from the stereotypes
+transform. This was just a quick hack to get us going. We need to
+replace this with a call to annotations to get a list of profile names
+and exclude those.
 
-*** Generating a meta-model for dogen                                 :story:
+We should also rename =is_stereotype_handled_externally= to something
+more like "is profile" or "matches profile name".
 
-We are making use of coding meta-types a fair bit in dogen:
+Actually the right thing may even be to just remove all of the profile
+stereotypes during annotations processing. However, we should wait
+until we complete the exomodel work since that will remove scribble
+groups, etc. Its all in the annotations transform.
 
-- we have meta-names, which we use for things such as indexing,
-  formatter discovery etc.
-- we need to know which types are generatable.
-- we are associating meta-types with technical spaces (intrinsic).
+*** Profiles as meta-model elements                                   :story:
 
-It would be nice if somehow we were able to generate some basic
-reflection code that enabled us to ask for a meta-model's element
-meta-class. For example, given an element, we should be able to do:
+Initially we separated the notion of annotations and profiles from the
+metamodel. This is a mistake. Profiles are metamodel
+elements. Annotations are just a way to convey profiles in UML.
 
-: element.meta_class().intrinsic_technical_space()
+In the same fashion, there is a distinction between a facet (like say
+types) and a facet configuration (enable types, enable default
+constructors, etc). These should also be metamodel elements. User
+models should create facet configurations (this is part of the profile
+machinery) and then associate them with elements.  This means we could
+provide out of the box configurations such as =Serialisable= which
+come from dogen profiles. We could also have =JsonSerialisable=. Users
+can use these or override them in their own profiles. However,
+crucial, modeling elements should not reference facets directly
+because this makes the metamodel very messy.
 
-The =meta_class()= method should be static and code-generated by
-dogen. This still requires a lot of thinking though. Look for
-reflection stories in backlog.
+In this view of the world, the global profile could then have
+associations between these facet configurations and metamodel element
+types, e.g.
 
-*** Consider making editor a meta-data element                        :story:
+: object -> serialisable, hashable
 
-When we create meta-data elements for technical space, facet, etc we
-should also consider making one for editors. We probably only need a
-few properties such as start of modeline, etc.
+These can then be overridden locally.
+
+In effect we are extending the notion of traits from Umple. However,
+we also want traits to cover facets, not just concepts.
+
+Terminology clarification:
+
+- traits: configuration of facets.
+- profile: mapping of traits to metamodel elements, with
+  defaults. E.g. =object -> serialisable, hashable=
+
+Actually there is a problem: traits as used in MOP are close to our
+templates. We should rename templates to traits to make it
+consistent. However, we still need the notion of named collections of
+facet configurations with inheritance support.
+
+*Thoughts on Features*
+
+There is a facet in dogen called "features". The facet can have
+multiple backends:
+
+- dogen/UML: special case when adding new features to dogen
+  itself. Any features added to this backend will be read out by dogen
+  and made available to facets.
+- file based configuration: property tree or other simple system to
+  read configuration from file.
+- database based configuration: a database schema (defined by the
+  facet) is code-generated.
+- etcd: code to read and write configuration from etcd is generated.
+
+The feature facet can be used within a component model or on its own
+model. Features are specifically only product features, not properties
+of users etc. They can be dynamically updated if the backend supports
+it. Generated code must handle event notification.
+
+*Thoughts on Terminology*
+
+- traits should be used in the MOP sense.
+- profiles/collections of settings/configurations should be called
+  =capabilities=. This is because they normally have names like
+  =serialisable= etc. When not used in the context of modeling
+  elements it should be called just configuration (in keeping with
+  feature modeling). A capability is a named configuration for
+  reuse. The only slight snag is that there are named configurations
+  that should not be called capabilities (say licensing details,
+  etc). These are required for product/product line support. Perhaps
+  we should just call them "named configurations". Crucially, named
+  configurations should inherit the namespace of the model and there
+  should not be any clashes (e.g. dogen should error). Users are
+  instructed to define their product line configuration in a model
+  with the name of the product line (e.g. =dogen::serialisable=
+  becomes the stereotype). To make the concept symmetric, we need the
+  notion of a "model level stereotype". This can easily be achieved by
+  conceiving the model as a package. For the purposes of dia we can
+  simply add a =dia.stereotype= which conveys the model
+  stereotypes. With these we can now set named configurations at the
+  model level. This then means the following:
+  - define a model for dogen (the product) with all named
+    configurations. These are equivalent to what we call "profiles" at
+    present and may even have the same names. the only difference is
+    that because they are model elements, we now call them
+    =dogen::PROFILE=, e.g. =dogen::disable_odb_cmake=. We should also
+    add all of the missing features to the named configurations
+    (disable VS, disable C#, etc).
+  - add stereotypes to each model referencing the named configuration.
+- with this approach, product lines become really easy - you just need
+  to create a shared model for the product line (its own git repo and
+  then git submodules). Because named configurations can use
+  inheritance you can easily override at the product level as well as
+  at the component level.
+- when a named configuration is applied to a model element, the
+  features it contains must match the scope. We should stop calling
+  these global/local features and instead call them after the types of
+  modeling elements: model, package, element, etc.
+- traits are now only used for the purposes intended by MOP.
+- features are integrated with UML by adding features to the
+  metamodel.
+- =profiles= should be used in the UML sense only.
+
+*Thoughts on code generation*
+
+- create a stereotype for =dogen::feature_group=. The name of the
+  feature (e.g. the path for the kvp) will be given by the model name
+  and location plus package plus feature group name plus feature
+  name. example =dogen.language.input= instead of
+  =yarn.input_languages=.
+- the UML class's attributes become the features. The types must match
+  the types we use in annotation, except these are also real dogen
+  types and thus must be defined in a model and must be fully
+  qualified. We must reference this model. Default value of the
+  attribute is the UML value.
+- any properties of the feature that cannot be supplied directly are
+  supplied via features:
+
+:    "template_kind": "instance",
+:    "scope": "root_module"
+
+- note that these are features too, so there will be a feature group
+  for feature properties. Interestingly, we can now solve the
+  enumeration problem because we can define a
+  =dogen::features::enumeration= that can only be used for features
+  and can be used to check that the values are correct. One of the
+  values of the type is any element who's meta-type is
+  =feature_enumeration=. Actually we don't even need this, it can be a
+  regular enumeration (provided it knows how to read itself from a
+  string). Basically a valid type for a feature is any dogen
+  enumeration.
+- annotations become a very simple model. There are no types in
+  annotation itself, just functions to cast strings. These will be
+  used by generated code. The profile merging code remains the same,
+  but now it has no notion of artefact location; it simply merges KVPs
+  based on a graph of inheritance (this time given by model
+  relationships, but with exactly the same result as the JSON
+  approach).
+- annotation merging still takes place, both at the named
+  configuration levels, and then subsequently at the element
+  level. Named configurations are just meta-model entities so we can
+  locate them by name, and literally copy across any key that we do
+  not have (as we do now).
+- code generation creates a factory for the feature group containing:
+  - a registration method. We still need some kind of registration of
+    key to scope so that we can validate that a key was not used in
+    the wrong scope.
+  - a class with all the members of the feature group in c++ types;
+  - a factory method that takes in a KVP or an annotation and returns
+    the class.
+- there are no templates any longer; we need to manually create each
+  feature in the appropriate feature group. Also, at present we are
+  reading features individually in each transform. Going forward this
+  is inefficient because we'd end up creating the configuration many
+  times. We need some kind of way of caching features against
+  types. At present we do this via properties. We could create
+  something like a "configuration" class and then just initialise all
+  features in one go. The transforms can then use these. Model
+  elements are associated with configurations. The easiest way is to
+  have a base class for configurations and then cast them as required
+  (or even have a visitor, since we know of the types). Alternatively,
+  we need to change the transforms so that we process a feature group
+  all in one go. This would be the cleanest way of doing it but
+  perhaps quite difficult given the current structure of the code.
+- we could also always set the KVP value to be string and use a
+  separator for containers and make it invalid to use it in strings
+  (something like |). Then we could split the string on the fly when
+  time comes for creating a vector/list.
+
+Notes:
+
+- loading profiles as meta-model elements is going to be a challenge,
+  especially in a world where any model can make use of them. The
+  problem is we must have access to all profile data before we perform
+  an annotation expansion; at present this is done during the creation
+  of the context in a very non-obvious way (the annotation_factory
+  loads up profiles on construction). We either force users to have
+  configuration models (CMs, configuration models?) in which case we
+  can simply load all of these up first or we need a two-pass approach
+  in which we load up the models but only process the mappings,
+  initialise the annotation factory and then do the regular
+  processing. The other problem is that we are only performing
+  resolution later on, whereas we are now saying we need to expand the
+  stereotype into a full blown annotation by resolving the stereotype
+  into a name quite early in the pipeline. In the past this worked
+  because we were only performing a very shallow resolution (string
+  matching and always in the same model?) whereas now we are asking
+  for full location resolution, across models. This will also be a
+  problem for mappings as meta-model elements.
+- a possible solution is to split processing into the following
+  phases:
+  1. load up target model.
+  2. read references from target, load references. Need also to
+     process model name via annotations. This means its not possible
+     to use external modules as a named configuration (or else its
+     recursive, we cannot find a configuration because its missing
+     EMs, and its missing EMs because we did not process the named
+     configuration). In a world where external modules are merged with
+     model modules, this becomes cleaner since the model module must
+     be unique for each model.
+  3. collect all elements that need pre-processing and pre-process
+     them: mappings, licences, named configurations/profiles. Not
+     traits/object templates. All initialised structures are placed in
+     the context. Note that we are actually processing only these
+     elements into the endomodel, everything else is untouched. Also
+     we need to remove these elements from the model as well so that
+     they are not re-processed on the second phase. In addition, we
+     need resolution for the meta-elements on the first phase, so we
+     need to prime the resolver with these entities somehow,
+     independently of the model merging. Or better, we need to create
+     a first phase model-merge that only contains entities for the
+     first phase and process that. So: load target, collect all
+     first-phase meta-elements and remove from target, add target to
+     cache. Then repeat process with references. Then merge this model
+     and process it.
+  4. Second phase is as at present, except we no longer load the
+     models, we reuse them from an in-memory cache, after the
+     filtering has taken place.
+- note that the new meta-model elements are marked as non-generatable
+  so a model that only contains these is non-generatable. Same with
+  object templates/traits.
+- the only slight problem with this approach is that we wanted the
+  context to be const. This way we need to do all of these transforms
+  before we can initialise the context. One possible solution is to
+  split out first pass from second pass (different namespaces) so that
+  "context" means different things. We can then say that the second
+  phase context depends on first phase transform chain (in fact the
+  input for the second phase is the output of the first phase,
+  including cached models etc).
+
+Links:
+
+- https://cruise.eecs.uottawa.ca/umple/Traits.html
+
 
 ** Deprecated
