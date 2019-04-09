@@ -49,8 +49,10 @@ namespace masd::dogen::generation::formatters {
 void decoration_formatter::
 add_modeline(std::list<std::string>& content,
     const boost::shared_ptr<coding::meta_model::modeline> ml) const {
-    if (!ml)
+    if (!ml) {
+        BOOST_LOG_SEV(lg, trace) << "Modeline is empty.";
         return;
+    }
 
     std::ostringstream s;
     modeline_formatter f;
@@ -61,9 +63,10 @@ add_modeline(std::list<std::string>& content,
 void decoration_formatter::
 add_marker(std::list<std::string>& content,
     const boost::shared_ptr<coding::meta_model::generation_marker> gm) const {
-
-    if (!gm)
+    if (!gm) {
+        BOOST_LOG_SEV(lg, trace) << "Generation marker is empty.";
         return;
+    }
 
     std::ostringstream s;
     generation_marker_formatter f;
@@ -75,6 +78,9 @@ void decoration_formatter::
 add_copyright_notices(std::list<std::string>& content,
     std::list<std::string> copyright_notices) const {
     BOOST_LOG_SEV(lg, trace) << "Copyriht notices: " << copyright_notices;
+
+    if (copyright_notices.empty())
+        return;
 
     std::ostringstream s;
     for (const auto& cn : copyright_notices)
@@ -153,8 +159,10 @@ void decoration_formatter::
 format_postamble(std::ostream& s, const comment_style& cs,
     const boost::shared_ptr<coding::meta_model::modeline> ml) const {
 
-    if (!ml)
+    if (!ml) {
+        BOOST_LOG_SEV(lg, trace) << "Modeline is empty.";
         return;
+    }
 
     if (ml->location() == coding::meta_model::modeline_location::bottom) {
         std::list<std::string> content;
