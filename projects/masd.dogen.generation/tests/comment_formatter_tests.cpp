@@ -194,7 +194,7 @@ BOOST_AUTO_TEST_CASE(formatting_empty_string_as_c_style_comment_produces_expecte
 
     masd::dogen::generation::formatters::comment_formatter f;
     const auto r(format(f, empty));
-    BOOST_CHECK(asserter::assert_equals_marker(c_style_empty, r));
+    BOOST_CHECK(asserter::assert_equals_string(c_style_empty, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_empty_string_as_doxygen_c_style_comment_produces_expected_output) {
@@ -208,7 +208,7 @@ BOOST_AUTO_TEST_CASE(formatting_empty_string_as_doxygen_c_style_comment_produces
         !last_line_is_blank);
 
     const auto r(format(f, empty));
-    BOOST_CHECK(asserter::assert_equals_marker(doxygen_c_style_empty, r));
+    BOOST_CHECK(asserter::assert_equals_string(doxygen_c_style_empty, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_empty_string_as_csharp_style_comment_produces_expected_output) {
@@ -222,7 +222,7 @@ BOOST_AUTO_TEST_CASE(formatting_empty_string_as_csharp_style_comment_produces_ex
         last_line_is_blank);
 
     const auto r(format(f, empty));
-    BOOST_CHECK(asserter::assert_equals_marker(csharp_style_empty, r));
+    BOOST_CHECK(asserter::assert_equals_string(csharp_style_empty, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_empty_string_as_sandcastle_csharp_style_comment_produces_expected_output) {
@@ -237,7 +237,7 @@ BOOST_AUTO_TEST_CASE(formatting_empty_string_as_sandcastle_csharp_style_comment_
 
     const auto r(format(f, empty));
     BOOST_CHECK(
-        asserter::assert_equals_marker(sandcastle_csharp_style_empty, r));
+        asserter::assert_equals_string(sandcastle_csharp_style_empty, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_licence_as_c_style_comment_produces_expected_output) {
@@ -252,7 +252,7 @@ BOOST_AUTO_TEST_CASE(formatting_licence_as_c_style_comment_produces_expected_out
 
     std::list<std::string> content { modeline, licence };
     const auto r(format(f, content, line_between_blocks));
-    BOOST_CHECK(asserter::assert_equals_marker(licence_c_style, r));
+    BOOST_CHECK(asserter::assert_equals_string(licence_c_style, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_licence_as_csharp_style_comment_produces_expected_output) {
@@ -267,7 +267,7 @@ BOOST_AUTO_TEST_CASE(formatting_licence_as_csharp_style_comment_produces_expecte
 
     std::list<std::string> content { modeline, licence };
     const auto r(format(f, content, line_between_blocks));
-    BOOST_CHECK(asserter::assert_equals_marker(licence_csharp_style, r));
+    BOOST_CHECK(asserter::assert_equals_string(licence_csharp_style, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_licence_as_shell_style_comment_produces_expected_output) {
@@ -282,7 +282,7 @@ BOOST_AUTO_TEST_CASE(formatting_licence_as_shell_style_comment_produces_expected
 
     std::list<std::string> content { modeline, licence };
     const auto r(format(f, content, line_between_blocks));
-    BOOST_CHECK(asserter::assert_equals_marker(licence_shell_style, r));
+    BOOST_CHECK(asserter::assert_equals_string(licence_shell_style, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_modeline_as_shell_style_comment_produces_expected_output) {
@@ -296,7 +296,7 @@ BOOST_AUTO_TEST_CASE(formatting_modeline_as_shell_style_comment_produces_expecte
         !last_line_is_blank);
 
     const auto r(format(f, modeline));
-    BOOST_CHECK(asserter::assert_equals_marker(modeline_shell_style, r));
+    BOOST_CHECK(asserter::assert_equals_string(modeline_shell_style, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_one_line_as_doxygen_c_style_comment_produces_expected_output) {
@@ -310,7 +310,7 @@ BOOST_AUTO_TEST_CASE(formatting_one_line_as_doxygen_c_style_comment_produces_exp
         !last_line_is_blank);
 
     const auto r(format(f, doxygen_brief));
-    BOOST_CHECK(asserter::assert_equals_marker(function_doxygen, r));
+    BOOST_CHECK(asserter::assert_equals_string(function_doxygen, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_one_line_as_sandcastle_csharp_style_comment_produces_expected_output) {
@@ -324,7 +324,7 @@ BOOST_AUTO_TEST_CASE(formatting_one_line_as_sandcastle_csharp_style_comment_prod
         !last_line_is_blank);
 
     const auto r(format(f, doxygen_brief));
-    BOOST_CHECK(asserter::assert_equals_marker(function_sandcastle, r));
+    BOOST_CHECK(asserter::assert_equals_string(function_sandcastle, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_multi_line_as_doxygen_c_style_comment_produces_expected_output) {
@@ -338,7 +338,7 @@ BOOST_AUTO_TEST_CASE(formatting_multi_line_as_doxygen_c_style_comment_produces_e
         last_line_is_blank);
 
     const auto r(format(f, doxgen_multi_line));
-    BOOST_CHECK(asserter::assert_equals_marker(multi_line_doxygen_c_style, r));
+    BOOST_CHECK(asserter::assert_equals_string(multi_line_doxygen_c_style, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_multi_line_as_sandcastle_csharp_style_comment_produces_expected_output) {
@@ -353,7 +353,7 @@ BOOST_AUTO_TEST_CASE(formatting_multi_line_as_sandcastle_csharp_style_comment_pr
 
     const auto r(format(f, doxgen_multi_line));
     BOOST_CHECK(
-        asserter::assert_equals_marker(multi_line_sandcastle_csharp_style, r));
+        asserter::assert_equals_string(multi_line_sandcastle_csharp_style, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_one_line_as_doxygen_cpp_style_comment_produces_expected_output) {
@@ -367,7 +367,7 @@ BOOST_AUTO_TEST_CASE(formatting_one_line_as_doxygen_cpp_style_comment_produces_e
         !last_line_is_blank);
 
     const auto r(format(f, enumeration));
-    BOOST_CHECK(asserter::assert_equals_marker(enumeration_doxygen, r));
+    BOOST_CHECK(asserter::assert_equals_string(enumeration_doxygen, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_multi_line_text_as_shell_style_comment_produces_expected_output) {
@@ -381,7 +381,7 @@ BOOST_AUTO_TEST_CASE(formatting_multi_line_text_as_shell_style_comment_produces_
         !last_line_is_blank);
 
     const auto r(format(f, multi_line_text));
-    BOOST_CHECK(asserter::assert_equals_marker(multi_line_text_shell_style, r));
+    BOOST_CHECK(asserter::assert_equals_string(multi_line_text_shell_style, r));
 }
 
 BOOST_AUTO_TEST_CASE(formatting_multi_line_text_as_xml_style_comment_produces_expected_output) {
@@ -395,7 +395,7 @@ BOOST_AUTO_TEST_CASE(formatting_multi_line_text_as_xml_style_comment_produces_ex
         !last_line_is_blank);
 
     const auto r(format(f, multi_line_text));
-    BOOST_CHECK(asserter::assert_equals_marker(multi_line_text_xml_style, r));
+    BOOST_CHECK(asserter::assert_equals_string(multi_line_text_xml_style, r));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

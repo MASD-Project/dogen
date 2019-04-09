@@ -255,7 +255,7 @@ BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
     BOOST_LOG_SEV(lg, debug) << "Input" << bp;
     const auto r(format(bp));
 
-    BOOST_CHECK(asserter::assert_equals_marker(expected_cpp_modeline_top, r));
+    BOOST_CHECK(asserter::assert_equals_string(expected_cpp_modeline_top, r));
     BOOST_LOG_SEV(lg, debug) << "Logging to disable modeline at the bottom";
 }
 
@@ -269,7 +269,7 @@ BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
 //     const auto hg(factory_.make_header_guard(true/*is_empty*/));
 //     const auto r(format(dc, inc, hg));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(multiline_licence, r));
+//     BOOST_CHECK(asserter::assert_equals_string(multiline_licence, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -283,7 +283,7 @@ BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
 //     const auto hg(factory_.make_header_guard(true/*is_empty*/));
 //     const auto r(format(dc, inc, hg));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(modeline_bottom, r));
+//     BOOST_CHECK(asserter::assert_equals_string(modeline_bottom, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -299,7 +299,7 @@ BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
 //     const auto hg(factory_.make_header_guard(true/*is_empty*/));
 //     const auto r(format(dc, inc, hg));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(no_marker, r));
+//     BOOST_CHECK(asserter::assert_equals_string(no_marker, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -315,7 +315,7 @@ BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
 //     const auto hg(factory_.make_header_guard(true/*is_empty*/));
 //     const auto r(format(dc, inc, hg));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(no_licence, r));
+//     BOOST_CHECK(asserter::assert_equals_string(no_licence, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -332,7 +332,7 @@ BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
 //     const auto hg(factory_.make_header_guard(true/*is_empty*/));
 //     const auto r(format(dc, inc, hg));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(licence_no_text, r));
+//     BOOST_CHECK(asserter::assert_equals_string(licence_no_text, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -350,7 +350,7 @@ BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
 //     const auto r(format(dc, inc, hg));
 
 //     BOOST_CHECK(
-//         asserter::assert_equals_marker(licence_no_copyright_notices, r));
+//         asserter::assert_equals_string(licence_no_copyright_notices, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -364,7 +364,7 @@ BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
 //     const auto hg(factory_.make_header_guard(true/*is_empty*/));
 //     const auto r(format(dc, inc, hg));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(just_marker, r));
+//     BOOST_CHECK(asserter::assert_equals_string(just_marker, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -381,7 +381,7 @@ BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
 //     const auto hg(factory_.make_header_guard(true/*is_empty*/));
 //     const auto r(format(dc, inc, hg));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(just_modeline_top, r));
+//     BOOST_CHECK(asserter::assert_equals_string(just_modeline_top, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -398,7 +398,7 @@ BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
 //     const auto hg(factory_.make_header_guard(true/*is_empty*/));
 //     const auto r(format(dc, inc, hg));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(just_modeline_bottom, r));
+//     BOOST_CHECK(asserter::assert_equals_string(just_modeline_bottom, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -412,7 +412,7 @@ BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
 //     const auto hg(factory_.make_header_guard(true/*is_empty*/));
 //     const auto r(format(dc, inc, hg));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(empty, r));
+//     BOOST_CHECK(asserter::assert_equals_string(empty, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -426,7 +426,7 @@ BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
 //     const auto r(format(dc, inc, hg));
 
 //     BOOST_CHECK(r == guards_with_top_modeline);
-//     BOOST_CHECK(asserter::assert_equals_marker(guards_with_top_modeline, r));
+//     BOOST_CHECK(asserter::assert_equals_string(guards_with_top_modeline, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -440,7 +440,7 @@ BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
 //     const auto hg(factory_.make_header_guard());
 //     const auto r(format(dc, inc, hg));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(guards_with_bottom_modeline, r));
+//     BOOST_CHECK(asserter::assert_equals_string(guards_with_bottom_modeline, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -453,7 +453,7 @@ BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
 //     const auto hg(factory_.make_header_guard());
 //     const auto r(format(dc, inc, hg));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(includes_with_top_modeline, r));
+//     BOOST_CHECK(asserter::assert_equals_string(includes_with_top_modeline, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -466,7 +466,7 @@ BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
 //     const auto hg(factory_.make_header_guard());
 //     const auto r(format(dc, inc, hg, !generate_premable));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(disabled_preamble, r));
+//     BOOST_CHECK(asserter::assert_equals_string(disabled_preamble, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 

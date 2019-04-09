@@ -67,7 +67,7 @@
 
 //     masd::dogen::extraction::cpp::include_formatter f;
 //     f.format(fo, includes);
-//     BOOST_CHECK(asserter::assert_equals_marker(with_includes, s.str()));
+//     BOOST_CHECK(asserter::assert_equals_string(with_includes, s.str()));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -82,7 +82,7 @@
 
 //     masd::dogen::extraction::cpp::include_formatter f;
 //     f.format(fo, empty_includes);
-//     BOOST_CHECK(asserter::assert_equals_marker(empty, s.str()));
+//     BOOST_CHECK(asserter::assert_equals_string(empty, s.str()));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 

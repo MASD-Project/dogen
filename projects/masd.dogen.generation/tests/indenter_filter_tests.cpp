@@ -92,7 +92,7 @@ BOOST_AUTO_TEST_CASE(default_indentation_level_does_not_indent) {
     fo.push(s);
     fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4), s.str()));
+    BOOST_CHECK(asserter::assert_equals_string(expected(0, 4), s.str()));
 }
 
 BOOST_AUTO_TEST_CASE(default_indentation_level_without_new_line_does_not_indent) {
@@ -104,7 +104,7 @@ BOOST_AUTO_TEST_CASE(default_indentation_level_without_new_line_does_not_indent)
     fo.push(s);
     fo << input;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(input, s.str()));
+    BOOST_CHECK(asserter::assert_equals_string(input, s.str()));
 }
 
 BOOST_AUTO_TEST_CASE(incrementing_once_increases_indentation_level_by_one) {
@@ -117,7 +117,7 @@ BOOST_AUTO_TEST_CASE(incrementing_once_increases_indentation_level_by_one) {
     ++fo;
     fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(expected(1, 4), s.str()));
+    BOOST_CHECK(asserter::assert_equals_string(expected(1, 4), s.str()));
     s.str(empty);
 }
 
@@ -131,7 +131,7 @@ BOOST_AUTO_TEST_CASE(incrementing_twice_times_increases_indentation_level_by_two
     ++fo; ++fo;
     fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(expected(2, 4), s.str()));
+    BOOST_CHECK(asserter::assert_equals_string(expected(2, 4), s.str()));
     s.str(empty);
 }
 
@@ -145,7 +145,7 @@ BOOST_AUTO_TEST_CASE(incrementing_three_times_increases_indentation_level_by_thr
     ++fo; ++fo; ++fo;
     fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(expected(3, 4), s.str()));
+    BOOST_CHECK(asserter::assert_equals_string(expected(3, 4), s.str()));
     s.str(empty);
 }
 
@@ -159,13 +159,13 @@ BOOST_AUTO_TEST_CASE(decrementing_once_increases_indentation_level_by_one) {
     ++fo; ++fo; ++fo;
     fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(expected(3, 4), s.str()));
+    BOOST_CHECK(asserter::assert_equals_string(expected(3, 4), s.str()));
     s.str(empty);
 
     --fo;
     fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(expected(2, 4), s.str()));
+    BOOST_CHECK(asserter::assert_equals_string(expected(2, 4), s.str()));
     s.str(empty);
 }
 
@@ -179,13 +179,13 @@ BOOST_AUTO_TEST_CASE(decrementing_twice_increases_indentation_level_by_two) {
     ++fo; ++fo; ++fo; ++fo;
     fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(expected(4, 4), s.str()));
+    BOOST_CHECK(asserter::assert_equals_string(expected(4, 4), s.str()));
     s.str(empty);
 
     --fo; --fo;
     fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(expected(2, 4), s.str()));
+    BOOST_CHECK(asserter::assert_equals_string(expected(2, 4), s.str()));
     s.str(empty);
 }
 
@@ -199,13 +199,13 @@ BOOST_AUTO_TEST_CASE(decrementing_three_times_increases_indentation_level_by_thr
     ++fo; ++fo; ++fo; ++fo; ++fo; ++fo;
     fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(expected(6, 4), s.str()));
+    BOOST_CHECK(asserter::assert_equals_string(expected(6, 4), s.str()));
     s.str(empty);
 
     --fo; --fo; --fo;
     fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(expected(3, 4), s.str()));
+    BOOST_CHECK(asserter::assert_equals_string(expected(3, 4), s.str()));
     s.str(empty);
 }
 
@@ -219,7 +219,7 @@ BOOST_AUTO_TEST_CASE(unindenting_at_zero_indentation_level_does_nothing) {
     --fo;
     fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4), s.str()));
+    BOOST_CHECK(asserter::assert_equals_string(expected(0, 4), s.str()));
     s.str(empty);
 }
 
@@ -231,30 +231,30 @@ BOOST_AUTO_TEST_CASE(positive_indenter_scope_correctly_increases_and_decreases_i
     fo.push(s);
     fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4), s.str()));
+    BOOST_CHECK(asserter::assert_equals_string(expected(0, 4), s.str()));
     s.str(empty);
     {
         masd::dogen::generation::formatters::positive_indenter_scope pis(fo);
         fo << input << std::endl;
         fo.flush();
-        BOOST_CHECK(asserter::assert_equals_marker(expected(1, 4), s.str()));
+        BOOST_CHECK(asserter::assert_equals_string(expected(1, 4), s.str()));
         s.str(empty);
         {
             masd::dogen::generation::formatters::positive_indenter_scope pis(fo);
             fo << input << std::endl;
             fo.flush();
-            BOOST_CHECK(asserter::assert_equals_marker(expected(2, 4),
+            BOOST_CHECK(asserter::assert_equals_string(expected(2, 4),
                     s.str()));
             s.str(empty);
         }
         fo << input << std::endl;
         fo.flush();
-        BOOST_CHECK(asserter::assert_equals_marker(expected(1, 4), s.str()));
+        BOOST_CHECK(asserter::assert_equals_string(expected(1, 4), s.str()));
         s.str(empty);
     }
     fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4), s.str()));
+    BOOST_CHECK(asserter::assert_equals_string(expected(0, 4), s.str()));
     s.str(empty);
 }
 
@@ -267,31 +267,31 @@ BOOST_AUTO_TEST_CASE(negative_indenter_scope_correctly_decreases_and_increases_i
     ++fo; ++fo;
     fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(expected(2, 4), s.str()));
+    BOOST_CHECK(asserter::assert_equals_string(expected(2, 4), s.str()));
     s.str(empty);
 
     {
         masd::dogen::generation::formatters::negative_indenter_scope nis(fo);
         fo << input << std::endl;
         fo.flush();
-        BOOST_CHECK(asserter::assert_equals_marker(expected(1, 4), s.str()));
+        BOOST_CHECK(asserter::assert_equals_string(expected(1, 4), s.str()));
         s.str(empty);
         {
             masd::dogen::generation::formatters::negative_indenter_scope nis(fo);
             fo << input << std::endl;
             fo.flush();
-            BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4),
+            BOOST_CHECK(asserter::assert_equals_string(expected(0, 4),
                     s.str()));
             s.str(empty);
         }
         fo << input << std::endl;
         fo.flush();
-        BOOST_CHECK(asserter::assert_equals_marker(expected(1, 4), s.str()));
+        BOOST_CHECK(asserter::assert_equals_string(expected(1, 4), s.str()));
         s.str(empty);
     }
     fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(expected(2, 4), s.str()));
+    BOOST_CHECK(asserter::assert_equals_string(expected(2, 4), s.str()));
     s.str(empty);
 }
 
@@ -303,18 +303,18 @@ BOOST_AUTO_TEST_CASE(negative_indenter_scope_correctly_handles_zero_indentation_
     fo.push(s);
     fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4), s.str()));
+    BOOST_CHECK(asserter::assert_equals_string(expected(0, 4), s.str()));
     s.str(empty);
     {
         masd::dogen::generation::formatters::negative_indenter_scope nis(fo);
         fo << input << std::endl;
         fo.flush();
-        BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4), s.str()));
+        BOOST_CHECK(asserter::assert_equals_string(expected(0, 4), s.str()));
         s.str(empty);
     }
     fo << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(expected(0, 4), s.str()));
+    BOOST_CHECK(asserter::assert_equals_string(expected(0, 4), s.str()));
     s.str(empty);
 }
 
@@ -326,13 +326,13 @@ BOOST_AUTO_TEST_CASE(single_trailing_blank_line_is_suppressed_when_managing_blan
     fo.push(s);
     fo << input << std::endl << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(
+    BOOST_CHECK(asserter::assert_equals_string(
             with_one_trailing_blank_line, s.str()));
     s.str(empty);
 
     fo << input << std::endl;
     fo << manage_blank_lines << std::endl;
-    BOOST_CHECK(asserter::assert_equals_marker(without_blank_lines, s.str()));
+    BOOST_CHECK(asserter::assert_equals_string(without_blank_lines, s.str()));
     s.str(empty);
 }
 
@@ -344,13 +344,13 @@ BOOST_AUTO_TEST_CASE(multiple_trailing_blank_lines_are_suppressed_when_managing_
     fo.push(s);
     fo << input << std::endl << std::endl << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(
+    BOOST_CHECK(asserter::assert_equals_string(
             with_two_trailing_blank_lines, s.str()));
     s.str(empty);
 
     fo << input << std::endl;
     fo << manage_blank_lines << std::endl << std::endl;
-    BOOST_CHECK(asserter::assert_equals_marker(without_blank_lines, s.str()));
+    BOOST_CHECK(asserter::assert_equals_string(without_blank_lines, s.str()));
     s.str(empty);
 }
 
@@ -362,14 +362,14 @@ BOOST_AUTO_TEST_CASE(one_blank_line_in_between_content_is_printed_out_when_manag
     fo.push(s);
     fo << input << std::endl << std::endl << other_input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(
+    BOOST_CHECK(asserter::assert_equals_string(
             blank_line_in_between_content, s.str()));
     s.str(empty);
 
     fo << input << std::endl;
     fo << manage_blank_lines << std::endl;
     fo << other_input << std::endl;
-    BOOST_CHECK(asserter::assert_equals_marker(blank_line_in_between_content,
+    BOOST_CHECK(asserter::assert_equals_string(blank_line_in_between_content,
             s.str()));
     s.str(empty);
 }
@@ -383,7 +383,7 @@ BOOST_AUTO_TEST_CASE(multiple_blank_lines_in_between_content_results_in_a_single
     fo << input << std::endl << std::endl << std::endl << std::endl
        << other_input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(
+    BOOST_CHECK(asserter::assert_equals_string(
             blank_lines_in_between_content, s.str()));
     s.str(empty);
 
@@ -391,7 +391,7 @@ BOOST_AUTO_TEST_CASE(multiple_blank_lines_in_between_content_results_in_a_single
     fo << manage_blank_lines << std::endl << std::endl
        << std::endl << std::endl;
     fo << other_input << std::endl;
-    BOOST_CHECK(asserter::assert_equals_marker(blank_line_in_between_content,
+    BOOST_CHECK(asserter::assert_equals_string(blank_line_in_between_content,
             s.str()));
     s.str(empty);
 }
@@ -404,13 +404,13 @@ BOOST_AUTO_TEST_CASE(single_leading_blank_line_is_not_suppressed_when_managing_b
     fo.push(s);
     fo << std::endl << input << std::endl;
     fo.flush();
-    BOOST_CHECK(asserter::assert_equals_marker(
+    BOOST_CHECK(asserter::assert_equals_string(
             with_one_leading_blank_line, s.str()));
     s.str(empty);
 
     fo << std::endl << input << std::endl;
     fo << manage_blank_lines << std::endl << std::endl;
-    BOOST_CHECK(asserter::assert_equals_marker(
+    BOOST_CHECK(asserter::assert_equals_string(
             with_one_leading_blank_line, s.str()));
     s.str(empty);
 }

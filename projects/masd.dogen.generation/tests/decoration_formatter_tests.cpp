@@ -140,7 +140,7 @@ BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
             make_modeline(),
             make_generation_marker()));
 
-    // BOOST_CHECK(asserter::assert_equals_marker(expected_cpp_modeline_top, a));
+    // BOOST_CHECK(asserter::assert_equals_string(expected_cpp_modeline_top, a));
 
     BOOST_LOG_SEV(lg, debug) << disable_bottom_modeline;
 }

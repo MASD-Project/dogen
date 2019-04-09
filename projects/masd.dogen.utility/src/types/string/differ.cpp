@@ -57,13 +57,17 @@ std::string differ::diff(const std::string& a, const std::string& b) {
     diff(a, b, s);
 
     const auto r(s.str());
-    BOOST_LOG_SEV(lg, debug) << "Diff: " << r;
+    if (r.empty())
+        BOOST_LOG_SEV(lg, trace) << "Diff: <empty>";
+    else
+        BOOST_LOG_SEV(lg, trace) << "Diff: " << std::endl << r;
+
     return r;
 }
 
 void differ::diff(const std::string& a, const std::string& b, std::ostream& s) {
-    BOOST_LOG_SEV(lg, trace) << "Diffing. a: " << a;
-    BOOST_LOG_SEV(lg, trace) << "b: " << b;
+    BOOST_LOG_SEV(lg, trace) << "Content of a: " << std::endl << a;
+    BOOST_LOG_SEV(lg, trace) << "Content of b: " << std::endl << b;
 
     const auto a_lines(split_lines(a));
     const auto b_lines(split_lines(b));

@@ -165,7 +165,7 @@
 //     const auto hg(factory_.make_header_guard(true/*is_empty*/));
 //     const auto r(format(dc, us));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(modeline_top, r));
+//     BOOST_CHECK(asserter::assert_equals_string(modeline_top, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -178,7 +178,7 @@
 //     const auto us(factory_.make_usings(true/*is_empty*/));
 //     const auto r(format(dc, us));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(multiline_licence, r));
+//     BOOST_CHECK(asserter::assert_equals_string(multiline_licence, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -191,7 +191,7 @@
 //     const auto us(factory_.make_usings(true/*is_empty*/));
 //     const auto r(format(dc, us));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(modeline_bottom, r));
+//     BOOST_CHECK(asserter::assert_equals_string(modeline_bottom, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -206,7 +206,7 @@
 //     const auto us(factory_.make_usings(true/*is_empty*/));
 //     const auto r(format(dc, us));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(no_marker, r));
+//     BOOST_CHECK(asserter::assert_equals_string(no_marker, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -221,7 +221,7 @@
 //     const auto us(factory_.make_usings(true/*is_empty*/));
 //     const auto r(format(dc, us));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(no_licence, r));
+//     BOOST_CHECK(asserter::assert_equals_string(no_licence, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -237,7 +237,7 @@
 //     const auto us(factory_.make_usings(true/*is_empty*/));
 //     const auto r(format(dc, us));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(licence_no_text, r));
+//     BOOST_CHECK(asserter::assert_equals_string(licence_no_text, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -254,7 +254,7 @@
 //     const auto r(format(dc, us));
 
 //     BOOST_CHECK(
-//         asserter::assert_equals_marker(licence_no_copyright_notices, r));
+//         asserter::assert_equals_string(licence_no_copyright_notices, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -267,7 +267,7 @@
 //     const auto us(factory_.make_usings(true/*is_empty*/));
 //     const auto r(format(dc, us));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(just_marker, r));
+//     BOOST_CHECK(asserter::assert_equals_string(just_marker, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -283,7 +283,7 @@
 //     const auto us(factory_.make_usings(true/*is_empty*/));
 //     const auto r(format(dc, us));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(just_modeline_top, r));
+//     BOOST_CHECK(asserter::assert_equals_string(just_modeline_top, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -299,7 +299,7 @@
 //     const auto us(factory_.make_usings(true/*is_empty*/));
 //     const auto r(format(dc, us));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(just_modeline_bottom, r));
+//     BOOST_CHECK(asserter::assert_equals_string(just_modeline_bottom, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -312,7 +312,7 @@
 //     const auto us(factory_.make_usings(true/*is_empty*/));
 //     const auto r(format(dc, us));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(empty, r));
+//     BOOST_CHECK(asserter::assert_equals_string(empty, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -324,7 +324,7 @@
 //     const auto us(factory_.make_usings());
 //     const auto r(format(dc, us));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(includes_with_top_modeline, r));
+//     BOOST_CHECK(asserter::assert_equals_string(includes_with_top_modeline, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -336,7 +336,7 @@
 //     const auto us(factory_.make_usings());
 //     const auto r(format(dc, us, !generate_premable));
 
-//     BOOST_CHECK(asserter::assert_equals_marker(disabled_preamble, r));
+//     BOOST_CHECK(asserter::assert_equals_string(disabled_preamble, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 

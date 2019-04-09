@@ -31,6 +31,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/algorithm/string/predicate.hpp>
+#include "masd.dogen.utility/types/string/differ.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.utility/types/io/set_io.hpp"
 #include "masd.dogen.utility/types/io/vector_io.hpp"
@@ -91,6 +92,11 @@ bool compare_paths(
 
 namespace masd::dogen::utility::test {
 
+/*
+ * Note: Log defined visibly by design. We are using this log on the
+ * header file in order to support template based methods that need to
+ * log.
+ */
 using namespace masd::dogen::utility::log;
 logger asserter::lg_(logger_factory("utility.test.asserter"));
 
@@ -174,9 +180,14 @@ bool asserter::assert_directory(const boost::filesystem::path& expected_path,
     return assert_directory(expected_path, actual_path, v);
 }
 
-bool asserter::assert_equals_marker(const std::string& expected,
+bool asserter::assert_equals_string(const std::string& expected,
     const std::string& actual) {
-    log_strings(expected, actual);
+    /*
+     * No need to log actual and expected as the differ will do that
+     * for us.
+     */
+    BOOST_LOG_SEV(lg_, debug) << "diffing expected (a) against actual (b): ";
+    string::differ::diff(expected, actual);
     return handle_assert(expected == actual, "assert equals");
 }
 

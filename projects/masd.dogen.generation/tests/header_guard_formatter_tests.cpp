@@ -64,7 +64,7 @@
 //     f.format_begin(fo, non_empty_guard);
 //     f.format_end(fo, non_empty_guard);
 //     const auto r(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(with_guard, r));
+//     BOOST_CHECK(asserter::assert_equals_string(with_guard, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
@@ -81,7 +81,7 @@
 //     f.format_begin(s, empty_guard);
 //     f.format_end(s, empty_guard);
 //     const auto r(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(empty, r));
+//     BOOST_CHECK(asserter::assert_equals_string(empty, r));
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 

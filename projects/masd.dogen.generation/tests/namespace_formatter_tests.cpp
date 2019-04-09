@@ -77,13 +77,13 @@
 //     masd::dogen::extraction::cpp::namespace_formatter nsf;
 //     nsf.format_begin(s, single_namespace);
 //     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(
+//     BOOST_CHECK(asserter::assert_equals_string(
 //             single_namespace_default_configuration_begin, beg));
 //     s.str("");
 
 //     nsf.format_end(s, single_namespace);
 //     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(single_end, end));
+//     BOOST_CHECK(asserter::assert_equals_string(single_end, end));
 // }
 
 // BOOST_IGNORE_AUTO_TEST_CASE(multiple_namespaces_with_default_configuration_generates_expected_cpp_namespaces) {
@@ -96,13 +96,13 @@
 //     nsf.format_begin(s, multiple_namespaces);
 //     const auto beg(s.str());
 
-//     BOOST_CHECK(asserter::assert_equals_marker(
+//     BOOST_CHECK(asserter::assert_equals_string(
 //             multiple_namespaces_default_configuration_begin, beg));
 //     s.str("");
 
 //     nsf.format_end(s, multiple_namespaces);
 //     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(multiple_end, end));
+//     BOOST_CHECK(asserter::assert_equals_string(multiple_end, end));
 // }
 
 // BOOST_IGNORE_AUTO_TEST_CASE(empy_namespace_with_default_configuration_generates_expected_cpp_namespaces) {
@@ -113,13 +113,13 @@
 //     namespace_formatter nsf(true/*anonymous_namespace*/);
 //     nsf.format_begin(s, empty);
 //     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(
+//     BOOST_CHECK(asserter::assert_equals_string(
 //             empty_namespace_default_configuration_begin, beg));
 //     s.str("");
 
 //     nsf.format_end(s, empty);
 //     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(single_end, end));
+//     BOOST_CHECK(asserter::assert_equals_string(single_end, end));
 // }
 
 // BOOST_IGNORE_AUTO_TEST_CASE(empy_namespaces_with_default_configuration_generates_expected_cpp_namespaces) {
@@ -132,13 +132,13 @@
 //     const std::list<std::string> empty_list;
 //     nsf.format_begin(s, empty_list);
 //     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(
+//     BOOST_CHECK(asserter::assert_equals_string(
 //             empty_namespace_default_configuration_begin, beg));
 //     s.str("");
 
 //     nsf.format_end(s, empty);
 //     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(single_end, end));
+//     BOOST_CHECK(asserter::assert_equals_string(single_end, end));
 // }
 
 // BOOST_IGNORE_AUTO_TEST_CASE(empy_namespace_with_anonymous_namespaces_off_generates_expected_cpp_namespaces) {
@@ -149,12 +149,12 @@
 //     namespace_formatter nsf(false/*anonymous_namespace*/);
 //     nsf.format_begin(s, empty);
 //     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(empty, beg));
+//     BOOST_CHECK(asserter::assert_equals_string(empty, beg));
 //     s.str("");
 
 //     nsf.format_end(s, empty);
 //     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(empty, end));
+//     BOOST_CHECK(asserter::assert_equals_string(empty, end));
 // }
 
 // BOOST_IGNORE_AUTO_TEST_CASE(empy_namespaces_with_anonymous_namespaces_off_generates_expected_cpp_namespaces) {
@@ -167,12 +167,12 @@
 //     const std::list<std::string> empty_list;
 //     nsf.format_begin(s, empty_list);
 //     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(empty, beg));
+//     BOOST_CHECK(asserter::assert_equals_string(empty, beg));
 //     s.str("");
 
 //     nsf.format_end(s, empty);
 //     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(empty, end));
+//     BOOST_CHECK(asserter::assert_equals_string(empty, end));
 // }
 
 // BOOST_IGNORE_AUTO_TEST_CASE(empy_namespace_with_new_line_generates_expected_cpp_namespaces) {
@@ -183,13 +183,13 @@
 //     namespace_formatter nsf(true/*anonymous_namespace*/, true/*add_new_line*/);
 //     nsf.format_begin(s, empty);
 //     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(
+//     BOOST_CHECK(asserter::assert_equals_string(
 //             empty_namespace_default_configuration_begin, beg));
 //     s.str("");
 
 //     nsf.format_end(s, empty);
 //     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(single_end_new_line, end));
+//     BOOST_CHECK(asserter::assert_equals_string(single_end_new_line, end));
 // }
 
 // BOOST_IGNORE_AUTO_TEST_CASE(empy_namespaces_with_new_line_generates_expected_cpp_namespaces) {
@@ -202,13 +202,13 @@
 //     const std::list<std::string> empty_list;
 //     nsf.format_begin(s, empty_list);
 //     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(
+//     BOOST_CHECK(asserter::assert_equals_string(
 //             empty_namespace_default_configuration_begin, beg));
 //     s.str("");
 
 //     nsf.format_end(s, empty);
 //     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(single_end_new_line, end));
+//     BOOST_CHECK(asserter::assert_equals_string(single_end_new_line, end));
 // }
 
 // BOOST_IGNORE_AUTO_TEST_CASE(single_namespace_with_new_line_generates_expected_cpp_namespaces) {
@@ -221,13 +221,13 @@
 //     namespace_formatter nsf(true/*anonymous_namespace*/, true/*add_new_line*/);
 //     nsf.format_begin(s, single_namespace);
 //     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(
+//     BOOST_CHECK(asserter::assert_equals_string(
 //             single_namespace_default_configuration_begin, beg));
 //     s.str("");
 
 //     nsf.format_end(s, single_namespace);
 //     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(single_end_new_line, end));
+//     BOOST_CHECK(asserter::assert_equals_string(single_end_new_line, end));
 // }
 
 // BOOST_IGNORE_AUTO_TEST_CASE(multiple_namespaces_with_new_line_generates_expected_cpp_namespaces) {
@@ -241,13 +241,13 @@
 //     namespace_formatter nsf(true/*anonymous_namespace*/, true/*add_new_line*/);
 //     nsf.format_begin(s, multiple_namespaces);
 //     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(
+//     BOOST_CHECK(asserter::assert_equals_string(
 //             multiple_namespaces_default_configuration_begin, beg));
 //     s.str("");
 
 //     nsf.format_end(s, multiple_namespaces);
 //     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(multiple_end_new_line, end));
+//     BOOST_CHECK(asserter::assert_equals_string(multiple_end_new_line, end));
 // }
 
 // BOOST_IGNORE_AUTO_TEST_CASE(single_namespace_with_nested_namespaces_generates_expected_cpp_namespaces) {
@@ -261,13 +261,13 @@
 //         true/*nested_namespaces*/);
 //     nsf.format_begin(s, single_namespace);
 //     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(
+//     BOOST_CHECK(asserter::assert_equals_string(
 //             single_namespace_default_configuration_begin, beg));
 //     s.str("");
 
 //     nsf.format_end(s, single_namespace);
 //     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(single_end, end));
+//     BOOST_CHECK(asserter::assert_equals_string(single_end, end));
 // }
 
 // BOOST_IGNORE_AUTO_TEST_CASE(multiple_namespaces_with_nested_namespaces_generates_expected_cpp_namespaces) {
@@ -281,13 +281,13 @@
 //         true/*nested_namespaces*/);
 //     nsf.format_begin(s, multiple_namespaces);
 //     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(
+//     BOOST_CHECK(asserter::assert_equals_string(
 //             multiple_namespaces_nested_configuration_begin, beg));
 //     s.str("");
 
 //     nsf.format_end(s, multiple_namespaces);
 //     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_marker(single_end, end));
+//     BOOST_CHECK(asserter::assert_equals_string(single_end, end));
 // }
 
 // BOOST_AUTO_TEST_SUITE_END()

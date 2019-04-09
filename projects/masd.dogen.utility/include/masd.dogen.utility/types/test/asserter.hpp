@@ -185,12 +185,10 @@ public:
     }
 
     /**
-     * @brief Like assert_equals but provides a start and end marker.
-     *
-     * Only available for strings as the markers result in non-compliant
-     * JSON.
+     * @brief Like assert_equals but provides specific handling for
+     * strings, such as unified diffing.
      */
-    static bool assert_equals_marker(const std::string& expected,
+    static bool assert_equals_string(const std::string& expected,
         const std::string& actual);
 
     /**
