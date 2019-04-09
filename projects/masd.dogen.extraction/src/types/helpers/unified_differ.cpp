@@ -19,24 +19,14 @@
  *
  */
 #include <sstream>
-#include <dtl/dtl.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/string/differ.hpp"
 #include "masd.dogen.extraction/types/helpers/unified_differ.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory("extraction.transforms.unified_differ"));
-
-std::vector<std::string> split_lines(const std::string& s) {
-    std::string line;
-    std::istringstream ss(s);
-    std::vector<std::string> r;
-    while (std::getline(ss, line))
-        r.push_back(line);
-
-    return r;
-}
 
 void compose_header(const boost::filesystem::path& base,
     const boost::filesystem::path& a_path, const std::string&  info,
@@ -50,16 +40,6 @@ void compose_header(const boost::filesystem::path& base,
       << "+++  " << gs << std::endl;
 }
 
-void compose_diff(const std::vector<std::string>& a,
-    const std::vector<std::string>& b, std::ostream& s) {
-
-    dtl::Diff<std::string> diff(a, b);
-    diff.onHuge();
-    diff.compose();
-    diff.composeUnifiedHunks();
-    diff.printUnifiedFormat(s);
-}
-
 }
 
 namespace masd::dogen::extraction::helpers {
@@ -69,17 +49,12 @@ std::string unified_differ::diff(const std::string& a, const std::string& b,
     const boost::filesystem::path& a_path,
     const std::string& info) {
 
-    BOOST_LOG_SEV(lg, debug) << "Diffing " << a_path.generic();
-    BOOST_LOG_SEV(lg, trace) << "a " << a;
-    BOOST_LOG_SEV(lg, trace) << "b " << b;
-    std::ostringstream ss;
-    compose_header(base, a_path, info, ss);
+    BOOST_LOG_SEV(lg, debug) << "Diffing: " << a_path.generic();
 
-    const auto a_lines(split_lines(a));
-    const auto b_lines(split_lines(b));
-    compose_diff(a_lines, b_lines, ss);
-
-    const auto r(ss.str());
+    std::ostringstream s;
+    compose_header(base, a_path, info, s);
+    utility::string::differ::diff(a, b, s);
+    const auto r(s.str());
     BOOST_LOG_SEV(lg, debug) << "Diff: " << r;
     return r;
 }

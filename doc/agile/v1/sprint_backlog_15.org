@@ -13,20 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-09 Tue 10:34]
-| <75>                                                   |        |      |      |       |
-| Headline                                               | Time   |      |      |     % |
-|--------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                           | *9:40* |      |      | 100.0 |
-|--------------------------------------------------------+--------+------+------+-------|
-| Stories                                                | 9:40   |      |      | 100.0 |
-| Active                                                 |        | 9:40 |      | 100.0 |
-| Edit release notes for previous sprint                 |        |      | 4:21 |  45.0 |
-| Sprint and product backlog grooming                    |        |      | 1:32 |  15.9 |
-| Create a video demo for the previous sprint's features |        |      | 1:35 |  16.4 |
-| Fix issues with emacs                                  |        |      | 2:01 |  20.9 |
-| Fix issues with nightly build                          |        |      | 0:08 |   1.4 |
-| Reactivate the boilerplate tests                       |        |      | 0:03 |   0.5 |
+#+CAPTION: Clock summary at [2019-04-09 Tue 16:18]
+| <75>                                                   |         |       |      |       |
+| Headline                                               | Time    |       |      |     % |
+|--------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                           | *11:32* |       |      | 100.0 |
+|--------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                | 11:32   |       |      | 100.0 |
+| Active                                                 |         | 11:32 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 4:21 |  37.7 |
+| Sprint and product backlog grooming                    |         |       | 1:32 |  13.3 |
+| Create a video demo for the previous sprint's features |         |       | 1:35 |  13.7 |
+| Fix issues with emacs                                  |         |       | 2:01 |  17.5 |
+| Fix issues with nightly build                          |         |       | 0:08 |   1.2 |
+| Add diffing support to string asserter                 |         |       | 0:23 |   3.3 |
+| Reactivate the boilerplate tests                       |         |       | 0:46 |   6.6 |
+| Fix snags with emacs                                   |         |       | 0:46 |   6.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -251,12 +253,52 @@ Things the marker can/should have:
   every time there is a new commit so perhaps we need to have this
   switched off by default.
 
+*** COMPLETED Add diffing support to string asserter                  :story:
+    CLOSED: [2019-04-09 Tue 16:18]
+    CLOCK: [2019-04-09 Tue 15:55]--[2019-04-09 Tue 16:18] =>  0:23
+
+It would be nice to have a unified diff coming out of the asserter. At
+present we are dumping the actual and expected and then having to
+manually diff these.
+
+Tasks:
+
+- move differ to utility.
+- add trivial diff method that does not care about paths.
+- use differ in asserter.
+
 *** STARTED Reactivate the boilerplate tests                          :story:
     :LOGBOOK:
+    CLOCK: [2019-04-09 Tue 11:42]--[2019-04-09 Tue 12:06] =>  0:24
+    CLOCK: [2019-04-09 Tue 11:06]--[2019-04-09 Tue 11:25] =>  0:19
     CLOCK: [2019-04-09 Tue 10:30]--[2019-04-09 Tue 10:33] =>  0:03
     :END:
 
 Split these out into decoration tests and boilerplate tests.
+
+*** STARTED Fix snags with emacs                                      :story:
+    :LOGBOOK:
+    CLOCK: [2019-04-09 Tue 11:26]--[2019-04-09 Tue 11:42] =>  0:16
+    CLOCK: [2019-04-09 Tue 10:34]--[2019-04-09 Tue 11:04] =>  0:30
+    :END:
+
+Keep track of time spent faffing around with emacs (troubleshooting,
+installing new modes, etc).
+
+Notes:
+
+- it seems CQuery is no [[https://github.com/cquery-project/cquery/issues/867][longer actively maintained]]. We snapshotted it
+  a while ago, but we seem to be using a lot of CPU for no reason
+  quite a few times, grinding emacs to a halt. Investigate moving to
+  clangd.
+
+*** Consider a test suite level logging flag                          :story:
+
+At present we can either enable logging for all test suites in dogen
+or disable it. This means that all tests run a lot slower. Maybe we
+should allow enabling logging at the test suite level. However, we
+only use this to troubleshoot in which case the cost of a few seconds
+is not a big problem.
 
 *** Add support for decoration configuration overrides                :story:
 
