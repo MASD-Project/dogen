@@ -3202,6 +3202,7 @@ Notes:
 Links:
 
 - [[https://github.com/abolz/CmdLine2][CmdLine2]]: alternative library to program options.
+- [[https://github.com/p-ranav/argparse][argparse]]: Argument Parser for Modern C++
 
 *** Add support for operations                                        :story:
 
