@@ -71,8 +71,7 @@ inclusion_dependencies(const coding::meta_model::element& /*e*/) const {
 
 extraction::meta_model::artefact visual_studio_project_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
-    const auto id(e.name().qualified().dot());
-    assistant a(ctx, archetype_location(), id);
+    assistant a(ctx, e, archetype_location());
     const auto& vsp(a.as<fabric::visual_studio_project>(static_id(), e));
 
 a.stream() << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << std::endl;

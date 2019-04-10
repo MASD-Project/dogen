@@ -54,20 +54,10 @@ const std::string attribute_with_no_simple_name(
 
 namespace masd::dogen::generation::csharp::formatters {
 
-std::string
-assistant::get_qualified_name(const coding::meta_model::name& n) const {
-    return n.qualified().dot();
-}
-
-std::string
-assistant::get_qualified_name(const coding::meta_model::name_tree& nt) const {
-    return nt.qualified().dot();
-}
-
 assistant::
-assistant(const context& ctx, const annotations::archetype_location& al,
-    const std::string& id) :
-    element_id_(id), context_(ctx),
+assistant(const context& ctx, const coding::meta_model::element& e,
+    const annotations::archetype_location& al) :
+    element_id_(e.name().qualified().dot()), element_(e), context_(ctx),
     artefact_properties_(obtain_artefact_properties(al.archetype())),
     archetype_location_(al) {
 
@@ -76,6 +66,16 @@ assistant(const context& ctx, const annotations::archetype_location& al,
 
     generation::formatters::indent_filter::push(filtering_stream_, 4);
     filtering_stream_.push(stream_);
+}
+
+std::string
+assistant::get_qualified_name(const coding::meta_model::name& n) const {
+    return n.qualified().dot();
+}
+
+std::string
+assistant::get_qualified_name(const coding::meta_model::name_tree& nt) const {
+    return nt.qualified().dot();
 }
 
 std::string
@@ -282,7 +282,16 @@ extraction::meta_model::artefact assistant::make_artefact() const {
     extraction::meta_model::artefact r;
     r.content(stream_.str());
     r.path(artefact_properties_.file_path());
-    r.overwrite(artefact_properties_.overwrite());
+
+    const auto& ap(element_.artefact_properties());
+    const auto arch(archetype_location_.archetype());
+    const auto i(ap.find(arch));
+    if (i == ap.end()) {
+        BOOST_LOG_SEV(lg, error) << artefact_properties_missing << arch;
+        BOOST_THROW_EXCEPTION(
+            formatting_error(artefact_properties_missing + arch));
+    }
+    r.overwrite(i->second.overwrite());
 
     extraction::meta_model::operation op;
     using ot = extraction::meta_model::operation_type;

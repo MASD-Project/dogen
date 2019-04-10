@@ -46,8 +46,8 @@ namespace masd::dogen::generation::csharp::formatters {
 
 class assistant final {
 public:
-    assistant(const context& ctx, const annotations::archetype_location& al,
-        const std::string& id);
+    assistant(const context& ctx, const coding::meta_model::element& e,
+        const annotations::archetype_location& al);
 
 private:
     const formattables::artefact_properties&
@@ -148,6 +148,7 @@ private:
     std::ostringstream stream_;
     boost::iostreams::filtering_ostream filtering_stream_;
     const std::string element_id_;
+    const coding::meta_model::element& element_;
     const context& context_;
     formattables::artefact_properties artefact_properties_;
     const annotations::archetype_location archetype_location_;

@@ -72,8 +72,7 @@ inclusion_dependencies(const coding::meta_model::element& /*e*/) const {
 
 extraction::meta_model::artefact visual_studio_solution_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
-    const auto id(e.name().qualified().dot());
-    assistant a(ctx, archetype_location(), id);
+    assistant a(ctx, e, archetype_location());
     const auto& vsl(a.as<fabric::visual_studio_solution>(static_id(), e));
 a.stream() << "Microsoft Visual Studio Solution File, Format Version 12.00" << std::endl;
 a.stream() << "# Visual Studio 2012" << std::endl;

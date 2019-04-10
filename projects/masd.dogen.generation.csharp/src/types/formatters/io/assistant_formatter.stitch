@@ -18,8 +18,7 @@
 
 extraction::meta_model::artefact assistant_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
-    const auto id(e.name().qualified().dot());
-    assistant a(ctx, archetype_location(), id);
+    assistant a(ctx, e, archetype_location());
     {
         const auto sn(e.name().simple());
         const auto qn(a.get_qualified_name(e.name()));

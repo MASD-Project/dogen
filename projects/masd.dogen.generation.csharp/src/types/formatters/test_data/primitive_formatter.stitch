@@ -18,8 +18,7 @@
 
 extraction::meta_model::artefact primitive_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
-    const auto id(e.name().qualified().dot());
-    assistant a(ctx, archetype_location(), id);
+    assistant a(ctx, e, archetype_location());
     const auto& p(a.as<coding::meta_model::primitive>(static_id(), e));
     {
         const auto sn(e.name().simple());

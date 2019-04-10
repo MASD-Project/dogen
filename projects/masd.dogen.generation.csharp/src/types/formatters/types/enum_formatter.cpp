@@ -67,8 +67,7 @@ inclusion_dependencies(const coding::meta_model::element& /*e*/) const {
 
 extraction::meta_model::artefact enum_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
-    const auto id(e.name().qualified().dot());
-    assistant a(ctx, archetype_location(), id);
+    assistant a(ctx, e, archetype_location());
     const auto& ye(a.as<coding::meta_model::enumeration>(static_id(), e));
     {
         const auto sn(e.name().simple());
