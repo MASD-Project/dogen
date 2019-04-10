@@ -87,8 +87,8 @@ using masd::dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(dependencies_formatter_tests)
 
-BOOST_AUTO_TEST_CASE(usings_are_formatted_correctly) {
-    SETUP_TEST_LOG_SOURCE("usings_are_formatted_correctly");
+BOOST_AUTO_TEST_CASE(csharp_non_empty_dependencies_are_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("csharp_non_empty_dependencies_are_formatted_correctly");
 
     const std::list<std::string> deps {
         "System", "System.Linq",
@@ -100,8 +100,8 @@ BOOST_AUTO_TEST_CASE(usings_are_formatted_correctly) {
     BOOST_CHECK(asserter::assert_equals_string(e, a));
 }
 
-BOOST_AUTO_TEST_CASE(includes_are_formatted_correctly) {
-    SETUP_TEST_LOG_SOURCE("includes_are_formatted_correctly");
+BOOST_AUTO_TEST_CASE(cpp_non_empty_dependencies_are_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("cpp_non_empty_dependencies_are_formatted_correctly");
 
     const std::list<std::string> deps {
         "\"user_inc_1\"",
@@ -113,6 +113,18 @@ BOOST_AUTO_TEST_CASE(includes_are_formatted_correctly) {
     const auto& e(cpp_includes_with_top_modeline);
     const auto a(format(technical_space::cpp, deps));
     BOOST_CHECK(asserter::assert_equals_string(e, a));
+}
+
+BOOST_AUTO_TEST_CASE(empty_dependencies_produce_no_output) {
+    SETUP_TEST_LOG_SOURCE("empty_dependencies_produce_no_output");
+
+    const std::list<std::string> deps;
+    const std::string e;
+    const auto cpp_a(format(technical_space::cpp, deps));
+    BOOST_CHECK(asserter::assert_equals_string(e, cpp_a));
+
+    const auto csharp_a(format(technical_space::csharp, deps));
+    BOOST_CHECK(asserter::assert_equals_string(e, csharp_a));
 }
 
 BOOST_AUTO_TEST_SUITE_END()
