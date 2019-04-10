@@ -18,276 +18,267 @@
  * MA 02110-1301, USA.
  *
  */
-// #include <sstream>
-// #include <boost/test/unit_test.hpp>
-// #include "masd.dogen.extraction/types/indent_filter.hpp"
-// #include "masd.dogen.utility/types/test/asserter.hpp"
-// #include "masd.dogen.utility/types/test/logging.hpp"
-// #include "masd.dogen.utility/types/io/list_io.hpp"
-// #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
-// #include "masd.dogen.extraction/types/cpp/namespace_formatter.hpp"
+#include <sstream>
+#include <boost/test/unit_test.hpp>
+#include "masd.dogen.utility/types/test/asserter.hpp"
+#include "masd.dogen.utility/types/test/logging.hpp"
+#include "masd.dogen.utility/types/io/list_io.hpp"
+#include "masd.dogen.utility/types/io/unordered_map_io.hpp"
+#include "masd.dogen.generation/types/formatters/indent_filter.hpp"
+#include "masd.dogen.generation/types/formatters/namespace_formatter.hpp"
 
-// namespace {
+namespace {
 
-// const std::string test_module("masd.dogen.extraction.tests");
-// const std::string test_suite("namespace_formatter_tests");
-// const std::string empty;
+const std::string test_module("masd.dogen.generation.tests");
+const std::string test_suite("namespace_formatter_tests");
+const std::string empty;
 
-// const std::string single_end("}");
-// const std::string single_end_new_line(R"(}
-// )");
+const std::string single_end("}");
+const std::string single_end_new_line(R"(}
+)");
 
-// const std::string multiple_end("} } }");
-// const std::string multiple_end_new_line(R"(} } }
-// )");
+const std::string multiple_end("} } }");
+const std::string multiple_end_new_line(R"(} } }
+)");
 
-// const std::string single_namespace("aaa");
-// const std::list<std::string> multiple_namespaces({"aaa", "bbb", "ccc"});
+const std::string single_namespace("aaa");
+const std::list<std::string> multiple_namespaces_cpp({"aaa", "bbb", "ccc"});
 
-// const std::string
-// single_namespace_default_configuration_begin(R"(namespace aaa {
-// )");
+const std::string
+single_namespace_cpp_default_configuration_begin(R"(namespace aaa {
+)");
 
-// const std::string
-// multiple_namespaces_default_configuration_begin(R"(namespace aaa {
-// namespace bbb {
-// namespace ccc {
-// )");
+const std::string
+multiple_namespaces_cpp_default_configuration_begin(R"(namespace aaa {
+namespace bbb {
+namespace ccc {
+)");
 
-// const std::string
-// multiple_namespaces_nested_configuration_begin(R"(namespace aaa::bbb::ccc {
-// )");
+const std::string
+single_namespace_csharp_default_configuration_begin(R"(namespace aaa
+{
+)");
 
-// const std::string empty_namespace_default_configuration_begin(R"(namespace {
-// )");
+const std::string
+multiple_namespaces_csharp_default_configuration_begin(R"(namespace aaa.bbb.ccc
+{
+)");
 
-// }
+const std::string
+multiple_namespaces_cpp_nested_configuration_begin(R"(namespace aaa::bbb::ccc {
+)");
 
-// using namespace masd::dogen::utility::test;
-// using masd::dogen::utility::test::asserter;
+const std::string empty_namespace_default_configuration_begin(R"(namespace {
+)");
 
-// BOOST_AUTO_TEST_SUITE(namespace_formatter_tests)
+const auto cpp_ts(masd::dogen::coding::meta_model::technical_space::cpp);
+const auto csharp_ts(masd::dogen::coding::meta_model::technical_space::csharp);
+const std::list<std::string> empty_namespaces;
+}
 
-// BOOST_IGNORE_AUTO_TEST_CASE(single_namespace_with_default_configuration_generates_expected_cpp_namespaces) {
-//     SETUP_TEST_LOG_SOURCE("single_namespace_with_default_configuration_generates_expected_cpp_namespaces");
+using namespace masd::dogen::utility::test;
+using masd::dogen::utility::test::asserter;
+using masd::dogen::generation::formatters::namespace_formatter;
 
-//     BOOST_LOG_SEV(lg, debug) << "Input: " << single_namespace;
+BOOST_AUTO_TEST_SUITE(namespace_formatter_tests)
 
-//     std::ostringstream s;
-//     masd::dogen::extraction::cpp::namespace_formatter nsf;
-//     nsf.format_begin(s, single_namespace);
-//     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(
-//             single_namespace_default_configuration_begin, beg));
-//     s.str("");
+BOOST_AUTO_TEST_CASE(single_namespace_with_default_configuration_generates_expected_cpp_namespaces) {
+    SETUP_TEST_LOG_SOURCE("single_namespace_with_default_configuration_generates_expected_cpp_namespaces");
 
-//     nsf.format_end(s, single_namespace);
-//     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(single_end, end));
-// }
+    std::ostringstream s;
+    namespace_formatter f(s, cpp_ts, single_namespace);
+    f.format_begin();
+    const auto beg(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(
+            single_namespace_cpp_default_configuration_begin, beg));
+    s.str("");
 
-// BOOST_IGNORE_AUTO_TEST_CASE(multiple_namespaces_with_default_configuration_generates_expected_cpp_namespaces) {
-//     SETUP_TEST_LOG_SOURCE("multiple_namespaces_with_default_configuration_generates_expected_cpp_namespaces");
+    f.format_end();
+    const auto end(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(single_end, end));
+}
 
-//     BOOST_LOG_SEV(lg, debug) << "Input: " << multiple_namespaces;
+BOOST_AUTO_TEST_CASE(multiple_namespaces_with_default_configuration_generates_expected_cpp_namespaces) {
+    SETUP_TEST_LOG_SOURCE("multiple_namespaces_with_default_configuration_generates_expected_cpp_namespaces");
 
-//     std::ostringstream s;
-//     masd::dogen::extraction::cpp::namespace_formatter nsf;
-//     nsf.format_begin(s, multiple_namespaces);
-//     const auto beg(s.str());
+    std::ostringstream s;
+    namespace_formatter f(s, cpp_ts, multiple_namespaces_cpp);
+    f.format_begin();
+    const auto beg(s.str());
 
-//     BOOST_CHECK(asserter::assert_equals_string(
-//             multiple_namespaces_default_configuration_begin, beg));
-//     s.str("");
+    BOOST_CHECK(asserter::assert_equals_string(
+            multiple_namespaces_cpp_default_configuration_begin, beg));
+    s.str("");
 
-//     nsf.format_end(s, multiple_namespaces);
-//     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(multiple_end, end));
-// }
+    f.format_end();
+    const auto end(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(multiple_end, end));
+}
 
-// BOOST_IGNORE_AUTO_TEST_CASE(empy_namespace_with_default_configuration_generates_expected_cpp_namespaces) {
-//     SETUP_TEST_LOG_SOURCE("empty_namespace_with_default_configuration_generates_expected_cpp_namespaces");
+BOOST_AUTO_TEST_CASE(empy_namespace_with_default_configuration_generates_expected_cpp_namespaces) {
+    SETUP_TEST_LOG_SOURCE("empty_namespace_with_default_configuration_generates_expected_cpp_namespaces");
 
-//     std::ostringstream s;
-//     using masd::dogen::extraction::cpp::namespace_formatter;
-//     namespace_formatter nsf(true/*anonymous_namespace*/);
-//     nsf.format_begin(s, empty);
-//     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(
-//             empty_namespace_default_configuration_begin, beg));
-//     s.str("");
+    std::ostringstream s;
+    namespace_formatter f(s, cpp_ts, empty);
+    f.format_begin();
+    const auto beg(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(
+            empty_namespace_default_configuration_begin, beg));
+    s.str("");
 
-//     nsf.format_end(s, empty);
-//     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(single_end, end));
-// }
+    f.format_end();
+    const auto end(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(single_end, end));
+}
 
-// BOOST_IGNORE_AUTO_TEST_CASE(empy_namespaces_with_default_configuration_generates_expected_cpp_namespaces) {
-//     SETUP_TEST_LOG_SOURCE("empty_namespaces_with_default_configuration_generates_expected_cpp_namespaces");
+BOOST_AUTO_TEST_CASE(empy_namespaces_with_default_configuration_generates_expected_cpp_namespaces) {
+    SETUP_TEST_LOG_SOURCE("empty_namespaces_with_default_configuration_generates_expected_cpp_namespaces");
 
-//     std::ostringstream s;
-//     using masd::dogen::extraction::cpp::namespace_formatter;
-//     namespace_formatter nsf(true/*anonymous_namespace*/);
+    std::ostringstream s;
+    namespace_formatter f(s, cpp_ts, empty_namespaces);
 
-//     const std::list<std::string> empty_list;
-//     nsf.format_begin(s, empty_list);
-//     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(
-//             empty_namespace_default_configuration_begin, beg));
-//     s.str("");
+    f.format_begin();
+    const auto beg(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(
+            empty_namespace_default_configuration_begin, beg));
+    s.str("");
 
-//     nsf.format_end(s, empty);
-//     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(single_end, end));
-// }
+    f.format_end();
+    const auto end(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(single_end, end));
+}
 
-// BOOST_IGNORE_AUTO_TEST_CASE(empy_namespace_with_anonymous_namespaces_off_generates_expected_cpp_namespaces) {
-//     SETUP_TEST_LOG_SOURCE("empty_namespace_with_anonymous_namespaces_off_generates_expected_cpp_namespaces");
+BOOST_AUTO_TEST_CASE(empy_namespace_with_new_line_generates_expected_cpp_namespaces) {
+    SETUP_TEST_LOG_SOURCE("empty_namespace_with_new_line_generates_expected_cpp_namespaces");
 
-//     std::ostringstream s;
-//     using masd::dogen::extraction::cpp::namespace_formatter;
-//     namespace_formatter nsf(false/*anonymous_namespace*/);
-//     nsf.format_begin(s, empty);
-//     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(empty, beg));
-//     s.str("");
+    std::ostringstream s;
+    namespace_formatter f(s, cpp_ts, empty, true/*add_new_line*/);
+    f.format_begin();
+    const auto beg(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(
+            empty_namespace_default_configuration_begin, beg));
+    s.str("");
 
-//     nsf.format_end(s, empty);
-//     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(empty, end));
-// }
+    f.format_end();
+    const auto end(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(single_end_new_line, end));
+}
 
-// BOOST_IGNORE_AUTO_TEST_CASE(empy_namespaces_with_anonymous_namespaces_off_generates_expected_cpp_namespaces) {
-//     SETUP_TEST_LOG_SOURCE("empty_namespaces_with_anonymous_namespaces_off_generates_expected_cpp_namespaces");
+BOOST_AUTO_TEST_CASE(empy_namespaces_with_new_line_generates_expected_cpp_namespaces) {
+    SETUP_TEST_LOG_SOURCE("empty_namespaces_with_new_line_generates_expected_cpp_namespaces");
 
-//     std::ostringstream s;
-//     using masd::dogen::extraction::cpp::namespace_formatter;
-//     namespace_formatter nsf(false/*anonymous_namespace*/);
+    std::ostringstream s;
+    namespace_formatter f(s, cpp_ts, empty_namespaces, true/*add_new_line*/);
 
-//     const std::list<std::string> empty_list;
-//     nsf.format_begin(s, empty_list);
-//     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(empty, beg));
-//     s.str("");
+    f.format_begin();
+    const auto beg(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(
+            empty_namespace_default_configuration_begin, beg));
+    s.str("");
 
-//     nsf.format_end(s, empty);
-//     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(empty, end));
-// }
+    f.format_end();
+    const auto end(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(single_end_new_line, end));
+}
 
-// BOOST_IGNORE_AUTO_TEST_CASE(empy_namespace_with_new_line_generates_expected_cpp_namespaces) {
-//     SETUP_TEST_LOG_SOURCE("empty_namespace_with_new_line_generates_expected_cpp_namespaces");
+BOOST_AUTO_TEST_CASE(single_namespace_with_new_line_generates_expected_cpp_namespaces) {
+    SETUP_TEST_LOG_SOURCE("single_namespace_with_new_line_generates_expected_cpp_namespaces");
 
-//     std::ostringstream s;
-//     using masd::dogen::extraction::cpp::namespace_formatter;
-//     namespace_formatter nsf(true/*anonymous_namespace*/, true/*add_new_line*/);
-//     nsf.format_begin(s, empty);
-//     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(
-//             empty_namespace_default_configuration_begin, beg));
-//     s.str("");
+    std::ostringstream s;
+    namespace_formatter f(s, cpp_ts, single_namespace, true/*add_new_line*/);
+    f.format_begin();
+    const auto beg(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(
+            single_namespace_cpp_default_configuration_begin, beg));
+    s.str("");
 
-//     nsf.format_end(s, empty);
-//     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(single_end_new_line, end));
-// }
+    f.format_end();
+    const auto end(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(single_end_new_line, end));
+}
 
-// BOOST_IGNORE_AUTO_TEST_CASE(empy_namespaces_with_new_line_generates_expected_cpp_namespaces) {
-//     SETUP_TEST_LOG_SOURCE("empty_namespaces_with_new_line_generates_expected_cpp_namespaces");
+BOOST_AUTO_TEST_CASE(multiple_namespaces_with_new_line_generates_expected_cpp_namespaces) {
+    SETUP_TEST_LOG_SOURCE("multiple_namespaces_with_new_line_generates_expected_cpp_namespaces");
 
-//     std::ostringstream s;
-//     using masd::dogen::extraction::cpp::namespace_formatter;
-//     namespace_formatter nsf(true/*anonymous_namespace*/, true/*add_new_line*/);
+    std::ostringstream s;
+    namespace_formatter f(s, cpp_ts, multiple_namespaces_cpp,
+        true/*add_new_line*/);
+    f.format_begin();
+    const auto beg(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(
+            multiple_namespaces_cpp_default_configuration_begin, beg));
+    s.str("");
 
-//     const std::list<std::string> empty_list;
-//     nsf.format_begin(s, empty_list);
-//     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(
-//             empty_namespace_default_configuration_begin, beg));
-//     s.str("");
+    f.format_end();
+    const auto end(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(multiple_end_new_line, end));
+}
 
-//     nsf.format_end(s, empty);
-//     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(single_end_new_line, end));
-// }
+BOOST_AUTO_TEST_CASE(single_namespace_with_new_line_generates_expected_csharp_namespaces) {
+    SETUP_TEST_LOG_SOURCE("single_namespace_with_new_line_generates_expected_csharp_namespaces");
 
-// BOOST_IGNORE_AUTO_TEST_CASE(single_namespace_with_new_line_generates_expected_cpp_namespaces) {
-//     SETUP_TEST_LOG_SOURCE("single_namespace_with_new_line_generates_expected_cpp_namespaces");
+    std::ostringstream s;
+    namespace_formatter f(s, csharp_ts, single_namespace, true/*add_new_line*/);
+    f.format_begin();
+    const auto beg(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(
+            single_namespace_csharp_default_configuration_begin, beg));
+    s.str("");
 
-//     BOOST_LOG_SEV(lg, debug) << "Input: " << single_namespace;
+    f.format_end();
+    const auto end(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(single_end_new_line, end));
+}
 
-//     std::ostringstream s;
-//     using masd::dogen::extraction::cpp::namespace_formatter;
-//     namespace_formatter nsf(true/*anonymous_namespace*/, true/*add_new_line*/);
-//     nsf.format_begin(s, single_namespace);
-//     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(
-//             single_namespace_default_configuration_begin, beg));
-//     s.str("");
+BOOST_AUTO_TEST_CASE(multiple_namespaces_with_new_line_generates_expected_csharp_namespaces) {
+    SETUP_TEST_LOG_SOURCE("multiple_namespaces_with_new_line_generates_expected_csharp_namespaces");
 
-//     nsf.format_end(s, single_namespace);
-//     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(single_end_new_line, end));
-// }
+    std::ostringstream s;
+    namespace_formatter f(s, csharp_ts, multiple_namespaces_cpp,
+        true/*add_new_line*/);
+    f.format_begin();
+    const auto beg(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(
+            multiple_namespaces_csharp_default_configuration_begin, beg));
+    s.str("");
 
-// BOOST_IGNORE_AUTO_TEST_CASE(multiple_namespaces_with_new_line_generates_expected_cpp_namespaces) {
-//     SETUP_TEST_LOG_SOURCE("multiple_namespaces_with_new_line_generates_expected_cpp_namespaces");
+    f.format_end();
+    const auto end(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(single_end_new_line, end));
+}
 
-//     BOOST_LOG_SEV(lg, debug) << "Input: " << multiple_namespaces;
+BOOST_AUTO_TEST_CASE(single_namespace_with_nested_namespaces_generates_expected_cpp_namespaces) {
+    SETUP_TEST_LOG_SOURCE("single_namespace_with_nested_namespaces_generates_expected_cpp_namespaces");
 
-//     std::ostringstream s;
-//     using masd::dogen::extraction::cpp::namespace_formatter;
+    std::ostringstream s;
+    namespace_formatter f(s, cpp_ts, single_namespace, false/*add_new_line*/,
+        true/*use_nesting*/);
+    f.format_begin();
+    const auto beg(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(
+            single_namespace_cpp_default_configuration_begin, beg));
+    s.str("");
 
-//     namespace_formatter nsf(true/*anonymous_namespace*/, true/*add_new_line*/);
-//     nsf.format_begin(s, multiple_namespaces);
-//     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(
-//             multiple_namespaces_default_configuration_begin, beg));
-//     s.str("");
+    f.format_end();
+    const auto end(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(single_end, end));
+}
 
-//     nsf.format_end(s, multiple_namespaces);
-//     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(multiple_end_new_line, end));
-// }
+BOOST_AUTO_TEST_CASE(multiple_namespaces_with_nested_namespaces_generates_expected_cpp_namespaces) {
+    SETUP_TEST_LOG_SOURCE("multiple_namespaces_with_nested_namespaces_generates_expected_cpp_namespaces");
 
-// BOOST_IGNORE_AUTO_TEST_CASE(single_namespace_with_nested_namespaces_generates_expected_cpp_namespaces) {
-//     SETUP_TEST_LOG_SOURCE("single_namespace_with_nested_namespaces_generates_expected_cpp_namespaces");
+    std::ostringstream s;
+    namespace_formatter f(s, cpp_ts, multiple_namespaces_cpp, false/*add_new_line*/,
+        true/*use_nesting*/);
+    f.format_begin();
+    const auto beg(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(
+            multiple_namespaces_cpp_nested_configuration_begin, beg));
+    s.str("");
 
-//     BOOST_LOG_SEV(lg, debug) << "Input: " << single_namespace;
+    f.format_end();
+    const auto end(s.str());
+    BOOST_CHECK(asserter::assert_equals_string(single_end, end));
+}
 
-//     std::ostringstream s;
-//     using masd::dogen::extraction::cpp::namespace_formatter;
-//     namespace_formatter nsf(true/*anonymous_namespace*/, false/*add_new_line*/,
-//         true/*nested_namespaces*/);
-//     nsf.format_begin(s, single_namespace);
-//     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(
-//             single_namespace_default_configuration_begin, beg));
-//     s.str("");
-
-//     nsf.format_end(s, single_namespace);
-//     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(single_end, end));
-// }
-
-// BOOST_IGNORE_AUTO_TEST_CASE(multiple_namespaces_with_nested_namespaces_generates_expected_cpp_namespaces) {
-//     SETUP_TEST_LOG_SOURCE("multiple_namespaces_with_nested_namespaces_generates_expected_cpp_namespaces");
-
-//     BOOST_LOG_SEV(lg, debug) << "Input: " << multiple_namespaces;
-
-//     std::ostringstream s;
-//     using masd::dogen::extraction::cpp::namespace_formatter;
-//     namespace_formatter nsf(true/*anonymous_namespace*/, false/*add_new_line*/,
-//         true/*nested_namespaces*/);
-//     nsf.format_begin(s, multiple_namespaces);
-//     const auto beg(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(
-//             multiple_namespaces_nested_configuration_begin, beg));
-//     s.str("");
-
-//     nsf.format_end(s, multiple_namespaces);
-//     const auto end(s.str());
-//     BOOST_CHECK(asserter::assert_equals_string(single_end, end));
-// }
-
-// BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE_END()
