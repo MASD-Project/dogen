@@ -38,7 +38,7 @@ std::vector<std::string> split_lines(const std::string& s) {
     return r;
 }
 
-void compose_diff(const std::vector<std::string>& a,
+bool compose_diff(const std::vector<std::string>& a,
     const std::vector<std::string>& b, std::ostream& s) {
 
     dtl::Diff<std::string> diff(a, b);
@@ -46,6 +46,8 @@ void compose_diff(const std::vector<std::string>& a,
     diff.compose();
     diff.composeUnifiedHunks();
     diff.printUnifiedFormat(s);
+
+    return diff.getEditDistance() != 0;
 }
 
 }
@@ -65,13 +67,13 @@ std::string differ::diff(const std::string& a, const std::string& b) {
     return r;
 }
 
-void differ::diff(const std::string& a, const std::string& b, std::ostream& s) {
+bool differ::diff(const std::string& a, const std::string& b, std::ostream& s) {
     BOOST_LOG_SEV(lg, trace) << "Content of a: " << std::endl << a;
     BOOST_LOG_SEV(lg, trace) << "Content of b: " << std::endl << b;
 
     const auto a_lines(split_lines(a));
     const auto b_lines(split_lines(b));
-    compose_diff(a_lines, b_lines, s);
+    return compose_diff(a_lines, b_lines, s);
 }
 
 }

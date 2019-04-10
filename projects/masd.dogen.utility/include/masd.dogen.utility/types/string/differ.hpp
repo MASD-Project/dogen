@@ -35,8 +35,18 @@ namespace masd::dogen::utility::string {
  */
 class differ final {
 public:
+    /**
+     * @brief Returns diff as a string.
+     */
     static std::string diff(const std::string& a, const std::string& b);
-    static void diff(const std::string& a, const std::string& b, std::ostream& s);
+
+    /**
+     * @brief Dumps diff into a stream.
+     *
+     * @return True if there are any differences, false otherwise.
+     */
+    static bool
+    diff(const std::string& a, const std::string& b, std::ostream& s);
 };
 
 }
