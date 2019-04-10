@@ -30,6 +30,9 @@ auto lg(logger_factory("extraction.transforms.unified_differ"));
 
 const std::string empty;
 
+/**
+ * @brief Creates the unified diff header.
+ */
 void compose_header(const boost::filesystem::path& base,
     const boost::filesystem::path& a_path, const std::string&  info,
     std::ostream& s) {

@@ -94,31 +94,6 @@ const std::string expected_cpp_guards_with_bottom_modeline(
 #endif
 )");
 
-const std::string expected_cpp_includes_with_top_modeline(
-    R"(/* -*- a_field: a_value -*-
- *
- * this is a marker
- *
- * a_holder
- *
- * licence text
- *
- */
-#ifndef A_PATH_HPP
-#define A_PATH_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <win32/system_inc_1>
-#include <unix/system_inc_2>
-#include "user_inc_1"
-#include "user_inc_2"
-
-#endif
-)");
-
 const std::string expected_cpp_disabled_preamble(
     R"(#ifndef A_PATH_HPP
 #define A_PATH_HPP
@@ -201,17 +176,5 @@ BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
 //     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 // }
 
-// BOOST_IGNORE_AUTO_TEST_CASE(includes_are_formatted_correctly) {
-//     SETUP_TEST_LOG_SOURCE("includes_are_formatted_correctly");
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
-
-//     const decoration_properties dc(factory_.make_decoration_properties());
-//     const auto inc(factory_.make_includes());
-//     const auto hg(factory_.make_header_guard());
-//     const auto r(format(dc, inc, hg));
-
-//     BOOST_CHECK(asserter::assert_equals_string(includes_with_top_modeline, r));
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
-// }
 
 BOOST_AUTO_TEST_SUITE_END()

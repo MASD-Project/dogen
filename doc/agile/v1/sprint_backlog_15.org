@@ -13,23 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-10 Wed 12:02]
+#+CAPTION: Clock summary at [2019-04-10 Wed 14:41]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *19:14* |       |      | 100.0 |
+| *Total time*                                           | *20:56* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 19:14   |       |      | 100.0 |
-| Active                                                 |         | 19:14 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 4:21 |  22.6 |
-| Sprint and product backlog grooming                    |         |       | 1:39 |   8.6 |
-| Create a video demo for the previous sprint's features |         |       | 1:35 |   8.2 |
-| Fix issues with emacs                                  |         |       | 2:01 |  10.5 |
-| Fix issues with nightly build                          |         |       | 0:08 |   0.7 |
-| Add diffing support to string asserter                 |         |       | 1:00 |   5.2 |
-| C# generation is borked                                |         |       | 4:12 |  21.8 |
-| Reactivate the boilerplate tests                       |         |       | 3:32 |  18.4 |
-| Fix snags with emacs                                   |         |       | 0:46 |   4.0 |
+| Stories                                                | 20:56   |       |      | 100.0 |
+| Active                                                 |         | 20:56 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 4:21 |  20.8 |
+| Sprint and product backlog grooming                    |         |       | 1:42 |   8.1 |
+| Create a video demo for the previous sprint's features |         |       | 1:35 |   7.6 |
+| Fix issues with emacs                                  |         |       | 2:01 |   9.6 |
+| Fix issues with nightly build                          |         |       | 0:08 |   0.6 |
+| Add diffing support to string asserter                 |         |       | 1:00 |   4.8 |
+| C# generation is borked                                |         |       | 4:12 |  20.1 |
+| Fix snags with emacs                                   |         |       | 1:55 |   9.2 |
+| Reactivate the boilerplate tests                       |         |       | 4:02 |  19.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -190,7 +190,7 @@ Happy Modeling!
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
-    CLOCK: [2019-04-10 Wed 11:55]--[2019-04-10 Wed 12:02] =>  0:07
+    CLOCK: [2019-04-10 Wed 11:55]--[2019-04-10 Wed 12:05] =>  0:10
     CLOCK: [2019-04-09 Tue 10:13]--[2019-04-09 Tue 10:29] =>  0:16
     CLOCK: [2019-04-09 Tue 09:55]--[2019-04-09 Tue 10:12] =>  0:17
     CLOCK: [2019-04-09 Tue 09:35]--[2019-04-09 Tue 09:45] =>  0:10
@@ -283,20 +283,10 @@ We do not seem to be detecting diffs in C#. The problem is that we are
 not using the element artefact properties to determine the overwrite
 flag. We neeed to copy the logic from c++ assistant.
 
-*** STARTED Reactivate the boilerplate tests                          :story:
-    :LOGBOOK:
-    CLOCK: [2019-04-09 Tue 19:00]--[2019-04-09 Tue 19:45] =>  0:45
-    CLOCK: [2019-04-09 Tue 17:48]--[2019-04-09 Tue 18:59] =>  1:11
-    CLOCK: [2019-04-09 Tue 16:57]--[2019-04-09 Tue 17:47] =>  0:50
-    CLOCK: [2019-04-09 Tue 11:42]--[2019-04-09 Tue 12:06] =>  0:24
-    CLOCK: [2019-04-09 Tue 11:06]--[2019-04-09 Tue 11:25] =>  0:19
-    CLOCK: [2019-04-09 Tue 10:30]--[2019-04-09 Tue 10:33] =>  0:03
-    :END:
-
-Split these out into decoration tests and boilerplate tests.
-
 *** STARTED Fix snags with emacs                                      :story:
     :LOGBOOK:
+    CLOCK: [2019-04-10 Wed 13:27]--[2019-04-10 Wed 14:11] =>  0:44
+    CLOCK: [2019-04-10 Wed 13:01]--[2019-04-10 Wed 13:26] =>  0:25
     CLOCK: [2019-04-09 Tue 11:26]--[2019-04-09 Tue 11:42] =>  0:16
     CLOCK: [2019-04-09 Tue 10:34]--[2019-04-09 Tue 11:04] =>  0:30
     :END:
@@ -310,6 +300,20 @@ Notes:
   a while ago, but we seem to be using a lot of CPU for no reason
   quite a few times, grinding emacs to a halt. Investigate moving to
   clangd.
+- experiments with minimap.
+
+*** STARTED Reactivate the boilerplate tests                          :story:
+    :LOGBOOK:
+    CLOCK: [2019-04-10 Wed 14:11]--[2019-04-10 Wed 14:41] =>  0:30
+    CLOCK: [2019-04-09 Tue 19:00]--[2019-04-09 Tue 19:45] =>  0:45
+    CLOCK: [2019-04-09 Tue 17:48]--[2019-04-09 Tue 18:59] =>  1:11
+    CLOCK: [2019-04-09 Tue 16:57]--[2019-04-09 Tue 17:47] =>  0:50
+    CLOCK: [2019-04-09 Tue 11:42]--[2019-04-09 Tue 12:06] =>  0:24
+    CLOCK: [2019-04-09 Tue 11:06]--[2019-04-09 Tue 11:25] =>  0:19
+    CLOCK: [2019-04-09 Tue 10:30]--[2019-04-09 Tue 10:33] =>  0:03
+    :END:
+
+Split these out into decoration tests and boilerplate tests.
 
 *** Location of =--byproduct-directory= not respected                 :story:
 
