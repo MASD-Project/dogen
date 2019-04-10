@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/optional_io.hpp"
 #include "masd.dogen.utility/types/io/unordered_set_io.hpp"
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
@@ -42,6 +43,16 @@ const std::string duplicate_archetype_name("Duplicate archetype name: ");
 const std::string duplicate_element_archetype("Duplicate element archetype: ");
 const std::string meta_name_not_found("Meta-name not found: ");
 
+template <typename T>
+struct scope_exit {
+    scope_exit(T &&t) : t_{std::move(t)} {}
+    ~scope_exit() { t_(); }
+    T t_;
+};
+
+template <typename T>
+scope_exit<T> make_scope_exit(T &&t) {
+    return scope_exit<T> { std::move(t)}; }
 }
 
 namespace masd::dogen::generation::transforms {
@@ -71,8 +82,9 @@ is_element_disabled(const coding::meta_model::element& e) {
      * documentation.
      */
     if (m.documentation().empty()) {
-        BOOST_LOG_SEV(lg, debug) << "Module does not have documentation. "
-                                 << "Disabling it. Id: " << m.name().qualified().dot();
+        BOOST_LOG_SEV(lg, trace) << "Module does not have documentation. "
+                                 << "Disabling it. Id: "
+                                 << m.name().qualified().dot();
         return true;
     }
     return false;
@@ -105,7 +117,7 @@ void enablement_transform::compute_enablement_for_artefact_properties(
      */
     const auto j(lalp.find(archetype));
     if (j == lalp.end()) {
-        BOOST_LOG_SEV(lg, debug) << "Ignoring formatter: " << archetype;
+        BOOST_LOG_SEV(lg, trace) << "Ignoring formatter: " << archetype;
         return;
     }
     const auto& lc(j->second);
@@ -146,6 +158,24 @@ void enablement_transform::compute_enablement_for_artefact_properties(
      * just so we don't have to worry about handling the ""continue""
      * statements.
      */
+    auto lambda(
+        [&](auto& optional_flag) {
+            std::ostringstream s;
+            if (optional_flag)
+                s << *optional_flag;
+            else
+                s << "<empty>";
+            return s.str();
+        });
+    BOOST_LOG_SEV(lg, trace) << "Overwrite flags. "
+                             << "Local artchetype: "
+                             << lambda(lc.archetype_overwrite())
+                             << " Local facet: "
+                             << lambda(lc.facet_overwrite())
+                             << " Global archetype: "
+                             << lambda(gc.archetype_overwrite())
+                             << " Global facet: "
+                             << gc.facet_overwrite();
 
     if (lc.archetype_overwrite())
         ap.overwrite(*lc.archetype_overwrite());
@@ -157,10 +187,21 @@ void enablement_transform::compute_enablement_for_artefact_properties(
         ap.overwrite(gc.facet_overwrite());
 
     /*
+     * Ensure we log the enablement details with the early returns.
+     */
+    auto log_scope_exit(make_scope_exit(
+        [&]() mutable {
+            BOOST_LOG_SEV(lg, trace) << "Enablement for: " << archetype
+                                     << " value: " << ap.enabled()
+                                     << " overwrite: " << ap.overwrite();
+        }));
+
+    /*
      * If the entire backend has been disabled globally, the formatter
      * will be disabled too.
      */
     if (!gc.backend_enabled()) {
+        BOOST_LOG_SEV(lg, trace) << "Backend is disabled.";
         ap.enabled(false);
         return;
     }
@@ -205,9 +246,6 @@ void enablement_transform::compute_enablement_for_artefact_properties(
         ap.enabled(false);
     else
         ap.enabled(gc.facet_enabled() && gc.archetype_enabled());
-
-    BOOST_LOG_SEV(lg, debug) << "Enablement for: " << archetype
-                             << " value: " << ap.enabled();
 }
 
 void enablement_transform::compute_enablement_for_element(
@@ -226,11 +264,13 @@ void enablement_transform::compute_enablement_for_element(
      * On some very special cases we may disable an element based on
      * its state. If so, there is nothing to do.
      */
-    if (is_element_disabled(e))
+    if (is_element_disabled(e)) {
+        BOOST_LOG_SEV(lg, trace) << "Element is disabled due to its state.";
         return;
+    }
 
     const auto mt(e.meta_name().qualified().dot());
-    BOOST_LOG_SEV(lg, debug) << "Meta-type: " << mt;
+    BOOST_LOG_SEV(lg, trace) << "Meta-type: " << mt;
 
     /*
      * Not all elements have formatting. For example, object templates
@@ -239,7 +279,7 @@ void enablement_transform::compute_enablement_for_element(
      * so, skip the element.
      */
     if (e.archetype_location_properties().empty()) {
-        BOOST_LOG_SEV(lg, debug) << "Element has no formatting, "
+        BOOST_LOG_SEV(lg, trace) << "Element has no formatting, "
                                  << " so nothing enable.";
         return;
     }
@@ -268,17 +308,17 @@ void enablement_transform::compute_enablement_for_element(
     auto& eafe(enabled_archetype_for_element);
     for (auto& pair : e.artefact_properties()) {
         const auto arch(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << arch;
+        BOOST_LOG_SEV(lg, trace) << "Processing archetype: " << arch;
 
         auto& art_props(pair.second);
         compute_enablement_for_artefact_properties(galp, lalp, arch, art_props);
 
         if (!art_props.enabled()) {
-            BOOST_LOG_SEV(lg, debug) << "Archetype not enabled.";
+            BOOST_LOG_SEV(lg, trace) << "Archetype not enabled.";
             continue;
         }
 
-        BOOST_LOG_SEV(lg, debug) << "Archetype is enabled.";
+        BOOST_LOG_SEV(lg, trace) << "Archetype is enabled.";
 
         /*
          * If we are enabled, we need to update the enablement
