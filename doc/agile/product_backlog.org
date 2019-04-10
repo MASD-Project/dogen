@@ -3540,11 +3540,6 @@ this is not always the case because we've proven that enabling and
 disabling a facet correctly results in the deletion of files. It must
 be something to do with how local enablement is handled.
 
-*** Location of =--byproduct-directory= not respected                 :story:
-
-It seems that at present we are not honouring the directory supplied
-by the user.
-
 *** Postfix and directory fields in annotations look weird            :story:
 
 Why are we manually instantiating postfix and directory for each
