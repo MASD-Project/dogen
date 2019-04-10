@@ -133,7 +133,8 @@ bool check_for_differences(const boost::filesystem::path& output_dir,
             a.operation().type() != operation_type::remove)
             continue;
 
-        if (diffs_found == 0) {
+        const bool is_first_diff(diffs_found == 0);
+        if (is_first_diff) {
             std::cout << "Differences found. Outputting first five."
                       << std::endl;
         }
@@ -147,9 +148,14 @@ bool check_for_differences(const boost::filesystem::path& output_dir,
         if (a.operation().type() == operation_type::remove)
             std::cout << "Unexpected file (remove): " << gs << std::endl;
         else if (a.operation().type() == operation_type::write) {
-            if (a.operation().reason() == operation_reason::newly_generated)
+            const auto rsn(a.operation().reason());
+            if (rsn == operation_reason::newly_generated)
                 std::cout << "New file: " << gs << std::endl;
-            else
+            else if (rsn == operation_reason::force_write &&
+                a.unified_diff().empty()) {
+                std::cout << "Unexpected force write (no diffs): "
+                          << gs << std::endl;
+            } else
                 print_lines(a.unified_diff(), 20, std::cout);
         } else if (a.operation().type() == operation_type::ignore) {
             if (a.operation().reason() == operation_reason::ignore_unexpected)
