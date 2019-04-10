@@ -26,7 +26,7 @@
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.generation/types/formatters/indent_filter.hpp"
-#include "masd.dogen.generation/test/mock_boilerplate_properties_factory.hpp"
+#include "masd.dogen.generation/types/formatters/boilerplate_properties.hpp"
 #include "masd.dogen.generation/io/formatters/boilerplate_properties_io.hpp"
 #include "masd.dogen.generation/types/formatters/boilerplate_formatter.hpp"
 
@@ -36,145 +36,240 @@ const std::string test_module("masd.dogen.generation.tests");
 const std::string test_suite("boilerplate_formatter_tests");
 const std::string empty;
 
-// const bool generate_premable(true);
-
-const std::string expected_cpp_modeline_top(
-    R"(/* -*- a_field: a_value -*-
- *
- * this is a marker
- *
- * a_holder
- *
- * licence text
- *
- */
+const std::string preamble(
+    R"(This is a preamble
+line 1
+line 2
+last line
 )");
 
-const std::string expected_cpp_guards_with_top_modeline(
-    R"(/* -*- a_field: a_value -*-
- *
- * this is a marker
- *
- * a_holder
- *
- * licence text
- *
- */
-#ifndef A_PATH_HPP
-#define A_PATH_HPP
+const std::string postamble(
+    R"(now for the postamble
+at the end line 1
+at the end line 2
+at the end last line
+)");
+
+const std::list<std::string> dependencies = {
+    "first dependency",
+    "second dependency"
+};
+
+const std::string expected_cpp_all_properties(
+    R"(This is a preamble
+line 1
+line 2
+last line
+#ifndef this_is_a_guard
+#define this_is_a_guard
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include first dependency
+#include second dependency
+
+now for the postamble
+at the end line 1
+at the end line 2
+at the end last line
 #endif
 )");
 
-const std::string expected_cpp_guards_with_bottom_modeline(
-    R"(/*
- * this is a marker
- *
- * a_holder
- *
- * licence text
- *
- */
-#ifndef A_PATH_HPP
-#define A_PATH_HPP
+const std::string expected_csharp_all_properties(
+    R"(This is a preamble
+line 1
+line 2
+last line
+using first dependency
+using second dependency
+
+now for the postamble
+at the end line 1
+at the end line 2
+at the end last line
+)");
+
+const std::string expected_cpp_no_guards(
+    R"(This is a preamble
+line 1
+line 2
+last line
+#include first dependency
+#include second dependency
+
+now for the postamble
+at the end line 1
+at the end line 2
+at the end last line
+)");
+
+const std::string expected_cpp_no_dependencies(
+    R"(This is a preamble
+line 1
+line 2
+last line
+#ifndef this_is_a_guard
+#define this_is_a_guard
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-/*
- * Local variables:
- * a_field: a_value
- * End:
- */
+now for the postamble
+at the end line 1
+at the end line 2
+at the end last line
 #endif
 )");
 
-const std::string expected_cpp_disabled_preamble(
-    R"(#ifndef A_PATH_HPP
-#define A_PATH_HPP
+const std::string expected_csharp_no_dependencies(
+    R"(This is a preamble
+line 1
+line 2
+last line
+now for the postamble
+at the end line 1
+at the end line 2
+at the end last line
+)");
+
+const std::string expected_cpp_no_preamble(
+    R"(#ifndef this_is_a_guard
+#define this_is_a_guard
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <win32/system_inc_1>
-#include <unix/system_inc_2>
-#include "user_inc_1"
-#include "user_inc_2"
+#include first dependency
+#include second dependency
 
 #endif
 )");
 
+const std::string expected_csharp_no_preamble(
+    R"(using first dependency
+using second dependency
+)");
+
+using masd::dogen::coding::meta_model::technical_space;
 using masd::dogen::generation::formatters::boilerplate_properties;
 
-std::string format(const boilerplate_properties& bp) {
+boilerplate_properties make_all_properties(const technical_space ts) {
+    boilerplate_properties r;
 
+    r.generate_preamble(true);
+    r.generate_header_guards(true);
+
+    r.preamble(preamble);
+    r.postamble(postamble);
+    r.technical_space(ts);
+    r.dependencies(dependencies);
+    r.header_guard("this_is_a_guard");
+
+    return r;
+}
+
+std::string format(const boilerplate_properties& bp) {
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
     masd::dogen::generation::formatters::indent_filter::push(fo, 4);
     fo.push(s);
 
-    masd::dogen::generation::formatters::boilerplate_formatter f(s, bp);
+    masd::dogen::generation::formatters::boilerplate_formatter f(fo, bp);
     f.format_begin();
     f.format_end();
     return s.str();
 }
-
 }
 
 using namespace masd::dogen::generation::formatters;
 using namespace masd::dogen::utility::test;
 using masd::dogen::utility::test::asserter;
-using factory =
-    masd::dogen::generation::test::mock_boilerplate_properties_factory;
 
 BOOST_AUTO_TEST_SUITE(boilerplate_formatter_tests)
 
-BOOST_AUTO_TEST_CASE(cpp_top_modeline_is_formatted_correctly) {
-    SETUP_TEST_LOG_SOURCE("cpp_top_modeline_is_formatted_correctly");
+BOOST_AUTO_TEST_CASE(cpp_all_properties_are_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("cpp_all_properties_are_formatted_correctly");
 
-    BOOST_LOG_SEV(lg, debug) << "Logging to disable modeline at the top.";
-    const auto bp(factory::make_cpp_top_modeline_single_line());
+    const auto bp(make_all_properties(technical_space::cpp));
+    const auto a(format(bp));
 
-    BOOST_LOG_SEV(lg, debug) << "Input" << bp;
-    const auto r(format(bp));
-
-    BOOST_CHECK(asserter::assert_equals_string(expected_cpp_modeline_top, r));
-    BOOST_LOG_SEV(lg, debug) << "Logging to disable modeline at the bottom";
+    const auto& e(expected_cpp_all_properties);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
 }
 
-// BOOST_IGNORE_AUTO_TEST_CASE(header_guards_with_top_modeline_are_formatted_correctly) {
-//     SETUP_TEST_LOG_SOURCE("header_guards_with_top_modeline_are_formatted_correctly");
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
+BOOST_AUTO_TEST_CASE(csharp_all_properties_are_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("csharp_all_properties_are_formatted_correctly");
 
-//     const decoration_properties dc(factory_.make_decoration_properties());
-//     const auto inc(factory_.make_includes(true/*is_empty*/));
-//     const auto hg(factory_.make_header_guard());
-//     const auto r(format(dc, inc, hg));
+    const auto bp(make_all_properties(technical_space::csharp));
+    const auto a(format(bp));
 
-//     BOOST_CHECK(r == guards_with_top_modeline);
-//     BOOST_CHECK(asserter::assert_equals_string(guards_with_top_modeline, r));
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
-// }
+    const auto &e(expected_csharp_all_properties);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+}
 
-// BOOST_IGNORE_AUTO_TEST_CASE(header_guards_with_bottom_modeline_are_formatted_correctly) {
-//     SETUP_TEST_LOG_SOURCE("header_guards_with_bottom_modeline_are_formatted_correctly");
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
+BOOST_AUTO_TEST_CASE(cpp_no_guards_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("cpp_no_guards_is_formatted_correctly");
 
-//     const decoration_properties
-//         dc(factory_.make_decoration_properties(modeline_locations::bottom));
-//     const auto inc(factory_.make_includes(true/*is_empty*/));
-//     const auto hg(factory_.make_header_guard());
-//     const auto r(format(dc, inc, hg));
+    auto bp(make_all_properties(technical_space::cpp));
+    bp.generate_header_guards(true);
+    bp.header_guard("");
 
-//     BOOST_CHECK(asserter::assert_equals_string(guards_with_bottom_modeline, r));
-//     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
-// }
+    const auto a(format(bp));
 
+    const auto &e(expected_cpp_no_guards);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+}
+
+BOOST_AUTO_TEST_CASE(cpp_no_dependencies_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("cpp_no_dependencies_is_formatted_correctly");
+
+    auto bp(make_all_properties(technical_space::cpp));
+    bp.dependencies(std::list<std::string>());
+
+    const auto a(format(bp));
+
+    const auto &e(expected_cpp_no_dependencies);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+}
+
+BOOST_AUTO_TEST_CASE(csharp_no_dependencies_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("csharp_no_dependencies_is_formatted_correctly");
+
+    auto bp(make_all_properties(technical_space::csharp));
+    bp.dependencies(std::list<std::string>());
+
+    const auto a(format(bp));
+
+    const auto &e(expected_csharp_no_dependencies);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+}
+
+BOOST_AUTO_TEST_CASE(cpp_disabled_preamble_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("cpp_disabled_preamble_is_formatted_correctly");
+
+    auto bp(make_all_properties(technical_space::cpp));
+    bp.generate_preamble(false);
+
+    const auto a(format(bp));
+
+    const auto &e(expected_cpp_no_preamble);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+}
+
+BOOST_AUTO_TEST_CASE(csharp_disabled_preamble_is_formatted_correctly) {
+    SETUP_TEST_LOG_SOURCE("csharp_disabled_preamble_is_formatted_correctly");
+
+    auto bp(make_all_properties(technical_space::csharp));
+    bp.generate_preamble(false);
+
+    const auto a(format(bp));
+
+    const auto &e(expected_csharp_no_preamble);
+    BOOST_CHECK(asserter::assert_equals_string(e, a));
+}
 
 BOOST_AUTO_TEST_SUITE_END()

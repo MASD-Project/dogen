@@ -18,12 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-
 #include <ostream>
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.generation/io/formatters/boilerplate_properties_io.hpp"
 #include "masd.dogen.generation/types/formatters/dependencies_formatter.hpp"
 #include "masd.dogen.generation/types/formatters/header_guard_formatter.hpp"
 #include "masd.dogen.generation/types/formatters/boilerplate_formatter.hpp"
 #include "masd.dogen.generation/types/formatters/boilerplate_formatter.hpp"
+
+namespace {
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory("generation.formatters.boilerplate_formatter"));
+
+}
 
 namespace masd::dogen::generation::formatters {
 
@@ -31,20 +39,31 @@ boilerplate_formatter::
 boilerplate_formatter(std::ostream& s, const boilerplate_properties& bp)
     : stream_(s), boilerplate_properties_(bp),
       supports_header_guards_(
-          bp.technical_space() == coding::meta_model::technical_space::cpp) {}
+          bp.technical_space() == coding::meta_model::technical_space::cpp) {
+
+    BOOST_LOG_SEV(lg, trace) << "Boilerplate properties: " << bp;
+}
 
 void boilerplate_formatter::format_preamble() const {
-    const auto& bp(boilerplate_properties_);
-    if (!bp.generate_preamble())
+    BOOST_LOG_SEV(lg, trace) << "Formatting preamble.";
+
+    const auto &bp(boilerplate_properties_);
+    if (!bp.generate_preamble()) {
+        BOOST_LOG_SEV(lg, trace) << "Preamble is disabled.";
         return;
+    }
 
     stream_ << bp.preamble();
 }
 
 void boilerplate_formatter::format_postamble() const {
-    const auto& bp(boilerplate_properties_);
-    if (!bp.generate_preamble())
+    BOOST_LOG_SEV(lg, trace) << "Formatting postamble.";
+
+    const auto &bp(boilerplate_properties_);
+    if (!bp.generate_preamble()) {
+        BOOST_LOG_SEV(lg, trace) << "Postamble is disabled.";
         return;
+    }
 
     stream_ << bp.postamble();
 }
@@ -79,14 +98,19 @@ void boilerplate_formatter::format_dependencies() const {
 }
 
 void boilerplate_formatter::format_begin() const {
+    BOOST_LOG_SEV(lg, trace) << "Beginning boilerplate.";
+
     format_preamble();
     format_guards_begin();
     format_dependencies();
 }
 
 void boilerplate_formatter::format_end() const {
+    BOOST_LOG_SEV(lg, trace) << "Ending boilerplate.";
+
     format_postamble();
     format_guards_end();
+    stream_.flush();
 }
 
 }
