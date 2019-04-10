@@ -42,6 +42,7 @@ const std::string empty;
 const std::string reason_new("Reason: New generated file.");
 const std::string reason_changed("Reason: Changed generated file.");
 const std::string reason_unexpected("Reason: unexpected file.");
+const std::string reason_force_write("Reason: Force write requested.");
 const std::string reason_other("Reason: Other.");
 
 }
@@ -65,15 +66,17 @@ apply(const context& ctx, meta_model::model& m) {
     }
 
     bool found_diffs(false);
+    const auto md(m.managed_directories().front());
     for (auto& a : m.artefacts()) {
-        if (a.path().empty()) {
+        const auto& p(a.path());
+        if (p.empty()) {
             // FIXME: throw
             BOOST_LOG_SEV(lg, error) << "Empty file name supplied.";
             continue;
         }
 
         BOOST_LOG_SEV(lg, trace) << "Processing arefact: "
-                                 << a.path().filename();
+                                 << p.filename();
         BOOST_LOG_SEV(lg, trace) << "Arefact operation: " << a.operation();
 
         /*
@@ -96,7 +99,7 @@ apply(const context& ctx, meta_model::model& m) {
         const auto reason(a.operation().reason());
         using masd::dogen::utility::filesystem::read_file_content;
         const std::string c(reason == operation_reason::newly_generated ?
-            empty : read_file_content(a.path()));
+            empty : read_file_content(p));
 
         /*
          * Diff the content of the file against the artefact,
@@ -111,13 +114,15 @@ apply(const context& ctx, meta_model::model& m) {
                     return reason_changed;
                 case operation_reason::unexpected:
                     return reason_unexpected;
+                case operation_reason::force_write:
+                    return reason_force_write;
                 default:
                     return reason_other;
                 }
             }());
 
-        const auto ud(helpers::unified_differ::diff(c, a.content(),
-                m.managed_directories().front(), a.path(), info));
+        using helpers::unified_differ;
+        const auto ud(unified_differ::diff(c, a.content(), md, p, info));
         a.unified_diff(ud);
     }
 
