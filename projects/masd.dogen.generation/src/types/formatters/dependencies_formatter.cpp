@@ -33,7 +33,7 @@ using namespace masd::dogen::utility::log;
 static logger
 lg(logger_factory("generation.formatters.dependencies_formatter"));
 
-const std::string using_keyword("using");
+const std::string using_keyword("using ");
 const std::string include_keyword("#include ");
 
 const std::string unsupported_technical_space(
@@ -53,7 +53,7 @@ void dependencies_formatter::format_csharp_usings(std::ostream& s,
     const std::list<std::string>& dependencies) const {
 
     for (const auto& d : dependencies)
-        s << using_keyword <<  d<<  std::endl;
+        s << using_keyword << d << std::endl;
 }
 
 void dependencies_formatter::format(std::ostream& s,

@@ -101,8 +101,9 @@ void namespace_formatter::format_csharp_begin() {
         BOOST_THROW_EXCEPTION(formatting_error(empty_namespace + s));
     }
 
-    const auto joined(boost::algorithm::join(namespaces_, colon));
-    stream_ << using_keyword << joined << " {" << std::endl;
+    const auto joined(boost::algorithm::join(namespaces_, dot));
+    stream_ << namespace_keyword << joined << std::endl
+            << "{" << std::endl;
 }
 
 void namespace_formatter::format_cpp_end() {
@@ -139,7 +140,7 @@ void namespace_formatter::format_csharp_end() {
         BOOST_THROW_EXCEPTION(formatting_error(empty_namespace + s));
     }
 
-    stream_ << "}"; // no space and no std::endl by design
+    stream_ << "}" << std::endl;
 }
 
 void namespace_formatter::format_begin() {
