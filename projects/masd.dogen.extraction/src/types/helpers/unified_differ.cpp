@@ -28,6 +28,8 @@ namespace {
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory("extraction.transforms.unified_differ"));
 
+const std::string empty;
+
 void compose_header(const boost::filesystem::path& base,
     const boost::filesystem::path& a_path, const std::string&  info,
     std::ostream& s) {
@@ -52,11 +54,18 @@ std::string unified_differ::diff(const std::string& a, const std::string& b,
     BOOST_LOG_SEV(lg, debug) << "Diffing: " << a_path.generic();
 
     std::ostringstream s;
-    compose_header(base, a_path, info, s);
-    utility::string::differ::diff(a, b, s);
-    const auto r(s.str());
-    BOOST_LOG_SEV(lg, debug) << "Diff: " << r;
-    return r;
+    const auto has_diffs(utility::string::differ::diff(a, b, s));
+
+    if (has_diffs) {
+        compose_header(base, a_path, info, s);
+
+        const auto r(s.str());
+        BOOST_LOG_SEV(lg, debug) << "Diff: " << r;
+        return r;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "No diffs found.";
+    return empty;
 }
 
 }
