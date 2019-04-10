@@ -16,6 +16,19 @@ such as profiles, licences etc.
 
 Stories that we haven't quite classified yet, but are needed.
 
+*** Add additional checks in generation formatters                    :story:
+
+We are not validating very much in the formatters. Checks we could be
+doing for boilerplate formatter:
+
+- anonymous namespaces outside of c++ are invalid.
+- ensure TS is supported.
+- include guards outside of c++ are invalid.
+- include guard must obey a regex.
+- c++ dependencies are expected to be enclosed in quotes or angle
+  brackets.
+- c# dependencies are expected to be valid identifiers.
+
 *** Handling of =invalid= in enumeration is incorrect                 :story:
 
 At present we are injecting the invalid enumerator transparently via
