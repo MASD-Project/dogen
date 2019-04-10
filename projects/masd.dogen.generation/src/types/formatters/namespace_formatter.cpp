@@ -23,6 +23,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.generation/types/formatters/formatting_error.hpp"
 #include "masd.dogen.generation/types/formatters/namespace_formatter.hpp"
@@ -53,7 +54,14 @@ namespace_formatter::namespace_formatter(std::ostream& s,
     const bool add_new_line, const bool use_nesting)
     : stream_(s), technical_space_(ts), namespaces_(ns),
       add_new_line_(add_new_line),
-      use_nesting_(use_nesting) {}
+      use_nesting_(use_nesting) {
+
+    BOOST_LOG_SEV(lg, trace) << "Dumping initial configuration."
+                             << " technical space: " << ts
+                             << " namespaces: " << ns
+                             << " add_new_line: " << add_new_line
+                             << " use_nesting: " << use_nesting;
+}
 
 namespace_formatter::namespace_formatter(std::ostream& s,
     const coding::meta_model::technical_space ts,
@@ -144,6 +152,7 @@ void namespace_formatter::format_csharp_end() {
 }
 
 void namespace_formatter::format_begin() {
+    BOOST_LOG_SEV(lg, trace) << "Beginning namespace.";
     using coding::meta_model::technical_space;
     switch(technical_space_) {
     case technical_space::cpp:
@@ -160,6 +169,7 @@ void namespace_formatter::format_begin() {
 }
 
 void namespace_formatter::format_end() {
+    BOOST_LOG_SEV(lg, trace) << "Ending namespace.";
     using coding::meta_model::technical_space;
     switch(technical_space_) {
     case technical_space::cpp:
