@@ -346,4 +346,28 @@ adapter::to_licence(const coding::meta_model::location& l,
     return r;
 }
 
+boost::shared_ptr<coding::meta_model::configuration>
+adapter::to_configuration(const coding::meta_model::location& l,
+    const stereotypes_conversion_result& scr,
+    const injection::meta_model::element& ie) const {
+    auto r(boost::make_shared<coding::meta_model::configuration>());
+    populate_element(l, scr, ie, *r);
+
+    for (const auto& attr : ie.attributes()) {
+        const auto n(attr.name());
+        ensure_not_empty(n);
+
+        coding::meta_model::configuration_entry ce;
+        ce.annotation(annotation_expander_.expand(attr.annotation()));
+        ce.name(n);
+
+        const auto v(attr.value());
+        if (!v.empty())
+            ce.value().push_back(v);
+
+        r->entries().push_back(ce);
+    }
+    return r;
+}
+
 }

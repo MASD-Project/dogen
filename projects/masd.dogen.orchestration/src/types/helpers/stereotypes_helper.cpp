@@ -26,6 +26,7 @@
 #include "masd.dogen.utility/types/string/splitter.hpp"
 #include "masd.dogen.utility/types/exception/invalid_enum_value.hpp"
 #include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
+#include "masd.dogen.coding/types/meta_model/static_stereotypes.hpp"
 #include "masd.dogen.orchestration/types/helpers/stereotypes_helper.hpp"
 
 namespace {
@@ -54,6 +55,7 @@ const std::string stereotype_modeline("masd::decoration::modeline");
 const std::string stereotype_generation_marker(
     "masd::decoration::generation_marker");
 const std::string stereotype_licence("masd::decoration::licence");
+const std::string stereotype_configuration("masd::configuration");
 const std::string unsupported_stereotype("Invalid or unsupported stereotype: ");
 
 }
@@ -97,6 +99,8 @@ static_stereotypes stereotypes_helper::from_string(const std::string& s) const {
         return static_stereotypes::generation_marker;
     else if (s == stereotype_licence)
         return static_stereotypes::licence;
+    else if (s == stereotype_configuration)
+        return static_stereotypes::configuration;
 
     BOOST_LOG_SEV(lg, error) << "Could not convert stereotype.";
 
@@ -151,6 +155,7 @@ to_string(const static_stereotypes ss) const {
     case static_stereotypes::generation_marker:
         return stereotype_generation_marker;
     case static_stereotypes::licence: return stereotype_licence;
+    case static_stereotypes::configuration: return stereotype_configuration;
 
     default: {
         const std::string s(boost::lexical_cast<std::string>(ss));
@@ -173,7 +178,8 @@ is_element_type(const static_stereotypes ss) const {
         ss == static_stereotypes::modeline_group ||
         ss == static_stereotypes::modeline ||
         ss == static_stereotypes::generation_marker ||
-        ss == static_stereotypes::licence;
+        ss == static_stereotypes::licence ||
+        ss == static_stereotypes::configuration;
 }
 
 std::list<static_stereotypes> stereotypes_helper::extract_element_types(

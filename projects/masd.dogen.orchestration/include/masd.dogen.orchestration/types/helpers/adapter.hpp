@@ -48,6 +48,7 @@
 #include "masd.dogen.coding/types/meta_model/modeline.hpp"
 #include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
 #include "masd.dogen.coding/types/meta_model/licence.hpp"
+#include "masd.dogen.coding/types/meta_model/configuration.hpp"
 #include "masd.dogen.orchestration/types/helpers/stereotypes_conversion_result.hpp"
 
 namespace masd::dogen::orchestration::helpers {
@@ -217,6 +218,15 @@ public:
      */
     boost::shared_ptr<coding::meta_model::licence>
     to_licence(const coding::meta_model::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::meta_model::element& ie) const;
+
+    /**
+     * @brief Converts an injection element with a stereotype of
+     * coding::configuration to a configuration.
+     */
+    boost::shared_ptr<coding::meta_model::configuration>
+    to_configuration(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 

@@ -243,6 +243,9 @@ process_element(const helpers::adapter& ad,
     case static_stereotypes::licence:
         insert(ad.to_licence(l, scr, e), em.licences());
         break;
+    case static_stereotypes::configuration:
+        insert(ad.to_configuration(l, scr, e), em.configurations());
+        break;
     default: {
         const auto s(boost::lexical_cast<std::string>(et));
         BOOST_LOG_SEV(lg, error) << invalid_element_type << s;;
