@@ -13,25 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-11 Thu 10:16]
+#+CAPTION: Clock summary at [2019-04-11 Thu 16:52]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *27:04* |       |      | 100.0 |
+| *Total time*                                           | *32:39* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 27:04   |       |      | 100.0 |
-| Active                                                 |         | 27:04 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 4:21 |  16.1 |
-| Sprint and product backlog grooming                    |         |       | 1:54 |   7.0 |
-| Create a video demo for the previous sprint's features |         |       | 1:35 |   5.8 |
-| Fix issues with emacs                                  |         |       | 2:01 |   7.5 |
-| Fix issues with nightly build                          |         |       | 0:08 |   0.5 |
-| Add diffing support to string asserter                 |         |       | 1:00 |   3.7 |
-| C# generation is borked                                |         |       | 4:12 |  15.5 |
-| Reactivate the boilerplate tests                       |         |       | 5:58 |  22.0 |
-| Update to clang8                                       |         |       | 0:11 |   0.7 |
-| Fix snags with emacs                                   |         |       | 5:27 |  20.1 |
-| Profiles as meta-model elements                        |         |       | 0:17 |   1.0 |
+| Stories                                                | 32:39   |       |      | 100.0 |
+| Active                                                 |         | 32:39 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 4:21 |  13.3 |
+| Sprint and product backlog grooming                    |         |       | 1:54 |   5.8 |
+| Create a video demo for the previous sprint's features |         |       | 1:35 |   4.8 |
+| Fix issues with emacs                                  |         |       | 2:01 |   6.2 |
+| Fix issues with nightly build                          |         |       | 0:08 |   0.4 |
+| Add diffing support to string asserter                 |         |       | 1:00 |   3.1 |
+| C# generation is borked                                |         |       | 4:12 |  12.9 |
+| Reactivate the boilerplate tests                       |         |       | 5:58 |  18.3 |
+| Update to clang8                                       |         |       | 0:11 |   0.6 |
+| Fix snags with emacs                                   |         |       | 5:27 |  16.7 |
+| Profiles as meta-model elements                        |         |       | 5:52 |  18.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -336,7 +336,8 @@ Notes:
 
 *** STARTED Profiles as meta-model elements                           :story:
     :LOGBOOK:
-    CLOCK: [2019-04-11 Thu 09:51]
+    CLOCK: [2019-04-11 Thu 14:04]--[2019-04-11 Thu 16:52] =>  2:48
+    CLOCK: [2019-04-11 Thu 09:51]--[2019-04-11 Thu 12:38] =>  2:47
     CLOCK: [2019-04-11 Thu 09:21]--[2019-04-11 Thu 09:38] =>  0:17
     :END:
 
@@ -574,6 +575,18 @@ Links:
 
 - https://cruise.eecs.uottawa.ca/umple/Traits.html
 
+Notes:
+
+- on a first pass, add the dot names (dogen.enable_all_facets). Remove
+  this as soon as we get things to work. We should only rely on model
+  names (e.g. masd::enable_all_facets). We should also remove labels.
+- move generation of profile repository outside of annotation
+  expander.
+- remove uses of annotations expander from stitch, if any are still
+  left.
+- move annotation expansion from adaptor into its own transform. It is
+  done against the model set.
+
 *** Location of =--byproduct-directory= not respected                 :story:
 
 It seems that at present we are not honouring the directory supplied
@@ -699,5 +712,8 @@ Actually the right thing may even be to just remove all of the profile
 stereotypes during annotations processing. However, we should wait
 until we complete the exomodel work since that will remove scribble
 groups, etc. Its all in the annotations transform.
+
+Once we have the profiles in the model set it should be easy to supply
+them to the annotations transform.
 
 ** Deprecated
