@@ -13,25 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-11 Thu 17:49]
+#+CAPTION: Clock summary at [2019-04-11 Thu 18:34]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *33:35* |       |      | 100.0 |
+| *Total time*                                           | *34:15* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 33:35   |       |      | 100.0 |
-| Active                                                 |         | 33:35 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 4:21 |  13.0 |
-| Sprint and product backlog grooming                    |         |       | 1:54 |   5.7 |
-| Create a video demo for the previous sprint's features |         |       | 1:35 |   4.7 |
-| Fix issues with emacs                                  |         |       | 2:01 |   6.0 |
+| Stories                                                | 34:15   |       |      | 100.0 |
+| Active                                                 |         | 34:15 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 4:21 |  12.7 |
+| Sprint and product backlog grooming                    |         |       | 1:54 |   5.5 |
+| Create a video demo for the previous sprint's features |         |       | 1:35 |   4.6 |
+| Fix issues with emacs                                  |         |       | 2:01 |   5.9 |
 | Fix issues with nightly build                          |         |       | 0:08 |   0.4 |
-| Add diffing support to string asserter                 |         |       | 1:00 |   3.0 |
-| C# generation is borked                                |         |       | 4:12 |  12.5 |
-| Reactivate the boilerplate tests                       |         |       | 5:58 |  17.8 |
+| Add diffing support to string asserter                 |         |       | 1:00 |   2.9 |
+| C# generation is borked                                |         |       | 4:12 |  12.3 |
+| Reactivate the boilerplate tests                       |         |       | 5:58 |  17.4 |
 | Update to clang8                                       |         |       | 0:11 |   0.5 |
-| Fix snags with emacs                                   |         |       | 5:27 |  16.2 |
-| Profiles as meta-model elements                        |         |       | 6:48 |  20.2 |
+| Fix snags with emacs                                   |         |       | 5:27 |  15.9 |
+| Profiles as meta-model elements                        |         |       | 7:28 |  21.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -336,6 +336,8 @@ Notes:
 
 *** STARTED Profiles as meta-model elements                           :story:
     :LOGBOOK:
+    CLOCK: [2019-04-11 Thu 18:15]--[2019-04-11 Thu 18:34] =>  0:19
+    CLOCK: [2019-04-11 Thu 17:50]--[2019-04-11 Thu 18:11] =>  0:21
     CLOCK: [2019-04-11 Thu 16:53]--[2019-04-11 Thu 17:49] =>  0:56
     CLOCK: [2019-04-11 Thu 14:04]--[2019-04-11 Thu 16:52] =>  2:48
     CLOCK: [2019-04-11 Thu 09:51]--[2019-04-11 Thu 12:38] =>  2:47

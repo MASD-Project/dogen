@@ -54,9 +54,6 @@ const std::string unsupported_value("Unsupported attribute value: ");
 
 namespace masd::dogen::orchestration::helpers {
 
-adapter::adapter(const annotations::annotation_expander& e)
-    : annotation_expander_(e) {}
-
 void adapter::ensure_not_empty(const std::string& s) const {
     if (s.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_string;
@@ -110,7 +107,7 @@ adapter::to_attribute(const injection::meta_model::attribute& ia) const {
     r.name().simple(ia.name());
     r.unparsed_type(ia.type());
     r.documentation(ia.documentation());
-    r.annotation(annotation_expander_.expand(ia.annotation()));
+    r.annotation(ia.annotation());
 
     return r;
 }
@@ -128,7 +125,7 @@ adapter::to_enumerator(const injection::meta_model::attribute& ia) const {
     coding::meta_model::enumerator r;
     r.name().simple(ia.name());
     r.documentation(ia.documentation());
-    r.annotation(annotation_expander_.expand(ia.annotation()));
+    r.annotation(ia.annotation());
 
     return r;
 }
@@ -144,7 +141,7 @@ void adapter::populate_element(const coding::meta_model::location& l,
 
     const auto& ds(scr.dynamic_stereotypes());
     e.dynamic_stereotypes(ds);
-    e.annotation(annotation_expander_.expand(ds, ie.annotation()));
+    e.annotation(ie.annotation());
     e.in_global_module(
         l.external_modules().empty() && l.model_modules().empty());
 }
@@ -358,7 +355,7 @@ adapter::to_configuration(const coding::meta_model::location& l,
         ensure_not_empty(n);
 
         coding::meta_model::configuration_entry ce;
-        ce.annotation(annotation_expander_.expand(attr.annotation()));
+        ce.annotation(attr.annotation());
         ce.name(n);
 
         const auto v(attr.value());

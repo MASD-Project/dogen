@@ -29,7 +29,6 @@
 #include <string>
 #include <iosfwd>
 #include <boost/shared_ptr.hpp>
-#include "masd.dogen.annotations/types/annotation_expander.hpp"
 #include "masd.dogen.injection/types/meta_model/attribute.hpp"
 #include "masd.dogen.injection/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/location.hpp"
@@ -57,9 +56,6 @@ namespace masd::dogen::orchestration::helpers {
  * @brief Adapts types from the injection model into the coding model.
  */
 class adapter final {
-public:
-    explicit adapter(const annotations::annotation_expander& e);
-
 private:
     /**
      * @brief Ensure the string is not empty.
@@ -229,9 +225,6 @@ public:
     to_configuration(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
-
-private:
-    const annotations::annotation_expander& annotation_expander_;
 };
 
 }

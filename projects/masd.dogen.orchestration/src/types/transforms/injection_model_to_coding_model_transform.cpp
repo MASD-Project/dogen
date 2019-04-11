@@ -263,10 +263,7 @@ apply(const context& ctx, const injection::meta_model::model& m) {
     const auto scr(h.from_string(m.stereotypes()));
     const auto& f(*ctx.coding_context().annotation_factory());
     const auto scope(annotations::scope_types::root_module);
-    const auto ra1(f.make(m.tagged_values(), scope));
-
-    const auto& e(*ctx.annotation_expander());
-    const auto ra(e.expand(scr.dynamic_stereotypes(), ra1));
+    const auto ra(f.make(m.tagged_values(), scope));
 
     const auto& atrp(*ctx.coding_context().type_repository());
     const auto tg(make_type_group(atrp));
@@ -281,7 +278,7 @@ apply(const context& ctx, const injection::meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Computed model name: " << r.name();
 
     r.input_technical_space(to_technical_space(m.input_technical_space()));
-    const helpers::adapter ad(*ctx.annotation_expander());
+    const helpers::adapter ad;
     for (const auto& e : m.elements()) {
         const auto l(e.in_global_module() ? empty_location : model_location);
         process_element(ad, l, e, r);
@@ -290,6 +287,7 @@ apply(const context& ctx, const injection::meta_model::model& m) {
     r.root_module(boost::make_shared<coding::meta_model::module>());
     r.root_module()->name(r.name());
     r.root_module()->annotation(ra);
+    r.root_module()->dynamic_stereotypes(scr.dynamic_stereotypes());
     r.root_module()->documentation(m.documentation());
     insert(r.root_module(), r.modules());
 

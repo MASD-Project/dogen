@@ -32,6 +32,7 @@
 #include "masd.dogen.coding/types/transforms/primitives_transform.hpp"
 #include "masd.dogen.coding/types/transforms/containment_transform.hpp"
 #include "masd.dogen.coding/types/transforms/extraction_properties_transform.hpp"
+#include "masd.dogen.coding/types/transforms/annotation_expansion_transform.hpp"
 #include "masd.dogen.coding/types/transforms/pre_assembly_chain.hpp"
 
 namespace {
@@ -88,7 +89,13 @@ void pre_assembly_chain::apply(const context& ctx, meta_model::model_set& ms) {
         transform_id, ms.target().name().qualified().dot(), *ctx.tracer(), ms);
 
     /*
-     * Apply all of the pre-processing transforms to the target.
+     * Apply first all of the model set level transforms.
+     */
+    annotation_expansion_transform::apply(ctx, ms);
+
+    /*
+     * Then, apply all of the pre-processing transforms to the
+     * target.
      */
     apply(ctx, ms.target());
 
