@@ -30,8 +30,6 @@ for layer in dia.active_display().diagram.data.layers:
             stereotype = object.properties["stereotype"].value
             if "masd::decoration::modeline_group" in stereotype:
                 object.properties["fill_colour"] = "#FFEFFE"
-            elif "masd::decoration::licence_text_group" in stereotype:
-                object.properties["fill_colour"] = "#AEAEE1"
             else:
                 object.properties["fill_colour"] = "#F5F5F5"
             continue;
@@ -65,10 +63,12 @@ for layer in dia.active_display().diagram.data.layers:
         #
         elif "masd::decoration::modeline" in stereotype:
             object.properties["fill_colour"] = "#DDB7B7"
-        elif "masd::decoration::licence_text" in stereotype:
+        elif "masd::decoration::licence" in stereotype:
             object.properties["fill_colour"] = "#DDB7DD"
         elif "masd::decoration::generation_marker" in stereotype:
             object.properties["fill_colour"] = "#ACACBB"
+        elif "masd::configuration" in stereotype:
+            object.properties["fill_colour"] = "#EDE6F2"
 
         #
         # Theme: Core meta-elements
