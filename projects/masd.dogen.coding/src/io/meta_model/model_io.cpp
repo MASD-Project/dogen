@@ -32,6 +32,7 @@
 #include "masd.dogen.coding/io/meta_model/primitive_io.hpp"
 #include "masd.dogen.coding/io/meta_model/enumeration_io.hpp"
 #include "masd.dogen.coding/io/meta_model/origin_types_io.hpp"
+#include "masd.dogen.coding/io/meta_model/configuration_io.hpp"
 #include "masd.dogen.coding/io/meta_model/modeline_group_io.hpp"
 #include "masd.dogen.coding/io/meta_model/object_template_io.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
@@ -487,6 +488,40 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::coding::meta_model::configuration>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::configuration> >& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::technical_space>& v) {
@@ -538,6 +573,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"modelines\": " << v.modelines() << ", "
       << "\"licences\": " << v.licences() << ", "
       << "\"generation_markers\": " << v.generation_markers() << ", "
+      << "\"configurations\": " << v.configurations() << ", "
       << "\"root_module\": " << v.root_module() << ", "
       << "\"input_technical_space\": " << v.input_technical_space() << ", "
       << "\"output_technical_spaces\": " << v.output_technical_spaces() << ", "

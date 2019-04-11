@@ -651,6 +651,10 @@
           "type": "std::unordered_map<std::string, boost::shared_ptr<generation_marker>>"
         },
         {
+          "name": "configurations",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<configuration>>"
+        },
+        {
           "name": "root_module",
           "type": "boost::shared_ptr<module>"
         },

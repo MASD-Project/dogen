@@ -28,6 +28,7 @@
 #include "masd.dogen.coding/types/meta_model/exception.hpp"
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
 #include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
@@ -140,6 +141,15 @@ const boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker>& rhs
 
 }
 
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::configuration>& lhs,
+const boost::shared_ptr<masd::dogen::coding::meta_model::configuration>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
 namespace masd::dogen::coding::meta_model {
 
 model::model()
@@ -164,6 +174,7 @@ model::model(model&& rhs)
       modelines_(std::move(rhs.modelines_)),
       licences_(std::move(rhs.licences_)),
       generation_markers_(std::move(rhs.generation_markers_)),
+      configurations_(std::move(rhs.configurations_)),
       root_module_(std::move(rhs.root_module_)),
       input_technical_space_(std::move(rhs.input_technical_space_)),
       output_technical_spaces_(std::move(rhs.output_technical_spaces_)),
@@ -188,6 +199,7 @@ model::model(
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::modeline> >& modelines,
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >& licences,
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> >& generation_markers,
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::configuration> >& configurations,
     const boost::shared_ptr<masd::dogen::coding::meta_model::module>& root_module,
     const masd::dogen::coding::meta_model::technical_space input_technical_space,
     const std::list<masd::dogen::coding::meta_model::technical_space>& output_technical_spaces,
@@ -210,6 +222,7 @@ model::model(
       modelines_(modelines),
       licences_(licences),
       generation_markers_(generation_markers),
+      configurations_(configurations),
       root_module_(root_module),
       input_technical_space_(input_technical_space),
       output_technical_spaces_(output_technical_spaces),
@@ -235,6 +248,7 @@ void model::swap(model& other) noexcept {
     swap(modelines_, other.modelines_);
     swap(licences_, other.licences_);
     swap(generation_markers_, other.generation_markers_);
+    swap(configurations_, other.configurations_);
     swap(root_module_, other.root_module_);
     swap(input_technical_space_, other.input_technical_space_);
     swap(output_technical_spaces_, other.output_technical_spaces_);
@@ -260,6 +274,7 @@ bool model::operator==(const model& rhs) const {
         modelines_ == rhs.modelines_ &&
         licences_ == rhs.licences_ &&
         generation_markers_ == rhs.generation_markers_ &&
+        configurations_ == rhs.configurations_ &&
         root_module_ == rhs.root_module_ &&
         input_technical_space_ == rhs.input_technical_space_ &&
         output_technical_spaces_ == rhs.output_technical_spaces_ &&
@@ -535,6 +550,22 @@ void model::generation_markers(const std::unordered_map<std::string, boost::shar
 
 void model::generation_markers(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> >&& v) {
     generation_markers_ = std::move(v);
+}
+
+const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::configuration> >& model::configurations() const {
+    return configurations_;
+}
+
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::configuration> >& model::configurations() {
+    return configurations_;
+}
+
+void model::configurations(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::configuration> >& v) {
+    configurations_ = v;
+}
+
+void model::configurations(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::configuration> >&& v) {
+    configurations_ = std::move(v);
 }
 
 const boost::shared_ptr<masd::dogen::coding::meta_model::module>& model::root_module() const {

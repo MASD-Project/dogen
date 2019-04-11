@@ -4528,7 +4528,7 @@ meta-types (object templates) and non-types (modules and backend specific entiti
         <dia:point val="-155,-49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-155.05,-49.05;-119.8,-30.95"/>
+        <dia:rectangle val="-155.05,-49.05;-119.8,-30.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-155,-49"/>
@@ -4537,7 +4537,7 @@ meta-types (object templates) and non-types (modules and backend specific entiti
         <dia:real val="35.149999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="18.000000000000004"/>
+        <dia:real val="18.800000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#model#</dia:string>
@@ -4935,6 +4935,29 @@ Leaves are types concrete types which have a parent.#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;generation_marker&gt;&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#configurations#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;configuration&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
