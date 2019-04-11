@@ -13,23 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-10 Wed 17:03]
+#+CAPTION: Clock summary at [2019-04-11 Thu 10:16]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *23:04* |       |      | 100.0 |
+| *Total time*                                           | *27:04* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 23:04   |       |      | 100.0 |
-| Active                                                 |         | 23:04 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 4:21 |  18.9 |
-| Sprint and product backlog grooming                    |         |       | 1:54 |   8.2 |
-| Create a video demo for the previous sprint's features |         |       | 1:35 |   6.9 |
-| Fix issues with emacs                                  |         |       | 2:01 |   8.7 |
-| Fix issues with nightly build                          |         |       | 0:08 |   0.6 |
-| Add diffing support to string asserter                 |         |       | 1:00 |   4.3 |
-| C# generation is borked                                |         |       | 4:12 |  18.2 |
-| Reactivate the boilerplate tests                       |         |       | 5:58 |  25.9 |
-| Fix snags with emacs                                   |         |       | 1:55 |   8.3 |
+| Stories                                                | 27:04   |       |      | 100.0 |
+| Active                                                 |         | 27:04 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 4:21 |  16.1 |
+| Sprint and product backlog grooming                    |         |       | 1:54 |   7.0 |
+| Create a video demo for the previous sprint's features |         |       | 1:35 |   5.8 |
+| Fix issues with emacs                                  |         |       | 2:01 |   7.5 |
+| Fix issues with nightly build                          |         |       | 0:08 |   0.5 |
+| Add diffing support to string asserter                 |         |       | 1:00 |   3.7 |
+| C# generation is borked                                |         |       | 4:12 |  15.5 |
+| Reactivate the boilerplate tests                       |         |       | 5:58 |  22.0 |
+| Update to clang8                                       |         |       | 0:11 |   0.7 |
+| Fix snags with emacs                                   |         |       | 5:27 |  20.1 |
+| Profiles as meta-model elements                        |         |       | 0:17 |   1.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -300,8 +302,21 @@ flag. We neeed to copy the logic from c++ assistant.
 
 Split these out into decoration tests and boilerplate tests.
 
+*** COMPLETED Update to clang8                                        :story:
+    CLOSED: [2019-04-11 Thu 10:16]
+    :LOGBOOK:
+    CLOCK: [2019-04-11 Thu 09:39]--[2019-04-11 Thu 09:50] =>  0:11
+    :END:
+
+We seem to have a lot of spurious errors with clangd-7. Try with
+clangd-8. However, in order to do this we need to get the code to
+compile with clang 8.
+
 *** STARTED Fix snags with emacs                                      :story:
     :LOGBOOK:
+    CLOCK: [2019-04-11 Thu 09:16]--[2019-04-11 Thu 09:20] =>  0:04
+    CLOCK: [2019-04-11 Thu 08:02]--[2019-04-11 Thu 09:15] =>  1:13
+    CLOCK: [2019-04-10 Wed 17:50]--[2019-04-10 Wed 20:05] =>  2:15
     CLOCK: [2019-04-10 Wed 13:27]--[2019-04-10 Wed 14:11] =>  0:44
     CLOCK: [2019-04-10 Wed 13:01]--[2019-04-10 Wed 13:26] =>  0:25
     CLOCK: [2019-04-09 Tue 11:26]--[2019-04-09 Tue 11:42] =>  0:16
@@ -319,133 +334,11 @@ Notes:
   clangd.
 - experiments with minimap.
 
-*** Location of =--byproduct-directory= not respected                 :story:
-
-It seems that at present we are not honouring the directory supplied
-by the user. This seems to only happen on convert mode.
-
-*** Consider a test suite level logging flag                          :story:
-
-At present we can either enable logging for all test suites in dogen
-or disable it. This means that all tests run a lot slower. Maybe we
-should allow enabling logging at the test suite level. However, we
-only use this to troubleshoot in which case the cost of a few seconds
-is not a big problem.
-
-*** Add support for decoration configuration overrides                :story:
-
-At present we have hard-coded the decoration configuration to be read
-from the root object only. In an ideal world, we should be able to
-override some of these such as the copyrights. It may not make sense
-to be able to override them all though.
-
-This functionality has been implemented but requires tests in the test
-model.
-
-*** Update copyright notices                                          :story:
-
-We need to update all notices to reflect personal ownership until DDC
-was formed, and then ownership by DDC.
-
-- first update to personal ownership has been done, but we need to
-  test if multiple copyright entries is properly supported.
-
-*** Copyright holders is scalar when it should be an array            :story:
-
-At present its only possible to specify a single copyright holder. It
-should be handled the same was as odb parameters, but because that is
-done with a massive hack, we are not going to extend the hack to
-copyright holders.
-
-This functionality has been implemented but requires tests in the test
-model.
-
-*** Duplicate elements in model                                       :story:
-
-Whilst running queries on postgres against a model dumped in tracing,
-we found evidence of duplicate elements. Query:
-
-: select jsonb_pretty(
-:           jsonb_array_elements(
-:           jsonb_array_elements(data)->'elements')->'data'->'__parent_0__'->'name'->'qualified'->'dot'
-:       )
-: from traces;
-
-Snippet of results after =sort | uniq -c=
-
-:      1  "masd.dogen.generation.csharp"
-:      1  "masd.dogen.generation.csharp.all"
-:      1  "masd.dogen.generation.csharp.CMakeLists"
-:      1  "masd.dogen.generation.csharp.entry_point"
-:      1  "masd.dogen.generation.csharp.fabric"
-:      2  "masd.dogen.generation.csharp.fabric.assembly_info"
-:      2  "masd.dogen.generation.csharp.fabric.assembly_info_factory"
-:      2  "masd.dogen.generation.csharp.fabric.assistant"
-:      2  "masd.dogen.generation.csharp.fabric.assistant_factory"
-:      2  "masd.dogen.generation.csharp.fabric.decoration_expander"
-:      2  "masd.dogen.generation.csharp.fabric.dynamic_transform"
-:      2  "masd.dogen.generation.csharp.fabric.element_visitor"
-:      2  "masd.dogen.generation.csharp.fabric.initializer"
-:      2  "masd.dogen.generation.csharp.fabric.injector"
-:      2  "masd.dogen.generation.csharp.fabric.meta_name_factory"
-:      2  "masd.dogen.generation.csharp.fabric.traits"
-:      2  "masd.dogen.generation.csharp.fabric.visual_studio_configuration"
-:      2  "masd.dogen.generation.csharp.fabric.visual_studio_factory"
-
-We need to investigate the generation pipeline to understand where
-this is coming from.
-
-*** Consider renaming orchestration to "engine"                       :story:
-
-Orchestration is a bit of a vague name. It is really the code
-generation engine of dogen. Its still very vague but slightly less so.
-
-*** Make extraction model name a qualified name                       :story:
-
-At present we are setting up the extraction model name from the simple
-name of the model. It should really be the qualified name. Hopefully
-this will only affect tracing and diffing.
-
-*** Move wale templates from the data directory                       :story:
-
-At present we have wale templates under the data directory. This is
-not the right location. These are part of a model just like stitch
-templates. There is one slight wrinkle though: if a user attempts to
-create a dogen formatter (say if plugins were supported), then we need
-access to the template from the debian package. So whilst they should
-live in the appropriate model (e.g. =generation.cpp=,
-=generation.csharp=), they also need to be packaged and shipped.
-
-Interestingly, so will all dogen models which are defining annotations
-and profiles. We need to rethink the data directory, separating system
-models from dogen models somehow. In effect, the data directory will
-be, in the future, the system models directory.
-
-So, in conclusion, two use cases for wale templates:
-
-- regular model defines a wale template and makes use of it. Template
-  should be with the model, just like stitch templates. However,
-  unlike stitch, there should be a directory for them.
-- user model wants to define a new formatter. It will make use of
-  dogen profiles and wale templates. These must be in the future data
-  directory somehow.
-
-*** Exclude profiles from stereotypes processing                      :story:
-
-At present we are manually excluding profiles from the stereotypes
-transform. This was just a quick hack to get us going. We need to
-replace this with a call to annotations to get a list of profile names
-and exclude those.
-
-We should also rename =is_stereotype_handled_externally= to something
-more like "is profile" or "matches profile name".
-
-Actually the right thing may even be to just remove all of the profile
-stereotypes during annotations processing. However, we should wait
-until we complete the exomodel work since that will remove scribble
-groups, etc. Its all in the annotations transform.
-
-*** Profiles as meta-model elements                                   :story:
+*** STARTED Profiles as meta-model elements                           :story:
+    :LOGBOOK:
+    CLOCK: [2019-04-11 Thu 09:51]
+    CLOCK: [2019-04-11 Thu 09:21]--[2019-04-11 Thu 09:38] =>  0:17
+    :END:
 
 Initially we separated the notion of annotations and profiles from the
 metamodel. This is a mistake. Profiles are metamodel
@@ -459,7 +352,7 @@ machinery) and then associate them with elements.  This means we could
 provide out of the box configurations such as =Serialisable= which
 come from dogen profiles. We could also have =JsonSerialisable=. Users
 can use these or override them in their own profiles. However,
-crucial, modeling elements should not reference facets directly
+crucially, modeling elements should not reference facets directly
 because this makes the metamodel very messy.
 
 In this view of the world, the global profile could then have
@@ -475,9 +368,12 @@ we also want traits to cover facets, not just concepts.
 
 Terminology clarification:
 
-- traits: configuration of facets.
+- traits: configuration of facets. [Actually these are now understood
+  to be configurations. Traits will be the object templates, though we
+  need to re-read the umple paper.]
 - profile: mapping of traits to metamodel elements, with
-  defaults. E.g. =object -> serialisable, hashable=
+  defaults. E.g. =object -> serialisable, hashable=. []Actually these
+  are just the stereotypes.]
 
 Actually there is a problem: traits as used in MOP are close to our
 templates. We should rename templates to traits to make it
@@ -678,5 +574,130 @@ Links:
 
 - https://cruise.eecs.uottawa.ca/umple/Traits.html
 
+*** Location of =--byproduct-directory= not respected                 :story:
+
+It seems that at present we are not honouring the directory supplied
+by the user. This seems to only happen on convert mode.
+
+*** Consider a test suite level logging flag                          :story:
+
+At present we can either enable logging for all test suites in dogen
+or disable it. This means that all tests run a lot slower. Maybe we
+should allow enabling logging at the test suite level. However, we
+only use this to troubleshoot in which case the cost of a few seconds
+is not a big problem.
+
+*** Add support for decoration configuration overrides                :story:
+
+At present we have hard-coded the decoration configuration to be read
+from the root object only. In an ideal world, we should be able to
+override some of these such as the copyrights. It may not make sense
+to be able to override them all though.
+
+This functionality has been implemented but requires tests in the test
+model.
+
+*** Update copyright notices                                          :story:
+
+We need to update all notices to reflect personal ownership until DDC
+was formed, and then ownership by DDC.
+
+- first update to personal ownership has been done, but we need to
+  test if multiple copyright entries is properly supported.
+
+*** Copyright holders is scalar when it should be an array            :story:
+
+At present its only possible to specify a single copyright holder. It
+should be handled the same was as odb parameters, but because that is
+done with a massive hack, we are not going to extend the hack to
+copyright holders.
+
+This functionality has been implemented but requires tests in the test
+model.
+
+*** Duplicate elements in model                                       :story:
+
+Whilst running queries on postgres against a model dumped in tracing,
+we found evidence of duplicate elements. Query:
+
+: select jsonb_pretty(
+:           jsonb_array_elements(
+:           jsonb_array_elements(data)->'elements')->'data'->'__parent_0__'->'name'->'qualified'->'dot'
+:       )
+: from traces;
+
+Snippet of results after =sort | uniq -c=
+
+:      1  "masd.dogen.generation.csharp"
+:      1  "masd.dogen.generation.csharp.all"
+:      1  "masd.dogen.generation.csharp.CMakeLists"
+:      1  "masd.dogen.generation.csharp.entry_point"
+:      1  "masd.dogen.generation.csharp.fabric"
+:      2  "masd.dogen.generation.csharp.fabric.assembly_info"
+:      2  "masd.dogen.generation.csharp.fabric.assembly_info_factory"
+:      2  "masd.dogen.generation.csharp.fabric.assistant"
+:      2  "masd.dogen.generation.csharp.fabric.assistant_factory"
+:      2  "masd.dogen.generation.csharp.fabric.decoration_expander"
+:      2  "masd.dogen.generation.csharp.fabric.dynamic_transform"
+:      2  "masd.dogen.generation.csharp.fabric.element_visitor"
+:      2  "masd.dogen.generation.csharp.fabric.initializer"
+:      2  "masd.dogen.generation.csharp.fabric.injector"
+:      2  "masd.dogen.generation.csharp.fabric.meta_name_factory"
+:      2  "masd.dogen.generation.csharp.fabric.traits"
+:      2  "masd.dogen.generation.csharp.fabric.visual_studio_configuration"
+:      2  "masd.dogen.generation.csharp.fabric.visual_studio_factory"
+
+We need to investigate the generation pipeline to understand where
+this is coming from.
+
+*** Consider renaming orchestration to "engine"                       :story:
+
+Orchestration is a bit of a vague name. It is really the code
+generation engine of dogen. Its still very vague but slightly less so.
+
+*** Make extraction model name a qualified name                       :story:
+
+At present we are setting up the extraction model name from the simple
+name of the model. It should really be the qualified name. Hopefully
+this will only affect tracing and diffing.
+
+*** Move wale templates from the data directory                       :story:
+
+At present we have wale templates under the data directory. This is
+not the right location. These are part of a model just like stitch
+templates. There is one slight wrinkle though: if a user attempts to
+create a dogen formatter (say if plugins were supported), then we need
+access to the template from the debian package. So whilst they should
+live in the appropriate model (e.g. =generation.cpp=,
+=generation.csharp=), they also need to be packaged and shipped.
+
+Interestingly, so will all dogen models which are defining annotations
+and profiles. We need to rethink the data directory, separating system
+models from dogen models somehow. In effect, the data directory will
+be, in the future, the system models directory.
+
+So, in conclusion, two use cases for wale templates:
+
+- regular model defines a wale template and makes use of it. Template
+  should be with the model, just like stitch templates. However,
+  unlike stitch, there should be a directory for them.
+- user model wants to define a new formatter. It will make use of
+  dogen profiles and wale templates. These must be in the future data
+  directory somehow.
+
+*** Exclude profiles from stereotypes processing                      :story:
+
+At present we are manually excluding profiles from the stereotypes
+transform. This was just a quick hack to get us going. We need to
+replace this with a call to annotations to get a list of profile names
+and exclude those.
+
+We should also rename =is_stereotype_handled_externally= to something
+more like "is profile" or "matches profile name".
+
+Actually the right thing may even be to just remove all of the profile
+stereotypes during annotations processing. However, we should wait
+until we complete the exomodel work since that will remove scribble
+groups, etc. Its all in the annotations transform.
 
 ** Deprecated
