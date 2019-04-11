@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <unordered_set>
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/meta_model/model_set.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"

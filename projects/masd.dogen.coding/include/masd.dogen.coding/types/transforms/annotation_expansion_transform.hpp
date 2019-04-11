@@ -25,24 +25,18 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.coding/types/meta_model/model_set.hpp"
+#include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::coding::transforms {
 
+/**
+ * @brief Expands the annotations of all model elements.
+ */
 class annotation_expansion_transform final {
 public:
-    annotation_expansion_transform() = default;
-    annotation_expansion_transform(const annotation_expansion_transform&) = default;
-    annotation_expansion_transform(annotation_expansion_transform&&) = default;
-    ~annotation_expansion_transform() = default;
-    annotation_expansion_transform& operator=(const annotation_expansion_transform&) = default;
-
-public:
-    bool operator==(const annotation_expansion_transform& rhs) const;
-    bool operator!=(const annotation_expansion_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, meta_model::model_set& ms);
 };
 
 }
