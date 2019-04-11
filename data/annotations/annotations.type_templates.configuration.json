@@ -1,0 +1,74 @@
+[
+  {
+    "name": {
+      "simple": "scope",
+      "qualified": "masd.configuration.scope"
+    },
+    "archetype_location": {
+      "kernel": "masd"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "entity"
+  },
+  {
+    "name": {
+      "simple": "labels",
+      "qualified": "masd.configuration.labels"
+    },
+    "archetype_location": {
+      "kernel": "masd"
+    },
+    "value_type": "text_collection",
+    "template_kind": "instance",
+    "scope": "entity"
+  },
+  {
+    "name": {
+      "simple": "kernel",
+      "qualified": "masd.configuration.archetype_location.kernel"
+    },
+    "archetype_location": {
+      "kernel": "masd"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "property"
+  },
+  {
+    "name": {
+      "simple": "backend",
+      "qualified": "masd.configuration.archetype_location.backend"
+    },
+    "archetype_location": {
+      "kernel": "masd"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "property"
+  },
+  {
+    "name": {
+      "simple": "template_kind",
+      "qualified": "masd.configuration.template_kind"
+    },
+    "archetype_location": {
+      "kernel": "masd"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "property"
+  },
+  {
+    "name": {
+      "simple": "untyped_value",
+      "qualified": "masd.configuration.untyped_value"
+    },
+    "archetype_location": {
+      "kernel": "masd"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "property"
+  }
+]
