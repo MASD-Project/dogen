@@ -32,8 +32,8 @@ TestResult.xml
 *.coatiproject
 poly-stitch.elc
 
-# cquery
-.cquery_cached_index
+# clangd
+.clangd/
 compile_commands.json
 
 # Task Juggler
