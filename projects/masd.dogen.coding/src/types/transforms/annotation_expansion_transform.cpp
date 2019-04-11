@@ -18,26 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.coding/test_data/meta_model/static_stereotypes_td.hpp"
+#include "masd.dogen.coding/types/transforms/annotation_expansion_transform.hpp"
 
-namespace masd::dogen::coding::meta_model {
+namespace masd::dogen::coding::transforms {
 
-static_stereotypes_generator::static_stereotypes_generator() : position_(0) { }
-void static_stereotypes_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<static_stereotypes>(position % 18);
-}
-
-static_stereotypes_generator::result_type
-static_stereotypes_generator::create(const unsigned int  position) {
-    result_type r;
-    static_stereotypes_generator::populate(position, r);
-    return r;
-}
-
-static_stereotypes_generator::result_type
-static_stereotypes_generator::operator()() {
-    return create(position_++);
+bool annotation_expansion_transform::operator==(const annotation_expansion_transform& /*rhs*/) const {
+    return true;
 }
 
 }

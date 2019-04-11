@@ -81,6 +81,9 @@ std::ostream& operator<<(std::ostream& s, const static_stereotypes& v) {
     case static_stereotypes::licence:
         attr = "\"licence\"";
         break;
+    case static_stereotypes::configuration:
+        attr = "\"configuration\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for static_stereotypes");
     }

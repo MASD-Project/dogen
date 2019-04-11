@@ -18,37 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_STATIC_STEREOTYPES_HPP
-#define MASD_DOGEN_CODING_TYPES_META_MODEL_STATIC_STEREOTYPES_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_ANNOTATION_EXPANSION_TRANSFORM_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_ANNOTATION_EXPANSION_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace masd::dogen::coding::meta_model {
+#include <algorithm>
 
-/**
- * @brief Lists all stereotypes defined in the masd UML profile.
- */
-enum class static_stereotypes : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    object = 1,
-    object_template = 2,
-    exception = 3,
-    primitive = 4,
-    enumeration = 5,
-    module = 6,
-    builtin = 7,
-    visitable = 8,
-    fluent = 9,
-    immutable = 10,
-    orm_object = 11,
-    orm_value = 12,
-    modeline_group = 13,
-    modeline = 14,
-    generation_marker = 15,
-    licence = 16,
-    configuration = 17
+namespace masd::dogen::coding::transforms {
+
+class annotation_expansion_transform final {
+public:
+    annotation_expansion_transform() = default;
+    annotation_expansion_transform(const annotation_expansion_transform&) = default;
+    annotation_expansion_transform(annotation_expansion_transform&&) = default;
+    ~annotation_expansion_transform() = default;
+    annotation_expansion_transform& operator=(const annotation_expansion_transform&) = default;
+
+public:
+    bool operator==(const annotation_expansion_transform& rhs) const;
+    bool operator!=(const annotation_expansion_transform& rhs) const {
+        return !this->operator==(rhs);
+    }
+
 };
 
 }

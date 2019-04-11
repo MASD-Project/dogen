@@ -18,26 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.coding/test_data/meta_model/static_stereotypes_td.hpp"
+#ifndef MASD_DOGEN_CODING_TEST_DATA_META_MODEL_CONFIGURATION_TD_HPP
+#define MASD_DOGEN_CODING_TEST_DATA_META_MODEL_CONFIGURATION_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "masd.dogen.coding/types/meta_model/configuration.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
-static_stereotypes_generator::static_stereotypes_generator() : position_(0) { }
-void static_stereotypes_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<static_stereotypes>(position % 18);
+class configuration_generator {
+public:
+    configuration_generator();
+
+public:
+    typedef masd::dogen::coding::meta_model::configuration result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
 }
 
-static_stereotypes_generator::result_type
-static_stereotypes_generator::create(const unsigned int  position) {
-    result_type r;
-    static_stereotypes_generator::populate(position, r);
-    return r;
-}
-
-static_stereotypes_generator::result_type
-static_stereotypes_generator::operator()() {
-    return create(position_++);
-}
-
-}
+#endif

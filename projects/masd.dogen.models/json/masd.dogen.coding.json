@@ -1912,6 +1912,10 @@
         {
           "name": "licence",
           "type": ""
+        },
+        {
+          "name": "configuration",
+          "type": ""
         }
       ]
     },
@@ -1953,6 +1957,10 @@
         {
           "name": "references",
           "type": "std::list<model>"
+        },
+        {
+          "name": "profile_repository",
+          "type": "annotations::profile_repository"
         }
       ]
     },
@@ -2209,6 +2217,37 @@
           "type": "std::unordered_set<std::string>"
         }
       ]
+    },
+    {
+      "name": "transforms::configuration_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::configuration",
+      "parents": [
+        "meta_model::element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "labels",
+          "type": "std::unordered_set<std::string>"
+        },
+        {
+          "name": "templates",
+          "type": "std::list<annotations::entry_template>"
+        }
+      ]
+    },
+    {
+      "name": "transforms::annotation_expansion_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

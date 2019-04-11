@@ -18,26 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.coding/test_data/meta_model/static_stereotypes_td.hpp"
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_CONFIGURATION_FWD_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_CONFIGURATION_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace masd::dogen::coding::meta_model {
 
-static_stereotypes_generator::static_stereotypes_generator() : position_(0) { }
-void static_stereotypes_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<static_stereotypes>(position % 18);
-}
-
-static_stereotypes_generator::result_type
-static_stereotypes_generator::create(const unsigned int  position) {
-    result_type r;
-    static_stereotypes_generator::populate(position, r);
-    return r;
-}
-
-static_stereotypes_generator::result_type
-static_stereotypes_generator::operator()() {
-    return create(position_++);
-}
+class configuration;
 
 }
+
+#endif

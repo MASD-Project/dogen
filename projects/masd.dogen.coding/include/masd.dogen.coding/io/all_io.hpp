@@ -54,6 +54,7 @@
 #include "masd.dogen.coding/io/helpers/mapping_context_io.hpp"
 #include "masd.dogen.coding/io/meta_model/letter_cases_io.hpp"
 #include "masd.dogen.coding/io/meta_model/origin_types_io.hpp"
+#include "masd.dogen.coding/io/meta_model/configuration_io.hpp"
 #include "masd.dogen.coding/io/meta_model/modeline_field_io.hpp"
 #include "masd.dogen.coding/io/meta_model/modeline_group_io.hpp"
 #include "masd.dogen.coding/io/meta_model/object_template_io.hpp"

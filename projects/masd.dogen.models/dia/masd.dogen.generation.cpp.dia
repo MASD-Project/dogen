@@ -1212,13 +1212,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O8">
       <dia:attribute name="obj_pos">
-        <dia:point val="6.11871,250.146"/>
+        <dia:point val="6.26157,250.146"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="6.06871,250.096;18.9887,253.196"/>
+        <dia:rectangle val="6.21157,250.096;19.1316,253.196"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="6.11871,250.146"/>
+        <dia:point val="6.26157,250.146"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -23139,13 +23139,13 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O186">
       <dia:attribute name="obj_pos">
-        <dia:point val="-42.2143,223"/>
+        <dia:point val="-42,223"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-42.2643,222.95;-6.2443,227.45"/>
+        <dia:rectangle val="-42.05,222.95;-6.03,227.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-42.2143,223"/>
+        <dia:point val="-42,223"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="35.920000000000002"/>
@@ -33937,13 +33937,13 @@ an "odd" formatter.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O281">
       <dia:attribute name="obj_pos">
-        <dia:point val="-3.21429,230"/>
+        <dia:point val="-3.28572,229.929"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-3.26429,229.95;9.65571,233.05"/>
+        <dia:rectangle val="-3.33572,229.879;9.58428,232.979"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-3.21429,230"/>
+        <dia:point val="-3.28572,229.929"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>

@@ -54,6 +54,7 @@
 #include "masd.dogen.coding/test_data/helpers/mapping_context_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/letter_cases_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/origin_types_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/configuration_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/modeline_field_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/modeline_group_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/object_template_td.hpp"

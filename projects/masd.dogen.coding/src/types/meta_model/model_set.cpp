@@ -24,19 +24,23 @@ namespace masd::dogen::coding::meta_model {
 
 model_set::model_set(
     const masd::dogen::coding::meta_model::model& target,
-    const std::list<masd::dogen::coding::meta_model::model>& references)
+    const std::list<masd::dogen::coding::meta_model::model>& references,
+    const masd::dogen::annotations::profile_repository& profile_repository)
     : target_(target),
-      references_(references) { }
+      references_(references),
+      profile_repository_(profile_repository) { }
 
 void model_set::swap(model_set& other) noexcept {
     using std::swap;
     swap(target_, other.target_);
     swap(references_, other.references_);
+    swap(profile_repository_, other.profile_repository_);
 }
 
 bool model_set::operator==(const model_set& rhs) const {
     return target_ == rhs.target_ &&
-        references_ == rhs.references_;
+        references_ == rhs.references_ &&
+        profile_repository_ == rhs.profile_repository_;
 }
 
 model_set& model_set::operator=(model_set other) {
@@ -75,6 +79,22 @@ void model_set::references(const std::list<masd::dogen::coding::meta_model::mode
 
 void model_set::references(const std::list<masd::dogen::coding::meta_model::model>&& v) {
     references_ = std::move(v);
+}
+
+const masd::dogen::annotations::profile_repository& model_set::profile_repository() const {
+    return profile_repository_;
+}
+
+masd::dogen::annotations::profile_repository& model_set::profile_repository() {
+    return profile_repository_;
+}
+
+void model_set::profile_repository(const masd::dogen::annotations::profile_repository& v) {
+    profile_repository_ = v;
+}
+
+void model_set::profile_repository(const masd::dogen::annotations::profile_repository&& v) {
+    profile_repository_ = std::move(v);
 }
 
 }
