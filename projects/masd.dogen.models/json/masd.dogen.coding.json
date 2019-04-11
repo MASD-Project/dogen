@@ -1201,6 +1201,10 @@
           "type": "boost::shared_ptr<annotations::annotation_factory>"
         },
         {
+          "name": "profile_repository",
+          "type": "boost::shared_ptr<annotations::profile_repository>"
+        },
+        {
           "name": "mapping_repository",
           "type": "boost::shared_ptr<helpers::mapping_set_repository>"
         },

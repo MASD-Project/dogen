@@ -31,6 +31,7 @@
 #include "masd.dogen.annotations/types/type_repository_fwd.hpp"
 #include "masd.dogen.annotations/types/annotation_factory_fwd.hpp"
 #include "masd.dogen.annotations/types/annotation_expander_fwd.hpp"
+#include "masd.dogen.annotations/types/profile_repository_fwd.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_fwd.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository_fwd.hpp"
 
@@ -57,6 +58,7 @@ public:
         const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& archetype_location_repository,
         const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& annotation_factory,
         const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& annotation_expander,
+        const boost::shared_ptr<masd::dogen::annotations::profile_repository>& profile_repository,
         const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& mapping_repository,
         const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer);
 
@@ -73,6 +75,9 @@ public:
     const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& annotation_expander() const;
     void annotation_expander(const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& v);
 
+    const boost::shared_ptr<masd::dogen::annotations::profile_repository>& profile_repository() const;
+    void profile_repository(const boost::shared_ptr<masd::dogen::annotations::profile_repository>& v);
+
     const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& mapping_repository() const;
     void mapping_repository(const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& v);
 
@@ -84,6 +89,7 @@ private:
     boost::shared_ptr<masd::dogen::annotations::archetype_location_repository> archetype_location_repository_;
     boost::shared_ptr<masd::dogen::annotations::annotation_factory> annotation_factory_;
     boost::shared_ptr<masd::dogen::annotations::annotation_expander> annotation_expander_;
+    boost::shared_ptr<masd::dogen::annotations::profile_repository> profile_repository_;
     boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository> mapping_repository_;
     boost::shared_ptr<masd::dogen::tracing::tracer> tracer_;
 };

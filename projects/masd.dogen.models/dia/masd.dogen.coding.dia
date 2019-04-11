@@ -10680,19 +10680,19 @@ model.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O77">
       <dia:attribute name="obj_pos">
-        <dia:point val="-244,30"/>
+        <dia:point val="-244,24"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-244.05,29.95;-207.645,36.85"/>
+        <dia:rectangle val="-244.05,23.95;-207.645,31.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-244,30"/>
+        <dia:point val="-244,24"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="36.305"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="7.6000000000000005"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#context#</dia:string>
@@ -10842,6 +10842,29 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boost::shared_ptr&lt;annotations::annotation_factory&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#profile_repository#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#boost::shared_ptr&lt;annotations::profile_repository&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -13150,16 +13173,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O93">
       <dia:attribute name="obj_pos">
-        <dia:point val="-244,24"/>
+        <dia:point val="-244,18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-244.05,23.95;-222.26,27.35"/>
+        <dia:rectangle val="-244.05,17.95;-222.26,21.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-244,24"/>
+        <dia:point val="-244,18"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="21.690000000000001"/>
@@ -13190,7 +13213,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-243.65,25.245"/>
+            <dia:point val="-243.65,19.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -14836,13 +14859,13 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O105">
       <dia:attribute name="obj_pos">
-        <dia:point val="-219,24"/>
+        <dia:point val="-218,18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-219.05,23.95;-208.968,27.05"/>
+        <dia:rectangle val="-218.05,17.95;-207.968,21.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-219,24"/>
+        <dia:point val="-218,18"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="9.9824999999999999"/>
