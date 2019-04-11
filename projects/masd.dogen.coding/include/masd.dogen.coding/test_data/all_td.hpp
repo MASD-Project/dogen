@@ -67,6 +67,7 @@
 #include "masd.dogen.coding/test_data/meta_model/static_stereotypes_td.hpp"
 #include "masd.dogen.coding/test_data/helpers/mapping_set_repository_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/artefact_properties_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/configuration_entry_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/orm_database_systems_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/orm_model_properties_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/extraction_properties_td.hpp"

@@ -31,7 +31,7 @@
 #include <algorithm>
 #include <unordered_set>
 #include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.annotations/types/entry_template.hpp"
+#include "masd.dogen.coding/types/meta_model/configuration_entry.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
@@ -60,7 +60,7 @@ public:
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const boost::optional<masd::dogen::coding::meta_model::decoration>& decoration,
         const std::unordered_set<std::string>& labels,
-        const std::list<masd::dogen::annotations::entry_template>& templates);
+        const std::list<masd::dogen::coding::meta_model::configuration_entry>& entries);
 
 public:
     using element::accept;
@@ -78,10 +78,10 @@ public:
     void labels(const std::unordered_set<std::string>& v);
     void labels(const std::unordered_set<std::string>&& v);
 
-    const std::list<masd::dogen::annotations::entry_template>& templates() const;
-    std::list<masd::dogen::annotations::entry_template>& templates();
-    void templates(const std::list<masd::dogen::annotations::entry_template>& v);
-    void templates(const std::list<masd::dogen::annotations::entry_template>&& v);
+    const std::list<masd::dogen::coding::meta_model::configuration_entry>& entries() const;
+    std::list<masd::dogen::coding::meta_model::configuration_entry>& entries();
+    void entries(const std::list<masd::dogen::coding::meta_model::configuration_entry>& v);
+    void entries(const std::list<masd::dogen::coding::meta_model::configuration_entry>&& v);
 
 public:
     bool operator==(const configuration& rhs) const;
@@ -98,7 +98,7 @@ public:
 
 private:
     std::unordered_set<std::string> labels_;
-    std::list<masd::dogen::annotations::entry_template> templates_;
+    std::list<masd::dogen::coding::meta_model::configuration_entry> entries_;
 };
 
 }

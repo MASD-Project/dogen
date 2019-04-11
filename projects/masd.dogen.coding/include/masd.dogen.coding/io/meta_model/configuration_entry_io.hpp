@@ -18,17 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "masd.dogen.coding/io/meta_model/element_io.hpp"
-#include "masd.dogen.coding/io/meta_model/configuration_io.hpp"
-#include "masd.dogen.coding/io/meta_model/configuration_entry_io.hpp"
+#ifndef MASD_DOGEN_CODING_IO_META_MODEL_CONFIGURATION_ENTRY_IO_HPP
+#define MASD_DOGEN_CODING_IO_META_MODEL_CONFIGURATION_ENTRY_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "masd.dogen.coding/types/meta_model/configuration_entry.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
-std::ostream& operator<<(std::ostream& s, const configuration& v) {
-    v.to_stream(s);
-    return(s);
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const masd::dogen::coding::meta_model::configuration_entry& v);
 
 }
+
+#endif

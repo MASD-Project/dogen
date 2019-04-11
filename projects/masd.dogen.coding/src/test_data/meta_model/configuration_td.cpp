@@ -20,8 +20,8 @@
  */
 #include <sstream>
 #include "masd.dogen.coding/test_data/meta_model/element_td.hpp"
-#include "masd.dogen.annotations/test_data/entry_template_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/configuration_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/configuration_entry_td.hpp"
 
 namespace {
 
@@ -39,15 +39,15 @@ std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int
     return r;
 }
 
-masd::dogen::annotations::entry_template
-create_masd_dogen_annotations_entry_template(const unsigned int position) {
-    return masd::dogen::annotations::entry_template_generator::create(position);
+masd::dogen::coding::meta_model::configuration_entry
+create_masd_dogen_coding_meta_model_configuration_entry(const unsigned int position) {
+    return masd::dogen::coding::meta_model::configuration_entry_generator::create(position);
 }
 
-std::list<masd::dogen::annotations::entry_template> create_std_list_masd_dogen_annotations_entry_template(unsigned int position) {
-    std::list<masd::dogen::annotations::entry_template> r;
+std::list<masd::dogen::coding::meta_model::configuration_entry> create_std_list_masd_dogen_coding_meta_model_configuration_entry(unsigned int position) {
+    std::list<masd::dogen::coding::meta_model::configuration_entry> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_masd_dogen_annotations_entry_template(position + i));
+        r.push_back(create_masd_dogen_coding_meta_model_configuration_entry(position + i));
     }
     return r;
 }
@@ -62,7 +62,7 @@ void configuration_generator::
 populate(const unsigned int position, result_type& v) {
     masd::dogen::coding::meta_model::element_generator::populate(position, v);
     v.labels(create_std_unordered_set_std_string(position + 0));
-    v.templates(create_std_list_masd_dogen_annotations_entry_template(position + 1));
+    v.entries(create_std_list_masd_dogen_coding_meta_model_configuration_entry(position + 1));
 }
 
 configuration_generator::result_type

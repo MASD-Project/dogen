@@ -21,9 +21,9 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
-#include "masd.dogen.annotations/io/entry_template_io.hpp"
 #include "masd.dogen.coding/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
+#include "masd.dogen.coding/io/meta_model/configuration_entry_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -49,7 +49,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::annotations::entry_template>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::configuration_entry>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -79,7 +79,7 @@ configuration::configuration(
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const boost::optional<masd::dogen::coding::meta_model::decoration>& decoration,
     const std::unordered_set<std::string>& labels,
-    const std::list<masd::dogen::annotations::entry_template>& templates)
+    const std::list<masd::dogen::coding::meta_model::configuration_entry>& entries)
     : masd::dogen::coding::meta_model::element(
       name,
       documentation,
@@ -96,7 +96,7 @@ configuration::configuration(
       archetype_location_properties,
       decoration),
       labels_(labels),
-      templates_(templates) { }
+      entries_(entries) { }
 
 void configuration::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -121,7 +121,7 @@ void configuration::to_stream(std::ostream& s) const {
     masd::dogen::coding::meta_model::element::to_stream(s);
     s << ", "
       << "\"labels\": " << labels_ << ", "
-      << "\"templates\": " << templates_
+      << "\"entries\": " << entries_
       << " }";
 }
 
@@ -130,7 +130,7 @@ void configuration::swap(configuration& other) noexcept {
 
     using std::swap;
     swap(labels_, other.labels_);
-    swap(templates_, other.templates_);
+    swap(entries_, other.entries_);
 }
 
 bool configuration::equals(const masd::dogen::coding::meta_model::element& other) const {
@@ -142,7 +142,7 @@ bool configuration::equals(const masd::dogen::coding::meta_model::element& other
 bool configuration::operator==(const configuration& rhs) const {
     return masd::dogen::coding::meta_model::element::compare(rhs) &&
         labels_ == rhs.labels_ &&
-        templates_ == rhs.templates_;
+        entries_ == rhs.entries_;
 }
 
 configuration& configuration::operator=(configuration other) {
@@ -167,20 +167,20 @@ void configuration::labels(const std::unordered_set<std::string>&& v) {
     labels_ = std::move(v);
 }
 
-const std::list<masd::dogen::annotations::entry_template>& configuration::templates() const {
-    return templates_;
+const std::list<masd::dogen::coding::meta_model::configuration_entry>& configuration::entries() const {
+    return entries_;
 }
 
-std::list<masd::dogen::annotations::entry_template>& configuration::templates() {
-    return templates_;
+std::list<masd::dogen::coding::meta_model::configuration_entry>& configuration::entries() {
+    return entries_;
 }
 
-void configuration::templates(const std::list<masd::dogen::annotations::entry_template>& v) {
-    templates_ = v;
+void configuration::entries(const std::list<masd::dogen::coding::meta_model::configuration_entry>& v) {
+    entries_ = v;
 }
 
-void configuration::templates(const std::list<masd::dogen::annotations::entry_template>&& v) {
-    templates_ = std::move(v);
+void configuration::entries(const std::list<masd::dogen::coding::meta_model::configuration_entry>&& v) {
+    entries_ = std::move(v);
 }
 
 }

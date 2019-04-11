@@ -106,6 +106,7 @@
 #include "masd.dogen.coding/types/helpers/mapping_set_repository.hpp"
 #include "masd.dogen.coding/types/helpers/pre_assembly_validator.hpp"
 #include "masd.dogen.coding/types/meta_model/artefact_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/configuration_entry.hpp"
 #include "masd.dogen.coding/types/transforms/modelines_transform.hpp"
 #include "masd.dogen.coding/types/transforms/post_assembly_chain.hpp"
 #include "masd.dogen.coding/types/helpers/legacy_name_tree_parser.hpp"

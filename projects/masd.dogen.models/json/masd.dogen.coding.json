@@ -2241,8 +2241,8 @@
           "type": "std::unordered_set<std::string>"
         },
         {
-          "name": "templates",
-          "type": "std::list<annotations::entry_template>"
+          "name": "entries",
+          "type": "std::list<configuration_entry>"
         }
       ]
     },
@@ -2252,6 +2252,23 @@
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::configuration_entry",
+      "stereotypes": [
+        "Annotatable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string"
+        },
+        {
+          "name": "value",
+          "type": "std::list<std::string>"
+        }
+      ]
     }
   ]
 }
