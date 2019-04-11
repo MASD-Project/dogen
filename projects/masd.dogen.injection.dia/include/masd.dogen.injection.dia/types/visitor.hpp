@@ -36,7 +36,7 @@ namespace masd::dogen::injection::dia {
 class visitor : public boost::default_dfs_visitor {
 public:
     visitor() = delete;
-    visitor& operator=(const visitor&) = default;
+    visitor& operator=(const visitor&) = delete;
     visitor(const visitor&) = default;
     visitor(visitor&&) = default;
 

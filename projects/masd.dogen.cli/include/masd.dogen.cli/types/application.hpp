@@ -39,7 +39,7 @@ namespace masd::dogen::cli {
  */
 class application final {
 public:
-    application() = default;
+    application() = delete;
     application(const application&) = delete;
     application(application&&) = delete;
     ~application() = default;
