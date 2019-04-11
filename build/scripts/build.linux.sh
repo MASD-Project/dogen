@@ -65,14 +65,14 @@ elif [ "${compiler}" = "gcc8" ]; then
     echo "* Compiler: ${compiler}"
     export CC=gcc-8
     export CXX=g++-8
+elif [ "${compiler}" = "clang8" ]; then
+    echo "* Compiler: ${compiler}"
+    export CC=clang-8
+    export CXX=clang++-8
 elif [ "${compiler}" = "clang7" ]; then
     echo "* Compiler: ${compiler}"
     export CC=clang-7
     export CXX=clang++-7
-elif [ "${compiler}" = "clang6" ]; then
-    echo "* Compiler: ${compiler}"
-    export CC=clang-6.0
-    export CXX=clang++-6.0
 else
     echo "* Unrecognised compiler: ${compiler}"
     exit
