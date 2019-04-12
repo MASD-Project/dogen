@@ -28,7 +28,6 @@
 #include <list>
 #include <algorithm>
 #include "masd.dogen.coding/types/meta_model/model.hpp"
-#include "masd.dogen.annotations/types/profile_repository.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
@@ -42,8 +41,7 @@ public:
 public:
     model_set(
         const masd::dogen::coding::meta_model::model& target,
-        const std::list<masd::dogen::coding::meta_model::model>& references,
-        const masd::dogen::annotations::profile_repository& profile_repository);
+        const std::list<masd::dogen::coding::meta_model::model>& references);
 
 public:
     const masd::dogen::coding::meta_model::model& target() const;
@@ -55,11 +53,6 @@ public:
     std::list<masd::dogen::coding::meta_model::model>& references();
     void references(const std::list<masd::dogen::coding::meta_model::model>& v);
     void references(const std::list<masd::dogen::coding::meta_model::model>&& v);
-
-    const masd::dogen::annotations::profile_repository& profile_repository() const;
-    masd::dogen::annotations::profile_repository& profile_repository();
-    void profile_repository(const masd::dogen::annotations::profile_repository& v);
-    void profile_repository(const masd::dogen::annotations::profile_repository&& v);
 
 public:
     bool operator==(const model_set& rhs) const;
@@ -74,7 +67,6 @@ public:
 private:
     masd::dogen::coding::meta_model::model target_;
     std::list<masd::dogen::coding::meta_model::model> references_;
-    masd::dogen::annotations::profile_repository profile_repository_;
 };
 
 }

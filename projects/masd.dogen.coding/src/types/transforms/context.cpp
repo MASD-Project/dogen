@@ -32,14 +32,12 @@ context::context(
     const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& archetype_location_repository,
     const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& annotation_factory,
     const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& annotation_expander,
-    const boost::shared_ptr<masd::dogen::annotations::profile_repository>& profile_repository,
     const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& mapping_repository,
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer)
     : type_repository_(type_repository),
       archetype_location_repository_(archetype_location_repository),
       annotation_factory_(annotation_factory),
       annotation_expander_(annotation_expander),
-      profile_repository_(profile_repository),
       mapping_repository_(mapping_repository),
       tracer_(tracer) { }
 
@@ -73,14 +71,6 @@ const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& context:
 
 void context::annotation_expander(const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& v) {
     annotation_expander_ = v;
-}
-
-const boost::shared_ptr<masd::dogen::annotations::profile_repository>& context::profile_repository() const {
-    return profile_repository_;
-}
-
-void context::profile_repository(const boost::shared_ptr<masd::dogen::annotations::profile_repository>& v) {
-    profile_repository_ = v;
 }
 
 const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& context::mapping_repository() const {
