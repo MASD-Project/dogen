@@ -6528,6 +6528,25 @@ Features for which there is no urgency but we'd like to see them
 implemented at some point. They may require some alterations to the
 core, but not fundamental rethinking.
 
+*** Consider adding a GIR/GObject injector                            :story:
+
+GIR seems to be yet another format that could be suitable for a dogen
+input.
+
+Links:
+
+- [[https://gitlab.com/mnauw/cppgir][cppgir]]
+- [[https://www.reddit.com/r/cpp/comments/bbp25s/gobjectintrospection_c_binding_wrapper_generator/][GObject-Introspection C++ binding wrapper generator]]
+
+*** Add support for =fixed_storage_arrays=                            :story:
+
+This is a library with some fixed size arrays. We need to check to see
+if we support array syntax at present.
+
+Links:
+
+- [[https://github.com/recatek/fixed_storage_arrays][github]]
+
 *** Exceptions with stream to build exception message                 :story:
 
 Consider adding some functionality to exceptions whereby we could
@@ -10876,6 +10895,14 @@ We should investigate how hard it is to add support for these IDLs.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen. Tooling, infrastructure, blog posts, etc. However,
 they must still be in keeping with the vision, so not too left field.
+
+*** Add fuzzing tests                                                 :story:
+
+We need to setup some basic fuzzing tests for model inputs.
+
+Links:
+
+- [[https://nullprogram.com/blog/2019/01/25/][The Day I Fell in Love with Fuzzing]]
 
 *** Updates to debian package                                         :story:
 

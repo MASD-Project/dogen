@@ -13,25 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-11 Thu 18:38]
+#+CAPTION: Clock summary at [2019-04-12 Fri 07:58]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *34:18* |       |      | 100.0 |
+| *Total time*                                           | *35:06* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 34:18   |       |      | 100.0 |
-| Active                                                 |         | 34:18 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 4:21 |  12.7 |
-| Sprint and product backlog grooming                    |         |       | 1:54 |   5.5 |
-| Create a video demo for the previous sprint's features |         |       | 1:35 |   4.6 |
-| Fix issues with emacs                                  |         |       | 2:01 |   5.9 |
+| Stories                                                | 35:06   |       |      | 100.0 |
+| Active                                                 |         | 35:06 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 4:21 |  12.4 |
+| Sprint and product backlog grooming                    |         |       | 2:12 |   6.3 |
+| Create a video demo for the previous sprint's features |         |       | 1:35 |   4.5 |
+| Fix issues with emacs                                  |         |       | 2:01 |   5.7 |
 | Fix issues with nightly build                          |         |       | 0:08 |   0.4 |
-| Add diffing support to string asserter                 |         |       | 1:00 |   2.9 |
-| C# generation is borked                                |         |       | 4:12 |  12.2 |
-| Reactivate the boilerplate tests                       |         |       | 5:58 |  17.4 |
+| Add diffing support to string asserter                 |         |       | 1:00 |   2.8 |
+| C# generation is borked                                |         |       | 4:12 |  12.0 |
+| Reactivate the boilerplate tests                       |         |       | 5:58 |  17.0 |
 | Update to clang8                                       |         |       | 0:11 |   0.5 |
-| Fix snags with emacs                                   |         |       | 5:27 |  15.9 |
-| Profiles as meta-model elements                        |         |       | 7:31 |  21.9 |
+| Fix snags with emacs                                   |         |       | 5:27 |  15.5 |
+| Profiles as meta-model elements                        |         |       | 8:01 |  22.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -192,6 +192,7 @@ Happy Modeling!
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-04-12 Fri 07:40]--[2019-04-12 Fri 07:58] =>  0:18
     CLOCK: [2019-04-10 Wed 16:50]--[2019-04-10 Wed 17:02] =>  0:12
     CLOCK: [2019-04-10 Wed 11:55]--[2019-04-10 Wed 12:05] =>  0:10
     CLOCK: [2019-04-09 Tue 10:13]--[2019-04-09 Tue 10:29] =>  0:16
@@ -336,6 +337,7 @@ Notes:
 
 *** STARTED Profiles as meta-model elements                           :story:
     :LOGBOOK:
+    CLOCK: [2019-04-11 Thu 18:39]--[2019-04-11 Thu 19:09] =>  0:30
     CLOCK: [2019-04-11 Thu 18:35]--[2019-04-11 Thu 18:38] =>  0:03
     CLOCK: [2019-04-11 Thu 18:15]--[2019-04-11 Thu 18:34] =>  0:19
     CLOCK: [2019-04-11 Thu 17:50]--[2019-04-11 Thu 18:11] =>  0:21
@@ -590,6 +592,7 @@ Notes:
   left.
 - move annotation expansion from adaptor into its own transform. It is
   done against the model set.
+- profile repository appears deprecated, remove it?
 
 *** Location of =--byproduct-directory= not respected                 :story:
 
