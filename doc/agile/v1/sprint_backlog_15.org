@@ -13,25 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-12 Fri 07:58]
+#+CAPTION: Clock summary at [2019-04-12 Fri 14:20]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *35:06* |       |      | 100.0 |
+| *Total time*                                           | *37:27* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 35:06   |       |      | 100.0 |
-| Active                                                 |         | 35:06 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 4:21 |  12.4 |
-| Sprint and product backlog grooming                    |         |       | 2:12 |   6.3 |
-| Create a video demo for the previous sprint's features |         |       | 1:35 |   4.5 |
-| Fix issues with emacs                                  |         |       | 2:01 |   5.7 |
+| Stories                                                | 37:27   |       |      | 100.0 |
+| Active                                                 |         | 37:27 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 4:21 |  11.6 |
+| Sprint and product backlog grooming                    |         |       | 2:12 |   5.9 |
+| Create a video demo for the previous sprint's features |         |       | 1:35 |   4.2 |
+| Fix issues with emacs                                  |         |       | 2:01 |   5.4 |
 | Fix issues with nightly build                          |         |       | 0:08 |   0.4 |
-| Add diffing support to string asserter                 |         |       | 1:00 |   2.8 |
-| C# generation is borked                                |         |       | 4:12 |  12.0 |
-| Reactivate the boilerplate tests                       |         |       | 5:58 |  17.0 |
+| Add diffing support to string asserter                 |         |       | 1:00 |   2.7 |
+| C# generation is borked                                |         |       | 4:12 |  11.2 |
+| Reactivate the boilerplate tests                       |         |       | 5:58 |  15.9 |
 | Update to clang8                                       |         |       | 0:11 |   0.5 |
-| Fix snags with emacs                                   |         |       | 5:27 |  15.5 |
-| Profiles as meta-model elements                        |         |       | 8:01 |  22.8 |
+| Fix snags with emacs                                   |         |       | 5:27 |  14.6 |
+| Profiles as meta-model elements                        |         |       | 8:01 |  21.4 |
+| Great configuration rename                             |         |       | 2:21 |   6.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -337,6 +338,7 @@ Notes:
 
 *** STARTED Profiles as meta-model elements                           :story:
     :LOGBOOK:
+3    CLOCK: [2019-04-12 Fri 07:59]--[2019-04-12 Fri 09:00] =>  1:01
     CLOCK: [2019-04-11 Thu 18:39]--[2019-04-11 Thu 19:09] =>  0:30
     CLOCK: [2019-04-11 Thu 18:35]--[2019-04-11 Thu 18:38] =>  0:03
     CLOCK: [2019-04-11 Thu 18:15]--[2019-04-11 Thu 18:34] =>  0:19
@@ -593,6 +595,103 @@ Notes:
 - move annotation expansion from adaptor into its own transform. It is
   done against the model set.
 - profile repository appears deprecated, remove it?
+
+*** STARTED Great configuration rename                                :story:
+    :LOGBOOK:
+    CLOCK: [2019-04-12 Fri 14:06]--[2019-04-12 Fri 14:20] =>  0:14
+    CLOCK: [2019-04-12 Fri 11:15]--[2019-04-12 Fri 11:29] =>  0:14
+    CLOCK: [2019-04-12 Fri 09:00]--[2019-04-12 Fri 10:53] =>  1:53
+    :END:
+
+There has been a great deal of confusion regarding how annotations
+have been used. We have the following use cases/names:
+
+- annotation: store of configuration. The store is "dynamic", in the
+  sense that the values are changeable at run time.
+- coding configuration: "adapter" to allow the meta-model to carry
+  "configuration templates" - that which we call profiles.
+- profiles: templates for configuration. These are stored as
+  templates, and subsequently instantiated into annotations.
+
+Note that the annotations are of two "types":
+
+- stand alone annotations: these are the product of configuration
+  template instantiation. These are sourced from JSON files (at
+  present) or model elements (the coding configuration). These are
+  unbound configurations.
+- element owned annotations: these are sourced from regular model
+  elements. These are bound configurations.
+
+The objective is to apply stand alone configurations to element owned
+configurations via the mappings in stereotypes. Given all of this, the
+existing names are woefully inadequate, and its becoming more
+confusing as we make increased use of this functionality. We need to
+rename all of these model types to more sensible names and document
+their responsibilities else this code will become (even more)
+unmaintainable.
+
+Notes:
+
+- the annotations model should really be called configuration because
+  it deals with all of the primitives for configuration. Or better
+  yet: variability. Note that this model is concerned with structural
+  variability. We will leave non-structural variability (configuration
+  files) for another time. we need to split this out in the backlog.
+- the annotation class is really a typed configuration
+  store. We use the name store to avoid confusion with the established
+  repository idiom, e.g.: =configuration::store=.
+- profiles are configuration templates.
+- the annotation expander is a =store_builder=. It creates a store
+  from a set of configuration templates.
+- the coding configuration is actually a configuration template.
+- a type is actually a (typed) feature. What we are calling type
+  groups are feature groups. Traits are feature names. In the future,
+  we will code-generate the insertion of features into the variablity
+  model feature store, and the conversion of dynamic configurations
+  into concrete configurations (c++ types). By declaring a model
+  element as a feature group, each attribute becomes a feature. The
+  code generator reads the features and injects them into the
+  variability model. It also creates the C++ type. It also creates
+  code to convert from and to the dynamic configuration
+  representation. It also contains the feature and feature group
+  documentation, accessible at run-time.
+- maybe we should call feature group "feature set" instead to avoid
+  confusion with xor/or-groups in feature diagrams.
+- what we are calling scope types is perhaps called "binding times".
+- there is a simple algebra of configurations such as a + b = c
+  (confiugrations are additive), etc. The algebra dictates the order
+  of operations.
+- tagged values could be configuration points. This is not to be
+  confused with variation points.
+- unlike Clauss, Possompes et al., our approach to variability is to
+  only expose it at the code generator level. Users can create
+  configurations but on the happy path they are not expected to create
+  new features. In addition, if they do create new features, these can
+  only be used to configure the behaviour of the code generator
+  (e.g. their own templates). It is structural variability, but not
+  for user models. Concretely, this means you cannot use features to
+  determine the shape of modeling elements (have a sort algorithm
+  interface that has variation points to determine the actual
+  algorithm to use). This is explicitly a non-goal of our approach. In
+  effect, we are focused only on structural variability inside the
+  archetype space, not the coding space.
+- we need to use the names bound and unbound configurations. The
+  expander takes a set of unbound configurations, finds those that
+  bind to stereotypes (candidate bindings) and then performs the
+  addition operation between the element bound configuration and the
+  stereotype bound configuration. Maybe we should call it "binder"?
+- merger should be called "adder": it performs the "addition"
+  operation on two configurations. However, our addition is
+  non-commutative and non-associative. Maybe its not addition? Its not
+  clear by looking at wikipedia so lets stick to merger.
+
+Tasks:
+
+- rename annotations to variability.
+- rename type to feature.
+- rename type group to feature group. Leave traits as is for now.
+- rename annotation to configuration.
+
 
 *** Location of =--byproduct-directory= not respected                 :story:
 

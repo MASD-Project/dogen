@@ -655,6 +655,53 @@ need to have a way to declare facet dependencies:
 - all facets other than types depend on types.
 - tests depends on at least types and test data.
 
+Actually what we really need is a model to declare all entities in the
+archetype space and their relationships:
+
+- archetypes
+- facets
+- formatters
+- kernels
+
+The annotations model can then depend on this model. It should have
+facilities for registration of kerneles, etc. However, note that this
+has nothing to do with model to text transforms - its just declaring
+the lay of the land for the archetype space. We called this generation
+space up to know but generation is concerned with the mapping of
+coding entities into archetype space, not with defining the geometry
+of that space. We need a good name for this model:
+
+- =masd.dogen.archetypes=
+
+This also makes it clear why annotations had a need for locations in
+archetype space: its because the configuration is the configuration of
+formatting functions which are responsible for mapping coding elements
+into archetypes. Of course we have configuration that is not related
+to archetypes as well. We need some kind of way of stating this at the
+archetype model level so that we don't have to associate all features
+with a location on archetype space when none exists.
+
+Merged stories:
+
+*Add support for formatter and facet dependencies*
+
+Once we are finished with the refactoring of the C++ model, we should
+add a way of declaring dependencies between facets and between
+formatters. We may not need dependencies between facets as these are
+actually a manifestation of the formatter dependencies.
+
+These are required to ensure users have not chosen some invalid
+combination of formatters (for example disable serialisation when a
+formatter requires it). It is also required when a given
+facet/formatter is not supported (for example when an STL type does
+not support serialisation out of the box).
+
+Note that the dependencies are not just static. For example, the types
+facet depends on the hash facet if the user decides to add a
+=std::unordered_map= of a user defined type to another user defined
+type. We need to make sure we take these run-time dependencies into
+account too.
+
 *** Formatters can only belong to one facet                           :story:
 
 Up to know there was an agreement that generation space was
@@ -3432,25 +3479,6 @@ We need to be able to mark yarn attributes as:
 - public
 - private
 - protected
-
-*** Add support for formatter and facet dependencies                  :story:
-
-Once we are finished with the refactoring of the C++ model, we should
-add a way of declaring dependencies between facets and between
-formatters. We may not need dependencies between facets as these are
-actually a manifestation of the formatter dependencies.
-
-These are required to ensure users have not chosen some invalid
-combination of formatters (for example disable serialisation when a
-formatter requires it). It is also required when a given
-facet/formatter is not supported (for example when an STL type does
-not support serialisation out of the box).
-
-Note that the dependencies are not just static. For example, the types
-facet depends on the hash facet if the user decides to add a
-=std::unordered_map= of a user defined type to another user defined
-type. We need to make sure we take these run-time dependencies into
-account too.
 
 *** Add support for default values                                    :story:
 
