@@ -31,11 +31,11 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.annotations/types/annotation_factory.hpp"
-#include "masd.dogen.annotations/types/annotation_expander.hpp"
-#include "masd.dogen.annotations/types/archetype_location_repository.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/annotation_factory.hpp"
+#include "masd.dogen.variability/types/annotation_expander.hpp"
+#include "masd.dogen.variability/types/archetype_location_repository.hpp"
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.templating/types/stitch/properties.hpp"
 #include "masd.dogen.templating/types/stitch/text_template.hpp"
@@ -79,24 +79,24 @@ private:
     /**
      * @brief Obtains the archetype location repository.
      */
-    annotations::archetype_location_repository
+    variability::archetype_location_repository
     obtain_archetype_location_repository() const;
 
     /**
      * @brief Sets up the annotations repository.
      */
-    annotations::type_repository create_annotations_type_repository(
+    variability::type_repository create_annotations_type_repository(
         const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::archetype_location_repository& alrp)
+        const variability::archetype_location_repository& alrp)
         const;
 
     /**
      * @brief Creates the artefacts
      */
     std::list<extraction::meta_model::artefact>
-    create_artefacts(const annotations::type_repository& atrp,
-        const annotations::annotation_factory& af,
-        const annotations::annotation_expander& ae,
+    create_artefacts(const variability::type_repository& atrp,
+        const variability::annotation_factory& af,
+        const variability::annotation_expander& ae,
         const std::forward_list<boost::filesystem::path>&
         text_template_paths,
         const std::unordered_map<std::string, std::string>& kvps) const;

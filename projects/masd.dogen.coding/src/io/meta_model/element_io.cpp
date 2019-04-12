@@ -21,8 +21,8 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.annotations/io/annotation_io.hpp"
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
+#include "masd.dogen.variability/io/annotation_io.hpp"
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.coding/io/meta_model/decoration_io.hpp"
 #include "masd.dogen.coding/io/meta_model/origin_types_io.hpp"

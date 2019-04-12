@@ -27,7 +27,7 @@
 
 #include <list>
 #include <boost/shared_ptr.hpp>
-#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 
@@ -47,13 +47,13 @@ private:
         generation::meta_model::model& m) const;
 
 private:
-    void inject_visual_studio(const annotations::type_repository& atrp,
+    void inject_visual_studio(const variability::type_repository& atrp,
         generation::meta_model::model& m) const;
     void inject_assembly_info(generation::meta_model::model& m) const;
     void inject_assistant(generation::meta_model::model& m) const;
 
 public:
-    void inject(const annotations::type_repository& atrp,
+    void inject(const variability::type_repository& atrp,
         generation::meta_model::model& m) const;
 };
 

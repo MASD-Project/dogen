@@ -798,7 +798,7 @@ etc.).
 #DOGEN masd.injection.reference=cpp.std
 #DOGEN masd.injection.reference=cpp.boost
 #DOGEN masd.injection.reference=masd.dogen
-#DOGEN masd.injection.reference=masd.dogen.annotations
+#DOGEN masd.injection.reference=masd.dogen.variability
 #DOGEN masd.injection.reference=masd.dogen.tracing
 #DOGEN masd.injection.reference=masd.dogen.extraction
 #DOGEN masd.injection.reference=masd
@@ -1630,7 +1630,7 @@ etc.#</dia:string>
             <dia:string>#annotation#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#annotations::annotation#</dia:string>
+            <dia:string>#variability::annotation#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -10795,7 +10795,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
             <dia:string>#type_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;annotations::type_repository&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;variability::type_repository&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -10818,7 +10818,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
             <dia:string>#archetype_location_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;annotations::archetype_location_repository&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;variability::archetype_location_repository&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -10841,7 +10841,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
             <dia:string>#annotation_factory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;annotations::annotation_factory&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;variability::annotation_factory&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

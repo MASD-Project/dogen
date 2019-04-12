@@ -4509,7 +4509,7 @@ model directory.#</dia:string>
 #DOGEN masd.injection.reference=cpp.boost
 #DOGEN masd.injection.reference=cpp.std
 #DOGEN masd.injection.reference=masd.dogen
-#DOGEN masd.injection.reference=masd.dogen.annotations
+#DOGEN masd.injection.reference=masd.dogen.variability
 #DOGEN masd.injection.reference=masd.dogen.tracing
 #DOGEN masd.injection.reference=masd.dogen.coding
 #DOGEN masd.injection.reference=masd.dogen.extraction
@@ -6790,7 +6790,7 @@ model directory.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#annotations::archetype_location_repository_parts#</dia:string>
+            <dia:string>#variability::archetype_location_repository_parts#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -9260,7 +9260,7 @@ model directory.#</dia:string>
             <dia:string>#type_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;annotations::type_repository&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;variability::type_repository&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9283,7 +9283,7 @@ model directory.#</dia:string>
             <dia:string>#archetype_location_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;annotations::archetype_location_repository&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;variability::archetype_location_repository&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9306,7 +9306,7 @@ model directory.#</dia:string>
             <dia:string>#annotation_factory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;annotations::annotation_factory&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;variability::annotation_factory&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9329,7 +9329,7 @@ model directory.#</dia:string>
             <dia:string>#annotation_expander#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;annotations::annotation_expander&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;variability::annotation_expander&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

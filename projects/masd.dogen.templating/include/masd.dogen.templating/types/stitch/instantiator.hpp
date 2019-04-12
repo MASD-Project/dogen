@@ -28,10 +28,10 @@
 #include <string>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.annotations/types/annotation_factory.hpp"
-#include "masd.dogen.annotations/types/annotation_expander.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/annotation_factory.hpp"
+#include "masd.dogen.variability/types/annotation_expander.hpp"
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.templating/types/stitch/properties_factory.hpp"
 #include "masd.dogen.templating/types/stitch/text_template.hpp"
@@ -45,9 +45,9 @@ typedef boost::error_info<struct tag_file_name, std::string> error_in_file;
 
 class instantiator final {
 public:
-    instantiator(const annotations::type_repository& atrp,
-        const annotations::annotation_factory& af,
-        const annotations::annotation_expander& ae);
+    instantiator(const variability::type_repository& atrp,
+        const variability::annotation_factory& af,
+        const variability::annotation_expander& ae);
 
 private:
     /**
@@ -105,8 +105,8 @@ public:
         const std::unordered_map<std::string, std::string>& kvps) const;
 
 private:
-    const annotations::annotation_factory& annotation_factory_;
-    const annotations::annotation_expander& annotation_expander_;
+    const variability::annotation_factory& annotation_factory_;
+    const variability::annotation_expander& annotation_expander_;
     const properties_factory properties_factory_;
 };
 

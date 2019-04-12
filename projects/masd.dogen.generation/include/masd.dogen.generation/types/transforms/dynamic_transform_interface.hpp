@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.generation/types/transforms/context_fwd.hpp"
 

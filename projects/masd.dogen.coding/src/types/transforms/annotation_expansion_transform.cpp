@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.annotations/types/annotation_expander.hpp"
+#include "masd.dogen.variability/types/annotation_expander.hpp"
 #include "masd.dogen.coding/io/meta_model/model_set_io.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/meta_model/elements_traversal.hpp"
@@ -42,7 +42,7 @@ namespace {
 
 class updater {
 public:
-    explicit updater(const annotations::annotation_expander& e)
+    explicit updater(const variability::annotation_expander& e)
         : annotation_expander_(e) {}
 
 private:
@@ -84,7 +84,7 @@ public:
     }
 
 private:
-    const annotations::annotation_expander annotation_expander_;
+    const variability::annotation_expander annotation_expander_;
 };
 
 }

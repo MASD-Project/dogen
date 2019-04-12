@@ -26,8 +26,8 @@
 #endif
 
 #include <string>
-#include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/types/meta_model/name_tree.hpp"
@@ -55,21 +55,21 @@ namespace masd::dogen::coding::transforms {
 class parsing_transform final {
 private:
     struct type_group {
-        annotations::type parent;
-        annotations::type enumeration_underlying_element;
-        annotations::type primitive_underlying_element;
+        variability::type parent;
+        variability::type enumeration_underlying_element;
+        variability::type primitive_underlying_element;
     };
 
-    static type_group make_type_group(const annotations::type_repository& atrp);
+    static type_group make_type_group(const variability::type_repository& atrp);
 
     static std::string make_parent(const type_group& tg,
-        const annotations::annotation& a);
+        const variability::annotation& a);
 
     static std::string make_enumeration_underlying_element(const type_group& tg,
-        const annotations::annotation& a);
+        const variability::annotation& a);
 
     static std::string make_primitive_underlying_element(const type_group& tg,
-        const annotations::annotation& a);
+        const variability::annotation& a);
 
 private:
     static std::string

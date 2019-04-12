@@ -24,8 +24,8 @@
 #include "masd.dogen.utility/types/io/optional_io.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/meta_model/licence.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
@@ -61,9 +61,9 @@ const std::string technical_space_not_found("Technical space not found: ");
 namespace masd::dogen::generation::transforms {
 
 decoration_transform::type_group decoration_transform::
-make_type_group(const annotations::type_repository& atrp) {
+make_type_group(const variability::type_repository& atrp) {
     type_group r;
-    const annotations::type_repository_selector s(atrp);
+    const variability::type_repository_selector s(atrp);
 
     r.enabled = s.select_type_by_name(traits::decoration::enabled());
     r.copyright_notice =
@@ -78,10 +78,10 @@ make_type_group(const annotations::type_repository& atrp) {
 
 boost::optional<decoration_configuration>
 decoration_transform::read_decoration_configuration(const type_group& tg,
-    const annotations::annotation& a) {
+    const variability::annotation& a) {
 
     bool has_configuration(false);
-    const annotations::entry_selector s(a);
+    const variability::entry_selector s(a);
     decoration_configuration r;
     if (s.has_entry(tg.enabled)) {
         r.enabled(s.get_boolean_content(tg.enabled));

@@ -24,7 +24,7 @@
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
-#include "masd.dogen.annotations/io/annotation_io.hpp"
+#include "masd.dogen.variability/io/annotation_io.hpp"
 #include "masd.dogen.templating/types/wale/workflow.hpp"
 #include "masd.dogen.templating/types/helpers/kvp_validator.hpp"
 #include "masd.dogen.templating/types/stitch/instantiation_error.hpp"
@@ -49,9 +49,9 @@ const std::string duplicate_key("Attempt to insert duplicate key: ");
 
 namespace masd::dogen::templating::stitch {
 
-instantiator::instantiator(const annotations::type_repository& atrp,
-    const annotations::annotation_factory& af,
-    const annotations::annotation_expander& ae)
+instantiator::instantiator(const variability::type_repository& atrp,
+    const variability::annotation_factory& af,
+    const variability::annotation_expander& ae)
     : annotation_factory_(af), annotation_expander_(ae),
       properties_factory_(atrp) {}
 
@@ -191,7 +191,7 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
          * performs a profile expansion as required. We then take that
          * annotation object and use it to generate the properties.
          */
-        const auto st(annotations::scope_types::root_module);
+        const auto st(variability::scope_types::root_module);
         const auto& tv(r.body().tagged_values());
         const auto original(annotation_factory_.make(tv, st));
         const auto expanded(annotation_expander_.expand(original));

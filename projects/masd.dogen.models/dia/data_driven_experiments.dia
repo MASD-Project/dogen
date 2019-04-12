@@ -352,7 +352,7 @@
             <dia:string>#annotations#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::vector&lt;annotations::annotation&gt;#</dia:string>
+            <dia:string>#std::vector&lt;variability::annotation&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

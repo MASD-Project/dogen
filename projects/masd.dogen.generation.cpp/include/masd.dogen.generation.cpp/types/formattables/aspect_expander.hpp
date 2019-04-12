@@ -29,9 +29,9 @@
 #include <string>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.coding/types/meta_model/name_tree.hpp"
 #include "masd.dogen.coding/types/meta_model/attribute.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/formattable.hpp"
@@ -43,24 +43,24 @@ namespace masd::dogen::generation::cpp::formattables {
 class aspect_expander {
 private:
     struct type_group {
-        annotations::type requires_manual_default_constructor;
-        annotations::type requires_manual_move_constructor;
-        annotations::type requires_stream_manipulators;
+        variability::type requires_manual_default_constructor;
+        variability::type requires_manual_move_constructor;
+        variability::type requires_stream_manipulators;
     };
 
     friend std::ostream& operator<<(std::ostream& s, const type_group& v);
 
-    type_group make_type_group(const annotations::type_repository& atrp) const;
+    type_group make_type_group(const variability::type_repository& atrp) const;
 
     boost::optional<aspect_properties> make_aspect_properties(
-        const type_group& tg, const annotations::annotation& a) const;
+        const type_group& tg, const variability::annotation& a) const;
 
 private:
     typedef std::unordered_map<std::string, aspect_properties>
     aspect_properties_type;
 
     aspect_properties_type
-    obtain_aspect_properties(const annotations::type_repository& atrp,
+    obtain_aspect_properties(const variability::type_repository& atrp,
         const std::unordered_map<std::string, formattable>& formattables) const;
 
 private:
@@ -81,7 +81,7 @@ private:
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
-    void expand(const annotations::type_repository& atrp, model& fm) const;
+    void expand(const variability::type_repository& atrp, model& fm) const;
 };
 
 }

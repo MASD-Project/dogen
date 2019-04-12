@@ -87,7 +87,7 @@ inject_master_headers(generation::meta_model::model& m) const {
     add_element(e, m);
 }
 
-void injector::inject_visual_studio(const annotations::type_repository& atrp,
+void injector::inject_visual_studio(const variability::type_repository& atrp,
     generation::meta_model::model& m) const {
     visual_studio_factory f;
     const auto e(f.make(atrp, m));
@@ -107,7 +107,7 @@ void injector::inject_entry_point(generation::meta_model::model& m) const {
     add_element(e, m);
 }
 
-void injector::inject(const annotations::type_repository& atrp,
+void injector::inject(const variability::type_repository& atrp,
     generation::meta_model::model& m) const {
     inject_registrar(m);
     inject_build_files(m);

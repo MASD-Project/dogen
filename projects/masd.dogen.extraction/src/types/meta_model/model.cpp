@@ -23,7 +23,7 @@
 namespace masd::dogen::extraction::meta_model {
 
 model::model(
-    const masd::dogen::annotations::annotation& annotation,
+    const masd::dogen::variability::annotation& annotation,
     const std::string& name,
     const std::string& technical_space,
     const std::list<masd::dogen::extraction::meta_model::artefact>& artefacts,
@@ -61,19 +61,19 @@ model& model::operator=(model other) {
     return *this;
 }
 
-const masd::dogen::annotations::annotation& model::annotation() const {
+const masd::dogen::variability::annotation& model::annotation() const {
     return annotation_;
 }
 
-masd::dogen::annotations::annotation& model::annotation() {
+masd::dogen::variability::annotation& model::annotation() {
     return annotation_;
 }
 
-void model::annotation(const masd::dogen::annotations::annotation& v) {
+void model::annotation(const masd::dogen::variability::annotation& v) {
     annotation_ = v;
 }
 
-void model::annotation(const masd::dogen::annotations::annotation&& v) {
+void model::annotation(const masd::dogen::variability::annotation&& v) {
     annotation_ = std::move(v);
 }
 

@@ -64,7 +64,7 @@ const std::string repository_stereotype("repository");
 const std::string immutable_stereotype("immutable");
 
 masd::dogen::injection::dia::context empty_context;
-masd::dogen::annotations::scribble_group empty_scribble_group;
+masd::dogen::variability::scribble_group empty_scribble_group;
 
 }
 

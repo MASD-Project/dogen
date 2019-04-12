@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.annotations/types/annotation_expander.hpp"
+#include "masd.dogen.variability/types/annotation_expander.hpp"
 #include "masd.dogen.orchestration/types/transforms/context.hpp"
 
 namespace masd::dogen::orchestration::transforms {

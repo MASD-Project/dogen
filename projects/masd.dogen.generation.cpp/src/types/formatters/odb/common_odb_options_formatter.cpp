@@ -46,9 +46,9 @@ std::string common_odb_options_formatter::id() const {
     return r;
 }
 
-annotations::archetype_location
+variability::archetype_location
 common_odb_options_formatter::archetype_location() const {
-    static annotations::archetype_location
+    static variability::archetype_location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(), common_odb_options_formatter::static_id());
     return r;

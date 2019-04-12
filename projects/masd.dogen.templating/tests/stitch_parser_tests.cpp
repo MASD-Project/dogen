@@ -24,7 +24,7 @@
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.utility/types/test/exception_checkers.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.templating/io/stitch/text_template_body_io.hpp"
 #include "masd.dogen.templating/types/stitch/parsing_error.hpp"
 #include "masd.dogen.templating/types/stitch/parser.hpp"

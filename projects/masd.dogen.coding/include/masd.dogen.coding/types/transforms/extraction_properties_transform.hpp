@@ -27,9 +27,9 @@
 
 #include <unordered_set>
 #include <boost/optional.hpp>
-#include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/meta_model/extraction_properties.hpp"
@@ -42,27 +42,27 @@ namespace masd::dogen::coding::transforms {
 class extraction_properties_transform final {
 private:
     struct type_group {
-        annotations::type cpp_headers_output_directory;
-        annotations::type enable_backend_directories;
-        std::list<annotations::type> enabled;
+        variability::type cpp_headers_output_directory;
+        variability::type enable_backend_directories;
+        std::list<variability::type> enabled;
     };
 
-    static type_group make_type_group(const annotations::type_repository& atrp,
-        const std::list<annotations::archetype_location>& als);
+    static type_group make_type_group(const variability::type_repository& atrp,
+        const std::list<variability::archetype_location>& als);
 
     static boost::filesystem::path obtain_cpp_headers_output_directory(
-        const type_group& tg, const annotations::annotation& ra);
+        const type_group& tg, const variability::annotation& ra);
 
     static std::unordered_set<std::string> obtain_enabled_backends(
-        const type_group& tg, const annotations::annotation& ra);
+        const type_group& tg, const variability::annotation& ra);
 
     static bool obtain_enable_backend_directories(const type_group& tg,
-        const annotations::annotation& ra);
+        const variability::annotation& ra);
 
     static meta_model::extraction_properties make_extraction_properties(
         const context& ctx,
-        const std::list<annotations::archetype_location>& als,
-        const annotations::annotation& ra);
+        const std::list<variability::archetype_location>& als,
+        const variability::annotation& ra);
 
 public:
     /**

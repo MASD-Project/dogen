@@ -34,7 +34,7 @@
 namespace masd::dogen::generation::cpp::formattables {
 
 void model_expander::
-expand_streaming(const annotations::type_repository& atrp, model& fm) const {
+expand_streaming(const variability::type_repository& atrp, model& fm) const {
     streaming_expander ex;
     ex.expand(atrp, fm);
 }
@@ -46,7 +46,7 @@ void model_expander::expand_canonical_archetypes(
 }
 
 void model_expander::expand_inclusion(
-    const annotations::type_repository& atrp,
+    const variability::type_repository& atrp,
     const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element, const formatters::repository& frp,
     const locator& l, model& fm) const {
@@ -54,13 +54,13 @@ void model_expander::expand_inclusion(
     ex.expand(atrp, enabled_archetype_for_element, frp, l, fm);
 }
 
-void model_expander::expand_aspects(const annotations::type_repository& atrp,
+void model_expander::expand_aspects(const variability::type_repository& atrp,
     model& fm) const {
     aspect_expander ex;
     ex.expand(atrp, fm);
 }
 
-void model_expander::expand_helpers(const annotations::type_repository& atrp,
+void model_expander::expand_helpers(const variability::type_repository& atrp,
     const formatters::repository& frp, model& fm) const {
     helper_expander ex;
     ex.expand(atrp, frp, fm);
@@ -77,7 +77,7 @@ void model_expander::expand_file_paths_and_guards(
     ex.expand(frp, l, fm);
 }
 
-void model_expander::expand_odb(const annotations::type_repository& atrp,
+void model_expander::expand_odb(const variability::type_repository& atrp,
     const locator& l, model& fm) const {
     odb_expander ex;
     ex.expand(atrp, l, fm);
@@ -95,14 +95,14 @@ void model_expander::expand_build_files(const locator& l, model& fm) const {
 }
 
 void
-model_expander::expand_cpp_standard(const annotations::type_repository& atrp,
-    const annotations::annotation& ra, model& fm) const {
+model_expander::expand_cpp_standard(const variability::type_repository& atrp,
+    const variability::annotation& ra, model& fm) const {
     cpp_standard_expander ex;
     ex.expand(atrp, ra, fm);
 }
 
 void model_expander::expand(
-    const annotations::type_repository& atrp, const annotations::annotation& ra,
+    const variability::type_repository& atrp, const variability::annotation& ra,
     const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element,
     const formatters::repository& frp, const locator& l, model& fm) const {

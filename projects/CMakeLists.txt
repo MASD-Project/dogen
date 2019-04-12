@@ -275,7 +275,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.cli/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.utility/include
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.annotations/include
+    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.variability/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.dia/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.injection/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.injection.dia/include
@@ -296,7 +296,7 @@ include_directories(
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.cli)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.utility)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.annotations)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.variability)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.dia)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.injection)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.injection.dia)

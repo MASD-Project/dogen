@@ -22,9 +22,9 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
-#include "masd.dogen.annotations/io/type_io.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/io/type_io.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/adapter.hpp"
@@ -61,7 +61,7 @@ public:
 
 private:
     std::list<std::string> make_odb_pragmas(const odb_expander::type_group& tg,
-        const annotations::annotation& a) const;
+        const variability::annotation& a) const;
 
 public:
     using fabric::element_visitor::visit;
@@ -86,9 +86,9 @@ updator(model& fm, const locator& l, const odb_expander::type_group& tg)
 
 std::list<std::string>
 updator::make_odb_pragmas(const odb_expander::type_group& tg,
-    const annotations::annotation& a) const {
+    const variability::annotation& a) const {
 
-    const annotations::entry_selector s(a);
+    const variability::entry_selector s(a);
     if (!s.has_entry(tg.odb_pragma))
         return std::list<std::string>();
 
@@ -132,7 +132,7 @@ void updator::visit(fabric::object_odb_options& ooo) {
 void updator::visit(coding::meta_model::object& o) {
     odb_properties op;
 
-    const annotations::entry_selector s(o.annotation());
+    const variability::entry_selector s(o.annotation());
     auto top_level_pragmas(make_odb_pragmas(type_group_, o.annotation()));
     if (o.orm_properties()) {
         /*
@@ -288,11 +288,11 @@ std::ostream& operator<<(std::ostream& s,
 }
 
 odb_expander::type_group odb_expander::
-make_type_group(const annotations::type_repository& atrp) const {
+make_type_group(const variability::type_repository& atrp) const {
     BOOST_LOG_SEV(lg, debug) << "Creating type groups.";
 
     type_group r;
-    const annotations::type_repository_selector s(atrp);
+    const variability::type_repository_selector s(atrp);
     const auto& op(formatters::odb::traits::odb_pragma());
     r.odb_pragma = s.select_type_by_name(op);
 
@@ -300,7 +300,7 @@ make_type_group(const annotations::type_repository& atrp) const {
     return r;
 }
 
-void odb_expander::expand(const annotations::type_repository& atrp,
+void odb_expander::expand(const variability::type_repository& atrp,
     const locator& l, model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started expanding odb properties.";
 

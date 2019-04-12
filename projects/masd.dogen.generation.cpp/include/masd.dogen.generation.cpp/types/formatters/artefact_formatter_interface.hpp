@@ -27,7 +27,7 @@
 
 #include <string>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.annotations/types/archetype_location.hpp"
+#include "masd.dogen.variability/types/archetype_location.hpp"
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
@@ -54,7 +54,7 @@ public:
     /**
      * @brief Ownership hierarchy for this formatter
      */
-    virtual annotations::archetype_location archetype_location() const = 0;
+    virtual variability::archetype_location archetype_location() const = 0;
 
     /**
      * @brief Returns name of the meta-model element that this

@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/cpp_standards.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/model.hpp"
 
@@ -39,17 +39,17 @@ private:
 
 private:
     struct type_group {
-        annotations::type cpp_standard;
+        variability::type cpp_standard;
     };
 
-    type_group make_type_group(const annotations::type_repository& atrp) const;
+    type_group make_type_group(const variability::type_repository& atrp) const;
 
     cpp_standards
-    make_standard(const type_group& tg, const annotations::annotation& a) const;
+    make_standard(const type_group& tg, const variability::annotation& a) const;
 
 public:
-    void expand(const annotations::type_repository& atrp,
-        const annotations::annotation& ra, model& fm) const;
+    void expand(const variability::type_repository& atrp,
+        const variability::annotation& ra, model& fm) const;
 };
 
 }

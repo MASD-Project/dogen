@@ -26,9 +26,9 @@
 #endif
 
 #include <list>
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
@@ -45,14 +45,14 @@ private:
 
 private:
     struct type_group {
-        annotations::type output_technical_space;
+        variability::type output_technical_space;
     };
 
-    static type_group make_type_group(const annotations::type_repository& atrp);
+    static type_group make_type_group(const variability::type_repository& atrp);
 
     static std::list<meta_model::technical_space>
     make_output_technical_space(const type_group& tg,
-        const annotations::annotation& a);
+        const variability::annotation& a);
 
     /**
      * @brief Sets up the intrinsic technical space for all model

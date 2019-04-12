@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "masd.dogen.annotations/types/annotation_factory.hpp"
+#include "masd.dogen.variability/types/annotation_factory.hpp"
 #include "masd.dogen.injection/types/meta_model/model.hpp"
 #include "masd.dogen.injection/types/transforms/context_fwd.hpp"
 

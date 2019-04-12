@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.extraction/types/transforms/context.hpp"
 #include "masd.dogen.extraction/types/meta_model/model.hpp"
 #include "masd.dogen.extraction/types/meta_model/outputting_properties.hpp"
@@ -40,28 +40,28 @@ namespace masd::dogen::extraction::transforms {
 class update_outputting_properties_transform final {
 private:
     struct type_group {
-        annotations::type force_write;
-        annotations::type delete_extra_files;
-        annotations::type ignore_files_matching_regex;
-        annotations::type delete_empty_directories;
+        variability::type force_write;
+        variability::type delete_extra_files;
+        variability::type ignore_files_matching_regex;
+        variability::type delete_empty_directories;
     };
 
-    static type_group make_type_group(const annotations::type_repository& atrp);
+    static type_group make_type_group(const variability::type_repository& atrp);
 
     static bool obtain_force_write(const type_group& tg,
-        const annotations::annotation& ra);
+        const variability::annotation& ra);
 
     static bool obtain_delete_extra_files(const type_group& tg,
-        const annotations::annotation& ra);
+        const variability::annotation& ra);
 
     static std::vector<std::string> obtain_ignore_files_matching_regex(
-        const type_group& tg, const annotations::annotation& ra);
+        const type_group& tg, const variability::annotation& ra);
 
     static bool obtain_delete_empty_directories(const type_group& tg,
-        const annotations::annotation& ra);
+        const variability::annotation& ra);
 
     static meta_model::outputting_properties make_outputting_properties(
-        const context& ctx, const annotations::annotation& ra);
+        const context& ctx, const variability::annotation& ra);
 
 public:
     static void apply(const context& ctx, meta_model::model& m);

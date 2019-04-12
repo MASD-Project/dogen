@@ -21,9 +21,9 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
-#include "masd.dogen.annotations/types/archetype_location_repository.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/archetype_location_repository.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.extraction/types/traits.hpp"
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"
@@ -43,10 +43,10 @@ namespace masd::dogen::extraction::transforms {
 
 update_outputting_properties_transform::type_group
 update_outputting_properties_transform::make_type_group(
-    const annotations::type_repository& atrp) {
+    const variability::type_repository& atrp) {
 
     type_group r;
-    const annotations::type_repository_selector rs(atrp);
+    const variability::type_repository_selector rs(atrp);
 
     const auto fw(traits::extraction::force_write());
     r.force_write = rs.select_type_by_name(fw);
@@ -65,21 +65,21 @@ update_outputting_properties_transform::make_type_group(
 
 bool update_outputting_properties_transform::
 obtain_force_write(const type_group& tg,
-    const annotations::annotation& ra) {
-    const annotations::entry_selector s(ra);
+    const variability::annotation& ra) {
+    const variability::entry_selector s(ra);
     return s.get_boolean_content_or_default(tg.force_write);
 }
 
 bool update_outputting_properties_transform::obtain_delete_extra_files(
-    const type_group& tg, const annotations::annotation& ra) {
-    const annotations::entry_selector s(ra);
+    const type_group& tg, const variability::annotation& ra) {
+    const variability::entry_selector s(ra);
     return s.get_boolean_content_or_default(tg.delete_extra_files);
 }
 
 std::vector<std::string> update_outputting_properties_transform::
 obtain_ignore_files_matching_regex(const type_group& tg,
-    const annotations::annotation& ra) {
-    const annotations::entry_selector s(ra);
+    const variability::annotation& ra) {
+    const variability::entry_selector s(ra);
 
     if (!s.has_entry(tg.ignore_files_matching_regex))
         return std::vector<std::string>();
@@ -93,14 +93,14 @@ obtain_ignore_files_matching_regex(const type_group& tg,
 }
 
 bool update_outputting_properties_transform::obtain_delete_empty_directories(
-    const type_group& tg, const annotations::annotation& ra) {
-    const annotations::entry_selector s(ra);
+    const type_group& tg, const variability::annotation& ra) {
+    const variability::entry_selector s(ra);
     return s.get_boolean_content_or_default(tg.delete_empty_directories);
 }
 
 meta_model::outputting_properties
 update_outputting_properties_transform::make_outputting_properties(
-    const context& ctx, const annotations::annotation& ra) {
+    const context& ctx, const variability::annotation& ra) {
 
     const auto tg(make_type_group(*ctx.type_repository()));
     meta_model::outputting_properties r;

@@ -22,10 +22,10 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.annotations/io/type_io.hpp"
-#include "masd.dogen.annotations/types/annotation_factory.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/io/type_io.hpp"
+#include "masd.dogen.variability/types/annotation_factory.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
@@ -119,10 +119,10 @@ coding::meta_model::technical_space to_technical_space(const std::string& s) {
 
 injection_model_to_coding_model_transform::type_group
 injection_model_to_coding_model_transform::
-make_type_group(const annotations::type_repository& atrp) {
+make_type_group(const variability::type_repository& atrp) {
     type_group r;
 
-    const annotations::type_repository_selector rs(atrp);
+    const variability::type_repository_selector rs(atrp);
 
     const auto& em(coding::traits::external_modules());
     r.external_modules = rs.select_type_by_name(em);
@@ -135,9 +135,9 @@ make_type_group(const annotations::type_repository& atrp) {
 
 naming_configuration
 injection_model_to_coding_model_transform::make_naming_configuration(
-    const type_group& tg, const annotations::annotation& a) {
+    const type_group& tg, const variability::annotation& a) {
 
-    const annotations::entry_selector s(a);
+    const variability::entry_selector s(a);
     if (!s.has_entry(tg.model_modules)) {
         BOOST_LOG_SEV(lg, error) << missing_model_modules;
         BOOST_THROW_EXCEPTION(transform_exception(missing_model_modules));
@@ -262,7 +262,7 @@ apply(const context& ctx, const injection::meta_model::model& m) {
     helpers::stereotypes_helper h;
     const auto scr(h.from_string(m.stereotypes()));
     const auto& f(*ctx.coding_context().annotation_factory());
-    const auto scope(annotations::scope_types::root_module);
+    const auto scope(variability::scope_types::root_module);
     const auto ra(f.make(m.tagged_values(), scope));
 
     const auto& atrp(*ctx.coding_context().type_repository());

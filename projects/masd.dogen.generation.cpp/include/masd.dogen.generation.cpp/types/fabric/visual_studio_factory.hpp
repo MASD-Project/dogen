@@ -27,9 +27,9 @@
 
 #include <list>
 #include <boost/shared_ptr.hpp>
-#include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/visual_studio_configuration.hpp"
@@ -39,18 +39,18 @@ namespace masd::dogen::generation::cpp::fabric {
 class visual_studio_factory final {
 private:
     struct type_group {
-        annotations::type project_solution_guid;
-        annotations::type project_guid;
+        variability::type project_solution_guid;
+        variability::type project_guid;
     };
 
-    type_group make_type_group(const annotations::type_repository& atrp) const;
+    type_group make_type_group(const variability::type_repository& atrp) const;
 
     visual_studio_configuration make_configuration(const type_group& tg,
-        const annotations::annotation& ra) const;
+        const variability::annotation& ra) const;
 
     visual_studio_configuration make_configuration(
-        const annotations::type_repository& atrp,
-        const annotations::annotation& ra) const;
+        const variability::type_repository& atrp,
+        const variability::annotation& ra) const;
 
 private:
     std::string obtain_project_name(
@@ -69,7 +69,7 @@ private:
 
 public:
     std::list<boost::shared_ptr<coding::meta_model::element>>
-    make(const annotations::type_repository& atrp,
+    make(const variability::type_repository& atrp,
         const generation::meta_model::model& m) const;
 };
 

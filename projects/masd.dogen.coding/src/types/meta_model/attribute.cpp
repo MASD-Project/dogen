@@ -38,7 +38,7 @@ attribute::attribute(attribute&& rhs)
 
 attribute::attribute(
     const std::string& documentation,
-    const masd::dogen::annotations::annotation& annotation,
+    const masd::dogen::variability::annotation& annotation,
     const masd::dogen::coding::meta_model::name& name,
     const std::string& unparsed_type,
     const masd::dogen::coding::meta_model::name_tree& parsed_type,
@@ -99,19 +99,19 @@ void attribute::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const masd::dogen::annotations::annotation& attribute::annotation() const {
+const masd::dogen::variability::annotation& attribute::annotation() const {
     return annotation_;
 }
 
-masd::dogen::annotations::annotation& attribute::annotation() {
+masd::dogen::variability::annotation& attribute::annotation() {
     return annotation_;
 }
 
-void attribute::annotation(const masd::dogen::annotations::annotation& v) {
+void attribute::annotation(const masd::dogen::variability::annotation& v) {
     annotation_ = v;
 }
 
-void attribute::annotation(const masd::dogen::annotations::annotation&& v) {
+void attribute::annotation(const masd::dogen::variability::annotation&& v) {
     annotation_ = std::move(v);
 }
 

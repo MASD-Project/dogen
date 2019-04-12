@@ -26,8 +26,8 @@
 #endif
 
 #include <string>
-#include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/meta_model/formatting_styles.hpp"
@@ -42,19 +42,19 @@ private:
 
 private:
     struct type_group {
-        annotations::type formatting_style;
-        annotations::type formatting_input;
+        variability::type formatting_style;
+        variability::type formatting_input;
     };
     friend std::ostream& operator<<(std::ostream& s, const type_group& v);
 
     static std::unordered_map<std::string, type_group>
-    make_type_groups(const annotations::type_repository& atrp,
-        const std::list<annotations::archetype_location>& als);
+    make_type_groups(const variability::type_repository& atrp,
+        const std::list<variability::archetype_location>& als);
 
     static std::unordered_map<std::string, formatting_configuration>
     make_formatting_configuration(
         const std::unordered_map<std::string, type_group>& tgs,
-        const annotations::annotation& a);
+        const variability::annotation& a);
 
     static void apply(const std::unordered_map<std::string, type_group> tgs,
         coding::meta_model::element& e);

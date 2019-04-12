@@ -22,9 +22,9 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/string/splitter.hpp"
-#include "masd.dogen.annotations/io/type_io.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/io/type_io.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
@@ -164,10 +164,10 @@ operator<<(std::ostream& s, const orm_transform::type_group& v) {
 }
 
 orm_transform::type_group orm_transform::
-make_type_group(const annotations::type_repository& atrp) {
+make_type_group(const variability::type_repository& atrp) {
     type_group r;
 
-    const annotations::type_repository_selector rs(atrp);
+    const variability::type_repository_selector rs(atrp);
 
     const auto& ds(traits::orm::database_system());
     r.database_system = rs.select_type_by_name(ds);
@@ -201,10 +201,10 @@ make_type_group(const annotations::type_repository& atrp) {
 
 boost::optional<meta_model::orm_model_properties>
 orm_transform::make_model_properties(const type_group& tg,
-    const annotations::annotation& a) {
+    const variability::annotation& a) {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating model configuration.";
-    const annotations::entry_selector s(a);
+    const variability::entry_selector s(a);
     bool found_any(false);
 
     meta_model::orm_model_properties r;
@@ -235,10 +235,10 @@ orm_transform::make_model_properties(const type_group& tg,
 }
 
 void orm_transform::update_object_properties(
-    const type_group& tg, const annotations::annotation& a,
+    const type_group& tg, const variability::annotation& a,
     meta_model::orm_object_properties& cfg) {
 
-    const annotations::entry_selector s(a);
+    const variability::entry_selector s(a);
     if (s.has_entry(tg.schema_name))
         cfg.schema_name(s.get_text_content(tg.schema_name));
 
@@ -248,9 +248,9 @@ void orm_transform::update_object_properties(
 
 boost::optional<meta_model::orm_attribute_properties>
 orm_transform::make_attribute_properties(const type_group& tg,
-    const annotations::annotation& a) {
+    const variability::annotation& a) {
 
-    const annotations::entry_selector s(a);
+    const variability::entry_selector s(a);
     bool found_any(false);
 
     meta_model::orm_attribute_properties r;
@@ -287,19 +287,19 @@ orm_transform::make_attribute_properties(const type_group& tg,
 }
 
 void orm_transform::update_primitive_properties(
-    const type_group& tg, const annotations::annotation& a,
+    const type_group& tg, const variability::annotation& a,
     meta_model::orm_primitive_properties& cfg) {
 
-    const annotations::entry_selector s(a);
+    const variability::entry_selector s(a);
     if (s.has_entry(tg.schema_name))
         cfg.schema_name(s.get_text_content(tg.schema_name));
 }
 
 boost::optional<meta_model::orm_module_properties>
 orm_transform::make_module_properties(const type_group& tg,
-    const annotations::annotation& a) {
+    const variability::annotation& a) {
 
-    const annotations::entry_selector s(a);
+    const variability::entry_selector s(a);
     bool found_any(false);
 
     meta_model::orm_module_properties r;

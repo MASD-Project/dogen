@@ -26,7 +26,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/exception/utility_exception.hpp"
-#include "masd.dogen.annotations/types/value_factory.hpp"
+#include "masd.dogen.variability/types/value_factory.hpp"
 #include "masd.dogen.coding/types/meta_model/exception.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
@@ -394,8 +394,8 @@ void insert_object(meta_model::model& m,
     m.objects().insert(std::make_pair(o->name().qualified().dot(), o));
 }
 
-void add_test_annotationss(annotations::annotation& a) {
-    using namespace annotations;
+void add_test_annotationss(variability::annotation& a) {
+    using namespace variability;
 
     value_factory f;
     a.tagged_values().insert(std::make_pair(licence_name_key,

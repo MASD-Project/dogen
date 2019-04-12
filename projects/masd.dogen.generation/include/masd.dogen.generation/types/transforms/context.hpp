@@ -31,10 +31,10 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.tracing/types/tracer_fwd.hpp"
-#include "masd.dogen.annotations/types/type_repository_fwd.hpp"
-#include "masd.dogen.annotations/types/annotation_factory_fwd.hpp"
-#include "masd.dogen.annotations/types/annotation_expander_fwd.hpp"
-#include "masd.dogen.annotations/types/archetype_location_repository_fwd.hpp"
+#include "masd.dogen.variability/types/type_repository_fwd.hpp"
+#include "masd.dogen.variability/types/annotation_factory_fwd.hpp"
+#include "masd.dogen.variability/types/annotation_expander_fwd.hpp"
+#include "masd.dogen.variability/types/archetype_location_repository_fwd.hpp"
 #include "masd.dogen.generation/types/meta_model/intra_backend_segment_properties.hpp"
 
 namespace masd::dogen::generation::transforms {
@@ -46,26 +46,26 @@ public:
 
 public:
     context(
-        const boost::shared_ptr<masd::dogen::annotations::type_repository>& type_repository,
-        const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& archetype_location_repository,
-        const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& annotation_factory,
-        const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& annotation_expander,
+        const boost::shared_ptr<masd::dogen::variability::type_repository>& type_repository,
+        const boost::shared_ptr<masd::dogen::variability::archetype_location_repository>& archetype_location_repository,
+        const boost::shared_ptr<masd::dogen::variability::annotation_factory>& annotation_factory,
+        const boost::shared_ptr<masd::dogen::variability::annotation_expander>& annotation_expander,
         const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer,
         const std::unordered_map<std::string, masd::dogen::generation::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties,
         const boost::filesystem::path& output_directory_path);
 
 public:
-    const boost::shared_ptr<masd::dogen::annotations::type_repository>& type_repository() const;
-    void type_repository(const boost::shared_ptr<masd::dogen::annotations::type_repository>& v);
+    const boost::shared_ptr<masd::dogen::variability::type_repository>& type_repository() const;
+    void type_repository(const boost::shared_ptr<masd::dogen::variability::type_repository>& v);
 
-    const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& archetype_location_repository() const;
-    void archetype_location_repository(const boost::shared_ptr<masd::dogen::annotations::archetype_location_repository>& v);
+    const boost::shared_ptr<masd::dogen::variability::archetype_location_repository>& archetype_location_repository() const;
+    void archetype_location_repository(const boost::shared_ptr<masd::dogen::variability::archetype_location_repository>& v);
 
-    const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& annotation_factory() const;
-    void annotation_factory(const boost::shared_ptr<masd::dogen::annotations::annotation_factory>& v);
+    const boost::shared_ptr<masd::dogen::variability::annotation_factory>& annotation_factory() const;
+    void annotation_factory(const boost::shared_ptr<masd::dogen::variability::annotation_factory>& v);
 
-    const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& annotation_expander() const;
-    void annotation_expander(const boost::shared_ptr<masd::dogen::annotations::annotation_expander>& v);
+    const boost::shared_ptr<masd::dogen::variability::annotation_expander>& annotation_expander() const;
+    void annotation_expander(const boost::shared_ptr<masd::dogen::variability::annotation_expander>& v);
 
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer() const;
     void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v);
@@ -82,10 +82,10 @@ public:
     /**@}*/
 
 private:
-    boost::shared_ptr<masd::dogen::annotations::type_repository> type_repository_;
-    boost::shared_ptr<masd::dogen::annotations::archetype_location_repository> archetype_location_repository_;
-    boost::shared_ptr<masd::dogen::annotations::annotation_factory> annotation_factory_;
-    boost::shared_ptr<masd::dogen::annotations::annotation_expander> annotation_expander_;
+    boost::shared_ptr<masd::dogen::variability::type_repository> type_repository_;
+    boost::shared_ptr<masd::dogen::variability::archetype_location_repository> archetype_location_repository_;
+    boost::shared_ptr<masd::dogen::variability::annotation_factory> annotation_factory_;
+    boost::shared_ptr<masd::dogen::variability::annotation_expander> annotation_expander_;
     boost::shared_ptr<masd::dogen::tracing::tracer> tracer_;
     std::unordered_map<std::string, masd::dogen::generation::meta_model::intra_backend_segment_properties> intra_backend_segment_properties_;
     boost::filesystem::path output_directory_path_;

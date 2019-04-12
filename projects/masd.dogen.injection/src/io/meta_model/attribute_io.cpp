@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.annotations/io/annotation_io.hpp"
+#include "masd.dogen.variability/io/annotation_io.hpp"
 #include "masd.dogen.injection/io/meta_model/attribute_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {

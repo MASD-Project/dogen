@@ -45,7 +45,7 @@ void annotations_transform::apply(const transforms::context& ctx,
                              << "Total elements: " << m.elements().size();
 
     const auto& f(*ctx.annotation_factory());
-    using masd::dogen::annotations::scope_types;
+    using masd::dogen::variability::scope_types;
     m.annotation(f.make(m.tagged_values(), scope_types::root_module));
 
     for (auto& e : m.elements()) {

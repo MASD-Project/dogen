@@ -23,9 +23,9 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.annotations/io/type_io.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/io/type_io.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
@@ -104,11 +104,11 @@ operator<<(std::ostream& s, const enumerations_transform::type_group& v) {
 }
 
 enumerations_transform::enumeration_type_group enumerations_transform::
-make_enumeration_type_group(const annotations::type_repository& atrp) {
+make_enumeration_type_group(const variability::type_repository& atrp) {
     BOOST_LOG_SEV(lg, debug) << "Creating enumeration type group.";
 
     enumeration_type_group r;
-    const annotations::type_repository_selector s(atrp);
+    const variability::type_repository_selector s(atrp);
 
     using en = traits::enumeration;
     const auto uidue(en::use_implementation_defined_underlying_element());
@@ -127,11 +127,11 @@ make_enumeration_type_group(const annotations::type_repository& atrp) {
 }
 
 enumerations_transform::enumerator_type_group enumerations_transform::
-make_enumerator_type_group(const annotations::type_repository& atrp) {
+make_enumerator_type_group(const variability::type_repository& atrp) {
     BOOST_LOG_SEV(lg, debug) << "Creating enumerator type group.";
 
     enumerator_type_group r;
-    const annotations::type_repository_selector s(atrp);
+    const variability::type_repository_selector s(atrp);
     r.value = s.select_type_by_name(traits::enumerator::value());
 
     BOOST_LOG_SEV(lg, debug) << "Created enumerator type group.";
@@ -139,7 +139,7 @@ make_enumerator_type_group(const annotations::type_repository& atrp) {
 }
 
 enumerations_transform::type_group enumerations_transform::
-make_type_group(const annotations::type_repository& atrp) {
+make_type_group(const variability::type_repository& atrp) {
     BOOST_LOG_SEV(lg, debug) << "Creating type group.";
 
     type_group r;
@@ -154,7 +154,7 @@ void enumerations_transform::populate_from_annotations(
     const enumeration_type_group& tg, meta_model::enumeration& e) {
 
     const auto& a(e.annotation());
-    const annotations::entry_selector s(a);
+    const variability::entry_selector s(a);
     const auto uidue(tg.use_implementation_defined_underlying_element);
     e.use_implementation_defined_underlying_element(
         s.get_boolean_content_or_default(uidue));
@@ -170,7 +170,7 @@ void enumerations_transform::populate_from_annotations(
 void enumerations_transform::populate_from_annotations(
     const enumerator_type_group& tg, meta_model::enumerator& e) {
     const auto& a(e.annotation());
-    const annotations::entry_selector s(a);
+    const variability::entry_selector s(a);
     if (s.has_entry(tg.value)) {
         e.value(s.get_text_content(tg.value));
         BOOST_LOG_SEV(lg, debug) << "Read enumerator value: "

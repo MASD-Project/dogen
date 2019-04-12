@@ -27,7 +27,7 @@ attribute::attribute(
     const std::list<std::string>& stereotypes,
     const std::string& documentation,
     const std::string& name,
-    const masd::dogen::annotations::annotation& annotation,
+    const masd::dogen::variability::annotation& annotation,
     const std::string& type,
     const std::string& value)
     : tagged_values_(tagged_values),
@@ -129,19 +129,19 @@ void attribute::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-const masd::dogen::annotations::annotation& attribute::annotation() const {
+const masd::dogen::variability::annotation& attribute::annotation() const {
     return annotation_;
 }
 
-masd::dogen::annotations::annotation& attribute::annotation() {
+masd::dogen::variability::annotation& attribute::annotation() {
     return annotation_;
 }
 
-void attribute::annotation(const masd::dogen::annotations::annotation& v) {
+void attribute::annotation(const masd::dogen::variability::annotation& v) {
     annotation_ = v;
 }
 
-void attribute::annotation(const masd::dogen::annotations::annotation&& v) {
+void attribute::annotation(const masd::dogen::variability::annotation&& v) {
     annotation_ = std::move(v);
 }
 

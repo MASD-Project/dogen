@@ -7,7 +7,7 @@
     "masd.injection.reference": "cpp.boost",
     "masd.injection.reference": "cpp.std",
     "masd.injection.reference": "masd.dogen",
-    "masd.injection.reference": "masd.dogen.annotations",
+    "masd.injection.reference": "masd.dogen.variability",
     "masd.injection.reference": "masd.dogen.tracing",
     "masd.injection.reference": "masd.dogen.coding",
     "masd.injection.reference": "masd.dogen.extraction",

@@ -35,14 +35,14 @@ void model_expander::expand_file_paths(
 }
 
 void model_expander::expand_aspect_properties(
-    const annotations::type_repository& atrp, model& fm) const {
+    const variability::type_repository& atrp, model& fm) const {
 
     aspect_expander ex;
     ex.expand(atrp, fm);
 }
 
 void model_expander::expand_assistant_properties(
-    const annotations::type_repository& atrp, model& fm) const {
+    const variability::type_repository& atrp, model& fm) const {
 
     assistant_expander ex;
     ex.expand(atrp, fm);
@@ -58,15 +58,15 @@ void model_expander::expand_project_items(model& fm) const {
     pie.expand(fm);
 }
 
-void model_expander::expand_helpers(const annotations::type_repository& atrp,
+void model_expander::expand_helpers(const variability::type_repository& atrp,
     const formatters::repository& frp, model& fm) const {
     helper_expander he;
     he.expand(atrp, frp, fm);
 }
 
 void model_expander::expand(
-    const annotations::type_repository& atrp,
-    const annotations::annotation& /*ra*/,
+    const variability::type_repository& atrp,
+    const variability::annotation& /*ra*/,
     const formatters::repository& frp, const locator& l, model& fm) const {
 
     /*

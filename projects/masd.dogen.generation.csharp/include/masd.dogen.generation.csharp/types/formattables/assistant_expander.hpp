@@ -26,9 +26,9 @@
 #endif
 
 #include <boost/optional.hpp>
-#include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/model.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/assistant_properties.hpp"
 
@@ -37,17 +37,17 @@ namespace masd::dogen::generation::csharp::formattables {
 class assistant_expander final {
 private:
     struct type_group {
-        annotations::type requires_assistance;
-        annotations::type method_postfix;
+        variability::type requires_assistance;
+        variability::type method_postfix;
     };
 
-    type_group make_type_group(const annotations::type_repository& atrp) const;
+    type_group make_type_group(const variability::type_repository& atrp) const;
 
     boost::optional<assistant_properties> make_assistant_properties(
-        const type_group& tg, const annotations::annotation& a) const;
+        const type_group& tg, const variability::annotation& a) const;
 
 public:
-    void expand(const annotations::type_repository& atrp, model& fm) const;
+    void expand(const variability::type_repository& atrp, model& fm) const;
 };
 
 }

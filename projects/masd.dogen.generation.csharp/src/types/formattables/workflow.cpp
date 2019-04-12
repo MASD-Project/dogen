@@ -45,16 +45,16 @@ model workflow:: make_model(const formatters::repository& frp,
 }
 
 void workflow::expand_model(
-    const annotations::type_repository& atrp,
-    const annotations::annotation& ra,
+    const variability::type_repository& atrp,
+    const variability::annotation& ra,
     const formatters::repository& frp, const locator& l, model& fm) const {
     model_expander ex;
     ex.expand(atrp, ra, frp, l, fm);
 }
 
 model workflow::execute(
-    const annotations::type_repository& atrp,
-    const annotations::annotation& ra,
+    const variability::type_repository& atrp,
+    const variability::annotation& ra,
     const formatters::repository& frp, const locator& l,
     const generation::meta_model::model& m) const {
 

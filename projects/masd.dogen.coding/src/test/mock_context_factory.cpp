@@ -24,9 +24,9 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
-#include "masd.dogen.annotations/types/annotation_factory.hpp"
-#include "masd.dogen.annotations/types/type_repository_factory.hpp"
-#include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
+#include "masd.dogen.variability/types/annotation_factory.hpp"
+#include "masd.dogen.variability/types/type_repository_factory.hpp"
+#include "masd.dogen.variability/types/archetype_location_repository_builder.hpp"
 #include "masd.dogen.tracing/types/tracer.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
 #include "masd.dogen.coding/test/mock_context_factory.hpp"
@@ -44,13 +44,13 @@ transforms::context mock_context_factory::make() {
     BOOST_LOG_SEV(lg, debug) << "Creating the mock context.";
 
     transforms::context r;
-    auto alrp(boost::make_shared<annotations::archetype_location_repository>());
+    auto alrp(boost::make_shared<variability::archetype_location_repository>());
     r.archetype_location_repository(alrp);
 
-    annotations::type_repository_factory atrpf;
+    variability::type_repository_factory atrpf;
     const auto data_dir(utility::filesystem::data_files_directory());
     const auto data_dirs(std::vector<boost::filesystem::path>{ data_dir });
-    const auto atrp(boost::make_shared<annotations::type_repository>(
+    const auto atrp(boost::make_shared<variability::type_repository>(
             atrpf.make(*alrp, data_dirs)));
     r.type_repository(atrp);
 
@@ -64,7 +64,7 @@ transforms::context mock_context_factory::make() {
             *alrp, *atrp, tcfg));
     r.tracer(tracer);
 
-    const auto af(boost::make_shared<annotations::annotation_factory>(
+    const auto af(boost::make_shared<variability::annotation_factory>(
             *alrp, *atrp, false/*compatibility_mode*/));
     r.annotation_factory(af);
 

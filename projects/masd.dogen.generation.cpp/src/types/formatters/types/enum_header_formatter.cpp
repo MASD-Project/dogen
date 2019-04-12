@@ -38,9 +38,9 @@ std::string enum_header_formatter::id() const {
     return static_id();
 }
 
-annotations::archetype_location
+variability::archetype_location
 enum_header_formatter::archetype_location() const {
-    static annotations::archetype_location
+    static variability::archetype_location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(),
           enum_header_formatter::static_id());

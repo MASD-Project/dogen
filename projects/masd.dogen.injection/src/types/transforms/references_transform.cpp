@@ -23,9 +23,9 @@
 #include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.annotations/io/type_io.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/io/type_io.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.injection/types/traits.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
@@ -55,11 +55,11 @@ operator<<(std::ostream& s, const references_transform::type_group& v) {
 }
 
 references_transform::type_group references_transform::
-make_type_group(const annotations::type_repository& atrp) {
+make_type_group(const variability::type_repository& atrp) {
     BOOST_LOG_SEV(lg, debug) << "Creating type group.";
 
     type_group r;
-    const annotations::type_repository_selector s(atrp);
+    const variability::type_repository_selector s(atrp);
     r.reference = s.select_type_by_name(traits::reference());
 
     BOOST_LOG_SEV(lg, debug) << "Created type group. Result: " << r;
@@ -67,8 +67,8 @@ make_type_group(const annotations::type_repository& atrp) {
 }
 
 std::list<std::string> references_transform::
-make_references(const type_group& tg, const annotations::annotation& a) {
-    const annotations::entry_selector s(a);
+make_references(const type_group& tg, const variability::annotation& a) {
+    const variability::entry_selector s(a);
     const auto& ref(tg.reference);
     if (s.has_entry(ref))
         return s.get_text_collection_content(ref);

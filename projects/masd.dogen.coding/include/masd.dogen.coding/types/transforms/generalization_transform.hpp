@@ -26,8 +26,8 @@
 #endif
 
 #include <unordered_set>
-#include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
@@ -42,13 +42,13 @@ namespace masd::dogen::coding::transforms {
 class generalization_transform final {
 private:
     struct type_group {
-        annotations::type is_final;
+        variability::type is_final;
     };
 
-    static type_group make_type_group(const annotations::type_repository& atrp);
+    static type_group make_type_group(const variability::type_repository& atrp);
 
     static boost::optional<bool> make_is_final(const type_group& tg,
-        const annotations::annotation& a);
+        const variability::annotation& a);
 
 private:
     static std::unordered_set<std::string>

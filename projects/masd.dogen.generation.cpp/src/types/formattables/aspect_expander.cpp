@@ -20,9 +20,9 @@
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
-#include "masd.dogen.annotations/io/type_io.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/io/type_io.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
@@ -55,10 +55,10 @@ operator<<(std::ostream& s, const aspect_expander::type_group& v) {
 }
 
 aspect_expander::type_group aspect_expander::
-make_type_group(const annotations::type_repository& atrp) const {
+make_type_group(const variability::type_repository& atrp) const {
     type_group r;
 
-    const annotations::type_repository_selector rs(atrp);
+    const variability::type_repository_selector rs(atrp);
     typedef traits::cpp::aspect aspect;
 
     const auto& rmdc(aspect::requires_manual_default_constructor());
@@ -75,10 +75,10 @@ make_type_group(const annotations::type_repository& atrp) const {
 
 boost::optional<aspect_properties> aspect_expander::
 make_aspect_properties(const type_group& tg,
-    const annotations::annotation& a) const {
+    const variability::annotation& a) const {
     aspect_properties r;
 
-    const annotations::entry_selector s(a);
+    const variability::entry_selector s(a);
     bool found_any(false);
 
     if (s.has_entry(tg.requires_manual_default_constructor))
@@ -109,7 +109,7 @@ make_aspect_properties(const type_group& tg,
 }
 
 aspect_expander::aspect_properties_type aspect_expander::
-obtain_aspect_properties(const annotations::type_repository& atrp,
+obtain_aspect_properties(const variability::type_repository& atrp,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating aspect configuration.";
@@ -225,7 +225,7 @@ populate_aspect_properties(const aspect_properties_type& element_aps,
 }
 
 void aspect_expander::
-expand(const annotations::type_repository& atrp, model& fm) const {
+expand(const variability::type_repository& atrp, model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started expansion.";
     const auto element_aps(obtain_aspect_properties(atrp, fm.formattables()));
     populate_aspect_properties(element_aps, fm.formattables());

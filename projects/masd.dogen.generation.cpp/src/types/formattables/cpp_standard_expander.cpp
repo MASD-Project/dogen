@@ -19,8 +19,8 @@
  *
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/expansion_error.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/cpp_standard_expander.hpp"
@@ -58,8 +58,8 @@ cpp_standard_expander::to_cpp_standard(const std::string& s) const {
 }
 
 cpp_standard_expander::type_group cpp_standard_expander::
-make_type_group(const annotations::type_repository& atrp) const {
-    const annotations::type_repository_selector s(atrp);
+make_type_group(const variability::type_repository& atrp) const {
+    const variability::type_repository_selector s(atrp);
     type_group r;
     const auto cs(traits::cpp::standard());
     r.cpp_standard = s.select_type_by_name(cs);
@@ -67,15 +67,15 @@ make_type_group(const annotations::type_repository& atrp) const {
 }
 
 cpp_standards cpp_standard_expander::
-make_standard(const type_group& tg, const annotations::annotation& ra) const {
-    const annotations::entry_selector s(ra);
+make_standard(const type_group& tg, const variability::annotation& ra) const {
+    const variability::entry_selector s(ra);
     const auto cs(s.get_text_content_or_default(tg.cpp_standard));
     return to_cpp_standard(cs);
 }
 
 void cpp_standard_expander::
-expand(const annotations::type_repository& atrp,
-    const annotations::annotation& ra, model& fm) const {
+expand(const variability::type_repository& atrp,
+    const variability::annotation& ra, model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started expanding C++ standard.";
     const auto tg(make_type_group(atrp));
     fm.cpp_standard(make_standard(tg, ra));

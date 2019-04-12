@@ -34,7 +34,7 @@ set_target_properties(${lib_target_name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
 target_link_libraries(${lib_target_name}
-    masd.dogen.annotations.lib
+    masd.dogen.variability.lib
     masd.dogen.extraction.lib
     masd.dogen.coding.lib
     masd.dogen.templating.lib

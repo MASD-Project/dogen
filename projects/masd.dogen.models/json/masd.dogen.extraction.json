@@ -8,7 +8,7 @@
     "masd.injection.reference": "cpp.std",
     "masd.injection.reference": "cpp.boost",
     "masd.injection.reference": "masd.dogen.tracing",
-    "masd.injection.reference": "masd.dogen.annotations",
+    "masd.injection.reference": "masd.dogen.variability",
     "masd.injection.reference": "masd",
     "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
     "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
@@ -432,7 +432,7 @@
       "attributes": [
         {
           "name": "annotation",
-          "type": "annotations::annotation",
+          "type": "variability::annotation",
           "documentation": "Annotation for this element.\n"
         }
       ]

@@ -21,8 +21,8 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/unordered_set_io.hpp"
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
@@ -315,8 +315,8 @@ helper_properties_generator::result() const {
 }
 
 helper_expander::type_group helper_expander::
-make_type_group(const annotations::type_repository& atrp) const {
-    const annotations::type_repository_selector s(atrp);
+make_type_group(const variability::type_repository& atrp) const {
+    const variability::type_repository_selector s(atrp);
     const auto hf(traits::cpp::helper::family());
     type_group r;
     r.family = s.select_type_by_name(hf);
@@ -336,7 +336,7 @@ make_configuration(const type_group& tg, const model& fm) const {
 
         auto& formattable(pair.second);
         auto& segment(*formattable.master_segment());
-        const annotations::entry_selector s(segment.annotation());
+        const variability::entry_selector s(segment.annotation());
         const auto fam(s.get_text_content_or_default(tg.family));
         r.helper_families()[id] = fam;
     }
@@ -411,7 +411,7 @@ void helper_expander::populate_helper_properties(
     }
 }
 
-void helper_expander::expand(const annotations::type_repository& atrp,
+void helper_expander::expand(const variability::type_repository& atrp,
     const formatters::repository& frp, model& fm) const {
     const auto tg(make_type_group(atrp));
     const auto cfg(make_configuration(tg, fm));

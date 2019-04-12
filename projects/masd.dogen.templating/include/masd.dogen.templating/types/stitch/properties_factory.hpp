@@ -29,8 +29,8 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.templating/types/stitch/properties.hpp"
 
 namespace masd::dogen::templating::stitch {
@@ -40,65 +40,65 @@ namespace masd::dogen::templating::stitch {
  */
 class properties_factory {
 public:
-    explicit properties_factory(const annotations::type_repository& arp);
+    explicit properties_factory(const variability::type_repository& arp);
 
 private:
     struct type_group {
-        annotations::type stream_variable_name;
-        annotations::type relative_output_directory;
-        annotations::type inclusion_dependency;
-        annotations::type containing_namespaces;
-        annotations::type wale_template;
-        annotations::type wale_kvp;
+        variability::type stream_variable_name;
+        variability::type relative_output_directory;
+        variability::type inclusion_dependency;
+        variability::type containing_namespaces;
+        variability::type wale_template;
+        variability::type wale_kvp;
     };
 
     /**
      * @brief Creates the formatter properties.
      */
     type_group
-    make_type_group(const annotations::type_repository& arp) const;
+    make_type_group(const variability::type_repository& arp) const;
 
 private:
     /**
      * @brief Extracts the stream variable name.
      */
     std::string
-    extract_stream_variable_name(const annotations::annotation& a) const;
+    extract_stream_variable_name(const variability::annotation& a) const;
 
     /**
      * @brief Extracts the relative output directory.
      */
     boost::filesystem::path
-    extract_relative_output_directory(const annotations::annotation& a) const;
+    extract_relative_output_directory(const variability::annotation& a) const;
 
     /**
      * @brief Extracts inclusion dependencies.
      */
     std::list<std::string>
-    extract_inclusion_dependencies(const annotations::annotation& o) const;
+    extract_inclusion_dependencies(const variability::annotation& o) const;
 
     /**
      * @brief Extract containing namespaces.
      */
     std::list<std::string>
-    extract_containing_namespaces(const annotations::annotation& a) const;
+    extract_containing_namespaces(const variability::annotation& a) const;
 
     /**
      * @brief Extract wale template
      */
-    std::string extract_wale_template(const annotations::annotation& a) const;
+    std::string extract_wale_template(const variability::annotation& a) const;
 
     /**
      * @brief Extract wale kvps
      */
     std::unordered_map<std::string, std::string>
-    extract_wale_kvps(const annotations::annotation& a) const;
+    extract_wale_kvps(const variability::annotation& a) const;
 
 public:
     /**
      * @brief Create the stitching settings.
      */
-    properties make(const annotations::annotation& a) const;
+    properties make(const variability::annotation& a) const;
 
 private:
     const type_group type_group_;

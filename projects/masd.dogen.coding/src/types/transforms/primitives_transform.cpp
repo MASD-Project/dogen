@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.annotations/io/type_io.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/io/type_io.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
@@ -54,12 +54,12 @@ operator<<(std::ostream& s, const primitives_transform::type_group& v) {
 }
 
 primitives_transform::type_group primitives_transform::
-make_type_group(const annotations::type_repository& atrp) {
+make_type_group(const variability::type_repository& atrp) {
     BOOST_LOG_SEV(lg, debug) << "Creating type group.";
 
     type_group r;
 
-    const annotations::type_repository_selector s(atrp);
+    const variability::type_repository_selector s(atrp);
 
     const auto in(traits::primitive::is_nullable());
     r.is_nullable = s.select_type_by_name(in);
@@ -74,7 +74,7 @@ make_type_group(const annotations::type_repository& atrp) {
 void primitives_transform::
 populate_from_annotations(const type_group& tg, meta_model::primitive& p) {
     const auto& a(p.annotation());
-    const annotations::entry_selector s(a);
+    const variability::entry_selector s(a);
     p.is_nullable(s.get_boolean_content_or_default(tg.is_nullable));
     p.use_type_aliasing(s.get_boolean_content_or_default(tg.use_type_aliasing));
 }

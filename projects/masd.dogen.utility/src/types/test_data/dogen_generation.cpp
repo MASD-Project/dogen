@@ -43,7 +43,7 @@ const std::string output_dir("masd.dogen.code_generation_test_output");
 const std::string models_dia_dir("masd.dogen.models/dia");
 const std::string models_json_dir("masd.dogen.models/json");
 
-const std::string path_masd_dogen_annotations_dia("masd.dogen.annotations.dia");
+const std::string path_masd_dogen_annotations_dia("masd.dogen.variability.dia");
 const std::string path_masd_dogen_cli_dia("masd.dogen.cli.dia");
 const std::string path_masd_dogen_coding_dia("masd.dogen.coding.dia");
 const std::string path_masd_dogen_dia("masd.dogen.dia");
@@ -61,7 +61,7 @@ const std::string path_masd_dogen_tracing_dia("masd.dogen.tracing.dia");
 const std::string path_masd_dogen_utility_dia("masd.dogen.utility.dia");
 
 const std::string path_masd_dogen_cli_json("masd.dogen.cli.json");
-const std::string path_masd_dogen_annotations_json("masd.dogen.annotations.json");
+const std::string path_masd_dogen_annotations_json("masd.dogen.variability.json");
 const std::string path_masd_dogen_coding_json("masd.dogen.coding.json");
 const std::string path_masd_dogen_json("masd.dogen.json");
 const std::string path_masd_dogen_dia_json("masd.dogen.dia.json");

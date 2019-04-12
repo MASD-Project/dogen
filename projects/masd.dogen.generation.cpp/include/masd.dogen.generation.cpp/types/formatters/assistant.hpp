@@ -32,7 +32,7 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
-#include "masd.dogen.annotations/types/archetype_location.hpp"
+#include "masd.dogen.variability/types/archetype_location.hpp"
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.generation/types/formatters/scoped_namespace_formatter.hpp"
 #include "masd.dogen.generation/types/formatters/scoped_boilerplate_formatter.hpp"
@@ -52,7 +52,7 @@ namespace masd::dogen::generation::cpp::formatters {
 class assistant final {
 public:
     assistant(const context& ctx, const coding::meta_model::element& e,
-        const annotations::archetype_location& al,
+        const variability::archetype_location& al,
         const bool requires_header_guard);
 
 private:
@@ -404,7 +404,7 @@ private:
     const context& context_;
     formattables::artefact_properties artefact_properties_;
     coding::meta_model::artefact_properties new_artefact_properties_;
-    const annotations::archetype_location archetype_location_;
+    const variability::archetype_location archetype_location_;
     const bool requires_header_guard_;
 };
 

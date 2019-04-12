@@ -25,15 +25,15 @@
 #pragma once
 #endif
 
-#include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/model.hpp"
 
 namespace masd::dogen::generation::csharp::formattables {
 
 class aspect_expander final {
 public:
-    void expand(const annotations::type_repository& atrp, model& fm) const;
+    void expand(const variability::type_repository& atrp, model& fm) const;
 };
 
 }

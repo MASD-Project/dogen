@@ -21,8 +21,8 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.generation.csharp/types/traits.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/location_error.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/artefact_formatter_interface.hpp"
@@ -45,8 +45,8 @@ const std::string missing_archetype_configuration(
 namespace masd::dogen::generation::csharp::formattables {
 
 locator::locator(const boost::filesystem::path& output_directory_path,
-    const annotations::type_repository& atrp, const formatters::repository& frp,
-    const annotations::annotation& root,
+    const variability::type_repository& atrp, const formatters::repository& frp,
+    const variability::annotation& root,
     const coding::meta_model::name& model_name,
     const std::unordered_set<std::string>& module_ids,
     const bool enable_backend_directories)
@@ -57,11 +57,11 @@ locator::locator(const boost::filesystem::path& output_directory_path,
               configuration_, enable_backend_directories)) {}
 
 locator::type_group locator::make_type_group(
-    const annotations::type_repository& atrp,
+    const variability::type_repository& atrp,
     const formatters::repository& frp) const {
 
     type_group r;
-    const annotations::type_repository_selector s(atrp);
+    const variability::type_repository_selector s(atrp);
 
     std::unordered_set<std::string> processed_facets;
     for (const auto ptr : frp.stock_artefact_formatters()) {
@@ -103,10 +103,10 @@ locator::type_group locator::make_type_group(
 }
 
 locator_configuration locator::make_configuration(
-    const type_group& tg, const annotations::annotation& a) const {
+    const type_group& tg, const variability::annotation& a) const {
 
     locator_configuration r;
-    const annotations::entry_selector s(a);
+    const variability::entry_selector s(a);
 
     const auto& kdn(tg.backend_directory_name);
     r.backend_directory_name(s.get_text_content_or_default(kdn));
@@ -146,8 +146,8 @@ locator_configuration locator::make_configuration(
 }
 
 locator_configuration locator::make_configuration(
-    const annotations::type_repository& atrp, const formatters::repository& frp,
-    const annotations::annotation& o) {
+    const variability::type_repository& atrp, const formatters::repository& frp,
+    const variability::annotation& o) {
 
     const auto tg(make_type_group (atrp, frp));
     const auto r(make_configuration(tg, o));

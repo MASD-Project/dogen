@@ -29,9 +29,9 @@
 #include <list>
 #include <string>
 #include <boost/optional.hpp>
-#include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/helpers/decoration_repository.hpp"
@@ -46,24 +46,24 @@ namespace masd::dogen::generation::transforms {
 class decoration_transform final {
 private:
     struct type_group {
-        annotations::type enabled;
-        annotations::type copyright_notice;
-        annotations::type licence_name;
-        annotations::type modeline_group_name;
-        annotations::type marker_name;
+        variability::type enabled;
+        variability::type copyright_notice;
+        variability::type licence_name;
+        variability::type modeline_group_name;
+        variability::type marker_name;
     };
 
     /**
      * @brief Creates the type group for decoration.
      */
-    static type_group make_type_group(const annotations::type_repository& atrp);
+    static type_group make_type_group(const variability::type_repository& atrp);
 
     /**
      * @brief Reads the decoration configuration from the supplied annotation.
      */
     static boost::optional<decoration_configuration>
     read_decoration_configuration(const type_group& tg,
-        const annotations::annotation& a);
+        const variability::annotation& a);
 
 private:
     /**

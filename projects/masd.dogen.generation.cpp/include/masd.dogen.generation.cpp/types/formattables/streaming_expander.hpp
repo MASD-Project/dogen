@@ -26,9 +26,9 @@
 #endif
 
 #include <boost/optional.hpp>
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/streaming_properties.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/model.hpp"
 
@@ -37,22 +37,22 @@ namespace masd::dogen::generation::cpp::formattables {
 class streaming_expander {
 private:
     struct type_group {
-        annotations::type requires_quoting;
-        annotations::type string_conversion_method;
-        annotations::type remove_unprintable_characters;
+        variability::type requires_quoting;
+        variability::type string_conversion_method;
+        variability::type remove_unprintable_characters;
     };
 
     friend std::ostream& operator<<(std::ostream& s,
         const type_group& v);
 
     type_group
-    make_type_group(const annotations::type_repository& atrp) const;
+    make_type_group(const variability::type_repository& atrp) const;
 
     boost::optional<streaming_properties> make_streaming_properties(
-        const type_group& tg, const annotations::annotation& a) const;
+        const type_group& tg, const variability::annotation& a) const;
 
 public:
-    void expand(const annotations::type_repository& atrp, model& fm) const;
+    void expand(const variability::type_repository& atrp, model& fm) const;
 };
 
 }

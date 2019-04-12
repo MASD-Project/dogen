@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "masd.dogen.annotations/test_data/annotation_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/name_td.hpp"
+#include "masd.dogen.variability/test_data/annotation_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/enumerator_td.hpp"
 
 namespace {
@@ -36,9 +36,9 @@ create_masd_dogen_coding_meta_model_name(const unsigned int position) {
     return masd::dogen::coding::meta_model::name_generator::create(position);
 }
 
-masd::dogen::annotations::annotation
-create_masd_dogen_annotations_annotation(const unsigned int position) {
-    return masd::dogen::annotations::annotation_generator::create(position);
+masd::dogen::variability::annotation
+create_masd_dogen_variability_annotation(const unsigned int position) {
+    return masd::dogen::variability::annotation_generator::create(position);
 }
 
 }
@@ -51,7 +51,7 @@ void enumerator_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.name(create_masd_dogen_coding_meta_model_name(position + 1));
-    v.annotation(create_masd_dogen_annotations_annotation(position + 2));
+    v.annotation(create_masd_dogen_variability_annotation(position + 2));
     v.value(create_std_string(position + 3));
 }
 

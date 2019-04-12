@@ -2509,7 +2509,7 @@ For details on the stereotypes see the MASD UML profile.
 #DOGEN masd.injection.reference=cpp.std
 #DOGEN masd.injection.reference=cpp.boost
 #DOGEN masd.injection.reference=masd.dogen.dia
-#DOGEN masd.injection.reference=masd.dogen.annotations
+#DOGEN masd.injection.reference=masd.dogen.variability
 #DOGEN masd.injection.reference=masd.dogen.tracing
 #DOGEN masd.injection.reference=masd.dogen.injection
 #DOGEN masd.injection.reference=masd.dogen.extraction

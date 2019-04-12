@@ -23,7 +23,7 @@
 namespace masd::dogen::coding::meta_model {
 
 configuration_entry::configuration_entry(
-    const masd::dogen::annotations::annotation& annotation,
+    const masd::dogen::variability::annotation& annotation,
     const std::string& name,
     const std::list<std::string>& value)
     : annotation_(annotation),
@@ -49,19 +49,19 @@ configuration_entry& configuration_entry::operator=(configuration_entry other) {
     return *this;
 }
 
-const masd::dogen::annotations::annotation& configuration_entry::annotation() const {
+const masd::dogen::variability::annotation& configuration_entry::annotation() const {
     return annotation_;
 }
 
-masd::dogen::annotations::annotation& configuration_entry::annotation() {
+masd::dogen::variability::annotation& configuration_entry::annotation() {
     return annotation_;
 }
 
-void configuration_entry::annotation(const masd::dogen::annotations::annotation& v) {
+void configuration_entry::annotation(const masd::dogen::variability::annotation& v) {
     annotation_ = v;
 }
 
-void configuration_entry::annotation(const masd::dogen::annotations::annotation&& v) {
+void configuration_entry::annotation(const masd::dogen::variability::annotation&& v) {
     annotation_ = std::move(v);
 }
 

@@ -21,8 +21,8 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline.hpp"
@@ -113,9 +113,9 @@ modelines_transform::to_technical_space(const std::string& s) {
 }
 
 modelines_transform::type_group
-modelines_transform::make_type_group(const annotations::type_repository& atrp) {
+modelines_transform::make_type_group(const variability::type_repository& atrp) {
     type_group r;
-    const annotations::type_repository_selector s(atrp);
+    const variability::type_repository_selector s(atrp);
 
     using ml = traits::decoration::modeline;
     r.editor = s.select_type_by_name(ml::editor());
@@ -125,22 +125,22 @@ modelines_transform::make_type_group(const annotations::type_repository& atrp) {
 }
 
 meta_model::editor modelines_transform::
-make_editor(const type_group& tg, const annotations::annotation& a) {
-    const annotations::entry_selector s(a);
+make_editor(const type_group& tg, const variability::annotation& a) {
+    const variability::entry_selector s(a);
     const auto str(s.get_text_content(tg.editor));
     return to_editor(str);
 }
 
 meta_model::modeline_location modelines_transform::make_modeline_location(
-    const type_group& tg, const annotations::annotation& a) {
-    const annotations::entry_selector s(a);
+    const type_group& tg, const variability::annotation& a) {
+    const variability::entry_selector s(a);
     const auto str(s.get_text_content(tg.modeline_location));
     return to_modeline_location((str));
 }
 
 meta_model::technical_space modelines_transform::
-make_technical_space(const type_group& tg, const annotations::annotation& a) {
-    const annotations::entry_selector s(a);
+make_technical_space(const type_group& tg, const variability::annotation& a) {
+    const variability::entry_selector s(a);
     const auto str(s.get_text_content(tg.technical_space));
     return to_technical_space(str);
 }

@@ -171,15 +171,15 @@
         },
         {
           "name": "type_repository",
-          "type": "boost::shared_ptr<annotations::type_repository>"
+          "type": "boost::shared_ptr<variability::type_repository>"
         },
         {
           "name": "archetype_location_repository",
-          "type": "boost::shared_ptr<annotations::archetype_location_repository>"
+          "type": "boost::shared_ptr<variability::archetype_location_repository>"
         },
         {
           "name": "annotation_factory",
-          "type": "boost::shared_ptr<annotations::annotation_factory>"
+          "type": "boost::shared_ptr<variability::annotation_factory>"
         },
         {
           "name": "tracer",
@@ -339,7 +339,7 @@
       "attributes": [
         {
           "name": "annotation",
-          "type": "annotations::annotation",
+          "type": "variability::annotation",
           "documentation": "Annotation for this element.\n"
         }
       ]

@@ -31,9 +31,9 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.annotations/types/annotation_factory.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/annotation_factory.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_interface.hpp"
@@ -60,31 +60,31 @@ public:
 
 private:
     formattables::model create_formattables_model(
-        const annotations::type_repository& atrp,
-        const annotations::annotation& ra,
+        const variability::type_repository& atrp,
+        const variability::annotation& ra,
         const formatters::repository& frp, const formattables::locator & l,
         const generation::meta_model::model& m) const;
 
     std::list<extraction::meta_model::artefact>
-    format(const annotations::type_repository& atrp,
-        const annotations::annotation_factory& af,
+    format(const variability::type_repository& atrp,
+        const variability::annotation_factory& af,
         const formattables::model& fm) const;
 
 public:
     std::string id() const override;
 
-    const std::forward_list<annotations::archetype_location>&
+    const std::forward_list<variability::archetype_location>&
         archetype_locations() const override;
 
     const std::unordered_map<std::string,
-                             annotations::archetype_locations_group>&
+                             variability::archetype_locations_group>&
     archetype_locations_by_meta_name() const override;
 
     const std::unordered_map<std::string,
-                             std::list<annotations::archetype_location>>&
+                             std::list<variability::archetype_location>>&
     archetype_locations_by_family() const override;
 
-    const annotations::archetype_location_repository_parts&
+    const variability::archetype_location_repository_parts&
     archetype_location_repository_parts() const override;
 
     coding::meta_model::technical_space technical_space() const override;

@@ -96,7 +96,7 @@ bool include_directive_comparer(
 namespace masd::dogen::generation::cpp::formattables {
 
 directive_group_repository inclusion_expander::
-create_directive_groups(const annotations::type_repository& atrp,
+create_directive_groups(const variability::type_repository& atrp,
     const formatters::repository& frp, const locator& l,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
@@ -238,7 +238,7 @@ void inclusion_expander::populate_inclusion_dependencies(
                              << "for all formattables. ";
 }
 
-void inclusion_expander::expand(const annotations::type_repository& atrp,
+void inclusion_expander::expand(const variability::type_repository& atrp,
     const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element, const formatters::repository& frp,
     const locator& l, model& fm) const {

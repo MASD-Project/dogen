@@ -24,7 +24,7 @@
         },
         {
           "name": "annotations",
-          "type": "std::vector<annotations::annotation>"
+          "type": "std::vector<variability::annotation>"
         }
       ]
     },

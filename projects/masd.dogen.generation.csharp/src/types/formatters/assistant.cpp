@@ -56,7 +56,7 @@ namespace masd::dogen::generation::csharp::formatters {
 
 assistant::
 assistant(const context& ctx, const coding::meta_model::element& e,
-    const annotations::archetype_location& al) :
+    const variability::archetype_location& al) :
     element_id_(e.name().qualified().dot()), element_(e), context_(ctx),
     artefact_properties_(obtain_artefact_properties(al.archetype())),
     archetype_location_(al) {

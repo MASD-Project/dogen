@@ -41,9 +41,9 @@ std::string visual_studio_project_formatter::id() const {
     return r;
 }
 
-annotations::archetype_location
+variability::archetype_location
 visual_studio_project_formatter::archetype_location() const {
-    static annotations::archetype_location
+    static variability::archetype_location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::visual_studio_facet(),
           visual_studio_project_formatter::static_id());

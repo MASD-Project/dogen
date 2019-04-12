@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
@@ -35,10 +35,10 @@ namespace masd::dogen::coding::transforms {
 class origin_transform final {
 private:
     struct type_group {
-        annotations::type is_proxy_model;
+        variability::type is_proxy_model;
     };
 
-    static type_group make_type_group(const annotations::type_repository& atrp);
+    static type_group make_type_group(const variability::type_repository& atrp);
 
     static bool is_proxy_model(const type_group& tg,
         const meta_model::model& m);

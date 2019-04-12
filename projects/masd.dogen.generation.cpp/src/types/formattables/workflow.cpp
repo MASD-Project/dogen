@@ -39,8 +39,8 @@ model workflow::make_model(const formatters::repository& frp,
 }
 
 void workflow::expand_model(
-    const annotations::type_repository& atrp,
-    const annotations::annotation& ra,
+    const variability::type_repository& atrp,
+    const variability::annotation& ra,
     const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element,
     const formatters::repository& frp, const locator& l,
@@ -50,8 +50,8 @@ void workflow::expand_model(
 }
 
 model workflow::execute(
-    const annotations::type_repository& atrp,
-    const annotations::annotation& ra,
+    const variability::type_repository& atrp,
+    const variability::annotation& ra,
     const locator& l, const formatters::repository& frp,
     const generation::meta_model::model& m) const {
 

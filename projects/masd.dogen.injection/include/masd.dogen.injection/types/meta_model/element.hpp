@@ -29,7 +29,7 @@
 #include <string>
 #include <utility>
 #include <algorithm>
-#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.injection/types/meta_model/attribute.hpp"
 
 namespace masd::dogen::injection::meta_model {
@@ -52,7 +52,7 @@ public:
         const std::list<std::string>& stereotypes,
         const std::string& documentation,
         const std::string& name,
-        const masd::dogen::annotations::annotation& annotation,
+        const masd::dogen::variability::annotation& annotation,
         const std::list<std::string>& parents,
         const std::list<masd::dogen::injection::meta_model::attribute>& attributes,
         const std::string& fallback_element_type,
@@ -96,10 +96,10 @@ public:
      * @brief Annotation for this element.
      */
     /**@{*/
-    const masd::dogen::annotations::annotation& annotation() const;
-    masd::dogen::annotations::annotation& annotation();
-    void annotation(const masd::dogen::annotations::annotation& v);
-    void annotation(const masd::dogen::annotations::annotation&& v);
+    const masd::dogen::variability::annotation& annotation() const;
+    masd::dogen::variability::annotation& annotation();
+    void annotation(const masd::dogen::variability::annotation& v);
+    void annotation(const masd::dogen::variability::annotation&& v);
     /**@}*/
 
     const std::list<std::string>& parents() const;
@@ -156,7 +156,7 @@ private:
     std::list<std::string> stereotypes_;
     std::string documentation_;
     std::string name_;
-    masd::dogen::annotations::annotation annotation_;
+    masd::dogen::variability::annotation annotation_;
     std::list<std::string> parents_;
     std::list<masd::dogen::injection::meta_model::attribute> attributes_;
     std::string fallback_element_type_;

@@ -25,7 +25,7 @@ namespace masd::dogen::coding::meta_model {
 enumerator::enumerator(
     const std::string& documentation,
     const masd::dogen::coding::meta_model::name& name,
-    const masd::dogen::annotations::annotation& annotation,
+    const masd::dogen::variability::annotation& annotation,
     const std::string& value)
     : documentation_(documentation),
       name_(name),
@@ -85,19 +85,19 @@ void enumerator::name(const masd::dogen::coding::meta_model::name&& v) {
     name_ = std::move(v);
 }
 
-const masd::dogen::annotations::annotation& enumerator::annotation() const {
+const masd::dogen::variability::annotation& enumerator::annotation() const {
     return annotation_;
 }
 
-masd::dogen::annotations::annotation& enumerator::annotation() {
+masd::dogen::variability::annotation& enumerator::annotation() {
     return annotation_;
 }
 
-void enumerator::annotation(const masd::dogen::annotations::annotation& v) {
+void enumerator::annotation(const masd::dogen::variability::annotation& v) {
     annotation_ = v;
 }
 
-void enumerator::annotation(const masd::dogen::annotations::annotation&& v) {
+void enumerator::annotation(const masd::dogen::variability::annotation&& v) {
     annotation_ = std::move(v);
 }
 

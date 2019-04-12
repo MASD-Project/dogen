@@ -21,8 +21,8 @@
 #include <boost/make_shared.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
 #include "masd.dogen.coding/types/helpers/name_flattener.hpp"
@@ -50,10 +50,10 @@ using coding::meta_model::origin_types;
 using coding::meta_model::technical_space;
 
 visual_studio_factory::type_group visual_studio_factory::make_type_group(
-    const annotations::type_repository& atrp) const {
+    const variability::type_repository& atrp) const {
 
     type_group r;
-    const annotations::type_repository_selector s(atrp);
+    const variability::type_repository_selector s(atrp);
 
     const auto& psg(traits::visual_studio_project_solution_guid());
     r.project_solution_guid = s.select_type_by_name(psg);
@@ -66,10 +66,10 @@ visual_studio_factory::type_group visual_studio_factory::make_type_group(
 
 visual_studio_configuration visual_studio_factory::
 make_configuration(const type_group& tg,
-    const annotations::annotation& ra) const {
+    const variability::annotation& ra) const {
 
     visual_studio_configuration r;
-    const annotations::entry_selector s(ra);
+    const variability::entry_selector s(ra);
 
     const auto& psg(tg.project_solution_guid);
     r.project_solution_guid(s.get_text_content_or_default(psg));
@@ -81,8 +81,8 @@ make_configuration(const type_group& tg,
 }
 
 visual_studio_configuration visual_studio_factory::
-make_configuration(const annotations::type_repository& atrp,
-    const annotations::annotation& ra) const {
+make_configuration(const variability::type_repository& atrp,
+    const variability::annotation& ra) const {
 
     const auto tg(make_type_group(atrp));
     const auto r(make_configuration(tg, ra));
@@ -147,7 +147,7 @@ make_project(const visual_studio_configuration cfg,
 }
 
 std::list<boost::shared_ptr<coding::meta_model::element>>
-visual_studio_factory::make(const annotations::type_repository& atrp,
+visual_studio_factory::make(const variability::type_repository& atrp,
     const generation::meta_model::model& m) const {
 
     const auto pn(obtain_project_name(m));

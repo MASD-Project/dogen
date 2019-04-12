@@ -106,7 +106,7 @@ not technical space specific.
 #DOGEN masd.injection.reference=cpp.std
 #DOGEN masd.injection.reference=cpp.boost
 #DOGEN masd.injection.reference=masd.dogen.tracing
-#DOGEN masd.injection.reference=masd.dogen.annotations
+#DOGEN masd.injection.reference=masd.dogen.variability
 #DOGEN masd.injection.reference=masd
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
@@ -6892,7 +6892,7 @@ external technical spaces.
             <dia:string>#annotation#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#annotations::annotation#</dia:string>
+            <dia:string>#variability::annotation#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

@@ -22,10 +22,10 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
-#include "masd.dogen.annotations/types/annotation_factory.hpp"
-#include "masd.dogen.annotations/types/annotation_expander.hpp"
-#include "masd.dogen.annotations/types/type_repository_factory.hpp"
-#include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
+#include "masd.dogen.variability/types/annotation_factory.hpp"
+#include "masd.dogen.variability/types/annotation_expander.hpp"
+#include "masd.dogen.variability/types/type_repository_factory.hpp"
+#include "masd.dogen.variability/types/archetype_location_repository_builder.hpp"
 #include "masd.dogen.tracing/types/tracer.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
@@ -75,11 +75,11 @@ create_intra_backend_segment_properties(
     return r;
 }
 
-boost::shared_ptr<annotations::archetype_location_repository>
+boost::shared_ptr<variability::archetype_location_repository>
 create_archetype_location_repository(
     const model_to_extraction_model_transform_registrar& rg) {
 
-    using namespace annotations;
+    using namespace variability;
     archetype_location_repository_builder b;
     for (const auto& pair : rg.transforms_by_technical_space()) {
         const auto& t(*pair.second);
@@ -115,8 +115,8 @@ make_injection_context(const configuration& cfg) {
     const auto alrp(create_archetype_location_repository(rg));
     r.archetype_location_repository(alrp);
 
-    annotations::type_repository_factory atrpf;
-    const auto atrp(boost::make_shared<annotations::type_repository>(
+    variability::type_repository_factory atrpf;
+    const auto atrp(boost::make_shared<variability::type_repository>(
             atrpf.make(*alrp, data_dirs)));
     r.type_repository(atrp);
 
@@ -124,7 +124,7 @@ make_injection_context(const configuration& cfg) {
      * Setup the annotations related factories.
      */
     const bool cm(cfg.model_processing().compatibility_mode_enabled());
-    const auto af(boost::make_shared<annotations::annotation_factory>(
+    const auto af(boost::make_shared<variability::annotation_factory>(
                 *alrp, *atrp, cm));
     r.annotation_factory(af);
 
@@ -169,8 +169,8 @@ context context_factory::make_context(const configuration& cfg,
     r.coding_context().archetype_location_repository(alrp);
     r.generation_context().archetype_location_repository(alrp);
 
-    annotations::type_repository_factory atrpf;
-    const auto atrp(boost::make_shared<annotations::type_repository>(
+    variability::type_repository_factory atrpf;
+    const auto atrp(boost::make_shared<variability::type_repository>(
             atrpf.make(*alrp, data_dirs)));
     r.injection_context().type_repository(atrp);
     r.coding_context().type_repository(atrp);
@@ -181,13 +181,13 @@ context context_factory::make_context(const configuration& cfg,
      * Setup the annotations related factories.
      */
     const bool cm(cfg.model_processing().compatibility_mode_enabled());
-    const auto af(boost::make_shared<annotations::annotation_factory>(
+    const auto af(boost::make_shared<variability::annotation_factory>(
                 *alrp, *atrp, cm));
     r.injection_context().annotation_factory(af);
     r.coding_context().annotation_factory(af);
     r.generation_context().annotation_factory(af);
 
-    const auto ae(boost::make_shared<annotations::annotation_expander>(
+    const auto ae(boost::make_shared<variability::annotation_expander>(
             data_dirs, *alrp, *atrp, cm));
     r.coding_context().annotation_expander(ae);
     r.generation_context().annotation_expander(ae);

@@ -35,7 +35,7 @@
 #include "masd.dogen.utility/types/test/exception_checkers.hpp"
 #include "masd.dogen.dia/test/diagram_serialization_helper.hpp"
 #include "masd.dogen.coding/serialization/registrar_ser.hpp"
-#include "masd.dogen.annotations/test/mock_type_repository_factory.hpp"
+#include "masd.dogen.variability/test/mock_type_repository_factory.hpp"
 #include "masd.dogen.injection.dia/types/workflow.hpp"
 
 template<typename Archive> void register_types(Archive& ar) {
@@ -60,7 +60,7 @@ bool test_workflow(
     using masd::dogen::dia::test::diagram_serialization_helper;
     const auto i(diagram_serialization_helper::from_xml(s));
 
-    using namespace masd::dogen::annotations::test;
+    using namespace masd::dogen::variability::test;
     mock_type_repository_factory rf;
     const auto rp(rf.make());
     const auto actual(workflow::execute(i));

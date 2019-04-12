@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/editor.hpp"
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_location.hpp"
@@ -48,20 +48,20 @@ private:
 
 private:
     struct type_group {
-        annotations::type editor;
-        annotations::type modeline_location;
-        annotations::type technical_space;
+        variability::type editor;
+        variability::type modeline_location;
+        variability::type technical_space;
     };
 
-    static type_group make_type_group(const annotations::type_repository& atrp);
+    static type_group make_type_group(const variability::type_repository& atrp);
 
     static meta_model::editor
-    make_editor(const type_group& tg, const annotations::annotation& a);
+    make_editor(const type_group& tg, const variability::annotation& a);
     static meta_model::technical_space
     make_technical_space(const type_group& tg,
-        const annotations::annotation& a);
+        const variability::annotation& a);
     static meta_model::modeline_location make_modeline_location(
-        const type_group& tg, const annotations::annotation& a);
+        const type_group& tg, const variability::annotation& a);
 
 public:
     static void apply(const context& ctx, meta_model::model& m);

@@ -24,9 +24,9 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
-#include "masd.dogen.annotations/io/type_io.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/io/type_io.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
@@ -94,12 +94,12 @@ std::ostream& operator<<(std::ostream& s,
 
 directive_group_repository_factory::type_group
 directive_group_repository_factory::make_type_group(
-    const annotations::type_repository& atrp,
+    const variability::type_repository& atrp,
     const formatters::repository& frp) const {
     BOOST_LOG_SEV(lg, debug) << "Creating type group.";
 
     type_group r;
-    const annotations::type_repository_selector s(atrp);
+    const variability::type_repository_selector s(atrp);
     const auto ir(traits::cpp::inclusion_required());
     r.inclusion_required = s.select_type_by_name(ir);
 
@@ -130,15 +130,15 @@ directive_group_repository_factory::make_type_group(
 
 bool directive_group_repository_factory::
 make_top_level_inclusion_required(
-    const type_group& tg, const annotations::annotation& a) const {
-    const annotations::entry_selector s(a);
+    const type_group& tg, const variability::annotation& a) const {
+    const variability::entry_selector s(a);
     return s.get_boolean_content_or_default(tg.inclusion_required);
 }
 
 boost::optional<directive_group>
 directive_group_repository_factory::make_directive_group(
     const type_group& tg,const std::string& archetype,
-    const annotations::annotation& a) const {
+    const variability::annotation& a) const {
 
     if (archetype.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_archetype;
@@ -152,7 +152,7 @@ directive_group_repository_factory::make_directive_group(
     }
 
     const auto& ft(i->second);
-    const annotations::entry_selector s(a);
+    const variability::entry_selector s(a);
     directive_group r;
 
     bool found(false);
@@ -180,8 +180,8 @@ directive_group_repository_factory::make_directive_group(
 }
 
 bool directive_group_repository_factory::
-has_inclusion_directive_overrides(const annotations::annotation& a) const {
-    const annotations::entry_selector s(a);
+has_inclusion_directive_overrides(const variability::annotation& a) const {
+    const variability::entry_selector s(a);
     const auto r(s.has_key_ending_with(override_postfix));
     BOOST_LOG_SEV(lg, debug) << "Found entries with keys ending with "
                              << override_postfix << ": " << r;
@@ -393,7 +393,7 @@ directive_group_repository_factory::make(const type_group& tg,
 
 directive_group_repository
 directive_group_repository_factory::
-make(const annotations::type_repository& atrp,
+make(const variability::type_repository& atrp,
     const formatters::repository& frp, const locator& l,
     const std::unordered_map<std::string, formattable>& formattables) const {
 

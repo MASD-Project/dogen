@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.injection/types/meta_model/model.hpp"
 #include "masd.dogen.injection/types/transforms/context_fwd.hpp"
 
@@ -41,15 +41,15 @@ namespace masd::dogen::injection::transforms {
 class references_transform final {
 private:
     struct type_group {
-        annotations::type reference;
+        variability::type reference;
     };
     friend std::ostream& operator<<(std::ostream& s,
         const type_group& v);
 
-    static type_group make_type_group(const annotations::type_repository& atrp);
+    static type_group make_type_group(const variability::type_repository& atrp);
 
     static std::list<std::string> make_references(const type_group& tg,
-        const annotations::annotation& a);
+        const variability::annotation& a);
 
 public:
     static void apply(const context& ctx, meta_model::model& m);

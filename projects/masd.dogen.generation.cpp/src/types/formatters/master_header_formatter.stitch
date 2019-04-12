@@ -18,7 +18,7 @@ std::string master_header_formatter::id() const {
     return archetype_location().archetype();
 }
 
-annotations::archetype_location
+variability::archetype_location
 master_header_formatter::archetype_location() const {
     return archetype_location_;
 }

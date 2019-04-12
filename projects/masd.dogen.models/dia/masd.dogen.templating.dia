@@ -3904,7 +3904,7 @@
                 <dia:string>#a#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const annotations::annotation&amp;#</dia:string>
+                <dia:string>#const variability::annotation&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

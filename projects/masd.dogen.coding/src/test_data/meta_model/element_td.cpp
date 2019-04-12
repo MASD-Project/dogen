@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "masd.dogen.annotations/test_data/annotation_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/name_td.hpp"
+#include "masd.dogen.variability/test_data/annotation_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/module_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/object_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/builtin_td.hpp"
@@ -55,9 +55,9 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-masd::dogen::annotations::annotation
-create_masd_dogen_annotations_annotation(const unsigned int position) {
-    return masd::dogen::annotations::annotation_generator::create(position);
+masd::dogen::variability::annotation
+create_masd_dogen_variability_annotation(const unsigned int position) {
+    return masd::dogen::variability::annotation_generator::create(position);
 }
 
 masd::dogen::coding::meta_model::origin_types
@@ -141,7 +141,7 @@ void element_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_masd_dogen_coding_meta_model_name(position + 0));
     v.documentation(create_std_string(position + 1));
-    v.annotation(create_masd_dogen_annotations_annotation(position + 2));
+    v.annotation(create_masd_dogen_variability_annotation(position + 2));
     v.origin_type(create_masd_dogen_coding_meta_model_origin_types(position + 3));
     v.contained_by(create_std_string(position + 4));
     v.in_global_module(create_bool(position + 5));

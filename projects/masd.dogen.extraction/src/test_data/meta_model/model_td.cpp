@@ -19,16 +19,16 @@
  *
  */
 #include <sstream>
-#include "masd.dogen.annotations/test_data/annotation_td.hpp"
+#include "masd.dogen.variability/test_data/annotation_td.hpp"
 #include "masd.dogen.extraction/test_data/meta_model/model_td.hpp"
 #include "masd.dogen.extraction/test_data/meta_model/artefact_td.hpp"
 #include "masd.dogen.extraction/test_data/meta_model/outputting_properties_td.hpp"
 
 namespace {
 
-masd::dogen::annotations::annotation
-create_masd_dogen_annotations_annotation(const unsigned int position) {
-    return masd::dogen::annotations::annotation_generator::create(position);
+masd::dogen::variability::annotation
+create_masd_dogen_variability_annotation(const unsigned int position) {
+    return masd::dogen::variability::annotation_generator::create(position);
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -78,7 +78,7 @@ model_generator::model_generator() : position_(0) { }
 
 void model_generator::
 populate(const unsigned int position, result_type& v) {
-    v.annotation(create_masd_dogen_annotations_annotation(position + 0));
+    v.annotation(create_masd_dogen_variability_annotation(position + 0));
     v.name(create_std_string(position + 1));
     v.technical_space(create_std_string(position + 2));
     v.artefacts(create_std_list_masd_dogen_extraction_meta_model_artefact(position + 3));

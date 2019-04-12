@@ -27,8 +27,8 @@
 
 #include <list>
 #include <boost/optional.hpp>
-#include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/locator.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/odb_properties.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/model.hpp"
@@ -38,16 +38,16 @@ namespace masd::dogen::generation::cpp::formattables {
 class odb_expander {
 private:
     struct type_group {
-        annotations::type odb_pragma;
+        variability::type odb_pragma;
     };
     friend class updator;
 
     friend std::ostream& operator<<(std::ostream& s, const type_group& v);
 
-    type_group make_type_group(const annotations::type_repository& atrp) const;
+    type_group make_type_group(const variability::type_repository& atrp) const;
 
 public:
-    void expand(const annotations::type_repository& atrp, const locator& l,
+    void expand(const variability::type_repository& atrp, const locator& l,
         model& fm) const;
 };
 

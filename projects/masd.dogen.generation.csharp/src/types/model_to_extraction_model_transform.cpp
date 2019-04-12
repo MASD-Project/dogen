@@ -48,8 +48,8 @@ model_to_extraction_model_transform::
 
 formattables::model
 model_to_extraction_model_transform::create_formattables_model(
-    const annotations::type_repository& atrp,
-    const annotations::annotation& ra,
+    const variability::type_repository& atrp,
+    const variability::annotation& ra,
     const formatters::repository& frp, const formattables::locator& l,
     const generation::meta_model::model& m) const {
     formattables::workflow fw;
@@ -62,34 +62,34 @@ std::string model_to_extraction_model_transform::id() const {
 
 std::list<extraction::meta_model::artefact>
 model_to_extraction_model_transform::
-format(const annotations::type_repository& /*atrp*/,
-    const annotations::annotation_factory& /*af*/,
+format(const variability::type_repository& /*atrp*/,
+    const variability::annotation_factory& /*af*/,
     const formattables::model& fm) const {
     formatters::workflow wf;
     return wf.execute(fm);
 }
 
-const std::forward_list<annotations::archetype_location>&
+const std::forward_list<variability::archetype_location>&
 model_to_extraction_model_transform::archetype_locations() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations();
 }
 
 const std::unordered_map<std::string,
-                         annotations::archetype_locations_group>&
+                         variability::archetype_locations_group>&
 model_to_extraction_model_transform::archetype_locations_by_meta_name() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations_by_meta_name();
 }
 
 const std::unordered_map<std::string,
-                         std::list<annotations::archetype_location>>&
+                         std::list<variability::archetype_location>>&
 model_to_extraction_model_transform::archetype_locations_by_family() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations_by_family();
 }
 
-const annotations::archetype_location_repository_parts&
+const variability::archetype_location_repository_parts&
 model_to_extraction_model_transform::
 archetype_location_repository_parts() const {
     const auto& rg(formatters::workflow::registrar());

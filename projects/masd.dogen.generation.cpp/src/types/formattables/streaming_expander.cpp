@@ -21,9 +21,9 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
-#include "masd.dogen.annotations/io/type_io.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/io/type_io.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/streaming_properties_io.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/streaming_expander.hpp"
@@ -54,12 +54,12 @@ std::ostream& operator<<(std::ostream& s,
 
 streaming_expander::type_group
 streaming_expander::make_type_group(
-    const annotations::type_repository& atrp) const {
+    const variability::type_repository& atrp) const {
     BOOST_LOG_SEV(lg, debug) << "Creating type group.";
 
     type_group r;
 
-    const annotations::type_repository_selector s(atrp);
+    const variability::type_repository_selector s(atrp);
     const auto scm(traits::cpp::streaming::string_conversion_method());
     r.string_conversion_method = s.select_type_by_name(scm);
 
@@ -76,12 +76,12 @@ streaming_expander::make_type_group(
 
 boost::optional<streaming_properties>
 streaming_expander::make_streaming_properties(
-    const type_group& tg, const annotations::annotation& a) const {
+    const type_group& tg, const variability::annotation& a) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating streaming properties.";
     bool found_any(false);
     streaming_properties r;
-    const annotations::entry_selector s(a);
+    const variability::entry_selector s(a);
 
     const auto& rq(tg.requires_quoting);
     if (s.has_entry(rq)) {
@@ -110,7 +110,7 @@ streaming_expander::make_streaming_properties(
 }
 
 void streaming_expander::
-expand(const annotations::type_repository& atrp, model& fm) const {
+expand(const variability::type_repository& atrp, model& fm) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started expanding streaming properties.";
     const auto tg(make_type_group(atrp));

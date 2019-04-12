@@ -54,8 +54,8 @@ model_to_extraction_model_transform::formatters_repository() const {
 
 formattables::model
 model_to_extraction_model_transform::create_formattables_model(
-    const annotations::type_repository& atrp,
-    const annotations::annotation& ra,
+    const variability::type_repository& atrp,
+    const variability::annotation& ra,
     const formatters::repository& frp, const formattables::locator& l,
     const generation::meta_model::model& m) const {
     formattables::workflow fw;
@@ -64,7 +64,7 @@ model_to_extraction_model_transform::create_formattables_model(
 
 formattables::locator model_to_extraction_model_transform::make_locator(
     const boost::filesystem::path& output_directory_path,
-    const annotations::type_repository& atrp, const annotations::annotation& ra,
+    const variability::type_repository& atrp, const variability::annotation& ra,
     const formatters::repository& frp, const bool enable_backend_directories,
     const generation::meta_model::model& m) const {
 
@@ -85,9 +85,9 @@ std::string model_to_extraction_model_transform::id() const {
 std::list<extraction::meta_model::artefact>
 model_to_extraction_model_transform::
 format(const std::unordered_set<generation::meta_model::element_archetype>&
-    enabled_archetype_for_element, const annotations::type_repository& atrp,
-    const annotations::annotation_factory& af,
-    const annotations::annotation_expander& ae,
+    enabled_archetype_for_element, const variability::type_repository& atrp,
+    const variability::annotation_factory& af,
+    const variability::annotation_expander& ae,
     const formattables::model& fm) const {
     formatters::workflow wf(atrp, af, ae);
     return wf.execute(enabled_archetype_for_element, fm);
@@ -103,27 +103,27 @@ managed_directories(const formattables::locator& l) const {
     return r;
 }
 
-const std::forward_list<annotations::archetype_location>&
+const std::forward_list<variability::archetype_location>&
 model_to_extraction_model_transform::archetype_locations() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations();
 }
 
 const std::unordered_map<std::string,
-                         annotations::archetype_locations_group>&
+                         variability::archetype_locations_group>&
 model_to_extraction_model_transform::archetype_locations_by_meta_name() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations_by_meta_name();
 }
 
 const std::unordered_map<std::string,
-                         std::list<annotations::archetype_location>>&
+                         std::list<variability::archetype_location>>&
 model_to_extraction_model_transform::archetype_locations_by_family() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations_by_family();
 }
 
-const annotations::archetype_location_repository_parts&
+const variability::archetype_location_repository_parts&
 model_to_extraction_model_transform::
 archetype_location_repository_parts() const {
     const auto& rg(formatters::workflow::registrar());

@@ -102,7 +102,7 @@
 #DOGEN masd.injection.reference=cpp.boost
 #DOGEN masd.injection.reference=cpp.std
 #DOGEN masd.injection.reference=masd.dogen
-#DOGEN masd.injection.reference=masd.dogen.annotations
+#DOGEN masd.injection.reference=masd.dogen.variability
 #DOGEN masd.injection.reference=masd.dogen.tracing
 #DOGEN masd.injection.reference=masd.dogen.coding
 #DOGEN masd.injection.reference=masd.dogen.extraction
@@ -290,7 +290,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#annotations::archetype_location#</dia:string>
+            <dia:string>#variability::archetype_location#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -320,7 +320,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;annotations::archetype_location&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;variability::archetype_location&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1353,7 +1353,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#annotations::archetype_location#</dia:string>
+            <dia:string>#variability::archetype_location#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5513,7 +5513,7 @@
                 <dia:string>#atrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const annotations::type_repository&amp;#</dia:string>
+                <dia:string>#const variability::type_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -5547,7 +5547,7 @@
                 <dia:string>#ra#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const annotations::annotation&amp;#</dia:string>
+                <dia:string>#const variability::annotation&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6315,7 +6315,7 @@
                 <dia:string>#atrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const annotations::type_repository&amp;#</dia:string>
+                <dia:string>#const variability::type_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6332,7 +6332,7 @@
                 <dia:string>#ra#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const annotations::annotation&amp;#</dia:string>
+                <dia:string>#const variability::annotation&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6770,7 +6770,7 @@
                 <dia:string>#atrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const annotations::type_repository&amp;#</dia:string>
+                <dia:string>#const variability::type_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6787,7 +6787,7 @@
                 <dia:string>#ra#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const annotations::annotation&amp;#</dia:string>
+                <dia:string>#const variability::annotation&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8235,7 +8235,7 @@
                 <dia:string>#atrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const annotations::type_repository&amp;#</dia:string>
+                <dia:string>#const variability::type_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

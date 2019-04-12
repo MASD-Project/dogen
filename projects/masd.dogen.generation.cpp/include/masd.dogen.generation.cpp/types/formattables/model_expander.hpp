@@ -26,8 +26,8 @@
 #endif
 
 #include <unordered_set>
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.generation/types/meta_model/element_archetype.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/locator.hpp"
@@ -38,21 +38,21 @@ namespace masd::dogen::generation::cpp::formattables {
 class model_expander {
 private:
     void expand_streaming(
-        const annotations::type_repository& atrp, model& fm) const;
+        const variability::type_repository& atrp, model& fm) const;
 
     void expand_canonical_archetypes(const formatters::repository& frp,
         model& fm) const;
 
     void expand_inclusion(
-        const annotations::type_repository& atrp,
+        const variability::type_repository& atrp,
         const std::unordered_set<generation::meta_model::element_archetype>&
         enabled_archetype_for_element,
         const formatters::repository& frp, const locator& l, model& fm) const;
 
-    void expand_aspects(const annotations::type_repository& atrp,
+    void expand_aspects(const variability::type_repository& atrp,
         model& fm) const;
 
-    void expand_helpers(const annotations::type_repository& atrp,
+    void expand_helpers(const variability::type_repository& atrp,
         const formatters::repository& frp, model& fm) const;
 
     void reduce(model& fm) const;
@@ -60,19 +60,19 @@ private:
     void expand_file_paths_and_guards(const formatters::repository& frp,
         const locator& l, model& fm) const;
 
-    void expand_odb(const annotations::type_repository& atrp, const locator& l,
+    void expand_odb(const variability::type_repository& atrp, const locator& l,
         model& fm) const;
 
     void expand_facet_directories(const locator& l, model& fm) const;
 
     void expand_build_files(const locator& l, model& fm) const;
 
-    void expand_cpp_standard(const annotations::type_repository& atrp,
-        const annotations::annotation& ra, model& fm) const;
+    void expand_cpp_standard(const variability::type_repository& atrp,
+        const variability::annotation& ra, model& fm) const;
 
 public:
-    void expand(const annotations::type_repository& atrp,
-        const annotations::annotation& ra,
+    void expand(const variability::type_repository& atrp,
+        const variability::annotation& ra,
         const std::unordered_set<generation::meta_model::element_archetype>&
         enabled_archetype_for_element,
         const formatters::repository& frp, const locator& l, model& fm) const;

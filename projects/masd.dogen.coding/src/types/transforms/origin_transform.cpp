@@ -20,8 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
@@ -81,10 +81,10 @@ private:
 }
 
 origin_transform::type_group origin_transform::
-make_type_group(const annotations::type_repository& atrp) {
+make_type_group(const variability::type_repository& atrp) {
 
     type_group r;
-    const annotations::type_repository_selector s(atrp);
+    const variability::type_repository_selector s(atrp);
     r.is_proxy_model = s.select_type_by_name(traits::is_proxy_model());
     return r;
 }
@@ -92,7 +92,7 @@ make_type_group(const annotations::type_repository& atrp) {
 bool origin_transform::
 is_proxy_model(const type_group& tg, const meta_model::model& m) {
     const auto& o(m.root_module()->annotation());
-    const annotations::entry_selector s(o);
+    const variability::entry_selector s(o);
     const bool r(s.get_boolean_content_or_default(tg.is_proxy_model));
     BOOST_LOG_SEV(lg, debug) << "Read is proxy model: " << r
                              << " for model: " << m.name().qualified().dot();

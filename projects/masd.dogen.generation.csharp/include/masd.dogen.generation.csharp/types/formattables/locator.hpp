@@ -30,9 +30,9 @@
 #include <unordered_set>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/repository.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/locator_configuration.hpp"
@@ -43,14 +43,14 @@ namespace masd::dogen::generation::csharp::formattables {
 class locator final {
 private:
     struct facet_type_group {
-        annotations::type directory;
-        annotations::type postfix;
+        variability::type directory;
+        variability::type postfix;
     };
 
     struct formatter_type_group {
-        boost::optional<annotations::type> facet_directory;
-        boost::optional<annotations::type> facet_postfix;
-        annotations::type archetype_postfix;
+        boost::optional<variability::type> facet_directory;
+        boost::optional<variability::type> facet_postfix;
+        variability::type archetype_postfix;
     };
 
     struct type_group {
@@ -58,18 +58,18 @@ private:
         facets_type_group;
         std::unordered_map<std::string, formatter_type_group>
         formatters_type_group;
-        annotations::type backend_directory_name;
+        variability::type backend_directory_name;
     };
 
-    type_group make_type_group(const annotations::type_repository& atrp,
+    type_group make_type_group(const variability::type_repository& atrp,
         const formatters::repository& frp) const;
 
     locator_configuration make_configuration(const type_group& tg,
-        const annotations::annotation& o) const;
+        const variability::annotation& o) const;
 
     locator_configuration
-    make_configuration(const annotations::type_repository& atrp,
-        const formatters::repository& frp, const annotations::annotation& a);
+    make_configuration(const variability::type_repository& atrp,
+        const formatters::repository& frp, const variability::annotation& a);
 
 private:
     /**
@@ -83,8 +83,8 @@ private:
 public:
     locator(
         const boost::filesystem::path& output_directory_path,
-        const annotations::type_repository& atrp,
-        const formatters::repository& frp, const annotations::annotation& ra,
+        const variability::type_repository& atrp,
+        const formatters::repository& frp, const variability::annotation& ra,
         const coding::meta_model::name& model_name,
         const std::unordered_set<std::string>& module_ids,
         const bool enable_backend_directories);

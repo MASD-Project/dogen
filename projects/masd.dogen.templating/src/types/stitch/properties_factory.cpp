@@ -21,8 +21,8 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/string/splitter.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.templating/types/stitch/traits.hpp"
 #include "masd.dogen.templating/types/stitch/building_error.hpp"
 #include "masd.dogen.templating/types/stitch/properties_factory.hpp"
@@ -39,13 +39,13 @@ const std::string field_definition_not_found(
 
 namespace masd::dogen::templating::stitch {
 
-properties_factory::properties_factory(const annotations::type_repository& arp)
+properties_factory::properties_factory(const variability::type_repository& arp)
     : type_group_(make_type_group(arp)) {}
 
 properties_factory::type_group properties_factory::make_type_group(
-    const annotations::type_repository& arp) const {
+    const variability::type_repository& arp) const {
     type_group r;
-    const annotations::type_repository_selector s(arp);
+    const variability::type_repository_selector s(arp);
 
     const auto& svn(traits::stream_variable_name());
     r.stream_variable_name = s.select_type_by_name(svn);
@@ -69,16 +69,16 @@ properties_factory::type_group properties_factory::make_type_group(
 }
 
 std::string properties_factory::
-extract_stream_variable_name(const annotations::annotation& a) const {
-    using namespace annotations;
+extract_stream_variable_name(const variability::annotation& a) const {
+    using namespace variability;
     const entry_selector s(a);
     const auto& tg(type_group_);
     return s.get_text_content_or_default(tg.stream_variable_name);
 }
 
 boost::filesystem::path properties_factory::
-extract_relative_output_directory(const annotations::annotation& a) const {
-    using namespace annotations;
+extract_relative_output_directory(const variability::annotation& a) const {
+    using namespace variability;
     const entry_selector s(a);
     if (!s.has_entry(traits::relative_output_directory()))
         return boost::filesystem::path();
@@ -88,9 +88,9 @@ extract_relative_output_directory(const annotations::annotation& a) const {
 }
 
 std::list<std::string> properties_factory::
-extract_inclusion_dependencies(const annotations::annotation& a) const {
+extract_inclusion_dependencies(const variability::annotation& a) const {
     std::list<std::string> r;
-    using namespace annotations;
+    using namespace variability;
     const entry_selector s(a);
     const auto& t(type_group_.inclusion_dependency);
     if (!s.has_entry(t))
@@ -100,9 +100,9 @@ extract_inclusion_dependencies(const annotations::annotation& a) const {
 }
 
 std::list<std::string> properties_factory::
-extract_containing_namespaces(const annotations::annotation& a) const {
+extract_containing_namespaces(const variability::annotation& a) const {
     std::list<std::string> r;
-    using namespace annotations;
+    using namespace variability;
     const entry_selector s(a);
     const auto& t(type_group_.containing_namespaces);
     if (!s.has_entry(t))
@@ -117,9 +117,9 @@ extract_containing_namespaces(const annotations::annotation& a) const {
 }
 
 std::string properties_factory::
-extract_wale_template(const annotations::annotation& a) const {
+extract_wale_template(const variability::annotation& a) const {
     std::string r;
-    using namespace annotations;
+    using namespace variability;
     const entry_selector s(a);
     const auto& t(type_group_.wale_template);
     if (!s.has_entry(t))
@@ -129,9 +129,9 @@ extract_wale_template(const annotations::annotation& a) const {
 }
 
 std::unordered_map<std::string, std::string> properties_factory::
-extract_wale_kvps(const annotations::annotation& a) const {
+extract_wale_kvps(const variability::annotation& a) const {
     std::unordered_map<std::string, std::string>  r;
-    using namespace annotations;
+    using namespace variability;
     const entry_selector s(a);
     const auto& t(type_group_.wale_kvp);
     if (!s.has_entry(t))
@@ -141,7 +141,7 @@ extract_wale_kvps(const annotations::annotation& a) const {
 }
 
 properties
-properties_factory::make(const annotations::annotation& a) const {
+properties_factory::make(const variability::annotation& a) const {
     properties r;
     r.stream_variable_name(extract_stream_variable_name(a));
     r.relative_output_directory(extract_relative_output_directory(a));

@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "masd.dogen.annotations/test_data/annotation_td.hpp"
+#include "masd.dogen.variability/test_data/annotation_td.hpp"
 #include "masd.dogen.injection/test_data/meta_model/attribute_td.hpp"
 
 namespace {
@@ -54,9 +54,9 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
-masd::dogen::annotations::annotation
-create_masd_dogen_annotations_annotation(const unsigned int position) {
-    return masd::dogen::annotations::annotation_generator::create(position);
+masd::dogen::variability::annotation
+create_masd_dogen_variability_annotation(const unsigned int position) {
+    return masd::dogen::variability::annotation_generator::create(position);
 }
 
 }
@@ -71,7 +71,7 @@ populate(const unsigned int position, result_type& v) {
     v.stereotypes(create_std_list_std_string(position + 1));
     v.documentation(create_std_string(position + 2));
     v.name(create_std_string(position + 3));
-    v.annotation(create_masd_dogen_annotations_annotation(position + 4));
+    v.annotation(create_masd_dogen_variability_annotation(position + 4));
     v.type(create_std_string(position + 5));
     v.value(create_std_string(position + 6));
 }

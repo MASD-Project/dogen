@@ -36,8 +36,8 @@ std::string assistant_formatter::id() const {
     return static_id();
 }
 
-annotations::archetype_location assistant_formatter::archetype_location() const {
-    static annotations::archetype_location
+variability::archetype_location assistant_formatter::archetype_location() const {
+    static variability::archetype_location
         r(csharp::traits::kernel(), csharp::traits::backend(),
           traits::facet(),
           assistant_formatter::static_id());

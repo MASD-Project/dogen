@@ -103,7 +103,7 @@
 #DOGEN masd.injection.reference=cpp.boost
 #DOGEN masd.injection.reference=cpp.std
 #DOGEN masd.injection.reference=masd.dogen
-#DOGEN masd.injection.reference=masd.dogen.annotations
+#DOGEN masd.injection.reference=masd.dogen.variability
 #DOGEN masd.injection.reference=masd
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
@@ -276,7 +276,7 @@
                 <dia:string>#alrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#annotations::archetype_location_repository#</dia:string>
+                <dia:string>#variability::archetype_location_repository#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -293,7 +293,7 @@
                 <dia:string>#atrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#annotations::type_repository#</dia:string>
+                <dia:string>#variability::type_repository#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

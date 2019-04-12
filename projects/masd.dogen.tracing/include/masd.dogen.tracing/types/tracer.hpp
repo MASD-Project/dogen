@@ -31,8 +31,8 @@
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen/types/tracing_configuration.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.annotations/types/archetype_location_repository.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/archetype_location_repository.hpp"
 #include "masd.dogen.tracing/types/metrics.hpp"
 #include "masd.dogen.tracing/types/metrics_builder.hpp"
 
@@ -46,8 +46,8 @@ public:
     tracer(const tracer&) = default;
 
 public:
-    tracer(const annotations::archetype_location_repository& alrp,
-        const annotations::type_repository& atrp,
+    tracer(const variability::archetype_location_repository& alrp,
+        const variability::type_repository& atrp,
         const boost::optional<tracing_configuration>& cfg);
 
 private:
@@ -59,8 +59,8 @@ private:
     void ensure_transform_position_not_empty() const;
 
     void write_initial_inputs(
-        const annotations::archetype_location_repository& alrp,
-        const annotations::type_repository& atrp) const;
+        const variability::archetype_location_repository& alrp,
+        const variability::type_repository& atrp) const;
 
     boost::filesystem::path
     full_path_for_writing(const std::string& transform_id,

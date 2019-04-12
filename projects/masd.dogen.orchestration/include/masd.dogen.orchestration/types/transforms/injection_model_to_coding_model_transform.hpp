@@ -29,9 +29,9 @@
 #include <iosfwd>
 #include <vector>
 #include <unordered_map>
-#include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.injection/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/location.hpp"
@@ -46,17 +46,17 @@ namespace masd::dogen::orchestration::transforms {
 class injection_model_to_coding_model_transform final {
 private:
     struct type_group {
-        annotations::type external_modules;
-        annotations::type model_modules;
+        variability::type external_modules;
+        variability::type model_modules;
     };
 
     friend std::ostream& operator<<(std::ostream& s, const type_group& v);
 
     static type_group
-    make_type_group(const annotations::type_repository& atrp);
+    make_type_group(const variability::type_repository& atrp);
 
     static naming_configuration make_naming_configuration(const type_group& tg,
-        const annotations::annotation& a);
+        const variability::annotation& a);
 
     static coding::meta_model::location
     create_location(const naming_configuration& nc);

@@ -35,7 +35,7 @@ element::element(
     const std::list<std::string>& stereotypes,
     const std::string& documentation,
     const std::string& name,
-    const masd::dogen::annotations::annotation& annotation,
+    const masd::dogen::variability::annotation& annotation,
     const std::list<std::string>& parents,
     const std::list<masd::dogen::injection::meta_model::attribute>& attributes,
     const std::string& fallback_element_type,
@@ -165,19 +165,19 @@ void element::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-const masd::dogen::annotations::annotation& element::annotation() const {
+const masd::dogen::variability::annotation& element::annotation() const {
     return annotation_;
 }
 
-masd::dogen::annotations::annotation& element::annotation() {
+masd::dogen::variability::annotation& element::annotation() {
     return annotation_;
 }
 
-void element::annotation(const masd::dogen::annotations::annotation& v) {
+void element::annotation(const masd::dogen::variability::annotation& v) {
     annotation_ = v;
 }
 
-void element::annotation(const masd::dogen::annotations::annotation&& v) {
+void element::annotation(const masd::dogen::variability::annotation&& v) {
     annotation_ = std::move(v);
 }
 

@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.generation.csharp/types/traits.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/assistant_expander.hpp"
@@ -28,9 +28,9 @@
 namespace masd::dogen::generation::csharp::formattables {
 
 assistant_expander::type_group assistant_expander::
-make_type_group(const annotations::type_repository& atrp) const {
+make_type_group(const variability::type_repository& atrp) const {
     type_group r;
-    const annotations::type_repository_selector s(atrp);
+    const variability::type_repository_selector s(atrp);
 
     const auto ra(traits::csharp::assistant::requires_assistance());
     r.requires_assistance = s.select_type_by_name(ra);
@@ -43,12 +43,12 @@ make_type_group(const annotations::type_repository& atrp) const {
 
 boost::optional<assistant_properties>
 assistant_expander::make_assistant_properties(const type_group& tg,
-    const annotations::annotation& a) const {
+    const variability::annotation& a) const {
 
     assistant_properties r;
     bool has_properties(false);
 
-    const annotations::entry_selector s(a);
+    const variability::entry_selector s(a);
     const auto& ra(tg.requires_assistance);
     if (s.has_entry(ra)) {
         has_properties = true;
@@ -68,7 +68,7 @@ assistant_expander::make_assistant_properties(const type_group& tg,
 }
 
 void assistant_expander::
-expand(const annotations::type_repository& atrp, model& fm) const {
+expand(const variability::type_repository& atrp, model& fm) const {
     const auto tg(make_type_group(atrp));
 
     for (const auto& pair : fm.formattables()) {

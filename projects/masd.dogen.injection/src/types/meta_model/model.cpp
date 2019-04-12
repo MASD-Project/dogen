@@ -27,7 +27,7 @@ model::model(
     const std::list<std::string>& stereotypes,
     const std::string& documentation,
     const std::string& name,
-    const masd::dogen::annotations::annotation& annotation,
+    const masd::dogen::variability::annotation& annotation,
     const std::list<masd::dogen::injection::meta_model::element>& elements,
     const std::string& input_technical_space,
     const std::list<std::string>& references)
@@ -133,19 +133,19 @@ void model::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-const masd::dogen::annotations::annotation& model::annotation() const {
+const masd::dogen::variability::annotation& model::annotation() const {
     return annotation_;
 }
 
-masd::dogen::annotations::annotation& model::annotation() {
+masd::dogen::variability::annotation& model::annotation() {
     return annotation_;
 }
 
-void model::annotation(const masd::dogen::annotations::annotation& v) {
+void model::annotation(const masd::dogen::variability::annotation& v) {
     annotation_ = v;
 }
 
-void model::annotation(const masd::dogen::annotations::annotation&& v) {
+void model::annotation(const masd::dogen::variability::annotation&& v) {
     annotation_ = std::move(v);
 }
 

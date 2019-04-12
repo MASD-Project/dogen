@@ -26,8 +26,8 @@
 #include "masd.dogen.utility/types/io/forward_list_io.hpp"
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
-#include "masd.dogen.annotations/types/type_repository_factory.hpp"
-#include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
+#include "masd.dogen.variability/types/type_repository_factory.hpp"
+#include "masd.dogen.variability/types/archetype_location_repository_builder.hpp"
 #include "masd.dogen.extraction/io/meta_model/artefact_io.hpp"
 #include "masd.dogen.extraction/types/helpers/filesystem_writer.hpp"
 #include "masd.dogen.templating/types/stitch/parser.hpp"
@@ -94,28 +94,28 @@ validate_text_template_paths(const std::forward_list<boost::filesystem::path>&
     }
 }
 
-annotations::archetype_location_repository
+variability::archetype_location_repository
 workflow::obtain_archetype_location_repository() const {
-    std::list<annotations::archetype_location> als;
+    std::list<variability::archetype_location> als;
     formatter fmt;
     als.push_back(fmt.archetype_location());
 
-    annotations::archetype_location_repository_builder b;
+    variability::archetype_location_repository_builder b;
     b.add(als);
     return b.build();
 }
 
-annotations::type_repository workflow::create_annotations_type_repository(
+variability::type_repository workflow::create_annotations_type_repository(
     const std::vector<boost::filesystem::path>& data_dirs,
-    const annotations::archetype_location_repository& alrp) const {
-    annotations::type_repository_factory f;
+    const variability::archetype_location_repository& alrp) const {
+    variability::type_repository_factory f;
     return f.make(alrp, data_dirs);
 }
 
 std::list<extraction::meta_model::artefact>
-workflow::create_artefacts(const annotations::type_repository& atrp,
-    const annotations::annotation_factory& af,
-    const annotations::annotation_expander& ae,
+workflow::create_artefacts(const variability::type_repository& atrp,
+    const variability::annotation_factory& af,
+    const variability::annotation_expander& ae,
     const std::forward_list<boost::filesystem::path>& text_template_paths,
     const std::unordered_map<std::string, std::string>& kvps) const {
 
@@ -150,8 +150,8 @@ void workflow::execute(const boost::filesystem::path& p,
     const auto atrp(create_annotations_type_repository(data_dirs, alrp));
 
     const auto cm(compatibility_mode_);
-    annotations::annotation_factory af(alrp, atrp, cm);
-    annotations::annotation_expander ae(data_dirs, alrp, atrp, cm);
+    variability::annotation_factory af(alrp, atrp, cm);
+    variability::annotation_expander ae(data_dirs, alrp, atrp, cm);
 
     properties_factory pf(atrp);
     const auto artefacts(create_artefacts(atrp, af, ae, paths, kvps));

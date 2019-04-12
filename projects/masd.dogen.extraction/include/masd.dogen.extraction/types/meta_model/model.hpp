@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.extraction/types/meta_model/outputting_properties.hpp"
 
@@ -44,7 +44,7 @@ public:
 
 public:
     model(
-        const masd::dogen::annotations::annotation& annotation,
+        const masd::dogen::variability::annotation& annotation,
         const std::string& name,
         const std::string& technical_space,
         const std::list<masd::dogen::extraction::meta_model::artefact>& artefacts,
@@ -56,10 +56,10 @@ public:
      * @brief Annotation for this element.
      */
     /**@{*/
-    const masd::dogen::annotations::annotation& annotation() const;
-    masd::dogen::annotations::annotation& annotation();
-    void annotation(const masd::dogen::annotations::annotation& v);
-    void annotation(const masd::dogen::annotations::annotation&& v);
+    const masd::dogen::variability::annotation& annotation() const;
+    masd::dogen::variability::annotation& annotation();
+    void annotation(const masd::dogen::variability::annotation& v);
+    void annotation(const masd::dogen::variability::annotation&& v);
     /**@}*/
 
     const std::string& name() const;
@@ -103,7 +103,7 @@ public:
     model& operator=(model other);
 
 private:
-    masd::dogen::annotations::annotation annotation_;
+    masd::dogen::variability::annotation annotation_;
     std::string name_;
     std::string technical_space_;
     std::list<masd::dogen::extraction::meta_model::artefact> artefacts_;

@@ -52,7 +52,7 @@ void injector::add_elements(
         add_element(e, m);
 }
 
-void injector::inject_visual_studio(const annotations::type_repository& atrp,
+void injector::inject_visual_studio(const variability::type_repository& atrp,
     generation::meta_model::model& m) const {
     visual_studio_factory f;
     const auto e(f.make(atrp, m));
@@ -72,7 +72,7 @@ void injector::inject_assistant(generation::meta_model::model& m) const {
     add_element(e, m);
 }
 
-void injector::inject(const annotations::type_repository& atrp,
+void injector::inject(const variability::type_repository& atrp,
     generation::meta_model::model& m) const {
     inject_visual_studio(atrp, m);
     inject_assembly_info(m);

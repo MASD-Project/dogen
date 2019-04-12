@@ -35,7 +35,7 @@ set_target_properties(${tests_target_name}
 target_link_libraries(${tests_target_name}
     ${lib_target_name}
     masd.dogen.utility.lib
-    masd.dogen.annotations.lib
+    masd.dogen.variability.lib
     masd.dogen.injection.lib
     ${LIBXML2_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES}

@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "masd.dogen.annotations/test_data/annotation_td.hpp"
+#include "masd.dogen.variability/test_data/annotation_td.hpp"
 #include "masd.dogen.injection/test_data/meta_model/model_td.hpp"
 #include "masd.dogen.injection/test_data/meta_model/element_td.hpp"
 
@@ -55,9 +55,9 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
-masd::dogen::annotations::annotation
-create_masd_dogen_annotations_annotation(const unsigned int position) {
-    return masd::dogen::annotations::annotation_generator::create(position);
+masd::dogen::variability::annotation
+create_masd_dogen_variability_annotation(const unsigned int position) {
+    return masd::dogen::variability::annotation_generator::create(position);
 }
 
 masd::dogen::injection::meta_model::element
@@ -85,7 +85,7 @@ populate(const unsigned int position, result_type& v) {
     v.stereotypes(create_std_list_std_string(position + 1));
     v.documentation(create_std_string(position + 2));
     v.name(create_std_string(position + 3));
-    v.annotation(create_masd_dogen_annotations_annotation(position + 4));
+    v.annotation(create_masd_dogen_variability_annotation(position + 4));
     v.elements(create_std_list_masd_dogen_injection_meta_model_element(position + 5));
     v.input_technical_space(create_std_string(position + 6));
     v.references(create_std_list_std_string(position + 7));

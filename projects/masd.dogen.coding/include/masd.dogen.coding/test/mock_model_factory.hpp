@@ -30,7 +30,7 @@
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.coding/types/meta_model/model.hpp"
-#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
 
 namespace masd::dogen::coding::test {
 
@@ -153,7 +153,7 @@ public:
     };
 
 public:
-    typedef std::function<void(annotations::annotation&)>
+    typedef std::function<void(variability::annotation&)>
     annotation_function_type;
 
 public:

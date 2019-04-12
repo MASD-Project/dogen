@@ -24,8 +24,8 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/unordered_set_io.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
@@ -75,9 +75,9 @@ const std::string underlying_element_conflict(
 namespace masd::dogen::coding::transforms {
 
 parsing_transform::type_group parsing_transform::make_type_group(
-    const annotations::type_repository& atrp) {
+    const variability::type_repository& atrp) {
     type_group r;
-    const annotations::type_repository_selector s(atrp);
+    const variability::type_repository_selector s(atrp);
     const auto gp(traits::generalization::parent());
     r.parent = s.select_type_by_name(gp);
 
@@ -91,8 +91,8 @@ parsing_transform::type_group parsing_transform::make_type_group(
 }
 
 std::string parsing_transform::
-make_parent(const type_group& tg, const annotations::annotation& a) {
-    const annotations::entry_selector s(a);
+make_parent(const type_group& tg, const variability::annotation& a) {
+    const variability::entry_selector s(a);
     if (s.has_entry(tg.parent))
         return s.get_text_content(tg.parent);
 
@@ -100,8 +100,8 @@ make_parent(const type_group& tg, const annotations::annotation& a) {
 }
 
 std::string parsing_transform::make_enumeration_underlying_element(
-    const type_group& tg, const annotations::annotation& a) {
-    const annotations::entry_selector s(a);
+    const type_group& tg, const variability::annotation& a) {
+    const variability::entry_selector s(a);
     if (s.has_entry(tg.enumeration_underlying_element))
         return s.get_text_content(tg.enumeration_underlying_element);
 
@@ -109,8 +109,8 @@ std::string parsing_transform::make_enumeration_underlying_element(
 }
 
 std::string parsing_transform::make_primitive_underlying_element(
-    const type_group& tg, const annotations::annotation& a) {
-    const annotations::entry_selector s(a);
+    const type_group& tg, const variability::annotation& a) {
+    const variability::entry_selector s(a);
     if (s.has_entry(tg.primitive_underlying_element))
         return s.get_text_content(tg.primitive_underlying_element);
 

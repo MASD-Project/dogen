@@ -27,9 +27,9 @@
 
 #include <string>
 #include <iosfwd>
-#include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
@@ -42,13 +42,13 @@ namespace masd::dogen::coding::transforms {
 class primitives_transform final {
 private:
     struct type_group {
-        annotations::type is_nullable;
-        annotations::type use_type_aliasing;
+        variability::type is_nullable;
+        variability::type use_type_aliasing;
     };
 
     friend std::ostream& operator<<(std::ostream& s, const type_group& v);
 
-    static type_group make_type_group(const annotations::type_repository& atrp);
+    static type_group make_type_group(const variability::type_repository& atrp);
     static void populate_from_annotations(const type_group& tg,
         meta_model::primitive& p);
 

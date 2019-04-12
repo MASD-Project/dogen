@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
-#include "masd.dogen.annotations/types/archetype_location.hpp"
+#include "masd.dogen.variability/types/archetype_location.hpp"
 #include "masd.dogen.templating/types/helpers/kvp_resolver.hpp"
 #include "masd.dogen.templating/types/stitch/line.hpp"
 #include "masd.dogen.templating/types/stitch/text_template.hpp"
@@ -82,7 +82,7 @@ public:
     /**
      * @brief Archetype location for this formatter.
      */
-    annotations::archetype_location archetype_location() const;
+    variability::archetype_location archetype_location() const;
 
     /**
      * @brief Formats the template into an artefact.

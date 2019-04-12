@@ -50,7 +50,7 @@ requires_expansion(const generation::meta_model::model& m) const {
 }
 
 void dynamic_transform::expand_injection(
-    const annotations::type_repository& atrp,
+    const variability::type_repository& atrp,
     generation::meta_model::model& m) const {
     injector i;
     i.inject(atrp, m);

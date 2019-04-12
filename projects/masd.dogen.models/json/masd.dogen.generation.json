@@ -6,7 +6,7 @@
     "masd.injection.reference": "cpp.boost",
     "masd.injection.reference": "cpp.std",
     "masd.injection.reference": "masd.dogen",
-    "masd.injection.reference": "masd.dogen.annotations",
+    "masd.injection.reference": "masd.dogen.variability",
     "masd.injection.reference": "masd.dogen.tracing",
     "masd.injection.reference": "masd.dogen.coding",
     "masd.injection.reference": "masd.dogen.extraction",
@@ -652,19 +652,19 @@
       "attributes": [
         {
           "name": "type_repository",
-          "type": "boost::shared_ptr<annotations::type_repository>"
+          "type": "boost::shared_ptr<variability::type_repository>"
         },
         {
           "name": "archetype_location_repository",
-          "type": "boost::shared_ptr<annotations::archetype_location_repository>"
+          "type": "boost::shared_ptr<variability::archetype_location_repository>"
         },
         {
           "name": "annotation_factory",
-          "type": "boost::shared_ptr<annotations::annotation_factory>"
+          "type": "boost::shared_ptr<variability::annotation_factory>"
         },
         {
           "name": "annotation_expander",
-          "type": "boost::shared_ptr<annotations::annotation_expander>"
+          "type": "boost::shared_ptr<variability::annotation_expander>"
         },
         {
           "name": "tracer",

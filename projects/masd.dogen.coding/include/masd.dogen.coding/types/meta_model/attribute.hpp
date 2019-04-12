@@ -28,8 +28,8 @@
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.coding/types/meta_model/name.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.coding/types/meta_model/name_tree.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_attribute_properties.hpp"
 
@@ -52,7 +52,7 @@ public:
 public:
     attribute(
         const std::string& documentation,
-        const masd::dogen::annotations::annotation& annotation,
+        const masd::dogen::variability::annotation& annotation,
         const masd::dogen::coding::meta_model::name& name,
         const std::string& unparsed_type,
         const masd::dogen::coding::meta_model::name_tree& parsed_type,
@@ -79,10 +79,10 @@ public:
      * @brief Annotation for this element.
      */
     /**@{*/
-    const masd::dogen::annotations::annotation& annotation() const;
-    masd::dogen::annotations::annotation& annotation();
-    void annotation(const masd::dogen::annotations::annotation& v);
-    void annotation(const masd::dogen::annotations::annotation&& v);
+    const masd::dogen::variability::annotation& annotation() const;
+    masd::dogen::variability::annotation& annotation();
+    void annotation(const masd::dogen::variability::annotation& v);
+    void annotation(const masd::dogen::variability::annotation&& v);
     /**@}*/
 
     /**
@@ -150,7 +150,7 @@ public:
 
 private:
     std::string documentation_;
-    masd::dogen::annotations::annotation annotation_;
+    masd::dogen::variability::annotation annotation_;
     masd::dogen::coding::meta_model::name name_;
     std::string unparsed_type_;
     masd::dogen::coding::meta_model::name_tree parsed_type_;

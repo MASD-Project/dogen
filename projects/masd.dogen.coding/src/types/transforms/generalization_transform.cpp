@@ -22,8 +22,8 @@
 #include "masd.dogen.utility/types/io/unordered_set_io.hpp"
 #include "masd.dogen.utility/types/io/optional_io.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
@@ -58,18 +58,18 @@ inline bool operator<(const name& lhs, const name& rhs) {
 namespace masd::dogen::coding::transforms {
 
 generalization_transform::type_group generalization_transform::make_type_group(
-    const annotations::type_repository& atrp) {
+    const variability::type_repository& atrp) {
 
     type_group r;
-    const annotations::type_repository_selector s(atrp);
+    const variability::type_repository_selector s(atrp);
     r.is_final = s.select_type_by_name(traits::generalization::is_final());
     return r;
 }
 
 boost::optional<bool>
 generalization_transform::make_is_final(const type_group& tg,
-    const annotations::annotation& a) {
-    const annotations::entry_selector s(a);
+    const variability::annotation& a) {
+    const variability::entry_selector s(a);
 
     if (s.has_entry(tg.is_final))
         return s.get_boolean_content(tg.is_final);

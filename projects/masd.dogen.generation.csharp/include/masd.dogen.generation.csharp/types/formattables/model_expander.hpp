@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/repository.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/locator.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/model.hpp"
@@ -39,21 +39,21 @@ private:
         const locator& l, model& fm) const;
 
     void expand_aspect_properties(
-        const annotations::type_repository& atrp, model& fm) const;
+        const variability::type_repository& atrp, model& fm) const;
 
     void expand_assistant_properties(
-        const annotations::type_repository& atrp, model& fm) const;
+        const variability::type_repository& atrp, model& fm) const;
 
     void reduce(model& fm) const;
 
     void expand_project_items(model& fm) const;
-    void expand_helpers(const annotations::type_repository& atrp,
+    void expand_helpers(const variability::type_repository& atrp,
         const formatters::repository& frp,
         model& fm) const;
 
 public:
-    void expand(const annotations::type_repository& atrp,
-        const annotations::annotation& ra,
+    void expand(const variability::type_repository& atrp,
+        const variability::annotation& ra,
         const formatters::repository& frp, const locator& l, model& fm) const;
 };
 

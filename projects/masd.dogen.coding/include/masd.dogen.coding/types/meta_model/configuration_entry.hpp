@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
@@ -41,7 +41,7 @@ public:
 
 public:
     configuration_entry(
-        const masd::dogen::annotations::annotation& annotation,
+        const masd::dogen::variability::annotation& annotation,
         const std::string& name,
         const std::list<std::string>& value);
 
@@ -50,10 +50,10 @@ public:
      * @brief Annotation for this element.
      */
     /**@{*/
-    const masd::dogen::annotations::annotation& annotation() const;
-    masd::dogen::annotations::annotation& annotation();
-    void annotation(const masd::dogen::annotations::annotation& v);
-    void annotation(const masd::dogen::annotations::annotation&& v);
+    const masd::dogen::variability::annotation& annotation() const;
+    masd::dogen::variability::annotation& annotation();
+    void annotation(const masd::dogen::variability::annotation& v);
+    void annotation(const masd::dogen::variability::annotation&& v);
     /**@}*/
 
     const std::string& name() const;
@@ -77,7 +77,7 @@ public:
     configuration_entry& operator=(configuration_entry other);
 
 private:
-    masd::dogen::annotations::annotation annotation_;
+    masd::dogen::variability::annotation annotation_;
     std::string name_;
     std::list<std::string> value_;
 };

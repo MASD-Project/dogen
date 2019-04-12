@@ -30,9 +30,9 @@
 #include <vector>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_model_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_object_properties.hpp"
@@ -60,40 +60,40 @@ private:
 
 private:
     struct type_group {
-        annotations::type database_system;
-        annotations::type table_name;
-        annotations::type schema_name;
-        annotations::type is_primary_key;
-        annotations::type column_name;
-        annotations::type is_nullable;
-        annotations::type letter_case;
-        annotations::type type_override;
-        annotations::type is_composite;
+        variability::type database_system;
+        variability::type table_name;
+        variability::type schema_name;
+        variability::type is_primary_key;
+        variability::type column_name;
+        variability::type is_nullable;
+        variability::type letter_case;
+        variability::type type_override;
+        variability::type is_composite;
     };
 
     friend std::ostream& operator<<(std::ostream& s, const type_group& v);
 
-    static type_group make_type_group(const annotations::type_repository& atrp);
+    static type_group make_type_group(const variability::type_repository& atrp);
 
     static boost::optional<meta_model::orm_model_properties>
     make_model_properties(const type_group& tg,
-        const annotations::annotation& a);
+        const variability::annotation& a);
 
     static void update_object_properties(const type_group& tg,
-        const annotations::annotation& a,
+        const variability::annotation& a,
         meta_model::orm_object_properties& cfg);
 
     static boost::optional<meta_model::orm_attribute_properties>
     make_attribute_properties(
-        const type_group& tg, const annotations::annotation& a);
+        const type_group& tg, const variability::annotation& a);
 
     static void update_primitive_properties(const type_group& tg,
-        const annotations::annotation& a,
+        const variability::annotation& a,
         meta_model::orm_primitive_properties& cfg);
 
     static boost::optional<meta_model::orm_module_properties>
     make_module_properties(const type_group& tg,
-        const annotations::annotation& a);
+        const variability::annotation& a);
 
 private:
     static void transform_objects(const type_group& tg,

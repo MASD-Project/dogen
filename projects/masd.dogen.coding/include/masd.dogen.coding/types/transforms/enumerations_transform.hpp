@@ -27,9 +27,9 @@
 
 #include <string>
 #include <iosfwd>
-#include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
@@ -43,15 +43,15 @@ namespace masd::dogen::coding::transforms {
 class enumerations_transform final {
 private:
     struct enumeration_type_group {
-        annotations::type use_implementation_defined_underlying_element;
-        annotations::type use_implementation_defined_enumerator_values;
-        annotations::type add_invalid_enumerator;
+        variability::type use_implementation_defined_underlying_element;
+        variability::type use_implementation_defined_enumerator_values;
+        variability::type add_invalid_enumerator;
     };
     friend std::ostream& operator<<(std::ostream& s,
         const enumeration_type_group& v);
 
     struct enumerator_type_group {
-        annotations::type value;
+        variability::type value;
     };
     friend std::ostream& operator<<(std::ostream& s,
         const enumerator_type_group& v);
@@ -63,12 +63,12 @@ private:
     friend std::ostream& operator<<(std::ostream& s, const type_group& v);
 
     static enumeration_type_group make_enumeration_type_group(
-        const annotations::type_repository& atrp);
+        const variability::type_repository& atrp);
 
     static enumerator_type_group make_enumerator_type_group(
-        const annotations::type_repository& atrp);
+        const variability::type_repository& atrp);
 
-    static type_group make_type_group(const annotations::type_repository& atrp);
+    static type_group make_type_group(const variability::type_repository& atrp);
 
 private:
     static void populate_from_annotations(const enumeration_type_group& tg,

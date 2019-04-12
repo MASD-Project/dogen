@@ -21,8 +21,8 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.annotations/io/annotation_io.hpp"
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
+#include "masd.dogen.variability/io/annotation_io.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/io/meta_model/decoration_io.hpp"
 #include "masd.dogen.coding/io/meta_model/origin_types_io.hpp"
@@ -145,7 +145,7 @@ element::element(element&& rhs)
 element::element(
     const masd::dogen::coding::meta_model::name& name,
     const std::string& documentation,
-    const masd::dogen::annotations::annotation& annotation,
+    const masd::dogen::variability::annotation& annotation,
     const masd::dogen::coding::meta_model::origin_types origin_type,
     const std::string& contained_by,
     const bool in_global_module,
@@ -265,19 +265,19 @@ void element::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const masd::dogen::annotations::annotation& element::annotation() const {
+const masd::dogen::variability::annotation& element::annotation() const {
     return annotation_;
 }
 
-masd::dogen::annotations::annotation& element::annotation() {
+masd::dogen::variability::annotation& element::annotation() {
     return annotation_;
 }
 
-void element::annotation(const masd::dogen::annotations::annotation& v) {
+void element::annotation(const masd::dogen::variability::annotation& v) {
     annotation_ = v;
 }
 
-void element::annotation(const masd::dogen::annotations::annotation&& v) {
+void element::annotation(const masd::dogen::variability::annotation&& v) {
     annotation_ = std::move(v);
 }
 

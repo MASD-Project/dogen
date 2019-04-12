@@ -86,7 +86,7 @@ namespace masd::dogen::generation::cpp::formatters {
 
 assistant::
 assistant(const context& ctx, const coding::meta_model::element& e,
-    const annotations::archetype_location& al, const bool requires_header_guard)
+    const variability::archetype_location& al, const bool requires_header_guard)
     : element_(e), context_(ctx),
       artefact_properties_(
         obtain_artefact_properties(element_.name().qualified().dot(),

@@ -29,8 +29,8 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/model.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/locator.hpp"
@@ -42,32 +42,32 @@ namespace masd::dogen::generation::cpp::formattables {
 class directive_group_repository_factory final {
 private:
     struct formattater_type_group {
-        annotations::type primary_inclusion_directive;
-        annotations::type secondary_inclusion_directive;
+        variability::type primary_inclusion_directive;
+        variability::type secondary_inclusion_directive;
     };
     friend std::ostream& operator<<(std::ostream& s,
         const formattater_type_group& v);
 
     struct type_group {
-        annotations::type inclusion_required;
+        variability::type inclusion_required;
         std::unordered_map<std::string, formattater_type_group>
         formattaters_type_groups;
     };
     friend std::ostream& operator<<(std::ostream& s,
         const type_group& v);
 
-    type_group make_type_group(const annotations::type_repository& atrp,
+    type_group make_type_group(const variability::type_repository& atrp,
         const formatters::repository& frp) const;
 
     bool make_top_level_inclusion_required(const type_group& tg,
-        const annotations::annotation& a) const;
+        const variability::annotation& a) const;
 
     boost::optional<directive_group> make_directive_group(
         const type_group& tg, const std::string& archetype,
-        const annotations::annotation& a) const;
+        const variability::annotation& a) const;
 
     bool has_inclusion_directive_overrides(
-        const annotations::annotation& a) const;
+        const variability::annotation& a) const;
 
 private:
     std::string to_inclusion_directive(const boost::filesystem::path& p) const;
@@ -100,7 +100,7 @@ private:
 
 public:
     directive_group_repository
-    make(const annotations::type_repository& atrp,
+    make(const variability::type_repository& atrp,
         const formatters::repository& frp, const locator& l,
         const std::unordered_map<std::string, formattable>& formattables) const;
 };

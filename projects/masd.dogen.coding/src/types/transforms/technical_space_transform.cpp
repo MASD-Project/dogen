@@ -21,8 +21,8 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/list_io.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
@@ -69,9 +69,9 @@ technical_space_transform::to_technical_space(const std::string& s) {
 }
 
 technical_space_transform::type_group technical_space_transform::
-make_type_group(const annotations::type_repository& atrp) {
+make_type_group(const variability::type_repository& atrp) {
     type_group r;
-    const annotations::type_repository_selector s(atrp);
+    const variability::type_repository_selector s(atrp);
     r.output_technical_space =
         s.select_type_by_name(traits::output_technical_space());
     return r;
@@ -79,8 +79,8 @@ make_type_group(const annotations::type_repository& atrp) {
 
 std::list<meta_model::technical_space>
 technical_space_transform::make_output_technical_space(const type_group& tg,
-    const annotations::annotation& a) {
-    const annotations::entry_selector s(a);
+    const variability::annotation& a) {
+    const variability::entry_selector s(a);
 
     std::list<meta_model::technical_space> r;
     if (!s.has_entry(tg.output_technical_space))

@@ -21,8 +21,8 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.injection/types/traits.hpp"
@@ -44,17 +44,17 @@ auto lg(logger_factory(transform_id));
 namespace masd::dogen::injection::transforms {
 
 input_technical_space_transform::type_group input_technical_space_transform::
-make_type_group(const annotations::type_repository& atrp) {
+make_type_group(const variability::type_repository& atrp) {
     type_group r;
-    const annotations::type_repository_selector s(atrp);
+    const variability::type_repository_selector s(atrp);
     r.input_technical_space = s.select_type_by_name(traits::input_technical_space());
     return r;
 }
 
 std::string input_technical_space_transform::
 make_input_technical_space(const type_group& tg,
-    const annotations::annotation& a) {
-    const annotations::entry_selector s(a);
+    const variability::annotation& a) {
+    const variability::entry_selector s(a);
     return s.get_text_content_or_default(tg.input_technical_space);
 }
 

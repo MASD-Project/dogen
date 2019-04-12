@@ -24,8 +24,8 @@
 #include <boost/algorithm/string/join.hpp>
 #include <boost/filesystem/operations.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/location_error.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
@@ -56,8 +56,8 @@ namespace masd::dogen::generation::cpp::formattables {
 locator::locator(
     const boost::filesystem::path& output_directory_path,
     const boost::filesystem::path& cpp_headers_output_directory_path,
-    const annotations::type_repository& atrp, const formatters::repository& frp,
-    const annotations::annotation& root,
+    const variability::type_repository& atrp, const formatters::repository& frp,
+    const variability::annotation& root,
     const coding::meta_model::name& model_name,
     const std::unordered_set<std::string>& module_ids,
     const bool enable_backend_directories)
@@ -71,11 +71,11 @@ locator::locator(
       split_mode_(!cpp_headers_output_directory_path.empty()) {}
 
 locator::type_group
-locator::make_type_group(const annotations::type_repository& atrp,
+locator::make_type_group(const variability::type_repository& atrp,
     const formatters::repository& frp) const {
 
     type_group r;
-    const annotations::type_repository_selector s(atrp);
+    const variability::type_repository_selector s(atrp);
 
     std::unordered_set<std::string> processed_facets;
     for (const auto ptr : frp.stock_artefact_formatters()) {
@@ -135,10 +135,10 @@ locator::make_type_group(const annotations::type_repository& atrp,
 }
 
 locator_configuration locator::make_configuration(
-    const type_group& tg, const annotations::annotation& o) const {
+    const type_group& tg, const variability::annotation& o) const {
 
     locator_configuration r;
-    const annotations::entry_selector s(o);
+    const variability::entry_selector s(o);
 
     for (const auto& pair : tg.facets_type_group) {
         const auto fct(pair.first);
@@ -217,8 +217,8 @@ boost::filesystem::path locator::compute_headers_path(
 }
 
 locator_configuration locator::make_configuration(
-    const annotations::type_repository& atrp, const formatters::repository& frp,
-    const annotations::annotation& a) {
+    const variability::type_repository& atrp, const formatters::repository& frp,
+    const variability::annotation& a) {
 
     const auto tg(make_type_group (atrp, frp));
     const auto r(make_configuration(tg, a));

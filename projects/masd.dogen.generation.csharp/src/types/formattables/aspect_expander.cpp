@@ -20,9 +20,9 @@
  */
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.annotations/types/entry_selector.hpp"
-#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/exception.hpp"
@@ -47,17 +47,17 @@ namespace masd::dogen::generation::csharp::formattables {
 class aspect_properties_generator : public coding::meta_model::element_visitor {
 private:
     struct type_group {
-        annotations::type requires_static_reference_equals;
+        variability::type requires_static_reference_equals;
     };
 
-    type_group make_type_group(const annotations::type_repository& atrp) const;
+    type_group make_type_group(const variability::type_repository& atrp) const;
 
 public:
     explicit
-    aspect_properties_generator(const annotations::type_repository& atrp);
+    aspect_properties_generator(const variability::type_repository& atrp);
 
 private:
-    void handle_aspect_properties(const annotations::annotation& a,
+    void handle_aspect_properties(const variability::annotation& a,
         const std::string& id, const bool is_floating_point = false);
 
 public:
@@ -78,14 +78,14 @@ private:
 
 
 aspect_properties_generator::
-aspect_properties_generator(const annotations::type_repository& atrp)
+aspect_properties_generator(const variability::type_repository& atrp)
     : type_group_(make_type_group(atrp)) {}
 
 aspect_properties_generator::type_group aspect_properties_generator::
-make_type_group(const annotations::type_repository& atrp) const {
+make_type_group(const variability::type_repository& atrp) const {
 
     type_group r;
-    const annotations::type_repository_selector s(atrp);
+    const variability::type_repository_selector s(atrp);
 
     const auto rsrq(traits::csharp::aspect::requires_static_reference_equals());
     r.requires_static_reference_equals = s.select_type_by_name(rsrq);
@@ -94,9 +94,9 @@ make_type_group(const annotations::type_repository& atrp) const {
 }
 
 void aspect_properties_generator::handle_aspect_properties(
-    const annotations::annotation& a, const std::string& id,
+    const variability::annotation& a, const std::string& id,
     const bool is_floating_point) {
-    const annotations::entry_selector s(a);
+    const variability::entry_selector s(a);
 
     /*
      * FIXME: It would be nice to make this container sparse rather
@@ -136,7 +136,7 @@ aspect_properties_generator::result() const {
 }
 
 void aspect_expander::
-expand(const annotations::type_repository& atrp, model& fm) const {
+expand(const variability::type_repository& atrp, model& fm) const {
     aspect_properties_generator g(atrp);
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);

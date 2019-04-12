@@ -6,7 +6,7 @@
     "masd.injection.reference": "cpp.builtins",
     "masd.injection.reference": "cpp.std",
     "masd.injection.reference": "cpp.boost",
-    "masd.injection.reference": "masd.dogen.annotations",
+    "masd.injection.reference": "masd.dogen.variability",
     "masd.injection.reference": "masd.dogen.tracing",
     "masd.injection.reference": "masd.dogen.extraction",
     "masd.injection.reference": "masd.dogen.injection",

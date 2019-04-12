@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/forward_list_io.hpp"
-#include "masd.dogen.annotations/io/archetype_location_io.hpp"
+#include "masd.dogen.variability/io/archetype_location_io.hpp"
 #include "masd.dogen.generation.csharp/io/formatters/repository_io.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/registrar_error.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/registrar.hpp"
@@ -155,24 +155,24 @@ const repository& registrar::formatter_repository() const {
     return formatter_repository_;
 }
 
-const std::forward_list<annotations::archetype_location>&
+const std::forward_list<variability::archetype_location>&
 registrar::archetype_locations() const {
     return archetype_locations_;
 }
 
 const std::unordered_map<std::string,
-                         annotations::archetype_locations_group>&
+                         variability::archetype_locations_group>&
 registrar::archetype_locations_by_meta_name() const {
     return archetype_locations_by_meta_name_;
 }
 
 const std::unordered_map<std::string,
-                         std::list<annotations::archetype_location>>&
+                         std::list<variability::archetype_location>>&
 registrar::archetype_locations_by_family() const {
     return archetype_locations_by_family_;
 }
 
-const annotations::archetype_location_repository_parts&
+const variability::archetype_location_repository_parts&
 registrar::archetype_location_repository_parts() const {
     return archetype_location_repository_parts_;
 }
