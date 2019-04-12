@@ -18,21 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ANNOTATIONS_IO_PROFILE_REPOSITORY_IO_HPP
-#define MASD_DOGEN_ANNOTATIONS_IO_PROFILE_REPOSITORY_IO_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_CONFIGURATION_TEMPLATES_REPOSITORY_FACTORY_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_CONFIGURATION_TEMPLATES_REPOSITORY_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "masd.dogen.annotations/types/profile_repository.hpp"
+#include <algorithm>
 
 namespace masd::dogen::annotations {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const masd::dogen::annotations::profile_repository& v);
+class configuration_templates_repository_factory final {
+public:
+    configuration_templates_repository_factory() = default;
+    configuration_templates_repository_factory(const configuration_templates_repository_factory&) = default;
+    configuration_templates_repository_factory(configuration_templates_repository_factory&&) = default;
+    ~configuration_templates_repository_factory() = default;
+    configuration_templates_repository_factory& operator=(const configuration_templates_repository_factory&) = default;
+
+public:
+    bool operator==(const configuration_templates_repository_factory& rhs) const;
+    bool operator!=(const configuration_templates_repository_factory& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
 
 }
 

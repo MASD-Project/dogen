@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ANNOTATIONS_TEST_DATA_PROFILE_REPOSITORY_TD_HPP
-#define MASD_DOGEN_ANNOTATIONS_TEST_DATA_PROFILE_REPOSITORY_TD_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TEST_DATA_CONFIGURATION_TEMPLATES_REPOSITORY_TD_HPP
+#define MASD_DOGEN_ANNOTATIONS_TEST_DATA_CONFIGURATION_TEMPLATES_REPOSITORY_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.annotations/types/profile_repository.hpp"
+#include "masd.dogen.annotations/types/configuration_templates_repository.hpp"
 
 namespace masd::dogen::annotations {
 
-class profile_repository_generator {
+class configuration_templates_repository_generator {
 public:
-    profile_repository_generator();
+    configuration_templates_repository_generator();
 
 public:
-    typedef masd::dogen::annotations::profile_repository result_type;
+    typedef masd::dogen::annotations::configuration_templates_repository result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

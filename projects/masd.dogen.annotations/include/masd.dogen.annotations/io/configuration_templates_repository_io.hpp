@@ -18,16 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_PROFILE_REPOSITORY_FWD_HPP
-#define MASD_DOGEN_ANNOTATIONS_TYPES_PROFILE_REPOSITORY_FWD_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_IO_CONFIGURATION_TEMPLATES_REPOSITORY_IO_HPP
+#define MASD_DOGEN_ANNOTATIONS_IO_CONFIGURATION_TEMPLATES_REPOSITORY_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "masd.dogen.annotations/types/configuration_templates_repository.hpp"
+
 namespace masd::dogen::annotations {
 
-class profile_repository;
+std::ostream&
+operator<<(std::ostream& s,
+     const masd::dogen::annotations::configuration_templates_repository& v);
 
 }
 

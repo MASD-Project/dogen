@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include "masd.dogen.annotations/test_data/profile_td.hpp"
-#include "masd.dogen.annotations/test_data/profile_repository_td.hpp"
+#include "masd.dogen.annotations/test_data/configuration_templates_repository_td.hpp"
 
 namespace {
 
@@ -47,29 +47,29 @@ std::unordered_map<std::string, masd::dogen::annotations::profile> create_std_un
 
 namespace masd::dogen::annotations {
 
-profile_repository_generator::profile_repository_generator() : position_(0) { }
+configuration_templates_repository_generator::configuration_templates_repository_generator() : position_(0) { }
 
-void profile_repository_generator::
+void configuration_templates_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.profiles_by_name(create_std_unordered_map_std_string_masd_dogen_annotations_profile(position + 0));
+    v.by_name(create_std_unordered_map_std_string_masd_dogen_annotations_profile(position + 0));
 }
 
-profile_repository_generator::result_type
-profile_repository_generator::create(const unsigned int position) {
-    profile_repository r;
-    profile_repository_generator::populate(position, r);
+configuration_templates_repository_generator::result_type
+configuration_templates_repository_generator::create(const unsigned int position) {
+    configuration_templates_repository r;
+    configuration_templates_repository_generator::populate(position, r);
     return r;
 }
 
-profile_repository_generator::result_type*
-profile_repository_generator::create_ptr(const unsigned int position) {
-    profile_repository* p = new profile_repository();
-    profile_repository_generator::populate(position, *p);
+configuration_templates_repository_generator::result_type*
+configuration_templates_repository_generator::create_ptr(const unsigned int position) {
+    configuration_templates_repository* p = new configuration_templates_repository();
+    configuration_templates_repository_generator::populate(position, *p);
     return p;
 }
 
-profile_repository_generator::result_type
-profile_repository_generator::operator()() {
+configuration_templates_repository_generator::result_type
+configuration_templates_repository_generator::operator()() {
     return create(position_++);
 }
 

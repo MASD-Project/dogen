@@ -42,10 +42,11 @@
 #include "masd.dogen.annotations/io/text_collection_io.hpp"
 #include "masd.dogen.annotations/io/type_repository_io.hpp"
 #include "masd.dogen.annotations/io/archetype_location_io.hpp"
-#include "masd.dogen.annotations/io/profile_repository_io.hpp"
 #include "masd.dogen.annotations/io/profiler_configuration_io.hpp"
 #include "masd.dogen.annotations/io/archetype_locations_group_io.hpp"
 #include "masd.dogen.annotations/io/archetype_location_repository_io.hpp"
+#include "masd.dogen.annotations/io/unbound_configurations_repository_io.hpp"
+#include "masd.dogen.annotations/io/configuration_templates_repository_io.hpp"
 #include "masd.dogen.annotations/io/archetype_location_repository_parts_io.hpp"
 
 #endif

@@ -54,7 +54,6 @@
 #include "masd.dogen.annotations/types/profile_hydrator.hpp"
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
 #include "masd.dogen.annotations/types/archetype_location.hpp"
-#include "masd.dogen.annotations/types/profile_repository.hpp"
 #include "masd.dogen.annotations/types/annotation_expander.hpp"
 #include "masd.dogen.annotations/types/instantiation_error.hpp"
 #include "masd.dogen.annotations/types/template_instantiator.hpp"
@@ -64,8 +63,11 @@
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
 #include "masd.dogen.annotations/types/archetype_locations_group.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository.hpp"
+#include "masd.dogen.annotations/types/unbound_configurations_repository.hpp"
+#include "masd.dogen.annotations/types/configuration_templates_repository.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository_parts.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
+#include "masd.dogen.annotations/types/configuration_templates_repository_factory.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository_parts_builder.hpp"
 
 #endif

@@ -23,14 +23,14 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
-#include "masd.dogen.annotations/io/profile_repository_io.hpp"
-#include "masd.dogen.annotations/types/profile_repository.hpp"
-#include "masd.dogen.annotations/test_data/profile_repository_td.hpp"
+#include "masd.dogen.annotations/io/unbound_configurations_repository_io.hpp"
+#include "masd.dogen.annotations/types/unbound_configurations_repository.hpp"
+#include "masd.dogen.annotations/test_data/unbound_configurations_repository_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(profile_repository_tests)
+BOOST_AUTO_TEST_SUITE(unbound_configurations_repository_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
-    masd::dogen::annotations::profile_repository_generator g;
+    masd::dogen::annotations::unbound_configurations_repository_generator g;
     const auto a(g());
     const auto b(a);
 
@@ -40,7 +40,7 @@ BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
 }
 
 BOOST_AUTO_TEST_CASE(an_object_is_equal_to_itself) {
-    masd::dogen::annotations::profile_repository_generator g;
+    masd::dogen::annotations::unbound_configurations_repository_generator g;
     const auto a(g());
 
     BOOST_CHECK(a == a);
@@ -48,7 +48,7 @@ BOOST_AUTO_TEST_CASE(an_object_is_equal_to_itself) {
 }
 
 BOOST_AUTO_TEST_CASE(distinct_objects_are_unequal) {
-    masd::dogen::annotations::profile_repository_generator g;
+    masd::dogen::annotations::unbound_configurations_repository_generator g;
     const auto a(g());
     const auto b(g());
 
@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_CASE(assigning_an_object_to_itself_results_in_the_same_object) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wself-assign-overloaded"
 #endif
-    masd::dogen::annotations::profile_repository_generator g;
+    masd::dogen::annotations::unbound_configurations_repository_generator g;
     auto a(g());
     const auto b(a);
     const auto c(g());
@@ -75,10 +75,10 @@ BOOST_AUTO_TEST_CASE(assigning_an_object_to_itself_results_in_the_same_object) {
 }
 
 BOOST_AUTO_TEST_CASE(moved_objects_are_equal) {
-    masd::dogen::annotations::profile_repository_generator g;
+    masd::dogen::annotations::unbound_configurations_repository_generator g;
     g();
     auto a(g());
-    const auto b = masd::dogen::annotations::profile_repository();
+    const auto b = masd::dogen::annotations::unbound_configurations_repository();
     const auto c(a);
     BOOST_CHECK(a != b);
     BOOST_CHECK(a == c);
@@ -89,10 +89,10 @@ BOOST_AUTO_TEST_CASE(moved_objects_are_equal) {
 }
 
 BOOST_AUTO_TEST_CASE(assigned_objects_are_equal) {
-    masd::dogen::annotations::profile_repository_generator g;
+    masd::dogen::annotations::unbound_configurations_repository_generator g;
     g();
     const auto a(g());
-    masd::dogen::annotations::profile_repository b;
+    masd::dogen::annotations::unbound_configurations_repository b;
     BOOST_CHECK(a != b);
 
     b = a;
@@ -100,18 +100,18 @@ BOOST_AUTO_TEST_CASE(assigned_objects_are_equal) {
 }
 
 BOOST_AUTO_TEST_CASE(copy_constructed_objects_are_equal) {
-    masd::dogen::annotations::profile_repository_generator g;
+    masd::dogen::annotations::unbound_configurations_repository_generator g;
     g();
     const auto a(g());
     auto b(a);
     BOOST_CHECK(a == b);
 
-    b = masd::dogen::annotations::profile_repository();
+    b = masd::dogen::annotations::unbound_configurations_repository();
     BOOST_CHECK(a != b);
 }
 
 BOOST_AUTO_TEST_CASE(swapping_objects_results_in_the_expected_state) {
-    masd::dogen::annotations::profile_repository_generator g;
+    masd::dogen::annotations::unbound_configurations_repository_generator g;
     const auto a(g());
     const auto b(g());
 
@@ -126,7 +126,7 @@ BOOST_AUTO_TEST_CASE(swapping_objects_results_in_the_expected_state) {
 }
 
 BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
-    masd::dogen::annotations::profile_repository_generator g;
+    masd::dogen::annotations::unbound_configurations_repository_generator g;
     const auto a(g());
     std::stringstream s;
     s << a;
