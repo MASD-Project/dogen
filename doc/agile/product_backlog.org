@@ -11644,6 +11644,18 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Add design by contract to code-base
+
+We should really declare pre/post conditions, etc in Dogen. This can
+either be done using C++ 20 when we upgrade or an already existing
+library such as [[https://www.boost.org/doc/libs/1_70_0/libs/contract/doc/html/index.html][Boost.Contract]]. The only slight problem is that
+libraries have very macro based syntax whereas C++ 20 has proper
+attribute support, making the code look much nicer.
+
+Links:
+
+- [[https://speakerdeck.com/rollbear/accu2019-programming-with-contracts-in-c-plus-plus-20][Programming with contracts in C++ 20]]
+
 *** Improving boost test support with org-mode                        :story:
 
 This story is somewhat random at present but there is a kernel of
