@@ -50,7 +50,7 @@ sudo apt-get install -qq libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev
 # clang
 #
 if [ "$CXX" == "clang++" ]; then
-    version="7"
+    version="8"
     server="http://apt.llvm.org/trusty/"
     sources="/etc/apt/sources.list"
     trusty="llvm-toolchain-trusty"

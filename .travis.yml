@@ -52,7 +52,7 @@ matrix:
     #
     - os: linux
       compiler: clang
-      env: configuration=Release compiler="clang7" generator="Ninja" build_group="Continuous" report_name="Linux Clang Release"
+      env: configuration=Release compiler="clang8" generator="Ninja" build_group="Continuous" report_name="Linux Clang Release"
     - os: linux
       compiler: clang
       env: coverage=1 configuration=Debug compiler="clang7" generator="Ninja" build_group="Continuous" report_name="Linux Clang Debug"
