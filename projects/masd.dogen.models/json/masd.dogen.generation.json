@@ -656,7 +656,7 @@
         },
         {
           "name": "archetype_location_repository",
-          "type": "boost::shared_ptr<archetypes::archetype_location_repository>"
+          "type": "boost::shared_ptr<archetypes::location_repository>"
         },
         {
           "name": "annotation_factory",

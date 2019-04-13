@@ -28,7 +28,7 @@
 #include <string>
 #include <boost/optional.hpp>
 #include "masd.dogen.variability/types/type.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository.hpp"
+#include "masd.dogen.archetypes/types/location_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.generation/types/meta_model/element_archetype.hpp"
 #include "masd.dogen.generation/types/meta_model/backend_properties.hpp"
@@ -81,19 +81,19 @@ private:
 private:
     static std::unordered_map<std::string, backend_type_group>
     make_backend_type_group(const variability::type_repository& atrp,
-        const archetypes::archetype_location_repository& alrp);
+        const archetypes::location_repository& alrp);
 
     static std::unordered_map<std::string, facet_type_group>
     make_facet_type_group(const variability::type_repository& atrp,
-        const archetypes::archetype_location_repository& alrp);
+        const archetypes::location_repository& alrp);
 
     static std::unordered_map<std::string, global_archetype_type_group>
     make_global_archetype_type_group(const variability::type_repository& atrp,
-        const archetypes::archetype_location_repository& alrp);
+        const archetypes::location_repository& alrp);
 
     static std::unordered_map<std::string, local_archetype_type_group>
     make_local_archetype_type_group(const variability::type_repository& atrp,
-        const archetypes::archetype_location_repository& alrp);
+        const archetypes::location_repository& alrp);
 
 private:
     static std::unordered_map<std::string, meta_model::backend_properties>
@@ -113,7 +113,7 @@ private:
 
     static void populate_global_archetype_location_properties(
         const variability::type_repository& atrp,
-        const archetypes::archetype_location_repository& alrp,
+        const archetypes::location_repository& alrp,
         meta_model::model& m);
 
     static std::unordered_map<
@@ -121,12 +121,12 @@ private:
         coding::meta_model::local_archetype_location_properties>
     obtain_local_archetype_location_properties(
         const std::unordered_map<std::string, local_archetype_type_group>& tgs,
-        const std::list<archetypes::archetype_location>& als,
+        const std::list<archetypes::location>& als,
         const variability::annotation& a);
 
     static void populate_local_archetype_location_properties(
         const variability::type_repository& atrp,
-        const archetypes::archetype_location_repository& alrp,
+        const archetypes::location_repository& alrp,
         meta_model::model& m);
 
 public:

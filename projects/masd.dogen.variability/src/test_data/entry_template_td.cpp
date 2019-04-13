@@ -20,9 +20,9 @@
  */
 #include <sstream>
 #include "masd.dogen.variability/test_data/name_td.hpp"
+#include "masd.dogen.archetypes/test_data/location_td.hpp"
 #include "masd.dogen.variability/test_data/entry_template_td.hpp"
 #include "masd.dogen.variability/test_data/template_kinds_td.hpp"
-#include "masd.dogen.archetypes/test_data/archetype_location_td.hpp"
 
 namespace {
 
@@ -31,9 +31,9 @@ create_masd_dogen_variability_name(const unsigned int position) {
     return masd::dogen::variability::name_generator::create(position);
 }
 
-masd::dogen::archetypes::archetype_location
-create_masd_dogen_archetypes_archetype_location(const unsigned int position) {
-    return masd::dogen::archetypes::archetype_location_generator::create(position);
+masd::dogen::archetypes::location
+create_masd_dogen_archetypes_location(const unsigned int position) {
+    return masd::dogen::archetypes::location_generator::create(position);
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -64,7 +64,7 @@ entry_template_generator::entry_template_generator() : position_(0) { }
 void entry_template_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_masd_dogen_variability_name(position + 0));
-    v.archetype_location(create_masd_dogen_archetypes_archetype_location(position + 1));
+    v.archetype_location(create_masd_dogen_archetypes_location(position + 1));
     v.untyped_value(create_std_list_std_string(position + 2));
     v.kind(create_masd_dogen_variability_template_kinds(position + 3));
 }

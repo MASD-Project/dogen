@@ -40,9 +40,9 @@ std::string forward_declarations_formatter::id() const {
     return static_id();
 }
 
-archetypes::archetype_location
+archetypes::location
 forward_declarations_formatter::archetype_location() const {
-    static archetypes::archetype_location
+    static archetypes::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(),
           forward_declarations_formatter::static_id());

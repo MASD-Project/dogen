@@ -48,7 +48,7 @@ private:
     };
 
     static type_group make_type_group(const variability::type_repository& atrp,
-        const std::list<archetypes::archetype_location>& als);
+        const std::list<archetypes::location>& als);
 
     static boost::filesystem::path obtain_cpp_headers_output_directory(
         const type_group& tg, const variability::annotation& ra);
@@ -61,7 +61,7 @@ private:
 
     static meta_model::extraction_properties make_extraction_properties(
         const context& ctx,
-        const std::list<archetypes::archetype_location>& als,
+        const std::list<archetypes::location>& als,
         const variability::annotation& ra);
 
 public:

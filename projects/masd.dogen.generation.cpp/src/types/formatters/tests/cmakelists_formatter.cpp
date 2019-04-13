@@ -42,9 +42,9 @@ std::string cmakelists_formatter::id() const {
     return static_id();
 }
 
-archetypes::archetype_location cmakelists_formatter::
+archetypes::location cmakelists_formatter::
 archetype_location() const {
-    static archetypes::archetype_location
+    static archetypes::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(),
           cmakelists_formatter::static_id());

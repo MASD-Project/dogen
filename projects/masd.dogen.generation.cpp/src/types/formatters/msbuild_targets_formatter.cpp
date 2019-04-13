@@ -41,9 +41,9 @@ std::string msbuild_targets_formatter::id() const {
     return r;
 }
 
-archetypes::archetype_location
+archetypes::location
 msbuild_targets_formatter::archetype_location() const {
-    static archetypes::archetype_location
+    static archetypes::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::msbuild_facet(),
           msbuild_targets_formatter::static_id());

@@ -59,7 +59,7 @@ update_element(const context& ctx, coding::meta_model::element& e) {
 
     const auto mn(e.meta_name().qualified().dot());
     const auto& alrp(*ctx.archetype_location_repository());
-    const auto& c(alrp.archetype_locations_by_meta_name());
+    const auto& c(alrp.by_meta_name());
     const auto i(c.find(mn));
     if (i == c.end()) {
         BOOST_LOG_SEV(lg, debug) << "No archetypes for meta-name: " << mn;
@@ -73,7 +73,7 @@ update_element(const context& ctx, coding::meta_model::element& e) {
      * sourced from the formatting available in each backend.
      */
     auto& ap(e.artefact_properties());
-    for (const auto& al : i->second.archetype_locations()) {
+    for (const auto& al : i->second.locations()) {
         const auto a(al.archetype());
         using coding::meta_model::artefact_properties;
         const auto pair(std::make_pair(a, artefact_properties()));

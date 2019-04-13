@@ -25,7 +25,7 @@
 #include "masd.dogen.variability/types/annotation_factory.hpp"
 #include "masd.dogen.variability/types/annotation_expander.hpp"
 #include "masd.dogen.variability/types/type_repository_factory.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository_builder.hpp"
+#include "masd.dogen.archetypes/types/location_repository_builder.hpp"
 #include "masd.dogen.tracing/types/tracer.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
@@ -75,18 +75,18 @@ create_intra_backend_segment_properties(
     return r;
 }
 
-boost::shared_ptr<archetypes::archetype_location_repository>
+boost::shared_ptr<archetypes::location_repository>
 create_archetype_location_repository(
     const model_to_extraction_model_transform_registrar& rg) {
 
-    archetypes::archetype_location_repository_builder b;
+    archetypes::location_repository_builder b;
     for (const auto& pair : rg.transforms_by_technical_space()) {
         const auto& t(*pair.second);
         b.add(t.archetype_locations_by_meta_name());
         b.add(t.archetype_locations_by_family());
         b.add(t.archetype_location_repository_parts());
     }
-    return boost::make_shared<archetypes::archetype_location_repository>(b.build());
+    return boost::make_shared<archetypes::location_repository>(b.build());
 }
 
 injection::transforms::context context_factory::

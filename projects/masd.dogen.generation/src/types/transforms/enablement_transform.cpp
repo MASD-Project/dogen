@@ -250,7 +250,7 @@ void enablement_transform::compute_enablement_for_artefact_properties(
 
 void enablement_transform::compute_enablement_for_element(
     const std::unordered_map<std::string,
-    archetypes::archetype_locations_group>& archetype_locations_by_meta_name,
+    archetypes::locations_group>& archetype_locations_by_meta_name,
     const std::unordered_map<std::string,
     meta_model::denormalised_archetype_properties>&
     global_archetype_location_properties,
@@ -291,7 +291,7 @@ void enablement_transform::compute_enablement_for_element(
         BOOST_THROW_EXCEPTION(
             transformation_error(meta_name_not_found + mn.qualified().dot()));
     }
-    const auto& cal(j->second.canonical_archetype_locations());
+    const auto& cal(j->second.canonical_locations());
 
     /*
      * Now, for each element, obtain the global and local
@@ -359,7 +359,7 @@ apply(const context& ctx, meta_model::model& m) {
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto& alrp(*ctx.archetype_location_repository());
-    const auto& albmn(alrp.archetype_locations_by_meta_name());
+    const auto& albmn(alrp.by_meta_name());
     const auto& galp(m.global_archetype_location_properties()
         .denormalised_archetype_properties());
     std::unordered_set<meta_model::element_archetype> eafe;

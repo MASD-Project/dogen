@@ -35,7 +35,7 @@
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/scope_types.hpp"
 #include "masd.dogen.variability/types/type_repository.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository.hpp"
+#include "masd.dogen.archetypes/types/location_repository.hpp"
 
 namespace masd::dogen::variability {
 
@@ -53,7 +53,7 @@ public:
      */
     annotation_expander(
         const std::vector<boost::filesystem::path>& data_dirs,
-        const archetypes::archetype_location_repository& alrp,
+        const archetypes::location_repository& alrp,
         const type_repository& trp, const bool compatibility_mode);
 
 private:
@@ -109,7 +109,7 @@ public:
 
 private:
     const std::vector<boost::filesystem::path> data_dirs_;
-    const archetypes::archetype_location_repository&
+    const archetypes::location_repository&
     archetype_location_repository_;
     const type_repository& type_repository_;
     const std::unordered_map<std::string, annotation> profiles_;

@@ -36,9 +36,9 @@ std::string namespace_header_formatter::id() const {
     return static_id();
 }
 
-archetypes::archetype_location
+archetypes::location
 namespace_header_formatter::archetype_location() const {
-    static archetypes::archetype_location
+    static archetypes::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(),
           namespace_header_formatter::static_id());

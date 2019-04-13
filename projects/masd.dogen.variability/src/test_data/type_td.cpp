@@ -21,9 +21,9 @@
 #include "masd.dogen.variability/test_data/name_td.hpp"
 #include "masd.dogen.variability/test_data/type_td.hpp"
 #include "masd.dogen.variability/test_data/value_td.hpp"
+#include "masd.dogen.archetypes/test_data/location_td.hpp"
 #include "masd.dogen.variability/test_data/scope_types_td.hpp"
 #include "masd.dogen.variability/test_data/value_types_td.hpp"
-#include "masd.dogen.archetypes/test_data/archetype_location_td.hpp"
 
 namespace {
 
@@ -42,9 +42,9 @@ create_masd_dogen_variability_scope_types(const unsigned int position) {
     return masd::dogen::variability::scope_types_generator::create(position);
 }
 
-masd::dogen::archetypes::archetype_location
-create_masd_dogen_archetypes_archetype_location(const unsigned int position) {
-    return masd::dogen::archetypes::archetype_location_generator::create(position);
+masd::dogen::archetypes::location
+create_masd_dogen_archetypes_location(const unsigned int position) {
+    return masd::dogen::archetypes::location_generator::create(position);
 }
 
 masd::dogen::variability::value*
@@ -74,7 +74,7 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_masd_dogen_variability_name(position + 0));
     v.value_type(create_masd_dogen_variability_value_types(position + 1));
     v.scope(create_masd_dogen_variability_scope_types(position + 2));
-    v.archetype_location(create_masd_dogen_archetypes_archetype_location(position + 3));
+    v.archetype_location(create_masd_dogen_archetypes_location(position + 3));
     v.default_value(create_boost_shared_ptr_masd_dogen_variability_value(position + 4));
     v.is_partially_matchable(create_bool(position + 5));
 }

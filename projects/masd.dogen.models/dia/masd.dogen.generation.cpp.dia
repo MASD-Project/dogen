@@ -539,7 +539,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#archetypes::archetype_location#</dia:string>
+            <dia:string>#archetypes::location#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1001,7 +1001,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#archetypes::archetype_location#</dia:string>
+            <dia:string>#archetypes::location#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1031,7 +1031,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;archetypes::archetype_location&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;archetypes::location&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -10560,7 +10560,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#al#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const archetypes::archetype_location&amp;#</dia:string>
+                <dia:string>#const archetypes::location&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

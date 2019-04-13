@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include "masd.dogen.archetypes/io/archetype_location_io.hpp"
-#include "masd.dogen.archetypes/io/archetype_locations_group_io.hpp"
-#include "masd.dogen.archetypes/io/archetype_location_repository_io.hpp"
-#include "masd.dogen.archetypes/io/archetype_location_repository_parts_io.hpp"
+#include "masd.dogen.archetypes/io/location_io.hpp"
+#include "masd.dogen.archetypes/io/locations_group_io.hpp"
+#include "masd.dogen.archetypes/io/location_repository_io.hpp"
+#include "masd.dogen.archetypes/io/location_repository_parts_io.hpp"
 
 #endif

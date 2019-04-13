@@ -25,13 +25,13 @@
 #pragma once
 #endif
 
+#include "masd.dogen.archetypes/types/location.hpp"
 #include "masd.dogen.archetypes/types/archetypes.hpp"
 #include "masd.dogen.archetypes/types/building_error.hpp"
-#include "masd.dogen.archetypes/types/archetype_location.hpp"
-#include "masd.dogen.archetypes/types/archetype_locations_group.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository_parts.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository_builder.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository_parts_builder.hpp"
+#include "masd.dogen.archetypes/types/locations_group.hpp"
+#include "masd.dogen.archetypes/types/location_repository.hpp"
+#include "masd.dogen.archetypes/types/location_repository_parts.hpp"
+#include "masd.dogen.archetypes/types/location_repository_builder.hpp"
+#include "masd.dogen.archetypes/types/location_repository_parts_builder.hpp"
 
 #endif

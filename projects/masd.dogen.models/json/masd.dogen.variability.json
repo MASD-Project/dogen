@@ -144,7 +144,7 @@
         },
         {
           "name": "archetype_location",
-          "type": "archetypes::archetype_location",
+          "type": "archetypes::location",
           "documentation": "The archetype location for this type.\n"
         },
         {
@@ -355,7 +355,7 @@
       "attributes": [
         {
           "name": "repository_",
-          "type": "archetypes::archetype_location_repository"
+          "type": "archetypes::location_repository"
         }
       ]
     },
@@ -436,7 +436,7 @@
         },
         {
           "name": "archetype_location",
-          "type": "archetypes::archetype_location"
+          "type": "archetypes::location"
         },
         {
           "name": "untyped_value",
@@ -491,7 +491,7 @@
         },
         {
           "name": "archetype_location",
-          "type": "archetypes::archetype_location",
+          "type": "archetypes::location",
           "documentation": "The archetype location for this type.\n"
         },
         {

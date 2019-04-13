@@ -103,18 +103,18 @@ private:
 public:
     std::string id() const override;
 
-    const std::forward_list<archetypes::archetype_location>&
+    const std::forward_list<archetypes::location>&
     archetype_locations() const override;
 
     const std::unordered_map<std::string,
-                             archetypes::archetype_locations_group>&
+                             archetypes::locations_group>&
     archetype_locations_by_meta_name() const override;
 
     const std::unordered_map<std::string,
-                             std::list<archetypes::archetype_location>>&
+                             std::list<archetypes::location>>&
     archetype_locations_by_family() const override;
 
-    const archetypes::archetype_location_repository_parts&
+    const archetypes::location_repository_parts&
     archetype_location_repository_parts() const override;
 
     coding::meta_model::technical_space technical_space() const override;

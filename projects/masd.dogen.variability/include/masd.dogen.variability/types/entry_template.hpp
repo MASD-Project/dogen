@@ -29,8 +29,8 @@
 #include <string>
 #include <algorithm>
 #include "masd.dogen.variability/types/name.hpp"
+#include "masd.dogen.archetypes/types/location.hpp"
 #include "masd.dogen.variability/types/template_kinds.hpp"
-#include "masd.dogen.archetypes/types/archetype_location.hpp"
 
 namespace masd::dogen::variability {
 
@@ -46,7 +46,7 @@ public:
 public:
     entry_template(
         const masd::dogen::variability::name& name,
-        const masd::dogen::archetypes::archetype_location& archetype_location,
+        const masd::dogen::archetypes::location& archetype_location,
         const std::list<std::string>& untyped_value,
         const masd::dogen::variability::template_kinds kind);
 
@@ -56,10 +56,10 @@ public:
     void name(const masd::dogen::variability::name& v);
     void name(const masd::dogen::variability::name&& v);
 
-    const masd::dogen::archetypes::archetype_location& archetype_location() const;
-    masd::dogen::archetypes::archetype_location& archetype_location();
-    void archetype_location(const masd::dogen::archetypes::archetype_location& v);
-    void archetype_location(const masd::dogen::archetypes::archetype_location&& v);
+    const masd::dogen::archetypes::location& archetype_location() const;
+    masd::dogen::archetypes::location& archetype_location();
+    void archetype_location(const masd::dogen::archetypes::location& v);
+    void archetype_location(const masd::dogen::archetypes::location&& v);
 
     const std::list<std::string>& untyped_value() const;
     std::list<std::string>& untyped_value();
@@ -81,7 +81,7 @@ public:
 
 private:
     masd::dogen::variability::name name_;
-    masd::dogen::archetypes::archetype_location archetype_location_;
+    masd::dogen::archetypes::location archetype_location_;
     std::list<std::string> untyped_value_;
     masd::dogen::variability::template_kinds kind_;
 };

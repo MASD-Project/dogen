@@ -10818,7 +10818,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
             <dia:string>#archetype_location_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;archetypes::archetype_location_repository&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;archetypes::location_repository&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

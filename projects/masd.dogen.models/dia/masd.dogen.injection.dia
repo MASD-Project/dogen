@@ -2900,7 +2900,7 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
             <dia:string>#archetype_location_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;archetypes::archetype_location_repository&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;archetypes::location_repository&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

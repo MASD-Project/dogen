@@ -39,9 +39,9 @@ std::string visual_studio_solution_formatter::id() const {
     return r;
 }
 
-archetypes::archetype_location
+archetypes::location
 visual_studio_solution_formatter::archetype_location() const {
-    static archetypes::archetype_location
+    static archetypes::location
         r(csharp::traits::kernel(), csharp::traits::backend(),
           traits::visual_studio_facet(),
           visual_studio_solution_formatter::static_id());

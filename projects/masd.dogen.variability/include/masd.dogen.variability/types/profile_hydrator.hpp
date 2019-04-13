@@ -30,7 +30,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include "masd.dogen.variability/types/name.hpp"
 #include "masd.dogen.variability/types/template_kinds.hpp"
-#include "masd.dogen.archetypes/types/archetype_location.hpp"
+#include "masd.dogen.archetypes/types/location.hpp"
 #include "masd.dogen.variability/types/entry_template.hpp"
 #include "masd.dogen.variability/types/profile.hpp"
 
@@ -42,7 +42,7 @@ private:
 
     name read_name(const boost::property_tree::ptree& pt) const;
 
-    archetypes::archetype_location
+    archetypes::location
     read_archetype_location(const boost::property_tree::ptree& pt) const;
 
     std::list<entry_template>

@@ -176,7 +176,7 @@ void profiler::validate(const profile_map_type& pm) const {
 }
 
 void profiler::
-setup_annotations(const archetypes::archetype_location_repository& alrp,
+setup_annotations(const archetypes::location_repository& alrp,
     const type_repository& trp, profile_map_type& pm) const {
     BOOST_LOG_SEV(lg, debug) << "Instantiating value templates.";
 
@@ -328,7 +328,7 @@ profiler::create_annotation_map(const profile_map_type& pm) const {
 
 std::unordered_map<std::string, annotation>
 profiler::generate(const std::vector<boost::filesystem::path>& data_dirs,
-    const archetypes::archetype_location_repository& alrp,
+    const archetypes::location_repository& alrp,
     const type_repository& trp) const {
 
     BOOST_LOG_SEV(lg, debug) << "Generating profiles.";

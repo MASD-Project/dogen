@@ -27,7 +27,7 @@
 
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen/types/configuration.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository.hpp"
+#include "masd.dogen.archetypes/types/location_repository.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.orchestration/types/transforms/context.hpp"
 

@@ -96,9 +96,9 @@ name profile_hydrator::read_name(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-archetypes::archetype_location profile_hydrator::
+archetypes::location profile_hydrator::
 read_archetype_location(const boost::property_tree::ptree& pt) const {
-    archetypes::archetype_location r;
+    archetypes::location r;
 
     r.backend(pt.get<std::string>(archetype_location_backend_key, empty));
     r.facet(pt.get<std::string>(archetype_location_facet_key, empty));

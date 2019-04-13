@@ -1335,7 +1335,7 @@ yet imposing some constraints on the shape of the data.
             <dia:string>#archetype_location#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#archetypes::archetype_location#</dia:string>
+            <dia:string>#archetypes::location#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -4551,7 +4551,7 @@ to the content of entries.#</dia:string>
                 <dia:string>#archetype_location#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::forward_list&lt;archetypes::archetype_location&gt;&amp;#</dia:string>
+                <dia:string>#const std::forward_list&lt;archetypes::location&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -4925,7 +4925,7 @@ The starting point of the recursion is the level supplied by an archetype locati
             <dia:string>#repository_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#archetypes::archetype_location_repository#</dia:string>
+            <dia:string>#archetypes::location_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -4979,7 +4979,7 @@ The starting point of the recursion is the level supplied by an archetype locati
                 <dia:string>#ohrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const archetypes::archetype_location_repository&amp;#</dia:string>
+                <dia:string>#const archetypes::location_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6561,7 +6561,7 @@ The starting point of the recursion is the level supplied by an archetype locati
             <dia:string>#archetype_location#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#archetypes::archetype_location#</dia:string>
+            <dia:string>#archetypes::location#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -6771,7 +6771,7 @@ The starting point of the recursion is the level supplied by an archetype locati
                 <dia:string>#alrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#archetypes::archetype_location_repository#</dia:string>
+                <dia:string>#archetypes::location_repository#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -7409,7 +7409,7 @@ The starting point of the recursion is the level supplied by an archetype locati
             <dia:string>#archetype_location#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#archetypes::archetype_location#</dia:string>
+            <dia:string>#archetypes::location#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

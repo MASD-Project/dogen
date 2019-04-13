@@ -21,11 +21,11 @@
 #include <ostream>
 #include "masd.dogen.variability/io/name_io.hpp"
 #include "masd.dogen.variability/io/value_io.hpp"
+#include "masd.dogen.archetypes/io/location_io.hpp"
 #include "masd.dogen.variability/io/scope_types_io.hpp"
 #include "masd.dogen.variability/io/value_types_io.hpp"
 #include "masd.dogen.variability/io/type_template_io.hpp"
 #include "masd.dogen.variability/io/template_kinds_io.hpp"
-#include "masd.dogen.archetypes/io/archetype_location_io.hpp"
 
 namespace boost {
 

@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/forward_list_io.hpp"
-#include "masd.dogen.archetypes/io/archetype_location_io.hpp"
+#include "masd.dogen.archetypes/io/location_io.hpp"
 #include "masd.dogen.generation.csharp/io/formatters/repository_io.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/registrar_error.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/registrar.hpp"
@@ -101,7 +101,7 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
     archetype_locations_.push_front(al);
     const auto mn(f->meta_name().qualified().dot());
     auto& alg(archetype_locations_by_meta_name_[mn]);
-    alg.archetype_locations().push_back(al);
+    alg.locations().push_back(al);
     auto& albf(archetype_locations_by_family_[f->family()]);
     albf.push_back(al);
 
@@ -155,24 +155,24 @@ const repository& registrar::formatter_repository() const {
     return formatter_repository_;
 }
 
-const std::forward_list<archetypes::archetype_location>&
+const std::forward_list<archetypes::location>&
 registrar::archetype_locations() const {
     return archetype_locations_;
 }
 
 const std::unordered_map<std::string,
-                         archetypes::archetype_locations_group>&
+                         archetypes::locations_group>&
 registrar::archetype_locations_by_meta_name() const {
     return archetype_locations_by_meta_name_;
 }
 
 const std::unordered_map<std::string,
-                         std::list<archetypes::archetype_location>>&
+                         std::list<archetypes::location>>&
 registrar::archetype_locations_by_family() const {
     return archetype_locations_by_family_;
 }
 
-const archetypes::archetype_location_repository_parts&
+const archetypes::location_repository_parts&
 registrar::archetype_location_repository_parts() const {
     return archetype_location_repository_parts_;
 }

@@ -41,7 +41,7 @@ type_template::type_template(
     const masd::dogen::variability::name& name,
     const masd::dogen::variability::value_types value_type,
     const masd::dogen::variability::scope_types scope,
-    const masd::dogen::archetypes::archetype_location& archetype_location,
+    const masd::dogen::archetypes::location& archetype_location,
     const boost::shared_ptr<masd::dogen::variability::value>& default_value,
     const masd::dogen::variability::template_kinds kind)
     : name_(name),
@@ -108,19 +108,19 @@ void type_template::scope(const masd::dogen::variability::scope_types v) {
     scope_ = v;
 }
 
-const masd::dogen::archetypes::archetype_location& type_template::archetype_location() const {
+const masd::dogen::archetypes::location& type_template::archetype_location() const {
     return archetype_location_;
 }
 
-masd::dogen::archetypes::archetype_location& type_template::archetype_location() {
+masd::dogen::archetypes::location& type_template::archetype_location() {
     return archetype_location_;
 }
 
-void type_template::archetype_location(const masd::dogen::archetypes::archetype_location& v) {
+void type_template::archetype_location(const masd::dogen::archetypes::location& v) {
     archetype_location_ = v;
 }
 
-void type_template::archetype_location(const masd::dogen::archetypes::archetype_location&& v) {
+void type_template::archetype_location(const masd::dogen::archetypes::location&& v) {
     archetype_location_ = std::move(v);
 }
 

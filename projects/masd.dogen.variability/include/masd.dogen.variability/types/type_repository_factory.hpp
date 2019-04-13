@@ -30,7 +30,7 @@
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.variability/types/type_repository.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository.hpp"
+#include "masd.dogen.archetypes/types/location_repository.hpp"
 #include "masd.dogen.variability/types/type_template.hpp"
 #include "masd.dogen.variability/types/type.hpp"
 
@@ -52,7 +52,7 @@ private:
      * instances.
      */
     std::list<type> instantiate_templates(
-        const archetypes::archetype_location_repository& alrp,
+        const archetypes::location_repository& alrp,
         const std::list<type_template>& tts) const;
 
     /**
@@ -67,7 +67,7 @@ public:
      * supplied directories.
      */
     type_repository make(
-        const archetypes::archetype_location_repository& alrp,
+        const archetypes::location_repository& alrp,
         const std::vector<boost::filesystem::path>& data_dirs) const;
 };
 

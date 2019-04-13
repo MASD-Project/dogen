@@ -34,7 +34,7 @@
 #include "masd.dogen.variability/types/value.hpp"
 #include "masd.dogen.variability/types/value_types.hpp"
 #include "masd.dogen.variability/types/template_kinds.hpp"
-#include "masd.dogen.archetypes/types/archetype_location.hpp"
+#include "masd.dogen.archetypes/types/location.hpp"
 #include "masd.dogen.variability/types/type_template.hpp"
 
 namespace masd::dogen::variability {
@@ -74,7 +74,7 @@ private:
     /**
      * @brief Reads the ownership hierarchy from the property tree.
      */
-    archetypes::archetype_location
+    archetypes::location
     read_archetype_location(const boost::property_tree::ptree& pt) const;
 
     /**

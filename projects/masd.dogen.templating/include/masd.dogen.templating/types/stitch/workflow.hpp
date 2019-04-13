@@ -35,7 +35,7 @@
 #include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/annotation_factory.hpp"
 #include "masd.dogen.variability/types/annotation_expander.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository.hpp"
+#include "masd.dogen.archetypes/types/location_repository.hpp"
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.templating/types/stitch/properties.hpp"
 #include "masd.dogen.templating/types/stitch/text_template.hpp"
@@ -79,7 +79,7 @@ private:
     /**
      * @brief Obtains the archetype location repository.
      */
-    archetypes::archetype_location_repository
+    archetypes::location_repository
     obtain_archetype_location_repository() const;
 
     /**
@@ -87,7 +87,7 @@ private:
      */
     variability::type_repository create_annotations_type_repository(
         const std::vector<boost::filesystem::path>& data_dirs,
-        const archetypes::archetype_location_repository& alrp)
+        const archetypes::location_repository& alrp)
         const;
 
     /**

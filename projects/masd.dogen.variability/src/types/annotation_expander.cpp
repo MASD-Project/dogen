@@ -54,7 +54,7 @@ namespace masd::dogen::variability {
 
 annotation_expander::annotation_expander(
     const std::vector<boost::filesystem::path>& data_dirs,
-    const archetypes::archetype_location_repository& alrp,
+    const archetypes::location_repository& alrp,
     const type_repository& trp, const bool compatibility_mode)
     : data_dirs_(data_dirs), archetype_location_repository_(alrp),
       type_repository_(trp),

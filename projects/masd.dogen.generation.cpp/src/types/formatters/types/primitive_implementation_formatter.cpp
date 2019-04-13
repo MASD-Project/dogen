@@ -43,9 +43,9 @@ std::string primitive_implementation_formatter::id() const {
     return static_id();
 }
 
-archetypes::archetype_location
+archetypes::location
 primitive_implementation_formatter::archetype_location() const {
-    static archetypes::archetype_location
+    static archetypes::location
         r(cpp::traits::kernel(),  cpp::traits::backend(),
           traits::facet(),
           primitive_implementation_formatter::static_id());

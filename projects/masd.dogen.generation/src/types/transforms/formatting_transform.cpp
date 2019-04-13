@@ -64,7 +64,7 @@ operator<<(std::ostream& s, const formatting_transform::type_group& v) {
 
 std::unordered_map<std::string, formatting_transform::type_group>
 formatting_transform::make_type_groups(const variability::type_repository& atrp,
-    const std::list<archetypes::archetype_location>& als) {
+    const std::list<archetypes::location>& als) {
 
     BOOST_LOG_SEV(lg, debug) << "Creating type groups.";
 
@@ -174,7 +174,7 @@ void formatting_transform::apply(const context& ctx, meta_model::model& m) {
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto& atrp(*ctx.type_repository());
-    const auto& als(ctx.archetype_location_repository()->archetype_locations());
+    const auto& als(ctx.archetype_location_repository()->all());
     const auto tgs(make_type_groups(atrp, als));
 
     for(auto& ptr : m.elements())

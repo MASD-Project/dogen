@@ -30,8 +30,8 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.archetypes/types/archetype_locations_group.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository_parts.hpp"
+#include "masd.dogen.archetypes/types/locations_group.hpp"
+#include "masd.dogen.archetypes/types/location_repository_parts.hpp"
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.generation/types/meta_model/intra_backend_segment_properties.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
@@ -64,21 +64,21 @@ public:
      * transform, listing all available backends, facets and
      * archetypes.
      */
-    virtual const std::forward_list<archetypes::archetype_location>&
+    virtual const std::forward_list<archetypes::location>&
     archetype_locations() const = 0;
 
     /**
      * @brief Returns the archetype locations for each meta name.
      */
     virtual const std::unordered_map<std::string,
-                                     archetypes::archetype_locations_group>&
+                                     archetypes::locations_group>&
     archetype_locations_by_meta_name() const = 0;
 
     /**
      * @brief Returns the archetype locations for each family.
      */
     virtual const std::unordered_map<std::string,
-                                     std::list<archetypes::archetype_location>
+                                     std::list<archetypes::location>
                                      >&
     archetype_locations_by_family() const = 0;
 
@@ -86,7 +86,7 @@ public:
      * @brief Returns this backend's part of the repository of
      * archetype locations.
      */
-    virtual const archetypes::archetype_location_repository_parts&
+    virtual const archetypes::location_repository_parts&
     archetype_location_repository_parts() const = 0;
 
     /**
