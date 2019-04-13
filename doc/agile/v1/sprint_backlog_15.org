@@ -13,26 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-13 Sat 14:37]
-| <75>                                                   |         |       |      |       |
-| Headline                                               | Time    |       |      |     % |
-|--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *43:07* |       |      | 100.0 |
-|--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 43:07   |       |      | 100.0 |
-| Active                                                 |         | 43:07 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 4:21 |  10.1 |
-| Sprint and product backlog grooming                    |         |       | 2:12 |   5.1 |
-| Create a video demo for the previous sprint's features |         |       | 1:35 |   3.7 |
-| Fix issues with emacs                                  |         |       | 2:01 |   4.7 |
-| Fix issues with nightly build                          |         |       | 0:08 |   0.3 |
-| Add diffing support to string asserter                 |         |       | 1:00 |   2.3 |
-| C# generation is borked                                |         |       | 4:12 |   9.7 |
-| Reactivate the boilerplate tests                       |         |       | 5:58 |  13.8 |
-| Update to clang8                                       |         |       | 0:11 |   0.4 |
-| Fix snags with emacs                                   |         |       | 5:27 |  12.6 |
-| Profiles as meta-model elements                        |         |       | 8:01 |  18.6 |
-| Great configuration rename                             |         |       | 8:01 |  18.6 |
+#+CAPTION: Clock summary at [2019-04-13 Sat 17:41]
+| <75>                                                   |         |       |       |       |
+| Headline                                               | Time    |       |       |     % |
+|--------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                           | *46:10* |       |       | 100.0 |
+|--------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                | 46:10   |       |       | 100.0 |
+| Active                                                 |         | 46:10 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  4:21 |   9.4 |
+| Sprint and product backlog grooming                    |         |       |  2:12 |   4.8 |
+| Create a video demo for the previous sprint's features |         |       |  1:35 |   3.4 |
+| Fix issues with emacs                                  |         |       |  2:01 |   4.4 |
+| Fix issues with nightly build                          |         |       |  0:08 |   0.3 |
+| Add diffing support to string asserter                 |         |       |  1:00 |   2.2 |
+| C# generation is borked                                |         |       |  4:12 |   9.1 |
+| Reactivate the boilerplate tests                       |         |       |  5:58 |  12.9 |
+| Update to clang8                                       |         |       |  0:11 |   0.4 |
+| Fix snags with emacs                                   |         |       |  5:27 |  11.8 |
+| Profiles as meta-model elements                        |         |       |  8:01 |  17.4 |
+| Redesign annotations model                             |         |       | 11:04 |  24.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -596,8 +596,9 @@ Notes:
   done against the model set.
 - profile repository appears deprecated, remove it?
 
-*** STARTED Great configuration rename                                :story:
+*** STARTED Redesign annotations model                                :story:
     :LOGBOOK:
+    CLOCK: [2019-04-13 Sat 14:38]--[2019-04-13 Sat 17:41] =>  3:03
     CLOCK: [2019-04-13 Sat 12:55]--[2019-04-13 Sat 14:37] =>  1:42
     CLOCK: [2019-04-13 Sat 10:52]--[2019-04-13 Sat 12:30] =>  1:38
     CLOCK: [2019-04-13 Sat 06:03]--[2019-04-13 Sat 06:33] =>  0:30
