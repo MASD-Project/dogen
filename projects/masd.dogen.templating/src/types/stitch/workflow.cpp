@@ -27,7 +27,7 @@
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.variability/types/type_repository_factory.hpp"
-#include "masd.dogen.variability/types/archetype_location_repository_builder.hpp"
+#include "masd.dogen.archetypes/types/archetype_location_repository_builder.hpp"
 #include "masd.dogen.extraction/io/meta_model/artefact_io.hpp"
 #include "masd.dogen.extraction/types/helpers/filesystem_writer.hpp"
 #include "masd.dogen.templating/types/stitch/parser.hpp"
@@ -94,20 +94,20 @@ validate_text_template_paths(const std::forward_list<boost::filesystem::path>&
     }
 }
 
-variability::archetype_location_repository
+archetypes::archetype_location_repository
 workflow::obtain_archetype_location_repository() const {
-    std::list<variability::archetype_location> als;
+    std::list<archetypes::archetype_location> als;
     formatter fmt;
     als.push_back(fmt.archetype_location());
 
-    variability::archetype_location_repository_builder b;
+    archetypes::archetype_location_repository_builder b;
     b.add(als);
     return b.build();
 }
 
 variability::type_repository workflow::create_annotations_type_repository(
     const std::vector<boost::filesystem::path>& data_dirs,
-    const variability::archetype_location_repository& alrp) const {
+    const archetypes::archetype_location_repository& alrp) const {
     variability::type_repository_factory f;
     return f.make(alrp, data_dirs);
 }

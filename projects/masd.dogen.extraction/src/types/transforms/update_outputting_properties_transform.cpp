@@ -23,7 +23,7 @@
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
-#include "masd.dogen.variability/types/archetype_location_repository.hpp"
+#include "masd.dogen.archetypes/types/archetype_location_repository.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.extraction/types/traits.hpp"
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"

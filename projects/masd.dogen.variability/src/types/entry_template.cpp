@@ -27,7 +27,7 @@ entry_template::entry_template()
 
 entry_template::entry_template(
     const masd::dogen::variability::name& name,
-    const masd::dogen::variability::archetype_location& archetype_location,
+    const masd::dogen::archetypes::archetype_location& archetype_location,
     const std::list<std::string>& untyped_value,
     const masd::dogen::variability::template_kinds kind)
     : name_(name),
@@ -72,19 +72,19 @@ void entry_template::name(const masd::dogen::variability::name&& v) {
     name_ = std::move(v);
 }
 
-const masd::dogen::variability::archetype_location& entry_template::archetype_location() const {
+const masd::dogen::archetypes::archetype_location& entry_template::archetype_location() const {
     return archetype_location_;
 }
 
-masd::dogen::variability::archetype_location& entry_template::archetype_location() {
+masd::dogen::archetypes::archetype_location& entry_template::archetype_location() {
     return archetype_location_;
 }
 
-void entry_template::archetype_location(const masd::dogen::variability::archetype_location& v) {
+void entry_template::archetype_location(const masd::dogen::archetypes::archetype_location& v) {
     archetype_location_ = v;
 }
 
-void entry_template::archetype_location(const masd::dogen::variability::archetype_location&& v) {
+void entry_template::archetype_location(const masd::dogen::archetypes::archetype_location&& v) {
     archetype_location_ = std::move(v);
 }
 

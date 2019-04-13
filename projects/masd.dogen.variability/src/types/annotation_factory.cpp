@@ -48,7 +48,7 @@ const std::string field_used_in_invalid_scope("Field used in invalid scope: ");
 namespace masd::dogen::variability {
 
 annotation_factory::annotation_factory(
-    const archetype_location_repository& alrp,
+    const archetypes::archetype_location_repository& alrp,
     const type_repository& trp, const bool compatibility_mode)
     : archetype_location_repository_(alrp), type_repository_(trp),
       compatibility_mode_(compatibility_mode) {}

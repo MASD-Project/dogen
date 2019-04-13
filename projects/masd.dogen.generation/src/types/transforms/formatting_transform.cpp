@@ -64,7 +64,7 @@ operator<<(std::ostream& s, const formatting_transform::type_group& v) {
 
 std::unordered_map<std::string, formatting_transform::type_group>
 formatting_transform::make_type_groups(const variability::type_repository& atrp,
-    const std::list<variability::archetype_location>& als) {
+    const std::list<archetypes::archetype_location>& als) {
 
     BOOST_LOG_SEV(lg, debug) << "Creating type groups.";
 

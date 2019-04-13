@@ -32,7 +32,7 @@
 #include "masd.dogen.variability/types/annotation_factory_fwd.hpp"
 #include "masd.dogen.variability/types/annotation_expander_fwd.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_fwd.hpp"
-#include "masd.dogen.variability/types/archetype_location_repository_fwd.hpp"
+#include "masd.dogen.archetypes/types/archetype_location_repository_fwd.hpp"
 
 namespace masd::dogen::coding::transforms {
 
@@ -54,7 +54,7 @@ public:
 public:
     context(
         const boost::shared_ptr<masd::dogen::variability::type_repository>& type_repository,
-        const boost::shared_ptr<masd::dogen::variability::archetype_location_repository>& archetype_location_repository,
+        const boost::shared_ptr<masd::dogen::archetypes::archetype_location_repository>& archetype_location_repository,
         const boost::shared_ptr<masd::dogen::variability::annotation_factory>& annotation_factory,
         const boost::shared_ptr<masd::dogen::variability::annotation_expander>& annotation_expander,
         const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& mapping_repository,
@@ -64,8 +64,8 @@ public:
     const boost::shared_ptr<masd::dogen::variability::type_repository>& type_repository() const;
     void type_repository(const boost::shared_ptr<masd::dogen::variability::type_repository>& v);
 
-    const boost::shared_ptr<masd::dogen::variability::archetype_location_repository>& archetype_location_repository() const;
-    void archetype_location_repository(const boost::shared_ptr<masd::dogen::variability::archetype_location_repository>& v);
+    const boost::shared_ptr<masd::dogen::archetypes::archetype_location_repository>& archetype_location_repository() const;
+    void archetype_location_repository(const boost::shared_ptr<masd::dogen::archetypes::archetype_location_repository>& v);
 
     const boost::shared_ptr<masd::dogen::variability::annotation_factory>& annotation_factory() const;
     void annotation_factory(const boost::shared_ptr<masd::dogen::variability::annotation_factory>& v);
@@ -81,7 +81,7 @@ public:
 
 private:
     boost::shared_ptr<masd::dogen::variability::type_repository> type_repository_;
-    boost::shared_ptr<masd::dogen::variability::archetype_location_repository> archetype_location_repository_;
+    boost::shared_ptr<masd::dogen::archetypes::archetype_location_repository> archetype_location_repository_;
     boost::shared_ptr<masd::dogen::variability::annotation_factory> annotation_factory_;
     boost::shared_ptr<masd::dogen::variability::annotation_expander> annotation_expander_;
     boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository> mapping_repository_;

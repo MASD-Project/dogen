@@ -35,7 +35,7 @@ public:
 
 public:
     std::string id() const override;
-    variability::archetype_location archetype_location() const override;
+    archetypes::archetype_location archetype_location() const override;
     const coding::meta_model::name& meta_name() const override;
     std::string family() const override;
 
@@ -57,7 +57,7 @@ public:
         const coding::meta_model::element& e) const override;
 
 private:
-    const variability::archetype_location archetype_location_;
+    const archetypes::archetype_location archetype_location_;
 
 };
 

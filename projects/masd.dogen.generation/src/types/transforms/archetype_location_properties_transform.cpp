@@ -120,7 +120,7 @@ std::unordered_map<std::string,
                    archetype_location_properties_transform::backend_type_group>
 archetype_location_properties_transform::
 make_backend_type_group(const variability::type_repository& atrp,
-    const variability::archetype_location_repository& alrp) {
+    const archetypes::archetype_location_repository& alrp) {
     std::unordered_map<std::string, backend_type_group> r;
 
     const variability::type_repository_selector s(atrp);
@@ -142,7 +142,7 @@ std::unordered_map<std::string,
                    archetype_location_properties_transform::facet_type_group>
 archetype_location_properties_transform::
 make_facet_type_group(const variability::type_repository& atrp,
-    const variability::archetype_location_repository& alrp) {
+    const archetypes::archetype_location_repository& alrp) {
     std::unordered_map<std::string, facet_type_group> r;
 
     const variability::type_repository_selector s(atrp);
@@ -169,7 +169,7 @@ std::unordered_map<
     archetype_location_properties_transform::global_archetype_type_group>
 archetype_location_properties_transform::
 make_global_archetype_type_group(const variability::type_repository& atrp,
-    const variability::archetype_location_repository& alrp) {
+    const archetypes::archetype_location_repository& alrp) {
     std::unordered_map<std::string, global_archetype_type_group> r;
 
     const variability::type_repository_selector s(atrp);
@@ -195,7 +195,7 @@ std::unordered_map<
     archetype_location_properties_transform::local_archetype_type_group>
 archetype_location_properties_transform::
 make_local_archetype_type_group(const variability::type_repository& atrp,
-    const variability::archetype_location_repository& alrp) {
+    const archetypes::archetype_location_repository& alrp) {
     std::unordered_map<std::string, local_archetype_type_group> r;
 
     const variability::type_repository_selector s(atrp);
@@ -297,7 +297,7 @@ archetype_location_properties_transform::obtain_archetype_properties(
 void archetype_location_properties_transform::
 populate_global_archetype_location_properties(
     const variability::type_repository& atrp,
-    const variability::archetype_location_repository& alrp,
+    const archetypes::archetype_location_repository& alrp,
     meta_model::model& m) {
 
     const auto btg(make_backend_type_group(atrp, alrp));
@@ -376,7 +376,7 @@ std::unordered_map<std::string,
 archetype_location_properties_transform::
 obtain_local_archetype_location_properties(
     const std::unordered_map<std::string, local_archetype_type_group>& tgs,
-    const std::list<variability::archetype_location>& als,
+    const std::list<archetypes::archetype_location>& als,
     const variability::annotation& a) {
 
     BOOST_LOG_SEV(lg, debug) << "Creating local archetype location properties.";
@@ -425,7 +425,7 @@ obtain_local_archetype_location_properties(
 void archetype_location_properties_transform::
 populate_local_archetype_location_properties(
     const variability::type_repository& atrp,
-    const variability::archetype_location_repository& alrp,
+    const archetypes::archetype_location_repository& alrp,
     meta_model::model& m) {
     /*
      * Computes all of the possible types for every archetype

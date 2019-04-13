@@ -23,13 +23,13 @@
 #include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.variability/types/annotation_factory.hpp"
 #include "masd.dogen.variability/types/annotation_expander.hpp"
-#include "masd.dogen.variability/types/archetype_location_repository.hpp"
+#include "masd.dogen.archetypes/types/archetype_location_repository.hpp"
 
 namespace masd::dogen::generation::transforms {
 
 context::context(
     const boost::shared_ptr<masd::dogen::variability::type_repository>& type_repository,
-    const boost::shared_ptr<masd::dogen::variability::archetype_location_repository>& archetype_location_repository,
+    const boost::shared_ptr<masd::dogen::archetypes::archetype_location_repository>& archetype_location_repository,
     const boost::shared_ptr<masd::dogen::variability::annotation_factory>& annotation_factory,
     const boost::shared_ptr<masd::dogen::variability::annotation_expander>& annotation_expander,
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer,
@@ -51,11 +51,11 @@ void context::type_repository(const boost::shared_ptr<masd::dogen::variability::
     type_repository_ = v;
 }
 
-const boost::shared_ptr<masd::dogen::variability::archetype_location_repository>& context::archetype_location_repository() const {
+const boost::shared_ptr<masd::dogen::archetypes::archetype_location_repository>& context::archetype_location_repository() const {
     return archetype_location_repository_;
 }
 
-void context::archetype_location_repository(const boost::shared_ptr<masd::dogen::variability::archetype_location_repository>& v) {
+void context::archetype_location_repository(const boost::shared_ptr<masd::dogen::archetypes::archetype_location_repository>& v) {
     archetype_location_repository_ = v;
 }
 

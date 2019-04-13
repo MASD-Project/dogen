@@ -34,14 +34,15 @@
 #include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.variability/types/type_template.hpp"
 #include "masd.dogen.variability/types/entry_template.hpp"
-#include "masd.dogen.variability/types/archetype_location_repository.hpp"
+#include "masd.dogen.archetypes/types/archetype_location_repository.hpp"
 #include "masd.dogen.variability/types/type_repository.hpp"
 
 namespace masd::dogen::variability {
 
 class template_instantiator {
 public:
-    explicit template_instantiator(const archetype_location_repository& alrp);
+    explicit template_instantiator(
+        const archetypes::archetype_location_repository& alrp);
 
 public:
     bool is_instantiable(const template_kinds tk) const;
@@ -49,7 +50,7 @@ public:
 private:
     bool is_partially_mathcable(const value_types vt) const;
 
-    void validate(const archetype_location& al, const name& n,
+    void validate(const archetypes::archetype_location& al, const name& n,
         const template_kinds tk) const;
 
 public:
@@ -90,7 +91,7 @@ public:
     instantiate(const type_repository& trp, const entry_template& et) const;
 
 private:
-    const archetype_location_repository& repository_;
+    const archetypes::archetype_location_repository& repository_;
 };
 
 }

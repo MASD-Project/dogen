@@ -6790,7 +6790,7 @@ model directory.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#variability::archetype_location_repository_parts#</dia:string>
+            <dia:string>#archetypes::archetype_location_repository_parts#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -9283,7 +9283,7 @@ model directory.#</dia:string>
             <dia:string>#archetype_location_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;variability::archetype_location_repository&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;archetypes::archetype_location_repository&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

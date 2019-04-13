@@ -49,7 +49,7 @@ private:
 
     static std::unordered_map<std::string, type_group>
     make_type_groups(const variability::type_repository& atrp,
-        const std::list<variability::archetype_location>& als);
+        const std::list<archetypes::archetype_location>& als);
 
     static std::unordered_map<std::string, formatting_configuration>
     make_formatting_configuration(

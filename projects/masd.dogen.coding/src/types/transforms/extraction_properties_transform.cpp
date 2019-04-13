@@ -21,7 +21,7 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
-#include "masd.dogen.variability/types/archetype_location_repository.hpp"
+#include "masd.dogen.archetypes/types/archetype_location_repository.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
@@ -40,7 +40,7 @@ namespace masd::dogen::coding::transforms {
 extraction_properties_transform::type_group
 extraction_properties_transform::make_type_group(
     const variability::type_repository& atrp,
-    const std::list<variability::archetype_location>& als) {
+    const std::list<archetypes::archetype_location>& als) {
     type_group r;
     const variability::type_repository_selector rs(atrp);
 
@@ -95,7 +95,7 @@ bool extraction_properties_transform::obtain_enable_backend_directories(
 
 meta_model::extraction_properties extraction_properties_transform::
 make_extraction_properties(const context& ctx,
-    const std::list<variability::archetype_location>& als,
+    const std::list<archetypes::archetype_location>& als,
     const variability::annotation& ra) {
 
     const auto tg(make_type_group(*ctx.type_repository(), als));

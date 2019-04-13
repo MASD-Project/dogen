@@ -36,8 +36,8 @@ std::string exception_formatter::id() const {
     return static_id();
 }
 
-variability::archetype_location exception_formatter::archetype_location() const {
-    static variability::archetype_location
+archetypes::archetype_location exception_formatter::archetype_location() const {
+    static archetypes::archetype_location
         r(csharp::traits::kernel(), csharp::traits::backend(),
           traits::facet(),
           exception_formatter::static_id());

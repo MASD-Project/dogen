@@ -103,27 +103,27 @@ managed_directories(const formattables::locator& l) const {
     return r;
 }
 
-const std::forward_list<variability::archetype_location>&
+const std::forward_list<archetypes::archetype_location>&
 model_to_extraction_model_transform::archetype_locations() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations();
 }
 
 const std::unordered_map<std::string,
-                         variability::archetype_locations_group>&
+                         archetypes::archetype_locations_group>&
 model_to_extraction_model_transform::archetype_locations_by_meta_name() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations_by_meta_name();
 }
 
 const std::unordered_map<std::string,
-                         std::list<variability::archetype_location>>&
+                         std::list<archetypes::archetype_location>>&
 model_to_extraction_model_transform::archetype_locations_by_family() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations_by_family();
 }
 
-const variability::archetype_location_repository_parts&
+const archetypes::archetype_location_repository_parts&
 model_to_extraction_model_transform::
 archetype_location_repository_parts() const {
     const auto& rg(formatters::workflow::registrar());

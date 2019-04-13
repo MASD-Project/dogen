@@ -41,12 +41,8 @@
 #include "masd.dogen.variability/io/template_kinds_io.hpp"
 #include "masd.dogen.variability/io/text_collection_io.hpp"
 #include "masd.dogen.variability/io/type_repository_io.hpp"
-#include "masd.dogen.variability/io/archetype_location_io.hpp"
 #include "masd.dogen.variability/io/profiler_configuration_io.hpp"
-#include "masd.dogen.variability/io/archetype_locations_group_io.hpp"
-#include "masd.dogen.variability/io/archetype_location_repository_io.hpp"
 #include "masd.dogen.variability/io/unbound_configurations_repository_io.hpp"
 #include "masd.dogen.variability/io/configuration_templates_repository_io.hpp"
-#include "masd.dogen.variability/io/archetype_location_repository_parts_io.hpp"
 
 #endif

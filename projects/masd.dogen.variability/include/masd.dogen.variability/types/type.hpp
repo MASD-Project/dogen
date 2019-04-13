@@ -31,7 +31,7 @@
 #include "masd.dogen.variability/types/value_fwd.hpp"
 #include "masd.dogen.variability/types/scope_types.hpp"
 #include "masd.dogen.variability/types/value_types.hpp"
-#include "masd.dogen.variability/types/archetype_location.hpp"
+#include "masd.dogen.archetypes/types/archetype_location.hpp"
 
 namespace masd::dogen::variability {
 
@@ -52,7 +52,7 @@ public:
         const masd::dogen::variability::name& name,
         const masd::dogen::variability::value_types value_type,
         const masd::dogen::variability::scope_types scope,
-        const masd::dogen::variability::archetype_location& archetype_location,
+        const masd::dogen::archetypes::archetype_location& archetype_location,
         const boost::shared_ptr<masd::dogen::variability::value>& default_value,
         const bool is_partially_matchable);
 
@@ -87,10 +87,10 @@ public:
      * @brief The archetype location for this type.
      */
     /**@{*/
-    const masd::dogen::variability::archetype_location& archetype_location() const;
-    masd::dogen::variability::archetype_location& archetype_location();
-    void archetype_location(const masd::dogen::variability::archetype_location& v);
-    void archetype_location(const masd::dogen::variability::archetype_location&& v);
+    const masd::dogen::archetypes::archetype_location& archetype_location() const;
+    masd::dogen::archetypes::archetype_location& archetype_location();
+    void archetype_location(const masd::dogen::archetypes::archetype_location& v);
+    void archetype_location(const masd::dogen::archetypes::archetype_location&& v);
     /**@}*/
 
     /**
@@ -120,7 +120,7 @@ private:
     masd::dogen::variability::name name_;
     masd::dogen::variability::value_types value_type_;
     masd::dogen::variability::scope_types scope_;
-    masd::dogen::variability::archetype_location archetype_location_;
+    masd::dogen::archetypes::archetype_location archetype_location_;
     boost::shared_ptr<masd::dogen::variability::value> default_value_;
     bool is_partially_matchable_;
 };

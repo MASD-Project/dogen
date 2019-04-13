@@ -8,6 +8,7 @@
     "masd.injection.reference": "cpp.std",
     "masd.injection.reference": "cpp.boost",
     "masd.injection.reference": "masd",
+    "masd.injection.reference": "masd.dogen.archetypes",
     "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
     "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
     "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
@@ -143,7 +144,7 @@
         },
         {
           "name": "archetype_location",
-          "type": "archetype_location",
+          "type": "archetypes::archetype_location",
           "documentation": "The archetype location for this type.\n"
         },
         {
@@ -225,33 +226,6 @@
         "masd::exception"
       ],
       "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "archetype_location",
-      "documentation": "Location of an archetype or set of archetypes in the hierarchical artchetype space.\n\nThese must be populated in order, e.g. in order to have a backend we must have a\nkernel; in order to have a facet we must have a backend and in order to have a\nformatter we must have a facet. We may not have any.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "kernel",
-          "type": "std::string",
-          "documentation": "Name of the kernel that owns this field, if any.\n"
-        },
-        {
-          "name": "backend",
-          "type": "std::string",
-          "documentation": "Name of the backend that owns this field, if any.\n"
-        },
-        {
-          "name": "facet",
-          "type": "std::string",
-          "documentation": "Name of the facet that owns this field, if any.\n"
-        },
-        {
-          "name": "archetype",
-          "type": "std::string",
-          "documentation": "Name of the archetype that owns this field, if any.\n"
-        }
-      ]
     },
     {
       "name": "value_factory",
@@ -381,7 +355,7 @@
       "attributes": [
         {
           "name": "repository_",
-          "type": "archetype_location_repository"
+          "type": "archetypes::archetype_location_repository"
         }
       ]
     },
@@ -462,7 +436,7 @@
         },
         {
           "name": "archetype_location",
-          "type": "archetype_location"
+          "type": "archetypes::archetype_location"
         },
         {
           "name": "untyped_value",
@@ -517,7 +491,7 @@
         },
         {
           "name": "archetype_location",
-          "type": "archetype_location",
+          "type": "archetypes::archetype_location",
           "documentation": "The archetype location for this type.\n"
         },
         {
@@ -531,49 +505,6 @@
           "documentation": "If the type is a template, defines the kind of template.\n"
         }
       ]
-    },
-    {
-      "name": "archetype_location_repository",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "archetype_locations",
-          "type": "std::list<archetype_location>"
-        },
-        {
-          "name": "facet_names_by_backend_name",
-          "type": "std::unordered_map<std::string, std::unordered_set<std::string>>"
-        },
-        {
-          "name": "formatter_names_by_backend_name",
-          "type": "std::unordered_map<std::string, std::unordered_set<std::string>>"
-        },
-        {
-          "name": "archetype_locations_by_meta_name",
-          "type": "std::unordered_map<std::string, archetype_locations_group>"
-        },
-        {
-          "name": "archetype_locations_by_family",
-          "type": "std::unordered_map<std::string, std::list<archetype_location>>",
-          "documentation": "All archetype locations for a given family.\n\nFamilies are backend specific sets of archetype locations, with associated\nproperties such as file extensions.\n"
-        },
-        {
-          "name": "archetypes_by_backend_by_facet",
-          "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string>>>"
-        },
-        {
-          "name": "archetype_locations_by_intra_backend_segment",
-          "type": "std::unordered_map<std::string, std::list<archetype_location>>",
-          "documentation": "All archetype locations for a given intra-backend segment.\n\nIntra-backend segments are backend specific sets of archetype locations, with\nassociated properties.\n"
-        }
-      ]
-    },
-    {
-      "name": "archetype_location_repository_builder",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
     },
     {
       "name": "profiling_error",
@@ -612,55 +543,6 @@
           "type": "std::unordered_map<std::string, std::string>"
         }
       ]
-    },
-    {
-      "name": "archetype_locations_group",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "archetype_locations",
-          "type": "std::list<archetype_location>",
-          "documentation": "All archetype locations that belong to this group.\n"
-        },
-        {
-          "name": "canonical_archetype_locations",
-          "type": "std::unordered_map<std::string, std::string>",
-          "documentation": "Maps a concrete archetype location to its canonical form, if the canonical\nform is supported. Otherwise no such mapping will exist.\n"
-        }
-      ]
-    },
-    {
-      "name": "archetype_location_repository_parts",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "archetype_locations",
-          "type": "std::list<archetype_location>",
-          "documentation": "All archetype locations for the archetypes owned by this transform,\nlisting all available backends, facets and archetypes.\n"
-        },
-        {
-          "name": "archetype_locations_by_meta_name",
-          "type": "std::unordered_map<std::string, archetype_locations_group>",
-          "documentation": "Returns the archetype locations for each meta name.\n"
-        },
-        {
-          "name": "archetype_locations_by_family",
-          "type": "std::unordered_map<std::string, std::list<archetype_location>>",
-          "documentation": "All archetype locations for a given family.\n\nFamilies are backend specific sets of archetype locations, with associated\nproperties such as file extensions.\n"
-        },
-        {
-          "name": "archetype_locations_by_intra_backend_segment",
-          "type": "std::unordered_map<std::string, std::list<archetype_location>>",
-          "documentation": "All archetype locations for a given intra-backend segment.\n\nIntra-backend segments are backend specific sets of archetype locations, with\nassociated properties.\n"
-        }
-      ]
-    },
-    {
-      "name": "archetype_location_repository_parts_builder",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
     },
     {
       "name": "annotation_factory",

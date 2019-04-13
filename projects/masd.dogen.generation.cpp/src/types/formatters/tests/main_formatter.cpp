@@ -43,9 +43,9 @@ std::string main_formatter::id() const {
     return static_id();
 }
 
-variability::archetype_location
+archetypes::archetype_location
 main_formatter::archetype_location() const {
-    static variability::archetype_location
+    static archetypes::archetype_location
         r(cpp::traits::kernel(),  cpp::traits::backend(),
           traits::facet(),
           main_formatter::static_id());

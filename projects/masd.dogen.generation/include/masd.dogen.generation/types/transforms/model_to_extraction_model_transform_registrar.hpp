@@ -29,7 +29,7 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
-#include "masd.dogen.variability/types/archetype_location.hpp"
+#include "masd.dogen.archetypes/types/archetype_location.hpp"
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/hash/meta_model/technical_space_hash.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_interface.hpp"

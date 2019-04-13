@@ -35,7 +35,7 @@
 #include "masd.dogen.variability/types/profiler_configuration.hpp"
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/type_repository.hpp"
-#include "masd.dogen.variability/types/archetype_location_repository.hpp"
+#include "masd.dogen.archetypes/types/archetype_location_repository.hpp"
 
 namespace masd::dogen::variability {
 
@@ -59,7 +59,7 @@ private:
 
     void validate(const profile_map_type& pm) const;
 
-    void setup_annotations(const archetype_location_repository& alrp,
+    void setup_annotations(const archetypes::archetype_location_repository& alrp,
         const type_repository& trp, profile_map_type& pm) const;
 
     const profiler_configuration& walk_up_parent_tree_and_merge(
@@ -73,7 +73,7 @@ private:
 public:
     std::unordered_map<std::string, annotation>
     generate(const std::vector<boost::filesystem::path>& data_dirs,
-        const archetype_location_repository& alrp,
+        const archetypes::archetype_location_repository& alrp,
         const type_repository& trp) const;
 
 private:

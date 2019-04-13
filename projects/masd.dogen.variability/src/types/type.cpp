@@ -41,7 +41,7 @@ type::type(
     const masd::dogen::variability::name& name,
     const masd::dogen::variability::value_types value_type,
     const masd::dogen::variability::scope_types scope,
-    const masd::dogen::variability::archetype_location& archetype_location,
+    const masd::dogen::archetypes::archetype_location& archetype_location,
     const boost::shared_ptr<masd::dogen::variability::value>& default_value,
     const bool is_partially_matchable)
     : name_(name),
@@ -108,19 +108,19 @@ void type::scope(const masd::dogen::variability::scope_types v) {
     scope_ = v;
 }
 
-const masd::dogen::variability::archetype_location& type::archetype_location() const {
+const masd::dogen::archetypes::archetype_location& type::archetype_location() const {
     return archetype_location_;
 }
 
-masd::dogen::variability::archetype_location& type::archetype_location() {
+masd::dogen::archetypes::archetype_location& type::archetype_location() {
     return archetype_location_;
 }
 
-void type::archetype_location(const masd::dogen::variability::archetype_location& v) {
+void type::archetype_location(const masd::dogen::archetypes::archetype_location& v) {
     archetype_location_ = v;
 }
 
-void type::archetype_location(const masd::dogen::variability::archetype_location&& v) {
+void type::archetype_location(const masd::dogen::archetypes::archetype_location&& v) {
     archetype_location_ = std::move(v);
 }
 

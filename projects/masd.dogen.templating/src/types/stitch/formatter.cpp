@@ -151,8 +151,8 @@ void formatter::format_line_with_single_block(const std::string& stream_name,
     }
 }
 
-variability::archetype_location formatter::archetype_location() const {
-    using variability::archetype_location;
+archetypes::archetype_location formatter::archetype_location() const {
+    using archetypes::archetype_location;
     static archetype_location
         r(family_name, backend_name, facet_name, archetype_name);
     return r;

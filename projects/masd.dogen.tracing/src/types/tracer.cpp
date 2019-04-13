@@ -29,7 +29,7 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.variability/io/type_repository_io.hpp"
-#include "masd.dogen.variability/io/archetype_location_repository_io.hpp"
+#include "masd.dogen.archetypes/io/archetype_location_repository_io.hpp"
 #include "masd.dogen.tracing/types/tracing_error.hpp"
 #include "masd.dogen.tracing/types/metrics.hpp"
 #include "masd.dogen.tracing/types/metrics_printer.hpp"
@@ -88,7 +88,7 @@ boost::filesystem::path get_current_directory(
 
 namespace masd::dogen::tracing {
 
-tracer::tracer(const variability::archetype_location_repository& alrp,
+tracer::tracer(const archetypes::archetype_location_repository& alrp,
     const variability::type_repository& atrp,
     const boost::optional<tracing_configuration>& cfg) :
     configuration_(cfg),
@@ -231,7 +231,7 @@ boost::filesystem::path tracer::full_path_for_writing(
 }
 
 void tracer::write_initial_inputs(
-    const variability::archetype_location_repository& alrp,
+    const archetypes::archetype_location_repository& alrp,
     const variability::type_repository& atrp) const {
 
     BOOST_LOG_SEV(lg, debug) << "Writing initial inputs.";

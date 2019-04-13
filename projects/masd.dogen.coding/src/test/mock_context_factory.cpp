@@ -26,7 +26,7 @@
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.variability/types/annotation_factory.hpp"
 #include "masd.dogen.variability/types/type_repository_factory.hpp"
-#include "masd.dogen.variability/types/archetype_location_repository_builder.hpp"
+#include "masd.dogen.archetypes/types/archetype_location_repository_builder.hpp"
 #include "masd.dogen.tracing/types/tracer.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
 #include "masd.dogen.coding/test/mock_context_factory.hpp"
@@ -44,7 +44,7 @@ transforms::context mock_context_factory::make() {
     BOOST_LOG_SEV(lg, debug) << "Creating the mock context.";
 
     transforms::context r;
-    auto alrp(boost::make_shared<variability::archetype_location_repository>());
+    auto alrp(boost::make_shared<archetypes::archetype_location_repository>());
     r.archetype_location_repository(alrp);
 
     variability::type_repository_factory atrpf;

@@ -26,7 +26,7 @@
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
 #include "masd.dogen.utility/types/io/unordered_set_io.hpp"
 #include "masd.dogen.variability/io/template_kinds_io.hpp"
-#include "masd.dogen.variability/io/archetype_location_io.hpp"
+#include "masd.dogen.archetypes/io/archetype_location_io.hpp"
 #include "masd.dogen.variability/io/type_io.hpp"
 #include "masd.dogen.variability/io/type_template_io.hpp"
 #include "masd.dogen.variability/io/entry_template_io.hpp"
@@ -60,7 +60,7 @@ const std::string missing_kernel("Recursive templates must supply the kernel.");
 namespace masd::dogen::variability {
 
 template_instantiator::
-template_instantiator(const archetype_location_repository& alrp)
+template_instantiator(const archetypes::archetype_location_repository& alrp)
     : repository_(alrp) { }
 
 bool template_instantiator::is_instantiable(const template_kinds tk) const {
@@ -75,7 +75,7 @@ bool template_instantiator::is_partially_mathcable(const value_types vt) const {
     return vt == value_types::key_value_pair;
 }
 
-void template_instantiator::validate(const archetype_location& al,
+void template_instantiator::validate(const archetypes::archetype_location& al,
     const name& n, const template_kinds tk) const {
     /*
      * All templates must supply a simple name. This cannot be

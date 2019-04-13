@@ -27,7 +27,7 @@
 #include "masd.dogen.utility/types/io/vector_io.hpp"
 #include "masd.dogen.utility/types/io/forward_list_io.hpp"
 #include "masd.dogen.variability/io/type_repository_io.hpp"
-#include "masd.dogen.variability/io/archetype_location_io.hpp"
+#include "masd.dogen.archetypes/io/archetype_location_io.hpp"
 #include "masd.dogen.variability/types/template_instantiator.hpp"
 #include "masd.dogen.variability/types/building_error.hpp"
 #include "masd.dogen.variability/types/type_templates_hydrator.hpp"
@@ -77,7 +77,7 @@ std::list<type_template> type_repository_factory::hydrate_templates(
 }
 
 std::list<type> type_repository_factory::instantiate_templates(
-    const archetype_location_repository& alrp,
+    const archetypes::archetype_location_repository& alrp,
     const std::list<type_template>& tts) const {
     std::list<type> r;
 
@@ -132,7 +132,7 @@ create_repository(const std::list<type>& ts) const {
 }
 
 type_repository type_repository_factory::make(
-    const archetype_location_repository& alrp,
+    const archetypes::archetype_location_repository& alrp,
     const std::vector<boost::filesystem::path>& dirs) const {
     BOOST_LOG_SEV(lg, info) << "Generating repository.";
 

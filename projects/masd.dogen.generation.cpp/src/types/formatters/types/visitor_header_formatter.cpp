@@ -40,9 +40,9 @@ std::string visitor_header_formatter::id() const {
     return static_id();
 }
 
-variability::archetype_location
+archetypes::archetype_location
 visitor_header_formatter::archetype_location() const {
-    static variability::archetype_location
+    static archetypes::archetype_location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(),
           visitor_header_formatter::static_id());

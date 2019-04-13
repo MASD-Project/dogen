@@ -27,7 +27,7 @@
 
 #include <string>
 #include <unordered_map>
-#include "masd.dogen.variability/types/archetype_locations_group.hpp"
+#include "masd.dogen.archetypes/types/archetype_locations_group.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.generation/types/meta_model/element_archetype.hpp"
 #include "masd.dogen.coding/types/meta_model/artefact_properties.hpp"
@@ -55,7 +55,7 @@ private:
 
     static void compute_enablement_for_element(
         const std::unordered_map<std::string,
-        variability::archetype_locations_group>&
+        archetypes::archetype_locations_group>&
         archetype_locations_by_meta_name,
         const std::unordered_map<std::string,
         meta_model::denormalised_archetype_properties>&
