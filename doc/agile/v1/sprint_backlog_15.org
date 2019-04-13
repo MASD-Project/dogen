@@ -701,6 +701,11 @@ Tasks:
 - rename annotation to configuration.
 - create archetype model and mode archetype related types there.
 
+*** Reactivate injection.dia tests                                    :story:
+
+We seem to have a number of tests commented out in
+injection.dia. Investigate why and if possible, reactivate them.
+
 *** Location of =--byproduct-directory= not respected                 :story:
 
 It seems that at present we are not honouring the directory supplied
