@@ -25,24 +25,25 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include "masd.dogen.archetypes/types/archetype_location.hpp"
+#include "masd.dogen.archetypes/types/archetype_location_repository_parts.hpp"
 
 namespace masd::dogen::archetypes {
 
 class archetype_location_repository_parts_builder final {
-public:
-    archetype_location_repository_parts_builder() = default;
-    archetype_location_repository_parts_builder(const archetype_location_repository_parts_builder&) = default;
-    archetype_location_repository_parts_builder(archetype_location_repository_parts_builder&&) = default;
-    ~archetype_location_repository_parts_builder() = default;
-    archetype_location_repository_parts_builder& operator=(const archetype_location_repository_parts_builder&) = default;
+private:
+    void validate(const std::string& meta_name, const std::string& family,
+        const std::string& intra_backend_segment, const archetype_location& al);
 
 public:
-    bool operator==(const archetype_location_repository_parts_builder& rhs) const;
-    bool operator!=(const archetype_location_repository_parts_builder& rhs) const {
-        return !this->operator==(rhs);
-    }
+    void add(const std::string& meta_name, const std::string& family,
+        const std::string& intra_backend_segment,
+        const std::string& canonical_archetype, const archetype_location& al);
+    archetype_location_repository_parts build();
 
+private:
+    archetype_location_repository_parts parts_;
 };
 
 }

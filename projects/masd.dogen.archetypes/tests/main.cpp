@@ -18,20 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ARCHETYPES_TYPES_ALL_HPP
-#define MASD_DOGEN_ARCHETYPES_TYPES_ALL_HPP
+#define BOOST_TEST_MODULE masd.dogen.archetypes.tests
+#include <boost/test/unit_test.hpp>
+#include "masd.dogen.utility/types/test/fixture.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "masd.dogen.archetypes/types/archetypes.hpp"
-#include "masd.dogen.archetypes/types/building_error.hpp"
-#include "masd.dogen.archetypes/types/archetype_location.hpp"
-#include "masd.dogen.archetypes/types/archetype_locations_group.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository_parts.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository_builder.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository_parts_builder.hpp"
-
-#endif
+using namespace masd::dogen::utility::test;
+BOOST_GLOBAL_FIXTURE(exception_fixture);

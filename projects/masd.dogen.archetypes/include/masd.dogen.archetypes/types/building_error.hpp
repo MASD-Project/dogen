@@ -18,20 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ARCHETYPES_TYPES_ALL_HPP
-#define MASD_DOGEN_ARCHETYPES_TYPES_ALL_HPP
+#ifndef MASD_DOGEN_ARCHETYPES_TYPES_BUILDING_ERROR_HPP
+#define MASD_DOGEN_ARCHETYPES_TYPES_BUILDING_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.archetypes/types/archetypes.hpp"
-#include "masd.dogen.archetypes/types/building_error.hpp"
-#include "masd.dogen.archetypes/types/archetype_location.hpp"
-#include "masd.dogen.archetypes/types/archetype_locations_group.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository_parts.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository_builder.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository_parts_builder.hpp"
+#include <string>
+#include <boost/exception/info.hpp>
+
+namespace masd::dogen::archetypes {
+
+/**
+ * @brief An error occurred while the field factory was building.
+ */
+class building_error : public virtual std::exception, public virtual boost::exception {
+public:
+    building_error() = default;
+    ~building_error() noexcept = default;
+
+public:
+    explicit building_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
+}
 
 #endif

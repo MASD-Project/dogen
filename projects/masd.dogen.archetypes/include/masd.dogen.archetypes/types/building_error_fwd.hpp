@@ -18,20 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ARCHETYPES_TYPES_ALL_HPP
-#define MASD_DOGEN_ARCHETYPES_TYPES_ALL_HPP
+#ifndef MASD_DOGEN_ARCHETYPES_TYPES_BUILDING_ERROR_FWD_HPP
+#define MASD_DOGEN_ARCHETYPES_TYPES_BUILDING_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.archetypes/types/archetypes.hpp"
-#include "masd.dogen.archetypes/types/building_error.hpp"
-#include "masd.dogen.archetypes/types/archetype_location.hpp"
-#include "masd.dogen.archetypes/types/archetype_locations_group.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository_parts.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository_builder.hpp"
-#include "masd.dogen.archetypes/types/archetype_location_repository_parts_builder.hpp"
+namespace masd::dogen::archetypes {
+
+class building_error;
+
+}
 
 #endif

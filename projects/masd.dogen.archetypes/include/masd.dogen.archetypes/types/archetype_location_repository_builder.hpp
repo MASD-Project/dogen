@@ -25,24 +25,37 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include "masd.dogen.archetypes/types/archetype_location.hpp"
+#include "masd.dogen.archetypes/types/archetype_locations_group.hpp"
+#include "masd.dogen.archetypes/types/archetype_location_repository_parts.hpp"
+#include "masd.dogen.archetypes/types/archetype_location_repository.hpp"
 
 namespace masd::dogen::archetypes {
 
 class archetype_location_repository_builder final {
-public:
-    archetype_location_repository_builder() = default;
-    archetype_location_repository_builder(const archetype_location_repository_builder&) = default;
-    archetype_location_repository_builder(archetype_location_repository_builder&&) = default;
-    ~archetype_location_repository_builder() = default;
-    archetype_location_repository_builder& operator=(const archetype_location_repository_builder&) = default;
+private:
+    void validate(const std::list<archetype_location>& als) const;
+    void populate_locations(const std::list<archetype_location>& als);
+    void populate_archetypes_by_facet_by_backend();
+    void populate_facet_names_by_backend_name();
+    void populate_formatter_names_by_backend_name();
 
 public:
-    bool operator==(const archetype_location_repository_builder& rhs) const;
-    bool operator!=(const archetype_location_repository_builder& rhs) const {
-        return !this->operator==(rhs);
-    }
+    void add(const std::list<archetype_location>& als);
+    void add(const std::unordered_map<std::string, archetype_locations_group>&
+        archetype_locations_by_meta_name);
+    void add(const std::unordered_map<std::string,
+        std::list<archetype_location>>& archetype_locations_by_family);
 
+public:
+    void add(const archetype_location_repository_parts& parts);
+
+public:
+    const archetype_location_repository& build();
+
+private:
+    archetype_location_repository repository_;
 };
 
 }

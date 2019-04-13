@@ -18,12 +18,103 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.archetypes/types/building_error.hpp"
 #include "masd.dogen.archetypes/types/archetype_location_repository_parts_builder.hpp"
+
+namespace {
+
+using namespace masd::dogen::utility::log;
+static logger
+lg(logger_factory("annotations.archetype_location_repository_parts_builder"));
+
+const std::string empty_archetype("Archetype is empty.");
+const std::string empty_facet_name("Facet name is empty.");
+const std::string empty_model_name("Model name is empty.");
+const std::string duplicate_archetype("Duplicate formatter id: ");
+const std::string empty_meta_name("Meta-name cannot be empty.");
+const std::string empty_intra_backend_segment(
+    "Intra-backend segment cannot be empty.");
+const std::string empty_family("Family cannot be empty.");
+
+}
 
 namespace masd::dogen::archetypes {
 
-bool archetype_location_repository_parts_builder::operator==(const archetype_location_repository_parts_builder& /*rhs*/) const {
-    return true;
+void archetype_location_repository_parts_builder::
+validate(const std::string& meta_name, const std::string& family,
+    const std::string& intra_backend_segment, const archetype_location& al) {
+
+    if(meta_name.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_meta_name;
+        BOOST_THROW_EXCEPTION(building_error(empty_meta_name));
+    }
+
+    if(family.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_family;
+        BOOST_THROW_EXCEPTION(building_error(empty_family));
+    }
+
+    if(intra_backend_segment.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_intra_backend_segment;
+        BOOST_THROW_EXCEPTION(building_error(empty_intra_backend_segment));
+    }
+
+    if (al.archetype().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_archetype;
+        BOOST_THROW_EXCEPTION(building_error(empty_archetype));
+    }
+
+    if (al.facet().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_facet_name;
+        BOOST_THROW_EXCEPTION(building_error(empty_facet_name));
+    }
+
+    if (al.backend().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_model_name;
+        BOOST_THROW_EXCEPTION(building_error(empty_model_name));
+    }
+}
+
+void archetype_location_repository_parts_builder::
+add(const std::string& meta_name, const std::string& family,
+    const std::string& intra_backend_segment,
+    const std::string& canonical_archetype, const archetype_location& al) {
+
+    validate(meta_name, family, intra_backend_segment, al);
+    parts_.archetype_locations().push_front(al);
+
+    auto& alg(parts_.archetype_locations_by_meta_name()[meta_name]);
+    alg.archetype_locations().push_back(al);
+
+    auto& albf(parts_.archetype_locations_by_family()[family]);
+    albf.push_back(al);
+
+    auto& albibs(parts_.archetype_locations_by_intra_backend_segment());
+    albibs[intra_backend_segment].push_back(al);
+
+    /*
+     * If the archetype location points to a canonical archetype,
+     * update the canonical archetype mapping.
+     */
+    auto& cal(alg.canonical_archetype_locations());
+    if (!canonical_archetype.empty()) {
+        const auto arch(al.archetype());
+        const auto fct(al.facet());
+        const auto& carch(canonical_archetype);
+        const auto inserted(cal.insert(std::make_pair(arch, carch)).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_archetype << arch;
+            BOOST_THROW_EXCEPTION(building_error(duplicate_archetype + arch));
+        }
+        BOOST_LOG_SEV(lg, debug) << "Mapped " << carch << " to " << arch;
+    }
+}
+
+archetype_location_repository_parts
+archetype_location_repository_parts_builder::build() {
+    return parts_;
 }
 
 }
