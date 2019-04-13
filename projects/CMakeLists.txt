@@ -273,6 +273,7 @@ include_directories(
 
     # real code
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen/include
+    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.archetypes/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.cli/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.utility/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.variability/include
@@ -294,6 +295,7 @@ include_directories(
 # add all other projects
 #
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.archetypes)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.cli)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.utility)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.variability)
