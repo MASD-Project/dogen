@@ -32,6 +32,7 @@
 #include "masd.dogen.variability/types/meta_model/element.hpp"
 #include "masd.dogen.variability/types/meta_model/value_fwd.hpp"
 #include "masd.dogen.variability/types/meta_model/value_type.hpp"
+#include "masd.dogen.variability/types/meta_model/binding_type.hpp"
 #include "masd.dogen.variability/types/meta_model/template_kind.hpp"
 
 namespace masd::dogen::variability::meta_model {
@@ -56,6 +57,7 @@ public:
         const masd::dogen::archetypes::location& location,
         const boost::shared_ptr<masd::dogen::variability::meta_model::value>& default_value,
         const masd::dogen::variability::meta_model::value_type value_type,
+        const masd::dogen::variability::meta_model::binding_type binding_type,
         const masd::dogen::variability::meta_model::template_kind kind);
 
 public:
@@ -91,6 +93,14 @@ public:
     /**@}*/
 
     /**
+     * @brief How the feature binds against other model elements.
+     */
+    /**@{*/
+    masd::dogen::variability::meta_model::binding_type binding_type() const;
+    void binding_type(const masd::dogen::variability::meta_model::binding_type v);
+    /**@}*/
+
+    /**
      * @brief Kind of the template.
      */
     /**@{*/
@@ -115,6 +125,7 @@ private:
     masd::dogen::archetypes::location location_;
     boost::shared_ptr<masd::dogen::variability::meta_model::value> default_value_;
     masd::dogen::variability::meta_model::value_type value_type_;
+    masd::dogen::variability::meta_model::binding_type binding_type_;
     masd::dogen::variability::meta_model::template_kind kind_;
 };
 

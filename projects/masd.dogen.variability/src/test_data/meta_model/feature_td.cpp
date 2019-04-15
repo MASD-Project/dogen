@@ -70,7 +70,7 @@ populate(const unsigned int position, result_type& v) {
     v.location(create_masd_dogen_archetypes_location(position + 0));
     v.default_value(create_boost_shared_ptr_masd_dogen_variability_meta_model_value(position + 1));
     v.value_type(create_masd_dogen_variability_meta_model_value_type(position + 2));
-    v.binding(create_masd_dogen_variability_meta_model_binding_type(position + 3));
+    v.binding_type(create_masd_dogen_variability_meta_model_binding_type(position + 3));
     v.is_partially_matchable(create_bool(position + 4));
 }
 

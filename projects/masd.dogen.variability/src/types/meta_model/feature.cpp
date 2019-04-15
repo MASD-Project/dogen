@@ -57,7 +57,7 @@ namespace masd::dogen::variability::meta_model {
 
 feature::feature()
     : value_type_(static_cast<masd::dogen::variability::meta_model::value_type>(0)),
-      binding_(static_cast<masd::dogen::variability::meta_model::binding_type>(0)),
+      binding_type_(static_cast<masd::dogen::variability::meta_model::binding_type>(0)),
       is_partially_matchable_(static_cast<bool>(0)) { }
 
 feature::feature(
@@ -66,7 +66,7 @@ feature::feature(
     const masd::dogen::archetypes::location& location,
     const boost::shared_ptr<masd::dogen::variability::meta_model::value>& default_value,
     const masd::dogen::variability::meta_model::value_type value_type,
-    const masd::dogen::variability::meta_model::binding_type binding,
+    const masd::dogen::variability::meta_model::binding_type binding_type,
     const bool is_partially_matchable)
     : masd::dogen::variability::meta_model::element(
       name,
@@ -74,7 +74,7 @@ feature::feature(
       location_(location),
       default_value_(default_value),
       value_type_(value_type),
-      binding_(binding),
+      binding_type_(binding_type),
       is_partially_matchable_(is_partially_matchable) { }
 
 void feature::to_stream(std::ostream& s) const {
@@ -92,7 +92,7 @@ void feature::to_stream(std::ostream& s) const {
       << "\"location\": " << location_ << ", "
       << "\"default_value\": " << default_value_ << ", "
       << "\"value_type\": " << value_type_ << ", "
-      << "\"binding\": " << binding_ << ", "
+      << "\"binding_type\": " << binding_type_ << ", "
       << "\"is_partially_matchable\": " << is_partially_matchable_
       << " }";
 }
@@ -104,7 +104,7 @@ void feature::swap(feature& other) noexcept {
     swap(location_, other.location_);
     swap(default_value_, other.default_value_);
     swap(value_type_, other.value_type_);
-    swap(binding_, other.binding_);
+    swap(binding_type_, other.binding_type_);
     swap(is_partially_matchable_, other.is_partially_matchable_);
 }
 
@@ -119,7 +119,7 @@ bool feature::operator==(const feature& rhs) const {
         location_ == rhs.location_ &&
         default_value_ == rhs.default_value_ &&
         value_type_ == rhs.value_type_ &&
-        binding_ == rhs.binding_ &&
+        binding_type_ == rhs.binding_type_ &&
         is_partially_matchable_ == rhs.is_partially_matchable_;
 }
 
@@ -169,12 +169,12 @@ void feature::value_type(const masd::dogen::variability::meta_model::value_type 
     value_type_ = v;
 }
 
-masd::dogen::variability::meta_model::binding_type feature::binding() const {
-    return binding_;
+masd::dogen::variability::meta_model::binding_type feature::binding_type() const {
+    return binding_type_;
 }
 
-void feature::binding(const masd::dogen::variability::meta_model::binding_type v) {
-    binding_ = v;
+void feature::binding_type(const masd::dogen::variability::meta_model::binding_type v) {
+    binding_type_ = v;
 }
 
 bool feature::is_partially_matchable() const {

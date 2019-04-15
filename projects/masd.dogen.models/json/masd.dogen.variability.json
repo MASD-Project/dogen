@@ -609,10 +609,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "binding",
-          "type": "binding_type"
-        },
-        {
           "name": "is_partially_matchable",
           "type": "bool",
           "documentation": "Feature name can be matched partially.\n"
@@ -1057,12 +1053,27 @@
       ]
     },
     {
+      "name": "meta_model::Bindeable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "binding_type",
+          "type": "binding_type",
+          "documentation": "How the feature binds against other model elements.\n"
+        }
+      ]
+    },
+    {
       "name": "meta_model::FeatureElement",
       "parents": [
         "meta_model::Locatable",
         "meta_model::Element",
         "meta_model::Defaultable",
-        "meta_model::Typeable"
+        "meta_model::Typeable",
+        "meta_model::Bindeable"
       ],
       "stereotypes": [
         "masd::object_template"
