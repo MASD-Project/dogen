@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_VARIABILITY_TYPES_PROFILE_HYDRATOR_HPP
-#define MASD_DOGEN_VARIABILITY_TYPES_PROFILE_HYDRATOR_HPP
+#ifndef MASD_DOGEN_VARIABILITY_TYPES_HELPERS_CONFIGURATION_TEMPLATE_HYDRATOR_HPP
+#define MASD_DOGEN_VARIABILITY_TYPES_HELPERS_CONFIGURATION_TEMPLATE_HYDRATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,31 +29,36 @@
 #include <string>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
-#include "masd.dogen.variability/types/name.hpp"
-#include "masd.dogen.variability/types/template_kinds.hpp"
 #include "masd.dogen.archetypes/types/location.hpp"
-#include "masd.dogen.variability/types/entry_template.hpp"
-#include "masd.dogen.variability/types/profile.hpp"
+#include "masd.dogen.variability/types/meta_model/name.hpp"
+#include "masd.dogen.variability/types/meta_model/template_kind.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration_point_template.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration_template.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
 
-namespace masd::dogen::variability {
+namespace masd::dogen::variability::helpers {
 
-class profile_hydrator {
+/**
+ * @brief Reads an unbound configuration from JSON.
+ */
+class configuration_template_hydrator final {
 private:
-    template_kinds to_template_kind(const std::string& s) const;
+    meta_model::template_kind to_template_kind(const std::string& s) const;
 
-    name read_name(const boost::property_tree::ptree& pt) const;
+    meta_model::name read_name(const boost::property_tree::ptree& pt) const;
 
     archetypes::location
     read_archetype_location(const boost::property_tree::ptree& pt) const;
 
-    std::list<entry_template>
+    std::list<meta_model::configuration_point_template>
     read_templates(const boost::property_tree::ptree& pt) const;
 
-    profile read_stream(std::istream& s) const;
+    meta_model::configuration_template read_stream(std::istream& s) const;
 
 public:
-    profile hydrate(std::istream& s) const;
-    profile hydrate(const boost::filesystem::path& p) const;
+    meta_model::configuration_template hydrate(std::istream& s) const;
+    meta_model::configuration_template
+    hydrate(const boost::filesystem::path& p) const;
 };
 
 }
