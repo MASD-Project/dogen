@@ -25,24 +25,101 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include <unordered_map>
+#include <boost/shared_ptr.hpp>
+#include "masd.dogen.variability/types/meta_model/value.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/value_type.hpp"
 
 namespace masd::dogen::variability::helpers {
 
+
+/**
+ * @brief Builds a value from raw data.
+ */
 class value_factory final {
-public:
-    value_factory() = default;
-    value_factory(const value_factory&) = default;
-    value_factory(value_factory&&) = default;
-    ~value_factory() = default;
-    value_factory& operator=(const value_factory&) = default;
+private:
+    /**
+     * @brief Converts s to integer.
+     *
+     * @pre s must be a valid integer.
+     */
+    int to_int(const std::string& s) const;
+
+    /**
+     * @brief Converts s to bool.
+     *
+     * @pre s must be a valid bool.
+     */
+    bool to_bool(const std::string& s) const;
+
+    /**
+     * @brief Throws if the collection has more than one element.
+     */
+    void ensure_at_most_one_element(const std::list<std::string>& v) const;
+
+    /**
+     * @brief Returns true if the value type refers to a collection.
+     */
+    bool is_collection(const meta_model::value_type vt) const;
 
 public:
-    bool operator==(const value_factory& rhs) const;
-    bool operator!=(const value_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Creates a stand alone text value.
+     */
+    boost::shared_ptr<meta_model::value> make_text(const std::string& v) const;
 
+    /**
+     * @brief Creates a collection of text values.
+     */
+    boost::shared_ptr<meta_model::value>
+    make_text_collection(const std::list<std::string>& v) const;
+
+    /**
+     * @brief Creates a stand alone boolean value.
+     */
+    /**@{*/
+    boost::shared_ptr<meta_model::value>
+    make_boolean(const std::string& v) const;
+    boost::shared_ptr<meta_model::value> make_boolean(const bool v) const;
+    /**@}*/
+
+    /**
+     * @brief Creates a stand alone numeric value.
+     */
+    /**@{*/
+    boost::shared_ptr<meta_model::value>
+    make_number(const std::string& v) const;
+    boost::shared_ptr<meta_model::value> make_number(const int v) const;
+    /**@}*/
+
+    /**
+     * @brief Creates a stand alone kvp value.
+     */
+    boost::shared_ptr<meta_model::value>
+    make_kvp(const std::unordered_map<std::string, std::string>& v) const;
+
+public:
+    /**
+     * @brief Creates a value given a feature, the original key and
+     * zero or more raw values.
+     *
+     * @pre If the raw values have more than one element, the
+     * feature's value type must be a collection.
+     *
+     * @pre the raw values must be valid according to the value type.
+     */
+    boost::shared_ptr<meta_model::value>
+    make(const meta_model::feature& f, const std::list<std::string>& v) const;
+
+    /**
+     * @brief Creates a value given a feature, with the expectation
+     * that it is of kvp type.
+     */
+    boost::shared_ptr<meta_model::value> make(const meta_model::feature& f,
+        const std::unordered_map<std::string, std::string>& v) const;
 };
 
 }
