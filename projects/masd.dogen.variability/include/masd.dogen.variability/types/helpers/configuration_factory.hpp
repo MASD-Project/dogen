@@ -25,24 +25,86 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include <utility>
+#include <unordered_map>
+#include <boost/optional.hpp>
+#include <boost/filesystem/path.hpp>
+#include "masd.dogen.archetypes/types/location_repository.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/binding_type.hpp"
 
 namespace masd::dogen::variability::helpers {
 
+/**
+ * @brief Produces a configuration object from raw data.
+ */
 class configuration_factory final {
 public:
-    configuration_factory() = default;
-    configuration_factory(const configuration_factory&) = default;
-    configuration_factory(configuration_factory&&) = default;
-    ~configuration_factory() = default;
-    configuration_factory& operator=(const configuration_factory&) = default;
+    /**
+     * @brief Initialise the configuration factory.
+     *
+     * @param alrp the archetype location repository.
+     * @param fm the feature model.
+     * @param compatibility_mode if true, try to ignore some
+     * resolution errors.
+     */
+    configuration_factory(const archetypes::location_repository& alrp,
+        const meta_model::feature_model& fm, const bool compatibility_mode);
+
+private:
+    /**
+     * @brief Returns the feature for the given qualified name, if any
+     * such feature exists.
+     */
+    boost::optional<meta_model::feature>
+    try_obtain_feature(const std::string& qn) const;
+
+    /**
+     * @brief Ensures the feature can be bound to the supplied binding
+     * type.
+     */
+    void validate_binding(const meta_model::feature& f,
+        const meta_model::binding_type bt) const;
+
+    /**
+     * @brief Given a binding type, returns the well-known name of its
+     * the default configuration.
+     */
+    std::string get_default_configuration_name_for_binding_type(
+        const meta_model::binding_type bt) const;
+
+private:
+    /**
+     * @brief Converts the raw data into a configuration.
+     */
+    meta_model::configuration
+    create_configuration(const meta_model::binding_type bt,
+        const std::unordered_map<std::string, std::list<std::string>>&
+        aggregated_entries) const;
+
+    /**
+     * @brief Aggregate entry data by key.
+     */
+    std::unordered_map<std::string, std::list<std::string>>
+    aggregate_entries(const std::list<std::pair<std::string, std::string>>&
+        entries) const;
 
 public:
-    bool operator==(const configuration_factory& rhs) const;
-    bool operator!=(const configuration_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Create a configuration.
+     */
+    meta_model::configuration
+    make(const std::list<std::pair<std::string, std::string>>& entries,
+        const meta_model::binding_type bt) const;
 
+private:
+    const archetypes::location_repository& archetype_location_repository_;
+    const meta_model::feature_model& feature_model_;
+    const bool compatibility_mode_;
 };
 
 }

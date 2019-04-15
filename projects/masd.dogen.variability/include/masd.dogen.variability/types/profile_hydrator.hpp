@@ -28,6 +28,7 @@
 #include <list>
 #include <string>
 #include <boost/property_tree/ptree.hpp>
+#include <boost/filesystem/path.hpp>
 #include "masd.dogen.variability/types/name.hpp"
 #include "masd.dogen.variability/types/template_kinds.hpp"
 #include "masd.dogen.archetypes/types/location.hpp"
