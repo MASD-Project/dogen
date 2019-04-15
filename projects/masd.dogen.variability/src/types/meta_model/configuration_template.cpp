@@ -48,6 +48,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 namespace std {
 
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
 inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::variability::meta_model::configuration_point_template>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -66,7 +80,7 @@ configuration_template::configuration_template(
     const masd::dogen::variability::meta_model::name& name,
     const std::string& description,
     const std::list<std::string>& parents,
-    const std::list<std::string>& labels,
+    const std::unordered_set<std::string>& labels,
     const std::list<masd::dogen::variability::meta_model::configuration_point_template>& templates)
     : masd::dogen::variability::meta_model::element(
       name,
@@ -131,19 +145,19 @@ void configuration_template::parents(const std::list<std::string>&& v) {
     parents_ = std::move(v);
 }
 
-const std::list<std::string>& configuration_template::labels() const {
+const std::unordered_set<std::string>& configuration_template::labels() const {
     return labels_;
 }
 
-std::list<std::string>& configuration_template::labels() {
+std::unordered_set<std::string>& configuration_template::labels() {
     return labels_;
 }
 
-void configuration_template::labels(const std::list<std::string>& v) {
+void configuration_template::labels(const std::unordered_set<std::string>& v) {
     labels_ = v;
 }
 
-void configuration_template::labels(const std::list<std::string>&& v) {
+void configuration_template::labels(const std::unordered_set<std::string>&& v) {
     labels_ = std::move(v);
 }
 

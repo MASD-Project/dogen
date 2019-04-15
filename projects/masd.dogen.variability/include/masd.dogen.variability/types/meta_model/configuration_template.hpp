@@ -29,6 +29,7 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
+#include <unordered_set>
 #include "masd.dogen.variability/types/meta_model/element.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration_point_template.hpp"
 
@@ -50,7 +51,7 @@ public:
         const masd::dogen::variability::meta_model::name& name,
         const std::string& description,
         const std::list<std::string>& parents,
-        const std::list<std::string>& labels,
+        const std::unordered_set<std::string>& labels,
         const std::list<masd::dogen::variability::meta_model::configuration_point_template>& templates);
 
 public:
@@ -62,10 +63,10 @@ public:
     void parents(const std::list<std::string>& v);
     void parents(const std::list<std::string>&& v);
 
-    const std::list<std::string>& labels() const;
-    std::list<std::string>& labels();
-    void labels(const std::list<std::string>& v);
-    void labels(const std::list<std::string>&& v);
+    const std::unordered_set<std::string>& labels() const;
+    std::unordered_set<std::string>& labels();
+    void labels(const std::unordered_set<std::string>& v);
+    void labels(const std::unordered_set<std::string>&& v);
 
     const std::list<masd::dogen::variability::meta_model::configuration_point_template>& templates() const;
     std::list<masd::dogen::variability::meta_model::configuration_point_template>& templates();
@@ -87,7 +88,7 @@ public:
 
 private:
     std::list<std::string> parents_;
-    std::list<std::string> labels_;
+    std::unordered_set<std::string> labels_;
     std::list<masd::dogen::variability::meta_model::configuration_point_template> templates_;
 };
 

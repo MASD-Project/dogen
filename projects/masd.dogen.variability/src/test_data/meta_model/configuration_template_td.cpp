@@ -39,6 +39,14 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
+std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int position) {
+    std::unordered_set<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(create_std_string(position + i));
+    }
+    return r;
+}
+
 masd::dogen::variability::meta_model::configuration_point_template
 create_masd_dogen_variability_meta_model_configuration_point_template(const unsigned int position) {
     return masd::dogen::variability::meta_model::configuration_point_template_generator::create(position);
@@ -62,7 +70,7 @@ void configuration_template_generator::
 populate(const unsigned int position, result_type& v) {
     masd::dogen::variability::meta_model::element_generator::populate(position, v);
     v.parents(create_std_list_std_string(position + 0));
-    v.labels(create_std_list_std_string(position + 1));
+    v.labels(create_std_unordered_set_std_string(position + 1));
     v.templates(create_std_list_masd_dogen_variability_meta_model_configuration_point_template(position + 2));
 }
 

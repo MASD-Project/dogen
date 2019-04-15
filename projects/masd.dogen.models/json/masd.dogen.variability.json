@@ -810,7 +810,7 @@
         },
         {
           "name": "labels",
-          "type": "std::list<std::string>"
+          "type": "std::unordered_set<std::string>"
         },
         {
           "name": "templates",
@@ -1138,7 +1138,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "helpers::configuration_hydrator",
+      "name": "helpers::configuration_template_hydrator",
       "stereotypes": [
         "masd::handcrafted"
       ],
