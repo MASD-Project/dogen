@@ -929,7 +929,7 @@
           "documentation": "All configuration points in this configuration.\n"
         },
         {
-          "name": "binding",
+          "name": "binding_type",
           "type": "boost::optional<binding_type>",
           "documentation": "Type of binding available for this configuration, if bound.\n"
         }

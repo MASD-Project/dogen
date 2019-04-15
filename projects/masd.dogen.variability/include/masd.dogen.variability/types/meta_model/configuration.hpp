@@ -51,7 +51,7 @@ public:
         const masd::dogen::variability::meta_model::name& name,
         const std::string& description,
         const std::unordered_map<std::string, masd::dogen::variability::meta_model::configuration_point>& configuration_points,
-        const boost::optional<masd::dogen::variability::meta_model::binding_type>& binding);
+        const boost::optional<masd::dogen::variability::meta_model::binding_type>& binding_type);
 
 public:
     void to_stream(std::ostream& s) const override;
@@ -71,10 +71,10 @@ public:
      * @brief Type of binding available for this configuration, if bound.
      */
     /**@{*/
-    const boost::optional<masd::dogen::variability::meta_model::binding_type>& binding() const;
-    boost::optional<masd::dogen::variability::meta_model::binding_type>& binding();
-    void binding(const boost::optional<masd::dogen::variability::meta_model::binding_type>& v);
-    void binding(const boost::optional<masd::dogen::variability::meta_model::binding_type>&& v);
+    const boost::optional<masd::dogen::variability::meta_model::binding_type>& binding_type() const;
+    boost::optional<masd::dogen::variability::meta_model::binding_type>& binding_type();
+    void binding_type(const boost::optional<masd::dogen::variability::meta_model::binding_type>& v);
+    void binding_type(const boost::optional<masd::dogen::variability::meta_model::binding_type>&& v);
     /**@}*/
 
 public:
@@ -92,7 +92,7 @@ public:
 
 private:
     std::unordered_map<std::string, masd::dogen::variability::meta_model::configuration_point> configuration_points_;
-    boost::optional<masd::dogen::variability::meta_model::binding_type> binding_;
+    boost::optional<masd::dogen::variability::meta_model::binding_type> binding_type_;
 };
 
 }

@@ -67,7 +67,7 @@ void configuration_generator::
 populate(const unsigned int position, result_type& v) {
     masd::dogen::variability::meta_model::element_generator::populate(position, v);
     v.configuration_points(create_std_unordered_map_std_string_masd_dogen_variability_meta_model_configuration_point(position + 0));
-    v.binding(create_boost_optional_masd_dogen_variability_meta_model_binding_type(position + 1));
+    v.binding_type(create_boost_optional_masd_dogen_variability_meta_model_binding_type(position + 1));
 }
 
 configuration_generator::result_type
