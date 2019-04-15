@@ -729,11 +729,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "value_type",
-          "type": "value_type",
-          "documentation": "Type of the value for the feature that will result of the template instantiation.\n"
-        },
-        {
           "name": "kind",
           "type": "template_kind",
           "documentation": "Kind of the template.\n"
@@ -1048,11 +1043,26 @@
       ]
     },
     {
+      "name": "meta_model::Typeable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "value_type",
+          "type": "value_type",
+          "documentation": "Type of the value for the feature that will result of the template instantiation.\n"
+        }
+      ]
+    },
+    {
       "name": "meta_model::FeatureElement",
       "parents": [
         "meta_model::Locatable",
         "meta_model::Element",
-        "meta_model::Defaultable"
+        "meta_model::Defaultable",
+        "meta_model::Typeable"
       ],
       "stereotypes": [
         "masd::object_template"

@@ -25,6 +25,7 @@
 #include "masd.dogen.variability/types/meta_model/value.hpp"
 #include "masd.dogen.variability/io/meta_model/element_io.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/io/meta_model/value_type_io.hpp"
 #include "masd.dogen.variability/io/meta_model/binding_type_io.hpp"
 
 namespace boost {
@@ -55,7 +56,8 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::d
 namespace masd::dogen::variability::meta_model {
 
 feature::feature()
-    : binding_(static_cast<masd::dogen::variability::meta_model::binding_type>(0)),
+    : value_type_(static_cast<masd::dogen::variability::meta_model::value_type>(0)),
+      binding_(static_cast<masd::dogen::variability::meta_model::binding_type>(0)),
       is_partially_matchable_(static_cast<bool>(0)) { }
 
 feature::feature(
@@ -63,6 +65,7 @@ feature::feature(
     const std::string& description,
     const masd::dogen::archetypes::location& location,
     const boost::shared_ptr<masd::dogen::variability::meta_model::value>& default_value,
+    const masd::dogen::variability::meta_model::value_type value_type,
     const masd::dogen::variability::meta_model::binding_type binding,
     const bool is_partially_matchable)
     : masd::dogen::variability::meta_model::element(
@@ -70,6 +73,7 @@ feature::feature(
       description),
       location_(location),
       default_value_(default_value),
+      value_type_(value_type),
       binding_(binding),
       is_partially_matchable_(is_partially_matchable) { }
 
@@ -87,6 +91,7 @@ void feature::to_stream(std::ostream& s) const {
     s << ", "
       << "\"location\": " << location_ << ", "
       << "\"default_value\": " << default_value_ << ", "
+      << "\"value_type\": " << value_type_ << ", "
       << "\"binding\": " << binding_ << ", "
       << "\"is_partially_matchable\": " << is_partially_matchable_
       << " }";
@@ -98,6 +103,7 @@ void feature::swap(feature& other) noexcept {
     using std::swap;
     swap(location_, other.location_);
     swap(default_value_, other.default_value_);
+    swap(value_type_, other.value_type_);
     swap(binding_, other.binding_);
     swap(is_partially_matchable_, other.is_partially_matchable_);
 }
@@ -112,6 +118,7 @@ bool feature::operator==(const feature& rhs) const {
     return masd::dogen::variability::meta_model::element::compare(rhs) &&
         location_ == rhs.location_ &&
         default_value_ == rhs.default_value_ &&
+        value_type_ == rhs.value_type_ &&
         binding_ == rhs.binding_ &&
         is_partially_matchable_ == rhs.is_partially_matchable_;
 }
@@ -152,6 +159,14 @@ void feature::default_value(const boost::shared_ptr<masd::dogen::variability::me
 
 void feature::default_value(const boost::shared_ptr<masd::dogen::variability::meta_model::value>&& v) {
     default_value_ = std::move(v);
+}
+
+masd::dogen::variability::meta_model::value_type feature::value_type() const {
+    return value_type_;
+}
+
+void feature::value_type(const masd::dogen::variability::meta_model::value_type v) {
+    value_type_ = v;
 }
 
 masd::dogen::variability::meta_model::binding_type feature::binding() const {

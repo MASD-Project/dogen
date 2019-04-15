@@ -31,6 +31,7 @@
 #include "masd.dogen.archetypes/types/location.hpp"
 #include "masd.dogen.variability/types/meta_model/element.hpp"
 #include "masd.dogen.variability/types/meta_model/value_fwd.hpp"
+#include "masd.dogen.variability/types/meta_model/value_type.hpp"
 #include "masd.dogen.variability/types/meta_model/binding_type.hpp"
 
 namespace masd::dogen::variability::meta_model {
@@ -54,6 +55,7 @@ public:
         const std::string& description,
         const masd::dogen::archetypes::location& location,
         const boost::shared_ptr<masd::dogen::variability::meta_model::value>& default_value,
+        const masd::dogen::variability::meta_model::value_type value_type,
         const masd::dogen::variability::meta_model::binding_type binding,
         const bool is_partially_matchable);
 
@@ -79,6 +81,14 @@ public:
     boost::shared_ptr<masd::dogen::variability::meta_model::value>& default_value();
     void default_value(const boost::shared_ptr<masd::dogen::variability::meta_model::value>& v);
     void default_value(const boost::shared_ptr<masd::dogen::variability::meta_model::value>&& v);
+    /**@}*/
+
+    /**
+     * @brief Type of the value for the feature that will result of the template instantiation.
+     */
+    /**@{*/
+    masd::dogen::variability::meta_model::value_type value_type() const;
+    void value_type(const masd::dogen::variability::meta_model::value_type v);
     /**@}*/
 
     masd::dogen::variability::meta_model::binding_type binding() const;
@@ -108,6 +118,7 @@ public:
 private:
     masd::dogen::archetypes::location location_;
     boost::shared_ptr<masd::dogen::variability::meta_model::value> default_value_;
+    masd::dogen::variability::meta_model::value_type value_type_;
     masd::dogen::variability::meta_model::binding_type binding_;
     bool is_partially_matchable_;
 };

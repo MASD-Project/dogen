@@ -22,6 +22,7 @@
 #include "masd.dogen.variability/test_data/meta_model/value_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/element_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/feature_td.hpp"
+#include "masd.dogen.variability/test_data/meta_model/value_type_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/binding_type_td.hpp"
 
 namespace {
@@ -41,6 +42,11 @@ create_boost_shared_ptr_masd_dogen_variability_meta_model_value(unsigned int pos
     boost::shared_ptr<masd::dogen::variability::meta_model::value> r(
         create_masd_dogen_variability_meta_model_value_ptr(position));
     return r;
+}
+
+masd::dogen::variability::meta_model::value_type
+create_masd_dogen_variability_meta_model_value_type(const unsigned int position) {
+    return masd::dogen::variability::meta_model::value_type_generator::create(position);
 }
 
 masd::dogen::variability::meta_model::binding_type
@@ -63,8 +69,9 @@ populate(const unsigned int position, result_type& v) {
     masd::dogen::variability::meta_model::element_generator::populate(position, v);
     v.location(create_masd_dogen_archetypes_location(position + 0));
     v.default_value(create_boost_shared_ptr_masd_dogen_variability_meta_model_value(position + 1));
-    v.binding(create_masd_dogen_variability_meta_model_binding_type(position + 2));
-    v.is_partially_matchable(create_bool(position + 3));
+    v.value_type(create_masd_dogen_variability_meta_model_value_type(position + 2));
+    v.binding(create_masd_dogen_variability_meta_model_binding_type(position + 3));
+    v.is_partially_matchable(create_bool(position + 4));
 }
 
 feature_generator::result_type
