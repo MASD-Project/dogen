@@ -93,6 +93,7 @@
 #include "masd.dogen.variability/types/configuration_templates_repository.hpp"
 #include "masd.dogen.variability/types/transforms/feature_model_transform.hpp"
 #include "masd.dogen.variability/types/transforms/configuration_processing.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_point_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_template_hydrator.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration_point_template.hpp"
 #include "masd.dogen.variability/types/transforms/feature_model_production_chain.hpp"
