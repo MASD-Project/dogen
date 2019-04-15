@@ -13,26 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-13 Sat 17:41]
+#+CAPTION: Clock summary at [2019-04-14 Sun 15:09]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *46:10* |       |       | 100.0 |
+| *Total time*                                           | *48:45* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 46:10   |       |       | 100.0 |
-| Active                                                 |         | 46:10 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  4:21 |   9.4 |
-| Sprint and product backlog grooming                    |         |       |  2:12 |   4.8 |
-| Create a video demo for the previous sprint's features |         |       |  1:35 |   3.4 |
-| Fix issues with emacs                                  |         |       |  2:01 |   4.4 |
+| Stories                                                | 48:45   |       |       | 100.0 |
+| Active                                                 |         | 48:45 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  4:21 |   8.9 |
+| Sprint and product backlog grooming                    |         |       |  4:24 |   9.0 |
+| Create a video demo for the previous sprint's features |         |       |  1:35 |   3.2 |
+| Fix issues with emacs                                  |         |       |  2:01 |   4.1 |
 | Fix issues with nightly build                          |         |       |  0:08 |   0.3 |
-| Add diffing support to string asserter                 |         |       |  1:00 |   2.2 |
-| C# generation is borked                                |         |       |  4:12 |   9.1 |
-| Reactivate the boilerplate tests                       |         |       |  5:58 |  12.9 |
+| Add diffing support to string asserter                 |         |       |  1:00 |   2.1 |
+| C# generation is borked                                |         |       |  4:12 |   8.6 |
+| Reactivate the boilerplate tests                       |         |       |  5:58 |  12.2 |
 | Update to clang8                                       |         |       |  0:11 |   0.4 |
-| Fix snags with emacs                                   |         |       |  5:27 |  11.8 |
-| Profiles as meta-model elements                        |         |       |  8:01 |  17.4 |
-| Redesign annotations model                             |         |       | 11:04 |  24.0 |
+| Fix snags with emacs                                   |         |       |  5:50 |  12.0 |
+| Profiles as meta-model elements                        |         |       |  8:01 |  16.4 |
+| Redesign annotations model                             |         |       | 11:04 |  22.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -193,6 +193,10 @@ Happy Modeling!
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-04-14 Sun 14:04]--[2019-04-14 Sun 14:45] =>  0:41
+    CLOCK: [2019-04-14 Sun 13:21]--[2019-04-14 Sun 13:25] =>  0:04
+    CLOCK: [2019-04-14 Sun 12:52]--[2019-04-14 Sun 13:20] =>  0:28
+    CLOCK: [2019-04-14 Sun 07:08]--[2019-04-14 Sun 08:07] =>  0:59
     CLOCK: [2019-04-12 Fri 07:40]--[2019-04-12 Fri 07:58] =>  0:18
     CLOCK: [2019-04-10 Wed 16:50]--[2019-04-10 Wed 17:02] =>  0:12
     CLOCK: [2019-04-10 Wed 11:55]--[2019-04-10 Wed 12:05] =>  0:10
@@ -316,6 +320,7 @@ compile with clang 8.
 
 *** STARTED Fix snags with emacs                                      :story:
     :LOGBOOK:
+    CLOCK: [2019-04-14 Sun 14:46]--[2019-04-14 Sun 15:09] =>  0:23
     CLOCK: [2019-04-11 Thu 09:16]--[2019-04-11 Thu 09:20] =>  0:04
     CLOCK: [2019-04-11 Thu 08:02]--[2019-04-11 Thu 09:15] =>  1:13
     CLOCK: [2019-04-10 Wed 17:50]--[2019-04-10 Wed 20:05] =>  2:15
@@ -642,7 +647,7 @@ Notes:
 
 - the annotations model should really be called configuration because
   it deals with all of the primitives for configuration. Or better
-  yet: variability. Note that this model is concerned with structural
+  yet: variability2. Note that this model is concerned with structural
   variability. We will leave non-structural variability (configuration
   files) for another time. we need to split this out in the backlog.
 - the annotation class is really a typed configuration
@@ -786,6 +791,11 @@ this is coming from.
 
 Orchestration is a bit of a vague name. It is really the code
 generation engine of dogen. Its still very vague but slightly less so.
+
+Actually the real name of this model is something like
+"component". This will make sense once we add the product model. In
+addition we need to somehow share the "generation" model across coding
+and product models.
 
 *** Make extraction model name a qualified name                       :story:
 

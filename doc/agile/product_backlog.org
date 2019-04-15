@@ -2128,6 +2128,20 @@ Note that each model must have an associated version. The version
 should be part of the file name. However, maybe we need to distinguish
 between TS version (11, 17, etc) from library version.
 
+One way of solving this regularity problem (e.g. having
+masd::std::string is the real name but its annoying to have to have
+users typing this) is to support "using" statements at the model
+level. If a user could type something like =using masd= and this would
+allow us to find all types as if we had typed =masd::= then users
+could still type =std::string= and find =masd::std::string=. We'd
+solve both the regularity and the "look and feel". The downside is
+that this could have important ramifications in resolution:
+
+- how does this work in the presence of merged models? do we merge
+  usings? will this find types we're not supposed to find?
+
+Needs some more thinking.
+
 Merged stories:
 
 *Platform description models*
@@ -6983,6 +6997,61 @@ available:
 - GNU: gnu projects seem to have a well-defined structure, if not the
   most sensible.
 
+*Product Model*
+
+Actually we have been going about this all wrong. What we've called
+"orchestration" is in fact the product model. It is just lacking all
+other entities in the product meta-model such as:
+
+- injection/coding models: injection/coding models are themselves
+  modeling elements within the product meta-model. However, to avoid
+  having to load an entire coding/injection model, a product coding
+  model can contain only the key aspects of the injection/coding
+  models we're interested in: a) file or path to the model b)
+  references c) labels: these allow us to group models easily such as
+  say "pipeline" or "injection" etc. d) references: with this we can
+  make a product graph of model dependencies. We can also avoid
+  rereading models. we can also figure out what packages needed by the
+  model graph.
+- build systems: visual studio, msbuild, cmake
+- ctest
+- CI: travis, appveyor.
+- kubernetes support, docker support.
+- valgrind
+- compiler: clang, gcc, msvc, clang-cl. Version of the compiler. This
+  is used in several places such as the scripts, CI, etc.
+- operative system: windows, linux. used in installation scripts, CI,
+  etc.
+- dependencies for install scripts; these are sourced from the
+  component models.
+- manual: org mode, latex
+- org agile: product backlog, sprints, vision, etc.
+
+Notes:
+
+- a product may be associated with one or more primary technical
+  spaces (e.g. support for say C# and C++ in the same model). This
+  would have an impact at the product level.
+- a product could have some simple wale templates so that when you
+  initialise a product you would get a trivial dia model with a simple
+  entry point (for executables) or a library with maybe no types.
+- when generating a product we can generate all models (product and
+  component), generate just the product, generate a specific component
+  or generate a label (which groups components).
+- we need a "init" command that initialises a product. It needs a
+  product name and maybe some other parameters to determine what to
+  add. Maybe it just makes a product model and asks the user to fill
+  it in instead.
+- there are several types of component models: 1) models that do not
+  generate anything at all. these are useful for defining templates,
+  configurations, etc. 2) regular component models 3) product
+  models. 4) platform definition models that are used to adapt
+  existing libraries into MASD.
+- in this sense, we have two different models: product and
+  component. Both of these need to be projected into artefact space
+  (because we have multiple facets in products as well). This means we
+  somehow need to use archetypes from both models.
+
 Links:
 
 - [[https://github.com/bkaradzic/GENie][GENie - Project generator tool]]
@@ -6992,6 +7061,7 @@ Links:
   quickly start new CMake-based projects. The tool generates an entire
   C++ project with boiler-plate CMake files and source code, and the
   generated project can be downloaded as a zip file."
+- [[https://awfulcode.io/2019/04/13/professional-zero-cost-setup-for-c-projects-part-1-of-n/][Professional, zero-cost setup for C++ projects (Part 1 of N)]]:
 
 *** Add conversion (encoding) support for Dia                         :story:
 
