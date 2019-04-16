@@ -60,8 +60,6 @@
 #include "masd.dogen.variability/io/meta_model/feature_template_io.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_point_io.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_template_io.hpp"
-#include "masd.dogen.variability/io/unbound_configurations_repository_io.hpp"
-#include "masd.dogen.variability/io/configuration_templates_repository_io.hpp"
 #include "masd.dogen.variability/io/transforms/configuration_processing_io.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_point_template_io.hpp"
 #include "masd.dogen.variability/io/meta_model/unbound_configurations_repository_io.hpp"

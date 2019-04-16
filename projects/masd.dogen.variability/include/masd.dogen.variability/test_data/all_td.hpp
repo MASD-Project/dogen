@@ -60,8 +60,6 @@
 #include "masd.dogen.variability/test_data/meta_model/feature_template_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/configuration_point_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/configuration_template_td.hpp"
-#include "masd.dogen.variability/test_data/unbound_configurations_repository_td.hpp"
-#include "masd.dogen.variability/test_data/configuration_templates_repository_td.hpp"
 #include "masd.dogen.variability/test_data/transforms/configuration_processing_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/configuration_point_template_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/unbound_configurations_repository_td.hpp"

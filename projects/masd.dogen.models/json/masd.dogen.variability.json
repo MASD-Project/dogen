@@ -417,16 +417,6 @@
       ]
     },
     {
-      "name": "configuration_templates_repository",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "by_name",
-          "type": "std::unordered_map<std::string, profile>"
-        }
-      ]
-    },
-    {
       "name": "entry_template",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -563,23 +553,6 @@
         "masd.generation.cpp.types.forward_declarations.enabled": "true"
       },
       "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "configuration_templates_repository_factory",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "unbound_configurations_repository",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "by_name",
-          "type": "std::unordered_map<std::string, annotation>"
-        }
-      ]
     },
     {
       "name": "meta_model",
