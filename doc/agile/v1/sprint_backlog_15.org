@@ -13,26 +13,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-15 Mon 17:41]
+#+CAPTION: Clock summary at [2019-04-16 Tue 08:24]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *52:21* |       |       | 100.0 |
+| *Total time*                                           | *53:55* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 52:21   |       |       | 100.0 |
-| Active                                                 |         | 52:21 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  4:21 |   8.3 |
-| Sprint and product backlog grooming                    |         |       |  4:24 |   8.4 |
-| Create a video demo for the previous sprint's features |         |       |  1:35 |   3.0 |
-| Fix issues with emacs                                  |         |       |  2:01 |   3.9 |
-| Fix issues with nightly build                          |         |       |  0:08 |   0.3 |
+| Stories                                                | 53:55   |       |       | 100.0 |
+| Active                                                 |         | 53:55 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  4:21 |   8.1 |
+| Sprint and product backlog grooming                    |         |       |  4:24 |   8.2 |
+| Create a video demo for the previous sprint's features |         |       |  1:35 |   2.9 |
+| Fix issues with emacs                                  |         |       |  2:01 |   3.7 |
+| Fix issues with nightly build                          |         |       |  0:08 |   0.2 |
 | Add diffing support to string asserter                 |         |       |  1:00 |   1.9 |
-| C# generation is borked                                |         |       |  4:12 |   8.0 |
-| Reactivate the boilerplate tests                       |         |       |  5:58 |  11.4 |
-| Update to clang8                                       |         |       |  0:11 |   0.4 |
-| Fix snags with emacs                                   |         |       |  5:50 |  11.1 |
-| Profiles as meta-model elements                        |         |       |  8:01 |  15.3 |
-| Redesign annotations model                             |         |       | 14:40 |  28.0 |
+| C# generation is borked                                |         |       |  4:12 |   7.8 |
+| Reactivate the boilerplate tests                       |         |       |  5:58 |  11.1 |
+| Update to clang8                                       |         |       |  0:11 |   0.3 |
+| Nursing nightlies                                      |         |       |  0:22 |   0.7 |
+| Fix snags with emacs                                   |         |       |  5:50 |  10.8 |
+| Profiles as meta-model elements                        |         |       |  8:01 |  14.9 |
+| Redesign annotations model                             |         |       | 15:52 |  29.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -317,6 +318,15 @@ Split these out into decoration tests and boilerplate tests.
 We seem to have a lot of spurious errors with clangd-7. Try with
 clangd-8. However, in order to do this we need to get the code to
 compile with clang 8.
+
+*** STARTED Nursing nightlies                                         :story:
+    :LOGBOOK:
+    CLOCK: [2019-04-16 Tue 06:50]--[2019-04-16 Tue 07:12] =>  0:22
+    :END:
+
+Time taken fixing assorted issues with nightly builds.
+
+- changing compilers to clang8 caused nightlies to break.
 
 *** STARTED Fix snags with emacs                                      :story:
     :LOGBOOK:
@@ -603,6 +613,7 @@ Notes:
 
 *** STARTED Redesign annotations model                                :story:
     :LOGBOOK:
+    CLOCK: [2019-04-16 Tue 07:12]--[2019-04-16 Tue 08:24] =>  1:12
     CLOCK: [2019-04-15 Mon 14:05]--[2019-04-15 Mon 17:41] =>  3:36
     CLOCK: [2019-04-13 Sat 14:38]--[2019-04-13 Sat 17:41] =>  3:03
     CLOCK: [2019-04-13 Sat 12:55]--[2019-04-13 Sat 14:37] =>  1:42
