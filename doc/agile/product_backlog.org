@@ -1750,7 +1750,7 @@ weaving as well). We could probably deduce it: if the user supplied a
 directory as a target, we should do it in directory mode.
 
 *** Add stereotype for IoC containers                                 :story:
-<review>
+
 At present we are marking IoC containers with either handcrafted or
 header only. In reality, they should have their own stereotype and
 colours as, in the future, we want to code generate them. However, we
@@ -1782,7 +1782,8 @@ make sense. We need some way of "forcing" enablement for some features
 where there is such a hard dependency. This is probably something we
 need to look at when we implement "computable enablement". We then
 need some way of telling the system about these dependencies:
-e.g. visitor requires enablement x, y, z.
+e.g. visitor requires enablement x, y, z. This should done in archetypes
+by declaring facet depencies.
 
 A second problem is that, at present, there is no way to manually
 enable (force) forward declarations on visitors. We can enable them on
@@ -2030,7 +2031,8 @@ Tasks:
 We need to move all functionality which is not kernel specific into
 yarn for the locator. This will exist in the helpers namespace. We
 then need to implement the C++ locator as a composite of yarn
-locator. It will live in fabric.
+locator. It will live in fabric. Actually this will now be part of
+archetypes now.
 
 *Other Notes*
 
@@ -2436,16 +2438,14 @@ What we really need is the concept of a technical space in the
 metamodel, as well as a "version" for that technical space, and then
 also the concept of a facet. Then we are effectively building
 (weaving?) an instance of a theoretical TS based on the configuration
-(positive variability). We can then validate the configuration.
+(positive variability). We can then validate the configuration. This
+should all now be part of archetypes. The versions can be attributes
+of technical space with a string version (e.g. "c++ 98) and a numeric
+version (1 say) so that we can make comparisons (e.g. c++ 17 > c++ 98).
 
-*Merged stories*
+Merged stories
 
-Facets incompatible with standards
-
-Some facets may not be supported for all settings of a language. For
-example the hash facet is not compatible with C++ 98. We need to have
-some kind of facet/formatter level validation for this.
-
+*Facets incompatible with standards*
 
 Some facets may not be supported for all settings of a language. For
 example the hash facet is not compatible with C++ 98. We need to have
@@ -2521,7 +2521,7 @@ Notes:
   allowing concepts to be placed in packages.
 
 *** Move dependencies into generation                                 :story:
-
+<review>
 Actually the dependencies will be generated at the kernel level
 because 99% of the code is kernel specific. However, we need to make
 it an external transform.
