@@ -25,24 +25,26 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
 
 namespace masd::dogen::variability::helpers {
 
+/**
+ * @brief Merges two configurations.
+ *
+ * Merging works by taking all configuration points in lhs and rhs and
+ * making a configuration with their superset. If a key exists in
+ * both, rhs takes precedence. Note that this makes merging not
+ * commutative, so the order of lhs/rhs matters.
+ */
 class configuration_merger final {
 public:
-    configuration_merger() = default;
-    configuration_merger(const configuration_merger&) = default;
-    configuration_merger(configuration_merger&&) = default;
-    ~configuration_merger() = default;
-    configuration_merger& operator=(const configuration_merger&) = default;
-
-public:
-    bool operator==(const configuration_merger& rhs) const;
-    bool operator!=(const configuration_merger& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * @brief Merges the two configurations according to the merging
+     * rules,
+     */
+    meta_model::configuration merge(const meta_model::configuration& lhs,
+        const meta_model::configuration& rhs) const;
 };
 
 }

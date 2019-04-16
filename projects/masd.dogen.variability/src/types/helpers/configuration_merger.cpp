@@ -18,12 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_merger.hpp"
+
+namespace {
+
+using namespace masd::dogen::utility::log;
+static logger lg(logger_factory("variability.helpers..configuration_merger"));
+
+}
 
 namespace masd::dogen::variability::helpers {
 
-bool configuration_merger::operator==(const configuration_merger& /*rhs*/) const {
-    return true;
+meta_model::configuration
+configuration_merger::merge(const meta_model::configuration& lhs,
+    const meta_model::configuration& rhs) const {
+    BOOST_LOG_SEV(lg, debug) << "Merging configurations. Lhs"
+                             << lhs.name().qualified()
+                             << " Rhs: " << rhs.name().qualified();
+
+    meta_model::configuration r(lhs);
+    for (const auto& cp : rhs.configuration_points())
+        r.configuration_points().insert(cp);
+
+    BOOST_LOG_SEV(lg, debug) << "Merged configurations.";
+    return r;
 }
 
 }
