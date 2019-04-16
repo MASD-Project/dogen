@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.variability/types/helpers/configuration_point_selector.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 
 namespace masd::dogen::variability::helpers {
 
-bool configuration_point_selector::operator==(const configuration_point_selector& /*rhs*/) const {
+bool configuration_selector::operator==(const configuration_selector& /*rhs*/) const {
     return true;
 }
 

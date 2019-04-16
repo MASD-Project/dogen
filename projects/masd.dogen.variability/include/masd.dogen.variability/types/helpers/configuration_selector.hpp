@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_VARIABILITY_TYPES_HELPERS_CONFIGURATION_POINT_SELECTOR_HPP
-#define MASD_DOGEN_VARIABILITY_TYPES_HELPERS_CONFIGURATION_POINT_SELECTOR_HPP
+#ifndef MASD_DOGEN_VARIABILITY_TYPES_HELPERS_CONFIGURATION_SELECTOR_HPP
+#define MASD_DOGEN_VARIABILITY_TYPES_HELPERS_CONFIGURATION_SELECTOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,17 +29,17 @@
 
 namespace masd::dogen::variability::helpers {
 
-class configuration_point_selector final {
+class configuration_selector final {
 public:
-    configuration_point_selector() = default;
-    configuration_point_selector(const configuration_point_selector&) = default;
-    configuration_point_selector(configuration_point_selector&&) = default;
-    ~configuration_point_selector() = default;
-    configuration_point_selector& operator=(const configuration_point_selector&) = default;
+    configuration_selector() = default;
+    configuration_selector(const configuration_selector&) = default;
+    configuration_selector(configuration_selector&&) = default;
+    ~configuration_selector() = default;
+    configuration_selector& operator=(const configuration_selector&) = default;
 
 public:
-    bool operator==(const configuration_point_selector& rhs) const;
-    bool operator!=(const configuration_point_selector& rhs) const {
+    bool operator==(const configuration_selector& rhs) const;
+    bool operator!=(const configuration_selector& rhs) const {
         return !this->operator==(rhs);
     }
 
