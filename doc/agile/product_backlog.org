@@ -34,6 +34,9 @@ configuration" or configurable or some such. When reading the
 configuration, we need to validate that none of the entry templates
 contain fields with this value set to false.
 
+Its not quite "supporting configuration", more like " supporting
+unbound configurations". All features are by definition configurable.
+
 *** Consider inheriting annotations and stereotypes                   :story:
 
 At present we need to define the stereotype
@@ -50,6 +53,9 @@ this:
 
 : descendant_stereotypes=xyz
 : implementer_stereotypes=xyz
+
+Or perhaps "propagate across inheritance". This is in effect, a variation
+of IPC (implicit presence conditions).
 
 *** Create metamodel elements for =entry_point= and =interface=       :story:
 
@@ -332,7 +338,6 @@ A related point is to do with cases where the meta-element requires
 specific configuration:
 
 - entry point, interface: should be types only.
-
 
 For these cases, it would be nice if we could associate a stereotype
 with the metaclass and then all instances would inherit these.
@@ -619,7 +624,8 @@ mappings in the meta-model.
 *** Colours test model is invalid at present                          :story:
 
 We should probably generate this model; at the moment, we have many
-missing elements/meta-data, causing dogen to choke.
+missing elements/meta-data, causing dogen to choke. However we need a way
+to make the model generate nothing.
 
 *** Pre-includes defines                                              :story:
 
@@ -757,6 +763,7 @@ And so on. Then we can associate each formatter with a destination:
 
 Notes:
 
+- these should be in archetypes models.
 - with this we can now map any formatter to any folder, particularly
   if this is done at the element level. That is, you can easily define
   a global mapping for all formatters, and then override it
@@ -1520,6 +1527,9 @@ case yet.
   formatters.
 - consider renaming formatters to model to text transforms.
 
+Actually, the name of this model is not clear. We need to wait for the
+product model clean up before we tackle this rename.
+
 *** Report validation errors like compilers do                        :story:
 
 It would be very useful to output validation errors like a compiler,
@@ -1601,7 +1611,8 @@ information about what they are processing (e.g. model).
 
 *** Rename =transformation_error= to =transform_exception=            :story:
 
-In keeping with the framework guidelines for naming exceptions.
+In keeping with the framework guidelines for naming exceptions. We need to 
+also look at all other exceptions.
 
 *** Consider replacing the associations against object templates      :story:
 
@@ -1739,7 +1750,7 @@ weaving as well). We could probably deduce it: if the user supplied a
 directory as a target, we should do it in directory mode.
 
 *** Add stereotype for IoC containers                                 :story:
-
+<review>
 At present we are marking IoC containers with either handcrafted or
 header only. In reality, they should have their own stereotype and
 colours as, in the future, we want to code generate them. However, we
