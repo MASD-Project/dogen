@@ -22,11 +22,13 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
+#include "masd.dogen.tracing/types/tracer.hpp"
+#include "masd.dogen.archetypes/io/location_repository_io.hpp"
+#include "masd.dogen.archetypes/types/location_repository_builder.hpp"
+#include "masd.dogen.variability/io/type_repository_io.hpp"
 #include "masd.dogen.variability/types/annotation_factory.hpp"
 #include "masd.dogen.variability/types/annotation_expander.hpp"
 #include "masd.dogen.variability/types/type_repository_factory.hpp"
-#include "masd.dogen.archetypes/types/location_repository_builder.hpp"
-#include "masd.dogen.tracing/types/tracer.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
@@ -38,6 +40,9 @@ namespace {
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory("orchestration.transforms.context_factory"));
+
+const std::string alrp_input_id("archetype_location_repository");
+const std::string trp_input_id("type_repository");
 
 const std::string duplicate_segment("Duplicat segment: ");
 
@@ -131,8 +136,7 @@ make_injection_context(const configuration& cfg) {
      * Setup the tracer. Note that we do it regardless of whether
      * tracing is enabled or not - its the tracer job to handle that.
      */
-    const auto tracer(
-        boost::make_shared<tracing::tracer>(*alrp, *atrp, cfg.tracing()));
+    const auto tracer(boost::make_shared<tracing::tracer>(cfg.tracing()));
     r.tracer(tracer);
 
     return r;
@@ -207,12 +211,14 @@ context context_factory::make_context(const configuration& cfg,
      * Setup the tracer. Note that we do it regardless of whether
      * tracing is enabled or not - its the tracer job to handle that.
      */
-    const auto tracer(
-        boost::make_shared<tracing::tracer>(*alrp, *atrp, cfg.tracing()));
+    const auto tracer(boost::make_shared<tracing::tracer>(cfg.tracing()));
     r.injection_context().tracer(tracer);
     r.coding_context().tracer(tracer);
     r.generation_context().tracer(tracer);
     r.extraction_context().tracer(tracer);
+
+    tracer->add_initial_input(alrp_input_id, *alrp);
+    tracer->add_initial_input(trp_input_id, *atrp);
 
     /*
      * Setup the diffing and operational reporting configuration.

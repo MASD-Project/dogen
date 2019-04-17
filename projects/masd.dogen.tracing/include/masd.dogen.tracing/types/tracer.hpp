@@ -31,8 +31,6 @@
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen/types/tracing_configuration.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
-#include "masd.dogen.archetypes/types/location_repository.hpp"
 #include "masd.dogen.tracing/types/metrics.hpp"
 #include "masd.dogen.tracing/types/metrics_builder.hpp"
 
@@ -46,9 +44,7 @@ public:
     tracer(const tracer&) = default;
 
 public:
-    tracer(const archetypes::location_repository& alrp,
-        const variability::type_repository& atrp,
-        const boost::optional<tracing_configuration>& cfg);
+    explicit tracer(const boost::optional<tracing_configuration>& cfg);
 
 private:
     void validate() const;
@@ -58,10 +54,6 @@ private:
     void handle_current_directory() const;
     void ensure_transform_position_not_empty() const;
 
-    void write_initial_inputs(
-        const archetypes::location_repository& alrp,
-        const variability::type_repository& atrp) const;
-
     boost::filesystem::path
     full_path_for_writing(const std::string& transform_id,
         const std::string& type) const;
@@ -70,6 +62,22 @@ private:
     full_path_for_writing(const std::string& filename) const;
 
 public:
+    /**
+     * @brief Writes an initial input to the filesystem.
+     */
+    template<typename Ioable>
+    void add_initial_input(const std::string& input_id,
+        const Ioable& input) const {
+
+        if (!detailed_tracing_enabled())
+            return;
+
+        ensure_transform_position_not_empty();
+        const auto p(full_path_for_writing(input_id, "initial_input"));
+        ++transform_position_.top();
+        utility::filesystem::write(p, input);
+    }
+
     void start_chain(const std::string& transform_id) const;
     void start_chain(const std::string& transform_id,
         const std::string& model_id) const;

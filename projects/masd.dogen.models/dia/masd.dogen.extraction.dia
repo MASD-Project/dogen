@@ -68,7 +68,7 @@
         <dia:point val="-85,-79"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-85.05,-79.05;-57.87,-57.25"/>
+        <dia:rectangle val="-85.05,-79.05;-57.87,-56.45"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="21.700000000000003"/>
+        <dia:real val="22.500000000000004"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -108,6 +108,7 @@ not technical space specific.
 #DOGEN masd.injection.reference=masd.dogen.tracing
 #DOGEN masd.injection.reference=masd.dogen.variability
 #DOGEN masd.injection.reference=masd
+#DOGEN masd.injection.reference=masd.dogen
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
@@ -6334,7 +6335,7 @@ external technical spaces.
         <dia:point val="-62,43.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-65.5337,42.85;-61.25,48.8"/>
+        <dia:rectangle val="-65.5338,42.85;-61.25,48.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

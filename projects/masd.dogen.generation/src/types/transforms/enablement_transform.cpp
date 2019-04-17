@@ -24,6 +24,7 @@
 #include "masd.dogen.utility/types/io/unordered_set_io.hpp"
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.archetypes/types/location_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.generation/io/meta_model/model_io.hpp"
 #include "masd.dogen.generation/io/meta_model/facet_properties_io.hpp"

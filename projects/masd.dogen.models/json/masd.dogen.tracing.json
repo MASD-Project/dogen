@@ -7,8 +7,6 @@
     "masd.injection.reference": "cpp.builtins",
     "masd.injection.reference": "cpp.boost",
     "masd.injection.reference": "cpp.std",
-    "masd.injection.reference": "masd.dogen",
-    "masd.injection.reference": "masd.dogen.variability",
     "masd.injection.reference": "masd",
     "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
     "masd.extraction.ignore_files_matching_regex": ".*/test/.*",

@@ -60,8 +60,7 @@ transforms::context mock_context_factory::make() {
     r.mapping_repository(msrp);
 
     boost::optional<tracing_configuration> tcfg;
-    auto tracer(boost::make_shared<tracing::tracer>(
-            *alrp, *atrp, tcfg));
+    auto tracer(boost::make_shared<tracing::tracer>(tcfg));
     r.tracer(tracer);
 
     const auto af(boost::make_shared<variability::annotation_factory>(

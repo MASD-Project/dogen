@@ -45,7 +45,6 @@ endif ()
 target_link_libraries(${lib_target_name}
     masd.dogen.lib
     masd.dogen.utility.lib
-    masd.dogen.variability.lib
     $<$<BOOL:${use_msvc_libs}>:bcrypt>
     ${Boost_LIBRARIES})
 

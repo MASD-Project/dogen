@@ -21,6 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
+#include "masd.dogen.archetypes/types/location_repository.hpp"
 #include "masd.dogen.variability/io/type_io.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"

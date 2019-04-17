@@ -22,12 +22,19 @@ const std::string run_activity("byproduct_generation");
 const std::string transform_stats_org_fn("transform_stats.org");
 const std::string transform_stats_text_fn("transform_stats.txt");
 const std::string transform_stats_graphviz_fn("transform_stats.dot");
-const std::string archetype_location_fn(
-    "000-archetype_location_repository.json");
+const std::string archetype_location_prefix(
+    "000-archetype_location_repository-");
+const std::string type_repository_prefix(
+    "001-type_repository-");
+const std::string archetype_location_postfix(
+    "-initial_input.json");
+const std::string type_repository_postfix(
+    "-initial_input.json");
 const std::string injection_transform_prefix(
     "001-injection.dia.decoding_transform-");
-const std::string first_short_name("000.json");
-const std::string second_short_name("001.json");
+const std::string first_short_name("000-initial_input.json");
+const std::string second_short_name("001-initial_input.json");
+const std::string third_short_name("004-input.json");
 const std::string injection_transform_postfix("-input.json");
 const std::regex tracing_regex(".*/tracing/.*");
 const std::regex guid_regex(
@@ -128,14 +135,17 @@ void apply_transforms(const configuration& cfg, const path& output_dir,
     const auto m(extraction_model_production_chain::apply(ctx, target));
 }
 
-bool are_tracing_files_healthy(const configuration& cfg) {
+bool are_tracing_files_healthy(const configuration& cfg,
+    masd::dogen::utility::log::logger lg) {
     /*
      * Ensure we have created a byproducts directory.
      */
     using namespace boost::filesystem;
     if (!exists(cfg.byproduct_directory()))
         return false;
-    BOOST_TEST_MESSAGE("Directory exists.");
+
+    using namespace masd::dogen::utility::log;
+    BOOST_LOG_SEV(lg, debug) << "Directory exists.";
 
     /*
      * Ensure we have created the minimum number of expected files.
@@ -145,7 +155,8 @@ bool are_tracing_files_healthy(const configuration& cfg) {
     const auto files(find_files(cfg.byproduct_directory()));
     if (files.size() < minimum_number)
         return false;
-    BOOST_TEST_MESSAGE("Files." << files.size());
+
+    BOOST_LOG_SEV(lg, debug) << "Files." << files.size();
 
     /*
      * Ensure all files have the minimum content size and find a
@@ -153,6 +164,7 @@ bool are_tracing_files_healthy(const configuration& cfg) {
      */
     bool found_transform_stats(false);
     bool found_archetype_location(false);
+    bool found_type_repository(false);
     bool found_injection_dia_transform(false);
     for (const auto& f : files) {
         /*
@@ -160,7 +172,8 @@ bool are_tracing_files_healthy(const configuration& cfg) {
          */
         const boost::uintmax_t minimum_size(50);
         const auto sz(file_size(f));
-        BOOST_TEST_MESSAGE("Size." << sz);
+        BOOST_LOG_SEV(lg, debug) << "Size." << sz;
+
         if (sz < minimum_size)
             return false;
 
@@ -168,7 +181,8 @@ bool are_tracing_files_healthy(const configuration& cfg) {
          * We only expect files inside the tracing directory.
          */
         const auto gs(f.generic_string());
-        BOOST_TEST_MESSAGE("gs." << gs);
+        BOOST_LOG_SEV(lg, debug) << "gs: " << gs;
+
         if (!std::regex_match(gs, tracing_regex))
             return false;
 
@@ -183,16 +197,24 @@ bool are_tracing_files_healthy(const configuration& cfg) {
             else if (fn == first_short_name)
                 found_archetype_location = true;
             else if (fn == second_short_name)
+                found_type_repository = true;
+            else if (fn == third_short_name)
                 found_injection_dia_transform = true;
         } else {
             if (fn == transform_stats_org_fn)
                 found_transform_stats = true;
-            else if (fn == archetype_location_fn)
+            else if (boost::starts_with(fn, archetype_location_prefix) &&
+                boost::ends_with(fn, archetype_location_postfix)) {
                 found_archetype_location = true;
-            else if (boost::starts_with(fn, injection_transform_prefix) &&
+                BOOST_LOG_SEV(lg, debug) << "Found archetype location: " << gs;
+            } else if (boost::starts_with(fn, type_repository_prefix) &&
+                boost::ends_with(fn, type_repository_postfix)) {
+                found_type_repository = true;
+                BOOST_LOG_SEV(lg, debug) << "Found type repository: " << gs;
+            } else if (boost::starts_with(fn, injection_transform_prefix) &&
                 boost::ends_with(fn, injection_transform_postfix)) {
                 found_injection_dia_transform = true;
-                BOOST_TEST_MESSAGE("Found injection.");
+                BOOST_LOG_SEV(lg, debug) << "Found injection: " << gs;
 
                 /*
                  * Ensure filenames have a guid (since we requested it in
@@ -201,22 +223,32 @@ bool are_tracing_files_healthy(const configuration& cfg) {
                 auto guid(fn);
                 boost::erase_first(guid, injection_transform_prefix);
                 boost::erase_first(guid, injection_transform_postfix);
-                BOOST_TEST_MESSAGE("guid:" << guid);
+                BOOST_LOG_SEV(lg, debug) << "guid:" << guid;
+
                 if (guid.size() != 36)
                     return false;
 
-                BOOST_TEST_MESSAGE("before regex match");
+                BOOST_LOG_SEV(lg, debug) << "before regex match.";
                 if (!std::regex_match(guid, guid_regex))
                     return false;
 
-                BOOST_TEST_MESSAGE("after regex match");
+                BOOST_LOG_SEV(lg, debug) << "after regex match.";
             }
         }
     }
+
+    BOOST_LOG_SEV(lg, debug) << "found_transform_stats: "
+                             << found_transform_stats
+                             << " found_archetype_location: "
+                             << found_archetype_location
+                             << " found_type_repository: "
+                             << found_type_repository
+                             << " found_injection_dia_transform: "
+                             << found_injection_dia_transform;
+
     return
-        found_transform_stats &&
-        found_archetype_location &&
-        found_injection_dia_transform;
+        found_transform_stats && found_archetype_location &&
+        found_type_repository && found_injection_dia_transform;
 }
 
 }
@@ -237,7 +269,7 @@ BOOST_AUTO_TEST_SUITE(byproduct_generation_tests)
  */
 #ifndef _WIN32
 BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_org_mode_results_in_expected_trace_files) {
-    SETUP_TEST_LOG("enabling_detailed_tracing_with_org_moderesults_in_expected_trace_files");
+    SETUP_TEST_LOG_SOURCE("enabling_detailed_tracing_with_org_mode_results_in_expected_trace_files");
 
     const auto t(dogen_generation::input_masd_dogen_dia());
     const std::string id("detailed_tracing_org_mode");
@@ -250,7 +282,7 @@ BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_org_mode_results_in_expected
     const auto od(dogen_generation::output_directory() / id);
     apply_transforms(cfg, od, t);
 
-    BOOST_CHECK(are_tracing_files_healthy(cfg));
+    BOOST_CHECK(are_tracing_files_healthy(cfg, lg));
 }
 #endif
 
@@ -303,7 +335,7 @@ BOOST_AUTO_TEST_CASE(enabling_summary_tracing_with_graphviz_results_in_expected_
 }
 
 BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_short_names_results_in_expected_trace_files) {
-    SETUP_TEST_LOG("enabling_detailed_tracing_with_short_names_results_in_expected_trace_files");
+    SETUP_TEST_LOG_SOURCE("enabling_detailed_tracing_with_short_names_results_in_expected_trace_files");
 
     const auto t(dogen_generation::input_masd_dogen_dia());
     const std::string id("detail_tracing_short_names");
@@ -317,7 +349,7 @@ BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_short_names_results_in_expec
     const auto od(dogen_generation::output_directory() / id);
     apply_transforms(cfg, od, t);
 
-    BOOST_CHECK(are_tracing_files_healthy(cfg));
+    BOOST_CHECK(are_tracing_files_healthy(cfg, lg));
 }
 
 BOOST_AUTO_TEST_CASE(enabling_diffing_results_in_expected_trace_files) {

@@ -88,9 +88,7 @@ boost::filesystem::path get_current_directory(
 
 namespace masd::dogen::tracing {
 
-tracer::tracer(const archetypes::location_repository& alrp,
-    const variability::type_repository& atrp,
-    const boost::optional<tracing_configuration>& cfg) :
+tracer::tracer(const boost::optional<tracing_configuration>& cfg) :
     configuration_(cfg),
     builder_(get_logging_impact(cfg), get_tracing_impact(cfg)),
     current_directory_(get_current_directory(cfg)) {
@@ -106,7 +104,6 @@ tracer::tracer(const archetypes::location_repository& alrp,
         return;
 
     transform_position_.push(0);
-    write_initial_inputs(alrp, atrp);
 }
 
 void tracer::validate() const {
@@ -228,25 +225,6 @@ boost::filesystem::path tracer::full_path_for_writing(
     s << delimiter << type << extension;
 
     return current_directory_ / s.str();
-}
-
-void tracer::write_initial_inputs(
-    const archetypes::location_repository& alrp,
-    const variability::type_repository& atrp) const {
-
-    BOOST_LOG_SEV(lg, debug) << "Writing initial inputs.";
-
-    ensure_transform_position_not_empty();
-    auto path(full_path_for_writing("archetype_location_repository"));
-    BOOST_LOG_SEV(lg, debug) << "Writing: " << path.generic_string();
-    utility::filesystem::write(path, alrp);
-
-    ++transform_position_.top();
-    path = full_path_for_writing("type_repository");
-    BOOST_LOG_SEV(lg, debug) << "Writing: " << path.generic_string();
-    utility::filesystem::write(path, atrp);
-
-    BOOST_LOG_SEV(lg, debug) << "Finish writing initial inputs.";
 }
 
 void tracer::start_transform(const std::string& transform_id) const {
