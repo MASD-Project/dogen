@@ -34,6 +34,9 @@ configuration" or configurable or some such. When reading the
 configuration, we need to validate that none of the entry templates
 contain fields with this value set to false.
 
+Its not quite "supporting configuration", more like " supporting
+unbound configurations". All features are by definition configurable.
+
 *** Consider inheriting annotations and stereotypes                   :story:
 
 At present we need to define the stereotype
@@ -50,6 +53,9 @@ this:
 
 : descendant_stereotypes=xyz
 : implementer_stereotypes=xyz
+
+Or perhaps "propagate across inheritance". This is in effect, a variation
+of IPC (implicit presence conditions).
 
 *** Create metamodel elements for =entry_point= and =interface=       :story:
 
@@ -362,6 +368,57 @@ way to declare all of the formatters dependencies. Then, we could
 switch to building all of the stitch boilerplate outside of stitch and
 supplying it as a KVP.
 
+*** Meta-element configuration                                        :story:
+
+It is becoming obvious that there is a need to explicitly model
+meta-elements. A good example are the wale templates for handcrafted
+types. Say we want to associate a wale template with =entry_point=. We
+need one for C# and one for C++. We have the following alternatives:
+
+- the user needs to manually supply these as meta-data parameters
+  every time it creates an entry point.
+- next level is to have profiles: we could define a profile with these
+  parameters and the user is responsible for applying it to entry
+  points as required. This is flexible because users could choose
+  different wale templates. However, its painful that there isn't a
+  default wale template.
+- we could hard-code the default wale template into the field's value,
+  so that you'd get that value if you don't supply any. At least now
+  there is a default, but its hard-coded.
+- finally, if we could create a =<<metaclass= in a diagram, we could
+  then add the default values there _as data_.
+
+A related point is to do with cases where the meta-element requires
+specific configuration:
+
+- entry point, interface: should be types only.
+
+For these cases, it would be nice if we could associate a stereotype
+with the metaclass and then all instances would inherit these.
+
+This is actually simpler to implement than it may appear. We just need
+to have a meta-element of type =metaclass=, with an annotation and a
+name. The name of the metaclass is the element it is configuring
+(e.g. =entry_point=). We could have a transform that sets the static
+stereotype of the element based on the name for good measure. Then,
+during the profile merging, we could simply merge first its annotation
+into all elements of this type. Then we would continue with the
+profile merging. We could also do a hack and have a =root_module=
+=metaclass= which could be used for defaults. However, it is not clear
+when we should use this as opposed to plain stereotypes. The good
+thing about stereotypes is that we make the relationships explicit,
+whereas with =metaclass= we are making them slightly less transparent.
+
+If dogen had a way to set static properties, we could have a transform
+that updated all elements with their metaclass, so that you could
+simply do:
+
+: element.metaclass().name();
+: element.metaclass().annotation();
+
+This should be very simple to do, we just need a way to know if an
+attribute is static or not.
+
 *** Stitch extension is hard-coded                                    :story:
 
 At present we have hard-coded the file extension in the output of
@@ -621,7 +678,8 @@ mappings in the meta-model.
 *** Colours test model is invalid at present                          :story:
 
 We should probably generate this model; at the moment, we have many
-missing elements/meta-data, causing dogen to choke.
+missing elements/meta-data, causing dogen to choke. However we need a way
+to make the model generate nothing.
 
 *** Pre-includes defines                                              :story:
 
@@ -759,6 +817,7 @@ And so on. Then we can associate each formatter with a destination:
 
 Notes:
 
+- these should be in archetypes models.
 - with this we can now map any formatter to any folder, particularly
   if this is done at the element level. That is, you can easily define
   a global mapping for all formatters, and then override it
@@ -1500,6 +1559,9 @@ case yet.
   formatters.
 - consider renaming formatters to model to text transforms.
 
+Actually, the name of this model is not clear. We need to wait for the
+product model clean up before we tackle this rename.
+
 *** Report validation errors like compilers do                        :story:
 
 It would be very useful to output validation errors like a compiler,
@@ -1581,7 +1643,8 @@ information about what they are processing (e.g. model).
 
 *** Rename =transformation_error= to =transform_exception=            :story:
 
-In keeping with the framework guidelines for naming exceptions.
+In keeping with the framework guidelines for naming exceptions. We need to
+also look at all other exceptions.
 
 *** Consider replacing the associations against object templates      :story:
 
@@ -1751,7 +1814,8 @@ make sense. We need some way of "forcing" enablement for some features
 where there is such a hard dependency. This is probably something we
 need to look at when we implement "computable enablement". We then
 need some way of telling the system about these dependencies:
-e.g. visitor requires enablement x, y, z.
+e.g. visitor requires enablement x, y, z. This should done in archetypes
+by declaring facet depencies.
 
 A second problem is that, at present, there is no way to manually
 enable (force) forward declarations on visitors. We can enable them on
@@ -1999,7 +2063,8 @@ Tasks:
 We need to move all functionality which is not kernel specific into
 yarn for the locator. This will exist in the helpers namespace. We
 then need to implement the C++ locator as a composite of yarn
-locator. It will live in fabric.
+locator. It will live in fabric. Actually this will now be part of
+archetypes now.
 
 *Other Notes*
 
@@ -2386,16 +2451,14 @@ What we really need is the concept of a technical space in the
 metamodel, as well as a "version" for that technical space, and then
 also the concept of a facet. Then we are effectively building
 (weaving?) an instance of a theoretical TS based on the configuration
-(positive variability). We can then validate the configuration.
+(positive variability). We can then validate the configuration. This
+should all now be part of archetypes. The versions can be attributes
+of technical space with a string version (e.g. "c++ 98) and a numeric
+version (1 say) so that we can make comparisons (e.g. c++ 17 > c++ 98).
 
-*Merged stories*
+Merged stories
 
-Facets incompatible with standards
-
-Some facets may not be supported for all settings of a language. For
-example the hash facet is not compatible with C++ 98. We need to have
-some kind of facet/formatter level validation for this.
-
+*Facets incompatible with standards*
 
 Some facets may not be supported for all settings of a language. For
 example the hash facet is not compatible with C++ 98. We need to have
@@ -2471,7 +2534,7 @@ Notes:
   allowing concepts to be placed in packages.
 
 *** Move dependencies into generation                                 :story:
-
+<review>
 Actually the dependencies will be generated at the kernel level
 because 99% of the code is kernel specific. However, we need to make
 it an external transform.
