@@ -13,27 +13,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-17 Wed 08:43]
+#+CAPTION: Clock summary at [2019-04-17 Wed 17:53]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *55:53* |       |       | 100.0 |
+| *Total time*                                           | *61:26* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 55:53   |       |       | 100.0 |
-| Active                                                 |         | 55:53 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  4:21 |   7.8 |
-| Sprint and product backlog grooming                    |         |       |  6:04 |  10.9 |
-| Create a video demo for the previous sprint's features |         |       |  1:35 |   2.8 |
-| Fix issues with emacs                                  |         |       |  2:01 |   3.6 |
+| Stories                                                | 61:26   |       |       | 100.0 |
+| Active                                                 |         | 61:26 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  4:21 |   7.1 |
+| Sprint and product backlog grooming                    |         |       |  6:04 |   9.9 |
+| Create a video demo for the previous sprint's features |         |       |  1:35 |   2.6 |
+| Fix issues with emacs                                  |         |       |  2:01 |   3.3 |
 | Fix issues with nightly build                          |         |       |  0:08 |   0.2 |
-| Add diffing support to string asserter                 |         |       |  1:00 |   1.8 |
-| C# generation is borked                                |         |       |  4:12 |   7.5 |
-| Reactivate the boilerplate tests                       |         |       |  5:58 |  10.7 |
+| Add diffing support to string asserter                 |         |       |  1:00 |   1.6 |
+| C# generation is borked                                |         |       |  4:12 |   6.8 |
+| Reactivate the boilerplate tests                       |         |       |  5:58 |   9.7 |
 | Update to clang8                                       |         |       |  0:11 |   0.3 |
-| Nursing nightlies                                      |         |       |  0:40 |   1.2 |
-| Fix snags with emacs                                   |         |       |  5:50 |  10.4 |
-| Profiles as meta-model elements                        |         |       |  8:01 |  14.3 |
-| Redesign annotations model                             |         |       | 15:52 |  28.4 |
+| Nursing nightlies                                      |         |       |  0:40 |   1.1 |
+| Fix snags with emacs                                   |         |       |  5:50 |   9.5 |
+| Profiles as meta-model elements                        |         |       |  8:01 |  13.0 |
+| Redesign annotations model                             |         |       | 21:25 |  34.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -647,6 +647,10 @@ Notes:
 
 *** STARTED Redesign annotations model                                :story:
     :LOGBOOK:
+    CLOCK: [2019-04-17 Wed 17:50]--[2019-04-17 Wed 17:53] =>  0:03
+    CLOCK: [2019-04-17 Wed 17:16]--[2019-04-17 Wed 17:49] =>  0:33
+    CLOCK: [2019-04-17 Wed 14:02]--[2019-04-17 Wed 17:15] =>  3:13
+    CLOCK: [2019-04-17 Wed 09:22]--[2019-04-17 Wed 11:06] =>  1:44
     CLOCK: [2019-04-16 Tue 07:12]--[2019-04-16 Tue 08:24] =>  1:12
     CLOCK: [2019-04-15 Mon 14:05]--[2019-04-15 Mon 17:41] =>  3:36
     CLOCK: [2019-04-13 Sat 14:38]--[2019-04-13 Sat 17:41] =>  3:03
@@ -743,6 +747,8 @@ Notes:
   operation on two configurations. However, our addition is
   non-commutative and non-associative. Maybe its not addition? Its not
   clear by looking at wikipedia so lets stick to merger.
+- tracing is dependent on variability at present. This is only because
+  we are dumping the inputs. We need a different way of doing this.
 
 Tasks:
 
@@ -782,6 +788,15 @@ injection.dia. Investigate why and if possible, reactivate them.
 
 It seems that at present we are not honouring the directory supplied
 by the user. This seems to only happen on convert mode.
+
+*** Add primitives to the archetypes model                            :story:
+
+Instead of using strings we should use primitives for:
+
+- facets
+- formatters
+- backends
+- etc.
 
 *** Consider a test suite level logging flag                          :story:
 
@@ -911,6 +926,25 @@ groups, etc. Its all in the annotations transform.
 
 Once we have the profiles in the model set it should be easy to supply
 them to the annotations transform.
+
+*** Getter by reference of pointee                                    :story:
+
+A useful use case is, whenever we have a property which is of
+pointer-like type (shared pointer, etc), is to return the type pointed
+to by const reference. We should be able to configure the generator
+for this:
+
+- we can already detect if the type is a pointer type;
+- we would need some meta-data at the property level (generate
+  de-refenced const/non-const setter). If this is used but the
+  property type is not a pointer then we should throw.
+- the generator would look for the meta-data, if enabled it would add
+  additional setters.
+- we may even want to suppress the pointer getters as well.
+
+*** Shared pointers have getters and setters with references          :story:
+
+We should really pass shared pointers by value instead of reference.
 
 ** Deprecated
 *** CANCELLED Consider code generating utility at a product level     :story:
