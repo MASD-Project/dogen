@@ -9,6 +9,7 @@
     "masd.injection.reference": "cpp.boost",
     "masd.injection.reference": "masd",
     "masd.injection.reference": "masd.dogen.archetypes",
+    "masd.injection.reference": "masd.dogen.tracing",
     "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
     "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
     "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
@@ -1155,6 +1156,9 @@
     {
       "name": "transforms::context",
       "documentation": "Context for transformations.\n",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -1164,6 +1168,10 @@
         {
           "name": "data_directories",
           "type": "std::vector<boost::filesystem::path>"
+        },
+        {
+          "name": "tracer",
+          "type": "boost::shared_ptr<tracing::tracer>"
         }
       ]
     },

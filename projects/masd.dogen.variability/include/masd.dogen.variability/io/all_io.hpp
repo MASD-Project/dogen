@@ -48,7 +48,6 @@
 #include "masd.dogen.variability/io/meta_model/boolean_io.hpp"
 #include "masd.dogen.variability/io/meta_model/element_io.hpp"
 #include "masd.dogen.variability/io/meta_model/feature_io.hpp"
-#include "masd.dogen.variability/io/transforms/context_io.hpp"
 #include "masd.dogen.variability/io/meta_model/value_type_io.hpp"
 #include "masd.dogen.variability/io/profiler_configuration_io.hpp"
 #include "masd.dogen.variability/io/meta_model/binding_type_io.hpp"

@@ -68,7 +68,7 @@
         <dia:point val="-72,-106"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-72.05,-106.05;-44.1,-84.25"/>
+        <dia:rectangle val="-72.05,-106.05;-44.1,-83.45"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="27.850000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="21.700000000000003"/>
+        <dia:real val="22.500000000000004"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -108,6 +108,7 @@ yet imposing some constraints on the shape of the data.
 #DOGEN masd.injection.reference=cpp.boost
 #DOGEN masd.injection.reference=masd
 #DOGEN masd.injection.reference=masd.dogen.archetypes
+#DOGEN masd.injection.reference=masd.dogen.tracing
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
@@ -16255,13 +16256,13 @@ Represents a value for a configuration point, a default value for a feature, etc
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O131">
       <dia:attribute name="obj_pos">
-        <dia:point val="-57,51"/>
+        <dia:point val="-57,52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-57.05,50.95;-17.565,54.65"/>
+        <dia:rectangle val="-57.05,51.95;-17.565,55.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-57,51"/>
+        <dia:point val="-57,52"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="39.385000000000005"/>
@@ -16432,13 +16433,13 @@ Represents a value for a configuration point, a default value for a feature, etc
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O132">
       <dia:attribute name="obj_pos">
-        <dia:point val="-64,45"/>
+        <dia:point val="-64,47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-64.05,44.95;-39.195,48.65"/>
+        <dia:rectangle val="-64.05,46.95;-39.195,50.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-64,45"/>
+        <dia:point val="-64,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="24.755000000000003"/>
@@ -16592,13 +16593,13 @@ Represents a value for a configuration point, a default value for a feature, etc
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O133">
       <dia:attribute name="obj_pos">
-        <dia:point val="-35,45"/>
+        <dia:point val="-35,47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-35.05,44.95;-7.115,48.65"/>
+        <dia:rectangle val="-35.05,46.95;-7.115,50.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-35,45"/>
+        <dia:point val="-35,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
@@ -16752,13 +16753,13 @@ Represents a value for a configuration point, a default value for a feature, etc
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O134">
       <dia:attribute name="obj_pos">
-        <dia:point val="-57,58"/>
+        <dia:point val="-62,58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-57.05,57.95;-17.565,61.65"/>
+        <dia:rectangle val="-62.05,57.95;-22.565,61.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-57,58"/>
+        <dia:point val="-62,58"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="39.385000000000005"/>
@@ -17137,13 +17138,13 @@ Represents a value for a configuration point, a default value for a feature, etc
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O136">
       <dia:attribute name="obj_pos">
-        <dia:point val="-64,66"/>
+        <dia:point val="-65,66"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-64.05,65.95;-36.885,69.65"/>
+        <dia:rectangle val="-65.05,65.95;-37.885,69.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-64,66"/>
+        <dia:point val="-65,66"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.064999999999998"/>
@@ -17297,13 +17298,13 @@ Represents a value for a configuration point, a default value for a feature, etc
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O137">
       <dia:attribute name="obj_pos">
-        <dia:point val="-54,72"/>
+        <dia:point val="-54,71"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-54.05,71.95;-15.72,75.65"/>
+        <dia:rectangle val="-54.05,70.95;-15.72,74.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-54,72"/>
+        <dia:point val="-54,71"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="38.230000000000004"/>
@@ -17634,13 +17635,13 @@ Represents a value for a configuration point, a default value for a feature, etc
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O139">
       <dia:attribute name="obj_pos">
-        <dia:point val="-3,45"/>
+        <dia:point val="-4,47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-3.05,44.95;21.805,49.45"/>
+        <dia:rectangle val="-4.05,46.95;20.805,51.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-3,45"/>
+        <dia:point val="-4,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="24.755000000000003"/>
@@ -18044,7 +18045,7 @@ Represents a value for a configuration point, a default value for a feature, etc
         <dia:point val="-45,40.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-51.6725,39.85;-44.25,45.8"/>
+        <dia:rectangle val="-51.6725,39.85;-44.25,47.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -18053,7 +18054,7 @@ Represents a value for a configuration point, a default value for a feature, etc
         <dia:point val="-45,40.6"/>
         <dia:point val="-45,43"/>
         <dia:point val="-51.6225,43"/>
-        <dia:point val="-51.6225,45"/>
+        <dia:point val="-51.6225,47"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -18116,7 +18117,7 @@ Represents a value for a configuration point, a default value for a feature, etc
         <dia:point val="-35.3175,40.6503"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-37.3575,39.9003;-34.5675,51.8"/>
+        <dia:rectangle val="-37.3575,39.9003;-34.5675,52.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -18125,7 +18126,7 @@ Represents a value for a configuration point, a default value for a feature, etc
         <dia:point val="-35.3175,40.6503"/>
         <dia:point val="-35.3175,43"/>
         <dia:point val="-37.3075,43"/>
-        <dia:point val="-37.3075,51"/>
+        <dia:point val="-37.3075,52"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -18188,7 +18189,7 @@ Represents a value for a configuration point, a default value for a feature, etc
         <dia:point val="-25.635,40.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-26.385,39.85;-20.8825,45.8"/>
+        <dia:rectangle val="-26.385,39.85;-20.8825,47.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -18197,7 +18198,7 @@ Represents a value for a configuration point, a default value for a feature, etc
         <dia:point val="-25.635,40.6"/>
         <dia:point val="-25.635,43"/>
         <dia:point val="-21.0825,43"/>
-        <dia:point val="-21.0825,45"/>
+        <dia:point val="-21.0825,47"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -18221,25 +18222,25 @@ Represents a value for a configuration point, a default value for a feature, etc
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O144">
       <dia:attribute name="obj_pos">
-        <dia:point val="11,37"/>
+        <dia:point val="-4,37"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="10.95,36.95;35.805,40.65"/>
+        <dia:rectangle val="-4.05,36.95;20.805,42.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="11,37"/>
+        <dia:point val="-4,37"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="24.755000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#context#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>##</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Context for transformations.#</dia:string>
@@ -18281,7 +18282,7 @@ Represents a value for a configuration point, a default value for a feature, etc
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f5fffa"/>
+        <dia:color val="#fffacd"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -18369,6 +18370,29 @@ Represents a value for a configuration point, a default value for a feature, etc
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#tracer#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#boost::shared_ptr&lt;tracing::tracer&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -18379,13 +18403,13 @@ Represents a value for a configuration point, a default value for a feature, etc
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O145">
       <dia:attribute name="obj_pos">
-        <dia:point val="-33,66"/>
+        <dia:point val="-32,66"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-33.05,65.95;8.745,69.65"/>
+        <dia:rectangle val="-32.05,65.95;9.745,69.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-33,66"/>
+        <dia:point val="-32,66"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="41.695"/>
@@ -18575,19 +18599,19 @@ Represents a value for a configuration point, a default value for a feature, etc
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-57,61.6"/>
+        <dia:point val="-62,61.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-57.75,60.85;-50.2675,66.8"/>
+        <dia:rectangle val="-62.75,60.85;-51.2675,66.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-57,61.6"/>
-        <dia:point val="-57,64"/>
-        <dia:point val="-50.4675,64"/>
-        <dia:point val="-50.4675,66"/>
+        <dia:point val="-62,61.6"/>
+        <dia:point val="-62,64"/>
+        <dia:point val="-51.4675,64"/>
+        <dia:point val="-51.4675,66"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -18647,19 +18671,19 @@ Represents a value for a configuration point, a default value for a feature, etc
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-17.615,61.6"/>
+        <dia:point val="-22.615,61.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-33.05,60.85;-16.865,66.8"/>
+        <dia:rectangle val="-32.05,60.85;-21.865,66.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-17.615,61.6"/>
-        <dia:point val="-17.615,64"/>
-        <dia:point val="-33,64"/>
-        <dia:point val="-33,66"/>
+        <dia:point val="-22.615,61.6"/>
+        <dia:point val="-22.615,64"/>
+        <dia:point val="-32,64"/>
+        <dia:point val="-32,66"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -18719,19 +18743,19 @@ Represents a value for a configuration point, a default value for a feature, etc
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-37.3075,61.6"/>
+        <dia:point val="-42.3075,61.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-38.0575,60.85;-34.685,72.8"/>
+        <dia:rectangle val="-43.0575,60.85;-34.685,71.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-37.3075,61.6"/>
-        <dia:point val="-37.3075,64"/>
+        <dia:point val="-42.3075,61.6"/>
+        <dia:point val="-42.3075,64"/>
         <dia:point val="-34.885,64"/>
-        <dia:point val="-34.885,72"/>
+        <dia:point val="-34.885,71"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -18755,13 +18779,13 @@ Represents a value for a configuration point, a default value for a feature, etc
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O149">
       <dia:attribute name="obj_pos">
-        <dia:point val="-13,58"/>
+        <dia:point val="-20,58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-13.05,57.95;10.265,62.45"/>
+        <dia:rectangle val="-20.05,57.95;3.265,62.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-13,58"/>
+        <dia:point val="-20,58"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="23.215"/>
@@ -18972,19 +18996,19 @@ Represents a value for a configuration point, a default value for a feature, etc
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="8.695,66"/>
+        <dia:point val="9.695,66"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-1.4425,62.35;9.445,66.8"/>
+        <dia:rectangle val="-8.4425,62.35;10.445,66.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="8.695,66"/>
-        <dia:point val="8.695,64"/>
-        <dia:point val="-1.3925,64"/>
-        <dia:point val="-1.3925,62.4"/>
+        <dia:point val="9.695,66"/>
+        <dia:point val="9.695,64"/>
+        <dia:point val="-8.3925,64"/>
+        <dia:point val="-8.3925,62.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -19919,13 +19943,13 @@ Represents a value for a configuration point, a default value for a feature, etc
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O155">
       <dia:attribute name="obj_pos">
-        <dia:point val="-3,37"/>
+        <dia:point val="26,37"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-3.05,36.95;7.0325,40.05"/>
+        <dia:rectangle val="25.95,36.95;36.0325,40.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-3,37"/>
+        <dia:point val="26,37"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="9.9824999999999999"/>
