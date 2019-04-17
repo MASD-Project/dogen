@@ -25,24 +25,98 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <boost/optional.hpp>
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 
 namespace masd::dogen::variability::helpers {
 
+/**
+ * @brief Performs a set of canned queries over a feature model.
+ */
 class feature_selector final {
 public:
-    feature_selector() = default;
-    feature_selector(const feature_selector&) = default;
-    feature_selector(feature_selector&&) = default;
-    ~feature_selector() = default;
-    feature_selector& operator=(const feature_selector&) = default;
+    explicit feature_selector(const meta_model::feature_model& fm);
+
+private:
+    /**
+     * @brief Returns a qualified field name.
+     */
+    std::string qualify(const std::string& prefix,
+        const std::string& feature_name) const;
 
 public:
-    bool operator==(const feature_selector& rhs) const;
-    bool operator!=(const feature_selector& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Tries to get the feature corresponding to the supplied
+     * qualified name.
+     *
+     * @return if one exists, returns it. Returns null otherwise.
+     */
+    boost::optional<const meta_model::feature&>
+    try_get_feature_by_name(const std::string& n) const;
 
+    /**
+     * @brief Tries to get the feature corresponding to the qualified
+     * name made up of the prefix and the simple name.
+     *
+     * Prefixes are expected to be formatter and facet names.
+     *
+     * @return if one exists, returns it. Returns Null otherwise.
+     */
+    boost::optional<const meta_model::feature&>
+    try_get_feature_by_name(const std::string& prefix,
+        const std::string& simple_name) const;
+
+public:
+    /**
+     * @brief Returns the feature corresponding to the supplied
+     * qualified name.
+     *
+     * @pre name must exist.
+     */
+    const meta_model::feature&
+    get_feature_by_name(const std::string& n) const;
+
+    /**
+     * @brief Returns the feature corresponding to the qualified name
+     * made up of the prefix and the simple name.
+     *
+     * Prefixes are expected to be formatter and facet names.
+     *
+     * @pre qualified field name must exist.
+     */
+    const meta_model::feature& get_feature_by_name(
+        const std::string& prefix, const std::string& simple_name) const;
+
+    /**
+     * @brief Returns the feature corresponding to the supplied name.
+     *
+     * @pre formatter name must exist.
+     */
+    const std::list<meta_model::feature>&
+    get_feature_by_formatter_name(const std::string& n) const;
+
+    /**
+     * @brief Returns the feature corresponding to the supplied facet
+     * name.
+     *
+     * @pre facet name must exist.
+     */
+    const std::list<meta_model::feature>&
+    get_feature_by_facet_name(const std::string& n) const;
+
+    /**
+     * @brief Returns the feature corresponding to the supplied
+     * backend name.
+     *
+     * @pre backend name must exist.
+     */
+    const std::list<meta_model::feature>&
+    get_feature_by_backend_name(const std::string& n) const;
+
+private:
+    const meta_model::feature_model& model_;
 };
 
 }

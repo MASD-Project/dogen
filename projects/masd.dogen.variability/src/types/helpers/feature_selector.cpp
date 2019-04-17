@@ -18,12 +18,99 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.variability/types/helpers/selection_exception.hpp"
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
+
+namespace {
+
+using namespace masd::dogen::utility::log;
+static logger lg(logger_factory("variability.helpers.feature_selector"));
+
+const std::string dot(".");
+const std::string feature_not_found("Could not find expected feature: ");
+const std::string no_features_for_formatter(
+    "Could not find any features for formatter: ");
+const std::string no_features_for_facet(
+    "Could not find any features for facet: ");
+const std::string no_features_for_model(
+    "Could not find any features for model: ");
+
+}
 
 namespace masd::dogen::variability::helpers {
 
-bool feature_selector::operator==(const feature_selector& /*rhs*/) const {
-    return true;
+feature_selector::feature_selector(const meta_model::feature_model& fm)
+    : model_(fm) {}
+
+std::string feature_selector::
+qualify(const std::string& prefix, const std::string& feature_name) const {
+    return prefix + dot + feature_name;
+}
+
+boost::optional<const meta_model::feature&> feature_selector::
+try_get_feature_by_name(const std::string& n) const {
+    const auto& c(model_.by_name());
+    const auto i(c.find(n));
+    if (i == c.end())
+        return boost::optional<const meta_model::feature&>();
+
+    return i->second;
+}
+
+boost::optional<const meta_model::feature&> feature_selector::
+try_get_feature_by_name(const std::string& prefix,
+    const std::string& simple_name) const {
+    return try_get_feature_by_name(qualify(prefix, simple_name));
+}
+
+const meta_model::feature& feature_selector::
+get_feature_by_name(const std::string& n) const {
+    const auto r(try_get_feature_by_name(n));
+    if (!r) {
+        BOOST_LOG_SEV(lg, error) << feature_not_found << n;
+        BOOST_THROW_EXCEPTION(selection_exception(feature_not_found + n));
+    }
+    return *r;
+}
+
+const meta_model::feature& feature_selector::get_feature_by_name(
+    const std::string& prefix, const std::string& simple_name) const {
+    return get_feature_by_name(qualify(prefix, simple_name));
+}
+
+const std::list<meta_model::feature>& feature_selector::
+get_feature_by_formatter_name(const std::string& n) const {
+    const auto& c(model_.by_formatter_name());
+    const auto i(c.find(n));
+    if (i != c.end())
+        return i->second;
+
+    BOOST_LOG_SEV(lg, error) << no_features_for_formatter << n;
+    BOOST_THROW_EXCEPTION(selection_exception(no_features_for_formatter + n));
+}
+
+const std::list<meta_model::feature>& feature_selector::
+get_feature_by_facet_name(const std::string& n) const {
+    const auto& c(model_.by_facet_name());
+    const auto i(c.find(n));
+    if (i != c.end())
+        return i->second;
+
+    BOOST_LOG_SEV(lg, error) << no_features_for_facet << n;
+    BOOST_THROW_EXCEPTION(selection_exception(no_features_for_facet + n));
+}
+
+const std::list<meta_model::feature>& feature_selector::
+get_feature_by_backend_name(const std::string& n) const {
+    const auto& c(model_.by_backend_name());
+    const auto i(c.find(n));
+    if (i != c.end())
+        return i->second;
+
+    BOOST_LOG_SEV(lg, error) << no_features_for_model << n;
+    BOOST_THROW_EXCEPTION(selection_exception(no_features_for_model + n));
 }
 
 }
