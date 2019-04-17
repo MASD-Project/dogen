@@ -23,49 +23,15 @@
 namespace masd::dogen::variability::transforms {
 
 context::context(
-    const masd::dogen::archetypes::location_repository& archetype_location_repository,
-    const std::vector<boost::filesystem::path>& data_directories)
-    : archetype_location_repository_(archetype_location_repository),
-      data_directories_(data_directories) { }
+    const std::vector<boost::filesystem::path>& data_directories,
+    const boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository,
+    const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer)
 
-void context::swap(context& other) noexcept {
-    using std::swap;
-    swap(archetype_location_repository_, other.archetype_location_repository_);
-    swap(data_directories_, other.data_directories_);
-}
-
-bool context::operator==(const context& rhs) const {
-    return archetype_location_repository_ == rhs.archetype_location_repository_ &&
-        data_directories_ == rhs.data_directories_;
-}
-
-context& context::operator=(context other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
-}
-
-const masd::dogen::archetypes::location_repository& context::archetype_location_repository() const {
-    return archetype_location_repository_;
-}
-
-masd::dogen::archetypes::location_repository& context::archetype_location_repository() {
-    return archetype_location_repository_;
-}
-
-void context::archetype_location_repository(const masd::dogen::archetypes::location_repository& v) {
-    archetype_location_repository_ = v;
-}
-
-void context::archetype_location_repository(const masd::dogen::archetypes::location_repository&& v) {
-    archetype_location_repository_ = std::move(v);
-}
+    : data_directories_(data_directories),
+      archetype_location_repository_(archetype_location_repository),
+      tracer_(tracer) { }
 
 const std::vector<boost::filesystem::path>& context::data_directories() const {
-    return data_directories_;
-}
-
-std::vector<boost::filesystem::path>& context::data_directories() {
     return data_directories_;
 }
 
@@ -73,8 +39,20 @@ void context::data_directories(const std::vector<boost::filesystem::path>& v) {
     data_directories_ = v;
 }
 
-void context::data_directories(const std::vector<boost::filesystem::path>&& v) {
-    data_directories_ = std::move(v);
+const boost::shared_ptr<masd::dogen::archetypes::location_repository>& context::archetype_location_repository() const {
+    return archetype_location_repository_;
+}
+
+void context::archetype_location_repository(const boost::shared_ptr<masd::dogen::archetypes::location_repository>& v) {
+    archetype_location_repository_ = v;
+}
+
+const boost::shared_ptr<masd::dogen::tracing::tracer>& context::tracer() const {
+    return tracer_;
+}
+
+void context::tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v) {
+    tracer_ = v;
 }
 
 }
