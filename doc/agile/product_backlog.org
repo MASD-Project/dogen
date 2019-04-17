@@ -102,6 +102,60 @@ the valid stereotypes which as model elements. However, for this there
 is some mapping required as we want
 =masd::coding::meta_model::enumeration= to map to =masd::enumeration=.
 
+Merged stories:
+
+*Meta-element configuration*
+
+It is becoming obvious that there is a need to explicitly model
+meta-elements. A good example are the wale templates for handcrafted
+types. Say we want to associate a wale template with =entry_point=. We
+need one for C# and one for C++. We have the following alternatives:
+
+- the user needs to manually supply these as meta-data parameters
+  every time it creates an entry point.
+- next level is to have profiles: we could define a profile with these
+  parameters and the user is responsible for applying it to entry
+  points as required. This is flexible because users could choose
+  different wale templates. However, its painful that there isn't a
+  default wale template.
+- we could hard-code the default wale template into the field's value,
+  so that you'd get that value if you don't supply any. At least now
+  there is a default, but its hard-coded.
+- finally, if we could create a =<<metaclass= in a diagram, we could
+  then add the default values there _as data_.
+
+A related point is to do with cases where the meta-element requires
+specific configuration:
+
+- entry point, interface: should be types only.
+
+
+For these cases, it would be nice if we could associate a stereotype
+with the metaclass and then all instances would inherit these.
+
+This is actually simpler to implement than it may appear. We just need
+to have a meta-element of type =metaclass=, with an annotation and a
+name. The name of the metaclass is the element it is configuring
+(e.g. =entry_point=). We could have a transform that sets the static
+stereotype of the element based on the name for good measure. Then,
+during the profile merging, we could simply merge first its annotation
+into all elements of this type. Then we would continue with the
+profile merging. We could also do a hack and have a =root_module=
+=metaclass= which could be used for defaults. However, it is not clear
+when we should use this as opposed to plain stereotypes. The good
+thing about stereotypes is that we make the relationships explicit,
+whereas with =metaclass= we are making them slightly less transparent.
+
+If dogen had a way to set static properties, we could have a transform
+that updated all elements with their metaclass, so that you could
+simply do:
+
+: element.metaclass().name();
+: element.metaclass().annotation();
+
+This should be very simple to do, we just need a way to know if an
+attribute is static or not.
+
 *** Consider making editor a meta-data element                        :story:
 
 When we create meta-data elements for technical space, facet, etc we
@@ -307,58 +361,6 @@ but without adding to types referencing the type, this would give us a
 way to declare all of the formatters dependencies. Then, we could
 switch to building all of the stitch boilerplate outside of stitch and
 supplying it as a KVP.
-
-*** Meta-element configuration                                        :story:
-
-It is becoming obvious that there is a need to explicitly model
-meta-elements. A good example are the wale templates for handcrafted
-types. Say we want to associate a wale template with =entry_point=. We
-need one for C# and one for C++. We have the following alternatives:
-
-- the user needs to manually supply these as meta-data parameters
-  every time it creates an entry point.
-- next level is to have profiles: we could define a profile with these
-  parameters and the user is responsible for applying it to entry
-  points as required. This is flexible because users could choose
-  different wale templates. However, its painful that there isn't a
-  default wale template.
-- we could hard-code the default wale template into the field's value,
-  so that you'd get that value if you don't supply any. At least now
-  there is a default, but its hard-coded.
-- finally, if we could create a =<<metaclass= in a diagram, we could
-  then add the default values there _as data_.
-
-A related point is to do with cases where the meta-element requires
-specific configuration:
-
-- entry point, interface: should be types only.
-
-
-For these cases, it would be nice if we could associate a stereotype
-with the metaclass and then all instances would inherit these.
-
-This is actually simpler to implement than it may appear. We just need
-to have a meta-element of type =metaclass=, with an annotation and a
-name. The name of the metaclass is the element it is configuring
-(e.g. =entry_point=). We could have a transform that sets the static
-stereotype of the element based on the name for good measure. Then,
-during the profile merging, we could simply merge first its annotation
-into all elements of this type. Then we would continue with the
-profile merging. We could also do a hack and have a =root_module=
-=metaclass= which could be used for defaults. However, it is not clear
-when we should use this as opposed to plain stereotypes. The good
-thing about stereotypes is that we make the relationships explicit,
-whereas with =metaclass= we are making them slightly less transparent.
-
-If dogen had a way to set static properties, we could have a transform
-that updated all elements with their metaclass, so that you could
-simply do:
-
-: element.metaclass().name();
-: element.metaclass().annotation();
-
-This should be very simple to do, we just need a way to know if an
-attribute is static or not.
 
 *** Stitch extension is hard-coded                                    :story:
 
@@ -1176,16 +1178,6 @@ Once we support JSON fully we should go through all of the uses of
 JSON we have at present and replace them with the JSON serialised
 version of the types.
 
-*** Add annotation types description                                  :story:
-
-It would be useful to have a description of the purpose of the field
-so that we could print it to the command line. We could simply add a
-JSON attribute to the field called description to start off with. But
-ideally we need a command line argument to dump all fields and their
-descriptions so that users know what's available.
-
-This should be sorted by qualified name.
-
 *** Computation of enablement values                                   :epic:
 
 Note: this story is still *very* sketchy.
@@ -1453,18 +1445,6 @@ At present dogen always assumes we want to generate a static
 library. It would be nice to be able to generate an executable too,
 with all of the cmake infrastructure generated.
 
-*** Make visitor an explicit type                                     :story:
-
-Instead of automatically generating visitors via the visitable
-stereotype, we should:
-
-- create a new stereotype =masd::visitor=. It triggers the creation of
-  the visitor meta-model element.
-- visitor must have a target via meta-data. This points to the element
-  to visit.
-
-We need to make sure we don't break cross model visitation with this change.
-
 *** Consider allowing renaming of "internal" types                    :story:
 
 Users may want to change the =_visitor= postfix for visitors or the
@@ -1710,7 +1690,7 @@ Notes:
   messages slightly different from MSVC]]. Clang [[http://lists.llvm.org/pipermail/cfe-dev/2019-February/061339.html][have patched]] the diffs
   now.
 
-*** Implement configuration validator                                 :story:
+*** Implement CLI configuration validator                             :story:
 
 At present we are not performing any validation to the new
 configuration classes in the API.
@@ -2318,25 +2298,6 @@ model.
 This can be done in the generation model, as part of the generation
 clean up.
 
-*** Properties vs configuration                                       :story:
-
-Originally we had defined properties to mean things which are computed
-and configuration to mean things which are read directly from the
-meta-data and not touched afterwards. This made life easier in
-determining how each class was used. However, this was not strictly
-enforced and now there are many cases where properties are used when
-configuration should have been (and probably vice-versa). In addition,
-we have cases where we should have used configuration but used nothing
-(type parameters springs to mind). We need to do a clean up of the
-meta-model.
-
-Actually we now have a clear answer to this question, based on feature
-modeling and variability analysis: we have a feature model, composed
-of features; this is what we have so far called "properties". The
-instances of these features are called configurations. We just need a
-strategy for mapping features into UML models, for which there are
-several in the literature.
-
 *** Additional extraction model post-processing chain transforms      :story:
 
 The following transforms can be done after generation of the
@@ -2603,73 +2564,6 @@ across into yarn.
 
 We should be able to handle these generically in yarn.
 
-*** Consider code generating utility at a product level               :story:
-
-At present we are copying and pasting logging from utilities to all
-new projects and then adding log initialisation to binaries. It would
-be nicer if this was part of dogen itself, and we could somehow state
-that we are targeting Boost.Log at the executable level and have the
-logging initialisation code all generated, including
-initialisation. Of course, when using it on a product with multiple
-components, it would be even better if this code could be shared. We
-need to review all the code in utilities and see if there is a way to
-create a model that can take on that functionality as meta-data
-parameters. Useful things:
-
-- dogen "standard" exceptions: invalid enum value, etc. Exceptions
-  that we think may be useful in several applications but for which
-  there is no c++ standard equivalent.
-- file utilities: read whole file etc.
-- hashing
-- io
-- etc.
-
-In effect what we really want is to have a way to generate the utility
-library for each product, which is what we are doing at present
-manually. A better way of doing this would be to have a product line
-level option whereby users could state they would like it included
-with their product. Dogen would then code generate it with all the
-right options. In effect, its a configurable model with trivial
-utilities. We could also just go back to the ideas around needle and
-call it =needle=, or something else that is not very likely to clash
-with user code.
-
-Another way to look at this is to consider the utility model as just
-like any other model and instead introduce "type bundles" for certain
-functionality. For example: logging, etc. We could just have a
-stereotype for these "bundles", applicable to a package:
-
-: masd::bundle::logging
-
-This would generate a namespace with logging functionality. Users can
-create a small package and not bother with supplying details or create
-a large package and add their own types to it as well.
-
-The bundle expands during transformation to the generation of the
-types associated with the bundle. This means we need individual
-meta-types for each type. In the cases where we have helpers per type
-(e.g. IO, etc) maybe it makes more sense to use these as properties
-and enable them specifically:
-
-: masd::bundle::io
-: masd.bundle.io.add_type=std::array
-
-Similarly, the test bundle provides a number of dogen tests for
-types. If you'd like to test models, you need to enable it on your
-utility model - e.g. models must reference a utility model and then we
-check to see if the test bundle is enabled.
-
-For extra marks, with would be great if you could associate a bundle
-with a facet as well, so that the IO, hashing etc types would go into
-the right facet folders rather than under types.
-
-Notes:
-
-- once we have the concept of products and once we support meta-data
-  for vcpkg (other story), we can then generate a "vcpkg script" per
-  product. This is a script that gets vcpkg, bootstraps it and
-  installs all of the dependent packages.
-
 *** Make explicit all implicit modeling elements                      :story:
 
 At present we have a number of modeling elements that can be
@@ -2716,6 +2610,20 @@ Then hopefully the existing pipeline would take over and we'd generate
 the files for the first time but then let the user overwrite it. This
 would also be applicable to all fabric types (registrar, etc) but we'd
 have to manually read each stereotype on each factory.
+
+Merged stories:
+
+*Make visitor an explicit type*
+
+Instead of automatically generating visitors via the visitable
+stereotype, we should:
+
+- create a new stereotype =masd::visitor=. It triggers the creation of
+  the visitor meta-model element.
+- visitor must have a target via meta-data. This points to the element
+  to visit.
+
+We need to make sure we don't break cross model visitation with this change.
 
 *** Propagate =fluent= stereotype                                     :story:
 
@@ -3074,18 +2982,7 @@ make things slightly more efficient:
 These should be called "product models" rather than projects. We
 should also consider how "product families" fit in this architecture.
 
-*** Clean up annotation scope types                                   :story:
-
-As part of the attribute rename (which used to be called property) we
-should have renamed the annotation scope as well to attribute.
-
-In addition, we have a scope type of "entity" but the yarn meta-model
-type is really "element".
-
-We should also check if "not applicable" scope is in use, and if not
-delete it.
-
-*** Allow users to override mapping sets at the element level         :story:
+*** Allow users to override mapping sets at the element level :reviewing:story:
 
 Sometimes we may want to use a different mapping just for a particular
 element. For example, by default =lam::linked_list= binds to

@@ -13,27 +13,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-16 Tue 08:24]
+#+CAPTION: Clock summary at [2019-04-17 Wed 08:43]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *53:55* |       |       | 100.0 |
+| *Total time*                                           | *55:53* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 53:55   |       |       | 100.0 |
-| Active                                                 |         | 53:55 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  4:21 |   8.1 |
-| Sprint and product backlog grooming                    |         |       |  4:24 |   8.2 |
-| Create a video demo for the previous sprint's features |         |       |  1:35 |   2.9 |
-| Fix issues with emacs                                  |         |       |  2:01 |   3.7 |
+| Stories                                                | 55:53   |       |       | 100.0 |
+| Active                                                 |         | 55:53 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  4:21 |   7.8 |
+| Sprint and product backlog grooming                    |         |       |  6:04 |  10.9 |
+| Create a video demo for the previous sprint's features |         |       |  1:35 |   2.8 |
+| Fix issues with emacs                                  |         |       |  2:01 |   3.6 |
 | Fix issues with nightly build                          |         |       |  0:08 |   0.2 |
-| Add diffing support to string asserter                 |         |       |  1:00 |   1.9 |
-| C# generation is borked                                |         |       |  4:12 |   7.8 |
-| Reactivate the boilerplate tests                       |         |       |  5:58 |  11.1 |
+| Add diffing support to string asserter                 |         |       |  1:00 |   1.8 |
+| C# generation is borked                                |         |       |  4:12 |   7.5 |
+| Reactivate the boilerplate tests                       |         |       |  5:58 |  10.7 |
 | Update to clang8                                       |         |       |  0:11 |   0.3 |
-| Nursing nightlies                                      |         |       |  0:22 |   0.7 |
-| Fix snags with emacs                                   |         |       |  5:50 |  10.8 |
-| Profiles as meta-model elements                        |         |       |  8:01 |  14.9 |
-| Redesign annotations model                             |         |       | 15:52 |  29.4 |
+| Nursing nightlies                                      |         |       |  0:40 |   1.2 |
+| Fix snags with emacs                                   |         |       |  5:50 |  10.4 |
+| Profiles as meta-model elements                        |         |       |  8:01 |  14.3 |
+| Redesign annotations model                             |         |       | 15:52 |  28.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -194,6 +194,9 @@ Happy Modeling!
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-04-17 Wed 07:22]--[2019-04-17 Wed 07:43] =>  0:21
+    CLOCK: [2019-04-17 Wed 07:13]--[2019-04-17 Wed 07:21] =>  0:08
+    CLOCK: [2019-04-16 Tue 15:01]--[2019-04-16 Tue 16:12] =>  1:11
     CLOCK: [2019-04-14 Sun 14:04]--[2019-04-14 Sun 14:45] =>  0:41
     CLOCK: [2019-04-14 Sun 13:21]--[2019-04-14 Sun 13:25] =>  0:04
     CLOCK: [2019-04-14 Sun 12:52]--[2019-04-14 Sun 13:20] =>  0:28
@@ -319,14 +322,42 @@ We seem to have a lot of spurious errors with clangd-7. Try with
 clangd-8. However, in order to do this we need to get the code to
 compile with clang 8.
 
+*** COMPLETED Properties vs configuration                             :story:
+    CLOSED: [2019-04-17 Wed 07:38]
+
+*Rationale*: this investigation is complete.
+
+Originally we had defined properties to mean things which are computed
+and configuration to mean things which are read directly from the
+meta-data and not touched afterwards. This made life easier in
+determining how each class was used. However, this was not strictly
+enforced and now there are many cases where properties are used when
+configuration should have been (and probably vice-versa). In addition,
+we have cases where we should have used configuration but used nothing
+(type parameters springs to mind). We need to do a clean up of the
+meta-model.
+
+Actually we now have a clear answer to this question, based on feature
+modeling and variability analysis: we have a feature model, composed
+of features; this is what we have so far called "properties". The
+instances of these features are called configurations. We just need a
+strategy for mapping features into UML models, for which there are
+several in the literature.
+
 *** STARTED Nursing nightlies                                         :story:
     :LOGBOOK:
+    CLOCK: [2019-04-17 Wed 07:01]--[2019-04-17 Wed 07:19] =>  0:18
     CLOCK: [2019-04-16 Tue 06:50]--[2019-04-16 Tue 07:12] =>  0:22
     :END:
 
 Time taken fixing assorted issues with nightly builds.
 
 - changing compilers to clang8 caused nightlies to break.
+- because we use the ctest script from git to run the nightly, we are
+  always out of sync with the script: the git update is done within
+  the script. This means that when we do changes to the script we need
+  to manually update the directory or wait another day for it to sync
+  up.
 
 *** STARTED Fix snags with emacs                                      :story:
     :LOGBOOK:
@@ -610,6 +641,9 @@ Notes:
 - move annotation expansion from adaptor into its own transform. It is
   done against the model set.
 - profile repository appears deprecated, remove it?
+- we probably should rename =coding::configuration= to "unbound
+  configuration" or some other name to make it distinct from
+  =variability::configuration=.
 
 *** STARTED Redesign annotations model                                :story:
     :LOGBOOK:
@@ -717,6 +751,27 @@ Tasks:
 - rename type group to feature group. Leave traits as is for now.
 - rename annotation to configuration.
 - create archetype model and mode archetype related types there.
+
+*** Clean up annotation scope types                                   :story:
+
+As part of the attribute rename (which used to be called property) we
+should have renamed the annotation scope as well to attribute.
+
+In addition, we have a scope type of "entity" but the yarn meta-model
+type is really "element".
+
+We should also check if "not applicable" scope is in use, and if not
+delete it.
+
+*** Add annotation types description                                  :story:
+
+It would be useful to have a description of the purpose of the field
+so that we could print it to the command line. We could simply add a
+JSON attribute to the field called description to start off with. But
+ideally we need a command line argument to dump all fields and their
+descriptions so that users know what's available.
+
+This should be sorted by qualified name.
 
 *** Reactivate injection.dia tests                                    :story:
 
@@ -858,3 +913,73 @@ Once we have the profiles in the model set it should be easy to supply
 them to the annotations transform.
 
 ** Deprecated
+*** CANCELLED Consider code generating utility at a product level     :story:
+    CLOSED: [2019-04-17 Wed 07:39]
+
+*Rationale*: this is a bad idea. Utility will be moved over to a
+PDM-like model instead.
+
+At present we are copying and pasting logging from utilities to all
+new projects and then adding log initialisation to binaries. It would
+be nicer if this was part of dogen itself, and we could somehow state
+that we are targeting Boost.Log at the executable level and have the
+logging initialisation code all generated, including
+initialisation. Of course, when using it on a product with multiple
+components, it would be even better if this code could be shared. We
+need to review all the code in utilities and see if there is a way to
+create a model that can take on that functionality as meta-data
+parameters. Useful things:
+
+- dogen "standard" exceptions: invalid enum value, etc. Exceptions
+  that we think may be useful in several applications but for which
+  there is no c++ standard equivalent.
+- file utilities: read whole file etc.
+- hashing
+- io
+- etc.
+
+In effect what we really want is to have a way to generate the utility
+library for each product, which is what we are doing at present
+manually. A better way of doing this would be to have a product line
+level option whereby users could state they would like it included
+with their product. Dogen would then code generate it with all the
+right options. In effect, its a configurable model with trivial
+utilities. We could also just go back to the ideas around needle and
+call it =needle=, or something else that is not very likely to clash
+with user code.
+
+Another way to look at this is to consider the utility model as just
+like any other model and instead introduce "type bundles" for certain
+functionality. For example: logging, etc. We could just have a
+stereotype for these "bundles", applicable to a package:
+
+: masd::bundle::logging
+
+This would generate a namespace with logging functionality. Users can
+create a small package and not bother with supplying details or create
+a large package and add their own types to it as well.
+
+The bundle expands during transformation to the generation of the
+types associated with the bundle. This means we need individual
+meta-types for each type. In the cases where we have helpers per type
+(e.g. IO, etc) maybe it makes more sense to use these as properties
+and enable them specifically:
+
+: masd::bundle::io
+: masd.bundle.io.add_type=std::array
+
+Similarly, the test bundle provides a number of dogen tests for
+types. If you'd like to test models, you need to enable it on your
+utility model - e.g. models must reference a utility model and then we
+check to see if the test bundle is enabled.
+
+For extra marks, with would be great if you could associate a bundle
+with a facet as well, so that the IO, hashing etc types would go into
+the right facet folders rather than under types.
+
+Notes:
+
+- once we have the concept of products and once we support meta-data
+  for vcpkg (other story), we can then generate a "vcpkg script" per
+  product. This is a script that gets vcpkg, bootstraps it and
+  installs all of the dependent packages.
