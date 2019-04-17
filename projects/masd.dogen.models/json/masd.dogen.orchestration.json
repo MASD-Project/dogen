@@ -102,6 +102,10 @@
         {
           "name": "extraction_context",
           "type": "extraction::transforms::context"
+        },
+        {
+          "name": "variability_context",
+          "type": "variability::transforms::context"
         }
       ]
     },

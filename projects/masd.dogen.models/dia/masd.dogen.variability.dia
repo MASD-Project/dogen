@@ -18222,16 +18222,16 @@ Represents a value for a configuration point, a default value for a feature, etc
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O144">
       <dia:attribute name="obj_pos">
-        <dia:point val="-4,37"/>
+        <dia:point val="5,37"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-4.05,36.95;20.805,42.25"/>
+        <dia:rectangle val="4.95,36.95;37.12,42.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-4,37"/>
+        <dia:point val="5,37"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.755000000000003"/>
+        <dia:real val="32.07"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -18326,10 +18326,10 @@ Represents a value for a configuration point, a default value for a feature, etc
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#archetype_location_repository#</dia:string>
+            <dia:string>#data_directories#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#archetypes::location_repository#</dia:string>
+            <dia:string>#std::vector&lt;boost::filesystem::path&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -18349,10 +18349,10 @@ Represents a value for a configuration point, a default value for a feature, etc
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#data_directories#</dia:string>
+            <dia:string>#archetype_location_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::vector&lt;boost::filesystem::path&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;archetypes::location_repository&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -19943,13 +19943,13 @@ Represents a value for a configuration point, a default value for a feature, etc
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O155">
       <dia:attribute name="obj_pos">
-        <dia:point val="26,37"/>
+        <dia:point val="-19,37"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="25.95,36.95;36.0325,40.05"/>
+        <dia:rectangle val="-19.05,36.95;-8.9675,40.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="26,37"/>
+        <dia:point val="-19,37"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="9.9824999999999999"/>
