@@ -162,6 +162,7 @@ context context_factory::make_context(const configuration& cfg,
      */
     const auto data_dir(utility::filesystem::data_files_directory());
     const auto data_dirs(std::vector<boost::filesystem::path>{ data_dir });
+    r.variability_context().data_directories(data_dirs);
     r.injection_context().data_directories(data_dirs);
 
     /*
@@ -212,6 +213,7 @@ context context_factory::make_context(const configuration& cfg,
      * tracing is enabled or not - its the tracer job to handle that.
      */
     const auto tracer(boost::make_shared<tracing::tracer>(cfg.tracing()));
+    r.variability_context().tracer(tracer);
     r.injection_context().tracer(tracer);
     r.coding_context().tracer(tracer);
     r.generation_context().tracer(tracer);

@@ -24,14 +24,32 @@
 namespace masd::dogen::orchestration::transforms {
 
 context::context(
+    const masd::dogen::variability::transforms::context& variability_context,
     const masd::dogen::injection::transforms::context& injection_context,
     const masd::dogen::coding::transforms::context& coding_context,
     const masd::dogen::generation::transforms::context& generation_context,
     const masd::dogen::extraction::transforms::context& extraction_context)
-    : injection_context_(injection_context),
+    : variability_context_(variability_context),
+      injection_context_(injection_context),
       coding_context_(coding_context),
       generation_context_(generation_context),
       extraction_context_(extraction_context) { }
+
+const masd::dogen::variability::transforms::context& context::variability_context() const {
+    return variability_context_;
+}
+
+masd::dogen::variability::transforms::context& context::variability_context() {
+    return variability_context_;
+}
+
+void context::variability_context(const masd::dogen::variability::transforms::context& v) {
+    variability_context_ = v;
+}
+
+void context::variability_context(const masd::dogen::variability::transforms::context&& v) {
+    variability_context_ = std::move(v);
+}
 
 const masd::dogen::injection::transforms::context& context::injection_context() const {
     return injection_context_;

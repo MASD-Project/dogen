@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include "masd.dogen.variability/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
@@ -42,12 +43,18 @@ public:
 
 public:
     context(
+        const masd::dogen::variability::transforms::context& variability_context,
         const masd::dogen::injection::transforms::context& injection_context,
         const masd::dogen::coding::transforms::context& coding_context,
         const masd::dogen::generation::transforms::context& generation_context,
         const masd::dogen::extraction::transforms::context& extraction_context);
 
 public:
+    const masd::dogen::variability::transforms::context& variability_context() const;
+    masd::dogen::variability::transforms::context& variability_context();
+    void variability_context(const masd::dogen::variability::transforms::context& v);
+    void variability_context(const masd::dogen::variability::transforms::context&& v);
+
     const masd::dogen::injection::transforms::context& injection_context() const;
     masd::dogen::injection::transforms::context& injection_context();
     void injection_context(const masd::dogen::injection::transforms::context& v);
@@ -69,6 +76,7 @@ public:
     void extraction_context(const masd::dogen::extraction::transforms::context&& v);
 
 private:
+    masd::dogen::variability::transforms::context variability_context_;
     masd::dogen::injection::transforms::context injection_context_;
     masd::dogen::coding::transforms::context coding_context_;
     masd::dogen::generation::transforms::context generation_context_;
