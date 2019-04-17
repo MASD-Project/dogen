@@ -368,57 +368,6 @@ way to declare all of the formatters dependencies. Then, we could
 switch to building all of the stitch boilerplate outside of stitch and
 supplying it as a KVP.
 
-*** Meta-element configuration                                        :story:
-
-It is becoming obvious that there is a need to explicitly model
-meta-elements. A good example are the wale templates for handcrafted
-types. Say we want to associate a wale template with =entry_point=. We
-need one for C# and one for C++. We have the following alternatives:
-
-- the user needs to manually supply these as meta-data parameters
-  every time it creates an entry point.
-- next level is to have profiles: we could define a profile with these
-  parameters and the user is responsible for applying it to entry
-  points as required. This is flexible because users could choose
-  different wale templates. However, its painful that there isn't a
-  default wale template.
-- we could hard-code the default wale template into the field's value,
-  so that you'd get that value if you don't supply any. At least now
-  there is a default, but its hard-coded.
-- finally, if we could create a =<<metaclass= in a diagram, we could
-  then add the default values there _as data_.
-
-A related point is to do with cases where the meta-element requires
-specific configuration:
-
-- entry point, interface: should be types only.
-
-For these cases, it would be nice if we could associate a stereotype
-with the metaclass and then all instances would inherit these.
-
-This is actually simpler to implement than it may appear. We just need
-to have a meta-element of type =metaclass=, with an annotation and a
-name. The name of the metaclass is the element it is configuring
-(e.g. =entry_point=). We could have a transform that sets the static
-stereotype of the element based on the name for good measure. Then,
-during the profile merging, we could simply merge first its annotation
-into all elements of this type. Then we would continue with the
-profile merging. We could also do a hack and have a =root_module=
-=metaclass= which could be used for defaults. However, it is not clear
-when we should use this as opposed to plain stereotypes. The good
-thing about stereotypes is that we make the relationships explicit,
-whereas with =metaclass= we are making them slightly less transparent.
-
-If dogen had a way to set static properties, we could have a transform
-that updated all elements with their metaclass, so that you could
-simply do:
-
-: element.metaclass().name();
-: element.metaclass().annotation();
-
-This should be very simple to do, we just need a way to know if an
-attribute is static or not.
-
 *** Stitch extension is hard-coded                                    :story:
 
 At present we have hard-coded the file extension in the output of
