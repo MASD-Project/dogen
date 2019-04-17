@@ -25,24 +25,14 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.variability/types/meta_model/configuration_template.hpp"
+#include "masd.dogen.variability/types/transforms/context.hpp"
 
 namespace masd::dogen::variability::transforms {
 
 class configuration_template_hydration_transform final {
 public:
-    configuration_template_hydration_transform() = default;
-    configuration_template_hydration_transform(const configuration_template_hydration_transform&) = default;
-    configuration_template_hydration_transform(configuration_template_hydration_transform&&) = default;
-    ~configuration_template_hydration_transform() = default;
-    configuration_template_hydration_transform& operator=(const configuration_template_hydration_transform&) = default;
-
-public:
-    bool operator==(const configuration_template_hydration_transform& rhs) const;
-    bool operator!=(const configuration_template_hydration_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    std::list<meta_model::configuration_template> apply(const context& ctx);
 };
 
 }
