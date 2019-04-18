@@ -1249,6 +1249,14 @@
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::instantiation_exception",
+      "documentation": "An error occurred whilst instantiating templates.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
