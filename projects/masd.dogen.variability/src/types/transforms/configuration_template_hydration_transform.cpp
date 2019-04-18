@@ -18,12 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/predicate.hpp>
+#include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.utility/types/io/vector_io.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_template_io.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_template_hydrator.hpp"
 #include "masd.dogen.variability/types/transforms/configuration_template_hydration_transform.hpp"
@@ -36,8 +35,8 @@ const std::string transform_id(
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
-const std::string profile_dir("annotations");
-const std::string profile_prefix("masd.annotations.profiles.");
+const std::string templates_dir("annotations");
+const std::string templates_prefix("masd.annotations.profiles.");
 
 }
 
@@ -49,7 +48,7 @@ configuration_template_hydration_transform::to_template_directories(
     std::vector<boost::filesystem::path> r;
     r.reserve(data_dirs.size());
     for (const auto& d : data_dirs)
-        r.push_back(d / profile_dir);
+        r.push_back(d / templates_dir);
 
     BOOST_LOG_SEV(lg, debug) << "Directory list: " << r;
     return r;
@@ -64,7 +63,7 @@ configuration_template_hydration_transform::obtain_template_filenames(
     const auto files(dogen::utility::filesystem::find_files(template_dirs));
     for (const auto& f : files) {
         const auto fn(f.filename().generic_string());
-        if (!boost::starts_with(fn, profile_prefix)) {
+        if (!boost::starts_with(fn, templates_prefix)) {
             BOOST_LOG_SEV(lg, debug) << "Ignoring file: " << f.filename();
             continue;
         }
