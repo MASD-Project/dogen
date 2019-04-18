@@ -18,12 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/list_io.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.variability/io/meta_model/configuration_template_io.hpp"
+#include "masd.dogen.variability/io/meta_model/configuration_template_io.hpp"
 #include "masd.dogen.variability/types/transforms/configuration_template_instantiation_transform.hpp"
+
+namespace {
+
+const std::string transform_id(
+    "variability.transforms.configuration_template_instantiation_transform");
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace masd::dogen::variability::transforms {
 
-bool configuration_template_instantiation_transform::operator==(const configuration_template_instantiation_transform& /*rhs*/) const {
-    return true;
+std::list<meta_model::configuration>
+configuration_template_instantiation_transform::apply(const context& ctx,
+    const std::list<meta_model::configuration_template>& cts) {
+    tracing::scoped_transform_tracer stp(lg,
+        "configuration template instantiation transform",
+        transform_id, transform_id, *ctx.tracer(), cts);
+
+    std::list<meta_model::configuration> r;
+    return r;
 }
 
 }

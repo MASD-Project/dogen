@@ -25,24 +25,20 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.variability/types/meta_model/configuration_template.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/transforms/context.hpp"
 
 namespace masd::dogen::variability::transforms {
 
+/**
+ * @brief Instantiates a set of configuration templates into
+ * unbound configurations.
+ */
 class configuration_template_instantiation_transform final {
 public:
-    configuration_template_instantiation_transform() = default;
-    configuration_template_instantiation_transform(const configuration_template_instantiation_transform&) = default;
-    configuration_template_instantiation_transform(configuration_template_instantiation_transform&&) = default;
-    ~configuration_template_instantiation_transform() = default;
-    configuration_template_instantiation_transform& operator=(const configuration_template_instantiation_transform&) = default;
-
-public:
-    bool operator==(const configuration_template_instantiation_transform& rhs) const;
-    bool operator!=(const configuration_template_instantiation_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    std::list<meta_model::configuration> apply(const context& ctx,
+        const std::list<meta_model::configuration_template>& cts);
 };
 
 }
