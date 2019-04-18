@@ -25,12 +25,37 @@
 #pragma once
 #endif
 
+#include <list>
+#include <vector>
+#include <boost/filesystem/path.hpp>
 #include "masd.dogen.variability/types/meta_model/configuration_template.hpp"
 #include "masd.dogen.variability/types/transforms/context.hpp"
 
 namespace masd::dogen::variability::transforms {
 
+/**
+ * @brief Reads all configuration templates from the filesystem.
+ */
 class configuration_template_hydration_transform final {
+private:
+    /**
+     * @brief Convert data directories into template directories.
+     */
+    std::vector<boost::filesystem::path> to_template_directories(
+        const std::vector<boost::filesystem::path>& data_dirs) const;
+
+    /**
+     * @brief Obtain all templates in template directories.
+     */
+    std::list<boost::filesystem::path> obtain_template_filenames(
+        const std::vector<boost::filesystem::path>& template_dirs) const;
+
+    /**
+     * @brief Hydrate all templates.
+     */
+    std::list<meta_model::configuration_template> hydrate_templates(
+        const std::list<boost::filesystem::path>& tfn);
+
 public:
     std::list<meta_model::configuration_template> apply(const context& ctx);
 };
