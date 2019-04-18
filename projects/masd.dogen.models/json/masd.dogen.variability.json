@@ -1162,12 +1162,12 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "archetype_location_repository",
-          "type": "archetypes::location_repository"
-        },
-        {
           "name": "data_directories",
           "type": "std::vector<boost::filesystem::path>"
+        },
+        {
+          "name": "archetype_location_repository",
+          "type": "boost::shared_ptr<archetypes::location_repository>"
         },
         {
           "name": "tracer",
@@ -1238,6 +1238,13 @@
     },
     {
       "name": "helpers::configuration_selector",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::template_instantiator",
       "stereotypes": [
         "masd::handcrafted"
       ],

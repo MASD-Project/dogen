@@ -85,6 +85,7 @@
 #include "masd.dogen.variability/types/meta_model/feature_template.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_merger.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_factory.hpp"
+#include "masd.dogen.variability/types/helpers/template_instantiator.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration_point.hpp"
 #include "masd.dogen.variability/types/transforms/transformation_error.hpp"

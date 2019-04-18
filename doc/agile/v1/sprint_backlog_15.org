@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-18 Thu 07:36]
+#+CAPTION: Clock summary at [2019-04-18 Thu 07:45]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *62:50* |       |       | 100.0 |
+| *Total time*                                           | *62:58* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 62:50   |       |       | 100.0 |
-| Active                                                 |         | 62:50 |       | 100.0 |
+| Stories                                                | 62:58   |       |       | 100.0 |
+| Active                                                 |         | 62:58 |       | 100.0 |
 | Edit release notes for previous sprint                 |         |       |  4:21 |   6.9 |
-| Sprint and product backlog grooming                    |         |       |  6:04 |   9.7 |
+| Sprint and product backlog grooming                    |         |       |  6:04 |   9.6 |
 | Create a video demo for the previous sprint's features |         |       |  1:35 |   2.5 |
 | Fix issues with emacs                                  |         |       |  2:01 |   3.2 |
 | Fix issues with nightly build                          |         |       |  0:08 |   0.2 |
@@ -32,8 +32,8 @@
 | Update to clang8                                       |         |       |  0:11 |   0.3 |
 | Nursing nightlies                                      |         |       |  0:49 |   1.3 |
 | Fix snags with emacs                                   |         |       |  6:00 |   9.5 |
-| Profiles as meta-model elements                        |         |       |  8:01 |  12.8 |
-| Redesign annotations model                             |         |       | 22:30 |  35.8 |
+| Profiles as meta-model elements                        |         |       |  8:01 |  12.7 |
+| Redesign annotations model                             |         |       | 22:38 |  35.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -649,6 +649,7 @@ Notes:
 
 *** STARTED Redesign annotations model                                :story:
     :LOGBOOK:
+    CLOCK: [2019-04-18 Thu 07:37]--[2019-04-18 Thu 07:45] =>  0:08
     CLOCK: [2019-04-18 Thu 07:24]--[2019-04-18 Thu 07:36] =>  0:12
     CLOCK: [2019-04-18 Thu 06:35]--[2019-04-18 Thu 07:23] =>  0:48
     CLOCK: [2019-04-17 Wed 17:54]--[2019-04-17 Wed 17:59] =>  0:05
