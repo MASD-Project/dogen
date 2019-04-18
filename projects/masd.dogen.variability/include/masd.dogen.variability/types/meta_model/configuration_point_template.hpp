@@ -50,8 +50,8 @@ public:
         const masd::dogen::variability::meta_model::name& name,
         const std::string& description,
         const masd::dogen::archetypes::location& location,
-        const std::list<std::string>& untyped_value,
-        const masd::dogen::variability::meta_model::template_kind kind);
+        const masd::dogen::variability::meta_model::template_kind kind,
+        const std::list<std::string>& untyped_value);
 
 public:
     void to_stream(std::ostream& s) const override;
@@ -67,13 +67,18 @@ public:
     void location(const masd::dogen::archetypes::location&& v);
     /**@}*/
 
+    /**
+     * @brief Kind of the template.
+     */
+    /**@{*/
+    masd::dogen::variability::meta_model::template_kind kind() const;
+    void kind(const masd::dogen::variability::meta_model::template_kind v);
+    /**@}*/
+
     const std::list<std::string>& untyped_value() const;
     std::list<std::string>& untyped_value();
     void untyped_value(const std::list<std::string>& v);
     void untyped_value(const std::list<std::string>&& v);
-
-    masd::dogen::variability::meta_model::template_kind kind() const;
-    void kind(const masd::dogen::variability::meta_model::template_kind v);
 
 public:
     bool operator==(const configuration_point_template& rhs) const;
@@ -90,8 +95,8 @@ public:
 
 private:
     masd::dogen::archetypes::location location_;
-    std::list<std::string> untyped_value_;
     masd::dogen::variability::meta_model::template_kind kind_;
+    std::list<std::string> untyped_value_;
 };
 
 }

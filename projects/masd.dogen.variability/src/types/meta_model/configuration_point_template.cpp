@@ -56,14 +56,14 @@ configuration_point_template::configuration_point_template(
     const masd::dogen::variability::meta_model::name& name,
     const std::string& description,
     const masd::dogen::archetypes::location& location,
-    const std::list<std::string>& untyped_value,
-    const masd::dogen::variability::meta_model::template_kind kind)
+    const masd::dogen::variability::meta_model::template_kind kind,
+    const std::list<std::string>& untyped_value)
     : masd::dogen::variability::meta_model::element(
       name,
       description),
       location_(location),
-      untyped_value_(untyped_value),
-      kind_(kind) { }
+      kind_(kind),
+      untyped_value_(untyped_value) { }
 
 void configuration_point_template::to_stream(std::ostream& s) const {
     s << " { "
@@ -72,8 +72,8 @@ void configuration_point_template::to_stream(std::ostream& s) const {
     masd::dogen::variability::meta_model::element::to_stream(s);
     s << ", "
       << "\"location\": " << location_ << ", "
-      << "\"untyped_value\": " << untyped_value_ << ", "
-      << "\"kind\": " << kind_
+      << "\"kind\": " << kind_ << ", "
+      << "\"untyped_value\": " << untyped_value_
       << " }";
 }
 
@@ -82,8 +82,8 @@ void configuration_point_template::swap(configuration_point_template& other) noe
 
     using std::swap;
     swap(location_, other.location_);
-    swap(untyped_value_, other.untyped_value_);
     swap(kind_, other.kind_);
+    swap(untyped_value_, other.untyped_value_);
 }
 
 bool configuration_point_template::equals(const masd::dogen::variability::meta_model::element& other) const {
@@ -95,8 +95,8 @@ bool configuration_point_template::equals(const masd::dogen::variability::meta_m
 bool configuration_point_template::operator==(const configuration_point_template& rhs) const {
     return masd::dogen::variability::meta_model::element::compare(rhs) &&
         location_ == rhs.location_ &&
-        untyped_value_ == rhs.untyped_value_ &&
-        kind_ == rhs.kind_;
+        kind_ == rhs.kind_ &&
+        untyped_value_ == rhs.untyped_value_;
 }
 
 configuration_point_template& configuration_point_template::operator=(configuration_point_template other) {
@@ -121,6 +121,14 @@ void configuration_point_template::location(const masd::dogen::archetypes::locat
     location_ = std::move(v);
 }
 
+masd::dogen::variability::meta_model::template_kind configuration_point_template::kind() const {
+    return kind_;
+}
+
+void configuration_point_template::kind(const masd::dogen::variability::meta_model::template_kind v) {
+    kind_ = v;
+}
+
 const std::list<std::string>& configuration_point_template::untyped_value() const {
     return untyped_value_;
 }
@@ -135,14 +143,6 @@ void configuration_point_template::untyped_value(const std::list<std::string>& v
 
 void configuration_point_template::untyped_value(const std::list<std::string>&& v) {
     untyped_value_ = std::move(v);
-}
-
-masd::dogen::variability::meta_model::template_kind configuration_point_template::kind() const {
-    return kind_;
-}
-
-void configuration_point_template::kind(const masd::dogen::variability::meta_model::template_kind v) {
-    kind_ = v;
 }
 
 }

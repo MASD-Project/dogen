@@ -694,16 +694,10 @@
       ],
       "documentation": "Defines a template that can be used to instantiate features.\n",
       "stereotypes": [
-        "FeatureElement"
+        "FeatureElement",
+        "Templateable"
       ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "kind",
-          "type": "template_kind",
-          "documentation": "Kind of the template.\n"
-        }
-      ]
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "meta_model::value_type",
@@ -798,17 +792,14 @@
         "meta_model::element"
       ],
       "stereotypes": [
-        "Locatable"
+        "Locatable",
+        "Templateable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "untyped_value",
           "type": "std::list<std::string>"
-        },
-        {
-          "name": "kind",
-          "type": "template_kind"
         }
       ]
     },
@@ -1257,6 +1248,20 @@
         "masd::exception"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::Templateable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "kind",
+          "type": "template_kind",
+          "documentation": "Kind of the template.\n"
+        }
+      ]
     }
   ]
 }

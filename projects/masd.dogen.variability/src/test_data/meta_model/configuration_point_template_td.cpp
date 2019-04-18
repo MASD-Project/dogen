@@ -31,6 +31,11 @@ create_masd_dogen_archetypes_location(const unsigned int position) {
     return masd::dogen::archetypes::location_generator::create(position);
 }
 
+masd::dogen::variability::meta_model::template_kind
+create_masd_dogen_variability_meta_model_template_kind(const unsigned int position) {
+    return masd::dogen::variability::meta_model::template_kind_generator::create(position);
+}
+
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
@@ -45,11 +50,6 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
-masd::dogen::variability::meta_model::template_kind
-create_masd_dogen_variability_meta_model_template_kind(const unsigned int position) {
-    return masd::dogen::variability::meta_model::template_kind_generator::create(position);
-}
-
 }
 
 namespace masd::dogen::variability::meta_model {
@@ -60,8 +60,8 @@ void configuration_point_template_generator::
 populate(const unsigned int position, result_type& v) {
     masd::dogen::variability::meta_model::element_generator::populate(position, v);
     v.location(create_masd_dogen_archetypes_location(position + 0));
-    v.untyped_value(create_std_list_std_string(position + 1));
-    v.kind(create_masd_dogen_variability_meta_model_template_kind(position + 2));
+    v.kind(create_masd_dogen_variability_meta_model_template_kind(position + 1));
+    v.untyped_value(create_std_list_std_string(position + 2));
 }
 
 configuration_point_template_generator::result_type
