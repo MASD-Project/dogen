@@ -115,14 +115,17 @@ a.stream() << "   \"${CMAKE_CURRENT_SOURCE_DIR}/*.cxx\")" << std::endl;
 a.stream() << "set(files ${files} ${odb_files})" << std::endl;
 a.stream() << std::endl;
         }
-a.stream() << "add_library(" << model_name << " STATIC ${files})" << std::endl;
+a.stream() << "add_library(" << model_name << " ${files})" << std::endl;
 a.stream() << "set_target_properties(" << model_name << " PROPERTIES" << std::endl;
         if (a.is_cpp_standard_98()) {
 a.stream() << "    CXX_STANDARD 98" << std::endl;
         }
 a.stream() << "    OUTPUT_NAME " << product_name << (product_name.empty() ? "" : ".") << model_name << ")" << std::endl;
 a.stream() << std::endl;
-a.stream() << "install(TARGETS " << model_name << " ARCHIVE DESTINATION lib COMPONENT libraries)" << std::endl;
+a.stream() << "install(TARGETS " << model_name << std::endl;
+a.stream() << "    ARCHIVE DESTINATION lib" << std::endl;
+a.stream() << "    LIBRARY DESTINATION lib" << std::endl;
+a.stream() << "    COMPONENT libraries)" << std::endl;
         if (a.is_odb_facet_enabled() && !c.odb_targets().targets().empty()) {
             const auto targets(c.odb_targets());
 a.stream() << std::endl;
