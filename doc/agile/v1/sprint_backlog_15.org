@@ -13,27 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-18 Thu 07:45]
-| <75>                                                   |         |       |       |       |
-| Headline                                               | Time    |       |       |     % |
-|--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *62:58* |       |       | 100.0 |
-|--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 62:58   |       |       | 100.0 |
-| Active                                                 |         | 62:58 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  4:21 |   6.9 |
-| Sprint and product backlog grooming                    |         |       |  6:04 |   9.6 |
-| Create a video demo for the previous sprint's features |         |       |  1:35 |   2.5 |
-| Fix issues with emacs                                  |         |       |  2:01 |   3.2 |
-| Fix issues with nightly build                          |         |       |  0:08 |   0.2 |
-| Add diffing support to string asserter                 |         |       |  1:00 |   1.6 |
-| C# generation is borked                                |         |       |  4:12 |   6.7 |
-| Reactivate the boilerplate tests                       |         |       |  5:58 |   9.5 |
-| Update to clang8                                       |         |       |  0:11 |   0.3 |
-| Nursing nightlies                                      |         |       |  0:49 |   1.3 |
-| Fix snags with emacs                                   |         |       |  6:00 |   9.5 |
-| Profiles as meta-model elements                        |         |       |  8:01 |  12.7 |
-| Redesign annotations model                             |         |       | 22:38 |  35.9 |
+#+CAPTION: Clock summary at [2019-04-19 Fri 16:14]
+| <75>                                                              |         |       |       |       |
+| Headline                                                          | Time    |       |       |     % |
+|-------------------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                                      | *70:21* |       |       | 100.0 |
+|-------------------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                           | 70:21   |       |       | 100.0 |
+| Active                                                            |         | 70:21 |       | 100.0 |
+| Edit release notes for previous sprint                            |         |       |  4:21 |   6.2 |
+| Sprint and product backlog grooming                               |         |       |  7:06 |  10.1 |
+| Create a video demo for the previous sprint's features            |         |       |  1:35 |   2.3 |
+| Fix issues with emacs                                             |         |       |  2:01 |   2.9 |
+| Fix issues with nightly build                                     |         |       |  0:08 |   0.2 |
+| Add diffing support to string asserter                            |         |       |  1:00 |   1.4 |
+| C# generation is borked                                           |         |       |  4:12 |   6.0 |
+| Reactivate the boilerplate tests                                  |         |       |  5:58 |   8.5 |
+| Update to clang8                                                  |         |       |  0:11 |   0.3 |
+| Do not hard-code static library generation                        |         |       |  1:01 |   1.4 |
+| Nursing nightlies                                                 |         |       |  0:49 |   1.2 |
+| Fix snags with emacs                                              |         |       |  6:00 |   8.5 |
+| Profiles as meta-model elements                                   |         |       |  8:01 |  11.4 |
+| Redesign annotations model                                        |         |       | 27:55 |  39.7 |
+| Generated models should support both static and dynamic libraries |         |       |  0:03 |   0.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -194,6 +196,9 @@ Happy Modeling!
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-04-18 Thu 18:11]--[2019-04-18 Thu 18:25] =>  0:14
+    CLOCK: [2019-04-18 Thu 12:02]--[2019-04-18 Thu 12:35] =>  0:33
+    CLOCK: [2019-04-18 Thu 09:21]--[2019-04-18 Thu 09:36] =>  0:15
     CLOCK: [2019-04-17 Wed 07:22]--[2019-04-17 Wed 07:43] =>  0:21
     CLOCK: [2019-04-17 Wed 07:13]--[2019-04-17 Wed 07:21] =>  0:08
     CLOCK: [2019-04-16 Tue 15:01]--[2019-04-16 Tue 16:12] =>  1:11
@@ -343,6 +348,16 @@ of features; this is what we have so far called "properties". The
 instances of these features are called configurations. We just need a
 strategy for mapping features into UML models, for which there are
 several in the literature.
+
+*** COMPLETED Do not hard-code static library generation              :story:
+    CLOSED: [2019-04-19 Fri 16:09]
+    :LOGBOOK:
+    CLOCK: [2019-04-19 Fri 15:08]--[2019-04-19 Fri 16:09] =>  1:01
+    :END:
+
+It seems we need to support building shared libraries in order to use
+cling at present. However, we've hard-coded dogen to use static
+libraries. Remove the hard-coding.
 
 *** STARTED Nursing nightlies                                         :story:
     :LOGBOOK:
@@ -649,6 +664,11 @@ Notes:
 
 *** STARTED Redesign annotations model                                :story:
     :LOGBOOK:
+    CLOCK: [2019-04-18 Thu 18:39]--[2019-04-18 Thu 18:50] =>  0:11
+    CLOCK: [2019-04-18 Thu 18:25]--[2019-04-18 Thu 18:39] =>  0:14
+    CLOCK: [2019-04-18 Thu 17:31]--[2019-04-18 Thu 18:10] =>  0:52
+    CLOCK: [2019-04-18 Thu 14:02]--[2019-04-18 Thu 15:59] =>  1:57
+    CLOCK: [2019-04-18 Thu 09:45]--[2019-04-18 Thu 12:01] =>  2:41
     CLOCK: [2019-04-18 Thu 07:37]--[2019-04-18 Thu 07:45] =>  0:08
     CLOCK: [2019-04-18 Thu 07:24]--[2019-04-18 Thu 07:36] =>  0:12
     CLOCK: [2019-04-18 Thu 06:35]--[2019-04-18 Thu 07:23] =>  0:48
@@ -764,6 +784,79 @@ Tasks:
 - rename annotation to configuration.
 - create archetype model and mode archetype related types there.
 
+*** STARTED Generated models should support both static and dynamic libraries :story:
+    :LOGBOOK:
+    CLOCK: [2019-04-19 Fri 16:11]--[2019-04-19 Fri 16:14] =>  0:03
+    :END:
+
+At present we have hard-coded the CMake files to generate static
+libraries on all generated . We should allow the user to choose at
+build time. See other story:
+
+- Allow user to choose whether to build shared or static libraries
+
+*** Enablement problem is in the variability domain                   :story:
+
+Up to now we have considered the enablement problem as a generation
+model problem, but this is incorrect. The enablement problem is
+basically the idea that if I set a type to be hashable (for example),
+the system should implicitly determine all other types that need to be
+hashable too. This means that if I have descendants, they should also
+be hashable, and if I have properties, the type of those properties
+must also be hashable. In reality this is just a variability
+problem. We need to tell the variability model about:
+
+- features that require "propagation across model elements". We need a
+  good name for this, without referencing model elements.
+- the relationship between bound configurations. This can be copied
+  from the model element (the bound configuration has the exact same
+  name as the model element).
+
+Then, we can simply build a DAG for the feature model using only bound
+configurations (e.g. at present, binding type of "not applicable") and
+then DFS the DAG setting properties across this relationship. Call the
+relationship R between a and b, where a and b are configurations; all
+properties that have the "propagate" flag on will be copied across
+from a to b as is (due to R). If done after building the merged model
+and after stereotype expansion this will work really well:
+
+- we don't really care how a got into the state it is at present, we
+  just copy the relevant properties across.
+- there is no solving, BDD, etc. However, R must not have cycles. We
+  probably need to first see how many cycles we find with inheritance
+  and associations.
+- we may need a way to switch this off. Say we really want to
+  introduce a cycle; in that case, the bound configurations should be
+  ignored.
+
+Note that we will probably need to store pointers to the configuration
+in order for this to work, or else we'll end up doing a lot of lookups
+and copying around (to get the configurations from the model elements
+into variability, the DAG etc and then back into the model at the
+end).
+
+Interestingly, this also means that we should not move the
+global/local enablement computations into archetypes as we had planned
+earlier. Instead, we need to explore if it is possible to generalise
+the notion of "local" and "global" configurations, with overrides and
+default values. This would work as part of the configuration binding
+via implicit relationships - its just that the global configuration is
+not really a relationship inferred from the underlying model. We then
+need to look at the cleverness that we are using for overwrite as
+well. Whilst we only need this logic for enablement, it may be useful
+for other fields as well in the future. We also need some kind of way
+of declaring certain fields as "cloneable" (for want of a better
+term). In this case, we start off with a list of these fields, and if
+there is no configuration point for them locally, we take the global
+configuration point; if none exists, we take the default value.
+
+Actually its more like "hierarchical copy" because we need to take
+into account the hierarchy. In addition, we don't particularly care
+about say backend, facet, etc at the element level, we just want the
+archetype. So we need to encode these rules as a type of bind. It can
+even be hacked as a bind "special" just for this purpose, its still a
+better approach.
+
 *** Clean up annotation scope types                                   :story:
 
 As part of the attribute rename (which used to be called property) we
@@ -802,6 +895,7 @@ Instead of using strings we should use primitives for:
 - facets
 - formatters
 - backends
+- simple and qualified names.
 - etc.
 
 *** Consider a test suite level logging flag                          :story:
@@ -951,6 +1045,13 @@ for this:
 *** Shared pointers have getters and setters with references          :story:
 
 We should really pass shared pointers by value instead of reference.
+
+*** Consider changing variability value into a variant                :story:
+
+Really all we are doing is adding a lot of infrastructure to be able
+to store different types of values. This is what the variant is
+designed to do. In addition, we then have all of the complexities
+around selection that are already handled by variant.
 
 ** Deprecated
 *** CANCELLED Consider code generating utility at a product level     :story:

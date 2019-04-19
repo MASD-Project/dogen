@@ -11279,6 +11279,13 @@ There are some known limitations in package naming:
 
 *** Allow user to choose whether to build shared or static libraries  :story:
 
+We removed the hard-coding, but the code does not compile due to
+problems linking Boost Log:
+
+- [[https://github.com/Microsoft/vcpkg/issues/6148][Errors building shared library due to Boost Log and PIC]]
+
+*Previous understanding*
+
 #+begin_quote
 *Story*: As a dogen user, I want to generate models as shared objects
 so that I don't have to statically link models all the time.
@@ -11311,15 +11318,8 @@ Dogen. However, CMake supports both.
 
 Links:
 
-- [[http://stackoverflow.com/questions/2152077/is-it-possible-to-get-cmake-to-build-both-a-static-and-shared-version-of-the-sam][Is it possible to get CMake to build both a static and shared version of the same library?]]
-
-*** Generated models should support both static and dynamic libraries :story:
-
-At present we have hard-coded the CMake files to generate static
-libraries on all generated . We should allow the user to choose at
-build time. See other story:
-
-- Allow user to choose whether to build shared or static libraries
+- [[http://stackoverflow.com/questions/2152077/is-it-possible-to-get-cmake-to-build-both-a-static-and-shared-version-of-the-sam][Is it possible to get CMake to build both a static and shared
+  version of the same library?]]
 
 *** Migrate from Boost Test to Catch                                  :story:
 
@@ -14753,3 +14753,18 @@ Links:
 - [[https://github.com/wlbr/cl-marshal][cl-marshal]]: Simple and fast marshalling of Lisp datastructures.
 - [[https://www.cliki.net/serialization][cliki]]: Libraries to translate data structures to/from a format which
   can be stored/retrieved
+*** Add jailer like functionality to ORM support                      :story:
+
+Jailer is a Java tool that allows exporting subsets of a relational
+database ("Database Subsetting Tool"). This is useful for example for
+creating test databases. We could support jailer directly from
+Dogen. However, we probably need to have built-in SQL support
+first. This story also intersects other stories such as data
+anonymisation.
+
+Links:
+
+- [[http://jailer.sourceforge.net/exporting-data.htm][jailer tutorial]]
+- [[http://jailer.sourceforge.net/][jailer]]
+- [[https://martinfowler.com/articles/evodb.html][Evolutionary Database Design]]: Fowler article talking about how
+  jailer is used with Agile.
