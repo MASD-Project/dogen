@@ -19,19 +19,20 @@
  *
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.variability/types/helpers/configuration_merger.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_point_merger.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
-static logger lg(logger_factory("variability.helpers..configuration_merger"));
+static logger lg(logger_factory(
+        "variability.helpers..configuration_point_merger"));
 
 }
 
 namespace masd::dogen::variability::helpers {
 
 meta_model::configuration
-configuration_merger::merge(const meta_model::configuration& lhs,
+configuration_point_merger::merge(const meta_model::configuration& lhs,
     const meta_model::configuration& rhs) const {
     BOOST_LOG_SEV(lg, debug) << "Merging configurations. Lhs"
                              << lhs.name().qualified()

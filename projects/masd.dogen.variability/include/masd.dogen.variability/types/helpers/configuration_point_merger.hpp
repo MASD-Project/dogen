@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_VARIABILITY_TYPES_HELPERS_CONFIGURATION_MERGER_HPP
-#define MASD_DOGEN_VARIABILITY_TYPES_HELPERS_CONFIGURATION_MERGER_HPP
+#ifndef MASD_DOGEN_VARIABILITY_TYPES_HELPERS_CONFIGURATION_POINT_MERGER_HPP
+#define MASD_DOGEN_VARIABILITY_TYPES_HELPERS_CONFIGURATION_POINT_MERGER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -37,7 +37,7 @@ namespace masd::dogen::variability::helpers {
  * both, rhs takes precedence. Note that this makes merging not
  * commutative, so the order of lhs/rhs matters.
  */
-class configuration_merger final {
+class configuration_point_merger final {
 public:
     /**
      * @brief Merges the two configurations according to the merging

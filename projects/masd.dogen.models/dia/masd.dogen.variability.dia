@@ -2176,13 +2176,13 @@ to the content of entries.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O18">
       <dia:attribute name="obj_pos">
-        <dia:point val="120,-69"/>
+        <dia:point val="121,-72"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="119.95,-69.05;151.35,-62.95"/>
+        <dia:rectangle val="120.95,-72.05;152.35,-65.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="120,-69"/>
+        <dia:point val="121,-72"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="31.300000000000001"/>
@@ -7740,17 +7740,17 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="135.65,-66"/>
+        <dia:point val="136.65,-65.9498"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="129.765,-66.75;136.4,-60.2"/>
+        <dia:rectangle val="129.765,-66.6998;137.4,-60.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="135.65,-66"/>
-        <dia:point val="135.65,-63"/>
+        <dia:point val="136.65,-65.9498"/>
+        <dia:point val="136.65,-63"/>
         <dia:point val="129.815,-63"/>
         <dia:point val="129.815,-61"/>
       </dia:attribute>
@@ -17017,19 +17017,19 @@ elements.#</dia:string>
         <dia:point val="127,-17"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="126.95,-17.05;155.655,-12.55"/>
+        <dia:rectangle val="126.95,-17.05;156.04,-10.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="127,-17"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="28.605"/>
+        <dia:real val="28.989999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#configuration_merger#</dia:string>
+        <dia:string>#configuration_point_merger#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>
@@ -17151,7 +17151,7 @@ elements.#</dia:string>
                 <dia:string>#lhs#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::configuration#</dia:string>
+                <dia:string>#std::unordered_map&lt;std::string, meta_model::configuration_point&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -17168,7 +17168,7 @@ elements.#</dia:string>
                 <dia:string>#rhs#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::configuration#</dia:string>
+                <dia:string>#std::unordered_map&lt;std::string, meta_model::configuration_point&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
