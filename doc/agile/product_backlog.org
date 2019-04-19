@@ -968,16 +968,6 @@ enable/disable this behaviour.
 It would be nice to generate a tracing of the model dependencies. This
 may not necessarily be part of tracing.
 
-*** Fix cmake emacs variable for tab width                            :story:
-
-We need to replace uses of =tab-width= in cmake files with
-=cmake-tab-width=, as explained here:
-
-[[http://stackoverflow.com/questions/25751408/controlling-the-indent-offset-for-cmake-in-emacs][Controlling the indent/offset for CMake in emacs]]
-
-We need to do this for both code generated and manually generated
-files.
-
 *** Default model modules from filename                               :story:
 
 It would be nice to be able to not have to supply model modules when

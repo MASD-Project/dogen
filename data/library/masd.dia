@@ -644,7 +644,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#tab-width#</dia:string>
+            <dia:string>#cmake-tab-width#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -5548,7 +5548,7 @@ obtained from the copyright holder.
         <dia:point val="10.7587,46"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.90875,45.95;25.4275,57.05"/>
+        <dia:rectangle val="9.9087,45.95;25.4275,57.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5753,7 +5753,7 @@ obtained from the copyright holder.
         <dia:point val="10.7587,46"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.90875,45.95;14.1925,50.05"/>
+        <dia:rectangle val="9.9087,45.95;14.1925,50.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6246,7 +6246,7 @@ obtained from the copyright holder.
         <dia:point val="10.7587,46"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.90875,45.95;36.1925,50.05"/>
+        <dia:rectangle val="9.9087,45.95;36.1925,50.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8096,7 +8096,7 @@ obtained from the copyright holder.
         <dia:point val="65.6538,38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="64.8037,37.95;66.5037,50.05"/>
+        <dia:rectangle val="64.8038,37.95;66.5038,50.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8625,7 +8625,7 @@ obtained from the copyright holder.
         <dia:point val="65.6538,38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="64.8037,37.95;79.5025,45.05"/>
+        <dia:rectangle val="64.8038,37.95;79.5025,45.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9020,7 +9020,7 @@ obtained from the copyright holder.
         <dia:point val="65.6538,38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="55.9,37.95;66.5037,45.05"/>
+        <dia:rectangle val="55.9,37.95;66.5038,45.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9102,7 +9102,7 @@ obtained from the copyright holder.
         <dia:point val="76.2313,27.6501"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="71.2575,27.6001;77.0812,35.05"/>
+        <dia:rectangle val="71.2575,27.6001;77.0813,35.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
