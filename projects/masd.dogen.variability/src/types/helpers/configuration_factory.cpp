@@ -25,7 +25,7 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_io.hpp"
-#include "masd.dogen.variability/io/meta_model/binding_type_io.hpp"
+#include "masd.dogen.variability/io/meta_model/binding_point_io.hpp"
 #include "masd.dogen.variability/types/helpers/value_factory.hpp"
 #include "masd.dogen.variability/types/helpers/building_exception.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_factory.hpp"
@@ -35,8 +35,8 @@ namespace {
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("variability.helpers.configuration_factory"));
 
-const std::string expected_binding_type(" Expected binding type: ");
-const std::string actual_binding_type(" Actual binding type: ");
+const std::string expected_binding_point(" Expected binding point: ");
+const std::string actual_binding_point(" Actual binding point: ");
 const std::string duplicate_feature("Feature already inserted: ");
 const std::string duplicate_key("Key already inserted: ");
 const std::string too_many_values("More than one value supplied against key: ");
@@ -79,29 +79,27 @@ configuration_factory::try_obtain_feature(const std::string& qn) const {
 }
 
 void configuration_factory::validate_binding(const meta_model::feature& f,
-    const meta_model::binding_type bt) const {
-    using meta_model::binding_type;
+    const meta_model::binding_point bp) const {
 
-    const auto fbt(f.binding_type());
-    if (fbt != binding_type::any &&
-        fbt != binding_type::not_applicable && fbt != bt) {
-
+    const auto fbt(f.binding_point());
+    if (fbt != meta_model::binding_point::any && fbt != bp) {
         std::stringstream s;
         s << invalid_binding_for_point << f.name().qualified()
-          << expected_binding_type << f.binding_type()
-          << actual_binding_type << bt;
+          << expected_binding_point << f.binding_point()
+          << actual_binding_point << bp;
+
         BOOST_LOG_SEV(lg, error) << s.str();
         BOOST_THROW_EXCEPTION(building_exception(s.str()));
     }
 }
 
 meta_model::configuration
-configuration_factory::create_configuration(const meta_model::binding_type bt,
+configuration_factory::create_configuration(const meta_model::binding_point bp,
     const std::unordered_map<std::string, std::list<std::string>>&
     aggregated_entries) const {
 
     meta_model::configuration r;
-    r.binding_type(bt);
+    r.source_binding_point(bp);
 
     value_factory factory;
     std::unordered_map<std::string, boost::shared_ptr<meta_model::value>>
@@ -140,7 +138,7 @@ configuration_factory::create_configuration(const meta_model::binding_type bt,
          * Ensure the entry is valid with regards to the binding type.
          */
         const auto& f(*of);
-        validate_binding(f, bt);
+        validate_binding(f, bp);
 
         const auto& v(kvp.second);
         if (f.value_type() == meta_model::value_type::key_value_pair) {
@@ -197,9 +195,9 @@ configuration_factory::aggregate_entries(
 
 meta_model::configuration configuration_factory::make(
     const std::list<std::pair<std::string, std::string>>& entries,
-    const meta_model::binding_type bt) const {
+    const meta_model::binding_point bp) const {
     auto aggregated_entries(aggregate_entries(entries));
-    const auto r(create_configuration(bt, aggregated_entries));
+    const auto r(create_configuration(bp, aggregated_entries));
     return r;
 }
 

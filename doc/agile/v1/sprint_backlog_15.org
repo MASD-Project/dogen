@@ -13,30 +13,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-19 Fri 17:01]
+#+CAPTION: Clock summary at [2019-04-19 Fri 20:32]
 | <75>                                                              |         |       |       |       |
 | Headline                                                          | Time    |       |       |     % |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                      | *71:05* |       |       | 100.0 |
+| *Total time*                                                      | *73:50* |       |       | 100.0 |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                           | 71:05   |       |       | 100.0 |
-| Active                                                            |         | 71:05 |       | 100.0 |
-| Edit release notes for previous sprint                            |         |       |  4:21 |   6.1 |
-| Sprint and product backlog grooming                               |         |       |  7:06 |  10.0 |
-| Create a video demo for the previous sprint's features            |         |       |  1:35 |   2.2 |
-| Fix issues with emacs                                             |         |       |  2:01 |   2.8 |
+| Stories                                                           | 73:50   |       |       | 100.0 |
+| Active                                                            |         | 73:50 |       | 100.0 |
+| Edit release notes for previous sprint                            |         |       |  4:21 |   5.9 |
+| Sprint and product backlog grooming                               |         |       |  7:06 |   9.6 |
+| Create a video demo for the previous sprint's features            |         |       |  1:35 |   2.1 |
+| Fix issues with emacs                                             |         |       |  2:01 |   2.7 |
 | Fix issues with nightly build                                     |         |       |  0:08 |   0.2 |
 | Add diffing support to string asserter                            |         |       |  1:00 |   1.4 |
-| C# generation is borked                                           |         |       |  4:12 |   5.9 |
-| Reactivate the boilerplate tests                                  |         |       |  5:58 |   8.4 |
-| Update to clang8                                                  |         |       |  0:11 |   0.3 |
+| C# generation is borked                                           |         |       |  4:12 |   5.7 |
+| Reactivate the boilerplate tests                                  |         |       |  5:58 |   8.1 |
+| Update to clang8                                                  |         |       |  0:11 |   0.2 |
 | Do not hard-code static library generation                        |         |       |  1:01 |   1.4 |
 | Generated models should support both static and dynamic libraries |         |       |  0:09 |   0.2 |
 | Fix cmake emacs variable for tab width                            |         |       |  0:38 |   0.9 |
 | Nursing nightlies                                                 |         |       |  0:49 |   1.1 |
-| Fix snags with emacs                                              |         |       |  6:00 |   8.4 |
-| Profiles as meta-model elements                                   |         |       |  8:01 |  11.3 |
-| Redesign annotations model                                        |         |       | 27:55 |  39.3 |
+| Fix snags with emacs                                              |         |       |  6:00 |   8.1 |
+| Profiles as meta-model elements                                   |         |       |  8:01 |  10.9 |
+| Redesign annotations model                                        |         |       | 30:40 |  41.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -692,6 +692,8 @@ Notes:
 
 *** STARTED Redesign annotations model                                :story:
     :LOGBOOK:
+    CLOCK: [2019-04-19 Fri 18:01]--[2019-04-19 Fri 20:32] =>  2:31
+    CLOCK: [2019-04-19 Fri 17:01]--[2019-04-19 Fri 17:15] =>  0:40
     CLOCK: [2019-04-18 Thu 18:39]--[2019-04-18 Thu 18:50] =>  0:11
     CLOCK: [2019-04-18 Thu 18:25]--[2019-04-18 Thu 18:39] =>  0:14
     CLOCK: [2019-04-18 Thu 17:31]--[2019-04-18 Thu 18:10] =>  0:52
@@ -803,6 +805,20 @@ Notes:
   clear by looking at wikipedia so lets stick to merger.
 - tracing is dependent on variability at present. This is only because
   we are dumping the inputs. We need a different way of doing this.
+- we could create a top-level variability chain - the "profile binding
+  chain" - that receives as input a configuration model set and a
+  feature model. Configuration model sets are made up of configuration
+  models. These are made up of a set of profile templates, the global
+  configuration and the local configuration. The last two are
+  pointers. The chain then is made up of the following transforms:
+  - instantiate all profile templates across all models in the model
+    set.
+  - process all profile template relationships.
+  - create all profiles.
+  - bind all profiles to configurations.
+  - apply the global to local configuration transform.
+- at the coding level we then copy across the configurations to the
+  corresponding model elements. This is done
 
 Tasks:
 
@@ -873,6 +889,18 @@ about say backend, facet, etc at the element level, we just want the
 archetype. So we need to encode these rules as a type of bind. It can
 even be hacked as a bind "special" just for this purpose, its still a
 better approach.
+
+Another interesting issue is that of "reverse references". That is,
+the fact that a model m is referenced by a set of models S; each of
+these models may enable facets on elements that are associated with
+elements from model m. On a first pass, we need to be able to consider
+the configuration requirements as "non-satisfiable". The user
+requested a configuration on the target model which cannot be
+satisfied unless we alter the configuration of a referenced model. On
+a second pass, when we have product level support, we could consider
+adding "referenced" models to each model. This means that when we are
+building m we have visibility of how m is used in the product and we
+can take those uses into account when building the DAG.
 
 *** Clean up annotation scope types                                   :story:
 

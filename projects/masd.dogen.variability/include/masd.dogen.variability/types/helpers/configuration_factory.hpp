@@ -35,7 +35,7 @@
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
-#include "masd.dogen.variability/types/meta_model/binding_type.hpp"
+#include "masd.dogen.variability/types/meta_model/binding_point.hpp"
 
 namespace masd::dogen::variability::helpers {
 
@@ -68,21 +68,21 @@ private:
      * type.
      */
     void validate_binding(const meta_model::feature& f,
-        const meta_model::binding_type bt) const;
+        const meta_model::binding_point bp) const;
 
     /**
      * @brief Given a binding type, returns the well-known name of its
      * the default configuration.
      */
-    std::string get_default_configuration_name_for_binding_type(
-        const meta_model::binding_type bt) const;
+    std::string get_default_configuration_name_for_binding_point(
+        const meta_model::binding_point bp) const;
 
 private:
     /**
      * @brief Converts the raw data into a configuration.
      */
     meta_model::configuration
-    create_configuration(const meta_model::binding_type bt,
+    create_configuration(const meta_model::binding_point bp,
         const std::unordered_map<std::string, std::list<std::string>>&
         aggregated_entries) const;
 
@@ -99,7 +99,7 @@ public:
      */
     meta_model::configuration
     make(const std::list<std::pair<std::string, std::string>>& entries,
-        const meta_model::binding_type bt) const;
+        const meta_model::binding_point bp) const;
 
 private:
     const archetypes::location_repository& archetype_location_repository_;

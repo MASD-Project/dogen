@@ -23,7 +23,8 @@
 #include "masd.dogen.variability/test_data/meta_model/element_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/feature_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/value_type_td.hpp"
-#include "masd.dogen.variability/test_data/meta_model/binding_type_td.hpp"
+#include "masd.dogen.variability/test_data/meta_model/binding_point_td.hpp"
+#include "masd.dogen.variability/test_data/meta_model/binding_action_td.hpp"
 
 namespace {
 
@@ -49,9 +50,14 @@ create_masd_dogen_variability_meta_model_value_type(const unsigned int position)
     return masd::dogen::variability::meta_model::value_type_generator::create(position);
 }
 
-masd::dogen::variability::meta_model::binding_type
-create_masd_dogen_variability_meta_model_binding_type(const unsigned int position) {
-    return masd::dogen::variability::meta_model::binding_type_generator::create(position);
+masd::dogen::variability::meta_model::binding_point
+create_masd_dogen_variability_meta_model_binding_point(const unsigned int position) {
+    return masd::dogen::variability::meta_model::binding_point_generator::create(position);
+}
+
+masd::dogen::variability::meta_model::binding_action
+create_masd_dogen_variability_meta_model_binding_action(const unsigned int position) {
+    return masd::dogen::variability::meta_model::binding_action_generator::create(position);
 }
 
 bool create_bool(const unsigned int position) {
@@ -70,8 +76,10 @@ populate(const unsigned int position, result_type& v) {
     v.location(create_masd_dogen_archetypes_location(position + 0));
     v.default_value(create_boost_shared_ptr_masd_dogen_variability_meta_model_value(position + 1));
     v.value_type(create_masd_dogen_variability_meta_model_value_type(position + 2));
-    v.binding_type(create_masd_dogen_variability_meta_model_binding_type(position + 3));
-    v.is_partially_matchable(create_bool(position + 4));
+    v.binding_point(create_masd_dogen_variability_meta_model_binding_point(position + 3));
+    v.profile_binding_action(create_masd_dogen_variability_meta_model_binding_action(position + 4));
+    v.configuration_binding_action(create_masd_dogen_variability_meta_model_binding_action(position + 5));
+    v.is_partially_matchable(create_bool(position + 6));
 }
 
 feature_generator::result_type

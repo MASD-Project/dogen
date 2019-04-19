@@ -29,36 +29,39 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include <boost/optional.hpp>
+#include <unordered_set>
 #include "masd.dogen.variability/types/meta_model/element.hpp"
-#include "masd.dogen.variability/types/meta_model/binding_type.hpp"
+#include "masd.dogen.variability/types/meta_model/binding_point.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration_point.hpp"
 
 namespace masd::dogen::variability::meta_model {
 
 class configuration final : public masd::dogen::variability::meta_model::element {
 public:
-    configuration() = default;
     configuration(const configuration&) = default;
-
-    virtual ~configuration() noexcept { }
+    configuration(configuration&&) = default;
 
 public:
-    configuration(configuration&& rhs);
+    configuration();
+
+    virtual ~configuration() noexcept { }
 
 public:
     configuration(
         const masd::dogen::variability::meta_model::name& name,
         const std::string& description,
         const std::unordered_map<std::string, masd::dogen::variability::meta_model::configuration_point>& configuration_points,
-        const boost::optional<masd::dogen::variability::meta_model::binding_type>& binding_type);
+        const std::unordered_set<std::string>& profile_bindings,
+        const std::unordered_set<std::string>& configuration_bindings,
+        const masd::dogen::variability::meta_model::binding_point source_binding_point,
+        const bool from_target);
 
 public:
     void to_stream(std::ostream& s) const override;
 
 public:
     /**
-     * @brief All configuration points in this configuration.
+     * @brief All configuration points associated with this element.
      */
     /**@{*/
     const std::unordered_map<std::string, masd::dogen::variability::meta_model::configuration_point>& configuration_points() const;
@@ -68,13 +71,42 @@ public:
     /**@}*/
 
     /**
-     * @brief Type of binding available for this configuration, if bound.
+     * @brief Bindings to profiles.
      */
     /**@{*/
-    const boost::optional<masd::dogen::variability::meta_model::binding_type>& binding_type() const;
-    boost::optional<masd::dogen::variability::meta_model::binding_type>& binding_type();
-    void binding_type(const boost::optional<masd::dogen::variability::meta_model::binding_type>& v);
-    void binding_type(const boost::optional<masd::dogen::variability::meta_model::binding_type>&& v);
+    const std::unordered_set<std::string>& profile_bindings() const;
+    std::unordered_set<std::string>& profile_bindings();
+    void profile_bindings(const std::unordered_set<std::string>& v);
+    void profile_bindings(const std::unordered_set<std::string>&& v);
+    /**@}*/
+
+    /**
+     * @brief Relationships between this bound configuration and other bound configurations.
+     *
+     * These relationships are inferred from the relationships of the underlying model
+     * elements.
+     */
+    /**@{*/
+    const std::unordered_set<std::string>& configuration_bindings() const;
+    std::unordered_set<std::string>& configuration_bindings();
+    void configuration_bindings(const std::unordered_set<std::string>& v);
+    void configuration_bindings(const std::unordered_set<std::string>&& v);
+    /**@}*/
+
+    /**
+     * @brief Where was this configuration sourced from with regards to binding.
+     */
+    /**@{*/
+    masd::dogen::variability::meta_model::binding_point source_binding_point() const;
+    void source_binding_point(const masd::dogen::variability::meta_model::binding_point v);
+    /**@}*/
+
+    /**
+     * @brief If true, this configuration was sourced from an element in the target model.
+     */
+    /**@{*/
+    bool from_target() const;
+    void from_target(const bool v);
     /**@}*/
 
 public:
@@ -92,7 +124,10 @@ public:
 
 private:
     std::unordered_map<std::string, masd::dogen::variability::meta_model::configuration_point> configuration_points_;
-    boost::optional<masd::dogen::variability::meta_model::binding_type> binding_type_;
+    std::unordered_set<std::string> profile_bindings_;
+    std::unordered_set<std::string> configuration_bindings_;
+    masd::dogen::variability::meta_model::binding_point source_binding_point_;
+    bool from_target_;
 };
 
 }

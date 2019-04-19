@@ -50,9 +50,8 @@ const std::string scope_key("scope");
 const std::string default_value_key("default_value");
 
 const std::string scope_any("any");
-const std::string scope_not_applicable("not_applicable");
+const std::string scope_any_module("any");
 const std::string scope_root_module("root_module");
-const std::string scope_any_module("any_module");
 const std::string scope_entity("entity");
 const std::string scope_property("property");
 const std::string scope_operation("operation");
@@ -85,23 +84,21 @@ const std::string invalid_template_kind(
 
 namespace masd::dogen::variability::helpers {
 
-meta_model::binding_type
-feature_template_hydrator::to_binding_type(const std::string& s) const {
-    using meta_model::binding_type;
+meta_model::binding_point
+feature_template_hydrator::to_binding_point(const std::string& s) const {
+    using meta_model::binding_point;
     if (s == scope_any)
-        return binding_type::any;
-    else if (s == scope_not_applicable)
-        return binding_type::not_applicable;
+        return binding_point::any;
     else if (s == scope_root_module)
-        return binding_type::root_module;
+        return binding_point::global;
     else if (s == scope_any_module)
-        return binding_type::any_module;
+        return binding_point::element;
     else if (s == scope_entity)
-        return binding_type::entity;
+        return binding_point::element;
     else if (s == scope_property)
-        return binding_type::property;
+        return binding_point::property;
     else if (s == scope_operation)
-        return binding_type::operation;
+        return binding_point::operation;
 
     BOOST_LOG_SEV(lg, error) << invalid_scope << "'" << s << "'";
     BOOST_THROW_EXCEPTION(hydration_exception(invalid_scope + s));
@@ -132,7 +129,6 @@ feature_template_hydrator::to_template_kind(const std::string& s) const {
         return template_kind::instance;
     if (s == template_kind_recursive_template)
         return template_kind::recursive_template;
-    if (s == template_kind_backend_template)
         return template_kind::backend_template;
     if (s == template_kind_facet_template)
         return template_kind::facet_template;
@@ -207,7 +203,7 @@ feature_template_hydrator::read_stream(std::istream& s) const {
         ft.location(read_archetype_location(j->second));
         ft.value_type(to_value_type(tt_pt.get<std::string>(value_type_key)));
         ft.kind(to_template_kind(tt_pt.get<std::string>(template_kind_key)));
-        ft.binding_type(to_binding_type(tt_pt.get<std::string>(scope_key)));
+        ft.binding_point(to_binding_point(tt_pt.get<std::string>(scope_key)));
 
         const auto dv(tt_pt.get_optional<std::string>(default_value_key));
         if (dv)

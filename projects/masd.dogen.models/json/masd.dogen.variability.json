@@ -607,7 +607,7 @@
       ]
     },
     {
-      "name": "meta_model::binding_type",
+      "name": "meta_model::binding_point",
       "documentation": "Determines how a feature can be bound to a modeling element.\n",
       "stereotypes": [
         "masd::enumeration"
@@ -620,34 +620,24 @@
           "documentation": "Feature can be configured anywhere.\n"
         },
         {
-          "name": "not_applicable",
-          "type": "",
-          "documentation": "The notion of scopes does not apply to this feature.\n"
-        },
-        {
-          "name": "root_module",
+          "name": "global",
           "type": "",
           "documentation": "Feature can only be configured in the root module.\n"
         },
         {
-          "name": "any_module",
+          "name": "element",
           "type": "",
-          "documentation": "Feature can be configured in any module.\n"
-        },
-        {
-          "name": "entity",
-          "type": "",
-          "documentation": "Feature can be configured in any modeling entity.\n"
+          "documentation": "Feature can be configured in any modeling element.\n"
         },
         {
           "name": "property",
           "type": "",
-          "documentation": "Feature can only be configured in a property of a modeling entity.\n"
+          "documentation": "Feature can only be configured in a property of a modeling element.\n"
         },
         {
           "name": "operation",
           "type": "",
-          "documentation": "Feature can only be configured in an operation of a modeling entity.\n"
+          "documentation": "Feature can only be configured in an operation of a modeling element.\n"
         }
       ]
     },
@@ -765,21 +755,17 @@
       ]
     },
     {
-      "name": "meta_model::configuration_template",
+      "name": "meta_model::profile_template",
       "parents": [
         "meta_model::element"
       ],
       "documentation": "Holds a set of templates for configuration points.\n",
+      "stereotypes": [
+        "Generalizable",
+        "Labelable"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "parents",
-          "type": "std::list<std::string>"
-        },
-        {
-          "name": "labels",
-          "type": "std::unordered_set<std::string>"
-        },
         {
           "name": "templates",
           "type": "std::list<configuration_point_template>"
@@ -886,17 +872,30 @@
       "parents": [
         "meta_model::element"
       ],
+      "stereotypes": [
+        "ConfigurationStore"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "configuration_points",
-          "type": "std::unordered_map<std::string, configuration_point>",
-          "documentation": "All configuration points in this configuration.\n"
+          "name": "profile_bindings",
+          "type": "std::unordered_set<std::string>",
+          "documentation": "Bindings to profiles.\n"
         },
         {
-          "name": "binding_type",
-          "type": "boost::optional<binding_type>",
-          "documentation": "Type of binding available for this configuration, if bound.\n"
+          "name": "configuration_bindings",
+          "type": "std::unordered_set<std::string>",
+          "documentation": "Relationships between this bound configuration and other bound configurations.\n\nThese relationships are inferred from the relationships of the underlying model\nelements.\n"
+        },
+        {
+          "name": "source_binding_point",
+          "type": "binding_point",
+          "documentation": "Where was this configuration sourced from with regards to binding.\n"
+        },
+        {
+          "name": "from_target",
+          "type": "bool",
+          "documentation": "If true, this configuration was sourced from an element in the target model.\n"
         }
       ]
     },
@@ -906,35 +905,10 @@
         "meta_model::element"
       ],
       "documentation": "Maps a feature name to an instance value\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "value",
-          "type": "boost::shared_ptr<value>",
-          "documentation": "Value that has been assigned to the feature, within this configuration.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::configuration_templates_repository",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "by_name",
-          "type": "std::unordered_map<std::string, configuration_template>"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::unbound_configurations_repository",
-      "documentation": "Container of configurations that are not bound to a model element.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "by_name",
-          "type": "std::unordered_map<std::string, configuration>"
-        }
-      ]
+      "stereotypes": [
+        "Valuable"
+      ],
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "meta_model::Locatable",
@@ -965,7 +939,7 @@
       ]
     },
     {
-      "name": "meta_model::Descriptable",
+      "name": "meta_model::Describable",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -982,7 +956,7 @@
       "name": "meta_model::Element",
       "parents": [
         "meta_model::Nameable",
-        "meta_model::Descriptable"
+        "meta_model::Describable"
       ],
       "stereotypes": [
         "masd::object_template"
@@ -1025,9 +999,17 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "binding_type",
-          "type": "binding_type",
+          "name": "binding_point",
+          "type": "binding_point",
           "documentation": "How the feature binds against other model elements.\n"
+        },
+        {
+          "name": "profile_binding_action",
+          "type": "binding_action"
+        },
+        {
+          "name": "configuration_binding_action",
+          "type": "binding_action"
         }
       ]
     },
@@ -1096,7 +1078,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::unbound_configurations_repository_production_chain",
+      "name": "transforms::profile_repository_production_chain",
       "stereotypes": [
         "masd::handcrafted"
       ],
@@ -1110,14 +1092,14 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::configuration_template_hydration_transform",
+      "name": "transforms::profile_template_hydration_transform",
       "stereotypes": [
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::configuration_template_instantiation_transform",
+      "name": "transforms::profile_template_instantiation_transform",
       "stereotypes": [
         "masd::handcrafted"
       ],
@@ -1131,7 +1113,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::configuration_binding_transform",
+      "name": "transforms::profile_binding_transform",
       "stereotypes": [
         "masd::handcrafted"
       ],
@@ -1161,35 +1143,21 @@
           "type": "boost::shared_ptr<archetypes::location_repository>"
         },
         {
+          "name": "feature_model",
+          "type": "meta_model::feature_model"
+        },
+        {
           "name": "tracer",
           "type": "boost::shared_ptr<tracing::tracer>"
         }
       ]
     },
     {
-      "name": "transforms::unbound_configurations_repository_transform",
+      "name": "transforms::profile_merging_transform",
       "stereotypes": [
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::configuration_processing",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "configuration_template",
-          "type": "meta_model::configuration_template"
-        },
-        {
-          "name": "configuration",
-          "type": "meta_model::configuration"
-        },
-        {
-          "name": "merged",
-          "type": "bool"
-        }
-      ]
     },
     {
       "name": "helpers::value_factory",
@@ -1262,6 +1230,168 @@
           "documentation": "Kind of the template.\n"
         }
       ]
+    },
+    {
+      "name": "meta_model::Valuable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "boost::shared_ptr<value>",
+          "documentation": "Value that has been assigned to this element.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::ConfigurationStore",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "configuration_points",
+          "type": "std::unordered_map<std::string, configuration_point>",
+          "documentation": "All configuration points associated with this element.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::profile",
+      "parents": [
+        "meta_model::element"
+      ],
+      "stereotypes": [
+        "ConfigurationStore",
+        "Generalizable",
+        "Labelable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "merged",
+          "type": "bool",
+          "documentation": "If true, the profile has been merged with all of its parents.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::Generalizable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "parents",
+          "type": "std::list<std::string>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::Labelable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "labels",
+          "type": "std::unordered_set<std::string>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::binding_action",
+      "documentation": "What action to take when binding.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "ignore",
+          "type": "",
+          "documentation": "Ignores the implict relationship.\n"
+        },
+        {
+          "name": "copy",
+          "type": "",
+          "documentation": "Copy across the value of the feature from the related element\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::profile_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "by_name",
+          "type": "std::unordered_map<std::string, profile>"
+        },
+        {
+          "name": "by_labels",
+          "type": "std::unordered_map<std::string, profile>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::configuration_model_set",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "models",
+          "type": "std::list<configuration_model>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::configuration_model",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "global",
+          "type": "boost::shared_ptr<configuration>"
+        },
+        {
+          "name": "local",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<configuration>>"
+        }
+      ]
+    },
+    {
+      "name": "transforms::profile_binding_chain",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::profile_template_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "templates",
+          "type": "std::list<profile_template>"
+        }
+      ]
+    },
+    {
+      "name": "transforms::global_configuration_binding_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::implicit_configuration_binding_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

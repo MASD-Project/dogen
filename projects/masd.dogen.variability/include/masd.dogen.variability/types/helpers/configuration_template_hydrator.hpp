@@ -32,8 +32,8 @@
 #include "masd.dogen.archetypes/types/location.hpp"
 #include "masd.dogen.variability/types/meta_model/name.hpp"
 #include "masd.dogen.variability/types/meta_model/template_kind.hpp"
+#include "masd.dogen.variability/types/meta_model/profile_template.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration_point_template.hpp"
-#include "masd.dogen.variability/types/meta_model/configuration_template.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 
 namespace masd::dogen::variability::helpers {
@@ -53,12 +53,11 @@ private:
     std::list<meta_model::configuration_point_template>
     read_templates(const boost::property_tree::ptree& pt) const;
 
-    meta_model::configuration_template read_stream(std::istream& s) const;
+    meta_model::profile_template read_stream(std::istream& s) const;
 
 public:
-    meta_model::configuration_template hydrate(std::istream& s) const;
-    meta_model::configuration_template
-    hydrate(const boost::filesystem::path& p) const;
+    meta_model::profile_template hydrate(std::istream& s) const;
+    meta_model::profile_template hydrate(const boost::filesystem::path& p) const;
 };
 
 }

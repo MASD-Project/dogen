@@ -32,7 +32,8 @@
 #include "masd.dogen.variability/types/meta_model/element.hpp"
 #include "masd.dogen.variability/types/meta_model/value_fwd.hpp"
 #include "masd.dogen.variability/types/meta_model/value_type.hpp"
-#include "masd.dogen.variability/types/meta_model/binding_type.hpp"
+#include "masd.dogen.variability/types/meta_model/binding_point.hpp"
+#include "masd.dogen.variability/types/meta_model/binding_action.hpp"
 
 namespace masd::dogen::variability::meta_model {
 
@@ -56,7 +57,9 @@ public:
         const masd::dogen::archetypes::location& location,
         const boost::shared_ptr<masd::dogen::variability::meta_model::value>& default_value,
         const masd::dogen::variability::meta_model::value_type value_type,
-        const masd::dogen::variability::meta_model::binding_type binding_type,
+        const masd::dogen::variability::meta_model::binding_point binding_point,
+        const masd::dogen::variability::meta_model::binding_action profile_binding_action,
+        const masd::dogen::variability::meta_model::binding_action configuration_binding_action,
         const bool is_partially_matchable);
 
 public:
@@ -95,9 +98,15 @@ public:
      * @brief How the feature binds against other model elements.
      */
     /**@{*/
-    masd::dogen::variability::meta_model::binding_type binding_type() const;
-    void binding_type(const masd::dogen::variability::meta_model::binding_type v);
+    masd::dogen::variability::meta_model::binding_point binding_point() const;
+    void binding_point(const masd::dogen::variability::meta_model::binding_point v);
     /**@}*/
+
+    masd::dogen::variability::meta_model::binding_action profile_binding_action() const;
+    void profile_binding_action(const masd::dogen::variability::meta_model::binding_action v);
+
+    masd::dogen::variability::meta_model::binding_action configuration_binding_action() const;
+    void configuration_binding_action(const masd::dogen::variability::meta_model::binding_action v);
 
     /**
      * @brief Feature name can be matched partially.
@@ -124,7 +133,9 @@ private:
     masd::dogen::archetypes::location location_;
     boost::shared_ptr<masd::dogen::variability::meta_model::value> default_value_;
     masd::dogen::variability::meta_model::value_type value_type_;
-    masd::dogen::variability::meta_model::binding_type binding_type_;
+    masd::dogen::variability::meta_model::binding_point binding_point_;
+    masd::dogen::variability::meta_model::binding_action profile_binding_action_;
+    masd::dogen::variability::meta_model::binding_action configuration_binding_action_;
     bool is_partially_matchable_;
 };
 

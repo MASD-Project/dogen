@@ -19,9 +19,10 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.variability/io/meta_model/element_io.hpp"
-#include "masd.dogen.variability/io/meta_model/binding_type_io.hpp"
+#include "masd.dogen.variability/io/meta_model/binding_point_io.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_point_io.hpp"
 
@@ -51,16 +52,15 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace boost {
+namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::variability::meta_model::binding_type>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
     return s;
 }
 
@@ -68,31 +68,44 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dog
 
 namespace masd::dogen::variability::meta_model {
 
-configuration::configuration(configuration&& rhs)
-    : masd::dogen::variability::meta_model::element(
-        std::forward<masd::dogen::variability::meta_model::element>(rhs)),
-      configuration_points_(std::move(rhs.configuration_points_)),
-      binding_type_(std::move(rhs.binding_type_)) { }
+configuration::configuration()
+    : source_binding_point_(static_cast<masd::dogen::variability::meta_model::binding_point>(0)),
+      from_target_(static_cast<bool>(0)) { }
 
 configuration::configuration(
     const masd::dogen::variability::meta_model::name& name,
     const std::string& description,
     const std::unordered_map<std::string, masd::dogen::variability::meta_model::configuration_point>& configuration_points,
-    const boost::optional<masd::dogen::variability::meta_model::binding_type>& binding_type)
+    const std::unordered_set<std::string>& profile_bindings,
+    const std::unordered_set<std::string>& configuration_bindings,
+    const masd::dogen::variability::meta_model::binding_point source_binding_point,
+    const bool from_target)
     : masd::dogen::variability::meta_model::element(
       name,
       description),
       configuration_points_(configuration_points),
-      binding_type_(binding_type) { }
+      profile_bindings_(profile_bindings),
+      configuration_bindings_(configuration_bindings),
+      source_binding_point_(source_binding_point),
+      from_target_(from_target) { }
 
 void configuration::to_stream(std::ostream& s) const {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::variability::meta_model::configuration\"" << ", "
       << "\"__parent_0__\": ";
     masd::dogen::variability::meta_model::element::to_stream(s);
     s << ", "
       << "\"configuration_points\": " << configuration_points_ << ", "
-      << "\"binding_type\": " << binding_type_
+      << "\"profile_bindings\": " << profile_bindings_ << ", "
+      << "\"configuration_bindings\": " << configuration_bindings_ << ", "
+      << "\"source_binding_point\": " << source_binding_point_ << ", "
+      << "\"from_target\": " << from_target_
       << " }";
 }
 
@@ -101,7 +114,10 @@ void configuration::swap(configuration& other) noexcept {
 
     using std::swap;
     swap(configuration_points_, other.configuration_points_);
-    swap(binding_type_, other.binding_type_);
+    swap(profile_bindings_, other.profile_bindings_);
+    swap(configuration_bindings_, other.configuration_bindings_);
+    swap(source_binding_point_, other.source_binding_point_);
+    swap(from_target_, other.from_target_);
 }
 
 bool configuration::equals(const masd::dogen::variability::meta_model::element& other) const {
@@ -113,7 +129,10 @@ bool configuration::equals(const masd::dogen::variability::meta_model::element& 
 bool configuration::operator==(const configuration& rhs) const {
     return masd::dogen::variability::meta_model::element::compare(rhs) &&
         configuration_points_ == rhs.configuration_points_ &&
-        binding_type_ == rhs.binding_type_;
+        profile_bindings_ == rhs.profile_bindings_ &&
+        configuration_bindings_ == rhs.configuration_bindings_ &&
+        source_binding_point_ == rhs.source_binding_point_ &&
+        from_target_ == rhs.from_target_;
 }
 
 configuration& configuration::operator=(configuration other) {
@@ -138,20 +157,52 @@ void configuration::configuration_points(const std::unordered_map<std::string, m
     configuration_points_ = std::move(v);
 }
 
-const boost::optional<masd::dogen::variability::meta_model::binding_type>& configuration::binding_type() const {
-    return binding_type_;
+const std::unordered_set<std::string>& configuration::profile_bindings() const {
+    return profile_bindings_;
 }
 
-boost::optional<masd::dogen::variability::meta_model::binding_type>& configuration::binding_type() {
-    return binding_type_;
+std::unordered_set<std::string>& configuration::profile_bindings() {
+    return profile_bindings_;
 }
 
-void configuration::binding_type(const boost::optional<masd::dogen::variability::meta_model::binding_type>& v) {
-    binding_type_ = v;
+void configuration::profile_bindings(const std::unordered_set<std::string>& v) {
+    profile_bindings_ = v;
 }
 
-void configuration::binding_type(const boost::optional<masd::dogen::variability::meta_model::binding_type>&& v) {
-    binding_type_ = std::move(v);
+void configuration::profile_bindings(const std::unordered_set<std::string>&& v) {
+    profile_bindings_ = std::move(v);
+}
+
+const std::unordered_set<std::string>& configuration::configuration_bindings() const {
+    return configuration_bindings_;
+}
+
+std::unordered_set<std::string>& configuration::configuration_bindings() {
+    return configuration_bindings_;
+}
+
+void configuration::configuration_bindings(const std::unordered_set<std::string>& v) {
+    configuration_bindings_ = v;
+}
+
+void configuration::configuration_bindings(const std::unordered_set<std::string>&& v) {
+    configuration_bindings_ = std::move(v);
+}
+
+masd::dogen::variability::meta_model::binding_point configuration::source_binding_point() const {
+    return source_binding_point_;
+}
+
+void configuration::source_binding_point(const masd::dogen::variability::meta_model::binding_point v) {
+    source_binding_point_ = v;
+}
+
+bool configuration::from_target() const {
+    return from_target_;
+}
+
+void configuration::from_target(const bool v) {
+    from_target_ = v;
 }
 
 }

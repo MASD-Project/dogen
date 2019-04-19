@@ -19,9 +19,10 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.variability/io/meta_model/element_io.hpp"
-#include "masd.dogen.variability/io/meta_model/binding_type_io.hpp"
+#include "masd.dogen.variability/io/meta_model/binding_point_io.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_io.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_point_io.hpp"
 

@@ -35,7 +35,7 @@
 #include "masd.dogen.variability/types/meta_model/value.hpp"
 #include "masd.dogen.variability/types/meta_model/value_type.hpp"
 #include "masd.dogen.variability/types/meta_model/template_kind.hpp"
-#include "masd.dogen.variability/types/meta_model/binding_type.hpp"
+#include "masd.dogen.variability/types/meta_model/binding_point.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_template.hpp"
 
 namespace masd::dogen::variability::helpers {
@@ -49,7 +49,7 @@ private:
     /**
      * @brief Converts a string to a scope type.
      */
-    meta_model::binding_type to_binding_type(const std::string& s) const;
+    meta_model::binding_point to_binding_point(const std::string& s) const;
 
     /**
      * @brief Converts a string to a value type.

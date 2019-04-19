@@ -55,7 +55,7 @@ public:
 
 public:
     /**
-     * @brief Value that has been assigned to the feature, within this configuration.
+     * @brief Value that has been assigned to this element.
      */
     /**@{*/
     const boost::shared_ptr<masd::dogen::variability::meta_model::value>& value() const;

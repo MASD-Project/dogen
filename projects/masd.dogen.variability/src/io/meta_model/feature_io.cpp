@@ -25,7 +25,8 @@
 #include "masd.dogen.variability/io/meta_model/element_io.hpp"
 #include "masd.dogen.variability/io/meta_model/feature_io.hpp"
 #include "masd.dogen.variability/io/meta_model/value_type_io.hpp"
-#include "masd.dogen.variability/io/meta_model/binding_type_io.hpp"
+#include "masd.dogen.variability/io/meta_model/binding_point_io.hpp"
+#include "masd.dogen.variability/io/meta_model/binding_action_io.hpp"
 
 namespace masd::dogen::variability::meta_model {
 

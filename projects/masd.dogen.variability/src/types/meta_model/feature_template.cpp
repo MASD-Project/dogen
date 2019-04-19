@@ -24,8 +24,9 @@
 #include "masd.dogen.variability/types/meta_model/value.hpp"
 #include "masd.dogen.variability/io/meta_model/element_io.hpp"
 #include "masd.dogen.variability/io/meta_model/value_type_io.hpp"
-#include "masd.dogen.variability/io/meta_model/binding_type_io.hpp"
+#include "masd.dogen.variability/io/meta_model/binding_point_io.hpp"
 #include "masd.dogen.variability/io/meta_model/template_kind_io.hpp"
+#include "masd.dogen.variability/io/meta_model/binding_action_io.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_template.hpp"
 
 namespace boost {
@@ -57,7 +58,9 @@ namespace masd::dogen::variability::meta_model {
 
 feature_template::feature_template()
     : value_type_(static_cast<masd::dogen::variability::meta_model::value_type>(0)),
-      binding_type_(static_cast<masd::dogen::variability::meta_model::binding_type>(0)),
+      binding_point_(static_cast<masd::dogen::variability::meta_model::binding_point>(0)),
+      profile_binding_action_(static_cast<masd::dogen::variability::meta_model::binding_action>(0)),
+      configuration_binding_action_(static_cast<masd::dogen::variability::meta_model::binding_action>(0)),
       kind_(static_cast<masd::dogen::variability::meta_model::template_kind>(0)) { }
 
 feature_template::feature_template(
@@ -66,7 +69,9 @@ feature_template::feature_template(
     const masd::dogen::archetypes::location& location,
     const boost::shared_ptr<masd::dogen::variability::meta_model::value>& default_value,
     const masd::dogen::variability::meta_model::value_type value_type,
-    const masd::dogen::variability::meta_model::binding_type binding_type,
+    const masd::dogen::variability::meta_model::binding_point binding_point,
+    const masd::dogen::variability::meta_model::binding_action profile_binding_action,
+    const masd::dogen::variability::meta_model::binding_action configuration_binding_action,
     const masd::dogen::variability::meta_model::template_kind kind)
     : masd::dogen::variability::meta_model::element(
       name,
@@ -74,7 +79,9 @@ feature_template::feature_template(
       location_(location),
       default_value_(default_value),
       value_type_(value_type),
-      binding_type_(binding_type),
+      binding_point_(binding_point),
+      profile_binding_action_(profile_binding_action),
+      configuration_binding_action_(configuration_binding_action),
       kind_(kind) { }
 
 void feature_template::to_stream(std::ostream& s) const {
@@ -86,7 +93,9 @@ void feature_template::to_stream(std::ostream& s) const {
       << "\"location\": " << location_ << ", "
       << "\"default_value\": " << default_value_ << ", "
       << "\"value_type\": " << value_type_ << ", "
-      << "\"binding_type\": " << binding_type_ << ", "
+      << "\"binding_point\": " << binding_point_ << ", "
+      << "\"profile_binding_action\": " << profile_binding_action_ << ", "
+      << "\"configuration_binding_action\": " << configuration_binding_action_ << ", "
       << "\"kind\": " << kind_
       << " }";
 }
@@ -98,7 +107,9 @@ void feature_template::swap(feature_template& other) noexcept {
     swap(location_, other.location_);
     swap(default_value_, other.default_value_);
     swap(value_type_, other.value_type_);
-    swap(binding_type_, other.binding_type_);
+    swap(binding_point_, other.binding_point_);
+    swap(profile_binding_action_, other.profile_binding_action_);
+    swap(configuration_binding_action_, other.configuration_binding_action_);
     swap(kind_, other.kind_);
 }
 
@@ -113,7 +124,9 @@ bool feature_template::operator==(const feature_template& rhs) const {
         location_ == rhs.location_ &&
         default_value_ == rhs.default_value_ &&
         value_type_ == rhs.value_type_ &&
-        binding_type_ == rhs.binding_type_ &&
+        binding_point_ == rhs.binding_point_ &&
+        profile_binding_action_ == rhs.profile_binding_action_ &&
+        configuration_binding_action_ == rhs.configuration_binding_action_ &&
         kind_ == rhs.kind_;
 }
 
@@ -163,12 +176,28 @@ void feature_template::value_type(const masd::dogen::variability::meta_model::va
     value_type_ = v;
 }
 
-masd::dogen::variability::meta_model::binding_type feature_template::binding_type() const {
-    return binding_type_;
+masd::dogen::variability::meta_model::binding_point feature_template::binding_point() const {
+    return binding_point_;
 }
 
-void feature_template::binding_type(const masd::dogen::variability::meta_model::binding_type v) {
-    binding_type_ = v;
+void feature_template::binding_point(const masd::dogen::variability::meta_model::binding_point v) {
+    binding_point_ = v;
+}
+
+masd::dogen::variability::meta_model::binding_action feature_template::profile_binding_action() const {
+    return profile_binding_action_;
+}
+
+void feature_template::profile_binding_action(const masd::dogen::variability::meta_model::binding_action v) {
+    profile_binding_action_ = v;
+}
+
+masd::dogen::variability::meta_model::binding_action feature_template::configuration_binding_action() const {
+    return configuration_binding_action_;
+}
+
+void feature_template::configuration_binding_action(const masd::dogen::variability::meta_model::binding_action v) {
+    configuration_binding_action_ = v;
 }
 
 masd::dogen::variability::meta_model::template_kind feature_template::kind() const {

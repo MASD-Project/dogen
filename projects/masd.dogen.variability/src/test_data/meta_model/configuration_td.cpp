@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include "masd.dogen.variability/test_data/meta_model/element_td.hpp"
-#include "masd.dogen.variability/test_data/meta_model/binding_type_td.hpp"
+#include "masd.dogen.variability/test_data/meta_model/binding_point_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/configuration_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/configuration_point_td.hpp"
 
@@ -45,16 +45,21 @@ std::unordered_map<std::string, masd::dogen::variability::meta_model::configurat
     return r;
 }
 
-masd::dogen::variability::meta_model::binding_type
-create_masd_dogen_variability_meta_model_binding_type(const unsigned int position) {
-    return masd::dogen::variability::meta_model::binding_type_generator::create(position);
+std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int position) {
+    std::unordered_set<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(create_std_string(position + i));
+    }
+    return r;
 }
 
-boost::optional<masd::dogen::variability::meta_model::binding_type>
-create_boost_optional_masd_dogen_variability_meta_model_binding_type(unsigned int position) {
-    boost::optional<masd::dogen::variability::meta_model::binding_type> r(
-        create_masd_dogen_variability_meta_model_binding_type(position));
-    return r;
+masd::dogen::variability::meta_model::binding_point
+create_masd_dogen_variability_meta_model_binding_point(const unsigned int position) {
+    return masd::dogen::variability::meta_model::binding_point_generator::create(position);
+}
+
+bool create_bool(const unsigned int position) {
+    return (position % 2) != 0;
 }
 
 }
@@ -67,7 +72,10 @@ void configuration_generator::
 populate(const unsigned int position, result_type& v) {
     masd::dogen::variability::meta_model::element_generator::populate(position, v);
     v.configuration_points(create_std_unordered_map_std_string_masd_dogen_variability_meta_model_configuration_point(position + 0));
-    v.binding_type(create_boost_optional_masd_dogen_variability_meta_model_binding_type(position + 1));
+    v.profile_bindings(create_std_unordered_set_std_string(position + 1));
+    v.configuration_bindings(create_std_unordered_set_std_string(position + 2));
+    v.source_binding_point(create_masd_dogen_variability_meta_model_binding_point(position + 3));
+    v.from_target(create_bool(position + 4));
 }
 
 configuration_generator::result_type

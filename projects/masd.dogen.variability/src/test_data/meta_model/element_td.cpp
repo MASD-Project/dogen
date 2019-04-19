@@ -22,10 +22,11 @@
 #include "masd.dogen.variability/test_data/meta_model/name_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/element_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/feature_td.hpp"
+#include "masd.dogen.variability/test_data/meta_model/profile_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/configuration_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/feature_template_td.hpp"
+#include "masd.dogen.variability/test_data/meta_model/profile_template_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/configuration_point_td.hpp"
-#include "masd.dogen.variability/test_data/meta_model/configuration_template_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/configuration_point_template_td.hpp"
 
 namespace {
@@ -53,16 +54,18 @@ populate(const unsigned int position, result_type& v) {
 
 element_generator::result_type*
 element_generator::create_ptr(const unsigned int position) {
-    if ((position % 5) == 0)
+    if ((position % 6) == 0)
         return masd::dogen::variability::meta_model::configuration_point_generator::create_ptr(position);
-    if ((position % 5) == 1)
+    if ((position % 6) == 1)
         return masd::dogen::variability::meta_model::configuration_point_template_generator::create_ptr(position);
-    if ((position % 5) == 2)
-        return masd::dogen::variability::meta_model::configuration_template_generator::create_ptr(position);
-    if ((position % 5) == 3)
+    if ((position % 6) == 2)
         return masd::dogen::variability::meta_model::feature_generator::create_ptr(position);
-    if ((position % 5) == 4)
+    if ((position % 6) == 3)
         return masd::dogen::variability::meta_model::feature_template_generator::create_ptr(position);
+    if ((position % 6) == 4)
+        return masd::dogen::variability::meta_model::profile_generator::create_ptr(position);
+    if ((position % 6) == 5)
+        return masd::dogen::variability::meta_model::profile_template_generator::create_ptr(position);
     return masd::dogen::variability::meta_model::configuration_generator::create_ptr(position);
 }
 

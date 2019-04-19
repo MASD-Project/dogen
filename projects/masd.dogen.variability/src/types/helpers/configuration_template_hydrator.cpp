@@ -155,13 +155,13 @@ read_templates(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-meta_model::configuration_template
+meta_model::profile_template
 configuration_template_hydrator::read_stream(std::istream& s) const {
     using namespace boost::property_tree;
     ptree pt;
     read_json(s, pt);
 
-    meta_model::configuration_template r;
+    meta_model::profile_template r;
     r.name().simple(pt.get<std::string>(name_key));
 
     auto i = pt.find(parents_key);
@@ -187,7 +187,7 @@ configuration_template_hydrator::read_stream(std::istream& s) const {
     return r;
 }
 
-meta_model::configuration_template
+meta_model::profile_template
 configuration_template_hydrator::hydrate(std::istream& s) const {
     BOOST_LOG_SEV(lg, trace) << "Parsing JSON stream.";
     using namespace boost::property_tree;
@@ -208,7 +208,7 @@ configuration_template_hydrator::hydrate(std::istream& s) const {
     }
 }
 
-meta_model::configuration_template configuration_template_hydrator::
+meta_model::profile_template configuration_template_hydrator::
 hydrate(const boost::filesystem::path& p) const {
     const auto gs(p.generic_string());
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << p.generic_string();
