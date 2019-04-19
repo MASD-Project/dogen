@@ -31,16 +31,19 @@ static logger lg(logger_factory(
 
 namespace masd::dogen::variability::helpers {
 
-meta_model::configuration
-configuration_point_merger::merge(const meta_model::configuration& lhs,
-    const meta_model::configuration& rhs) const {
-    BOOST_LOG_SEV(lg, debug) << "Merging configurations. Lhs"
-                             << lhs.name().qualified()
-                             << " Rhs: " << rhs.name().qualified();
+std::unordered_map<std::string, meta_model::configuration_point>
+configuration_point_merger::merge(
+    const std::string& lhs_name, const std::unordered_map<std::string,
+    meta_model::configuration_point>& lhs, const std::string& rhs_name,
+    const std::unordered_map<std::string,
+    meta_model::configuration_point>& rhs) const {
+    BOOST_LOG_SEV(lg, debug) << "Merging configurations. "
+                             << " lhs: " << lhs_name
+                             << " rhs: " << rhs_name;
 
-    meta_model::configuration r(lhs);
-    for (const auto& cp : rhs.configuration_points())
-        r.configuration_points().insert(cp);
+    std::unordered_map<std::string, meta_model::configuration_point> r(lhs);
+    for (const auto& pair : rhs)
+        r.insert(pair);
 
     BOOST_LOG_SEV(lg, debug) << "Merged configurations.";
     return r;

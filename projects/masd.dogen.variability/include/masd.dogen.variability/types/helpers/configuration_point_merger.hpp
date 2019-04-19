@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
-#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include <string>
+#include <unordered_map>
+#include "masd.dogen.variability/types/meta_model/configuration_point.hpp"
 
 namespace masd::dogen::variability::helpers {
 
@@ -43,8 +45,11 @@ public:
      * @brief Merges the two configurations according to the merging
      * rules,
      */
-    meta_model::configuration merge(const meta_model::configuration& lhs,
-        const meta_model::configuration& rhs) const;
+    std::unordered_map<std::string, meta_model::configuration_point> merge(
+        const std::string& lhs_name, const std::unordered_map<std::string,
+        meta_model::configuration_point>& lhs,
+        const std::string& rhs_name, const std::unordered_map<std::string,
+        meta_model::configuration_point>& rhs) const;
 };
 
 }
