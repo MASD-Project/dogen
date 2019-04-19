@@ -25,7 +25,7 @@
 #include <boost/property_tree/json_parser.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.variability/types/helpers/hydration_exception.hpp"
-#include "masd.dogen.variability/types/helpers/configuration_template_hydrator.hpp"
+#include "masd.dogen.variability/types/helpers/profile_template_hydrator.hpp"
 
 namespace {
 
@@ -71,7 +71,7 @@ const std::string template_has_no_untyped_value(
 namespace masd::dogen::variability::helpers {
 
 meta_model::template_kind
-configuration_template_hydrator::to_template_kind(const std::string& s) const {
+profile_template_hydrator::to_template_kind(const std::string& s) const {
     using meta_model::template_kind;
     if (s == template_kind_instance)
         return template_kind::instance;
@@ -88,7 +88,7 @@ configuration_template_hydrator::to_template_kind(const std::string& s) const {
     BOOST_THROW_EXCEPTION(hydration_exception(invalid_template_kind + s));
 }
 
-meta_model::name configuration_template_hydrator::
+meta_model::name profile_template_hydrator::
 read_name(const boost::property_tree::ptree& pt) const {
     meta_model::name r;
     r.simple(pt.get<std::string>(name_simple_key));
@@ -100,7 +100,7 @@ read_name(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-archetypes::location configuration_template_hydrator::
+archetypes::location profile_template_hydrator::
 read_archetype_location(const boost::property_tree::ptree& pt) const {
     archetypes::location r;
 
@@ -112,7 +112,7 @@ read_archetype_location(const boost::property_tree::ptree& pt) const {
 }
 
 std::list<meta_model::configuration_point_template>
-configuration_template_hydrator::
+profile_template_hydrator::
 read_templates(const boost::property_tree::ptree& pt) const {
     using meta_model::configuration_point_template;
     std::list<configuration_point_template> r;
@@ -156,7 +156,7 @@ read_templates(const boost::property_tree::ptree& pt) const {
 }
 
 meta_model::profile_template
-configuration_template_hydrator::read_stream(std::istream& s) const {
+profile_template_hydrator::read_stream(std::istream& s) const {
     using namespace boost::property_tree;
     ptree pt;
     read_json(s, pt);
@@ -188,7 +188,7 @@ configuration_template_hydrator::read_stream(std::istream& s) const {
 }
 
 meta_model::profile_template
-configuration_template_hydrator::hydrate(std::istream& s) const {
+profile_template_hydrator::hydrate(std::istream& s) const {
     BOOST_LOG_SEV(lg, trace) << "Parsing JSON stream.";
     using namespace boost::property_tree;
     try {
@@ -208,7 +208,7 @@ configuration_template_hydrator::hydrate(std::istream& s) const {
     }
 }
 
-meta_model::profile_template configuration_template_hydrator::
+meta_model::profile_template profile_template_hydrator::
 hydrate(const boost::filesystem::path& p) const {
     const auto gs(p.generic_string());
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << p.generic_string();

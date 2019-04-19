@@ -1085,7 +1085,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "helpers::configuration_template_hydrator",
+      "name": "helpers::profile_template_hydrator",
       "stereotypes": [
         "masd::handcrafted"
       ],

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_VARIABILITY_TYPES_HELPERS_CONFIGURATION_TEMPLATE_HYDRATOR_HPP
-#define MASD_DOGEN_VARIABILITY_TYPES_HELPERS_CONFIGURATION_TEMPLATE_HYDRATOR_HPP
+#ifndef MASD_DOGEN_VARIABILITY_TYPES_HELPERS_PROFILE_TEMPLATE_HYDRATOR_HPP
+#define MASD_DOGEN_VARIABILITY_TYPES_HELPERS_PROFILE_TEMPLATE_HYDRATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -41,7 +41,7 @@ namespace masd::dogen::variability::helpers {
 /**
  * @brief Reads an unbound configuration from JSON.
  */
-class configuration_template_hydrator final {
+class profile_template_hydrator final {
 private:
     meta_model::template_kind to_template_kind(const std::string& s) const;
 

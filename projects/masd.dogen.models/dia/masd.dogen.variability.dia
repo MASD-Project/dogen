@@ -16101,19 +16101,19 @@ elements.#</dia:string>
         <dia:point val="127,-26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="126.95,-26.05;157.195,-21.55"/>
+        <dia:rectangle val="126.95,-26.05;154.885,-21.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="127,-26"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="30.145"/>
+        <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#configuration_template_hydrator#</dia:string>
+        <dia:string>#profile_template_hydrator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted#</dia:string>
@@ -16209,7 +16209,7 @@ elements.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::configuration_template#</dia:string>
+            <dia:string>#meta_model::profile_template#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16257,7 +16257,7 @@ elements.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::configuration_template#</dia:string>
+            <dia:string>#meta_model::profile_template#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -19189,17 +19189,17 @@ with Masd.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="142.072,-26"/>
+        <dia:point val="140.917,-26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="132.652,-30.05;142.822,-25.2"/>
+        <dia:rectangle val="132.652,-30.05;141.667,-25.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="142.072,-26"/>
-        <dia:point val="142.072,-28"/>
+        <dia:point val="140.917,-26"/>
+        <dia:point val="140.917,-28"/>
         <dia:point val="132.702,-28"/>
         <dia:point val="132.702,-30"/>
       </dia:attribute>
