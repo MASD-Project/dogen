@@ -29,7 +29,7 @@ file(GLOB_RECURSE files RELATIVE
 set(lib_files ${files})
 list(FILTER lib_files EXCLUDE REGEX "main.cpp")
 
-add_library(${lib_target_name} STATIC ${lib_files})
+add_library(${lib_target_name} ${lib_files})
 set_target_properties(${lib_target_name} PROPERTIES
     OUTPUT_NAME ${lib_binary_name})
 set_target_properties(${lib_target_name}
@@ -51,4 +51,7 @@ target_link_libraries(${lib_target_name}
     ${Boost_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES})
 
-install(TARGETS ${lib_target_name} ARCHIVE DESTINATION lib COMPONENT libraries)
+install(TARGETS ${lib_target_name}
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    COMPONENT libraries)
