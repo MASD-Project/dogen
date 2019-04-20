@@ -13,30 +13,31 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-20 Sat 07:43]
+#+CAPTION: Clock summary at [2019-04-20 Sat 18:03]
 | <75>                                                              |         |       |       |       |
 | Headline                                                          | Time    |       |       |     % |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                      | *75:02* |       |       | 100.0 |
+| *Total time*                                                      | *78:06* |       |       | 100.0 |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                           | 75:02   |       |       | 100.0 |
-| Active                                                            |         | 75:02 |       | 100.0 |
-| Edit release notes for previous sprint                            |         |       |  4:21 |   5.8 |
-| Sprint and product backlog grooming                               |         |       |  7:06 |   9.5 |
-| Create a video demo for the previous sprint's features            |         |       |  1:35 |   2.1 |
-| Fix issues with emacs                                             |         |       |  2:01 |   2.7 |
+| Stories                                                           | 78:06   |       |       | 100.0 |
+| Active                                                            |         | 78:06 |       | 100.0 |
+| Edit release notes for previous sprint                            |         |       |  4:21 |   5.6 |
+| Sprint and product backlog grooming                               |         |       |  7:06 |   9.1 |
+| Create a video demo for the previous sprint's features            |         |       |  1:35 |   2.0 |
+| Fix issues with emacs                                             |         |       |  2:01 |   2.6 |
 | Fix issues with nightly build                                     |         |       |  0:08 |   0.2 |
 | Add diffing support to string asserter                            |         |       |  1:00 |   1.3 |
-| C# generation is borked                                           |         |       |  4:12 |   5.6 |
-| Reactivate the boilerplate tests                                  |         |       |  5:58 |   8.0 |
+| C# generation is borked                                           |         |       |  4:12 |   5.4 |
+| Reactivate the boilerplate tests                                  |         |       |  5:58 |   7.6 |
 | Update to clang8                                                  |         |       |  0:11 |   0.2 |
-| Do not hard-code static library generation                        |         |       |  1:01 |   1.4 |
+| Do not hard-code static library generation                        |         |       |  1:01 |   1.3 |
 | Generated models should support both static and dynamic libraries |         |       |  0:09 |   0.2 |
 | Fix cmake emacs variable for tab width                            |         |       |  0:38 |   0.8 |
-| Nursing nightlies                                                 |         |       |  1:45 |   2.3 |
-| Fix snags with emacs                                              |         |       |  6:00 |   8.0 |
-| Profiles as meta-model elements                                   |         |       |  8:01 |  10.7 |
-| Redesign annotations model                                        |         |       | 30:56 |  41.2 |
+| Re-read variability modeling papers                               |         |       |  2:59 |   3.8 |
+| Nursing nightlies                                                 |         |       |  1:50 |   2.3 |
+| Fix snags with emacs                                              |         |       |  6:00 |   7.7 |
+| Profiles as meta-model elements                                   |         |       |  8:01 |  10.3 |
+| Redesign annotations model                                        |         |       | 30:56 |  39.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -387,8 +388,114 @@ We need to replace uses of =tab-width= in cmake files with
 We need to do this for both code generated and manually generated
 files.
 
+*** COMPLETED Re-read variability modeling papers                     :story:
+    CLOSED: [2019-04-20 Sat 17:56]
+    :LOGBOOK:
+    CLOCK: [2019-04-20 Sat 17:57]--[2019-04-20 Sat 18:02] =>  0:05
+    CLOCK: [2019-04-20 Sat 17:37]--[2019-04-20 Sat 17:56] =>  0:19
+    CLOCK: [2019-04-20 Sat 15:02]--[2019-04-20 Sat 17:37] =>  2:35
+    :END:
+
+Given that we are refactoring the variability model, we should take
+this opportunity to re-read the papers on variability modeling to make
+sure we didn't miss anything obvious.
+
+Notes:
+
+- our approach to variability is anchored on pushing it to the
+  archetype space.
+- the modeling space allows structural variability but it is not
+  directly linked to variability modeling. Modeling space is composed
+  of two models, the product and the component model. Both are
+  projected into archetype space.
+- we make use of positive and negative variability as we map our M2T
+  transforms into the archetype space. However, these are not
+  important for end users and can be thought of as implementation details.
+- we have chosen to use a very simplified feature model, with
+  restricted ability to capture features and their relationships. Our
+  target is to avoid the complexity that most feature models have, as
+  well as the complexity in solving and satisfiability.
+- end users can only configure; they cannot define new features. We
+  make a clear separation between the "inherent features" - those
+  define by the MASD feature model and the "end user features" - those
+  defined by the end user in creating a solution for their problem
+  domain. We do not support end user feature modeling.
+- core assets are the SRAPs. These are defined by MASD and codified
+  into archetype space.
+- end user is expected to add configuration and product specific
+  assets (hand-crafted code).
+- variability management is done by defining configurations and
+  profiles. Profiles support the SPLE use case because they can be
+  stored in models that can be shared by products. A product familiy
+  is thus defined by sharing variability profiles and the associated
+  vocabulary it defines.
+- our approach may be minimalistic but still shares the advantages
+  defined by Groher for variability management. We just don't fully
+  implement the vision.
+- we do not require any weaving between the feature model and the
+  model because of how we have mixed the two models.
+- we see aspect orientation as an implementation detail. It is
+  relegated to M2T and not made visible to the end user.
+- Models describe product lines (via the profiles). Variants are
+  defined at the model level. All products are product variants of
+  MASD. Variants are therefore not a very useful term. Families are
+  defined by sharing configurations. These are useful to end users.
+- Transforms create libraries and running applications, though we are
+  not expected to code generate a product without handcrafting.
+- DSLs/problem space meta-models are out of the scope of MASD.
+- MASD uses feature based variability.
+- Model assumes traditional creative construction via a normal
+  metamodel such as the UML. IT does not preclude a larger
+  pre-processing pipeline with user defined metamodels that combine
+  with MASD for code generation. This is outside the scope of MASD
+  though.
+- "The model is an expression of configurative variability."
+- other approaches make the variability itself a responsibility of the
+  end user. We only allow configuration.
+- separation between system features (MASD) and user defined
+  features. User defined features may be implemented using MASD
+  features.
+- the process of mixing features and classes is called "the mixing
+  process". Conversely the un-mixing process extracts the variability
+  model from a mixed model. This is also called "Amalgamated
+  Approach.": "Annotate a Base Model by Means of Extensions."
+- a selection is a configuration which has been selected to be used on
+  a modeling element. Is this a better name than a "profile"? at least
+  it is not confusing with UML profiles, and it appears to be used by
+  variability domain experts.
+- SRAP is a predefined set of core assets with an associated feature
+  model.
+- we need to find a name for our mixing technique.
+- features can be activated or deactivated. All of our feature
+  activation occurs at generation time.
+- archetype space makes use of positive and negative variability and
+  aspects.
+- our approach to variability is close ended in the sense that the
+  variability model is scoped only to the archetype
+  space. Superimposed over the archetype space? or derived from it?
+- most variability models are very flexible, but if applied to large
+  industrial systems they would result in extremely complex models and
+  would be very difficult to maintain. Our variability model is
+  designed to keep complexity low even if it is very inflexible. It is
+  a trade-off we want to make.
+- we have copied some of the ideas from the TDM: global features,
+  typing, modularity.
+- as with TDM we also have created a methodology to anchor the
+  variability approach. It would not make sense without it.
+- feature relations: requires, conflicts. Sets of features a feature
+  is related to. This would be really helpful when determining valid
+  configurations.
+- it is the end user's responsibility to trace requirements (problem
+  space) to configurations. We do not have any support for this.
+- Goher: "we express as many artefacts as possible using models. This
+  allows for processing these artefacts using model transforms." Our
+  approach is anchored on this, in the limit.
+- model weaving: add to core. Model tailoring: optional parts are
+  removed.
+
 *** STARTED Nursing nightlies                                         :story:
     :LOGBOOK:
+    CLOCK: [2019-04-20 Sat 07:44]--[2019-04-20 Sat 07:49] =>  0:05
     CLOCK: [2019-04-20 Sat 07:16]--[2019-04-20 Sat 07:43] =>  0:27
     CLOCK: [2019-04-20 Sat 06:46]--[2019-04-20 Sat 07:15] =>  0:29
     CLOCK: [2019-04-18 Thu 06:15]--[2019-04-18 Thu 06:24] =>  0:09
