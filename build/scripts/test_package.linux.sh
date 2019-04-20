@@ -45,6 +45,8 @@ elif [ "${compiler}" = "gcc8" ]; then
     echo "* Compiler: ${compiler}"
 elif [ "${compiler}" = "clang7" ]; then
     echo "* Compiler: ${compiler}"
+elif [ "${compiler}" = "clang8" ]; then
+    echo "* Compiler: ${compiler}"
 else
     echo "* Unrecognised compiler: ${compiler}"
     exit
