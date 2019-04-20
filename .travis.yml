@@ -26,6 +26,11 @@ git:
   depth: 2
 
 matrix:
+  allow_failures:
+    # gcc release it timing out
+    - os: linux
+      compiler: gcc
+      env: configuration=Release compiler="gcc8" generator="Ninja" build_group="Continuous" report_name="Linux Gcc Releases"
   include:
     #
     # OSX Clang
@@ -43,7 +48,7 @@ matrix:
     #
     - os: linux
       compiler: gcc
-      env: deploy="1" configuration=Release compiler="gcc8" generator="Ninja" build_group="Continuous" report_name="Linux Gcc Releases"
+      env: configuration=Release compiler="gcc8" generator="Ninja" build_group="Continuous" report_name="Linux Gcc Releases"
     - os: linux
       compiler: gcc
       env: configuration=Debug compiler="gcc8" generator="Ninja" build_group="Continuous"  report_name="Linux Gcc Debug"
