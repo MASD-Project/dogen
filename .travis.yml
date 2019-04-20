@@ -57,7 +57,7 @@ matrix:
     #
     - os: linux
       compiler: clang
-      env: configuration=Release compiler="clang8" generator="Ninja" build_group="Continuous" report_name="Linux Clang Release"
+      env: deploy="1" configuration=Release compiler="clang8" generator="Ninja" build_group="Continuous" report_name="Linux Clang Release"
     - os: linux
       compiler: clang
       env: coverage=1 configuration=Debug compiler="clang8" generator="Ninja" build_group="Continuous" report_name="Linux Clang Debug"
@@ -110,19 +110,6 @@ notifications:
       - https://webhooks.gitter.im/e/4691f5966730f6898869
     on_success: always
     on_failure: always
-
-deploy:
-  skip_cleanup: true
-  provider: releases
-  api_key:
-    secure: UdotUzhLJ7GcmwyJlpqcsvWsXxuWjoswXG7intkgxKeD5vkIT6Ng2v7ik6c/4uO9wXJ9uWV8/X/EzdZhWqFjiamMljsmFGcy4Bt37oqP6oxdlRyO/KrLM1E/xtmA1kZppuY4njCqzZnMslyzyMtsl+DH3zseOL7GQIbkL5xbecI=
-  file_glob: true
-  file: stage/pkg/*.deb
-  skip_cleanup: true
-  on:
-    tags: true
-    branch: master
-    condition: "${deploy} = 1"
 
 deploy:
   skip_cleanup: true
