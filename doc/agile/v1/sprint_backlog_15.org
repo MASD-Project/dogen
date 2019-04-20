@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-20 Sat 07:15]
+#+CAPTION: Clock summary at [2019-04-20 Sat 07:43]
 | <75>                                                              |         |       |       |       |
 | Headline                                                          | Time    |       |       |     % |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                      | *74:35* |       |       | 100.0 |
+| *Total time*                                                      | *75:02* |       |       | 100.0 |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                           | 74:35   |       |       | 100.0 |
-| Active                                                            |         | 74:35 |       | 100.0 |
+| Stories                                                           | 75:02   |       |       | 100.0 |
+| Active                                                            |         | 75:02 |       | 100.0 |
 | Edit release notes for previous sprint                            |         |       |  4:21 |   5.8 |
 | Sprint and product backlog grooming                               |         |       |  7:06 |   9.5 |
 | Create a video demo for the previous sprint's features            |         |       |  1:35 |   2.1 |
@@ -33,10 +33,10 @@
 | Do not hard-code static library generation                        |         |       |  1:01 |   1.4 |
 | Generated models should support both static and dynamic libraries |         |       |  0:09 |   0.2 |
 | Fix cmake emacs variable for tab width                            |         |       |  0:38 |   0.8 |
-| Nursing nightlies                                                 |         |       |  1:18 |   1.7 |
+| Nursing nightlies                                                 |         |       |  1:45 |   2.3 |
 | Fix snags with emacs                                              |         |       |  6:00 |   8.0 |
 | Profiles as meta-model elements                                   |         |       |  8:01 |  10.7 |
-| Redesign annotations model                                        |         |       | 30:56 |  41.5 |
+| Redesign annotations model                                        |         |       | 30:56 |  41.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -389,6 +389,7 @@ files.
 
 *** STARTED Nursing nightlies                                         :story:
     :LOGBOOK:
+    CLOCK: [2019-04-20 Sat 07:16]--[2019-04-20 Sat 07:43] =>  0:27
     CLOCK: [2019-04-20 Sat 06:46]--[2019-04-20 Sat 07:15] =>  0:29
     CLOCK: [2019-04-18 Thu 06:15]--[2019-04-18 Thu 06:24] =>  0:09
     CLOCK: [2019-04-17 Wed 07:01]--[2019-04-17 Wed 07:19] =>  0:18
@@ -821,6 +822,8 @@ Notes:
   - apply the global to local configuration transform.
 - at the coding level we then copy across the configurations to the
   corresponding model elements. This is done
+- add variable to determine if a feature is available to the
+  configuration/profile or not.
 
 Tasks:
 
