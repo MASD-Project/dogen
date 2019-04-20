@@ -129,6 +129,7 @@ feature_template_hydrator::to_template_kind(const std::string& s) const {
         return template_kind::instance;
     if (s == template_kind_recursive_template)
         return template_kind::recursive_template;
+    if (s == template_kind_backend_template)
         return template_kind::backend_template;
     if (s == template_kind_facet_template)
         return template_kind::facet_template;
