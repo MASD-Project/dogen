@@ -2,7 +2,7 @@
   {
     "name": {
       "simple": "scope",
-      "qualified": "masd.configuration.scope"
+      "qualified": "masd.variability.scope"
     },
     "archetype_location": {
       "kernel": "masd"
@@ -14,7 +14,7 @@
   {
     "name": {
       "simple": "labels",
-      "qualified": "masd.configuration.labels"
+      "qualified": "masd.variability.labels"
     },
     "archetype_location": {
       "kernel": "masd"
@@ -26,7 +26,7 @@
   {
     "name": {
       "simple": "kernel",
-      "qualified": "masd.configuration.archetype_location.kernel"
+      "qualified": "masd.variability.archetype_location.kernel"
     },
     "archetype_location": {
       "kernel": "masd"
@@ -38,7 +38,7 @@
   {
     "name": {
       "simple": "backend",
-      "qualified": "masd.configuration.archetype_location.backend"
+      "qualified": "masd.variability.archetype_location.backend"
     },
     "archetype_location": {
       "kernel": "masd"
@@ -50,7 +50,7 @@
   {
     "name": {
       "simple": "template_kind",
-      "qualified": "masd.configuration.template_kind"
+      "qualified": "masd.variability.template_kind"
     },
     "archetype_location": {
       "kernel": "masd"
@@ -62,7 +62,7 @@
   {
     "name": {
       "simple": "untyped_value",
-      "qualified": "masd.configuration.untyped_value"
+      "qualified": "masd.variability.untyped_value"
     },
     "archetype_location": {
       "kernel": "masd"
