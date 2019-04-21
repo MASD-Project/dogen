@@ -67,7 +67,7 @@ for layer in dia.active_display().diagram.data.layers:
             object.properties["fill_colour"] = "#DDB7DD"
         elif "masd::decoration::generation_marker" in stereotype:
             object.properties["fill_colour"] = "#ACACBB"
-        elif "masd::configuration" in stereotype:
+        elif "masd::variability::profile_template" in stereotype:
             object.properties["fill_colour"] = "#EDE6F2"
 
         #

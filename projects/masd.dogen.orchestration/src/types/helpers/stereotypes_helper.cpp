@@ -55,7 +55,8 @@ const std::string stereotype_modeline("masd::decoration::modeline");
 const std::string stereotype_generation_marker(
     "masd::decoration::generation_marker");
 const std::string stereotype_licence("masd::decoration::licence");
-const std::string stereotype_configuration("masd::configuration");
+const std::string stereotype_variability_profile_template(
+    "masd::variability::profile_template");
 const std::string unsupported_stereotype("Invalid or unsupported stereotype: ");
 
 }
@@ -99,7 +100,7 @@ static_stereotypes stereotypes_helper::from_string(const std::string& s) const {
         return static_stereotypes::generation_marker;
     else if (s == stereotype_licence)
         return static_stereotypes::licence;
-    else if (s == stereotype_configuration)
+    else if (s == stereotype_variability_profile_template)
         return static_stereotypes::configuration;
 
     BOOST_LOG_SEV(lg, error) << "Could not convert stereotype.";
@@ -155,7 +156,8 @@ to_string(const static_stereotypes ss) const {
     case static_stereotypes::generation_marker:
         return stereotype_generation_marker;
     case static_stereotypes::licence: return stereotype_licence;
-    case static_stereotypes::configuration: return stereotype_configuration;
+    case static_stereotypes::configuration:
+        return stereotype_variability_profile_template;
 
     default: {
         const std::string s(boost::lexical_cast<std::string>(ss));
