@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_CONFIGURATION_ENTRY_HPP
-#define MASD_DOGEN_CODING_TYPES_META_MODEL_CONFIGURATION_ENTRY_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_VARIABILITY_PROFILE_TEMPLATE_ENTRY_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_VARIABILITY_PROFILE_TEMPLATE_ENTRY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,15 +32,15 @@
 
 namespace masd::dogen::coding::meta_model {
 
-class configuration_entry final {
+class variability_profile_template_entry final {
 public:
-    configuration_entry() = default;
-    configuration_entry(const configuration_entry&) = default;
-    configuration_entry(configuration_entry&&) = default;
-    ~configuration_entry() = default;
+    variability_profile_template_entry() = default;
+    variability_profile_template_entry(const variability_profile_template_entry&) = default;
+    variability_profile_template_entry(variability_profile_template_entry&&) = default;
+    ~variability_profile_template_entry() = default;
 
 public:
-    configuration_entry(
+    variability_profile_template_entry(
         const masd::dogen::variability::annotation& annotation,
         const std::string& name,
         const std::list<std::string>& value);
@@ -67,14 +67,14 @@ public:
     void value(const std::list<std::string>&& v);
 
 public:
-    bool operator==(const configuration_entry& rhs) const;
-    bool operator!=(const configuration_entry& rhs) const {
+    bool operator==(const variability_profile_template_entry& rhs) const;
+    bool operator!=(const variability_profile_template_entry& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(configuration_entry& other) noexcept;
-    configuration_entry& operator=(configuration_entry other);
+    void swap(variability_profile_template_entry& other) noexcept;
+    variability_profile_template_entry& operator=(variability_profile_template_entry other);
 
 private:
     masd::dogen::variability::annotation annotation_;
@@ -88,8 +88,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::coding::meta_model::configuration_entry& lhs,
-    masd::dogen::coding::meta_model::configuration_entry& rhs) {
+    masd::dogen::coding::meta_model::variability_profile_template_entry& lhs,
+    masd::dogen::coding::meta_model::variability_profile_template_entry& rhs) {
     lhs.swap(rhs);
 }
 

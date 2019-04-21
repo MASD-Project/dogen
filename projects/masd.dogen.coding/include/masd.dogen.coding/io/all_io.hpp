@@ -54,7 +54,6 @@
 #include "masd.dogen.coding/io/helpers/mapping_context_io.hpp"
 #include "masd.dogen.coding/io/meta_model/letter_cases_io.hpp"
 #include "masd.dogen.coding/io/meta_model/origin_types_io.hpp"
-#include "masd.dogen.coding/io/meta_model/configuration_io.hpp"
 #include "masd.dogen.coding/io/meta_model/modeline_field_io.hpp"
 #include "masd.dogen.coding/io/meta_model/modeline_group_io.hpp"
 #include "masd.dogen.coding/io/meta_model/object_template_io.hpp"
@@ -67,7 +66,6 @@
 #include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
 #include "masd.dogen.coding/io/helpers/mapping_set_repository_io.hpp"
 #include "masd.dogen.coding/io/meta_model/artefact_properties_io.hpp"
-#include "masd.dogen.coding/io/meta_model/configuration_entry_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_database_systems_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_model_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/extraction_properties_io.hpp"
@@ -75,7 +73,9 @@
 #include "masd.dogen.coding/io/meta_model/orm_object_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_attribute_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_primitive_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/variability_profile_template_io.hpp"
 #include "masd.dogen.coding/io/meta_model/fully_qualified_representation_io.hpp"
+#include "masd.dogen.coding/io/meta_model/variability_profile_template_entry_io.hpp"
 #include "masd.dogen.coding/io/meta_model/local_archetype_location_properties_io.hpp"
 
 #endif

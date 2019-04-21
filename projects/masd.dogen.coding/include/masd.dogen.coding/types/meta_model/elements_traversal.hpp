@@ -37,8 +37,8 @@
 #include "masd.dogen.coding/types/meta_model/modeline.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
 #include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
-#include "masd.dogen.coding/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/types/meta_model/variability_profile_template.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
@@ -86,7 +86,7 @@ inline void elements_traversal(const meta_model::model& m,
     for (const auto& pair : m.generation_markers())
         v(*pair.second);
 
-    for (const auto& pair : m.configurations())
+    for (const auto& pair : m.variability_profile_templates())
         v(*pair.second);
 }
 
@@ -129,7 +129,7 @@ inline void elements_traversal(const meta_model::model& m,
     for (const auto& pair : m.generation_markers())
         v(*pair.second);
 
-    for (const auto& pair : m.configurations())
+    for (const auto& pair : m.variability_profile_templates())
         v(*pair.second);
 }
 
@@ -172,7 +172,7 @@ inline void elements_traversal(meta_model::model& m,
     for (const auto& pair : m.generation_markers())
         v(*pair.second);
 
-    for (const auto& pair : m.configurations())
+    for (const auto& pair : m.variability_profile_templates())
         v(*pair.second);
 }
 /**@}*/
@@ -221,7 +221,7 @@ inline void shared_elements_traversal(const meta_model::model& m,
     for (const auto& pair : m.generation_markers())
         v(pair.second);
 
-    for (const auto& pair : m.configurations())
+    for (const auto& pair : m.variability_profile_templates())
         v(pair.second);
 }
 
@@ -264,7 +264,7 @@ inline void shared_elements_traversal(const meta_model::model& m,
     for (const auto& pair : m.generation_markers())
         v(pair.second);
 
-    for (const auto& pair : m.configurations())
+    for (const auto& pair : m.variability_profile_templates())
         v(pair.second);
 }
 
@@ -307,7 +307,7 @@ inline void shared_elements_traversal(meta_model::model& m,
     for (const auto& pair : m.generation_markers())
         v(pair.second);
 
-    for (const auto& pair : m.configurations())
+    for (const auto& pair : m.variability_profile_templates())
         v(pair.second);
 }
 /**@}*/

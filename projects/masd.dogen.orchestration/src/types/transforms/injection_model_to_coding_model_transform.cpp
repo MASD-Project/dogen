@@ -201,7 +201,7 @@ compute_element_type(
 void injection_model_to_coding_model_transform::
 process_element(const helpers::adapter& ad,
     const coding::meta_model::location& l,
-    const injection::meta_model::element& e, coding::meta_model::model& em) {
+    const injection::meta_model::element& e, coding::meta_model::model& m) {
 
     helpers::stereotypes_helper h;
     const auto scr(h.from_string(e.stereotypes()));
@@ -211,40 +211,41 @@ process_element(const helpers::adapter& ad,
     using coding::meta_model::static_stereotypes;
     switch (et) {
     case static_stereotypes::object:
-        insert(ad.to_object(l, scr, e), em.objects());
+        insert(ad.to_object(l, scr, e), m.objects());
         break;
     case static_stereotypes::object_template:
-        insert(ad.to_object_template(l, scr, e), em.object_templates());
+        insert(ad.to_object_template(l, scr, e), m.object_templates());
         break;
     case static_stereotypes::exception:
-        insert(ad.to_exception(l, scr, e), em.exceptions());
+        insert(ad.to_exception(l, scr, e), m.exceptions());
         break;
     case static_stereotypes::primitive:
-        insert(ad.to_primitive(l, scr, e), em.primitives());
+        insert(ad.to_primitive(l, scr, e), m.primitives());
         break;
     case static_stereotypes::enumeration:
-        insert(ad.to_enumeration(l, scr, e), em.enumerations());
+        insert(ad.to_enumeration(l, scr, e), m.enumerations());
         break;
     case static_stereotypes::module:
-        insert(ad.to_module(l, scr, e), em.modules());
+        insert(ad.to_module(l, scr, e), m.modules());
         break;
     case static_stereotypes::builtin:
-        insert(ad.to_builtin(l, scr, e), em.builtins());
+        insert(ad.to_builtin(l, scr, e), m.builtins());
         break;
     case static_stereotypes::modeline_group:
-        insert(ad.to_modeline_group(l, scr, e), em.modeline_groups());
+        insert(ad.to_modeline_group(l, scr, e), m.modeline_groups());
         break;
     case static_stereotypes::modeline:
-        insert(ad.to_modeline(l, scr, e), em.modelines());
+        insert(ad.to_modeline(l, scr, e), m.modelines());
         break;
     case static_stereotypes::generation_marker:
-        insert(ad.to_generation_marker(l, scr, e), em.generation_markers());
+        insert(ad.to_generation_marker(l, scr, e), m.generation_markers());
         break;
     case static_stereotypes::licence:
-        insert(ad.to_licence(l, scr, e), em.licences());
+        insert(ad.to_licence(l, scr, e), m.licences());
         break;
     case static_stereotypes::configuration:
-        insert(ad.to_configuration(l, scr, e), em.configurations());
+        insert(ad.to_variability_profile_template(l, scr, e),
+            m.variability_profile_templates());
         break;
     default: {
         const auto s(boost::lexical_cast<std::string>(et));

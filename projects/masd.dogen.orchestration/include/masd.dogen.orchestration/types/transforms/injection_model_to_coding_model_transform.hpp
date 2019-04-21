@@ -68,7 +68,7 @@ private:
     static void process_element(const helpers::adapter& ad,
         const coding::meta_model::location& l,
         const injection::meta_model::element& ie,
-        coding::meta_model::model& cm);
+        coding::meta_model::model& m);
 
 public:
     static coding::meta_model::model

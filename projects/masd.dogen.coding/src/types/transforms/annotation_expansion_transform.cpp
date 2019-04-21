@@ -77,9 +77,9 @@ public:
     void operator()(meta_model::modeline& ml) { update(ml); }
     void operator()(meta_model::modeline_group& mg) { update(mg); }
     void operator()(meta_model::generation_marker& gm) { update(gm); }
-    void operator()(meta_model::configuration& c) {
-        update(c);
-        for (auto& e : c.entries())
+    void operator()(meta_model::variability_profile_template& vpt) {
+        update(vpt);
+        for (auto& e : vpt.entries())
             e.annotation(annotation_expander_.expand(e.annotation()));
     }
 

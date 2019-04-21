@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.coding/types/meta_model/configuration_entry.hpp"
+#include "masd.dogen.coding/types/meta_model/variability_profile_template_entry.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
-configuration_entry::configuration_entry(
+variability_profile_template_entry::variability_profile_template_entry(
     const masd::dogen::variability::annotation& annotation,
     const std::string& name,
     const std::list<std::string>& value)
@@ -30,70 +30,70 @@ configuration_entry::configuration_entry(
       name_(name),
       value_(value) { }
 
-void configuration_entry::swap(configuration_entry& other) noexcept {
+void variability_profile_template_entry::swap(variability_profile_template_entry& other) noexcept {
     using std::swap;
     swap(annotation_, other.annotation_);
     swap(name_, other.name_);
     swap(value_, other.value_);
 }
 
-bool configuration_entry::operator==(const configuration_entry& rhs) const {
+bool variability_profile_template_entry::operator==(const variability_profile_template_entry& rhs) const {
     return annotation_ == rhs.annotation_ &&
         name_ == rhs.name_ &&
         value_ == rhs.value_;
 }
 
-configuration_entry& configuration_entry::operator=(configuration_entry other) {
+variability_profile_template_entry& variability_profile_template_entry::operator=(variability_profile_template_entry other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const masd::dogen::variability::annotation& configuration_entry::annotation() const {
+const masd::dogen::variability::annotation& variability_profile_template_entry::annotation() const {
     return annotation_;
 }
 
-masd::dogen::variability::annotation& configuration_entry::annotation() {
+masd::dogen::variability::annotation& variability_profile_template_entry::annotation() {
     return annotation_;
 }
 
-void configuration_entry::annotation(const masd::dogen::variability::annotation& v) {
+void variability_profile_template_entry::annotation(const masd::dogen::variability::annotation& v) {
     annotation_ = v;
 }
 
-void configuration_entry::annotation(const masd::dogen::variability::annotation&& v) {
+void variability_profile_template_entry::annotation(const masd::dogen::variability::annotation&& v) {
     annotation_ = std::move(v);
 }
 
-const std::string& configuration_entry::name() const {
+const std::string& variability_profile_template_entry::name() const {
     return name_;
 }
 
-std::string& configuration_entry::name() {
+std::string& variability_profile_template_entry::name() {
     return name_;
 }
 
-void configuration_entry::name(const std::string& v) {
+void variability_profile_template_entry::name(const std::string& v) {
     name_ = v;
 }
 
-void configuration_entry::name(const std::string&& v) {
+void variability_profile_template_entry::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-const std::list<std::string>& configuration_entry::value() const {
+const std::list<std::string>& variability_profile_template_entry::value() const {
     return value_;
 }
 
-std::list<std::string>& configuration_entry::value() {
+std::list<std::string>& variability_profile_template_entry::value() {
     return value_;
 }
 
-void configuration_entry::value(const std::list<std::string>& v) {
+void variability_profile_template_entry::value(const std::list<std::string>& v) {
     value_ = v;
 }
 
-void configuration_entry::value(const std::list<std::string>&& v) {
+void variability_profile_template_entry::value(const std::list<std::string>&& v) {
     value_ = std::move(v);
 }
 

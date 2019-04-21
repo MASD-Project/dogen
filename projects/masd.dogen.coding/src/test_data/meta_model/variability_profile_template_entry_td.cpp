@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include "masd.dogen.variability/test_data/annotation_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/configuration_entry_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/variability_profile_template_entry_td.hpp"
 
 namespace {
 
@@ -47,31 +47,31 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
 
 namespace masd::dogen::coding::meta_model {
 
-configuration_entry_generator::configuration_entry_generator() : position_(0) { }
+variability_profile_template_entry_generator::variability_profile_template_entry_generator() : position_(0) { }
 
-void configuration_entry_generator::
+void variability_profile_template_entry_generator::
 populate(const unsigned int position, result_type& v) {
     v.annotation(create_masd_dogen_variability_annotation(position + 0));
     v.name(create_std_string(position + 1));
     v.value(create_std_list_std_string(position + 2));
 }
 
-configuration_entry_generator::result_type
-configuration_entry_generator::create(const unsigned int position) {
-    configuration_entry r;
-    configuration_entry_generator::populate(position, r);
+variability_profile_template_entry_generator::result_type
+variability_profile_template_entry_generator::create(const unsigned int position) {
+    variability_profile_template_entry r;
+    variability_profile_template_entry_generator::populate(position, r);
     return r;
 }
 
-configuration_entry_generator::result_type*
-configuration_entry_generator::create_ptr(const unsigned int position) {
-    configuration_entry* p = new configuration_entry();
-    configuration_entry_generator::populate(position, *p);
+variability_profile_template_entry_generator::result_type*
+variability_profile_template_entry_generator::create_ptr(const unsigned int position) {
+    variability_profile_template_entry* p = new variability_profile_template_entry();
+    variability_profile_template_entry_generator::populate(position, *p);
     return p;
 }
 
-configuration_entry_generator::result_type
-configuration_entry_generator::operator()() {
+variability_profile_template_entry_generator::result_type
+variability_profile_template_entry_generator::operator()() {
     return create(position_++);
 }
 

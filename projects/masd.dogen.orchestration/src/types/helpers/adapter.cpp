@@ -343,26 +343,27 @@ adapter::to_licence(const coding::meta_model::location& l,
     return r;
 }
 
-boost::shared_ptr<coding::meta_model::configuration>
-adapter::to_configuration(const coding::meta_model::location& l,
+boost::shared_ptr<coding::meta_model::variability_profile_template>
+adapter::to_variability_profile_template(const coding::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
-    auto r(boost::make_shared<coding::meta_model::configuration>());
+    using coding::meta_model::variability_profile_template;
+    auto r(boost::make_shared<variability_profile_template>());
     populate_element(l, scr, ie, *r);
 
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name());
         ensure_not_empty(n);
 
-        coding::meta_model::configuration_entry ce;
-        ce.annotation(attr.annotation());
-        ce.name(n);
+        coding::meta_model::variability_profile_template_entry e;
+        e.annotation(attr.annotation());
+        e.name(n);
 
         const auto v(attr.value());
         if (!v.empty())
-            ce.value().push_back(v);
+            e.value().push_back(v);
 
-        r->entries().push_back(ce);
+        r->entries().push_back(e);
     }
     return r;
 }

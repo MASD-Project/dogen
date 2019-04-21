@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_CONFIGURATION_FWD_HPP
-#define MASD_DOGEN_CODING_TYPES_META_MODEL_CONFIGURATION_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "masd.dogen.coding/io/meta_model/element_io.hpp"
+#include "masd.dogen.coding/io/meta_model/variability_profile_template_io.hpp"
+#include "masd.dogen.coding/io/meta_model/variability_profile_template_entry_io.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
-class configuration;
-
+std::ostream& operator<<(std::ostream& s, const variability_profile_template& v) {
+    v.to_stream(s);
+    return(s);
 }
 
-#endif
+}

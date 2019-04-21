@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_CONFIGURATION_HPP
-#define MASD_DOGEN_CODING_TYPES_META_MODEL_CONFIGURATION_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_VARIABILITY_PROFILE_TEMPLATE_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_VARIABILITY_PROFILE_TEMPLATE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,20 +31,20 @@
 #include <algorithm>
 #include <unordered_set>
 #include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/types/meta_model/configuration_entry.hpp"
+#include "masd.dogen.coding/types/meta_model/variability_profile_template_entry.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
-class configuration final : public masd::dogen::coding::meta_model::element {
+class variability_profile_template final : public masd::dogen::coding::meta_model::element {
 public:
-    configuration() = default;
-    configuration(const configuration&) = default;
-    configuration(configuration&&) = default;
+    variability_profile_template() = default;
+    variability_profile_template(const variability_profile_template&) = default;
+    variability_profile_template(variability_profile_template&&) = default;
 
-    virtual ~configuration() noexcept { }
+    virtual ~variability_profile_template() noexcept { }
 
 public:
-    configuration(
+    variability_profile_template(
         const masd::dogen::coding::meta_model::name& name,
         const std::string& documentation,
         const masd::dogen::variability::annotation& annotation,
@@ -60,7 +60,7 @@ public:
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const boost::optional<masd::dogen::coding::meta_model::decoration>& decoration,
         const std::unordered_set<std::string>& labels,
-        const std::list<masd::dogen::coding::meta_model::configuration_entry>& entries);
+        const std::list<masd::dogen::coding::meta_model::variability_profile_template_entry>& entries);
 
 public:
     using element::accept;
@@ -78,14 +78,14 @@ public:
     void labels(const std::unordered_set<std::string>& v);
     void labels(const std::unordered_set<std::string>&& v);
 
-    const std::list<masd::dogen::coding::meta_model::configuration_entry>& entries() const;
-    std::list<masd::dogen::coding::meta_model::configuration_entry>& entries();
-    void entries(const std::list<masd::dogen::coding::meta_model::configuration_entry>& v);
-    void entries(const std::list<masd::dogen::coding::meta_model::configuration_entry>&& v);
+    const std::list<masd::dogen::coding::meta_model::variability_profile_template_entry>& entries() const;
+    std::list<masd::dogen::coding::meta_model::variability_profile_template_entry>& entries();
+    void entries(const std::list<masd::dogen::coding::meta_model::variability_profile_template_entry>& v);
+    void entries(const std::list<masd::dogen::coding::meta_model::variability_profile_template_entry>&& v);
 
 public:
-    bool operator==(const configuration& rhs) const;
-    bool operator!=(const configuration& rhs) const {
+    bool operator==(const variability_profile_template& rhs) const;
+    bool operator!=(const variability_profile_template& rhs) const {
         return !this->operator==(rhs);
     }
 
@@ -93,12 +93,12 @@ public:
     bool equals(const masd::dogen::coding::meta_model::element& other) const override;
 
 public:
-    void swap(configuration& other) noexcept;
-    configuration& operator=(configuration other);
+    void swap(variability_profile_template& other) noexcept;
+    variability_profile_template& operator=(variability_profile_template other);
 
 private:
     std::unordered_set<std::string> labels_;
-    std::list<masd::dogen::coding::meta_model::configuration_entry> entries_;
+    std::list<masd::dogen::coding::meta_model::variability_profile_template_entry> entries_;
 };
 
 }
@@ -107,8 +107,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::coding::meta_model::configuration& lhs,
-    masd::dogen::coding::meta_model::configuration& rhs) {
+    masd::dogen::coding::meta_model::variability_profile_template& lhs,
+    masd::dogen::coding::meta_model::variability_profile_template& rhs) {
     lhs.swap(rhs);
 }
 

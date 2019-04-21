@@ -34,10 +34,10 @@
 #include "masd.dogen.coding/types/meta_model/exception_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/primitive_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration_fwd.hpp"
-#include "masd.dogen.coding/types/meta_model/configuration_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_group_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/generation_marker_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/variability_profile_template_fwd.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
@@ -57,16 +57,6 @@ public:
     virtual void visit(const masd::dogen::coding::meta_model::builtin&) { }
     virtual void visit(masd::dogen::coding::meta_model::builtin&) const { }
     virtual void visit(masd::dogen::coding::meta_model::builtin&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type masd::dogen::coding::meta_model::configuration
-     */
-    /**@{*/
-    virtual void visit(const masd::dogen::coding::meta_model::configuration&) const { }
-    virtual void visit(const masd::dogen::coding::meta_model::configuration&) { }
-    virtual void visit(masd::dogen::coding::meta_model::configuration&) const { }
-    virtual void visit(masd::dogen::coding::meta_model::configuration&) { }
     /**@}*/
 
     /**
@@ -167,6 +157,16 @@ public:
     virtual void visit(const masd::dogen::coding::meta_model::primitive&) { }
     virtual void visit(masd::dogen::coding::meta_model::primitive&) const { }
     virtual void visit(masd::dogen::coding::meta_model::primitive&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type masd::dogen::coding::meta_model::variability_profile_template
+     */
+    /**@{*/
+    virtual void visit(const masd::dogen::coding::meta_model::variability_profile_template&) const { }
+    virtual void visit(const masd::dogen::coding::meta_model::variability_profile_template&) { }
+    virtual void visit(masd::dogen::coding::meta_model::variability_profile_template&) const { }
+    virtual void visit(masd::dogen::coding::meta_model::variability_profile_template&) { }
     /**@}*/
 
     /**

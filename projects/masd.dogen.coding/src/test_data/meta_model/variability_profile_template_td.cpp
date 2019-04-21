@@ -20,8 +20,8 @@
  */
 #include <sstream>
 #include "masd.dogen.coding/test_data/meta_model/element_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/configuration_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/configuration_entry_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/variability_profile_template_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/variability_profile_template_entry_td.hpp"
 
 namespace {
 
@@ -39,15 +39,15 @@ std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int
     return r;
 }
 
-masd::dogen::coding::meta_model::configuration_entry
-create_masd_dogen_coding_meta_model_configuration_entry(const unsigned int position) {
-    return masd::dogen::coding::meta_model::configuration_entry_generator::create(position);
+masd::dogen::coding::meta_model::variability_profile_template_entry
+create_masd_dogen_coding_meta_model_variability_profile_template_entry(const unsigned int position) {
+    return masd::dogen::coding::meta_model::variability_profile_template_entry_generator::create(position);
 }
 
-std::list<masd::dogen::coding::meta_model::configuration_entry> create_std_list_masd_dogen_coding_meta_model_configuration_entry(unsigned int position) {
-    std::list<masd::dogen::coding::meta_model::configuration_entry> r;
+std::list<masd::dogen::coding::meta_model::variability_profile_template_entry> create_std_list_masd_dogen_coding_meta_model_variability_profile_template_entry(unsigned int position) {
+    std::list<masd::dogen::coding::meta_model::variability_profile_template_entry> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_masd_dogen_coding_meta_model_configuration_entry(position + i));
+        r.push_back(create_masd_dogen_coding_meta_model_variability_profile_template_entry(position + i));
     }
     return r;
 }
@@ -56,31 +56,31 @@ std::list<masd::dogen::coding::meta_model::configuration_entry> create_std_list_
 
 namespace masd::dogen::coding::meta_model {
 
-configuration_generator::configuration_generator() : position_(0) { }
+variability_profile_template_generator::variability_profile_template_generator() : position_(0) { }
 
-void configuration_generator::
+void variability_profile_template_generator::
 populate(const unsigned int position, result_type& v) {
     masd::dogen::coding::meta_model::element_generator::populate(position, v);
     v.labels(create_std_unordered_set_std_string(position + 0));
-    v.entries(create_std_list_masd_dogen_coding_meta_model_configuration_entry(position + 1));
+    v.entries(create_std_list_masd_dogen_coding_meta_model_variability_profile_template_entry(position + 1));
 }
 
-configuration_generator::result_type
-configuration_generator::create(const unsigned int position) {
-    configuration r;
-    configuration_generator::populate(position, r);
+variability_profile_template_generator::result_type
+variability_profile_template_generator::create(const unsigned int position) {
+    variability_profile_template r;
+    variability_profile_template_generator::populate(position, r);
     return r;
 }
 
-configuration_generator::result_type*
-configuration_generator::create_ptr(const unsigned int position) {
-    configuration* p = new configuration();
-    configuration_generator::populate(position, *p);
+variability_profile_template_generator::result_type*
+variability_profile_template_generator::create_ptr(const unsigned int position) {
+    variability_profile_template* p = new variability_profile_template();
+    variability_profile_template_generator::populate(position, *p);
     return p;
 }
 
-configuration_generator::result_type
-configuration_generator::operator()() {
+variability_profile_template_generator::result_type
+variability_profile_template_generator::operator()() {
     return create(position_++);
 }
 

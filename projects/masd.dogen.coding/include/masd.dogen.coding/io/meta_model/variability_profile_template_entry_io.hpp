@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_IO_META_MODEL_CONFIGURATION_IO_HPP
-#define MASD_DOGEN_CODING_IO_META_MODEL_CONFIGURATION_IO_HPP
+#ifndef MASD_DOGEN_CODING_IO_META_MODEL_VARIABILITY_PROFILE_TEMPLATE_ENTRY_IO_HPP
+#define MASD_DOGEN_CODING_IO_META_MODEL_VARIABILITY_PROFILE_TEMPLATE_ENTRY_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "masd.dogen.coding/types/meta_model/configuration.hpp"
+#include "masd.dogen.coding/types/meta_model/variability_profile_template_entry.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const masd::dogen::coding::meta_model::configuration& v);
+     const masd::dogen::coding::meta_model::variability_profile_template_entry& v);
 
 }
 

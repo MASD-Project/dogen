@@ -651,8 +651,8 @@
           "type": "std::unordered_map<std::string, boost::shared_ptr<generation_marker>>"
         },
         {
-          "name": "configurations",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<configuration>>"
+          "name": "variability_profile_templates",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<variability_profile_template>>"
         },
         {
           "name": "root_module",
@@ -2226,7 +2226,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::configuration",
+      "name": "meta_model::variability_profile_template",
       "parents": [
         "meta_model::element"
       ],
@@ -2238,7 +2238,7 @@
         },
         {
           "name": "entries",
-          "type": "std::list<configuration_entry>"
+          "type": "std::list<variability_profile_template_entry>"
         }
       ]
     },
@@ -2250,7 +2250,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::configuration_entry",
+      "name": "meta_model::variability_profile_template_entry",
       "stereotypes": [
         "Annotatable"
       ],

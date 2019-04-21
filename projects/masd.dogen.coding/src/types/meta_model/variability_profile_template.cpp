@@ -21,9 +21,9 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
-#include "masd.dogen.coding/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
-#include "masd.dogen.coding/io/meta_model/configuration_entry_io.hpp"
+#include "masd.dogen.coding/types/meta_model/variability_profile_template.hpp"
+#include "masd.dogen.coding/io/meta_model/variability_profile_template_entry_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -49,7 +49,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::configuration_entry>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::variability_profile_template_entry>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -63,7 +63,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::co
 
 namespace masd::dogen::coding::meta_model {
 
-configuration::configuration(
+variability_profile_template::variability_profile_template(
     const masd::dogen::coding::meta_model::name& name,
     const std::string& documentation,
     const masd::dogen::variability::annotation& annotation,
@@ -79,7 +79,7 @@ configuration::configuration(
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const boost::optional<masd::dogen::coding::meta_model::decoration>& decoration,
     const std::unordered_set<std::string>& labels,
-    const std::list<masd::dogen::coding::meta_model::configuration_entry>& entries)
+    const std::list<masd::dogen::coding::meta_model::variability_profile_template_entry>& entries)
     : masd::dogen::coding::meta_model::element(
       name,
       documentation,
@@ -98,25 +98,25 @@ configuration::configuration(
       labels_(labels),
       entries_(entries) { }
 
-void configuration::accept(const element_visitor& v) const {
+void variability_profile_template::accept(const element_visitor& v) const {
     v.visit(*this);
 }
 
-void configuration::accept(element_visitor& v) const {
+void variability_profile_template::accept(element_visitor& v) const {
     v.visit(*this);
     }
 
-void configuration::accept(const element_visitor& v) {
+void variability_profile_template::accept(const element_visitor& v) {
     v.visit(*this);
 }
 
-void configuration::accept(element_visitor& v) {
+void variability_profile_template::accept(element_visitor& v) {
     v.visit(*this);
 }
 
-void configuration::to_stream(std::ostream& s) const {
+void variability_profile_template::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::configuration\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::variability_profile_template\"" << ", "
       << "\"__parent_0__\": ";
     masd::dogen::coding::meta_model::element::to_stream(s);
     s << ", "
@@ -125,7 +125,7 @@ void configuration::to_stream(std::ostream& s) const {
       << " }";
 }
 
-void configuration::swap(configuration& other) noexcept {
+void variability_profile_template::swap(variability_profile_template& other) noexcept {
     masd::dogen::coding::meta_model::element::swap(other);
 
     using std::swap;
@@ -133,53 +133,53 @@ void configuration::swap(configuration& other) noexcept {
     swap(entries_, other.entries_);
 }
 
-bool configuration::equals(const masd::dogen::coding::meta_model::element& other) const {
-    const configuration* const p(dynamic_cast<const configuration* const>(&other));
+bool variability_profile_template::equals(const masd::dogen::coding::meta_model::element& other) const {
+    const variability_profile_template* const p(dynamic_cast<const variability_profile_template* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
-bool configuration::operator==(const configuration& rhs) const {
+bool variability_profile_template::operator==(const variability_profile_template& rhs) const {
     return masd::dogen::coding::meta_model::element::compare(rhs) &&
         labels_ == rhs.labels_ &&
         entries_ == rhs.entries_;
 }
 
-configuration& configuration::operator=(configuration other) {
+variability_profile_template& variability_profile_template::operator=(variability_profile_template other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::unordered_set<std::string>& configuration::labels() const {
+const std::unordered_set<std::string>& variability_profile_template::labels() const {
     return labels_;
 }
 
-std::unordered_set<std::string>& configuration::labels() {
+std::unordered_set<std::string>& variability_profile_template::labels() {
     return labels_;
 }
 
-void configuration::labels(const std::unordered_set<std::string>& v) {
+void variability_profile_template::labels(const std::unordered_set<std::string>& v) {
     labels_ = v;
 }
 
-void configuration::labels(const std::unordered_set<std::string>&& v) {
+void variability_profile_template::labels(const std::unordered_set<std::string>&& v) {
     labels_ = std::move(v);
 }
 
-const std::list<masd::dogen::coding::meta_model::configuration_entry>& configuration::entries() const {
+const std::list<masd::dogen::coding::meta_model::variability_profile_template_entry>& variability_profile_template::entries() const {
     return entries_;
 }
 
-std::list<masd::dogen::coding::meta_model::configuration_entry>& configuration::entries() {
+std::list<masd::dogen::coding::meta_model::variability_profile_template_entry>& variability_profile_template::entries() {
     return entries_;
 }
 
-void configuration::entries(const std::list<masd::dogen::coding::meta_model::configuration_entry>& v) {
+void variability_profile_template::entries(const std::list<masd::dogen::coding::meta_model::variability_profile_template_entry>& v) {
     entries_ = v;
 }
 
-void configuration::entries(const std::list<masd::dogen::coding::meta_model::configuration_entry>&& v) {
+void variability_profile_template::entries(const std::list<masd::dogen::coding::meta_model::variability_profile_template_entry>&& v) {
     entries_ = std::move(v);
 }
 

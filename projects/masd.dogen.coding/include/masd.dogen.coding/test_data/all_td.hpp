@@ -54,7 +54,6 @@
 #include "masd.dogen.coding/test_data/helpers/mapping_context_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/letter_cases_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/origin_types_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/configuration_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/modeline_field_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/modeline_group_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/object_template_td.hpp"
@@ -67,7 +66,6 @@
 #include "masd.dogen.coding/test_data/meta_model/static_stereotypes_td.hpp"
 #include "masd.dogen.coding/test_data/helpers/mapping_set_repository_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/artefact_properties_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/configuration_entry_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/orm_database_systems_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/orm_model_properties_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/extraction_properties_td.hpp"
@@ -75,7 +73,9 @@
 #include "masd.dogen.coding/test_data/meta_model/orm_object_properties_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/orm_attribute_properties_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/orm_primitive_properties_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/variability_profile_template_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/fully_qualified_representation_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/variability_profile_template_entry_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/local_archetype_location_properties_td.hpp"
 
 #endif
