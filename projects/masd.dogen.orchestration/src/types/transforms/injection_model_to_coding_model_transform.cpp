@@ -243,7 +243,7 @@ process_element(const helpers::adapter& ad,
     case static_stereotypes::licence:
         insert(ad.to_licence(l, scr, e), m.licences());
         break;
-    case static_stereotypes::configuration:
+    case static_stereotypes::variability_profile_template:
         insert(ad.to_variability_profile_template(l, scr, e),
             m.variability_profile_templates());
         break;

@@ -48,7 +48,7 @@ enum class static_stereotypes : unsigned int {
     modeline = 14,
     generation_marker = 15,
     licence = 16,
-    configuration = 17
+    variability_profile_template = 17
 };
 
 }

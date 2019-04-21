@@ -26930,13 +26930,13 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-190,-94"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-190.05,-94.05;-181.137,-77.55"/>
+        <dia:rectangle val="-190.05,-94.05;-178.285,-77.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-190,-94"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.8125"/>
+        <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="16.400000000000002"/>
@@ -27399,7 +27399,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#configuration#</dia:string>
+            <dia:string>#variability_profile_template#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -30716,7 +30716,7 @@ as a modeline.#</dia:string>
         <dia:point val="-179.125,-74"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-185.644,-77.65;-178.375,-73.2"/>
+        <dia:rectangle val="-184.218,-77.65;-178.375,-73.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30724,8 +30724,8 @@ as a modeline.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-179.125,-74"/>
         <dia:point val="-179.125,-76"/>
-        <dia:point val="-185.594,-76"/>
-        <dia:point val="-185.594,-77.6"/>
+        <dia:point val="-184.167,-76"/>
+        <dia:point val="-184.167,-77.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
