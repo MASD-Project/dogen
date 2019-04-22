@@ -27,10 +27,13 @@ git:
 
 matrix:
   allow_failures:
-    # gcc release it timing out
+    # GCC  it timing out
     - os: linux
       compiler: gcc
       env: configuration=Release compiler="gcc8" generator="Ninja" build_group="Continuous" report_name="Linux Gcc Releases"
+    - os: linux
+      compiler: gcc
+      env: configuration=Debug compiler="gcc8" generator="Ninja" build_group="Continuous"  report_name="Linux Gcc Debug"
   include:
     #
     # OSX Clang
