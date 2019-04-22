@@ -14,38 +14,18 @@ using C-c C-e J p. File is under Reports directory.
 
 ** Software Development
 
-*** Extraction clean-up
-   :PROPERTIES:
-   :EFFORT:   3d
-   :BLOCKER:  start
-   :allocate: s14
-   :END:
-
-- move modelines, licences, etc into meta-model.
-- create transforms to assemble decoration in generation.
-- move formatters into generation.
-- move utility formatters into generation.
-- Sprint 14.
-
-*** Annotations profile clean-up
+*** Variability model implementation
    :PROPERTIES:
    :EFFORT:   3d
    :BLOCKER:  previous-sibling
-   :allocate: s15
+   :allocate: s16
    :END:
 
-- create types to represent profiles and profile inheritance in
-  coding.
-- create transforms that use the coding types to instantiate
-  annotations infrastructure.
-- update context factories to read annotation information from the
-  model itself.
-
-*** Annotations types clean-up
+*** Variability feature clean-up
    :PROPERTIES:
    :EFFORT:   2d
    :BLOCKER:  previous-sibling
-   :allocate: s16
+   :allocate: s17
    :END:
 
 - create templates to generate types and associated annotation type
@@ -68,7 +48,7 @@ using C-c C-e J p. File is under Reports directory.
    :PROPERTIES:
    :EFFORT:   3d
    :BLOCKER:  previous-sibling
-   :allocate: s17
+   :allocate: s18
    :END:
 
 - remove all types that are in coding but are related to generation
@@ -78,7 +58,7 @@ using C-c C-e J p. File is under Reports directory.
    :PROPERTIES:
    :EFFORT:   3d
    :BLOCKER:  previous-sibling
-   :allocate: s17
+   :allocate: s18
    :END:
 
 - move formattables concepts into generation, generalising them. This
@@ -88,7 +68,7 @@ using C-c C-e J p. File is under Reports directory.
    :PROPERTIES:
    :EFFORT:   2d
    :BLOCKER:  previous-sibling
-   :allocate: s18
+   :allocate: s19
    :END:
 
 - when C++ and C# models only have formatters, merge them into one
@@ -98,7 +78,7 @@ using C-c C-e J p. File is under Reports directory.
    :PROPERTIES:
    :EFFORT:   2d
    :BLOCKER:  previous-sibling
-   :allocate: s18
+   :allocate: s19
    :END:
 
 - update all CMake templates with latest layout from hand-crafted
@@ -108,7 +88,7 @@ using C-c C-e J p. File is under Reports directory.
    :PROPERTIES:
    :EFFORT:   3d
    :BLOCKER:  previous-sibling
-   :allocate: s19
+   :allocate: s20
    :END:
 
 - add proudct and product family level entities to coding.
@@ -116,23 +96,13 @@ using C-c C-e J p. File is under Reports directory.
 ** Milestones
 *** Project start
     :PROPERTIES:
-    :task_id:  start
-    :start:    2019-04-25
+    :task_id: start
+    :start: 2019-04-22
     :END:
 
 * Sprints                                              :taskjuggler_resource:
 
 Sprints for the project plan.
-
-** Sprint 14
-   :PROPERTIES:
-   :resource_id: s14
-   :END:
-
-** Sprint 15
-   :PROPERTIES:
-   :resource_id: s15
-   :END:
 
 ** Sprint 16
    :PROPERTIES:
@@ -152,4 +122,8 @@ Sprints for the project plan.
 ** Sprint 19
    :PROPERTIES:
    :resource_id: s19
+   :END:
+** Sprint 20
+   :PROPERTIES:
+   :resource_id: s20
    :END:

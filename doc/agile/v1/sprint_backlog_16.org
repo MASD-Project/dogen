@@ -13,126 +13,67 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-22 Mon 09:48]
-| <75>                                |        |      |      |       |
-| Headline                            | Time   |      |      |     % |
-|-------------------------------------+--------+------+------+-------|
-| *Total time*                        | *0:22* |      |      | 100.0 |
-|-------------------------------------+--------+------+------+-------|
-| Stories                             | 0:22   |      |      | 100.0 |
-| Active                              |        | 0:22 |      | 100.0 |
-| Sprint and product backlog grooming |        |      | 0:22 | 100.0 |
+#+CAPTION: Clock summary at [2019-04-22 Mon 11:26]
+| <75>                                   |        |      |      |       |
+| Headline                               | Time   |      |      |     % |
+|----------------------------------------+--------+------+------+-------|
+| *Total time*                           | *1:58* |      |      | 100.0 |
+|----------------------------------------+--------+------+------+-------|
+| Stories                                | 1:58   |      |      | 100.0 |
+| Active                                 |        | 1:58 |      | 100.0 |
+| Edit release notes for previous sprint |        |      | 1:36 |  81.4 |
+| Sprint and product backlog grooming    |        |      | 0:22 |  18.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
-*** Edit release notes for previous sprint                            :story:
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2019-04-22 Mon 11:24]
+    :LOGBOOK:
+    CLOCK: [2019-04-22 Mon 09:50]--[2019-04-22 Mon 11:26] =>  1:36
+    :END:
 
 Add github release notes for previous sprint.
 
-Title: Dogen v1.0.15, ""
+Title: Dogen v1.0.15, "Quinzinho"
 
 #+begin_src markdown
-![Deserto do Namibe](http://4.bp.blogspot.com/-LiNTT6RDryM/VOyICPXnVDI/AAAAAAAAFMs/41QA7apihtQ/s1600/IMG_0834%2Bcopy.jpg)
-_Dunes in the Namib Desert, Namibe Province, Angola. (C) 2012 [João P. Baptista](http://xamalundo.blogspot.com/2015/02/deserto-do-namibe-angola.html)_.
+![Joaquim Alberto da Silva](https://pbs.twimg.com/media/D4vvToKWkAEN1Ri.png:large)
+
+_Joaquim Alberto da Silva ("Quinzinho") playing for the Angolan national team, the Palancas Negras. (C) 2001 Getty Images._
+
+# Prelude
+
+This release is named in memory of "Quinzinho", who [scored Angola's first goal in the Africa Cup of Nations](https://www.bbc.co.uk/sport/football/47987342). _Xala Kiambote, Guerreiro._
 
 # Introduction
 
-This sprint was yet again an extremely busy affair. However, for a change, time was mainly focused on the task at hand rather than on distractions such as testing. As a result, we have finally delivered the first of a number of core meta-model changes that aim to regularise our approach to the modeling of elements across the solution space. In other words, it may appear like a small release to the untrained eye, but it feels like a giant leap to the development team.
-
-As you will not fail to notice, the release notes have been tweaked yet again in response to feedback: we now start with the user visible changes, and proceed to discuss internal matters afterwards.
+The key objective this sprint was to make inroads with regards to variability management in Dogen models [1]. Readers won't fail to notice that we've started to get more and more technical as we try to align Dogen with the PhD thesis. This trend is only set to increase, because we are approaching the business end of the research project. Also, as expected, the technical work was much harder than expected (if you pardon the pun), so we didn't get as far as exposing variability management to the end user. We are now hoping to reach this significant milestone next sprint.
 
 # User visible changes
 
-This section covers stories that affect end users. The sprint demo provides a quick demonstration on the user visible changes, whereas the below sections provide more detail.
+There were only a few minor user visible changes:
 
-[![Sprint 1.0.14 Demo](https://img.youtube.com/vi/zNnzGF6VSTw/0.jpg)](https://youtu.be/zNnzGF6VSTw)
-
-## Decorative elements are now in meta-model
-
-Before delving into the details of the feature, it is worth providing some context. Up to now we have separated configuration from modeling proper. As a result, there are a number of little configuration files, each declared and consumed by user models via its own ad-hoc mechanisms. As [MDE theory](https://en.wikipedia.org/wiki/Model-driven_engineering) became better understood, and as the MASD approach cemented itself, it became clear that these configuration units are indeed worthy of modeling just like any other higher level concept present in a product. This release sees the start of a **long** process that, when completed, will finally move the architecture to its desired state. Sadly, it will require quite a large engineering effort to get there.
-
-As for the feature itself: this release places the management of modelines, licences, location strings (known in Dogen speak as "generation markers") and other decorative elements into the meta-model. This means that instead of an assortment set of data files of varying formats, these are now contained in a "regular" model and can be extended and/or overridden by users as required.
-
-The ```masd``` model defines a number of these which can readily be used:
-
-![MASD Model](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/masd_model_screenshot.png)
-
-In order to make use of these new model elements, you need to first define a reference to ```masd``` (assuming a Dia model):
-
-```
-#DOGEN masd.injection.reference=masd
-```
-
-And then you can set up the meta-data as required:
-
-```
-#DOGEN masd.generation.decoration.enabled=true
-#DOGEN masd.generation.decoration.licence_name=masd.gpl_v3
-#DOGEN masd.generation.decoration.modeline_group_name=masd.emacs
-#DOGEN masd.generation.decoration.copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
-```
-
-As you can see, from a usage perspective these are very similar to the previous approach (modulus the field name changes). However, the advantage is that you can now define you own modeling elements (licences, etc), on either the target model or a model shared by a number of target models - as in the ```masd``` model example above.
-
-Please note that these keys were previously available with different names, so this is a breaking change. The fields have been updated from:
-
-```
-masd.decoration.enabled
-masd.decoration.licence_name
-masd.decoration.copyright_notice
-masd.decoration.modeline_group_name
-```
-
-to
-
-```
-masd.generation.decoration.enabled
-masd.generation.decoration.licence_name
-masd.generation.decoration.copyright_notice
-masd.generation.decoration.modeline_group_name
-```
-
-## Language rename
-
-Sadly, this is not the only breaking change in this release. The "language rename" is explained in more detail below on the internal section, but from a end user perspective, it is a breaking change. The following fields have been renamed:
-
-```
-#DOGEN masd.injection.input_language=cpp
-#DOGEN masd.extraction.output_language=cpp
-```
-
-Have been renamed. They must be updated to:
-
-```
-#DOGEN masd.injection.input_technical_space=cpp
-#DOGEN masd.extraction.output_technical_space=cpp
-```
+- a rather dodgy bug in C# code generation was found and fixed, whereby we somehow were not generating code for C# models. How this was missed is a veritable comedy of errors, from the way we had designed the system tests to the way diffs were being made. Suffices to say that many lessons were learned and a tightening of the process was put into place to avoid this particular problem from happening again.
+- CMake files now use the correct tab variable for emacs, i.e. ```cmake-tab-width``` instead of ```tab-width```.
+- CMake files are no longer hard-coded to generate static libraries. You can generate a shared library by using the CMake variable ```-DBUILD_SHARED_LIBS=ON```. This change was also made to the Dogen codebase itself, but due to a problem with the Boost.Log build supplied by vcpkg, we can't yet build Dogen using shared libraries [2].
 
 # Development Matters
 
-In this section we cover topics that are mainly of interest if you follow Dogen development, such as details on internal stories that consumed significant resources, important events, etc. As usual, for all the gory details of the work carried out this sprint, see the [sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_14.org).
-
-## Milestones
-
-With this release, we have made the 8888th commit to Dogen! I guess a celebration blog post is in order, though it's always difficult to justify taking more time away from coding.
-
-![Commit milestone](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/dogen_8888_commit.png)
+In this section we cover topics that are mainly of interest if you follow Dogen development, such as details on internal stories that consumed significant resources, important events, etc. As usual, for all the gory details of the work carried out this sprint, see the [sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_15.org).
 
 ## Significant Internal Stories
 
-Several very important clean-ups were achieved this sprint:
+The bulk of the work was taken by redesigning the annotations model. We have spent some time re-reading the [MDE](https://en.wikipedia.org/wiki/Model-driven_engineering) theory on this subject to make sure we have aligned all terminology with the terms used by domain experts. The final result was the creation of the variability model, composed of a number of transforms. This model has not yet been fully implemented and integrated with the core.
 
-- **Move from "languages" to "technical spaces"**. This is somewhat difficult to explain without getting into the details (which my thesis will explain properly), but with this release we have started a move from mere programming languages towards [technical spaces](https://userpages.uni-koblenz.de/~laemmel/gttse/2005/pdfs/41430036.pdf) as [MDE](https://en.wikipedia.org/wiki/Model-driven_engineering) understands them. This will in time provide a much cleaner conceptual model.
-- **Simpler qualified name representation**. In the past we had relied on maps, and associated qualified names directly with programming languages. With this release we now have a cleaner representation for these.
-- **Clean-up of the extraction model**. This story is related to the user visible feature above, but from an internal perspective. We have now moved all code in the extraction model which didn't belong there. There is only one outstanding task to finish the clean-up of this model, but it already looks in a much better shape.
+A second significant story this sprint was the reactivation of the boilerplate tests, which was a mop-up effort left from the previous sprint.
 
 ## Resourcing
 
-Most of the sprint's time was spent towards moving extraction model entities into the coding metamodel (~45%). Around 18% of the total time was dedicated to process, with the bulk of it taken by backlog grooming (9.5%), project planning (just below 3%) and the editing of release notes and the creation of the demo for the previous sprint (~2% and ~4% respectively). We also had a couple of spikes.
+Over 54% of the sprint was taken by stories related to its mission statement. We spent around 16% of the total time on process, with just shy of 10% for backlog grooming, and the remainder related to release notes and demo. We've also had a number of interesting spikes, which were rather expensive:
 
-The first spike had a cost of around 4%, and is related to integrating Report-CI; this is the latest project by [Klemens Morgenstern](http://klemens-morgenstern.github.io), the amazing coder behind [Boost.Process](https://www.boost.org/doc/libs/master/doc/html/process.html) and other core libraries. As always, we are happy to help fellow travellers on their road to product building. In addition, integration was fairly trivial (mainly reviewing Klemens' PRs) and we've already started to see some of the benefits as we start to make use of [the reports](https://github.com/MASD-Project/dogen/runs/95903756) the tool produces.
-
-The second spike cost circa 3.3% and was related to fixes to the emacs setup. Improvements in the development environment are always welcome, and [tend to have a very positive impact](http://mcraveiro.blogspot.com/2015/05/nerd-food-prelude-of-things-to-come.html), though in ways that are somewhat difficult to measure.
+- 10% of the time was spent changing our Emacs configuration. On the plus side, we are now using [clangd](https://clang.llvm.org/extra/clangd/index.html) instead of [cquery](https://github.com/cquery-project/cquery), whose development has slowed considerably. Given that Google and many other large enterprises contribute to clangd's development, it seems like the right decision. As a bonus, we've also updated clang to v8 - though, sadly, not via Debian's package management, as it is still only in unstable. Let's hope it hits testing soon.
+- the bug with C# code generation cost us 5.3% of the total ask.
+- we've had a number of issues with our nightly builds, costing us 2.5% of the total ask.
 
 The complete story breakdown is as follows:
 
@@ -140,31 +81,34 @@ The complete story breakdown is as follows:
 
 ## Planning
 
-Sprint 14 introduces a [project plan](https://github.com/MASD-Project/dogen/blob/master/doc/agile/project_plan.org). Given Dogen is on the critical path of my PhD, it seemed like a good idea to create some kind of road map that gives an inkling as to when I can start to think of completing it. It has the grandiose name of "project plan", but alas, it is nothing like a project plan for a real industry project. In truth, I've never been a great believer in the estimation process; the objective here is just to have some kind of projection, regardless of how crude, of what is left to do in order to release the [fabled v2 release](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org#required-for-v2).
-
-At the end of sprint 14, the plan looks like this:
+Due to the variability work being harder than expected, the project plan was bumped back by a sprint. At the end of sprint 15, the plan looks like this:
 
 ![Project Plan](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/agile/v1/sprint_14_project_plan.png)
 
 ![Resource Allocation Graph](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/agile/v1/sprint_14_resource_allocation_graph.png)
 
-We will keep it updated with each release.
-
 # Next Sprint
 
-As per the project plan above, we are expecting to continue the meta-modeling work in the next sprint by tackling a very thorny issue: moving profiles into the meta-model. This is a feature of pivotal importance to make Dogen usable because it will finally mean users can define profiles such as ```serializable``` and the like on their own diagrams, associate them with user defined configuration, and ultimately apply them to element types. Profiles are key to unlocking Dogen functionality, so we are extremely excited to finally get to work on this feature.
+The focus on Sprint 15 is to finish the variability model, and replace the legacy classes with the new, transform-based approach. If all goes according to plan, this will finally mean we can expose our variability profiles to end users.
 
 # Binaries
 
+Please note that we are now shipping clang binaries on Linux rather than the GCC-generated ones. Due to the current refactorings, our GCC builds are taking too long to complete. This does mean that we are now using clang for all our builds.
+
 You can download binaries from [Bintray](https://bintray.com/masd-project/main/dogen) for OSX, Linux and Windows (all 64-bit):
 
-- [dogen_1.0.14_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.14/dogen_1.0.14_amd64-applications.deb)
-- [dogen-1.0.14-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.14/dogen-1.0.14-Darwin-x86_64.dmg)
-- [dogen-1.0.14-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/DOGEN-1.0.14-Windows-AMD64.msi)
+- [dogen_1.0.15_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.15/dogen_1.0.15_amd64-applications.deb)
+- [dogen-1.0.15-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.15/dogen-1.0.15-Darwin-x86_64.dmg)
+- [dogen-1.0.15-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/DOGEN-1.0.15-Windows-AMD64.msi)
 
 For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
 
 Happy Modeling!
+
+# Footnotes
+
+[1]  If this is not a topic you are familiar with and you'd like to understand it better, JM Jézéquel's review paper on the subject is probably of interest: ["Model-Driven Engineering for Software Product Lines"](http://downloads.hindawi.com/journals/isrn.software.engineering/2012/670803.pdf).
+[2] [vcpkg #6148: Errors building shared library due to Boost Log and PIC](https://github.com/Microsoft/vcpkg/issues/6148)
 #+end_src
 
 - [[https://twitter.com/MarcoCraveiro/status/1115302519067090947][Tweet]]
