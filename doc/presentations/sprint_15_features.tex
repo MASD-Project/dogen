@@ -1,0 +1,56 @@
+\documentclass{beamer}
+\mode<presentation>
+{ \usetheme{boxes} }
+
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{csquotes}
+\usepackage[backend=bibtex]{biblatex}
+
+\title{Dogen v1.0.15, \enquote{Quinzinho}}
+
+\author{Marco Craveiro \\
+  Domain Driven Development
+}
+\date{\today}
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\bibliography{sprint_15_features}
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{User Visible Changes}
+
+\begin{itemize}
+
+\item CMake files now use the correct tab variable for emacs,
+  i.e. cmake-tab-width instead of tab-width.
+\item CMake files are no longer hard-coded to generate static
+  libraries.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Next Sprint}
+
+\begin{itemize}
+\item \textbf{Mission statement}: Provide support for profiles at the
+  metamodel level.
+\end{itemize}
+
+\end{frame}
+
+\end{document}

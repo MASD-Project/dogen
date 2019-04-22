@@ -13,22 +13,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-22 Mon 11:47]
-| <75>                                   |        |      |      |       |
-| Headline                               | Time   |      |      |     % |
-|----------------------------------------+--------+------+------+-------|
-| *Total time*                           | *2:18* |      |      | 100.0 |
-|----------------------------------------+--------+------+------+-------|
-| Stories                                | 2:18   |      |      | 100.0 |
-| Active                                 |        | 2:18 |      | 100.0 |
-| Edit release notes for previous sprint |        |      | 1:56 |  84.1 |
-| Sprint and product backlog grooming    |        |      | 0:22 |  15.9 |
+#+CAPTION: Clock summary at [2019-04-22 Mon 14:37]
+| <75>                                                   |        |      |      |       |
+| Headline                                               | Time   |      |      |     % |
+|--------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                           | *4:21* |      |      | 100.0 |
+|--------------------------------------------------------+--------+------+------+-------|
+| Stories                                                | 4:21   |      |      | 100.0 |
+| Active                                                 |        | 4:21 |      | 100.0 |
+| Edit release notes for previous sprint                 |        |      | 2:04 |  47.5 |
+| Sprint and product backlog grooming                    |        |      | 0:22 |   8.4 |
+| Create a video demo for the previous sprint's features |        |      | 1:55 |  44.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2019-04-22 Mon 11:24]
     :LOGBOOK:
+    CLOCK: [2019-04-22 Mon 12:21]--[2019-04-22 Mon 12:29] =>  0:08
     CLOCK: [2019-04-22 Mon 11:27]--[2019-04-22 Mon 11:47] =>  0:20
     CLOCK: [2019-04-22 Mon 09:50]--[2019-04-22 Mon 11:26] =>  1:36
     :END:
@@ -124,7 +126,11 @@ Happy Modeling!
 
 Updates to sprint and product backlog.
 
-*** Create a video demo for the previous sprint's features            :story:
+*** COMPLETED Create a video demo for the previous sprint's features  :story:
+    CLOSED: [2019-04-22 Mon 14:36]
+    :LOGBOOK:
+    CLOCK: [2019-04-22 Mon 12:41]--[2019-04-22 Mon 14:36] =>  1:55
+    :END:
 
 Demo the delete empty directories feature.
 
