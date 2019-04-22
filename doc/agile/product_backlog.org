@@ -5074,6 +5074,22 @@ Stories that will not be handled on the current major release.
 
 Ideas to improve the code base.
 
+*** Use =std::filesystem= instead of =boost::filesystem=              :story:
+
+Now that we have upgraded to C++ 17 we can start to make use of
+=std::filesystem=. Given our very limited use, all of the required
+functionality should be available.
+
+*** Use =std::shared_ptr= instead of =boost::shared_ptr=              :story:
+
+It seems it is now possible to serialise =std:shared_ptr= using
+regular boost serialisation. We should start to move our pointers to
+standard ones.
+
+Links:
+
+- [[https://stackoverflow.com/questions/8115220/how-can-boostserialization-be-used-with-stdshared-ptr-from-c11][How can boost::serialization be used with std::shared_ptr from C++11?]]
+
 *** Create a mock factory facet                                       :story:
 
 A very common pattern we have in dogen is that for a small number of

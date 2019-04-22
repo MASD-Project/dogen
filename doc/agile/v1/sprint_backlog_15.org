@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-21 Sun 12:31]
+#+CAPTION: Clock summary at [2019-04-22 Mon 09:29]
 | <75>                                                              |         |       |       |       |
 | Headline                                                          | Time    |       |       |     % |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                      | *79:09* |       |       | 100.0 |
+| *Total time*                                                      | *79:21* |       |       | 100.0 |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                           | 79:09   |       |       | 100.0 |
-| Active                                                            |         | 79:09 |       | 100.0 |
+| Stories                                                           | 79:21   |       |       | 100.0 |
+| Active                                                            |         | 79:21 |       | 100.0 |
 | Edit release notes for previous sprint                            |         |       |  4:21 |   5.5 |
-| Sprint and product backlog grooming                               |         |       |  7:06 |   9.0 |
+| Sprint and product backlog grooming                               |         |       |  7:18 |   9.2 |
 | Create a video demo for the previous sprint's features            |         |       |  1:35 |   2.0 |
 | Fix issues with emacs                                             |         |       |  2:01 |   2.5 |
 | Fix issues with nightly build                                     |         |       |  0:08 |   0.2 |
@@ -37,7 +37,7 @@
 | Nursing nightlies                                                 |         |       |  1:50 |   2.3 |
 | Fix snags with emacs                                              |         |       |  6:00 |   7.6 |
 | Profiles as meta-model elements                                   |         |       |  8:01 |  10.1 |
-| Redesign annotations model                                        |         |       | 31:59 |  40.4 |
+| Redesign annotations model                                        |         |       | 31:59 |  40.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -196,8 +196,10 @@ Happy Modeling!
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6521068658024804352][LinkedIn]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2019-04-22 Mon 09:28]
     :LOGBOOK:
+    CLOCK: [2019-04-22 Mon 08:55]--[2019-04-22 Mon 09:07] =>  0:12
     CLOCK: [2019-04-18 Thu 18:11]--[2019-04-18 Thu 18:25] =>  0:14
     CLOCK: [2019-04-18 Thu 12:02]--[2019-04-18 Thu 12:35] =>  0:33
     CLOCK: [2019-04-18 Thu 09:21]--[2019-04-18 Thu 09:36] =>  0:15
@@ -493,7 +495,8 @@ Notes:
 - model weaving: add to core. Model tailoring: optional parts are
   removed.
 
-*** STARTED Nursing nightlies                                         :story:
+*** COMPLETED Nursing nightlies                                       :story:
+    CLOSED: [2019-04-22 Mon 09:28]
     :LOGBOOK:
     CLOCK: [2019-04-20 Sat 07:44]--[2019-04-20 Sat 07:49] =>  0:05
     CLOCK: [2019-04-20 Sat 07:16]--[2019-04-20 Sat 07:43] =>  0:27
@@ -512,7 +515,8 @@ Time taken fixing assorted issues with nightly builds.
   to manually update the directory or wait another day for it to sync
   up.
 
-*** STARTED Fix snags with emacs                                      :story:
+*** COMPLETED Fix snags with emacs                                    :story:
+    CLOSED: [2019-04-22 Mon 09:28]
     :LOGBOOK:
     CLOCK: [2019-04-18 Thu 06:25]--[2019-04-18 Thu 06:35] =>  0:10
     CLOCK: [2019-04-14 Sun 14:46]--[2019-04-14 Sun 15:09] =>  0:23
@@ -536,7 +540,8 @@ Notes:
   clangd.
 - experiments with minimap.
 
-*** STARTED Profiles as meta-model elements                           :story:
+*** POSTPONED Profiles as meta-model elements                         :story:
+    CLOSED: [2019-04-22 Mon 09:28]
     :LOGBOOK:
 3    CLOCK: [2019-04-12 Fri 07:59]--[2019-04-12 Fri 09:00] =>  1:01
     CLOCK: [2019-04-11 Thu 18:39]--[2019-04-11 Thu 19:09] =>  0:30
@@ -799,7 +804,8 @@ Notes:
   configuration" or some other name to make it distinct from
   =variability::configuration=.
 
-*** STARTED Redesign annotations model                                :story:
+*** POSTPONED Redesign annotations model                              :story:
+    CLOSED: [2019-04-22 Mon 09:29]
     :LOGBOOK:
     CLOCK: [2019-04-21 Sun 12:18]--[2019-04-21 Sun 12:31] =>  0:13
     CLOCK: [2019-04-21 Sun 12:06]--[2019-04-21 Sun 12:17] =>  0:11
@@ -943,276 +949,6 @@ Tasks:
 - rename type group to feature group. Leave traits as is for now.
 - rename annotation to configuration.
 - create archetype model and mode archetype related types there.
-
-*** Enablement problem is in the variability domain                   :story:
-
-Up to now we have considered the enablement problem as a generation
-model problem, but this is incorrect. The enablement problem is
-basically the idea that if I set a type to be hashable (for example),
-the system should implicitly determine all other types that need to be
-hashable too. This means that if I have descendants, they should also
-be hashable, and if I have properties, the type of those properties
-must also be hashable. In reality this is just a variability
-problem. We need to tell the variability model about:
-
-- features that require "propagation across model elements". We need a
-  good name for this, without referencing model elements.
-- the relationship between bound configurations. This can be copied
-  from the model element (the bound configuration has the exact same
-  name as the model element).
-
-Then, we can simply build a DAG for the feature model using only bound
-configurations (e.g. at present, binding type of "not applicable") and
-then DFS the DAG setting properties across this relationship. Call the
-relationship R between a and b, where a and b are configurations; all
-properties that have the "propagate" flag on will be copied across
-from a to b as is (due to R). If done after building the merged model
-and after stereotype expansion this will work really well:
-
-- we don't really care how a got into the state it is at present, we
-  just copy the relevant properties across.
-- there is no solving, BDD, etc. However, R must not have cycles. We
-  probably need to first see how many cycles we find with inheritance
-  and associations.
-- we may need a way to switch this off. Say we really want to
-  introduce a cycle; in that case, the bound configurations should be
-  ignored.
-
-Note that we will probably need to store pointers to the configuration
-in order for this to work, or else we'll end up doing a lot of lookups
-and copying around (to get the configurations from the model elements
-into variability, the DAG etc and then back into the model at the
-end).
-
-Interestingly, this also means that we should not move the
-global/local enablement computations into archetypes as we had planned
-earlier. Instead, we need to explore if it is possible to generalise
-the notion of "local" and "global" configurations, with overrides and
-default values. This would work as part of the configuration binding
-via implicit relationships - its just that the global configuration is
-not really a relationship inferred from the underlying model. We then
-need to look at the cleverness that we are using for overwrite as
-well. Whilst we only need this logic for enablement, it may be useful
-for other fields as well in the future. We also need some kind of way
-of declaring certain fields as "cloneable" (for want of a better
-term). In this case, we start off with a list of these fields, and if
-there is no configuration point for them locally, we take the global
-configuration point; if none exists, we take the default value.
-
-Actually its more like "hierarchical copy" because we need to take
-into account the hierarchy. In addition, we don't particularly care
-about say backend, facet, etc at the element level, we just want the
-archetype. So we need to encode these rules as a type of bind. It can
-even be hacked as a bind "special" just for this purpose, its still a
-better approach.
-
-Another interesting issue is that of "reverse references". That is,
-the fact that a model m is referenced by a set of models S; each of
-these models may enable facets on elements that are associated with
-elements from model m. On a first pass, we need to be able to consider
-the configuration requirements as "non-satisfiable". The user
-requested a configuration on the target model which cannot be
-satisfied unless we alter the configuration of a referenced model. On
-a second pass, when we have product level support, we could consider
-adding "referenced" models to each model. This means that when we are
-building m we have visibility of how m is used in the product and we
-can take those uses into account when building the DAG.
-
-*** Clean up annotation scope types                                   :story:
-
-As part of the attribute rename (which used to be called property) we
-should have renamed the annotation scope as well to attribute.
-
-In addition, we have a scope type of "entity" but the yarn meta-model
-type is really "element".
-
-We should also check if "not applicable" scope is in use, and if not
-delete it.
-
-*** Add annotation types description                                  :story:
-
-It would be useful to have a description of the purpose of the field
-so that we could print it to the command line. We could simply add a
-JSON attribute to the field called description to start off with. But
-ideally we need a command line argument to dump all fields and their
-descriptions so that users know what's available.
-
-This should be sorted by qualified name.
-
-*** Reactivate injection.dia tests                                    :story:
-
-We seem to have a number of tests commented out in
-injection.dia. Investigate why and if possible, reactivate them.
-
-*** Location of =--byproduct-directory= not respected                 :story:
-
-It seems that at present we are not honouring the directory supplied
-by the user. This seems to only happen on convert mode.
-
-*** Add primitives to the archetypes model                            :story:
-
-Instead of using strings we should use primitives for:
-
-- facets
-- formatters
-- backends
-- simple and qualified names.
-- etc.
-
-*** Consider a test suite level logging flag                          :story:
-
-At present we can either enable logging for all test suites in dogen
-or disable it. This means that all tests run a lot slower. Maybe we
-should allow enabling logging at the test suite level. However, we
-only use this to troubleshoot in which case the cost of a few seconds
-is not a big problem.
-
-*** Add support for decoration configuration overrides                :story:
-
-At present we have hard-coded the decoration configuration to be read
-from the root object only. In an ideal world, we should be able to
-override some of these such as the copyrights. It may not make sense
-to be able to override them all though.
-
-This functionality has been implemented but requires tests in the test
-model.
-
-*** Update copyright notices                                          :story:
-
-We need to update all notices to reflect personal ownership until DDC
-was formed, and then ownership by DDC.
-
-- first update to personal ownership has been done, but we need to
-  test if multiple copyright entries is properly supported.
-
-*** Copyright holders is scalar when it should be an array            :story:
-
-At present its only possible to specify a single copyright holder. It
-should be handled the same was as odb parameters, but because that is
-done with a massive hack, we are not going to extend the hack to
-copyright holders.
-
-This functionality has been implemented but requires tests in the test
-model.
-
-*** Duplicate elements in model                                       :story:
-
-Whilst running queries on postgres against a model dumped in tracing,
-we found evidence of duplicate elements. Query:
-
-: select jsonb_pretty(
-:           jsonb_array_elements(
-:           jsonb_array_elements(data)->'elements')->'data'->'__parent_0__'->'name'->'qualified'->'dot'
-:       )
-: from traces;
-
-Snippet of results after =sort | uniq -c=
-
-:      1  "masd.dogen.generation.csharp"
-:      1  "masd.dogen.generation.csharp.all"
-:      1  "masd.dogen.generation.csharp.CMakeLists"
-:      1  "masd.dogen.generation.csharp.entry_point"
-:      1  "masd.dogen.generation.csharp.fabric"
-:      2  "masd.dogen.generation.csharp.fabric.assembly_info"
-:      2  "masd.dogen.generation.csharp.fabric.assembly_info_factory"
-:      2  "masd.dogen.generation.csharp.fabric.assistant"
-:      2  "masd.dogen.generation.csharp.fabric.assistant_factory"
-:      2  "masd.dogen.generation.csharp.fabric.decoration_expander"
-:      2  "masd.dogen.generation.csharp.fabric.dynamic_transform"
-:      2  "masd.dogen.generation.csharp.fabric.element_visitor"
-:      2  "masd.dogen.generation.csharp.fabric.initializer"
-:      2  "masd.dogen.generation.csharp.fabric.injector"
-:      2  "masd.dogen.generation.csharp.fabric.meta_name_factory"
-:      2  "masd.dogen.generation.csharp.fabric.traits"
-:      2  "masd.dogen.generation.csharp.fabric.visual_studio_configuration"
-:      2  "masd.dogen.generation.csharp.fabric.visual_studio_factory"
-
-We need to investigate the generation pipeline to understand where
-this is coming from.
-
-*** Consider renaming orchestration to "engine"                       :story:
-
-Orchestration is a bit of a vague name. It is really the code
-generation engine of dogen. Its still very vague but slightly less so.
-
-Actually the real name of this model is something like
-"component". This will make sense once we add the product model. In
-addition we need to somehow share the "generation" model across coding
-and product models.
-
-*** Make extraction model name a qualified name                       :story:
-
-At present we are setting up the extraction model name from the simple
-name of the model. It should really be the qualified name. Hopefully
-this will only affect tracing and diffing.
-
-*** Move wale templates from the data directory                       :story:
-
-At present we have wale templates under the data directory. This is
-not the right location. These are part of a model just like stitch
-templates. There is one slight wrinkle though: if a user attempts to
-create a dogen formatter (say if plugins were supported), then we need
-access to the template from the debian package. So whilst they should
-live in the appropriate model (e.g. =generation.cpp=,
-=generation.csharp=), they also need to be packaged and shipped.
-
-Interestingly, so will all dogen models which are defining annotations
-and profiles. We need to rethink the data directory, separating system
-models from dogen models somehow. In effect, the data directory will
-be, in the future, the system models directory.
-
-So, in conclusion, two use cases for wale templates:
-
-- regular model defines a wale template and makes use of it. Template
-  should be with the model, just like stitch templates. However,
-  unlike stitch, there should be a directory for them.
-- user model wants to define a new formatter. It will make use of
-  dogen profiles and wale templates. These must be in the future data
-  directory somehow.
-
-*** Exclude profiles from stereotypes processing                      :story:
-
-At present we are manually excluding profiles from the stereotypes
-transform. This was just a quick hack to get us going. We need to
-replace this with a call to annotations to get a list of profile names
-and exclude those.
-
-We should also rename =is_stereotype_handled_externally= to something
-more like "is profile" or "matches profile name".
-
-Actually the right thing may even be to just remove all of the profile
-stereotypes during annotations processing. However, we should wait
-until we complete the exomodel work since that will remove scribble
-groups, etc. Its all in the annotations transform.
-
-Once we have the profiles in the model set it should be easy to supply
-them to the annotations transform.
-
-*** Getter by reference of pointee                                    :story:
-
-A useful use case is, whenever we have a property which is of
-pointer-like type (shared pointer, etc), is to return the type pointed
-to by const reference. We should be able to configure the generator
-for this:
-
-- we can already detect if the type is a pointer type;
-- we would need some meta-data at the property level (generate
-  de-refenced const/non-const setter). If this is used but the
-  property type is not a pointer then we should throw.
-- the generator would look for the meta-data, if enabled it would add
-  additional setters.
-- we may even want to suppress the pointer getters as well.
-
-*** Shared pointers have getters and setters with references          :story:
-
-We should really pass shared pointers by value instead of reference.
-
-*** Consider changing variability value into a variant                :story:
-
-Really all we are doing is adding a lot of infrastructure to be able
-to store different types of values. This is what the variant is
-designed to do. In addition, we then have all of the complexities
-around selection that are already handled by variant.
 
 ** Deprecated
 *** CANCELLED Consider code generating utility at a product level     :story:
