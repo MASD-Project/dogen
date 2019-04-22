@@ -303,10 +303,15 @@ tests, please submit a bug report. It must include:
 If you find a bug whilst using Dogen with one of your models, please
 also include:
 
-- a small model reproducing the problem;
-- the compressed log; it is located under the directory where you
-  executed Dogen and named ```masd.dogen.cli.MODEL.log``` where
-  ```MODEL``` is the name of the model you ran against.
+- a small model reproducing the problem, called the [MWE (Minimum
+  Working
+  Example)](https://en.wikipedia.org/wiki/Minimal_working_example).
+- the compressed log. By default, dogen creates a directory structure
+  for all of its byproducts, in the folder it was executed from. It
+  has the form ```masd.dogen.byproducts/cli.generate.MODEL```, where
+  ```MODEL``` is the file name and extension of the generated
+  model. The log file is stored in this directory, with a name such as
+  ```cli.generate.MODEL.log```.
 
 Bugs can be submitted
 using [github Issues](https://github.com/MASD-Project/dogen/issues).
