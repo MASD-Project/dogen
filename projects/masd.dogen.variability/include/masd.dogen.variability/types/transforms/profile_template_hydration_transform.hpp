@@ -25,24 +25,40 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <vector>
+#include <boost/filesystem/path.hpp>
+#include "masd.dogen.variability/types/meta_model/profile_template.hpp"
+#include "masd.dogen.variability/types/transforms/context.hpp"
+
+/**
+ * @brief Reads all configuration templates from the filesystem.
+ */
 
 namespace masd::dogen::variability::transforms {
 
 class profile_template_hydration_transform final {
-public:
-    profile_template_hydration_transform() = default;
-    profile_template_hydration_transform(const profile_template_hydration_transform&) = default;
-    profile_template_hydration_transform(profile_template_hydration_transform&&) = default;
-    ~profile_template_hydration_transform() = default;
-    profile_template_hydration_transform& operator=(const profile_template_hydration_transform&) = default;
+private:
+    /**
+     * @brief Convert data directories into template directories.
+     */
+    std::vector<boost::filesystem::path> to_template_directories(
+        const std::vector<boost::filesystem::path>& data_dirs) const;
+
+    /**
+     * @brief Obtain all templates in template directories.
+     */
+    std::list<boost::filesystem::path> obtain_template_filenames(
+        const std::vector<boost::filesystem::path>& template_dirs) const;
+
+    /**
+     * @brief Hydrate all templates.
+     */
+    std::list<meta_model::profile_template> hydrate_templates(
+        const std::list<boost::filesystem::path>& tfn);
 
 public:
-    bool operator==(const profile_template_hydration_transform& rhs) const;
-    bool operator!=(const profile_template_hydration_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    std::list<meta_model::profile_template> apply(const context& ctx);
 };
 
 }
