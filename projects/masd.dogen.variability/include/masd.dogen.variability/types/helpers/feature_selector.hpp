@@ -54,7 +54,7 @@ public:
      * @return if one exists, returns it. Returns null otherwise.
      */
     boost::optional<const meta_model::feature&>
-    try_get_feature_by_name(const std::string& n) const;
+    try_get_by_name(const std::string& n) const;
 
     /**
      * @brief Tries to get the feature corresponding to the qualified
@@ -65,7 +65,7 @@ public:
      * @return if one exists, returns it. Returns Null otherwise.
      */
     boost::optional<const meta_model::feature&>
-    try_get_feature_by_name(const std::string& prefix,
+    try_get_by_name(const std::string& prefix,
         const std::string& simple_name) const;
 
 public:
@@ -76,7 +76,7 @@ public:
      * @pre name must exist.
      */
     const meta_model::feature&
-    get_feature_by_name(const std::string& n) const;
+    get_by_name(const std::string& n) const;
 
     /**
      * @brief Returns the feature corresponding to the qualified name
@@ -86,7 +86,7 @@ public:
      *
      * @pre qualified field name must exist.
      */
-    const meta_model::feature& get_feature_by_name(
+    const meta_model::feature& get_by_name(
         const std::string& prefix, const std::string& simple_name) const;
 
     /**
@@ -95,7 +95,7 @@ public:
      * @pre formatter name must exist.
      */
     const std::list<meta_model::feature>&
-    get_feature_by_formatter_name(const std::string& n) const;
+    get_by_formatter_name(const std::string& n) const;
 
     /**
      * @brief Returns the feature corresponding to the supplied facet
@@ -104,7 +104,7 @@ public:
      * @pre facet name must exist.
      */
     const std::list<meta_model::feature>&
-    get_feature_by_facet_name(const std::string& n) const;
+    get_by_facet_name(const std::string& n) const;
 
     /**
      * @brief Returns the feature corresponding to the supplied
@@ -113,7 +113,7 @@ public:
      * @pre backend name must exist.
      */
     const std::list<meta_model::feature>&
-    get_feature_by_backend_name(const std::string& n) const;
+    get_by_backend_name(const std::string& n) const;
 
 private:
     const meta_model::feature_model& model_;

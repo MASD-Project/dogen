@@ -49,8 +49,8 @@ qualify(const std::string& prefix, const std::string& feature_name) const {
     return prefix + dot + feature_name;
 }
 
-boost::optional<const meta_model::feature&> feature_selector::
-try_get_feature_by_name(const std::string& n) const {
+boost::optional<const meta_model::feature&>
+feature_selector::try_get_by_name(const std::string& n) const {
     const auto& c(model_.by_name());
     const auto i(c.find(n));
     if (i == c.end())
@@ -59,15 +59,15 @@ try_get_feature_by_name(const std::string& n) const {
     return i->second;
 }
 
-boost::optional<const meta_model::feature&> feature_selector::
-try_get_feature_by_name(const std::string& prefix,
+boost::optional<const meta_model::feature&>
+feature_selector::try_get_by_name(const std::string& prefix,
     const std::string& simple_name) const {
-    return try_get_feature_by_name(qualify(prefix, simple_name));
+    return try_get_by_name(qualify(prefix, simple_name));
 }
 
-const meta_model::feature& feature_selector::
-get_feature_by_name(const std::string& n) const {
-    const auto r(try_get_feature_by_name(n));
+const meta_model::feature&
+feature_selector::get_by_name(const std::string& n) const {
+    const auto r(try_get_by_name(n));
     if (!r) {
         BOOST_LOG_SEV(lg, error) << feature_not_found << n;
         BOOST_THROW_EXCEPTION(selection_exception(feature_not_found + n));
@@ -75,13 +75,13 @@ get_feature_by_name(const std::string& n) const {
     return *r;
 }
 
-const meta_model::feature& feature_selector::get_feature_by_name(
+const meta_model::feature& feature_selector::get_by_name(
     const std::string& prefix, const std::string& simple_name) const {
-    return get_feature_by_name(qualify(prefix, simple_name));
+    return get_by_name(qualify(prefix, simple_name));
 }
 
-const std::list<meta_model::feature>& feature_selector::
-get_feature_by_formatter_name(const std::string& n) const {
+const std::list<meta_model::feature>&
+feature_selector::get_by_formatter_name(const std::string& n) const {
     const auto& c(model_.by_formatter_name());
     const auto i(c.find(n));
     if (i != c.end())
@@ -91,8 +91,8 @@ get_feature_by_formatter_name(const std::string& n) const {
     BOOST_THROW_EXCEPTION(selection_exception(no_features_for_formatter + n));
 }
 
-const std::list<meta_model::feature>& feature_selector::
-get_feature_by_facet_name(const std::string& n) const {
+const std::list<meta_model::feature>&
+feature_selector::get_by_facet_name(const std::string& n) const {
     const auto& c(model_.by_facet_name());
     const auto i(c.find(n));
     if (i != c.end())
@@ -102,8 +102,8 @@ get_feature_by_facet_name(const std::string& n) const {
     BOOST_THROW_EXCEPTION(selection_exception(no_features_for_facet + n));
 }
 
-const std::list<meta_model::feature>& feature_selector::
-get_feature_by_backend_name(const std::string& n) const {
+const std::list<meta_model::feature>&
+feature_selector::get_by_backend_name(const std::string& n) const {
     const auto& c(model_.by_backend_name());
     const auto i(c.find(n));
     if (i != c.end())
