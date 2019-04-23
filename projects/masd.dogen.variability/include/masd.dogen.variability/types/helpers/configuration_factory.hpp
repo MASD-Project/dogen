@@ -30,6 +30,7 @@
 #include <utility>
 #include <unordered_map>
 #include <boost/optional.hpp>
+#include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.archetypes/types/location_repository.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
@@ -79,26 +80,33 @@ private:
 
 private:
     /**
-     * @brief Converts the raw data into a configuration.
-     */
-    meta_model::configuration
-    create_configuration(const meta_model::binding_point bp,
-        const std::unordered_map<std::string, std::list<std::string>>&
-        aggregated_entries) const;
-
-    /**
      * @brief Aggregate entry data by key.
      */
     std::unordered_map<std::string, std::list<std::string>>
     aggregate_entries(const std::list<std::pair<std::string, std::string>>&
         entries) const;
 
+    /**
+     * @brief Uses the raw data to populate the configuration.
+     */
+    void
+    populate_configuration(const meta_model::binding_point bp,
+        const std::unordered_map<std::string, std::list<std::string>>&
+        aggregated_entries, meta_model::configuration& cfg) const;
+
 public:
     /**
      * @brief Create a configuration.
      */
     meta_model::configuration
-    make(const std::list<std::pair<std::string, std::string>>& entries,
+    make(const std::list<std::pair<std::string, std::string>> &entries,
+        const meta_model::binding_point bp) const;
+
+    /**
+     * @brief Create a configuration as a shared pointer.
+     */
+    boost::shared_ptr<meta_model::configuration> make_shared_ptr(
+        const std::list<std::pair<std::string, std::string>> &entries,
         const meta_model::binding_point bp) const;
 
 private:

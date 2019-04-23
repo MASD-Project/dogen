@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/erase.hpp>
@@ -93,19 +94,29 @@ void configuration_factory::validate_binding(const meta_model::feature& f,
     }
 }
 
-meta_model::configuration
-configuration_factory::create_configuration(const meta_model::binding_point bp,
-    const std::unordered_map<std::string, std::list<std::string>>&
-    aggregated_entries) const {
+std::unordered_map<std::string, std::list<std::string>>
+configuration_factory::aggregate_entries(
+    const std::list<std::pair<std::string, std::string>>& entries) const {
+    std::unordered_map<std::string, std::list<std::string> > r;
 
-    meta_model::configuration r;
-    r.source_binding_point(bp);
+    for (const auto& entry : entries)
+        r[entry.first].push_front(entry.second);
+
+    return r;
+}
+
+void configuration_factory::populate_configuration(
+    const meta_model::binding_point bp,
+    const std::unordered_map<std::string, std::list<std::string>>&
+    aggregated_entries, meta_model::configuration& cfg) const {
+
+    cfg.source_binding_point(bp);
 
     value_factory factory;
-    std::unordered_map<std::string, boost::shared_ptr<meta_model::value>>
-        entries;
-    std::unordered_map<std::string, std::unordered_map<std::string, std::string>>
-        all_kvps;
+    std::unordered_map<std::string,
+                       boost::shared_ptr<meta_model::value>> entries;
+    std::unordered_map<std::string,
+                       std::unordered_map<std::string, std::string>> all_kvps;
     for (auto kvp : aggregated_entries) {
         const auto& k(kvp.first);
         const auto of(try_obtain_feature(k));
@@ -163,7 +174,7 @@ configuration_factory::create_configuration(const meta_model::binding_point bp,
             meta_model::configuration_point cp;
             cp.name().qualified(k);
             cp.value(factory.make(f, v));
-            r.configuration_points()[k] = cp;
+            cfg.configuration_points()[k] = cp;
         }
     }
 
@@ -176,28 +187,26 @@ configuration_factory::create_configuration(const meta_model::binding_point bp,
         meta_model::configuration_point cp;
         cp.name().qualified(k);
         cp.value(factory.make_kvp(kvps));
-        r.configuration_points()[k] = cp;
+        cfg.configuration_points()[k] = cp;
     }
-
-    return r;
-}
-
-std::unordered_map<std::string, std::list<std::string>>
-configuration_factory::aggregate_entries(
-    const std::list<std::pair<std::string, std::string>>& entries) const {
-    std::unordered_map<std::string, std::list<std::string> > r;
-
-    for (const auto& entry : entries)
-        r[entry.first].push_front(entry.second);
-
-    return r;
 }
 
 meta_model::configuration configuration_factory::make(
     const std::list<std::pair<std::string, std::string>>& entries,
     const meta_model::binding_point bp) const {
     auto aggregated_entries(aggregate_entries(entries));
-    const auto r(create_configuration(bp, aggregated_entries));
+    meta_model::configuration r;
+    populate_configuration(bp, aggregated_entries, r);
+    return r;
+}
+
+boost::shared_ptr<meta_model::configuration>
+configuration_factory::make_shared_ptr(
+    const std::list<std::pair<std::string, std::string>>& entries,
+    const meta_model::binding_point bp) const {
+    auto aggregated_entries(aggregate_entries(entries));
+    auto r(boost::make_shared<meta_model::configuration>());
+    populate_configuration(bp, aggregated_entries, *r);
     return r;
 }
 
