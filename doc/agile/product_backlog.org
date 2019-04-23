@@ -13900,8 +13900,9 @@ Links:
 
 - [[https://github.com/vincentlaucsb/csv-parser][csv-parser]]: very promising CSV parsing library, with read and write
   support.
-- [[https://github.com/shaovoon/minicsv][minicsv]]: Minimalistic CSV Streams
-- [[https://github.com/shaovoon/csv_stream][csv_stream]]: C++14 CSV Stream based on C API
+- [[https://github.com/shaovoon/minicsv][minicsv]]: Minimalistic CSV Streams.
+- [[https://github.com/shaovoon/csv_stream][csv_stream]]: C++14 CSV Stream based on C API.
+- [[https://github.com/p-ranav/csv][CSV]]: CSV for Modern C++ (C++ 17).
 - [[https://github.com/shaovoon/minicsv_benchmark][benchmark of CSV libaries]]
 
 *** Consider generation of validators                                  :epic:
@@ -14774,3 +14775,12 @@ Links:
 - [[http://jailer.sourceforge.net/][jailer]]
 - [[https://martinfowler.com/articles/evodb.html][Evolutionary Database Design]]: Fowler article talking about how
   jailer is used with Agile.
+*** Add support for portable services                                 :story:
+
+It seems we just need to generate a small number of files in order to
+support portable services. We could add these to our product model.
+
+Links:
+
+- [[http://0pointer.net/blog/walkthrough-for-portable-services-in-go.html][Portable Services Walkthrough (Go Edition)]]
+- [[http://0pointer.net/blog/walkthrough-for-portable-services.html][Portable Services with systemd v239]]
