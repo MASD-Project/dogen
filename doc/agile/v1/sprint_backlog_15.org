@@ -13,7 +13,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-22 Mon 10:38]
+#+CAPTION: Clock summary at [2019-04-23 Tue 07:53]
 | <75>                                                              |         |       |       |       |
 | Headline                                                          | Time    |       |       |     % |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
@@ -36,8 +36,8 @@
 | Re-read variability modeling papers                               |         |       |  2:59 |   3.7 |
 | Nursing nightlies                                                 |         |       |  1:50 |   2.3 |
 | Fix snags with emacs                                              |         |       |  6:00 |   7.5 |
-| Profiles as meta-model elements                                   |         |       |  9:02 |  11.2 |
 | Redesign annotations model                                        |         |       | 31:59 |  39.8 |
+| Profiles as meta-model elements                                   |         |       |  9:02 |  11.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -540,6 +540,155 @@ Notes:
   clangd.
 - experiments with minimap.
 
+*** COMPLETED Redesign annotations model                              :story:
+    CLOSED: [2019-04-23 Tue 07:53]
+    :LOGBOOK:
+    CLOCK: [2019-04-21 Sun 12:18]--[2019-04-21 Sun 12:31] =>  0:13
+    CLOCK: [2019-04-21 Sun 12:06]--[2019-04-21 Sun 12:17] =>  0:11
+    CLOCK: [2019-04-21 Sun 12:00]--[2019-04-21 Sun 12:05] =>  0:05
+    CLOCK: [2019-04-21 Sun 11:25]--[2019-04-21 Sun 11:59] =>  0:34
+    CLOCK: [2019-04-19 Fri 20:33]--[2019-04-19 Fri 20:49] =>  0:16
+    CLOCK: [2019-04-19 Fri 18:01]--[2019-04-19 Fri 20:32] =>  2:31
+    CLOCK: [2019-04-19 Fri 17:01]--[2019-04-19 Fri 17:15] =>  0:40
+    CLOCK: [2019-04-18 Thu 18:39]--[2019-04-18 Thu 18:50] =>  0:11
+    CLOCK: [2019-04-18 Thu 18:25]--[2019-04-18 Thu 18:39] =>  0:14
+    CLOCK: [2019-04-18 Thu 17:31]--[2019-04-18 Thu 18:10] =>  0:52
+    CLOCK: [2019-04-18 Thu 14:02]--[2019-04-18 Thu 15:59] =>  1:57
+    CLOCK: [2019-04-18 Thu 09:45]--[2019-04-18 Thu 12:01] =>  2:41
+    CLOCK: [2019-04-18 Thu 07:37]--[2019-04-18 Thu 07:45] =>  0:08
+    CLOCK: [2019-04-18 Thu 07:24]--[2019-04-18 Thu 07:36] =>  0:12
+    CLOCK: [2019-04-18 Thu 06:35]--[2019-04-18 Thu 07:23] =>  0:48
+    CLOCK: [2019-04-17 Wed 17:54]--[2019-04-17 Wed 17:59] =>  0:05
+    CLOCK: [2019-04-17 Wed 17:50]--[2019-04-17 Wed 17:53] =>  0:03
+    CLOCK: [2019-04-17 Wed 17:16]--[2019-04-17 Wed 17:49] =>  0:33
+    CLOCK: [2019-04-17 Wed 14:02]--[2019-04-17 Wed 17:15] =>  3:13
+    CLOCK: [2019-04-17 Wed 09:22]--[2019-04-17 Wed 11:06] =>  1:44
+    CLOCK: [2019-04-16 Tue 07:12]--[2019-04-16 Tue 08:24] =>  1:12
+    CLOCK: [2019-04-15 Mon 14:05]--[2019-04-15 Mon 17:41] =>  3:36
+    CLOCK: [2019-04-13 Sat 14:38]--[2019-04-13 Sat 17:41] =>  3:03
+    CLOCK: [2019-04-13 Sat 12:55]--[2019-04-13 Sat 14:37] =>  1:42
+    CLOCK: [2019-04-13 Sat 10:52]--[2019-04-13 Sat 12:30] =>  1:38
+    CLOCK: [2019-04-13 Sat 06:03]--[2019-04-13 Sat 06:33] =>  0:30
+    CLOCK: [2019-04-12 Fri 17:41]--[2019-04-12 Fri 17:49] =>  0:08
+    CLOCK: [2019-04-12 Fri 17:27]--[2019-04-12 Fri 17:40] =>  0:13
+    CLOCK: [2019-04-12 Fri 17:06]--[2019-04-12 Fri 17:26] =>  0:20
+    CLOCK: [2019-04-12 Fri 14:21]--[2019-04-12 Fri 15:30] =>  1:09
+    CLOCK: [2019-04-12 Fri 14:06]--[2019-04-12 Fri 14:20] =>  0:14
+    CLOCK: [2019-04-12 Fri 11:15]--[2019-04-12 Fri 11:29] =>  0:14
+    CLOCK: [2019-04-12 Fri 09:00]--[2019-04-12 Fri 10:53] =>  1:53
+    :END:
+
+*Rationale*: the redesign was completed with the modeling work. We now
+have to implement it, which is a different story.
+
+There has been a great deal of confusion regarding how annotations
+have been used. We have the following use cases/names:
+
+- annotation: store of configuration. The store is "dynamic", in the
+  sense that the values are changeable at run time.
+- coding configuration: "adapter" to allow the meta-model to carry
+  "configuration templates" - that which we call profiles.
+- profiles: templates for configuration. These are stored as
+  templates, and subsequently instantiated into annotations.
+
+Note that the annotations are of two "types":
+
+- stand alone annotations: these are the product of configuration
+  template instantiation. These are sourced from JSON files (at
+  present) or model elements (the coding configuration). These are
+  unbound configurations.
+- element owned annotations: these are sourced from regular model
+  elements. These are bound configurations.
+
+The objective is to apply stand alone configurations to element owned
+configurations via the mappings in stereotypes. Given all of this, the
+existing names are woefully inadequate, and its becoming more
+confusing as we make increased use of this functionality. We need to
+rename all of these model types to more sensible names and document
+their responsibilities else this code will become (even more)
+unmaintainable.
+
+Notes:
+
+- the annotations model should really be called configuration because
+  it deals with all of the primitives for configuration. Or better
+  yet: variability2. Note that this model is concerned with structural
+  variability. We will leave non-structural variability (configuration
+  files) for another time. we need to split this out in the backlog.
+- the annotation class is really a typed configuration
+  store. We use the name store to avoid confusion with the established
+  repository idiom, e.g.: =configuration::store=.
+- profiles are configuration templates.
+- the annotation expander is a =store_builder=. It creates a store
+  from a set of configuration templates.
+- the coding configuration is actually a configuration template.
+- a type is actually a (typed) feature. What we are calling type
+  groups are feature groups. Traits are feature names. In the future,
+  we will code-generate the insertion of features into the variablity
+  model feature store, and the conversion of dynamic configurations
+  into concrete configurations (c++ types). By declaring a model
+  element as a feature group, each attribute becomes a feature. The
+  code generator reads the features and injects them into the
+  variability model. It also creates the C++ type. It also creates
+  code to convert from and to the dynamic configuration
+  representation. It also contains the feature and feature group
+  documentation, accessible at run-time.
+- maybe we should call feature group "feature set" instead to avoid
+  confusion with xor/or-groups in feature diagrams.
+- what we are calling scope types is perhaps called "binding times".
+- there is a simple algebra of configurations such as a + b = c
+  (confiugrations are additive), etc. The algebra dictates the order
+  of operations.
+- tagged values could be configuration points. This is not to be
+  confused with variation points.
+- unlike Clauss, Possompes et al., our approach to variability is to
+  only expose it at the code generator level. Users can create
+  configurations but on the happy path they are not expected to create
+  new features. In addition, if they do create new features, these can
+  only be used to configure the behaviour of the code generator
+  (e.g. their own templates). It is structural variability, but not
+  for user models. Concretely, this means you cannot use features to
+  determine the shape of modeling elements (have a sort algorithm
+  interface that has variation points to determine the actual
+  algorithm to use). This is explicitly a non-goal of our approach. In
+  effect, we are focused only on structural variability inside the
+  archetype space, not the coding space.
+- we need to use the names bound and unbound configurations. The
+  expander takes a set of unbound configurations, finds those that
+  bind to stereotypes (candidate bindings) and then performs the
+  addition operation between the element bound configuration and the
+  stereotype bound configuration. Maybe we should call it "binder"?
+- merger should be called "adder": it performs the "addition"
+  operation on two configurations. However, our addition is
+  non-commutative and non-associative. Maybe its not addition? Its not
+  clear by looking at wikipedia so lets stick to merger.
+- tracing is dependent on variability at present. This is only because
+  we are dumping the inputs. We need a different way of doing this.
+- we could create a top-level variability chain - the "profile binding
+  chain" - that receives as input a configuration model set and a
+  feature model. Configuration model sets are made up of configuration
+  models. These are made up of a set of profile templates, the global
+  configuration and the local configuration. The last two are
+  pointers. The chain then is made up of the following transforms:
+  - instantiate all profile templates across all models in the model
+    set.
+  - process all profile template relationships.
+  - create all profiles.
+  - bind all profiles to configurations.
+  - apply the global to local configuration transform.
+- at the coding level we then copy across the configurations to the
+  corresponding model elements. This is done
+- add variable to determine if a feature is available to the
+  configuration/profile or not.
+
+Tasks:
+
+- rename annotations to variability.
+- rename type to feature.
+- rename type group to feature group. Leave traits as is for now.
+- rename annotation to configuration.
+- create archetype model and mode archetype related types there.
+
 *** POSTPONED Profiles as meta-model elements                         :story:
     CLOSED: [2019-04-22 Mon 09:28]
     :LOGBOOK:
@@ -803,152 +952,6 @@ Notes:
 - we probably should rename =coding::configuration= to "unbound
   configuration" or some other name to make it distinct from
   =variability::configuration=.
-
-*** POSTPONED Redesign annotations model                              :story:
-    CLOSED: [2019-04-22 Mon 09:29]
-    :LOGBOOK:
-    CLOCK: [2019-04-21 Sun 12:18]--[2019-04-21 Sun 12:31] =>  0:13
-    CLOCK: [2019-04-21 Sun 12:06]--[2019-04-21 Sun 12:17] =>  0:11
-    CLOCK: [2019-04-21 Sun 12:00]--[2019-04-21 Sun 12:05] =>  0:05
-    CLOCK: [2019-04-21 Sun 11:25]--[2019-04-21 Sun 11:59] =>  0:34
-    CLOCK: [2019-04-19 Fri 20:33]--[2019-04-19 Fri 20:49] =>  0:16
-    CLOCK: [2019-04-19 Fri 18:01]--[2019-04-19 Fri 20:32] =>  2:31
-    CLOCK: [2019-04-19 Fri 17:01]--[2019-04-19 Fri 17:15] =>  0:40
-    CLOCK: [2019-04-18 Thu 18:39]--[2019-04-18 Thu 18:50] =>  0:11
-    CLOCK: [2019-04-18 Thu 18:25]--[2019-04-18 Thu 18:39] =>  0:14
-    CLOCK: [2019-04-18 Thu 17:31]--[2019-04-18 Thu 18:10] =>  0:52
-    CLOCK: [2019-04-18 Thu 14:02]--[2019-04-18 Thu 15:59] =>  1:57
-    CLOCK: [2019-04-18 Thu 09:45]--[2019-04-18 Thu 12:01] =>  2:41
-    CLOCK: [2019-04-18 Thu 07:37]--[2019-04-18 Thu 07:45] =>  0:08
-    CLOCK: [2019-04-18 Thu 07:24]--[2019-04-18 Thu 07:36] =>  0:12
-    CLOCK: [2019-04-18 Thu 06:35]--[2019-04-18 Thu 07:23] =>  0:48
-    CLOCK: [2019-04-17 Wed 17:54]--[2019-04-17 Wed 17:59] =>  0:05
-    CLOCK: [2019-04-17 Wed 17:50]--[2019-04-17 Wed 17:53] =>  0:03
-    CLOCK: [2019-04-17 Wed 17:16]--[2019-04-17 Wed 17:49] =>  0:33
-    CLOCK: [2019-04-17 Wed 14:02]--[2019-04-17 Wed 17:15] =>  3:13
-    CLOCK: [2019-04-17 Wed 09:22]--[2019-04-17 Wed 11:06] =>  1:44
-    CLOCK: [2019-04-16 Tue 07:12]--[2019-04-16 Tue 08:24] =>  1:12
-    CLOCK: [2019-04-15 Mon 14:05]--[2019-04-15 Mon 17:41] =>  3:36
-    CLOCK: [2019-04-13 Sat 14:38]--[2019-04-13 Sat 17:41] =>  3:03
-    CLOCK: [2019-04-13 Sat 12:55]--[2019-04-13 Sat 14:37] =>  1:42
-    CLOCK: [2019-04-13 Sat 10:52]--[2019-04-13 Sat 12:30] =>  1:38
-    CLOCK: [2019-04-13 Sat 06:03]--[2019-04-13 Sat 06:33] =>  0:30
-    CLOCK: [2019-04-12 Fri 17:41]--[2019-04-12 Fri 17:49] =>  0:08
-    CLOCK: [2019-04-12 Fri 17:27]--[2019-04-12 Fri 17:40] =>  0:13
-    CLOCK: [2019-04-12 Fri 17:06]--[2019-04-12 Fri 17:26] =>  0:20
-    CLOCK: [2019-04-12 Fri 14:21]--[2019-04-12 Fri 15:30] =>  1:09
-    CLOCK: [2019-04-12 Fri 14:06]--[2019-04-12 Fri 14:20] =>  0:14
-    CLOCK: [2019-04-12 Fri 11:15]--[2019-04-12 Fri 11:29] =>  0:14
-    CLOCK: [2019-04-12 Fri 09:00]--[2019-04-12 Fri 10:53] =>  1:53
-    :END:
-
-There has been a great deal of confusion regarding how annotations
-have been used. We have the following use cases/names:
-
-- annotation: store of configuration. The store is "dynamic", in the
-  sense that the values are changeable at run time.
-- coding configuration: "adapter" to allow the meta-model to carry
-  "configuration templates" - that which we call profiles.
-- profiles: templates for configuration. These are stored as
-  templates, and subsequently instantiated into annotations.
-
-Note that the annotations are of two "types":
-
-- stand alone annotations: these are the product of configuration
-  template instantiation. These are sourced from JSON files (at
-  present) or model elements (the coding configuration). These are
-  unbound configurations.
-- element owned annotations: these are sourced from regular model
-  elements. These are bound configurations.
-
-The objective is to apply stand alone configurations to element owned
-configurations via the mappings in stereotypes. Given all of this, the
-existing names are woefully inadequate, and its becoming more
-confusing as we make increased use of this functionality. We need to
-rename all of these model types to more sensible names and document
-their responsibilities else this code will become (even more)
-unmaintainable.
-
-Notes:
-
-- the annotations model should really be called configuration because
-  it deals with all of the primitives for configuration. Or better
-  yet: variability2. Note that this model is concerned with structural
-  variability. We will leave non-structural variability (configuration
-  files) for another time. we need to split this out in the backlog.
-- the annotation class is really a typed configuration
-  store. We use the name store to avoid confusion with the established
-  repository idiom, e.g.: =configuration::store=.
-- profiles are configuration templates.
-- the annotation expander is a =store_builder=. It creates a store
-  from a set of configuration templates.
-- the coding configuration is actually a configuration template.
-- a type is actually a (typed) feature. What we are calling type
-  groups are feature groups. Traits are feature names. In the future,
-  we will code-generate the insertion of features into the variablity
-  model feature store, and the conversion of dynamic configurations
-  into concrete configurations (c++ types). By declaring a model
-  element as a feature group, each attribute becomes a feature. The
-  code generator reads the features and injects them into the
-  variability model. It also creates the C++ type. It also creates
-  code to convert from and to the dynamic configuration
-  representation. It also contains the feature and feature group
-  documentation, accessible at run-time.
-- maybe we should call feature group "feature set" instead to avoid
-  confusion with xor/or-groups in feature diagrams.
-- what we are calling scope types is perhaps called "binding times".
-- there is a simple algebra of configurations such as a + b = c
-  (confiugrations are additive), etc. The algebra dictates the order
-  of operations.
-- tagged values could be configuration points. This is not to be
-  confused with variation points.
-- unlike Clauss, Possompes et al., our approach to variability is to
-  only expose it at the code generator level. Users can create
-  configurations but on the happy path they are not expected to create
-  new features. In addition, if they do create new features, these can
-  only be used to configure the behaviour of the code generator
-  (e.g. their own templates). It is structural variability, but not
-  for user models. Concretely, this means you cannot use features to
-  determine the shape of modeling elements (have a sort algorithm
-  interface that has variation points to determine the actual
-  algorithm to use). This is explicitly a non-goal of our approach. In
-  effect, we are focused only on structural variability inside the
-  archetype space, not the coding space.
-- we need to use the names bound and unbound configurations. The
-  expander takes a set of unbound configurations, finds those that
-  bind to stereotypes (candidate bindings) and then performs the
-  addition operation between the element bound configuration and the
-  stereotype bound configuration. Maybe we should call it "binder"?
-- merger should be called "adder": it performs the "addition"
-  operation on two configurations. However, our addition is
-  non-commutative and non-associative. Maybe its not addition? Its not
-  clear by looking at wikipedia so lets stick to merger.
-- tracing is dependent on variability at present. This is only because
-  we are dumping the inputs. We need a different way of doing this.
-- we could create a top-level variability chain - the "profile binding
-  chain" - that receives as input a configuration model set and a
-  feature model. Configuration model sets are made up of configuration
-  models. These are made up of a set of profile templates, the global
-  configuration and the local configuration. The last two are
-  pointers. The chain then is made up of the following transforms:
-  - instantiate all profile templates across all models in the model
-    set.
-  - process all profile template relationships.
-  - create all profiles.
-  - bind all profiles to configurations.
-  - apply the global to local configuration transform.
-- at the coding level we then copy across the configurations to the
-  corresponding model elements. This is done
-- add variable to determine if a feature is available to the
-  configuration/profile or not.
-
-Tasks:
-
-- rename annotations to variability.
-- rename type to feature.
-- rename type group to feature group. Leave traits as is for now.
-- rename annotation to configuration.
-- create archetype model and mode archetype related types there.
 
 ** Deprecated
 *** CANCELLED Consider code generating utility at a product level     :story:
