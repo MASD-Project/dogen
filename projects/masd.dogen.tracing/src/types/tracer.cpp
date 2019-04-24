@@ -253,8 +253,8 @@ void tracer::start_chain(const std::string& transform_id,
     if (!detailed_tracing_enabled())
         return;
 
-    ++transform_position_.top();
     handle_current_directory();
+    ++transform_position_.top();
     transform_position_.push(0);
 }
 

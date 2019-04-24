@@ -92,8 +92,8 @@ public:
             return;
 
         ensure_transform_position_not_empty();
-        ++transform_position_.top();
         const auto p(full_path_for_writing(transform_id, "input"));
+        ++transform_position_.top();
         utility::filesystem::write(p, input);
     }
 
@@ -110,8 +110,8 @@ public:
 
         if (detailed_tracing_enabled()) {
             ensure_transform_position_not_empty();
-            ++transform_position_.top();
             const auto p(full_path_for_writing(transform_id, "input"));
+            ++transform_position_.top();
             utility::filesystem::write(p, input);
         }
     }

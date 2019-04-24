@@ -31,7 +31,7 @@ const std::string archetype_location_postfix(
 const std::string type_repository_postfix(
     "-initial_input.json");
 const std::string injection_transform_prefix(
-    "001-injection.dia.decoding_transform-");
+    "000-injection.dia.decoding_transform-");
 const std::string first_short_name("000-initial_input.json");
 const std::string second_short_name("001-initial_input.json");
 const std::string third_short_name("004-input.json");
