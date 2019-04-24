@@ -38,7 +38,7 @@ auto lg(logger_factory(transform_id));
 
 namespace masd::dogen::variability::transforms {
 
-meta_model::feature_model
+boost::shared_ptr<meta_model::feature_model>
 feature_model_production_chain::apply(const context& ctx) {
     tracing::scoped_chain_tracer stp(lg, "feature model production chain",
         transform_id, transform_id, *ctx.tracer());

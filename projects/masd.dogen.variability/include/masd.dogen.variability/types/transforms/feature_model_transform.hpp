@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <boost/shared_ptr.hpp>
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.variability/types/transforms/context.hpp"
@@ -33,7 +34,7 @@ namespace masd::dogen::variability::transforms {
 
 class feature_model_transform final {
 public:
-    static meta_model::feature_model
+    static boost::shared_ptr<meta_model::feature_model>
     apply(const context& ctx, const std::list<meta_model::feature>& features);
 };
 

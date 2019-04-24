@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
@@ -41,18 +42,18 @@ const std::string duplicate_qualified_name(
 
 namespace masd::dogen::variability::transforms {
 
-meta_model::feature_model feature_model_transform::
+boost::shared_ptr<meta_model::feature_model> feature_model_transform::
 apply(const context& ctx, const std::list<meta_model::feature>& features) {
     tracing::scoped_transform_tracer stp(lg, "feature model transform",
         transform_id, transform_id, *ctx.tracer(), features);
 
-    meta_model::feature_model r;
-    r.all(features);
+    auto r(boost::make_shared<meta_model::feature_model>());
+    r->all(features);
 
     for (const auto& f : features) {
         const auto qn(f.name().qualified());
         const auto pair(std::make_pair(qn, f));
-        const auto inserted(r.by_name().insert(pair).second);
+        const auto inserted(r->by_name().insert(pair).second);
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << qn;
             BOOST_THROW_EXCEPTION(
@@ -61,16 +62,16 @@ apply(const context& ctx, const std::list<meta_model::feature>& features) {
 
         const auto& l(f.location());
         if (!l.facet().empty())
-            r.by_facet_name()[l.facet()].push_back(f);
+            r->by_facet_name()[l.facet()].push_back(f);
 
         if (!l.archetype().empty())
-            r.by_formatter_name()[l.archetype()].push_back(f);
+            r->by_formatter_name()[l.archetype()].push_back(f);
 
         if (!l.backend().empty())
-            r.by_backend_name()[l.backend()].push_back(f);
+            r->by_backend_name()[l.backend()].push_back(f);
 
         if (f.is_partially_matchable())
-            r.partially_matchable()[qn] = f;
+            r->partially_matchable()[qn] = f;
     }
 
     stp.end_transform(r);
