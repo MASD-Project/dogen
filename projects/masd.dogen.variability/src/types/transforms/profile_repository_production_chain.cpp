@@ -18,12 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.variability/io/meta_model/feature_model_io.hpp"
+#include "masd.dogen.variability/io/meta_model/profile_repository_io.hpp"
+#include "masd.dogen.variability/types/transforms/profile_merging_transform.hpp"
+#include "masd.dogen.variability/types/transforms/profile_template_hydration_transform.hpp"
+#include "masd.dogen.variability/types/transforms/profile_template_instantiation_transform.hpp"
 #include "masd.dogen.variability/types/transforms/profile_repository_production_chain.hpp"
+
+namespace {
+
+const std::string transform_id(
+    "variability.transforms.profile_repository_production_chain");
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace masd::dogen::variability::transforms {
 
-bool profile_repository_production_chain::operator==(const profile_repository_production_chain& /*rhs*/) const {
-    return true;
+meta_model::profile_repository profile_repository_production_chain::
+apply(const context& ctx, const meta_model::feature_model& fm) {
+    tracing::scoped_transform_tracer stp(lg,
+        "profile repository production chain",
+        transform_id, transform_id, *ctx.tracer(), fm);
+
+    const auto t(profile_template_hydration_transform::apply(ctx));
+    const auto p(profile_template_instantiation_transform::apply(ctx, fm, t));
+    const auto r(profile_merging_transform::apply(ctx, p));
+
+    stp.end_transform(r);
+    return r;
 }
 
 }

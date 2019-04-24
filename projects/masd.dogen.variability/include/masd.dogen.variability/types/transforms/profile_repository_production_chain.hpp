@@ -25,24 +25,16 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.variability/types/meta_model/profile_repository.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
+#include "masd.dogen.variability/types/transforms/context.hpp"
 
 namespace masd::dogen::variability::transforms {
 
 class profile_repository_production_chain final {
 public:
-    profile_repository_production_chain() = default;
-    profile_repository_production_chain(const profile_repository_production_chain&) = default;
-    profile_repository_production_chain(profile_repository_production_chain&&) = default;
-    ~profile_repository_production_chain() = default;
-    profile_repository_production_chain& operator=(const profile_repository_production_chain&) = default;
-
-public:
-    bool operator==(const profile_repository_production_chain& rhs) const;
-    bool operator!=(const profile_repository_production_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    meta_model::profile_repository
+    apply(const context& ctx, const meta_model::feature_model& fm);
 };
 
 }
