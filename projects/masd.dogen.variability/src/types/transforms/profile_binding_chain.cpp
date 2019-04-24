@@ -18,12 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.variability/io/meta_model/configuration_model_io.hpp"
+#include "masd.dogen.variability/types/transforms/profile_binding_transform.hpp"
+#include "masd.dogen.variability/types/transforms/profile_repository_production_chain.hpp"
 #include "masd.dogen.variability/types/transforms/profile_binding_chain.hpp"
+
+namespace {
+
+const std::string
+transform_id("variability.transforms.profile_binding_chain");
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace masd::dogen::variability::transforms {
 
-bool profile_binding_chain::operator==(const profile_binding_chain& /*rhs*/) const {
-    return true;
+void profile_binding_chain::apply(const context& ctx,
+    const meta_model::feature_model& fm, meta_model::configuration_model& cm) {
+    tracing::scoped_chain_tracer stp(lg, "feature model production chain",
+        transform_id, transform_id, *ctx.tracer(), cm);
+
+    const auto prp(profile_repository_production_chain::apply(ctx, fm));
+    profile_binding_transform::apply(ctx, prp, fm, cm);
+
+    stp.end_chain(cm);
 }
 
 }

@@ -25,24 +25,16 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.variability/types/meta_model/configuration_model.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
+#include "masd.dogen.variability/types/transforms/context.hpp"
 
 namespace masd::dogen::variability::transforms {
 
 class profile_binding_chain final {
 public:
-    profile_binding_chain() = default;
-    profile_binding_chain(const profile_binding_chain&) = default;
-    profile_binding_chain(profile_binding_chain&&) = default;
-    ~profile_binding_chain() = default;
-    profile_binding_chain& operator=(const profile_binding_chain&) = default;
-
-public:
-    bool operator==(const profile_binding_chain& rhs) const;
-    bool operator!=(const profile_binding_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, const meta_model::feature_model& fm,
+        meta_model::configuration_model& cm);
 };
 
 }
