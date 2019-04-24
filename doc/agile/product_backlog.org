@@ -14784,3 +14784,16 @@ Links:
 
 - [[http://0pointer.net/blog/walkthrough-for-portable-services-in-go.html][Portable Services Walkthrough (Go Edition)]]
 - [[http://0pointer.net/blog/walkthrough-for-portable-services.html][Portable Services with systemd v239]]
+
+*** Add support for CAF serialisation                                 :story:
+
+The C++ Actor Framework is a C++ library implementing the [[https://en.wikipedia.org/wiki/Actor_model][Actor
+Model]]. It requires serialisation support. This could be implemented as
+a facet.
+
+We may also be able to add simple actors, but this will probably
+require some experience with the framework.
+
+Links:
+
+- [[https://actor-framework.readthedocs.io/en/latest/TypeInspection.html][Type Inspection (Serialization and String Conversion)]]
