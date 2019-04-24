@@ -25,24 +25,37 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include "masd.dogen.variability/types/meta_model/feature_template.hpp"
+#include "masd.dogen.variability/types/transforms/context.hpp"
 
 namespace masd::dogen::variability::transforms {
 
+/**
+ * @brief Reads all feature templates from the filesystem.
+ */
 class feature_template_hydration_transform final {
-public:
-    feature_template_hydration_transform() = default;
-    feature_template_hydration_transform(const feature_template_hydration_transform&) = default;
-    feature_template_hydration_transform(feature_template_hydration_transform&&) = default;
-    ~feature_template_hydration_transform() = default;
-    feature_template_hydration_transform& operator=(const feature_template_hydration_transform&) = default;
+private:
+    /**
+     * @brief Convert data directories into template directories.
+     */
+    static std::vector<boost::filesystem::path> to_template_directories(
+        const std::vector<boost::filesystem::path>& data_dirs);
+
+    /**
+     * @brief Obtain all templates in template directories.
+     */
+    static std::list<boost::filesystem::path> obtain_template_filenames(
+        const std::vector<boost::filesystem::path>& template_dirs);
+
+    /**
+     * @brief Hydrate all templates.
+     */
+    static std::list<meta_model::feature_template> hydrate_templates(
+        const std::list<boost::filesystem::path>& tfns);
 
 public:
-    bool operator==(const feature_template_hydration_transform& rhs) const;
-    bool operator!=(const feature_template_hydration_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static std::list<meta_model::feature_template> apply(const context& ctx);
 };
 
 }

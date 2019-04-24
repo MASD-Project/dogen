@@ -18,12 +18,104 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string/predicate.hpp>
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/set_io.hpp"
+#include "masd.dogen.utility/types/io/list_io.hpp"
+#include "masd.dogen.utility/types/io/vector_io.hpp"
+#include "masd.dogen.utility/types/filesystem/file.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.variability/io/meta_model/feature_template_io.hpp"
+#include "masd.dogen.variability/types/helpers/feature_template_hydrator.hpp"
 #include "masd.dogen.variability/types/transforms/feature_template_hydration_transform.hpp"
 
-namespace masd::dogen::variability::transforms {
+namespace {
 
-bool feature_template_hydration_transform::operator==(const feature_template_hydration_transform& /*rhs*/) const {
-    return true;
+const std::string transform_id(
+    "variability.transforms.feature_template_hydration_transform");
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+const std::string annotations_dir("annotations");
+const std::string annotations_prefix("annotations.type_templates.");
+
+}
+
+namespace masd::dogen::variability::transforms {
+std::vector<boost::filesystem::path>
+feature_template_hydration_transform::to_template_directories(
+    const std::vector<boost::filesystem::path>& data_dirs) {
+
+    std::vector<boost::filesystem::path> r;
+    r.reserve(data_dirs.size());
+    for (const auto& dir : data_dirs)
+        r.push_back(dir / annotations_dir);
+
+    return r;
+}
+
+std::list<boost::filesystem::path>
+feature_template_hydration_transform::obtain_template_filenames(
+    const std::vector<boost::filesystem::path>& template_dirs) {
+
+    BOOST_LOG_SEV(lg, trace) << "Finding all files in: " << template_dirs;
+    const auto files(dogen::utility::filesystem::find_files(template_dirs));
+    BOOST_LOG_SEV(lg, trace) << "Files found: " << files;
+
+    std::list<boost::filesystem::path> r;
+    for (const auto& f : files) {
+        const auto fn(f.filename().generic_string());
+        if (boost::starts_with(fn, annotations_prefix)) {
+            BOOST_LOG_SEV(lg, trace) << "Adding file: " << fn;
+            r.push_back(f);
+        } else
+            BOOST_LOG_SEV(lg, trace) << "Ignoring file: " << fn;
+    }
+    return r;
+}
+
+std::list<meta_model::feature_template>
+feature_template_hydration_transform::hydrate_templates(
+    const std::list<boost::filesystem::path>& tfns) {
+
+    std::list<meta_model::feature_template> r;
+    helpers::feature_template_hydrator h;
+    for (const auto& tfn : tfns) {
+        auto ts(h.hydrate(tfn));
+        r.splice(r.end(), ts);
+    }
+    return r;
+}
+
+std::list<meta_model::feature_template>
+feature_template_hydration_transform::apply(const context& ctx) {
+    tracing::scoped_transform_tracer stp(lg,
+        "feature template hydration transform", transform_id, transform_id,
+        *ctx.tracer());
+
+    BOOST_LOG_SEV(lg, debug) << "Obtaining feature templates.";
+
+    /*
+     * First we obtain the set of directories that contain feature
+     * templates, by looking into the supplied data directories at a
+     * well-known location.
+     */
+    const auto template_dirs(to_template_directories(ctx.data_directories()));
+
+    /*
+     * We then get a list of all templates in these directories.
+     */
+    const auto tfns(obtain_template_filenames(template_dirs));
+
+    /*
+     * Now we can hydrate all files with templates.
+     */
+    const auto r(hydrate_templates(tfns));
+
+    stp.end_transform(r);
+    BOOST_LOG_SEV(lg, debug) << "Finished obtaining feature templates.";
+    return r;
 }
 
 }
