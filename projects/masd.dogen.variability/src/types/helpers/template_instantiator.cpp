@@ -111,18 +111,6 @@ void template_instantiator::validate(const archetypes::location& al,
     }
 
     /*
-     * Since we allow "instance" templates, which are basically
-     * templates which do not require instantiation, we need to filter
-     * them out. Ensure we are only attempting to process "real"
-     * templates here.
-     */
-    if (!is_instantiable(tk)) {
-        BOOST_LOG_SEV(lg, error) << template_not_instantiable << sn;
-        BOOST_THROW_EXCEPTION(
-            instantiation_exception(template_not_instantiable + sn));
-    }
-
-    /*
      * The qualified name must not be supplied by the template,
      * because it will be derived for each template instantiation.
      */
@@ -439,7 +427,13 @@ std::list<meta_model::configuration_point>
 template_instantiator::instantiate(const meta_model::feature_model& fm,
     const meta_model::configuration_point_template& cpt) const {
     /*
-     * First handle the simplest case, which is that of "instance" -
+     * First, sanity check the template to make sure it is vaguely
+     * valid.
+     */
+    validate(cpt.location(), cpt.name(), cpt.kind());
+
+    /*
+     * Then handle the simplest case, which is that of "instance" -
      * the identity template.
      */
     using meta_model::template_kind;
@@ -451,13 +445,7 @@ template_instantiator::instantiate(const meta_model::feature_model& fm,
     }
 
     /*
-     * Some actual instantiating is required. Sanity check the
-     * template.
-     */
-    validate(cpt.location(), cpt.name(), cpt.kind());
-
-    /*
-     * Then dispatch to the appropriate instantiator.
+     * Finally, dispatch to the appropriate instantiator.
      */
     BOOST_LOG_SEV(lg, debug) << "Instantiating template: " << cpt;
 
@@ -484,16 +472,27 @@ instantiate(const meta_model::feature_template& ft) const {
     BOOST_LOG_SEV(lg, trace) << "Instantiating template: " << ft;
 
     /*
-     * First, sanity check the template.
+     * First, sanity check the template to make sure it is vaguely
+     * valid.
      */
     validate(ft.location(), ft.name(), ft.kind());
 
     /*
-     * Then dispatch to the appropriate instantiator.
+     * Now handle the simplest case, which is that of "instance" - the
+     * identity template.
      */
-    std::list<meta_model::feature>  r;
-    const auto tk(ft.kind());
     using meta_model::template_kind;
+    const auto ftqn(ft.name().qualified());
+    std::list<meta_model::feature> r;
+    if (ft.kind() == template_kind::instance) {
+        r.push_back(to_feature(ft));
+        return r;
+    }
+
+    /*
+     * Finally, dispatch to the appropriate instantiator.
+     */
+    const auto tk(ft.kind());
     if (tk == template_kind::recursive_template)
         r = instantiate_recursive_template(ft);
     else if (tk == template_kind::facet_template)

@@ -55,7 +55,7 @@ public:
     template_instantiator(const archetypes::location_repository& alrp,
         const bool compatibility_mode);
 
-public:
+private:
     /**
      * @brief Returns true if the kind of template can be
      * instantiated, false otherwise.
@@ -81,7 +81,7 @@ private:
     void validate(const archetypes::location& al, const meta_model::name& n,
         const meta_model::template_kind tk) const;
 
-public:
+private:
     /**
      * @brief Instantiates a configuration point template into a
      * configuration point.
