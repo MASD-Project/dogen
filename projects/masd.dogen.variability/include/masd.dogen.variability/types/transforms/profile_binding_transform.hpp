@@ -25,24 +25,58 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include <unordered_set>
+#include "masd.dogen.variability/types/meta_model/binding_point.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
+#include "masd.dogen.variability/types/meta_model/profile_repository.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration_model.hpp"
+#include "masd.dogen.variability/types/transforms/context.hpp"
 
 namespace masd::dogen::variability::transforms {
 
+/**
+ * @brief Binds configurations to profiles.
+ */
 class profile_binding_transform final {
-public:
-    profile_binding_transform() = default;
-    profile_binding_transform(const profile_binding_transform&) = default;
-    profile_binding_transform(profile_binding_transform&&) = default;
-    ~profile_binding_transform() = default;
-    profile_binding_transform& operator=(const profile_binding_transform&) = default;
+private:
+    struct feature_group {
+        meta_model::feature profile;
+    };
+
+    static feature_group
+    make_feature_group(const meta_model::feature_model& fm);
+
+    static std::string obtain_profile_name(const feature_group& fg,
+        const meta_model::configuration& cfg);
+
+private:
+    /**
+     * @brief Given a binding point, returns the well-known name of
+     * its the default profile.
+     */
+    static std::string get_default_profile_name_for_binding_point(
+        const meta_model::binding_point bp);
+
+    /**
+     * @brief Returns the profiles that bind, giving the current
+     * profile repository.
+     */
+    static std::list<std::string> get_bindable_profile_names(
+        const meta_model::profile_repository& prp,
+        const std::unordered_set<std::string>& candidates);
+
+private:
+    static void bind(const meta_model::profile_repository& prp,
+        const feature_group& fg, meta_model::configuration& cfg);
 
 public:
-    bool operator==(const profile_binding_transform& rhs) const;
-    bool operator!=(const profile_binding_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx,
+        const meta_model::profile_repository& prp,
+        const meta_model::feature_model& fm,
+        meta_model::configuration_model& cm);
 };
 
 }

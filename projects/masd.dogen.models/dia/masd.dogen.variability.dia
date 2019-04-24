@@ -16905,13 +16905,13 @@ elements.#</dia:string>
         <dia:point val="-29,65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-29.05,64.95;4.66,69.45"/>
+        <dia:rectangle val="-29.05,64.95;15.44,69.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-29,65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="33.609999999999999"/>
+        <dia:real val="44.390000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -17070,10 +17070,27 @@ elements.#</dia:string>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
+                <dia:string>#fm#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#meta_model::feature_model#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="1"/>
+              </dia:attribute>
+            </dia:composite>
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
                 <dia:string>#cms#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::configuration_model_set#</dia:string>
+                <dia:string>#meta_model::configuration_model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -18925,13 +18942,13 @@ elements.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O144">
       <dia:attribute name="obj_pos">
-        <dia:point val="-83,34"/>
+        <dia:point val="-86,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-83.05,33.95;-72.9675,37.05"/>
+        <dia:rectangle val="-86.05,33.95;-75.9675,37.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-83,34"/>
+        <dia:point val="-86,34"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="9.9824999999999999"/>
@@ -24504,7 +24521,7 @@ with Masd.
                 <dia:string>#cms#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::configuration_model_set#</dia:string>
+                <dia:string>#meta_model::configuration_model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -24773,7 +24790,7 @@ with Masd.
         <dia:point val="-34.355,61.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-35.105,60.65;-11.995,65.8"/>
+        <dia:rectangle val="-35.105,60.65;-6.605,65.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24781,8 +24798,8 @@ with Masd.
       <dia:attribute name="orth_points">
         <dia:point val="-34.355,61.4"/>
         <dia:point val="-34.355,63"/>
-        <dia:point val="-12.195,63"/>
-        <dia:point val="-12.195,65"/>
+        <dia:point val="-6.805,63"/>
+        <dia:point val="-6.805,65"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
