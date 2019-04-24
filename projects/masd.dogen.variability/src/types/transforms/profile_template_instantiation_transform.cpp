@@ -18,12 +18,42 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/list_io.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.variability/io/meta_model/profile_io.hpp"
+#include "masd.dogen.variability/io/meta_model/profile_template_io.hpp"
+#include "masd.dogen.variability/types/helpers/template_instantiator.hpp"
 #include "masd.dogen.variability/types/transforms/profile_template_instantiation_transform.hpp"
+
+namespace {
+
+const std::string transform_id(
+    "variability.transforms.profile_template_instantiation_transform");
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace masd::dogen::variability::transforms {
 
-bool profile_template_instantiation_transform::operator==(const profile_template_instantiation_transform& /*rhs*/) const {
-    return true;
+std::list<meta_model::profile> profile_template_instantiation_transform::
+apply(const context& ctx, const meta_model::feature_model& fm,
+    const std::list<meta_model::profile_template>& pts) {
+    tracing::scoped_transform_tracer stp(lg,
+        "profile template instantiation transform",
+        transform_id, transform_id, *ctx.tracer(), pts);
+
+    const auto cm(ctx.compatibility_mode());
+    const auto& alrp(*ctx.archetype_location_repository());
+    helpers::template_instantiator ti(alrp, cm);
+
+    std::list<meta_model::profile> r;
+    for (const auto& pt : pts)
+        r.push_back(ti.instantiate(fm, pt));
+
+    return r;
 }
 
 }

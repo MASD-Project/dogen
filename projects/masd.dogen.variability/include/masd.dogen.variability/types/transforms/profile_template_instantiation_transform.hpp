@@ -25,24 +25,23 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include "masd.dogen.variability/types/meta_model/profile.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
+#include "masd.dogen.variability/types/meta_model/profile_template.hpp"
+#include "masd.dogen.variability/types/transforms/context.hpp"
 
 namespace masd::dogen::variability::transforms {
 
+/**
+ * @brief Instantiates a set of profile templates into unbound
+ * configurations.
+ */
 class profile_template_instantiation_transform final {
 public:
-    profile_template_instantiation_transform() = default;
-    profile_template_instantiation_transform(const profile_template_instantiation_transform&) = default;
-    profile_template_instantiation_transform(profile_template_instantiation_transform&&) = default;
-    ~profile_template_instantiation_transform() = default;
-    profile_template_instantiation_transform& operator=(const profile_template_instantiation_transform&) = default;
-
-public:
-    bool operator==(const profile_template_instantiation_transform& rhs) const;
-    bool operator!=(const profile_template_instantiation_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    std::list<meta_model::profile>
+    apply(const context& ctx, const meta_model::feature_model& fm,
+        const std::list<meta_model::profile_template>& pts);
 };
 
 }

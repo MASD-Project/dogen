@@ -1147,10 +1147,6 @@
           "type": "bool"
         },
         {
-          "name": "feature_model",
-          "type": "meta_model::feature_model"
-        },
-        {
           "name": "tracer",
           "type": "boost::shared_ptr<tracing::tracer>"
         }
