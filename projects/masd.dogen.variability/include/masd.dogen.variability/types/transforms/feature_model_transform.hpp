@@ -25,24 +25,16 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
+#include "masd.dogen.variability/types/transforms/context.hpp"
 
 namespace masd::dogen::variability::transforms {
 
 class feature_model_transform final {
 public:
-    feature_model_transform() = default;
-    feature_model_transform(const feature_model_transform&) = default;
-    feature_model_transform(feature_model_transform&&) = default;
-    ~feature_model_transform() = default;
-    feature_model_transform& operator=(const feature_model_transform&) = default;
-
-public:
-    bool operator==(const feature_model_transform& rhs) const;
-    bool operator!=(const feature_model_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static meta_model::feature_model
+    apply(const context& ctx, const std::list<meta_model::feature>& features);
 };
 
 }
