@@ -34,8 +34,7 @@
 namespace masd::dogen::variability::transforms {
 
 /**
- * @brief Instantiates a set of profile templates into unbound
- * configurations.
+ * @brief Instantiates a set of profile templates into profiles.
  */
 class profile_template_instantiation_transform final {
 public:

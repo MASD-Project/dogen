@@ -53,6 +53,9 @@ apply(const context& ctx, const meta_model::feature_model& fm,
     for (const auto& pt : pts)
         r.push_back(ti.instantiate(fm, pt));
 
+    BOOST_LOG_SEV(lg, debug) << "Total number of templates instantiated: "
+                             << r.size();
+
     stp.end_transform(r);
     return r;
 }
