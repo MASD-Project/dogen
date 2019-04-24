@@ -188,6 +188,17 @@ context context_factory::make_context(const configuration& cfg,
     const auto tracer(boost::make_shared<tracing::tracer>(cfg.tracing()));
     vctx.tracer(tracer);
 
+    tracer->add_initial_input(alrp_input_id, *alrp);
+
+    /*
+     * We do the type repository here just so we can setup the initial
+     * inputs in the tracer.
+     */
+    variability::type_repository_factory atrpf;
+    const auto atrp(boost::make_shared<variability::type_repository>(
+            atrpf.make(*alrp, data_dirs)));
+    tracer->add_initial_input(trp_input_id, *atrp);
+
     /*
      * Create the top-level context and all of its sub-contexts.
      */
@@ -197,12 +208,12 @@ context context_factory::make_context(const configuration& cfg,
     /*
      * Now we can create the feature model.
      */
-    // using variability::transforms::feature_model_production_chain;
-    // const auto fm(feature_model_production_chain::apply(vctx));
-    // r.injection_context().feature_model(fm);
-    // r.coding_context().feature_model(fm);
-    // r.generation_context().feature_model(fm);
-    // r.extraction_context().feature_model(fm);
+    using variability::transforms::feature_model_production_chain;
+    const auto fm(feature_model_production_chain::apply(vctx));
+    r.injection_context().feature_model(fm);
+    r.coding_context().feature_model(fm);
+    r.generation_context().feature_model(fm);
+    r.extraction_context().feature_model(fm);
 
     /*
      * Populate the output directory.
@@ -221,9 +232,6 @@ context context_factory::make_context(const configuration& cfg,
     r.coding_context().archetype_location_repository(alrp);
     r.generation_context().archetype_location_repository(alrp);
 
-    variability::type_repository_factory atrpf;
-    const auto atrp(boost::make_shared<variability::type_repository>(
-            atrpf.make(*alrp, data_dirs)));
     r.injection_context().type_repository(atrp);
     r.coding_context().type_repository(atrp);
     r.generation_context().type_repository(atrp);
@@ -262,9 +270,6 @@ context context_factory::make_context(const configuration& cfg,
     r.coding_context().tracer(tracer);
     r.generation_context().tracer(tracer);
     r.extraction_context().tracer(tracer);
-
-    tracer->add_initial_input(alrp_input_id, *alrp);
-    tracer->add_initial_input(trp_input_id, *atrp);
 
     /*
      * Setup the diffing and operational reporting configuration.
