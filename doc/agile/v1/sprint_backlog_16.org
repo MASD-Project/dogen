@@ -12,19 +12,19 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-24 Wed 15:55]
+#+CAPTION: Clock summary at [2019-04-24 Wed 16:12]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *14:18* |       |      | 100.0 |
+| *Total time*                                           | *14:34* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 14:18   |       |      | 100.0 |
-| Active                                                 |         | 14:18 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 2:40 |  18.6 |
-| Sprint and product backlog grooming                    |         |       | 0:22 |   2.6 |
-| Create a video demo for the previous sprint's features |         |       | 1:55 |  13.4 |
-| Read variability papers                                |         |       | 1:04 |   7.5 |
-| Implement variability model                            |         |       | 8:17 |  57.9 |
+| Stories                                                | 14:34   |       |      | 100.0 |
+| Active                                                 |         | 14:34 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 2:40 |  18.3 |
+| Sprint and product backlog grooming                    |         |       | 0:22 |   2.5 |
+| Create a video demo for the previous sprint's features |         |       | 1:55 |  13.2 |
+| Read variability papers                                |         |       | 1:04 |   7.3 |
+| Implement variability model                            |         |       | 8:33 |  58.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -174,6 +174,7 @@ sure our approach is aligned with the literature.
 
 *** STARTED Implement variability model                               :story:
     :LOGBOOK:
+    CLOCK: [2019-04-24 Wed 15:56]--[2019-04-24 Wed 16:12] =>  0:16
     CLOCK: [2019-04-24 Wed 15:45]--[2019-04-24 Wed 15:55] =>  0:10
     CLOCK: [2019-04-24 Wed 15:14]--[2019-04-24 Wed 15:44] =>  0:30
     CLOCK: [2019-04-24 Wed 14:16]--[2019-04-24 Wed 14:55] =>  0:39
@@ -194,6 +195,31 @@ sure our approach is aligned with the literature.
 On the back of the redesign of the annotations model, which was
 completed last sprint, we now have to implement all classes and then
 hook them up to the engine.
+
+Notes:
+
+- for the initial test of the changes, we need to obtain the feature
+  model as part of the context generation in orchestration's context
+  factory. We then add the feature model to injection. We then create
+  a =Configurable= element in injection, side by side with
+  annotation. We then use the configuration factory to create the
+  configuration. Finally, we read fields using the configuration
+  selector. This will prove that basic features and
+  configurations work. Note that we need to duplicate all code
+  creating "type groups" etc. We should probably add a flag in the
+  context that determines whether to use new world or legacy and then
+  populate it within orchestration.
+- the second change is to add the feature model to the coding
+  model. We then add a Configurable element, side-by-side
+  Annotable. We then create the configuration model from a coding
+  model, and execute the profile binding chain transform on it. We
+  then read all features from the configuration. This will prove that
+  profile binding works.
+- finally we add feature model to generation context, and read
+  remaining fields from the configuration.
+- when all is working, we remove all references to annotation in
+  injection, coding and generation.
+- we then remove all legacy types from variability.
 
 *** Profiles as meta-model elements                                   :story:
 
