@@ -141,10 +141,13 @@ bool are_tracing_files_healthy(const configuration& cfg,
      * Ensure we have created a byproducts directory.
      */
     using namespace boost::filesystem;
-    if (!exists(cfg.byproduct_directory()))
-        return false;
-
     using namespace masd::dogen::utility::log;
+    if (!exists(cfg.byproduct_directory())) {
+        BOOST_LOG_SEV(lg, error) << "Could not find byproduct directory: "
+                                 << cfg.byproduct_directory().generic();
+        return false;
+    }
+
     BOOST_LOG_SEV(lg, debug) << "Directory exists.";
 
     /*
@@ -153,10 +156,14 @@ bool are_tracing_files_healthy(const configuration& cfg,
     using masd::dogen::utility::filesystem::find_files;
     const boost::uintmax_t minimum_number(100);
     const auto files(find_files(cfg.byproduct_directory()));
-    if (files.size() < minimum_number)
+    if (files.size() < minimum_number) {
+        BOOST_LOG_SEV(lg, error) << "Found less files than expected. Found: "
+                                 << files.size() << ". Minimum is: "
+                                 << minimum_number;
         return false;
+    }
 
-    BOOST_LOG_SEV(lg, debug) << "Files." << files.size();
+    BOOST_LOG_SEV(lg, debug) << "Files: " << files.size();
 
     /*
      * Ensure all files have the minimum content size and find a
@@ -167,24 +174,30 @@ bool are_tracing_files_healthy(const configuration& cfg,
     bool found_type_repository(false);
     bool found_injection_dia_transform(false);
     for (const auto& f : files) {
+        const auto gs(f.generic_string());
+        BOOST_LOG_SEV(lg, debug) << "gs: " << gs;
+
         /*
          * Ensure files have a minimum size.
          */
         const boost::uintmax_t minimum_size(50);
         const auto sz(file_size(f));
-        BOOST_LOG_SEV(lg, debug) << "Size." << sz;
+        BOOST_LOG_SEV(lg, debug) << "Size: " << sz;
 
-        if (sz < minimum_size)
+        if (sz < minimum_size) {
+            BOOST_LOG_SEV(lg, error) << "File size is smaller than minimum."
+                                     << " Size: " << sz << " Minimum expected: "
+                                     << minimum_size;
             return false;
+        }
 
         /*
          * We only expect files inside the tracing directory.
          */
-        const auto gs(f.generic_string());
-        BOOST_LOG_SEV(lg, debug) << "gs: " << gs;
-
-        if (!std::regex_match(gs, tracing_regex))
+        if (!std::regex_match(gs, tracing_regex)) {
+            BOOST_LOG_SEV(lg, error) << "File is not in the tracing directory.";
             return false;
+        }
 
         /*
          * Look for a small number of "anchor" files to make sure
@@ -225,12 +238,17 @@ bool are_tracing_files_healthy(const configuration& cfg,
                 boost::erase_first(guid, injection_transform_postfix);
                 BOOST_LOG_SEV(lg, debug) << "guid:" << guid;
 
-                if (guid.size() != 36)
+                if (guid.size() != 36) {
+                    BOOST_LOG_SEV(lg, error) << "GUID is too small. Expected: "
+                                             << 36 << " Size: " << guid.size();
                     return false;
+                }
 
                 BOOST_LOG_SEV(lg, debug) << "before regex match.";
-                if (!std::regex_match(guid, guid_regex))
+                if (!std::regex_match(guid, guid_regex)) {
+                    BOOST_LOG_SEV(lg, error) << "GUID does not match regex.";
                     return false;
+                }
 
                 BOOST_LOG_SEV(lg, debug) << "after regex match.";
             }
