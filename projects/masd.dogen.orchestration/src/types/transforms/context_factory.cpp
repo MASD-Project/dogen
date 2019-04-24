@@ -29,6 +29,8 @@
 #include "masd.dogen.variability/types/annotation_factory.hpp"
 #include "masd.dogen.variability/types/annotation_expander.hpp"
 #include "masd.dogen.variability/types/type_repository_factory.hpp"
+#include "masd.dogen.variability/types/transforms/context.hpp"
+#include "masd.dogen.variability/types/transforms/feature_model_production_chain.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
@@ -145,10 +147,20 @@ make_injection_context(const configuration& cfg) {
 
 context context_factory::make_context(const configuration& cfg,
     const boost::filesystem::path& output_directory) {
-    BOOST_LOG_SEV(lg, debug) << "Creating the context.";
+    BOOST_LOG_SEV(lg, debug) << "Creating the top-level context.";
 
-    orchestration::transforms::context r;
-    r.generation_context().output_directory_path(output_directory);
+    /*
+     * First we create the variability context, needed to create the
+     * feature model.
+     */
+    variability::transforms::context vctx;
+
+    /*
+     * Obtain the data directories.
+     */
+    const auto data_dir(utility::filesystem::data_files_directory());
+    const auto data_dirs(std::vector<boost::filesystem::path>{ data_dir });
+    vctx.data_directories(data_dirs);
 
     /*
      * Obtain the transform registrar and ensure it has been setup.
@@ -158,18 +170,53 @@ context context_factory::make_context(const configuration& cfg,
     rg.validate();
 
     /*
-     * Obtain the data directories.
+     * Obtain the archetype location repository.
      */
-    const auto data_dir(utility::filesystem::data_files_directory());
-    const auto data_dirs(std::vector<boost::filesystem::path>{ data_dir });
-    r.variability_context().data_directories(data_dirs);
+    const auto alrp(create_archetype_location_repository(rg));
+    vctx.archetype_location_repository(alrp);
+
+    /*
+     * Handle the compatibility mode.
+     */
+    const bool cm(cfg.model_processing().compatibility_mode_enabled());
+    vctx.compatibility_mode(cm);
+
+    /*
+     * Setup the tracer. Note that we do it regardless of whether
+     * tracing is enabled or not - its the tracer job to handle that.
+     */
+    const auto tracer(boost::make_shared<tracing::tracer>(cfg.tracing()));
+    vctx.tracer(tracer);
+
+    /*
+     * Create the top-level context and all of its sub-contexts.
+     */
+    orchestration::transforms::context r;
+    r.variability_context(vctx);
+
+    /*
+     * Now we can create the feature model.
+     */
+    // using variability::transforms::feature_model_production_chain;
+    // const auto fm(feature_model_production_chain::apply(vctx));
+    // r.injection_context().feature_model(fm);
+    // r.coding_context().feature_model(fm);
+    // r.generation_context().feature_model(fm);
+    // r.extraction_context().feature_model(fm);
+
+    /*
+     * Populate the output directory.
+     */
+    r.generation_context().output_directory_path(output_directory);
+
+    /*
+     * Populate the data directories.
+     */
     r.injection_context().data_directories(data_dirs);
 
     /*
      * Setup the annotations related data structures.
      */
-    const auto alrp(create_archetype_location_repository(rg));
-    r.variability_context().archetype_location_repository(alrp);
     r.injection_context().archetype_location_repository(alrp);
     r.coding_context().archetype_location_repository(alrp);
     r.generation_context().archetype_location_repository(alrp);
@@ -185,9 +232,6 @@ context context_factory::make_context(const configuration& cfg,
     /*
      * Setup the annotations related factories.
      */
-    const bool cm(cfg.model_processing().compatibility_mode_enabled());
-    r.variability_context().compatibility_mode(cm);
-
     const auto af(boost::make_shared<variability::annotation_factory>(
                 *alrp, *atrp, cm));
     r.injection_context().annotation_factory(af);
@@ -212,11 +256,8 @@ context context_factory::make_context(const configuration& cfg,
     r.coding_context().mapping_repository(msrp);
 
     /*
-     * Setup the tracer. Note that we do it regardless of whether
-     * tracing is enabled or not - its the tracer job to handle that.
+     * Setup the tracer.
      */
-    const auto tracer(boost::make_shared<tracing::tracer>(cfg.tracing()));
-    r.variability_context().tracer(tracer);
     r.injection_context().tracer(tracer);
     r.coding_context().tracer(tracer);
     r.generation_context().tracer(tracer);
