@@ -19,6 +19,7 @@
  *
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/shared_ptr_io.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.variability/io/meta_model/feature_model_io.hpp"
 #include "masd.dogen.variability/types/transforms/feature_model_transform.hpp"
