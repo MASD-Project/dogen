@@ -20,9 +20,9 @@
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/list_io.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.variability/io/meta_model/feature_io.hpp"
 #include "masd.dogen.variability/io/meta_model/feature_model_io.hpp"
-#include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.variability/types/transforms/transformation_error.hpp"
 #include "masd.dogen.variability/types/transforms/feature_model_transform.hpp"
 
@@ -75,7 +75,6 @@ apply(const context& ctx, const std::list<meta_model::feature>& features) {
 
     stp.end_transform(r);
     return r;
-
 }
 
 }
