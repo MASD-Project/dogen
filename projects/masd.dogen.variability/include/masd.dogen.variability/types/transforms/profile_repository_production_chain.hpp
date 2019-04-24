@@ -33,7 +33,7 @@ namespace masd::dogen::variability::transforms {
 
 class profile_repository_production_chain final {
 public:
-    meta_model::profile_repository
+    static meta_model::profile_repository
     apply(const context& ctx, const meta_model::feature_model& fm);
 };
 
