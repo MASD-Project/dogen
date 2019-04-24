@@ -49,7 +49,7 @@ namespace masd::dogen::variability::transforms {
 
 const meta_model::profile& profile_merging_transform::
 walk_up_parent_tree_and_merge(const std::string& current,
-    std::unordered_map<std::string, meta_model::profile>& pm) const {
+    std::unordered_map<std::string, meta_model::profile>& pm) {
     BOOST_LOG_SEV(lg, debug) << "Merging profile: " << current;
 
     /*
@@ -59,7 +59,8 @@ walk_up_parent_tree_and_merge(const std::string& current,
     const auto i(pm.find(current));
     if (i == pm.end()) {
         BOOST_LOG_SEV(lg, error) << profile_not_found << current;
-        BOOST_THROW_EXCEPTION(transformation_error(profile_not_found + current));
+        BOOST_THROW_EXCEPTION(
+            transformation_error(profile_not_found + current));
     }
 
     auto& prf(i->second);
@@ -101,7 +102,7 @@ walk_up_parent_tree_and_merge(const std::string& current,
 }
 
 std::unordered_map<std::string, meta_model::profile> profile_merging_transform::
-create_profile_map(const std::list<meta_model::profile>& profiles) const {
+create_profile_map(const std::list<meta_model::profile>& profiles) {
     std::unordered_map<std::string, meta_model::profile> r;
     for (const auto& prf : profiles) {
         const auto prfn(prf.name().qualified());
@@ -117,7 +118,7 @@ create_profile_map(const std::list<meta_model::profile>& profiles) const {
 }
 
 void profile_merging_transform::
-validate(const std::unordered_map<std::string, meta_model::profile>& pm) const {
+validate(const std::unordered_map<std::string, meta_model::profile>& pm) {
     BOOST_LOG_SEV(lg, debug) << "Validating profiles.";
 
     /*
@@ -177,7 +178,7 @@ validate(const std::unordered_map<std::string, meta_model::profile>& pm) const {
 }
 
 void profile_merging_transform::
-merge(std::unordered_map<std::string, meta_model::profile>& pm) const {
+merge(std::unordered_map<std::string, meta_model::profile>& pm) {
     BOOST_LOG_SEV(lg, debug) << "Merging profiles. Total: " << pm.size();
     for (const auto& pair : pm) {
         const auto current(pair.first);

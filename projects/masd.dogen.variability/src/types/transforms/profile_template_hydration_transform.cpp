@@ -44,7 +44,7 @@ namespace masd::dogen::variability::transforms {
 
 std::vector<boost::filesystem::path>
 profile_template_hydration_transform::to_template_directories(
-    const std::vector<boost::filesystem::path>& data_dirs) const {
+    const std::vector<boost::filesystem::path>& data_dirs) {
     std::vector<boost::filesystem::path> r;
     r.reserve(data_dirs.size());
     for (const auto& d : data_dirs)
@@ -57,7 +57,7 @@ profile_template_hydration_transform::to_template_directories(
 
 std::list<boost::filesystem::path>
 profile_template_hydration_transform::obtain_template_filenames(
-    const std::vector<boost::filesystem::path>& template_dirs) const {
+    const std::vector<boost::filesystem::path>& template_dirs) {
 
     std::list<boost::filesystem::path> r;
     const auto files(dogen::utility::filesystem::find_files(template_dirs));

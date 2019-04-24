@@ -39,7 +39,7 @@ namespace masd::dogen::variability::transforms {
  */
 class profile_template_instantiation_transform final {
 public:
-    std::list<meta_model::profile>
+    static std::list<meta_model::profile>
     apply(const context& ctx, const meta_model::feature_model& fm,
         const std::list<meta_model::profile_template>& pts);
 };

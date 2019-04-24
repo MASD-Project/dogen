@@ -41,36 +41,36 @@ private:
      * @brief Recurses up the profile tree and merges children with
      * their parents.
      */
-    const meta_model::profile& walk_up_parent_tree_and_merge(
+    static const meta_model::profile& walk_up_parent_tree_and_merge(
         const std::string& current,
-        std::unordered_map<std::string, meta_model::profile>& pm) const;
+        std::unordered_map<std::string, meta_model::profile>& pm);
 
 private:
     /**
      * @brief Organises profiles into a map, by qualified name.
      */
-    std::unordered_map<std::string, meta_model::profile>
-    create_profile_map(const std::list<meta_model::profile>& profiles) const;
+    static std::unordered_map<std::string, meta_model::profile>
+    create_profile_map(const std::list<meta_model::profile>& profiles);
 
     /**
      * @brief Performs a number of sanity checks on a profile.
      */
-    void validate(
-        const std::unordered_map<std::string, meta_model::profile>& pm) const;
+    static void validate(
+        const std::unordered_map<std::string, meta_model::profile>& pm);
 
     /**
      * @brief Merges all profiles.
      */
-    void merge(std::unordered_map<std::string, meta_model::profile>& pm) const;
+    static void merge(std::unordered_map<std::string, meta_model::profile>& pm);
 
     /**
      * @brief Generates a profile repository.
      */
-    meta_model::profile_repository create_repository(
+    static meta_model::profile_repository create_repository(
         const std::unordered_map<std::string, meta_model::profile>& pm);
 
 public:
-    meta_model::profile_repository apply(const context& ctx,
+    static meta_model::profile_repository apply(const context& ctx,
         const std::list<meta_model::profile>& profiles);
 };
 

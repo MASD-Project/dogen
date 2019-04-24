@@ -42,23 +42,23 @@ private:
     /**
      * @brief Convert data directories into template directories.
      */
-    std::vector<boost::filesystem::path> to_template_directories(
-        const std::vector<boost::filesystem::path>& data_dirs) const;
+    static std::vector<boost::filesystem::path> to_template_directories(
+        const std::vector<boost::filesystem::path>& data_dirs);
 
     /**
      * @brief Obtain all templates in template directories.
      */
-    std::list<boost::filesystem::path> obtain_template_filenames(
-        const std::vector<boost::filesystem::path>& template_dirs) const;
+    static std::list<boost::filesystem::path> obtain_template_filenames(
+        const std::vector<boost::filesystem::path>& template_dirs);
 
     /**
      * @brief Hydrate all templates.
      */
-    std::list<meta_model::profile_template> hydrate_templates(
+    static std::list<meta_model::profile_template> hydrate_templates(
         const std::list<boost::filesystem::path>& tfn);
 
 public:
-    std::list<meta_model::profile_template> apply(const context& ctx);
+    static std::list<meta_model::profile_template> apply(const context& ctx);
 };
 
 }
