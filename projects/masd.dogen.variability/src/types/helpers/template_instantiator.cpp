@@ -111,10 +111,11 @@ void template_instantiator::validate(const archetypes::location& al,
     }
 
     /*
-     * The qualified name must not be supplied by the template,
-     * because it will be derived for each template instantiation.
+     * The qualified name must not be supplied by instantiable
+     * templates because it will be derived for each template
+     * instantiation.
      */
-    if (!n.qualified().empty()) {
+    if (is_instantiable(tk) && !n.qualified().empty()) {
         BOOST_LOG_SEV(lg, error) << qualified_name_not_empty << sn;
         BOOST_THROW_EXCEPTION(
             instantiation_exception(qualified_name_not_empty + sn));
