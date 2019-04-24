@@ -38,13 +38,14 @@ namespace masd::dogen::variability::transforms {
  */
 class context final {
 public:
-    context() = default;
+    context();
     context(const context&) = default;
 
 public:
     context(
         const std::vector<boost::filesystem::path>& data_directories,
         const boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository,
+        const bool compatibility_mode,
         const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer);
 
 public:
@@ -54,12 +55,16 @@ public:
     const boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository() const;
     void archetype_location_repository(const boost::shared_ptr<masd::dogen::archetypes::location_repository>& v);
 
+    bool compatibility_mode() const;
+    void compatibility_mode(const bool v);
+
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer() const;
     void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v);
 
 private:
     std::vector<boost::filesystem::path> data_directories_;
     boost::shared_ptr<masd::dogen::archetypes::location_repository> archetype_location_repository_;
+    bool compatibility_mode_;
     boost::shared_ptr<masd::dogen::tracing::tracer> tracer_;
 };
 
