@@ -9,6 +9,6 @@
     },
     "value_type": "boolean",
     "template_kind": "instance",
-    "scope": "not_applicable"
+    "scope": "any"
   }
 ]
