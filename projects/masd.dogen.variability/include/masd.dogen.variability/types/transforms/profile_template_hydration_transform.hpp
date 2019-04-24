@@ -31,12 +31,11 @@
 #include "masd.dogen.variability/types/meta_model/profile_template.hpp"
 #include "masd.dogen.variability/types/transforms/context.hpp"
 
-/**
- * @brief Reads all configuration templates from the filesystem.
- */
-
 namespace masd::dogen::variability::transforms {
 
+/**
+ * @brief Reads all profile templates from the filesystem.
+ */
 class profile_template_hydration_transform final {
 private:
     /**
@@ -55,7 +54,7 @@ private:
      * @brief Hydrate all templates.
      */
     static std::list<meta_model::profile_template> hydrate_templates(
-        const std::list<boost::filesystem::path>& tfn);
+        const std::list<boost::filesystem::path>& tfns);
 
 public:
     static std::list<meta_model::profile_template> apply(const context& ctx);

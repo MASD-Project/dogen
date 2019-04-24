@@ -76,11 +76,11 @@ profile_template_hydration_transform::obtain_template_filenames(
 
 std::list<meta_model::profile_template>
 profile_template_hydration_transform::hydrate_templates(
-    const std::list<boost::filesystem::path>& tfn) {
+    const std::list<boost::filesystem::path>& tfns) {
     std::list<meta_model::profile_template> r;
     helpers::profile_template_hydrator h;
-    for (const auto& fn : tfn)
-        r.push_back(h.hydrate(fn));
+    for (const auto& tfn : tfns)
+        r.push_back(h.hydrate(tfn));
     return r;
 }
 
@@ -90,26 +90,27 @@ profile_template_hydration_transform::apply(const context& ctx) {
         "profile template hydration transform", transform_id, transform_id,
         *ctx.tracer());
 
-    BOOST_LOG_SEV(lg, debug) << "Generating configuration templates.";
+    BOOST_LOG_SEV(lg, debug) << "Obtaining profile templates.";
 
     /*
-     * First we obtain the set of directories that contain
-     * configuration templates, by looking into the supplied data
-     * directories at a well-known location.
+     * First we obtain the set of directories that contain profile
+     * templates, by looking into the supplied data directories at a
+     * well-known location.
      */
     const auto template_dirs(to_template_directories(ctx.data_directories()));
 
     /*
      * We then get a list of all templates in these directories.
      */
-    const auto tfn(obtain_template_filenames(template_dirs));
+    const auto tfns(obtain_template_filenames(template_dirs));
 
     /*
      * Now we can hydrate all files with templates.
      */
-    const auto r(hydrate_templates(tfn));
+    const auto r(hydrate_templates(tfns));
 
     stp.end_transform(r);
+    BOOST_LOG_SEV(lg, debug) << "Finished obtaining profile templates.";
     return r;
 }
 
