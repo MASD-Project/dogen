@@ -53,6 +53,7 @@ apply(const context& ctx, const meta_model::feature_model& fm,
     for (const auto& pt : pts)
         r.push_back(ti.instantiate(fm, pt));
 
+    stp.end_transform(r);
     return r;
 }
 
