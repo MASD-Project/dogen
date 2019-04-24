@@ -32,6 +32,7 @@
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.tracing/types/tracer_fwd.hpp"
 #include "masd.dogen.variability/types/type_repository_fwd.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model_fwd.hpp"
 #include "masd.dogen.variability/types/annotation_factory_fwd.hpp"
 #include "masd.dogen.variability/types/annotation_expander_fwd.hpp"
 #include "masd.dogen.archetypes/types/location_repository_fwd.hpp"
@@ -47,6 +48,7 @@ public:
 public:
     context(
         const boost::shared_ptr<masd::dogen::variability::type_repository>& type_repository,
+        const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model,
         const boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository,
         const boost::shared_ptr<masd::dogen::variability::annotation_factory>& annotation_factory,
         const boost::shared_ptr<masd::dogen::variability::annotation_expander>& annotation_expander,
@@ -57,6 +59,9 @@ public:
 public:
     const boost::shared_ptr<masd::dogen::variability::type_repository>& type_repository() const;
     void type_repository(const boost::shared_ptr<masd::dogen::variability::type_repository>& v);
+
+    const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model() const;
+    void feature_model(const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& v);
 
     const boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository() const;
     void archetype_location_repository(const boost::shared_ptr<masd::dogen::archetypes::location_repository>& v);
@@ -83,6 +88,7 @@ public:
 
 private:
     boost::shared_ptr<masd::dogen::variability::type_repository> type_repository_;
+    boost::shared_ptr<masd::dogen::variability::meta_model::feature_model> feature_model_;
     boost::shared_ptr<masd::dogen::archetypes::location_repository> archetype_location_repository_;
     boost::shared_ptr<masd::dogen::variability::annotation_factory> annotation_factory_;
     boost::shared_ptr<masd::dogen::variability::annotation_expander> annotation_expander_;

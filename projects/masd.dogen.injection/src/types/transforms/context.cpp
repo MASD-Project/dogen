@@ -29,11 +29,13 @@ namespace masd::dogen::injection::transforms {
 context::context(
     const std::vector<boost::filesystem::path>& data_directories,
     const boost::shared_ptr<masd::dogen::variability::type_repository>& type_repository,
+    const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model,
     const boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository,
     const boost::shared_ptr<masd::dogen::variability::annotation_factory>& annotation_factory,
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer)
     : data_directories_(data_directories),
       type_repository_(type_repository),
+      feature_model_(feature_model),
       archetype_location_repository_(archetype_location_repository),
       annotation_factory_(annotation_factory),
       tracer_(tracer) { }
@@ -52,6 +54,14 @@ const boost::shared_ptr<masd::dogen::variability::type_repository>& context::typ
 
 void context::type_repository(const boost::shared_ptr<masd::dogen::variability::type_repository>& v) {
     type_repository_ = v;
+}
+
+const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& context::feature_model() const {
+    return feature_model_;
+}
+
+void context::feature_model(const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& v) {
+    feature_model_ = v;
 }
 
 const boost::shared_ptr<masd::dogen::archetypes::location_repository>& context::archetype_location_repository() const {

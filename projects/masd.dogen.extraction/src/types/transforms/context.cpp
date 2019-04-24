@@ -26,11 +26,13 @@ namespace masd::dogen::extraction::transforms {
 
 context::context(
     const boost::shared_ptr<masd::dogen::variability::type_repository>& type_repository,
+    const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model,
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer,
     const boost::optional<masd::dogen::diffing_configuration>& diffing_configuration,
     const boost::optional<masd::dogen::reporting_configuration>& reporting_configuration,
     const bool dry_run_mode_enabled)
     : type_repository_(type_repository),
+      feature_model_(feature_model),
       tracer_(tracer),
       diffing_configuration_(diffing_configuration),
       reporting_configuration_(reporting_configuration),
@@ -42,6 +44,14 @@ const boost::shared_ptr<masd::dogen::variability::type_repository>& context::typ
 
 void context::type_repository(const boost::shared_ptr<masd::dogen::variability::type_repository>& v) {
     type_repository_ = v;
+}
+
+const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& context::feature_model() const {
+    return feature_model_;
+}
+
+void context::feature_model(const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& v) {
+    feature_model_ = v;
 }
 
 const boost::shared_ptr<masd::dogen::tracing::tracer>& context::tracer() const {
