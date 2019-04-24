@@ -44,9 +44,8 @@ void code_generation_chain::apply(const context& ctx,
     BOOST_LOG_SEV(lg, debug) << "Target: " << target.generic();
 
     const auto model_name(target.filename().string());
-    const auto& tracer(*ctx.injection_context().tracer());
     tracing::scoped_chain_tracer stp(lg, "code generation chain",
-        transform_id, model_name, tracer);
+        transform_id, model_name, *ctx.injection_context().tracer());
 
     /*
      * Obtain the extraction model.
