@@ -25,24 +25,53 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.variability/types/meta_model/profile.hpp"
+#include "masd.dogen.variability/types/meta_model/profile_repository.hpp"
+#include "masd.dogen.variability/types/transforms/context.hpp"
 
 namespace masd::dogen::variability::transforms {
 
+/**
+ * @brief Merges profiles according to their inheritance
+ * relationships.
+ */
 class profile_merging_transform final {
-public:
-    profile_merging_transform() = default;
-    profile_merging_transform(const profile_merging_transform&) = default;
-    profile_merging_transform(profile_merging_transform&&) = default;
-    ~profile_merging_transform() = default;
-    profile_merging_transform& operator=(const profile_merging_transform&) = default;
+private:
+    /**
+     * @brief Recurses up the profile tree and merges children with
+     * their parents.
+     */
+    const meta_model::profile& walk_up_parent_tree_and_merge(
+        const std::string& current,
+        std::unordered_map<std::string, meta_model::profile>& pm) const;
+
+private:
+    /**
+     * @brief Organises profiles into a map, by qualified name.
+     */
+    std::unordered_map<std::string, meta_model::profile>
+    create_profile_map(const std::list<meta_model::profile>& profiles) const;
+
+    /**
+     * @brief Performs a number of sanity checks on a profile.
+     */
+    void validate(
+        const std::unordered_map<std::string, meta_model::profile>& pm) const;
+
+    /**
+     * @brief Merges all profiles.
+     */
+    void merge(std::unordered_map<std::string, meta_model::profile>& pm) const;
+
+    /**
+     * @brief Generates a profile repository.
+     */
+    meta_model::profile_repository create_repository(
+        const std::unordered_map<std::string, meta_model::profile>& pm);
 
 public:
-    bool operator==(const profile_merging_transform& rhs) const;
-    bool operator!=(const profile_merging_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    meta_model::profile_repository apply(const context& ctx,
+        const std::list<meta_model::profile>& profiles);
 };
 
 }

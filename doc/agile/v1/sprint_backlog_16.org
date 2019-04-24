@@ -12,19 +12,19 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-24 Wed 11:10]
+#+CAPTION: Clock summary at [2019-04-24 Wed 11:54]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *11:04* |       |      | 100.0 |
+| *Total time*                                           | *11:47* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 11:04   |       |      | 100.0 |
-| Active                                                 |         | 11:04 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 2:40 |  24.1 |
-| Sprint and product backlog grooming                    |         |       | 0:22 |   3.3 |
-| Create a video demo for the previous sprint's features |         |       | 1:55 |  17.3 |
-| Read variability papers                                |         |       | 1:04 |   9.6 |
-| Implement variability model                            |         |       | 5:03 |  45.6 |
+| Stories                                                | 11:47   |       |      | 100.0 |
+| Active                                                 |         | 11:47 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 2:40 |  22.6 |
+| Sprint and product backlog grooming                    |         |       | 0:22 |   3.1 |
+| Create a video demo for the previous sprint's features |         |       | 1:55 |  16.3 |
+| Read variability papers                                |         |       | 1:04 |   9.1 |
+| Implement variability model                            |         |       | 5:46 |  48.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -174,6 +174,7 @@ sure our approach is aligned with the literature.
 
 *** STARTED Implement variability model                               :story:
     :LOGBOOK:
+    CLOCK: [2019-04-24 Wed 11:11]--[2019-04-24 Wed 11:54] =>  0:43
     CLOCK: [2019-04-24 Wed 10:58]--[2019-04-24 Wed 11:10] =>  0:12
     CLOCK: [2019-04-24 Wed 10:53]--[2019-04-24 Wed 10:57] =>  0:04
     CLOCK: [2019-04-24 Wed 09:01]--[2019-04-24 Wed 10:52] =>  1:51
