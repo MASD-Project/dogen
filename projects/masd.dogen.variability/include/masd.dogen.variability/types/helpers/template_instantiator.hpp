@@ -25,24 +25,156 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include <forward_list>
+#include <unordered_set>
+#include <unordered_map>
+#include <boost/shared_ptr.hpp>
+#include "masd.dogen.archetypes/types/location_repository.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/profile.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
+#include "masd.dogen.variability/types/meta_model/profile_template.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_template.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration_point.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration_point_template.hpp"
 
 namespace masd::dogen::variability::helpers {
 
+/**
+ * @brief Instantiates configuration and feature templates.
+ */
 class template_instantiator final {
 public:
-    template_instantiator() = default;
-    template_instantiator(const template_instantiator&) = default;
-    template_instantiator(template_instantiator&&) = default;
-    ~template_instantiator() = default;
-    template_instantiator& operator=(const template_instantiator&) = default;
+    /**
+     * @brief Initialises the instantiator.
+     *
+     * @param alrp Archetype location repository.
+     */
+    template_instantiator(const archetypes::location_repository& alrp,
+        const bool compatibility_mode);
 
 public:
-    bool operator==(const template_instantiator& rhs) const;
-    bool operator!=(const template_instantiator& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Returns true if the kind of template can be
+     * instantiated, false otherwise.
+     */
+    bool is_instantiable(const meta_model::template_kind tk) const;
 
+    /**
+     * @brief Returns true if the value type allows partial matching.
+     */
+    bool is_partially_mathcable(const meta_model::value_type vt) const;
+
+    /**
+     * @brief Returns true if there is a match between lhs and rhs,
+     * according to the matching rules.
+     */
+    bool is_match(const std::string& lhs, const std::string& rhs) const;
+
+private:
+    /**
+     * @brief Ensures the supplied parameters result in a valid
+     * instantiation.
+     */
+    void validate(const archetypes::location& al, const meta_model::name& n,
+        const meta_model::template_kind tk) const;
+
+public:
+    /**
+     * @brief Instantiates a configuration point template into a
+     * configuration point.
+     */
+    meta_model::configuration_point to_configuration_point(
+        const meta_model::feature_model& fm, const std::string& owner,
+        const meta_model::configuration_point_template& cpt) const;
+
+    /*
+     * @brief Expands a feature template into a feature.
+     */
+    meta_model::feature to_feature(const meta_model::feature_template& ft) const;
+
+private:
+    /**
+     * @brief Instantiates a feature template that is recursive across
+     * archetype space.
+     */
+    std::list<meta_model::feature> instantiate_recursive_template(
+        const meta_model::feature_template &ft) const;
+
+    /**
+     * @brief Instantiates the feature template for all available
+     * facets in archetype space, for a given backend.
+     */
+    void instantiate_facet_template(const meta_model::feature_template &ft,
+        const std::string &backend_name,
+        const std::unordered_set<std::string> &facet_names,
+        std::list<meta_model::feature> &features) const;
+
+    /**
+     * @brief Instantiates the feature template for all available
+     * facets in archetype space, across all backends.
+     */
+    std::list<meta_model::feature>
+    instantiate_facet_template(const meta_model::feature_template &ft) const;
+
+    /**
+     * @brief Instantiates a feature template across all archetypes.
+     */
+    std::list<meta_model::feature> instantiate_archetype_template(
+        const meta_model::feature_template &ft) const;
+
+private:
+    /**
+     * @brief Instantiates a configuration point template that is
+     * recursive across archetype space.
+     */
+    std::list<meta_model::configuration_point>
+    instantiate_recursive_template(const meta_model::feature_model& fm,
+        const meta_model::configuration_point_template& cpt) const;
+
+    /**
+     * @brief Instantiates the configuration point template for all
+     * available facets in archetype space.
+     */
+    std::list<meta_model::configuration_point>
+    instantiate_facet_template(const meta_model::feature_model& fm,
+        const meta_model::configuration_point_template& cpt) const;
+
+    /**
+     * @brief Instantiates the configuration point template for all
+     * archetypes.
+     */
+    std::list<meta_model::configuration_point>
+    instantiate_archetype_template(const meta_model::feature_model& fm,
+        const meta_model::configuration_point_template& cpt) const;
+
+    /**
+     * @brief Instantiates a configuration point template into a set
+     * of configuration points.
+     */
+    std::list<meta_model::configuration_point>
+    instantiate(const meta_model::feature_model& fm,
+        const meta_model::configuration_point_template& cpt) const;
+
+public:
+    /**
+     * @brief Instantiates the feature template across archetype
+     * space.
+     */
+    std::list<meta_model::feature>
+    instantiate(const meta_model::feature_template& ft) const;
+
+    /**
+     * @brief Instantiates a profile template across archetype space.
+     */
+    meta_model::profile instantiate(const meta_model::feature_model& fm,
+        const meta_model::profile_template& pt) const;
+
+private:
+    const archetypes::location_repository& repository_;
+    const bool compatibility_mode_;
 };
 
 }
