@@ -18,12 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.variability/io/meta_model/feature_model_io.hpp"
+#include "masd.dogen.variability/types/transforms/feature_model_transform.hpp"
+#include "masd.dogen.variability/types/transforms/feature_template_hydration_transform.hpp"
+#include "masd.dogen.variability/types/transforms/feature_template_instantiation_transform.hpp"
 #include "masd.dogen.variability/types/transforms/feature_model_production_chain.hpp"
+
+namespace {
+
+const std::string
+transform_id("variability.transforms.feature_model_production_chain");
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace masd::dogen::variability::transforms {
 
-bool feature_model_production_chain::operator==(const feature_model_production_chain& /*rhs*/) const {
-    return true;
+meta_model::feature_model
+feature_model_production_chain::apply(const context& ctx) {
+    tracing::scoped_chain_tracer stp(lg, "feature model production chain",
+        transform_id, transform_id, *ctx.tracer());
+
+    const auto t(feature_template_hydration_transform::apply(ctx));
+    const auto f(feature_template_instantiation_transform::apply(ctx, t));
+    const auto r(feature_model_transform::apply(ctx, f));
+
+    stp.end_chain(r);
+    return r;
 }
 
 }

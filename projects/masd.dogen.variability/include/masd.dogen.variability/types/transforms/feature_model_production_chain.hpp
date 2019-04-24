@@ -25,24 +25,14 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
+#include "masd.dogen.variability/types/transforms/context.hpp"
 
 namespace masd::dogen::variability::transforms {
 
 class feature_model_production_chain final {
 public:
-    feature_model_production_chain() = default;
-    feature_model_production_chain(const feature_model_production_chain&) = default;
-    feature_model_production_chain(feature_model_production_chain&&) = default;
-    ~feature_model_production_chain() = default;
-    feature_model_production_chain& operator=(const feature_model_production_chain&) = default;
-
-public:
-    bool operator==(const feature_model_production_chain& rhs) const;
-    bool operator!=(const feature_model_production_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static meta_model::feature_model apply(const context& ctx);
 };
 
 }
