@@ -25,24 +25,21 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_template.hpp"
+#include "masd.dogen.variability/types/transforms/context.hpp"
 
 namespace masd::dogen::variability::transforms {
 
+/**
+ * @brief Instantiates a set of feature templates into feature.
+ */
 class feature_template_instantiation_transform final {
 public:
-    feature_template_instantiation_transform() = default;
-    feature_template_instantiation_transform(const feature_template_instantiation_transform&) = default;
-    feature_template_instantiation_transform(feature_template_instantiation_transform&&) = default;
-    ~feature_template_instantiation_transform() = default;
-    feature_template_instantiation_transform& operator=(const feature_template_instantiation_transform&) = default;
-
-public:
-    bool operator==(const feature_template_instantiation_transform& rhs) const;
-    bool operator!=(const feature_template_instantiation_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static std::list<meta_model::feature>
+    apply(const context& ctx,
+        const std::list<meta_model::feature_template>& fts);
 };
 
 }

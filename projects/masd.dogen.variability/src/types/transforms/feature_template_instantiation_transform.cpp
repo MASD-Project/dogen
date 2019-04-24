@@ -18,12 +18,50 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/list_io.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.variability/io/meta_model/feature_io.hpp"
+#include "masd.dogen.variability/io/meta_model/feature_template_io.hpp"
+#include "masd.dogen.variability/types/helpers/template_instantiator.hpp"
 #include "masd.dogen.variability/types/transforms/feature_template_instantiation_transform.hpp"
+
+namespace {
+
+const std::string transform_id(
+    "variability.transforms.feature_template_instantiation_transform");
+
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace masd::dogen::variability::transforms {
 
-bool feature_template_instantiation_transform::operator==(const feature_template_instantiation_transform& /*rhs*/) const {
-    return true;
+std::list<meta_model::feature>
+feature_template_instantiation_transform::apply(const context& ctx,
+    const std::list<meta_model::feature_template>& fts) {
+    tracing::scoped_transform_tracer stp(lg,
+        "feature template instantiation transform",
+        transform_id, transform_id, *ctx.tracer(), fts);
+
+    const auto cm(ctx.compatibility_mode());
+    const auto& alrp(*ctx.archetype_location_repository());
+    helpers::template_instantiator ti(alrp, cm);
+
+    unsigned int counter(0);
+    std::list<meta_model::feature> r;
+    for (const auto& ft : fts) {
+        r.splice(r.end(), ti.instantiate(ft));
+        ++counter;
+    }
+    BOOST_LOG_SEV(lg, debug) << "Total number of templates instantiated: "
+                             << counter;
+
+    stp.end_transform(r);
+    return r;
+
+
 }
 
 }
