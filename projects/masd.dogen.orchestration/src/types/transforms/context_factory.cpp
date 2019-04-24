@@ -169,6 +169,7 @@ context context_factory::make_context(const configuration& cfg,
      * Setup the annotations related data structures.
      */
     const auto alrp(create_archetype_location_repository(rg));
+    r.variability_context().archetype_location_repository(alrp);
     r.injection_context().archetype_location_repository(alrp);
     r.coding_context().archetype_location_repository(alrp);
     r.generation_context().archetype_location_repository(alrp);
@@ -185,6 +186,8 @@ context context_factory::make_context(const configuration& cfg,
      * Setup the annotations related factories.
      */
     const bool cm(cfg.model_processing().compatibility_mode_enabled());
+    r.variability_context().compatibility_mode(cm);
+
     const auto af(boost::make_shared<variability::annotation_factory>(
                 *alrp, *atrp, cm));
     r.injection_context().annotation_factory(af);
