@@ -108,6 +108,7 @@ adapter::to_attribute(const injection::meta_model::attribute& ia) const {
     r.unparsed_type(ia.type());
     r.documentation(ia.documentation());
     r.annotation(ia.annotation());
+    r.configuration(ia.configuration());
 
     return r;
 }
@@ -126,6 +127,7 @@ adapter::to_enumerator(const injection::meta_model::attribute& ia) const {
     r.name().simple(ia.name());
     r.documentation(ia.documentation());
     r.annotation(ia.annotation());
+    r.configuration(ia.configuration());
 
     return r;
 }
@@ -142,6 +144,7 @@ void adapter::populate_element(const coding::meta_model::location& l,
     const auto& ds(scr.dynamic_stereotypes());
     e.dynamic_stereotypes(ds);
     e.annotation(ie.annotation());
+    e.configuration(ie.configuration());
     e.in_global_module(
         l.external_modules().empty() && l.model_modules().empty());
 }
@@ -357,6 +360,7 @@ adapter::to_variability_profile_template(const coding::meta_model::location& l,
 
         coding::meta_model::variability_profile_template_entry e;
         e.annotation(attr.annotation());
+        e.configuration(attr.configuration());
         e.name(n);
 
         const auto v(attr.value());
