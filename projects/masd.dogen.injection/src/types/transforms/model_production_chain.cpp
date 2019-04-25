@@ -25,6 +25,7 @@
 #include "masd.dogen.injection/types/transforms/input_technical_space_transform.hpp"
 #include "masd.dogen.injection/types/transforms/references_transform.hpp"
 #include "masd.dogen.injection/types/transforms/annotations_transform.hpp"
+#include "masd.dogen.injection/types/transforms/configuration_transform.hpp"
 #include "masd.dogen.injection/types/transforms/model_production_chain.hpp"
 
 namespace {
@@ -62,7 +63,6 @@ apply(const context& ctx, const boost::filesystem::path& p) {
     const auto model_name(p.filename().generic_string());
     tracing::scoped_chain_tracer stp(lg, "injection model production chain",
         transform_id, model_name, *ctx.tracer());
-
     /*
      * Transform the external model in whatever supported external
      * representation it may be in - Dia, JSON, etc - into the
@@ -75,6 +75,11 @@ apply(const context& ctx, const boost::filesystem::path& p) {
      * Process all annotations.
      */
     annotations_transform::apply(ctx, r);
+
+    /*
+     * Process the configuration
+     */
+    configuration_transform::apply(ctx, r);
 
     /*
      * Read the input technical space.
