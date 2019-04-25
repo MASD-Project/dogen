@@ -20,6 +20,7 @@
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.variability/types/annotation_factory.hpp"
 #include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/annotations_transform.hpp"
@@ -37,7 +38,6 @@ namespace masd::dogen::injection::transforms {
 
 void annotations_transform::apply(const transforms::context& ctx,
     meta_model::model& m) {
-
     tracing::scoped_transform_tracer stp(lg, "annotations transform",
         transform_id, m.name(), *ctx.tracer(), m);
 
@@ -57,7 +57,6 @@ void annotations_transform::apply(const transforms::context& ctx,
 
     stp.end_transform(m);
     BOOST_LOG_SEV(lg, debug) << "Transformed model.";
-
 }
 
 }
