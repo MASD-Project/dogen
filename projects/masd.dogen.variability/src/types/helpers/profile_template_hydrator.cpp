@@ -30,7 +30,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("annotations.type_templates_hydrator"));
+auto lg(logger_factory("variability.helpers.profile_template_hydrator"));
 
 const std::string empty;
 const std::string name_key("name");
@@ -163,6 +163,7 @@ profile_template_hydrator::read_stream(std::istream& s) const {
 
     meta_model::profile_template r;
     r.name().simple(pt.get<std::string>(name_key));
+    r.name().qualified(r.name().simple());
 
     auto i = pt.find(parents_key);
     if (i != pt.not_found()) {
@@ -175,9 +176,7 @@ profile_template_hydrator::read_stream(std::istream& s) const {
     if (i != pt.not_found()) {
         const auto& labels(i->second);
         for (auto j(labels.begin()); j != labels.end(); ++j)
-            r.labels()
-
-                .insert(j->second.get_value<std::string>());
+            r.labels().insert(j->second.get_value<std::string>());
     }
 
     i = pt.find(templates_key);
@@ -192,12 +191,13 @@ profile_template_hydrator::hydrate(std::istream& s) const {
     BOOST_LOG_SEV(lg, trace) << "Parsing JSON stream.";
     using namespace boost::property_tree;
     try {
-        auto r(read_stream(s));
+        const auto r(read_stream(s));
         BOOST_LOG_SEV(lg, trace) << "Parsed JSON stream successfully.";
         return r;
     } catch (const json_parser_error& e) {
         BOOST_LOG_SEV(lg, error) << invalid_json_file << e.what();
-        BOOST_THROW_EXCEPTION(hydration_exception(invalid_json_file + e.what()));
+        BOOST_THROW_EXCEPTION(
+            hydration_exception(invalid_json_file + e.what()));
     } catch (const ptree_bad_data& e) {
         BOOST_LOG_SEV(lg, error) << invalid_value_in_json << e.what();
         BOOST_THROW_EXCEPTION(

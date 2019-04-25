@@ -41,6 +41,7 @@ using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("variability.helpers.template_instantiator"));
 
 const std::string empty;
+const std::string empty_msg("<empty>");
 const std::string template_not_instantiable(
     "Template cannot be instantiated: ");
 const std::string empty_simple_name("Simple name cannot be empty.");
@@ -387,10 +388,11 @@ template_instantiator::instantiate_recursive_template(
     return r;
 }
 
-std::list<meta_model::configuration_point>
-template_instantiator::instantiate_facet_template(
-    const meta_model::feature_model& fm,
+std::list<meta_model::configuration_point> template_instantiator::
+instantiate_facet_template(const meta_model::feature_model& fm,
     const meta_model::configuration_point_template& cpt) const {
+
+    BOOST_LOG_SEV(lg, debug) << "Instantiating template: " << cpt;
 
     const auto& l(cpt.location());
     std::list<meta_model::configuration_point> r;
@@ -523,7 +525,10 @@ template_instantiator::instantiate(const meta_model::feature_model& fm,
 
     for (auto& cpt : pt.templates()) {
         const auto cptqn(cpt.name().qualified());
-        BOOST_LOG_SEV(lg, debug) << "Configuration point template: " << cptqn;
+        BOOST_LOG_SEV(lg, debug) << "Configuration point template: "
+                                 << cpt.name().simple() << " ('"
+                                 << (cptqn.empty() ? empty_msg : cptqn)
+                                 << "')" ;
         std::list<meta_model::configuration_point> cps;
 
         /*

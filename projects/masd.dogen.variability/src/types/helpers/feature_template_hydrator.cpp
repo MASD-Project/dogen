@@ -33,7 +33,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("annotations.feature_templates_hydrator"));
+auto lg(logger_factory("variability.helpers.feature_template_hydrator"));
 
 const std::string empty;
 const std::string name_key("name");
