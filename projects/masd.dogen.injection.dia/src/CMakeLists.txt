@@ -38,7 +38,8 @@ target_link_libraries(${lib_target_name}
     masd.dogen.injection.lib
     masd.dogen.dia.lib
     ${LIBXML2_LIBRARIES}
-    ${Boost_LIBRARIES})
+    ${Boost_LIBRARIES}
+    ${CMAKE_REQUIRED_LIBRARIES})
 
 install(TARGETS ${lib_target_name}
     ARCHIVE DESTINATION lib

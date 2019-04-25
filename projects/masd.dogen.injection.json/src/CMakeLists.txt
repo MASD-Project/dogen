@@ -35,8 +35,6 @@ set_target_properties(${lib_target_name}
 
 target_link_libraries(${lib_target_name}
     masd.dogen.utility.lib
-    masd.dogen.variability.lib
-    masd.dogen.extraction.lib
     masd.dogen.injection.lib
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})
