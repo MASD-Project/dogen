@@ -14797,3 +14797,14 @@ require some experience with the framework.
 Links:
 
 - [[https://actor-framework.readthedocs.io/en/latest/TypeInspection.html][Type Inspection (Serialization and String Conversion)]]
+*** Add sonar cloud checks to project                                 :story:
+
+Sonar cloud seems to provide a set of security etc checks for open
+source projects. A project was created but we still need CI integration.
+
+Links
+
+- [[https://github.com/arvidn/libtorrent][libtorrent]]: example project using sonar cloud with badges. Their
+  [[https://sonarcloud.io/dashboard?id=libtorrent][project page]].
+- [[https://sonarcloud.io/dashboard?id=MASD-Project_dogen][MASD-Project_dogen]]
+- [[https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner][Analyzing with SonarQube Scanner]]
