@@ -29,7 +29,9 @@
 #include <string>
 #include <utility>
 #include <algorithm>
+#include <boost/shared_ptr.hpp>
 #include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration_fwd.hpp"
 
 namespace masd::dogen::injection::meta_model {
 
@@ -47,6 +49,7 @@ public:
         const std::string& documentation,
         const std::string& name,
         const masd::dogen::variability::annotation& annotation,
+        const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
         const std::string& type,
         const std::string& value);
 
@@ -89,6 +92,16 @@ public:
     void annotation(const masd::dogen::variability::annotation&& v);
     /**@}*/
 
+    /**
+     * @brief Configuration for this element.
+     */
+    /**@{*/
+    const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration() const;
+    boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration();
+    void configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& v);
+    void configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>&& v);
+    /**@}*/
+
     const std::string& type() const;
     std::string& type();
     void type(const std::string& v);
@@ -120,6 +133,7 @@ private:
     std::string documentation_;
     std::string name_;
     masd::dogen::variability::annotation annotation_;
+    boost::shared_ptr<masd::dogen::variability::meta_model::configuration> configuration_;
     std::string type_;
     std::string value_;
 };

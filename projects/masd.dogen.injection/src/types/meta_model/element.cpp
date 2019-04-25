@@ -19,6 +19,16 @@
  *
  */
 #include "masd.dogen.injection/types/meta_model/element.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& lhs,
+const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
 
 namespace masd::dogen::injection::meta_model {
 
@@ -36,6 +46,7 @@ element::element(
     const std::string& documentation,
     const std::string& name,
     const masd::dogen::variability::annotation& annotation,
+    const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
     const std::list<std::string>& parents,
     const std::list<masd::dogen::injection::meta_model::attribute>& attributes,
     const std::string& fallback_element_type,
@@ -50,6 +61,7 @@ element::element(
       documentation_(documentation),
       name_(name),
       annotation_(annotation),
+      configuration_(configuration),
       parents_(parents),
       attributes_(attributes),
       fallback_element_type_(fallback_element_type),
@@ -67,6 +79,7 @@ void element::swap(element& other) noexcept {
     swap(documentation_, other.documentation_);
     swap(name_, other.name_);
     swap(annotation_, other.annotation_);
+    swap(configuration_, other.configuration_);
     swap(parents_, other.parents_);
     swap(attributes_, other.attributes_);
     swap(fallback_element_type_, other.fallback_element_type_);
@@ -84,6 +97,7 @@ bool element::operator==(const element& rhs) const {
         documentation_ == rhs.documentation_ &&
         name_ == rhs.name_ &&
         annotation_ == rhs.annotation_ &&
+        configuration_ == rhs.configuration_ &&
         parents_ == rhs.parents_ &&
         attributes_ == rhs.attributes_ &&
         fallback_element_type_ == rhs.fallback_element_type_ &&
@@ -179,6 +193,22 @@ void element::annotation(const masd::dogen::variability::annotation& v) {
 
 void element::annotation(const masd::dogen::variability::annotation&& v) {
     annotation_ = std::move(v);
+}
+
+const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& element::configuration() const {
+    return configuration_;
+}
+
+boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& element::configuration() {
+    return configuration_;
+}
+
+void element::configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& v) {
+    configuration_ = v;
+}
+
+void element::configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>&& v) {
+    configuration_ = std::move(v);
 }
 
 const std::list<std::string>& element::parents() const {

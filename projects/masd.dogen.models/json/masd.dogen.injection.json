@@ -346,13 +346,29 @@
       ]
     },
     {
+      "name": "meta_model::Configurable",
+      "documentation": "Ability to have meta-data associated.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "configuration",
+          "type": "boost::shared_ptr<variability::meta_model::configuration>",
+          "documentation": "Configuration for this element.\n"
+        }
+      ]
+    },
+    {
       "name": "meta_model::Element",
       "parents": [
         "meta_model::Taggable",
         "meta_model::Stereotypable",
         "meta_model::Documentable",
         "meta_model::Nameable",
-        "meta_model::Annotatable"
+        "meta_model::Annotatable",
+        "meta_model::Configurable"
       ],
       "documentation": "Consolidates a number of related object templates.\n",
       "stereotypes": [

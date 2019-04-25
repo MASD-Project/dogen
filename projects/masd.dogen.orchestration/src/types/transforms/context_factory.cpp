@@ -187,7 +187,6 @@ context context_factory::make_context(const configuration& cfg,
      */
     const auto tracer(boost::make_shared<tracing::tracer>(cfg.tracing()));
     vctx.tracer(tracer);
-
     tracer->add_initial_input(alrp_input_id, *alrp);
 
     /*

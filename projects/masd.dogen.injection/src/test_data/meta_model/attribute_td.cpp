@@ -21,6 +21,7 @@
 #include <sstream>
 #include "masd.dogen.variability/test_data/annotation_td.hpp"
 #include "masd.dogen.injection/test_data/meta_model/attribute_td.hpp"
+#include "masd.dogen.variability/test_data/meta_model/configuration_td.hpp"
 
 namespace {
 
@@ -59,6 +60,18 @@ create_masd_dogen_variability_annotation(const unsigned int position) {
     return masd::dogen::variability::annotation_generator::create(position);
 }
 
+masd::dogen::variability::meta_model::configuration*
+create_masd_dogen_variability_meta_model_configuration_ptr(const unsigned int position) {
+    return masd::dogen::variability::meta_model::configuration_generator::create_ptr(position);
+}
+
+boost::shared_ptr<masd::dogen::variability::meta_model::configuration>
+create_boost_shared_ptr_masd_dogen_variability_meta_model_configuration(unsigned int position) {
+    boost::shared_ptr<masd::dogen::variability::meta_model::configuration> r(
+        create_masd_dogen_variability_meta_model_configuration_ptr(position));
+    return r;
+}
+
 }
 
 namespace masd::dogen::injection::meta_model {
@@ -72,8 +85,9 @@ populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 2));
     v.name(create_std_string(position + 3));
     v.annotation(create_masd_dogen_variability_annotation(position + 4));
-    v.type(create_std_string(position + 5));
-    v.value(create_std_string(position + 6));
+    v.configuration(create_boost_shared_ptr_masd_dogen_variability_meta_model_configuration(position + 5));
+    v.type(create_std_string(position + 6));
+    v.value(create_std_string(position + 7));
 }
 
 attribute_generator::result_type

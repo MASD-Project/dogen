@@ -29,8 +29,10 @@
 #include <string>
 #include <utility>
 #include <algorithm>
+#include <boost/shared_ptr.hpp>
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.injection/types/meta_model/element.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration_fwd.hpp"
 
 namespace masd::dogen::injection::meta_model {
 
@@ -51,6 +53,7 @@ public:
         const std::string& documentation,
         const std::string& name,
         const masd::dogen::variability::annotation& annotation,
+        const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
         const std::list<masd::dogen::injection::meta_model::element>& elements,
         const std::string& input_technical_space,
         const std::list<std::string>& references);
@@ -94,6 +97,16 @@ public:
     void annotation(const masd::dogen::variability::annotation&& v);
     /**@}*/
 
+    /**
+     * @brief Configuration for this element.
+     */
+    /**@{*/
+    const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration() const;
+    boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration();
+    void configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& v);
+    void configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>&& v);
+    /**@}*/
+
     const std::list<masd::dogen::injection::meta_model::element>& elements() const;
     std::list<masd::dogen::injection::meta_model::element>& elements();
     void elements(const std::list<masd::dogen::injection::meta_model::element>& v);
@@ -130,6 +143,7 @@ private:
     std::string documentation_;
     std::string name_;
     masd::dogen::variability::annotation annotation_;
+    boost::shared_ptr<masd::dogen::variability::meta_model::configuration> configuration_;
     std::list<masd::dogen::injection::meta_model::element> elements_;
     std::string input_technical_space_;
     std::list<std::string> references_;

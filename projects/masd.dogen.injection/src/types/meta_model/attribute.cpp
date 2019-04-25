@@ -19,6 +19,16 @@
  *
  */
 #include "masd.dogen.injection/types/meta_model/attribute.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& lhs,
+const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
 
 namespace masd::dogen::injection::meta_model {
 
@@ -28,6 +38,7 @@ attribute::attribute(
     const std::string& documentation,
     const std::string& name,
     const masd::dogen::variability::annotation& annotation,
+    const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
     const std::string& type,
     const std::string& value)
     : tagged_values_(tagged_values),
@@ -35,6 +46,7 @@ attribute::attribute(
       documentation_(documentation),
       name_(name),
       annotation_(annotation),
+      configuration_(configuration),
       type_(type),
       value_(value) { }
 
@@ -45,6 +57,7 @@ void attribute::swap(attribute& other) noexcept {
     swap(documentation_, other.documentation_);
     swap(name_, other.name_);
     swap(annotation_, other.annotation_);
+    swap(configuration_, other.configuration_);
     swap(type_, other.type_);
     swap(value_, other.value_);
 }
@@ -55,6 +68,7 @@ bool attribute::operator==(const attribute& rhs) const {
         documentation_ == rhs.documentation_ &&
         name_ == rhs.name_ &&
         annotation_ == rhs.annotation_ &&
+        configuration_ == rhs.configuration_ &&
         type_ == rhs.type_ &&
         value_ == rhs.value_;
 }
@@ -143,6 +157,22 @@ void attribute::annotation(const masd::dogen::variability::annotation& v) {
 
 void attribute::annotation(const masd::dogen::variability::annotation&& v) {
     annotation_ = std::move(v);
+}
+
+const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& attribute::configuration() const {
+    return configuration_;
+}
+
+boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& attribute::configuration() {
+    return configuration_;
+}
+
+void attribute::configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& v) {
+    configuration_ = v;
+}
+
+void attribute::configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>&& v) {
+    configuration_ = std::move(v);
 }
 
 const std::string& attribute::type() const {
