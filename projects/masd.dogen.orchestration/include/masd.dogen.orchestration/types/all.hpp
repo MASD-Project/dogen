@@ -46,6 +46,6 @@
 #include "masd.dogen.orchestration/types/transforms/extraction_model_production_chain.hpp"
 #include "masd.dogen.orchestration/types/transforms/injection_model_to_coding_model_transform.hpp"
 #include "masd.dogen.orchestration/types/transforms/coding_model_to_generation_model_transform.hpp"
-#include "masd.dogen.orchestration/types/transforms/injection_model_set_to_coding_model_set_transform.hpp"
+#include "masd.dogen.orchestration/types/transforms/injection_model_set_to_coding_model_set_chain.hpp"
 
 #endif

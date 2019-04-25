@@ -26,7 +26,7 @@
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"
 #include "masd.dogen.extraction/types/transforms/model_production_chain.hpp"
-#include "masd.dogen.orchestration/types/transforms/injection_model_set_to_coding_model_set_transform.hpp"
+#include "masd.dogen.orchestration/types/transforms/injection_model_set_to_coding_model_set_chain.hpp"
 #include "masd.dogen.orchestration/types/transforms/coding_model_to_generation_model_transform.hpp"
 #include "masd.dogen.orchestration/types/transforms/context.hpp"
 #include "masd.dogen.orchestration/types/transforms/extraction_model_production_chain.hpp"
@@ -64,7 +64,7 @@ extraction_model_production_chain::apply(const context& ctx,
     /*
      * Convert the injection model set into a coding model set.
      */
-    const auto cmset(injection_model_set_to_coding_model_set_transform::
+    const auto cmset(injection_model_set_to_coding_model_set_chain::
         apply(ctx, ims));
 
     /*

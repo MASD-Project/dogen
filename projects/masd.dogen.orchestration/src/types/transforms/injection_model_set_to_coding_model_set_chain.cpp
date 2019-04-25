@@ -23,12 +23,12 @@
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.orchestration/types/transforms/context.hpp"
 #include "masd.dogen.orchestration/types/transforms/injection_model_to_coding_model_transform.hpp"
-#include "masd.dogen.orchestration/types/transforms/injection_model_set_to_coding_model_set_transform.hpp"
+#include "masd.dogen.orchestration/types/transforms/injection_model_set_to_coding_model_set_chain.hpp"
 
 namespace {
 
 const std::string transform_id(
-    "orchestration.transforms.injection_model_set_to_coding_model_set_transform");
+    "orchestration.transforms.injection_model_set_to_coding_model_set_chain");
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
@@ -37,7 +37,7 @@ static logger lg(logger_factory(transform_id));
 namespace masd::dogen::orchestration::transforms {
 
 coding::meta_model::model_set
-injection_model_set_to_coding_model_set_transform::
+injection_model_set_to_coding_model_set_chain::
 apply(const context& ctx, const injection::meta_model::model_set& ms) {
     const auto model_name(ms.target().name());
     tracing::scoped_chain_tracer stp(lg,

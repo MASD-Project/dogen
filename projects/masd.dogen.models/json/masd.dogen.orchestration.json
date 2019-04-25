@@ -132,7 +132,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::injection_model_set_to_coding_model_set_transform",
+      "name": "transforms::injection_model_set_to_coding_model_set_chain",
       "stereotypes": [
         "masd::handcrafted"
       ],
