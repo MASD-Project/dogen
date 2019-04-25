@@ -3423,17 +3423,17 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="35,83"/>
+        <dia:point val="48.725,83"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="34.25,78.35;40.2,83.8"/>
+        <dia:rectangle val="39.95,78.35;49.475,83.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="35,83"/>
-        <dia:point val="35,81"/>
+        <dia:point val="48.725,83"/>
+        <dia:point val="48.725,81"/>
         <dia:point val="40,81"/>
         <dia:point val="40,78.4"/>
       </dia:attribute>
@@ -3452,7 +3452,7 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O7" connection="0"/>
+        <dia:connection handle="0" to="O7" connection="1"/>
         <dia:connection handle="1" to="O21" connection="5"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
