@@ -12,19 +12,19 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-25 Thu 21:04]
+#+CAPTION: Clock summary at [2019-04-25 Thu 22:12]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *23:32* |       |       | 100.0 |
+| *Total time*                                           | *24:38* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 23:32   |       |       | 100.0 |
-| Active                                                 |         | 23:32 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  2:40 |  11.3 |
-| Sprint and product backlog grooming                    |         |       |  0:22 |   1.6 |
-| Create a video demo for the previous sprint's features |         |       |  1:55 |   8.1 |
-| Read variability papers                                |         |       |  1:04 |   4.5 |
-| Implement variability model                            |         |       | 17:31 |  74.4 |
+| Stories                                                | 24:38   |       |       | 100.0 |
+| Active                                                 |         | 24:38 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  2:40 |  10.8 |
+| Sprint and product backlog grooming                    |         |       |  0:22 |   1.5 |
+| Create a video demo for the previous sprint's features |         |       |  1:55 |   7.8 |
+| Read variability papers                                |         |       |  1:04 |   4.3 |
+| Implement variability model                            |         |       | 18:37 |  75.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -189,6 +189,8 @@ sure our approach is aligned with the literature.
 
 *** STARTED Implement variability model                               :story:
     :LOGBOOK:
+    CLOCK: [2019-04-25 Thu 22:09]--[2019-04-25 Thu 22:12] =>  0:03
+    CLOCK: [2019-04-25 Thu 21:05]--[2019-04-25 Thu 22:08] =>  1:03
     CLOCK: [2019-04-25 Thu 20:19]--[2019-04-25 Thu 21:04] =>  0:45
     CLOCK: [2019-04-25 Thu 19:02]--[2019-04-25 Thu 19:04] =>  0:02
     CLOCK: [2019-04-25 Thu 16:54]--[2019-04-25 Thu 16:59] =>  0:05
@@ -234,7 +236,7 @@ On the back of the redesign of the annotations model, which was
 completed last sprint, we now have to implement all classes and then
 hook them up to the engine.
 
-Notes:
+Order of tasks:
 
 - for the initial test of the changes, we need to obtain the feature
   model as part of the context generation in orchestration's context
@@ -264,6 +266,18 @@ Notes:
 - when all is working, we remove all references to annotation in
   injection, coding and generation.
 - we then remove all legacy types from variability.
+
+Notes:
+
+- qualified name of attributes is not being added. This is probably a
+  bug in adaptor.
+- fabric types are not part of the profile expansion. By sheer luck,
+  this is ok. At present we are also performing annotation expansion
+  at the pre-assembly stage, well before fabric is injected. This
+  makes sense: since we cannot configure fabric elements (they are
+  injected), there is no need to process their configuration. This
+  will be addressed in the future as we make them explicit meta-model
+  elements.
 
 *** Profiles as meta-model elements                                   :story:
 

@@ -25,24 +25,20 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.variability/types/meta_model/configuration_model_set.hpp"
+#include "masd.dogen.coding/types/meta_model/model_set.hpp"
+#include "masd.dogen.orchestration/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::orchestration::transforms {
 
 class coding_model_set_to_configuration_model_set_transform final {
-public:
-    coding_model_set_to_configuration_model_set_transform() = default;
-    coding_model_set_to_configuration_model_set_transform(const coding_model_set_to_configuration_model_set_transform&) = default;
-    coding_model_set_to_configuration_model_set_transform(coding_model_set_to_configuration_model_set_transform&&) = default;
-    ~coding_model_set_to_configuration_model_set_transform() = default;
-    coding_model_set_to_configuration_model_set_transform& operator=(const coding_model_set_to_configuration_model_set_transform&) = default;
+private:
+    static variability::meta_model::configuration_model
+    to_configuration_model(const coding::meta_model::model& m);
 
 public:
-    bool operator==(const coding_model_set_to_configuration_model_set_transform& rhs) const;
-    bool operator!=(const coding_model_set_to_configuration_model_set_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static variability::meta_model::configuration_model_set
+    apply(const context& ctx, const coding::meta_model::model_set& ms);
 };
 
 }
