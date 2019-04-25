@@ -20,6 +20,7 @@
  */
 #include "masd.dogen.coding/test_data/meta_model/model_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/model_set_td.hpp"
+#include "masd.dogen.variability/test_data/meta_model/profile_repository_td.hpp"
 
 namespace {
 
@@ -36,6 +37,11 @@ std::list<masd::dogen::coding::meta_model::model> create_std_list_masd_dogen_cod
     return r;
 }
 
+masd::dogen::variability::meta_model::profile_repository
+create_masd_dogen_variability_meta_model_profile_repository(const unsigned int position) {
+    return masd::dogen::variability::meta_model::profile_repository_generator::create(position);
+}
+
 }
 
 namespace masd::dogen::coding::meta_model {
@@ -46,6 +52,7 @@ void model_set_generator::
 populate(const unsigned int position, result_type& v) {
     v.target(create_masd_dogen_coding_meta_model_model(position + 0));
     v.references(create_std_list_masd_dogen_coding_meta_model_model(position + 1));
+    v.profile_repository(create_masd_dogen_variability_meta_model_profile_repository(position + 2));
 }
 
 model_set_generator::result_type
