@@ -26,6 +26,8 @@
 #include "masd.dogen.variability/io/type_io.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/helpers/feature_selector.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.injection/types/traits.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
@@ -76,14 +78,43 @@ make_references(const type_group& tg, const variability::annotation& a) {
     return std::list<std::string>{};
 }
 
+references_transform::feature_group references_transform::
+make_feature_group(const variability::meta_model::feature_model& fm) {
+    BOOST_LOG_SEV(lg, debug) << "Creating feature group.";
+
+    feature_group r;
+    const variability::helpers::feature_selector s(fm);
+    r.reference = s.get_by_name(traits::reference());
+
+    BOOST_LOG_SEV(lg, debug) << "Created feature group.";
+    return r;
+}
+
+std::list<std::string>
+references_transform::make_references(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) {
+    const variability::helpers::configuration_selector s(cfg);
+    if (s.has_configuration_point(fg.reference))
+        return s.get_text_collection_content(fg.reference);
+
+    return std::list<std::string>{};
+}
+
 void references_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "references transform",
         transform_id, m.name(), *ctx.tracer(), m);
 
-    const auto& tg(make_type_group(*ctx.type_repository()));
-    const auto ra(m.annotation());
-    const auto refs(make_references(tg, ra));
-    m.references(refs);
+    if (ctx.use_configuration()) {
+        const auto &fg(make_feature_group(*ctx.feature_model()));
+        const auto gcfg(*m.configuration());
+        const auto refs(make_references(fg, gcfg));
+        m.references(refs);
+    } else {
+        const auto &tg(make_type_group(*ctx.type_repository()));
+        const auto ra(m.annotation());
+        const auto refs(make_references(tg, ra));
+        m.references(refs);
+    }
 
     stp.end_transform(m);
 }
