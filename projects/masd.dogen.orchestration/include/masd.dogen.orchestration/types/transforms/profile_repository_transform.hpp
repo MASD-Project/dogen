@@ -25,24 +25,20 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.variability/types/meta_model/profile_repository.hpp"
+#include "masd.dogen.coding/types/meta_model/model_set.hpp"
+#include "masd.dogen.orchestration/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::orchestration::transforms {
 
+/**
+ * @brief Builds a profile repository sourcing its data from the
+ * supplied model set.
+ */
 class profile_repository_transform final {
 public:
-    profile_repository_transform() = default;
-    profile_repository_transform(const profile_repository_transform&) = default;
-    profile_repository_transform(profile_repository_transform&&) = default;
-    ~profile_repository_transform() = default;
-    profile_repository_transform& operator=(const profile_repository_transform&) = default;
-
-public:
-    bool operator==(const profile_repository_transform& rhs) const;
-    bool operator!=(const profile_repository_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static variability::meta_model::profile_repository
+    apply(const context& ctx,  const coding::meta_model::model_set& ms);
 };
 
 }

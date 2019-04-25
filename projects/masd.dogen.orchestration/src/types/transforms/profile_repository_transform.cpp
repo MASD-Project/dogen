@@ -18,12 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.variability/io/meta_model/profile_repository_io.hpp"
+#include "masd.dogen.variability/types/transforms/profile_repository_production_chain.hpp"
+#include "masd.dogen.coding/io/meta_model/model_set_io.hpp"
+#include "masd.dogen.orchestration/types/transforms/context.hpp"
 #include "masd.dogen.orchestration/types/transforms/profile_repository_transform.hpp"
+
+namespace {
+
+const std::string
+transform_id("orchestration.transforms.profile_repository_transform");
+
+using namespace masd::dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
 
 namespace masd::dogen::orchestration::transforms {
 
-bool profile_repository_transform::operator==(const profile_repository_transform& /*rhs*/) const {
-    return true;
+variability::meta_model::profile_repository profile_repository_transform::
+apply(const context& ctx,  const coding::meta_model::model_set& ms) {
+    const auto& vctx(ctx.variability_context());
+    tracing::scoped_transform_tracer stp(lg,  "profile repository transform",
+        transform_id, *vctx.tracer(), ms);
+
+    const auto& fm(*ctx.coding_context().feature_model());
+    using variability::transforms::profile_repository_production_chain;
+    const auto r(profile_repository_production_chain::apply(vctx, fm));
+    stp.end_transform(r);
+    return r;
 }
 
 }
