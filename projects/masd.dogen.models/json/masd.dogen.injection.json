@@ -375,6 +375,13 @@
         "masd::object_template"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::configuration_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

@@ -42,6 +42,7 @@
 #include "masd.dogen.injection/types/transforms/transformation_error.hpp"
 #include "masd.dogen.injection/types/transforms/annotations_transform.hpp"
 #include "masd.dogen.injection/types/transforms/model_production_chain.hpp"
+#include "masd.dogen.injection/types/transforms/configuration_transform.hpp"
 #include "masd.dogen.injection/types/transforms/model_set_production_chain.hpp"
 #include "masd.dogen.injection/types/helpers/reference_resolution_exception.hpp"
 #include "masd.dogen.injection/types/transforms/input_technical_space_transform.hpp"
