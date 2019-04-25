@@ -25,24 +25,23 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.injection/types/meta_model/model.hpp"
+#include "masd.dogen.injection/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::injection::transforms {
 
+/**
+ * @brief Transforms the tagged values as read from the external model
+ * into a configuration. No profile binding is made at this point,
+ * just a type transformation into variability types.
+ *
+ * @pre Requires tagged values to have been populated by the decoding
+ * codec.
+ */
 class configuration_transform final {
 public:
-    configuration_transform() = default;
-    configuration_transform(const configuration_transform&) = default;
-    configuration_transform(configuration_transform&&) = default;
-    ~configuration_transform() = default;
-    configuration_transform& operator=(const configuration_transform&) = default;
-
-public:
-    bool operator==(const configuration_transform& rhs) const;
-    bool operator!=(const configuration_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const transforms::context& ctx,
+        meta_model::model& m);
 };
 
 }

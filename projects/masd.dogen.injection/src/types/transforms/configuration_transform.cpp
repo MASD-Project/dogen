@@ -18,12 +18,49 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.variability/types/meta_model/binding_point.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_factory.hpp"
+#include "masd.dogen.injection/io/meta_model/model_io.hpp"
+#include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/configuration_transform.hpp"
+
+namespace {
+
+const std::string transform_id("injector.transforms.configuration_transform");
+
+using namespace masd::dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
 
 namespace masd::dogen::injection::transforms {
 
-bool configuration_transform::operator==(const configuration_transform& /*rhs*/) const {
-    return true;
+void configuration_transform::
+apply(const transforms::context& ctx, meta_model::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "annotations transform",
+        transform_id, m.name(), *ctx.tracer(), m);
+
+    BOOST_LOG_SEV(lg, debug) << "Transforming model: " << m.name()
+                             << "Total elements: " << m.elements().size();
+
+    using bp = variability::meta_model::binding_point;
+    variability::helpers::configuration_factory f(
+        *ctx.archetype_location_repository(),
+        *ctx.feature_model(),
+        ctx.compatibility_mode());
+
+    m.configuration(f.make_shared_ptr(m.tagged_values(), bp::global));
+    for (auto& e : m.elements()) {
+        e.configuration(f.make_shared_ptr(e.tagged_values(), bp::element));
+
+        for (auto& a : e.attributes())
+            a.configuration(f.make_shared_ptr(a.tagged_values(), bp::property));
+    }
+
+    stp.end_transform(m);
+    BOOST_LOG_SEV(lg, debug) << "Transformed model.";
 }
 
 }
