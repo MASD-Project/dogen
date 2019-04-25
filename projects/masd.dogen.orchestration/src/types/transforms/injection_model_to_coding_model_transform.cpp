@@ -23,7 +23,6 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.variability/io/type_io.hpp"
-#include "masd.dogen.variability/types/annotation_factory.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
@@ -260,11 +259,7 @@ apply(const context& ctx, const injection::meta_model::model& m) {
         "injection model to coding model transform", transform_id, m.name(),
         *ctx.coding_context().tracer(), m);
 
-    helpers::stereotypes_helper h;
-    const auto scr(h.from_string(m.stereotypes()));
-    const auto& f(*ctx.coding_context().annotation_factory());
-    const auto scope(variability::scope_types::root_module);
-    const auto ra(f.make(m.tagged_values(), scope));
+    const auto& ra(m.annotation());
 
     const auto& atrp(*ctx.coding_context().type_repository());
     const auto tg(make_type_group(atrp));
@@ -288,7 +283,11 @@ apply(const context& ctx, const injection::meta_model::model& m) {
     r.root_module(boost::make_shared<coding::meta_model::module>());
     r.root_module()->name(r.name());
     r.root_module()->annotation(ra);
+
+    helpers::stereotypes_helper h;
+    const auto scr(h.from_string(m.stereotypes()));
     r.root_module()->dynamic_stereotypes(scr.dynamic_stereotypes());
+
     r.root_module()->documentation(m.documentation());
     insert(r.root_module(), r.modules());
 
