@@ -42,6 +42,10 @@ static logger lg(logger_factory("variability.helpers.template_instantiator"));
 
 const std::string empty;
 const std::string empty_msg("<empty>");
+
+const std::string empty_qualified_name(
+    "Qualified name cannot be empty for instance templates.");
+const std::string empty_owner("Owner cannot be empty.");
 const std::string template_not_instantiable(
     "Template cannot be instantiated: ");
 const std::string empty_simple_name("Simple name cannot be empty.");
@@ -176,12 +180,37 @@ void template_instantiator::validate(const archetypes::location& al,
 meta_model::configuration_point template_instantiator::to_configuration_point(
     const meta_model::feature_model& fm, const std::string& owner,
     const meta_model::configuration_point_template& cpt) const {
+
     /*
-     * First we locate the feature for this configuration point
-     * template.
+     * Determine which qualified name to use for the point's feature.
+     */
+    std::string fqn;
+    if (cpt.kind() == meta_model::template_kind::instance) {
+        /*
+         * Instance templates must have a qualified name.
+         */
+        if (cpt.name().qualified().empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_qualified_name;
+            BOOST_THROW_EXCEPTION(
+                instantiation_exception(empty_qualified_name));
+        }
+        fqn = cpt.name().qualified();
+    } else {
+        /*
+         * Non-instance templates must have a owner.
+         */
+        if (owner.empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_owner;
+            BOOST_THROW_EXCEPTION(instantiation_exception(empty_owner));
+        }
+        fqn = owner + "." + cpt.name().simple();
+    }
+
+    /*
+     * Locate the feature for this configuration point template.
      */
     const auto& bn(fm.by_name());
-    const auto& fqn(cpt.name().qualified());
+    BOOST_LOG_SEV(lg, trace) << "Feature qualified name: " << fqn;
     const auto i(bn.find(fqn));
     if (i == bn.end()) {
         BOOST_LOG_SEV(lg, error) << missing_feature << fqn;
@@ -195,10 +224,7 @@ meta_model::configuration_point template_instantiator::to_configuration_point(
     const auto& feature(i->second);
     meta_model::configuration_point r;
     r.name().simple(feature.name().simple());
-    if (owner.empty())
-        r.name().qualified(fqn);
-    else
-        r.name().qualified(owner + "." + feature.name().simple());
+    r.name().qualified(feature.name().qualified());
 
     /*
      * Finally we can create the value.
@@ -392,18 +418,20 @@ std::list<meta_model::configuration_point> template_instantiator::
 instantiate_facet_template(const meta_model::feature_model& fm,
     const meta_model::configuration_point_template& cpt) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Instantiating template: " << cpt;
-
     const auto& l(cpt.location());
     std::list<meta_model::configuration_point> r;
     for (const auto pair : repository_.facet_names_by_backend_name()) {
         const auto backend_name(pair.first);
-        if (!is_match(l.backend(), backend_name))
+        if (!is_match(l.backend(), backend_name)) {
+            BOOST_LOG_SEV(lg, trace) << "Ignoring backend: " << backend_name;
             continue;
+        }
 
         const auto& facet_names(pair.second);
-        for (const auto facet_name : facet_names)
+        for (const auto facet_name : facet_names) {
+            BOOST_LOG_SEV(lg, trace) << "Processing facet: " << facet_name;
             r.push_back(to_configuration_point(fm, facet_name, cpt));
+        }
     }
     return r;
 }
@@ -450,7 +478,8 @@ template_instantiator::instantiate(const meta_model::feature_model& fm,
     /*
      * Finally, dispatch to the appropriate instantiator.
      */
-    BOOST_LOG_SEV(lg, debug) << "Instantiating template: " << cpt;
+    BOOST_LOG_SEV(lg, debug) << "Instantiating point template: "
+                             << cpt;
 
     const auto tk(cpt.kind());
     if (tk == template_kind::recursive_template)
