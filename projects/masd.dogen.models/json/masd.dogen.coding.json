@@ -36,6 +36,7 @@
       "stereotypes": [
         "Documentable",
         "Annotatable",
+        "Configurable",
         "Nameable"
       ],
       "fallback_element_type": "masd::object",

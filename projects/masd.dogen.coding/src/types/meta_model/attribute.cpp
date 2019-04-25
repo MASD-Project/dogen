@@ -19,6 +19,16 @@
  *
  */
 #include "masd.dogen.coding/types/meta_model/attribute.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& lhs,
+const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
 
 namespace masd::dogen::coding::meta_model {
 
@@ -29,6 +39,7 @@ attribute::attribute()
 attribute::attribute(attribute&& rhs)
     : documentation_(std::move(rhs.documentation_)),
       annotation_(std::move(rhs.annotation_)),
+      configuration_(std::move(rhs.configuration_)),
       name_(std::move(rhs.name_)),
       unparsed_type_(std::move(rhs.unparsed_type_)),
       parsed_type_(std::move(rhs.parsed_type_)),
@@ -39,6 +50,7 @@ attribute::attribute(attribute&& rhs)
 attribute::attribute(
     const std::string& documentation,
     const masd::dogen::variability::annotation& annotation,
+    const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
     const masd::dogen::coding::meta_model::name& name,
     const std::string& unparsed_type,
     const masd::dogen::coding::meta_model::name_tree& parsed_type,
@@ -47,6 +59,7 @@ attribute::attribute(
     const boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties>& orm_properties)
     : documentation_(documentation),
       annotation_(annotation),
+      configuration_(configuration),
       name_(name),
       unparsed_type_(unparsed_type),
       parsed_type_(parsed_type),
@@ -58,6 +71,7 @@ void attribute::swap(attribute& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
     swap(annotation_, other.annotation_);
+    swap(configuration_, other.configuration_);
     swap(name_, other.name_);
     swap(unparsed_type_, other.unparsed_type_);
     swap(parsed_type_, other.parsed_type_);
@@ -69,6 +83,7 @@ void attribute::swap(attribute& other) noexcept {
 bool attribute::operator==(const attribute& rhs) const {
     return documentation_ == rhs.documentation_ &&
         annotation_ == rhs.annotation_ &&
+        configuration_ == rhs.configuration_ &&
         name_ == rhs.name_ &&
         unparsed_type_ == rhs.unparsed_type_ &&
         parsed_type_ == rhs.parsed_type_ &&
@@ -113,6 +128,22 @@ void attribute::annotation(const masd::dogen::variability::annotation& v) {
 
 void attribute::annotation(const masd::dogen::variability::annotation&& v) {
     annotation_ = std::move(v);
+}
+
+const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& attribute::configuration() const {
+    return configuration_;
+}
+
+boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& attribute::configuration() {
+    return configuration_;
+}
+
+void attribute::configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& v) {
+    configuration_ = v;
+}
+
+void attribute::configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>&& v) {
+    configuration_ = std::move(v);
 }
 
 const masd::dogen::coding::meta_model::name& attribute::name() const {

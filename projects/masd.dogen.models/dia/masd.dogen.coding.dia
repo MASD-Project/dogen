@@ -121,7 +121,7 @@
         <dia:string>#attribute#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Documentable, Annotatable, Nameable#</dia:string>
+        <dia:string>#Documentable, Annotatable, Configurable, Nameable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Represents an attribute in an object.#</dia:string>

@@ -25,6 +25,7 @@
 #include "masd.dogen.variability/io/annotation_io.hpp"
 #include "masd.dogen.coding/io/meta_model/attribute_io.hpp"
 #include "masd.dogen.coding/io/meta_model/name_tree_io.hpp"
+#include "masd.dogen.variability/io/meta_model/configuration_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_attribute_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -33,6 +34,22 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\"", "<quote>");
     boost::replace_all(s, "\\", "<backslash>");
     return s;
+}
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
 }
 
 namespace boost {
@@ -63,6 +80,7 @@ std::ostream& operator<<(std::ostream& s, const attribute& v) {
       << "\"__type__\": " << "\"masd::dogen::coding::meta_model::attribute\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"annotation\": " << v.annotation() << ", "
+      << "\"configuration\": " << v.configuration() << ", "
       << "\"name\": " << v.name() << ", "
       << "\"unparsed_type\": " << "\"" << tidy_up_string(v.unparsed_type()) << "\"" << ", "
       << "\"parsed_type\": " << v.parsed_type() << ", "
