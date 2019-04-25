@@ -260,7 +260,7 @@ apply(const context& ctx, const injection::meta_model::model& m) {
         *ctx.coding_context().tracer(), m);
 
     const auto& ra(m.annotation());
-
+    const auto& gcfg(m.configuration());
     const auto& atrp(*ctx.coding_context().type_repository());
     const auto tg(make_type_group(atrp));
     const auto nc(make_naming_configuration(tg, ra));
@@ -283,6 +283,7 @@ apply(const context& ctx, const injection::meta_model::model& m) {
     r.root_module(boost::make_shared<coding::meta_model::module>());
     r.root_module()->name(r.name());
     r.root_module()->annotation(ra);
+    r.root_module()->configuration(gcfg);
 
     helpers::stereotypes_helper h;
     const auto scr(h.from_string(m.stereotypes()));
