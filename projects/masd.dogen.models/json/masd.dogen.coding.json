@@ -418,7 +418,8 @@
       "stereotypes": [
         "Documentable",
         "Nameable",
-        "Annotatable"
+        "Annotatable",
+        "Configurable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2269,7 +2270,8 @@
     {
       "name": "meta_model::variability_profile_template_entry",
       "stereotypes": [
-        "Annotatable"
+        "Annotatable",
+        "Configurable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [

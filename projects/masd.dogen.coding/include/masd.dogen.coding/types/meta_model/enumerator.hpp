@@ -27,8 +27,10 @@
 
 #include <string>
 #include <algorithm>
+#include <boost/shared_ptr.hpp>
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration_fwd.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
@@ -49,6 +51,7 @@ public:
         const std::string& documentation,
         const masd::dogen::coding::meta_model::name& name,
         const masd::dogen::variability::annotation& annotation,
+        const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
         const std::string& value);
 
 public:
@@ -87,6 +90,16 @@ public:
     /**@}*/
 
     /**
+     * @brief Configuration for this element.
+     */
+    /**@{*/
+    const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration() const;
+    boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration();
+    void configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& v);
+    void configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>&& v);
+    /**@}*/
+
+    /**
      * @brief Value for the enumerator.
      *
      * It must be castable to instance of the type defined in the enumeration.
@@ -112,6 +125,7 @@ private:
     std::string documentation_;
     masd::dogen::coding::meta_model::name name_;
     masd::dogen::variability::annotation annotation_;
+    boost::shared_ptr<masd::dogen::variability::meta_model::configuration> configuration_;
     std::string value_;
 };
 

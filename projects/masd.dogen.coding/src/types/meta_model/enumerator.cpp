@@ -19,6 +19,16 @@
  *
  */
 #include "masd.dogen.coding/types/meta_model/enumerator.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& lhs,
+const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
 
 namespace masd::dogen::coding::meta_model {
 
@@ -26,10 +36,12 @@ enumerator::enumerator(
     const std::string& documentation,
     const masd::dogen::coding::meta_model::name& name,
     const masd::dogen::variability::annotation& annotation,
+    const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
     const std::string& value)
     : documentation_(documentation),
       name_(name),
       annotation_(annotation),
+      configuration_(configuration),
       value_(value) { }
 
 void enumerator::swap(enumerator& other) noexcept {
@@ -37,6 +49,7 @@ void enumerator::swap(enumerator& other) noexcept {
     swap(documentation_, other.documentation_);
     swap(name_, other.name_);
     swap(annotation_, other.annotation_);
+    swap(configuration_, other.configuration_);
     swap(value_, other.value_);
 }
 
@@ -44,6 +57,7 @@ bool enumerator::operator==(const enumerator& rhs) const {
     return documentation_ == rhs.documentation_ &&
         name_ == rhs.name_ &&
         annotation_ == rhs.annotation_ &&
+        configuration_ == rhs.configuration_ &&
         value_ == rhs.value_;
 }
 
@@ -99,6 +113,22 @@ void enumerator::annotation(const masd::dogen::variability::annotation& v) {
 
 void enumerator::annotation(const masd::dogen::variability::annotation&& v) {
     annotation_ = std::move(v);
+}
+
+const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& enumerator::configuration() const {
+    return configuration_;
+}
+
+boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& enumerator::configuration() {
+    return configuration_;
+}
+
+void enumerator::configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& v) {
+    configuration_ = v;
+}
+
+void enumerator::configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>&& v) {
+    configuration_ = std::move(v);
 }
 
 const std::string& enumerator::value() const {

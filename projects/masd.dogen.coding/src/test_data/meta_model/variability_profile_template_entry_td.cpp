@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include "masd.dogen.variability/test_data/annotation_td.hpp"
+#include "masd.dogen.variability/test_data/meta_model/configuration_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/variability_profile_template_entry_td.hpp"
 
 namespace {
@@ -27,6 +28,18 @@ namespace {
 masd::dogen::variability::annotation
 create_masd_dogen_variability_annotation(const unsigned int position) {
     return masd::dogen::variability::annotation_generator::create(position);
+}
+
+masd::dogen::variability::meta_model::configuration*
+create_masd_dogen_variability_meta_model_configuration_ptr(const unsigned int position) {
+    return masd::dogen::variability::meta_model::configuration_generator::create_ptr(position);
+}
+
+boost::shared_ptr<masd::dogen::variability::meta_model::configuration>
+create_boost_shared_ptr_masd_dogen_variability_meta_model_configuration(unsigned int position) {
+    boost::shared_ptr<masd::dogen::variability::meta_model::configuration> r(
+        create_masd_dogen_variability_meta_model_configuration_ptr(position));
+    return r;
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -52,8 +65,9 @@ variability_profile_template_entry_generator::variability_profile_template_entry
 void variability_profile_template_entry_generator::
 populate(const unsigned int position, result_type& v) {
     v.annotation(create_masd_dogen_variability_annotation(position + 0));
-    v.name(create_std_string(position + 1));
-    v.value(create_std_list_std_string(position + 2));
+    v.configuration(create_boost_shared_ptr_masd_dogen_variability_meta_model_configuration(position + 1));
+    v.name(create_std_string(position + 2));
+    v.value(create_std_list_std_string(position + 3));
 }
 
 variability_profile_template_entry_generator::result_type
