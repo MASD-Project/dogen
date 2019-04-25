@@ -12,19 +12,19 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-25 Thu 07:05]
+#+CAPTION: Clock summary at [2019-04-25 Thu 09:36]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *17:17* |       |       | 100.0 |
+| *Total time*                                           | *18:10* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 17:17   |       |       | 100.0 |
-| Active                                                 |         | 17:17 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  2:40 |  15.4 |
-| Sprint and product backlog grooming                    |         |       |  0:22 |   2.1 |
-| Create a video demo for the previous sprint's features |         |       |  1:55 |  11.1 |
-| Read variability papers                                |         |       |  1:04 |   6.2 |
-| Implement variability model                            |         |       | 11:16 |  65.2 |
+| Stories                                                | 18:10   |       |       | 100.0 |
+| Active                                                 |         | 18:10 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  2:40 |  14.7 |
+| Sprint and product backlog grooming                    |         |       |  0:22 |   2.0 |
+| Create a video demo for the previous sprint's features |         |       |  1:55 |  10.6 |
+| Read variability papers                                |         |       |  1:04 |   5.9 |
+| Implement variability model                            |         |       | 12:09 |  66.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -136,6 +136,21 @@ Updates to sprint and product backlog.
 
 Demo the delete empty directories feature.
 
+*** COMPLETED Clean up annotation scope types                         :story:
+    CLOSED: [2019-04-25 Thu 09:29]
+
+*Rationale*: this work was carried out as part of the variability model
+redesign.
+
+As part of the attribute rename (which used to be called property) we
+should have renamed the annotation scope as well to attribute.
+
+In addition, we have a scope type of "entity" but the yarn meta-model
+type is really "element".
+
+We should also check if "not applicable" scope is in use, and if not
+delete it.
+
 *** STARTED Read variability papers                                   :story:
     :LOGBOOK:
     CLOCK: [2019-04-22 Mon 17:39]--[2019-04-22 Mon 17:54] =>  0:15
@@ -174,6 +189,8 @@ sure our approach is aligned with the literature.
 
 *** STARTED Implement variability model                               :story:
     :LOGBOOK:
+    CLOCK: [2019-04-25 Thu 08:57]--[2019-04-25 Thu 09:36] =>  0:39
+    CLOCK: [2019-04-25 Thu 07:06]--[2019-04-25 Thu 07:20] =>  0:14
     CLOCK: [2019-04-25 Thu 06:38]--[2019-04-25 Thu 07:05] =>  0:27
     CLOCK: [2019-04-24 Wed 18:45]--[2019-04-24 Wed 18:49] =>  0:04
     CLOCK: [2019-04-24 Wed 17:47]--[2019-04-24 Wed 18:44] =>  0:57
@@ -552,17 +569,6 @@ a second pass, when we have product level support, we could consider
 adding "referenced" models to each model. This means that when we are
 building m we have visibility of how m is used in the product and we
 can take those uses into account when building the DAG.
-
-*** Clean up annotation scope types                                   :story:
-
-As part of the attribute rename (which used to be called property) we
-should have renamed the annotation scope as well to attribute.
-
-In addition, we have a scope type of "entity" but the yarn meta-model
-type is really "element".
-
-We should also check if "not applicable" scope is in use, and if not
-delete it.
 
 *** Add annotation types description                                  :story:
 
