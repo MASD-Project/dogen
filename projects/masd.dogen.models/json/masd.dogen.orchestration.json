@@ -88,6 +88,10 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
+          "name": "variability_context",
+          "type": "variability::transforms::context"
+        },
+        {
           "name": "injection_context",
           "type": "injection::transforms::context"
         },
@@ -102,10 +106,6 @@
         {
           "name": "extraction_context",
           "type": "extraction::transforms::context"
-        },
-        {
-          "name": "variability_context",
-          "type": "variability::transforms::context"
         }
       ]
     },
@@ -215,6 +215,20 @@
     },
     {
       "name": "transforms::extraction_model_production_chain",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::profile_repository_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::profile_binding_transform",
       "stereotypes": [
         "masd::handcrafted"
       ],
