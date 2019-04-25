@@ -67,7 +67,7 @@ profile_template_hydration_transform::obtain_template_filenames(
             BOOST_LOG_SEV(lg, debug) << "Ignoring file: " << f.filename();
             continue;
         }
-        r.push_back(fn);
+        r.push_back(f);
     }
 
     BOOST_LOG_SEV(lg, debug) << "File list: " << r;
