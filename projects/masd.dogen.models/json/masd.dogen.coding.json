@@ -1211,6 +1211,10 @@
           "type": "boost::shared_ptr<variability::type_repository>"
         },
         {
+          "name": "feature_model",
+          "type": "variability::meta_model::feature_model"
+        },
+        {
           "name": "archetype_location_repository",
           "type": "boost::shared_ptr<archetypes::location_repository>"
         },
@@ -2288,6 +2292,13 @@
           "type": "std::list<std::string>"
         }
       ]
+    },
+    {
+      "name": "transforms::profile_repository_transform",
+      "stereotypes": [
+        "masd::handcrafted"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

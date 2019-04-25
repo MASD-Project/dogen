@@ -133,6 +133,7 @@
 #include "masd.dogen.coding/types/transforms/object_templates_transform.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
 #include "masd.dogen.coding/types/meta_model/variability_profile_template.hpp"
+#include "masd.dogen.coding/types/transforms/profile_repository_transform.hpp"
 #include "masd.dogen.coding/types/meta_model/fully_qualified_representation.hpp"
 #include "masd.dogen.coding/types/transforms/annotation_expansion_transform.hpp"
 #include "masd.dogen.coding/types/transforms/extraction_properties_transform.hpp"
