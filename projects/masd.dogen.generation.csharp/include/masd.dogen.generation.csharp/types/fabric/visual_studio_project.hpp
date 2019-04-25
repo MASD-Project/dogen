@@ -52,6 +52,7 @@ public:
         const std::list<std::string>& dynamic_stereotypes,
         const masd::dogen::coding::meta_model::name& meta_name,
         const masd::dogen::coding::meta_model::technical_space intrinsic_technical_space,
+        const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
         const bool is_element_extension,
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,

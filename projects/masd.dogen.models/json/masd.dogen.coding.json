@@ -313,6 +313,21 @@
       ]
     },
     {
+      "name": "meta_model::Configurable",
+      "documentation": "Ability to have meta-data associated.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "configuration",
+          "type": "boost::shared_ptr<variability::meta_model::configuration>",
+          "documentation": "Configuration for this element.\n"
+        }
+      ]
+    },
+    {
       "name": "meta_model::Element",
       "parents": [
         "meta_model::Nameable",
@@ -322,7 +337,8 @@
         "meta_model::Containable",
         "meta_model::Stereotypable",
         "meta_model::MetaNameable",
-        "meta_model::TechnicalSpaceRelationship"
+        "meta_model::TechnicalSpaceRelationship",
+        "meta_model::Configurable"
       ],
       "documentation": "A unit of coding that can be code generated.\n\nWe define the Element object template purely to make our life easier\nwhen creating the element class. It is not required for any other\npurpose.\n",
       "stereotypes": [

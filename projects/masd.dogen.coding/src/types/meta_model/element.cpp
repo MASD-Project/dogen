@@ -28,6 +28,8 @@
 #include "masd.dogen.coding/io/meta_model/origin_types_io.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
+#include "masd.dogen.variability/io/meta_model/configuration_io.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/io/meta_model/artefact_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/local_archetype_location_properties_io.hpp"
 
@@ -62,6 +64,31 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
         s << "\"" << tidy_up_string(*i) << "\"";
     }
     s << "] ";
+    return s;
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& lhs,
+const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
     return s;
 }
 
@@ -137,6 +164,7 @@ element::element(element&& rhs)
       dynamic_stereotypes_(std::move(rhs.dynamic_stereotypes_)),
       meta_name_(std::move(rhs.meta_name_)),
       intrinsic_technical_space_(std::move(rhs.intrinsic_technical_space_)),
+      configuration_(std::move(rhs.configuration_)),
       is_element_extension_(std::move(rhs.is_element_extension_)),
       artefact_properties_(std::move(rhs.artefact_properties_)),
       archetype_location_properties_(std::move(rhs.archetype_location_properties_)),
@@ -153,6 +181,7 @@ element::element(
     const std::list<std::string>& dynamic_stereotypes,
     const masd::dogen::coding::meta_model::name& meta_name,
     const masd::dogen::coding::meta_model::technical_space intrinsic_technical_space,
+    const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
     const bool is_element_extension,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
@@ -167,6 +196,7 @@ element::element(
       dynamic_stereotypes_(dynamic_stereotypes),
       meta_name_(meta_name),
       intrinsic_technical_space_(intrinsic_technical_space),
+      configuration_(configuration),
       is_element_extension_(is_element_extension),
       artefact_properties_(artefact_properties),
       archetype_location_properties_(archetype_location_properties),
@@ -191,6 +221,7 @@ void element::to_stream(std::ostream& s) const {
       << "\"dynamic_stereotypes\": " << dynamic_stereotypes_ << ", "
       << "\"meta_name\": " << meta_name_ << ", "
       << "\"intrinsic_technical_space\": " << intrinsic_technical_space_ << ", "
+      << "\"configuration\": " << configuration_ << ", "
       << "\"is_element_extension\": " << is_element_extension_ << ", "
       << "\"artefact_properties\": " << artefact_properties_ << ", "
       << "\"archetype_location_properties\": " << archetype_location_properties_ << ", "
@@ -210,6 +241,7 @@ void element::swap(element& other) noexcept {
     swap(dynamic_stereotypes_, other.dynamic_stereotypes_);
     swap(meta_name_, other.meta_name_);
     swap(intrinsic_technical_space_, other.intrinsic_technical_space_);
+    swap(configuration_, other.configuration_);
     swap(is_element_extension_, other.is_element_extension_);
     swap(artefact_properties_, other.artefact_properties_);
     swap(archetype_location_properties_, other.archetype_location_properties_);
@@ -227,6 +259,7 @@ bool element::compare(const element& rhs) const {
         dynamic_stereotypes_ == rhs.dynamic_stereotypes_ &&
         meta_name_ == rhs.meta_name_ &&
         intrinsic_technical_space_ == rhs.intrinsic_technical_space_ &&
+        configuration_ == rhs.configuration_ &&
         is_element_extension_ == rhs.is_element_extension_ &&
         artefact_properties_ == rhs.artefact_properties_ &&
         archetype_location_properties_ == rhs.archetype_location_properties_ &&
@@ -367,6 +400,22 @@ masd::dogen::coding::meta_model::technical_space element::intrinsic_technical_sp
 
 void element::intrinsic_technical_space(const masd::dogen::coding::meta_model::technical_space v) {
     intrinsic_technical_space_ = v;
+}
+
+const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& element::configuration() const {
+    return configuration_;
+}
+
+boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& element::configuration() {
+    return configuration_;
+}
+
+void element::configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& v) {
+    configuration_ = v;
+}
+
+void element::configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>&& v) {
+    configuration_ = std::move(v);
 }
 
 bool element::is_element_extension() const {

@@ -31,6 +31,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include <boost/optional.hpp>
+#include <boost/shared_ptr.hpp>
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration.hpp"
@@ -39,6 +40,7 @@
 #include "masd.dogen.coding/types/meta_model/static_stereotypes.hpp"
 #include "masd.dogen.coding/types/meta_model/artefact_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor_fwd.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/local_archetype_location_properties.hpp"
 
 namespace masd::dogen::coding::meta_model {
@@ -74,6 +76,7 @@ public:
         const std::list<std::string>& dynamic_stereotypes,
         const masd::dogen::coding::meta_model::name& meta_name,
         const masd::dogen::coding::meta_model::technical_space intrinsic_technical_space,
+        const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
         const bool is_element_extension,
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
@@ -193,6 +196,16 @@ public:
     /**@}*/
 
     /**
+     * @brief Configuration for this element.
+     */
+    /**@{*/
+    const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration() const;
+    boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration();
+    void configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& v);
+    void configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>&& v);
+    /**@}*/
+
+    /**
      * @brief If true, this element extends another element with the same id.
      */
     /**@{*/
@@ -239,6 +252,7 @@ private:
     std::list<std::string> dynamic_stereotypes_;
     masd::dogen::coding::meta_model::name meta_name_;
     masd::dogen::coding::meta_model::technical_space intrinsic_technical_space_;
+    boost::shared_ptr<masd::dogen::variability::meta_model::configuration> configuration_;
     bool is_element_extension_;
     std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties> artefact_properties_;
     std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties> archetype_location_properties_;
