@@ -1983,10 +1983,6 @@
         {
           "name": "references",
           "type": "std::list<model>"
-        },
-        {
-          "name": "profile_repository",
-          "type": "variability::meta_model::profile_repository"
         }
       ]
     },
@@ -2245,13 +2241,6 @@
       ]
     },
     {
-      "name": "transforms::configuration_transform",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "meta_model::variability_profile_template",
       "parents": [
         "meta_model::element"
@@ -2292,13 +2281,6 @@
           "type": "std::list<std::string>"
         }
       ]
-    },
-    {
-      "name": "transforms::profile_repository_transform",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
     }
   ]
 }

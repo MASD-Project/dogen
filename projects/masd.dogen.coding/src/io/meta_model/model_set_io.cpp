@@ -21,7 +21,6 @@
 #include <ostream>
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/io/meta_model/model_set_io.hpp"
-#include "masd.dogen.variability/io/meta_model/profile_repository_io.hpp"
 
 namespace std {
 
@@ -43,8 +42,7 @@ std::ostream& operator<<(std::ostream& s, const model_set& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::coding::meta_model::model_set\"" << ", "
       << "\"target\": " << v.target() << ", "
-      << "\"references\": " << v.references() << ", "
-      << "\"profile_repository\": " << v.profile_repository()
+      << "\"references\": " << v.references()
       << " }";
     return(s);
 }
