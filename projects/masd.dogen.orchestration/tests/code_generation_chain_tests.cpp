@@ -130,10 +130,10 @@ void execute_code_generation_transform(const boost::filesystem::path& target,
 
 BOOST_AUTO_TEST_SUITE(code_generation_chain_tests)
 
-BOOST_AUTO_TEST_CASE(masd_dogen_annotations_dia_produces_expected_code) {
-    SETUP_TEST_LOG("masd_dogen_annotations_dia_produces_expected_model");
+BOOST_AUTO_TEST_CASE(masd_dogen_variability_dia_produces_expected_code) {
+    SETUP_TEST_LOG("masd_dogen_variability_dia_produces_expected_model");
     using masd::dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_masd_dogen_annotations_dia());
+    const auto t(dogen_generation::input_masd_dogen_variability_dia());
     const auto od(dogen_generation::output_directory());
     execute_code_generation_transform(t, od);
     BOOST_CHECK(are_generated_files_healthy(od, t));

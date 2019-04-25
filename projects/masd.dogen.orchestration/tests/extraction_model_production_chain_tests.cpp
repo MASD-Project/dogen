@@ -434,10 +434,10 @@ bool check_out_of_sync(const boost::filesystem::path& output_dir,
 
 BOOST_AUTO_TEST_SUITE(extraction_model_production_chain_tests)
 
-BOOST_AUTO_TEST_CASE(masd_dogen_annotations_dia_produces_expected_model) {
-    SETUP_TEST_LOG("masd_dogen_annotations_dia_produces_expected_model");
+BOOST_AUTO_TEST_CASE(masd_dogen_variability_dia_produces_expected_model) {
+    SETUP_TEST_LOG("masd_dogen_variability_dia_produces_expected_model");
     using masd::dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_masd_dogen_annotations_dia());
+    const auto t(dogen_generation::input_masd_dogen_variability_dia());
     const auto od(dogen_generation::project_directory());
     const auto m(apply_extraction_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
@@ -810,10 +810,10 @@ BOOST_AUTO_TEST_CASE(masd_csharprefimpl_lammodel_dia_produces_expected_model) {
 
 #endif // ENABLE_CSHARP_REF_IMPL_TESTS
 
-BOOST_AUTO_TEST_CASE(masd_dogen_annotations_json_produces_expected_model) {
-    SETUP_TEST_LOG("masd_dogen_annotations_json_produces_expected_model");
+BOOST_AUTO_TEST_CASE(masd_dogen_variability_json_produces_expected_model) {
+    SETUP_TEST_LOG("masd_dogen_variability_json_produces_expected_model");
     using masd::dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_masd_dogen_annotations_json());
+    const auto t(dogen_generation::input_masd_dogen_variability_json());
     const auto od(dogen_generation::project_directory());
     const auto m(apply_extraction_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));

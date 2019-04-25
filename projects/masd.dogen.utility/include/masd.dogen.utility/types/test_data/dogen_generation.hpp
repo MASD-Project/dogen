@@ -48,7 +48,7 @@ public:
     static boost::filesystem::path output_directory();
 
 public:
-    static boost::filesystem::path input_masd_dogen_annotations_dia();
+    static boost::filesystem::path input_masd_dogen_variability_dia();
     static boost::filesystem::path input_masd_dogen_cli_dia();
     static boost::filesystem::path input_masd_dogen_coding_dia();
     static boost::filesystem::path input_masd_dogen_dia();
@@ -66,7 +66,7 @@ public:
     static boost::filesystem::path input_masd_dogen_utility_dia();
 
 public:
-    static boost::filesystem::path input_masd_dogen_annotations_json();
+    static boost::filesystem::path input_masd_dogen_variability_json();
     static boost::filesystem::path input_masd_dogen_cli_json();
     static boost::filesystem::path input_masd_dogen_coding_json();
     static boost::filesystem::path input_masd_dogen_json();
