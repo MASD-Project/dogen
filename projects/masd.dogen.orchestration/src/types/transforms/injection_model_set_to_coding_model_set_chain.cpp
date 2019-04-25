@@ -22,6 +22,7 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.orchestration/types/transforms/context.hpp"
+#include "masd.dogen.orchestration/types/transforms/profile_repository_transform.hpp"
 #include "masd.dogen.orchestration/types/transforms/injection_model_to_coding_model_transform.hpp"
 #include "masd.dogen.orchestration/types/transforms/injection_model_set_to_coding_model_set_chain.hpp"
 
@@ -60,6 +61,12 @@ apply(const context& ctx, const injection::meta_model::model_set& ms) {
      */
     for (const auto& ref : ms.references())
         r.references().push_back(tf::apply(ctx, ref));
+
+    /*
+     * The second step of processing is to retrieve the variability
+     * data from the models.
+     */
+    const auto prp(profile_repository_transform::apply(ctx, r));
 
     return r;
 }
