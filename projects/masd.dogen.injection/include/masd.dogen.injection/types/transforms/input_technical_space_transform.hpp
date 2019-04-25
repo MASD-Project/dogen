@@ -25,9 +25,12 @@
 #pragma once
 #endif
 
+#include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/type_repository.hpp"
-#include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.injection/types/meta_model/model.hpp"
 #include "masd.dogen.injection/types/transforms/context_fwd.hpp"
 
@@ -48,6 +51,16 @@ private:
 
     static std::string make_input_technical_space(const type_group& tg,
         const variability::annotation& a);
+
+public:
+    struct feature_group {
+        variability::meta_model::feature input_technical_space;
+    };
+
+    static feature_group make_feature_group(const variability::meta_model::feature_model& fm);
+
+    static std::string make_input_technical_space(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
 
 public:
     static void apply(const context& ctx, meta_model::model& m);
