@@ -215,6 +215,11 @@ context context_factory::make_context(const configuration& cfg,
     r.extraction_context().feature_model(fm);
 
     /*
+     * Handle the compatibility mode for all other contexts.
+     */
+    r.injection_context().compatibility_mode(cm);
+
+    /*
      * Populate the output directory.
      */
     r.generation_context().output_directory_path(output_directory);

@@ -39,12 +39,15 @@ namespace masd::dogen::injection::transforms {
 
 class context final {
 public:
-    context() = default;
     ~context() = default;
 
 public:
+    context();
+
     context(
         const std::vector<boost::filesystem::path>& data_directories,
+        const bool compatibility_mode,
+        const bool use_configuration,
         const boost::shared_ptr<masd::dogen::variability::type_repository>& type_repository,
         const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model,
         const boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository,
@@ -54,6 +57,12 @@ public:
 public:
     const std::vector<boost::filesystem::path>& data_directories() const;
     void data_directories(const std::vector<boost::filesystem::path>& v);
+
+    bool compatibility_mode() const;
+    void compatibility_mode(const bool v);
+
+    bool use_configuration() const;
+    void use_configuration(const bool v);
 
     const boost::shared_ptr<masd::dogen::variability::type_repository>& type_repository() const;
     void type_repository(const boost::shared_ptr<masd::dogen::variability::type_repository>& v);
@@ -72,6 +81,8 @@ public:
 
 private:
     std::vector<boost::filesystem::path> data_directories_;
+    bool compatibility_mode_;
+    bool use_configuration_;
     boost::shared_ptr<masd::dogen::variability::type_repository> type_repository_;
     boost::shared_ptr<masd::dogen::variability::meta_model::feature_model> feature_model_;
     boost::shared_ptr<masd::dogen::archetypes::location_repository> archetype_location_repository_;
