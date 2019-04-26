@@ -23,6 +23,8 @@
 #include "masd.dogen.variability/io/type_io.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/helpers/feature_selector.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
@@ -79,17 +81,54 @@ populate_from_annotations(const type_group& tg, meta_model::primitive& p) {
     p.use_type_aliasing(s.get_boolean_content_or_default(tg.use_type_aliasing));
 }
 
+primitives_transform::feature_group primitives_transform::
+make_feature_group(const variability::meta_model::feature_model& fm) {
+    BOOST_LOG_SEV(lg, debug) << "Creating feature group.";
+
+    feature_group r;
+
+    const variability::helpers::feature_selector s(fm);
+
+    const auto in(traits::primitive::is_nullable());
+    r.is_nullable = s.get_by_name(in);
+
+    const auto uta(traits::primitive::use_type_aliasing());
+    r.use_type_aliasing = s.get_by_name(uta);
+
+    BOOST_LOG_SEV(lg, debug) << "Created feature group.";
+    return r;
+}
+
+void primitives_transform::
+populate_from_annotations(const feature_group& fg, meta_model::primitive& p) {
+    const auto& cfg(*p.configuration());
+    const variability::helpers::configuration_selector s(cfg);
+    p.is_nullable(s.get_boolean_content_or_default(fg.is_nullable));
+    p.use_type_aliasing(s.get_boolean_content_or_default(fg.use_type_aliasing));
+}
+
 void primitives_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "primitives transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    const auto tg(make_type_group(*ctx.type_repository()));
-    for (auto& pair : m.primitives()) {
-        const auto& id(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Transforming: " << id;
+    if (ctx.use_configuration()) {
+        const auto fg(make_feature_group(*ctx.feature_model()));
+        for (auto& pair : m.primitives()) {
+            const auto& id(pair.first);
+            BOOST_LOG_SEV(lg, debug) << "Transforming: " << id;
 
-        auto& p(*pair.second);
-        populate_from_annotations(tg, p);
+            auto& p(*pair.second);
+            populate_from_annotations(fg, p);
+        }
+    } else {
+        const auto tg(make_type_group(*ctx.type_repository()));
+        for (auto& pair : m.primitives()) {
+            const auto& id(pair.first);
+            BOOST_LOG_SEV(lg, debug) << "Transforming: " << id;
+
+            auto& p(*pair.second);
+            populate_from_annotations(tg, p);
+        }
     }
 
     stp.end_transform(m);

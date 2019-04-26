@@ -29,6 +29,9 @@
 #include <iosfwd>
 #include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
@@ -50,6 +53,17 @@ private:
 
     static type_group make_type_group(const variability::type_repository& atrp);
     static void populate_from_annotations(const type_group& tg,
+        meta_model::primitive& p);
+
+private:
+    struct feature_group {
+        variability::meta_model::feature is_nullable;
+        variability::meta_model::feature use_type_aliasing;
+    };
+
+    static feature_group make_feature_group(
+        const variability::meta_model::feature_model& fm);
+    static void populate_from_annotations(const feature_group& fg,
         meta_model::primitive& p);
 
 public:
