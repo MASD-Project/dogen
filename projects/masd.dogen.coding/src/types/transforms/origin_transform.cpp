@@ -22,6 +22,8 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/helpers/feature_selector.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
@@ -99,6 +101,24 @@ is_proxy_model(const type_group& tg, const meta_model::model& m) {
     return r;
 }
 
+origin_transform::feature_group origin_transform::
+make_feature_group(const variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const variability::helpers::feature_selector s(fm);
+    r.is_proxy_model = s.get_by_name(traits::is_proxy_model());
+    return r;
+}
+
+bool origin_transform::
+is_proxy_model(const feature_group& fg, const meta_model::model& m) {
+    const auto& cfg(*m.root_module()->configuration());
+    const variability::helpers::configuration_selector s(cfg);
+    const bool r(s.get_boolean_content_or_default(fg.is_proxy_model));
+    BOOST_LOG_SEV(lg, debug) << "Read is proxy model: " << r
+                             << " for model: " << m.name().qualified().dot();
+    return r;
+}
+
 meta_model::origin_types origin_transform::
 compute_origin_types(const meta_model::model& m, const bool is_proxy_model) {
     using meta_model::origin_types;
@@ -122,8 +142,15 @@ apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "origin transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    const auto tg(make_type_group(*ctx.type_repository()));
-    const auto ipm(is_proxy_model(tg, m));
+
+    bool ipm(false);
+    if (ctx.use_configuration()) {
+        const auto fg(make_feature_group(*ctx.feature_model()));
+        ipm = is_proxy_model(fg, m);
+    } else {
+        const auto tg(make_type_group(*ctx.type_repository()));
+        ipm = is_proxy_model(tg, m);
+    }
     const auto ot(compute_origin_types(m, ipm));
     m.origin_type(ot);
 

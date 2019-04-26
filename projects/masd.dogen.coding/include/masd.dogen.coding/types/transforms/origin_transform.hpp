@@ -25,8 +25,11 @@
 #pragma once
 #endif
 
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
@@ -45,6 +48,17 @@ private:
 
     static meta_model::origin_types compute_origin_types(
         const meta_model::model& m, const bool is_proxy_model);
+
+private:
+    struct feature_group {
+        variability::meta_model::feature is_proxy_model;
+    };
+
+    static feature_group make_feature_group(
+        const variability::meta_model::feature_model& fm);
+
+    static bool is_proxy_model(const feature_group& fg,
+        const meta_model::model& m);
 
 public:
     static void apply(const context& ctx, meta_model::model& m);
