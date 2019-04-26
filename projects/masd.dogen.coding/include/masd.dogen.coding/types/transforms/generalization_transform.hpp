@@ -28,6 +28,9 @@
 #include <unordered_set>
 #include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
@@ -51,15 +54,28 @@ private:
         const variability::annotation& a);
 
 private:
+    struct feature_group {
+        variability::meta_model::feature is_final;
+    };
+
+    static feature_group make_feature_group(
+        const variability::meta_model::feature_model& fm);
+
+    static boost::optional<bool> make_is_final(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+private:
     static std::unordered_set<std::string>
     update_and_collect_parent_ids(const helpers::indices& idx,
         meta_model::model& m);
 
     static void populate_properties_up_the_generalization_tree(
-        const type_group& tg, const meta_model::name& leaf,
+        const type_group& tg, const feature_group& fg,
+        const bool use_configuration, const meta_model::name& leaf,
         meta_model::model& m, meta_model::object& o);
 
     static void populate_generalizable_properties(const type_group& tg,
+        const feature_group& fg, const bool use_configuration,
         const std::unordered_set<std::string>& parent_ids,
         meta_model::model& m);
 
