@@ -27,7 +27,11 @@
 
 namespace masd::dogen::generation::transforms {
 
+context::context()
+    : use_configuration_(false) {}
+
 context::context(
+    const bool use_configuration,
     const boost::shared_ptr<masd::dogen::variability::type_repository>& type_repository,
     const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model,
     const boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository,
@@ -36,7 +40,8 @@ context::context(
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer,
     const std::unordered_map<std::string, masd::dogen::generation::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties,
     const boost::filesystem::path& output_directory_path)
-    : type_repository_(type_repository),
+    : use_configuration_(use_configuration),
+      type_repository_(type_repository),
       feature_model_(feature_model),
       archetype_location_repository_(archetype_location_repository),
       annotation_factory_(annotation_factory),
@@ -44,6 +49,14 @@ context::context(
       tracer_(tracer),
       intra_backend_segment_properties_(intra_backend_segment_properties),
       output_directory_path_(output_directory_path) { }
+
+bool context::use_configuration() const {
+    return use_configuration_;
+}
+
+void context::use_configuration(const bool v) {
+    use_configuration_ = v;
+}
 
 const boost::shared_ptr<masd::dogen::variability::type_repository>& context::type_repository() const {
     return type_repository_;
