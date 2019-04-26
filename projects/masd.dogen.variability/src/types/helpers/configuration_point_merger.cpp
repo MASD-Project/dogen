@@ -25,7 +25,7 @@ namespace {
 
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(
-        "variability.helpers..configuration_point_merger"));
+        "variability.helpers.configuration_point_merger"));
 
 }
 
@@ -37,7 +37,7 @@ configuration_point_merger::merge(
     meta_model::configuration_point>& lhs, const std::string& rhs_name,
     const std::unordered_map<std::string,
     meta_model::configuration_point>& rhs) const {
-    BOOST_LOG_SEV(lg, debug) << "Merging configurations. "
+    BOOST_LOG_SEV(lg, debug) << "Merging configurations."
                              << " lhs: " << lhs_name
                              << " rhs: " << rhs_name;
 
