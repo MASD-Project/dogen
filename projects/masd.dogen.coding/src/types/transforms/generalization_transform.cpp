@@ -261,8 +261,8 @@ populate_generalizable_properties(const type_group& tg, const feature_group& fg,
          if (!o.is_leaf())
              continue;
 
-         populate_properties_up_the_generalization_tree(tg, fg, use_configuration,
-             o.name(), m, o);
+         populate_properties_up_the_generalization_tree(tg, fg,
+             use_configuration, o.name(), m, o);
     }
 }
 

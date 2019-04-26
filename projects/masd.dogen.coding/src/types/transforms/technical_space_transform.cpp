@@ -23,6 +23,8 @@
 #include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/helpers/feature_selector.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
@@ -93,6 +95,31 @@ technical_space_transform::make_output_technical_space(const type_group& tg,
     return r;
 }
 
+technical_space_transform::feature_group technical_space_transform::
+make_feature_group(const variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const variability::helpers::feature_selector s(fm);
+    r.output_technical_space =
+        s.get_by_name(traits::output_technical_space());
+    return r;
+}
+
+std::list<meta_model::technical_space>
+technical_space_transform::make_output_technical_space(const feature_group& tg,
+    const variability::meta_model::configuration& cfg) {
+    const variability::helpers::configuration_selector s(cfg);
+
+    std::list<meta_model::technical_space> r;
+    if (!s.has_configuration_point(tg.output_technical_space))
+        return r;
+
+    const auto ots(s.get_text_collection_content(tg.output_technical_space));
+    for (const auto ts : ots)
+        r.push_back(to_technical_space(ts));
+
+    return r;
+}
+
 void technical_space_transform::
 setup_intrinsic_technical_space(meta_model::model& m) {
     meta_model::elements_traversal(m,
@@ -135,9 +162,13 @@ apply(const context& ctx, meta_model::model& m) {
     /*
      * Read the output technical_space requested by the user.
      */
-    const auto ra(m.root_module()->annotation());
+    const auto& ra(m.root_module()->annotation());
+    const auto& cfg(*m.root_module()->configuration());
     const auto tg(make_type_group(*ctx.type_repository()));
-    const auto ol(make_output_technical_space(tg, ra));
+    const auto fg(make_feature_group(*ctx.feature_model()));
+    const auto ol(ctx.use_configuration() ?
+        make_output_technical_space(fg, cfg) :
+        make_output_technical_space(tg, ra));
 
     /*
      * If the user did not set an output technical space, assume the
