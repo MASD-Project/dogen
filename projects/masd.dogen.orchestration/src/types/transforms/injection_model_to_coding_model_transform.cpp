@@ -25,6 +25,7 @@
 #include "masd.dogen.variability/io/type_io.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
@@ -259,8 +260,12 @@ apply(const context& ctx, const injection::meta_model::model& m) {
         "injection model to coding model transform", transform_id, m.name(),
         *ctx.coding_context().tracer(), m);
 
+    /*
+     * First we compute the model name and technical space by reading
+     * data from configuration.
+     */
     const auto& ra(m.annotation());
-    const auto& gcfg(m.configuration());
+    auto& gcfg(m.configuration());
     const auto& atrp(*ctx.coding_context().type_repository());
     const auto tg(make_type_group(atrp));
     const auto nc(make_naming_configuration(tg, ra));
@@ -271,26 +276,37 @@ apply(const context& ctx, const injection::meta_model::model& m) {
     b.external_modules(model_location.external_modules());
     b.model_modules(model_location.model_modules());
     r.name(b.build());
+    r.input_technical_space(to_technical_space(m.input_technical_space()));
     BOOST_LOG_SEV(lg, debug) << "Computed model name: " << r.name();
 
-    r.input_technical_space(to_technical_space(m.input_technical_space()));
+    /*
+     * Then we populate all model elements by adapting the injection
+     * elements into coding elements.
+     */
     const helpers::adapter ad;
     for (const auto& e : m.elements()) {
         const auto l(e.in_global_module() ? empty_location : model_location);
         process_element(ad, l, e, r);
     }
 
+    /*
+     * Finally we handle the creation of the root module. This is done
+     * separately from regular module processing due to the vagaries
+     * of the root module: its not an element from an injection
+     * perspective, etc.
+     */
     r.root_module(boost::make_shared<coding::meta_model::module>());
-    r.root_module()->name(r.name());
-    r.root_module()->annotation(ra);
-    r.root_module()->configuration(gcfg);
-    r.root_module()->is_root(true);
+    auto& rm(*r.root_module());
+    rm.name(r.name());
+    rm.annotation(ra);
+    rm.configuration(gcfg);
+    rm.configuration()->name().qualified(rm.name().qualified().dot());
+    rm.is_root(true);
 
     helpers::stereotypes_helper h;
     const auto scr(h.from_string(m.stereotypes()));
-    r.root_module()->dynamic_stereotypes(scr.dynamic_stereotypes());
-
-    r.root_module()->documentation(m.documentation());
+    rm.dynamic_stereotypes(scr.dynamic_stereotypes());
+    rm.documentation(m.documentation());
     insert(r.root_module(), r.modules());
 
     stp.end_transform(r);
