@@ -12,19 +12,19 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-26 Fri 10:04]
+#+CAPTION: Clock summary at [2019-04-26 Fri 10:41]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *27:02* |       |       | 100.0 |
+| *Total time*                                           | *27:38* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 27:02   |       |       | 100.0 |
-| Active                                                 |         | 27:02 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  2:40 |   9.9 |
-| Sprint and product backlog grooming                    |         |       |  0:42 |   2.6 |
-| Create a video demo for the previous sprint's features |         |       |  1:55 |   7.1 |
+| Stories                                                | 27:38   |       |       | 100.0 |
+| Active                                                 |         | 27:38 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  2:40 |   9.7 |
+| Sprint and product backlog grooming                    |         |       |  0:42 |   2.5 |
+| Create a video demo for the previous sprint's features |         |       |  1:55 |   6.9 |
 | Read variability papers                                |         |       |  1:04 |   3.9 |
-| Implement variability model                            |         |       | 20:41 |  76.5 |
+| Implement variability model                            |         |       | 21:17 |  77.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -190,6 +190,7 @@ sure our approach is aligned with the literature.
 
 *** STARTED Implement variability model                               :story:
     :LOGBOOK:
+    CLOCK: [2019-04-26 Fri 10:05]--[2019-04-26 Fri 10:41] =>  0:36
     CLOCK: [2019-04-26 Fri 09:33]--[2019-04-26 Fri 10:04] =>  0:31
     CLOCK: [2019-04-26 Fri 09:17]--[2019-04-26 Fri 09:32] =>  0:15
     CLOCK: [2019-04-26 Fri 08:51]--[2019-04-26 Fri 09:16] =>  0:25
@@ -284,6 +285,12 @@ Notes:
   injected), there is no need to process their configuration. This
   will be addressed in the future as we make them explicit meta-model
   elements.
+
+*** Remove dynamic stereotypes from coding                            :story:
+
+Now that we are intercepting the dynamic stereotypes coming in from
+injection and directly populating the configuration, there is no need
+to store them in the modeling element.
 
 *** Profiles as meta-model elements                                   :story:
 

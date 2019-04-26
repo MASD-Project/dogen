@@ -26,6 +26,7 @@
 #include "masd.dogen.coding/io/meta_model/location_io.hpp"
 #include "masd.dogen.coding/types/helpers/name_builder.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
+#include "masd.dogen.orchestration/types/helpers/stereotypes_helper.hpp"
 #include "masd.dogen.orchestration/types/helpers/adaptation_exception.hpp"
 #include "masd.dogen.orchestration/types/helpers/adapter.hpp"
 
@@ -112,8 +113,15 @@ adapter::to_attribute(const coding::meta_model::name& owner,
     r.unparsed_type(ia.type());
     r.documentation(ia.documentation());
     r.annotation(ia.annotation());
+
     r.configuration(ia.configuration());
     r.configuration()->name().qualified(r.name().qualified().dot());
+
+    helpers::stereotypes_helper h;
+    const auto scr(h.from_string(ia.stereotypes()));
+    const auto& ds(scr.dynamic_stereotypes());
+    for (const auto& s : ds)
+        r.configuration()->profile_bindings().insert(s);
 
     return r;
 }
@@ -134,8 +142,15 @@ adapter::to_enumerator(const coding::meta_model::name& owner,
     r.name(f.build_attribute_name(owner, ia.name()));
     r.documentation(ia.documentation());
     r.annotation(ia.annotation());
+
     r.configuration(ia.configuration());
     r.configuration()->name().qualified(r.name().qualified().dot());
+
+    helpers::stereotypes_helper h;
+    const auto scr(h.from_string(ia.stereotypes()));
+    const auto& ds(scr.dynamic_stereotypes());
+    for (const auto& s : ds)
+        r.configuration()->profile_bindings().insert(s);
 
     return r;
 }
@@ -152,8 +167,12 @@ void adapter::populate_element(const coding::meta_model::location& l,
     const auto& ds(scr.dynamic_stereotypes());
     e.dynamic_stereotypes(ds);
     e.annotation(ie.annotation());
+
     e.configuration(ie.configuration());
     e.configuration()->name().qualified(e.name().qualified().dot());
+    for (const auto& s : ds)
+        e.configuration()->profile_bindings().insert(s);
+
     e.in_global_module(
         l.external_modules().empty() && l.model_modules().empty());
 }
