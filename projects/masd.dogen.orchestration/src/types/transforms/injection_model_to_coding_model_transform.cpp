@@ -248,7 +248,7 @@ process_element(const helpers::adapter& ad,
         break;
     default: {
         const auto s(boost::lexical_cast<std::string>(et));
-        BOOST_LOG_SEV(lg, error) << invalid_element_type << s;;
+        BOOST_LOG_SEV(lg, error) << invalid_element_type << s;
         BOOST_THROW_EXCEPTION(transform_exception(invalid_element_type + s));
     } }
 }
@@ -284,6 +284,7 @@ apply(const context& ctx, const injection::meta_model::model& m) {
     r.root_module()->name(r.name());
     r.root_module()->annotation(ra);
     r.root_module()->configuration(gcfg);
+    r.root_module()->is_root(true);
 
     helpers::stereotypes_helper h;
     const auto scr(h.from_string(m.stereotypes()));

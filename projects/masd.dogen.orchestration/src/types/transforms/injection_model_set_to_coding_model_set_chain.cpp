@@ -21,7 +21,7 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.orchestration/types/transforms/context.hpp"
-#include "masd.dogen.variability/types/transforms/profile_binding_transform.hpp"
+#include "masd.dogen.orchestration/types/transforms/profile_binding_transform.hpp"
 #include "masd.dogen.orchestration/types/transforms/profile_repository_transform.hpp"
 #include "masd.dogen.orchestration/types/transforms/injection_model_to_coding_model_transform.hpp"
 #include "masd.dogen.orchestration/types/transforms/coding_model_set_to_configuration_model_set_transform.hpp"
@@ -58,22 +58,29 @@ apply(const context& ctx, const injection::meta_model::model_set& ms) {
     r.target().origin_type(coding::meta_model::origin_types::target);
 
     /*
-     * Now we do the same thing to the reference models.
+     * Now we do the same conversion to the reference models.
      */
     for (const auto& ref : ms.references())
         r.references().push_back(tf::apply(ctx, ref));
 
     /*
-     * The second step of processing is to retrieve the variability
-     * data from the models.
+     * The second part of this chain handles variability
+     * processing. First we need to retrieve the variability data from
+     * the models.
      */
     const auto prp(profile_repository_transform::apply(ctx, r));
 
     /*
-     * Create the configuration models from the coding model set.
+     * Then we extract the configuration models from the coding model
+     * set.
      */
-    const auto cms(coding_model_set_to_configuration_model_set_transform::apply(ctx, r));
+    auto cms(coding_model_set_to_configuration_model_set_transform::
+        apply(ctx, r));
 
+    /*
+     * Finally, we bind the profiles to the relevant configurations.
+     */
+    profile_binding_transform::apply(ctx, prp, cms);
 
     return r;
 }

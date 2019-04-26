@@ -25,24 +25,21 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.variability/types/meta_model/configuration_model_set.hpp"
+#include "masd.dogen.variability/types/meta_model/profile_repository.hpp"
+#include "masd.dogen.orchestration/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::orchestration::transforms {
 
+/**
+ * @brief Performs profile binding across the entire configuration
+ * model set.
+ */
 class profile_binding_transform final {
 public:
-    profile_binding_transform() = default;
-    profile_binding_transform(const profile_binding_transform&) = default;
-    profile_binding_transform(profile_binding_transform&&) = default;
-    ~profile_binding_transform() = default;
-    profile_binding_transform& operator=(const profile_binding_transform&) = default;
-
-public:
-    bool operator==(const profile_binding_transform& rhs) const;
-    bool operator!=(const profile_binding_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx,
+        const variability::meta_model::profile_repository& prp,
+        variability::meta_model::configuration_model_set& cms);
 };
 
 }

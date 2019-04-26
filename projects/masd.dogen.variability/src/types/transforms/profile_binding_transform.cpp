@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
@@ -45,6 +46,10 @@ const std::string missing_profile(
     "Configuration references a profile that could not be found: ");
 const std::string too_many_binds(
     "Too many candidate labels bind to a profile: ");
+const std::string missing_global_config(
+    "Configuration model set does not have global configuration.");
+const std::string null_local_config(
+    "Configuration model set has a null configuration");
 
 }
 
@@ -200,10 +205,26 @@ void profile_binding_transform::apply(const context& ctx,
     tracing::scoped_transform_tracer stp(lg, "profile binding transform",
         transform_id, transform_id, *ctx.tracer(), cm);
 
+    /*
+     * All configuration models must have a global configuration set.
+     */
+    if (!cm.global()) {
+        BOOST_LOG_SEV(lg, error) << missing_global_config;
+        BOOST_THROW_EXCEPTION(transformation_error(missing_global_config));
+    }
+
     const auto fg(make_feature_group(fm));
     bind(prp, fg, *cm.global());
 
     for (auto& pair : cm.local()) {
+        /*
+         * Local configurations cannot be null.
+         */
+        if (!pair.second) {
+            BOOST_LOG_SEV(lg, error) << null_local_config;
+            BOOST_THROW_EXCEPTION(transformation_error(null_local_config));
+        }
+
         auto& cfg(*pair.second);
         bind(prp, fg, cfg);
     }

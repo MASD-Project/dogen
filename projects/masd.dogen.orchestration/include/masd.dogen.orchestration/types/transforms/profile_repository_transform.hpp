@@ -38,7 +38,7 @@ namespace masd::dogen::orchestration::transforms {
 class profile_repository_transform final {
 public:
     static variability::meta_model::profile_repository
-    apply(const context& ctx,  const coding::meta_model::model_set& ms);
+    apply(const context& ctx, const coding::meta_model::model_set& ms);
 };
 
 }
