@@ -21,8 +21,7 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.variability/types/entry_selector.hpp"
-#include "masd.dogen.variability/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/cmakelists.hpp"
@@ -56,6 +55,10 @@ make_cmakelists(const generation::meta_model::model& m) const {
     r->meta_name(meta_name_factory::make_cmakelists_name());
     r->origin_type(origin_types::target);
     r->intrinsic_technical_space(technical_space::cmake);
+    r->configuration(
+        boost::make_shared<variability::meta_model::configuration>());
+    r->configuration()->name().simple(n.simple());
+    r->configuration()->name().qualified(n.qualified().dot());
 
     BOOST_LOG_SEV(lg, debug) << "Generated CMakeLists.";
     return r;
@@ -72,6 +75,10 @@ make_msbuild_targets(const generation::meta_model::model& m) const {
     r->meta_name(meta_name_factory::make_msbuild_targets_name());
     r->origin_type(origin_types::target);
     r->intrinsic_technical_space(technical_space::xml);
+    r->configuration(
+        boost::make_shared<variability::meta_model::configuration>());
+    r->configuration()->name().simple(n.simple());
+    r->configuration()->name().qualified(n.qualified().dot());
 
     BOOST_LOG_SEV(lg, debug) << "Generated MSBuild Targets.";
     return r;

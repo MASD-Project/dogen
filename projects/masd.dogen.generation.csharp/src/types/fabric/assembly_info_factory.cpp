@@ -20,6 +20,7 @@
  */
 #include <boost/make_shared.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/assembly_info.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
@@ -53,6 +54,10 @@ make(const generation::meta_model::model& m) const {
     r->meta_name(meta_name_factory::make_assembly_info_name());
     r->origin_type(origin_types::target);
     r->intrinsic_technical_space(technical_space::csharp);
+    r->configuration(
+        boost::make_shared<variability::meta_model::configuration>());
+    r->configuration()->name().simple(r->name().simple());
+    r->configuration()->name().qualified(r->name().qualified().dot());
 
     BOOST_LOG_SEV(lg, debug) << "Generated Assembly Info.";
     return r;

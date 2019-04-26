@@ -20,6 +20,7 @@
  */
 #include <boost/make_shared.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
@@ -54,6 +55,10 @@ private:
         r->annotation(e.annotation());
         r->is_element_extension(true);
         r->intrinsic_technical_space(technical_space::cpp);
+        r->configuration(
+            boost::make_shared<variability::meta_model::configuration>());
+        r->configuration()->name().simple(e.name().simple());
+        r->configuration()->name().qualified(e.name().qualified().dot());
         return r;
     }
 

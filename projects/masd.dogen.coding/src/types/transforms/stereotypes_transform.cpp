@@ -25,6 +25,7 @@
 #include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.utility/types/io/vector_io.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
 #include "masd.dogen.coding/types/helpers/resolver.hpp"
@@ -220,6 +221,10 @@ stereotypes_transform::create_visitor(const meta_model::object& o,
     r->origin_type(ot);
     r->documentation(visitor_doc + o.name().simple());
     r->intrinsic_technical_space(meta_model::technical_space::cpp);
+    r->configuration(
+        boost::make_shared<variability::meta_model::configuration>());
+    r->configuration()->name().simple(r->name().simple());
+    r->configuration()->name().qualified(r->name().qualified().dot());
 
     if (leaves.empty()) {
         const auto id(n.qualified().dot());
@@ -405,7 +410,8 @@ bool stereotypes_transform::try_as_object_template(const std::string& s,
 }
 
 void stereotypes_transform::apply(meta_model::object& o, meta_model::model& m) {
-    BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << o.name().qualified().dot();
+    BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: "
+                             << o.name().qualified().dot();
 
     /*
      * If there are no stereotypes of either type, then there is no

@@ -21,6 +21,7 @@
 #include <boost/make_shared.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
@@ -117,6 +118,10 @@ make_solution(const visual_studio_configuration cfg,
     r->project_name(project_name);
     r->project_guid(cfg.project_guid());
     r->project_solution_guid(cfg.project_solution_guid());
+    r->configuration(
+        boost::make_shared<variability::meta_model::configuration>());
+    r->configuration()->name().simple(r->name().simple());
+    r->configuration()->name().qualified(r->name().qualified().dot());
 
     BOOST_LOG_SEV(lg, debug) << "Generated Visual Studio Solution.";
 
@@ -140,6 +145,10 @@ make_project(const visual_studio_configuration cfg,
     r->intrinsic_technical_space(technical_space::xml);
     r->project_name(project_name);
     r->project_guid(cfg.project_guid());
+    r->configuration(
+        boost::make_shared<variability::meta_model::configuration>());
+    r->configuration()->name().simple(r->name().simple());
+    r->configuration()->name().qualified(r->name().qualified().dot());
 
     BOOST_LOG_SEV(lg, debug) << "Generated Visual Studio Project.";
 

@@ -22,6 +22,7 @@
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
@@ -59,6 +60,11 @@ make(const coding::meta_model::name& n,
     r->annotation(a);
     r->is_element_extension(true);
     r->intrinsic_technical_space(technical_space::odb);
+    r->configuration(
+        boost::make_shared<variability::meta_model::configuration>());
+    r->configuration()->name().simple(r->name().simple());
+    r->configuration()->name().qualified(r->name().qualified().dot());
+
     return r;
 }
 
@@ -113,6 +119,11 @@ odb_options_factory::make(const generation::meta_model::model& m) const {
     coo->meta_name(meta_name_factory::make_common_odb_options_name());
     coo->origin_type(origin_types::target);
     coo->intrinsic_technical_space(technical_space::odb);
+    coo->configuration(
+        boost::make_shared<variability::meta_model::configuration>());
+    coo->configuration()->name().simple(coo->name().simple());
+    coo->configuration()->name().qualified(coo->name().qualified().dot());
+
     r.push_back(coo);
 
     BOOST_LOG_SEV(lg, debug) << "Generated ODB Options.";

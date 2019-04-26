@@ -21,6 +21,7 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/registrar.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
@@ -45,6 +46,10 @@ make(const coding::meta_model::name& model_name) const {
     r->name(n);
     r->meta_name(meta_name_factory::make_registrar_name());
     r->intrinsic_technical_space(coding::meta_model::technical_space::cpp);
+    r->configuration(
+        boost::make_shared<variability::meta_model::configuration>());
+    r->configuration()->name().simple(r->name().simple());
+    r->configuration()->name().qualified(r->name().qualified().dot());
     return r;
 }
 

@@ -19,6 +19,7 @@
  *
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/entry_point.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
@@ -47,6 +48,10 @@ make(const coding::meta_model::name& model_name) const {
     r->meta_name(meta_name_factory::make_entry_point_name());
     r->origin_type(origin_types::target);
     r->intrinsic_technical_space(technical_space::agnostic);
+    r->configuration(
+        boost::make_shared<variability::meta_model::configuration>());
+    r->configuration()->name().simple(n.simple());
+    r->configuration()->name().qualified(n.qualified().dot());
 
     return r;
 }

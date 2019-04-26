@@ -22,6 +22,7 @@
 #include <forward_list>
 #include <boost/make_shared.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/types/helpers/building_error.hpp"
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
@@ -117,6 +118,10 @@ generator::create_master_header(const coding::meta_model::name& model_name) {
     r->meta_name(meta_name_factory::make_master_header_name());
     r->origin_type(origin_types::target);
     r->intrinsic_technical_space(technical_space::cpp);
+    r->configuration(
+        boost::make_shared<variability::meta_model::configuration>());
+    r->configuration()->name().simple(r->name().simple());
+    r->configuration()->name().qualified(r->name().qualified().dot());
     return r;
 }
 
