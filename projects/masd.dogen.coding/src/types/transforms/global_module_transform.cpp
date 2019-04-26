@@ -22,6 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/builtin.hpp"
@@ -71,6 +72,11 @@ create_global_module(const meta_model::origin_types ot) {
     r->documentation(global_module_doc);
     r->is_global_module(true);
     r->intrinsic_technical_space(meta_model::technical_space::agnostic);
+    r->configuration(
+        boost::make_shared<variability::meta_model::configuration>());
+    r->configuration()->name().simple(gm);
+    r->configuration()->name().qualified(fqr.dot());
+
     return r;
 }
 

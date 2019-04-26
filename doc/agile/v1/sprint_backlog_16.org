@@ -190,6 +190,7 @@ sure our approach is aligned with the literature.
 
 *** STARTED Implement variability model                               :story:
     :LOGBOOK:
+    CLOCK: [2019-04-26 Fri 13:46]--[2019-04-26 Fri 14:47] =>  1:01
     CLOCK: [2019-04-26 Fri 13:36]--[2019-04-26 Fri 13:45] =>  0:09
     CLOCK: [2019-04-26 Fri 13:14]--[2019-04-26 Fri 13:35] =>  0:21
     CLOCK: [2019-04-26 Fri 11:50]--[2019-04-26 Fri 12:10] =>  0:20
@@ -291,6 +292,9 @@ Notes:
   injected), there is no need to process their configuration. This
   will be addressed in the future as we make them explicit meta-model
   elements.
+- as a test to make sure we've caught all uses of annotation, we
+  should set the pointer to null in the adapter and see if anything
+  breaks.
 
 *** Remove dynamic stereotypes from coding                            :story:
 

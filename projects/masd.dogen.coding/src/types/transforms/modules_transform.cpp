@@ -23,6 +23,7 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
@@ -109,6 +110,10 @@ void modules_transform::create_modules(const std::unordered_map<std::string,
             auto mod(boost::make_shared<meta_model::module>());
             mod->name(n);
             mod->origin_type(m.origin_type());
+            mod->configuration(
+                boost::make_shared<variability::meta_model::configuration>());
+            mod->configuration()->name().simple(n.simple());
+            mod->configuration()->name().qualified(n.qualified().dot());
             m.modules().insert(std::make_pair(n.qualified().dot(), mod));
         }
     }
