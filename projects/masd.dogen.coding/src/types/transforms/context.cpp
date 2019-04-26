@@ -26,7 +26,11 @@
 
 namespace masd::dogen::coding::transforms {
 
+context::context()
+    : use_configuration_(false) {}
+
 context::context(
+    const bool use_configuration,
     const boost::shared_ptr<masd::dogen::variability::type_repository>& type_repository,
     const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model,
     const boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository,
@@ -34,13 +38,22 @@ context::context(
     const boost::shared_ptr<masd::dogen::variability::annotation_expander>& annotation_expander,
     const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& mapping_repository,
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer)
-    : type_repository_(type_repository),
+    : use_configuration_(use_configuration),
+      type_repository_(type_repository),
       feature_model_(feature_model),
       archetype_location_repository_(archetype_location_repository),
       annotation_factory_(annotation_factory),
       annotation_expander_(annotation_expander),
       mapping_repository_(mapping_repository),
       tracer_(tracer) { }
+
+bool context::use_configuration() const {
+    return use_configuration_;
+}
+
+void context::use_configuration(const bool v) {
+    use_configuration_ = v;
+}
 
 const boost::shared_ptr<masd::dogen::variability::type_repository>& context::type_repository() const {
     return type_repository_;
