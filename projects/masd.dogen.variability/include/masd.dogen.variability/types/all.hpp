@@ -94,7 +94,6 @@
 #include "masd.dogen.variability/types/meta_model/configuration_point.hpp"
 #include "masd.dogen.variability/types/helpers/instantiation_exception.hpp"
 #include "masd.dogen.variability/types/transforms/transformation_error.hpp"
-#include "masd.dogen.variability/types/transforms/profile_binding_chain.hpp"
 #include "masd.dogen.variability/types/helpers/feature_template_hydrator.hpp"
 #include "masd.dogen.variability/types/helpers/profile_template_hydrator.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_point_merger.hpp"
