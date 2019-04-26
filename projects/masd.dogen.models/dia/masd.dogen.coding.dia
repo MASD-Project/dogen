@@ -33083,13 +33083,13 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:point val="-133,-6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-133.05,-6.05;-117.265,-1.55"/>
+        <dia:rectangle val="-133.05,-6.05;-112.045,-1.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-133,-6"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.684999999999999"/>
+        <dia:real val="20.905000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -33098,7 +33098,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:string>#variability_profile_template_entry#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Annotatable, Configurable#</dia:string>
+        <dia:string>#Documentable, Annotatable, Configurable, Nameable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -33184,7 +33184,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#name#</dia:string>
+            <dia:string>#key#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -33277,7 +33277,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:point val="-132.162,-14.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-132.912,-15.15;-124.957,-5.25022"/>
+        <dia:rectangle val="-132.912,-15.15;-122.347,-5.25022"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -33285,8 +33285,8 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
       <dia:attribute name="orth_points">
         <dia:point val="-132.162,-14.4"/>
         <dia:point val="-132.162,-8"/>
-        <dia:point val="-125.157,-8"/>
-        <dia:point val="-125.157,-6.05022"/>
+        <dia:point val="-122.547,-8"/>
+        <dia:point val="-122.547,-6.05022"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

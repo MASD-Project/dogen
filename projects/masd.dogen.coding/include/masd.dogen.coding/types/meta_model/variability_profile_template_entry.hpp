@@ -29,6 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
+#include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration_fwd.hpp"
 
@@ -43,12 +44,28 @@ public:
 
 public:
     variability_profile_template_entry(
+        const std::string& documentation,
         const masd::dogen::variability::annotation& annotation,
         const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
-        const std::string& name,
+        const masd::dogen::coding::meta_model::name& name,
+        const std::string& key,
         const std::list<std::string>& value);
 
 public:
+    /**
+     * @brief Code comments.
+     *
+     * These are expected to follow the grammar of the comment processing tools
+     * of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java,
+     * etc.
+     */
+    /**@{*/
+    const std::string& documentation() const;
+    std::string& documentation();
+    void documentation(const std::string& v);
+    void documentation(const std::string&& v);
+    /**@}*/
+
     /**
      * @brief Annotation for this element.
      */
@@ -69,10 +86,20 @@ public:
     void configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>&& v);
     /**@}*/
 
-    const std::string& name() const;
-    std::string& name();
-    void name(const std::string& v);
-    void name(const std::string&& v);
+    /**
+     * @brief Fully qualified name.
+     */
+    /**@{*/
+    const masd::dogen::coding::meta_model::name& name() const;
+    masd::dogen::coding::meta_model::name& name();
+    void name(const masd::dogen::coding::meta_model::name& v);
+    void name(const masd::dogen::coding::meta_model::name&& v);
+    /**@}*/
+
+    const std::string& key() const;
+    std::string& key();
+    void key(const std::string& v);
+    void key(const std::string&& v);
 
     const std::list<std::string>& value() const;
     std::list<std::string>& value();
@@ -90,9 +117,11 @@ public:
     variability_profile_template_entry& operator=(variability_profile_template_entry other);
 
 private:
+    std::string documentation_;
     masd::dogen::variability::annotation annotation_;
     boost::shared_ptr<masd::dogen::variability::meta_model::configuration> configuration_;
-    std::string name_;
+    masd::dogen::coding::meta_model::name name_;
+    std::string key_;
     std::list<std::string> value_;
 };
 

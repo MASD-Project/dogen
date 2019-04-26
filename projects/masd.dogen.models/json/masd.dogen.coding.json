@@ -2267,13 +2267,15 @@
     {
       "name": "meta_model::variability_profile_template_entry",
       "stereotypes": [
+        "Documentable",
         "Annotatable",
-        "Configurable"
+        "Configurable",
+        "Nameable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "name",
+          "name": "key",
           "type": "std::string"
         },
         {

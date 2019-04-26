@@ -20,9 +20,18 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.variability/io/annotation_io.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_io.hpp"
 #include "masd.dogen.coding/io/meta_model/variability_profile_template_entry_io.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
 
 namespace boost {
 
@@ -38,14 +47,6 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::d
     return s;
 }
 
-}
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
 }
 
 namespace std {
@@ -67,9 +68,11 @@ namespace masd::dogen::coding::meta_model {
 std::ostream& operator<<(std::ostream& s, const variability_profile_template_entry& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::coding::meta_model::variability_profile_template_entry\"" << ", "
+      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"annotation\": " << v.annotation() << ", "
       << "\"configuration\": " << v.configuration() << ", "
-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"name\": " << v.name() << ", "
+      << "\"key\": " << "\"" << tidy_up_string(v.key()) << "\"" << ", "
       << "\"value\": " << v.value()
       << " }";
     return(s);

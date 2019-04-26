@@ -367,7 +367,7 @@ adapter::to_variability_profile_template(const coding::meta_model::location& l,
         coding::meta_model::variability_profile_template_entry e;
         e.annotation(attr.annotation());
         e.configuration(attr.configuration());
-        e.name(n);
+        e.key(n);
 
         const auto v(attr.value());
         if (!v.empty())
