@@ -12,19 +12,19 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-26 Fri 07:21]
+#+CAPTION: Clock summary at [2019-04-26 Fri 08:45]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *25:28* |       |       | 100.0 |
+| *Total time*                                           | *25:51* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 25:28   |       |       | 100.0 |
-| Active                                                 |         | 25:28 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  2:40 |  10.5 |
-| Sprint and product backlog grooming                    |         |       |  0:22 |   1.4 |
-| Create a video demo for the previous sprint's features |         |       |  1:55 |   7.5 |
-| Read variability papers                                |         |       |  1:04 |   4.2 |
-| Implement variability model                            |         |       | 19:27 |  76.4 |
+| Stories                                                | 25:51   |       |       | 100.0 |
+| Active                                                 |         | 25:51 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  2:40 |  10.3 |
+| Sprint and product backlog grooming                    |         |       |  0:42 |   2.7 |
+| Create a video demo for the previous sprint's features |         |       |  1:55 |   7.4 |
+| Read variability papers                                |         |       |  1:04 |   4.1 |
+| Implement variability model                            |         |       | 19:30 |  75.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -122,6 +122,7 @@ Happy Modeling!
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-04-26 Fri 08:25]--[2019-04-26 Fri 08:45] =>  0:20
     CLOCK: [2019-04-22 Mon 09:38]--[2019-04-22 Mon 09:48] =>  0:10
     CLOCK: [2019-04-22 Mon 09:25]--[2019-04-22 Mon 09:37] =>  0:12
     :END:
@@ -189,6 +190,7 @@ sure our approach is aligned with the literature.
 
 *** STARTED Implement variability model                               :story:
     :LOGBOOK:
+    CLOCK: [2019-04-26 Fri 07:22]--[2019-04-26 Fri 07:25] =>  1:17
     CLOCK: [2019-04-26 Fri 06:31]--[2019-04-26 Fri 07:21] =>  0:50
     CLOCK: [2019-04-25 Thu 22:09]--[2019-04-25 Thu 22:12] =>  0:03
     CLOCK: [2019-04-25 Thu 21:05]--[2019-04-25 Thu 22:08] =>  1:03

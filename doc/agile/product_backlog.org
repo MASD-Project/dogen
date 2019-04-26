@@ -10909,6 +10909,14 @@ Stuff that is not directly related to the problem domain but its
 needed by Dogen. Tooling, infrastructure, blog posts, etc. However,
 they must still be in keeping with the vision, so not too left field.
 
+*** Consider adding pre-commit hooks                                  :story:
+
+Its not clear how these work with github but they seem interesting.
+
+Links:
+
+- [[https://github.com/pocc/pre-commit-hooks][pre-commit-hooks]]
+
 *** Add fuzzing tests                                                 :story:
 
 We need to setup some basic fuzzing tests for model inputs.
@@ -12685,7 +12693,7 @@ Links:
 - [[https://github.com/pantor/inja][inja]]
 - [[https://github.com/jrziviani/amps][amps]]
 
-*** Model anonymizer and slicer                                       :story:
+*** Model anonymiser and slicer                                       :story:
 
 A user may create a model which triggers a problem in dogen. For
 example it may cause it to abort code generation, or generate invalid
@@ -12718,6 +12726,10 @@ collapse all references of external models (non-proxy) into the same
 model.
 
 Users could run the slicer first and then the anonymizer.
+
+Links:
+
+- [[https://github.com/TonicAI/masquerade][masquerade:]] real time data annonymiser. See this [[https://www.tonic.ai/post/masquerade-a-postgres-proxy/][blog post]].
 
 *** Consider using the fmt library instead of iostreams               :story:
 
@@ -14775,6 +14787,9 @@ Links:
 - [[http://jailer.sourceforge.net/][jailer]]
 - [[https://martinfowler.com/articles/evodb.html][Evolutionary Database Design]]: Fowler article talking about how
   jailer is used with Agile.
+- [[https://github.com/TonicAI/condenser][condenser]]: Condenser is a config-driven database subsetting
+  tool. Seems similar to jailer.
+
 *** Add support for portable services                                 :story:
 
 It seems we just need to generate a small number of files in order to
