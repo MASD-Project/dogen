@@ -21,6 +21,8 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/helpers/feature_selector.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
@@ -80,16 +82,63 @@ expand_type_parameters(const type_group& tg, meta_model::object& o) {
     o.type_parameters(tp);
 }
 
+type_params_transform::feature_group type_params_transform::
+make_feature_group(const variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const variability::helpers::feature_selector s(fm);
+    const auto& vnp(traits::type_parameters::variable_number_of_parameters());
+    r.variable_number_of_parameters = s.get_by_name(vnp);
+
+    const auto& tpc(traits::type_parameters::type_parameters_count());
+    r.type_parameters_count = s.get_by_name(tpc);
+
+    const auto& aih(traits::type_parameters::type_parameters_always_in_heap());
+    r.type_parameters_always_in_heap = s.get_by_name(aih);
+
+    return r;
+}
+
+meta_model::type_parameters
+type_params_transform::make_type_parameters(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) {
+    meta_model::type_parameters r;
+    const variability::helpers::configuration_selector s(cfg);
+
+    const auto& vnp(fg.variable_number_of_parameters);
+    r.variable_number_of_parameters(s.get_boolean_content_or_default(vnp));
+
+    const auto& tpc(fg.type_parameters_count);
+    r.count(static_cast<unsigned int>(s.get_number_content_or_default(tpc)));
+
+    const auto& aih(fg.type_parameters_always_in_heap);
+    r.always_in_heap(s.get_boolean_content_or_default(aih));
+
+    return r;
+}
+
+void type_params_transform::
+expand_type_parameters(const feature_group& fg, meta_model::object& o) {
+    const auto tp(make_type_parameters(fg, *o.configuration()));
+    o.type_parameters(tp);
+}
+
 void type_params_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "type params transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    const auto tg(make_type_group(*ctx.type_repository()));
-    for (auto& pair : m.objects()) {
-        auto& o(*pair.second);
-        expand_type_parameters(tg, o);
+    if (ctx.use_configuration()) {
+        const auto fg(make_feature_group(*ctx.feature_model()));
+        for (auto& pair : m.objects()) {
+            auto& o(*pair.second);
+            expand_type_parameters(fg, o);
+        }
+    } else {
+        const auto tg(make_type_group(*ctx.type_repository()));
+        for (auto& pair : m.objects()) {
+            auto& o(*pair.second);
+            expand_type_parameters(tg, o);
+        }
     }
-
     stp.end_transform(m);
 }
 

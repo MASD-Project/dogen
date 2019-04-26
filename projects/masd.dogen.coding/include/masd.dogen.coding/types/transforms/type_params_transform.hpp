@@ -28,6 +28,9 @@
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.coding/types/meta_model/type_parameters.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
@@ -49,6 +52,24 @@ private:
 
 private:
     static void expand_type_parameters(const type_group& tg,
+        meta_model::object& o);
+
+private:
+    struct feature_group {
+        variability::meta_model::feature variable_number_of_parameters;
+        variability::meta_model::feature type_parameters_count;
+        variability::meta_model::feature type_parameters_always_in_heap;
+    };
+
+    static feature_group make_feature_group(
+        const variability::meta_model::feature_model& fm);
+
+    static meta_model::type_parameters
+    make_type_parameters(const feature_group& fg,
+        const variability::meta_model::configuration& a);
+
+private:
+    static void expand_type_parameters(const feature_group& fg,
         meta_model::object& o);
 
 public:
