@@ -209,6 +209,7 @@ context context_factory::make_context(const configuration& cfg,
      * approach. To be removed once refactor is finished.
      */
     r.injection_context().use_configuration(true);
+    r.coding_context().use_configuration(true);
 
     /*
      * Now we can create the feature model.

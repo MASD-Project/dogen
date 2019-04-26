@@ -57,7 +57,8 @@ public:
         variability::meta_model::feature input_technical_space;
     };
 
-    static feature_group make_feature_group(const variability::meta_model::feature_model& fm);
+    static feature_group make_feature_group(
+        const variability::meta_model::feature_model& fm);
 
     static std::string make_input_technical_space(const feature_group& fg,
         const variability::meta_model::configuration& cfg);

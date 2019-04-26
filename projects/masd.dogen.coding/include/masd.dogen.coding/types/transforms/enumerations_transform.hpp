@@ -30,6 +30,9 @@
 #include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
@@ -71,9 +74,42 @@ private:
     static type_group make_type_group(const variability::type_repository& atrp);
 
 private:
+    struct enumeration_feature_group {
+        variability::meta_model::feature
+        use_implementation_defined_underlying_element;
+        variability::meta_model::feature
+        use_implementation_defined_enumerator_values;
+        variability::meta_model::feature add_invalid_enumerator;
+    };
+
+    struct enumerator_feature_group {
+        variability::meta_model::feature value;
+    };
+
+    struct feature_group {
+        enumeration_feature_group enumeration;
+        enumerator_feature_group enumerator;
+    };
+
+    static enumeration_feature_group make_enumeration_feature_group(
+        const variability::meta_model::feature_model& fm);
+
+    static enumerator_feature_group make_enumerator_feature_group(
+        const variability::meta_model::feature_model& fm);
+
+    static feature_group make_feature_group(
+        const variability::meta_model::feature_model& fm);
+
+private:
     static void populate_from_annotations(const enumeration_type_group& tg,
         meta_model::enumeration& e);
     static void populate_from_annotations(const enumerator_type_group& tg,
+        meta_model::enumerator& e);
+
+private:
+    static void populate_from_configuration(const enumeration_feature_group& fg,
+        meta_model::enumeration& e);
+    static void populate_from_configuration(const enumerator_feature_group& fg,
         meta_model::enumerator& e);
 
 private:
@@ -88,6 +124,7 @@ private:
         const meta_model::name& default_underlying_element_name,
         meta_model::enumeration& e);
     static void expand_enumerators(const enumerator_type_group& tg,
+        const enumerator_feature_group& fg, const bool use_configuration,
         const meta_model::technical_space ts, meta_model::enumeration& e);
 
 public:

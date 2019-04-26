@@ -26,6 +26,8 @@
 #include "masd.dogen.variability/io/type_io.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/helpers/feature_selector.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
@@ -178,6 +180,82 @@ void enumerations_transform::populate_from_annotations(
     }
 }
 
+enumerations_transform::enumeration_feature_group
+enumerations_transform::make_enumeration_feature_group(
+    const variability::meta_model::feature_model& fm) {
+    BOOST_LOG_SEV(lg, debug) << "Creating enumeration feature group.";
+
+    enumeration_feature_group r;
+    const variability::helpers::feature_selector s(fm);
+
+    using en = traits::enumeration;
+    const auto uidue(en::use_implementation_defined_underlying_element());
+    r.use_implementation_defined_underlying_element =
+        s.get_by_name(uidue);
+
+    const auto uidev(en::use_implementation_defined_enumerator_values());
+    r.use_implementation_defined_enumerator_values =
+        s.get_by_name(uidev);
+
+    const auto aie(en::add_invalid_enumerator());
+    r.add_invalid_enumerator = s.get_by_name(aie);
+
+    BOOST_LOG_SEV(lg, debug) << "Created enumeration feature group.";
+    return r;
+}
+
+enumerations_transform::enumerator_feature_group
+enumerations_transform::make_enumerator_feature_group(
+    const variability::meta_model::feature_model& fm) {
+    BOOST_LOG_SEV(lg, debug) << "Creating enumerator feature group.";
+
+    enumerator_feature_group r;
+    const variability::helpers::feature_selector s(fm);
+    r.value = s.get_by_name(traits::enumerator::value());
+
+    BOOST_LOG_SEV(lg, debug) << "Created enumerator feature group.";
+    return r;
+}
+
+enumerations_transform::feature_group enumerations_transform::
+make_feature_group(const variability::meta_model::feature_model& fm) {
+    BOOST_LOG_SEV(lg, debug) << "Creating feature group.";
+
+    feature_group r;
+    r.enumeration = make_enumeration_feature_group(fm);
+    r.enumerator = make_enumerator_feature_group(fm);
+
+    BOOST_LOG_SEV(lg, debug) << "Created feature group.";
+    return r;
+}
+
+void enumerations_transform::populate_from_configuration(
+    const enumeration_feature_group& fg, meta_model::enumeration& e) {
+
+    const auto& cfg(*e.configuration());
+    const variability::helpers::configuration_selector s(cfg);
+    const auto uidue(fg.use_implementation_defined_underlying_element);
+    e.use_implementation_defined_underlying_element(
+        s.get_boolean_content_or_default(uidue));
+
+    const auto uidev(fg.use_implementation_defined_enumerator_values);
+    e.use_implementation_defined_enumerator_values(
+        s.get_boolean_content_or_default(uidev));
+
+    const auto aie(fg.add_invalid_enumerator);
+    e.add_invalid_enumerator(s.get_boolean_content_or_default(aie));
+}
+
+void enumerations_transform::populate_from_configuration(
+    const enumerator_feature_group& fg, meta_model::enumerator& e) {
+    const auto& cfg(*e.configuration());
+    const variability::helpers::configuration_selector s(cfg);
+    if (s.has_configuration_point(fg.value)) {
+        e.value(s.get_text_content(fg.value));
+        BOOST_LOG_SEV(lg, debug) << "Read enumerator value: " << e.value();
+    }
+}
+
 meta_model::name enumerations_transform::
 obtain_enumeration_default_underlying_element_name(const meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Obtaining default enumeration underlying "
@@ -257,6 +335,7 @@ void enumerations_transform::expand_default_underlying_element(
 }
 
 void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
+    const enumerator_feature_group& fg, const bool use_configuration,
     const meta_model::technical_space ts, meta_model::enumeration& e) {
     std::vector<meta_model::enumerator> enumerators;
 
@@ -281,15 +360,18 @@ void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
                 transformation_error(duplicate_enumerator + sn));
         }
 
-        auto copy(en);
-
         /*
          * We try to read the value from the annotations. If its not
          * populated we set it ourselves. Note that it is validation's
          * job to ensure the user doesn't start mixing and matching,
          * populating the value for some enumerators but not others.
          */
-        populate_from_annotations(tg, copy);
+        auto copy(en);
+        if (use_configuration)
+            populate_from_configuration(fg, copy);
+        else
+            populate_from_annotations(tg, copy);
+
         if (copy.value().empty())
             copy.value(boost::lexical_cast<std::string>(pos));
 
@@ -299,8 +381,7 @@ void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
     e.enumerators(enumerators);
 }
 
-void enumerations_transform::apply(const context& ctx,
-    meta_model::model& m) {
+void enumerations_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "enumerations transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
@@ -313,8 +394,10 @@ void enumerations_transform::apply(const context& ctx,
     if (m.enumerations().empty())
         return;
 
+    const auto uc(ctx.use_configuration());
     const auto l(m.input_technical_space());
     const auto tg(make_type_group(*ctx.type_repository()));
+    const auto fg(make_feature_group(*ctx.feature_model()));
     const auto duen(obtain_enumeration_default_underlying_element_name(m));
 
     for (auto& pair : m.enumerations()) {
@@ -322,9 +405,13 @@ void enumerations_transform::apply(const context& ctx,
         BOOST_LOG_SEV(lg, debug) << "Expanding: " << id;
 
         auto& e(*pair.second);
-        populate_from_annotations(tg.enumeration, e);
+        if (uc)
+            populate_from_configuration(fg.enumeration, e);
+        else
+            populate_from_annotations(tg.enumeration, e);
+
         expand_default_underlying_element(duen, e);
-        expand_enumerators(tg.enumerator, l, e);
+        expand_enumerators(tg.enumerator, fg.enumerator, uc, l, e);
     }
 
     stp.end_transform(m);
