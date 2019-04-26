@@ -23,6 +23,8 @@
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/helpers/feature_selector.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline.hpp"
@@ -145,37 +147,102 @@ make_technical_space(const type_group& tg, const variability::annotation& a) {
     return to_technical_space(str);
 }
 
+modelines_transform::feature_group modelines_transform::
+make_feature_group(const variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const variability::helpers::feature_selector s(fm);
+
+    using ml = traits::decoration::modeline;
+    r.editor = s.get_by_name(ml::editor());
+    r.modeline_location = s.get_by_name(ml::location());
+    r.technical_space = s.get_by_name(ml::technical_space());
+    return r;
+}
+
+meta_model::editor modelines_transform::make_editor(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) {
+    const variability::helpers::configuration_selector s(cfg);
+    const auto str(s.get_text_content(fg.editor));
+    return to_editor(str);
+}
+
+meta_model::modeline_location
+modelines_transform::make_modeline_location(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) {
+    const variability::helpers::configuration_selector s(cfg);
+    const auto str(s.get_text_content(fg.modeline_location));
+    return to_modeline_location((str));
+}
+
+meta_model::technical_space
+modelines_transform::make_technical_space(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) {
+    const variability::helpers::configuration_selector s(cfg);
+    const auto str(s.get_text_content(fg.technical_space));
+    return to_technical_space(str);
+}
+
 void modelines_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "modelines transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    const auto tg(make_type_group(*ctx.type_repository()));
-    for(auto& pair : m.modelines()) {
-        const auto id(pair.first);
-        BOOST_LOG_SEV(lg, trace) << "Processing modeline: " << id;
+    if (ctx.use_configuration()) {
+        const auto fg(make_feature_group(*ctx.feature_model()));
+        for(auto& pair : m.modelines()) {
+            const auto id(pair.first);
+            BOOST_LOG_SEV(lg, trace) << "Processing modeline: " << id;
 
-        auto& ml(*pair.second);
-        const auto a(ml.annotation());
+            auto& ml(*pair.second);
+            const auto cfg(*ml.configuration());
 
-        ml.editor(make_editor(tg, a));
-        ml.location(make_modeline_location(tg, a));
-        ml.technical_space(make_technical_space(tg, a));
+            ml.editor(make_editor(fg, cfg));
+            ml.location(make_modeline_location(fg, cfg));
+            ml.technical_space(make_technical_space(fg, cfg));
 
-        if (ml.contained_by().empty()) {
-            BOOST_LOG_SEV(lg, error) << missing_container << id;
-            BOOST_THROW_EXCEPTION(transformation_error(missing_container + id));
+            if (ml.contained_by().empty()) {
+                BOOST_LOG_SEV(lg, error) << missing_container << id;
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(missing_container + id));
+            }
+
+            auto& mgs(m.modeline_groups());
+            const auto i(mgs.find(ml.contained_by()));
+            if (i == mgs.end()) {
+                BOOST_LOG_SEV(lg, error) << missing_group << ml.contained_by();
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(missing_group + ml.contained_by()));
+            }
+            i->second->modelines().push_back(pair.second);
         }
+    } else {
+        const auto tg(make_type_group(*ctx.type_repository()));
+        for(auto& pair : m.modelines()) {
+            const auto id(pair.first);
+            BOOST_LOG_SEV(lg, trace) << "Processing modeline: " << id;
 
-        auto& mgs(m.modeline_groups());
-        const auto i(mgs.find(ml.contained_by()));
-        if (i == mgs.end()) {
-            BOOST_LOG_SEV(lg, error) << missing_group << ml.contained_by();
-            BOOST_THROW_EXCEPTION(
-                transformation_error(missing_group + ml.contained_by()));
+            auto& ml(*pair.second);
+            const auto a(ml.annotation());
+
+            ml.editor(make_editor(tg, a));
+            ml.location(make_modeline_location(tg, a));
+            ml.technical_space(make_technical_space(tg, a));
+
+            if (ml.contained_by().empty()) {
+                BOOST_LOG_SEV(lg, error) << missing_container << id;
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(missing_container + id));
+            }
+
+            auto& mgs(m.modeline_groups());
+            const auto i(mgs.find(ml.contained_by()));
+            if (i == mgs.end()) {
+                BOOST_LOG_SEV(lg, error) << missing_group << ml.contained_by();
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(missing_group + ml.contained_by()));
+            }
+            i->second->modelines().push_back(pair.second);
         }
-        i->second->modelines().push_back(pair.second);
     }
-
     stp.end_transform(m);
 }
 

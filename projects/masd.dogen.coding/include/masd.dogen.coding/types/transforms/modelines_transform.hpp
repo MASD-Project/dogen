@@ -28,6 +28,9 @@
 #include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.coding/types/meta_model/editor.hpp"
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_location.hpp"
@@ -62,6 +65,25 @@ private:
         const variability::annotation& a);
     static meta_model::modeline_location make_modeline_location(
         const type_group& tg, const variability::annotation& a);
+
+private:
+    struct feature_group {
+        variability::meta_model::feature editor;
+        variability::meta_model::feature modeline_location;
+        variability::meta_model::feature technical_space;
+    };
+
+    static feature_group make_feature_group(
+        const variability::meta_model::feature_model& fm);
+
+    static meta_model::editor make_editor(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+    static meta_model::technical_space
+    make_technical_space(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+    static meta_model::modeline_location
+    make_modeline_location(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
 
 public:
     static void apply(const context& ctx, meta_model::model& m);
