@@ -85,21 +85,8 @@ void attributes_transform::expand_object(meta_model::object& o,
     }
 
     /*
-     * Setup fluency and immutability on all local attributes. These
-     * are obtained from the object itself.
-     */
-    if (o.is_fluent() || o.is_immutable()) {
-        for (auto& attr : o.local_attributes()) {
-            attr.is_fluent(o.is_fluent());
-            attr.is_immutable(o.is_immutable());
-        }
-    }
-
-    /*
-     * Grab all of the object template attributes in one go, and them
-     * add them to the local attributes at the beginning. The idea is
-     * to keep changes from rippling through, but there is no evidence
-     * that this order is more effective than other alternatives.
+     * Grab all attributes from all of the object templates this
+     * object is associated with, in one go,
      */
     std::list<meta_model::attribute> object_template_attributes;
     for (const auto& otn : o.object_templates()) {
@@ -110,34 +97,50 @@ void attributes_transform::expand_object(meta_model::object& o,
     }
 
     /*
-     * If we are a fluent or an immutable object, we need to mark all
-     * properties we've inherited via object templates - these have
-     * values that are specific to the object coding the object
-     * template. This is actually a bit of a problem because this
-     * means we are instantiating different object templates.
+     * Repopulate the names of attribute sourced from object
+     * templates. These have originally been populated by the adaptor
+     * at the orchestration level. However, as we copied these across,
+     * we need to ensure they are located correctly in coding space:
+     * i.e. their qualified name should indicate that their are no
+     * longer part of the object template and are now part of the
+     * object.
      */
-    if (o.is_fluent() || o.is_immutable()) {
-        for(auto& attr : object_template_attributes) {
-            attr.is_fluent(o.is_fluent());
-            attr.is_immutable(o.is_immutable());
-        }
+    helpers::name_factory f;
+    for (auto& attr : object_template_attributes) {
+        const auto n(f.build_attribute_name(o.name(), attr.name().simple()));
+        attr.name(n);
     }
 
+    /*
+     * Now, copy across the object template attributes into the object
+     * itself, and add them to the local attributes at the
+     * beginning. The idea is to keep changes from rippling through,
+     * but we haven't yet collected evidence to prove this order is
+     * more effective than other alternatives.
+     */
     o.local_attributes().insert(o.local_attributes().begin(),
         object_template_attributes.begin(), object_template_attributes.end());
 
     /*
-     * Expand all attribute names. At this point, we've only populated
-     * attribute simple names. Note that we are doing this after
-     * expanding object template attributes. This is because we want
-     * to ensure the attributes are located correctly in element
-     * space: they are no longer part of the object template but are
-     * now part of the object.
+     * Setup fluency and immutability on all local attributes. Values
+     * for these two properties are inherited from the object
+     * itself. Note that this is done *after* we've merged the object
+     * template's attributes. The logic is as follows: if we are a
+     * fluent or an immutable object, we also need to mark all
+     * properties we've inherited via object templates as these have
+     * values that are specific to the _object_ rather than the object
+     * template. This may actually a bit of a problem because it means
+     * we are instantiating different object templates, some of which
+     * could have been marked as immutable/mutable,
+     * fluent/non-fluent. In effect, it means these properties have no
+     * meaning in the context of object templates. This consistency
+     * problem also applies to parent/descendants.
      */
-    helpers::name_factory f;
-    for (auto& attr : o.local_attributes()) {
-        const auto n(f.build_attribute_name(o.name(), attr.name().simple()));
-        attr.name(n);
+    if (o.is_fluent() || o.is_immutable()) {
+        for (auto& attr : o.local_attributes()) {
+            attr.is_fluent(o.is_fluent());
+            attr.is_immutable(o.is_immutable());
+        }
     }
 
     /*
@@ -189,16 +192,6 @@ void attributes_transform::expand_object_template(
     if (processed_ids.find(ot.name().qualified().dot()) != processed_ids.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object already processed:" << id;
         return;
-    }
-
-    /*
-     * Expand all attribute names. At this point, we've only populated
-     * attribute simple names.
-     */
-    helpers::name_factory f;
-    for (auto& attr : ot.local_attributes()) {
-        const auto n(f.build_attribute_name(ot.name(), attr.name().simple()));
-        attr.name(n);
     }
 
     /*

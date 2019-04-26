@@ -96,7 +96,8 @@ private:
      * @pre name of the injector attribute must not be empty.
      */
     coding::meta_model::attribute
-    to_attribute(const injection::meta_model::attribute& ia) const;
+    to_attribute(const coding::meta_model::name& owner,
+        const injection::meta_model::attribute& ia) const;
 
     /**
      * @brief Converts an injector attribute to an coding enumerator.
@@ -105,7 +106,8 @@ private:
      * @pre type and value of the injector attribute must be empty.
      */
     coding::meta_model::enumerator
-    to_enumerator(const injection::meta_model::attribute& ia) const;
+    to_enumerator(const coding::meta_model::name& owner,
+        const injection::meta_model::attribute& ia) const;
 
 private:
     /**

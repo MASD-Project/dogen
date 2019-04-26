@@ -271,7 +271,6 @@ void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
      * names are unique.
      */
     unsigned int pos(e.add_invalid_enumerator() ? 1 : 0);
-    helpers::name_factory nf;
     std::set<std::string> enumerator_names;
     for (const auto& en : e.enumerators()) {
         const auto sn(en.name().simple());
@@ -294,11 +293,6 @@ void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
         if (copy.value().empty())
             copy.value(boost::lexical_cast<std::string>(pos));
 
-        /*
-         * Expand name. At this point, we've only populated
-         * the enumerator simple name.
-         */
-        copy.name(nf.build_attribute_name(e.name(), copy.name().simple()));
         enumerators.push_back(copy);
         ++pos;
     }

@@ -24,6 +24,7 @@
 #include "masd.dogen.utility/types/string/splitter.hpp"
 #include "masd.dogen.coding/io/meta_model/location_io.hpp"
 #include "masd.dogen.coding/types/helpers/name_builder.hpp"
+#include "masd.dogen.coding/types/helpers/name_factory.hpp"
 #include "masd.dogen.orchestration/types/helpers/adaptation_exception.hpp"
 #include "masd.dogen.orchestration/types/helpers/adapter.hpp"
 
@@ -100,11 +101,14 @@ adapter::to_modeline_field(const injection::meta_model::attribute& ia) const {
 }
 
 coding::meta_model::attribute
-adapter::to_attribute(const injection::meta_model::attribute& ia) const {
+adapter::to_attribute(const coding::meta_model::name& owner,
+    const injection::meta_model::attribute& ia) const {
     ensure_not_empty(ia.name());
 
+    coding::helpers::name_factory f;
     coding::meta_model::attribute r;
-    r.name().simple(ia.name());
+    r.name(f.build_attribute_name(owner, ia.name()));
+    r.name().simple();
     r.unparsed_type(ia.type());
     r.documentation(ia.documentation());
     r.annotation(ia.annotation());
@@ -114,7 +118,8 @@ adapter::to_attribute(const injection::meta_model::attribute& ia) const {
 }
 
 coding::meta_model::enumerator
-adapter::to_enumerator(const injection::meta_model::attribute& ia) const {
+adapter::to_enumerator(const coding::meta_model::name& owner,
+    const injection::meta_model::attribute& ia) const {
     ensure_not_empty(ia.name());
 
     if (!ia.type().empty()) {
@@ -123,8 +128,9 @@ adapter::to_enumerator(const injection::meta_model::attribute& ia) const {
         BOOST_THROW_EXCEPTION(adaptation_exception(enumerator_with_type + t));
     }
 
+    coding::helpers::name_factory f;
     coding::meta_model::enumerator r;
-    r.name().simple(ia.name());
+    r.name(f.build_attribute_name(owner, ia.name()));
     r.documentation(ia.documentation());
     r.annotation(ia.annotation());
     r.configuration(ia.configuration());
@@ -162,7 +168,7 @@ adapter::to_object(const coding::meta_model::location& l,
     r->can_be_primitive_underlier(ie.can_be_primitive_underlier());
 
     for (const auto& attr : ie.attributes())
-        r->local_attributes().push_back(to_attribute(attr));
+        r->local_attributes().push_back(to_attribute(r->name(), attr));
 
     for (const auto& p : ie.parents())
         r->parents().push_back(to_name(l, p));
@@ -181,7 +187,7 @@ adapter::to_object_template(const coding::meta_model::location& l,
     populate_element(l, scr, ie, *r);
 
     for (const auto& attr : ie.attributes())
-        r->local_attributes().push_back(to_attribute(attr));
+        r->local_attributes().push_back(to_attribute(r->name(), attr));
 
     for (const auto& p : ie.parents())
         r->parents().push_back(to_name(l, p));
@@ -224,7 +230,7 @@ adapter::to_enumeration(const coding::meta_model::location& l,
     populate_element(l, scr, ie, *r);
 
     for (const auto& attr : ie.attributes())
-        r->enumerators().push_back(to_enumerator(attr));
+        r->enumerators().push_back(to_enumerator(r->name(), attr));
 
     return r;
 }
