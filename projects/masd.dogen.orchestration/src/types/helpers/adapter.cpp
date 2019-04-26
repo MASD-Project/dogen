@@ -22,6 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/string/splitter.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/io/meta_model/location_io.hpp"
 #include "masd.dogen.coding/types/helpers/name_builder.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
@@ -108,11 +109,11 @@ adapter::to_attribute(const coding::meta_model::name& owner,
     coding::helpers::name_factory f;
     coding::meta_model::attribute r;
     r.name(f.build_attribute_name(owner, ia.name()));
-    r.name().simple();
     r.unparsed_type(ia.type());
     r.documentation(ia.documentation());
     r.annotation(ia.annotation());
     r.configuration(ia.configuration());
+    r.configuration()->name().qualified(r.name().qualified().dot());
 
     return r;
 }
@@ -134,6 +135,7 @@ adapter::to_enumerator(const coding::meta_model::name& owner,
     r.documentation(ia.documentation());
     r.annotation(ia.annotation());
     r.configuration(ia.configuration());
+    r.configuration()->name().qualified(r.name().qualified().dot());
 
     return r;
 }
@@ -151,6 +153,7 @@ void adapter::populate_element(const coding::meta_model::location& l,
     e.dynamic_stereotypes(ds);
     e.annotation(ie.annotation());
     e.configuration(ie.configuration());
+    e.configuration()->name().qualified(e.name().qualified().dot());
     e.in_global_module(
         l.external_modules().empty() && l.model_modules().empty());
 }
@@ -360,14 +363,41 @@ adapter::to_variability_profile_template(const coding::meta_model::location& l,
     auto r(boost::make_shared<variability_profile_template>());
     populate_element(l, scr, ie, *r);
 
+    coding::helpers::name_factory f;
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name());
         ensure_not_empty(n);
 
+        /*
+         * The conventions for naming profile entries are somewhat
+         * confusing. The "simple" name of a profile entry must match
+         * the qualified naem of the feature it is configuring, e.g.:
+         *
+         *     masd.generalization.parent
+         *
+         * The "qualified" name of the profile entry reflects its
+         * position in coding space, and as such is composed of the
+         * coding element that owns the profile entry (the profile):
+         *
+         *     dogen.cpp_artefact_formatter
+         *
+         * Concatenated with the "simple" name, e.g.:
+         *
+         *     dogen.cpp_artefact_formatter.masd.generalization.parent
+         *
+         * Whilst this may not be exactly the most aesthetically
+         * pleasing approach, it is more or less compliant with the
+         * conceptual model for the coding space. It also makes it
+         * really easy to find out where a configuration came from,
+         * when we are looking at a configuration model
+         * representation.
+         */
         coding::meta_model::variability_profile_template_entry e;
+        e.name(f.build_attribute_name(r->name(), n));
+        e.key(n);
         e.annotation(attr.annotation());
         e.configuration(attr.configuration());
-        e.key(n);
+        e.configuration()->name().qualified(e.name().qualified().dot());
 
         const auto v(attr.value());
         if (!v.empty())

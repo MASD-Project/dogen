@@ -21,6 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_model_set_io.hpp"
 #include "masd.dogen.coding/io/meta_model/model_set_io.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
@@ -47,14 +48,15 @@ namespace {
 
 class extractor {
 private:
-    template<typename NameableAndConfigurable>
-    void extract(NameableAndConfigurable& nac) {
-        const auto qn(nac.name().qualified().dot());
+    template<typename Configurable>
+    void extract(Configurable& c) {
+        const auto& n(c.configuration()->name());
+        const auto& qn(n.qualified());
         BOOST_LOG_SEV(lg, trace) << "Extracting: "
-                                 << nac.name().simple()
+                                 << n.simple()
                                  << " (" << qn << ") ";
 
-        auto pair(std::make_pair(qn, nac.configuration()));
+        auto pair(std::make_pair(qn, c.configuration()));
         const auto inserted(model_.local().insert(pair).second);
 
         if (!inserted) {

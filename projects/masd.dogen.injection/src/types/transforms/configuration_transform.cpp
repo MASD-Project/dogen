@@ -52,11 +52,15 @@ apply(const transforms::context& ctx, meta_model::model& m) {
         ctx.compatibility_mode());
 
     m.configuration(f.make_shared_ptr(m.tagged_values(), bp::global));
+    m.configuration()->name().simple(m.name());
     for (auto& e : m.elements()) {
         e.configuration(f.make_shared_ptr(e.tagged_values(), bp::element));
+        e.configuration()->name().simple(e.name());
 
-        for (auto& a : e.attributes())
+        for (auto& a : e.attributes()) {
             a.configuration(f.make_shared_ptr(a.tagged_values(), bp::property));
+            a.configuration()->name().simple(a.name());
+        }
     }
 
     stp.end_transform(m);
