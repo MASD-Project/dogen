@@ -144,7 +144,8 @@ void profile_binding_transform::bind(const meta_model::profile_repository& prp,
     if (bpfn.size() > 1) {
         BOOST_LOG_SEV(lg, error) << too_many_binds << bpfn;
         BOOST_THROW_EXCEPTION(transformation_error(too_many_binds));
-    }
+    } else if (bpfn.empty())
+        BOOST_LOG_SEV(lg, trace) << "Could not find any bindable profiles.";
 
     for (const auto& bl : bpfn) {
         BOOST_LOG_SEV(lg, debug) << "Bound label: " << bl;
@@ -203,7 +204,7 @@ void profile_binding_transform::apply(const context& ctx,
     const meta_model::feature_model& fm,
     meta_model::configuration_model& cm) {
     tracing::scoped_transform_tracer stp(lg, "profile binding transform",
-        transform_id, transform_id, *ctx.tracer(), cm);
+        transform_id/*FIXME*/, transform_id, *ctx.tracer(), cm);
 
     /*
      * All configuration models must have a global configuration set.
