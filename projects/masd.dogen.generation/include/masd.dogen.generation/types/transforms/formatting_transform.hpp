@@ -28,6 +28,9 @@
 #include <string>
 #include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.variability/types/annotation.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/meta_model/formatting_styles.hpp"
@@ -57,6 +60,24 @@ private:
         const variability::annotation& a);
 
     static void apply(const std::unordered_map<std::string, type_group> tgs,
+        coding::meta_model::element& e);
+
+private:
+    struct feature_group {
+        variability::meta_model::feature formatting_style;
+        variability::meta_model::feature formatting_input;
+    };
+
+    static std::unordered_map<std::string, feature_group>
+    make_feature_groups(const variability::meta_model::feature_model& fm,
+        const std::list<archetypes::location>& als);
+
+    static std::unordered_map<std::string, formatting_configuration>
+    make_formatting_configuration(
+        const std::unordered_map<std::string, feature_group>& fgs,
+        const variability::meta_model::configuration& cfg);
+
+    static void apply(const std::unordered_map<std::string, feature_group> fgs,
         coding::meta_model::element& e);
 
 public:

@@ -12,19 +12,19 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-26 Fri 17:29]
+#+CAPTION: Clock summary at [2019-04-26 Fri 18:47]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *31:55* |       |       | 100.0 |
+| *Total time*                                           | *32:47* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 31:55   |       |       | 100.0 |
-| Active                                                 |         | 31:55 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  2:40 |   8.4 |
-| Sprint and product backlog grooming                    |         |       |  0:42 |   2.2 |
-| Create a video demo for the previous sprint's features |         |       |  1:55 |   6.0 |
+| Stories                                                | 32:47   |       |       | 100.0 |
+| Active                                                 |         | 32:47 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  2:40 |   8.1 |
+| Sprint and product backlog grooming                    |         |       |  0:42 |   2.1 |
+| Create a video demo for the previous sprint's features |         |       |  1:55 |   5.8 |
 | Read variability papers                                |         |       |  1:04 |   3.3 |
-| Implement variability model                            |         |       | 25:34 |  80.1 |
+| Implement variability model                            |         |       | 26:26 |  80.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -190,6 +190,7 @@ sure our approach is aligned with the literature.
 
 *** STARTED Implement variability model                               :story:
     :LOGBOOK:
+    CLOCK: [2019-04-26 Fri 17:56]--[2019-04-26 Fri 18:48] =>  0:52
     CLOCK: [2019-04-26 Fri 17:00]--[2019-04-26 Fri 17:29] =>  0:29
     CLOCK: [2019-04-26 Fri 16:41]--[2019-04-26 Fri 16:59] =>  0:18
     CLOCK: [2019-04-26 Fri 16:31]--[2019-04-26 Fri 16:40] =>  0:09
@@ -301,6 +302,7 @@ Notes:
 - as a test to make sure we've caught all uses of annotation, we
   should set the pointer to null in the adapter and see if anything
   breaks.
+- make configuration model =Nameable=.
 
 *** Remove dynamic stereotypes from coding                            :story:
 
