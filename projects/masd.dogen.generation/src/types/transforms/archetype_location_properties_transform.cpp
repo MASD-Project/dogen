@@ -846,8 +846,7 @@ apply(const context& ctx, meta_model::model& m) {
         "archetype location properties transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    // FIXME: hack for now as this is borked
-    if (!ctx.use_configuration()) {
+    if (ctx.use_configuration()) {
         const auto &fm(*ctx.feature_model());
         const auto &alrp(*ctx.archetype_location_repository());
         populate_global_archetype_location_properties(fm, alrp, m);
@@ -858,6 +857,7 @@ apply(const context& ctx, meta_model::model& m) {
         populate_global_archetype_location_properties(atrp, alrp, m);
         populate_local_archetype_location_properties(atrp, alrp, m);
     }
+    stp.end_transform(m);
 }
 
 }
