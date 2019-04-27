@@ -552,6 +552,7 @@ template_instantiator::instantiate(const meta_model::feature_model& fm,
     meta_model::profile r;
     r.name(pt.name());
     r.labels(pt.labels());
+    r.parents(pt.parents());
 
     for (auto& cpt : pt.templates()) {
         const auto cptqn(cpt.name().qualified());

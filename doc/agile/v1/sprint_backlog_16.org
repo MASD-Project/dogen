@@ -190,6 +190,7 @@ sure our approach is aligned with the literature.
 
 *** STARTED Implement variability model                               :story:
     :LOGBOOK:
+    CLOCK: [2019-04-27 Sat 06:45]--[2019-04-27 Sat 07:31] =>  0:46
     CLOCK: [2019-04-27 Sat 06:26]--[2019-04-27 Sat 06:44] =>  0:18
     CLOCK: [2019-04-27 Sat 05:42]--[2019-04-27 Sat 06:25] =>  0:43
     CLOCK: [2019-04-26 Fri 17:56]--[2019-04-26 Fri 18:48] =>  0:52
@@ -305,6 +306,8 @@ Notes:
   should set the pointer to null in the adapter and see if anything
   breaks.
 - make configuration model =Nameable=.
+- archetype location transform has forward decls disabled on input,
+  but still seems to be generating it.
 
 *** Create an element builder                                         :story:
 
