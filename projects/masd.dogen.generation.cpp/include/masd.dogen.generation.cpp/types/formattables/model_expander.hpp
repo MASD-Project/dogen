@@ -28,6 +28,9 @@
 #include <unordered_set>
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.generation/types/meta_model/element_archetype.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/locator.hpp"
@@ -68,11 +71,17 @@ private:
     void expand_build_files(const locator& l, model& fm) const;
 
     void expand_cpp_standard(const variability::type_repository& atrp,
-        const variability::annotation& ra, model& fm) const;
+        const variability::meta_model::feature_model& feature_model,
+        const bool use_configuration,
+        const variability::annotation& ra,
+        const variability::meta_model::configuration& rcfg, model& fm) const;
 
 public:
     void expand(const variability::type_repository& atrp,
+        const variability::meta_model::feature_model& feature_model,
+        const bool use_configuration,
         const variability::annotation& ra,
+        const variability::meta_model::configuration& rcfg,
         const std::unordered_set<generation::meta_model::element_archetype>&
         enabled_archetype_for_element,
         const formatters::repository& frp, const locator& l, model& fm) const;

@@ -45,7 +45,10 @@ private:
 
     void expand_model(
         const variability::type_repository& atrp,
+        const variability::meta_model::feature_model& feature_model,
+        const bool use_configuration,
         const variability::annotation& ra,
+        const variability::meta_model::configuration& rcfg,
         const std::unordered_set<generation::meta_model::element_archetype>&
         enabled_archetype_for_element,
         const formatters::repository& frp, const locator& l,
@@ -54,7 +57,10 @@ private:
 public:
     model execute(
         const variability::type_repository& atrp,
+        const variability::meta_model::feature_model& feature_model,
+        const bool use_configuration,
         const variability::annotation& ra,
+        const variability::meta_model::configuration& rcfg,
         const locator& l, const formatters::repository& frp,
         const generation::meta_model::model& m) const;
 };

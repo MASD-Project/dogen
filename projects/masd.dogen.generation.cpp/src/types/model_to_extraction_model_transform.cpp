@@ -55,11 +55,15 @@ model_to_extraction_model_transform::formatters_repository() const {
 formattables::model
 model_to_extraction_model_transform::create_formattables_model(
     const variability::type_repository& atrp,
+    const variability::meta_model::feature_model& feature_model,
+    const bool use_configuration,
     const variability::annotation& ra,
+    const variability::meta_model::configuration& rcfg,
     const formatters::repository& frp, const formattables::locator& l,
     const generation::meta_model::model& m) const {
     formattables::workflow fw;
-    return fw.execute(atrp, ra, l, frp, m);
+    return fw.execute(atrp, feature_model, use_configuration, ra,
+        rcfg, l, frp, m);
 }
 
 formattables::locator model_to_extraction_model_transform::make_locator(
@@ -177,7 +181,8 @@ extraction::meta_model::model model_to_extraction_model_transform::apply(
     /*
      * Generate the formattables model.
      */
-    const auto fm(create_formattables_model(atrp, ra, frp, l, m));
+    const auto fm(create_formattables_model(atrp, feature_model, uc, ra,
+            rcfg, frp, l, m));
 
     /*
      * Code-generate all artefacts.

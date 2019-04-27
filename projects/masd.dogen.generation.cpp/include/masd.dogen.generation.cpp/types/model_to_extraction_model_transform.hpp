@@ -73,7 +73,10 @@ private:
      */
     formattables::model create_formattables_model(
         const variability::type_repository& atrp,
+        const variability::meta_model::feature_model& feature_model,
+        const bool use_configuration,
         const variability::annotation& ra,
+        const variability::meta_model::configuration& rcfg,
         const formatters::repository& frp, const formattables::locator& l,
         const generation::meta_model::model& m) const;
 

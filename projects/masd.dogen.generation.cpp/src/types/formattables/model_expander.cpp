@@ -96,13 +96,20 @@ void model_expander::expand_build_files(const locator& l, model& fm) const {
 
 void
 model_expander::expand_cpp_standard(const variability::type_repository& atrp,
-    const variability::annotation& ra, model& fm) const {
+    const variability::meta_model::feature_model& feature_model,
+    const bool use_configuration,
+    const variability::annotation& ra,
+    const variability::meta_model::configuration& rcfg, model& fm) const {
     cpp_standard_expander ex;
-    ex.expand(atrp, ra, fm);
+    ex.expand(atrp, feature_model, use_configuration, ra, rcfg, fm);
 }
 
 void model_expander::expand(
-    const variability::type_repository& atrp, const variability::annotation& ra,
+    const variability::type_repository& atrp,
+    const variability::meta_model::feature_model& feature_model,
+    const bool use_configuration,
+    const variability::annotation& ra,
+    const variability::meta_model::configuration& rcfg,
     const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element,
     const formatters::repository& frp, const locator& l, model& fm) const {
@@ -118,7 +125,7 @@ void model_expander::expand(
      * we will use it to check that the enabled facets are compatible
      * with the C++ standard (e.g. hash is not available for C++ 98).
      */
-    expand_cpp_standard(atrp, ra, fm);
+    expand_cpp_standard(atrp, feature_model, use_configuration, ra, rcfg, fm);
 
     /*
      * Canonical formatter expansion must be done before inclusion

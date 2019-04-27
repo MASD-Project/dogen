@@ -21,6 +21,8 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/helpers/feature_selector.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/expansion_error.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/cpp_standard_expander.hpp"
@@ -73,12 +75,35 @@ make_standard(const type_group& tg, const variability::annotation& ra) const {
     return to_cpp_standard(cs);
 }
 
+cpp_standard_expander::feature_group cpp_standard_expander::
+make_feature_group(const variability::meta_model::feature_model& fm) const {
+    const variability::helpers::feature_selector s(fm);
+    feature_group r;
+    const auto cs(traits::cpp::standard());
+    r.cpp_standard = s.get_by_name(cs);
+    return r;
+}
+
+cpp_standards cpp_standard_expander::make_standard(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) const {
+    const variability::helpers::configuration_selector s(cfg);
+    const auto cs(s.get_text_content_or_default(fg.cpp_standard));
+    return to_cpp_standard(cs);
+}
+
 void cpp_standard_expander::
 expand(const variability::type_repository& atrp,
-    const variability::annotation& ra, model& fm) const {
+    const variability::meta_model::feature_model& feature_model,
+    const bool use_configuration,
+    const variability::annotation& ra,
+    const variability::meta_model::configuration& rcfg, model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started expanding C++ standard.";
+
     const auto tg(make_type_group(atrp));
-    fm.cpp_standard(make_standard(tg, ra));
+    const auto fg(make_feature_group(feature_model));
+    const auto cpp_std(use_configuration ?
+        make_standard(fg, rcfg) : make_standard(tg, ra));
+    fm.cpp_standard(cpp_std);
     BOOST_LOG_SEV(lg, debug) << "Finished expanding C++ standard.";
 }
 

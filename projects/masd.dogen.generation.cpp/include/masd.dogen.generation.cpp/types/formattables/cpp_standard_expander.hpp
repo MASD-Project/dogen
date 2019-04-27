@@ -28,6 +28,9 @@
 #include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/cpp_standards.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/model.hpp"
 
@@ -47,9 +50,23 @@ private:
     cpp_standards
     make_standard(const type_group& tg, const variability::annotation& a) const;
 
+private:
+    struct feature_group {
+        variability::meta_model::feature cpp_standard;
+    };
+
+    feature_group make_feature_group(
+        const variability::meta_model::feature_model& fm) const;
+
+    cpp_standards make_standard(const feature_group& fg,
+        const variability::meta_model::configuration& cfg) const;
+
 public:
     void expand(const variability::type_repository& atrp,
-        const variability::annotation& ra, model& fm) const;
+        const variability::meta_model::feature_model& feature_model,
+        const bool use_configuration,
+        const variability::annotation& ra,
+        const variability::meta_model::configuration& rcfg, model& fm) const;
 };
 
 }
