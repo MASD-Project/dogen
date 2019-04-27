@@ -28,6 +28,9 @@
 #include <string>
 #include <boost/optional.hpp>
 #include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.archetypes/types/location_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.generation/types/meta_model/element_archetype.hpp"
@@ -126,6 +129,87 @@ private:
 
     static void populate_local_archetype_location_properties(
         const variability::type_repository& atrp,
+        const archetypes::location_repository& alrp,
+        meta_model::model& m);
+
+private:
+    struct backend_feature_group {
+        variability::meta_model::feature enabled;
+        variability::meta_model::feature directory;
+    };
+
+    struct facet_feature_group {
+        variability::meta_model::feature enabled;
+        variability::meta_model::feature overwrite;
+        boost::optional<variability::meta_model::feature> directory;
+        boost::optional<variability::meta_model::feature> postfix;
+    };
+
+    struct global_archetype_feature_group {
+        variability::meta_model::feature enabled;
+        variability::meta_model::feature overwrite;
+        variability::meta_model::feature postfix;
+    };
+
+    struct local_archetype_feature_group {
+        variability::meta_model::feature facet_enabled;
+        variability::meta_model::feature archetype_enabled;
+        variability::meta_model::feature facet_overwrite;
+        variability::meta_model::feature archetype_overwrite;
+    };
+
+private:
+    static std::unordered_map<std::string, backend_feature_group>
+    make_backend_feature_group(const variability::meta_model::feature_model& fm,
+        const archetypes::location_repository& alrp);
+
+    static std::unordered_map<std::string, facet_feature_group>
+    make_facet_feature_group(const variability::meta_model::feature_model& fm,
+        const archetypes::location_repository& alrp);
+
+    static std::unordered_map<std::string, global_archetype_feature_group>
+    make_global_archetype_feature_group(
+        const variability::meta_model::feature_model& fm,
+        const archetypes::location_repository& alrp);
+
+    static std::unordered_map<std::string, local_archetype_feature_group>
+    make_local_archetype_feature_group(
+        const variability::meta_model::feature_model& fm,
+        const archetypes::location_repository& alrp);
+
+private:
+    static std::unordered_map<std::string, meta_model::backend_properties>
+    obtain_backend_properties(
+        const std::unordered_map<std::string, backend_feature_group>& fgs,
+        const variability::meta_model::configuration& cfg);
+
+    static std::unordered_map<std::string, meta_model::facet_properties>
+    obtain_facet_properties(
+        const std::unordered_map<std::string, facet_feature_group>& fgs,
+        const variability::meta_model::configuration& cfg);
+
+    static std::unordered_map<std::string, meta_model::archetype_properties>
+    obtain_archetype_properties(
+        const std::unordered_map<std::string,
+        global_archetype_feature_group>& fgs,
+        const variability::meta_model::configuration& cfg);
+
+    static void populate_global_archetype_location_properties(
+        const variability::meta_model::feature_model& fm,
+        const archetypes::location_repository& alrp,
+        meta_model::model& m);
+
+    static std::unordered_map<
+        std::string,
+        coding::meta_model::local_archetype_location_properties>
+    obtain_local_archetype_location_properties(
+        const std::unordered_map<std::string,
+        local_archetype_feature_group>& fgs,
+        const std::list<archetypes::location>& als,
+        const variability::meta_model::configuration& cfg);
+
+    static void populate_local_archetype_location_properties(
+        const variability::meta_model::feature_model& fm,
         const archetypes::location_repository& alrp,
         meta_model::model& m);
 

@@ -24,6 +24,8 @@
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/io/type_io.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
+#include "masd.dogen.variability/types/helpers/feature_selector.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/optional_io.hpp"
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
@@ -476,16 +478,386 @@ populate_local_archetype_location_properties(
     }
 }
 
+// FIXME
+
+std::unordered_map<
+    std::string,
+    archetype_location_properties_transform::backend_feature_group>
+archetype_location_properties_transform::
+make_backend_feature_group(const variability::meta_model::feature_model& fm,
+    const archetypes::location_repository& alrp) {
+    std::unordered_map<std::string, backend_feature_group> r;
+
+    const variability::helpers::feature_selector s(fm);
+    for (const auto& pair : alrp.facet_names_by_backend_name()) {
+        const auto& backend(pair.first);
+        backend_feature_group btg;
+        const auto ebl(coding::traits::enabled());
+        btg.enabled = s.get_by_name(backend, ebl);
+
+        const auto dir(coding::traits::directory());
+        btg.directory = s.get_by_name(backend, dir);
+
+        r.insert(std::make_pair(backend, btg));
+    }
+    return r;
+}
+
+std::unordered_map<
+    std::string,
+    archetype_location_properties_transform::facet_feature_group>
+archetype_location_properties_transform::
+make_facet_feature_group(const variability::meta_model::feature_model& fm,
+    const archetypes::location_repository& alrp) {
+    std::unordered_map<std::string, facet_feature_group> r;
+
+    const variability::helpers::feature_selector s(fm);
+    for (const auto& pair : alrp.facet_names_by_backend_name()) {
+        for (const auto& fct : pair.second) {
+            facet_feature_group ftg;
+            const auto ebl(coding::traits::enabled());
+            ftg.enabled = s.get_by_name(fct, ebl);
+
+            const auto ow(coding::traits::overwrite());
+            ftg.overwrite = s.get_by_name(fct, ow);
+
+            ftg.directory = s.try_get_by_name(fct,
+                coding::traits::directory());
+            ftg.postfix = s.try_get_by_name(fct,
+                coding::traits::postfix());
+
+            r.insert(std::make_pair(fct, ftg));
+        }
+    }
+    return r;
+}
+
+std::unordered_map<
+    std::string,
+    archetype_location_properties_transform::global_archetype_feature_group>
+archetype_location_properties_transform::make_global_archetype_feature_group(
+    const variability::meta_model::feature_model& fm,
+    const archetypes::location_repository& alrp) {
+    std::unordered_map<std::string, global_archetype_feature_group> r;
+
+    const variability::helpers::feature_selector s(fm);
+    for (const auto& al : alrp.all()) {
+        global_archetype_feature_group gatg;
+        const auto ebl(coding::traits::enabled());
+        gatg.enabled = s.get_by_name(al.archetype(), ebl);
+
+        const auto ow(coding::traits::overwrite());
+        gatg.overwrite = s.get_by_name(al.archetype(), ow);
+
+        const auto postfix(coding::traits::postfix());
+        gatg.postfix = s.get_by_name(al.archetype(), postfix);
+
+        r.insert(std::make_pair(al.archetype(), gatg));
+    }
+    return r;
+}
+
+std::unordered_map<
+    std::string,
+    archetype_location_properties_transform::local_archetype_feature_group>
+archetype_location_properties_transform::make_local_archetype_feature_group(
+    const variability::meta_model::feature_model& fm,
+    const archetypes::location_repository& alrp) {
+    std::unordered_map<std::string, local_archetype_feature_group> r;
+
+    const variability::helpers::feature_selector s(fm);
+    for (const auto& al : alrp.all()) {
+        local_archetype_feature_group latg;
+        const auto ebl(coding::traits::enabled());
+        latg.facet_enabled = s.get_by_name(al.facet(), ebl);
+        latg.archetype_enabled = s.get_by_name(al.archetype(), ebl);
+
+        const auto ow(coding::traits::overwrite());
+        latg.facet_overwrite = s.get_by_name(al.facet(), ow);
+        latg.archetype_overwrite = s.get_by_name(al.archetype(), ow);
+
+        r.insert(std::make_pair(al.archetype(), latg));
+    }
+    return r;
+}
+
+std::unordered_map<std::string, meta_model::backend_properties>
+archetype_location_properties_transform::obtain_backend_properties(
+    const std::unordered_map<std::string, backend_feature_group>& fgs,
+    const variability::meta_model::configuration& cfg) {
+
+    BOOST_LOG_SEV(lg, debug) << "Creating backend properties.";
+
+    std::unordered_map<std::string, meta_model::backend_properties> r;
+    const variability::helpers::configuration_selector s(cfg);
+    for (const auto& pair : fgs) {
+        const auto& backend(pair.first);
+        const auto& tg(pair.second);
+
+        meta_model::backend_properties bp;
+        bp.enabled(s.get_boolean_content_or_default(tg.enabled));
+        bp.directory(s.get_text_content_or_default(tg.directory));
+
+        r[backend] = bp;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Created backend properties. Result: " << r;
+    return r;
+}
+
+std::unordered_map<std::string, meta_model::facet_properties>
+archetype_location_properties_transform::obtain_facet_properties(
+    const std::unordered_map<std::string, facet_feature_group>& fgs,
+    const variability::meta_model::configuration& cfg) {
+
+    BOOST_LOG_SEV(lg, debug) << "Creating facet properties.";
+
+    std::unordered_map<std::string, meta_model::facet_properties> r;
+    const variability::helpers::configuration_selector s(cfg);
+    for (const auto& pair : fgs) {
+        const auto& facet(pair.first);
+        const auto& tg(pair.second);
+
+        meta_model::facet_properties fp;
+        fp.enabled(s.get_boolean_content_or_default(tg.enabled));
+        fp.overwrite(s.get_boolean_content_or_default(tg.overwrite));
+        if (tg.directory)
+            fp.directory(s.get_text_content_or_default(*tg.directory));
+
+        if (tg.postfix)
+            fp.postfix(s.get_text_content_or_default(*tg.postfix));
+
+        r[facet] = fp;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Created facet properties. Result: " << r;
+    return r;
+}
+
+std::unordered_map<std::string, meta_model::archetype_properties>
+archetype_location_properties_transform::obtain_archetype_properties(
+    const std::unordered_map<std::string, global_archetype_feature_group>& fgs,
+    const variability::meta_model::configuration& ra) {
+
+    BOOST_LOG_SEV(lg, debug) << "Creating archetype properties.";
+
+    std::unordered_map<std::string, meta_model::archetype_properties> r;
+    const variability::helpers::configuration_selector s(ra);
+    for (const auto& pair : fgs) {
+        const auto& archetype(pair.first);
+        const auto& tg(pair.second);
+
+        meta_model::archetype_properties ap;
+        ap.enabled(s.get_boolean_content_or_default(tg.enabled));
+        if (s.has_configuration_point(tg.overwrite))
+            ap.overwrite(s.get_boolean_content(tg.overwrite));
+
+        ap.postfix(s.get_text_content_or_default(tg.postfix));
+
+        r[archetype] = ap;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Created archetype properties. Result: " << r;
+    return r;
+}
+
+void archetype_location_properties_transform::
+populate_global_archetype_location_properties(
+    const variability::meta_model::feature_model& fm,
+    const archetypes::location_repository& alrp,
+    meta_model::model& m) {
+
+    const auto bftg(make_backend_feature_group(fm, alrp));
+    const auto fftg(make_facet_feature_group(fm, alrp));
+    const auto aftg(make_global_archetype_feature_group(fm, alrp));
+
+    const auto& cfg(*m.root_module()->configuration());
+    auto& galp(m.global_archetype_location_properties());
+    galp.backend_properties(obtain_backend_properties(bftg, cfg));
+    galp.facet_properties(obtain_facet_properties(fftg, cfg));
+    galp.archetype_properties(obtain_archetype_properties(aftg, cfg));
+
+    /*
+     * Now populate the denormalised archetype properties by querying
+     * the containers we've already populated.
+     */
+    for (const auto& backend_pair : alrp.by_backend_by_facet()) {
+        /*
+         * First we locate the backend for the current batch of
+         * artchefeature locations.
+         */
+        const auto& bn(backend_pair.first);
+        const auto i(galp.backend_properties().find(bn));
+        if (i == galp.backend_properties().end()) {
+            BOOST_LOG_SEV(lg, error) << backend_not_found << bn;
+            BOOST_THROW_EXCEPTION(transformation_error(backend_not_found + bn));
+        }
+        const auto& backend(i->second);
+
+        /*
+         * Next we loop through all of its facets and locate each facet.
+         */
+        for (const auto& facet_pair : backend_pair.second) {
+            const auto& fn(facet_pair.first);
+            const auto j(galp.facet_properties().find(fn));
+            if (j == galp.facet_properties().end()) {
+                BOOST_LOG_SEV(lg, error) << facet_not_found << fn;
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(facet_not_found + fn));
+            }
+            const auto& facet(j->second);
+
+            /*
+             * Finally we can loop through all of the archetype
+             * locations owned by both this backend and facet and
+             * populate the denormalised properties.
+             */
+            for (const auto& an : facet_pair.second) {
+                meta_model::denormalised_archetype_properties dap;
+                dap.backend_enabled(backend.enabled());
+                dap.backend_directory(backend.directory());
+                dap.facet_enabled(facet.enabled());
+                dap.facet_overwrite(facet.overwrite());
+                dap.facet_directory(facet.directory());
+                dap.facet_postfix(facet.postfix());
+
+                const auto k(galp.archetype_properties().find(an));
+                if (k == galp.archetype_properties().end()) {
+                    BOOST_LOG_SEV(lg, error) << archetype_not_found << an;
+                    BOOST_THROW_EXCEPTION(
+                        transformation_error(archetype_not_found + an));
+                }
+                const auto& archetype(k->second);
+                dap.archetype_enabled(archetype.enabled());
+                dap.archetype_overwrite(archetype.overwrite());
+                dap.archetype_postfix(archetype.postfix());
+                galp.denormalised_archetype_properties()
+                    .insert(std::make_pair(an, dap));
+            }
+        }
+    }
+}
+
+std::unordered_map<std::string,
+                   coding::meta_model::local_archetype_location_properties>
+archetype_location_properties_transform::
+obtain_local_archetype_location_properties(
+    const std::unordered_map<std::string, local_archetype_feature_group>& fgs,
+    const std::list<archetypes::location>& als,
+    const variability::meta_model::configuration& cfg) {
+
+    BOOST_LOG_SEV(lg, debug) << "Creating local archetype location properties.";
+
+    std::unordered_map<
+        std::string,
+        coding::meta_model::local_archetype_location_properties> r;
+    const variability::helpers::configuration_selector s(cfg);
+    for (const auto& al : als) {
+        const auto archetype(al.archetype());
+        const auto i(fgs.find(archetype));
+        if (i == fgs.end()) {
+            BOOST_LOG_SEV(lg, error) << type_group_not_found << archetype;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(type_group_not_found + archetype));
+        }
+        const auto fg(i->second);
+
+        coding::meta_model::local_archetype_location_properties lalp;
+        if (s.has_configuration_point(fg.facet_enabled)) {
+            lalp.facet_enabled(
+                s.get_boolean_content_or_default(fg.facet_enabled));
+        }
+
+        if (s.has_configuration_point(fg.archetype_enabled)) {
+            lalp.archetype_enabled(
+                s.get_boolean_content_or_default(fg.archetype_enabled));
+        }
+
+        if (s.has_configuration_point(fg.facet_overwrite))
+            lalp.facet_overwrite(s.get_boolean_content(fg.facet_overwrite));
+
+        if (s.has_configuration_point(fg.archetype_overwrite)) {
+            lalp.archetype_overwrite(
+                s.get_boolean_content(fg.archetype_overwrite));
+        }
+
+        r[archetype] = lalp;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Created local archetype location properties.";
+    return r;
+}
+
+void archetype_location_properties_transform::
+populate_local_archetype_location_properties(
+    const variability::meta_model::feature_model& fm,
+    const archetypes::location_repository& alrp,
+    meta_model::model& m) {
+    /*
+     * Computes all of the possible features for every archetype
+     * location. Not all of these will be of use to a given element,
+     * because they may not be expressed for that element.
+     */
+    const auto fgs(make_local_archetype_feature_group(fm, alrp));
+
+    /*
+     * Bucket all elements by their meta-name.
+     */
+    std::unordered_map<std::string,
+                       std::list<boost::shared_ptr<coding::meta_model::element>>>
+        bucketed_elements;
+    for (auto ptr : m.elements())
+        bucketed_elements[ptr->meta_name().qualified().dot()].push_back(ptr);
+
+    for (auto& pair : bucketed_elements) {
+        /*
+         * Locate all of the archetype locations that make sense for
+         * the current meta-name. If none do, there nothing for us to
+         * do here. This can happen if the meta-model element is not
+         * expressed as an artefact at all. This is the case, for
+         * example, for object templates (at the time of this
+         * wwritting).
+         */
+        const auto mn_id(pair.first);
+        const auto& albmn(alrp.by_meta_name());
+        const auto i(albmn.find(mn_id));
+        if (i == albmn.end())
+            continue;
+
+        const auto& als(i->second.locations());
+
+        /*
+         * Now process each of the elements of this meta-feature, only
+         * taking into account the archetype locations relevant to the
+         * meta-feature.
+         */
+        for (auto ptr : pair.second) {
+            auto& e(*ptr);
+            const auto& cfg(*e.configuration());
+            e.archetype_location_properties(
+                obtain_local_archetype_location_properties(fgs, als, cfg));
+        }
+    }
+}
+
 void archetype_location_properties_transform::
 apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "archetype location properties transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    const auto& atrp(*ctx.type_repository());
-    const auto& alrp(*ctx.archetype_location_repository());
-    populate_global_archetype_location_properties(atrp, alrp, m);
-    populate_local_archetype_location_properties(atrp, alrp, m);
+    // FIXME: hack for now as this is borked
+    if (!ctx.use_configuration()) {
+        const auto &fm(*ctx.feature_model());
+        const auto &alrp(*ctx.archetype_location_repository());
+        populate_global_archetype_location_properties(fm, alrp, m);
+        populate_local_archetype_location_properties(fm, alrp, m);
+    } else {
+        const auto &atrp(*ctx.type_repository());
+        const auto &alrp(*ctx.archetype_location_repository());
+        populate_global_archetype_location_properties(atrp, alrp, m);
+        populate_local_archetype_location_properties(atrp, alrp, m);
+    }
 }
 
 }
