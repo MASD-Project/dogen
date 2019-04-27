@@ -26,6 +26,8 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/helpers/feature_selector.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/location_error.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
@@ -56,13 +58,19 @@ namespace masd::dogen::generation::cpp::formattables {
 locator::locator(
     const boost::filesystem::path& output_directory_path,
     const boost::filesystem::path& cpp_headers_output_directory_path,
-    const variability::type_repository& atrp, const formatters::repository& frp,
+    const variability::type_repository& atrp,
+    const variability::meta_model::feature_model& fm,
+    const bool use_configuration,
+    const formatters::repository& frp,
     const variability::annotation& root,
+    const variability::meta_model::configuration& rcfg,
     const coding::meta_model::name& model_name,
     const std::unordered_set<std::string>& module_ids,
     const bool enable_backend_directories)
     : model_name_(model_name),
-      configuration_(make_configuration(atrp, frp, root)),
+      configuration_(use_configuration ?
+          make_configuration(fm, frp, rcfg) :
+          make_configuration(atrp, frp, root)),
       module_ids_(module_ids),
       project_path_(make_project_path(output_directory_path, model_name,
               configuration_, enable_backend_directories)),
@@ -195,6 +203,131 @@ locator_configuration locator::make_configuration(
     return r;
 }
 
+locator::feature_group
+locator::make_feature_group(const variability::meta_model::feature_model& fm,
+    const formatters::repository& frp) const {
+
+    feature_group r;
+    const variability::helpers::feature_selector s(fm);
+
+    std::unordered_set<std::string> processed_facets;
+    for (const auto ptr : frp.stock_artefact_formatters()) {
+        const auto& fmt(*ptr);
+        const auto& al(fmt.archetype_location());
+
+        const auto arch(al.archetype());
+        const auto fct(al.facet());
+        const auto pf(traits::postfix());
+
+        formatter_feature_group fmt_fg;
+        const auto pfix(traits::postfix());
+        fmt_fg.archetype_postfix = s.get_by_name(arch, pfix);
+
+        auto dir(s.try_get_by_name(fct, traits::directory()));
+        if (dir)
+            fmt_fg.facet_directory = *dir;
+
+        auto postfix(s.try_get_by_name(fct, traits::postfix()));
+        if (postfix)
+            fmt_fg.facet_postfix = *postfix;
+
+        r.formatters_feature_group[arch] = fmt_fg;
+
+        const bool done(processed_facets.find(fct) != processed_facets.end());
+        if (fmt_fg.facet_directory && !done) {
+            processed_facets.insert(fct);
+            facet_feature_group fct_fg;
+            fct_fg.directory = *fmt_fg.facet_directory;
+            fct_fg.postfix = *fmt_fg.facet_postfix;
+            r.facets_feature_group[fct] = fct_fg;
+        }
+    }
+
+    const auto& idn(traits::cpp::include_directory_name());
+    r.include_directory_name = s.get_by_name(idn);
+
+    const auto& sdn(traits::cpp::source_directory_name());
+    r.source_directory_name = s.get_by_name(sdn);
+
+    const auto& tdn(traits::cpp::tests_directory_name());
+    r.tests_directory_name = s.get_by_name(tdn);
+
+    const auto& hde(traits::cpp::header_file_extension());
+    r.header_file_extension = s.get_by_name(hde);
+
+    const auto& ife(traits::cpp::implementation_file_extension());
+    r.implementation_file_extension = s.get_by_name(ife);
+
+    const auto& dt(traits::cpp::disable_facet_directories());
+    r.disable_facet_directories = s.get_by_name(dt);
+
+    const auto& kdn(traits::cpp::backend_directory_name());
+    r.backend_directory_name = s.get_by_name(kdn);
+
+    return r;
+}
+
+locator_configuration locator::make_configuration(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) const {
+
+    locator_configuration r;
+    const variability::helpers::configuration_selector s(cfg);
+
+    for (const auto& pair : fg.facets_feature_group) {
+        const auto fct(pair.first);
+        const auto& fct_tg(pair.second);
+
+        locator_facet_configuration fct_cfg;
+        fct_cfg.directory(s.get_text_content_or_default(fct_tg.directory));
+        fct_cfg.postfix(s.get_text_content_or_default(fct_tg.postfix));
+        r.facet_configurations()[fct] = fct_cfg;
+    }
+
+    for (const auto& pair : fg.formatters_feature_group) {
+        const auto arch(pair.first);
+        const auto fmt_fg(pair.second);
+        locator_archetype_configuration arch_cfg;
+
+        if (fmt_fg.facet_directory) {
+            const auto t(*fmt_fg.facet_directory);
+            arch_cfg.facet_directory(s.get_text_content_or_default(t));
+        }
+
+        if (fmt_fg.facet_postfix) {
+            const auto t(*fmt_fg.facet_postfix);
+            arch_cfg.facet_postfix(s.get_text_content_or_default(t));
+        }
+
+        const auto pfix(fmt_fg.archetype_postfix);
+        arch_cfg.archetype_postfix(s.get_text_content_or_default(pfix));
+
+        r.archetype_configurations()[arch] = arch_cfg;
+    }
+
+    const auto& hfe(fg.header_file_extension);
+    r.header_file_extension(s.get_text_content_or_default(hfe));
+
+    const auto& ife(fg.implementation_file_extension);
+    r.implementation_file_extension(s.get_text_content_or_default(ife));
+
+    const auto& idn(fg.include_directory_name);
+    r.include_directory_name(s.get_text_content_or_default(idn));
+
+    const auto& sdn(fg.source_directory_name);
+    r.source_directory_name(s.get_text_content_or_default(sdn));
+
+    const auto& tdn(fg.tests_directory_name);
+    r.tests_directory_name(s.get_text_content_or_default(tdn));
+
+    const auto& dt(fg.disable_facet_directories);
+    r.disable_facet_directories(s.get_boolean_content_or_default(dt));
+
+    const auto& kdn(fg.backend_directory_name);
+    r.backend_directory_name(s.get_text_content_or_default(kdn));
+
+    return r;
+}
+
 boost::filesystem::path locator::compute_headers_path(
     const boost::filesystem::path& output_directory_path,
     const boost::filesystem::path& project_path,
@@ -222,6 +355,16 @@ locator_configuration locator::make_configuration(
 
     const auto tg(make_type_group (atrp, frp));
     const auto r(make_configuration(tg, a));
+    return r;
+}
+
+locator_configuration locator::make_configuration(
+    const variability::meta_model::feature_model& fm,
+    const formatters::repository& frp,
+    const variability::meta_model::configuration& cfg) {
+
+    const auto fg(make_feature_group (fm, frp));
+    const auto r(make_configuration(fg, cfg));
     return r;
 }
 

@@ -33,6 +33,9 @@
 #include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/locator_configuration.hpp"
@@ -48,7 +51,10 @@ public:
         const boost::filesystem::path& output_directory_path,
         const boost::filesystem::path& cpp_headers_output_directory_path,
         const variability::type_repository& atrp,
+        const variability::meta_model::feature_model& fm,
+        const bool use_configuration,
         const formatters::repository& frp, const variability::annotation& root,
+        const variability::meta_model::configuration& rcfg,
         const coding::meta_model::name& model_name,
         const std::unordered_set<std::string>& module_ids,
         const bool enable_backend_directories);
@@ -88,6 +94,44 @@ private:
     locator_configuration
     make_configuration(const variability::type_repository& atrp,
         const formatters::repository& frp, const variability::annotation& o);
+
+private:
+    struct facet_feature_group {
+        variability::meta_model::feature directory;
+        variability::meta_model::feature postfix;
+    };
+
+    struct formatter_feature_group {
+        boost::optional<variability::meta_model::feature> facet_directory;
+        boost::optional<variability::meta_model::feature> facet_postfix;
+        variability::meta_model::feature archetype_postfix;
+    };
+
+    struct feature_group {
+        std::unordered_map<std::string, facet_feature_group>
+        facets_feature_group;
+        std::unordered_map<std::string, formatter_feature_group>
+        formatters_feature_group;
+        variability::meta_model::feature header_file_extension;
+        variability::meta_model::feature implementation_file_extension;
+        variability::meta_model::feature include_directory_name;
+        variability::meta_model::feature source_directory_name;
+        variability::meta_model::feature tests_directory_name;
+        variability::meta_model::feature disable_facet_directories;
+        variability::meta_model::feature backend_directory_name;
+    };
+
+    feature_group make_feature_group(
+        const variability::meta_model::feature_model& fm,
+        const formatters::repository& frp) const;
+
+    locator_configuration make_configuration(const feature_group& fg,
+        const variability::meta_model::configuration& cfg) const;
+
+    locator_configuration
+    make_configuration(const variability::meta_model::feature_model& fm,
+        const formatters::repository& frp,
+        const variability::meta_model::configuration& cfg);
 
 private:
     boost::filesystem::path compute_headers_path(

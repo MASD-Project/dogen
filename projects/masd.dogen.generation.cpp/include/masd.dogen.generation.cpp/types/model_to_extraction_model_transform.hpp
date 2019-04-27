@@ -35,6 +35,9 @@
 #include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/annotation_factory.hpp"
 #include "masd.dogen.variability/types/annotation_expander.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_interface.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
@@ -80,7 +83,10 @@ private:
     formattables::locator make_locator(
         const boost::filesystem::path& output_directory_path,
         const variability::type_repository& atrp,
-        const variability::annotation& ra, const formatters::repository& frp,
+        const variability::meta_model::feature_model& fm,
+        const bool use_configuration, const variability::annotation& ra,
+        const variability::meta_model::configuration& cfg,
+        const formatters::repository& frp,
         const bool enable_backend_directories,
         const generation::meta_model::model& m) const;
 

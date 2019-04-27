@@ -64,7 +64,10 @@ model_to_extraction_model_transform::create_formattables_model(
 
 formattables::locator model_to_extraction_model_transform::make_locator(
     const boost::filesystem::path& output_directory_path,
-    const variability::type_repository& atrp, const variability::annotation& ra,
+    const variability::type_repository& atrp,
+    const variability::meta_model::feature_model& fm,
+    const bool use_configuration, const variability::annotation& ra,
+    const variability::meta_model::configuration& cfg,
     const formatters::repository& frp, const bool enable_backend_directories,
     const generation::meta_model::model& m) const {
 
@@ -74,7 +77,8 @@ formattables::locator model_to_extraction_model_transform::make_locator(
     const auto chodp(ep.cpp_headers_output_directory());
     const auto ekd(enable_backend_directories);
     const auto ids(m.module_ids());
-    const formattables::locator r(odp, chodp, atrp, frp, ra, mn, ids, ekd);
+    const formattables::locator r(odp, chodp, atrp, fm, use_configuration,
+        frp, ra, cfg, mn, ids, ekd);
     return r;
 }
 
@@ -160,12 +164,15 @@ extraction::meta_model::model model_to_extraction_model_transform::apply(
     /*
      * Create the locator.
      */
+    const auto uc(ctx.use_configuration());
     const auto& odp(ctx.output_directory_path());
     const auto& atrp(*ctx.type_repository());
+    const auto& feature_model(*ctx.feature_model());
     const auto& ra(m.root_module()->annotation());
+    const auto& rcfg(*m.root_module()->configuration());
     const auto& frp(formatters_repository());
-    const auto l(make_locator(
-            odp, atrp, ra, frp, enable_backend_directories, m));
+    const auto l(make_locator(odp, atrp, feature_model, uc, ra, rcfg,
+            frp, enable_backend_directories, m));
 
     /*
      * Generate the formattables model.
