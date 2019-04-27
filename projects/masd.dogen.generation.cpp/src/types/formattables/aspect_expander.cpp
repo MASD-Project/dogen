@@ -20,9 +20,11 @@
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
+#include "masd.dogen.variability/io/type_io.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
-#include "masd.dogen.variability/io/type_io.hpp"
+#include "masd.dogen.variability/types/helpers/feature_selector.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
@@ -108,13 +110,70 @@ make_aspect_properties(const type_group& tg,
     return boost::optional<aspect_properties>();
 }
 
+aspect_expander::feature_group aspect_expander::
+make_feature_group(const variability::meta_model::feature_model& fm) const {
+    feature_group r;
+
+    const variability::helpers::feature_selector s(fm);
+    typedef traits::cpp::aspect aspect;
+
+    const auto& rmdc(aspect::requires_manual_default_constructor());
+    r.requires_manual_default_constructor = s.get_by_name(rmdc);
+
+    const auto& rmmc(aspect::requires_manual_move_constructor());
+    r.requires_manual_move_constructor = s.get_by_name(rmmc);
+
+    const auto& rsm(aspect::requires_stream_manipulators());
+    r.requires_stream_manipulators = s.get_by_name(rsm);
+
+    return r;
+}
+
+boost::optional<aspect_properties> aspect_expander::
+make_aspect_properties(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) const {
+    aspect_properties r;
+
+    const variability::helpers::configuration_selector s(cfg);
+    bool found_any(false);
+
+    if (s.has_configuration_point(fg.requires_manual_default_constructor))
+        found_any = true;
+
+    r.requires_manual_default_constructor(
+        s.get_boolean_content_or_default(
+            fg.requires_manual_default_constructor));
+
+    if (s.has_configuration_point(fg.requires_manual_move_constructor))
+        found_any = true;
+
+    r.requires_manual_move_constructor(
+        s.get_boolean_content_or_default(
+            fg.requires_manual_move_constructor));
+
+    if (s.has_configuration_point(fg.requires_stream_manipulators))
+        found_any = true;
+
+    r.requires_stream_manipulators(
+        s.get_boolean_content_or_default(
+            fg.requires_stream_manipulators));
+
+    if (found_any)
+        return r;
+
+    return boost::optional<aspect_properties>();
+}
+
 aspect_expander::aspect_properties_type aspect_expander::
 obtain_aspect_properties(const variability::type_repository& atrp,
+    const variability::meta_model::feature_model& feature_model,
+    const bool use_configuration,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating aspect configuration.";
 
     const auto tg(make_type_group(atrp));
+    const auto fg(make_feature_group(feature_model));
     aspect_properties_type r;
     for (auto& pair : formattables) {
         const auto id(pair.first);
@@ -122,7 +181,10 @@ obtain_aspect_properties(const variability::type_repository& atrp,
 
         auto& formattable(pair.second);
         const auto& segment(*formattable.master_segment());
-        const auto ap(make_aspect_properties(tg, segment.annotation()));
+
+        const auto ap(use_configuration ?
+            make_aspect_properties(fg, *segment.configuration()) :
+            make_aspect_properties(tg, segment.annotation()));
         if (ap)
             r[id] = *ap;
     }
@@ -225,9 +287,12 @@ populate_aspect_properties(const aspect_properties_type& element_aps,
 }
 
 void aspect_expander::
-expand(const variability::type_repository& atrp, model& fm) const {
+expand(const variability::type_repository& atrp,
+    const variability::meta_model::feature_model& feature_model,
+    const bool use_configuration, model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started expansion.";
-    const auto element_aps(obtain_aspect_properties(atrp, fm.formattables()));
+    const auto element_aps(obtain_aspect_properties(atrp, feature_model,
+            use_configuration, fm.formattables()));
     populate_aspect_properties(element_aps, fm.formattables());
     BOOST_LOG_SEV(lg, debug) << "Finished expansion.";
 }

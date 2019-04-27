@@ -53,7 +53,8 @@ private:
         const formatters::repository& frp, const locator& l, model& fm) const;
 
     void expand_aspects(const variability::type_repository& atrp,
-        model& fm) const;
+        const variability::meta_model::feature_model& feature_model,
+        const bool use_configuration, model& fm) const;
 
     void expand_helpers(const variability::type_repository& atrp,
         const formatters::repository& frp, model& fm) const;
@@ -66,8 +67,7 @@ private:
     void expand_odb(const variability::type_repository& atrp,
         const variability::meta_model::feature_model& feature_model,
         const bool use_configuration,
-        const locator& l,
-        model& fm) const;
+        const locator& l, model& fm) const;
 
     void expand_facet_directories(const locator& l, model& fm) const;
 

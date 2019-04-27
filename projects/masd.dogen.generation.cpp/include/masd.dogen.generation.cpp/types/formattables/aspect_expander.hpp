@@ -29,9 +29,12 @@
 #include <string>
 #include <unordered_map>
 #include <boost/optional.hpp>
+#include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/type_repository.hpp"
-#include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.coding/types/meta_model/name_tree.hpp"
 #include "masd.dogen.coding/types/meta_model/attribute.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/formattable.hpp"
@@ -55,12 +58,29 @@ private:
     boost::optional<aspect_properties> make_aspect_properties(
         const type_group& tg, const variability::annotation& a) const;
 
+
+private:
+    struct feature_group {
+        variability::meta_model::feature requires_manual_default_constructor;
+        variability::meta_model::feature requires_manual_move_constructor;
+        variability::meta_model::feature requires_stream_manipulators;
+    };
+
+    feature_group make_feature_group(
+        const variability::meta_model::feature_model& fm) const;
+
+    boost::optional<aspect_properties>
+    make_aspect_properties(const feature_group& fg,
+        const variability::meta_model::configuration& cfg) const;
+
 private:
     typedef std::unordered_map<std::string, aspect_properties>
     aspect_properties_type;
 
     aspect_properties_type
     obtain_aspect_properties(const variability::type_repository& atrp,
+        const variability::meta_model::feature_model& feature_model,
+        const bool use_configuration,
         const std::unordered_map<std::string, formattable>& formattables) const;
 
 private:
@@ -81,7 +101,9 @@ private:
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
-    void expand(const variability::type_repository& atrp, model& fm) const;
+    void expand(const variability::type_repository& atrp,
+        const variability::meta_model::feature_model& feature_model,
+        const bool use_configuration, model& fm) const;
 };
 
 }

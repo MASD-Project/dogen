@@ -55,9 +55,10 @@ void model_expander::expand_inclusion(
 }
 
 void model_expander::expand_aspects(const variability::type_repository& atrp,
-    model& fm) const {
+    const variability::meta_model::feature_model& feature_model,
+    const bool use_configuration, model& fm) const {
     aspect_expander ex;
-    ex.expand(atrp, fm);
+    ex.expand(atrp, feature_model, use_configuration, fm);
 }
 
 void model_expander::expand_helpers(const variability::type_repository& atrp,
@@ -137,7 +138,7 @@ void model_expander::expand(
     expand_canonical_archetypes(frp, fm);
 
     expand_inclusion(atrp, enabled_archetype_for_element, frp, l, fm);
-    expand_aspects(atrp, fm);
+    expand_aspects(atrp, feature_model, use_configuration, fm);
     expand_helpers(atrp, frp, fm);
 
     /*
