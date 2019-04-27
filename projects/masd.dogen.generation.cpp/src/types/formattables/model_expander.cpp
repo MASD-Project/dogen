@@ -47,11 +47,14 @@ void model_expander::expand_canonical_archetypes(
 
 void model_expander::expand_inclusion(
     const variability::type_repository& atrp,
+    const variability::meta_model::feature_model& feature_model,
+    const bool use_configuration,
     const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element, const formatters::repository& frp,
     const locator& l, model& fm) const {
     inclusion_expander ex;
-    ex.expand(atrp, enabled_archetype_for_element, frp, l, fm);
+    ex.expand(atrp, feature_model, use_configuration,
+        enabled_archetype_for_element, frp, l, fm);
 }
 
 void model_expander::expand_aspects(const variability::type_repository& atrp,
@@ -139,7 +142,8 @@ void model_expander::expand(
      */
     expand_canonical_archetypes(frp, fm);
 
-    expand_inclusion(atrp, enabled_archetype_for_element, frp, l, fm);
+    expand_inclusion(atrp, feature_model, use_configuration,
+        enabled_archetype_for_element, frp, l, fm);
     expand_aspects(atrp, feature_model, use_configuration, fm);
     expand_helpers(atrp, feature_model, use_configuration, frp, fm);
 
