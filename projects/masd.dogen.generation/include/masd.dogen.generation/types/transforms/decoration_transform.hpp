@@ -152,10 +152,6 @@ private:
         const boost::optional<decoration_configuration> element_dc,
         const coding::meta_model::technical_space ts);
 
-private:
-    static void legacy_apply(const context& ctx, meta_model::model& m);
-    static void new_apply(const context& ctx, meta_model::model& m);
-
 public:
     static void apply(const context& ctx, meta_model::model& m);
 };

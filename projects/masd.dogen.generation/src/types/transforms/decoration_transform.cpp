@@ -450,8 +450,7 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
     const auto tg(make_type_group(*ctx.type_repository()));
     const auto fg(make_feature_group(*ctx.feature_model()));
     auto& rm(*m.root_module());
-    // FIXME: disabled as it is borked
-    const auto dc(!ctx.use_configuration());
+    const auto dc(ctx.use_configuration());
     const auto& ra(rm.annotation());
     const auto& rcfg(*rm.configuration());
     const auto root_dc(dc ?
