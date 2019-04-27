@@ -34,9 +34,11 @@
 namespace masd::dogen::generation::cpp::formattables {
 
 void model_expander::
-expand_streaming(const variability::type_repository& atrp, model& fm) const {
+expand_streaming(const variability::type_repository& atrp,
+    const variability::meta_model::feature_model& feature_model,
+    const bool use_configuration, model& fm) const {
     streaming_expander ex;
-    ex.expand(atrp, fm);
+    ex.expand(atrp, feature_model, use_configuration, fm);
 }
 
 void model_expander::expand_canonical_archetypes(
@@ -126,7 +128,7 @@ void model_expander::expand(
      * Streaming expansion must be done before helper expansion as the
      * helpers need the streaminging properties.
      */
-    expand_streaming(atrp, fm);
+    expand_streaming(atrp, feature_model, use_configuration, fm);
 
     /*
      * C++ standard expansion must be done before enablement because

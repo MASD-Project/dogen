@@ -40,8 +40,9 @@ namespace masd::dogen::generation::cpp::formattables {
 
 class model_expander {
 private:
-    void expand_streaming(
-        const variability::type_repository& atrp, model& fm) const;
+    void expand_streaming(const variability::type_repository& atrp,
+        const variability::meta_model::feature_model& feature_model,
+        const bool use_configuration, model& fm) const;
 
     void expand_canonical_archetypes(const formatters::repository& frp,
         model& fm) const;

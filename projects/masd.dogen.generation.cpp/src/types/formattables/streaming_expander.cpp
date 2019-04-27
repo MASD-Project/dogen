@@ -21,9 +21,11 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
+#include "masd.dogen.variability/io/type_io.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
-#include "masd.dogen.variability/io/type_io.hpp"
+#include "masd.dogen.variability/types/helpers/feature_selector.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/streaming_properties_io.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/streaming_expander.hpp"
@@ -109,11 +111,73 @@ streaming_expander::make_streaming_properties(
     return r;
 }
 
+streaming_expander::feature_group
+streaming_expander::make_feature_group(
+    const variability::meta_model::feature_model& fm) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating feature group.";
+
+    feature_group r;
+
+    const variability::helpers::feature_selector s(fm);
+    const auto scm(traits::cpp::streaming::string_conversion_method());
+    r.string_conversion_method = s.get_by_name(scm);
+
+    const auto rq(traits::cpp::streaming::requires_quoting());
+    r.requires_quoting = s.get_by_name(rq);
+
+    const auto ruc(traits::cpp::streaming::remove_unprintable_characters());
+    r.remove_unprintable_characters = s.get_by_name(ruc);
+
+    BOOST_LOG_SEV(lg, debug) << "Created type group.";
+
+    return r;
+}
+
+boost::optional<streaming_properties>
+streaming_expander::
+make_streaming_properties(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) const {
+
+    BOOST_LOG_SEV(lg, debug) << "Creating streaming properties.";
+    bool found_any(false);
+    streaming_properties r;
+    const variability::helpers::configuration_selector s(cfg);
+
+    const auto& rq(fg.requires_quoting);
+    if (s.has_configuration_point(rq)) {
+        r.requires_quoting(s.get_boolean_content_or_default(rq));
+        found_any = true;
+    }
+
+    const auto& scm(fg.string_conversion_method);
+    if (s.has_configuration_point(scm)) {
+        r.string_conversion_method(s.get_text_content_or_default(scm));
+        found_any = true;
+    }
+
+    const auto& ruc(fg.remove_unprintable_characters);
+    if (s.has_configuration_point(ruc)) {
+        r.remove_unprintable_characters(s.get_boolean_content_or_default(ruc));
+        found_any = true;
+    }
+
+    if (!found_any)
+        return boost::optional<streaming_properties>();
+
+    BOOST_LOG_SEV(lg, debug) << "Created streaming properties. "
+                             << "Result: " << r;
+    return r;
+}
+
+
 void streaming_expander::
-expand(const variability::type_repository& atrp, model& fm) const {
+expand(const variability::type_repository& atrp,
+    const variability::meta_model::feature_model& feature_model,
+    const bool use_configuration, model& fm) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started expanding streaming properties.";
     const auto tg(make_type_group(atrp));
+    const auto fg(make_feature_group(feature_model));
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
@@ -126,7 +190,9 @@ expand(const variability::type_repository& atrp, model& fm) const {
          */
         auto segment(formattable.master_segment());
         const auto& e(*segment);
-        const auto sp(make_streaming_properties(tg, e.annotation()));
+        const auto sp(use_configuration ?
+            make_streaming_properties(fg, *e.configuration()) :
+            make_streaming_properties(tg, e.annotation()));
         if (!sp)
             continue;
 

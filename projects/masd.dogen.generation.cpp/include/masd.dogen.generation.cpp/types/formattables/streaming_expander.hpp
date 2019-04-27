@@ -26,9 +26,12 @@
 #endif
 
 #include <boost/optional.hpp>
+#include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/type_repository.hpp"
-#include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/streaming_properties.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/model.hpp"
 
@@ -51,8 +54,24 @@ private:
     boost::optional<streaming_properties> make_streaming_properties(
         const type_group& tg, const variability::annotation& a) const;
 
+private:
+    struct feature_group {
+        variability::meta_model::feature requires_quoting;
+        variability::meta_model::feature string_conversion_method;
+        variability::meta_model::feature remove_unprintable_characters;
+    };
+
+    feature_group
+    make_feature_group(const variability::meta_model::feature_model& fm) const;
+
+    boost::optional<streaming_properties>
+    make_streaming_properties(const feature_group& fg,
+        const variability::meta_model::configuration& cfg) const;
+
 public:
-    void expand(const variability::type_repository& atrp, model& fm) const;
+    void expand(const variability::type_repository& atrp,
+        const variability::meta_model::feature_model& feature_model,
+        const bool use_configuration, model& fm) const;
 };
 
 }
