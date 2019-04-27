@@ -55,8 +55,17 @@ private:
         r->annotation(e.annotation());
         r->is_element_extension(true);
         r->intrinsic_technical_space(technical_space::cpp);
+
+        /*
+         * FIXME: The copying of the configuration is one big hack. We
+         * are copying the configuration from the original element
+         * because it already has all of the processing required. This
+         * will not be an issue once we implement forward declarations
+         * properly and remove element extensions.
+         */
         r->configuration(
-            boost::make_shared<variability::meta_model::configuration>());
+            boost::make_shared<variability::meta_model::configuration>(
+                *e.configuration()));
         r->configuration()->name().simple(e.name().simple());
         r->configuration()->name().qualified(e.name().qualified().dot());
         return r;
