@@ -63,7 +63,10 @@ private:
     void expand_file_paths_and_guards(const formatters::repository& frp,
         const locator& l, model& fm) const;
 
-    void expand_odb(const variability::type_repository& atrp, const locator& l,
+    void expand_odb(const variability::type_repository& atrp,
+        const variability::meta_model::feature_model& feature_model,
+        const bool use_configuration,
+        const locator& l,
         model& fm) const;
 
     void expand_facet_directories(const locator& l, model& fm) const;

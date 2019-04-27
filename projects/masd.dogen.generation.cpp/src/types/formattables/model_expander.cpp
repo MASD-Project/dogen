@@ -78,9 +78,11 @@ void model_expander::expand_file_paths_and_guards(
 }
 
 void model_expander::expand_odb(const variability::type_repository& atrp,
+    const variability::meta_model::feature_model& feature_model,
+    const bool use_configuration,
     const locator& l, model& fm) const {
     odb_expander ex;
-    ex.expand(atrp, l, fm);
+    ex.expand(atrp, feature_model, use_configuration, l, fm);
 }
 
 void model_expander::
@@ -145,7 +147,7 @@ void model_expander::expand(
     reduce(fm);
 
     expand_file_paths_and_guards(frp, l, fm);
-    expand_odb(atrp, l, fm);
+    expand_odb(atrp, feature_model, use_configuration, l, fm);
     expand_facet_directories(l, fm);
     expand_build_files(l, fm);
 }

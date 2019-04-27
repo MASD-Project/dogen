@@ -27,8 +27,11 @@
 
 #include <list>
 #include <boost/optional.hpp>
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/type.hpp"
+#include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/locator.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/odb_properties.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/model.hpp"
@@ -46,8 +49,18 @@ private:
 
     type_group make_type_group(const variability::type_repository& atrp) const;
 
+private:
+    struct feature_group {
+        variability::meta_model::feature odb_pragma;
+    };
+
+    feature_group make_feature_group(
+        const variability::meta_model::feature_model& fm) const;
+
 public:
-    void expand(const variability::type_repository& atrp, const locator& l,
+    void expand(const variability::type_repository& atrp,
+        const variability::meta_model::feature_model& feature_model,
+        const bool use_configuration, const locator& l,
         model& fm) const;
 };
 
