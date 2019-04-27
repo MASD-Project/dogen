@@ -62,9 +62,11 @@ void model_expander::expand_aspects(const variability::type_repository& atrp,
 }
 
 void model_expander::expand_helpers(const variability::type_repository& atrp,
+    const variability::meta_model::feature_model& feature_model,
+    const bool use_configuration,
     const formatters::repository& frp, model& fm) const {
     helper_expander ex;
-    ex.expand(atrp, frp, fm);
+    ex.expand(atrp, feature_model, use_configuration, frp, fm);
 }
 
 void model_expander::reduce(model& fm) const {
@@ -139,7 +141,7 @@ void model_expander::expand(
 
     expand_inclusion(atrp, enabled_archetype_for_element, frp, l, fm);
     expand_aspects(atrp, feature_model, use_configuration, fm);
-    expand_helpers(atrp, frp, fm);
+    expand_helpers(atrp, feature_model, use_configuration, frp, fm);
 
     /*
      * All of the above expansions must be performed prior to
