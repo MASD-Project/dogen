@@ -26,6 +26,8 @@
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/helpers/feature_selector.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/meta_model/licence.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
@@ -110,6 +112,61 @@ decoration_transform::read_decoration_configuration(const type_group& tg,
 
     if (has_configuration) {
         BOOST_LOG_SEV(lg, debug) << "Read decoration configuration: " << r;
+        return r;
+    }
+
+    return boost::optional<decoration_configuration>();
+}
+
+decoration_transform::feature_group decoration_transform::
+make_feature_group(const variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const variability::helpers::feature_selector s(fm);
+
+    r.enabled = s.get_by_name(traits::decoration::enabled());
+    r.copyright_notice =s.get_by_name(traits::decoration::copyright_notice());
+    r.licence_name = s.get_by_name(traits::decoration::licence_name());;
+    r.modeline_group_name =
+        s.get_by_name(traits::decoration::modeline_group_name());;
+    r.marker_name = s.get_by_name(traits::decoration::marker_name());;
+
+    return r;
+}
+
+boost::optional<decoration_configuration>
+decoration_transform::read_decoration_configuration(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) {
+
+    bool has_configuration(false);
+    const variability::helpers::configuration_selector s(cfg);
+    decoration_configuration r;
+    if (s.has_configuration_point(fg.enabled)) {
+        r.enabled(s.get_boolean_content(fg.enabled));
+        has_configuration = true;
+    }
+
+    if (s.has_configuration_point(fg.copyright_notice)) {
+        r.copyright_notices(s.get_text_collection_content(fg.copyright_notice));
+        has_configuration = true;
+    }
+
+    if (s.has_configuration_point(fg.licence_name)) {
+        r.licence_name(s.get_text_content(fg.licence_name));
+        has_configuration = true;
+    }
+
+    if (s.has_configuration_point(fg.modeline_group_name)) {
+        r.modeline_group_name(s.get_text_content(fg.modeline_group_name));
+        has_configuration = true;
+    }
+
+    if (s.has_configuration_point(fg.marker_name)) {
+        r.marker_name(s.get_text_content(fg.marker_name));
+        has_configuration = true;
+    }
+
+    if (has_configuration) {
+        BOOST_LOG_SEV(lg, debug) << "Read decoration configuration.";
         return r;
     }
 
@@ -391,9 +448,15 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
      * model elements.
      */
     const auto tg(make_type_group(*ctx.type_repository()));
+    const auto fg(make_feature_group(*ctx.feature_model()));
     auto& rm(*m.root_module());
+    // FIXME: disabled as it is borked
+    const auto dc(!ctx.use_configuration());
     const auto& ra(rm.annotation());
-    const auto root_dc(read_decoration_configuration(tg, ra));
+    const auto& rcfg(*rm.configuration());
+    const auto root_dc(dc ?
+        read_decoration_configuration(fg, rcfg) :
+        read_decoration_configuration(tg, ra));
 
     /*
      * With the default configuration, we can create the global
@@ -484,7 +547,10 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
          * the global configuration.
          */
         const auto& a(e->annotation());
-        const auto element_dc(read_decoration_configuration(tg, a));
+        const auto& cfg(*e->configuration());
+        const auto element_dc(dc ?
+            read_decoration_configuration(fg, cfg) :
+            read_decoration_configuration(tg, a));
         e->decoration(make_local_decoration(drp, root_dc, gd, element_dc, ts));
     }
     stp.end_transform(m);

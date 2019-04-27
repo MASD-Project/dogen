@@ -32,6 +32,9 @@
 #include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/helpers/decoration_repository.hpp"
@@ -64,6 +67,28 @@ private:
     static boost::optional<decoration_configuration>
     read_decoration_configuration(const type_group& tg,
         const variability::annotation& a);
+
+private:
+    struct feature_group {
+        variability::meta_model::feature enabled;
+        variability::meta_model::feature copyright_notice;
+        variability::meta_model::feature licence_name;
+        variability::meta_model::feature modeline_group_name;
+        variability::meta_model::feature marker_name;
+    };
+
+    /**
+     * @brief Creates the feature group for decoration.
+     */
+    static feature_group make_feature_group(
+        const variability::meta_model::feature_model& fm);
+
+    /**
+     * @brief Reads the decoration configuration from the supplied annotation.
+     */
+    static boost::optional<decoration_configuration>
+    read_decoration_configuration(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
 
 private:
     /**
@@ -126,6 +151,10 @@ private:
         const boost::optional<coding::meta_model::decoration> global_decoration,
         const boost::optional<decoration_configuration> element_dc,
         const coding::meta_model::technical_space ts);
+
+private:
+    static void legacy_apply(const context& ctx, meta_model::model& m);
+    static void new_apply(const context& ctx, meta_model::model& m);
 
 public:
     static void apply(const context& ctx, meta_model::model& m);
