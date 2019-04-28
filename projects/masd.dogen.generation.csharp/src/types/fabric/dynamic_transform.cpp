@@ -52,9 +52,11 @@ requires_expansion(const generation::meta_model::model& m) const {
 
 void dynamic_transform::expand_injection(
     const variability::type_repository& atrp,
+    const variability::meta_model::feature_model& fm,
+    const bool use_configuration,
     generation::meta_model::model& m) const {
     injector i;
-    i.inject(atrp, m);
+    i.inject(atrp, fm, use_configuration, m);
 }
 
 std::string dynamic_transform::id() const {
@@ -70,7 +72,9 @@ void dynamic_transform::apply(const generation::transforms::context& ctx,
         return;
     }
 
-    expand_injection(*ctx.type_repository(), m);
+    const auto fm(*ctx.feature_model());
+    const auto uc(ctx.use_configuration());
+    expand_injection(*ctx.type_repository(), fm, uc, m);
 }
 
 }

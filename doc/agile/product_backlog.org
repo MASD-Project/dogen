@@ -604,7 +604,7 @@ them from Dia. The right solution for this is as follows:
 - add a transform in injection that reads these properties and sets
   them in the element. This is now possible because we have proper
   annotation support.
-- move the attributes to meta-data on all JSON models.
+  - move the attributes to meta-data on all JSON models.
 
 *** Split library into JSON and dia                                   :story:
 

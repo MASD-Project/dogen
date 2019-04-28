@@ -53,9 +53,11 @@ void injector::add_elements(
 }
 
 void injector::inject_visual_studio(const variability::type_repository& atrp,
+    const variability::meta_model::feature_model& fm,
+    const bool use_configuration,
     generation::meta_model::model& m) const {
     visual_studio_factory f;
-    const auto e(f.make(atrp, m));
+    const auto e(f.make(atrp, fm, use_configuration, m));
     add_elements(e, m);
 }
 
@@ -73,8 +75,10 @@ void injector::inject_assistant(generation::meta_model::model& m) const {
 }
 
 void injector::inject(const variability::type_repository& atrp,
+    const variability::meta_model::feature_model& fm,
+    const bool use_configuration,
     generation::meta_model::model& m) const {
-    inject_visual_studio(atrp, m);
+    inject_visual_studio(atrp, fm, use_configuration, m);
     inject_assembly_info(m);
     inject_assistant(m);
 }

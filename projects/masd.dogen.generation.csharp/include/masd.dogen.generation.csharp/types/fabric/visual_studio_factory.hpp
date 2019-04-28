@@ -30,6 +30,9 @@
 #include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/visual_studio_configuration.hpp"
@@ -53,6 +56,23 @@ private:
         const variability::annotation& ra) const;
 
 private:
+    struct feature_group {
+        variability::meta_model::feature project_solution_guid;
+        variability::meta_model::feature project_guid;
+    };
+
+    feature_group make_feature_group(
+        const variability::meta_model::feature_model& fm) const;
+
+    visual_studio_configuration make_configuration(
+        const feature_group& fg,
+        const variability::meta_model::configuration& cfg) const;
+
+    visual_studio_configuration make_configuration(
+        const variability::meta_model::feature_model& fm,
+        const variability::meta_model::configuration& cfg) const;
+
+private:
     std::string obtain_project_name(
         const generation::meta_model::model& m) const;
 
@@ -70,6 +90,8 @@ private:
 public:
     std::list<boost::shared_ptr<coding::meta_model::element>>
     make(const variability::type_repository& atrp,
+        const variability::meta_model::feature_model& fm,
+        const bool use_configuration,
         const generation::meta_model::model& m) const;
 };
 
