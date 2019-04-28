@@ -28,7 +28,6 @@
 #include <algorithm>
 #include <boost/variant.hpp>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.cli/types/weaving_configuration.hpp"
 #include "masd.dogen.cli/types/conversion_configuration.hpp"
 #include "masd.dogen.cli/types/generation_configuration.hpp"
 
@@ -48,14 +47,14 @@ public:
 
 public:
     cli_configuration(
-        const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& activity,
+        const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration>& activity,
         const boost::filesystem::path& byproduct_directory);
 
 public:
-    const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& activity() const;
-    boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& activity();
-    cli_configuration& activity(const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& v);
-    cli_configuration& activity(const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>&& v);
+    const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration>& activity() const;
+    boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration>& activity();
+    cli_configuration& activity(const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration>& v);
+    cli_configuration& activity(const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration>&& v);
 
     /**
      * @brief Directory in which to place all files not directly related to generated code.
@@ -78,7 +77,7 @@ public:
     cli_configuration& operator=(cli_configuration other);
 
 private:
-    boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration> activity_;
+    boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration> activity_;
     boost::filesystem::path byproduct_directory_;
 };
 

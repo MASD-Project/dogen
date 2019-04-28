@@ -40,7 +40,6 @@ public:
 
 public:
     static void validate(const generation_configuration& cfg);
-    static void validate(const weaving_configuration& cfg);
     static void validate(const conversion_configuration& cfg);
 
 public:

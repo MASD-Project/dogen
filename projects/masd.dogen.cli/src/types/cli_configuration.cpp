@@ -27,7 +27,7 @@ cli_configuration::cli_configuration(cli_configuration&& rhs)
       byproduct_directory_(std::move(rhs.byproduct_directory_)) { }
 
 cli_configuration::cli_configuration(
-    const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& activity,
+    const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration>& activity,
     const boost::filesystem::path& byproduct_directory)
     : activity_(activity),
       byproduct_directory_(byproduct_directory) { }
@@ -49,20 +49,20 @@ cli_configuration& cli_configuration::operator=(cli_configuration other) {
     return *this;
 }
 
-const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& cli_configuration::activity() const {
+const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration>& cli_configuration::activity() const {
     return activity_;
 }
 
-boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& cli_configuration::activity() {
+boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration>& cli_configuration::activity() {
     return activity_;
 }
 
-cli_configuration& cli_configuration::activity(const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& v) {
+cli_configuration& cli_configuration::activity(const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration>& v) {
     activity_ = v;
     return *this;
 }
 
-cli_configuration& cli_configuration::activity(const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>&& v) {
+cli_configuration& cli_configuration::activity(const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration>&& v) {
     activity_ = std::move(v);
     return *this;
 }

@@ -39,15 +39,10 @@ const std::string non_absolute_output(
 using masd::dogen::cli::configuration;
 using masd::dogen::cli::configuration_validator;
 using masd::dogen::cli::generation_configuration;
-using masd::dogen::cli::weaving_configuration;
 using masd::dogen::cli::conversion_configuration;
 
 class activity_dispatcher : public boost::static_visitor<> {
 public:
-    void operator()(const weaving_configuration& cfg) const {
-        configuration_validator::validate(cfg);
-    }
-
     void operator()(const conversion_configuration& cfg) const {
         configuration_validator::validate(cfg);
     }
@@ -111,10 +106,6 @@ void configuration_validator::validate(const generation_configuration& cfg) {
             invalid_configuration_exception(non_absolute_output + gs));
     }
     BOOST_LOG_SEV(lg, info) << "Generation configuration is valid.";
-}
-
-void configuration_validator::validate(const weaving_configuration& /*cfg*/) {
-    // FIXME: implement validation
 }
 
 void configuration_validator::

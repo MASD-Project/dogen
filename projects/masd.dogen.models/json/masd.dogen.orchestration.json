@@ -51,16 +51,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "weaver",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "tagged_values": {
-        "masd.generalization.parent": "masd::dogen::weaver"
-      },
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "converter",
       "stereotypes": [
         "masd::handcrafted"

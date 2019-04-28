@@ -26,15 +26,12 @@
 #endif
 
 #include "masd.dogen/types/dogen.hpp"
-#include "masd.dogen/types/weaver.hpp"
 #include "masd.dogen/types/converter.hpp"
 #include "masd.dogen/types/generator.hpp"
 #include "masd.dogen/types/configuration.hpp"
 #include "masd.dogen/types/tracing_level.hpp"
-#include "masd.dogen/types/weaving_style.hpp"
 #include "masd.dogen/types/tracing_format.hpp"
 #include "masd.dogen/types/reporting_style.hpp"
-#include "masd.dogen/types/weaving_exception.hpp"
 #include "masd.dogen/types/diffing_destination.hpp"
 #include "masd.dogen/types/conversion_exception.hpp"
 #include "masd.dogen/types/generation_exception.hpp"

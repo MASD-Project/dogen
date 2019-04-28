@@ -27,7 +27,6 @@
 
 #include "masd.dogen.cli/io/configuration_io.hpp"
 #include "masd.dogen.cli/io/cli_configuration_io.hpp"
-#include "masd.dogen.cli/io/weaving_configuration_io.hpp"
 #include "masd.dogen.cli/io/conversion_configuration_io.hpp"
 #include "masd.dogen.cli/io/generation_configuration_io.hpp"
 

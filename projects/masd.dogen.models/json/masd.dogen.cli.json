@@ -123,25 +123,6 @@
       ]
     },
     {
-      "name": "weaving_configuration",
-      "documentation": "Configuration for weaving.\n",
-      "stereotypes": [
-        "masd::fluent"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "style",
-          "type": "weaving_style",
-          "documentation": "What style of weaving to perform.\n"
-        },
-        {
-          "name": "target",
-          "type": "boost::filesystem::path"
-        }
-      ]
-    },
-    {
       "name": "conversion_configuration",
       "documentation": "Configuration for the model conversion.\n",
       "stereotypes": [
@@ -184,7 +165,7 @@
       "attributes": [
         {
           "name": "activity",
-          "type": "boost::variant<generation_configuration, conversion_configuration, weaving_configuration>"
+          "type": "boost::variant<generation_configuration, conversion_configuration>"
         },
         {
           "name": "byproduct_directory",

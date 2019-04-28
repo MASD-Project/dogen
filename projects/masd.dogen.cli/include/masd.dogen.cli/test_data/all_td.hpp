@@ -27,7 +27,6 @@
 
 #include "masd.dogen.cli/test_data/configuration_td.hpp"
 #include "masd.dogen.cli/test_data/cli_configuration_td.hpp"
-#include "masd.dogen.cli/test_data/weaving_configuration_td.hpp"
 #include "masd.dogen.cli/test_data/conversion_configuration_td.hpp"
 #include "masd.dogen.cli/test_data/generation_configuration_td.hpp"
 

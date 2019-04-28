@@ -34,7 +34,6 @@
 #include "masd.dogen.cli/types/cli_configuration.hpp"
 #include "masd.dogen.cli/types/command_line_parser.hpp"
 #include "masd.dogen.cli/types/application_exception.hpp"
-#include "masd.dogen.cli/types/weaving_configuration.hpp"
 #include "masd.dogen.cli/types/program_options_parser.hpp"
 #include "masd.dogen.cli/types/configuration_validator.hpp"
 #include "masd.dogen.cli/types/conversion_configuration.hpp"

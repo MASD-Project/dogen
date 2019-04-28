@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "masd.dogen.orchestration/types/weaver.hpp"
 #include "masd.dogen.orchestration/types/converter.hpp"
 #include "masd.dogen.orchestration/types/generator.hpp"
 #include "masd.dogen.orchestration/types/orchestration.hpp"

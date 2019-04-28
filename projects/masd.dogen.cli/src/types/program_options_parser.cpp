@@ -51,9 +51,6 @@ const std::string generate_command_desc(
 const std::string convert_command_name("convert");
 const std::string convert_command_desc(
     "Converts a model from one codec to another. ");
-const std::string weave_command_name("weave");
-const std::string weave_command_desc(
-    "Weaves one or more template files into its final output. ");
 
 const std::string help_arg("help");
 const std::string version_arg("version");
@@ -102,7 +99,6 @@ const std::string generate_target_arg("target");
 const std::string generate_output_dir_arg("output-directory");
 const std::string convert_source_arg("source");
 const std::string convert_destination_arg("destination");
-const std::string weaving_target_arg("target");
 
 const std::string invalid_option("Option is not valid for command: ");
 const std::string invalid_command("Command is invalid or unsupported: ");
@@ -125,7 +121,6 @@ using boost::program_options::options_description;
 using boost::program_options::positional_options_description;
 using masd::dogen::cli::configuration;
 using masd::dogen::cli::parser_exception;
-using masd::dogen::cli::weaving_configuration;
 using masd::dogen::cli::generation_configuration;
 using masd::dogen::cli::conversion_configuration;
 using masd::dogen::utility::log::logging_configuration;
@@ -206,7 +201,7 @@ options_description make_top_level_hidden_options_description() {
     options_description r("Commands");
     r.add_options()
         ("command", value<std::string>(), "Command to execute. "
-            "Available commands: generate, convert, weave.")
+            "Available commands: generate, convert.")
         ("args", value<std::vector<std::string> >(),
             "Arguments for command");
     return r;
@@ -254,27 +249,13 @@ options_description make_convert_options_description() {
 }
 
 /**
- * @brief Creates the options related to weaving.
- */
-options_description make_weave_options_description() {
-    options_description r("Weave");
-    r.add_options()
-        ("target,t",
-            value<std::string>(),
-            "File or directory containing supported templates.");
-
-    return r;
-}
-
-/**
  * @brief ensures the supplied command is a valid command. If not,
  * reports the erros into stream and throws.
  */
 void validate_command_name(const std::string& command_name) {
     const bool is_valid_command_name(
         command_name == generate_command_name ||
-        command_name == convert_command_name ||
-        command_name == weave_command_name);
+        command_name == convert_command_name);
 
     if (is_valid_command_name)
         return;
@@ -313,7 +294,6 @@ void print_help(const boost::program_options::options_description& od,
                 });
     lambda(generate_command_name, generate_command_desc);
     lambda(convert_command_name, convert_command_desc);
-    lambda(weave_command_name, weave_command_desc);
 
     s << std::endl << "For command specific options, type <command> --help."
       << std::endl;
@@ -612,21 +592,6 @@ read_conversion_configuration(const variables_map& vm) {
     return r;
 }
 
-/**
- * @brief Reads the weaving configuration from the variables map.
- */
-weaving_configuration read_weaving_configuration(const variables_map& vm) {
-    weaving_configuration r;
-
-    using boost::filesystem::absolute;
-    if (vm.count(weaving_target_arg)) {
-        const auto s(vm[weaving_target_arg].as<std::string>());
-        r.target(absolute(s));
-    }
-
-    return r;
-}
-
 boost::filesystem::path read_byproduct_directory(
     const variables_map& vm, const std::string& run_identifier) {
 
@@ -701,17 +666,6 @@ handle_command(const std::string& command_name, const bool has_help,
         const auto cc(read_conversion_configuration(vm));
         target = cc.source();
         r.cli().activity(cc);
-    } else if (command_name == weave_command_name) {
-        const auto cod(make_weave_options_description());
-        if (has_help) {
-            print_help_command(weave_command_name, cod, info);
-            return empty_config();
-        }
-
-        store(command_line_parser(options).options(cod).run(), vm);
-        const auto wc(read_weaving_configuration(vm));
-        target = wc.target();
-        r.cli().activity(wc);
     }
 
     /*

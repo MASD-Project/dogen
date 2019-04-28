@@ -26,7 +26,6 @@
 #endif
 
 #include <boost/di.hpp>
-#include "masd.dogen.orchestration/types/weaver.hpp"
 #include "masd.dogen.orchestration/types/converter.hpp"
 #include "masd.dogen.orchestration/types/generator.hpp"
 
@@ -38,8 +37,6 @@ public:
         using boost::di::bind;
         using boost::di::make_injector;
         return make_injector(
-            bind<masd::dogen::weaver>
-            .to<masd::dogen::orchestration::weaver>(),
             bind<masd::dogen::converter>
             .to<masd::dogen::orchestration::converter>(),
             bind<masd::dogen::generator>

@@ -27,7 +27,6 @@
 
 #include "masd.dogen/test_data/configuration_td.hpp"
 #include "masd.dogen/test_data/tracing_level_td.hpp"
-#include "masd.dogen/test_data/weaving_style_td.hpp"
 #include "masd.dogen/test_data/tracing_format_td.hpp"
 #include "masd.dogen/test_data/reporting_style_td.hpp"
 #include "masd.dogen/test_data/diffing_destination_td.hpp"

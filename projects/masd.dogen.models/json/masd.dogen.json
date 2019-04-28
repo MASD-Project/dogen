@@ -162,24 +162,6 @@
       ]
     },
     {
-      "name": "weaving_style",
-      "documentation": "Style of the weaving to perform.\n",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "stitch",
-          "type": ""
-        },
-        {
-          "name": "wale",
-          "type": ""
-        }
-      ]
-    },
-    {
       "name": "configuration_validator",
       "stereotypes": [
         "masd::handcrafted"
@@ -229,21 +211,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "weaver",
-      "stereotypes": [
-        "masd::interface"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "generation_exception",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "weaving_exception",
       "stereotypes": [
         "masd::exception"
       ],

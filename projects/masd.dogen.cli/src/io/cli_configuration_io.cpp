@@ -21,19 +21,18 @@
 #include <ostream>
 #include <boost/variant/apply_visitor.hpp>
 #include "masd.dogen.cli/io/cli_configuration_io.hpp"
-#include "masd.dogen.cli/io/weaving_configuration_io.hpp"
 #include "masd.dogen.cli/io/conversion_configuration_io.hpp"
 #include "masd.dogen.cli/io/generation_configuration_io.hpp"
 
 namespace boost {
 
-struct boost_variant_masd_dogen_cli_generation_configuration_masd_dogen_cli_conversion_configuration_masd_dogen_cli_weaving_configuration_visitor : public boost::static_visitor<> {
-    boost_variant_masd_dogen_cli_generation_configuration_masd_dogen_cli_conversion_configuration_masd_dogen_cli_weaving_configuration_visitor(std::ostream& s) : stream_(s) {
+struct boost_variant_masd_dogen_cli_generation_configuration_masd_dogen_cli_conversion_configuration_visitor : public boost::static_visitor<> {
+    boost_variant_masd_dogen_cli_generation_configuration_masd_dogen_cli_conversion_configuration_visitor(std::ostream& s) : stream_(s) {
         s << "{ " << "\"__type__\": " << "\"boost::variant\"" << ", ";
         s << "\"data\": ";
     }
 
-    ~boost_variant_masd_dogen_cli_generation_configuration_masd_dogen_cli_conversion_configuration_masd_dogen_cli_weaving_configuration_visitor() { stream_ << " }"; }
+    ~boost_variant_masd_dogen_cli_generation_configuration_masd_dogen_cli_conversion_configuration_visitor() { stream_ << " }"; }
 
     void operator()(const masd::dogen::cli::generation_configuration& v) const {
         stream_ << v;
@@ -43,16 +42,12 @@ struct boost_variant_masd_dogen_cli_generation_configuration_masd_dogen_cli_conv
         stream_ << v;
     }
 
-    void operator()(const masd::dogen::cli::weaving_configuration& v) const {
-        stream_ << v;
-    }
-
 private:
     std::ostream& stream_;
 };
 
-inline std::ostream& operator<<(std::ostream& s, const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration, masd::dogen::cli::weaving_configuration>& v) {
-    boost::apply_visitor(boost_variant_masd_dogen_cli_generation_configuration_masd_dogen_cli_conversion_configuration_masd_dogen_cli_weaving_configuration_visitor(s), v);
+inline std::ostream& operator<<(std::ostream& s, const boost::variant<masd::dogen::cli::generation_configuration, masd::dogen::cli::conversion_configuration>& v) {
+    boost::apply_visitor(boost_variant_masd_dogen_cli_generation_configuration_masd_dogen_cli_conversion_configuration_visitor(s), v);
     return s;
 }
 

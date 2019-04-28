@@ -30,26 +30,20 @@ namespace {
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory("cli.application"));
 
-using masd::dogen::weaver;
 using masd::dogen::generator;
 using masd::dogen::converter;
 using masd::dogen::cli::configuration;
 using masd::dogen::cli::application_exception;
 using masd::dogen::cli::generation_configuration;
-using masd::dogen::cli::weaving_configuration;
 using masd::dogen::cli::conversion_configuration;
 
 class activity_dispatcher : public boost::static_visitor<> {
 public:
-    activity_dispatcher(const weaver& w, const converter& c, const generator& g,
+    activity_dispatcher(const converter& c, const generator& g,
         const configuration& cfg)
-        : weaver_(w), converter_(c), generator_(g), configuration_(cfg) {}
+        : converter_(c), generator_(g), configuration_(cfg) {}
 
 public:
-    void operator()(const weaving_configuration& cfg) const {
-        weaver_.weave(configuration_.api(), cfg.target());
-    }
-
     void operator()(const conversion_configuration& cfg) const {
         converter_.convert(configuration_.api(), cfg.source(),
             cfg.destination());
@@ -61,7 +55,6 @@ public:
     }
 
 private:
-    const weaver& weaver_;
     const converter& converter_;
     const generator& generator_;
     const configuration& configuration_;
@@ -72,8 +65,8 @@ private:
 namespace masd::dogen::cli {
 
 application::
-application(const weaver& w, const converter& c, const generator& g)
-    : weaver_(w), converter_(c), generator_(g) {}
+application(const converter& c, const generator& g)
+    : converter_(c), generator_(g) {}
 
 void application::run(const configuration& cfg) const {
     BOOST_LOG_SEV(lg, debug) << "Application started.";
@@ -83,7 +76,7 @@ void application::run(const configuration& cfg) const {
      * sense. No point in proceeding otherwise.
      */
     configuration_validator::validate(cfg);
-    activity_dispatcher d(weaver_, converter_, generator_, cfg);
+    activity_dispatcher d(converter_, generator_, cfg);
     boost::apply_visitor(d, cfg.cli().activity());
 
     BOOST_LOG_SEV(lg, debug) << "Application finished.";

@@ -36,7 +36,6 @@
 using namespace masd::dogen::utility::log;
 using masd::dogen::cli::injector_factory;
 using masd::dogen::cli::command_line_parser;
-using masd::dogen::cli::weaving_configuration;
 using masd::dogen::cli::conversion_configuration;
 using masd::dogen::cli::generation_configuration;
 using masd::dogen::cli::program_options_parser;
@@ -60,7 +59,6 @@ const std::string invalid_log_level_msg("Log level is invalid");
 
 const std::string invalid_command_arg("invalid-command");
 const std::string generate_command_arg("generate");
-const std::string weave_command_arg("weave");
 const std::string convert_command_arg("convert");
 const std::string help_arg("--help");
 const std::string version_arg("--version");
@@ -269,8 +267,6 @@ BOOST_AUTO_TEST_CASE(supplying_an_invalid_command_or_argument_throws) {
     typedef std::vector<std::string> vector;
     check_exception(vector { invalid_arg }, missing_command_msg);
     check_exception(vector { generate_command_arg, invalid_arg },
-        invalid_argument_msg);
-    check_exception(vector { weave_command_arg, invalid_arg },
         invalid_argument_msg);
     check_exception(vector { convert_command_arg, invalid_arg },
         invalid_argument_msg);
