@@ -27,6 +27,8 @@
 
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/repository.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/locator.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/model.hpp"
@@ -42,7 +44,10 @@ private:
         const variability::type_repository& atrp, model& fm) const;
 
     void expand_assistant_properties(
-        const variability::type_repository& atrp, model& fm) const;
+        const variability::type_repository& atrp,
+        const variability::meta_model::feature_model& feature_model,
+        const bool use_configuration,
+        model& fm) const;
 
     void reduce(model& fm) const;
 
@@ -53,7 +58,8 @@ private:
 
 public:
     void expand(const variability::type_repository& atrp,
-        const variability::annotation& ra,
+        const variability::meta_model::feature_model& feature_model,
+        const bool use_configuration,
         const formatters::repository& frp, const locator& l, model& fm) const;
 };
 

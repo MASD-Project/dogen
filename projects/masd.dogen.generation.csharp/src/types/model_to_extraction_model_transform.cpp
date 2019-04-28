@@ -49,11 +49,12 @@ model_to_extraction_model_transform::
 formattables::model
 model_to_extraction_model_transform::create_formattables_model(
     const variability::type_repository& atrp,
-    const variability::annotation& ra,
+    const variability::meta_model::feature_model& feature_model,
+    const bool use_configuration,
     const formatters::repository& frp, const formattables::locator& l,
     const generation::meta_model::model& m) const {
     formattables::workflow fw;
-    return fw.execute(atrp, ra, frp, l, m);
+    return fw.execute(atrp, feature_model, use_configuration, frp, l, m);
 }
 
 std::string model_to_extraction_model_transform::id() const {
@@ -147,7 +148,7 @@ model_to_extraction_model_transform::apply(
     /*
      * Generate the formattables model.
      */
-    const auto fm(create_formattables_model(atrp, ra, frp, l, m));
+    const auto fm(create_formattables_model(atrp, feature_model, uc, frp, l, m));
 
     /*
      * Code-generate all artefacts.

@@ -46,20 +46,22 @@ model workflow:: make_model(const formatters::repository& frp,
 
 void workflow::expand_model(
     const variability::type_repository& atrp,
-    const variability::annotation& ra,
+    const variability::meta_model::feature_model& feature_model,
+    const bool use_configuration,
     const formatters::repository& frp, const locator& l, model& fm) const {
     model_expander ex;
-    ex.expand(atrp, ra, frp, l, fm);
+    ex.expand(atrp, feature_model, use_configuration, frp, l, fm);
 }
 
 model workflow::execute(
     const variability::type_repository& atrp,
-    const variability::annotation& ra,
+    const variability::meta_model::feature_model& feature_model,
+    const bool use_configuration,
     const formatters::repository& frp, const locator& l,
     const generation::meta_model::model& m) const {
 
     auto r(make_model(frp, m));
-    expand_model(atrp, ra, frp, l, r);
+    expand_model(atrp, feature_model, use_configuration, frp, l, r);
 
     BOOST_LOG_SEV(lg, trace) << "Formattables model: " << r;
 

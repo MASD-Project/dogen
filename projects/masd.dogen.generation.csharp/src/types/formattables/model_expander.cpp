@@ -42,10 +42,13 @@ void model_expander::expand_aspect_properties(
 }
 
 void model_expander::expand_assistant_properties(
-    const variability::type_repository& atrp, model& fm) const {
+    const variability::type_repository& atrp,
+    const variability::meta_model::feature_model& feature_model,
+    const bool use_configuration,
+    model& fm) const {
 
     assistant_expander ex;
-    ex.expand(atrp, fm);
+    ex.expand(atrp, feature_model, use_configuration, fm);
 }
 
 void model_expander::reduce(model& fm) const {
@@ -66,7 +69,8 @@ void model_expander::expand_helpers(const variability::type_repository& atrp,
 
 void model_expander::expand(
     const variability::type_repository& atrp,
-    const variability::annotation& /*ra*/,
+    const variability::meta_model::feature_model& feature_model,
+    const bool use_configuration,
     const formatters::repository& frp, const locator& l, model& fm) const {
 
     /*
@@ -75,7 +79,7 @@ void model_expander::expand(
      * non-target elements.
      */
     expand_aspect_properties(atrp, fm);
-    expand_assistant_properties(atrp, fm);
+    expand_assistant_properties(atrp, feature_model, use_configuration, fm);
 
     /*
      * We must expand helpers before reduction because we want to
