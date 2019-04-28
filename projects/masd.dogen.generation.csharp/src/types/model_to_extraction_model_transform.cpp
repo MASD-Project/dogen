@@ -133,12 +133,16 @@ model_to_extraction_model_transform::apply(
      * Create the locator.
      */
     const auto mn(m.name());
+    const auto uc(ctx.use_configuration());
     const auto& ra(m.root_module()->annotation());
+    const auto& rcfg(*m.root_module()->configuration());
     const auto& atrp(*ctx.type_repository());
+    const auto& feature_model(*ctx.feature_model());
     const auto odp(ctx.output_directory_path());
     const auto& frp(formatters::workflow::registrar().formatter_repository());
     const bool ekd(enable_backend_directories);
-    const formattables::locator l(odp, atrp, frp, ra, mn, m.module_ids(), ekd);
+    const formattables::locator l(odp, atrp, feature_model, uc, frp, ra, rcfg,
+        mn, m.module_ids(), ekd);
 
     /*
      * Generate the formattables model.

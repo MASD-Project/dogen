@@ -23,6 +23,8 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/helpers/feature_selector.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.generation.csharp/types/traits.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/location_error.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/artefact_formatter_interface.hpp"
@@ -45,13 +47,19 @@ const std::string missing_archetype_configuration(
 namespace masd::dogen::generation::csharp::formattables {
 
 locator::locator(const boost::filesystem::path& output_directory_path,
-    const variability::type_repository& atrp, const formatters::repository& frp,
+    const variability::type_repository& atrp,
+    const variability::meta_model::feature_model& fm,
+    const bool use_configuration,
+    const formatters::repository& frp,
     const variability::annotation& root,
+    const variability::meta_model::configuration& rcfg,
     const coding::meta_model::name& model_name,
     const std::unordered_set<std::string>& module_ids,
     const bool enable_backend_directories)
     : model_name_(model_name),
-      configuration_(make_configuration(atrp, frp, root)),
+      configuration_(use_configuration ?
+          make_configuration(fm, frp, rcfg) :
+          make_configuration(atrp, frp, root)),
       module_ids_(module_ids),
       project_path_(make_project_path(output_directory_path, model_name,
               configuration_, enable_backend_directories)) {}
@@ -151,6 +159,105 @@ locator_configuration locator::make_configuration(
 
     const auto tg(make_type_group (atrp, frp));
     const auto r(make_configuration(tg, o));
+    return r;
+}
+
+locator::feature_group locator::make_feature_group(
+    const variability::meta_model::feature_model& feature_model,
+    const formatters::repository& frp) const {
+
+    feature_group r;
+    const variability::helpers::feature_selector s(feature_model);
+
+    std::unordered_set<std::string> processed_facets;
+    for (const auto ptr : frp.stock_artefact_formatters()) {
+        const auto& fmt(*ptr);
+        const auto& al(fmt.archetype_location());
+
+        const auto arch(al.archetype());
+        const auto fct(al.facet());
+        const auto pf(traits::postfix());
+
+        formatter_feature_group fmt_tg;
+        const auto pfix(traits::postfix());
+        fmt_tg.archefeature_postfix = s.get_by_name(arch, pfix);
+
+        auto dir(s.try_get_by_name(fct, traits::directory()));
+        if (dir)
+            fmt_tg.facet_directory = *dir;
+
+        auto postfix(s.try_get_by_name(fct, traits::postfix()));
+        if (postfix)
+            fmt_tg.facet_postfix = *postfix;
+
+        r.formatters_feature_group[arch] = fmt_tg;
+
+        const bool done(processed_facets.find(fct) != processed_facets.end());
+        if (fmt_tg.facet_directory && !done) {
+            processed_facets.insert(fct);
+            facet_feature_group fct_tg;
+            fct_tg.directory = *fmt_tg.facet_directory;
+            fct_tg.postfix = *fmt_tg.facet_postfix;
+            r.facets_feature_group[fct] = fct_tg;
+        }
+    }
+
+    const auto& kdn(traits::backend_directory_name());
+    r.backend_directory_name = s.get_by_name(kdn);
+
+    return r;
+}
+
+locator_configuration locator::make_configuration(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) const {
+
+    locator_configuration r;
+    const variability::helpers::configuration_selector s(cfg);
+
+    const auto& kdn(fg.backend_directory_name);
+    r.backend_directory_name(s.get_text_content_or_default(kdn));
+
+    for (const auto& pair : fg.facets_feature_group) {
+        const auto fct(pair.first);
+        const auto& fct_tg(pair.second);
+
+        locator_facet_configuration fct_cfg;
+        fct_cfg.directory(s.get_text_content_or_default(fct_tg.directory));
+        fct_cfg.postfix(s.get_text_content_or_default(fct_tg.postfix));
+        r.facet_configurations()[fct] = fct_cfg;
+    }
+
+    for (const auto& pair : fg.formatters_feature_group) {
+        const auto arch(pair.first);
+        const auto fmt_tg(pair.second);
+        locator_archetype_configuration arch_cfg;
+
+        if (fmt_tg.facet_directory) {
+            const auto t(*fmt_tg.facet_directory);
+            arch_cfg.facet_directory(s.get_text_content_or_default(t));
+        }
+
+        if (fmt_tg.facet_postfix) {
+            const auto t(*fmt_tg.facet_postfix);
+            arch_cfg.facet_postfix(s.get_text_content_or_default(t));
+        }
+
+        const auto pfix(fmt_tg.archefeature_postfix);
+        arch_cfg.archetype_postfix(s.get_text_content_or_default(pfix));
+
+        r.archetype_configurations()[arch] = arch_cfg;
+    }
+
+    return r;
+}
+
+locator_configuration locator::make_configuration(
+    const variability::meta_model::feature_model& fm,
+    const formatters::repository& frp,
+    const variability::meta_model::configuration& cfg) {
+
+    const auto fg(make_feature_group (fm, frp));
+    const auto r(make_configuration(fg, cfg));
     return r;
 }
 
