@@ -1,4 +1,4 @@
-<#@ masd.annotations.profile=dogen.stitch #>
+<#@ masd.stitch.stream_variable_name=a.stream() #>
 <#@ masd.stitch.containing_namespaces=masd::dogen::generation::cpp::formatters::test_data #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/test_data/number_helper.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/assistant.hpp" #>

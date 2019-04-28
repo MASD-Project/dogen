@@ -1,4 +1,5 @@
-<#@ masd.annotations.profile=dogen.stitch #>
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=masd::dogen::generation::cpp::formatters #>
 <#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>

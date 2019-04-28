@@ -1,4 +1,4 @@
-<#@ masd.annotations.profile=dogen.stitch #>
+<#@ masd.stitch.stream_variable_name=a.stream() #>
 <#@ masd.stitch.containing_namespaces=masd::dogen::generation::cpp::formatters::types #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.coding/types/meta_model/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.coding/types/helpers/meta_name_factory.hpp" #>
