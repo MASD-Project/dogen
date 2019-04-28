@@ -96,20 +96,6 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "stitch::workflow_error",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "stitch::workflow",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "stitch::parser",
       "stereotypes": [
         "masd::handcrafted"
