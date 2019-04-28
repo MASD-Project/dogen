@@ -13,20 +13,20 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-28 Sun 10:05]
+#+CAPTION: Clock summary at [2019-04-28 Sun 14:56]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *40:05* |       |       | 100.0 |
+| *Total time*                                           | *41:17* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 40:05   |       |       | 100.0 |
-| Active                                                 |         | 40:05 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  2:40 |   6.7 |
-| Sprint and product backlog grooming                    |         |       |  0:42 |   1.7 |
-| Create a video demo for the previous sprint's features |         |       |  1:55 |   4.8 |
-| Read variability papers                                |         |       |  1:04 |   2.7 |
-| Finish implementing the variability model              |         |       | 10:49 |  27.0 |
-| Read meta-data using configurations                    |         |       | 22:55 |  57.2 |
+| Stories                                                | 41:17   |       |       | 100.0 |
+| Active                                                 |         | 41:17 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  2:40 |   6.5 |
+| Sprint and product backlog grooming                    |         |       |  1:13 |   2.9 |
+| Create a video demo for the previous sprint's features |         |       |  1:55 |   4.6 |
+| Read variability papers                                |         |       |  1:04 |   2.6 |
+| Finish implementing the variability model              |         |       | 10:49 |  26.2 |
+| Read meta-data using configurations                    |         |       | 23:36 |  57.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -124,6 +124,8 @@ Happy Modeling!
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-04-28 Sun 14:40]--[2019-04-28 Sun 14:56] =>  0:16
+    CLOCK: [2019-04-28 Sun 14:24]--[2019-04-28 Sun 14:39] =>  0:15
     CLOCK: [2019-04-26 Fri 08:25]--[2019-04-26 Fri 08:45] =>  0:20
     CLOCK: [2019-04-22 Mon 09:38]--[2019-04-22 Mon 09:48] =>  0:10
     CLOCK: [2019-04-22 Mon 09:25]--[2019-04-22 Mon 09:37] =>  0:12
@@ -220,8 +222,31 @@ On the back of the redesign of the annotations model, which was
 completed last sprint, we now have to implement all classes and then
 hook them up to the engine.
 
+*** COMPLETED Supply decorations as a stitch parameter                :story:
+    CLOSED: [2019-04-28 Sun 14:23]
+
+*Rationale*: this was implemented as part of the decorations in
+meta-model work.
+
+As explained in other story at present we are creating the decoration
+inside the stitch template. This won't work with new world. We need to
+supply it as KVP. For now we will leave everything else as is.
+
+Notes:
+
+- factor out commonalities between wale and stitch into object
+  template regarding keys.
+- add validation to ensure all expected keys have been found. Look at
+  how that's done in wale.
+- add a way to supply KVPs from the outside world into stitch template
+  instantiation.
+- no decoration for root module
+- cmake files are not going via boilerplate.
+
 *** STARTED Read meta-data using configurations                       :story:
     :LOGBOOK:
+    CLOCK: [2019-04-28 Sun 14:01]--[2019-04-28 Sun 14:23] =>  0:22
+    CLOCK: [2019-04-28 Sun 10:32]--[2019-04-28 Sun 10:51] =>  0:19
     CLOCK: [2019-04-28 Sun 09:53]--[2019-04-28 Sun 10:04] =>  0:11
     CLOCK: [2019-04-28 Sun 09:33]--[2019-04-28 Sun 09:52] =>  0:19
     CLOCK: [2019-04-28 Sun 07:42]--[2019-04-28 Sun 08:15] =>  0:33
@@ -331,6 +356,16 @@ Notes:
 - make configuration model =Nameable=.
 - archetype location transform has forward decls disabled on input,
   but still seems to be generating it.
+
+
+*** STARTED Trim down stitch's use of annotations                     :story:
+
+- remove weaving: configuration, weaver, command line options, cmake
+  targets.
+- remove profile field from stitch templates. Should not break
+  anything.
+- remove annotations expander from workflow
+- add variability parameters to workflow, supply them from formatters.
 
 *** Create an element builder                                         :story:
 
@@ -817,6 +852,129 @@ So, in conclusion, two use cases for wale templates:
 - user model wants to define a new formatter. It will make use of
   dogen profiles and wale templates. These must be in the future data
   directory somehow.
+
+*** Split wale out of stitch templates                                :story:
+
+Stitch requires extra work in order to split out decoration. This is
+because in the past we relied on profiles to populate decoration. It
+worked because we were reading the same simple JSON files. Now we are
+relying on model references and meta-model entities, so this is no
+longer viable: they do not exist at the template level.
+
+One possible solution is to have a "reference" command line argument
+that loads up the user supplied model. We then need some kind of chain
+that applies the decoration transforms. The only solution is to create
+a temporary model that has some kind of coding element on it; this
+model is then supplied to the pipeline:
+
+- injection: needed to read the MASD model with decoration.
+- coding: needed to assemble the temp model with the MASD model and
+  to obtain the decoration.
+- generation: needed to populate the decoration properties.
+
+At this point we can then supply the annotations to the decoration
+formatter. This means that stitch now has a hard dependency on the
+rest of the dogen pipeline. Ideally we should try to split out
+weaving from stitching so that "weaving" becomes this complex
+pipeline but stitching just means the previous processing we did on
+templates. This could even mean we could remove annotations from
+stitching altogether and then have model to text transforms that
+join the stitch template output with the decoration.
+
+If we take this idea to the limit, what we are saying is that stitch
+templates can have KVPs associated with them, with multiple sources:
+
+- wale (as at present)
+- decorations. We need at least two: preamble and postamble.
+
+Note that operations (hand-crafted code to merge into the generated
+code) cannot be handled by the KVPs. This is because we are generating
+the stitch template itself, not the user facing code; we are
+generating the generator, so we are one level removed from the code
+generator. These can be handled as before, via a post-processing step
+that replaces guids with contents from the file system.
+
+To start off with we can just deprecate weaving for now. It is only
+used to quickly weave the model without code generation, but the
+generator is so quick that it does not make a lot of difference.
+
+It is important to note that we still have a two-level set of
+annotations:
+
+- the element annotations which contain the decoration. These are
+  processed prior to calling the stitch template instantiator to
+  generate the preamble and postamble KVPs (as well as the wale KVPs).
+- the annotation of the template itself. This contains the stitch
+  fields such as includes, etc. These will not contain any fields
+  related to decoration (e.g. it is no longer possible to decorate
+  from within stitch itself).
+
+This means that we need to remove all code from stitch that handles
+annotation expansion and just leave the annotation factory.
+
+We also need to look into how the wale keys were implemented - likely
+we've hard-coded it so that its always the same name:
+
+: <#$ stitch.wale.template_instantiation_result #>
+
+With a bit of luck its just a variable. If so we can then add at the
+top and bottom of each template:
+
+: <#$ stitch.decoration.preamble #>
+: ...
+: <#$ stitch.decoration.postamble #>
+
+It is *very important* to understand that this is the decoration of
+the output of the stitch template *itself*, not of the code it will
+generate. The decoration of the generated code will be handled as at
+present, by manually calling the decoration formatters.
+
+Notes:
+
+- we also need to split out the includes from the template. At present
+  it makes sense to supply it as a stitch KVP but in reality these are
+  parameters that should be inferred from the model. What we need is a
+  way to supply include dependencies in the meta-data. Then use that
+  information to build the include dependencies within
+  generation. Then use the list of includes to build the
+  boilerplate. The stitch template is just the core of the file.
+
+*** Remove annotations from stitch templates                          :story:
+
+In the new world, stitch templates don't have all of the required
+information to build the boilerplate:
+
+- they cannot expand wale templates because the KVPs will be in the
+  element itself, not the template. Strictly speaking this is not an
+  problem we have right now though.
+- more importantly, the include dependencies cannot be computed by the
+  template. This is because the dependencies are really a function of
+  the model type we are expressing on the template. Instead, we did a
+  quick hack and supplied the includes as KVPs. So they are kind of
+  parameters but kind of not really parameters because they are
+  hard-coded to the template. It solved the immediate problem of
+  having them formatted and placed in the right part of the file, but
+  now we can see this is not the right approach.
+
+In reality, we should not have any annotations at all in
+templates. The boilerplate and includes should be supplied as KVPs and
+applied as variables. They should be composed externally with access
+to data from the model element. Thus we then need a way to associate
+includes with model elements. This is captured as a separate story.
+
+*** Stitch is still using artefact writer                             :story:
+
+Create a templating transform that is similar to the approach used by
+extraction - in fact, stitch should probably be using a transform in
+extraction.
+
+Delete artefact writer.
+
+*** Stitch extension is hard-coded                                    :story:
+
+At present we have hard-coded the file extension in the output of
+stitch templates as =cpp=. We should really supply it as part of the
+configuration. Ideally even the entire filename.
 
 *** Exclude profiles from stereotypes processing                      :story:
 

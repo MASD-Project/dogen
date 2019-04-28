@@ -198,100 +198,6 @@ We could do with a simpler word for handcrafted. Check the literature.
 Once this is in place, we could have some top-level stereotype that
 aggregates all three (=masd::???=) and we can then tag types with it.
 
-*** Stitch is still using artefact writer                             :story:
-
-Create a templating transform that is similar to the approach used by
-extraction - in fact, stitch should probably be using a transform in
-extraction.
-
-Delete artefact writer.
-
-*** Split wale out of stitch templates                                :story:
-
-Stitch requires extra work in order to split out decoration. This is
-because in the past we relied on profiles to populate decoration. It
-worked because we were reading the same simple JSON files. Now we are
-relying on model references and meta-model entities, so this is no
-longer viable: they do not exist at the template level.
-
-One possible solution is to have a "reference" command line argument
-that loads up the user supplied model. We then need some kind of chain
-that applies the decoration transforms. The only solution is to create
-a temporary model that has some kind of coding element on it; this
-model is then supplied to the pipeline:
-
-- injection: needed to read the MASD model with decoration.
-- coding: needed to assemble the temp model with the MASD model and
-  to obtain the decoration.
-- generation: needed to populate the decoration properties.
-
-At this point we can then supply the annotations to the decoration
-formatter. This means that stitch now has a hard dependency on the
-rest of the dogen pipeline. Ideally we should try to split out
-weaving from stitching so that "weaving" becomes this complex
-pipeline but stitching just means the previous processing we did on
-templates. This could even mean we could remove annotations from
-stitching altogether and then have model to text transforms that
-join the stitch template output with the decoration.
-
-If we take this idea to the limit, what we are saying is that stitch
-templates can have KVPs associated with them, with multiple sources:
-
-- wale (as at present)
-- decorations. We need at least two: preamble and postamble.
-
-Note that operations (hand-crafted code to merge into the generated
-code) cannot be handled by the KVPs. This is because we are generating
-the stitch template itself, not the user facing code; we are
-generating the generator, so we are one level removed from the code
-generator. These can be handled as before, via a post-processing step
-that replaces guids with contents from the file system.
-
-To start off with we can just deprecate weaving for now. It is only
-used to quickly weave the model without code generation, but the
-generator is so quick that it does not make a lot of difference.
-
-It is important to note that we still have a two-level set of
-annotations:
-
-- the element annotations which contain the decoration. These are
-  processed prior to calling the stitch template instantiator to
-  generate the preamble and postamble KVPs (as well as the wale KVPs).
-- the annotation of the template itself. This contains the stitch
-  fields such as includes, etc. These will not contain any fields
-  related to decoration (e.g. it is no longer possible to decorate
-  from within stitch itself).
-
-This means that we need to remove all code from stitch that handles
-annotation expansion and just leave the annotation factory.
-
-We also need to look into how the wale keys were implemented - likely
-we've hard-coded it so that its always the same name:
-
-: <#$ stitch.wale.template_instantiation_result #>
-
-With a bit of luck its just a variable. If so we can then add at the
-top and bottom of each template:
-
-: <#$ stitch.decoration.preamble #>
-: ...
-: <#$ stitch.decoration.postamble #>
-
-It is *very important* to understand that this is the decoration of
-the output of the stitch template *itself*, not of the code it will
-generate. The decoration of the generated code will be handled as at
-present, by manually calling the decoration formatters.
-
-Notes:
-
-- we also need to split out the includes from the template. At present
-  it makes sense to supply it as a stitch KVP but in reality these are
-  parameters that should be inferred from the model. What we need is a
-  way to supply include dependencies in the meta-data. Then use that
-  information to build the include dependencies within
-  generation. Then use the list of includes to build the
-  boilerplate. The stitch template is just the core of the file.
-
 *** Create a "tests" stereotype with profiles                         :story:
 
 At present we are ignoring all of the contents of =tests=. This means
@@ -299,46 +205,6 @@ whenever we delete a type we are left behind with its tests. A better
 solution is to create model elements for each handcrafted test marked
 as "masd::handcrafted_test". This disables all facets except for
 tests. We can then remove the regex.
-
-*** Remove annotations from stitch templates                          :story:
-
-In the new world, stitch templates don't have all of the required
-information to build the boilerplate:
-
-- they cannot expand wale templates because the KVPs will be in the
-  element itself, not the template. Strictly speaking this is not an
-  problem we have right now though.
-- more importantly, the include dependencies cannot be computed by the
-  template. This is because the dependencies are really a function of
-  the model type we are expressing on the template. Instead, we did a
-  quick hack and supplied the includes as KVPs. So they are kind of
-  parameters but kind of not really parameters because they are
-  hard-coded to the template. It solved the immediate problem of
-  having them formatted and placed in the right part of the file, but
-  now we can see this is not the right approach.
-
-In reality, we should not have any annotations at all in
-templates. The boilerplate and includes should be supplied as KVPs and
-applied as variables. They should be composed externally with access
-to data from the model element. Thus we then need a way to associate
-includes with model elements. This is captured as a separate story.
-
-*** Supply decorations as a stitch parameter                          :story:
-
-As explained in other story at present we are creating the decoration
-inside the stitch template. This won't work with new world. We need to
-supply it as KVP. For now we will leave everything else as is.
-
-Notes:
-
-- factor out commonalities between wale and stitch into object
-  template regarding keys.
-- add validation to ensure all expected keys have been found. Look at
-  how that's done in wale.
-- add a way to supply KVPs from the outside world into stitch template
-  instantiation.
-- no decoration for root module
-- cmake files are not going via boilerplate.
 
 *** Associate includes with model elements                            :story:
 
@@ -367,12 +233,6 @@ but without adding to types referencing the type, this would give us a
 way to declare all of the formatters dependencies. Then, we could
 switch to building all of the stitch boilerplate outside of stitch and
 supplying it as a KVP.
-
-*** Stitch extension is hard-coded                                    :story:
-
-At present we have hard-coded the file extension in the output of
-stitch templates as =cpp=. We should really supply it as part of the
-configuration. Ideally even the entire filename.
 
 *** Configuration classes with traits                                 :story:
 
@@ -12681,16 +12541,31 @@ For now, to make life easier we will roll our own. As soon as we have
 a stable windows environment we will move to bustache.
 #+end_quote
 
-We should really move to one of these mustache implementations.
+We should really move to one of these mustache implementations. Inja
+seems to be the most sensible one, even though it depends on a JSON
+library. We will need JSON internally anyway, so it may be the time to
+add a dependency. We should also have a way to associate an arbitrary
+JSON document with a formatter so that users can create their own
+templates with their own parameters and the model is merely used for
+pass-through.
+
+We should also start to create a standard set of variables that dogen
+exports into inja such as object name, namespaces, etc. These are
+"system variables" and do not require any action from the user.
+
+Note that stitch only makes sense when we are creating a code
+generator (at least given the use cases we have so far) whereas inja
+makes sense even for regular models and can be applied to items in any
+technical space.
 
 Links:
 
 - [[https://github.com/cierelabs/boostache/tree/develop][boostache]]
 - [[https://github.com/no1msd/mstch][mstch]]
-- [[https://github.com/mrtazz/plustache][plustache]]
+- [[https://github.com/mrtazz/plustache][plustache]] (in vcpkg)
 - [[https://github.com/melpon/ginger][ginger]]
 - [[https://github.com/qicosmos/render][render]]
-- [[https://github.com/pantor/inja][inja]]
+- [[https://github.com/pantor/inja][inja]]: in vcpkg, needs JSON library.
 - [[https://github.com/jrziviani/amps][amps]]
 
 *** Model anonymiser and slicer                                       :story:
@@ -14823,3 +14698,34 @@ Links
   [[https://sonarcloud.io/dashboard?id=libtorrent][project page]].
 - [[https://sonarcloud.io/dashboard?id=MASD-Project_dogen][MASD-Project_dogen]]
 - [[https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner][Analyzing with SonarQube Scanner]]
+*** Consider adding weaving support as a command                      :story:
+
+With the refactorings, we removed top-level weaving support in sprint
+16 (around Apr 27 2019). Weaving made sense originally because stitch
+was responsible for processing a stitch template and had all the
+information required to convert a sttich template into a compilable
+C++ file. This was because stitch had its own annotations and access
+to the profiling system. However, with the integration of variability
+into the meta-model, sadly it no longer made sense to have a
+self-contained template because the variability elements had to come
+from a model. In order to have a self-contained template we need to:
+
+- process an associated model (or set of models, via references);
+- build all of the variability structures;
+- supply them into the stitch template workflow.
+
+This means that its almost as hard as code-generating the entire model
+in the first place. It may still make sense to create some transform
+chains to execute this use case, but we do not have any use cases for
+it at present and it is non-trivial to implement this.
+
+A second, related, approach is to allow the mere "template
+instantiation". In this case, you can generate stitch templates but
+these have no knowledge of the model. You could use stitch outside of
+dogen for whatever use case you may have (e.g. as a stand-alone T4
+like language) but you have no access to any of the model machinery
+(at least to start off with). Similarly, with wale (and inja, in the
+future), you could expand templates etc but without connection to a
+model. Again, we don't really have concrete use cases for these as of
+yet so we haven't decided on implementation details, but this story
+will be used to capture ideas in this space.
