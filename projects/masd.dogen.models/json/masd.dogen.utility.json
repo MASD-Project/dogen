@@ -383,13 +383,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "test_data::stitch",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "test_data::tds_test_good",
       "stereotypes": [
         "masd::handcrafted"

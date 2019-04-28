@@ -51,7 +51,6 @@
 #include "masd.dogen.utility/types/string/splitter.hpp"
 #include "masd.dogen.utility/types/xml/text_reader.hpp"
 #include "masd.dogen.utility/types/io/shared_ptr_io.hpp"
-#include "masd.dogen.utility/types/test_data/stitch.hpp"
 #include "masd.dogen.utility/types/xml/node_types_io.hpp"
 #include "masd.dogen.utility/types/io/forward_list_io.hpp"
 #include "masd.dogen.utility/types/log/severity_level.hpp"
