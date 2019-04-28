@@ -13,20 +13,20 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-28 Sun 09:52]
+#+CAPTION: Clock summary at [2019-04-28 Sun 10:05]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *39:54* |       |       | 100.0 |
+| *Total time*                                           | *40:05* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 39:54   |       |       | 100.0 |
-| Active                                                 |         | 39:54 |       | 100.0 |
+| Stories                                                | 40:05   |       |       | 100.0 |
+| Active                                                 |         | 40:05 |       | 100.0 |
 | Edit release notes for previous sprint                 |         |       |  2:40 |   6.7 |
-| Sprint and product backlog grooming                    |         |       |  0:42 |   1.8 |
+| Sprint and product backlog grooming                    |         |       |  0:42 |   1.7 |
 | Create a video demo for the previous sprint's features |         |       |  1:55 |   4.8 |
 | Read variability papers                                |         |       |  1:04 |   2.7 |
-| Finish implementing the variability model              |         |       | 10:49 |  27.1 |
-| Read meta-data using configurations                    |         |       | 22:44 |  57.0 |
+| Finish implementing the variability model              |         |       | 10:49 |  27.0 |
+| Read meta-data using configurations                    |         |       | 22:55 |  57.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -222,6 +222,7 @@ hook them up to the engine.
 
 *** STARTED Read meta-data using configurations                       :story:
     :LOGBOOK:
+    CLOCK: [2019-04-28 Sun 09:53]--[2019-04-28 Sun 10:04] =>  0:11
     CLOCK: [2019-04-28 Sun 09:33]--[2019-04-28 Sun 09:52] =>  0:19
     CLOCK: [2019-04-28 Sun 07:42]--[2019-04-28 Sun 08:15] =>  0:33
     CLOCK: [2019-04-28 Sun 06:40]--[2019-04-28 Sun 07:29] =>  0:49

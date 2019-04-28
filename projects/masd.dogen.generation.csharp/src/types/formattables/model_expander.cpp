@@ -62,9 +62,11 @@ void model_expander::expand_project_items(model& fm) const {
 }
 
 void model_expander::expand_helpers(const variability::type_repository& atrp,
+    const variability::meta_model::feature_model& feature_model,
+    const bool use_configuration,
     const formatters::repository& frp, model& fm) const {
     helper_expander he;
-    he.expand(atrp, frp, fm);
+    he.expand(atrp, feature_model, use_configuration, frp, fm);
 }
 
 void model_expander::expand(
@@ -86,7 +88,7 @@ void model_expander::expand(
      * generate helpers for all referenced types, not just those in
      * the target model.
      */
-    expand_helpers(atrp, frp, fm);
+    expand_helpers(atrp, feature_model, use_configuration, frp, fm);
 
     reduce(fm);
 

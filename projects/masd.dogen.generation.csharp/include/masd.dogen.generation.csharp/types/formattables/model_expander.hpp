@@ -53,6 +53,8 @@ private:
 
     void expand_project_items(model& fm) const;
     void expand_helpers(const variability::type_repository& atrp,
+        const variability::meta_model::feature_model& feature_model,
+        const bool use_configuration,
         const formatters::repository& frp,
         model& fm) const;
 

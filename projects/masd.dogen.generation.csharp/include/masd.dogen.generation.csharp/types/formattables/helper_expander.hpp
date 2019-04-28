@@ -28,6 +28,9 @@
 #include <unordered_set>
 #include <unordered_map>
 #include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/repository.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/helper_configuration.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/formattable.hpp"
@@ -46,6 +49,17 @@ private:
     helper_configuration
     make_configuration(const type_group& tg, const model& fm) const;
 
+private:
+    struct feature_group {
+        variability::meta_model::feature family;
+    };
+
+    feature_group make_feature_group(
+        const variability::meta_model::feature_model& fm) const;
+
+    helper_configuration
+    make_configuration(const feature_group& fg, const model& fm) const;
+
 public:
     typedef std::unordered_map<std::string, std::unordered_set<std::string>>
     facets_for_family_type;
@@ -60,8 +74,9 @@ private:
 
 public:
     void expand(const variability::type_repository& atrp,
+        const variability::meta_model::feature_model& feature_model,
+        const bool use_configuration,
         const formatters::repository& frp, model& fm) const;
-
 };
 
 }
