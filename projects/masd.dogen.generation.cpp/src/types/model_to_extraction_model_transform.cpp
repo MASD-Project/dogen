@@ -94,10 +94,12 @@ std::list<extraction::meta_model::artefact>
 model_to_extraction_model_transform::
 format(const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element, const variability::type_repository& atrp,
+    const variability::meta_model::feature_model& feature_model,
+    const bool use_configuration,
     const variability::annotation_factory& af,
-    const variability::annotation_expander& ae,
+    const variability::helpers::configuration_factory& cf,
     const formattables::model& fm) const {
-    formatters::workflow wf(atrp, af, ae);
+    formatters::workflow wf(atrp, feature_model, use_configuration, af, cf);
     return wf.execute(enabled_archetype_for_element, fm);
 }
 
@@ -147,8 +149,6 @@ std::unordered_map<std::string,
                    generation::meta_model::intra_backend_segment_properties>
 model_to_extraction_model_transform::
 intra_backend_segment_properties() const {
-    // coding::meta_model::intra_backend_segment_properties include;
-    // coding::meta_model::intra_backend_segment_properties implementation;
     std::unordered_map<
         std::string,
         generation::meta_model::intra_backend_segment_properties> r;
@@ -189,10 +189,12 @@ extraction::meta_model::model model_to_extraction_model_transform::apply(
      */
     extraction::meta_model::model r;
     const auto& af(*ctx.annotation_factory());
-    const auto& ae(*ctx.annotation_expander());
     const auto& eafe(m.enabled_archetype_for_element());
+    const variability::helpers::configuration_factory
+        cf(*ctx.archetype_location_repository(), feature_model,
+            false);
 
-    r.artefacts(format(eafe, atrp, af, ae, fm));
+    r.artefacts(format(eafe, atrp, feature_model, uc, af, cf, fm));
     r.managed_directories(managed_directories(l));
 
     BOOST_LOG_SEV(lg, debug) << "Finished backend.";

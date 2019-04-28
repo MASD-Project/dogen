@@ -31,7 +31,8 @@
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/annotation_factory.hpp"
-#include "masd.dogen.variability/types/annotation_expander.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_factory.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.templating/types/stitch/properties_factory.hpp"
 #include "masd.dogen.templating/types/stitch/text_template.hpp"
@@ -46,8 +47,10 @@ typedef boost::error_info<struct tag_file_name, std::string> error_in_file;
 class instantiator final {
 public:
     instantiator(const variability::type_repository& atrp,
+        const variability::meta_model::feature_model& fm,
+        const bool use_configuration,
         const variability::annotation_factory& af,
-        const variability::annotation_expander& ae);
+        const variability::helpers::configuration_factory& cf);
 
 private:
     /**
@@ -105,8 +108,9 @@ public:
         const std::unordered_map<std::string, std::string>& kvps) const;
 
 private:
+    bool use_configuration_;
     const variability::annotation_factory& annotation_factory_;
-    const variability::annotation_expander& annotation_expander_;
+    const variability::helpers::configuration_factory& configuration_factory_;
     const properties_factory properties_factory_;
 };
 

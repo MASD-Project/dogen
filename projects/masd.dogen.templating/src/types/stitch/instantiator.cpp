@@ -50,10 +50,12 @@ const std::string duplicate_key("Attempt to insert duplicate key: ");
 namespace masd::dogen::templating::stitch {
 
 instantiator::instantiator(const variability::type_repository& atrp,
+    const variability::meta_model::feature_model& fm,
+    const bool use_configuration,
     const variability::annotation_factory& af,
-    const variability::annotation_expander& ae)
-    : annotation_factory_(af), annotation_expander_(ae),
-      properties_factory_(atrp) {}
+            const variability::helpers::configuration_factory& cf)
+    : use_configuration_(use_configuration), annotation_factory_(af),
+      configuration_factory_(cf), properties_factory_(atrp, fm) {}
 
 boost::filesystem::path
 instantiator::compute_output_path(const boost::filesystem::path& input_path,
@@ -193,10 +195,11 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
          */
         const auto st(variability::scope_types::root_module);
         const auto& tv(r.body().tagged_values());
-        const auto original(annotation_factory_.make(tv, st));
-        const auto expanded(annotation_expander_.expand(original));
-        BOOST_LOG_SEV(lg, debug) << "Annotation: " << expanded;
-        r.properties(properties_factory_.make(expanded));
+        const auto a(annotation_factory_.make(tv, st));
+        const auto bp(variability::meta_model::binding_point::global);
+        const auto cfg(configuration_factory_.make(tv, bp));
+        r.properties(use_configuration_ ?
+            properties_factory_.make(cfg) : properties_factory_.make(a));
 
         /*
          * Perform the required processing for wale templates.

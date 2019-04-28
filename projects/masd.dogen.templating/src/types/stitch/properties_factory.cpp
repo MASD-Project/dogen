@@ -23,6 +23,8 @@
 #include "masd.dogen.utility/types/string/splitter.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/helpers/feature_selector.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.templating/types/stitch/traits.hpp"
 #include "masd.dogen.templating/types/stitch/building_error.hpp"
 #include "masd.dogen.templating/types/stitch/properties_factory.hpp"
@@ -39,8 +41,10 @@ const std::string field_definition_not_found(
 
 namespace masd::dogen::templating::stitch {
 
-properties_factory::properties_factory(const variability::type_repository& arp)
-    : type_group_(make_type_group(arp)) {}
+properties_factory::properties_factory(const variability::type_repository& arp,
+    const variability::meta_model::feature_model& fm)
+    : type_group_(make_type_group(arp)),
+      feature_group_(make_feature_group(fm)) {}
 
 properties_factory::type_group properties_factory::make_type_group(
     const variability::type_repository& arp) const {
@@ -139,6 +143,115 @@ extract_wale_kvps(const variability::annotation& a) const {
 
     return s.get_kvp_content(t);
 }
+
+properties_factory::feature_group properties_factory::make_feature_group(
+    const variability::meta_model::feature_model& fm) const {
+    feature_group r;
+    const variability::helpers::feature_selector s(fm);
+
+    const auto& svn(traits::stream_variable_name());
+    r.stream_variable_name = s.get_by_name(svn);
+
+    const auto& rod(traits::relative_output_directory());
+    r.relative_output_directory = s.get_by_name(rod);
+
+    const auto& id(traits::inclusion_dependency());
+    r.inclusion_dependency = s.get_by_name(id);
+
+    const auto cn(traits::containing_namespaces());
+    r.containing_namespaces = s.get_by_name(cn);
+
+    const auto wt(traits::wale_template());
+    r.wale_template = s.get_by_name(wt);
+
+    const auto wkvp(traits::wale_kvp());
+    r.wale_kvp = s.get_by_name(wkvp);
+
+    return r;
+}
+
+std::string properties_factory::
+extract_stream_variable_name(
+    const variability::meta_model::configuration& cfg) const {
+    const variability::helpers::configuration_selector s(cfg);
+    const auto& tg(feature_group_);
+    return s.get_text_content_or_default(tg.stream_variable_name);
+}
+
+boost::filesystem::path
+properties_factory::extract_relative_output_directory(
+    const variability::meta_model::configuration& cfg) const {
+    const variability::helpers::configuration_selector s(cfg);
+    if (!s.has_configuration_point(traits::relative_output_directory()))
+        return boost::filesystem::path();
+
+    const auto text(s.get_text_content(traits::relative_output_directory()));
+    return boost::filesystem::path(text);
+}
+
+std::list<std::string>
+properties_factory::extract_inclusion_dependencies(
+    const variability::meta_model::configuration& cfg) const {
+    std::list<std::string> r;
+    const variability::helpers::configuration_selector s(cfg);
+    const auto& f(feature_group_.inclusion_dependency);
+    if (!s.has_configuration_point(f))
+        return r;
+
+    return s.get_text_collection_content(f);
+}
+
+std::list<std::string>
+properties_factory::extract_containing_namespaces(
+    const variability::meta_model::configuration& cfg) const {
+    std::list<std::string> r;
+    const variability::helpers::configuration_selector s(cfg);
+    const auto& f(feature_group_.containing_namespaces);
+    if (!s.has_configuration_point(f))
+        return r;
+
+    const auto cns(s.get_text_content(f));
+    if (cns.empty())
+        return r;
+
+    using utility::string::splitter;
+    return splitter::split_scoped(cns);
+}
+
+std::string properties_factory::
+extract_wale_template(const variability::meta_model::configuration& cfg) const {
+    std::string r;
+    const variability::helpers::configuration_selector s(cfg);
+    const auto& f(feature_group_.wale_template);
+    if (!s.has_configuration_point(f))
+        return r;
+
+    return s.get_text_content(f);
+}
+
+std::unordered_map<std::string, std::string> properties_factory::
+extract_wale_kvps(const variability::meta_model::configuration& cfg) const {
+    std::unordered_map<std::string, std::string>  r;
+    const variability::helpers::configuration_selector s(cfg);
+    const auto& f(feature_group_.wale_kvp);
+    if (!s.has_configuration_point(f))
+        return r;
+
+    return s.get_kvp_content(f);
+}
+
+properties properties_factory::
+make(const variability::meta_model::configuration& cfg) const {
+    properties r;
+    r.stream_variable_name(extract_stream_variable_name(cfg));
+    r.relative_output_directory(extract_relative_output_directory(cfg));
+    r.inclusion_dependencies(extract_inclusion_dependencies(cfg));
+    r.containing_namespaces(extract_containing_namespaces(cfg));
+    r.wale_template(extract_wale_template(cfg));
+    r.wale_kvps(extract_wale_kvps(cfg));
+    return r;
+}
+
 
 properties
 properties_factory::make(const variability::annotation& a) const {

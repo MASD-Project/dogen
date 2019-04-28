@@ -34,7 +34,7 @@
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/annotation_factory.hpp"
-#include "masd.dogen.variability/types/annotation_expander.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_factory.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -99,8 +99,10 @@ private:
     std::list<extraction::meta_model::artefact>
     format(const std::unordered_set<generation::meta_model::element_archetype>&
         enabled_archetype_for_element, const variability::type_repository& atrp,
+        const variability::meta_model::feature_model& feature_model,
+        const bool use_configuration,
         const variability::annotation_factory& af,
-        const variability::annotation_expander& ae,
+        const variability::helpers::configuration_factory& cf,
         const formattables::model& fm) const;
 
     /**

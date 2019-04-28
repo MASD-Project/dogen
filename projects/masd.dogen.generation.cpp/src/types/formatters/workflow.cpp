@@ -45,9 +45,11 @@ namespace masd::dogen::generation::cpp::formatters {
 std::shared_ptr<cpp::formatters::registrar> workflow::registrar_;
 
 workflow::workflow(const variability::type_repository& atrp,
+    const variability::meta_model::feature_model& fm,
+    const bool use_configuration,
     const variability::annotation_factory& af,
-    const variability::annotation_expander& ae)
-    : stitch_formatter_(atrp, af, ae) { }
+    const variability::helpers::configuration_factory& cf)
+    : stitch_formatter_(atrp, fm, use_configuration, af, cf) { }
 
 cpp::formatters::registrar& workflow::registrar() {
     if (!registrar_)

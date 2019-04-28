@@ -41,9 +41,11 @@ const std::string decoration_postamble_key(
 namespace masd::dogen::generation::cpp::formatters {
 
 stitch_formatter::stitch_formatter(const variability::type_repository& atrp,
+    const variability::meta_model::feature_model& fm,
+    const bool use_configuration,
     const variability::annotation_factory& af,
-    const variability::annotation_expander& ae)
-    : instantiator_(atrp, af, ae) {}
+    const variability::helpers::configuration_factory& cf)
+    : instantiator_(atrp, fm, use_configuration, af, cf) {}
 
 bool stitch_formatter::is_header(const inclusion_support_types ist) const {
     return

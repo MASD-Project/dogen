@@ -26,7 +26,7 @@
 #endif
 
 #include "masd.dogen.variability/types/annotation_factory.hpp"
-#include "masd.dogen.variability/types/annotation_expander.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_factory.hpp"
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.coding/types/meta_model/element_fwd.hpp"
 #include "masd.dogen.templating/types/stitch/instantiator.hpp"
@@ -38,8 +38,10 @@ namespace masd::dogen::generation::cpp::formatters {
 class stitch_formatter final {
 public:
     stitch_formatter(const variability::type_repository& atrp,
+        const variability::meta_model::feature_model& fm,
+        const bool use_configuration,
         const variability::annotation_factory& af,
-        const variability::annotation_expander& ae);
+        const variability::helpers::configuration_factory& cf);
 
 private:
     bool is_header(const inclusion_support_types ist) const;

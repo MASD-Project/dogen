@@ -31,6 +31,9 @@
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.templating/types/stitch/properties.hpp"
 
 namespace masd::dogen::templating::stitch {
@@ -40,7 +43,8 @@ namespace masd::dogen::templating::stitch {
  */
 class properties_factory {
 public:
-    explicit properties_factory(const variability::type_repository& arp);
+    properties_factory(const variability::type_repository& arp,
+        const variability::meta_model::feature_model& fm);
 
 private:
     struct type_group {
@@ -94,6 +98,69 @@ private:
     std::unordered_map<std::string, std::string>
     extract_wale_kvps(const variability::annotation& a) const;
 
+private:
+    struct feature_group {
+        variability::meta_model::feature stream_variable_name;
+        variability::meta_model::feature relative_output_directory;
+        variability::meta_model::feature inclusion_dependency;
+        variability::meta_model::feature containing_namespaces;
+        variability::meta_model::feature wale_template;
+        variability::meta_model::feature wale_kvp;
+    };
+
+    /**
+     * @brief Creates the formatter properties.
+     */
+    feature_group
+    make_feature_group(const variability::meta_model::feature_model& fm) const;
+
+private:
+    /**
+     * @brief Extracts the stream variable name.
+     */
+    std::string
+    extract_stream_variable_name(
+        const variability::meta_model::configuration& cfg) const;
+
+    /**
+     * @brief Extracts the relative output directory.
+     */
+    boost::filesystem::path
+    extract_relative_output_directory(
+        const variability::meta_model::configuration& cfg) const;
+
+    /**
+     * @brief Extracts inclusion dependencies.
+     */
+    std::list<std::string>
+    extract_inclusion_dependencies(
+        const variability::meta_model::configuration& cfg) const;
+
+    /**
+     * @brief Extract containing namespaces.
+     */
+    std::list<std::string>
+    extract_containing_namespaces(
+        const variability::meta_model::configuration& cfg) const;
+
+    /**
+     * @brief Extract wale template
+     */
+    std::string extract_wale_template(
+        const variability::meta_model::configuration& cfg) const;
+
+    /**
+     * @brief Extract wale kvps
+     */
+    std::unordered_map<std::string, std::string>
+    extract_wale_kvps(const variability::meta_model::configuration& cfg) const;
+
+public:
+    /**
+     * @brief Create the stitching settings.
+     */
+    properties make(const variability::meta_model::configuration& cfg) const;
+
 public:
     /**
      * @brief Create the stitching settings.
@@ -102,6 +169,7 @@ public:
 
 private:
     const type_group type_group_;
+    const feature_group feature_group_;
 };
 
 }
