@@ -27,12 +27,11 @@
 namespace masd::dogen::injection::transforms {
 
 context::context()
-    : compatibility_mode_(false), use_configuration_(false) {}
+    : compatibility_mode_(false) {}
 
 context::context(
     const std::vector<boost::filesystem::path>& data_directories,
     const bool compatibility_mode,
-    const bool use_configuration,
     const boost::shared_ptr<masd::dogen::variability::type_repository>& type_repository,
     const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model,
     const boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository,
@@ -40,7 +39,6 @@ context::context(
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer)
     : data_directories_(data_directories),
       compatibility_mode_(compatibility_mode),
-      use_configuration_(use_configuration),
       type_repository_(type_repository),
       feature_model_(feature_model),
       archetype_location_repository_(archetype_location_repository),
@@ -61,14 +59,6 @@ bool context::compatibility_mode() const {
 
 void context::compatibility_mode(const bool v) {
     compatibility_mode_ = v;
-}
-
-bool context::use_configuration() const {
-    return use_configuration_;
-}
-
-void context::use_configuration(const bool v) {
-    use_configuration_ = v;
 }
 
 const boost::shared_ptr<masd::dogen::variability::type_repository>& context::type_repository() const {

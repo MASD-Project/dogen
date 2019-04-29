@@ -208,7 +208,6 @@ context context_factory::make_context(const configuration& cfg,
      * FIXME: top-level feature toggle for the new configuration
      * approach. To be removed once refactor is finished.
      */
-    r.injection_context().use_configuration(true);
     r.coding_context().use_configuration(true);
     r.generation_context().use_configuration(true);
     r.extraction_context().use_configuration(true);
