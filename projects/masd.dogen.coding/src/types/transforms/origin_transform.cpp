@@ -20,8 +20,6 @@
  */
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.variability/types/entry_selector.hpp"
-#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
@@ -82,25 +80,6 @@ private:
 
 }
 
-origin_transform::type_group origin_transform::
-make_type_group(const variability::type_repository& atrp) {
-
-    type_group r;
-    const variability::type_repository_selector s(atrp);
-    r.is_proxy_model = s.select_type_by_name(traits::is_proxy_model());
-    return r;
-}
-
-bool origin_transform::
-is_proxy_model(const type_group& tg, const meta_model::model& m) {
-    const auto& o(m.root_module()->annotation());
-    const variability::entry_selector s(o);
-    const bool r(s.get_boolean_content_or_default(tg.is_proxy_model));
-    BOOST_LOG_SEV(lg, debug) << "Read is proxy model: " << r
-                             << " for model: " << m.name().qualified().dot();
-    return r;
-}
-
 origin_transform::feature_group origin_transform::
 make_feature_group(const variability::meta_model::feature_model& fm) {
     feature_group r;
@@ -144,13 +123,8 @@ apply(const context& ctx, meta_model::model& m) {
 
 
     bool ipm(false);
-    if (ctx.use_configuration()) {
-        const auto fg(make_feature_group(*ctx.feature_model()));
-        ipm = is_proxy_model(fg, m);
-    } else {
-        const auto tg(make_type_group(*ctx.type_repository()));
-        ipm = is_proxy_model(tg, m);
-    }
+    const auto fg(make_feature_group(*ctx.feature_model()));
+    ipm = is_proxy_model(fg, m);
     const auto ot(compute_origin_types(m, ipm));
     m.origin_type(ot);
 
