@@ -59,7 +59,7 @@ make_feature_group(const variability::meta_model::feature_model& fm) {
 }
 
 void primitives_transform::
-populate_from_annotations(const feature_group& fg, meta_model::primitive& p) {
+populate_from_configuration(const feature_group& fg, meta_model::primitive& p) {
     const auto& cfg(*p.configuration());
     const variability::helpers::configuration_selector s(cfg);
     p.is_nullable(s.get_boolean_content_or_default(fg.is_nullable));
@@ -76,7 +76,7 @@ void primitives_transform::apply(const context& ctx, meta_model::model& m) {
         BOOST_LOG_SEV(lg, debug) << "Transforming: " << id;
 
         auto& p(*pair.second);
-        populate_from_annotations(fg, p);
+        populate_from_configuration(fg, p);
     }
 
     stp.end_transform(m);

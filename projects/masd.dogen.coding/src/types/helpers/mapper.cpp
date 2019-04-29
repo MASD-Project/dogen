@@ -253,7 +253,7 @@ meta_model::model mapper::map(const meta_model::technical_space from,
 
     /*
      * For now we always use the default mapping set. In the future
-     * this will be configurable via annotations.
+     * this will be configurable via variability.
      */
     const auto& ms(mapping_set_repository_.default_mapping_set());
     const auto mc(create_mapping_context(ms, from, to, m));

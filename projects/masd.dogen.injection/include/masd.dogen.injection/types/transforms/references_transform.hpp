@@ -35,8 +35,6 @@ namespace masd::dogen::injection::transforms {
 
 /**
  * @brief Reads the model references from the annotation.
- *
- * @pre annotations transform must have already been applied.
  */
 class references_transform final {
 private:

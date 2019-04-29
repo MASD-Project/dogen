@@ -27,7 +27,7 @@ namespace {
 
 using namespace masd::dogen::utility::log;
 static logger
-lg(logger_factory("annotations.location_repository_parts_builder"));
+lg(logger_factory("archetypes.location_repository_parts_builder"));
 
 const std::string empty_archetype("Archetype is empty.");
 const std::string empty_facet_name("Facet name is empty.");

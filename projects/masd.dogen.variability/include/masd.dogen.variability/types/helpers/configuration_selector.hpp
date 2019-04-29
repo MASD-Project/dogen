@@ -36,7 +36,7 @@
 namespace masd::dogen::variability::helpers {
 
 /**
- * @brief Performs a number of simple queries over the annotations
+ * @brief Performs a number of simple queries over the configuration
  * object.
  */
 class configuration_selector final {

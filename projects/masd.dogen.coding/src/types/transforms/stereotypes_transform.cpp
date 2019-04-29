@@ -167,8 +167,11 @@ void stereotypes_transform::transform_dynamic_stereotypes(meta_model::object& o,
          * i.e. profiles.
          *
          * FIXME: This is a massive hack; we should really ask
-         * annotations for all valid profile names and exclude those
-         * instead of hard-coding them here.
+         * variability for all valid profile names and exclude those
+         * instead of hard-coding them here. In addition, now that
+         * profile processing happens before we enter the coding
+         * chain, we could probably exclude profiles that were bound
+         * (or keep track of them).
          */
         if (is_stereotype_handled_externally(us))
             continue;

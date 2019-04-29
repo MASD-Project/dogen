@@ -34,7 +34,7 @@ static logger lg(logger_factory("templating.stitch.formatter"));
 
 const std::string empty_header_guard;
 /*
- * FIXME: humongous hackery just to get annotations to let us
+ * FIXME: humongous hackery just to get variability to let us
  * through. It reality, we should just have a family and no facet or
  * backend.
  */

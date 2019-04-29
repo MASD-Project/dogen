@@ -112,7 +112,7 @@ make_injection_context(const configuration& cfg) {
     r.data_directories(data_dirs);
 
     /*
-     * Setup the annotations related data structures.
+     * Setup the archetypes data structures.
      */
     const auto alrp(create_archetype_location_repository(rg));
     r.archetype_location_repository(alrp);

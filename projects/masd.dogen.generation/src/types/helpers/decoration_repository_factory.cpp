@@ -138,7 +138,7 @@ void decoration_repository_factory::handle_modeline_group(
         }
     }
 
-    BOOST_LOG_SEV(lg, trace) << "Total annotations for modeline group: "
+    BOOST_LOG_SEV(lg, trace) << "Total modelines for modeline group: "
                              << map.size();
 
     const auto gid(mg->name().qualified().dot());

@@ -240,10 +240,11 @@ expand_enumerators(const enumerator_feature_group& fg,
         }
 
         /*
-         * We try to read the value from the annotations. If its not
-         * populated we set it ourselves. Note that it is validation's
-         * job to ensure the user doesn't start mixing and matching,
-         * populating the value for some enumerators but not others.
+         * We try to read the value from variability's
+         * configuration. If its not populated we set it
+         * ourselves. Note that it is validation's job to ensure the
+         * user doesn't start mixing and matching, populating the
+         * value for some enumerators but not others.
          */
         auto copy(en);
         populate_from_configuration(fg, copy);

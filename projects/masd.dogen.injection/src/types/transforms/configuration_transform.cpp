@@ -39,7 +39,7 @@ namespace masd::dogen::injection::transforms {
 
 void configuration_transform::
 apply(const transforms::context& ctx, meta_model::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "annotations transform",
+    tracing::scoped_transform_tracer stp(lg, "configuration transform",
         transform_id, m.name(), *ctx.tracer(), m);
 
     BOOST_LOG_SEV(lg, debug) << "Transforming model: " << m.name()

@@ -48,7 +48,7 @@ private:
 
     static feature_group make_feature_group(
         const variability::meta_model::feature_model& fm);
-    static void populate_from_annotations(const feature_group& fg,
+    static void populate_from_configuration(const feature_group& fg,
         meta_model::primitive& p);
 
 public:
