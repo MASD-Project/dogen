@@ -33,51 +33,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "helpers",
-      "fallback_element_type": "masd::module"
-    },
-    {
-      "name": "helpers::artefact_writer_interface",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::filesystem_writer",
-      "parents": [
-        "helpers::artefact_writer_interface"
-      ],
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::stream_writer",
-      "parents": [
-        "helpers::artefact_writer_interface"
-      ],
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "stream_",
-          "type": "std::ostream"
-        }
-      ]
-    },
-    {
-      "name": "helpers::writing_error",
-      "documentation": "An error ocrurred whilst writing.\n",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "meta_model",
       "documentation": "The extraction meta-model captures the entities required\nto transport information from the MASD technical space to\nexternal technical spaces.\n",
       "tagged_values": {
@@ -150,6 +105,10 @@
           "type": "operation"
         }
       ]
+    },
+    {
+      "name": "helpers",
+      "fallback_element_type": "masd::module"
     },
     {
       "name": "helpers::file_status_collector",

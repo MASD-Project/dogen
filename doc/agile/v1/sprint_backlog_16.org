@@ -13,22 +13,23 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-29 Mon 17:42]
+#+CAPTION: Clock summary at [2019-04-29 Mon 17:48]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *52:29* |       |       | 100.0 |
+| *Total time*                                           | *52:33* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 52:29   |       |       | 100.0 |
-| Active                                                 |         | 52:29 |       | 100.0 |
+| Stories                                                | 52:33   |       |       | 100.0 |
+| Active                                                 |         | 52:33 |       | 100.0 |
 | Edit release notes for previous sprint                 |         |       |  2:40 |   5.1 |
 | Sprint and product backlog grooming                    |         |       |  1:40 |   3.2 |
-| Create a video demo for the previous sprint's features |         |       |  1:55 |   3.7 |
+| Create a video demo for the previous sprint's features |         |       |  1:55 |   3.6 |
 | Read variability papers                                |         |       |  1:04 |   2.0 |
 | Finish implementing the variability model              |         |       | 10:49 |  20.6 |
 | Trim down stitch's use of annotations                  |         |       |  1:30 |   2.9 |
-| Read meta-data using configurations                    |         |       | 24:24 |  46.5 |
+| Read meta-data using configurations                    |         |       | 24:24 |  46.4 |
 | Remove uses of annotations                             |         |       |  7:44 |  14.7 |
+| Stitch is still using artefact writer                  |         |       |  0:04 |   0.1 |
 | Profiles as meta-model elements                        |         |       |  0:43 |   1.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -407,6 +408,18 @@ Notes:
 - disable population of annotation to prove the new code is working
   everywhere.
 - remove all legacy types from variability model.
+
+*** COMPLETED Stitch is still using artefact writer                   :story:
+    CLOSED: [2019-04-29 Mon 17:47]
+    :LOGBOOK:
+    CLOCK: [2019-04-29 Mon 17:43]--[2019-04-29 Mon 17:47] =>  0:04
+    :END:
+
+Create a templating transform that is similar to the approach used by
+extraction - in fact, stitch should probably be using a transform in
+extraction.
+
+Delete artefact writer.
 
 *** STARTED Profiles as meta-model elements                           :story:
     :LOGBOOK:
@@ -1029,14 +1042,6 @@ templates. The boilerplate and includes should be supplied as KVPs and
 applied as variables. They should be composed externally with access
 to data from the model element. Thus we then need a way to associate
 includes with model elements. This is captured as a separate story.
-
-*** Stitch is still using artefact writer                             :story:
-
-Create a templating transform that is similar to the approach used by
-extraction - in fact, stitch should probably be using a transform in
-extraction.
-
-Delete artefact writer.
 
 *** Stitch extension is hard-coded                                    :story:
 
