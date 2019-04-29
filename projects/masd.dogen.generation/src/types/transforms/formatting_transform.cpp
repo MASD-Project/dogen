@@ -22,8 +22,6 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
 #include "masd.dogen.archetypes/types/location_repository.hpp"
-#include "masd.dogen.variability/io/type_io.hpp"
-#include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
@@ -64,114 +62,6 @@ formatting_transform::to_formatting_style(const std::string& s) {
 
     BOOST_LOG_SEV(lg, error) << invalid_style << s;
     BOOST_THROW_EXCEPTION(transformation_error(invalid_style + s));
-}
-
-std::ostream&
-operator<<(std::ostream& s, const formatting_transform::type_group& v) {
-    s << " { "
-      << "\"__type__\": " << "\"masd::dogen::masd::cpp::formattables::"
-      << "formatting_transform::type_group\"" << ", "
-      << "\"formatting_style\": " << v.formatting_style << ", "
-      << "\"formatting_input\": " << v.formatting_input
-      << " }";
-
-    return s;
-}
-
-std::unordered_map<std::string, formatting_transform::type_group>
-formatting_transform::make_type_groups(const variability::type_repository& atrp,
-    const std::list<archetypes::location>& als) {
-
-    BOOST_LOG_SEV(lg, debug) << "Creating type groups.";
-
-    std::unordered_map<std::string, formatting_transform::type_group> r;
-    for (const auto al : als) {
-        const auto arch(al.archetype());
-
-        type_group tg;
-        const variability::type_repository_selector s(atrp);
-        const auto fs(formatting_style_trait);
-        tg.formatting_style = s.select_type_by_name(arch, fs);
-
-        const auto fi(formatting_input_trait);
-        tg.formatting_input = s.select_type_by_name(arch, fi);
-
-        r[arch] = tg;
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Created type groups. Result: " << r;
-    return r;
-}
-
-std::unordered_map<std::string, formatting_configuration>
-formatting_transform::make_formatting_configuration(
-    const std::unordered_map<std::string, type_group>& tgs,
-    const variability::annotation& a) {
-    std::unordered_map<std::string, formatting_configuration> r;
-
-    const variability::entry_selector s(a);
-    for (const auto& pair : tgs) {
-        const auto arch(pair.first);
-        const auto& tg(pair.second);
-
-        bool found(false);
-        formatting_configuration cfg;
-        const auto fs(tg.formatting_style);
-        if (s.has_entry(fs)) {
-            found = true;
-            cfg.style(to_formatting_style(s.get_text_content(fs)));
-        }
-
-        const auto fi(tg.formatting_input);
-        if (s.has_entry(fi)) {
-            found = true;
-            cfg.input(s.get_text_content(fi));
-        }
-
-        if (found)
-            r[arch] = cfg;
-    }
-    return r;
-}
-
-void formatting_transform::
-apply(const std::unordered_map<std::string, type_group> tgs,
-    coding::meta_model::element& e) {
-    BOOST_LOG_SEV(lg, debug) << "Transforming element: "
-                             << e.name().qualified().dot();
-
-    const auto cfgs(make_formatting_configuration(tgs, e.annotation()));
-    auto& ap(e.artefact_properties());
-    for (auto& pair : ap) {
-        const auto arch(pair.first);
-        auto& art_prop(pair.second);
-        const auto i(cfgs.find(arch));
-        if (i == cfgs.end()) {
-            using coding::meta_model::formatting_styles;
-            art_prop.formatting_style(formatting_styles::stock);
-            continue;
-        }
-        const auto& cfg(i->second);
-
-        // FIXME: mega hack until we move artefact stuff into
-        // generation
-        auto lambda(
-            [](meta_model::formatting_styles fs) {
-                using meta_model::formatting_styles;
-                if (fs == meta_model::formatting_styles::wale)
-                    return coding::meta_model::formatting_styles::wale;
-                else if (fs == meta_model::formatting_styles::stitch)
-                    return coding::meta_model::formatting_styles::stitch;
-                else if (fs == meta_model::formatting_styles::stock)
-                    return coding::meta_model::formatting_styles::stock;
-                else
-                    return coding::meta_model::formatting_styles::invalid;
-            });
-        art_prop.formatting_style(lambda(cfg.style()));
-        art_prop.formatting_input(cfg.input());
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Finished transforming element";
 }
 
 std::unordered_map<std::string, formatting_transform::feature_group>
@@ -276,18 +166,12 @@ void formatting_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "formatting transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    const auto& atrp(*ctx.type_repository());
     const auto& als(ctx.archetype_location_repository()->all());
-    if (ctx.use_configuration()) {
-        const auto& fm(*ctx.feature_model());
-        const auto fgs(make_feature_groups(fm, als));
-        for(auto& ptr : m.elements())
-            apply(fgs, *ptr);
-    } else {
-        const auto tgs(make_type_groups(atrp, als));
-        for(auto& ptr : m.elements())
-            apply(tgs, *ptr);
-    }
+    const auto& fm(*ctx.feature_model());
+    const auto fgs(make_feature_groups(fm, als));
+    for(auto& ptr : m.elements())
+        apply(fgs, *ptr);
+
     stp.end_transform(m);
 }
 

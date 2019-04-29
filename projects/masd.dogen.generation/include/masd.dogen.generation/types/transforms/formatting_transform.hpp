@@ -26,8 +26,6 @@
 #endif
 
 #include <string>
-#include "masd.dogen.variability/types/type.hpp"
-#include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -42,25 +40,6 @@ class formatting_transform final {
 private:
     static meta_model::formatting_styles
     to_formatting_style(const std::string& s);
-
-private:
-    struct type_group {
-        variability::type formatting_style;
-        variability::type formatting_input;
-    };
-    friend std::ostream& operator<<(std::ostream& s, const type_group& v);
-
-    static std::unordered_map<std::string, type_group>
-    make_type_groups(const variability::type_repository& atrp,
-        const std::list<archetypes::location>& als);
-
-    static std::unordered_map<std::string, formatting_configuration>
-    make_formatting_configuration(
-        const std::unordered_map<std::string, type_group>& tgs,
-        const variability::annotation& a);
-
-    static void apply(const std::unordered_map<std::string, type_group> tgs,
-        coding::meta_model::element& e);
 
 private:
     struct feature_group {
