@@ -27,9 +27,6 @@
 
 #include <list>
 #include <boost/shared_ptr.hpp>
-#include "masd.dogen.variability/types/type.hpp"
-#include "masd.dogen.variability/types/annotation.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -40,21 +37,6 @@
 namespace masd::dogen::generation::cpp::fabric {
 
 class visual_studio_factory final {
-private:
-    struct type_group {
-        variability::type project_solution_guid;
-        variability::type project_guid;
-    };
-
-    type_group make_type_group(const variability::type_repository& atrp) const;
-
-    visual_studio_configuration make_configuration(const type_group& tg,
-        const variability::annotation& ra) const;
-
-    visual_studio_configuration make_configuration(
-        const variability::type_repository& atrp,
-        const variability::annotation& ra) const;
-
 private:
     struct feature_group {
         variability::meta_model::feature project_solution_guid;
@@ -88,9 +70,7 @@ private:
 
 public:
     std::list<boost::shared_ptr<coding::meta_model::element>>
-    make(const variability::type_repository& atrp,
-        const variability::meta_model::feature_model& fm,
-        const bool use_configuration,
+    make(const variability::meta_model::feature_model& fm,
         const generation::meta_model::model& m) const;
 };
 

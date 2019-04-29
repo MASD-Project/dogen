@@ -43,7 +43,8 @@ private:
         generation::meta_model::model& m) const;
 
     void add_elements(
-        const std::list<boost::shared_ptr<coding::meta_model::element>>& elements,
+        const std::list<boost::shared_ptr<
+        coding::meta_model::element>>& elements,
         generation::meta_model::model& m) const;
 
 private:
@@ -51,9 +52,7 @@ private:
     void inject_build_files(generation::meta_model::model& m) const;
     void inject_odb_options(generation::meta_model::model& m) const;
     void inject_master_headers(generation::meta_model::model& m) const;
-    void inject_visual_studio(const variability::type_repository& atrp,
-        const variability::meta_model::feature_model& fm,
-        const bool use_configuration,
+    void inject_visual_studio(const variability::meta_model::feature_model& fm,
         generation::meta_model::model& m) const;
     void inject_forward_declarations(
         generation::meta_model::model& m) const;
@@ -61,9 +60,7 @@ private:
         generation::meta_model::model& m) const;
 
 public:
-    void inject(const variability::type_repository& atrp,
-        const variability::meta_model::feature_model& fm,
-        const bool use_configuration,
+    void inject(const variability::meta_model::feature_model& fm,
         generation::meta_model::model& m) const;
 };
 

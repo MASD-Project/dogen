@@ -37,9 +37,7 @@ private:
     bool requires_expansion(
         const generation::meta_model::model& m) const;
 
-    void expand_injection(const variability::type_repository& atrp,
-        const variability::meta_model::feature_model& fm,
-        const bool use_configuration,
+    void expand_injection(const variability::meta_model::feature_model& fm,
         generation::meta_model::model& m) const;
 
 public:

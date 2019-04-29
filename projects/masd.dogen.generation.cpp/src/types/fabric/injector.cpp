@@ -87,12 +87,11 @@ inject_master_headers(generation::meta_model::model& m) const {
     add_element(e, m);
 }
 
-void injector::inject_visual_studio(const variability::type_repository& atrp,
+void injector::inject_visual_studio(
     const variability::meta_model::feature_model& fm,
-    const bool use_configuration,
     generation::meta_model::model& m) const {
     visual_studio_factory f;
-    const auto e(f.make(atrp, fm, use_configuration, m));
+    const auto e(f.make(fm, m));
     add_elements(e, m);
 }
 
@@ -109,15 +108,13 @@ void injector::inject_entry_point(generation::meta_model::model& m) const {
     add_element(e, m);
 }
 
-void injector::inject(const variability::type_repository& atrp,
-    const variability::meta_model::feature_model& fm,
-    const bool use_configuration,
+void injector::inject(const variability::meta_model::feature_model& fm,
     generation::meta_model::model& m) const {
     inject_registrar(m);
     inject_build_files(m);
     inject_odb_options(m);
     inject_master_headers(m);
-    inject_visual_studio(atrp, fm, use_configuration, m);
+    inject_visual_studio(fm, m);
     inject_forward_declarations(m);
     inject_entry_point(m);
 }
