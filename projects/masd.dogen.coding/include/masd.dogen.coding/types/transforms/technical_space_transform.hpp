@@ -26,9 +26,6 @@
 #endif
 
 #include <list>
-#include "masd.dogen.variability/types/annotation.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
-#include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -45,17 +42,6 @@ namespace masd::dogen::coding::transforms {
 class technical_space_transform final {
 private:
     static meta_model::technical_space to_technical_space(const std::string& s);
-
-private:
-    struct type_group {
-        variability::type output_technical_space;
-    };
-
-    static type_group make_type_group(const variability::type_repository& atrp);
-
-    static std::list<meta_model::technical_space>
-    make_output_technical_space(const type_group& tg,
-        const variability::annotation& a);
 
 private:
     struct feature_group {

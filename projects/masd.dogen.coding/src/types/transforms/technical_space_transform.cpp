@@ -21,8 +21,6 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/list_io.hpp"
-#include "masd.dogen.variability/types/entry_selector.hpp"
-#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
@@ -68,31 +66,6 @@ technical_space_transform::to_technical_space(const std::string& s) {
     BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;
     BOOST_THROW_EXCEPTION(
         transformation_error(unsupported_technical_space + s));
-}
-
-technical_space_transform::type_group technical_space_transform::
-make_type_group(const variability::type_repository& atrp) {
-    type_group r;
-    const variability::type_repository_selector s(atrp);
-    r.output_technical_space =
-        s.select_type_by_name(traits::output_technical_space());
-    return r;
-}
-
-std::list<meta_model::technical_space>
-technical_space_transform::make_output_technical_space(const type_group& tg,
-    const variability::annotation& a) {
-    const variability::entry_selector s(a);
-
-    std::list<meta_model::technical_space> r;
-    if (!s.has_entry(tg.output_technical_space))
-        return r;
-
-    const auto ots(s.get_text_collection_content(tg.output_technical_space));
-    for (const auto ts : ots)
-        r.push_back(to_technical_space(ts));
-
-    return r;
 }
 
 technical_space_transform::feature_group technical_space_transform::
@@ -162,13 +135,9 @@ apply(const context& ctx, meta_model::model& m) {
     /*
      * Read the output technical_space requested by the user.
      */
-    const auto& ra(m.root_module()->annotation());
     const auto& cfg(*m.root_module()->configuration());
-    const auto tg(make_type_group(*ctx.type_repository()));
     const auto fg(make_feature_group(*ctx.feature_model()));
-    const auto ol(ctx.use_configuration() ?
-        make_output_technical_space(fg, cfg) :
-        make_output_technical_space(tg, ra));
+    const auto ol(make_output_technical_space(fg, cfg));
 
     /*
      * If the user did not set an output technical space, assume the
