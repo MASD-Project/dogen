@@ -19,7 +19,7 @@
  *
  */
 #include <set>
-#include <iostream> // FIXME
+#include <unordered_map>
 #include <boost/filesystem.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
