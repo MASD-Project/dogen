@@ -38,7 +38,7 @@ using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 const std::string annotations_dir("annotations");
-const std::string annotations_prefix("annotations.type_templates.");
+const std::string features_prefix("masd.variability.feature_templates.");
 
 }
 
@@ -66,7 +66,7 @@ feature_template_hydration_transform::obtain_template_filenames(
     std::list<boost::filesystem::path> r;
     for (const auto& f : files) {
         const auto fn(f.filename().generic_string());
-        if (boost::starts_with(fn, annotations_prefix)) {
+        if (boost::starts_with(fn, features_prefix)) {
             BOOST_LOG_SEV(lg, trace) << "Adding file: " << fn;
             r.push_back(f);
         } else
