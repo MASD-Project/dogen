@@ -37,7 +37,7 @@ const std::string transform_id(
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
-const std::string annotations_dir("annotations");
+const std::string variability_dir("variability");
 const std::string features_prefix("masd.variability.feature_templates.");
 
 }
@@ -50,7 +50,7 @@ feature_template_hydration_transform::to_template_directories(
     std::vector<boost::filesystem::path> r;
     r.reserve(data_dirs.size());
     for (const auto& dir : data_dirs)
-        r.push_back(dir / annotations_dir);
+        r.push_back(dir / variability_dir);
 
     return r;
 }

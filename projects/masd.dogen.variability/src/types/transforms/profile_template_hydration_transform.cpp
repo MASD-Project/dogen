@@ -35,8 +35,8 @@ const std::string transform_id(
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
-const std::string templates_dir("annotations");
-const std::string templates_prefix("masd.variability.profiles.");
+const std::string variability_dir("variability");
+const std::string profiles_prefix("masd.variability.profiles.");
 
 }
 
@@ -48,7 +48,7 @@ profile_template_hydration_transform::to_template_directories(
     std::vector<boost::filesystem::path> r;
     r.reserve(data_dirs.size());
     for (const auto& d : data_dirs)
-        r.push_back(d / templates_dir);
+        r.push_back(d / variability_dir);
 
     BOOST_LOG_SEV(lg, debug) << "Directory list: " << r;
     return r;
@@ -63,7 +63,7 @@ profile_template_hydration_transform::obtain_template_filenames(
     const auto files(dogen::utility::filesystem::find_files(template_dirs));
     for (const auto& f : files) {
         const auto fn(f.filename().generic_string());
-        if (!boost::starts_with(fn, templates_prefix)) {
+        if (!boost::starts_with(fn, profiles_prefix)) {
             BOOST_LOG_SEV(lg, debug) << "Ignoring file: " << f.filename();
             continue;
         }
