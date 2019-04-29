@@ -1,6 +1,18 @@
 [
   {
     "name": {
+      "simple": "profile",
+      "qualified": "masd.variability.profile"
+    },
+    "archetype_location": {
+      "kernel": "masd"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "any"
+  },
+  {
+    "name": {
       "simple": "scope",
       "qualified": "masd.variability.scope"
     },
