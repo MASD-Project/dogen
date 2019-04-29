@@ -23,9 +23,7 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/unordered_set_io.hpp"
-#include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.utility/types/io/unordered_set_io.hpp"
-#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
@@ -75,49 +73,6 @@ const std::string underlying_element_conflict(
 }
 
 namespace masd::dogen::coding::transforms {
-
-parsing_transform::type_group parsing_transform::make_type_group(
-    const variability::type_repository& atrp) {
-    type_group r;
-    const variability::type_repository_selector s(atrp);
-    const auto gp(traits::generalization::parent());
-    r.parent = s.select_type_by_name(gp);
-
-    const auto eue(traits::enumeration::underlying_element());
-    r.enumeration_underlying_element = s.select_type_by_name(eue);
-
-    const auto pue(traits::primitive::underlying_element());
-    r.primitive_underlying_element = s.select_type_by_name(pue);
-
-    return r;
-}
-
-std::string parsing_transform::
-make_parent(const type_group& tg, const variability::annotation& a) {
-    const variability::entry_selector s(a);
-    if (s.has_entry(tg.parent))
-        return s.get_text_content(tg.parent);
-
-    return std::string();
-}
-
-std::string parsing_transform::make_enumeration_underlying_element(
-    const type_group& tg, const variability::annotation& a) {
-    const variability::entry_selector s(a);
-    if (s.has_entry(tg.enumeration_underlying_element))
-        return s.get_text_content(tg.enumeration_underlying_element);
-
-    return std::string();
-}
-
-std::string parsing_transform::make_primitive_underlying_element(
-    const type_group& tg, const variability::annotation& a) {
-    const variability::entry_selector s(a);
-    if (s.has_entry(tg.primitive_underlying_element))
-        return s.get_text_content(tg.primitive_underlying_element);
-
-    return std::string();
-}
 
 parsing_transform::feature_group parsing_transform::make_feature_group(
     const variability::meta_model::feature_model& fm) {
@@ -199,14 +154,12 @@ void parsing_transform::parse_attributes(const meta_model::technical_space ts,
 }
 
 void parsing_transform::
-parse_parent(const type_group& tg, const feature_group& fg,
-    const bool use_configuration, meta_model::object& o) {
+parse_parent(const feature_group& fg, meta_model::object& o) {
     /*
      * Obtain the parent name from the meta-data. If there is no
      * parent name there is nothing to do.
      */
-    const auto parent(use_configuration ?
-        make_parent(fg, *o.configuration()) : make_parent(tg, o.annotation()));
+    const auto parent(make_parent(fg, *o.configuration()));
     if (parent.empty())
         return;
 
@@ -229,15 +182,12 @@ parse_parent(const type_group& tg, const feature_group& fg,
 }
 
 void parsing_transform::
-parse_underlying_element(const type_group& tg, const feature_group& fg,
-    const bool use_configuration, meta_model::enumeration& e) {
+parse_underlying_element(const feature_group& fg, meta_model::enumeration& e) {
     /*
      * Obtain the underlying element name from the meta-data. If there
      * is none, there is nothing to do.
      */
-    const auto s(use_configuration ?
-        make_enumeration_underlying_element(fg, *e.configuration()) :
-        make_enumeration_underlying_element(tg, e.annotation()));
+    const auto s(make_enumeration_underlying_element(fg, *e.configuration()));
     if (s.empty())
         return;
 
@@ -260,8 +210,7 @@ parse_underlying_element(const type_group& tg, const feature_group& fg,
     e.underlying_element(ue);
 }
 
-void parsing_transform::parse_underlying_element(const type_group& tg,
-    const feature_group& fg, const bool use_configuration,
+void parsing_transform::parse_underlying_element(const feature_group& fg,
     const meta_model::technical_space ts, meta_model::primitive& p) {
 
     const auto id(p.name().qualified().dot());
@@ -270,9 +219,7 @@ void parsing_transform::parse_underlying_element(const type_group& tg,
      * Obtain the underlying element name from the meta-data. If there
      * isn't one, bomb out as primitives require it.
      */
-    auto ut(use_configuration ?
-        make_primitive_underlying_element(fg, *p.configuration()) :
-        make_primitive_underlying_element(tg, p.annotation()));
+    auto ut(make_primitive_underlying_element(fg, *p.configuration()));
     boost::algorithm::trim(ut);
     if (ut.empty()) {
         BOOST_LOG_SEV(lg, error) << missing_underlier << id;
@@ -302,18 +249,15 @@ void parsing_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "parsing transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    const auto uc(ctx.use_configuration());
-    const auto tg(make_type_group(*ctx.type_repository()));
     const auto fg(make_feature_group(*ctx.feature_model()));
     const auto ts(m.input_technical_space());
-
     for (auto& pair : m.objects()) {
         auto& o(*pair.second);
         const auto id(o.name().qualified().dot());
 
         try {
             parse_attributes(ts, o.local_attributes());
-            parse_parent(tg, fg, uc, o);
+            parse_parent(fg, o);
         } catch (boost::exception& e) {
             e << errmsg_parsing_owner(id);
             throw;
@@ -337,7 +281,7 @@ void parsing_transform::apply(const context& ctx, meta_model::model& m) {
         const auto id(e.name().qualified().dot());
 
         try {
-            parse_underlying_element(tg, fg, uc, e);
+            parse_underlying_element(fg, e);
         } catch (boost::exception& e) {
             e << errmsg_parsing_owner(id);
             throw;
@@ -349,7 +293,7 @@ void parsing_transform::apply(const context& ctx, meta_model::model& m) {
         const auto id(p.name().qualified().dot());
 
         try {
-            parse_underlying_element(tg, fg, uc, ts, p);
+            parse_underlying_element(fg,ts, p);
         } catch (boost::exception& e) {
             e << errmsg_parsing_owner(id);
             throw;

@@ -26,8 +26,6 @@
 #endif
 
 #include <string>
-#include "masd.dogen.variability/types/type.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -56,24 +54,6 @@ namespace masd::dogen::coding::transforms {
  * forth.
  */
 class parsing_transform final {
-private:
-    struct type_group {
-        variability::type parent;
-        variability::type enumeration_underlying_element;
-        variability::type primitive_underlying_element;
-    };
-
-    static type_group make_type_group(const variability::type_repository& atrp);
-
-    static std::string make_parent(const type_group& tg,
-        const variability::annotation& a);
-
-    static std::string make_enumeration_underlying_element(const type_group& tg,
-        const variability::annotation& a);
-
-    static std::string make_primitive_underlying_element(const type_group& tg,
-        const variability::annotation& a);
-
 private:
     struct feature_group {
         variability::meta_model::feature parent;
@@ -109,23 +89,21 @@ private:
     /**
      * @brief Parses parent name in the supplied object.
      */
-    static void parse_parent(const type_group& tg, const feature_group& fg,
-        const bool use_configuration, meta_model::object& o);
+    static void parse_parent(const feature_group& fg,
+        meta_model::object& o);
 
     /**
      * @brief Parses the underlying element in the supplied
      * enumeration.
      */
-    static void parse_underlying_element(const type_group& tg,
-        const feature_group& fg, const bool use_configuration,
+    static void parse_underlying_element(const feature_group& fg,
         meta_model::enumeration& e);
 
     /**
      * @brief Parses underlying element in the supplied primitive.
      */
-    static void parse_underlying_element(const type_group& tg,
-        const feature_group& fg, const bool use_configuration,
-        const meta_model::technical_space ts,
+    static void parse_underlying_element(
+        const feature_group& fg, const meta_model::technical_space ts,
         meta_model::primitive& p);
 
 public:
