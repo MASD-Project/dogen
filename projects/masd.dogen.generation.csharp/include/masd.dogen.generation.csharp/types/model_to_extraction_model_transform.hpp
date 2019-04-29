@@ -31,9 +31,6 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.variability/types/annotation.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
-#include "masd.dogen.variability/types/annotation_factory.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_interface.hpp"
@@ -60,16 +57,12 @@ public:
 
 private:
     formattables::model create_formattables_model(
-        const variability::type_repository& atrp,
         const variability::meta_model::feature_model& feature_model,
-        const bool use_configuration,
         const formatters::repository& frp, const formattables::locator & l,
         const generation::meta_model::model& m) const;
 
     std::list<extraction::meta_model::artefact>
-    format(const variability::type_repository& atrp,
-        const variability::annotation_factory& af,
-        const formattables::model& fm) const;
+    format(const formattables::model& fm) const;
 
 public:
     std::string id() const override;

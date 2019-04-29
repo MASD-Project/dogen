@@ -20,9 +20,10 @@
  */
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.variability/types/annotation.hpp"
-#include "masd.dogen.variability/types/entry_selector.hpp"
-#include "masd.dogen.variability/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/helpers/feature_selector.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/exception.hpp"
@@ -46,18 +47,20 @@ namespace masd::dogen::generation::csharp::formattables {
 
 class aspect_properties_generator : public coding::meta_model::element_visitor {
 private:
-    struct type_group {
-        variability::type requires_static_reference_equals;
+    struct feature_group {
+        variability::meta_model::feature requires_static_reference_equals;
     };
 
-    type_group make_type_group(const variability::type_repository& atrp) const;
+    feature_group make_feature_group(
+        const variability::meta_model::feature_model& feature_model) const;
 
 public:
-    explicit
-    aspect_properties_generator(const variability::type_repository& atrp);
+    explicit aspect_properties_generator(
+        const variability::meta_model::feature_model& feature_model);
 
 private:
-    void handle_aspect_properties(const variability::annotation& a,
+    void handle_aspect_properties(
+        const variability::meta_model::configuration& cfg,
         const std::string& id, const bool is_floating_point = false);
 
 public:
@@ -72,31 +75,31 @@ public:
     result() const;
 
 private:
-    type_group type_group_;
+    feature_group feature_group_;
     std::unordered_map<std::string, formattables::aspect_properties> result_;
 };
 
 
-aspect_properties_generator::
-aspect_properties_generator(const variability::type_repository& atrp)
-    : type_group_(make_type_group(atrp)) {}
+aspect_properties_generator::aspect_properties_generator(
+    const variability::meta_model::feature_model& feature_model)
+    : feature_group_(make_feature_group(feature_model)) {}
 
-aspect_properties_generator::type_group aspect_properties_generator::
-make_type_group(const variability::type_repository& atrp) const {
+aspect_properties_generator::feature_group
+aspect_properties_generator::make_feature_group(
+    const variability::meta_model::feature_model& feature_model) const {
 
-    type_group r;
-    const variability::type_repository_selector s(atrp);
-
+    feature_group r;
+    const variability::helpers::feature_selector s(feature_model);
     const auto rsrq(traits::csharp::aspect::requires_static_reference_equals());
-    r.requires_static_reference_equals = s.select_type_by_name(rsrq);
+    r.requires_static_reference_equals = s.get_by_name(rsrq);
 
     return r;
 }
 
 void aspect_properties_generator::handle_aspect_properties(
-    const variability::annotation& a, const std::string& id,
+    const variability::meta_model::configuration& cfg, const std::string& id,
     const bool is_floating_point) {
-    const variability::entry_selector s(a);
+    const variability::helpers::configuration_selector s(cfg);
 
     /*
      * FIXME: It would be nice to make this container sparse rather
@@ -105,7 +108,7 @@ void aspect_properties_generator::handle_aspect_properties(
      * confusing. This needs some rethinking.
      */
     aspect_properties ap;
-    const auto& rsrq(type_group_.requires_static_reference_equals);
+    const auto& rsrq(feature_group_.requires_static_reference_equals);
     ap.requires_static_reference_equals(s.get_boolean_content_or_default(rsrq));
     ap.is_floating_point(is_floating_point);
 
@@ -114,20 +117,20 @@ void aspect_properties_generator::handle_aspect_properties(
 
 void aspect_properties_generator::
 visit(const coding::meta_model::enumeration& e) {
-    handle_aspect_properties(e.annotation(), e.name().qualified().dot());
+    handle_aspect_properties(*e.configuration(), e.name().qualified().dot());
 }
 
 void aspect_properties_generator::
 visit(const coding::meta_model::exception& e) {
-    handle_aspect_properties(e.annotation(), e.name().qualified().dot());
+    handle_aspect_properties(*e.configuration(), e.name().qualified().dot());
 }
 
 void aspect_properties_generator::visit(const coding::meta_model::object& o) {
-    handle_aspect_properties(o.annotation(), o.name().qualified().dot());
+    handle_aspect_properties(*o.configuration(), o.name().qualified().dot());
 }
 
 void aspect_properties_generator::visit(const coding::meta_model::builtin& p) {
-    handle_aspect_properties(p.annotation(), p.name().qualified().dot());
+    handle_aspect_properties(*p.configuration(), p.name().qualified().dot());
 }
 
 const std::unordered_map<std::string, formattables::aspect_properties>&
@@ -136,12 +139,12 @@ aspect_properties_generator::result() const {
 }
 
 void aspect_expander::
-expand(const variability::type_repository& atrp, model& fm) const {
-    aspect_properties_generator g(atrp);
+expand(const variability::meta_model::feature_model& feature_model,
+    model& fm) const {
+    aspect_properties_generator g(feature_model);
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
         const auto& e(*formattable.element());
-
         e.accept(g);
     }
     fm.aspect_properties(g.result());

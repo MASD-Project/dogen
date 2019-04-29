@@ -35,20 +35,18 @@ void model_expander::expand_file_paths(
 }
 
 void model_expander::expand_aspect_properties(
-    const variability::type_repository& atrp, model& fm) const {
-
+    const variability::meta_model::feature_model& feature_model,
+    model& fm) const {
     aspect_expander ex;
-    ex.expand(atrp, fm);
+    ex.expand(feature_model, fm);
 }
 
 void model_expander::expand_assistant_properties(
-    const variability::type_repository& atrp,
     const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration,
     model& fm) const {
 
     assistant_expander ex;
-    ex.expand(atrp, feature_model, use_configuration, fm);
+    ex.expand(feature_model, fm);
 }
 
 void model_expander::reduce(model& fm) const {
@@ -61,18 +59,15 @@ void model_expander::expand_project_items(model& fm) const {
     pie.expand(fm);
 }
 
-void model_expander::expand_helpers(const variability::type_repository& atrp,
-    const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration,
+void model_expander::
+expand_helpers(const variability::meta_model::feature_model& feature_model,
     const formatters::repository& frp, model& fm) const {
     helper_expander he;
-    he.expand(atrp, feature_model, use_configuration, frp, fm);
+    he.expand(feature_model, frp, fm);
 }
 
 void model_expander::expand(
-    const variability::type_repository& atrp,
     const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration,
     const formatters::repository& frp, const locator& l, model& fm) const {
 
     /*
@@ -80,15 +75,15 @@ void model_expander::expand(
      * reduction because we need to know about properties from
      * non-target elements.
      */
-    expand_aspect_properties(atrp, fm);
-    expand_assistant_properties(atrp, feature_model, use_configuration, fm);
+    expand_aspect_properties(feature_model, fm);
+    expand_assistant_properties(feature_model, fm);
 
     /*
      * We must expand helpers before reduction because we want to
      * generate helpers for all referenced types, not just those in
      * the target model.
      */
-    expand_helpers(atrp, feature_model, use_configuration, frp, fm);
+    expand_helpers(feature_model, frp, fm);
 
     reduce(fm);
 

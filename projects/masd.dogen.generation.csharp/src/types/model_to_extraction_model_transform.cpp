@@ -48,13 +48,11 @@ model_to_extraction_model_transform::
 
 formattables::model
 model_to_extraction_model_transform::create_formattables_model(
-    const variability::type_repository& atrp,
     const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration,
     const formatters::repository& frp, const formattables::locator& l,
     const generation::meta_model::model& m) const {
     formattables::workflow fw;
-    return fw.execute(atrp, feature_model, use_configuration, frp, l, m);
+    return fw.execute(feature_model, frp, l, m);
 }
 
 std::string model_to_extraction_model_transform::id() const {
@@ -63,9 +61,7 @@ std::string model_to_extraction_model_transform::id() const {
 
 std::list<extraction::meta_model::artefact>
 model_to_extraction_model_transform::
-format(const variability::type_repository& /*atrp*/,
-    const variability::annotation_factory& /*af*/,
-    const formattables::model& fm) const {
+format(const formattables::model& fm) const {
     formatters::workflow wf;
     return wf.execute(fm);
 }
@@ -134,28 +130,24 @@ model_to_extraction_model_transform::apply(
      * Create the locator.
      */
     const auto mn(m.name());
-    const auto uc(ctx.use_configuration());
-    const auto& ra(m.root_module()->annotation());
     const auto& rcfg(*m.root_module()->configuration());
-    const auto& atrp(*ctx.type_repository());
     const auto& feature_model(*ctx.feature_model());
     const auto odp(ctx.output_directory_path());
     const auto& frp(formatters::workflow::registrar().formatter_repository());
     const bool ekd(enable_backend_directories);
-    const formattables::locator l(odp, atrp, feature_model, uc, frp, ra, rcfg,
-        mn, m.module_ids(), ekd);
+    const formattables::locator l(odp, feature_model, frp, rcfg, mn, m.
+        module_ids(), ekd);
 
     /*
      * Generate the formattables model.
      */
-    const auto fm(create_formattables_model(atrp, feature_model, uc, frp, l, m));
+    const auto fm(create_formattables_model(feature_model, frp, l, m));
 
     /*
      * Code-generate all artefacts.
      */
     extraction::meta_model::model r;
-    const auto& af(*ctx.annotation_factory());
-    r.artefacts(format(atrp, af, fm));
+    r.artefacts(format(fm));
     r.managed_directories().push_back(l.project_path());
 
     BOOST_LOG_SEV(lg, debug) << "Finished backend.";

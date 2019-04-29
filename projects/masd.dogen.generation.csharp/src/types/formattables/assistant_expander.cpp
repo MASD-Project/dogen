@@ -29,46 +29,6 @@
 
 namespace masd::dogen::generation::csharp::formattables {
 
-assistant_expander::type_group assistant_expander::
-make_type_group(const variability::type_repository& atrp) const {
-    type_group r;
-    const variability::type_repository_selector s(atrp);
-
-    const auto ra(traits::csharp::assistant::requires_assistance());
-    r.requires_assistance = s.select_type_by_name(ra);
-
-    const auto amp(traits::csharp::assistant::method_postfix());
-    r.method_postfix = s.select_type_by_name(amp);
-
-    return r;
-}
-
-boost::optional<assistant_properties>
-assistant_expander::make_assistant_properties(const type_group& tg,
-    const variability::annotation& a) const {
-
-    assistant_properties r;
-    bool has_properties(false);
-
-    const variability::entry_selector s(a);
-    const auto& ra(tg.requires_assistance);
-    if (s.has_entry(ra)) {
-        has_properties = true;
-        r.requires_assistance(s.get_boolean_content(ra));
-    }
-
-    const auto amp(tg.method_postfix);
-    if (s.has_entry(amp)) {
-        has_properties = true;
-        r.method_postfix(s.get_text_content(amp));
-    }
-
-    if (has_properties)
-        return r;
-
-    return boost::optional<assistant_properties>();
-}
-
 assistant_expander::feature_group assistant_expander::
 make_feature_group(const variability::meta_model::feature_model& fm) const {
     feature_group r;
@@ -84,20 +44,20 @@ make_feature_group(const variability::meta_model::feature_model& fm) const {
 }
 
 boost::optional<assistant_properties>
-assistant_expander::make_assistant_properties(const feature_group& tg,
+assistant_expander::make_assistant_properties(const feature_group& fg,
     const variability::meta_model::configuration& cfg) const {
 
     assistant_properties r;
     bool has_properties(false);
 
     const variability::helpers::configuration_selector s(cfg);
-    const auto& ra(tg.requires_assistance);
+    const auto& ra(fg.requires_assistance);
     if (s.has_configuration_point(ra)) {
         has_properties = true;
         r.requires_assistance(s.get_boolean_content(ra));
     }
 
-    const auto amp(tg.method_postfix);
+    const auto amp(fg.method_postfix);
     if (s.has_configuration_point(amp)) {
         has_properties = true;
         r.method_postfix(s.get_text_content(amp));
@@ -110,10 +70,8 @@ assistant_expander::make_assistant_properties(const feature_group& tg,
 }
 
 void assistant_expander::
-expand(const variability::type_repository& atrp,
-    const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration, model& fm) const {
-    const auto tg(make_type_group(atrp));
+expand(const variability::meta_model::feature_model& feature_model,
+    model& fm) const {
     const auto fg(make_feature_group(feature_model));
 
     for (const auto& pair : fm.formattables()) {
@@ -121,9 +79,7 @@ expand(const variability::type_repository& atrp,
         const auto& e(*formattable.element());
         const auto a(e.annotation());
         const auto cfg(*e.configuration());
-        const auto oap(use_configuration ?
-            make_assistant_properties(fg, cfg) :
-            make_assistant_properties(tg, a));
+        const auto oap(make_assistant_properties(fg, cfg));
 
         if (!oap)
             continue;

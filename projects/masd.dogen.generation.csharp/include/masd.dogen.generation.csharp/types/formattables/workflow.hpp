@@ -25,8 +25,6 @@
 #pragma once
 #endif
 
-#include "masd.dogen.variability/types/annotation.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/model.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/locator.hpp"
@@ -44,16 +42,12 @@ private:
         const generation::meta_model::model& m) const;
 
     void expand_model(
-        const variability::type_repository& atrp,
         const variability::meta_model::feature_model& feature_model,
-        const bool use_configuration,
         const formatters::repository& frp, const locator& l, model& fm) const;
 
 public:
     model execute(
-        const variability::type_repository& atrp,
         const variability::meta_model::feature_model& feature_model,
-        const bool use_configuration,
         const formatters::repository& frp, const locator& l,
         const generation::meta_model::model& m) const;
 };

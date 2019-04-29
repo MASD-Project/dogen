@@ -21,8 +21,6 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/unordered_set_io.hpp"
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
-#include "masd.dogen.variability/types/entry_selector.hpp"
-#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
@@ -255,37 +253,6 @@ compute_helper_properties(const helper_configuration& cfg,
     return r;
 }
 
-helper_expander::type_group helper_expander::
-make_type_group(const variability::type_repository& atrp) const {
-    const variability::type_repository_selector s(atrp);
-    const auto hf(traits::csharp::helper::family());
-    type_group r;
-    r.family = s.select_type_by_name(hf);
-    return r;
-}
-
-helper_configuration helper_expander::
-make_configuration(const type_group& tg, const model& fm) const {
-
-    BOOST_LOG_SEV(lg, debug) << "Started making the configuration.";
-    helper_configuration r;
-
-    for (auto& pair : fm.formattables()) {
-        const auto id(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
-
-        auto& formattable(pair.second);
-        auto& e(*formattable.element());
-        const variability::entry_selector s(e.annotation());
-        const auto fam(s.get_text_content_or_default(tg.family));
-        r.helper_families()[id] = fam;
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Finished making the configuration. Result:"
-                             << r;
-    return r;
-}
-
 helper_expander::feature_group helper_expander::
 make_feature_group(const variability::meta_model::feature_model& fm) const {
     const variability::helpers::feature_selector s(fm);
@@ -381,16 +348,13 @@ void helper_expander::populate_helper_properties(
     }
 }
 
-void helper_expander::expand(const variability::type_repository& atrp,
-    const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration,
+void helper_expander::
+expand(const variability::meta_model::feature_model& feature_model,
     const formatters::repository& frp, model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started helper expansion.";
 
-    const auto tg(make_type_group(atrp));
     const auto fg(make_feature_group(feature_model));
-    const auto cfg(use_configuration ?
-        make_configuration(fg, fm) : make_configuration(tg, fm));
+    const auto cfg(make_configuration(fg, fm));
     populate_helper_properties(cfg, frp, fm.formattables());
 
     BOOST_LOG_SEV(lg, debug) << "Finished helper expansion.";
