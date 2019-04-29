@@ -27,9 +27,6 @@
 
 #include <string>
 #include <iosfwd>
-#include "masd.dogen.variability/types/type.hpp"
-#include "masd.dogen.variability/types/annotation.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -44,35 +41,6 @@ namespace masd::dogen::coding::transforms {
  * @brief Expands all enumerations in model.
  */
 class enumerations_transform final {
-private:
-    struct enumeration_type_group {
-        variability::type use_implementation_defined_underlying_element;
-        variability::type use_implementation_defined_enumerator_values;
-        variability::type add_invalid_enumerator;
-    };
-    friend std::ostream& operator<<(std::ostream& s,
-        const enumeration_type_group& v);
-
-    struct enumerator_type_group {
-        variability::type value;
-    };
-    friend std::ostream& operator<<(std::ostream& s,
-        const enumerator_type_group& v);
-
-    struct type_group {
-        enumeration_type_group enumeration;
-        enumerator_type_group enumerator;
-    };
-    friend std::ostream& operator<<(std::ostream& s, const type_group& v);
-
-    static enumeration_type_group make_enumeration_type_group(
-        const variability::type_repository& atrp);
-
-    static enumerator_type_group make_enumerator_type_group(
-        const variability::type_repository& atrp);
-
-    static type_group make_type_group(const variability::type_repository& atrp);
-
 private:
     struct enumeration_feature_group {
         variability::meta_model::feature
@@ -101,12 +69,6 @@ private:
         const variability::meta_model::feature_model& fm);
 
 private:
-    static void populate_from_annotations(const enumeration_type_group& tg,
-        meta_model::enumeration& e);
-    static void populate_from_annotations(const enumerator_type_group& tg,
-        meta_model::enumerator& e);
-
-private:
     static void populate_from_configuration(const enumeration_feature_group& fg,
         meta_model::enumeration& e);
     static void populate_from_configuration(const enumerator_feature_group& fg,
@@ -123,8 +85,7 @@ private:
     static void expand_default_underlying_element(
         const meta_model::name& default_underlying_element_name,
         meta_model::enumeration& e);
-    static void expand_enumerators(const enumerator_type_group& tg,
-        const enumerator_feature_group& fg, const bool use_configuration,
+    static void expand_enumerators(const enumerator_feature_group& fg,
         const meta_model::technical_space ts, meta_model::enumeration& e);
 
 public:

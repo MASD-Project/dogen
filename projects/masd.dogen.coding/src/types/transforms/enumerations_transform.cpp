@@ -23,9 +23,6 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.variability/io/type_io.hpp"
-#include "masd.dogen.variability/types/entry_selector.hpp"
-#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
@@ -61,124 +58,6 @@ const std::string missing_default(
 }
 
 namespace masd::dogen::coding::transforms {
-
-std::ostream&
-operator<<(std::ostream& s,
-    const enumerations_transform::enumeration_type_group& v) {
-
-    s << " { "
-      << "\"__type__\": " << "\"masd::dogen::coding::"
-      << "enumerations_transform::enumeration_type_group\"" << ", "
-      << "\"use_implementation_defined_underlying_element\": "
-      << v.use_implementation_defined_underlying_element << ", "
-      << "\"use_implementation_defined_enumerator_values\": "
-      << v.use_implementation_defined_enumerator_values << ", "
-      << "\"add_invalid_enumerator\": " << v.add_invalid_enumerator
-      << " }";
-
-    return s;
-}
-
-std::ostream&
-operator<<(std::ostream& s,
-    const enumerations_transform::enumerator_type_group& v) {
-
-    s << " { "
-      << "\"__type__\": " << "\"masd::dogen::coding::"
-      << "enumerations_transform::enumerator_type_group\"" << ", "
-      << "\"value\": " << v.value
-      << " }";
-
-    return s;
-}
-
-std::ostream&
-operator<<(std::ostream& s, const enumerations_transform::type_group& v) {
-
-    s << " { "
-      << "\"__type__\": " << "\"masd::dogen::coding::enumerations_transform::"
-      << "type_group\"" << ", "
-      << "\"enumeration\": " << v.enumeration << ", "
-      << "\"enumerator\": " << v.enumerator
-      << " }";
-
-    return s;
-}
-
-enumerations_transform::enumeration_type_group enumerations_transform::
-make_enumeration_type_group(const variability::type_repository& atrp) {
-    BOOST_LOG_SEV(lg, debug) << "Creating enumeration type group.";
-
-    enumeration_type_group r;
-    const variability::type_repository_selector s(atrp);
-
-    using en = traits::enumeration;
-    const auto uidue(en::use_implementation_defined_underlying_element());
-    r.use_implementation_defined_underlying_element =
-        s.select_type_by_name(uidue);
-
-    const auto uidev(en::use_implementation_defined_enumerator_values());
-    r.use_implementation_defined_enumerator_values =
-        s.select_type_by_name(uidev);
-
-    const auto aie(en::add_invalid_enumerator());
-    r.add_invalid_enumerator = s.select_type_by_name(aie);
-
-    BOOST_LOG_SEV(lg, debug) << "Created enumeration type group.";
-    return r;
-}
-
-enumerations_transform::enumerator_type_group enumerations_transform::
-make_enumerator_type_group(const variability::type_repository& atrp) {
-    BOOST_LOG_SEV(lg, debug) << "Creating enumerator type group.";
-
-    enumerator_type_group r;
-    const variability::type_repository_selector s(atrp);
-    r.value = s.select_type_by_name(traits::enumerator::value());
-
-    BOOST_LOG_SEV(lg, debug) << "Created enumerator type group.";
-    return r;
-}
-
-enumerations_transform::type_group enumerations_transform::
-make_type_group(const variability::type_repository& atrp) {
-    BOOST_LOG_SEV(lg, debug) << "Creating type group.";
-
-    type_group r;
-    r.enumeration = make_enumeration_type_group(atrp);
-    r.enumerator = make_enumerator_type_group(atrp);
-
-    BOOST_LOG_SEV(lg, debug) << "Created type group. Result" << r;
-    return r;
-}
-
-void enumerations_transform::populate_from_annotations(
-    const enumeration_type_group& tg, meta_model::enumeration& e) {
-
-    const auto& a(e.annotation());
-    const variability::entry_selector s(a);
-    const auto uidue(tg.use_implementation_defined_underlying_element);
-    e.use_implementation_defined_underlying_element(
-        s.get_boolean_content_or_default(uidue));
-
-    const auto uidev(tg.use_implementation_defined_enumerator_values);
-    e.use_implementation_defined_enumerator_values(
-        s.get_boolean_content_or_default(uidev));
-
-    const auto aie(tg.add_invalid_enumerator);
-    e.add_invalid_enumerator(s.get_boolean_content_or_default(aie));
-}
-
-void enumerations_transform::populate_from_annotations(
-    const enumerator_type_group& tg, meta_model::enumerator& e) {
-    const auto& a(e.annotation());
-    const variability::entry_selector s(a);
-    if (s.has_entry(tg.value)) {
-        e.value(s.get_text_content(tg.value));
-        BOOST_LOG_SEV(lg, debug) << "Read enumerator value: "
-                                 << e.value();
-    }
-}
 
 enumerations_transform::enumeration_feature_group
 enumerations_transform::make_enumeration_feature_group(
@@ -334,8 +213,8 @@ void enumerations_transform::expand_default_underlying_element(
     e.underlying_element(default_underlying_element_name);
 }
 
-void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
-    const enumerator_feature_group& fg, const bool use_configuration,
+void enumerations_transform::
+expand_enumerators(const enumerator_feature_group& fg,
     const meta_model::technical_space ts, meta_model::enumeration& e) {
     std::vector<meta_model::enumerator> enumerators;
 
@@ -367,10 +246,7 @@ void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
          * populating the value for some enumerators but not others.
          */
         auto copy(en);
-        if (use_configuration)
-            populate_from_configuration(fg, copy);
-        else
-            populate_from_annotations(tg, copy);
+        populate_from_configuration(fg, copy);
 
         if (copy.value().empty())
             copy.value(boost::lexical_cast<std::string>(pos));
@@ -394,9 +270,7 @@ void enumerations_transform::apply(const context& ctx, meta_model::model& m) {
     if (m.enumerations().empty())
         return;
 
-    const auto uc(ctx.use_configuration());
     const auto l(m.input_technical_space());
-    const auto tg(make_type_group(*ctx.type_repository()));
     const auto fg(make_feature_group(*ctx.feature_model()));
     const auto duen(obtain_enumeration_default_underlying_element_name(m));
 
@@ -405,13 +279,9 @@ void enumerations_transform::apply(const context& ctx, meta_model::model& m) {
         BOOST_LOG_SEV(lg, debug) << "Expanding: " << id;
 
         auto& e(*pair.second);
-        if (uc)
-            populate_from_configuration(fg.enumeration, e);
-        else
-            populate_from_annotations(tg.enumeration, e);
-
+        populate_from_configuration(fg.enumeration, e);
         expand_default_underlying_element(duen, e);
-        expand_enumerators(tg.enumerator, fg.enumerator, uc, l, e);
+        expand_enumerators(fg.enumerator, l, e);
     }
 
     stp.end_transform(m);
