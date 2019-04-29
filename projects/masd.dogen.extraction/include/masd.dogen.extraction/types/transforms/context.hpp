@@ -38,11 +38,13 @@ namespace masd::dogen::extraction::transforms {
 
 class context final {
 public:
-    context() = default;
     ~context() = default;
 
 public:
+    context();
+
     context(
+        const bool use_configuration,
         const boost::shared_ptr<masd::dogen::variability::type_repository>& type_repository,
         const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model,
         const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer,
@@ -51,6 +53,9 @@ public:
         const bool dry_run_mode_enabled);
 
 public:
+    bool use_configuration() const;
+    void use_configuration(const bool v);
+
     const boost::shared_ptr<masd::dogen::variability::type_repository>& type_repository() const;
     void type_repository(const boost::shared_ptr<masd::dogen::variability::type_repository>& v);
 
@@ -70,6 +75,7 @@ public:
     void dry_run_mode_enabled(const bool v);
 
 private:
+    bool use_configuration_;
     boost::shared_ptr<masd::dogen::variability::type_repository> type_repository_;
     boost::shared_ptr<masd::dogen::variability::meta_model::feature_model> feature_model_;
     boost::shared_ptr<masd::dogen::tracing::tracer> tracer_;
