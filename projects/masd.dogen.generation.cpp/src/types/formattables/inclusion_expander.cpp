@@ -31,7 +31,8 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-static logger lg(logger_factory("generation.cpp.formattables.inclusion_expander"));
+static logger lg(logger_factory(
+        "generation.cpp.formattables.inclusion_expander"));
 
 const char angle_bracket('<');
 const std::string double_quote("\"");
@@ -96,14 +97,13 @@ bool include_directive_comparer(
 namespace masd::dogen::generation::cpp::formattables {
 
 directive_group_repository inclusion_expander::
-create_directive_groups(const variability::type_repository& atrp,
+create_directive_groups(
     const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration,
     const formatters::repository& frp, const locator& l,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
     directive_group_repository_factory f;
-    return f.make(atrp, feature_model,  use_configuration, frp, l, formattables);
+    return f.make(feature_model, frp, l, formattables);
 }
 
 inclusion_expander::element_inclusion_dependencies_type
@@ -240,16 +240,14 @@ void inclusion_expander::populate_inclusion_dependencies(
                              << "for all formattables. ";
 }
 
-void inclusion_expander::expand(const variability::type_repository& atrp,
+void inclusion_expander::expand(
     const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration,
     const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element, const formatters::repository& frp,
     const locator& l, model& fm) const {
 
     auto& fbls(fm.formattables());
-    const auto dgrp(create_directive_groups(atrp, feature_model,
-            use_configuration, frp, l, fbls));
+    const auto dgrp(create_directive_groups(feature_model, frp, l, fbls));
     dependencies_builder_factory df(dgrp, enabled_archetype_for_element);
     populate_inclusion_dependencies(frp, df, fbls);
 }

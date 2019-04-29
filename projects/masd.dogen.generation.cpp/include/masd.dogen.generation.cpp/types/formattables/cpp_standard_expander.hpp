@@ -25,9 +25,6 @@
 #pragma once
 #endif
 
-#include "masd.dogen.variability/types/type.hpp"
-#include "masd.dogen.variability/types/annotation.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -41,16 +38,6 @@ private:
     cpp_standards to_cpp_standard(const std::string& s) const;
 
 private:
-    struct type_group {
-        variability::type cpp_standard;
-    };
-
-    type_group make_type_group(const variability::type_repository& atrp) const;
-
-    cpp_standards
-    make_standard(const type_group& tg, const variability::annotation& a) const;
-
-private:
     struct feature_group {
         variability::meta_model::feature cpp_standard;
     };
@@ -62,10 +49,7 @@ private:
         const variability::meta_model::configuration& cfg) const;
 
 public:
-    void expand(const variability::type_repository& atrp,
-        const variability::meta_model::feature_model& feature_model,
-        const bool use_configuration,
-        const variability::annotation& ra,
+    void expand(const variability::meta_model::feature_model& feature_model,
         const variability::meta_model::configuration& rcfg, model& fm) const;
 };
 

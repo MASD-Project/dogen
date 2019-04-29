@@ -32,8 +32,6 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
-#include "masd.dogen.variability/types/type_repository.hpp"
-#include "masd.dogen.variability/types/annotation_factory.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_factory.hpp"
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
@@ -49,10 +47,7 @@ namespace masd::dogen::generation::cpp::formatters {
  */
 class workflow final {
 public:
-    workflow(const variability::type_repository& atrp,
-        const variability::meta_model::feature_model& fm,
-        const bool use_configuration,
-        const variability::annotation_factory& af,
+    workflow(const variability::meta_model::feature_model& fm,
         const variability::helpers::configuration_factory& cf);
 
 public:

@@ -31,9 +31,6 @@
 #include <memory>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.variability/types/annotation.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
-#include "masd.dogen.variability/types/annotation_factory.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_factory.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
@@ -72,10 +69,7 @@ private:
      * @brief Create the formattables representation of the yarn model.
      */
     formattables::model create_formattables_model(
-        const variability::type_repository& atrp,
         const variability::meta_model::feature_model& feature_model,
-        const bool use_configuration,
-        const variability::annotation& ra,
         const variability::meta_model::configuration& rcfg,
         const formatters::repository& frp, const formattables::locator& l,
         const generation::meta_model::model& m) const;
@@ -85,9 +79,7 @@ private:
      */
     formattables::locator make_locator(
         const boost::filesystem::path& output_directory_path,
-        const variability::type_repository& atrp,
         const variability::meta_model::feature_model& fm,
-        const bool use_configuration, const variability::annotation& ra,
         const variability::meta_model::configuration& cfg,
         const formatters::repository& frp,
         const bool enable_backend_directories,
@@ -98,10 +90,8 @@ private:
      */
     std::list<extraction::meta_model::artefact>
     format(const std::unordered_set<generation::meta_model::element_archetype>&
-        enabled_archetype_for_element, const variability::type_repository& atrp,
+        enabled_archetype_for_element,
         const variability::meta_model::feature_model& feature_model,
-        const bool use_configuration,
-        const variability::annotation_factory& af,
         const variability::helpers::configuration_factory& cf,
         const formattables::model& fm) const;
 

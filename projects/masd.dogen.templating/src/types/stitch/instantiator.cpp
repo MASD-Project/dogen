@@ -24,7 +24,6 @@
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
-#include "masd.dogen.variability/io/annotation_io.hpp"
 #include "masd.dogen.templating/types/wale/workflow.hpp"
 #include "masd.dogen.templating/types/helpers/kvp_validator.hpp"
 #include "masd.dogen.templating/types/stitch/instantiation_error.hpp"
@@ -49,13 +48,9 @@ const std::string duplicate_key("Attempt to insert duplicate key: ");
 
 namespace masd::dogen::templating::stitch {
 
-instantiator::instantiator(const variability::type_repository& atrp,
-    const variability::meta_model::feature_model& fm,
-    const bool use_configuration,
-    const variability::annotation_factory& af,
-            const variability::helpers::configuration_factory& cf)
-    : use_configuration_(use_configuration), annotation_factory_(af),
-      configuration_factory_(cf), properties_factory_(atrp, fm) {}
+instantiator::instantiator(const variability::meta_model::feature_model& fm,
+    const variability::helpers::configuration_factory& cf)
+    : configuration_factory_(cf), properties_factory_(fm) {}
 
 boost::filesystem::path
 instantiator::compute_output_path(const boost::filesystem::path& input_path,
@@ -193,13 +188,10 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
          * performs a profile expansion as required. We then take that
          * annotation object and use it to generate the properties.
          */
-        const auto st(variability::scope_types::root_module);
         const auto& tv(r.body().tagged_values());
-        const auto a(annotation_factory_.make(tv, st));
         const auto bp(variability::meta_model::binding_point::global);
         const auto cfg(configuration_factory_.make(tv, bp));
-        r.properties(use_configuration_ ?
-            properties_factory_.make(cfg) : properties_factory_.make(a));
+        r.properties(properties_factory_.make(cfg));
 
         /*
          * Perform the required processing for wale templates.

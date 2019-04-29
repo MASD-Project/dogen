@@ -27,8 +27,6 @@
 
 #include <unordered_map>
 #include <unordered_set>
-#include "masd.dogen.variability/types/type.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -40,16 +38,6 @@
 namespace masd::dogen::generation::cpp::formattables {
 
 class helper_expander {
-private:
-    struct type_group {
-        variability::type family;
-    };
-
-    type_group make_type_group(const variability::type_repository& atrp) const;
-
-    helper_configuration
-    make_configuration(const type_group& tg, const model& fm) const;
-
 private:
     struct feature_group {
         variability::meta_model::feature family;
@@ -74,10 +62,8 @@ private:
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
-    void expand(const variability::type_repository& atrp,
-        const variability::meta_model::feature_model& feature_model,
-        const bool use_configuration, const formatters::repository& frp,
-        model& fm) const;
+    void expand(const variability::meta_model::feature_model& feature_model,
+        const formatters::repository& frp, model& fm) const;
 };
 
 }

@@ -21,9 +21,6 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
-#include "masd.dogen.variability/io/type_io.hpp"
-#include "masd.dogen.variability/types/entry_selector.hpp"
-#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
@@ -33,83 +30,12 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-static logger lg(logger_factory("generation.cpp.formattables.streaming_expander"));
+static logger lg(logger_factory(
+        "generation.cpp.formattables.streaming_expander"));
 
 }
 
 namespace masd::dogen::generation::cpp::formattables {
-
-std::ostream& operator<<(std::ostream& s,
-    const streaming_expander::type_group& v) {
-
-    s << " { "
-      << "\"__type__\": " << "\"masd.dogen::generation::cpp::formattables::"
-      << "streaming_expander::type_group\"" << ", "
-      << "\"requires_quoting\": " << v.requires_quoting << ", "
-      << "\"string_conversion_method\": " << v.string_conversion_method << ", "
-      << "\"remove_unprintable_characters\": "
-      << v.remove_unprintable_characters
-      << " }";
-
-    return s;
-}
-
-streaming_expander::type_group
-streaming_expander::make_type_group(
-    const variability::type_repository& atrp) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating type group.";
-
-    type_group r;
-
-    const variability::type_repository_selector s(atrp);
-    const auto scm(traits::cpp::streaming::string_conversion_method());
-    r.string_conversion_method = s.select_type_by_name(scm);
-
-    const auto rq(traits::cpp::streaming::requires_quoting());
-    r.requires_quoting = s.select_type_by_name(rq);
-
-    const auto ruc(traits::cpp::streaming::remove_unprintable_characters());
-    r.remove_unprintable_characters = s.select_type_by_name(ruc);
-
-    BOOST_LOG_SEV(lg, debug) << "Created type group. Result: " << r;
-
-    return r;
-}
-
-boost::optional<streaming_properties>
-streaming_expander::make_streaming_properties(
-    const type_group& tg, const variability::annotation& a) const {
-
-    BOOST_LOG_SEV(lg, debug) << "Creating streaming properties.";
-    bool found_any(false);
-    streaming_properties r;
-    const variability::entry_selector s(a);
-
-    const auto& rq(tg.requires_quoting);
-    if (s.has_entry(rq)) {
-        r.requires_quoting(s.get_boolean_content_or_default(rq));
-        found_any = true;
-    }
-
-    const auto& scm(tg.string_conversion_method);
-    if (s.has_entry(scm)) {
-        r.string_conversion_method(s.get_text_content_or_default(scm));
-        found_any = true;
-    }
-
-    const auto& ruc(tg.remove_unprintable_characters);
-    if (s.has_entry(ruc)) {
-        r.remove_unprintable_characters(s.get_boolean_content_or_default(ruc));
-        found_any = true;
-    }
-
-    if (!found_any)
-        return boost::optional<streaming_properties>();
-
-    BOOST_LOG_SEV(lg, debug) << "Created streaming properties. "
-                             << "Result: " << r;
-    return r;
-}
 
 streaming_expander::feature_group
 streaming_expander::make_feature_group(
@@ -171,12 +97,10 @@ make_streaming_properties(const feature_group& fg,
 
 
 void streaming_expander::
-expand(const variability::type_repository& atrp,
-    const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration, model& fm) const {
+expand(const variability::meta_model::feature_model& feature_model,
+    model& fm) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started expanding streaming properties.";
-    const auto tg(make_type_group(atrp));
     const auto fg(make_feature_group(feature_model));
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
@@ -190,9 +114,7 @@ expand(const variability::type_repository& atrp,
          */
         auto segment(formattable.master_segment());
         const auto& e(*segment);
-        const auto sp(use_configuration ?
-            make_streaming_properties(fg, *e.configuration()) :
-            make_streaming_properties(tg, e.annotation()));
+        const auto sp(make_streaming_properties(fg, *e.configuration()));
         if (!sp)
             continue;
 

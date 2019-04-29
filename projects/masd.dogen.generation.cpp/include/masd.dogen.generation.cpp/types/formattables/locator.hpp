@@ -30,9 +30,6 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.variability/types/type.hpp"
-#include "masd.dogen.variability/types/annotation.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -50,50 +47,12 @@ public:
     locator(
         const boost::filesystem::path& output_directory_path,
         const boost::filesystem::path& cpp_headers_output_directory_path,
-        const variability::type_repository& atrp,
         const variability::meta_model::feature_model& fm,
-        const bool use_configuration,
-        const formatters::repository& frp, const variability::annotation& root,
+        const formatters::repository& frp,
         const variability::meta_model::configuration& rcfg,
         const coding::meta_model::name& model_name,
         const std::unordered_set<std::string>& module_ids,
         const bool enable_backend_directories);
-
-private:
-    struct facet_type_group {
-        variability::type directory;
-        variability::type postfix;
-    };
-
-    struct formatter_type_group {
-        boost::optional<variability::type> facet_directory;
-        boost::optional<variability::type> facet_postfix;
-        variability::type archetype_postfix;
-    };
-
-    struct type_group {
-        std::unordered_map<std::string, facet_type_group>
-        facets_type_group;
-        std::unordered_map<std::string, formatter_type_group>
-        formatters_type_group;
-        variability::type header_file_extension;
-        variability::type implementation_file_extension;
-        variability::type include_directory_name;
-        variability::type source_directory_name;
-        variability::type tests_directory_name;
-        variability::type disable_facet_directories;
-        variability::type backend_directory_name;
-    };
-
-    type_group make_type_group(const variability::type_repository& atrp,
-        const formatters::repository& frp) const;
-
-    locator_configuration make_configuration(const type_group& tg,
-        const variability::annotation& a) const;
-
-    locator_configuration
-    make_configuration(const variability::type_repository& atrp,
-        const formatters::repository& frp, const variability::annotation& o);
 
 private:
     struct facet_feature_group {

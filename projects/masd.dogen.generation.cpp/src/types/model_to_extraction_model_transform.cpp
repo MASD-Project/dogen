@@ -54,23 +54,17 @@ model_to_extraction_model_transform::formatters_repository() const {
 
 formattables::model
 model_to_extraction_model_transform::create_formattables_model(
-    const variability::type_repository& atrp,
     const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration,
-    const variability::annotation& ra,
     const variability::meta_model::configuration& rcfg,
     const formatters::repository& frp, const formattables::locator& l,
     const generation::meta_model::model& m) const {
     formattables::workflow fw;
-    return fw.execute(atrp, feature_model, use_configuration, ra,
-        rcfg, l, frp, m);
+    return fw.execute(feature_model, rcfg, l, frp, m);
 }
 
 formattables::locator model_to_extraction_model_transform::make_locator(
     const boost::filesystem::path& output_directory_path,
-    const variability::type_repository& atrp,
     const variability::meta_model::feature_model& fm,
-    const bool use_configuration, const variability::annotation& ra,
     const variability::meta_model::configuration& cfg,
     const formatters::repository& frp, const bool enable_backend_directories,
     const generation::meta_model::model& m) const {
@@ -81,8 +75,7 @@ formattables::locator model_to_extraction_model_transform::make_locator(
     const auto chodp(ep.cpp_headers_output_directory());
     const auto ekd(enable_backend_directories);
     const auto ids(m.module_ids());
-    const formattables::locator r(odp, chodp, atrp, fm, use_configuration,
-        frp, ra, cfg, mn, ids, ekd);
+    const formattables::locator r(odp, chodp, fm, frp, cfg, mn, ids, ekd);
     return r;
 }
 
@@ -93,13 +86,11 @@ std::string model_to_extraction_model_transform::id() const {
 std::list<extraction::meta_model::artefact>
 model_to_extraction_model_transform::
 format(const std::unordered_set<generation::meta_model::element_archetype>&
-    enabled_archetype_for_element, const variability::type_repository& atrp,
+    enabled_archetype_for_element,
     const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration,
-    const variability::annotation_factory& af,
     const variability::helpers::configuration_factory& cf,
     const formattables::model& fm) const {
-    formatters::workflow wf(atrp, feature_model, use_configuration, af, cf);
+    formatters::workflow wf(feature_model, cf);
     return wf.execute(enabled_archetype_for_element, fm);
 }
 
@@ -168,33 +159,28 @@ extraction::meta_model::model model_to_extraction_model_transform::apply(
     /*
      * Create the locator.
      */
-    const auto uc(ctx.use_configuration());
     const auto& odp(ctx.output_directory_path());
-    const auto& atrp(*ctx.type_repository());
     const auto& feature_model(*ctx.feature_model());
-    const auto& ra(m.root_module()->annotation());
     const auto& rcfg(*m.root_module()->configuration());
     const auto& frp(formatters_repository());
-    const auto l(make_locator(odp, atrp, feature_model, uc, ra, rcfg,
-            frp, enable_backend_directories, m));
+    const auto l(make_locator(odp, feature_model, rcfg, frp,
+            enable_backend_directories, m));
 
     /*
      * Generate the formattables model.
      */
-    const auto fm(create_formattables_model(atrp, feature_model, uc, ra,
-            rcfg, frp, l, m));
+    const auto fm(create_formattables_model(feature_model, rcfg, frp, l, m));
 
     /*
      * Code-generate all artefacts.
      */
     extraction::meta_model::model r;
-    const auto& af(*ctx.annotation_factory());
     const auto& eafe(m.enabled_archetype_for_element());
     const variability::helpers::configuration_factory
         cf(*ctx.archetype_location_repository(), feature_model,
             false);
 
-    r.artefacts(format(eafe, atrp, feature_model, uc, af, cf, fm));
+    r.artefacts(format(eafe, feature_model, cf, fm));
     r.managed_directories(managed_directories(l));
 
     BOOST_LOG_SEV(lg, debug) << "Finished backend.";

@@ -26,9 +26,6 @@
 #endif
 
 #include <boost/optional.hpp>
-#include "masd.dogen.variability/types/type.hpp"
-#include "masd.dogen.variability/types/annotation.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -38,22 +35,6 @@
 namespace masd::dogen::generation::cpp::formattables {
 
 class streaming_expander {
-private:
-    struct type_group {
-        variability::type requires_quoting;
-        variability::type string_conversion_method;
-        variability::type remove_unprintable_characters;
-    };
-
-    friend std::ostream& operator<<(std::ostream& s,
-        const type_group& v);
-
-    type_group
-    make_type_group(const variability::type_repository& atrp) const;
-
-    boost::optional<streaming_properties> make_streaming_properties(
-        const type_group& tg, const variability::annotation& a) const;
-
 private:
     struct feature_group {
         variability::meta_model::feature requires_quoting;
@@ -69,9 +50,8 @@ private:
         const variability::meta_model::configuration& cfg) const;
 
 public:
-    void expand(const variability::type_repository& atrp,
-        const variability::meta_model::feature_model& feature_model,
-        const bool use_configuration, model& fm) const;
+    void expand(const variability::meta_model::feature_model& feature_model,
+        model& fm) const;
 };
 
 }

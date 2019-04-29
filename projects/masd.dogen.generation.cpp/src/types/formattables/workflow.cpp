@@ -39,31 +39,24 @@ model workflow::make_model(const formatters::repository& frp,
 }
 
 void workflow::expand_model(
-    const variability::type_repository& atrp,
     const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration,
-    const variability::annotation& ra,
     const variability::meta_model::configuration& rcfg,
     const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element,
     const formatters::repository& frp, const locator& l,
     model& fm) const {
     model_expander ex;
-    ex.expand(atrp, feature_model, use_configuration, ra, rcfg,
-        enabled_archetype_for_element, frp, l, fm);
+    ex.expand(feature_model, rcfg, enabled_archetype_for_element, frp, l, fm);
 }
 
 model workflow::execute(
-    const variability::type_repository& atrp,
     const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration,
-    const variability::annotation& ra,
     const variability::meta_model::configuration& rcfg,
     const locator& l, const formatters::repository& frp,
     const generation::meta_model::model& m) const {
 
     auto r(make_model(frp, m));
-    expand_model(atrp, feature_model, use_configuration, ra, rcfg,
+    expand_model(feature_model, rcfg,
         m.enabled_archetype_for_element(), frp, l, r);
     return r;
 }

@@ -41,108 +41,9 @@ const std::string field_definition_not_found(
 
 namespace masd::dogen::templating::stitch {
 
-properties_factory::properties_factory(const variability::type_repository& arp,
+properties_factory::properties_factory(
     const variability::meta_model::feature_model& fm)
-    : type_group_(make_type_group(arp)),
-      feature_group_(make_feature_group(fm)) {}
-
-properties_factory::type_group properties_factory::make_type_group(
-    const variability::type_repository& arp) const {
-    type_group r;
-    const variability::type_repository_selector s(arp);
-
-    const auto& svn(traits::stream_variable_name());
-    r.stream_variable_name = s.select_type_by_name(svn);
-
-    const auto& rod(traits::relative_output_directory());
-    r.relative_output_directory = s.select_type_by_name(rod);
-
-    const auto& id(traits::inclusion_dependency());
-    r.inclusion_dependency = s.select_type_by_name(id);
-
-    const auto cn(traits::containing_namespaces());
-    r.containing_namespaces = s.select_type_by_name(cn);
-
-    const auto wt(traits::wale_template());
-    r.wale_template = s.select_type_by_name(wt);
-
-    const auto wkvp(traits::wale_kvp());
-    r.wale_kvp = s.select_type_by_name(wkvp);
-
-    return r;
-}
-
-std::string properties_factory::
-extract_stream_variable_name(const variability::annotation& a) const {
-    using namespace variability;
-    const entry_selector s(a);
-    const auto& tg(type_group_);
-    return s.get_text_content_or_default(tg.stream_variable_name);
-}
-
-boost::filesystem::path properties_factory::
-extract_relative_output_directory(const variability::annotation& a) const {
-    using namespace variability;
-    const entry_selector s(a);
-    if (!s.has_entry(traits::relative_output_directory()))
-        return boost::filesystem::path();
-
-    const auto text(s.get_text_content(traits::relative_output_directory()));
-    return boost::filesystem::path(text);
-}
-
-std::list<std::string> properties_factory::
-extract_inclusion_dependencies(const variability::annotation& a) const {
-    std::list<std::string> r;
-    using namespace variability;
-    const entry_selector s(a);
-    const auto& t(type_group_.inclusion_dependency);
-    if (!s.has_entry(t))
-        return r;
-
-    return s.get_text_collection_content(t);
-}
-
-std::list<std::string> properties_factory::
-extract_containing_namespaces(const variability::annotation& a) const {
-    std::list<std::string> r;
-    using namespace variability;
-    const entry_selector s(a);
-    const auto& t(type_group_.containing_namespaces);
-    if (!s.has_entry(t))
-        return r;
-
-    const auto cns(s.get_text_content(t));
-    if (cns.empty())
-        return r;
-
-    using utility::string::splitter;
-    return splitter::split_scoped(cns);
-}
-
-std::string properties_factory::
-extract_wale_template(const variability::annotation& a) const {
-    std::string r;
-    using namespace variability;
-    const entry_selector s(a);
-    const auto& t(type_group_.wale_template);
-    if (!s.has_entry(t))
-        return r;
-
-    return s.get_text_content(t);
-}
-
-std::unordered_map<std::string, std::string> properties_factory::
-extract_wale_kvps(const variability::annotation& a) const {
-    std::unordered_map<std::string, std::string>  r;
-    using namespace variability;
-    const entry_selector s(a);
-    const auto& t(type_group_.wale_kvp);
-    if (!s.has_entry(t))
-        return r;
-
-    return s.get_kvp_content(t);
-}
+    : feature_group_(make_feature_group(fm)) {}
 
 properties_factory::feature_group properties_factory::make_feature_group(
     const variability::meta_model::feature_model& fm) const {
@@ -249,19 +150,6 @@ make(const variability::meta_model::configuration& cfg) const {
     r.containing_namespaces(extract_containing_namespaces(cfg));
     r.wale_template(extract_wale_template(cfg));
     r.wale_kvps(extract_wale_kvps(cfg));
-    return r;
-}
-
-
-properties
-properties_factory::make(const variability::annotation& a) const {
-    properties r;
-    r.stream_variable_name(extract_stream_variable_name(a));
-    r.relative_output_directory(extract_relative_output_directory(a));
-    r.inclusion_dependencies(extract_inclusion_dependencies(a));
-    r.containing_namespaces(extract_containing_namespaces(a));
-    r.wale_template(extract_wale_template(a));
-    r.wale_kvps(extract_wale_kvps(a));
     return r;
 }
 

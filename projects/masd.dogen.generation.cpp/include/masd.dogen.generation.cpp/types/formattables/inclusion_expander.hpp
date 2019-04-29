@@ -27,7 +27,6 @@
 
 #include <string>
 #include <unordered_set>
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -70,9 +69,7 @@ namespace masd::dogen::generation::cpp::formattables {
 class inclusion_expander {
 private:
     directive_group_repository create_directive_groups(
-        const variability::type_repository& atrp,
         const variability::meta_model::feature_model& feature_model,
-        const bool use_configuration,
         const formatters::repository& frp, const locator& l,
         const std::unordered_map<std::string, formattable>& formattables) const;
 
@@ -90,9 +87,7 @@ public:
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
-    void expand(const variability::type_repository& atrp,
-        const variability::meta_model::feature_model& feature_model,
-        const bool use_configuration,
+    void expand(const variability::meta_model::feature_model& feature_model,
         const std::unordered_set<generation::meta_model::element_archetype>&
         enabled_archetype_for_element,
         const formatters::repository& frp, const locator& l, model& fm) const;

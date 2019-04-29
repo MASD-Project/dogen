@@ -24,8 +24,6 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
-#include "masd.dogen.variability/types/entry_selector.hpp"
-#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.variability/io/type_io.hpp"
@@ -62,133 +60,6 @@ const std::string secondary_without_primary(
 }
 
 namespace masd::dogen::generation::cpp::formattables {
-
-std::ostream& operator<<(std::ostream& s,
-    const directive_group_repository_factory::
-    formattater_type_group& v) {
-
-    s << " { "
-      << "\"__type__\": " << "\"masd.dogen::generation::cpp::formattables::"
-      << "directive_group_repository_factory::formatters_type_group\""
-      << ", "
-      << "\"primary_inclusion_directive\": "
-      << v.primary_inclusion_directive << ", "
-      << "\"secondary_inclusion_directive\": "
-      << v.secondary_inclusion_directive
-      << " }";
-
-    return s;
-}
-
-std::ostream& operator<<(std::ostream& s,
-    const directive_group_repository_factory::type_group& v) {
-
-    s << " { "
-      << "\"__type__\": " << "\"masd.dogen::generation::cpp::formattables::"
-      << "directive_group_repository_factory::type_group\"" << ", "
-      << "\"inclusion_required\": " << v.inclusion_required << ", "
-      << "\"formattaters_type_groups\": "
-      << v.formattaters_type_groups
-      << " }";
-
-    return s;
-}
-
-directive_group_repository_factory::type_group
-directive_group_repository_factory::make_type_group(
-    const variability::type_repository& atrp,
-    const formatters::repository& frp) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating type group.";
-
-    type_group r;
-    const variability::type_repository_selector s(atrp);
-    const auto ir(traits::cpp::inclusion_required());
-    r.inclusion_required = s.select_type_by_name(ir);
-
-    for (const auto f : frp.stock_artefact_formatters()) {
-        const auto& al(f->archetype_location());
-        const auto arch(al.archetype());
-
-        using formatters::inclusion_support_types;
-        static const auto ns(inclusion_support_types::not_supported);
-        if (f->inclusion_support_type() == ns) {
-            BOOST_LOG_SEV(lg, debug) << "Skipping archetype: " << arch;
-            continue;
-        }
-
-        formattater_type_group ftg;
-        const auto& pid(traits::primary_inclusion_directive());
-        ftg.primary_inclusion_directive = s.select_type_by_name(arch, pid);
-
-        const auto& sid(traits::secondary_inclusion_directive());
-        ftg.secondary_inclusion_directive = s.select_type_by_name(arch, sid);
-
-        r.formattaters_type_groups[arch] = ftg;
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Created type group. Result: " << r;
-    return r;
-}
-
-bool directive_group_repository_factory::
-make_top_level_inclusion_required(
-    const type_group& tg, const variability::annotation& a) const {
-    const variability::entry_selector s(a);
-    return s.get_boolean_content_or_default(tg.inclusion_required);
-}
-
-boost::optional<directive_group>
-directive_group_repository_factory::make_directive_group(
-    const type_group& tg,const std::string& archetype,
-    const variability::annotation& a) const {
-
-    if (archetype.empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_archetype;
-        BOOST_THROW_EXCEPTION(expansion_error(empty_archetype));
-    }
-
-    const auto i(tg.formattaters_type_groups.find(archetype));
-    if (i == tg.formattaters_type_groups.end()) {
-        BOOST_LOG_SEV(lg, error) << missing_archetype;
-        BOOST_THROW_EXCEPTION(expansion_error(missing_archetype));
-    }
-
-    const auto& ft(i->second);
-    const variability::entry_selector s(a);
-    directive_group r;
-
-    bool found(false);
-    const auto pid(ft.primary_inclusion_directive);
-    if (s.has_entry(pid)) {
-        found = true;
-        r.primary(s.get_text_content(pid));
-    }
-
-    const auto sid(ft.secondary_inclusion_directive);
-    if (s.has_entry(sid)) {
-        if (!found) {
-            BOOST_LOG_SEV(lg, error) << secondary_without_primary << archetype;
-            BOOST_THROW_EXCEPTION(
-                expansion_error(secondary_without_primary + archetype));
-        }
-
-        r.secondary(s.get_text_collection_content(sid));
-    }
-
-    if (!found)
-        return boost::optional<directive_group>();
-
-    return r;
-}
-
-bool directive_group_repository_factory::
-has_inclusion_directive_overrides(const variability::annotation& a) const {
-    const variability::entry_selector s(a);
-    const auto r(s.has_key_ending_with(override_postfix));
-    BOOST_LOG_SEV(lg, debug) << "Found entries with keys ending with "
-                             << override_postfix << ": " << r;
-    return r;
-}
 
 directive_group_repository_factory::feature_group
 directive_group_repository_factory::make_feature_group(
@@ -344,8 +215,8 @@ insert_inclusion_directive(const std::string& id, const std::string& archetype,
 }
 
 void directive_group_repository_factory::
-compute_directives(const type_group& tg, const feature_group& fg,
-    const bool use_configuration, const coding::meta_model::element& e,
+compute_directives(const feature_group& fg,
+    const coding::meta_model::element& e,
     const artefact_formatters_type& formatters, const locator& l,
     directive_group_repository& dgrp) const {
 
@@ -367,11 +238,8 @@ compute_directives(const type_group& tg, const feature_group& fg,
      * override this, we default it to true because normally elements
      * require inclusion.
      */
-    const auto& a(e.annotation());
     const auto& cfg(*e.configuration());
-    const bool required(use_configuration ?
-        make_top_level_inclusion_required(fg, cfg) :
-        make_top_level_inclusion_required(tg, a));
+    const bool required(make_top_level_inclusion_required(fg, cfg));
     if (!required) {
         BOOST_LOG_SEV(lg, trace) << "Inclusion not required for element.";
         return;
@@ -384,9 +252,7 @@ compute_directives(const type_group& tg, const feature_group& fg,
      * at all. If it has at least one override, we know we don't need
      * to generate inclusion directives manually.
      */
-    const bool has_overrides(use_configuration ?
-        has_inclusion_directive_overrides(cfg) :
-        has_inclusion_directive_overrides(a));
+    const bool has_overrides(has_inclusion_directive_overrides(cfg));
 
     /*
      * Now we start working at the formatter level.
@@ -441,9 +307,7 @@ compute_directives(const type_group& tg, const feature_group& fg,
          * data we make use of helpers and thus not require an
          * include.
          */
-        const auto dg(use_configuration ?
-            make_directive_group(fg, arch, cfg) :
-            make_directive_group(tg, arch, a));
+        const auto dg(make_directive_group(fg, arch, cfg));
         if (dg) {
             insert_inclusion_directive(id, arch, *dg, dgrp);
             BOOST_LOG_SEV(lg, trace) << "Read primary directive from "
@@ -466,8 +330,7 @@ compute_directives(const type_group& tg, const feature_group& fg,
 }
 
 directive_group_repository
-directive_group_repository_factory::make(const type_group& tg,
-    const feature_group& fg, const bool use_configuration,
+directive_group_repository_factory::make(const feature_group& fg,
     const std::unordered_map<std::string, artefact_formatters_type>& afmt,
     const locator& l,
     const std::unordered_map<std::string, formattable>& formattables) const {
@@ -492,7 +355,7 @@ directive_group_repository_factory::make(const type_group& tg,
                 continue;
             }
 
-            compute_directives(tg, fg, use_configuration, e, i->second, l, r);
+            compute_directives(fg, e, i->second, l, r);
         }
     }
     return r;
@@ -500,15 +363,12 @@ directive_group_repository_factory::make(const type_group& tg,
 
 directive_group_repository
 directive_group_repository_factory::
-make(const variability::type_repository& atrp,
-    const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration,
+make(const variability::meta_model::feature_model& feature_model,
     const formatters::repository& frp, const locator& l,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating inclusion dependencies "
-                             << "group repository. use_configuration: "
-                             << use_configuration;
+                             << "group repository.";
 
     /*
      * First we must make sure we only have formatters which generate
@@ -516,9 +376,8 @@ make(const variability::type_repository& atrp,
      * all of those that do not, and bucket them all by type index.
      */
     const auto afmt(includible_formatters_by_meta_name(frp));
-    const auto tg(make_type_group(atrp, frp));
     const auto fg(make_feature_group(feature_model, frp));
-    const auto r(make(tg, fg, use_configuration, afmt, l, formattables));
+    const auto r(make(fg, afmt, l, formattables));
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies "
                              << "group repository.";

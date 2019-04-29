@@ -22,9 +22,6 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
-#include "masd.dogen.variability/types/entry_selector.hpp"
-#include "masd.dogen.variability/types/type_repository_selector.hpp"
-#include "masd.dogen.variability/io/type_io.hpp"
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
@@ -59,13 +56,12 @@ namespace masd::dogen::generation::cpp::formattables {
 
 class updator : public fabric::element_visitor {
 public:
-    updator(model& fm, const locator& l, const odb_expander::type_group& tg,
-        const odb_expander::feature_group& fg, const bool use_configuration);
+    updator(model& fm, const locator& l,
+        const odb_expander::feature_group& fg);
 
 private:
     std::list<std::string> make_odb_pragmas(
-        const variability::meta_model::configuration& cfg,
-        const variability::annotation& a) const;
+        const variability::meta_model::configuration& cfg) const;
 
 public:
     using fabric::element_visitor::visit;
@@ -80,35 +76,22 @@ public:
 private:
     const model& model_;
     const locator locator_;
-    const odb_expander::type_group& type_group_;
     const odb_expander::feature_group& feature_group_;
-    const bool use_configuration_;
     boost::optional<odb_properties> result_;
 };
 
 updator::
-updator(model& fm, const locator& l, const odb_expander::type_group& tg,
-    const odb_expander::feature_group& fg, const bool use_configuration)
-    : model_(fm), locator_(l), type_group_(tg), feature_group_(fg),
-      use_configuration_(use_configuration) {}
+updator(model& fm, const locator& l, const odb_expander::feature_group& fg)
+    : model_(fm), locator_(l), feature_group_(fg) {}
 
-std::list<std::string>
-updator::make_odb_pragmas(const variability::meta_model::configuration& cfg,
-    const variability::annotation& a) const {
+std::list<std::string> updator::make_odb_pragmas(
+    const variability::meta_model::configuration& cfg) const {
 
-    if (use_configuration_) {
-        const variability::helpers::configuration_selector s(cfg);
-        if (!s.has_configuration_point(feature_group_.odb_pragma))
-            return std::list<std::string>();
+    const variability::helpers::configuration_selector s(cfg);
+    if (!s.has_configuration_point(feature_group_.odb_pragma))
+        return std::list<std::string>();
 
-        return s.get_text_collection_content(feature_group_.odb_pragma);
-    } else {
-        const variability::entry_selector s(a);
-        if (!s.has_entry(type_group_.odb_pragma))
-            return std::list<std::string>();
-
-        return s.get_text_collection_content(type_group_.odb_pragma);
-    }
+    return s.get_text_collection_content(feature_group_.odb_pragma);
 }
 
 void updator::visit(fabric::common_odb_options& coo) {
@@ -148,8 +131,7 @@ void updator::visit(fabric::object_odb_options& ooo) {
 void updator::visit(coding::meta_model::object& o) {
     odb_properties op;
 
-    const variability::entry_selector s(o.annotation());
-    auto top_level_pragmas(make_odb_pragmas(*o.configuration(), o.annotation()));
+    auto top_level_pragmas(make_odb_pragmas(*o.configuration()));
     if (o.orm_properties()) {
         /*
          * If the user has supplied an ORM properties and this
@@ -184,7 +166,7 @@ void updator::visit(coding::meta_model::object& o) {
 
     for (const auto& attr : o.local_attributes()) {
         const auto id(attr.name().qualified().dot());
-        auto attr_pragmas(make_odb_pragmas(*attr.configuration(), attr.annotation()));
+        auto attr_pragmas(make_odb_pragmas(*attr.configuration()));
 
         if (attr.orm_properties()) {
             const auto& cfg(*attr.orm_properties());
@@ -240,8 +222,7 @@ void updator::visit(coding::meta_model::object& o) {
 void updator::visit(coding::meta_model::primitive& p) {
     odb_properties op;
     op.is_value(true);
-    op.top_level_odb_pragmas(
-        make_odb_pragmas(*p.configuration(), p.annotation()));
+    op.top_level_odb_pragmas(make_odb_pragmas(*p.configuration()));
 
     if (p.orm_properties()) {
         const auto& cfg(*p.orm_properties());
@@ -292,31 +273,6 @@ updator::result() const {
     return result_;
 }
 
-std::ostream& operator<<(std::ostream& s,
-    const odb_expander::type_group& v) {
-
-    s << " { "
-      << "\"__type__\": " << "\"masd.dogen::generation::cpp::formattables::"
-      << "odb_expander::type_group\"" << ", "
-      << "\"odb_pragma\": " << v.odb_pragma
-      << " }";
-
-    return s;
-}
-
-odb_expander::type_group odb_expander::
-make_type_group(const variability::type_repository& atrp) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating type groups.";
-
-    type_group r;
-    const variability::type_repository_selector s(atrp);
-    const auto& op(formatters::odb::traits::odb_pragma());
-    r.odb_pragma = s.select_type_by_name(op);
-
-    BOOST_LOG_SEV(lg, debug) << "Created type groups. Result: " << r;
-    return r;
-}
-
 odb_expander::feature_group odb_expander::
 make_feature_group(const variability::meta_model::feature_model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Creating feature groups.";
@@ -330,12 +286,12 @@ make_feature_group(const variability::meta_model::feature_model& fm) const {
     return r;
 }
 
-void odb_expander::expand(const variability::type_repository& atrp,
+void odb_expander::expand(
     const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration, const locator& l, model& fm) const {
+    const locator& l, model& fm) const {
+
     BOOST_LOG_SEV(lg, debug) << "Started expanding odb properties.";
 
-    const auto tg(make_type_group(atrp));
     const auto fg(make_feature_group(feature_model));
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
@@ -355,7 +311,7 @@ void odb_expander::expand(const variability::type_repository& atrp,
 
         for (const auto& ptr : formattable.all_segments()) {
             auto& e(*ptr);
-            updator g(fm, l, tg, fg, use_configuration);
+            updator g(fm, l, fg);
             e.accept(g);
 
             if (!g.result())

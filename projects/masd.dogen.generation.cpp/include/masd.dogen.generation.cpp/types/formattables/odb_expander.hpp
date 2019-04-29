@@ -27,8 +27,6 @@
 
 #include <list>
 #include <boost/optional.hpp>
-#include "masd.dogen.variability/types/type.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -40,16 +38,8 @@ namespace masd::dogen::generation::cpp::formattables {
 
 class odb_expander {
 private:
-    struct type_group {
-        variability::type odb_pragma;
-    };
     friend class updator;
 
-    friend std::ostream& operator<<(std::ostream& s, const type_group& v);
-
-    type_group make_type_group(const variability::type_repository& atrp) const;
-
-private:
     struct feature_group {
         variability::meta_model::feature odb_pragma;
     };
@@ -58,10 +48,8 @@ private:
         const variability::meta_model::feature_model& fm) const;
 
 public:
-    void expand(const variability::type_repository& atrp,
-        const variability::meta_model::feature_model& feature_model,
-        const bool use_configuration, const locator& l,
-        model& fm) const;
+    void expand(const variability::meta_model::feature_model& feature_model,
+        const locator& l, model& fm) const;
 };
 
 }

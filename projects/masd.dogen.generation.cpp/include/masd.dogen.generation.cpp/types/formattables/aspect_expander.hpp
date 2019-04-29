@@ -29,9 +29,6 @@
 #include <string>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "masd.dogen.variability/types/type.hpp"
-#include "masd.dogen.variability/types/annotation.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -44,21 +41,6 @@
 namespace masd::dogen::generation::cpp::formattables {
 
 class aspect_expander {
-private:
-    struct type_group {
-        variability::type requires_manual_default_constructor;
-        variability::type requires_manual_move_constructor;
-        variability::type requires_stream_manipulators;
-    };
-
-    friend std::ostream& operator<<(std::ostream& s, const type_group& v);
-
-    type_group make_type_group(const variability::type_repository& atrp) const;
-
-    boost::optional<aspect_properties> make_aspect_properties(
-        const type_group& tg, const variability::annotation& a) const;
-
-
 private:
     struct feature_group {
         variability::meta_model::feature requires_manual_default_constructor;
@@ -78,9 +60,8 @@ private:
     aspect_properties_type;
 
     aspect_properties_type
-    obtain_aspect_properties(const variability::type_repository& atrp,
+    obtain_aspect_properties(
         const variability::meta_model::feature_model& feature_model,
-        const bool use_configuration,
         const std::unordered_map<std::string, formattable>& formattables) const;
 
 private:
@@ -101,9 +82,8 @@ private:
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
-    void expand(const variability::type_repository& atrp,
-        const variability::meta_model::feature_model& feature_model,
-        const bool use_configuration, model& fm) const;
+    void expand(const variability::meta_model::feature_model& feature_model,
+        model& fm) const;
 };
 
 }

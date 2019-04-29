@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "masd.dogen.variability/types/annotation_factory.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_factory.hpp"
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.coding/types/meta_model/element_fwd.hpp"
@@ -37,10 +36,7 @@ namespace masd::dogen::generation::cpp::formatters {
 
 class stitch_formatter final {
 public:
-    stitch_formatter(const variability::type_repository& atrp,
-        const variability::meta_model::feature_model& fm,
-        const bool use_configuration,
-        const variability::annotation_factory& af,
+    stitch_formatter(const variability::meta_model::feature_model& fm,
         const variability::helpers::configuration_factory& cf);
 
 private:

@@ -27,8 +27,6 @@
 
 #include <string>
 #include <unordered_set>
-#include "masd.dogen.variability/types/annotation.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.generation/types/meta_model/element_archetype.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/model.hpp"
@@ -44,10 +42,7 @@ private:
         const generation::meta_model::model& m) const;
 
     void expand_model(
-        const variability::type_repository& atrp,
         const variability::meta_model::feature_model& feature_model,
-        const bool use_configuration,
-        const variability::annotation& ra,
         const variability::meta_model::configuration& rcfg,
         const std::unordered_set<generation::meta_model::element_archetype>&
         enabled_archetype_for_element,
@@ -56,10 +51,7 @@ private:
 
 public:
     model execute(
-        const variability::type_repository& atrp,
         const variability::meta_model::feature_model& feature_model,
-        const bool use_configuration,
-        const variability::annotation& ra,
         const variability::meta_model::configuration& rcfg,
         const locator& l, const formatters::repository& frp,
         const generation::meta_model::model& m) const;

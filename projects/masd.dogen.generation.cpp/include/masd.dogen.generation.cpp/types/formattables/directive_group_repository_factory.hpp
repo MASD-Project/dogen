@@ -29,8 +29,6 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.variability/types/type.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -43,35 +41,6 @@
 namespace masd::dogen::generation::cpp::formattables {
 
 class directive_group_repository_factory final {
-private:
-    struct formattater_type_group {
-        variability::type primary_inclusion_directive;
-        variability::type secondary_inclusion_directive;
-    };
-    friend std::ostream& operator<<(std::ostream& s,
-        const formattater_type_group& v);
-
-    struct type_group {
-        variability::type inclusion_required;
-        std::unordered_map<std::string, formattater_type_group>
-        formattaters_type_groups;
-    };
-    friend std::ostream& operator<<(std::ostream& s,
-        const type_group& v);
-
-    type_group make_type_group(const variability::type_repository& atrp,
-        const formatters::repository& frp) const;
-
-    bool make_top_level_inclusion_required(const type_group& tg,
-        const variability::annotation& a) const;
-
-    boost::optional<directive_group> make_directive_group(
-        const type_group& tg, const std::string& archetype,
-        const variability::annotation& a) const;
-
-    bool has_inclusion_directive_overrides(
-        const variability::annotation& a) const;
-
 private:
     struct formattater_feature_group {
         variability::meta_model::feature primary_inclusion_directive;
@@ -117,23 +86,21 @@ private:
         const std::string& archetype, const directive_group& dg,
         directive_group_repository& dgrp) const;
 
-    void compute_directives(const type_group& tg, const feature_group& fg,
-        const bool use_configuration,
+    void compute_directives(const feature_group& fg,
         const coding::meta_model::element& e,
         const artefact_formatters_type& formatters,
         const locator& l, directive_group_repository& dgrp) const;
 
-    directive_group_repository make(const type_group& tg,
-        const feature_group& fg, const bool use_configuration,
+    directive_group_repository make(
+        const feature_group& fg,
         const std::unordered_map<std::string, artefact_formatters_type>& afmt,
         const locator& l,
         const std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
     directive_group_repository
-    make(const variability::type_repository& atrp,
-        const variability::meta_model::feature_model& feature_model,
-        const bool use_configuration, const formatters::repository& frp,
+    make(const variability::meta_model::feature_model& feature_model,
+        const formatters::repository& frp,
         const locator& l,
         const std::unordered_map<std::string, formattable>& formattables) const;
 };

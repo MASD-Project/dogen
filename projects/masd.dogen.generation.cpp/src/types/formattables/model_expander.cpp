@@ -34,11 +34,10 @@
 namespace masd::dogen::generation::cpp::formattables {
 
 void model_expander::
-expand_streaming(const variability::type_repository& atrp,
-    const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration, model& fm) const {
+expand_streaming(const variability::meta_model::feature_model& feature_model,
+    model& fm) const {
     streaming_expander ex;
-    ex.expand(atrp, feature_model, use_configuration, fm);
+    ex.expand(feature_model, fm);
 }
 
 void model_expander::expand_canonical_archetypes(
@@ -48,30 +47,26 @@ void model_expander::expand_canonical_archetypes(
 }
 
 void model_expander::expand_inclusion(
-    const variability::type_repository& atrp,
     const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration,
     const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element, const formatters::repository& frp,
     const locator& l, model& fm) const {
     inclusion_expander ex;
-    ex.expand(atrp, feature_model, use_configuration,
-        enabled_archetype_for_element, frp, l, fm);
+    ex.expand(feature_model, enabled_archetype_for_element, frp, l, fm);
 }
 
-void model_expander::expand_aspects(const variability::type_repository& atrp,
+void model_expander::expand_aspects(
     const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration, model& fm) const {
+    model& fm) const {
     aspect_expander ex;
-    ex.expand(atrp, feature_model, use_configuration, fm);
+    ex.expand(feature_model, fm);
 }
 
-void model_expander::expand_helpers(const variability::type_repository& atrp,
+void model_expander::expand_helpers(
     const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration,
     const formatters::repository& frp, model& fm) const {
     helper_expander ex;
-    ex.expand(atrp, feature_model, use_configuration, frp, fm);
+    ex.expand(feature_model, frp, fm);
 }
 
 void model_expander::reduce(model& fm) const {
@@ -85,12 +80,11 @@ void model_expander::expand_file_paths_and_guards(
     ex.expand(frp, l, fm);
 }
 
-void model_expander::expand_odb(const variability::type_repository& atrp,
+void model_expander::expand_odb(
     const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration,
     const locator& l, model& fm) const {
     odb_expander ex;
-    ex.expand(atrp, feature_model, use_configuration, l, fm);
+    ex.expand(feature_model, l, fm);
 }
 
 void model_expander::
@@ -105,20 +99,15 @@ void model_expander::expand_build_files(const locator& l, model& fm) const {
 }
 
 void
-model_expander::expand_cpp_standard(const variability::type_repository& atrp,
+model_expander::expand_cpp_standard(
     const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration,
-    const variability::annotation& ra,
     const variability::meta_model::configuration& rcfg, model& fm) const {
     cpp_standard_expander ex;
-    ex.expand(atrp, feature_model, use_configuration, ra, rcfg, fm);
+    ex.expand(feature_model, rcfg, fm);
 }
 
 void model_expander::expand(
-    const variability::type_repository& atrp,
     const variability::meta_model::feature_model& feature_model,
-    const bool use_configuration,
-    const variability::annotation& ra,
     const variability::meta_model::configuration& rcfg,
     const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element,
@@ -128,14 +117,14 @@ void model_expander::expand(
      * Streaming expansion must be done before helper expansion as the
      * helpers need the streaminging properties.
      */
-    expand_streaming(atrp, feature_model, use_configuration, fm);
+    expand_streaming(feature_model, fm);
 
     /*
      * C++ standard expansion must be done before enablement because
      * we will use it to check that the enabled facets are compatible
      * with the C++ standard (e.g. hash is not available for C++ 98).
      */
-    expand_cpp_standard(atrp, feature_model, use_configuration, ra, rcfg, fm);
+    expand_cpp_standard(feature_model, rcfg, fm);
 
     /*
      * Canonical formatter expansion must be done before inclusion
@@ -144,10 +133,9 @@ void model_expander::expand(
      */
     expand_canonical_archetypes(frp, fm);
 
-    expand_inclusion(atrp, feature_model, use_configuration,
-        enabled_archetype_for_element, frp, l, fm);
-    expand_aspects(atrp, feature_model, use_configuration, fm);
-    expand_helpers(atrp, feature_model, use_configuration, frp, fm);
+    expand_inclusion(feature_model, enabled_archetype_for_element, frp, l, fm);
+    expand_aspects(feature_model, fm);
+    expand_helpers(feature_model, frp, fm);
 
     /*
      * All of the above expansions must be performed prior to
@@ -156,7 +144,7 @@ void model_expander::expand(
     reduce(fm);
 
     expand_file_paths_and_guards(frp, l, fm);
-    expand_odb(atrp, feature_model, use_configuration, l, fm);
+    expand_odb(feature_model, l, fm);
     expand_facet_directories(l, fm);
     expand_build_files(l, fm);
 }
