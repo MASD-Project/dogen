@@ -21,8 +21,6 @@
 #include <boost/make_shared.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.variability/types/entry_selector.hpp"
-#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
@@ -50,46 +48,6 @@ namespace masd::dogen::generation::csharp::fabric {
 
 using coding::meta_model::origin_types;
 using coding::meta_model::technical_space;
-
-visual_studio_factory::type_group visual_studio_factory::make_type_group(
-    const variability::type_repository& atrp) const {
-
-    type_group r;
-    const variability::type_repository_selector s(atrp);
-
-    const auto& psg(traits::visual_studio_project_solution_guid());
-    r.project_solution_guid = s.select_type_by_name(psg);
-
-    const auto& pg(traits::visual_studio_project_guid());
-    r.project_guid = s.select_type_by_name(pg);
-
-    return r;
-}
-
-visual_studio_configuration visual_studio_factory::
-make_configuration(const type_group& tg,
-    const variability::annotation& ra) const {
-
-    visual_studio_configuration r;
-    const variability::entry_selector s(ra);
-
-    const auto& psg(tg.project_solution_guid);
-    r.project_solution_guid(s.get_text_content_or_default(psg));
-
-    const auto& pg(tg.project_guid);
-    r.project_guid(s.get_text_content_or_default(pg));
-
-    return r;
-}
-
-visual_studio_configuration visual_studio_factory::
-make_configuration(const variability::type_repository& atrp,
-    const variability::annotation& ra) const {
-
-    const auto tg(make_type_group(atrp));
-    const auto r(make_configuration(tg, ra));
-    return r;
-}
 
 visual_studio_factory::feature_group
 visual_studio_factory::make_feature_group(
@@ -198,17 +156,12 @@ make_project(const visual_studio_configuration cfg,
 }
 
 std::list<boost::shared_ptr<coding::meta_model::element>>
-visual_studio_factory::make(const variability::type_repository& atrp,
-    const variability::meta_model::feature_model& fm,
-    const bool use_configuration,
+visual_studio_factory::make(const variability::meta_model::feature_model& fm,
     const generation::meta_model::model& m) const {
 
     const auto pn(obtain_project_name(m));
-    const auto ra(m.root_module()->annotation());
     const auto rcfg(*m.root_module()->configuration());
-    const auto cfg(use_configuration ?
-        make_configuration(fm, rcfg) :
-        make_configuration(atrp, ra));
+    const auto cfg(make_configuration(fm, rcfg));
 
     std::list<boost::shared_ptr<coding::meta_model::element>> r;
     r.push_back(make_solution(cfg, pn, m));
