@@ -93,18 +93,6 @@ insert(const boost::shared_ptr<Element>& e,
     }
 }
 
-std::ostream& operator<<(std::ostream& s,
-    const injection_model_to_coding_model_transform::type_group& v) {
-    s << " { "
-      << "\"__type__\": "
-      << "\"coding::injection_model_to_coding_model_transform::"
-      << "type_group\"" << ", "
-      << "\"external_modules\": " << v.external_modules << ", "
-      << "\"model_modules\": " << v.model_modules
-      << " }";
-    return s;
-}
-
 coding::meta_model::technical_space to_technical_space(const std::string& s) {
     using coding::meta_model::technical_space;
     if (s == cpp_technical_space)
@@ -116,42 +104,6 @@ coding::meta_model::technical_space to_technical_space(const std::string& s) {
 
     BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;
     BOOST_THROW_EXCEPTION(transform_exception(unsupported_technical_space + s));
-}
-
-
-injection_model_to_coding_model_transform::type_group
-injection_model_to_coding_model_transform::
-make_type_group(const variability::type_repository& atrp) {
-    type_group r;
-
-    const variability::type_repository_selector rs(atrp);
-
-    const auto& em(coding::traits::external_modules());
-    r.external_modules = rs.select_type_by_name(em);
-
-    const auto& mm(coding::traits::model_modules());
-    r.model_modules = rs.select_type_by_name(mm);
-
-    return r;
-}
-
-naming_configuration
-injection_model_to_coding_model_transform::make_naming_configuration(
-    const type_group& tg, const variability::annotation& a) {
-
-    const variability::entry_selector s(a);
-    if (!s.has_entry(tg.model_modules)) {
-        BOOST_LOG_SEV(lg, error) << missing_model_modules;
-        BOOST_THROW_EXCEPTION(transform_exception(missing_model_modules));
-    }
-
-    naming_configuration r;
-    r.model_modules(s.get_text_content(tg.model_modules));
-
-    if (s.has_entry(tg.external_modules))
-        r.external_modules(s.get_text_content(tg.external_modules));
-
-    return r;
 }
 
 injection_model_to_coding_model_transform::feature_group
@@ -302,16 +254,11 @@ apply(const context& ctx, const injection::meta_model::model& m) {
      * First we compute the model name and technical space by reading
      * data from configuration.
      */
-    const auto& ra(m.annotation());
     const auto& cfg(*m.configuration());
     auto& gcfg(m.configuration());
-    const auto& atrp(*ctx.coding_context().type_repository());
     const auto& fm(*ctx.coding_context().feature_model());
-    const auto tg(make_type_group(atrp));
     const auto fg(make_feature_group(fm));
-    const auto nc(ctx.coding_context().use_configuration() ?
-        make_naming_configuration(fg, cfg) :
-        make_naming_configuration(tg, ra));
+    const auto nc(make_naming_configuration(fg, cfg));
     const auto model_location(create_location(nc));
 
     coding::meta_model::model r;
@@ -341,7 +288,6 @@ apply(const context& ctx, const injection::meta_model::model& m) {
     r.root_module(boost::make_shared<coding::meta_model::module>());
     auto& rm(*r.root_module());
     rm.name(r.name());
-    rm.annotation(ra);
     rm.configuration(gcfg);
     rm.configuration()->name().qualified(rm.name().qualified().dot());
     rm.is_root(true);
