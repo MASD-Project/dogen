@@ -230,8 +230,8 @@ populate_generalizable_properties(const type_group& tg, const feature_group& fg,
           * Handle the case where the user decided to override final.
           */
          const auto is_final(use_configuration ?
-             make_is_final(tg, o.annotation()) :
-             make_is_final(fg, *o.configuration()));
+             make_is_final(fg, *o.configuration()) :
+             make_is_final(tg, o.annotation()));
          if (is_final) {
              if (*is_final && o.is_parent()) {
                  BOOST_LOG_SEV(lg, error) << incompatible_is_final << id;

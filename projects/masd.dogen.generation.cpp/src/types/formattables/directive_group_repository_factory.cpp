@@ -384,7 +384,9 @@ compute_directives(const type_group& tg, const feature_group& fg,
      * at all. If it has at least one override, we know we don't need
      * to generate inclusion directives manually.
      */
-    const bool has_overrides(has_inclusion_directive_overrides(a));
+    const bool has_overrides(use_configuration ?
+        has_inclusion_directive_overrides(cfg) :
+        has_inclusion_directive_overrides(a));
 
     /*
      * Now we start working at the formatter level.
@@ -505,7 +507,8 @@ make(const variability::type_repository& atrp,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating inclusion dependencies "
-                             << "group repository.";
+                             << "group repository. use_configuration: "
+                             << use_configuration;
 
     /*
      * First we must make sure we only have formatters which generate

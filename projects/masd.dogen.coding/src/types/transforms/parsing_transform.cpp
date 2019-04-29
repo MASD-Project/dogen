@@ -206,7 +206,7 @@ parse_parent(const type_group& tg, const feature_group& fg,
      * parent name there is nothing to do.
      */
     const auto parent(use_configuration ?
-        make_parent(tg, o.annotation()) : make_parent(fg, *o.configuration()));
+        make_parent(fg, *o.configuration()) : make_parent(tg, o.annotation()));
     if (parent.empty())
         return;
 
@@ -236,8 +236,8 @@ parse_underlying_element(const type_group& tg, const feature_group& fg,
      * is none, there is nothing to do.
      */
     const auto s(use_configuration ?
-        make_enumeration_underlying_element(tg, e.annotation()) :
-        make_enumeration_underlying_element(fg, *e.configuration()));
+        make_enumeration_underlying_element(fg, *e.configuration()) :
+        make_enumeration_underlying_element(tg, e.annotation()));
     if (s.empty())
         return;
 
@@ -271,8 +271,8 @@ void parsing_transform::parse_underlying_element(const type_group& tg,
      * isn't one, bomb out as primitives require it.
      */
     auto ut(use_configuration ?
-        make_primitive_underlying_element(tg, p.annotation()) :
-        make_primitive_underlying_element(fg, *p.configuration()));
+        make_primitive_underlying_element(fg, *p.configuration()) :
+        make_primitive_underlying_element(tg, p.annotation()));
     boost::algorithm::trim(ut);
     if (ut.empty()) {
         BOOST_LOG_SEV(lg, error) << missing_underlier << id;
