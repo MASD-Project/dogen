@@ -6480,6 +6480,8 @@ Links:
 - [[https://www.codeproject.com/Articles/20027/JSON-Spirit-A-C-JSON-Parser-Generator-Implemented][JSON Spirit]]
 - [[https://github.com/miloyip/nativejson-benchmark][nativejson-benchmark]]: project comparing JSON libraries.
 - [[https://github.com/dropbox/json11][Json11]]
+- [[https://github.com/beached/daw_json_link][daw_json_link]]: more "static" JSON library. Also has its own code
+  generator: [[https://github.com/beached/json_to_cpp][json_to_cpp]].
 
 Merged stories:
 
@@ -10690,6 +10692,7 @@ other IDLs.
 We could create a frontend that reads TextUML files:
 
 - https://github.com/abstratt/textuml
+- http://abstratt.github.io/textuml/readme
 
 Example (copied from the [[http://abstratt.github.io/textuml/docs/tutorial.html][tutorial]]):
 
@@ -10709,6 +10712,11 @@ less sense, but nevertheless, its worth capturing the idea.
 Links:
 
 - [[https://blog.abstratt.com/2007/11/01/uml-101-the-templates-package/][UML 101 with TextUML: the Templates package]]
+- [[http://abstratt.github.io/textuml/docs/structure.html][Modeling structure]]: note that they do not use standard UML - there
+  are a number of extensions.
+- list of textual UML tools: [[https://modeling-languages.com/text-uml-tools-complete-list/][Text to UML tools – Fastest way to create
+  your models]]
+- [[https://modeling-languages.com/umple-language-model-oriented-programming/][UMPLE]]
 
 *** Add support for the fmt library                                   :story:
 
