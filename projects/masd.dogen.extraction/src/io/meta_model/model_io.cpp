@@ -23,7 +23,24 @@
 #include "masd.dogen.variability/io/annotation_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/artefact_io.hpp"
+#include "masd.dogen.variability/io/meta_model/configuration_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/outputting_properties_io.hpp"
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -67,6 +84,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::extraction::meta_model::model\"" << ", "
       << "\"annotation\": " << v.annotation() << ", "
+      << "\"configuration\": " << v.configuration() << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"technical_space\": " << "\"" << tidy_up_string(v.technical_space()) << "\"" << ", "
       << "\"artefacts\": " << v.artefacts() << ", "

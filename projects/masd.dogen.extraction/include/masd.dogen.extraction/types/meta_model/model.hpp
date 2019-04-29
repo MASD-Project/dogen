@@ -28,9 +28,11 @@
 #include <list>
 #include <string>
 #include <algorithm>
+#include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration_fwd.hpp"
 #include "masd.dogen.extraction/types/meta_model/outputting_properties.hpp"
 
 namespace masd::dogen::extraction::meta_model {
@@ -45,6 +47,7 @@ public:
 public:
     model(
         const masd::dogen::variability::annotation& annotation,
+        const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
         const std::string& name,
         const std::string& technical_space,
         const std::list<masd::dogen::extraction::meta_model::artefact>& artefacts,
@@ -60,6 +63,16 @@ public:
     masd::dogen::variability::annotation& annotation();
     void annotation(const masd::dogen::variability::annotation& v);
     void annotation(const masd::dogen::variability::annotation&& v);
+    /**@}*/
+
+    /**
+     * @brief Configuration for this element.
+     */
+    /**@{*/
+    const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration() const;
+    boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration();
+    void configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& v);
+    void configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>&& v);
     /**@}*/
 
     const std::string& name() const;
@@ -104,6 +117,7 @@ public:
 
 private:
     masd::dogen::variability::annotation annotation_;
+    boost::shared_ptr<masd::dogen::variability::meta_model::configuration> configuration_;
     std::string name_;
     std::string technical_space_;
     std::list<masd::dogen::extraction::meta_model::artefact> artefacts_;

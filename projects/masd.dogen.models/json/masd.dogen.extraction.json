@@ -88,7 +88,8 @@
     {
       "name": "meta_model::model",
       "stereotypes": [
-        "Annotatable"
+        "Annotatable",
+        "Configurable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -435,6 +436,21 @@
           "name": "annotation",
           "type": "variability::annotation",
           "documentation": "Annotation for this element.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::Configurable",
+      "documentation": "Ability to have meta-data associated.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "configuration",
+          "type": "boost::shared_ptr<variability::meta_model::configuration>",
+          "documentation": "Configuration for this element.\n"
         }
       ]
     }
