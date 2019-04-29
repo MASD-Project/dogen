@@ -28,6 +28,9 @@
 #include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/type_repository.hpp"
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.extraction/types/transforms/context.hpp"
 #include "masd.dogen.extraction/types/meta_model/model.hpp"
 #include "masd.dogen.extraction/types/meta_model/outputting_properties.hpp"
@@ -62,6 +65,33 @@ private:
 
     static meta_model::outputting_properties make_outputting_properties(
         const context& ctx, const variability::annotation& ra);
+
+private:
+    struct feature_group {
+        variability::meta_model::feature force_write;
+        variability::meta_model::feature delete_extra_files;
+        variability::meta_model::feature ignore_files_matching_regex;
+        variability::meta_model::feature delete_empty_directories;
+    };
+
+    static feature_group make_feature_group(
+        const variability::meta_model::feature_model& fm);
+
+    static bool obtain_force_write(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+    static bool obtain_delete_extra_files(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+    static std::vector<std::string>
+    obtain_ignore_files_matching_regex(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+    static bool obtain_delete_empty_directories(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+    static meta_model::outputting_properties make_outputting_properties(
+        const context& ctx, const variability::meta_model::configuration& cfg);
 
 public:
     static void apply(const context& ctx, meta_model::model& m);

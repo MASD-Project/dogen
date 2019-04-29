@@ -23,6 +23,8 @@
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
+#include "masd.dogen.variability/types/helpers/feature_selector.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.archetypes/types/location_repository.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.extraction/types/traits.hpp"
@@ -112,6 +114,79 @@ update_outputting_properties_transform::make_outputting_properties(
     return r;
 }
 
+update_outputting_properties_transform::feature_group
+update_outputting_properties_transform::make_feature_group(
+    const variability::meta_model::feature_model& fm) {
+
+    feature_group r;
+    const variability::helpers::feature_selector s(fm);
+
+    const auto fw(traits::extraction::force_write());
+    r.force_write = s.get_by_name(fw);
+
+    const auto def(traits::extraction::delete_extra_files());
+    r.delete_extra_files = s.get_by_name(def);
+
+    const auto ifmr(traits::extraction::ignore_files_matching_regex());
+    r.ignore_files_matching_regex = s.get_by_name(ifmr);
+
+    const auto ded(traits::extraction::delete_empty_directories());
+    r.delete_empty_directories = s.get_by_name(ded);
+
+    return r;
+}
+
+bool update_outputting_properties_transform::
+obtain_force_write(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) {
+    const variability::helpers::configuration_selector s(cfg);
+    return s.get_boolean_content_or_default(fg.force_write);
+}
+
+bool update_outputting_properties_transform::
+obtain_delete_extra_files(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) {
+    const variability::helpers::configuration_selector s(cfg);
+    return s.get_boolean_content_or_default(fg.delete_extra_files);
+}
+
+std::vector<std::string> update_outputting_properties_transform::
+obtain_ignore_files_matching_regex(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) {
+    const variability::helpers::configuration_selector s(cfg);
+
+    if (!s.has_configuration_point(fg.ignore_files_matching_regex))
+        return std::vector<std::string>();
+
+    const auto c(s.get_text_collection_content(fg.ignore_files_matching_regex));
+    std::vector<std::string> r;
+    r.reserve(c.size());
+    for (const auto& e : c)
+        r.push_back(e);
+    return r;
+}
+
+bool update_outputting_properties_transform::
+obtain_delete_empty_directories(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) {
+    const variability::helpers::configuration_selector s(cfg);
+    return s.get_boolean_content_or_default(fg.delete_empty_directories);
+}
+
+meta_model::outputting_properties
+update_outputting_properties_transform::make_outputting_properties(
+    const context& ctx, const variability::meta_model::configuration& cfg) {
+
+    const auto fg(make_feature_group(*ctx.feature_model()));
+    meta_model::outputting_properties r;
+    r.force_write(obtain_force_write(fg, cfg));
+    r.delete_extra_files(obtain_delete_extra_files(fg, cfg));
+    r.ignore_files_matching_regex(obtain_ignore_files_matching_regex(fg, cfg));
+    r.delete_empty_directories(obtain_delete_empty_directories(fg, cfg));
+
+    return r;
+}
+
 void update_outputting_properties_transform::
 apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
@@ -119,7 +194,10 @@ apply(const context& ctx, meta_model::model& m) {
         *ctx.tracer(), m);
 
     const auto& ra(m.annotation());
-    const auto ep(make_outputting_properties(ctx, ra));
+    const auto& cfg(*m.configuration());
+    const auto ep(ctx.use_configuration() ?
+        make_outputting_properties(ctx, cfg) :
+        make_outputting_properties(ctx, ra));
     m.outputting_properties(ep);
 
     stp.end_transform(m);
