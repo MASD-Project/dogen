@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.variability/io/annotation_io.hpp"
 #include "masd.dogen.injection/io/meta_model/attribute_io.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_io.hpp"
 
@@ -98,7 +97,6 @@ std::ostream& operator<<(std::ostream& s, const attribute& v) {
       << "\"stereotypes\": " << v.stereotypes() << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"annotation\": " << v.annotation() << ", "
       << "\"configuration\": " << v.configuration() << ", "
       << "\"type\": " << "\"" << tidy_up_string(v.type()) << "\"" << ", "
       << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""

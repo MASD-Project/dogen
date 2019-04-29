@@ -37,7 +37,6 @@ model::model(
     const std::list<std::string>& stereotypes,
     const std::string& documentation,
     const std::string& name,
-    const masd::dogen::variability::annotation& annotation,
     const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
     const std::list<masd::dogen::injection::meta_model::element>& elements,
     const std::string& input_technical_space,
@@ -46,7 +45,6 @@ model::model(
       stereotypes_(stereotypes),
       documentation_(documentation),
       name_(name),
-      annotation_(annotation),
       configuration_(configuration),
       elements_(elements),
       input_technical_space_(input_technical_space),
@@ -58,7 +56,6 @@ void model::swap(model& other) noexcept {
     swap(stereotypes_, other.stereotypes_);
     swap(documentation_, other.documentation_);
     swap(name_, other.name_);
-    swap(annotation_, other.annotation_);
     swap(configuration_, other.configuration_);
     swap(elements_, other.elements_);
     swap(input_technical_space_, other.input_technical_space_);
@@ -70,7 +67,6 @@ bool model::operator==(const model& rhs) const {
         stereotypes_ == rhs.stereotypes_ &&
         documentation_ == rhs.documentation_ &&
         name_ == rhs.name_ &&
-        annotation_ == rhs.annotation_ &&
         configuration_ == rhs.configuration_ &&
         elements_ == rhs.elements_ &&
         input_technical_space_ == rhs.input_technical_space_ &&
@@ -145,22 +141,6 @@ void model::name(const std::string& v) {
 
 void model::name(const std::string&& v) {
     name_ = std::move(v);
-}
-
-const masd::dogen::variability::annotation& model::annotation() const {
-    return annotation_;
-}
-
-masd::dogen::variability::annotation& model::annotation() {
-    return annotation_;
-}
-
-void model::annotation(const masd::dogen::variability::annotation& v) {
-    annotation_ = v;
-}
-
-void model::annotation(const masd::dogen::variability::annotation&& v) {
-    annotation_ = std::move(v);
 }
 
 const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& model::configuration() const {

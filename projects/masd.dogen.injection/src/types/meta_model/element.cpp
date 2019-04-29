@@ -45,7 +45,6 @@ element::element(
     const std::list<std::string>& stereotypes,
     const std::string& documentation,
     const std::string& name,
-    const masd::dogen::variability::annotation& annotation,
     const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
     const std::list<std::string>& parents,
     const std::list<masd::dogen::injection::meta_model::attribute>& attributes,
@@ -60,7 +59,6 @@ element::element(
       stereotypes_(stereotypes),
       documentation_(documentation),
       name_(name),
-      annotation_(annotation),
       configuration_(configuration),
       parents_(parents),
       attributes_(attributes),
@@ -78,7 +76,6 @@ void element::swap(element& other) noexcept {
     swap(stereotypes_, other.stereotypes_);
     swap(documentation_, other.documentation_);
     swap(name_, other.name_);
-    swap(annotation_, other.annotation_);
     swap(configuration_, other.configuration_);
     swap(parents_, other.parents_);
     swap(attributes_, other.attributes_);
@@ -96,7 +93,6 @@ bool element::operator==(const element& rhs) const {
         stereotypes_ == rhs.stereotypes_ &&
         documentation_ == rhs.documentation_ &&
         name_ == rhs.name_ &&
-        annotation_ == rhs.annotation_ &&
         configuration_ == rhs.configuration_ &&
         parents_ == rhs.parents_ &&
         attributes_ == rhs.attributes_ &&
@@ -177,22 +173,6 @@ void element::name(const std::string& v) {
 
 void element::name(const std::string&& v) {
     name_ = std::move(v);
-}
-
-const masd::dogen::variability::annotation& element::annotation() const {
-    return annotation_;
-}
-
-masd::dogen::variability::annotation& element::annotation() {
-    return annotation_;
-}
-
-void element::annotation(const masd::dogen::variability::annotation& v) {
-    annotation_ = v;
-}
-
-void element::annotation(const masd::dogen::variability::annotation&& v) {
-    annotation_ = std::move(v);
 }
 
 const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& element::configuration() const {

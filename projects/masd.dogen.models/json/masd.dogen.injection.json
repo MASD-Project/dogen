@@ -175,6 +175,10 @@
           "type": "boost::shared_ptr<variability::type_repository>"
         },
         {
+          "name": "feature_model",
+          "type": "variability::meta_model::feature_model"
+        },
+        {
           "name": "archetype_location_repository",
           "type": "boost::shared_ptr<archetypes::location_repository>"
         },
@@ -267,13 +271,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::annotations_transform",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "meta_model::Taggable",
       "documentation": "Ability to contain tagged values.\n",
       "stereotypes": [
@@ -331,21 +328,6 @@
       ]
     },
     {
-      "name": "meta_model::Annotatable",
-      "documentation": "Ability to have meta-data associated.\n",
-      "stereotypes": [
-        "masd::object_template"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "annotation",
-          "type": "variability::annotation",
-          "documentation": "Annotation for this element.\n"
-        }
-      ]
-    },
-    {
       "name": "meta_model::Configurable",
       "documentation": "Ability to have meta-data associated.\n",
       "stereotypes": [
@@ -367,7 +349,6 @@
         "meta_model::Stereotypable",
         "meta_model::Documentable",
         "meta_model::Nameable",
-        "meta_model::Annotatable",
         "meta_model::Configurable"
       ],
       "documentation": "Consolidates a number of related object templates.\n",

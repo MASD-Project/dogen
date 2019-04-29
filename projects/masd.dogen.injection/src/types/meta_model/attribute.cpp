@@ -37,7 +37,6 @@ attribute::attribute(
     const std::list<std::string>& stereotypes,
     const std::string& documentation,
     const std::string& name,
-    const masd::dogen::variability::annotation& annotation,
     const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
     const std::string& type,
     const std::string& value)
@@ -45,7 +44,6 @@ attribute::attribute(
       stereotypes_(stereotypes),
       documentation_(documentation),
       name_(name),
-      annotation_(annotation),
       configuration_(configuration),
       type_(type),
       value_(value) { }
@@ -56,7 +54,6 @@ void attribute::swap(attribute& other) noexcept {
     swap(stereotypes_, other.stereotypes_);
     swap(documentation_, other.documentation_);
     swap(name_, other.name_);
-    swap(annotation_, other.annotation_);
     swap(configuration_, other.configuration_);
     swap(type_, other.type_);
     swap(value_, other.value_);
@@ -67,7 +64,6 @@ bool attribute::operator==(const attribute& rhs) const {
         stereotypes_ == rhs.stereotypes_ &&
         documentation_ == rhs.documentation_ &&
         name_ == rhs.name_ &&
-        annotation_ == rhs.annotation_ &&
         configuration_ == rhs.configuration_ &&
         type_ == rhs.type_ &&
         value_ == rhs.value_;
@@ -141,22 +137,6 @@ void attribute::name(const std::string& v) {
 
 void attribute::name(const std::string&& v) {
     name_ = std::move(v);
-}
-
-const masd::dogen::variability::annotation& attribute::annotation() const {
-    return annotation_;
-}
-
-masd::dogen::variability::annotation& attribute::annotation() {
-    return annotation_;
-}
-
-void attribute::annotation(const masd::dogen::variability::annotation& v) {
-    annotation_ = v;
-}
-
-void attribute::annotation(const masd::dogen::variability::annotation&& v) {
-    annotation_ = std::move(v);
 }
 
 const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& attribute::configuration() const {
