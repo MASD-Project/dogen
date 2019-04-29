@@ -27,9 +27,6 @@
 
 #include <unordered_set>
 #include <boost/optional.hpp>
-#include "masd.dogen.variability/types/type.hpp"
-#include "masd.dogen.variability/types/annotation.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -43,30 +40,6 @@ namespace masd::dogen::coding::transforms {
  * @brief Expands all extraction properties from meta-data.
  */
 class extraction_properties_transform final {
-private:
-    struct type_group {
-        variability::type cpp_headers_output_directory;
-        variability::type enable_backend_directories;
-        std::list<variability::type> enabled;
-    };
-
-    static type_group make_type_group(const variability::type_repository& atrp,
-        const std::list<archetypes::location>& als);
-
-    static boost::filesystem::path obtain_cpp_headers_output_directory(
-        const type_group& tg, const variability::annotation& ra);
-
-    static std::unordered_set<std::string> obtain_enabled_backends(
-        const type_group& tg, const variability::annotation& ra);
-
-    static bool obtain_enable_backend_directories(const type_group& tg,
-        const variability::annotation& ra);
-
-    static meta_model::extraction_properties make_extraction_properties(
-        const context& ctx,
-        const std::list<archetypes::location>& als,
-        const variability::annotation& ra);
-
 private:
     struct feature_group {
         variability::meta_model::feature cpp_headers_output_directory;
