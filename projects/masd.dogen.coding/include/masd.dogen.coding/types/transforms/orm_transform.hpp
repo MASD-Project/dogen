@@ -30,9 +30,6 @@
 #include <vector>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "masd.dogen.variability/types/type.hpp"
-#include "masd.dogen.variability/types/annotation.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -60,53 +57,6 @@ private:
 
     std::unordered_map<meta_model::orm_database_systems, std::string>
     static make_type_overrides(const std::list<std::string> ls);
-
-private:
-    struct type_group {
-        variability::type database_system;
-        variability::type table_name;
-        variability::type schema_name;
-        variability::type is_primary_key;
-        variability::type column_name;
-        variability::type is_nullable;
-        variability::type letter_case;
-        variability::type type_override;
-        variability::type is_composite;
-    };
-
-    friend std::ostream& operator<<(std::ostream& s, const type_group& v);
-
-    static type_group make_type_group(const variability::type_repository& atrp);
-
-    static boost::optional<meta_model::orm_model_properties>
-    make_model_properties(const type_group& tg,
-        const variability::annotation& a);
-
-    static void update_object_properties(const type_group& tg,
-        const variability::annotation& a,
-        meta_model::orm_object_properties& cfg);
-
-    static boost::optional<meta_model::orm_attribute_properties>
-    make_attribute_properties(
-        const type_group& tg, const variability::annotation& a);
-
-    static void update_primitive_properties(const type_group& tg,
-        const variability::annotation& a,
-        meta_model::orm_primitive_properties& cfg);
-
-    static boost::optional<meta_model::orm_module_properties>
-    make_module_properties(const type_group& tg,
-        const variability::annotation& a);
-
-private:
-    static void transform_objects(const type_group& tg,
-        meta_model::model& m);
-    static void transform_object_templates(const type_group& tg,
-        meta_model::model& m);
-    static void transform_primitives(const type_group& tg,
-        meta_model::model& m);
-    static void transform_modules(const type_group& tg,
-        meta_model::model& m);
 
 private:
     struct feature_group {
