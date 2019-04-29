@@ -13,22 +13,23 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-29 Mon 16:40]
+#+CAPTION: Clock summary at [2019-04-29 Mon 17:05]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *51:34* |       |       | 100.0 |
+| *Total time*                                           | *51:53* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 51:34   |       |       | 100.0 |
-| Active                                                 |         | 51:34 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  2:40 |   5.2 |
+| Stories                                                | 51:53   |       |       | 100.0 |
+| Active                                                 |         | 51:53 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  2:40 |   5.1 |
 | Sprint and product backlog grooming                    |         |       |  1:40 |   3.2 |
 | Create a video demo for the previous sprint's features |         |       |  1:55 |   3.7 |
 | Read variability papers                                |         |       |  1:04 |   2.1 |
-| Finish implementing the variability model              |         |       | 10:49 |  21.0 |
+| Finish implementing the variability model              |         |       | 10:49 |  20.8 |
 | Trim down stitch's use of annotations                  |         |       |  1:30 |   2.9 |
-| Read meta-data using configurations                    |         |       | 24:24 |  47.3 |
-| Remove uses of annotations                             |         |       |  7:32 |  14.6 |
+| Read meta-data using configurations                    |         |       | 24:24 |  47.0 |
+| Remove uses of annotations                             |         |       |  7:32 |  14.5 |
+| Profiles as meta-model elements                        |         |       |  0:19 |   0.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -406,49 +407,10 @@ Notes:
   everywhere.
 - remove all legacy types from variability model.
 
-*** Allow stereotypes in object templates                             :story:
-
-At present we need to use inheritance to "merge" object
-templates. This has served us well, but has one limitation:
-composition has to be tree-like. In practice, we have use cases where
-composition is more haphazard, not allowing us to draw a clean
-inheritance diagram. For example, we have the "properties-like
-elements" in coding, that all have:
-
-: Documentable, Annotatable, Configurable, Nameable
-
-These could easily be packaged into a object template, but we can't
-because its not possible to have two "kinds" of inheritance graphs -
-we'd end up with lots of lines intersecting each other. However, a
-natural way to solve this problem is to allow dynamic stereotypes in
-object templates. These are mapped to parents and processed exactly as
-if we had the inheritance relationship. From a practical perspective
-this makes a lot of sense, but we need to make sure this is not
-frowned upon from a theoretical perspective.
-
-The other problem as well is that we need to mix and match dynamic and
-static stereotypes (e.g. we need =masd::object_template= as well).
-
-*** Create an element builder                                         :story:
-
-At present we are manually populating the core properties of
-element. This means every time a new one is added, we need to go and
-find all the places where element is being created. We need a template
-based builder for element that takes care of these:
-
-- populate implicit properties, such as configuration whenever name is
-  populated.
-- hide name factory inside of builder.
-- to determine the builder API, see all use cases where we are
-  manually creating the element.
-
-*** Remove dynamic stereotypes from coding                            :story:
-
-Now that we are intercepting the dynamic stereotypes coming in from
-injection and directly populating the configuration, there is no need
-to store them in the modeling element.
-
-*** Profiles as meta-model elements                                   :story:
+*** STARTED Profiles as meta-model elements                           :story:
+    :LOGBOOK:
+    CLOCK: [2019-04-29 Mon 16:41]--[2019-04-29 Mon 17:00] =>  0:19
+    :END:
 
 Initially we separated the notion of annotations and profiles from the
 metamodel. This is a mistake. Profiles are metamodel
@@ -699,6 +661,48 @@ Notes:
 - we probably should rename =coding::configuration= to "unbound
   configuration" or some other name to make it distinct from
   =variability::configuration=.
+
+*** Allow stereotypes in object templates                             :story:
+
+At present we need to use inheritance to "merge" object
+templates. This has served us well, but has one limitation:
+composition has to be tree-like. In practice, we have use cases where
+composition is more haphazard, not allowing us to draw a clean
+inheritance diagram. For example, we have the "properties-like
+elements" in coding, that all have:
+
+: Documentable, Annotatable, Configurable, Nameable
+
+These could easily be packaged into a object template, but we can't
+because its not possible to have two "kinds" of inheritance graphs -
+we'd end up with lots of lines intersecting each other. However, a
+natural way to solve this problem is to allow dynamic stereotypes in
+object templates. These are mapped to parents and processed exactly as
+if we had the inheritance relationship. From a practical perspective
+this makes a lot of sense, but we need to make sure this is not
+frowned upon from a theoretical perspective.
+
+The other problem as well is that we need to mix and match dynamic and
+static stereotypes (e.g. we need =masd::object_template= as well).
+
+*** Create an element builder                                         :story:
+
+At present we are manually populating the core properties of
+element. This means every time a new one is added, we need to go and
+find all the places where element is being created. We need a template
+based builder for element that takes care of these:
+
+- populate implicit properties, such as configuration whenever name is
+  populated.
+- hide name factory inside of builder.
+- to determine the builder API, see all use cases where we are
+  manually creating the element.
+
+*** Remove dynamic stereotypes from coding                            :story:
+
+Now that we are intercepting the dynamic stereotypes coming in from
+injection and directly populating the configuration, there is no need
+to store them in the modeling element.
 
 *** Enablement problem is in the variability domain                   :story:
 
