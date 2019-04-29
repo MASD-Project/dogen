@@ -25,9 +25,6 @@
 #pragma once
 #endif
 
-#include "masd.dogen.variability/types/type.hpp"
-#include "masd.dogen.variability/types/annotation.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -42,16 +39,6 @@ namespace masd::dogen::injection::transforms {
  * @pre Annotations transform must have been applied.
  */
 class input_technical_space_transform final {
-private:
-    struct type_group {
-        variability::type input_technical_space;
-    };
-
-    static type_group make_type_group(const variability::type_repository& atrp);
-
-    static std::string make_input_technical_space(const type_group& tg,
-        const variability::annotation& a);
-
 public:
     struct feature_group {
         variability::meta_model::feature input_technical_space;
