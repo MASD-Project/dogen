@@ -39,7 +39,7 @@ using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 const std::string empty;
-const std::string profile_field("masd.annotations.profile");
+const std::string profile_field("masd.variability.profile");
 const std::string default_root("default.root_module");
 
 const std::string missing_profile(

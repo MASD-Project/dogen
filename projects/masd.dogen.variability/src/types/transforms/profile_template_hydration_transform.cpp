@@ -36,7 +36,7 @@ using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 const std::string templates_dir("annotations");
-const std::string templates_prefix("masd.annotations.profiles.");
+const std::string templates_prefix("masd.variability.profiles.");
 
 }
 

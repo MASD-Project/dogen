@@ -2,7 +2,7 @@
   {
     "name": {
       "simple": "profile",
-      "qualified": "masd.annotations.profile"
+      "qualified": "masd.variability.profile"
     },
     "archetype_location": {
       "kernel": "masd"
