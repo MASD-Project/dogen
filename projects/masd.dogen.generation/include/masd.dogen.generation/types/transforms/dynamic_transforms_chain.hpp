@@ -25,8 +25,6 @@
 #pragma once
 #endif
 
-#include "masd.dogen.variability/types/annotation.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.generation/types/transforms/dynamic_transform_registrar.hpp"
 #include "masd.dogen.generation/types/transforms/context_fwd.hpp"

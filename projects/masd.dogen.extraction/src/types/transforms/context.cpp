@@ -19,7 +19,6 @@
  *
  */
 #include "masd.dogen.tracing/types/tracer.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.extraction/types/transforms/context.hpp"
 
 namespace masd::dogen::extraction::transforms {
@@ -29,14 +28,12 @@ context::context()
 
 context::context(
     const bool use_configuration,
-    const boost::shared_ptr<masd::dogen::variability::type_repository>& type_repository,
     const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model,
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer,
     const boost::optional<masd::dogen::diffing_configuration>& diffing_configuration,
     const boost::optional<masd::dogen::reporting_configuration>& reporting_configuration,
     const bool dry_run_mode_enabled)
     : use_configuration_(use_configuration),
-      type_repository_(type_repository),
       feature_model_(feature_model),
       tracer_(tracer),
       diffing_configuration_(diffing_configuration),
@@ -49,14 +46,6 @@ bool context::use_configuration() const {
 
 void context::use_configuration(const bool v) {
     use_configuration_ = v;
-}
-
-const boost::shared_ptr<masd::dogen::variability::type_repository>& context::type_repository() const {
-    return type_repository_;
-}
-
-void context::type_repository(const boost::shared_ptr<masd::dogen::variability::type_repository>& v) {
-    type_repository_ = v;
 }
 
 const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& context::feature_model() const {

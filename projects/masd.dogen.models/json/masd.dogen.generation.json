@@ -651,20 +651,8 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "type_repository",
-          "type": "boost::shared_ptr<variability::type_repository>"
-        },
-        {
           "name": "archetype_location_repository",
           "type": "boost::shared_ptr<archetypes::location_repository>"
-        },
-        {
-          "name": "annotation_factory",
-          "type": "boost::shared_ptr<variability::annotation_factory>"
-        },
-        {
-          "name": "annotation_expander",
-          "type": "boost::shared_ptr<variability::annotation_expander>"
         },
         {
           "name": "tracer",

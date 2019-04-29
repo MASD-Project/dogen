@@ -28,7 +28,6 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
-#include "masd.dogen.variability/types/type_repository_fwd.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model_fwd.hpp"
 #include "masd.dogen.tracing/types/tracer_fwd.hpp"
 #include "masd.dogen/types/diffing_configuration.hpp"
@@ -45,7 +44,6 @@ public:
 
     context(
         const bool use_configuration,
-        const boost::shared_ptr<masd::dogen::variability::type_repository>& type_repository,
         const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model,
         const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer,
         const boost::optional<masd::dogen::diffing_configuration>& diffing_configuration,
@@ -55,9 +53,6 @@ public:
 public:
     bool use_configuration() const;
     void use_configuration(const bool v);
-
-    const boost::shared_ptr<masd::dogen::variability::type_repository>& type_repository() const;
-    void type_repository(const boost::shared_ptr<masd::dogen::variability::type_repository>& v);
 
     const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model() const;
     void feature_model(const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& v);
@@ -76,7 +71,6 @@ public:
 
 private:
     bool use_configuration_;
-    boost::shared_ptr<masd::dogen::variability::type_repository> type_repository_;
     boost::shared_ptr<masd::dogen::variability::meta_model::feature_model> feature_model_;
     boost::shared_ptr<masd::dogen::tracing::tracer> tracer_;
     boost::optional<masd::dogen::diffing_configuration> diffing_configuration_;

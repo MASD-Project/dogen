@@ -33,15 +33,13 @@ const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& rh
 namespace masd::dogen::extraction::meta_model {
 
 model::model(
-    const masd::dogen::variability::annotation& annotation,
     const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
     const std::string& name,
     const std::string& technical_space,
     const std::list<masd::dogen::extraction::meta_model::artefact>& artefacts,
     const std::list<boost::filesystem::path>& managed_directories,
     const masd::dogen::extraction::meta_model::outputting_properties& outputting_properties)
-    : annotation_(annotation),
-      configuration_(configuration),
+    : configuration_(configuration),
       name_(name),
       technical_space_(technical_space),
       artefacts_(artefacts),
@@ -50,7 +48,6 @@ model::model(
 
 void model::swap(model& other) noexcept {
     using std::swap;
-    swap(annotation_, other.annotation_);
     swap(configuration_, other.configuration_);
     swap(name_, other.name_);
     swap(technical_space_, other.technical_space_);
@@ -60,8 +57,7 @@ void model::swap(model& other) noexcept {
 }
 
 bool model::operator==(const model& rhs) const {
-    return annotation_ == rhs.annotation_ &&
-        configuration_ == rhs.configuration_ &&
+    return configuration_ == rhs.configuration_ &&
         name_ == rhs.name_ &&
         technical_space_ == rhs.technical_space_ &&
         artefacts_ == rhs.artefacts_ &&
@@ -73,22 +69,6 @@ model& model::operator=(model other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const masd::dogen::variability::annotation& model::annotation() const {
-    return annotation_;
-}
-
-masd::dogen::variability::annotation& model::annotation() {
-    return annotation_;
-}
-
-void model::annotation(const masd::dogen::variability::annotation& v) {
-    annotation_ = v;
-}
-
-void model::annotation(const masd::dogen::variability::annotation&& v) {
-    annotation_ = std::move(v);
 }
 
 const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& model::configuration() const {

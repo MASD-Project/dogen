@@ -25,9 +25,6 @@
 #pragma once
 #endif
 
-#include "masd.dogen.variability/types/type.hpp"
-#include "masd.dogen.variability/types/annotation.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -41,31 +38,6 @@ namespace masd::dogen::extraction::transforms {
  * @brief Populates the outputting properties of the model.
  */
 class update_outputting_properties_transform final {
-private:
-    struct type_group {
-        variability::type force_write;
-        variability::type delete_extra_files;
-        variability::type ignore_files_matching_regex;
-        variability::type delete_empty_directories;
-    };
-
-    static type_group make_type_group(const variability::type_repository& atrp);
-
-    static bool obtain_force_write(const type_group& tg,
-        const variability::annotation& ra);
-
-    static bool obtain_delete_extra_files(const type_group& tg,
-        const variability::annotation& ra);
-
-    static std::vector<std::string> obtain_ignore_files_matching_regex(
-        const type_group& tg, const variability::annotation& ra);
-
-    static bool obtain_delete_empty_directories(const type_group& tg,
-        const variability::annotation& ra);
-
-    static meta_model::outputting_properties make_outputting_properties(
-        const context& ctx, const variability::annotation& ra);
-
 private:
     struct feature_group {
         variability::meta_model::feature force_write;

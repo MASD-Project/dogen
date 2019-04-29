@@ -26,7 +26,6 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/exception/utility_exception.hpp"
-#include "masd.dogen.variability/types/value_factory.hpp"
 #include "masd.dogen.coding/types/meta_model/exception.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
@@ -393,27 +392,7 @@ void insert_object(meta_model::model& m,
     const boost::shared_ptr<meta_model::object>& o) {
     m.objects().insert(std::make_pair(o->name().qualified().dot(), o));
 }
-/*
-void add_test_annotationss(variability::annotation& a) {
-    using namespace variability;
 
-    value_factory f;
-    a.tagged_values().insert(std::make_pair(licence_name_key,
-            f.make_text(licence_name_value)));
-
-    a.tagged_values().insert(std::make_pair(copyright_notices_key,
-            f.make_text(copyright_notices_value)));
-
-    a.tagged_values().insert(std::make_pair(modeline_group_name_key,
-            f.make_text(modeline_group_name_value)));
-
-    a.tagged_values().insert(std::make_pair(code_generation_marker_message_key,
-            f.make_text(code_generation_marker_message_value)));
-
-    a.tagged_values().insert(std::make_pair(generate_preamble_key,
-            f.make_text(generate_preamble_value)));
-}
-*/
 }
 
 mock_model_factory::flags::flags(const bool tagged,
@@ -483,10 +462,7 @@ associations_indexed(const bool v) {
 }
 
 mock_model_factory::
-mock_model_factory(const flags& f,
-    annotation_function_type fn) : flags_(f),
-                                   annotation_function_(fn) {}
-//      annotation_function_(fn ? fn : add_test_annotationss) { }
+mock_model_factory(const flags& f) : flags_(f) {}
 
 std::string mock_model_factory::
 simple_model_name(const unsigned int n) const {
@@ -595,9 +571,6 @@ mock_model_factory::make_object(const unsigned int i,
     auto r(boost::make_shared<meta_model::object>());
     populate_object(*r, i, model_name, module_n, ot);
 
-    /*if (flags_.tagged())
-      annotation_function_(r->annotation());*/
-
     return r;
 }
 
@@ -631,9 +604,6 @@ mock_model_factory::make_object_template(const unsigned int i,
     r->documentation(documentation);
     r->origin_type(ot);
 
-    /*if (flags_.tagged())
-      annotation_function_(r->annotation());*/
-
     return r;
 }
 
@@ -666,9 +636,6 @@ make_enumeration(const unsigned int i, const meta_model::name& model_name,
     r->enumerators().push_back(lambda(0));
     r->enumerators().push_back(lambda(1));
 
-    /*if (flags_.tagged())
-      annotation_function_(r->annotation());*/
-
     return r;
 }
 
@@ -688,9 +655,6 @@ mock_model_factory::make_exception(const unsigned int i,
     r->documentation(documentation);
     r->origin_type(ot);
 
-    /*if (flags_.tagged())
-      annotation_function_(r->annotation());*/
-
     return r;
 }
 
@@ -701,9 +665,6 @@ mock_model_factory::make_module(const meta_model::name& n,
     r->name(n);
     r->documentation(documentation);
     r->origin_type(ot);
-
-    /*if (flags_.tagged())
-      annotation_function_(r->annotation());*/
 
     return r;
 }

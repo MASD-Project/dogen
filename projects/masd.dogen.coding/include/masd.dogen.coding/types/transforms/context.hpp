@@ -28,10 +28,7 @@
 #include <vector>
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.tracing/types/tracer_fwd.hpp"
-#include "masd.dogen.variability/types/type_repository_fwd.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model_fwd.hpp"
-#include "masd.dogen.variability/types/annotation_factory_fwd.hpp"
-#include "masd.dogen.variability/types/annotation_expander_fwd.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_fwd.hpp"
 #include "masd.dogen.archetypes/types/location_repository_fwd.hpp"
 
@@ -56,11 +53,8 @@ public:
 
     context(
         const bool use_configuration,
-        const boost::shared_ptr<masd::dogen::variability::type_repository>& type_repository,
         const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model,
         const boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository,
-        const boost::shared_ptr<masd::dogen::variability::annotation_factory>& annotation_factory,
-        const boost::shared_ptr<masd::dogen::variability::annotation_expander>& annotation_expander,
         const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& mapping_repository,
         const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer);
 
@@ -68,20 +62,11 @@ public:
     bool use_configuration() const;
     void use_configuration(const bool v);
 
-    const boost::shared_ptr<masd::dogen::variability::type_repository>& type_repository() const;
-    void type_repository(const boost::shared_ptr<masd::dogen::variability::type_repository>& v);
-
     const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model() const;
     void feature_model(const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& v);
 
     const boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository() const;
     void archetype_location_repository(const boost::shared_ptr<masd::dogen::archetypes::location_repository>& v);
-
-    const boost::shared_ptr<masd::dogen::variability::annotation_factory>& annotation_factory() const;
-    void annotation_factory(const boost::shared_ptr<masd::dogen::variability::annotation_factory>& v);
-
-    const boost::shared_ptr<masd::dogen::variability::annotation_expander>& annotation_expander() const;
-    void annotation_expander(const boost::shared_ptr<masd::dogen::variability::annotation_expander>& v);
 
     const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& mapping_repository() const;
     void mapping_repository(const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& v);
@@ -91,11 +76,8 @@ public:
 
 private:
     bool use_configuration_;
-    boost::shared_ptr<masd::dogen::variability::type_repository> type_repository_;
     boost::shared_ptr<masd::dogen::variability::meta_model::feature_model> feature_model_;
     boost::shared_ptr<masd::dogen::archetypes::location_repository> archetype_location_repository_;
-    boost::shared_ptr<masd::dogen::variability::annotation_factory> annotation_factory_;
-    boost::shared_ptr<masd::dogen::variability::annotation_expander> annotation_expander_;
     boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository> mapping_repository_;
     boost::shared_ptr<masd::dogen::tracing::tracer> tracer_;
 };

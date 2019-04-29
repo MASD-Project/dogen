@@ -24,14 +24,14 @@
 #include <boost/test/unit_test.hpp>
 #include "masd.dogen.utility/types/test/logging.hpp"
 #include "masd.dogen.utility/types/io/list_io.hpp"
-#include "masd.dogen.variability/io/type_template_io.hpp"
-#include "masd.dogen.variability/types/type_templates_hydrator.hpp"
+#include "masd.dogen.variability/io/meta_model/feature_template_io.hpp"
+#include "masd.dogen.variability/types/helpers/feature_template_hydrator.hpp"
 
 namespace {
 
 const std::string empty;
 const std::string test_module("masd.dogen.variability.tests");
-const std::string test_suite("type_templates_hydrator_tests");
+const std::string test_suite("feature_template_hydrator_tests");
 
 const std::string simple_name("a simple name");
 const std::string qualified_name("a qualified name");
@@ -52,17 +52,17 @@ const std::string trivial_type_template(R"([
         },
         "value_type" : "boolean",
         "template_kind" : "instance",
-        "scope" : "not_applicable"
+        "scope" : "entity"
     }
 ])");
 
-std::list<masd::dogen::variability::type_template>
+std::list<masd::dogen::variability::meta_model::feature_template>
 hydrate(std::istream& s) {
-    masd::dogen::variability::type_templates_hydrator h;
+    masd::dogen::variability::helpers::feature_template_hydrator h;
     return h.hydrate(s);
 }
 
-std::list<masd::dogen::variability::type_template>
+std::list<masd::dogen::variability::meta_model::feature_template>
 hydrate(const std::string& content) {
     std::istringstream s(content);
     return hydrate(s);
@@ -70,9 +70,9 @@ hydrate(const std::string& content) {
 
 }
 
-using masd::dogen::variability::scope_types;
-using masd::dogen::variability::value_types;
-using masd::dogen::variability::template_kinds;
+using masd::dogen::variability::meta_model::binding_point;
+using masd::dogen::variability::meta_model::value_type;
+using masd::dogen::variability::meta_model::template_kind;
 
 BOOST_AUTO_TEST_SUITE(type_templates_hydrator_tests)
 
@@ -88,17 +88,17 @@ BOOST_AUTO_TEST_CASE(trivial_type_template_hydrates_into_expected_collection) {
 
     BOOST_CHECK(tt.name().simple() == simple_name);
     BOOST_CHECK(tt.name().qualified() == qualified_name);
-    BOOST_CHECK(tt.archetype_location().backend() == backend);
-    BOOST_CHECK(tt.archetype_location().facet() == facet);
-    BOOST_CHECK(tt.archetype_location().archetype() == archetype);
+    BOOST_CHECK(tt.location().backend() == backend);
+    BOOST_CHECK(tt.location().facet() == facet);
+    BOOST_CHECK(tt.location().archetype() == archetype);
 
-    const auto st(scope_types::not_applicable);
-    BOOST_CHECK(tt.scope() == st);
+    const auto bp(binding_point::element);
+    BOOST_CHECK(tt.binding_point() == bp);
 
-    const auto vt(value_types::boolean);
+    const auto vt(value_type::boolean);
     BOOST_CHECK(tt.value_type() == vt);
 
-    const auto tk(template_kinds::instance);
+    const auto tk(template_kind::instance);
     BOOST_CHECK(tt.kind() == tk);
 }
 

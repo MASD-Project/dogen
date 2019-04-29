@@ -28,7 +28,6 @@
 #include "masd.dogen.utility/types/io/optional_io.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
-#include "masd.dogen.variability/io/type_repository_io.hpp"
 #include "masd.dogen.archetypes/io/location_repository_io.hpp"
 #include "masd.dogen.tracing/types/tracing_error.hpp"
 #include "masd.dogen.tracing/types/metrics.hpp"

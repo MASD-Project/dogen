@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.variability/io/annotation_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/artefact_io.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_io.hpp"
@@ -83,7 +82,6 @@ namespace masd::dogen::extraction::meta_model {
 std::ostream& operator<<(std::ostream& s, const model& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::extraction::meta_model::model\"" << ", "
-      << "\"annotation\": " << v.annotation() << ", "
       << "\"configuration\": " << v.configuration() << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"technical_space\": " << "\"" << tidy_up_string(v.technical_space()) << "\"" << ", "

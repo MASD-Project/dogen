@@ -88,7 +88,6 @@
     {
       "name": "meta_model::model",
       "stereotypes": [
-        "Annotatable",
         "Configurable"
       ],
       "fallback_element_type": "masd::object",
@@ -421,21 +420,6 @@
         {
           "name": "delete_empty_directories",
           "type": "bool"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::Annotatable",
-      "documentation": "Ability to have meta-data associated.\n",
-      "stereotypes": [
-        "masd::object_template"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "annotation",
-          "type": "variability::annotation",
-          "documentation": "Annotation for this element.\n"
         }
       ]
     },

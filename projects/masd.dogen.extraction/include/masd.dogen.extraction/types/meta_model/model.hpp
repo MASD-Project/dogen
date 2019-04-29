@@ -30,7 +30,6 @@
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration_fwd.hpp"
 #include "masd.dogen.extraction/types/meta_model/outputting_properties.hpp"
@@ -46,7 +45,6 @@ public:
 
 public:
     model(
-        const masd::dogen::variability::annotation& annotation,
         const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
         const std::string& name,
         const std::string& technical_space,
@@ -55,16 +53,6 @@ public:
         const masd::dogen::extraction::meta_model::outputting_properties& outputting_properties);
 
 public:
-    /**
-     * @brief Annotation for this element.
-     */
-    /**@{*/
-    const masd::dogen::variability::annotation& annotation() const;
-    masd::dogen::variability::annotation& annotation();
-    void annotation(const masd::dogen::variability::annotation& v);
-    void annotation(const masd::dogen::variability::annotation&& v);
-    /**@}*/
-
     /**
      * @brief Configuration for this element.
      */
@@ -116,7 +104,6 @@ public:
     model& operator=(model other);
 
 private:
-    masd::dogen::variability::annotation annotation_;
     boost::shared_ptr<masd::dogen::variability::meta_model::configuration> configuration_;
     std::string name_;
     std::string technical_space_;

@@ -25,10 +25,6 @@
 #include "masd.dogen.tracing/types/tracer.hpp"
 #include "masd.dogen.archetypes/io/location_repository_io.hpp"
 #include "masd.dogen.archetypes/types/location_repository_builder.hpp"
-#include "masd.dogen.variability/io/type_repository_io.hpp"
-#include "masd.dogen.variability/types/annotation_factory.hpp"
-#include "masd.dogen.variability/types/annotation_expander.hpp"
-#include "masd.dogen.variability/types/type_repository_factory.hpp"
 #include "masd.dogen.variability/types/transforms/context.hpp"
 #include "masd.dogen.variability/types/transforms/feature_model_production_chain.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
@@ -44,7 +40,7 @@ using namespace masd::dogen::utility::log;
 auto lg(logger_factory("orchestration.transforms.context_factory"));
 
 const std::string alrp_input_id("archetype_location_repository");
-const std::string trp_input_id("type_repository");
+const std::string fm_input_id("feature_model");
 
 const std::string duplicate_segment("Duplicat segment: ");
 
@@ -121,19 +117,6 @@ make_injection_context(const configuration& cfg) {
     const auto alrp(create_archetype_location_repository(rg));
     r.archetype_location_repository(alrp);
 
-    variability::type_repository_factory atrpf;
-    const auto atrp(boost::make_shared<variability::type_repository>(
-            atrpf.make(*alrp, data_dirs)));
-    r.type_repository(atrp);
-
-    /*
-     * Setup the annotations related factories.
-     */
-    const bool cm(cfg.model_processing().compatibility_mode_enabled());
-    const auto af(boost::make_shared<variability::annotation_factory>(
-                *alrp, *atrp, cm));
-    r.annotation_factory(af);
-
     /*
      * Setup the tracer. Note that we do it regardless of whether
      * tracing is enabled or not - its the tracer job to handle that.
@@ -190,15 +173,6 @@ context context_factory::make_context(const configuration& cfg,
     tracer->add_initial_input(alrp_input_id, *alrp);
 
     /*
-     * We do the type repository here just so we can setup the initial
-     * inputs in the tracer.
-     */
-    variability::type_repository_factory atrpf;
-    const auto atrp(boost::make_shared<variability::type_repository>(
-            atrpf.make(*alrp, data_dirs)));
-    tracer->add_initial_input(trp_input_id, *atrp);
-
-    /*
      * Create the top-level context and all of its sub-contexts.
      */
     orchestration::transforms::context r;
@@ -238,30 +212,11 @@ context context_factory::make_context(const configuration& cfg,
     r.injection_context().data_directories(data_dirs);
 
     /*
-     * Setup the annotations related data structures.
+     * Setup the archetype location repository.
      */
     r.injection_context().archetype_location_repository(alrp);
     r.coding_context().archetype_location_repository(alrp);
     r.generation_context().archetype_location_repository(alrp);
-
-    r.injection_context().type_repository(atrp);
-    r.coding_context().type_repository(atrp);
-    r.generation_context().type_repository(atrp);
-    r.extraction_context().type_repository(atrp);
-
-    /*
-     * Setup the annotations related factories.
-     */
-    const auto af(boost::make_shared<variability::annotation_factory>(
-                *alrp, *atrp, cm));
-    r.injection_context().annotation_factory(af);
-    r.coding_context().annotation_factory(af);
-    r.generation_context().annotation_factory(af);
-
-    const auto ae(boost::make_shared<variability::annotation_expander>(
-            data_dirs, *alrp, *atrp, cm));
-    r.coding_context().annotation_expander(ae);
-    r.generation_context().annotation_expander(ae);
 
     /*
      * Setup the intrabackend segment properties.

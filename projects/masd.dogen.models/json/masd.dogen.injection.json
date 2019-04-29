@@ -171,20 +171,12 @@
           "type": "std::vector<boost::filesystem::path>"
         },
         {
-          "name": "type_repository",
-          "type": "boost::shared_ptr<variability::type_repository>"
-        },
-        {
           "name": "feature_model",
           "type": "variability::meta_model::feature_model"
         },
         {
           "name": "archetype_location_repository",
           "type": "boost::shared_ptr<archetypes::location_repository>"
-        },
-        {
-          "name": "annotation_factory",
-          "type": "boost::shared_ptr<variability::annotation_factory>"
         },
         {
           "name": "tracer",

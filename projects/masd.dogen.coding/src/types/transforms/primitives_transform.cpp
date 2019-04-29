@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.variability/io/type_io.hpp"
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"

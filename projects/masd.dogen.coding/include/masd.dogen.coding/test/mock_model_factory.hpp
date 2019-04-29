@@ -30,7 +30,6 @@
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.coding/types/meta_model/model.hpp"
-#include "masd.dogen.variability/types/annotation.hpp"
 
 namespace masd::dogen::coding::test {
 
@@ -153,16 +152,11 @@ public:
     };
 
 public:
-    typedef std::function<void(variability::annotation&)>
-    annotation_function_type;
-
-public:
     /**
      * @brief Initialises a new mock factory at a given stage in the
      * coding pipeline, as given by the flags supplied.
      */
-    explicit mock_model_factory(const flags& f,
-        annotation_function_type fn = annotation_function_type());
+    explicit mock_model_factory(const flags& f);
 
 public:
     /**
@@ -572,7 +566,6 @@ public:
 
 private:
     const flags flags_;
-    annotation_function_type annotation_function_;
 };
 
 }

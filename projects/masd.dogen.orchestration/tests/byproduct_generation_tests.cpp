@@ -24,17 +24,12 @@ const std::string transform_stats_text_fn("transform_stats.txt");
 const std::string transform_stats_graphviz_fn("transform_stats.dot");
 const std::string archetype_location_prefix(
     "000-archetype_location_repository-");
-const std::string type_repository_prefix(
-    "001-type_repository-");
 const std::string archetype_location_postfix(
-    "-initial_input.json");
-const std::string type_repository_postfix(
     "-initial_input.json");
 const std::string injection_transform_prefix(
     "000-injection.dia.decoding_transform-");
 const std::string first_short_name("000-initial_input.json");
-const std::string second_short_name("001-initial_input.json");
-const std::string third_short_name("004-input.json");
+const std::string second_short_name("001-input.json");
 const std::string injection_transform_postfix("-input.json");
 const std::regex tracing_regex(".*/tracing/.*");
 const std::regex guid_regex(
@@ -171,7 +166,6 @@ bool are_tracing_files_healthy(const configuration& cfg,
      */
     bool found_transform_stats(false);
     bool found_archetype_location(false);
-    bool found_type_repository(false);
     bool found_injection_dia_transform(false);
     for (const auto& f : files) {
         const auto gs(f.generic_string());
@@ -210,8 +204,6 @@ bool are_tracing_files_healthy(const configuration& cfg,
             else if (fn == first_short_name)
                 found_archetype_location = true;
             else if (fn == second_short_name)
-                found_type_repository = true;
-            else if (fn == third_short_name)
                 found_injection_dia_transform = true;
         } else {
             if (fn == transform_stats_org_fn)
@@ -220,10 +212,6 @@ bool are_tracing_files_healthy(const configuration& cfg,
                 boost::ends_with(fn, archetype_location_postfix)) {
                 found_archetype_location = true;
                 BOOST_LOG_SEV(lg, debug) << "Found archetype location: " << gs;
-            } else if (boost::starts_with(fn, type_repository_prefix) &&
-                boost::ends_with(fn, type_repository_postfix)) {
-                found_type_repository = true;
-                BOOST_LOG_SEV(lg, debug) << "Found type repository: " << gs;
             } else if (boost::starts_with(fn, injection_transform_prefix) &&
                 boost::ends_with(fn, injection_transform_postfix)) {
                 found_injection_dia_transform = true;
@@ -259,14 +247,12 @@ bool are_tracing_files_healthy(const configuration& cfg,
                              << found_transform_stats
                              << " found_archetype_location: "
                              << found_archetype_location
-                             << " found_type_repository: "
-                             << found_type_repository
                              << " found_injection_dia_transform: "
                              << found_injection_dia_transform;
 
     return
         found_transform_stats && found_archetype_location &&
-        found_type_repository && found_injection_dia_transform;
+        found_injection_dia_transform;
 }
 
 }
