@@ -26,6 +26,8 @@
 #include "masd.dogen.variability/types/entry_selector.hpp"
 #include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/helpers/feature_selector.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
@@ -152,6 +154,42 @@ injection_model_to_coding_model_transform::make_naming_configuration(
     return r;
 }
 
+injection_model_to_coding_model_transform::feature_group
+injection_model_to_coding_model_transform::
+make_feature_group(const variability::meta_model::feature_model& fm) {
+    feature_group r;
+
+    const variability::helpers::feature_selector s(fm);
+
+    const auto& em(coding::traits::external_modules());
+    r.external_modules = s.get_by_name(em);
+
+    const auto& mm(coding::traits::model_modules());
+    r.model_modules = s.get_by_name(mm);
+
+    return r;
+}
+
+naming_configuration
+injection_model_to_coding_model_transform::
+make_naming_configuration(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) {
+
+    const variability::helpers::configuration_selector s(cfg);
+    if (!s.has_configuration_point(fg.model_modules)) {
+        BOOST_LOG_SEV(lg, error) << missing_model_modules;
+        BOOST_THROW_EXCEPTION(transform_exception(missing_model_modules));
+    }
+
+    naming_configuration r;
+    r.model_modules(s.get_text_content(fg.model_modules));
+
+    if (s.has_configuration_point(fg.external_modules))
+        r.external_modules(s.get_text_content(fg.external_modules));
+
+    return r;
+}
+
 coding::meta_model::location injection_model_to_coding_model_transform::
 create_location(const naming_configuration& nc) {
     coding::helpers::location_builder b;
@@ -265,10 +303,15 @@ apply(const context& ctx, const injection::meta_model::model& m) {
      * data from configuration.
      */
     const auto& ra(m.annotation());
+    const auto& cfg(*m.configuration());
     auto& gcfg(m.configuration());
     const auto& atrp(*ctx.coding_context().type_repository());
+    const auto& fm(*ctx.coding_context().feature_model());
     const auto tg(make_type_group(atrp));
-    const auto nc(make_naming_configuration(tg, ra));
+    const auto fg(make_feature_group(fm));
+    const auto nc(ctx.coding_context().use_configuration() ?
+        make_naming_configuration(fg, cfg) :
+        make_naming_configuration(tg, ra));
     const auto model_location(create_location(nc));
 
     coding::meta_model::model r;
