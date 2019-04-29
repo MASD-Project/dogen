@@ -112,7 +112,6 @@ adapter::to_attribute(const coding::meta_model::name& owner,
     r.name(f.build_attribute_name(owner, ia.name()));
     r.unparsed_type(ia.type());
     r.documentation(ia.documentation());
-    r.annotation(ia.annotation());
 
     r.configuration(ia.configuration());
     r.configuration()->name().qualified(r.name().qualified().dot());
@@ -141,7 +140,6 @@ adapter::to_enumerator(const coding::meta_model::name& owner,
     coding::meta_model::enumerator r;
     r.name(f.build_attribute_name(owner, ia.name()));
     r.documentation(ia.documentation());
-    r.annotation(ia.annotation());
 
     r.configuration(ia.configuration());
     r.configuration()->name().qualified(r.name().qualified().dot());
@@ -166,7 +164,6 @@ void adapter::populate_element(const coding::meta_model::location& l,
 
     const auto& ds(scr.dynamic_stereotypes());
     e.dynamic_stereotypes(ds);
-    e.annotation(ie.annotation());
 
     e.configuration(ie.configuration());
     e.configuration()->name().qualified(e.name().qualified().dot());
@@ -414,7 +411,6 @@ adapter::to_variability_profile_template(const coding::meta_model::location& l,
         coding::meta_model::variability_profile_template_entry e;
         e.name(f.build_attribute_name(r->name(), n));
         e.key(n);
-        e.annotation(attr.annotation());
         e.configuration(attr.configuration());
         e.configuration()->name().qualified(e.name().qualified().dot());
 
