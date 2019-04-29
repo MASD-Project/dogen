@@ -21,8 +21,6 @@
 #include <ostream>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.variability/io/type_io.hpp"
-#include "masd.dogen.variability/types/entry_selector.hpp"
-#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
@@ -42,44 +40,6 @@ static logger lg(logger_factory(transform_id));
 }
 
 namespace masd::dogen::coding::transforms {
-
-std::ostream&
-operator<<(std::ostream& s, const primitives_transform::type_group& v) {
-    s << " { "
-      << "\"__type__\": "
-      << "\"masd::dogen::coding::primitives_transform::type_group\""
-      << ", " << "\"is_nullable\": " << v.is_nullable << ", "
-      << "\"use_type_aliasing\": " << v.use_type_aliasing
-      << " }";
-
-    return s;
-}
-
-primitives_transform::type_group primitives_transform::
-make_type_group(const variability::type_repository& atrp) {
-    BOOST_LOG_SEV(lg, debug) << "Creating type group.";
-
-    type_group r;
-
-    const variability::type_repository_selector s(atrp);
-
-    const auto in(traits::primitive::is_nullable());
-    r.is_nullable = s.select_type_by_name(in);
-
-    const auto uta(traits::primitive::use_type_aliasing());
-    r.use_type_aliasing = s.select_type_by_name(uta);
-
-    BOOST_LOG_SEV(lg, debug) << "Created type group. Result" << r;
-    return r;
-}
-
-void primitives_transform::
-populate_from_annotations(const type_group& tg, meta_model::primitive& p) {
-    const auto& a(p.annotation());
-    const variability::entry_selector s(a);
-    p.is_nullable(s.get_boolean_content_or_default(tg.is_nullable));
-    p.use_type_aliasing(s.get_boolean_content_or_default(tg.use_type_aliasing));
-}
 
 primitives_transform::feature_group primitives_transform::
 make_feature_group(const variability::meta_model::feature_model& fm) {
@@ -111,24 +71,13 @@ void primitives_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "primitives transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    if (ctx.use_configuration()) {
-        const auto fg(make_feature_group(*ctx.feature_model()));
-        for (auto& pair : m.primitives()) {
-            const auto& id(pair.first);
-            BOOST_LOG_SEV(lg, debug) << "Transforming: " << id;
+    const auto fg(make_feature_group(*ctx.feature_model()));
+    for (auto& pair : m.primitives()) {
+        const auto& id(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Transforming: " << id;
 
-            auto& p(*pair.second);
-            populate_from_annotations(fg, p);
-        }
-    } else {
-        const auto tg(make_type_group(*ctx.type_repository()));
-        for (auto& pair : m.primitives()) {
-            const auto& id(pair.first);
-            BOOST_LOG_SEV(lg, debug) << "Transforming: " << id;
-
-            auto& p(*pair.second);
-            populate_from_annotations(tg, p);
-        }
+        auto& p(*pair.second);
+        populate_from_annotations(fg, p);
     }
 
     stp.end_transform(m);

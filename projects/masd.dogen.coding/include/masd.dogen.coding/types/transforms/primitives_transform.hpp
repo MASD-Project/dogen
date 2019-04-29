@@ -27,8 +27,6 @@
 
 #include <string>
 #include <iosfwd>
-#include "masd.dogen.variability/types/type.hpp"
-#include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -43,18 +41,6 @@ namespace masd::dogen::coding::transforms {
  * @brief Expands all primitives in model.
  */
 class primitives_transform final {
-private:
-    struct type_group {
-        variability::type is_nullable;
-        variability::type use_type_aliasing;
-    };
-
-    friend std::ostream& operator<<(std::ostream& s, const type_group& v);
-
-    static type_group make_type_group(const variability::type_repository& atrp);
-    static void populate_from_annotations(const type_group& tg,
-        meta_model::primitive& p);
-
 private:
     struct feature_group {
         variability::meta_model::feature is_nullable;
