@@ -13,21 +13,22 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-28 Sun 17:22]
+#+CAPTION: Clock summary at [2019-04-29 Mon 08:55]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *43:35* |       |       | 100.0 |
+| *Total time*                                           | *44:43* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 43:35   |       |       | 100.0 |
-| Active                                                 |         | 43:35 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  2:40 |   6.1 |
-| Sprint and product backlog grooming                    |         |       |  1:13 |   2.8 |
-| Create a video demo for the previous sprint's features |         |       |  1:55 |   4.4 |
+| Stories                                                | 44:43   |       |       | 100.0 |
+| Active                                                 |         | 44:43 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  2:40 |   6.0 |
+| Sprint and product backlog grooming                    |         |       |  1:29 |   3.3 |
+| Create a video demo for the previous sprint's features |         |       |  1:55 |   4.3 |
 | Read variability papers                                |         |       |  1:04 |   2.4 |
-| Finish implementing the variability model              |         |       | 10:49 |  24.8 |
+| Finish implementing the variability model              |         |       | 10:49 |  24.2 |
 | Trim down stitch's use of annotations                  |         |       |  1:30 |   3.4 |
-| Read meta-data using configurations                    |         |       | 24:24 |  56.0 |
+| Read meta-data using configurations                    |         |       | 24:24 |  54.6 |
+| Remove uses of annotations                             |         |       |  0:52 |   1.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -125,6 +126,7 @@ Happy Modeling!
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-04-29 Mon 07:03]--[2019-04-29 Mon 07:19] =>  0:16
     CLOCK: [2019-04-28 Sun 14:40]--[2019-04-28 Sun 14:56] =>  0:16
     CLOCK: [2019-04-28 Sun 14:24]--[2019-04-28 Sun 14:39] =>  0:15
     CLOCK: [2019-04-26 Fri 08:25]--[2019-04-26 Fri 08:45] =>  0:20
@@ -383,7 +385,12 @@ Notes:
 - archetype location transform has forward decls disabled on input,
   but still seems to be generating it.
 
-*** Remove uses of annotations                                        :story:
+*** STARTED Remove uses of annotations                                :story:
+    :LOGBOOK:
+    CLOCK: [2019-04-29 Mon 08:35]--[2019-04-29 Mon 08:55] =>  0:20
+    CLOCK: [2019-04-29 Mon 07:20]--[2019-04-29 Mon 07:25] =>  0:05
+    CLOCK: [2019-04-29 Mon 06:35]--[2019-04-29 Mon 07:02] =>  0:44
+    :END:
 
 - disable population of annotation to prove the new code is working
   everywhere.

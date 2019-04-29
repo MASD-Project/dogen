@@ -7602,6 +7602,9 @@ Links:
 - [[https://github.com/emirozer/fake2db][fake2db]]: Generate fake but valid data filled databases for test
   purposes using most popular patterns.
 - [[https://devarea.com/python-understanding-generators/#.XKX5tXVKiV4][Python – understanding generators]]
+- [[https://picsum.photos/][Lorem picsum]]: Lorem Ipsum but for photos. Could be used for pictures
+  for profiles, etc. Also: [[http://lorempixel.com/][lorempixel]]. For splash screens:
+  [[https://source.unsplash.com/][unsplash]]. [[https://placeimg.com/][placeimg]] for images of places.
 
 **** Example Types
 
