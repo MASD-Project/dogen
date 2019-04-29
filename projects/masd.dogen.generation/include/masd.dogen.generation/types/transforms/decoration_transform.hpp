@@ -29,9 +29,6 @@
 #include <list>
 #include <string>
 #include <boost/optional.hpp>
-#include "masd.dogen.variability/types/type.hpp"
-#include "masd.dogen.variability/types/annotation.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -47,27 +44,6 @@ namespace masd::dogen::generation::transforms {
  * @brief Updates the decoration of all modeling elements.
  */
 class decoration_transform final {
-private:
-    struct type_group {
-        variability::type enabled;
-        variability::type copyright_notice;
-        variability::type licence_name;
-        variability::type modeline_group_name;
-        variability::type marker_name;
-    };
-
-    /**
-     * @brief Creates the type group for decoration.
-     */
-    static type_group make_type_group(const variability::type_repository& atrp);
-
-    /**
-     * @brief Reads the decoration configuration from the supplied annotation.
-     */
-    static boost::optional<decoration_configuration>
-    read_decoration_configuration(const type_group& tg,
-        const variability::annotation& a);
-
 private:
     struct feature_group {
         variability::meta_model::feature enabled;
