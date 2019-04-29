@@ -22,7 +22,6 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
-#include "masd.dogen.variability/io/annotation_io.hpp"
 #include "masd.dogen.coding/io/meta_model/attribute_io.hpp"
 #include "masd.dogen.coding/io/meta_model/name_tree_io.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_io.hpp"
@@ -79,7 +78,6 @@ std::ostream& operator<<(std::ostream& s, const attribute& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::coding::meta_model::attribute\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"annotation\": " << v.annotation() << ", "
       << "\"configuration\": " << v.configuration() << ", "
       << "\"name\": " << v.name() << ", "
       << "\"unparsed_type\": " << "\"" << tidy_up_string(v.unparsed_type()) << "\"" << ", "

@@ -25,9 +25,6 @@
 #pragma once
 #endif
 
-#include "masd.dogen.variability/types/annotation.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
-#include "masd.dogen.variability/types/type.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -38,22 +35,6 @@
 namespace masd::dogen::coding::transforms {
 
 class type_params_transform final {
-private:
-    struct type_group {
-        variability::type variable_number_of_parameters;
-        variability::type type_parameters_count;
-        variability::type type_parameters_always_in_heap;
-    };
-
-    static type_group make_type_group(const variability::type_repository& atrp);
-
-    static meta_model::type_parameters make_type_parameters(
-        const type_group& tg, const variability::annotation& a);
-
-private:
-    static void expand_type_parameters(const type_group& tg,
-        meta_model::object& o);
-
 private:
     struct feature_group {
         variability::meta_model::feature variable_number_of_parameters;

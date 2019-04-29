@@ -34,13 +34,11 @@ namespace masd::dogen::coding::meta_model {
 
 variability_profile_template_entry::variability_profile_template_entry(
     const std::string& documentation,
-    const masd::dogen::variability::annotation& annotation,
     const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
     const masd::dogen::coding::meta_model::name& name,
     const std::string& key,
     const std::list<std::string>& value)
     : documentation_(documentation),
-      annotation_(annotation),
       configuration_(configuration),
       name_(name),
       key_(key),
@@ -49,7 +47,6 @@ variability_profile_template_entry::variability_profile_template_entry(
 void variability_profile_template_entry::swap(variability_profile_template_entry& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
-    swap(annotation_, other.annotation_);
     swap(configuration_, other.configuration_);
     swap(name_, other.name_);
     swap(key_, other.key_);
@@ -58,7 +55,6 @@ void variability_profile_template_entry::swap(variability_profile_template_entry
 
 bool variability_profile_template_entry::operator==(const variability_profile_template_entry& rhs) const {
     return documentation_ == rhs.documentation_ &&
-        annotation_ == rhs.annotation_ &&
         configuration_ == rhs.configuration_ &&
         name_ == rhs.name_ &&
         key_ == rhs.key_ &&
@@ -85,22 +81,6 @@ void variability_profile_template_entry::documentation(const std::string& v) {
 
 void variability_profile_template_entry::documentation(const std::string&& v) {
     documentation_ = std::move(v);
-}
-
-const masd::dogen::variability::annotation& variability_profile_template_entry::annotation() const {
-    return annotation_;
-}
-
-masd::dogen::variability::annotation& variability_profile_template_entry::annotation() {
-    return annotation_;
-}
-
-void variability_profile_template_entry::annotation(const masd::dogen::variability::annotation& v) {
-    annotation_ = v;
-}
-
-void variability_profile_template_entry::annotation(const masd::dogen::variability::annotation&& v) {
-    annotation_ = std::move(v);
 }
 
 const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& variability_profile_template_entry::configuration() const {

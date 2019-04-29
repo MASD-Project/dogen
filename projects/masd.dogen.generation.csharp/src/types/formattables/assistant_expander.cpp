@@ -77,7 +77,6 @@ expand(const variability::meta_model::feature_model& feature_model,
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
         const auto& e(*formattable.element());
-        const auto a(e.annotation());
         const auto cfg(*e.configuration());
         const auto oap(make_assistant_properties(fg, cfg));
 

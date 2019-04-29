@@ -49,7 +49,7 @@ using coding::meta_model::technical_space;
 boost::shared_ptr<coding::meta_model::element> odb_options_factory::
 make(const coding::meta_model::name& n,
     const coding::meta_model::origin_types& ot,
-    const variability::annotation& a) const {
+    const variability::meta_model::configuration cfg) const {
     const auto id(n.qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
 
@@ -57,11 +57,10 @@ make(const coding::meta_model::name& n,
     r->name(n);
     r->meta_name(meta_name_factory::make_object_odb_options_name());
     r->origin_type(ot);
-    r->annotation(a);
     r->is_element_extension(true);
     r->intrinsic_technical_space(technical_space::odb);
     r->configuration(
-        boost::make_shared<variability::meta_model::configuration>());
+        boost::make_shared<variability::meta_model::configuration>(cfg));
     r->configuration()->name().simple(r->name().simple());
     r->configuration()->name().qualified(r->name().qualified().dot());
 
@@ -89,7 +88,7 @@ odb_options_factory::make(const generation::meta_model::model& m) const {
         const auto optr(boost::dynamic_pointer_cast<object>(ptr));
         if (optr && optr->orm_properties()) {
             const auto& o(*optr);
-            r.push_back(make(o.name(), o.origin_type(), o.annotation()));
+            r.push_back(make(o.name(), o.origin_type(), *o.configuration()));
         }
 
         /*
@@ -100,7 +99,7 @@ odb_options_factory::make(const generation::meta_model::model& m) const {
         const auto pptr(boost::dynamic_pointer_cast<primitive>(ptr));
         if (pptr && pptr->orm_properties()) {
             const auto& p(*pptr);
-            r.push_back(make(p.name(), p.origin_type(), p.annotation()));
+            r.push_back(make(p.name(), p.origin_type(), *p.configuration()));
         }
     }
 

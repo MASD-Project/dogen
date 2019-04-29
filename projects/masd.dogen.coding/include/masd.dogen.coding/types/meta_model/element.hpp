@@ -33,7 +33,6 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.coding/types/meta_model/name.hpp"
-#include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration.hpp"
 #include "masd.dogen.coding/types/meta_model/origin_types.hpp"
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
@@ -68,7 +67,6 @@ public:
     element(
         const masd::dogen::coding::meta_model::name& name,
         const std::string& documentation,
-        const masd::dogen::variability::annotation& annotation,
         const masd::dogen::coding::meta_model::origin_types origin_type,
         const std::string& contained_by,
         const bool in_global_module,
@@ -114,16 +112,6 @@ public:
     std::string& documentation();
     void documentation(const std::string& v);
     void documentation(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Annotation for this element.
-     */
-    /**@{*/
-    const masd::dogen::variability::annotation& annotation() const;
-    masd::dogen::variability::annotation& annotation();
-    void annotation(const masd::dogen::variability::annotation& v);
-    void annotation(const masd::dogen::variability::annotation&& v);
     /**@}*/
 
     /**
@@ -244,7 +232,6 @@ protected:
 private:
     masd::dogen::coding::meta_model::name name_;
     std::string documentation_;
-    masd::dogen::variability::annotation annotation_;
     masd::dogen::coding::meta_model::origin_types origin_type_;
     std::string contained_by_;
     bool in_global_module_;

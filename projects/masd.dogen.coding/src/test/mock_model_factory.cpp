@@ -393,7 +393,7 @@ void insert_object(meta_model::model& m,
     const boost::shared_ptr<meta_model::object>& o) {
     m.objects().insert(std::make_pair(o->name().qualified().dot(), o));
 }
-
+/*
 void add_test_annotationss(variability::annotation& a) {
     using namespace variability;
 
@@ -413,7 +413,7 @@ void add_test_annotationss(variability::annotation& a) {
     a.tagged_values().insert(std::make_pair(generate_preamble_key,
             f.make_text(generate_preamble_value)));
 }
-
+*/
 }
 
 mock_model_factory::flags::flags(const bool tagged,
@@ -485,7 +485,8 @@ associations_indexed(const bool v) {
 mock_model_factory::
 mock_model_factory(const flags& f,
     annotation_function_type fn) : flags_(f),
-      annotation_function_(fn ? fn : add_test_annotationss) { }
+                                   annotation_function_(fn) {}
+//      annotation_function_(fn ? fn : add_test_annotationss) { }
 
 std::string mock_model_factory::
 simple_model_name(const unsigned int n) const {
@@ -594,8 +595,8 @@ mock_model_factory::make_object(const unsigned int i,
     auto r(boost::make_shared<meta_model::object>());
     populate_object(*r, i, model_name, module_n, ot);
 
-    if (flags_.tagged())
-        annotation_function_(r->annotation());
+    /*if (flags_.tagged())
+      annotation_function_(r->annotation());*/
 
     return r;
 }
@@ -630,8 +631,8 @@ mock_model_factory::make_object_template(const unsigned int i,
     r->documentation(documentation);
     r->origin_type(ot);
 
-    if (flags_.tagged())
-        annotation_function_(r->annotation());
+    /*if (flags_.tagged())
+      annotation_function_(r->annotation());*/
 
     return r;
 }
@@ -665,8 +666,8 @@ make_enumeration(const unsigned int i, const meta_model::name& model_name,
     r->enumerators().push_back(lambda(0));
     r->enumerators().push_back(lambda(1));
 
-    if (flags_.tagged())
-        annotation_function_(r->annotation());
+    /*if (flags_.tagged())
+      annotation_function_(r->annotation());*/
 
     return r;
 }
@@ -687,8 +688,8 @@ mock_model_factory::make_exception(const unsigned int i,
     r->documentation(documentation);
     r->origin_type(ot);
 
-    if (flags_.tagged())
-        annotation_function_(r->annotation());
+    /*if (flags_.tagged())
+      annotation_function_(r->annotation());*/
 
     return r;
 }
@@ -701,8 +702,8 @@ mock_model_factory::make_module(const meta_model::name& n,
     r->documentation(documentation);
     r->origin_type(ot);
 
-    if (flags_.tagged())
-        annotation_function_(r->annotation());
+    /*if (flags_.tagged())
+      annotation_function_(r->annotation());*/
 
     return r;
 }

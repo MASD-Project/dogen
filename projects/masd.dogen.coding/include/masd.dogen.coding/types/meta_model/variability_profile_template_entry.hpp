@@ -30,7 +30,6 @@
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.coding/types/meta_model/name.hpp"
-#include "masd.dogen.variability/types/annotation.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration_fwd.hpp"
 
 namespace masd::dogen::coding::meta_model {
@@ -45,7 +44,6 @@ public:
 public:
     variability_profile_template_entry(
         const std::string& documentation,
-        const masd::dogen::variability::annotation& annotation,
         const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
         const masd::dogen::coding::meta_model::name& name,
         const std::string& key,
@@ -64,16 +62,6 @@ public:
     std::string& documentation();
     void documentation(const std::string& v);
     void documentation(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Annotation for this element.
-     */
-    /**@{*/
-    const masd::dogen::variability::annotation& annotation() const;
-    masd::dogen::variability::annotation& annotation();
-    void annotation(const masd::dogen::variability::annotation& v);
-    void annotation(const masd::dogen::variability::annotation&& v);
     /**@}*/
 
     /**
@@ -118,7 +106,6 @@ public:
 
 private:
     std::string documentation_;
-    masd::dogen::variability::annotation annotation_;
     boost::shared_ptr<masd::dogen::variability::meta_model::configuration> configuration_;
     masd::dogen::coding::meta_model::name name_;
     std::string key_;

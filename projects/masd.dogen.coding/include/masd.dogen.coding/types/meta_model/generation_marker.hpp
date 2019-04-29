@@ -51,7 +51,6 @@ public:
     generation_marker(
         const masd::dogen::coding::meta_model::name& name,
         const std::string& documentation,
-        const masd::dogen::variability::annotation& annotation,
         const masd::dogen::coding::meta_model::origin_types origin_type,
         const std::string& contained_by,
         const bool in_global_module,

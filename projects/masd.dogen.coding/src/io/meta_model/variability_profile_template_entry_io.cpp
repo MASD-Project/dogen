@@ -21,7 +21,6 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
-#include "masd.dogen.variability/io/annotation_io.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_io.hpp"
 #include "masd.dogen.coding/io/meta_model/variability_profile_template_entry_io.hpp"
 
@@ -69,7 +68,6 @@ std::ostream& operator<<(std::ostream& s, const variability_profile_template_ent
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::coding::meta_model::variability_profile_template_entry\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"annotation\": " << v.annotation() << ", "
       << "\"configuration\": " << v.configuration() << ", "
       << "\"name\": " << v.name() << ", "
       << "\"key\": " << "\"" << tidy_up_string(v.key()) << "\"" << ", "

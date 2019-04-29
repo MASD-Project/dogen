@@ -66,7 +66,6 @@ namespace masd::dogen::coding::meta_model {
 variability_profile_template::variability_profile_template(
     const masd::dogen::coding::meta_model::name& name,
     const std::string& documentation,
-    const masd::dogen::variability::annotation& annotation,
     const masd::dogen::coding::meta_model::origin_types origin_type,
     const std::string& contained_by,
     const bool in_global_module,
@@ -84,7 +83,6 @@ variability_profile_template::variability_profile_template(
     : masd::dogen::coding::meta_model::element(
       name,
       documentation,
-      annotation,
       origin_type,
       contained_by,
       in_global_module,

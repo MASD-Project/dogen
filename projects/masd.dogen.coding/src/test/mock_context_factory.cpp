@@ -24,8 +24,6 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
-#include "masd.dogen.variability/types/annotation_factory.hpp"
-#include "masd.dogen.variability/types/type_repository_factory.hpp"
 #include "masd.dogen.archetypes/types/location_repository_builder.hpp"
 #include "masd.dogen.tracing/types/tracer.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
@@ -47,12 +45,8 @@ transforms::context mock_context_factory::make() {
     auto alrp(boost::make_shared<archetypes::location_repository>());
     r.archetype_location_repository(alrp);
 
-    variability::type_repository_factory atrpf;
     const auto data_dir(utility::filesystem::data_files_directory());
     const auto data_dirs(std::vector<boost::filesystem::path>{ data_dir });
-    const auto atrp(boost::make_shared<variability::type_repository>(
-            atrpf.make(*alrp, data_dirs)));
-    r.type_repository(atrp);
 
     helpers::mapping_set_repository_factory msrpf;
     const auto msrp(boost::make_shared<
@@ -62,10 +56,6 @@ transforms::context mock_context_factory::make() {
     boost::optional<tracing_configuration> tcfg;
     auto tracer(boost::make_shared<tracing::tracer>(tcfg));
     r.tracer(tracer);
-
-    const auto af(boost::make_shared<variability::annotation_factory>(
-            *alrp, *atrp, false/*compatibility_mode*/));
-    r.annotation_factory(af);
 
     BOOST_LOG_SEV(lg, debug) << "Created the context.";
     return r;

@@ -22,7 +22,6 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
-#include "masd.dogen.variability/io/annotation_io.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/io/meta_model/decoration_io.hpp"
 #include "masd.dogen.coding/io/meta_model/origin_types_io.hpp"
@@ -156,7 +155,6 @@ element::element()
 element::element(element&& rhs)
     : name_(std::move(rhs.name_)),
       documentation_(std::move(rhs.documentation_)),
-      annotation_(std::move(rhs.annotation_)),
       origin_type_(std::move(rhs.origin_type_)),
       contained_by_(std::move(rhs.contained_by_)),
       in_global_module_(std::move(rhs.in_global_module_)),
@@ -173,7 +171,6 @@ element::element(element&& rhs)
 element::element(
     const masd::dogen::coding::meta_model::name& name,
     const std::string& documentation,
-    const masd::dogen::variability::annotation& annotation,
     const masd::dogen::coding::meta_model::origin_types origin_type,
     const std::string& contained_by,
     const bool in_global_module,
@@ -188,7 +185,6 @@ element::element(
     const boost::optional<masd::dogen::coding::meta_model::decoration>& decoration)
     : name_(name),
       documentation_(documentation),
-      annotation_(annotation),
       origin_type_(origin_type),
       contained_by_(contained_by),
       in_global_module_(in_global_module),
@@ -213,7 +209,6 @@ void element::to_stream(std::ostream& s) const {
       << "\"__type__\": " << "\"masd::dogen::coding::meta_model::element\"" << ", "
       << "\"name\": " << name_ << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
-      << "\"annotation\": " << annotation_ << ", "
       << "\"origin_type\": " << origin_type_ << ", "
       << "\"contained_by\": " << "\"" << tidy_up_string(contained_by_) << "\"" << ", "
       << "\"in_global_module\": " << in_global_module_ << ", "
@@ -233,7 +228,6 @@ void element::swap(element& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(documentation_, other.documentation_);
-    swap(annotation_, other.annotation_);
     swap(origin_type_, other.origin_type_);
     swap(contained_by_, other.contained_by_);
     swap(in_global_module_, other.in_global_module_);
@@ -251,7 +245,6 @@ void element::swap(element& other) noexcept {
 bool element::compare(const element& rhs) const {
     return name_ == rhs.name_ &&
         documentation_ == rhs.documentation_ &&
-        annotation_ == rhs.annotation_ &&
         origin_type_ == rhs.origin_type_ &&
         contained_by_ == rhs.contained_by_ &&
         in_global_module_ == rhs.in_global_module_ &&
@@ -296,22 +289,6 @@ void element::documentation(const std::string& v) {
 
 void element::documentation(const std::string&& v) {
     documentation_ = std::move(v);
-}
-
-const masd::dogen::variability::annotation& element::annotation() const {
-    return annotation_;
-}
-
-masd::dogen::variability::annotation& element::annotation() {
-    return annotation_;
-}
-
-void element::annotation(const masd::dogen::variability::annotation& v) {
-    annotation_ = v;
-}
-
-void element::annotation(const masd::dogen::variability::annotation&& v) {
-    annotation_ = std::move(v);
 }
 
 masd::dogen::coding::meta_model::origin_types element::origin_type() const {

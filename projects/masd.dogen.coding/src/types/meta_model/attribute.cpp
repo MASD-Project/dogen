@@ -38,7 +38,6 @@ attribute::attribute()
 
 attribute::attribute(attribute&& rhs)
     : documentation_(std::move(rhs.documentation_)),
-      annotation_(std::move(rhs.annotation_)),
       configuration_(std::move(rhs.configuration_)),
       name_(std::move(rhs.name_)),
       unparsed_type_(std::move(rhs.unparsed_type_)),
@@ -49,7 +48,6 @@ attribute::attribute(attribute&& rhs)
 
 attribute::attribute(
     const std::string& documentation,
-    const masd::dogen::variability::annotation& annotation,
     const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
     const masd::dogen::coding::meta_model::name& name,
     const std::string& unparsed_type,
@@ -58,7 +56,6 @@ attribute::attribute(
     const bool is_fluent,
     const boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties>& orm_properties)
     : documentation_(documentation),
-      annotation_(annotation),
       configuration_(configuration),
       name_(name),
       unparsed_type_(unparsed_type),
@@ -70,7 +67,6 @@ attribute::attribute(
 void attribute::swap(attribute& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
-    swap(annotation_, other.annotation_);
     swap(configuration_, other.configuration_);
     swap(name_, other.name_);
     swap(unparsed_type_, other.unparsed_type_);
@@ -82,7 +78,6 @@ void attribute::swap(attribute& other) noexcept {
 
 bool attribute::operator==(const attribute& rhs) const {
     return documentation_ == rhs.documentation_ &&
-        annotation_ == rhs.annotation_ &&
         configuration_ == rhs.configuration_ &&
         name_ == rhs.name_ &&
         unparsed_type_ == rhs.unparsed_type_ &&
@@ -112,22 +107,6 @@ void attribute::documentation(const std::string& v) {
 
 void attribute::documentation(const std::string&& v) {
     documentation_ = std::move(v);
-}
-
-const masd::dogen::variability::annotation& attribute::annotation() const {
-    return annotation_;
-}
-
-masd::dogen::variability::annotation& attribute::annotation() {
-    return annotation_;
-}
-
-void attribute::annotation(const masd::dogen::variability::annotation& v) {
-    annotation_ = v;
-}
-
-void attribute::annotation(const masd::dogen::variability::annotation&& v) {
-    annotation_ = std::move(v);
 }
 
 const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& attribute::configuration() const {

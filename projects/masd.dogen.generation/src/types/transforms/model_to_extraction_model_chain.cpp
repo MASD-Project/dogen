@@ -146,7 +146,6 @@ apply(const generation::transforms::context& ctx,
      */
     const auto ep(ms.front().extraction_properties());
     r.name(ms.front().name().simple());
-    r.annotation(ms.front().root_module()->annotation());
     r.configuration(ms.front().root_module()->configuration());
 
     /*

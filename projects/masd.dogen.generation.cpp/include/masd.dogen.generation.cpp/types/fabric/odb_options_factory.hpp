@@ -39,7 +39,7 @@ private:
     boost::shared_ptr<coding::meta_model::element>
     make(const coding::meta_model::name& n,
         const coding::meta_model::origin_types& ot,
-        const variability::annotation& a) const;
+        const variability::meta_model::configuration cfg) const;
 
 public:
     std::list<boost::shared_ptr<coding::meta_model::element>>

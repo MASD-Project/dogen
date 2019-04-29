@@ -35,12 +35,10 @@ namespace masd::dogen::coding::meta_model {
 enumerator::enumerator(
     const std::string& documentation,
     const masd::dogen::coding::meta_model::name& name,
-    const masd::dogen::variability::annotation& annotation,
     const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
     const std::string& value)
     : documentation_(documentation),
       name_(name),
-      annotation_(annotation),
       configuration_(configuration),
       value_(value) { }
 
@@ -48,7 +46,6 @@ void enumerator::swap(enumerator& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
     swap(name_, other.name_);
-    swap(annotation_, other.annotation_);
     swap(configuration_, other.configuration_);
     swap(value_, other.value_);
 }
@@ -56,7 +53,6 @@ void enumerator::swap(enumerator& other) noexcept {
 bool enumerator::operator==(const enumerator& rhs) const {
     return documentation_ == rhs.documentation_ &&
         name_ == rhs.name_ &&
-        annotation_ == rhs.annotation_ &&
         configuration_ == rhs.configuration_ &&
         value_ == rhs.value_;
 }
@@ -97,22 +93,6 @@ void enumerator::name(const masd::dogen::coding::meta_model::name& v) {
 
 void enumerator::name(const masd::dogen::coding::meta_model::name&& v) {
     name_ = std::move(v);
-}
-
-const masd::dogen::variability::annotation& enumerator::annotation() const {
-    return annotation_;
-}
-
-masd::dogen::variability::annotation& enumerator::annotation() {
-    return annotation_;
-}
-
-void enumerator::annotation(const masd::dogen::variability::annotation& v) {
-    annotation_ = v;
-}
-
-void enumerator::annotation(const masd::dogen::variability::annotation&& v) {
-    annotation_ = std::move(v);
 }
 
 const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& enumerator::configuration() const {
