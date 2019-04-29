@@ -22,8 +22,6 @@
 #include "masd.dogen.utility/types/io/unordered_set_io.hpp"
 #include "masd.dogen.utility/types/io/optional_io.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.variability/types/entry_selector.hpp"
-#include "masd.dogen.variability/types/type_repository_selector.hpp"
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
@@ -58,26 +56,6 @@ inline bool operator<(const name& lhs, const name& rhs) {
 }
 
 namespace masd::dogen::coding::transforms {
-
-generalization_transform::type_group generalization_transform::make_type_group(
-    const variability::type_repository& atrp) {
-
-    type_group r;
-    const variability::type_repository_selector s(atrp);
-    r.is_final = s.select_type_by_name(traits::generalization::is_final());
-    return r;
-}
-
-boost::optional<bool>
-generalization_transform::make_is_final(const type_group& tg,
-    const variability::annotation& a) {
-    const variability::entry_selector s(a);
-
-    if (s.has_entry(tg.is_final))
-        return s.get_boolean_content(tg.is_final);
-
-    return boost::optional<bool>();
-}
 
 generalization_transform::feature_group
 generalization_transform::make_feature_group(
@@ -139,8 +117,7 @@ generalization_transform::update_and_collect_parent_ids(
 }
 
 void generalization_transform::populate_properties_up_the_generalization_tree(
-    const type_group& tg, const feature_group& fg, const bool use_configuration,
-    const meta_model::name& leaf,
+    const feature_group& fg, const meta_model::name& leaf,
     meta_model::model& em, meta_model::object& o) {
 
     /*
@@ -177,8 +154,7 @@ void generalization_transform::populate_properties_up_the_generalization_tree(
         }
 
         auto& parent(*i->second);
-        populate_properties_up_the_generalization_tree(tg, fg,
-            use_configuration, leaf, em, parent);
+        populate_properties_up_the_generalization_tree(fg, leaf, em, parent);
 
         if (parent.parents().empty()) {
             /*
@@ -199,10 +175,8 @@ void generalization_transform::populate_properties_up_the_generalization_tree(
 }
 
 void generalization_transform::
-populate_generalizable_properties(const type_group& tg, const feature_group& fg,
-    const bool use_configuration,
-    const std::unordered_set<std::string>& parent_ids,
-    meta_model::model& m) {
+populate_generalizable_properties(const feature_group& fg,
+    const std::unordered_set<std::string>& parent_ids, meta_model::model& m) {
 
     for (auto& pair : m.objects()) {
         const auto& id(pair.first);
@@ -229,9 +203,7 @@ populate_generalizable_properties(const type_group& tg, const feature_group& fg,
          /*
           * Handle the case where the user decided to override final.
           */
-         const auto is_final(use_configuration ?
-             make_is_final(fg, *o.configuration()) :
-             make_is_final(tg, o.annotation()));
+         const auto is_final(make_is_final(fg, *o.configuration()));
          if (is_final) {
              if (*is_final && o.is_parent()) {
                  BOOST_LOG_SEV(lg, error) << incompatible_is_final << id;
@@ -261,8 +233,7 @@ populate_generalizable_properties(const type_group& tg, const feature_group& fg,
          if (!o.is_leaf())
              continue;
 
-         populate_properties_up_the_generalization_tree(tg, fg,
-             use_configuration, o.name(), m, o);
+         populate_properties_up_the_generalization_tree(fg, o.name(), m, o);
     }
 }
 
@@ -278,11 +249,9 @@ void generalization_transform::apply(const context& ctx,
     tracing::scoped_transform_tracer stp(lg, "generalization transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    const auto uc(ctx.use_configuration());
     const auto parent_ids(update_and_collect_parent_ids(idx, m));
-    const auto tg(make_type_group(*ctx.type_repository()));
     const auto fg(make_feature_group(*ctx.feature_model()));
-    populate_generalizable_properties(tg, fg, uc, parent_ids, m);
+    populate_generalizable_properties(fg, parent_ids, m);
     sort_leaves(m);
 
     stp.end_transform(m);

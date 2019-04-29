@@ -26,8 +26,6 @@
 #endif
 
 #include <unordered_set>
-#include "masd.dogen.variability/types/type.hpp"
-#include "masd.dogen.variability/types/type_repository.hpp"
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
@@ -43,16 +41,6 @@ namespace masd::dogen::coding::transforms {
  * @brief Expands generalisation relationships in model.
  */
 class generalization_transform final {
-private:
-    struct type_group {
-        variability::type is_final;
-    };
-
-    static type_group make_type_group(const variability::type_repository& atrp);
-
-    static boost::optional<bool> make_is_final(const type_group& tg,
-        const variability::annotation& a);
-
 private:
     struct feature_group {
         variability::meta_model::feature is_final;
@@ -70,12 +58,11 @@ private:
         meta_model::model& m);
 
     static void populate_properties_up_the_generalization_tree(
-        const type_group& tg, const feature_group& fg,
-        const bool use_configuration, const meta_model::name& leaf,
+        const feature_group& fg, const meta_model::name& leaf,
         meta_model::model& m, meta_model::object& o);
 
-    static void populate_generalizable_properties(const type_group& tg,
-        const feature_group& fg, const bool use_configuration,
+    static void populate_generalizable_properties(
+        const feature_group& fg,
         const std::unordered_set<std::string>& parent_ids,
         meta_model::model& m);
 
