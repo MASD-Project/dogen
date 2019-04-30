@@ -37,7 +37,7 @@ variability_profile_template_entry::variability_profile_template_entry(
     const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
     const masd::dogen::coding::meta_model::name& name,
     const std::string& key,
-    const std::list<std::string>& value)
+    const std::string& value)
     : documentation_(documentation),
       configuration_(configuration),
       name_(name),
@@ -131,19 +131,19 @@ void variability_profile_template_entry::key(const std::string&& v) {
     key_ = std::move(v);
 }
 
-const std::list<std::string>& variability_profile_template_entry::value() const {
+const std::string& variability_profile_template_entry::value() const {
     return value_;
 }
 
-std::list<std::string>& variability_profile_template_entry::value() {
+std::string& variability_profile_template_entry::value() {
     return value_;
 }
 
-void variability_profile_template_entry::value(const std::list<std::string>& v) {
+void variability_profile_template_entry::value(const std::string& v) {
     value_ = v;
 }
 
-void variability_profile_template_entry::value(const std::list<std::string>&& v) {
+void variability_profile_template_entry::value(const std::string&& v) {
     value_ = std::move(v);
 }
 

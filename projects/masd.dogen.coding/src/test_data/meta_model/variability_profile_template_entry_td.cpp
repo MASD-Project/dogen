@@ -48,14 +48,6 @@ create_masd_dogen_coding_meta_model_name(const unsigned int position) {
     return masd::dogen::coding::meta_model::name_generator::create(position);
 }
 
-std::list<std::string> create_std_list_std_string(unsigned int position) {
-    std::list<std::string> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_string(position + i));
-    }
-    return r;
-}
-
 }
 
 namespace masd::dogen::coding::meta_model {
@@ -68,7 +60,7 @@ populate(const unsigned int position, result_type& v) {
     v.configuration(create_boost_shared_ptr_masd_dogen_variability_meta_model_configuration(position + 1));
     v.name(create_masd_dogen_coding_meta_model_name(position + 2));
     v.key(create_std_string(position + 3));
-    v.value(create_std_list_std_string(position + 4));
+    v.value(create_std_string(position + 4));
 }
 
 variability_profile_template_entry_generator::result_type

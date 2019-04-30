@@ -2251,7 +2251,7 @@
         },
         {
           "name": "value",
-          "type": "std::list<std::string>"
+          "type": "std::string"
         }
       ]
     }

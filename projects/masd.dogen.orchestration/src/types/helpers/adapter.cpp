@@ -419,7 +419,7 @@ adapter::to_variability_profile_template(const coding::meta_model::location& l,
 
         const auto v(attr.value());
         if (!v.empty())
-            e.value().push_back(v);
+            e.value(v);
 
         r->entries().push_back(e);
     }

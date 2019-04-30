@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
@@ -47,7 +46,7 @@ public:
         const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
         const masd::dogen::coding::meta_model::name& name,
         const std::string& key,
-        const std::list<std::string>& value);
+        const std::string& value);
 
 public:
     /**
@@ -89,10 +88,10 @@ public:
     void key(const std::string& v);
     void key(const std::string&& v);
 
-    const std::list<std::string>& value() const;
-    std::list<std::string>& value();
-    void value(const std::list<std::string>& v);
-    void value(const std::list<std::string>&& v);
+    const std::string& value() const;
+    std::string& value();
+    void value(const std::string& v);
+    void value(const std::string&& v);
 
 public:
     bool operator==(const variability_profile_template_entry& rhs) const;
@@ -109,7 +108,7 @@ private:
     boost::shared_ptr<masd::dogen::variability::meta_model::configuration> configuration_;
     masd::dogen::coding::meta_model::name name_;
     std::string key_;
-    std::list<std::string> value_;
+    std::string value_;
 };
 
 }

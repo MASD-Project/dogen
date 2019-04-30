@@ -48,20 +48,6 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::d
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace masd::dogen::coding::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const variability_profile_template_entry& v) {
@@ -71,7 +57,7 @@ std::ostream& operator<<(std::ostream& s, const variability_profile_template_ent
       << "\"configuration\": " << v.configuration() << ", "
       << "\"name\": " << v.name() << ", "
       << "\"key\": " << "\"" << tidy_up_string(v.key()) << "\"" << ", "
-      << "\"value\": " << v.value()
+      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
       << " }";
     return(s);
 }

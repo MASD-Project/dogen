@@ -32619,7 +32619,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
             <dia:string>#value#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
+            <dia:string>#std::string#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
