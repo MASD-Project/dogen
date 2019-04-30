@@ -837,7 +837,7 @@ Update hello world to demonstrate this. We basically want to make the
 entry use case as simple as possible, requiring little to no
 meta-data.
 
-*** Code-generate annotations type templates                          :story:
+*** Code-generate variability feature templates                       :story:
 
 Type templates are in effect features from a feature model. We need to
 add UML support for features (e.g. add meta-model elements for them),
@@ -1253,50 +1253,6 @@ the current logic of parents are abstract).
 We then need to review the C++ templates and figure out where we were
 also inferring "abstractness", and use the new flag.
 
-*** Move generation element properties back into formattables         :story:
-
-We moved a number of properties out of formattables. Move them
-back. By the end of this refactor we should end up with no references
-to facets in coding.
-
-*** Move fabric types into generation                                 :story:
-
-- copy across the fabric types from cpp and csharp into generation.
-- update formatters to use the types from generation.
-- delete them from original models.
-
-At present we are always generating the fabric types via the injctor
-and then asking the user to disable them as required via the
-enablement settings. This is very silly. The approach should now be
-that we look for elements with the correct stereotypes,
-e.g. =masd::cmakelists= and so forth and use those to generate these
-elements. This must be done as part of the work to move fabric types
-into the metamodel. We should also take this opportunity to merge
-common types between C# and C++, if any exist.
-
-Notes:
-
-- this will also address the naming of types such as registrar.
-- we need to remove all top-level knobs that are controlling the
-  enablement of meta-types such as visual studio, etc. In addition, at
-  present when we enable say ODB we automatically get ODB options,
-  etc. In this world, we would need to create the element in the
-  model. This is a bit confusing because users won't know this is a
-  requirement. Perhaps we need to have a combination of implicit and
-  explicit types?
-
-*** Move formattables into generation                                 :story:
-
-- first, update the generation model with formattable properties from
-  cpp: add a formattable type to the generation model and container
-  for it, add the formattable population logic. Then remove the
-  formattable logic from cpp.
-- repeat the exercise with csharp. We should end up with two new
-  namespaces in generation handling the fabric meta-types and their
-  processing.
-- by the end of this refactor, cpp and csharp should contain only the
-  formatters.
-
 *** Allow generating executables from dogen                           :story:
 
 At present dogen always assumes we want to generate a static
@@ -1343,23 +1299,6 @@ formattables pipeline.
 At present the visitor is named by dogen. There is nothing stopping us
 from allowing users to rename it via meta-data. We don't have a use
 case yet.
-
-*** Create =generation.extraction= model                              :story:
-
-- rename =generation.cpp= to =generation.extraction=.
-- rename =formatters= namespace to =cpp=.
-- ensure the logic for processing one tech space will work for
-  multiple tech spaces. For example, we could move the existing
-  workflow into the =cpp= namespace and register the text generation
-  chain from there.
-- repeat the exercise with the csharp model.
-- by the end of this refactor we should end up with a single
-  =generation.extraction= containing both the csharp and cpp
-  formatters.
-- consider renaming formatters to model to text transforms.
-
-Actually, the name of this model is not clear. We need to wait for the
-product model clean up before we tackle this rename.
 
 *** Report validation errors like compilers do                        :story:
 
@@ -1451,12 +1390,6 @@ Object templates are really a higher level concept when compared to
 objects, etc. We should not be using associations to denote the notion
 of an object instantiating an object template. Perhaps the "implements
 an interface" relationship is more appropriate. Check the UML books.
-
-*** Move all formatters in extraction to generation                   :story:
-
-Since we only need these during generation, seems like the more
-logical place. This should be done when (after) we move all of the
-meta-elements that live in formatter into coding.
 
 *** Add warning for unused references                                 :story:
 
@@ -1857,13 +1790,15 @@ Tasks:
 - change enablement to merge all element properties of extensible
   elements.
 
-*** Create a generation locator                                       :story:
+*** Create a archetypes locator                                       :story:
 
 We need to move all functionality which is not kernel specific into
 yarn for the locator. This will exist in the helpers namespace. We
 then need to implement the C++ locator as a composite of yarn
 locator. It will live in fabric. Actually this will now be part of
 archetypes now.
+
+Actually this will now be placed in the archetypes model.
 
 *Other Notes*
 
@@ -2332,11 +2267,13 @@ Notes:
   inside of packages]]. This solved some of the problems such as
   allowing concepts to be placed in packages.
 
-*** Move dependencies into generation                                 :story:
-<review>
+*** Move dependencies into archetypes                                 :story:
+
 Actually the dependencies will be generated at the kernel level
 because 99% of the code is kernel specific. However, we need to make
-it an external transform.
+it an external transform. We need to figure out an interface that
+supplies archetypes with the data needed to create the dependencies
+container.
 
 Tasks:
 
@@ -2414,17 +2351,6 @@ canonical archetypes and which don't. In the validation we said:
 
 We should have some kind of flag in yarn to distinguish. This still
 requires a bit of thinking.
-
-*** Move helpers into generation                                      :story:
-
-Looking at helpers, it is clear that they are common to all
-languages. We just need to rename the terminology slightly -
-particularly wrt to streaming properties - and then move this code
-across into yarn.
-
-*** Move facet properties into generation                             :story:
-
-We should be able to handle these generically in yarn.
 
 *** Make explicit all implicit modeling elements                      :story:
 

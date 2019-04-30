@@ -13,25 +13,25 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-30 Tue 10:07]
+#+CAPTION: Clock summary at [2019-04-30 Tue 10:42]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *54:16* |       |       | 100.0 |
+| *Total time*                                           | *54:49* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 54:16   |       |       | 100.0 |
-| Active                                                 |         | 54:16 |       | 100.0 |
+| Stories                                                | 54:49   |       |       | 100.0 |
+| Active                                                 |         | 54:49 |       | 100.0 |
 | Edit release notes for previous sprint                 |         |       |  2:40 |   4.9 |
-| Sprint and product backlog grooming                    |         |       |  2:26 |   4.5 |
+| Sprint and product backlog grooming                    |         |       |  2:59 |   5.4 |
 | Create a video demo for the previous sprint's features |         |       |  1:55 |   3.5 |
-| Read variability papers                                |         |       |  1:04 |   2.0 |
+| Read variability papers                                |         |       |  1:04 |   1.9 |
 | Emacs maintenance and exploration work                 |         |       |  0:20 |   0.6 |
-| Finish implementing the variability model              |         |       | 10:49 |  19.9 |
-| Trim down stitch's use of annotations                  |         |       |  1:30 |   2.8 |
-| Read meta-data using configurations                    |         |       | 24:24 |  45.0 |
-| Remove uses of annotations                             |         |       |  7:44 |  14.3 |
+| Finish implementing the variability model              |         |       | 10:49 |  19.7 |
+| Trim down stitch's use of annotations                  |         |       |  1:30 |   2.7 |
+| Read meta-data using configurations                    |         |       | 24:24 |  44.5 |
+| Remove uses of annotations                             |         |       |  7:44 |  14.1 |
 | Stitch is still using artefact writer                  |         |       |  0:04 |   0.1 |
-| Profiles as meta-model elements                        |         |       |  1:20 |   2.5 |
+| Profiles as meta-model elements                        |         |       |  1:20 |   2.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -129,6 +129,7 @@ Happy Modeling!
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-04-30 Tue 10:08]--[2019-04-30 Tue 10:41] =>  0:33
     CLOCK: [2019-04-30 Tue 09:40]--[2019-04-30 Tue 09:57] =>  0:17
     CLOCK: [2019-04-30 Tue 08:05]--[2019-04-30 Tue 08:34] =>  0:29
     CLOCK: [2019-04-29 Mon 10:17]--[2019-04-29 Mon 10:28] =>  0:11
@@ -431,6 +432,16 @@ extraction - in fact, stitch should probably be using a transform in
 extraction.
 
 Delete artefact writer.
+
+*** COMPLETED Move all formatters in extraction to generation         :story:
+    CLOSED: [2019-04-30 Tue 10:34]
+
+*Rationale*: done as part of the extraction clean-up.
+
+Since we only need these during generation, seems like the more
+logical place. This should be done when (after) we move all of the
+meta-elements that live in formatter into coding.
+
 
 *** STARTED Profiles as meta-model elements                           :story:
     :LOGBOOK:
@@ -912,13 +923,68 @@ this is coming from.
 
 *** Consider renaming orchestration to "engine"                       :story:
 
-Orchestration is a bit of a vague name. It is really the code
+Orchestration is a bit of a vague name; after all we do orchestration
+pretty much everywhere. This model really represents the code
 generation engine of dogen. Its still very vague but slightly less so.
 
-Actually the real name of this model is something like
-"component". This will make sense once we add the product model. In
-addition we need to somehow share the "generation" model across coding
-and product models.
+*** Consider renaming =coding= model                                  :story:
+
+The real name of this model is something like "component". This will
+make sense once we add the product model. In addition we need to
+somehow share the "generation" model across coding and product
+models. In reality, much of what is in generation more properly
+belongs to =archetypes= because is functionality related to
+projections into archetype space.
+
+=coding= is the meta-model for modeling elements that exist inside a
+component of a product. "component" is not a particularly brilliant
+name, and it is somewhat confusing because it is used in UML with a
+somewhat different meaning, but the more correct name - chosen by
+Voelter - would be "building block", which is too long. We just need
+to make it clear that "component" and "product" are terms from the
+MASD domain. Library and executable are the types of components.
+
+Another point to consider before this rename is that we may not
+necessarily need a product model. Maybe we can add the elements for
+product directly into coding. We need to identify all of these
+elements and see if they are sufficient to exist as a stand alone
+model. If we do create a single model, then "coding" is actually not
+the worse possible name (e.g. component + product = coding, the
+activity for creating products).
+
+*** Move fabric types into coding                           :story:
+
+Fabric types need to be tidied up and moved into coding as regular
+meta-model elements. We need to try to make them as technical space
+agnostic as possible.
+
+*Previous understanding*
+
+Move fabric types into generation.
+
+- copy across the fabric types from cpp and csharp into generation.
+- update formatters to use the types from generation.
+- delete them from original models.
+
+At present we are always generating the fabric types via the injctor
+and then asking the user to disable them as required via the
+enablement settings. This is very silly. The approach should now be
+that we look for elements with the correct stereotypes,
+e.g. =masd::cmakelists= and so forth and use those to generate these
+elements. This must be done as part of the work to move fabric types
+into the metamodel. We should also take this opportunity to merge
+common types between C# and C++, if any exist.
+
+Notes:
+
+- this will also address the naming of types such as registrar.
+- we need to remove all top-level knobs that are controlling the
+  enablement of meta-types such as visual studio, etc. In addition, at
+  present when we enable say ODB we automatically get ODB options,
+  etc. In this world, we would need to create the element in the
+  model. This is a bit confusing because users won't know this is a
+  requirement. Perhaps we need to have a combination of implicit and
+  explicit types?
 
 *** Make extraction model name a qualified name                       :story:
 
@@ -1110,3 +1176,67 @@ designed to do. In addition, we then have all of the complexities
 around selection that are already handled by variant.
 
 ** Deprecated
+*** CANCELLED Move generation element properties back into formattables :story:
+    CLOSED: [2019-04-30 Tue 10:28]
+
+*Rationale*: these will now be moved into archetypes.
+
+We moved a number of properties out of formattables. Move them
+back. By the end of this refactor we should end up with no references
+to facets in coding.
+
+*** CANCELLED Move formattables into generation                       :story:
+    CLOSED: [2019-04-30 Tue 10:30]
+
+*Rationale*: these will now be moved into archetypes.
+
+- first, update the generation model with formattable properties from
+  cpp: add a formattable type to the generation model and container
+  for it, add the formattable population logic. Then remove the
+  formattable logic from cpp.
+- repeat the exercise with csharp. We should end up with two new
+  namespaces in generation handling the fabric meta-types and their
+  processing.
+- by the end of this refactor, cpp and csharp should contain only the
+  formatters.
+
+*** CANCELLED Create =generation.extraction= model                    :story:
+    CLOSED: [2019-04-30 Tue 10:31]
+
+*Rationale*: actually, once we move out most of the stuff in
+generation into archetypes, generation.cpp more or less becomes
+=coding.cpp=? Needs more thinking. But not what this story originally
+envisioned.
+
+- rename =generation.cpp= to =generation.extraction=.
+- rename =formatters= namespace to =cpp=.
+- ensure the logic for processing one tech space will work for
+  multiple tech spaces. For example, we could move the existing
+  workflow into the =cpp= namespace and register the text generation
+  chain from there.
+- repeat the exercise with the csharp model.
+- by the end of this refactor we should end up with a single
+  =generation.extraction= containing both the csharp and cpp
+  formatters.
+- consider renaming formatters to model to text transforms.
+
+Actually, the name of this model is not clear. We need to wait for the
+product model clean up before we tackle this rename.
+
+*** CANCELLED Move facet properties into generation                   :story:
+    CLOSED: [2019-04-30 Tue 10:39]
+
+*Rationale*: this will be handled with the archetypes clean up. It
+won't be into generation.
+
+We should be able to handle these generically in yarn.
+
+*** CANCELLED Move helpers into generation                            :story:
+    CLOSED: [2019-04-30 Tue 10:40]
+
+*Rationale*: all helpers will be removed when we implement PDMs correctly.
+
+Looking at helpers, it is clear that they are common to all
+languages. We just need to rename the terminology slightly -
+particularly wrt to streaming properties - and then move this code
+across into yarn.
