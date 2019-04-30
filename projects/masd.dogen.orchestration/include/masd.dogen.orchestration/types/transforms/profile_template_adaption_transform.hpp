@@ -21,28 +21,63 @@
 #ifndef MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_PROFILE_TEMPLATE_ADAPTION_TRANSFORM_HPP
 #define MASD_DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_PROFILE_TEMPLATE_ADAPTION_TRANSFORM_HPP
 
+#include "masd.dogen.coding/types/meta_model/variability_profile_template.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include <boost/optional.hpp>
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
+#include "masd.dogen.variability/types/meta_model/profile_template.hpp"
+#include "masd.dogen.coding/types/meta_model/model_set.hpp"
+#include "masd.dogen.orchestration/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::orchestration::transforms {
 
 class profile_template_adaption_transform final {
-public:
-    profile_template_adaption_transform() = default;
-    profile_template_adaption_transform(const profile_template_adaption_transform&) = default;
-    profile_template_adaption_transform(profile_template_adaption_transform&&) = default;
-    ~profile_template_adaption_transform() = default;
-    profile_template_adaption_transform& operator=(const profile_template_adaption_transform&) = default;
+private:
+    struct feature_group {
+        variability::meta_model::feature binding_point;
+        variability::meta_model::feature labels;
+        variability::meta_model::feature archetype_location_kernel;
+        variability::meta_model::feature archetype_location_backend;
+        variability::meta_model::feature template_kind;
+    };
+
+    static feature_group make_feature_group(
+        const variability::meta_model::feature_model& fm);
+
+    static variability::meta_model::binding_point
+    make_binding_point(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+    static std::list<std::string>
+    make_labels(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+    static std::string
+    make_archetype_location_kernel(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+    static std::string
+    archetype_location_backend(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+    static variability::meta_model::template_kind
+    make_template_kind(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+private:
+    static variability::meta_model::profile_template
+    adapt(const coding::meta_model::variability_profile_template& vpt);
 
 public:
-    bool operator==(const profile_template_adaption_transform& rhs) const;
-    bool operator!=(const profile_template_adaption_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static std::list<variability::meta_model::profile_template>
+    apply(const context& ctx, const coding::meta_model::model_set& ms);
 };
 
 }

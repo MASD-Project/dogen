@@ -22,8 +22,29 @@
 
 namespace masd::dogen::orchestration {
 
-bool traits::operator==(const traits& /*rhs*/) const {
-    return true;
+std::string traits::variability::binding_point() {
+    static std::string r("masd.variability.binding_point");
+    return r;
+}
+
+std::string traits::variability::labels() {
+    static std::string r("masd.variability.labels");
+    return r;
+}
+
+std::string traits::variability::archetype_location_kernel() {
+    static std::string r("masd.variability.archetype_location.kernel");
+    return r;
+}
+
+std::string traits::variability::archetype_location_backend() {
+    static std::string r("masd.variability.archetype_location.backend");
+    return r;
+}
+
+std::string traits::variability::template_kind() {
+    static std::string r("masd.variability.template_kind");
+    return r;
 }
 
 }

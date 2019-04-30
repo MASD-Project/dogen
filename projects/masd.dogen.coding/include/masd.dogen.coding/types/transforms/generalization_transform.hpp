@@ -26,6 +26,7 @@
 #endif
 
 #include <unordered_set>
+#include <boost/optional.hpp>
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
