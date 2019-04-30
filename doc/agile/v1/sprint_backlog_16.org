@@ -13,25 +13,25 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-04-30 Tue 12:08]
+#+CAPTION: Clock summary at [2019-04-30 Tue 16:18]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *56:10* |       |       | 100.0 |
+| *Total time*                                           | *58:17* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 56:10   |       |       | 100.0 |
-| Active                                                 |         | 56:10 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  2:40 |   4.7 |
-| Sprint and product backlog grooming                    |         |       |  2:59 |   5.3 |
-| Create a video demo for the previous sprint's features |         |       |  1:55 |   3.4 |
-| Read variability papers                                |         |       |  1:04 |   1.9 |
+| Stories                                                | 58:17   |       |       | 100.0 |
+| Active                                                 |         | 58:17 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  2:40 |   4.6 |
+| Sprint and product backlog grooming                    |         |       |  2:59 |   5.1 |
+| Create a video demo for the previous sprint's features |         |       |  1:55 |   3.3 |
+| Read variability papers                                |         |       |  1:04 |   1.8 |
 | Emacs maintenance and exploration work                 |         |       |  0:20 |   0.6 |
-| Finish implementing the variability model              |         |       | 10:49 |  19.3 |
-| Trim down stitch's use of annotations                  |         |       |  1:30 |   2.7 |
-| Read meta-data using configurations                    |         |       | 24:24 |  43.4 |
-| Remove uses of annotations                             |         |       |  7:44 |  13.8 |
+| Finish implementing the variability model              |         |       | 10:49 |  18.6 |
+| Trim down stitch's use of annotations                  |         |       |  1:30 |   2.6 |
+| Read meta-data using configurations                    |         |       | 24:24 |  41.9 |
+| Remove uses of annotations                             |         |       |  7:44 |  13.3 |
 | Stitch is still using artefact writer                  |         |       |  0:04 |   0.1 |
-| Profiles as meta-model elements                        |         |       |  2:41 |   4.8 |
+| Profiles as meta-model elements                        |         |       |  4:48 |   8.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -444,6 +444,9 @@ meta-elements that live in formatter into coding.
 
 *** STARTED Profiles as meta-model elements                           :story:
     :LOGBOOK:
+    CLOCK: [2019-04-30 Tue 15:37]--[2019-04-30 Tue 16:18] =>  0:41
+    CLOCK: [2019-04-30 Tue 14:20]--[2019-04-30 Tue 15:36] =>  1:16
+    CLOCK: [2019-04-30 Tue 13:45]--[2019-04-30 Tue 13:55] =>  0:10
     CLOCK: [2019-04-30 Tue 11:12]--[2019-04-30 Tue 12:08] =>  0:56
     CLOCK: [2019-04-30 Tue 10:46]--[2019-04-30 Tue 11:11] =>  0:25
     CLOCK: [2019-04-30 Tue 09:58]--[2019-04-30 Tue 10:07] =>  0:09
@@ -704,6 +707,40 @@ Notes:
 - we probably should rename =coding::configuration= to "unbound
   configuration" or some other name to make it distinct from
   =variability::configuration=.
+
+*** Use of binding points in profiles                                 :story:
+
+At present we have the concept of a binding point in a feature. This
+allows us to determine how a feature can be bound to a modeling
+element in a configuration. For example, take feature =X= with a binding
+point of =global=; this feature can only be configured in the root
+module because it does not make sense to exist anywhere else.
+
+This concept was already present in the annotations model, where we
+checked that a "scope type" of a field matched the scope type of the
+element. However, this was present haphazardly in profiles; we had the
+notion of a "scope type" on a profile as a property but the profile
+hydrator never populated it; in addition, the profiler only set the
+annotation scope:
+
+: pc.annotation().scope(scope_types::not_applicable);
+
+We probably started thinking about this but stopped half-way. So, if
+we try to retrace our steps logically:
+
+- a profile could conceivably have a binding point. It would be used
+  to validate that all profiles it merges against also have the same
+  biding point (or similar; say =any= or =module= for =global=). It
+  could also be used to validate that the feature templates referred
+  to in its configuration point templates are also compatible.
+
+At present we have preserved the old logic of having a binding point
+in a profile as a feature, and left the initial feature processing
+support in the adaptor transform, but:
+
+- we did not add it to the profile template and profile classes;
+- consequently we are missing all of the validation logic defined
+  above.
 
 *** Allow stereotypes in object templates                             :story:
 

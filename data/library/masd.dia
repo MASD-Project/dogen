@@ -5225,7 +5225,7 @@ obtained from the copyright holder.
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.archetype_location.kernel=formatters
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.untyped_value=Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;#</dia:string>
+#DOGEN masd.variability.value=Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

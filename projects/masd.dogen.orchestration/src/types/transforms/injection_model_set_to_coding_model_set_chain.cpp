@@ -25,6 +25,7 @@
 #include "masd.dogen.orchestration/types/transforms/profile_repository_transform.hpp"
 #include "masd.dogen.orchestration/types/transforms/injection_model_to_coding_model_transform.hpp"
 #include "masd.dogen.orchestration/types/transforms/coding_model_set_to_configuration_model_set_transform.hpp"
+#include "masd.dogen.orchestration/types/transforms/profile_template_adaption_transform.hpp"
 #include "masd.dogen.orchestration/types/transforms/injection_model_set_to_coding_model_set_chain.hpp"
 
 namespace {
@@ -68,6 +69,7 @@ apply(const context& ctx, const injection::meta_model::model_set& ms) {
      * processing. First we need to retrieve the variability data from
      * the models.
      */
+    const auto pts(profile_template_adaption_transform::apply(ctx, r));
     const auto prp(profile_repository_transform::apply(ctx, r));
 
     /*

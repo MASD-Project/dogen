@@ -42,8 +42,23 @@ std::string traits::variability::archetype_location_backend() {
     return r;
 }
 
+std::string traits::variability::archetype_location_facet() {
+    static std::string r("masd.variability.archetype_location.facet");
+    return r;
+}
+
+std::string traits::variability::archetype_location_archetype() {
+    static std::string r("masd.variability.archetype_location.archetype");
+    return r;
+}
+
 std::string traits::variability::template_kind() {
     static std::string r("masd.variability.template_kind");
+    return r;
+}
+
+std::string traits::variability::untyped_value() {
+    static std::string r("masd.variability.value");
     return r;
 }
 

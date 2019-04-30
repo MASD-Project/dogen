@@ -32,7 +32,7 @@
 namespace {
 
 const std::string
-transform_id("orchestration.transforms.stereotypes_transform");
+transform_id("orchestration.helpers.stereotypes_helper");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));

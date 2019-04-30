@@ -20,11 +20,17 @@
  */
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/io/list_io.hpp"
+#include "masd.dogen.utility/types/io/unordered_set_io.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/string/splitter.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
+#include "masd.dogen.variability/io/meta_model/profile_template_io.hpp"
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
+#include "masd.dogen.coding/io/meta_model/model_set_io.hpp"
+#include "masd.dogen.coding/io/meta_model/variability_profile_template_io.hpp"
 #include "masd.dogen.orchestration/types/traits.hpp"
+#include "masd.dogen.orchestration/types/transforms/context.hpp"
 #include "masd.dogen.orchestration/types/transforms/transform_exception.hpp"
 #include "masd.dogen.orchestration/types/transforms/profile_template_adaption_transform.hpp"
 
@@ -50,6 +56,10 @@ const std::string template_kind_archetype_template("archetype_template");
 
 const std::string invalid_binding_point("Invalid binding point: ");
 const std::string invalid_template_type("Invalid template type: ");
+const std::string duplicate_label("Profile has a duplicate lable: ");
+const std::string conflicting_values(
+    "Entry has a value as meta-data and as a property: ");
+const std::string missing_value("Must supply a value for entry: ");
 
 }
 
@@ -67,7 +77,12 @@ profile_template_adaption_transform::make_feature_group(
         traits::variability::archetype_location_kernel());
     r.archetype_location_backend = s.get_by_name(
         traits::variability::archetype_location_backend());
+    r.archetype_location_facet = s.get_by_name(
+        traits::variability::archetype_location_facet());
+    r.archetype_location_archetype = s.get_by_name(
+        traits::variability::archetype_location_archetype());
     r.template_kind = s.get_by_name(traits::variability::template_kind());
+    r.untyped_value = s.get_by_name(traits::variability::untyped_value());
 
     return r;
 }
@@ -97,18 +112,25 @@ make_binding_point(const feature_group& fg,
         transform_exception(invalid_binding_point + tc));
 }
 
-std::list<std::string> profile_template_adaption_transform::
+std::unordered_set<std::string> profile_template_adaption_transform::
 make_labels(const feature_group& fg,
     const variability::meta_model::configuration& cfg) {
 
+    std::unordered_set<std::string> r;
     const variability::helpers::configuration_selector s(cfg);
     if (s.has_configuration_point(fg.labels)) {
-        const auto r(s.get_text_collection_content(fg.labels));
+        const auto tc(s.get_text_collection_content(fg.labels));
         BOOST_LOG_SEV(lg, trace) << "Read labels: " << r;
-        return r;
-    }
 
-    return std::list<std::string>{};
+        for (const auto& l : tc) {
+            const auto inserted(r.insert(l).second);
+            if (!inserted) {
+                BOOST_LOG_SEV(lg, error) << duplicate_label << l;
+                BOOST_THROW_EXCEPTION(transform_exception(duplicate_label + l));
+            }
+        }
+    }
+    return r;
 }
 
 std::string profile_template_adaption_transform::
@@ -135,12 +157,40 @@ archetype_location_backend(const feature_group& fg,
     return empty;
 }
 
+std::string profile_template_adaption_transform::
+archetype_location_facet(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) {
+
+    const variability::helpers::configuration_selector s(cfg);
+    if (s.has_configuration_point(fg.archetype_location_facet)) {
+        const auto r(s.get_text_content(fg.archetype_location_facet));
+        BOOST_LOG_SEV(lg, trace) << "Read facet: " << r;
+        return r;
+    }
+
+    return empty;
+}
+
+std::string profile_template_adaption_transform::
+archetype_location_archetype(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) {
+
+    const variability::helpers::configuration_selector s(cfg);
+    if (s.has_configuration_point(fg.archetype_location_archetype)) {
+        const auto r(s.get_text_content(fg.archetype_location_archetype));
+        BOOST_LOG_SEV(lg, trace) << "Read archetype: " << r;
+        return r;
+    }
+
+    return empty;
+}
+
 variability::meta_model::template_kind profile_template_adaption_transform::
 make_template_kind(const feature_group& fg,
     const variability::meta_model::configuration& cfg) {
 
     const variability::helpers::configuration_selector s(cfg);
-    const auto tc(s.get_text_content(fg.binding_point));
+    const auto tc(s.get_text_content(fg.template_kind));
     BOOST_LOG_SEV(lg, trace) << "Read template kind: " << tc;
 
     using variability::meta_model::template_kind;
@@ -160,16 +210,97 @@ make_template_kind(const feature_group& fg,
         transform_exception(invalid_template_type + tc));
 }
 
+std::list<std::string> profile_template_adaption_transform::
+make_untyped_value(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) {
+
+    const variability::helpers::configuration_selector s(cfg);
+    if (s.has_configuration_point(fg.untyped_value)) {
+        const auto r(s.get_text_collection_content(fg.untyped_value));
+        BOOST_LOG_SEV(lg, trace) << "Read untyped value: " << r;
+        return r;
+    }
+    return std::list<std::string>{};
+}
+
 variability::meta_model::profile_template profile_template_adaption_transform::
-adapt(const coding::meta_model::variability_profile_template& /*vpt*/) {
+adapt(const feature_group& fg,
+    const coding::meta_model::variability_profile_template& vpt) {
     variability::meta_model::profile_template r;
+
+    const auto sn(vpt.name().simple());
+    BOOST_LOG_SEV(lg, trace) << "Adapting: " << sn;
+
+    using utility::string::splitter;
+    const auto tokens(splitter::split_delimited(sn, "."));
+    r.name().simple(tokens.back());
+    r.name().qualified(sn);
+    r.labels(make_labels(fg, *vpt.configuration()));
+
+    for (const auto& n : vpt.parents())
+        r.parents().push_back(n.simple());
+
+    for (const auto& e : vpt.entries()) {
+        const auto& cfg(*e.configuration());
+        const auto& k(e.key());
+        BOOST_LOG_SEV(lg, trace) << "Adapting entry: " << k;
+
+        variability::meta_model::configuration_point_template cpt;
+        cpt.name().simple(k);
+        cpt.name().qualified(k);
+        cpt.kind(make_template_kind(fg, cfg));
+
+        archetypes::location al;
+
+        al.backend(archetype_location_backend(fg, cfg));
+        al.facet(archetype_location_facet(fg, cfg));
+        al.archetype(archetype_location_archetype(fg, cfg));
+        cpt.location(al);
+
+        const auto uv(make_untyped_value(fg, cfg));
+        if (!uv.empty() && !e.value().empty()) {
+            BOOST_LOG_SEV(lg, error) << conflicting_values << k;
+            BOOST_THROW_EXCEPTION(transform_exception(conflicting_values + k));
+        } else if (uv.empty() && e.value().empty()) {
+            BOOST_LOG_SEV(lg, error) << missing_value << k;
+            BOOST_THROW_EXCEPTION(transform_exception(missing_value + k));
+        } else if (!uv.empty()) {
+            BOOST_LOG_SEV(lg, trace) << "Untyped value: " << uv;
+            cpt.untyped_value(uv);
+        } else {
+            BOOST_LOG_SEV(lg, trace) << "Untyped value: "
+                                     << e.value();
+            cpt.untyped_value().push_back(e.value());
+        }
+    }
+
     return r;
 }
 
 std::list<variability::meta_model::profile_template>
 profile_template_adaption_transform::
-apply(const context& /*ctx*/, const coding::meta_model::model_set& /*ms*/) {
+apply(const context& ctx, const coding::meta_model::model_set& ms) {
+    tracing::scoped_transform_tracer stp(lg,
+        "profile template adaption transform",
+        transform_id, *ctx.variability_context().tracer(), ms);
+
+    const auto& fm(*ctx.injection_context().feature_model());
+    const auto fg(make_feature_group(fm));
+
     std::list<variability::meta_model::profile_template> r;
+    for (const auto& pair : ms.target().variability_profile_templates()) {
+        const auto& vpt(*pair.second);
+        r.push_back(adapt(fg, vpt));
+    }
+
+    for (const auto& m : ms.references()) {
+        for (const auto& pair : m.variability_profile_templates()) {
+            const auto& vpt(*pair.second);
+            r.push_back(adapt(fg, vpt));
+        }
+    }
+
+    stp.end_transform(r);
     return r;
 }
 

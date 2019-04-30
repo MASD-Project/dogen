@@ -61,6 +61,30 @@
   },
   {
     "name": {
+      "simple": "facet",
+      "qualified": "masd.variability.archetype_location.facet"
+    },
+    "archetype_location": {
+      "kernel": "masd"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "property"
+  },
+  {
+    "name": {
+      "simple": "archetype",
+      "qualified": "masd.variability.archetype_location.archetype"
+    },
+    "archetype_location": {
+      "kernel": "masd"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "property"
+  },
+  {
+    "name": {
       "simple": "template_kind",
       "qualified": "masd.variability.template_kind"
     },
@@ -73,13 +97,13 @@
   },
   {
     "name": {
-      "simple": "untyped_value",
-      "qualified": "masd.variability.untyped_value"
+      "simple": "value",
+      "qualified": "masd.variability.value"
     },
     "archetype_location": {
       "kernel": "masd"
     },
-    "value_type": "text",
+    "value_type": "text_collection",
     "template_kind": "instance",
     "scope": "property"
   }

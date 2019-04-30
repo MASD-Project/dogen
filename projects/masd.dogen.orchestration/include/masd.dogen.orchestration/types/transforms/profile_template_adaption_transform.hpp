@@ -28,6 +28,7 @@
 
 #include <list>
 #include <string>
+#include <unordered_set>
 #include <boost/optional.hpp>
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
@@ -45,7 +46,10 @@ private:
         variability::meta_model::feature labels;
         variability::meta_model::feature archetype_location_kernel;
         variability::meta_model::feature archetype_location_backend;
+        variability::meta_model::feature archetype_location_facet;
+        variability::meta_model::feature archetype_location_archetype;
         variability::meta_model::feature template_kind;
+        variability::meta_model::feature untyped_value;
     };
 
     static feature_group make_feature_group(
@@ -55,7 +59,7 @@ private:
     make_binding_point(const feature_group& fg,
         const variability::meta_model::configuration& cfg);
 
-    static std::list<std::string>
+    static std::unordered_set<std::string>
     make_labels(const feature_group& fg,
         const variability::meta_model::configuration& cfg);
 
@@ -67,13 +71,26 @@ private:
     archetype_location_backend(const feature_group& fg,
         const variability::meta_model::configuration& cfg);
 
+    static std::string
+    archetype_location_facet(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+    static std::string
+    archetype_location_archetype(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
     static variability::meta_model::template_kind
     make_template_kind(const feature_group& fg,
         const variability::meta_model::configuration& cfg);
 
+    static std::list<std::string>
+    make_untyped_value(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
 private:
     static variability::meta_model::profile_template
-    adapt(const coding::meta_model::variability_profile_template& vpt);
+    adapt(const feature_group& fg,
+        const coding::meta_model::variability_profile_template& vpt);
 
 public:
     static std::list<variability::meta_model::profile_template>

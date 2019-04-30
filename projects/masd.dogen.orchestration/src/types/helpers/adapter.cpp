@@ -416,11 +416,7 @@ adapter::to_variability_profile_template(const coding::meta_model::location& l,
         e.key(n);
         e.configuration(attr.configuration());
         e.configuration()->name().qualified(e.name().qualified().dot());
-
-        const auto v(attr.value());
-        if (!v.empty())
-            e.value(v);
-
+        e.value(attr.value());
         r->entries().push_back(e);
     }
     return r;
