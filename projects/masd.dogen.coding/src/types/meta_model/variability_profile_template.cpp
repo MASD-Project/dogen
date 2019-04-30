@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
 #include "masd.dogen.coding/types/meta_model/variability_profile_template.hpp"
@@ -61,6 +62,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::co
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::name>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace masd::dogen::coding::meta_model {
 
 variability_profile_template::variability_profile_template(
@@ -79,7 +94,8 @@ variability_profile_template::variability_profile_template(
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const boost::optional<masd::dogen::coding::meta_model::decoration>& decoration,
     const std::unordered_set<std::string>& labels,
-    const std::list<masd::dogen::coding::meta_model::variability_profile_template_entry>& entries)
+    const std::list<masd::dogen::coding::meta_model::variability_profile_template_entry>& entries,
+    const std::list<masd::dogen::coding::meta_model::name>& parents)
     : masd::dogen::coding::meta_model::element(
       name,
       documentation,
@@ -96,7 +112,8 @@ variability_profile_template::variability_profile_template(
       archetype_location_properties,
       decoration),
       labels_(labels),
-      entries_(entries) { }
+      entries_(entries),
+      parents_(parents) { }
 
 void variability_profile_template::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -121,7 +138,8 @@ void variability_profile_template::to_stream(std::ostream& s) const {
     masd::dogen::coding::meta_model::element::to_stream(s);
     s << ", "
       << "\"labels\": " << labels_ << ", "
-      << "\"entries\": " << entries_
+      << "\"entries\": " << entries_ << ", "
+      << "\"parents\": " << parents_
       << " }";
 }
 
@@ -131,6 +149,7 @@ void variability_profile_template::swap(variability_profile_template& other) noe
     using std::swap;
     swap(labels_, other.labels_);
     swap(entries_, other.entries_);
+    swap(parents_, other.parents_);
 }
 
 bool variability_profile_template::equals(const masd::dogen::coding::meta_model::element& other) const {
@@ -142,7 +161,8 @@ bool variability_profile_template::equals(const masd::dogen::coding::meta_model:
 bool variability_profile_template::operator==(const variability_profile_template& rhs) const {
     return masd::dogen::coding::meta_model::element::compare(rhs) &&
         labels_ == rhs.labels_ &&
-        entries_ == rhs.entries_;
+        entries_ == rhs.entries_ &&
+        parents_ == rhs.parents_;
 }
 
 variability_profile_template& variability_profile_template::operator=(variability_profile_template other) {
@@ -181,6 +201,22 @@ void variability_profile_template::entries(const std::list<masd::dogen::coding::
 
 void variability_profile_template::entries(const std::list<masd::dogen::coding::meta_model::variability_profile_template_entry>&& v) {
     entries_ = std::move(v);
+}
+
+const std::list<masd::dogen::coding::meta_model::name>& variability_profile_template::parents() const {
+    return parents_;
+}
+
+std::list<masd::dogen::coding::meta_model::name>& variability_profile_template::parents() {
+    return parents_;
+}
+
+void variability_profile_template::parents(const std::list<masd::dogen::coding::meta_model::name>& v) {
+    parents_ = v;
+}
+
+void variability_profile_template::parents(const std::list<masd::dogen::coding::meta_model::name>&& v) {
+    parents_ = std::move(v);
 }
 
 }

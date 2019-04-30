@@ -702,7 +702,7 @@ C++ pointers, references and so on.#</dia:string>
         <dia:point val="-119.782,-76.3613"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-131.85,-77.1113;-119.032,-70.2"/>
+        <dia:rectangle val="-131.85,-77.1114;-119.032,-70.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1526,7 +1526,7 @@ etc.#</dia:string>
         <dia:point val="-169.553,-55.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-170.403,-55.45;-154.887,-48.9996"/>
+        <dia:rectangle val="-170.403,-55.45;-154.888,-48.9996"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3578,7 +3578,7 @@ formatting.#</dia:string>
         <dia:point val="-197.745,-67.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-198.595,-67.45;-154.887,-48.95"/>
+        <dia:rectangle val="-198.595,-67.45;-154.888,-48.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3778,7 +3778,7 @@ formatting.#</dia:string>
         <dia:point val="-201.49,-54.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-202.34,-54.65;-154.887,-48.95"/>
+        <dia:rectangle val="-202.34,-54.65;-154.888,-48.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7803,7 +7803,7 @@ model.#</dia:string>
         <dia:point val="-177.125,-66.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-177.975,-66.65;-154.887,-48.95"/>
+        <dia:rectangle val="-177.975,-66.65;-154.888,-48.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -28815,13 +28815,13 @@ separator is @e ;.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O205">
       <dia:attribute name="obj_pos">
-        <dia:point val="-146,-6"/>
+        <dia:point val="-145,-6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-146.05,-6.05;-138.135,-2.35"/>
+        <dia:rectangle val="-145.05,-6.05;-137.135,-2.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-146,-6"/>
+        <dia:point val="-145,-6"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="7.8150000000000004"/>
@@ -28973,13 +28973,13 @@ separator is @e ;.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O206">
       <dia:attribute name="obj_pos">
-        <dia:point val="-161,-6"/>
+        <dia:point val="-157,-6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-161.05,-6.05;-152.365,0.05"/>
+        <dia:rectangle val="-157.05,-6.05;-148.365,0.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-161,-6"/>
+        <dia:point val="-157,-6"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.5849999999999991"/>
@@ -29374,7 +29374,7 @@ separator is @e ;.#</dia:string>
         <dia:point val="-145,-12.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-156.758,-13.55;-144.25,-5.2"/>
+        <dia:rectangle val="-152.758,-13.55;-144.25,-5.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -29382,8 +29382,8 @@ separator is @e ;.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-145,-12.8"/>
         <dia:point val="-145,-8"/>
-        <dia:point val="-156.708,-8"/>
-        <dia:point val="-156.708,-6"/>
+        <dia:point val="-152.708,-8"/>
+        <dia:point val="-152.708,-6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -30372,7 +30372,7 @@ as a modeline.#</dia:string>
         <dia:point val="-206,-37"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-229.523,-40.8;-205.25,-36.2"/>
+        <dia:rectangle val="-229.522,-40.8;-205.25,-36.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30516,7 +30516,7 @@ as a modeline.#</dia:string>
         <dia:point val="-177.125,-71"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-189.218,-77.65;-176.375,-70.2"/>
+        <dia:rectangle val="-189.217,-77.65;-176.375,-70.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30588,7 +30588,7 @@ as a modeline.#</dia:string>
         <dia:point val="-138.205,-12.7506"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-142.143,-13.5006;-137.455,-5.2"/>
+        <dia:rectangle val="-141.143,-13.5006;-137.455,-5.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30596,8 +30596,8 @@ as a modeline.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-138.205,-12.7506"/>
         <dia:point val="-138.205,-8"/>
-        <dia:point val="-142.093,-8"/>
-        <dia:point val="-142.093,-6"/>
+        <dia:point val="-141.093,-8"/>
+        <dia:point val="-141.093,-6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -31557,7 +31557,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:point val="-187.472,-55.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-188.322,-55.45;-154.887,-48.95"/>
+        <dia:rectangle val="-188.322,-55.45;-154.888,-48.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32266,19 +32266,19 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O239">
       <dia:attribute name="obj_pos">
-        <dia:point val="-127,-18"/>
+        <dia:point val="-126,-18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-127.05,-18.05;-105.275,-14.35"/>
+        <dia:rectangle val="-126.05,-18.05;-104.275,-13.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-127,-18"/>
+        <dia:point val="-126,-18"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="21.675000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#variability_profile_template#</dia:string>
@@ -32414,6 +32414,29 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#parents#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::list&lt;name&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Parents of this profile template.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -32427,7 +32450,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:point val="-186.5,-31"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-187.35,-31.05;-116.112,-17.95"/>
+        <dia:rectangle val="-187.35,-31.05;-115.112,-17.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32435,8 +32458,8 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
       <dia:attribute name="orth_points">
         <dia:point val="-186.5,-31"/>
         <dia:point val="-186.5,-27"/>
-        <dia:point val="-116.162,-27"/>
-        <dia:point val="-116.162,-18"/>
+        <dia:point val="-115.162,-27"/>
+        <dia:point val="-115.162,-18"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -32466,13 +32489,13 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O241">
       <dia:attribute name="obj_pos">
-        <dia:point val="-122,-6"/>
+        <dia:point val="-120,-6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-122.05,-6.05;-106.05,-1.55"/>
+        <dia:rectangle val="-120.05,-6.05;-104.05,-1.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-122,-6"/>
+        <dia:point val="-120,-6"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.9"/>
@@ -32660,19 +32683,19 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-116.162,-14.4"/>
+        <dia:point val="-115.162,-13.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-116.912,-15.15;-113.85,-5.25022"/>
+        <dia:rectangle val="-115.912,-14.35;-111.85,-5.25022"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-116.162,-14.4"/>
-        <dia:point val="-116.162,-8"/>
-        <dia:point val="-114.05,-8"/>
-        <dia:point val="-114.05,-6.05022"/>
+        <dia:point val="-115.162,-13.6"/>
+        <dia:point val="-115.162,-8"/>
+        <dia:point val="-112.05,-8"/>
+        <dia:point val="-112.05,-6.05022"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -32834,7 +32857,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:point val="-161.697,-75.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-162.547,-75.45;-154.887,-48.95"/>
+        <dia:rectangle val="-162.547,-75.45;-154.888,-48.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

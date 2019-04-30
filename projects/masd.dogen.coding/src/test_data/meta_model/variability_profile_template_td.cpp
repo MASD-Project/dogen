@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "masd.dogen.coding/test_data/meta_model/name_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/element_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/variability_profile_template_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/variability_profile_template_entry_td.hpp"
@@ -52,6 +53,19 @@ std::list<masd::dogen::coding::meta_model::variability_profile_template_entry> c
     return r;
 }
 
+masd::dogen::coding::meta_model::name
+create_masd_dogen_coding_meta_model_name(const unsigned int position) {
+    return masd::dogen::coding::meta_model::name_generator::create(position);
+}
+
+std::list<masd::dogen::coding::meta_model::name> create_std_list_masd_dogen_coding_meta_model_name(unsigned int position) {
+    std::list<masd::dogen::coding::meta_model::name> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_masd_dogen_coding_meta_model_name(position + i));
+    }
+    return r;
+}
+
 }
 
 namespace masd::dogen::coding::meta_model {
@@ -63,6 +77,7 @@ populate(const unsigned int position, result_type& v) {
     masd::dogen::coding::meta_model::element_generator::populate(position, v);
     v.labels(create_std_unordered_set_std_string(position + 0));
     v.entries(create_std_list_masd_dogen_coding_meta_model_variability_profile_template_entry(position + 1));
+    v.parents(create_std_list_masd_dogen_coding_meta_model_name(position + 2));
 }
 
 variability_profile_template_generator::result_type

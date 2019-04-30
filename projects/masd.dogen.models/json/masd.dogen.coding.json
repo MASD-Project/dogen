@@ -2228,6 +2228,11 @@
         {
           "name": "entries",
           "type": "std::list<variability_profile_template_entry>"
+        },
+        {
+          "name": "parents",
+          "type": "std::list<name>",
+          "documentation": "Parents of this profile template.\n"
         }
       ]
     },

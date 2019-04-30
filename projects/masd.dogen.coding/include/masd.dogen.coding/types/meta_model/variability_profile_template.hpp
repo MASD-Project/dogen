@@ -30,6 +30,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_set>
+#include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/variability_profile_template_entry.hpp"
 
@@ -60,7 +61,8 @@ public:
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const boost::optional<masd::dogen::coding::meta_model::decoration>& decoration,
         const std::unordered_set<std::string>& labels,
-        const std::list<masd::dogen::coding::meta_model::variability_profile_template_entry>& entries);
+        const std::list<masd::dogen::coding::meta_model::variability_profile_template_entry>& entries,
+        const std::list<masd::dogen::coding::meta_model::name>& parents);
 
 public:
     using element::accept;
@@ -83,6 +85,16 @@ public:
     void entries(const std::list<masd::dogen::coding::meta_model::variability_profile_template_entry>& v);
     void entries(const std::list<masd::dogen::coding::meta_model::variability_profile_template_entry>&& v);
 
+    /**
+     * @brief Parents of this profile template.
+     */
+    /**@{*/
+    const std::list<masd::dogen::coding::meta_model::name>& parents() const;
+    std::list<masd::dogen::coding::meta_model::name>& parents();
+    void parents(const std::list<masd::dogen::coding::meta_model::name>& v);
+    void parents(const std::list<masd::dogen::coding::meta_model::name>&& v);
+    /**@}*/
+
 public:
     bool operator==(const variability_profile_template& rhs) const;
     bool operator!=(const variability_profile_template& rhs) const {
@@ -99,6 +111,7 @@ public:
 private:
     std::unordered_set<std::string> labels_;
     std::list<masd::dogen::coding::meta_model::variability_profile_template_entry> entries_;
+    std::list<masd::dogen::coding::meta_model::name> parents_;
 };
 
 }
