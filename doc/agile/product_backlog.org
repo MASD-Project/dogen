@@ -10687,37 +10687,6 @@ Franca is an IDL language for which there is an XText definition and a
 C++ (spirit) implementation [[https://github.com/martinhaefner/franca][here]]. It may be useful as a gateway for
 other IDLs.
 
-*** Consider creating a TextUML injector                              :story:
-
-We could create a frontend that reads TextUML files:
-
-- https://github.com/abstratt/textuml
-- http://abstratt.github.io/textuml/readme
-
-Example (copied from the [[http://abstratt.github.io/textuml/docs/tutorial.html][tutorial]]):
-
-#+begin_example
-package payment;
-
-class PaymentMethod
-end;
-
-class Cheque specializes PaymentMethod
-end;
-#+end_example
-
-Now that we are thinking about moving to XMI, this may make slightly
-less sense, but nevertheless, its worth capturing the idea.
-
-Links:
-
-- [[https://blog.abstratt.com/2007/11/01/uml-101-the-templates-package/][UML 101 with TextUML: the Templates package]]
-- [[http://abstratt.github.io/textuml/docs/structure.html][Modeling structure]]: note that they do not use standard UML - there
-  are a number of extensions.
-- list of textual UML tools: [[https://modeling-languages.com/text-uml-tools-complete-list/][Text to UML tools – Fastest way to create
-  your models]]
-- [[https://modeling-languages.com/umple-language-model-oriented-programming/][UMPLE]]
-
 *** Add support for the fmt library                                   :story:
 
 We could add a facet for fmt that acts like the iostreams
@@ -10773,6 +10742,22 @@ can create code to interface with legacy systems.
 #+end_quote
 
 We should investigate how hard it is to add support for these IDLs.
+
+*** Support for pretty printing libraries                             :story:
+
+[[https://github.com/p-ranav/pprint][pprint]] is a library for pretty printing of C++ objects. It could be
+used as an alternative for our current JSON-based approach to IO. It
+appears there are [[https://news.ycombinator.com/item?id=19780725][a number of similar libraries]].
+
+Links:
+
+- [[https://github.com/p-ranav/pprint][pprint]]: github repo.
+- [[https://github.com/tfc/pprintpp][pprintpp]]: Typesafe Python Style Printf Formatting for C++.
+- [[https://github.com/calebzulawski/hippo][hippo]]: Hierarchical Information Pretty-Printer Objects. More macro
+  based.
+- [[https://github.com/tcbrindle/pretty_print.hpp][pretty_print.hpp]]: another single-header C++14 library for printing
+  STL-compatible container types to IO streams.
+
 
 ** Miscellaneous
 
@@ -14740,3 +14725,58 @@ future), you could expand templates etc but without connection to a
 model. Again, we don't really have concrete use cases for these as of
 yet so we haven't decided on implementation details, but this story
 will be used to capture ideas in this space.
+
+*** Consider creating textual UML injectors                           :story:
+
+We could create a frontend that reads TextUML files:
+
+- https://github.com/abstratt/textuml
+- http://abstratt.github.io/textuml/readme
+
+Example (copied from the [[http://abstratt.github.io/textuml/docs/tutorial.html][tutorial]]):
+
+#+begin_example
+package payment;
+
+class PaymentMethod
+end;
+
+class Cheque specializes PaymentMethod
+end;
+#+end_example
+
+Now that we are thinking about moving to XMI, this may make slightly
+less sense, but nevertheless, its worth capturing the idea. Actually
+there are many different languages that implement textual UML:
+
+- [[https://blog.abstratt.com/2007/11/01/uml-101-the-templates-package/][UML 101 with TextUML: the Templates package]]
+- [[http://abstratt.github.io/textuml/docs/structure.html][Modeling structure]]: note that they do not use standard UML - there
+  are a number of extensions.
+- list of textual UML tools: [[https://modeling-languages.com/text-uml-tools-complete-list/][Text to UML tools – Fastest way to create
+  your models]]
+- [[https://modeling-languages.com/umple-language-model-oriented-programming/][UMPLE]]
+- OMG created [[https://www.omg.org/spec/HUTN/About-HUTN/][HUTN]] (human-usable textual notation specification).
+- [[https://www.eclipse.org/epsilon/doc/articles/hutn-basic/][Using the Human-Usable Textual Notation (HUTN) in Epsilon]]
+- [[https://www.cooperate-project.de/images/publications/MODELSWARD2016.pdf][Survey on Textual Notations for the Unified Modeling Language]]:
+  academic paper.
+
+*** Org-mode as a carrier format for modeling                         :story:
+
+This is a bit of a weird idea, but may just work; this story is a
+placeholder to capture ideas in this space. Consider a org-mode
+file as a model. Ideas:
+
+- the top-level properties are all model properties. For example, if
+  you add text at the top, that is a model comment.
+- we can also make use of the exact same format for Dogen comments as
+  we do in Dia, with =#DOGEN= markers.
+- stereotypes and other meta-data can be conveyed using org-mode
+  properties. In addition, due to org-babel, we can include code
+  snippets on any programming language, with some (minimal) IDE-like
+  integration.
+- we could also include the GUIDs for merging as org-mode properties.
+- once we create a C++ stand-alone product to represent org-mode
+  documents, we can just create an adapter for it as an injector.
+- there already is some support for creating state-machines in
+  org-mode: [[https://orgmode.org/worg/org-tutorials/org-dot-diagrams.html][Org tutorial on generating simple process diagrams using
+  dot and tables]]
