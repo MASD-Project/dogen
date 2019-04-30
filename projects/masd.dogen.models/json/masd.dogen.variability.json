@@ -561,13 +561,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::profile_template_hydration_transform",
-      "stereotypes": [
-        "masd::handcrafted"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::profile_template_instantiation_transform",
       "stereotypes": [
         "masd::handcrafted"

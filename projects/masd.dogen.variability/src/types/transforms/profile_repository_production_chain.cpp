@@ -23,7 +23,6 @@
 #include "masd.dogen.variability/io/meta_model/feature_model_io.hpp"
 #include "masd.dogen.variability/io/meta_model/profile_repository_io.hpp"
 #include "masd.dogen.variability/types/transforms/profile_merging_transform.hpp"
-#include "masd.dogen.variability/types/transforms/profile_template_hydration_transform.hpp"
 #include "masd.dogen.variability/types/transforms/profile_template_instantiation_transform.hpp"
 #include "masd.dogen.variability/types/transforms/profile_repository_production_chain.hpp"
 
@@ -46,7 +45,6 @@ profile_repository_production_chain::apply(const context& ctx,
     tracing::scoped_chain_tracer stp(lg, "profile repository production chain",
         transform_id, transform_id, *ctx.tracer(), fm);
 
-    // const auto t(profile_template_hydration_transform::apply(ctx));
     const auto p(profile_template_instantiation_transform::apply(ctx, fm, pts));
     const auto r(profile_merging_transform::apply(ctx, p));
 

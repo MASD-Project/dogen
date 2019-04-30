@@ -72,7 +72,6 @@
 #include "masd.dogen.variability/types/transforms/feature_model_production_chain.hpp"
 #include "masd.dogen.variability/types/transforms/profile_repository_production_chain.hpp"
 #include "masd.dogen.variability/types/transforms/feature_template_hydration_transform.hpp"
-#include "masd.dogen.variability/types/transforms/profile_template_hydration_transform.hpp"
 #include "masd.dogen.variability/types/transforms/global_configuration_binding_transform.hpp"
 #include "masd.dogen.variability/types/transforms/feature_template_instantiation_transform.hpp"
 #include "masd.dogen.variability/types/transforms/implicit_configuration_binding_transform.hpp"
