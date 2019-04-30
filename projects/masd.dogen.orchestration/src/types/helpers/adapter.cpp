@@ -380,6 +380,9 @@ adapter::to_variability_profile_template(const coding::meta_model::location& l,
     populate_element(l, scr, ie, *r);
 
     coding::helpers::name_factory f;
+    for (const auto& p : ie.parents())
+        r->parents().push_back(to_name(l, p));
+
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name());
         ensure_not_empty(n);
