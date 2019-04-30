@@ -13,8 +13,8 @@
   },
   {
     "name": {
-      "simple": "scope",
-      "qualified": "masd.variability.scope"
+      "simple": "binding_point",
+      "qualified": "masd.variability.binding_point"
     },
     "archetype_location": {
       "kernel": "masd"
