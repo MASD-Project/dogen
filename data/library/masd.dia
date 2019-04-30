@@ -7183,7 +7183,7 @@ obtained from the copyright holder.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.labels=masd::cpp_artefact_formatter#</dia:string>
+#DOGEN masd.variability.labels=masd::csharp_artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

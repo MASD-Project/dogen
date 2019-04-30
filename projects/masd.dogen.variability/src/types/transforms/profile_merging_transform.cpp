@@ -207,8 +207,10 @@ meta_model::profile_repository profile_merging_transform::create_repository(
             const auto label_pair(std::make_pair(l, prf));
             const auto inserted(r.by_labels().insert(label_pair).second);
             if (!inserted) {
-                BOOST_LOG_SEV(lg, warn) << duplicate_label << l;
-                BOOST_THROW_EXCEPTION(transformation_error(duplicate_label + l));
+                BOOST_LOG_SEV(lg, error) << duplicate_label << l
+                                         << " Profile: " << first_pair.first;
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(duplicate_label + l));
             }
         }
     }
@@ -217,9 +219,8 @@ meta_model::profile_repository profile_merging_transform::create_repository(
 
 meta_model::profile_repository profile_merging_transform::
 apply(const context& ctx, const std::list<meta_model::profile>& profiles) {
-    tracing::scoped_transform_tracer stp(lg,
-        "profile template hydration transform", transform_id, transform_id,
-        *ctx.tracer(), profiles);
+    tracing::scoped_transform_tracer stp(lg, "profile merging transform",
+        transform_id, transform_id, *ctx.tracer(), profiles);
 
     /*
      * We create a map by profile name of those profiles and ensure

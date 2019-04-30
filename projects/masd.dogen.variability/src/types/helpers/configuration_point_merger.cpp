@@ -19,6 +19,8 @@
  *
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.utility/types/io/unordered_map_io.hpp"
+#include "masd.dogen.variability/io/meta_model/configuration_point_io.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_point_merger.hpp"
 
 namespace {
@@ -40,12 +42,15 @@ configuration_point_merger::merge(
     BOOST_LOG_SEV(lg, debug) << "Merging configurations."
                              << " lhs: " << lhs_name
                              << " rhs: " << rhs_name;
+    BOOST_LOG_SEV(lg, trace) << "lhs: " << lhs;
+    BOOST_LOG_SEV(lg, trace) << "rhs: " << lhs;
 
     std::unordered_map<std::string, meta_model::configuration_point> r(lhs);
     for (const auto& pair : rhs)
         r.insert(pair);
 
-    BOOST_LOG_SEV(lg, debug) << "Merged configurations.";
+    BOOST_LOG_SEV(lg, debug) << "Merged configurations. ";
+    BOOST_LOG_SEV(lg, trace) << "Result: " << r;
     return r;
 }
 

@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include <list>
+#include "masd.dogen.variability/types/meta_model/profile_template.hpp"
 #include "masd.dogen.variability/types/meta_model/profile_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/model_set.hpp"
 #include "masd.dogen.orchestration/types/transforms/context_fwd.hpp"
@@ -38,7 +40,9 @@ namespace masd::dogen::orchestration::transforms {
 class profile_repository_transform final {
 public:
     static variability::meta_model::profile_repository
-    apply(const context& ctx, const coding::meta_model::model_set& ms);
+    apply(const context& ctx,
+        const std::list<variability::meta_model::profile_template>& pts,
+        const coding::meta_model::model_set& ms);
 };
 
 }

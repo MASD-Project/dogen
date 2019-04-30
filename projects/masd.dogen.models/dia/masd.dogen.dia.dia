@@ -4559,7 +4559,7 @@ between the class and the slot concepts, we renamed it.#</dia:string>
 #DOGEN masd.generation.cpp.visual_studio.project.enabled=false
 #DOGEN masd.generation.cpp.visual_studio.solution.enabled=false
 #DOGEN masd.generation.csharp.enabled=false
-#DOGEN masd.variability.profile=dogen.disable_common_facets
+#DOGEN masd.variability.profile=masd.dogen.disable_common_facets
 #DOGEN masd.generation.cpp.serialization.enabled=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

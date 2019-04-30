@@ -39,13 +39,15 @@ auto lg(logger_factory(transform_id));
 
 namespace masd::dogen::variability::transforms {
 
-meta_model::profile_repository profile_repository_production_chain::
-apply(const context& ctx, const meta_model::feature_model& fm) {
+meta_model::profile_repository
+profile_repository_production_chain::apply(const context& ctx,
+    const std::list<variability::meta_model::profile_template>& pts,
+    const meta_model::feature_model& fm) {
     tracing::scoped_chain_tracer stp(lg, "profile repository production chain",
         transform_id, transform_id, *ctx.tracer(), fm);
 
-    const auto t(profile_template_hydration_transform::apply(ctx));
-    const auto p(profile_template_instantiation_transform::apply(ctx, fm, t));
+    // const auto t(profile_template_hydration_transform::apply(ctx));
+    const auto p(profile_template_instantiation_transform::apply(ctx, fm, pts));
     const auto r(profile_merging_transform::apply(ctx, p));
 
     stp.end_chain(r);

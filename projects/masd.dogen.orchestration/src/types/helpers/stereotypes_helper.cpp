@@ -103,8 +103,7 @@ static_stereotypes stereotypes_helper::from_string(const std::string& s) const {
     else if (s == stereotype_variability_profile_template)
         return static_stereotypes::variability_profile_template;
 
-    BOOST_LOG_SEV(lg, error) << "Could not convert stereotype.";
-
+    BOOST_LOG_SEV(lg, debug) << "Could not convert stereotype, assuming dynamic.";
     return static_stereotypes::invalid;
 }
 

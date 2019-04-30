@@ -70,11 +70,16 @@ apply(const context& ctx, const injection::meta_model::model_set& ms) {
      * the models.
      */
     const auto pts(profile_template_adaption_transform::apply(ctx, r));
-    const auto prp(profile_repository_transform::apply(ctx, r));
 
     /*
-     * Then we extract the configuration models from the coding model
-     * set.
+     * We then use the variability data to create a repository of all
+     * profiles.
+        */
+    const auto prp(profile_repository_transform::apply(ctx, pts, r));
+
+    /*
+     * Then we need to extract the configuration models from the
+     * coding model set.
      */
     auto cms(coding_model_set_to_configuration_model_set_transform::
         apply(ctx, r));

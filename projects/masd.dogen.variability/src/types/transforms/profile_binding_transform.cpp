@@ -107,7 +107,6 @@ void profile_binding_transform::bind(const meta_model::profile_repository& prp,
     const feature_group& fg, meta_model::configuration& cfg) {
     BOOST_LOG_SEV(lg, debug) << "Started binding profiles for configuration: "
                              << cfg.name().qualified();
-    BOOST_LOG_SEV(lg, trace) << "Original: " << cfg;
 
     /*
      * If a profile name was specified via the meta-data, it must
@@ -132,7 +131,7 @@ void profile_binding_transform::bind(const meta_model::profile_repository& prp,
                 profile.name().qualified(),
                 profile.configuration_points()));
         cfg.configuration_points(cps);
-        BOOST_LOG_SEV(lg, trace) << "After Merging profile: " << cfg;
+        BOOST_LOG_SEV(lg, trace) << "Merged profile.";
     } else
         BOOST_LOG_SEV(lg, trace) << "Profile not set in meta-data.";
 
@@ -163,7 +162,6 @@ void profile_binding_transform::bind(const meta_model::profile_repository& prp,
                 profile.name().qualified(),
                 profile.configuration_points()));
         cfg.configuration_points(cps);
-        BOOST_LOG_SEV(lg, debug) << "Merged profile: " << cfg;
     }
 
     /*
@@ -188,7 +186,6 @@ void profile_binding_transform::bind(const meta_model::profile_repository& prp,
                     profile.name().qualified(),
                     profile.configuration_points()));
             cfg.configuration_points(cps);
-            BOOST_LOG_SEV(lg, debug) << "Merged profile: " << cfg;
         }
     } else
         BOOST_LOG_SEV(lg, debug) << "Scope does not have a default profile.";

@@ -38,15 +38,18 @@ static logger lg(logger_factory(transform_id));
 
 namespace masd::dogen::orchestration::transforms {
 
-variability::meta_model::profile_repository profile_repository_transform::
-apply(const context& ctx,  const coding::meta_model::model_set& ms) {
+variability::meta_model::profile_repository
+profile_repository_transform::apply(const context& ctx,
+    const std::list<variability::meta_model::profile_template>& pts,
+
+    const coding::meta_model::model_set& ms) {
     const auto& vctx(ctx.variability_context());
-    tracing::scoped_transform_tracer stp(lg,  "profile repository transform",
+    tracing::scoped_transform_tracer stp(lg, "profile repository transform",
         transform_id, *vctx.tracer(), ms);
 
     const auto& fm(*ctx.coding_context().feature_model());
     using variability::transforms::profile_repository_production_chain;
-    const auto r(profile_repository_production_chain::apply(vctx, fm));
+    const auto r(profile_repository_production_chain::apply(vctx, pts, fm));
     stp.end_transform(r);
     return r;
 }

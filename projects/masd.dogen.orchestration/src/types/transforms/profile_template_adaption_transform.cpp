@@ -22,7 +22,6 @@
 #include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.utility/types/io/unordered_set_io.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.utility/types/string/splitter.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.variability/io/meta_model/profile_template_io.hpp"
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
@@ -229,16 +228,15 @@ adapt(const feature_group& fg,
     variability::meta_model::profile_template r;
 
     const auto sn(vpt.name().simple());
-    BOOST_LOG_SEV(lg, trace) << "Adapting: " << sn;
+    const auto qn(vpt.name().qualified().dot());
+    BOOST_LOG_SEV(lg, trace) << "Adapting: " << sn << "(" << qn << ")";
 
-    using utility::string::splitter;
-    const auto tokens(splitter::split_delimited(sn, "."));
-    r.name().simple(tokens.back());
-    r.name().qualified(sn);
+    r.name().simple(sn);
+    r.name().qualified(qn);
     r.labels(make_labels(fg, *vpt.configuration()));
 
     for (const auto& n : vpt.parents())
-        r.parents().push_back(n.simple());
+        r.parents().push_back(n.qualified().dot());
 
     for (const auto& e : vpt.entries()) {
         const auto& cfg(*e.configuration());
@@ -247,11 +245,13 @@ adapt(const feature_group& fg,
 
         variability::meta_model::configuration_point_template cpt;
         cpt.name().simple(k);
-        cpt.name().qualified(k);
         cpt.kind(make_template_kind(fg, cfg));
 
-        archetypes::location al;
+        using variability::meta_model::template_kind;
+        if (cpt.kind() == template_kind::instance)
+            cpt.name().qualified(k);
 
+        archetypes::location al;
         al.backend(archetype_location_backend(fg, cfg));
         al.facet(archetype_location_facet(fg, cfg));
         al.archetype(archetype_location_archetype(fg, cfg));
@@ -272,6 +272,7 @@ adapt(const feature_group& fg,
                                      << e.value();
             cpt.untyped_value().push_back(e.value());
         }
+        r.templates().push_back(cpt);
     }
 
     return r;
