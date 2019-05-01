@@ -43,21 +43,6 @@ const std::string transform_id("coding.transforms.stereotypes_transform");
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
-const std::string stereotype_pretty_printable("dogen::pretty_printable");
-const std::string stereotype_serializable("dogen::serializable");
-const std::string stereotype_hashable("dogen::hashable");
-const std::string stereotype_entry_point("masd::entry_point");
-const std::string stereotype_header_only("masd::cpp::header_only");
-const std::string stereotype_interface("masd::interface");
-const std::string stereotype_handcrafted("masd::handcrafted");
-const std::string stereotype_cpp_helper_formatter("masd::cpp_helper_formatter");
-const std::string stereotype_cpp_artefact_formatter(
-    "masd::cpp_artefact_formatter");
-const std::string stereotype_csharp_helper_formatter(
-    "masd::csharp_helper_formatter");
-const std::string stereotype_csharp_artefact_formatter(
-    "masd::csharp_artefact_formatter");
-
 const std::string visitor_name("visitor");
 const std::string visitor_argument_name("v");
 const std::string visitor_doc("Visitor for ");
@@ -75,22 +60,6 @@ const std::string invalid_stereotypes("Stereotypes are not valid: ");
 }
 
 namespace masd::dogen::coding::transforms {
-
-bool stereotypes_transform::
-is_stereotype_handled_externally(const std::string& s) {
-    return
-        s == stereotype_pretty_printable ||
-        s == stereotype_serializable ||
-        s == stereotype_hashable ||
-        s == stereotype_handcrafted ||
-        s == stereotype_entry_point ||
-        s == stereotype_header_only ||
-        s == stereotype_interface ||
-        s == stereotype_cpp_helper_formatter ||
-        s == stereotype_cpp_artefact_formatter ||
-        s == stereotype_csharp_helper_formatter ||
-        s == stereotype_csharp_artefact_formatter;
-}
 
 bool stereotypes_transform::
 is_element_type(const meta_model::static_stereotypes ss) {
@@ -163,22 +132,10 @@ void stereotypes_transform::transform_dynamic_stereotypes(meta_model::object& o,
     std::list<std::string> unknown_stereotypes;
     for (const auto us : o.dynamic_stereotypes()) {
         /*
-         * Exclude all stereotypes that are handled externally -
-         * i.e. profiles.
-         *
-         * FIXME: This is a massive hack; we should really ask
-         * variability for all valid profile names and exclude those
-         * instead of hard-coding them here. In addition, now that
-         * profile processing happens before we enter the coding
-         * chain, we could probably exclude profiles that were bound
-         * (or keep track of them).
-         */
-        if (is_stereotype_handled_externally(us))
-            continue;
-
-        /*
          * Attempt to process the stereotype as an object template. If
-         * it isn't then is definitely not one of ours.
+         * it isn't then is definitely not one of ours. This is
+         * because all stereotypes that have made it through are those
+         * which have not been processed as profiles.
          */
         const bool is_object_template(try_as_object_template(us, o, em));
         if (!is_object_template)
@@ -295,7 +252,8 @@ expand_visitable(meta_model::object& o, meta_model::model& em) {
         BOOST_THROW_EXCEPTION(transformation_error(visitable_child + id));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Found visitation root: " << o.name().qualified().dot();
+    BOOST_LOG_SEV(lg, debug) << "Found visitation root: "
+                             << o.name().qualified().dot();
 
     /*
      * Visitable types must have at least one leaf. We probably

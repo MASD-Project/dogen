@@ -44,13 +44,6 @@ namespace masd::dogen::coding::transforms {
 class stereotypes_transform final {
 private:
     /**
-     * @brief If true, this stereotype is part of the list of
-     * stereotypes that are valid but require no action from this
-     * expander; it is someone else's problem.
-     */
-    static bool is_stereotype_handled_externally(const std::string& s);
-
-    /**
      * @brief Returns true if the well-known stereotype denotes a coding
      * element type, false otherwise.
      */
