@@ -483,7 +483,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.labels": "masd::cpp_implementation_only"
+        "masd.variability.labels": "masd::cpp::implementation_only"
       },
       "fallback_element_type": "masd::object",
       "attributes": [

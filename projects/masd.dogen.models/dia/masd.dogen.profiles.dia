@@ -2898,7 +2898,7 @@ default profile.
         <dia:string>#This element has only a types implementation file.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=masd::cpp_implementation_only#</dia:string>
+#DOGEN masd.variability.labels=masd::cpp::implementation_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
