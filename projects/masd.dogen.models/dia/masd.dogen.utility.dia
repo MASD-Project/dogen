@@ -106,7 +106,7 @@
         <dia:point val="28,-22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="27.95,-22.05;55.13,-4.25"/>
+        <dia:rectangle val="27.95,-22.05;56.67,-3.45"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -115,10 +115,10 @@
         <dia:point val="28,-22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.080000000000002"/>
+        <dia:real val="28.620000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="17.700000000000003"/>
+        <dia:real val="18.500000000000004"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -178,13 +178,13 @@
         <dia:point val="88,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="87.95,33.95;98.56,37.05"/>
+        <dia:rectangle val="87.95,33.95;98.175,37.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="88,34"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -193,7 +193,7 @@
         <dia:string>#invalid_enum_value#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -289,13 +289,13 @@
         <dia:point val="100,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.95,33.95;110.56,37.05"/>
+        <dia:rectangle val="99.95,33.95;110.175,37.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="100,34"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -304,7 +304,7 @@
         <dia:string>#utility_exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -438,13 +438,13 @@
         <dia:point val="88,68"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="87.95,67.95;96.635,71.05"/>
+        <dia:rectangle val="87.95,67.95;100.485,71.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="88,68"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -453,7 +453,7 @@
         <dia:string>#file#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -546,13 +546,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O6">
       <dia:attribute name="obj_pos">
-        <dia:point val="99,68"/>
+        <dia:point val="105,68"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="98.95,67.95;106.865,71.05"/>
+        <dia:rectangle val="104.95,67.95;112.865,71.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="99,68"/>
+        <dia:point val="105,68"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="7.8150000000000004"/>
@@ -657,13 +657,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O7">
       <dia:attribute name="obj_pos">
-        <dia:point val="99,73"/>
+        <dia:point val="105,73"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="98.95,72.95;106.865,76.05"/>
+        <dia:rectangle val="104.95,72.95;112.865,76.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="99,73"/>
+        <dia:point val="105,73"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="7.8150000000000004"/>
@@ -771,13 +771,13 @@
         <dia:point val="88,73"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="87.95,72.95;96.635,76.05"/>
+        <dia:rectangle val="87.95,72.95;100.485,76.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="88,73"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -786,7 +786,7 @@
         <dia:string>#path#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -920,13 +920,13 @@
         <dia:point val="59,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.95,33.95;69.56,37.05"/>
+        <dia:rectangle val="58.95,33.95;69.175,37.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="59,34"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -935,7 +935,7 @@
         <dia:string>#combine#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1031,13 +1031,13 @@
         <dia:point val="72,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="71.95,33.95;82.56,37.05"/>
+        <dia:rectangle val="71.95,33.95;82.175,37.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="72,34"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -1046,7 +1046,7 @@
         <dia:string>#list_hash#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1180,13 +1180,13 @@
         <dia:point val="30,0"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.95,-0.05;40.56,3.05"/>
+        <dia:rectangle val="29.95,-0.05;40.175,3.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="30,0"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -1195,7 +1195,7 @@
         <dia:string>#array_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1291,13 +1291,13 @@
         <dia:point val="42.49,0"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.44,-0.05;53.05,3.05"/>
+        <dia:rectangle val="42.44,-0.05;52.665,3.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="42.49,0"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -1306,7 +1306,7 @@
         <dia:string>#forward_list_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1402,13 +1402,13 @@
         <dia:point val="30,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.95,4.95;40.56,8.05"/>
+        <dia:rectangle val="29.95,4.95;40.175,8.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="30,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -1417,7 +1417,7 @@
         <dia:string>#jsonify_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1513,13 +1513,13 @@
         <dia:point val="42.49,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.44,4.95;53.05,8.05"/>
+        <dia:rectangle val="42.44,4.95;52.665,8.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="42.49,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -1528,7 +1528,7 @@
         <dia:string>#list_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1624,13 +1624,13 @@
         <dia:point val="30,10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.95,9.95;40.56,13.05"/>
+        <dia:rectangle val="29.95,9.95;40.175,13.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="30,10"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -1639,7 +1639,7 @@
         <dia:string>#map_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1735,13 +1735,13 @@
         <dia:point val="42.49,10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.44,9.95;53.05,13.05"/>
+        <dia:rectangle val="42.44,9.95;52.665,13.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="42.49,10"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -1750,7 +1750,7 @@
         <dia:string>#memory_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1846,13 +1846,13 @@
         <dia:point val="30,15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.95,14.95;40.56,18.05"/>
+        <dia:rectangle val="29.95,14.95;40.175,18.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="30,15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -1861,7 +1861,7 @@
         <dia:string>#optional_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1957,13 +1957,13 @@
         <dia:point val="42.49,15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.44,14.95;53.05,18.05"/>
+        <dia:rectangle val="42.44,14.95;52.665,18.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="42.49,15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -1972,7 +1972,7 @@
         <dia:string>#pair_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2068,13 +2068,13 @@
         <dia:point val="30,20"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.95,19.95;40.56,23.05"/>
+        <dia:rectangle val="29.95,19.95;40.175,23.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="30,20"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -2083,7 +2083,7 @@
         <dia:string>#set_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2179,13 +2179,13 @@
         <dia:point val="42.49,20"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.44,19.95;53.05,23.05"/>
+        <dia:rectangle val="42.44,19.95;52.665,23.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="42.49,20"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -2194,7 +2194,7 @@
         <dia:string>#shared_ptr_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2290,13 +2290,13 @@
         <dia:point val="30,25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.95,24.95;40.56,28.05"/>
+        <dia:rectangle val="29.95,24.95;40.175,28.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="30,25"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -2305,7 +2305,7 @@
         <dia:string>#typeindex_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2401,13 +2401,13 @@
         <dia:point val="42.49,25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.44,24.95;53.05,28.05"/>
+        <dia:rectangle val="42.44,24.95;52.665,28.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="42.49,25"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -2416,7 +2416,7 @@
         <dia:string>#unordered_map_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2512,13 +2512,13 @@
         <dia:point val="30,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.95,29.95;40.56,33.05"/>
+        <dia:rectangle val="29.95,29.95;40.175,33.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="30,30"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -2527,7 +2527,7 @@
         <dia:string>#unordered_set_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2623,13 +2623,13 @@
         <dia:point val="42.49,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.44,29.95;53.05,33.05"/>
+        <dia:rectangle val="42.44,29.95;52.665,33.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="42.49,30"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -2638,7 +2638,7 @@
         <dia:string>#vector_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2769,16 +2769,16 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O28">
       <dia:attribute name="obj_pos">
-        <dia:point val="36,75"/>
+        <dia:point val="36,73"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="35.95,74.95;44.635,78.05"/>
+        <dia:rectangle val="35.95,72.95;48.485,76.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="36,75"/>
+        <dia:point val="36,73"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -2787,7 +2787,7 @@
         <dia:string>#logger#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2880,13 +2880,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O29">
       <dia:attribute name="obj_pos">
-        <dia:point val="37,52"/>
+        <dia:point val="39,52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="36.95,51.95;53.335,56.45"/>
+        <dia:rectangle val="38.95,51.95;55.335,56.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="37,52"/>
+        <dia:point val="39,52"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.285"/>
@@ -2898,7 +2898,7 @@
         <dia:string>#lifecycle_manager#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3088,7 +3088,7 @@
         <dia:string>#scoped_lifecycle_manager#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3230,16 +3230,16 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O31">
       <dia:attribute name="obj_pos">
-        <dia:point val="30,63"/>
+        <dia:point val="30,62"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.95,62.95;38.635,66.05"/>
+        <dia:rectangle val="29.95,61.95;42.485,65.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="30,63"/>
+        <dia:point val="30,62"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -3248,7 +3248,7 @@
         <dia:string>#severity_level#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3382,13 +3382,13 @@
         <dia:point val="59,0"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.95,-0.05;67.635,3.05"/>
+        <dia:rectangle val="58.95,-0.05;71.485,3.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="59,0"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -3397,7 +3397,7 @@
         <dia:string>#archive_types#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3490,16 +3490,16 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O34">
       <dia:attribute name="obj_pos">
-        <dia:point val="71,0"/>
+        <dia:point val="73,0"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="70.95,-0.05;81.56,3.05"/>
+        <dia:rectangle val="72.95,-0.05;83.175,3.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="71,0"/>
+        <dia:point val="73,0"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -3508,7 +3508,7 @@
         <dia:string>#xml_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3604,13 +3604,13 @@
         <dia:point val="59,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.95,4.95;69.56,8.05"/>
+        <dia:rectangle val="58.95,4.95;69.175,8.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="59,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -3619,7 +3619,7 @@
         <dia:string>#path#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3753,13 +3753,13 @@
         <dia:point val="59,17"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.95,16.95;67.635,20.05"/>
+        <dia:rectangle val="58.95,16.95;71.485,20.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="59,17"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -3768,7 +3768,7 @@
         <dia:string>#splitter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3902,13 +3902,13 @@
         <dia:point val="88,0"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="87.95,-0.05;96.635,3.05"/>
+        <dia:rectangle val="87.95,-0.05;100.485,3.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="88,0"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -3917,7 +3917,7 @@
         <dia:string>#asserter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4013,13 +4013,13 @@
         <dia:point val="103,0"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="102.95,-0.05;113.56,3.05"/>
+        <dia:rectangle val="102.95,-0.05;115.485,3.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="103,0"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4028,7 +4028,7 @@
         <dia:string>#bytewise_file_asserter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4124,13 +4124,13 @@
         <dia:point val="88,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="87.95,4.95;98.56,8.05"/>
+        <dia:rectangle val="87.95,4.95;98.175,8.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="88,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4139,7 +4139,7 @@
         <dia:string>#file_asserter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4235,13 +4235,13 @@
         <dia:point val="88,10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="87.95,9.95;96.635,13.05"/>
+        <dia:rectangle val="87.95,9.95;100.485,13.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="88,10"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4250,7 +4250,7 @@
         <dia:string>#logging#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4361,7 +4361,7 @@
         <dia:string>#xml_serialization_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4457,13 +4457,13 @@
         <dia:point val="103,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="102.95,4.95;113.56,8.05"/>
+        <dia:rectangle val="102.95,4.95;113.175,8.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="103,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4472,7 +4472,7 @@
         <dia:string>#exception_checkers#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4568,13 +4568,13 @@
         <dia:point val="103,10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="102.95,9.95;111.635,13.05"/>
+        <dia:rectangle val="102.95,9.95;115.485,13.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="103,10"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4583,7 +4583,7 @@
         <dia:string>#fixture#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4679,13 +4679,13 @@
         <dia:point val="103,15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="102.95,14.95;113.56,18.05"/>
+        <dia:rectangle val="102.95,14.95;113.175,18.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="103,15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4694,7 +4694,7 @@
         <dia:string>#macros#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4828,13 +4828,13 @@
         <dia:point val="120,0"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="119.95,-0.05;128.635,3.05"/>
+        <dia:rectangle val="119.95,-0.05;132.485,3.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="120,0"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4843,7 +4843,7 @@
         <dia:string>#filesystem_tests#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4939,13 +4939,13 @@
         <dia:point val="135,0"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="134.95,-0.05;145.56,3.05"/>
+        <dia:rectangle val="134.95,-0.05;145.175,3.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="135,0"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4954,7 +4954,7 @@
         <dia:string>#generate_container#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5050,13 +5050,13 @@
         <dia:point val="120,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="119.95,4.95;130.56,8.05"/>
+        <dia:rectangle val="119.95,4.95;130.175,8.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="120,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5065,7 +5065,7 @@
         <dia:string>#generator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5161,13 +5161,13 @@
         <dia:point val="135,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="134.95,4.95;143.635,8.05"/>
+        <dia:rectangle val="134.95,4.95;147.485,8.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="135,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5176,7 +5176,7 @@
         <dia:string>#injection_dia#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5272,13 +5272,13 @@
         <dia:point val="120,10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="119.95,9.95;128.635,13.05"/>
+        <dia:rectangle val="119.95,9.95;132.485,13.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="120,10"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5287,7 +5287,7 @@
         <dia:string>#injection_json#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5383,13 +5383,13 @@
         <dia:point val="135,10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="134.95,9.95;143.635,13.05"/>
+        <dia:rectangle val="134.95,9.95;147.485,13.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="135,10"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5398,7 +5398,7 @@
         <dia:string>#northwind#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5494,13 +5494,13 @@
         <dia:point val="120,15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="119.95,14.95;128.635,18.05"/>
+        <dia:rectangle val="119.95,14.95;132.485,18.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="120,15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5509,7 +5509,7 @@
         <dia:string>#resolver#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5605,13 +5605,13 @@
         <dia:point val="120,20"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="119.95,19.95;130.56,23.05"/>
+        <dia:rectangle val="119.95,19.95;130.175,23.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="120,20"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5620,7 +5620,7 @@
         <dia:string>#sequence#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5716,13 +5716,13 @@
         <dia:point val="120,25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="119.95,24.95;128.635,28.05"/>
+        <dia:rectangle val="119.95,24.95;132.485,28.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="120,25"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5731,7 +5731,7 @@
         <dia:string>#tds_test_good#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5827,13 +5827,13 @@
         <dia:point val="120,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="119.95,29.95;130.56,33.05"/>
+        <dia:rectangle val="119.95,29.95;130.175,33.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="120,30"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5842,7 +5842,7 @@
         <dia:string>#test_data#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5938,13 +5938,13 @@
         <dia:point val="135,20"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="134.95,19.95;144.173,23.05"/>
+        <dia:rectangle val="134.95,19.95;147.485,23.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="135,20"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.1224999999999987"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5953,7 +5953,7 @@
         <dia:string>#validating_resolver#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6049,13 +6049,13 @@
         <dia:point val="120,35"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="119.95,34.95;128.635,38.05"/>
+        <dia:rectangle val="119.95,34.95;132.485,38.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="120,35"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -6064,7 +6064,7 @@
         <dia:string>#xml_reader#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6198,13 +6198,13 @@
         <dia:point val="88,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="87.95,48.95;98.56,52.05"/>
+        <dia:rectangle val="87.95,48.95;98.175,52.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="88,49"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -6213,7 +6213,7 @@
         <dia:string>#exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6309,13 +6309,13 @@
         <dia:point val="102,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="101.95,48.95;112.56,52.05"/>
+        <dia:rectangle val="101.95,48.95;112.175,52.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="102,49"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -6324,7 +6324,7 @@
         <dia:string>#node_types#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#masd::cpp_header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6420,13 +6420,13 @@
         <dia:point val="88,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="87.95,53.95;96.635,57.05"/>
+        <dia:rectangle val="87.95,53.95;100.485,57.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="88,54"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -6435,7 +6435,7 @@
         <dia:string>#node_types_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6531,13 +6531,13 @@
         <dia:point val="102,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="101.95,53.95;110.635,57.05"/>
+        <dia:rectangle val="101.95,53.95;114.485,57.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="102,54"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -6546,7 +6546,7 @@
         <dia:string>#text_reader#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6642,13 +6642,13 @@
         <dia:point val="88,59"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="87.95,58.95;96.635,62.05"/>
+        <dia:rectangle val="87.95,58.95;100.485,62.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="88,59"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -6657,7 +6657,7 @@
         <dia:string>#text_reader_io#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6750,13 +6750,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O66">
       <dia:attribute name="obj_pos">
-        <dia:point val="43,63"/>
+        <dia:point val="46,62"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.95,62.95;59.72,69.05"/>
+        <dia:rectangle val="45.95,61.95;62.72,68.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="43,63"/>
+        <dia:point val="46,62"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.669999999999998"/>
@@ -6994,19 +6994,19 @@ If empty, file logging is disabled.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="45.1425,56.4"/>
+        <dia:point val="47.1425,56.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="44.3925,55.65;51.535,63.8"/>
+        <dia:rectangle val="46.3925,55.65;54.535,62.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="45.1425,56.4"/>
-        <dia:point val="45.1425,60"/>
-        <dia:point val="51.335,60"/>
-        <dia:point val="51.335,63"/>
+        <dia:point val="47.1425,56.4"/>
+        <dia:point val="47.1425,60"/>
+        <dia:point val="54.335,60"/>
+        <dia:point val="54.335,62"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7069,7 +7069,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:point val="71.03,52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.0925,48.2;71.78,52.8"/>
+        <dia:rectangle val="47.0925,48.2;71.78,52.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7077,8 +7077,8 @@ If empty, file logging is disabled.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="71.03,52"/>
         <dia:point val="71.03,49"/>
-        <dia:point val="45.1425,49"/>
-        <dia:point val="45.1425,52"/>
+        <dia:point val="47.1425,49"/>
+        <dia:point val="47.1425,52"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7102,13 +7102,13 @@ If empty, file logging is disabled.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O69">
       <dia:attribute name="obj_pos">
-        <dia:point val="64,75"/>
+        <dia:point val="64,73"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="63.95,74.95;77.81,78.05"/>
+        <dia:rectangle val="63.95,72.95;77.81,76.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="64,75"/>
+        <dia:point val="64,73"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.76"/>
@@ -7215,13 +7215,13 @@ If empty, file logging is disabled.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O70">
       <dia:attribute name="obj_pos">
-        <dia:point val="64,63"/>
+        <dia:point val="66,62"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="63.95,62.95;79.565,66.65"/>
+        <dia:rectangle val="65.95,61.95;81.565,65.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="64,63"/>
+        <dia:point val="66,62"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -7233,7 +7233,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:string>#logging_configuration_validator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7411,19 +7411,19 @@ If empty, file logging is disabled.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="79.515,66.6"/>
+        <dia:point val="81.515,65.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="70.83,65.85;80.265,75.8"/>
+        <dia:rectangle val="70.83,64.85;82.265,73.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="79.515,66.6"/>
-        <dia:point val="79.515,72"/>
-        <dia:point val="70.88,72"/>
-        <dia:point val="70.88,75"/>
+        <dia:point val="81.515,65.6"/>
+        <dia:point val="81.515,70"/>
+        <dia:point val="70.88,70"/>
+        <dia:point val="70.88,73"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7483,19 +7483,19 @@ If empty, file logging is disabled.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="64,66.6"/>
+        <dia:point val="66,65.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.285,65.85;64.75,72.05"/>
+        <dia:rectangle val="54.285,64.85;66.75,70.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="64,66.6"/>
-        <dia:point val="64,72"/>
-        <dia:point val="51.335,72"/>
-        <dia:point val="51.335,69.0502"/>
+        <dia:point val="66,65.6"/>
+        <dia:point val="66,70"/>
+        <dia:point val="54.335,70"/>
+        <dia:point val="54.335,68.0499"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7554,19 +7554,19 @@ If empty, file logging is disabled.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="53.285,56.4"/>
+        <dia:point val="55.285,56.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.535,55.65;71.9575,63.8"/>
+        <dia:rectangle val="54.535,55.65;73.9575,62.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="53.285,56.4"/>
-        <dia:point val="53.285,60"/>
-        <dia:point val="71.7575,60"/>
-        <dia:point val="71.7575,63"/>
+        <dia:point val="55.285,56.4"/>
+        <dia:point val="55.285,60"/>
+        <dia:point val="73.7575,60"/>
+        <dia:point val="73.7575,62"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7626,19 +7626,19 @@ If empty, file logging is disabled.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="40.2925,75"/>
+        <dia:point val="42.2175,73"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="34.2425,65.95;41.0425,75.8"/>
+        <dia:rectangle val="36.1675,64.95;42.9675,73.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="40.2925,75"/>
-        <dia:point val="40.2925,72"/>
-        <dia:point val="34.2925,72"/>
-        <dia:point val="34.2925,66"/>
+        <dia:point val="42.2175,73"/>
+        <dia:point val="42.2175,70"/>
+        <dia:point val="36.2175,70"/>
+        <dia:point val="36.2175,65"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7665,13 +7665,13 @@ If empty, file logging is disabled.#</dia:string>
         <dia:point val="135,25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="134.95,24.95;143.698,28.05"/>
+        <dia:rectangle val="134.95,24.95;147.485,28.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="135,25"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.6474999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -7680,7 +7680,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:string>#dogen_generation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7776,13 +7776,13 @@ If empty, file logging is disabled.#</dia:string>
         <dia:point val="135,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="134.95,29.95;146.55,33.05"/>
+        <dia:rectangle val="134.95,29.95;147.485,33.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="135,30"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.5"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -7791,7 +7791,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:string>#cpp_ref_impl_generation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7902,7 +7902,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:string>#csharp_ref_impl_generation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -8273,7 +8273,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:string>#variable_reader#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -8571,19 +8571,19 @@ If empty, file logging is disabled.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="37,56.4"/>
+        <dia:point val="39,56.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="34.2425,55.65;37.75,63.8"/>
+        <dia:rectangle val="36.1675,55.65;39.75,62.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="37,56.4"/>
-        <dia:point val="37,60"/>
-        <dia:point val="34.2925,60"/>
-        <dia:point val="34.2925,63"/>
+        <dia:point val="39,56.4"/>
+        <dia:point val="39,60"/>
+        <dia:point val="36.2175,60"/>
+        <dia:point val="36.2175,62"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -8645,13 +8645,13 @@ If empty, file logging is disabled.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O85">
       <dia:attribute name="obj_pos">
-        <dia:point val="29,85"/>
+        <dia:point val="30,86"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.95,84.95;37.075,88.05"/>
+        <dia:rectangle val="29.95,85.95;38.075,89.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="29,85"/>
+        <dia:point val="30,86"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.0250000000000004"/>
@@ -8756,13 +8756,13 @@ If empty, file logging is disabled.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O86">
       <dia:attribute name="obj_pos">
-        <dia:point val="42,85"/>
+        <dia:point val="42,86"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="41.95,84.95;50.635,89.45"/>
+        <dia:rectangle val="41.95,85.95;50.635,90.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="42,85"/>
+        <dia:point val="42,86"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.5849999999999991"/>
@@ -8914,13 +8914,13 @@ If empty, file logging is disabled.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O87">
       <dia:attribute name="obj_pos">
-        <dia:point val="55,85"/>
+        <dia:point val="55,86"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.95,84.95;63.635,91.05"/>
+        <dia:rectangle val="54.95,85.95;63.635,92.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="55,85"/>
+        <dia:point val="55,86"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.5849999999999991"/>
@@ -9136,7 +9136,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:string>#utility_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -9399,16 +9399,16 @@ If empty, file logging is disabled.#</dia:string>
         <dia:point val="40,95"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.25,89.35;46.4925,95.8"/>
+        <dia:rectangle val="39.25,90.35;46.4925,95.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="40,95"/>
-        <dia:point val="40,92"/>
-        <dia:point val="46.2925,92"/>
-        <dia:point val="46.2925,89.4"/>
+        <dia:point val="40,93"/>
+        <dia:point val="46.2925,93"/>
+        <dia:point val="46.2925,90.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -9471,16 +9471,16 @@ If empty, file logging is disabled.#</dia:string>
         <dia:point val="65.525,95"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="59.2425,90.95;66.275,95.8"/>
+        <dia:rectangle val="59.2425,91.95;66.275,95.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="65.525,95"/>
-        <dia:point val="65.525,92.65"/>
-        <dia:point val="59.2925,92.65"/>
-        <dia:point val="59.2925,91"/>
+        <dia:point val="65.525,93.15"/>
+        <dia:point val="59.2925,93.15"/>
+        <dia:point val="59.2925,92"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -9522,7 +9522,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:string>#differ#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
