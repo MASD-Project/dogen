@@ -4927,13 +4927,13 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:point val="-87,-35"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-87.05,-35.75;-73.175,-31.95"/>
+        <dia:rectangle val="-87.05,-35.75;-69.87,-31.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-87,-35"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.129999999999999"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4942,7 +4942,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:string>#elements_traversal#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7381,13 +7381,13 @@ names in coding element
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O54">
       <dia:attribute name="obj_pos">
-        <dia:point val="-278,-44"/>
+        <dia:point val="-276,-52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-278.05,-44.05;-259.74,-37.15"/>
+        <dia:rectangle val="-276.05,-52.05;-257.74,-45.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-278,-44"/>
+        <dia:point val="-276,-52"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.210000000000001"/>
@@ -7399,7 +7399,7 @@ names in coding element
         <dia:string>#traits#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -10570,7 +10570,7 @@ model.#</dia:string>
         <dia:string>#context#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.generation.cpp.types.forward_declarations.enabled=true
@@ -10782,7 +10782,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#pre_assembly_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -10959,7 +10959,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#model_production_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -11136,7 +11136,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#assembly_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -11330,7 +11330,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#post_assembly_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -11507,7 +11507,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#merge_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -11667,7 +11667,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#modules_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -11844,7 +11844,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#origin_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -12021,7 +12021,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#technical_space_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -12414,7 +12414,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#type_params_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -12663,7 +12663,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#parsing_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -12840,7 +12840,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#primitives_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -13071,7 +13071,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#generalization_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -13248,7 +13248,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#stereotypes_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -13425,7 +13425,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#object_templates_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -13602,7 +13602,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#global_module_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -13779,7 +13779,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#orm_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -13956,7 +13956,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#resolver_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -14133,7 +14133,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#attributes_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -14310,7 +14310,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#associations_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -14814,7 +14814,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#enumerations_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -15305,7 +15305,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#decomposer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -15522,13 +15522,13 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:point val="-46,38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,37.95;-34.3825,41.65"/>
+        <dia:rectangle val="-46.05,37.95;-33.515,41.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-46,38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.567499999999999"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -15537,7 +15537,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#post_assembly_validator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -15937,13 +15937,13 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:point val="-28,38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-28.05,37.95;-16.8525,41.65"/>
+        <dia:rectangle val="-28.05,37.95;-15.515,41.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-28,38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.0975"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -15952,7 +15952,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#pre_assembly_validator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -16522,7 +16522,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#indexer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -16898,7 +16898,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#resolver#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -17612,7 +17612,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:string>#mapper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -18663,7 +18663,7 @@ space to another.#</dia:string>
         <dia:string>#mapping_set_repository_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -18895,7 +18895,7 @@ space to another.#</dia:string>
         <dia:string>#mappings_validator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -19674,7 +19674,7 @@ space.#</dia:string>
         <dia:string>#mappings_hydrator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -20233,7 +20233,7 @@ space.#</dia:string>
         <dia:string>#mapping_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -20610,7 +20610,7 @@ space.#</dia:string>
         <dia:string>#pretty_printer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -21421,7 +21421,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#string_processor#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -21692,7 +21692,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#name_tree_builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -22512,7 +22512,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#legacy_name_tree_parser#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -22864,13 +22864,13 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="59,59"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.95,58.95;69.87,62.05"/>
+        <dia:rectangle val="58.95,58.95;71.485,62.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="59,59"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.82"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -22879,7 +22879,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#new_name_tree_parser#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -23191,17 +23191,17 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="64.41,62.0492"/>
+        <dia:point val="65.0593,62.0492"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="63.66,61.2992;73.1075,65.8"/>
+        <dia:rectangle val="64.237,61.2269;73.1075,65.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="64.41,62.0492"/>
-        <dia:point val="64.41,64"/>
+        <dia:point val="65.0593,62.0492"/>
+        <dia:point val="64.8601,64"/>
         <dia:point val="72.9075,64"/>
         <dia:point val="72.9075,65"/>
       </dia:attribute>
@@ -23245,7 +23245,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#fully_qualified_representation_builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -23548,7 +23548,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#name_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -23886,7 +23886,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#name_builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -24610,7 +24610,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#name_flattener#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -25211,7 +25211,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#meta_naming_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -25388,7 +25388,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#meta_name_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -25800,7 +25800,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#location_builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -27430,7 +27430,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#extraction_properties_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -29993,7 +29993,7 @@ rebuilds for no good reason.#</dia:string>
         <dia:point val="-190.74,0"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-200.213,-0.75;-189.99,5.8"/>
+        <dia:rectangle val="-200.212,-0.75;-189.99,5.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30723,7 +30723,7 @@ as a modeline.#</dia:string>
         <dia:string>#modelines_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -31831,7 +31831,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:string>#containment_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
