@@ -31,6 +31,7 @@
         {
           "name": "masd.generation.decoration.enabled",
           "type": "",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "formatters",
             "masd.variability.template_kind": "instance"
@@ -39,6 +40,7 @@
         {
           "name": "masd.generation.decoration.licence_name",
           "type": "",
+          "value": "masd.gpl_v3",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "formatters",
             "masd.variability.template_kind": "instance"
@@ -47,6 +49,7 @@
         {
           "name": "masd.generation.decoration.modeline_group_name",
           "type": "",
+          "value": "masd.emacs",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "formatters",
             "masd.variability.template_kind": "instance"
@@ -77,6 +80,7 @@
         {
           "name": "masd.generation.cpp.cmake.enabled",
           "type": "",
+          "value": "false",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -86,6 +90,7 @@
         {
           "name": "masd.generation.cpp.odb.enabled",
           "type": "",
+          "value": "false",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -95,6 +100,7 @@
         {
           "name": "masd.generation.cpp.hash.enabled",
           "type": "",
+          "value": "false",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -104,6 +110,7 @@
         {
           "name": "masd.generation.cpp.serialization.enabled",
           "type": "",
+          "value": "false",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -113,6 +120,7 @@
         {
           "name": "masd.generation.cpp.tests.cmakelists.enabled",
           "type": "",
+          "value": "false",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -122,6 +130,7 @@
         {
           "name": "masd.generation.cpp.tests.main.enabled",
           "type": "",
+          "value": "false",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -131,6 +140,7 @@
         {
           "name": "masd.generation.cpp.tests.enabled",
           "type": "",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -140,6 +150,7 @@
         {
           "name": "masd.generation.cpp.test_data.enabled",
           "type": "",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -199,6 +210,7 @@
         {
           "name": "masd.generation.cpp.types.enabled",
           "type": "",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -225,6 +237,7 @@
         {
           "name": "masd.generation.cpp.io.enabled",
           "type": "",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -251,6 +264,7 @@
         {
           "name": "masd.generation.cpp.hash.enabled",
           "type": "",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -276,6 +290,7 @@
         {
           "name": "masd.generation.cpp.serialization.enabled",
           "type": "",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -301,6 +316,7 @@
         {
           "name": "enabled",
           "type": "",
+          "value": "false",
           "tagged_values": {
             "masd.variability.template_kind": "facet_template",
             "masd.variability.archetype_location.kernel": "masd",
@@ -324,7 +340,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "composable::hand_pretty_printable",
+      "name": "composable::handcrafted_pretty_printable",
       "parents": [
         "composable::handcrafted"
       ],
@@ -340,6 +356,7 @@
         {
           "name": "masd.generation.cpp.io.enabled",
           "type": "",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -349,6 +366,7 @@
         {
           "name": "masd.generation.cpp.io.overwrite",
           "type": "",
+          "value": "false",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -358,7 +376,7 @@
       ]
     },
     {
-      "name": "composable::hand_typeable",
+      "name": "composable::handcrafted_typeable",
       "parents": [
         "composable::handcrafted"
       ],
@@ -375,6 +393,7 @@
         {
           "name": "masd.generation.cpp.types.enabled",
           "type": "",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -384,6 +403,7 @@
         {
           "name": "masd.generation.cpp.types.overwrite",
           "type": "",
+          "value": "false",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -393,6 +413,7 @@
         {
           "name": "masd.generation.cpp.types.forward_declarations.enabled",
           "type": "",
+          "value": "false",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -404,7 +425,7 @@
     {
       "name": "composable::header_only",
       "parents": [
-        "composable::hand_typeable"
+        "composable::handcrafted_typeable"
       ],
       "documentation": "This element has only a types header file.\n",
       "stereotypes": [
@@ -419,6 +440,7 @@
         {
           "name": "masd.generation.cpp.types.class_implementation.enabled",
           "type": "",
+          "value": "false",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -441,6 +463,7 @@
         {
           "name": "masd.generalization.is_final",
           "type": "",
+          "value": "false",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -452,7 +475,7 @@
     {
       "name": "composable::implementation_only",
       "parents": [
-        "composable::hand_typeable"
+        "composable::handcrafted_typeable"
       ],
       "documentation": "This element has only a types implementation file.\n",
       "stereotypes": [
@@ -467,6 +490,7 @@
         {
           "name": "masd.generation.cpp.types.class_header.enabled",
           "type": "",
+          "value": "false",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -476,6 +500,7 @@
         {
           "name": "masd.generation.cpp.types.forward_declarations.enabled",
           "type": "",
+          "value": "false",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -485,6 +510,7 @@
         {
           "name": "masd.generation.cpp.types.class_implementation.enabled",
           "type": "",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -496,7 +522,7 @@
     {
       "name": "composable::cpp_artefact_formatter",
       "parents": [
-        "composable::hand_typeable"
+        "composable::handcrafted_typeable"
       ],
       "stereotypes": [
         "masd::variability::profile_template"
@@ -510,6 +536,7 @@
         {
           "name": "masd.generalization.parent",
           "type": "",
+          "value": "formatters::artefact_formatter_interface",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance"
@@ -518,6 +545,7 @@
         {
           "name": "masd.generation.cpp.types.class_header.formatting_style",
           "type": "",
+          "value": "wale",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -527,6 +555,7 @@
         {
           "name": "masd.generation.cpp.types.class_header.formatting_input",
           "type": "",
+          "value": "cpp_artefact_formatter_header.wale",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -536,6 +565,7 @@
         {
           "name": "masd.generation.cpp.types.class_header.overwrite",
           "type": "",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -545,6 +575,7 @@
         {
           "name": "masd.generation.cpp.types.class_implementation.formatting_style",
           "type": "",
+          "value": "stitch",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -554,6 +585,7 @@
         {
           "name": "masd.generation.cpp.types.class_implementation.overwrite",
           "type": "",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -565,7 +597,7 @@
     {
       "name": "composable::csharp_artefact_formatter",
       "parents": [
-        "composable::hand_typeable"
+        "composable::handcrafted_typeable"
       ],
       "stereotypes": [
         "masd::variability::profile_template"
@@ -579,6 +611,7 @@
         {
           "name": "masd.generalization.parent",
           "type": "",
+          "value": "formatters::artefact_formatter_interface",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance"
@@ -587,6 +620,7 @@
         {
           "name": "masd.generation.cpp.types.class_header.formatting_style",
           "type": "",
+          "value": "wale",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -596,6 +630,7 @@
         {
           "name": "masd.generation.cpp.types.class_header.formatting_input",
           "type": "",
+          "value": "csharp_artefact_formatter_header.wale",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -605,6 +640,7 @@
         {
           "name": "masd.generation.cpp.types.class_header.overwrite",
           "type": "",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -614,6 +650,7 @@
         {
           "name": "masd.generation.cpp.types.class_implementation.formatting_style",
           "type": "",
+          "value": "stitch",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -623,6 +660,7 @@
         {
           "name": "masd.generation.cpp.types.class_implementation.overwrite",
           "type": "",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -634,7 +672,7 @@
     {
       "name": "composable::cpp_helper_formatter",
       "parents": [
-        "composable::hand_typeable"
+        "composable::handcrafted_typeable"
       ],
       "stereotypes": [
         "masd::variability::profile_template"
@@ -648,6 +686,7 @@
         {
           "name": "masd.generalization.parent",
           "type": "",
+          "value": "formatters::helper_formatter_interface",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance"
@@ -656,6 +695,7 @@
         {
           "name": "masd.generation.cpp.types.class_header.formatting_style",
           "type": "",
+          "value": "wale",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -665,6 +705,7 @@
         {
           "name": "masd.generation.cpp.types.class_header.formatting_input",
           "type": "",
+          "value": "cpp_helper_formatter_header.wale",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -674,6 +715,7 @@
         {
           "name": "masd.generation.cpp.types.class_header.overwrite",
           "type": "",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -683,6 +725,7 @@
         {
           "name": "masd.generation.cpp.types.class_implementation.formatting_style",
           "type": "",
+          "value": "stitch",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -692,6 +735,7 @@
         {
           "name": "masd.generation.cpp.types.class_implementation.overwrite",
           "type": "",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -703,7 +747,7 @@
     {
       "name": "composable::csharp_helper_formatter",
       "parents": [
-        "composable::hand_typeable"
+        "composable::handcrafted_typeable"
       ],
       "stereotypes": [
         "masd::variability::profile_template"
@@ -717,6 +761,7 @@
         {
           "name": "masd.generalization.parent",
           "type": "",
+          "value": "formatters::helper_formatter_interface",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance"
@@ -725,6 +770,7 @@
         {
           "name": "masd.generation.cpp.types.class_header.formatting_style",
           "type": "",
+          "value": "wale",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -734,6 +780,7 @@
         {
           "name": "masd.generation.cpp.types.class_header.formatting_input",
           "type": "",
+          "value": "csharp_helper_formatter_header.wale",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -743,6 +790,7 @@
         {
           "name": "masd.generation.cpp.types.class_header.overwrite",
           "type": "",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -752,6 +800,7 @@
         {
           "name": "masd.generation.cpp.types.class_implementation.formatting_style",
           "type": "",
+          "value": "stitch",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -761,6 +810,7 @@
         {
           "name": "masd.generation.cpp.types.class_implementation.overwrite",
           "type": "",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -770,7 +820,7 @@
       ]
     },
     {
-      "name": "composable::hand_serializable",
+      "name": "composable::handcrafted_serializable",
       "parents": [
         "composable::handcrafted"
       ],
@@ -786,6 +836,7 @@
         {
           "name": "masd.generation.cpp.serialization.enabled",
           "type": "",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -795,6 +846,7 @@
         {
           "name": "masd.generation.cpp.serialization.overwrite",
           "type": "",
+          "value": "false",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",

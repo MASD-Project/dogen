@@ -168,16 +168,16 @@ space; keep it technical space agnostic.
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O2">
       <dia:attribute name="obj_pos">
-        <dia:point val="14,-10"/>
+        <dia:point val="13,-10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.95,-11.05;145.05,44.05"/>
+        <dia:rectangle val="12.95,-11.05;144.05,44.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="14,-10"/>
+        <dia:point val="13,-10"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="131"/>
@@ -2019,7 +2019,7 @@ default profile.
         <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#hand_typeable#</dia:string>
+        <dia:string>#handcrafted_typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::variability::profile_template#</dia:string>
@@ -2322,7 +2322,7 @@ default profile.
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#hand_pretty_printable#</dia:string>
+        <dia:string>#handcrafted_pretty_printable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::variability::profile_template#</dia:string>
@@ -4394,7 +4394,7 @@ for the element.
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#hand_serializable#</dia:string>
+        <dia:string>#handcrafted_serializable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::variability::profile_template#</dia:string>
