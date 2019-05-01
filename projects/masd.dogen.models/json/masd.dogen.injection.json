@@ -32,14 +32,14 @@
     {
       "name": "transforms::encoding_transform",
       "stereotypes": [
-        "masd::interface"
+        "masd::cpp_header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::registrar",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -54,14 +54,14 @@
     {
       "name": "transforms::model_production_chain",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::model_to_model_chain",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -160,7 +160,7 @@
     {
       "name": "transforms::context",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "tagged_values": {
         "masd.generation.cpp.types.forward_declarations.enabled": "true"
@@ -199,7 +199,7 @@
     {
       "name": "transforms::decoding_transform",
       "stereotypes": [
-        "masd::interface"
+        "masd::cpp_header_only"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -224,28 +224,28 @@
     {
       "name": "helpers::references_resolver",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::model_set_production_chain",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::input_technical_space_transform",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::references_transform",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -259,7 +259,7 @@
     {
       "name": "traits",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -353,7 +353,7 @@
     {
       "name": "transforms::configuration_transform",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     }
