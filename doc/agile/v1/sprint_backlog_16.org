@@ -13,25 +13,25 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-01 Wed 12:03]
+#+CAPTION: Clock summary at [2019-05-01 Wed 13:31]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *62:09* |       |       | 100.0 |
+| *Total time*                                           | *62:26* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 62:09   |       |       | 100.0 |
-| Active                                                 |         | 62:09 |       | 100.0 |
+| Stories                                                | 62:26   |       |       | 100.0 |
+| Active                                                 |         | 62:26 |       | 100.0 |
 | Edit release notes for previous sprint                 |         |       |  2:40 |   4.3 |
 | Sprint and product backlog grooming                    |         |       |  2:59 |   4.8 |
 | Create a video demo for the previous sprint's features |         |       |  1:55 |   3.1 |
 | Read variability papers                                |         |       |  1:04 |   1.7 |
 | Emacs maintenance and exploration work                 |         |       |  0:20 |   0.5 |
-| Finish implementing the variability model              |         |       | 10:49 |  17.4 |
+| Finish implementing the variability model              |         |       | 10:49 |  17.3 |
 | Trim down stitch's use of annotations                  |         |       |  1:30 |   2.4 |
-| Read meta-data using configurations                    |         |       | 24:24 |  39.3 |
+| Read meta-data using configurations                    |         |       | 24:24 |  39.1 |
 | Remove uses of annotations                             |         |       |  7:44 |  12.4 |
 | Stitch is still using artefact writer                  |         |       |  0:04 |   0.1 |
-| Profiles as meta-model elements                        |         |       |  8:40 |  13.9 |
+| Profiles as meta-model elements                        |         |       |  8:57 |  14.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -444,6 +444,7 @@ meta-elements that live in formatter into coding.
 
 *** STARTED Profiles as meta-model elements                           :story:
     :LOGBOOK:
+    CLOCK: [2019-05-01 Wed 13:14]--[2019-05-01 Wed 13:31] =>  0:17
     CLOCK: [2019-05-01 Wed 11:40]--[2019-05-01 Wed 12:04] =>  0:24
     CLOCK: [2019-05-01 Wed 09:59]--[2019-05-01 Wed 11:39] =>  1:40
     CLOCK: [2019-04-30 Tue 18:44]--[2019-04-30 Tue 18:49] =>  0:05

@@ -41,6 +41,7 @@ const std::string parents_key("parents");
 const std::string documentation_key("documentation");
 const std::string tagged_values_key("tagged_values");
 const std::string type_key("type");
+const std::string value_key("value");
 const std::string elements_key("elements");
 const std::string attributes_key("attributes");
 const std::string stereotypes_key("stereotypes");
@@ -121,6 +122,7 @@ read_attribute(const boost::property_tree::ptree& pt) const {
     injection::meta_model::attribute r;
     r.name(pt.get<std::string>(name_key));
     r.type(pt.get<std::string>(type_key));
+    r.value(pt.get<std::string>(value_key, empty));
     r.documentation(read_documentation(pt));
     r.tagged_values(read_tagged_values(pt));
     r.stereotypes(read_stereotypes(pt));

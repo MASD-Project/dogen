@@ -119,6 +119,13 @@ void dehydrator::insert_attribute(std::ostream& s,
     s << " : ";
     uf.insert_quoted_escaped(a.type());
 
+    if (!a.value().empty()) {
+        s << comma_space;
+        uf.insert_quoted("value");
+        s << " : ";
+        uf.insert_quoted_escaped(a.value());
+    }
+
     if (!a.documentation().empty()) {
         s << comma_space;
         insert_documentation(s, a.documentation());
