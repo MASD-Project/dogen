@@ -10552,13 +10552,13 @@ model.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O75">
       <dia:attribute name="obj_pos">
-        <dia:point val="-244,24"/>
+        <dia:point val="-243.929,23.9286"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-244.05,23.95;-211.88,30.05"/>
+        <dia:rectangle val="-243.979,23.8786;-211.809,29.9786"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-244,24"/>
+        <dia:point val="-243.929,23.9286"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="32.07"/>
@@ -11489,13 +11489,13 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O80">
       <dia:attribute name="obj_pos">
-        <dia:point val="-234,44"/>
+        <dia:point val="-233.786,43.9286"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-234.05,43.95;-209.965,47.65"/>
+        <dia:rectangle val="-233.836,43.8786;-209.751,47.5786"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-234,44"/>
+        <dia:point val="-233.786,43.9286"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="23.984999999999999"/>
@@ -32236,15 +32236,15 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:point val="-212,55.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-222.058,47.55;-211.25,55.9"/>
+        <dia:rectangle val="-221.843,47.4786;-211.25,55.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="-212,55.1"/>
-        <dia:point val="-222.007,55.1"/>
-        <dia:point val="-222.007,47.6"/>
+        <dia:point val="-221.793,55.1"/>
+        <dia:point val="-221.793,47.5286"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>

@@ -4474,22 +4474,22 @@ model directory.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O29">
       <dia:attribute name="obj_pos">
-        <dia:point val="3,22"/>
+        <dia:point val="1,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,21.95;30.13,42.15"/>
+        <dia:rectangle val="0.95,21.95;29.67,42.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="3,22"/>
+        <dia:point val="1,22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.080000000000002"/>
+        <dia:real val="28.620000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="20.100000000000005"/>
+        <dia:real val="20.900000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -4536,7 +4536,7 @@ model directory.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="3.35,23.245"/>
+            <dia:point val="1.35,23.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -9582,13 +9582,13 @@ model directory.#</dia:string>
         <dia:point val="3,45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,44.95;11.635,48.05"/>
+        <dia:rectangle val="2.95,44.95;15.485,48.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="3,45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
