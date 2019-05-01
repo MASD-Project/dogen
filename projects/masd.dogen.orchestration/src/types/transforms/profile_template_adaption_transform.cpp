@@ -229,7 +229,7 @@ adapt(const feature_group& fg,
 
     const auto sn(vpt.name().simple());
     const auto qn(vpt.name().qualified().dot());
-    BOOST_LOG_SEV(lg, trace) << "Adapting: " << sn << "(" << qn << ")";
+    BOOST_LOG_SEV(lg, trace) << "Adapting: " << sn << " (" << qn << ")";
 
     r.name().simple(sn);
     r.name().qualified(qn);
