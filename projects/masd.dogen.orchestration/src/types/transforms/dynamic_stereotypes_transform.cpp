@@ -66,11 +66,23 @@ private:
 public:
     void operator()(coding::meta_model::element&) { }
     void operator()(coding::meta_model::module& m) { update(m); }
-    void operator()(coding::meta_model::object_template &ot) { update(ot); }
+    void operator()(coding::meta_model::object_template &ot) {
+        update(ot);
+        for (auto& attr : ot.local_attributes())
+            attr.dynamic_stereotypes(extract(attr));
+    }
     void operator()(coding::meta_model::builtin& b) {  update(b); }
-    void operator()(coding::meta_model::enumeration& e) { update(e); }
+    void operator()(coding::meta_model::enumeration& e) {
+        update(e);
+        for (auto& enm : e.enumerators())
+            enm.dynamic_stereotypes(extract(enm));
+    }
     void operator()(coding::meta_model::primitive& p) { update(p); }
-    void operator()(coding::meta_model::object& o) { update(o); }
+    void operator()(coding::meta_model::object& o) {
+        update(o);
+        for (auto& attr : o.local_attributes())
+            attr.dynamic_stereotypes(extract(attr));
+    }
     void operator()(coding::meta_model::exception& e) { update(e); }
     void operator()(coding::meta_model::visitor& v) { update(v); }
     void operator()(coding::meta_model::licence& l) { update(l); }
