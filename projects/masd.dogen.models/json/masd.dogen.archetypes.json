@@ -89,7 +89,7 @@
     {
       "name": "location_repository_builder",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -138,7 +138,7 @@
     {
       "name": "location_repository_parts_builder",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
