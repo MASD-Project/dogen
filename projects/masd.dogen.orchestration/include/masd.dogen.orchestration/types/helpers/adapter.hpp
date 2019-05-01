@@ -29,6 +29,7 @@
 #include <string>
 #include <iosfwd>
 #include <boost/shared_ptr.hpp>
+#include "masd.dogen.variability/types/meta_model/potential_binding.hpp"
 #include "masd.dogen.injection/types/meta_model/attribute.hpp"
 #include "masd.dogen.injection/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/location.hpp"
@@ -66,6 +67,13 @@ private:
      * @brief Ensure the string is empty.
      */
     void ensure_empty(const std::string& s) const;
+
+private:
+    /**
+     * @brief Creates a list of potential bindings from a list of stereotypes.
+     */
+    std::list<variability::meta_model::potential_binding>
+    to_potential_binding(const std::list<std::string>& stereotypes) const;
 
 private:
     /**

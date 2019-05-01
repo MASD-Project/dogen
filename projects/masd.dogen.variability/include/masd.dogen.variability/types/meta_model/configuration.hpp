@@ -25,13 +25,14 @@
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include <unordered_set>
 #include "masd.dogen.variability/types/meta_model/element.hpp"
 #include "masd.dogen.variability/types/meta_model/binding_point.hpp"
+#include "masd.dogen.variability/types/meta_model/potential_binding.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration_point.hpp"
 
 namespace masd::dogen::variability::meta_model {
@@ -51,8 +52,8 @@ public:
         const masd::dogen::variability::meta_model::name& name,
         const std::string& description,
         const std::unordered_map<std::string, masd::dogen::variability::meta_model::configuration_point>& configuration_points,
-        const std::unordered_set<std::string>& profile_bindings,
-        const std::unordered_set<std::string>& configuration_bindings,
+        const std::list<masd::dogen::variability::meta_model::potential_binding>& profile_bindings,
+        const std::list<masd::dogen::variability::meta_model::potential_binding>& configuration_bindings,
         const masd::dogen::variability::meta_model::binding_point source_binding_point,
         const bool from_target);
 
@@ -74,10 +75,10 @@ public:
      * @brief Bindings to profiles.
      */
     /**@{*/
-    const std::unordered_set<std::string>& profile_bindings() const;
-    std::unordered_set<std::string>& profile_bindings();
-    void profile_bindings(const std::unordered_set<std::string>& v);
-    void profile_bindings(const std::unordered_set<std::string>&& v);
+    const std::list<masd::dogen::variability::meta_model::potential_binding>& profile_bindings() const;
+    std::list<masd::dogen::variability::meta_model::potential_binding>& profile_bindings();
+    void profile_bindings(const std::list<masd::dogen::variability::meta_model::potential_binding>& v);
+    void profile_bindings(const std::list<masd::dogen::variability::meta_model::potential_binding>&& v);
     /**@}*/
 
     /**
@@ -87,10 +88,10 @@ public:
      * elements.
      */
     /**@{*/
-    const std::unordered_set<std::string>& configuration_bindings() const;
-    std::unordered_set<std::string>& configuration_bindings();
-    void configuration_bindings(const std::unordered_set<std::string>& v);
-    void configuration_bindings(const std::unordered_set<std::string>&& v);
+    const std::list<masd::dogen::variability::meta_model::potential_binding>& configuration_bindings() const;
+    std::list<masd::dogen::variability::meta_model::potential_binding>& configuration_bindings();
+    void configuration_bindings(const std::list<masd::dogen::variability::meta_model::potential_binding>& v);
+    void configuration_bindings(const std::list<masd::dogen::variability::meta_model::potential_binding>&& v);
     /**@}*/
 
     /**
@@ -124,8 +125,8 @@ public:
 
 private:
     std::unordered_map<std::string, masd::dogen::variability::meta_model::configuration_point> configuration_points_;
-    std::unordered_set<std::string> profile_bindings_;
-    std::unordered_set<std::string> configuration_bindings_;
+    std::list<masd::dogen::variability::meta_model::potential_binding> profile_bindings_;
+    std::list<masd::dogen::variability::meta_model::potential_binding> configuration_bindings_;
     masd::dogen::variability::meta_model::binding_point source_binding_point_;
     bool from_target_;
 };

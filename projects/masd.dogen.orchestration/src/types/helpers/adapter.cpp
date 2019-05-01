@@ -71,6 +71,18 @@ void adapter::ensure_empty(const std::string& s) const {
     }
 }
 
+std::list<variability::meta_model::potential_binding> adapter::
+to_potential_binding(const std::list<std::string>& stereotypes) const {
+    std::list<variability::meta_model::potential_binding> r;
+    for (const auto& s : stereotypes) {
+        variability::meta_model::potential_binding pb;
+        pb.name(s);
+        pb.realized(false);
+        r.push_back(pb);
+    }
+    return r;
+}
+
 coding::meta_model::name adapter::to_name(const coding::meta_model::location& l,
     const std::string& n) const {
     BOOST_LOG_SEV(lg, debug) << "Location: " << l;
@@ -119,8 +131,7 @@ adapter::to_attribute(const coding::meta_model::name& owner,
     helpers::stereotypes_helper h;
     const auto scr(h.from_string(ia.stereotypes()));
     const auto& ds(scr.dynamic_stereotypes());
-    for (const auto& s : ds)
-        r.configuration()->profile_bindings().insert(s);
+    r.configuration()->profile_bindings(to_potential_binding(ds));
 
     return r;
 }
@@ -147,8 +158,7 @@ adapter::to_enumerator(const coding::meta_model::name& owner,
     helpers::stereotypes_helper h;
     const auto scr(h.from_string(ia.stereotypes()));
     const auto& ds(scr.dynamic_stereotypes());
-    for (const auto& s : ds)
-        r.configuration()->profile_bindings().insert(s);
+    r.configuration()->profile_bindings(to_potential_binding(ds));
 
     return r;
 }
@@ -167,8 +177,7 @@ void adapter::populate_element(const coding::meta_model::location& l,
 
     e.configuration(ie.configuration());
     e.configuration()->name().qualified(e.name().qualified().dot());
-    for (const auto& s : ds)
-        e.configuration()->profile_bindings().insert(s);
+    e.configuration()->profile_bindings(to_potential_binding(ds));
 
     e.in_global_module(
         l.external_modules().empty() && l.model_modules().empty());

@@ -52,6 +52,7 @@
 #include "masd.dogen.variability/types/helpers/selection_exception.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_template.hpp"
 #include "masd.dogen.variability/types/meta_model/profile_template.hpp"
+#include "masd.dogen.variability/types/meta_model/potential_binding.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_factory.hpp"
 #include "masd.dogen.variability/types/helpers/template_instantiator.hpp"
 #include "masd.dogen.variability/types/meta_model/profile_repository.hpp"

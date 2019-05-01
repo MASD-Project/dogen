@@ -18,20 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
-#include "masd.dogen.variability/io/meta_model/element_io.hpp"
-#include "masd.dogen.variability/io/meta_model/binding_point_io.hpp"
-#include "masd.dogen.variability/io/meta_model/configuration_io.hpp"
-#include "masd.dogen.variability/io/meta_model/potential_binding_io.hpp"
-#include "masd.dogen.variability/io/meta_model/configuration_point_io.hpp"
+#ifndef MASD_DOGEN_VARIABILITY_IO_META_MODEL_POTENTIAL_BINDING_IO_HPP
+#define MASD_DOGEN_VARIABILITY_IO_META_MODEL_POTENTIAL_BINDING_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "masd.dogen.variability/types/meta_model/potential_binding.hpp"
 
 namespace masd::dogen::variability::meta_model {
 
-std::ostream& operator<<(std::ostream& s, const configuration& v) {
-    v.to_stream(s);
-    return(s);
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const masd::dogen::variability::meta_model::potential_binding& v);
 
 }
+
+#endif

@@ -44,6 +44,8 @@ const std::string default_root("default.root_module");
 
 const std::string missing_profile(
     "Configuration references a profile that could not be found: ");
+const std::string empty_potential_bind_name(
+    "Potential bind has an empty name.");
 const std::string too_many_binds(
     "Too many candidate labels bind to a profile: ");
 const std::string missing_global_config(
@@ -90,19 +92,6 @@ profile_binding_transform::get_default_profile_name_for_binding_point(
     return empty;
 }
 
-std::list<std::string>
-profile_binding_transform::get_bindable_profile_names(
-    const meta_model::profile_repository& prp,
-    const std::unordered_set<std::string>& candidates)  {
-
-    std::list<std::string> r;
-    for (const auto& c : candidates) {
-        if (prp.by_labels().find(c) != prp.by_labels().end())
-            r.push_back(c);
-    }
-    return r;
-}
-
 void profile_binding_transform::bind(const meta_model::profile_repository& prp,
     const feature_group& fg, meta_model::configuration& cfg) {
     BOOST_LOG_SEV(lg, debug) << "Started binding profiles for configuration: "
@@ -136,22 +125,34 @@ void profile_binding_transform::bind(const meta_model::profile_repository& prp,
         BOOST_LOG_SEV(lg, trace) << "Profile not set in meta-data.";
 
     /*
-     * Lets try to see if any of the candidate labels binds to a
-     * profile. We only allow one to bind at most.
+     * Lets try to see which of the candidate labels binds to a
+     * profile.
      */
-    const auto bpfn(get_bindable_profile_names(prp, cfg.profile_bindings()));
-    if (bpfn.size() > 1) {
-        BOOST_LOG_SEV(lg, error) << too_many_binds << bpfn;
-        BOOST_THROW_EXCEPTION(transformation_error(too_many_binds));
-    } else if (bpfn.empty())
-        BOOST_LOG_SEV(lg, trace) << "Could not find any bindable profiles.";
+    unsigned int bind_count(0);
+    for (auto& pb : cfg.profile_bindings()) {
+        /*
+         * Potential bind must have some kind of name.
+         */
+        const auto& pbn(pb.name());
+        if (pbn.empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_potential_bind_name;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(empty_potential_bind_name));
+        }
 
-    for (const auto& bl : bpfn) {
-        BOOST_LOG_SEV(lg, debug) << "Bound label: " << bl;
-        const auto i(prp.by_labels().find(bl));
+        BOOST_LOG_SEV(lg, trace) << "Processing potential bind: " << pbn;
+        const auto i(prp.by_labels().find(pbn));
         if (i == prp.by_labels().end()) {
-            BOOST_LOG_SEV(lg, error) << missing_profile << bl;
-            BOOST_THROW_EXCEPTION(transformation_error(missing_profile + bl));
+            BOOST_LOG_SEV(lg, trace) << "Binding not realised.";
+            continue;
+        }
+
+        /*
+         * For now, we  only allow one to bind at most.
+         */
+        if (bind_count > 1) {
+            BOOST_LOG_SEV(lg, error) << too_many_binds << pbn;
+            BOOST_THROW_EXCEPTION(transformation_error(too_many_binds + pbn));
         }
 
         helpers::configuration_point_merger mg;
@@ -162,7 +163,14 @@ void profile_binding_transform::bind(const meta_model::profile_repository& prp,
                 profile.name().qualified(),
                 profile.configuration_points()));
         cfg.configuration_points(cps);
+        pb.realized(true);
+        ++bind_count;
     }
+
+    BOOST_LOG_SEV(lg, trace) << "Total potential bindings: "
+                             << cfg.profile_bindings().size()
+                             << " Realised bindings: "
+                             << bind_count;
 
     /*
      * If no profile name was found by now, we need to try looking for

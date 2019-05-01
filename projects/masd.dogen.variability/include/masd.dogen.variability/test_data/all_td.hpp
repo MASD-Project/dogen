@@ -43,6 +43,7 @@
 #include "masd.dogen.variability/test_data/meta_model/text_collection_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/feature_template_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/profile_template_td.hpp"
+#include "masd.dogen.variability/test_data/meta_model/potential_binding_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/profile_repository_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/configuration_model_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/configuration_point_td.hpp"

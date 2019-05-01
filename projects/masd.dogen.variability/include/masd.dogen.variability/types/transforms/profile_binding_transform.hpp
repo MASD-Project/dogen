@@ -60,14 +60,6 @@ private:
     static std::string get_default_profile_name_for_binding_point(
         const meta_model::binding_point bp);
 
-    /**
-     * @brief Returns the profiles that bind, giving the current
-     * profile repository.
-     */
-    static std::list<std::string> get_bindable_profile_names(
-        const meta_model::profile_repository& prp,
-        const std::unordered_set<std::string>& candidates);
-
 private:
     static void bind(const meta_model::profile_repository& prp,
         const feature_group& fg, meta_model::configuration& cfg);

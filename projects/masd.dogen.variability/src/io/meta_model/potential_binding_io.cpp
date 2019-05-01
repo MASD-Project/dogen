@@ -21,16 +21,30 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.variability/io/meta_model/element_io.hpp"
-#include "masd.dogen.variability/io/meta_model/binding_point_io.hpp"
-#include "masd.dogen.variability/io/meta_model/configuration_io.hpp"
 #include "masd.dogen.variability/io/meta_model/potential_binding_io.hpp"
-#include "masd.dogen.variability/io/meta_model/configuration_point_io.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
 
 namespace masd::dogen::variability::meta_model {
 
-std::ostream& operator<<(std::ostream& s, const configuration& v) {
-    v.to_stream(s);
+std::ostream& operator<<(std::ostream& s, const potential_binding& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
+    s << " { "
+      << "\"__type__\": " << "\"masd::dogen::variability::meta_model::potential_binding\"" << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"realized\": " << v.realized()
+      << " }";
     return(s);
 }
 

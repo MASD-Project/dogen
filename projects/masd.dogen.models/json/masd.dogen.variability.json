@@ -261,7 +261,7 @@
     },
     {
       "name": "meta_model::value",
-      "documentation": "Base class of all value types. \n\nRepresents a value for a configuration point, a default value for a feature, etc.\n",
+      "documentation": "Base class of all value types.\n\nRepresents a value for a configuration point, a default value for a feature, etc.\n",
       "stereotypes": [
         "masd::visitable"
       ],
@@ -349,12 +349,12 @@
       "attributes": [
         {
           "name": "profile_bindings",
-          "type": "std::unordered_set<std::string>",
+          "type": "std::list<potential_binding>",
           "documentation": "Bindings to profiles.\n"
         },
         {
           "name": "configuration_bindings",
-          "type": "std::unordered_set<std::string>",
+          "type": "std::list<potential_binding>",
           "documentation": "Relationships between this bound configuration and other bound configurations.\n\nThese relationships are inferred from the relationships of the underlying model\nelements.\n"
         },
         {
@@ -848,6 +848,23 @@
         "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::potential_binding",
+      "documentation": "Contains information about a potential binding.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "documentation": "The name to bind to. This can represent a profile or configuration name, or an\nalias.\n"
+        },
+        {
+          "name": "realized",
+          "type": "bool",
+          "documentation": "If true, the potential binding was realised into an actual binding.\n"
+        }
+      ]
     }
   ]
 }

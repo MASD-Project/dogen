@@ -22,6 +22,7 @@
 #include "masd.dogen.variability/test_data/meta_model/element_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/binding_point_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/configuration_td.hpp"
+#include "masd.dogen.variability/test_data/meta_model/potential_binding_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/configuration_point_td.hpp"
 
 namespace {
@@ -45,10 +46,15 @@ std::unordered_map<std::string, masd::dogen::variability::meta_model::configurat
     return r;
 }
 
-std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int position) {
-    std::unordered_set<std::string> r;
+masd::dogen::variability::meta_model::potential_binding
+create_masd_dogen_variability_meta_model_potential_binding(const unsigned int position) {
+    return masd::dogen::variability::meta_model::potential_binding_generator::create(position);
+}
+
+std::list<masd::dogen::variability::meta_model::potential_binding> create_std_list_masd_dogen_variability_meta_model_potential_binding(unsigned int position) {
+    std::list<masd::dogen::variability::meta_model::potential_binding> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(create_std_string(position + i));
+        r.push_back(create_masd_dogen_variability_meta_model_potential_binding(position + i));
     }
     return r;
 }
@@ -72,8 +78,8 @@ void configuration_generator::
 populate(const unsigned int position, result_type& v) {
     masd::dogen::variability::meta_model::element_generator::populate(position, v);
     v.configuration_points(create_std_unordered_map_std_string_masd_dogen_variability_meta_model_configuration_point(position + 0));
-    v.profile_bindings(create_std_unordered_set_std_string(position + 1));
-    v.configuration_bindings(create_std_unordered_set_std_string(position + 2));
+    v.profile_bindings(create_std_list_masd_dogen_variability_meta_model_potential_binding(position + 1));
+    v.configuration_bindings(create_std_list_masd_dogen_variability_meta_model_potential_binding(position + 2));
     v.source_binding_point(create_masd_dogen_variability_meta_model_binding_point(position + 3));
     v.from_target(create_bool(position + 4));
 }
