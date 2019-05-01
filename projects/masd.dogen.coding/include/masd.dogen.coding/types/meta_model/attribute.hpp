@@ -25,12 +25,14 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/name_tree.hpp"
+#include "masd.dogen.coding/types/meta_model/static_stereotypes.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/orm_attribute_properties.hpp"
 
@@ -55,6 +57,8 @@ public:
         const std::string& documentation,
         const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
         const masd::dogen::coding::meta_model::name& name,
+        const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<std::string>& dynamic_stereotypes,
         const std::string& unparsed_type,
         const masd::dogen::coding::meta_model::name_tree& parsed_type,
         const bool is_immutable,
@@ -94,6 +98,27 @@ public:
     masd::dogen::coding::meta_model::name& name();
     void name(const masd::dogen::coding::meta_model::name& v);
     void name(const masd::dogen::coding::meta_model::name&& v);
+    /**@}*/
+
+    /**
+     * @brief Stereotypes that are part of the dogen UML profile, and so are well-known to the
+     * model.
+     */
+    /**@{*/
+    const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes() const;
+    std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes();
+    void static_stereotypes(const std::list<masd::dogen::coding::meta_model::static_stereotypes>& v);
+    void static_stereotypes(const std::list<masd::dogen::coding::meta_model::static_stereotypes>&& v);
+    /**@}*/
+
+    /**
+     * @brief Stereotypes that are not part of the masd UML profile. These are user defined.
+     */
+    /**@{*/
+    const std::list<std::string>& dynamic_stereotypes() const;
+    std::list<std::string>& dynamic_stereotypes();
+    void dynamic_stereotypes(const std::list<std::string>& v);
+    void dynamic_stereotypes(const std::list<std::string>&& v);
     /**@}*/
 
     /**
@@ -153,6 +178,8 @@ private:
     std::string documentation_;
     boost::shared_ptr<masd::dogen::variability::meta_model::configuration> configuration_;
     masd::dogen::coding::meta_model::name name_;
+    std::list<masd::dogen::coding::meta_model::static_stereotypes> static_stereotypes_;
+    std::list<std::string> dynamic_stereotypes_;
     std::string unparsed_type_;
     masd::dogen::coding::meta_model::name_tree parsed_type_;
     bool is_immutable_;

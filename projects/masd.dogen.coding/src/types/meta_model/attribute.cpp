@@ -40,6 +40,8 @@ attribute::attribute(attribute&& rhs)
     : documentation_(std::move(rhs.documentation_)),
       configuration_(std::move(rhs.configuration_)),
       name_(std::move(rhs.name_)),
+      static_stereotypes_(std::move(rhs.static_stereotypes_)),
+      dynamic_stereotypes_(std::move(rhs.dynamic_stereotypes_)),
       unparsed_type_(std::move(rhs.unparsed_type_)),
       parsed_type_(std::move(rhs.parsed_type_)),
       is_immutable_(std::move(rhs.is_immutable_)),
@@ -50,6 +52,8 @@ attribute::attribute(
     const std::string& documentation,
     const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
     const masd::dogen::coding::meta_model::name& name,
+    const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
+    const std::list<std::string>& dynamic_stereotypes,
     const std::string& unparsed_type,
     const masd::dogen::coding::meta_model::name_tree& parsed_type,
     const bool is_immutable,
@@ -58,6 +62,8 @@ attribute::attribute(
     : documentation_(documentation),
       configuration_(configuration),
       name_(name),
+      static_stereotypes_(static_stereotypes),
+      dynamic_stereotypes_(dynamic_stereotypes),
       unparsed_type_(unparsed_type),
       parsed_type_(parsed_type),
       is_immutable_(is_immutable),
@@ -69,6 +75,8 @@ void attribute::swap(attribute& other) noexcept {
     swap(documentation_, other.documentation_);
     swap(configuration_, other.configuration_);
     swap(name_, other.name_);
+    swap(static_stereotypes_, other.static_stereotypes_);
+    swap(dynamic_stereotypes_, other.dynamic_stereotypes_);
     swap(unparsed_type_, other.unparsed_type_);
     swap(parsed_type_, other.parsed_type_);
     swap(is_immutable_, other.is_immutable_);
@@ -80,6 +88,8 @@ bool attribute::operator==(const attribute& rhs) const {
     return documentation_ == rhs.documentation_ &&
         configuration_ == rhs.configuration_ &&
         name_ == rhs.name_ &&
+        static_stereotypes_ == rhs.static_stereotypes_ &&
+        dynamic_stereotypes_ == rhs.dynamic_stereotypes_ &&
         unparsed_type_ == rhs.unparsed_type_ &&
         parsed_type_ == rhs.parsed_type_ &&
         is_immutable_ == rhs.is_immutable_ &&
@@ -139,6 +149,38 @@ void attribute::name(const masd::dogen::coding::meta_model::name& v) {
 
 void attribute::name(const masd::dogen::coding::meta_model::name&& v) {
     name_ = std::move(v);
+}
+
+const std::list<masd::dogen::coding::meta_model::static_stereotypes>& attribute::static_stereotypes() const {
+    return static_stereotypes_;
+}
+
+std::list<masd::dogen::coding::meta_model::static_stereotypes>& attribute::static_stereotypes() {
+    return static_stereotypes_;
+}
+
+void attribute::static_stereotypes(const std::list<masd::dogen::coding::meta_model::static_stereotypes>& v) {
+    static_stereotypes_ = v;
+}
+
+void attribute::static_stereotypes(const std::list<masd::dogen::coding::meta_model::static_stereotypes>&& v) {
+    static_stereotypes_ = std::move(v);
+}
+
+const std::list<std::string>& attribute::dynamic_stereotypes() const {
+    return dynamic_stereotypes_;
+}
+
+std::list<std::string>& attribute::dynamic_stereotypes() {
+    return dynamic_stereotypes_;
+}
+
+void attribute::dynamic_stereotypes(const std::list<std::string>& v) {
+    dynamic_stereotypes_ = v;
+}
+
+void attribute::dynamic_stereotypes(const std::list<std::string>&& v) {
+    dynamic_stereotypes_ = std::move(v);
 }
 
 const std::string& attribute::unparsed_type() const {

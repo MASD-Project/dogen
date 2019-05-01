@@ -22,6 +22,7 @@
 #include "masd.dogen.coding/test_data/meta_model/name_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/attribute_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/name_tree_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/static_stereotypes_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/configuration_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/orm_attribute_properties_td.hpp"
 
@@ -48,6 +49,27 @@ create_boost_shared_ptr_masd_dogen_variability_meta_model_configuration(unsigned
 masd::dogen::coding::meta_model::name
 create_masd_dogen_coding_meta_model_name(const unsigned int position) {
     return masd::dogen::coding::meta_model::name_generator::create(position);
+}
+
+masd::dogen::coding::meta_model::static_stereotypes
+create_masd_dogen_coding_meta_model_static_stereotypes(const unsigned int position) {
+    return masd::dogen::coding::meta_model::static_stereotypes_generator::create(position);
+}
+
+std::list<masd::dogen::coding::meta_model::static_stereotypes> create_std_list_masd_dogen_coding_meta_model_static_stereotypes(unsigned int position) {
+    std::list<masd::dogen::coding::meta_model::static_stereotypes> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_masd_dogen_coding_meta_model_static_stereotypes(position + i));
+    }
+    return r;
+}
+
+std::list<std::string> create_std_list_std_string(unsigned int position) {
+    std::list<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_std_string(position + i));
+    }
+    return r;
 }
 
 masd::dogen::coding::meta_model::name_tree
@@ -82,11 +104,13 @@ populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.configuration(create_boost_shared_ptr_masd_dogen_variability_meta_model_configuration(position + 1));
     v.name(create_masd_dogen_coding_meta_model_name(position + 2));
-    v.unparsed_type(create_std_string(position + 3));
-    v.parsed_type(create_masd_dogen_coding_meta_model_name_tree(position + 4));
-    v.is_immutable(create_bool(position + 5));
-    v.is_fluent(create_bool(position + 6));
-    v.orm_properties(create_boost_optional_masd_dogen_coding_meta_model_orm_attribute_properties(position + 7));
+    v.static_stereotypes(create_std_list_masd_dogen_coding_meta_model_static_stereotypes(position + 3));
+    v.dynamic_stereotypes(create_std_list_std_string(position + 4));
+    v.unparsed_type(create_std_string(position + 5));
+    v.parsed_type(create_masd_dogen_coding_meta_model_name_tree(position + 6));
+    v.is_immutable(create_bool(position + 7));
+    v.is_fluent(create_bool(position + 8));
+    v.orm_properties(create_boost_optional_masd_dogen_coding_meta_model_orm_attribute_properties(position + 9));
 }
 
 attribute_generator::result_type

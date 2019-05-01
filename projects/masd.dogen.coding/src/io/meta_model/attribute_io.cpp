@@ -24,6 +24,7 @@
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/io/meta_model/attribute_io.hpp"
 #include "masd.dogen.coding/io/meta_model/name_tree_io.hpp"
+#include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_attribute_properties_io.hpp"
 
@@ -46,6 +47,34 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::d
     else
         s << "\"data\": ""\"<null>\"";
     s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::static_stereotypes>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
     return s;
 }
 
@@ -80,6 +109,8 @@ std::ostream& operator<<(std::ostream& s, const attribute& v) {
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"configuration\": " << v.configuration() << ", "
       << "\"name\": " << v.name() << ", "
+      << "\"static_stereotypes\": " << v.static_stereotypes() << ", "
+      << "\"dynamic_stereotypes\": " << v.dynamic_stereotypes() << ", "
       << "\"unparsed_type\": " << "\"" << tidy_up_string(v.unparsed_type()) << "\"" << ", "
       << "\"parsed_type\": " << v.parsed_type() << ", "
       << "\"is_immutable\": " << v.is_immutable() << ", "

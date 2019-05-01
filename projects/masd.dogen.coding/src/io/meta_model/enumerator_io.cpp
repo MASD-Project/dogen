@@ -22,6 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/io/meta_model/enumerator_io.hpp"
+#include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -48,6 +49,34 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::d
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::static_stereotypes>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace masd::dogen::coding::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const enumerator& v) {
@@ -56,6 +85,8 @@ std::ostream& operator<<(std::ostream& s, const enumerator& v) {
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"configuration\": " << v.configuration() << ", "
+      << "\"static_stereotypes\": " << v.static_stereotypes() << ", "
+      << "\"dynamic_stereotypes\": " << v.dynamic_stereotypes() << ", "
       << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
       << " }";
     return(s);

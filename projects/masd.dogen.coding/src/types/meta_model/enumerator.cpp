@@ -36,10 +36,14 @@ enumerator::enumerator(
     const std::string& documentation,
     const masd::dogen::coding::meta_model::name& name,
     const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
+    const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
+    const std::list<std::string>& dynamic_stereotypes,
     const std::string& value)
     : documentation_(documentation),
       name_(name),
       configuration_(configuration),
+      static_stereotypes_(static_stereotypes),
+      dynamic_stereotypes_(dynamic_stereotypes),
       value_(value) { }
 
 void enumerator::swap(enumerator& other) noexcept {
@@ -47,6 +51,8 @@ void enumerator::swap(enumerator& other) noexcept {
     swap(documentation_, other.documentation_);
     swap(name_, other.name_);
     swap(configuration_, other.configuration_);
+    swap(static_stereotypes_, other.static_stereotypes_);
+    swap(dynamic_stereotypes_, other.dynamic_stereotypes_);
     swap(value_, other.value_);
 }
 
@@ -54,6 +60,8 @@ bool enumerator::operator==(const enumerator& rhs) const {
     return documentation_ == rhs.documentation_ &&
         name_ == rhs.name_ &&
         configuration_ == rhs.configuration_ &&
+        static_stereotypes_ == rhs.static_stereotypes_ &&
+        dynamic_stereotypes_ == rhs.dynamic_stereotypes_ &&
         value_ == rhs.value_;
 }
 
@@ -109,6 +117,38 @@ void enumerator::configuration(const boost::shared_ptr<masd::dogen::variability:
 
 void enumerator::configuration(const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>&& v) {
     configuration_ = std::move(v);
+}
+
+const std::list<masd::dogen::coding::meta_model::static_stereotypes>& enumerator::static_stereotypes() const {
+    return static_stereotypes_;
+}
+
+std::list<masd::dogen::coding::meta_model::static_stereotypes>& enumerator::static_stereotypes() {
+    return static_stereotypes_;
+}
+
+void enumerator::static_stereotypes(const std::list<masd::dogen::coding::meta_model::static_stereotypes>& v) {
+    static_stereotypes_ = v;
+}
+
+void enumerator::static_stereotypes(const std::list<masd::dogen::coding::meta_model::static_stereotypes>&& v) {
+    static_stereotypes_ = std::move(v);
+}
+
+const std::list<std::string>& enumerator::dynamic_stereotypes() const {
+    return dynamic_stereotypes_;
+}
+
+std::list<std::string>& enumerator::dynamic_stereotypes() {
+    return dynamic_stereotypes_;
+}
+
+void enumerator::dynamic_stereotypes(const std::list<std::string>& v) {
+    dynamic_stereotypes_ = v;
+}
+
+void enumerator::dynamic_stereotypes(const std::list<std::string>&& v) {
+    dynamic_stereotypes_ = std::move(v);
 }
 
 const std::string& enumerator::value() const {

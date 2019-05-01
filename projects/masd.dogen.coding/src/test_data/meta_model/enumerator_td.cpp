@@ -21,6 +21,7 @@
 #include <sstream>
 #include "masd.dogen.coding/test_data/meta_model/name_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/enumerator_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/static_stereotypes_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/configuration_td.hpp"
 
 namespace {
@@ -48,6 +49,27 @@ create_boost_shared_ptr_masd_dogen_variability_meta_model_configuration(unsigned
     return r;
 }
 
+masd::dogen::coding::meta_model::static_stereotypes
+create_masd_dogen_coding_meta_model_static_stereotypes(const unsigned int position) {
+    return masd::dogen::coding::meta_model::static_stereotypes_generator::create(position);
+}
+
+std::list<masd::dogen::coding::meta_model::static_stereotypes> create_std_list_masd_dogen_coding_meta_model_static_stereotypes(unsigned int position) {
+    std::list<masd::dogen::coding::meta_model::static_stereotypes> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_masd_dogen_coding_meta_model_static_stereotypes(position + i));
+    }
+    return r;
+}
+
+std::list<std::string> create_std_list_std_string(unsigned int position) {
+    std::list<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_std_string(position + i));
+    }
+    return r;
+}
+
 }
 
 namespace masd::dogen::coding::meta_model {
@@ -59,7 +81,9 @@ populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.name(create_masd_dogen_coding_meta_model_name(position + 1));
     v.configuration(create_boost_shared_ptr_masd_dogen_variability_meta_model_configuration(position + 2));
-    v.value(create_std_string(position + 3));
+    v.static_stereotypes(create_std_list_masd_dogen_coding_meta_model_static_stereotypes(position + 3));
+    v.dynamic_stereotypes(create_std_list_std_string(position + 4));
+    v.value(create_std_string(position + 5));
 }
 
 enumerator_generator::result_type

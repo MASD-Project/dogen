@@ -37,7 +37,8 @@
       "stereotypes": [
         "Documentable",
         "Configurable",
-        "Nameable"
+        "Nameable",
+        "Stereotypable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -402,7 +403,8 @@
       "stereotypes": [
         "Documentable",
         "Nameable",
-        "Configurable"
+        "Configurable",
+        "Stereotypable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
