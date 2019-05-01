@@ -36,14 +36,14 @@
     {
       "name": "application",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "command_line_parser",
       "stereotypes": [
-        "masd::interface"
+        "masd::cpp_header_only"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -53,21 +53,21 @@
         "command_line_parser"
       ],
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "injector_factory",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "masd::cpp_header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "main",
       "stereotypes": [
-        "masd::entry_point"
+        "masd::cpp::implementation_only"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -145,14 +145,14 @@
     {
       "name": "configuration_validator",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "initializer",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
