@@ -8,6 +8,7 @@
     "masd.injection.reference": "cpp.boost",
     "masd.injection.reference": "cpp.std",
     "masd.injection.reference": "masd",
+    "masd.injection.reference": "masd.dogen.profiles",
     "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
     "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
     "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
@@ -20,7 +21,7 @@
     "masd.generation.cpp.visual_studio.project.enabled": "false",
     "masd.generation.cpp.visual_studio.solution.enabled": "false",
     "masd.generation.csharp.enabled": "false",
-    "masd.variability.profile": "masd.dogen.disable_common_facets"
+    "masd.variability.profile": "masd.dogen.profiles.base.default_profile"
   },
   "elements": [
     {

@@ -802,6 +802,7 @@ etc.).
 #DOGEN masd.injection.reference=masd.dogen.tracing
 #DOGEN masd.injection.reference=masd.dogen.extraction
 #DOGEN masd.injection.reference=masd
+#DOGEN masd.injection.reference=masd.dogen.profiles
 #DOGEN masd.injection.input_technical_space=cpp
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
@@ -814,7 +815,7 @@ etc.).
 #DOGEN masd.generation.cpp.visual_studio.project.enabled=false
 #DOGEN masd.generation.cpp.visual_studio.solution.enabled=false
 #DOGEN masd.generation.csharp.enabled=false
-#DOGEN masd.variability.profile=masd.dogen.disable_common_facets#</dia:string>
+#DOGEN masd.variability.profile=masd.dogen.profiles.base.default_profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

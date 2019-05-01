@@ -2,7 +2,7 @@
   "documentation": "Top-level model in Dogen that contains all of the shared \ntypes at the meta-model level.\n\nThis model is not intended to be generated. If generated,\nshould not produce any output.\n\nYou should be able to reference this model from any technical\nspace; keep it technical space agnostic.\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
-    "masd.injection.model_modules": "masd",
+    "masd.injection.model_modules": "masd.dogen.profiles",
     "masd.injection.input_technical_space": "agnostic",
     "masd.injection.is_proxy_model": "true",
     "masd.generation.cpp.enabled": "false",

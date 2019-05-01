@@ -104,7 +104,7 @@ You should be able to reference this model from any technical
 space; keep it technical space agnostic.
 
 #DOGEN masd.injection.dia.comment=true
-#DOGEN masd.injection.model_modules=masd
+#DOGEN masd.injection.model_modules=masd.dogen.profiles
 #DOGEN masd.injection.input_technical_space=agnostic
 #DOGEN masd.injection.is_proxy_model=true
 #DOGEN masd.generation.cpp.enabled=false
