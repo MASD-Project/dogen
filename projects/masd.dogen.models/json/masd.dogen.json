@@ -140,7 +140,7 @@
       "name": "configuration_builder",
       "documentation": "masd::builder\n",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -165,7 +165,7 @@
     {
       "name": "configuration_validator",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -200,14 +200,14 @@
     {
       "name": "generator",
       "stereotypes": [
-        "masd::interface"
+        "masd::cpp_header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "converter",
       "stereotypes": [
-        "masd::interface"
+        "masd::cpp_header_only"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -283,7 +283,7 @@
     {
       "name": "mock_configuration_factory",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     }
