@@ -58,21 +58,21 @@
     {
       "name": "wale::key_extractor",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "wale::workflow",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "wale::formatter",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -99,7 +99,7 @@
     {
       "name": "stitch::parser",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -150,7 +150,7 @@
     {
       "name": "stitch::formatter",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -211,14 +211,14 @@
     {
       "name": "stitch::properties_factory",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "stitch::traits",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -260,7 +260,7 @@
     {
       "name": "stitch::instantiator",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -312,7 +312,7 @@
     {
       "name": "helpers::kvp_validator",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -327,7 +327,7 @@
     {
       "name": "helpers::kvp_resolver",
       "stereotypes": [
-        "masd::handcrafted"
+        "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
