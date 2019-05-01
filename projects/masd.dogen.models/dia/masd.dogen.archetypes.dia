@@ -94,7 +94,7 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#The archetypes model defines the core entities that make up the 
+            <dia:string>#The archetypes model defines the core entities that make up the
 archetype space.
 
 #DOGEN masd.injection.dia.comment=true
@@ -104,6 +104,7 @@ archetype space.
 #DOGEN masd.injection.reference=cpp.std
 #DOGEN masd.injection.reference=cpp.boost
 #DOGEN masd.injection.reference=masd
+#DOGEN masd.injection.reference=masd.dogen.profiles
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*

@@ -1,5 +1,5 @@
 {
-  "documentation": "The archetypes model defines the core entities that make up the \narchetype space.\n",
+  "documentation": "The archetypes model defines the core entities that make up the\narchetype space.\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "masd.dogen.archetypes",
