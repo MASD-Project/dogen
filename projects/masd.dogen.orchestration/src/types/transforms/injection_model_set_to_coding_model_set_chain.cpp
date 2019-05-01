@@ -26,6 +26,7 @@
 #include "masd.dogen.orchestration/types/transforms/injection_model_to_coding_model_transform.hpp"
 #include "masd.dogen.orchestration/types/transforms/coding_model_set_to_configuration_model_set_transform.hpp"
 #include "masd.dogen.orchestration/types/transforms/profile_template_adaption_transform.hpp"
+#include "masd.dogen.orchestration/types/transforms/dynamic_stereotypes_transform.hpp"
 #include "masd.dogen.orchestration/types/transforms/injection_model_set_to_coding_model_set_chain.hpp"
 
 namespace {
@@ -73,7 +74,7 @@ apply(const context& ctx, const injection::meta_model::model_set& ms) {
 
     /*
      * We then use the variability data to create a repository of all
-     * profiles.
+     * profiles, across all model sets.
         */
     const auto prp(profile_repository_transform::apply(ctx, pts, r));
 
@@ -85,9 +86,16 @@ apply(const context& ctx, const injection::meta_model::model_set& ms) {
         apply(ctx, r));
 
     /*
-     * Finally, we bind the profiles to the relevant configurations.
+     * We then bind the profiles to the relevant configurations.
      */
     profile_binding_transform::apply(ctx, prp, cms);
+
+    /*
+     * Finally, we retrieve any stereotypes which did not bind to a
+     * profile, and mark them as dynamic stereotypes. These are then
+     * further processed within the coding model chain.
+     */
+    dynamic_stereotypes_transform::apply(ctx.coding_context(), r);
 
     return r;
 }

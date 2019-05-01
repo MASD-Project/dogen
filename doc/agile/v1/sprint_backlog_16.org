@@ -13,25 +13,26 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-01 Wed 13:31]
+#+CAPTION: Clock summary at [2019-05-01 Wed 16:31]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *62:26* |       |       | 100.0 |
+| *Total time*                                           | *65:22* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 62:26   |       |       | 100.0 |
-| Active                                                 |         | 62:26 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  2:40 |   4.3 |
-| Sprint and product backlog grooming                    |         |       |  2:59 |   4.8 |
-| Create a video demo for the previous sprint's features |         |       |  1:55 |   3.1 |
-| Read variability papers                                |         |       |  1:04 |   1.7 |
+| Stories                                                | 65:22   |       |       | 100.0 |
+| Active                                                 |         | 65:22 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  2:40 |   4.1 |
+| Sprint and product backlog grooming                    |         |       |  2:59 |   4.6 |
+| Create a video demo for the previous sprint's features |         |       |  1:55 |   2.9 |
+| Read variability papers                                |         |       |  1:04 |   1.6 |
 | Emacs maintenance and exploration work                 |         |       |  0:20 |   0.5 |
-| Finish implementing the variability model              |         |       | 10:49 |  17.3 |
-| Trim down stitch's use of annotations                  |         |       |  1:30 |   2.4 |
-| Read meta-data using configurations                    |         |       | 24:24 |  39.1 |
-| Remove uses of annotations                             |         |       |  7:44 |  12.4 |
+| Finish implementing the variability model              |         |       | 10:49 |  16.5 |
+| Trim down stitch's use of annotations                  |         |       |  1:30 |   2.3 |
+| Read meta-data using configurations                    |         |       | 24:24 |  37.3 |
+| Remove uses of annotations                             |         |       |  7:44 |  11.8 |
 | Stitch is still using artefact writer                  |         |       |  0:04 |   0.1 |
-| Profiles as meta-model elements                        |         |       |  8:57 |  14.3 |
+| Profiles as meta-model elements                        |         |       |  9:32 |  14.6 |
+| Exclude profiles from stereotypes processing           |         |       |  2:21 |   3.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -442,8 +443,19 @@ Since we only need these during generation, seems like the more
 logical place. This should be done when (after) we move all of the
 meta-elements that live in formatter into coding.
 
+*** CANCELLED Remove dynamic stereotypes from coding                  :story:
+    CLOSED: [2019-05-01 Wed 14:18]
+
+*Rationale*: this is wrong - we still need to find the object
+templates.
+
+Now that we are intercepting the dynamic stereotypes coming in from
+injection and directly populating the configuration, there is no need
+to store them in the modeling element.
+
 *** STARTED Profiles as meta-model elements                           :story:
     :LOGBOOK:
+    CLOCK: [2019-05-01 Wed 13:32]--[2019-05-01 Wed 14:07] =>  0:35
     CLOCK: [2019-05-01 Wed 13:14]--[2019-05-01 Wed 13:31] =>  0:17
     CLOCK: [2019-05-01 Wed 11:40]--[2019-05-01 Wed 12:04] =>  0:24
     CLOCK: [2019-05-01 Wed 09:59]--[2019-05-01 Wed 11:39] =>  1:40
@@ -728,6 +740,28 @@ Mop-up tasks:
   labels. Actually we do need labels. The profile names are just too
   unwieldy. However, the right name is =alias=. Rename this property.
 
+*** STARTED Exclude profiles from stereotypes processing              :story:
+    :LOGBOOK:
+    CLOCK: [2019-05-01 Wed 14:33]--[2019-05-01 Wed 16:30] =>  1:57
+    CLOCK: [2019-05-01 Wed 14:08]--[2019-05-01 Wed 14:32] =>  0:24
+    :END:
+
+At present we are manually excluding profiles from the stereotypes
+transform. This was just a quick hack to get us going. We need to
+replace this with a call to annotations to get a list of profile names
+and exclude those.
+
+We should also rename =is_stereotype_handled_externally= to something
+more like "is profile" or "matches profile name".
+
+Actually the right thing may even be to just remove all of the profile
+stereotypes during annotations processing. However, we should wait
+until we complete the exomodel work since that will remove scribble
+groups, etc. Its all in the annotations transform.
+
+Once we have the profiles in the model set it should be easy to supply
+them to the annotations transform.
+
 *** Use of binding points in profiles                                 :story:
 
 At present we have the concept of a binding point in a feature. This
@@ -797,12 +831,6 @@ based builder for element that takes care of these:
 - hide name factory inside of builder.
 - to determine the builder API, see all use cases where we are
   manually creating the element.
-
-*** Remove dynamic stereotypes from coding                            :story:
-
-Now that we are intercepting the dynamic stereotypes coming in from
-injection and directly populating the configuration, there is no need
-to store them in the modeling element.
 
 *** Enablement problem is in the variability domain                   :story:
 
@@ -1203,24 +1231,6 @@ includes with model elements. This is captured as a separate story.
 At present we have hard-coded the file extension in the output of
 stitch templates as =cpp=. We should really supply it as part of the
 configuration. Ideally even the entire filename.
-
-*** Exclude profiles from stereotypes processing                      :story:
-
-At present we are manually excluding profiles from the stereotypes
-transform. This was just a quick hack to get us going. We need to
-replace this with a call to annotations to get a list of profile names
-and exclude those.
-
-We should also rename =is_stereotype_handled_externally= to something
-more like "is profile" or "matches profile name".
-
-Actually the right thing may even be to just remove all of the profile
-stereotypes during annotations processing. However, we should wait
-until we complete the exomodel work since that will remove scribble
-groups, etc. Its all in the annotations transform.
-
-Once we have the profiles in the model set it should be easy to supply
-them to the annotations transform.
 
 *** Getter by reference of pointee                                    :story:
 

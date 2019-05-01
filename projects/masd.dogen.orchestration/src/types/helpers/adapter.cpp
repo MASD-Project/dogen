@@ -172,11 +172,10 @@ void adapter::populate_element(const coding::meta_model::location& l,
     e.documentation(ie.documentation());
     e.static_stereotypes(scr.static_stereotypes());
 
-    const auto& ds(scr.dynamic_stereotypes());
-    e.dynamic_stereotypes(ds);
-
     e.configuration(ie.configuration());
     e.configuration()->name().qualified(e.name().qualified().dot());
+
+    const auto& ds(scr.dynamic_stereotypes());
     e.configuration()->profile_bindings(to_potential_binding(ds));
 
     e.in_global_module(
