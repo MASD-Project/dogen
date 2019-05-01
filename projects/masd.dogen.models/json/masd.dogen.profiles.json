@@ -163,31 +163,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "base::disable_all_facets",
-      "parents": [
-        "base::decoration"
-      ],
-      "documentation": "\nDisables all facets in the C++ backend.\n",
-      "stereotypes": [
-        "masd::variability::profile_template"
-      ],
-      "tagged_values": {
-        "masd.variability.binding_point": "global"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "enabled",
-          "type": "",
-          "tagged_values": {
-            "masd.variability.template_kind": "facet_template",
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp"
-          }
-        }
-      ]
-    },
-    {
       "name": "composable",
       "documentation": "The composable layer is made up of profiles that\nare meant to be applied on top of the base layer.\nThese can be used to compose the final configuration\nfor the element.\n",
       "tagged_values": {
@@ -310,7 +285,35 @@
       ]
     },
     {
+      "name": "base::disable_all_facets",
+      "parents": [
+        "base::decoration"
+      ],
+      "documentation": "\nDisables all facets in the C++ backend.\n",
+      "stereotypes": [
+        "masd::variability::profile_template"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "global"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "",
+          "tagged_values": {
+            "masd.variability.template_kind": "facet_template",
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp"
+          }
+        }
+      ]
+    },
+    {
       "name": "composable::handcrafted",
+      "parents": [
+        "base::disable_all_facets"
+      ],
       "documentation": "Base profile for model elements that are manually generated.\n",
       "stereotypes": [
         "masd::variability::profile_template"
@@ -328,6 +331,10 @@
       "stereotypes": [
         "masd::variability::profile_template"
       ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.labels": "masd::handcrafted::pretty_printable"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -361,7 +368,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.labels": "masd::handcrafted"
+        "masd.variability.labels": "masd::handcrafted::typeable"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -405,7 +412,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
-        "masd.variability.labels": "masd::cpp::header_only"
+        "masd.variability.labels": "masd::cpp_header_only"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -453,7 +460,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.labels": "masd::entry_point"
+        "masd.variability.labels": "masd::cpp_implementation_only"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -496,7 +503,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
-        "masd.variability.labels": "masd::cpp_artefact_formatter"
+        "masd.variability.labels": "masd::cpp::artefact_formatter"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -528,7 +535,12 @@
         },
         {
           "name": "masd.generation.cpp.types.class_header.overwrite",
-          "type": ""
+          "type": "",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "instance"
+          }
         },
         {
           "name": "masd.generation.cpp.types.class_implementation.formatting_style",
@@ -560,7 +572,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
-        "masd.variability.labels": "masd::csharp_artefact_formatter"
+        "masd.variability.labels": "masd::csharp::artefact_formatter"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -629,7 +641,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
-        "masd.variability.labels": "masd::cpp_helper_formatter"
+        "masd.variability.labels": "masd::cpp::helper_formatter"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -698,7 +710,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
-        "masd.variability.labels": "masd::csharp_helper_formatter"
+        "masd.variability.labels": "masd::csharp::helper_formatter"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -765,6 +777,10 @@
       "stereotypes": [
         "masd::variability::profile_template"
       ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.labels": "masd::handcrafted::serializable"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
