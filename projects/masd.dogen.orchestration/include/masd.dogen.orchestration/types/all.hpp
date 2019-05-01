@@ -43,6 +43,7 @@
 #include "masd.dogen.orchestration/types/transforms/profile_binding_transform.hpp"
 #include "masd.dogen.orchestration/types/helpers/stereotypes_conversion_result.hpp"
 #include "masd.dogen.orchestration/types/transforms/profile_repository_transform.hpp"
+#include "masd.dogen.orchestration/types/transforms/dynamic_stereotypes_transform.hpp"
 #include "masd.dogen.orchestration/types/transforms/extraction_model_production_chain.hpp"
 #include "masd.dogen.orchestration/types/transforms/profile_template_adaption_transform.hpp"
 #include "masd.dogen.orchestration/types/transforms/injection_model_to_coding_model_transform.hpp"
