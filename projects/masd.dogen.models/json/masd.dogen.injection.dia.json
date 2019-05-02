@@ -247,7 +247,7 @@
     {
       "name": "visitor",
       "stereotypes": [
-        "masd::cpp_header_only"
+        "masd::cpp::header_only"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [

@@ -433,7 +433,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
-        "masd.variability.labels": "masd::cpp_header_only"
+        "masd.variability.labels": "masd::cpp::header_only"
       },
       "fallback_element_type": "masd::object",
       "attributes": [

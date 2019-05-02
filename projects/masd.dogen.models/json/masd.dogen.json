@@ -200,14 +200,14 @@
     {
       "name": "generator",
       "stereotypes": [
-        "masd::cpp_header_only"
+        "masd::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "converter",
       "stereotypes": [
-        "masd::cpp_header_only"
+        "masd::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },

@@ -2057,7 +2057,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
         <dia:string>#generator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp_header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2321,7 +2321,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
         <dia:string>#converter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp_header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

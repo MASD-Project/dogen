@@ -32,7 +32,7 @@
     {
       "name": "transforms::encoding_transform",
       "stereotypes": [
-        "masd::cpp_header_only"
+        "masd::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -199,7 +199,7 @@
     {
       "name": "transforms::decoding_transform",
       "stereotypes": [
-        "masd::cpp_header_only"
+        "masd::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },

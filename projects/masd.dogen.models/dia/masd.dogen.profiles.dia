@@ -2494,7 +2494,7 @@ default profile.
         <dia:string>#This element has only a types header file.
 
 #DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.labels=masd::cpp_header_only#</dia:string>
+#DOGEN masd.variability.labels=masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

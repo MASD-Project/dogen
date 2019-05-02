@@ -5777,7 +5777,7 @@ model directory.#</dia:string>
         <dia:string>#dynamic_transform_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp_header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6668,7 +6668,7 @@ model directory.#</dia:string>
         <dia:string>#model_to_extraction_model_transform_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp_header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.generation.cpp.types.forward_declarations.enabled=true#</dia:string>
@@ -13779,7 +13779,7 @@ than one element.#</dia:string>
         <dia:string>#indent_filter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp_header_only#</dia:string>
+        <dia:string>#masd::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
