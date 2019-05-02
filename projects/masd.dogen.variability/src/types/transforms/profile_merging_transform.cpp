@@ -120,10 +120,9 @@ create_profile_map(const std::list<meta_model::profile>& profiles) {
 void profile_merging_transform::
 validate(const std::unordered_map<std::string, meta_model::profile>& pm) {
     BOOST_LOG_SEV(lg, debug) << "Validating profiles.";
-
     /*
-     * We expect at least one profile. This is a simple sanity check
-     * to avoid dodgy installations, etc.
+     * We expect at least one profile. If there are no profiles, there
+     * is no need to execute this transform or its containing chain.
      */
     if (pm.empty()) {
         BOOST_LOG_SEV(lg, error) << no_profiles;

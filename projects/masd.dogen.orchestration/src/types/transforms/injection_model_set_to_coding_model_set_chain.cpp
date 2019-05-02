@@ -67,32 +67,38 @@ apply(const context& ctx, const injection::meta_model::model_set& ms) {
 
     /*
      * The second part of this chain handles variability
-     * processing. First we need to retrieve the variability data from
-     * the models.
+     * processing. First we need to retrieve the variability data
+     * structures - i.e. profile templates - from the models, across
+     * all model sets.
      */
     const auto pts(profile_template_adaption_transform::apply(ctx, r));
 
     /*
-     * We then use the variability data to create a repository of all
-     * profiles, across all model sets.
-        */
-    const auto prp(profile_repository_transform::apply(ctx, pts, r));
-
-    /*
-     * Then we need to extract the configuration models from the
-     * coding model set.
+     * If some templates were found, we need to process them.
      */
-    auto cms(coding_model_set_to_configuration_model_set_transform::
-        apply(ctx, r));
+    if (!pts.empty()) {
+        /*
+         * First we need to create a repository of all profiles,
+         * organised for querying.
+         */
+        const auto prp(profile_repository_transform::apply(ctx, pts, r));
+
+        /*
+         * Then we need to extract the configuration models from the
+         * coding model set.
+         */
+        auto cms(coding_model_set_to_configuration_model_set_transform::
+            apply(ctx, r));
+
+        /*
+         * We then bind the profiles to the relevant configurations.
+         */
+        profile_binding_transform::apply(ctx, prp, cms);
+    }
 
     /*
-     * We then bind the profiles to the relevant configurations.
-     */
-    profile_binding_transform::apply(ctx, prp, cms);
-
-    /*
-     * Finally, we retrieve any stereotypes which did not bind to a
-     * profile, and mark them as dynamic stereotypes. These are then
+     * The final step is to retrieve stereotypes which did not bind to
+     * a profile, and mark them as dynamic stereotypes. These are then
      * further processed within the coding model chain.
      */
     dynamic_stereotypes_transform::apply(ctx.coding_context(), r);
