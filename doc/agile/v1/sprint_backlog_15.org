@@ -254,7 +254,6 @@ Fix any pending issues with emacs left over from previous sprint.
     CLOCK: [2019-04-09 Tue 08:27]--[2019-04-09 Tue 08:35] =>  0:08
     :END:
 
-
 Seems like the nightly did not run due to changes in the path. Fix these.
 
 *** COMPLETED Read =generate_preamble= from dynamic object            :story:
