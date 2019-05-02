@@ -64,7 +64,7 @@
     {
       "name": "injector_factory",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "masd::cpp_header_only"
       ],
       "fallback_element_type": "masd::object"
     },
