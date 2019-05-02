@@ -54,8 +54,8 @@
       }
     },
     {
-      "includePattern": "${DOGEN_PACKAGE_DIR}/dogen-${DOGEN_VERSION}-Darwin-x86_64.dmg",
-      "uploadPattern": "/${DOGEN_VERSION}/dogen-${DOGEN_VERSION}-Darwin-x86_64.dmg",
+      "includePattern": "${DOGEN_PACKAGE_DIR}/DOGEN-${DOGEN_VERSION}-Darwin-x86_64.dmg",
+      "uploadPattern": "/${DOGEN_VERSION}/DOGEN-${DOGEN_VERSION}-Darwin-x86_64.dmg",
       "matrixParams": {
         "override": 1
       }
