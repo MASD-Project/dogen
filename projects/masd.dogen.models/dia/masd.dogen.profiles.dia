@@ -1444,13 +1444,13 @@ Disables all facets in the C++ backend.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="74,37"/>
+        <dia:point val="74.0714,37"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="73.95,36.95;89.95,40.65"/>
+        <dia:rectangle val="74.0214,36.95;90.0214,40.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="74,37"/>
+        <dia:point val="74.0714,37"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.9"/>
@@ -1923,7 +1923,7 @@ default profile.
         <dia:point val="76.7575,33"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="75.9075,32.95;82,37.05"/>
+        <dia:rectangle val="75.9075,32.95;82.0714,37.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1931,8 +1931,8 @@ default profile.
       <dia:attribute name="orth_points">
         <dia:point val="76.7575,33"/>
         <dia:point val="76.7575,35"/>
-        <dia:point val="81.95,35"/>
-        <dia:point val="81.95,37"/>
+        <dia:point val="82.0214,35"/>
+        <dia:point val="82.0214,37"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
