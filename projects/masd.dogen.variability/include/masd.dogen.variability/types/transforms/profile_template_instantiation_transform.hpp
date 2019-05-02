@@ -26,8 +26,10 @@
 #endif
 
 #include <list>
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/profile.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/profile_template.hpp"
 #include "masd.dogen.variability/types/transforms/context.hpp"
 
@@ -37,6 +39,18 @@ namespace masd::dogen::variability::transforms {
  * @brief Instantiates a set of profile templates into profiles.
  */
 class profile_template_instantiation_transform final {
+private:
+private:
+    struct feature_group {
+        meta_model::feature profile;
+    };
+
+    static feature_group
+    make_feature_group(const meta_model::feature_model& fm);
+
+    static std::string obtain_profile_name(const feature_group& fg,
+        const meta_model::configuration& cfg);
+
 public:
     static std::list<meta_model::profile>
     apply(const context& ctx, const meta_model::feature_model& fm,

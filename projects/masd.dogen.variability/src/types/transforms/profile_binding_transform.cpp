@@ -61,7 +61,7 @@ profile_binding_transform::feature_group profile_binding_transform::
 make_feature_group(const meta_model::feature_model& fm) {
     BOOST_LOG_SEV(lg, debug) << "Creating feature group.";
 
-    profile_binding_transform::feature_group r;
+    feature_group r;
     const helpers::feature_selector s(fm);
     r.profile = s.get_by_name(profile_field);
 
