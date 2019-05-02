@@ -53,7 +53,8 @@ public:
         const std::unordered_map<std::string, masd::dogen::variability::meta_model::configuration_point>& configuration_points,
         const std::list<std::string>& parents,
         const std::unordered_set<std::string>& labels,
-        const bool merged);
+        const bool merged,
+        const std::string& base_layer_profile);
 
 public:
     void to_stream(std::ostream& s) const override;
@@ -87,6 +88,16 @@ public:
     void merged(const bool v);
     /**@}*/
 
+    /**
+     * @brief Which base layer does this profile rely on, if any.
+     */
+    /**@{*/
+    const std::string& base_layer_profile() const;
+    std::string& base_layer_profile();
+    void base_layer_profile(const std::string& v);
+    void base_layer_profile(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const profile& rhs) const;
     bool operator!=(const profile& rhs) const {
@@ -105,6 +116,7 @@ private:
     std::list<std::string> parents_;
     std::unordered_set<std::string> labels_;
     bool merged_;
+    std::string base_layer_profile_;
 };
 
 }

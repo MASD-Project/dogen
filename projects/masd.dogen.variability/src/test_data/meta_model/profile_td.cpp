@@ -77,6 +77,7 @@ populate(const unsigned int position, result_type& v) {
     v.parents(create_std_list_std_string(position + 1));
     v.labels(create_std_unordered_set_std_string(position + 2));
     v.merged(create_bool(position + 3));
+    v.base_layer_profile(create_std_string(position + 4));
 }
 
 profile_generator::result_type

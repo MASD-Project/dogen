@@ -90,14 +90,16 @@ profile::profile(
     const std::unordered_map<std::string, masd::dogen::variability::meta_model::configuration_point>& configuration_points,
     const std::list<std::string>& parents,
     const std::unordered_set<std::string>& labels,
-    const bool merged)
+    const bool merged,
+    const std::string& base_layer_profile)
     : masd::dogen::variability::meta_model::element(
       name,
       description),
       configuration_points_(configuration_points),
       parents_(parents),
       labels_(labels),
-      merged_(merged) { }
+      merged_(merged),
+      base_layer_profile_(base_layer_profile) { }
 
 void profile::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -114,7 +116,8 @@ void profile::to_stream(std::ostream& s) const {
       << "\"configuration_points\": " << configuration_points_ << ", "
       << "\"parents\": " << parents_ << ", "
       << "\"labels\": " << labels_ << ", "
-      << "\"merged\": " << merged_
+      << "\"merged\": " << merged_ << ", "
+      << "\"base_layer_profile\": " << "\"" << tidy_up_string(base_layer_profile_) << "\""
       << " }";
 }
 
@@ -126,6 +129,7 @@ void profile::swap(profile& other) noexcept {
     swap(parents_, other.parents_);
     swap(labels_, other.labels_);
     swap(merged_, other.merged_);
+    swap(base_layer_profile_, other.base_layer_profile_);
 }
 
 bool profile::equals(const masd::dogen::variability::meta_model::element& other) const {
@@ -139,7 +143,8 @@ bool profile::operator==(const profile& rhs) const {
         configuration_points_ == rhs.configuration_points_ &&
         parents_ == rhs.parents_ &&
         labels_ == rhs.labels_ &&
-        merged_ == rhs.merged_;
+        merged_ == rhs.merged_ &&
+        base_layer_profile_ == rhs.base_layer_profile_;
 }
 
 profile& profile::operator=(profile other) {
@@ -202,6 +207,22 @@ bool profile::merged() const {
 
 void profile::merged(const bool v) {
     merged_ = v;
+}
+
+const std::string& profile::base_layer_profile() const {
+    return base_layer_profile_;
+}
+
+std::string& profile::base_layer_profile() {
+    return base_layer_profile_;
+}
+
+void profile::base_layer_profile(const std::string& v) {
+    base_layer_profile_ = v;
+}
+
+void profile::base_layer_profile(const std::string&& v) {
+    base_layer_profile_ = std::move(v);
 }
 
 }

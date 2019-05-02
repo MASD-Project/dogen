@@ -12608,19 +12608,19 @@ with Masd.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O96">
       <dia:attribute name="obj_pos">
-        <dia:point val="-30,-3"/>
+        <dia:point val="-29.9286,-3.07143"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-30.05,-3.05;-10.97,0.65"/>
+        <dia:rectangle val="-29.9786,-3.12143;-10.8986,1.37857"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-30,-3"/>
+        <dia:point val="-29.9286,-3.07143"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#profile#</dia:string>
@@ -12733,6 +12733,29 @@ with Masd.
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#base_layer_profile#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Which base layer does this profile rely on, if any.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -12746,7 +12769,7 @@ with Masd.
         <dia:point val="-8.6325,-7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-20.56,-7.05;-7.7825,-2.95"/>
+        <dia:rectangle val="-20.4886,-7.05;-7.7825,-3.02143"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12754,8 +12777,8 @@ with Masd.
       <dia:attribute name="orth_points">
         <dia:point val="-8.6325,-7"/>
         <dia:point val="-8.6325,-5"/>
-        <dia:point val="-20.51,-5"/>
-        <dia:point val="-20.51,-3"/>
+        <dia:point val="-20.4386,-5"/>
+        <dia:point val="-20.4386,-3.07143"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -12893,17 +12916,17 @@ with Masd.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-11.02,0.6"/>
+        <dia:point val="-10.9486,1.32857"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,-0.15;-10.27,7.8"/>
+        <dia:rectangle val="-16.05,0.578571;-10.1986,7.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-11.02,0.6"/>
-        <dia:point val="-11.02,5"/>
+        <dia:point val="-10.9486,1.32857"/>
+        <dia:point val="-10.9486,5"/>
         <dia:point val="-16,5"/>
         <dia:point val="-16,7"/>
       </dia:attribute>
@@ -13379,17 +13402,17 @@ with Masd.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-30,0.6"/>
+        <dia:point val="-29.9286,1.32857"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-30.75,-0.15;-24.98,7.8"/>
+        <dia:rectangle val="-30.6786,0.578571;-24.98,7.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-30,0.6"/>
-        <dia:point val="-30,5"/>
+        <dia:point val="-29.9286,1.32857"/>
+        <dia:point val="-29.9286,5"/>
         <dia:point val="-25.18,5"/>
         <dia:point val="-25.18,7"/>
       </dia:attribute>
@@ -14118,17 +14141,17 @@ with Masd.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-20.51,0.6"/>
+        <dia:point val="-20.4386,1.32857"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-25.49,0.55;-20.31,15.8"/>
+        <dia:rectangle val="-25.49,1.27857;-20.2386,15.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-20.51,0.6"/>
-        <dia:point val="-20.51,12"/>
+        <dia:point val="-20.4386,1.32857"/>
+        <dia:point val="-20.4386,12"/>
         <dia:point val="-24.74,12"/>
         <dia:point val="-24.74,15"/>
       </dia:attribute>

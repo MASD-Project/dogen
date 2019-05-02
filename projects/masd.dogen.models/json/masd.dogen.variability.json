@@ -738,6 +738,11 @@
           "name": "merged",
           "type": "bool",
           "documentation": "If true, the profile has been merged with all of its parents.\n"
+        },
+        {
+          "name": "base_layer_profile",
+          "type": "std::string",
+          "documentation": "Which base layer does this profile rely on, if any.\n"
         }
       ]
     },
