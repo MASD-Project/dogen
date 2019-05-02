@@ -20,7 +20,6 @@
  */
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/fstream.hpp>
-#include <boost/algorithm/string/trim.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/list_io.hpp"
@@ -71,8 +70,7 @@ hydrator::read_documentation(const boost::property_tree::ptree& pt) const {
     if (!opt)
         return empty;
 
-    auto r(*opt);
-    boost::trim(r);
+    const auto r(*opt);
     return r;
 }
 
