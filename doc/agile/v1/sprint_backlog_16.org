@@ -13,28 +13,28 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-02 Thu 13:58]
+#+CAPTION: Clock summary at [2019-05-02 Thu 14:28]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *71:06* |       |       | 100.0 |
+| *Total time*                                           | *71:34* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 71:06   |       |       | 100.0 |
-| Active                                                 |         | 71:06 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  2:40 |   3.8 |
-| Sprint and product backlog grooming                    |         |       |  3:09 |   4.4 |
+| Stories                                                | 71:34   |       |       | 100.0 |
+| Active                                                 |         | 71:34 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  2:40 |   3.7 |
+| Sprint and product backlog grooming                    |         |       |  3:22 |   4.7 |
 | Create a video demo for the previous sprint's features |         |       |  1:55 |   2.7 |
 | Read variability papers                                |         |       |  1:04 |   1.5 |
 | Emacs maintenance and exploration work                 |         |       |  0:20 |   0.5 |
 | Fix issues with nightly build and CI                   |         |       |  0:39 |   0.9 |
-| Finish implementing the variability model              |         |       | 10:49 |  15.2 |
+| Finish implementing the variability model              |         |       | 10:49 |  15.1 |
 | Trim down stitch's use of annotations                  |         |       |  1:30 |   2.1 |
-| Read meta-data using configurations                    |         |       | 24:24 |  34.3 |
-| Remove uses of annotations                             |         |       |  7:44 |  10.9 |
+| Read meta-data using configurations                    |         |       | 24:24 |  34.1 |
+| Remove uses of annotations                             |         |       |  7:44 |  10.8 |
 | Stitch is still using artefact writer                  |         |       |  0:04 |   0.1 |
-| Exclude profiles from stereotypes processing           |         |       |  2:41 |   3.8 |
-| Profiles as meta-model elements                        |         |       | 13:54 |  19.5 |
-| Add support for composable stereotypes                 |         |       |  0:13 |   0.3 |
+| Exclude profiles from stereotypes processing           |         |       |  2:41 |   3.7 |
+| Profiles as meta-model elements                        |         |       | 13:54 |  19.4 |
+| Add support for composable stereotypes                 |         |       |  0:28 |   0.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -132,6 +132,7 @@ Happy Modeling!
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-05-02 Thu 13:59]--[2019-05-02 Thu 14:12] =>  0:18
     CLOCK: [2019-05-02 Thu 12:54]--[2019-05-02 Thu 13:04] =>  0:10
     CLOCK: [2019-04-30 Tue 10:08]--[2019-04-30 Tue 10:41] =>  0:33
     CLOCK: [2019-04-30 Tue 09:40]--[2019-04-30 Tue 09:57] =>  0:17
@@ -785,6 +786,7 @@ Mop-up tasks:
 
 *** STARTED Add support for composable stereotypes                    :story:
     :LOGBOOK:
+    CLOCK: [2019-05-02 Thu 14:13]--[2019-05-02 Thu 14:28] =>  0:15
     CLOCK: [2019-05-02 Thu 13:45]--[2019-05-02 Thu 13:58] =>  0:13
     :END:
 
