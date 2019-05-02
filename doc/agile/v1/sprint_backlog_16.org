@@ -13,27 +13,27 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-02 Thu 07:10]
+#+CAPTION: Clock summary at [2019-05-02 Thu 13:04]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *67:56* |       |       | 100.0 |
+| *Total time*                                           | *70:53* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 67:56   |       |       | 100.0 |
-| Active                                                 |         | 67:56 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  2:40 |   3.9 |
-| Sprint and product backlog grooming                    |         |       |  2:59 |   4.4 |
-| Create a video demo for the previous sprint's features |         |       |  1:55 |   2.8 |
-| Read variability papers                                |         |       |  1:04 |   1.6 |
+| Stories                                                | 70:53   |       |       | 100.0 |
+| Active                                                 |         | 70:53 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  2:40 |   3.8 |
+| Sprint and product backlog grooming                    |         |       |  3:09 |   4.4 |
+| Create a video demo for the previous sprint's features |         |       |  1:55 |   2.7 |
+| Read variability papers                                |         |       |  1:04 |   1.5 |
 | Emacs maintenance and exploration work                 |         |       |  0:20 |   0.5 |
-| Fix issues with nightly build and CI                   |         |       |  0:39 |   1.0 |
-| Finish implementing the variability model              |         |       | 10:49 |  15.9 |
-| Trim down stitch's use of annotations                  |         |       |  1:30 |   2.2 |
-| Read meta-data using configurations                    |         |       | 24:24 |  35.9 |
-| Remove uses of annotations                             |         |       |  7:44 |  11.4 |
+| Fix issues with nightly build and CI                   |         |       |  0:39 |   0.9 |
+| Finish implementing the variability model              |         |       | 10:49 |  15.3 |
+| Trim down stitch's use of annotations                  |         |       |  1:30 |   2.1 |
+| Read meta-data using configurations                    |         |       | 24:24 |  34.4 |
+| Remove uses of annotations                             |         |       |  7:44 |  10.9 |
 | Stitch is still using artefact writer                  |         |       |  0:04 |   0.1 |
-| Exclude profiles from stereotypes processing           |         |       |  2:41 |   3.9 |
-| Profiles as meta-model elements                        |         |       | 11:07 |  16.4 |
+| Exclude profiles from stereotypes processing           |         |       |  2:41 |   3.8 |
+| Profiles as meta-model elements                        |         |       | 13:54 |  19.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -131,6 +131,7 @@ Happy Modeling!
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-05-02 Thu 12:54]--[2019-05-02 Thu 13:04] =>  0:10
     CLOCK: [2019-04-30 Tue 10:08]--[2019-04-30 Tue 10:41] =>  0:33
     CLOCK: [2019-04-30 Tue 09:40]--[2019-04-30 Tue 09:57] =>  0:17
     CLOCK: [2019-04-30 Tue 08:05]--[2019-04-30 Tue 08:34] =>  0:29
@@ -488,8 +489,13 @@ groups, etc. Its all in the annotations transform.
 Once we have the profiles in the model set it should be easy to supply
 them to the annotations transform.
 
-*** STARTED Profiles as meta-model elements                           :story:
+*** COMPLETED Profiles as meta-model elements                         :story:
+    CLOSED: [2019-05-02 Thu 12:53]
     :LOGBOOK:
+    CLOCK: [2019-05-02 Thu 12:01]--[2019-05-02 Thu 12:53] =>  0:52
+    CLOCK: [2019-05-02 Thu 11:11]--[2019-05-02 Thu 11:28] =>  0:17
+    CLOCK: [2019-05-02 Thu 10:37]--[2019-05-02 Thu 11:10] =>  0:33
+    CLOCK: [2019-05-02 Thu 09:31]--[2019-05-02 Thu 10:36] =>  1:05
     CLOCK: [2019-05-01 Wed 16:53]--[2019-05-01 Wed 18:28] =>  1:35
     CLOCK: [2019-05-01 Wed 13:32]--[2019-05-01 Wed 14:07] =>  0:35
     CLOCK: [2019-05-01 Wed 13:14]--[2019-05-01 Wed 13:31] =>  0:17
@@ -775,6 +781,43 @@ Mop-up tasks:
 - reference profiles by name rather than by label and remove
   labels. Actually we do need labels. The profile names are just too
   unwieldy. However, the right name is =alias=. Rename this property.
+
+*** Add support for composable stereotypes                            :story:
+
+We need to be able to add more than one profile to an element. We have
+most of the parts needed for this now.
+
+Tasks:
+
+- add support to element level profiles, so that we can apply a "base
+  layer". If no base profile is supplied, we should just assume the
+  global base profile. Doing nothing should be sufficient for this
+  behaviour to emerge given the current implementation. Test this with
+  name hashing. Actually for this to be practical we need to support
+  the base layer in the profile itself; and we need to ensure that all
+  profiles we are merging have the same base layer, which is applied
+  only once. At present this is needed for handcrafted.
+- context can be used as a test for manual ioable.
+- add support for multiple binds per element.
+
+Merged stories:
+
+*Add "ioable" handcrafted types*
+
+Whenever we need to mix and match generated types with handcrafted
+types, it would be really useful to create the missing facets. The
+main one is IO, but we probably also need test data support because
+the tests would fail. We could simply handcraft the types on those
+facets. It would be nice to have profiles like:
+
+: masd::handcrafted_types
+: masd::handcrafted_io
+: masd::handcrafted_test_data
+
+We could do with a simpler word for handcrafted. Check the literature.
+
+Once this is in place, we could have some top-level stereotype that
+aggregates all three (=masd::???=) and we can then tag types with it.
 
 *** Use of binding points in profiles                                 :story:
 

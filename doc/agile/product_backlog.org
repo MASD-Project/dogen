@@ -181,23 +181,6 @@ IO. There may be other reasons such as the annotations factory and
 annotation expander. We should just add IO support for all types that
 need it and code generate the contexts.
 
-*** Add "ioable" handcrafted types                                    :story:
-
-Whenever we need to mix and match generated types with handcrafted
-types, it would be really useful to create the missing facets. The
-main one is IO, but we probably also need test data support because
-the tests would fail. We could simply handcraft the types on those
-facets. It would be nice to have profiles like:
-
-: masd::handcrafted_types
-: masd::handcrafted_io
-: masd::handcrafted_test_data
-
-We could do with a simpler word for handcrafted. Check the literature.
-
-Once this is in place, we could have some top-level stereotype that
-aggregates all three (=masd::???=) and we can then tag types with it.
-
 *** Create a "tests" stereotype with profiles                         :story:
 
 At present we are ignoring all of the contents of =tests=. This means
@@ -8593,7 +8576,13 @@ And they should behave just like built-ins.
 
 *** Add handcrafted class to C# test model                            :story:
 
-We should make sure handcrafted code works in C#.
+We should make sure handcrafted code works in C#. All the components
+including the profile is now present in the test model, but we do not
+yet have a test type for it. We also need to check how enablement is
+working to make sure it works for C#. This should all be done once we
+finish with the archetypes model clean up.
+
+*Previous Understanding*
 
 Actually in order to get handcrafted types to work we need support for
 enablement. This is a somewhat tricky feature so we should leave it
