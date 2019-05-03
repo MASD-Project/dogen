@@ -1182,7 +1182,8 @@
       "name": "transforms::context",
       "documentation": "\nContext for all coding transformations.\n\nContains all of the external data required for the transformations\nto execute. It's not ideal to have a huge \"global\" class, with lots\nof unrelated state; however, over time, we found that a number of\narguments were being supplied across the call graph, resulting in a\nlot of repetitive code. The context gathers together all of these.\n",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "masd::typeable",
+        "masd::pretty_printable"
       ],
       "tagged_values": {
         "masd.generation.cpp.types.forward_declarations.enabled": "true"
@@ -1191,7 +1192,7 @@
       "attributes": [
         {
           "name": "feature_model",
-          "type": "variability::meta_model::feature_model"
+          "type": "boost::shared_ptr<variability::meta_model::feature_model>"
         },
         {
           "name": "archetype_location_repository",

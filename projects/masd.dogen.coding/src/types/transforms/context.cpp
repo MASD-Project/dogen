@@ -19,35 +19,85 @@
  *
  */
 #include "masd.dogen.tracing/types/tracer.hpp"
-#include "masd.dogen.coding/types/helpers/mapping_set_repository.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.archetypes/types/location_repository.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
+#include "masd.dogen.coding/types/helpers/mapping_set_repository.hpp"
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& lhs,
+const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<masd::dogen::archetypes::location_repository>& lhs,
+const boost::shared_ptr<masd::dogen::archetypes::location_repository>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& lhs,
+const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<masd::dogen::tracing::tracer>& lhs,
+const boost::shared_ptr<masd::dogen::tracing::tracer>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
 
 namespace masd::dogen::coding::transforms {
 
-context::context()
-    : use_configuration_(false) {}
-
 context::context(
-    const bool use_configuration,
     const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model,
     const boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository,
     const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& mapping_repository,
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer)
-    : use_configuration_(use_configuration),
-      feature_model_(feature_model),
+    : feature_model_(feature_model),
       archetype_location_repository_(archetype_location_repository),
       mapping_repository_(mapping_repository),
       tracer_(tracer) { }
 
-bool context::use_configuration() const {
-    return use_configuration_;
+void context::swap(context& other) noexcept {
+    using std::swap;
+    swap(feature_model_, other.feature_model_);
+    swap(archetype_location_repository_, other.archetype_location_repository_);
+    swap(mapping_repository_, other.mapping_repository_);
+    swap(tracer_, other.tracer_);
 }
 
-void context::use_configuration(const bool v) {
-    use_configuration_ = v;
+bool context::operator==(const context& rhs) const {
+    return feature_model_ == rhs.feature_model_ &&
+        archetype_location_repository_ == rhs.archetype_location_repository_ &&
+        mapping_repository_ == rhs.mapping_repository_ &&
+        tracer_ == rhs.tracer_;
+}
+
+context& context::operator=(context other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
 }
 
 const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& context::feature_model() const {
+    return feature_model_;
+}
+
+boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& context::feature_model() {
     return feature_model_;
 }
 
@@ -55,7 +105,15 @@ void context::feature_model(const boost::shared_ptr<masd::dogen::variability::me
     feature_model_ = v;
 }
 
+void context::feature_model(const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>&& v) {
+    feature_model_ = std::move(v);
+}
+
 const boost::shared_ptr<masd::dogen::archetypes::location_repository>& context::archetype_location_repository() const {
+    return archetype_location_repository_;
+}
+
+boost::shared_ptr<masd::dogen::archetypes::location_repository>& context::archetype_location_repository() {
     return archetype_location_repository_;
 }
 
@@ -63,7 +121,15 @@ void context::archetype_location_repository(const boost::shared_ptr<masd::dogen:
     archetype_location_repository_ = v;
 }
 
+void context::archetype_location_repository(const boost::shared_ptr<masd::dogen::archetypes::location_repository>&& v) {
+    archetype_location_repository_ = std::move(v);
+}
+
 const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& context::mapping_repository() const {
+    return mapping_repository_;
+}
+
+boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& context::mapping_repository() {
     return mapping_repository_;
 }
 
@@ -71,12 +137,24 @@ void context::mapping_repository(const boost::shared_ptr<masd::dogen::coding::he
     mapping_repository_ = v;
 }
 
+void context::mapping_repository(const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>&& v) {
+    mapping_repository_ = std::move(v);
+}
+
 const boost::shared_ptr<masd::dogen::tracing::tracer>& context::tracer() const {
+    return tracer_;
+}
+
+boost::shared_ptr<masd::dogen::tracing::tracer>& context::tracer() {
     return tracer_;
 }
 
 void context::tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v) {
     tracer_ = v;
+}
+
+void context::tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>&& v) {
+    tracer_ = std::move(v);
 }
 
 }

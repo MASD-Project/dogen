@@ -25,12 +25,12 @@
 #pragma once
 #endif
 
-#include <vector>
+#include <algorithm>
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.tracing/types/tracer_fwd.hpp"
+#include "masd.dogen.archetypes/types/location_repository_fwd.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model_fwd.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_fwd.hpp"
-#include "masd.dogen.archetypes/types/location_repository_fwd.hpp"
 
 namespace masd::dogen::coding::transforms {
 
@@ -46,41 +46,66 @@ namespace masd::dogen::coding::transforms {
  */
 class context final {
 public:
+    context() = default;
+    context(const context&) = default;
+    context(context&&) = default;
     ~context() = default;
 
 public:
-    context();
-
     context(
-        const bool use_configuration,
         const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model,
         const boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository,
         const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& mapping_repository,
         const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer);
 
 public:
-    bool use_configuration() const;
-    void use_configuration(const bool v);
-
     const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model() const;
+    boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model();
     void feature_model(const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& v);
+    void feature_model(const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>&& v);
 
     const boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository() const;
+    boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository();
     void archetype_location_repository(const boost::shared_ptr<masd::dogen::archetypes::location_repository>& v);
+    void archetype_location_repository(const boost::shared_ptr<masd::dogen::archetypes::location_repository>&& v);
 
     const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& mapping_repository() const;
+    boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& mapping_repository();
     void mapping_repository(const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>& v);
+    void mapping_repository(const boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository>&& v);
 
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer() const;
+    boost::shared_ptr<masd::dogen::tracing::tracer>& tracer();
     void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v);
+    void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>&& v);
+
+public:
+    bool operator==(const context& rhs) const;
+    bool operator!=(const context& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+public:
+    void swap(context& other) noexcept;
+    context& operator=(context other);
 
 private:
-    bool use_configuration_;
     boost::shared_ptr<masd::dogen::variability::meta_model::feature_model> feature_model_;
     boost::shared_ptr<masd::dogen::archetypes::location_repository> archetype_location_repository_;
     boost::shared_ptr<masd::dogen::coding::helpers::mapping_set_repository> mapping_repository_;
     boost::shared_ptr<masd::dogen::tracing::tracer> tracer_;
 };
+
+}
+
+namespace std {
+
+template<>
+inline void swap(
+    masd::dogen::coding::transforms::context& lhs,
+    masd::dogen::coding::transforms::context& rhs) {
+    lhs.swap(rhs);
+}
 
 }
 

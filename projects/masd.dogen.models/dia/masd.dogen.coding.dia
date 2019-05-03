@@ -10566,7 +10566,7 @@ model.#</dia:string>
         <dia:string>#context#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#masd::typeable, masd::pretty_printable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.generation.cpp.types.forward_declarations.enabled=true
@@ -10616,7 +10616,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#fffacd"/>
+        <dia:color val="#f5fffa"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -10663,7 +10663,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
             <dia:string>#feature_model#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#variability::meta_model::feature_model#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;variability::meta_model::feature_model&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
