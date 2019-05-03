@@ -55,7 +55,7 @@ const std::string path_masd_dogen_generation_dia("masd.dogen.generation.dia");
 const std::string path_masd_dogen_injection_dia("masd.dogen.injection.dia");
 const std::string path_masd_dogen_injection_dia_dia("masd.dogen.injection.dia.dia");
 const std::string path_masd_dogen_injection_json_dia("masd.dogen.injection.json.dia");
-const std::string path_masd_dogen_orchestration_dia("masd.dogen.orchestration.dia");
+const std::string path_masd_dogen_engine_dia("masd.dogen.engine.dia");
 const std::string path_masd_dogen_templating_dia("masd.dogen.templating.dia");
 const std::string path_masd_dogen_tracing_dia("masd.dogen.tracing.dia");
 const std::string path_masd_dogen_utility_dia("masd.dogen.utility.dia");
@@ -72,7 +72,7 @@ const std::string path_masd_dogen_generation_json("masd.dogen.generation.json");
 const std::string path_masd_dogen_injection_json("masd.dogen.injection.json");
 const std::string path_masd_dogen_injection_dia_json("masd.dogen.injection.dia.json");
 const std::string path_masd_dogen_injection_json_json("masd.dogen.injection.json.json");
-const std::string path_masd_dogen_orchestration_json("masd.dogen.orchestration.json");
+const std::string path_masd_dogen_engine_json("masd.dogen.engine.json");
 const std::string path_masd_dogen_templating_json("masd.dogen.templating.json");
 const std::string path_masd_dogen_tracing_json("masd.dogen.tracing.json");
 const std::string path_masd_dogen_utility_json("masd.dogen.utility.json");
@@ -204,9 +204,9 @@ path dogen_generation::input_masd_dogen_injection_json_dia() {
     return dia_models_directory_ / path_masd_dogen_injection_json_dia;
 }
 
-path dogen_generation::input_masd_dogen_orchestration_dia() {
+path dogen_generation::input_masd_dogen_engine_dia() {
     ensure_initialized();
-    return dia_models_directory_ / path_masd_dogen_orchestration_dia;
+    return dia_models_directory_ / path_masd_dogen_engine_dia;
 }
 
 path dogen_generation::input_masd_dogen_templating_dia() {
@@ -284,9 +284,9 @@ path dogen_generation::input_masd_dogen_injection_json_json() {
     return json_models_directory_ / path_masd_dogen_injection_json_json;
 }
 
-path dogen_generation::input_masd_dogen_orchestration_json() {
+path dogen_generation::input_masd_dogen_engine_json() {
     ensure_initialized();
-    return json_models_directory_ / path_masd_dogen_orchestration_json;
+    return json_models_directory_ / path_masd_dogen_engine_json;
 }
 
 path dogen_generation::input_masd_dogen_templating_json() {

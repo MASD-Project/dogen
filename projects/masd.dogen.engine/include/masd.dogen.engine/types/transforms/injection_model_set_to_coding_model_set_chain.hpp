@@ -18,29 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
-#define MASD_DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
+#ifndef MASD_DOGEN_ENGINE_TYPES_TRANSFORMS_INJECTION_MODEL_SET_TO_CODING_MODEL_SET_CHAIN_HPP
+#define MASD_DOGEN_ENGINE_TYPES_TRANSFORMS_INJECTION_MODEL_SET_TO_CODING_MODEL_SET_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/di.hpp>
-#include "masd.dogen.cli/types/command_line_parser.hpp"
-#include "masd.dogen.cli/types/program_options_parser.hpp"
-#include "masd.dogen.engine/types/injector_factory.hpp"
+#include "masd.dogen.injection/types/meta_model/model_set.hpp"
+#include "masd.dogen.coding/types/meta_model/model_set.hpp"
+#include "masd.dogen.engine/types/transforms/context_fwd.hpp"
 
-namespace masd::dogen::cli {
+namespace masd::dogen::engine::transforms {
 
-class injector_factory final {
+/**
+ * @brief Converts an injection model set into a coding model set.
+ *
+ * The transform assumes all injection transforms have been applied to
+ * the injection model set.
+ */
+class injection_model_set_to_coding_model_set_chain final {
 public:
-    static auto make_injector() {
-        using boost::di::bind;
-        using boost::di::make_injector;
-        return make_injector(
-            masd::dogen::engine::injector_factory::make_injector(),
-            bind<command_line_parser>.to<program_options_parser>());
-    }
+    static coding::meta_model::model_set
+    apply(const context& ctx, const injection::meta_model::model_set& ms);
 };
 
 }

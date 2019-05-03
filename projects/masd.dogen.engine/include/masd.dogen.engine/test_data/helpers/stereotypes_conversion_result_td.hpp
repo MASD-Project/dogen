@@ -18,29 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
-#define MASD_DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
+#ifndef MASD_DOGEN_ENGINE_TEST_DATA_HELPERS_STEREOTYPES_CONVERSION_RESULT_TD_HPP
+#define MASD_DOGEN_ENGINE_TEST_DATA_HELPERS_STEREOTYPES_CONVERSION_RESULT_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/di.hpp>
-#include "masd.dogen.cli/types/command_line_parser.hpp"
-#include "masd.dogen.cli/types/program_options_parser.hpp"
-#include "masd.dogen.engine/types/injector_factory.hpp"
+#include "masd.dogen.engine/types/helpers/stereotypes_conversion_result.hpp"
 
-namespace masd::dogen::cli {
+namespace masd::dogen::engine::helpers {
 
-class injector_factory final {
+class stereotypes_conversion_result_generator {
 public:
-    static auto make_injector() {
-        using boost::di::bind;
-        using boost::di::make_injector;
-        return make_injector(
-            masd::dogen::engine::injector_factory::make_injector(),
-            bind<command_line_parser>.to<program_options_parser>());
-    }
+    stereotypes_conversion_result_generator();
+
+public:
+    typedef masd::dogen::engine::helpers::stereotypes_conversion_result result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 }

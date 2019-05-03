@@ -18,29 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
-#define MASD_DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
+#ifndef MASD_DOGEN_ENGINE_TYPES_TRAITS_HPP
+#define MASD_DOGEN_ENGINE_TYPES_TRAITS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/di.hpp>
-#include "masd.dogen.cli/types/command_line_parser.hpp"
-#include "masd.dogen.cli/types/program_options_parser.hpp"
-#include "masd.dogen.engine/types/injector_factory.hpp"
+#include <string>
 
-namespace masd::dogen::cli {
+namespace masd::dogen::engine {
 
-class injector_factory final {
-public:
-    static auto make_injector() {
-        using boost::di::bind;
-        using boost::di::make_injector;
-        return make_injector(
-            masd::dogen::engine::injector_factory::make_injector(),
-            bind<command_line_parser>.to<program_options_parser>());
-    }
+struct traits {
+    struct variability {
+        static std::string  binding_point();
+        static std::string  labels();
+        static std::string  archetype_location_kernel();
+        static std::string  archetype_location_backend();
+        static std::string  archetype_location_facet();
+        static std::string  archetype_location_archetype();
+        static std::string  template_kind();
+        static std::string  untyped_value();
+    };
 };
 
 }

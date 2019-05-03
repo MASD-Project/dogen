@@ -13,29 +13,30 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-03 Fri 14:41]
+#+CAPTION: Clock summary at [2019-05-03 Fri 15:20]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *77:55* |       |       | 100.0 |
+| *Total time*                                           | *78:33* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 77:55   |       |       | 100.0 |
-| Active                                                 |         | 77:55 |       | 100.0 |
+| Stories                                                | 78:33   |       |       | 100.0 |
+| Active                                                 |         | 78:33 |       | 100.0 |
 | Edit release notes for previous sprint                 |         |       |  2:40 |   3.4 |
 | Sprint and product backlog grooming                    |         |       |  3:27 |   4.4 |
-| Create a video demo for the previous sprint's features |         |       |  1:55 |   2.5 |
+| Create a video demo for the previous sprint's features |         |       |  1:55 |   2.4 |
 | Read variability papers                                |         |       |  1:04 |   1.4 |
 | Emacs maintenance and exploration work                 |         |       |  0:20 |   0.4 |
 | Fix issues with nightly build and CI                   |         |       |  0:39 |   0.8 |
-| Finish implementing the variability model              |         |       | 10:49 |  13.9 |
+| Finish implementing the variability model              |         |       | 10:49 |  13.8 |
 | Trim down stitch's use of annotations                  |         |       |  1:30 |   1.9 |
-| Read meta-data using configurations                    |         |       | 24:24 |  31.3 |
-| Remove uses of annotations                             |         |       |  7:44 |   9.9 |
+| Read meta-data using configurations                    |         |       | 24:24 |  31.1 |
+| Remove uses of annotations                             |         |       |  7:44 |   9.8 |
 | Stitch is still using artefact writer                  |         |       |  0:04 |   0.1 |
 | Exclude profiles from stereotypes processing           |         |       |  2:41 |   3.4 |
-| Profiles as meta-model elements                        |         |       | 13:54 |  17.8 |
+| Profiles as meta-model elements                        |         |       | 13:54 |  17.7 |
 | Add support for composable stereotypes                 |         |       |  6:06 |   7.8 |
 | Code generate all contexts                             |         |       |  0:38 |   0.8 |
+| Consider renaming orchestration to "engine"            |         |       |  0:38 |   0.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -849,6 +850,16 @@ IO. There may be other reasons such as the annotations factory and
 annotation expander. We should just add IO support for all types that
 need it and code generate the contexts.
 
+*** COMPLETED Consider renaming orchestration to "engine"             :story:
+    CLOSED: [2019-05-03 Fri 15:20]
+    :LOGBOOK:
+    CLOCK: [2019-05-03 Fri 14:42]--[2019-05-03 Fri 15:20] =>  0:38
+    :END:
+
+Orchestration is a bit of a vague name; after all we do orchestration
+pretty much everywhere. This model really represents the code
+generation engine of dogen. Its still very vague but slightly less so.
+
 *** Merging of profiles and configurations is non-intuitive           :story:
 
 As per comments in profile binding:
@@ -1108,12 +1119,6 @@ Snippet of results after =sort | uniq -c=
 
 We need to investigate the generation pipeline to understand where
 this is coming from.
-
-*** Consider renaming orchestration to "engine"                       :story:
-
-Orchestration is a bit of a vague name; after all we do orchestration
-pretty much everywhere. This model really represents the code
-generation engine of dogen. Its still very vague but slightly less so.
 
 *** Consider renaming =coding= model                                  :story:
 

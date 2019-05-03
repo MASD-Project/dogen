@@ -18,31 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
-#define MASD_DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
+#include "masd.dogen.utility/types/log/logger.hpp"
+#include "masd.dogen.engine/types/transforms/scoped_context_manager.hpp"
+#include "masd.dogen.engine/types/transforms/code_generation_chain.hpp"
+#include "masd.dogen.engine/types/generator.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include <boost/di.hpp>
-#include "masd.dogen.cli/types/command_line_parser.hpp"
-#include "masd.dogen.cli/types/program_options_parser.hpp"
-#include "masd.dogen.engine/types/injector_factory.hpp"
-
-namespace masd::dogen::cli {
-
-class injector_factory final {
-public:
-    static auto make_injector() {
-        using boost::di::bind;
-        using boost::di::make_injector;
-        return make_injector(
-            masd::dogen::engine::injector_factory::make_injector(),
-            bind<command_line_parser>.to<program_options_parser>());
-    }
-};
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory("engine.generator"));
 
 }
 
-#endif
+namespace masd::dogen::engine {
+
+void generator::generate(const configuration& cfg,
+    const boost::filesystem::path& target,
+    const boost::filesystem::path& output_directory) const {
+
+    BOOST_LOG_SEV(lg, debug) << "Started generation.";
+
+    {
+        using namespace transforms;
+        scoped_context_manager scm(cfg, output_directory);
+        code_generation_chain::apply(scm.context(), target);
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished generation.";
+}
+
+}

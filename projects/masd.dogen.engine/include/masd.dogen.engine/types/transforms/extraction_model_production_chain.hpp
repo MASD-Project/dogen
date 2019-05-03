@@ -18,29 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
-#define MASD_DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
+#ifndef MASD_DOGEN_ENGINE_TYPES_TRANSFORMS_EXTRACTION_MODEL_PRODUCTION_CHAIN_HPP
+#define MASD_DOGEN_ENGINE_TYPES_TRANSFORMS_EXTRACTION_MODEL_PRODUCTION_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/di.hpp>
-#include "masd.dogen.cli/types/command_line_parser.hpp"
-#include "masd.dogen.cli/types/program_options_parser.hpp"
-#include "masd.dogen.engine/types/injector_factory.hpp"
+#include <boost/filesystem/path.hpp>
+#include "masd.dogen.extraction/types/meta_model/model.hpp"
+#include "masd.dogen.engine/types/transforms/context_fwd.hpp"
 
-namespace masd::dogen::cli {
+namespace masd::dogen::engine::transforms {
 
-class injector_factory final {
+class extraction_model_production_chain final {
 public:
-    static auto make_injector() {
-        using boost::di::bind;
-        using boost::di::make_injector;
-        return make_injector(
-            masd::dogen::engine::injector_factory::make_injector(),
-            bind<command_line_parser>.to<program_options_parser>());
-    }
+    static extraction::meta_model::model apply(const context& ctx,
+        const boost::filesystem::path& target);
 };
 
 }

@@ -17,7 +17,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(name "masd.dogen.cli")
+set(name "masd.dogen.engine")
 set(lib_binary_name ${name})
 set(lib_target_name ${name}.lib)
 
@@ -36,25 +36,8 @@ set_target_properties(${lib_target_name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
 target_link_libraries(${lib_target_name}
-    ${Boost_LIBRARIES})
-
-install(TARGETS ${lib_target_name}
-    ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib
-    COMPONENT libraries)
-
-set(exe_binary_name ${name})
-set(exe_target_name ${name}.exe)
-
-set(exe_files ${files})
-list(FILTER exe_files INCLUDE REGEX "main.cpp")
-
-add_executable(${exe_target_name} ${exe_files})
-set_target_properties(${exe_target_name} PROPERTIES
-    OUTPUT_NAME ${exe_binary_name})
-
-target_link_libraries(${exe_target_name}
-    ${lib_target_name}
+    masd.dogen.lib
+    masd.dogen.utility.lib
     masd.dogen.dia.lib
     masd.dogen.extraction.lib
     masd.dogen.injection.lib
@@ -63,12 +46,12 @@ target_link_libraries(${exe_target_name}
     masd.dogen.coding.lib
     masd.dogen.generation.cpp.lib
     masd.dogen.generation.csharp.lib
-    masd.dogen.lib
-    masd.dogen.engine.lib
+    masd.dogen.generation.lib
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
-    ${CMAKE_REQUIRED_LIBRARIES}
-    ${CMAKE_THREAD_LIBS_INIT})
+    ${CMAKE_REQUIRED_LIBRARIES})
 
-install(TARGETS ${exe_target_name} RUNTIME DESTINATION bin
-    COMPONENT applications)
+install(TARGETS ${lib_target_name}
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    COMPONENT libraries)

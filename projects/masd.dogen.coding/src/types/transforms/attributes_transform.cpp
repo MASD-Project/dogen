@@ -99,7 +99,7 @@ void attributes_transform::expand_object(meta_model::object& o,
     /*
      * Repopulate the names of attribute sourced from object
      * templates. These have originally been populated by the adaptor
-     * at the orchestration level. However, as we copied these across,
+     * at the engine level. However, as we copied these across,
      * we need to ensure they are located correctly in coding space:
      * i.e. their qualified name should indicate that their are no
      * longer part of the object template and are now part of the

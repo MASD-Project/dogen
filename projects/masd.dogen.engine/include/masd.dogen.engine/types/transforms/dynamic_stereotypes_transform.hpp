@@ -18,29 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
-#define MASD_DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
+#ifndef MASD_DOGEN_ENGINE_TYPES_TRANSFORMS_DYNAMIC_STEREOTYPES_TRANSFORM_HPP
+#define MASD_DOGEN_ENGINE_TYPES_TRANSFORMS_DYNAMIC_STEREOTYPES_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/di.hpp>
-#include "masd.dogen.cli/types/command_line_parser.hpp"
-#include "masd.dogen.cli/types/program_options_parser.hpp"
-#include "masd.dogen.engine/types/injector_factory.hpp"
+#include "masd.dogen.coding/types/meta_model/model_set.hpp"
+#include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
-namespace masd::dogen::cli {
+namespace masd::dogen::engine::transforms {
 
-class injector_factory final {
+/**
+ * @brief Populates the dynamic stereotypes of the coding model.
+ */
+class dynamic_stereotypes_transform final {
 public:
-    static auto make_injector() {
-        using boost::di::bind;
-        using boost::di::make_injector;
-        return make_injector(
-            masd::dogen::engine::injector_factory::make_injector(),
-            bind<command_line_parser>.to<program_options_parser>());
-    }
+    static void apply(const coding::transforms::context& ctx,
+        coding::meta_model::model_set& ms);
 };
 
 }

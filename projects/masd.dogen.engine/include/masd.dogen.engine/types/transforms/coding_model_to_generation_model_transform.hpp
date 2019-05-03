@@ -18,29 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
-#define MASD_DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
+#ifndef MASD_DOGEN_ENGINE_TYPES_TRANSFORMS_CODING_MODEL_TO_GENERATION_MODEL_TRANSFORM_HPP
+#define MASD_DOGEN_ENGINE_TYPES_TRANSFORMS_CODING_MODEL_TO_GENERATION_MODEL_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/di.hpp>
-#include "masd.dogen.cli/types/command_line_parser.hpp"
-#include "masd.dogen.cli/types/program_options_parser.hpp"
-#include "masd.dogen.engine/types/injector_factory.hpp"
+#include <list>
+#include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.generation/types/meta_model/model.hpp"
+#include "masd.dogen.generation/types/transforms/context.hpp"
 
-namespace masd::dogen::cli {
+namespace masd::dogen::engine::transforms {
 
-class injector_factory final {
+class coding_model_to_generation_model_transform final {
+private:
+    static std::size_t
+    compute_total_size(const coding::meta_model::model& em);
+
+    static generation::meta_model::model
+    apply(const coding::meta_model::model& m);
+
 public:
-    static auto make_injector() {
-        using boost::di::bind;
-        using boost::di::make_injector;
-        return make_injector(
-            masd::dogen::engine::injector_factory::make_injector(),
-            bind<command_line_parser>.to<program_options_parser>());
-    }
+    static std::list<generation::meta_model::model>
+    apply(const generation::transforms::context& ctx,
+        const std::list<coding::meta_model::model>& cms);
 };
 
 }

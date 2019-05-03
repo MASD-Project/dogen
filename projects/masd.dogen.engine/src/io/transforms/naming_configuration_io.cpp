@@ -18,31 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
-#define MASD_DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "masd.dogen.engine/io/transforms/naming_configuration_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <boost/di.hpp>
-#include "masd.dogen.cli/types/command_line_parser.hpp"
-#include "masd.dogen.cli/types/program_options_parser.hpp"
-#include "masd.dogen.engine/types/injector_factory.hpp"
-
-namespace masd::dogen::cli {
-
-class injector_factory final {
-public:
-    static auto make_injector() {
-        using boost::di::bind;
-        using boost::di::make_injector;
-        return make_injector(
-            masd::dogen::engine::injector_factory::make_injector(),
-            bind<command_line_parser>.to<program_options_parser>());
-    }
-};
-
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
 }
 
-#endif
+namespace masd::dogen::engine::transforms {
+
+std::ostream& operator<<(std::ostream& s, const naming_configuration& v) {
+    s << " { "
+      << "\"__type__\": " << "\"masd::dogen::engine::transforms::naming_configuration\"" << ", "
+      << "\"external_modules\": " << "\"" << tidy_up_string(v.external_modules()) << "\"" << ", "
+      << "\"model_modules\": " << "\"" << tidy_up_string(v.model_modules()) << "\""
+      << " }";
+    return(s);
+}
+
+}
