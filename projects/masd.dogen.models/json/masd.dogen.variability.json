@@ -593,7 +593,8 @@
       "name": "transforms::context",
       "documentation": "Context for transformations.\n",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "masd::typeable",
+        "masd::pretty_printable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [

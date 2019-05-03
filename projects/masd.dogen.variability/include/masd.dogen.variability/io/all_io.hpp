@@ -33,6 +33,7 @@
 #include "masd.dogen.variability/io/meta_model/element_io.hpp"
 #include "masd.dogen.variability/io/meta_model/feature_io.hpp"
 #include "masd.dogen.variability/io/meta_model/profile_io.hpp"
+#include "masd.dogen.variability/io/transforms/context_io.hpp"
 #include "masd.dogen.variability/io/meta_model/value_type_io.hpp"
 #include "masd.dogen.variability/io/meta_model/binding_point_io.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_io.hpp"

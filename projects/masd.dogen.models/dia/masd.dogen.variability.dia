@@ -7844,7 +7844,7 @@ elements.#</dia:string>
         <dia:string>#context#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#masd::typeable, masd::pretty_printable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Context for transformations.#</dia:string>
@@ -7886,7 +7886,7 @@ elements.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#fffacd"/>
+        <dia:color val="#f5fffa"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>

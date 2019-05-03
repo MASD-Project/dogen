@@ -27,6 +27,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.tracing/types/tracer_fwd.hpp"
 #include "masd.dogen.archetypes/types/location_repository_fwd.hpp"
@@ -38,8 +39,12 @@ namespace masd::dogen::variability::transforms {
  */
 class context final {
 public:
-    context();
     context(const context&) = default;
+    context(context&&) = default;
+    ~context() = default;
+
+public:
+    context();
 
 public:
     context(
@@ -50,16 +55,32 @@ public:
 
 public:
     const std::vector<boost::filesystem::path>& data_directories() const;
+    std::vector<boost::filesystem::path>& data_directories();
     void data_directories(const std::vector<boost::filesystem::path>& v);
+    void data_directories(const std::vector<boost::filesystem::path>&& v);
 
     const boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository() const;
+    boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository();
     void archetype_location_repository(const boost::shared_ptr<masd::dogen::archetypes::location_repository>& v);
+    void archetype_location_repository(const boost::shared_ptr<masd::dogen::archetypes::location_repository>&& v);
 
     bool compatibility_mode() const;
     void compatibility_mode(const bool v);
 
     const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer() const;
+    boost::shared_ptr<masd::dogen::tracing::tracer>& tracer();
     void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v);
+    void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>&& v);
+
+public:
+    bool operator==(const context& rhs) const;
+    bool operator!=(const context& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+public:
+    void swap(context& other) noexcept;
+    context& operator=(context other);
 
 private:
     std::vector<boost::filesystem::path> data_directories_;
@@ -67,6 +88,17 @@ private:
     bool compatibility_mode_;
     boost::shared_ptr<masd::dogen::tracing::tracer> tracer_;
 };
+
+}
+
+namespace std {
+
+template<>
+inline void swap(
+    masd::dogen::variability::transforms::context& lhs,
+    masd::dogen::variability::transforms::context& rhs) {
+    lhs.swap(rhs);
+}
 
 }
 
