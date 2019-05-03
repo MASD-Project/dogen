@@ -52,9 +52,9 @@ for layer in dia.active_display().diagram.data.layers:
         elif "masd::handcrafted::typeable" in stereotype:
             object.properties["fill_colour"] = "#FFFACD"
         elif "masd::cpp::header_only" in stereotype:
-            object.properties["fill_colour"] = "#EEFACD"
+            object.properties["fill_colour"] = "#F5FFFA"
         elif "masd::cpp::implementation_only" in stereotype:
-            object.properties["fill_colour"] = "#B2E2E2"
+            object.properties["fill_colour"] = "#EEFACD"
 
         #
         # Theme: Decorations
@@ -65,8 +65,16 @@ for layer in dia.active_display().diagram.data.layers:
             object.properties["fill_colour"] = "#DDB7DD"
         elif "masd::decoration::generation_marker" in stereotype:
             object.properties["fill_colour"] = "#ACACBB"
+
+        #
+        # Theme: variability
+        #
         elif "masd::variability::profile_template" in stereotype:
             object.properties["fill_colour"] = "#EDE6F2"
+        elif "masd::feature_template_group" in stereotype:
+            object.properties["fill_colour"] = "#B2E2E2"
+        elif "masd::feature_template_group_registrar" in stereotype:
+            object.properties["fill_colour"] = "#B2E2E2"
 
         #
         # Theme: Core meta-elements
@@ -79,7 +87,7 @@ for layer in dia.active_display().diagram.data.layers:
             object.properties["fill_colour"] = "#FFDAB9"
         elif "masd::object_template" in stereotype:
             object.properties["fill_colour"] = "#EED2DE"
-        elif "masd::object" in stereotype:
-            object.properties["fill_colour"] = "#F5FFFA"
+        elif "masd::object_template" in stereotype:
+            object.properties["fill_colour"] = "#EED2DE"
         else:
             object.properties["fill_colour"] = "#F5FFFA"
