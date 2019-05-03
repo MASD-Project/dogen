@@ -203,14 +203,6 @@ few properties such as start of modeline, etc.
 When we moved the kernel logic into yarn from quilt, we did not rename
 the traits.
 
-*** Code generate all contexts                                        :story:
-
-At present we are manually generating the transform contexts across
-all models. The main reason for this is that tracer does not support
-IO. There may be other reasons such as the annotations factory and
-annotation expander. We should just add IO support for all types that
-need it and code generate the contexts.
-
 *** Create a "tests" stereotype with profiles                         :story:
 
 At present we are ignoring all of the contents of =tests=. This means

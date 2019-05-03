@@ -13,28 +13,29 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-03 Fri 12:50]
+#+CAPTION: Clock summary at [2019-05-03 Fri 14:41]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *77:17* |       |       | 100.0 |
+| *Total time*                                           | *77:55* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 77:17   |       |       | 100.0 |
-| Active                                                 |         | 77:17 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  2:40 |   3.5 |
-| Sprint and product backlog grooming                    |         |       |  3:27 |   4.5 |
+| Stories                                                | 77:55   |       |       | 100.0 |
+| Active                                                 |         | 77:55 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  2:40 |   3.4 |
+| Sprint and product backlog grooming                    |         |       |  3:27 |   4.4 |
 | Create a video demo for the previous sprint's features |         |       |  1:55 |   2.5 |
 | Read variability papers                                |         |       |  1:04 |   1.4 |
 | Emacs maintenance and exploration work                 |         |       |  0:20 |   0.4 |
 | Fix issues with nightly build and CI                   |         |       |  0:39 |   0.8 |
-| Finish implementing the variability model              |         |       | 10:49 |  14.0 |
+| Finish implementing the variability model              |         |       | 10:49 |  13.9 |
 | Trim down stitch's use of annotations                  |         |       |  1:30 |   1.9 |
-| Read meta-data using configurations                    |         |       | 24:24 |  31.6 |
-| Remove uses of annotations                             |         |       |  7:44 |  10.0 |
+| Read meta-data using configurations                    |         |       | 24:24 |  31.3 |
+| Remove uses of annotations                             |         |       |  7:44 |   9.9 |
 | Stitch is still using artefact writer                  |         |       |  0:04 |   0.1 |
-| Exclude profiles from stereotypes processing           |         |       |  2:41 |   3.5 |
-| Profiles as meta-model elements                        |         |       | 13:54 |  18.0 |
-| Add support for composable stereotypes                 |         |       |  6:06 |   7.9 |
+| Exclude profiles from stereotypes processing           |         |       |  2:41 |   3.4 |
+| Profiles as meta-model elements                        |         |       | 13:54 |  17.8 |
+| Add support for composable stereotypes                 |         |       |  6:06 |   7.8 |
+| Code generate all contexts                             |         |       |  0:38 |   0.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -785,7 +786,8 @@ Mop-up tasks:
   labels. Actually we do need labels. The profile names are just too
   unwieldy. However, the right name is =alias=. Rename this property.
 
-*** STARTED Add support for composable stereotypes                    :story:
+*** COMPLETED Add support for composable stereotypes                  :story:
+    CLOSED: [2019-05-03 Fri 14:09]
     :LOGBOOK:
     CLOCK: [2019-05-03 Fri 12:32]--[2019-05-03 Fri 12:50] =>  0:18
     CLOCK: [2019-05-03 Fri 11:55]--[2019-05-03 Fri 12:31] =>  0:36
@@ -831,6 +833,21 @@ We could do with a simpler word for handcrafted. Check the literature.
 
 Once this is in place, we could have some top-level stereotype that
 aggregates all three (=masd::???=) and we can then tag types with it.
+
+*** COMPLETED Code generate all contexts                              :story:
+    CLOSED: [2019-05-03 Fri 14:41]
+    :LOGBOOK:
+    CLOCK: [2019-05-03 Fri 14:24]--[2019-05-03 Fri 14:41] =>  0:17
+    CLOCK: [2019-05-03 Fri 14:11]--[2019-05-03 Fri 14:23] =>  0:12
+    CLOCK: [2019-05-03 Fri 14:09]--[2019-05-03 Fri 14:10] =>  0:01
+    CLOCK: [2019-05-03 Fri 14:01]--[2019-05-03 Fri 14:09] =>  0:08
+    :END:
+
+At present we are manually generating the transform contexts across
+all models. The main reason for this is that tracer does not support
+IO. There may be other reasons such as the annotations factory and
+annotation expander. We should just add IO support for all types that
+need it and code generate the contexts.
 
 *** Merging of profiles and configurations is non-intuitive           :story:
 
