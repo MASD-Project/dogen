@@ -356,6 +356,58 @@
         "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features",
+      "documentation": "Defines all of the features and feature groups used by\nthe injection model.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "features::input_technical_space",
+      "stereotypes": [
+        "masd::variability::feature_template_group"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.injection.input_technical_space",
+          "type": "std::string",
+          "value": "agnostic",
+          "documentation": "text\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance"
+          }
+        }
+      ]
+    },
+    {
+      "name": "features::reference",
+      "stereotypes": [
+        "masd::variability::feature_template_group"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.injection.reference",
+          "type": "std::string",
+          "documentation": "text_collection\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance"
+          }
+        }
+      ]
+    },
+    {
+      "name": "features::registrar",
+      "stereotypes": [
+        "masd::variability::feature_template_group_registrar"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

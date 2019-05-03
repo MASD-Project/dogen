@@ -28,6 +28,7 @@
 #include "masd.dogen.injection/types/traits.hpp"
 #include "masd.dogen.injection/types/injection.hpp"
 #include "masd.dogen.injection/types/meta_model/model.hpp"
+#include "masd.dogen.injection/types/features/features.hpp"
 #include "masd.dogen.injection/types/meta_model/element.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/meta_model/attribute.hpp"
