@@ -58,9 +58,9 @@ const std::string stereotype_licence("masd::decoration::licence");
 const std::string stereotype_variability_profile_template(
     "masd::variability::profile_template");
 const std::string stereotype_variability_feature_template_group(
-    "masd::variability::variability_feature_template_group");
+    "masd::variability::feature_template_group");
 const std::string stereotype_variability_feature_template_group_registrar(
-    "masd::variability::variability_feature_template_group_registrar");
+    "masd::variability::feature_template_group_registrar");
 const std::string unsupported_stereotype("Invalid or unsupported stereotype: ");
 
 }
@@ -194,7 +194,7 @@ is_element_type(const static_stereotypes ss) const {
         ss == static_stereotypes::generation_marker ||
         ss == static_stereotypes::licence ||
         ss == static_stereotypes::variability_profile_template ||
-        ss == static_stereotypes::variability_feature_template_group_registrar ||
+        ss == static_stereotypes::variability_feature_template_group ||
         ss == static_stereotypes::variability_feature_template_group_registrar;
 }
 
