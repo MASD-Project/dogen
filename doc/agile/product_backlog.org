@@ -10703,7 +10703,6 @@ Links:
 - [[https://github.com/tcbrindle/pretty_print.hpp][pretty_print.hpp]]: another single-header C++14 library for printing
   STL-compatible container types to IO streams.
 
-
 ** Miscellaneous
 
 Stuff that is not directly related to the problem domain but its
