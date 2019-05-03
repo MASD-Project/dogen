@@ -25,7 +25,7 @@ namespace masd::dogen::coding::meta_model {
 static_stereotypes_generator::static_stereotypes_generator() : position_(0) { }
 void static_stereotypes_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<static_stereotypes>(position % 18);
+    v = static_cast<static_stereotypes>(position % 20);
 }
 
 static_stereotypes_generator::result_type

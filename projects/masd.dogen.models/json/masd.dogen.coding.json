@@ -1926,6 +1926,14 @@
         {
           "name": "variability_profile_template",
           "type": ""
+        },
+        {
+          "name": "variability_feature_template_group",
+          "type": ""
+        },
+        {
+          "name": "variability_feature_template_group_registrar",
+          "type": ""
         }
       ]
     },
