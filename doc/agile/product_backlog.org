@@ -138,6 +138,13 @@ the valid stereotypes which as model elements. However, for this there
 is some mapping required as we want
 =masd::coding::meta_model::enumeration= to map to =masd::enumeration=.
 
+Actually the right approach for this is to annotate all elements in
+coding as "meta-elements". They would then have all of these
+properties as features (stereotypes, etc). The code generator would
+then generate static methods for each class with this information. We
+could then return a =meta_class= from these classes, populated with
+relevant data.
+
 Merged stories:
 
 *Meta-element configuration*
@@ -164,7 +171,6 @@ A related point is to do with cases where the meta-element requires
 specific configuration:
 
 - entry point, interface: should be types only.
-
 
 For these cases, it would be nice if we could associate a stereotype
 with the metaclass and then all instances would inherit these.
