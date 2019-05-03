@@ -39,6 +39,8 @@
 #include "masd.dogen.coding/io/meta_model/orm_model_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/extraction_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/variability_profile_template_io.hpp"
+#include "masd.dogen.coding/io/meta_model/variability_feature_template_group_io.hpp"
+#include "masd.dogen.coding/io/meta_model/variability_feature_template_group_registrar_io.hpp"
 
 namespace std {
 
@@ -522,6 +524,40 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group> >& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::technical_space>& v) {
@@ -574,6 +610,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"licences\": " << v.licences() << ", "
       << "\"generation_markers\": " << v.generation_markers() << ", "
       << "\"variability_profile_templates\": " << v.variability_profile_templates() << ", "
+      << "\"variability_feature_template_groups\": " << v.variability_feature_template_groups() << ", "
+      << "\"variability_feature_template_group_registrar\": " << v.variability_feature_template_group_registrar() << ", "
       << "\"root_module\": " << v.root_module() << ", "
       << "\"input_technical_space\": " << v.input_technical_space() << ", "
       << "\"output_technical_spaces\": " << v.output_technical_spaces() << ", "

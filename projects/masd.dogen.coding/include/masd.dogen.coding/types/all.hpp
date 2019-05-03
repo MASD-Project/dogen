@@ -131,11 +131,15 @@
 #include "masd.dogen.coding/types/transforms/technical_space_transform.hpp"
 #include "masd.dogen.coding/types/transforms/object_templates_transform.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
+#include "masd.dogen.coding/types/meta_model/variability_feature_template.hpp"
 #include "masd.dogen.coding/types/meta_model/variability_profile_template.hpp"
 #include "masd.dogen.coding/types/meta_model/fully_qualified_representation.hpp"
 #include "masd.dogen.coding/types/transforms/extraction_properties_transform.hpp"
+#include "masd.dogen.coding/types/meta_model/variability_feature_template_group.hpp"
 #include "masd.dogen.coding/types/meta_model/variability_profile_template_entry.hpp"
 #include "masd.dogen.coding/types/helpers/fully_qualified_representation_builder.hpp"
 #include "masd.dogen.coding/types/meta_model/local_archetype_location_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/variability_feature_template_group_registrar.hpp"
+#include "masd.dogen.coding/types/transforms/variability_feature_template_group_transform.hpp"
 
 #endif

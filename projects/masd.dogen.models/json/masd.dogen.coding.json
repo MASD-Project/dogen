@@ -656,6 +656,14 @@
           "type": "std::unordered_map<std::string, boost::shared_ptr<variability_profile_template>>"
         },
         {
+          "name": "variability_feature_template_groups",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<variability_feature_template_group>>"
+        },
+        {
+          "name": "variability_feature_template_group_registrar",
+          "type": "variability_feature_template_group_registrar"
+        },
+        {
           "name": "root_module",
           "type": "boost::shared_ptr<module>"
         },
@@ -2254,6 +2262,66 @@
         {
           "name": "value",
           "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::variability_feature_template_group",
+      "parents": [
+        "meta_model::element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "feature_templates",
+          "type": "std::list<variability_feature_template>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::variability_feature_template",
+      "stereotypes": [
+        "Documentable",
+        "Configurable",
+        "Nameable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "type",
+          "type": "std::string"
+        },
+        {
+          "name": "location",
+          "type": "archetypes::location"
+        },
+        {
+          "name": "template_kind",
+          "type": "variability::meta_model::template_kind"
+        },
+        {
+          "name": "binding_point",
+          "type": "variability::meta_model::binding_point"
+        }
+      ]
+    },
+    {
+      "name": "transforms::variability_feature_template_group_transform",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::variability_feature_template_group_registrar",
+      "parents": [
+        "meta_model::element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "template_groups",
+          "type": "std::list<variability_feature_template_group>"
         }
       ]
     }

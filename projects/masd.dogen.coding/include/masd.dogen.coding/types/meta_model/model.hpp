@@ -51,6 +51,8 @@
 #include "masd.dogen.coding/types/meta_model/extraction_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/generation_marker_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/variability_profile_template_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/variability_feature_template_group_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/variability_feature_template_group_registrar.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
@@ -88,6 +90,8 @@ public:
         const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >& licences,
         const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> >& generation_markers,
         const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_profile_template> >& variability_profile_templates,
+        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group> >& variability_feature_template_groups,
+        const masd::dogen::coding::meta_model::variability_feature_template_group_registrar& variability_feature_template_group_registrar,
         const boost::shared_ptr<masd::dogen::coding::meta_model::module>& root_module,
         const masd::dogen::coding::meta_model::technical_space input_technical_space,
         const std::list<masd::dogen::coding::meta_model::technical_space>& output_technical_spaces,
@@ -251,6 +255,16 @@ public:
     void variability_profile_templates(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_profile_template> >& v);
     void variability_profile_templates(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_profile_template> >&& v);
 
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group> >& variability_feature_template_groups() const;
+    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group> >& variability_feature_template_groups();
+    void variability_feature_template_groups(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group> >& v);
+    void variability_feature_template_groups(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group> >&& v);
+
+    const masd::dogen::coding::meta_model::variability_feature_template_group_registrar& variability_feature_template_group_registrar() const;
+    masd::dogen::coding::meta_model::variability_feature_template_group_registrar& variability_feature_template_group_registrar();
+    void variability_feature_template_group_registrar(const masd::dogen::coding::meta_model::variability_feature_template_group_registrar& v);
+    void variability_feature_template_group_registrar(const masd::dogen::coding::meta_model::variability_feature_template_group_registrar&& v);
+
     const boost::shared_ptr<masd::dogen::coding::meta_model::module>& root_module() const;
     boost::shared_ptr<masd::dogen::coding::meta_model::module>& root_module();
     void root_module(const boost::shared_ptr<masd::dogen::coding::meta_model::module>& v);
@@ -313,6 +327,8 @@ private:
     std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> > licences_;
     std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> > generation_markers_;
     std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_profile_template> > variability_profile_templates_;
+    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group> > variability_feature_template_groups_;
+    masd::dogen::coding::meta_model::variability_feature_template_group_registrar variability_feature_template_group_registrar_;
     boost::shared_ptr<masd::dogen::coding::meta_model::module> root_module_;
     masd::dogen::coding::meta_model::technical_space input_technical_space_;
     std::list<masd::dogen::coding::meta_model::technical_space> output_technical_spaces_;

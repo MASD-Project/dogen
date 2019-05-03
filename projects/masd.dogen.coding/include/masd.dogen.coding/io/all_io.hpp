@@ -74,9 +74,12 @@
 #include "masd.dogen.coding/io/meta_model/orm_object_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_attribute_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm_primitive_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/variability_feature_template_io.hpp"
 #include "masd.dogen.coding/io/meta_model/variability_profile_template_io.hpp"
 #include "masd.dogen.coding/io/meta_model/fully_qualified_representation_io.hpp"
+#include "masd.dogen.coding/io/meta_model/variability_feature_template_group_io.hpp"
 #include "masd.dogen.coding/io/meta_model/variability_profile_template_entry_io.hpp"
 #include "masd.dogen.coding/io/meta_model/local_archetype_location_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/variability_feature_template_group_registrar_io.hpp"
 
 #endif

@@ -38,6 +38,8 @@
 #include "masd.dogen.coding/types/meta_model/object_template_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/generation_marker_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/variability_profile_template_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/variability_feature_template_group_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/variability_feature_template_group_registrar_fwd.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
@@ -157,6 +159,26 @@ public:
     virtual void visit(const masd::dogen::coding::meta_model::primitive&) { }
     virtual void visit(masd::dogen::coding::meta_model::primitive&) const { }
     virtual void visit(masd::dogen::coding::meta_model::primitive&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type masd::dogen::coding::meta_model::variability_feature_template_group
+     */
+    /**@{*/
+    virtual void visit(const masd::dogen::coding::meta_model::variability_feature_template_group&) const { }
+    virtual void visit(const masd::dogen::coding::meta_model::variability_feature_template_group&) { }
+    virtual void visit(masd::dogen::coding::meta_model::variability_feature_template_group&) const { }
+    virtual void visit(masd::dogen::coding::meta_model::variability_feature_template_group&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type masd::dogen::coding::meta_model::variability_feature_template_group_registrar
+     */
+    /**@{*/
+    virtual void visit(const masd::dogen::coding::meta_model::variability_feature_template_group_registrar&) const { }
+    virtual void visit(const masd::dogen::coding::meta_model::variability_feature_template_group_registrar&) { }
+    virtual void visit(masd::dogen::coding::meta_model::variability_feature_template_group_registrar&) const { }
+    virtual void visit(masd::dogen::coding::meta_model::variability_feature_template_group_registrar&) { }
     /**@}*/
 
     /**
