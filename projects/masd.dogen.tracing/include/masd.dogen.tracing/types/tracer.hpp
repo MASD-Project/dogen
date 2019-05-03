@@ -46,6 +46,11 @@ public:
 public:
     explicit tracer(const boost::optional<tracing_configuration>& cfg);
 
+public:
+    const boost::optional<tracing_configuration> configuration() const {
+        return configuration_;
+    }
+
 private:
     void validate() const;
     bool tracing_enabled() const;

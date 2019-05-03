@@ -18,14 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_TRACING_IO_ALL_IO_HPP
-#define MASD_DOGEN_TRACING_IO_ALL_IO_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
+#include <ostream>
 #include "masd.dogen.tracing/io/tracer_io.hpp"
-#include "masd.dogen.tracing/io/metrics_io.hpp"
+#include "masd.dogen/io/tracing_configuration_io.hpp"
 
-#endif
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::tracing_configuration>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace masd::dogen::tracing {
+
+std::ostream& operator<<(std::ostream& s, const tracer& v) {
+    s << " { "
+      << "\"__type__\": " << "\"masd::dogen::tracing::tracer\"" << ", "
+      << "\"configuration\": " << v.configuration()
+      << " }";
+    return(s);
+}
+
+}

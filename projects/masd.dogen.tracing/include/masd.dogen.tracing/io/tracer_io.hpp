@@ -18,14 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_TRACING_IO_ALL_IO_HPP
-#define MASD_DOGEN_TRACING_IO_ALL_IO_HPP
+#ifndef MASD_DOGEN_TRACING_IO_TRACER_IO_HPP
+#define MASD_DOGEN_TRACING_IO_TRACER_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.tracing/io/tracer_io.hpp"
-#include "masd.dogen.tracing/io/metrics_io.hpp"
+#include <iosfwd>
+#include "masd.dogen.tracing/types/tracer.hpp"
+
+namespace masd::dogen::tracing {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const masd::dogen::tracing::tracer& v);
+
+}
 
 #endif

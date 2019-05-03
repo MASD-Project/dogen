@@ -8,6 +8,7 @@
     "masd.injection.reference": "cpp.boost",
     "masd.injection.reference": "cpp.std",
     "masd.injection.reference": "masd",
+    "masd.injection.reference": "masd.dogen",
     "masd.injection.reference": "masd.dogen.profiles",
     "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
     "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
@@ -27,12 +28,19 @@
     {
       "name": "tracer",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "masd::handcrafted::typeable",
+        "masd::pretty_printable"
       ],
       "tagged_values": {
         "masd.generation.cpp.types.forward_declarations.enabled": "true"
       },
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "configuration",
+          "type": "boost::optional<tracing_configuration>"
+        }
+      ]
     },
     {
       "name": "metrics",
