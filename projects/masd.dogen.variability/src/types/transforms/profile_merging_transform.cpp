@@ -18,10 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.variability/io/meta_model/profile_io.hpp"
+#include "masd.dogen.variability/types/helpers/feature_selector.hpp"
+#include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.variability/io/meta_model/profile_repository_io.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_point_merger.hpp"
 #include "masd.dogen.variability/types/transforms/transformation_error.hpp"
@@ -42,10 +45,38 @@ const std::string parent_not_found(
     "Parent not found in profile container: ");
 const std::string duplicate_label("Label applied more than once to profile: ");
 const std::string empty_label("Profile has an empty label: ");
+const std::string profile_field("masd.variability.profile");
 
 }
 
 namespace masd::dogen::variability::transforms {
+
+profile_merging_transform::feature_group profile_merging_transform::
+make_feature_group(const meta_model::feature_model& fm) {
+    BOOST_LOG_SEV(lg, debug) << "Creating feature group.";
+
+    feature_group r;
+    const helpers::feature_selector s(fm);
+    r.profile = s.get_by_name(profile_field);
+
+    BOOST_LOG_SEV(lg, debug) << "Created feature group.";
+    return r;
+}
+
+std::string
+profile_merging_transform::obtain_profile_name(const feature_group& fg,
+    const meta_model::configuration& cfg) {
+
+    BOOST_LOG_SEV(lg, debug) << "Reading profile name.";
+    const helpers::configuration_selector s(cfg);
+    std::string r;
+    if (s.has_configuration_point(fg.profile))
+        r = s.get_text_content(fg.profile);
+
+    BOOST_LOG_SEV(lg, debug) << "Profile name: '" << r << "'";
+    return r;
+}
+
 
 const meta_model::profile& profile_merging_transform::
 walk_up_parent_tree_and_merge(const std::string& current,
@@ -186,6 +217,28 @@ merge(std::unordered_map<std::string, meta_model::profile>& pm) {
     BOOST_LOG_SEV(lg, debug) << "Merged profiles.";
 }
 
+void profile_merging_transform::
+populate_base_layer(const meta_model::feature_model& fm,
+    std::unordered_map<std::string, meta_model::profile>& pm) {
+
+    const auto fg(make_feature_group(fm));
+    for (auto& pair : pm) {
+        auto& profile(pair.second);
+
+        /*
+         * FIXME: big hack. Create a temporary configuration just so
+         * we can read the base profile name from the profile.
+         */
+        meta_model::configuration cfg;
+        cfg.configuration_points(profile.configuration_points());
+        const auto bl(obtain_profile_name(fg, cfg));
+        if (!bl.empty()) {
+            BOOST_LOG_SEV(lg, trace) << "Read base layer name: " << bl;
+            profile.base_layer_profile(bl);
+        }
+    }
+}
+
 meta_model::profile_repository profile_merging_transform::create_repository(
     const std::unordered_map<std::string, meta_model::profile>& pm) {
 
@@ -217,7 +270,9 @@ meta_model::profile_repository profile_merging_transform::create_repository(
 }
 
 meta_model::profile_repository profile_merging_transform::
-apply(const context& ctx, const std::list<meta_model::profile>& profiles) {
+apply(const context& ctx,
+    const meta_model::feature_model& fm,
+    const std::list<meta_model::profile>& profiles) {
     tracing::scoped_transform_tracer stp(lg, "profile merging transform",
         transform_id, transform_id, *ctx.tracer(), profiles);
 
@@ -236,6 +291,11 @@ apply(const context& ctx, const std::list<meta_model::profile>& profiles) {
      * Merge the profiles according to their inheritance tree.
      */
     merge(pm);
+
+    /*
+     * Populate the base layer field.
+     */
+    populate_base_layer(fm, pm);
 
     /*
      * Use the merged profile map to create the repository.

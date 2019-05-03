@@ -25,7 +25,10 @@
 #pragma once
 #endif
 
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/profile.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.variability/types/meta_model/profile_repository.hpp"
 #include "masd.dogen.variability/types/transforms/context.hpp"
 
@@ -34,8 +37,37 @@ namespace masd::dogen::variability::transforms {
 /**
  * @brief Merges profiles according to their inheritance
  * relationships.
+ *
+ * This transform is really a mix of three separate transforms, but we
+ * just can't figure out a good way of splitting them apart:
+ *
+ * - the recursive merging up the inheritance tree, which gives it its
+ *   name.
+ *
+ * - the creation of a repository of profiles. This requires the data
+ *   to be organised in a map, which is also needed for the previous
+ *   step.
+ *
+ * - the population of the base layer profile name. This requires the
+ *   data to be merged (because we want the field to populate from
+ *   parent to children), but not yet in a repository (because we do
+ *   not want to have to populate the copies of the profiles).
+ *
+ * So, to make our life easier for now we just bundled all of these
+ * responsibilities into one big transform.
  */
 class profile_merging_transform final {
+private:
+    struct feature_group {
+        meta_model::feature profile;
+    };
+
+    static feature_group
+    make_feature_group(const meta_model::feature_model& fm);
+
+    static std::string obtain_profile_name(const feature_group& fg,
+        const meta_model::configuration& cfg);
+
 private:
     /**
      * @brief Recurses up the profile tree and merges children with
@@ -64,6 +96,13 @@ private:
     static void merge(std::unordered_map<std::string, meta_model::profile>& pm);
 
     /**
+     * @brief Populates the base layer field.
+     */
+    static void populate_base_layer(
+        const meta_model::feature_model& fm,
+        std::unordered_map<std::string, meta_model::profile>& pm);
+
+    /**
      * @brief Generates a profile repository.
      */
     static meta_model::profile_repository create_repository(
@@ -71,6 +110,7 @@ private:
 
 public:
     static meta_model::profile_repository apply(const context& ctx,
+        const meta_model::feature_model& fm,
         const std::list<meta_model::profile>& profiles);
 };
 

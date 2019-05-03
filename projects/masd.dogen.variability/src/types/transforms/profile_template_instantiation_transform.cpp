@@ -36,40 +36,9 @@ const std::string transform_id(
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
-const std::string empty;
-const std::string profile_field("masd.variability.profile");
-
-
 }
 
 namespace masd::dogen::variability::transforms {
-
-profile_template_instantiation_transform::feature_group
-profile_template_instantiation_transform::
-make_feature_group(const meta_model::feature_model& fm) {
-    BOOST_LOG_SEV(lg, debug) << "Creating feature group.";
-
-    feature_group r;
-    const helpers::feature_selector s(fm);
-    r.profile = s.get_by_name(profile_field);
-
-    BOOST_LOG_SEV(lg, debug) << "Created feature group.";
-    return r;
-}
-
-std::string profile_template_instantiation_transform::
-obtain_profile_name(const feature_group& fg,
-    const meta_model::configuration& cfg) {
-
-    BOOST_LOG_SEV(lg, debug) << "Reading profile name.";
-    const helpers::configuration_selector s(cfg);
-    std::string r;
-    if (s.has_configuration_point(fg.profile))
-        r = s.get_text_content(fg.profile);
-
-    BOOST_LOG_SEV(lg, debug) << "Profile name: '" << r << "'";
-    return r;
-}
 
 std::list<meta_model::profile> profile_template_instantiation_transform::
 apply(const context& ctx, const meta_model::feature_model& fm,
@@ -78,7 +47,6 @@ apply(const context& ctx, const meta_model::feature_model& fm,
         "profile template instantiation transform",
         transform_id, transform_id, *ctx.tracer(), pts);
 
-    const auto fg(make_feature_group(fm));
     const auto cm(ctx.compatibility_mode());
     const auto& alrp(*ctx.archetype_location_repository());
     helpers::template_instantiator ti(alrp, cm);
@@ -86,16 +54,6 @@ apply(const context& ctx, const meta_model::feature_model& fm,
     std::list<meta_model::profile> r;
     for (const auto& pt : pts) {
         auto prf(ti.instantiate(fm, pt));
-
-        /*
-         * FIXME: big hack. Create a temporary configuration just so
-         * we can read the base profile name from the profile.
-         */
-        meta_model::configuration prf_cfg;
-        prf_cfg.configuration_points(prf.configuration_points());
-        const auto prf_bl(obtain_profile_name(fg, prf_cfg));
-        prf.base_layer_profile(prf_bl);
-
         r.push_back(prf);
     }
 

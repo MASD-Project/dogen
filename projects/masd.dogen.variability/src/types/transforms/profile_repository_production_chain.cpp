@@ -18,11 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.variability/io/meta_model/feature_model_io.hpp"
 #include "masd.dogen.variability/io/meta_model/profile_repository_io.hpp"
 #include "masd.dogen.variability/types/transforms/profile_merging_transform.hpp"
+#include "masd.dogen.variability/types/transforms/transformation_error.hpp"
 #include "masd.dogen.variability/types/transforms/profile_template_instantiation_transform.hpp"
 #include "masd.dogen.variability/types/transforms/profile_repository_production_chain.hpp"
 
@@ -46,7 +48,7 @@ profile_repository_production_chain::apply(const context& ctx,
         transform_id, transform_id, *ctx.tracer(), fm);
 
     const auto p(profile_template_instantiation_transform::apply(ctx, fm, pts));
-    const auto r(profile_merging_transform::apply(ctx, p));
+    const auto r(profile_merging_transform::apply(ctx, fm, p));
 
     stp.end_chain(r);
     return r;
