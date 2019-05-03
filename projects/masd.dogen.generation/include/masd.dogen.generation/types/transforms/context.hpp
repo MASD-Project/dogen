@@ -31,59 +31,88 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.tracing/types/tracer_fwd.hpp"
-#include "masd.dogen.variability/types/meta_model/feature_model_fwd.hpp"
 #include "masd.dogen.archetypes/types/location_repository_fwd.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model_fwd.hpp"
 #include "masd.dogen.generation/types/meta_model/intra_backend_segment_properties.hpp"
 
 namespace masd::dogen::generation::transforms {
 
 class context final {
 public:
+    context() = default;
+    context(const context&) = default;
     ~context() = default;
 
 public:
-    context();
-
-    context(
-        const bool use_configuration,
-        const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model,
-        const boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository,
-        const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer,
-        const std::unordered_map<std::string, masd::dogen::generation::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties,
-        const boost::filesystem::path& output_directory_path);
+    context(context&& rhs);
 
 public:
-    bool use_configuration() const;
-    void use_configuration(const bool v);
+    context(
+        const boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository,
+        const std::unordered_map<std::string, masd::dogen::generation::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties,
+        const boost::filesystem::path& output_directory_path,
+        const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model,
+        const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer);
 
-    const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model() const;
-    void feature_model(const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& v);
-
+public:
     const boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository() const;
+    boost::shared_ptr<masd::dogen::archetypes::location_repository>& archetype_location_repository();
     void archetype_location_repository(const boost::shared_ptr<masd::dogen::archetypes::location_repository>& v);
-
-    const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer() const;
-    void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v);
+    void archetype_location_repository(const boost::shared_ptr<masd::dogen::archetypes::location_repository>&& v);
 
     const std::unordered_map<std::string, masd::dogen::generation::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties() const;
+    std::unordered_map<std::string, masd::dogen::generation::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties();
     void intra_backend_segment_properties(const std::unordered_map<std::string, masd::dogen::generation::meta_model::intra_backend_segment_properties>& v);
+    void intra_backend_segment_properties(const std::unordered_map<std::string, masd::dogen::generation::meta_model::intra_backend_segment_properties>&& v);
 
     /**
      * @brief FIXME: to be removed
      */
     /**@{*/
     const boost::filesystem::path& output_directory_path() const;
+    boost::filesystem::path& output_directory_path();
     void output_directory_path(const boost::filesystem::path& v);
+    void output_directory_path(const boost::filesystem::path&& v);
     /**@}*/
 
+    const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model() const;
+    boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model();
+    void feature_model(const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& v);
+    void feature_model(const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>&& v);
+
+    const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer() const;
+    boost::shared_ptr<masd::dogen::tracing::tracer>& tracer();
+    void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v);
+    void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>&& v);
+
+public:
+    bool operator==(const context& rhs) const;
+    bool operator!=(const context& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+public:
+    void swap(context& other) noexcept;
+    context& operator=(context other);
+
 private:
-    bool use_configuration_;
-    boost::shared_ptr<masd::dogen::variability::meta_model::feature_model> feature_model_;
     boost::shared_ptr<masd::dogen::archetypes::location_repository> archetype_location_repository_;
-    boost::shared_ptr<masd::dogen::tracing::tracer> tracer_;
     std::unordered_map<std::string, masd::dogen::generation::meta_model::intra_backend_segment_properties> intra_backend_segment_properties_;
     boost::filesystem::path output_directory_path_;
+    boost::shared_ptr<masd::dogen::variability::meta_model::feature_model> feature_model_;
+    boost::shared_ptr<masd::dogen::tracing::tracer> tracer_;
 };
+
+}
+
+namespace std {
+
+template<>
+inline void swap(
+    masd::dogen::generation::transforms::context& lhs,
+    masd::dogen::generation::transforms::context& rhs) {
+    lhs.swap(rhs);
+}
 
 }
 

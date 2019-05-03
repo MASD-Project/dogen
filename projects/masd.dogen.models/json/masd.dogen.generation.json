@@ -644,7 +644,8 @@
     {
       "name": "transforms::context",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "masd::typeable",
+        "masd::pretty_printable"
       ],
       "tagged_values": {
         "masd.generation.cpp.types.forward_declarations.enabled": "true"
@@ -656,10 +657,6 @@
           "type": "boost::shared_ptr<archetypes::location_repository>"
         },
         {
-          "name": "tracer",
-          "type": "boost::shared_ptr<tracing::tracer>"
-        },
-        {
           "name": "intra_backend_segment_properties",
           "type": "std::unordered_map<std::string, generation::meta_model::intra_backend_segment_properties>"
         },
@@ -667,6 +664,14 @@
           "name": "output_directory_path",
           "type": "boost::filesystem::path",
           "documentation": "FIXME: to be removed\n"
+        },
+        {
+          "name": "feature_model",
+          "type": "boost::shared_ptr<variability::meta_model::feature_model>"
+        },
+        {
+          "name": "tracer",
+          "type": "boost::shared_ptr<tracing::tracer>"
         }
       ]
     },
