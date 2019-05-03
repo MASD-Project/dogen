@@ -57,11 +57,9 @@ std::string unified_differ::diff(const std::string& a, const std::string& b,
     BOOST_LOG_SEV(lg, debug) << "Diffing: " << a_path.generic();
 
     std::ostringstream s;
+    compose_header(base, a_path, info, s);
     const auto has_diffs(utility::string::differ::diff(a, b, s));
-
     if (has_diffs) {
-        compose_header(base, a_path, info, s);
-
         const auto r(s.str());
         BOOST_LOG_SEV(lg, debug) << "Diff: " << r;
         return r;
