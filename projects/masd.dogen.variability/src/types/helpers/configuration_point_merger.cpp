@@ -43,7 +43,7 @@ configuration_point_merger::merge(
                              << " lhs: " << lhs_name
                              << " rhs: " << rhs_name;
     BOOST_LOG_SEV(lg, trace) << "lhs: " << lhs;
-    BOOST_LOG_SEV(lg, trace) << "rhs: " << lhs;
+    BOOST_LOG_SEV(lg, trace) << "rhs: " << rhs;
 
     std::unordered_map<std::string, meta_model::configuration_point> r(lhs);
     for (const auto& pair : rhs)
