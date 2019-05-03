@@ -430,4 +430,28 @@ adapter::to_variability_profile_template(const coding::meta_model::location& l,
     return r;
 }
 
+boost::shared_ptr<coding::meta_model::variability_feature_template_group>
+adapter::to_variability_feature_template_group(
+    const coding::meta_model::location &l,
+    const stereotypes_conversion_result &scr,
+    const injection::meta_model::element &ie) const {
+    using coding::meta_model::variability_feature_template_group;
+    auto r(boost::make_shared<variability_feature_template_group>());
+    populate_element(l, scr, ie, *r);
+    return r;
+}
+
+boost::shared_ptr<
+    coding::meta_model::variability_feature_template_group_registrar
+    >
+adapter::to_variability_feature_template_group_registrar(
+    const coding::meta_model::location &l,
+    const stereotypes_conversion_result &scr,
+    const injection::meta_model::element &ie) const {
+    using coding::meta_model::variability_feature_template_group_registrar;
+    auto r(boost::make_shared<variability_feature_template_group_registrar>());
+    populate_element(l, scr, ie, *r);
+    return r;
+}
+
 }

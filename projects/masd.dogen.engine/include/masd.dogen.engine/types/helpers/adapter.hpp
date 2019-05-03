@@ -49,6 +49,8 @@
 #include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
 #include "masd.dogen.coding/types/meta_model/licence.hpp"
 #include "masd.dogen.coding/types/meta_model/variability_profile_template.hpp"
+#include "masd.dogen.coding/types/meta_model/variability_feature_template_group.hpp"
+#include "masd.dogen.coding/types/meta_model/variability_feature_template_group_registrar.hpp"
 #include "masd.dogen.engine/types/helpers/stereotypes_conversion_result.hpp"
 
 namespace masd::dogen::engine::helpers {
@@ -148,7 +150,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * coding::exception to a coding exception.
+     * masd::exception to a coding exception.
      */
     boost::shared_ptr<coding::meta_model::exception>
     to_exception(const coding::meta_model::location& l,
@@ -157,7 +159,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * coding::primitive to a coding primitive.
+     * masd::primitive to a coding primitive.
      */
     boost::shared_ptr<coding::meta_model::primitive>
     to_primitive(const coding::meta_model::location& l,
@@ -166,7 +168,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * coding::enumeration to a coding enumeration.
+     * masd::enumeration to a coding enumeration.
      */
     boost::shared_ptr<coding::meta_model::enumeration>
     to_enumeration(const coding::meta_model::location& l,
@@ -175,7 +177,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * coding::module to a coding module.
+     * masd::module to a coding module.
      */
     boost::shared_ptr<coding::meta_model::module>
     to_module(const coding::meta_model::location& l,
@@ -184,7 +186,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * coding::module to a coding module.
+     * masd::builtin to a coding builtin.
      */
     boost::shared_ptr<coding::meta_model::builtin>
     to_builtin(const coding::meta_model::location& l,
@@ -193,7 +195,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * coding::modeline_group to a coding module.
+     * masd::modeline_group to a coding modeline group.
      */
     boost::shared_ptr<coding::meta_model::modeline_group>
     to_modeline_group(const coding::meta_model::location& l,
@@ -202,7 +204,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * coding::modeline to a coding module.
+     * masd::modeline to a coding modeline.
      */
     boost::shared_ptr<coding::meta_model::modeline>
     to_modeline(const coding::meta_model::location& l,
@@ -211,7 +213,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * coding::generation_marker to a coding module.
+     * masd::generation_marker to a coding generation marker.
      */
     boost::shared_ptr<coding::meta_model::generation_marker>
     to_generation_marker(const coding::meta_model::location& l,
@@ -220,7 +222,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * coding::licence to a coding module.
+     * masd::licence to a coding licence.
      */
     boost::shared_ptr<coding::meta_model::licence>
     to_licence(const coding::meta_model::location& l,
@@ -229,10 +231,34 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * coding::configuration to a configuration.
+     * masd::to_variability_profile_template to a variability feature
+     * template group.
      */
     boost::shared_ptr<coding::meta_model::variability_profile_template>
     to_variability_profile_template(const coding::meta_model::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::meta_model::element& ie) const;
+
+    /**
+     * @brief Converts an injection element with a stereotype of
+     * masd::variability_feature_template_group to a coding
+     * variability feature template group
+     */
+    boost::shared_ptr<coding::meta_model::variability_feature_template_group>
+    to_variability_feature_template_group(const coding::meta_model::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::meta_model::element& ie) const;
+
+    /**
+     * @brief Converts an injection element with a stereotype of
+     * masd::variability_feature_template_group_registrar to a coding
+     * variability feature template group registrar.
+     */
+    boost::shared_ptr<
+        coding::meta_model::variability_feature_template_group_registrar
+        >
+    to_variability_feature_template_group_registrar(
+        const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 };
