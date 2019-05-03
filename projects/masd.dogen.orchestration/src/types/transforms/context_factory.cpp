@@ -179,14 +179,6 @@ context context_factory::make_context(const configuration& cfg,
     r.variability_context(vctx);
 
     /*
-     * FIXME: top-level feature toggle for the new configuration
-     * approach. To be removed once refactor is finished.
-     */
-    r.coding_context().use_configuration(true);
-    r.generation_context().use_configuration(true);
-    r.extraction_context().use_configuration(true);
-
-    /*
      * Now we can create the feature model.
      */
     using variability::transforms::feature_model_production_chain;
