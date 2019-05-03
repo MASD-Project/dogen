@@ -153,7 +153,8 @@
     {
       "name": "transforms::context",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "masd::typeable",
+        "masd::pretty_printable"
       ],
       "tagged_values": {
         "masd.generation.cpp.types.forward_declarations.enabled": "true"
@@ -161,20 +162,24 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "tracer",
-          "type": "boost::shared_ptr<tracing::tracer>"
-        },
-        {
           "name": "diffing_configuration",
           "type": "boost::optional<diffing_configuration>"
         },
         {
-          "name": "reporting",
+          "name": "reporting_configuration",
           "type": "boost::optional<reporting_configuration>"
         },
         {
           "name": "dry_run_mode_enabled",
           "type": "bool"
+        },
+        {
+          "name": "feature_model",
+          "type": "boost::shared_ptr<variability::meta_model::feature_model>"
+        },
+        {
+          "name": "tracer",
+          "type": "boost::shared_ptr<tracing::tracer>"
         }
       ]
     },

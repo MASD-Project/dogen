@@ -28,55 +28,84 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
-#include "masd.dogen.variability/types/meta_model/feature_model_fwd.hpp"
 #include "masd.dogen.tracing/types/tracer_fwd.hpp"
 #include "masd.dogen/types/diffing_configuration.hpp"
 #include "masd.dogen/types/reporting_configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model_fwd.hpp"
 
 namespace masd::dogen::extraction::transforms {
 
 class context final {
 public:
+    context(const context&) = default;
     ~context() = default;
 
 public:
     context();
 
-    context(
-        const bool use_configuration,
-        const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model,
-        const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer,
-        const boost::optional<masd::dogen::diffing_configuration>& diffing_configuration,
-        const boost::optional<masd::dogen::reporting_configuration>& reporting_configuration,
-        const bool dry_run_mode_enabled);
+public:
+    context(context&& rhs);
 
 public:
-    bool use_configuration() const;
-    void use_configuration(const bool v);
+    context(
+        const boost::optional<masd::dogen::diffing_configuration>& diffing_configuration,
+        const boost::optional<masd::dogen::reporting_configuration>& reporting_configuration,
+        const bool dry_run_mode_enabled,
+        const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model,
+        const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer);
 
-    const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model() const;
-    void feature_model(const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& v);
-
-    const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer() const;
-    void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v);
-
+public:
     const boost::optional<masd::dogen::diffing_configuration>& diffing_configuration() const;
+    boost::optional<masd::dogen::diffing_configuration>& diffing_configuration();
     void diffing_configuration(const boost::optional<masd::dogen::diffing_configuration>& v);
+    void diffing_configuration(const boost::optional<masd::dogen::diffing_configuration>&& v);
 
     const boost::optional<masd::dogen::reporting_configuration>& reporting_configuration() const;
+    boost::optional<masd::dogen::reporting_configuration>& reporting_configuration();
     void reporting_configuration(const boost::optional<masd::dogen::reporting_configuration>& v);
+    void reporting_configuration(const boost::optional<masd::dogen::reporting_configuration>&& v);
 
     bool dry_run_mode_enabled() const;
     void dry_run_mode_enabled(const bool v);
 
+    const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model() const;
+    boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& feature_model();
+    void feature_model(const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>& v);
+    void feature_model(const boost::shared_ptr<masd::dogen::variability::meta_model::feature_model>&& v);
+
+    const boost::shared_ptr<masd::dogen::tracing::tracer>& tracer() const;
+    boost::shared_ptr<masd::dogen::tracing::tracer>& tracer();
+    void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>& v);
+    void tracer(const boost::shared_ptr<masd::dogen::tracing::tracer>&& v);
+
+public:
+    bool operator==(const context& rhs) const;
+    bool operator!=(const context& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+public:
+    void swap(context& other) noexcept;
+    context& operator=(context other);
+
 private:
-    bool use_configuration_;
-    boost::shared_ptr<masd::dogen::variability::meta_model::feature_model> feature_model_;
-    boost::shared_ptr<masd::dogen::tracing::tracer> tracer_;
     boost::optional<masd::dogen::diffing_configuration> diffing_configuration_;
     boost::optional<masd::dogen::reporting_configuration> reporting_configuration_;
     bool dry_run_mode_enabled_;
+    boost::shared_ptr<masd::dogen::variability::meta_model::feature_model> feature_model_;
+    boost::shared_ptr<masd::dogen::tracing::tracer> tracer_;
 };
+
+}
+
+namespace std {
+
+template<>
+inline void swap(
+    masd::dogen::extraction::transforms::context& lhs,
+    masd::dogen::extraction::transforms::context& rhs) {
+    lhs.swap(rhs);
+}
 
 }
 

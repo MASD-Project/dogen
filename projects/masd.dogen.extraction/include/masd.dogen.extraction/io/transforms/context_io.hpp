@@ -18,20 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTRACTION_IO_ALL_IO_HPP
-#define MASD_DOGEN_EXTRACTION_IO_ALL_IO_HPP
+#ifndef MASD_DOGEN_EXTRACTION_IO_TRANSFORMS_CONTEXT_IO_HPP
+#define MASD_DOGEN_EXTRACTION_IO_TRANSFORMS_CONTEXT_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.extraction/io/meta_model/model_io.hpp"
-#include "masd.dogen.extraction/io/transforms/context_io.hpp"
-#include "masd.dogen.extraction/io/meta_model/artefact_io.hpp"
-#include "masd.dogen.extraction/io/meta_model/operation_io.hpp"
-#include "masd.dogen.extraction/io/helpers/files_by_status_io.hpp"
-#include "masd.dogen.extraction/io/meta_model/operation_type_io.hpp"
-#include "masd.dogen.extraction/io/meta_model/operation_reason_io.hpp"
-#include "masd.dogen.extraction/io/meta_model/outputting_properties_io.hpp"
+#include <iosfwd>
+#include "masd.dogen.extraction/types/transforms/context.hpp"
+
+namespace masd::dogen::extraction::transforms {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const masd::dogen::extraction::transforms::context& v);
+
+}
 
 #endif
