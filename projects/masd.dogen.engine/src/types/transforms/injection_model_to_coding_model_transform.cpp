@@ -234,6 +234,15 @@ process_element(const helpers::adapter& ad,
         insert(ad.to_variability_profile_template(l, scr, e),
             m.variability_profile_templates());
         break;
+    case static_stereotypes::variability_feature_template_group:
+        insert(ad.to_variability_feature_template_group(l, scr, e),
+            m.variability_feature_template_groups());
+        break;
+    case static_stereotypes::variability_feature_template_group_registrar:
+        // FIXME: throw if already set.
+        m.variability_feature_template_group_registrar(
+            ad.to_variability_feature_template_group_registrar(l, scr, e));
+        break;
     default: {
         const auto s(boost::lexical_cast<std::string>(et));
         BOOST_LOG_SEV(lg, error) << invalid_element_type << s;
