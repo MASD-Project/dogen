@@ -328,4 +328,9 @@ void tracer::end_tracing() const {
     utility::filesystem::write(p, s);
 }
 
+bool tracer::operator==(const tracer& /*rhs*/) const {
+    return false;
+}
+
+
 }

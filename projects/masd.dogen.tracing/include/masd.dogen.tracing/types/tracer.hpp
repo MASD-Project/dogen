@@ -151,6 +151,9 @@ public:
 
     void end_tracing() const;
 
+public:
+    bool operator==(const tracer& rhs) const;
+
 private:
     const boost::optional<tracing_configuration> configuration_;
     mutable metrics_builder builder_;
