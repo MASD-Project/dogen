@@ -61,6 +61,18 @@ private:
         const meta_model::binding_point bp);
 
 private:
+    /**
+     * @brief Resolves potential binds into profiles, and handles the
+     * base layer merging.
+     */
+    static void handle_potential_bindings(
+        const bool has_base_layer,
+        const meta_model::profile_repository& prp,
+        meta_model::configuration& cfg);
+
+    /**
+     * @brief Binds profiles to the supplied configuration.
+     */
     static void bind(const meta_model::profile_repository& prp,
         const feature_group& fg, meta_model::configuration& cfg);
 
