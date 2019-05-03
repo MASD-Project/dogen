@@ -4823,7 +4823,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>#variability_feature_template_group_registrar#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#variability_feature_template_group_registrar#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;variability_feature_template_group_registrar&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

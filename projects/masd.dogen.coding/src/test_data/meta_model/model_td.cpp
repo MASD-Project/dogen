@@ -355,9 +355,16 @@ std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_mode
     return r;
 }
 
-masd::dogen::coding::meta_model::variability_feature_template_group_registrar
-create_masd_dogen_coding_meta_model_variability_feature_template_group_registrar(const unsigned int position) {
-    return masd::dogen::coding::meta_model::variability_feature_template_group_registrar_generator::create(position);
+masd::dogen::coding::meta_model::variability_feature_template_group_registrar*
+create_masd_dogen_coding_meta_model_variability_feature_template_group_registrar_ptr(const unsigned int position) {
+    return masd::dogen::coding::meta_model::variability_feature_template_group_registrar_generator::create_ptr(position);
+}
+
+boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group_registrar>
+create_boost_shared_ptr_masd_dogen_coding_meta_model_variability_feature_template_group_registrar(unsigned int position) {
+    boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group_registrar> r(
+        create_masd_dogen_coding_meta_model_variability_feature_template_group_registrar_ptr(position));
+    return r;
 }
 
 masd::dogen::coding::meta_model::technical_space
@@ -417,7 +424,7 @@ populate(const unsigned int position, result_type& v) {
     v.generation_markers(create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_generation_marker(position + 16));
     v.variability_profile_templates(create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_variability_profile_template(position + 17));
     v.variability_feature_template_groups(create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_variability_feature_template_group(position + 18));
-    v.variability_feature_template_group_registrar(create_masd_dogen_coding_meta_model_variability_feature_template_group_registrar(position + 19));
+    v.variability_feature_template_group_registrar(create_boost_shared_ptr_masd_dogen_coding_meta_model_variability_feature_template_group_registrar(position + 19));
     v.root_module(create_boost_shared_ptr_masd_dogen_coding_meta_model_module(position + 20));
     v.input_technical_space(create_masd_dogen_coding_meta_model_technical_space(position + 21));
     v.output_technical_spaces(create_std_list_masd_dogen_coding_meta_model_technical_space(position + 22));

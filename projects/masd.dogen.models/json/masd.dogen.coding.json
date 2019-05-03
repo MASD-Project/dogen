@@ -661,7 +661,7 @@
         },
         {
           "name": "variability_feature_template_group_registrar",
-          "type": "variability_feature_template_group_registrar"
+          "type": "boost::shared_ptr<variability_feature_template_group_registrar>"
         },
         {
           "name": "root_module",
