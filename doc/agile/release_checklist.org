@@ -1,17 +1,32 @@
 #+title: Release Checklist
 #+options: date:nil toc:nil author:nil num:nil
 
-Steps to create a new release:
+Steps to create a new release.
 
-1. Move all untouched stories into product backlog.
-2. Close current sprint: close all open tasks, delete tasks we did not
+* Close previous sprint
+
+To be done on the last Sunday of the sprint.
+
+1. Make a copy of current sprint backlog and name it current
+   sprint + 1 but don't check it in.
+2. Move all untouched stories into product backlog.
+3. Close current sprint: close all open tasks, delete tasks we did not
    work on, update clocks.
-3. Tag commit and sign it with key.
-4. Make a copy of current sprint backlog and name it current
-   sprint + 1.
-5. Open new sprint, updating CMake version, README and appveyor
+4. Tag commit and sign it with key.
+5. Push commit tag and tag. Generate new builds over night.
+
+* Open new sprint
+
+To be done on the Monday morning of the new sprint.
+
+1. Open new sprint, updating CMake version, README and appveyor
    version. This should all be in one commit.
-6. Write up release notes, publish them in github.
-7. When tag build is finished, announce on gitter, twitter and linked
+2. Regenerate the LAM models for C# and C++ with the new version, and
+   commit the changed files. Push the commit. (Ensure there are no
+   pending builds still running or tests will fail due to version
+   change).
+3. Create a demo. Publish it on youtube.
+4. Write up release notes, publish them in github.
+5. Update bintray with the correct release notes.
+6. When tag build is finished, announce on gitter, twitter and linked
    in.
-8. Update bintray with the correct release notes.
