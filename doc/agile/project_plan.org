@@ -14,13 +14,6 @@ using C-c C-e J p. File is under Reports directory.
 
 ** Software Development
 
-*** Variability model implementation
-   :PROPERTIES:
-   :EFFORT:   3d
-   :BLOCKER:  previous-sibling
-   :allocate: s16
-   :END:
-
 *** Variability feature clean-up
    :PROPERTIES:
    :EFFORT:   2d
@@ -97,17 +90,12 @@ using C-c C-e J p. File is under Reports directory.
 *** Project start
     :PROPERTIES:
     :task_id: start
-    :start: 2019-04-22
+    :start: 2019-05-06
     :END:
 
 * Sprints                                              :taskjuggler_resource:
 
 Sprints for the project plan.
-
-** Sprint 16
-   :PROPERTIES:
-   :resource_id: s16
-   :END:
 
 ** Sprint 17
    :PROPERTIES:

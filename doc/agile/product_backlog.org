@@ -14639,7 +14639,7 @@ Links
 *** Consider adding weaving support as a command                      :story:
 
 With the refactorings, we removed top-level weaving support in sprint
-16 (around Apr 27 2019). Weaving made sense originally because stitch
+16 (around [[https://github.com/MASD-Project/dogen/commits/master?after=28ea047b0ee64e00f8d0f9df817194e83422419b+139][Apr 27 2019]]). Weaving made sense originally because stitch
 was responsible for processing a stitch template and had all the
 information required to convert a sttich template into a compilable
 C++ file. This was because stitch had its own annotations and access
