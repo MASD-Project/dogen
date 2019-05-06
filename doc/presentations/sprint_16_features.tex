@@ -1,0 +1,53 @@
+\documentclass{beamer}
+\mode<presentation>
+{ \usetheme{boxes} }
+
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{csquotes}
+\usepackage[backend=bibtex]{biblatex}
+
+\title{Dogen v1.0.16, \enquote{São Pedro}}
+
+\author{Marco Craveiro \\
+  Domain Driven Development
+}
+\date{\today}
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\bibliography{sprint_16_features}
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{User Visible Changes}
+
+\begin{itemize}
+
+\item Profiles are now part of the meta-model.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Next Sprint}
+
+\begin{itemize}
+\item \textbf{Mission statement}: Support features at the meta-model
+  level, with code-generation support.
+\end{itemize}
+
+\end{frame}
+
+\end{document}
