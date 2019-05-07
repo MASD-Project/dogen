@@ -122,7 +122,8 @@ bool resolver::
 is_name_referable(const indices& idx, const meta_model::name& n) {
     BOOST_LOG_SEV(lg, trace) << "Checking to see if name is referable:" << n;
 
-    const auto i(idx.elements_referable_by_attributes().find(n.qualified().dot()));
+    const auto& id(n.qualified().dot());
+    const auto i(idx.elements_referable_by_attributes().find(id));
     if (i != idx.elements_referable_by_attributes().end())
         return true;
 
@@ -140,22 +141,35 @@ meta_model::name resolver::resolve_name_with_internal_modules(
      * caters for the case of the user providing an absolute internal
      * path, either to the current package or to elsewhere in the same
      * model as the context.
-     *
-     * Very important: we do not support relative paths from the
-     * context - e.g. add the user path to the context path. We simply
-     * assume all paths provided are absolute. Thus if there is an
-     * internal path in the context as well, we simply ignore it. This
-     * may be a surprising behaviour for some users so we may need to
-     * revisit it in the future.
      */
     name_factory nf;
-    auto r(nf.build_combined_element_name(ctx, n,
-            true/*populate_model_modules_if_blank*/));
-    BOOST_LOG_SEV(lg, trace) << "Resolving with internal modules: " << r;
+    {
+        const auto r(nf.build_combined_element_name(ctx, n,
+                true/*populate_model_modules_if_blank*/));
+        BOOST_LOG_SEV(lg, trace) << "Resolving with internal modules: " << r;
 
-    if (is_name_referable(idx, r)) {
-        BOOST_LOG_SEV(lg, trace) << "Resolution succeeded.";
-        return r;
+        if (is_name_referable(idx, r)) {
+            BOOST_LOG_SEV(lg, trace) << "Resolution succeeded.";
+            return r;
+        }
+    }
+
+    /*
+     * Next we attempt a relative paths from the context - e.g. add
+     * the user path to the context path.
+     */
+    {
+        const auto r(nf.build_combined_element_name(ctx, n,
+                true/*populate_model_modules_if_blank*/,
+                false/*populate_internal_modules_if_blank*/,
+                true/*combine_internal_modules*/));
+        BOOST_LOG_SEV(lg, trace) << "Resolving with combined internal modules: "
+                                 << r;
+
+        if (is_name_referable(idx, r)) {
+            BOOST_LOG_SEV(lg, trace) << "Resolution succeeded.";
+            return r;
+        }
     }
 
     /*

@@ -10,19 +10,20 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-07 Tue 11:57]
+#+CAPTION: Clock summary at [2019-05-07 Tue 14:15]
 | <75>                                                       |        |      |      |       |
 | Headline                                                   | Time   |      |      |     % |
 |------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                               | *7:42* |      |      | 100.0 |
+| *Total time*                                               | *8:16* |      |      | 100.0 |
 |------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                    | 7:42   |      |      | 100.0 |
-| Active                                                     |        | 7:42 |      | 100.0 |
-| Edit release notes for previous sprint                     |        |      | 2:41 |  34.8 |
-| Create a video demo for the previous sprint's features     |        |      | 2:11 |  28.4 |
-| Sprint and product backlog grooming                        |        |      | 0:19 |   4.1 |
-| Defining profiles directly on a target model does not work |        |      | 0:30 |   6.5 |
-| Create namespaces for model elements                       |        |      | 2:01 |  26.2 |
+| Stories                                                    | 8:16   |      |      | 100.0 |
+| Active                                                     |        | 8:16 |      | 100.0 |
+| Edit release notes for previous sprint                     |        |      | 2:41 |  32.5 |
+| Create a video demo for the previous sprint's features     |        |      | 2:11 |  26.4 |
+| Sprint and product backlog grooming                        |        |      | 0:19 |   3.8 |
+| Defining profiles directly on a target model does not work |        |      | 0:30 |   6.0 |
+| Inner modules need to be qualified                         |        |      | 0:22 |   4.4 |
+| Create namespaces for model elements                       |        |      | 2:13 |  26.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -178,8 +179,21 @@ error. The problem is probably to do with the fact that we do not set
 the meta-model information on these new types. We should try something
 similar for all meta-types such as decorations, etc.
 
+*** COMPLETED Inner modules need to be qualified                      :story:
+    CLOSED: [2019-05-07 Tue 14:15]
+    :LOGBOOK:
+    CLOCK: [2019-05-07 Tue 13:53]--[2019-05-07 Tue 14:15] =>  0:22
+    :END:
+
+At present we cannot make a reference to a type in a "inner"
+module. Take type T defined in namespace N. Assume N::M with type
+R. In T we should be able to refer to M::R without any further
+qualification because N contains both T and M. However, at present the
+resolver cannot find M::R unless we specify N::M::R.
+
 *** STARTED Create namespaces for model elements                      :story:
     :LOGBOOK:
+    CLOCK: [2019-05-07 Tue 13:41]--[2019-05-07 Tue 13:53] =>  0:12
     CLOCK: [2019-05-07 Tue 09:56]--[2019-05-07 Tue 11:57] =>  2:01
     :END:
 

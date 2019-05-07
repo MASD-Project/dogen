@@ -160,7 +160,8 @@ meta_model::name name_factory::build_combined_element_name(
     const meta_model::name& model_name,
     const meta_model::name& partial_element_name,
     const bool populate_model_modules_if_blank,
-    const bool populate_internal_modules_if_blank) const {
+    const bool populate_internal_modules_if_blank,
+    const bool combine_internal_modules) const {
 
     name_builder b;
     b.simple_name(partial_element_name.simple());
@@ -175,6 +176,11 @@ meta_model::name name_factory::build_combined_element_name(
     if (populate_internal_modules_if_blank &&
         partial_element_name.location().internal_modules().empty()) {
         b.internal_modules(l.internal_modules());
+    } else if (combine_internal_modules) {
+        auto im(model_name.location().internal_modules());
+        for (const auto m : partial_element_name.location().internal_modules())
+            im.push_back(m);
+        b.internal_modules(im);
     } else
         b.internal_modules(partial_element_name.location().internal_modules());
 
