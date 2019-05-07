@@ -25,8 +25,8 @@
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
-#include "masd.dogen.coding/types/meta_model/modeline.hpp"
-#include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/modeline.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/modeline_group.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
 #include "masd.dogen.coding/types/transforms/modelines_transform.hpp"
@@ -65,8 +65,9 @@ const std::string invalid_technical_space(
 
 namespace masd::dogen::coding::transforms {
 
-meta_model::editor modelines_transform::to_editor(const std::string& s) {
-    using meta_model::editor;
+meta_model::decoration::editor
+modelines_transform::to_editor(const std::string& s) {
+    using meta_model::decoration::editor;
     if (s == editor_emacs)
         return editor::emacs;
     else if (s == editor_vi)
@@ -80,9 +81,9 @@ meta_model::editor modelines_transform::to_editor(const std::string& s) {
     BOOST_THROW_EXCEPTION(transformation_error(invalid_editor + s));
 }
 
-meta_model::modeline_location modelines_transform::
+meta_model::decoration::modeline_location modelines_transform::
 to_modeline_location(const std::string& s) {
-    using meta_model::modeline_location;
+    using meta_model::decoration::modeline_location;
     if (s == modeline_location_top)
         return modeline_location::top;
     else if (s == modeline_location_bottom)
@@ -124,14 +125,15 @@ make_feature_group(const variability::meta_model::feature_model& fm) {
     return r;
 }
 
-meta_model::editor modelines_transform::make_editor(const feature_group& fg,
+meta_model::decoration::editor
+modelines_transform::make_editor(const feature_group& fg,
     const variability::meta_model::configuration& cfg) {
     const variability::helpers::configuration_selector s(cfg);
     const auto str(s.get_text_content(fg.editor));
     return to_editor(str);
 }
 
-meta_model::modeline_location
+meta_model::decoration::modeline_location
 modelines_transform::make_modeline_location(const feature_group& fg,
     const variability::meta_model::configuration& cfg) {
     const variability::helpers::configuration_selector s(cfg);

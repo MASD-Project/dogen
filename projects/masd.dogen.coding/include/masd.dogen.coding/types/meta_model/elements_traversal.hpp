@@ -33,11 +33,11 @@
 #include "masd.dogen.coding/types/meta_model/exception.hpp"
 #include "masd.dogen.coding/types/meta_model/visitor.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
-#include "masd.dogen.coding/types/meta_model/licence.hpp"
-#include "masd.dogen.coding/types/meta_model/modeline.hpp"
-#include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
-#include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/licence.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/modeline.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/modeline_group.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/generation_marker.hpp"
 #include "masd.dogen.coding/types/meta_model/variability_profile_template.hpp"
 
 namespace masd::dogen::coding::meta_model {

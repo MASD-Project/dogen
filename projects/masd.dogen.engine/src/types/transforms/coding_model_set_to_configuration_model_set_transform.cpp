@@ -93,10 +93,16 @@ public:
     }
     void operator()(coding::meta_model::exception& e) { extract(e); }
     void operator()(coding::meta_model::visitor& v) { extract(v); }
-    void operator()(coding::meta_model::licence& l) { extract(l); }
-    void operator()(coding::meta_model::modeline& ml) { extract(ml); }
-    void operator()(coding::meta_model::modeline_group& mg) { extract(mg); }
-    void operator()(coding::meta_model::generation_marker& gm) { extract(gm); }
+    void operator()(coding::meta_model::decoration::licence& l) { extract(l); }
+    void operator()(coding::meta_model::decoration::modeline& ml) {
+        extract(ml);
+    }
+    void operator()(coding::meta_model::decoration::modeline_group& mg) {
+        extract(mg);
+    }
+    void operator()(coding::meta_model::decoration::generation_marker& gm) {
+        extract(gm);
+    }
 
 public:
     variability::meta_model::configuration_model& result() {

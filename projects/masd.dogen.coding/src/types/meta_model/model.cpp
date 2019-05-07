@@ -22,15 +22,15 @@
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/builtin.hpp"
-#include "masd.dogen.coding/types/meta_model/licence.hpp"
 #include "masd.dogen.coding/types/meta_model/visitor.hpp"
-#include "masd.dogen.coding/types/meta_model/modeline.hpp"
 #include "masd.dogen.coding/types/meta_model/exception.hpp"
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
-#include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
-#include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/licence.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/modeline.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/modeline_group.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/generation_marker.hpp"
 #include "masd.dogen.coding/types/meta_model/variability_profile_template.hpp"
 #include "masd.dogen.coding/types/meta_model/variability_feature_template_group.hpp"
 #include "masd.dogen.coding/types/meta_model/variability_feature_template_group_registrar.hpp"
@@ -109,8 +109,8 @@ const boost::shared_ptr<masd::dogen::coding::meta_model::visitor>& rhs) {
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::modeline_group>& lhs,
-const boost::shared_ptr<masd::dogen::coding::meta_model::modeline_group>& rhs) {
+inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline_group>& lhs,
+const boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline_group>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -118,8 +118,8 @@ const boost::shared_ptr<masd::dogen::coding::meta_model::modeline_group>& rhs) {
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::modeline>& lhs,
-const boost::shared_ptr<masd::dogen::coding::meta_model::modeline>& rhs) {
+inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline>& lhs,
+const boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -127,8 +127,8 @@ const boost::shared_ptr<masd::dogen::coding::meta_model::modeline>& rhs) {
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::licence>& lhs,
-const boost::shared_ptr<masd::dogen::coding::meta_model::licence>& rhs) {
+inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::decoration::licence>& lhs,
+const boost::shared_ptr<masd::dogen::coding::meta_model::decoration::licence>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -136,8 +136,8 @@ const boost::shared_ptr<masd::dogen::coding::meta_model::licence>& rhs) {
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker>& lhs,
-const boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker>& rhs) {
+inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::decoration::generation_marker>& lhs,
+const boost::shared_ptr<masd::dogen::coding::meta_model::decoration::generation_marker>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -217,10 +217,10 @@ model::model(
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::object> >& objects,
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::exception> >& exceptions,
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::visitor> >& visitors,
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::modeline_group> >& modeline_groups,
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::modeline> >& modelines,
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >& licences,
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> >& generation_markers,
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline_group> >& modeline_groups,
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline> >& modelines,
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::licence> >& licences,
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::generation_marker> >& generation_markers,
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_profile_template> >& variability_profile_templates,
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group> >& variability_feature_template_groups,
     const boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group_registrar>& variability_feature_template_group_registrar,
@@ -518,67 +518,67 @@ void model::visitors(const std::unordered_map<std::string, boost::shared_ptr<mas
     visitors_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::modeline_group> >& model::modeline_groups() const {
+const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline_group> >& model::modeline_groups() const {
     return modeline_groups_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::modeline_group> >& model::modeline_groups() {
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline_group> >& model::modeline_groups() {
     return modeline_groups_;
 }
 
-void model::modeline_groups(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::modeline_group> >& v) {
+void model::modeline_groups(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline_group> >& v) {
     modeline_groups_ = v;
 }
 
-void model::modeline_groups(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::modeline_group> >&& v) {
+void model::modeline_groups(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline_group> >&& v) {
     modeline_groups_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::modeline> >& model::modelines() const {
+const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline> >& model::modelines() const {
     return modelines_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::modeline> >& model::modelines() {
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline> >& model::modelines() {
     return modelines_;
 }
 
-void model::modelines(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::modeline> >& v) {
+void model::modelines(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline> >& v) {
     modelines_ = v;
 }
 
-void model::modelines(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::modeline> >&& v) {
+void model::modelines(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline> >&& v) {
     modelines_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >& model::licences() const {
+const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::licence> >& model::licences() const {
     return licences_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >& model::licences() {
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::licence> >& model::licences() {
     return licences_;
 }
 
-void model::licences(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >& v) {
+void model::licences(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::licence> >& v) {
     licences_ = v;
 }
 
-void model::licences(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >&& v) {
+void model::licences(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::licence> >&& v) {
     licences_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> >& model::generation_markers() const {
+const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::generation_marker> >& model::generation_markers() const {
     return generation_markers_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> >& model::generation_markers() {
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::generation_marker> >& model::generation_markers() {
     return generation_markers_;
 }
 
-void model::generation_markers(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> >& v) {
+void model::generation_markers(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::generation_marker> >& v) {
     generation_markers_ = v;
 }
 
-void model::generation_markers(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> >&& v) {
+void model::generation_markers(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::generation_marker> >&& v) {
     generation_markers_ = std::move(v);
 }
 

@@ -28,9 +28,9 @@
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
-#include "masd.dogen.coding/types/meta_model/editor.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/editor.hpp"
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
-#include "masd.dogen.coding/types/meta_model/modeline_location.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/modeline_location.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
@@ -41,8 +41,8 @@ namespace masd::dogen::coding::transforms {
  */
 class modelines_transform final {
 private:
-    static meta_model::editor to_editor(const std::string& s);
-    static meta_model::modeline_location
+    static meta_model::decoration::editor to_editor(const std::string& s);
+    static meta_model::decoration::modeline_location
     to_modeline_location(const std::string& s);
     static meta_model::technical_space to_technical_space(const std::string& s);
 
@@ -56,12 +56,12 @@ private:
     static feature_group make_feature_group(
         const variability::meta_model::feature_model& fm);
 
-    static meta_model::editor make_editor(const feature_group& fg,
+    static meta_model::decoration::editor make_editor(const feature_group& fg,
         const variability::meta_model::configuration& cfg);
     static meta_model::technical_space
     make_technical_space(const feature_group& fg,
         const variability::meta_model::configuration& cfg);
-    static meta_model::modeline_location
+    static meta_model::decoration::modeline_location
     make_modeline_location(const feature_group& fg,
         const variability::meta_model::configuration& cfg);
 

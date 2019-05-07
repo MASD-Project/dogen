@@ -44,10 +44,10 @@
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/meta_model/builtin.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
-#include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
-#include "masd.dogen.coding/types/meta_model/modeline.hpp"
-#include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
-#include "masd.dogen.coding/types/meta_model/licence.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/licence.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/modeline.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/modeline_group.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/generation_marker.hpp"
 #include "masd.dogen.coding/types/meta_model/variability_profile_template.hpp"
 #include "masd.dogen.coding/types/meta_model/variability_feature_template_group.hpp"
 #include "masd.dogen.coding/types/meta_model/variability_feature_template_group_registrar.hpp"
@@ -97,7 +97,7 @@ private:
      * @pre name and value of the injector attribute must not be empty.
      * @pre value of the injector attribute must be empty.
      */
-    coding::meta_model::modeline_field
+    coding::meta_model::decoration::modeline_field
     to_modeline_field(const injection::meta_model::attribute& ia) const;
 
     /**
@@ -197,7 +197,7 @@ public:
      * @brief Converts an injection element with a stereotype of
      * masd::modeline_group to a coding modeline group.
      */
-    boost::shared_ptr<coding::meta_model::modeline_group>
+    boost::shared_ptr<coding::meta_model::decoration::modeline_group>
     to_modeline_group(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
@@ -206,7 +206,7 @@ public:
      * @brief Converts an injection element with a stereotype of
      * masd::modeline to a coding modeline.
      */
-    boost::shared_ptr<coding::meta_model::modeline>
+    boost::shared_ptr<coding::meta_model::decoration::modeline>
     to_modeline(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
@@ -215,7 +215,7 @@ public:
      * @brief Converts an injection element with a stereotype of
      * masd::generation_marker to a coding generation marker.
      */
-    boost::shared_ptr<coding::meta_model::generation_marker>
+    boost::shared_ptr<coding::meta_model::decoration::generation_marker>
     to_generation_marker(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
@@ -224,7 +224,7 @@ public:
      * @brief Converts an injection element with a stereotype of
      * masd::licence to a coding licence.
      */
-    boost::shared_ptr<coding::meta_model::licence>
+    boost::shared_ptr<coding::meta_model::decoration::licence>
     to_licence(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;

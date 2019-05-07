@@ -21,10 +21,10 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/licence.hpp"
-#include "masd.dogen.coding/types/meta_model/modeline.hpp"
-#include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
-#include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/licence.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/modeline.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/modeline_group.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/generation_marker.hpp"
 #include "masd.dogen.coding/types/meta_model/variability_profile_template.hpp"
 #include "masd.dogen.coding/types/meta_model/variability_feature_template_group_registrar.hpp"
 #include "masd.dogen.coding/types/meta_model/variability_feature_template_group.hpp"
@@ -97,22 +97,22 @@ public:
         v.meta_name(n);
     }
 
-    void operator()(meta_model::licence& l) {
+    void operator()(meta_model::decoration::licence& l) {
         static const auto n(mnf::make_licence_name());
         l.meta_name(n);
     }
 
-    void operator()(meta_model::modeline& ml) {
+    void operator()(meta_model::decoration::modeline& ml) {
         static const auto n(mnf::make_modeline_name());
         ml.meta_name(n);
     }
 
-    void operator()(meta_model::modeline_group& mg) {
+    void operator()(meta_model::decoration::modeline_group& mg) {
         static const auto n(mnf::make_modeline_group_name());
         mg.meta_name(n);
     }
 
-    void operator()(meta_model::generation_marker& gm) {
+    void operator()(meta_model::decoration::generation_marker& gm) {
         static const auto n(mnf::make_generation_marker_name());
         gm.meta_name(n);
     }

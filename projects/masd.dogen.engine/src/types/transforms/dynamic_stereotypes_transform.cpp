@@ -85,10 +85,14 @@ public:
     }
     void operator()(coding::meta_model::exception& e) { update(e); }
     void operator()(coding::meta_model::visitor& v) { update(v); }
-    void operator()(coding::meta_model::licence& l) { update(l); }
-    void operator()(coding::meta_model::modeline& ml) { update(ml); }
-    void operator()(coding::meta_model::modeline_group& mg) { update(mg); }
-    void operator()(coding::meta_model::generation_marker& gm) { update(gm); }
+    void operator()(coding::meta_model::decoration::licence& l) { update(l); }
+    void operator()(coding::meta_model::decoration::modeline& ml) {
+        update(ml);
+    }
+    void operator()(coding::meta_model::decoration::modeline_group& mg) {
+        update(mg);
+    }
+    void operator()(coding::meta_model::decoration::generation_marker& gm) { update(gm); }
 };
 
 }

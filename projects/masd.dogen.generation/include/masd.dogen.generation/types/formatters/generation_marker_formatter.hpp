@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include <string>
-#include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/generation_marker.hpp"
 
 namespace masd::dogen::generation::formatters {
 
@@ -38,7 +38,7 @@ namespace masd::dogen::generation::formatters {
 class generation_marker_formatter final {
 public:
     void format(std::ostream& s,
-        const coding::meta_model::generation_marker& gm) const;
+        const coding::meta_model::decoration::generation_marker& gm) const;
 };
 
 }

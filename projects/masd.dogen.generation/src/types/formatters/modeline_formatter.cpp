@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.coding/io/meta_model/modeline_io.hpp"
+#include "masd.dogen.coding/io/meta_model/decoration/modeline_io.hpp"
 #include "masd.dogen.generation/types/formatters/formatting_error.hpp"
 #include "masd.dogen.generation/types/formatters/modeline_formatter.hpp"
 
@@ -46,27 +46,32 @@ const std::string unsupported_modeline("Modeline is not supported.");
 
 namespace masd::dogen::generation::formatters {
 
-bool modeline_formatter::is_vim(const coding::meta_model::modeline& ml) const {
-    return ml.editor() == coding::meta_model::editor::vim;
+using coding::meta_model::decoration::editor;
+using coding::meta_model::decoration::modeline_location;
+using coding::meta_model::decoration::modeline;
+
+bool modeline_formatter::
+is_vim(const modeline& ml) const {
+    return ml.editor() == editor::vim;
 }
 
 bool modeline_formatter::
-is_emacs(const coding::meta_model::modeline& ml) const {
-    return ml.editor() == coding::meta_model::editor::emacs;
+is_emacs(const modeline& ml) const {
+    return ml.editor() == editor::emacs;
 }
 
 bool modeline_formatter::
-is_top_line(const coding::meta_model::modeline& ml) const {
-    return ml.location() == coding::meta_model::modeline_location::top;
+is_top_line(const modeline& ml) const {
+    return ml.location() == modeline_location::top;
 }
 
 bool modeline_formatter::
-is_bottom_line(const coding::meta_model::modeline& ml) const {
-    return ml.location() == coding::meta_model::modeline_location::bottom;
+is_bottom_line(const modeline& ml) const {
+    return ml.location() == modeline_location::bottom;
 }
 
 void modeline_formatter::
-vim_modeline(std::ostream& s, const coding::meta_model::modeline& ml) const {
+vim_modeline(std::ostream& s, const modeline& ml) const {
     s << vim_marker << space;
     bool is_first(true);
     for (const auto& f : ml.fields()) {
@@ -81,8 +86,8 @@ vim_modeline(std::ostream& s, const coding::meta_model::modeline& ml) const {
     }
 }
 
-void modeline_formatter::emacs_top_modeline(std::ostream& s,
-    const coding::meta_model::modeline& ml) const {
+void modeline_formatter::
+emacs_top_modeline(std::ostream& s, const modeline& ml) const {
     s << emacs_top_marker << space;
     bool is_first(true);
     for (const auto& f : ml.fields()) {
@@ -96,8 +101,8 @@ void modeline_formatter::emacs_top_modeline(std::ostream& s,
     s << space << emacs_top_marker;
 }
 
-void modeline_formatter::emacs_bottom_modeline(std::ostream& s,
-    const coding::meta_model::modeline& ml) const {
+void modeline_formatter::
+emacs_bottom_modeline(std::ostream& s, const modeline& ml) const {
     s << emacs_bottom_start_marker << std::endl;
     for (const auto& f : ml.fields()) {
         s << f.name() << emacs_field_separator << space << f.value()
@@ -106,8 +111,7 @@ void modeline_formatter::emacs_bottom_modeline(std::ostream& s,
     s << emacs_bottom_end_marker << std::endl;
 }
 
-void modeline_formatter::
-format(std::ostream& s, const coding::meta_model::modeline& ml) const {
+void modeline_formatter::format(std::ostream& s, const modeline& ml) const {
     BOOST_LOG_SEV(lg, trace) << "Modeline: " << ml;
 
     if (is_emacs(ml)) {

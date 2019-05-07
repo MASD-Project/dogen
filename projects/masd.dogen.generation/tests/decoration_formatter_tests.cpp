@@ -28,8 +28,8 @@
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
-#include "masd.dogen.coding/types/meta_model/modeline.hpp"
-#include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/modeline.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/generation_marker.hpp"
 #include "masd.dogen.generation/types/formatters/indent_filter.hpp"
 #include "masd.dogen.generation/types/formatters/decoration_formatter.hpp"
 
@@ -245,6 +245,7 @@ make_copyright_notices(const bool with_multiple_holders = false) {
 }
 
 using namespace masd::dogen::coding::meta_model;
+using namespace masd::dogen::coding::meta_model::decoration;
 boost::shared_ptr<generation_marker> empty_marker;
 boost::shared_ptr<modeline> empty_modeline;
 
@@ -262,7 +263,6 @@ make_modeline(const bool is_top = true) {
     return r;
 }
 
-using masd::dogen::coding::meta_model::generation_marker;
 boost::shared_ptr<generation_marker> make_generation_marker() {
     auto r(boost::make_shared<generation_marker>());
     r->message(single_line_marker_message);

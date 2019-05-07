@@ -799,15 +799,15 @@
       "attributes": [
         {
           "name": "modelines_by_modeline_group_by_technical_space",
-          "type": "std::unordered_map<std::string, std::unordered_map<coding::meta_model::technical_space, boost::shared_ptr<coding::meta_model::modeline>>>"
+          "type": "std::unordered_map<std::string, std::unordered_map<coding::meta_model::technical_space, boost::shared_ptr<coding::meta_model::decoration::modeline>>>"
         },
         {
           "name": "licences_by_name",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<coding::meta_model::licence>>"
+          "type": "std::unordered_map<std::string, boost::shared_ptr<coding::meta_model::decoration::licence>>"
         },
         {
           "name": "generation_markers_by_name",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<coding::meta_model::generation_marker>>"
+          "type": "std::unordered_map<std::string, boost::shared_ptr<coding::meta_model::decoration::generation_marker>>"
         }
       ]
     },

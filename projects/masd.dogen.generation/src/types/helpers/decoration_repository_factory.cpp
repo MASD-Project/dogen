@@ -22,10 +22,10 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.coding/types/meta_model/licence.hpp"
-#include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
-#include "masd.dogen.coding/types/meta_model/modeline.hpp"
-#include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/licence.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/generation_marker.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/modeline.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/modeline_group.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
 #include "masd.dogen.generation/types/helpers/building_exception.hpp"
@@ -65,7 +65,7 @@ void decoration_repository_factory::handle_licence(
 
     BOOST_LOG_SEV(lg, trace) << "Processing licence.";
     const auto id(e->name().qualified().dot());
-    using coding::meta_model::licence;
+    using coding::meta_model::decoration::licence;
     const auto l(boost::dynamic_pointer_cast<licence>(e));
     if (!l) {
         BOOST_LOG_SEV(lg, error) << inconsistent_meta_name << id;
@@ -89,7 +89,7 @@ void decoration_repository_factory::handle_generation_marker(
     BOOST_LOG_SEV(lg, trace) << "Processing generation marker.";
 
     const auto id(e->name().qualified().dot());
-    using coding::meta_model::generation_marker;
+    using coding::meta_model::decoration::generation_marker;
     const auto gm(boost::dynamic_pointer_cast<generation_marker>(e));
     if (!gm) {
         BOOST_LOG_SEV(lg, error) << inconsistent_meta_name << id;
@@ -114,15 +114,16 @@ void decoration_repository_factory::handle_modeline_group(
     BOOST_LOG_SEV(lg, trace) << "Processing modeline group.";
 
     const auto id(e->name().qualified().dot());
-    using coding::meta_model::modeline_group;
+    using coding::meta_model::decoration::modeline_group;
     const auto mg(boost::dynamic_pointer_cast<modeline_group>(e));
     if (!mg) {
         BOOST_LOG_SEV(lg, error) << inconsistent_meta_name << id;
         BOOST_THROW_EXCEPTION(building_exception(inconsistent_meta_name + id));
     }
 
+    using coding::meta_model::decoration::modeline;
     std::unordered_map<coding::meta_model::technical_space,
-                       boost::shared_ptr<coding::meta_model::modeline>> map;
+                       boost::shared_ptr<modeline>> map;
 
     for (const auto& ml : mg->modelines()) {
         const auto ts(ml->technical_space());

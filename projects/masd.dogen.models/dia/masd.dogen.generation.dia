@@ -11350,13 +11350,13 @@ model directory.#</dia:string>
         <dia:point val="208,113"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="207.95,112.95;280.16,117.45"/>
+        <dia:rectangle val="207.95,112.95;284.78,117.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="208,113"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="72.109999999999999"/>
+        <dia:real val="76.72999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -11454,7 +11454,7 @@ model directory.#</dia:string>
             <dia:string>#modelines_by_modeline_group_by_technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;coding::meta_model::technical_space, boost::shared_ptr&lt;coding::meta_model::modeline&gt;&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;coding::meta_model::technical_space, boost::shared_ptr&lt;coding::meta_model::decoration::modeline&gt;&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -11477,7 +11477,7 @@ model directory.#</dia:string>
             <dia:string>#licences_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;coding::meta_model::licence&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;coding::meta_model::decoration::licence&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -11500,7 +11500,7 @@ model directory.#</dia:string>
             <dia:string>#generation_markers_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;coding::meta_model::generation_marker&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;coding::meta_model::decoration::generation_marker&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -11727,7 +11727,7 @@ model directory.#</dia:string>
         <dia:point val="227.26,124"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="226.51,117.35;244.255,124.8"/>
+        <dia:rectangle val="226.51,117.35;246.565,124.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11735,8 +11735,8 @@ model directory.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="227.26,124"/>
         <dia:point val="227.26,121"/>
-        <dia:point val="244.055,121"/>
-        <dia:point val="244.055,117.4"/>
+        <dia:point val="246.365,121"/>
+        <dia:point val="246.365,117.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

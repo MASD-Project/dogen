@@ -27,8 +27,8 @@
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
-#include "masd.dogen.coding/types/meta_model/licence.hpp"
-#include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/licence.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/modeline_group.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
 #include "masd.dogen.coding/io/meta_model/decoration/element_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
@@ -59,6 +59,10 @@ const std::string technical_space_not_found("Technical space not found: ");
 }
 
 namespace masd::dogen::generation::transforms {
+
+using coding::meta_model::decoration::generation_marker;
+using coding::meta_model::decoration::modeline;
+
 
 decoration_transform::feature_group decoration_transform::
 make_feature_group(const variability::meta_model::feature_model& fm) {
@@ -136,8 +140,8 @@ is_generatable(const coding::meta_model::name& meta_name) {
 
 boost::optional<coding::meta_model::decoration::element_properties>
 decoration_transform::make_decoration(const std::string& licence_text,
-    const boost::shared_ptr<coding::meta_model::modeline> ml,
-    const boost::shared_ptr<coding::meta_model::generation_marker> gm,
+    const boost::shared_ptr<modeline> ml,
+    const boost::shared_ptr<generation_marker> gm,
     const std::list<std::string>& copyright_notices,
     const coding::meta_model::technical_space ts) {
 
@@ -198,13 +202,13 @@ get_short_form_licence(const helpers::decoration_repository drp,
     return i->second->short_form();
 }
 
-boost::shared_ptr<coding::meta_model::modeline>
+boost::shared_ptr<modeline>
 decoration_transform::get_modeline(const helpers::decoration_repository drp,
     const std::string& modeline_group_name,
     const coding::meta_model::technical_space ts) {
 
     if (modeline_group_name.empty())
-        return boost::shared_ptr<coding::meta_model::modeline>();
+        return boost::shared_ptr<modeline>();
 
     const auto& mg_map(drp.modelines_by_modeline_group_by_technical_space());
     const auto i(mg_map.find(modeline_group_name));
@@ -228,13 +232,13 @@ decoration_transform::get_modeline(const helpers::decoration_repository drp,
     return j->second;
 }
 
-boost::shared_ptr<coding::meta_model::generation_marker>
+boost::shared_ptr<generation_marker>
 decoration_transform::
 get_generation_marker(const helpers::decoration_repository drp,
     const std::string& generation_marker_name) {
 
     if (generation_marker_name.empty())
-        return boost::shared_ptr<coding::meta_model::generation_marker>();
+        return boost::shared_ptr<generation_marker>();
 
     const auto& map(drp.generation_markers_by_name());
     const auto i(map.find(generation_marker_name));
@@ -372,7 +376,8 @@ decoration_transform::make_local_decoration(
     const auto r(make_decoration(overriden_licence, overriden_modeline,
             overriden_marker, overriden_copyright_notices, ts));
 
-    BOOST_LOG_SEV(lg, trace) << "Created local decoration with overrides: " << r;
+    BOOST_LOG_SEV(lg, trace) << "Created local decoration with overrides: "
+                             << r;
     return r;
 }
 

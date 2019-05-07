@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include <string>
-#include "masd.dogen.coding/types/meta_model/modeline.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/modeline.hpp"
 
 namespace masd::dogen::generation::formatters {
 
@@ -44,46 +44,48 @@ private:
     /**
      * @brief Returns true if the target editor is vim.
      */
-    bool is_vim(const coding::meta_model::modeline& ml) const;
+    bool is_vim(const coding::meta_model::decoration::modeline& ml) const;
 
     /**
      * @brief Returns true if the target editor is emacs.
      */
-    bool is_emacs(const coding::meta_model::modeline& m) const;
+    bool is_emacs(const coding::meta_model::decoration::modeline& m) const;
 
     /**
      * @brief Returns true if the modeline should be placed at the top
      * of the file.
      */
-    bool is_top_line(const coding::meta_model::modeline& m) const;
+    bool is_top_line(const coding::meta_model::decoration::modeline& m) const;
 
     /**
      * @brief Returns true if the modeline should be placed at the
      * bottom of the file.
      */
-    bool is_bottom_line(const coding::meta_model::modeline& m) const;
+    bool is_bottom_line(
+        const coding::meta_model::decoration::modeline& m) const;
 
 private:
     /**
      * @brief Creates a modeline for the vim editor.
      */
     void vim_modeline(std::ostream& s,
-        const coding::meta_model::modeline& ml) const;
+        const coding::meta_model::decoration::modeline& ml) const;
 
     /**
      * @brief Creates a modeline for the emacs editor, first line.
      */
     void emacs_top_modeline(std::ostream& s,
-        const coding::meta_model::modeline& ml) const;
+        const coding::meta_model::decoration::modeline& ml) const;
 
     /**
      * @brief Creates a modeline for the emacs editor, last lines.
      */
     void emacs_bottom_modeline(std::ostream& s,
-        const coding::meta_model::modeline& ml) const;
+        const coding::meta_model::decoration::modeline& ml) const;
 
 public:
-    void format(std::ostream& s, const coding::meta_model::modeline& m) const;
+    void format(std::ostream& s,
+        const coding::meta_model::decoration::modeline& m) const;
 };
 
 }

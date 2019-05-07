@@ -26,8 +26,8 @@
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/modeline.hpp"
-#include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/modeline.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/modeline_group.hpp"
 #include "masd.dogen.coding/types/meta_model/elements_traversal.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
 #include "masd.dogen.coding/types/helpers/name_builder.hpp"
@@ -114,7 +114,7 @@ public:
     void operator()(meta_model::object& o) { update(o); }
     void operator()(meta_model::exception& e) { update(e); }
     void operator()(meta_model::visitor& v) { update(v); }
-    void operator()(meta_model::modeline& ml) { update(ml); }
+    void operator()(meta_model::decoration::modeline& ml) { update(ml); }
 
 public:
     meta_model::model& model_;

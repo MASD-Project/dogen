@@ -29,11 +29,11 @@
 #include <algorithm>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
-#include "masd.dogen.coding/types/meta_model/licence_fwd.hpp"
-#include "masd.dogen.coding/types/meta_model/modeline_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/hash/meta_model/technical_space_hash.hpp"
-#include "masd.dogen.coding/types/meta_model/generation_marker_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/licence_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/modeline_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/generation_marker_fwd.hpp"
 
 namespace masd::dogen::generation::helpers {
 
@@ -46,25 +46,25 @@ public:
 
 public:
     decoration_repository(
-        const std::unordered_map<std::string, std::unordered_map<masd::dogen::coding::meta_model::technical_space, boost::shared_ptr<masd::dogen::coding::meta_model::modeline> > >& modelines_by_modeline_group_by_technical_space,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >& licences_by_name,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> >& generation_markers_by_name);
+        const std::unordered_map<std::string, std::unordered_map<masd::dogen::coding::meta_model::technical_space, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline> > >& modelines_by_modeline_group_by_technical_space,
+        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::licence> >& licences_by_name,
+        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::generation_marker> >& generation_markers_by_name);
 
 public:
-    const std::unordered_map<std::string, std::unordered_map<masd::dogen::coding::meta_model::technical_space, boost::shared_ptr<masd::dogen::coding::meta_model::modeline> > >& modelines_by_modeline_group_by_technical_space() const;
-    std::unordered_map<std::string, std::unordered_map<masd::dogen::coding::meta_model::technical_space, boost::shared_ptr<masd::dogen::coding::meta_model::modeline> > >& modelines_by_modeline_group_by_technical_space();
-    void modelines_by_modeline_group_by_technical_space(const std::unordered_map<std::string, std::unordered_map<masd::dogen::coding::meta_model::technical_space, boost::shared_ptr<masd::dogen::coding::meta_model::modeline> > >& v);
-    void modelines_by_modeline_group_by_technical_space(const std::unordered_map<std::string, std::unordered_map<masd::dogen::coding::meta_model::technical_space, boost::shared_ptr<masd::dogen::coding::meta_model::modeline> > >&& v);
+    const std::unordered_map<std::string, std::unordered_map<masd::dogen::coding::meta_model::technical_space, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline> > >& modelines_by_modeline_group_by_technical_space() const;
+    std::unordered_map<std::string, std::unordered_map<masd::dogen::coding::meta_model::technical_space, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline> > >& modelines_by_modeline_group_by_technical_space();
+    void modelines_by_modeline_group_by_technical_space(const std::unordered_map<std::string, std::unordered_map<masd::dogen::coding::meta_model::technical_space, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline> > >& v);
+    void modelines_by_modeline_group_by_technical_space(const std::unordered_map<std::string, std::unordered_map<masd::dogen::coding::meta_model::technical_space, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline> > >&& v);
 
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >& licences_by_name() const;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >& licences_by_name();
-    void licences_by_name(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >& v);
-    void licences_by_name(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> >&& v);
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::licence> >& licences_by_name() const;
+    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::licence> >& licences_by_name();
+    void licences_by_name(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::licence> >& v);
+    void licences_by_name(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::licence> >&& v);
 
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> >& generation_markers_by_name() const;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> >& generation_markers_by_name();
-    void generation_markers_by_name(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> >& v);
-    void generation_markers_by_name(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> >&& v);
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::generation_marker> >& generation_markers_by_name() const;
+    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::generation_marker> >& generation_markers_by_name();
+    void generation_markers_by_name(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::generation_marker> >& v);
+    void generation_markers_by_name(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::generation_marker> >&& v);
 
 public:
     bool operator==(const decoration_repository& rhs) const;
@@ -77,9 +77,9 @@ public:
     decoration_repository& operator=(decoration_repository other);
 
 private:
-    std::unordered_map<std::string, std::unordered_map<masd::dogen::coding::meta_model::technical_space, boost::shared_ptr<masd::dogen::coding::meta_model::modeline> > > modelines_by_modeline_group_by_technical_space_;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::licence> > licences_by_name_;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::generation_marker> > generation_markers_by_name_;
+    std::unordered_map<std::string, std::unordered_map<masd::dogen::coding::meta_model::technical_space, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline> > > modelines_by_modeline_group_by_technical_space_;
+    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::licence> > licences_by_name_;
+    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::generation_marker> > generation_markers_by_name_;
 };
 
 }

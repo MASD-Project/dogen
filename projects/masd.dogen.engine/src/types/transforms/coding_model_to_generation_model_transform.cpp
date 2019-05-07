@@ -33,10 +33,10 @@
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
-#include "masd.dogen.coding/types/meta_model/licence.hpp"
-#include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
-#include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
-#include "masd.dogen.coding/types/meta_model/modeline.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/licence.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/modeline.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/generation_marker.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/modeline_group.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
@@ -118,17 +118,20 @@ public:
     void operator()(boost::shared_ptr<coding::meta_model::visitor> v) {
         add(v);
     }
-    void operator()(boost::shared_ptr<coding::meta_model::licence> l) {
+    void operator()
+    (boost::shared_ptr<coding::meta_model::decoration::licence> l) {
         add(l);
     }
     void operator()
-    (boost::shared_ptr<coding::meta_model::generation_marker> gm) {
+    (boost::shared_ptr<coding::meta_model::decoration::generation_marker> gm) {
         add(gm);
     }
-    void operator()(boost::shared_ptr<coding::meta_model::modeline_group> mg) {
+    void operator()
+    (boost::shared_ptr<coding::meta_model::decoration::modeline_group> mg) {
         add(mg);
     }
-    void operator()(boost::shared_ptr<coding::meta_model::modeline> m) {
+    void operator()
+    (boost::shared_ptr<coding::meta_model::decoration::modeline> m) {
         add(m);
     }
 

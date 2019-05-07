@@ -57,6 +57,13 @@ const std::string unsupported_value("Unsupported attribute value: ");
 
 namespace masd::dogen::engine::helpers {
 
+using coding::meta_model::decoration::modeline_field;
+using coding::meta_model::decoration::modeline_group;
+using coding::meta_model::decoration::modeline;
+using coding::meta_model::decoration::generation_marker;
+using coding::meta_model::decoration::licence;
+
+
 void adapter::ensure_not_empty(const std::string& s) const {
     if (s.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_string;
@@ -104,11 +111,11 @@ coding::meta_model::name adapter::to_name(const coding::meta_model::location& l,
     return b.build();
 }
 
-coding::meta_model::modeline_field
+modeline_field
 adapter::to_modeline_field(const injection::meta_model::attribute& ia) const {
     ensure_not_empty(ia.name());
 
-    coding::meta_model::modeline_field r;
+    modeline_field r;
     r.name(ia.name());
     r.value(ia.value());
     return r;
@@ -292,20 +299,20 @@ adapter::to_builtin(const coding::meta_model::location& l,
     return r;
 }
 
-boost::shared_ptr<coding::meta_model::modeline_group>
+boost::shared_ptr<modeline_group>
 adapter::to_modeline_group(const coding::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
-    auto r(boost::make_shared<coding::meta_model::modeline_group>());
+    auto r(boost::make_shared<modeline_group>());
     populate_element(l, scr, ie, *r);
     return r;
 }
 
-boost::shared_ptr<coding::meta_model::modeline>
+boost::shared_ptr<modeline>
 adapter::to_modeline(const coding::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
-    auto r(boost::make_shared<coding::meta_model::modeline>());
+    auto r(boost::make_shared<modeline>());
     populate_element(l, scr, ie, *r);
 
     for (const auto& attr : ie.attributes())
@@ -314,11 +321,11 @@ adapter::to_modeline(const coding::meta_model::location& l,
     return r;
 }
 
-boost::shared_ptr<coding::meta_model::generation_marker>
+boost::shared_ptr<generation_marker>
 adapter::to_generation_marker(const coding::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
-    auto r(boost::make_shared<coding::meta_model::generation_marker>());
+    auto r(boost::make_shared<generation_marker>());
     populate_element(l, scr, ie, *r);
 
     const auto str_to_bool(
@@ -354,11 +361,11 @@ adapter::to_generation_marker(const coding::meta_model::location& l,
     return r;
 }
 
-boost::shared_ptr<coding::meta_model::licence>
+boost::shared_ptr<licence>
 adapter::to_licence(const coding::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
-    auto r(boost::make_shared<coding::meta_model::licence>());
+    auto r(boost::make_shared<licence>());
     populate_element(l, scr, ie, *r);
 
     for (const auto& attr : ie.attributes()) {
