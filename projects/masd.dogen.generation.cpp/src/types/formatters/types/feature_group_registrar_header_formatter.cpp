@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.generation.cpp/types/formatters/types/class_header_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/types/feature_group_registrar_header_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/hash/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/types/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/serialization/traits.hpp"
@@ -33,48 +33,48 @@
 
 namespace masd::dogen::generation::cpp::formatters::types {
 
-std::string class_header_formatter::static_id() {
-    return traits::class_header_archetype();
+std::string feature_group_registrar_header_formatter::static_id() {
+    return traits::feature_group_registrar_header_archetype();
 }
 
-std::string class_header_formatter::id() const {
+std::string feature_group_registrar_header_formatter::id() const {
     return static_id();
 }
 
 archetypes::location
-class_header_formatter::archetype_location() const {
+feature_group_registrar_header_formatter::archetype_location() const {
     static archetypes::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(),
-          class_header_formatter::static_id());
+          feature_group_registrar_header_formatter::static_id());
     return r;
 }
 
-const coding::meta_model::name& class_header_formatter::meta_name() const {
+const coding::meta_model::name& feature_group_registrar_header_formatter::meta_name() const {
     using coding::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_variability_feature_template_group_registrar_name());
     return r;
 }
 
-std::string class_header_formatter::family() const {
+std::string feature_group_registrar_header_formatter::family() const {
     return cpp::traits::header_family();
 }
 
-inclusion_support_types class_header_formatter::inclusion_support_type() const {
+inclusion_support_types feature_group_registrar_header_formatter::inclusion_support_type() const {
     return inclusion_support_types::canonical_support;
 }
 
-boost::filesystem::path class_header_formatter::inclusion_path(
+boost::filesystem::path feature_group_registrar_header_formatter::inclusion_path(
     const formattables::locator& l, const coding::meta_model::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_id());
 }
 
-boost::filesystem::path class_header_formatter::full_path(
+boost::filesystem::path feature_group_registrar_header_formatter::full_path(
     const formattables::locator& l, const coding::meta_model::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_id());
 }
 
-std::list<std::string> class_header_formatter::inclusion_dependencies(
+std::list<std::string> feature_group_registrar_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const coding::meta_model::element& e) const {
 
@@ -92,7 +92,7 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-extraction::meta_model::artefact class_header_formatter::
+extraction::meta_model::artefact feature_group_registrar_header_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
     const auto& o(a.as<coding::meta_model::variability::feature_template_group_registrar>(e));

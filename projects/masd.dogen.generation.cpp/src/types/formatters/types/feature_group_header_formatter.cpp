@@ -36,7 +36,7 @@
 namespace masd::dogen::generation::cpp::formatters::types {
 
 std::string feature_group_header_formatter::static_id() {
-    return traits::class_implementation_archetype();
+    return traits::feature_group_header_archetype();
 }
 
 std::string feature_group_header_formatter::id() const {

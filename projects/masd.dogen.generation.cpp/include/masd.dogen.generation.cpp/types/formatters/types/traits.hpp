@@ -89,6 +89,11 @@ struct traits {
      * @brief Name of the primitive implementation archetype.
      */
     static std::string primitive_implementation_archetype();
+
+    static std::string feature_group_header_archetype();
+    static std::string feature_group_implementation_archetype();
+    static std::string feature_group_registrar_header_archetype();
+    static std::string feature_group_registrar_implementation_archetype();
 };
 
 }

@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.generation.cpp/types/formatters/types/class_implementation_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/types/feature_group_implementation_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/types/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/io/inserter_implementation_helper.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/io/traits.hpp"
@@ -35,55 +35,55 @@
 
 namespace masd::dogen::generation::cpp::formatters::types {
 
-std::string class_implementation_formatter::static_id() {
-    return traits::class_implementation_archetype();
+std::string feature_group_implementation_formatter::static_id() {
+    return traits::feature_group_implementation_archetype();
 }
 
-std::string class_implementation_formatter::id() const {
+std::string feature_group_implementation_formatter::id() const {
     return static_id();
 }
 
 archetypes::location
-class_implementation_formatter::archetype_location() const {
+feature_group_implementation_formatter::archetype_location() const {
     static archetypes::location
         r(cpp::traits::kernel(),  cpp::traits::backend(),
           traits::facet(),
-          class_implementation_formatter::static_id());
+          feature_group_implementation_formatter::static_id());
     return r;
 }
 
-const coding::meta_model::name& class_implementation_formatter::meta_name() const {
+const coding::meta_model::name& feature_group_implementation_formatter::meta_name() const {
     using coding::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_variability_feature_template_group_name());
     return r;
 }
 
-std::string class_implementation_formatter::family() const {
+std::string feature_group_implementation_formatter::family() const {
     return cpp::traits::implementation_family();
 }
 
-inclusion_support_types class_implementation_formatter::inclusion_support_type() const {
+inclusion_support_types feature_group_implementation_formatter::inclusion_support_type() const {
     return inclusion_support_types::not_supported;
 }
 
-boost::filesystem::path class_implementation_formatter::inclusion_path(
+boost::filesystem::path feature_group_implementation_formatter::inclusion_path(
     const formattables::locator& /*l*/, const coding::meta_model::name& n) const {
 
     using namespace dogen::utility::log;
     static logger lg(
-        logger_factory(class_implementation_formatter::static_id()));
+        logger_factory(feature_group_implementation_formatter::static_id()));
     static const std::string not_supported("Inclusion path is not supported: ");
 
     BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
     BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
 }
 
-boost::filesystem::path class_implementation_formatter::full_path(
+boost::filesystem::path feature_group_implementation_formatter::full_path(
     const formattables::locator& l, const coding::meta_model::name& n) const {
     return l.make_full_path_for_cpp_implementation(n, static_id());
 }
 
-std::list<std::string> class_implementation_formatter::inclusion_dependencies(
+std::list<std::string> feature_group_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const coding::meta_model::element& e) const {
     using coding::meta_model::variability::feature_template_group;
@@ -100,7 +100,7 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-extraction::meta_model::artefact class_implementation_formatter::
+extraction::meta_model::artefact feature_group_implementation_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& o(a.as<coding::meta_model::variability::feature_template_group>(e));
