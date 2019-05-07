@@ -1898,8 +1898,7 @@
       "name": "meta_model::decoration::licence",
       "documentation": "Represents legal licence for software projects.\n",
       "stereotypes": [
-        "coding::meta_element",
-        "coding::non_testable"
+        "coding::meta_element"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1942,8 +1941,7 @@
       "documentation": "Group of modelines, logically associated.\n\nFor example, one may choose to have a set of modelines for @e emacs , or for\n@e vi, etc.\n",
       "stereotypes": [
         "coding::meta_element",
-        "Container",
-        "coding::non_testable"
+        "Container"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1958,8 +1956,7 @@
       "name": "meta_model::decoration::modeline",
       "documentation": "Groups all the fields representing editor variables for emacs, vi, etc.\n\nA field is a key-value pair (KVP), where name is the first element and its value\nthe second.\n\nExample: -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-\n\nIn this particular case, both prefix and postfix are @e -*-; @e mode is the first\nfield name and its value is @e c++; the KVP separator is @e : and the field\nseparator is @e ;.\n",
       "stereotypes": [
-        "coding::meta_element",
-        "coding::non_testable"
+        "coding::meta_element"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1989,8 +1986,7 @@
       "name": "meta_model::decoration::editor",
       "documentation": "Supported editors for modelines.\n",
       "stereotypes": [
-        "masd::enumeration",
-        "coding::non_testable"
+        "masd::enumeration"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2018,9 +2014,6 @@
     },
     {
       "name": "meta_model::decoration::modeline_field",
-      "stereotypes": [
-        "coding::non_testable"
-      ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2039,8 +2032,7 @@
       "name": "meta_model::decoration::modeline_location",
       "documentation": "Location in the file to place the modeline.\n",
       "stereotypes": [
-        "masd::enumeration",
-        "coding::non_testable"
+        "masd::enumeration"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2060,8 +2052,7 @@
       "name": "meta_model::decoration::generation_marker",
       "documentation": "Properties of the \"generation marker\" to add to generated files.\n\nThese are also known as \"location strings\".\n",
       "stereotypes": [
-        "coding::meta_element",
-        "coding::non_testable"
+        "coding::meta_element"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2103,8 +2094,7 @@
     {
       "name": "meta_model::variability::profile_template",
       "stereotypes": [
-        "coding::meta_element",
-        "coding::non_testable"
+        "coding::meta_element"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2128,8 +2118,7 @@
       "stereotypes": [
         "Documentable",
         "Configurable",
-        "Nameable",
-        "coding::non_testable"
+        "Nameable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2146,8 +2135,7 @@
     {
       "name": "meta_model::variability::feature_template_group",
       "stereotypes": [
-        "coding::meta_element",
-        "coding::non_testable"
+        "coding::meta_element"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2162,8 +2150,7 @@
       "stereotypes": [
         "Documentable",
         "Configurable",
-        "Nameable",
-        "coding::non_testable"
+        "Nameable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2188,8 +2175,7 @@
     {
       "name": "meta_model::variability::feature_template_group_registrar",
       "stereotypes": [
-        "coding::meta_element",
-        "coding::non_testable"
+        "coding::meta_element"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2211,8 +2197,7 @@
       "name": "meta_model::orm::model_properties",
       "stereotypes": [
         "Schemable",
-        "Caseable",
-        "coding::non_testable"
+        "Caseable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2226,8 +2211,7 @@
       "name": "meta_model::orm::database_system",
       "stereotypes": [
         "masd::enumeration",
-        "masd::hashable",
-        "coding::non_testable"
+        "masd::hashable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2256,8 +2240,7 @@
     {
       "name": "meta_model::orm::letter_case",
       "stereotypes": [
-        "masd::enumeration",
-        "coding::non_testable"
+        "masd::enumeration"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2276,8 +2259,7 @@
       "stereotypes": [
         "Schemable",
         "Caseable",
-        "Mappeable",
-        "coding::non_testable"
+        "Mappeable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2303,24 +2285,19 @@
       "stereotypes": [
         "Schemable",
         "Caseable",
-        "Mappeable",
-        "coding::non_testable"
+        "Mappeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "meta_model::orm::module_properties",
       "stereotypes": [
-        "Schemable",
-        "coding::non_testable"
+        "Schemable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "meta_model::orm::attribute_properties",
-      "stereotypes": [
-        "coding::non_testable"
-      ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2397,9 +2374,6 @@
     {
       "name": "meta_model::decoration::element_properties",
       "documentation": "Decoration for this element.\n",
-      "stereotypes": [
-        "coding::non_testable"
-      ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2411,29 +2385,6 @@
           "name": "postamble",
           "type": "std::string",
           "documentation": "Postamble for all artefacts created from this element.\n\nThe postamble is located at the bottom of an artefact and includes elements such\nas a modeline.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::non_testable",
-      "stereotypes": [
-        "masd::variability::profile_template"
-      ],
-      "tagged_values": {
-        "masd.variability.binding_point": "element",
-        "masd.variability.labels": "coding::non_testable"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "masd.generation.cpp.tests.enabled",
-          "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
         }
       ]
     }
