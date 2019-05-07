@@ -106,7 +106,7 @@
         <dia:point val="-48,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,4.95;-20.87,27.55"/>
+        <dia:rectangle val="-48.05,4.95;-19.33,28.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -115,10 +115,10 @@
         <dia:point val="-48,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.080000000000002"/>
+        <dia:real val="28.620000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="22.500000000000004"/>
+        <dia:real val="23.300000000000004"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -184,7 +184,7 @@
         <dia:point val="-48,172"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,170.95;236.05,369.717"/>
+        <dia:rectangle val="-48.05,170.95;240.05,369.717"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -193,7 +193,7 @@
         <dia:point val="-48,172"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="284"/>
+        <dia:real val="288"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="197.66666666666663"/>
@@ -219,19 +219,19 @@
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O3">
       <dia:attribute name="obj_pos">
-        <dia:point val="-41.2143,241"/>
+        <dia:point val="-46,241"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-41.2643,239.95;1.8357,305.05"/>
+        <dia:rectangle val="-46.05,239.95;1.05,305.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-41.2143,241"/>
+        <dia:point val="-46,241"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="43"/>
+        <dia:real val="47"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="64"/>
@@ -258,16 +258,16 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O4">
       <dia:attribute name="obj_pos">
-        <dia:point val="-39.2143,250.083"/>
+        <dia:point val="-44.1187,253.937"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.2643,250.033;-26.3443,253.133"/>
+        <dia:rectangle val="-44.1687,253.887;-30.8637,256.987"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-39.2143,250.083"/>
+        <dia:point val="-44.1187,253.937"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -1177,7 +1177,7 @@
         <dia:point val="3.78571,241"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.73571,239.95;46.8357,305.05"/>
+        <dia:rectangle val="3.73571,239.95;46.05,305.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1186,7 +1186,7 @@
         <dia:point val="3.78571,241"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="43"/>
+        <dia:real val="42.214289999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="64"/>
@@ -1213,16 +1213,16 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O8">
       <dia:attribute name="obj_pos">
-        <dia:point val="6.26157,250.146"/>
+        <dia:point val="6,254"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="6.21157,250.096;19.1316,253.196"/>
+        <dia:rectangle val="5.95,253.95;19.255,257.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="6.26157,250.146"/>
+        <dia:point val="6,254"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -1324,13 +1324,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O9">
       <dia:attribute name="obj_pos">
-        <dia:point val="26.1187,250.146"/>
+        <dia:point val="24,254"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="26.0687,250.096;41.2187,253.196"/>
+        <dia:rectangle val="23.95,253.95;39.1,257.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="26.1187,250.146"/>
+        <dia:point val="24,254"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.050000000000001"/>
@@ -1435,13 +1435,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O10">
       <dia:attribute name="obj_pos">
-        <dia:point val="-39.2143,256.083"/>
+        <dia:point val="-43.7857,259"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.2643,256.033;-25.9093,259.133"/>
+        <dia:rectangle val="-43.8357,258.95;-30.4807,262.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-39.2143,256.083"/>
+        <dia:point val="-43.7857,259"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.254999999999999"/>
@@ -1546,16 +1546,16 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O11">
       <dia:attribute name="obj_pos">
-        <dia:point val="-39.2143,262.083"/>
+        <dia:point val="-43.7857,264"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.2643,262.033;-26.3443,265.133"/>
+        <dia:rectangle val="-43.8357,263.95;-30.5307,267.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-39.2143,262.083"/>
+        <dia:point val="-43.7857,264"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -1657,13 +1657,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O12">
       <dia:attribute name="obj_pos">
-        <dia:point val="-39.2143,268.083"/>
+        <dia:point val="-43.7857,269"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.2643,268.033;-25.2443,271.133"/>
+        <dia:rectangle val="-43.8357,268.95;-29.8157,272.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-39.2143,268.083"/>
+        <dia:point val="-43.7857,269"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.919999999999998"/>
@@ -1768,16 +1768,16 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="-17.8813,262.146"/>
+        <dia:point val="-20,264"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.9313,262.096;-5.0113,265.196"/>
+        <dia:rectangle val="-20.05,263.95;-6.745,267.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-17.8813,262.146"/>
+        <dia:point val="-20,264"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -1879,13 +1879,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O14">
       <dia:attribute name="obj_pos">
-        <dia:point val="-17.8813,250.146"/>
+        <dia:point val="-20,254"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.9313,250.096;-2.7813,253.196"/>
+        <dia:rectangle val="-20.05,253.95;-4.9,257.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-17.8813,250.146"/>
+        <dia:point val="-20,254"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.050000000000001"/>
@@ -1990,16 +1990,16 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O15">
       <dia:attribute name="obj_pos">
-        <dia:point val="6.11871,256.146"/>
+        <dia:point val="6,259"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="6.06871,256.096;18.9887,259.196"/>
+        <dia:rectangle val="5.95,258.95;19.255,262.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="6.11871,256.146"/>
+        <dia:point val="6,259"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -2140,16 +2140,16 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O17">
       <dia:attribute name="obj_pos">
-        <dia:point val="51.1187,250.146"/>
+        <dia:point val="51,254"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.0687,250.096;63.9887,253.196"/>
+        <dia:rectangle val="50.95,253.95;64.255,257.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="51.1187,250.146"/>
+        <dia:point val="51,254"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -2251,13 +2251,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O18">
       <dia:attribute name="obj_pos">
-        <dia:point val="71.7857,250"/>
+        <dia:point val="72,254"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="71.7357,249.95;86.8857,253.05"/>
+        <dia:rectangle val="71.95,253.95;87.1,257.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="71.7857,250"/>
+        <dia:point val="72,254"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.050000000000001"/>
@@ -2362,16 +2362,16 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O19">
       <dia:attribute name="obj_pos">
-        <dia:point val="50.7857,256"/>
+        <dia:point val="51,259"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.7357,255.95;63.6557,259.05"/>
+        <dia:rectangle val="50.95,258.95;64.255,262.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="50.7857,256"/>
+        <dia:point val="51,259"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -2473,13 +2473,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O20">
       <dia:attribute name="obj_pos">
-        <dia:point val="71.7857,256"/>
+        <dia:point val="72,259"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="71.7357,255.95;87.1607,259.05"/>
+        <dia:rectangle val="71.95,258.95;87.375,262.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="71.7857,256"/>
+        <dia:point val="72,259"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.324999999999999"/>
@@ -2584,16 +2584,16 @@
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O21">
       <dia:attribute name="obj_pos">
-        <dia:point val="188.786,241"/>
+        <dia:point val="192,241"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="188.736,239.95;233.836,305.05"/>
+        <dia:rectangle val="191.95,239.95;237.05,305.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="188.786,241"/>
+        <dia:point val="192,241"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="45"/>
@@ -2623,16 +2623,16 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O22">
       <dia:attribute name="obj_pos">
-        <dia:point val="190.786,250"/>
+        <dia:point val="194,254"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="190.736,249.95;203.656,253.05"/>
+        <dia:rectangle val="193.95,253.95;207.255,257.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="190.786,250"/>
+        <dia:point val="194,254"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -2734,13 +2734,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O23">
       <dia:attribute name="obj_pos">
-        <dia:point val="211.786,250"/>
+        <dia:point val="214,254"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="211.736,249.95;226.886,253.05"/>
+        <dia:rectangle val="213.95,253.95;229.1,257.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="211.786,250"/>
+        <dia:point val="214,254"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.050000000000001"/>
@@ -2848,13 +2848,13 @@
         <dia:point val="30.7857,223"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="30.7357,222.95;42.8332,226.05"/>
+        <dia:rectangle val="30.7357,222.95;43.2707,226.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="30.7857,223"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.997499999999999"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -2958,19 +2958,19 @@
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O25">
       <dia:attribute name="obj_pos">
-        <dia:point val="142.786,241"/>
+        <dia:point val="143,241"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="142.736,239.95;185.836,305.05"/>
+        <dia:rectangle val="142.95,239.95;189.264,305.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="142.786,241"/>
+        <dia:point val="143,241"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="43"/>
+        <dia:real val="46.213999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="64"/>
@@ -2997,16 +2997,16 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O26">
       <dia:attribute name="obj_pos">
-        <dia:point val="144.786,250"/>
+        <dia:point val="146.214,254"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="144.736,249.95;157.656,253.05"/>
+        <dia:rectangle val="146.164,253.95;159.469,257.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="144.786,250"/>
+        <dia:point val="146.214,254"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -3108,13 +3108,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O27">
       <dia:attribute name="obj_pos">
-        <dia:point val="167.786,250"/>
+        <dia:point val="169.214,254"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="167.736,249.95;182.886,253.05"/>
+        <dia:rectangle val="169.164,253.95;184.314,257.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="167.786,250"/>
+        <dia:point val="169.214,254"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.050000000000001"/>
@@ -3219,16 +3219,16 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O28">
       <dia:attribute name="obj_pos">
-        <dia:point val="144.786,256"/>
+        <dia:point val="146.214,259"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="144.736,255.95;157.656,259.05"/>
+        <dia:rectangle val="146.164,258.95;159.469,262.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="144.786,256"/>
+        <dia:point val="146.214,259"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -3330,13 +3330,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O29">
       <dia:attribute name="obj_pos">
-        <dia:point val="167.786,256"/>
+        <dia:point val="169.214,259"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="167.736,255.95;183.161,259.05"/>
+        <dia:rectangle val="169.164,258.95;184.589,262.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="167.786,256"/>
+        <dia:point val="169.214,259"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.324999999999999"/>
@@ -3480,16 +3480,16 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O31">
       <dia:attribute name="obj_pos">
-        <dia:point val="97.7857,250"/>
+        <dia:point val="97.9997,254"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="97.7357,249.95;110.656,253.05"/>
+        <dia:rectangle val="97.9497,253.95;111.255,257.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="97.7857,250"/>
+        <dia:point val="97.9997,254"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -3591,13 +3591,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O32">
       <dia:attribute name="obj_pos">
-        <dia:point val="117.786,256"/>
+        <dia:point val="118,259"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="117.736,255.95;132.784,259.05"/>
+        <dia:rectangle val="117.95,258.95;132.998,262.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="117.786,256"/>
+        <dia:point val="118,259"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.9475"/>
@@ -3982,16 +3982,16 @@ grammar of the C++ technical space.
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O36">
       <dia:attribute name="obj_pos">
-        <dia:point val="-39.2143,243"/>
+        <dia:point val="-44,243"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.2643,242.95;-23.6343,247.15"/>
+        <dia:rectangle val="-44.05,242.95;-28.42,247.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-39.2143,243"/>
+        <dia:point val="-44,243"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.530000000000001"/>
@@ -4023,7 +4023,7 @@ C++ technical space.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-38.8643,244.245"/>
+            <dia:point val="-43.65,244.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -4092,16 +4092,16 @@ C++ technical space.
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O38">
       <dia:attribute name="obj_pos">
-        <dia:point val="144.786,243"/>
+        <dia:point val="146,243"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="144.736,242.95;160.366,247.15"/>
+        <dia:rectangle val="145.95,242.95;161.58,247.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="144.786,243"/>
+        <dia:point val="146,243"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.530000000000001"/>
@@ -4133,7 +4133,7 @@ of the C++ technical space.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="145.136,244.245"/>
+            <dia:point val="146.35,244.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -4257,16 +4257,16 @@ C++ technical space.
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O41">
       <dia:attribute name="obj_pos">
-        <dia:point val="190.786,243"/>
+        <dia:point val="194,243"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="190.736,242.95;206.366,247.15"/>
+        <dia:rectangle val="193.95,242.95;209.58,247.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="190.786,243"/>
+        <dia:point val="194,243"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.530000000000001"/>
@@ -4298,7 +4298,7 @@ facet of the C++ technical space.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="191.136,244.245"/>
+            <dia:point val="194.35,244.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -4312,16 +4312,16 @@ facet of the C++ technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O42">
       <dia:attribute name="obj_pos">
-        <dia:point val="-9,243"/>
+        <dia:point val="-20,249"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-9.05,242.95;-0.365,246.05"/>
+        <dia:rectangle val="-20.05,248.95;-7.515,252.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-9,243"/>
+        <dia:point val="-20,249"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4423,16 +4423,16 @@ facet of the C++ technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O43">
       <dia:attribute name="obj_pos">
-        <dia:point val="35,243"/>
+        <dia:point val="24,248"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="34.95,242.95;43.635,246.05"/>
+        <dia:rectangle val="23.95,247.95;36.485,251.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="35,243"/>
+        <dia:point val="24,248"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4534,16 +4534,16 @@ facet of the C++ technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O44">
       <dia:attribute name="obj_pos">
-        <dia:point val="175,243"/>
+        <dia:point val="164.214,249"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="174.95,242.95;183.635,246.05"/>
+        <dia:rectangle val="164.164,248.95;176.699,252.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="175,243"/>
+        <dia:point val="164.214,249"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4645,16 +4645,16 @@ facet of the C++ technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O45">
       <dia:attribute name="obj_pos">
-        <dia:point val="130,243"/>
+        <dia:point val="118,249"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="129.95,242.95;138.635,246.05"/>
+        <dia:rectangle val="117.95,248.95;130.485,252.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="130,243"/>
+        <dia:point val="118,249"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4756,16 +4756,16 @@ facet of the C++ technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O46">
       <dia:attribute name="obj_pos">
-        <dia:point val="83,243"/>
+        <dia:point val="72,249"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="82.95,242.95;91.635,246.05"/>
+        <dia:rectangle val="71.95,248.95;84.485,252.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="83,243"/>
+        <dia:point val="72,249"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4867,16 +4867,16 @@ facet of the C++ technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O47">
       <dia:attribute name="obj_pos">
-        <dia:point val="222,243"/>
+        <dia:point val="213,249"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="221.95,242.95;230.635,246.05"/>
+        <dia:rectangle val="212.95,248.95;225.485,252.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="222,243"/>
+        <dia:point val="213,249"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5467,13 +5467,13 @@ facet of the C++ technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O51">
       <dia:attribute name="obj_pos">
-        <dia:point val="-22,190"/>
+        <dia:point val="-27,190"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-22.05,189.95;-13.925,193.05"/>
+        <dia:rectangle val="-27.05,189.95;-18.925,193.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-22,190"/>
+        <dia:point val="-27,190"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.0250000000000004"/>
@@ -6086,16 +6086,16 @@ for a given C++ entity.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O56">
       <dia:attribute name="obj_pos">
-        <dia:point val="-33,190"/>
+        <dia:point val="-44,196"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-33.05,189.95;-24.365,193.05"/>
+        <dia:rectangle val="-44.05,195.95;-31.515,199.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-33,190"/>
+        <dia:point val="-44,196"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -6271,13 +6271,13 @@ for a given C++ entity.#</dia:string>
         <dia:point val="27.083,159.167"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="27.033,159.117;35.718,162.217"/>
+        <dia:rectangle val="27.033,159.117;39.568,162.217"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="27.083,159.167"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -6751,7 +6751,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="145.358,180.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="145.288,180.43;150.704,184.358"/>
+        <dia:rectangle val="145.289,180.43;150.704,184.358"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6830,8 +6830,8 @@ registry of all available formatters.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="166.086,184"/>
         <dia:point val="166.086,178.917"/>
-        <dia:point val="176.693,178.917"/>
-        <dia:point val="176.693,184"/>
+        <dia:point val="176.694,178.917"/>
+        <dia:point val="176.694,184"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7155,16 +7155,16 @@ registry of all available formatters.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O69">
       <dia:attribute name="obj_pos">
-        <dia:point val="-11,190"/>
+        <dia:point val="-27,196"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-11.05,189.95;-1.595,193.05"/>
+        <dia:rectangle val="-27.05,195.95;-14.515,199.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-11,190"/>
+        <dia:point val="-27,196"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.3550000000000004"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -7269,13 +7269,13 @@ registry of all available formatters.#</dia:string>
         <dia:point val="13.083,159.167"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.033,159.117;21.718,162.817"/>
+        <dia:rectangle val="13.033,159.117;25.568,162.817"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="13.083,159.167"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -7494,16 +7494,16 @@ main, or from another initialiser.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O73">
       <dia:attribute name="obj_pos">
-        <dia:point val="-21,243"/>
+        <dia:point val="-20,244"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-21.05,242.95;-12.365,246.65"/>
+        <dia:rectangle val="-20.05,243.95;-7.515,247.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-21,243"/>
+        <dia:point val="-20,244"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -7639,13 +7639,13 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="-44,190"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,189.95;-35.365,193.65"/>
+        <dia:rectangle val="-44.05,189.95;-31.515,193.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-44,190"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -7781,13 +7781,13 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="117.786,243.146"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="117.736,243.096;126.421,246.796"/>
+        <dia:rectangle val="117.736,243.096;130.271,246.796"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="117.786,243.146"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -7923,13 +7923,13 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="72,243"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="71.95,242.95;80.635,246.65"/>
+        <dia:rectangle val="71.95,242.95;84.485,246.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="72,243"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -8062,16 +8062,16 @@ main, or from another initialiser.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O77">
       <dia:attribute name="obj_pos">
-        <dia:point val="210,243"/>
+        <dia:point val="213.214,243"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="209.95,242.95;218.635,246.65"/>
+        <dia:rectangle val="213.164,242.95;225.699,246.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="210,243"/>
+        <dia:point val="213.214,243"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -8856,13 +8856,13 @@ main, or from another initialiser.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O79">
       <dia:attribute name="obj_pos">
-        <dia:point val="-17.8813,256.146"/>
+        <dia:point val="-20,259"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.9313,256.096;-3.0313,259.196"/>
+        <dia:rectangle val="-20.05,258.95;-5.15,262.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-17.8813,256.146"/>
+        <dia:point val="-20,259"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.800000000000001"/>
@@ -8967,13 +8967,13 @@ main, or from another initialiser.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O80">
       <dia:attribute name="obj_pos">
-        <dia:point val="190.786,262"/>
+        <dia:point val="194,264"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="190.736,261.95;205.636,265.05"/>
+        <dia:rectangle val="193.95,263.95;208.85,267.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="190.786,262"/>
+        <dia:point val="194,264"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.800000000000001"/>
@@ -9642,13 +9642,13 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="24,243"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.95,242.95;32.635,246.65"/>
+        <dia:rectangle val="23.95,242.95;36.485,246.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="24,243"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -10241,16 +10241,16 @@ main, or from another initialiser.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O87">
       <dia:attribute name="obj_pos">
-        <dia:point val="163,243"/>
+        <dia:point val="164.214,243"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="162.95,242.95;171.635,246.65"/>
+        <dia:rectangle val="164.164,242.95;176.699,246.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="163,243"/>
+        <dia:point val="164.214,243"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -10983,16 +10983,16 @@ main, or from another initialiser.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O89">
       <dia:attribute name="obj_pos">
-        <dia:point val="190.786,256"/>
+        <dia:point val="194,259"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="190.736,255.95;203.656,259.05"/>
+        <dia:rectangle val="193.95,258.95;207.255,262.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="190.786,256"/>
+        <dia:point val="194,259"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -11094,13 +11094,13 @@ main, or from another initialiser.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O90">
       <dia:attribute name="obj_pos">
-        <dia:point val="211.786,256"/>
+        <dia:point val="214,259"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="211.736,255.95;228.619,259.05"/>
+        <dia:rectangle val="213.95,258.95;230.833,262.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="211.786,256"/>
+        <dia:point val="214,259"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.782499999999999"/>
@@ -11205,16 +11205,16 @@ main, or from another initialiser.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O91">
       <dia:attribute name="obj_pos">
-        <dia:point val="211.786,262"/>
+        <dia:point val="214,264"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="211.736,261.95;224.656,265.05"/>
+        <dia:rectangle val="213.95,263.95;227.255,267.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="211.786,262"/>
+        <dia:point val="214,264"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -11316,16 +11316,16 @@ main, or from another initialiser.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O92">
       <dia:attribute name="obj_pos">
-        <dia:point val="97.7857,256"/>
+        <dia:point val="98,259"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="97.7357,255.95;110.656,259.05"/>
+        <dia:rectangle val="97.95,258.95;111.255,262.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="97.7857,256"/>
+        <dia:point val="98,259"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -13813,13 +13813,13 @@ an enumeration, false otherwise.#</dia:string>
         <dia:point val="305.833,60.0833"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="305.783,60.0333;314.468,63.7333"/>
+        <dia:rectangle val="305.783,60.0333;318.318,63.7333"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="305.833,60.0833"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -15282,17 +15282,17 @@ an enumeration, false otherwise.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="279.164,60.0331"/>
+        <dia:point val="280.905,60.0331"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="278.414,49.8333;286.088,60.8331"/>
+        <dia:rectangle val="280.088,49.8333;286.088,60.8499"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="279.164,60.0331"/>
-        <dia:point val="279.164,56"/>
+        <dia:point val="280.905,60.0331"/>
+        <dia:point val="280.527,56"/>
         <dia:point val="285.888,56"/>
         <dia:point val="285.888,49.8833"/>
       </dia:attribute>
@@ -15802,16 +15802,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O123">
       <dia:attribute name="obj_pos">
-        <dia:point val="-17.8813,268.146"/>
+        <dia:point val="-20,269"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.9313,268.096;-5.0113,271.196"/>
+        <dia:rectangle val="-20.05,268.95;-6.745,272.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-17.8813,268.146"/>
+        <dia:point val="-20,269"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -15913,16 +15913,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O124">
       <dia:attribute name="obj_pos">
-        <dia:point val="26.9044,256.289"/>
+        <dia:point val="24,259"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="26.8544,256.239;39.7744,259.339"/>
+        <dia:rectangle val="23.95,258.95;37.255,262.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="26.9044,256.289"/>
+        <dia:point val="24,259"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -16024,16 +16024,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O125">
       <dia:attribute name="obj_pos">
-        <dia:point val="144.786,262"/>
+        <dia:point val="146.214,264"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="144.736,261.95;157.656,265.05"/>
+        <dia:rectangle val="146.164,263.95;159.469,267.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="144.786,262"/>
+        <dia:point val="146.214,264"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -16135,16 +16135,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O126">
       <dia:attribute name="obj_pos">
-        <dia:point val="50.7857,262"/>
+        <dia:point val="51,264"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.7357,261.95;63.6557,265.05"/>
+        <dia:rectangle val="50.95,263.95;64.255,267.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="50.7857,262"/>
+        <dia:point val="51,264"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -16246,16 +16246,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O127">
       <dia:attribute name="obj_pos">
-        <dia:point val="117.786,250"/>
+        <dia:point val="118,254"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="117.736,249.95;130.656,253.05"/>
+        <dia:rectangle val="117.95,253.95;131.255,257.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="117.786,250"/>
+        <dia:point val="118,254"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -16357,16 +16357,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O128">
       <dia:attribute name="obj_pos">
-        <dia:point val="190.786,268"/>
+        <dia:point val="194,269"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="190.736,267.95;203.656,271.05"/>
+        <dia:rectangle val="193.95,268.95;207.255,272.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="190.786,268"/>
+        <dia:point val="194,269"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -21680,16 +21680,16 @@ and element.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="190.406,88.5784"/>
+        <dia:point val="190.406,88.5785"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="189.656,87.8284;210.878,99.3834"/>
+        <dia:rectangle val="189.656,87.8285;210.878,99.3834"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="190.406,88.5784"/>
+        <dia:point val="190.406,88.5785"/>
         <dia:point val="190.406,99.3334"/>
         <dia:point val="210.678,99.3334"/>
         <dia:point val="210.678,88.6"/>
@@ -23511,16 +23511,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O188">
       <dia:attribute name="obj_pos">
-        <dia:point val="-39.2143,299"/>
+        <dia:point val="-44,299"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.2643,298.95;-27.1143,302.05"/>
+        <dia:rectangle val="-44.05,298.95;-31.515,302.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-39.2143,299"/>
+        <dia:point val="-44,299"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -23625,13 +23625,13 @@ and element.#</dia:string>
         <dia:point val="6,298"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="5.95,297.95;18.1,301.05"/>
+        <dia:rectangle val="5.95,297.95;18.485,301.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="6,298"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -23736,13 +23736,13 @@ and element.#</dia:string>
         <dia:point val="21,293"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="20.95,292.95;33.1,296.05"/>
+        <dia:rectangle val="20.95,292.95;33.485,296.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="21,293"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -23847,13 +23847,13 @@ and element.#</dia:string>
         <dia:point val="21,283"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="20.95,282.95;33.1,286.05"/>
+        <dia:rectangle val="20.95,282.95;33.485,286.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="21,283"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -24069,13 +24069,13 @@ and element.#</dia:string>
         <dia:point val="6,273"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="5.95,272.95;18.1,276.05"/>
+        <dia:rectangle val="5.95,272.95;18.485,276.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="6,273"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -24180,13 +24180,13 @@ and element.#</dia:string>
         <dia:point val="21,273"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="20.95,272.95;33.1,276.05"/>
+        <dia:rectangle val="20.95,272.95;33.485,276.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="21,273"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -24291,13 +24291,13 @@ and element.#</dia:string>
         <dia:point val="6,278"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="5.95,277.95;18.1,281.05"/>
+        <dia:rectangle val="5.95,277.95;18.485,281.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="6,278"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -24402,13 +24402,13 @@ and element.#</dia:string>
         <dia:point val="21,288"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="20.95,287.95;33.1,291.05"/>
+        <dia:rectangle val="20.95,287.95;33.485,291.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="21,288"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -24624,13 +24624,13 @@ and element.#</dia:string>
         <dia:point val="6,283"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="5.95,282.95;18.1,286.05"/>
+        <dia:rectangle val="5.95,282.95;18.485,286.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="6,283"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -24735,13 +24735,13 @@ and element.#</dia:string>
         <dia:point val="6,293"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="5.95,292.95;18.1,296.05"/>
+        <dia:rectangle val="5.95,292.95;18.485,296.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="6,293"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -24957,13 +24957,13 @@ and element.#</dia:string>
         <dia:point val="50,299"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,298.95;62.1,302.05"/>
+        <dia:rectangle val="49.95,298.95;62.485,302.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="50,299"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -25068,13 +25068,13 @@ and element.#</dia:string>
         <dia:point val="50,293"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,292.95;62.1,296.05"/>
+        <dia:rectangle val="49.95,292.95;62.485,296.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="50,293"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -25179,13 +25179,13 @@ and element.#</dia:string>
         <dia:point val="50,287"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,286.95;62.1,290.05"/>
+        <dia:rectangle val="49.95,286.95;62.485,290.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="50,287"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -25290,13 +25290,13 @@ and element.#</dia:string>
         <dia:point val="79,293"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="78.95,292.95;91.1,296.05"/>
+        <dia:rectangle val="78.95,292.95;91.485,296.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="79,293"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -25512,13 +25512,13 @@ and element.#</dia:string>
         <dia:point val="79,299"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="78.95,298.95;91.1,302.05"/>
+        <dia:rectangle val="78.95,298.95;91.485,302.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="79,299"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -25623,13 +25623,13 @@ and element.#</dia:string>
         <dia:point val="64,287"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="63.95,286.95;76.1,290.05"/>
+        <dia:rectangle val="63.95,286.95;76.485,290.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="64,287"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -25731,16 +25731,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O208">
       <dia:attribute name="obj_pos">
-        <dia:point val="190.786,299"/>
+        <dia:point val="194,299"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="190.736,298.95;202.886,302.05"/>
+        <dia:rectangle val="193.95,298.95;206.485,302.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="190.786,299"/>
+        <dia:point val="194,299"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -25842,13 +25842,13 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O209">
       <dia:attribute name="obj_pos">
-        <dia:point val="144,284"/>
+        <dia:point val="145.214,284"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="143.95,283.95;157.6,287.05"/>
+        <dia:rectangle val="145.164,283.95;158.814,287.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="144,284"/>
+        <dia:point val="145.214,284"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.550000000000001"/>
@@ -25953,16 +25953,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O210">
       <dia:attribute name="obj_pos">
-        <dia:point val="173,279"/>
+        <dia:point val="174.214,279"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="172.95,278.95;185.1,282.05"/>
+        <dia:rectangle val="174.164,278.95;186.699,282.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="173,279"/>
+        <dia:point val="174.214,279"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -26064,16 +26064,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O211">
       <dia:attribute name="obj_pos">
-        <dia:point val="159,279"/>
+        <dia:point val="160.214,279"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="158.95,278.95;171.1,282.05"/>
+        <dia:rectangle val="160.164,278.95;172.699,282.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="159,279"/>
+        <dia:point val="160.214,279"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -26175,16 +26175,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O212">
       <dia:attribute name="obj_pos">
-        <dia:point val="144,279"/>
+        <dia:point val="145.214,279"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="143.95,278.95;156.1,282.05"/>
+        <dia:rectangle val="145.164,278.95;157.699,282.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="144,279"/>
+        <dia:point val="145.214,279"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -26286,16 +26286,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O213">
       <dia:attribute name="obj_pos">
-        <dia:point val="173,294"/>
+        <dia:point val="174.214,294"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="172.95,293.95;185.1,297.05"/>
+        <dia:rectangle val="174.164,293.95;186.699,297.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="173,294"/>
+        <dia:point val="174.214,294"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -26397,16 +26397,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O214">
       <dia:attribute name="obj_pos">
-        <dia:point val="173,284"/>
+        <dia:point val="174.214,284"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="172.95,283.95;185.1,287.05"/>
+        <dia:rectangle val="174.164,283.95;186.699,287.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="173,284"/>
+        <dia:point val="174.214,284"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -26508,16 +26508,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O215">
       <dia:attribute name="obj_pos">
-        <dia:point val="173,289"/>
+        <dia:point val="174.214,289"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="172.95,288.95;185.1,292.05"/>
+        <dia:rectangle val="174.164,288.95;186.699,292.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="173,289"/>
+        <dia:point val="174.214,289"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -26619,16 +26619,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O216">
       <dia:attribute name="obj_pos">
-        <dia:point val="159,284"/>
+        <dia:point val="160.214,284"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="158.95,283.95;171.1,287.05"/>
+        <dia:rectangle val="160.164,283.95;172.699,287.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="159,284"/>
+        <dia:point val="160.214,284"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -26730,16 +26730,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O217">
       <dia:attribute name="obj_pos">
-        <dia:point val="144,289"/>
+        <dia:point val="145.214,289"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="143.95,288.95;156.1,292.05"/>
+        <dia:rectangle val="145.164,288.95;157.699,292.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="144,289"/>
+        <dia:point val="145.214,289"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -26841,16 +26841,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O218">
       <dia:attribute name="obj_pos">
-        <dia:point val="159,289"/>
+        <dia:point val="160.214,289"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="158.95,288.95;171.1,292.05"/>
+        <dia:rectangle val="160.164,288.95;172.699,292.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="159,289"/>
+        <dia:point val="160.214,289"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -26952,16 +26952,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O219">
       <dia:attribute name="obj_pos">
-        <dia:point val="173,274"/>
+        <dia:point val="174.214,274"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="172.95,273.95;185.1,277.05"/>
+        <dia:rectangle val="174.164,273.95;186.699,277.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="173,274"/>
+        <dia:point val="174.214,274"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -27063,13 +27063,13 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O220">
       <dia:attribute name="obj_pos">
-        <dia:point val="144,294"/>
+        <dia:point val="145.214,294"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="143.95,293.95;156.838,297.05"/>
+        <dia:rectangle val="145.164,293.95;158.052,297.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="144,294"/>
+        <dia:point val="145.214,294"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.7875"/>
@@ -27174,16 +27174,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O221">
       <dia:attribute name="obj_pos">
-        <dia:point val="159,299"/>
+        <dia:point val="160.214,299"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="158.95,298.95;171.1,302.05"/>
+        <dia:rectangle val="160.164,298.95;172.699,302.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="159,299"/>
+        <dia:point val="160.214,299"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -27285,16 +27285,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O222">
       <dia:attribute name="obj_pos">
-        <dia:point val="159,294"/>
+        <dia:point val="160.214,294"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="158.95,293.95;171.1,297.05"/>
+        <dia:rectangle val="160.164,293.95;172.699,297.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="159,294"/>
+        <dia:point val="160.214,294"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -27396,16 +27396,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O223">
       <dia:attribute name="obj_pos">
-        <dia:point val="144,299"/>
+        <dia:point val="145.214,299"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="143.95,298.95;156.1,302.05"/>
+        <dia:rectangle val="145.164,298.95;157.699,302.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="144,299"/>
+        <dia:point val="145.214,299"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -27507,16 +27507,16 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O224">
       <dia:attribute name="obj_pos">
-        <dia:point val="173,299"/>
+        <dia:point val="174.214,299"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="172.95,298.95;185.1,302.05"/>
+        <dia:rectangle val="174.164,298.95;186.699,302.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="173,299"/>
+        <dia:point val="174.214,299"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -27731,19 +27731,19 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O226">
       <dia:attribute name="obj_pos">
-        <dia:point val="72.7857,281"/>
+        <dia:point val="66,280"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.7357,280.95;90.6757,283.55"/>
+        <dia:rectangle val="65.95,279.95;87.74,282.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="72.7857,281"/>
+        <dia:point val="66,280"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.840000000000003"/>
+        <dia:real val="21.690000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -27770,7 +27770,7 @@ not a regular" helper.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="73.1357,282.245"/>
+            <dia:point val="66.35,281.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -27784,16 +27784,16 @@ not a regular" helper.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O227">
       <dia:attribute name="obj_pos">
-        <dia:point val="80.5507,283.5"/>
+        <dia:point val="76.845,282.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="80.481,283.43;85.7317,287.355"/>
+        <dia:rectangle val="76.7775,282.433;85.6883,287.378"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="80.5507,283.5"/>
+        <dia:point val="76.845,282.5"/>
         <dia:point val="85.4587,287"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
@@ -27809,7 +27809,7 @@ not a regular" helper.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="83.0047,285.75"/>
+        <dia:point val="81.1519,285.25"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O226" connection="6"/>
@@ -27875,14 +27875,14 @@ an "odd" formatter.#</dia:string>
         <dia:point val="41.5725,219.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="36.5081,219.43;41.6424,223.352"/>
+        <dia:rectangle val="36.7203,219.43;41.6426,223.348"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="41.5725,219.5"/>
-        <dia:point val="36.7845,223"/>
+        <dia:point val="37.0032,223"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -27897,7 +27897,7 @@ an "odd" formatter.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="39.1785,221.75"/>
+        <dia:point val="39.2878,221.75"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O228" connection="6"/>
@@ -28392,16 +28392,16 @@ an "odd" formatter.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O235">
       <dia:attribute name="obj_pos">
-        <dia:point val="-39.2143,274"/>
+        <dia:point val="-44,274"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.2643,273.95;-26.2618,277.05"/>
+        <dia:rectangle val="-44.05,273.95;-30.745,277.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-39.2143,274"/>
+        <dia:point val="-44,274"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.9025"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -28503,16 +28503,16 @@ an "odd" formatter.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O236">
       <dia:attribute name="obj_pos">
-        <dia:point val="5.78571,262"/>
+        <dia:point val="6,264"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="5.73571,261.95;18.7382,265.05"/>
+        <dia:rectangle val="5.95,263.95;19.255,267.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="5.78571,262"/>
+        <dia:point val="6,264"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.9025"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -28614,16 +28614,16 @@ an "odd" formatter.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O237">
       <dia:attribute name="obj_pos">
-        <dia:point val="71.7857,262"/>
+        <dia:point val="72,264"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="71.7357,261.95;84.7382,265.05"/>
+        <dia:rectangle val="71.95,263.95;85.255,267.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="71.7857,262"/>
+        <dia:point val="72,264"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.9025"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -28725,16 +28725,16 @@ an "odd" formatter.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O238">
       <dia:attribute name="obj_pos">
-        <dia:point val="97.7857,262"/>
+        <dia:point val="98,264"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="97.7357,261.95;110.738,265.05"/>
+        <dia:rectangle val="97.95,263.95;111.255,267.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="97.7857,262"/>
+        <dia:point val="98,264"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.9025"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -28836,16 +28836,16 @@ an "odd" formatter.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O239">
       <dia:attribute name="obj_pos">
-        <dia:point val="167.786,262"/>
+        <dia:point val="169.214,264"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="167.736,261.95;180.739,265.05"/>
+        <dia:rectangle val="169.164,263.95;182.469,267.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="167.786,262"/>
+        <dia:point val="169.214,264"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.9025"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -28947,16 +28947,16 @@ an "odd" formatter.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O240">
       <dia:attribute name="obj_pos">
-        <dia:point val="211.786,268"/>
+        <dia:point val="214,269"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="211.736,267.95;224.739,271.05"/>
+        <dia:rectangle val="213.95,268.95;227.255,272.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="211.786,268"/>
+        <dia:point val="214,269"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.9025"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -29058,13 +29058,13 @@ an "odd" formatter.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O241">
       <dia:attribute name="obj_pos">
-        <dia:point val="-18.2143,274"/>
+        <dia:point val="-20,274"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.2643,273.95;-1.2818,277.05"/>
+        <dia:rectangle val="-20.05,273.95;-3.0675,277.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-18.2143,274"/>
+        <dia:point val="-20,274"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.8825"/>
@@ -29169,13 +29169,13 @@ an "odd" formatter.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O242">
       <dia:attribute name="obj_pos">
-        <dia:point val="25.7857,262"/>
+        <dia:point val="24,264"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="25.7357,261.95;42.7182,265.05"/>
+        <dia:rectangle val="23.95,263.95;40.9325,267.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="25.7857,262"/>
+        <dia:point val="24,264"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.8825"/>
@@ -29280,13 +29280,13 @@ an "odd" formatter.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O243">
       <dia:attribute name="obj_pos">
-        <dia:point val="50.7857,269"/>
+        <dia:point val="51,273"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.7357,268.95;67.7182,272.05"/>
+        <dia:rectangle val="50.95,272.95;67.9325,276.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="50.7857,269"/>
+        <dia:point val="51,273"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.8825"/>
@@ -29391,13 +29391,13 @@ an "odd" formatter.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O244">
       <dia:attribute name="obj_pos">
-        <dia:point val="144.786,269"/>
+        <dia:point val="146.214,269"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="144.736,268.95;161.719,272.05"/>
+        <dia:rectangle val="146.164,268.95;163.147,272.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="144.786,269"/>
+        <dia:point val="146.214,269"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.8825"/>
@@ -29502,13 +29502,13 @@ an "odd" formatter.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O245">
       <dia:attribute name="obj_pos">
-        <dia:point val="190.786,274"/>
+        <dia:point val="194,274"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="190.736,273.95;207.719,277.05"/>
+        <dia:rectangle val="193.95,273.95;210.933,277.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="190.786,274"/>
+        <dia:point val="194,274"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.8825"/>
@@ -30840,13 +30840,13 @@ an "odd" formatter.#</dia:string>
         <dia:point val="274.833,60.0833"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="274.783,60.0333;283.546,63.1333"/>
+        <dia:rectangle val="274.783,60.0333;287.318,63.1333"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="274.833,60.0833"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.6624999999999996"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -33143,13 +33143,13 @@ an "odd" formatter.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O274">
       <dia:attribute name="obj_pos">
-        <dia:point val="117.786,262"/>
+        <dia:point val="118,264"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="117.736,261.95;131.771,265.05"/>
+        <dia:rectangle val="117.95,263.95;131.985,267.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="117.786,262"/>
+        <dia:point val="118,264"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.934999999999999"/>
@@ -33924,13 +33924,13 @@ an "odd" formatter.#</dia:string>
         <dia:point val="-3.28572,229.929"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-3.33572,229.879;9.58428,232.979"/>
+        <dia:rectangle val="-3.33572,229.879;9.96928,232.979"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-3.28572,229.929"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -35316,19 +35316,19 @@ an "odd" formatter.#</dia:string>
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O293">
       <dia:attribute name="obj_pos">
-        <dia:point val="-41.2143,308"/>
+        <dia:point val="-46,308"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-41.2643,306.95;1.8357,366.05"/>
+        <dia:rectangle val="-46.05,306.95;1.05,366.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-41.2143,308"/>
+        <dia:point val="-46,308"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="43"/>
+        <dia:real val="47"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="58"/>
@@ -35355,16 +35355,16 @@ an "odd" formatter.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O294">
       <dia:attribute name="obj_pos">
-        <dia:point val="-39.2143,310"/>
+        <dia:point val="-44,310"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.2643,309.95;-20.9393,314.15"/>
+        <dia:rectangle val="-44.05,309.95;-25.725,314.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-39.2143,310"/>
+        <dia:point val="-44,310"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.225000000000001"/>
@@ -35396,7 +35396,7 @@ from JSON,using the RapidJson library.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-38.8643,311.245"/>
+            <dia:point val="-43.65,311.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -35410,16 +35410,16 @@ from JSON,using the RapidJson library.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O295">
       <dia:attribute name="obj_pos">
-        <dia:point val="-39.2143,317"/>
+        <dia:point val="-44.7857,321"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.2643,316.95;-26.3443,320.05"/>
+        <dia:rectangle val="-44.8357,320.95;-31.5307,324.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-39.2143,317"/>
+        <dia:point val="-44.7857,321"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -35521,16 +35521,16 @@ from JSON,using the RapidJson library.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O296">
       <dia:attribute name="obj_pos">
-        <dia:point val="-19,310"/>
+        <dia:point val="-23.7857,310"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-19.05,309.95;-10.365,313.65"/>
+        <dia:rectangle val="-23.8357,309.95;-11.3007,313.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-19,310"/>
+        <dia:point val="-23.7857,310"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -35663,16 +35663,16 @@ from JSON,using the RapidJson library.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O297">
       <dia:attribute name="obj_pos">
-        <dia:point val="-9,310"/>
+        <dia:point val="-23.7857,316"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-9.05,309.95;-0.365,313.05"/>
+        <dia:rectangle val="-23.8357,315.95;-11.3007,319.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-9,310"/>
+        <dia:point val="-23.7857,316"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -35774,13 +35774,13 @@ from JSON,using the RapidJson library.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O298">
       <dia:attribute name="obj_pos">
-        <dia:point val="-19.2143,317"/>
+        <dia:point val="-24.7857,321"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-19.2643,316.95;-4.1143,320.05"/>
+        <dia:rectangle val="-24.8357,320.95;-9.6857,324.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-19.2143,317"/>
+        <dia:point val="-24.7857,321"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.050000000000001"/>
@@ -36712,13 +36712,13 @@ code.
         <dia:point val="26,310"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="25.95,309.95;34.635,313.65"/>
+        <dia:rectangle val="25.95,309.95;38.485,313.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="26,310"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -36851,16 +36851,16 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O308">
       <dia:attribute name="obj_pos">
-        <dia:point val="36,310"/>
+        <dia:point val="26,316"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="35.95,309.95;44.635,313.05"/>
+        <dia:rectangle val="25.95,315.95;38.485,319.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="36,310"/>
+        <dia:point val="26,316"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -36962,13 +36962,13 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O309">
       <dia:attribute name="obj_pos">
-        <dia:point val="6,317"/>
+        <dia:point val="6,321"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="5.95,316.95;21.1,320.05"/>
+        <dia:rectangle val="5.95,320.95;21.1,324.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="6,317"/>
+        <dia:point val="6,321"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.050000000000001"/>
@@ -37630,16 +37630,16 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O316">
       <dia:attribute name="obj_pos">
-        <dia:point val="26,317"/>
+        <dia:point val="26,321"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="25.95,316.95;38.87,320.05"/>
+        <dia:rectangle val="25.95,320.95;39.255,324.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="26,317"/>
+        <dia:point val="26,321"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -37741,16 +37741,16 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O317">
       <dia:attribute name="obj_pos">
-        <dia:point val="6,323"/>
+        <dia:point val="6,326"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="5.95,322.95;18.87,326.05"/>
+        <dia:rectangle val="5.95,325.95;19.255,329.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="6,323"/>
+        <dia:point val="6,326"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -37852,13 +37852,13 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O318">
       <dia:attribute name="obj_pos">
-        <dia:point val="26,323"/>
+        <dia:point val="26,326"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="25.95,322.95;41.375,326.05"/>
+        <dia:rectangle val="25.95,325.95;41.375,329.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="26,323"/>
+        <dia:point val="26,326"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.324999999999999"/>
@@ -37960,6 +37960,450 @@ code.
       </dia:attribute>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O305"/>
+    </dia:object>
+    <dia:object type="UML - Class" version="0" id="O319">
+      <dia:attribute name="obj_pos">
+        <dia:point val="-43.7857,279"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="-43.8357,278.95;-28.5257,282.05"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="-43.7857,279"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="15.209999999999999"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="3"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>#feature_group_header_formatter#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>#masd::cpp::artefact_formatter#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="comment">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="abstract">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_attributes">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_operations">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="visible_attributes">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_comments">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_after_char">
+        <dia:int val="40"/>
+      </dia:attribute>
+      <dia:attribute name="comment_line_length">
+        <dia:int val="17"/>
+      </dia:attribute>
+      <dia:attribute name="comment_tagging">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_color">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="fill_color">
+        <dia:color val="#f5fffa"/>
+      </dia:attribute>
+      <dia:attribute name="text_color">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font">
+        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font">
+        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font">
+        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font">
+        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font">
+        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font_height">
+        <dia:real val="0.69999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="attributes"/>
+      <dia:attribute name="operations"/>
+      <dia:attribute name="template">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="templates"/>
+      <dia:childnode parent="O3"/>
+    </dia:object>
+    <dia:object type="UML - Class" version="0" id="O320">
+      <dia:attribute name="obj_pos">
+        <dia:point val="-20,279"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="-20.05,278.95;-0.76,282.05"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="-20,279"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="19.190000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="3"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>#feature_group_implementation_formatter#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>#masd::cpp::artefact_formatter#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="comment">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="abstract">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_attributes">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_operations">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="visible_attributes">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_comments">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_after_char">
+        <dia:int val="40"/>
+      </dia:attribute>
+      <dia:attribute name="comment_line_length">
+        <dia:int val="17"/>
+      </dia:attribute>
+      <dia:attribute name="comment_tagging">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_color">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="fill_color">
+        <dia:color val="#f5fffa"/>
+      </dia:attribute>
+      <dia:attribute name="text_color">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font">
+        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font">
+        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font">
+        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font">
+        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font">
+        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font_height">
+        <dia:real val="0.69999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="attributes"/>
+      <dia:attribute name="operations"/>
+      <dia:attribute name="template">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="templates"/>
+      <dia:childnode parent="O3"/>
+    </dia:object>
+    <dia:object type="UML - Class" version="0" id="O321">
+      <dia:attribute name="obj_pos">
+        <dia:point val="-43.7857,284"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="-43.8357,283.95;-24.1532,287.05"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="-43.7857,284"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="19.5825"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="3"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>#feature_group_registrar_header_formatter#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>#masd::cpp::artefact_formatter#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="comment">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="abstract">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_attributes">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_operations">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="visible_attributes">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_comments">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_after_char">
+        <dia:int val="40"/>
+      </dia:attribute>
+      <dia:attribute name="comment_line_length">
+        <dia:int val="17"/>
+      </dia:attribute>
+      <dia:attribute name="comment_tagging">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_color">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="fill_color">
+        <dia:color val="#f5fffa"/>
+      </dia:attribute>
+      <dia:attribute name="text_color">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font">
+        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font">
+        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font">
+        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font">
+        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font">
+        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font_height">
+        <dia:real val="0.69999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="attributes"/>
+      <dia:attribute name="operations"/>
+      <dia:attribute name="template">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="templates"/>
+      <dia:childnode parent="O3"/>
+    </dia:object>
+    <dia:object type="UML - Class" version="0" id="O322">
+      <dia:attribute name="obj_pos">
+        <dia:point val="-44,289"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="-44.05,288.95;-20.3875,292.05"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="-44,289"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="23.5625"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="3"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>#feature_group_registrar_implementation_formatter#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>#masd::cpp::artefact_formatter#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="comment">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="abstract">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_attributes">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_operations">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="visible_attributes">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_comments">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_after_char">
+        <dia:int val="40"/>
+      </dia:attribute>
+      <dia:attribute name="comment_line_length">
+        <dia:int val="17"/>
+      </dia:attribute>
+      <dia:attribute name="comment_tagging">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_color">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="fill_color">
+        <dia:color val="#f5fffa"/>
+      </dia:attribute>
+      <dia:attribute name="text_color">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font">
+        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font">
+        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font">
+        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font">
+        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font">
+        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font_height">
+        <dia:real val="0.69999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="attributes"/>
+      <dia:attribute name="operations"/>
+      <dia:attribute name="template">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="templates"/>
+      <dia:childnode parent="O3"/>
     </dia:object>
   </dia:layer>
 </dia:diagram>

@@ -224,6 +224,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/test_data/primitive_header_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/tests/class_implementation_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/types/class_implementation_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/types/feature_group_header_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/types/forward_declarations_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/io/primitive_implementation_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/serialization/builtin_header_formatter.hpp"
@@ -238,7 +239,10 @@
 #include "masd.dogen.generation.cpp/types/formatters/serialization/class_implementation_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/serialization/forward_declarations_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/test_data/primitive_implementation_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/types/feature_group_implementation_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/types/feature_group_registrar_header_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/serialization/primitive_implementation_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/serialization/registrar_implementation_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/types/feature_group_registrar_implementation_formatter.hpp"
 
 #endif
