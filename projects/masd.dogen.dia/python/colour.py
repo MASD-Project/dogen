@@ -52,7 +52,7 @@ for layer in dia.active_display().diagram.data.layers:
         elif "masd::handcrafted::typeable" in stereotype:
             object.properties["fill_colour"] = "#FFFACD"
         elif "masd::cpp::header_only" in stereotype:
-            object.properties["fill_colour"] = "#F5FFFA"
+            object.properties["fill_colour"] = "#FFFACD"
         elif "masd::cpp::implementation_only" in stereotype:
             object.properties["fill_colour"] = "#EEFACD"
 
