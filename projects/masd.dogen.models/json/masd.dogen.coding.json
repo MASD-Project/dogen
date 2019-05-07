@@ -64,7 +64,7 @@
         },
         {
           "name": "orm_properties",
-          "type": "boost::optional<orm_attribute_properties>"
+          "type": "boost::optional<orm::attribute_properties>"
         }
       ]
     },
@@ -132,7 +132,7 @@
         },
         {
           "name": "decoration",
-          "type": "boost::optional<masd::dogen::coding::meta_model::decoration::element_properties>",
+          "type": "boost::optional<decoration::element_properties>",
           "documentation": "If set, decoration to be added to each generated file.\n"
         }
       ]
@@ -160,7 +160,7 @@
         },
         {
           "name": "orm_properties",
-          "type": "boost::optional<orm_module_properties>"
+          "type": "boost::optional<orm::module_properties>"
         }
       ]
     },
@@ -455,7 +455,7 @@
         },
         {
           "name": "orm_properties",
-          "type": "boost::optional<orm_object_properties>"
+          "type": "boost::optional<orm::object_properties>"
         }
       ]
     },
@@ -679,7 +679,7 @@
         },
         {
           "name": "orm_properties",
-          "type": "boost::optional<orm_model_properties>"
+          "type": "boost::optional<orm::model_properties>"
         },
         {
           "name": "extraction_properties",
@@ -961,173 +961,7 @@
         },
         {
           "name": "orm_properties",
-          "type": "boost::optional<orm_primitive_properties>"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::orm_database_systems",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "tagged_values": {
-        "masd.generation.cpp.hash.enabled": "true"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "mysql",
-          "type": ""
-        },
-        {
-          "name": "postgresql",
-          "type": ""
-        },
-        {
-          "name": "oracle",
-          "type": ""
-        },
-        {
-          "name": "sql_server",
-          "type": ""
-        },
-        {
-          "name": "sqlite",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "name": "meta_model::orm_model_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "database_systems",
-          "type": "std::vector<orm_database_systems>"
-        },
-        {
-          "name": "schema_name",
-          "type": "std::string"
-        },
-        {
-          "name": "letter_case",
-          "type": "boost::optional<letter_cases>"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::letter_cases",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "upper_case",
-          "type": ""
-        },
-        {
-          "name": "lower_case",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "name": "meta_model::orm_object_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "generate_mapping",
-          "type": "bool",
-          "documentation": "If true, object-relational mapping will be generated for this element.\n"
-        },
-        {
-          "name": "schema_name",
-          "type": "std::string",
-          "documentation": "Name of the database schema in which to place this element.\n"
-        },
-        {
-          "name": "table_name",
-          "type": "std::string",
-          "documentation": "Name of the table to map this element to.\n"
-        },
-        {
-          "name": "is_value",
-          "type": "bool",
-          "documentation": "If true, treat this object as a value type (e.g. simple type) rather than as an object.\n"
-        },
-        {
-          "name": "has_primary_key",
-          "type": "bool",
-          "documentation": "True if the object has an attribute marked as a primary key, false otherwise.\n"
-        },
-        {
-          "name": "letter_case",
-          "type": "boost::optional<letter_cases>",
-          "documentation": "What case to use for the database identifiers.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::orm_attribute_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "column_name",
-          "type": "std::string",
-          "documentation": "Name of the column to use for this attribute. If populated, will override the attribute name.\n"
-        },
-        {
-          "name": "is_primary_key",
-          "type": "bool",
-          "documentation": "If true, this attribute is a primary key for the relation.\n"
-        },
-        {
-          "name": "is_nullable",
-          "type": "boost::optional<bool>",
-          "documentation": "If true, the attribute can be NULL.\n"
-        },
-        {
-          "name": "type_overrides",
-          "type": "std::unordered_map<orm_database_systems, std::string>",
-          "documentation": "Override the default type for this attribute for a given database system.\n"
-        },
-        {
-          "name": "is_composite",
-          "type": "bool",
-          "documentation": "If true, the value of this attribute is a composite value.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::orm_module_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "schema_name",
-          "type": "std::string",
-          "documentation": "Name of the database schema in which elements contained by this module will placed in.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::orm_primitive_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "generate_mapping",
-          "type": "bool",
-          "documentation": "If true, object-relational mapping will be generated for this element.\n"
-        },
-        {
-          "name": "schema_name",
-          "type": "std::string",
-          "documentation": "Name of the database schema in which to place this element.\n"
-        },
-        {
-          "name": "letter_case",
-          "type": "boost::optional<letter_cases>",
-          "documentation": "What case to use for the database identifiers.\n"
+          "type": "boost::optional<orm::primitive_properties>"
         }
       ]
     },

@@ -35,7 +35,7 @@
 #include "masd.dogen.coding/test_data/meta_model/object_template_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/technical_space_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/generation_marker_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/orm_model_properties_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/orm/model_properties_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/extraction_properties_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/variability_profile_template_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/variability_feature_template_group_td.hpp"
@@ -380,14 +380,14 @@ std::list<masd::dogen::coding::meta_model::technical_space> create_std_list_masd
     return r;
 }
 
-masd::dogen::coding::meta_model::orm_model_properties
+masd::dogen::coding::meta_model::orm::model_properties
 create_masd_dogen_coding_meta_model_orm_model_properties(const unsigned int position) {
-    return masd::dogen::coding::meta_model::orm_model_properties_generator::create(position);
+    return masd::dogen::coding::meta_model::orm::model_properties_generator::create(position);
 }
 
-boost::optional<masd::dogen::coding::meta_model::orm_model_properties>
+boost::optional<masd::dogen::coding::meta_model::orm::model_properties>
 create_boost_optional_masd_dogen_coding_meta_model_orm_model_properties(unsigned int position) {
-    boost::optional<masd::dogen::coding::meta_model::orm_model_properties> r(
+    boost::optional<masd::dogen::coding::meta_model::orm::model_properties> r(
         create_masd_dogen_coding_meta_model_orm_model_properties(position));
     return r;
 }

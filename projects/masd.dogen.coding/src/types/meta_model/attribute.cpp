@@ -58,7 +58,7 @@ attribute::attribute(
     const masd::dogen::coding::meta_model::name_tree& parsed_type,
     const bool is_immutable,
     const bool is_fluent,
-    const boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties>& orm_properties)
+    const boost::optional<masd::dogen::coding::meta_model::orm::attribute_properties>& orm_properties)
     : documentation_(documentation),
       configuration_(configuration),
       name_(name),
@@ -231,19 +231,19 @@ void attribute::is_fluent(const bool v) {
     is_fluent_ = v;
 }
 
-const boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties>& attribute::orm_properties() const {
+const boost::optional<masd::dogen::coding::meta_model::orm::attribute_properties>& attribute::orm_properties() const {
     return orm_properties_;
 }
 
-boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties>& attribute::orm_properties() {
+boost::optional<masd::dogen::coding::meta_model::orm::attribute_properties>& attribute::orm_properties() {
     return orm_properties_;
 }
 
-void attribute::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties>& v) {
+void attribute::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm::attribute_properties>& v) {
     orm_properties_ = v;
 }
 
-void attribute::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties>&& v) {
+void attribute::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm::attribute_properties>&& v) {
     orm_properties_ = std::move(v);
 }
 

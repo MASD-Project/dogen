@@ -26,7 +26,7 @@
 #include "masd.dogen.coding/io/meta_model/attribute_io.hpp"
 #include "masd.dogen.coding/io/meta_model/type_parameters_io.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
-#include "masd.dogen.coding/io/meta_model/orm_object_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/orm/object_properties_io.hpp"
 
 namespace std {
 
@@ -91,7 +91,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::co
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::orm_object_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::orm::object_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -193,7 +193,7 @@ object::object(
     const std::list<masd::dogen::coding::meta_model::name>& associative_container_keys,
     const bool provides_opaqueness,
     const bool can_be_primitive_underlier,
-    const boost::optional<masd::dogen::coding::meta_model::orm_object_properties>& orm_properties)
+    const boost::optional<masd::dogen::coding::meta_model::orm::object_properties>& orm_properties)
     : masd::dogen::coding::meta_model::element(
       name,
       documentation,
@@ -683,19 +683,19 @@ void object::can_be_primitive_underlier(const bool v) {
     can_be_primitive_underlier_ = v;
 }
 
-const boost::optional<masd::dogen::coding::meta_model::orm_object_properties>& object::orm_properties() const {
+const boost::optional<masd::dogen::coding::meta_model::orm::object_properties>& object::orm_properties() const {
     return orm_properties_;
 }
 
-boost::optional<masd::dogen::coding::meta_model::orm_object_properties>& object::orm_properties() {
+boost::optional<masd::dogen::coding::meta_model::orm::object_properties>& object::orm_properties() {
     return orm_properties_;
 }
 
-void object::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_object_properties>& v) {
+void object::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm::object_properties>& v) {
     orm_properties_ = v;
 }
 
-void object::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_object_properties>&& v) {
+void object::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm::object_properties>&& v) {
     orm_properties_ = std::move(v);
 }
 

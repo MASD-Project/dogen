@@ -21,7 +21,7 @@
 #include "masd.dogen.coding/test_data/meta_model/element_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/attribute_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/primitive_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/orm_primitive_properties_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/orm/primitive_properties_td.hpp"
 
 namespace {
 
@@ -34,14 +34,14 @@ create_masd_dogen_coding_meta_model_attribute(const unsigned int position) {
     return masd::dogen::coding::meta_model::attribute_generator::create(position);
 }
 
-masd::dogen::coding::meta_model::orm_primitive_properties
+masd::dogen::coding::meta_model::orm::primitive_properties
 create_masd_dogen_coding_meta_model_orm_primitive_properties(const unsigned int position) {
-    return masd::dogen::coding::meta_model::orm_primitive_properties_generator::create(position);
+    return masd::dogen::coding::meta_model::orm::primitive_properties_generator::create(position);
 }
 
-boost::optional<masd::dogen::coding::meta_model::orm_primitive_properties>
+boost::optional<masd::dogen::coding::meta_model::orm::primitive_properties>
 create_boost_optional_masd_dogen_coding_meta_model_orm_primitive_properties(unsigned int position) {
-    boost::optional<masd::dogen::coding::meta_model::orm_primitive_properties> r(
+    boost::optional<masd::dogen::coding::meta_model::orm::primitive_properties> r(
         create_masd_dogen_coding_meta_model_orm_primitive_properties(position));
     return r;
 }

@@ -35,7 +35,7 @@
 #include "masd.dogen.coding/hash/meta_model/name_hash.hpp"
 #include "masd.dogen.coding/types/meta_model/attribute.hpp"
 #include "masd.dogen.coding/types/meta_model/type_parameters.hpp"
-#include "masd.dogen.coding/types/meta_model/orm_object_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/orm/object_properties.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
@@ -101,7 +101,7 @@ public:
         const std::list<masd::dogen::coding::meta_model::name>& associative_container_keys,
         const bool provides_opaqueness,
         const bool can_be_primitive_underlier,
-        const boost::optional<masd::dogen::coding::meta_model::orm_object_properties>& orm_properties);
+        const boost::optional<masd::dogen::coding::meta_model::orm::object_properties>& orm_properties);
 
 public:
     using element::accept;
@@ -349,10 +349,10 @@ public:
     void can_be_primitive_underlier(const bool v);
     /**@}*/
 
-    const boost::optional<masd::dogen::coding::meta_model::orm_object_properties>& orm_properties() const;
-    boost::optional<masd::dogen::coding::meta_model::orm_object_properties>& orm_properties();
-    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_object_properties>& v);
-    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_object_properties>&& v);
+    const boost::optional<masd::dogen::coding::meta_model::orm::object_properties>& orm_properties() const;
+    boost::optional<masd::dogen::coding::meta_model::orm::object_properties>& orm_properties();
+    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm::object_properties>& v);
+    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm::object_properties>&& v);
 
 public:
     bool operator==(const object& rhs) const;
@@ -394,7 +394,7 @@ private:
     std::list<masd::dogen::coding::meta_model::name> associative_container_keys_;
     bool provides_opaqueness_;
     bool can_be_primitive_underlier_;
-    boost::optional<masd::dogen::coding::meta_model::orm_object_properties> orm_properties_;
+    boost::optional<masd::dogen::coding::meta_model::orm::object_properties> orm_properties_;
 };
 
 }

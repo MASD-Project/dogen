@@ -40,7 +40,6 @@
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/name_tree.hpp"
-#include "masd.dogen.coding/types/meta_model/letter_cases.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/context.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/helper_properties.hpp"
 

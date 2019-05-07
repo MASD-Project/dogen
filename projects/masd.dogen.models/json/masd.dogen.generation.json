@@ -86,7 +86,7 @@
         },
         {
           "name": "orm_properties",
-          "type": "boost::optional<coding::meta_model::orm_model_properties>"
+          "type": "boost::optional<coding::meta_model::orm::model_properties>"
         },
         {
           "name": "enabled_archetype_for_element",

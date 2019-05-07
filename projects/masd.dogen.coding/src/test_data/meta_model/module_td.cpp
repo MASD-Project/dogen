@@ -21,7 +21,7 @@
 #include <sstream>
 #include "masd.dogen.coding/test_data/meta_model/module_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/element_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/orm_module_properties_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/orm/module_properties_td.hpp"
 
 namespace {
 
@@ -43,14 +43,14 @@ bool create_bool(const unsigned int position) {
     return (position % 2) != 0;
 }
 
-masd::dogen::coding::meta_model::orm_module_properties
+masd::dogen::coding::meta_model::orm::module_properties
 create_masd_dogen_coding_meta_model_orm_module_properties(const unsigned int position) {
-    return masd::dogen::coding::meta_model::orm_module_properties_generator::create(position);
+    return masd::dogen::coding::meta_model::orm::module_properties_generator::create(position);
 }
 
-boost::optional<masd::dogen::coding::meta_model::orm_module_properties>
+boost::optional<masd::dogen::coding::meta_model::orm::module_properties>
 create_boost_optional_masd_dogen_coding_meta_model_orm_module_properties(unsigned int position) {
-    boost::optional<masd::dogen::coding::meta_model::orm_module_properties> r(
+    boost::optional<masd::dogen::coding::meta_model::orm::module_properties> r(
         create_masd_dogen_coding_meta_model_orm_module_properties(position));
     return r;
 }

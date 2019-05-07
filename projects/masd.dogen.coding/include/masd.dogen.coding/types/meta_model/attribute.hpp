@@ -34,7 +34,7 @@
 #include "masd.dogen.coding/types/meta_model/name_tree.hpp"
 #include "masd.dogen.coding/types/meta_model/static_stereotypes.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration_fwd.hpp"
-#include "masd.dogen.coding/types/meta_model/orm_attribute_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/orm/attribute_properties.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
@@ -63,7 +63,7 @@ public:
         const masd::dogen::coding::meta_model::name_tree& parsed_type,
         const bool is_immutable,
         const bool is_fluent,
-        const boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties>& orm_properties);
+        const boost::optional<masd::dogen::coding::meta_model::orm::attribute_properties>& orm_properties);
 
 public:
     /**
@@ -159,10 +159,10 @@ public:
     void is_fluent(const bool v);
     /**@}*/
 
-    const boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties>& orm_properties() const;
-    boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties>& orm_properties();
-    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties>& v);
-    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties>&& v);
+    const boost::optional<masd::dogen::coding::meta_model::orm::attribute_properties>& orm_properties() const;
+    boost::optional<masd::dogen::coding::meta_model::orm::attribute_properties>& orm_properties();
+    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm::attribute_properties>& v);
+    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm::attribute_properties>&& v);
 
 public:
     bool operator==(const attribute& rhs) const;
@@ -184,7 +184,7 @@ private:
     masd::dogen::coding::meta_model::name_tree parsed_type_;
     bool is_immutable_;
     bool is_fluent_;
-    boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties> orm_properties_;
+    boost::optional<masd::dogen::coding::meta_model::orm::attribute_properties> orm_properties_;
 };
 
 }

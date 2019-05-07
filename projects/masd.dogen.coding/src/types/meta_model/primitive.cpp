@@ -24,11 +24,11 @@
 #include "masd.dogen.coding/io/meta_model/attribute_io.hpp"
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
-#include "masd.dogen.coding/io/meta_model/orm_primitive_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/orm/primitive_properties_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::orm_primitive_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::orm::primitive_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -76,7 +76,7 @@ primitive::primitive(
     const masd::dogen::coding::meta_model::attribute& value_attribute,
     const bool use_type_aliasing,
     const bool is_immutable,
-    const boost::optional<masd::dogen::coding::meta_model::orm_primitive_properties>& orm_properties)
+    const boost::optional<masd::dogen::coding::meta_model::orm::primitive_properties>& orm_properties)
     : masd::dogen::coding::meta_model::element(
       name,
       documentation,
@@ -206,19 +206,19 @@ void primitive::is_immutable(const bool v) {
     is_immutable_ = v;
 }
 
-const boost::optional<masd::dogen::coding::meta_model::orm_primitive_properties>& primitive::orm_properties() const {
+const boost::optional<masd::dogen::coding::meta_model::orm::primitive_properties>& primitive::orm_properties() const {
     return orm_properties_;
 }
 
-boost::optional<masd::dogen::coding::meta_model::orm_primitive_properties>& primitive::orm_properties() {
+boost::optional<masd::dogen::coding::meta_model::orm::primitive_properties>& primitive::orm_properties() {
     return orm_properties_;
 }
 
-void primitive::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_primitive_properties>& v) {
+void primitive::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm::primitive_properties>& v) {
     orm_properties_ = v;
 }
 
-void primitive::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_primitive_properties>&& v) {
+void primitive::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm::primitive_properties>&& v) {
     orm_properties_ = std::move(v);
 }
 

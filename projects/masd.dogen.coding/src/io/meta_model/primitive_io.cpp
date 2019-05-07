@@ -23,7 +23,7 @@
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.coding/io/meta_model/attribute_io.hpp"
 #include "masd.dogen.coding/io/meta_model/primitive_io.hpp"
-#include "masd.dogen.coding/io/meta_model/orm_primitive_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/orm/primitive_properties_io.hpp"
 
 namespace masd::dogen::coding::meta_model {
 

@@ -26,7 +26,7 @@
 #include "masd.dogen.coding/io/meta_model/name_tree_io.hpp"
 #include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_io.hpp"
-#include "masd.dogen.coding/io/meta_model/orm_attribute_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/orm/attribute_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -82,7 +82,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::orm::attribute_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)

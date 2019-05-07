@@ -39,7 +39,7 @@
 #include "masd.dogen.coding/types/meta_model/origin_types.hpp"
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/hash/meta_model/technical_space_hash.hpp"
-#include "masd.dogen.coding/types/meta_model/orm_model_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/orm/model_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/extraction_properties.hpp"
 #include "masd.dogen.generation/types/meta_model/element_archetype.hpp"
 #include "masd.dogen.generation/types/meta_model/locator_properties.hpp"
@@ -75,7 +75,7 @@ public:
         const masd::dogen::coding::meta_model::technical_space input_technical_space,
         const masd::dogen::coding::meta_model::technical_space output_technical_space,
         const std::unordered_set<masd::dogen::coding::meta_model::technical_space>& all_technical_spaces,
-        const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties,
+        const boost::optional<masd::dogen::coding::meta_model::orm::model_properties>& orm_properties,
         const std::unordered_set<masd::dogen::generation::meta_model::element_archetype>& enabled_archetype_for_element,
         const masd::dogen::generation::meta_model::locator_properties& locator_properties,
         const masd::dogen::generation::meta_model::global_archetype_location_properties& global_archetype_location_properties,
@@ -177,10 +177,10 @@ public:
     void all_technical_spaces(const std::unordered_set<masd::dogen::coding::meta_model::technical_space>&& v);
     /**@}*/
 
-    const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties() const;
-    boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties();
-    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& v);
-    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>&& v);
+    const boost::optional<masd::dogen::coding::meta_model::orm::model_properties>& orm_properties() const;
+    boost::optional<masd::dogen::coding::meta_model::orm::model_properties>& orm_properties();
+    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm::model_properties>& v);
+    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm::model_properties>&& v);
 
     const std::unordered_set<masd::dogen::generation::meta_model::element_archetype>& enabled_archetype_for_element() const;
     std::unordered_set<masd::dogen::generation::meta_model::element_archetype>& enabled_archetype_for_element();
@@ -224,7 +224,7 @@ private:
     masd::dogen::coding::meta_model::technical_space input_technical_space_;
     masd::dogen::coding::meta_model::technical_space output_technical_space_;
     std::unordered_set<masd::dogen::coding::meta_model::technical_space> all_technical_spaces_;
-    boost::optional<masd::dogen::coding::meta_model::orm_model_properties> orm_properties_;
+    boost::optional<masd::dogen::coding::meta_model::orm::model_properties> orm_properties_;
     std::unordered_set<masd::dogen::generation::meta_model::element_archetype> enabled_archetype_for_element_;
     masd::dogen::generation::meta_model::locator_properties locator_properties_;
     masd::dogen::generation::meta_model::global_archetype_location_properties global_archetype_location_properties_;

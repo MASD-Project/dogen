@@ -25,7 +25,7 @@
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.coding/io/meta_model/attribute_io.hpp"
 #include "masd.dogen.coding/io/meta_model/type_parameters_io.hpp"
-#include "masd.dogen.coding/io/meta_model/orm_object_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/orm/object_properties_io.hpp"
 
 namespace masd::dogen::coding::meta_model {
 

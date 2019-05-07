@@ -35,9 +35,9 @@
 #include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.coding/types/meta_model/enumeration.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
-#include "masd.dogen.coding/io/meta_model/orm_model_properties_io.hpp"
-#include "masd.dogen.coding/io/meta_model/orm_object_properties_io.hpp"
-#include "masd.dogen.coding/io/meta_model/orm_primitive_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/orm/model_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/orm/object_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/orm/primitive_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
@@ -59,7 +59,7 @@ const std::string sqlite("sqlite");
 const std::string upper_case("upper_case");
 const std::string lower_case("lower_case");
 
-const std::string invalid_daatabase_system(
+const std::string invalid_database_system(
     "Database system is invalid or unsupported: ");
 const std::string invalid_letter_case(
     "Letter case is invalid or unsupported: ");
@@ -71,29 +71,29 @@ const std::string duplicate_database_system(
 
 namespace masd::dogen::coding::transforms {
 
-meta_model::orm_database_systems orm_transform::
+meta_model::orm::database_system orm_transform::
 to_orm_database_system(const std::string& s) {
-    using meta_model::orm_database_systems;
+    using meta_model::orm::database_system;
     const auto ls(boost::to_lower_copy(s));
     if (ls == mysql) {
-        return orm_database_systems::mysql;
+        return database_system::mysql;
     } else if (ls == postgresql) {
-        return orm_database_systems::postgresql;
+        return database_system::postgresql;
     } else if (ls == oracle) {
-        return orm_database_systems::oracle;
+        return database_system::oracle;
     } else if (ls == sql_server) {
-        return orm_database_systems::sql_server;
+        return database_system::sql_server;
     } else if (ls == sqlite) {
-        return orm_database_systems::sqlite;
+        return database_system::sqlite;
     }
 
-    BOOST_LOG_SEV(lg, error) << invalid_daatabase_system << s;
-    BOOST_THROW_EXCEPTION(transformation_error(invalid_daatabase_system + s));
+    BOOST_LOG_SEV(lg, error) << invalid_database_system << s;
+    BOOST_THROW_EXCEPTION(transformation_error(invalid_database_system + s));
 }
 
-std::vector<meta_model::orm_database_systems> orm_transform::
+std::vector<meta_model::orm::database_system> orm_transform::
 to_orm_database_system(const std::list<std::string>& vs) {
-    std::vector<meta_model::orm_database_systems> r;
+    std::vector<meta_model::orm::database_system> r;
     r.reserve(vs.size());
     for (const auto& s : vs) {
         r.push_back(to_orm_database_system(s));
@@ -101,24 +101,24 @@ to_orm_database_system(const std::list<std::string>& vs) {
     return r;
 }
 
-meta_model::letter_cases
+meta_model::orm::letter_case
 orm_transform::to_letter_case(const std::string& s) {
-    using meta_model::letter_cases;
+    using meta_model::orm::letter_case;
     const auto ls(boost::to_lower_copy(s));
     if (ls == upper_case) {
-        return letter_cases::upper_case;
+        return letter_case::upper_case;
     } else if (ls == lower_case) {
-        return letter_cases::lower_case;
+        return letter_case::lower_case;
     }
 
     BOOST_LOG_SEV(lg, error) << invalid_letter_case << s;
     BOOST_THROW_EXCEPTION(transformation_error(invalid_letter_case + s));
 }
 
-std::unordered_map<meta_model::orm_database_systems, std::string>
+std::unordered_map<meta_model::orm::database_system, std::string>
 orm_transform::
 make_type_overrides(const std::list<std::string> ls) {
-    std::unordered_map<meta_model::orm_database_systems, std::string> r;
+    std::unordered_map<meta_model::orm::database_system, std::string> r;
 
     using utility::string::splitter;
     for (const auto& s : ls) {
@@ -179,7 +179,7 @@ make_feature_group(const variability::meta_model::feature_model& fm) {
     return r;
 }
 
-boost::optional<meta_model::orm_model_properties>
+boost::optional<meta_model::orm::model_properties>
 orm_transform::make_model_properties(const feature_group& fg,
     const variability::meta_model::configuration& cfg) {
 
@@ -187,7 +187,7 @@ orm_transform::make_model_properties(const feature_group& fg,
     const variability::helpers::configuration_selector s(cfg);
     bool found_any(false);
 
-    meta_model::orm_model_properties r;
+    meta_model::orm::model_properties r;
     if (s.has_configuration_point(fg.database_system)) {
         found_any = true;
         const auto ds(s.get_text_collection_content(fg.database_system));
@@ -211,13 +211,13 @@ orm_transform::make_model_properties(const feature_group& fg,
     }
 
     BOOST_LOG_SEV(lg, debug) << "Model configuration is empty.";
-    return boost::optional<meta_model::orm_model_properties>();
+    return boost::optional<meta_model::orm::model_properties>();
 }
 
 void orm_transform::update_object_properties(
     const feature_group& fg,
     const variability::meta_model::configuration& cfg,
-    meta_model::orm_object_properties& oop) {
+    meta_model::orm::object_properties& oop) {
 
     const variability::helpers::configuration_selector s(cfg);
     if (s.has_configuration_point(fg.schema_name))
@@ -227,14 +227,14 @@ void orm_transform::update_object_properties(
         oop.table_name(s.get_text_content(fg.table_name));
 }
 
-boost::optional<meta_model::orm_attribute_properties>
+boost::optional<meta_model::orm::attribute_properties>
 orm_transform::make_attribute_properties(const feature_group& fg,
     const variability::meta_model::configuration& cfg) {
 
     const variability::helpers::configuration_selector s(cfg);
     bool found_any(false);
 
-    meta_model::orm_attribute_properties r;
+    meta_model::orm::attribute_properties r;
     if (s.has_configuration_point(fg.column_name)) {
         found_any = true;
         r.column_name(s.get_text_content(fg.column_name));
@@ -264,22 +264,22 @@ orm_transform::make_attribute_properties(const feature_group& fg,
     if (found_any)
         return r;
 
-    return boost::optional<meta_model::orm_attribute_properties>();
+    return boost::optional<meta_model::orm::attribute_properties>();
 }
 
 void orm_transform::update_primitive_properties(const feature_group& fg,
     const variability::meta_model::configuration& cfg,
-    meta_model::orm_primitive_properties& opp) {
+    meta_model::orm::primitive_properties& opp) {
 
     const variability::helpers::configuration_selector s(cfg);
     if (s.has_configuration_point(fg.schema_name))
         opp.schema_name(s.get_text_content(fg.schema_name));
 }
 
-boost::optional<meta_model::orm_module_properties>
+boost::optional<meta_model::orm::module_properties>
 orm_transform::make_module_properties(const feature_group& fg,
     const variability::meta_model::configuration& cfg) {
-    meta_model::orm_module_properties r;
+    meta_model::orm::module_properties r;
     const variability::helpers::configuration_selector s(cfg);
 
     if (s.has_configuration_point(fg.schema_name)) {
@@ -287,14 +287,14 @@ orm_transform::make_module_properties(const feature_group& fg,
         return r;
     }
 
-    return boost::optional<meta_model::orm_module_properties>();
+    return boost::optional<meta_model::orm::module_properties>();
 }
 
 void orm_transform::
 transform_objects(const feature_group& fg, meta_model::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Started transforming objects.";
 
-    boost::optional<meta_model::letter_cases> lc;
+    boost::optional<meta_model::orm::letter_case> lc;
     if (em.orm_properties())
         lc = em.orm_properties()->letter_case();
 
@@ -364,7 +364,7 @@ transform_primitives(const feature_group& fg, meta_model::model& m) {
 
     BOOST_LOG_SEV(lg, debug) << "Started transforming primitives.";
 
-    boost::optional<meta_model::letter_cases> lc;
+    boost::optional<meta_model::orm::letter_case> lc;
     if (m.orm_properties())
         lc = m.orm_properties()->letter_case();
 

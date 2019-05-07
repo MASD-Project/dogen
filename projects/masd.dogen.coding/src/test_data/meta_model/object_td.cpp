@@ -23,7 +23,7 @@
 #include "masd.dogen.coding/test_data/meta_model/element_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/attribute_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/type_parameters_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/orm_object_properties_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/orm/object_properties_td.hpp"
 
 namespace {
 
@@ -77,14 +77,14 @@ create_masd_dogen_coding_meta_model_type_parameters(const unsigned int position)
     return masd::dogen::coding::meta_model::type_parameters_generator::create(position);
 }
 
-masd::dogen::coding::meta_model::orm_object_properties
+masd::dogen::coding::meta_model::orm::object_properties
 create_masd_dogen_coding_meta_model_orm_object_properties(const unsigned int position) {
-    return masd::dogen::coding::meta_model::orm_object_properties_generator::create(position);
+    return masd::dogen::coding::meta_model::orm::object_properties_generator::create(position);
 }
 
-boost::optional<masd::dogen::coding::meta_model::orm_object_properties>
+boost::optional<masd::dogen::coding::meta_model::orm::object_properties>
 create_boost_optional_masd_dogen_coding_meta_model_orm_object_properties(unsigned int position) {
-    boost::optional<masd::dogen::coding::meta_model::orm_object_properties> r(
+    boost::optional<masd::dogen::coding::meta_model::orm::object_properties> r(
         create_masd_dogen_coding_meta_model_orm_object_properties(position));
     return r;
 }

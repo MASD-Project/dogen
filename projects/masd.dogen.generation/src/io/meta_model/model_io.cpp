@@ -27,7 +27,7 @@
 #include "masd.dogen.generation/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/io/meta_model/origin_types_io.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
-#include "masd.dogen.coding/io/meta_model/orm_model_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/orm/model_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/extraction_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/element_archetype_io.hpp"
 #include "masd.dogen.generation/io/meta_model/locator_properties_io.hpp"
@@ -149,7 +149,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<masd::
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::orm::model_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)

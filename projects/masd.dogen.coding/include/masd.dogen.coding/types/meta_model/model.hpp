@@ -47,7 +47,7 @@
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_group_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template_fwd.hpp"
-#include "masd.dogen.coding/types/meta_model/orm_model_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/orm/model_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/extraction_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/generation_marker_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/variability_profile_template_fwd.hpp"
@@ -95,7 +95,7 @@ public:
         const boost::shared_ptr<masd::dogen::coding::meta_model::module>& root_module,
         const masd::dogen::coding::meta_model::technical_space input_technical_space,
         const std::list<masd::dogen::coding::meta_model::technical_space>& output_technical_spaces,
-        const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties,
+        const boost::optional<masd::dogen::coding::meta_model::orm::model_properties>& orm_properties,
         const masd::dogen::coding::meta_model::extraction_properties& extraction_properties);
 
 public:
@@ -288,10 +288,10 @@ public:
     void output_technical_spaces(const std::list<masd::dogen::coding::meta_model::technical_space>&& v);
     /**@}*/
 
-    const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties() const;
-    boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties();
-    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& v);
-    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>&& v);
+    const boost::optional<masd::dogen::coding::meta_model::orm::model_properties>& orm_properties() const;
+    boost::optional<masd::dogen::coding::meta_model::orm::model_properties>& orm_properties();
+    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm::model_properties>& v);
+    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm::model_properties>&& v);
 
     const masd::dogen::coding::meta_model::extraction_properties& extraction_properties() const;
     masd::dogen::coding::meta_model::extraction_properties& extraction_properties();
@@ -332,7 +332,7 @@ private:
     boost::shared_ptr<masd::dogen::coding::meta_model::module> root_module_;
     masd::dogen::coding::meta_model::technical_space input_technical_space_;
     std::list<masd::dogen::coding::meta_model::technical_space> output_technical_spaces_;
-    boost::optional<masd::dogen::coding::meta_model::orm_model_properties> orm_properties_;
+    boost::optional<masd::dogen::coding::meta_model::orm::model_properties> orm_properties_;
     masd::dogen::coding::meta_model::extraction_properties extraction_properties_;
 };
 

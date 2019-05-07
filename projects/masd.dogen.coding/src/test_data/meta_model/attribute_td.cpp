@@ -24,7 +24,7 @@
 #include "masd.dogen.coding/test_data/meta_model/name_tree_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/static_stereotypes_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/configuration_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/orm_attribute_properties_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/orm/attribute_properties_td.hpp"
 
 namespace {
 
@@ -81,14 +81,14 @@ bool create_bool(const unsigned int position) {
     return (position % 2) != 0;
 }
 
-masd::dogen::coding::meta_model::orm_attribute_properties
+masd::dogen::coding::meta_model::orm::attribute_properties
 create_masd_dogen_coding_meta_model_orm_attribute_properties(const unsigned int position) {
-    return masd::dogen::coding::meta_model::orm_attribute_properties_generator::create(position);
+    return masd::dogen::coding::meta_model::orm::attribute_properties_generator::create(position);
 }
 
-boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties>
+boost::optional<masd::dogen::coding::meta_model::orm::attribute_properties>
 create_boost_optional_masd_dogen_coding_meta_model_orm_attribute_properties(unsigned int position) {
-    boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties> r(
+    boost::optional<masd::dogen::coding::meta_model::orm::attribute_properties> r(
         create_masd_dogen_coding_meta_model_orm_attribute_properties(position));
     return r;
 }

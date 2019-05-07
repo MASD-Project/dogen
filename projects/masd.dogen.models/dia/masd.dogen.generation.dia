@@ -423,7 +423,7 @@ spaces.#</dia:string>
             <dia:string>#orm_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;coding::meta_model::orm_model_properties&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;coding::meta_model::orm::model_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

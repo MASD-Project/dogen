@@ -31,7 +31,7 @@
 #include <unordered_set>
 #include <boost/optional.hpp>
 #include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/types/meta_model/orm_module_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/orm/module_properties.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
@@ -71,7 +71,7 @@ public:
         const std::unordered_set<std::string>& contains,
         const bool is_root,
         const bool is_global_module,
-        const boost::optional<masd::dogen::coding::meta_model::orm_module_properties>& orm_properties);
+        const boost::optional<masd::dogen::coding::meta_model::orm::module_properties>& orm_properties);
 
 public:
     using element::accept;
@@ -105,10 +105,10 @@ public:
     void is_global_module(const bool v);
     /**@}*/
 
-    const boost::optional<masd::dogen::coding::meta_model::orm_module_properties>& orm_properties() const;
-    boost::optional<masd::dogen::coding::meta_model::orm_module_properties>& orm_properties();
-    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_module_properties>& v);
-    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_module_properties>&& v);
+    const boost::optional<masd::dogen::coding::meta_model::orm::module_properties>& orm_properties() const;
+    boost::optional<masd::dogen::coding::meta_model::orm::module_properties>& orm_properties();
+    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm::module_properties>& v);
+    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm::module_properties>&& v);
 
 public:
     bool operator==(const module& rhs) const;
@@ -127,7 +127,7 @@ private:
     std::unordered_set<std::string> contains_;
     bool is_root_;
     bool is_global_module_;
-    boost::optional<masd::dogen::coding::meta_model::orm_module_properties> orm_properties_;
+    boost::optional<masd::dogen::coding::meta_model::orm::module_properties> orm_properties_;
 };
 
 }

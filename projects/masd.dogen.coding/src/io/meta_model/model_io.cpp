@@ -36,7 +36,7 @@
 #include "masd.dogen.coding/io/meta_model/object_template_io.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/io/meta_model/generation_marker_io.hpp"
-#include "masd.dogen.coding/io/meta_model/orm_model_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/orm/model_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/extraction_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/variability_profile_template_io.hpp"
 #include "masd.dogen.coding/io/meta_model/variability_feature_template_group_io.hpp"
@@ -590,7 +590,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::co
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::orm::model_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)

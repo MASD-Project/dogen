@@ -32,8 +32,8 @@
 #include "masd.dogen.coding/types/helpers/name_builder.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
-#include "masd.dogen.coding/types/meta_model/orm_object_properties.hpp"
-#include "masd.dogen.coding/types/meta_model/orm_primitive_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/orm/object_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/orm/primitive_properties.hpp"
 #include "masd.dogen.coding/types/transforms/stereotypes_transform.hpp"
 
 namespace {
@@ -100,11 +100,11 @@ transform_static_stereotypes(meta_model::object& o, meta_model::model& m) {
         else if (ss == static_stereotypes::immutable)
             o.is_immutable(true);
         else if (ss == static_stereotypes::orm_object) {
-            meta_model::orm_object_properties cfg;
+            meta_model::orm::object_properties cfg;
             cfg.generate_mapping(true);
             o.orm_properties(cfg);
         } else if (ss == static_stereotypes::orm_value) {
-            meta_model::orm_object_properties cfg;
+            meta_model::orm::object_properties cfg;
             cfg.generate_mapping(true);
             cfg.is_value(true);
             o.orm_properties(cfg);
@@ -426,7 +426,7 @@ void stereotypes_transform::apply(meta_model::primitive& p) {
         } else if (st == static_stereotypes::immutable)
             p.is_immutable(true);
         else if (st == static_stereotypes::orm_value) {
-            meta_model::orm_primitive_properties cfg;
+            meta_model::orm::primitive_properties cfg;
             cfg.generate_mapping(true);
             p.orm_properties(cfg);
         } else

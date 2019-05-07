@@ -21,9 +21,8 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.coding/io/meta_model/letter_cases_io.hpp"
-#include "masd.dogen.coding/io/meta_model/orm_database_systems_io.hpp"
-#include "masd.dogen.coding/types/meta_model/orm_database_systems.hpp"
+#include "masd.dogen.coding/io/meta_model/orm/letter_case_io.hpp"
+#include "masd.dogen.coding/io/meta_model/orm/database_system_io.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/artefact_properties.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/adaptation_error.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
@@ -55,15 +54,15 @@ const std::string invalid_case("Letter case is invalid or unsupported: ");
 namespace masd::dogen::generation::cpp::formattables {
 
 std::string
-adapter::to_odb_database(const coding::meta_model::orm_database_systems ds) {
-    using coding::meta_model::orm_database_systems;
+adapter::to_odb_database(const coding::meta_model::orm::database_system ds) {
+    using coding::meta_model::orm::database_system;
 
     switch (ds) {
-    case orm_database_systems::mysql: return mysql;
-    case orm_database_systems::postgresql: return postgresql;
-    case orm_database_systems::oracle: return oracle;
-    case orm_database_systems::sql_server: return sql_server;
-    case orm_database_systems::sqlite: return sqlite;
+    case database_system::mysql: return mysql;
+    case database_system::postgresql: return postgresql;
+    case database_system::oracle: return oracle;
+    case database_system::sql_server: return sql_server;
+    case database_system::sqlite: return sqlite;
     default: {
         const auto s(boost::lexical_cast<std::string>(ds));
         BOOST_LOG_SEV(lg, error) << invalid_daatabase_system << s;
@@ -72,12 +71,12 @@ adapter::to_odb_database(const coding::meta_model::orm_database_systems ds) {
 }
 
 std::string adapter::
-to_odb_sql_name_case(const coding::meta_model::letter_cases lc) const {
-    using coding::meta_model::letter_cases;
+to_odb_sql_name_case(const coding::meta_model::orm::letter_case lc) const {
+    using coding::meta_model::orm::letter_case;
 
     switch (lc) {
-    case letter_cases::upper_case: return upper_case;
-    case letter_cases::lower_case: return lower_case;
+    case letter_case::upper_case: return upper_case;
+    case letter_case::lower_case: return lower_case;
     default: {
         const auto s(boost::lexical_cast<std::string>(lc));
         BOOST_LOG_SEV(lg, error) << invalid_case << s;
@@ -86,7 +85,7 @@ to_odb_sql_name_case(const coding::meta_model::letter_cases lc) const {
 }
 
 std::list<std::string> adapter::
-make_databases(const coding::meta_model::orm_model_properties& omp) const {
+make_databases(const coding::meta_model::orm::model_properties& omp) const {
     std::list<std::string> r;
 
     if (omp.database_systems().size() > 1)

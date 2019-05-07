@@ -144,7 +144,7 @@ void updator::visit(coding::meta_model::object& o) {
         if (cfg.generate_mapping() && !op.is_value() && !cfg.has_primary_key())
             top_level_pragmas.push_back(no_id_pragma);
 
-        using coding::meta_model::letter_cases;
+        using coding::meta_model::orm::letter_case;
         const auto& sn(cfg.schema_name());
         if (!sn.empty() && (op.is_value() || cfg.generate_mapping())) {
             std::ostringstream s;
@@ -152,9 +152,9 @@ void updator::visit(coding::meta_model::object& o) {
 
             if (!cfg.letter_case())
                 s << cfg.schema_name();
-            else if (*cfg.letter_case() == letter_cases::upper_case)
+            else if (*cfg.letter_case() == letter_case::upper_case)
                 s << boost::to_upper_copy(cfg.schema_name());
-            else if (*cfg.letter_case() == letter_cases::lower_case)
+            else if (*cfg.letter_case() == letter_case::lower_case)
                 s << boost::to_lower_copy(cfg.schema_name());
 
             s <<"\")";
@@ -232,12 +232,12 @@ void updator::visit(coding::meta_model::primitive& p) {
             std::ostringstream s;
             s << "schema(\"";
 
-            using coding::meta_model::letter_cases;
+            using coding::meta_model::orm::letter_case;
             if (!cfg.letter_case())
                 s << cfg.schema_name();
-            else if (*cfg.letter_case() == letter_cases::upper_case)
+            else if (*cfg.letter_case() == letter_case::upper_case)
                 s << boost::to_upper_copy(cfg.schema_name());
-            else if (*cfg.letter_case() == letter_cases::lower_case)
+            else if (*cfg.letter_case() == letter_case::lower_case)
                 s << boost::to_lower_copy(cfg.schema_name());
 
             s <<"\")";

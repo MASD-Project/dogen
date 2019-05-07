@@ -24,7 +24,7 @@
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
-#include "masd.dogen.coding/io/meta_model/orm_module_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/orm/module_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -50,7 +50,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::s
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::orm_module_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::orm::module_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -95,7 +95,7 @@ module::module(
     const std::unordered_set<std::string>& contains,
     const bool is_root,
     const bool is_global_module,
-    const boost::optional<masd::dogen::coding::meta_model::orm_module_properties>& orm_properties)
+    const boost::optional<masd::dogen::coding::meta_model::orm::module_properties>& orm_properties)
     : masd::dogen::coding::meta_model::element(
       name,
       documentation,
@@ -213,19 +213,19 @@ void module::is_global_module(const bool v) {
     is_global_module_ = v;
 }
 
-const boost::optional<masd::dogen::coding::meta_model::orm_module_properties>& module::orm_properties() const {
+const boost::optional<masd::dogen::coding::meta_model::orm::module_properties>& module::orm_properties() const {
     return orm_properties_;
 }
 
-boost::optional<masd::dogen::coding::meta_model::orm_module_properties>& module::orm_properties() {
+boost::optional<masd::dogen::coding::meta_model::orm::module_properties>& module::orm_properties() {
     return orm_properties_;
 }
 
-void module::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_module_properties>& v) {
+void module::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm::module_properties>& v) {
     orm_properties_ = v;
 }
 
-void module::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_module_properties>&& v) {
+void module::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm::module_properties>&& v) {
     orm_properties_ = std::move(v);
 }
 

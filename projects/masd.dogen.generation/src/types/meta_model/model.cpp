@@ -77,7 +77,7 @@ model::model(
     const masd::dogen::coding::meta_model::technical_space input_technical_space,
     const masd::dogen::coding::meta_model::technical_space output_technical_space,
     const std::unordered_set<masd::dogen::coding::meta_model::technical_space>& all_technical_spaces,
-    const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& orm_properties,
+    const boost::optional<masd::dogen::coding::meta_model::orm::model_properties>& orm_properties,
     const std::unordered_set<masd::dogen::generation::meta_model::element_archetype>& enabled_archetype_for_element,
     const masd::dogen::generation::meta_model::locator_properties& locator_properties,
     const masd::dogen::generation::meta_model::global_archetype_location_properties& global_archetype_location_properties,
@@ -296,19 +296,19 @@ void model::all_technical_spaces(const std::unordered_set<masd::dogen::coding::m
     all_technical_spaces_ = std::move(v);
 }
 
-const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& model::orm_properties() const {
+const boost::optional<masd::dogen::coding::meta_model::orm::model_properties>& model::orm_properties() const {
     return orm_properties_;
 }
 
-boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& model::orm_properties() {
+boost::optional<masd::dogen::coding::meta_model::orm::model_properties>& model::orm_properties() {
     return orm_properties_;
 }
 
-void model::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& v) {
+void model::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm::model_properties>& v) {
     orm_properties_ = v;
 }
 
-void model::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>&& v) {
+void model::orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm::model_properties>&& v) {
     orm_properties_ = std::move(v);
 }
 

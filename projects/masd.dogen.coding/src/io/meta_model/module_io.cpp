@@ -23,7 +23,7 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/module_io.hpp"
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
-#include "masd.dogen.coding/io/meta_model/orm_module_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/orm/module_properties_io.hpp"
 
 namespace masd::dogen::coding::meta_model {
 

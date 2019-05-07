@@ -34,28 +34,28 @@
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
-#include "masd.dogen.coding/types/meta_model/orm_model_properties.hpp"
-#include "masd.dogen.coding/types/meta_model/orm_object_properties.hpp"
-#include "masd.dogen.coding/types/meta_model/orm_module_properties.hpp"
-#include "masd.dogen.coding/types/meta_model/orm_attribute_properties.hpp"
-#include "masd.dogen.coding/types/meta_model/orm_primitive_properties.hpp"
-#include "masd.dogen.coding/types/meta_model/orm_database_systems.hpp"
-#include "masd.dogen.coding/types/meta_model/letter_cases.hpp"
+#include "masd.dogen.coding/types/meta_model/orm/letter_case.hpp"
+#include "masd.dogen.coding/types/meta_model/orm/database_system.hpp"
+#include "masd.dogen.coding/types/meta_model/orm/model_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/orm/object_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/orm/module_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/orm/attribute_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/orm/primitive_properties.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::coding::transforms {
 
 class orm_transform final {
 private:
-    static meta_model::orm_database_systems
+    static meta_model::orm::database_system
     to_orm_database_system(const std::string& s);
 
-    std::vector<meta_model::orm_database_systems>
+    std::vector<meta_model::orm::database_system>
     static to_orm_database_system(const std::list<std::string>& vs);
 
-    static meta_model::letter_cases to_letter_case(const std::string& s);
+    static meta_model::orm::letter_case to_letter_case(const std::string& s);
 
-    std::unordered_map<meta_model::orm_database_systems, std::string>
+    std::unordered_map<meta_model::orm::database_system, std::string>
     static make_type_overrides(const std::list<std::string> ls);
 
 private:
@@ -74,23 +74,23 @@ private:
     static feature_group make_feature_group(
         const variability::meta_model::feature_model& fm);
 
-    static boost::optional<meta_model::orm_model_properties>
+    static boost::optional<meta_model::orm::model_properties>
     make_model_properties(const feature_group& fg,
         const variability::meta_model::configuration& cfg);
 
     static void update_object_properties(const feature_group& fg,
         const variability::meta_model::configuration& cfg,
-        meta_model::orm_object_properties& oop);
+        meta_model::orm::object_properties& oop);
 
-    static boost::optional<meta_model::orm_attribute_properties>
+    static boost::optional<meta_model::orm::attribute_properties>
     make_attribute_properties(const feature_group& fg,
         const variability::meta_model::configuration& cfg);
 
     static void update_primitive_properties(const feature_group& fg,
         const variability::meta_model::configuration& cfg,
-        meta_model::orm_primitive_properties& opp);
+        meta_model::orm::primitive_properties& opp);
 
-    static boost::optional<meta_model::orm_module_properties>
+    static boost::optional<meta_model::orm::module_properties>
     make_module_properties(const feature_group& fg,
         const variability::meta_model::configuration& cfg);
 
