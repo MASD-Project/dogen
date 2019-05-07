@@ -4359,6 +4359,13 @@ Existing validation code:
 - modelines must be defined inside of modeline groups.
 - licences and generation markers must be defined at the top-level.
 
+*Other*
+
+- Check that all header guards generated for a given model are
+  unique. We've had cases where a class with a prefix (say
+  =variability_x=) and a class in a namespace (say =variability::x=)
+  resolve to exactly the same header guard (say =VARIABILITY_X_HPP=).
+
 Merged stories:
 
 *Add warning support for validation*
@@ -9395,7 +9402,15 @@ to express the header guards:
 
 : $(namespaces)_$(class_name)_$(extension)
 
-And so forth.
+And so forth. One use case is when we somehow generate the same header
+guard for two different model types (for example when one has a prefix
+that is the same as the namespace of another). In this case it would
+be nice to be able to override the header guard.
+
+In addition, we could also make the namespace separators for modules
+configurable; if we didn't use underscores for modules we would not
+have a clash. However, its not clear what the separator would then be
+(double underscore?).
 
 *** Code generation of registrars for static registration             :story:
 
