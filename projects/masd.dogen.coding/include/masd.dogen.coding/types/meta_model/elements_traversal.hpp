@@ -38,7 +38,7 @@
 #include "masd.dogen.coding/types/meta_model/decoration/modeline.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/modeline_group.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/generation_marker.hpp"
-#include "masd.dogen.coding/types/meta_model/variability_profile_template.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/profile_template.hpp"
 
 namespace masd::dogen::coding::meta_model {
 

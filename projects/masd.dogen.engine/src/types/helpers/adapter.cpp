@@ -386,12 +386,12 @@ adapter::to_licence(const coding::meta_model::location& l,
     return r;
 }
 
-boost::shared_ptr<coding::meta_model::variability_profile_template>
+boost::shared_ptr<coding::meta_model::variability::profile_template>
 adapter::to_variability_profile_template(const coding::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
-    using coding::meta_model::variability_profile_template;
-    auto r(boost::make_shared<variability_profile_template>());
+    using coding::meta_model::variability::profile_template;
+    auto r(boost::make_shared<profile_template>());
     populate_element(l, scr, ie, *r);
 
     coding::helpers::name_factory f;
@@ -426,7 +426,7 @@ adapter::to_variability_profile_template(const coding::meta_model::location& l,
          * when we are looking at a configuration model
          * representation.
          */
-        coding::meta_model::variability_profile_template_entry e;
+        coding::meta_model::variability::profile_template_entry e;
         e.name(f.build_attribute_name(r->name(), n));
         e.key(n);
         e.configuration(attr.configuration());
@@ -437,26 +437,26 @@ adapter::to_variability_profile_template(const coding::meta_model::location& l,
     return r;
 }
 
-boost::shared_ptr<coding::meta_model::variability_feature_template_group>
+boost::shared_ptr<coding::meta_model::variability::feature_template_group>
 adapter::to_variability_feature_template_group(
     const coding::meta_model::location &l,
     const stereotypes_conversion_result &scr,
     const injection::meta_model::element &ie) const {
-    using coding::meta_model::variability_feature_template_group;
-    auto r(boost::make_shared<variability_feature_template_group>());
+    using coding::meta_model::variability::feature_template_group;
+    auto r(boost::make_shared<feature_template_group>());
     populate_element(l, scr, ie, *r);
     return r;
 }
 
 boost::shared_ptr<
-    coding::meta_model::variability_feature_template_group_registrar
+    coding::meta_model::variability::feature_template_group_registrar
     >
 adapter::to_variability_feature_template_group_registrar(
     const coding::meta_model::location &l,
     const stereotypes_conversion_result &scr,
     const injection::meta_model::element &ie) const {
-    using coding::meta_model::variability_feature_template_group_registrar;
-    auto r(boost::make_shared<variability_feature_template_group_registrar>());
+    using coding::meta_model::variability::feature_template_group_registrar;
+    auto r(boost::make_shared<feature_template_group_registrar>());
     populate_element(l, scr, ie, *r);
     return r;
 }

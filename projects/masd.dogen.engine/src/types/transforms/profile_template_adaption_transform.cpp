@@ -27,7 +27,7 @@
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.coding/io/meta_model/model_set_io.hpp"
-#include "masd.dogen.coding/io/meta_model/variability_profile_template_io.hpp"
+#include "masd.dogen.coding/io/meta_model/variability/profile_template_io.hpp"
 #include "masd.dogen.engine/types/traits.hpp"
 #include "masd.dogen.engine/types/transforms/context.hpp"
 #include "masd.dogen.engine/types/transforms/transform_exception.hpp"
@@ -224,7 +224,7 @@ make_untyped_value(const feature_group& fg,
 
 variability::meta_model::profile_template profile_template_adaption_transform::
 adapt(const feature_group& fg,
-    const coding::meta_model::variability_profile_template& vpt) {
+    const coding::meta_model::variability::profile_template& vpt) {
     variability::meta_model::profile_template r;
 
     const auto sn(vpt.name().simple());

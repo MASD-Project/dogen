@@ -48,9 +48,9 @@
 #include "masd.dogen.coding/types/meta_model/decoration/modeline.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/modeline_group.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/generation_marker.hpp"
-#include "masd.dogen.coding/types/meta_model/variability_profile_template.hpp"
-#include "masd.dogen.coding/types/meta_model/variability_feature_template_group.hpp"
-#include "masd.dogen.coding/types/meta_model/variability_feature_template_group_registrar.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/profile_template.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/feature_template_group.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/feature_template_group_registrar.hpp"
 #include "masd.dogen.engine/types/helpers/stereotypes_conversion_result.hpp"
 
 namespace masd::dogen::engine::helpers {
@@ -234,7 +234,7 @@ public:
      * masd::to_variability_profile_template to a variability feature
      * template group.
      */
-    boost::shared_ptr<coding::meta_model::variability_profile_template>
+    boost::shared_ptr<coding::meta_model::variability::profile_template>
     to_variability_profile_template(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
@@ -244,7 +244,7 @@ public:
      * masd::variability_feature_template_group to a coding
      * variability feature template group
      */
-    boost::shared_ptr<coding::meta_model::variability_feature_template_group>
+    boost::shared_ptr<coding::meta_model::variability::feature_template_group>
     to_variability_feature_template_group(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
@@ -255,7 +255,7 @@ public:
      * variability feature template group registrar.
      */
     boost::shared_ptr<
-        coding::meta_model::variability_feature_template_group_registrar
+        coding::meta_model::variability::feature_template_group_registrar
         >
     to_variability_feature_template_group_registrar(
         const coding::meta_model::location& l,

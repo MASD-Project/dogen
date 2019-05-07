@@ -653,15 +653,15 @@
         },
         {
           "name": "variability_profile_templates",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<variability_profile_template>>"
+          "type": "std::unordered_map<std::string, boost::shared_ptr<variability::profile_template>>"
         },
         {
           "name": "variability_feature_template_groups",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<variability_feature_template_group>>"
+          "type": "std::unordered_map<std::string, boost::shared_ptr<variability::feature_template_group>>"
         },
         {
           "name": "variability_feature_template_group_registrar",
-          "type": "boost::shared_ptr<variability_feature_template_group_registrar>"
+          "type": "boost::shared_ptr<variability::feature_template_group_registrar>"
         },
         {
           "name": "root_module",
@@ -1880,105 +1880,11 @@
       ]
     },
     {
-      "name": "meta_model::variability_profile_template",
-      "parents": [
-        "meta_model::element"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "labels",
-          "type": "std::unordered_set<std::string>"
-        },
-        {
-          "name": "entries",
-          "type": "std::list<variability_profile_template_entry>"
-        },
-        {
-          "name": "parents",
-          "type": "std::list<name>",
-          "documentation": "Parents of this profile template.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::variability_profile_template_entry",
-      "stereotypes": [
-        "Documentable",
-        "Configurable",
-        "Nameable"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "key",
-          "type": "std::string"
-        },
-        {
-          "name": "value",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::variability_feature_template_group",
-      "parents": [
-        "meta_model::element"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "feature_templates",
-          "type": "std::list<variability_feature_template>"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::variability_feature_template",
-      "stereotypes": [
-        "Documentable",
-        "Configurable",
-        "Nameable"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "type",
-          "type": "std::string"
-        },
-        {
-          "name": "location",
-          "type": "archetypes::location"
-        },
-        {
-          "name": "template_kind",
-          "type": "variability::meta_model::template_kind"
-        },
-        {
-          "name": "binding_point",
-          "type": "variability::meta_model::binding_point"
-        }
-      ]
-    },
-    {
       "name": "transforms::variability_feature_template_group_transform",
       "stereotypes": [
         "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "meta_model::variability_feature_template_group_registrar",
-      "parents": [
-        "meta_model::element"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "template_groups",
-          "type": "std::list<variability_feature_template_group>"
-        }
-      ]
     },
     {
       "name": "meta_model::decoration",
@@ -2195,7 +2101,7 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "meta_model::variability::profile_template_new",
+      "name": "meta_model::variability::profile_template",
       "stereotypes": [
         "coding::meta_element",
         "coding::non_testable"
@@ -2208,7 +2114,7 @@
         },
         {
           "name": "entries",
-          "type": "std::list<profile_template_entry_new>"
+          "type": "std::list<profile_template_entry>"
         },
         {
           "name": "parents",
@@ -2218,7 +2124,7 @@
       ]
     },
     {
-      "name": "meta_model::variability::profile_template_entry_new",
+      "name": "meta_model::variability::profile_template_entry",
       "stereotypes": [
         "Documentable",
         "Configurable",
@@ -2238,7 +2144,7 @@
       ]
     },
     {
-      "name": "meta_model::variability::feature_template_group_new",
+      "name": "meta_model::variability::feature_template_group",
       "stereotypes": [
         "coding::meta_element",
         "coding::non_testable"
@@ -2247,12 +2153,12 @@
       "attributes": [
         {
           "name": "feature_templates",
-          "type": "std::list<feature_template_new>"
+          "type": "std::list<feature_template>"
         }
       ]
     },
     {
-      "name": "meta_model::variability::feature_template_new",
+      "name": "meta_model::variability::feature_template",
       "stereotypes": [
         "Documentable",
         "Configurable",
@@ -2280,7 +2186,7 @@
       ]
     },
     {
-      "name": "meta_model::variability::feature_template_group_registrar_new",
+      "name": "meta_model::variability::feature_template_group_registrar",
       "stereotypes": [
         "coding::meta_element",
         "coding::non_testable"
@@ -2289,7 +2195,7 @@
       "attributes": [
         {
           "name": "template_groups",
-          "type": "std::list<feature_template_group_new>"
+          "type": "std::list<feature_template_group>"
         }
       ]
     },

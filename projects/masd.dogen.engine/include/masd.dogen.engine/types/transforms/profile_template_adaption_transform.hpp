@@ -21,7 +21,6 @@
 #ifndef MASD_DOGEN_ENGINE_TYPES_TRANSFORMS_PROFILE_TEMPLATE_ADAPTION_TRANSFORM_HPP
 #define MASD_DOGEN_ENGINE_TYPES_TRANSFORMS_PROFILE_TEMPLATE_ADAPTION_TRANSFORM_HPP
 
-#include "masd.dogen.coding/types/meta_model/variability_profile_template.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -35,6 +34,7 @@
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.variability/types/meta_model/profile_template.hpp"
 #include "masd.dogen.coding/types/meta_model/model_set.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/profile_template.hpp"
 #include "masd.dogen.engine/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::engine::transforms {
@@ -90,7 +90,7 @@ private:
 private:
     static variability::meta_model::profile_template
     adapt(const feature_group& fg,
-        const coding::meta_model::variability_profile_template& vpt);
+        const coding::meta_model::variability::profile_template& vpt);
 
 public:
     static std::list<variability::meta_model::profile_template>

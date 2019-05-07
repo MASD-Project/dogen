@@ -31,9 +31,9 @@
 #include "masd.dogen.coding/types/meta_model/decoration/modeline.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/modeline_group.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/generation_marker.hpp"
-#include "masd.dogen.coding/types/meta_model/variability_profile_template.hpp"
-#include "masd.dogen.coding/types/meta_model/variability_feature_template_group.hpp"
-#include "masd.dogen.coding/types/meta_model/variability_feature_template_group_registrar.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/profile_template.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/feature_template_group.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/feature_template_group_registrar.hpp"
 
 namespace boost {
 
@@ -145,8 +145,8 @@ const boost::shared_ptr<masd::dogen::coding::meta_model::decoration::generation_
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::variability_profile_template>& lhs,
-const boost::shared_ptr<masd::dogen::coding::meta_model::variability_profile_template>& rhs) {
+inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::variability::profile_template>& lhs,
+const boost::shared_ptr<masd::dogen::coding::meta_model::variability::profile_template>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -154,8 +154,8 @@ const boost::shared_ptr<masd::dogen::coding::meta_model::variability_profile_tem
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group>& lhs,
-const boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group>& rhs) {
+inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group>& lhs,
+const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -163,8 +163,8 @@ const boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_tem
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group_registrar>& lhs,
-const boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group_registrar>& rhs) {
+inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>& lhs,
+const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -221,9 +221,9 @@ model::model(
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline> >& modelines,
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::licence> >& licences,
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::generation_marker> >& generation_markers,
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_profile_template> >& variability_profile_templates,
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group> >& variability_feature_template_groups,
-    const boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group_registrar>& variability_feature_template_group_registrar,
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::profile_template> >& variability_profile_templates,
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> >& variability_feature_template_groups,
+    const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>& variability_feature_template_group_registrar,
     const boost::shared_ptr<masd::dogen::coding::meta_model::module>& root_module,
     const masd::dogen::coding::meta_model::technical_space input_technical_space,
     const std::list<masd::dogen::coding::meta_model::technical_space>& output_technical_spaces,
@@ -582,51 +582,51 @@ void model::generation_markers(const std::unordered_map<std::string, boost::shar
     generation_markers_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_profile_template> >& model::variability_profile_templates() const {
+const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::profile_template> >& model::variability_profile_templates() const {
     return variability_profile_templates_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_profile_template> >& model::variability_profile_templates() {
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::profile_template> >& model::variability_profile_templates() {
     return variability_profile_templates_;
 }
 
-void model::variability_profile_templates(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_profile_template> >& v) {
+void model::variability_profile_templates(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::profile_template> >& v) {
     variability_profile_templates_ = v;
 }
 
-void model::variability_profile_templates(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_profile_template> >&& v) {
+void model::variability_profile_templates(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::profile_template> >&& v) {
     variability_profile_templates_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group> >& model::variability_feature_template_groups() const {
+const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> >& model::variability_feature_template_groups() const {
     return variability_feature_template_groups_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group> >& model::variability_feature_template_groups() {
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> >& model::variability_feature_template_groups() {
     return variability_feature_template_groups_;
 }
 
-void model::variability_feature_template_groups(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group> >& v) {
+void model::variability_feature_template_groups(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> >& v) {
     variability_feature_template_groups_ = v;
 }
 
-void model::variability_feature_template_groups(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group> >&& v) {
+void model::variability_feature_template_groups(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> >&& v) {
     variability_feature_template_groups_ = std::move(v);
 }
 
-const boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group_registrar>& model::variability_feature_template_group_registrar() const {
+const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>& model::variability_feature_template_group_registrar() const {
     return variability_feature_template_group_registrar_;
 }
 
-boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group_registrar>& model::variability_feature_template_group_registrar() {
+boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>& model::variability_feature_template_group_registrar() {
     return variability_feature_template_group_registrar_;
 }
 
-void model::variability_feature_template_group_registrar(const boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group_registrar>& v) {
+void model::variability_feature_template_group_registrar(const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>& v) {
     variability_feature_template_group_registrar_ = v;
 }
 
-void model::variability_feature_template_group_registrar(const boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group_registrar>&& v) {
+void model::variability_feature_template_group_registrar(const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>&& v) {
     variability_feature_template_group_registrar_ = std::move(v);
 }
 

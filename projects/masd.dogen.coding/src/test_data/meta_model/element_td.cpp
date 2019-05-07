@@ -38,14 +38,11 @@
 #include "masd.dogen.coding/test_data/meta_model/decoration/modeline_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/decoration/modeline_group_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/decoration/generation_marker_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/variability_profile_template_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/variability/profile_template_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/decoration/element_properties_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/variability/profile_template_new_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/variability_feature_template_group_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/variability/feature_template_group_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/local_archetype_location_properties_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/variability/feature_template_group_new_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/variability_feature_template_group_registrar_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/variability/feature_template_group_registrar_new_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/variability/feature_template_group_registrar_td.hpp"
 
 namespace {
 
@@ -169,39 +166,33 @@ populate(const unsigned int position, result_type& v) {
 
 element_generator::result_type*
 element_generator::create_ptr(const unsigned int position) {
-    if ((position % 17) == 0)
+    if ((position % 14) == 0)
         return masd::dogen::coding::meta_model::decoration::generation_marker_generator::create_ptr(position);
-    if ((position % 17) == 1)
+    if ((position % 14) == 1)
         return masd::dogen::coding::meta_model::decoration::licence_generator::create_ptr(position);
-    if ((position % 17) == 2)
+    if ((position % 14) == 2)
         return masd::dogen::coding::meta_model::decoration::modeline_generator::create_ptr(position);
-    if ((position % 17) == 3)
+    if ((position % 14) == 3)
         return masd::dogen::coding::meta_model::decoration::modeline_group_generator::create_ptr(position);
-    if ((position % 17) == 4)
+    if ((position % 14) == 4)
         return masd::dogen::coding::meta_model::enumeration_generator::create_ptr(position);
-    if ((position % 17) == 5)
+    if ((position % 14) == 5)
         return masd::dogen::coding::meta_model::exception_generator::create_ptr(position);
-    if ((position % 17) == 6)
+    if ((position % 14) == 6)
         return masd::dogen::coding::meta_model::module_generator::create_ptr(position);
-    if ((position % 17) == 7)
+    if ((position % 14) == 7)
         return masd::dogen::coding::meta_model::object_generator::create_ptr(position);
-    if ((position % 17) == 8)
+    if ((position % 14) == 8)
         return masd::dogen::coding::meta_model::object_template_generator::create_ptr(position);
-    if ((position % 17) == 9)
+    if ((position % 14) == 9)
         return masd::dogen::coding::meta_model::primitive_generator::create_ptr(position);
-    if ((position % 17) == 10)
-        return masd::dogen::coding::meta_model::variability::feature_template_group_new_generator::create_ptr(position);
-    if ((position % 17) == 11)
-        return masd::dogen::coding::meta_model::variability::feature_template_group_registrar_new_generator::create_ptr(position);
-    if ((position % 17) == 12)
-        return masd::dogen::coding::meta_model::variability::profile_template_new_generator::create_ptr(position);
-    if ((position % 17) == 13)
-        return masd::dogen::coding::meta_model::variability_feature_template_group_generator::create_ptr(position);
-    if ((position % 17) == 14)
-        return masd::dogen::coding::meta_model::variability_feature_template_group_registrar_generator::create_ptr(position);
-    if ((position % 17) == 15)
-        return masd::dogen::coding::meta_model::variability_profile_template_generator::create_ptr(position);
-    if ((position % 17) == 16)
+    if ((position % 14) == 10)
+        return masd::dogen::coding::meta_model::variability::feature_template_group_generator::create_ptr(position);
+    if ((position % 14) == 11)
+        return masd::dogen::coding::meta_model::variability::feature_template_group_registrar_generator::create_ptr(position);
+    if ((position % 14) == 12)
+        return masd::dogen::coding::meta_model::variability::profile_template_generator::create_ptr(position);
+    if ((position % 14) == 13)
         return masd::dogen::coding::meta_model::visitor_generator::create_ptr(position);
     return masd::dogen::coding::meta_model::builtin_generator::create_ptr(position);
 }

@@ -37,9 +37,9 @@
 #include "masd.dogen.coding/test_data/meta_model/extraction_properties_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/decoration/modeline_group_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/decoration/generation_marker_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/variability_profile_template_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/variability_feature_template_group_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/variability_feature_template_group_registrar_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/variability/profile_template_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/variability/feature_template_group_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/variability/feature_template_group_registrar_td.hpp"
 
 namespace {
 
@@ -315,54 +315,54 @@ std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_mode
     return r;
 }
 
-masd::dogen::coding::meta_model::variability_profile_template*
+masd::dogen::coding::meta_model::variability::profile_template*
 create_masd_dogen_coding_meta_model_variability_profile_template_ptr(const unsigned int position) {
-    return masd::dogen::coding::meta_model::variability_profile_template_generator::create_ptr(position);
+    return masd::dogen::coding::meta_model::variability::profile_template_generator::create_ptr(position);
 }
 
-boost::shared_ptr<masd::dogen::coding::meta_model::variability_profile_template>
+boost::shared_ptr<masd::dogen::coding::meta_model::variability::profile_template>
 create_boost_shared_ptr_masd_dogen_coding_meta_model_variability_profile_template(unsigned int position) {
-    boost::shared_ptr<masd::dogen::coding::meta_model::variability_profile_template> r(
+    boost::shared_ptr<masd::dogen::coding::meta_model::variability::profile_template> r(
         create_masd_dogen_coding_meta_model_variability_profile_template_ptr(position));
     return r;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_profile_template> > create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_variability_profile_template(unsigned int position) {
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_profile_template> > r;
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::profile_template> > create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_variability_profile_template(unsigned int position) {
+    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::profile_template> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_std_string(position + i), create_boost_shared_ptr_masd_dogen_coding_meta_model_variability_profile_template(position + i)));
     }
     return r;
 }
 
-masd::dogen::coding::meta_model::variability_feature_template_group*
+masd::dogen::coding::meta_model::variability::feature_template_group*
 create_masd_dogen_coding_meta_model_variability_feature_template_group_ptr(const unsigned int position) {
-    return masd::dogen::coding::meta_model::variability_feature_template_group_generator::create_ptr(position);
+    return masd::dogen::coding::meta_model::variability::feature_template_group_generator::create_ptr(position);
 }
 
-boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group>
+boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group>
 create_boost_shared_ptr_masd_dogen_coding_meta_model_variability_feature_template_group(unsigned int position) {
-    boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group> r(
+    boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> r(
         create_masd_dogen_coding_meta_model_variability_feature_template_group_ptr(position));
     return r;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group> > create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_variability_feature_template_group(unsigned int position) {
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group> > r;
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> > create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_variability_feature_template_group(unsigned int position) {
+    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_std_string(position + i), create_boost_shared_ptr_masd_dogen_coding_meta_model_variability_feature_template_group(position + i)));
     }
     return r;
 }
 
-masd::dogen::coding::meta_model::variability_feature_template_group_registrar*
+masd::dogen::coding::meta_model::variability::feature_template_group_registrar*
 create_masd_dogen_coding_meta_model_variability_feature_template_group_registrar_ptr(const unsigned int position) {
-    return masd::dogen::coding::meta_model::variability_feature_template_group_registrar_generator::create_ptr(position);
+    return masd::dogen::coding::meta_model::variability::feature_template_group_registrar_generator::create_ptr(position);
 }
 
-boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group_registrar>
+boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>
 create_boost_shared_ptr_masd_dogen_coding_meta_model_variability_feature_template_group_registrar(unsigned int position) {
-    boost::shared_ptr<masd::dogen::coding::meta_model::variability_feature_template_group_registrar> r(
+    boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar> r(
         create_masd_dogen_coding_meta_model_variability_feature_template_group_registrar_ptr(position));
     return r;
 }
