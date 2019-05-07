@@ -29,20 +29,27 @@
 #include "masd.dogen.coding/test_data/meta_model/modeline_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/exception_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/primitive_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/decoration_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/enumeration_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/origin_types_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/modeline_group_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/object_template_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/technical_space_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/generation_marker_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/decoration/licence_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/static_stereotypes_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/configuration_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/artefact_properties_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/decoration/modeline_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/decoration/modeline_group_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/decoration/generation_marker_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/variability_profile_template_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/decoration/element_properties_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/variability/profile_template_new_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/variability_feature_template_group_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/local_archetype_location_properties_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/variability/feature_template_group_new_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/variability_feature_template_group_registrar_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/variability/feature_template_group_registrar_new_td.hpp"
 
 namespace {
 
@@ -130,15 +137,15 @@ std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype
     return r;
 }
 
-masd::dogen::coding::meta_model::decoration
-create_masd_dogen_coding_meta_model_decoration(const unsigned int position) {
-    return masd::dogen::coding::meta_model::decoration_generator::create(position);
+masd::dogen::coding::meta_model::decoration::element_properties
+create_masd_dogen_coding_meta_model_decoration_element_properties(const unsigned int position) {
+    return masd::dogen::coding::meta_model::decoration::element_properties_generator::create(position);
 }
 
-boost::optional<masd::dogen::coding::meta_model::decoration>
-create_boost_optional_masd_dogen_coding_meta_model_decoration(unsigned int position) {
-    boost::optional<masd::dogen::coding::meta_model::decoration> r(
-        create_masd_dogen_coding_meta_model_decoration(position));
+boost::optional<masd::dogen::coding::meta_model::decoration::element_properties>
+create_boost_optional_masd_dogen_coding_meta_model_decoration_element_properties(unsigned int position) {
+    boost::optional<masd::dogen::coding::meta_model::decoration::element_properties> r(
+        create_masd_dogen_coding_meta_model_decoration_element_properties(position));
     return r;
 }
 
@@ -161,38 +168,52 @@ populate(const unsigned int position, result_type& v) {
     v.is_element_extension(create_bool(position + 10));
     v.artefact_properties(create_std_unordered_map_std_string_masd_dogen_coding_meta_model_artefact_properties(position + 11));
     v.archetype_location_properties(create_std_unordered_map_std_string_masd_dogen_coding_meta_model_local_archetype_location_properties(position + 12));
-    v.decoration(create_boost_optional_masd_dogen_coding_meta_model_decoration(position + 13));
+    v.decoration(create_boost_optional_masd_dogen_coding_meta_model_decoration_element_properties(position + 13));
 }
 
 element_generator::result_type*
 element_generator::create_ptr(const unsigned int position) {
-    if ((position % 14) == 0)
+    if ((position % 21) == 0)
+        return masd::dogen::coding::meta_model::decoration::generation_marker_generator::create_ptr(position);
+    if ((position % 21) == 1)
+        return masd::dogen::coding::meta_model::decoration::licence_generator::create_ptr(position);
+    if ((position % 21) == 2)
+        return masd::dogen::coding::meta_model::decoration::modeline_generator::create_ptr(position);
+    if ((position % 21) == 3)
+        return masd::dogen::coding::meta_model::decoration::modeline_group_generator::create_ptr(position);
+    if ((position % 21) == 4)
         return masd::dogen::coding::meta_model::enumeration_generator::create_ptr(position);
-    if ((position % 14) == 1)
+    if ((position % 21) == 5)
         return masd::dogen::coding::meta_model::exception_generator::create_ptr(position);
-    if ((position % 14) == 2)
+    if ((position % 21) == 6)
         return masd::dogen::coding::meta_model::generation_marker_generator::create_ptr(position);
-    if ((position % 14) == 3)
+    if ((position % 21) == 7)
         return masd::dogen::coding::meta_model::licence_generator::create_ptr(position);
-    if ((position % 14) == 4)
+    if ((position % 21) == 8)
         return masd::dogen::coding::meta_model::modeline_generator::create_ptr(position);
-    if ((position % 14) == 5)
+    if ((position % 21) == 9)
         return masd::dogen::coding::meta_model::modeline_group_generator::create_ptr(position);
-    if ((position % 14) == 6)
+    if ((position % 21) == 10)
         return masd::dogen::coding::meta_model::module_generator::create_ptr(position);
-    if ((position % 14) == 7)
+    if ((position % 21) == 11)
         return masd::dogen::coding::meta_model::object_generator::create_ptr(position);
-    if ((position % 14) == 8)
+    if ((position % 21) == 12)
         return masd::dogen::coding::meta_model::object_template_generator::create_ptr(position);
-    if ((position % 14) == 9)
+    if ((position % 21) == 13)
         return masd::dogen::coding::meta_model::primitive_generator::create_ptr(position);
-    if ((position % 14) == 10)
+    if ((position % 21) == 14)
+        return masd::dogen::coding::meta_model::variability::feature_template_group_new_generator::create_ptr(position);
+    if ((position % 21) == 15)
+        return masd::dogen::coding::meta_model::variability::feature_template_group_registrar_new_generator::create_ptr(position);
+    if ((position % 21) == 16)
+        return masd::dogen::coding::meta_model::variability::profile_template_new_generator::create_ptr(position);
+    if ((position % 21) == 17)
         return masd::dogen::coding::meta_model::variability_feature_template_group_generator::create_ptr(position);
-    if ((position % 14) == 11)
+    if ((position % 21) == 18)
         return masd::dogen::coding::meta_model::variability_feature_template_group_registrar_generator::create_ptr(position);
-    if ((position % 14) == 12)
+    if ((position % 21) == 19)
         return masd::dogen::coding::meta_model::variability_profile_template_generator::create_ptr(position);
-    if ((position % 14) == 13)
+    if ((position % 21) == 20)
         return masd::dogen::coding::meta_model::visitor_generator::create_ptr(position);
     return masd::dogen::coding::meta_model::builtin_generator::create_ptr(position);
 }

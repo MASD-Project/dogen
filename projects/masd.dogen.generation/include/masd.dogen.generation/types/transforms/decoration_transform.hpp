@@ -32,7 +32,7 @@
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
-#include "masd.dogen.coding/types/meta_model/decoration.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/element_properties.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/helpers/decoration_repository.hpp"
 #include "masd.dogen.generation/types/transforms/decoration_configuration.hpp"
@@ -102,7 +102,7 @@ private:
     static bool is_generatable(const coding::meta_model::name& meta_name);
 
 private:
-    static boost::optional<coding::meta_model::decoration>
+    static boost::optional<coding::meta_model::decoration::element_properties>
     make_decoration(const std::string& licence_text,
         const boost::shared_ptr<coding::meta_model::modeline> ml,
         const boost::shared_ptr<coding::meta_model::generation_marker> gm,
@@ -113,7 +113,7 @@ private:
     /**
      * @brief Creates the global decoration.
      */
-    static boost::optional<coding::meta_model::decoration>
+    static boost::optional<coding::meta_model::decoration::element_properties>
     make_global_decoration(const helpers::decoration_repository drp,
         const boost::optional<decoration_configuration> root_dc,
         const coding::meta_model::technical_space ts);
@@ -121,10 +121,11 @@ private:
     /**
      * @brief Creates a local decoration.
      */
-    static boost::optional<coding::meta_model::decoration>
+    static boost::optional<coding::meta_model::decoration::element_properties>
     make_local_decoration(const helpers::decoration_repository drp,
         const boost::optional<decoration_configuration> root_dc,
-        const boost::optional<coding::meta_model::decoration> global_decoration,
+        const boost::optional<
+        coding::meta_model::decoration::element_properties> global_decoration,
         const boost::optional<decoration_configuration> element_dc,
         const coding::meta_model::technical_space ts);
 

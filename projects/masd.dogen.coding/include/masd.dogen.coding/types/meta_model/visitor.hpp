@@ -62,7 +62,7 @@ public:
         const bool is_element_extension,
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
-        const boost::optional<masd::dogen::coding::meta_model::decoration>& decoration,
+        const boost::optional<masd::dogen::coding::meta_model::decoration::element_properties>& decoration,
         const std::list<masd::dogen::coding::meta_model::name>& visits,
         const boost::optional<masd::dogen::coding::meta_model::name>& parent);
 

@@ -132,7 +132,7 @@
         },
         {
           "name": "decoration",
-          "type": "boost::optional<decoration>",
+          "type": "boost::optional<masd::dogen::coding::meta_model::decoration::element_properties>",
           "documentation": "If set, decoration to be added to each generated file.\n"
         }
       ]
@@ -2149,23 +2149,6 @@
       ]
     },
     {
-      "name": "meta_model::decoration",
-      "documentation": "Decoration for this element.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "preamble",
-          "type": "std::string",
-          "documentation": "Preamble for all artefacts created from this element.\n\nThe preamble is located at the top of an artefact and includes elements such as a\nmodeline, licence,  copyrights, etc.\n"
-        },
-        {
-          "name": "postamble",
-          "type": "std::string",
-          "documentation": "Postamble for all artefacts created from this element.\n\nThe postamble is located at the bottom of an artefact and includes elements such\nas a modeline.\n"
-        }
-      ]
-    },
-    {
       "name": "transforms::modelines_transform",
       "stereotypes": [
         "masd::handcrafted::typeable"
@@ -2330,6 +2313,557 @@
         {
           "name": "template_groups",
           "type": "std::list<variability_feature_template_group>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::decoration",
+      "documentation": "Houses all of the meta-modeling elements and\nproperties related to decorations.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "meta_model::decoration::licence",
+      "documentation": "Represents legal licence for software projects.\n",
+      "stereotypes": [
+        "coding::meta_element",
+        "coding::non_testable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "short_form",
+          "type": "std::string",
+          "documentation": "Short version of the licence, for inclusion in project files.\n"
+        },
+        {
+          "name": "long_form",
+          "type": "std::string",
+          "documentation": "Long form of the licence text, suitable for generation of LICENCE files.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::meta_element",
+      "stereotypes": [
+        "masd::variability::profile_template"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.labels": "coding::meta_element"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generalization.parent",
+          "type": "",
+          "value": "masd::dogen::coding::meta_model::element",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance"
+          }
+        }
+      ]
+    },
+    {
+      "name": "meta_model::decoration::modeline_group",
+      "documentation": "Group of modelines, logically associated.\n\nFor example, one may choose to have a set of modelines for @e emacs , or for\n@e vi, etc.\n",
+      "stereotypes": [
+        "coding::meta_element",
+        "Container",
+        "coding::non_testable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "modelines",
+          "type": "std::list<boost::shared_ptr<modeline>>",
+          "documentation": "Modelines that make up the group.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::decoration::modeline",
+      "documentation": "Groups all the fields representing editor variables for emacs, vi, etc.\n\nA field is a key-value pair (KVP), where name is the first element and its value\nthe second.\n\nExample: -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-\n\nIn this particular case, both prefix and postfix are @e -*-; @e mode is the first\nfield name and its value is @e c++; the KVP separator is @e : and the field\nseparator is @e ;.\n",
+      "stereotypes": [
+        "coding::meta_element",
+        "coding::non_testable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "editor",
+          "type": "editor",
+          "documentation": "The modeline will use the syntax for this editor.\n"
+        },
+        {
+          "name": "location",
+          "type": "modeline_location",
+          "documentation": "Where to place the modeline.\n"
+        },
+        {
+          "name": "fields",
+          "type": "std::list<modeline_field>",
+          "documentation": "List of all the parameters in the preamble, in order of appearence.\n"
+        },
+        {
+          "name": "technical_space",
+          "type": "technical_space",
+          "documentation": "Technical space that this modeline targets.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::decoration::editor",
+      "documentation": "Supported editors for modelines.\n",
+      "stereotypes": [
+        "masd::enumeration",
+        "coding::non_testable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "emacs",
+          "type": "",
+          "documentation": "The emacs editor.\n"
+        },
+        {
+          "name": "vi",
+          "type": "",
+          "documentation": "The generic vi editor.\n"
+        },
+        {
+          "name": "vim",
+          "type": "",
+          "documentation": "The vi-like editor vim.\n"
+        },
+        {
+          "name": "ex",
+          "type": "",
+          "documentation": "The old ex editor.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::decoration::modeline_field",
+      "stereotypes": [
+        "coding::non_testable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "documentation": "Name of the field.\n"
+        },
+        {
+          "name": "value",
+          "type": "std::string",
+          "documentation": "Value of the field.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::decoration::modeline_location",
+      "documentation": "Location in the file to place the modeline.\n",
+      "stereotypes": [
+        "masd::enumeration",
+        "coding::non_testable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "top",
+          "type": "",
+          "documentation": "Very first line in file.\n"
+        },
+        {
+          "name": "bottom",
+          "type": "",
+          "documentation": "Very last line in file.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::decoration::generation_marker",
+      "documentation": "Properties of the \"generation marker\" to add to generated files.\n\nThese are also known as \"location strings\".\n",
+      "stereotypes": [
+        "coding::meta_element",
+        "coding::non_testable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "add_date_time",
+          "type": "bool",
+          "documentation": "If true, the location strings will include the date and time of generation.\n\nThis is not recomended for models that are generated often as it will trigger\nrebuilds for no good reason.\n"
+        },
+        {
+          "name": "add_dogen_version",
+          "type": "bool",
+          "documentation": "If true, adds the version of dogen used to generate the code.\n"
+        },
+        {
+          "name": "add_model_to_text_transform_details",
+          "type": "bool",
+          "documentation": "If true, adds information about the transform used to generate the file.\n"
+        },
+        {
+          "name": "add_warning",
+          "type": "bool",
+          "documentation": "If true, warns users that the file was code-generated.\n"
+        },
+        {
+          "name": "message",
+          "type": "std::string",
+          "documentation": "Custom message to add to each generated file.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::variability",
+      "documentation": "Houses all of the meta-modeling elements related\nto variability.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "meta_model::variability::profile_template_new",
+      "stereotypes": [
+        "coding::meta_element",
+        "coding::non_testable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "labels",
+          "type": "std::unordered_set<std::string>"
+        },
+        {
+          "name": "entries",
+          "type": "std::list<profile_template_entry_new>"
+        },
+        {
+          "name": "parents",
+          "type": "std::list<name>",
+          "documentation": "Parents of this profile template.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::variability::profile_template_entry_new",
+      "stereotypes": [
+        "Documentable",
+        "Configurable",
+        "Nameable",
+        "coding::non_testable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "key",
+          "type": "std::string"
+        },
+        {
+          "name": "value",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::variability::feature_template_group_new",
+      "stereotypes": [
+        "coding::meta_element",
+        "coding::non_testable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "feature_templates",
+          "type": "std::list<feature_template_new>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::variability::feature_template_new",
+      "stereotypes": [
+        "Documentable",
+        "Configurable",
+        "Nameable",
+        "coding::non_testable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "type",
+          "type": "std::string"
+        },
+        {
+          "name": "location",
+          "type": "archetypes::location"
+        },
+        {
+          "name": "template_kind",
+          "type": "variability::meta_model::template_kind"
+        },
+        {
+          "name": "binding_point",
+          "type": "variability::meta_model::binding_point"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::variability::feature_template_group_registrar_new",
+      "stereotypes": [
+        "coding::meta_element",
+        "coding::non_testable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "template_groups",
+          "type": "std::list<feature_template_group_new>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::orm",
+      "documentation": "Houses all of the properties related to ORM\nsupport in Dogen.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "meta_model::orm::model_properties",
+      "stereotypes": [
+        "Schemable",
+        "Caseable",
+        "coding::non_testable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "database_systems",
+          "type": "std::vector<database_system>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::orm::database_system",
+      "stereotypes": [
+        "masd::enumeration",
+        "masd::hashable",
+        "coding::non_testable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "mysql",
+          "type": ""
+        },
+        {
+          "name": "postgresql",
+          "type": ""
+        },
+        {
+          "name": "oracle",
+          "type": ""
+        },
+        {
+          "name": "sql_server",
+          "type": ""
+        },
+        {
+          "name": "sqlite",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "meta_model::orm::letter_case",
+      "stereotypes": [
+        "masd::enumeration",
+        "coding::non_testable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "upper_case",
+          "type": ""
+        },
+        {
+          "name": "lower_case",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "meta_model::orm::object_properties",
+      "stereotypes": [
+        "Schemable",
+        "Caseable",
+        "Mappeable",
+        "coding::non_testable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "table_name",
+          "type": "std::string",
+          "documentation": "Name of the table to map this element to.\n"
+        },
+        {
+          "name": "is_value",
+          "type": "bool",
+          "documentation": "If true, treat this object as a value type (e.g. simple type) rather than as an object.\n"
+        },
+        {
+          "name": "has_primary_key",
+          "type": "bool",
+          "documentation": "True if the object has an attribute marked as a primary key, false otherwise.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::orm::primitive_properties",
+      "stereotypes": [
+        "Schemable",
+        "Caseable",
+        "Mappeable",
+        "coding::non_testable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::orm::module_properties",
+      "stereotypes": [
+        "Schemable",
+        "coding::non_testable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::orm::attribute_properties",
+      "stereotypes": [
+        "coding::non_testable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "column_name",
+          "type": "std::string",
+          "documentation": "Name of the column to use for this attribute. If populated, will override the attribute name.\n"
+        },
+        {
+          "name": "is_primary_key",
+          "type": "bool",
+          "documentation": "If true, this attribute is a primary key for the relation.\n"
+        },
+        {
+          "name": "is_nullable",
+          "type": "boost::optional<bool>",
+          "documentation": "If true, the attribute can be NULL.\n"
+        },
+        {
+          "name": "type_overrides",
+          "type": "std::unordered_map<database_system, std::string>",
+          "documentation": "Override the default type for this attribute for a given database system.\n"
+        },
+        {
+          "name": "is_composite",
+          "type": "bool",
+          "documentation": "If true, the value of this attribute is a composite value.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::orm::Schemable",
+      "documentation": "Model element can belong to a relational database schema.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "schema_name",
+          "type": "std::string",
+          "documentation": "Name of the database schema in which to place this element.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::orm::Caseable",
+      "documentation": "The model element supports configuration related to casing.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "letter_case",
+          "type": "boost::optional<letter_case>",
+          "documentation": "What case to use for the database identifiers.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::orm::Mappeable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "generate_mapping",
+          "type": "bool",
+          "documentation": "If true, object-relational mapping will be generated for this element.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::decoration::element_properties",
+      "documentation": "Decoration for this element.\n",
+      "stereotypes": [
+        "coding::non_testable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "preamble",
+          "type": "std::string",
+          "documentation": "Preamble for all artefacts created from this element.\n\nThe preamble is located at the top of an artefact and includes elements such as a\nmodeline, licence,  copyrights, etc.\n"
+        },
+        {
+          "name": "postamble",
+          "type": "std::string",
+          "documentation": "Postamble for all artefacts created from this element.\n\nThe postamble is located at the bottom of an artefact and includes elements such\nas a modeline.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::non_testable",
+      "stereotypes": [
+        "masd::variability::profile_template"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.labels": "coding::non_testable"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.cpp.tests.enabled",
+          "type": "",
+          "value": "false",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "instance"
+          }
         }
       ]
     }

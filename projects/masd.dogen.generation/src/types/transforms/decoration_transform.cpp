@@ -30,7 +30,7 @@
 #include "masd.dogen.coding/types/meta_model/licence.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
-#include "masd.dogen.coding/io/meta_model/decoration_io.hpp"
+#include "masd.dogen.coding/io/meta_model/decoration/element_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/hash/meta_model/technical_space_hash.hpp"
 #include "masd.dogen.generation/types/traits.hpp"
@@ -134,7 +134,7 @@ is_generatable(const coding::meta_model::name& meta_name) {
         id != gmn.qualified().dot();
 }
 
-boost::optional<coding::meta_model::decoration>
+boost::optional<coding::meta_model::decoration::element_properties>
 decoration_transform::make_decoration(const std::string& licence_text,
     const boost::shared_ptr<coding::meta_model::modeline> ml,
     const boost::shared_ptr<coding::meta_model::generation_marker> gm,
@@ -175,7 +175,7 @@ decoration_transform::make_decoration(const std::string& licence_text,
     else if (ts == technical_space::csharp)
         df.format_postamble(postamble_stream, comment_style::csharp_style, ml);
 
-    coding::meta_model::decoration r;
+    coding::meta_model::decoration::element_properties r;
     r.preamble(preamble_stream.str());
     r.postamble(postamble_stream.str());
     return r;
@@ -247,7 +247,8 @@ get_generation_marker(const helpers::decoration_repository drp,
     return i->second;
 }
 
-boost::optional<coding::meta_model::decoration> decoration_transform::
+boost::optional<coding::meta_model::decoration::element_properties>
+decoration_transform::
 make_global_decoration(const helpers::decoration_repository drp,
     const boost::optional<decoration_configuration> root_dc,
     const coding::meta_model::technical_space ts) {
@@ -255,8 +256,10 @@ make_global_decoration(const helpers::decoration_repository drp,
      * If there is no decoration configuration there shall be no
      * decoration either.
      */
+    typedef boost::optional<
+        coding::meta_model::decoration::element_properties> empty_decorations;
     if (!root_dc)
-        return boost::optional<coding::meta_model::decoration>();
+        return empty_decorations();
 
     /*
      * If the user did not specifically enable decoration in the
@@ -270,7 +273,7 @@ make_global_decoration(const helpers::decoration_repository drp,
      */
     const auto& dc(*root_dc);
     if (!dc.enabled() || !(*dc.enabled()))
-        return boost::optional<coding::meta_model::decoration>();
+        return empty_decorations();
 
     /*
      * Obtain all decoration inputs and create the decoration.
@@ -284,11 +287,12 @@ make_global_decoration(const helpers::decoration_repository drp,
     return r;
 }
 
-boost::optional<coding::meta_model::decoration>
+boost::optional<coding::meta_model::decoration::element_properties>
 decoration_transform::make_local_decoration(
     const helpers::decoration_repository drp,
     const boost::optional<decoration_configuration> root_dc,
-    const boost::optional<coding::meta_model::decoration> global_decoration,
+    const boost::optional<coding::meta_model::decoration::element_properties>
+    global_decoration,
     const boost::optional<decoration_configuration> element_dc,
     const coding::meta_model::technical_space ts) {
 
@@ -320,7 +324,8 @@ decoration_transform::make_local_decoration(
                                  << " enabled_locally: " << enabled_locally
                                  << " disabled_locally: " << disabled_locally
                                  << " enabled_globally: " << enabled_globally;
-        return boost::optional<coding::meta_model::decoration>();
+        return boost::optional<
+            coding::meta_model::decoration::element_properties>();
     }
 
     /*
@@ -404,7 +409,8 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
      */
     const auto mts(m.output_technical_space());
     std::unordered_map<coding::meta_model::technical_space,
-                       boost::optional<coding::meta_model::decoration>
+                       boost::optional<
+                           coding::meta_model::decoration::element_properties>
                        > root_decorations;
     BOOST_LOG_SEV(lg, trace) << "Generating all global decorations";
     for (const auto ts : m.all_technical_spaces()) {

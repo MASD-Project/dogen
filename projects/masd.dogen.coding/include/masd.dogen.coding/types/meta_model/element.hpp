@@ -33,13 +33,13 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.coding/types/meta_model/name.hpp"
-#include "masd.dogen.coding/types/meta_model/decoration.hpp"
 #include "masd.dogen.coding/types/meta_model/origin_types.hpp"
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/types/meta_model/static_stereotypes.hpp"
 #include "masd.dogen.coding/types/meta_model/artefact_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor_fwd.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/element_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/local_archetype_location_properties.hpp"
 
 namespace masd::dogen::coding::meta_model {
@@ -78,7 +78,7 @@ public:
         const bool is_element_extension,
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
-        const boost::optional<masd::dogen::coding::meta_model::decoration>& decoration);
+        const boost::optional<masd::dogen::coding::meta_model::decoration::element_properties>& decoration);
 
 public:
     virtual void accept(const element_visitor& v) const = 0;
@@ -215,10 +215,10 @@ public:
      * @brief If set, decoration to be added to each generated file.
      */
     /**@{*/
-    const boost::optional<masd::dogen::coding::meta_model::decoration>& decoration() const;
-    boost::optional<masd::dogen::coding::meta_model::decoration>& decoration();
-    void decoration(const boost::optional<masd::dogen::coding::meta_model::decoration>& v);
-    void decoration(const boost::optional<masd::dogen::coding::meta_model::decoration>&& v);
+    const boost::optional<masd::dogen::coding::meta_model::decoration::element_properties>& decoration() const;
+    boost::optional<masd::dogen::coding::meta_model::decoration::element_properties>& decoration();
+    void decoration(const boost::optional<masd::dogen::coding::meta_model::decoration::element_properties>& v);
+    void decoration(const boost::optional<masd::dogen::coding::meta_model::decoration::element_properties>&& v);
     /**@}*/
 
 protected:
@@ -243,7 +243,7 @@ private:
     bool is_element_extension_;
     std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties> artefact_properties_;
     std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties> archetype_location_properties_;
-    boost::optional<masd::dogen::coding::meta_model::decoration> decoration_;
+    boost::optional<masd::dogen::coding::meta_model::decoration::element_properties> decoration_;
 };
 
 inline element::~element() noexcept { }

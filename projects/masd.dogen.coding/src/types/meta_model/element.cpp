@@ -23,13 +23,13 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/io/meta_model/decoration_io.hpp"
 #include "masd.dogen.coding/io/meta_model/origin_types_io.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_io.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/io/meta_model/artefact_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/decoration/element_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/local_archetype_location_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -131,7 +131,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::decoration>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::decoration::element_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -182,7 +182,7 @@ element::element(
     const bool is_element_extension,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
-    const boost::optional<masd::dogen::coding::meta_model::decoration>& decoration)
+    const boost::optional<masd::dogen::coding::meta_model::decoration::element_properties>& decoration)
     : name_(name),
       documentation_(documentation),
       origin_type_(origin_type),
@@ -435,19 +435,19 @@ void element::archetype_location_properties(const std::unordered_map<std::string
     archetype_location_properties_ = std::move(v);
 }
 
-const boost::optional<masd::dogen::coding::meta_model::decoration>& element::decoration() const {
+const boost::optional<masd::dogen::coding::meta_model::decoration::element_properties>& element::decoration() const {
     return decoration_;
 }
 
-boost::optional<masd::dogen::coding::meta_model::decoration>& element::decoration() {
+boost::optional<masd::dogen::coding::meta_model::decoration::element_properties>& element::decoration() {
     return decoration_;
 }
 
-void element::decoration(const boost::optional<masd::dogen::coding::meta_model::decoration>& v) {
+void element::decoration(const boost::optional<masd::dogen::coding::meta_model::decoration::element_properties>& v) {
     decoration_ = v;
 }
 
-void element::decoration(const boost::optional<masd::dogen::coding::meta_model::decoration>&& v) {
+void element::decoration(const boost::optional<masd::dogen::coding::meta_model::decoration::element_properties>&& v) {
     decoration_ = std::move(v);
 }
 
