@@ -10,23 +10,25 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-06 Mon 17:51]
-| <75>                                                   |        |      |      |       |
-| Headline                                               | Time   |      |      |     % |
-|--------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                           | *4:49* |      |      | 100.0 |
-|--------------------------------------------------------+--------+------+------+-------|
-| Stories                                                | 4:49   |      |      | 100.0 |
-| Active                                                 |        | 4:49 |      | 100.0 |
-| Edit release notes for previous sprint                 |        |      | 2:30 |  51.9 |
-| Create a video demo for the previous sprint's features |        |      | 2:00 |  41.5 |
-| Sprint and product backlog grooming                    |        |      | 0:19 |   6.6 |
+#+CAPTION: Clock summary at [2019-05-07 Tue 09:55]
+| <75>                                                       |        |      |      |       |
+| Headline                                                   | Time   |      |      |     % |
+|------------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                               | *5:41* |      |      | 100.0 |
+|------------------------------------------------------------+--------+------+------+-------|
+| Stories                                                    | 5:41   |      |      | 100.0 |
+| Active                                                     |        | 5:41 |      | 100.0 |
+| Edit release notes for previous sprint                     |        |      | 2:41 |  47.2 |
+| Create a video demo for the previous sprint's features     |        |      | 2:11 |  38.4 |
+| Sprint and product backlog grooming                        |        |      | 0:19 |   5.6 |
+| Defining profiles directly on a target model does not work |        |      | 0:30 |   8.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2019-05-06 Mon 17:51]
     :LOGBOOK:
+    CLOCK: [2019-05-06 Mon 18:01]--[2019-05-06 Mon 18:12] =>  0:11
     CLOCK: [2019-05-06 Mon 12:24]--[2019-05-06 Mon 12:31] =>  0:07
     CLOCK: [2019-05-06 Mon 12:16]--[2019-05-06 Mon 12:23] =>  0:07
     CLOCK: [2019-05-06 Mon 10:34]--[2019-05-06 Mon 12:15] =>  1:41
@@ -38,87 +40,119 @@ Add github release notes for previous sprint.
 Title: Dogen v1.0.16, "São Pedro"
 
 #+begin_src markdown
-![Paróquia de São Pedro, Moçamedes](https://mw2.google.com/mw-panoramio/photos/medium/8148285.jpg)
+![Paróquia de São Pedro, Moçamedes](https://2.bp.blogspot.com/-P8MHQArl_fA/VzCYm9epI0I/AAAAAAAAl1g/CPkRiD5ZhGwgcqjTQoxEyRAcQNTHYuz2QCLcB/s1600/Igreja%2BS%2BPedro%2BNamibe.jpg)
 
-_Joaquim Alberto da Silva ("Quinzinho") playing for the Angolan national team, the Palancas Negras. (C) 2001 Getty Images._
-
-# Prelude
-
-This release is named in memory of "Quinzinho", who [scored Angola's first goal in the Africa Cup of Nations](https://www.bbc.co.uk/sport/football/47987342). _Xala Kiambote, Guerreiro._
+_Paróquia de São Pedro, Moçamedes, Namibe. Do [blog de Maria Jardim](http://mossamedes-do-antigamente.blogspot.com/2016/05/a-igreja-de-s-pedro-de-mocamedes-namibe.html)._
 
 # Introduction
 
-The key objective this sprint was to make inroads with regards to variability management in Dogen models [1]. Readers won't fail to notice that we've started to get more and more technical as we try to align Dogen with the PhD thesis. This trend is only set to increase, because we are approaching the business end of the research project. Also, as expected, the technical work was much harder than expected (if you pardon the pun), so we didn't get as far as exposing variability management to the end user. We are now hoping to reach this significant milestone next sprint.
+This sprint achieved the long standing objective of moving profiles into the meta-model. We've also continued the work on cleaning up models to better align them to [MDE](https://en.wikipedia.org/wiki/Model-driven_engineering) terminology.
 
 # User visible changes
 
-There were only a few minor user visible changes:
+This section covers stories that affect end users. The sprint demo provides a quick demonstration of the user visible changes, whereas the below sections provide more detail.
 
-- a rather dodgy bug in C# code generation was found and fixed, whereby we somehow were not generating code for C# models. How this was missed is a veritable comedy of errors, from the way we had designed the system tests to the way diffs were being made. Suffices to say that many lessons were learned and a tightening of the process was put into place to avoid this particular problem from happening again.
-- CMake files now use the correct tab variable for emacs, i.e. ```cmake-tab-width``` instead of ```tab-width```.
-- CMake files are no longer hard-coded to generate static libraries. You can generate a shared library by using the CMake variable ```-DBUILD_SHARED_LIBS=ON```. This change was also made to the Dogen codebase itself, but due to a problem with the Boost.Log build supplied by vcpkg, we can't yet build Dogen using shared libraries [2].
+[![Sprint 1.0.16 Demo](https://img.youtube.com/vi/3XrHSFkdVps/0.jpg)](https://youtu.be/3XrHSFkdVps)
+
+## Profiles as meta-model elements
+
+The key story of the sprint was to move variability profiles into the meta-model. For those less familiar with Dogen's variability profiles, the basic idea is that you can create "canned" sets of configurations and then apply them to modeling elements via UML stereotypes.
+
+We had alread made decorations metamodel elements in [sprint 14](https://github.com/MASD-Project/dogen/releases/tag/v1.0.14); now that we are also treating profiles as a regular meta-model elements,  we have the core features in place to allow users to start defining [SPLs](https://en.wikipedia.org/wiki/Software_product_line). You can create an SPL by creating a shared model containing all of the required configuration such as profiles, decorations etc and then make use of these in the models that make up the product line. As an example, in Dogen we created the ["profiles" model](https://github.com/MASD-Project/dogen/tree/master/projects/masd.dogen.models/dia) ```masd.dogen.profiles.dia```.
+
+![Dogen's Profiles Model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/profiles_model.png)
+
+The name is not exactly ideal as the model can contain more than just profiles, so we are still searching for a more fitting denomination. The fundamental idea is clear, though: to have a central place where all the configuration of the product is stored, and use to create "a language" at the product level, imbued with product specific meaning. For example, one could define profiles such as ```hashable```, ```serialisable``` and so forth and then configure these with specific features. ```hashable``` could be mapped to the ```std::hash``` facet, serialisable to the Boost Serialisation facet and so forth. All of the mapping and naming is defined by the end user. In Dogen we define ```masd::pretty_printable``` as follows (using JSON notation):
+
+```json
+    {
+      "name": "composable::pretty_printable",
+      "parents": [
+        "composable::code_generated"
+      ],
+      "documentation": "The element has the ability to dump itself to a stream.\n",
+      "stereotypes": [
+        "masd::variability::profile_template"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.labels": "masd::pretty_printable"
+      },
+      "attributes": [
+        {
+          "name": "masd.generation.cpp.io.enabled",
+          "type": "",
+          "value": "true",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "instance"
+          }
+        }
+      ]
+    },
+```
+
+Any modeling element with the stereotype of ```masd::pretty_printable``` will now have the ability to dump itself into a stream via the ```masd.generation.cpp.io``` facet.
+
+There are a couple of caveats to this feature. Firstly, we are yet to find a good domain based name for what are are calling thus far "profiles". The name is somewhat confusing, because Dogen's variability profiles are entirely unrelated to UML profiles. Our search through the literature continues, so in the future it is entirely possible that profiles will be renamed to a more fitting term.
+
+Secondly, this release only adds the _foundational_ infrastructure for SPL. Many domain elements still need to be added to complete the SPL story, such as the concept of a product, build systems, etc. However, these features are already useful enough, and simplified Dogen's internals considerably.
+
+## Removal of "stand-alone" weaving
+
+In the past it was possible to instantiate stitch templates directly from Dogen, using the weaving command, e.g.:
+
+```
+$ masd.dogen.cli weave -t model.dia
+```
+
+However, due to the changes done in variability management, stitch templates are no longer instantiable without going through the entire processing pipeline for models. As such, the feature no longer makes sense, so it was removed.
+
+The long term plan is to remove variability support from stitch templates; once that is in place, we can add weaving once more - though its usefulness in this fashion is somewhat debatable. We shall await for concrete use cases before working on this feature; for now, the story was moved to the bottom of the [product backlog](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org#consider-adding-weaving-support-as-a-command).
 
 # Development Matters
 
-In this section we cover topics that are mainly of interest if you follow Dogen development, such as details on internal stories that consumed significant resources, important events, etc. As usual, for all the gory details of the work carried out this sprint, see the [sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_15.org).
+In this section we cover topics that are mainly of interest if you follow Dogen development, such as details on internal stories that consumed significant resources, important events, etc. As usual, for all the gory details of the work carried out this sprint, see the [sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_16.org).
 
 ## Significant Internal Stories
 
-The bulk of the work was taken by redesigning the annotations model. We have spent some time re-reading the [MDE](https://en.wikipedia.org/wiki/Model-driven_engineering) theory on this subject to make sure we have aligned all terminology with the terms used by domain experts. The final result was the creation of the variability model, composed of a number of transforms. This model has not yet been fully implemented and integrated with the core.
-
-A second significant story this sprint was the reactivation of the boilerplate tests, which was a mop-up effort left from the previous sprint.
+Rather unusually, this sprint was _extremely_ delivery focused, so there were no significant internal stories to speak of.
 
 ## Resourcing
 
-Over 54% of the sprint was taken by stories related to its mission statement. We spent around 16% of the total time on process, with just shy of 10% for backlog grooming, and the remainder related to release notes and demo. We've also had a number of interesting spikes, which were rather expensive:
+Amazingly, over 87% of the total ask was taken by stories directly related to the sprint's mission -  probably a first in Dogen's development history. The remaining 13% of the time was spent as follows. Release related activities for the previous sprint cost around 5%, including activities such editing the release notes and creating the demo. Backlog grooming was shy of 5%, and around 1.3% of the total ask was spent on reading the academic literature on variability. Spikes had a cost of less than 2%, with the nursing of builds taking 0.8% and Emacs related work only 0.4%. Overall, it was an extremely efficient sprint.
 
-- 10% of the time was spent changing our Emacs configuration. On the plus side, we are now using [clangd](https://clang.llvm.org/extra/clangd/index.html) instead of [cquery](https://github.com/cquery-project/cquery), whose development has slowed considerably. Given that Google and many other large enterprises contribute to clangd's development, it seems like the right decision. As a bonus, we've also updated clang to v8 - though, sadly, not via Debian's package management, as it is still only in unstable. Let's hope it hits testing soon.
-- the bug with C# code generation cost us 5.3% of the total ask.
-- we've had a number of issues with our nightly builds, costing us 2.5% of the total ask.
-
-The complete story breakdown is as follows:
-
-![Story Pie Chart](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/agile/v1/sprint_14_pie_chart.jpg)
+![Story Pie Chart](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_16_pie_chart.jpg)
 
 ## Planning
 
-Due to the variability work being harder than expected, the project plan was bumped back by a sprint. At the end of sprint 15, the plan looks like this:
+The plan is proceeding as expected. At the end of sprint 16, the plan looks like this:
 
-![Project Plan](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/agile/v1/sprint_14_project_plan.png)
+![Project Plan](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_16_project_plan.png)
 
-![Resource Allocation Graph](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/agile/v1/sprint_14_resource_allocation_graph.png)
+![Resource Allocation Graph](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_16_resource_allocation_graph.png)
 
 # Next Sprint
 
-The focus on Sprint 15 is to finish the variability model, and replace the legacy classes with the new, transform-based approach. If all goes according to plan, this will finally mean we can expose our variability profiles to end users.
+The focus on Sprint 17 is to address the other side of variability: the definition of new features. At present we are manually creating features, involving both the creation of the feature definition on its own JSON file and then the source code to implement the reading of the feature from a modeling element. The vision is that the code generator should create code for all of this, off the back of a modeling element (say ```masd::feature_group```). Work has started on this in sprint 16, so hopefully it will be completed in sprint 17.
 
 # Binaries
 
-Please note that we are now shipping clang binaries on Linux rather than the GCC-generated ones. Due to the current refactorings, our GCC builds are taking too long to complete. This does mean that we are now using clang for all our builds.
-
 You can download binaries from [Bintray](https://bintray.com/masd-project/main/dogen) for OSX, Linux and Windows (all 64-bit):
 
-- [dogen_1.0.15_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.15/dogen_1.0.15_amd64-applications.deb)
-- [dogen-1.0.15-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.15/dogen-1.0.15-Darwin-x86_64.dmg)
-- [dogen-1.0.15-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/DOGEN-1.0.15-Windows-AMD64.msi)
+- [dogen_1.0.16_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.16/dogen_1.0.16_amd64-applications.deb)
+- [dogen-1.0.16-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.16/DOGEN-1.0.16-Darwin-x86_64.dmg)
+- [dogen-1.0.16-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/DOGEN-1.0.16-Windows-AMD64.msi)
 
-For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
-
-Happy Modeling!
-
-# Footnotes
-
-[1]  If this is not a topic you are familiar with and you'd like to understand it better, JM Jézéquel's review paper on the subject is probably of interest: ["Model-Driven Engineering for Software Product Lines"](http://downloads.hindawi.com/journals/isrn.software.engineering/2012/670803.pdf).
-[2] [vcpkg #6148: Errors building shared library due to Boost Log and PIC](https://github.com/Microsoft/vcpkg/issues/6148)
-#+end_src
-
-- [[https://twitter.com/MarcoCraveiro/status/1115302519067090947][Tweet]]
-- [[https://www.linkedin.com/feed/update/urn:li:activity:6526115847252041728][LinkedIn]]
+For all other architectures and/or operative systems, you will need to build Dogen from source. tps://twitter.com/MarcoCraveiro/status/1125447976418193412][twitter]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6531213559836270592][LinkedIn]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
 *** COMPLETED Create a video demo for the previous sprint's features  :story:
     CLOSED: [2019-05-06 Mon 17:51]
     :LOGBOOK:
+    CLOCK: [2019-05-06 Mon 17:49]--[2019-05-06 Mon 18:00] =>  0:11
     CLOCK: [2019-05-06 Mon 15:48]--[2019-05-06 Mon 17:48] =>  2:00
     :END:
 
@@ -131,7 +165,11 @@ Time spent creating the demo.
 
 Updates to sprint and product backlog.
 
-*** Defining profiles directly on a target model does not work        :story:
+*** COMPLETED Defining profiles directly on a target model does not work :story:
+    CLOSED: [2019-05-07 Tue 09:55]
+    :LOGBOOK:
+    CLOCK: [2019-05-07 Tue 09:25]--[2019-05-07 Tue 09:55] =>  0:30
+    :END:
 
 We seem to have made some mistake when processing profile templates:
 when we define them directly on a target model we fail with an
@@ -139,7 +177,22 @@ error. The problem is probably to do with the fact that we do not set
 the meta-model information on these new types. We should try something
 similar for all meta-types such as decorations, etc.
 
-***  Read variability papers                                          :story:
+*** Create namespaces for model elements                              :story:
+
+At present we have a flat namespace for all elements in coding. This
+had served us well up to recently, but with the proliferation of
+metamodel elements, it is becoming a bit unwieldy. This will get a lot
+worse once we move the fabric types. Its probably best if we partition
+elements into their own namespaces, such as:
+
+- decoration
+- variability
+- cpp
+- csharp
+- build
+- etc.
+
+*** Read variability papers                                           :story:
 
 Time spent reading the literature on variability.
 
