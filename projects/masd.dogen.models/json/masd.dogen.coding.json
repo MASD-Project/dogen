@@ -690,7 +690,7 @@
     {
       "name": "meta_model::elements_traversal",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "masd::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
