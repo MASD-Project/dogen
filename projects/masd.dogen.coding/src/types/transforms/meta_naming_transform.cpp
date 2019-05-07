@@ -25,6 +25,9 @@
 #include "masd.dogen.coding/types/meta_model/modeline.hpp"
 #include "masd.dogen.coding/types/meta_model/modeline_group.hpp"
 #include "masd.dogen.coding/types/meta_model/generation_marker.hpp"
+#include "masd.dogen.coding/types/meta_model/variability_profile_template.hpp"
+#include "masd.dogen.coding/types/meta_model/variability_feature_template_group_registrar.hpp"
+#include "masd.dogen.coding/types/meta_model/variability_feature_template_group.hpp"
 #include "masd.dogen.coding/types/meta_model/elements_traversal.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
@@ -43,7 +46,7 @@ auto lg(logger_factory(transform_id));
 
 namespace masd::dogen::coding::transforms {
 
-using helpers::meta_name_factory;
+using mnf = helpers::meta_name_factory;
 
 class updater {
 public:
@@ -55,63 +58,81 @@ public:
     }
 
     void operator()(meta_model::module& m) {
-        static const auto n(meta_name_factory::make_module_name());
+        static const auto n(mnf::make_module_name());
         m.meta_name(n);
     }
 
     void operator()(meta_model::object_template& ot) {
-        static const auto n(meta_name_factory::make_object_template_name());
+        static const auto n(mnf::make_object_template_name());
         ot.meta_name(n);
     }
 
     void operator()(meta_model::builtin& b) {
-        static const auto n(meta_name_factory::make_builtin_name());
+        static const auto n(mnf::make_builtin_name());
         b.meta_name(n);
     }
 
     void operator()(meta_model::enumeration& e) {
-        static const auto n(meta_name_factory::make_enumeration_name());
+        static const auto n(mnf::make_enumeration_name());
         e.meta_name(n);
     }
 
     void operator()(meta_model::primitive& p) {
-        static const auto n(meta_name_factory::make_primitive_name());
+        static const auto n(mnf::make_primitive_name());
         p.meta_name(n);
     }
 
     void operator()(meta_model::object& o) {
-        static const auto n(meta_name_factory::make_object_name());
+        static const auto n(mnf::make_object_name());
         o.meta_name(n);
     }
 
     void operator()(meta_model::exception& e) {
-        static const auto n(meta_name_factory::make_exception_name());
+        static const auto n(mnf::make_exception_name());
         e.meta_name(n);
     }
 
     void operator()(meta_model::visitor& v) {
-        static const auto n(meta_name_factory::make_visitor_name());
+        static const auto n(mnf::make_visitor_name());
         v.meta_name(n);
     }
 
     void operator()(meta_model::licence& l) {
-        static const auto n(meta_name_factory::make_licence_name());
+        static const auto n(mnf::make_licence_name());
         l.meta_name(n);
     }
 
     void operator()(meta_model::modeline& ml) {
-        static const auto n(meta_name_factory::make_modeline_name());
+        static const auto n(mnf::make_modeline_name());
         ml.meta_name(n);
     }
 
     void operator()(meta_model::modeline_group& mg) {
-        static const auto n(meta_name_factory::make_modeline_group_name());
+        static const auto n(mnf::make_modeline_group_name());
         mg.meta_name(n);
     }
 
     void operator()(meta_model::generation_marker& gm) {
-        static const auto n(meta_name_factory::make_generation_marker_name());
+        static const auto n(mnf::make_generation_marker_name());
         gm.meta_name(n);
+    }
+
+    void operator()(meta_model::variability_profile_template& vpt) {
+        static const auto n(mnf::make_variability_profile_template_name());
+        vpt.meta_name(n);
+    }
+
+    void operator()(meta_model::variability_feature_template_group& vftg) {
+        static const auto
+            n(mnf::make_variability_feature_template_group_name());
+        vftg.meta_name(n);
+    }
+
+    void operator()(meta_model::
+        variability_feature_template_group_registrar& vftgr) {
+        static const auto
+            n(mnf::make_variability_feature_template_group_registrar_name());
+        vftgr.meta_name(n);
     }
 };
 
@@ -120,7 +141,7 @@ apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "meta-naming transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    m.meta_name(meta_name_factory::make_model_name());
+    m.meta_name(mnf::make_model_name());
 
     updater u;
     meta_model::elements_traversal(m, u);

@@ -50,6 +50,10 @@ public:
     static meta_model::name make_modeline_name();
     static meta_model::name make_modeline_group_name();
     static meta_model::name make_generation_marker_name();
+    static meta_model::name make_variability_profile_template_name();
+    static meta_model::name make_variability_feature_template_group_name();
+    static meta_model::name
+    make_variability_feature_template_group_registrar_name();
 };
 
 }

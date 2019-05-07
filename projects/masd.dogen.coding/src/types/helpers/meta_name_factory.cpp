@@ -104,4 +104,22 @@ meta_model::name meta_name_factory::make_generation_marker_name() {
     return r;
 }
 
+meta_model::name meta_name_factory::make_variability_profile_template_name() {
+    static const auto r(make_name("variability_profile_template"));
+    return r;
+}
+
+meta_model::name meta_name_factory::
+make_variability_feature_template_group_name() {
+    static const auto r(make_name("variability_feature_template_group"));
+    return r;
+}
+
+meta_model::name meta_name_factory::
+make_variability_feature_template_group_registrar_name() {
+    static const auto r(
+        make_name("variability_feature_template_group_registrar"));
+    return r;
+}
+
 }
