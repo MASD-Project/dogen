@@ -2387,6 +2387,241 @@
           "documentation": "Postamble for all artefacts created from this element.\n\nThe postamble is located at the bottom of an artefact and includes elements such\nas a modeline.\n"
         }
       ]
+    },
+    {
+      "name": "meta_model::structural",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "meta_model::structural::object_template",
+      "documentation": "Represents a structural template for masd objects.\n",
+      "stereotypes": [
+        "coding::meta_element",
+        "Stateful"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "parents",
+          "type": "std::list<name>",
+          "documentation": "List of object templates that this object template inherits from, if any.\n"
+        },
+        {
+          "name": "is_child",
+          "type": "bool",
+          "documentation": "If true, the object template has at least one parent.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::structural::object",
+      "documentation": "Representation of the class notion in the OOP paradigm.\n\nThe @e object is equivalent to a meta-class, but we decided against this\nname because all elements should also have the prefix meta - after all, coding\nis ameta-model. Since the word class cannot be used in c++ to name types, we\ndecided instead to use the word object.\n",
+      "stereotypes": [
+        "coding::meta_element",
+        "Stateful",
+        "Relatable",
+        "Parameterisable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "is_associative_container",
+          "type": "bool",
+          "documentation": "Object is an associative container.\n"
+        },
+        {
+          "name": "object_templates",
+          "type": "std::list<name>",
+          "documentation": "All object templates associated with this object.\n"
+        },
+        {
+          "name": "associative_container_keys",
+          "type": "std::list<name>",
+          "documentation": "Elements that are keys in an associative container.\n"
+        },
+        {
+          "name": "provides_opaqueness",
+          "type": "bool",
+          "documentation": "If true, this type provides opaqueness to any type parameters it may have.\n"
+        },
+        {
+          "name": "can_be_primitive_underlier",
+          "type": "bool",
+          "documentation": "If true, this object can be the underlying element of a primitive.\n"
+        },
+        {
+          "name": "orm_properties",
+          "type": "boost::optional<masd::dogen::coding::meta_model::orm::object_properties>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::structural::builtin",
+      "documentation": "Represents a value type that is built-in at the hardware level.\n",
+      "stereotypes": [
+        "coding::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "is_default_enumeration_type",
+          "type": "bool",
+          "documentation": "If true, this built-in is the default type to be used on enumerations.\n"
+        },
+        {
+          "name": "is_floating_point",
+          "type": "bool",
+          "documentation": "If true, this built-in represents a floating point number.\n"
+        },
+        {
+          "name": "can_be_enumeration_underlier",
+          "type": "bool",
+          "documentation": "If true, this element can be the underlying element of an enumeration.\n"
+        },
+        {
+          "name": "can_be_primitive_underlier",
+          "type": "bool",
+          "documentation": "If true, this built-in can be the underlying element of a primitive.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::structural::exception",
+      "documentation": "Represents an exception which can be thrown.\n",
+      "stereotypes": [
+        "coding::meta_element"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::structural::visitor",
+      "stereotypes": [
+        "coding::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "visits",
+          "type": "std::list<name>",
+          "documentation": "Elements that are visitable by the visitor.\n"
+        },
+        {
+          "name": "parent",
+          "type": "boost::optional<name>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::structural::primitive",
+      "documentation": "Defines an element created by the user to wrap another element, most likely a built-in.\n",
+      "stereotypes": [
+        "coding::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "is_nullable",
+          "type": "bool",
+          "documentation": "If true, this element can be null (empty).\n"
+        },
+        {
+          "name": "value_attribute",
+          "type": "attribute",
+          "documentation": "Attribute that represents the value of the primitive.\n"
+        },
+        {
+          "name": "use_type_aliasing",
+          "type": "bool",
+          "documentation": "If set to true, and if the owning technical space supports it, use type aliasing.\n"
+        },
+        {
+          "name": "is_immutable",
+          "type": "bool",
+          "documentation": "If true, do not generate modifiable operations.\n"
+        },
+        {
+          "name": "orm_properties",
+          "type": "boost::optional<masd::dogen::coding::meta_model::orm::primitive_properties>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::structural::module",
+      "documentation": "Container for other coding elements.\n\nAggregates a group of logically related elements into a unit.\n",
+      "stereotypes": [
+        "coding::meta_element",
+        "Container"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "is_root",
+          "type": "bool",
+          "documentation": "If true, this module is thee root module of the model.\n"
+        },
+        {
+          "name": "is_global_module",
+          "type": "bool",
+          "documentation": "If true, this module is the pseudo module that models the global namespace.\n"
+        },
+        {
+          "name": "orm_properties",
+          "type": "boost::optional<masd::dogen::coding::meta_model::orm::module_properties>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::structural::enumeration",
+      "documentation": "Defines a bounded set of logically related values for a built-in type\nor a string.\n",
+      "stereotypes": [
+        "coding::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "underlying_element",
+          "type": "name",
+          "documentation": "Underlying element of each instance of the enumeration.\n"
+        },
+        {
+          "name": "enumerators",
+          "type": "std::vector<enumerator>",
+          "documentation": "Enumerators for this enumeration.\n"
+        },
+        {
+          "name": "use_implementation_defined_underlying_element",
+          "type": "bool",
+          "documentation": "If true, we will use the implementation specific default enumeration type.\n"
+        },
+        {
+          "name": "use_implementation_defined_enumerator_values",
+          "type": "bool",
+          "documentation": "If true, we will rely on compiler generated enumeration values.\n"
+        },
+        {
+          "name": "add_invalid_enumerator",
+          "type": "bool",
+          "documentation": "If true, an enumerator for \"invalid\" will be added.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::structural::enumerator",
+      "documentation": "One of a set of valid values that an enumeration can assume.\n\nThe enumerator defines an element in the domain of the enumeration.\n",
+      "stereotypes": [
+        "Documentable",
+        "Nameable",
+        "Configurable",
+        "Stereotypable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "std::string",
+          "documentation": "Value for the enumerator.\n\nIt must be castable to instance of the type defined in the enumeration.\n"
+        }
+      ]
     }
   ]
 }
