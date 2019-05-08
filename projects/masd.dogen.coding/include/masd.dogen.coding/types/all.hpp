@@ -112,6 +112,7 @@
 #include "masd.dogen.coding/types/meta_model/orm/module_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/orm/object_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/structural/enumerator.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/structural.hpp"
 #include "masd.dogen.coding/types/transforms/containment_transform.hpp"
 #include "masd.dogen.coding/types/transforms/meta_naming_transform.hpp"
 #include "masd.dogen.coding/types/transforms/stereotypes_transform.hpp"

@@ -2152,6 +2152,10 @@
     },
     {
       "name": "meta_model::structural",
+      "documentation": "Houses all of the meta-modeling elements related\nto structural modeling.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {

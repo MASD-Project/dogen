@@ -2284,7 +2284,7 @@ formatting.#</dia:string>
         <dia:point val="-197.745,-68.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-198.595,-68.45;-170.887,-49.95"/>
+        <dia:rectangle val="-198.595,-68.45;-170.888,-49.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2484,7 +2484,7 @@ formatting.#</dia:string>
         <dia:point val="-200.49,-55.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-201.34,-55.65;-170.887,-49.95"/>
+        <dia:rectangle val="-201.34,-55.65;-170.888,-49.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5093,7 +5093,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-234.205,-62"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-235.055,-62.05;-215.887,-49.95"/>
+        <dia:rectangle val="-235.055,-62.05;-215.888,-49.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5135,7 +5135,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-223.665,-55.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-224.515,-55.65;-215.887,-49.95"/>
+        <dia:rectangle val="-224.515,-55.65;-215.888,-49.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6116,7 +6116,7 @@ model.#</dia:string>
         <dia:point val="-177.125,-67.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-177.975,-67.65;-170.887,-49.95"/>
+        <dia:rectangle val="-177.975,-67.65;-170.888,-49.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24442,7 +24442,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-201.5,-38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-202.25,-44.85;-198.273,-37.2"/>
+        <dia:rectangle val="-202.25,-44.85;-198.272,-37.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -25399,7 +25399,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:point val="-187.472,-56.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-188.322,-56.45;-170.887,-49.95"/>
+        <dia:rectangle val="-188.322,-56.45;-170.888,-49.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31789,13 +31789,13 @@ as a modeline.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O234">
       <dia:attribute name="obj_pos">
-        <dia:point val="-12,-47"/>
+        <dia:point val="-10,-38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-12.05,-47.05;1.64,-42.55"/>
+        <dia:rectangle val="-10.05,-38.05;3.64,-33.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-12,-47"/>
+        <dia:point val="-10,-38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.59"/>
@@ -32406,13 +32406,13 @@ decided instead to use the word object.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O237">
       <dia:attribute name="obj_pos">
-        <dia:point val="31,-18"/>
+        <dia:point val="-8,-43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="30.95,-18.05;40.79,-14.95"/>
+        <dia:rectangle val="-8.05,-43.05;1.79,-39.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="31,-18"/>
+        <dia:point val="-8,-43"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="9.7400000000000002"/>
@@ -32517,13 +32517,13 @@ decided instead to use the word object.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O238">
       <dia:attribute name="obj_pos">
-        <dia:point val="-12,-38"/>
+        <dia:point val="30,-18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-12.05,-38.05;0.1,-33.55"/>
+        <dia:rectangle val="29.95,-18.05;42.1,-13.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-12,-38"/>
+        <dia:point val="30,-18"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.050000000000001"/>
@@ -33737,6 +33737,61 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:connection handle="1" to="O44" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
+    </dia:object>
+    <dia:object type="UML - Note" version="0" id="O247">
+      <dia:attribute name="obj_pos">
+        <dia:point val="-14,-48"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="-14.05,-48.05;5.43,-43.85"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="-14,-48"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="19.380000000000003"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="4.0999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="fill_colour">
+        <dia:color val="#f0e68c"/>
+      </dia:attribute>
+      <dia:attribute name="text">
+        <dia:composite type="text">
+          <dia:attribute name="string">
+            <dia:string>#Houses all of the meta-modeling elements related
+to structural modeling.
+
+#DOGEN masd.injection.dia.comment=true#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="font">
+            <dia:font family="monospace" style="0" name="Courier"/>
+          </dia:attribute>
+          <dia:attribute name="height">
+            <dia:real val="0.80000000000000004"/>
+          </dia:attribute>
+          <dia:attribute name="pos">
+            <dia:point val="-13.65,-46.755"/>
+          </dia:attribute>
+          <dia:attribute name="color">
+            <dia:color val="#000000"/>
+          </dia:attribute>
+          <dia:attribute name="alignment">
+            <dia:enum val="0"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:childnode parent="O233"/>
     </dia:object>
   </dia:layer>
 </dia:diagram>
