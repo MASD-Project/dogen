@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
+#include "masd.dogen.generation.cpp/types/element_visitor.hpp"
 #include "masd.dogen.generation.cpp/io/fabric/odb_targets_io.hpp"
-#include "masd.dogen.generation.cpp/types/fabric/element_visitor.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/msbuild_targets.hpp"
 
 namespace masd::dogen::generation::cpp::fabric {

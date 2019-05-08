@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
-#include "masd.dogen.generation.csharp/types/fabric/element_visitor.hpp"
+#include "masd.dogen.generation.csharp/types/element_visitor.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/visual_studio_solution.hpp"
 
 inline std::string tidy_up_string(std::string s) {

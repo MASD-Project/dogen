@@ -22,9 +22,9 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
+#include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
 #include "masd.dogen.coding/types/meta_model/structural/module.hpp"
 #include "masd.dogen.coding/io/meta_model/orm/module_properties_io.hpp"
-#include "masd.dogen.coding/types/meta_model/structural/element_visitor.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -116,32 +116,20 @@ module::module(
       is_global_module_(is_global_module),
       orm_properties_(orm_properties) { }
 
-void module::accept(const masd::dogen::coding::meta_model::element_visitor& v) const {
-    typedef const element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void module::accept(const element_visitor& v) const {
+    v.visit(*this);
 }
 
-void module::accept(masd::dogen::coding::meta_model::element_visitor& v) const {
-    typedef element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void module::accept(element_visitor& v) const {
+    v.visit(*this);
     }
 
-void module::accept(const masd::dogen::coding::meta_model::element_visitor& v) {
-    typedef const element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void module::accept(const element_visitor& v) {
+    v.visit(*this);
 }
 
-void module::accept(masd::dogen::coding::meta_model::element_visitor& v) {
-    typedef element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void module::accept(element_visitor& v) {
+    v.visit(*this);
 }
 
 void module::to_stream(std::ostream& s) const {

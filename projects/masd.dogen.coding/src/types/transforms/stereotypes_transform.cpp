@@ -61,6 +61,13 @@ const std::string invalid_stereotypes("Stereotypes are not valid: ");
 
 namespace masd::dogen::coding::transforms {
 
+meta_model::location stereotypes_transform::
+strip_internal_modules(const meta_model::location& l) {
+    auto r(l);
+    r.internal_modules().clear();
+    return r;
+}
+
 bool stereotypes_transform::
 is_element_type(const meta_model::static_stereotypes ss) {
     using meta_model::static_stereotypes;
@@ -159,8 +166,15 @@ std::unordered_map<meta_model::location,
                    std::list<meta_model::name>> stereotypes_transform::
 bucket_leaves_by_location(const std::list<meta_model::name>& leaves) {
     std::unordered_map<meta_model::location, std::list<meta_model::name>>  r;
-    for (const auto& l : leaves)
-        r[l.location()].push_back(l);
+
+    for (auto l : leaves) {
+        /*
+         * Strip the internal modules from the leaves. This has the
+         * effect of bunching up all leaves in a given model into the
+         * same bucket.
+         */
+        r[strip_internal_modules(l.location())].push_back(l);
+    }
 
     return r;
 }
@@ -269,18 +283,14 @@ expand_visitable(meta_model::object& o, meta_model::model& em) {
     }
 
     /*
-     * We need to organise the leaves by location. In truth, we
-     * are trying to organise the leaves by model really, as there
-     * is an assumption that we do not have multiple leaves in
-     * different modules for the same model. But it should still
-     * work if we do, we just end up generating multiple visitors
-     * - one per module.
-     *
-     * Additional (crazy) limitation: we must have leaves on the
-     * same location as the root parent.
+     * We need to organise the leaves by model, so that one visitor is
+     * created for each model. The model containing the original
+     * visitable type will have the "base visitor" and all other
+     * models will have the "derived visitors" - in the case of cross
+     * model visitation.
      */
     auto bucketed_leaves(bucket_leaves_by_location(o.leaves()));
-    auto j(bucketed_leaves.find(o.name().location()));
+    auto j(bucketed_leaves.find(strip_internal_modules(o.name().location())));
     if (j == bucketed_leaves.end()) {
         const auto id(o.name().qualified().dot());
         BOOST_LOG_SEV(lg, error) << leaves_not_found << id;

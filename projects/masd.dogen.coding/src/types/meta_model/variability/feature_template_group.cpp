@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
-#include "masd.dogen.coding/types/meta_model/variability/element_visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
 #include "masd.dogen.coding/io/meta_model/variability/feature_template_io.hpp"
 #include "masd.dogen.coding/types/meta_model/variability/feature_template_group.hpp"
 
@@ -73,32 +73,20 @@ feature_template_group::feature_template_group(
       decoration),
       feature_templates_(feature_templates) { }
 
-void feature_template_group::accept(const masd::dogen::coding::meta_model::element_visitor& v) const {
-    typedef const element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void feature_template_group::accept(const element_visitor& v) const {
+    v.visit(*this);
 }
 
-void feature_template_group::accept(masd::dogen::coding::meta_model::element_visitor& v) const {
-    typedef element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void feature_template_group::accept(element_visitor& v) const {
+    v.visit(*this);
     }
 
-void feature_template_group::accept(const masd::dogen::coding::meta_model::element_visitor& v) {
-    typedef const element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void feature_template_group::accept(const element_visitor& v) {
+    v.visit(*this);
 }
 
-void feature_template_group::accept(masd::dogen::coding::meta_model::element_visitor& v) {
-    typedef element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void feature_template_group::accept(element_visitor& v) {
+    v.visit(*this);
 }
 
 void feature_template_group::to_stream(std::ostream& s) const {

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FABRIC_ELEMENT_VISITOR_HPP
-#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FABRIC_ELEMENT_VISITOR_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_ELEMENT_VISITOR_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_ELEMENT_VISITOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,7 +31,7 @@
 #include "masd.dogen.generation.csharp/types/fabric/visual_studio_project_fwd.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/visual_studio_solution_fwd.hpp"
 
-namespace masd::dogen::generation::csharp::fabric {
+namespace masd::dogen::generation::csharp {
 
 /**
  * @brief Visitor for element

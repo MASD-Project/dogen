@@ -22,7 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
-#include "masd.dogen.coding/types/meta_model/decoration/element_visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/generation_marker.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -82,32 +82,20 @@ generation_marker::generation_marker(
       add_warning_(add_warning),
       message_(message) { }
 
-void generation_marker::accept(const masd::dogen::coding::meta_model::element_visitor& v) const {
-    typedef const element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void generation_marker::accept(const element_visitor& v) const {
+    v.visit(*this);
 }
 
-void generation_marker::accept(masd::dogen::coding::meta_model::element_visitor& v) const {
-    typedef element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void generation_marker::accept(element_visitor& v) const {
+    v.visit(*this);
     }
 
-void generation_marker::accept(const masd::dogen::coding::meta_model::element_visitor& v) {
-    typedef const element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void generation_marker::accept(const element_visitor& v) {
+    v.visit(*this);
 }
 
-void generation_marker::accept(masd::dogen::coding::meta_model::element_visitor& v) {
-    typedef element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void generation_marker::accept(element_visitor& v) {
+    v.visit(*this);
 }
 
 void generation_marker::to_stream(std::ostream& s) const {

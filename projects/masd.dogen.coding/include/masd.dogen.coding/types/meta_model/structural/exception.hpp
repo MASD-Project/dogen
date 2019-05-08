@@ -60,12 +60,12 @@ public:
         const boost::optional<masd::dogen::coding::meta_model::decoration::element_properties>& decoration);
 
 public:
-    using masd::dogen::coding::meta_model::element::accept;
+    using element::accept;
 
-    virtual void accept(const masd::dogen::coding::meta_model::element_visitor& v) const override;
-    virtual void accept(masd::dogen::coding::meta_model::element_visitor& v) const override;
-    virtual void accept(const masd::dogen::coding::meta_model::element_visitor& v) override;
-    virtual void accept(masd::dogen::coding::meta_model::element_visitor& v) override;
+    virtual void accept(const element_visitor& v) const override;
+    virtual void accept(element_visitor& v) const override;
+    virtual void accept(const element_visitor& v) override;
+    virtual void accept(element_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
 

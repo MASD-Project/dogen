@@ -21,9 +21,9 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
+#include "masd.dogen.generation.cpp/types/element_visitor.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/cmakelists.hpp"
 #include "masd.dogen.generation.cpp/io/fabric/odb_targets_io.hpp"
-#include "masd.dogen.generation.cpp/types/fabric/element_visitor.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

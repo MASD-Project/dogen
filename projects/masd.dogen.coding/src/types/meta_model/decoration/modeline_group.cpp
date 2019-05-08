@@ -21,10 +21,10 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
+#include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
 #include "masd.dogen.coding/io/meta_model/decoration/modeline_io.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/modeline.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/modeline_group.hpp"
-#include "masd.dogen.coding/types/meta_model/decoration/element_visitor.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -124,32 +124,20 @@ modeline_group::modeline_group(
       contains_(contains),
       modelines_(modelines) { }
 
-void modeline_group::accept(const masd::dogen::coding::meta_model::element_visitor& v) const {
-    typedef const element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void modeline_group::accept(const element_visitor& v) const {
+    v.visit(*this);
 }
 
-void modeline_group::accept(masd::dogen::coding::meta_model::element_visitor& v) const {
-    typedef element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void modeline_group::accept(element_visitor& v) const {
+    v.visit(*this);
     }
 
-void modeline_group::accept(const masd::dogen::coding::meta_model::element_visitor& v) {
-    typedef const element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void modeline_group::accept(const element_visitor& v) {
+    v.visit(*this);
 }
 
-void modeline_group::accept(masd::dogen::coding::meta_model::element_visitor& v) {
-    typedef element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void modeline_group::accept(element_visitor& v) {
+    v.visit(*this);
 }
 
 void modeline_group::to_stream(std::ostream& s) const {

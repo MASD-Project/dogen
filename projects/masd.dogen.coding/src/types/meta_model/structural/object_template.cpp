@@ -23,7 +23,7 @@
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.coding/io/meta_model/attribute_io.hpp"
-#include "masd.dogen.coding/types/meta_model/structural/element_visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
 #include "masd.dogen.coding/types/meta_model/structural/object_template.hpp"
 
 namespace std {
@@ -124,32 +124,20 @@ object_template::object_template(
       parents_(parents),
       is_child_(is_child) { }
 
-void object_template::accept(const masd::dogen::coding::meta_model::element_visitor& v) const {
-    typedef const element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void object_template::accept(const element_visitor& v) const {
+    v.visit(*this);
 }
 
-void object_template::accept(masd::dogen::coding::meta_model::element_visitor& v) const {
-    typedef element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void object_template::accept(element_visitor& v) const {
+    v.visit(*this);
     }
 
-void object_template::accept(const masd::dogen::coding::meta_model::element_visitor& v) {
-    typedef const element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void object_template::accept(const element_visitor& v) {
+    v.visit(*this);
 }
 
-void object_template::accept(masd::dogen::coding::meta_model::element_visitor& v) {
-    typedef element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void object_template::accept(element_visitor& v) {
+    v.visit(*this);
 }
 
 void object_template::to_stream(std::ostream& s) const {

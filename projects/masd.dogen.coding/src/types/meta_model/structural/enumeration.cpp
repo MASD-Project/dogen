@@ -22,9 +22,9 @@
 #include <boost/io/ios_state.hpp>
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
+#include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
 #include "masd.dogen.coding/io/meta_model/structural/enumerator_io.hpp"
 #include "masd.dogen.coding/types/meta_model/structural/enumeration.hpp"
-#include "masd.dogen.coding/types/meta_model/structural/element_visitor.hpp"
 
 namespace std {
 
@@ -88,32 +88,20 @@ enumeration::enumeration(
       use_implementation_defined_enumerator_values_(use_implementation_defined_enumerator_values),
       add_invalid_enumerator_(add_invalid_enumerator) { }
 
-void enumeration::accept(const masd::dogen::coding::meta_model::element_visitor& v) const {
-    typedef const element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void enumeration::accept(const element_visitor& v) const {
+    v.visit(*this);
 }
 
-void enumeration::accept(masd::dogen::coding::meta_model::element_visitor& v) const {
-    typedef element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void enumeration::accept(element_visitor& v) const {
+    v.visit(*this);
     }
 
-void enumeration::accept(const masd::dogen::coding::meta_model::element_visitor& v) {
-    typedef const element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void enumeration::accept(const element_visitor& v) {
+    v.visit(*this);
 }
 
-void enumeration::accept(masd::dogen::coding::meta_model::element_visitor& v) {
-    typedef element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void enumeration::accept(element_visitor& v) {
+    v.visit(*this);
 }
 
 void enumeration::to_stream(std::ostream& s) const {

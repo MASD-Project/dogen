@@ -30,7 +30,7 @@
 #include "masd.dogen.generation.cpp/types/fabric/msbuild_targets.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/odb_targets.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/common_odb_options.hpp"
-#include "masd.dogen.generation.cpp/types/fabric/element_visitor.hpp"
+#include "masd.dogen.generation.cpp/types/element_visitor.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/odb/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/types/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/expansion_error.hpp"
@@ -40,7 +40,8 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-static logger lg(logger_factory("generation.cpp.formattables.build_files_expander"));
+static logger
+lg(logger_factory("generation.cpp.formattables.build_files_expander"));
 
 const std::string separator("_");
 const std::string missing_odb_options("Could not find the ODB Options element");
@@ -56,7 +57,7 @@ bool odb_target_comparer(
     return lhs.name() < rhs.name();
 }
 
-class odb_targets_factory : public fabric::element_visitor {
+class odb_targets_factory : public element_visitor {
 public:
     odb_targets_factory(const model& fm,
         const locator& l, const coding::meta_model::name& model_name);
@@ -65,7 +66,7 @@ private:
     void generate_targets(const coding::meta_model::name& n);
 
 public:
-    using fabric::element_visitor::visit;
+    using element_visitor::visit;
     void visit(const fabric::common_odb_options& coo);
     void visit(const coding::meta_model::object& o);
     void visit(const coding::meta_model::primitive& p);
@@ -171,12 +172,12 @@ const fabric::odb_targets& odb_targets_factory::result() const {
     return result_;
 }
 
-class build_files_updater : public fabric::element_visitor {
+class build_files_updater : public element_visitor {
 public:
     build_files_updater(const locator& l, const fabric::odb_targets& targets);
 
 public:
-    using fabric::element_visitor::visit;
+    using element_visitor::visit;
     void visit(fabric::cmakelists& c);
     void visit(fabric::msbuild_targets& mt);
 

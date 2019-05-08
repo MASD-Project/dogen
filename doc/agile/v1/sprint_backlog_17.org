@@ -10,21 +10,22 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-08 Wed 10:29]
+#+CAPTION: Clock summary at [2019-05-08 Wed 12:05]
 | <75>                                                       |         |       |      |       |
 | Headline                                                   | Time    |       |      |     % |
 |------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                               | *12:56* |       |      | 100.0 |
+| *Total time*                                               | *14:29* |       |      | 100.0 |
 |------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                    | 12:56   |       |      | 100.0 |
-| Active                                                     |         | 12:56 |      | 100.0 |
-| Edit release notes for previous sprint                     |         |       | 2:41 |  20.7 |
-| Create a video demo for the previous sprint's features     |         |       | 2:11 |  16.9 |
-| Sprint and product backlog grooming                        |         |       | 0:19 |   2.4 |
-| Defining profiles directly on a target model does not work |         |       | 0:30 |   3.9 |
-| Inner modules need to be qualified                         |         |       | 0:22 |   2.8 |
-| Create namespaces for model elements                       |         |       | 5:08 |  39.7 |
-| Code generate feature infrastructure                       |         |       | 1:45 |  13.5 |
+| Stories                                                    | 14:29   |       |      | 100.0 |
+| Active                                                     |         | 14:29 |      | 100.0 |
+| Edit release notes for previous sprint                     |         |       | 2:41 |  18.5 |
+| Create a video demo for the previous sprint's features     |         |       | 2:11 |  15.1 |
+| Sprint and product backlog grooming                        |         |       | 0:19 |   2.2 |
+| Defining profiles directly on a target model does not work |         |       | 0:30 |   3.5 |
+| Inner modules need to be qualified                         |         |       | 0:22 |   2.5 |
+| Create namespaces for model elements                       |         |       | 5:08 |  35.4 |
+| Leaves in internal modules are not captured correctly      |         |       | 1:33 |  10.7 |
+| Code generate feature infrastructure                       |         |       | 1:45 |  12.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -221,11 +222,27 @@ Actually we now have only the "core" elements outside a namespace. In
 reality, these are "structural" elements. Create a namespace for them
 as well.
 
-*** Leaves in internal modules are not captured                       :story:
+*** COMPLETED Leaves in internal modules are not captured correctly   :story:
+    CLOSED: [2019-05-08 Wed 12:05]
+    :LOGBOOK:
+    CLOCK: [2019-05-08 Wed 11:55]--[2019-05-08 Wed 12:04] =>  0:09
+    CLOCK: [2019-05-08 Wed 10:30]--[2019-05-08 Wed 11:54] =>  1:24
+    :END:
 
 It seems we are not adding leaves to parents if they are located in
 internal modules. It could also be because the generalisation
 relationship comes about via meta-data rather than UML generalisation.
+
+Actually the problem is related to how we were bucketing the leaves
+when generating the visitor: we were splitting them by internal
+modules, resulting in multiple visitors per model. We now bucket them
+by model instead.
+
+*** Investigate use of =is_element_type= in stereotypes               :story:
+
+We seem to only be considering a subset of the elements when doing the
+stereotype transform, yet its all working. Need to figure out why, and
+if this is no longer required, remove this method.
 
 *** Read variability papers                                           :story:
 

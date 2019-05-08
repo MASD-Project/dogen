@@ -44,6 +44,12 @@ namespace masd::dogen::coding::transforms {
 class stereotypes_transform final {
 private:
     /**
+     * @brief Strips the internal modules of the supplied location.
+     */
+    static meta_model::location
+    strip_internal_modules(const meta_model::location& l);
+
+    /**
      * @brief Returns true if the well-known stereotype denotes a coding
      * element type, false otherwise.
      */

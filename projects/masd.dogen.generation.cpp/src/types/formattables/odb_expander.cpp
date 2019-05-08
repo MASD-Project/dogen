@@ -29,7 +29,7 @@
 #include "masd.dogen.generation.cpp/types/formattables/adapter.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/common_odb_options.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/object_odb_options.hpp"
-#include "masd.dogen.generation.cpp/types/fabric/element_visitor.hpp"
+#include "masd.dogen.generation.cpp/types/element_visitor.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/odb_options_factory.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/odb_properties_io.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/header_guard_factory.hpp"
@@ -54,7 +54,7 @@ const std::string value_pragma("value");
 
 namespace masd::dogen::generation::cpp::formattables {
 
-class updator : public fabric::element_visitor {
+class updator : public element_visitor {
 public:
     updator(model& fm, const locator& l,
         const odb_expander::feature_group& fg);
@@ -64,7 +64,7 @@ private:
         const variability::meta_model::configuration& cfg) const;
 
 public:
-    using fabric::element_visitor::visit;
+    using element_visitor::visit;
     void visit(fabric::common_odb_options& coo);
     void visit(fabric::object_odb_options& ooo);
     void visit(coding::meta_model::object& o);

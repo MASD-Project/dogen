@@ -21,10 +21,10 @@
 #include <ostream>
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
+#include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
 #include "masd.dogen.coding/io/meta_model/decoration/editor_io.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/modeline.hpp"
 #include "masd.dogen.coding/io/meta_model/decoration/modeline_field_io.hpp"
-#include "masd.dogen.coding/types/meta_model/decoration/element_visitor.hpp"
 #include "masd.dogen.coding/io/meta_model/decoration/modeline_location_io.hpp"
 
 namespace std {
@@ -87,32 +87,20 @@ modeline::modeline(
       fields_(fields),
       technical_space_(technical_space) { }
 
-void modeline::accept(const masd::dogen::coding::meta_model::element_visitor& v) const {
-    typedef const element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void modeline::accept(const element_visitor& v) const {
+    v.visit(*this);
 }
 
-void modeline::accept(masd::dogen::coding::meta_model::element_visitor& v) const {
-    typedef element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void modeline::accept(element_visitor& v) const {
+    v.visit(*this);
     }
 
-void modeline::accept(const masd::dogen::coding::meta_model::element_visitor& v) {
-    typedef const element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void modeline::accept(const element_visitor& v) {
+    v.visit(*this);
 }
 
-void modeline::accept(masd::dogen::coding::meta_model::element_visitor& v) {
-    typedef element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void modeline::accept(element_visitor& v) {
+    v.visit(*this);
 }
 
 void modeline::to_stream(std::ostream& s) const {

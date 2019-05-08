@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_DECORATION_ELEMENT_VISITOR_FWD_HPP
-#define MASD_DOGEN_CODING_TYPES_META_MODEL_DECORATION_ELEMENT_VISITOR_FWD_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_ELEMENT_VISITOR_FWD_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_ELEMENT_VISITOR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace masd::dogen::coding::meta_model::decoration {
+namespace masd::dogen::generation::cpp {
 
 class element_visitor;
 

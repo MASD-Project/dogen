@@ -24,9 +24,9 @@
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.coding/io/meta_model/attribute_io.hpp"
 #include "masd.dogen.coding/io/meta_model/type_parameters_io.hpp"
+#include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
 #include "masd.dogen.coding/types/meta_model/structural/object.hpp"
 #include "masd.dogen.coding/io/meta_model/orm/object_properties_io.hpp"
-#include "masd.dogen.coding/types/meta_model/structural/element_visitor.hpp"
 
 namespace std {
 
@@ -237,32 +237,20 @@ object::object(
       can_be_primitive_underlier_(can_be_primitive_underlier),
       orm_properties_(orm_properties) { }
 
-void object::accept(const masd::dogen::coding::meta_model::element_visitor& v) const {
-    typedef const element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void object::accept(const element_visitor& v) const {
+    v.visit(*this);
 }
 
-void object::accept(masd::dogen::coding::meta_model::element_visitor& v) const {
-    typedef element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void object::accept(element_visitor& v) const {
+    v.visit(*this);
     }
 
-void object::accept(const masd::dogen::coding::meta_model::element_visitor& v) {
-    typedef const element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void object::accept(const element_visitor& v) {
+    v.visit(*this);
 }
 
-void object::accept(masd::dogen::coding::meta_model::element_visitor& v) {
-    typedef element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void object::accept(element_visitor& v) {
+    v.visit(*this);
 }
 
 void object::to_stream(std::ostream& s) const {

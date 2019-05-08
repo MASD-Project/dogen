@@ -21,8 +21,8 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
+#include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/licence.hpp"
-#include "masd.dogen.coding/types/meta_model/decoration/element_visitor.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -69,32 +69,20 @@ licence::licence(
       short_form_(short_form),
       long_form_(long_form) { }
 
-void licence::accept(const masd::dogen::coding::meta_model::element_visitor& v) const {
-    typedef const element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void licence::accept(const element_visitor& v) const {
+    v.visit(*this);
 }
 
-void licence::accept(masd::dogen::coding::meta_model::element_visitor& v) const {
-    typedef element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void licence::accept(element_visitor& v) const {
+    v.visit(*this);
     }
 
-void licence::accept(const masd::dogen::coding::meta_model::element_visitor& v) {
-    typedef const element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void licence::accept(const element_visitor& v) {
+    v.visit(*this);
 }
 
-void licence::accept(masd::dogen::coding::meta_model::element_visitor& v) {
-    typedef element_visitor* derived_ptr;
-    const auto dv(dynamic_cast<derived_ptr>(&v));
-    if (dv)
-        dv->visit(*this);
+void licence::accept(element_visitor& v) {
+    v.visit(*this);
 }
 
 void licence::to_stream(std::ostream& s) const {

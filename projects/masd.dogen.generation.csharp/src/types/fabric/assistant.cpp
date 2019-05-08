@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
+#include "masd.dogen.generation.csharp/types/element_visitor.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/assistant.hpp"
-#include "masd.dogen.generation.csharp/types/fabric/element_visitor.hpp"
 
 namespace masd::dogen::generation::csharp::fabric {
 
