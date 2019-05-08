@@ -58,7 +58,7 @@ private:
     update_and_collect_parent_ids(const helpers::indices& idx,
         meta_model::model& m);
 
-    static void populate_properties_up_the_generalization_tree(
+    static void walk_up_generalization_tree(
         const feature_group& fg, const meta_model::name& leaf,
         meta_model::model& m, meta_model::object& o);
 

@@ -41,7 +41,7 @@ namespace masd::dogen::coding::helpers {
 
 std::string string_processor::to_identifiable(const std::string& s) {
     std::string r(s);
-    BOOST_LOG_SEV(lg, trace) << "Before processing: " << r;
+    BOOST_LOG_SEV(lg, trace) << "Input string: " << r;
 
     boost::replace_all(r, scope_operator, separator);
     boost::replace_all(r, less_than, separator);
@@ -52,7 +52,7 @@ std::string string_processor::to_identifiable(const std::string& s) {
 
     boost::replace_all(r, space, separator);
 
-    BOOST_LOG_SEV(lg, trace) << "After processing: " << r;
+    BOOST_LOG_SEV(lg, trace) << "Result: " << r;
     return r;
 }
 

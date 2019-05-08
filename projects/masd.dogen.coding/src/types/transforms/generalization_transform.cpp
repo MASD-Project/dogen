@@ -87,11 +87,13 @@ generalization_transform::update_and_collect_parent_ids(
     std::unordered_set<std::string> r;
     for (auto& pair : m.objects()) {
         const auto& id(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
+        BOOST_LOG_SEV(lg, trace) << "Processing type: " << id;
 
         auto& o(*pair.second);
-        if (o.parents().empty())
+        if (o.parents().empty()) {
+            BOOST_LOG_SEV(lg, trace) << "Type has no parents.";
             continue;
+        }
 
         /*
          * Resolve the parent names. This is required because they may
@@ -105,7 +107,9 @@ generalization_transform::update_and_collect_parent_ids(
         std::list<meta_model::name> resolved_parents;
         for (const auto& pn : o.parents()) {
             const auto resolved_pn(resolver::resolve(m, idx, o.name(), pn));
-            r.insert(resolved_pn.qualified().dot());
+            const auto& pid(resolved_pn.qualified().dot());
+            r.insert(pid);
+            BOOST_LOG_SEV(lg, trace) << "Resolved parent: " << pid;
             resolved_parents.push_back(resolved_pn);
         }
 
@@ -116,51 +120,68 @@ generalization_transform::update_and_collect_parent_ids(
     return r;
 }
 
-void generalization_transform::populate_properties_up_the_generalization_tree(
+void generalization_transform::walk_up_generalization_tree(
     const feature_group& fg, const meta_model::name& leaf,
     meta_model::model& em, meta_model::object& o) {
 
+    BOOST_LOG_SEV(lg, trace) << "Updating leaves for: "
+                             << o.name().qualified().dot()
+                             << " Leaf: " << leaf.qualified().dot();
+
     /*
      * Add the leaf to all nodes of the tree except for the leaf node
-     * itself.
+     * itself. The leaf node is the last child of a branch of
+     * inheritance.
      */
-    if (!o.is_leaf())
+    if (!o.is_leaf()) {
         o.leaves().push_back(leaf);
+        BOOST_LOG_SEV(lg, trace) << "Added leaf to object.";
+    }
 
     /*
      * If we do not have any parents, we have reached the top of the
-     * generalisation tree.
+     * generalisation tree. The top of the tree is the top-most class
+     * in an inheritance graph (the root parent).
      */
     if (o.parents().empty()) {
         /*
-         * If the leaf name belongs to the target model, add it to
-         * the model's list of leaves. Ignore non-target leaves.
+         * If the leaf name belongs to the target model, add it to the
+         * model's list of leaves. Ignore non-target leaves.
          */
         const auto& ll(leaf.location());
         const auto& ml(em.name().location());
-        if (ll.model_modules() == ml.model_modules())
+        if (ll.model_modules() == ml.model_modules()) {
             em.leaves().insert(leaf);
+            BOOST_LOG_SEV(lg, trace) << "Added leaf to model.";
+        } else
+            BOOST_LOG_SEV(lg, trace) << "Ignoring non-target leaf.";
 
         return;
     }
 
+    /*
+     * Now we climb up the inheritance graph. Parents must exist or
+     * else the model is not consistent.
+     */
     for (const auto& pn : o.parents()) {
-        auto i(em.objects().find(pn.qualified().dot()));
+        const auto& pid(pn.qualified().dot());
+        BOOST_LOG_SEV(lg, trace) << "Processing parent: " << pid;
+        auto i(em.objects().find(pid));
         if (i == em.objects().end()) {
-            BOOST_LOG_SEV(lg, error) << parent_not_found
-                                     << pn.qualified().dot();
-            BOOST_THROW_EXCEPTION(
-                transformation_error(parent_not_found + pn.qualified().dot()));
+            BOOST_LOG_SEV(lg, error) << parent_not_found << pid;
+            BOOST_THROW_EXCEPTION(transformation_error(parent_not_found + pid));
         }
 
         auto& parent(*i->second);
-        populate_properties_up_the_generalization_tree(fg, leaf, em, parent);
+        walk_up_generalization_tree(fg, leaf, em, parent);
 
         if (parent.parents().empty()) {
             /*
              * If our parent does not have a parent, then it is our
              * root parent.
              */
+            BOOST_LOG_SEV(lg, trace) << "Found root parent directly: "
+                                     << parent.name().qualified().dot();
             o.root_parents().push_back(parent.name());
         } else {
             /*
@@ -168,8 +189,11 @@ void generalization_transform::populate_properties_up_the_generalization_tree(
              * from our direct parent; these would have been populated
              * from the root parent as per above.
              */
-            for (const auto& rp : parent.root_parents())
+            for (const auto& rp : parent.root_parents()) {
+                BOOST_LOG_SEV(lg, trace) << "Found root parent indirectly: "
+                                         << rp.qualified().dot();
                 o.root_parents().push_back(rp);
+            }
         }
     }
 }
@@ -180,7 +204,7 @@ populate_generalizable_properties(const feature_group& fg,
 
     for (auto& pair : m.objects()) {
         const auto& id(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
+        BOOST_LOG_SEV(lg, trace) << "Processing type: " << id;
 
         auto& o(*pair.second);
 
@@ -230,10 +254,12 @@ populate_generalizable_properties(const feature_group& fg,
           */
          o.is_leaf(!o.is_parent() && o.is_child());
 
-         if (!o.is_leaf())
+         if (!o.is_leaf()) {
+             BOOST_LOG_SEV(lg, trace) << "Type is not a leaf, finished processing.";
              continue;
+         }
 
-         populate_properties_up_the_generalization_tree(fg, o.name(), m, o);
+         walk_up_generalization_tree(fg, o.name(), m, o);
     }
 }
 
