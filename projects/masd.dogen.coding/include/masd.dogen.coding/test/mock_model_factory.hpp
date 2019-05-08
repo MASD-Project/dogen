@@ -241,22 +241,22 @@ public:
     /**
      * @brief Creates a built-in.
      */
-    meta_model::builtin make_builtin(const unsigned int i,
+    meta_model::structural::builtin make_builtin(const unsigned int i,
         const meta_model::name& model_name, const meta_model::origin_types ot,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create a value object.
      */
-    boost::shared_ptr<meta_model::object> make_object(const unsigned int i,
-        const meta_model::name& model_name,
+    boost::shared_ptr<meta_model::structural::object>
+    make_object(const unsigned int i, const meta_model::name& model_name,
         const meta_model::origin_types ot,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create a value object with an attribute
      */
-    boost::shared_ptr<meta_model::object>
+    boost::shared_ptr<meta_model::structural::object>
     make_object_with_attribute(const unsigned int i,
         const meta_model::name& model_name,
         const meta_model::origin_types ot,
@@ -265,21 +265,22 @@ public:
     /**
      * @brief Create a value object with a model name based on @e i.
      */
-    boost::shared_ptr<meta_model::object> make_object(unsigned int i,
+    boost::shared_ptr<meta_model::structural::object> make_object(unsigned int i,
         const meta_model::origin_types ot,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create an object template.
      */
-    boost::shared_ptr<meta_model::object_template> make_object_template(
-        const unsigned int i, const meta_model::name& model_name,
+    boost::shared_ptr<meta_model::structural::object_template>
+    make_object_template(const unsigned int i,
+        const meta_model::name& model_name,
         const meta_model::origin_types ot) const;
 
     /**
      * @brief Create an enumeration.
      */
-    boost::shared_ptr<meta_model::enumeration>
+    boost::shared_ptr<meta_model::structural::enumeration>
     make_enumeration(const unsigned int i, const meta_model::name& model_name,
         const meta_model::origin_types ot,
         const unsigned int module_n = 0) const;
@@ -287,7 +288,7 @@ public:
     /**
      * @brief Create an exception.
      */
-    boost::shared_ptr<meta_model::exception>
+    boost::shared_ptr<meta_model::structural::exception>
     make_exception(const unsigned int i, const meta_model::name& model_name,
         const meta_model::origin_types ot,
         const unsigned int module_n = 0) const;
@@ -295,14 +296,14 @@ public:
     /**
      * @brief Create a module from a name.
      */
-    boost::shared_ptr<meta_model::module> make_module(const meta_model::name& n,
-        const meta_model::origin_types ot,
+    boost::shared_ptr<meta_model::structural::module> make_module(
+        const meta_model::name& n, const meta_model::origin_types ot,
         const std::string& documentation = std::string()) const;
 
     /**
      * @brief Create a module from its components.
      */
-    boost::shared_ptr<meta_model::module>
+    boost::shared_ptr<meta_model::structural::module>
     make_module(const unsigned int module_n, const meta_model::name& model_name,
         const meta_model::origin_types ot,
         const std::list<std::string>& internal_modules,

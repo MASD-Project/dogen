@@ -24,14 +24,14 @@
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/builtin.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/types/meta_model/visitor.hpp"
-#include "masd.dogen.coding/types/meta_model/exception.hpp"
-#include "masd.dogen.coding/types/meta_model/primitive.hpp"
-#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
-#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object_template.hpp"
 #include "masd.dogen.coding/types/helpers/name_builder.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
 #include "masd.dogen.coding/types/transforms/global_module_transform.hpp"
@@ -62,11 +62,11 @@ inline void add_containing_module_to_non_contained_entities(
     }
 }
 
-boost::shared_ptr<meta_model::module> global_module_transform::
+boost::shared_ptr<meta_model::structural::module> global_module_transform::
 create_global_module(const meta_model::origin_types ot) {
     const std::string gm("global_module");
     const meta_model::fully_qualified_representation fqr(gm, gm, gm);
-    auto r(boost::make_shared<meta_model::module>());
+    auto r(boost::make_shared<meta_model::structural::module>());
     r->name().qualified(fqr);
     r->origin_type(ot);
     r->documentation(global_module_doc);

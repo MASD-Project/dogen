@@ -22,7 +22,7 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "masd.dogen.utility/types/test/logging.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/helpers/resolution_error.hpp"
 #include "masd.dogen.coding/types/transforms/merge_transform.hpp"
@@ -101,7 +101,7 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_the_same_model_resolves_succe
         }
     }
     const auto idx(indexer::index(m));
-    using namespace masd::dogen::coding::meta_model;
+    using namespace masd::dogen::coding::meta_model::structural;
     const auto original([](const model& im) {
             auto r(im);
             r.objects().clear();

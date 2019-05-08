@@ -25,7 +25,6 @@
 #include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
@@ -66,7 +65,7 @@ void associations_transform::remove_duplicates(
 }
 
 void associations_transform::
-walk_name_tree(const meta_model::model& m, meta_model::object& o,
+walk_name_tree(const meta_model::model& m, meta_model::structural::object& o,
     const meta_model::name_tree& nt,
     const bool inherit_opaqueness_from_parent) {
 
@@ -101,7 +100,7 @@ walk_name_tree(const meta_model::model& m, meta_model::object& o,
 }
 
 void associations_transform::
-process_object(const meta_model::model& m, meta_model::object& o) {
+process_object(const meta_model::model& m, meta_model::structural::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Expand object: " << o.name().qualified().dot();
 
     for (const auto& p : o.local_attributes()) {

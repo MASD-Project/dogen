@@ -51,7 +51,7 @@ private:
 
 private:
     static void expand_type_parameters(const feature_group& fg,
-        meta_model::object& o);
+        meta_model::structural::object& o);
 
 public:
     static void apply(const context& ctx, meta_model::model& m);

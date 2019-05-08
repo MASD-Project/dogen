@@ -1,6 +1,6 @@
 <#@ masd.stitch.stream_variable_name=a.stream() #>
 <#@ masd.stitch.containing_namespaces=masd::dogen::generation::cpp::formatters::types #>
-<#@ masd.stitch.inclusion_dependency="masd.dogen.coding/types/meta_model/exception.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.coding/types/meta_model/structural/exception.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.coding/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/traits.hpp" #>
@@ -15,7 +15,7 @@
 <#@ masd.stitch.wale.kvp.class.simple_name=exception_header_formatter #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=exception_header #>
 <#@ masd.stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
-<#@ masd.stitch.wale.kvp.yarn_element=coding::meta_model::exception #>
+<#@ masd.stitch.wale.kvp.yarn_element=coding::meta_model::structural::exception #>
 <#@ masd.stitch.wale.kvp.meta_element=exception #>
 <#@ masd.stitch.wale.kvp.meta_name_factory=coding::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
@@ -33,7 +33,7 @@ std::list<std::string> exception_header_formatter::inclusion_dependencies(
 extraction::meta_model::artefact exception_header_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& ye(a.as<coding::meta_model::exception>(e));
+    const auto& ye(a.as<coding::meta_model::structural::exception>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

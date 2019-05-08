@@ -25,15 +25,15 @@
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
-#include "masd.dogen.coding/types/meta_model/module.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/builtin.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/types/meta_model/visitor.hpp"
-#include "masd.dogen.coding/types/meta_model/exception.hpp"
-#include "masd.dogen.coding/types/meta_model/primitive.hpp"
-#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
-#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/module.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object_template.hpp"
 #include "masd.dogen.coding/types/meta_model/elements_traversal.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
@@ -65,14 +65,16 @@ public:
 
 public:
     void operator()(meta_model::element&) { }
-    void operator()(meta_model::module& m) { update(m); }
-    void operator()(meta_model::object_template& ot) { update(ot); }
-    void operator()(meta_model::builtin& b) { update(b); }
-    void operator()(meta_model::enumeration& e) { update(e); }
-    void operator()(meta_model::primitive& p) { update(p); }
-    void operator()(meta_model::object& o) { update(o); }
-    void operator()(meta_model::exception& e) { update(e); }
-    void operator()(meta_model::visitor& v) { update(v); }
+    void operator()(meta_model::structural::module& m) { update(m); }
+    void operator()(meta_model::structural::object_template& ot) {
+        update(ot);
+    }
+    void operator()(meta_model::structural::builtin& b) { update(b); }
+    void operator()(meta_model::structural::enumeration& e) { update(e); }
+    void operator()(meta_model::structural::primitive& p) { update(p); }
+    void operator()(meta_model::structural::object& o) { update(o); }
+    void operator()(meta_model::structural::exception& e) { update(e); }
+    void operator()(meta_model::structural::visitor& v) { update(v); }
 
 private:
     const meta_model::origin_types origin_types_;

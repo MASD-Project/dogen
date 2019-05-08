@@ -24,7 +24,7 @@
 #include "masd.dogen.generation.csharp/types/traits.hpp"
 #include "masd.dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
-#include "masd.dogen.coding/types/meta_model/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/primitive.hpp"
 #include <iostream>
 
 namespace masd::dogen::generation::csharp::formatters::types {
@@ -70,7 +70,7 @@ extraction::meta_model::artefact primitive_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     const auto id(e.name().qualified().dot());
     assistant a(ctx, e, archetype_location());
-    const auto& p(a.as<coding::meta_model::primitive>(static_id(), e));
+    const auto& p(a.as<coding::meta_model::structural::primitive>(static_id(), e));
     {
         const auto sn(e.name().simple());
         auto sbf(a.make_scoped_boilerplate_formatter(e));

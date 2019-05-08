@@ -33,7 +33,7 @@
 #include "masd.dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include <boost/algorithm/string/join.hpp>
 #include <boost/throw_exception.hpp>
@@ -92,7 +92,7 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const coding::meta_model::element& e) const {
 
-    using coding::meta_model::object;
+    using coding::meta_model::structural::object;
     const auto& o(assistant::as<object>(e));
     auto builder(f.make());
     builder.add(o.name(), types::traits::class_header_archetype());
@@ -153,7 +153,7 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
 extraction::meta_model::artefact class_implementation_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& o(a.as<coding::meta_model::object>(e));
+    const auto& o(a.as<coding::meta_model::structural::object>(e));
     {
         auto sbf(a.make_scoped_boilerplate_formatter(o));
         const auto qn(a.get_qualified_name(o.name()));

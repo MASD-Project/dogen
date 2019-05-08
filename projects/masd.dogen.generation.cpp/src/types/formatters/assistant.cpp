@@ -122,7 +122,7 @@ void assistant::validate() const {
 }
 
 std::string
-assistant::make_final_keyword_text(const coding::meta_model::object& o) const {
+assistant::make_final_keyword_text(const coding::meta_model::structural::object& o) const {
     if (is_cpp_standard_98())
         return empty;
 

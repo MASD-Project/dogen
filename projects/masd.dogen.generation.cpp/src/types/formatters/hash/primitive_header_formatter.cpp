@@ -26,7 +26,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/traits.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
-#include "masd.dogen.coding/types/meta_model/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/primitive.hpp"
 
 namespace masd::dogen::generation::cpp::formatters::hash {
 
@@ -84,7 +84,7 @@ std::list<std::string> primitive_header_formatter::inclusion_dependencies(
 extraction::meta_model::artefact primitive_header_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& p(a.as<coding::meta_model::primitive>(e));
+    const auto& p(a.as<coding::meta_model::structural::primitive>(e));
 
     const auto sn(p.name().simple());
     const auto qn(a.get_qualified_name(p.name()));

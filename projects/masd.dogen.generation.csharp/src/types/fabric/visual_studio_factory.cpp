@@ -23,7 +23,7 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
-#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/module.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
 #include "masd.dogen.coding/types/helpers/name_flattener.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/traits.hpp"

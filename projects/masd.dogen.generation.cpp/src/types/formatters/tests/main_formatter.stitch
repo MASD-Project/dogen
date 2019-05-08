@@ -67,7 +67,7 @@ std::list<std::string> main_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const coding::meta_model::element& /*e*/) const {
 
-    using coding::meta_model::object;
+    using coding::meta_model::structural::object;
     auto builder(f.make());
 
     using ic = inclusion_constants;

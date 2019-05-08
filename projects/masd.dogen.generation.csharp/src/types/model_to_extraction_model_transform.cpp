@@ -21,7 +21,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/module.hpp"
 #include "masd.dogen.generation.csharp/types/traits.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/workflow.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/workflow.hpp"

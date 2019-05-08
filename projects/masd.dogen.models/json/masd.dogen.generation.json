@@ -56,7 +56,7 @@
         },
         {
           "name": "root_module",
-          "type": "boost::shared_ptr<coding::meta_model::module>",
+          "type": "boost::shared_ptr<coding::meta_model::structural::module>",
           "documentation": "The module that represents the model.\n"
         },
         {

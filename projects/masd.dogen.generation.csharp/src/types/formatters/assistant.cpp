@@ -79,7 +79,7 @@ assistant::get_qualified_name(const coding::meta_model::name_tree& nt) const {
 }
 
 std::string
-assistant::make_inheritance_keyword_text(const coding::meta_model::object& o) {
+assistant::make_inheritance_keyword_text(const coding::meta_model::structural::object& o) {
     if (o.is_parent())
         return abstract_keyword_text;
 

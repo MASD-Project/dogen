@@ -23,7 +23,7 @@
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/aspect_properties_io.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/aspect_expander.hpp"
@@ -184,7 +184,7 @@ void aspect_expander::populate_aspect_properties(const std::string& element_id,
      * We are only interested in yarn objects; all other element
      * types do not need helpers.
      */
-    const auto ptr(dynamic_cast<const coding::meta_model::object*>(ms.get()));
+    const auto ptr(dynamic_cast<const coding::meta_model::structural::object*>(ms.get()));
     if (ptr == nullptr)
         return;
 

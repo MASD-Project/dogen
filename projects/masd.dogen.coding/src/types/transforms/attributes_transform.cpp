@@ -27,8 +27,8 @@
 #include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object_template.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
@@ -51,7 +51,7 @@ const std::string object_template_not_found(
 
 namespace masd::dogen::coding::transforms {
 
-meta_model::object& attributes_transform::
+meta_model::structural::object& attributes_transform::
 find_object(const meta_model::name& n, meta_model::model& m) {
     const auto id(n.qualified().dot());
     auto i(m.objects().find(id));
@@ -62,7 +62,7 @@ find_object(const meta_model::name& n, meta_model::model& m) {
     return *i->second;
 }
 
-meta_model::object_template& attributes_transform::
+meta_model::structural::object_template& attributes_transform::
 find_object_template(const meta_model::name& n, meta_model::model& m) {
     const auto& id(n.qualified().dot());
     auto i(m.object_templates().find(id));
@@ -74,7 +74,7 @@ find_object_template(const meta_model::name& n, meta_model::model& m) {
     return *i->second;
 }
 
-void attributes_transform::expand_object(meta_model::object& o,
+void attributes_transform::expand_object(meta_model::structural::object& o,
     meta_model::model& m, std::unordered_set<std::string>& processed_ids) {
     const auto id(o.name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Expanding object: " << id;
@@ -184,12 +184,12 @@ void attributes_transform::expand_objects(meta_model::model& em) {
 }
 
 void attributes_transform::expand_object_template(
-    meta_model::object_template& ot, meta_model::model& m,
+    meta_model::structural::object_template& ot, meta_model::model& m,
     std::unordered_set<std::string>& processed_ids) {
     const auto id(ot.name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Expanding object template:" << id;
 
-    if (processed_ids.find(ot.name().qualified().dot()) != processed_ids.end()) {
+    if (processed_ids.find(id) != processed_ids.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object already processed:" << id;
         return;
     }

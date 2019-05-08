@@ -28,7 +28,7 @@
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
-#include "masd.dogen.coding/types/meta_model/visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/visitor.hpp"
 
 namespace masd::dogen::generation::cpp::formatters::types {
 
@@ -76,7 +76,7 @@ boost::filesystem::path visitor_header_formatter::full_path(
 std::list<std::string> visitor_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const coding::meta_model::element& e) const {
-    using coding::meta_model::visitor;
+    using coding::meta_model::structural::visitor;
     const auto& v(assistant::as<visitor>(e));
     auto builder(f.make());
     builder.add(v.visits(), traits::forward_declarations_archetype());
@@ -90,7 +90,7 @@ std::list<std::string> visitor_header_formatter::inclusion_dependencies(
 extraction::meta_model::artefact visitor_header_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& v(a.as<coding::meta_model::visitor>(e));
+    const auto& v(a.as<coding::meta_model::structural::visitor>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

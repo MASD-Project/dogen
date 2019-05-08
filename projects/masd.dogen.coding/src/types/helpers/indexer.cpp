@@ -21,8 +21,8 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/unordered_set_io.hpp"
 #include "masd.dogen.coding/io/helpers/indices_io.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/builtin.hpp"
 #include "masd.dogen.coding/types/helpers/indexer.hpp"
 
 namespace {

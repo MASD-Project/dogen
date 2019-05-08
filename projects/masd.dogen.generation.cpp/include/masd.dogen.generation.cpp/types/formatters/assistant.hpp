@@ -38,7 +38,7 @@
 #include "masd.dogen.generation/types/formatters/scoped_boilerplate_formatter.hpp"
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
 #include "masd.dogen.coding/types/meta_model/name_tree.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/context.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/helper_properties.hpp"
@@ -73,7 +73,7 @@ public:
      * final keyword. If non-empty, includes a trailing space.
      */
     std::string
-    make_final_keyword_text(const coding::meta_model::object& o) const;
+    make_final_keyword_text(const coding::meta_model::structural::object& o) const;
 
     /**
      * @brief Returns the override keyword, if supported by the

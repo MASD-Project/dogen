@@ -26,7 +26,7 @@
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 #include "masd.dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
-#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/enumeration.hpp"
 
 namespace masd::dogen::generation::cpp::formatters::types {
 
@@ -75,7 +75,7 @@ std::list<std::string> enum_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const coding::meta_model::element& e) const {
 
-    using coding::meta_model::enumeration;
+    using coding::meta_model::structural::enumeration;
     const auto& en(assistant::as<enumeration>(e));
     auto builder(f.make());
     const auto arch(traits::canonical_archetype());
@@ -86,7 +86,7 @@ std::list<std::string> enum_header_formatter::inclusion_dependencies(
 extraction::meta_model::artefact enum_header_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& ye(a.as<coding::meta_model::enumeration>(e));
+    const auto& ye(a.as<coding::meta_model::structural::enumeration>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

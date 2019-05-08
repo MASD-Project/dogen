@@ -23,7 +23,7 @@
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/type_params_transform.hpp"
@@ -73,8 +73,8 @@ type_params_transform::make_type_parameters(const feature_group& fg,
     return r;
 }
 
-void type_params_transform::
-expand_type_parameters(const feature_group& fg, meta_model::object& o) {
+void type_params_transform::expand_type_parameters(const feature_group& fg,
+    meta_model::structural::object& o) {
     const auto tp(make_type_parameters(fg, *o.configuration()));
     o.type_parameters(tp);
 }

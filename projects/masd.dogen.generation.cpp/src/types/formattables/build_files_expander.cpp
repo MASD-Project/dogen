@@ -23,8 +23,8 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.utility/types/io/pair_io.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/primitive.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/odb_target.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/cmakelists.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/msbuild_targets.hpp"
@@ -68,8 +68,8 @@ private:
 public:
     using element_visitor::visit;
     void visit(const fabric::common_odb_options& coo);
-    void visit(const coding::meta_model::object& o);
-    void visit(const coding::meta_model::primitive& p);
+    void visit(const coding::meta_model::structural::object& o);
+    void visit(const coding::meta_model::structural::primitive& p);
 
 public:
     const fabric::odb_targets& result() const;
@@ -146,7 +146,7 @@ generate_targets(const coding::meta_model::name& n) {
     result_.targets().push_back(t);
 }
 
-void odb_targets_factory::visit(const coding::meta_model::object& o) {
+void odb_targets_factory::visit(const coding::meta_model::structural::object& o) {
     /*
      * We only care about objects which have ORM enabled.
      */
@@ -157,7 +157,7 @@ void odb_targets_factory::visit(const coding::meta_model::object& o) {
     generate_targets(n);
 }
 
-void odb_targets_factory::visit(const coding::meta_model::primitive& p) {
+void odb_targets_factory::visit(const coding::meta_model::structural::primitive& p) {
     /*
      * We only care about objects which have ORM enabled.
      */

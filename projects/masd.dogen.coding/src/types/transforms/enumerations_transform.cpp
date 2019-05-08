@@ -30,9 +30,9 @@
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
-#include "masd.dogen.coding/types/meta_model/builtin.hpp"
-#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
-#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/enumeration.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
 #include "masd.dogen.coding/types/transforms/enumerations_transform.hpp"
@@ -108,8 +108,9 @@ make_feature_group(const variability::meta_model::feature_model& fm) {
     return r;
 }
 
-void enumerations_transform::populate_from_configuration(
-    const enumeration_feature_group& fg, meta_model::enumeration& e) {
+void enumerations_transform::
+populate_from_configuration(const enumeration_feature_group& fg,
+    meta_model::structural::enumeration& e) {
 
     const auto& cfg(*e.configuration());
     const variability::helpers::configuration_selector s(cfg);
@@ -126,7 +127,7 @@ void enumerations_transform::populate_from_configuration(
 }
 
 void enumerations_transform::populate_from_configuration(
-    const enumerator_feature_group& fg, meta_model::enumerator& e) {
+    const enumerator_feature_group& fg, meta_model::structural::enumerator& e) {
     const auto& cfg(*e.configuration());
     const variability::helpers::configuration_selector s(cfg);
     if (s.has_configuration_point(fg.value)) {
@@ -184,9 +185,10 @@ obtain_invalid_enumerator_simple_name(const meta_model::technical_space ts) {
     } }
 }
 
-meta_model::enumerator enumerations_transform::make_invalid_enumerator(
-    const meta_model::name& n, const meta_model::technical_space l) {
-    meta_model::enumerator r;
+meta_model::structural::enumerator
+enumerations_transform::make_invalid_enumerator(const meta_model::name& n,
+    const meta_model::technical_space l) {
+    meta_model::structural::enumerator r;
     r.documentation("Represents an uninitialised enum");
     r.value("0");
 
@@ -199,7 +201,7 @@ meta_model::enumerator enumerations_transform::make_invalid_enumerator(
 
 void enumerations_transform::expand_default_underlying_element(
     const meta_model::name& default_underlying_element_name,
-    meta_model::enumeration& e) {
+    meta_model::structural::enumeration& e) {
     const auto ue(e.underlying_element());
     BOOST_LOG_SEV(lg, debug) << "Underlying type: '"
                              << ue.qualified().dot() << "'";
@@ -215,8 +217,9 @@ void enumerations_transform::expand_default_underlying_element(
 
 void enumerations_transform::
 expand_enumerators(const enumerator_feature_group& fg,
-    const meta_model::technical_space ts, meta_model::enumeration& e) {
-    std::vector<meta_model::enumerator> enumerators;
+    const meta_model::technical_space ts,
+    meta_model::structural::enumeration& e) {
+    std::vector<meta_model::structural::enumerator> enumerators;
 
     if (e.add_invalid_enumerator()) {
         enumerators.reserve(e.enumerators().size() + 1/*invalid*/);

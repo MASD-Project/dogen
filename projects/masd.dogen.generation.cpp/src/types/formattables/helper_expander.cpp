@@ -24,8 +24,8 @@
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/primitive.hpp"
 #include "masd.dogen.coding/types/meta_model/name_tree.hpp"
 #include "masd.dogen.coding/types/meta_model/attribute.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
@@ -94,8 +94,8 @@ public:
      * other element types do not need helpers.
      */
     using coding::meta_model::element_visitor::visit;
-    void visit(const coding::meta_model::object& o);
-    void visit(const coding::meta_model::primitive& p);
+    void visit(const coding::meta_model::structural::object& o);
+    void visit(const coding::meta_model::structural::primitive& p);
 
 public:
     const std::list<formattables::helper_properties>& result() const;
@@ -293,7 +293,7 @@ compute_helper_properties(const helper_configuration& cfg,
     return r;
 }
 
-void helper_properties_generator::visit(const coding::meta_model::object& o) {
+void helper_properties_generator::visit(const coding::meta_model::structural::object& o) {
     const auto& fff(facets_for_family_);
     const auto& cfg(helper_configuration_);
     const auto& attrs(o.local_attributes());
@@ -301,7 +301,7 @@ void helper_properties_generator::visit(const coding::meta_model::object& o) {
     result_ = compute_helper_properties(cfg, fff, iir, attrs);
 }
 
-void helper_properties_generator::visit(const coding::meta_model::primitive& p) {
+void helper_properties_generator::visit(const coding::meta_model::structural::primitive& p) {
     const auto& fff(facets_for_family_);
     const auto& cfg(helper_configuration_);
     const std::list<coding::meta_model::attribute> attrs({ p.value_attribute() });

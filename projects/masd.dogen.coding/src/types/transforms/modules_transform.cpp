@@ -25,8 +25,8 @@
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
-#include "masd.dogen.coding/types/meta_model/module.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/module.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
 #include "masd.dogen.coding/types/meta_model/elements_traversal.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
 #include "masd.dogen.coding/types/helpers/name_builder.hpp"
@@ -56,14 +56,30 @@ private:
 
 public:
     void operator()(meta_model::element&) { }
-    void operator()(meta_model::module& m) { process(m.name()); }
-    void operator()(meta_model::object_template& ot) { process(ot.name()); }
-    void operator()(meta_model::builtin& b) { process(b.name()); }
-    void operator()(meta_model::enumeration& e) { process(e.name()); }
-    void operator()(meta_model::primitive& p) { process(p.name()); }
-    void operator()(meta_model::object& o) { process(o.name()); }
-    void operator()(meta_model::exception& e) { process(e.name()); }
-    void operator()(meta_model::visitor& v) { process(v.name()); }
+    void operator()(meta_model::structural::module& m) {
+        process(m.name());
+    }
+    void operator()(meta_model::structural::object_template& ot) {
+        process(ot.name());
+    }
+    void operator()(meta_model::structural::builtin& b) {
+        process(b.name());
+    }
+    void operator()(meta_model::structural::enumeration& e) {
+        process(e.name());
+    }
+    void operator()(meta_model::structural::primitive& p) {
+        process(p.name());
+    }
+    void operator()(meta_model::structural::object& o) {
+        process(o.name());
+    }
+    void operator()(meta_model::structural::exception& e) {
+        process(e.name());
+    }
+    void operator()(meta_model::structural::visitor& v) {
+        process(v.name());
+    }
 
 public:
     const std::unordered_map<std::string, std::list<std::string>>&
@@ -107,7 +123,7 @@ void modules_transform::create_modules(const std::unordered_map<std::string,
         const auto n(f.build_module_name(m.name(), ipp));
         const auto i(m.modules().find(n.qualified().dot()));
         if (i == m.modules().end()) {
-            auto mod(boost::make_shared<meta_model::module>());
+            auto mod(boost::make_shared<meta_model::structural::module>());
             mod->name(n);
             mod->origin_type(m.origin_type());
             mod->configuration(

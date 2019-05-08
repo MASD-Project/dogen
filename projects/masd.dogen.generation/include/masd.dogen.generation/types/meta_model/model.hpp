@@ -34,13 +34,13 @@
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/hash/meta_model/name_hash.hpp"
-#include "masd.dogen.coding/types/meta_model/module_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/element_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/origin_types.hpp"
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
 #include "masd.dogen.coding/hash/meta_model/technical_space_hash.hpp"
 #include "masd.dogen.coding/types/meta_model/orm/model_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/extraction_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/module_fwd.hpp"
 #include "masd.dogen.generation/types/meta_model/element_archetype.hpp"
 #include "masd.dogen.generation/types/meta_model/locator_properties.hpp"
 #include "masd.dogen.generation/hash/meta_model/element_archetype_hash.hpp"
@@ -69,7 +69,7 @@ public:
         const std::unordered_map<masd::dogen::coding::meta_model::name, masd::dogen::coding::meta_model::origin_types>& references,
         const std::unordered_set<masd::dogen::coding::meta_model::name>& leaves,
         const std::vector<boost::shared_ptr<masd::dogen::coding::meta_model::element> >& elements,
-        const boost::shared_ptr<masd::dogen::coding::meta_model::module>& root_module,
+        const boost::shared_ptr<masd::dogen::coding::meta_model::structural::module>& root_module,
         const std::unordered_set<std::string>& module_ids,
         const bool has_generatable_types,
         const masd::dogen::coding::meta_model::technical_space input_technical_space,
@@ -123,10 +123,10 @@ public:
      * @brief The module that represents the model.
      */
     /**@{*/
-    const boost::shared_ptr<masd::dogen::coding::meta_model::module>& root_module() const;
-    boost::shared_ptr<masd::dogen::coding::meta_model::module>& root_module();
-    void root_module(const boost::shared_ptr<masd::dogen::coding::meta_model::module>& v);
-    void root_module(const boost::shared_ptr<masd::dogen::coding::meta_model::module>&& v);
+    const boost::shared_ptr<masd::dogen::coding::meta_model::structural::module>& root_module() const;
+    boost::shared_ptr<masd::dogen::coding::meta_model::structural::module>& root_module();
+    void root_module(const boost::shared_ptr<masd::dogen::coding::meta_model::structural::module>& v);
+    void root_module(const boost::shared_ptr<masd::dogen::coding::meta_model::structural::module>&& v);
     /**@}*/
 
     /**
@@ -218,7 +218,7 @@ private:
     std::unordered_map<masd::dogen::coding::meta_model::name, masd::dogen::coding::meta_model::origin_types> references_;
     std::unordered_set<masd::dogen::coding::meta_model::name> leaves_;
     std::vector<boost::shared_ptr<masd::dogen::coding::meta_model::element> > elements_;
-    boost::shared_ptr<masd::dogen::coding::meta_model::module> root_module_;
+    boost::shared_ptr<masd::dogen::coding::meta_model::structural::module> root_module_;
     std::unordered_set<std::string> module_ids_;
     bool has_generatable_types_;
     masd::dogen::coding::meta_model::technical_space input_technical_space_;

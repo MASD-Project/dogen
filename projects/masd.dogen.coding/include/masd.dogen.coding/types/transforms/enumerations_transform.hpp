@@ -31,7 +31,7 @@
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
-#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/enumeration.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
@@ -70,23 +70,24 @@ private:
 
 private:
     static void populate_from_configuration(const enumeration_feature_group& fg,
-        meta_model::enumeration& e);
+        meta_model::structural::enumeration& e);
     static void populate_from_configuration(const enumerator_feature_group& fg,
-        meta_model::enumerator& e);
+        meta_model::structural::enumerator& e);
 
 private:
     static meta_model::name obtain_enumeration_default_underlying_element_name(
         const meta_model::model& m);
     static std::string obtain_invalid_enumerator_simple_name(
         const meta_model::technical_space ts);
-    static meta_model::enumerator make_invalid_enumerator(
+    static meta_model::structural::enumerator make_invalid_enumerator(
         const meta_model::name& n, const meta_model::technical_space ts);
 
     static void expand_default_underlying_element(
         const meta_model::name& default_underlying_element_name,
-        meta_model::enumeration& e);
+        meta_model::structural::enumeration& e);
     static void expand_enumerators(const enumerator_feature_group& fg,
-        const meta_model::technical_space ts, meta_model::enumeration& e);
+        const meta_model::technical_space ts,
+        meta_model::structural::enumeration& e);
 
 public:
     static void apply(const context& ctx, meta_model::model& m);

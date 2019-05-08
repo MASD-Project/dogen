@@ -24,15 +24,15 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.coding/types/meta_model/module.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/module.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/builtin.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/types/meta_model/visitor.hpp"
-#include "masd.dogen.coding/types/meta_model/exception.hpp"
-#include "masd.dogen.coding/types/meta_model/primitive.hpp"
-#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
-#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object_template.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/licence.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/modeline.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/generation_marker.hpp"
@@ -93,29 +93,29 @@ private:
 
 public:
     void operator()(boost::shared_ptr<coding::meta_model::element>) { }
-    void operator()(boost::shared_ptr<coding::meta_model::module> m) {
+    void operator()(boost::shared_ptr<coding::meta_model::structural::module> m) {
         result_.module_ids().insert(m->name().qualified().dot());
         add(m);
     }
-    void operator()(boost::shared_ptr<coding::meta_model::object_template> ot) {
+    void operator()(boost::shared_ptr<coding::meta_model::structural::object_template> ot) {
         add(ot);
     }
-    void operator()(boost::shared_ptr<coding::meta_model::builtin> b) {
+    void operator()(boost::shared_ptr<coding::meta_model::structural::builtin> b) {
         add(b);
     }
-    void operator()(boost::shared_ptr<coding::meta_model::enumeration> e) {
+    void operator()(boost::shared_ptr<coding::meta_model::structural::enumeration> e) {
         add(e);
     }
-    void operator()(boost::shared_ptr<coding::meta_model::primitive> p) {
+    void operator()(boost::shared_ptr<coding::meta_model::structural::primitive> p) {
         add(p);
     }
-    void operator()(boost::shared_ptr<coding::meta_model::object> o) {
+    void operator()(boost::shared_ptr<coding::meta_model::structural::object> o) {
         add(o);
     }
-    void operator()(boost::shared_ptr<coding::meta_model::exception> e) {
+    void operator()(boost::shared_ptr<coding::meta_model::structural::exception> e) {
         add(e);
     }
-    void operator()(boost::shared_ptr<coding::meta_model::visitor> v) {
+    void operator()(boost::shared_ptr<coding::meta_model::structural::visitor> v) {
         add(v);
     }
     void operator()

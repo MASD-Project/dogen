@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/licence.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/modeline.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/modeline_group.hpp"
@@ -57,42 +57,42 @@ public:
          */
     }
 
-    void operator()(meta_model::module& m) {
+    void operator()(meta_model::structural::module& m) {
         static const auto n(mnf::make_module_name());
         m.meta_name(n);
     }
 
-    void operator()(meta_model::object_template& ot) {
+    void operator()(meta_model::structural::object_template& ot) {
         static const auto n(mnf::make_object_template_name());
         ot.meta_name(n);
     }
 
-    void operator()(meta_model::builtin& b) {
+    void operator()(meta_model::structural::builtin& b) {
         static const auto n(mnf::make_builtin_name());
         b.meta_name(n);
     }
 
-    void operator()(meta_model::enumeration& e) {
+    void operator()(meta_model::structural::enumeration& e) {
         static const auto n(mnf::make_enumeration_name());
         e.meta_name(n);
     }
 
-    void operator()(meta_model::primitive& p) {
+    void operator()(meta_model::structural::primitive& p) {
         static const auto n(mnf::make_primitive_name());
         p.meta_name(n);
     }
 
-    void operator()(meta_model::object& o) {
+    void operator()(meta_model::structural::object& o) {
         static const auto n(mnf::make_object_name());
         o.meta_name(n);
     }
 
-    void operator()(meta_model::exception& e) {
+    void operator()(meta_model::structural::exception& e) {
         static const auto n(mnf::make_exception_name());
         e.meta_name(n);
     }
 
-    void operator()(meta_model::visitor& v) {
+    void operator()(meta_model::structural::visitor& v) {
         static const auto n(mnf::make_visitor_name());
         v.meta_name(n);
     }

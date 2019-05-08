@@ -20,13 +20,13 @@
  */
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
-#include "masd.dogen.coding/types/meta_model/module.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/builtin.hpp"
-#include "masd.dogen.coding/types/meta_model/visitor.hpp"
-#include "masd.dogen.coding/types/meta_model/exception.hpp"
-#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
-#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/module.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object_template.hpp"
 #include "masd.dogen.coding/types/helpers/validation_error.hpp"
 #include "masd.dogen.coding/types/helpers/pre_assembly_validator.hpp"
 
@@ -60,14 +60,19 @@ private:
 
 public:
     void validate(const std::string& id,
-        const meta_model::object_template& ot) const;
-    void validate(const std::string& id, const meta_model::builtin& b) const;
-    void validate(const std::string& id, const meta_model::visitor& v) const;
+        const meta_model::structural::object_template& ot) const;
     void validate(const std::string& id,
-        const meta_model::enumeration& e) const;
-    void validate(const std::string& id, const meta_model::object& o) const;
-    void validate(const std::string& id, const meta_model::exception& e) const;
-    void validate(const std::string& id, const meta_model::module& m) const;
+        const meta_model::structural::builtin& b) const;
+    void validate(const std::string& id,
+        const meta_model::structural::visitor& v) const;
+    void validate(const std::string& id,
+        const meta_model::structural::enumeration& e) const;
+    void validate(const std::string& id,
+        const meta_model::structural::object& o) const;
+    void validate(const std::string& id,
+        const meta_model::structural::exception& e) const;
+    void validate(const std::string& id,
+        const meta_model::structural::module& m) const;
 
 private:
     const meta_model::name model_name_;
@@ -113,28 +118,28 @@ validate_name(const std::string& id, const bool in_global_module,
     }
 }
 
-void validator::
-validate(const std::string& id, const meta_model::object_template& ot) const {
+void validator::validate(const std::string& id,
+    const meta_model::structural::object_template& ot) const {
     validate_name(id, ot.in_global_module(), ot.name());
 }
 
-void validator::
-validate(const std::string& id, const meta_model::builtin& b) const {
+void validator::validate(const std::string& id,
+    const meta_model::structural::builtin& b) const {
     validate_name(id, b.in_global_module(), b.name());
 }
 
-void validator::
-validate(const std::string& id, const meta_model::visitor& v) const {
+void validator::validate(const std::string& id,
+    const meta_model::structural::visitor& v) const {
     validate_name(id, v.in_global_module(), v.name());
 }
 
-void validator::
-validate(const std::string& id, const meta_model::enumeration& e) const {
+void validator::validate(const std::string& id,
+    const meta_model::structural::enumeration& e) const {
     validate_name(id, e.in_global_module(), e.name());
 }
 
-void validator::
-validate(const std::string& id, const meta_model::object& o) const {
+void validator::validate(const std::string& id,
+    const meta_model::structural::object& o) const {
     validate_name(id, o.in_global_module(), o.name());
 
     /*
@@ -189,13 +194,13 @@ validate(const std::string& id, const meta_model::object& o) const {
     }
 }
 
-void validator::
-validate(const std::string& id, const meta_model::exception& e) const {
+void validator::validate(const std::string& id,
+    const meta_model::structural::exception& e) const {
     validate_name(id, e.in_global_module(), e.name());
 }
 
-void validator::
-validate(const std::string& id, const meta_model::module& m) const {
+void validator::validate(const std::string& id,
+    const meta_model::structural::module& m) const {
     validate_name(id, m.in_global_module(), m.name());
 }
 

@@ -28,15 +28,15 @@
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
-#include "masd.dogen.coding/types/meta_model/module.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/builtin.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/types/meta_model/visitor.hpp"
-#include "masd.dogen.coding/types/meta_model/exception.hpp"
-#include "masd.dogen.coding/types/meta_model/primitive.hpp"
-#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
-#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/module.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object_template.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/helpers/name_builder.hpp"
@@ -153,8 +153,8 @@ void parsing_transform::parse_attributes(const meta_model::technical_space ts,
     }
 }
 
-void parsing_transform::
-parse_parent(const feature_group& fg, meta_model::object& o) {
+void parsing_transform::parse_parent(const feature_group& fg,
+    meta_model::structural::object& o) {
     /*
      * Obtain the parent name from the meta-data. If there is no
      * parent name there is nothing to do.
@@ -181,8 +181,8 @@ parse_parent(const feature_group& fg, meta_model::object& o) {
     o.parents().push_back(pn);
 }
 
-void parsing_transform::
-parse_underlying_element(const feature_group& fg, meta_model::enumeration& e) {
+void parsing_transform::parse_underlying_element(const feature_group& fg,
+    meta_model::structural::enumeration& e) {
     /*
      * Obtain the underlying element name from the meta-data. If there
      * is none, there is nothing to do.
@@ -211,7 +211,8 @@ parse_underlying_element(const feature_group& fg, meta_model::enumeration& e) {
 }
 
 void parsing_transform::parse_underlying_element(const feature_group& fg,
-    const meta_model::technical_space ts, meta_model::primitive& p) {
+    const meta_model::technical_space ts,
+    meta_model::structural::primitive& p) {
 
     const auto id(p.name().qualified().dot());
 

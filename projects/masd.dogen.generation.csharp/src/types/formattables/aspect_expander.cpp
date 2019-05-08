@@ -24,11 +24,11 @@
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/types/meta_model/exception.hpp"
-#include "masd.dogen.coding/types/meta_model/builtin.hpp"
-#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/enumeration.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
 #include "masd.dogen.generation.csharp/types/traits.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/aspect_properties.hpp"
@@ -65,10 +65,10 @@ private:
 
 public:
     using coding::meta_model::element_visitor::visit;
-    void visit(const coding::meta_model::enumeration& e);
-    void visit(const coding::meta_model::exception& e);
-    void visit(const coding::meta_model::object& o);
-    void visit(const coding::meta_model::builtin& p);
+    void visit(const coding::meta_model::structural::enumeration& e);
+    void visit(const coding::meta_model::structural::exception& e);
+    void visit(const coding::meta_model::structural::object& o);
+    void visit(const coding::meta_model::structural::builtin& p);
 
 public:
     const std::unordered_map<std::string, formattables::aspect_properties>&
@@ -116,20 +116,20 @@ void aspect_properties_generator::handle_aspect_properties(
 }
 
 void aspect_properties_generator::
-visit(const coding::meta_model::enumeration& e) {
+visit(const coding::meta_model::structural::enumeration& e) {
     handle_aspect_properties(*e.configuration(), e.name().qualified().dot());
 }
 
 void aspect_properties_generator::
-visit(const coding::meta_model::exception& e) {
+visit(const coding::meta_model::structural::exception& e) {
     handle_aspect_properties(*e.configuration(), e.name().qualified().dot());
 }
 
-void aspect_properties_generator::visit(const coding::meta_model::object& o) {
+void aspect_properties_generator::visit(const coding::meta_model::structural::object& o) {
     handle_aspect_properties(*o.configuration(), o.name().qualified().dot());
 }
 
-void aspect_properties_generator::visit(const coding::meta_model::builtin& p) {
+void aspect_properties_generator::visit(const coding::meta_model::structural::builtin& p) {
     handle_aspect_properties(*p.configuration(), p.name().qualified().dot());
 }
 

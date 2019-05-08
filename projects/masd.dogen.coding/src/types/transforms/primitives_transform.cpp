@@ -59,7 +59,8 @@ make_feature_group(const variability::meta_model::feature_model& fm) {
 }
 
 void primitives_transform::
-populate_from_configuration(const feature_group& fg, meta_model::primitive& p) {
+populate_from_configuration(const feature_group& fg,
+    meta_model::structural::primitive& p) {
     const auto& cfg(*p.configuration());
     const variability::helpers::configuration_selector s(cfg);
     p.is_nullable(s.get_boolean_content_or_default(fg.is_nullable));

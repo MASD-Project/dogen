@@ -103,14 +103,14 @@ private:
     /**
      * @brief Returns the object with the given name, or throws.
      */
-    static  meta_model::object& find_object(const meta_model::name& n,
-        meta_model::model& m);
+    static  meta_model::structural::object&
+    find_object(const meta_model::name& n, meta_model::model& m);
 
     /**
      * @brief Returns the object template with the given name, or
      * throws.
      */
-    static meta_model::object_template& resolve_object_template(
+    static meta_model::structural::object_template& resolve_object_template(
         const meta_model::name& owner,
         const meta_model::name& object_template_name,
         meta_model::model& m);
@@ -125,7 +125,7 @@ private:
     /**
      * @brief Expands a specific object.
      */
-    static void expand_object(meta_model::object& o,
+    static void expand_object(meta_model::structural::object& o,
         meta_model::model& m,
         std::unordered_set<meta_model::name>& processed_names);
 
@@ -138,7 +138,7 @@ private:
      * @brief Expands an object template.
      */
     static void
-    expand_object_template(meta_model::object_template& otp,
+    expand_object_template(meta_model::structural::object_template& otp,
         meta_model::model& m,
         std::unordered_set<meta_model::name>& processed_names);
 

@@ -281,7 +281,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>#root_module#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;coding::meta_model::module&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;coding::meta_model::structural::module&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

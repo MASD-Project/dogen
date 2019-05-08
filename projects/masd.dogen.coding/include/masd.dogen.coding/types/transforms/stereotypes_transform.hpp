@@ -28,9 +28,9 @@
 #include <list>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
-#include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/visitor.hpp"
-#include "masd.dogen.coding/types/meta_model/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/primitive.hpp"
 #include "masd.dogen.coding/hash/meta_model/location_hash.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
@@ -59,14 +59,14 @@ private:
      * @brief Transforms the static stereotypes of the object, if any
      * exist.
      */
-    static void transform_static_stereotypes(meta_model::object& o,
+    static void transform_static_stereotypes(meta_model::structural::object& o,
         meta_model::model& m);
 
     /**
      * @brief Transforms the dynamic stereotypes of the object, if any
      * exist.
      */
-    static void transform_dynamic_stereotypes(meta_model::object& o,
+    static void transform_dynamic_stereotypes(meta_model::structural::object& o,
         const meta_model::model& m);
 
 private:
@@ -83,7 +83,7 @@ private:
     bucket_leaves_by_location(const std::list<meta_model::name>& leaves);
 
     static void add_visitor_to_model(
-        const boost::shared_ptr<meta_model::visitor> v,
+        const boost::shared_ptr<meta_model::structural::visitor> v,
         meta_model::model& m);
 
     /**
@@ -94,8 +94,8 @@ private:
      *
      * @pre leaves must not be empty.
      */
-    static boost::shared_ptr<meta_model::visitor>
-    create_visitor(const meta_model::object& o,
+    static boost::shared_ptr<meta_model::structural::visitor>
+    create_visitor(const meta_model::structural::object& o,
         const meta_model::location& l, const meta_model::origin_types ot,
         const std::list<meta_model::name>& leaves);
 
@@ -109,24 +109,25 @@ private:
     /**
      * @brief Performs the expansion of the visitable stereotype.
      */
-    static void expand_visitable(meta_model::object& o, meta_model::model& m);
+    static void expand_visitable(meta_model::structural::object& o,
+        meta_model::model& m);
 
     /**
      * @brief Try to expand the stereotype as an object
      * template. Returns true on success, false otherwise.
      */
     static bool try_as_object_template(const std::string& s,
-        meta_model::object& o, const meta_model::model& m);
+        meta_model::structural::object& o, const meta_model::model& m);
 
     /**
      * @brief Transforms all stereotypes for the object.
      */
-    static void apply(meta_model::object& o, meta_model::model& m);
+    static void apply(meta_model::structural::object& o, meta_model::model& m);
 
     /**
      * @brief Transforms all stereotypes for the primitive.
      */
-    static void apply(meta_model::primitive& p);
+    static void apply(meta_model::structural::primitive& p);
 
 public:
     /**

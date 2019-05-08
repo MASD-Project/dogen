@@ -26,7 +26,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/traits.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
 #include "masd.dogen.generation/types/formatters/sequence_formatter.hpp"
 
 namespace masd::dogen::generation::cpp::formatters::io {
@@ -87,7 +87,7 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
 extraction::meta_model::artefact class_header_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& o(a.as<coding::meta_model::object>(e));
+    const auto& o(a.as<coding::meta_model::structural::object>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

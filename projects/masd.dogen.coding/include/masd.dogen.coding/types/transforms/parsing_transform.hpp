@@ -29,12 +29,12 @@
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
 #include "masd.dogen.coding/types/meta_model/technical_space.hpp"
-#include "masd.dogen.coding/types/meta_model/name_tree.hpp"
-#include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.coding/types/meta_model/attribute.hpp"
-#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/name_tree.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/enumeration.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
@@ -90,21 +90,21 @@ private:
      * @brief Parses parent name in the supplied object.
      */
     static void parse_parent(const feature_group& fg,
-        meta_model::object& o);
+        meta_model::structural::object& o);
 
     /**
      * @brief Parses the underlying element in the supplied
      * enumeration.
      */
     static void parse_underlying_element(const feature_group& fg,
-        meta_model::enumeration& e);
+        meta_model::structural::enumeration& e);
 
     /**
      * @brief Parses underlying element in the supplied primitive.
      */
     static void parse_underlying_element(
         const feature_group& fg, const meta_model::technical_space ts,
-        meta_model::primitive& p);
+        meta_model::structural::primitive& p);
 
 public:
     /**

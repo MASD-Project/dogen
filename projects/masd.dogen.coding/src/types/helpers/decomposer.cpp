@@ -78,7 +78,7 @@ void decomposer::operator()(const meta_model::element& e) {
     add_meta_name(e.name().qualified().dot(), e.meta_name());
 }
 
-void decomposer::operator()(const meta_model::module& m) {
+void decomposer::operator()(const meta_model::structural::module& m) {
     /*
      * The global module represents the unnamed global
      * namespace. There can only be one of these and it is generated
@@ -90,35 +90,35 @@ void decomposer::operator()(const meta_model::module& m) {
     decompose_element(m);
 }
 
-void decomposer::operator()(const meta_model::object_template& ot) {
+void decomposer::operator()(const meta_model::structural::object_template& ot) {
     decompose_element(ot);
     decompose_attributes(ot.name().qualified().dot(), ot.local_attributes());
 }
 
-void decomposer::operator()(const meta_model::builtin& b) {
+void decomposer::operator()(const meta_model::structural::builtin& b) {
     decompose_element(b);
 }
 
-void decomposer::operator()(const meta_model::enumeration& e) {
+void decomposer::operator()(const meta_model::structural::enumeration& e) {
     decompose_element(e);
     for (const auto& en : e.enumerators())
         add_name(e.name().qualified().dot(), en.name());
 }
 
-void decomposer::operator()(const meta_model::primitive& p) {
+void decomposer::operator()(const meta_model::structural::primitive& p) {
     decompose_element(p);
 }
 
-void decomposer::operator()(const meta_model::object& o) {
+void decomposer::operator()(const meta_model::structural::object& o) {
     decompose_element(o);
     decompose_attributes(o.name().qualified().dot(), o.local_attributes());
 }
 
-void decomposer::operator()(const meta_model::exception& e) {
+void decomposer::operator()(const meta_model::structural::exception& e) {
     decompose_element(e);
 }
 
-void decomposer::operator()(const meta_model::visitor& v) {
+void decomposer::operator()(const meta_model::structural::visitor& v) {
     decompose_element(v);
 }
 

@@ -81,8 +81,8 @@ is_element_type(const meta_model::static_stereotypes ss) {
         ss == static_stereotypes::builtin;
 }
 
-void stereotypes_transform::
-transform_static_stereotypes(meta_model::object& o, meta_model::model& m) {
+void stereotypes_transform::transform_static_stereotypes(
+    meta_model::structural::object& o, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Static  stereotypes: "
                              << o.static_stereotypes();
 
@@ -131,8 +131,8 @@ transform_static_stereotypes(meta_model::object& o, meta_model::model& m) {
     }
 }
 
-void stereotypes_transform::transform_dynamic_stereotypes(meta_model::object& o,
-    const meta_model::model& em) {
+void stereotypes_transform::transform_dynamic_stereotypes(
+    meta_model::structural::object& o, const meta_model::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Dynamic stereotypes: "
                              << o.dynamic_stereotypes();
 
@@ -179,8 +179,8 @@ bucket_leaves_by_location(const std::list<meta_model::name>& leaves) {
     return r;
 }
 
-boost::shared_ptr<meta_model::visitor>
-stereotypes_transform::create_visitor(const meta_model::object& o,
+boost::shared_ptr<meta_model::structural::visitor>
+stereotypes_transform::create_visitor(const meta_model::structural::object& o,
     const meta_model::location& l, const meta_model::origin_types ot,
     const std::list<meta_model::name>& leaves) {
     helpers::name_builder b;
@@ -190,7 +190,7 @@ stereotypes_transform::create_visitor(const meta_model::object& o,
     const auto n(b.build());
     BOOST_LOG_SEV(lg, debug) << "Creating visitor: " << n.qualified().dot();
 
-    auto r(boost::make_shared<meta_model::visitor>());
+    auto r(boost::make_shared<meta_model::structural::visitor>());
     r->name(n);
     r->origin_type(ot);
     r->documentation(visitor_doc + o.name().simple());
@@ -237,7 +237,7 @@ update_visited_leaves(const std::list<meta_model::name>& leaves,
 }
 
 void stereotypes_transform::
-add_visitor_to_model(const boost::shared_ptr<meta_model::visitor> v,
+add_visitor_to_model(const boost::shared_ptr<meta_model::structural::visitor> v,
     meta_model::model& em) {
     const auto id(v->name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Adding visitor: " << id;
@@ -252,7 +252,7 @@ add_visitor_to_model(const boost::shared_ptr<meta_model::visitor> v,
 }
 
 void stereotypes_transform::
-expand_visitable(meta_model::object& o, meta_model::model& em) {
+expand_visitable(meta_model::structural::object& o, meta_model::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Expanding visitable for: "
                              << o.name().qualified().dot();
 
@@ -369,7 +369,7 @@ expand_visitable(meta_model::object& o, meta_model::model& em) {
 }
 
 bool stereotypes_transform::try_as_object_template(const std::string& s,
-    meta_model::object& o, const meta_model::model& m) {
+    meta_model::structural::object& o, const meta_model::model& m) {
 
     using helpers::resolver;
     const auto oot(resolver::try_resolve_object_template_name(o.name(), s, m));
@@ -380,7 +380,8 @@ bool stereotypes_transform::try_as_object_template(const std::string& s,
     return true;
 }
 
-void stereotypes_transform::apply(meta_model::object& o, meta_model::model& m) {
+void stereotypes_transform::
+apply(meta_model::structural::object& o, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: "
                              << o.name().qualified().dot();
 
@@ -397,7 +398,7 @@ void stereotypes_transform::apply(meta_model::object& o, meta_model::model& m) {
     transform_dynamic_stereotypes(o, m);
 }
 
-void stereotypes_transform::apply(meta_model::primitive& p) {
+void stereotypes_transform::apply(meta_model::structural::primitive& p) {
     const auto id(p.name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << id;
 

@@ -36,7 +36,7 @@
 #include "masd.dogen.coding/types/meta_model/attribute.hpp"
 #include "masd.dogen.coding/types/meta_model/name_tree.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/context.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/helper_properties.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/assistant_properties.hpp"
@@ -66,7 +66,7 @@ public:
      * includes a trailing space.
      */
     static std::string
-    make_inheritance_keyword_text(const coding::meta_model::object& o);
+    make_inheritance_keyword_text(const coding::meta_model::structural::object& o);
 
 public:
     /**

@@ -25,7 +25,7 @@
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.archetypes/types/location_repository.hpp"
-#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/module.hpp"
 #include "masd.dogen.generation/io/meta_model/model_io.hpp"
 #include "masd.dogen.generation/io/meta_model/facet_properties_io.hpp"
 #include "masd.dogen.generation/types/transforms/transformation_error.hpp"
@@ -64,7 +64,7 @@ is_element_disabled(const coding::meta_model::element& e) {
      * We're only interested in modules as these are the only elements
      * that can be enabled/disabled based on their state.
      */
-    const auto ptr(dynamic_cast<const coding::meta_model::module*>(&e));
+    const auto ptr(dynamic_cast<const coding::meta_model::structural::module*>(&e));
     if (!ptr)
         return false;
 

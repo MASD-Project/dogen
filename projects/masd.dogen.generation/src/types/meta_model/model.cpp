@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/module.hpp"
 
 namespace boost {
 
@@ -33,8 +33,8 @@ const boost::shared_ptr<masd::dogen::coding::meta_model::element>& rhs) {
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::module>& lhs,
-const boost::shared_ptr<masd::dogen::coding::meta_model::module>& rhs) {
+inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::structural::module>& lhs,
+const boost::shared_ptr<masd::dogen::coding::meta_model::structural::module>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -71,7 +71,7 @@ model::model(
     const std::unordered_map<masd::dogen::coding::meta_model::name, masd::dogen::coding::meta_model::origin_types>& references,
     const std::unordered_set<masd::dogen::coding::meta_model::name>& leaves,
     const std::vector<boost::shared_ptr<masd::dogen::coding::meta_model::element> >& elements,
-    const boost::shared_ptr<masd::dogen::coding::meta_model::module>& root_module,
+    const boost::shared_ptr<masd::dogen::coding::meta_model::structural::module>& root_module,
     const std::unordered_set<std::string>& module_ids,
     const bool has_generatable_types,
     const masd::dogen::coding::meta_model::technical_space input_technical_space,
@@ -224,19 +224,19 @@ void model::elements(const std::vector<boost::shared_ptr<masd::dogen::coding::me
     elements_ = std::move(v);
 }
 
-const boost::shared_ptr<masd::dogen::coding::meta_model::module>& model::root_module() const {
+const boost::shared_ptr<masd::dogen::coding::meta_model::structural::module>& model::root_module() const {
     return root_module_;
 }
 
-boost::shared_ptr<masd::dogen::coding::meta_model::module>& model::root_module() {
+boost::shared_ptr<masd::dogen::coding::meta_model::structural::module>& model::root_module() {
     return root_module_;
 }
 
-void model::root_module(const boost::shared_ptr<masd::dogen::coding::meta_model::module>& v) {
+void model::root_module(const boost::shared_ptr<masd::dogen::coding::meta_model::structural::module>& v) {
     root_module_ = v;
 }
 
-void model::root_module(const boost::shared_ptr<masd::dogen::coding::meta_model::module>&& v) {
+void model::root_module(const boost::shared_ptr<masd::dogen::coding::meta_model::structural::module>&& v) {
     root_module_ = std::move(v);
 }
 

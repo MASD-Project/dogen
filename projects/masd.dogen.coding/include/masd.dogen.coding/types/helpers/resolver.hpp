@@ -28,7 +28,7 @@
 #include <list>
 #include <boost/optional.hpp>
 #include "masd.dogen.coding/types/meta_model/name.hpp"
-#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object_template.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/helpers/indices.hpp"
 
@@ -124,7 +124,7 @@ private:
      */
     static void validate_inheritance_graph(
         const meta_model::model& m,
-        const meta_model::object& o);
+        const meta_model::structural::object& o);
 
     /**
      * @brief Ensures that all object templates that are parents of
@@ -134,7 +134,7 @@ private:
      */
     static void validate_object_template_inheritance(
         const meta_model::model& m,
-        const meta_model::object_template& c);
+        const meta_model::structural::object_template& ot);
 
     /**
      * @brief Resolve all object templates.

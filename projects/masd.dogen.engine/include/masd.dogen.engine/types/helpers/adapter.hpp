@@ -34,16 +34,16 @@
 #include "masd.dogen.injection/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/location.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/types/meta_model/enumerator.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/enumerator.hpp"
 #include "masd.dogen.coding/types/meta_model/attribute.hpp"
-#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
-#include "masd.dogen.coding/types/meta_model/primitive.hpp"
-#include "masd.dogen.coding/types/meta_model/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/exception.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/module.hpp"
-#include "masd.dogen.coding/types/meta_model/builtin.hpp"
-#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/module.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object_template.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/licence.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/modeline.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/modeline_group.hpp"
@@ -115,7 +115,7 @@ private:
      * @pre name of the injector attribute must not be empty.
      * @pre type and value of the injector attribute must be empty.
      */
-    coding::meta_model::enumerator
+    coding::meta_model::structural::enumerator
     to_enumerator(const coding::meta_model::name& owner,
         const injection::meta_model::attribute& ia) const;
 
@@ -134,7 +134,7 @@ public:
      * @brief Converts an injection element with a stereotype of
      * masd::object to a coding object.
      */
-    boost::shared_ptr<coding::meta_model::object>
+    boost::shared_ptr<coding::meta_model::structural::object>
     to_object(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
@@ -143,7 +143,7 @@ public:
      * @brief Converts an injection element with a stereotype of
      * masd::object_template to a coding object template.
      */
-    boost::shared_ptr<coding::meta_model::object_template>
+    boost::shared_ptr<coding::meta_model::structural::object_template>
     to_object_template(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
@@ -152,7 +152,7 @@ public:
      * @brief Converts an injection element with a stereotype of
      * masd::exception to a coding exception.
      */
-    boost::shared_ptr<coding::meta_model::exception>
+    boost::shared_ptr<coding::meta_model::structural::exception>
     to_exception(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
@@ -161,7 +161,7 @@ public:
      * @brief Converts an injection element with a stereotype of
      * masd::primitive to a coding primitive.
      */
-    boost::shared_ptr<coding::meta_model::primitive>
+    boost::shared_ptr<coding::meta_model::structural::primitive>
     to_primitive(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
@@ -170,7 +170,7 @@ public:
      * @brief Converts an injection element with a stereotype of
      * masd::enumeration to a coding enumeration.
      */
-    boost::shared_ptr<coding::meta_model::enumeration>
+    boost::shared_ptr<coding::meta_model::structural::enumeration>
     to_enumeration(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
@@ -179,7 +179,7 @@ public:
      * @brief Converts an injection element with a stereotype of
      * masd::module to a coding module.
      */
-    boost::shared_ptr<coding::meta_model::module>
+    boost::shared_ptr<coding::meta_model::structural::module>
     to_module(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
@@ -188,7 +188,7 @@ public:
      * @brief Converts an injection element with a stereotype of
      * masd::builtin to a coding builtin.
      */
-    boost::shared_ptr<coding::meta_model::builtin>
+    boost::shared_ptr<coding::meta_model::structural::builtin>
     to_builtin(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;

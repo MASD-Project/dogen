@@ -28,7 +28,7 @@
 #include "masd.dogen.generation.cpp/types/fabric/forward_declarations.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
 
 namespace masd::dogen::generation::cpp::formatters::types {
 

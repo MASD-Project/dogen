@@ -23,7 +23,7 @@
 #include "masd.dogen.generation.csharp/types/formatters/types/traits.hpp"
 #include "masd.dogen.generation.csharp/types/traits.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
-#include "masd.dogen.coding/types/meta_model/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/builtin.hpp"
 
 namespace masd::dogen::generation::csharp::formatters::types {
 

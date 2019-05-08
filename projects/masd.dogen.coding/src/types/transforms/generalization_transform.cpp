@@ -27,7 +27,7 @@
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/helpers/resolver.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
@@ -122,7 +122,7 @@ generalization_transform::update_and_collect_parent_ids(
 
 void generalization_transform::walk_up_generalization_tree(
     const feature_group& fg, const meta_model::name& leaf,
-    meta_model::model& em, meta_model::object& o) {
+    meta_model::model& em, meta_model::structural::object& o) {
 
     BOOST_LOG_SEV(lg, trace) << "Updating leaves for: "
                              << o.name().qualified().dot()
@@ -255,7 +255,7 @@ populate_generalizable_properties(const feature_group& fg,
          o.is_leaf(!o.is_parent() && o.is_child());
 
          if (!o.is_leaf()) {
-             BOOST_LOG_SEV(lg, trace) << "Type is not a leaf, finished processing.";
+             BOOST_LOG_SEV(lg, trace) << "Non-leaf type, processing finished.";
              continue;
          }
 

@@ -20,11 +20,11 @@
  */
 #include <sstream>
 #include "masd.dogen.coding/test_data/meta_model/name_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/module_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/element_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/model_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/origin_types_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/technical_space_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/structural/module_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/orm/model_properties_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/extraction_properties_td.hpp"
 #include "masd.dogen.generation/test_data/meta_model/element_archetype_td.hpp"
@@ -79,15 +79,15 @@ std::vector<boost::shared_ptr<masd::dogen::coding::meta_model::element> > create
     return r;
 }
 
-masd::dogen::coding::meta_model::module*
-create_masd_dogen_coding_meta_model_module_ptr(const unsigned int position) {
-    return masd::dogen::coding::meta_model::module_generator::create_ptr(position);
+masd::dogen::coding::meta_model::structural::module*
+create_masd_dogen_coding_meta_model_structural_module_ptr(const unsigned int position) {
+    return masd::dogen::coding::meta_model::structural::module_generator::create_ptr(position);
 }
 
-boost::shared_ptr<masd::dogen::coding::meta_model::module>
-create_boost_shared_ptr_masd_dogen_coding_meta_model_module(unsigned int position) {
-    boost::shared_ptr<masd::dogen::coding::meta_model::module> r(
-        create_masd_dogen_coding_meta_model_module_ptr(position));
+boost::shared_ptr<masd::dogen::coding::meta_model::structural::module>
+create_boost_shared_ptr_masd_dogen_coding_meta_model_structural_module(unsigned int position) {
+    boost::shared_ptr<masd::dogen::coding::meta_model::structural::module> r(
+        create_masd_dogen_coding_meta_model_structural_module_ptr(position));
     return r;
 }
 
@@ -175,7 +175,7 @@ populate(const unsigned int position, result_type& v) {
     v.references(create_std_unordered_map_masd_dogen_coding_meta_model_name_masd_dogen_coding_meta_model_origin_types(position + 2));
     v.leaves(create_std_unordered_set_masd_dogen_coding_meta_model_name(position + 3));
     v.elements(create_std_vector_boost_shared_ptr_masd_dogen_coding_meta_model_element(position + 4));
-    v.root_module(create_boost_shared_ptr_masd_dogen_coding_meta_model_module(position + 5));
+    v.root_module(create_boost_shared_ptr_masd_dogen_coding_meta_model_structural_module(position + 5));
     v.module_ids(create_std_unordered_set_std_string(position + 6));
     v.has_generatable_types(create_bool(position + 7));
     v.input_technical_space(create_masd_dogen_coding_meta_model_technical_space(position + 8));

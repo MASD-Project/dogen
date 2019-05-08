@@ -24,7 +24,7 @@
 #include "masd.dogen.generation.csharp/types/traits.hpp"
 #include "masd.dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
 
 namespace masd::dogen::generation::csharp::formatters::test_data {
 
@@ -68,7 +68,7 @@ inclusion_dependencies(const coding::meta_model::element& /*e*/) const {
 extraction::meta_model::artefact class_formatter::format(
     const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location());
-    const auto& o(a.as<coding::meta_model::object>(static_id(), e));
+    const auto& o(a.as<coding::meta_model::structural::object>(static_id(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(a.get_qualified_name(e.name()));

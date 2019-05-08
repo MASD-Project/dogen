@@ -28,9 +28,9 @@
 #include <list>
 #include <unordered_set>
 #include "masd.dogen.coding/types/meta_model/name.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/hash/meta_model/name_hash.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.coding/hash/meta_model/name_hash.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 
 namespace masd::dogen::coding::transforms {
@@ -76,7 +76,7 @@ private:
      * it goes along.
      */
     static void walk_name_tree(const meta_model::model& m,
-        meta_model::object& o, const meta_model::name_tree& nt,
+        meta_model::structural::object& o, const meta_model::name_tree& nt,
         const bool inherit_opaqueness_from_parent);
 
 private:
@@ -84,7 +84,7 @@ private:
      * @brief Processes a specific object.
      */
     static void process_object(const meta_model::model& m,
-        meta_model::object& o);
+        meta_model::structural::object& o);
 
 public:
     /**

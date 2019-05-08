@@ -26,14 +26,14 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/exception/utility_exception.hpp"
-#include "masd.dogen.coding/types/meta_model/exception.hpp"
-#include "masd.dogen.coding/types/meta_model/object_template.hpp"
-#include "masd.dogen.coding/types/meta_model/module.hpp"
-#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object_template.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/module.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/builtin.hpp"
 #include "masd.dogen.coding/types/helpers/name_builder.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/builtin.hpp"
 #include "masd.dogen.coding/types/helpers/building_error.hpp"
 #include "masd.dogen.coding/test/mock_model_factory.hpp"
 
@@ -247,17 +247,17 @@ std::list<std::string> make_internal_modules(const unsigned int module_n) {
     return r;
 }
 
-boost::shared_ptr<meta_model::builtin>
+boost::shared_ptr<meta_model::structural::builtin>
 make_builtin(const std::string& simple_name) {
     helpers::name_builder b;
     b.simple_name(simple_name);
 
-    auto r(boost::make_shared<meta_model::builtin>());
+    auto r(boost::make_shared<meta_model::structural::builtin>());
     r->name(b.build());
     return r;
 }
 
-void populate_object(meta_model::object& o, const unsigned int i,
+void populate_object(meta_model::structural::object& o, const unsigned int i,
     const meta_model::name& model_name,
     const unsigned int module_n,
     const meta_model::origin_types ot) {
@@ -337,7 +337,8 @@ void add_attribute(StatefulAndNameable& sn,
 }
 
 void instantiate_object_template(const bool attributes_indexed,
-    meta_model::object& o, const meta_model::object_template& otp) {
+    meta_model::structural::object& o,
+    const meta_model::structural::object_template& otp) {
 
     o.object_templates().push_back(otp.name());
     if (attributes_indexed) {
@@ -349,9 +350,9 @@ void instantiate_object_template(const bool attributes_indexed,
 }
 
 void parent_to_child(const bool attributes_indexed,
-    meta_model::object& parent,
-    meta_model::object& child,
-    meta_model::object& root_parent,
+    meta_model::structural::object& parent,
+    meta_model::structural::object& child,
+    meta_model::structural::object& root_parent,
     const bool add_leaf_relationship = true) {
 
     child.parents().push_back(parent.name());
@@ -376,7 +377,8 @@ void parent_to_child(const bool attributes_indexed,
 }
 
 void parent_to_child(const bool attributes_indexed,
-    meta_model::object& parent, meta_model::object& child,
+    meta_model::structural::object& parent,
+    meta_model::structural::object& child,
     const bool add_leaf_relationship = true) {
     parent_to_child(attributes_indexed, parent, child, parent,
         add_leaf_relationship);
@@ -389,7 +391,7 @@ void insert_nameable(std::unordered_map<std::string, Nameable>& map,
 }
 
 void insert_object(meta_model::model& m,
-    const boost::shared_ptr<meta_model::object>& o) {
+    const boost::shared_ptr<meta_model::structural::object>& o) {
     m.objects().insert(std::make_pair(o->name().qualified().dot(), o));
 }
 
@@ -545,7 +547,7 @@ void mock_model_factory::handle_model_module(
     insert_nameable(m.modules(), module);
 }
 
-meta_model::builtin mock_model_factory::
+meta_model::structural::builtin mock_model_factory::
 make_builtin(const unsigned int i, const meta_model::name& model_name,
     const meta_model::origin_types ot, const unsigned int module_n) const {
 
@@ -555,7 +557,7 @@ make_builtin(const unsigned int i, const meta_model::name& model_name,
     helpers::name_factory nf;
     meta_model::name n(nf.build_element_in_model(model_name, sn, ipp));
 
-    meta_model::builtin r;
+    meta_model::structural::builtin r;
     r.name(n);
     r.documentation(documentation);
     r.origin_type(ot);
@@ -563,18 +565,18 @@ make_builtin(const unsigned int i, const meta_model::name& model_name,
     return r;
 }
 
-boost::shared_ptr<meta_model::object>
+boost::shared_ptr<meta_model::structural::object>
 mock_model_factory::make_object(const unsigned int i,
     const meta_model::name& model_name, const meta_model::origin_types ot,
     const unsigned int module_n) const {
 
-    auto r(boost::make_shared<meta_model::object>());
+    auto r(boost::make_shared<meta_model::structural::object>());
     populate_object(*r, i, model_name, module_n, ot);
 
     return r;
 }
 
-boost::shared_ptr<meta_model::object>
+boost::shared_ptr<meta_model::structural::object>
 mock_model_factory::make_object_with_attribute(
     const unsigned int i, const meta_model::name& model_name,
     const meta_model::origin_types ot, const unsigned int module_n) const {
@@ -584,13 +586,13 @@ mock_model_factory::make_object_with_attribute(
     return r;
 }
 
-boost::shared_ptr<meta_model::object>
+boost::shared_ptr<meta_model::structural::object>
 mock_model_factory::make_object(unsigned int i,
     const meta_model::origin_types ot, const unsigned int module_n) const {
     return make_object(i, mock_model_name(i), ot, module_n);
 }
 
-boost::shared_ptr<meta_model::object_template>
+boost::shared_ptr<meta_model::structural::object_template>
 mock_model_factory::make_object_template(const unsigned int i,
     const meta_model::name& model_name,
     const meta_model::origin_types ot) const {
@@ -599,7 +601,7 @@ mock_model_factory::make_object_template(const unsigned int i,
     const auto otpn(object_template_name(i));
     meta_model::name n(nf.build_element_in_model(model_name, otpn));
 
-    auto r(boost::make_shared<meta_model::object_template>());
+    auto r(boost::make_shared<meta_model::structural::object_template>());
     r->name(n);
     r->documentation(documentation);
     r->origin_type(ot);
@@ -607,7 +609,7 @@ mock_model_factory::make_object_template(const unsigned int i,
     return r;
 }
 
-boost::shared_ptr<meta_model::enumeration> mock_model_factory::
+boost::shared_ptr<meta_model::structural::enumeration> mock_model_factory::
 make_enumeration(const unsigned int i, const meta_model::name& model_name,
     const meta_model::origin_types ot, const unsigned int module_n) const {
 
@@ -617,7 +619,7 @@ make_enumeration(const unsigned int i, const meta_model::name& model_name,
     helpers::name_factory nf;
     meta_model::name n(nf.build_element_in_model(model_name, sn, ipp));
 
-    auto r(boost::make_shared<meta_model::enumeration>());
+    auto r(boost::make_shared<meta_model::structural::enumeration>());
     r->name(n);
     r->documentation(documentation);
     r->origin_type(ot);
@@ -626,8 +628,9 @@ make_enumeration(const unsigned int i, const meta_model::name& model_name,
     ue.simple(unsigned_int);
     r->underlying_element(ue);
 
-    const auto lambda([&](const unsigned int pos) -> meta_model::enumerator {
-            meta_model::enumerator r;
+    const auto lambda([&](const unsigned int pos)
+        -> meta_model::structural::enumerator {
+                          meta_model::structural::enumerator r;
             r.name(nf.build_attribute_name(n, type_name(pos)));;
             r.value(boost::lexical_cast<std::string>(pos));
             return r;
@@ -639,7 +642,7 @@ make_enumeration(const unsigned int i, const meta_model::name& model_name,
     return r;
 }
 
-boost::shared_ptr<meta_model::exception>
+boost::shared_ptr<meta_model::structural::exception>
 mock_model_factory::make_exception(const unsigned int i,
     const meta_model::name& model_name, const meta_model::origin_types ot,
     const unsigned int module_n) const {
@@ -650,7 +653,7 @@ mock_model_factory::make_exception(const unsigned int i,
     helpers::name_factory nf;
     meta_model::name n(nf.build_element_in_model(model_name, sn, ipp));
 
-    auto r(boost::make_shared<meta_model::exception>());
+    auto r(boost::make_shared<meta_model::structural::exception>());
     r->name(n);
     r->documentation(documentation);
     r->origin_type(ot);
@@ -658,10 +661,10 @@ mock_model_factory::make_exception(const unsigned int i,
     return r;
 }
 
-boost::shared_ptr<meta_model::module>
+boost::shared_ptr<meta_model::structural::module>
 mock_model_factory::make_module(const meta_model::name& n,
     const meta_model::origin_types ot, const std::string& documentation) const {
-    auto r(boost::make_shared<meta_model::module>());
+    auto r(boost::make_shared<meta_model::structural::module>());
     r->name(n);
     r->documentation(documentation);
     r->origin_type(ot);
@@ -669,7 +672,7 @@ mock_model_factory::make_module(const meta_model::name& n,
     return r;
 }
 
-boost::shared_ptr<meta_model::module>
+boost::shared_ptr<meta_model::structural::module>
 mock_model_factory::make_module(const unsigned int module_n,
     const meta_model::name& model_name, const meta_model::origin_types ot,
     const std::list<std::string>& internal_modules,
@@ -1069,7 +1072,7 @@ object_with_both_transparent_and_opaque_associations(
         o0->transparent_associations().push_back(o1->name());
 
     helpers::name_factory nf;
-    auto o2(boost::make_shared<meta_model::object>());
+    auto o2(boost::make_shared<meta_model::structural::object>());
     o2->name(nf.build_element_name("boost", "shared_ptr"));
     insert_object(r, o2);
 
@@ -1093,7 +1096,7 @@ object_with_both_transparent_and_opaque_associations(
     if (flags_.associations_indexed())
         o0->opaque_associations().push_back(o3->name());
 
-    auto o4(boost::make_shared<meta_model::object>());
+    auto o4(boost::make_shared<meta_model::structural::object>());
     o4->name(nf.build_element_name("std", "string"));
     insert_object(r, o4);
 
@@ -1117,7 +1120,7 @@ object_with_attribute(const meta_model::origin_types ot,
     const auto mn(mock_model_name(0));
     auto o1(make_object(1, mn, ot));
 
-    auto o0(boost::make_shared<meta_model::object>());
+    auto o0(boost::make_shared<meta_model::structural::object>());
     if (objt == object_types::value_object)
         o0 = make_object(0, mn, ot);
     else {
@@ -1142,7 +1145,7 @@ object_with_attribute(const meta_model::origin_types ot,
     }
 
     if (pt == attribute_types::unsigned_int || pt == attribute_types::boolean) {
-        auto ui(boost::make_shared<meta_model::builtin>());
+        auto ui(boost::make_shared<meta_model::structural::builtin>());
         ui->name(p.parsed_type().current());
         insert_nameable(r.builtins(), ui);
 
@@ -1150,7 +1153,7 @@ object_with_attribute(const meta_model::origin_types ot,
             o0->transparent_associations().push_back(ui->name());
 
     } else if (pt == attribute_types::boost_shared_ptr) {
-        auto o2(boost::make_shared<meta_model::object>());
+        auto o2(boost::make_shared<meta_model::structural::object>());
         o2->name(nf.build_element_name("boost", "shared_ptr"));
         insert_object(r, o2);
 
@@ -1164,7 +1167,7 @@ object_with_attribute(const meta_model::origin_types ot,
         if (flags_.associations_indexed())
             o0->transparent_associations().push_back(b->name());
 
-        auto o2(boost::make_shared<meta_model::object>());
+        auto o2(boost::make_shared<meta_model::structural::object>());
         o2->name(nf.build_element_name("std", "pair"));
 
         if (flags_.associations_indexed())
@@ -1184,7 +1187,7 @@ object_with_attribute(const meta_model::origin_types ot,
         if (flags_.associations_indexed())
             o0->transparent_associations().push_back(ui->name());
 
-        auto o2(boost::make_shared<meta_model::object>());
+        auto o2(boost::make_shared<meta_model::structural::object>());
         o2->name(nf.build_element_name("boost", "variant"));
         insert_object(r, o2);
 
@@ -1192,7 +1195,7 @@ object_with_attribute(const meta_model::origin_types ot,
             o0->transparent_associations().push_back(o2->name());
 
     } else if (pt == attribute_types::std_string) {
-        auto o2(boost::make_shared<meta_model::object>());
+        auto o2(boost::make_shared<meta_model::structural::object>());
         o2->name(nf.build_element_name("std", "string"));
         insert_object(r, o2);
 
@@ -1512,7 +1515,7 @@ object_with_group_of_attributes_of_different_types(
 
     auto p1(mock_attribute(o0->name(), tp, 1));
     lambda(p1);
-    auto ui(boost::make_shared<meta_model::builtin>());
+    auto ui(boost::make_shared<meta_model::structural::builtin>());
     ui->name(p1.parsed_type().current());
     insert_nameable(r.builtins(), ui);
 
@@ -1522,7 +1525,7 @@ object_with_group_of_attributes_of_different_types(
     auto p2(mock_attribute(o0->name(), tp, 2, bsp, o3->name()));
     lambda(p2);
 
-    auto o2(boost::make_shared<meta_model::object>());
+    auto o2(boost::make_shared<meta_model::structural::object>());
     coding::helpers::name_factory nf;
     o2->name(nf.build_element_name("boost", "shared_ptr"));
     insert_object(r, o2);

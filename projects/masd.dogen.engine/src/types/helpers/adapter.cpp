@@ -143,7 +143,7 @@ adapter::to_attribute(const coding::meta_model::name& owner,
     return r;
 }
 
-coding::meta_model::enumerator
+coding::meta_model::structural::enumerator
 adapter::to_enumerator(const coding::meta_model::name& owner,
     const injection::meta_model::attribute& ia) const {
     ensure_not_empty(ia.name());
@@ -155,7 +155,7 @@ adapter::to_enumerator(const coding::meta_model::name& owner,
     }
 
     coding::helpers::name_factory f;
-    coding::meta_model::enumerator r;
+    coding::meta_model::structural::enumerator r;
     r.name(f.build_attribute_name(owner, ia.name()));
     r.documentation(ia.documentation());
 
@@ -189,14 +189,14 @@ void adapter::populate_element(const coding::meta_model::location& l,
         l.external_modules().empty() && l.model_modules().empty());
 }
 
-boost::shared_ptr<coding::meta_model::object>
+boost::shared_ptr<coding::meta_model::structural::object>
 adapter::to_object(const coding::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming external element to object: "
                              << ie.name();
 
-    auto r(boost::make_shared<coding::meta_model::object>());
+    auto r(boost::make_shared<coding::meta_model::structural::object>());
     populate_element(l, scr, ie, *r);
     r->is_associative_container(ie.is_associative_container());
     r->can_be_primitive_underlier(ie.can_be_primitive_underlier());
@@ -210,14 +210,14 @@ adapter::to_object(const coding::meta_model::location& l,
     return r;
 }
 
-boost::shared_ptr<coding::meta_model::object_template>
+boost::shared_ptr<coding::meta_model::structural::object_template>
 adapter::to_object_template(const coding::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming external element "
                              << "to object template: " << ie.name();
 
-    auto r(boost::make_shared<coding::meta_model::object_template>());
+    auto r(boost::make_shared<coding::meta_model::structural::object_template>());
     populate_element(l, scr, ie, *r);
 
     for (const auto& attr : ie.attributes())
@@ -229,38 +229,38 @@ adapter::to_object_template(const coding::meta_model::location& l,
     return r;
 }
 
-boost::shared_ptr<coding::meta_model::exception>
+boost::shared_ptr<coding::meta_model::structural::exception>
 adapter::to_exception(const coding::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming external element to exception: "
                              << ie.name();
 
-    auto r(boost::make_shared<coding::meta_model::exception>());
+    auto r(boost::make_shared<coding::meta_model::structural::exception>());
     populate_element(l, scr, ie, *r);
     return r;
 }
 
-boost::shared_ptr<coding::meta_model::primitive>
+boost::shared_ptr<coding::meta_model::structural::primitive>
 adapter::to_primitive(const coding::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming external element to primitive: "
                              << ie.name();
 
-    auto r(boost::make_shared<coding::meta_model::primitive>());
+    auto r(boost::make_shared<coding::meta_model::structural::primitive>());
     populate_element(l, scr, ie, *r);
     return r;
 }
 
-boost::shared_ptr<coding::meta_model::enumeration>
+boost::shared_ptr<coding::meta_model::structural::enumeration>
 adapter::to_enumeration(const coding::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming external element to enumeration: "
                              << ie.name();
 
-    auto r(boost::make_shared<coding::meta_model::enumeration>());
+    auto r(boost::make_shared<coding::meta_model::structural::enumeration>());
     populate_element(l, scr, ie, *r);
 
     for (const auto& attr : ie.attributes())
@@ -269,26 +269,26 @@ adapter::to_enumeration(const coding::meta_model::location& l,
     return r;
 }
 
-boost::shared_ptr<coding::meta_model::module> adapter::
+boost::shared_ptr<coding::meta_model::structural::module> adapter::
 to_module(const coding::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming external element to module: "
                              << ie.name();
 
-    auto r(boost::make_shared<coding::meta_model::module>());
+    auto r(boost::make_shared<coding::meta_model::structural::module>());
     populate_element(l, scr, ie, *r);
     return r;
 }
 
-boost::shared_ptr<coding::meta_model::builtin>
+boost::shared_ptr<coding::meta_model::structural::builtin>
 adapter::to_builtin(const coding::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming external element to builtin: "
                              << ie.name();
 
-    auto r(boost::make_shared<coding::meta_model::builtin>());
+    auto r(boost::make_shared<coding::meta_model::structural::builtin>());
     populate_element(l, scr, ie, *r);
 
     r->can_be_primitive_underlier(ie.can_be_primitive_underlier());

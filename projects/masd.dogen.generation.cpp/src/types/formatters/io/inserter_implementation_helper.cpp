@@ -24,7 +24,7 @@
 namespace masd::dogen::generation::cpp::formatters::io {
 
 void inserter_implementation_helper(
-    assistant& a, const coding::meta_model::object& o, const bool inside_class) {
+    assistant& a, const coding::meta_model::structural::object& o, const bool inside_class) {
 
     const auto qn(a.get_qualified_name(o.name()));
 

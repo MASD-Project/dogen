@@ -27,7 +27,7 @@
 
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.coding/types/meta_model/model.hpp"
-#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/module.hpp"
 #include "masd.dogen.coding/types/meta_model/origin_types.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 
@@ -43,7 +43,7 @@ private:
     /**
      * @brief Creates the module to represent the global namespace.
      */
-    static boost::shared_ptr<meta_model::module>
+    static boost::shared_ptr<meta_model::structural::module>
     create_global_module(const meta_model::origin_types ot);
 
     /**

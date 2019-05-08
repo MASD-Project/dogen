@@ -24,7 +24,7 @@
 #include "masd.dogen.generation.csharp/types/traits.hpp"
 #include "masd.dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
-#include "masd.dogen.coding/types/meta_model/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/exception.hpp"
 
 namespace masd::dogen::generation::csharp::formatters::types {
 

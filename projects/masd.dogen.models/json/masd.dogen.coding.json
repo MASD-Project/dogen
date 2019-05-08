@@ -109,85 +109,6 @@
       ]
     },
     {
-      "name": "meta_model::element",
-      "documentation": "Represents a generic coding construct.\n\nAn element is anything of interest in a problem domain which needs to be\nexpressed in code generation. It covers both types (objects, enumerations, etc),\nmeta-types (object templates) and non-types (modules and backend specific entities).\n",
-      "stereotypes": [
-        "masd::visitable",
-        "Element"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "is_element_extension",
-          "type": "bool",
-          "documentation": "If true, this element extends another element with the same id.\n"
-        },
-        {
-          "name": "artefact_properties",
-          "type": "std::unordered_map<std::string, artefact_properties>"
-        },
-        {
-          "name": "archetype_location_properties",
-          "type": "std::unordered_map<std::string, local_archetype_location_properties>"
-        },
-        {
-          "name": "decoration",
-          "type": "boost::optional<decoration::element_properties>",
-          "documentation": "If set, decoration to be added to each generated file.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::module",
-      "parents": [
-        "meta_model::element"
-      ],
-      "documentation": "Container for other coding elements.\n\nAggregates a group of logically related elements into a unit.\n",
-      "stereotypes": [
-        "Container"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "is_root",
-          "type": "bool",
-          "documentation": "If true, this module is thee root module of the model.\n"
-        },
-        {
-          "name": "is_global_module",
-          "type": "bool",
-          "documentation": "If true, this module is the pseudo module that models the global namespace.\n"
-        },
-        {
-          "name": "orm_properties",
-          "type": "boost::optional<orm::module_properties>"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::object_template",
-      "parents": [
-        "meta_model::element"
-      ],
-      "documentation": "Represents a structural template for masd objects.\n",
-      "stereotypes": [
-        "Stateful"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "parents",
-          "type": "std::list<name>",
-          "documentation": "List of object templates that this object template inherits from, if any.\n"
-        },
-        {
-          "name": "is_child",
-          "type": "bool",
-          "documentation": "If true, the object template has at least one parent.\n"
-        }
-      ]
-    },
-    {
       "name": "meta_model::Nameable",
       "documentation": "Ability to have a name.\n",
       "stereotypes": [
@@ -333,133 +254,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::builtin",
-      "parents": [
-        "meta_model::element"
-      ],
-      "documentation": "Represents a value type that is built-in at the hardware level.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "is_default_enumeration_type",
-          "type": "bool",
-          "documentation": "If true, this built-in is the default type to be used on enumerations.\n"
-        },
-        {
-          "name": "is_floating_point",
-          "type": "bool",
-          "documentation": "If true, this built-in represents a floating point number.\n"
-        },
-        {
-          "name": "can_be_enumeration_underlier",
-          "type": "bool",
-          "documentation": "If true, this element can be the underlying element of an enumeration.\n"
-        },
-        {
-          "name": "can_be_primitive_underlier",
-          "type": "bool",
-          "documentation": "If true, this built-in can be the underlying element of a primitive.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::enumeration",
-      "parents": [
-        "meta_model::element"
-      ],
-      "documentation": "Defines a bounded set of logically related values for a built-in type\nor a string.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "underlying_element",
-          "type": "name",
-          "documentation": "Underlying element of each instance of the enumeration.\n"
-        },
-        {
-          "name": "enumerators",
-          "type": "std::vector<enumerator>",
-          "documentation": "Enumerators for this enumeration.\n"
-        },
-        {
-          "name": "use_implementation_defined_underlying_element",
-          "type": "bool",
-          "documentation": "If true, we will use the implementation specific default enumeration type.\n"
-        },
-        {
-          "name": "use_implementation_defined_enumerator_values",
-          "type": "bool",
-          "documentation": "If true, we will rely on compiler generated enumeration values.\n"
-        },
-        {
-          "name": "add_invalid_enumerator",
-          "type": "bool",
-          "documentation": "If true, an enumerator for \"invalid\" will be added.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::enumerator",
-      "documentation": "One of a set of valid values that an enumeration can assume.\n\nThe enumerator defines an element in the domain of the enumeration.\n",
-      "stereotypes": [
-        "Documentable",
-        "Nameable",
-        "Configurable",
-        "Stereotypable"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "value",
-          "type": "std::string",
-          "documentation": "Value for the enumerator.\n\nIt must be castable to instance of the type defined in the enumeration.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::object",
-      "parents": [
-        "meta_model::element"
-      ],
-      "documentation": "Representation of the class notion in the OOP paradigm.\n\nThe @e object is equivalent to a meta-class, but we decided against this\nname because all elements should also have the prefix meta - after all, coding\nis ameta-model. Since the word class cannot be used in c++ to name types, we\ndecided instead to use the word object.\n",
-      "stereotypes": [
-        "Stateful",
-        "Relatable",
-        "Parameterisable"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "is_associative_container",
-          "type": "bool",
-          "documentation": "Object is an associative container.\n"
-        },
-        {
-          "name": "object_templates",
-          "type": "std::list<name>",
-          "documentation": "All object templates associated with this object.\n"
-        },
-        {
-          "name": "associative_container_keys",
-          "type": "std::list<name>",
-          "documentation": "Elements that are keys in an associative container.\n"
-        },
-        {
-          "name": "provides_opaqueness",
-          "type": "bool",
-          "documentation": "If true, this type provides opaqueness to any type parameters it may have.\n"
-        },
-        {
-          "name": "can_be_primitive_underlier",
-          "type": "bool",
-          "documentation": "If true, this object can be the underlying element of a primitive.\n"
-        },
-        {
-          "name": "orm_properties",
-          "type": "boost::optional<orm::object_properties>"
-        }
-      ]
-    },
-    {
       "name": "meta_model::name",
       "documentation": "Name of an element in coding space.\n\nA name represents a point in coding space, and this point can only be\nused by one coding element. Names can be uniquely identified by their\nqualified ID.\n\nName has the following properties: a) two different points in element space\ncannot have the same name and b) the same point in element space can only\nhave one and only one name.\n\nNames are required in addition to just using the qualfied ID representation\nbecause we use them to infer all sorts of properties for an element (namespaces,\nnaming files, etc).\n",
       "stereotypes": [
@@ -576,6 +370,35 @@
       ]
     },
     {
+      "name": "meta_model::element",
+      "documentation": "Represents a generic coding construct.\n\nAn element is anything of interest in a problem domain which needs to be\nexpressed in code generation. It covers both types (objects, enumerations, etc),\nmeta-types (object templates) and non-types (modules and backend specific entities).\n",
+      "stereotypes": [
+        "masd::visitable",
+        "Element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "is_element_extension",
+          "type": "bool",
+          "documentation": "If true, this element extends another element with the same id.\n"
+        },
+        {
+          "name": "artefact_properties",
+          "type": "std::unordered_map<std::string, artefact_properties>"
+        },
+        {
+          "name": "archetype_location_properties",
+          "type": "std::unordered_map<std::string, local_archetype_location_properties>"
+        },
+        {
+          "name": "decoration",
+          "type": "boost::optional<decoration::element_properties>",
+          "documentation": "If set, decoration to be added to each generated file.\n"
+        }
+      ]
+    },
+    {
       "name": "meta_model::model",
       "documentation": "Intermediate representation of a masd model.\n",
       "stereotypes": [
@@ -597,42 +420,42 @@
         },
         {
           "name": "modules",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<module>>",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<structural::module>>",
           "documentation": "Modules contained in the model.\n"
         },
         {
           "name": "object_templates",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<object_template>>",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<structural::object_template>>",
           "documentation": "All the object templates available in this model.\n"
         },
         {
           "name": "builtins",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<builtin>>",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<structural::builtin>>",
           "documentation": "All built-ins contained in this model.\n"
         },
         {
           "name": "enumerations",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<enumeration>>",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<structural::enumeration>>",
           "documentation": "All enumerations contained in this model.\n"
         },
         {
           "name": "primitives",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<primitive>>",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<structural::primitive>>",
           "documentation": "All primitives in this model.\n"
         },
         {
           "name": "objects",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<object>>",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<structural::object>>",
           "documentation": "All objects contained in this model.\n"
         },
         {
           "name": "exceptions",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<exception>>",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<structural::exception>>",
           "documentation": "All exceptions in this model.\n"
         },
         {
           "name": "visitors",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<visitor>>",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<structural::visitor>>",
           "documentation": "All visitors in this model.\n"
         },
         {
@@ -665,7 +488,7 @@
         },
         {
           "name": "root_module",
-          "type": "boost::shared_ptr<module>"
+          "type": "boost::shared_ptr<structural::module>"
         },
         {
           "name": "input_technical_space",
@@ -819,33 +642,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::visitor",
-      "parents": [
-        "meta_model::element"
-      ],
-      "documentation": "Represents a visitor in the GOF visitor design pattern.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "visits",
-          "type": "std::list<name>",
-          "documentation": "Elements that are visitable by the visitor.\n"
-        },
-        {
-          "name": "parent",
-          "type": "boost::optional<name>"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::exception",
-      "parents": [
-        "meta_model::element"
-      ],
-      "documentation": "Represents an exception which can be thrown.\n",
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "meta_model::Parameterisable",
       "stereotypes": [
         "masd::object_template"
@@ -928,40 +724,6 @@
           "name": "sln",
           "type": "",
           "documentation": "Visual studio solution.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::primitive",
-      "parents": [
-        "meta_model::element"
-      ],
-      "documentation": "Defines an element created by the user to wrap another element, most likely a built-in.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "is_nullable",
-          "type": "bool",
-          "documentation": "If true, this element can be null (empty).\n"
-        },
-        {
-          "name": "value_attribute",
-          "type": "attribute",
-          "documentation": "Attribute that represents the value of the primitive.\n"
-        },
-        {
-          "name": "use_type_aliasing",
-          "type": "bool",
-          "documentation": "If set to true, and if the owning technical space supports it, use type aliasing.\n"
-        },
-        {
-          "name": "is_immutable",
-          "type": "bool",
-          "documentation": "If true, do not generate a setter..\n"
-        },
-        {
-          "name": "orm_properties",
-          "type": "boost::optional<orm::primitive_properties>"
         }
       ]
     },

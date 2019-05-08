@@ -23,7 +23,7 @@
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.archetypes/types/location_repository.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
-#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/module.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/extraction_properties_transform.hpp"
 

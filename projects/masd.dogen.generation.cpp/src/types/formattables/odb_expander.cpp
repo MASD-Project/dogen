@@ -24,8 +24,8 @@
 #include "masd.dogen.utility/types/io/unordered_map_io.hpp"
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/primitive.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/adapter.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/common_odb_options.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/object_odb_options.hpp"
@@ -67,8 +67,8 @@ public:
     using element_visitor::visit;
     void visit(fabric::common_odb_options& coo);
     void visit(fabric::object_odb_options& ooo);
-    void visit(coding::meta_model::object& o);
-    void visit(coding::meta_model::primitive& p);
+    void visit(coding::meta_model::structural::object& o);
+    void visit(coding::meta_model::structural::primitive& p);
 
 public:
     const boost::optional<odb_properties>& result() const;
@@ -128,7 +128,7 @@ void updator::visit(fabric::object_odb_options& ooo) {
     ooo.header_guard_prefix(header_guard_factory::make(odb_rp.parent_path()));
 }
 
-void updator::visit(coding::meta_model::object& o) {
+void updator::visit(coding::meta_model::structural::object& o) {
     odb_properties op;
 
     auto top_level_pragmas(make_odb_pragmas(*o.configuration()));
@@ -219,7 +219,7 @@ void updator::visit(coding::meta_model::object& o) {
         result_ = op;
 }
 
-void updator::visit(coding::meta_model::primitive& p) {
+void updator::visit(coding::meta_model::structural::primitive& p) {
     odb_properties op;
     op.is_value(true);
     op.top_level_odb_pragmas(make_odb_pragmas(*p.configuration()));

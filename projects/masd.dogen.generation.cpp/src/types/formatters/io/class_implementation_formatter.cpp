@@ -29,7 +29,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/traits.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
 #include "masd.dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include <boost/throw_exception.hpp>
@@ -88,7 +88,7 @@ boost::filesystem::path class_implementation_formatter::full_path(
 std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const coding::meta_model::element& e) const {
-    const auto& o(assistant::as<coding::meta_model::object>(e));
+    const auto& o(assistant::as<coding::meta_model::structural::object>(e));
     auto builder(f.make());
     const auto ch_fn(traits::class_header_archetype());
     builder.add(o.name(), ch_fn);
@@ -114,7 +114,7 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
 extraction::meta_model::artefact class_implementation_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& o(a.as<coding::meta_model::object>(e));
+    const auto& o(a.as<coding::meta_model::structural::object>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

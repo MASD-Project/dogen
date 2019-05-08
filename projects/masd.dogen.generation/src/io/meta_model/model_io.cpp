@@ -22,11 +22,11 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
-#include "masd.dogen.coding/io/meta_model/module_io.hpp"
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.generation/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/io/meta_model/origin_types_io.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
+#include "masd.dogen.coding/io/meta_model/structural/module_io.hpp"
 #include "masd.dogen.coding/io/meta_model/orm/model_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/extraction_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/element_archetype_io.hpp"
@@ -97,7 +97,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::shared
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::coding::meta_model::module>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::coding::meta_model::structural::module>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 

@@ -23,8 +23,8 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/primitive.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/building_error.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
@@ -84,7 +84,7 @@ odb_options_factory::make(const generation::meta_model::model& m) const {
          * If we're an object with ORM properties, we need to be
          * processed.
          */
-        using coding::meta_model::object;
+        using coding::meta_model::structural::object;
         const auto optr(boost::dynamic_pointer_cast<object>(ptr));
         if (optr && optr->orm_properties()) {
             const auto& o(*optr);
@@ -95,7 +95,7 @@ odb_options_factory::make(const generation::meta_model::model& m) const {
          * If we're a primitive with ORM properties, we need to be
          * processed.
          */
-        using coding::meta_model::primitive;
+        using coding::meta_model::structural::primitive;
         const auto pptr(boost::dynamic_pointer_cast<primitive>(ptr));
         if (pptr && pptr->orm_properties()) {
             const auto& p(*pptr);

@@ -30,7 +30,7 @@
 #include <unordered_set>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
-#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
 #include "masd.dogen.generation/types/meta_model/element_archetype.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/directive_group.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/directive_group_repository.hpp"

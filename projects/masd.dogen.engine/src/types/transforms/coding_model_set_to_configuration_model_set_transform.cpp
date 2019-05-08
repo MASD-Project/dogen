@@ -24,7 +24,7 @@
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_model_set_io.hpp"
 #include "masd.dogen.coding/io/meta_model/model_set_io.hpp"
-#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/module.hpp"
 #include "masd.dogen.coding/types/meta_model/elements_traversal.hpp"
 #include "masd.dogen.engine/types/transforms/context.hpp"
 #include "masd.dogen.engine/types/transforms/transform_exception.hpp"
@@ -68,31 +68,31 @@ private:
 
 public:
     void operator()(coding::meta_model::element&) { }
-    void operator()(coding::meta_model::module& m) {
+    void operator()(coding::meta_model::structural::module& m) {
         if (m.is_root())
             model_.global(m.configuration());
         else
             extract(m);
     }
-    void operator()(coding::meta_model::object_template& ot) {
+    void operator()(coding::meta_model::structural::object_template& ot) {
         extract(ot);
         for (auto& attr : ot.local_attributes())
             extract(attr);
     }
-    void operator()(coding::meta_model::builtin& b) { extract(b); }
-    void operator()(coding::meta_model::enumeration& e) {
+    void operator()(coding::meta_model::structural::builtin& b) { extract(b); }
+    void operator()(coding::meta_model::structural::enumeration& e) {
         extract(e);
         for (auto& enm : e.enumerators())
             extract(enm);
     }
-    void operator()(coding::meta_model::primitive& p) { extract(p); }
-    void operator()(coding::meta_model::object& o) {
+    void operator()(coding::meta_model::structural::primitive& p) { extract(p); }
+    void operator()(coding::meta_model::structural::object& o) {
         extract(o);
         for (auto& attr : o.local_attributes())
             extract(attr);
     }
-    void operator()(coding::meta_model::exception& e) { extract(e); }
-    void operator()(coding::meta_model::visitor& v) { extract(v); }
+    void operator()(coding::meta_model::structural::exception& e) { extract(e); }
+    void operator()(coding::meta_model::structural::visitor& v) { extract(v); }
     void operator()(coding::meta_model::decoration::licence& l) { extract(l); }
     void operator()(coding::meta_model::decoration::modeline& ml) {
         extract(ml);

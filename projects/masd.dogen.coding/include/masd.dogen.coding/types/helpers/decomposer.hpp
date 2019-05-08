@@ -26,18 +26,18 @@
 #endif
 
 #include <string>
-#include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/types/meta_model/module.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/types/meta_model/exception.hpp"
-#include "masd.dogen.coding/types/meta_model/builtin.hpp"
-#include "masd.dogen.coding/types/meta_model/visitor.hpp"
-#include "masd.dogen.coding/types/meta_model/primitive.hpp"
-#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
-#include "masd.dogen.coding/types/meta_model/object_template.hpp"
-#include "masd.dogen.coding/types/meta_model/attribute.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/attribute.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/module.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object_template.hpp"
+
 #include "masd.dogen.coding/types/helpers/decomposition_result.hpp"
 
 namespace masd::dogen::coding::helpers {
@@ -69,14 +69,14 @@ public:
      * public due to the traversal.
      */
     void operator()(const meta_model::element& e);
-    void operator()(const meta_model::module& m);
-    void operator()(const meta_model::object_template& ot);
-    void operator()(const meta_model::builtin& b);
-    void operator()(const meta_model::enumeration& e);
-    void operator()(const meta_model::primitive& p);
-    void operator()(const meta_model::object& o);
-    void operator()(const meta_model::exception& e);
-    void operator()(const meta_model::visitor& v);
+    void operator()(const meta_model::structural::module& m);
+    void operator()(const meta_model::structural::object_template& ot);
+    void operator()(const meta_model::structural::builtin& b);
+    void operator()(const meta_model::structural::enumeration& e);
+    void operator()(const meta_model::structural::primitive& p);
+    void operator()(const meta_model::structural::object& o);
+    void operator()(const meta_model::structural::exception& e);
+    void operator()(const meta_model::structural::visitor& v);
 
 private:
     const decomposition_result& result() const;

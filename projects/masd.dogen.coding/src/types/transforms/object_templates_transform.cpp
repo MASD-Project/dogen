@@ -27,8 +27,8 @@
 #include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object_template.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/helpers/resolver.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
@@ -66,7 +66,7 @@ inline bool operator<(const name& lhs, const name& rhs) {
 
 namespace masd::dogen::coding::transforms {
 
-meta_model::object& object_templates_transform::
+meta_model::structural::object& object_templates_transform::
 find_object(const meta_model::name& n, meta_model::model& m) {
     auto i(m.objects().find(n.qualified().dot()));
     if (i == m.objects().end()) {
@@ -77,7 +77,7 @@ find_object(const meta_model::name& n, meta_model::model& m) {
     return *i->second;
 }
 
-meta_model::object_template& object_templates_transform::
+meta_model::structural::object_template& object_templates_transform::
 resolve_object_template(const meta_model::name& owner,
     const meta_model::name& object_template_name, meta_model::model& m) {
     using helpers::resolver;
@@ -124,9 +124,10 @@ remove_duplicates(std::list<meta_model::name>& names) {
 }
 
 void object_templates_transform::
-expand_object(meta_model::object& o, meta_model::model& m,
+expand_object(meta_model::structural::object& o, meta_model::model& m,
     std::unordered_set<meta_model::name>& processed_names) {
-    BOOST_LOG_SEV(lg, debug) << "Expanding object: " << o.name().qualified().dot();
+    BOOST_LOG_SEV(lg, debug) << "Expanding object: "
+                             << o.name().qualified().dot();
 
     if (processed_names.find(o.name()) != processed_names.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object already processed.";
@@ -218,7 +219,7 @@ void object_templates_transform::expand_objects(meta_model::model& m) {
 }
 
 void object_templates_transform::
-expand_object_template(meta_model::object_template& otp,
+expand_object_template(meta_model::structural::object_template& otp,
     meta_model::model& m,
     std::unordered_set<meta_model::name>& processed_names) {
     BOOST_LOG_SEV(lg, debug) << "Expand object template: "

@@ -29,7 +29,7 @@
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 #include "masd.dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
-#include "masd.dogen.coding/types/meta_model/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/primitive.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include <boost/throw_exception.hpp>
 
@@ -87,7 +87,7 @@ std::list<std::string>
 primitive_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const coding::meta_model::element& e) const {
-    using coding::meta_model::primitive;
+    using coding::meta_model::structural::primitive;
     const auto& o(assistant::as<primitive>(e));
     auto builder(f.make());
 
@@ -99,7 +99,7 @@ primitive_implementation_formatter::inclusion_dependencies(
 extraction::meta_model::artefact primitive_implementation_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& p(a.as<coding::meta_model::primitive>(e));
+    const auto& p(a.as<coding::meta_model::structural::primitive>(e));
 
     const auto sn(p.name().simple());
     const auto qn(a.get_qualified_name(p.name()));

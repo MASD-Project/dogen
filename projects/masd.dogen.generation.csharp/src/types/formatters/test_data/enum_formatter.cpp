@@ -24,7 +24,7 @@
 #include "masd.dogen.generation.csharp/types/traits.hpp"
 #include "masd.dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
-#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/enumeration.hpp"
 
 namespace masd::dogen::generation::csharp::formatters::test_data {
 
@@ -68,7 +68,7 @@ inclusion_dependencies(const coding::meta_model::element& /*e*/) const {
 extraction::meta_model::artefact enum_formatter::format(
     const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location());
-    const auto& ye(a.as<coding::meta_model::enumeration>(static_id(), e));
+    const auto& ye(a.as<coding::meta_model::structural::enumeration>(static_id(), e));
     {
         const auto sn(e.name().simple());
         auto sbf(a.make_scoped_boilerplate_formatter(e));

@@ -25,12 +25,12 @@
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/types/helpers/building_error.hpp"
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/module.hpp"
-#include "masd.dogen.coding/types/meta_model/visitor.hpp"
-#include "masd.dogen.coding/types/meta_model/exception.hpp"
-#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
-#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/module.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object_template.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
 #include "masd.dogen.coding/types/meta_model/elements_traversal.hpp"
@@ -84,18 +84,18 @@ private:
 
 public:
     using coding::meta_model::element_visitor::visit;
-    void visit(const coding::meta_model::visitor& v) { process_element(v); }
-    void visit(const coding::meta_model::enumeration& e) {
+    void visit(const coding::meta_model::structural::visitor& v) { process_element(v); }
+    void visit(const coding::meta_model::structural::enumeration& e) {
         process_element(e);
     }
-    void visit(const coding::meta_model::primitive& p) {
+    void visit(const coding::meta_model::structural::primitive& p) {
         process_element(p);
     }
-    void visit(const coding::meta_model::object& o) { process_element(o); }
-    void visit(const coding::meta_model::exception& e) {
+    void visit(const coding::meta_model::structural::object& o) { process_element(o); }
+    void visit(const coding::meta_model::structural::exception& e) {
         process_element(e);
     }
-    void visit(const coding::meta_model::module& m) { process_element(m); }
+    void visit(const coding::meta_model::structural::module& m) { process_element(m); }
 
 public:
     boost::shared_ptr<master_header> result() { return result_; }

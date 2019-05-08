@@ -22,11 +22,11 @@
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/types/meta_model/object.hpp"
-#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
-#include "masd.dogen.coding/types/meta_model/exception.hpp"
-#include "masd.dogen.coding/types/meta_model/primitive.hpp"
-#include "masd.dogen.coding/types/meta_model/visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/object.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/visitor.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/forward_declarations.hpp"
@@ -76,11 +76,11 @@ public:
 
 public:
     using coding::meta_model::element_visitor::visit;
-    void visit(coding::meta_model::visitor& v) {
+    void visit(coding::meta_model::structural::visitor& v) {
         result_.push_back(create(v));
     }
 
-    void visit(coding::meta_model::enumeration& e) {
+    void visit(coding::meta_model::structural::enumeration& e) {
         const auto fd(create(e));
         fd->is_enum(true);
         fd->underlying_element(e.underlying_element());
@@ -88,15 +88,15 @@ public:
         result_.push_back(fd);
     }
 
-    void visit(coding::meta_model::primitive& p) {
+    void visit(coding::meta_model::structural::primitive& p) {
         result_.push_back(create(p));
     }
 
-    void visit(coding::meta_model::object& o) {
+    void visit(coding::meta_model::structural::object& o) {
         result_.push_back(create(o));
     }
 
-    void visit(coding::meta_model::exception& e) {
+    void visit(coding::meta_model::structural::exception& e) {
         const auto fd(create(e));
         fd->is_exception(true);
         fd->intrinsic_technical_space(technical_space::cpp);

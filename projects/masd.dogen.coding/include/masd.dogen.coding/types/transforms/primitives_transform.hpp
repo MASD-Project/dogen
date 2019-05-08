@@ -30,7 +30,7 @@
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
-#include "masd.dogen.coding/types/meta_model/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/primitive.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
@@ -49,7 +49,7 @@ private:
     static feature_group make_feature_group(
         const variability::meta_model::feature_model& fm);
     static void populate_from_configuration(const feature_group& fg,
-        meta_model::primitive& p);
+        meta_model::structural::primitive& p);
 
 public:
     static void apply(const context& ctx, meta_model::model& m);
