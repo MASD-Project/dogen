@@ -2388,6 +2388,84 @@
           "documentation": "Value for the enumerator.\n\nIt must be castable to instance of the type defined in the enumeration.\n"
         }
       ]
+    },
+    {
+      "name": "meta_model::decoration::element_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "modeline_groups",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<modeline_group>>"
+        },
+        {
+          "name": "modelines",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<modeline>>"
+        },
+        {
+          "name": "licences",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<licence>>"
+        },
+        {
+          "name": "generation_markers",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<generation_marker>>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::variability::element_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "profile_templates",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<profile_template>>"
+        },
+        {
+          "name": "feature_template_groups",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<feature_template_group>>"
+        },
+        {
+          "name": "feature_template_group_registrar",
+          "type": "boost::shared_ptr<feature_template_group_registrar>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::structural::element_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "modules",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<module>>"
+        },
+        {
+          "name": "object_templates",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<object_template>>"
+        },
+        {
+          "name": "builtins",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<builtin>>"
+        },
+        {
+          "name": "enumerations",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<enumeration>>"
+        },
+        {
+          "name": "primitives",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<primitive>>"
+        },
+        {
+          "name": "objects",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<object>>"
+        },
+        {
+          "name": "exceptions",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<exception>>"
+        },
+        {
+          "name": "visitors",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<visitor>>"
+        }
+      ]
     }
   ]
 }

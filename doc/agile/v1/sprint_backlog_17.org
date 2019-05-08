@@ -10,22 +10,22 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-08 Wed 19:06]
+#+CAPTION: Clock summary at [2019-05-08 Wed 19:40]
 | <75>                                                       |         |       |      |       |
 | Headline                                                   | Time    |       |      |     % |
 |------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                               | *16:55* |       |      | 100.0 |
+| *Total time*                                               | *17:26* |       |      | 100.0 |
 |------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                    | 16:55   |       |      | 100.0 |
-| Active                                                     |         | 16:55 |      | 100.0 |
-| Edit release notes for previous sprint                     |         |       | 2:41 |  15.9 |
-| Create a video demo for the previous sprint's features     |         |       | 2:11 |  12.9 |
-| Sprint and product backlog grooming                        |         |       | 0:19 |   1.9 |
-| Defining profiles directly on a target model does not work |         |       | 0:30 |   3.0 |
-| Inner modules need to be qualified                         |         |       | 0:22 |   2.2 |
-| Create namespaces for model elements                       |         |       | 7:34 |  44.7 |
-| Leaves in internal modules are not captured correctly      |         |       | 1:33 |   9.2 |
-| Code generate feature infrastructure                       |         |       | 1:45 |  10.3 |
+| Stories                                                    | 17:26   |       |      | 100.0 |
+| Active                                                     |         | 17:26 |      | 100.0 |
+| Edit release notes for previous sprint                     |         |       | 2:41 |  15.4 |
+| Create a video demo for the previous sprint's features     |         |       | 2:11 |  12.5 |
+| Sprint and product backlog grooming                        |         |       | 0:19 |   1.8 |
+| Defining profiles directly on a target model does not work |         |       | 0:30 |   2.9 |
+| Inner modules need to be qualified                         |         |       | 0:22 |   2.1 |
+| Create namespaces for model elements                       |         |       | 7:45 |  44.5 |
+| Leaves in internal modules are not captured correctly      |         |       | 1:33 |   8.9 |
+| Code generate feature infrastructure                       |         |       | 2:05 |  12.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -196,6 +196,7 @@ resolver cannot find M::R unless we specify N::M::R.
 *** COMPLETED Create namespaces for model elements                    :story:
     CLOSED: [2019-05-07 Tue 16:17]
     :LOGBOOK:
+    CLOCK: [2019-05-08 Wed 19:28]--[2019-05-08 Wed 19:39] =>  0:11
     CLOCK: [2019-05-08 Wed 18:54]--[2019-05-08 Wed 19:06] =>  0:12
     CLOCK: [2019-05-08 Wed 18:45]--[2019-05-08 Wed 18:53] =>  0:08
     CLOCK: [2019-05-08 Wed 17:01]--[2019-05-08 Wed 18:01] =>  1:53
@@ -262,6 +263,7 @@ Time spent fixing build issues with either nightlies and/or CI.
 
 *** STARTED Code generate feature infrastructure                      :story:
     :LOGBOOK:
+    CLOCK: [2019-05-08 Wed 19:07]--[2019-05-08 Wed 19:27] =>  0:20
     CLOCK: [2019-05-08 Wed 09:27]--[2019-05-08 Wed 09:31] =>  0:04
     CLOCK: [2019-05-07 Tue 16:54]--[2019-05-07 Tue 18:01] =>  1:07
     CLOCK: [2019-05-07 Tue 16:26]--[2019-05-07 Tue 16:53] =>  0:27
