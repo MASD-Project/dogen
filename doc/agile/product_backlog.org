@@ -2931,6 +2931,13 @@ services.
 We would have to extend yarn to understand member variables as well as
 properties.
 
+Actually we should just have a meta-model concept for a masd property,
+which knows about getters and setters; these are associated with masd
+object's and object templates. Attributes, if required, need their own
+meta-model representation. This also means that we should determine
+the getter/setter settings within coding (for example, if immutable
+disable setter etc).
+
 ** Feature Heap
 
 New features for this release.
