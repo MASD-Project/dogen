@@ -220,5 +220,69 @@
     "template_kind": "instance",
     "scope": "root_module",
     "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "masd.generation.cpp.types.feature_group_header.postfix"
+    },
+    "archetype_location": {
+      "kernel": "masd",
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.types",
+      "archetype": "masd.generation.cpp.types.feature_group_header"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+   },
+   {
+    "name": {
+      "simple": "postfix",
+      "qualified": "masd.generation.cpp.types.feature_group_implementation.postfix"
+    },
+    "archetype_location": {
+      "kernel": "masd",
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.types",
+      "archetype": "masd.generation.cpp.types.feature_group_implementation"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "masd.generation.cpp.types.feature_group_registrar_header.postfix"
+    },
+    "archetype_location": {
+      "kernel": "masd",
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.types",
+      "archetype": "masd.generation.cpp.types.feature_group_registrar_header"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+   },
+   {
+    "name": {
+      "simple": "postfix",
+      "qualified": "masd.generation.cpp.types.feature_group_registrar_implementation.postfix"
+    },
+    "archetype_location": {
+      "kernel": "masd",
+      "backend": "masd.generation.cpp",
+      "facet": "masd.generation.cpp.types",
+      "archetype": "masd.generation.cpp.types.feature_group_registrar_implementation"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
   }
 ]

@@ -51,10 +51,10 @@ void initializer::initialize(registrar& rg) {
     register_formatter<namespace_header_formatter>(rg);
     register_formatter<visitor_header_formatter>(rg);
     register_formatter<forward_declarations_formatter>(rg);
-    // register_formatter<feature_group_header_formatter>(rg);
-    // register_formatter<feature_group_implementation_formatter>(rg);
-    // register_formatter<feature_group_registrar_header_formatter>(rg);
-    // register_formatter<feature_group_registrar_implementation_formatter>(rg);
+    register_formatter<feature_group_header_formatter>(rg);
+    register_formatter<feature_group_implementation_formatter>(rg);
+    register_formatter<feature_group_registrar_header_formatter>(rg);
+    register_formatter<feature_group_registrar_implementation_formatter>(rg);
 
     register_helper_formatter<smart_pointer_helper>(rg);
 }
