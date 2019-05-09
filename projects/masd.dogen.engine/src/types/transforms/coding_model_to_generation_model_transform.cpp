@@ -37,6 +37,8 @@
 #include "masd.dogen.coding/types/meta_model/decoration/modeline.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/generation_marker.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/modeline_group.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/feature_template_group.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/feature_template_group_registrar.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
@@ -92,7 +94,8 @@ private:
     }
 
 public:
-    void operator()(boost::shared_ptr<coding::meta_model::element>) { }
+    void operator()
+    (boost::shared_ptr<coding::meta_model::element>) { }
     void operator()
     (boost::shared_ptr<coding::meta_model::structural::module> m) {
         result_.module_ids().insert(m->name().qualified().dot());
@@ -143,6 +146,15 @@ public:
         add(m);
     }
 
+    void operator()(boost::shared_ptr<
+        coding::meta_model::variability::feature_template_group> ftg) {
+        add(ftg);
+    }
+    void operator()(boost::shared_ptr<coding::meta_model::variability::
+        feature_template_group_registrar> ftgrg) {
+        add(ftgrg);
+    }
+
 public:
     void add(
         const std::list<boost::shared_ptr<coding::meta_model::element>>& ie) {
@@ -175,6 +187,8 @@ compute_total_size(const coding::meta_model::model& m) {
     r += m.decoration_elements().generation_markers().size();
     r += m.decoration_elements().modeline_groups().size();
     r += m.decoration_elements().modelines().size();
+    r += m.variability_elements().feature_template_groups().size();
+    r += m.variability_elements().feature_template_group_registrar() != nullptr ?  1 : 0;
 
     return r;
 }

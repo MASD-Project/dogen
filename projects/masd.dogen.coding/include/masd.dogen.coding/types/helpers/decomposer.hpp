@@ -37,7 +37,6 @@
 #include "masd.dogen.coding/types/meta_model/structural/primitive.hpp"
 #include "masd.dogen.coding/types/meta_model/structural/enumeration.hpp"
 #include "masd.dogen.coding/types/meta_model/structural/object_template.hpp"
-
 #include "masd.dogen.coding/types/helpers/decomposition_result.hpp"
 
 namespace masd::dogen::coding::helpers {
