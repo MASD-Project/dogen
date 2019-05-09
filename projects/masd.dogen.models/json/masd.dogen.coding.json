@@ -1868,6 +1868,10 @@
           "type": "std::string"
         },
         {
+          "name": "value",
+          "type": "std::string"
+        },
+        {
           "name": "location",
           "type": "archetypes::location"
         },

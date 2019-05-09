@@ -41,6 +41,7 @@ feature_template::feature_template(
     const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
     const masd::dogen::coding::meta_model::name& name,
     const std::string& type,
+    const std::string& value,
     const masd::dogen::archetypes::location& location,
     const masd::dogen::variability::meta_model::template_kind template_kind,
     const masd::dogen::variability::meta_model::binding_point binding_point)
@@ -48,6 +49,7 @@ feature_template::feature_template(
       configuration_(configuration),
       name_(name),
       type_(type),
+      value_(value),
       location_(location),
       template_kind_(template_kind),
       binding_point_(binding_point) { }
@@ -58,6 +60,7 @@ void feature_template::swap(feature_template& other) noexcept {
     swap(configuration_, other.configuration_);
     swap(name_, other.name_);
     swap(type_, other.type_);
+    swap(value_, other.value_);
     swap(location_, other.location_);
     swap(template_kind_, other.template_kind_);
     swap(binding_point_, other.binding_point_);
@@ -68,6 +71,7 @@ bool feature_template::operator==(const feature_template& rhs) const {
         configuration_ == rhs.configuration_ &&
         name_ == rhs.name_ &&
         type_ == rhs.type_ &&
+        value_ == rhs.value_ &&
         location_ == rhs.location_ &&
         template_kind_ == rhs.template_kind_ &&
         binding_point_ == rhs.binding_point_;
@@ -141,6 +145,22 @@ void feature_template::type(const std::string& v) {
 
 void feature_template::type(const std::string&& v) {
     type_ = std::move(v);
+}
+
+const std::string& feature_template::value() const {
+    return value_;
+}
+
+std::string& feature_template::value() {
+    return value_;
+}
+
+void feature_template::value(const std::string& v) {
+    value_ = v;
+}
+
+void feature_template::value(const std::string&& v) {
+    value_ = std::move(v);
 }
 
 const masd::dogen::archetypes::location& feature_template::location() const {

@@ -51,6 +51,7 @@ public:
         const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
         const masd::dogen::coding::meta_model::name& name,
         const std::string& type,
+        const std::string& value,
         const masd::dogen::archetypes::location& location,
         const masd::dogen::variability::meta_model::template_kind template_kind,
         const masd::dogen::variability::meta_model::binding_point binding_point);
@@ -95,6 +96,11 @@ public:
     void type(const std::string& v);
     void type(const std::string&& v);
 
+    const std::string& value() const;
+    std::string& value();
+    void value(const std::string& v);
+    void value(const std::string&& v);
+
     const masd::dogen::archetypes::location& location() const;
     masd::dogen::archetypes::location& location();
     void location(const masd::dogen::archetypes::location& v);
@@ -121,6 +127,7 @@ private:
     boost::shared_ptr<masd::dogen::variability::meta_model::configuration> configuration_;
     masd::dogen::coding::meta_model::name name_;
     std::string type_;
+    std::string value_;
     masd::dogen::archetypes::location location_;
     masd::dogen::variability::meta_model::template_kind template_kind_;
     masd::dogen::variability::meta_model::binding_point binding_point_;

@@ -93,29 +93,37 @@ private:
 
 public:
     void operator()(boost::shared_ptr<coding::meta_model::element>) { }
-    void operator()(boost::shared_ptr<coding::meta_model::structural::module> m) {
+    void operator()
+    (boost::shared_ptr<coding::meta_model::structural::module> m) {
         result_.module_ids().insert(m->name().qualified().dot());
         add(m);
     }
-    void operator()(boost::shared_ptr<coding::meta_model::structural::object_template> ot) {
+    void operator()
+    (boost::shared_ptr<coding::meta_model::structural::object_template> ot) {
         add(ot);
     }
-    void operator()(boost::shared_ptr<coding::meta_model::structural::builtin> b) {
+    void operator()
+    (boost::shared_ptr<coding::meta_model::structural::builtin> b) {
         add(b);
     }
-    void operator()(boost::shared_ptr<coding::meta_model::structural::enumeration> e) {
+    void operator()
+    (boost::shared_ptr<coding::meta_model::structural::enumeration> e) {
         add(e);
     }
-    void operator()(boost::shared_ptr<coding::meta_model::structural::primitive> p) {
+    void operator()
+    (boost::shared_ptr<coding::meta_model::structural::primitive> p) {
         add(p);
     }
-    void operator()(boost::shared_ptr<coding::meta_model::structural::object> o) {
+    void operator()
+    (boost::shared_ptr<coding::meta_model::structural::object> o) {
         add(o);
     }
-    void operator()(boost::shared_ptr<coding::meta_model::structural::exception> e) {
+    void operator()
+    (boost::shared_ptr<coding::meta_model::structural::exception> e) {
         add(e);
     }
-    void operator()(boost::shared_ptr<coding::meta_model::structural::visitor> v) {
+    void operator()
+    (boost::shared_ptr<coding::meta_model::structural::visitor> v) {
         add(v);
     }
     void operator()
@@ -153,20 +161,21 @@ private:
 }
 
 std::size_t coding_model_to_generation_model_transform::
-compute_total_size(const coding::meta_model::model& em) {
+compute_total_size(const coding::meta_model::model& m) {
     std::size_t r;
-    r = em.structural_elements().modules().size();
-    r += em.structural_elements().object_templates().size();
-    r += em.structural_elements().builtins().size();
-    r += em.structural_elements().enumerations().size();
-    r += em.structural_elements().primitives().size();
-    r += em.structural_elements().objects().size();
-    r += em.structural_elements().exceptions().size();
-    r += em.structural_elements().visitors().size();
-    r += em.decoration_elements().licences().size();
-    r += em.decoration_elements().generation_markers().size();
-    r += em.decoration_elements().modeline_groups().size();
-    r += em.decoration_elements().modelines().size();
+    r = m.structural_elements().modules().size();
+    r += m.structural_elements().object_templates().size();
+    r += m.structural_elements().builtins().size();
+    r += m.structural_elements().enumerations().size();
+    r += m.structural_elements().primitives().size();
+    r += m.structural_elements().objects().size();
+    r += m.structural_elements().exceptions().size();
+    r += m.structural_elements().visitors().size();
+    r += m.decoration_elements().licences().size();
+    r += m.decoration_elements().generation_markers().size();
+    r += m.decoration_elements().modeline_groups().size();
+    r += m.decoration_elements().modelines().size();
+
     return r;
 }
 

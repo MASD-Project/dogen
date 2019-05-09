@@ -60,6 +60,7 @@ std::ostream& operator<<(std::ostream& s, const feature_template& v) {
       << "\"configuration\": " << v.configuration() << ", "
       << "\"name\": " << v.name() << ", "
       << "\"type\": " << "\"" << tidy_up_string(v.type()) << "\"" << ", "
+      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\"" << ", "
       << "\"location\": " << v.location() << ", "
       << "\"template_kind\": " << v.template_kind() << ", "
       << "\"binding_point\": " << v.binding_point()
