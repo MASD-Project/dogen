@@ -61,31 +61,31 @@ BOOST_AUTO_TEST_CASE(expanding_non_visitable_type_does_nothing) {
     SETUP_TEST_LOG_SOURCE("expanding_non_visitable_type_does_nothing");
 
     auto a(factory.make_single_type_model());
-    BOOST_REQUIRE(a.objects().size() == 1);
-    BOOST_CHECK(a.objects().begin()->second->contained_by().empty());
-    BOOST_REQUIRE(a.modules().empty());
-    BOOST_REQUIRE(a.builtins().empty());
-    BOOST_REQUIRE(a.enumerations().empty());
-    BOOST_REQUIRE(a.object_templates().empty());
-    BOOST_REQUIRE(a.visitors().empty());
+    BOOST_REQUIRE(a.structural_elements().objects().size() == 1);
+    BOOST_CHECK(a.structural_elements().objects().begin()->second->contained_by().empty());
+    BOOST_REQUIRE(a.structural_elements().modules().empty());
+    BOOST_REQUIRE(a.structural_elements().builtins().empty());
+    BOOST_REQUIRE(a.structural_elements().enumerations().empty());
+    BOOST_REQUIRE(a.structural_elements().object_templates().empty());
+    BOOST_REQUIRE(a.structural_elements().visitors().empty());
 
     stereotypes_transform::apply(mock_context_factory::make(), a);
 
-    BOOST_CHECK(a.objects().size() == 1);
-    BOOST_CHECK(a.visitors().empty());
-    BOOST_CHECK(a.modules().empty());
-    BOOST_CHECK(a.builtins().empty());
-    BOOST_CHECK(a.enumerations().empty());
-    BOOST_CHECK(a.object_templates().empty());
-    BOOST_CHECK(a.visitors().empty());
+    BOOST_CHECK(a.structural_elements().objects().size() == 1);
+    BOOST_CHECK(a.structural_elements().visitors().empty());
+    BOOST_CHECK(a.structural_elements().modules().empty());
+    BOOST_CHECK(a.structural_elements().builtins().empty());
+    BOOST_CHECK(a.structural_elements().enumerations().empty());
+    BOOST_CHECK(a.structural_elements().object_templates().empty());
+    BOOST_CHECK(a.structural_elements().visitors().empty());
 }
 
 BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {
     SETUP_TEST_LOG_SOURCE("visitable_object_with_no_leaves_throws");
 
     auto m(factory.make_single_type_model());
-    BOOST_REQUIRE(m.objects().size() == 1);
-    auto& o(*(m.objects().begin()->second));
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 1);
+    auto& o(*(m.structural_elements().objects().begin()->second));
     o.static_stereotypes().push_back(static_stereotypes::visitable);
     o.is_visitation_root(true);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
@@ -100,8 +100,8 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     SETUP_TEST_LOG_SOURCE("visitable_object_has_visitor_injected");
 
     auto m(factory.object_with_parent_in_the_same_model());
-    BOOST_REQUIRE(m.objects().size() == 2);
-    for (auto& pair : m.objects()) {
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 2);
+    for (auto& pair : m.structural_elements().objects()) {
         const auto& n(pair.second->name());
         if (factory.is_type_name_n(1, n)) {
             auto& o(*pair.second);
@@ -116,9 +116,9 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     stereotypes_transform::apply(ctx, m);
     BOOST_LOG_SEV(lg, debug) << "after: " << m;
 
-    BOOST_CHECK(m.objects().size() == 2);
+    BOOST_CHECK(m.structural_elements().objects().size() == 2);
     bool type_one(false);
-    for (const auto& pair : m.objects()) {
+    for (const auto& pair : m.structural_elements().objects()) {
         const auto& n(pair.second->name());
         if (factory.is_type_name_n(1, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified().dot();
@@ -127,8 +127,8 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     }
     BOOST_CHECK(type_one);
 
-    BOOST_REQUIRE(m.visitors().size() == 1);
-    const auto v(*(m.visitors().begin()->second));
+    BOOST_REQUIRE(m.structural_elements().visitors().size() == 1);
+    const auto v(*(m.structural_elements().visitors().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "found visitor: " << v.name().qualified().dot();
     BOOST_CHECK(factory.is_type_name_n_visitor(1, v.name()));
     BOOST_REQUIRE(v.visits().size() == 1);

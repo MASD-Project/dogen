@@ -83,7 +83,7 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
     using masd::dogen::coding::meta_model::fully_qualified_representation;
     const fully_qualified_representation
         fqr(invalid_id, invalid_id, invalid_id);
-    m.objects().begin()->second->name().qualified(fqr);
+    m.structural_elements().objects().begin()->second->name().qualified(fqr);
     m.input_technical_space(technical_space::cpp);
     BOOST_LOG_SEV(lg, debug) << "Model: " << m;
 

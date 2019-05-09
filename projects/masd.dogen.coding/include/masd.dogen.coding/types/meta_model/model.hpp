@@ -26,7 +26,6 @@
 #endif
 
 #include <list>
-#include <string>
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
@@ -39,20 +38,9 @@
 #include "masd.dogen.coding/types/meta_model/orm/model_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/extraction_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/structural/module_fwd.hpp"
-#include "masd.dogen.coding/types/meta_model/structural/object_fwd.hpp"
-#include "masd.dogen.coding/types/meta_model/decoration/licence_fwd.hpp"
-#include "masd.dogen.coding/types/meta_model/structural/builtin_fwd.hpp"
-#include "masd.dogen.coding/types/meta_model/structural/visitor_fwd.hpp"
-#include "masd.dogen.coding/types/meta_model/decoration/modeline_fwd.hpp"
-#include "masd.dogen.coding/types/meta_model/structural/exception_fwd.hpp"
-#include "masd.dogen.coding/types/meta_model/structural/primitive_fwd.hpp"
-#include "masd.dogen.coding/types/meta_model/structural/enumeration_fwd.hpp"
-#include "masd.dogen.coding/types/meta_model/decoration/modeline_group_fwd.hpp"
-#include "masd.dogen.coding/types/meta_model/structural/object_template_fwd.hpp"
-#include "masd.dogen.coding/types/meta_model/decoration/generation_marker_fwd.hpp"
-#include "masd.dogen.coding/types/meta_model/variability/profile_template_fwd.hpp"
-#include "masd.dogen.coding/types/meta_model/variability/feature_template_group_fwd.hpp"
-#include "masd.dogen.coding/types/meta_model/variability/feature_template_group_registrar_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/decoration/element_repository.hpp"
+#include "masd.dogen.coding/types/meta_model/structural/element_repository.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/element_repository.hpp"
 
 namespace masd::dogen::coding::meta_model {
 
@@ -77,26 +65,14 @@ public:
         const masd::dogen::coding::meta_model::origin_types origin_type,
         const std::unordered_map<masd::dogen::coding::meta_model::name, masd::dogen::coding::meta_model::origin_types>& references,
         const std::unordered_set<masd::dogen::coding::meta_model::name>& leaves,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::module> >& modules,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::object_template> >& object_templates,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::builtin> >& builtins,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::enumeration> >& enumerations,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::primitive> >& primitives,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::object> >& objects,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::exception> >& exceptions,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::visitor> >& visitors,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline_group> >& modeline_groups,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline> >& modelines,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::licence> >& licences,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::generation_marker> >& generation_markers,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::profile_template> >& variability_profile_templates,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> >& variability_feature_template_groups,
-        const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>& variability_feature_template_group_registrar,
         const boost::shared_ptr<masd::dogen::coding::meta_model::structural::module>& root_module,
         const masd::dogen::coding::meta_model::technical_space input_technical_space,
         const std::list<masd::dogen::coding::meta_model::technical_space>& output_technical_spaces,
         const boost::optional<masd::dogen::coding::meta_model::orm::model_properties>& orm_properties,
-        const masd::dogen::coding::meta_model::extraction_properties& extraction_properties);
+        const masd::dogen::coding::meta_model::extraction_properties& extraction_properties,
+        const masd::dogen::coding::meta_model::structural::element_repository& structural_elements,
+        const masd::dogen::coding::meta_model::decoration::element_repository& decoration_elements,
+        const masd::dogen::coding::meta_model::variability::element_repository& variability_elements);
 
 public:
     /**
@@ -150,121 +126,6 @@ public:
     void leaves(const std::unordered_set<masd::dogen::coding::meta_model::name>&& v);
     /**@}*/
 
-    /**
-     * @brief Modules contained in the model.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::module> >& modules() const;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::module> >& modules();
-    void modules(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::module> >& v);
-    void modules(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::module> >&& v);
-    /**@}*/
-
-    /**
-     * @brief All the object templates available in this model.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::object_template> >& object_templates() const;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::object_template> >& object_templates();
-    void object_templates(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::object_template> >& v);
-    void object_templates(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::object_template> >&& v);
-    /**@}*/
-
-    /**
-     * @brief All built-ins contained in this model.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::builtin> >& builtins() const;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::builtin> >& builtins();
-    void builtins(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::builtin> >& v);
-    void builtins(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::builtin> >&& v);
-    /**@}*/
-
-    /**
-     * @brief All enumerations contained in this model.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::enumeration> >& enumerations() const;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::enumeration> >& enumerations();
-    void enumerations(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::enumeration> >& v);
-    void enumerations(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::enumeration> >&& v);
-    /**@}*/
-
-    /**
-     * @brief All primitives in this model.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::primitive> >& primitives() const;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::primitive> >& primitives();
-    void primitives(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::primitive> >& v);
-    void primitives(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::primitive> >&& v);
-    /**@}*/
-
-    /**
-     * @brief All objects contained in this model.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::object> >& objects() const;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::object> >& objects();
-    void objects(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::object> >& v);
-    void objects(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::object> >&& v);
-    /**@}*/
-
-    /**
-     * @brief All exceptions in this model.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::exception> >& exceptions() const;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::exception> >& exceptions();
-    void exceptions(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::exception> >& v);
-    void exceptions(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::exception> >&& v);
-    /**@}*/
-
-    /**
-     * @brief All visitors in this model.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::visitor> >& visitors() const;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::visitor> >& visitors();
-    void visitors(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::visitor> >& v);
-    void visitors(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::visitor> >&& v);
-    /**@}*/
-
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline_group> >& modeline_groups() const;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline_group> >& modeline_groups();
-    void modeline_groups(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline_group> >& v);
-    void modeline_groups(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline_group> >&& v);
-
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline> >& modelines() const;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline> >& modelines();
-    void modelines(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline> >& v);
-    void modelines(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline> >&& v);
-
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::licence> >& licences() const;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::licence> >& licences();
-    void licences(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::licence> >& v);
-    void licences(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::licence> >&& v);
-
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::generation_marker> >& generation_markers() const;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::generation_marker> >& generation_markers();
-    void generation_markers(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::generation_marker> >& v);
-    void generation_markers(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::generation_marker> >&& v);
-
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::profile_template> >& variability_profile_templates() const;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::profile_template> >& variability_profile_templates();
-    void variability_profile_templates(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::profile_template> >& v);
-    void variability_profile_templates(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::profile_template> >&& v);
-
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> >& variability_feature_template_groups() const;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> >& variability_feature_template_groups();
-    void variability_feature_template_groups(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> >& v);
-    void variability_feature_template_groups(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> >&& v);
-
-    const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>& variability_feature_template_group_registrar() const;
-    boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>& variability_feature_template_group_registrar();
-    void variability_feature_template_group_registrar(const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>& v);
-    void variability_feature_template_group_registrar(const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>&& v);
-
     const boost::shared_ptr<masd::dogen::coding::meta_model::structural::module>& root_module() const;
     boost::shared_ptr<masd::dogen::coding::meta_model::structural::module>& root_module();
     void root_module(const boost::shared_ptr<masd::dogen::coding::meta_model::structural::module>& v);
@@ -298,6 +159,36 @@ public:
     void extraction_properties(const masd::dogen::coding::meta_model::extraction_properties& v);
     void extraction_properties(const masd::dogen::coding::meta_model::extraction_properties&& v);
 
+    /**
+     * @brief All structural elements in this model.
+     */
+    /**@{*/
+    const masd::dogen::coding::meta_model::structural::element_repository& structural_elements() const;
+    masd::dogen::coding::meta_model::structural::element_repository& structural_elements();
+    void structural_elements(const masd::dogen::coding::meta_model::structural::element_repository& v);
+    void structural_elements(const masd::dogen::coding::meta_model::structural::element_repository&& v);
+    /**@}*/
+
+    /**
+     * @brief All decoration elements in this model.
+     */
+    /**@{*/
+    const masd::dogen::coding::meta_model::decoration::element_repository& decoration_elements() const;
+    masd::dogen::coding::meta_model::decoration::element_repository& decoration_elements();
+    void decoration_elements(const masd::dogen::coding::meta_model::decoration::element_repository& v);
+    void decoration_elements(const masd::dogen::coding::meta_model::decoration::element_repository&& v);
+    /**@}*/
+
+    /**
+     * @brief All variability elements in this model.
+     */
+    /**@{*/
+    const masd::dogen::coding::meta_model::variability::element_repository& variability_elements() const;
+    masd::dogen::coding::meta_model::variability::element_repository& variability_elements();
+    void variability_elements(const masd::dogen::coding::meta_model::variability::element_repository& v);
+    void variability_elements(const masd::dogen::coding::meta_model::variability::element_repository&& v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -314,26 +205,14 @@ private:
     masd::dogen::coding::meta_model::origin_types origin_type_;
     std::unordered_map<masd::dogen::coding::meta_model::name, masd::dogen::coding::meta_model::origin_types> references_;
     std::unordered_set<masd::dogen::coding::meta_model::name> leaves_;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::module> > modules_;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::object_template> > object_templates_;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::builtin> > builtins_;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::enumeration> > enumerations_;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::primitive> > primitives_;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::object> > objects_;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::exception> > exceptions_;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::structural::visitor> > visitors_;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline_group> > modeline_groups_;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::modeline> > modelines_;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::licence> > licences_;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::decoration::generation_marker> > generation_markers_;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::profile_template> > variability_profile_templates_;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> > variability_feature_template_groups_;
-    boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar> variability_feature_template_group_registrar_;
     boost::shared_ptr<masd::dogen::coding::meta_model::structural::module> root_module_;
     masd::dogen::coding::meta_model::technical_space input_technical_space_;
     std::list<masd::dogen::coding::meta_model::technical_space> output_technical_spaces_;
     boost::optional<masd::dogen::coding::meta_model::orm::model_properties> orm_properties_;
     masd::dogen::coding::meta_model::extraction_properties extraction_properties_;
+    masd::dogen::coding::meta_model::structural::element_repository structural_elements_;
+    masd::dogen::coding::meta_model::decoration::element_repository decoration_elements_;
+    masd::dogen::coding::meta_model::variability::element_repository variability_elements_;
 };
 
 }

@@ -213,25 +213,25 @@ validate(const meta_model::model& m) {
     const bool ipr(m.origin_type() == origin_types::proxy_reference);
 
     validator v(m.name(), ipr);
-    for (const auto& pair : m.modules())
+    for (const auto& pair : m.structural_elements().modules())
         v.validate(pair.first, *pair.second);
 
-    for (const auto& pair : m.object_templates())
+    for (const auto& pair : m.structural_elements().object_templates())
         v.validate(pair.first, *pair.second);
 
-    for (const auto& pair : m.builtins())
+    for (const auto& pair : m.structural_elements().builtins())
         v.validate(pair.first, *pair.second);
 
-    for (const auto& pair : m.enumerations())
+    for (const auto& pair : m.structural_elements().enumerations())
         v.validate(pair.first, *pair.second);
 
-    for (const auto& pair : m.objects())
+    for (const auto& pair : m.structural_elements().objects())
         v.validate(pair.first, *pair.second);
 
-    for (const auto& pair : m.exceptions())
+    for (const auto& pair : m.structural_elements().exceptions())
         v.validate(pair.first, *pair.second);
 
-    for (const auto& pair : m.visitors())
+    for (const auto& pair : m.structural_elements().visitors())
         v.validate(pair.first, *pair.second);
 
     BOOST_LOG_SEV(lg, debug) << "Finished validation.";

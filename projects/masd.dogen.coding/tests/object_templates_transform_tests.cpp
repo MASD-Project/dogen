@@ -76,7 +76,7 @@ BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_object_templates_transform) {
 
     auto a(factory.make_empty_model());
     const auto e(factory.make_empty_model());
-    BOOST_CHECK(a.objects().empty());
+    BOOST_CHECK(a.structural_elements().objects().empty());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
     object_templates_transform::apply(mock_context_factory::make(), a);
@@ -90,7 +90,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_ob
     auto a(factory.make_single_type_model());
     const auto e(factory.make_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
-    BOOST_CHECK(a.objects().size() == 1);
+    BOOST_CHECK(a.structural_elements().objects().size() == 1);
 
     object_templates_transform::apply(mock_context_factory::make(), a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
@@ -108,12 +108,12 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_is_untouched_by_object_templ
 
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
-    BOOST_CHECK(a.object_templates().empty());
-    BOOST_CHECK(a.enumerations().empty());
-    BOOST_CHECK(a.builtins().size() == 1);
+    BOOST_CHECK(a.structural_elements().object_templates().empty());
+    BOOST_CHECK(a.structural_elements().enumerations().empty());
+    BOOST_CHECK(a.structural_elements().builtins().size() == 1);
 
-    BOOST_REQUIRE(a.objects().size() == 1);
-    const auto& o(*(a.objects().begin()->second));
+    BOOST_REQUIRE(a.structural_elements().objects().size() == 1);
+    const auto& o(*(a.structural_elements().objects().begin()->second));
     BOOST_CHECK(o.local_attributes().size() == 1);
     BOOST_CHECK(o.inherited_attributes().empty());
     BOOST_CHECK(o.all_attributes().empty());
@@ -130,13 +130,13 @@ BOOST_AUTO_TEST_CASE(model_with_single_object_template_is_untouched_by_object_te
     auto a(factory.make_single_object_template_model());
     const auto e(factory.make_single_object_template_model());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
-    BOOST_REQUIRE(a.objects().size() == 1);
+    BOOST_REQUIRE(a.structural_elements().objects().size() == 1);
 
-    const auto& o(*(a.objects().begin()->second));
+    const auto& o(*(a.structural_elements().objects().begin()->second));
     BOOST_CHECK(o.object_templates().size() == 1);
 
-    BOOST_REQUIRE(a.object_templates().size() == 1);
-    const auto& c(*(a.object_templates().begin()->second));
+    BOOST_REQUIRE(a.structural_elements().object_templates().size() == 1);
+    const auto& c(*(a.structural_elements().object_templates().begin()->second));
     BOOST_CHECK(c.parents().empty());
 
     object_templates_transform::apply(mock_context_factory::make(), a);
@@ -149,8 +149,8 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_object_template_inheritance_results
 
     auto m(factory.make_first_degree_object_templates_model());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
-    BOOST_REQUIRE(m.objects().size() == 2);
-    for (const auto& pair : m.objects()) {
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 2);
+    for (const auto& pair : m.structural_elements().objects()) {
         const auto& o(*pair.second);
         const auto& n(o.name());
 
@@ -168,8 +168,8 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_object_template_inheritance_results
         BOOST_CHECK(o.parents().empty());
     }
 
-    BOOST_REQUIRE(m.object_templates().size() == 2);
-    for (const auto& pair : m.object_templates()) {
+    BOOST_REQUIRE(m.structural_elements().object_templates().size() == 2);
+    for (const auto& pair : m.structural_elements().object_templates()) {
         const auto& c(*pair.second);
         const auto& n(c.name());
 
@@ -185,7 +185,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_object_template_inheritance_results
     object_templates_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
-    for (const auto& pair : m.object_templates()) {
+    for (const auto& pair : m.structural_elements().object_templates()) {
         const auto& c(*pair.second);
         const auto& n(c.name());
 
@@ -197,8 +197,8 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_object_template_inheritance_results
             BOOST_FAIL("Unexpected object template: " << n.qualified().dot());
     }
 
-    BOOST_REQUIRE(m.objects().size() == 2);
-    for (const auto& pair : m.objects()) {
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 2);
+    for (const auto& pair : m.structural_elements().objects()) {
         const auto& o(*pair.second);
         const auto& n(o.name());
 
@@ -216,8 +216,8 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_object_template_inheritance_result
 
     auto m(factory.make_second_degree_object_templates_model());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
-    BOOST_REQUIRE(m.objects().size() == 3);
-    for (const auto& pair : m.objects()) {
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 3);
+    for (const auto& pair : m.structural_elements().objects()) {
         const auto& o(*pair.second);
         const auto& n(o.name());
 
@@ -239,8 +239,8 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_object_template_inheritance_result
         BOOST_CHECK(o.parents().empty());
     }
 
-    BOOST_REQUIRE(m.object_templates().size() == 3);
-    for (const auto& pair : m.object_templates()) {
+    BOOST_REQUIRE(m.structural_elements().object_templates().size() == 3);
+    for (const auto& pair : m.structural_elements().object_templates()) {
         const auto& c(*pair.second);
         const auto& n(c.name());
 
@@ -261,7 +261,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_object_template_inheritance_result
     object_templates_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
-    for (const auto& pair : m.object_templates()) {
+    for (const auto& pair : m.structural_elements().object_templates()) {
         const auto& c(*pair.second);
         const auto& n(c.name());
 
@@ -275,8 +275,8 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_object_template_inheritance_result
             BOOST_FAIL("Unexpected object template: " << n.qualified().dot());
     }
 
-    BOOST_REQUIRE(m.objects().size() == 3);
-    for (const auto& pair : m.objects()) {
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 3);
+    for (const auto& pair : m.structural_elements().objects()) {
         const auto& o(*pair.second);
         const auto& n(o.name());
 
@@ -297,9 +297,9 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_object_template_inheritance_results_in_e
     auto m(factory.make_diamond_inheritance_object_templates_model());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    BOOST_REQUIRE(m.objects().size() == 1);
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 1);
     {
-        const auto& o(*(m.objects().begin()->second));
+        const auto& o(*(m.structural_elements().objects().begin()->second));
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
@@ -312,8 +312,8 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_object_template_inheritance_results_in_e
             BOOST_FAIL("Unexpected object: " << n.qualified().dot());
     }
 
-    BOOST_REQUIRE(m.object_templates().size() == 4);
-    for (const auto& pair : m.object_templates()) {
+    BOOST_REQUIRE(m.structural_elements().object_templates().size() == 4);
+    for (const auto& pair : m.structural_elements().object_templates()) {
         const auto& c(*pair.second);
         const auto& n(c.name());
 
@@ -341,8 +341,8 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_object_template_inheritance_results_in_e
 
     object_templates_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
-    BOOST_CHECK(m.object_templates().size() == 4);
-    for (const auto& pair : m.object_templates()) {
+    BOOST_CHECK(m.structural_elements().object_templates().size() == 4);
+    for (const auto& pair : m.structural_elements().object_templates()) {
         const auto& c(*pair.second);
         const auto& n(c.name());
 
@@ -374,9 +374,9 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_object_template_inheritance_results_in_e
             BOOST_FAIL("Unexpected object template: " << n.qualified().dot());
     }
 
-    BOOST_REQUIRE(m.objects().size() == 1);
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 1);
     {
-        const auto& o(*(m.objects().begin()->second));
+        const auto& o(*(m.structural_elements().objects().begin()->second));
         const auto& n(o.name());
         BOOST_CHECK(factory.is_type_name_n(0, n));
         BOOST_CHECK(o.object_templates().size() == 4);
@@ -390,8 +390,8 @@ BOOST_AUTO_TEST_CASE(model_with_single_parent_that_does_not_model_object_templat
     const auto e(factory.object_with_parent_in_the_same_model());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
-    BOOST_REQUIRE(a.objects().size() == 2);
-    BOOST_REQUIRE(a.object_templates().empty());
+    BOOST_REQUIRE(a.structural_elements().objects().size() == 2);
+    BOOST_REQUIRE(a.structural_elements().object_templates().empty());
 
     object_templates_transform::apply(mock_context_factory::make(), a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
@@ -405,8 +405,8 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_obj
     const auto e(factory.object_with_third_degree_parent_in_same_model());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
-    BOOST_REQUIRE(a.objects().size() == 4);
-    BOOST_REQUIRE(a.object_templates().empty());
+    BOOST_REQUIRE(a.structural_elements().objects().size() == 4);
+    BOOST_REQUIRE(a.structural_elements().object_templates().empty());
 
     object_templates_transform::apply(mock_context_factory::make(), a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
@@ -421,8 +421,8 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_object_temp
     const auto e(f.make_object_with_parent_that_instantiates_object_template());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
-    BOOST_REQUIRE(a.object_templates().size() == 1);
-    for (const auto& pair : a.object_templates()) {
+    BOOST_REQUIRE(a.structural_elements().object_templates().size() == 1);
+    for (const auto& pair : a.structural_elements().object_templates()) {
         const auto& c(*pair.second);
         const auto& n(c.name());
 
@@ -432,8 +432,8 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_object_temp
             BOOST_FAIL("Unexpected object: " << n.qualified().dot());
     }
 
-    BOOST_CHECK(a.objects().size() == 2);
-    for (const auto& pair : a.objects()) {
+    BOOST_CHECK(a.structural_elements().objects().size() == 2);
+    for (const auto& pair : a.structural_elements().objects()) {
         const auto& o(*pair.second);
         const auto& n(o.name());
 
@@ -461,8 +461,8 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
     auto m(factory.make_object_with_parent_that_instantiates_a_child_object_template());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    BOOST_REQUIRE(m.object_templates().size() == 2);
-    for (const auto& pair : m.object_templates()) {
+    BOOST_REQUIRE(m.structural_elements().object_templates().size() == 2);
+    for (const auto& pair : m.structural_elements().object_templates()) {
         const auto& otp(*pair.second);
         const auto& n(otp.name());
 
@@ -476,8 +476,8 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
             BOOST_FAIL("Unexpected object: " << n.qualified().dot());
     }
 
-    BOOST_REQUIRE(m.objects().size() == 2);
-    for (const auto& pair : m.objects()) {
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 2);
+    for (const auto& pair : m.structural_elements().objects()) {
         const auto& o(*pair.second);
         const auto& n(o.name());
 
@@ -497,8 +497,8 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
     object_templates_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
-    BOOST_CHECK(m.object_templates().size() == 2);
-    for (const auto& pair : m.object_templates()) {
+    BOOST_CHECK(m.structural_elements().object_templates().size() == 2);
+    for (const auto& pair : m.structural_elements().object_templates()) {
         const auto& c(*pair.second);
         const auto& n(c.name());
 
@@ -512,8 +512,8 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
             BOOST_FAIL("Unexpected object template: " << n.qualified().dot());
     }
 
-    BOOST_REQUIRE(m.objects().size() == 2);
-    for (const auto& pair : m.objects()) {
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 2);
+    for (const auto& pair : m.structural_elements().objects()) {
         const auto& o(*pair.second);
         const auto& n(o.name());
 
@@ -540,10 +540,10 @@ BOOST_AUTO_TEST_CASE(model_with_object_template_that_parents_missing_object_temp
     SETUP_TEST_LOG_SOURCE("model_with_object_template_that_parents_missing_object_template_throws");
 
     auto m(factory.make_object_template_that_inherits_missing_object_template());
-    BOOST_REQUIRE(m.objects().empty());
-    BOOST_REQUIRE(m.object_templates().size() == 1);
+    BOOST_REQUIRE(m.structural_elements().objects().empty());
+    BOOST_REQUIRE(m.structural_elements().object_templates().size() == 1);
     {
-        const auto& otp(*(m.object_templates().begin()->second));
+        const auto& otp(*(m.structural_elements().object_templates().begin()->second));
         const auto& n(otp.name());
 
         if (factory.is_object_template_name_n(1, otp.name())) {
@@ -566,14 +566,14 @@ BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_object_template_throw
     SETUP_TEST_LOG_SOURCE("model_with_object_that_models_missing_object_template_throws");
 
     auto m(factory.make_object_that_instantiates_missing_object_template());
-    BOOST_REQUIRE(m.object_templates().empty());
-    BOOST_REQUIRE(m.objects().size() == 1);
+    BOOST_REQUIRE(m.structural_elements().object_templates().empty());
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 1);
     {
-        const auto& n(m.objects().begin()->second->name());
+        const auto& n(m.structural_elements().objects().begin()->second->name());
         if (!factory.is_type_name_n(0, n))
             BOOST_FAIL("Unexpected object: " << n);
 
-        const auto& o(*(m.objects().begin()->second));
+        const auto& o(*(m.structural_elements().objects().begin()->second));
         BOOST_REQUIRE(o.object_templates().size() == 1);
         BOOST_REQUIRE(factory.is_object_template_name_n(0,
                 o.object_templates().front()));
@@ -591,10 +591,10 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
     SETUP_TEST_LOG_SOURCE("model_object_that_models_object_template_with_missing_parent");
 
     auto m(factory.make_object_that_instantiates_object_template_with_missing_parent());
-    BOOST_REQUIRE(m.object_templates().size() == 1);
+    BOOST_REQUIRE(m.structural_elements().object_templates().size() == 1);
     {
-        const auto& n(m.object_templates().begin()->first);
-        const auto& c(*(m.object_templates().begin()->second));
+        const auto& n(m.structural_elements().object_templates().begin()->first);
+        const auto& c(*(m.structural_elements().object_templates().begin()->second));
 
         if (factory.is_object_template_name_n(0, c.name()))
             BOOST_REQUIRE(c.parents().empty());
@@ -602,9 +602,9 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
             BOOST_FAIL("Unexpected object: " << n);
     }
 
-    BOOST_REQUIRE(m.objects().size() == 1);
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 1);
     {
-        const auto& o(*(m.objects().begin()->second));
+        const auto& o(*(m.structural_elements().objects().begin()->second));
         const auto& n(o.name());
 
         const auto& mc(o.object_templates());

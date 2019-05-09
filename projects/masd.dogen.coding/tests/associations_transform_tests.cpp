@@ -70,7 +70,7 @@ BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_associations_transform) {
 
     auto a(factory.make_empty_model());
     const auto e(factory.make_empty_model());
-    BOOST_REQUIRE(a.objects().empty());
+    BOOST_REQUIRE(a.structural_elements().objects().empty());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
     associations_transform::apply(mock_context_factory::make(), a);
@@ -84,7 +84,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_as
     auto a(factory.make_single_type_model());
     const auto e(factory.make_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
-    BOOST_REQUIRE(a.objects().size() == 1);
+    BOOST_REQUIRE(a.structural_elements().objects().size() == 1);
 
     associations_transform::apply(mock_context_factory::make(), a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
@@ -103,9 +103,9 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_results_in_expected_associat
     associations_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
-    BOOST_REQUIRE(m.objects().size() == 1);
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 1);
 
-    const auto& o(*m.objects().begin()->second);
+    const auto& o(*m.structural_elements().objects().begin()->second);
     BOOST_CHECK(o.transparent_associations().size() == 1);
     BOOST_CHECK(o.opaque_associations().empty());
 }
@@ -115,7 +115,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_object_templates_is_untouched_by_associat
 
     auto a(factory.make_empty_model());
     const auto e(factory.make_empty_model());
-    BOOST_REQUIRE(a.objects().empty());
+    BOOST_REQUIRE(a.structural_elements().objects().empty());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
     associations_transform::apply(mock_context_factory::make(), a);
@@ -132,8 +132,8 @@ BOOST_AUTO_TEST_CASE(model_with_more_than_one_attribute_of_the_same_type_results
     associations_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
-    BOOST_REQUIRE(m.objects().size() == 2);
-    for (const auto& pair : m.objects()) {
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 2);
+    for (const auto& pair : m.structural_elements().objects()) {
         const auto& o(*pair.second);
         const auto& n(o.name());
 
@@ -155,8 +155,8 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_typ
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     bool found0(false), found1(false), found3(false);
-    BOOST_REQUIRE(m.objects().size() == 5);
-    for (const auto& pair : m.objects()) {
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 5);
+    for (const auto& pair : m.structural_elements().objects()) {
         const auto& o(*pair.second);
         const auto& n(o.name());
 
@@ -214,8 +214,8 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_typ
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     bool found0(false), found1(false), found3(false);
-    BOOST_REQUIRE(m.objects().size() == 5);
-    for (const auto& pair : m.objects()) {
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 5);
+    for (const auto& pair : m.structural_elements().objects()) {
         const auto& o(*pair.second);
         const auto& n(o.name());
 
@@ -268,15 +268,15 @@ BOOST_AUTO_TEST_CASE(object_with_unsigned_int_attribute_results_in_expected_asso
     const auto objt(object_types::value_object);
     const auto pt(attribute_types::unsigned_int);
     auto m(factory.object_with_attribute(ot, objt, pt));
-    BOOST_REQUIRE(m.objects().size() == 1);
-    BOOST_REQUIRE(m.objects().begin()->second->local_attributes().size() == 1);
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 1);
+    BOOST_REQUIRE(m.structural_elements().objects().begin()->second->local_attributes().size() == 1);
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
     associations_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
-    BOOST_REQUIRE(m.objects().size() == 1);
-    for (const auto& pair : m.objects()) {
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 1);
+    for (const auto& pair : m.structural_elements().objects()) {
         const auto& o(*pair.second);
         const auto& n(o.name());
 
@@ -297,15 +297,15 @@ BOOST_AUTO_TEST_CASE(object_with_bool_attribute_results_in_expected_associations
     const auto objt(object_types::value_object);
     const auto pt(attribute_types::boolean);
     auto m(factory.object_with_attribute(ot, objt, pt));
-    BOOST_REQUIRE(m.objects().size() == 1);
-    BOOST_REQUIRE(m.objects().begin()->second->local_attributes().size() == 1);
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 1);
+    BOOST_REQUIRE(m.structural_elements().objects().begin()->second->local_attributes().size() == 1);
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
     associations_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
-    BOOST_REQUIRE(m.objects().size() == 1);
-    for (const auto& pair : m.objects()) {
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 1);
+    for (const auto& pair : m.structural_elements().objects()) {
         const auto& o(*pair.second);
         const auto& n(o.name());
 
@@ -327,11 +327,11 @@ BOOST_AUTO_TEST_CASE(object_with_object_attribute_results_in_expected_associatio
     const auto pt(attribute_types::value_object);
     auto m(factory.object_with_attribute(ot, objt, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
-    BOOST_REQUIRE(m.objects().size() == 2);
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 2);
 
     associations_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
-    for (const auto& pair : m.objects()) {
+    for (const auto& pair : m.structural_elements().objects()) {
         const auto& o(*pair.second);
         const auto& n(o.name());
 
@@ -361,8 +361,8 @@ BOOST_AUTO_TEST_CASE(object_with_std_pair_attribute_results_in_expected_associat
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     bool found(false);
-    BOOST_REQUIRE(m.objects().size() == 2);
-    for (const auto& pair : m.objects()) {
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 2);
+    for (const auto& pair : m.structural_elements().objects()) {
         const auto& o(*pair.second);
         const auto& n(o.name());
 
@@ -388,14 +388,14 @@ BOOST_AUTO_TEST_CASE(object_with_boost_variant_attribute_results_in_expected_ass
     const auto pt(attribute_types::boost_variant);
     auto m(factory.object_with_attribute(ot, objt, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
-    BOOST_REQUIRE(m.objects().size() == 2);
-    BOOST_REQUIRE(m.builtins().size() == 2);
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 2);
+    BOOST_REQUIRE(m.structural_elements().builtins().size() == 2);
 
     bool found(false);
     associations_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
-    for (const auto& pair : m.objects()) {
+    for (const auto& pair : m.structural_elements().objects()) {
         const auto& o(*pair.second);
         const auto& n(o.name());
 
@@ -436,8 +436,8 @@ BOOST_AUTO_TEST_CASE(object_with_std_string_attribute_results_in_expected_associ
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     bool found(false);
-    BOOST_REQUIRE(m.objects().size() == 2);
-    for (const auto& pair : m.objects()) {
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 2);
+    for (const auto& pair : m.structural_elements().objects()) {
         const auto& o(*pair.second);
         const auto& n(o.name());
 
@@ -460,13 +460,13 @@ BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_attribute_results_in_expected_
     const auto pt(attribute_types::boost_shared_ptr);
     auto m(factory.object_with_attribute(ot, objt, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
-    BOOST_REQUIRE(m.objects().size() == 3);
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 3);
 
     bool found(false);
     associations_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
-    for (const auto& pair : m.objects()) {
+    for (const auto& pair : m.structural_elements().objects()) {
         const auto& o(*pair.second);
         const auto& n(o.name());
 
@@ -491,13 +491,13 @@ BOOST_AUTO_TEST_CASE(object_with_both_regular_and_opaque_associations_results_in
 
     auto m(factory.object_with_both_transparent_and_opaque_associations());
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
-    BOOST_REQUIRE(m.objects().size() == 5);
+    BOOST_REQUIRE(m.structural_elements().objects().size() == 5);
 
     bool found(false);
     associations_transform::apply(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
-    for (const auto& pair : m.objects()) {
+    for (const auto& pair : m.structural_elements().objects()) {
         const auto& o(*pair.second);
         const auto& n(o.name());
 

@@ -59,15 +59,15 @@ namespace masd::dogen::coding::helpers {
 
 bool resolver::
 is_floating_point(const meta_model::model& m, const meta_model::name& n) {
-    auto i(m.builtins().find(n.qualified().dot()));
-    return i != m.builtins().end() && i->second->is_floating_point();
+    auto i(m.structural_elements().builtins().find(n.qualified().dot()));
+    return i != m.structural_elements().builtins().end() && i->second->is_floating_point();
 }
 
 bool resolver::
 is_builtin(const meta_model::model& m, const meta_model::name& n) {
 
-    auto i(m.builtins().find(n.qualified().dot()));
-    if (i != m.builtins().end()) {
+    auto i(m.structural_elements().builtins().find(n.qualified().dot()));
+    if (i != m.structural_elements().builtins().end()) {
         BOOST_LOG_SEV(lg, trace) << "Name belongs to a built-in in model.";
         return true;
     }
@@ -77,8 +77,8 @@ is_builtin(const meta_model::model& m, const meta_model::name& n) {
 bool resolver::
 is_primitive(const meta_model::model& m, const meta_model::name& n) {
 
-    auto i(m.primitives().find(n.qualified().dot()));
-    if (i != m.primitives().end()) {
+    auto i(m.structural_elements().primitives().find(n.qualified().dot()));
+    if (i != m.structural_elements().primitives().end()) {
         BOOST_LOG_SEV(lg, trace) << "Name belongs to a primitive in model.";
         return true;
     }
@@ -88,8 +88,8 @@ is_primitive(const meta_model::model& m, const meta_model::name& n) {
 bool resolver::
 is_enumeration(const meta_model::model& m, const meta_model::name& n) {
 
-    auto i(m.enumerations().find(n.qualified().dot()));
-    if (i != m.enumerations().end()) {
+    auto i(m.structural_elements().enumerations().find(n.qualified().dot()));
+    if (i != m.structural_elements().enumerations().end()) {
         BOOST_LOG_SEV(lg, trace) << "Name belongs to an enumeration in model.";
         return true;
     }
@@ -99,8 +99,8 @@ is_enumeration(const meta_model::model& m, const meta_model::name& n) {
 bool resolver::
 is_object(const meta_model::model& m, const meta_model::name& n) {
 
-    auto i(m.objects().find(n.qualified().dot()));
-    if (i != m.objects().end()) {
+    auto i(m.structural_elements().objects().find(n.qualified().dot()));
+    if (i != m.structural_elements().objects().end()) {
         BOOST_LOG_SEV(lg, trace) << "Name belongs to an object in model.";
         return true;
     }
@@ -110,8 +110,8 @@ is_object(const meta_model::model& m, const meta_model::name& n) {
 bool resolver::
 is_object_template(const meta_model::model& m, const meta_model::name& n) {
 
-    auto i(m.object_templates().find(n.qualified().dot()));
-    if (i != m.object_templates().end()) {
+    auto i(m.structural_elements().object_templates().find(n.qualified().dot()));
+    if (i != m.structural_elements().object_templates().end()) {
         BOOST_LOG_SEV(lg, trace) << "Name belongs to object_template in model.";
         return true;
     }
@@ -576,9 +576,9 @@ const meta_model::structural::object_template& otp) {
 void resolver::
 resolve_object_templates(const indices& idx, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Resolving object templates. Size: "
-                             << m.object_templates().size();
+                             << m.structural_elements().object_templates().size();
 
-    for (auto& pair : m.object_templates()) {
+    for (auto& pair : m.structural_elements().object_templates()) {
         auto& otp(pair.second);
 
         BOOST_LOG_SEV(lg, trace) << "Resolving object template: "
@@ -593,9 +593,9 @@ resolve_object_templates(const indices& idx, meta_model::model& m) {
 
 void resolver::resolve_objects(const indices& idx, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Resolving objects. Size: "
-                             << m.objects().size();
+                             << m.structural_elements().objects().size();
 
-    for (auto& pair : m.objects()) {
+    for (auto& pair : m.structural_elements().objects()) {
         auto& o(*pair.second);
 
         BOOST_LOG_SEV(lg, trace) << "Resolving object: "
@@ -611,9 +611,9 @@ void resolver::resolve_objects(const indices& idx, meta_model::model& m) {
 void resolver::
 resolve_enumerations(const indices& idx, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Resolving enumerations. Size: "
-                             << m.enumerations().size();
+                             << m.structural_elements().enumerations().size();
 
-    for (auto& pair : m.enumerations()) {
+    for (auto& pair : m.structural_elements().enumerations()) {
         auto& e(*pair.second);
 
         BOOST_LOG_SEV(lg, trace) << "Resolving enumeration: "
@@ -647,9 +647,9 @@ resolve_enumerations(const indices& idx, meta_model::model& m) {
 void resolver::
 resolve_primitives(const indices& idx, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Resolving primitives. Size: "
-                             << m.primitives().size();
+                             << m.structural_elements().primitives().size();
 
-    for (auto& pair : m.primitives()) {
+    for (auto& pair : m.structural_elements().primitives()) {
         auto& p(*pair.second);
 
         BOOST_LOG_SEV(lg, trace) << "Resolving primitive: "
@@ -708,8 +708,8 @@ try_resolve_object_template_name(meta_model::name ctx, const std::string& s,
 
     BOOST_LOG_SEV(lg, trace) << "Internal modules climb: " << r;
 
-    auto i(m.object_templates().find(r.qualified().dot()));
-    if (i != m.object_templates().end()) {
+    auto i(m.structural_elements().object_templates().find(r.qualified().dot()));
+    if (i != m.structural_elements().object_templates().end()) {
         BOOST_LOG_SEV(lg, trace) << "Found object template.";
         return r;
     }
@@ -730,8 +730,8 @@ try_resolve_object_template_name(meta_model::name ctx, const std::string& s,
 
             BOOST_LOG_SEV(lg, trace) << "Internal modules climb: " << r;
 
-            i = m.object_templates().find(r.qualified().dot());
-            if (i != m.object_templates().end()) {
+            i = m.structural_elements().object_templates().find(r.qualified().dot());
+            if (i != m.structural_elements().object_templates().end()) {
                 BOOST_LOG_SEV(lg, trace) << "Found object templates.";
                 return r;
             }

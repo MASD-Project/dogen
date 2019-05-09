@@ -84,7 +84,7 @@ void type_params_transform::apply(const context& ctx, meta_model::model& m) {
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto fg(make_feature_group(*ctx.feature_model()));
-    for (auto& pair : m.objects()) {
+    for (auto& pair : m.structural_elements().objects()) {
         auto& o(*pair.second);
         expand_type_parameters(fg, o);
     }

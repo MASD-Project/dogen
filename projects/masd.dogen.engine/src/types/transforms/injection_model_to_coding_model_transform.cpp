@@ -198,49 +198,60 @@ process_element(const helpers::adapter& ad,
     using coding::meta_model::static_stereotypes;
     switch (et) {
     case static_stereotypes::object:
-        insert(ad.to_object(l, scr, e), m.objects());
+        insert(ad.to_object(l, scr, e),
+            m.structural_elements().objects());
         break;
     case static_stereotypes::object_template:
-        insert(ad.to_object_template(l, scr, e), m.object_templates());
+        insert(ad.to_object_template(l, scr, e),
+            m.structural_elements().object_templates());
         break;
     case static_stereotypes::exception:
-        insert(ad.to_exception(l, scr, e), m.exceptions());
+        insert(ad.to_exception(l, scr, e),
+            m.structural_elements().exceptions());
         break;
     case static_stereotypes::primitive:
-        insert(ad.to_primitive(l, scr, e), m.primitives());
+        insert(ad.to_primitive(l, scr, e),
+            m.structural_elements().primitives());
         break;
     case static_stereotypes::enumeration:
-        insert(ad.to_enumeration(l, scr, e), m.enumerations());
+        insert(ad.to_enumeration(l, scr, e),
+            m.structural_elements().enumerations());
         break;
     case static_stereotypes::module:
-        insert(ad.to_module(l, scr, e), m.modules());
+        insert(ad.to_module(l, scr, e),
+            m.structural_elements().modules());
         break;
     case static_stereotypes::builtin:
-        insert(ad.to_builtin(l, scr, e), m.builtins());
+        insert(ad.to_builtin(l, scr, e),
+            m.structural_elements().builtins());
         break;
     case static_stereotypes::modeline_group:
-        insert(ad.to_modeline_group(l, scr, e), m.modeline_groups());
+        insert(ad.to_modeline_group(l, scr, e),
+            m.decoration_elements().modeline_groups());
         break;
     case static_stereotypes::modeline:
-        insert(ad.to_modeline(l, scr, e), m.modelines());
+        insert(ad.to_modeline(l, scr, e),
+            m.decoration_elements().modelines());
         break;
     case static_stereotypes::generation_marker:
-        insert(ad.to_generation_marker(l, scr, e), m.generation_markers());
+        insert(ad.to_generation_marker(l, scr, e),
+            m.decoration_elements().generation_markers());
         break;
     case static_stereotypes::licence:
-        insert(ad.to_licence(l, scr, e), m.licences());
+        insert(ad.to_licence(l, scr, e),
+            m.decoration_elements().licences());
         break;
     case static_stereotypes::variability_profile_template:
         insert(ad.to_variability_profile_template(l, scr, e),
-            m.variability_profile_templates());
+            m.variability_elements().profile_templates());
         break;
     case static_stereotypes::variability_feature_template_group:
         insert(ad.to_variability_feature_template_group(l, scr, e),
-            m.variability_feature_template_groups());
+            m.variability_elements().feature_template_groups());
         break;
     case static_stereotypes::variability_feature_template_group_registrar:
         // FIXME: throw if already set.
-        m.variability_feature_template_group_registrar(
+        m.variability_elements().feature_template_group_registrar(
             ad.to_variability_feature_template_group_registrar(l, scr, e));
         break;
     default: {
@@ -302,7 +313,7 @@ apply(const context& ctx, const injection::meta_model::model& m) {
     const auto scr(h.from_string(m.stereotypes()));
     rm.dynamic_stereotypes(scr.dynamic_stereotypes());
     rm.documentation(m.documentation());
-    insert(r.root_module(), r.modules());
+    insert(r.root_module(), r.structural_elements().modules());
 
     stp.end_transform(r);
     return r;

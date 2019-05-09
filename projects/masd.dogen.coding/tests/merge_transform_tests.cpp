@@ -81,11 +81,11 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
 
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << combined;
 
-    BOOST_CHECK(combined.objects().size() == n);
-    BOOST_CHECK(combined.builtins().empty());
-    BOOST_CHECK(combined.enumerations().empty());
-    BOOST_CHECK(combined.object_templates().empty());
-    BOOST_CHECK(combined.modules().empty());
+    BOOST_CHECK(combined.structural_elements().objects().size() == n);
+    BOOST_CHECK(combined.structural_elements().builtins().empty());
+    BOOST_CHECK(combined.structural_elements().enumerations().empty());
+    BOOST_CHECK(combined.structural_elements().object_templates().empty());
+    BOOST_CHECK(combined.structural_elements().modules().empty());
     BOOST_CHECK(combined.references().size() == 4);
 
     for (const auto pair : combined.references())
@@ -93,7 +93,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
 
     std::set<std::string> object_names;
     std::set<std::string> model_names;
-    for (const auto& pair : combined.objects()) {
+    for (const auto& pair : combined.structural_elements().objects()) {
         const auto& n(pair.second->name());
         BOOST_REQUIRE(n.location().model_modules().size() == 1);
         object_names.insert(n.location().model_modules().front() + "_" +
@@ -138,10 +138,10 @@ BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
     const auto combined(merge_transform::apply(ctx, m, ims));
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << combined;
 
-    BOOST_CHECK(combined.objects().empty());
-    BOOST_CHECK(combined.builtins().empty());
-    BOOST_CHECK(combined.enumerations().empty());
-    BOOST_CHECK(combined.modules().empty());
+    BOOST_CHECK(combined.structural_elements().objects().empty());
+    BOOST_CHECK(combined.structural_elements().builtins().empty());
+    BOOST_CHECK(combined.structural_elements().enumerations().empty());
+    BOOST_CHECK(combined.structural_elements().modules().empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

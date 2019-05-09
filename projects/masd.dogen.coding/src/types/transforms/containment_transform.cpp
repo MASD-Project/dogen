@@ -224,7 +224,7 @@ void updater::update_containing_element(const meta_model::name& container,
      * First we check to see if the container is a module. If it is,
      * update the module membership list.
      */
-    bool inserted = try_insert(model_.modules(), container_id, containee_id);
+    bool inserted = try_insert(model_.structural_elements().modules(), container_id, containee_id);
     if (inserted)
         return;
 
@@ -234,7 +234,7 @@ void updater::update_containing_element(const meta_model::name& container,
     BOOST_LOG_SEV(lg, trace) << "Could not find module: '"
                              << container_id << "'. "
                              << "Trying as a modeline group.";
-    inserted = try_insert(model_.modeline_groups(), container_id, containee_id);
+    inserted = try_insert(model_.decoration_elements().modeline_groups(), container_id, containee_id);
     if (inserted)
         return;
 

@@ -289,13 +289,13 @@ apply(const context& ctx, const coding::meta_model::model_set& ms) {
     const auto fg(make_feature_group(fm));
 
     std::list<variability::meta_model::profile_template> r;
-    for (const auto& pair : ms.target().variability_profile_templates()) {
+    for (const auto& pair : ms.target().variability_elements().profile_templates()) {
         const auto& vpt(*pair.second);
         r.push_back(adapt(fg, vpt));
     }
 
     for (const auto& m : ms.references()) {
-        for (const auto& pair : m.variability_profile_templates()) {
+        for (const auto& pair : m.variability_elements().profile_templates()) {
             const auto& vpt(*pair.second);
             r.push_back(adapt(fg, vpt));
         }

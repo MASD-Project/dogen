@@ -37,7 +37,7 @@ namespace masd::dogen::coding::helpers {
 indices indexer::index(meta_model::model& m) {
     indices r;
 
-    for (const auto& pair : m.builtins()) {
+    for (const auto& pair : m.structural_elements().builtins()) {
         const auto id(pair.first);
         r.elements_referable_by_attributes().insert(id);
 
@@ -49,15 +49,15 @@ indices indexer::index(meta_model::model& m) {
             r.primitive_underliers().insert(id);
     }
 
-    for (const auto& pair : m.primitives()) {
+    for (const auto& pair : m.structural_elements().primitives()) {
         const auto id(pair.first);
         r.elements_referable_by_attributes().insert(id);
     }
 
-    for (const auto& pair : m.enumerations())
+    for (const auto& pair : m.structural_elements().enumerations())
         r.elements_referable_by_attributes().insert(pair.first);
 
-    for (const auto& pair : m.objects()) {
+    for (const auto& pair : m.structural_elements().objects()) {
         const auto id(pair.first);
         r.elements_referable_by_attributes().insert(id);
 

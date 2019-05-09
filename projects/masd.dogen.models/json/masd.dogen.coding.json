@@ -419,74 +419,6 @@
           "documentation": "All leaf types in this model.\n\nLeaves are types concrete types which have a parent.\n"
         },
         {
-          "name": "modules",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<structural::module>>",
-          "documentation": "Modules contained in the model.\n"
-        },
-        {
-          "name": "object_templates",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<structural::object_template>>",
-          "documentation": "All the object templates available in this model.\n"
-        },
-        {
-          "name": "builtins",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<structural::builtin>>",
-          "documentation": "All built-ins contained in this model.\n"
-        },
-        {
-          "name": "enumerations",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<structural::enumeration>>",
-          "documentation": "All enumerations contained in this model.\n"
-        },
-        {
-          "name": "primitives",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<structural::primitive>>",
-          "documentation": "All primitives in this model.\n"
-        },
-        {
-          "name": "objects",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<structural::object>>",
-          "documentation": "All objects contained in this model.\n"
-        },
-        {
-          "name": "exceptions",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<structural::exception>>",
-          "documentation": "All exceptions in this model.\n"
-        },
-        {
-          "name": "visitors",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<structural::visitor>>",
-          "documentation": "All visitors in this model.\n"
-        },
-        {
-          "name": "modeline_groups",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<decoration::modeline_group>>"
-        },
-        {
-          "name": "modelines",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<decoration::modeline>>"
-        },
-        {
-          "name": "licences",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<decoration::licence>>"
-        },
-        {
-          "name": "generation_markers",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<decoration::generation_marker>>"
-        },
-        {
-          "name": "variability_profile_templates",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<variability::profile_template>>"
-        },
-        {
-          "name": "variability_feature_template_groups",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<variability::feature_template_group>>"
-        },
-        {
-          "name": "variability_feature_template_group_registrar",
-          "type": "boost::shared_ptr<variability::feature_template_group_registrar>"
-        },
-        {
           "name": "root_module",
           "type": "boost::shared_ptr<structural::module>"
         },
@@ -507,6 +439,21 @@
         {
           "name": "extraction_properties",
           "type": "extraction_properties"
+        },
+        {
+          "name": "structural_elements",
+          "type": "structural::element_repository",
+          "documentation": "All structural elements in this model.\n"
+        },
+        {
+          "name": "decoration_elements",
+          "type": "decoration::element_repository",
+          "documentation": "All decoration elements in this model.\n"
+        },
+        {
+          "name": "variability_elements",
+          "type": "variability::element_repository",
+          "documentation": "All variability elements in this model.\n"
         }
       ]
     },

@@ -144,7 +144,7 @@ obtain_enumeration_default_underlying_element_name(const meta_model::model& m) {
 
     meta_model::name r;
     bool found(false);
-    for (const auto& pair : m.builtins()) {
+    for (const auto& pair : m.structural_elements().builtins()) {
         const auto b(*pair.second);
         const auto id(b.name().qualified().dot());
         if (b.is_default_enumeration_type()) {
@@ -271,14 +271,14 @@ void enumerations_transform::apply(const context& ctx, meta_model::model& m) {
      * do not use enumerations. Otherwise, we'd fail when searching
      * for the default underlying element name.
      */
-    if (m.enumerations().empty())
+    if (m.structural_elements().enumerations().empty())
         return;
 
     const auto l(m.input_technical_space());
     const auto fg(make_feature_group(*ctx.feature_model()));
     const auto duen(obtain_enumeration_default_underlying_element_name(m));
 
-    for (auto& pair : m.enumerations()) {
+    for (auto& pair : m.structural_elements().enumerations()) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Expanding: " << id;
 

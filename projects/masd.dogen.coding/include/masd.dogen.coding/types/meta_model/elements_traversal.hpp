@@ -50,129 +50,129 @@ namespace masd::dogen::coding::meta_model {
 template<typename TraversalVisitor>
 inline void elements_traversal(const meta_model::model& m,
     const TraversalVisitor& v) {
-    for (const auto& pair : m.modules())
+    for (const auto& pair : m.structural_elements().modules())
         v(*pair.second);
 
-    for (const auto& pair : m.object_templates())
+    for (const auto& pair : m.structural_elements().object_templates())
         v(*pair.second);
 
-    for (const auto& pair : m.builtins())
+    for (const auto& pair : m.structural_elements().builtins())
         v(*pair.second);
 
-    for (const auto& pair : m.enumerations())
+    for (const auto& pair : m.structural_elements().enumerations())
         v(*pair.second);
 
-    for (const auto& pair : m.primitives())
+    for (const auto& pair : m.structural_elements().primitives())
         v(*pair.second);
 
-    for (const auto& pair : m.objects())
+    for (const auto& pair : m.structural_elements().objects())
         v(*pair.second);
 
-    for (const auto& pair : m.exceptions())
+    for (const auto& pair : m.structural_elements().exceptions())
         v(*pair.second);
 
-    for (const auto& pair : m.visitors())
+    for (const auto& pair : m.structural_elements().visitors())
         v(*pair.second);
 
-    for (const auto& pair : m.licences())
+    for (const auto& pair : m.decoration_elements().licences())
         v(*pair.second);
 
-    for (const auto& pair : m.modelines())
+    for (const auto& pair : m.decoration_elements().modelines())
         v(*pair.second);
 
-    for (const auto& pair : m.modeline_groups())
+    for (const auto& pair : m.decoration_elements().modeline_groups())
         v(*pair.second);
 
-    for (const auto& pair : m.generation_markers())
+    for (const auto& pair : m.decoration_elements().generation_markers())
         v(*pair.second);
 
-    for (const auto& pair : m.variability_profile_templates())
+    for (const auto& pair : m.variability_elements().profile_templates())
         v(*pair.second);
 }
 
 template<typename TraversalVisitor>
 inline void elements_traversal(const meta_model::model& m,
     TraversalVisitor& v) {
-    for (auto& pair : m.modules())
+    for (auto& pair : m.structural_elements().modules())
         v(*pair.second);
 
-    for (auto& pair : m.object_templates())
+    for (auto& pair : m.structural_elements().object_templates())
         v(*pair.second);
 
-    for (auto& pair : m.builtins())
+    for (auto& pair : m.structural_elements().builtins())
         v(*pair.second);
 
-    for (auto& pair : m.enumerations())
+    for (auto& pair : m.structural_elements().enumerations())
         v(*pair.second);
 
-    for (auto& pair : m.primitives())
+    for (auto& pair : m.structural_elements().primitives())
         v(*pair.second);
 
-    for (auto& pair : m.objects())
+    for (auto& pair : m.structural_elements().objects())
         v(*pair.second);
 
-    for (auto& pair : m.exceptions())
+    for (auto& pair : m.structural_elements().exceptions())
         v(*pair.second);
 
-    for (auto& pair : m.visitors())
+    for (auto& pair : m.structural_elements().visitors())
         v(*pair.second);
 
-    for (const auto& pair : m.licences())
+    for (const auto& pair : m.decoration_elements().licences())
         v(*pair.second);
 
-    for (const auto& pair : m.modelines())
+    for (const auto& pair : m.decoration_elements().modelines())
         v(*pair.second);
 
-    for (const auto& pair : m.modeline_groups())
+    for (const auto& pair : m.decoration_elements().modeline_groups())
         v(*pair.second);
 
-    for (const auto& pair : m.generation_markers())
+    for (const auto& pair : m.decoration_elements().generation_markers())
         v(*pair.second);
 
-    for (const auto& pair : m.variability_profile_templates())
+    for (const auto& pair : m.variability_elements().profile_templates())
         v(*pair.second);
 }
 
 template<typename TraversalVisitor>
 inline void elements_traversal(meta_model::model& m,
     TraversalVisitor& v) {
-    for (auto& pair : m.modules())
+    for (auto& pair : m.structural_elements().modules())
         v(*pair.second);
 
-    for (auto& pair : m.object_templates())
+    for (auto& pair : m.structural_elements().object_templates())
         v(*pair.second);
 
-    for (auto& pair : m.builtins())
+    for (auto& pair : m.structural_elements().builtins())
         v(*pair.second);
 
-    for (auto& pair : m.enumerations())
+    for (auto& pair : m.structural_elements().enumerations())
         v(*pair.second);
 
-    for (auto& pair : m.primitives())
+    for (auto& pair : m.structural_elements().primitives())
         v(*pair.second);
 
-    for (auto& pair : m.objects())
+    for (auto& pair : m.structural_elements().objects())
         v(*pair.second);
 
-    for (auto& pair : m.exceptions())
+    for (auto& pair : m.structural_elements().exceptions())
         v(*pair.second);
 
-    for (auto& pair : m.visitors())
+    for (auto& pair : m.structural_elements().visitors())
         v(*pair.second);
 
-    for (const auto& pair : m.licences())
+    for (const auto& pair : m.decoration_elements().licences())
         v(*pair.second);
 
-    for (const auto& pair : m.modelines())
+    for (const auto& pair : m.decoration_elements().modelines())
         v(*pair.second);
 
-    for (const auto& pair : m.modeline_groups())
+    for (const auto& pair : m.decoration_elements().modeline_groups())
         v(*pair.second);
 
-    for (const auto& pair : m.generation_markers())
+    for (const auto& pair : m.decoration_elements().generation_markers())
         v(*pair.second);
 
-    for (const auto& pair : m.variability_profile_templates())
+    for (const auto& pair : m.variability_elements().profile_templates())
         v(*pair.second);
 }
 /**@}*/
@@ -185,129 +185,129 @@ inline void elements_traversal(meta_model::model& m,
 template<typename TraversalVisitor>
 inline void shared_elements_traversal(const meta_model::model& m,
     const TraversalVisitor& v) {
-    for (const auto& pair : m.modules())
+    for (const auto& pair : m.structural_elements().modules())
         v(pair.second);
 
-    for (const auto& pair : m.object_templates())
+    for (const auto& pair : m.structural_elements().object_templates())
         v(pair.second);
 
-    for (const auto& pair : m.builtins())
+    for (const auto& pair : m.structural_elements().builtins())
         v(pair.second);
 
-    for (const auto& pair : m.enumerations())
+    for (const auto& pair : m.structural_elements().enumerations())
         v(pair.second);
 
-    for (const auto& pair : m.primitives())
+    for (const auto& pair : m.structural_elements().primitives())
         v(pair.second);
 
-    for (const auto& pair : m.objects())
+    for (const auto& pair : m.structural_elements().objects())
         v(pair.second);
 
-    for (const auto& pair : m.exceptions())
+    for (const auto& pair : m.structural_elements().exceptions())
         v(pair.second);
 
-    for (const auto& pair : m.visitors())
+    for (const auto& pair : m.structural_elements().visitors())
         v(pair.second);
 
-    for (const auto& pair : m.licences())
+    for (const auto& pair : m.decoration_elements().licences())
         v(pair.second);
 
-    for (const auto& pair : m.modelines())
+    for (const auto& pair : m.decoration_elements().modelines())
         v(pair.second);
 
-    for (const auto& pair : m.modeline_groups())
+    for (const auto& pair : m.decoration_elements().modeline_groups())
         v(pair.second);
 
-    for (const auto& pair : m.generation_markers())
+    for (const auto& pair : m.decoration_elements().generation_markers())
         v(pair.second);
 
-    for (const auto& pair : m.variability_profile_templates())
+    for (const auto& pair : m.variability_elements().profile_templates())
         v(pair.second);
 }
 
 template<typename TraversalVisitor>
 inline void shared_elements_traversal(const meta_model::model& m,
     TraversalVisitor& v) {
-    for (auto& pair : m.modules())
+    for (auto& pair : m.structural_elements().modules())
         v(pair.second);
 
-    for (auto& pair : m.object_templates())
+    for (auto& pair : m.structural_elements().object_templates())
         v(pair.second);
 
-    for (auto& pair : m.builtins())
+    for (auto& pair : m.structural_elements().builtins())
         v(pair.second);
 
-    for (auto& pair : m.enumerations())
+    for (auto& pair : m.structural_elements().enumerations())
         v(pair.second);
 
-    for (auto& pair : m.primitives())
+    for (auto& pair : m.structural_elements().primitives())
         v(pair.second);
 
-    for (auto& pair : m.objects())
+    for (auto& pair : m.structural_elements().objects())
         v(pair.second);
 
-    for (auto& pair : m.exceptions())
+    for (auto& pair : m.structural_elements().exceptions())
         v(pair.second);
 
-    for (auto& pair : m.visitors())
+    for (auto& pair : m.structural_elements().visitors())
         v(pair.second);
 
-    for (const auto& pair : m.licences())
+    for (const auto& pair : m.decoration_elements().licences())
         v(pair.second);
 
-    for (const auto& pair : m.modelines())
+    for (const auto& pair : m.decoration_elements().modelines())
         v(pair.second);
 
-    for (const auto& pair : m.modeline_groups())
+    for (const auto& pair : m.decoration_elements().modeline_groups())
         v(pair.second);
 
-    for (const auto& pair : m.generation_markers())
+    for (const auto& pair : m.decoration_elements().generation_markers())
         v(pair.second);
 
-    for (const auto& pair : m.variability_profile_templates())
+    for (const auto& pair : m.variability_elements().profile_templates())
         v(pair.second);
 }
 
 template<typename TraversalVisitor>
 inline void shared_elements_traversal(meta_model::model& m,
     TraversalVisitor& v) {
-    for (auto& pair : m.modules())
+    for (auto& pair : m.structural_elements().modules())
         v(pair.second);
 
-    for (auto& pair : m.object_templates())
+    for (auto& pair : m.structural_elements().object_templates())
         v(pair.second);
 
-    for (auto& pair : m.builtins())
+    for (auto& pair : m.structural_elements().builtins())
         v(pair.second);
 
-    for (auto& pair : m.enumerations())
+    for (auto& pair : m.structural_elements().enumerations())
         v(pair.second);
 
-    for (auto& pair : m.primitives())
+    for (auto& pair : m.structural_elements().primitives())
         v(pair.second);
 
-    for (auto& pair : m.objects())
+    for (auto& pair : m.structural_elements().objects())
         v(pair.second);
 
-    for (auto& pair : m.exceptions())
+    for (auto& pair : m.structural_elements().exceptions())
         v(pair.second);
 
-    for (auto& pair : m.visitors())
+    for (auto& pair : m.structural_elements().visitors())
         v(pair.second);
 
-    for (const auto& pair : m.licences())
+    for (const auto& pair : m.decoration_elements().licences())
         v(pair.second);
 
-    for (const auto& pair : m.modelines())
+    for (const auto& pair : m.decoration_elements().modelines())
         v(pair.second);
 
-    for (const auto& pair : m.modeline_groups())
+    for (const auto& pair : m.decoration_elements().modeline_groups())
         v(pair.second);
 
-    for (const auto& pair : m.generation_markers())
+    for (const auto& pair : m.decoration_elements().generation_markers())
         v(pair.second);
 
-    for (const auto& pair : m.variability_profile_templates())
+    for (const auto& pair : m.variability_elements().profile_templates())
         v(pair.second);
 }
 /**@}*/

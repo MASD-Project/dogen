@@ -54,8 +54,8 @@ namespace masd::dogen::coding::transforms {
 meta_model::structural::object& attributes_transform::
 find_object(const meta_model::name& n, meta_model::model& m) {
     const auto id(n.qualified().dot());
-    auto i(m.objects().find(id));
-    if (i == m.objects().end()) {
+    auto i(m.structural_elements().objects().find(id));
+    if (i == m.structural_elements().objects().end()) {
         BOOST_LOG_SEV(lg, error) << object_not_found << id;
         BOOST_THROW_EXCEPTION(transformation_error(object_not_found + id));
     }
@@ -65,8 +65,8 @@ find_object(const meta_model::name& n, meta_model::model& m) {
 meta_model::structural::object_template& attributes_transform::
 find_object_template(const meta_model::name& n, meta_model::model& m) {
     const auto& id(n.qualified().dot());
-    auto i(m.object_templates().find(id));
-    if (i == m.object_templates().end()) {
+    auto i(m.structural_elements().object_templates().find(id));
+    if (i == m.structural_elements().object_templates().end()) {
         BOOST_LOG_SEV(lg, error) << object_template_not_found << id;
         BOOST_THROW_EXCEPTION(
             transformation_error(object_template_not_found + id));
@@ -174,10 +174,10 @@ void attributes_transform::expand_object(meta_model::structural::object& o,
 }
 
 void attributes_transform::expand_objects(meta_model::model& em) {
-    BOOST_LOG_SEV(lg, debug) << "Expanding objects: " << em.objects().size();
+    BOOST_LOG_SEV(lg, debug) << "Expanding objects: " << em.structural_elements().objects().size();
 
     std::unordered_set<std::string> processed_ids;
-    for (auto& pair : em.objects()) {
+    for (auto& pair : em.structural_elements().objects()) {
         auto& o(*pair.second);
         expand_object(o, em, processed_ids);
     }
@@ -215,10 +215,10 @@ void attributes_transform::expand_object_template(
 
 void attributes_transform::expand_object_templates(meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Expanding object templates: "
-                             << m.object_templates().size();
+                             << m.structural_elements().object_templates().size();
 
     std::unordered_set<std::string> processed_ids;
-    for (auto& pair : m.object_templates()) {
+    for (auto& pair : m.structural_elements().object_templates()) {
         auto& otp(*pair.second);
         expand_object_template(otp, m, processed_ids);
     }

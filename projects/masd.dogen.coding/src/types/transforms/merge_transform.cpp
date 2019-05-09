@@ -65,34 +65,34 @@ merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
 
     BOOST_LOG_SEV(lg, debug) << "Merging source model: '"
                              << src.name().qualified().dot()
-                             << " modules: " << src.modules().size()
+                             << " modules: " << src.structural_elements().modules().size()
                              << " object templates: "
-                             << src.object_templates().size()
-                             << " builtins: " << src.builtins().size()
-                             << " enumerations: " << src.enumerations().size()
-                             << " primitives: " << src.primitives().size()
-                             << " objects: " << src.objects().size()
-                             << " exceptions: " << src.exceptions().size()
-                             << " visitors: " << src.visitors().size()
+                             << src.structural_elements().object_templates().size()
+                             << " builtins: " << src.structural_elements().builtins().size()
+                             << " enumerations: " << src.structural_elements().enumerations().size()
+                             << " primitives: " << src.structural_elements().primitives().size()
+                             << " objects: " << src.structural_elements().objects().size()
+                             << " exceptions: " << src.structural_elements().exceptions().size()
+                             << " visitors: " << src.structural_elements().visitors().size()
                              << " modeline_groups: "
-                             << src.modeline_groups().size()
-                             << " modeline: " << src.modelines().size()
+                             << src.decoration_elements().modeline_groups().size()
+                             << " modeline: " << src.decoration_elements().modelines().size()
                              << " generation markers: "
-                             << src.generation_markers().size()
-                             << " licences: " << src.licences().size();
+                             << src.decoration_elements().generation_markers().size()
+                             << " licences: " << src.decoration_elements().licences().size();
 
-    copy(src.modules(), dst.modules());
-    copy(src.object_templates(), dst.object_templates());
-    copy(src.builtins(), dst.builtins());
-    copy(src.enumerations(), dst.enumerations());
-    copy(src.primitives(), dst.primitives());
-    copy(src.objects(), dst.objects());
-    copy(src.exceptions(), dst.exceptions());
-    copy(src.visitors(), dst.visitors());
-    copy(src.modeline_groups(), dst.modeline_groups());
-    copy(src.modelines(), dst.modelines());
-    copy(src.generation_markers(), dst.generation_markers());
-    copy(src.licences(), dst.licences());
+    copy(src.structural_elements().modules(), dst.structural_elements().modules());
+    copy(src.structural_elements().object_templates(), dst.structural_elements().object_templates());
+    copy(src.structural_elements().builtins(), dst.structural_elements().builtins());
+    copy(src.structural_elements().enumerations(), dst.structural_elements().enumerations());
+    copy(src.structural_elements().primitives(), dst.structural_elements().primitives());
+    copy(src.structural_elements().objects(), dst.structural_elements().objects());
+    copy(src.structural_elements().exceptions(), dst.structural_elements().exceptions());
+    copy(src.structural_elements().visitors(), dst.structural_elements().visitors());
+    copy(src.decoration_elements().modeline_groups(), dst.decoration_elements().modeline_groups());
+    copy(src.decoration_elements().modelines(), dst.decoration_elements().modelines());
+    copy(src.decoration_elements().generation_markers(), dst.decoration_elements().generation_markers());
+    copy(src.decoration_elements().licences(), dst.decoration_elements().licences());
 
     /*
      * Update the references of the merged model.

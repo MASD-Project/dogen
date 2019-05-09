@@ -84,10 +84,10 @@ BOOST_AUTO_TEST_SUITE(resolver_tests)
 BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_the_same_model_resolves_successfully) {
     SETUP_TEST_LOG_SOURCE("object_with_attribute_type_in_the_same_model_resolves_successfully");
     auto m(factory.object_with_attribute());
-    BOOST_CHECK(m.objects().size() == 2);
-    BOOST_CHECK(m.builtins().empty());
+    BOOST_CHECK(m.structural_elements().objects().size() == 2);
+    BOOST_CHECK(m.structural_elements().builtins().empty());
 
-    for (auto& pair : m.objects()) {
+    for (auto& pair : m.structural_elements().objects()) {
         auto& o(*pair.second);
         BOOST_CHECK(o.local_attributes().size() == 1 ||
             o.local_attributes().empty());
@@ -104,10 +104,10 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_the_same_model_resolves_succe
     using namespace masd::dogen::coding::meta_model::structural;
     const auto original([](const model& im) {
             auto r(im);
-            r.objects().clear();
-            for (const auto& pair : im.objects()) {
+            r.structural_elements().objects().clear();
+            for (const auto& pair : im.structural_elements().objects()) {
                 auto o(boost::make_shared<object>(*pair.second));
-                r.objects().insert(std::make_pair(pair.first, o));
+                r.structural_elements().objects().insert(std::make_pair(pair.first, o));
             }
             return r;
         }(m));
@@ -118,7 +118,7 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_the_same_model_resolves_succe
     BOOST_CHECK(m != original);
 
     bool found(false);
-    for (const auto pair : m.objects()) {
+    for (const auto pair : m.structural_elements().objects()) {
         const auto& n(pair.second->name());
         if (factory.is_type_name_n(0, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified().dot();
@@ -143,14 +143,14 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_different_model_results_in_su
     const std::list<model> refs = { m[1] };
     const auto ctx(mock_context_factory::make());
     auto combined(merge_transform::apply(ctx, m[0], refs));
-    BOOST_CHECK(combined.objects().size() == 2);
-    BOOST_CHECK(combined.builtins().empty());
+    BOOST_CHECK(combined.structural_elements().objects().size() == 2);
+    BOOST_CHECK(combined.structural_elements().builtins().empty());
 
     const auto idx(indexer::index(combined));
     resolver::resolve(idx, combined);
 
     bool found(false);
-    for (const auto pair : combined.objects()) {
+    for (const auto pair : combined.structural_elements().objects()) {
         const auto& n(pair.second->name());
         if (factory.is_type_name_n(0, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified().dot();
@@ -183,13 +183,13 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
     const std::list<model> refs;
     const auto ctx(mock_context_factory::make());
     auto combined(merge_transform::apply(ctx, m, refs));
-    BOOST_CHECK(combined.objects().size() == 2);
-    BOOST_CHECK(combined.builtins().empty());
+    BOOST_CHECK(combined.structural_elements().objects().size() == 2);
+    BOOST_CHECK(combined.structural_elements().builtins().empty());
 
     resolver::resolve(idx, combined);
 
     bool found(false);
-    for (const auto pair : combined.objects()) {
+    for (const auto pair : combined.structural_elements().objects()) {
         const auto& n(pair.second->name());
         if (factory.is_type_name_n(0, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified().dot();
@@ -215,13 +215,13 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
     const std::list<model> refs = { m[1] };
     const auto ctx(mock_context_factory::make());
     auto combined(merge_transform::apply(ctx, m[0], refs));
-    BOOST_CHECK(combined.objects().size() == 2);
-    BOOST_CHECK(combined.builtins().empty());
+    BOOST_CHECK(combined.structural_elements().objects().size() == 2);
+    BOOST_CHECK(combined.structural_elements().builtins().empty());
 
     resolver::resolve(idx, combined);
 
     bool found(false);
-    for (const auto pair : combined.objects()) {
+    for (const auto pair : combined.structural_elements().objects()) {
         const auto& n(pair.second->name());
         if (factory.is_type_name_n(0, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified().dot();
@@ -245,14 +245,14 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
 
     const auto ctx(mock_context_factory::make());
     auto combined(merge_transform::apply(ctx, m, refs));
-    BOOST_CHECK(combined.objects().size() == 4);
-    BOOST_CHECK(combined.builtins().empty());
+    BOOST_CHECK(combined.structural_elements().objects().size() == 4);
+    BOOST_CHECK(combined.structural_elements().builtins().empty());
 
     resolver::resolve(idx, combined);
 
     bool found_one(false);
     bool found_two(false);
-    for (const auto pair : combined.objects()) {
+    for (const auto pair : combined.structural_elements().objects()) {
         const auto& n(pair.second->name());
         if (factory.is_type_name_n(0, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified().dot();
@@ -296,13 +296,13 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
 
     const auto ctx(mock_context_factory::make());
     auto combined(merge_transform::apply(ctx, a[0], refs));
-    BOOST_CHECK(combined.objects().size() == 4);
-    BOOST_CHECK(combined.builtins().empty());
+    BOOST_CHECK(combined.structural_elements().objects().size() == 4);
+    BOOST_CHECK(combined.structural_elements().builtins().empty());
 
     resolver::resolve(idx, combined);
 
     bool found(false);
-    for (const auto pair : combined.objects()) {
+    for (const auto pair : combined.structural_elements().objects()) {
         const auto& n(pair.second->name());
         if (factory.is_type_name_n(0, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified().dot();

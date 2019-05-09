@@ -85,7 +85,7 @@ generalization_transform::update_and_collect_parent_ids(
 
     using helpers::resolver;
     std::unordered_set<std::string> r;
-    for (auto& pair : m.objects()) {
+    for (auto& pair : m.structural_elements().objects()) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, trace) << "Processing type: " << id;
 
@@ -166,8 +166,8 @@ void generalization_transform::walk_up_generalization_tree(
     for (const auto& pn : o.parents()) {
         const auto& pid(pn.qualified().dot());
         BOOST_LOG_SEV(lg, trace) << "Processing parent: " << pid;
-        auto i(em.objects().find(pid));
-        if (i == em.objects().end()) {
+        auto i(em.structural_elements().objects().find(pid));
+        if (i == em.structural_elements().objects().end()) {
             BOOST_LOG_SEV(lg, error) << parent_not_found << pid;
             BOOST_THROW_EXCEPTION(transformation_error(parent_not_found + pid));
         }
@@ -202,7 +202,7 @@ void generalization_transform::
 populate_generalizable_properties(const feature_group& fg,
     const std::unordered_set<std::string>& parent_ids, meta_model::model& m) {
 
-    for (auto& pair : m.objects()) {
+    for (auto& pair : m.structural_elements().objects()) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, trace) << "Processing type: " << id;
 
@@ -264,7 +264,7 @@ populate_generalizable_properties(const feature_group& fg,
 }
 
 void generalization_transform::sort_leaves(meta_model::model& m) {
-    for (auto& pair : m.objects()) {
+    for (auto& pair : m.structural_elements().objects()) {
         auto& o(*pair.second);
         o.leaves().sort();
     }

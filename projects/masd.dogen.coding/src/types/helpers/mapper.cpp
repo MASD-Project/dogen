@@ -64,21 +64,29 @@ clone(const meta_model::model& m) const {
      * replaced by a proper clone implementation by the code
      * generator.
      */
-    r.object_templates(clone(m.object_templates()));
-    r.builtins(clone(m.builtins()));
-    r.enumerations(clone(m.enumerations()));
-    r.primitives(clone(m.primitives()));
-    r.objects(clone(m.objects()));
-    r.exceptions(clone(m.exceptions()));
-    r.visitors(clone(m.visitors()));
+    r.structural_elements().object_templates(
+        clone(m.structural_elements().object_templates()));
+    r.structural_elements().builtins(
+        clone(m.structural_elements().builtins()));
+    r.structural_elements().enumerations(
+        clone(m.structural_elements().enumerations()));
+    r.structural_elements().primitives(
+        clone(m.structural_elements().primitives()));
+    r.structural_elements().objects(
+        clone(m.structural_elements().objects()));
+    r.structural_elements().exceptions(
+        clone(m.structural_elements().exceptions()));
+    r.structural_elements().visitors(
+        clone(m.structural_elements().visitors()));
 
     /*
      * Copy across the modules, and sync up the root module.
      */
-    r.modules(clone(m.modules()));
+    r.structural_elements().modules(
+        clone(m.structural_elements().modules()));
     const auto rm_id(m.name().qualified().dot());
-    const auto i(r.modules().find(rm_id));
-    if (i == r.modules().end()) {
+    const auto i(r.structural_elements().modules().find(rm_id));
+    if (i == r.structural_elements().modules().end()) {
         BOOST_LOG_SEV(lg, error) << root_module_not_found << rm_id;
         BOOST_THROW_EXCEPTION(mapping_error(root_module_not_found + rm_id));
     }
@@ -132,7 +140,7 @@ mapper::injections_for_technical_space(const mapping_set& ms,
         BOOST_THROW_EXCEPTION(mapping_error(missing_mapping + lam_pointer));
     }
     const auto& n(j->second);
-    for (const auto& pair : m.objects()) {
+    for (const auto& pair : m.structural_elements().objects()) {
         const auto& o(pair.second);
         for (const auto& pn : o->parents()) {
             const auto pair(std::make_pair(pn.qualified().dot(), n));
@@ -259,10 +267,10 @@ meta_model::model mapper::map(const meta_model::technical_space from,
     const auto mc(create_mapping_context(ms, from, to, m));
     BOOST_LOG_SEV(lg, debug) << "Mapping context: " << mc;
 
-    for (auto& pair : r.objects())
+    for (auto& pair : r.structural_elements().objects())
         map_attributes(mc, pair.second->local_attributes());
 
-    for (auto& pair : r.object_templates())
+    for (auto& pair : r.structural_elements().object_templates())
         map_attributes(mc, pair.second->local_attributes());
 
     r.input_technical_space(to);

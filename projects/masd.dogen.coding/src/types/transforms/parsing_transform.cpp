@@ -252,7 +252,7 @@ void parsing_transform::apply(const context& ctx, meta_model::model& m) {
 
     const auto fg(make_feature_group(*ctx.feature_model()));
     const auto ts(m.input_technical_space());
-    for (auto& pair : m.objects()) {
+    for (auto& pair : m.structural_elements().objects()) {
         auto& o(*pair.second);
         const auto id(o.name().qualified().dot());
 
@@ -265,7 +265,7 @@ void parsing_transform::apply(const context& ctx, meta_model::model& m) {
         }
     }
 
-    for (auto& pair : m.object_templates()) {
+    for (auto& pair : m.structural_elements().object_templates()) {
         auto& c(*pair.second);
         const auto id(c.name().qualified().dot());
 
@@ -277,7 +277,7 @@ void parsing_transform::apply(const context& ctx, meta_model::model& m) {
         }
     }
 
-    for (auto& pair : m.enumerations()) {
+    for (auto& pair : m.structural_elements().enumerations()) {
         auto& e(*pair.second);
         const auto id(e.name().qualified().dot());
 
@@ -289,7 +289,7 @@ void parsing_transform::apply(const context& ctx, meta_model::model& m) {
         }
     }
 
-    for (auto& pair : m.primitives()) {
+    for (auto& pair : m.structural_elements().primitives()) {
         auto& p(*pair.second);
         const auto id(p.name().qualified().dot());
 

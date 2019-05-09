@@ -72,7 +72,7 @@ void primitives_transform::apply(const context& ctx, meta_model::model& m) {
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto fg(make_feature_group(*ctx.feature_model()));
-    for (auto& pair : m.primitives()) {
+    for (auto& pair : m.structural_elements().primitives()) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Transforming: " << id;
 

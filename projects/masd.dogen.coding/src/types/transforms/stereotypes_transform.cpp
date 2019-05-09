@@ -220,8 +220,8 @@ update_visited_leaves(const std::list<meta_model::name>& leaves,
                              << vd.base.qualified().dot();
 
     for (const auto& l : leaves) {
-        auto i(m.objects().find(l.qualified().dot()));
-        if (i == m.objects().end()) {
+        auto i(m.structural_elements().objects().find(l.qualified().dot()));
+        if (i == m.structural_elements().objects().end()) {
             BOOST_LOG_SEV(lg, error) << leaf_not_found << l.qualified().dot();
             BOOST_THROW_EXCEPTION(
                 transformation_error(leaf_not_found + l.qualified().dot()));
@@ -243,7 +243,7 @@ add_visitor_to_model(const boost::shared_ptr<meta_model::structural::visitor> v,
     BOOST_LOG_SEV(lg, debug) << "Adding visitor: " << id;
 
     const auto pair(std::make_pair(id, v));
-    const auto i(em.visitors().insert(pair));
+    const auto i(em.structural_elements().visitors().insert(pair));
     if (!i.second) {
         BOOST_LOG_SEV(lg, error) << duplicate_name << id;
         BOOST_THROW_EXCEPTION(transformation_error(duplicate_name + id));
@@ -461,10 +461,10 @@ void stereotypes_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "stereotypes transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    for (auto& pair : m.objects())
+    for (auto& pair : m.structural_elements().objects())
         apply(*pair.second, m);
 
-    for (auto& pair : m.primitives())
+    for (auto& pair : m.structural_elements().primitives())
         apply(*pair.second);
 
     stp.end_transform(m);

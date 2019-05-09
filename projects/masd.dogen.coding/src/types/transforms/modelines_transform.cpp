@@ -154,7 +154,7 @@ void modelines_transform::apply(const context& ctx, meta_model::model& m) {
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto fg(make_feature_group(*ctx.feature_model()));
-    for(auto& pair : m.modelines()) {
+    for(auto& pair : m.decoration_elements().modelines()) {
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, trace) << "Processing modeline: " << id;
 
@@ -170,7 +170,7 @@ void modelines_transform::apply(const context& ctx, meta_model::model& m) {
             BOOST_THROW_EXCEPTION(transformation_error(missing_container + id));
         }
 
-        auto& mgs(m.modeline_groups());
+        auto& mgs(m.decoration_elements().modeline_groups());
         const auto i(mgs.find(ml.contained_by()));
         if (i == mgs.end()) {
             BOOST_LOG_SEV(lg, error) << missing_group << ml.contained_by();

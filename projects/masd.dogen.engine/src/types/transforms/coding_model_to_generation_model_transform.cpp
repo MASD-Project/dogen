@@ -155,18 +155,18 @@ private:
 std::size_t coding_model_to_generation_model_transform::
 compute_total_size(const coding::meta_model::model& em) {
     std::size_t r;
-    r = em.modules().size();
-    r += em.object_templates().size();
-    r += em.builtins().size();
-    r += em.enumerations().size();
-    r += em.primitives().size();
-    r += em.objects().size();
-    r += em.exceptions().size();
-    r += em.visitors().size();
-    r += em.licences().size();
-    r += em.generation_markers().size();
-    r += em.modeline_groups().size();
-    r += em.modelines().size();
+    r = em.structural_elements().modules().size();
+    r += em.structural_elements().object_templates().size();
+    r += em.structural_elements().builtins().size();
+    r += em.structural_elements().enumerations().size();
+    r += em.structural_elements().primitives().size();
+    r += em.structural_elements().objects().size();
+    r += em.structural_elements().exceptions().size();
+    r += em.structural_elements().visitors().size();
+    r += em.decoration_elements().licences().size();
+    r += em.decoration_elements().generation_markers().size();
+    r += em.decoration_elements().modeline_groups().size();
+    r += em.decoration_elements().modelines().size();
     return r;
 }
 

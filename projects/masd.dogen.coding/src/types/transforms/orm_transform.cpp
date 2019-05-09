@@ -298,7 +298,7 @@ transform_objects(const feature_group& fg, meta_model::model& em) {
     if (em.orm_properties())
         lc = em.orm_properties()->letter_case();
 
-    for (auto& pair : em.objects()) {
+    for (auto& pair : em.structural_elements().objects()) {
         /*
          * If we do not have a configuration, there is nothing to be
          * done for this object. Configurations are setup during
@@ -348,7 +348,7 @@ void orm_transform::
 transform_object_templates(const feature_group& fg, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Started transforming object templates.";
 
-    for (auto& pair : m.object_templates()) {
+    for (auto& pair : m.structural_elements().object_templates()) {
         auto& c(*pair.second);
         for (auto& attr : c.local_attributes()) {
             const auto& cfg(*attr.configuration());
@@ -368,7 +368,7 @@ transform_primitives(const feature_group& fg, meta_model::model& m) {
     if (m.orm_properties())
         lc = m.orm_properties()->letter_case();
 
-    for (auto& pair : m.primitives()) {
+    for (auto& pair : m.structural_elements().primitives()) {
         /*
          * If we do not have a configuration, there is nothing to be
          * done for this primitive. Configurations are setup during
@@ -403,7 +403,7 @@ void orm_transform::
 transform_modules(const feature_group& fg, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Started transforming modules.";
 
-    for (auto& pair : m.modules()) {
+    for (auto& pair : m.structural_elements().modules()) {
         auto& mod(*pair.second);
         BOOST_LOG_SEV(lg, trace) << "Processing: "
                                  << mod.name().qualified().dot();
@@ -434,8 +434,8 @@ transform_modules(const feature_group& fg, meta_model::model& m) {
         for (const auto& id : mod.contains()) {
             BOOST_LOG_SEV(lg, debug) << "Processing contained element: " << id;
 
-            const auto i(m.objects().find(id));
-            if (i != m.objects().end()) {
+            const auto i(m.structural_elements().objects().find(id));
+            if (i != m.structural_elements().objects().end()) {
                 auto& o(*i->second);
                 auto& op(o.orm_properties());
                 const bool update_schema_name(op && op->schema_name().empty()
@@ -448,8 +448,8 @@ transform_modules(const feature_group& fg, meta_model::model& m) {
                                          << " to: " << sn;
                 op->schema_name(sn);
             } else {
-                const auto j(m.primitives().find(id));
-                if (j == m.primitives().end())
+                const auto j(m.structural_elements().primitives().find(id));
+                if (j == m.structural_elements().primitives().end())
                     continue;
 
                 auto& p(*j->second);
