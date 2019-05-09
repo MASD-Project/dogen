@@ -10,23 +10,24 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-09 Thu 11:55]
+#+CAPTION: Clock summary at [2019-05-09 Thu 17:33]
 | <75>                                                       |         |       |      |       |
 | Headline                                                   | Time    |       |      |     % |
 |------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                               | *22:45* |       |      | 100.0 |
+| *Total time*                                               | *25:09* |       |      | 100.0 |
 |------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                    | 22:45   |       |      | 100.0 |
-| Active                                                     |         | 22:45 |      | 100.0 |
-| Edit release notes for previous sprint                     |         |       | 2:41 |  11.8 |
-| Create a video demo for the previous sprint's features     |         |       | 2:11 |   9.6 |
-| Sprint and product backlog grooming                        |         |       | 0:28 |   2.1 |
-| Defining profiles directly on a target model does not work |         |       | 0:30 |   2.2 |
-| Inner modules need to be qualified                         |         |       | 0:22 |   1.6 |
-| Create namespaces for model elements                       |         |       | 8:59 |  39.5 |
-| Leaves in internal modules are not captured correctly      |         |       | 1:33 |   6.8 |
-| Code generate feature infrastructure                       |         |       | 3:10 |  13.9 |
-| Try to add relational tracing support                      |         |       | 2:51 |  12.5 |
+| Stories                                                    | 25:09   |       |      | 100.0 |
+| Active                                                     |         | 25:09 |      | 100.0 |
+| Edit release notes for previous sprint                     |         |       | 2:41 |  10.7 |
+| Create a video demo for the previous sprint's features     |         |       | 2:11 |   8.7 |
+| Sprint and product backlog grooming                        |         |       | 0:28 |   1.9 |
+| Defining profiles directly on a target model does not work |         |       | 0:30 |   2.0 |
+| Inner modules need to be qualified                         |         |       | 0:22 |   1.5 |
+| Create namespaces for model elements                       |         |       | 8:59 |  35.7 |
+| Leaves in internal modules are not captured correctly      |         |       | 1:33 |   6.2 |
+| Try to add relational tracing support                      |         |       | 2:51 |  11.3 |
+| Linux and OSX binaries are not stripped                    |         |       | 1:23 |   5.5 |
+| Code generate feature infrastructure                       |         |       | 4:11 |  16.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -247,37 +248,6 @@ when generating the visitor: we were splitting them by internal
 modules, resulting in multiple visitors per model. We now bucket them
 by model instead.
 
-*** STARTED Code generate feature infrastructure                      :story:
-    :LOGBOOK:
-    CLOCK: [2019-05-09 Thu 08:38]--[2019-05-09 Thu 09:02] =>  0:59
-    CLOCK: [2019-05-09 Thu 07:04]--[2019-05-09 Thu 07:06] =>  0:02
-    CLOCK: [2019-05-09 Thu 06:35]--[2019-05-09 Thu 07:03] =>  0:28
-    CLOCK: [2019-05-09 Thu 06:13]--[2019-05-09 Thu 06:24] =>  0:11
-    CLOCK: [2019-05-08 Wed 19:07]--[2019-05-08 Wed 19:27] =>  0:20
-    CLOCK: [2019-05-08 Wed 09:27]--[2019-05-08 Wed 09:31] =>  0:04
-    CLOCK: [2019-05-07 Tue 16:54]--[2019-05-07 Tue 18:01] =>  1:07
-    CLOCK: [2019-05-07 Tue 16:26]--[2019-05-07 Tue 16:53] =>  0:27
-    CLOCK: [2019-05-07 Tue 16:18]--[2019-05-07 Tue 16:25] =>  0:07
-    :END:
-
-Dogen should generate code for the following:
-
-- definition of a feature template, as per the existing data
-  files. The approach should be very similar to what we did with
-  profiles. With this we have features as a meta-model element.
-- a concrete class to represent the feature group.
-- code to read the concrete class out of the dynamic configuration
-  (e.g. a "feature deserialiser" if you like).
-
-Problems:
-
-- we are defining a new binding point rather than binding; this means
-  that the logic for checking the bindings no longer works. For
-  example, we could be creating a new global binding point in a
-  property.
-
-: #DOGEN masd.variability.binding_point=global
-
 *** POSTPONED Try to add relational tracing support                   :story:
     CLOSED: [2019-05-09 Thu 11:55]
     :LOGBOOK:
@@ -322,6 +292,85 @@ supply those to the backend. It is not very clear how this would
 work. For now we've postponed this approach as it seems its not going
 to be a quick win.
 
+We should approach this incrementally. Next time we have a bit of
+spare time, we need to generate the model and then create the adapters
+from existing models. Finally we can look at how it will be integrated
+with tracing.
+
+*** STARTED Linux and OSX binaries are not stripped                   :story:
+    :LOGBOOK:
+    CLOCK: [2019-05-09 Thu 16:25]--[2019-05-09 Thu 17:20] =>  0:55
+    CLOCK: [2019-05-09 Thu 15:56]--[2019-05-09 Thu 16:24] =>  0:28
+    :END:
+
+At present our Linux and OSX build is much bigger than our windows
+builds (3.8 MB on Windows vs 31 MB OSX and 15 MB on Linux). The
+problem appears to be that we are not stripping the binaries on Linux.
+
+We tried manually stripping:
+
+:     # strip the binaries in release
+:    set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -s")
+:    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -s")
+
+However clang does not support this.
+
+This may be related to the CMake build type of MinRelSize. Try doing a
+build with this and see if the binaries are smaller. Actually this
+does not work. We also tried:
+
+: CMAKE_INSTALL_DO_STRIP
+
+Which seems to have some effect but not exactly the same as a command
+line =strip=. Supposedly this is a install level strip.
+
+The only solution that appears to work is to add a custom command to
+all targets in the build to strip:
+
+: add_custom_command(TARGET ${target} POST_BUILD
+:        COMMAND ${EMBREE_SIGN_FILE} $<TARGET_FILE:${target}>)
+
+However we need to be careful because stripping shared libraries may
+cause problems. Also this is done for every build.
+
+Links:
+
+- [[https://www.technovelty.org/linux/stripping-shared-libraries.html][Stripping shared libraries]]
+- [[https://cmake.org/pipermail/cmake/2012-March/049741.html][make install/strip does not strip static libraries]]
+
+*** STARTED Code generate feature infrastructure                      :story:
+    :LOGBOOK:
+    CLOCK: [2019-05-09 Thu 13:59]--[2019-05-09 Thu 14:25] =>  0:26
+    CLOCK: [2019-05-09 Thu 13:10]--[2019-05-09 Thu 13:45] =>  0:35
+    CLOCK: [2019-05-09 Thu 08:38]--[2019-05-09 Thu 09:02] =>  0:59
+    CLOCK: [2019-05-09 Thu 07:04]--[2019-05-09 Thu 07:06] =>  0:02
+    CLOCK: [2019-05-09 Thu 06:35]--[2019-05-09 Thu 07:03] =>  0:28
+    CLOCK: [2019-05-09 Thu 06:13]--[2019-05-09 Thu 06:24] =>  0:11
+    CLOCK: [2019-05-08 Wed 19:07]--[2019-05-08 Wed 19:27] =>  0:20
+    CLOCK: [2019-05-08 Wed 09:27]--[2019-05-08 Wed 09:31] =>  0:04
+    CLOCK: [2019-05-07 Tue 16:54]--[2019-05-07 Tue 18:01] =>  1:07
+    CLOCK: [2019-05-07 Tue 16:26]--[2019-05-07 Tue 16:53] =>  0:27
+    CLOCK: [2019-05-07 Tue 16:18]--[2019-05-07 Tue 16:25] =>  0:07
+    :END:
+
+Dogen should generate code for the following:
+
+- definition of a feature template, as per the existing data
+  files. The approach should be very similar to what we did with
+  profiles. With this we have features as a meta-model element.
+- a concrete class to represent the feature group.
+- code to read the concrete class out of the dynamic configuration
+  (e.g. a "feature deserialiser" if you like).
+
+Problems:
+
+- we are defining a new binding point rather than binding; this means
+  that the logic for checking the bindings no longer works. For
+  example, we could be creating a new global binding point in a
+  property.
+
+: #DOGEN masd.variability.binding_point=global
+
 *** Consider adding stereotypes into profiles                         :story:
 
 It would be nice to be able to define a profile called "ormable" and
@@ -333,7 +382,7 @@ then have it enable:
 
 However, at present there is no way to associate a stereotype with a profile.
 
-*** Add type mapping support to primitives                            :story:
+*** Add ORM type mapping support to primitives                        :story:
 
 At present we can setup a type map in ORM as follows:
 
@@ -342,7 +391,6 @@ At present we can setup a type map in ORM as follows:
 However, this is specific to attributes. It would be really nice to
 have this at the primitive level as well so that we can map once and
 reuse the mapping.
-
 
 *** Read variability papers                                           :story:
 
@@ -363,20 +411,6 @@ parsing transform. If we create a transform for this in injection,
 this would mean that all meta-model elements would have access to
 parenting via meta-data. We could also name the transform a bit
 better.
-
-*** Linux and OSX binaries are not stripped                           :story:
-
-At present our Linux and OSX build is much bigger than our windows
-builds (3.8 MB on Windows vs 31 MB OSX and 15 MB on Linux). The
-problem appears to be that we are not stripping the binaries on Linux.
-
-We tried manually stripping:
-
-:     # strip the binaries in release
-:    set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -s")
-:    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -s")
-
-However clang does not support this.
 
 *** Merging of profiles and configurations is non-intuitive           :story:
 
