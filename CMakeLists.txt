@@ -100,7 +100,6 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/build/cmake)
 #
 option(WITH_DOXYGEN "Build the project documentation" off)
 option(WITH_LATEX "Build LaTeX documents. Requires pdflatex and beamer." off)
-option(WITH_PROFILING "Build the project with profiling support" off)
 option(WITH_MINIMAL_PACKAGING "Package just the main application" off)
 option(WITH_JSON_VALIDATION "Adds JSON validation targets. Requires jq." on)
 option(WITH_BENCHMARKS "Adds targets for running benchmarks" on)
@@ -179,28 +178,6 @@ if (WITH_MINIMAL_PACKAGING)
     message(STATUS "Packaging just the main application")
 else()
     message(STATUS "Packaging everything main application")
-endif()
-
-# profiling
-if (WITH_PROFILING)
-    if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-        message(STATUS "Profiling enabled...")
-    else()
-        message(STATUS "Ignoring attempt to enable profiling without debug.")
-        set(WITH_PROFILING off)
-    endif()
-else()
-    message(STATUS "Profiling NOT enabled...")
-endif()
-
-# coveralls
-if (WITH_COVERALLS)
-    if (WITH_PROFILING)
-        message(STATUS "Coveralls enabled...")
-    else()
-        message(STATUS "Ignoring attempt to enable Coveralls without profiling.")
-        set(WITH_COVERALLS off)
-    endif()
 endif()
 
 #
@@ -334,12 +311,25 @@ else()
     message(STATUS "Not adding build info.")
 endif()
 
-# debug
-message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    message(STATUS "Building WITH DEBUG symbols...")
+#
+# Build type
+#
+if(CMAKE_BUILD_TYPE MATCHES Debug)
+    message(STATUS "Configuring in DEBUG mode")
+elseif(CMAKE_BUILD_TYPE MATCHES Release)
+    if (UNIX)
+        set(CMAKE_INSTALL_DO_STRIP TRUE)
+    endif()
+    message(STATUS "Configuring in RELEASE mode")
+elseif(CMAKE_BUILD_TYPE MATCHES RelWithDebInfo)
+    message(STATUS "Configuring in RELEASE mode WITH symbols")
+elseif(CMAKE_BUILD_TYPE MATCHES MinRelSize)
+    if (UNIX)
+        set(CMAKE_INSTALL_DO_STRIP TRUE)
+    endif()
+    message(STATUS "Configuring in RELEASE mode with minimised size")
 else()
-    message(STATUS "Building WITHOUT DEBUG symbols...")
+    message(STATUS "Unrecognized build type - will use cmake defaults")
 endif()
 message(STATUS "Product version: ${DOGEN_VERSION}")
 
