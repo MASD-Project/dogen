@@ -45,7 +45,7 @@ $vcpkg_downloads_location="${downloads_dir}\${vcpkg_package}"
 $vcpkg_installs_dir="$installs_dir"
 $vcpkg_final_folder="vcpkg-export"
 
-# Note: we don't seem to be able to download from dropbox using DownloadFile 
+# Note: we don't seem to be able to download from dropbox using DownloadFile
 # so we use wget instead.
 # appveyor DownloadFile $vcpkg_input_location -FileName $vcpkg_downloads_location
 build\scripts\wget.exe --quiet --no-check-certificate $vcpkg_input_location -O $vcpkg_downloads_location
