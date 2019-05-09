@@ -16,6 +16,39 @@ such as profiles, licences etc.
 
 Stories that we haven't quite classified yet, but are needed.
 
+*** Operations to add when we have code merging support               :story:
+
+This story lists all of the operations that should be added to objects
+once we can merge handcrafted code with generated code.
+
+- add =size()= to model and element repository, computed by adding the
+  size of all element containers.
+- add =merge()= (join?) to models.
+- add =id()= to names or maybe to elements (or both).
+
+*** Consider creating shared pointer typedefs for leaves              :story:
+
+It would be nice to be able to enable the creation of shared pointer
+typedefs for leaves, to simplify code such as:
+
+: void operator()(boost::shared_ptr<coding::meta_model::structural::object_template> ot) {
+
+to maybe:
+
+: void operator()(shared_object_template ot) {
+
+Users should be able to decide which shared pointer implementation to
+use (maybe as a parameter to the meta-model element?). We could use
+the forward declarations to define the typedef. Alternatively we could
+define the typedefs with the leaf class itself, but then we'd be
+pulling in the shared pointer into the header.
+
+*** Investigate use of =is_element_type= in stereotypes               :story:
+
+We seem to only be considering a subset of the elements when doing the
+stereotype transform, yet its all working. Need to figure out why, and
+if this is no longer required, remove this method.
+
 *** Prefix =masd::= in stereotypes is misleading                      :story:
 
 At present we have stereotypes such as =masd::handcrafted::typeable=
