@@ -120,7 +120,7 @@ make_archetype_location_kernel(const feature_group& fg,
 }
 
 std::string profile_template_adaption_transform::
-archetype_location_backend(const feature_group& fg,
+make_archetype_location_backend(const feature_group& fg,
     const variability::meta_model::configuration& cfg) {
 
     const variability::helpers::configuration_selector s(cfg);
@@ -134,7 +134,7 @@ archetype_location_backend(const feature_group& fg,
 }
 
 std::string profile_template_adaption_transform::
-archetype_location_facet(const feature_group& fg,
+make_archetype_location_facet(const feature_group& fg,
     const variability::meta_model::configuration& cfg) {
 
     const variability::helpers::configuration_selector s(cfg);
@@ -148,7 +148,7 @@ archetype_location_facet(const feature_group& fg,
 }
 
 std::string profile_template_adaption_transform::
-archetype_location_archetype(const feature_group& fg,
+make_archetype_location_archetype(const feature_group& fg,
     const variability::meta_model::configuration& cfg) {
 
     const variability::helpers::configuration_selector s(cfg);
@@ -221,9 +221,10 @@ adapt(const feature_group& fg,
             cpt.name().qualified(k);
 
         archetypes::location al;
-        al.backend(archetype_location_backend(fg, cfg));
-        al.facet(archetype_location_facet(fg, cfg));
-        al.archetype(archetype_location_archetype(fg, cfg));
+        al.kernel(make_archetype_location_kernel(fg, cfg));
+        al.backend(make_archetype_location_backend(fg, cfg));
+        al.facet(make_archetype_location_facet(fg, cfg));
+        al.archetype(make_archetype_location_archetype(fg, cfg));
         cpt.location(al);
 
         const auto uv(make_untyped_value(fg, cfg));
