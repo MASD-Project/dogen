@@ -22,6 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.utility/types/string/splitter.hpp"
+#include "masd.dogen.variability/types/helpers/enum_mapper.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration.hpp"
 #include "masd.dogen.coding/io/meta_model/location_io.hpp"
 #include "masd.dogen.coding/types/helpers/name_builder.hpp"
@@ -446,6 +447,7 @@ adapter::to_variability_feature_bundle(
     auto r(boost::make_shared<feature_bundle>());
     populate_element(l, scr, ie, *r);
 
+    using variability::helpers::enum_mapper;
     coding::helpers::name_factory f;
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name());
@@ -455,6 +457,7 @@ adapter::to_variability_feature_bundle(
         ft.name(f.build_attribute_name(r->name(), n));
         ft.key(n);
         ft.value(attr.value());
+        ft.value_type(enum_mapper::to_value_type(attr.type()));
         r->feature_templates().push_back(ft);
     }
 
