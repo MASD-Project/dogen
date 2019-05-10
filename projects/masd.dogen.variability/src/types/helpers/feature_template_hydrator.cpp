@@ -220,12 +220,13 @@ feature_template_hydrator::hydrate(std::istream& s) const {
     BOOST_LOG_SEV(lg, trace) << "Parsing JSON stream.";
     using namespace boost::property_tree;
     try {
-        auto r(read_stream(s));
+        const std::list<meta_model::feature_template> r(read_stream(s));
         BOOST_LOG_SEV(lg, trace) << "Parsed JSON stream successfully.";
         return r;
     } catch (const json_parser_error& e) {
-        BOOST_LOG_SEV(lg, error) << invalid_json_file <<  e.what();
-        BOOST_THROW_EXCEPTION(hydration_exception(invalid_json_file + e.what()));
+        const auto w(e.what());
+        BOOST_LOG_SEV(lg, error) << invalid_json_file << w;
+        BOOST_THROW_EXCEPTION(hydration_exception(invalid_json_file + w));
     } catch (const ptree_bad_data& e) {
         BOOST_LOG_SEV(lg, error) << invalid_value_in_json << e.what();
         BOOST_THROW_EXCEPTION(

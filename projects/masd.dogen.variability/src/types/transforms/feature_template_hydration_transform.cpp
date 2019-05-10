@@ -25,7 +25,7 @@
 #include "masd.dogen.utility/types/io/vector_io.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.variability/io/meta_model/feature_template_io.hpp"
+#include "masd.dogen.variability/io/meta_model/feature_template_repository_io.hpp"
 #include "masd.dogen.variability/types/helpers/feature_template_hydrator.hpp"
 #include "masd.dogen.variability/types/transforms/feature_template_hydration_transform.hpp"
 
@@ -75,20 +75,20 @@ feature_template_hydration_transform::obtain_template_filenames(
     return r;
 }
 
-std::list<meta_model::feature_template>
+meta_model::feature_template_repository
 feature_template_hydration_transform::hydrate_templates(
-    const std::list<boost::filesystem::path>& tfns) {
+    const std::list<boost::filesystem::path>& fns) {
 
-    std::list<meta_model::feature_template> r;
     helpers::feature_template_hydrator h;
-    for (const auto& tfn : tfns) {
-        auto ts(h.hydrate(tfn));
-        r.splice(r.end(), ts);
-    }
+    std::list<meta_model::feature_template> fts;
+    for (const auto& fn : fns)
+        fts.splice(fts.end(), h.hydrate(fn));
+
+    const meta_model::feature_template_repository r(fts);
     return r;
 }
 
-std::list<meta_model::feature_template>
+meta_model::feature_template_repository
 feature_template_hydration_transform::apply(const context& ctx) {
     tracing::scoped_transform_tracer stp(lg,
         "feature template hydration transform", transform_id, transform_id,

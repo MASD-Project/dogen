@@ -27,7 +27,7 @@
 
 #include <list>
 #include "masd.dogen.variability/types/meta_model/feature.hpp"
-#include "masd.dogen.variability/types/meta_model/feature_template.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_template_repository.hpp"
 #include "masd.dogen.variability/types/transforms/context.hpp"
 
 namespace masd::dogen::variability::transforms {
@@ -39,7 +39,7 @@ class feature_template_instantiation_transform final {
 public:
     static std::list<meta_model::feature>
     apply(const context& ctx,
-        const std::list<meta_model::feature_template>& fts);
+        const meta_model::feature_template_repository& fts);
 };
 
 }

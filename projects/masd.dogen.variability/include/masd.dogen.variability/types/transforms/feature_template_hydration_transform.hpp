@@ -26,7 +26,9 @@
 #endif
 
 #include <list>
+#include <boost/filesystem/path.hpp>
 #include "masd.dogen.variability/types/meta_model/feature_template.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_template_repository.hpp"
 #include "masd.dogen.variability/types/transforms/context.hpp"
 
 namespace masd::dogen::variability::transforms {
@@ -51,11 +53,11 @@ private:
     /**
      * @brief Hydrate all templates.
      */
-    static std::list<meta_model::feature_template> hydrate_templates(
-        const std::list<boost::filesystem::path>& tfns);
+    static meta_model::feature_template_repository
+    hydrate_templates(const std::list<boost::filesystem::path>& fns);
 
 public:
-    static std::list<meta_model::feature_template> apply(const context& ctx);
+    static meta_model::feature_template_repository apply(const context& ctx);
 };
 
 }

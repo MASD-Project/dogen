@@ -22,8 +22,8 @@
 #include "masd.dogen.utility/types/io/list_io.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.variability/io/meta_model/feature_io.hpp"
-#include "masd.dogen.variability/io/meta_model/feature_template_io.hpp"
 #include "masd.dogen.variability/types/helpers/template_instantiator.hpp"
+#include "masd.dogen.variability/io/meta_model/feature_template_repository_io.hpp"
 #include "masd.dogen.variability/types/transforms/feature_template_instantiation_transform.hpp"
 
 namespace {
@@ -40,10 +40,10 @@ namespace masd::dogen::variability::transforms {
 
 std::list<meta_model::feature>
 feature_template_instantiation_transform::apply(const context& ctx,
-    const std::list<meta_model::feature_template>& fts) {
+    const meta_model::feature_template_repository& ftrp) {
     tracing::scoped_transform_tracer stp(lg,
         "feature template instantiation transform",
-        transform_id, transform_id, *ctx.tracer(), fts);
+        transform_id, transform_id, *ctx.tracer(), ftrp);
 
     const auto cm(ctx.compatibility_mode());
     const auto& alrp(*ctx.archetype_location_repository());
@@ -51,7 +51,7 @@ feature_template_instantiation_transform::apply(const context& ctx,
 
     unsigned int counter(0);
     std::list<meta_model::feature> r;
-    for (const auto& ft : fts) {
+    for (const auto& ft : ftrp.templates()) {
         r.splice(r.end(), ti.instantiate(ft));
         ++counter;
     }
