@@ -53,7 +53,7 @@ public:
     static meta_model::name make_variability_profile_template_name();
     static meta_model::name make_variability_feature_template_group_name();
     static meta_model::name
-    make_variability_feature_template_group_registrar_name();
+    make_variability_feature_template_initializer_name();
 };
 
 }

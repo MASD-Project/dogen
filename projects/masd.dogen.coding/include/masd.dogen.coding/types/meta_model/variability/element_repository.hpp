@@ -31,7 +31,7 @@
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.coding/types/meta_model/variability/profile_template_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/variability/feature_template_group_fwd.hpp"
-#include "masd.dogen.coding/types/meta_model/variability/feature_template_group_registrar_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/feature_template_initializer_fwd.hpp"
 
 namespace masd::dogen::coding::meta_model::variability {
 
@@ -46,7 +46,7 @@ public:
     element_repository(
         const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::profile_template> >& profile_templates,
         const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> >& feature_template_groups,
-        const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>& feature_template_group_registrar);
+        const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_initializer>& feature_template_initializer);
 
 public:
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::profile_template> >& profile_templates() const;
@@ -59,10 +59,10 @@ public:
     void feature_template_groups(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> >& v);
     void feature_template_groups(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> >&& v);
 
-    const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>& feature_template_group_registrar() const;
-    boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>& feature_template_group_registrar();
-    void feature_template_group_registrar(const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>& v);
-    void feature_template_group_registrar(const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>&& v);
+    const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_initializer>& feature_template_initializer() const;
+    boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_initializer>& feature_template_initializer();
+    void feature_template_initializer(const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_initializer>& v);
+    void feature_template_initializer(const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_initializer>&& v);
 
 public:
     bool operator==(const element_repository& rhs) const;
@@ -77,7 +77,7 @@ public:
 private:
     std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::profile_template> > profile_templates_;
     std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> > feature_template_groups_;
-    boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar> feature_template_group_registrar_;
+    boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_initializer> feature_template_initializer_;
 };
 
 }

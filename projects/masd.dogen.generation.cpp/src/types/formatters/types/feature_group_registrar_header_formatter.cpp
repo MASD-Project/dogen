@@ -29,7 +29,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "masd.dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
-#include "masd.dogen.coding/types/meta_model/variability/feature_template_group_registrar.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/feature_template_initializer.hpp"
 
 namespace masd::dogen::generation::cpp::formatters::types {
 
@@ -52,7 +52,7 @@ feature_group_registrar_header_formatter::archetype_location() const {
 
 const coding::meta_model::name& feature_group_registrar_header_formatter::meta_name() const {
     using coding::helpers::meta_name_factory;
-    static auto r(meta_name_factory::make_variability_feature_template_group_registrar_name());
+    static auto r(meta_name_factory::make_variability_feature_template_initializer_name());
     return r;
 }
 
@@ -78,8 +78,8 @@ std::list<std::string> feature_group_registrar_header_formatter::inclusion_depen
     const formattables::dependencies_builder_factory& f,
     const coding::meta_model::element& e) const {
 
-    using coding::meta_model::variability::feature_template_group_registrar;
-    const auto& o(assistant::as<feature_template_group_registrar>(e));
+    using coding::meta_model::variability::feature_template_initializer;
+    const auto& o(assistant::as<feature_template_initializer>(e));
     auto builder(f.make());
 
     // algorithm: domain headers need it for the swap function.
@@ -95,7 +95,7 @@ std::list<std::string> feature_group_registrar_header_formatter::inclusion_depen
 extraction::meta_model::artefact feature_group_registrar_header_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& o(a.as<coding::meta_model::variability::feature_template_group_registrar>(e));
+    const auto& o(a.as<coding::meta_model::variability::feature_template_initializer>(e));
 
     {
         const auto sn(o.name().simple());

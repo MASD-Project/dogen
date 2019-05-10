@@ -59,8 +59,8 @@ const std::string stereotype_variability_profile_template(
     "masd::variability::profile_template");
 const std::string stereotype_variability_feature_template_group(
     "masd::variability::feature_template_group");
-const std::string stereotype_variability_feature_template_group_registrar(
-    "masd::variability::feature_template_group_registrar");
+const std::string stereotype_variability_feature_template_initializer(
+    "masd::variability::feature_template_initializer");
 const std::string unsupported_stereotype("Invalid or unsupported stereotype: ");
 
 }
@@ -108,8 +108,8 @@ static_stereotypes stereotypes_helper::from_string(const std::string& s) const {
         return static_stereotypes::variability_profile_template;
     else if (s == stereotype_variability_feature_template_group)
         return static_stereotypes::variability_feature_template_group;
-    else if (s == stereotype_variability_feature_template_group_registrar)
-        return static_stereotypes::variability_feature_template_group_registrar;
+    else if (s == stereotype_variability_feature_template_initializer)
+        return static_stereotypes::variability_feature_template_initializer;
 
     BOOST_LOG_SEV(lg, debug) << "Could not convert stereotype."
                              << " Assuming dynamic.";
@@ -167,9 +167,9 @@ to_string(const static_stereotypes ss) const {
     case static_stereotypes::variability_profile_template:
         return stereotype_variability_profile_template;
     case static_stereotypes::variability_feature_template_group:
-        return stereotype_variability_feature_template_group_registrar;
-    case static_stereotypes::variability_feature_template_group_registrar:
-        return stereotype_variability_feature_template_group_registrar;
+        return stereotype_variability_feature_template_initializer;
+    case static_stereotypes::variability_feature_template_initializer:
+        return stereotype_variability_feature_template_initializer;
 
     default: {
         const std::string s(boost::lexical_cast<std::string>(ss));
@@ -195,7 +195,7 @@ is_element_type(const static_stereotypes ss) const {
         ss == static_stereotypes::licence ||
         ss == static_stereotypes::variability_profile_template ||
         ss == static_stereotypes::variability_feature_template_group ||
-        ss == static_stereotypes::variability_feature_template_group_registrar;
+        ss == static_stereotypes::variability_feature_template_initializer;
 }
 
 std::list<static_stereotypes> stereotypes_helper::extract_element_types(

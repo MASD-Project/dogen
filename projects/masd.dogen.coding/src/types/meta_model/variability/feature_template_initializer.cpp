@@ -22,7 +22,7 @@
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
 #include "masd.dogen.coding/io/meta_model/variability/feature_template_group_io.hpp"
-#include "masd.dogen.coding/types/meta_model/variability/feature_template_group_registrar.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/feature_template_initializer.hpp"
 
 namespace std {
 
@@ -40,7 +40,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::co
 
 namespace masd::dogen::coding::meta_model::variability {
 
-feature_template_group_registrar::feature_template_group_registrar(
+feature_template_initializer::feature_template_initializer(
     const masd::dogen::coding::meta_model::name& name,
     const std::string& documentation,
     const masd::dogen::coding::meta_model::origin_types origin_type,
@@ -73,25 +73,25 @@ feature_template_group_registrar::feature_template_group_registrar(
       decoration),
       template_groups_(template_groups) { }
 
-void feature_template_group_registrar::accept(const element_visitor& v) const {
+void feature_template_initializer::accept(const element_visitor& v) const {
     v.visit(*this);
 }
 
-void feature_template_group_registrar::accept(element_visitor& v) const {
+void feature_template_initializer::accept(element_visitor& v) const {
     v.visit(*this);
     }
 
-void feature_template_group_registrar::accept(const element_visitor& v) {
+void feature_template_initializer::accept(const element_visitor& v) {
     v.visit(*this);
 }
 
-void feature_template_group_registrar::accept(element_visitor& v) {
+void feature_template_initializer::accept(element_visitor& v) {
     v.visit(*this);
 }
 
-void feature_template_group_registrar::to_stream(std::ostream& s) const {
+void feature_template_initializer::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::variability::feature_template_group_registrar\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::variability::feature_template_initializer\"" << ", "
       << "\"__parent_0__\": ";
     masd::dogen::coding::meta_model::element::to_stream(s);
     s << ", "
@@ -99,43 +99,43 @@ void feature_template_group_registrar::to_stream(std::ostream& s) const {
       << " }";
 }
 
-void feature_template_group_registrar::swap(feature_template_group_registrar& other) noexcept {
+void feature_template_initializer::swap(feature_template_initializer& other) noexcept {
     masd::dogen::coding::meta_model::element::swap(other);
 
     using std::swap;
     swap(template_groups_, other.template_groups_);
 }
 
-bool feature_template_group_registrar::equals(const masd::dogen::coding::meta_model::element& other) const {
-    const feature_template_group_registrar* const p(dynamic_cast<const feature_template_group_registrar* const>(&other));
+bool feature_template_initializer::equals(const masd::dogen::coding::meta_model::element& other) const {
+    const feature_template_initializer* const p(dynamic_cast<const feature_template_initializer* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
-bool feature_template_group_registrar::operator==(const feature_template_group_registrar& rhs) const {
+bool feature_template_initializer::operator==(const feature_template_initializer& rhs) const {
     return masd::dogen::coding::meta_model::element::compare(rhs) &&
         template_groups_ == rhs.template_groups_;
 }
 
-feature_template_group_registrar& feature_template_group_registrar::operator=(feature_template_group_registrar other) {
+feature_template_initializer& feature_template_initializer::operator=(feature_template_initializer other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::list<masd::dogen::coding::meta_model::variability::feature_template_group>& feature_template_group_registrar::template_groups() const {
+const std::list<masd::dogen::coding::meta_model::variability::feature_template_group>& feature_template_initializer::template_groups() const {
     return template_groups_;
 }
 
-std::list<masd::dogen::coding::meta_model::variability::feature_template_group>& feature_template_group_registrar::template_groups() {
+std::list<masd::dogen::coding::meta_model::variability::feature_template_group>& feature_template_initializer::template_groups() {
     return template_groups_;
 }
 
-void feature_template_group_registrar::template_groups(const std::list<masd::dogen::coding::meta_model::variability::feature_template_group>& v) {
+void feature_template_initializer::template_groups(const std::list<masd::dogen::coding::meta_model::variability::feature_template_group>& v) {
     template_groups_ = v;
 }
 
-void feature_template_group_registrar::template_groups(const std::list<masd::dogen::coding::meta_model::variability::feature_template_group>&& v) {
+void feature_template_initializer::template_groups(const std::list<masd::dogen::coding::meta_model::variability::feature_template_group>&& v) {
     template_groups_ = std::move(v);
 }
 

@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.coding/test_data/meta_model/element_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/variability/feature_template_group_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/variability/feature_template_group_registrar_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/variability/feature_template_initializer_td.hpp"
 
 namespace {
 
@@ -41,30 +41,30 @@ std::list<masd::dogen::coding::meta_model::variability::feature_template_group> 
 
 namespace masd::dogen::coding::meta_model::variability {
 
-feature_template_group_registrar_generator::feature_template_group_registrar_generator() : position_(0) { }
+feature_template_initializer_generator::feature_template_initializer_generator() : position_(0) { }
 
-void feature_template_group_registrar_generator::
+void feature_template_initializer_generator::
 populate(const unsigned int position, result_type& v) {
     masd::dogen::coding::meta_model::element_generator::populate(position, v);
     v.template_groups(create_std_list_masd_dogen_coding_meta_model_variability_feature_template_group(position + 0));
 }
 
-feature_template_group_registrar_generator::result_type
-feature_template_group_registrar_generator::create(const unsigned int position) {
-    feature_template_group_registrar r;
-    feature_template_group_registrar_generator::populate(position, r);
+feature_template_initializer_generator::result_type
+feature_template_initializer_generator::create(const unsigned int position) {
+    feature_template_initializer r;
+    feature_template_initializer_generator::populate(position, r);
     return r;
 }
 
-feature_template_group_registrar_generator::result_type*
-feature_template_group_registrar_generator::create_ptr(const unsigned int position) {
-    feature_template_group_registrar* p = new feature_template_group_registrar();
-    feature_template_group_registrar_generator::populate(position, *p);
+feature_template_initializer_generator::result_type*
+feature_template_initializer_generator::create_ptr(const unsigned int position) {
+    feature_template_initializer* p = new feature_template_initializer();
+    feature_template_initializer_generator::populate(position, *p);
     return p;
 }
 
-feature_template_group_registrar_generator::result_type
-feature_template_group_registrar_generator::operator()() {
+feature_template_initializer_generator::result_type
+feature_template_initializer_generator::operator()() {
     return create(position_++);
 }
 

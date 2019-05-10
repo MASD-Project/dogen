@@ -82,6 +82,6 @@
 #include "masd.dogen.coding/test_data/meta_model/variability/feature_template_group_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/variability/profile_template_entry_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/local_archetype_location_properties_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/variability/feature_template_group_registrar_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/variability/feature_template_initializer_td.hpp"
 
 #endif

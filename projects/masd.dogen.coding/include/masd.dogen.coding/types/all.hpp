@@ -146,7 +146,7 @@
 #include "masd.dogen.coding/types/meta_model/variability/profile_template_entry.hpp"
 #include "masd.dogen.coding/types/helpers/fully_qualified_representation_builder.hpp"
 #include "masd.dogen.coding/types/meta_model/local_archetype_location_properties.hpp"
-#include "masd.dogen.coding/types/meta_model/variability/feature_template_group_registrar.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/feature_template_initializer.hpp"
 #include "masd.dogen.coding/types/transforms/variability_feature_template_group_transform.hpp"
 
 #endif

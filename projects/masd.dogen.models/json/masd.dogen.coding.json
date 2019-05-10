@@ -1475,7 +1475,7 @@
           "type": ""
         },
         {
-          "name": "variability_feature_template_group_registrar",
+          "name": "variability_feature_template_initializer",
           "type": ""
         }
       ]
@@ -1886,7 +1886,7 @@
       ]
     },
     {
-      "name": "meta_model::variability::feature_template_group_registrar",
+      "name": "meta_model::variability::feature_template_initializer",
       "stereotypes": [
         "coding::meta_element"
       ],
@@ -2375,8 +2375,8 @@
           "type": "std::unordered_map<std::string, boost::shared_ptr<feature_template_group>>"
         },
         {
-          "name": "feature_template_group_registrar",
-          "type": "boost::shared_ptr<feature_template_group_registrar>"
+          "name": "feature_template_initializer",
+          "type": "boost::shared_ptr<feature_template_initializer>"
         }
       ]
     },

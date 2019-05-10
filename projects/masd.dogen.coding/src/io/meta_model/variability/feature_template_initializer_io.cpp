@@ -21,11 +21,11 @@
 #include <ostream>
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.coding/io/meta_model/variability/feature_template_group_io.hpp"
-#include "masd.dogen.coding/io/meta_model/variability/feature_template_group_registrar_io.hpp"
+#include "masd.dogen.coding/io/meta_model/variability/feature_template_initializer_io.hpp"
 
 namespace masd::dogen::coding::meta_model::variability {
 
-std::ostream& operator<<(std::ostream& s, const feature_template_group_registrar& v) {
+std::ostream& operator<<(std::ostream& s, const feature_template_initializer& v) {
     v.to_stream(s);
     return(s);
 }

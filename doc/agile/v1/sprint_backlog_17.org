@@ -400,7 +400,10 @@ Notes:
   initialiser. It calls the registrar with all the features in that
   model.
 
-*** Replace JSON based feature templates with generated code          :story:
+*** STARTED Replace JSON based feature templates with generated code  :story:
+    :LOGBOOK:
+    CLOCK: [2019-05-10 Fri 12:55]--[2019-05-10 Fri 13:26] =>  0:31
+    :END:
 
 Tasks:
 

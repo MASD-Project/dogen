@@ -50,7 +50,7 @@ enum class static_stereotypes : unsigned int {
     licence = 16,
     variability_profile_template = 17,
     variability_feature_template_group = 18,
-    variability_feature_template_group_registrar = 19
+    variability_feature_template_initializer = 19
 };
 
 }

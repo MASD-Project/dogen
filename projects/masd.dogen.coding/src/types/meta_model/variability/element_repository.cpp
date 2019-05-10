@@ -21,7 +21,7 @@
 #include "masd.dogen.coding/types/meta_model/variability/profile_template.hpp"
 #include "masd.dogen.coding/types/meta_model/variability/element_repository.hpp"
 #include "masd.dogen.coding/types/meta_model/variability/feature_template_group.hpp"
-#include "masd.dogen.coding/types/meta_model/variability/feature_template_group_registrar.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/feature_template_initializer.hpp"
 
 namespace boost {
 
@@ -43,8 +43,8 @@ const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_te
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>& lhs,
-const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>& rhs) {
+inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_initializer>& lhs,
+const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_initializer>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -55,22 +55,22 @@ namespace masd::dogen::coding::meta_model::variability {
 element_repository::element_repository(
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::profile_template> >& profile_templates,
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> >& feature_template_groups,
-    const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>& feature_template_group_registrar)
+    const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_initializer>& feature_template_initializer)
     : profile_templates_(profile_templates),
       feature_template_groups_(feature_template_groups),
-      feature_template_group_registrar_(feature_template_group_registrar) { }
+      feature_template_initializer_(feature_template_initializer) { }
 
 void element_repository::swap(element_repository& other) noexcept {
     using std::swap;
     swap(profile_templates_, other.profile_templates_);
     swap(feature_template_groups_, other.feature_template_groups_);
-    swap(feature_template_group_registrar_, other.feature_template_group_registrar_);
+    swap(feature_template_initializer_, other.feature_template_initializer_);
 }
 
 bool element_repository::operator==(const element_repository& rhs) const {
     return profile_templates_ == rhs.profile_templates_ &&
         feature_template_groups_ == rhs.feature_template_groups_ &&
-        feature_template_group_registrar_ == rhs.feature_template_group_registrar_;
+        feature_template_initializer_ == rhs.feature_template_initializer_;
 }
 
 element_repository& element_repository::operator=(element_repository other) {
@@ -111,20 +111,20 @@ void element_repository::feature_template_groups(const std::unordered_map<std::s
     feature_template_groups_ = std::move(v);
 }
 
-const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>& element_repository::feature_template_group_registrar() const {
-    return feature_template_group_registrar_;
+const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_initializer>& element_repository::feature_template_initializer() const {
+    return feature_template_initializer_;
 }
 
-boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>& element_repository::feature_template_group_registrar() {
-    return feature_template_group_registrar_;
+boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_initializer>& element_repository::feature_template_initializer() {
+    return feature_template_initializer_;
 }
 
-void element_repository::feature_template_group_registrar(const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>& v) {
-    feature_template_group_registrar_ = v;
+void element_repository::feature_template_initializer(const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_initializer>& v) {
+    feature_template_initializer_ = v;
 }
 
-void element_repository::feature_template_group_registrar(const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group_registrar>&& v) {
-    feature_template_group_registrar_ = std::move(v);
+void element_repository::feature_template_initializer(const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_initializer>&& v) {
+    feature_template_initializer_ = std::move(v);
 }
 
 }

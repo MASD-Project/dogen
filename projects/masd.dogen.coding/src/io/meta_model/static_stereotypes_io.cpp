@@ -87,8 +87,8 @@ std::ostream& operator<<(std::ostream& s, const static_stereotypes& v) {
     case static_stereotypes::variability_feature_template_group:
         attr = "\"variability_feature_template_group\"";
         break;
-    case static_stereotypes::variability_feature_template_group_registrar:
-        attr = "\"variability_feature_template_group_registrar\"";
+    case static_stereotypes::variability_feature_template_initializer:
+        attr = "\"variability_feature_template_initializer\"";
         break;
     default:
         throw std::invalid_argument("Invalid value for static_stereotypes");

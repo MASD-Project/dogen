@@ -449,14 +449,14 @@ adapter::to_variability_feature_template_group(
 }
 
 boost::shared_ptr<
-    coding::meta_model::variability::feature_template_group_registrar
+    coding::meta_model::variability::feature_template_initializer
     >
-adapter::to_variability_feature_template_group_registrar(
+adapter::to_variability_feature_template_initializer(
     const coding::meta_model::location &l,
     const stereotypes_conversion_result &scr,
     const injection::meta_model::element &ie) const {
-    using coding::meta_model::variability::feature_template_group_registrar;
-    auto r(boost::make_shared<feature_template_group_registrar>());
+    using coding::meta_model::variability::feature_template_initializer;
+    auto r(boost::make_shared<feature_template_initializer>());
     populate_element(l, scr, ie, *r);
     return r;
 }

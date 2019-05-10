@@ -405,7 +405,7 @@
     {
       "name": "features::registrar",
       "stereotypes": [
-        "masd::variability::feature_template_group_registrar"
+        "masd::variability::feature_template_initializer"
       ],
       "fallback_element_type": "masd::object"
     }

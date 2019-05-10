@@ -116,9 +116,9 @@ make_variability_feature_template_group_name() {
 }
 
 meta_model::name meta_name_factory::
-make_variability_feature_template_group_registrar_name() {
+make_variability_feature_template_initializer_name() {
     static const auto r(
-        make_name("variability_feature_template_group_registrar"));
+        make_name("variability_feature_template_initializer"));
     return r;
 }
 

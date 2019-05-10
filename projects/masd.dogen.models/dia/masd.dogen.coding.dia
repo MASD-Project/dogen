@@ -23150,7 +23150,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#variability_feature_template_group_registrar#</dia:string>
+            <dia:string>#variability_feature_template_initializer#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -28660,7 +28660,7 @@ to variability.
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#feature_template_group_registrar#</dia:string>
+        <dia:string>#feature_template_initializer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#coding::meta_element#</dia:string>
@@ -33826,10 +33826,10 @@ to structural modeling.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#feature_template_group_registrar#</dia:string>
+            <dia:string>#feature_template_initializer#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;feature_template_group_registrar&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;feature_template_initializer&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_IO_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_GROUP_REGISTRAR_IO_HPP
-#define MASD_DOGEN_CODING_IO_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_GROUP_REGISTRAR_IO_HPP
+#ifndef MASD_DOGEN_CODING_IO_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_INITIALIZER_IO_HPP
+#define MASD_DOGEN_CODING_IO_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_INITIALIZER_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "masd.dogen.coding/types/meta_model/variability/feature_template_group_registrar.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/feature_template_initializer.hpp"
 
 namespace masd::dogen::coding::meta_model::variability {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const masd::dogen::coding::meta_model::variability::feature_template_group_registrar& v);
+     const masd::dogen::coding::meta_model::variability::feature_template_initializer& v);
 
 }
 

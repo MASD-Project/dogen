@@ -83,6 +83,6 @@
 #include "masd.dogen.coding/io/meta_model/variability/feature_template_group_io.hpp"
 #include "masd.dogen.coding/io/meta_model/variability/profile_template_entry_io.hpp"
 #include "masd.dogen.coding/io/meta_model/local_archetype_location_properties_io.hpp"
-#include "masd.dogen.coding/io/meta_model/variability/feature_template_group_registrar_io.hpp"
+#include "masd.dogen.coding/io/meta_model/variability/feature_template_initializer_io.hpp"
 
 #endif

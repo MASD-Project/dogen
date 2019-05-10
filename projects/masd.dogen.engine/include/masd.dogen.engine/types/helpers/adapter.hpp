@@ -50,7 +50,7 @@
 #include "masd.dogen.coding/types/meta_model/decoration/generation_marker.hpp"
 #include "masd.dogen.coding/types/meta_model/variability/profile_template.hpp"
 #include "masd.dogen.coding/types/meta_model/variability/feature_template_group.hpp"
-#include "masd.dogen.coding/types/meta_model/variability/feature_template_group_registrar.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/feature_template_initializer.hpp"
 #include "masd.dogen.engine/types/helpers/stereotypes_conversion_result.hpp"
 
 namespace masd::dogen::engine::helpers {
@@ -251,13 +251,13 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::variability_feature_template_group_registrar to a coding
+     * masd::variability_feature_template_initializer to a coding
      * variability feature template group registrar.
      */
     boost::shared_ptr<
-        coding::meta_model::variability::feature_template_group_registrar
+        coding::meta_model::variability::feature_template_initializer
         >
-    to_variability_feature_template_group_registrar(
+    to_variability_feature_template_initializer(
         const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;

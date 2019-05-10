@@ -42,7 +42,7 @@
 #include "masd.dogen.coding/test_data/meta_model/decoration/element_properties_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/variability/feature_template_group_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/local_archetype_location_properties_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/variability/feature_template_group_registrar_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/variability/feature_template_initializer_td.hpp"
 
 namespace {
 
@@ -191,7 +191,7 @@ element_generator::create_ptr(const unsigned int position) {
     if ((position % 14) == 11)
         return masd::dogen::coding::meta_model::variability::feature_template_group_generator::create_ptr(position);
     if ((position % 14) == 12)
-        return masd::dogen::coding::meta_model::variability::feature_template_group_registrar_generator::create_ptr(position);
+        return masd::dogen::coding::meta_model::variability::feature_template_initializer_generator::create_ptr(position);
     if ((position % 14) == 13)
         return masd::dogen::coding::meta_model::variability::profile_template_generator::create_ptr(position);
     return masd::dogen::coding::meta_model::decoration::generation_marker_generator::create_ptr(position);

@@ -26,7 +26,7 @@
 #include "masd.dogen.coding/types/meta_model/decoration/modeline_group.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/generation_marker.hpp"
 #include "masd.dogen.coding/types/meta_model/variability/profile_template.hpp"
-#include "masd.dogen.coding/types/meta_model/variability/feature_template_group_registrar.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/feature_template_initializer.hpp"
 #include "masd.dogen.coding/types/meta_model/variability/feature_template_group.hpp"
 #include "masd.dogen.coding/types/meta_model/elements_traversal.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
@@ -129,9 +129,9 @@ public:
     }
 
     void operator()(meta_model::variability::
-        feature_template_group_registrar& vftgr) {
+        feature_template_initializer& vftgr) {
         static const auto
-            n(mnf::make_variability_feature_template_group_registrar_name());
+            n(mnf::make_variability_feature_template_initializer_name());
         vftgr.meta_name(n);
     }
 };

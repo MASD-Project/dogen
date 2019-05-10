@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_GROUP_REGISTRAR_HPP
-#define MASD_DOGEN_CODING_TYPES_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_GROUP_REGISTRAR_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_INITIALIZER_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_INITIALIZER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,16 +33,16 @@
 
 namespace masd::dogen::coding::meta_model::variability {
 
-class feature_template_group_registrar final : public masd::dogen::coding::meta_model::element {
+class feature_template_initializer final : public masd::dogen::coding::meta_model::element {
 public:
-    feature_template_group_registrar() = default;
-    feature_template_group_registrar(const feature_template_group_registrar&) = default;
-    feature_template_group_registrar(feature_template_group_registrar&&) = default;
+    feature_template_initializer() = default;
+    feature_template_initializer(const feature_template_initializer&) = default;
+    feature_template_initializer(feature_template_initializer&&) = default;
 
-    virtual ~feature_template_group_registrar() noexcept { }
+    virtual ~feature_template_initializer() noexcept { }
 
 public:
-    feature_template_group_registrar(
+    feature_template_initializer(
         const masd::dogen::coding::meta_model::name& name,
         const std::string& documentation,
         const masd::dogen::coding::meta_model::origin_types origin_type,
@@ -76,8 +76,8 @@ public:
     void template_groups(const std::list<masd::dogen::coding::meta_model::variability::feature_template_group>&& v);
 
 public:
-    bool operator==(const feature_template_group_registrar& rhs) const;
-    bool operator!=(const feature_template_group_registrar& rhs) const {
+    bool operator==(const feature_template_initializer& rhs) const;
+    bool operator!=(const feature_template_initializer& rhs) const {
         return !this->operator==(rhs);
     }
 
@@ -85,8 +85,8 @@ public:
     bool equals(const masd::dogen::coding::meta_model::element& other) const override;
 
 public:
-    void swap(feature_template_group_registrar& other) noexcept;
-    feature_template_group_registrar& operator=(feature_template_group_registrar other);
+    void swap(feature_template_initializer& other) noexcept;
+    feature_template_initializer& operator=(feature_template_initializer other);
 
 private:
     std::list<masd::dogen::coding::meta_model::variability::feature_template_group> template_groups_;
@@ -98,8 +98,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::coding::meta_model::variability::feature_template_group_registrar& lhs,
-    masd::dogen::coding::meta_model::variability::feature_template_group_registrar& rhs) {
+    masd::dogen::coding::meta_model::variability::feature_template_initializer& lhs,
+    masd::dogen::coding::meta_model::variability::feature_template_initializer& rhs) {
     lhs.swap(rhs);
 }
 
