@@ -24,12 +24,13 @@ namespace masd::dogen::injection::features {
 
 std::list<masd::dogen::variability::meta_model::feature_template>
 reference::make_templates() {
-    using masd::dogen::variability::meta_model::feature_template;
+    using namespace masd::dogen::variability::meta_model;
     std::list<feature_template> r;
 
     {
         feature_template ft;
         ft.name().qualified("masd.injection.reference");
+        ft.value_type(value_type::text);
         r.push_back(ft);
     }
 
