@@ -37,33 +37,33 @@ public:
     /**
      * @brief Converts a string to a value type.
      */
-    meta_model::value_type to_value_type(const std::string& s) const;
+    static meta_model::value_type to_value_type(const std::string& s);
 
     /**
      * @brief Converts a string to a template kind.
      */
-    meta_model::template_kind to_template_kind(const std::string& s) const;
+    static meta_model::template_kind to_template_kind(const std::string& s);
 
     /**
      * @brief Converts a string to a binding point.
      */
-    meta_model::binding_point to_binding_point(const std::string& s) const;
+    static meta_model::binding_point to_binding_point(const std::string& s);
 
 public:
     /**
      * @brief Converts a value type to a string.
      */
-    std::string from_value_type(const meta_model::value_type v) const;
+    static std::string from_value_type(const meta_model::value_type v);
 
     /**
      * @brief Converts a template kind to a string.
      */
-    std::string from_template_kind(const meta_model::template_kind v) const;
+    static std::string from_template_kind(const meta_model::template_kind v);
 
     /**
      * @brief Converts a binding point to a string.
      */
-    std::string from_binding_point(const meta_model::binding_point s) const;
+    static std::string from_binding_point(const meta_model::binding_point s);
 };
 
 }

@@ -24,7 +24,6 @@
 #include "masd.dogen.variability/io/meta_model/value_type_io.hpp"
 #include "masd.dogen.variability/io/meta_model/template_kind_io.hpp"
 #include "masd.dogen.variability/io/meta_model/binding_point_io.hpp"
-
 #include "masd.dogen.variability/types/helpers/enum_mapping_exception.hpp"
 #include "masd.dogen.variability/types/helpers/enum_mapper.hpp"
 
@@ -33,12 +32,19 @@ namespace {
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory("variability.helpers.enum_mapper"));
 
-const std::string value_type_text("masd::variability::text");
-const std::string value_type_text_collection(
+const std::string input_value_type_text("masd::variability::text");
+const std::string input_value_type_text_collection(
     "masd::variability::text_collection");
-const std::string value_type_number("masd::variability::number");
-const std::string value_type_boolean("masd::variability::boolean");
-const std::string value_type_kvp("masd::variability::key_value_pair");
+const std::string input_value_type_number("masd::variability::number");
+const std::string input_value_type_boolean("masd::variability::boolean");
+const std::string input_value_type_kvp("masd::variability::key_value_pair");
+
+const std::string output_value_type_text("value_type::text");
+const std::string output_value_type_text_collection(
+    "masd::variability::text_collection");
+const std::string output_value_type_number("value_type::number");
+const std::string output_value_type_boolean("value_type::boolean");
+const std::string output_value_type_kvp("value_type::key_value_pair");
 
 const std::string binding_point_any("any");
 const std::string binding_point_global("global");
@@ -62,25 +68,24 @@ const std::string invalid_template_kind(
 namespace masd::dogen::variability::helpers {
 
 meta_model::value_type
-enum_mapper::to_value_type(const std::string& s) const {
+enum_mapper::to_value_type(const std::string& s) {
     using meta_model::value_type;
-    if (s == value_type_text)
+    if (s == input_value_type_text)
         return value_type::text;
-    else if (s == value_type_text_collection)
+    else if (s == input_value_type_text_collection)
         return value_type::text_collection;
-    else if (s == value_type_number)
+    else if (s == input_value_type_number)
         return value_type::number;
-    else if (s == value_type_boolean)
+    else if (s == input_value_type_boolean)
         return value_type::boolean;
-    else if (s == value_type_kvp)
+    else if (s == input_value_type_kvp)
         return value_type::key_value_pair;
 
     BOOST_LOG_SEV(lg, error) << invalid_value_type << "'" << s << "'";
     BOOST_THROW_EXCEPTION(enum_mapping_exception(invalid_value_type + s));
 }
 
-meta_model::template_kind
-enum_mapper::to_template_kind(const std::string& s) const {
+meta_model::template_kind enum_mapper::to_template_kind(const std::string& s) {
     using meta_model::template_kind;
     if (s == template_kind_instance)
         return template_kind::instance;
@@ -97,8 +102,7 @@ enum_mapper::to_template_kind(const std::string& s) const {
     BOOST_THROW_EXCEPTION(enum_mapping_exception(invalid_template_kind + s));
 }
 
-meta_model::binding_point
-enum_mapper::to_binding_point(const std::string& s) const {
+meta_model::binding_point enum_mapper::to_binding_point(const std::string& s) {
     using meta_model::binding_point;
     if (s == binding_point_any)
         return binding_point::any;
@@ -117,14 +121,14 @@ enum_mapper::to_binding_point(const std::string& s) const {
     BOOST_THROW_EXCEPTION(enum_mapping_exception(invalid_scope + s));
 }
 
-std::string enum_mapper::from_value_type(const meta_model::value_type v) const {
+std::string enum_mapper::from_value_type(const meta_model::value_type v) {
     using meta_model::value_type;
     switch(v) {
-    case value_type::text: return value_type_text;
-    case value_type::text_collection: return value_type_text_collection;
-    case value_type::number: return value_type_number;
-    case value_type::boolean: return value_type_boolean;
-    case value_type::key_value_pair: return value_type_kvp;
+    case value_type::text: return output_value_type_text;
+    case value_type::text_collection: return output_value_type_text_collection;
+    case value_type::number: return output_value_type_number;
+    case value_type::boolean: return output_value_type_boolean;
+    case value_type::key_value_pair: return output_value_type_kvp;
     default: {
         const auto s(boost::lexical_cast<std::string>(v));
         BOOST_LOG_SEV(lg, error) << invalid_value_type << "'" << s << "'";
@@ -132,8 +136,7 @@ std::string enum_mapper::from_value_type(const meta_model::value_type v) const {
     } }
 }
 
-std::string
-enum_mapper::from_template_kind(const meta_model::template_kind v) const {
+std::string enum_mapper::from_template_kind(const meta_model::template_kind v) {
     using meta_model::template_kind;
     switch (v) {
     case template_kind::instance:
@@ -154,8 +157,7 @@ enum_mapper::from_template_kind(const meta_model::template_kind v) const {
     } }
 }
 
-std::string
-enum_mapper::from_binding_point(const meta_model::binding_point v) const {
+std::string enum_mapper::from_binding_point(const meta_model::binding_point v) {
     using meta_model::binding_point;
     switch(v) {
     case binding_point::any: return binding_point_any;
