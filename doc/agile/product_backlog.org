@@ -9715,30 +9715,6 @@ treatment.
 
 See [[http://www-01.ibm.com/support/knowledgecenter/SS5JSH_9.1.2/com.ibm.xtools.transform.uml2.cpp.doc/topics/rucppprofile.html][Stereotypes of the UML-to-C++ transformation profile]] for ideas.
 
-*** Consider adding enumerations in dynamic                           :story:
-
-This story is bound to already exist in backlog so do another
-search. The idea is that we should be able to define a field and all
-of its valid values. For extra bonus points, we should be able to
-assign an enumeration and get the string conversion done
-automatically; for example by having a string to enum code generated,
-and supplying that function as a type parameter into dynamic. Then
-dynamic's field selector would create the instances of the enumeration.
-
-Previous stories:
-
-*Create a domain field definitions*
-
-In addition to default values, it should be possible to supply a list
-of possible values for a field definition - a domain. When processing
-the values we can then check that it is part of the domain and if not
-throw. This is required for the include types and for the family
-types. At present this is only applicable to string fields.
-
-In this sense, =boolean= is just a special case where the list is know
-up front. We should re-implement =boolean= this way. Possibly even add
-synonyms (e.g. =true=, =false=, =0=, =1=)?
-
 *** Investigate boost log config files                                :story:
 
 Our log files are growing quite a bit. We don't really want to log any
@@ -10720,7 +10696,10 @@ that does the appropriate conversions.
 
 These values should be passed in as dynamic extensions. At present
 enumerators do not have dynamic extensions support so we need to add
-it too.
+it too. We could add a property to the meta-model: alias. Users can
+associate one or more alises with an enumerator. These are added to
+the element via meta-data. The from string method goes through the
+list of aliases and uses them for the conversion.
 
 Note that the inverse use case is also valid: one may want to map an
 enumerator to one or more strings (e.g. "to string"). As with "from
@@ -10729,7 +10708,8 @@ mapping. Ideally, one enumerator should map to a single string but it
 is conceivable there are other use cases (context sensitive
 mappings). Note that it is not necessarily the case that the mapping
 is bidirectional - i.e. "to string" is not required to be the inverse
-function of "from string" and vice-versa.
+function of "from string" and vice-versa. For the simple case where we
+just want one mapping we could have something like "string value".
 
 Notes:
 

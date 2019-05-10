@@ -168,6 +168,7 @@ Time spent creating the demo.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-05-10 Fri 11:35]--[2019-05-10 Fri 11:45] =>  0:10
     CLOCK: [2019-05-10 Fri 11:17]--[2019-05-10 Fri 11:34] =>  0:17
     CLOCK: [2019-05-09 Thu 06:25]--[2019-05-09 Thu 06:34] =>  0:09
     CLOCK: [2019-05-06 Mon 08:50]--[2019-05-06 Mon 09:09] =>  0:19
@@ -424,6 +425,16 @@ Tasks:
 - update all models to define features in the meta-model.
 - remove all JSON files.
 
+*** Add a method in enumeration that converts it from strings         :story:
+
+- =from_simple_string=;
+- =from_qualified_string=.
+
+For symmetry:
+
+- =to_simple_string=;
+- =to_qualified_string=.
+
 *** Create a code-generated static configuration reader               :story:
 
 Tasks:
@@ -454,3 +465,31 @@ Any time spent improving emacs, exploring new modes, fixing snags, etc.
 Time spent fixing build issues with either nightlies and/or CI.
 
 ** Deprecated
+*** CANCELLED Consider adding enumerations in dynamic                 :story:
+    CLOSED: [2019-05-10 Fri 11:45]
+
+*Rationale*: we do not want to further complicate the variability
+model. Instead, we shall code generate the conversion into the static
+type via the enumeration "from string" methods.
+
+This story is bound to already exist in backlog so do another
+search. The idea is that we should be able to define a field and all
+of its valid values. For extra bonus points, we should be able to
+assign an enumeration and get the string conversion done
+automatically; for example by having a string to enum code generated,
+and supplying that function as a type parameter into dynamic. Then
+dynamic's field selector would create the instances of the enumeration.
+
+Previous stories:
+
+*Create a domain field definitions*
+
+In addition to default values, it should be possible to supply a list
+of possible values for a field definition - a domain. When processing
+the values we can then check that it is part of the domain and if not
+throw. This is required for the include types and for the family
+types. At present this is only applicable to string fields.
+
+In this sense, =boolean= is just a special case where the list is know
+up front. We should re-implement =boolean= this way. Possibly even add
+synonyms (e.g. =true=, =false=, =0=, =1=)?
