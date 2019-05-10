@@ -897,7 +897,7 @@
       ]
     },
     {
-      "name": "helpers::value_type_mapper",
+      "name": "helpers::enum_mapper",
       "stereotypes": [
         "masd::handcrafted::typeable"
       ],

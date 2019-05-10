@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.variability/types/helpers/value_type_mapper.hpp"
+#include "masd.dogen.variability/types/helpers/enum_mapper.hpp"
 
 namespace masd::dogen::variability::helpers {
 
-bool value_type_mapper::operator==(const value_type_mapper& /*rhs*/) const {
+bool enum_mapper::operator==(const enum_mapper& /*rhs*/) const {
     return true;
 }
 

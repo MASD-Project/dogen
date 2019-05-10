@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_VARIABILITY_TYPES_HELPERS_VALUE_TYPE_MAPPER_HPP
-#define MASD_DOGEN_VARIABILITY_TYPES_HELPERS_VALUE_TYPE_MAPPER_HPP
+#ifndef MASD_DOGEN_VARIABILITY_TYPES_HELPERS_ENUM_MAPPER_HPP
+#define MASD_DOGEN_VARIABILITY_TYPES_HELPERS_ENUM_MAPPER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,17 +29,17 @@
 
 namespace masd::dogen::variability::helpers {
 
-class value_type_mapper final {
+class enum_mapper final {
 public:
-    value_type_mapper() = default;
-    value_type_mapper(const value_type_mapper&) = default;
-    value_type_mapper(value_type_mapper&&) = default;
-    ~value_type_mapper() = default;
-    value_type_mapper& operator=(const value_type_mapper&) = default;
+    enum_mapper() = default;
+    enum_mapper(const enum_mapper&) = default;
+    enum_mapper(enum_mapper&&) = default;
+    ~enum_mapper() = default;
+    enum_mapper& operator=(const enum_mapper&) = default;
 
 public:
-    bool operator==(const value_type_mapper& rhs) const;
-    bool operator!=(const value_type_mapper& rhs) const {
+    bool operator==(const enum_mapper& rhs) const;
+    bool operator!=(const enum_mapper& rhs) const {
         return !this->operator==(rhs);
     }
 
