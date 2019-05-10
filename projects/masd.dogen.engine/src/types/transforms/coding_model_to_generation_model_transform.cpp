@@ -188,7 +188,8 @@ compute_total_size(const coding::meta_model::model& m) {
     r += m.decoration_elements().modeline_groups().size();
     r += m.decoration_elements().modelines().size();
     r += m.variability_elements().feature_template_groups().size();
-    r += m.variability_elements().feature_template_group_registrar() != nullptr ?  1 : 0;
+    r += m.variability_elements().feature_template_group_registrar()
+        != nullptr ?  1 : 0;
 
     return r;
 }
