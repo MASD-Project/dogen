@@ -18,105 +18,95 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.generation.cpp/types/formatters/types/feature_group_registrar_implementation_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/types/feature_template_initializer_header_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/hash/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/types/traits.hpp"
-#include "masd.dogen.generation.cpp/types/formatters/io/inserter_implementation_helper.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/serialization/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/io/traits.hpp"
-#include "masd.dogen.generation.cpp/types/formatters/formatting_error.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/inclusion_constants.hpp"
-#include "masd.dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/traits.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "masd.dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
 #include "masd.dogen.coding/types/meta_model/variability/feature_template_initializer.hpp"
-#include "masd.dogen.utility/types/log/logger.hpp"
-#include <boost/throw_exception.hpp>
 
 namespace masd::dogen::generation::cpp::formatters::types {
 
-std::string feature_group_registrar_implementation_formatter::static_id() {
-    return traits::feature_group_registrar_implementation_archetype();
+std::string feature_template_initializer_header_formatter::static_id() {
+    return traits::feature_template_initializer_header_archetype();
 }
 
-std::string feature_group_registrar_implementation_formatter::id() const {
+std::string feature_template_initializer_header_formatter::id() const {
     return static_id();
 }
 
 archetypes::location
-feature_group_registrar_implementation_formatter::archetype_location() const {
+feature_template_initializer_header_formatter::archetype_location() const {
     static archetypes::location
-        r(cpp::traits::kernel(),  cpp::traits::backend(),
+        r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(),
-          feature_group_registrar_implementation_formatter::static_id());
+          feature_template_initializer_header_formatter::static_id());
     return r;
 }
 
-const coding::meta_model::name& feature_group_registrar_implementation_formatter::meta_name() const {
+const coding::meta_model::name& feature_template_initializer_header_formatter::meta_name() const {
     using coding::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_variability_feature_template_initializer_name());
     return r;
 }
 
-std::string feature_group_registrar_implementation_formatter::family() const {
-    return cpp::traits::implementation_family();
+std::string feature_template_initializer_header_formatter::family() const {
+    return cpp::traits::header_family();
 }
 
-inclusion_support_types feature_group_registrar_implementation_formatter::inclusion_support_type() const {
-    return inclusion_support_types::not_supported;
+inclusion_support_types feature_template_initializer_header_formatter::inclusion_support_type() const {
+    return inclusion_support_types::canonical_support;
 }
 
-boost::filesystem::path feature_group_registrar_implementation_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const coding::meta_model::name& n) const {
-
-    using namespace dogen::utility::log;
-    static logger lg(
-        logger_factory(feature_group_registrar_implementation_formatter::static_id()));
-    static const std::string not_supported("Inclusion path is not supported: ");
-
-    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
-}
-
-boost::filesystem::path feature_group_registrar_implementation_formatter::full_path(
+boost::filesystem::path feature_template_initializer_header_formatter::inclusion_path(
     const formattables::locator& l, const coding::meta_model::name& n) const {
-    return l.make_full_path_for_cpp_implementation(n, static_id());
+    return l.make_inclusion_path_for_cpp_header(n, static_id());
 }
 
-std::list<std::string> feature_group_registrar_implementation_formatter::inclusion_dependencies(
+boost::filesystem::path feature_template_initializer_header_formatter::full_path(
+    const formattables::locator& l, const coding::meta_model::name& n) const {
+    return l.make_full_path_for_cpp_header(n, static_id());
+}
+
+std::list<std::string> feature_template_initializer_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const coding::meta_model::element& e) const {
+
     using coding::meta_model::variability::feature_template_initializer;
     const auto& o(assistant::as<feature_template_initializer>(e));
     auto builder(f.make());
 
-    const auto ch_arch(traits::class_header_archetype());
-    builder.add(o.name(), ch_arch);
+    // algorithm: domain headers need it for the swap function.
+    builder.add(inclusion_constants::std::algorithm());
 
-    const auto os(inclusion_constants::std::ostream());
-    builder.add(os);
+    using ser = formatters::serialization::traits;
+    const auto ser_fwd_arch(ser::forward_declarations_archetype());
+    builder.add(o.name(), ser_fwd_arch);
 
     return builder.build();
 }
 
-extraction::meta_model::artefact feature_group_registrar_implementation_formatter::
+extraction::meta_model::artefact feature_template_initializer_header_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
-    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
     const auto& o(a.as<coding::meta_model::variability::feature_template_initializer>(e));
 
     {
         const auto sn(o.name().simple());
         const auto qn(a.get_qualified_name(o.name()));
         auto sbf(a.make_scoped_boilerplate_formatter(e));
-        a.add_helper_methods(o.name().qualified().dot());
-
         {
             const auto ns(a.make_namespaces(o.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
-        } // snf
+        }
     } // sbf
     return a.make_artefact();
 }
-
 }

@@ -256,13 +256,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.generation.cpp.types.feature_group_registrar_header.postfix"
+      "qualified": "masd.generation.cpp.types.feature_template_initializer_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
       "backend": "masd.generation.cpp",
       "facet": "masd.generation.cpp.types",
-      "archetype": "masd.generation.cpp.types.feature_group_registrar_header"
+      "archetype": "masd.generation.cpp.types.feature_template_initializer_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -272,13 +272,13 @@
    {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.generation.cpp.types.feature_group_registrar_implementation.postfix"
+      "qualified": "masd.generation.cpp.types.feature_template_initializer_implementation.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
       "backend": "masd.generation.cpp",
       "facet": "masd.generation.cpp.types",
-      "archetype": "masd.generation.cpp.types.feature_group_registrar_implementation"
+      "archetype": "masd.generation.cpp.types.feature_template_initializer_implementation"
     },
     "value_type": "text",
     "template_kind": "instance",

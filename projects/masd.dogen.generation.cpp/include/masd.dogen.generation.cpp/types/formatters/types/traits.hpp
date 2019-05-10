@@ -92,8 +92,8 @@ struct traits {
 
     static std::string feature_group_header_archetype();
     static std::string feature_group_implementation_archetype();
-    static std::string feature_group_registrar_header_archetype();
-    static std::string feature_group_registrar_implementation_archetype();
+    static std::string feature_template_initializer_header_archetype();
+    static std::string feature_template_initializer_implementation_archetype();
 };
 
 }

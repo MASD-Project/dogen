@@ -94,14 +94,14 @@ std::string traits::feature_group_implementation_archetype() {
     return r;
 }
 
-std::string traits::feature_group_registrar_header_archetype() {
-    static std::string r(traits::facet() + ".feature_group_registrar_header");
+std::string traits::feature_template_initializer_header_archetype() {
+    static std::string r(traits::facet() + ".feature_template_initializer_header");
     return r;
 }
 
-std::string traits::feature_group_registrar_implementation_archetype() {
+std::string traits::feature_template_initializer_implementation_archetype() {
     static std::string r(traits::facet() +
-        ".feature_group_registrar_implementation");
+        ".feature_template_initializer_implementation");
     return r;
 }
 
