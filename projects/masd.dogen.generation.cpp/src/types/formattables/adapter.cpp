@@ -99,7 +99,7 @@ make_databases(const coding::meta_model::orm::model_properties& omp) const {
 
 model adapter::adapt(const formatters::repository& frp,
     const generation::meta_model::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Adapting yarn to formattables."
+    BOOST_LOG_SEV(lg, debug) << "Adapting coding to formattables."
                              << " Elements in model: " << m.elements().size();
 
     model r;
@@ -188,7 +188,7 @@ model adapter::adapt(const formatters::repository& frp,
         }
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished adapting yarn to formattables."
+    BOOST_LOG_SEV(lg, debug) << "Finished adapting coding to formattables."
                              << "Size: " << r.formattables().size();
     return r;
 }

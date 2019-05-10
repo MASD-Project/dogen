@@ -39,6 +39,7 @@ namespace masd::dogen::generation::cpp::formattables {
 
 void file_path_and_guard_expander::
 expand(const formatters::repository& frp, const locator& l, model& fm) const {
+    BOOST_LOG_SEV(lg, debug) << "Expanding file paths and guards.";
 
     const auto safba(frp.stock_artefact_formatters_by_archetype());
     for (auto& pair : fm.formattables()) {
@@ -86,6 +87,7 @@ expand(const formatters::repository& frp, const locator& l, model& fm) const {
             }
         }
     }
+    BOOST_LOG_SEV(lg, debug) << "Finished expanding file paths and guards.";
 }
 
 }

@@ -287,7 +287,8 @@ boost::filesystem::path locator::make_project_path(
 boost::filesystem::path locator::make_facet_path(
     const std::string& archetype, const std::string& extension,
     const coding::meta_model::name& n) const {
-    BOOST_LOG_SEV(lg, debug) << "Making facet path for: " << n.qualified().dot();
+    BOOST_LOG_SEV(lg, trace) << "Making facet path for: "
+                             << n.qualified().dot();
 
     boost::filesystem::path r;
 
@@ -332,7 +333,7 @@ boost::filesystem::path locator::make_facet_path(
         stream << dot << extension;
     r /= stream.str();
 
-    BOOST_LOG_SEV(lg, debug) << "Done making the facet path. Result: "
+    BOOST_LOG_SEV(lg, trace) << "Done making the facet path. Result: "
                              << r.generic_string();
     return r;
 }
@@ -340,7 +341,8 @@ boost::filesystem::path locator::make_facet_path(
 boost::filesystem::path locator::make_facet_path_temp(
     const std::string& archetype, const std::string& file_name,
     const coding::meta_model::name& n) const {
-    BOOST_LOG_SEV(lg, debug) << "Making facet path for: " << n.qualified().dot();
+    BOOST_LOG_SEV(lg, trace) << "Making facet path for: "
+                             << n.qualified().dot();
 
     boost::filesystem::path r;
 
@@ -376,7 +378,7 @@ boost::filesystem::path locator::make_facet_path_temp(
     stream << file_name;
     r /= stream.str();
 
-    BOOST_LOG_SEV(lg, debug) << "Done making the facet path. Result: "
+    BOOST_LOG_SEV(lg, trace) << "Done making the facet path. Result: "
                              << r.generic_string();
     return r;
 }
