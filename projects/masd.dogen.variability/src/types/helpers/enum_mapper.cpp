@@ -46,17 +46,33 @@ const std::string output_value_type_number("value_type::number");
 const std::string output_value_type_boolean("value_type::boolean");
 const std::string output_value_type_kvp("value_type::key_value_pair");
 
-const std::string binding_point_any("any");
-const std::string binding_point_global("global");
-const std::string binding_point_element("element");
-const std::string binding_point_property("property");
-const std::string binding_point_operation("operation");
+const std::string input_binding_point_any("any");
+const std::string input_binding_point_global("global");
+const std::string input_binding_point_element("element");
+const std::string input_binding_point_property("property");
+const std::string input_binding_point_operation("operation");
 
-const std::string template_kind_instance("instance");
-const std::string template_kind_recursive_template("recursive_template");
-const std::string template_kind_backend_template("backend_template");
-const std::string template_kind_facet_template("facet_template");
-const std::string template_kind_archetype_template("archetype_template");
+const std::string output_binding_point_any("binding_point::any");
+const std::string output_binding_point_global("binding_point::global");
+const std::string output_binding_point_element("binding_point::element");
+const std::string output_binding_point_property("binding_point::property");
+const std::string output_binding_point_operation("binding_point::operation");
+
+const std::string input_template_kind_instance("instance");
+const std::string input_template_kind_recursive_template("recursive_template");
+const std::string input_template_kind_backend_template("backend_template");
+const std::string input_template_kind_facet_template("facet_template");
+const std::string input_template_kind_archetype_template("archetype_template");
+
+const std::string output_template_kind_instance("template_kind::instance");
+const std::string output_template_kind_recursive_template(
+    "template_kind::recursive_template");
+const std::string output_template_kind_backend_template(
+    "template_kind::backend_template");
+const std::string output_template_kind_facet_template(
+    "template_kind::facet_template");
+const std::string output_template_kind_archetype_template(
+    "template_kind::archetype_template");
 
 const std::string invalid_scope("Invalid or unsupported scope type: ");
 const std::string invalid_value_type("Invalid or unsupported value type: ");
@@ -87,15 +103,15 @@ enum_mapper::to_value_type(const std::string& s) {
 
 meta_model::template_kind enum_mapper::to_template_kind(const std::string& s) {
     using meta_model::template_kind;
-    if (s == template_kind_instance)
+    if (s == input_template_kind_instance)
         return template_kind::instance;
-    if (s == template_kind_recursive_template)
+    if (s == input_template_kind_recursive_template)
         return template_kind::recursive_template;
-    if (s == template_kind_backend_template)
+    if (s == input_template_kind_backend_template)
         return template_kind::backend_template;
-    if (s == template_kind_facet_template)
+    if (s == input_template_kind_facet_template)
         return template_kind::facet_template;
-    if (s == template_kind_archetype_template)
+    if (s == input_template_kind_archetype_template)
         return template_kind::archetype_template;
 
     BOOST_LOG_SEV(lg, error) << invalid_template_kind << "'" << s << "'";
@@ -104,17 +120,17 @@ meta_model::template_kind enum_mapper::to_template_kind(const std::string& s) {
 
 meta_model::binding_point enum_mapper::to_binding_point(const std::string& s) {
     using meta_model::binding_point;
-    if (s == binding_point_any)
+    if (s == input_binding_point_any)
         return binding_point::any;
-    else if (s == binding_point_any)
+    else if (s == input_binding_point_any)
         return binding_point::global;
-    else if (s == binding_point_global)
+    else if (s == input_binding_point_global)
         return binding_point::element;
-    else if (s == binding_point_element)
+    else if (s == input_binding_point_element)
         return binding_point::element;
-    else if (s == binding_point_property)
+    else if (s == input_binding_point_property)
         return binding_point::property;
-    else if (s == binding_point_operation)
+    else if (s == input_binding_point_operation)
         return binding_point::operation;
 
     BOOST_LOG_SEV(lg, error) << invalid_scope << "'" << s << "'";
@@ -140,15 +156,15 @@ std::string enum_mapper::from_template_kind(const meta_model::template_kind v) {
     using meta_model::template_kind;
     switch (v) {
     case template_kind::instance:
-        return template_kind_instance;
+        return output_template_kind_instance;
     case template_kind::recursive_template:
-        return template_kind_recursive_template;
+        return output_template_kind_recursive_template;
     case template_kind::backend_template:
-        return template_kind_backend_template;
+        return output_template_kind_backend_template;
     case template_kind::facet_template:
-        return template_kind_facet_template;
+        return output_template_kind_facet_template;
     case template_kind::archetype_template:
-        return template_kind_archetype_template;
+        return output_template_kind_archetype_template;
     default: {
         const auto s(boost::lexical_cast<std::string>(v));
         BOOST_LOG_SEV(lg, error) << invalid_template_kind << "'" << s << "'";
@@ -160,11 +176,11 @@ std::string enum_mapper::from_template_kind(const meta_model::template_kind v) {
 std::string enum_mapper::from_binding_point(const meta_model::binding_point v) {
     using meta_model::binding_point;
     switch(v) {
-    case binding_point::any: return binding_point_any;
-    case binding_point::global: return binding_point_global;
-    case binding_point::element: return binding_point_element;
-    case binding_point::property: return binding_point_property;
-    case binding_point::operation: return binding_point_operation;
+    case binding_point::any: return output_binding_point_any;
+    case binding_point::global: return output_binding_point_global;
+    case binding_point::element: return output_binding_point_element;
+    case binding_point::property: return output_binding_point_property;
+    case binding_point::operation: return output_binding_point_operation;
     default: {
         const auto s(boost::lexical_cast<std::string>(v));
         BOOST_LOG_SEV(lg, error) << invalid_scope << "'" << s << "'";
