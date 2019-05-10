@@ -22,38 +22,16 @@
 
 namespace masd::dogen::variability::helpers {
 
-feature_template_registrar::feature_template_registrar(const masd::dogen::variability::meta_model::feature_template_repository& repository)
-    : repository_(repository) { }
+void feature_template_registrar::register_templates(
+    const std::list<meta_model::feature_template>& fts) {
 
-void feature_template_registrar::swap(feature_template_registrar& other) noexcept {
-    using std::swap;
-    swap(repository_, other.repository_);
+    for (const auto& ft : fts)
+        repository_.templates().push_back(ft);
 }
 
-bool feature_template_registrar::operator==(const feature_template_registrar& rhs) const {
-    return repository_ == rhs.repository_;
-}
-
-feature_template_registrar& feature_template_registrar::operator=(feature_template_registrar other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
-}
-
-const masd::dogen::variability::meta_model::feature_template_repository& feature_template_registrar::repository() const {
+const meta_model::feature_template_repository&
+feature_template_registrar::repository() {
     return repository_;
-}
-
-masd::dogen::variability::meta_model::feature_template_repository& feature_template_registrar::repository() {
-    return repository_;
-}
-
-void feature_template_registrar::repository(const masd::dogen::variability::meta_model::feature_template_repository& v) {
-    repository_ = v;
-}
-
-void feature_template_registrar::repository(const masd::dogen::variability::meta_model::feature_template_repository&& v) {
-    repository_ = std::move(v);
 }
 
 }

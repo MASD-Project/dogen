@@ -25,51 +25,33 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include "masd.dogen.variability/types/meta_model/feature_template.hpp"
 #include "masd.dogen.variability/types/meta_model/feature_template_repository.hpp"
 
 namespace masd::dogen::variability::helpers {
 
+/**
+ * @brief Keeps track of all of the available feature templates in the
+ * system.
+ */
 class feature_template_registrar final {
 public:
-    feature_template_registrar() = default;
-    feature_template_registrar(const feature_template_registrar&) = default;
-    feature_template_registrar(feature_template_registrar&&) = default;
-    ~feature_template_registrar() = default;
+    /**
+     * @brief Adds a number of templates into the registrar.
+     */
+    void register_templates(
+        const std::list<meta_model::feature_template>& fts);
 
 public:
-    explicit feature_template_registrar(const masd::dogen::variability::meta_model::feature_template_repository& repository);
-
-public:
-    const masd::dogen::variability::meta_model::feature_template_repository& repository() const;
-    masd::dogen::variability::meta_model::feature_template_repository& repository();
-    void repository(const masd::dogen::variability::meta_model::feature_template_repository& v);
-    void repository(const masd::dogen::variability::meta_model::feature_template_repository&& v);
-
-public:
-    bool operator==(const feature_template_registrar& rhs) const;
-    bool operator!=(const feature_template_registrar& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    void swap(feature_template_registrar& other) noexcept;
-    feature_template_registrar& operator=(feature_template_registrar other);
+    /**
+     * @brief Returns the current state of the registrar.
+     */
+    const meta_model::feature_template_repository& repository();
 
 private:
-    masd::dogen::variability::meta_model::feature_template_repository repository_;
+    meta_model::feature_template_repository repository_;
 };
-
-}
-
-namespace std {
-
-template<>
-inline void swap(
-    masd::dogen::variability::helpers::feature_template_registrar& lhs,
-    masd::dogen::variability::helpers::feature_template_registrar& rhs) {
-    lhs.swap(rhs);
-}
 
 }
 
