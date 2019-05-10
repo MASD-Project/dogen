@@ -27,14 +27,25 @@
 
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.variability/types/meta_model/feature_model.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_template_repository.hpp"
 #include "masd.dogen.variability/types/transforms/context.hpp"
 
 namespace masd::dogen::variability::transforms {
 
+/**
+ * @brief Produces a feature model with all the available features in
+ * the system.
+ */
 class feature_model_production_chain final {
+private:
+    static meta_model::feature_template_repository
+    merge(const meta_model::feature_template_repository& lhs,
+        const meta_model::feature_template_repository& rhs);
+
 public:
     static boost::shared_ptr<meta_model::feature_model>
-    apply(const context& ctx);
+    apply(const context& ctx,
+        const meta_model::feature_template_repository& ftrp);
 };
 
 }

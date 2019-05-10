@@ -39,13 +39,28 @@ auto lg(logger_factory(transform_id));
 
 namespace masd::dogen::variability::transforms {
 
+meta_model::feature_template_repository
+feature_model_production_chain::merge(
+    const meta_model::feature_template_repository& lhs,
+    const meta_model::feature_template_repository& rhs) {
+
+    meta_model::feature_template_repository r(lhs);
+    for (const auto& ft : rhs.templates())
+        r.templates().push_back(ft);
+
+    return r;
+}
+
 boost::shared_ptr<meta_model::feature_model>
-feature_model_production_chain::apply(const context& ctx) {
+feature_model_production_chain::apply(const context& ctx,
+    const meta_model::feature_template_repository& ftrp) {
     tracing::scoped_chain_tracer stp(lg, "feature model production chain",
         transform_id, transform_id, *ctx.tracer());
 
-    const auto ftrp(feature_template_hydration_transform::apply(ctx));
-    const auto fts(feature_template_instantiation_transform::apply(ctx, ftrp));
+    const auto hydrated_ftrp(feature_template_hydration_transform::apply(ctx));
+    const auto merged_ftrp(merge(hydrated_ftrp, ftrp));
+    const auto fts(feature_template_instantiation_transform::
+        apply(ctx, merged_ftrp));
     const auto r(feature_model_transform::apply(ctx, fts));
 
     stp.end_chain(r);

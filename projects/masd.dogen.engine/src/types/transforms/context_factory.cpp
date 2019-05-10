@@ -26,6 +26,7 @@
 #include "masd.dogen.archetypes/io/location_repository_io.hpp"
 #include "masd.dogen.archetypes/types/location_repository_builder.hpp"
 #include "masd.dogen.variability/types/transforms/context.hpp"
+#include "masd.dogen.variability/types/helpers/feature_template_registrar.hpp"
 #include "masd.dogen.variability/types/transforms/feature_model_production_chain.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
@@ -182,7 +183,9 @@ context context_factory::make_context(const configuration& cfg,
      * Now we can create the feature model.
      */
     using variability::transforms::feature_model_production_chain;
-    const auto fm(feature_model_production_chain::apply(vctx));
+    variability::helpers::feature_template_registrar ftrg;
+    const auto ftrp(ftrg.repository());
+    const auto fm(feature_model_production_chain::apply(vctx, ftrp));
     r.injection_context().feature_model(fm);
     r.coding_context().feature_model(fm);
     r.generation_context().feature_model(fm);
