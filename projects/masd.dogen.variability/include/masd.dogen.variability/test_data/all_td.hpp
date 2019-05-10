@@ -48,6 +48,7 @@
 #include "masd.dogen.variability/test_data/meta_model/configuration_model_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/configuration_point_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/configuration_model_set_td.hpp"
+#include "masd.dogen.variability/test_data/meta_model/feature_template_repository_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/profile_template_repository_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/configuration_point_template_td.hpp"
 

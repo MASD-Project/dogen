@@ -871,6 +871,37 @@
           "documentation": "If true, the potential binding was realised into an actual binding.\n"
         }
       ]
+    },
+    {
+      "name": "meta_model::feature_template_repository",
+      "documentation": "Stores a set of feature templates.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "templates",
+          "type": "std::list<feature_template>"
+        }
+      ]
+    },
+    {
+      "name": "helpers::feature_template_registrar",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "repository",
+          "type": "meta_model::feature_template_repository"
+        }
+      ]
+    },
+    {
+      "name": "helpers::value_type_mapper",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

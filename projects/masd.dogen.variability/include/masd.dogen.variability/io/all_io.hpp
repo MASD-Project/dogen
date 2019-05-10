@@ -49,6 +49,7 @@
 #include "masd.dogen.variability/io/meta_model/configuration_model_io.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_point_io.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_model_set_io.hpp"
+#include "masd.dogen.variability/io/meta_model/feature_template_repository_io.hpp"
 #include "masd.dogen.variability/io/meta_model/profile_template_repository_io.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_point_template_io.hpp"
 
