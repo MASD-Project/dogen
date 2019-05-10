@@ -2058,14 +2058,14 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::feature_group_header_formatter",
+      "name": "formatters::types::feature_bundle_header_formatter",
       "stereotypes": [
         "masd::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::feature_group_implementation_formatter",
+      "name": "formatters::types::feature_bundle_implementation_formatter",
       "stereotypes": [
         "masd::cpp::artefact_formatter"
       ],

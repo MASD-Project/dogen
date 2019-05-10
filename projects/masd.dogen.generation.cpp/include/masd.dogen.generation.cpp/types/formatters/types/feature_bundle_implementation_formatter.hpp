@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_TYPES_FEATURE_GROUP_IMPLEMENTATION_FORMATTER_HPP
-#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_TYPES_FEATURE_GROUP_IMPLEMENTATION_FORMATTER_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_TYPES_FEATURE_BUNDLE_IMPLEMENTATION_FORMATTER_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_TYPES_FEATURE_BUNDLE_IMPLEMENTATION_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 
 namespace masd::dogen::generation::cpp::formatters::types {
 
-class feature_group_implementation_formatter final : public artefact_formatter_interface {
+class feature_bundle_implementation_formatter final : public artefact_formatter_interface {
 public:
     static std::string static_id();
 

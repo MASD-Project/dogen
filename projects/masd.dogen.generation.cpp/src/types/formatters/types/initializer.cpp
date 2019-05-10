@@ -31,8 +31,8 @@
 #include "masd.dogen.generation.cpp/types/formatters/types/visitor_header_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/types/forward_declarations_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/types/smart_pointer_helper.hpp"
-#include "masd.dogen.generation.cpp/types/formatters/types/feature_group_header_formatter.hpp"
-#include "masd.dogen.generation.cpp/types/formatters/types/feature_group_implementation_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/types/feature_bundle_header_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/types/feature_bundle_implementation_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/types/feature_template_initializer_header_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/types/feature_template_initializer_implementation_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/types/initializer.hpp"
@@ -51,8 +51,8 @@ void initializer::initialize(registrar& rg) {
     register_formatter<namespace_header_formatter>(rg);
     register_formatter<visitor_header_formatter>(rg);
     register_formatter<forward_declarations_formatter>(rg);
-    register_formatter<feature_group_header_formatter>(rg);
-    register_formatter<feature_group_implementation_formatter>(rg);
+    register_formatter<feature_bundle_header_formatter>(rg);
+    register_formatter<feature_bundle_implementation_formatter>(rg);
     register_formatter<feature_template_initializer_header_formatter>(rg);
     register_formatter<feature_template_initializer_implementation_formatter>(rg);
 

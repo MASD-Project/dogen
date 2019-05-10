@@ -84,13 +84,13 @@ std::string traits::primitive_implementation_archetype() {
     return r;
 }
 
-std::string traits::feature_group_header_archetype() {
-    static std::string r(traits::facet() + ".feature_group_header");
+std::string traits::feature_bundle_header_archetype() {
+    static std::string r(traits::facet() + ".feature_bundle_header");
     return r;
 }
 
-std::string traits::feature_group_implementation_archetype() {
-    static std::string r(traits::facet() + ".feature_group_implementation");
+std::string traits::feature_bundle_implementation_archetype() {
+    static std::string r(traits::facet() + ".feature_bundle_implementation");
     return r;
 }
 
