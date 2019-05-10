@@ -16,6 +16,546 @@ such as profiles, licences etc.
 
 Stories that we haven't quite classified yet, but are needed.
 
+*** Consider adding stereotypes into profiles                         :story:
+
+It would be nice to be able to define a profile called "ormable" and
+then have it enable:
+
+- types
+- ODB
+- the appropriate ORM stereotype, e.g. =orm::object=, etc.
+
+However, at present there is no way to associate a stereotype with a profile.
+
+*** Add ORM type mapping support to primitives                        :story:
+
+At present we can setup a type map in ORM as follows:
+
+: #DOGEN masd.orm.type_override=postgresql,JSONB
+
+However, this is specific to attributes. It would be really nice to
+have this at the primitive level as well so that we can map once and
+reuse the mapping.
+
+*** Move parent processing to injection                               :story:
+
+At present we are reading the parent field from meta-data in coding's
+parsing transform. If we create a transform for this in injection,
+this would mean that all meta-model elements would have access to
+parenting via meta-data. We could also name the transform a bit
+better.
+
+*** Merging of profiles and configurations is non-intuitive           :story:
+
+As per comments in profile binding:
+
+#+begin_quote
+Finally, merge against the configuration. This must be done in order:
+first the accumulating_profile, the base layer. This ordering is
+*highly* non-intuitive. It derives from the fact that, on a merge, lhs
+takes precedence over rhs. If we merge the base layer first, as it is
+logical, this would mean that the "overrides" would fail to override
+for all of the features that the base layer has already set. Clearly
+base layer is not a good name here; its more of a "default feature
+configuration" or something of the sort.
+#+end_quote
+
+*** Use of binding points in profiles                                 :story:
+
+At present we have the concept of a binding point in a feature. This
+allows us to determine how a feature can be bound to a modeling
+element in a configuration. For example, take feature =X= with a binding
+point of =global=; this feature can only be configured in the root
+module because it does not make sense to exist anywhere else.
+
+This concept was already present in the annotations model, where we
+checked that a "scope type" of a field matched the scope type of the
+element. However, this was present haphazardly in profiles; we had the
+notion of a "scope type" on a profile as a property but the profile
+hydrator never populated it; in addition, the profiler only set the
+annotation scope:
+
+: pc.annotation().scope(scope_types::not_applicable);
+
+We probably started thinking about this but stopped half-way. So, if
+we try to retrace our steps logically:
+
+- a profile could conceivably have a binding point. It would be used
+  to validate that all profiles it merges against also have the same
+  biding point (or similar; say =any= or =module= for =global=). It
+  could also be used to validate that the feature templates referred
+  to in its configuration point templates are also compatible.
+
+At present we have preserved the old logic of having a binding point
+in a profile as a feature, and left the initial feature processing
+support in the adaptor transform, but:
+
+- we did not add it to the profile template and profile classes;
+- consequently we are missing all of the validation logic defined
+  above.
+
+*** Allow stereotypes in object templates                             :story:
+
+At present we need to use inheritance to "merge" object
+templates. This has served us well, but has one limitation:
+composition has to be tree-like. In practice, we have use cases where
+composition is more haphazard, not allowing us to draw a clean
+inheritance diagram. For example, we have the "properties-like
+elements" in coding, that all have:
+
+: Documentable, Annotatable, Configurable, Nameable
+
+These could easily be packaged into a object template, but we can't
+because its not possible to have two "kinds" of inheritance graphs -
+we'd end up with lots of lines intersecting each other. However, a
+natural way to solve this problem is to allow dynamic stereotypes in
+object templates. These are mapped to parents and processed exactly as
+if we had the inheritance relationship. From a practical perspective
+this makes a lot of sense, but we need to make sure this is not
+frowned upon from a theoretical perspective.
+
+The other problem as well is that we need to mix and match dynamic and
+static stereotypes (e.g. we need =masd::object_template= as well).
+
+*** Create an element builder                                         :story:
+
+At present we are manually populating the core properties of
+element. This means every time a new one is added, we need to go and
+find all the places where element is being created. We need a template
+based builder for element that takes care of these:
+
+- populate implicit properties, such as configuration whenever name is
+  populated.
+- hide name factory inside of builder.
+- to determine the builder API, see all use cases where we are
+  manually creating the element.
+- populate the origin type. At present we are doing this on a
+  transform but the problem is we keep forgetting on adding new
+  meta-model types to it. Ideally we just want the types to be
+  populated straight on adaption. We just need a flag to be supplied
+  to the injection to coding transform (is target?), if we don't have
+  one already.
+
+*** Enablement problem is in the variability domain                   :story:
+
+Up to now we have considered the enablement problem as a generation
+model problem, but this is incorrect. The enablement problem is
+basically the idea that if I set a type to be hashable (for example),
+the system should implicitly determine all other types that need to be
+hashable too. This means that if I have descendants, they should also
+be hashable, and if I have properties, the type of those properties
+must also be hashable. In reality this is just a variability
+problem. We need to tell the variability model about:
+
+- features that require "propagation across model elements". We need a
+  good name for this, without referencing model elements.
+- the relationship between bound configurations. This can be copied
+  from the model element (the bound configuration has the exact same
+  name as the model element).
+
+Then, we can simply build a DAG for the feature model using only bound
+configurations (e.g. at present, binding type of "not applicable") and
+then DFS the DAG setting properties across this relationship. Call the
+relationship R between a and b, where a and b are configurations; all
+properties that have the "propagate" flag on will be copied across
+from a to b as is (due to R). If done after building the merged model
+and after stereotype expansion this will work really well:
+
+- we don't really care how a got into the state it is at present, we
+  just copy the relevant properties across.
+- there is no solving, BDD, etc. However, R must not have cycles. We
+  probably need to first see how many cycles we find with inheritance
+  and associations.
+- we may need a way to switch this off. Say we really want to
+  introduce a cycle; in that case, the bound configurations should be
+  ignored.
+
+Note that we will probably need to store pointers to the configuration
+in order for this to work, or else we'll end up doing a lot of lookups
+and copying around (to get the configurations from the model elements
+into variability, the DAG etc and then back into the model at the
+end).
+
+Interestingly, this also means that we should not move the
+global/local enablement computations into archetypes as we had planned
+earlier. Instead, we need to explore if it is possible to generalise
+the notion of "local" and "global" configurations, with overrides and
+default values. This would work as part of the configuration binding
+via implicit relationships - its just that the global configuration is
+not really a relationship inferred from the underlying model. We then
+need to look at the cleverness that we are using for overwrite as
+well. Whilst we only need this logic for enablement, it may be useful
+for other fields as well in the future. We also need some kind of way
+of declaring certain fields as "cloneable" (for want of a better
+term). In this case, we start off with a list of these fields, and if
+there is no configuration point for them locally, we take the global
+configuration point; if none exists, we take the default value.
+
+Actually its more like "hierarchical copy" because we need to take
+into account the hierarchy. In addition, we don't particularly care
+about say backend, facet, etc at the element level, we just want the
+archetype. So we need to encode these rules as a type of bind. It can
+even be hacked as a bind "special" just for this purpose, its still a
+better approach.
+
+Another interesting issue is that of "reverse references". That is,
+the fact that a model m is referenced by a set of models S; each of
+these models may enable facets on elements that are associated with
+elements from model m. On a first pass, we need to be able to consider
+the configuration requirements as "non-satisfiable". The user
+requested a configuration on the target model which cannot be
+satisfied unless we alter the configuration of a referenced model. On
+a second pass, when we have product level support, we could consider
+adding "referenced" models to each model. This means that when we are
+building m we have visibility of how m is used in the product and we
+can take those uses into account when building the DAG.
+
+*** Add annotation types description                                  :story:
+
+It would be useful to have a description of the purpose of the field
+so that we could print it to the command line. We could simply add a
+JSON attribute to the field called description to start off with. But
+ideally we need a command line argument to dump all fields and their
+descriptions so that users know what's available.
+
+This should be sorted by qualified name.
+
+*** Reactivate injection.dia tests                                    :story:
+
+We seem to have a number of tests commented out in
+injection.dia. Investigate why and if possible, reactivate them.
+
+*** Location of =--byproduct-directory= not respected                 :story:
+
+It seems that at present we are not honouring the directory supplied
+by the user. This seems to only happen on convert mode.
+
+*** Add primitives to the archetypes model                            :story:
+
+Instead of using strings we should use primitives for:
+
+- facets
+- formatters
+- backends
+- simple and qualified names.
+- etc.
+
+*** Consider a test suite level logging flag                          :story:
+
+At present we can either enable logging for all test suites in dogen
+or disable it. This means that all tests run a lot slower. Maybe we
+should allow enabling logging at the test suite level. However, we
+only use this to troubleshoot in which case the cost of a few seconds
+is not a big problem.
+
+*** Add support for decoration configuration overrides                :story:
+
+At present we have hard-coded the decoration configuration to be read
+from the root object only. In an ideal world, we should be able to
+override some of these such as the copyrights. It may not make sense
+to be able to override them all though.
+
+This functionality has been implemented but requires tests in the test
+model.
+
+*** Update copyright notices                                          :story:
+
+We need to update all notices to reflect personal ownership until DDC
+was formed, and then ownership by DDC.
+
+- first update to personal ownership has been done, but we need to
+  test if multiple copyright entries is properly supported.
+
+*** Copyright holders is scalar when it should be an array            :story:
+
+At present its only possible to specify a single copyright holder. It
+should be handled the same was as odb parameters, but because that is
+done with a massive hack, we are not going to extend the hack to
+copyright holders.
+
+This functionality has been implemented but requires tests in the test
+model.
+
+*** Duplicate elements in model                                       :story:
+
+Whilst running queries on postgres against a model dumped in tracing,
+we found evidence of duplicate elements. Query:
+
+: select jsonb_pretty(
+:           jsonb_array_elements(
+:           jsonb_array_elements(data)->'elements')->'data'->'__parent_0__'->'name'->'qualified'->'dot'
+:       )
+: from traces;
+
+Snippet of results after =sort | uniq -c=
+
+:      1  "masd.dogen.generation.csharp"
+:      1  "masd.dogen.generation.csharp.all"
+:      1  "masd.dogen.generation.csharp.CMakeLists"
+:      1  "masd.dogen.generation.csharp.entry_point"
+:      1  "masd.dogen.generation.csharp.fabric"
+:      2  "masd.dogen.generation.csharp.fabric.assembly_info"
+:      2  "masd.dogen.generation.csharp.fabric.assembly_info_factory"
+:      2  "masd.dogen.generation.csharp.fabric.assistant"
+:      2  "masd.dogen.generation.csharp.fabric.assistant_factory"
+:      2  "masd.dogen.generation.csharp.fabric.decoration_expander"
+:      2  "masd.dogen.generation.csharp.fabric.dynamic_transform"
+:      2  "masd.dogen.generation.csharp.fabric.element_visitor"
+:      2  "masd.dogen.generation.csharp.fabric.initializer"
+:      2  "masd.dogen.generation.csharp.fabric.injector"
+:      2  "masd.dogen.generation.csharp.fabric.meta_name_factory"
+:      2  "masd.dogen.generation.csharp.fabric.traits"
+:      2  "masd.dogen.generation.csharp.fabric.visual_studio_configuration"
+:      2  "masd.dogen.generation.csharp.fabric.visual_studio_factory"
+
+We need to investigate the generation pipeline to understand where
+this is coming from.
+
+*** Consider renaming =coding= model                                  :story:
+
+The real name of this model is something like "component". This will
+make sense once we add the product model. In addition we need to
+somehow share the "generation" model across coding and product
+models. In reality, much of what is in generation more properly
+belongs to =archetypes= because is functionality related to
+projections into archetype space.
+
+=coding= is the meta-model for modeling elements that exist inside a
+component of a product. "component" is not a particularly brilliant
+name, and it is somewhat confusing because it is used in UML with a
+somewhat different meaning, but the more correct name - chosen by
+Voelter - would be "building block", which is too long. We just need
+to make it clear that "component" and "product" are terms from the
+MASD domain. Library and executable are the types of components.
+
+Another point to consider before this rename is that we may not
+necessarily need a product model. Maybe we can add the elements for
+product directly into coding. We need to identify all of these
+elements and see if they are sufficient to exist as a stand alone
+model. If we do create a single model, then "coding" is actually not
+the worse possible name (e.g. component + product = coding, the
+activity for creating products).
+
+*** Move fabric types into coding                                     :story:
+
+Fabric types need to be tidied up and moved into coding as regular
+meta-model elements. We need to try to make them as technical space
+agnostic as possible.
+
+*Previous understanding*
+
+Move fabric types into generation.
+
+- copy across the fabric types from cpp and csharp into generation.
+- update formatters to use the types from generation.
+- delete them from original models.
+
+At present we are always generating the fabric types via the injctor
+and then asking the user to disable them as required via the
+enablement settings. This is very silly. The approach should now be
+that we look for elements with the correct stereotypes,
+e.g. =masd::cmakelists= and so forth and use those to generate these
+elements. This must be done as part of the work to move fabric types
+into the metamodel. We should also take this opportunity to merge
+common types between C# and C++, if any exist.
+
+Notes:
+
+- this will also address the naming of types such as registrar.
+- we need to remove all top-level knobs that are controlling the
+  enablement of meta-types such as visual studio, etc. In addition, at
+  present when we enable say ODB we automatically get ODB options,
+  etc. In this world, we would need to create the element in the
+  model. This is a bit confusing because users won't know this is a
+  requirement. Perhaps we need to have a combination of implicit and
+  explicit types?
+
+*** Make extraction model name a qualified name                       :story:
+
+At present we are setting up the extraction model name from the simple
+name of the model. It should really be the qualified name. Hopefully
+this will only affect tracing and diffing.
+
+*** Move wale templates from the data directory                       :story:
+
+At present we have wale templates under the data directory. This is
+not the right location. These are part of a model just like stitch
+templates. There is one slight wrinkle though: if a user attempts to
+create a dogen formatter (say if plugins were supported), then we need
+access to the template from the debian package. So whilst they should
+live in the appropriate model (e.g. =generation.cpp=,
+=generation.csharp=), they also need to be packaged and shipped.
+
+Interestingly, so will all dogen models which are defining annotations
+and profiles. We need to rethink the data directory, separating system
+models from dogen models somehow. In effect, the data directory will
+be, in the future, the system models directory.
+
+So, in conclusion, two use cases for wale templates:
+
+- regular model defines a wale template and makes use of it. Template
+  should be with the model, just like stitch templates. However,
+  unlike stitch, there should be a directory for them.
+- user model wants to define a new formatter. It will make use of
+  dogen profiles and wale templates. These must be in the future data
+  directory somehow.
+
+Actually, the right thing to do is to make wale templates themselves
+model elements:
+
+- we may want to use a wale template in a different model. This is the
+  use case for when users want to create new formatters to add to an
+  existing backend.
+- we don't want to add additional regular expressions to ignore wale
+  templates; we've already seen how this is a bad idea (for example
+  with tests).
+- whilst adding templates to a model element is not ideal if the model
+  element is in dia or JSON, these are really limitations of the
+  injector format rather than of the idea itself. Ideally, we should
+  have an injector format that supports this use case (another use
+  case for developing a =org_uml= injector).
+
+*** Split wale out of stitch templates                                :story:
+
+Stitch requires extra work in order to split out decoration. This is
+because in the past we relied on profiles to populate decoration. It
+worked because we were reading the same simple JSON files. Now we are
+relying on model references and meta-model entities, so this is no
+longer viable: they do not exist at the template level.
+
+One possible solution is to have a "reference" command line argument
+that loads up the user supplied model. We then need some kind of chain
+that applies the decoration transforms. The only solution is to create
+a temporary model that has some kind of coding element on it; this
+model is then supplied to the pipeline:
+
+- injection: needed to read the MASD model with decoration.
+- coding: needed to assemble the temp model with the MASD model and
+  to obtain the decoration.
+- generation: needed to populate the decoration properties.
+
+At this point we can then supply the annotations to the decoration
+formatter. This means that stitch now has a hard dependency on the
+rest of the dogen pipeline. Ideally we should try to split out
+weaving from stitching so that "weaving" becomes this complex
+pipeline but stitching just means the previous processing we did on
+templates. This could even mean we could remove annotations from
+stitching altogether and then have model to text transforms that
+join the stitch template output with the decoration.
+
+If we take this idea to the limit, what we are saying is that stitch
+templates can have KVPs associated with them, with multiple sources:
+
+- wale (as at present)
+- decorations. We need at least two: preamble and postamble.
+
+Note that operations (hand-crafted code to merge into the generated
+code) cannot be handled by the KVPs. This is because we are generating
+the stitch template itself, not the user facing code; we are
+generating the generator, so we are one level removed from the code
+generator. These can be handled as before, via a post-processing step
+that replaces guids with contents from the file system.
+
+To start off with we can just deprecate weaving for now. It is only
+used to quickly weave the model without code generation, but the
+generator is so quick that it does not make a lot of difference.
+
+It is important to note that we still have a two-level set of
+annotations:
+
+- the element annotations which contain the decoration. These are
+  processed prior to calling the stitch template instantiator to
+  generate the preamble and postamble KVPs (as well as the wale KVPs).
+- the annotation of the template itself. This contains the stitch
+  fields such as includes, etc. These will not contain any fields
+  related to decoration (e.g. it is no longer possible to decorate
+  from within stitch itself).
+
+This means that we need to remove all code from stitch that handles
+annotation expansion and just leave the annotation factory.
+
+We also need to look into how the wale keys were implemented - likely
+we've hard-coded it so that its always the same name:
+
+: <#$ stitch.wale.template_instantiation_result #>
+
+With a bit of luck its just a variable. If so we can then add at the
+top and bottom of each template:
+
+: <#$ stitch.decoration.preamble #>
+: ...
+: <#$ stitch.decoration.postamble #>
+
+It is *very important* to understand that this is the decoration of
+the output of the stitch template *itself*, not of the code it will
+generate. The decoration of the generated code will be handled as at
+present, by manually calling the decoration formatters.
+
+Notes:
+
+- we also need to split out the includes from the template. At present
+  it makes sense to supply it as a stitch KVP but in reality these are
+  parameters that should be inferred from the model. What we need is a
+  way to supply include dependencies in the meta-data. Then use that
+  information to build the include dependencies within
+  generation. Then use the list of includes to build the
+  boilerplate. The stitch template is just the core of the file.
+
+*** Remove annotations from stitch templates                          :story:
+
+In the new world, stitch templates don't have all of the required
+information to build the boilerplate:
+
+- they cannot expand wale templates because the KVPs will be in the
+  element itself, not the template. Strictly speaking this is not an
+  problem we have right now though.
+- more importantly, the include dependencies cannot be computed by the
+  template. This is because the dependencies are really a function of
+  the model type we are expressing on the template. Instead, we did a
+  quick hack and supplied the includes as KVPs. So they are kind of
+  parameters but kind of not really parameters because they are
+  hard-coded to the template. It solved the immediate problem of
+  having them formatted and placed in the right part of the file, but
+  now we can see this is not the right approach.
+
+In reality, we should not have any annotations at all in
+templates. The boilerplate and includes should be supplied as KVPs and
+applied as variables. They should be composed externally with access
+to data from the model element. Thus we then need a way to associate
+includes with model elements. This is captured as a separate story.
+
+*** Stitch extension is hard-coded                                    :story:
+
+At present we have hard-coded the file extension in the output of
+stitch templates as =cpp=. We should really supply it as part of the
+configuration. Ideally even the entire filename.
+
+*** Getter by reference of pointee                                    :story:
+
+A useful use case is, whenever we have a property which is of
+pointer-like type (shared pointer, etc), is to return the type pointed
+to by const reference. We should be able to configure the generator
+for this:
+
+- we can already detect if the type is a pointer type;
+- we would need some meta-data at the property level (generate
+  de-refenced const/non-const setter). If this is used but the
+  property type is not a pointer then we should throw.
+- the generator would look for the meta-data, if enabled it would add
+  additional setters.
+- we may even want to suppress the pointer getters as well.
+
+*** Shared pointers have getters and setters with references          :story:
+
+We should really pass shared pointers by value instead of reference.
+
+*** Consider changing variability value into a variant                :story:
+
+Really all we are doing is adding a lot of infrastructure to be able
+to store different types of values. This is what the variant is
+designed to do. In addition, we then have all of the complexities
+around selection that are already handled by variant.
+
 *** Operations to add when we have code merging support               :story:
 
 This story lists all of the operations that should be added to objects
