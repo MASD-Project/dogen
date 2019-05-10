@@ -380,7 +380,8 @@
           "documentation": "text\n",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance"
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
           }
         }
       ]
@@ -398,7 +399,8 @@
           "documentation": "text_collection\n",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance"
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
           }
         }
       ]

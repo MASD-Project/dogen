@@ -6402,7 +6402,8 @@ and, if so, ignore it.#</dia:string>
             <dia:string>#text
 
 #DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.template_kind=instance
+#DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6479,13 +6480,13 @@ the injection model.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O57">
       <dia:attribute name="obj_pos">
-        <dia:point val="109,71"/>
+        <dia:point val="111,72"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="108.95,70.95;128.8,74.65"/>
+        <dia:rectangle val="110.95,71.95;130.8,75.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="109,71"/>
+        <dia:point val="111,72"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="19.75"/>
@@ -6595,7 +6596,8 @@ the injection model.
             <dia:string>#text_collection
 
 #DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.template_kind=instance
+#DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
