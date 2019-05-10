@@ -46,7 +46,7 @@ std::string feature_group_header_formatter::id() const {
 archetypes::location
 feature_group_header_formatter::archetype_location() const {
     static archetypes::location
-        r(cpp::traits::kernel(),  cpp::traits::backend(),
+        r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(),
           feature_group_header_formatter::static_id());
     return r;
@@ -59,28 +59,21 @@ const coding::meta_model::name& feature_group_header_formatter::meta_name() cons
 }
 
 std::string feature_group_header_formatter::family() const {
-    return cpp::traits::implementation_family();
+    return cpp::traits::header_family();
 }
 
 inclusion_support_types feature_group_header_formatter::inclusion_support_type() const {
-    return inclusion_support_types::not_supported;
+    return inclusion_support_types::canonical_support;
 }
 
 boost::filesystem::path feature_group_header_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const coding::meta_model::name& n) const {
-
-    using namespace dogen::utility::log;
-    static logger lg(
-        logger_factory(feature_group_header_formatter::static_id()));
-    static const std::string not_supported("Inclusion path is not supported: ");
-
-    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
+    const formattables::locator& l, const coding::meta_model::name& n) const {
+    return l.make_inclusion_path_for_cpp_header(n, static_id());
 }
 
 boost::filesystem::path feature_group_header_formatter::full_path(
     const formattables::locator& l, const coding::meta_model::name& n) const {
-    return l.make_full_path_for_cpp_implementation(n, static_id());
+    return l.make_full_path_for_cpp_header(n, static_id());
 }
 
 std::list<std::string> feature_group_header_formatter::inclusion_dependencies(

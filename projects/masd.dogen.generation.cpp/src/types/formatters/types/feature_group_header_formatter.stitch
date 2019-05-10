@@ -14,9 +14,10 @@
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/io/inserter_implementation_helper.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/types/feature_group_header_formatter.hpp" #>
-<#@ masd.stitch.wale.template=cpp_artefact_formatter_implementation.wale #>
+<#@ masd.stitch.wale.template=cpp_artefact_formatter_implementation_header.wale #>
 <#@ masd.stitch.wale.kvp.class.simple_name=feature_group_header_formatter #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=feature_group_header #>
+<#@ masd.stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
 <#@ masd.stitch.wale.kvp.yarn_element=coding::meta_model::variability::feature_template_group #>
 <#@ masd.stitch.wale.kvp.meta_element=variability_feature_template_group #>
 <#@ masd.stitch.wale.kvp.meta_name_factory=coding::helpers::meta_name_factory #>
