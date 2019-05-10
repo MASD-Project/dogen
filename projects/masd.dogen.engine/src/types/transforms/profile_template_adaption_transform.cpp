@@ -23,8 +23,9 @@
 #include "masd.dogen.utility/types/io/unordered_set_io.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.tracing/types/scoped_tracer.hpp"
-#include "masd.dogen.variability/io/meta_model/profile_template_io.hpp"
+#include "masd.dogen.variability/types/helpers/enum_mapper.hpp"
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
+#include "masd.dogen.variability/io/meta_model/profile_template_io.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
 #include "masd.dogen.coding/io/meta_model/model_set_io.hpp"
 #include "masd.dogen.coding/io/meta_model/variability/profile_template_io.hpp"
@@ -42,19 +43,7 @@ using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 const std::string empty;
-const std::string binding_point_any("any");
-const std::string binding_point_global("global");
-const std::string binding_point_element("element");
-const std::string binding_point_property("property");
-const std::string binding_point_operation("operation");
-const std::string template_kind_instance("instance");
-const std::string template_kind_recursive_template("recursive_template");
-const std::string template_kind_backend_template("backend_template");
-const std::string template_kind_facet_template("facet_template");
-const std::string template_kind_archetype_template("archetype_template");
 
-const std::string invalid_binding_point("Invalid binding point: ");
-const std::string invalid_template_type("Invalid template type: ");
 const std::string duplicate_label("Profile has a duplicate lable: ");
 const std::string conflicting_values(
     "Entry has a value as meta-data and as a property: ");
@@ -94,21 +83,9 @@ make_binding_point(const feature_group& fg,
     const auto tc(s.get_text_content(fg.binding_point));
     BOOST_LOG_SEV(lg, trace) << "Read binding point: " << tc;
 
-    using variability::meta_model::binding_point;
-    if (tc == binding_point_any)
-        return binding_point::global;
-    else if (tc == binding_point_global)
-        return binding_point::global;
-    else if (tc == binding_point_element)
-        return binding_point::element;
-    else if (tc == binding_point_property)
-        return binding_point::property;
-    else if (tc == binding_point_operation)
-        return binding_point::operation;
-
-    BOOST_LOG_SEV(lg, error) << invalid_binding_point << tc;
-    BOOST_THROW_EXCEPTION(
-        transform_exception(invalid_binding_point + tc));
+    using variability::helpers::enum_mapper;
+    const auto r(enum_mapper::to_binding_point(tc));
+    return r;
 }
 
 std::unordered_set<std::string> profile_template_adaption_transform::
@@ -192,21 +169,9 @@ make_template_kind(const feature_group& fg,
     const auto tc(s.get_text_content(fg.template_kind));
     BOOST_LOG_SEV(lg, trace) << "Read template kind: " << tc;
 
-    using variability::meta_model::template_kind;
-    if (tc == template_kind_instance)
-        return template_kind::instance;
-    else if (tc == template_kind_recursive_template)
-        return template_kind::recursive_template;
-    else if (tc == template_kind_backend_template)
-        return template_kind::backend_template;
-    else if (tc == template_kind_facet_template)
-        return template_kind::facet_template;
-    else if (tc == template_kind_archetype_template)
-        return template_kind::archetype_template;
-
-    BOOST_LOG_SEV(lg, error) << invalid_template_type << tc;
-    BOOST_THROW_EXCEPTION(
-        transform_exception(invalid_template_type + tc));
+    using variability::helpers::enum_mapper;
+    const auto r(enum_mapper::to_template_kind(tc));
+    return r;
 }
 
 std::list<std::string> profile_template_adaption_transform::
@@ -246,6 +211,10 @@ adapt(const feature_group& fg,
         variability::meta_model::configuration_point_template cpt;
         cpt.name().simple(k);
         cpt.kind(make_template_kind(fg, cfg));
+
+        /*
+         * FIXME: not yet reading binding point.
+         */
 
         using variability::meta_model::template_kind;
         if (cpt.kind() == template_kind::instance)
@@ -289,7 +258,8 @@ apply(const context& ctx, const coding::meta_model::model_set& ms) {
     const auto fg(make_feature_group(fm));
 
     std::list<variability::meta_model::profile_template> r;
-    for (const auto& pair : ms.target().variability_elements().profile_templates()) {
+    for (const auto& pair :
+             ms.target().variability_elements().profile_templates()) {
         const auto& vpt(*pair.second);
         r.push_back(adapt(fg, vpt));
     }
