@@ -32,6 +32,8 @@ input_technical_space::make_templates() {
         ft.name().simple("input_technical_space");
         ft.name().qualified("masd.injection.input_technical_space");
         ft.value_type(value_type::text);
+        ft.binding_point(binding_point::element);
+        ft.kind(template_kind::instance);
 
         archetypes::location al;
         al.kernel("masd");

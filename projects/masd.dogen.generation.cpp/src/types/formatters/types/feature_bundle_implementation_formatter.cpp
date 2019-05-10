@@ -127,6 +127,8 @@ a.stream() << "        feature_template ft;" << std::endl;
 a.stream() << "        ft.name().simple(\"" << simple_key << "\");" << std::endl;
 a.stream() << "        ft.name().qualified(\"" << fb_ft.key() << "\");" << std::endl;
 a.stream() << "        ft.value_type(" << enum_mapper::from_value_type(fb_ft.value_type()) << ");" << std::endl;
+a.stream() << "        ft.binding_point(" << enum_mapper::from_binding_point(fb_ft.binding_point()) << ");" << std::endl;
+a.stream() << "        ft.kind(" << enum_mapper::from_template_kind(fb_ft.template_kind()) << ");" << std::endl;
 a.stream() << std::endl;
 a.stream() << "        archetypes::location al;" << std::endl;
                 if (!fb_ft.location().kernel().empty())
