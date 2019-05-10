@@ -25,6 +25,7 @@
 #include "masd.dogen.variability/types/helpers/enum_mapper.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/feature_template_initializer.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/transformation_error.hpp"
 #include "masd.dogen.coding/types/transforms/variability_feature_bundle_transform.hpp"
@@ -166,8 +167,10 @@ apply(const context& ctx, meta_model::model& m) {
     const auto& fm(*ctx.feature_model());
     const auto fg(make_feature_group(fm));
 
+    auto& init(*m.variability_elements().feature_template_initializer());
     for (auto& pair : m.variability_elements().feature_bundles()) {
         auto& fb(*pair.second);
+        init.bundles().push_back(fb.name());
         for (auto& ft : fb.feature_templates())
             update(fg, ft);
     }
