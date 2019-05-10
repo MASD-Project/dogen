@@ -164,31 +164,6 @@
   },
   {
     "name": {
-      "simple": "reference",
-      "qualified": "masd.injection.reference"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "text_collection",
-    "template_kind": "instance",
-    "scope": "root_module"
-  },
-  {
-    "name": {
-      "simple": "input_technical_space",
-      "qualified": "masd.injection.input_technical_space"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "text",
-    "template_kind": "instance",
-    "scope": "root_module",
-    "default_value": "agnostic"
-  },
-  {
-    "name": {
       "simple": "output_technical_space",
       "qualified": "masd.extraction.output_technical_space"
     },
