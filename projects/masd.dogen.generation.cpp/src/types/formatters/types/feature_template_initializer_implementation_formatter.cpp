@@ -90,11 +90,11 @@ std::list<std::string> feature_template_initializer_implementation_formatter::in
     const auto& o(assistant::as<feature_template_initializer>(e));
     auto builder(f.make());
 
-    const auto ch_arch(traits::class_header_archetype());
+    const auto ch_arch(traits::feature_template_initializer_header_archetype());
     builder.add(o.name(), ch_arch);
 
-    const auto os(inclusion_constants::std::ostream());
-    builder.add(os);
+    const auto fb_arch(traits::feature_bundle_header_archetype());
+    builder.add(o.bundles(), fb_arch);
 
     return builder.build();
 }
@@ -113,6 +113,13 @@ format(const context& ctx, const coding::meta_model::element& e) const {
         {
             const auto ns(a.make_namespaces(o.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
+a.stream() << std::endl;
+a.stream() << "void " << sn << "::" << std::endl;
+a.stream() << "register_templates(variability::helpers::feature_template_registrar& rg) {" << std::endl;
+            for (const auto& n : o.bundles())
+a.stream() << "    rg.register_templates(" << n.simple() << "::make_templates());" << std::endl;
+a.stream() << std::endl;
+a.stream() << "}" << std::endl;
 a.stream() << std::endl;
         } // snf
     } // sbf

@@ -81,6 +81,8 @@ std::list<std::string> feature_template_initializer_header_formatter::inclusion_
     using coding::meta_model::variability::feature_template_initializer;
     auto builder(f.make());
     builder.add("\"masd.dogen.variability/types/meta_model/feature_template.hpp\"");
+    builder.add("\"masd.dogen.variability/types/helpers/feature_template_registrar.hpp\"");
+
     return builder.build();
 }
 

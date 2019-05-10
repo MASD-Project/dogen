@@ -26,6 +26,7 @@
 #endif
 
 #include "masd.dogen.variability/types/meta_model/feature_template.hpp"
+#include "masd.dogen.variability/types/helpers/feature_template_registrar.hpp"
 
 namespace masd::dogen::injection::features {
 
