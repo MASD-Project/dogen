@@ -33,11 +33,12 @@ namespace {
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory("variability.helpers.enum_mapper"));
 
-const std::string value_type_text("text");
-const std::string value_type_text_collection("text_collection");
-const std::string value_type_number("number");
-const std::string value_type_boolean("boolean");
-const std::string value_type_kvp("key_value_pair");
+const std::string value_type_text("masd::variability::text");
+const std::string value_type_text_collection(
+    "masd::variability::text_collection");
+const std::string value_type_number("masd::variability::number");
+const std::string value_type_boolean("masd::variability::boolean");
+const std::string value_type_kvp("masd::variability::key_value_pair");
 
 const std::string binding_point_any("any");
 const std::string binding_point_global("global");
