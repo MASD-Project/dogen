@@ -25,9 +25,19 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.variability/types/meta_model/feature_template.hpp"
 
 namespace masd::dogen::injection::features {
 
+/**
+ * @brief Registers all of the available feature templates with registrar.
+ */
+class registrar final {
+public:
+    static void register_templates(
+        variability::helpers::feature_template_registrar& rg);
+};
+
 }
+
 #endif

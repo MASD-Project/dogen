@@ -76,19 +76,11 @@ boost::filesystem::path feature_template_initializer_header_formatter::full_path
 
 std::list<std::string> feature_template_initializer_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const coding::meta_model::element& e) const {
+    const coding::meta_model::element& /*e*/) const {
 
     using coding::meta_model::variability::feature_template_initializer;
-    const auto& o(assistant::as<feature_template_initializer>(e));
     auto builder(f.make());
-
-    // algorithm: domain headers need it for the swap function.
-    builder.add(inclusion_constants::std::algorithm());
-
-    using ser = formatters::serialization::traits;
-    const auto ser_fwd_arch(ser::forward_declarations_archetype());
-    builder.add(o.name(), ser_fwd_arch);
-
+    builder.add("\"masd.dogen.variability/types/meta_model/feature_template.hpp\"");
     return builder.build();
 }
 
@@ -105,7 +97,17 @@ format(const context& ctx, const coding::meta_model::element& e) const {
             const auto ns(a.make_namespaces(o.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
+a.stream() << "/**" << std::endl;
+a.stream() << " * @brief Registers all of the available feature templates with registrar." << std::endl;
+a.stream() << " */" << std::endl;
+a.stream() << "class " << sn << " final {" << std::endl;
+a.stream() << "public:" << std::endl;
+a.stream() << "    static void register_templates(" << std::endl;
+a.stream() << "        variability::helpers::feature_template_registrar& rg);" << std::endl;
+a.stream() << "};" << std::endl;
+a.stream() << std::endl;
         }
+a.stream() << std::endl;
     } // sbf
     return a.make_artefact();
 }
