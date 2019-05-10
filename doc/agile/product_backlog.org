@@ -16,6 +16,16 @@ such as profiles, licences etc.
 
 Stories that we haven't quite classified yet, but are needed.
 
+*** Consider adding "deprecated feature names"                        :story:
+
+One way to allow the renaming of features across releases is to keep
+track of the old name; we could create a property in a feature called
+"deprecated feature name" or some such and when we fail to find a
+feature, we could try to see if the deprecated feature names match. If
+they do we could bind to the old name, issue a warning and
+continue. By removing the name from deprecated feature field we'd
+officially stop supporting the old name.
+
 *** Consider adding stereotypes into profiles                         :story:
 
 It would be nice to be able to define a profile called "ormable" and
