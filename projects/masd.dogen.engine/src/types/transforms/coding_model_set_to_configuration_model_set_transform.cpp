@@ -85,13 +85,17 @@ public:
         for (auto& enm : e.enumerators())
             extract(enm);
     }
-    void operator()(coding::meta_model::structural::primitive& p) { extract(p); }
+    void operator()(coding::meta_model::structural::primitive& p) {
+        extract(p);
+    }
     void operator()(coding::meta_model::structural::object& o) {
         extract(o);
         for (auto& attr : o.local_attributes())
             extract(attr);
     }
-    void operator()(coding::meta_model::structural::exception& e) { extract(e); }
+    void operator()(coding::meta_model::structural::exception& e) {
+        extract(e);
+    }
     void operator()(coding::meta_model::structural::visitor& v) { extract(v); }
     void operator()(coding::meta_model::decoration::licence& l) { extract(l); }
     void operator()(coding::meta_model::decoration::modeline& ml) {
