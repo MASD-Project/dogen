@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include "masd.dogen.variability/types/helpers/feature_selector.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"

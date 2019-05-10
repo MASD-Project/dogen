@@ -25821,13 +25821,13 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O184">
       <dia:attribute name="obj_pos">
-        <dia:point val="-204,19"/>
+        <dia:point val="-203,19"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-204.05,18.95;-184.97,22.65"/>
+        <dia:rectangle val="-203.05,18.95;-183.97,22.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-204,19"/>
+        <dia:point val="-203,19"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.98"/>
@@ -26037,7 +26037,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:point val="-180.857,36"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-194.196,22.5915;-180.107,36.8"/>
+        <dia:rectangle val="-193.56,22.6004;-180.107,36.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -26045,8 +26045,8 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
       <dia:attribute name="orth_points">
         <dia:point val="-180.857,36"/>
         <dia:point val="-180.857,24"/>
-        <dia:point val="-193.865,24"/>
-        <dia:point val="-194.137,22.6504"/>
+        <dia:point val="-193.51,24"/>
+        <dia:point val="-193.51,22.6504"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

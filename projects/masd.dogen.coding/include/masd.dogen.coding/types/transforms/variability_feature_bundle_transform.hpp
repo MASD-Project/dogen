@@ -21,28 +21,64 @@
 #ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_VARIABILITY_FEATURE_TEMPLATE_GROUP_TRANSFORM_HPP
 #define MASD_DOGEN_CODING_TYPES_TRANSFORMS_VARIABILITY_FEATURE_TEMPLATE_GROUP_TRANSFORM_HPP
 
+#include "masd.dogen.coding/types/meta_model/variability/feature_bundle.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
+#include "masd.dogen.variability/types/meta_model/feature.hpp"
+#include "masd.dogen.variability/types/meta_model/configuration.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_model.hpp"
+#include "masd.dogen.variability/types/meta_model/template_kind.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
 namespace masd::dogen::coding::transforms {
 
 class variability_feature_bundle_transform final {
-public:
-    variability_feature_bundle_transform() = default;
-    variability_feature_bundle_transform(const variability_feature_bundle_transform&) = default;
-    variability_feature_bundle_transform(variability_feature_bundle_transform&&) = default;
-    ~variability_feature_bundle_transform() = default;
-    variability_feature_bundle_transform& operator=(const variability_feature_bundle_transform&) = default;
+private:
+    struct feature_group {
+        variability::meta_model::feature binding_point;
+        variability::meta_model::feature archetype_location_kernel;
+        variability::meta_model::feature archetype_location_backend;
+        variability::meta_model::feature archetype_location_facet;
+        variability::meta_model::feature archetype_location_archetype;
+        variability::meta_model::feature template_kind;
+    };
+
+    static feature_group make_feature_group(
+        const variability::meta_model::feature_model& fm);
+
+    static variability::meta_model::binding_point
+    make_binding_point(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+    static std::string
+    make_archetype_location_kernel(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+    static std::string
+    archetype_location_backend(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+    static std::string
+    archetype_location_facet(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+    static std::string
+    archetype_location_archetype(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+    static variability::meta_model::template_kind
+    make_template_kind(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+private:
+    static void update(const feature_group& fg,
+        meta_model::variability::feature_template& ft);
 
 public:
-    bool operator==(const variability_feature_bundle_transform& rhs) const;
-    bool operator!=(const variability_feature_bundle_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }
