@@ -55,6 +55,10 @@ namespace masd::dogen::coding::transforms {
 
 namespace {
 
+using namespace meta_model::structural;
+using namespace meta_model::decoration;
+using namespace meta_model::variability;
+
 class updater {
 public:
     explicit updater(const meta_model::origin_types ot) : origin_types_(ot) {}
@@ -65,16 +69,21 @@ public:
 
 public:
     void operator()(meta_model::element&) { }
-    void operator()(meta_model::structural::module& m) { update(m); }
-    void operator()(meta_model::structural::object_template& ot) {
-        update(ot);
-    }
-    void operator()(meta_model::structural::builtin& b) { update(b); }
-    void operator()(meta_model::structural::enumeration& e) { update(e); }
-    void operator()(meta_model::structural::primitive& p) { update(p); }
-    void operator()(meta_model::structural::object& o) { update(o); }
-    void operator()(meta_model::structural::exception& e) { update(e); }
-    void operator()(meta_model::structural::visitor& v) { update(v); }
+    void operator()(module& m) { update(m); }
+    void operator()(object_template& ot) { update(ot); }
+    void operator()(builtin& b) { update(b); }
+    void operator()(enumeration& e) { update(e); }
+    void operator()(primitive& p) { update(p); }
+    void operator()(object& o) { update(o); }
+    void operator()(exception& e) { update(e); }
+    void operator()(visitor& v) { update(v); }
+    void operator()(modeline_group& mg) { update(mg); }
+    void operator()(modeline& m) { update(m); }
+    void operator()(generation_marker& gm) { update(gm); }
+    void operator()(licence& l) { update(l); }
+    void operator()(feature_template_group_registrar& ftgr) { update(ftgr); }
+    void operator()(feature_template_group& ftg) { update(ftg); }
+    void operator()(profile_template& pt) { update(pt); }
 
 private:
     const meta_model::origin_types origin_types_;
