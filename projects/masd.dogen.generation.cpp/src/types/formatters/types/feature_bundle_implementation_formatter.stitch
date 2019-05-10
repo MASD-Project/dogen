@@ -62,7 +62,7 @@ std::list<masd::dogen::variability::meta_model::feature_template>
 #>
     {
         feature_template ft;
-        ft.name().qualified("<#= fb_ft.type() #>");
+        ft.name().qualified("<#= fb_ft.key() #>");
         r.push_back(ft);
     }
 

@@ -30,6 +30,7 @@
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.archetypes/types/location.hpp"
 #include "masd.dogen.coding/types/meta_model/name.hpp"
+#include "masd.dogen.variability/types/meta_model/value_type.hpp"
 #include "masd.dogen.variability/types/meta_model/binding_point.hpp"
 #include "masd.dogen.variability/types/meta_model/template_kind.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration_fwd.hpp"
@@ -50,11 +51,12 @@ public:
         const std::string& documentation,
         const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
         const masd::dogen::coding::meta_model::name& name,
-        const std::string& type,
+        const std::string& key,
         const std::string& value,
         const masd::dogen::archetypes::location& location,
-        const masd::dogen::variability::meta_model::template_kind template_kind,
-        const masd::dogen::variability::meta_model::binding_point binding_point);
+        const masd::dogen::variability::meta_model::value_type value_type,
+        const masd::dogen::variability::meta_model::binding_point binding_point,
+        const masd::dogen::variability::meta_model::template_kind template_kind);
 
 public:
     /**
@@ -91,10 +93,10 @@ public:
     void name(const masd::dogen::coding::meta_model::name&& v);
     /**@}*/
 
-    const std::string& type() const;
-    std::string& type();
-    void type(const std::string& v);
-    void type(const std::string&& v);
+    const std::string& key() const;
+    std::string& key();
+    void key(const std::string& v);
+    void key(const std::string&& v);
 
     const std::string& value() const;
     std::string& value();
@@ -106,11 +108,14 @@ public:
     void location(const masd::dogen::archetypes::location& v);
     void location(const masd::dogen::archetypes::location&& v);
 
-    masd::dogen::variability::meta_model::template_kind template_kind() const;
-    void template_kind(const masd::dogen::variability::meta_model::template_kind v);
+    masd::dogen::variability::meta_model::value_type value_type() const;
+    void value_type(const masd::dogen::variability::meta_model::value_type v);
 
     masd::dogen::variability::meta_model::binding_point binding_point() const;
     void binding_point(const masd::dogen::variability::meta_model::binding_point v);
+
+    masd::dogen::variability::meta_model::template_kind template_kind() const;
+    void template_kind(const masd::dogen::variability::meta_model::template_kind v);
 
 public:
     bool operator==(const feature_template& rhs) const;
@@ -126,11 +131,12 @@ private:
     std::string documentation_;
     boost::shared_ptr<masd::dogen::variability::meta_model::configuration> configuration_;
     masd::dogen::coding::meta_model::name name_;
-    std::string type_;
+    std::string key_;
     std::string value_;
     masd::dogen::archetypes::location location_;
-    masd::dogen::variability::meta_model::template_kind template_kind_;
+    masd::dogen::variability::meta_model::value_type value_type_;
     masd::dogen::variability::meta_model::binding_point binding_point_;
+    masd::dogen::variability::meta_model::template_kind template_kind_;
 };
 
 }

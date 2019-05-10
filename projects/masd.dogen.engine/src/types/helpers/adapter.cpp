@@ -453,7 +453,7 @@ adapter::to_variability_feature_bundle(
 
         coding::meta_model::variability::feature_template ft;
         ft.name(f.build_attribute_name(r->name(), n));
-        ft.type(n);
+        ft.key(n);
         ft.value(attr.value());
         r->feature_templates().push_back(ft);
     }

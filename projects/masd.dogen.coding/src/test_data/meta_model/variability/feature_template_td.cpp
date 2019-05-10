@@ -21,6 +21,7 @@
 #include <sstream>
 #include "masd.dogen.archetypes/test_data/location_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/name_td.hpp"
+#include "masd.dogen.variability/test_data/meta_model/value_type_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/binding_point_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/configuration_td.hpp"
 #include "masd.dogen.variability/test_data/meta_model/template_kind_td.hpp"
@@ -56,14 +57,19 @@ create_masd_dogen_archetypes_location(const unsigned int position) {
     return masd::dogen::archetypes::location_generator::create(position);
 }
 
-masd::dogen::variability::meta_model::template_kind
-create_masd_dogen_variability_meta_model_template_kind(const unsigned int position) {
-    return masd::dogen::variability::meta_model::template_kind_generator::create(position);
+masd::dogen::variability::meta_model::value_type
+create_masd_dogen_variability_meta_model_value_type(const unsigned int position) {
+    return masd::dogen::variability::meta_model::value_type_generator::create(position);
 }
 
 masd::dogen::variability::meta_model::binding_point
 create_masd_dogen_variability_meta_model_binding_point(const unsigned int position) {
     return masd::dogen::variability::meta_model::binding_point_generator::create(position);
+}
+
+masd::dogen::variability::meta_model::template_kind
+create_masd_dogen_variability_meta_model_template_kind(const unsigned int position) {
+    return masd::dogen::variability::meta_model::template_kind_generator::create(position);
 }
 
 }
@@ -77,11 +83,12 @@ populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.configuration(create_boost_shared_ptr_masd_dogen_variability_meta_model_configuration(position + 1));
     v.name(create_masd_dogen_coding_meta_model_name(position + 2));
-    v.type(create_std_string(position + 3));
+    v.key(create_std_string(position + 3));
     v.value(create_std_string(position + 4));
     v.location(create_masd_dogen_archetypes_location(position + 5));
-    v.template_kind(create_masd_dogen_variability_meta_model_template_kind(position + 6));
+    v.value_type(create_masd_dogen_variability_meta_model_value_type(position + 6));
     v.binding_point(create_masd_dogen_variability_meta_model_binding_point(position + 7));
+    v.template_kind(create_masd_dogen_variability_meta_model_template_kind(position + 8));
 }
 
 feature_template_generator::result_type

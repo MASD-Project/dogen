@@ -1864,7 +1864,7 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "type",
+          "name": "key",
           "type": "std::string"
         },
         {
@@ -1876,12 +1876,16 @@
           "type": "archetypes::location"
         },
         {
-          "name": "template_kind",
-          "type": "variability::meta_model::template_kind"
+          "name": "value_type",
+          "type": "variability::meta_model::value_type"
         },
         {
           "name": "binding_point",
           "type": "variability::meta_model::binding_point"
+        },
+        {
+          "name": "template_kind",
+          "type": "variability::meta_model::template_kind"
         }
       ]
     },

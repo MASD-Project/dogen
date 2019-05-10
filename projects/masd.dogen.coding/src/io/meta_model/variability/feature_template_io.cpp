@@ -22,6 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.archetypes/io/location_io.hpp"
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
+#include "masd.dogen.variability/io/meta_model/value_type_io.hpp"
 #include "masd.dogen.variability/io/meta_model/binding_point_io.hpp"
 #include "masd.dogen.variability/io/meta_model/configuration_io.hpp"
 #include "masd.dogen.variability/io/meta_model/template_kind_io.hpp"
@@ -59,11 +60,12 @@ std::ostream& operator<<(std::ostream& s, const feature_template& v) {
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"configuration\": " << v.configuration() << ", "
       << "\"name\": " << v.name() << ", "
-      << "\"type\": " << "\"" << tidy_up_string(v.type()) << "\"" << ", "
+      << "\"key\": " << "\"" << tidy_up_string(v.key()) << "\"" << ", "
       << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\"" << ", "
       << "\"location\": " << v.location() << ", "
-      << "\"template_kind\": " << v.template_kind() << ", "
-      << "\"binding_point\": " << v.binding_point()
+      << "\"value_type\": " << v.value_type() << ", "
+      << "\"binding_point\": " << v.binding_point() << ", "
+      << "\"template_kind\": " << v.template_kind()
       << " }";
     return(s);
 }
