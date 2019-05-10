@@ -1897,8 +1897,8 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "template_groups",
-          "type": "std::list<feature_bundle>"
+          "name": "bundles",
+          "type": "std::list<name>"
         }
       ]
     },

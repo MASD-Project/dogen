@@ -19,14 +19,14 @@
  *
  */
 #include <ostream>
+#include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
-#include "masd.dogen.coding/io/meta_model/variability/feature_bundle_io.hpp"
 #include "masd.dogen.coding/types/meta_model/variability/feature_template_initializer.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::variability::feature_bundle>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -55,7 +55,7 @@ feature_template_initializer::feature_template_initializer(
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const boost::optional<masd::dogen::coding::meta_model::decoration::element_properties>& decoration,
-    const std::list<masd::dogen::coding::meta_model::variability::feature_bundle>& template_groups)
+    const std::list<masd::dogen::coding::meta_model::name>& bundles)
     : masd::dogen::coding::meta_model::element(
       name,
       documentation,
@@ -71,7 +71,7 @@ feature_template_initializer::feature_template_initializer(
       artefact_properties,
       archetype_location_properties,
       decoration),
-      template_groups_(template_groups) { }
+      bundles_(bundles) { }
 
 void feature_template_initializer::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -95,7 +95,7 @@ void feature_template_initializer::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     masd::dogen::coding::meta_model::element::to_stream(s);
     s << ", "
-      << "\"template_groups\": " << template_groups_
+      << "\"bundles\": " << bundles_
       << " }";
 }
 
@@ -103,7 +103,7 @@ void feature_template_initializer::swap(feature_template_initializer& other) noe
     masd::dogen::coding::meta_model::element::swap(other);
 
     using std::swap;
-    swap(template_groups_, other.template_groups_);
+    swap(bundles_, other.bundles_);
 }
 
 bool feature_template_initializer::equals(const masd::dogen::coding::meta_model::element& other) const {
@@ -114,7 +114,7 @@ bool feature_template_initializer::equals(const masd::dogen::coding::meta_model:
 
 bool feature_template_initializer::operator==(const feature_template_initializer& rhs) const {
     return masd::dogen::coding::meta_model::element::compare(rhs) &&
-        template_groups_ == rhs.template_groups_;
+        bundles_ == rhs.bundles_;
 }
 
 feature_template_initializer& feature_template_initializer::operator=(feature_template_initializer other) {
@@ -123,20 +123,20 @@ feature_template_initializer& feature_template_initializer::operator=(feature_te
     return *this;
 }
 
-const std::list<masd::dogen::coding::meta_model::variability::feature_bundle>& feature_template_initializer::template_groups() const {
-    return template_groups_;
+const std::list<masd::dogen::coding::meta_model::name>& feature_template_initializer::bundles() const {
+    return bundles_;
 }
 
-std::list<masd::dogen::coding::meta_model::variability::feature_bundle>& feature_template_initializer::template_groups() {
-    return template_groups_;
+std::list<masd::dogen::coding::meta_model::name>& feature_template_initializer::bundles() {
+    return bundles_;
 }
 
-void feature_template_initializer::template_groups(const std::list<masd::dogen::coding::meta_model::variability::feature_bundle>& v) {
-    template_groups_ = v;
+void feature_template_initializer::bundles(const std::list<masd::dogen::coding::meta_model::name>& v) {
+    bundles_ = v;
 }
 
-void feature_template_initializer::template_groups(const std::list<masd::dogen::coding::meta_model::variability::feature_bundle>&& v) {
-    template_groups_ = std::move(v);
+void feature_template_initializer::bundles(const std::list<masd::dogen::coding::meta_model::name>&& v) {
+    bundles_ = std::move(v);
 }
 
 }
