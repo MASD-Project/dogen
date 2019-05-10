@@ -122,10 +122,8 @@ meta_model::binding_point enum_mapper::to_binding_point(const std::string& s) {
     using meta_model::binding_point;
     if (s == input_binding_point_any)
         return binding_point::any;
-    else if (s == input_binding_point_any)
-        return binding_point::global;
     else if (s == input_binding_point_global)
-        return binding_point::element;
+        return binding_point::global;
     else if (s == input_binding_point_element)
         return binding_point::element;
     else if (s == input_binding_point_property)
