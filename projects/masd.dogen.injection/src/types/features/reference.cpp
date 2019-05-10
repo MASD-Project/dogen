@@ -32,6 +32,11 @@ reference::make_templates() {
         ft.name().simple("reference");
         ft.name().qualified("masd.injection.reference");
         ft.value_type(value_type::text);
+
+        archetypes::location al;
+        al.kernel("masd");
+
+        ft.location(al);
         r.push_back(ft);
     }
 

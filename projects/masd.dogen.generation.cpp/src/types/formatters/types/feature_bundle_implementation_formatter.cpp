@@ -127,6 +127,18 @@ a.stream() << "        feature_template ft;" << std::endl;
 a.stream() << "        ft.name().simple(\"" << simple_key << "\");" << std::endl;
 a.stream() << "        ft.name().qualified(\"" << fb_ft.key() << "\");" << std::endl;
 a.stream() << "        ft.value_type(" << enum_mapper::from_value_type(fb_ft.value_type()) << ");" << std::endl;
+a.stream() << std::endl;
+a.stream() << "        archetypes::location al;" << std::endl;
+                if (!fb_ft.location().kernel().empty())
+a.stream() << "        al.kernel(\"" << fb_ft.location().kernel() << "\");" << std::endl;
+                if (!fb_ft.location().backend().empty())
+a.stream() << "        al.backend(\"" << fb_ft.location().backend() << "\");" << std::endl;
+                if (!fb_ft.location().facet().empty())
+a.stream() << "        al.facet(\"" << fb_ft.location().facet() << "\");" << std::endl;
+                if (!fb_ft.location().archetype().empty())
+a.stream() << "        al.archetype(\"" << fb_ft.location().archetype() << "\");" << std::endl;
+a.stream() << std::endl;
+a.stream() << "        ft.location(al);" << std::endl;
 a.stream() << "        r.push_back(ft);" << std::endl;
 a.stream() << "    }" << std::endl;
 a.stream() << std::endl;

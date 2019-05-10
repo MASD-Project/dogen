@@ -70,6 +70,26 @@ std::list<masd::dogen::variability::meta_model::feature_template>
         ft.name().simple("<#= simple_key #>");
         ft.name().qualified("<#= fb_ft.key() #>");
         ft.value_type(<#= enum_mapper::from_value_type(fb_ft.value_type()) #>);
+
+        archetypes::location al;
+<#+
+                if (!fb_ft.location().kernel().empty())
+#>
+        al.kernel("<#= fb_ft.location().kernel() #>");
+<#+
+                if (!fb_ft.location().backend().empty())
+#>
+        al.backend("<#= fb_ft.location().backend() #>");
+<#+
+                if (!fb_ft.location().facet().empty())
+#>
+        al.facet("<#= fb_ft.location().facet() #>");
+<#+
+                if (!fb_ft.location().archetype().empty())
+#>
+        al.archetype("<#= fb_ft.location().archetype() #>");
+
+        ft.location(al);
         r.push_back(ft);
     }
 
