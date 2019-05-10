@@ -41,7 +41,7 @@ const std::string input_value_type_kvp("masd::variability::key_value_pair");
 
 const std::string output_value_type_text("value_type::text");
 const std::string output_value_type_text_collection(
-    "masd::variability::text_collection");
+    "value_type::text_collection");
 const std::string output_value_type_number("value_type::number");
 const std::string output_value_type_boolean("value_type::boolean");
 const std::string output_value_type_kvp("value_type::key_value_pair");
