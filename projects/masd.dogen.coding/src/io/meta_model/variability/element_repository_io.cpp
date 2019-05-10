@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "masd.dogen.coding/io/meta_model/variability/feature_bundle_io.hpp"
 #include "masd.dogen.coding/io/meta_model/variability/profile_template_io.hpp"
 #include "masd.dogen.coding/io/meta_model/variability/element_repository_io.hpp"
-#include "masd.dogen.coding/io/meta_model/variability/feature_template_group_io.hpp"
 #include "masd.dogen.coding/io/meta_model/variability/feature_template_initializer_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -69,7 +69,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_bundle>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -85,7 +85,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::d
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_bundle> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -123,7 +123,7 @@ std::ostream& operator<<(std::ostream& s, const element_repository& v) {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::coding::meta_model::variability::element_repository\"" << ", "
       << "\"profile_templates\": " << v.profile_templates() << ", "
-      << "\"feature_template_groups\": " << v.feature_template_groups() << ", "
+      << "\"feature_bundles\": " << v.feature_bundles() << ", "
       << "\"feature_template_initializer\": " << v.feature_template_initializer()
       << " }";
     return(s);

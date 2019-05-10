@@ -6304,7 +6304,7 @@ and, if so, ignore it.#</dia:string>
         <dia:string>#input_technical_space#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_template_group#</dia:string>
+        <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6497,7 +6497,7 @@ the injection model.
         <dia:string>#reference#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_template_group#</dia:string>
+        <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

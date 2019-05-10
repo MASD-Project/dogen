@@ -368,7 +368,7 @@
     {
       "name": "features::input_technical_space",
       "stereotypes": [
-        "masd::variability::feature_template_group"
+        "masd::variability::feature_bundle"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -387,7 +387,7 @@
     {
       "name": "features::reference",
       "stereotypes": [
-        "masd::variability::feature_template_group"
+        "masd::variability::feature_bundle"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [

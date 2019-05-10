@@ -1471,7 +1471,7 @@
           "type": ""
         },
         {
-          "name": "variability_feature_template_group",
+          "name": "variability_feature_bundle",
           "type": ""
         },
         {
@@ -1589,7 +1589,7 @@
       ]
     },
     {
-      "name": "transforms::variability_feature_template_group_transform",
+      "name": "transforms::variability_feature_bundle_transform",
       "stereotypes": [
         "masd::handcrafted::typeable"
       ],
@@ -1842,7 +1842,7 @@
       ]
     },
     {
-      "name": "meta_model::variability::feature_template_group",
+      "name": "meta_model::variability::feature_bundle",
       "stereotypes": [
         "coding::meta_element"
       ],
@@ -1894,7 +1894,7 @@
       "attributes": [
         {
           "name": "template_groups",
-          "type": "std::list<feature_template_group>"
+          "type": "std::list<feature_bundle>"
         }
       ]
     },
@@ -2371,8 +2371,8 @@
           "type": "std::unordered_map<std::string, boost::shared_ptr<profile_template>>"
         },
         {
-          "name": "feature_template_groups",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<feature_template_group>>"
+          "name": "feature_bundles",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<feature_bundle>>"
         },
         {
           "name": "feature_template_initializer",

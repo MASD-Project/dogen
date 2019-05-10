@@ -23127,7 +23127,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#variability_feature_template_group#</dia:string>
+            <dia:string>#variability_feature_bundle#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -25836,7 +25836,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#variability_feature_template_group_transform#</dia:string>
+        <dia:string>#variability_feature_bundle_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::handcrafted::typeable#</dia:string>
@@ -28298,7 +28298,7 @@ to variability.
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#feature_template_group#</dia:string>
+        <dia:string>#feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#coding::meta_element#</dia:string>
@@ -28752,7 +28752,7 @@ to variability.
             <dia:string>#template_groups#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;feature_template_group&gt;#</dia:string>
+            <dia:string>#std::list&lt;feature_bundle&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -33803,10 +33803,10 @@ to structural modeling.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#feature_template_groups#</dia:string>
+            <dia:string>#feature_bundles#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;feature_template_group&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;feature_bundle&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

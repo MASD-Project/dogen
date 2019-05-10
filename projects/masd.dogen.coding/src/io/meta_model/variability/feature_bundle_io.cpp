@@ -18,22 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_IO_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_GROUP_IO_HPP
-#define MASD_DOGEN_CODING_IO_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_GROUP_IO_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <iosfwd>
-#include "masd.dogen.coding/types/meta_model/variability/feature_template_group.hpp"
+#include <ostream>
+#include "masd.dogen.coding/io/meta_model/element_io.hpp"
+#include "masd.dogen.coding/io/meta_model/variability/feature_bundle_io.hpp"
+#include "masd.dogen.coding/io/meta_model/variability/feature_template_io.hpp"
 
 namespace masd::dogen::coding::meta_model::variability {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const masd::dogen::coding::meta_model::variability::feature_template_group& v);
-
+std::ostream& operator<<(std::ostream& s, const feature_bundle& v) {
+    v.to_stream(s);
+    return(s);
 }
 
-#endif
+}

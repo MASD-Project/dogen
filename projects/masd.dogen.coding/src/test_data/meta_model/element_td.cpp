@@ -37,10 +37,10 @@
 #include "masd.dogen.coding/test_data/meta_model/structural/enumeration_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/decoration/modeline_group_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/structural/object_template_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/variability/feature_bundle_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/decoration/generation_marker_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/variability/profile_template_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/decoration/element_properties_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/variability/feature_template_group_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/local_archetype_location_properties_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/variability/feature_template_initializer_td.hpp"
 
@@ -189,7 +189,7 @@ element_generator::create_ptr(const unsigned int position) {
     if ((position % 14) == 10)
         return masd::dogen::coding::meta_model::structural::visitor_generator::create_ptr(position);
     if ((position % 14) == 11)
-        return masd::dogen::coding::meta_model::variability::feature_template_group_generator::create_ptr(position);
+        return masd::dogen::coding::meta_model::variability::feature_bundle_generator::create_ptr(position);
     if ((position % 14) == 12)
         return masd::dogen::coding::meta_model::variability::feature_template_initializer_generator::create_ptr(position);
     if ((position % 14) == 13)

@@ -57,8 +57,8 @@ const std::string stereotype_generation_marker(
 const std::string stereotype_licence("masd::decoration::licence");
 const std::string stereotype_variability_profile_template(
     "masd::variability::profile_template");
-const std::string stereotype_variability_feature_template_group(
-    "masd::variability::feature_template_group");
+const std::string stereotype_variability_feature_bundle(
+    "masd::variability::feature_bundle");
 const std::string stereotype_variability_feature_template_initializer(
     "masd::variability::feature_template_initializer");
 const std::string unsupported_stereotype("Invalid or unsupported stereotype: ");
@@ -106,8 +106,8 @@ static_stereotypes stereotypes_helper::from_string(const std::string& s) const {
         return static_stereotypes::licence;
     else if (s == stereotype_variability_profile_template)
         return static_stereotypes::variability_profile_template;
-    else if (s == stereotype_variability_feature_template_group)
-        return static_stereotypes::variability_feature_template_group;
+    else if (s == stereotype_variability_feature_bundle)
+        return static_stereotypes::variability_feature_bundle;
     else if (s == stereotype_variability_feature_template_initializer)
         return static_stereotypes::variability_feature_template_initializer;
 
@@ -166,7 +166,7 @@ to_string(const static_stereotypes ss) const {
     case static_stereotypes::licence: return stereotype_licence;
     case static_stereotypes::variability_profile_template:
         return stereotype_variability_profile_template;
-    case static_stereotypes::variability_feature_template_group:
+    case static_stereotypes::variability_feature_bundle:
         return stereotype_variability_feature_template_initializer;
     case static_stereotypes::variability_feature_template_initializer:
         return stereotype_variability_feature_template_initializer;
@@ -194,7 +194,7 @@ is_element_type(const static_stereotypes ss) const {
         ss == static_stereotypes::generation_marker ||
         ss == static_stereotypes::licence ||
         ss == static_stereotypes::variability_profile_template ||
-        ss == static_stereotypes::variability_feature_template_group ||
+        ss == static_stereotypes::variability_feature_bundle ||
         ss == static_stereotypes::variability_feature_template_initializer;
 }
 

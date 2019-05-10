@@ -21,8 +21,8 @@
 #include <ostream>
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/feature_bundle.hpp"
 #include "masd.dogen.coding/io/meta_model/variability/feature_template_io.hpp"
-#include "masd.dogen.coding/types/meta_model/variability/feature_template_group.hpp"
 
 namespace std {
 
@@ -40,7 +40,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::co
 
 namespace masd::dogen::coding::meta_model::variability {
 
-feature_template_group::feature_template_group(
+feature_bundle::feature_bundle(
     const masd::dogen::coding::meta_model::name& name,
     const std::string& documentation,
     const masd::dogen::coding::meta_model::origin_types origin_type,
@@ -73,25 +73,25 @@ feature_template_group::feature_template_group(
       decoration),
       feature_templates_(feature_templates) { }
 
-void feature_template_group::accept(const element_visitor& v) const {
+void feature_bundle::accept(const element_visitor& v) const {
     v.visit(*this);
 }
 
-void feature_template_group::accept(element_visitor& v) const {
+void feature_bundle::accept(element_visitor& v) const {
     v.visit(*this);
     }
 
-void feature_template_group::accept(const element_visitor& v) {
+void feature_bundle::accept(const element_visitor& v) {
     v.visit(*this);
 }
 
-void feature_template_group::accept(element_visitor& v) {
+void feature_bundle::accept(element_visitor& v) {
     v.visit(*this);
 }
 
-void feature_template_group::to_stream(std::ostream& s) const {
+void feature_bundle::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::variability::feature_template_group\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::variability::feature_bundle\"" << ", "
       << "\"__parent_0__\": ";
     masd::dogen::coding::meta_model::element::to_stream(s);
     s << ", "
@@ -99,43 +99,43 @@ void feature_template_group::to_stream(std::ostream& s) const {
       << " }";
 }
 
-void feature_template_group::swap(feature_template_group& other) noexcept {
+void feature_bundle::swap(feature_bundle& other) noexcept {
     masd::dogen::coding::meta_model::element::swap(other);
 
     using std::swap;
     swap(feature_templates_, other.feature_templates_);
 }
 
-bool feature_template_group::equals(const masd::dogen::coding::meta_model::element& other) const {
-    const feature_template_group* const p(dynamic_cast<const feature_template_group* const>(&other));
+bool feature_bundle::equals(const masd::dogen::coding::meta_model::element& other) const {
+    const feature_bundle* const p(dynamic_cast<const feature_bundle* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
-bool feature_template_group::operator==(const feature_template_group& rhs) const {
+bool feature_bundle::operator==(const feature_bundle& rhs) const {
     return masd::dogen::coding::meta_model::element::compare(rhs) &&
         feature_templates_ == rhs.feature_templates_;
 }
 
-feature_template_group& feature_template_group::operator=(feature_template_group other) {
+feature_bundle& feature_bundle::operator=(feature_bundle other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::list<masd::dogen::coding::meta_model::variability::feature_template>& feature_template_group::feature_templates() const {
+const std::list<masd::dogen::coding::meta_model::variability::feature_template>& feature_bundle::feature_templates() const {
     return feature_templates_;
 }
 
-std::list<masd::dogen::coding::meta_model::variability::feature_template>& feature_template_group::feature_templates() {
+std::list<masd::dogen::coding::meta_model::variability::feature_template>& feature_bundle::feature_templates() {
     return feature_templates_;
 }
 
-void feature_template_group::feature_templates(const std::list<masd::dogen::coding::meta_model::variability::feature_template>& v) {
+void feature_bundle::feature_templates(const std::list<masd::dogen::coding::meta_model::variability::feature_template>& v) {
     feature_templates_ = v;
 }
 
-void feature_template_group::feature_templates(const std::list<masd::dogen::coding::meta_model::variability::feature_template>&& v) {
+void feature_bundle::feature_templates(const std::list<masd::dogen::coding::meta_model::variability::feature_template>&& v) {
     feature_templates_ = std::move(v);
 }
 

@@ -19,20 +19,20 @@
  *
  */
 #include "masd.dogen.coding/test_data/meta_model/element_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/variability/feature_template_group_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/variability/feature_bundle_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/variability/feature_template_initializer_td.hpp"
 
 namespace {
 
-masd::dogen::coding::meta_model::variability::feature_template_group
-create_masd_dogen_coding_meta_model_variability_feature_template_group(const unsigned int position) {
-    return masd::dogen::coding::meta_model::variability::feature_template_group_generator::create(position);
+masd::dogen::coding::meta_model::variability::feature_bundle
+create_masd_dogen_coding_meta_model_variability_feature_bundle(const unsigned int position) {
+    return masd::dogen::coding::meta_model::variability::feature_bundle_generator::create(position);
 }
 
-std::list<masd::dogen::coding::meta_model::variability::feature_template_group> create_std_list_masd_dogen_coding_meta_model_variability_feature_template_group(unsigned int position) {
-    std::list<masd::dogen::coding::meta_model::variability::feature_template_group> r;
+std::list<masd::dogen::coding::meta_model::variability::feature_bundle> create_std_list_masd_dogen_coding_meta_model_variability_feature_bundle(unsigned int position) {
+    std::list<masd::dogen::coding::meta_model::variability::feature_bundle> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_masd_dogen_coding_meta_model_variability_feature_template_group(position + i));
+        r.push_back(create_masd_dogen_coding_meta_model_variability_feature_bundle(position + i));
     }
     return r;
 }
@@ -46,7 +46,7 @@ feature_template_initializer_generator::feature_template_initializer_generator()
 void feature_template_initializer_generator::
 populate(const unsigned int position, result_type& v) {
     masd::dogen::coding::meta_model::element_generator::populate(position, v);
-    v.template_groups(create_std_list_masd_dogen_coding_meta_model_variability_feature_template_group(position + 0));
+    v.template_groups(create_std_list_masd_dogen_coding_meta_model_variability_feature_bundle(position + 0));
 }
 
 feature_template_initializer_generator::result_type

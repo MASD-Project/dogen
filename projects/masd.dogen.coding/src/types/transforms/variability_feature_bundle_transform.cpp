@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.coding/types/transforms/variability_feature_template_group_transform.hpp"
+#include "masd.dogen.coding/types/transforms/variability_feature_bundle_transform.hpp"
 
 namespace masd::dogen::coding::transforms {
 
-bool variability_feature_template_group_transform::operator==(const variability_feature_template_group_transform& /*rhs*/) const {
+bool variability_feature_bundle_transform::operator==(const variability_feature_bundle_transform& /*rhs*/) const {
     return true;
 }
 

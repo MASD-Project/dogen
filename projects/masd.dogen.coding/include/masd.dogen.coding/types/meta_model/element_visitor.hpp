@@ -36,9 +36,9 @@
 #include "masd.dogen.coding/types/meta_model/structural/enumeration_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/modeline_group_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/structural/object_template_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/feature_bundle_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/decoration/generation_marker_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/variability/profile_template_fwd.hpp"
-#include "masd.dogen.coding/types/meta_model/variability/feature_template_group_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/variability/feature_template_initializer_fwd.hpp"
 
 namespace masd::dogen::coding::meta_model {
@@ -172,13 +172,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Accept visits for type masd::dogen::coding::meta_model::variability::feature_template_group
+     * @brief Accept visits for type masd::dogen::coding::meta_model::variability::feature_bundle
      */
     /**@{*/
-    virtual void visit(const masd::dogen::coding::meta_model::variability::feature_template_group&) const { }
-    virtual void visit(const masd::dogen::coding::meta_model::variability::feature_template_group&) { }
-    virtual void visit(masd::dogen::coding::meta_model::variability::feature_template_group&) const { }
-    virtual void visit(masd::dogen::coding::meta_model::variability::feature_template_group&) { }
+    virtual void visit(const masd::dogen::coding::meta_model::variability::feature_bundle&) const { }
+    virtual void visit(const masd::dogen::coding::meta_model::variability::feature_bundle&) { }
+    virtual void visit(masd::dogen::coding::meta_model::variability::feature_bundle&) const { }
+    virtual void visit(masd::dogen::coding::meta_model::variability::feature_bundle&) { }
     /**@}*/
 
     /**

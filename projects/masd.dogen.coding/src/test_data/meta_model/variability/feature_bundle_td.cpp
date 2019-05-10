@@ -19,8 +19,8 @@
  *
  */
 #include "masd.dogen.coding/test_data/meta_model/element_td.hpp"
+#include "masd.dogen.coding/test_data/meta_model/variability/feature_bundle_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/variability/feature_template_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/variability/feature_template_group_td.hpp"
 
 namespace {
 
@@ -41,30 +41,30 @@ std::list<masd::dogen::coding::meta_model::variability::feature_template> create
 
 namespace masd::dogen::coding::meta_model::variability {
 
-feature_template_group_generator::feature_template_group_generator() : position_(0) { }
+feature_bundle_generator::feature_bundle_generator() : position_(0) { }
 
-void feature_template_group_generator::
+void feature_bundle_generator::
 populate(const unsigned int position, result_type& v) {
     masd::dogen::coding::meta_model::element_generator::populate(position, v);
     v.feature_templates(create_std_list_masd_dogen_coding_meta_model_variability_feature_template(position + 0));
 }
 
-feature_template_group_generator::result_type
-feature_template_group_generator::create(const unsigned int position) {
-    feature_template_group r;
-    feature_template_group_generator::populate(position, r);
+feature_bundle_generator::result_type
+feature_bundle_generator::create(const unsigned int position) {
+    feature_bundle r;
+    feature_bundle_generator::populate(position, r);
     return r;
 }
 
-feature_template_group_generator::result_type*
-feature_template_group_generator::create_ptr(const unsigned int position) {
-    feature_template_group* p = new feature_template_group();
-    feature_template_group_generator::populate(position, *p);
+feature_bundle_generator::result_type*
+feature_bundle_generator::create_ptr(const unsigned int position) {
+    feature_bundle* p = new feature_bundle();
+    feature_bundle_generator::populate(position, *p);
     return p;
 }
 
-feature_template_group_generator::result_type
-feature_template_group_generator::operator()() {
+feature_bundle_generator::result_type
+feature_bundle_generator::operator()() {
     return create(position_++);
 }
 

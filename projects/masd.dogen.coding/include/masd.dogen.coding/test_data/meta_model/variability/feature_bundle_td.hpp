@@ -18,16 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "masd.dogen.coding/io/meta_model/element_io.hpp"
-#include "masd.dogen.coding/io/meta_model/variability/feature_template_io.hpp"
-#include "masd.dogen.coding/io/meta_model/variability/feature_template_group_io.hpp"
+#ifndef MASD_DOGEN_CODING_TEST_DATA_META_MODEL_VARIABILITY_FEATURE_BUNDLE_TD_HPP
+#define MASD_DOGEN_CODING_TEST_DATA_META_MODEL_VARIABILITY_FEATURE_BUNDLE_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "masd.dogen.coding/types/meta_model/variability/feature_bundle.hpp"
 
 namespace masd::dogen::coding::meta_model::variability {
 
-std::ostream& operator<<(std::ostream& s, const feature_template_group& v) {
-    v.to_stream(s);
-    return(s);
-}
+class feature_bundle_generator {
+public:
+    feature_bundle_generator();
+
+public:
+    typedef masd::dogen::coding::meta_model::variability::feature_bundle result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 }
+
+#endif

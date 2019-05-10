@@ -18,16 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_GROUP_FWD_HPP
-#define MASD_DOGEN_CODING_TYPES_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_GROUP_FWD_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_VARIABILITY_FEATURE_TEMPLATE_GROUP_TRANSFORM_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_VARIABILITY_FEATURE_TEMPLATE_GROUP_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace masd::dogen::coding::meta_model::variability {
+#include <algorithm>
 
-class feature_template_group;
+namespace masd::dogen::coding::transforms {
+
+class variability_feature_bundle_transform final {
+public:
+    variability_feature_bundle_transform() = default;
+    variability_feature_bundle_transform(const variability_feature_bundle_transform&) = default;
+    variability_feature_bundle_transform(variability_feature_bundle_transform&&) = default;
+    ~variability_feature_bundle_transform() = default;
+    variability_feature_bundle_transform& operator=(const variability_feature_bundle_transform&) = default;
+
+public:
+    bool operator==(const variability_feature_bundle_transform& rhs) const;
+    bool operator!=(const variability_feature_bundle_transform& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
 
 }
 

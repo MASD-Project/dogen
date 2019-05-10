@@ -245,9 +245,9 @@ process_element(const helpers::adapter& ad,
         insert(ad.to_variability_profile_template(l, scr, e),
             m.variability_elements().profile_templates());
         break;
-    case static_stereotypes::variability_feature_template_group:
-        insert(ad.to_variability_feature_template_group(l, scr, e),
-            m.variability_elements().feature_template_groups());
+    case static_stereotypes::variability_feature_bundle:
+        insert(ad.to_variability_feature_bundle(l, scr, e),
+            m.variability_elements().feature_bundles());
         break;
     case static_stereotypes::variability_feature_template_initializer:
         // FIXME: throw if already set.

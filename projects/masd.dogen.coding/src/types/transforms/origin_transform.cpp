@@ -82,7 +82,7 @@ public:
     void operator()(generation_marker& gm) { update(gm); }
     void operator()(licence& l) { update(l); }
     void operator()(feature_template_initializer& fti) { update(fti); }
-    void operator()(feature_template_group& ftg) { update(ftg); }
+    void operator()(feature_bundle& ftg) { update(ftg); }
     void operator()(profile_template& pt) { update(pt); }
 
 private:

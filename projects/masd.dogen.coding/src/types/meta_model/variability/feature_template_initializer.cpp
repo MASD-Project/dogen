@@ -21,12 +21,12 @@
 #include <ostream>
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
-#include "masd.dogen.coding/io/meta_model/variability/feature_template_group_io.hpp"
+#include "masd.dogen.coding/io/meta_model/variability/feature_bundle_io.hpp"
 #include "masd.dogen.coding/types/meta_model/variability/feature_template_initializer.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::variability::feature_template_group>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::variability::feature_bundle>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -55,7 +55,7 @@ feature_template_initializer::feature_template_initializer(
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const boost::optional<masd::dogen::coding::meta_model::decoration::element_properties>& decoration,
-    const std::list<masd::dogen::coding::meta_model::variability::feature_template_group>& template_groups)
+    const std::list<masd::dogen::coding::meta_model::variability::feature_bundle>& template_groups)
     : masd::dogen::coding::meta_model::element(
       name,
       documentation,
@@ -123,19 +123,19 @@ feature_template_initializer& feature_template_initializer::operator=(feature_te
     return *this;
 }
 
-const std::list<masd::dogen::coding::meta_model::variability::feature_template_group>& feature_template_initializer::template_groups() const {
+const std::list<masd::dogen::coding::meta_model::variability::feature_bundle>& feature_template_initializer::template_groups() const {
     return template_groups_;
 }
 
-std::list<masd::dogen::coding::meta_model::variability::feature_template_group>& feature_template_initializer::template_groups() {
+std::list<masd::dogen::coding::meta_model::variability::feature_bundle>& feature_template_initializer::template_groups() {
     return template_groups_;
 }
 
-void feature_template_initializer::template_groups(const std::list<masd::dogen::coding::meta_model::variability::feature_template_group>& v) {
+void feature_template_initializer::template_groups(const std::list<masd::dogen::coding::meta_model::variability::feature_bundle>& v) {
     template_groups_ = v;
 }
 
-void feature_template_initializer::template_groups(const std::list<masd::dogen::coding::meta_model::variability::feature_template_group>&& v) {
+void feature_template_initializer::template_groups(const std::list<masd::dogen::coding::meta_model::variability::feature_bundle>&& v) {
     template_groups_ = std::move(v);
 }
 

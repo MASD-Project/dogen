@@ -29,7 +29,7 @@
 #include <iosfwd>
 #include <algorithm>
 #include "masd.dogen.coding/types/meta_model/element.hpp"
-#include "masd.dogen.coding/types/meta_model/variability/feature_template_group.hpp"
+#include "masd.dogen.coding/types/meta_model/variability/feature_bundle.hpp"
 
 namespace masd::dogen::coding::meta_model::variability {
 
@@ -57,7 +57,7 @@ public:
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const boost::optional<masd::dogen::coding::meta_model::decoration::element_properties>& decoration,
-        const std::list<masd::dogen::coding::meta_model::variability::feature_template_group>& template_groups);
+        const std::list<masd::dogen::coding::meta_model::variability::feature_bundle>& template_groups);
 
 public:
     using element::accept;
@@ -70,10 +70,10 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const std::list<masd::dogen::coding::meta_model::variability::feature_template_group>& template_groups() const;
-    std::list<masd::dogen::coding::meta_model::variability::feature_template_group>& template_groups();
-    void template_groups(const std::list<masd::dogen::coding::meta_model::variability::feature_template_group>& v);
-    void template_groups(const std::list<masd::dogen::coding::meta_model::variability::feature_template_group>&& v);
+    const std::list<masd::dogen::coding::meta_model::variability::feature_bundle>& template_groups() const;
+    std::list<masd::dogen::coding::meta_model::variability::feature_bundle>& template_groups();
+    void template_groups(const std::list<masd::dogen::coding::meta_model::variability::feature_bundle>& v);
+    void template_groups(const std::list<masd::dogen::coding::meta_model::variability::feature_bundle>&& v);
 
 public:
     bool operator==(const feature_template_initializer& rhs) const;
@@ -89,7 +89,7 @@ public:
     feature_template_initializer& operator=(feature_template_initializer other);
 
 private:
-    std::list<masd::dogen::coding::meta_model::variability::feature_template_group> template_groups_;
+    std::list<masd::dogen::coding::meta_model::variability::feature_bundle> template_groups_;
 };
 
 }

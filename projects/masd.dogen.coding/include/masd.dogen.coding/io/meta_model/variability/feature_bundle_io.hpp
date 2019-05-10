@@ -18,40 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_STATIC_STEREOTYPES_HPP
-#define MASD_DOGEN_CODING_TYPES_META_MODEL_STATIC_STEREOTYPES_HPP
+#ifndef MASD_DOGEN_CODING_IO_META_MODEL_VARIABILITY_FEATURE_BUNDLE_IO_HPP
+#define MASD_DOGEN_CODING_IO_META_MODEL_VARIABILITY_FEATURE_BUNDLE_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace masd::dogen::coding::meta_model {
+#include <iosfwd>
+#include "masd.dogen.coding/types/meta_model/variability/feature_bundle.hpp"
 
-/**
- * @brief Lists all stereotypes defined in the masd UML profile.
- */
-enum class static_stereotypes : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    object = 1,
-    object_template = 2,
-    exception = 3,
-    primitive = 4,
-    enumeration = 5,
-    module = 6,
-    builtin = 7,
-    visitable = 8,
-    fluent = 9,
-    immutable = 10,
-    orm_object = 11,
-    orm_value = 12,
-    modeline_group = 13,
-    modeline = 14,
-    generation_marker = 15,
-    licence = 16,
-    variability_profile_template = 17,
-    variability_feature_bundle = 18,
-    variability_feature_template_initializer = 19
-};
+namespace masd::dogen::coding::meta_model::variability {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const masd::dogen::coding::meta_model::variability::feature_bundle& v);
 
 }
 

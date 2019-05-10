@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_GROUP_HPP
-#define MASD_DOGEN_CODING_TYPES_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_GROUP_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_VARIABILITY_FEATURE_BUNDLE_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_VARIABILITY_FEATURE_BUNDLE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,16 +33,16 @@
 
 namespace masd::dogen::coding::meta_model::variability {
 
-class feature_template_group final : public masd::dogen::coding::meta_model::element {
+class feature_bundle final : public masd::dogen::coding::meta_model::element {
 public:
-    feature_template_group() = default;
-    feature_template_group(const feature_template_group&) = default;
-    feature_template_group(feature_template_group&&) = default;
+    feature_bundle() = default;
+    feature_bundle(const feature_bundle&) = default;
+    feature_bundle(feature_bundle&&) = default;
 
-    virtual ~feature_template_group() noexcept { }
+    virtual ~feature_bundle() noexcept { }
 
 public:
-    feature_template_group(
+    feature_bundle(
         const masd::dogen::coding::meta_model::name& name,
         const std::string& documentation,
         const masd::dogen::coding::meta_model::origin_types origin_type,
@@ -76,8 +76,8 @@ public:
     void feature_templates(const std::list<masd::dogen::coding::meta_model::variability::feature_template>&& v);
 
 public:
-    bool operator==(const feature_template_group& rhs) const;
-    bool operator!=(const feature_template_group& rhs) const {
+    bool operator==(const feature_bundle& rhs) const;
+    bool operator!=(const feature_bundle& rhs) const {
         return !this->operator==(rhs);
     }
 
@@ -85,8 +85,8 @@ public:
     bool equals(const masd::dogen::coding::meta_model::element& other) const override;
 
 public:
-    void swap(feature_template_group& other) noexcept;
-    feature_template_group& operator=(feature_template_group other);
+    void swap(feature_bundle& other) noexcept;
+    feature_bundle& operator=(feature_bundle other);
 
 private:
     std::list<masd::dogen::coding::meta_model::variability::feature_template> feature_templates_;
@@ -98,8 +98,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::coding::meta_model::variability::feature_template_group& lhs,
-    masd::dogen::coding::meta_model::variability::feature_template_group& rhs) {
+    masd::dogen::coding::meta_model::variability::feature_bundle& lhs,
+    masd::dogen::coding::meta_model::variability::feature_bundle& rhs) {
     lhs.swap(rhs);
 }
 

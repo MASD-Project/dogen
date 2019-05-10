@@ -19,9 +19,9 @@
  *
  */
 #include <sstream>
+#include "masd.dogen.coding/test_data/meta_model/variability/feature_bundle_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/variability/profile_template_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/variability/element_repository_td.hpp"
-#include "masd.dogen.coding/test_data/meta_model/variability/feature_template_group_td.hpp"
 #include "masd.dogen.coding/test_data/meta_model/variability/feature_template_initializer_td.hpp"
 
 namespace {
@@ -52,22 +52,22 @@ std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_mode
     return r;
 }
 
-masd::dogen::coding::meta_model::variability::feature_template_group*
-create_masd_dogen_coding_meta_model_variability_feature_template_group_ptr(const unsigned int position) {
-    return masd::dogen::coding::meta_model::variability::feature_template_group_generator::create_ptr(position);
+masd::dogen::coding::meta_model::variability::feature_bundle*
+create_masd_dogen_coding_meta_model_variability_feature_bundle_ptr(const unsigned int position) {
+    return masd::dogen::coding::meta_model::variability::feature_bundle_generator::create_ptr(position);
 }
 
-boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group>
-create_boost_shared_ptr_masd_dogen_coding_meta_model_variability_feature_template_group(unsigned int position) {
-    boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> r(
-        create_masd_dogen_coding_meta_model_variability_feature_template_group_ptr(position));
+boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_bundle>
+create_boost_shared_ptr_masd_dogen_coding_meta_model_variability_feature_bundle(unsigned int position) {
+    boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_bundle> r(
+        create_masd_dogen_coding_meta_model_variability_feature_bundle_ptr(position));
     return r;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> > create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_variability_feature_template_group(unsigned int position) {
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_template_group> > r;
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_bundle> > create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_variability_feature_bundle(unsigned int position) {
+    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::variability::feature_bundle> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_boost_shared_ptr_masd_dogen_coding_meta_model_variability_feature_template_group(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_boost_shared_ptr_masd_dogen_coding_meta_model_variability_feature_bundle(position + i)));
     }
     return r;
 }
@@ -93,7 +93,7 @@ element_repository_generator::element_repository_generator() : position_(0) { }
 void element_repository_generator::
 populate(const unsigned int position, result_type& v) {
     v.profile_templates(create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_variability_profile_template(position + 0));
-    v.feature_template_groups(create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_variability_feature_template_group(position + 1));
+    v.feature_bundles(create_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_coding_meta_model_variability_feature_bundle(position + 1));
     v.feature_template_initializer(create_boost_shared_ptr_masd_dogen_coding_meta_model_variability_feature_template_initializer(position + 2));
 }
 
