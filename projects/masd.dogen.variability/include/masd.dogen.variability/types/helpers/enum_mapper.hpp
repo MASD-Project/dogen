@@ -25,24 +25,45 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include "masd.dogen.variability/types/meta_model/value_type.hpp"
+#include "masd.dogen.variability/types/meta_model/template_kind.hpp"
+#include "masd.dogen.variability/types/meta_model/binding_point.hpp"
 
 namespace masd::dogen::variability::helpers {
 
 class enum_mapper final {
 public:
-    enum_mapper() = default;
-    enum_mapper(const enum_mapper&) = default;
-    enum_mapper(enum_mapper&&) = default;
-    ~enum_mapper() = default;
-    enum_mapper& operator=(const enum_mapper&) = default;
+    /**
+     * @brief Converts a string to a value type.
+     */
+    meta_model::value_type to_value_type(const std::string& s) const;
+
+    /**
+     * @brief Converts a string to a template kind.
+     */
+    meta_model::template_kind to_template_kind(const std::string& s) const;
+
+    /**
+     * @brief Converts a string to a binding point.
+     */
+    meta_model::binding_point to_binding_point(const std::string& s) const;
 
 public:
-    bool operator==(const enum_mapper& rhs) const;
-    bool operator!=(const enum_mapper& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Converts a value type to a string.
+     */
+    std::string from_value_type(const meta_model::value_type v) const;
 
+    /**
+     * @brief Converts a template kind to a string.
+     */
+    std::string from_template_kind(const meta_model::template_kind v) const;
+
+    /**
+     * @brief Converts a binding point to a string.
+     */
+    std::string from_binding_point(const meta_model::binding_point s) const;
 };
 
 }

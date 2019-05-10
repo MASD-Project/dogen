@@ -58,6 +58,7 @@
 #include "masd.dogen.variability/types/helpers/template_instantiator.hpp"
 #include "masd.dogen.variability/types/meta_model/profile_repository.hpp"
 #include "masd.dogen.variability/types/helpers/configuration_selector.hpp"
+#include "masd.dogen.variability/types/helpers/enum_mapping_exception.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration_model.hpp"
 #include "masd.dogen.variability/types/meta_model/configuration_point.hpp"
 #include "masd.dogen.variability/types/helpers/instantiation_exception.hpp"

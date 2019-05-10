@@ -902,6 +902,14 @@
         "masd::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::enum_mapping_exception",
+      "documentation": "An error occurred whilst mapping enums to or from strings.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
