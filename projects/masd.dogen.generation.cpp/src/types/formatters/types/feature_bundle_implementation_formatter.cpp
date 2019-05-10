@@ -119,7 +119,7 @@ a.stream() << std::endl;
             for (const auto& fb_ft : fb.feature_templates()) {
 a.stream() << "    {" << std::endl;
 a.stream() << "        feature_template ft;" << std::endl;
-a.stream() << "        ft.name().qualified(" << fb_ft.type() << ");" << std::endl;
+a.stream() << "        ft.name().qualified(\"" << fb_ft.type() << "\");" << std::endl;
 a.stream() << "        r.push_back(ft);" << std::endl;
 a.stream() << "    }" << std::endl;
 a.stream() << std::endl;

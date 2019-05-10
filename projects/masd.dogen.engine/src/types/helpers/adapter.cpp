@@ -445,6 +445,19 @@ adapter::to_variability_feature_bundle(
     using coding::meta_model::variability::feature_bundle;
     auto r(boost::make_shared<feature_bundle>());
     populate_element(l, scr, ie, *r);
+
+    coding::helpers::name_factory f;
+    for (const auto& attr : ie.attributes()) {
+        const auto n(attr.name());
+        ensure_not_empty(n);
+
+        coding::meta_model::variability::feature_template ft;
+        ft.name(f.build_attribute_name(r->name(), n));
+        ft.type(n);
+        ft.value(attr.value());
+        r->feature_templates().push_back(ft);
+    }
+
     return r;
 }
 

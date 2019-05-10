@@ -27,6 +27,12 @@ input_technical_space::make_templates() {
     using masd::dogen::variability::meta_model::feature_template;
     std::list<feature_template> r;
 
+    {
+        feature_template ft;
+        ft.name().qualified("masd.injection.input_technical_space");
+        r.push_back(ft);
+    }
+
     return r;
 }
 
