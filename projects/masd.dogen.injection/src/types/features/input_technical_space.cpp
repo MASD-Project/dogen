@@ -29,6 +29,7 @@ input_technical_space::make_templates() {
 
     {
         feature_template ft;
+        ft.name().simple("input_technical_space");
         ft.name().qualified("masd.injection.input_technical_space");
         ft.value_type(value_type::text);
         r.push_back(ft);

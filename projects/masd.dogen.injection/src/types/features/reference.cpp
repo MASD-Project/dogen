@@ -29,6 +29,7 @@ reference::make_templates() {
 
     {
         feature_template ft;
+        ft.name().simple("reference");
         ft.name().qualified("masd.injection.reference");
         ft.value_type(value_type::text);
         r.push_back(ft);

@@ -31,6 +31,7 @@
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
 #include "masd.dogen.coding/types/meta_model/variability/feature_bundle.hpp"
 #include "masd.dogen.variability/types/helpers/enum_mapper.hpp"
+#include "masd.dogen.utility/types/string/splitter.hpp"
 #include "masd.dogen.utility/types/log/logger.hpp"
 #include <boost/throw_exception.hpp>
 
@@ -117,10 +118,13 @@ a.stream() << sn << "::make_templates() {" << std::endl;
 a.stream() << "    using namespace masd::dogen::variability::meta_model;" << std::endl;
 a.stream() << "    std::list<feature_template> r;" << std::endl;
 a.stream() << std::endl;
-            using namespace masd::dogen::variability::helpers;
+            using namespace variability::helpers;
+            using utility::string::splitter;
             for (const auto& fb_ft : fb.feature_templates()) {
+                const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
 a.stream() << "    {" << std::endl;
 a.stream() << "        feature_template ft;" << std::endl;
+a.stream() << "        ft.name().simple(\"" << simple_key << "\");" << std::endl;
 a.stream() << "        ft.name().qualified(\"" << fb_ft.key() << "\");" << std::endl;
 a.stream() << "        ft.value_type(" << enum_mapper::from_value_type(fb_ft.value_type()) << ");" << std::endl;
 a.stream() << "        r.push_back(ft);" << std::endl;

@@ -2,6 +2,7 @@
 <#@ masd.stitch.containing_namespaces=masd::dogen::generation::cpp::formatters::types #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="masd.dogen.utility/types/string/splitter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.variability/types/helpers/enum_mapper.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.coding/types/meta_model/variability/feature_bundle.hpp" #>
 <#@ masd.stitch.inclusion_dependency="masd.dogen.coding/types/helpers/meta_name_factory.hpp" #>
@@ -59,11 +60,14 @@ std::list<masd::dogen::variability::meta_model::feature_template>
     std::list<feature_template> r;
 
 <#+
-            using namespace masd::dogen::variability::helpers;
+            using namespace variability::helpers;
+            using utility::string::splitter;
             for (const auto& fb_ft : fb.feature_templates()) {
+                const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
 #>
     {
         feature_template ft;
+        ft.name().simple("<#= simple_key #>");
         ft.name().qualified("<#= fb_ft.key() #>");
         ft.value_type(<#= enum_mapper::from_value_type(fb_ft.value_type()) #>);
         r.push_back(ft);
