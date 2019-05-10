@@ -58,15 +58,15 @@ private:
         const variability::meta_model::configuration& cfg);
 
     static std::string
-    archetype_location_backend(const feature_group& fg,
+    make_archetype_location_backend(const feature_group& fg,
         const variability::meta_model::configuration& cfg);
 
     static std::string
-    archetype_location_facet(const feature_group& fg,
+    make_archetype_location_facet(const feature_group& fg,
         const variability::meta_model::configuration& cfg);
 
     static std::string
-    archetype_location_archetype(const feature_group& fg,
+    make_archetype_location_archetype(const feature_group& fg,
         const variability::meta_model::configuration& cfg);
 
     static variability::meta_model::template_kind
