@@ -90,30 +90,42 @@ std::list<std::string> feature_bundle_implementation_formatter::inclusion_depend
     const auto& o(assistant::as<feature_bundle>(e));
     auto builder(f.make());
 
-    const auto ch_arch(traits::class_header_archetype());
+    const auto ch_arch(traits::feature_bundle_header_archetype());
     builder.add(o.name(), ch_arch);
 
-    const auto io_arch(formatters::io::traits::class_header_archetype());
-
-    const auto os(inclusion_constants::std::ostream());
-    builder.add(os);
     return builder.build();
 }
 
 extraction::meta_model::artefact feature_bundle_implementation_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& o(a.as<coding::meta_model::variability::feature_bundle>(e));
+    const auto& fb(a.as<coding::meta_model::variability::feature_bundle>(e));
 
     {
-        const auto sn(o.name().simple());
-        const auto qn(a.get_qualified_name(o.name()));
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
-        a.add_helper_methods(o.name().qualified().dot());
+        const auto sn(fb.name().simple());
+        const auto qn(a.get_qualified_name(fb.name()));
+        auto sbf(a.make_scoped_boilerplate_formatter(fb));
+        a.add_helper_methods(fb.name().qualified().dot());
 
         {
-            const auto ns(a.make_namespaces(o.name()));
+            const auto ns(a.make_namespaces(fb.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
+a.stream() << std::endl;
+a.stream() << "std::list<masd::dogen::variability::meta_model::feature_template>" << std::endl;
+a.stream() << sn << "::make_templates() {" << std::endl;
+a.stream() << "    using masd::dogen::variability::meta_model::feature_template;" << std::endl;
+a.stream() << "    std::list<feature_template> r;" << std::endl;
+a.stream() << std::endl;
+            for (const auto& fb_ft : fb.feature_templates()) {
+a.stream() << "    {" << std::endl;
+a.stream() << "        feature_template ft;" << std::endl;
+a.stream() << "        ft.name().qualified(" << fb_ft.type() << ");" << std::endl;
+a.stream() << "        r.push_back(ft);" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << std::endl;
+            }
+a.stream() << "    return r;" << std::endl;
+a.stream() << "}" << std::endl;
 a.stream() << std::endl;
         } // snf
     } // sbf

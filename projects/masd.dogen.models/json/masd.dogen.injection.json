@@ -367,6 +367,7 @@
     },
     {
       "name": "features::input_technical_space",
+      "documentation": "Feature bundle for the input technical space.\n",
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
@@ -374,7 +375,7 @@
       "attributes": [
         {
           "name": "masd.injection.input_technical_space",
-          "type": "std::string",
+          "type": "masd::variability::text",
           "value": "agnostic",
           "documentation": "text\n",
           "tagged_values": {
@@ -393,7 +394,7 @@
       "attributes": [
         {
           "name": "masd.injection.reference",
-          "type": "std::string",
+          "type": "masd::variability::text",
           "documentation": "text_collection\n",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",

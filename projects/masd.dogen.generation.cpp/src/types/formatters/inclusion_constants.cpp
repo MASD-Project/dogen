@@ -22,6 +22,11 @@
 
 namespace masd::dogen::generation::cpp::formatters {
 
+std::string inclusion_constants::std::list() {
+    static ::std::string r("<list>");
+    return r;
+}
+
 std::string inclusion_constants::std::string() {
     static ::std::string r("<string>");
     return r;

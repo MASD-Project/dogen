@@ -18,8 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
+#include "masd.dogen.injection/types/features/input_technical_space.hpp"
 
 namespace masd::dogen::injection::features {
+
+std::list<masd::dogen::variability::meta_model::feature_template>
+input_technical_space::make_templates() {
+    using masd::dogen::variability::meta_model::feature_template;
+    std::list<feature_template> r;
+
+    return r;
+}
 
 }

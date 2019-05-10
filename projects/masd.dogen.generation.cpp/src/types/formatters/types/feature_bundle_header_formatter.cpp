@@ -78,16 +78,13 @@ boost::filesystem::path feature_bundle_header_formatter::full_path(
 
 std::list<std::string> feature_bundle_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const coding::meta_model::element& e) const {
+    const coding::meta_model::element& /*e*/) const {
     using coding::meta_model::variability::feature_bundle;
-    const auto& o(assistant::as<feature_bundle>(e));
+
     auto builder(f.make());
 
-    const auto ch_arch(traits::class_header_archetype());
-    builder.add(o.name(), ch_arch);
-
-    const auto os(inclusion_constants::std::ostream());
-    builder.add(os);
+    builder.add(inclusion_constants::std::list());
+    builder.add("\"masd.dogen.variability/types/meta_model/feature_template.hpp\"");
 
     return builder.build();
 }
@@ -95,22 +92,28 @@ std::list<std::string> feature_bundle_header_formatter::inclusion_dependencies(
 extraction::meta_model::artefact feature_bundle_header_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& o(a.as<coding::meta_model::variability::feature_bundle>(e));
+    const auto& fb(a.as<coding::meta_model::variability::feature_bundle>(e));
 
     {
-        const auto sn(o.name().simple());
-        const auto qn(a.get_qualified_name(o.name()));
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
-        a.add_helper_methods(o.name().qualified().dot());
+        const auto sn(fb.name().simple());
+        const auto qn(a.get_qualified_name(fb.name()));
+        auto sbf(a.make_scoped_boilerplate_formatter(fb));
+        a.add_helper_methods(fb.name().qualified().dot());
 
         {
-            const auto ns(a.make_namespaces(o.name()));
+            const auto ns(a.make_namespaces(fb.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
+           a.comment(fb.documentation());
+a.stream() << "class " << sn << " final {" << std::endl;
+a.stream() << "public:" << std::endl;
+a.stream() << "    static std::list<masd::dogen::variability::meta_model::feature_template>" << std::endl;
+a.stream() << "    make_templates();" << std::endl;
+a.stream() << "};" << std::endl;
 a.stream() << std::endl;
         } // snf
+a.stream() << std::endl;
     } // sbf
     return a.make_artefact();
 }
-
 }

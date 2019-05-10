@@ -36,6 +36,7 @@ namespace masd::dogen::generation::cpp::formatters {
 struct inclusion_constants {
 
     struct std {
+        static ::std::string list();
         static ::std::string string();
         static ::std::string iosfwd();
         static ::std::string algorithm();

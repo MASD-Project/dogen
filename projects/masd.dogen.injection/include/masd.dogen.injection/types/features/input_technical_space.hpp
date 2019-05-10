@@ -25,10 +25,20 @@
 #pragma once
 #endif
 
-#include <ostream>
+#include <list>
+#include "masd.dogen.variability/types/meta_model/feature_template.hpp"
 
 namespace masd::dogen::injection::features {
 
+/**
+ * @brief Feature bundle for the input technical space.
+ */
+class input_technical_space final {
+public:
+    static std::list<masd::dogen::variability::meta_model::feature_template>
+    make_templates();
+};
 
 }
+
 #endif
