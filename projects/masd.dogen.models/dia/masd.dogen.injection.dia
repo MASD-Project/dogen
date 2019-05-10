@@ -6483,13 +6483,13 @@ the injection model.
         <dia:point val="111,72"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="110.95,71.95;130.8,75.65"/>
+        <dia:rectangle val="110.95,71.95;135.035,75.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="111,72"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="19.75"/>
+        <dia:real val="23.984999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -6587,13 +6587,13 @@ the injection model.
             <dia:string>#masd.injection.reference#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
+            <dia:string>#masd::variability::text_collection#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#text_collection
+            <dia:string>#test
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance

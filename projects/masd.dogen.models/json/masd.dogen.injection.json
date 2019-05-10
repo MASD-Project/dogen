@@ -395,8 +395,8 @@
       "attributes": [
         {
           "name": "masd.injection.reference",
-          "type": "masd::variability::text",
-          "documentation": "text_collection\n",
+          "type": "masd::variability::text_collection",
+          "documentation": "test\n",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",

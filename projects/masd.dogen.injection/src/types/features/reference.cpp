@@ -31,8 +31,8 @@ reference::make_templates() {
         feature_template ft;
         ft.name().simple("reference");
         ft.name().qualified("masd.injection.reference");
-        ft.value_type(value_type::text);
-        ft.binding_point(binding_point::element);
+        ft.value_type(value_type::text_collection);
+        ft.binding_point(binding_point::global);
         ft.kind(template_kind::instance);
 
         archetypes::location al;
