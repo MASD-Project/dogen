@@ -32,6 +32,7 @@
 #include "masd.dogen.coding/types/transforms/primitives_transform.hpp"
 #include "masd.dogen.coding/types/transforms/containment_transform.hpp"
 #include "masd.dogen.coding/types/transforms/extraction_properties_transform.hpp"
+#include "masd.dogen.coding/types/transforms/variability_feature_bundle_transform.hpp"
 #include "masd.dogen.coding/types/transforms/pre_assembly_chain.hpp"
 
 namespace {
@@ -70,6 +71,7 @@ void pre_assembly_chain::apply(const context& ctx, meta_model::model& m) {
     type_params_transform::apply(ctx, m);
     parsing_transform::apply(ctx, m);
     extraction_properties_transform::apply(ctx, m);
+    variability_feature_bundle_transform::apply(ctx, m);
 
     /*
      * Primitive transform requires parsing transform to populate the
