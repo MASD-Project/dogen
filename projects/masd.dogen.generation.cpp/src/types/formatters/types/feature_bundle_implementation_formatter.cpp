@@ -112,38 +112,43 @@ format(const context& ctx, const coding::meta_model::element& e) const {
         {
             const auto ns(a.make_namespaces(fb.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
+            using namespace variability::helpers;
+            using utility::string::splitter;
+            for (const auto& fb_ft : fb.feature_templates()) {
+                const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
+a.stream() << std::endl;
+a.stream() << "masd::dogen::variability::meta_model::feature_template" << std::endl;
+a.stream() << "make_" << fb_ft.identifiable_key() << "() {" << std::endl;
+a.stream() << "    using namespace masd::dogen::variability::meta_model;" << std::endl;
+a.stream() << "    feature_template r;" << std::endl;
+a.stream() << "    r.name().simple(\"" << simple_key << "\");" << std::endl;
+a.stream() << "    r.name().qualified(\"" << fb_ft.key() << "\");" << std::endl;
+a.stream() << "    r.value_type(" << enum_mapper::from_value_type(fb_ft.value_type()) << ");" << std::endl;
+a.stream() << "    r.binding_point(" << enum_mapper::from_binding_point(fb_ft.binding_point()) << ");" << std::endl;
+a.stream() << "    r.kind(" << enum_mapper::from_template_kind(fb_ft.template_kind()) << ");" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    archetypes::location al;" << std::endl;
+                if (!fb_ft.location().kernel().empty())
+a.stream() << "    al.kernel(\"" << fb_ft.location().kernel() << "\");" << std::endl;
+                if (!fb_ft.location().backend().empty())
+a.stream() << "    al.backend(\"" << fb_ft.location().backend() << "\");" << std::endl;
+                if (!fb_ft.location().facet().empty())
+a.stream() << "    al.facet(\"" << fb_ft.location().facet() << "\");" << std::endl;
+                if (!fb_ft.location().archetype().empty())
+a.stream() << "    al.archetype(\"" << fb_ft.location().archetype() << "\");" << std::endl;
+a.stream() << std::endl;
+a.stream() << "     r.location(al);" << std::endl;
+a.stream() << "     return r;" << std::endl;
+a.stream() << "}" << std::endl;
+            }
 a.stream() << std::endl;
 a.stream() << "std::list<masd::dogen::variability::meta_model::feature_template>" << std::endl;
 a.stream() << sn << "::make_templates() {" << std::endl;
 a.stream() << "    using namespace masd::dogen::variability::meta_model;" << std::endl;
 a.stream() << "    std::list<feature_template> r;" << std::endl;
-a.stream() << std::endl;
-            using namespace variability::helpers;
-            using utility::string::splitter;
+
             for (const auto& fb_ft : fb.feature_templates()) {
-                const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
-a.stream() << "    {" << std::endl;
-a.stream() << "        feature_template ft;" << std::endl;
-a.stream() << "        ft.name().simple(\"" << simple_key << "\");" << std::endl;
-a.stream() << "        ft.name().qualified(\"" << fb_ft.key() << "\");" << std::endl;
-a.stream() << "        ft.value_type(" << enum_mapper::from_value_type(fb_ft.value_type()) << ");" << std::endl;
-a.stream() << "        ft.binding_point(" << enum_mapper::from_binding_point(fb_ft.binding_point()) << ");" << std::endl;
-a.stream() << "        ft.kind(" << enum_mapper::from_template_kind(fb_ft.template_kind()) << ");" << std::endl;
-a.stream() << std::endl;
-a.stream() << "        archetypes::location al;" << std::endl;
-                if (!fb_ft.location().kernel().empty())
-a.stream() << "        al.kernel(\"" << fb_ft.location().kernel() << "\");" << std::endl;
-                if (!fb_ft.location().backend().empty())
-a.stream() << "        al.backend(\"" << fb_ft.location().backend() << "\");" << std::endl;
-                if (!fb_ft.location().facet().empty())
-a.stream() << "        al.facet(\"" << fb_ft.location().facet() << "\");" << std::endl;
-                if (!fb_ft.location().archetype().empty())
-a.stream() << "        al.archetype(\"" << fb_ft.location().archetype() << "\");" << std::endl;
-a.stream() << std::endl;
-a.stream() << "        ft.location(al);" << std::endl;
-a.stream() << "        r.push_back(ft);" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
+a.stream() << "    r.push_back(make_" << fb_ft.identifiable_key() << "());" << std::endl;
             }
 a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;

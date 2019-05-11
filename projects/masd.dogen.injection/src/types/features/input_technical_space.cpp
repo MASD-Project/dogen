@@ -22,26 +22,28 @@
 
 namespace masd::dogen::injection::features {
 
+masd::dogen::variability::meta_model::feature_template
+make_masd_injection_input_technical_space() {
+    using namespace masd::dogen::variability::meta_model;
+    feature_template r;
+    r.name().simple("input_technical_space");
+    r.name().qualified("masd.injection.input_technical_space");
+    r.value_type(value_type::text);
+    r.binding_point(binding_point::global);
+    r.kind(template_kind::instance);
+
+    archetypes::location al;
+    al.kernel("masd");
+
+     r.location(al);
+     return r;
+}
+
 std::list<masd::dogen::variability::meta_model::feature_template>
 input_technical_space::make_templates() {
     using namespace masd::dogen::variability::meta_model;
     std::list<feature_template> r;
-
-    {
-        feature_template ft;
-        ft.name().simple("input_technical_space");
-        ft.name().qualified("masd.injection.input_technical_space");
-        ft.value_type(value_type::text);
-        ft.binding_point(binding_point::global);
-        ft.kind(template_kind::instance);
-
-        archetypes::location al;
-        al.kernel("masd");
-
-        ft.location(al);
-        r.push_back(ft);
-    }
-
+    r.push_back(make_masd_injection_input_technical_space());
     return r;
 }
 

@@ -22,26 +22,28 @@
 
 namespace masd::dogen::injection::features {
 
+masd::dogen::variability::meta_model::feature_template
+make_masd_injection_reference() {
+    using namespace masd::dogen::variability::meta_model;
+    feature_template r;
+    r.name().simple("reference");
+    r.name().qualified("masd.injection.reference");
+    r.value_type(value_type::text_collection);
+    r.binding_point(binding_point::global);
+    r.kind(template_kind::instance);
+
+    archetypes::location al;
+    al.kernel("masd");
+
+     r.location(al);
+     return r;
+}
+
 std::list<masd::dogen::variability::meta_model::feature_template>
 reference::make_templates() {
     using namespace masd::dogen::variability::meta_model;
     std::list<feature_template> r;
-
-    {
-        feature_template ft;
-        ft.name().simple("reference");
-        ft.name().qualified("masd.injection.reference");
-        ft.value_type(value_type::text_collection);
-        ft.binding_point(binding_point::global);
-        ft.kind(template_kind::instance);
-
-        archetypes::location al;
-        al.kernel("masd");
-
-        ft.location(al);
-        r.push_back(ft);
-    }
-
+    r.push_back(make_masd_injection_reference());
     return r;
 }
 
