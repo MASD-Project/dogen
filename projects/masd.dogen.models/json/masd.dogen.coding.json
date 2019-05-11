@@ -2507,6 +2507,48 @@
         "masd::variability::feature_template_initializer"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::enumeration",
+      "documentation": "Parameters related to enumerations.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.enumeration.use_implementation_defined_underlying_element",
+          "type": "masd::variability::boolean",
+          "value": "false",
+          "documentation": "If true, it uses the default implementation defined underlying element for the\ntechnical space targeted.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.enumeration.underlying_element",
+          "type": "masd::variability::text",
+          "documentation": "Name of the underlying element to use for the enumeration.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.enumeration.use_implementation_defined_enumerator_values",
+          "type": "masd::variability::boolean",
+          "value": "false",
+          "documentation": "If true, uses the enumeration values supplied by the underlying technical space.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        }
+      ]
     }
   ]
 }

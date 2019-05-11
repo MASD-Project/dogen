@@ -18,19 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.coding/types/features/naming.hpp"
-#include "masd.dogen.coding/types/features/enumeration.hpp"
-#include "masd.dogen.coding/types/features/initializer.hpp"
-#include "masd.dogen.coding/types/features/type_parameters.hpp"
+#ifndef MASD_DOGEN_CODING_TYPES_FEATURES_ENUMERATION_HPP
+#define MASD_DOGEN_CODING_TYPES_FEATURES_ENUMERATION_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <list>
+#include "masd.dogen.variability/types/meta_model/feature_template.hpp"
 
 namespace masd::dogen::coding::features {
 
-void initializer::
-register_templates(variability::helpers::feature_template_registrar& rg) {
-    rg.register_templates(enumeration::make_templates());
-    rg.register_templates(naming::make_templates());
-    rg.register_templates(type_parameters::make_templates());
+/**
+ * @brief Parameters related to enumerations.
+ */
+class enumeration final {
+public:
+    static std::list<masd::dogen::variability::meta_model::feature_template>
+    make_templates();
+};
 
 }
 
-}
+#endif

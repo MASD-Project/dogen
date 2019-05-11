@@ -1,44 +1,6 @@
 [
   {
     "name": {
-      "simple": "use_implementation_defined_underlying_element",
-      "qualified": "masd.enumeration.use_implementation_defined_underlying_element"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "boolean",
-    "template_kind": "instance",
-    "scope": "entity",
-    "default_value": false
-  },
-  {
-    "name": {
-      "simple": "underlying_element",
-      "qualified": "masd.enumeration.underlying_element"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "text",
-    "template_kind": "instance",
-    "scope": "entity"
-  },
-  {
-    "name": {
-      "simple": "use_implementation_defined_enumerator_values",
-      "qualified": "masd.enumeration.use_implementation_defined_enumerator_values"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "boolean",
-    "template_kind": "instance",
-    "scope": "entity",
-    "default_value": false
-  },
-  {
-    "name": {
       "simple": "add_invalid_enumerator",
       "qualified": "masd.enumeration.add_invalid_enumerator"
     },
