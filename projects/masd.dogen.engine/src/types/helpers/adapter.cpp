@@ -27,6 +27,7 @@
 #include "masd.dogen.coding/io/meta_model/location_io.hpp"
 #include "masd.dogen.coding/types/helpers/name_builder.hpp"
 #include "masd.dogen.coding/types/helpers/name_factory.hpp"
+#include "masd.dogen.coding/types/helpers/string_processor.hpp"
 #include "masd.dogen.engine/types/helpers/stereotypes_helper.hpp"
 #include "masd.dogen.engine/types/helpers/adaptation_exception.hpp"
 #include "masd.dogen.engine/types/helpers/adapter.hpp"
@@ -449,6 +450,7 @@ adapter::to_variability_feature_bundle(
 
     using variability::helpers::enum_mapper;
     coding::helpers::name_factory f;
+    coding::helpers::string_processor sp;
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name());
         ensure_not_empty(n);
@@ -456,6 +458,7 @@ adapter::to_variability_feature_bundle(
         coding::meta_model::variability::feature_template ft;
         ft.name(f.build_attribute_name(r->name(), n));
         ft.key(n);
+        ft.identifiable_key(sp.to_identifiable(n));
         ft.value(attr.value());
         ft.value_type(enum_mapper::to_value_type(attr.type()));
         ft.configuration(attr.configuration());
