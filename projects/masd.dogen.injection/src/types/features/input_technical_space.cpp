@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "masd.dogen.variability/types/helpers/value_factory.hpp"
 #include "masd.dogen.injection/types/features/input_technical_space.hpp"
 
 namespace masd::dogen::injection::features {
@@ -28,9 +29,12 @@ make_masd_injection_input_technical_space() {
     feature_template r;
     r.name().simple("input_technical_space");
     r.name().qualified("masd.injection.input_technical_space");
-    r.value_type(value_type::text);
+    const auto vt(value_type::text);
+    r.value_type(vt);
     r.binding_point(binding_point::global);
     r.kind(template_kind::instance);
+    masd::dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ "agnostic" }));
 
     archetypes::location al;
     al.kernel("masd");

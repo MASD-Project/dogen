@@ -19,6 +19,7 @@
  *
  */
 #include "masd.dogen.coding/types/features/type_parameters.hpp"
+#include "masd.dogen.variability/types/helpers/value_factory.hpp"
 
 namespace masd::dogen::coding::features {
 
@@ -28,9 +29,12 @@ make_masd_type_parameters_variable_number_of_parameters() {
     feature_template r;
     r.name().simple("variable_number_of_parameters");
     r.name().qualified("masd.type_parameters.variable_number_of_parameters");
-    r.value_type(value_type::boolean);
+    const auto vt(value_type::boolean);
+    r.value_type(vt);
     r.binding_point(binding_point::element);
     r.kind(template_kind::instance);
+    masd::dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ "false" }));
 
     archetypes::location al;
     al.kernel("masd");
@@ -45,9 +49,12 @@ make_masd_type_parameters_count() {
     feature_template r;
     r.name().simple("count");
     r.name().qualified("masd.type_parameters.count");
-    r.value_type(value_type::number);
+    const auto vt(value_type::number);
+    r.value_type(vt);
     r.binding_point(binding_point::element);
     r.kind(template_kind::instance);
+    masd::dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ "0" }));
 
     archetypes::location al;
     al.kernel("masd");
@@ -62,9 +69,12 @@ make_masd_type_parameters_always_in_heap() {
     feature_template r;
     r.name().simple("always_in_heap");
     r.name().qualified("masd.type_parameters.always_in_heap");
-    r.value_type(value_type::boolean);
+    const auto vt(value_type::boolean);
+    r.value_type(vt);
     r.binding_point(binding_point::element);
     r.kind(template_kind::instance);
+    masd::dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ "false" }));
 
     archetypes::location al;
     al.kernel("masd");

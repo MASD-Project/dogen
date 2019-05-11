@@ -19,6 +19,7 @@
  *
  */
 #include "masd.dogen.injection/types/features/reference.hpp"
+#include "masd.dogen.variability/types/helpers/value_factory.hpp"
 
 namespace masd::dogen::injection::features {
 
@@ -28,7 +29,8 @@ make_masd_injection_reference() {
     feature_template r;
     r.name().simple("reference");
     r.name().qualified("masd.injection.reference");
-    r.value_type(value_type::text_collection);
+    const auto vt(value_type::text_collection);
+    r.value_type(vt);
     r.binding_point(binding_point::global);
     r.kind(template_kind::instance);
 

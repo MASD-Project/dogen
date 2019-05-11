@@ -34,6 +34,7 @@ std::list<std::string> feature_bundle_implementation_formatter::inclusion_depend
 
     const auto ch_arch(traits::feature_bundle_header_archetype());
     builder.add(o.name(), ch_arch);
+    builder.add("\"masd.dogen.variability/types/helpers/value_factory.hpp\"");
 
     return builder.build();
 }
@@ -64,9 +65,18 @@ make_<#= fb_ft.identifiable_key() #>() {
     feature_template r;
     r.name().simple("<#= simple_key #>");
     r.name().qualified("<#= fb_ft.key() #>");
-    r.value_type(<#= enum_mapper::from_value_type(fb_ft.value_type()) #>);
+    const auto vt(<#= enum_mapper::from_value_type(fb_ft.value_type()) #>);
+    r.value_type(vt);
     r.binding_point(<#= enum_mapper::from_binding_point(fb_ft.binding_point()) #>);
     r.kind(<#= enum_mapper::from_template_kind(fb_ft.template_kind()) #>);
+<#+
+    if (!fb_ft.value().empty()) {
+#>
+    masd::dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ "<#= fb_ft.value() #>" }));
+<#+
+    }
+#>
 
     archetypes::location al;
 <#+

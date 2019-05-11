@@ -94,6 +94,7 @@ std::list<std::string> feature_bundle_implementation_formatter::inclusion_depend
 
     const auto ch_arch(traits::feature_bundle_header_archetype());
     builder.add(o.name(), ch_arch);
+    builder.add("\"masd.dogen.variability/types/helpers/value_factory.hpp\"");
 
     return builder.build();
 }
@@ -123,9 +124,14 @@ a.stream() << "    using namespace masd::dogen::variability::meta_model;" << std
 a.stream() << "    feature_template r;" << std::endl;
 a.stream() << "    r.name().simple(\"" << simple_key << "\");" << std::endl;
 a.stream() << "    r.name().qualified(\"" << fb_ft.key() << "\");" << std::endl;
-a.stream() << "    r.value_type(" << enum_mapper::from_value_type(fb_ft.value_type()) << ");" << std::endl;
+a.stream() << "    const auto vt(" << enum_mapper::from_value_type(fb_ft.value_type()) << ");" << std::endl;
+a.stream() << "    r.value_type(vt);" << std::endl;
 a.stream() << "    r.binding_point(" << enum_mapper::from_binding_point(fb_ft.binding_point()) << ");" << std::endl;
 a.stream() << "    r.kind(" << enum_mapper::from_template_kind(fb_ft.template_kind()) << ");" << std::endl;
+    if (!fb_ft.value().empty()) {
+a.stream() << "    masd::dogen::variability::helpers::value_factory f;" << std::endl;
+a.stream() << "    r.default_value(f.make(vt, std::list<std::string>{ \"" << fb_ft.value() << "\" }));" << std::endl;
+    }
 a.stream() << std::endl;
 a.stream() << "    archetypes::location al;" << std::endl;
                 if (!fb_ft.location().kernel().empty())

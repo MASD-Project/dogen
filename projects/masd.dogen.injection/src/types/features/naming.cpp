@@ -19,6 +19,7 @@
  *
  */
 #include "masd.dogen.injection/types/features/naming.hpp"
+#include "masd.dogen.variability/types/helpers/value_factory.hpp"
 
 namespace masd::dogen::injection::features {
 
@@ -28,7 +29,8 @@ make_masd_injection_external_modules() {
     feature_template r;
     r.name().simple("external_modules");
     r.name().qualified("masd.injection.external_modules");
-    r.value_type(value_type::text);
+    const auto vt(value_type::text);
+    r.value_type(vt);
     r.binding_point(binding_point::global);
     r.kind(template_kind::instance);
 
@@ -45,7 +47,8 @@ make_masd_injection_model_modules() {
     feature_template r;
     r.name().simple("model_modules");
     r.name().qualified("masd.injection.model_modules");
-    r.value_type(value_type::text);
+    const auto vt(value_type::text);
+    r.value_type(vt);
     r.binding_point(binding_point::global);
     r.kind(template_kind::instance);
 
