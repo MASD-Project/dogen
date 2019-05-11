@@ -1,45 +1,6 @@
 [
   {
     "name": {
-      "simple": "variable_number_of_parameters",
-      "qualified": "masd.type_parameters.variable_number_of_parameters"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "boolean",
-    "template_kind": "instance",
-    "scope": "entity",
-    "default_value": false
-  },
-  {
-    "name": {
-      "simple": "count",
-      "qualified": "masd.type_parameters.count"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "number",
-    "template_kind": "instance",
-    "scope": "entity",
-    "default_value": 0
-  },
-  {
-    "name": {
-      "simple": "always_in_heap",
-      "qualified": "masd.type_parameters.always_in_heap"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "boolean",
-    "template_kind": "instance",
-    "scope": "entity",
-    "default_value": false
-  },
-  {
-    "name": {
       "simple": "use_implementation_defined_underlying_element",
       "qualified": "masd.enumeration.use_implementation_defined_underlying_element"
     },
