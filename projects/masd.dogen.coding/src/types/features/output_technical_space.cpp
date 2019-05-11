@@ -18,27 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.coding/types/features/naming.hpp"
-#include "masd.dogen.coding/types/features/origin.hpp"
-#include "masd.dogen.coding/types/features/enumerator.hpp"
-#include "masd.dogen.coding/types/features/enumeration.hpp"
-#include "masd.dogen.coding/types/features/initializer.hpp"
-#include "masd.dogen.coding/types/features/generalization.hpp"
-#include "masd.dogen.coding/types/features/type_parameters.hpp"
+#include "masd.dogen.variability/types/helpers/value_factory.hpp"
 #include "masd.dogen.coding/types/features/output_technical_space.hpp"
 
 namespace masd::dogen::coding::features {
 
-void initializer::
-register_templates(variability::helpers::feature_template_registrar& rg) {
-    rg.register_templates(enumeration::make_templates());
-    rg.register_templates(enumerator::make_templates());
-    rg.register_templates(generalization::make_templates());
-    rg.register_templates(naming::make_templates());
-    rg.register_templates(origin::make_templates());
-    rg.register_templates(output_technical_space::make_templates());
-    rg.register_templates(type_parameters::make_templates());
+masd::dogen::variability::meta_model::feature_template
+make_masd_extraction_output_technical_space() {
+    using namespace masd::dogen::variability::meta_model;
+    feature_template r;
+    r.name().simple("output_technical_space");
+    r.name().qualified("masd.extraction.output_technical_space");
+    const auto vt(value_type::text_collection);
+    r.value_type(vt);
+    r.binding_point(binding_point::global);
+    r.kind(template_kind::instance);
 
+    archetypes::location al;
+    al.kernel("masd");
+
+     r.location(al);
+     return r;
+}
+
+std::list<masd::dogen::variability::meta_model::feature_template>
+output_technical_space::make_templates() {
+    using namespace masd::dogen::variability::meta_model;
+    std::list<feature_template> r;
+    r.push_back(make_masd_extraction_output_technical_space());
+    return r;
 }
 
 }

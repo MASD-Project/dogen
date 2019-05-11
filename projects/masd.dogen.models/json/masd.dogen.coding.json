@@ -2631,6 +2631,26 @@
           }
         }
       ]
+    },
+    {
+      "name": "features::output_technical_space",
+      "documentation": "Features related to the output technical space.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.extraction.output_technical_space",
+          "type": "masd::variability::text_collection",
+          "documentation": "Set of output technical spaces that this model targets.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        }
+      ]
     }
   ]
 }
