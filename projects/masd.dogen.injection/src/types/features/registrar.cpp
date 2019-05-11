@@ -26,8 +26,8 @@ namespace masd::dogen::injection::features {
 
 void registrar::
 register_templates(variability::helpers::feature_template_registrar& rg) {
-    rg.register_templates(reference::make_templates());
     rg.register_templates(input_technical_space::make_templates());
+    rg.register_templates(reference::make_templates());
 
 }
 

@@ -42,6 +42,14 @@ const std::string empty;
 
 }
 
+namespace masd::dogen::coding::meta_model {
+
+inline bool operator<(const name& lhs, const name& rhs) {
+    return lhs.qualified().dot() < rhs.qualified().dot();
+}
+
+}
+
 namespace masd::dogen::coding::transforms {
 
 variability_feature_bundle_transform::feature_group
@@ -164,16 +172,27 @@ apply(const context& ctx, meta_model::model& m) {
         "variability feature bundle transform", transform_id,
         m.name().qualified().dot(), *ctx.tracer(), m);
 
+    const auto& bundles(m.variability_elements().feature_bundles());
+    if (bundles.empty())
+        return;
+
     const auto& fm(*ctx.feature_model());
     const auto fg(make_feature_group(fm));
-
-    auto& init(*m.variability_elements().feature_template_initializer());
-    for (auto& pair : m.variability_elements().feature_bundles()) {
+    for (auto& pair : bundles) {
         auto& fb(*pair.second);
-        init.bundles().push_back(fb.name());
         for (auto& ft : fb.feature_templates())
             update(fg, ft);
     }
+
+    if (m.variability_elements().feature_template_initializer() == nullptr)
+        return;
+
+    auto& fti(*m.variability_elements().feature_template_initializer());
+    for (auto& pair : bundles) {
+        auto& fb(*pair.second);
+        fti.bundles().push_back(fb.name());
+    }
+    fti.bundles().sort();
 
     stp.end_transform(m);
 }
