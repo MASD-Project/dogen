@@ -1,31 +1,6 @@
 [
   {
     "name": {
-      "simple": "add_invalid_enumerator",
-      "qualified": "masd.enumeration.add_invalid_enumerator"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "boolean",
-    "template_kind": "instance",
-    "scope": "entity",
-    "default_value": true
-  },
-  {
-    "name": {
-      "simple": "value",
-      "qualified": "masd.enumerator.value"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "text",
-    "template_kind": "instance",
-    "scope": "property"
-  },
-  {
-    "name": {
       "simple": "is_final",
       "qualified": "masd.generalization.is_final"
     },
