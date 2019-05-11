@@ -18,19 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.injection/types/features/naming.hpp"
-#include "masd.dogen.injection/types/features/reference.hpp"
-#include "masd.dogen.injection/types/features/registrar.hpp"
-#include "masd.dogen.injection/types/features/input_technical_space.hpp"
+#ifndef MASD_DOGEN_INJECTION_TYPES_FEATURES_NAMING_HPP
+#define MASD_DOGEN_INJECTION_TYPES_FEATURES_NAMING_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <list>
+#include "masd.dogen.variability/types/meta_model/feature_template.hpp"
 
 namespace masd::dogen::injection::features {
 
-void registrar::
-register_templates(variability::helpers::feature_template_registrar& rg) {
-    rg.register_templates(input_technical_space::make_templates());
-    rg.register_templates(naming::make_templates());
-    rg.register_templates(reference::make_templates());
+/**
+ * @brief Feature group for name related features.
+ */
+class naming final {
+public:
+    static std::list<masd::dogen::variability::meta_model::feature_template>
+    make_templates();
+};
 
 }
 
-}
+#endif

@@ -19,18 +19,45 @@
  *
  */
 #include "masd.dogen.injection/types/features/naming.hpp"
-#include "masd.dogen.injection/types/features/reference.hpp"
-#include "masd.dogen.injection/types/features/registrar.hpp"
-#include "masd.dogen.injection/types/features/input_technical_space.hpp"
 
 namespace masd::dogen::injection::features {
 
-void registrar::
-register_templates(variability::helpers::feature_template_registrar& rg) {
-    rg.register_templates(input_technical_space::make_templates());
-    rg.register_templates(naming::make_templates());
-    rg.register_templates(reference::make_templates());
+std::list<masd::dogen::variability::meta_model::feature_template>
+naming::make_templates() {
+    using namespace masd::dogen::variability::meta_model;
+    std::list<feature_template> r;
 
+    {
+        feature_template ft;
+        ft.name().simple("external_modules");
+        ft.name().qualified("masd.injection.external_modules");
+        ft.value_type(value_type::text);
+        ft.binding_point(binding_point::global);
+        ft.kind(template_kind::instance);
+
+        archetypes::location al;
+        al.kernel("masd");
+
+        ft.location(al);
+        r.push_back(ft);
+    }
+
+    {
+        feature_template ft;
+        ft.name().simple("model_modules");
+        ft.name().qualified("masd.injection.model_modules");
+        ft.value_type(value_type::text);
+        ft.binding_point(binding_point::global);
+        ft.kind(template_kind::instance);
+
+        archetypes::location al;
+        al.kernel("masd");
+
+        ft.location(al);
+        r.push_back(ft);
+    }
+
+    return r;
 }
 
 }
