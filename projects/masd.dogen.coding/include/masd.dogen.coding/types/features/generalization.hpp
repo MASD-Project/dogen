@@ -18,23 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.coding/types/features/naming.hpp"
-#include "masd.dogen.coding/types/features/enumerator.hpp"
-#include "masd.dogen.coding/types/features/enumeration.hpp"
-#include "masd.dogen.coding/types/features/initializer.hpp"
-#include "masd.dogen.coding/types/features/generalization.hpp"
-#include "masd.dogen.coding/types/features/type_parameters.hpp"
+#ifndef MASD_DOGEN_CODING_TYPES_FEATURES_GENERALIZATION_HPP
+#define MASD_DOGEN_CODING_TYPES_FEATURES_GENERALIZATION_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <list>
+#include "masd.dogen.variability/types/meta_model/feature_template.hpp"
 
 namespace masd::dogen::coding::features {
 
-void initializer::
-register_templates(variability::helpers::feature_template_registrar& rg) {
-    rg.register_templates(enumeration::make_templates());
-    rg.register_templates(enumerator::make_templates());
-    rg.register_templates(generalization::make_templates());
-    rg.register_templates(naming::make_templates());
-    rg.register_templates(type_parameters::make_templates());
+/**
+ * @brief Features related to the generalization relationship.
+ */
+class generalization final {
+public:
+    static std::list<masd::dogen::variability::meta_model::feature_template>
+    make_templates();
+};
 
 }
 
-}
+#endif
