@@ -42,6 +42,7 @@ feature_template::feature_template(
     const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
     const masd::dogen::coding::meta_model::name& name,
     const std::string& key,
+    const std::string& identifiable_key,
     const std::string& value,
     const masd::dogen::archetypes::location& location,
     const masd::dogen::variability::meta_model::value_type value_type,
@@ -51,6 +52,7 @@ feature_template::feature_template(
       configuration_(configuration),
       name_(name),
       key_(key),
+      identifiable_key_(identifiable_key),
       value_(value),
       location_(location),
       value_type_(value_type),
@@ -63,6 +65,7 @@ void feature_template::swap(feature_template& other) noexcept {
     swap(configuration_, other.configuration_);
     swap(name_, other.name_);
     swap(key_, other.key_);
+    swap(identifiable_key_, other.identifiable_key_);
     swap(value_, other.value_);
     swap(location_, other.location_);
     swap(value_type_, other.value_type_);
@@ -75,6 +78,7 @@ bool feature_template::operator==(const feature_template& rhs) const {
         configuration_ == rhs.configuration_ &&
         name_ == rhs.name_ &&
         key_ == rhs.key_ &&
+        identifiable_key_ == rhs.identifiable_key_ &&
         value_ == rhs.value_ &&
         location_ == rhs.location_ &&
         value_type_ == rhs.value_type_ &&
@@ -150,6 +154,22 @@ void feature_template::key(const std::string& v) {
 
 void feature_template::key(const std::string&& v) {
     key_ = std::move(v);
+}
+
+const std::string& feature_template::identifiable_key() const {
+    return identifiable_key_;
+}
+
+std::string& feature_template::identifiable_key() {
+    return identifiable_key_;
+}
+
+void feature_template::identifiable_key(const std::string& v) {
+    identifiable_key_ = v;
+}
+
+void feature_template::identifiable_key(const std::string&& v) {
+    identifiable_key_ = std::move(v);
 }
 
 const std::string& feature_template::value() const {

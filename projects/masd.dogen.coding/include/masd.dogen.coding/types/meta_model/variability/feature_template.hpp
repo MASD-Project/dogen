@@ -52,6 +52,7 @@ public:
         const boost::shared_ptr<masd::dogen::variability::meta_model::configuration>& configuration,
         const masd::dogen::coding::meta_model::name& name,
         const std::string& key,
+        const std::string& identifiable_key,
         const std::string& value,
         const masd::dogen::archetypes::location& location,
         const masd::dogen::variability::meta_model::value_type value_type,
@@ -98,6 +99,16 @@ public:
     void key(const std::string& v);
     void key(const std::string&& v);
 
+    /**
+     * @brief Post-processed key, suitable for use as an identifier.
+     */
+    /**@{*/
+    const std::string& identifiable_key() const;
+    std::string& identifiable_key();
+    void identifiable_key(const std::string& v);
+    void identifiable_key(const std::string&& v);
+    /**@}*/
+
     const std::string& value() const;
     std::string& value();
     void value(const std::string& v);
@@ -132,6 +143,7 @@ private:
     boost::shared_ptr<masd::dogen::variability::meta_model::configuration> configuration_;
     masd::dogen::coding::meta_model::name name_;
     std::string key_;
+    std::string identifiable_key_;
     std::string value_;
     masd::dogen::archetypes::location location_;
     masd::dogen::variability::meta_model::value_type value_type_;

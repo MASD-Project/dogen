@@ -1868,6 +1868,11 @@
           "type": "std::string"
         },
         {
+          "name": "identifiable_key",
+          "type": "std::string",
+          "documentation": "Post-processed key, suitable for use as an identifier.\n"
+        },
+        {
           "name": "value",
           "type": "std::string"
         },

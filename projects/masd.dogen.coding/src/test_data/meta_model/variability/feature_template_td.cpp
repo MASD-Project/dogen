@@ -84,11 +84,12 @@ populate(const unsigned int position, result_type& v) {
     v.configuration(create_boost_shared_ptr_masd_dogen_variability_meta_model_configuration(position + 1));
     v.name(create_masd_dogen_coding_meta_model_name(position + 2));
     v.key(create_std_string(position + 3));
-    v.value(create_std_string(position + 4));
-    v.location(create_masd_dogen_archetypes_location(position + 5));
-    v.value_type(create_masd_dogen_variability_meta_model_value_type(position + 6));
-    v.binding_point(create_masd_dogen_variability_meta_model_binding_point(position + 7));
-    v.template_kind(create_masd_dogen_variability_meta_model_template_kind(position + 8));
+    v.identifiable_key(create_std_string(position + 4));
+    v.value(create_std_string(position + 5));
+    v.location(create_masd_dogen_archetypes_location(position + 6));
+    v.value_type(create_masd_dogen_variability_meta_model_value_type(position + 7));
+    v.binding_point(create_masd_dogen_variability_meta_model_binding_point(position + 8));
+    v.template_kind(create_masd_dogen_variability_meta_model_template_kind(position + 9));
 }
 
 feature_template_generator::result_type
