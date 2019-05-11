@@ -2654,6 +2654,7 @@
     },
     {
       "name": "features::primitive",
+      "documentation": "Features related to primitive elements.\n",
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
@@ -2689,6 +2690,106 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "element"
+          }
+        }
+      ]
+    },
+    {
+      "name": "features::orm",
+      "documentation": "Features related to ORM support.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.orm.database_system",
+          "type": "masd::variability::text_collection",
+          "documentation": "Database system to target for ORM support.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.orm.table_name",
+          "type": "masd::variability::text",
+          "documentation": "Name of the database table for this element.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.orm.schema_name",
+          "type": "masd::variability::text",
+          "documentation": "Name of the database schema for this modeling element.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "any"
+          }
+        },
+        {
+          "name": "masd.orm.is_primary_key",
+          "type": "masd::variability::boolean",
+          "documentation": "If true, this property will be used for the primary key.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "property"
+          }
+        },
+        {
+          "name": "masd.orm.column_name",
+          "type": "masd::variability::text",
+          "documentation": "Overrides the name of the column name for the database table.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "property"
+          }
+        },
+        {
+          "name": "masd.orm.is_nullable",
+          "type": "masd::variability::boolean",
+          "documentation": "If true, the column can be null.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "property"
+          }
+        },
+        {
+          "name": "masd.orm.is_composite",
+          "type": "masd::variability::boolean",
+          "documentation": "If true, the primary key is a composite key.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "property"
+          }
+        },
+        {
+          "name": "masd.orm.letter_case",
+          "type": "masd::variability::text",
+          "documentation": "Determines the casing to use for identifiers.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.orm.type_override",
+          "type": "masd::variability::text_collection",
+          "documentation": "Overrides to use for the relational type, for a given database system.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "property"
           }
         }
       ]

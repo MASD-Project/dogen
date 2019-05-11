@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CODING_TYPES_FEATURES_PRIMITIVE_HPP
-#define MASD_DOGEN_CODING_TYPES_FEATURES_PRIMITIVE_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_FEATURES_ORM_HPP
+#define MASD_DOGEN_CODING_TYPES_FEATURES_ORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,9 +31,9 @@
 namespace masd::dogen::coding::features {
 
 /**
- * @brief Features related to primitive elements.
+ * @brief Features related to ORM support.
  */
-class primitive final {
+class orm final {
 public:
     static std::list<masd::dogen::variability::meta_model::feature_template>
     make_templates();
