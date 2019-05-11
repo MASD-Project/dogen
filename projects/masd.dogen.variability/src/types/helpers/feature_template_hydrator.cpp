@@ -143,17 +143,7 @@ feature_template_hydrator::to_template_kind(const std::string& s) const {
 boost::shared_ptr<meta_model::value> feature_template_hydrator::
 create_value(const meta_model::value_type vt, const std::string& v) const {
     value_factory f;
-
-    using meta_model::value_type;
-    switch (vt) {
-    case value_type::text: return f.make_text(v);
-    case value_type::boolean: return f.make_boolean(v);
-    case value_type::number: return f.make_number(v);
-    default: {
-        const auto s(boost::lexical_cast<std::string>(vt));
-        BOOST_LOG_SEV(lg, error) << invalid_value_type << "'" << s << "'";
-        BOOST_THROW_EXCEPTION(hydration_exception(invalid_value_type + s));
-    } }
+    return f.make(vt, std::list<std::string>{ v });
 }
 
 meta_model::name feature_template_hydrator::

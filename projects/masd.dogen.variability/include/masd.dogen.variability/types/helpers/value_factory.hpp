@@ -103,6 +103,13 @@ public:
 
 public:
     /**
+     * @brief Creates a value using the supplied enum.
+     */
+    boost::shared_ptr<meta_model::value> make(const meta_model::value_type& vt,
+        const std::list<std::string>& v) const;
+
+public:
+    /**
      * @brief Creates a value given a feature, the original key and
      * zero or more raw values.
      *

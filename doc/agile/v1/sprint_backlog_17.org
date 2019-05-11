@@ -12,25 +12,25 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-11 Sat 07:41]
+#+CAPTION: Clock summary at [2019-05-11 Sat 13:24]
 | <75>                                                       |         |       |      |       |
 | Headline                                                   | Time    |       |      |     % |
 |------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                               | *36:56* |       |      | 100.0 |
+| *Total time*                                               | *37:35* |       |      | 100.0 |
 |------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                    | 36:56   |       |      | 100.0 |
-| Active                                                     |         | 36:56 |      | 100.0 |
-| Edit release notes for previous sprint                     |         |       | 2:41 |   7.3 |
-| Create a video demo for the previous sprint's features     |         |       | 2:11 |   5.9 |
-| Sprint and product backlog grooming                        |         |       | 1:01 |   2.8 |
-| Defining profiles directly on a target model does not work |         |       | 0:30 |   1.4 |
+| Stories                                                    | 37:35   |       |      | 100.0 |
+| Active                                                     |         | 37:35 |      | 100.0 |
+| Edit release notes for previous sprint                     |         |       | 2:41 |   7.1 |
+| Create a video demo for the previous sprint's features     |         |       | 2:11 |   5.8 |
+| Sprint and product backlog grooming                        |         |       | 1:01 |   2.7 |
+| Defining profiles directly on a target model does not work |         |       | 0:30 |   1.3 |
 | Inner modules need to be qualified                         |         |       | 0:22 |   1.0 |
-| Create namespaces for model elements                       |         |       | 8:59 |  24.3 |
-| Leaves in internal modules are not captured correctly      |         |       | 1:33 |   4.2 |
-| Try to add relational tracing support                      |         |       | 2:51 |   7.7 |
+| Create namespaces for model elements                       |         |       | 8:59 |  23.9 |
+| Leaves in internal modules are not captured correctly      |         |       | 1:33 |   4.1 |
+| Try to add relational tracing support                      |         |       | 2:51 |   7.6 |
 | Linux and OSX binaries are not stripped                    |         |       | 1:23 |   3.7 |
-| Initial analysis to code generate feature infrastructure   |         |       | 7:13 |  19.5 |
-| Replace JSON based feature templates with generated code   |         |       | 8:12 |  22.2 |
+| Initial analysis to code generate feature infrastructure   |         |       | 7:13 |  19.2 |
+| Replace JSON based feature templates with generated code   |         |       | 8:51 |  23.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -404,6 +404,8 @@ Notes:
 
 *** STARTED Replace JSON based feature templates with generated code  :story:
     :LOGBOOK:
+    CLOCK: [2019-05-11 Sat 13:14]--[2019-05-11 Sat 13:24] =>  0:10
+    CLOCK: [2019-05-11 Sat 09:01]--[2019-05-11 Sat 09:30] =>  0:29
     CLOCK: [2019-05-11 Sat 07:08]--[2019-05-11 Sat 07:41] =>  0:33
     CLOCK: [2019-05-11 Sat 06:52]--[2019-05-11 Sat 07:07] =>  0:15
     CLOCK: [2019-05-11 Sat 06:42]--[2019-05-11 Sat 06:51] =>  0:09

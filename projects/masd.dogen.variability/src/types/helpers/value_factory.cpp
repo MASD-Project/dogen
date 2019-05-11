@@ -141,15 +141,10 @@ make_kvp(const std::unordered_map<std::string, std::string>& v) const {
     return boost::make_shared<meta_model::key_value_pair>(v);
 }
 
-boost::shared_ptr<meta_model::value>
-value_factory::make(const meta_model::feature& f,
-    const std::list<std::string>& v) const {
-
-    if (!is_collection(f.value_type()))
-        ensure_at_most_one_element(v);
-
+boost::shared_ptr<meta_model::value> value_factory::
+make(const meta_model::value_type& vt, const std::list<std::string>& v) const {
     using meta_model::value_type;
-    switch (f.value_type()) {
+    switch (vt) {
     case value_type::text:
         return make_text(v.front());
     case value_type::text_collection:
@@ -162,9 +157,19 @@ value_factory::make(const meta_model::feature& f,
         break;
     }
 
-    const auto s(boost::lexical_cast<std::string>(f.value_type()));
+    const auto s(boost::lexical_cast<std::string>(vt));
     BOOST_LOG_SEV(lg, error) << value_type_not_supported << s;
     BOOST_THROW_EXCEPTION(building_exception(value_type_not_supported + s));
+}
+
+boost::shared_ptr<meta_model::value>
+value_factory::make(const meta_model::feature& f,
+    const std::list<std::string>& v) const {
+
+    if (!is_collection(f.value_type()))
+        ensure_at_most_one_element(v);
+
+    return make(f.value_type(), v);
 }
 
 boost::shared_ptr<meta_model::value>
