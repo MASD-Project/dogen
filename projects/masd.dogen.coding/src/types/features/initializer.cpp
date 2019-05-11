@@ -20,6 +20,7 @@
  */
 #include "masd.dogen.coding/types/features/naming.hpp"
 #include "masd.dogen.coding/types/features/origin.hpp"
+#include "masd.dogen.coding/types/features/primitive.hpp"
 #include "masd.dogen.coding/types/features/enumerator.hpp"
 #include "masd.dogen.coding/types/features/enumeration.hpp"
 #include "masd.dogen.coding/types/features/initializer.hpp"
@@ -37,6 +38,7 @@ register_templates(variability::helpers::feature_template_registrar& rg) {
     rg.register_templates(naming::make_templates());
     rg.register_templates(origin::make_templates());
     rg.register_templates(output_technical_space::make_templates());
+    rg.register_templates(primitive::make_templates());
     rg.register_templates(type_parameters::make_templates());
 
 }

@@ -1,44 +1,6 @@
 [
   {
     "name": {
-      "simple": "underlying_element",
-      "qualified": "masd.primitive.underlying_element"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "text",
-    "template_kind": "instance",
-    "scope": "entity"
-  },
-  {
-    "name": {
-      "simple": "is_nullable",
-      "qualified": "masd.primitive.is_nullable"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "boolean",
-    "template_kind": "instance",
-    "scope": "entity",
-    "default_value": false
-  },
-  {
-    "name": {
-      "simple": "use_type_aliasing",
-      "qualified": "masd.primitive.use_type_aliasing"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "boolean",
-    "template_kind": "instance",
-    "scope": "entity",
-    "default_value": false
-  },
-  {
-    "name": {
       "simple": "database_system",
       "qualified": "masd.orm.database_system"
     },

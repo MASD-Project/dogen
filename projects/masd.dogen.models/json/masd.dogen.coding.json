@@ -2651,6 +2651,47 @@
           }
         }
       ]
+    },
+    {
+      "name": "features::primitive",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.primitive.underlying_element",
+          "type": "masd::variability::text",
+          "documentation": "Name of the underlying element to use for the primitive.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.primitive.is_nullable",
+          "type": "masd::variability::boolean",
+          "value": "false",
+          "documentation": "If true, the primitive can be null.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.primitive.use_type_aliasing",
+          "type": "masd::variability::boolean",
+          "value": "false",
+          "documentation": "If true, use type aliasing to implement the primitive if the technical space supports\nit.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        }
+      ]
     }
   ]
 }
