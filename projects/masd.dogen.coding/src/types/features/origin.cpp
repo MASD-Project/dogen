@@ -18,25 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.coding/types/features/naming.hpp"
 #include "masd.dogen.coding/types/features/origin.hpp"
-#include "masd.dogen.coding/types/features/enumerator.hpp"
-#include "masd.dogen.coding/types/features/enumeration.hpp"
-#include "masd.dogen.coding/types/features/initializer.hpp"
-#include "masd.dogen.coding/types/features/generalization.hpp"
-#include "masd.dogen.coding/types/features/type_parameters.hpp"
+#include "masd.dogen.variability/types/helpers/value_factory.hpp"
 
 namespace masd::dogen::coding::features {
 
-void initializer::
-register_templates(variability::helpers::feature_template_registrar& rg) {
-    rg.register_templates(enumeration::make_templates());
-    rg.register_templates(enumerator::make_templates());
-    rg.register_templates(generalization::make_templates());
-    rg.register_templates(naming::make_templates());
-    rg.register_templates(origin::make_templates());
-    rg.register_templates(type_parameters::make_templates());
+masd::dogen::variability::meta_model::feature_template
+make_masd_injection_is_proxy_model() {
+    using namespace masd::dogen::variability::meta_model;
+    feature_template r;
+    r.name().simple("is_proxy_model");
+    r.name().qualified("masd.injection.is_proxy_model");
+    const auto vt(value_type::boolean);
+    r.value_type(vt);
+    r.binding_point(binding_point::global);
+    r.kind(template_kind::instance);
+    masd::dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ "false" }));
 
+    archetypes::location al;
+    al.kernel("masd");
+
+     r.location(al);
+     return r;
+}
+
+std::list<masd::dogen::variability::meta_model::feature_template>
+origin::make_templates() {
+    using namespace masd::dogen::variability::meta_model;
+    std::list<feature_template> r;
+    r.push_back(make_masd_injection_is_proxy_model());
+    return r;
 }
 
 }

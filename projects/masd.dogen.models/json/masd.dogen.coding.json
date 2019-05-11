@@ -2610,6 +2610,27 @@
           }
         }
       ]
+    },
+    {
+      "name": "features::origin",
+      "documentation": "Features related to the origin of the model.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.injection.is_proxy_model",
+          "type": "masd::variability::boolean",
+          "value": "false",
+          "documentation": "If true, sets the origin of the model to \"proxy model\".\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        }
+      ]
     }
   ]
 }

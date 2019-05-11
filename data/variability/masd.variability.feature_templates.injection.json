@@ -1,19 +1,6 @@
 [
   {
     "name": {
-      "simple": "is_proxy_model",
-      "qualified": "masd.injection.is_proxy_model"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "boolean",
-    "template_kind": "instance",
-    "scope": "root_module",
-    "default_value": false
-  },
-  {
-    "name": {
       "simple": "output_technical_space",
       "qualified": "masd.extraction.output_technical_space"
     },
