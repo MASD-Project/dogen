@@ -12,14 +12,14 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-12 Sun 13:36]
+#+CAPTION: Clock summary at [2019-05-12 Sun 13:42]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *41:11* |       |       | 100.0 |
+| *Total time*                                               | *41:16* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 41:11   |       |       | 100.0 |
-| Active                                                     |         | 41:11 |       | 100.0 |
+| Stories                                                    | 41:16   |       |       | 100.0 |
+| Active                                                     |         | 41:16 |       | 100.0 |
 | Edit release notes for previous sprint                     |         |       |  2:41 |   6.5 |
 | Create a video demo for the previous sprint's features     |         |       |  2:11 |   5.3 |
 | Sprint and product backlog grooming                        |         |       |  1:01 |   2.5 |
@@ -30,7 +30,7 @@
 | Try to add relational tracing support                      |         |       |  2:51 |   6.9 |
 | Linux and OSX binaries are not stripped                    |         |       |  1:23 |   3.4 |
 | Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  17.5 |
-| Replace JSON based feature templates with generated code   |         |       | 12:27 |  30.2 |
+| Replace JSON based feature templates with generated code   |         |       | 12:32 |  30.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -404,6 +404,7 @@ Notes:
 
 *** STARTED Replace JSON based feature templates with generated code  :story:
     :LOGBOOK:
+    CLOCK: [2019-05-12 Sun 13:37]--[2019-05-12 Sun 13:42] =>  0:05
     CLOCK: [2019-05-12 Sun 13:21]--[2019-05-12 Sun 13:36] =>  0:15
     CLOCK: [2019-05-12 Sun 13:00]--[2019-05-12 Sun 13:20] =>  0:20
     CLOCK: [2019-05-12 Sun 12:56]--[2019-05-12 Sun 12:59] =>  0:03

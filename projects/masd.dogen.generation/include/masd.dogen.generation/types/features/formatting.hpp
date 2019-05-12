@@ -18,17 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.generation/types/features/decoration.hpp"
-#include "masd.dogen.generation/types/features/formatting.hpp"
-#include "masd.dogen.generation/types/features/initializer.hpp"
+#ifndef MASD_DOGEN_GENERATION_TYPES_FEATURES_FORMATTING_HPP
+#define MASD_DOGEN_GENERATION_TYPES_FEATURES_FORMATTING_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <list>
+#include "masd.dogen.variability/types/meta_model/feature_template.hpp"
 
 namespace masd::dogen::generation::features {
 
-void initializer::
-register_templates(variability::helpers::feature_template_registrar& rg) {
-    rg.register_templates(decoration::make_templates());
-    rg.register_templates(formatting::make_templates());
+/**
+ * @brief Features related to formatting.
+ */
+class formatting final {
+public:
+    static std::list<masd::dogen::variability::meta_model::feature_template>
+    make_templates();
+};
 
 }
 
-}
+#endif

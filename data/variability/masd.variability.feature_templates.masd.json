@@ -10,27 +10,5 @@
     "value_type": "text",
     "template_kind": "instance",
     "scope": "root_module"
-  },
-  {
-    "name": {
-      "simple": "formatting_style"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "text",
-    "template_kind": "archetype_template",
-    "scope": "any"
-  },
-  {
-    "name": {
-      "simple": "formatting_input"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "text",
-    "template_kind": "archetype_template",
-    "scope": "any"
   }
 ]

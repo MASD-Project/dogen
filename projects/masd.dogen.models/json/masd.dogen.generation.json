@@ -1046,6 +1046,36 @@
         "masd::variability::feature_template_initializer"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::formatting",
+      "documentation": "Features related to formatting.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "formatting_style",
+          "type": "masd::variability::text",
+          "documentation": "Style of formatting to use for this archetype.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "archetype_template",
+            "masd.variability.binding_point": "any"
+          }
+        },
+        {
+          "name": "formatting_input",
+          "type": "masd::variability::text",
+          "documentation": "If the formatting style requires a template, the name of the template to use.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "archetype_template",
+            "masd.variability.binding_point": "any"
+          }
+        }
+      ]
     }
   ]
 }
