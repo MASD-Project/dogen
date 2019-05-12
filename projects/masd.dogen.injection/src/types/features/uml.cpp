@@ -19,18 +19,34 @@
  *
  */
 #include "masd.dogen.injection/types/features/uml.hpp"
-#include "masd.dogen.injection/types/features/reference.hpp"
-#include "masd.dogen.injection/types/features/registrar.hpp"
-#include "masd.dogen.injection/types/features/input_technical_space.hpp"
+#include "masd.dogen.variability/types/helpers/value_factory.hpp"
 
 namespace masd::dogen::injection::features {
 
-void registrar::
-register_templates(variability::helpers::feature_template_registrar& rg) {
-    rg.register_templates(input_technical_space::make_templates());
-    rg.register_templates(reference::make_templates());
-    rg.register_templates(uml::make_templates());
+masd::dogen::variability::meta_model::feature_template
+make_masd_injection_dia_comment() {
+    using namespace masd::dogen::variability::meta_model;
+    feature_template r;
+    r.name().simple("comment");
+    r.name().qualified("masd.injection.dia.comment");
+    const auto vt(value_type::boolean);
+    r.value_type(vt);
+    r.binding_point(binding_point::any);
+    r.kind(template_kind::instance);
 
+    archetypes::location al;
+    al.kernel("masd");
+
+     r.location(al);
+     return r;
+}
+
+std::list<masd::dogen::variability::meta_model::feature_template>
+uml::make_templates() {
+    using namespace masd::dogen::variability::meta_model;
+    std::list<feature_template> r;
+    r.push_back(make_masd_injection_dia_comment());
+    return r;
 }
 
 }
