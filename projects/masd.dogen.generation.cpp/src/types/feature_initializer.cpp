@@ -19,12 +19,14 @@
  *
  */
 #include "masd.dogen.generation.cpp/types/feature_initializer.hpp"
-#include "masd.dogen.generation.cpp/types/formatters/features.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/io/features.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/odb/features.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/hash/features.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/facet_features.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/tests/features.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/types/features.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/global_features.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/archetype_features.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/test_data/features.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/serialization/features.hpp"
 
@@ -32,7 +34,9 @@ namespace masd::dogen::generation::cpp {
 
 void feature_initializer::
 register_templates(variability::helpers::feature_template_registrar& rg) {
-    rg.register_templates(masd::dogen::generation::cpp::formatters::features::make_templates());
+    rg.register_templates(masd::dogen::generation::cpp::formatters::archetype_features::make_templates());
+    rg.register_templates(masd::dogen::generation::cpp::formatters::facet_features::make_templates());
+    rg.register_templates(masd::dogen::generation::cpp::formatters::global_features::make_templates());
     rg.register_templates(masd::dogen::generation::cpp::formatters::hash::features::make_templates());
     rg.register_templates(masd::dogen::generation::cpp::formatters::io::features::make_templates());
     rg.register_templates(masd::dogen::generation::cpp::formatters::odb::features::make_templates());

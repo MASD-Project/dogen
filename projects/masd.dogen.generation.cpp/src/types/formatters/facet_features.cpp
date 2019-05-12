@@ -19,25 +19,47 @@
  *
  */
 #include "masd.dogen.variability/types/helpers/value_factory.hpp"
-#include "masd.dogen.generation.cpp/types/formatters/features.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/facet_features.hpp"
 
 namespace masd::dogen::generation::cpp::formatters {
 
 namespace {
 
 masd::dogen::variability::meta_model::feature_template
-make_masd_generation_cpp_headers_output_directory() {
+make_supported() {
     using namespace masd::dogen::variability::meta_model;
     feature_template r;
-    r.name().simple("cpp_headers_output_directory");
-    r.name().qualified("masd.generation.cpp_headers_output_directory");
-    const auto vt(value_type::text);
+    r.name().simple("supported");
+    const auto vt(value_type::boolean);
     r.value_type(vt);
-    r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
+    r.binding_point(binding_point::element);
+    r.kind(template_kind::facet_template);
+    masd::dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ "true" }));
 
     archetypes::location al;
     al.kernel("masd");
+    al.backend("masd.generation.cpp");
+
+     r.location(al);
+     return r;
+}
+
+masd::dogen::variability::meta_model::feature_template
+make_overwrite() {
+    using namespace masd::dogen::variability::meta_model;
+    feature_template r;
+    r.name().simple("overwrite");
+    const auto vt(value_type::boolean);
+    r.value_type(vt);
+    r.binding_point(binding_point::element);
+    r.kind(template_kind::facet_template);
+    masd::dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ "true" }));
+
+    archetypes::location al;
+    al.kernel("masd");
+    al.backend("masd.generation.cpp");
 
      r.location(al);
      return r;
@@ -46,10 +68,11 @@ make_masd_generation_cpp_headers_output_directory() {
 }
 
 std::list<masd::dogen::variability::meta_model::feature_template>
-features::make_templates() {
+facet_features::make_templates() {
     using namespace masd::dogen::variability::meta_model;
     std::list<feature_template> r;
-    r.push_back(make_masd_generation_cpp_headers_output_directory());
+    r.push_back(make_supported());
+    r.push_back(make_overwrite());
     return r;
 }
 

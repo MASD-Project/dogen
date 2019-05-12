@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_FEATURES_HPP
-#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_FEATURES_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_FACET_FEATURES_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_FACET_FEATURES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 
 namespace masd::dogen::generation::cpp::formatters {
 
-class features final {
+class facet_features final {
 public:
     static std::list<masd::dogen::variability::meta_model::feature_template>
     make_templates();

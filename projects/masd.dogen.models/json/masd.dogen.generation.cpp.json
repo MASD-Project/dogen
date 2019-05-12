@@ -2926,7 +2926,7 @@
       ]
     },
     {
-      "name": "formatters::features",
+      "name": "formatters::global_features",
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
@@ -2940,6 +2940,314 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.directory",
+          "type": "masd::variability::text",
+          "value": "\"cpp\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.inclusion_required",
+          "type": "masd::variability::boolean",
+          "value": "\"true\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.source_directory_name",
+          "type": "masd::variability::text",
+          "value": "\"src\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.include_directory_name",
+          "type": "masd::variability::text",
+          "value": "\"include\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.tests_directory_name",
+          "type": "masd::variability::text",
+          "value": "\"tests\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.header_file_extension",
+          "type": "masd::variability::text",
+          "value": "\"hpp\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.implementation_file_extension",
+          "type": "masd::variability::text",
+          "value": "\"cpp\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.enable_unique_file_names",
+          "type": "masd::variability::boolean",
+          "value": "\"true\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.aspect.requires_manual_default_constructor",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.aspect.requires_manual_move_constructor",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.aspect.requires_stream_manipulators",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.disable_facet_directories",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.standard",
+          "type": "masd::variability::text",
+          "value": "\"c++-14\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.helper.family",
+          "type": "masd::variability::text",
+          "value": "\"Default\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.streaming.string_conversion_method",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.streaming.requires_quoting",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.streaming.remove_unprintable_characters",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.cmake.source_cmakelists.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.cmake.include_cmakelists.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.msbuild.targets.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.visual_studio.project_solution_guid",
+          "type": "masd::variability::text",
+          "value": "\"00000000-0000-0000-0000-000000000000\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.visual_studio.project_guid",
+          "type": "masd::variability::text",
+          "value": "\"00000000-0000-0000-0000-000000000000\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.visual_studio.solution.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.visual_studio.project.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        }
+      ]
+    },
+    {
+      "name": "formatters::facet_features",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "supported",
+          "type": "masd::variability::boolean",
+          "value": "\"true\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "facet_template",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "overwrite",
+          "type": "masd::variability::boolean",
+          "value": "\"true\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "facet_template",
+            "masd.variability.binding_point": "element"
+          }
+        }
+      ]
+    },
+    {
+      "name": "formatters::archetype_features",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "overwrite",
+          "type": "masd::variability::boolean",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "archetype_template",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "primary_inclusion_directive",
+          "type": "masd::variability::text",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "archetype_template",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "secondary_inclusion_directive",
+          "type": "masd::variability::text_collection",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "archetype_template",
+            "masd.variability.binding_point": "element"
           }
         }
       ]
