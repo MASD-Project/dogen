@@ -115,6 +115,8 @@ format(const context& ctx, const coding::meta_model::element& e) const {
             auto snf(a.make_scoped_namespace_formatter(ns));
             using namespace variability::helpers;
             using utility::string::splitter;
+a.stream() << std::endl;
+a.stream() << "namespace {" << std::endl;
             for (const auto& fb_ft : fb.feature_templates()) {
                 const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
                 const bool has_qualified_name(simple_key != fb_ft.key());
@@ -150,6 +152,8 @@ a.stream() << "     r.location(al);" << std::endl;
 a.stream() << "     return r;" << std::endl;
 a.stream() << "}" << std::endl;
             }
+a.stream() << std::endl;
+a.stream() << "}" << std::endl;
 a.stream() << std::endl;
 a.stream() << "std::list<masd::dogen::variability::meta_model::feature_template>" << std::endl;
 a.stream() << sn << "::make_templates() {" << std::endl;

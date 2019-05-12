@@ -23,6 +23,8 @@
 
 namespace masd::dogen::generation::cpp::formatters::hash {
 
+namespace {
+
 masd::dogen::variability::meta_model::feature_template
 make_masd_generation_cpp_hash_directory() {
     using namespace masd::dogen::variability::meta_model;
@@ -221,6 +223,8 @@ make_masd_generation_cpp_hash_builtin_header_postfix() {
 
      r.location(al);
      return r;
+}
+
 }
 
 std::list<masd::dogen::variability::meta_model::feature_template>

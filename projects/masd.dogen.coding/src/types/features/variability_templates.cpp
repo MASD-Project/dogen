@@ -23,6 +23,8 @@
 
 namespace masd::dogen::coding::features {
 
+namespace {
+
 masd::dogen::variability::meta_model::feature_template
 make_masd_variability_binding_point() {
     using namespace masd::dogen::variability::meta_model;
@@ -165,6 +167,8 @@ make_masd_variability_value() {
 
      r.location(al);
      return r;
+}
+
 }
 
 std::list<masd::dogen::variability::meta_model::feature_template>

@@ -23,6 +23,8 @@
 
 namespace masd::dogen::generation::features {
 
+namespace {
+
 masd::dogen::variability::meta_model::feature_template
 make_masd_generation_decoration_enabled() {
     using namespace masd::dogen::variability::meta_model;
@@ -111,6 +113,8 @@ make_masd_generation_decoration_marker_name() {
 
      r.location(al);
      return r;
+}
+
 }
 
 std::list<masd::dogen::variability::meta_model::feature_template>

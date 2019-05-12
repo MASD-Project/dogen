@@ -23,6 +23,8 @@
 
 namespace masd::dogen::coding::features {
 
+namespace {
+
 masd::dogen::variability::meta_model::feature_template
 make_masd_injection_is_proxy_model() {
     using namespace masd::dogen::variability::meta_model;
@@ -41,6 +43,8 @@ make_masd_injection_is_proxy_model() {
 
      r.location(al);
      return r;
+}
+
 }
 
 std::list<masd::dogen::variability::meta_model::feature_template>

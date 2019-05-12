@@ -55,6 +55,10 @@ format(const context& ctx, const coding::meta_model::element& e) const {
             auto snf(a.make_scoped_namespace_formatter(ns));
             using namespace variability::helpers;
             using utility::string::splitter;
+#>
+
+namespace {
+<#+
             for (const auto& fb_ft : fb.feature_templates()) {
                 const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
                 const bool has_qualified_name(simple_key != fb_ft.key());
@@ -109,6 +113,8 @@ make_<#= fb_ft.identifiable_key() #>() {
 <#+
             }
 #>
+
+}
 
 std::list<masd::dogen::variability::meta_model::feature_template>
 <#= sn #>::make_templates() {

@@ -23,6 +23,8 @@
 
 namespace masd::dogen::coding::features {
 
+namespace {
+
 masd::dogen::variability::meta_model::feature_template
 make_masd_type_parameters_variable_number_of_parameters() {
     using namespace masd::dogen::variability::meta_model;
@@ -81,6 +83,8 @@ make_masd_type_parameters_always_in_heap() {
 
      r.location(al);
      return r;
+}
+
 }
 
 std::list<masd::dogen::variability::meta_model::feature_template>

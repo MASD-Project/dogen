@@ -23,6 +23,8 @@
 
 namespace masd::dogen::coding::features {
 
+namespace {
+
 masd::dogen::variability::meta_model::feature_template
 make_masd_enumeration_use_implementation_defined_underlying_element() {
     using namespace masd::dogen::variability::meta_model;
@@ -79,6 +81,8 @@ make_masd_enumeration_use_implementation_defined_enumerator_values() {
 
      r.location(al);
      return r;
+}
+
 }
 
 std::list<masd::dogen::variability::meta_model::feature_template>

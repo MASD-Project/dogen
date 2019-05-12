@@ -23,6 +23,8 @@
 
 namespace masd::dogen::generation::features {
 
+namespace {
+
 masd::dogen::variability::meta_model::feature_template
 make_formatting_style() {
     using namespace masd::dogen::variability::meta_model;
@@ -55,6 +57,8 @@ make_formatting_input() {
 
      r.location(al);
      return r;
+}
+
 }
 
 std::list<masd::dogen::variability::meta_model::feature_template>

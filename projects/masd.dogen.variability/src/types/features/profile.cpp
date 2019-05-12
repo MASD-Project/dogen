@@ -23,6 +23,8 @@
 
 namespace masd::dogen::variability::features {
 
+namespace {
+
 masd::dogen::variability::meta_model::feature_template
 make_masd_variability_profile() {
     using namespace masd::dogen::variability::meta_model;
@@ -39,6 +41,8 @@ make_masd_variability_profile() {
 
      r.location(al);
      return r;
+}
+
 }
 
 std::list<masd::dogen::variability::meta_model::feature_template>

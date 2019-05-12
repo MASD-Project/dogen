@@ -23,6 +23,8 @@
 
 namespace masd::dogen::generation::cpp::formatters::tests {
 
+namespace {
+
 masd::dogen::variability::meta_model::feature_template
 make_masd_generation_cpp_tests_directory() {
     using namespace masd::dogen::variability::meta_model;
@@ -161,6 +163,8 @@ make_masd_generation_cpp_tests_cmakelists_postfix() {
 
      r.location(al);
      return r;
+}
+
 }
 
 std::list<masd::dogen::variability::meta_model::feature_template>

@@ -23,6 +23,8 @@
 
 namespace masd::dogen::extraction::features {
 
+namespace {
+
 masd::dogen::variability::meta_model::feature_template
 make_masd_extraction_force_write() {
     using namespace masd::dogen::variability::meta_model;
@@ -119,6 +121,8 @@ make_masd_extraction_enable_backend_directories() {
 
      r.location(al);
      return r;
+}
+
 }
 
 std::list<masd::dogen::variability::meta_model::feature_template>

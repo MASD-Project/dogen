@@ -23,6 +23,8 @@
 
 namespace masd::dogen::coding::features {
 
+namespace {
+
 masd::dogen::variability::meta_model::feature_template
 make_masd_orm_database_system() {
     using namespace masd::dogen::variability::meta_model;
@@ -183,6 +185,8 @@ make_masd_orm_type_override() {
 
      r.location(al);
      return r;
+}
+
 }
 
 std::list<masd::dogen::variability::meta_model::feature_template>

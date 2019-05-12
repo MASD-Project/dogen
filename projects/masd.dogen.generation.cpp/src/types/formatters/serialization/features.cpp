@@ -23,6 +23,8 @@
 
 namespace masd::dogen::generation::cpp::formatters::serialization {
 
+namespace {
+
 masd::dogen::variability::meta_model::feature_template
 make_masd_generation_cpp_serialization_directory() {
     using namespace masd::dogen::variability::meta_model;
@@ -261,6 +263,8 @@ make_masd_generation_cpp_serialization_builtin_header_postfix() {
 
      r.location(al);
      return r;
+}
+
 }
 
 std::list<masd::dogen::variability::meta_model::feature_template>

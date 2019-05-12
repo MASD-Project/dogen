@@ -23,6 +23,8 @@
 
 namespace masd::dogen::generation::cpp::formatters::types {
 
+namespace {
+
 masd::dogen::variability::meta_model::feature_template
 make_masd_generation_cpp_types_directory() {
     using namespace masd::dogen::variability::meta_model;
@@ -381,6 +383,8 @@ make_masd_generation_cpp_types_feature_template_initializer_implementation_postf
 
      r.location(al);
      return r;
+}
+
 }
 
 std::list<masd::dogen::variability::meta_model::feature_template>

@@ -23,6 +23,8 @@
 
 namespace masd::dogen::coding::features {
 
+namespace {
+
 masd::dogen::variability::meta_model::feature_template
 make_masd_injection_external_modules() {
     using namespace masd::dogen::variability::meta_model;
@@ -57,6 +59,8 @@ make_masd_injection_model_modules() {
 
      r.location(al);
      return r;
+}
+
 }
 
 std::list<masd::dogen::variability::meta_model::feature_template>

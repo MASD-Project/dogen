@@ -23,6 +23,8 @@
 
 namespace masd::dogen::injection::features {
 
+namespace {
+
 masd::dogen::variability::meta_model::feature_template
 make_masd_injection_input_technical_space() {
     using namespace masd::dogen::variability::meta_model;
@@ -41,6 +43,8 @@ make_masd_injection_input_technical_space() {
 
      r.location(al);
      return r;
+}
+
 }
 
 std::list<masd::dogen::variability::meta_model::feature_template>

@@ -23,6 +23,8 @@
 
 namespace masd::dogen::archetypes::features {
 
+namespace {
+
 masd::dogen::variability::meta_model::feature_template
 make_enabled() {
     using namespace masd::dogen::variability::meta_model;
@@ -40,6 +42,8 @@ make_enabled() {
 
      r.location(al);
      return r;
+}
+
 }
 
 std::list<masd::dogen::variability::meta_model::feature_template>
