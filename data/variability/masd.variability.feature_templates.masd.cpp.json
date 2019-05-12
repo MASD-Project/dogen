@@ -53,20 +53,6 @@
   },
   {
     "name": {
-      "simple": "profile",
-      "qualified": "masd.generation.cpp.profile"
-    },
-    "archetype_location": {
-      "kernel": "masd",
-      "backend": "masd.generation.cpp"
-    },
-    "value_type": "text",
-    "template_kind": "instance",
-    "scope": "entity",
-    "default_value": "default"
-  },
-  {
-    "name": {
       "simple": "inclusion_required",
       "qualified": "masd.generation.cpp.inclusion_required"
     },
