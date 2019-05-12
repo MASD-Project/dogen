@@ -2845,6 +2845,85 @@
           }
         }
       ]
+    },
+    {
+      "name": "formatters::tests::features",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.cpp.tests.directory",
+          "type": "masd::variability::text",
+          "value": "\"tests\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.tests.postfix",
+          "type": "masd::variability::text",
+          "value": "\"tests\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.tests.class_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.tests.enum_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.tests.master_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.tests.main.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.tests.cmakelists.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        }
+      ]
     }
   ]
 }
