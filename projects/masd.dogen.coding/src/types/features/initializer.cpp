@@ -28,6 +28,7 @@
 #include "masd.dogen.coding/types/features/generalization.hpp"
 #include "masd.dogen.coding/types/features/type_parameters.hpp"
 #include "masd.dogen.coding/types/features/decoration_modeline.hpp"
+#include "masd.dogen.coding/types/features/variability_templates.hpp"
 #include "masd.dogen.coding/types/features/output_technical_space.hpp"
 
 namespace masd::dogen::coding::features {
@@ -44,6 +45,7 @@ register_templates(variability::helpers::feature_template_registrar& rg) {
     rg.register_templates(output_technical_space::make_templates());
     rg.register_templates(primitive::make_templates());
     rg.register_templates(type_parameters::make_templates());
+    rg.register_templates(variability_templates::make_templates());
 
 }
 

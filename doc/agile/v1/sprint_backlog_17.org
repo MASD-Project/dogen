@@ -12,25 +12,25 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-12 Sun 10:36]
+#+CAPTION: Clock summary at [2019-05-12 Sun 12:51]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *40:19* |       |       | 100.0 |
+| *Total time*                                               | *40:30* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 40:19   |       |       | 100.0 |
-| Active                                                     |         | 40:19 |       | 100.0 |
-| Edit release notes for previous sprint                     |         |       |  2:41 |   6.7 |
+| Stories                                                    | 40:30   |       |       | 100.0 |
+| Active                                                     |         | 40:30 |       | 100.0 |
+| Edit release notes for previous sprint                     |         |       |  2:41 |   6.6 |
 | Create a video demo for the previous sprint's features     |         |       |  2:11 |   5.4 |
 | Sprint and product backlog grooming                        |         |       |  1:01 |   2.5 |
 | Defining profiles directly on a target model does not work |         |       |  0:30 |   1.2 |
 | Inner modules need to be qualified                         |         |       |  0:22 |   0.9 |
-| Create namespaces for model elements                       |         |       |  8:59 |  22.3 |
+| Create namespaces for model elements                       |         |       |  8:59 |  22.2 |
 | Leaves in internal modules are not captured correctly      |         |       |  1:33 |   3.8 |
-| Try to add relational tracing support                      |         |       |  2:51 |   7.1 |
+| Try to add relational tracing support                      |         |       |  2:51 |   7.0 |
 | Linux and OSX binaries are not stripped                    |         |       |  1:23 |   3.4 |
-| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  17.9 |
-| Replace JSON based feature templates with generated code   |         |       | 11:35 |  28.7 |
+| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  17.8 |
+| Replace JSON based feature templates with generated code   |         |       | 11:46 |  29.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -404,6 +404,7 @@ Notes:
 
 *** STARTED Replace JSON based feature templates with generated code  :story:
     :LOGBOOK:
+    CLOCK: [2019-05-12 Sun 12:40]--[2019-05-12 Sun 12:51] =>  0:11
     CLOCK: [2019-05-12 Sun 10:27]--[2019-05-12 Sun 10:36] =>  0:09
     CLOCK: [2019-05-12 Sun 10:05]--[2019-05-12 Sun 10:26] =>  0:21
     CLOCK: [2019-05-12 Sun 09:25]--[2019-05-12 Sun 09:29] =>  0:04
@@ -478,6 +479,12 @@ Notes:
 - why are there multiple decoration related fields? some are
   =masd.decoration= others are
   =masd.generation.decoration=. Investigate how they are used.
+
+*** Make labels a plain text field not a collection                   :story:
+
+At present it is possible to label a profile with multiple
+labels. This is not a good idea. Make it a plain text field so we can
+only apply a single label.
 
 *** Add a method in enumeration that converts it from strings         :story:
 

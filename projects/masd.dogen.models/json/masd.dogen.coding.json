@@ -2836,6 +2836,96 @@
           }
         }
       ]
+    },
+    {
+      "name": "features::variability_templates",
+      "documentation": "Features related to the processing of variability for feature and profile templates.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.variability.binding_point",
+          "type": "masd::variability::text",
+          "documentation": "Where does this configuration bind.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "any"
+          }
+        },
+        {
+          "name": "masd.variability.labels",
+          "type": "masd::variability::text_collection",
+          "documentation": "Labels to apply to this profile. These are used for binding, via stereotypes.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.variability.archetype_location.kernel",
+          "type": "masd::variability::text",
+          "documentation": "Kernel for a facet or profile template.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "property"
+          }
+        },
+        {
+          "name": "masd.variability.archetype_location.backend",
+          "type": "masd::variability::text",
+          "documentation": "Kernel for a facet or profile template.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "property"
+          }
+        },
+        {
+          "name": "masd.variability.archetype_location.facet",
+          "type": "masd::variability::text",
+          "documentation": "Facet for a facet or profile template.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "property"
+          }
+        },
+        {
+          "name": "masd.variability.archetype_location.archetype",
+          "type": "masd::variability::text",
+          "documentation": "Archetype for a facet or profile template.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "property"
+          }
+        },
+        {
+          "name": "masd.variability.template_kind",
+          "type": "masd::variability::text",
+          "documentation": "Template kind for a facet or profile template.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "property"
+          }
+        },
+        {
+          "name": "masd.variability.value",
+          "type": "masd::variability::text_collection",
+          "documentation": "Value for a facet or profile template.\n\nValue as meta-data should be used only for collections, for single values prefer\nthe default value field if available.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "property"
+          }
+        }
+      ]
     }
   ]
 }
