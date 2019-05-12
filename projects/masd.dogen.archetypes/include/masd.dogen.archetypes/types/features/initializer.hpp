@@ -18,21 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ARCHETYPES_TYPES_ALL_HPP
-#define MASD_DOGEN_ARCHETYPES_TYPES_ALL_HPP
+#ifndef MASD_DOGEN_ARCHETYPES_TYPES_FEATURES_INITIALIZER_HPP
+#define MASD_DOGEN_ARCHETYPES_TYPES_FEATURES_INITIALIZER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.archetypes/types/location.hpp"
-#include "masd.dogen.archetypes/types/archetypes.hpp"
-#include "masd.dogen.archetypes/types/building_error.hpp"
-#include "masd.dogen.archetypes/types/locations_group.hpp"
-#include "masd.dogen.archetypes/types/features/features.hpp"
-#include "masd.dogen.archetypes/types/location_repository.hpp"
-#include "masd.dogen.archetypes/types/location_repository_parts.hpp"
-#include "masd.dogen.archetypes/types/location_repository_builder.hpp"
-#include "masd.dogen.archetypes/types/location_repository_parts_builder.hpp"
+#include "masd.dogen.variability/types/meta_model/feature_template.hpp"
+#include "masd.dogen.variability/types/helpers/feature_template_registrar.hpp"
+
+namespace masd::dogen::archetypes::features {
+
+/**
+ * @brief Registers all of the available feature templates with registrar.
+ */
+class initializer final {
+public:
+    static void register_templates(
+        variability::helpers::feature_template_registrar& rg);
+};
+
+}
 
 #endif

@@ -149,6 +149,41 @@
         "masd::exception"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features",
+      "documentation": "Features for the archetype model.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "features::enablement",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "masd::variability::boolean",
+          "value": "true",
+          "documentation": "If true, decorations are enabled on this modeling element.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "recursive_template",
+            "masd.variability.binding_point": "any"
+          }
+        }
+      ]
+    },
+    {
+      "name": "features::initializer",
+      "stereotypes": [
+        "masd::variability::feature_template_initializer"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

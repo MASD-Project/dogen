@@ -1,18 +1,6 @@
 [
   {
     "name": {
-      "simple": "enabled"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "boolean",
-    "template_kind": "recursive_template",
-    "scope": "any",
-    "default_value": true
-  },
-  {
-    "name": {
       "simple": "force_write",
       "qualified": "masd.extraction.force_write"
     },

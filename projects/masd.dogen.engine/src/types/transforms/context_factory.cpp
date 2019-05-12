@@ -23,6 +23,7 @@
 #include "masd.dogen.utility/types/filesystem/path.hpp"
 #include "masd.dogen.utility/types/filesystem/file.hpp"
 #include "masd.dogen.tracing/types/tracer.hpp"
+#include "masd.dogen.archetypes/types/features/initializer.hpp"
 #include "masd.dogen.archetypes/io/location_repository_io.hpp"
 #include "masd.dogen.archetypes/types/location_repository_builder.hpp"
 #include "masd.dogen.variability/types/features/initializer.hpp"
@@ -192,6 +193,7 @@ context context_factory::make_context(const configuration& cfg,
     coding::features::initializer::register_templates(ftrg);
     generation::features::initializer::register_templates(ftrg);
     variability::features::initializer::register_templates(ftrg);
+    archetypes::features::initializer::register_templates(ftrg);
     const auto ftrp(ftrg.repository());
     const auto fm(feature_model_production_chain::apply(vctx, ftrp));
     r.injection_context().feature_model(fm);

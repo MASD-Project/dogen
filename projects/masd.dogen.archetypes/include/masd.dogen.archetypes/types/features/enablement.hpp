@@ -18,21 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_ARCHETYPES_TYPES_ALL_HPP
-#define MASD_DOGEN_ARCHETYPES_TYPES_ALL_HPP
+#ifndef MASD_DOGEN_ARCHETYPES_TYPES_FEATURES_ENABLEMENT_HPP
+#define MASD_DOGEN_ARCHETYPES_TYPES_FEATURES_ENABLEMENT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.archetypes/types/location.hpp"
-#include "masd.dogen.archetypes/types/archetypes.hpp"
-#include "masd.dogen.archetypes/types/building_error.hpp"
-#include "masd.dogen.archetypes/types/locations_group.hpp"
-#include "masd.dogen.archetypes/types/features/features.hpp"
-#include "masd.dogen.archetypes/types/location_repository.hpp"
-#include "masd.dogen.archetypes/types/location_repository_parts.hpp"
-#include "masd.dogen.archetypes/types/location_repository_builder.hpp"
-#include "masd.dogen.archetypes/types/location_repository_parts_builder.hpp"
+#include <list>
+#include "masd.dogen.variability/types/meta_model/feature_template.hpp"
+
+namespace masd::dogen::archetypes::features {
+
+class enablement final {
+public:
+    static std::list<masd::dogen::variability::meta_model::feature_template>
+    make_templates();
+};
+
+}
 
 #endif
