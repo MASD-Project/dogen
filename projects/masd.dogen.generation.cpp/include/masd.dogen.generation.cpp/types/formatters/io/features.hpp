@@ -18,19 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.generation.cpp/types/feature_initializer.hpp"
-#include "masd.dogen.generation.cpp/types/formatters/io/features.hpp"
-#include "masd.dogen.generation.cpp/types/formatters/hash/features.hpp"
-#include "masd.dogen.generation.cpp/types/formatters/types/features.hpp"
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_IO_FEATURES_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_IO_FEATURES_HPP
 
-namespace masd::dogen::generation::cpp {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-void feature_initializer::
-register_templates(variability::helpers::feature_template_registrar& rg) {
-    rg.register_templates(masd::dogen::generation::cpp::formatters::hash::features::make_templates());
-    rg.register_templates(masd::dogen::generation::cpp::formatters::io::features::make_templates());
-    rg.register_templates(masd::dogen::generation::cpp::formatters::types::features::make_templates());
+#include <list>
+#include "masd.dogen.variability/types/meta_model/feature_template.hpp"
+
+namespace masd::dogen::generation::cpp::formatters::io {
+
+class features final {
+public:
+    static std::list<masd::dogen::variability::meta_model::feature_template>
+    make_templates();
+};
 
 }
 
-}
+#endif
