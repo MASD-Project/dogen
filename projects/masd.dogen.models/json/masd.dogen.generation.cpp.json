@@ -2498,6 +2498,115 @@
           }
         }
       ]
+    },
+    {
+      "name": "formatters::odb::features",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.cpp.odb.directory",
+          "type": "masd::variability::text",
+          "value": "\"odb\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.odb.postfix",
+          "type": "masd::variability::text",
+          "value": "\"pragmas\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.odb.class_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.odb.enum_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.odb.primitive_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.odb.common_odb_options.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.odb.object_odb_options.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.odb.master_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.odb.pragma",
+          "type": "masd::variability::text_collection",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "any"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.odb.builtin_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        }
+      ]
     }
   ]
 }

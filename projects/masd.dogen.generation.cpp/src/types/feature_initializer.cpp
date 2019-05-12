@@ -20,6 +20,7 @@
  */
 #include "masd.dogen.generation.cpp/types/feature_initializer.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/io/features.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/odb/features.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/hash/features.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/types/features.hpp"
 
@@ -29,6 +30,7 @@ void feature_initializer::
 register_templates(variability::helpers::feature_template_registrar& rg) {
     rg.register_templates(masd::dogen::generation::cpp::formatters::hash::features::make_templates());
     rg.register_templates(masd::dogen::generation::cpp::formatters::io::features::make_templates());
+    rg.register_templates(masd::dogen::generation::cpp::formatters::odb::features::make_templates());
     rg.register_templates(masd::dogen::generation::cpp::formatters::types::features::make_templates());
 
 }
