@@ -2924,6 +2924,25 @@
           }
         }
       ]
+    },
+    {
+      "name": "formatters::features",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.cpp_headers_output_directory",
+          "type": "masd::variability::text",
+          "documentation": "Override location of public c++ headers.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        }
+      ]
     }
   ]
 }
