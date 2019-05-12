@@ -1,42 +1,6 @@
 [
   {
     "name": {
-      "simple": "editor",
-      "qualified": "masd.decoration.modeline.editor"
-    },
-    "archetype_location": {
-      "kernel": "formatters"
-    },
-    "value_type": "text",
-    "template_kind": "instance",
-    "scope": "any"
-  },
-  {
-    "name": {
-      "simple": "location",
-      "qualified": "masd.decoration.modeline.location"
-    },
-    "archetype_location": {
-      "kernel": "formatters"
-    },
-    "value_type": "text",
-    "template_kind": "instance",
-    "scope": "any"
-  },
-  {
-    "name": {
-      "simple": "technical_space",
-      "qualified": "masd.decoration.modeline.technical_space"
-    },
-    "archetype_location": {
-      "kernel": "formatters"
-    },
-    "value_type": "text",
-    "template_kind": "instance",
-    "scope": "any"
-  },
-  {
-    "name": {
       "simple": "enabled",
       "qualified": "masd.generation.decoration.enabled"
     },

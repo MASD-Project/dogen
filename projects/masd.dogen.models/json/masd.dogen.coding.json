@@ -2793,6 +2793,45 @@
           }
         }
       ]
+    },
+    {
+      "name": "features::decoration_modeline",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.decoration.modeline.editor",
+          "type": "masd::variability::text",
+          "documentation": "Editor to use in this modeline.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "any"
+          }
+        },
+        {
+          "name": "masd.decoration.modeline.location",
+          "type": "masd::variability::text",
+          "documentation": "Where to place the modeline.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "any"
+          }
+        },
+        {
+          "name": "masd.decoration.modeline.technical_space",
+          "type": "masd::variability::text",
+          "documentation": "Technical space targeted by the modeline.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "any"
+          }
+        }
+      ]
     }
   ]
 }

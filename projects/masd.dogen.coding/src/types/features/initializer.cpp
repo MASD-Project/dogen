@@ -27,12 +27,14 @@
 #include "masd.dogen.coding/types/features/initializer.hpp"
 #include "masd.dogen.coding/types/features/generalization.hpp"
 #include "masd.dogen.coding/types/features/type_parameters.hpp"
+#include "masd.dogen.coding/types/features/decoration_modeline.hpp"
 #include "masd.dogen.coding/types/features/output_technical_space.hpp"
 
 namespace masd::dogen::coding::features {
 
 void initializer::
 register_templates(variability::helpers::feature_template_registrar& rg) {
+    rg.register_templates(decoration_modeline::make_templates());
     rg.register_templates(enumeration::make_templates());
     rg.register_templates(enumerator::make_templates());
     rg.register_templates(generalization::make_templates());
