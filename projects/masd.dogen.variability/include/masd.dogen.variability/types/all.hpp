@@ -29,6 +29,7 @@
 #include "masd.dogen.variability/types/meta_model/name.hpp"
 #include "masd.dogen.variability/types/meta_model/text.hpp"
 #include "masd.dogen.variability/types/meta_model/value.hpp"
+#include "masd.dogen.variability/types/features/features.hpp"
 #include "masd.dogen.variability/types/meta_model/number.hpp"
 #include "masd.dogen.variability/types/meta_model/boolean.hpp"
 #include "masd.dogen.variability/types/meta_model/element.hpp"
