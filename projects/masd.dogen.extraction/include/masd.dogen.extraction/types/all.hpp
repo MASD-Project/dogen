@@ -28,6 +28,7 @@
 #include "masd.dogen.extraction/types/traits.hpp"
 #include "masd.dogen.extraction/types/extraction.hpp"
 #include "masd.dogen.extraction/types/meta_model/model.hpp"
+#include "masd.dogen.extraction/types/features/features.hpp"
 #include "masd.dogen.extraction/types/transforms/context.hpp"
 #include "masd.dogen.extraction/types/meta_model/artefact.hpp"
 #include "masd.dogen.extraction/types/meta_model/operation.hpp"

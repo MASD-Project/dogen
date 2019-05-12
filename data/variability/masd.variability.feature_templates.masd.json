@@ -1,57 +1,6 @@
 [
   {
     "name": {
-      "simple": "force_write",
-      "qualified": "masd.extraction.force_write"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "boolean",
-    "template_kind": "instance",
-    "scope": "root_module",
-    "default_value": false
-  },
-  {
-    "name": {
-      "simple": "delete_extra_files",
-      "qualified": "masd.extraction.delete_extra_files"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "boolean",
-    "template_kind": "instance",
-    "scope": "root_module",
-    "default_value": false
-  },
-  {
-    "name": {
-      "simple": "ignore_files_matching_regex",
-      "qualified": "masd.extraction.ignore_files_matching_regex"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "text_collection",
-    "template_kind": "instance",
-    "scope": "root_module"
-  },
-  {
-    "name": {
-      "simple": "delete_empty_directories",
-      "qualified": "masd.extraction.delete_empty_directories"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "boolean",
-    "template_kind": "instance",
-    "scope": "root_module",
-    "default_value": false
-  },
-  {
-    "name": {
       "simple": "cpp_headers_output_directory",
       "qualified": "masd.generation.cpp_headers_output_directory"
     },
@@ -61,19 +10,6 @@
     "value_type": "text",
     "template_kind": "instance",
     "scope": "root_module"
-  },
-  {
-    "name": {
-      "simple": "enable_backend_directories",
-      "qualified": "masd.extraction.enable_backend_directories"
-    },
-    "archetype_location": {
-      "kernel": "masd"
-    },
-    "value_type": "boolean",
-    "template_kind": "instance",
-    "scope": "root_module",
-    "default_value": false
   },
   {
     "name": {

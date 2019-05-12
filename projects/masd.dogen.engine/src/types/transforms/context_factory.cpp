@@ -37,6 +37,7 @@
 #include "masd.dogen.generation/types/features/initializer.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
+#include "masd.dogen.extraction/types/features/initializer.hpp"
 #include "masd.dogen.engine/types/transforms/factory_exception.hpp"
 #include "masd.dogen.engine/types/transforms/context_factory.hpp"
 
@@ -194,6 +195,7 @@ context context_factory::make_context(const configuration& cfg,
     generation::features::initializer::register_templates(ftrg);
     variability::features::initializer::register_templates(ftrg);
     archetypes::features::initializer::register_templates(ftrg);
+    extraction::features::initializer::register_templates(ftrg);
     const auto ftrp(ftrg.repository());
     const auto fm(feature_model_production_chain::apply(vctx, ftrp));
     r.injection_context().feature_model(fm);
