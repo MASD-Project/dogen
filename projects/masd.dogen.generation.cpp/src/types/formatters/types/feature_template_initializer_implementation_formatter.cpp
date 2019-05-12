@@ -117,7 +117,7 @@ a.stream() << std::endl;
 a.stream() << "void " << sn << "::" << std::endl;
 a.stream() << "register_templates(variability::helpers::feature_template_registrar& rg) {" << std::endl;
             for (const auto& n : o.bundles())
-a.stream() << "    rg.register_templates(" << n.simple() << "::make_templates());" << std::endl;
+a.stream() << "    rg.register_templates(" << n.qualified().colon() << "::make_templates());" << std::endl;
 a.stream() << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;

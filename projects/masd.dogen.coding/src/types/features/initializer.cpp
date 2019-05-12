@@ -35,17 +35,17 @@ namespace masd::dogen::coding::features {
 
 void initializer::
 register_templates(variability::helpers::feature_template_registrar& rg) {
-    rg.register_templates(decoration_modeline::make_templates());
-    rg.register_templates(enumeration::make_templates());
-    rg.register_templates(enumerator::make_templates());
-    rg.register_templates(generalization::make_templates());
-    rg.register_templates(naming::make_templates());
-    rg.register_templates(origin::make_templates());
-    rg.register_templates(orm::make_templates());
-    rg.register_templates(output_technical_space::make_templates());
-    rg.register_templates(primitive::make_templates());
-    rg.register_templates(type_parameters::make_templates());
-    rg.register_templates(variability_templates::make_templates());
+    rg.register_templates(masd::dogen::coding::features::decoration_modeline::make_templates());
+    rg.register_templates(masd::dogen::coding::features::enumeration::make_templates());
+    rg.register_templates(masd::dogen::coding::features::enumerator::make_templates());
+    rg.register_templates(masd::dogen::coding::features::generalization::make_templates());
+    rg.register_templates(masd::dogen::coding::features::naming::make_templates());
+    rg.register_templates(masd::dogen::coding::features::origin::make_templates());
+    rg.register_templates(masd::dogen::coding::features::orm::make_templates());
+    rg.register_templates(masd::dogen::coding::features::output_technical_space::make_templates());
+    rg.register_templates(masd::dogen::coding::features::primitive::make_templates());
+    rg.register_templates(masd::dogen::coding::features::type_parameters::make_templates());
+    rg.register_templates(masd::dogen::coding::features::variability_templates::make_templates());
 
 }
 

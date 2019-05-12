@@ -25,7 +25,7 @@ namespace masd::dogen::archetypes::features {
 
 void initializer::
 register_templates(variability::helpers::feature_template_registrar& rg) {
-    rg.register_templates(enablement::make_templates());
+    rg.register_templates(masd::dogen::archetypes::features::enablement::make_templates());
 
 }
 

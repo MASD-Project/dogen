@@ -25,7 +25,7 @@ namespace masd::dogen::extraction::features {
 
 void initializer::
 register_templates(variability::helpers::feature_template_registrar& rg) {
-    rg.register_templates(filesystem::make_templates());
+    rg.register_templates(masd::dogen::extraction::features::filesystem::make_templates());
 
 }
 

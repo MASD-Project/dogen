@@ -26,8 +26,8 @@ namespace masd::dogen::generation::features {
 
 void initializer::
 register_templates(variability::helpers::feature_template_registrar& rg) {
-    rg.register_templates(decoration::make_templates());
-    rg.register_templates(formatting::make_templates());
+    rg.register_templates(masd::dogen::generation::features::decoration::make_templates());
+    rg.register_templates(masd::dogen::generation::features::formatting::make_templates());
 
 }
 
