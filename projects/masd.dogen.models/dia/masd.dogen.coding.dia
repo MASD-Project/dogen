@@ -34626,7 +34626,7 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.
           <dia:attribute name="string">
             <dia:string>#Defines all features used by the coding model.
 
-#DOGEN masd.dogen.injection.dia.comment=true#</dia:string>
+#DOGEN masd.injection.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

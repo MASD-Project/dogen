@@ -2429,6 +2429,10 @@
     },
     {
       "name": "features",
+      "documentation": "Defines all features used by the coding model.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {

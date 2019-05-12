@@ -35,6 +35,7 @@
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/helpers/resolver.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.coding/types/features/features.hpp"
 #include "masd.dogen.coding/types/helpers/decomposer.hpp"
 #include "masd.dogen.coding/types/helpers/separators.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
