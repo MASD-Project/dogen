@@ -68,7 +68,7 @@
         <dia:point val="-247,-98"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-247.05,-99.05;108.05,11.05"/>
+        <dia:rectangle val="-247.05,-99.05;112.05,11.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -77,7 +77,7 @@
         <dia:point val="-247,-98"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="355"/>
+        <dia:real val="359"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="109"/>
@@ -2284,7 +2284,7 @@ formatting.#</dia:string>
         <dia:point val="-197.745,-68.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-198.595,-68.45;-174.888,-49.95"/>
+        <dia:rectangle val="-198.595,-68.45;-174.887,-49.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2484,7 +2484,7 @@ formatting.#</dia:string>
         <dia:point val="-200.49,-55.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-201.34,-55.65;-174.888,-49.95"/>
+        <dia:rectangle val="-201.34,-55.65;-174.887,-49.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4817,7 +4817,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-234.205,-62"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-235.055,-62.05;-215.888,-49.95"/>
+        <dia:rectangle val="-235.055,-62.05;-215.887,-49.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4859,7 +4859,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-223.665,-55.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-224.515,-55.65;-215.888,-49.95"/>
+        <dia:rectangle val="-224.515,-55.65;-215.887,-49.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4997,7 +4997,7 @@ names in coding element
         <dia:point val="-133.123,-65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-133.185,-66.3971;-129.692,-64.8"/>
+        <dia:rectangle val="-133.185,-66.3971;-129.693,-64.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5840,7 +5840,7 @@ model.#</dia:string>
         <dia:point val="-177.125,-67.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-177.975,-67.65;-174.888,-49.95"/>
+        <dia:rectangle val="-177.975,-67.65;-174.887,-49.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24166,7 +24166,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-203.5,-38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-204.25,-44.85;-198.272,-37.2"/>
+        <dia:rectangle val="-204.25,-44.85;-198.273,-37.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -25123,7 +25123,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:point val="-187.472,-56.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-188.322,-56.45;-174.888,-49.95"/>
+        <dia:rectangle val="-188.322,-56.45;-174.887,-49.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27585,7 +27585,7 @@ separator is @e ;.#</dia:string>
         <dia:point val="-60.41,-66"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-61.16,-66.75;-55.4613,-61.2502"/>
+        <dia:rectangle val="-61.16,-66.75;-55.4612,-61.2502"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -34202,7 +34202,7 @@ to structural modeling.
         <dia:point val="49,14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="48.95,12.95;108.05,92.05"/>
+        <dia:rectangle val="48.95,12.95;112.05,92.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -34211,7 +34211,7 @@ to structural modeling.
         <dia:point val="49,14"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="59"/>
+        <dia:real val="63"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="78"/>
@@ -34411,13 +34411,13 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.
         <dia:point val="51,29"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.95,28.95;85.045,34.25"/>
+        <dia:rectangle val="50.95,28.95;85.815,34.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="51,29"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="33.994999999999997"/>
+        <dia:real val="34.765000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -34518,7 +34518,7 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.
             <dia:string>#masd::variability::boolean#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#false#</dia:string>
+            <dia:string>#"false"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
@@ -34543,7 +34543,7 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.
             <dia:string>#masd::variability::number#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#0#</dia:string>
+            <dia:string>#"0"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
@@ -34568,7 +34568,7 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.
             <dia:string>#masd::variability::boolean#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#false#</dia:string>
+            <dia:string>#"false"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
@@ -34763,13 +34763,13 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.
         <dia:point val="51,37"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.95,36.95;89.665,42.25"/>
+        <dia:rectangle val="50.95,36.95;90.435,42.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="51,37"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="38.614999999999995"/>
+        <dia:real val="39.385000000000005"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -34870,7 +34870,7 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.
             <dia:string>#masd::variability::boolean#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#false#</dia:string>
+            <dia:string>#"false"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, it uses the default implementation defined underlying element for the
@@ -34925,7 +34925,7 @@ technical space targeted.
             <dia:string>#masd::variability::boolean#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#false#</dia:string>
+            <dia:string>#"false"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, uses the enumeration values supplied by the underlying technical space.
@@ -34957,13 +34957,13 @@ technical space targeted.
         <dia:point val="51,45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.95,44.95;80.425,49.45"/>
+        <dia:rectangle val="50.95,44.95;81.195,49.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="51,45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="29.375"/>
+        <dia:real val="30.145"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -35064,7 +35064,7 @@ technical space targeted.
             <dia:string>#masd::variability::boolean#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#true#</dia:string>
+            <dia:string>#"true"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, adds an enumerator to represent an invalid choice.
@@ -35120,13 +35120,13 @@ technical space targeted.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O257">
       <dia:attribute name="obj_pos">
-        <dia:point val="83,45"/>
+        <dia:point val="86,45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="82.95,44.95;105.495,49.45"/>
+        <dia:rectangle val="85.95,44.95;108.495,49.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="83,45"/>
+        <dia:point val="86,45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="22.445"/>
@@ -35289,13 +35289,13 @@ technical space targeted.
         <dia:point val="51,52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.95,51.95;76.96,55.65"/>
+        <dia:rectangle val="50.95,51.95;77.73,55.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="51,52"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.91"/>
+        <dia:real val="26.68"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -35396,7 +35396,7 @@ technical space targeted.
             <dia:string>#masd::variability::boolean#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#false#</dia:string>
+            <dia:string>#"false"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, sets the origin of the model to "proxy model".
@@ -35564,16 +35564,16 @@ technical space targeted.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O260">
       <dia:attribute name="obj_pos">
-        <dia:point val="79,52"/>
+        <dia:point val="82,52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="78.95,51.95;106.115,57.25"/>
+        <dia:rectangle val="81.95,51.95;109.885,57.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="79,52"/>
+        <dia:point val="82,52"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.064999999999998"/>
+        <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -35701,7 +35701,7 @@ technical space targeted.
             <dia:string>#masd::variability::boolean#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#false#</dia:string>
+            <dia:string>#"false"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, the primitive can be null.
@@ -35728,7 +35728,7 @@ technical space targeted.
             <dia:string>#masd::variability::boolean#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#false#</dia:string>
+            <dia:string>#"false"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, use type aliasing to implement the primitive if the technical space supports

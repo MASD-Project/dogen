@@ -168,7 +168,7 @@
         {
           "name": "enabled",
           "type": "masd::variability::boolean",
-          "value": "true",
+          "value": "\"true\"",
           "documentation": "If true, decorations are enabled on this modeling element.\n",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",

@@ -2476,7 +2476,7 @@
         {
           "name": "masd.type_parameters.variable_number_of_parameters",
           "type": "masd::variability::boolean",
-          "value": "false",
+          "value": "\"false\"",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
@@ -2486,7 +2486,7 @@
         {
           "name": "masd.type_parameters.count",
           "type": "masd::variability::number",
-          "value": "0",
+          "value": "\"0\"",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
@@ -2496,7 +2496,7 @@
         {
           "name": "masd.type_parameters.always_in_heap",
           "type": "masd::variability::boolean",
-          "value": "false",
+          "value": "\"false\"",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
@@ -2523,7 +2523,7 @@
         {
           "name": "masd.enumeration.use_implementation_defined_underlying_element",
           "type": "masd::variability::boolean",
-          "value": "false",
+          "value": "\"false\"",
           "documentation": "If true, it uses the default implementation defined underlying element for the\ntechnical space targeted.\n",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
@@ -2544,7 +2544,7 @@
         {
           "name": "masd.enumeration.use_implementation_defined_enumerator_values",
           "type": "masd::variability::boolean",
-          "value": "false",
+          "value": "\"false\"",
           "documentation": "If true, uses the enumeration values supplied by the underlying technical space.\n",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
@@ -2565,7 +2565,7 @@
         {
           "name": "masd.enumeration.add_invalid_enumerator",
           "type": "masd::variability::boolean",
-          "value": "true",
+          "value": "\"true\"",
           "documentation": "If true, adds an enumerator to represent an invalid choice.\n",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
@@ -2626,7 +2626,7 @@
         {
           "name": "masd.injection.is_proxy_model",
           "type": "masd::variability::boolean",
-          "value": "false",
+          "value": "\"false\"",
           "documentation": "If true, sets the origin of the model to \"proxy model\".\n",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
@@ -2677,7 +2677,7 @@
         {
           "name": "masd.primitive.is_nullable",
           "type": "masd::variability::boolean",
-          "value": "false",
+          "value": "\"false\"",
           "documentation": "If true, the primitive can be null.\n",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
@@ -2688,7 +2688,7 @@
         {
           "name": "masd.primitive.use_type_aliasing",
           "type": "masd::variability::boolean",
-          "value": "false",
+          "value": "\"false\"",
           "documentation": "If true, use type aliasing to implement the primitive if the technical space supports\nit.\n",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",

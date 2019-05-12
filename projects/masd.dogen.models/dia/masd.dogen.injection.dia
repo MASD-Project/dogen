@@ -6289,13 +6289,13 @@ and, if so, ignore it.#</dia:string>
         <dia:point val="106,55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="105.95,54.95;134.655,58.65"/>
+        <dia:rectangle val="105.95,54.95;135.425,58.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="106,55"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="28.605"/>
+        <dia:real val="29.375"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -6396,7 +6396,7 @@ and, if so, ignore it.#</dia:string>
             <dia:string>#masd::variability::text#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#agnostic#</dia:string>
+            <dia:string>#"agnostic"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Input technical space for this model.

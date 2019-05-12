@@ -133,7 +133,7 @@ a.stream() << "    r.binding_point(" << enum_mapper::from_binding_point(fb_ft.bi
 a.stream() << "    r.kind(" << enum_mapper::from_template_kind(fb_ft.template_kind()) << ");" << std::endl;
     if (!fb_ft.value().empty()) {
 a.stream() << "    masd::dogen::variability::helpers::value_factory f;" << std::endl;
-a.stream() << "    r.default_value(f.make(vt, std::list<std::string>{ \"" << fb_ft.value() << "\" }));" << std::endl;
+a.stream() << "    r.default_value(f.make(vt, std::list<std::string>{ " << fb_ft.value() << " }));" << std::endl;
     }
 a.stream() << std::endl;
 a.stream() << "    archetypes::location al;" << std::endl;

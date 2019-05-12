@@ -376,7 +376,7 @@
         {
           "name": "masd.injection.input_technical_space",
           "type": "masd::variability::text",
-          "value": "agnostic",
+          "value": "\"agnostic\"",
           "documentation": "Input technical space for this model.\n",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",

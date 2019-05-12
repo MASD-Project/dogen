@@ -2227,13 +2227,13 @@ associated properties.#</dia:string>
         <dia:point val="24,44"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.95,43.95;41.105,47.65"/>
+        <dia:rectangle val="23.95,43.95;41.875,47.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="24,44"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.055"/>
+        <dia:real val="17.824999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -2334,7 +2334,7 @@ associated properties.#</dia:string>
             <dia:string>#masd::variability::boolean#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#true#</dia:string>
+            <dia:string>#"true"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, decorations are enabled on this modeling element.

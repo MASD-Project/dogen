@@ -80,7 +80,7 @@ make_<#= fb_ft.identifiable_key() #>() {
     if (!fb_ft.value().empty()) {
 #>
     masd::dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "<#= fb_ft.value() #>" }));
+    r.default_value(f.make(vt, std::list<std::string>{ <#= fb_ft.value() #> }));
 <#+
     }
 #>

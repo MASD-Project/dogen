@@ -6010,13 +6010,13 @@ external technical spaces.
         <dia:point val="-8,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-8.05,4.95;23.35,11.85"/>
+        <dia:rectangle val="-8.05,4.95;23.735,11.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-8,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="31.300000000000001"/>
+        <dia:real val="31.685000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -6117,7 +6117,7 @@ external technical spaces.
             <dia:string>#masd::variability::boolean#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#false#</dia:string>
+            <dia:string>#"false"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, artefacts are always written to the filesystem.
@@ -6147,7 +6147,7 @@ diff. If no changes are detected, no writting is performed.
             <dia:string>#masd::variability::boolean#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#true#</dia:string>
+            <dia:string>#"true"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, any files the code generator is not aware of are deleted.
@@ -6205,7 +6205,7 @@ Only applicable if "delete_extra_files" is enabled.
             <dia:string>#masd::variability::boolean#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#false#</dia:string>
+            <dia:string>#"false"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, all directories without any files will be deleted.
@@ -6235,7 +6235,7 @@ are themselves empty, the entire directory tree is deleted.
             <dia:string>#masd::variability::boolean#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#false#</dia:string>
+            <dia:string>#"false"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, a directory is created for each technical space targeted.
