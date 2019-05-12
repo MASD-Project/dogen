@@ -27,6 +27,7 @@
 
 #include "masd.dogen.generation/types/traits.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
+#include "masd.dogen.generation/types/features/features.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
 #include "masd.dogen.generation/types/formatters/comment_style.hpp"
 #include "masd.dogen.generation/types/formatters/indent_filter.hpp"

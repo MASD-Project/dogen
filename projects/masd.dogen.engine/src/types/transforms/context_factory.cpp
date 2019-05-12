@@ -32,6 +32,7 @@
 #include "masd.dogen.injection/types/features/registrar.hpp"
 #include "masd.dogen.coding/types/features/initializer.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
+#include "masd.dogen.generation/types/features/initializer.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
 #include "masd.dogen.engine/types/transforms/factory_exception.hpp"
@@ -188,6 +189,7 @@ context context_factory::make_context(const configuration& cfg,
     variability::helpers::feature_template_registrar ftrg;
     injection::features::registrar::register_templates(ftrg);
     coding::features::initializer::register_templates(ftrg);
+    generation::features::initializer::register_templates(ftrg);
     const auto ftrp(ftrg.repository());
     const auto fm(feature_model_production_chain::apply(vctx, ftrp));
     r.injection_context().feature_model(fm);
