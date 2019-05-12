@@ -117,13 +117,16 @@ format(const context& ctx, const coding::meta_model::element& e) const {
             using utility::string::splitter;
             for (const auto& fb_ft : fb.feature_templates()) {
                 const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
+                const bool has_qualified_name(simple_key != fb_ft.key());
 a.stream() << std::endl;
 a.stream() << "masd::dogen::variability::meta_model::feature_template" << std::endl;
 a.stream() << "make_" << fb_ft.identifiable_key() << "() {" << std::endl;
 a.stream() << "    using namespace masd::dogen::variability::meta_model;" << std::endl;
 a.stream() << "    feature_template r;" << std::endl;
 a.stream() << "    r.name().simple(\"" << simple_key << "\");" << std::endl;
+               if (has_qualified_name) {
 a.stream() << "    r.name().qualified(\"" << fb_ft.key() << "\");" << std::endl;
+               }
 a.stream() << "    const auto vt(" << enum_mapper::from_value_type(fb_ft.value_type()) << ");" << std::endl;
 a.stream() << "    r.value_type(vt);" << std::endl;
 a.stream() << "    r.binding_point(" << enum_mapper::from_binding_point(fb_ft.binding_point()) << ");" << std::endl;

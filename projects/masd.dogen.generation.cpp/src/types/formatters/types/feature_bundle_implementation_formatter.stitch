@@ -57,6 +57,7 @@ format(const context& ctx, const coding::meta_model::element& e) const {
             using utility::string::splitter;
             for (const auto& fb_ft : fb.feature_templates()) {
                 const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
+                const bool has_qualified_name(simple_key != fb_ft.key());
 #>
 
 masd::dogen::variability::meta_model::feature_template
@@ -64,7 +65,13 @@ make_<#= fb_ft.identifiable_key() #>() {
     using namespace masd::dogen::variability::meta_model;
     feature_template r;
     r.name().simple("<#= simple_key #>");
+<#+
+               if (has_qualified_name) {
+#>
     r.name().qualified("<#= fb_ft.key() #>");
+<#+
+               }
+#>
     const auto vt(<#= enum_mapper::from_value_type(fb_ft.value_type()) #>);
     r.value_type(vt);
     r.binding_point(<#= enum_mapper::from_binding_point(fb_ft.binding_point()) #>);
