@@ -198,7 +198,7 @@
         <dia:string>#model_to_extraction_model_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -591,7 +591,7 @@
         <dia:string>#initializer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -732,7 +732,7 @@
         <dia:string>#workflow#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1017,7 +1017,7 @@
         <dia:string>#registrar#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1201,7 +1201,7 @@
         <dia:string>#artefact_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.generation.cpp.types.forward_declarations.enabled=true#</dia:string>
@@ -1576,7 +1576,7 @@
         <dia:string>#repository#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.generation.cpp.io.enabled=true
@@ -1942,7 +1942,7 @@
         <dia:string>#class_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2053,7 +2053,7 @@
         <dia:string>#enum_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2164,7 +2164,7 @@
         <dia:string>#namespace_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2275,7 +2275,7 @@
         <dia:string>#visitor_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2425,7 +2425,7 @@
         <dia:string>#class_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2536,7 +2536,7 @@
         <dia:string>#enum_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2686,7 +2686,7 @@
         <dia:string>#class_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2797,7 +2797,7 @@
         <dia:string>#enum_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2908,7 +2908,7 @@
         <dia:string>#exception_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3019,7 +3019,7 @@
         <dia:string>#visual_studio_project_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3130,7 +3130,7 @@
         <dia:string>#initializer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3272,7 +3272,7 @@
         <dia:string>#initializer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3414,7 +3414,7 @@
         <dia:string>#initializer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3628,7 +3628,7 @@
         <dia:string>#traits#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3739,7 +3739,7 @@
         <dia:string>#traits#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3850,7 +3850,7 @@
         <dia:string>#traits#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4046,7 +4046,7 @@
         <dia:string>#traits#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4339,7 +4339,7 @@
         <dia:string>#assistant#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.generation.cpp.types.forward_declarations.enabled=true#</dia:string>
@@ -4450,7 +4450,7 @@
         <dia:string>#initializer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5378,7 +5378,7 @@
         <dia:string>#locator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5892,7 +5892,7 @@
         <dia:string>#adapter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6180,7 +6180,7 @@
         <dia:string>#workflow#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6652,7 +6652,7 @@
         <dia:string>#model_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6897,7 +6897,7 @@
         <dia:string>#file_path_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7704,7 +7704,7 @@
         <dia:string>#reducer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7975,7 +7975,7 @@
         <dia:string>#initializer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -8117,7 +8117,7 @@
         <dia:string>#injector#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -8547,7 +8547,7 @@
         <dia:string>#using_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -8779,7 +8779,7 @@
         <dia:string>#context#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -9421,7 +9421,7 @@
         <dia:string>#visual_studio_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -9725,7 +9725,7 @@
         <dia:string>#assembly_info_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -10140,7 +10140,7 @@
         <dia:string>#visual_studio_solution_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -10251,7 +10251,7 @@
         <dia:string>#traits#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -10592,7 +10592,7 @@
         <dia:string>#traits#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -10703,7 +10703,7 @@
         <dia:string>#project_items_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -11831,7 +11831,7 @@
         <dia:string>#aspect_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -12135,7 +12135,7 @@
         <dia:string>#helper_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -13060,7 +13060,7 @@
         <dia:string>#helper_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.generation.cpp.types.forward_declarations.enabled=true#</dia:string>
@@ -13458,7 +13458,7 @@
         <dia:string>#floating_point_number_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::csharp::helper_formatter#</dia:string>
+        <dia:string>#dogen::csharp::helper_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -13776,7 +13776,7 @@
         <dia:string>#builtin_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -13887,7 +13887,7 @@
         <dia:string>#builtin_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -13998,7 +13998,7 @@
         <dia:string>#builtin_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -14109,7 +14109,7 @@
         <dia:string>#assistant_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -14524,7 +14524,7 @@
         <dia:string>#assistant_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -14635,7 +14635,7 @@
         <dia:string>#assistant_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -14976,7 +14976,7 @@
         <dia:string>#assistant_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -15208,7 +15208,7 @@
         <dia:string>#enumerable_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::csharp::helper_formatter#</dia:string>
+        <dia:string>#dogen::csharp::helper_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -15986,7 +15986,7 @@
         <dia:string>#primitive_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -16097,7 +16097,7 @@
         <dia:string>#primitive_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -16208,7 +16208,7 @@
         <dia:string>#primitive_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -16391,7 +16391,7 @@
         <dia:string>#dynamic_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -16568,7 +16568,7 @@
         <dia:string>#meta_name_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

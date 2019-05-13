@@ -28,8 +28,8 @@
     {
       "name": "tracer",
       "stereotypes": [
-        "masd::handcrafted::typeable",
-        "masd::pretty_printable"
+        "dogen::handcrafted::typeable",
+        "dogen::pretty_printable"
       ],
       "tagged_values": {
         "masd.generation.cpp.types.forward_declarations.enabled": "true"
@@ -75,14 +75,14 @@
     {
       "name": "metrics_builder",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "metrics_printer",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -97,7 +97,7 @@
     {
       "name": "scoped_tracer",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     }

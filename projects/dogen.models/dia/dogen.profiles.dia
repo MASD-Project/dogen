@@ -1188,7 +1188,7 @@ Disables all facets in the C++ backend.#</dia:string>
         <dia:string>#Model element is defined as a type.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=masd::typeable#</dia:string>
+#DOGEN masd.variability.labels=dogen::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1356,7 +1356,7 @@ so we disable all facets.
         <dia:string>#The element has the ability to dump itself to a stream.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=masd::pretty_printable#</dia:string>
+#DOGEN masd.variability.labels=dogen::pretty_printable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1496,7 +1496,7 @@ so we disable all facets.
         <dia:string>#The element has the ability to generate hashes.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=masd::hashable#</dia:string>
+#DOGEN masd.variability.labels=dogen::hashable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2056,7 +2056,7 @@ default profile.
         <dia:string>#Configuration for model elements that are generated manually by the user.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=masd::handcrafted::typeable#</dia:string>
+#DOGEN masd.variability.labels=dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2383,7 +2383,7 @@ default profile.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=masd::handcrafted::pretty_printable#</dia:string>
+#DOGEN masd.variability.labels=dogen::handcrafted::pretty_printable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2548,7 +2548,7 @@ default profile.
         <dia:string>#This element has only a types header file.
 
 #DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.labels=masd::cpp::header_only#</dia:string>
+#DOGEN masd.variability.labels=dogen::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2686,7 +2686,7 @@ default profile.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.labels=masd::inheritable#</dia:string>
+#DOGEN masd.variability.labels=dogen::inheritable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2952,7 +2952,7 @@ default profile.
         <dia:string>#This element has only a types implementation file.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=masd::cpp::implementation_only#</dia:string>
+#DOGEN masd.variability.labels=dogen::cpp::implementation_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3140,7 +3140,7 @@ default profile.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.labels=masd::cpp::artefact_formatter#</dia:string>
+#DOGEN masd.variability.labels=dogen::cpp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3402,7 +3402,7 @@ default profile.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.labels=masd::csharp::artefact_formatter#</dia:string>
+#DOGEN masd.variability.labels=dogen::csharp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3664,7 +3664,7 @@ default profile.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.labels=masd::cpp::helper_formatter#</dia:string>
+#DOGEN masd.variability.labels=dogen::cpp::helper_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4010,7 +4010,7 @@ default profile.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.labels=masd::csharp::helper_formatter#</dia:string>
+#DOGEN masd.variability.labels=dogen::csharp::helper_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4455,7 +4455,7 @@ for the element.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=masd::handcrafted::serializable#</dia:string>
+#DOGEN masd.variability.labels=dogen::handcrafted::serializable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

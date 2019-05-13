@@ -161,7 +161,7 @@ not technical space specific.
         <dia:string>#traits#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -899,7 +899,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#file_status_collector#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1201,7 +1201,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#model_production_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1361,7 +1361,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#write_artefacts_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1521,7 +1521,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#gather_external_artefacts_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1681,7 +1681,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#generate_diffs_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2057,7 +2057,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#context#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::typeable, masd::pretty_printable#</dia:string>
+        <dia:string>#dogen::typeable, dogen::pretty_printable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.generation.cpp.types.forward_declarations.enabled=true#</dia:string>
@@ -3184,7 +3184,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#operation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3344,7 +3344,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#remove_files_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3648,7 +3648,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#generate_patch_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3880,7 +3880,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#mock_content_filler_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4452,7 +4452,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#unified_differ#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4680,7 +4680,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#generate_report_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4929,7 +4929,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#code_generation_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5162,7 +5162,7 @@ external technical spaces.
         <dia:string>#update_outputting_properties_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

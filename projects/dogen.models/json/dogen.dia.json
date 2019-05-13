@@ -309,7 +309,7 @@
       "name": "hydrator",
       "documentation": "Reads a Dia diagram and instatiates the dia model objects.\n",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -324,7 +324,7 @@
     {
       "name": "persister",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },

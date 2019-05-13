@@ -504,7 +504,7 @@
     {
       "name": "helpers::feature_selector",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -515,70 +515,70 @@
     {
       "name": "transforms::feature_model_production_chain",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "helpers::feature_template_hydrator",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::feature_template_instantiation_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::feature_model_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::profile_repository_production_chain",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "helpers::profile_template_hydrator",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::profile_template_instantiation_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "helpers::configuration_factory",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::profile_binding_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "helpers::configuration_point_merger",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -586,8 +586,8 @@
       "name": "transforms::context",
       "documentation": "Context for transformations.\n",
       "stereotypes": [
-        "masd::typeable",
-        "masd::pretty_printable"
+        "dogen::typeable",
+        "dogen::pretty_printable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -612,14 +612,14 @@
     {
       "name": "transforms::profile_merging_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "helpers::value_factory",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -655,14 +655,14 @@
     {
       "name": "helpers::configuration_selector",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "helpers::template_instantiator",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -837,14 +837,14 @@
     {
       "name": "transforms::global_configuration_binding_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::implicit_configuration_binding_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -879,7 +879,7 @@
     {
       "name": "helpers::feature_template_registrar",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -892,7 +892,7 @@
     {
       "name": "helpers::enum_mapper",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },

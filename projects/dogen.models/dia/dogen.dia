@@ -1115,7 +1115,7 @@ size limitations.#</dia:string>
         <dia:string>#configuration_builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#masd::builder#</dia:string>
@@ -1413,7 +1413,7 @@ size limitations.#</dia:string>
         <dia:string>#configuration_validator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2057,7 +2057,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
         <dia:string>#generator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#dogen::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2321,7 +2321,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
         <dia:string>#converter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::cpp::header_only#</dia:string>
+        <dia:string>#dogen::cpp::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4024,7 +4024,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
         <dia:string>#mock_configuration_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

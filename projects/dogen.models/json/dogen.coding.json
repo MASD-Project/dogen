@@ -257,7 +257,7 @@
       "name": "meta_model::name",
       "documentation": "Name of an element in coding space.\n\nA name represents a point in coding space, and this point can only be\nused by one coding element. Names can be uniquely identified by their\nqualified ID.\n\nName has the following properties: a) two different points in element space\ncannot have the same name and b) the same point in element space can only\nhave one and only one name.\n\nNames are required in addition to just using the qualfied ID representation\nbecause we use them to infer all sorts of properties for an element (namespaces,\nnaming files, etc).\n",
       "stereotypes": [
-        "masd::hashable",
+        "dogen::hashable",
         "Qualifiable"
       ],
       "fallback_element_type": "masd::object",
@@ -343,7 +343,7 @@
       "name": "meta_model::location",
       "documentation": "Identifies a hierarchy of containment within the coding space.\n\nElements exist at unique points within the coding space called @e\naddresses.  However, certain elements have the ability to contain\nother elements, creating in effect new dimensions in coding space. The\nlocation class keeps track of these dimensions. Note that the\nattributes of this class are hierarchical, i.e.  external modules\ncontain model modules and so forth. These attributes are best thought\nof as a single linked list, where segments of that linked list have\ndifferent meaning. However, because we care about these meanings, we\nimplemented the type with a number of linked lists, one per meaning.\n\nA location is not necessarily connected to modules, although these are\nthe main model elements that provide containment. For example, inner\nclasses are contained within classes; in coding terms it means a\nlocation should also have an \"object\" attribute to represent this\nrelationship.\n\nAlso, note that the location class itself encodes the address of the\nelement that owns that location; returning to the linked list idea,\nthe tail of the linked list is the name of the element, and the\nremaining linked list provides the location of the element.\n",
       "stereotypes": [
-        "masd::hashable"
+        "dogen::hashable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -460,7 +460,7 @@
     {
       "name": "meta_model::elements_traversal",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -622,7 +622,7 @@
     {
       "name": "traits",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -733,8 +733,8 @@
       "name": "transforms::context",
       "documentation": "\nContext for all coding transformations.\n\nContains all of the external data required for the transformations\nto execute. It's not ideal to have a huge \"global\" class, with lots\nof unrelated state; however, over time, we found that a number of\narguments were being supplied across the call graph, resulting in a\nlot of repetitive code. The context gathers together all of these.\n",
       "stereotypes": [
-        "masd::typeable",
-        "masd::pretty_printable"
+        "dogen::typeable",
+        "dogen::pretty_printable"
       ],
       "tagged_values": {
         "masd.generation.cpp.types.forward_declarations.enabled": "true"
@@ -762,133 +762,133 @@
     {
       "name": "transforms::pre_assembly_chain",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::model_production_chain",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::assembly_chain",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::post_assembly_chain",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::merge_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::modules_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::origin_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::technical_space_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::type_params_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::parsing_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::primitives_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::generalization_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::stereotypes_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::object_templates_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::global_module_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::orm_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::resolver_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::attributes_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::associations_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -903,7 +903,7 @@
     {
       "name": "transforms::enumerations_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -936,14 +936,14 @@
     {
       "name": "helpers::decomposer",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "helpers::post_assembly_validator",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -958,7 +958,7 @@
     {
       "name": "helpers::pre_assembly_validator",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -999,14 +999,14 @@
     {
       "name": "helpers::indexer",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "helpers::resolver",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1029,7 +1029,7 @@
     {
       "name": "helpers::mapper",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1088,14 +1088,14 @@
     {
       "name": "helpers::mapping_set_repository_factory",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "helpers::mappings_validator",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1151,7 +1151,7 @@
     {
       "name": "helpers::mappings_hydrator",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1165,7 +1165,7 @@
     {
       "name": "transforms::mapping_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1180,7 +1180,7 @@
     {
       "name": "helpers::pretty_printer",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1234,7 +1234,7 @@
     {
       "name": "helpers::string_processor",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1249,7 +1249,7 @@
     {
       "name": "helpers::name_tree_builder",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1278,7 +1278,7 @@
     {
       "name": "helpers::legacy_name_tree_parser",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1299,7 +1299,7 @@
     {
       "name": "helpers::new_name_tree_parser",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1314,21 +1314,21 @@
     {
       "name": "helpers::fully_qualified_representation_builder",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "helpers::name_factory",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "helpers::name_builder",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1341,28 +1341,28 @@
     {
       "name": "helpers::name_flattener",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::meta_naming_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "helpers::meta_name_factory",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "helpers::location_builder",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1503,7 +1503,7 @@
     {
       "name": "transforms::extraction_properties_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1524,7 +1524,7 @@
     {
       "name": "transforms::modelines_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1532,7 +1532,7 @@
       "name": "meta_model::fully_qualified_representation",
       "documentation": "Fully qualified representation for a coding identifier such as a name or name tree.\n",
       "stereotypes": [
-        "masd::hashable"
+        "dogen::hashable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1570,7 +1570,7 @@
     {
       "name": "transforms::containment_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1591,7 +1591,7 @@
     {
       "name": "transforms::variability_feature_bundle_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1933,7 +1933,7 @@
       "name": "meta_model::orm::database_system",
       "stereotypes": [
         "masd::enumeration",
-        "masd::hashable"
+        "dogen::hashable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [

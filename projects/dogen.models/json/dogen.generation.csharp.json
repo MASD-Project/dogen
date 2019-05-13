@@ -31,7 +31,7 @@
     {
       "name": "model_to_extraction_model_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -45,7 +45,7 @@
     {
       "name": "initializer",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -56,7 +56,7 @@
     {
       "name": "formatters::workflow",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -69,7 +69,7 @@
     {
       "name": "formatters::registrar",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -82,7 +82,7 @@
     {
       "name": "formatters::artefact_formatter_interface",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
         "masd.generation.cpp.types.forward_declarations.enabled": "true"
@@ -92,7 +92,7 @@
     {
       "name": "formatters::repository",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
         "masd.generation.cpp.io.enabled": "true",
@@ -122,28 +122,28 @@
     {
       "name": "formatters::types::class_formatter",
       "stereotypes": [
-        "masd::csharp::artefact_formatter"
+        "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::enum_formatter",
       "stereotypes": [
-        "masd::csharp::artefact_formatter"
+        "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::namespace_formatter",
       "stereotypes": [
-        "masd::csharp::artefact_formatter"
+        "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::visitor_formatter",
       "stereotypes": [
-        "masd::csharp::artefact_formatter"
+        "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -154,14 +154,14 @@
     {
       "name": "formatters::io::class_formatter",
       "stereotypes": [
-        "masd::csharp::artefact_formatter"
+        "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::enum_formatter",
       "stereotypes": [
-        "masd::csharp::artefact_formatter"
+        "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -172,77 +172,77 @@
     {
       "name": "formatters::test_data::class_formatter",
       "stereotypes": [
-        "masd::csharp::artefact_formatter"
+        "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::enum_formatter",
       "stereotypes": [
-        "masd::csharp::artefact_formatter"
+        "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::exception_formatter",
       "stereotypes": [
-        "masd::csharp::artefact_formatter"
+        "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::visual_studio_project_formatter",
       "stereotypes": [
-        "masd::csharp::artefact_formatter"
+        "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::initializer",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::initializer",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::initializer",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::traits",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::traits",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::traits",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "traits",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -257,7 +257,7 @@
     {
       "name": "formatters::assistant",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
         "masd.generation.cpp.types.forward_declarations.enabled": "true"
@@ -267,7 +267,7 @@
     {
       "name": "formatters::initializer",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -337,7 +337,7 @@
     {
       "name": "formattables::locator",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -366,7 +366,7 @@
     {
       "name": "formattables::adapter",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -380,7 +380,7 @@
     {
       "name": "formattables::workflow",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -413,21 +413,21 @@
     {
       "name": "formattables::model_expander",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::file_path_expander",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::reducer",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -446,14 +446,14 @@
     {
       "name": "fabric::initializer",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "fabric::injector",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -481,14 +481,14 @@
     {
       "name": "formattables::using_expander",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::context",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -542,14 +542,14 @@
     {
       "name": "fabric::visual_studio_factory",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "fabric::assembly_info_factory",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -563,14 +563,14 @@
     {
       "name": "formatters::visual_studio_solution_formatter",
       "stereotypes": [
-        "masd::csharp::artefact_formatter"
+        "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::traits",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -591,14 +591,14 @@
     {
       "name": "fabric::traits",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::project_items_expander",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -659,14 +659,14 @@
     {
       "name": "formattables::aspect_expander",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::helper_expander",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -729,7 +729,7 @@
     {
       "name": "formatters::helper_formatter_interface",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
         "masd.generation.cpp.types.forward_declarations.enabled": "true"
@@ -739,7 +739,7 @@
     {
       "name": "formatters::types::floating_point_number_helper",
       "stereotypes": [
-        "masd::csharp::helper_formatter"
+        "dogen::csharp::helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -756,28 +756,28 @@
     {
       "name": "formatters::types::builtin_formatter",
       "stereotypes": [
-        "masd::csharp::artefact_formatter"
+        "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::builtin_formatter",
       "stereotypes": [
-        "masd::csharp::artefact_formatter"
+        "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::builtin_formatter",
       "stereotypes": [
-        "masd::csharp::artefact_formatter"
+        "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "fabric::assistant_factory",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -791,14 +791,14 @@
     {
       "name": "formatters::io::assistant_formatter",
       "stereotypes": [
-        "masd::csharp::artefact_formatter"
+        "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::assistant_formatter",
       "stereotypes": [
-        "masd::csharp::artefact_formatter"
+        "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -821,14 +821,14 @@
     {
       "name": "formattables::assistant_expander",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::enumerable_helper",
       "stereotypes": [
-        "masd::csharp::helper_formatter"
+        "dogen::csharp::helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -878,35 +878,35 @@
     {
       "name": "formatters::types::primitive_formatter",
       "stereotypes": [
-        "masd::csharp::artefact_formatter"
+        "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::primitive_formatter",
       "stereotypes": [
-        "masd::csharp::artefact_formatter"
+        "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::primitive_formatter",
       "stereotypes": [
-        "masd::csharp::artefact_formatter"
+        "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "fabric::dynamic_transform",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "fabric::meta_name_factory",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },

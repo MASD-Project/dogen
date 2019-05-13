@@ -30,14 +30,14 @@
     {
       "name": "exception::invalid_enum_value",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "exception::utility_exception",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -48,7 +48,7 @@
     {
       "name": "filesystem::file",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -71,7 +71,7 @@
     {
       "name": "filesystem::path",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -82,14 +82,14 @@
     {
       "name": "hash::combine",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "hash::list_hash",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -100,98 +100,98 @@
     {
       "name": "io::array_io",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "io::forward_list_io",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "io::jsonify_io",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "io::list_io",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "io::map_io",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "io::memory_io",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "io::optional_io",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "io::pair_io",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "io::set_io",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "io::shared_ptr_io",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "io::typeindex_io",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "io::unordered_map_io",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "io::unordered_set_io",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "io::vector_io",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -202,28 +202,28 @@
     {
       "name": "log::logger",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "log::lifecycle_manager",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "log::scoped_lifecycle_manager",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "log::severity_level",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -234,21 +234,21 @@
     {
       "name": "serialization::archive_types",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "serialization::xml_helper",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "serialization::path",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -259,7 +259,7 @@
     {
       "name": "string::splitter",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -270,56 +270,56 @@
     {
       "name": "test::asserter",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "test::bytewise_file_asserter",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "test::file_asserter",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "test::logging",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "test::xml_serialization_helper",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "test::exception_checkers",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "test::fixture",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "test::macros",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -330,84 +330,84 @@
     {
       "name": "test_data::filesystem_tests",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "test_data::generate_container",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "test_data::generator",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "test_data::injection_dia",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "test_data::injection_json",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "test_data::northwind",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "test_data::resolver",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "test_data::sequence",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "test_data::tds_test_good",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "test_data::test_data",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "test_data::validating_resolver",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "test_data::xml_reader",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -418,35 +418,35 @@
     {
       "name": "xml::exception",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "xml::node_types",
       "stereotypes": [
-        "masd::cpp::header_only"
+        "dogen::cpp::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "xml::node_types_io",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "xml::text_reader",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "xml::text_reader_io",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -497,28 +497,28 @@
     {
       "name": "log::logging_configuration_validator",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "test_data::dogen_generation",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "test_data::cpp_ref_impl_generation",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "test_data::csharp_ref_impl_generation",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -545,7 +545,7 @@
     {
       "name": "environment::variable_reader",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -607,14 +607,14 @@
     {
       "name": "formatters::utility_formatter",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "string::differ",
       "stereotypes": [
-        "masd::handcrafted::typeable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     }

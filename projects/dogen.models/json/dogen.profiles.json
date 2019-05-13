@@ -229,7 +229,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.labels": "masd::typeable"
+        "masd.variability.labels": "dogen::typeable"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -267,7 +267,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.labels": "masd::pretty_printable"
+        "masd.variability.labels": "dogen::pretty_printable"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -294,7 +294,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.labels": "masd::hashable"
+        "masd.variability.labels": "dogen::hashable"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -369,7 +369,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.labels": "masd::handcrafted::pretty_printable"
+        "masd.variability.labels": "dogen::handcrafted::pretty_printable"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -406,7 +406,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.labels": "masd::handcrafted::typeable"
+        "masd.variability.labels": "dogen::handcrafted::typeable"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -453,7 +453,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
-        "masd.variability.labels": "masd::cpp::header_only"
+        "masd.variability.labels": "dogen::cpp::header_only"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -476,7 +476,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
-        "masd.variability.labels": "masd::inheritable"
+        "masd.variability.labels": "dogen::inheritable"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -503,7 +503,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.labels": "masd::cpp::implementation_only"
+        "masd.variability.labels": "dogen::cpp::implementation_only"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -549,7 +549,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
-        "masd.variability.labels": "masd::cpp::artefact_formatter"
+        "masd.variability.labels": "dogen::cpp::artefact_formatter"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -624,7 +624,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
-        "masd.variability.labels": "masd::csharp::artefact_formatter"
+        "masd.variability.labels": "dogen::csharp::artefact_formatter"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -699,7 +699,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
-        "masd.variability.labels": "masd::cpp::helper_formatter"
+        "masd.variability.labels": "dogen::cpp::helper_formatter"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -774,7 +774,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
-        "masd.variability.labels": "masd::csharp::helper_formatter"
+        "masd.variability.labels": "dogen::csharp::helper_formatter"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -849,7 +849,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.labels": "masd::handcrafted::serializable"
+        "masd.variability.labels": "dogen::handcrafted::serializable"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
