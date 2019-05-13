@@ -12,26 +12,26 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-13 Mon 18:03]
+#+CAPTION: Clock summary at [2019-05-13 Mon 18:48]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *51:38* |       |       | 100.0 |
+| *Total time*                                               | *51:54* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 51:38   |       |       | 100.0 |
-| Active                                                     |         | 51:38 |       | 100.0 |
+| Stories                                                    | 51:54   |       |       | 100.0 |
+| Active                                                     |         | 51:54 |       | 100.0 |
 | Edit release notes for previous sprint                     |         |       |  2:41 |   5.2 |
 | Create a video demo for the previous sprint's features     |         |       |  2:11 |   4.2 |
-| Sprint and product backlog grooming                        |         |       |  1:10 |   2.3 |
+| Sprint and product backlog grooming                        |         |       |  1:26 |   2.8 |
 | Defining profiles directly on a target model does not work |         |       |  0:30 |   1.0 |
 | Inner modules need to be qualified                         |         |       |  0:22 |   0.7 |
-| Create namespaces for model elements                       |         |       |  8:59 |  17.4 |
+| Create namespaces for model elements                       |         |       |  8:59 |  17.3 |
 | Leaves in internal modules are not captured correctly      |         |       |  1:33 |   3.0 |
 | Try to add relational tracing support                      |         |       |  2:51 |   5.5 |
 | Linux and OSX binaries are not stripped                    |         |       |  1:23 |   2.7 |
 | Fix issues with nightly build and CI                       |         |       |  0:05 |   0.2 |
-| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  14.0 |
-| Replace JSON based feature templates with generated code   |         |       | 16:15 |  31.5 |
+| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  13.9 |
+| Replace JSON based feature templates with generated code   |         |       | 16:15 |  31.3 |
 | Make a clear separation between dogen and masd             |         |       |  5:17 |  10.2 |
 | Update the MASD UML profile to reflect the latest changes  |         |       |  0:05 |   0.2 |
 | Add a method in enumeration that converts it from strings  |         |       |  1:03 |   2.0 |
@@ -173,6 +173,7 @@ Time spent creating the demo.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-05-13 Mon 18:31]--[2019-05-13 Mon 18:47] =>  0:16
     CLOCK: [2019-05-13 Mon 08:14]--[2019-05-13 Mon 08:18] =>  0:04
     CLOCK: [2019-05-13 Mon 08:02]--[2019-05-13 Mon 08:07] =>  0:05
     CLOCK: [2019-05-10 Fri 20:42]--[2019-05-10 Fri 20:48] =>  0:06
@@ -624,6 +625,69 @@ Links:
 
 - [[http://www.cplusplus.com/reference/cstring/strncmp/][strncmp]]
 - [[https://stackoverflow.com/questions/1250795/very-poor-boostlexical-cast-performance][Very poor boost::lexical_cast performance]]
+
+*** Postfix and directory fields should be templates                  :story:
+
+Why are we manually instantiating postfix and directory for each
+formatter/facet instead of using templates? This is one of the main
+reasons for breaks/errors when adding a new formatter.
+
+We need to understand why we didn't templatise these fields. It is
+very painful to have to add these manually for each facet and
+formatter.
+
+Most likely it is because each formatter/facet needs to "override" a
+base value with its own value. For example, we almost always want a
+blank postfix, but occasionally need to set it (=fwd= for forward
+declarations and so forth). Our variability implementation does not
+cope with this type of overrides. We would have to have some kind of
+way of allowing instance templates even though a facet/archetype
+template already exists, and then use the instance template as the
+override. Alternatively, we could simply check for postfix/directory;
+if not present default to empty string.
+
+For extra bonus points, we could allow variables: =${facet.name}=
+could expand to the current facet name on the facet template.
+
+*** Formatter dependencies and model processing                       :story:
+
+At present we are manually adding the includes required by a formatter
+as part of the "inclusion_dependencies" building. There are several
+disadvantages to this approach:
+
+- we are quite far down the pipeline. We've already passed all the
+  model building checks, etc. Thus, there is no way of knowing what
+  the formatter dependencies are. At present this is not a huge
+  problem because we have so few formatters and their dependencies are
+  mainly on the standard library and a few core boost models. However,
+  as we add more formatters this will become a bigger problem. For
+  example, we've added formatters now that require access to
+  variability headers; in an ideal world, we should now need to have a
+  reference to this model (for example, so that when we integrate
+  package management we get the right dependencies, etc).
+- we are hard-coding the header files. At present this is not a big
+  problem. To be honest, we can't see when this would be a big
+  problem, short of models changing their file names and/or
+  locations. Nonetheless, it seems "unclean" to depend on the header
+  file directly.
+- the dependency is on c++ code rather than expressed via a model.
+
+In an ideal world, we would have some kind of way of declaring a
+formatter meta-model element, with a set of dependencies declared via
+meta-data. These are on the model itself. They must be declared
+against a specific archetype. We then would process these as part of
+resolution. We would then map the header files as part of the existing
+machinery for header files.
+
+However one problem with this approach is that we are generating the
+formatter code using stitch at present. For this to work we would need
+to inject a fragment of code into the stitch template somehow with the
+dependencies. Whilst this is not exactly ideal, the advantage is that
+we could piggy-back on this mechanism to inject the postfix fields as
+well, so that we don't need to define these manually in each
+model. However, this needs some thinking because the complexity of
+defining a formatter will increase yet again. When there are problems,
+it will be hard to troubleshoot.
 
 *** Add =structural= namespace to core elements                       :story:
 
