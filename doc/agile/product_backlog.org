@@ -425,6 +425,12 @@ model elements:
   have an injector format that supports this use case (another use
   case for developing a =org_uml= injector).
 
+Notes:
+
+- automatically ignore wale templates by looking at the input
+  meta-data.
+- make wale template input path relative to the output directory.
+
 *** Split wale out of stitch templates                                :story:
 
 Stitch requires extra work in order to split out decoration. This is
@@ -1556,6 +1562,26 @@ mappings. A few things are needed:
   demand if, after mapping, we find types being referenced (e.g. get a
   list of all referenced models after mapping, check for their
   presence in references list and load them).
+
+Actually the right way to achieve this is to have "proxy model
+elements". These cannot be used by themselves; they exist merely to
+signify a mapping point. Then, on the regular models we define the
+mapping (e.g. =std::string= has a mapping to a proxy element in
+LAM). The mapping is not used when you include =std=, only when you
+include =lam= (e.g. when we detect the presence of the proxy
+elements). This means its now very easy to add new mappings (just add
+them to new models). Note also that the technical space of the mapping
+is inferred from the TS of the model with the mapping (e.g. c++ in the
+case of =std=). We need to:
+
+- create a model called LAM.
+- define a new type of meta-model element for the mapping (look for
+  better names).
+- define a new meta-data key for the mapping.
+- create a new mapping transform (post-assembly) that looks for proxy
+  elements and their mappings; it uses those to build the existing
+  mapping structures. The rest of the mapping process remains as is -
+  i.e. the output of this transform should match the hydrator.
 
 Merged Stories:
 
