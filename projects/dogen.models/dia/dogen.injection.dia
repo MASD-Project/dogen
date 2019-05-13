@@ -899,19 +899,19 @@
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O6">
       <dia:attribute name="obj_pos">
-        <dia:point val="-21,-4"/>
+        <dia:point val="-20,-4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-21.05,-4.05;7.67,32.15"/>
+        <dia:rectangle val="-20.05,-4.05;7.13,32.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-21,-4"/>
+        <dia:point val="-20,-4"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="28.620000000000001"/>
+        <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="36.100000000000001"/>
@@ -980,7 +980,7 @@ manage it.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-20.65,-2.755"/>
+            <dia:point val="-19.65,-2.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -5077,13 +5077,13 @@ and, if so, ignore it.#</dia:string>
         <dia:point val="-20,35"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-20.05,34.95;-7.515,38.05"/>
+        <dia:rectangle val="-20.05,34.95;-7.13,38.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-20,35"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.434999999999999"/>
+        <dia:real val="12.82"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
