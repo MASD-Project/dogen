@@ -12,28 +12,29 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-13 Mon 16:28]
+#+CAPTION: Clock summary at [2019-05-13 Mon 18:03]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *50:35* |       |       | 100.0 |
+| *Total time*                                               | *51:38* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 50:35   |       |       | 100.0 |
-| Active                                                     |         | 50:35 |       | 100.0 |
-| Edit release notes for previous sprint                     |         |       |  2:41 |   5.3 |
-| Create a video demo for the previous sprint's features     |         |       |  2:11 |   4.3 |
+| Stories                                                    | 51:38   |       |       | 100.0 |
+| Active                                                     |         | 51:38 |       | 100.0 |
+| Edit release notes for previous sprint                     |         |       |  2:41 |   5.2 |
+| Create a video demo for the previous sprint's features     |         |       |  2:11 |   4.2 |
 | Sprint and product backlog grooming                        |         |       |  1:10 |   2.3 |
 | Defining profiles directly on a target model does not work |         |       |  0:30 |   1.0 |
 | Inner modules need to be qualified                         |         |       |  0:22 |   0.7 |
-| Create namespaces for model elements                       |         |       |  8:59 |  17.8 |
-| Leaves in internal modules are not captured correctly      |         |       |  1:33 |   3.1 |
-| Try to add relational tracing support                      |         |       |  2:51 |   5.6 |
+| Create namespaces for model elements                       |         |       |  8:59 |  17.4 |
+| Leaves in internal modules are not captured correctly      |         |       |  1:33 |   3.0 |
+| Try to add relational tracing support                      |         |       |  2:51 |   5.5 |
 | Linux and OSX binaries are not stripped                    |         |       |  1:23 |   2.7 |
 | Fix issues with nightly build and CI                       |         |       |  0:05 |   0.2 |
-| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  14.3 |
-| Replace JSON based feature templates with generated code   |         |       | 16:15 |  32.1 |
-| Make a clear separation between dogen and masd             |         |       |  5:17 |  10.4 |
+| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  14.0 |
+| Replace JSON based feature templates with generated code   |         |       | 16:15 |  31.5 |
+| Make a clear separation between dogen and masd             |         |       |  5:17 |  10.2 |
 | Update the MASD UML profile to reflect the latest changes  |         |       |  0:05 |   0.2 |
+| Add a method in enumeration that converts it from strings  |         |       |  1:03 |   2.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -522,7 +523,8 @@ Notes:
   We should not require them in this case. We could make the location
   optional on the template.
 
-*** STARTED Make a clear separation between dogen and masd            :story:
+*** COMPLETED Make a clear separation between dogen and masd          :story:
+    CLOSED: [2019-05-13 Mon 16:32]
     :LOGBOOK:
     CLOCK: [2019-05-13 Mon 16:16]--[2019-05-13 Mon 16:28] =>  0:12
     CLOCK: [2019-05-13 Mon 16:05]--[2019-05-13 Mon 16:15] =>  0:10
@@ -583,6 +585,46 @@ somewhere in between.
 The UML profile is now a fair bit out of date. Take advantage of the
 down time waiting for builds to sync it.
 
+*** STARTED Add a method in enumeration that converts it from strings :story:
+    :LOGBOOK:
+    CLOCK: [2019-05-13 Mon 17:21]--[2019-05-13 Mon 18:02] =>  0:41
+    CLOCK: [2019-05-13 Mon 16:29]--[2019-05-13 Mon 16:51] =>  0:22
+    :END:
+
+- =from_simple_string=;
+- =from_qualified_string=.
+
+For symmetry:
+
+- =to_simple_string=;
+- =to_qualified_string=.
+
+Actually we cannot call the method =from_simple_string= as we cannot
+overload based on return types. In addition, with C++ 98 we may also
+have problems overloading based on plain enums - needs
+investigation. The names will have to reflect the enum name
+too. Perhaps:
+
+- =simple_string_to_technical_space=
+- =qualified_string_to_technical_space=
+- =simple_string_to_technical_space=
+- =qualified_string_to_technical_space=
+
+In addition, the conversion to string requires a bit of thinking. We
+don't want to create strings on the heap needlessly, but supporting
+C++98 means we can't just use string view. Besides we don't even know
+how string view will integrated with the existing code.
+
+A slightly better approach may be to rely on lexical cast. We can
+create a new facet specifically for this and specialise it only for
+enums for now. We could try to make no allocations as well using
+=char*= and =strncmp=.
+
+Links:
+
+- [[http://www.cplusplus.com/reference/cstring/strncmp/][strncmp]]
+- [[https://stackoverflow.com/questions/1250795/very-poor-boostlexical-cast-performance][Very poor boost::lexical_cast performance]]
+
 *** Add =structural= namespace to core elements                       :story:
 
 We've created a namespace inside the coding meta-model for the core
@@ -603,16 +645,6 @@ value and have the client code handle its absence.
 At present it is possible to label a profile with multiple
 labels. This is not a good idea. Make it a plain text field so we can
 only apply a single label.
-
-*** Add a method in enumeration that converts it from strings         :story:
-
-- =from_simple_string=;
-- =from_qualified_string=.
-
-For symmetry:
-
-- =to_simple_string=;
-- =to_qualified_string=.
 
 *** Create a code-generated static configuration reader               :story:
 
