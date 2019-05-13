@@ -28,9 +28,9 @@ enable_testing()
 #
 # Check environment
 #
-if (DEFINED ENV{MASD_DOGEN_PROJECTS_DIRECTORY})
+if (DEFINED ENV{DOGEN_PROJECTS_DIRECTORY})
     message(STATUS
-        "MASD_DOGEN_PROJECTS_DIRECTORY=$ENV{MASD_DOGEN_PROJECTS_DIRECTORY}")
+        "DOGEN_PROJECTS_DIRECTORY=$ENV{DOGEN_PROJECTS_DIRECTORY}")
 else()
     #
     # If the user did not set the projects directory for dogen, we
@@ -44,33 +44,33 @@ else()
     # figure out how to set it. Due to, this we have this defaulting
     # here.
     #
-    set(ENV{MASD_DOGEN_PROJECTS_DIRECTORY} "${CMAKE_SOURCE_DIR}/projects")
+    set(ENV{DOGEN_PROJECTS_DIRECTORY} "${CMAKE_SOURCE_DIR}/projects")
     message(STATUS
-        "MASD_DOGEN_PROJECTS_DIRECTORY=$ENV{MASD_DOGEN_PROJECTS_DIRECTORY} (default)")
+        "DOGEN_PROJECTS_DIRECTORY=$ENV{DOGEN_PROJECTS_DIRECTORY} (default)")
 endif()
 
 #
 # C++ Reference Model for system tests.
 #
-if (DEFINED ENV{MASD_CPP_REF_IMPL_PROJECTS_DIRECTORY})
+if (DEFINED ENV{CPP_REF_IMPL_PROJECTS_DIRECTORY})
     message(STATUS
-        "MASD_CPP_REF_IMPL_PROJECTS_DIRECTORY=$ENV{MASD_CPP_REF_IMPL_PROJECTS_DIRECTORY}")
+        "CPP_REF_IMPL_PROJECTS_DIRECTORY=$ENV{CPP_REF_IMPL_PROJECTS_DIRECTORY}")
     add_compile_definitions(ENABLE_CPP_REF_IMPL_TESTS)
 else()
     message(STATUS
-        "MASD_CPP_REF_IMPL_PROJECTS_DIRECTORY env variable not defined, disabling reference implementation tests.")
+        "CPP_REF_IMPL_PROJECTS_DIRECTORY env variable not defined, disabling reference implementation tests.")
 endif()
 
 #
 # C# Reference Model for system tests.
 #
-if (DEFINED ENV{MASD_CSHARP_REF_IMPL_PROJECTS_DIRECTORY})
+if (DEFINED ENV{CSHARP_REF_IMPL_PROJECTS_DIRECTORY})
     message(STATUS
-        "MASD_CSHARP_REF_IMPL_PROJECTS_DIRECTORY=$ENV{MASD_CSHARP_REF_IMPL_PROJECTS_DIRECTORY}")
+        "CSHARP_REF_IMPL_PROJECTS_DIRECTORY=$ENV{CSHARP_REF_IMPL_PROJECTS_DIRECTORY}")
     add_compile_definitions(ENABLE_CSHARP_REF_IMPL_TESTS)
 else()
     message(STATUS
-        "MASD_CSHARP_REF_IMPL_PROJECTS_DIRECTORY env variable not defined, disabling reference implementation tests.")
+        "CSHARP_REF_IMPL_PROJECTS_DIRECTORY env variable not defined, disabling reference implementation tests.")
 endif()
 
 #

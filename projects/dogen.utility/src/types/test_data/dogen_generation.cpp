@@ -30,7 +30,7 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("utility.dogen_generation"));
 
-const std::string dogen_project_directory_env("MASD_DOGEN_PROJECTS_DIRECTORY");
+const std::string dogen_project_directory_env("DOGEN_PROJECTS_DIRECTORY");
 
 const std::string project_dir_not_found(
     "Could not find project directory: ");

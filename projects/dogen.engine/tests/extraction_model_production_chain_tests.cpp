@@ -781,28 +781,28 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_out_of_sync_dia_produces_expected_model) {
 
 #ifdef ENABLE_CSHARP_REF_IMPL_TESTS
 
-BOOST_AUTO_TEST_CASE(masd_csharprefimpl_csharpmodel_dia_produces_expected_model) {
-    SETUP_TEST_LOG("masd_csharprefimpl_csharpmodel_dia_produces_expected_model");
+BOOST_AUTO_TEST_CASE(csharprefimpl_csharpmodel_dia_produces_expected_model) {
+    SETUP_TEST_LOG("csharprefimpl_csharpmodel_dia_produces_expected_model");
     using dogen::utility::test_data::csharp_ref_impl_generation;
-    const auto t(csharp_ref_impl_generation::input_masd_csharprefimpl_csharpmodel_dia());
+    const auto t(csharp_ref_impl_generation::input_csharprefimpl_csharpmodel_dia());
     const auto od(csharp_ref_impl_generation::project_directory());
     const auto m(apply_extraction_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(masd_csharprefimpl_directorysettings_dia_produces_expected_model) {
-    SETUP_TEST_LOG("masd_csharprefimpl_directorysettings_dia_produces_expected_model");
+BOOST_AUTO_TEST_CASE(csharprefimpl_directorysettings_dia_produces_expected_model) {
+    SETUP_TEST_LOG("csharprefimpl_directorysettings_dia_produces_expected_model");
     using dogen::utility::test_data::csharp_ref_impl_generation;
-    const auto t(csharp_ref_impl_generation::input_masd_csharprefimpl_directorysettings_dia());
+    const auto t(csharp_ref_impl_generation::input_csharprefimpl_directorysettings_dia());
     const auto od(csharp_ref_impl_generation::project_directory());
     const auto m(apply_extraction_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(masd_csharprefimpl_lammodel_dia_produces_expected_model) {
-    SETUP_TEST_LOG("masd_csharprefimpl_lammodel_dia_produces_expected_model");
+BOOST_AUTO_TEST_CASE(csharprefimpl_lammodel_dia_produces_expected_model) {
+    SETUP_TEST_LOG("csharprefimpl_lammodel_dia_produces_expected_model");
     using dogen::utility::test_data::csharp_ref_impl_generation;
-    const auto t(csharp_ref_impl_generation::input_masd_csharprefimpl_lammodel_dia());
+    const auto t(csharp_ref_impl_generation::input_csharprefimpl_lammodel_dia());
     const auto od(csharp_ref_impl_generation::project_directory());
     const auto m(apply_extraction_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
@@ -1157,28 +1157,28 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_out_of_sync_json_produces_expected_model) {
 
 #ifdef ENABLE_CSHARP_REF_IMPL_TESTS
 
-BOOST_AUTO_TEST_CASE(masd_csharprefimpl_csharpmodel_json_produces_expected_model) {
-    SETUP_TEST_LOG("masd_csharprefimpl_csharpmodel_json_produces_expected_model");
+BOOST_AUTO_TEST_CASE(csharprefimpl_csharpmodel_json_produces_expected_model) {
+    SETUP_TEST_LOG("csharprefimpl_csharpmodel_json_produces_expected_model");
     using dogen::utility::test_data::csharp_ref_impl_generation;
-    const auto t(csharp_ref_impl_generation::input_masd_csharprefimpl_csharpmodel_json());
+    const auto t(csharp_ref_impl_generation::input_csharprefimpl_csharpmodel_json());
     const auto od(csharp_ref_impl_generation::project_directory());
     const auto m(apply_extraction_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(masd_csharprefimpl_directorysettings_json_produces_expected_model) {
-    SETUP_TEST_LOG("masd_csharprefimpl_directorysettings_json_produces_expected_model");
+BOOST_AUTO_TEST_CASE(csharprefimpl_directorysettings_json_produces_expected_model) {
+    SETUP_TEST_LOG("csharprefimpl_directorysettings_json_produces_expected_model");
     using dogen::utility::test_data::csharp_ref_impl_generation;
-    const auto t(csharp_ref_impl_generation::input_masd_csharprefimpl_directorysettings_json());
+    const auto t(csharp_ref_impl_generation::input_csharprefimpl_directorysettings_json());
     const auto od(csharp_ref_impl_generation::project_directory());
     const auto m(apply_extraction_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(masd_csharprefimpl_lammodel_json_produces_expected_model) {
-    SETUP_TEST_LOG("masd_csharprefimpl_lammodel_json_produces_expected_model");
+BOOST_AUTO_TEST_CASE(csharprefimpl_lammodel_json_produces_expected_model) {
+    SETUP_TEST_LOG("csharprefimpl_lammodel_json_produces_expected_model");
     using dogen::utility::test_data::csharp_ref_impl_generation;
-    const auto t(csharp_ref_impl_generation::input_masd_csharprefimpl_lammodel_json());
+    const auto t(csharp_ref_impl_generation::input_csharprefimpl_lammodel_json());
     const auto od(csharp_ref_impl_generation::project_directory());
     const auto m(apply_extraction_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));

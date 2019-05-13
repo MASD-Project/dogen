@@ -31,7 +31,7 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("utility.csharp_ref_impl_generation"));
 
 const std::string csharp_ref_impl_project_directory_env(
-    "MASD_CSHARP_REF_IMPL_PROJECTS_DIRECTORY");
+    "CSHARP_REF_IMPL_PROJECTS_DIRECTORY");
 
 const std::string project_dir_not_found(
     "Could not find project directory: ");
@@ -41,22 +41,22 @@ const std::string failed_create("Failed to create output directory.");
 
 const std::string output_dir("masd.csharp_ref_impl.code_generation_test_output");
 
-const std::string models_dia_dir("Masd.CSharpRefImpl.Models/dia");
-const std::string models_json_dir("Masd.CSharpRefImpl.Models/json");
+const std::string models_dia_dir("CSharpRefImpl.Models/dia");
+const std::string models_json_dir("CSharpRefImpl.Models/json");
 
-const std::string path_masd_csharprefimpl_csharpmodel_dia(
-    "Masd.CSharpRefImpl.CSharpModel.dia");
-const std::string path_masd_csharprefimpl_directorysettings_dia(
-    "Masd.CSharpRefImpl.DirectorySettings.dia");
-const std::string path_masd_csharprefimpl_lammodel_dia(
-    "Masd.CSharpRefImpl.LamModel.dia");
+const std::string path_csharprefimpl_csharpmodel_dia(
+    "CSharpRefImpl.CSharpModel.dia");
+const std::string path_csharprefimpl_directorysettings_dia(
+    "CSharpRefImpl.DirectorySettings.dia");
+const std::string path_csharprefimpl_lammodel_dia(
+    "CSharpRefImpl.LamModel.dia");
 
-const std::string path_masd_csharprefimpl_csharpmodel_json(
-    "Masd.CSharpRefImpl.CSharpModel.json");
-const std::string path_masd_csharprefimpl_directorysettings_json(
-    "Masd.CSharpRefImpl.DirectorySettings.json");
-const std::string path_masd_csharprefimpl_lammodel_json(
-    "Masd.CSharpRefImpl.LamModel.json");
+const std::string path_csharprefimpl_csharpmodel_json(
+    "CSharpRefImpl.CSharpModel.json");
+const std::string path_csharprefimpl_directorysettings_json(
+    "CSharpRefImpl.DirectorySettings.json");
+const std::string path_csharprefimpl_lammodel_json(
+    "CSharpRefImpl.LamModel.json");
 
 }
 
@@ -131,38 +131,38 @@ path csharp_ref_impl_generation::output_directory() {
     return output_directory_;
 }
 
-path csharp_ref_impl_generation::input_masd_csharprefimpl_csharpmodel_dia() {
+path csharp_ref_impl_generation::input_csharprefimpl_csharpmodel_dia() {
     ensure_initialized();
-    return dia_models_directory_ / path_masd_csharprefimpl_csharpmodel_dia;
+    return dia_models_directory_ / path_csharprefimpl_csharpmodel_dia;
 }
 
 path csharp_ref_impl_generation::
-input_masd_csharprefimpl_directorysettings_dia() {
+input_csharprefimpl_directorysettings_dia() {
     ensure_initialized();
     return dia_models_directory_ /
-        path_masd_csharprefimpl_directorysettings_dia;
+        path_csharprefimpl_directorysettings_dia;
 }
 
-path csharp_ref_impl_generation::input_masd_csharprefimpl_lammodel_dia() {
+path csharp_ref_impl_generation::input_csharprefimpl_lammodel_dia() {
     ensure_initialized();
-    return dia_models_directory_ / path_masd_csharprefimpl_lammodel_dia;
+    return dia_models_directory_ / path_csharprefimpl_lammodel_dia;
 }
 
-path csharp_ref_impl_generation::input_masd_csharprefimpl_csharpmodel_json() {
+path csharp_ref_impl_generation::input_csharprefimpl_csharpmodel_json() {
     ensure_initialized();
-    return json_models_directory_ / path_masd_csharprefimpl_csharpmodel_json;
+    return json_models_directory_ / path_csharprefimpl_csharpmodel_json;
 }
 
 path csharp_ref_impl_generation::
-input_masd_csharprefimpl_directorysettings_json() {
+input_csharprefimpl_directorysettings_json() {
     ensure_initialized();
     return json_models_directory_ /
-        path_masd_csharprefimpl_directorysettings_json;
+        path_csharprefimpl_directorysettings_json;
 }
 
-path csharp_ref_impl_generation::input_masd_csharprefimpl_lammodel_json() {
+path csharp_ref_impl_generation::input_csharprefimpl_lammodel_json() {
     ensure_initialized();
-    return json_models_directory_ / path_masd_csharprefimpl_lammodel_json;
+    return json_models_directory_ / path_csharprefimpl_lammodel_json;
 }
 
 }

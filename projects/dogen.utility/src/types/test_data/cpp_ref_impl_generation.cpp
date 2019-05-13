@@ -31,7 +31,7 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("utility.cpp_ref_impl_generation"));
 
 const std::string cpp_ref_impl_project_directory_env(
-    "MASD_CPP_REF_IMPL_PROJECTS_DIRECTORY");
+    "CPP_REF_IMPL_PROJECTS_DIRECTORY");
 
 const std::string project_dir_not_found(
     "Could not find project directory: ");
