@@ -49,7 +49,7 @@ for layer in dia.active_display().diagram.data.layers:
         #
         # Theme: Manually generated
         #
-        elif "masd::handcrafted::typeable" in stereotype:
+        elif "dogen::handcrafted::typeable" in stereotype:
             object.properties["fill_colour"] = "#FFFACD"
         elif "masd::cpp::header_only" in stereotype:
             object.properties["fill_colour"] = "#FFFACD"
