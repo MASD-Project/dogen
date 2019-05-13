@@ -251,43 +251,43 @@ include_directories(
     ${stage_inc_dir}/
 
     # real code
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen/include
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.archetypes/include
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.cli/include
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.utility/include
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.variability/include
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.dia/include
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.injection/include
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.injection.dia/include
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.injection.json/include
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.tracing/include
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.extraction/include
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.coding/include
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.engine/include
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.templating/include
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.generation/include
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.generation.cpp/include
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.generation.csharp/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.archetypes/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.cli/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.utility/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.variability/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.dia/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.injection/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.injection.dia/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.injection.json/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.tracing/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.extraction/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.coding/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.engine/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.templating/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.generation/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.generation.cpp/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.generation.csharp/include
     )
 
 #
 # add all other projects
 #
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.archetypes)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.cli)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.utility)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.variability)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.dia)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.injection)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.injection.dia)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.injection.json)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.tracing)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.extraction)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.coding)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.engine)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.models)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.templating)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.generation)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.generation.cpp)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.generation.csharp)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.archetypes)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.cli)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.utility)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.variability)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.dia)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.injection)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.injection.dia)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.injection.json)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.tracing)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.extraction)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.coding)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.engine)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.models)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.templating)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.generation)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.generation.cpp)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.generation.csharp)

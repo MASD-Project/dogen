@@ -1,0 +1,34 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::generation::cpp::formatters::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.coding/types/meta_model/structural/builtin.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.coding/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/inclusion_constants.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/test_data/builtin_header_formatter.hpp" #>
+<#@ masd.stitch.wale.template=cpp_artefact_formatter_implementation_header.wale #>
+<#@ masd.stitch.wale.kvp.class.simple_name=builtin_header_formatter #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=builtin_header #>
+<#@ masd.stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
+<#@ masd.stitch.wale.kvp.yarn_element=coding::meta_model::structural::builtin #>
+<#@ masd.stitch.wale.kvp.meta_element=builtin #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=coding::helpers::meta_name_factory #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+std::list<std::string> builtin_header_formatter::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& /*f*/,
+    const coding::meta_model::element& /*e*/) const {
+    static const std::list<std::string> r;
+    return r;
+}
+
+extraction::meta_model::artefact builtin_header_formatter::
+format(const context& /*ctx*/, const coding::meta_model::element& /*e*/) const {
+    extraction::meta_model::artefact r;
+    return r;
+}
+
+#>

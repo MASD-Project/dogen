@@ -605,28 +605,6 @@ We seem to only be considering a subset of the elements when doing the
 stereotype transform, yet its all working. Need to figure out why, and
 if this is no longer required, remove this method.
 
-*** Prefix =masd::= in stereotypes is misleading                      :story:
-
-At present we have stereotypes such as =masd::handcrafted::typeable=
-etc. However, the namespace =masd= in this context is not meant to
-imply these are defined inside the MASD public UML profile. In fact,
-should we really call dogen =masd::dogen=?
-
-Whilst dogen is an implementation of MASD, it is not inside the MASD
-namespace - in the sense that things defined in dogen are
-implementation specific. If we has simply =dogen=, we could then
-reserve the =masd= namespace for things that are actually in the MASD
-spec. Similarly for the reference models. The question is whether
-reference implementations should exist under the MASD umbrella or
-not. Say for example a third party implements the MASD spec; we
-wouldn't expect them to place it under the MASD namespace.
-
-In a somewhat similar vein, we have the =masd= model in library. This
-contains elements which are directly usable by end users (licences for
-example) and others which are less so - generation markers are more of
-an example rather than what we expect users to use. Modelines are
-somewhere in between.
-
 *** Come up with a name for models that contain "meta-elements        :story:
 
 At present we created a number of models called "profiles"; these have

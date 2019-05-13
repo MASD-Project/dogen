@@ -1,0 +1,63 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::generation::csharp::formatters::types #>
+<#@ masd.stitch.inclusion_dependency="dogen.coding/types/meta_model/structural/enumeration.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.coding/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/types/enum_formatter.hpp" #>
+<#@ masd.stitch.wale.template=csharp_formatter_implementation.wale #>
+<#@ masd.stitch.wale.kvp.class.simple_name=enum_formatter #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=enum #>
+<#@ masd.stitch.wale.kvp.yarn_element=coding::meta_model::structural::enumeration #>
+<#@ masd.stitch.wale.kvp.meta_element=enumeration #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=coding::helpers::meta_name_factory #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+extraction::meta_model::artefact enum_formatter::
+format(const context& ctx, const coding::meta_model::element& e) const {
+    assistant a(ctx, e, archetype_location());
+    const auto& ye(a.as<coding::meta_model::structural::enumeration>(static_id(), e));
+    {
+        const auto sn(e.name().simple());
+        const auto qn(a.get_qualified_name(e.name()));
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        {
+#>
+using System;
+
+<#+
+            const auto ns(a.make_namespaces(e.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
+            a.comment(e.documentation(), 1/*indent*/);
+            if (ye.use_implementation_defined_underlying_element())
+#>
+    public enum <#= sn #>
+<#+
+            else
+#>
+    public enum <#= sn #> : <#= a.get_qualified_name(ye.underlying_element()) #>
+    {
+<#+
+            generation::formatters::sequence_formatter sf(ye.enumerators().size());
+            for (const auto& en : ye.enumerators()) {
+                if (ye.use_implementation_defined_enumerator_values())
+#>
+        <#= en.name().simple() #><#= sf.postfix() #><#= a.comment_inline(en.documentation()) #>
+<#+
+                else
+#>
+        <#= en.name().simple() #> = <#= en.value() #><#= sf.postfix() #><#= a.comment_inline(en.documentation()) #>
+<#+
+                sf.next();
+            }
+#>
+    }
+<#+
+        } // snf
+    } // sbf
+    return a.make_artefact();
+}
+#>

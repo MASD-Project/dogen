@@ -1,0 +1,943 @@
+{
+  "documentation": "The Annotations model is responsible for managing run-time typed data.\n\nThe idea is to allow the meta-models to carry data over to the\nformatting process without necessarily knowing about this data, but\nyet imposing some constraints on the shape of the data.\n",
+  "tagged_values": {
+    "masd.injection.dia.comment": "true",
+    "masd.injection.model_modules": "dogen.variability",
+    "masd.injection.input_technical_space": "cpp",
+    "masd.injection.reference": "cpp.builtins",
+    "masd.injection.reference": "cpp.std",
+    "masd.injection.reference": "cpp.boost",
+    "masd.injection.reference": "masd",
+    "masd.injection.reference": "dogen.profiles",
+    "masd.injection.reference": "dogen.archetypes",
+    "masd.injection.reference": "dogen.tracing",
+    "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
+    "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
+    "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
+    "masd.extraction.delete_extra_files": "true",
+    "masd.extraction.delete_empty_directories": "true",
+    "masd.generation.cpp.enabled": "true",
+    "masd.generation.cpp.standard": "c++-17",
+    "masd.generation.cpp.msbuild.enabled": "false",
+    "masd.generation.cpp.visual_studio.project.enabled": "false",
+    "masd.generation.cpp.visual_studio.solution.enabled": "false",
+    "masd.generation.csharp.enabled": "false",
+    "masd.variability.profile": "dogen.profiles.base.default_profile"
+  },
+  "elements": [
+    {
+      "name": "meta_model",
+      "documentation": "Contains all of the types describing variability\nwith Masd.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "meta_model::element",
+      "documentation": "Represents an element modeling some aspect of variability.\n",
+      "stereotypes": [
+        "Element"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::feature",
+      "parents": [
+        "meta_model::element"
+      ],
+      "documentation": "Unit of configuration within Dogen. Defines the domain of values.\n",
+      "stereotypes": [
+        "FeatureElement"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "is_partially_matchable",
+          "type": "bool",
+          "documentation": "Feature name can be matched partially.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::name",
+      "documentation": "Name of the element in the variability metamodel.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "simple",
+          "type": "std::string",
+          "documentation": "Non-qualified name of the element.\n"
+        },
+        {
+          "name": "qualified",
+          "type": "std::string",
+          "documentation": "Qualified name of the element, using dots to separate the hierarchy.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::binding_point",
+      "documentation": "Determines how a feature can be bound to a modeling element.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "any",
+          "type": "",
+          "documentation": "Feature can be configured anywhere.\n"
+        },
+        {
+          "name": "global",
+          "type": "",
+          "documentation": "Feature can only be configured in the root module.\n"
+        },
+        {
+          "name": "element",
+          "type": "",
+          "documentation": "Feature can be configured in any modeling element.\n"
+        },
+        {
+          "name": "property",
+          "type": "",
+          "documentation": "Feature can only be configured in a property of a modeling element.\n"
+        },
+        {
+          "name": "operation",
+          "type": "",
+          "documentation": "Feature can only be configured in an operation of a modeling element.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::feature_model",
+      "documentation": "Container of all available features, organised for querying.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "all",
+          "type": "std::list<feature>"
+        },
+        {
+          "name": "by_name",
+          "type": "std::unordered_map<std::string, feature>",
+          "documentation": "Features by qualified name.\n"
+        },
+        {
+          "name": "by_facet_name",
+          "type": "std::unordered_map<std::string, std::list<feature>>",
+          "documentation": "Features by facet name, for all models.\n"
+        },
+        {
+          "name": "by_formatter_name",
+          "type": "std::unordered_map<std::string,std::list<feature>>",
+          "documentation": "Features by formatter name, for all models.\n"
+        },
+        {
+          "name": "by_backend_name",
+          "type": "std::unordered_map<std::string, std::list<feature>>",
+          "documentation": "Features by backend name.\n"
+        },
+        {
+          "name": "partially_matchable",
+          "type": "std::unordered_map<std::string, feature>",
+          "documentation": "Features that can be partially matcheable, by qualified name.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::feature_template",
+      "parents": [
+        "meta_model::element"
+      ],
+      "documentation": "Defines a template that can be used to instantiate features.\n",
+      "stereotypes": [
+        "FeatureElement",
+        "Templateable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::value_type",
+      "documentation": "What values can a feature have.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "text",
+          "type": ""
+        },
+        {
+          "name": "text_collection",
+          "type": ""
+        },
+        {
+          "name": "number",
+          "type": ""
+        },
+        {
+          "name": "boolean",
+          "type": ""
+        },
+        {
+          "name": "key_value_pair",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "meta_model::template_kind",
+      "documentation": "Determines the operations to perform when expanding the template.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "instance",
+          "type": "",
+          "documentation": "Template is directly converted into an instance.\n"
+        },
+        {
+          "name": "recursive_template",
+          "type": "",
+          "documentation": "The template is expanded recursively for every point in archetype space.\n"
+        },
+        {
+          "name": "backend_template",
+          "type": "",
+          "documentation": "The template is expanded for every backend in archetype space.\n"
+        },
+        {
+          "name": "facet_template",
+          "type": "",
+          "documentation": "The template is expanded for every facet in archetype space.\n"
+        },
+        {
+          "name": "archetype_template",
+          "type": "",
+          "documentation": "The template is expanded for every archetype in archetype space.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::profile_template",
+      "parents": [
+        "meta_model::element"
+      ],
+      "documentation": "Holds a set of templates for configuration points.\n",
+      "stereotypes": [
+        "Generalizable",
+        "Labelable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "templates",
+          "type": "std::list<configuration_point_template>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::configuration_point_template",
+      "parents": [
+        "meta_model::element"
+      ],
+      "stereotypes": [
+        "Locatable",
+        "Templateable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "untyped_value",
+          "type": "std::list<std::string>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::value",
+      "documentation": "Base class of all value types.\n\nRepresents a value for a configuration point, a default value for a feature, etc.\n",
+      "stereotypes": [
+        "masd::visitable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::number",
+      "parents": [
+        "meta_model::value"
+      ],
+      "documentation": "Represents a numeric integral value.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "content",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::text",
+      "parents": [
+        "meta_model::value"
+      ],
+      "documentation": "Represents a text value.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "content",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::text_collection",
+      "parents": [
+        "meta_model::value"
+      ],
+      "documentation": "Represents a collection of text values.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "content",
+          "type": "std::list<std::string>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::boolean",
+      "parents": [
+        "meta_model::value"
+      ],
+      "documentation": "Represents a boolean value.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "content",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::key_value_pair",
+      "parents": [
+        "meta_model::value"
+      ],
+      "documentation": "Represents a pair of key and value.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "content",
+          "type": "std::unordered_map<std::string, std::string>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::configuration",
+      "parents": [
+        "meta_model::element"
+      ],
+      "stereotypes": [
+        "ConfigurationStore"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "profile_bindings",
+          "type": "std::list<potential_binding>",
+          "documentation": "Bindings to profiles.\n"
+        },
+        {
+          "name": "configuration_bindings",
+          "type": "std::list<potential_binding>",
+          "documentation": "Relationships between this bound configuration and other bound configurations.\n\nThese relationships are inferred from the relationships of the underlying model\nelements.\n"
+        },
+        {
+          "name": "source_binding_point",
+          "type": "binding_point",
+          "documentation": "Where was this configuration sourced from with regards to binding.\n"
+        },
+        {
+          "name": "from_target",
+          "type": "bool",
+          "documentation": "If true, this configuration was sourced from an element in the target model.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::configuration_point",
+      "parents": [
+        "meta_model::element"
+      ],
+      "documentation": "Maps a feature name to an instance value\n",
+      "stereotypes": [
+        "Valuable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::Locatable",
+      "documentation": "Has a position in archetype space.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "location",
+          "type": "archetypes::location",
+          "documentation": "The location of this element in archetype space.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::Nameable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::Describable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "description",
+          "type": "std::string",
+          "documentation": "Human readable description of the feature, used for documentation.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::Element",
+      "parents": [
+        "meta_model::Nameable",
+        "meta_model::Describable"
+      ],
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::Defaultable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "default_value",
+          "type": "boost::shared_ptr<value>",
+          "documentation": "Default value for element, if any.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::Typeable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "value_type",
+          "type": "value_type",
+          "documentation": "Type of the value for the feature that will result of the template instantiation.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::Bindeable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "binding_point",
+          "type": "binding_point",
+          "documentation": "How the feature binds against other model elements.\n"
+        },
+        {
+          "name": "profile_binding_action",
+          "type": "binding_action"
+        },
+        {
+          "name": "configuration_binding_action",
+          "type": "binding_action"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::FeatureElement",
+      "parents": [
+        "meta_model::Locatable",
+        "meta_model::Element",
+        "meta_model::Defaultable",
+        "meta_model::Typeable",
+        "meta_model::Bindeable"
+      ],
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "helpers::feature_selector",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "transforms::feature_model_production_chain",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::feature_template_hydrator",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::feature_template_instantiation_transform",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::feature_model_transform",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::profile_repository_production_chain",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::profile_template_hydrator",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::profile_template_instantiation_transform",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::configuration_factory",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::profile_binding_transform",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::configuration_point_merger",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::context",
+      "documentation": "Context for transformations.\n",
+      "stereotypes": [
+        "masd::typeable",
+        "masd::pretty_printable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "data_directories",
+          "type": "std::vector<boost::filesystem::path>"
+        },
+        {
+          "name": "archetype_location_repository",
+          "type": "boost::shared_ptr<archetypes::location_repository>"
+        },
+        {
+          "name": "compatibility_mode",
+          "type": "bool"
+        },
+        {
+          "name": "tracer",
+          "type": "boost::shared_ptr<tracing::tracer>"
+        }
+      ]
+    },
+    {
+      "name": "transforms::profile_merging_transform",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::value_factory",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::building_exception",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::hydration_exception",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::selection_exception",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::transformation_error",
+      "documentation": "An error occurred whilst applying a transformation.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::configuration_selector",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::template_instantiator",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::instantiation_exception",
+      "documentation": "An error occurred whilst instantiating templates.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::Templateable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "kind",
+          "type": "template_kind",
+          "documentation": "Kind of the template.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::Valuable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "boost::shared_ptr<value>",
+          "documentation": "Value that has been assigned to this element.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::ConfigurationStore",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "configuration_points",
+          "type": "std::unordered_map<std::string, configuration_point>",
+          "documentation": "All configuration points associated with this element.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::profile",
+      "parents": [
+        "meta_model::element"
+      ],
+      "stereotypes": [
+        "ConfigurationStore",
+        "Generalizable",
+        "Labelable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "merged",
+          "type": "bool",
+          "documentation": "If true, the profile has been merged with all of its parents.\n"
+        },
+        {
+          "name": "base_layer_profile",
+          "type": "std::string",
+          "documentation": "Which base layer does this profile rely on, if any.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::Generalizable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "parents",
+          "type": "std::list<std::string>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::Labelable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "labels",
+          "type": "std::unordered_set<std::string>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::binding_action",
+      "documentation": "What action to take when binding.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "ignore",
+          "type": "",
+          "documentation": "Ignores the implict relationship.\n"
+        },
+        {
+          "name": "copy",
+          "type": "",
+          "documentation": "Copy across the value of the feature from the related element\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::profile_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "by_name",
+          "type": "std::unordered_map<std::string, profile>"
+        },
+        {
+          "name": "by_labels",
+          "type": "std::unordered_map<std::string, profile>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::configuration_model_set",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "models",
+          "type": "std::list<configuration_model>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::configuration_model",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "global",
+          "type": "boost::shared_ptr<configuration>"
+        },
+        {
+          "name": "local",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<configuration>>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::profile_template_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "templates",
+          "type": "std::list<profile_template>"
+        }
+      ]
+    },
+    {
+      "name": "transforms::global_configuration_binding_transform",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::implicit_configuration_binding_transform",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::potential_binding",
+      "documentation": "Contains information about a potential binding.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "documentation": "The name to bind to. This can represent a profile or configuration name, or an\nalias.\n"
+        },
+        {
+          "name": "realized",
+          "type": "bool",
+          "documentation": "If true, the potential binding was realised into an actual binding.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::feature_template_repository",
+      "documentation": "Stores a set of feature templates.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "templates",
+          "type": "std::list<feature_template>"
+        }
+      ]
+    },
+    {
+      "name": "helpers::feature_template_registrar",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "repository",
+          "type": "meta_model::feature_template_repository"
+        }
+      ]
+    },
+    {
+      "name": "helpers::enum_mapper",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::enum_mapping_exception",
+      "documentation": "An error occurred whilst mapping enums to or from strings.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features",
+      "documentation": "Features used by the variability model.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "features::profile",
+      "documentation": "Features related to profile processing.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.variability.profile",
+          "type": "masd::variability::text",
+          "documentation": "Profile associated with this configuration.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "any"
+          }
+        }
+      ]
+    },
+    {
+      "name": "features::initializer",
+      "stereotypes": [
+        "masd::variability::feature_template_initializer"
+      ],
+      "fallback_element_type": "masd::object"
+    }
+  ]
+}

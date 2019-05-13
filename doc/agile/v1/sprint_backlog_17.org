@@ -12,26 +12,28 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-13 Mon 10:18]
+#+CAPTION: Clock summary at [2019-05-13 Mon 11:53]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *45:13* |       |       | 100.0 |
+| *Total time*                                               | *46:43* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 45:13   |       |       | 100.0 |
-| Active                                                     |         | 45:13 |       | 100.0 |
-| Edit release notes for previous sprint                     |         |       |  2:41 |   5.9 |
-| Create a video demo for the previous sprint's features     |         |       |  2:11 |   4.8 |
-| Sprint and product backlog grooming                        |         |       |  1:10 |   2.6 |
+| Stories                                                    | 46:43   |       |       | 100.0 |
+| Active                                                     |         | 46:43 |       | 100.0 |
+| Edit release notes for previous sprint                     |         |       |  2:41 |   5.7 |
+| Create a video demo for the previous sprint's features     |         |       |  2:11 |   4.7 |
+| Sprint and product backlog grooming                        |         |       |  1:10 |   2.5 |
 | Defining profiles directly on a target model does not work |         |       |  0:30 |   1.1 |
 | Inner modules need to be qualified                         |         |       |  0:22 |   0.8 |
-| Create namespaces for model elements                       |         |       |  8:59 |  19.9 |
-| Leaves in internal modules are not captured correctly      |         |       |  1:33 |   3.4 |
-| Try to add relational tracing support                      |         |       |  2:51 |   6.3 |
-| Linux and OSX binaries are not stripped                    |         |       |  1:23 |   3.1 |
+| Create namespaces for model elements                       |         |       |  8:59 |  19.2 |
+| Leaves in internal modules are not captured correctly      |         |       |  1:33 |   3.3 |
+| Try to add relational tracing support                      |         |       |  2:51 |   6.1 |
+| Linux and OSX binaries are not stripped                    |         |       |  1:23 |   3.0 |
 | Fix issues with nightly build and CI                       |         |       |  0:05 |   0.2 |
-| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  16.0 |
-| Replace JSON based feature templates with generated code   |         |       | 16:15 |  35.9 |
+| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  15.4 |
+| Replace JSON based feature templates with generated code   |         |       | 16:15 |  34.8 |
+| Make a clear separation between dogen and masd             |         |       |  1:25 |   3.0 |
+| Update the MASD UML profile to reflect the latest changes  |         |       |  0:05 |   0.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -519,6 +521,68 @@ Notes:
 - archetype location properties are not useful for instance templates.
   We should not require them in this case. We could make the location
   optional on the template.
+
+*** STARTED Make a clear separation between dogen and masd            :story:
+    :LOGBOOK:
+    CLOCK: [2019-05-13 Mon 12:45]
+    CLOCK: [2019-05-13 Mon 11:44]--[2019-05-13 Mon 12:05] =>  0:21
+    CLOCK: [2019-05-13 Mon 11:34]--[2019-05-13 Mon 11:37] =>  0:03
+    CLOCK: [2019-05-13 Mon 10:19]--[2019-05-13 Mon 11:33] =>  1:14
+    :END:
+
+At the moment we are confusing Dogen quite a lot with MASD. There
+should be a clear separation between these two:
+
+- MASD provides a theoretical framework, together with a meta-model
+  and a feature model.
+- Dogen is a reference implementation of this framework.
+
+We should not use the prefix =masd= on anything unless it belongs to
+the MASD framework. The question to ask is: "if we had a second
+implementation of MASD, would it have to know about this concept?" If
+the answer is no, then the concept should not be under the MASD
+namespace.
+
+Tasks:
+
+- drop =masd= namespace from all dogen models.
+- drop =masd= namespace from all test models.
+- drop =masd= namespace from all profiles.
+
+*Previous Understanding*
+
+At present we have stereotypes such as =masd::handcrafted::typeable=
+etc. However, the namespace =masd= in this context is not meant to
+imply these are defined inside the MASD public UML profile. In fact,
+should we really call dogen =masd::dogen=?
+
+Whilst dogen is an implementation of MASD, it is not inside the MASD
+namespace - in the sense that things defined in dogen are
+implementation specific. If we has simply =dogen=, we could then
+reserve the =masd= namespace for things that are actually in the MASD
+spec. Similarly for the reference models. The question is whether
+reference implementations should exist under the MASD umbrella or
+not. Say for example a third party implements the MASD spec; we
+wouldn't expect them to place it under the MASD namespace.
+
+In a somewhat similar vein, we have the =masd= model in library. This
+contains elements which are directly usable by end users (licences for
+example) and others which are less so - generation markers are more of
+an example rather than what we expect users to use. Modelines are
+somewhere in between.
+
+*** STARTED Update the MASD UML profile to reflect the latest changes :story:
+    :LOGBOOK:
+    CLOCK: [2019-05-13 Mon 11:38]--[2019-05-13 Mon 11:43] =>  0:05
+    :END:
+
+The UML profile is now a fair bit out of date. Take advantage of the
+down time waiting for builds to sync it.
+
+*** Add =structural= namespace to core elements                       :story:
+
+We've created a namespace inside the coding meta-model for the core
+entities but we did not update the MASD profile.
 
 *** Remove empty default values                                       :story:
 

@@ -1,0 +1,3256 @@
+{
+  "documentation": "CPP is the C++ backend in the default generation kernel.\n",
+  "tagged_values": {
+    "masd.injection.dia.comment": "true",
+    "masd.injection.model_modules": "dogen.generation.cpp",
+    "masd.injection.reference": "cpp.builtins",
+    "masd.injection.reference": "cpp.boost",
+    "masd.injection.reference": "cpp.std",
+    "masd.injection.reference": "dogen",
+    "masd.injection.reference": "dogen.variability",
+    "masd.injection.reference": "dogen.tracing",
+    "masd.injection.reference": "dogen.coding",
+    "masd.injection.reference": "dogen.extraction",
+    "masd.injection.reference": "dogen.generation",
+    "masd.injection.reference": "masd",
+    "masd.injection.reference": "dogen.profiles",
+    "masd.injection.input_technical_space": "cpp",
+    "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
+    "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
+    "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
+    "masd.extraction.delete_extra_files": "true",
+    "masd.extraction.delete_empty_directories": "true",
+    "masd.generation.cpp.enabled": "true",
+    "masd.generation.cpp.standard": "c++-17",
+    "masd.generation.cpp.msbuild.enabled": "false",
+    "masd.generation.cpp.visual_studio.project.enabled": "false",
+    "masd.generation.cpp.visual_studio.solution.enabled": "false",
+    "masd.generation.csharp.enabled": "false",
+    "masd.variability.profile": "dogen.profiles.base.default_profile"
+  },
+  "elements": [
+    {
+      "name": "formatters",
+      "documentation": "Formatters for the C++ model.\n\nTakes types in the C++ model and creates a file\nrepresentation of these types according to the\ngrammar of the C++ technical space.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "formatters::types",
+      "documentation": "Formatters for the types facet of the\nC++ technical space.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "formatters::types::class_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::artefact_formatter_interface",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "tagged_values": {
+        "masd.generation.cpp.types.forward_declarations.enabled": "true"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "model_to_extraction_model_transform",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::hash",
+      "documentation": "Formatters for the hash facet of the\nC++ technical space.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "formatters::hash::class_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::hash::class_implementation_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::types::exception_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::types::enum_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::types::namespace_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::types::visitor_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::types::class_implementation_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::hash::enum_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::io",
+      "documentation": "Formatters for the io facet of the\nC++ technical space.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "formatters::io::class_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::io::class_implementation_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::io::enum_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::io::enum_implementation_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::serialization",
+      "documentation": "Formatters for the boost serialisation\nfacet of the C++ technical space.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "formatters::serialization::class_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::serialization::class_implementation_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::master_header_formatter",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "tagged_values": {
+        "masd.generation.cpp.types.class_implementation.formatting_style": "stitch",
+        "masd.generation.cpp.types.class_implementation.overwrite": "true"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data",
+      "documentation": "Formatters for the test_data facet\nof the C++ technical space.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "formatters::test_data::class_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::class_implementation_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::enum_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::enum_implementation_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::odb",
+      "documentation": "Formatters for the odb facet of the\nC++ technical space.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "formatters::odb::class_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::odb::common_odb_options_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::include_cmakelists_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::source_cmakelists_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::types::traits",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::hash::traits",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::traits",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::odb::traits",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::io::traits",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::serialization::traits",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::registrar",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::registrar_error",
+      "documentation": "There was an error in the registrar.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "workflow_error",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::formatting_error",
+      "documentation": "An error occurred whilst formatting.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::repository",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "tagged_values": {
+        "masd.generation.cpp.io.enabled": "true",
+        "masd.generation.cpp.io.overwrite": "false"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stock_artefact_formatters_by_meta_name",
+          "type": "std::unordered_map<std::string, std::forward_list<std::shared_ptr<formatters::artefact_formatter_interface>>>"
+        },
+        {
+          "name": "stock_artefact_formatters_by_archetype",
+          "type": "std::unordered_map<std::string, std::shared_ptr<formatters::artefact_formatter_interface>>"
+        },
+        {
+          "name": "stock_artefact_formatters",
+          "type": "std::forward_list<std::shared_ptr<formatters::artefact_formatter_interface>>"
+        },
+        {
+          "name": "helper_formatters",
+          "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<formatters::helper_formatter_interface>>>>"
+        }
+      ]
+    },
+    {
+      "name": "formatters::workflow",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "registrar_",
+          "type": "formatters::registrar"
+        }
+      ]
+    },
+    {
+      "name": "formatters::traits",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "traits",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables",
+      "documentation": "Formattables contains all types required by the formatters\nand those used to generate them.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "formattables::workflow",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::inclusion_constants",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "initializer",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::types::initializer",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::initializer",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::odb::initializer",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::io::initializer",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::serialization::initializer",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::locator",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::types::forward_declarations_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::serialization::forward_declarations_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::dependencies_builder",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::building_error",
+      "documentation": "An error occurred while the factory was building.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::hash::initializer",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::artefact_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "file_path",
+          "type": "boost::filesystem::path"
+        },
+        {
+          "name": "header_guard",
+          "type": "std::string"
+        },
+        {
+          "name": "inclusion_dependencies",
+          "type": "std::list<std::string>"
+        }
+      ]
+    },
+    {
+      "name": "formattables::dependencies_builder_factory",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::initializer",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::assistant",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "tagged_values": {
+        "masd.generation.cpp.types.forward_declarations.enabled": "true"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stream_",
+          "type": "std::ostringstream"
+        }
+      ]
+    },
+    {
+      "name": "formatters::serialization::registrar_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::serialization::registrar_implementation_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::serialization::enum_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::odb::enum_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::context",
+      "documentation": "Supplies additional information required for formatting.\n",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "model",
+          "type": "formattables::model"
+        },
+        {
+          "name": "element_properties",
+          "type": "formattables::element_properties"
+        },
+        {
+          "name": "helpers",
+          "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<formatters::helper_formatter_interface>>>>"
+        }
+      ]
+    },
+    {
+      "name": "formatters::helper_formatter_interface",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "tagged_values": {
+        "masd.generation.cpp.types.forward_declarations.enabled": "true"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::building_error",
+      "documentation": "An error occurred whilst the factory was building.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::helper_descriptor",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "family",
+          "type": "std::string"
+        },
+        {
+          "name": "namespaces",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "name_identifiable",
+          "type": "std::string"
+        },
+        {
+          "name": "name_qualified",
+          "type": "std::string"
+        },
+        {
+          "name": "name_tree_qualified",
+          "type": "std::string"
+        },
+        {
+          "name": "name_tree_identifiable",
+          "type": "std::string"
+        },
+        {
+          "name": "streaming_properties",
+          "type": "boost::optional<formattables::streaming_properties>"
+        },
+        {
+          "name": "is_simple_type",
+          "type": "bool"
+        },
+        {
+          "name": "requires_hashing_helper",
+          "type": "bool"
+        },
+        {
+          "name": "is_circular_dependency",
+          "type": "bool"
+        },
+        {
+          "name": "is_pointer",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "formattables::helper_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "current",
+          "type": "formattables::helper_descriptor"
+        },
+        {
+          "name": "direct_descendants",
+          "type": "std::list<formattables::helper_descriptor>"
+        },
+        {
+          "name": "in_inheritance_relationship",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "formattables::element_properties",
+      "documentation": "All of the properties associated with an element.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "aspect_properties",
+          "type": "formattables::aspect_properties"
+        },
+        {
+          "name": "artefact_properties",
+          "type": "std::unordered_map<std::string, formattables::artefact_properties>"
+        },
+        {
+          "name": "helper_properties",
+          "type": "std::list<formattables::helper_properties>"
+        },
+        {
+          "name": "canonical_archetype_to_archetype",
+          "type": "std::unordered_map<std::string, std::string>"
+        },
+        {
+          "name": "odb_properties",
+          "type": "boost::optional<formattables::odb_properties>"
+        },
+        {
+          "name": "attribute_level_test_data_properties",
+          "type": "std::unordered_map<std::string, test_data_properties>"
+        }
+      ]
+    },
+    {
+      "name": "formattables::aspect_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "requires_manual_default_constructor",
+          "type": "bool"
+        },
+        {
+          "name": "requires_manual_move_constructor",
+          "type": "bool"
+        },
+        {
+          "name": "requires_stream_manipulators",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "fabric",
+      "documentation": "Houses the masd.generation.cpp extensions to masd.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "fabric::registrar",
+      "tagged_values": {
+        "masd.generalization.parent": "coding::meta_model::element"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "leaves",
+          "type": "std::list<coding::meta_model::name>",
+          "documentation": "List of all concrete classes which are part of an inheritance tree.\n"
+        },
+        {
+          "name": "model_dependencies",
+          "type": "std::list<coding::meta_model::name>",
+          "documentation": "List of all models which the model depends on.\n"
+        },
+        {
+          "name": "registrar_dependencies",
+          "type": "std::list<coding::meta_model::name>",
+          "documentation": "Registrars on other models this registrar depends on.\n"
+        }
+      ]
+    },
+    {
+      "name": "fabric::forward_declarations",
+      "tagged_values": {
+        "masd.generalization.parent": "coding::meta_model::element"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "is_enum",
+          "type": "bool",
+          "documentation": "Returns true if the type for which we are creating a forward declaration is\nan enumeration, false otherwise.\n"
+        },
+        {
+          "name": "underlying_element",
+          "type": "coding::meta_model::name",
+          "documentation": "The underlying type of the enumeration, if we are an enum forward declaration.\n"
+        },
+        {
+          "name": "is_exception",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "fabric::injector",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "fabric::initializer",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "fabric::master_header",
+      "tagged_values": {
+        "masd.generalization.parent": "coding::meta_model::element"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "inclusion_by_facet",
+          "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<coding::meta_model::name>>>"
+        }
+      ]
+    },
+    {
+      "name": "fabric::master_header_factory",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "fabric::registrar_factory",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "fabric::forward_declarations_factory",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "fabric::cmakelists",
+      "tagged_values": {
+        "masd.generalization.parent": "coding::meta_model::element"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "include_directory_path",
+          "type": "std::string"
+        },
+        {
+          "name": "source_directory_name",
+          "type": "std::string"
+        },
+        {
+          "name": "header_file_extension",
+          "type": "std::string"
+        },
+        {
+          "name": "implementation_file_extension",
+          "type": "std::string"
+        },
+        {
+          "name": "odb_targets",
+          "type": "odb_targets"
+        },
+        {
+          "name": "tests_directory_name",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "fabric::common_odb_options",
+      "tagged_values": {
+        "masd.generalization.parent": "coding::meta_model::element"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "sql_name_case",
+          "type": "std::string"
+        },
+        {
+          "name": "databases",
+          "type": "std::list<std::string>"
+        }
+      ]
+    },
+    {
+      "name": "formatters::inclusion_support_types",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "not_supported",
+          "type": "",
+          "documentation": "This formatter does not export an inclusion directive.\n"
+        },
+        {
+          "name": "regular_support",
+          "type": "",
+          "documentation": "This formatter exports a regular inclusion directive.\n"
+        },
+        {
+          "name": "canonical_support",
+          "type": "",
+          "documentation": "This formatter exports a regular inclusion directive and is the default for its facet\nand element.\n"
+        }
+      ]
+    },
+    {
+      "name": "formatters::types::builtin_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::hash::builtin_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::builtin_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::io::builtin_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::odb::builtin_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::serialization::builtin_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::formattable",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "master_segment",
+          "type": "boost::shared_ptr<coding::meta_model::element>"
+        },
+        {
+          "name": "all_segments",
+          "type": "std::list<boost::shared_ptr<coding::meta_model::element>>"
+        },
+        {
+          "name": "element_properties",
+          "type": "formattables::element_properties"
+        }
+      ]
+    },
+    {
+      "name": "formattables::adapter",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::inclusion_expander",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::reducer",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::model_expander",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::file_path_and_guard_expander",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::aspect_expander",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::helper_expander",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::adaptation_error",
+      "documentation": "An error occurred during adaptation.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::expansion_error",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::odb_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "is_value",
+          "type": "bool"
+        },
+        {
+          "name": "top_level_odb_pragmas",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "attribute_level_odb_pragmas",
+          "type": "std::unordered_map<std::string, std::list<std::string>>"
+        }
+      ]
+    },
+    {
+      "name": "formattables::odb_expander",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::model",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "coding::meta_model::name"
+        },
+        {
+          "name": "streaming_properties",
+          "type": "std::unordered_map<std::string, formattables::streaming_properties>"
+        },
+        {
+          "name": "formattables",
+          "type": "std::unordered_map<std::string, formattables::formattable>"
+        },
+        {
+          "name": "facet_properties",
+          "type": "std::unordered_map<std::string, formattables::facet_properties>"
+        },
+        {
+          "name": "cpp_standard",
+          "type": "formattables::cpp_standards"
+        },
+        {
+          "name": "odb_databases",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "odb_sql_name_case",
+          "type": "std::string"
+        },
+        {
+          "name": "project_items",
+          "type": "std::list<std::string>"
+        }
+      ]
+    },
+    {
+      "name": "formattables::facet_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "directory",
+          "type": "std::string"
+        },
+        {
+          "name": "enabled",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "formattables::facet_directory_expander",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::canonical_archetype_resolver",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::canonical_archetype_expander",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::resolution_error",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::streaming_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "requires_quoting",
+          "type": "bool"
+        },
+        {
+          "name": "string_conversion_method",
+          "type": "std::string"
+        },
+        {
+          "name": "remove_unprintable_characters",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "formattables::streaming_expander",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::locator_configuration",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "facet_configurations",
+          "type": "std::unordered_map<std::string, formattables::locator_facet_configuration>"
+        },
+        {
+          "name": "archetype_configurations",
+          "type": "std::unordered_map<std::string, formattables::locator_archetype_configuration>"
+        },
+        {
+          "name": "include_directory_name",
+          "type": "std::string"
+        },
+        {
+          "name": "source_directory_name",
+          "type": "std::string"
+        },
+        {
+          "name": "disable_facet_directories",
+          "type": "bool"
+        },
+        {
+          "name": "header_file_extension",
+          "type": "std::string"
+        },
+        {
+          "name": "implementation_file_extension",
+          "type": "std::string"
+        },
+        {
+          "name": "backend_directory_name",
+          "type": "std::string"
+        },
+        {
+          "name": "tests_directory_name",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "formattables::locator_facet_configuration",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "directory",
+          "type": "std::string"
+        },
+        {
+          "name": "postfix",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "formattables::locator_archetype_configuration",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "facet_directory",
+          "type": "std::string"
+        },
+        {
+          "name": "facet_postfix",
+          "type": "std::string"
+        },
+        {
+          "name": "archetype_postfix",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "formatters::wale_formatter",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::stitch_formatter",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::types::smart_pointer_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::hash::smart_pointer_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::hash::time_duration_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::hash::ptree_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::hash::associative_container_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::hash::date_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::hash::optional_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::hash::path_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::hash::pair_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::hash::sequence_container_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::hash::ptime_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::hash::variant_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::io::associative_container_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::io::smart_pointer_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::io::ptree_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::io::optional_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::io::pair_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::io::sequence_container_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::io::variant_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::io::string_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::serialization::path_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::associative_container_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::char_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::bool_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::date_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::domain_type_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::number_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::optional_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::pair_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::path_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::ptime_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::ptree_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::sequence_container_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::smart_pointer_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::string_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::time_duration_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::variant_helper",
+      "stereotypes": [
+        "masd::cpp::helper_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::io::inserter_implementation_helper",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "tagged_values": {
+        "masd.generation.cpp.types.class_implementation.formatting_style": "stitch",
+        "masd.generation.cpp.types.class_implementation.overwrite": "true"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::location_error",
+      "documentation": "An error occurred while the locator was creating a path.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::helper_configuration",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "helper_families",
+          "type": "std::unordered_map<std::string, std::string>"
+        },
+        {
+          "name": "streaming_properties",
+          "type": "std::unordered_map<std::string, formattables::streaming_properties>"
+        }
+      ]
+    },
+    {
+      "name": "formatters::types::primitive_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::hash::primitive_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::io::primitive_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::odb::primitive_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::primitive_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::serialization::primitive_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::types::primitive_implementation_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::hash::primitive_implementation_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::io::primitive_implementation_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::test_data::primitive_implementation_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::serialization::primitive_implementation_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::directive_group_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "by_id",
+          "type": "std::unordered_map<std::string, std::unordered_map<std::string, formattables::directive_group>>"
+        }
+      ]
+    },
+    {
+      "name": "formattables::directive_group_repository_factory",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::directive_group",
+      "documentation": "Represents the group of inclusion directives associated with a name and an archetype.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "primary",
+          "type": "std::string",
+          "documentation": "The main inclusion directive needed for this element.\n"
+        },
+        {
+          "name": "secondary",
+          "type": "std::list<std::string>",
+          "documentation": "Any other directives that are also needed for this element.\n"
+        }
+      ]
+    },
+    {
+      "name": "fabric::odb_options_factory",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "fabric::building_error",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "fabric::build_files_factory",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::build_files_expander",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::cpp_standards",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "cpp_98",
+          "type": ""
+        },
+        {
+          "name": "cpp_11",
+          "type": ""
+        },
+        {
+          "name": "cpp_14",
+          "type": ""
+        },
+        {
+          "name": "cpp_17",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "formattables::cpp_standard_expander",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::header_guard_factory",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "fabric::odb_targets",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "main_target_name",
+          "type": "std::string"
+        },
+        {
+          "name": "common_odb_options",
+          "type": "std::string"
+        },
+        {
+          "name": "targets",
+          "type": "std::list<odb_target>"
+        }
+      ]
+    },
+    {
+      "name": "fabric::odb_target",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string"
+        },
+        {
+          "name": "comment",
+          "type": "std::string"
+        },
+        {
+          "name": "output_directory",
+          "type": "std::string"
+        },
+        {
+          "name": "types_file",
+          "type": "std::string"
+        },
+        {
+          "name": "move_parameters",
+          "type": "std::list<std::pair<std::string, std::string>>"
+        },
+        {
+          "name": "object_odb_options",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "formattables::odb_file_path_generator",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "fabric::object_odb_options",
+      "tagged_values": {
+        "masd.generalization.parent": "coding::meta_model::element"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "epilogue",
+          "type": "std::string"
+        },
+        {
+          "name": "include_regexes",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "header_guard_prefix",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "formatters::odb::object_odb_options_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formattables::test_data_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "maximum_size",
+          "type": "unsigned int"
+        },
+        {
+          "name": "prefix",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "formattables::test_data_properties_expander",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "fabric::msbuild_targets",
+      "tagged_values": {
+        "masd.generalization.parent": "coding::meta_model::element"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "odb_targets",
+          "type": "odb_targets"
+        }
+      ]
+    },
+    {
+      "name": "formatters::msbuild_targets_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "fabric::visual_studio_factory",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "fabric::visual_studio_project",
+      "tagged_values": {
+        "masd.generalization.parent": "coding::meta_model::element"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "project_guid",
+          "type": "std::string"
+        },
+        {
+          "name": "project_name",
+          "type": "std::string"
+        },
+        {
+          "name": "tools_version",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "fabric::visual_studio_solution",
+      "tagged_values": {
+        "masd.generalization.parent": "coding::meta_model::element"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "project_guid",
+          "type": "std::string"
+        },
+        {
+          "name": "project_solution_guid",
+          "type": "std::string"
+        },
+        {
+          "name": "version",
+          "type": "std::string"
+        },
+        {
+          "name": "project_name",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "fabric::visual_studio_configuration",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "project_solution_guid",
+          "type": "std::string"
+        },
+        {
+          "name": "project_guid",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "formatters::visual_studio_project_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::visual_studio_solution_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::rapidjson",
+      "documentation": "Formatters that enable serialisation into and\nfrom JSON,using the RapidJson library.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "formatters::rapidjson::class_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::rapidjson::initializer",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::rapidjson::traits",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::rapidjson::class_implementation_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "fabric::dynamic_transform",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "fabric::meta_name_factory",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::repository_factory",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::tests",
+      "documentation": "Formatters that generate tests for generated\ncode.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "formatters::tests::initializer",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::tests::traits",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::tests::class_implementation_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "fabric::entry_point",
+      "tagged_values": {
+        "masd.generalization.parent": "coding::meta_model::element"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "fabric::entry_point_factory",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::tests::main_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::tests::cmakelists_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::tests::enum_implementation_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::types::feature_bundle_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::types::feature_bundle_implementation_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::types::feature_template_initializer_header_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::types::feature_template_initializer_implementation_formatter",
+      "stereotypes": [
+        "masd::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::types::features",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.cpp.types.directory",
+          "type": "masd::variability::text",
+          "value": "\"types\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.types.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.types.class_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.types.class_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.types.enum_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.types.enum_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.types.primitive_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.types.primitive_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.types.exception_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.types.namespace_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.types.visitor_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.types.forward_declarations.postfix",
+          "type": "masd::variability::text",
+          "value": "\"fwd\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.types.master_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.types.builtin_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.types.feature_bundle_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.types.feature_bundle_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.types.feature_template_initializer_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.types.feature_template_initializer_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        }
+      ]
+    },
+    {
+      "name": "feature_initializer",
+      "stereotypes": [
+        "masd::variability::feature_template_initializer"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::hash::features",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.cpp.hash.directory",
+          "type": "masd::variability::text",
+          "value": "\"hash\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.hash.postfix",
+          "type": "masd::variability::text",
+          "value": "\"hash\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.hash.class_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.hash.class_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.hash.enum_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.hash.enum_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.hash.primitive_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.hash.primitive_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.hash.master_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.hash.builtin_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        }
+      ]
+    },
+    {
+      "name": "formatters::io::features",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.cpp.io.directory",
+          "type": "masd::variability::text",
+          "value": "\"io\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.io.postfix",
+          "type": "masd::variability::text",
+          "value": "\"io\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.io.class_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.io.class_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.io.enum_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.io.enum_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.io.primitive_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.io.primitive_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.io.master_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.io.builtin_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        }
+      ]
+    },
+    {
+      "name": "formatters::odb::features",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.cpp.odb.directory",
+          "type": "masd::variability::text",
+          "value": "\"odb\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.odb.postfix",
+          "type": "masd::variability::text",
+          "value": "\"pragmas\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.odb.class_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.odb.enum_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.odb.primitive_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.odb.common_odb_options.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.odb.object_odb_options.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.odb.master_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.odb.pragma",
+          "type": "masd::variability::text_collection",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "any"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.odb.builtin_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        }
+      ]
+    },
+    {
+      "name": "formatters::test_data::features",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.cpp.test_data.directory",
+          "type": "masd::variability::text",
+          "value": "\"test_data\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.test_data.postfix",
+          "type": "masd::variability::text",
+          "value": "\"td\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.test_data.class_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.test_data.class_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.test_data.enum_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.test_data.enum_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.test_data.primitive_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.test_data.primitive_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.test_data.master_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.test_data.builtin_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        }
+      ]
+    },
+    {
+      "name": "formatters::serialization::features",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.cpp.serialization.directory",
+          "type": "masd::variability::text",
+          "value": "\"serialization\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.serialization.postfix",
+          "type": "masd::variability::text",
+          "value": "\"ser\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.serialization.class_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.serialization.class_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.serialization.enum_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.serialization.primitive_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.serialization.primitive_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.serialization.registrar_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.serialization.registrar_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.serialization.forward_declarations.postfix",
+          "type": "masd::variability::text",
+          "value": "\"fwd\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.serialization.master_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.serialization.builtin_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        }
+      ]
+    },
+    {
+      "name": "formatters::tests::features",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.cpp.tests.directory",
+          "type": "masd::variability::text",
+          "value": "\"tests\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.tests.postfix",
+          "type": "masd::variability::text",
+          "value": "\"tests\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.tests.class_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.tests.enum_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.tests.master_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.tests.main.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.tests.cmakelists.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        }
+      ]
+    },
+    {
+      "name": "formatters::global_features",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.cpp_headers_output_directory",
+          "type": "masd::variability::text",
+          "documentation": "Override location of public c++ headers.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.directory",
+          "type": "masd::variability::text",
+          "value": "\"cpp\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.inclusion_required",
+          "type": "masd::variability::boolean",
+          "value": "\"true\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.source_directory_name",
+          "type": "masd::variability::text",
+          "value": "\"src\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.include_directory_name",
+          "type": "masd::variability::text",
+          "value": "\"include\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.tests_directory_name",
+          "type": "masd::variability::text",
+          "value": "\"tests\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.header_file_extension",
+          "type": "masd::variability::text",
+          "value": "\"hpp\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.implementation_file_extension",
+          "type": "masd::variability::text",
+          "value": "\"cpp\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.enable_unique_file_names",
+          "type": "masd::variability::boolean",
+          "value": "\"true\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.aspect.requires_manual_default_constructor",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.aspect.requires_manual_move_constructor",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.aspect.requires_stream_manipulators",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.disable_facet_directories",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.standard",
+          "type": "masd::variability::text",
+          "value": "\"c++-14\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.helper.family",
+          "type": "masd::variability::text",
+          "value": "\"Default\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.streaming.string_conversion_method",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.streaming.requires_quoting",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.streaming.remove_unprintable_characters",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.cmake.source_cmakelists.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.cmake.include_cmakelists.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.msbuild.targets.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.visual_studio.project_solution_guid",
+          "type": "masd::variability::text",
+          "value": "\"00000000-0000-0000-0000-000000000000\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.visual_studio.project_guid",
+          "type": "masd::variability::text",
+          "value": "\"00000000-0000-0000-0000-000000000000\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.visual_studio.solution.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.visual_studio.project.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        }
+      ]
+    },
+    {
+      "name": "formatters::facet_features",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "supported",
+          "type": "masd::variability::boolean",
+          "value": "\"true\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "facet_template",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "overwrite",
+          "type": "masd::variability::boolean",
+          "value": "\"true\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "facet_template",
+            "masd.variability.binding_point": "element"
+          }
+        }
+      ]
+    },
+    {
+      "name": "formatters::archetype_features",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "overwrite",
+          "type": "masd::variability::boolean",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "archetype_template",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "primary_inclusion_directive",
+          "type": "masd::variability::text",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "archetype_template",
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "secondary_inclusion_directive",
+          "type": "masd::variability::text_collection",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "archetype_template",
+            "masd.variability.binding_point": "element"
+          }
+        }
+      ]
+    }
+  ]
+}

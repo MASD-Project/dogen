@@ -1,0 +1,1081 @@
+{
+  "tagged_values": {
+    "masd.injection.dia.comment": "true",
+    "masd.injection.model_modules": "dogen.generation",
+    "masd.injection.reference": "cpp.builtins",
+    "masd.injection.reference": "cpp.boost",
+    "masd.injection.reference": "cpp.std",
+    "masd.injection.reference": "dogen",
+    "masd.injection.reference": "dogen.variability",
+    "masd.injection.reference": "dogen.tracing",
+    "masd.injection.reference": "dogen.coding",
+    "masd.injection.reference": "dogen.extraction",
+    "masd.injection.reference": "masd",
+    "masd.injection.reference": "dogen.profiles",
+    "masd.injection.input_technical_space": "cpp",
+    "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
+    "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
+    "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
+    "masd.extraction.delete_extra_files": "true",
+    "masd.extraction.delete_empty_directories": "true",
+    "masd.generation.cpp.enabled": "true",
+    "masd.generation.cpp.standard": "c++-17",
+    "masd.generation.cpp.msbuild.enabled": "false",
+    "masd.generation.cpp.visual_studio.project.enabled": "false",
+    "masd.generation.cpp.visual_studio.solution.enabled": "false",
+    "masd.generation.csharp.enabled": "false",
+    "masd.variability.profile": "dogen.profiles.base.default_profile"
+  },
+  "elements": [
+    {
+      "name": "meta_model",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "meta_model::model",
+      "documentation": "Yarn model.\n",
+      "stereotypes": [
+        "Nameable",
+        "MetaNameable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "references",
+          "type": "std::unordered_map<coding::meta_model::name, coding::meta_model::origin_types>",
+          "documentation": "All other models that this model depends on, mapped to their origin.\n"
+        },
+        {
+          "name": "leaves",
+          "type": "std::unordered_set<coding::meta_model::name>",
+          "documentation": "All leaf types in this model.\n\nLeaves are types concrete types which have a parent.\n"
+        },
+        {
+          "name": "elements",
+          "type": "std::vector<boost::shared_ptr<coding::meta_model::element>>"
+        },
+        {
+          "name": "root_module",
+          "type": "boost::shared_ptr<coding::meta_model::structural::module>",
+          "documentation": "The module that represents the model.\n"
+        },
+        {
+          "name": "module_ids",
+          "type": "std::unordered_set<std::string>",
+          "documentation": "IDs of all of the model elements which are modules.\n"
+        },
+        {
+          "name": "has_generatable_types",
+          "type": "bool",
+          "documentation": "If true the intermediate model has at least one generable type, false otherwise.\n"
+        },
+        {
+          "name": "input_technical_space",
+          "type": "coding::meta_model::technical_space",
+          "documentation": "Technical space which this model used originally.\n"
+        },
+        {
+          "name": "output_technical_space",
+          "type": "coding::meta_model::technical_space",
+          "documentation": "Technical space into which to output the model.\n"
+        },
+        {
+          "name": "all_technical_spaces",
+          "type": "std::unordered_set<coding::meta_model::technical_space>",
+          "documentation": "Set of all technical concrete spaces involved in generating this model.\n\nIncludes the primary technical space (e.g. the output technical space) as well as\nall of the secondary technical spaces. Does not include any abstract technical\nspaces.\n"
+        },
+        {
+          "name": "orm_properties",
+          "type": "boost::optional<coding::meta_model::orm::model_properties>"
+        },
+        {
+          "name": "enabled_archetype_for_element",
+          "type": "std::unordered_set<element_archetype>"
+        },
+        {
+          "name": "locator_properties",
+          "type": "locator_properties"
+        },
+        {
+          "name": "global_archetype_location_properties",
+          "type": "global_archetype_location_properties"
+        },
+        {
+          "name": "extraction_properties",
+          "type": "coding::meta_model::extraction_properties"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::artefact_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "bool"
+        },
+        {
+          "name": "overwrite",
+          "type": "bool"
+        },
+        {
+          "name": "file_path",
+          "type": "boost::filesystem::path"
+        },
+        {
+          "name": "dependencies",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "formatting_style",
+          "type": "formatting_styles"
+        },
+        {
+          "name": "formatting_input",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::formatting_styles",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stock",
+          "type": ""
+        },
+        {
+          "name": "wale",
+          "type": ""
+        },
+        {
+          "name": "stitch",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "meta_model::element_archetype",
+      "tagged_values": {
+        "masd.generation.cpp.hash.enabled": "true"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "element",
+          "type": "std::string"
+        },
+        {
+          "name": "archetype",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::locator_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "directory_structure_style",
+          "type": "directory_structure_styles"
+        },
+        {
+          "name": "name_separator",
+          "type": "std::string",
+          "documentation": "Separator to use when concatenating sub-components of a path component.\n"
+        },
+        {
+          "name": "model_segment_properties",
+          "type": "model_segment_properties"
+        },
+        {
+          "name": "intra_backend_segment_properties",
+          "type": "std::unordered_map<std::string, intra_backend_segment_properties>"
+        },
+        {
+          "name": "archetype_family_properties",
+          "type": "std::unordered_map<std::string, archetype_family_properties>"
+        },
+        {
+          "name": "force_backend_directory",
+          "type": "bool",
+          "documentation": "If true, the backend directory will be expressed, even when there is only one\nbackend enabled.\n"
+        },
+        {
+          "name": "disable_facet_directories",
+          "type": "bool",
+          "documentation": "If true, directories for facets are not generated.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::directory_structure_styles",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "structured",
+          "type": "",
+          "documentation": "Create the standard directory structure.\n"
+        },
+        {
+          "name": "completely_flat",
+          "type": "",
+          "documentation": "Suppress the generation of all directories.\n"
+        },
+        {
+          "name": "flatten_facets",
+          "type": "",
+          "documentation": "Flatten only the facets but preserve remaining structure.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::model_segment_properties",
+      "documentation": "Properties related to the model segment of the path.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "directory",
+          "type": "std::string",
+          "documentation": "If supplied, the override directory name will take precedence and all other\nsettings will be ignored.\n\nIf not supplied the model path segment is computed from the remaining settings.\n"
+        },
+        {
+          "name": "external_modules",
+          "type": "path_contribution_types",
+          "documentation": "What kind of contribution do the external modules make to the final path.\n"
+        },
+        {
+          "name": "model_modules",
+          "type": "path_contribution_types",
+          "documentation": "What kind of contribution do the model modules make to the final path.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::path_contribution_types",
+      "documentation": "Different kinds of contributions that can be made to the final path computation.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "none",
+          "type": "",
+          "documentation": "The item does not contribute at all to the path.\n"
+        },
+        {
+          "name": "as_folders",
+          "type": "",
+          "documentation": "The itemcontributes folders to the path.\n"
+        },
+        {
+          "name": "as_path_components",
+          "type": "",
+          "documentation": "The item contributes a single folder to the path, as a delimited string.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::backend_properties",
+      "documentation": "Properties related to the backend.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "bool",
+          "documentation": "If true, this backend is enabled.\n"
+        },
+        {
+          "name": "directory",
+          "type": "std::string",
+          "documentation": "Backend specific directory name, if any.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::intra_backend_segment_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "override_parent_path",
+          "type": "boost::filesystem::path",
+          "documentation": "If supplied, this path is used as the parent path instead of the output path.\n\nThis is useful for example when you want to place the include files outside of the\nmodel directory.\n"
+        },
+        {
+          "name": "path_segment",
+          "type": "boost::filesystem::path",
+          "documentation": "Path segment to use for this intra-backend segment.\n"
+        },
+        {
+          "name": "external_modules",
+          "type": "path_contribution_types",
+          "documentation": "What kind of contribution do the external modules make to the final path.\n"
+        },
+        {
+          "name": "model_modules",
+          "type": "path_contribution_types",
+          "documentation": "What kind of contribution do the model modules make to the final path.\n"
+        },
+        {
+          "name": "internal_modules",
+          "type": "path_contribution_types",
+          "documentation": "What kind of contribution do the internal modules make to the final path.\n"
+        },
+        {
+          "name": "facet",
+          "type": "path_contribution_types",
+          "documentation": "What kind of contribution does the facet make to the final path.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::archetype_family_properties",
+      "documentation": "Properties pertaining to families of archetypes, related to the path computation.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "extension",
+          "type": "std::string",
+          "documentation": "Extension to use for files of this group. Includes the leading dot.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::global_archetype_location_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "backend_properties",
+          "type": "std::unordered_map<std::string, backend_properties>"
+        },
+        {
+          "name": "facet_properties",
+          "type": "std::unordered_map<std::string, facet_properties>"
+        },
+        {
+          "name": "archetype_properties",
+          "type": "std::unordered_map<std::string, archetype_properties>"
+        },
+        {
+          "name": "denormalised_archetype_properties",
+          "type": "std::unordered_map<std::string, denormalised_archetype_properties>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::local_archetype_location_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "facet_enabled",
+          "type": "boost::optional<bool>"
+        },
+        {
+          "name": "archetype_enabled",
+          "type": "boost::optional<bool>"
+        },
+        {
+          "name": "facet_overwrite",
+          "type": "boost::optional<bool>"
+        },
+        {
+          "name": "archetype_overwrite",
+          "type": "boost::optional<bool>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::denormalised_archetype_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "backend_enabled",
+          "type": "bool"
+        },
+        {
+          "name": "backend_directory",
+          "type": "std::string"
+        },
+        {
+          "name": "facet_enabled",
+          "type": "bool"
+        },
+        {
+          "name": "facet_overwrite",
+          "type": "bool"
+        },
+        {
+          "name": "facet_directory",
+          "type": "std::string"
+        },
+        {
+          "name": "facet_postfix",
+          "type": "std::string"
+        },
+        {
+          "name": "archetype_enabled",
+          "type": "bool"
+        },
+        {
+          "name": "archetype_overwrite",
+          "type": "boost::optional<bool>"
+        },
+        {
+          "name": "archetype_postfix",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::facet_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "bool",
+          "documentation": "If true, this facet is enabled.\n"
+        },
+        {
+          "name": "overwrite",
+          "type": "bool"
+        },
+        {
+          "name": "directory",
+          "type": "std::string",
+          "documentation": "Directory in which to place artefacts that belong to this facet.\n"
+        },
+        {
+          "name": "postfix",
+          "type": "std::string",
+          "documentation": "Postfix to use in file names of artefacts that belong to this facet.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::archetype_properties",
+      "documentation": "Archetype level properties, applicable to all instances of this archetype.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "bool",
+          "documentation": "If false, will disable all instances of this archetype.\n"
+        },
+        {
+          "name": "overwrite",
+          "type": "boost::optional<bool>"
+        },
+        {
+          "name": "postfix",
+          "type": "std::string",
+          "documentation": "Postfix to use for artefacts of this archetype.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::Nameable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "coding::meta_model::name"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::MetaNameable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "meta_name",
+          "type": "coding::meta_model::name"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::generatable_properties",
+      "documentation": "Element properties related to code generation.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "artefact_properties",
+          "type": "std::unordered_map<std::string, artefact_properties>"
+        },
+        {
+          "name": "archetype_location_properties",
+          "type": "std::unordered_map<std::string, local_archetype_location_properties>"
+        }
+      ]
+    },
+    {
+      "name": "transforms",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "transforms::generability_transform",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::dynamic_transforms_chain",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::dynamic_transform_interface",
+      "stereotypes": [
+        "masd::cpp::header_only"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::dynamic_transform_registrar",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::model_to_extraction_model_chain",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::model_to_extraction_model_transform_interface",
+      "stereotypes": [
+        "masd::cpp::header_only"
+      ],
+      "tagged_values": {
+        "masd.generation.cpp.types.forward_declarations.enabled": "true"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::model_to_extraction_model_transform_registrar",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "tagged_values": {
+        "masd.generation.cpp.types.forward_declarations.enabled": "true"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "transforms_by_technical_space_",
+          "type": "std::unordered_map<coding::meta_model::technical_space, std::shared_ptr<model_to_extraction_model_transform_interface>>"
+        }
+      ]
+    },
+    {
+      "name": "transforms::enablement_transform",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::artefact_properties_transform",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::formatting_transform",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::formatting_configuration",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "style",
+          "type": "meta_model::formatting_styles"
+        },
+        {
+          "name": "input",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "transforms::model_generation_chain",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::archetype_location_properties_transform",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::locator_properties_transform",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::context",
+      "stereotypes": [
+        "masd::typeable",
+        "masd::pretty_printable"
+      ],
+      "tagged_values": {
+        "masd.generation.cpp.types.forward_declarations.enabled": "true"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "archetype_location_repository",
+          "type": "boost::shared_ptr<archetypes::location_repository>"
+        },
+        {
+          "name": "intra_backend_segment_properties",
+          "type": "std::unordered_map<std::string, generation::meta_model::intra_backend_segment_properties>"
+        },
+        {
+          "name": "output_directory_path",
+          "type": "boost::filesystem::path",
+          "documentation": "FIXME: to be removed\n"
+        },
+        {
+          "name": "feature_model",
+          "type": "boost::shared_ptr<variability::meta_model::feature_model>"
+        },
+        {
+          "name": "tracer",
+          "type": "boost::shared_ptr<tracing::tracer>"
+        }
+      ]
+    },
+    {
+      "name": "transforms::transformation_error",
+      "documentation": "An error occurred whilst applying a transformation.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "traits",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::registrar_error",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::decoration_transform",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::decoration_configuration",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "boost::optional<bool>"
+        },
+        {
+          "name": "copyright_notices",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "licence_name",
+          "type": "std::string"
+        },
+        {
+          "name": "modeline_group_name",
+          "type": "std::string"
+        },
+        {
+          "name": "marker_name",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "formatters",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "formatters::comment_formatter",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::formatting_error",
+      "documentation": "An error has occurred while formatting.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::comment_style",
+      "documentation": "Supported styles of comments.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "c_style",
+          "type": "",
+          "documentation": "Original C programming language style.\n"
+        },
+        {
+          "name": "cpp_style",
+          "type": "",
+          "documentation": "One line, C++ style.\n"
+        },
+        {
+          "name": "csharp_style",
+          "type": "",
+          "documentation": "C# programming language style.\n"
+        },
+        {
+          "name": "shell_style",
+          "type": "",
+          "documentation": "UNIX shell scripting comments.\n"
+        },
+        {
+          "name": "sql_style",
+          "type": "",
+          "documentation": "Comments start with a double-dash.\n"
+        },
+        {
+          "name": "xml_style",
+          "type": "",
+          "documentation": "Comments using XML syntax.\n"
+        }
+      ]
+    },
+    {
+      "name": "helpers",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "helpers::decoration_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "modelines_by_modeline_group_by_technical_space",
+          "type": "std::unordered_map<std::string, std::unordered_map<coding::meta_model::technical_space, boost::shared_ptr<coding::meta_model::decoration::modeline>>>"
+        },
+        {
+          "name": "licences_by_name",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<coding::meta_model::decoration::licence>>"
+        },
+        {
+          "name": "generation_markers_by_name",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<coding::meta_model::decoration::generation_marker>>"
+        }
+      ]
+    },
+    {
+      "name": "helpers::decoration_repository_factory",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::building_exception",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::decoration_formatter",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::modeline_formatter",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::generation_marker_formatter",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::technical_space_transform",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::infix_configuration",
+      "documentation": "Configuration to use for a given infix in sequence formatter.\n",
+      "stereotypes": [
+        "masd::fluent"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "first",
+          "type": "std::string",
+          "documentation": "Applicable only to the first element of a sequence, if the sequence has more\nthan one element.\n"
+        },
+        {
+          "name": "not_first",
+          "type": "std::string",
+          "documentation": "Applicable to all elements other than the first.\n"
+        },
+        {
+          "name": "not_last",
+          "type": "std::string",
+          "documentation": "Applicable to all elements other than the last.\n"
+        },
+        {
+          "name": "last",
+          "type": "std::string",
+          "documentation": "Only applicable to the last element of a sequence.\n"
+        }
+      ]
+    },
+    {
+      "name": "formatters::sequence_formatter",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::indent_filter",
+      "stereotypes": [
+        "masd::cpp::header_only"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::namespace_formatter",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::scoped_namespace_formatter",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::boilerplate_formatter",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::scoped_boilerplate_formatter",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::dependencies_formatter",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::header_guard_formatter",
+      "stereotypes": [
+        "masd::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::boilerplate_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "preamble",
+          "type": "std::string"
+        },
+        {
+          "name": "postamble",
+          "type": "std::string"
+        },
+        {
+          "name": "dependencies",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "header_guard",
+          "type": "std::string"
+        },
+        {
+          "name": "technical_space",
+          "type": "coding::meta_model::technical_space"
+        },
+        {
+          "name": "generate_preamble",
+          "type": "bool"
+        },
+        {
+          "name": "generate_header_guards",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "features",
+      "documentation": "Features used by the generation model.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "features::decoration",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.decoration.enabled",
+          "type": "masd::variability::boolean",
+          "documentation": "If true, decorations are enabled on this modeling element.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "any"
+          }
+        },
+        {
+          "name": "masd.generation.decoration.copyright_notice",
+          "type": "masd::variability::text_collection",
+          "documentation": "Copyright notices for this modeling element.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "any"
+          }
+        },
+        {
+          "name": "masd.generation.decoration.licence_name",
+          "type": "masd::variability::text",
+          "documentation": "Name of the licence to use for this modeling element.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "any"
+          }
+        },
+        {
+          "name": "masd.generation.decoration.modeline_group_name",
+          "type": "masd::variability::text",
+          "documentation": "Name of the modeline group for this modeling element.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "any"
+          }
+        },
+        {
+          "name": "masd.generation.decoration.marker_name",
+          "type": "masd::variability::text",
+          "documentation": "Name of the decoration marker to use for this modeling element.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "any"
+          }
+        }
+      ]
+    },
+    {
+      "name": "features::initializer",
+      "stereotypes": [
+        "masd::variability::feature_template_initializer"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::formatting",
+      "documentation": "Features related to formatting.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "formatting_style",
+          "type": "masd::variability::text",
+          "documentation": "Style of formatting to use for this archetype.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "archetype_template",
+            "masd.variability.binding_point": "any"
+          }
+        },
+        {
+          "name": "formatting_input",
+          "type": "masd::variability::text",
+          "documentation": "If the formatting style requires a template, the name of the template to use.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "archetype_template",
+            "masd.variability.binding_point": "any"
+          }
+        }
+      ]
+    }
+  ]
+}

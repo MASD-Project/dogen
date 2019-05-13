@@ -1,0 +1,140 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::generation::cpp::formatters::types #>
+<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/string/splitter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.variability/types/helpers/enum_mapper.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.coding/types/meta_model/variability/feature_bundle.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.coding/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/inclusion_constants.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/formatting_error.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/io/inserter_implementation_helper.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/types/feature_bundle_implementation_formatter.hpp" #>
+<#@ masd.stitch.wale.template=cpp_artefact_formatter_implementation.wale #>
+<#@ masd.stitch.wale.kvp.class.simple_name=feature_bundle_implementation_formatter #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=feature_bundle_implementation #>
+<#@ masd.stitch.wale.kvp.yarn_element=coding::meta_model::variability::feature_bundle #>
+<#@ masd.stitch.wale.kvp.meta_element=variability_feature_bundle #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=coding::helpers::meta_name_factory #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+std::list<std::string> feature_bundle_implementation_formatter::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& f,
+    const coding::meta_model::element& e) const {
+    using coding::meta_model::variability::feature_bundle;
+    const auto& o(assistant::as<feature_bundle>(e));
+    auto builder(f.make());
+
+    const auto ch_arch(traits::feature_bundle_header_archetype());
+    builder.add(o.name(), ch_arch);
+    builder.add("\"dogen.variability/types/helpers/value_factory.hpp\"");
+
+    return builder.build();
+}
+
+extraction::meta_model::artefact feature_bundle_implementation_formatter::
+format(const context& ctx, const coding::meta_model::element& e) const {
+    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    const auto& fb(a.as<coding::meta_model::variability::feature_bundle>(e));
+
+    {
+        const auto sn(fb.name().simple());
+        const auto qn(a.get_qualified_name(fb.name()));
+        auto sbf(a.make_scoped_boilerplate_formatter(fb));
+        a.add_helper_methods(fb.name().qualified().dot());
+
+        {
+            const auto ns(a.make_namespaces(fb.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
+            using namespace variability::helpers;
+            using utility::string::splitter;
+#>
+
+namespace {
+<#+
+            for (const auto& fb_ft : fb.feature_templates()) {
+                const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
+                const bool has_qualified_name(simple_key != fb_ft.key());
+#>
+
+dogen::variability::meta_model::feature_template
+make_<#= fb_ft.identifiable_key() #>() {
+    using namespace dogen::variability::meta_model;
+    feature_template r;
+    r.name().simple("<#= simple_key #>");
+<#+
+               if (has_qualified_name) {
+#>
+    r.name().qualified("<#= fb_ft.key() #>");
+<#+
+               }
+#>
+    const auto vt(<#= enum_mapper::from_value_type(fb_ft.value_type()) #>);
+    r.value_type(vt);
+    r.binding_point(<#= enum_mapper::from_binding_point(fb_ft.binding_point()) #>);
+    r.kind(<#= enum_mapper::from_template_kind(fb_ft.template_kind()) #>);
+<#+
+    if (!fb_ft.value().empty()) {
+#>
+    dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ <#= fb_ft.value() #> }));
+<#+
+    }
+#>
+
+    archetypes::location al;
+<#+
+                if (!fb_ft.location().kernel().empty())
+#>
+    al.kernel("<#= fb_ft.location().kernel() #>");
+<#+
+                if (!fb_ft.location().backend().empty())
+#>
+    al.backend("<#= fb_ft.location().backend() #>");
+<#+
+                if (!fb_ft.location().facet().empty())
+#>
+    al.facet("<#= fb_ft.location().facet() #>");
+<#+
+                if (!fb_ft.location().archetype().empty())
+#>
+    al.archetype("<#= fb_ft.location().archetype() #>");
+
+     r.location(al);
+     return r;
+}
+<#+
+            }
+#>
+
+}
+
+std::list<dogen::variability::meta_model::feature_template>
+<#= sn #>::make_templates() {
+    using namespace dogen::variability::meta_model;
+    std::list<feature_template> r;
+<#+
+
+            for (const auto& fb_ft : fb.feature_templates()) {
+#>
+    r.push_back(make_<#= fb_ft.identifiable_key() #>());
+<#+
+            }
+#>
+    return r;
+}
+
+<#+
+        } // snf
+    } // sbf
+    return a.make_artefact();
+}
+
+#>
