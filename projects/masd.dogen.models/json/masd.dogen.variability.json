@@ -534,13 +534,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::feature_template_hydration_transform",
-      "stereotypes": [
-        "masd::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::feature_model_transform",
       "stereotypes": [
         "masd::handcrafted::typeable"

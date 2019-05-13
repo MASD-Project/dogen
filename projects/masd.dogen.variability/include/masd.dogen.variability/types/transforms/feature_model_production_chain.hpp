@@ -37,11 +37,6 @@ namespace masd::dogen::variability::transforms {
  * the system.
  */
 class feature_model_production_chain final {
-private:
-    static meta_model::feature_template_repository
-    merge(const meta_model::feature_template_repository& lhs,
-        const meta_model::feature_template_repository& rhs);
-
 public:
     static boost::shared_ptr<meta_model::feature_model>
     apply(const context& ctx,
