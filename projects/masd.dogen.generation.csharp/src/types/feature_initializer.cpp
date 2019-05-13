@@ -20,13 +20,19 @@
  */
 #include "masd.dogen.generation.csharp/types/feature_initializer.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/io/features.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/facet_features.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/types/features.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/global_features.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/archetype_features.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/test_data/features.hpp"
 
 namespace masd::dogen::generation::csharp {
 
 void feature_initializer::
 register_templates(variability::helpers::feature_template_registrar& rg) {
+    rg.register_templates(masd::dogen::generation::csharp::formatters::archetype_features::make_templates());
+    rg.register_templates(masd::dogen::generation::csharp::formatters::facet_features::make_templates());
+    rg.register_templates(masd::dogen::generation::csharp::formatters::global_features::make_templates());
     rg.register_templates(masd::dogen::generation::csharp::formatters::io::features::make_templates());
     rg.register_templates(masd::dogen::generation::csharp::formatters::test_data::features::make_templates());
     rg.register_templates(masd::dogen::generation::csharp::formatters::types::features::make_templates());
