@@ -30,6 +30,7 @@
 #include "masd.dogen.variability/types/transforms/context.hpp"
 #include "masd.dogen.variability/types/helpers/feature_template_registrar.hpp"
 #include "masd.dogen.variability/types/transforms/feature_model_production_chain.hpp"
+#include "masd.dogen.templating/types/initializer.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/features/registrar.hpp"
 #include "masd.dogen.coding/types/features/initializer.hpp"
@@ -195,6 +196,7 @@ context context_factory::make_context(const configuration& cfg,
     injection::features::registrar::register_templates(ftrg);
     coding::features::initializer::register_templates(ftrg);
     generation::features::initializer::register_templates(ftrg);
+    templating::initializer::register_templates(ftrg);
     variability::features::initializer::register_templates(ftrg);
     archetypes::features::initializer::register_templates(ftrg);
     extraction::features::initializer::register_templates(ftrg);

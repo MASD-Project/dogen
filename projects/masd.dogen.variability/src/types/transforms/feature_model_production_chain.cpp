@@ -57,10 +57,10 @@ feature_model_production_chain::apply(const context& ctx,
     tracing::scoped_chain_tracer stp(lg, "feature model production chain",
         transform_id, transform_id, *ctx.tracer());
 
-    const auto hydrated_ftrp(feature_template_hydration_transform::apply(ctx));
-    const auto merged_ftrp(merge(hydrated_ftrp, ftrp));
+    // const auto hydrated_ftrp(feature_template_hydration_transform::apply(ctx));
+    // const auto merged_ftrp(merge(hydrated_ftrp, ftrp));
     const auto fts(feature_template_instantiation_transform::
-        apply(ctx, merged_ftrp));
+        apply(ctx, ftrp));
     const auto r(feature_model_transform::apply(ctx, fts));
 
     stp.end_chain(r);

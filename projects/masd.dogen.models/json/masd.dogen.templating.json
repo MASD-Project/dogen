@@ -338,6 +338,77 @@
         "masd::exception"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "initializer",
+      "stereotypes": [
+        "masd::variability::feature_template_initializer"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "stitch::features",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.stitch.stream_variable_name",
+          "type": "masd::variability::text",
+          "value": "\"stream_\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.stitch.relative_output_directory",
+          "type": "masd::variability::text",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.stitch.inclusion_dependency",
+          "type": "masd::variability::text_collection",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.stitch.containing_namespaces",
+          "type": "masd::variability::text",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.stitch.wale.template",
+          "type": "masd::variability::text",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.stitch.wale.kvp",
+          "type": "masd::variability::key_value_pair",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        }
+      ]
     }
   ]
 }
