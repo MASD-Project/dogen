@@ -65,5 +65,5 @@ build_type_dir="${compiler_dir}/${build_type}";
 sudo dpkg -i ${build_type_dir}/stage/pkg/dogen_*_amd64-applications.deb
 cp ${product_dir}/projects/masd.dogen.models/dia/hello_world.dia /tmp
 cd /tmp
-/usr/bin/masd.dogen.cli --version
-/usr/bin/masd.dogen.cli generate -t hello_world.dia
+/usr/bin/dogen.cli --version
+/usr/bin/dogen.cli generate -t hello_world.dia
