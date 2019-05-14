@@ -12,29 +12,30 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-14 Tue 19:54]
+#+CAPTION: Clock summary at [2019-05-14 Tue 22:40]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *58:40* |       |       | 100.0 |
+| *Total time*                                               | *59:34* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 58:40   |       |       | 100.0 |
-| Active                                                     |         | 58:40 |       | 100.0 |
-| Edit release notes for previous sprint                     |         |       |  2:41 |   4.6 |
+| Stories                                                    | 59:34   |       |       | 100.0 |
+| Active                                                     |         | 59:34 |       | 100.0 |
+| Edit release notes for previous sprint                     |         |       |  2:41 |   4.5 |
 | Create a video demo for the previous sprint's features     |         |       |  2:11 |   3.7 |
 | Sprint and product backlog grooming                        |         |       |  1:26 |   2.4 |
-| Defining profiles directly on a target model does not work |         |       |  0:30 |   0.9 |
+| Defining profiles directly on a target model does not work |         |       |  0:30 |   0.8 |
 | Inner modules need to be qualified                         |         |       |  0:22 |   0.6 |
-| Create namespaces for model elements                       |         |       |  8:59 |  15.3 |
+| Create namespaces for model elements                       |         |       |  8:59 |  15.1 |
 | Leaves in internal modules are not captured correctly      |         |       |  1:33 |   2.6 |
-| Try to add relational tracing support                      |         |       |  2:51 |   4.9 |
-| Linux and OSX binaries are not stripped                    |         |       |  1:23 |   2.4 |
+| Try to add relational tracing support                      |         |       |  2:51 |   4.8 |
+| Linux and OSX binaries are not stripped                    |         |       |  1:23 |   2.3 |
 | Fix issues with nightly build and CI                       |         |       |  0:05 |   0.1 |
-| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  12.3 |
-| Replace JSON based feature templates with generated code   |         |       | 16:15 |  27.7 |
-| Make a clear separation between dogen and masd             |         |       |  5:17 |   9.0 |
-| Add a method in enumeration that converts it from strings  |         |       |  7:49 |  13.3 |
+| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  12.1 |
+| Replace JSON based feature templates with generated code   |         |       | 16:15 |  27.3 |
+| Make a clear separation between dogen and masd             |         |       |  5:17 |   8.9 |
+| Add a method in enumeration that converts it from strings  |         |       |  7:49 |  13.1 |
 | Update the MASD UML profile to reflect the latest changes  |         |       |  0:05 |   0.1 |
+| Mappings as meta-model elements                            |         |       |  0:54 |   1.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -646,6 +647,93 @@ Links:
 
 The UML profile is now a fair bit out of date. Take advantage of the
 down time waiting for builds to sync it.
+
+*** STARTED Mappings as meta-model elements                           :story:
+    :LOGBOOK:
+    CLOCK: [2019-05-14 Tue 22:37]--[2019-05-14 Tue 22:40] =>  0:03
+    CLOCK: [2019-05-14 Tue 21:45]--[2019-05-14 Tue 22:36] =>  0:51
+    :END:
+
+Now that we started to see PDMs as a solution for proxy models, the
+logical consequence is that mappings too are meta-model elements. In
+effect, it is a meta-model element that maps two model elements. So
+users can create their own mappings if required and PIMs then become a
+user level option. We can of course provide LAM, both as an example
+and proof of concept but users are free to create their own
+mappings. A few things are needed:
+
+- all mappings must be processed first. This is because when we load
+  models we do the mapping.
+- a model should state if its a PSM or a PIM. If a PSM it must
+  reference one or more mapping models. It must not reference any
+  PSMs.
+- mapping models should have references to PSMs. These are loaded on
+  demand if, after mapping, we find types being referenced (e.g. get a
+  list of all referenced models after mapping, check for their
+  presence in references list and load them).
+
+Actually the right way to achieve this is to have "proxy model
+elements". These cannot be used by themselves; they exist merely to
+signify a mapping point. Then, on the regular models we define the
+mapping (e.g. =std::string= has a mapping to a proxy element in
+LAM). The mapping is not used when you include =std=, only when you
+include =lam= (e.g. when we detect the presence of the proxy
+elements). This means its now very easy to add new mappings (just add
+them to new models). Note also that the technical space of the mapping
+is inferred from the TS of the model with the mapping (e.g. c++ in the
+case of =std=). We need to:
+
+- create a model called LAM.
+- define a new type of meta-model element for the mapping (look for
+  better names).
+- define a new meta-data key for the mapping.
+- create a new mapping transform (post-assembly) that looks for proxy
+  elements and their mappings; it uses those to build the existing
+  mapping structures. The rest of the mapping process remains as is -
+  i.e. the output of this transform should match the hydrator.
+
+Notes:
+
+- defining variability as a mapping model may not be a good
+  idea. First because we need to map things such as =text_collection=
+  to =std::list<std::string= but the mapping system was not designed
+  to do 1-N mappings, just 1-1 mappings. In truth, we should really
+  have a =collection<text>= as a composite type, but refactoring the
+  type system of variability is a fair amount of work and we do not
+  yet have a use case to justify it. Second, we only have a fixed set
+  of mappings for variability types and these are not going to
+  change. If they do, all the client code will break. Similarly, we
+  only need mappings for C++ because that's where we will always use
+  this code. All and all, we just need some special purpose mapping
+  for variability. However, we do not want to fall through the same
+  trap as we did for formatter includes: bypassing the model type
+  system is a bad idea. We need some kind of "soft mapping" for this
+  particular case, that associates a variability type to a name or
+  naem tree (e.g. =text_collection=) and then have that name or name
+  tree go through the usual processing (resolving, etc). Thus we could
+  create two separate concepts for mapping (open and closed, something
+  like this). For variability we just need closed mapping. We can then
+  use the feature template properties plus the mapping to construct an
+  structural object which is owned by the binding. This will be used
+  to create the struct.
+
+Merged Stories:
+
+*Allow users to choose mapping sets*
+
+At present we load the "default" mappings, which are also the only
+mappings available. It is entirely possible that users will not agree
+with those mappings. If we add a name to the mappings, and provide a
+meta-data tag to choose mappings we can then allow users to provide
+their own and set the meta-data accordingly. Mapper then reads the
+meta-data in the model and uses the requested element map. For this we
+need to name the element maps and we also need to create a "mapping
+set". These can be indexed by name in the mapping repository. Mapper
+chooses the mapping set to use.
+
+In keeping with the idea that profiles are model-level concepts,
+mappings should be too. We should be able to import mappings in a UML
+diagram and override them or define new ones too.
 
 *** Add logging support to generated tests                            :story:
 
