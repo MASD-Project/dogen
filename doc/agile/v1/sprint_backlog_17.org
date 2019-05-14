@@ -12,29 +12,29 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-14 Tue 09:20]
+#+CAPTION: Clock summary at [2019-05-14 Tue 12:05]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *52:34* |       |       | 100.0 |
+| *Total time*                                               | *55:17* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 52:34   |       |       | 100.0 |
-| Active                                                     |         | 52:34 |       | 100.0 |
-| Edit release notes for previous sprint                     |         |       |  2:41 |   5.1 |
-| Create a video demo for the previous sprint's features     |         |       |  2:11 |   4.2 |
-| Sprint and product backlog grooming                        |         |       |  1:26 |   2.7 |
-| Defining profiles directly on a target model does not work |         |       |  0:30 |   1.0 |
+| Stories                                                    | 55:17   |       |       | 100.0 |
+| Active                                                     |         | 55:17 |       | 100.0 |
+| Edit release notes for previous sprint                     |         |       |  2:41 |   4.9 |
+| Create a video demo for the previous sprint's features     |         |       |  2:11 |   3.9 |
+| Sprint and product backlog grooming                        |         |       |  1:26 |   2.6 |
+| Defining profiles directly on a target model does not work |         |       |  0:30 |   0.9 |
 | Inner modules need to be qualified                         |         |       |  0:22 |   0.7 |
-| Create namespaces for model elements                       |         |       |  8:59 |  17.1 |
-| Leaves in internal modules are not captured correctly      |         |       |  1:33 |   2.9 |
-| Try to add relational tracing support                      |         |       |  2:51 |   5.4 |
-| Linux and OSX binaries are not stripped                    |         |       |  1:23 |   2.6 |
+| Create namespaces for model elements                       |         |       |  8:59 |  16.2 |
+| Leaves in internal modules are not captured correctly      |         |       |  1:33 |   2.8 |
+| Try to add relational tracing support                      |         |       |  2:51 |   5.2 |
+| Linux and OSX binaries are not stripped                    |         |       |  1:23 |   2.5 |
 | Fix issues with nightly build and CI                       |         |       |  0:05 |   0.2 |
-| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  13.7 |
-| Replace JSON based feature templates with generated code   |         |       | 16:15 |  30.9 |
-| Make a clear separation between dogen and masd             |         |       |  5:17 |  10.1 |
+| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  13.1 |
+| Replace JSON based feature templates with generated code   |         |       | 16:15 |  29.4 |
+| Make a clear separation between dogen and masd             |         |       |  5:17 |   9.6 |
 | Update the MASD UML profile to reflect the latest changes  |         |       |  0:05 |   0.2 |
-| Add a method in enumeration that converts it from strings  |         |       |  1:43 |   3.3 |
+| Add a method in enumeration that converts it from strings  |         |       |  4:26 |   8.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -588,6 +588,8 @@ down time waiting for builds to sync it.
 
 *** STARTED Add a method in enumeration that converts it from strings :story:
     :LOGBOOK:
+    CLOCK: [2019-05-14 Tue 09:25]--[2019-05-14 Tue 12:05] =>  2:40
+    CLOCK: [2019-05-14 Tue 09:21]--[2019-05-14 Tue 09:24] =>  0:03
     CLOCK: [2019-05-14 Tue 08:40]--[2019-05-14 Tue 09:20] =>  0:40
     CLOCK: [2019-05-13 Mon 17:21]--[2019-05-13 Mon 18:02] =>  0:41
     CLOCK: [2019-05-13 Mon 16:29]--[2019-05-13 Mon 16:51] =>  0:22
@@ -622,16 +624,34 @@ create a new facet specifically for this and specialise it only for
 enums for now. We could try to make no allocations as well using
 =char*= and =strncmp=.
 
+Notes:
+
+- problems with c++ 98 model: tests are running on c++ 17. This is not
+  a huge problem normally, but we now have some header only code which
+  is actually only being validated for c++ 17. We need to remove all
+  autos from the tests plus fix semi-colons, etc.
+- need a way to obtain a qualified name to the enumerator in C++ 98
+  style (e.g. skipping the enumeration).
+
 Links:
 
 - [[http://www.cplusplus.com/reference/cstring/strncmp/][strncmp]]
 - [[https://stackoverflow.com/questions/1250795/very-poor-boostlexical-cast-performance][Very poor boost::lexical_cast performance]]
 
-*** Postfix and directory fields should be templates                  :story:
+*** Add logging support to generated tests                            :story:
 
-Why are we manually instantiating postfix and directory for each
-formatter/facet instead of using templates? This is one of the main
-reasons for breaks/errors when adding a new formatter.
+At present generated tests are not writing to the log file. This is
+because we wanted to keep them clean so that users could generate
+tests for their models without having to pull in dogen
+headers. However, for dogen tests this is a bit painful; if a test
+fails we can't just look at the log file to see why. We could have a
+flag to generate tests with logging.
+
+The other problem is we need to move utility into its own library as a
+PDM before we can do this because otherwise the logging will be in
+different locations (i.e. dogen vs reference model).
+
+*** Postfix and directory fields should be templates                  :story:
 
 We need to understand why we didn't templatise these fields. It is
 very painful to have to add these manually for each facet and
@@ -649,6 +669,14 @@ if not present default to empty string.
 
 For extra bonus points, we could allow variables: =${facet.name}=
 could expand to the current facet name on the facet template.
+
+Merged stories:
+
+*Postfix and directory fields in annotations look weird*
+
+Why are we manually instantiating postfix and directory for each
+formatter/facet instead of using templates? This is one of the main
+reasons for breaks/errors when adding a new formatter.
 
 *** Formatter dependencies and model processing                       :story:
 
