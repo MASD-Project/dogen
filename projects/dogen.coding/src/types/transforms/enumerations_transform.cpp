@@ -26,7 +26,7 @@
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.coding/io/meta_model/technical_space_io.hpp"
+#include "dogen.coding/lexical_cast/meta_model/technical_space_lc.hpp"
 #include "dogen.coding/io/meta_model/model_io.hpp"
 #include "dogen.coding/types/traits.hpp"
 #include "dogen.coding/types/transforms/context.hpp"

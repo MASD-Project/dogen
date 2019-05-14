@@ -22,6 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.coding/io/meta_model/technical_space_io.hpp"
+#include "dogen.coding/lexical_cast/meta_model/technical_space_lc.hpp"
 #include "dogen.coding/types/meta_model/structural/module.hpp"
 #include "dogen.coding/types/meta_model/structural/builtin.hpp"
 #include "dogen.coding/types/meta_model/structural/enumeration.hpp"
@@ -245,7 +246,9 @@ meta_model::model mapper::map(const meta_model::technical_space from,
     const meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started mapping. Model: "
                              << m.name().qualified().dot();
-    BOOST_LOG_SEV(lg, debug) << "Mapping from: " << from << " to: " << to;
+    BOOST_LOG_SEV(lg, debug) << "Mapping from: "
+                             << boost::lexical_cast<std::string>(from)
+                             << " to: " << boost::lexical_cast<std::string>(to);
     if (from == to) {
         BOOST_LOG_SEV(lg, debug) << "No mapping required";
         return m;
