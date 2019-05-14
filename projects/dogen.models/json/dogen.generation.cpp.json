@@ -3280,6 +3280,45 @@
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::lexical_cast::features",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.cpp.lexical_cast.directory",
+          "type": "masd::variability::text",
+          "value": "\"lexical_cast\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.lexical_cast.postfix",
+          "type": "masd::variability::text",
+          "value": "\"lc\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.lexical_cast.enum_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        }
+      ]
     }
   ]
 }

@@ -49,6 +49,7 @@ struct inclusion_constants {
 
     struct boost {
         static ::std::string shared_ptr();
+        static ::std::string lexical_cast();
 
         struct property_tree {
             static ::std::string ptree();

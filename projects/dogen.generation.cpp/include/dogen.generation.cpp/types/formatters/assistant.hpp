@@ -110,6 +110,14 @@ public:
     /**@}*/
 
     /**
+     * @brief Obtains the qualified namespace for this name.
+     *
+     * The qualified namespace contains all modules, but not the
+     * element name itself.
+     */
+    std::string get_qualified_namespace(const coding::meta_model::name& n) const;
+
+    /**
      * @brief Obtains the model name as a string.
      */
     std::string
@@ -246,6 +254,11 @@ public:
      * @brief Returns true if io is enabled locally.
      */
     bool is_io_enabled() const;
+
+    /**
+     * @brief Returns true if io is enabled locally.
+     */
+    bool is_lexical_cast_enabled() const;
 
     /**
      * @brief Returns true if odb is enabled globally.

@@ -72,6 +72,11 @@ std::string inclusion_constants::boost::shared_ptr() {
     return r;
 }
 
+std::string inclusion_constants::boost::lexical_cast() {
+    static ::std::string r("<boost/lexical_cast.hpp>");
+    return r;
+}
+
 std::string inclusion_constants::boost::property_tree::ptree() {
     static ::std::string r("<boost/property_tree/ptree.hpp>");
     return r;

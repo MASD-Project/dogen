@@ -27,52 +27,81 @@ std::list<std::string> enum_header_formatter::inclusion_dependencies(
 
     const auto eh_fn(types::traits::enum_header_archetype());
     builder.add(e.name(), eh_fn);
+    builder.add(inclusion_constants::boost::lexical_cast());
+
     return builder.build();
 }
 
 extraction::meta_model::artefact enum_header_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& ye(a.as<coding::meta_model::structural::enumeration>(e));
+    const auto& enm(a.as<coding::meta_model::structural::enumeration>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
-        {
-            const auto ns(a.make_namespaces(ye.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+        auto sbf(a.make_scoped_boilerplate_formatter(enm));
+        const auto qn(a.get_qualified_name(enm.name()));
+        const auto sn(enm.name().simple());
 #>
 
-std::ostream& operator<<(std::ostream& s, const <#= ye.name().simple() #>& v) {
-    s << "{ " << "\"__type__\": " << "\"<#= ye.name().simple() #>\", " << "\"value\": ";
+namespace boost {
 
-    std::string attr;
+template<>
+std::string lexical_cast(const <#= qn #>& v) {
+<#+
+        if (!a.is_cpp_standard_98()) {
+#>
+    using <#= qn #>;
+
+<#+
+        }
+#>
     switch (v) {
 <#+
-            for (const auto& en : ye.enumerators()) {
-                if (a.is_cpp_standard_98())
+        for (const auto& enu : enm.enumerators()) {
+            const auto enu_sn(enu.name().simple());
+            std::string enu_qn;
+            if (a.is_cpp_standard_98())
+                enu_qn = a.get_qualified_namespace(enm.name()) + "::" + enu_sn;
+            else
+                enu_qn = sn + "::" + enu_sn;
 #>
-    case <#= en.name().simple() #>:
+    case <#= enu_qn #>:
+        return "<#= sn + "::" + enu_sn #>";
 <#+
-                else
-#>
-    case <#= ye.name().simple() #>::<#= en.name().simple() #>:
-        attr = "\"<#= en.name().simple() #>\"";
-        break;
-<#+
-            }
+        }
 #>
     default:
-        throw std::invalid_argument("Invalid value for <#= ye.name().simple() #>");
+        throw boost::bad_lexical_cast();
     }
-    s << attr << " }";
-    return s;
 }
 
-
+template<>
+<#= qn #> lexical_cast(const std::string & s) {
+<#+
+        if (!a.is_cpp_standard_98()) {
+#>
+    using <#= qn #>;
 
 <#+
-         } // snf
+        }
+
+        for (const auto& enu : enm.enumerators()) {
+            const auto enu_sn(enu.name().simple());
+            std::string enu_qn;
+            if (a.is_cpp_standard_98())
+                enu_qn = a.get_qualified_namespace(enm.name()) + "::" + enu_sn;
+            else
+                enu_qn = sn + "::" + enu_sn;
 #>
+    if (s == "<#= enu_sn #>" || s == "<#= sn + "::" + enu_sn #>")
+        return <#= enu_qn #>;
+<#+
+        }
+#>
+    throw boost::bad_lexical_cast();
+}
+
+}
 
 <#+
     } // sbf

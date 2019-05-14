@@ -28,6 +28,7 @@
 #include "dogen.generation.cpp/types/formatters/global_features.hpp"
 #include "dogen.generation.cpp/types/formatters/archetype_features.hpp"
 #include "dogen.generation.cpp/types/formatters/test_data/features.hpp"
+#include "dogen.generation.cpp/types/formatters/lexical_cast/features.hpp"
 #include "dogen.generation.cpp/types/formatters/serialization/features.hpp"
 
 namespace dogen::generation::cpp {
@@ -39,6 +40,7 @@ register_templates(variability::helpers::feature_template_registrar& rg) {
     rg.register_templates(dogen::generation::cpp::formatters::global_features::make_templates());
     rg.register_templates(dogen::generation::cpp::formatters::hash::features::make_templates());
     rg.register_templates(dogen::generation::cpp::formatters::io::features::make_templates());
+    rg.register_templates(dogen::generation::cpp::formatters::lexical_cast::features::make_templates());
     rg.register_templates(dogen::generation::cpp::formatters::odb::features::make_templates());
     rg.register_templates(dogen::generation::cpp::formatters::serialization::features::make_templates());
     rg.register_templates(dogen::generation::cpp::formatters::test_data::features::make_templates());

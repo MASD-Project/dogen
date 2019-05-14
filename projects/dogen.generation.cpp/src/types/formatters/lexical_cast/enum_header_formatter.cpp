@@ -79,43 +79,66 @@ std::list<std::string> enum_header_formatter::inclusion_dependencies(
 
     const auto eh_fn(types::traits::enum_header_archetype());
     builder.add(e.name(), eh_fn);
+    builder.add(inclusion_constants::boost::lexical_cast());
+
     return builder.build();
 }
 
 extraction::meta_model::artefact enum_header_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& ye(a.as<coding::meta_model::structural::enumeration>(e));
+    const auto& enm(a.as<coding::meta_model::structural::enumeration>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
-        {
-            const auto ns(a.make_namespaces(ye.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+        auto sbf(a.make_scoped_boilerplate_formatter(enm));
+        const auto qn(a.get_qualified_name(enm.name()));
+        const auto sn(enm.name().simple());
 a.stream() << std::endl;
-a.stream() << "std::ostream& operator<<(std::ostream& s, const " << ye.name().simple() << "& v) {" << std::endl;
-a.stream() << "    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << ye.name().simple() << "\\\", \" << \"\\\"value\\\": \";" << std::endl;
+a.stream() << "namespace boost {" << std::endl;
 a.stream() << std::endl;
-a.stream() << "    std::string attr;" << std::endl;
+a.stream() << "template<>" << std::endl;
+a.stream() << "std::string lexical_cast(const " << qn << "& v) {" << std::endl;
+        if (!a.is_cpp_standard_98()) {
+a.stream() << "    using " << qn << ";" << std::endl;
+a.stream() << std::endl;
+        }
 a.stream() << "    switch (v) {" << std::endl;
-            for (const auto& en : ye.enumerators()) {
-                if (a.is_cpp_standard_98())
-a.stream() << "    case " << en.name().simple() << ":" << std::endl;
-                else
-a.stream() << "    case " << ye.name().simple() << "::" << en.name().simple() << ":" << std::endl;
-a.stream() << "        attr = \"\\\"" << en.name().simple() << "\\\"\";" << std::endl;
-a.stream() << "        break;" << std::endl;
-            }
+        for (const auto& enu : enm.enumerators()) {
+            const auto enu_sn(enu.name().simple());
+            std::string enu_qn;
+            if (a.is_cpp_standard_98())
+                enu_qn = a.get_qualified_namespace(enm.name()) + "::" + enu_sn;
+            else
+                enu_qn = sn + "::" + enu_sn;
+a.stream() << "    case " << enu_qn << ":" << std::endl;
+a.stream() << "        return \"" << sn + "::" + enu_sn << "\";" << std::endl;
+        }
 a.stream() << "    default:" << std::endl;
-a.stream() << "        throw std::invalid_argument(\"Invalid value for " << ye.name().simple() << "\");" << std::endl;
+a.stream() << "        throw boost::bad_lexical_cast();" << std::endl;
 a.stream() << "    }" << std::endl;
-a.stream() << "    s << attr << \" }\";" << std::endl;
-a.stream() << "    return s;" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
+a.stream() << "template<>" << std::endl;
+a.stream() << qn << " lexical_cast(const std::string & s) {" << std::endl;
+        if (!a.is_cpp_standard_98()) {
+a.stream() << "    using " << qn << ";" << std::endl;
 a.stream() << std::endl;
+        }
+
+        for (const auto& enu : enm.enumerators()) {
+            const auto enu_sn(enu.name().simple());
+            std::string enu_qn;
+            if (a.is_cpp_standard_98())
+                enu_qn = a.get_qualified_namespace(enm.name()) + "::" + enu_sn;
+            else
+                enu_qn = sn + "::" + enu_sn;
+a.stream() << "    if (s == \"" << enu_sn << "\" || s == \"" << sn + "::" + enu_sn << "\")" << std::endl;
+a.stream() << "        return " << enu_qn << ";" << std::endl;
+        }
+a.stream() << "    throw boost::bad_lexical_cast();" << std::endl;
+a.stream() << "}" << std::endl;
 a.stream() << std::endl;
-         } // snf
+a.stream() << "}" << std::endl;
 a.stream() << std::endl;
     } // sbf
     return a.make_artefact();

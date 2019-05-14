@@ -138,6 +138,16 @@
           }
         },
         {
+          "name": "masd.generation.cpp.lexical_cast.enabled",
+          "type": "",
+          "value": "false",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "instance"
+          }
+        },
+        {
           "name": "masd.generation.cpp.tests.enabled",
           "type": "",
           "value": "true",
@@ -844,6 +854,29 @@
           "name": "masd.generation.cpp.serialization.overwrite",
           "type": "",
           "value": "false",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "instance"
+          }
+        }
+      ]
+    },
+    {
+      "name": "composable::convertible",
+      "stereotypes": [
+        "masd::variability::profile_template"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.labels": "dogen::convertible"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.cpp.lexical_cast.enabled",
+          "type": "",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",

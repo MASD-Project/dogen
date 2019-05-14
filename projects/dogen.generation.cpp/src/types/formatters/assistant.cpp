@@ -33,6 +33,7 @@
 #include "dogen.generation.cpp/io/formattables/streaming_properties_io.hpp"
 #include "dogen.generation.cpp/io/formattables/helper_properties_io.hpp"
 #include "dogen.generation.cpp/types/formatters/io/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/lexical_cast/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/odb/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/hash/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/tests/traits.hpp"
@@ -171,8 +172,25 @@ assistant::get_qualified_name(const coding::meta_model::name_tree& nt) const {
     return nt.qualified().colon();
 }
 
+std::string
+assistant::get_qualified_namespace(const coding::meta_model::name& n) const {
+    // FIXME: why not use helper?
+    const auto& l(n.location());
+    auto ns(l.external_modules());
+    for (const auto& m : l.model_modules())
+        ns.push_back(m);
+
+    for (const auto& m : l.internal_modules())
+        ns.push_back(m);
+
+    using boost::algorithm::join;
+    const auto r(join(n.location().model_modules(), namespace_separator));
+    return r;
+}
+
 std::string assistant::
 get_identifiable_model_name(const coding::meta_model::name& n) const {
+    // FIXME: why not use helper?
     using boost::algorithm::join;
     return join(n.location().model_modules(), underscore);
 }
@@ -340,6 +358,11 @@ bool assistant::is_serialization_enabled() const {
 
 bool assistant::is_io_enabled() const {
     using formatters::io::traits;
+    return is_archetype_enabled(traits::canonical_archetype());
+}
+
+bool assistant::is_lexical_cast_enabled() const {
+    using formatters::lexical_cast::traits;
     return is_archetype_enabled(traits::canonical_archetype());
 }
 

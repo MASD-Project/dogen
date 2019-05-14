@@ -23,6 +23,7 @@
 #include "dogen.generation.cpp/types/formatters/test_data/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/serialization/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/hash/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/lexical_cast/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/io/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/types/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
@@ -107,6 +108,13 @@ std::list<std::string> enum_implementation_formatter::inclusion_dependencies(
         builder.add(ic::boost::property_tree::json_parser());
     }
 
+    const auto lc_arch(lexical_cast::traits::enum_header_archetype());
+    const bool lc_enabled(builder.is_enabled(e.name(), lc_arch));
+    if (lc_enabled) {
+        builder.add(e.name(), lc_arch);
+        builder.add(ic::boost::lexical_cast());
+    }
+
     using ser = formatters::serialization::traits;
     const auto ser_arch(ser::enum_header_archetype());
     const bool ser_enabled(builder.is_enabled(e.name(), ser_arch));
@@ -136,14 +144,15 @@ std::list<std::string> enum_implementation_formatter::inclusion_dependencies(
 extraction::meta_model::artefact enum_implementation_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    const auto& enm(a.as<coding::meta_model::structural::enumeration>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));
         const auto qn(a.get_qualified_name(e.name()));
+        const auto sn(e.name().simple());
         std::string type_name("auto");
         if (a.is_cpp_standard_98())
             type_name = qn;
-
 a.stream() << "BOOST_AUTO_TEST_SUITE(" << e.name().simple() << "_tests)" << std::endl;
 a.stream() << std::endl;
         /*
@@ -172,6 +181,60 @@ a.stream() << "    s << a;" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    boost::property_tree::ptree pt;" << std::endl;
 a.stream() << "    BOOST_REQUIRE_NO_THROW(read_json(s, pt));" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+            }
+
+            if (a.is_lexical_cast_enabled()) {
+                /*
+                 * Lexical cast tests.
+                 */
+a.stream() << "BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {" << std::endl;
+a.stream() << "    using " << qn << ";" << std::endl;
+a.stream() << "    " << sn << " r;" << std::endl;
+        for (const auto& enu : enm.enumerators()) {
+            const auto enu_sn(enu.name().simple());
+            std::string enu_qn;
+            if (a.is_cpp_standard_98())
+                enu_qn = a.get_qualified_namespace(enm.name()) + "::" + enu_sn;
+            else
+                enu_qn = sn + "::" + enu_sn;
+a.stream() << std::endl;
+a.stream() << "    r = boost::lexical_cast<" << sn << ">(std::string(\"" << enu_sn << "\"));" << std::endl;
+a.stream() << "    BOOST_CHECK(r == " << enu_qn << ");" << std::endl;
+a.stream() << "    r = boost::lexical_cast<" << sn << ">(std::string(\"" << sn + "::" + enu_sn << "\"));" << std::endl;
+a.stream() << "    BOOST_CHECK(r == " << enu_qn << ");" << std::endl;
+        }
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << "BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {" << std::endl;
+a.stream() << "    using " << qn << ";" << std::endl;
+a.stream() << "    BOOST_CHECK_THROW(boost::lexical_cast<" << sn << ">(std::string(\"DOGEN_THIS_IS_INVALID_DOGEN\"))," << std::endl;
+a.stream() << "        boost::bad_lexical_cast);" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << "BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {" << std::endl;
+a.stream() << "    using " << qn << ";" << std::endl;
+a.stream() << "    std::string r;" << std::endl;
+        for (const auto& enu : enm.enumerators()) {
+            const auto enu_sn(enu.name().simple());
+            std::string enu_qn;
+            if (a.is_cpp_standard_98())
+                enu_qn = a.get_qualified_namespace(enm.name()) + "::" + enu_sn;
+            else
+                enu_qn = sn + "::" + enu_sn;
+
+a.stream() << std::endl;
+a.stream() << "    r = boost::lexical_cast<std::string>(" << enu_qn << ");" << std::endl;
+a.stream() << "    BOOST_CHECK(r == \"" << sn + "::" + enu_sn << "\");" << std::endl;
+        }
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << "BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {" << std::endl;
+a.stream() << "    using " << qn << ";" << std::endl;
+a.stream() << "    const " << sn << " r(static_cast<" << sn << ">(" << enm.enumerators().size() + 10 << "));" << std::endl;
+a.stream() << "    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r)," << std::endl;
+a.stream() << "        boost::bad_lexical_cast);" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
             }
