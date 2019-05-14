@@ -12,29 +12,29 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-14 Tue 19:24]
+#+CAPTION: Clock summary at [2019-05-14 Tue 19:54]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *58:11* |       |       | 100.0 |
+| *Total time*                                               | *58:40* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 58:11   |       |       | 100.0 |
-| Active                                                     |         | 58:11 |       | 100.0 |
+| Stories                                                    | 58:40   |       |       | 100.0 |
+| Active                                                     |         | 58:40 |       | 100.0 |
 | Edit release notes for previous sprint                     |         |       |  2:41 |   4.6 |
-| Create a video demo for the previous sprint's features     |         |       |  2:11 |   3.8 |
-| Sprint and product backlog grooming                        |         |       |  1:26 |   2.5 |
+| Create a video demo for the previous sprint's features     |         |       |  2:11 |   3.7 |
+| Sprint and product backlog grooming                        |         |       |  1:26 |   2.4 |
 | Defining profiles directly on a target model does not work |         |       |  0:30 |   0.9 |
 | Inner modules need to be qualified                         |         |       |  0:22 |   0.6 |
-| Create namespaces for model elements                       |         |       |  8:59 |  15.4 |
-| Leaves in internal modules are not captured correctly      |         |       |  1:33 |   2.7 |
+| Create namespaces for model elements                       |         |       |  8:59 |  15.3 |
+| Leaves in internal modules are not captured correctly      |         |       |  1:33 |   2.6 |
 | Try to add relational tracing support                      |         |       |  2:51 |   4.9 |
 | Linux and OSX binaries are not stripped                    |         |       |  1:23 |   2.4 |
 | Fix issues with nightly build and CI                       |         |       |  0:05 |   0.1 |
-| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  12.4 |
-| Replace JSON based feature templates with generated code   |         |       | 16:15 |  27.9 |
-| Make a clear separation between dogen and masd             |         |       |  5:17 |   9.1 |
+| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  12.3 |
+| Replace JSON based feature templates with generated code   |         |       | 16:15 |  27.7 |
+| Make a clear separation between dogen and masd             |         |       |  5:17 |   9.0 |
+| Add a method in enumeration that converts it from strings  |         |       |  7:49 |  13.3 |
 | Update the MASD UML profile to reflect the latest changes  |         |       |  0:05 |   0.1 |
-| Add a method in enumeration that converts it from strings  |         |       |  7:20 |  12.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -578,16 +578,11 @@ example) and others which are less so - generation markers are more of
 an example rather than what we expect users to use. Modelines are
 somewhere in between.
 
-*** STARTED Update the MASD UML profile to reflect the latest changes :story:
+*** COMPLETED Add a method in enumeration that converts it from strings :story:
+    CLOSED: [2019-05-14 Tue 19:54]
     :LOGBOOK:
-    CLOCK: [2019-05-13 Mon 11:38]--[2019-05-13 Mon 11:43] =>  0:05
-    :END:
-
-The UML profile is now a fair bit out of date. Take advantage of the
-down time waiting for builds to sync it.
-
-*** STARTED Add a method in enumeration that converts it from strings :story:
-    :LOGBOOK:
+    CLOCK: [2019-05-14 Tue 19:45]--[2019-05-14 Tue 19:54] =>  0:09
+    CLOCK: [2019-05-14 Tue 19:24]--[2019-05-14 Tue 19:44] =>  0:20
     CLOCK: [2019-05-14 Tue 18:42]--[2019-05-14 Tue 18:52] =>  0:10
     CLOCK: [2019-05-14 Tue 17:46]--[2019-05-14 Tue 18:02] =>  0:16
     CLOCK: [2019-05-14 Tue 17:13]--[2019-05-14 Tue 17:33] =>  0:20
@@ -643,6 +638,14 @@ Links:
 
 - [[http://www.cplusplus.com/reference/cstring/strncmp/][strncmp]]
 - [[https://stackoverflow.com/questions/1250795/very-poor-boostlexical-cast-performance][Very poor boost::lexical_cast performance]]
+
+*** STARTED Update the MASD UML profile to reflect the latest changes :story:
+    :LOGBOOK:
+    CLOCK: [2019-05-13 Mon 11:38]--[2019-05-13 Mon 11:43] =>  0:05
+    :END:
+
+The UML profile is now a fair bit out of date. Take advantage of the
+down time waiting for builds to sync it.
 
 *** Add logging support to generated tests                            :story:
 
