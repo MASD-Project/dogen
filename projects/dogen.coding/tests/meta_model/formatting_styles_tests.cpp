@@ -90,8 +90,15 @@ BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
 }
 
 BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+#if BOOST_COMP_GNUC
+#pragma gcc diagnostic push
+#pragma gcc diagnostic ignored "-Werror=conversion"
+#endif
     using dogen::coding::meta_model::formatting_styles;
     const formatting_styles r(static_cast<formatting_styles>(14));
+#if BOOST_COMP_GNUC
+#pragma gcc diagnostic pop
+#endif
     BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
         boost::bad_lexical_cast);
 }

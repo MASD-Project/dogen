@@ -106,8 +106,15 @@ BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
 }
 
 BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+#if BOOST_COMP_GNUC
+#pragma gcc diagnostic push
+#pragma gcc diagnostic ignored "-Werror=conversion"
+#endif
     using dogen::variability::meta_model::template_kind;
     const template_kind r(static_cast<template_kind>(16));
+#if BOOST_COMP_GNUC
+#pragma gcc diagnostic pop
+#endif
     BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
         boost::bad_lexical_cast);
 }

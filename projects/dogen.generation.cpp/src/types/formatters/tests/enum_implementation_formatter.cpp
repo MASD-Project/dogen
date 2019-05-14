@@ -34,8 +34,9 @@
 #include "dogen.coding/types/helpers/meta_name_factory.hpp"
 #include "dogen.coding/types/meta_model/structural/enumeration.hpp"
 #include "dogen.utility/types/log/logger.hpp"
-#include <boost/throw_exception.hpp>
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
+#include <boost/throw_exception.hpp>
+#include <boost/predef.h>
 
 namespace dogen::generation::cpp::formatters::tests {
 
@@ -231,8 +232,15 @@ a.stream() << "    BOOST_CHECK(r == \"" << sn + "::" + enu_sn << "\");" << std::
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
 a.stream() << "BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {" << std::endl;
+a.stream() << "#if BOOST_COMP_GNUC" << std::endl;
+a.stream() << "#pragma gcc diagnostic push" << std::endl;
+a.stream() << "#pragma gcc diagnostic ignored \"-Werror=conversion\"" << std::endl;
+a.stream() << "#endif" << std::endl;
 a.stream() << "    using " << qn << ";" << std::endl;
 a.stream() << "    const " << sn << " r(static_cast<" << sn << ">(" << enm.enumerators().size() + 10 << "));" << std::endl;
+a.stream() << "#if BOOST_COMP_GNUC" << std::endl;
+a.stream() << "#pragma gcc diagnostic pop" << std::endl;
+a.stream() << "#endif" << std::endl;
 a.stream() << "    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r)," << std::endl;
 a.stream() << "        boost::bad_lexical_cast);" << std::endl;
 a.stream() << "}" << std::endl;

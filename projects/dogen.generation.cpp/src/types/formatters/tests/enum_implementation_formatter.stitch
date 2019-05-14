@@ -1,7 +1,8 @@
 <#@ masd.stitch.stream_variable_name=a.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::generation::cpp::formatters::tests #>
-<#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency=<boost/predef.h>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.coding/types/meta_model/structural/enumeration.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.coding/types/helpers/meta_name_factory.hpp" #>
@@ -227,8 +228,15 @@ BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
 }
 
 BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+#if BOOST_COMP_GNUC
+#pragma gcc diagnostic push
+#pragma gcc diagnostic ignored "-Werror=conversion"
+#endif
     using <#= qn #>;
     const <#= sn #> r(static_cast<<#= sn #>>(<#= enm.enumerators().size() + 10 #>));
+#if BOOST_COMP_GNUC
+#pragma gcc diagnostic pop
+#endif
     BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
         boost::bad_lexical_cast);
 }
