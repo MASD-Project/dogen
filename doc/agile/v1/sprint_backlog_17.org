@@ -12,29 +12,29 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-14 Tue 12:05]
+#+CAPTION: Clock summary at [2019-05-14 Tue 16:00]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *55:17* |       |       | 100.0 |
+| *Total time*                                               | *56:14* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 55:17   |       |       | 100.0 |
-| Active                                                     |         | 55:17 |       | 100.0 |
-| Edit release notes for previous sprint                     |         |       |  2:41 |   4.9 |
+| Stories                                                    | 56:14   |       |       | 100.0 |
+| Active                                                     |         | 56:14 |       | 100.0 |
+| Edit release notes for previous sprint                     |         |       |  2:41 |   4.8 |
 | Create a video demo for the previous sprint's features     |         |       |  2:11 |   3.9 |
-| Sprint and product backlog grooming                        |         |       |  1:26 |   2.6 |
+| Sprint and product backlog grooming                        |         |       |  1:26 |   2.5 |
 | Defining profiles directly on a target model does not work |         |       |  0:30 |   0.9 |
 | Inner modules need to be qualified                         |         |       |  0:22 |   0.7 |
-| Create namespaces for model elements                       |         |       |  8:59 |  16.2 |
+| Create namespaces for model elements                       |         |       |  8:59 |  16.0 |
 | Leaves in internal modules are not captured correctly      |         |       |  1:33 |   2.8 |
-| Try to add relational tracing support                      |         |       |  2:51 |   5.2 |
+| Try to add relational tracing support                      |         |       |  2:51 |   5.1 |
 | Linux and OSX binaries are not stripped                    |         |       |  1:23 |   2.5 |
-| Fix issues with nightly build and CI                       |         |       |  0:05 |   0.2 |
-| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  13.1 |
-| Replace JSON based feature templates with generated code   |         |       | 16:15 |  29.4 |
-| Make a clear separation between dogen and masd             |         |       |  5:17 |   9.6 |
-| Update the MASD UML profile to reflect the latest changes  |         |       |  0:05 |   0.2 |
-| Add a method in enumeration that converts it from strings  |         |       |  4:26 |   8.0 |
+| Fix issues with nightly build and CI                       |         |       |  0:05 |   0.1 |
+| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  12.8 |
+| Replace JSON based feature templates with generated code   |         |       | 16:15 |  28.9 |
+| Make a clear separation between dogen and masd             |         |       |  5:17 |   9.4 |
+| Update the MASD UML profile to reflect the latest changes  |         |       |  0:05 |   0.1 |
+| Add a method in enumeration that converts it from strings  |         |       |  5:23 |   9.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -588,6 +588,8 @@ down time waiting for builds to sync it.
 
 *** STARTED Add a method in enumeration that converts it from strings :story:
     :LOGBOOK:
+    CLOCK: [2019-05-14 Tue 15:16]--[2019-05-14 Tue 16:00] =>  0:44
+    CLOCK: [2019-05-14 Tue 15:02]--[2019-05-14 Tue 15:15] =>  0:13
     CLOCK: [2019-05-14 Tue 09:25]--[2019-05-14 Tue 12:05] =>  2:40
     CLOCK: [2019-05-14 Tue 09:21]--[2019-05-14 Tue 09:24] =>  0:03
     CLOCK: [2019-05-14 Tue 08:40]--[2019-05-14 Tue 09:20] =>  0:40

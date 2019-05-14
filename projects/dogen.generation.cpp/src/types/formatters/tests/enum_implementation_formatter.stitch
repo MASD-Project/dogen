@@ -121,6 +121,10 @@ format(const context& ctx, const coding::meta_model::element& e) const {
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));
         const auto qn(a.get_qualified_name(e.name()));
+        std::string type_name("auto");
+        if (a.is_cpp_standard_98())
+            type_name = qn;
+
 #>
 BOOST_AUTO_TEST_SUITE(<#= e.name().simple() #>_tests)
 
@@ -148,7 +152,7 @@ BOOST_AUTO_TEST_CASE(fake_test) {
 #>
 BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
     <#= qn #>_generator g;
-    const auto a(g());
+    const <#= type_name #> a(g());
     std::stringstream s;
     s << a;
 
@@ -166,7 +170,7 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 #>
 BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {
     <#= qn #>_generator g;
-    const auto a(g());
+    const <#= type_name #> a(g());
 
     using namespace boost::archive;
     std::ostringstream os;
@@ -186,7 +190,7 @@ BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {
 
 BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {
     <#= qn #>_generator g;
-    const auto a(g());
+    const <#= type_name #> a(g());
 
     using namespace boost::archive;
     std::ostringstream os;
@@ -206,7 +210,7 @@ BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {
 
 BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {
     <#= qn #>_generator g;
-    const auto a(g());
+    const <#= type_name #> a(g());
 
     using namespace boost::archive;
     std::ostringstream os;
@@ -235,8 +239,8 @@ BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {
 BOOST_AUTO_TEST_CASE(equal_enums_generate_the_same_hash) {
     <#= qn #>_generator g;
     g();
-    const auto a(g());
-    const auto b(a);
+    const <#= type_name #> a(g());
+    const <#= type_name #> b(a);
 
     std::hash<<#= qn #>> hasher;
     BOOST_CHECK(hasher(a) == hasher(b));
@@ -245,8 +249,8 @@ BOOST_AUTO_TEST_CASE(equal_enums_generate_the_same_hash) {
 BOOST_AUTO_TEST_CASE(different_enums_generate_different_hashes) {
     <#= qn #>_generator g;
     g();
-    const auto a(g());
-    const auto b(g());
+    const <#= type_name #> a(g());
+    const <#= type_name #> b(g());
 
     std::hash<<#= qn #>> hasher;
     BOOST_CHECK(hasher(a) != hasher(b));

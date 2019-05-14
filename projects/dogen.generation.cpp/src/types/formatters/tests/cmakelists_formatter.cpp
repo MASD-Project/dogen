@@ -111,8 +111,17 @@ a.stream() << "    \"${CMAKE_CURRENT_SOURCE_DIR}/*.cpp\")" << std::endl;
 a.stream() << std::endl;
 a.stream() << "add_executable(${tests_target_name} ${files})" << std::endl;
 a.stream() << std::endl;
-a.stream() << "set_target_properties(${tests_target_name}" << std::endl;
-a.stream() << "    PROPERTIES OUTPUT_NAME ${tests_binary_name})" << std::endl;
+a.stream() << "set_target_properties(${tests_target_name} PROPERTIES" << std::endl;
+        if (a.is_cpp_standard_98()) {
+a.stream() << "    CXX_STANDARD 98" << std::endl;
+        }
+a.stream() << "    OUTPUT_NAME ${tests_binary_name})" << std::endl;
+a.stream() << std::endl;
+        if (a.is_cpp_standard_98()) {
+a.stream() << "target_compile_options(${tests_target_name} PRIVATE" << std::endl;
+a.stream() << "    $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:" << std::endl;
+a.stream() << "    -Wno-c99-extensions>)" << std::endl;
+        }
 a.stream() << std::endl;
 a.stream() << "target_link_libraries(${tests_target_name}" << std::endl;
 a.stream() << "    ${lib_target_name}" << std::endl;

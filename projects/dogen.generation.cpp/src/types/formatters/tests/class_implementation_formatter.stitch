@@ -141,6 +141,11 @@ format(const context& ctx, const coding::meta_model::element& e) const {
         auto list(e.name().location().internal_modules());
         list.push_back(o.name().simple());
         const std::string test_suite_name(boost::join(list, "_"));
+
+        std::string type_name("auto");
+        if (a.is_cpp_standard_98())
+            type_name = qn;
+
 #>
 BOOST_AUTO_TEST_SUITE(<#= test_suite_name #>_tests)
 
@@ -171,8 +176,8 @@ BOOST_AUTO_TEST_CASE(fake_test) {
 #>
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
     <#= qn #>_generator g;
-    const auto a(g());
-    const auto b(a);
+    const <#= type_name #> a(g());
+    const <#= type_name #> b(a);
 
     BOOST_CHECK(a == b);
     BOOST_CHECK(b == a);
@@ -181,7 +186,7 @@ BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
 
 BOOST_AUTO_TEST_CASE(an_object_is_equal_to_itself) {
     <#= qn #>_generator g;
-    const auto a(g());
+    const <#= type_name #> a(g());
 
     BOOST_CHECK(a == a);
     BOOST_CHECK(!(a != a));
@@ -189,8 +194,8 @@ BOOST_AUTO_TEST_CASE(an_object_is_equal_to_itself) {
 
 BOOST_AUTO_TEST_CASE(distinct_objects_are_unequal) {
     <#= qn #>_generator g;
-    const auto a(g());
-    const auto b(g());
+    const <#= type_name #> a(g());
+    const <#= type_name #> b(g());
 
     BOOST_CHECK(!(a == b));
     BOOST_CHECK(a != b);
@@ -202,9 +207,9 @@ BOOST_AUTO_TEST_CASE(assigning_an_object_to_itself_results_in_the_same_object) {
 #pragma clang diagnostic ignored "-Wself-assign-overloaded"
 #endif
     <#= qn #>_generator g;
-    auto a(g());
-    const auto b(a);
-    const auto c(g());
+    <#= type_name #> a(g());
+    const <#= type_name #> b(a);
+    const <#= type_name #> c(g());
 
     a = a;
     BOOST_CHECK(a == b);
@@ -214,24 +219,31 @@ BOOST_AUTO_TEST_CASE(assigning_an_object_to_itself_results_in_the_same_object) {
 #endif
 }
 
+<#+
+        // FIXME: should be 11 or greater.
+        if (!a.is_cpp_standard_98()) {
+#>
 BOOST_AUTO_TEST_CASE(moved_objects_are_equal) {
     <#= qn #>_generator g;
     g();
-    auto a(g());
-    const auto b = <#= qn #>();
-    const auto c(a);
+    <#= type_name #> a(g());
+    const <#= type_name #> b = <#= qn #>();
+    const <#= type_name #> c(a);
     BOOST_CHECK(a != b);
     BOOST_CHECK(a == c);
 
-    const auto d = std::move(a);
+    const <#= type_name #> d = std::move(a);
     BOOST_CHECK(d == c);
     BOOST_CHECK(d != b);
 }
+<#+
+        }
+#>
 
 BOOST_AUTO_TEST_CASE(assigned_objects_are_equal) {
     <#= qn #>_generator g;
     g();
-    const auto a(g());
+    const <#= type_name #> a(g());
     <#= qn #> b;
     BOOST_CHECK(a != b);
 
@@ -242,8 +254,8 @@ BOOST_AUTO_TEST_CASE(assigned_objects_are_equal) {
 BOOST_AUTO_TEST_CASE(copy_constructed_objects_are_equal) {
     <#= qn #>_generator g;
     g();
-    const auto a(g());
-    auto b(a);
+    const <#= type_name #> a(g());
+    <#= type_name #> b(a);
     BOOST_CHECK(a == b);
 
     b = <#= qn #>();
@@ -252,11 +264,11 @@ BOOST_AUTO_TEST_CASE(copy_constructed_objects_are_equal) {
 
 BOOST_AUTO_TEST_CASE(swapping_objects_results_in_the_expected_state) {
     <#= qn #>_generator g;
-    const auto a(g());
-    const auto b(g());
+    const <#= type_name #> a(g());
+    const <#= type_name #> b(g());
 
-    auto c(a);
-    auto d(b);
+    <#= type_name #> c(a);
+    <#= type_name #> d(b);
     BOOST_CHECK(c == a);
     BOOST_CHECK(d == b);
 
@@ -288,7 +300,7 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
                 } else {
 #>
     <#= qn #>_generator g;
-    const auto a(g());
+    const <#= type_name #> a(g());
     std::stringstream s;
     s << a;
 
@@ -396,7 +408,7 @@ BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {
 #>
 BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {
     <#= qn #>_generator g;
-    const auto a(g());
+    const <#= type_name #> a(g());
 
     using namespace boost::archive;
     std::ostringstream os;
@@ -419,7 +431,7 @@ BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {
 
 BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {
     <#= qn #>_generator g;
-    const auto a(g());
+    const <#= type_name #> a(g());
 
     using namespace boost::archive;
     std::ostringstream os;
@@ -442,7 +454,7 @@ BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {
 
 BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {
     <#= qn #>_generator g;
-    const auto a(g());
+    const <#= type_name #> a(g());
 
     using namespace boost::archive;
     std::ostringstream os;
@@ -474,8 +486,8 @@ BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {
 BOOST_AUTO_TEST_CASE(equal_objects_generate_the_same_hash) {
     <#= qn #>_generator g;
     g();
-    const auto a(g());
-    const auto b(a);
+    const <#= type_name #> a(g());
+    const <#= type_name #> b(a);
 
     std::hash<<#= qn #>> hasher;
     BOOST_CHECK(hasher(a) == hasher(b));
@@ -484,8 +496,8 @@ BOOST_AUTO_TEST_CASE(equal_objects_generate_the_same_hash) {
 BOOST_AUTO_TEST_CASE(different_objects_generate_different_hashes) {
     <#= qn #>_generator g;
     g();
-    const auto a(g());
-    const auto b(g());
+    const <#= type_name #> a(g());
+    const <#= type_name #> b(g());
 
     std::hash<<#= qn #>> hasher;
     BOOST_CHECK(hasher(a) != hasher(b));

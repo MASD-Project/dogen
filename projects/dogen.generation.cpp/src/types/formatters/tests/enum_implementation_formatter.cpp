@@ -140,6 +140,10 @@ format(const context& ctx, const coding::meta_model::element& e) const {
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));
         const auto qn(a.get_qualified_name(e.name()));
+        std::string type_name("auto");
+        if (a.is_cpp_standard_98())
+            type_name = qn;
+
 a.stream() << "BOOST_AUTO_TEST_SUITE(" << e.name().simple() << "_tests)" << std::endl;
 a.stream() << std::endl;
         /*
@@ -162,7 +166,7 @@ a.stream() << std::endl;
                  */
 a.stream() << "BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {" << std::endl;
 a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    const auto a(g());" << std::endl;
+a.stream() << "    const " << type_name << " a(g());" << std::endl;
 a.stream() << "    std::stringstream s;" << std::endl;
 a.stream() << "    s << a;" << std::endl;
 a.stream() << std::endl;
@@ -178,7 +182,7 @@ a.stream() << std::endl;
                  */
 a.stream() << "BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {" << std::endl;
 a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    const auto a(g());" << std::endl;
+a.stream() << "    const " << type_name << " a(g());" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    using namespace boost::archive;" << std::endl;
 a.stream() << "    std::ostringstream os;" << std::endl;
@@ -198,7 +202,7 @@ a.stream() << "}" << std::endl;
 a.stream() << std::endl;
 a.stream() << "BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {" << std::endl;
 a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    const auto a(g());" << std::endl;
+a.stream() << "    const " << type_name << " a(g());" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    using namespace boost::archive;" << std::endl;
 a.stream() << "    std::ostringstream os;" << std::endl;
@@ -218,7 +222,7 @@ a.stream() << "}" << std::endl;
 a.stream() << std::endl;
 a.stream() << "BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {" << std::endl;
 a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    const auto a(g());" << std::endl;
+a.stream() << "    const " << type_name << " a(g());" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    using namespace boost::archive;" << std::endl;
 a.stream() << "    std::ostringstream os;" << std::endl;
@@ -245,8 +249,8 @@ a.stream() << std::endl;
 a.stream() << "BOOST_AUTO_TEST_CASE(equal_enums_generate_the_same_hash) {" << std::endl;
 a.stream() << "    " << qn << "_generator g;" << std::endl;
 a.stream() << "    g();" << std::endl;
-a.stream() << "    const auto a(g());" << std::endl;
-a.stream() << "    const auto b(a);" << std::endl;
+a.stream() << "    const " << type_name << " a(g());" << std::endl;
+a.stream() << "    const " << type_name << " b(a);" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    std::hash<" << qn << "> hasher;" << std::endl;
 a.stream() << "    BOOST_CHECK(hasher(a) == hasher(b));" << std::endl;
@@ -255,8 +259,8 @@ a.stream() << std::endl;
 a.stream() << "BOOST_AUTO_TEST_CASE(different_enums_generate_different_hashes) {" << std::endl;
 a.stream() << "    " << qn << "_generator g;" << std::endl;
 a.stream() << "    g();" << std::endl;
-a.stream() << "    const auto a(g());" << std::endl;
-a.stream() << "    const auto b(g());" << std::endl;
+a.stream() << "    const " << type_name << " a(g());" << std::endl;
+a.stream() << "    const " << type_name << " b(g());" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    std::hash<" << qn << "> hasher;" << std::endl;
 a.stream() << "    BOOST_CHECK(hasher(a) != hasher(b));" << std::endl;
