@@ -83,13 +83,13 @@ BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
 
 BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
 #if BOOST_COMP_GNUC
-#pragma gcc diagnostic push
-#pragma gcc diagnostic ignored "-Werror=conversion"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wconversion"
 #endif
     using dogen::coding::helpers::mapping_actions;
     const mapping_actions r(static_cast<mapping_actions>(13));
 #if BOOST_COMP_GNUC
-#pragma gcc diagnostic pop
+#pragma GCC diagnostic pop
 #endif
     BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
         boost::bad_lexical_cast);
