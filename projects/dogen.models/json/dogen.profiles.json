@@ -208,21 +208,7 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "composable::code_generated",
-      "documentation": "Base profile for model elements that are code generated, but do not obey the\ndefault profile.\n",
-      "stereotypes": [
-        "masd::variability::profile_template"
-      ],
-      "tagged_values": {
-        "masd.variability.binding_point": "element"
-      },
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "composable::typeable",
-      "parents": [
-        "composable::code_generated"
-      ],
       "documentation": "Model element is defined as a type.\n",
       "stereotypes": [
         "masd::variability::profile_template"
@@ -258,9 +244,6 @@
     },
     {
       "name": "composable::pretty_printable",
-      "parents": [
-        "composable::code_generated"
-      ],
       "documentation": "The element has the ability to dump itself to a stream.\n",
       "stereotypes": [
         "masd::variability::profile_template"
@@ -285,9 +268,6 @@
     },
     {
       "name": "composable::hashable",
-      "parents": [
-        "composable::code_generated"
-      ],
       "documentation": "The element has the ability to generate hashes.\n",
       "stereotypes": [
         "masd::variability::profile_template"
@@ -312,15 +292,12 @@
     },
     {
       "name": "composable::serializable",
-      "parents": [
-        "composable::code_generated"
-      ],
       "stereotypes": [
         "masd::variability::profile_template"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.labels": "masd::serializable"
+        "masd.variability.labels": "dogen::serializable"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
