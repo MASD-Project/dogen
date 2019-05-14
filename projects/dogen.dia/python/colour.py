@@ -77,6 +77,12 @@ for layer in dia.active_display().diagram.data.layers:
             object.properties["fill_colour"] = "#B2E2E2"
 
         #
+        # Theme: Mapping
+        #
+        elif "masd::mapping::mappable_type" in stereotype:
+            object.properties["fill_colour"] = "#F9FF7C"
+
+        #
         # Theme: Core meta-elements
         #
         elif "masd::enumeration" in stereotype:
