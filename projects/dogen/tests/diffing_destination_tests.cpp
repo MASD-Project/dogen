@@ -20,12 +20,14 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen/io/diffing_destination_io.hpp"
 #include "dogen/types/diffing_destination.hpp"
 #include "dogen/test_data/diffing_destination_td.hpp"
+#include "dogen/lexical_cast/diffing_destination_lc.hpp"
 
 BOOST_AUTO_TEST_SUITE(diffing_destination_tests)
 
@@ -37,6 +39,53 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using dogen::diffing_destination;
+    diffing_destination r;
+
+    r = boost::lexical_cast<diffing_destination>(std::string("invalid"));
+    BOOST_CHECK(r == diffing_destination::invalid);
+    r = boost::lexical_cast<diffing_destination>(std::string("diffing_destination::invalid"));
+    BOOST_CHECK(r == diffing_destination::invalid);
+
+    r = boost::lexical_cast<diffing_destination>(std::string("file"));
+    BOOST_CHECK(r == diffing_destination::file);
+    r = boost::lexical_cast<diffing_destination>(std::string("diffing_destination::file"));
+    BOOST_CHECK(r == diffing_destination::file);
+
+    r = boost::lexical_cast<diffing_destination>(std::string("console"));
+    BOOST_CHECK(r == diffing_destination::console);
+    r = boost::lexical_cast<diffing_destination>(std::string("diffing_destination::console"));
+    BOOST_CHECK(r == diffing_destination::console);
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using dogen::diffing_destination;
+    BOOST_CHECK_THROW(boost::lexical_cast<diffing_destination>(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using dogen::diffing_destination;
+    std::string r;
+
+    r = boost::lexical_cast<std::string>(diffing_destination::invalid);
+    BOOST_CHECK(r == "diffing_destination::invalid");
+
+    r = boost::lexical_cast<std::string>(diffing_destination::file);
+    BOOST_CHECK(r == "diffing_destination::file");
+
+    r = boost::lexical_cast<std::string>(diffing_destination::console);
+    BOOST_CHECK(r == "diffing_destination::console");
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+    using dogen::diffing_destination;
+    const diffing_destination r(static_cast<diffing_destination>(13));
+    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
+        boost::bad_lexical_cast);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

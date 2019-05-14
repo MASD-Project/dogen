@@ -20,12 +20,14 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen.coding/io/helpers/separators_io.hpp"
 #include "dogen.coding/types/helpers/separators.hpp"
 #include "dogen.coding/test_data/helpers/separators_td.hpp"
+#include "dogen.coding/lexical_cast/helpers/separators_lc.hpp"
 
 BOOST_AUTO_TEST_SUITE(separators_tests)
 
@@ -37,6 +39,61 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using dogen::coding::helpers::separators;
+    separators r;
+
+    r = boost::lexical_cast<separators>(std::string("invalid"));
+    BOOST_CHECK(r == separators::invalid);
+    r = boost::lexical_cast<separators>(std::string("separators::invalid"));
+    BOOST_CHECK(r == separators::invalid);
+
+    r = boost::lexical_cast<separators>(std::string("angle_brackets"));
+    BOOST_CHECK(r == separators::angle_brackets);
+    r = boost::lexical_cast<separators>(std::string("separators::angle_brackets"));
+    BOOST_CHECK(r == separators::angle_brackets);
+
+    r = boost::lexical_cast<separators>(std::string("double_colons"));
+    BOOST_CHECK(r == separators::double_colons);
+    r = boost::lexical_cast<separators>(std::string("separators::double_colons"));
+    BOOST_CHECK(r == separators::double_colons);
+
+    r = boost::lexical_cast<separators>(std::string("dots"));
+    BOOST_CHECK(r == separators::dots);
+    r = boost::lexical_cast<separators>(std::string("separators::dots"));
+    BOOST_CHECK(r == separators::dots);
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using dogen::coding::helpers::separators;
+    BOOST_CHECK_THROW(boost::lexical_cast<separators>(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using dogen::coding::helpers::separators;
+    std::string r;
+
+    r = boost::lexical_cast<std::string>(separators::invalid);
+    BOOST_CHECK(r == "separators::invalid");
+
+    r = boost::lexical_cast<std::string>(separators::angle_brackets);
+    BOOST_CHECK(r == "separators::angle_brackets");
+
+    r = boost::lexical_cast<std::string>(separators::double_colons);
+    BOOST_CHECK(r == "separators::double_colons");
+
+    r = boost::lexical_cast<std::string>(separators::dots);
+    BOOST_CHECK(r == "separators::dots");
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+    using dogen::coding::helpers::separators;
+    const separators r(static_cast<separators>(14));
+    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
+        boost::bad_lexical_cast);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

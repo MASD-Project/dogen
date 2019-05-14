@@ -20,12 +20,14 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen.generation/io/meta_model/formatting_styles_io.hpp"
 #include "dogen.generation/types/meta_model/formatting_styles.hpp"
 #include "dogen.generation/test_data/meta_model/formatting_styles_td.hpp"
+#include "dogen.generation/lexical_cast/meta_model/formatting_styles_lc.hpp"
 
 BOOST_AUTO_TEST_SUITE(formatting_styles_tests)
 
@@ -37,6 +39,61 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using dogen::generation::meta_model::formatting_styles;
+    formatting_styles r;
+
+    r = boost::lexical_cast<formatting_styles>(std::string("invalid"));
+    BOOST_CHECK(r == formatting_styles::invalid);
+    r = boost::lexical_cast<formatting_styles>(std::string("formatting_styles::invalid"));
+    BOOST_CHECK(r == formatting_styles::invalid);
+
+    r = boost::lexical_cast<formatting_styles>(std::string("stock"));
+    BOOST_CHECK(r == formatting_styles::stock);
+    r = boost::lexical_cast<formatting_styles>(std::string("formatting_styles::stock"));
+    BOOST_CHECK(r == formatting_styles::stock);
+
+    r = boost::lexical_cast<formatting_styles>(std::string("wale"));
+    BOOST_CHECK(r == formatting_styles::wale);
+    r = boost::lexical_cast<formatting_styles>(std::string("formatting_styles::wale"));
+    BOOST_CHECK(r == formatting_styles::wale);
+
+    r = boost::lexical_cast<formatting_styles>(std::string("stitch"));
+    BOOST_CHECK(r == formatting_styles::stitch);
+    r = boost::lexical_cast<formatting_styles>(std::string("formatting_styles::stitch"));
+    BOOST_CHECK(r == formatting_styles::stitch);
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using dogen::generation::meta_model::formatting_styles;
+    BOOST_CHECK_THROW(boost::lexical_cast<formatting_styles>(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using dogen::generation::meta_model::formatting_styles;
+    std::string r;
+
+    r = boost::lexical_cast<std::string>(formatting_styles::invalid);
+    BOOST_CHECK(r == "formatting_styles::invalid");
+
+    r = boost::lexical_cast<std::string>(formatting_styles::stock);
+    BOOST_CHECK(r == "formatting_styles::stock");
+
+    r = boost::lexical_cast<std::string>(formatting_styles::wale);
+    BOOST_CHECK(r == "formatting_styles::wale");
+
+    r = boost::lexical_cast<std::string>(formatting_styles::stitch);
+    BOOST_CHECK(r == "formatting_styles::stitch");
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+    using dogen::generation::meta_model::formatting_styles;
+    const formatting_styles r(static_cast<formatting_styles>(14));
+    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
+        boost::bad_lexical_cast);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

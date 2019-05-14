@@ -20,12 +20,14 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen.variability/io/meta_model/binding_point_io.hpp"
 #include "dogen.variability/types/meta_model/binding_point.hpp"
 #include "dogen.variability/test_data/meta_model/binding_point_td.hpp"
+#include "dogen.variability/lexical_cast/meta_model/binding_point_lc.hpp"
 
 BOOST_AUTO_TEST_SUITE(binding_point_tests)
 
@@ -37,6 +39,77 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using dogen::variability::meta_model::binding_point;
+    binding_point r;
+
+    r = boost::lexical_cast<binding_point>(std::string("invalid"));
+    BOOST_CHECK(r == binding_point::invalid);
+    r = boost::lexical_cast<binding_point>(std::string("binding_point::invalid"));
+    BOOST_CHECK(r == binding_point::invalid);
+
+    r = boost::lexical_cast<binding_point>(std::string("any"));
+    BOOST_CHECK(r == binding_point::any);
+    r = boost::lexical_cast<binding_point>(std::string("binding_point::any"));
+    BOOST_CHECK(r == binding_point::any);
+
+    r = boost::lexical_cast<binding_point>(std::string("global"));
+    BOOST_CHECK(r == binding_point::global);
+    r = boost::lexical_cast<binding_point>(std::string("binding_point::global"));
+    BOOST_CHECK(r == binding_point::global);
+
+    r = boost::lexical_cast<binding_point>(std::string("element"));
+    BOOST_CHECK(r == binding_point::element);
+    r = boost::lexical_cast<binding_point>(std::string("binding_point::element"));
+    BOOST_CHECK(r == binding_point::element);
+
+    r = boost::lexical_cast<binding_point>(std::string("property"));
+    BOOST_CHECK(r == binding_point::property);
+    r = boost::lexical_cast<binding_point>(std::string("binding_point::property"));
+    BOOST_CHECK(r == binding_point::property);
+
+    r = boost::lexical_cast<binding_point>(std::string("operation"));
+    BOOST_CHECK(r == binding_point::operation);
+    r = boost::lexical_cast<binding_point>(std::string("binding_point::operation"));
+    BOOST_CHECK(r == binding_point::operation);
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using dogen::variability::meta_model::binding_point;
+    BOOST_CHECK_THROW(boost::lexical_cast<binding_point>(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using dogen::variability::meta_model::binding_point;
+    std::string r;
+
+    r = boost::lexical_cast<std::string>(binding_point::invalid);
+    BOOST_CHECK(r == "binding_point::invalid");
+
+    r = boost::lexical_cast<std::string>(binding_point::any);
+    BOOST_CHECK(r == "binding_point::any");
+
+    r = boost::lexical_cast<std::string>(binding_point::global);
+    BOOST_CHECK(r == "binding_point::global");
+
+    r = boost::lexical_cast<std::string>(binding_point::element);
+    BOOST_CHECK(r == "binding_point::element");
+
+    r = boost::lexical_cast<std::string>(binding_point::property);
+    BOOST_CHECK(r == "binding_point::property");
+
+    r = boost::lexical_cast<std::string>(binding_point::operation);
+    BOOST_CHECK(r == "binding_point::operation");
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+    using dogen::variability::meta_model::binding_point;
+    const binding_point r(static_cast<binding_point>(16));
+    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
+        boost::bad_lexical_cast);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

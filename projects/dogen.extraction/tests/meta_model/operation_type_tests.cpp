@@ -20,6 +20,7 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
@@ -27,6 +28,7 @@
 #include "dogen.extraction/types/meta_model/operation_type.hpp"
 #include "dogen.extraction/hash/meta_model/operation_type_hash.hpp"
 #include "dogen.extraction/test_data/meta_model/operation_type_td.hpp"
+#include "dogen.extraction/lexical_cast/meta_model/operation_type_lc.hpp"
 
 BOOST_AUTO_TEST_SUITE(operation_type_tests)
 
@@ -38,6 +40,69 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using dogen::extraction::meta_model::operation_type;
+    operation_type r;
+
+    r = boost::lexical_cast<operation_type>(std::string("invalid"));
+    BOOST_CHECK(r == operation_type::invalid);
+    r = boost::lexical_cast<operation_type>(std::string("operation_type::invalid"));
+    BOOST_CHECK(r == operation_type::invalid);
+
+    r = boost::lexical_cast<operation_type>(std::string("create_only"));
+    BOOST_CHECK(r == operation_type::create_only);
+    r = boost::lexical_cast<operation_type>(std::string("operation_type::create_only"));
+    BOOST_CHECK(r == operation_type::create_only);
+
+    r = boost::lexical_cast<operation_type>(std::string("write"));
+    BOOST_CHECK(r == operation_type::write);
+    r = boost::lexical_cast<operation_type>(std::string("operation_type::write"));
+    BOOST_CHECK(r == operation_type::write);
+
+    r = boost::lexical_cast<operation_type>(std::string("ignore"));
+    BOOST_CHECK(r == operation_type::ignore);
+    r = boost::lexical_cast<operation_type>(std::string("operation_type::ignore"));
+    BOOST_CHECK(r == operation_type::ignore);
+
+    r = boost::lexical_cast<operation_type>(std::string("remove"));
+    BOOST_CHECK(r == operation_type::remove);
+    r = boost::lexical_cast<operation_type>(std::string("operation_type::remove"));
+    BOOST_CHECK(r == operation_type::remove);
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using dogen::extraction::meta_model::operation_type;
+    BOOST_CHECK_THROW(boost::lexical_cast<operation_type>(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using dogen::extraction::meta_model::operation_type;
+    std::string r;
+
+    r = boost::lexical_cast<std::string>(operation_type::invalid);
+    BOOST_CHECK(r == "operation_type::invalid");
+
+    r = boost::lexical_cast<std::string>(operation_type::create_only);
+    BOOST_CHECK(r == "operation_type::create_only");
+
+    r = boost::lexical_cast<std::string>(operation_type::write);
+    BOOST_CHECK(r == "operation_type::write");
+
+    r = boost::lexical_cast<std::string>(operation_type::ignore);
+    BOOST_CHECK(r == "operation_type::ignore");
+
+    r = boost::lexical_cast<std::string>(operation_type::remove);
+    BOOST_CHECK(r == "operation_type::remove");
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+    using dogen::extraction::meta_model::operation_type;
+    const operation_type r(static_cast<operation_type>(15));
+    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
+        boost::bad_lexical_cast);
 }
 
 BOOST_AUTO_TEST_CASE(equal_enums_generate_the_same_hash) {

@@ -20,12 +20,14 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen.generation.cpp/io/formattables/cpp_standards_io.hpp"
 #include "dogen.generation.cpp/types/formattables/cpp_standards.hpp"
 #include "dogen.generation.cpp/test_data/formattables/cpp_standards_td.hpp"
+#include "dogen.generation.cpp/lexical_cast/formattables/cpp_standards_lc.hpp"
 
 BOOST_AUTO_TEST_SUITE(cpp_standards_tests)
 
@@ -37,6 +39,69 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using dogen::generation::cpp::formattables::cpp_standards;
+    cpp_standards r;
+
+    r = boost::lexical_cast<cpp_standards>(std::string("invalid"));
+    BOOST_CHECK(r == cpp_standards::invalid);
+    r = boost::lexical_cast<cpp_standards>(std::string("cpp_standards::invalid"));
+    BOOST_CHECK(r == cpp_standards::invalid);
+
+    r = boost::lexical_cast<cpp_standards>(std::string("cpp_98"));
+    BOOST_CHECK(r == cpp_standards::cpp_98);
+    r = boost::lexical_cast<cpp_standards>(std::string("cpp_standards::cpp_98"));
+    BOOST_CHECK(r == cpp_standards::cpp_98);
+
+    r = boost::lexical_cast<cpp_standards>(std::string("cpp_11"));
+    BOOST_CHECK(r == cpp_standards::cpp_11);
+    r = boost::lexical_cast<cpp_standards>(std::string("cpp_standards::cpp_11"));
+    BOOST_CHECK(r == cpp_standards::cpp_11);
+
+    r = boost::lexical_cast<cpp_standards>(std::string("cpp_14"));
+    BOOST_CHECK(r == cpp_standards::cpp_14);
+    r = boost::lexical_cast<cpp_standards>(std::string("cpp_standards::cpp_14"));
+    BOOST_CHECK(r == cpp_standards::cpp_14);
+
+    r = boost::lexical_cast<cpp_standards>(std::string("cpp_17"));
+    BOOST_CHECK(r == cpp_standards::cpp_17);
+    r = boost::lexical_cast<cpp_standards>(std::string("cpp_standards::cpp_17"));
+    BOOST_CHECK(r == cpp_standards::cpp_17);
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using dogen::generation::cpp::formattables::cpp_standards;
+    BOOST_CHECK_THROW(boost::lexical_cast<cpp_standards>(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using dogen::generation::cpp::formattables::cpp_standards;
+    std::string r;
+
+    r = boost::lexical_cast<std::string>(cpp_standards::invalid);
+    BOOST_CHECK(r == "cpp_standards::invalid");
+
+    r = boost::lexical_cast<std::string>(cpp_standards::cpp_98);
+    BOOST_CHECK(r == "cpp_standards::cpp_98");
+
+    r = boost::lexical_cast<std::string>(cpp_standards::cpp_11);
+    BOOST_CHECK(r == "cpp_standards::cpp_11");
+
+    r = boost::lexical_cast<std::string>(cpp_standards::cpp_14);
+    BOOST_CHECK(r == "cpp_standards::cpp_14");
+
+    r = boost::lexical_cast<std::string>(cpp_standards::cpp_17);
+    BOOST_CHECK(r == "cpp_standards::cpp_17");
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+    using dogen::generation::cpp::formattables::cpp_standards;
+    const cpp_standards r(static_cast<cpp_standards>(15));
+    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
+        boost::bad_lexical_cast);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

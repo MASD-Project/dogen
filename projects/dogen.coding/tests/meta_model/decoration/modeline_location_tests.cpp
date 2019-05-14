@@ -20,12 +20,14 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen.coding/io/meta_model/decoration/modeline_location_io.hpp"
 #include "dogen.coding/types/meta_model/decoration/modeline_location.hpp"
 #include "dogen.coding/test_data/meta_model/decoration/modeline_location_td.hpp"
+#include "dogen.coding/lexical_cast/meta_model/decoration/modeline_location_lc.hpp"
 
 BOOST_AUTO_TEST_SUITE(modeline_location_tests)
 
@@ -37,6 +39,53 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using dogen::coding::meta_model::decoration::modeline_location;
+    modeline_location r;
+
+    r = boost::lexical_cast<modeline_location>(std::string("invalid"));
+    BOOST_CHECK(r == modeline_location::invalid);
+    r = boost::lexical_cast<modeline_location>(std::string("modeline_location::invalid"));
+    BOOST_CHECK(r == modeline_location::invalid);
+
+    r = boost::lexical_cast<modeline_location>(std::string("top"));
+    BOOST_CHECK(r == modeline_location::top);
+    r = boost::lexical_cast<modeline_location>(std::string("modeline_location::top"));
+    BOOST_CHECK(r == modeline_location::top);
+
+    r = boost::lexical_cast<modeline_location>(std::string("bottom"));
+    BOOST_CHECK(r == modeline_location::bottom);
+    r = boost::lexical_cast<modeline_location>(std::string("modeline_location::bottom"));
+    BOOST_CHECK(r == modeline_location::bottom);
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using dogen::coding::meta_model::decoration::modeline_location;
+    BOOST_CHECK_THROW(boost::lexical_cast<modeline_location>(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using dogen::coding::meta_model::decoration::modeline_location;
+    std::string r;
+
+    r = boost::lexical_cast<std::string>(modeline_location::invalid);
+    BOOST_CHECK(r == "modeline_location::invalid");
+
+    r = boost::lexical_cast<std::string>(modeline_location::top);
+    BOOST_CHECK(r == "modeline_location::top");
+
+    r = boost::lexical_cast<std::string>(modeline_location::bottom);
+    BOOST_CHECK(r == "modeline_location::bottom");
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+    using dogen::coding::meta_model::decoration::modeline_location;
+    const modeline_location r(static_cast<modeline_location>(13));
+    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
+        boost::bad_lexical_cast);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

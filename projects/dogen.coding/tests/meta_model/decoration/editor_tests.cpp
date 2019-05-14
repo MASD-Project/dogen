@@ -20,12 +20,14 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen.coding/io/meta_model/decoration/editor_io.hpp"
 #include "dogen.coding/types/meta_model/decoration/editor.hpp"
 #include "dogen.coding/test_data/meta_model/decoration/editor_td.hpp"
+#include "dogen.coding/lexical_cast/meta_model/decoration/editor_lc.hpp"
 
 BOOST_AUTO_TEST_SUITE(editor_tests)
 
@@ -37,6 +39,69 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using dogen::coding::meta_model::decoration::editor;
+    editor r;
+
+    r = boost::lexical_cast<editor>(std::string("invalid"));
+    BOOST_CHECK(r == editor::invalid);
+    r = boost::lexical_cast<editor>(std::string("editor::invalid"));
+    BOOST_CHECK(r == editor::invalid);
+
+    r = boost::lexical_cast<editor>(std::string("emacs"));
+    BOOST_CHECK(r == editor::emacs);
+    r = boost::lexical_cast<editor>(std::string("editor::emacs"));
+    BOOST_CHECK(r == editor::emacs);
+
+    r = boost::lexical_cast<editor>(std::string("vi"));
+    BOOST_CHECK(r == editor::vi);
+    r = boost::lexical_cast<editor>(std::string("editor::vi"));
+    BOOST_CHECK(r == editor::vi);
+
+    r = boost::lexical_cast<editor>(std::string("vim"));
+    BOOST_CHECK(r == editor::vim);
+    r = boost::lexical_cast<editor>(std::string("editor::vim"));
+    BOOST_CHECK(r == editor::vim);
+
+    r = boost::lexical_cast<editor>(std::string("ex"));
+    BOOST_CHECK(r == editor::ex);
+    r = boost::lexical_cast<editor>(std::string("editor::ex"));
+    BOOST_CHECK(r == editor::ex);
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using dogen::coding::meta_model::decoration::editor;
+    BOOST_CHECK_THROW(boost::lexical_cast<editor>(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using dogen::coding::meta_model::decoration::editor;
+    std::string r;
+
+    r = boost::lexical_cast<std::string>(editor::invalid);
+    BOOST_CHECK(r == "editor::invalid");
+
+    r = boost::lexical_cast<std::string>(editor::emacs);
+    BOOST_CHECK(r == "editor::emacs");
+
+    r = boost::lexical_cast<std::string>(editor::vi);
+    BOOST_CHECK(r == "editor::vi");
+
+    r = boost::lexical_cast<std::string>(editor::vim);
+    BOOST_CHECK(r == "editor::vim");
+
+    r = boost::lexical_cast<std::string>(editor::ex);
+    BOOST_CHECK(r == "editor::ex");
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+    using dogen::coding::meta_model::decoration::editor;
+    const editor r(static_cast<editor>(15));
+    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
+        boost::bad_lexical_cast);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

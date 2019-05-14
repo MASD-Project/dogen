@@ -20,12 +20,14 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen.coding/io/meta_model/origin_types_io.hpp"
 #include "dogen.coding/types/meta_model/origin_types.hpp"
 #include "dogen.coding/test_data/meta_model/origin_types_td.hpp"
+#include "dogen.coding/lexical_cast/meta_model/origin_types_lc.hpp"
 
 BOOST_AUTO_TEST_SUITE(origin_types_tests)
 
@@ -37,6 +39,69 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using dogen::coding::meta_model::origin_types;
+    origin_types r;
+
+    r = boost::lexical_cast<origin_types>(std::string("invalid"));
+    BOOST_CHECK(r == origin_types::invalid);
+    r = boost::lexical_cast<origin_types>(std::string("origin_types::invalid"));
+    BOOST_CHECK(r == origin_types::invalid);
+
+    r = boost::lexical_cast<origin_types>(std::string("target"));
+    BOOST_CHECK(r == origin_types::target);
+    r = boost::lexical_cast<origin_types>(std::string("origin_types::target"));
+    BOOST_CHECK(r == origin_types::target);
+
+    r = boost::lexical_cast<origin_types>(std::string("proxy_reference"));
+    BOOST_CHECK(r == origin_types::proxy_reference);
+    r = boost::lexical_cast<origin_types>(std::string("origin_types::proxy_reference"));
+    BOOST_CHECK(r == origin_types::proxy_reference);
+
+    r = boost::lexical_cast<origin_types>(std::string("non_proxy_reference"));
+    BOOST_CHECK(r == origin_types::non_proxy_reference);
+    r = boost::lexical_cast<origin_types>(std::string("origin_types::non_proxy_reference"));
+    BOOST_CHECK(r == origin_types::non_proxy_reference);
+
+    r = boost::lexical_cast<origin_types>(std::string("not_yet_determined"));
+    BOOST_CHECK(r == origin_types::not_yet_determined);
+    r = boost::lexical_cast<origin_types>(std::string("origin_types::not_yet_determined"));
+    BOOST_CHECK(r == origin_types::not_yet_determined);
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using dogen::coding::meta_model::origin_types;
+    BOOST_CHECK_THROW(boost::lexical_cast<origin_types>(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using dogen::coding::meta_model::origin_types;
+    std::string r;
+
+    r = boost::lexical_cast<std::string>(origin_types::invalid);
+    BOOST_CHECK(r == "origin_types::invalid");
+
+    r = boost::lexical_cast<std::string>(origin_types::target);
+    BOOST_CHECK(r == "origin_types::target");
+
+    r = boost::lexical_cast<std::string>(origin_types::proxy_reference);
+    BOOST_CHECK(r == "origin_types::proxy_reference");
+
+    r = boost::lexical_cast<std::string>(origin_types::non_proxy_reference);
+    BOOST_CHECK(r == "origin_types::non_proxy_reference");
+
+    r = boost::lexical_cast<std::string>(origin_types::not_yet_determined);
+    BOOST_CHECK(r == "origin_types::not_yet_determined");
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+    using dogen::coding::meta_model::origin_types;
+    const origin_types r(static_cast<origin_types>(15));
+    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
+        boost::bad_lexical_cast);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

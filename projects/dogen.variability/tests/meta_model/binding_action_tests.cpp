@@ -20,12 +20,14 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen.variability/io/meta_model/binding_action_io.hpp"
 #include "dogen.variability/types/meta_model/binding_action.hpp"
 #include "dogen.variability/test_data/meta_model/binding_action_td.hpp"
+#include "dogen.variability/lexical_cast/meta_model/binding_action_lc.hpp"
 
 BOOST_AUTO_TEST_SUITE(binding_action_tests)
 
@@ -37,6 +39,53 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using dogen::variability::meta_model::binding_action;
+    binding_action r;
+
+    r = boost::lexical_cast<binding_action>(std::string("invalid"));
+    BOOST_CHECK(r == binding_action::invalid);
+    r = boost::lexical_cast<binding_action>(std::string("binding_action::invalid"));
+    BOOST_CHECK(r == binding_action::invalid);
+
+    r = boost::lexical_cast<binding_action>(std::string("ignore"));
+    BOOST_CHECK(r == binding_action::ignore);
+    r = boost::lexical_cast<binding_action>(std::string("binding_action::ignore"));
+    BOOST_CHECK(r == binding_action::ignore);
+
+    r = boost::lexical_cast<binding_action>(std::string("copy"));
+    BOOST_CHECK(r == binding_action::copy);
+    r = boost::lexical_cast<binding_action>(std::string("binding_action::copy"));
+    BOOST_CHECK(r == binding_action::copy);
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using dogen::variability::meta_model::binding_action;
+    BOOST_CHECK_THROW(boost::lexical_cast<binding_action>(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using dogen::variability::meta_model::binding_action;
+    std::string r;
+
+    r = boost::lexical_cast<std::string>(binding_action::invalid);
+    BOOST_CHECK(r == "binding_action::invalid");
+
+    r = boost::lexical_cast<std::string>(binding_action::ignore);
+    BOOST_CHECK(r == "binding_action::ignore");
+
+    r = boost::lexical_cast<std::string>(binding_action::copy);
+    BOOST_CHECK(r == "binding_action::copy");
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+    using dogen::variability::meta_model::binding_action;
+    const binding_action r(static_cast<binding_action>(13));
+    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
+        boost::bad_lexical_cast);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

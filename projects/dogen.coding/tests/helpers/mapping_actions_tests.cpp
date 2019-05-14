@@ -20,12 +20,14 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen.coding/io/helpers/mapping_actions_io.hpp"
 #include "dogen.coding/types/helpers/mapping_actions.hpp"
 #include "dogen.coding/test_data/helpers/mapping_actions_td.hpp"
+#include "dogen.coding/lexical_cast/helpers/mapping_actions_lc.hpp"
 
 BOOST_AUTO_TEST_SUITE(mapping_actions_tests)
 
@@ -37,6 +39,53 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using dogen::coding::helpers::mapping_actions;
+    mapping_actions r;
+
+    r = boost::lexical_cast<mapping_actions>(std::string("invalid"));
+    BOOST_CHECK(r == mapping_actions::invalid);
+    r = boost::lexical_cast<mapping_actions>(std::string("mapping_actions::invalid"));
+    BOOST_CHECK(r == mapping_actions::invalid);
+
+    r = boost::lexical_cast<mapping_actions>(std::string("translate"));
+    BOOST_CHECK(r == mapping_actions::translate);
+    r = boost::lexical_cast<mapping_actions>(std::string("mapping_actions::translate"));
+    BOOST_CHECK(r == mapping_actions::translate);
+
+    r = boost::lexical_cast<mapping_actions>(std::string("erase"));
+    BOOST_CHECK(r == mapping_actions::erase);
+    r = boost::lexical_cast<mapping_actions>(std::string("mapping_actions::erase"));
+    BOOST_CHECK(r == mapping_actions::erase);
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using dogen::coding::helpers::mapping_actions;
+    BOOST_CHECK_THROW(boost::lexical_cast<mapping_actions>(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using dogen::coding::helpers::mapping_actions;
+    std::string r;
+
+    r = boost::lexical_cast<std::string>(mapping_actions::invalid);
+    BOOST_CHECK(r == "mapping_actions::invalid");
+
+    r = boost::lexical_cast<std::string>(mapping_actions::translate);
+    BOOST_CHECK(r == "mapping_actions::translate");
+
+    r = boost::lexical_cast<std::string>(mapping_actions::erase);
+    BOOST_CHECK(r == "mapping_actions::erase");
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+    using dogen::coding::helpers::mapping_actions;
+    const mapping_actions r(static_cast<mapping_actions>(13));
+    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
+        boost::bad_lexical_cast);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -20,12 +20,14 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen.utility/io/formatters/spacing_type_io.hpp"
 #include "dogen.utility/types/formatters/spacing_type.hpp"
 #include "dogen.utility/test_data/formatters/spacing_type_td.hpp"
+#include "dogen.utility/lexical_cast/formatters/spacing_type_lc.hpp"
 
 BOOST_AUTO_TEST_SUITE(spacing_type_tests)
 
@@ -37,6 +39,69 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using dogen::utility::formatters::spacing_type;
+    spacing_type r;
+
+    r = boost::lexical_cast<spacing_type>(std::string("invalid"));
+    BOOST_CHECK(r == spacing_type::invalid);
+    r = boost::lexical_cast<spacing_type>(std::string("spacing_type::invalid"));
+    BOOST_CHECK(r == spacing_type::invalid);
+
+    r = boost::lexical_cast<spacing_type>(std::string("no_space"));
+    BOOST_CHECK(r == spacing_type::no_space);
+    r = boost::lexical_cast<spacing_type>(std::string("spacing_type::no_space"));
+    BOOST_CHECK(r == spacing_type::no_space);
+
+    r = boost::lexical_cast<spacing_type>(std::string("left_space"));
+    BOOST_CHECK(r == spacing_type::left_space);
+    r = boost::lexical_cast<spacing_type>(std::string("spacing_type::left_space"));
+    BOOST_CHECK(r == spacing_type::left_space);
+
+    r = boost::lexical_cast<spacing_type>(std::string("right_space"));
+    BOOST_CHECK(r == spacing_type::right_space);
+    r = boost::lexical_cast<spacing_type>(std::string("spacing_type::right_space"));
+    BOOST_CHECK(r == spacing_type::right_space);
+
+    r = boost::lexical_cast<spacing_type>(std::string("left_and_right_space"));
+    BOOST_CHECK(r == spacing_type::left_and_right_space);
+    r = boost::lexical_cast<spacing_type>(std::string("spacing_type::left_and_right_space"));
+    BOOST_CHECK(r == spacing_type::left_and_right_space);
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using dogen::utility::formatters::spacing_type;
+    BOOST_CHECK_THROW(boost::lexical_cast<spacing_type>(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using dogen::utility::formatters::spacing_type;
+    std::string r;
+
+    r = boost::lexical_cast<std::string>(spacing_type::invalid);
+    BOOST_CHECK(r == "spacing_type::invalid");
+
+    r = boost::lexical_cast<std::string>(spacing_type::no_space);
+    BOOST_CHECK(r == "spacing_type::no_space");
+
+    r = boost::lexical_cast<std::string>(spacing_type::left_space);
+    BOOST_CHECK(r == "spacing_type::left_space");
+
+    r = boost::lexical_cast<std::string>(spacing_type::right_space);
+    BOOST_CHECK(r == "spacing_type::right_space");
+
+    r = boost::lexical_cast<std::string>(spacing_type::left_and_right_space);
+    BOOST_CHECK(r == "spacing_type::left_and_right_space");
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+    using dogen::utility::formatters::spacing_type;
+    const spacing_type r(static_cast<spacing_type>(15));
+    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
+        boost::bad_lexical_cast);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

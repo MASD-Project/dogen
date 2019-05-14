@@ -20,12 +20,14 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen.generation.csharp/io/formattables/auxiliary_function_types_io.hpp"
 #include "dogen.generation.csharp/types/formattables/auxiliary_function_types.hpp"
 #include "dogen.generation.csharp/test_data/formattables/auxiliary_function_types_td.hpp"
+#include "dogen.generation.csharp/lexical_cast/formattables/auxiliary_function_types_lc.hpp"
 
 BOOST_AUTO_TEST_SUITE(auxiliary_function_types_tests)
 
@@ -37,6 +39,53 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using dogen::generation::csharp::formattables::auxiliary_function_types;
+    auxiliary_function_types r;
+
+    r = boost::lexical_cast<auxiliary_function_types>(std::string("invalid"));
+    BOOST_CHECK(r == auxiliary_function_types::invalid);
+    r = boost::lexical_cast<auxiliary_function_types>(std::string("auxiliary_function_types::invalid"));
+    BOOST_CHECK(r == auxiliary_function_types::invalid);
+
+    r = boost::lexical_cast<auxiliary_function_types>(std::string("assistant"));
+    BOOST_CHECK(r == auxiliary_function_types::assistant);
+    r = boost::lexical_cast<auxiliary_function_types>(std::string("auxiliary_function_types::assistant"));
+    BOOST_CHECK(r == auxiliary_function_types::assistant);
+
+    r = boost::lexical_cast<auxiliary_function_types>(std::string("helper"));
+    BOOST_CHECK(r == auxiliary_function_types::helper);
+    r = boost::lexical_cast<auxiliary_function_types>(std::string("auxiliary_function_types::helper"));
+    BOOST_CHECK(r == auxiliary_function_types::helper);
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using dogen::generation::csharp::formattables::auxiliary_function_types;
+    BOOST_CHECK_THROW(boost::lexical_cast<auxiliary_function_types>(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using dogen::generation::csharp::formattables::auxiliary_function_types;
+    std::string r;
+
+    r = boost::lexical_cast<std::string>(auxiliary_function_types::invalid);
+    BOOST_CHECK(r == "auxiliary_function_types::invalid");
+
+    r = boost::lexical_cast<std::string>(auxiliary_function_types::assistant);
+    BOOST_CHECK(r == "auxiliary_function_types::assistant");
+
+    r = boost::lexical_cast<std::string>(auxiliary_function_types::helper);
+    BOOST_CHECK(r == "auxiliary_function_types::helper");
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+    using dogen::generation::csharp::formattables::auxiliary_function_types;
+    const auxiliary_function_types r(static_cast<auxiliary_function_types>(13));
+    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
+        boost::bad_lexical_cast);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

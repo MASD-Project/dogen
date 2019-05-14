@@ -20,12 +20,14 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen.variability/io/meta_model/value_type_io.hpp"
 #include "dogen.variability/types/meta_model/value_type.hpp"
 #include "dogen.variability/test_data/meta_model/value_type_td.hpp"
+#include "dogen.variability/lexical_cast/meta_model/value_type_lc.hpp"
 
 BOOST_AUTO_TEST_SUITE(value_type_tests)
 
@@ -37,6 +39,77 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using dogen::variability::meta_model::value_type;
+    value_type r;
+
+    r = boost::lexical_cast<value_type>(std::string("invalid"));
+    BOOST_CHECK(r == value_type::invalid);
+    r = boost::lexical_cast<value_type>(std::string("value_type::invalid"));
+    BOOST_CHECK(r == value_type::invalid);
+
+    r = boost::lexical_cast<value_type>(std::string("text"));
+    BOOST_CHECK(r == value_type::text);
+    r = boost::lexical_cast<value_type>(std::string("value_type::text"));
+    BOOST_CHECK(r == value_type::text);
+
+    r = boost::lexical_cast<value_type>(std::string("text_collection"));
+    BOOST_CHECK(r == value_type::text_collection);
+    r = boost::lexical_cast<value_type>(std::string("value_type::text_collection"));
+    BOOST_CHECK(r == value_type::text_collection);
+
+    r = boost::lexical_cast<value_type>(std::string("number"));
+    BOOST_CHECK(r == value_type::number);
+    r = boost::lexical_cast<value_type>(std::string("value_type::number"));
+    BOOST_CHECK(r == value_type::number);
+
+    r = boost::lexical_cast<value_type>(std::string("boolean"));
+    BOOST_CHECK(r == value_type::boolean);
+    r = boost::lexical_cast<value_type>(std::string("value_type::boolean"));
+    BOOST_CHECK(r == value_type::boolean);
+
+    r = boost::lexical_cast<value_type>(std::string("key_value_pair"));
+    BOOST_CHECK(r == value_type::key_value_pair);
+    r = boost::lexical_cast<value_type>(std::string("value_type::key_value_pair"));
+    BOOST_CHECK(r == value_type::key_value_pair);
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using dogen::variability::meta_model::value_type;
+    BOOST_CHECK_THROW(boost::lexical_cast<value_type>(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using dogen::variability::meta_model::value_type;
+    std::string r;
+
+    r = boost::lexical_cast<std::string>(value_type::invalid);
+    BOOST_CHECK(r == "value_type::invalid");
+
+    r = boost::lexical_cast<std::string>(value_type::text);
+    BOOST_CHECK(r == "value_type::text");
+
+    r = boost::lexical_cast<std::string>(value_type::text_collection);
+    BOOST_CHECK(r == "value_type::text_collection");
+
+    r = boost::lexical_cast<std::string>(value_type::number);
+    BOOST_CHECK(r == "value_type::number");
+
+    r = boost::lexical_cast<std::string>(value_type::boolean);
+    BOOST_CHECK(r == "value_type::boolean");
+
+    r = boost::lexical_cast<std::string>(value_type::key_value_pair);
+    BOOST_CHECK(r == "value_type::key_value_pair");
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+    using dogen::variability::meta_model::value_type;
+    const value_type r(static_cast<value_type>(16));
+    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
+        boost::bad_lexical_cast);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

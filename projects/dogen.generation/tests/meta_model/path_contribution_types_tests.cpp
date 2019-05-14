@@ -20,12 +20,14 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen.generation/io/meta_model/path_contribution_types_io.hpp"
 #include "dogen.generation/types/meta_model/path_contribution_types.hpp"
 #include "dogen.generation/test_data/meta_model/path_contribution_types_td.hpp"
+#include "dogen.generation/lexical_cast/meta_model/path_contribution_types_lc.hpp"
 
 BOOST_AUTO_TEST_SUITE(path_contribution_types_tests)
 
@@ -37,6 +39,61 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using dogen::generation::meta_model::path_contribution_types;
+    path_contribution_types r;
+
+    r = boost::lexical_cast<path_contribution_types>(std::string("invalid"));
+    BOOST_CHECK(r == path_contribution_types::invalid);
+    r = boost::lexical_cast<path_contribution_types>(std::string("path_contribution_types::invalid"));
+    BOOST_CHECK(r == path_contribution_types::invalid);
+
+    r = boost::lexical_cast<path_contribution_types>(std::string("none"));
+    BOOST_CHECK(r == path_contribution_types::none);
+    r = boost::lexical_cast<path_contribution_types>(std::string("path_contribution_types::none"));
+    BOOST_CHECK(r == path_contribution_types::none);
+
+    r = boost::lexical_cast<path_contribution_types>(std::string("as_folders"));
+    BOOST_CHECK(r == path_contribution_types::as_folders);
+    r = boost::lexical_cast<path_contribution_types>(std::string("path_contribution_types::as_folders"));
+    BOOST_CHECK(r == path_contribution_types::as_folders);
+
+    r = boost::lexical_cast<path_contribution_types>(std::string("as_path_components"));
+    BOOST_CHECK(r == path_contribution_types::as_path_components);
+    r = boost::lexical_cast<path_contribution_types>(std::string("path_contribution_types::as_path_components"));
+    BOOST_CHECK(r == path_contribution_types::as_path_components);
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using dogen::generation::meta_model::path_contribution_types;
+    BOOST_CHECK_THROW(boost::lexical_cast<path_contribution_types>(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using dogen::generation::meta_model::path_contribution_types;
+    std::string r;
+
+    r = boost::lexical_cast<std::string>(path_contribution_types::invalid);
+    BOOST_CHECK(r == "path_contribution_types::invalid");
+
+    r = boost::lexical_cast<std::string>(path_contribution_types::none);
+    BOOST_CHECK(r == "path_contribution_types::none");
+
+    r = boost::lexical_cast<std::string>(path_contribution_types::as_folders);
+    BOOST_CHECK(r == "path_contribution_types::as_folders");
+
+    r = boost::lexical_cast<std::string>(path_contribution_types::as_path_components);
+    BOOST_CHECK(r == "path_contribution_types::as_path_components");
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+    using dogen::generation::meta_model::path_contribution_types;
+    const path_contribution_types r(static_cast<path_contribution_types>(14));
+    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
+        boost::bad_lexical_cast);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

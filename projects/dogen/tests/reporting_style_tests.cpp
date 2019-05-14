@@ -20,12 +20,14 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen/io/reporting_style_io.hpp"
 #include "dogen/types/reporting_style.hpp"
 #include "dogen/test_data/reporting_style_td.hpp"
+#include "dogen/lexical_cast/reporting_style_lc.hpp"
 
 BOOST_AUTO_TEST_SUITE(reporting_style_tests)
 
@@ -37,6 +39,53 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using dogen::reporting_style;
+    reporting_style r;
+
+    r = boost::lexical_cast<reporting_style>(std::string("invalid"));
+    BOOST_CHECK(r == reporting_style::invalid);
+    r = boost::lexical_cast<reporting_style>(std::string("reporting_style::invalid"));
+    BOOST_CHECK(r == reporting_style::invalid);
+
+    r = boost::lexical_cast<reporting_style>(std::string("plain"));
+    BOOST_CHECK(r == reporting_style::plain);
+    r = boost::lexical_cast<reporting_style>(std::string("reporting_style::plain"));
+    BOOST_CHECK(r == reporting_style::plain);
+
+    r = boost::lexical_cast<reporting_style>(std::string("org_mode"));
+    BOOST_CHECK(r == reporting_style::org_mode);
+    r = boost::lexical_cast<reporting_style>(std::string("reporting_style::org_mode"));
+    BOOST_CHECK(r == reporting_style::org_mode);
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using dogen::reporting_style;
+    BOOST_CHECK_THROW(boost::lexical_cast<reporting_style>(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using dogen::reporting_style;
+    std::string r;
+
+    r = boost::lexical_cast<std::string>(reporting_style::invalid);
+    BOOST_CHECK(r == "reporting_style::invalid");
+
+    r = boost::lexical_cast<std::string>(reporting_style::plain);
+    BOOST_CHECK(r == "reporting_style::plain");
+
+    r = boost::lexical_cast<std::string>(reporting_style::org_mode);
+    BOOST_CHECK(r == "reporting_style::org_mode");
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+    using dogen::reporting_style;
+    const reporting_style r(static_cast<reporting_style>(13));
+    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
+        boost::bad_lexical_cast);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

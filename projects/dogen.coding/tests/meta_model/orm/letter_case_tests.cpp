@@ -20,12 +20,14 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen.coding/io/meta_model/orm/letter_case_io.hpp"
 #include "dogen.coding/types/meta_model/orm/letter_case.hpp"
 #include "dogen.coding/test_data/meta_model/orm/letter_case_td.hpp"
+#include "dogen.coding/lexical_cast/meta_model/orm/letter_case_lc.hpp"
 
 BOOST_AUTO_TEST_SUITE(letter_case_tests)
 
@@ -37,6 +39,53 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using dogen::coding::meta_model::orm::letter_case;
+    letter_case r;
+
+    r = boost::lexical_cast<letter_case>(std::string("invalid"));
+    BOOST_CHECK(r == letter_case::invalid);
+    r = boost::lexical_cast<letter_case>(std::string("letter_case::invalid"));
+    BOOST_CHECK(r == letter_case::invalid);
+
+    r = boost::lexical_cast<letter_case>(std::string("upper_case"));
+    BOOST_CHECK(r == letter_case::upper_case);
+    r = boost::lexical_cast<letter_case>(std::string("letter_case::upper_case"));
+    BOOST_CHECK(r == letter_case::upper_case);
+
+    r = boost::lexical_cast<letter_case>(std::string("lower_case"));
+    BOOST_CHECK(r == letter_case::lower_case);
+    r = boost::lexical_cast<letter_case>(std::string("letter_case::lower_case"));
+    BOOST_CHECK(r == letter_case::lower_case);
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using dogen::coding::meta_model::orm::letter_case;
+    BOOST_CHECK_THROW(boost::lexical_cast<letter_case>(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using dogen::coding::meta_model::orm::letter_case;
+    std::string r;
+
+    r = boost::lexical_cast<std::string>(letter_case::invalid);
+    BOOST_CHECK(r == "letter_case::invalid");
+
+    r = boost::lexical_cast<std::string>(letter_case::upper_case);
+    BOOST_CHECK(r == "letter_case::upper_case");
+
+    r = boost::lexical_cast<std::string>(letter_case::lower_case);
+    BOOST_CHECK(r == "letter_case::lower_case");
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+    using dogen::coding::meta_model::orm::letter_case;
+    const letter_case r(static_cast<letter_case>(13));
+    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
+        boost::bad_lexical_cast);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

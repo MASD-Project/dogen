@@ -20,12 +20,14 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen.generation/io/formatters/comment_style_io.hpp"
 #include "dogen.generation/types/formatters/comment_style.hpp"
 #include "dogen.generation/test_data/formatters/comment_style_td.hpp"
+#include "dogen.generation/lexical_cast/formatters/comment_style_lc.hpp"
 
 BOOST_AUTO_TEST_SUITE(comment_style_tests)
 
@@ -37,6 +39,85 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using dogen::generation::formatters::comment_style;
+    comment_style r;
+
+    r = boost::lexical_cast<comment_style>(std::string("invalid"));
+    BOOST_CHECK(r == comment_style::invalid);
+    r = boost::lexical_cast<comment_style>(std::string("comment_style::invalid"));
+    BOOST_CHECK(r == comment_style::invalid);
+
+    r = boost::lexical_cast<comment_style>(std::string("c_style"));
+    BOOST_CHECK(r == comment_style::c_style);
+    r = boost::lexical_cast<comment_style>(std::string("comment_style::c_style"));
+    BOOST_CHECK(r == comment_style::c_style);
+
+    r = boost::lexical_cast<comment_style>(std::string("cpp_style"));
+    BOOST_CHECK(r == comment_style::cpp_style);
+    r = boost::lexical_cast<comment_style>(std::string("comment_style::cpp_style"));
+    BOOST_CHECK(r == comment_style::cpp_style);
+
+    r = boost::lexical_cast<comment_style>(std::string("csharp_style"));
+    BOOST_CHECK(r == comment_style::csharp_style);
+    r = boost::lexical_cast<comment_style>(std::string("comment_style::csharp_style"));
+    BOOST_CHECK(r == comment_style::csharp_style);
+
+    r = boost::lexical_cast<comment_style>(std::string("shell_style"));
+    BOOST_CHECK(r == comment_style::shell_style);
+    r = boost::lexical_cast<comment_style>(std::string("comment_style::shell_style"));
+    BOOST_CHECK(r == comment_style::shell_style);
+
+    r = boost::lexical_cast<comment_style>(std::string("sql_style"));
+    BOOST_CHECK(r == comment_style::sql_style);
+    r = boost::lexical_cast<comment_style>(std::string("comment_style::sql_style"));
+    BOOST_CHECK(r == comment_style::sql_style);
+
+    r = boost::lexical_cast<comment_style>(std::string("xml_style"));
+    BOOST_CHECK(r == comment_style::xml_style);
+    r = boost::lexical_cast<comment_style>(std::string("comment_style::xml_style"));
+    BOOST_CHECK(r == comment_style::xml_style);
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using dogen::generation::formatters::comment_style;
+    BOOST_CHECK_THROW(boost::lexical_cast<comment_style>(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using dogen::generation::formatters::comment_style;
+    std::string r;
+
+    r = boost::lexical_cast<std::string>(comment_style::invalid);
+    BOOST_CHECK(r == "comment_style::invalid");
+
+    r = boost::lexical_cast<std::string>(comment_style::c_style);
+    BOOST_CHECK(r == "comment_style::c_style");
+
+    r = boost::lexical_cast<std::string>(comment_style::cpp_style);
+    BOOST_CHECK(r == "comment_style::cpp_style");
+
+    r = boost::lexical_cast<std::string>(comment_style::csharp_style);
+    BOOST_CHECK(r == "comment_style::csharp_style");
+
+    r = boost::lexical_cast<std::string>(comment_style::shell_style);
+    BOOST_CHECK(r == "comment_style::shell_style");
+
+    r = boost::lexical_cast<std::string>(comment_style::sql_style);
+    BOOST_CHECK(r == "comment_style::sql_style");
+
+    r = boost::lexical_cast<std::string>(comment_style::xml_style);
+    BOOST_CHECK(r == "comment_style::xml_style");
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+    using dogen::generation::formatters::comment_style;
+    const comment_style r(static_cast<comment_style>(17));
+    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
+        boost::bad_lexical_cast);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

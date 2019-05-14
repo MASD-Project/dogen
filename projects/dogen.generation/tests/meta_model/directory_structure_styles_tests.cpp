@@ -20,12 +20,14 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen.generation/io/meta_model/directory_structure_styles_io.hpp"
 #include "dogen.generation/types/meta_model/directory_structure_styles.hpp"
 #include "dogen.generation/test_data/meta_model/directory_structure_styles_td.hpp"
+#include "dogen.generation/lexical_cast/meta_model/directory_structure_styles_lc.hpp"
 
 BOOST_AUTO_TEST_SUITE(directory_structure_styles_tests)
 
@@ -37,6 +39,61 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using dogen::generation::meta_model::directory_structure_styles;
+    directory_structure_styles r;
+
+    r = boost::lexical_cast<directory_structure_styles>(std::string("invalid"));
+    BOOST_CHECK(r == directory_structure_styles::invalid);
+    r = boost::lexical_cast<directory_structure_styles>(std::string("directory_structure_styles::invalid"));
+    BOOST_CHECK(r == directory_structure_styles::invalid);
+
+    r = boost::lexical_cast<directory_structure_styles>(std::string("structured"));
+    BOOST_CHECK(r == directory_structure_styles::structured);
+    r = boost::lexical_cast<directory_structure_styles>(std::string("directory_structure_styles::structured"));
+    BOOST_CHECK(r == directory_structure_styles::structured);
+
+    r = boost::lexical_cast<directory_structure_styles>(std::string("completely_flat"));
+    BOOST_CHECK(r == directory_structure_styles::completely_flat);
+    r = boost::lexical_cast<directory_structure_styles>(std::string("directory_structure_styles::completely_flat"));
+    BOOST_CHECK(r == directory_structure_styles::completely_flat);
+
+    r = boost::lexical_cast<directory_structure_styles>(std::string("flatten_facets"));
+    BOOST_CHECK(r == directory_structure_styles::flatten_facets);
+    r = boost::lexical_cast<directory_structure_styles>(std::string("directory_structure_styles::flatten_facets"));
+    BOOST_CHECK(r == directory_structure_styles::flatten_facets);
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using dogen::generation::meta_model::directory_structure_styles;
+    BOOST_CHECK_THROW(boost::lexical_cast<directory_structure_styles>(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using dogen::generation::meta_model::directory_structure_styles;
+    std::string r;
+
+    r = boost::lexical_cast<std::string>(directory_structure_styles::invalid);
+    BOOST_CHECK(r == "directory_structure_styles::invalid");
+
+    r = boost::lexical_cast<std::string>(directory_structure_styles::structured);
+    BOOST_CHECK(r == "directory_structure_styles::structured");
+
+    r = boost::lexical_cast<std::string>(directory_structure_styles::completely_flat);
+    BOOST_CHECK(r == "directory_structure_styles::completely_flat");
+
+    r = boost::lexical_cast<std::string>(directory_structure_styles::flatten_facets);
+    BOOST_CHECK(r == "directory_structure_styles::flatten_facets");
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+    using dogen::generation::meta_model::directory_structure_styles;
+    const directory_structure_styles r(static_cast<directory_structure_styles>(14));
+    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
+        boost::bad_lexical_cast);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -140,7 +140,7 @@
         {
           "name": "masd.generation.cpp.lexical_cast.enabled",
           "type": "",
-          "value": "false",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",

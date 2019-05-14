@@ -20,6 +20,7 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
@@ -27,6 +28,7 @@
 #include "dogen.extraction/types/meta_model/operation_reason.hpp"
 #include "dogen.extraction/hash/meta_model/operation_reason_hash.hpp"
 #include "dogen.extraction/test_data/meta_model/operation_reason_td.hpp"
+#include "dogen.extraction/lexical_cast/meta_model/operation_reason_lc.hpp"
 
 BOOST_AUTO_TEST_SUITE(operation_reason_tests)
 
@@ -38,6 +40,109 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using dogen::extraction::meta_model::operation_reason;
+    operation_reason r;
+
+    r = boost::lexical_cast<operation_reason>(std::string("invalid"));
+    BOOST_CHECK(r == operation_reason::invalid);
+    r = boost::lexical_cast<operation_reason>(std::string("operation_reason::invalid"));
+    BOOST_CHECK(r == operation_reason::invalid);
+
+    r = boost::lexical_cast<operation_reason>(std::string("newly_generated"));
+    BOOST_CHECK(r == operation_reason::newly_generated);
+    r = boost::lexical_cast<operation_reason>(std::string("operation_reason::newly_generated"));
+    BOOST_CHECK(r == operation_reason::newly_generated);
+
+    r = boost::lexical_cast<operation_reason>(std::string("changed_generated"));
+    BOOST_CHECK(r == operation_reason::changed_generated);
+    r = boost::lexical_cast<operation_reason>(std::string("operation_reason::changed_generated"));
+    BOOST_CHECK(r == operation_reason::changed_generated);
+
+    r = boost::lexical_cast<operation_reason>(std::string("unchanged_generated"));
+    BOOST_CHECK(r == operation_reason::unchanged_generated);
+    r = boost::lexical_cast<operation_reason>(std::string("operation_reason::unchanged_generated"));
+    BOOST_CHECK(r == operation_reason::unchanged_generated);
+
+    r = boost::lexical_cast<operation_reason>(std::string("already_exists"));
+    BOOST_CHECK(r == operation_reason::already_exists);
+    r = boost::lexical_cast<operation_reason>(std::string("operation_reason::already_exists"));
+    BOOST_CHECK(r == operation_reason::already_exists);
+
+    r = boost::lexical_cast<operation_reason>(std::string("ignore_generated"));
+    BOOST_CHECK(r == operation_reason::ignore_generated);
+    r = boost::lexical_cast<operation_reason>(std::string("operation_reason::ignore_generated"));
+    BOOST_CHECK(r == operation_reason::ignore_generated);
+
+    r = boost::lexical_cast<operation_reason>(std::string("force_write"));
+    BOOST_CHECK(r == operation_reason::force_write);
+    r = boost::lexical_cast<operation_reason>(std::string("operation_reason::force_write"));
+    BOOST_CHECK(r == operation_reason::force_write);
+
+    r = boost::lexical_cast<operation_reason>(std::string("unexpected"));
+    BOOST_CHECK(r == operation_reason::unexpected);
+    r = boost::lexical_cast<operation_reason>(std::string("operation_reason::unexpected"));
+    BOOST_CHECK(r == operation_reason::unexpected);
+
+    r = boost::lexical_cast<operation_reason>(std::string("ignore_unexpected"));
+    BOOST_CHECK(r == operation_reason::ignore_unexpected);
+    r = boost::lexical_cast<operation_reason>(std::string("operation_reason::ignore_unexpected"));
+    BOOST_CHECK(r == operation_reason::ignore_unexpected);
+
+    r = boost::lexical_cast<operation_reason>(std::string("ignore_regex"));
+    BOOST_CHECK(r == operation_reason::ignore_regex);
+    r = boost::lexical_cast<operation_reason>(std::string("operation_reason::ignore_regex"));
+    BOOST_CHECK(r == operation_reason::ignore_regex);
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using dogen::extraction::meta_model::operation_reason;
+    BOOST_CHECK_THROW(boost::lexical_cast<operation_reason>(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using dogen::extraction::meta_model::operation_reason;
+    std::string r;
+
+    r = boost::lexical_cast<std::string>(operation_reason::invalid);
+    BOOST_CHECK(r == "operation_reason::invalid");
+
+    r = boost::lexical_cast<std::string>(operation_reason::newly_generated);
+    BOOST_CHECK(r == "operation_reason::newly_generated");
+
+    r = boost::lexical_cast<std::string>(operation_reason::changed_generated);
+    BOOST_CHECK(r == "operation_reason::changed_generated");
+
+    r = boost::lexical_cast<std::string>(operation_reason::unchanged_generated);
+    BOOST_CHECK(r == "operation_reason::unchanged_generated");
+
+    r = boost::lexical_cast<std::string>(operation_reason::already_exists);
+    BOOST_CHECK(r == "operation_reason::already_exists");
+
+    r = boost::lexical_cast<std::string>(operation_reason::ignore_generated);
+    BOOST_CHECK(r == "operation_reason::ignore_generated");
+
+    r = boost::lexical_cast<std::string>(operation_reason::force_write);
+    BOOST_CHECK(r == "operation_reason::force_write");
+
+    r = boost::lexical_cast<std::string>(operation_reason::unexpected);
+    BOOST_CHECK(r == "operation_reason::unexpected");
+
+    r = boost::lexical_cast<std::string>(operation_reason::ignore_unexpected);
+    BOOST_CHECK(r == "operation_reason::ignore_unexpected");
+
+    r = boost::lexical_cast<std::string>(operation_reason::ignore_regex);
+    BOOST_CHECK(r == "operation_reason::ignore_regex");
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+    using dogen::extraction::meta_model::operation_reason;
+    const operation_reason r(static_cast<operation_reason>(20));
+    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
+        boost::bad_lexical_cast);
 }
 
 BOOST_AUTO_TEST_CASE(equal_enums_generate_the_same_hash) {

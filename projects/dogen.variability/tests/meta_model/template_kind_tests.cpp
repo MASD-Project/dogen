@@ -20,12 +20,14 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen.variability/io/meta_model/template_kind_io.hpp"
 #include "dogen.variability/types/meta_model/template_kind.hpp"
 #include "dogen.variability/test_data/meta_model/template_kind_td.hpp"
+#include "dogen.variability/lexical_cast/meta_model/template_kind_lc.hpp"
 
 BOOST_AUTO_TEST_SUITE(template_kind_tests)
 
@@ -37,6 +39,77 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 
     boost::property_tree::ptree pt;
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using dogen::variability::meta_model::template_kind;
+    template_kind r;
+
+    r = boost::lexical_cast<template_kind>(std::string("invalid"));
+    BOOST_CHECK(r == template_kind::invalid);
+    r = boost::lexical_cast<template_kind>(std::string("template_kind::invalid"));
+    BOOST_CHECK(r == template_kind::invalid);
+
+    r = boost::lexical_cast<template_kind>(std::string("instance"));
+    BOOST_CHECK(r == template_kind::instance);
+    r = boost::lexical_cast<template_kind>(std::string("template_kind::instance"));
+    BOOST_CHECK(r == template_kind::instance);
+
+    r = boost::lexical_cast<template_kind>(std::string("recursive_template"));
+    BOOST_CHECK(r == template_kind::recursive_template);
+    r = boost::lexical_cast<template_kind>(std::string("template_kind::recursive_template"));
+    BOOST_CHECK(r == template_kind::recursive_template);
+
+    r = boost::lexical_cast<template_kind>(std::string("backend_template"));
+    BOOST_CHECK(r == template_kind::backend_template);
+    r = boost::lexical_cast<template_kind>(std::string("template_kind::backend_template"));
+    BOOST_CHECK(r == template_kind::backend_template);
+
+    r = boost::lexical_cast<template_kind>(std::string("facet_template"));
+    BOOST_CHECK(r == template_kind::facet_template);
+    r = boost::lexical_cast<template_kind>(std::string("template_kind::facet_template"));
+    BOOST_CHECK(r == template_kind::facet_template);
+
+    r = boost::lexical_cast<template_kind>(std::string("archetype_template"));
+    BOOST_CHECK(r == template_kind::archetype_template);
+    r = boost::lexical_cast<template_kind>(std::string("template_kind::archetype_template"));
+    BOOST_CHECK(r == template_kind::archetype_template);
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using dogen::variability::meta_model::template_kind;
+    BOOST_CHECK_THROW(boost::lexical_cast<template_kind>(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using dogen::variability::meta_model::template_kind;
+    std::string r;
+
+    r = boost::lexical_cast<std::string>(template_kind::invalid);
+    BOOST_CHECK(r == "template_kind::invalid");
+
+    r = boost::lexical_cast<std::string>(template_kind::instance);
+    BOOST_CHECK(r == "template_kind::instance");
+
+    r = boost::lexical_cast<std::string>(template_kind::recursive_template);
+    BOOST_CHECK(r == "template_kind::recursive_template");
+
+    r = boost::lexical_cast<std::string>(template_kind::backend_template);
+    BOOST_CHECK(r == "template_kind::backend_template");
+
+    r = boost::lexical_cast<std::string>(template_kind::facet_template);
+    BOOST_CHECK(r == "template_kind::facet_template");
+
+    r = boost::lexical_cast<std::string>(template_kind::archetype_template);
+    BOOST_CHECK(r == "template_kind::archetype_template");
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+    using dogen::variability::meta_model::template_kind;
+    const template_kind r(static_cast<template_kind>(16));
+    BOOST_CHECK_THROW(boost::lexical_cast<std::string>(r),
+        boost::bad_lexical_cast);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
