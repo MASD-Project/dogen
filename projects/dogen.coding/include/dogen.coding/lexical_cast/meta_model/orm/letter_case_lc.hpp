@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::coding::meta_model::orm::letter_case& v) {
+inline std::string lexical_cast(const dogen::coding::meta_model::orm::letter_case& v) {
     using dogen::coding::meta_model::orm::letter_case;
 
     switch (v) {
@@ -47,7 +47,7 @@ std::string lexical_cast(const dogen::coding::meta_model::orm::letter_case& v) {
 }
 
 template<>
-dogen::coding::meta_model::orm::letter_case lexical_cast(const std::string & s) {
+inline dogen::coding::meta_model::orm::letter_case lexical_cast(const std::string & s) {
     using dogen::coding::meta_model::orm::letter_case;
 
     if (s == "invalid" || s == "letter_case::invalid")

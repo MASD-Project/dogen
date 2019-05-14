@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::generation::cpp::formatters::inclusion_support_types& v) {
+inline std::string lexical_cast(const dogen::generation::cpp::formatters::inclusion_support_types& v) {
     using dogen::generation::cpp::formatters::inclusion_support_types;
 
     switch (v) {
@@ -49,7 +49,7 @@ std::string lexical_cast(const dogen::generation::cpp::formatters::inclusion_sup
 }
 
 template<>
-dogen::generation::cpp::formatters::inclusion_support_types lexical_cast(const std::string & s) {
+inline dogen::generation::cpp::formatters::inclusion_support_types lexical_cast(const std::string & s) {
     using dogen::generation::cpp::formatters::inclusion_support_types;
 
     if (s == "invalid" || s == "inclusion_support_types::invalid")

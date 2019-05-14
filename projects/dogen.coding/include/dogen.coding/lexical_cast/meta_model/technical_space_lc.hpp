@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::coding::meta_model::technical_space& v) {
+inline std::string lexical_cast(const dogen::coding::meta_model::technical_space& v) {
     using dogen::coding::meta_model::technical_space;
 
     switch (v) {
@@ -57,7 +57,7 @@ std::string lexical_cast(const dogen::coding::meta_model::technical_space& v) {
 }
 
 template<>
-dogen::coding::meta_model::technical_space lexical_cast(const std::string & s) {
+inline dogen::coding::meta_model::technical_space lexical_cast(const std::string & s) {
     using dogen::coding::meta_model::technical_space;
 
     if (s == "invalid" || s == "technical_space::invalid")

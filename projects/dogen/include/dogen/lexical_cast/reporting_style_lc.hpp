@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::reporting_style& v) {
+inline std::string lexical_cast(const dogen::reporting_style& v) {
     using dogen::reporting_style;
 
     switch (v) {
@@ -47,7 +47,7 @@ std::string lexical_cast(const dogen::reporting_style& v) {
 }
 
 template<>
-dogen::reporting_style lexical_cast(const std::string & s) {
+inline dogen::reporting_style lexical_cast(const std::string & s) {
     using dogen::reporting_style;
 
     if (s == "invalid" || s == "reporting_style::invalid")

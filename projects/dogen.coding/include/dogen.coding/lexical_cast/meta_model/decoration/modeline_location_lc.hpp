@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::coding::meta_model::decoration::modeline_location& v) {
+inline std::string lexical_cast(const dogen::coding::meta_model::decoration::modeline_location& v) {
     using dogen::coding::meta_model::decoration::modeline_location;
 
     switch (v) {
@@ -47,7 +47,7 @@ std::string lexical_cast(const dogen::coding::meta_model::decoration::modeline_l
 }
 
 template<>
-dogen::coding::meta_model::decoration::modeline_location lexical_cast(const std::string & s) {
+inline dogen::coding::meta_model::decoration::modeline_location lexical_cast(const std::string & s) {
     using dogen::coding::meta_model::decoration::modeline_location;
 
     if (s == "invalid" || s == "modeline_location::invalid")

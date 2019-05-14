@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::generation::csharp::formattables::auxiliary_function_types& v) {
+inline std::string lexical_cast(const dogen::generation::csharp::formattables::auxiliary_function_types& v) {
     using dogen::generation::csharp::formattables::auxiliary_function_types;
 
     switch (v) {
@@ -47,7 +47,7 @@ std::string lexical_cast(const dogen::generation::csharp::formattables::auxiliar
 }
 
 template<>
-dogen::generation::csharp::formattables::auxiliary_function_types lexical_cast(const std::string & s) {
+inline dogen::generation::csharp::formattables::auxiliary_function_types lexical_cast(const std::string & s) {
     using dogen::generation::csharp::formattables::auxiliary_function_types;
 
     if (s == "invalid" || s == "auxiliary_function_types::invalid")

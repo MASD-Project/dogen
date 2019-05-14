@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::coding::meta_model::orm::database_system& v) {
+inline std::string lexical_cast(const dogen::coding::meta_model::orm::database_system& v) {
     using dogen::coding::meta_model::orm::database_system;
 
     switch (v) {
@@ -53,7 +53,7 @@ std::string lexical_cast(const dogen::coding::meta_model::orm::database_system& 
 }
 
 template<>
-dogen::coding::meta_model::orm::database_system lexical_cast(const std::string & s) {
+inline dogen::coding::meta_model::orm::database_system lexical_cast(const std::string & s) {
     using dogen::coding::meta_model::orm::database_system;
 
     if (s == "invalid" || s == "database_system::invalid")

@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::extraction::meta_model::operation_reason& v) {
+inline std::string lexical_cast(const dogen::extraction::meta_model::operation_reason& v) {
     using dogen::extraction::meta_model::operation_reason;
 
     switch (v) {
@@ -61,7 +61,7 @@ std::string lexical_cast(const dogen::extraction::meta_model::operation_reason& 
 }
 
 template<>
-dogen::extraction::meta_model::operation_reason lexical_cast(const std::string & s) {
+inline dogen::extraction::meta_model::operation_reason lexical_cast(const std::string & s) {
     using dogen::extraction::meta_model::operation_reason;
 
     if (s == "invalid" || s == "operation_reason::invalid")

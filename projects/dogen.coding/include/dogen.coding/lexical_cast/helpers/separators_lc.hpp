@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::coding::helpers::separators& v) {
+inline std::string lexical_cast(const dogen::coding::helpers::separators& v) {
     using dogen::coding::helpers::separators;
 
     switch (v) {
@@ -49,7 +49,7 @@ std::string lexical_cast(const dogen::coding::helpers::separators& v) {
 }
 
 template<>
-dogen::coding::helpers::separators lexical_cast(const std::string & s) {
+inline dogen::coding::helpers::separators lexical_cast(const std::string & s) {
     using dogen::coding::helpers::separators;
 
     if (s == "invalid" || s == "separators::invalid")

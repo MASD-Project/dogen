@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::templating::stitch::block_types& v) {
+inline std::string lexical_cast(const dogen::templating::stitch::block_types& v) {
     using dogen::templating::stitch::block_types;
 
     switch (v) {
@@ -51,7 +51,7 @@ std::string lexical_cast(const dogen::templating::stitch::block_types& v) {
 }
 
 template<>
-dogen::templating::stitch::block_types lexical_cast(const std::string & s) {
+inline dogen::templating::stitch::block_types lexical_cast(const std::string & s) {
     using dogen::templating::stitch::block_types;
 
     if (s == "invalid" || s == "block_types::invalid")

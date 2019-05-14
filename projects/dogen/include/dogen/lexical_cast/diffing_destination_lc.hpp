@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::diffing_destination& v) {
+inline std::string lexical_cast(const dogen::diffing_destination& v) {
     using dogen::diffing_destination;
 
     switch (v) {
@@ -47,7 +47,7 @@ std::string lexical_cast(const dogen::diffing_destination& v) {
 }
 
 template<>
-dogen::diffing_destination lexical_cast(const std::string & s) {
+inline dogen::diffing_destination lexical_cast(const std::string & s) {
     using dogen::diffing_destination;
 
     if (s == "invalid" || s == "diffing_destination::invalid")

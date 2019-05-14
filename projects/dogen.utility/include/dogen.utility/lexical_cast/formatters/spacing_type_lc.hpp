@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::utility::formatters::spacing_type& v) {
+inline std::string lexical_cast(const dogen::utility::formatters::spacing_type& v) {
     using dogen::utility::formatters::spacing_type;
 
     switch (v) {
@@ -51,7 +51,7 @@ std::string lexical_cast(const dogen::utility::formatters::spacing_type& v) {
 }
 
 template<>
-dogen::utility::formatters::spacing_type lexical_cast(const std::string & s) {
+inline dogen::utility::formatters::spacing_type lexical_cast(const std::string & s) {
     using dogen::utility::formatters::spacing_type;
 
     if (s == "invalid" || s == "spacing_type::invalid")

@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::utility::formatters::quote_type& v) {
+inline std::string lexical_cast(const dogen::utility::formatters::quote_type& v) {
     using dogen::utility::formatters::quote_type;
 
     switch (v) {
@@ -47,7 +47,7 @@ std::string lexical_cast(const dogen::utility::formatters::quote_type& v) {
 }
 
 template<>
-dogen::utility::formatters::quote_type lexical_cast(const std::string & s) {
+inline dogen::utility::formatters::quote_type lexical_cast(const std::string & s) {
     using dogen::utility::formatters::quote_type;
 
     if (s == "invalid" || s == "quote_type::invalid")

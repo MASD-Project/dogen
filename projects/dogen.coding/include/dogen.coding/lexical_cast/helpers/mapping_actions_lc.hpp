@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::coding::helpers::mapping_actions& v) {
+inline std::string lexical_cast(const dogen::coding::helpers::mapping_actions& v) {
     using dogen::coding::helpers::mapping_actions;
 
     switch (v) {
@@ -47,7 +47,7 @@ std::string lexical_cast(const dogen::coding::helpers::mapping_actions& v) {
 }
 
 template<>
-dogen::coding::helpers::mapping_actions lexical_cast(const std::string & s) {
+inline dogen::coding::helpers::mapping_actions lexical_cast(const std::string & s) {
     using dogen::coding::helpers::mapping_actions;
 
     if (s == "invalid" || s == "mapping_actions::invalid")

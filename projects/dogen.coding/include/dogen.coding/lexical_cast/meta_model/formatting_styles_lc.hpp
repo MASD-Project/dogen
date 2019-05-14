@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::coding::meta_model::formatting_styles& v) {
+inline std::string lexical_cast(const dogen::coding::meta_model::formatting_styles& v) {
     using dogen::coding::meta_model::formatting_styles;
 
     switch (v) {
@@ -49,7 +49,7 @@ std::string lexical_cast(const dogen::coding::meta_model::formatting_styles& v) 
 }
 
 template<>
-dogen::coding::meta_model::formatting_styles lexical_cast(const std::string & s) {
+inline dogen::coding::meta_model::formatting_styles lexical_cast(const std::string & s) {
     using dogen::coding::meta_model::formatting_styles;
 
     if (s == "invalid" || s == "formatting_styles::invalid")

@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::injection::dia::dia_object_types& v) {
+inline std::string lexical_cast(const dogen::injection::dia::dia_object_types& v) {
     using dogen::injection::dia::dia_object_types;
 
     switch (v) {
@@ -57,7 +57,7 @@ std::string lexical_cast(const dogen::injection::dia::dia_object_types& v) {
 }
 
 template<>
-dogen::injection::dia::dia_object_types lexical_cast(const std::string & s) {
+inline dogen::injection::dia::dia_object_types lexical_cast(const std::string & s) {
     using dogen::injection::dia::dia_object_types;
 
     if (s == "invalid" || s == "dia_object_types::invalid")

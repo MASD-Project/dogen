@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::generation::cpp::formattables::cpp_standards& v) {
+inline std::string lexical_cast(const dogen::generation::cpp::formattables::cpp_standards& v) {
     using dogen::generation::cpp::formattables::cpp_standards;
 
     switch (v) {
@@ -51,7 +51,7 @@ std::string lexical_cast(const dogen::generation::cpp::formattables::cpp_standar
 }
 
 template<>
-dogen::generation::cpp::formattables::cpp_standards lexical_cast(const std::string & s) {
+inline dogen::generation::cpp::formattables::cpp_standards lexical_cast(const std::string & s) {
     using dogen::generation::cpp::formattables::cpp_standards;
 
     if (s == "invalid" || s == "cpp_standards::invalid")

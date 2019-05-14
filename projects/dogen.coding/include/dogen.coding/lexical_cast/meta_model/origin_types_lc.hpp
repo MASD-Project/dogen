@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::coding::meta_model::origin_types& v) {
+inline std::string lexical_cast(const dogen::coding::meta_model::origin_types& v) {
     using dogen::coding::meta_model::origin_types;
 
     switch (v) {
@@ -51,7 +51,7 @@ std::string lexical_cast(const dogen::coding::meta_model::origin_types& v) {
 }
 
 template<>
-dogen::coding::meta_model::origin_types lexical_cast(const std::string & s) {
+inline dogen::coding::meta_model::origin_types lexical_cast(const std::string & s) {
     using dogen::coding::meta_model::origin_types;
 
     if (s == "invalid" || s == "origin_types::invalid")

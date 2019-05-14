@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::variability::meta_model::binding_action& v) {
+inline std::string lexical_cast(const dogen::variability::meta_model::binding_action& v) {
     using dogen::variability::meta_model::binding_action;
 
     switch (v) {
@@ -47,7 +47,7 @@ std::string lexical_cast(const dogen::variability::meta_model::binding_action& v
 }
 
 template<>
-dogen::variability::meta_model::binding_action lexical_cast(const std::string & s) {
+inline dogen::variability::meta_model::binding_action lexical_cast(const std::string & s) {
     using dogen::variability::meta_model::binding_action;
 
     if (s == "invalid" || s == "binding_action::invalid")

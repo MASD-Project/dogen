@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::generation::meta_model::directory_structure_styles& v) {
+inline std::string lexical_cast(const dogen::generation::meta_model::directory_structure_styles& v) {
     using dogen::generation::meta_model::directory_structure_styles;
 
     switch (v) {
@@ -49,7 +49,7 @@ std::string lexical_cast(const dogen::generation::meta_model::directory_structur
 }
 
 template<>
-dogen::generation::meta_model::directory_structure_styles lexical_cast(const std::string & s) {
+inline dogen::generation::meta_model::directory_structure_styles lexical_cast(const std::string & s) {
     using dogen::generation::meta_model::directory_structure_styles;
 
     if (s == "invalid" || s == "directory_structure_styles::invalid")

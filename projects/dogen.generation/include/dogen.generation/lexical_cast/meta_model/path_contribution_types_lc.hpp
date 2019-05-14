@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::generation::meta_model::path_contribution_types& v) {
+inline std::string lexical_cast(const dogen::generation::meta_model::path_contribution_types& v) {
     using dogen::generation::meta_model::path_contribution_types;
 
     switch (v) {
@@ -49,7 +49,7 @@ std::string lexical_cast(const dogen::generation::meta_model::path_contribution_
 }
 
 template<>
-dogen::generation::meta_model::path_contribution_types lexical_cast(const std::string & s) {
+inline dogen::generation::meta_model::path_contribution_types lexical_cast(const std::string & s) {
     using dogen::generation::meta_model::path_contribution_types;
 
     if (s == "invalid" || s == "path_contribution_types::invalid")

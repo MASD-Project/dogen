@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::coding::meta_model::decoration::editor& v) {
+inline std::string lexical_cast(const dogen::coding::meta_model::decoration::editor& v) {
     using dogen::coding::meta_model::decoration::editor;
 
     switch (v) {
@@ -51,7 +51,7 @@ std::string lexical_cast(const dogen::coding::meta_model::decoration::editor& v)
 }
 
 template<>
-dogen::coding::meta_model::decoration::editor lexical_cast(const std::string & s) {
+inline dogen::coding::meta_model::decoration::editor lexical_cast(const std::string & s) {
     using dogen::coding::meta_model::decoration::editor;
 
     if (s == "invalid" || s == "editor::invalid")

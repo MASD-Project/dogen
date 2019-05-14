@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::tracing_level& v) {
+inline std::string lexical_cast(const dogen::tracing_level& v) {
     using dogen::tracing_level;
 
     switch (v) {
@@ -47,7 +47,7 @@ std::string lexical_cast(const dogen::tracing_level& v) {
 }
 
 template<>
-dogen::tracing_level lexical_cast(const std::string & s) {
+inline dogen::tracing_level lexical_cast(const std::string & s) {
     using dogen::tracing_level;
 
     if (s == "invalid" || s == "tracing_level::invalid")

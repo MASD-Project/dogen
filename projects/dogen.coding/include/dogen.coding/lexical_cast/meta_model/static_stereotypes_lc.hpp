@@ -31,7 +31,7 @@
 namespace boost {
 
 template<>
-std::string lexical_cast(const dogen::coding::meta_model::static_stereotypes& v) {
+inline std::string lexical_cast(const dogen::coding::meta_model::static_stereotypes& v) {
     using dogen::coding::meta_model::static_stereotypes;
 
     switch (v) {
@@ -81,7 +81,7 @@ std::string lexical_cast(const dogen::coding::meta_model::static_stereotypes& v)
 }
 
 template<>
-dogen::coding::meta_model::static_stereotypes lexical_cast(const std::string & s) {
+inline dogen::coding::meta_model::static_stereotypes lexical_cast(const std::string & s) {
     using dogen::coding::meta_model::static_stereotypes;
 
     if (s == "invalid" || s == "static_stereotypes::invalid")

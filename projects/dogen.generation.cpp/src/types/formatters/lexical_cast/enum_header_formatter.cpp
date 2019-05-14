@@ -97,7 +97,7 @@ a.stream() << std::endl;
 a.stream() << "namespace boost {" << std::endl;
 a.stream() << std::endl;
 a.stream() << "template<>" << std::endl;
-a.stream() << "std::string lexical_cast(const " << qn << "& v) {" << std::endl;
+a.stream() << "inline std::string lexical_cast(const " << qn << "& v) {" << std::endl;
         if (!a.is_cpp_standard_98()) {
 a.stream() << "    using " << qn << ";" << std::endl;
 a.stream() << std::endl;
@@ -119,7 +119,7 @@ a.stream() << "    }" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
 a.stream() << "template<>" << std::endl;
-a.stream() << qn << " lexical_cast(const std::string & s) {" << std::endl;
+a.stream() << "inline " << qn << " lexical_cast(const std::string & s) {" << std::endl;
         if (!a.is_cpp_standard_98()) {
 a.stream() << "    using " << qn << ";" << std::endl;
 a.stream() << std::endl;
