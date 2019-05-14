@@ -2025,7 +2025,7 @@
     {
       "name": "fabric::entry_point",
       "tagged_values": {
-        "masd.generalization.parent": "coding::meta_model::element"
+        "masd.generalization.parent": "dogen::coding::meta_model::element"
       },
       "fallback_element_type": "masd::object"
     },
@@ -3251,6 +3251,35 @@
           }
         }
       ]
+    },
+    {
+      "name": "formatters::lexical_cast",
+      "documentation": "Formatters related to conversions from and to\nstring.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "formatters::lexical_cast::initializer",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::lexical_cast::traits",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::lexical_cast::enum_header_formatter",
+      "stereotypes": [
+        "dogen::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

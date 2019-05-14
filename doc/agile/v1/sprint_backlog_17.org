@@ -12,29 +12,29 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-13 Mon 18:48]
+#+CAPTION: Clock summary at [2019-05-14 Tue 09:20]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *51:54* |       |       | 100.0 |
+| *Total time*                                               | *52:34* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 51:54   |       |       | 100.0 |
-| Active                                                     |         | 51:54 |       | 100.0 |
-| Edit release notes for previous sprint                     |         |       |  2:41 |   5.2 |
+| Stories                                                    | 52:34   |       |       | 100.0 |
+| Active                                                     |         | 52:34 |       | 100.0 |
+| Edit release notes for previous sprint                     |         |       |  2:41 |   5.1 |
 | Create a video demo for the previous sprint's features     |         |       |  2:11 |   4.2 |
-| Sprint and product backlog grooming                        |         |       |  1:26 |   2.8 |
+| Sprint and product backlog grooming                        |         |       |  1:26 |   2.7 |
 | Defining profiles directly on a target model does not work |         |       |  0:30 |   1.0 |
 | Inner modules need to be qualified                         |         |       |  0:22 |   0.7 |
-| Create namespaces for model elements                       |         |       |  8:59 |  17.3 |
-| Leaves in internal modules are not captured correctly      |         |       |  1:33 |   3.0 |
-| Try to add relational tracing support                      |         |       |  2:51 |   5.5 |
-| Linux and OSX binaries are not stripped                    |         |       |  1:23 |   2.7 |
+| Create namespaces for model elements                       |         |       |  8:59 |  17.1 |
+| Leaves in internal modules are not captured correctly      |         |       |  1:33 |   2.9 |
+| Try to add relational tracing support                      |         |       |  2:51 |   5.4 |
+| Linux and OSX binaries are not stripped                    |         |       |  1:23 |   2.6 |
 | Fix issues with nightly build and CI                       |         |       |  0:05 |   0.2 |
-| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  13.9 |
-| Replace JSON based feature templates with generated code   |         |       | 16:15 |  31.3 |
-| Make a clear separation between dogen and masd             |         |       |  5:17 |  10.2 |
+| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  13.7 |
+| Replace JSON based feature templates with generated code   |         |       | 16:15 |  30.9 |
+| Make a clear separation between dogen and masd             |         |       |  5:17 |  10.1 |
 | Update the MASD UML profile to reflect the latest changes  |         |       |  0:05 |   0.2 |
-| Add a method in enumeration that converts it from strings  |         |       |  1:03 |   2.0 |
+| Add a method in enumeration that converts it from strings  |         |       |  1:43 |   3.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -588,6 +588,7 @@ down time waiting for builds to sync it.
 
 *** STARTED Add a method in enumeration that converts it from strings :story:
     :LOGBOOK:
+    CLOCK: [2019-05-14 Tue 08:40]--[2019-05-14 Tue 09:20] =>  0:40
     CLOCK: [2019-05-13 Mon 17:21]--[2019-05-13 Mon 18:02] =>  0:41
     CLOCK: [2019-05-13 Mon 16:29]--[2019-05-13 Mon 16:51] =>  0:22
     :END:
