@@ -133,13 +133,13 @@ space; keep it technical space agnostic.
         <dia:point val="34,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="33.95,4.95;44.175,8.05"/>
+        <dia:rectangle val="33.95,4.95;47.255,8.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="34,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.125"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -148,11 +148,10 @@ space; keep it technical space agnostic.
         <dia:string>#text#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::mapping::source#</dia:string>
+        <dia:string>#masd::mapping::fixed_mappable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.mapping.destination=std::string
-#DOGEN masd.mapping.action=translate#</dia:string>
+        <dia:string>##DOGEN masd.mapping.destination=std::string#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -244,13 +243,13 @@ space; keep it technical space agnostic.
         <dia:point val="34,10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="33.95,9.95;44.175,13.05"/>
+        <dia:rectangle val="33.95,9.95;47.255,13.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="34,10"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.125"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -259,11 +258,10 @@ space; keep it technical space agnostic.
         <dia:string>#number#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::mapping::source#</dia:string>
+        <dia:string>#masd::mapping::fixed_mappable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.mapping.destination=int
-#DOGEN masd.mapping.action=translate#</dia:string>
+        <dia:string>##DOGEN masd.mapping.destination=int#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -352,16 +350,16 @@ space; keep it technical space agnostic.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O3">
       <dia:attribute name="obj_pos">
-        <dia:point val="48,5"/>
+        <dia:point val="51,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.95,4.95;58.175,8.05"/>
+        <dia:rectangle val="50.95,4.95;64.255,8.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="48,5"/>
+        <dia:point val="51,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.125"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -370,11 +368,10 @@ space; keep it technical space agnostic.
         <dia:string>#text_collection#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::mapping::source#</dia:string>
+        <dia:string>#masd::mapping::fixed_mappable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.mapping.destination=std::list&lt;std::string&gt;
-#DOGEN masd.mapping.action=translate#</dia:string>
+        <dia:string>##DOGEN masd.mapping.destination=std::list&lt;std::string&gt;#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -466,13 +463,13 @@ space; keep it technical space agnostic.
         <dia:point val="34,15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="33.95,14.95;44.175,18.05"/>
+        <dia:rectangle val="33.95,14.95;47.255,18.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="34,15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.125"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -481,11 +478,10 @@ space; keep it technical space agnostic.
         <dia:string>#key_value_pair#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::mapping::source#</dia:string>
+        <dia:string>#masd::mapping::fixed_mappable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.mapping.destination=std::unordered_map&lt;std::string, std::string&gt;
-#DOGEN masd.mapping.action=translate#</dia:string>
+        <dia:string>##DOGEN masd.mapping.destination=std::unordered_map&lt;std::string, std::string&gt;#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -574,16 +570,16 @@ space; keep it technical space agnostic.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O5">
       <dia:attribute name="obj_pos">
-        <dia:point val="48,10"/>
+        <dia:point val="51,10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.95,9.95;58.175,13.05"/>
+        <dia:rectangle val="50.95,9.95;64.255,13.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="48,10"/>
+        <dia:point val="51,10"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.125"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -592,11 +588,10 @@ space; keep it technical space agnostic.
         <dia:string>#boolean#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::mapping::source#</dia:string>
+        <dia:string>#masd::mapping::fixed_mappable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.mapping.destination=bool
-#DOGEN masd.mapping.action=translate#</dia:string>
+        <dia:string>##DOGEN masd.mapping.destination=bool#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
