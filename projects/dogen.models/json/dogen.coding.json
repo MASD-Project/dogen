@@ -3005,6 +3005,43 @@
           "type": ""
         }
       ]
+    },
+    {
+      "name": "features::mapping",
+      "documentation": "Meta-data related to element mapping.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.mapping.source",
+          "type": "masd::variability::text",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "any"
+          }
+        },
+        {
+          "name": "masd.mapping.destination",
+          "type": "masd::variability::text",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "any"
+          }
+        },
+        {
+          "name": "masd.mapping.action",
+          "type": "masd::variability::text",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "any"
+          }
+        }
+      ]
     }
   ]
 }

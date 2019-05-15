@@ -21,6 +21,7 @@
 #include "dogen.coding/types/features/orm.hpp"
 #include "dogen.coding/types/features/naming.hpp"
 #include "dogen.coding/types/features/origin.hpp"
+#include "dogen.coding/types/features/mapping.hpp"
 #include "dogen.coding/types/features/primitive.hpp"
 #include "dogen.coding/types/features/enumerator.hpp"
 #include "dogen.coding/types/features/enumeration.hpp"
@@ -39,6 +40,7 @@ register_templates(variability::helpers::feature_template_registrar& rg) {
     rg.register_templates(dogen::coding::features::enumeration::make_templates());
     rg.register_templates(dogen::coding::features::enumerator::make_templates());
     rg.register_templates(dogen::coding::features::generalization::make_templates());
+    rg.register_templates(dogen::coding::features::mapping::make_templates());
     rg.register_templates(dogen::coding::features::naming::make_templates());
     rg.register_templates(dogen::coding::features::origin::make_templates());
     rg.register_templates(dogen::coding::features::orm::make_templates());
