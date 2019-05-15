@@ -173,13 +173,15 @@ void attributes_transform::expand_object(meta_model::structural::object& o,
     processed_ids.insert(id);
 }
 
-void attributes_transform::expand_objects(meta_model::model& em) {
-    BOOST_LOG_SEV(lg, debug) << "Expanding objects: " << em.structural_elements().objects().size();
+void attributes_transform::expand_objects(meta_model::model& m) {
+    auto& objs(m.structural_elements().objects());
+    BOOST_LOG_SEV(lg, debug) << "Expanding objects. Count: "
+                             << objs.size();
 
     std::unordered_set<std::string> processed_ids;
-    for (auto& pair : em.structural_elements().objects()) {
+    for (auto& pair : objs) {
         auto& o(*pair.second);
-        expand_object(o, em, processed_ids);
+        expand_object(o, m, processed_ids);
     }
 }
 
@@ -214,11 +216,12 @@ void attributes_transform::expand_object_template(
 }
 
 void attributes_transform::expand_object_templates(meta_model::model& m) {
-    BOOST_LOG_SEV(lg, debug) << "Expanding object templates: "
-                             << m.structural_elements().object_templates().size();
+    auto& tpl(m.structural_elements().object_templates());
+    BOOST_LOG_SEV(lg, debug) << "Expanding object templates. Count: "
+                             << tpl.size();
 
     std::unordered_set<std::string> processed_ids;
-    for (auto& pair : m.structural_elements().object_templates()) {
+    for (auto& pair : tpl) {
         auto& otp(*pair.second);
         expand_object_template(otp, m, processed_ids);
     }
