@@ -68,7 +68,7 @@
         <dia:point val="6,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="5.95,4.95;30.82,17.95"/>
+        <dia:rectangle val="5.95,4.95;30.435,17.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -77,7 +77,7 @@
         <dia:point val="6,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.77"/>
+        <dia:real val="24.385000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="12.9"/>
@@ -94,8 +94,8 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#The Variability model defines the types related to variability
-for mapping.
+            <dia:string>#The variability model defines a domain of types related to
+MASD's variability implementation.
 
 This model is not intended to be generated. If generated,
 should not produce any output.
@@ -133,13 +133,13 @@ space; keep it technical space agnostic.
         <dia:point val="34,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="33.95,4.95;46.87,8.05"/>
+        <dia:rectangle val="33.95,4.95;44.175,8.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="34,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -148,10 +148,11 @@ space; keep it technical space agnostic.
         <dia:string>#text#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::mapping::mappable_type#</dia:string>
+        <dia:string>#masd::mapping::source#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.mapping.destination=std::string
+#DOGEN masd.mapping.action=translate#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -190,7 +191,7 @@ space; keep it technical space agnostic.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f9ff7c"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -243,13 +244,13 @@ space; keep it technical space agnostic.
         <dia:point val="34,10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="33.95,9.95;46.87,13.05"/>
+        <dia:rectangle val="33.95,9.95;44.175,13.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="34,10"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -258,10 +259,11 @@ space; keep it technical space agnostic.
         <dia:string>#number#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::mapping::mappable_type#</dia:string>
+        <dia:string>#masd::mapping::source#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.mapping.destination=int
+#DOGEN masd.mapping.action=translate#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -300,7 +302,7 @@ space; keep it technical space agnostic.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f9ff7c"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -350,16 +352,16 @@ space; keep it technical space agnostic.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O3">
       <dia:attribute name="obj_pos">
-        <dia:point val="50,5"/>
+        <dia:point val="48,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,4.95;62.87,8.05"/>
+        <dia:rectangle val="47.95,4.95;58.175,8.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="50,5"/>
+        <dia:point val="48,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -368,10 +370,11 @@ space; keep it technical space agnostic.
         <dia:string>#text_collection#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::mapping::mappable_type#</dia:string>
+        <dia:string>#masd::mapping::source#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.mapping.destination=std::list&lt;std::string&gt;
+#DOGEN masd.mapping.action=translate#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -410,7 +413,7 @@ space; keep it technical space agnostic.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f9ff7c"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -463,13 +466,13 @@ space; keep it technical space agnostic.
         <dia:point val="34,15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="33.95,14.95;46.87,18.05"/>
+        <dia:rectangle val="33.95,14.95;44.175,18.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="34,15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -478,10 +481,11 @@ space; keep it technical space agnostic.
         <dia:string>#key_value_pair#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::mapping::mappable_type#</dia:string>
+        <dia:string>#masd::mapping::source#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.mapping.destination=std::unordered_map&lt;std::string, std::string&gt;
+#DOGEN masd.mapping.action=translate#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -520,7 +524,7 @@ space; keep it technical space agnostic.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f9ff7c"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -570,16 +574,16 @@ space; keep it technical space agnostic.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O5">
       <dia:attribute name="obj_pos">
-        <dia:point val="50,10"/>
+        <dia:point val="48,10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,9.95;62.87,13.05"/>
+        <dia:rectangle val="47.95,9.95;58.175,13.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="50,10"/>
+        <dia:point val="48,10"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -588,10 +592,11 @@ space; keep it technical space agnostic.
         <dia:string>#boolean#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::mapping::mappable_type#</dia:string>
+        <dia:string>#masd::mapping::source#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.mapping.destination=bool
+#DOGEN masd.mapping.action=translate#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -630,7 +635,7 @@ space; keep it technical space agnostic.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f9ff7c"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
