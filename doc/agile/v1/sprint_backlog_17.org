@@ -12,30 +12,30 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-15 Wed 12:02]
+#+CAPTION: Clock summary at [2019-05-15 Wed 18:36]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *62:06* |       |       | 100.0 |
+| *Total time*                                               | *65:28* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 62:06   |       |       | 100.0 |
-| Active                                                     |         | 62:06 |       | 100.0 |
-| Edit release notes for previous sprint                     |         |       |  2:41 |   4.3 |
-| Create a video demo for the previous sprint's features     |         |       |  2:11 |   3.5 |
-| Sprint and product backlog grooming                        |         |       |  1:53 |   3.0 |
+| Stories                                                    | 65:28   |       |       | 100.0 |
+| Active                                                     |         | 65:28 |       | 100.0 |
+| Edit release notes for previous sprint                     |         |       |  2:41 |   4.1 |
+| Create a video demo for the previous sprint's features     |         |       |  2:11 |   3.3 |
+| Sprint and product backlog grooming                        |         |       |  2:01 |   3.1 |
 | Defining profiles directly on a target model does not work |         |       |  0:30 |   0.8 |
 | Inner modules need to be qualified                         |         |       |  0:22 |   0.6 |
-| Create namespaces for model elements                       |         |       |  8:59 |  14.5 |
-| Leaves in internal modules are not captured correctly      |         |       |  1:33 |   2.5 |
-| Try to add relational tracing support                      |         |       |  2:51 |   4.6 |
-| Linux and OSX binaries are not stripped                    |         |       |  1:23 |   2.2 |
+| Create namespaces for model elements                       |         |       |  8:59 |  13.7 |
+| Leaves in internal modules are not captured correctly      |         |       |  1:33 |   2.4 |
+| Try to add relational tracing support                      |         |       |  2:51 |   4.4 |
+| Linux and OSX binaries are not stripped                    |         |       |  1:23 |   2.1 |
 | Fix issues with nightly build and CI                       |         |       |  0:05 |   0.1 |
-| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  11.6 |
-| Replace JSON based feature templates with generated code   |         |       | 16:15 |  26.2 |
-| Make a clear separation between dogen and masd             |         |       |  5:17 |   8.5 |
-| Add a method in enumeration that converts it from strings  |         |       |  7:49 |  12.6 |
+| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  11.0 |
+| Replace JSON based feature templates with generated code   |         |       | 16:15 |  24.8 |
+| Make a clear separation between dogen and masd             |         |       |  5:17 |   8.1 |
+| Add a method in enumeration that converts it from strings  |         |       |  7:49 |  11.9 |
 | Update the MASD UML profile to reflect the latest changes  |         |       |  0:05 |   0.1 |
-| Mappings as meta-model elements                            |         |       |  2:36 |   4.2 |
+| Mappings as meta-model elements                            |         |       |  5:50 |   8.9 |
 | Emacs maintenance and exploration work                     |         |       |  0:23 |   0.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -175,6 +175,7 @@ Time spent creating the demo.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-05-15 Wed 18:28]--[2019-05-15 Wed 18:36] =>  0:08
     CLOCK: [2019-05-15 Wed 11:51]--[2019-05-15 Wed 12:02] =>  0:11
     CLOCK: [2019-05-15 Wed 10:56]--[2019-05-15 Wed 11:07] =>  0:11
     CLOCK: [2019-05-15 Wed 08:21]--[2019-05-15 Wed 08:26] =>  0:05
@@ -654,6 +655,13 @@ down time waiting for builds to sync it.
 
 *** STARTED Mappings as meta-model elements                           :story:
     :LOGBOOK:
+    CLOCK: [2019-05-15 Wed 18:13]--[2019-05-15 Wed 18:27] =>  0:14
+    CLOCK: [2019-05-15 Wed 18:08]--[2019-05-15 Wed 18:12] =>  0:04
+    CLOCK: [2019-05-15 Wed 17:10]--[2019-05-15 Wed 17:56] =>  0:46
+    CLOCK: [2019-05-15 Wed 16:58]--[2019-05-15 Wed 17:09] =>  0:11
+    CLOCK: [2019-05-15 Wed 15:31]--[2019-05-15 Wed 16:41] =>  1:10
+    CLOCK: [2019-05-15 Wed 14:23]--[2019-05-15 Wed 14:33] =>  0:10
+    CLOCK: [2019-05-15 Wed 13:34]--[2019-05-15 Wed 14:13] =>  0:39
     CLOCK: [2019-05-15 Wed 11:44]--[2019-05-15 Wed 11:50] =>  0:06
     CLOCK: [2019-05-15 Wed 11:35]--[2019-05-15 Wed 11:43] =>  0:08
     CLOCK: [2019-05-15 Wed 11:27]--[2019-05-15 Wed 11:34] =>  0:07
@@ -725,6 +733,26 @@ Notes:
   use the feature template properties plus the mapping to construct an
   structural object which is owned by the binding. This will be used
   to create the struct.
+- final approach is to have two separate types. For the extensible
+  mappables, the processing is as follows:
+  - at the engine level, we first adapt the types as usual.
+  - then, we traverse the entire model set looking for objects,
+    primitives or builtins that are mapped. We keep track of their
+    name, TS and action and the target of the mapping. A single
+    container of target to list of destination suffices.
+  - in coding, in the mappings transform, we read the extensible
+    mappings container and create a mapping repository. We need to use
+    the new action enum here.
+- for the fixed mappings:
+  - we can read them in the adapter as usual.
+  - then at the engine level we read the untyped destination.
+  - then the parsing transform creates the name tree.
+  - the merger merges all the mappings.
+  - the resolver transform resolves the name tree.
+  - a feature bundle transform at the post-assembly level creates the
+    inner object. It uses the fixed mappings of the target model to
+    resolve the properties into a name tree.
+  - formatter then expresses it as a struct.
 
 Merged Stories:
 
@@ -743,6 +771,46 @@ chooses the mapping set to use.
 In keeping with the idea that profiles are model-level concepts,
 mappings should be too. We should be able to import mappings in a UML
 diagram and override them or define new ones too.
+
+*** Add aliases to enumeration string conversions                     :story:
+
+We often need to cast a enum from a string but the name is not exactly
+like the original enumeration. For example, we use enums for
+stereotypes but we cannot have the same namespacing structure on the
+enum. For these cases it would be nice to be able to supply an alias.
+
+The only slight problem is that if we use this approach, the cast will
+still work when you supply the simple or qualified enumeration.
+
+Perhaps we can have two concepts:
+
+- alias. Everything else will still work.
+- overrides. Only the override is considered valid. Conversions will
+  now always use the override.
+
+*** Allow user supplied enumerator values                             :story:
+
+Now that we have value support in injection, it should be fairly
+straightforward to allow users to supply their own enumeration
+values. When this happens we need to check that:
+
+- they are unique and valid according to enumeration type;
+- they do not class with invalid value.
+
+Actually we have implemented this but using meta-data for some
+reason. We need to remove the meta-data support and use the value
+field instead.
+
+*** Consider adding a =to_string= facet                               :story:
+
+We originally added the boost lexical cast facet, but that requires
+boost. The new  C++ approach seems to be to use the conversion methods
+=to_string=. However, there is no equivalent "from string". We could
+add it though.
+
+Links:
+
+- [[http://www.cplusplus.com/reference/string/to_string/][to_string]]
 
 *** Remove empty types in injection.json models                       :story:
 

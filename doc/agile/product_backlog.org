@@ -4882,6 +4882,10 @@ Existing validation code:
 :     BOOST_CHECK_EXCEPTION(transform(c, po2, op2), transformation_error, cc);
 : }
 
+- enumerators with values:
+  - they are unique and valid according to enumeration type;
+  - they do not class with invalid value.
+
 *Decoration elements*
 
 - modeline groups must be defined at the top-level.
@@ -10221,15 +10225,6 @@ Links:
 - [[https://stackoverflow.com/questions/36937912/specializing-boostlexical-cast-for-enums-in-boostproperty-maps][specializing boost::lexical_cast for enums in boost::property_maps]]
 - [[https://stackoverflow.com/questions/28828957/enum-to-string-in-modern-c11-c14-c17-and-future-c20][enum to string in modern C++11 / C++14 / C++17 and future C++20]]
 - [[https://stackoverflow.com/questions/21295935/can-a-c-enum-class-have-methods][Can a C++ enum class have methods?]]
-
-*** Allow user supplied enumerator values                             :story:
-
-Now that we have value support in injection, it should be fairly
-straightforward to allow users to supply their own enumeration
-values. When this happens we need to check that:
-
-- they are unique and valid according to enumeration type;
-- they do not class with invalid value.
 
 *** Allow renaming =invalid= enumerator                               :story:
 
