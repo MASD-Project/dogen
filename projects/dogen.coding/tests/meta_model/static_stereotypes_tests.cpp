@@ -144,6 +144,11 @@ BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
     BOOST_CHECK(r == static_stereotypes::variability_feature_template_initializer);
     r = boost::lexical_cast<static_stereotypes>(std::string("static_stereotypes::variability_feature_template_initializer"));
     BOOST_CHECK(r == static_stereotypes::variability_feature_template_initializer);
+
+    r = boost::lexical_cast<static_stereotypes>(std::string("mapping_source"));
+    BOOST_CHECK(r == static_stereotypes::mapping_source);
+    r = boost::lexical_cast<static_stereotypes>(std::string("static_stereotypes::mapping_source"));
+    BOOST_CHECK(r == static_stereotypes::mapping_source);
 }
 
 BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
@@ -215,6 +220,9 @@ BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
 
     r = boost::lexical_cast<std::string>(static_stereotypes::variability_feature_template_initializer);
     BOOST_CHECK(r == "static_stereotypes::variability_feature_template_initializer");
+
+    r = boost::lexical_cast<std::string>(static_stereotypes::mapping_source);
+    BOOST_CHECK(r == "static_stereotypes::mapping_source");
 }
 
 BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
@@ -223,7 +231,7 @@ BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
 #pragma GCC diagnostic ignored "-Wconversion"
 #endif
     using dogen::coding::meta_model::static_stereotypes;
-    const static_stereotypes r(static_cast<static_stereotypes>(30));
+    const static_stereotypes r(static_cast<static_stereotypes>(31));
 #if BOOST_COMP_GNUC
 #pragma GCC diagnostic pop
 #endif
