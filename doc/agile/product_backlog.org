@@ -5611,7 +5611,8 @@ Tasks:
 
 - first add a quick hack just to get the code generator working
   again. For example, take the first model module of the model and try
-  resolving with that. Then worry about fixing this properly.
+  resolving with that. Then worry about fixing this properly. This has
+  been done with a big hack.
 - split the conversion of name into list from pretty printer. Printer
   should merely take a string or list of strings and do its thing. We
   need to find a good location for this method, since (for now) we
@@ -5663,6 +5664,22 @@ Notes:
   servers, users) rather than in one universal space. However, we
   could use URLs as a way to identify resources once we clear up the
   REST story.
+- another very interesting point is that the separation of parsing and
+  resolution may not be a great idea. At present we parse "unparsed
+  types" in attributes and create "proto-names"; these have guesses as
+  to what the different components should be (model module,
+  etc). However, a slightly different way to look at this is, we could
+  just create the lists off of the parsing and then send them to the
+  resolver; the resolver would either resolve them into a name or
+  fail. There would be no need to have this in-between state of
+  half-filled names. However, if we do want to separate parsing from
+  resolution, perhaps the right solution is to create a parallel
+  structure to the name tree which is made up of nested lists. The
+  parser populates these and the resolver uses them to create the name
+  trees. Even better: we can move all of this work into injection. The
+  parsing into lists can happen in injection and then we just need to
+  map these into model types in coding (resolution). The creation of
+  the name tree structure is resolution.
 
 *** Add a new annotation type of "pair"                               :story:
 
