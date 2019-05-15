@@ -40,6 +40,7 @@
 #include "dogen.engine/types/transforms/naming_configuration.hpp"
 #include "dogen.engine/types/transforms/code_generation_chain.hpp"
 #include "dogen.engine/types/transforms/scoped_context_manager.hpp"
+#include "dogen.engine/types/transforms/mapping_source_transform.hpp"
 #include "dogen.engine/types/transforms/profile_binding_transform.hpp"
 #include "dogen.engine/types/helpers/stereotypes_conversion_result.hpp"
 #include "dogen.engine/types/transforms/profile_repository_transform.hpp"
