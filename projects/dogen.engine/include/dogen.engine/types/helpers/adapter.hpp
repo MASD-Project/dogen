@@ -51,7 +51,8 @@
 #include "dogen.coding/types/meta_model/variability/profile_template.hpp"
 #include "dogen.coding/types/meta_model/variability/feature_bundle.hpp"
 #include "dogen.coding/types/meta_model/variability/feature_template_initializer.hpp"
-#include "dogen.coding/types/meta_model/mapping/source.hpp"
+#include "dogen.coding/types/meta_model/mapping/fixed_mappable.hpp"
+#include "dogen.coding/types/meta_model/mapping/extensible_mappable.hpp"
 #include "dogen.engine/types/helpers/stereotypes_conversion_result.hpp"
 
 namespace dogen::engine::helpers {
@@ -265,10 +266,20 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::mapping::source to a mapping source.
+     * masd::mapping::fixed_mappable to a fixed mappable element.
      */
-    boost::shared_ptr<coding::meta_model::mapping::source>
-    to_mapping_source(const coding::meta_model::location& l,
+    boost::shared_ptr<coding::meta_model::mapping::fixed_mappable>
+    to_fixed_mappable(const coding::meta_model::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::meta_model::element& ie) const;
+
+    /**
+     * @brief Converts an injection element with a stereotype of
+     * masd::mapping::extensible_mappable to a extensible mappable
+     * element.
+     */
+    boost::shared_ptr<coding::meta_model::mapping::extensible_mappable>
+    to_extensible_mappable(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 };

@@ -19,20 +19,14 @@
  *
  */
 #include <ostream>
-#include "dogen.coding/io/meta_model/name_io.hpp"
-#include "dogen.coding/io/meta_model/mapping/action_io.hpp"
-#include "dogen.coding/io/meta_model/technical_space_io.hpp"
+#include "dogen.coding/io/meta_model/element_io.hpp"
 #include "dogen.coding/io/meta_model/mapping/destination_io.hpp"
+#include "dogen.coding/io/meta_model/mapping/extensible_mappable_io.hpp"
 
 namespace dogen::coding::meta_model::mapping {
 
-std::ostream& operator<<(std::ostream& s, const destination& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::coding::meta_model::mapping::destination\"" << ", "
-      << "\"name\": " << v.name() << ", "
-      << "\"action\": " << v.action() << ", "
-      << "\"technical_space\": " << v.technical_space()
-      << " }";
+std::ostream& operator<<(std::ostream& s, const extensible_mappable& v) {
+    v.to_stream(s);
     return(s);
 }
 

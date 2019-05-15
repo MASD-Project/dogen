@@ -25,9 +25,10 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
+#include "dogen.coding/types/meta_model/name.hpp"
 #include "dogen.coding/types/meta_model/mapping/action.hpp"
+#include "dogen.coding/types/meta_model/technical_space.hpp"
 
 namespace dogen::coding::meta_model::mapping {
 
@@ -42,17 +43,21 @@ public:
 
 public:
     destination(
-        const std::string& element_id,
-        const dogen::coding::meta_model::mapping::action action);
+        const dogen::coding::meta_model::name& name,
+        const dogen::coding::meta_model::mapping::action action,
+        const dogen::coding::meta_model::technical_space technical_space);
 
 public:
-    const std::string& element_id() const;
-    std::string& element_id();
-    void element_id(const std::string& v);
-    void element_id(const std::string&& v);
+    const dogen::coding::meta_model::name& name() const;
+    dogen::coding::meta_model::name& name();
+    void name(const dogen::coding::meta_model::name& v);
+    void name(const dogen::coding::meta_model::name&& v);
 
     dogen::coding::meta_model::mapping::action action() const;
     void action(const dogen::coding::meta_model::mapping::action v);
+
+    dogen::coding::meta_model::technical_space technical_space() const;
+    void technical_space(const dogen::coding::meta_model::technical_space v);
 
 public:
     bool operator==(const destination& rhs) const;
@@ -65,8 +70,9 @@ public:
     destination& operator=(destination other);
 
 private:
-    std::string element_id_;
+    dogen::coding::meta_model::name name_;
     dogen::coding::meta_model::mapping::action action_;
+    dogen::coding::meta_model::technical_space technical_space_;
 };
 
 }

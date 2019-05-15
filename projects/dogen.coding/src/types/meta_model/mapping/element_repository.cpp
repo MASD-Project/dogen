@@ -18,13 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.coding/types/meta_model/mapping/source.hpp"
+#include "dogen.coding/types/meta_model/mapping/fixed_mappable.hpp"
 #include "dogen.coding/types/meta_model/mapping/element_repository.hpp"
+#include "dogen.coding/types/meta_model/mapping/extensible_mappable.hpp"
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::coding::meta_model::mapping::source>& lhs,
-const boost::shared_ptr<dogen::coding::meta_model::mapping::source>& rhs) {
+inline bool operator==(const boost::shared_ptr<dogen::coding::meta_model::mapping::extensible_mappable>& lhs,
+const boost::shared_ptr<dogen::coding::meta_model::mapping::extensible_mappable>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::coding::meta_model::mapping::fixed_mappable>& lhs,
+const boost::shared_ptr<dogen::coding::meta_model::mapping::fixed_mappable>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -32,16 +42,21 @@ const boost::shared_ptr<dogen::coding::meta_model::mapping::source>& rhs) {
 
 namespace dogen::coding::meta_model::mapping {
 
-element_repository::element_repository(const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::source> >& sources)
-    : sources_(sources) { }
+element_repository::element_repository(
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::extensible_mappable> >& extensible_mappables,
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::fixed_mappable> >& fixed_mappables)
+    : extensible_mappables_(extensible_mappables),
+      fixed_mappables_(fixed_mappables) { }
 
 void element_repository::swap(element_repository& other) noexcept {
     using std::swap;
-    swap(sources_, other.sources_);
+    swap(extensible_mappables_, other.extensible_mappables_);
+    swap(fixed_mappables_, other.fixed_mappables_);
 }
 
 bool element_repository::operator==(const element_repository& rhs) const {
-    return sources_ == rhs.sources_;
+    return extensible_mappables_ == rhs.extensible_mappables_ &&
+        fixed_mappables_ == rhs.fixed_mappables_;
 }
 
 element_repository& element_repository::operator=(element_repository other) {
@@ -50,20 +65,36 @@ element_repository& element_repository::operator=(element_repository other) {
     return *this;
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::source> >& element_repository::sources() const {
-    return sources_;
+const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::extensible_mappable> >& element_repository::extensible_mappables() const {
+    return extensible_mappables_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::source> >& element_repository::sources() {
-    return sources_;
+std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::extensible_mappable> >& element_repository::extensible_mappables() {
+    return extensible_mappables_;
 }
 
-void element_repository::sources(const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::source> >& v) {
-    sources_ = v;
+void element_repository::extensible_mappables(const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::extensible_mappable> >& v) {
+    extensible_mappables_ = v;
 }
 
-void element_repository::sources(const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::source> >&& v) {
-    sources_ = std::move(v);
+void element_repository::extensible_mappables(const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::extensible_mappable> >&& v) {
+    extensible_mappables_ = std::move(v);
+}
+
+const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::fixed_mappable> >& element_repository::fixed_mappables() const {
+    return fixed_mappables_;
+}
+
+std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::fixed_mappable> >& element_repository::fixed_mappables() {
+    return fixed_mappables_;
+}
+
+void element_repository::fixed_mappables(const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::fixed_mappable> >& v) {
+    fixed_mappables_ = v;
+}
+
+void element_repository::fixed_mappables(const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::fixed_mappable> >&& v) {
+    fixed_mappables_ = std::move(v);
 }
 
 }

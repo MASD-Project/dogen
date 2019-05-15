@@ -18,35 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CODING_TEST_DATA_META_MODEL_MAPPING_SOURCE_TD_HPP
-#define DOGEN_CODING_TEST_DATA_META_MODEL_MAPPING_SOURCE_TD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen.coding/types/meta_model/mapping/source.hpp"
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen.coding/io/meta_model/element_io.hpp"
+#include "dogen.coding/io/meta_model/name_tree_io.hpp"
+#include "dogen.coding/io/meta_model/mapping/fixed_mappable_io.hpp"
 
 namespace dogen::coding::meta_model::mapping {
 
-class source_generator {
-public:
-    source_generator();
-
-public:
-    typedef dogen::coding::meta_model::mapping::source result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
-
+std::ostream& operator<<(std::ostream& s, const fixed_mappable& v) {
+    v.to_stream(s);
+    return(s);
 }
 
-#endif
+}

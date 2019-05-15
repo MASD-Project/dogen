@@ -26,11 +26,11 @@ namespace dogen::coding::features {
 namespace {
 
 dogen::variability::meta_model::feature_template
-make_masd_mapping_source() {
+make_masd_mapping_target() {
     using namespace dogen::variability::meta_model;
     feature_template r;
-    r.name().simple("source");
-    r.name().qualified("masd.mapping.source");
+    r.name().simple("target");
+    r.name().qualified("masd.mapping.target");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
@@ -85,7 +85,7 @@ std::list<dogen::variability::meta_model::feature_template>
 mapping::make_templates() {
     using namespace dogen::variability::meta_model;
     std::list<feature_template> r;
-    r.push_back(make_masd_mapping_source());
+    r.push_back(make_masd_mapping_target());
     r.push_back(make_masd_mapping_destination());
     r.push_back(make_masd_mapping_action());
     return r;

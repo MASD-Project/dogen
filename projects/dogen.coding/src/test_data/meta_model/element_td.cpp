@@ -22,7 +22,6 @@
 #include "dogen.coding/test_data/meta_model/name_td.hpp"
 #include "dogen.coding/test_data/meta_model/element_td.hpp"
 #include "dogen.coding/test_data/meta_model/origin_types_td.hpp"
-#include "dogen.coding/test_data/meta_model/mapping/source_td.hpp"
 #include "dogen.coding/test_data/meta_model/technical_space_td.hpp"
 #include "dogen.coding/test_data/meta_model/structural/module_td.hpp"
 #include "dogen.coding/test_data/meta_model/structural/object_td.hpp"
@@ -35,10 +34,12 @@
 #include "dogen.coding/test_data/meta_model/decoration/modeline_td.hpp"
 #include "dogen.coding/test_data/meta_model/structural/exception_td.hpp"
 #include "dogen.coding/test_data/meta_model/structural/primitive_td.hpp"
+#include "dogen.coding/test_data/meta_model/mapping/fixed_mappable_td.hpp"
 #include "dogen.coding/test_data/meta_model/structural/enumeration_td.hpp"
 #include "dogen.coding/test_data/meta_model/decoration/modeline_group_td.hpp"
 #include "dogen.coding/test_data/meta_model/structural/object_template_td.hpp"
 #include "dogen.coding/test_data/meta_model/variability/feature_bundle_td.hpp"
+#include "dogen.coding/test_data/meta_model/mapping/extensible_mappable_td.hpp"
 #include "dogen.coding/test_data/meta_model/decoration/generation_marker_td.hpp"
 #include "dogen.coding/test_data/meta_model/variability/profile_template_td.hpp"
 #include "dogen.coding/test_data/meta_model/decoration/element_properties_td.hpp"
@@ -167,35 +168,37 @@ populate(const unsigned int position, result_type& v) {
 
 element_generator::result_type*
 element_generator::create_ptr(const unsigned int position) {
-    if ((position % 15) == 0)
+    if ((position % 16) == 0)
         return dogen::coding::meta_model::decoration::licence_generator::create_ptr(position);
-    if ((position % 15) == 1)
+    if ((position % 16) == 1)
         return dogen::coding::meta_model::decoration::modeline_generator::create_ptr(position);
-    if ((position % 15) == 2)
+    if ((position % 16) == 2)
         return dogen::coding::meta_model::decoration::modeline_group_generator::create_ptr(position);
-    if ((position % 15) == 3)
-        return dogen::coding::meta_model::mapping::source_generator::create_ptr(position);
-    if ((position % 15) == 4)
+    if ((position % 16) == 3)
+        return dogen::coding::meta_model::mapping::extensible_mappable_generator::create_ptr(position);
+    if ((position % 16) == 4)
+        return dogen::coding::meta_model::mapping::fixed_mappable_generator::create_ptr(position);
+    if ((position % 16) == 5)
         return dogen::coding::meta_model::structural::builtin_generator::create_ptr(position);
-    if ((position % 15) == 5)
+    if ((position % 16) == 6)
         return dogen::coding::meta_model::structural::enumeration_generator::create_ptr(position);
-    if ((position % 15) == 6)
+    if ((position % 16) == 7)
         return dogen::coding::meta_model::structural::exception_generator::create_ptr(position);
-    if ((position % 15) == 7)
+    if ((position % 16) == 8)
         return dogen::coding::meta_model::structural::module_generator::create_ptr(position);
-    if ((position % 15) == 8)
+    if ((position % 16) == 9)
         return dogen::coding::meta_model::structural::object_generator::create_ptr(position);
-    if ((position % 15) == 9)
+    if ((position % 16) == 10)
         return dogen::coding::meta_model::structural::object_template_generator::create_ptr(position);
-    if ((position % 15) == 10)
+    if ((position % 16) == 11)
         return dogen::coding::meta_model::structural::primitive_generator::create_ptr(position);
-    if ((position % 15) == 11)
+    if ((position % 16) == 12)
         return dogen::coding::meta_model::structural::visitor_generator::create_ptr(position);
-    if ((position % 15) == 12)
+    if ((position % 16) == 13)
         return dogen::coding::meta_model::variability::feature_bundle_generator::create_ptr(position);
-    if ((position % 15) == 13)
+    if ((position % 16) == 14)
         return dogen::coding::meta_model::variability::feature_template_initializer_generator::create_ptr(position);
-    if ((position % 15) == 14)
+    if ((position % 16) == 15)
         return dogen::coding::meta_model::variability::profile_template_generator::create_ptr(position);
     return dogen::coding::meta_model::decoration::generation_marker_generator::create_ptr(position);
 }

@@ -29,7 +29,8 @@
 #include <algorithm>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
-#include "dogen.coding/types/meta_model/mapping/source_fwd.hpp"
+#include "dogen.coding/types/meta_model/mapping/fixed_mappable_fwd.hpp"
+#include "dogen.coding/types/meta_model/mapping/extensible_mappable_fwd.hpp"
 
 namespace dogen::coding::meta_model::mapping {
 
@@ -41,13 +42,20 @@ public:
     ~element_repository() = default;
 
 public:
-    explicit element_repository(const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::source> >& sources);
+    element_repository(
+        const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::extensible_mappable> >& extensible_mappables,
+        const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::fixed_mappable> >& fixed_mappables);
 
 public:
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::source> >& sources() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::source> >& sources();
-    void sources(const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::source> >& v);
-    void sources(const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::source> >&& v);
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::extensible_mappable> >& extensible_mappables() const;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::extensible_mappable> >& extensible_mappables();
+    void extensible_mappables(const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::extensible_mappable> >& v);
+    void extensible_mappables(const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::extensible_mappable> >&& v);
+
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::fixed_mappable> >& fixed_mappables() const;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::fixed_mappable> >& fixed_mappables();
+    void fixed_mappables(const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::fixed_mappable> >& v);
+    void fixed_mappables(const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::fixed_mappable> >&& v);
 
 public:
     bool operator==(const element_repository& rhs) const;
@@ -60,7 +68,8 @@ public:
     element_repository& operator=(element_repository other);
 
 private:
-    std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::source> > sources_;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::extensible_mappable> > extensible_mappables_;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::fixed_mappable> > fixed_mappables_;
 };
 
 }

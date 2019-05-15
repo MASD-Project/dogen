@@ -75,8 +75,10 @@ inline std::string lexical_cast(const dogen::coding::meta_model::static_stereoty
         return "static_stereotypes::variability_feature_bundle";
     case static_stereotypes::variability_feature_template_initializer:
         return "static_stereotypes::variability_feature_template_initializer";
-    case static_stereotypes::mapping_source:
-        return "static_stereotypes::mapping_source";
+    case static_stereotypes::mapping_fixed_mappable:
+        return "static_stereotypes::mapping_fixed_mappable";
+    case static_stereotypes::mapping_extensible_mappable:
+        return "static_stereotypes::mapping_extensible_mappable";
     default:
         throw boost::bad_lexical_cast();
     }
@@ -126,8 +128,10 @@ inline dogen::coding::meta_model::static_stereotypes lexical_cast(const std::str
         return static_stereotypes::variability_feature_bundle;
     if (s == "variability_feature_template_initializer" || s == "static_stereotypes::variability_feature_template_initializer")
         return static_stereotypes::variability_feature_template_initializer;
-    if (s == "mapping_source" || s == "static_stereotypes::mapping_source")
-        return static_stereotypes::mapping_source;
+    if (s == "mapping_fixed_mappable" || s == "static_stereotypes::mapping_fixed_mappable")
+        return static_stereotypes::mapping_fixed_mappable;
+    if (s == "mapping_extensible_mappable" || s == "static_stereotypes::mapping_extensible_mappable")
+        return static_stereotypes::mapping_extensible_mappable;
     throw boost::bad_lexical_cast();
 }
 

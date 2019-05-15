@@ -23,23 +23,28 @@
 namespace dogen::coding::meta_model::mapping {
 
 destination::destination()
-    : action_(static_cast<dogen::coding::meta_model::mapping::action>(0)) { }
+    : action_(static_cast<dogen::coding::meta_model::mapping::action>(0)),
+      technical_space_(static_cast<dogen::coding::meta_model::technical_space>(0)) { }
 
 destination::destination(
-    const std::string& element_id,
-    const dogen::coding::meta_model::mapping::action action)
-    : element_id_(element_id),
-      action_(action) { }
+    const dogen::coding::meta_model::name& name,
+    const dogen::coding::meta_model::mapping::action action,
+    const dogen::coding::meta_model::technical_space technical_space)
+    : name_(name),
+      action_(action),
+      technical_space_(technical_space) { }
 
 void destination::swap(destination& other) noexcept {
     using std::swap;
-    swap(element_id_, other.element_id_);
+    swap(name_, other.name_);
     swap(action_, other.action_);
+    swap(technical_space_, other.technical_space_);
 }
 
 bool destination::operator==(const destination& rhs) const {
-    return element_id_ == rhs.element_id_ &&
-        action_ == rhs.action_;
+    return name_ == rhs.name_ &&
+        action_ == rhs.action_ &&
+        technical_space_ == rhs.technical_space_;
 }
 
 destination& destination::operator=(destination other) {
@@ -48,20 +53,20 @@ destination& destination::operator=(destination other) {
     return *this;
 }
 
-const std::string& destination::element_id() const {
-    return element_id_;
+const dogen::coding::meta_model::name& destination::name() const {
+    return name_;
 }
 
-std::string& destination::element_id() {
-    return element_id_;
+dogen::coding::meta_model::name& destination::name() {
+    return name_;
 }
 
-void destination::element_id(const std::string& v) {
-    element_id_ = v;
+void destination::name(const dogen::coding::meta_model::name& v) {
+    name_ = v;
 }
 
-void destination::element_id(const std::string&& v) {
-    element_id_ = std::move(v);
+void destination::name(const dogen::coding::meta_model::name&& v) {
+    name_ = std::move(v);
 }
 
 dogen::coding::meta_model::mapping::action destination::action() const {
@@ -70,6 +75,14 @@ dogen::coding::meta_model::mapping::action destination::action() const {
 
 void destination::action(const dogen::coding::meta_model::mapping::action v) {
     action_ = v;
+}
+
+dogen::coding::meta_model::technical_space destination::technical_space() const {
+    return technical_space_;
+}
+
+void destination::technical_space(const dogen::coding::meta_model::technical_space v) {
+    technical_space_ = v;
 }
 
 }

@@ -254,9 +254,13 @@ process_element(const helpers::adapter& ad,
         m.variability_elements().feature_template_initializer(
             ad.to_variability_feature_template_initializer(l, scr, e));
         break;
-    case static_stereotypes::mapping_source:
-        insert(ad.to_mapping_source(l, scr, e),
-            m.mapping_elements().sources());
+    case static_stereotypes::mapping_fixed_mappable:
+        insert(ad.to_fixed_mappable(l, scr, e),
+            m.mapping_elements().fixed_mappables());
+        break;
+    case static_stereotypes::mapping_extensible_mappable:
+        insert(ad.to_extensible_mappable(l, scr, e),
+            m.mapping_elements().extensible_mappables());
         break;
     default: {
         const auto s(boost::lexical_cast<std::string>(et));

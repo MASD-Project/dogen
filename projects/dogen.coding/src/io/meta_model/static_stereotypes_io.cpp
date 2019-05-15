@@ -90,8 +90,11 @@ std::ostream& operator<<(std::ostream& s, const static_stereotypes& v) {
     case static_stereotypes::variability_feature_template_initializer:
         attr = "\"variability_feature_template_initializer\"";
         break;
-    case static_stereotypes::mapping_source:
-        attr = "\"mapping_source\"";
+    case static_stereotypes::mapping_fixed_mappable:
+        attr = "\"mapping_fixed_mappable\"";
+        break;
+    case static_stereotypes::mapping_extensible_mappable:
+        attr = "\"mapping_extensible_mappable\"";
         break;
     default:
         throw std::invalid_argument("Invalid value for static_stereotypes");

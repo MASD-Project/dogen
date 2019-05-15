@@ -18,21 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CODING_IO_META_MODEL_MAPPING_SOURCE_IO_HPP
-#define DOGEN_CODING_IO_META_MODEL_MAPPING_SOURCE_IO_HPP
+#ifndef DOGEN_CODING_TYPES_META_MODEL_MAPPING_FIXED_MAPPABLE_FWD_HPP
+#define DOGEN_CODING_TYPES_META_MODEL_MAPPING_FIXED_MAPPABLE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen.coding/types/meta_model/mapping/source.hpp"
-
 namespace dogen::coding::meta_model::mapping {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::coding::meta_model::mapping::source& v);
+class fixed_mappable;
 
 }
 

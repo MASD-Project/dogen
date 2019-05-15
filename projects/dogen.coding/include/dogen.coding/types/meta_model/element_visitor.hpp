@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen.coding/types/meta_model/mapping/source_fwd.hpp"
 #include "dogen.coding/types/meta_model/structural/module_fwd.hpp"
 #include "dogen.coding/types/meta_model/structural/object_fwd.hpp"
 #include "dogen.coding/types/meta_model/decoration/licence_fwd.hpp"
@@ -34,10 +33,12 @@
 #include "dogen.coding/types/meta_model/decoration/modeline_fwd.hpp"
 #include "dogen.coding/types/meta_model/structural/exception_fwd.hpp"
 #include "dogen.coding/types/meta_model/structural/primitive_fwd.hpp"
+#include "dogen.coding/types/meta_model/mapping/fixed_mappable_fwd.hpp"
 #include "dogen.coding/types/meta_model/structural/enumeration_fwd.hpp"
 #include "dogen.coding/types/meta_model/decoration/modeline_group_fwd.hpp"
 #include "dogen.coding/types/meta_model/structural/object_template_fwd.hpp"
 #include "dogen.coding/types/meta_model/variability/feature_bundle_fwd.hpp"
+#include "dogen.coding/types/meta_model/mapping/extensible_mappable_fwd.hpp"
 #include "dogen.coding/types/meta_model/decoration/generation_marker_fwd.hpp"
 #include "dogen.coding/types/meta_model/variability/profile_template_fwd.hpp"
 #include "dogen.coding/types/meta_model/variability/feature_template_initializer_fwd.hpp"
@@ -93,13 +94,23 @@ public:
     /**@}*/
 
     /**
-     * @brief Accept visits for type dogen::coding::meta_model::mapping::source
+     * @brief Accept visits for type dogen::coding::meta_model::mapping::extensible_mappable
      */
     /**@{*/
-    virtual void visit(const dogen::coding::meta_model::mapping::source&) const { }
-    virtual void visit(const dogen::coding::meta_model::mapping::source&) { }
-    virtual void visit(dogen::coding::meta_model::mapping::source&) const { }
-    virtual void visit(dogen::coding::meta_model::mapping::source&) { }
+    virtual void visit(const dogen::coding::meta_model::mapping::extensible_mappable&) const { }
+    virtual void visit(const dogen::coding::meta_model::mapping::extensible_mappable&) { }
+    virtual void visit(dogen::coding::meta_model::mapping::extensible_mappable&) const { }
+    virtual void visit(dogen::coding::meta_model::mapping::extensible_mappable&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::coding::meta_model::mapping::fixed_mappable
+     */
+    /**@{*/
+    virtual void visit(const dogen::coding::meta_model::mapping::fixed_mappable&) const { }
+    virtual void visit(const dogen::coding::meta_model::mapping::fixed_mappable&) { }
+    virtual void visit(dogen::coding::meta_model::mapping::fixed_mappable&) const { }
+    virtual void visit(dogen::coding::meta_model::mapping::fixed_mappable&) { }
     /**@}*/
 
     /**

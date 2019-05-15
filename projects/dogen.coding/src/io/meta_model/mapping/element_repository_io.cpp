@@ -20,8 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.coding/io/meta_model/mapping/source_io.hpp"
+#include "dogen.coding/io/meta_model/mapping/fixed_mappable_io.hpp"
 #include "dogen.coding/io/meta_model/mapping/element_repository_io.hpp"
+#include "dogen.coding/io/meta_model/mapping/extensible_mappable_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -33,7 +34,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::coding::meta_model::mapping::source>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::coding::meta_model::mapping::extensible_mappable>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -49,7 +50,41 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::source> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::extensible_mappable> >& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::coding::meta_model::mapping::fixed_mappable>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::fixed_mappable> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -70,7 +105,8 @@ namespace dogen::coding::meta_model::mapping {
 std::ostream& operator<<(std::ostream& s, const element_repository& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::coding::meta_model::mapping::element_repository\"" << ", "
-      << "\"sources\": " << v.sources()
+      << "\"extensible_mappables\": " << v.extensible_mappables() << ", "
+      << "\"fixed_mappables\": " << v.fixed_mappables()
       << " }";
     return(s);
 }

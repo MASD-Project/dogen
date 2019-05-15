@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen.coding/io/meta_model/name_io.hpp"
-#include "dogen.coding/io/meta_model/mapping/action_io.hpp"
-#include "dogen.coding/io/meta_model/technical_space_io.hpp"
-#include "dogen.coding/io/meta_model/mapping/destination_io.hpp"
+#ifndef DOGEN_CODING_IO_META_MODEL_MAPPING_EXTENSIBLE_MAPPABLE_IO_HPP
+#define DOGEN_CODING_IO_META_MODEL_MAPPING_EXTENSIBLE_MAPPABLE_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen.coding/types/meta_model/mapping/extensible_mappable.hpp"
 
 namespace dogen::coding::meta_model::mapping {
 
-std::ostream& operator<<(std::ostream& s, const destination& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::coding::meta_model::mapping::destination\"" << ", "
-      << "\"name\": " << v.name() << ", "
-      << "\"action\": " << v.action() << ", "
-      << "\"technical_space\": " << v.technical_space()
-      << " }";
-    return(s);
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::coding::meta_model::mapping::extensible_mappable& v);
 
 }
+
+#endif

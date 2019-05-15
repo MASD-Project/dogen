@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CODING_TYPES_META_MODEL_MAPPING_SOURCE_HPP
-#define DOGEN_CODING_TYPES_META_MODEL_MAPPING_SOURCE_HPP
+#ifndef DOGEN_CODING_TYPES_META_MODEL_MAPPING_EXTENSIBLE_MAPPABLE_HPP
+#define DOGEN_CODING_TYPES_META_MODEL_MAPPING_EXTENSIBLE_MAPPABLE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,29 +28,28 @@
 #include <list>
 #include <iosfwd>
 #include <algorithm>
-#include <unordered_map>
-#include "dogen.coding/types/meta_model/name.hpp"
 #include "dogen.coding/types/meta_model/element.hpp"
-#include "dogen.coding/types/meta_model/name_tree.hpp"
-#include "dogen.coding/types/meta_model/technical_space.hpp"
-#include "dogen.coding/hash/meta_model/technical_space_hash.hpp"
 #include "dogen.coding/types/meta_model/mapping/destination.hpp"
 
 namespace dogen::coding::meta_model::mapping {
 
 /**
- * @brief Represents a source of mapping.
+ * @brief A mappable meta-model element for the general purpose of mapping.
+ *
+ * Mappables can be used to create a Platform Independent Model (PIM), which is then
+ * mapped to concrete types to form a Platform Specific Model (PSM). Users can
+ * extend the mappings as required.
  */
-class source final : public dogen::coding::meta_model::element {
+class extensible_mappable final : public dogen::coding::meta_model::element {
 public:
-    source() = default;
-    source(const source&) = default;
-    source(source&&) = default;
+    extensible_mappable() = default;
+    extensible_mappable(const extensible_mappable&) = default;
+    extensible_mappable(extensible_mappable&&) = default;
 
-    virtual ~source() noexcept { }
+    virtual ~extensible_mappable() noexcept { }
 
 public:
-    source(
+    extensible_mappable(
         const dogen::coding::meta_model::name& name,
         const std::string& documentation,
         const dogen::coding::meta_model::origin_types origin_type,
@@ -65,9 +64,7 @@ public:
         const std::unordered_map<std::string, dogen::coding::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const boost::optional<dogen::coding::meta_model::decoration::element_properties>& decoration,
-        const std::list<dogen::coding::meta_model::mapping::destination>& destinations,
-        const std::unordered_map<dogen::coding::meta_model::technical_space, std::list<dogen::coding::meta_model::name> >& names_by_technical_space,
-        const std::unordered_map<dogen::coding::meta_model::technical_space, std::list<dogen::coding::meta_model::name_tree> >& name_trees_by_technical_space);
+        const std::list<dogen::coding::meta_model::mapping::destination>& destinations);
 
 public:
     using element::accept;
@@ -90,31 +87,9 @@ public:
     void destinations(const std::list<dogen::coding::meta_model::mapping::destination>&& v);
     /**@}*/
 
-    /**
-     * @brief Destinations after they have been resolved into names, and mapped to a technical
-     * space.
-     */
-    /**@{*/
-    const std::unordered_map<dogen::coding::meta_model::technical_space, std::list<dogen::coding::meta_model::name> >& names_by_technical_space() const;
-    std::unordered_map<dogen::coding::meta_model::technical_space, std::list<dogen::coding::meta_model::name> >& names_by_technical_space();
-    void names_by_technical_space(const std::unordered_map<dogen::coding::meta_model::technical_space, std::list<dogen::coding::meta_model::name> >& v);
-    void names_by_technical_space(const std::unordered_map<dogen::coding::meta_model::technical_space, std::list<dogen::coding::meta_model::name> >&& v);
-    /**@}*/
-
-    /**
-     * @brief Destinations after they have been resolved into name trees, and mapped to a
-     * technical space.
-     */
-    /**@{*/
-    const std::unordered_map<dogen::coding::meta_model::technical_space, std::list<dogen::coding::meta_model::name_tree> >& name_trees_by_technical_space() const;
-    std::unordered_map<dogen::coding::meta_model::technical_space, std::list<dogen::coding::meta_model::name_tree> >& name_trees_by_technical_space();
-    void name_trees_by_technical_space(const std::unordered_map<dogen::coding::meta_model::technical_space, std::list<dogen::coding::meta_model::name_tree> >& v);
-    void name_trees_by_technical_space(const std::unordered_map<dogen::coding::meta_model::technical_space, std::list<dogen::coding::meta_model::name_tree> >&& v);
-    /**@}*/
-
 public:
-    bool operator==(const source& rhs) const;
-    bool operator!=(const source& rhs) const {
+    bool operator==(const extensible_mappable& rhs) const;
+    bool operator!=(const extensible_mappable& rhs) const {
         return !this->operator==(rhs);
     }
 
@@ -122,13 +97,11 @@ public:
     bool equals(const dogen::coding::meta_model::element& other) const override;
 
 public:
-    void swap(source& other) noexcept;
-    source& operator=(source other);
+    void swap(extensible_mappable& other) noexcept;
+    extensible_mappable& operator=(extensible_mappable other);
 
 private:
     std::list<dogen::coding::meta_model::mapping::destination> destinations_;
-    std::unordered_map<dogen::coding::meta_model::technical_space, std::list<dogen::coding::meta_model::name> > names_by_technical_space_;
-    std::unordered_map<dogen::coding::meta_model::technical_space, std::list<dogen::coding::meta_model::name_tree> > name_trees_by_technical_space_;
 };
 
 }
@@ -137,8 +110,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::coding::meta_model::mapping::source& lhs,
-    dogen::coding::meta_model::mapping::source& rhs) {
+    dogen::coding::meta_model::mapping::extensible_mappable& lhs,
+    dogen::coding::meta_model::mapping::extensible_mappable& rhs) {
     lhs.swap(rhs);
 }
 

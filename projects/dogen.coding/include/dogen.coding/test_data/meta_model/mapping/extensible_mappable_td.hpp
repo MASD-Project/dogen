@@ -18,16 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CODING_TYPES_META_MODEL_MAPPING_SOURCE_FWD_HPP
-#define DOGEN_CODING_TYPES_META_MODEL_MAPPING_SOURCE_FWD_HPP
+#ifndef DOGEN_CODING_TEST_DATA_META_MODEL_MAPPING_EXTENSIBLE_MAPPABLE_TD_HPP
+#define DOGEN_CODING_TEST_DATA_META_MODEL_MAPPING_EXTENSIBLE_MAPPABLE_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include "dogen.coding/types/meta_model/mapping/extensible_mappable.hpp"
+
 namespace dogen::coding::meta_model::mapping {
 
-class source;
+class extensible_mappable_generator {
+public:
+    extensible_mappable_generator();
+
+public:
+    typedef dogen::coding::meta_model::mapping::extensible_mappable result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 }
 

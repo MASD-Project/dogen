@@ -23,14 +23,14 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
-#include "dogen.coding/io/meta_model/mapping/source_io.hpp"
-#include "dogen.coding/types/meta_model/mapping/source.hpp"
-#include "dogen.coding/test_data/meta_model/mapping/source_td.hpp"
+#include "dogen.coding/io/meta_model/mapping/extensible_mappable_io.hpp"
+#include "dogen.coding/types/meta_model/mapping/extensible_mappable.hpp"
+#include "dogen.coding/test_data/meta_model/mapping/extensible_mappable_td.hpp"
 
-BOOST_AUTO_TEST_SUITE(meta_model_mapping_source_tests)
+BOOST_AUTO_TEST_SUITE(meta_model_mapping_extensible_mappable_tests)
 
 BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
-    dogen::coding::meta_model::mapping::source_generator g;
+    dogen::coding::meta_model::mapping::extensible_mappable_generator g;
     const auto a(g());
     const auto b(a);
 
@@ -40,7 +40,7 @@ BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
 }
 
 BOOST_AUTO_TEST_CASE(an_object_is_equal_to_itself) {
-    dogen::coding::meta_model::mapping::source_generator g;
+    dogen::coding::meta_model::mapping::extensible_mappable_generator g;
     const auto a(g());
 
     BOOST_CHECK(a == a);
@@ -48,7 +48,7 @@ BOOST_AUTO_TEST_CASE(an_object_is_equal_to_itself) {
 }
 
 BOOST_AUTO_TEST_CASE(distinct_objects_are_unequal) {
-    dogen::coding::meta_model::mapping::source_generator g;
+    dogen::coding::meta_model::mapping::extensible_mappable_generator g;
     const auto a(g());
     const auto b(g());
 
@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_CASE(assigning_an_object_to_itself_results_in_the_same_object) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wself-assign-overloaded"
 #endif
-    dogen::coding::meta_model::mapping::source_generator g;
+    dogen::coding::meta_model::mapping::extensible_mappable_generator g;
     auto a(g());
     const auto b(a);
     const auto c(g());
@@ -75,10 +75,10 @@ BOOST_AUTO_TEST_CASE(assigning_an_object_to_itself_results_in_the_same_object) {
 }
 
 BOOST_AUTO_TEST_CASE(moved_objects_are_equal) {
-    dogen::coding::meta_model::mapping::source_generator g;
+    dogen::coding::meta_model::mapping::extensible_mappable_generator g;
     g();
     auto a(g());
-    const auto b = dogen::coding::meta_model::mapping::source();
+    const auto b = dogen::coding::meta_model::mapping::extensible_mappable();
     const auto c(a);
     BOOST_CHECK(a != b);
     BOOST_CHECK(a == c);
@@ -89,10 +89,10 @@ BOOST_AUTO_TEST_CASE(moved_objects_are_equal) {
 }
 
 BOOST_AUTO_TEST_CASE(assigned_objects_are_equal) {
-    dogen::coding::meta_model::mapping::source_generator g;
+    dogen::coding::meta_model::mapping::extensible_mappable_generator g;
     g();
     const auto a(g());
-    dogen::coding::meta_model::mapping::source b;
+    dogen::coding::meta_model::mapping::extensible_mappable b;
     BOOST_CHECK(a != b);
 
     b = a;
@@ -100,18 +100,18 @@ BOOST_AUTO_TEST_CASE(assigned_objects_are_equal) {
 }
 
 BOOST_AUTO_TEST_CASE(copy_constructed_objects_are_equal) {
-    dogen::coding::meta_model::mapping::source_generator g;
+    dogen::coding::meta_model::mapping::extensible_mappable_generator g;
     g();
     const auto a(g());
     auto b(a);
     BOOST_CHECK(a == b);
 
-    b = dogen::coding::meta_model::mapping::source();
+    b = dogen::coding::meta_model::mapping::extensible_mappable();
     BOOST_CHECK(a != b);
 }
 
 BOOST_AUTO_TEST_CASE(swapping_objects_results_in_the_expected_state) {
-    dogen::coding::meta_model::mapping::source_generator g;
+    dogen::coding::meta_model::mapping::extensible_mappable_generator g;
     const auto a(g());
     const auto b(g());
 
@@ -126,7 +126,7 @@ BOOST_AUTO_TEST_CASE(swapping_objects_results_in_the_expected_state) {
 }
 
 BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
-    dogen::coding::meta_model::mapping::source_generator g;
+    dogen::coding::meta_model::mapping::extensible_mappable_generator g;
     const auto a(g());
     std::stringstream s;
     s << a;

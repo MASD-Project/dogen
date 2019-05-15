@@ -19,8 +19,9 @@
  *
  */
 #include <sstream>
-#include "dogen.coding/test_data/meta_model/mapping/source_td.hpp"
+#include "dogen.coding/test_data/meta_model/mapping/fixed_mappable_td.hpp"
 #include "dogen.coding/test_data/meta_model/mapping/element_repository_td.hpp"
+#include "dogen.coding/test_data/meta_model/mapping/extensible_mappable_td.hpp"
 
 namespace {
 
@@ -30,22 +31,42 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::coding::meta_model::mapping::source*
-create_dogen_coding_meta_model_mapping_source_ptr(const unsigned int position) {
-    return dogen::coding::meta_model::mapping::source_generator::create_ptr(position);
+dogen::coding::meta_model::mapping::extensible_mappable*
+create_dogen_coding_meta_model_mapping_extensible_mappable_ptr(const unsigned int position) {
+    return dogen::coding::meta_model::mapping::extensible_mappable_generator::create_ptr(position);
 }
 
-boost::shared_ptr<dogen::coding::meta_model::mapping::source>
-create_boost_shared_ptr_dogen_coding_meta_model_mapping_source(unsigned int position) {
-    boost::shared_ptr<dogen::coding::meta_model::mapping::source> r(
-        create_dogen_coding_meta_model_mapping_source_ptr(position));
+boost::shared_ptr<dogen::coding::meta_model::mapping::extensible_mappable>
+create_boost_shared_ptr_dogen_coding_meta_model_mapping_extensible_mappable(unsigned int position) {
+    boost::shared_ptr<dogen::coding::meta_model::mapping::extensible_mappable> r(
+        create_dogen_coding_meta_model_mapping_extensible_mappable_ptr(position));
     return r;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::source> > create_std_unordered_map_std_string_boost_shared_ptr_dogen_coding_meta_model_mapping_source(unsigned int position) {
-    std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::source> > r;
+std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::extensible_mappable> > create_std_unordered_map_std_string_boost_shared_ptr_dogen_coding_meta_model_mapping_extensible_mappable(unsigned int position) {
+    std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::extensible_mappable> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_boost_shared_ptr_dogen_coding_meta_model_mapping_source(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_boost_shared_ptr_dogen_coding_meta_model_mapping_extensible_mappable(position + i)));
+    }
+    return r;
+}
+
+dogen::coding::meta_model::mapping::fixed_mappable*
+create_dogen_coding_meta_model_mapping_fixed_mappable_ptr(const unsigned int position) {
+    return dogen::coding::meta_model::mapping::fixed_mappable_generator::create_ptr(position);
+}
+
+boost::shared_ptr<dogen::coding::meta_model::mapping::fixed_mappable>
+create_boost_shared_ptr_dogen_coding_meta_model_mapping_fixed_mappable(unsigned int position) {
+    boost::shared_ptr<dogen::coding::meta_model::mapping::fixed_mappable> r(
+        create_dogen_coding_meta_model_mapping_fixed_mappable_ptr(position));
+    return r;
+}
+
+std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::fixed_mappable> > create_std_unordered_map_std_string_boost_shared_ptr_dogen_coding_meta_model_mapping_fixed_mappable(unsigned int position) {
+    std::unordered_map<std::string, boost::shared_ptr<dogen::coding::meta_model::mapping::fixed_mappable> > r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_boost_shared_ptr_dogen_coding_meta_model_mapping_fixed_mappable(position + i)));
     }
     return r;
 }
@@ -58,7 +79,8 @@ element_repository_generator::element_repository_generator() : position_(0) { }
 
 void element_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.sources(create_std_unordered_map_std_string_boost_shared_ptr_dogen_coding_meta_model_mapping_source(position + 0));
+    v.extensible_mappables(create_std_unordered_map_std_string_boost_shared_ptr_dogen_coding_meta_model_mapping_extensible_mappable(position + 0));
+    v.fixed_mappables(create_std_unordered_map_std_string_boost_shared_ptr_dogen_coding_meta_model_mapping_fixed_mappable(position + 1));
 }
 
 element_repository_generator::result_type

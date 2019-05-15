@@ -482,11 +482,23 @@ adapter::to_variability_feature_template_initializer(
     return r;
 }
 
-boost::shared_ptr<coding::meta_model::mapping::source>
-adapter::to_mapping_source(const coding::meta_model::location& l,
+
+boost::shared_ptr<coding::meta_model::mapping::fixed_mappable>
+adapter::to_fixed_mappable(const coding::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
-    auto r(boost::make_shared<coding::meta_model::mapping::source>());
+    using coding::meta_model::mapping::fixed_mappable;
+    auto r(boost::make_shared<fixed_mappable>());
+    populate_element(l, scr, ie, *r);
+    return r;
+}
+
+boost::shared_ptr<coding::meta_model::mapping::extensible_mappable>
+adapter::to_extensible_mappable(const coding::meta_model::location& l,
+    const stereotypes_conversion_result& scr,
+    const injection::meta_model::element& ie) const {
+    using coding::meta_model::mapping::extensible_mappable;
+    auto r(boost::make_shared<extensible_mappable>());
     populate_element(l, scr, ie, *r);
     return r;
 }
