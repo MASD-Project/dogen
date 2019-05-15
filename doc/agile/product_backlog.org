@@ -9502,9 +9502,9 @@ to adopt something similar for C++.
 
 *** Use clang format in extraction                                    :story:
 
-We need to indent the output coming out of knit. At present our stitch
-templates are super-complex purely because we are trying to get the
-indentation right. In most cases we don't. We need to:
+We need to indent the output coming out of extraction. At present our
+stitch templates are super-complex purely because we are trying to get
+the indentation right. In most cases we don't. We need to:
 
 - remove indent filter and any other indentation "helpers"
 - update all templates to output everything as simply as possible, in
@@ -9513,6 +9513,16 @@ indentation right. In most cases we don't. We need to:
 - plug in clang format at the end of the knit pipeline, using either a
   default set of options or a user supplied set of options (via a
   command line parameter).
+
+Notes:
+
+- integrating with clang-format in an efficient way is a bit
+  tricky. We don't want to have to write each file and then reformat
+  it just to find out if there have been any changes. The alternative
+  is to apply clang format to the files in memory inside of
+  extraction. This is more efficient but will require a dependency on
+  [[https://clang.llvm.org/docs/LibFormat.html][libFormat]]. We can use [[https://github.com/llvm-mirror/clang/blob/master/tools/clang-format/ClangFormat.cpp][clang format's code]] to see how to use
+  libformat.
 
 Merged Stories:
 

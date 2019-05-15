@@ -12,17 +12,17 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-15 Wed 11:43]
+#+CAPTION: Clock summary at [2019-05-15 Wed 12:02]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *61:49* |       |       | 100.0 |
+| *Total time*                                               | *62:06* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 61:49   |       |       | 100.0 |
-| Active                                                     |         | 61:49 |       | 100.0 |
+| Stories                                                    | 62:06   |       |       | 100.0 |
+| Active                                                     |         | 62:06 |       | 100.0 |
 | Edit release notes for previous sprint                     |         |       |  2:41 |   4.3 |
 | Create a video demo for the previous sprint's features     |         |       |  2:11 |   3.5 |
-| Sprint and product backlog grooming                        |         |       |  1:42 |   2.8 |
+| Sprint and product backlog grooming                        |         |       |  1:53 |   3.0 |
 | Defining profiles directly on a target model does not work |         |       |  0:30 |   0.8 |
 | Inner modules need to be qualified                         |         |       |  0:22 |   0.6 |
 | Create namespaces for model elements                       |         |       |  8:59 |  14.5 |
@@ -30,12 +30,12 @@
 | Try to add relational tracing support                      |         |       |  2:51 |   4.6 |
 | Linux and OSX binaries are not stripped                    |         |       |  1:23 |   2.2 |
 | Fix issues with nightly build and CI                       |         |       |  0:05 |   0.1 |
-| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  11.7 |
-| Replace JSON based feature templates with generated code   |         |       | 16:15 |  26.3 |
+| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  11.6 |
+| Replace JSON based feature templates with generated code   |         |       | 16:15 |  26.2 |
 | Make a clear separation between dogen and masd             |         |       |  5:17 |   8.5 |
 | Add a method in enumeration that converts it from strings  |         |       |  7:49 |  12.6 |
 | Update the MASD UML profile to reflect the latest changes  |         |       |  0:05 |   0.1 |
-| Mappings as meta-model elements                            |         |       |  2:30 |   4.0 |
+| Mappings as meta-model elements                            |         |       |  2:36 |   4.2 |
 | Emacs maintenance and exploration work                     |         |       |  0:23 |   0.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -175,6 +175,7 @@ Time spent creating the demo.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-05-15 Wed 11:51]--[2019-05-15 Wed 12:02] =>  0:11
     CLOCK: [2019-05-15 Wed 10:56]--[2019-05-15 Wed 11:07] =>  0:11
     CLOCK: [2019-05-15 Wed 08:21]--[2019-05-15 Wed 08:26] =>  0:05
     CLOCK: [2019-05-13 Mon 18:31]--[2019-05-13 Mon 18:47] =>  0:16
@@ -653,6 +654,7 @@ down time waiting for builds to sync it.
 
 *** STARTED Mappings as meta-model elements                           :story:
     :LOGBOOK:
+    CLOCK: [2019-05-15 Wed 11:44]--[2019-05-15 Wed 11:50] =>  0:06
     CLOCK: [2019-05-15 Wed 11:35]--[2019-05-15 Wed 11:43] =>  0:08
     CLOCK: [2019-05-15 Wed 11:27]--[2019-05-15 Wed 11:34] =>  0:07
     CLOCK: [2019-05-15 Wed 11:07]--[2019-05-15 Wed 11:26] =>  0:19
@@ -741,6 +743,35 @@ chooses the mapping set to use.
 In keeping with the idea that profiles are model-level concepts,
 mappings should be too. We should be able to import mappings in a UML
 diagram and override them or define new ones too.
+
+*** Remove empty types in injection.json models                       :story:
+
+At present we are adding type to the converted model, even when its
+empty. For cases such as enumerations this is just confusing:
+
+:     {
+:       "name": "meta_model::static_stereotypes",
+:       "documentation": "Lists all stereotypes defined in the masd UML profile.\n",
+:       "stereotypes": [
+:         "masd::enumeration"
+:       ],
+:       "fallback_element_type": "masd::object",
+:       "attributes": [
+:         {
+:           "name": "object",
+:           "type": ""
+:         },
+:         {
+:           "name": "object_template",
+:           "type": ""
+:         },
+:         {
+:           "name": "exception",
+:           "type": ""
+:         },
+
+It would be much easier to read this if we ignored empty types. We
+need to check that the hydrator is not expecting this field.
 
 *** Code-generate all transform contexts                              :story:
 
