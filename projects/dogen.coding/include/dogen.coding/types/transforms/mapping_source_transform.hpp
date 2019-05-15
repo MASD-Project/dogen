@@ -25,24 +25,39 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.variability/types/meta_model/feature.hpp"
+#include "dogen.variability/types/meta_model/configuration.hpp"
+#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/meta_model/template_kind.hpp"
+#include "dogen.coding/types/meta_model/model.hpp"
+#include "dogen.coding/types/transforms/context_fwd.hpp"
+#include "dogen.coding/types/meta_model/mapping/action.hpp"
+#include "dogen.coding/types/meta_model/variability/feature_bundle.hpp"
 
 namespace dogen::coding::transforms {
 
 class mapping_source_transform final {
-public:
-    mapping_source_transform() = default;
-    mapping_source_transform(const mapping_source_transform&) = default;
-    mapping_source_transform(mapping_source_transform&&) = default;
-    ~mapping_source_transform() = default;
-    mapping_source_transform& operator=(const mapping_source_transform&) = default;
+private:
+    struct feature_group {
+        variability::meta_model::feature source;
+        variability::meta_model::feature destination;
+        variability::meta_model::feature action;
+    };
+
+    static feature_group make_feature_group(
+        const variability::meta_model::feature_model& fm);
+
+    static std::string make_source(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+    static std::string make_destination(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+    static meta_model::mapping::action make_action(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
 
 public:
-    bool operator==(const mapping_source_transform& rhs) const;
-    bool operator!=(const mapping_source_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }

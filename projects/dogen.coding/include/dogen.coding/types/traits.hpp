@@ -98,14 +98,20 @@ struct traits {
     };
 
     struct variability {
-        static std::string  binding_point();
-        static std::string  labels();
-        static std::string  archetype_location_kernel();
-        static std::string  archetype_location_backend();
-        static std::string  archetype_location_facet();
-        static std::string  archetype_location_archetype();
-        static std::string  template_kind();
-        static std::string  untyped_value();
+        static std::string binding_point();
+        static std::string labels();
+        static std::string archetype_location_kernel();
+        static std::string archetype_location_backend();
+        static std::string archetype_location_facet();
+        static std::string archetype_location_archetype();
+        static std::string template_kind();
+        static std::string untyped_value();
+    };
+
+    struct mapping {
+        static std::string source();
+        static std::string destination();
+        static std::string action();
     };
 };
 

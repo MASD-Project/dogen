@@ -18,12 +18,79 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
+#include "dogen.coding/types/traits.hpp"
+#include "dogen.coding/io/meta_model/model_io.hpp"
+#include "dogen.coding/types/transforms/context.hpp"
+#include "dogen.coding/lexical_cast/meta_model/mapping/action_lc.hpp"
 #include "dogen.coding/types/transforms/mapping_source_transform.hpp"
+
+namespace {
+
+const std::string
+transform_id("coding.transforms.mapping_source_transform");
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+const std::string empty;
+
+}
 
 namespace dogen::coding::transforms {
 
-bool mapping_source_transform::operator==(const mapping_source_transform& /*rhs*/) const {
-    return true;
+mapping_source_transform::feature_group
+mapping_source_transform::make_feature_group(
+    const variability::meta_model::feature_model& fm) {
+    const variability::helpers::feature_selector s(fm);
+
+    feature_group r;
+    r.source = s.get_by_name(traits::mapping::source());
+    r.destination  = s.get_by_name(traits::mapping::destination());
+    r.action = s.get_by_name(traits::mapping::action());
+
+    return r;
+}
+
+std::string mapping_source_transform::make_source(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) {
+    const variability::helpers::configuration_selector s(cfg);
+    const auto r(s.get_text_content(fg.source));
+    BOOST_LOG_SEV(lg, trace) << "Read source: " << r;
+    return r;
+}
+
+std::string mapping_source_transform::make_destination(
+    const feature_group &fg,
+    const variability::meta_model::configuration &cfg) {
+    const variability::helpers::configuration_selector s(cfg);
+    const auto r(s.get_text_content(fg.destination));
+    BOOST_LOG_SEV(lg, trace) << "Read destination: " << r;
+    return r;
+}
+
+meta_model::mapping::action
+mapping_source_transform::make_action(const feature_group &fg,
+    const variability::meta_model::configuration &cfg) {
+    const variability::helpers::configuration_selector s(cfg);
+    const auto str(s.get_text_content(fg.action));
+    BOOST_LOG_SEV(lg, trace) << "Read action: " << str;
+
+    using meta_model::mapping::action;
+    const auto r(boost::lexical_cast<action>(str));
+    return r;
+}
+
+void mapping_source_transform::apply(const context& ctx, meta_model::model& m) {
+    tracing::scoped_transform_tracer stp(lg,
+        "mapping source transform", transform_id,
+        m.name().qualified().dot(), *ctx.tracer(), m);
+
+
+    stp.end_transform(m);
 }
 
 }

@@ -21,7 +21,6 @@
 #ifndef DOGEN_CODING_TYPES_TRANSFORMS_VARIABILITY_FEATURE_TEMPLATE_GROUP_TRANSFORM_HPP
 #define DOGEN_CODING_TYPES_TRANSFORMS_VARIABILITY_FEATURE_TEMPLATE_GROUP_TRANSFORM_HPP
 
-#include "dogen.coding/types/meta_model/variability/feature_bundle.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -32,6 +31,7 @@
 #include "dogen.variability/types/meta_model/template_kind.hpp"
 #include "dogen.coding/types/meta_model/model.hpp"
 #include "dogen.coding/types/transforms/context_fwd.hpp"
+#include "dogen.coding/types/meta_model/variability/feature_bundle.hpp"
 
 namespace dogen::coding::transforms {
 
