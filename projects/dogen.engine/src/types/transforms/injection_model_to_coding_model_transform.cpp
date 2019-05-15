@@ -254,6 +254,10 @@ process_element(const helpers::adapter& ad,
         m.variability_elements().feature_template_initializer(
             ad.to_variability_feature_template_initializer(l, scr, e));
         break;
+    case static_stereotypes::mapping_source:
+        insert(ad.to_mapping_source(l, scr, e),
+            m.mapping_elements().sources());
+        break;
     default: {
         const auto s(boost::lexical_cast<std::string>(et));
         BOOST_LOG_SEV(lg, error) << invalid_element_type << s;

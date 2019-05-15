@@ -51,6 +51,7 @@
 #include "dogen.coding/types/meta_model/variability/profile_template.hpp"
 #include "dogen.coding/types/meta_model/variability/feature_bundle.hpp"
 #include "dogen.coding/types/meta_model/variability/feature_template_initializer.hpp"
+#include "dogen.coding/types/meta_model/mapping/source.hpp"
 #include "dogen.engine/types/helpers/stereotypes_conversion_result.hpp"
 
 namespace dogen::engine::helpers {
@@ -231,7 +232,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::to_variability_profile_template to a variability feature
+     * masd::to_variability::profile_template to a variability feature
      * template group.
      */
     boost::shared_ptr<coding::meta_model::variability::profile_template>
@@ -241,7 +242,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::variability_feature_bundle to a coding
+     * masd::variability::feature_bundle to a coding
      * variability feature template group
      */
     boost::shared_ptr<coding::meta_model::variability::feature_bundle>
@@ -251,7 +252,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::variability_feature_template_initializer to a coding
+     * masd::variability::feature_template_initializer to a coding
      * variability feature template group registrar.
      */
     boost::shared_ptr<
@@ -259,6 +260,15 @@ public:
         >
     to_variability_feature_template_initializer(
         const coding::meta_model::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::meta_model::element& ie) const;
+
+    /**
+     * @brief Converts an injection element with a stereotype of
+     * masd::mapping::source to a mapping source.
+     */
+    boost::shared_ptr<coding::meta_model::mapping::source>
+    to_mapping_source(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 };
