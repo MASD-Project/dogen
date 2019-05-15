@@ -26,6 +26,7 @@
 #include "dogen.coding/io/meta_model/structural/module_io.hpp"
 #include "dogen.coding/io/meta_model/orm/model_properties_io.hpp"
 #include "dogen.coding/io/meta_model/extraction_properties_io.hpp"
+#include "dogen.coding/io/meta_model/mapping/element_repository_io.hpp"
 #include "dogen.coding/io/meta_model/decoration/element_repository_io.hpp"
 #include "dogen.coding/io/meta_model/structural/element_repository_io.hpp"
 #include "dogen.coding/io/meta_model/variability/element_repository_io.hpp"
@@ -124,7 +125,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"extraction_properties\": " << v.extraction_properties() << ", "
       << "\"structural_elements\": " << v.structural_elements() << ", "
       << "\"decoration_elements\": " << v.decoration_elements() << ", "
-      << "\"variability_elements\": " << v.variability_elements()
+      << "\"variability_elements\": " << v.variability_elements() << ", "
+      << "\"mapping_elements\": " << v.mapping_elements()
       << " }";
     return(s);
 }

@@ -454,6 +454,11 @@
           "name": "variability_elements",
           "type": "variability::element_repository",
           "documentation": "All variability elements in this model.\n"
+        },
+        {
+          "name": "mapping_elements",
+          "type": "mapping::element_repository",
+          "documentation": "Model elements related to element mapping.\n"
         }
       ]
     },
@@ -2924,6 +2929,80 @@
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "property"
           }
+        }
+      ]
+    },
+    {
+      "name": "meta_model::mapping",
+      "documentation": "Meta-model elements related to mapping domains.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "meta_model::mapping::source",
+      "documentation": "Represents a source of mapping.\n",
+      "stereotypes": [
+        "coding::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "destinations",
+          "type": "std::list<destination>",
+          "documentation": "All the destinations that this source has been mapped to.\n"
+        },
+        {
+          "name": "names_by_technical_space",
+          "type": "std::unordered_map<technical_space, std::list<name>>",
+          "documentation": "Destinations after they have been resolved into names, and mapped to a technical\nspace.\n"
+        },
+        {
+          "name": "name_trees_by_technical_space",
+          "type": "std::unordered_map<technical_space, std::list<name_tree>>",
+          "documentation": "Destinations after they have been resolved into name trees, and mapped to a\ntechnical space.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::mapping::element_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "sources",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<source>>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::mapping::destination",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "element_id",
+          "type": "std::string"
+        },
+        {
+          "name": "action",
+          "type": "action"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::mapping::action",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "translate",
+          "type": ""
+        },
+        {
+          "name": "erase",
+          "type": ""
         }
       ]
     }

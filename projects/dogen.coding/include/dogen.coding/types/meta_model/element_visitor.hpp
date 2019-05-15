@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include "dogen.coding/types/meta_model/mapping/source_fwd.hpp"
 #include "dogen.coding/types/meta_model/structural/module_fwd.hpp"
 #include "dogen.coding/types/meta_model/structural/object_fwd.hpp"
 #include "dogen.coding/types/meta_model/decoration/licence_fwd.hpp"
@@ -89,6 +90,16 @@ public:
     virtual void visit(const dogen::coding::meta_model::decoration::modeline_group&) { }
     virtual void visit(dogen::coding::meta_model::decoration::modeline_group&) const { }
     virtual void visit(dogen::coding::meta_model::decoration::modeline_group&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::coding::meta_model::mapping::source
+     */
+    /**@{*/
+    virtual void visit(const dogen::coding::meta_model::mapping::source&) const { }
+    virtual void visit(const dogen::coding::meta_model::mapping::source&) { }
+    virtual void visit(dogen::coding::meta_model::mapping::source&) const { }
+    virtual void visit(dogen::coding::meta_model::mapping::source&) { }
     /**@}*/
 
     /**

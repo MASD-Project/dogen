@@ -38,6 +38,7 @@
 #include "dogen.coding/types/meta_model/orm/model_properties.hpp"
 #include "dogen.coding/types/meta_model/extraction_properties.hpp"
 #include "dogen.coding/types/meta_model/structural/module_fwd.hpp"
+#include "dogen.coding/types/meta_model/mapping/element_repository.hpp"
 #include "dogen.coding/types/meta_model/decoration/element_repository.hpp"
 #include "dogen.coding/types/meta_model/structural/element_repository.hpp"
 #include "dogen.coding/types/meta_model/variability/element_repository.hpp"
@@ -72,7 +73,8 @@ public:
         const dogen::coding::meta_model::extraction_properties& extraction_properties,
         const dogen::coding::meta_model::structural::element_repository& structural_elements,
         const dogen::coding::meta_model::decoration::element_repository& decoration_elements,
-        const dogen::coding::meta_model::variability::element_repository& variability_elements);
+        const dogen::coding::meta_model::variability::element_repository& variability_elements,
+        const dogen::coding::meta_model::mapping::element_repository& mapping_elements);
 
 public:
     /**
@@ -189,6 +191,16 @@ public:
     void variability_elements(const dogen::coding::meta_model::variability::element_repository&& v);
     /**@}*/
 
+    /**
+     * @brief Model elements related to element mapping.
+     */
+    /**@{*/
+    const dogen::coding::meta_model::mapping::element_repository& mapping_elements() const;
+    dogen::coding::meta_model::mapping::element_repository& mapping_elements();
+    void mapping_elements(const dogen::coding::meta_model::mapping::element_repository& v);
+    void mapping_elements(const dogen::coding::meta_model::mapping::element_repository&& v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -213,6 +225,7 @@ private:
     dogen::coding::meta_model::structural::element_repository structural_elements_;
     dogen::coding::meta_model::decoration::element_repository decoration_elements_;
     dogen::coding::meta_model::variability::element_repository variability_elements_;
+    dogen::coding::meta_model::mapping::element_repository mapping_elements_;
 };
 
 }
