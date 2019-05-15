@@ -126,12 +126,12 @@ a.stream() << std::endl;
         }
 
         for (const auto& enu : enm.enumerators()) {
-            const auto enu_sn(enu.name().simple());
-            std::string enu_qn;
-            if (a.is_cpp_standard_98())
-                enu_qn = a.get_qualified_namespace(enm.name()) + "::" + enu_sn;
-            else
-                enu_qn = sn + "::" + enu_sn;
+           const auto enu_sn(enu.name().simple());
+           std::string enu_qn;
+           if (a.is_cpp_standard_98())
+               enu_qn = a.get_qualified_namespace(enm.name()) + "::" + enu_sn;
+           else
+               enu_qn = sn + "::" + enu_sn;
 a.stream() << "    if (s == \"" << enu_sn << "\" || s == \"" << sn + "::" + enu_sn << "\")" << std::endl;
 a.stream() << "        return " << enu_qn << ";" << std::endl;
         }
