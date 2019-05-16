@@ -17,11 +17,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-import re
-
-pattern = re.compile("^([A-Z][0-9]+)+$")
-pattern.match(string)
-
 for layer in dia.active_display().diagram.data.layers:
     for object in layer.objects:
         #
@@ -119,7 +114,7 @@ for layer in dia.active_display().diagram.data.layers:
         #
         elif "masd::mapping::fixed_mappable" in stereotype:
             object.properties["fill_colour"] = "#DEE463"
-        elif "masd::mapping::source" in stereotype:
+        elif "masd::mapping::extensible_mappable" in stereotype:
             object.properties["fill_colour"] = "#F9FF7C"
 
         #
