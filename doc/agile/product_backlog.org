@@ -56,6 +56,13 @@ Other problems:
   the destination has already been mapped. Both of these limitations
   would be addressed if we made the destination =text_collection=
   rather than just =text=. In theory it should just work.
+- we can only have one mapping set. Originally we had envisioned that
+  users could supply multiple mapping sets, mapping different types as
+  required to LAM types. However, the new setup does not allow for
+  this. It could be possible via some weird and wonderful
+  parameterisation of mapping targets, but we are yet to have a use
+  case for such a complex scenario so its probably not worth worrying
+  about it.
 
 *** Improve resolution errors when user fails to reference model      :story:
 
