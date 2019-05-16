@@ -93,6 +93,8 @@ merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
     copy(src.decoration_elements().modelines(), dst.decoration_elements().modelines());
     copy(src.decoration_elements().generation_markers(), dst.decoration_elements().generation_markers());
     copy(src.decoration_elements().licences(), dst.decoration_elements().licences());
+    copy(src.mapping_elements().fixed_mappables(), dst.mapping_elements().fixed_mappables());
+    copy(src.mapping_elements().extensible_mappables(), dst.mapping_elements().extensible_mappables());
 
     /*
      * Update the references of the merged model.
