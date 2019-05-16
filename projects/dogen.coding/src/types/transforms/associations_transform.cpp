@@ -86,8 +86,9 @@ walk_name_tree(const meta_model::model& m, meta_model::structural::object& o,
      * properties to set (see above).
      */
     bool is_first(true);
-    const auto i(m.structural_elements().objects().find(n.qualified().dot()));
-    const auto is_associative_container(i != m.structural_elements().objects().end() &&
+    const auto& objs(m.structural_elements().objects());
+    const auto i(objs.find(n.qualified().dot()));
+    const auto is_associative_container(i != objs.end() &&
         i->second->is_associative_container());
 
     for (const auto c : nt.children()) {
@@ -132,9 +133,10 @@ apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "associations transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    BOOST_LOG_SEV(lg, debug) << "Total objects: " << m.structural_elements().objects().size();
+    auto& objs(m.structural_elements().objects());
+    BOOST_LOG_SEV(lg, debug) << "Total objects: " << objs.size();
 
-    for (auto& pair : m.structural_elements().objects())
+    for (auto& pair : objs)
         process_object(m, *pair.second);
 
     stp.end_transform(m);

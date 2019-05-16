@@ -265,18 +265,13 @@ std::string traits::variability::untyped_value() {
     return r;
 }
 
-std::string traits::mapping::source() {
-    static std::string r("masd.mapping.source");
+std::string traits::mapping::target() {
+    static std::string r("masd.mapping.target");
     return r;
 }
 
 std::string traits::mapping::destination() {
     static std::string r("masd.mapping.destination");
-    return r;
-}
-
-std::string traits::mapping::action() {
-    static std::string r("masd.mapping.action");
     return r;
 }
 

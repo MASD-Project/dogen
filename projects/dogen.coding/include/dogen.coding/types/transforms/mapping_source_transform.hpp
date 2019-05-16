@@ -28,7 +28,6 @@
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.variability/types/meta_model/template_kind.hpp"
 #include "dogen.coding/types/meta_model/model.hpp"
 #include "dogen.coding/types/transforms/context_fwd.hpp"
 #include "dogen.coding/types/meta_model/variability/feature_bundle.hpp"
@@ -40,7 +39,6 @@ private:
     struct feature_group {
         variability::meta_model::feature source;
         variability::meta_model::feature destination;
-        variability::meta_model::feature action;
     };
 
     static feature_group make_feature_group(

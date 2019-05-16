@@ -47,9 +47,8 @@ mapping_source_transform::make_feature_group(
     const variability::helpers::feature_selector s(fm);
 
     feature_group r;
-    r.source = s.get_by_name(traits::mapping::source());
+    // r.source = s.get_by_name(traits::mapping::source());
     r.destination  = s.get_by_name(traits::mapping::destination());
-    r.action = s.get_by_name(traits::mapping::action());
 
     return r;
 }

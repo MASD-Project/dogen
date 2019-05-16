@@ -109,9 +109,8 @@ struct traits {
     };
 
     struct mapping {
-        static std::string source();
+        static std::string target();
         static std::string destination();
-        static std::string action();
     };
 };
 
