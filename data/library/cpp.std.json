@@ -157,9 +157,9 @@
     {
       "name": "list",
       "tagged_values": {
+        "masd.mapping.target": "masd.lam.container.linked_list",
         "masd.generation.cpp.helper.family": "SequenceContainer",
         "masd.type_parameters.count": 1,
-        "masd.mapping.target": "masd.lam.container.linked_list",
         "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<list>",
         "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/list.hpp>"
       }
