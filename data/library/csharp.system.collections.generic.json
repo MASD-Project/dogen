@@ -42,6 +42,7 @@
         "ICollection"
       ],
       "tagged_values": {
+        "masd.mapping.target": "masd.lam.container.linked_list",
         "masd.type_parameters.count": 1,
         "masd.generation.csharp.aspect.requires_static_reference_equals": true,
         "masd.generation.csharp.helper.family": "Enumerable"

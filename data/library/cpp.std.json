@@ -14,6 +14,7 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
+        "masd.mapping.target": "masd.lam.numeric.integer8",
         "masd.generation.cpp.helper.family": "Character",
         "masd.generation.cpp.streaming.requires_quoting": true,
         "masd.generation.cpp.aspect.requires_manual_default_constructor": true,
@@ -27,6 +28,7 @@
       ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
+        "masd.mapping.target": "masd.lam.numeric.integer16",
         "masd.generation.cpp.helper.family": "Number",
         "masd.generation.cpp.aspect.requires_manual_default_constructor": true,
         "masd.generation.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
@@ -39,6 +41,7 @@
       ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
+        "masd.mapping.target": "masd.lam.numeric.integer32",
         "masd.generation.cpp.helper.family": "Number",
         "masd.generation.cpp.aspect.requires_manual_default_constructor": true,
         "masd.generation.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
@@ -51,6 +54,7 @@
       ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
+        "masd.mapping.target": "masd.lam.numeric.integer64",
         "masd.generation.cpp.helper.family": "Number",
         "masd.generation.cpp.aspect.requires_manual_default_constructor": true,
         "masd.generation.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
@@ -109,6 +113,7 @@
       "name": "string",
       "can_be_primitive_underlier": true,
       "tagged_values": {
+        "masd.mapping.target": "masd.lam.core.text.string",
         "masd.generation.cpp.helper.family": "String",
         "masd.generation.cpp.streaming.remove_unprintable_characters": true,
         "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<string>",
@@ -124,6 +129,7 @@
     {
       "name": "vector",
       "tagged_values": {
+        "masd.mapping.target": "masd.lam.container.dynamic_array",
         "masd.generation.cpp.helper.family": "SequenceContainer",
         "masd.type_parameters.count": 1,
         "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<vector>",
@@ -142,6 +148,7 @@
     {
       "name": "array",
       "tagged_values": {
+        "masd.mapping.target": "masd.lam.container.static_array",
         "masd.generation.cpp.helper.family": "SequenceContainer",
         "masd.type_parameters.count": 1,
         "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<array>"
@@ -152,6 +159,7 @@
       "tagged_values": {
         "masd.generation.cpp.helper.family": "SequenceContainer",
         "masd.type_parameters.count": 1,
+        "masd.mapping.target": "masd.lam.container.linked_list",
         "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<list>",
         "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/list.hpp>"
       }
@@ -168,6 +176,7 @@
       "name": "set",
       "is_associative_container": true,
       "tagged_values": {
+        "masd.mapping.target": "masd.lam.container.ordered_set",
         "masd.generation.cpp.helper.family": "AssociativeContainer",
         "masd.type_parameters.count": 1,
         "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<set>",
@@ -188,6 +197,7 @@
       "name": "unordered_set",
       "is_associative_container": true,
       "tagged_values": {
+        "masd.mapping.target": "masd.lam.container.unordered_set",
         "masd.generation.cpp.helper.family": "AssociativeContainer",
         "masd.type_parameters.count": 1,
         "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<unordered_set>",
@@ -198,6 +208,7 @@
       "name": "map",
       "is_associative_container": true,
       "tagged_values": {
+        "masd.mapping.target": "masd.lam.container.ordered_dictionary",
         "masd.generation.cpp.helper.family": "AssociativeContainer",
         "masd.type_parameters.count": 2,
         "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<map>",
@@ -218,6 +229,7 @@
       "name": "unordered_map",
       "is_associative_container": true,
       "tagged_values": {
+        "masd.mapping.target": "masd.lam.container.unordered_dictionary",
         "masd.generation.cpp.helper.family": "AssociativeContainer",
         "masd.type_parameters.count": 2,
         "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<unordered_map>",

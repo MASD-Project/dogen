@@ -9,6 +9,7 @@
     {
       "name": "shared_ptr",
       "tagged_values": {
+        "masd.mapping.target": "masd.lam.core.pointer",
         "masd.generation.cpp.helper.family": "SmartPointer",
         "masd.type_parameters.count": 1,
         "masd.type_parameters.always_in_heap": true,
@@ -108,6 +109,7 @@
       "name": "gregorian::date",
       "can_be_primitive_underlier": true,
       "tagged_values": {
+        "masd.mapping.target": "masd.lam.chrono.date",
         "masd.generation.cpp.helper.family": "BoostDate",
         "masd.generation.cpp.streaming.requires_quoting": true,
         "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<boost/date_time/gregorian/gregorian_types.hpp>",
@@ -124,6 +126,7 @@
       "name": "posix_time::ptime",
       "can_be_primitive_underlier": true,
       "tagged_values": {
+        "masd.mapping.target": "masd.lam.chrono.date_time",
         "masd.generation.cpp.helper.family": "BoostPTime",
         "masd.generation.cpp.streaming.requires_quoting": true,
         "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time_types.hpp>",
@@ -140,6 +143,7 @@
       "name": "posix_time::time_duration",
       "can_be_primitive_underlier": true,
       "tagged_values": {
+        "masd.mapping.target": "masd.lam.chrono.time",
         "masd.generation.cpp.helper.family": "BoostTimeDuration",
         "masd.generation.cpp.streaming.requires_quoting": true,
         "masd.generation.cpp.aspect.requires_manual_move_constructor": true,

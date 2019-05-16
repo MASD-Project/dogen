@@ -15,6 +15,7 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
+        "masd.mapping.target": "masd.lam.numeric.integer16",
         "masd.generation.csharp.aspect.requires_static_reference_equals": false,
         "masd.generation.csharp.assistant.requires_assistance": true,
         "masd.generation.csharp.assistant.method_postfix": "Short"
@@ -29,6 +30,7 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
+        "masd.mapping.target": "masd.lam.numeric.integer32",
         "masd.generation.csharp.aspect.requires_static_reference_equals": false,
         "masd.generation.csharp.assistant.requires_assistance": true,
         "masd.generation.csharp.assistant.method_postfix": "Int"
@@ -43,6 +45,7 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
+        "masd.mapping.target": "masd.lam.numeric.integer64",
         "masd.generation.csharp.aspect.requires_static_reference_equals": false,
         "masd.generation.csharp.assistant.requires_assistance": true,
         "masd.generation.csharp.assistant.method_postfix": "Long"
