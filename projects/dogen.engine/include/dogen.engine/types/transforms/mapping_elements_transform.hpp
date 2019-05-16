@@ -18,12 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.engine/types/transforms/mapping_source_transform.hpp"
+#ifndef DOGEN_ENGINE_TYPES_TRANSFORMS_MAPPING_ELEMENTS_TRANSFORM_HPP
+#define DOGEN_ENGINE_TYPES_TRANSFORMS_MAPPING_ELEMENTS_TRANSFORM_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <algorithm>
 
 namespace dogen::engine::transforms {
 
-bool mapping_source_transform::operator==(const mapping_source_transform& /*rhs*/) const {
-    return true;
-}
+class mapping_elements_transform final {
+public:
+    mapping_elements_transform() = default;
+    mapping_elements_transform(const mapping_elements_transform&) = default;
+    mapping_elements_transform(mapping_elements_transform&&) = default;
+    ~mapping_elements_transform() = default;
+    mapping_elements_transform& operator=(const mapping_elements_transform&) = default;
+
+public:
+    bool operator==(const mapping_elements_transform& rhs) const;
+    bool operator!=(const mapping_elements_transform& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
 
 }
+
+#endif
