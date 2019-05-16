@@ -12,32 +12,32 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-16 Thu 14:06]
+#+CAPTION: Clock summary at [2019-05-16 Thu 17:00]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *68:06* |       |       | 100.0 |
+| *Total time*                                               | *70:26* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 68:06   |       |       | 100.0 |
-| Active                                                     |         | 68:06 |       | 100.0 |
-| Edit release notes for previous sprint                     |         |       |  2:41 |   3.9 |
-| Create a video demo for the previous sprint's features     |         |       |  2:11 |   3.2 |
-| Sprint and product backlog grooming                        |         |       |  2:24 |   3.5 |
+| Stories                                                    | 70:26   |       |       | 100.0 |
+| Active                                                     |         | 70:26 |       | 100.0 |
+| Edit release notes for previous sprint                     |         |       |  2:41 |   3.8 |
+| Create a video demo for the previous sprint's features     |         |       |  2:11 |   3.1 |
+| Sprint and product backlog grooming                        |         |       |  2:24 |   3.4 |
 | Defining profiles directly on a target model does not work |         |       |  0:30 |   0.7 |
 | Inner modules need to be qualified                         |         |       |  0:22 |   0.5 |
-| Create namespaces for model elements                       |         |       |  8:59 |  13.2 |
-| Leaves in internal modules are not captured correctly      |         |       |  1:33 |   2.3 |
-| Try to add relational tracing support                      |         |       |  2:51 |   4.2 |
+| Create namespaces for model elements                       |         |       |  8:59 |  12.8 |
+| Leaves in internal modules are not captured correctly      |         |       |  1:33 |   2.2 |
+| Try to add relational tracing support                      |         |       |  2:51 |   4.0 |
 | Linux and OSX binaries are not stripped                    |         |       |  1:23 |   2.0 |
 | Fix issues with nightly build and CI                       |         |       |  0:05 |   0.1 |
-| Emacs maintenance and exploration work                     |         |       |  0:23 |   0.6 |
-| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  10.6 |
-| Replace JSON based feature templates with generated code   |         |       | 16:15 |  23.9 |
-| Make a clear separation between dogen and masd             |         |       |  5:17 |   7.8 |
-| Add a method in enumeration that converts it from strings  |         |       |  7:49 |  11.5 |
-| Update palettes and colour script with new elements        |         |       |  1:09 |   1.7 |
+| Emacs maintenance and exploration work                     |         |       |  0:40 |   0.9 |
+| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  10.2 |
+| Replace JSON based feature templates with generated code   |         |       | 16:15 |  23.1 |
+| Make a clear separation between dogen and masd             |         |       |  5:17 |   7.5 |
+| Add a method in enumeration that converts it from strings  |         |       |  7:49 |  11.1 |
+| Update palettes and colour script with new elements        |         |       |  1:09 |   1.6 |
 | Update the MASD UML profile to reflect the latest changes  |         |       |  0:05 |   0.1 |
-| Mappings as meta-model elements                            |         |       |  6:56 |  10.2 |
+| Mappings as meta-model elements                            |         |       |  8:59 |  12.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -369,6 +369,7 @@ Time spent fixing build issues with either nightlies and/or CI.
 
 *** STARTED Emacs maintenance and exploration work                    :story:
     :LOGBOOK:
+    CLOCK: [2019-05-16 Thu 14:52]--[2019-05-16 Thu 15:09] =>  0:17
     CLOCK: [2019-05-15 Wed 09:42]--[2019-05-15 Wed 09:53] =>  0:11
     CLOCK: [2019-05-15 Wed 09:02]--[2019-05-15 Wed 09:14] =>  0:12
     :END:
@@ -378,6 +379,8 @@ etc.
 
 - add support for indent guides. [[https://github.com/DarthFennec/highlight-indent-guides][highlight-indent-guides]], [[https://stackoverflow.com/questions/1587972/how-to-display-indentation-guides-in-emacs/56144459#56144459][SO question]].
 - treemacs issues: when blank type g to refresh.
+- lsp seems to update with every character we type. It would be nice
+  to update on save only.
 
 *** COMPLETED Initial analysis to code generate feature infrastructure :story:
     CLOSED: [2019-05-10 Fri 11:19]
@@ -693,6 +696,8 @@ down time waiting for builds to sync it.
 
 *** STARTED Mappings as meta-model elements                           :story:
     :LOGBOOK:
+    CLOCK: [2019-05-16 Thu 15:10]--[2019-05-16 Thu 16:59] =>  1:49
+    CLOCK: [2019-05-16 Thu 14:37]--[2019-05-16 Thu 14:51] =>  0:14
     CLOCK: [2019-05-16 Thu 14:01]--[2019-05-16 Thu 14:06] =>  0:05
     CLOCK: [2019-05-16 Thu 13:07]--[2019-05-16 Thu 14:00] =>  0:53
     CLOCK: [2019-05-15 Wed 18:37]--[2019-05-15 Wed 18:45] =>  0:08

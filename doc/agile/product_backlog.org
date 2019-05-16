@@ -35,6 +35,34 @@ undeveloped are:
   again treat this as a native type. This is probably the cleanest
   solution.
 
+Other problems:
+
+- at present there is no way to tell if the mapping support is
+  complete or not. For example, we could have forgotten to add a
+  reference to a C++ model, which would cause the mappings to fail. We
+  have no way of knowing what reference is missing. However, we could
+  "grep" a library and determine all of the potential mappings and
+  then tell the user that it is missing a reference. This includes
+  models that are not referenced. In fact this is useful in general,
+  we could have a "light weight model" that just gets the IDs and
+  mappings of all injection models and is used on resolution failures
+  and mapping failures.
+- mapping only allows a single target per element, e.g. =std::string=
+  can only be mapped to a single LAM element. This has two
+  limitations: first, it is entirely possible we have a LAM type
+  mapped to more than one element (for example say we could have two
+  string-like types in LAM that are implemented by
+  =std::string=). Secondly, users cannot define their own mappings if
+  the destination has already been mapped. Both of these limitations
+  would be addressed if we made the destination =text_collection=
+  rather than just =text=. In theory it should just work.
+
+*** Improve resolution errors when user fails to reference model      :story:
+
+We could have a "light weight model" that just gets the IDs and
+mappings of all injection models that have not been referenced and
+uses it for resolution failures and mapping failures.
+
 *** Improve LAM test models                                           :story:
 
 At present LAM is very basic. We need to ensure that all features work
