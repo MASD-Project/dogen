@@ -12,30 +12,30 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-15 Wed 18:45]
+#+CAPTION: Clock summary at [2019-05-16 Thu 08:44]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *65:36* |       |       | 100.0 |
+| *Total time*                                               | *65:59* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 65:36   |       |       | 100.0 |
-| Active                                                     |         | 65:36 |       | 100.0 |
+| Stories                                                    | 65:59   |       |       | 100.0 |
+| Active                                                     |         | 65:59 |       | 100.0 |
 | Edit release notes for previous sprint                     |         |       |  2:41 |   4.1 |
 | Create a video demo for the previous sprint's features     |         |       |  2:11 |   3.3 |
-| Sprint and product backlog grooming                        |         |       |  2:01 |   3.1 |
+| Sprint and product backlog grooming                        |         |       |  2:24 |   3.6 |
 | Defining profiles directly on a target model does not work |         |       |  0:30 |   0.8 |
 | Inner modules need to be qualified                         |         |       |  0:22 |   0.6 |
-| Create namespaces for model elements                       |         |       |  8:59 |  13.7 |
-| Leaves in internal modules are not captured correctly      |         |       |  1:33 |   2.4 |
+| Create namespaces for model elements                       |         |       |  8:59 |  13.6 |
+| Leaves in internal modules are not captured correctly      |         |       |  1:33 |   2.3 |
 | Try to add relational tracing support                      |         |       |  2:51 |   4.3 |
 | Linux and OSX binaries are not stripped                    |         |       |  1:23 |   2.1 |
 | Fix issues with nightly build and CI                       |         |       |  0:05 |   0.1 |
-| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  11.0 |
-| Replace JSON based feature templates with generated code   |         |       | 16:15 |  24.8 |
-| Make a clear separation between dogen and masd             |         |       |  5:17 |   8.1 |
-| Add a method in enumeration that converts it from strings  |         |       |  7:49 |  11.9 |
+| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  10.9 |
+| Replace JSON based feature templates with generated code   |         |       | 16:15 |  24.6 |
+| Make a clear separation between dogen and masd             |         |       |  5:17 |   8.0 |
+| Add a method in enumeration that converts it from strings  |         |       |  7:49 |  11.8 |
 | Update the MASD UML profile to reflect the latest changes  |         |       |  0:05 |   0.1 |
-| Mappings as meta-model elements                            |         |       |  5:58 |   9.1 |
+| Mappings as meta-model elements                            |         |       |  5:58 |   9.0 |
 | Emacs maintenance and exploration work                     |         |       |  0:23 |   0.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -175,6 +175,8 @@ Time spent creating the demo.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-05-16 Thu 08:30]--[2019-05-16 Thu 08:44] =>  0:14
+    CLOCK: [2019-05-16 Thu 08:12]--[2019-05-16 Thu 08:21] =>  0:09
     CLOCK: [2019-05-15 Wed 18:28]--[2019-05-15 Wed 18:36] =>  0:08
     CLOCK: [2019-05-15 Wed 11:51]--[2019-05-15 Wed 12:02] =>  0:11
     CLOCK: [2019-05-15 Wed 10:56]--[2019-05-15 Wed 11:07] =>  0:11
@@ -772,6 +774,62 @@ chooses the mapping set to use.
 In keeping with the idea that profiles are model-level concepts,
 mappings should be too. We should be able to import mappings in a UML
 diagram and override them or define new ones too.
+
+*** Make wale templates meta-model elements
+
+- create a templating namespace in coding. Add a template to it.
+- create a formatter that writes templating elements into a
+  project-level =templates= directory. We need to always have
+  overwrite off for templates (e.g. it only makes sense for them to be
+  handcrafted).
+- references to wale templates now become just templates (in
+  preparation to changing it to a moustache like approach).
+- paths to wale templates are relative to the templates folder.
+
+*Move wale templates from the data directory*
+
+At present we have wale templates under the data directory. This is
+not the right location. These are part of a model just like stitch
+templates. There is one slight wrinkle though: if a user attempts to
+create a dogen formatter (say if plugins were supported), then we need
+access to the template from the debian package. So whilst they should
+live in the appropriate model (e.g. =generation.cpp=,
+=generation.csharp=), they also need to be packaged and shipped.
+
+Interestingly, so will all dogen models which are defining annotations
+and profiles. We need to rethink the data directory, separating system
+models from dogen models somehow. In effect, the data directory will
+be, in the future, the system models directory.
+
+So, in conclusion, two use cases for wale templates:
+
+- regular model defines a wale template and makes use of it. Template
+  should be with the model, just like stitch templates. However,
+  unlike stitch, there should be a directory for them.
+- user model wants to define a new formatter. It will make use of
+  dogen profiles and wale templates. These must be in the future data
+  directory somehow.
+
+Actually, the right thing to do is to make wale templates themselves
+model elements:
+
+- we may want to use a wale template in a different model. This is the
+  use case for when users want to create new formatters to add to an
+  existing backend.
+- we don't want to add additional regular expressions to ignore wale
+  templates; we've already seen how this is a bad idea (for example
+  with tests).
+- whilst adding templates to a model element is not ideal if the model
+  element is in dia or JSON, these are really limitations of the
+  injector format rather than of the idea itself. Ideally, we should
+  have an injector format that supports this use case (another use
+  case for developing a =org_uml= injector).
+
+Notes:
+
+- automatically ignore wale templates by looking at the input
+  meta-data.
+- make wale template input path relative to the output directory.
 
 *** Add aliases to enumeration string conversions                     :story:
 

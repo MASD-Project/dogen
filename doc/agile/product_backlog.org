@@ -386,51 +386,6 @@ At present we are setting up the extraction model name from the simple
 name of the model. It should really be the qualified name. Hopefully
 this will only affect tracing and diffing.
 
-*** Move wale templates from the data directory                       :story:
-
-At present we have wale templates under the data directory. This is
-not the right location. These are part of a model just like stitch
-templates. There is one slight wrinkle though: if a user attempts to
-create a dogen formatter (say if plugins were supported), then we need
-access to the template from the debian package. So whilst they should
-live in the appropriate model (e.g. =generation.cpp=,
-=generation.csharp=), they also need to be packaged and shipped.
-
-Interestingly, so will all dogen models which are defining annotations
-and profiles. We need to rethink the data directory, separating system
-models from dogen models somehow. In effect, the data directory will
-be, in the future, the system models directory.
-
-So, in conclusion, two use cases for wale templates:
-
-- regular model defines a wale template and makes use of it. Template
-  should be with the model, just like stitch templates. However,
-  unlike stitch, there should be a directory for them.
-- user model wants to define a new formatter. It will make use of
-  dogen profiles and wale templates. These must be in the future data
-  directory somehow.
-
-Actually, the right thing to do is to make wale templates themselves
-model elements:
-
-- we may want to use a wale template in a different model. This is the
-  use case for when users want to create new formatters to add to an
-  existing backend.
-- we don't want to add additional regular expressions to ignore wale
-  templates; we've already seen how this is a bad idea (for example
-  with tests).
-- whilst adding templates to a model element is not ideal if the model
-  element is in dia or JSON, these are really limitations of the
-  injector format rather than of the idea itself. Ideally, we should
-  have an injector format that supports this use case (another use
-  case for developing a =org_uml= injector).
-
-Notes:
-
-- automatically ignore wale templates by looking at the input
-  meta-data.
-- make wale template input path relative to the output directory.
-
 *** Split wale out of stitch templates                                :story:
 
 Stitch requires extra work in order to split out decoration. This is
@@ -9527,6 +9482,13 @@ Notes:
   extraction. This is more efficient but will require a dependency on
   [[https://clang.llvm.org/docs/LibFormat.html][libFormat]]. We can use [[https://github.com/llvm-mirror/clang/blob/master/tools/clang-format/ClangFormat.cpp][clang format's code]] to see how to use
   libformat.
+- when we integrate clang format, we will have to change how we
+  process overwrite. At present we are just not writing if overwrite
+  is on; in the future, we need to physically load the contents from
+  the filesystem and override the generated contents, so that we can
+  clang-format the existing files. We then write the file down if the
+  formatting changes its content. If we don't do this we still need to
+  run clang-format manually again for the handcrafted code.
 
 Merged Stories:
 
@@ -13036,7 +12998,10 @@ pass-through.
 
 We should also start to create a standard set of variables that dogen
 exports into inja such as object name, namespaces, etc. These are
-"system variables" and do not require any action from the user.
+"system variables" and do not require any action from the user. In
+fact, if we use the JSON based approach, we could define a JSON schema
+for meta-model elements which is MASD specific. These are used by the
+templates.
 
 Note that stitch only makes sense when we are creating a code
 generator (at least given the use cases we have so far) whereas inja
