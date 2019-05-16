@@ -27,6 +27,7 @@
 #include "dogen.engine/types/transforms/coding_model_set_to_configuration_model_set_transform.hpp"
 #include "dogen.engine/types/transforms/profile_template_adaption_transform.hpp"
 #include "dogen.engine/types/transforms/dynamic_stereotypes_transform.hpp"
+#include "dogen.engine/types/transforms/mapping_elements_transform.hpp"
 #include "dogen.engine/types/transforms/injection_model_set_to_coding_model_set_chain.hpp"
 
 namespace {
@@ -95,6 +96,12 @@ apply(const context& ctx, const injection::meta_model::model_set& ms) {
          */
         profile_binding_transform::apply(ctx, prp, cms);
     }
+
+    /*
+     * The third step of this chain is concerned with processing of
+     * mapping elements.
+     */
+    mapping_elements_transform::apply(ctx, r);
 
     /*
      * The final step is to retrieve stereotypes which did not bind to
