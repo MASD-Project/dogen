@@ -25,6 +25,10 @@
 #pragma once
 #endif
 
+#include "dogen.coding/types/helpers/mapping.hpp"
+#include "dogen.coding/types/helpers/mapping_set.hpp"
+#include "dogen.coding/types/helpers/mapping_value.hpp"
+#include "dogen.coding/types/helpers/mapping_set_repository.hpp"
 #include "dogen.coding/types/meta_model/model.hpp"
 #include "dogen.coding/types/meta_model/technical_space.hpp"
 #include "dogen.coding/types/transforms/context_fwd.hpp"
@@ -32,6 +36,33 @@
 namespace dogen::coding::transforms {
 
 class mapping_transform final {
+private:
+    /**
+     * @brief Obtains all the element id mappings.
+     */
+    static std::unordered_map<std::string, std::list<helpers::mapping>>
+    obtain_mappings(const meta_model::model& m);
+
+    /**
+     * @brief Ensures the mappings are valid.
+     */
+    static void validate_mappings(const std::unordered_map<std::string,
+        std::list<helpers::mapping>>& mappings);
+
+private:
+    static void insert(const std::string& lam_id, const meta_model::name& n,
+        const meta_model::technical_space ts,
+        std::unordered_map<meta_model::technical_space,
+        std::unordered_map<std::string, meta_model::name>>& map);
+
+    static void populate_mapping_set(
+        const std::list<helpers::mapping>& mappings,
+        helpers::mapping_set& ms);
+
+    static helpers::mapping_set_repository create_repository(
+        const std::unordered_map<std::string,
+        std::list<helpers::mapping>>& mappings_by_set_name);
+
 public:
     static bool is_mappable(const meta_model::technical_space from,
         const meta_model::technical_space to);
