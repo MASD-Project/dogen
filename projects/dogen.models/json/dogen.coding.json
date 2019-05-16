@@ -3041,6 +3041,7 @@
         {
           "name": "masd.mapping.action",
           "type": "masd::variability::text",
+          "value": "\"translate\"",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",

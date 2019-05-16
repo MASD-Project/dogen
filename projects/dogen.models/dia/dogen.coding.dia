@@ -38734,13 +38734,13 @@ extend the mappings as required.#</dia:string>
         <dia:point val="82,78"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="81.95,77.95;101.8,83.25"/>
+        <dia:rectangle val="81.95,77.95;105.265,83.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="82,78"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="19.75"/>
+        <dia:real val="23.215"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -38891,7 +38891,7 @@ extend the mappings as required.#</dia:string>
             <dia:string>#masd::variability::text#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>##</dia:string>
+            <dia:string>#"translate"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd

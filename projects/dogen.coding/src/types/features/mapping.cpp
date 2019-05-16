@@ -71,6 +71,8 @@ make_masd_mapping_action() {
     r.value_type(vt);
     r.binding_point(binding_point::any);
     r.kind(template_kind::instance);
+    dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ "translate" }));
 
     archetypes::location al;
     al.kernel("masd");
