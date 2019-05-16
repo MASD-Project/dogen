@@ -17,8 +17,18 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
+import re
+
+pattern = re.compile("^([A-Z][0-9]+)+$")
+pattern.match(string)
+
 for layer in dia.active_display().diagram.data.layers:
     for object in layer.objects:
+        #
+        # MASD specific stereorypes.
+        # --------------------------
+        #
+
         #
         # Theme: UML elements
         #
@@ -39,22 +49,50 @@ for layer in dia.active_display().diagram.data.layers:
 
         name = object.properties["name"].value
         stereotype = object.properties["stereotype"].value
+
         #
-        # Theme: ORM
+        # Dogen specific stereorypes.
+        # --------------------------
         #
-        if "masd::orm::object" in stereotype:
-            object.properties["fill_colour"] = "#98FB98"
-        elif "masd::orm::value" in stereotype:
-            object.properties["fill_colour"] = "#DDA0DD"
+
         #
         # Theme: Manually generated
         #
-        elif "dogen::handcrafted::typeable" in stereotype:
+        if "dogen::handcrafted::typeable" in stereotype:
             object.properties["fill_colour"] = "#FFFACD"
-        elif "masd::cpp::header_only" in stereotype:
+        elif "dogen::cpp::header_only" in stereotype:
             object.properties["fill_colour"] = "#FFFACD"
-        elif "masd::cpp::implementation_only" in stereotype:
+        elif "dogen::cpp::implementation_only" in stereotype:
             object.properties["fill_colour"] = "#EEFACD"
+
+        #
+        # C++ Reference Implementation specific stereorypes.
+        # -------------------------------------------------
+        #
+
+        #
+        # Theme: Manually generated
+        #
+        elif "cpp_ref_impl::handcrafted::typeable" in stereotype:
+            object.properties["fill_colour"] = "#FFFACD"
+        elif "cpp_ref_impl::cpp::header_only" in stereotype:
+            object.properties["fill_colour"] = "#FFFACD"
+        elif "cpp_ref_impl::cpp::implementation_only" in stereotype:
+            object.properties["fill_colour"] = "#EEFACD"
+
+
+        #
+        # MASD specific stereorypes.
+        # --------------------------
+        #
+
+        #
+        # Theme: ORM
+        #
+        elif "masd::orm::object" in stereotype:
+            object.properties["fill_colour"] = "#98FB98"
+        elif "masd::orm::value" in stereotype:
+            object.properties["fill_colour"] = "#DDA0DD"
 
         #
         # Theme: Decorations
@@ -79,6 +117,8 @@ for layer in dia.active_display().diagram.data.layers:
         #
         # Theme: Mapping
         #
+        elif "masd::mapping::fixed_mappable" in stereotype:
+            object.properties["fill_colour"] = "#DEE463"
         elif "masd::mapping::source" in stereotype:
             object.properties["fill_colour"] = "#F9FF7C"
 
