@@ -19,7 +19,6 @@
  *
  */
 #include "dogen.coding/test_data/meta_model/name_td.hpp"
-#include "dogen.coding/test_data/meta_model/mapping/action_td.hpp"
 #include "dogen.coding/test_data/meta_model/technical_space_td.hpp"
 #include "dogen.coding/test_data/meta_model/mapping/destination_td.hpp"
 
@@ -28,11 +27,6 @@ namespace {
 dogen::coding::meta_model::name
 create_dogen_coding_meta_model_name(const unsigned int position) {
     return dogen::coding::meta_model::name_generator::create(position);
-}
-
-dogen::coding::meta_model::mapping::action
-create_dogen_coding_meta_model_mapping_action(const unsigned int position) {
-    return dogen::coding::meta_model::mapping::action_generator::create(position);
 }
 
 dogen::coding::meta_model::technical_space
@@ -49,8 +43,7 @@ destination_generator::destination_generator() : position_(0) { }
 void destination_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_coding_meta_model_name(position + 0));
-    v.action(create_dogen_coding_meta_model_mapping_action(position + 1));
-    v.technical_space(create_dogen_coding_meta_model_technical_space(position + 2));
+    v.technical_space(create_dogen_coding_meta_model_technical_space(position + 1));
 }
 
 destination_generator::result_type

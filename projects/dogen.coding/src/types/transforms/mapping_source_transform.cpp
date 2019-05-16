@@ -25,7 +25,6 @@
 #include "dogen.coding/types/traits.hpp"
 #include "dogen.coding/io/meta_model/model_io.hpp"
 #include "dogen.coding/types/transforms/context.hpp"
-#include "dogen.coding/lexical_cast/meta_model/mapping/action_lc.hpp"
 #include "dogen.coding/types/transforms/mapping_source_transform.hpp"
 
 namespace {
@@ -69,18 +68,6 @@ std::string mapping_source_transform::make_destination(
     const variability::helpers::configuration_selector s(cfg);
     const auto r(s.get_text_content(fg.destination));
     BOOST_LOG_SEV(lg, trace) << "Read destination: " << r;
-    return r;
-}
-
-meta_model::mapping::action
-mapping_source_transform::make_action(const feature_group &fg,
-    const variability::meta_model::configuration &cfg) {
-    const variability::helpers::configuration_selector s(cfg);
-    const auto str(s.get_text_content(fg.action));
-    BOOST_LOG_SEV(lg, trace) << "Read action: " << str;
-
-    using meta_model::mapping::action;
-    const auto r(boost::lexical_cast<action>(str));
     return r;
 }
 

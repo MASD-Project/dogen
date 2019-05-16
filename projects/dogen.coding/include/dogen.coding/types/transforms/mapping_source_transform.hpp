@@ -31,7 +31,6 @@
 #include "dogen.variability/types/meta_model/template_kind.hpp"
 #include "dogen.coding/types/meta_model/model.hpp"
 #include "dogen.coding/types/transforms/context_fwd.hpp"
-#include "dogen.coding/types/meta_model/mapping/action.hpp"
 #include "dogen.coding/types/meta_model/variability/feature_bundle.hpp"
 
 namespace dogen::coding::transforms {
@@ -51,9 +50,6 @@ private:
         const variability::meta_model::configuration& cfg);
 
     static std::string make_destination(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-    static meta_model::mapping::action make_action(const feature_group& fg,
         const variability::meta_model::configuration& cfg);
 
 public:

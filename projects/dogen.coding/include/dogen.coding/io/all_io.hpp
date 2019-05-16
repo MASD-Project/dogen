@@ -42,7 +42,6 @@
 #include "dogen.coding/io/helpers/mapping_actions_io.hpp"
 #include "dogen.coding/io/helpers/mapping_context_io.hpp"
 #include "dogen.coding/io/meta_model/origin_types_io.hpp"
-#include "dogen.coding/io/meta_model/mapping/action_io.hpp"
 #include "dogen.coding/io/meta_model/orm/letter_case_io.hpp"
 #include "dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "dogen.coding/io/meta_model/type_parameters_io.hpp"

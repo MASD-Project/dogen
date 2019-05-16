@@ -2986,29 +2986,8 @@
           "type": "name"
         },
         {
-          "name": "action",
-          "type": "action"
-        },
-        {
           "name": "technical_space",
           "type": "technical_space"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::mapping::action",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "translate",
-          "type": ""
-        },
-        {
-          "name": "erase",
-          "type": ""
         }
       ]
     },
@@ -3032,16 +3011,6 @@
         {
           "name": "masd.mapping.destination",
           "type": "masd::variability::text",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "any"
-          }
-        },
-        {
-          "name": "masd.mapping.action",
-          "type": "masd::variability::text",
-          "value": "\"translate\"",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",

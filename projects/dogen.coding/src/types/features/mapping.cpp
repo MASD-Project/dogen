@@ -61,26 +61,6 @@ make_masd_mapping_destination() {
      return r;
 }
 
-dogen::variability::meta_model::feature_template
-make_masd_mapping_action() {
-    using namespace dogen::variability::meta_model;
-    feature_template r;
-    r.name().simple("action");
-    r.name().qualified("masd.mapping.action");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::any);
-    r.kind(template_kind::instance);
-    dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "translate" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-     r.location(al);
-     return r;
-}
-
 }
 
 std::list<dogen::variability::meta_model::feature_template>
@@ -89,7 +69,6 @@ mapping::make_templates() {
     std::list<feature_template> r;
     r.push_back(make_masd_mapping_target());
     r.push_back(make_masd_mapping_destination());
-    r.push_back(make_masd_mapping_action());
     return r;
 }
 

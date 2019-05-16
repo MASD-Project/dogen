@@ -23,27 +23,22 @@
 namespace dogen::coding::meta_model::mapping {
 
 destination::destination()
-    : action_(static_cast<dogen::coding::meta_model::mapping::action>(0)),
-      technical_space_(static_cast<dogen::coding::meta_model::technical_space>(0)) { }
+    : technical_space_(static_cast<dogen::coding::meta_model::technical_space>(0)) { }
 
 destination::destination(
     const dogen::coding::meta_model::name& name,
-    const dogen::coding::meta_model::mapping::action action,
     const dogen::coding::meta_model::technical_space technical_space)
     : name_(name),
-      action_(action),
       technical_space_(technical_space) { }
 
 void destination::swap(destination& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
-    swap(action_, other.action_);
     swap(technical_space_, other.technical_space_);
 }
 
 bool destination::operator==(const destination& rhs) const {
     return name_ == rhs.name_ &&
-        action_ == rhs.action_ &&
         technical_space_ == rhs.technical_space_;
 }
 
@@ -67,14 +62,6 @@ void destination::name(const dogen::coding::meta_model::name& v) {
 
 void destination::name(const dogen::coding::meta_model::name&& v) {
     name_ = std::move(v);
-}
-
-dogen::coding::meta_model::mapping::action destination::action() const {
-    return action_;
-}
-
-void destination::action(const dogen::coding::meta_model::mapping::action v) {
-    action_ = v;
 }
 
 dogen::coding::meta_model::technical_space destination::technical_space() const {

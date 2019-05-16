@@ -27,7 +27,6 @@
 
 #include <algorithm>
 #include "dogen.coding/types/meta_model/name.hpp"
-#include "dogen.coding/types/meta_model/mapping/action.hpp"
 #include "dogen.coding/types/meta_model/technical_space.hpp"
 
 namespace dogen::coding::meta_model::mapping {
@@ -44,7 +43,6 @@ public:
 public:
     destination(
         const dogen::coding::meta_model::name& name,
-        const dogen::coding::meta_model::mapping::action action,
         const dogen::coding::meta_model::technical_space technical_space);
 
 public:
@@ -52,9 +50,6 @@ public:
     dogen::coding::meta_model::name& name();
     void name(const dogen::coding::meta_model::name& v);
     void name(const dogen::coding::meta_model::name&& v);
-
-    dogen::coding::meta_model::mapping::action action() const;
-    void action(const dogen::coding::meta_model::mapping::action v);
 
     dogen::coding::meta_model::technical_space technical_space() const;
     void technical_space(const dogen::coding::meta_model::technical_space v);
@@ -71,7 +66,6 @@ public:
 
 private:
     dogen::coding::meta_model::name name_;
-    dogen::coding::meta_model::mapping::action action_;
     dogen::coding::meta_model::technical_space technical_space_;
 };
 

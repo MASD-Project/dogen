@@ -41,7 +41,6 @@
 #include "dogen.coding/test_data/helpers/mapping_actions_td.hpp"
 #include "dogen.coding/test_data/helpers/mapping_context_td.hpp"
 #include "dogen.coding/test_data/meta_model/origin_types_td.hpp"
-#include "dogen.coding/test_data/meta_model/mapping/action_td.hpp"
 #include "dogen.coding/test_data/meta_model/orm/letter_case_td.hpp"
 #include "dogen.coding/test_data/meta_model/technical_space_td.hpp"
 #include "dogen.coding/test_data/meta_model/type_parameters_td.hpp"

@@ -69,7 +69,6 @@
 #include "dogen.coding/types/helpers/mappings_hydrator.hpp"
 #include "dogen.coding/types/helpers/meta_name_factory.hpp"
 #include "dogen.coding/types/helpers/name_tree_builder.hpp"
-#include "dogen.coding/types/meta_model/mapping/action.hpp"
 #include "dogen.coding/types/transforms/assembly_chain.hpp"
 #include "dogen.coding/types/helpers/mappings_validator.hpp"
 #include "dogen.coding/types/meta_model/element_visitor.hpp"

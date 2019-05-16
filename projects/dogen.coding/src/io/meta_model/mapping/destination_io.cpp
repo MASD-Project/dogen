@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include "dogen.coding/io/meta_model/name_io.hpp"
-#include "dogen.coding/io/meta_model/mapping/action_io.hpp"
 #include "dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "dogen.coding/io/meta_model/mapping/destination_io.hpp"
 
@@ -30,7 +29,6 @@ std::ostream& operator<<(std::ostream& s, const destination& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::coding::meta_model::mapping::destination\"" << ", "
       << "\"name\": " << v.name() << ", "
-      << "\"action\": " << v.action() << ", "
       << "\"technical_space\": " << v.technical_space()
       << " }";
     return(s);
