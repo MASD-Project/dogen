@@ -16,6 +16,39 @@ such as profiles, licences etc.
 
 Stories that we haven't quite classified yet, but are needed.
 
+*** Improve model mapping support                                     :story:
+
+Our original mapping implementation was very tentative. It had a
+number of half-baked ideas that were not fully implemented. We tried
+to preserve some of it, so that when we return to fix it we can
+continue from where we left of. The two key ideas that are very
+undeveloped are:
+
+- mapping to native types. For example, we want a way to say
+  =lam::array<int>= and have that map to =int[]= on C++ and C#. This
+  is not entirely trivial because it requires some intelligence at the
+  mapping level; we could for example map =array= to setting a bit on
+  the =int= type to signify an array.
+- mapping to types that are not required on a given technical
+  space. For example, =lam::pointer= maps to a =shared_ptr= in C++,
+  but to a normal type in C#. We need some kind of "type erasure" or
+  again treat this as a native type. This is probably the cleanest
+  solution.
+
+*** Improve LAM test models                                           :story:
+
+At present LAM is very basic. We need to ensure that all features work
+correctly for LAM:
+
+- inheritance, composition
+- dynamic arrays, static arrays
+- enumerations
+- exceptions
+- cross-TS handcrafted profiles
+
+We need to look at the core C++ and C# models and see what else we may
+be missing.
+
 *** Consider generating the colour script                             :story:
 
 At present we have to manually update the colour script every time we
@@ -1020,18 +1053,6 @@ them from Dia. The right solution for this is as follows:
 We should supply the core models as both. This is a good test for PDMs
 to make sure that all functionality is available on both. Actually
 this story may be superseded by the work on the core library.
-
-*** LAM types should exist as a model                                 :story:
-
-At present we use LAM as a conceptual device: we don't even have a LAM
-model. Users create attributes with LAM types and we map them to
-concrete technical spaces such as C++ and C#. However, this means we
-do not even resolve lam types, nor do we tell users what types are
-available. A better approach would be to create a LAM model with types
-and make the mappings properties of the types themselves. these can
-now be placed under the =masd= namespace: =masd::lannguage_agnostic=,
-=masd::la= or maybe =masd::pim=. This should be done when we place
-mappings in the meta-model.
 
 *** Colours test model is invalid at present                          :story:
 
@@ -4322,6 +4343,11 @@ sufficient.
 When we try to create a mutable class that has a property of an
 immutable type, the code fails to compile due to the swap
 method. This is because immutable types do not provide swap.
+
+*** Add DateTime and related types to C#                              :story:
+
+At present we do not have date types in C#. We will need helpers,
+etc. We should do this after the move to external PDMs.
 
 *** Using underscores with C# results in invalid code                 :story:
 
@@ -9459,14 +9485,43 @@ For examples on how to use the C++ API see the tutorial:
 
 https://github.com/mongodb/mongo-cxx-driver/wiki/Tutorial
 
-*** Add support for Decimal numbers in C++                            :story:
+*** Add support for Decimal numbers in C++ and C#                     :story:
+
+For C++:
 
 - try using ICU DecNumber library.
 - check compiler support (MSVC may have decimals; if so, use that
   instead)
-
 - There is a cross-platform implementation of =std::decimal= available
   [[https://sourceforge.net/p/stddecimal/code/HEAD/tree/trunk/][here]].
+
+For C#:
+
+- use System.Decimal.
+
+LAM:
+
+- update decimal mappings. We had:
+
+:    {
+:        "lam_id" : "lam.decimal",
+:        "names_by_technical_space" : [
+:            {
+:                "technical_space" : "cpp",
+:                "default_name" : {
+:                    "simple": "decimal",
+:                    "model_modules": "std"
+:                }
+:            },
+:            {
+:                "technical_space" : "csharp",
+:                "default_name" : {
+:                    "simple": "Decimal",
+:                    "model_modules": "System"
+:                }
+:            }
+:        ]
+:    },
 
 *** Add depth detection to io in C++                                  :story:
 
