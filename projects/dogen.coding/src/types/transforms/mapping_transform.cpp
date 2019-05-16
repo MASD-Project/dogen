@@ -180,15 +180,17 @@ meta_model::model mapping_transform::apply(const context& ctx,
     const bool new_world(false);
     if (new_world) {
         const auto mappings(obtain_mappings(src));
-        if (!mappings.empty()) {
-            validate_mappings(mappings);
-            const auto mrp(create_repository(mappings));
-            const helpers::mapper mp(mrp);
-            auto r(mp.map(src.input_technical_space(), to, src));
-            stp.end_transform(r);
-            return r;
+        if (mappings.empty()) {
+            BOOST_LOG_SEV(lg, debug) << "No mappings, skipping validation.";
+            // return src;
         } else
-            return src;
+            validate_mappings(mappings);
+
+        const auto mrp(create_repository(mappings));
+        const helpers::mapper mp(mrp);
+        auto r(mp.map(src.input_technical_space(), to, src));
+        stp.end_transform(r);
+        return r;
     } else {
         const helpers::mapper mp(*ctx.mapping_repository());
         auto r(mp.map(src.input_technical_space(), to, src));

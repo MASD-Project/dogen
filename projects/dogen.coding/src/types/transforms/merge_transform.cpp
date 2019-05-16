@@ -65,7 +65,7 @@ merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
 
     BOOST_LOG_SEV(lg, debug) << "Merging source model: '"
                              << src.name().qualified().dot()
-                             << " modules: " << src.structural_elements().modules().size()
+                             << "'. modules: " << src.structural_elements().modules().size()
                              << " object templates: "
                              << src.structural_elements().object_templates().size()
                              << " builtins: " << src.structural_elements().builtins().size()

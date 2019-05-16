@@ -12,32 +12,32 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-16 Thu 18:26]
+#+CAPTION: Clock summary at [2019-05-16 Thu 19:46]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *71:35* |       |       | 100.0 |
+| *Total time*                                               | *72:25* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 71:35   |       |       | 100.0 |
-| Active                                                     |         | 71:35 |       | 100.0 |
+| Stories                                                    | 72:25   |       |       | 100.0 |
+| Active                                                     |         | 72:25 |       | 100.0 |
 | Edit release notes for previous sprint                     |         |       |  2:41 |   3.7 |
-| Create a video demo for the previous sprint's features     |         |       |  2:11 |   3.1 |
-| Sprint and product backlog grooming                        |         |       |  2:24 |   3.4 |
+| Create a video demo for the previous sprint's features     |         |       |  2:11 |   3.0 |
+| Sprint and product backlog grooming                        |         |       |  2:24 |   3.3 |
 | Defining profiles directly on a target model does not work |         |       |  0:30 |   0.7 |
 | Inner modules need to be qualified                         |         |       |  0:22 |   0.5 |
-| Create namespaces for model elements                       |         |       |  8:59 |  12.5 |
-| Leaves in internal modules are not captured correctly      |         |       |  1:33 |   2.2 |
-| Try to add relational tracing support                      |         |       |  2:51 |   4.0 |
+| Create namespaces for model elements                       |         |       |  8:59 |  12.4 |
+| Leaves in internal modules are not captured correctly      |         |       |  1:33 |   2.1 |
+| Try to add relational tracing support                      |         |       |  2:51 |   3.9 |
 | Linux and OSX binaries are not stripped                    |         |       |  1:23 |   1.9 |
 | Fix issues with nightly build and CI                       |         |       |  0:05 |   0.1 |
 | Emacs maintenance and exploration work                     |         |       |  0:40 |   0.9 |
-| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  10.1 |
-| Replace JSON based feature templates with generated code   |         |       | 16:15 |  22.7 |
-| Make a clear separation between dogen and masd             |         |       |  5:17 |   7.4 |
-| Add a method in enumeration that converts it from strings  |         |       |  7:49 |  10.9 |
+| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  10.0 |
+| Replace JSON based feature templates with generated code   |         |       | 16:15 |  22.4 |
+| Make a clear separation between dogen and masd             |         |       |  5:17 |   7.3 |
+| Add a method in enumeration that converts it from strings  |         |       |  7:49 |  10.8 |
 | Update palettes and colour script with new elements        |         |       |  1:09 |   1.6 |
 | Update the MASD UML profile to reflect the latest changes  |         |       |  0:05 |   0.1 |
-| Mappings as meta-model elements                            |         |       | 10:08 |  14.2 |
+| Mappings as meta-model elements                            |         |       | 10:58 |  15.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -696,6 +696,7 @@ down time waiting for builds to sync it.
 
 *** STARTED Mappings as meta-model elements                           :story:
     :LOGBOOK:
+    CLOCK: [2019-05-16 Thu 18:56]--[2019-05-16 Thu 19:46] =>  0:50
     CLOCK: [2019-05-16 Thu 18:18]--[2019-05-16 Thu 18:26] =>  0:08
     CLOCK: [2019-05-16 Thu 17:01]--[2019-05-16 Thu 18:02] =>  1:01
     CLOCK: [2019-05-16 Thu 15:10]--[2019-05-16 Thu 16:59] =>  1:49
@@ -801,6 +802,12 @@ Notes:
     inner object. It uses the fixed mappings of the target model to
     resolve the properties into a name tree.
   - formatter then expresses it as a struct.
+- at present we are "mapping" agnostic models into concrete TS. This
+  happens because the mapping code always maps, regardless. The net
+  result is that this "mapping" is merely the copying across of
+  elements plus (very significantly) the changing of the model TS from
+  agnostic into a concrete TS. Without this the merger will just
+  ignore the model.
 
 Merged Stories:
 

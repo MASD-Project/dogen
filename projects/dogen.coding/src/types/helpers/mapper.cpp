@@ -267,14 +267,16 @@ meta_model::model mapper::map(const meta_model::technical_space from,
      * this will be configurable via variability.
      */
     const auto& ms(mapping_set_repository_.default_mapping_set());
-    const auto mc(create_mapping_context(ms, from, to, m));
-    BOOST_LOG_SEV(lg, debug) << "Mapping context: " << mc;
+    if (!ms.by_agnostic_id().empty()) {
+        const auto mc(create_mapping_context(ms, from, to, m));
+        BOOST_LOG_SEV(lg, debug) << "Mapping context: " << mc;
 
-    for (auto& pair : r.structural_elements().objects())
-        map_attributes(mc, pair.second->local_attributes());
+        for (auto& pair : r.structural_elements().objects())
+            map_attributes(mc, pair.second->local_attributes());
 
-    for (auto& pair : r.structural_elements().object_templates())
-        map_attributes(mc, pair.second->local_attributes());
+        for (auto& pair : r.structural_elements().object_templates())
+            map_attributes(mc, pair.second->local_attributes());
+    }
 
     r.input_technical_space(to);
     r.output_technical_spaces().clear();
