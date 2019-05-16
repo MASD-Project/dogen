@@ -5,38 +5,39 @@
 
 * Mission Statement
 
-- Refactor all feature related code to use code generation and the
-  meta-model instead of hand-crafted code.
+- Start generating static types to represent features.
+- Update all mappings to become meta-model elements.
 
 * Stories
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-16 Thu 08:44]
+#+CAPTION: Clock summary at [2019-05-16 Thu 11:51]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *65:59* |       |       | 100.0 |
+| *Total time*                                               | *67:08* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 65:59   |       |       | 100.0 |
-| Active                                                     |         | 65:59 |       | 100.0 |
-| Edit release notes for previous sprint                     |         |       |  2:41 |   4.1 |
+| Stories                                                    | 67:08   |       |       | 100.0 |
+| Active                                                     |         | 67:08 |       | 100.0 |
+| Edit release notes for previous sprint                     |         |       |  2:41 |   4.0 |
 | Create a video demo for the previous sprint's features     |         |       |  2:11 |   3.3 |
 | Sprint and product backlog grooming                        |         |       |  2:24 |   3.6 |
-| Defining profiles directly on a target model does not work |         |       |  0:30 |   0.8 |
-| Inner modules need to be qualified                         |         |       |  0:22 |   0.6 |
-| Create namespaces for model elements                       |         |       |  8:59 |  13.6 |
+| Defining profiles directly on a target model does not work |         |       |  0:30 |   0.7 |
+| Inner modules need to be qualified                         |         |       |  0:22 |   0.5 |
+| Create namespaces for model elements                       |         |       |  8:59 |  13.4 |
 | Leaves in internal modules are not captured correctly      |         |       |  1:33 |   2.3 |
-| Try to add relational tracing support                      |         |       |  2:51 |   4.3 |
+| Try to add relational tracing support                      |         |       |  2:51 |   4.2 |
 | Linux and OSX binaries are not stripped                    |         |       |  1:23 |   2.1 |
 | Fix issues with nightly build and CI                       |         |       |  0:05 |   0.1 |
-| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  10.9 |
-| Replace JSON based feature templates with generated code   |         |       | 16:15 |  24.6 |
-| Make a clear separation between dogen and masd             |         |       |  5:17 |   8.0 |
-| Add a method in enumeration that converts it from strings  |         |       |  7:49 |  11.8 |
-| Update the MASD UML profile to reflect the latest changes  |         |       |  0:05 |   0.1 |
-| Mappings as meta-model elements                            |         |       |  5:58 |   9.0 |
 | Emacs maintenance and exploration work                     |         |       |  0:23 |   0.6 |
+| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |  10.7 |
+| Replace JSON based feature templates with generated code   |         |       | 16:15 |  24.2 |
+| Make a clear separation between dogen and masd             |         |       |  5:17 |   7.9 |
+| Add a method in enumeration that converts it from strings  |         |       |  7:49 |  11.6 |
+| Update palettes and colour script with new elements        |         |       |  1:09 |   1.7 |
+| Update the MASD UML profile to reflect the latest changes  |         |       |  0:05 |   0.1 |
+| Mappings as meta-model elements                            |         |       |  5:58 |   8.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -366,6 +367,18 @@ Links:
 
 Time spent fixing build issues with either nightlies and/or CI.
 
+*** STARTED Emacs maintenance and exploration work                    :story:
+    :LOGBOOK:
+    CLOCK: [2019-05-15 Wed 09:42]--[2019-05-15 Wed 09:53] =>  0:11
+    CLOCK: [2019-05-15 Wed 09:02]--[2019-05-15 Wed 09:14] =>  0:12
+    :END:
+
+Any time spent improving emacs, exploring new modes, fixing snags,
+etc.
+
+- add support for indent guides. [[https://github.com/DarthFennec/highlight-indent-guides][highlight-indent-guides]], [[https://stackoverflow.com/questions/1587972/how-to-display-indentation-guides-in-emacs/56144459#56144459][SO question]].
+- treemacs issues: when blank type g to refresh.
+
 *** COMPLETED Initial analysis to code generate feature infrastructure :story:
     CLOSED: [2019-05-10 Fri 11:19]
     :LOGBOOK:
@@ -647,6 +660,29 @@ Links:
 - [[http://www.cplusplus.com/reference/cstring/strncmp/][strncmp]]
 - [[https://stackoverflow.com/questions/1250795/very-poor-boostlexical-cast-performance][Very poor boost::lexical_cast performance]]
 
+*** COMPLETED Update palettes and colour script with new elements     :story:
+    CLOSED: [2019-05-16 Thu 11:48]
+    :LOGBOOK:
+    CLOCK: [2019-05-16 Thu 11:42]--[2019-05-16 Thu 11:48] =>  0:06
+    CLOCK: [2019-05-16 Thu 10:57]--[2019-05-16 Thu 11:41] =>  0:44
+    CLOCK: [2019-05-16 Thu 10:37]--[2019-05-16 Thu 10:56] =>  0:19
+    :END:
+
+Our colours model has become really confusing:
+
+- it is located in the test model but it really is trying to
+  demonstrate MASD specific properties.
+- we are including colours for test model specific profiles.
+
+What we really need is to split it:
+
+- a model representing the MASD palette with only MASD-specific
+  stereotypes, which should be part of Dogen and shipped with the
+  package.
+- a model representing the dogen palette.
+- a model representing the test models palette. Note that we have not
+  created a profile for C# yet.
+
 *** STARTED Update the MASD UML profile to reflect the latest changes :story:
     :LOGBOOK:
     CLOCK: [2019-05-13 Mon 11:38]--[2019-05-13 Mon 11:43] =>  0:05
@@ -775,7 +811,42 @@ In keeping with the idea that profiles are model-level concepts,
 mappings should be too. We should be able to import mappings in a UML
 diagram and override them or define new ones too.
 
-*** Make wale templates meta-model elements
+*** Colouring script should be included as part of package            :story:
+
+Users should be able to make use of script as well. We need a tools
+folder in share.
+
+*** Rename =dogen::cpp::header_only= stereotypes                      :story:
+
+Originally, we created these stereotypes for MASD:
+
+- =dogen::cpp::header_only=
+- =dogen::cpp::implementation_only=
+
+Now that have been moved across to dogen they make a lot less sense
+with these names. We have started a new naming pattern:
+
+- =dogen::handcrafted::pretty_printable=
+- =dogen::handcrafted::typeable=
+
+Therefore these should probably be something like:
+
+- =dogen::handcrafted::typeable::header_only=
+- =dogen::handcrafted::typeable::implementation_only=
+
+Because we are configuring types to have only
+header/implementation. The technical space is irrelevant as these are
+only used inside of dogen, all of which exists in the C++ technical
+space.
+
+Tasks:
+
+- update the profile names
+- update all models
+- update the colour palette.
+- remove these profiles from the reference model.
+
+*** Make wale templates meta-model elements                           :story:
 
 - create a templating namespace in coding. Add a template to it.
 - create a formatter that writes templating elements into a
@@ -903,18 +974,6 @@ need to check that the hydrator is not expecting this field.
 *** Code-generate all transform contexts                              :story:
 
 It seems we missed the injection context, still marked as handcrafted.
-
-*** STARTED Emacs maintenance and exploration work                    :story:
-    :LOGBOOK:
-    CLOCK: [2019-05-15 Wed 09:42]--[2019-05-15 Wed 09:53] =>  0:11
-    CLOCK: [2019-05-15 Wed 09:02]--[2019-05-15 Wed 09:14] =>  0:12
-    :END:
-
-Any time spent improving emacs, exploring new modes, fixing snags,
-etc.
-
-- add support for indent guides. [[https://github.com/DarthFennec/highlight-indent-guides][highlight-indent-guides]], [[https://stackoverflow.com/questions/1587972/how-to-display-indentation-guides-in-emacs/56144459#56144459][SO question]].
-- treemacs issues: when blank type g to refresh.
 
 *** Create or update samples folder                                   :story:
 

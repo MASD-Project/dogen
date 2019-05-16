@@ -16,6 +16,22 @@ such as profiles, licences etc.
 
 Stories that we haven't quite classified yet, but are needed.
 
+*** Consider generating the colour script                             :story:
+
+At present we have to manually update the colour script every time we
+add a new modeling element. In an ideal world, we should associate the
+colour with the modeling element and/or profile as part of the model
+itself. Dogen could then generate the script. Even more ideal would be
+if the script could include the "package" version of the script -
+e.g. run the MASD script first then run the local one. This requires a
+little bit of thinking because the script would be generated from the
+profiles and the profiles model is not expressed as code.
+
+A simpler version of this is to just go through the dia palette models
+and associate stereotypes with colours. Then use it to build the
+script. The user supplies one or more models as input. It would be a
+new "command" in dogen.
+
 *** Consider adding "deprecated feature names"                        :story:
 
 One way to allow the renaming of features across releases is to keep
