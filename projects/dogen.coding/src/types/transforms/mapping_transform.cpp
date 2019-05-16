@@ -177,18 +177,24 @@ meta_model::model mapping_transform::apply(const context& ctx,
     tracing::scoped_transform_tracer stp(lg, "mapping transform",
         transform_id, src.name().qualified().dot(), *ctx.tracer(), src);
 
-    /*
-      FIXME
-    const auto mappings(obtain_mappings(src));
-    validate_mappings(mappings);
-    const auto mrp(create_repository(mappings));
-    */
-
-    const helpers::mapper mp(*ctx.mapping_repository());
-    auto r(mp.map(src.input_technical_space(), to, src));
-
-    stp.end_transform(r);
-    return r;
+    const bool new_world(false);
+    if (new_world) {
+        const auto mappings(obtain_mappings(src));
+        if (!mappings.empty()) {
+            validate_mappings(mappings);
+            const auto mrp(create_repository(mappings));
+            const helpers::mapper mp(mrp);
+            auto r(mp.map(src.input_technical_space(), to, src));
+            stp.end_transform(r);
+            return r;
+        } else
+            return src;
+    } else {
+        const helpers::mapper mp(*ctx.mapping_repository());
+        auto r(mp.map(src.input_technical_space(), to, src));
+        stp.end_transform(r);
+        return r;
+    }
 }
 
 }
