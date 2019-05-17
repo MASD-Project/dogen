@@ -16,6 +16,27 @@ such as profiles, licences etc.
 
 Stories that we haven't quite classified yet, but are needed.
 
+*** Use C# notation in JSON C# models                                 :story:
+
+At present we are generating C++ style types in JSON models (at least
+for LAM):
+
+:   "type": "masd::lam::text::character"
+
+If we change this to
+
+:   "type": "masd.lam.text.character"
+
+We get a parsing error.
+
+*** Conside renaming LAM                                              :story:
+
+We originally created the Language Agnostic Model (LAM). This may not
+be the best of names, especially now we moved over to technical
+spaces. It should really reflect its PIM (platform independent model)
+nature. Names: =masd::lannguage_agnostic=, =masd::la= or maybe
+=masd::pim=? LAM is not a MDE term either.
+
 *** Licence compatibility errors                                      :story:
 
 If we correctly annotate all PDMs with a licence, as well as all model

@@ -12,32 +12,34 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-17 Fri 10:02]
+#+CAPTION: Clock summary at [2019-05-17 Fri 17:23]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *74:55* |       |       | 100.0 |
+| *Total time*                                               | *77:49* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 74:55   |       |       | 100.0 |
-| Active                                                     |         | 74:55 |       | 100.0 |
-| Edit release notes for previous sprint                     |         |       |  2:41 |   3.6 |
-| Create a video demo for the previous sprint's features     |         |       |  2:11 |   2.9 |
-| Sprint and product backlog grooming                        |         |       |  2:24 |   3.2 |
-| Defining profiles directly on a target model does not work |         |       |  0:30 |   0.7 |
+| Stories                                                    | 77:49   |       |       | 100.0 |
+| Active                                                     |         | 77:49 |       | 100.0 |
+| Edit release notes for previous sprint                     |         |       |  2:41 |   3.4 |
+| Create a video demo for the previous sprint's features     |         |       |  2:11 |   2.8 |
+| Sprint and product backlog grooming                        |         |       |  2:24 |   3.1 |
+| Defining profiles directly on a target model does not work |         |       |  0:30 |   0.6 |
 | Inner modules need to be qualified                         |         |       |  0:22 |   0.5 |
-| Create namespaces for model elements                       |         |       |  8:59 |  12.0 |
-| Leaves in internal modules are not captured correctly      |         |       |  1:33 |   2.1 |
-| Try to add relational tracing support                      |         |       |  2:51 |   3.8 |
+| Create namespaces for model elements                       |         |       |  8:59 |  11.5 |
+| Leaves in internal modules are not captured correctly      |         |       |  1:33 |   2.0 |
+| Try to add relational tracing support                      |         |       |  2:51 |   3.7 |
 | Linux and OSX binaries are not stripped                    |         |       |  1:23 |   1.8 |
 | Fix issues with nightly build and CI                       |         |       |  0:05 |   0.1 |
 | Emacs maintenance and exploration work                     |         |       |  0:40 |   0.9 |
-| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |   9.6 |
-| Replace JSON based feature templates with generated code   |         |       | 16:15 |  21.7 |
-| Make a clear separation between dogen and masd             |         |       |  5:17 |   7.1 |
-| Add a method in enumeration that converts it from strings  |         |       |  7:49 |  10.4 |
+| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |   9.3 |
+| Replace JSON based feature templates with generated code   |         |       | 16:15 |  20.9 |
+| Make a clear separation between dogen and masd             |         |       |  5:17 |   6.8 |
+| Add a method in enumeration that converts it from strings  |         |       |  7:49 |  10.0 |
 | Update palettes and colour script with new elements        |         |       |  1:09 |   1.5 |
+| Mappings as meta-model elements                            |         |       | 13:45 |  17.7 |
+| Code-generate all transform contexts                       |         |       |  0:08 |   0.2 |
 | Update the MASD UML profile to reflect the latest changes  |         |       |  0:05 |   0.1 |
-| Mappings as meta-model elements                            |         |       | 13:28 |  18.0 |
+| Make wale templates meta-model elements                    |         |       |  2:29 |   3.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -686,16 +688,10 @@ What we really need is to split it:
 - a model representing the test models palette. Note that we have not
   created a profile for C# yet.
 
-*** STARTED Update the MASD UML profile to reflect the latest changes :story:
+*** COMPLETED Mappings as meta-model elements                         :story:
+    CLOSED: [2019-05-17 Fri 10:20]
     :LOGBOOK:
-    CLOCK: [2019-05-13 Mon 11:38]--[2019-05-13 Mon 11:43] =>  0:05
-    :END:
-
-The UML profile is now a fair bit out of date. Take advantage of the
-down time waiting for builds to sync it.
-
-*** STARTED Mappings as meta-model elements                           :story:
-    :LOGBOOK:
+    CLOCK: [2019-05-17 Fri 10:03]--[2019-05-17 Fri 10:20] =>  0:17
     CLOCK: [2019-05-17 Fri 09:54]--[2019-05-17 Fri 10:02] =>  0:08
     CLOCK: [2019-05-17 Fri 08:20]--[2019-05-17 Fri 09:53] =>  1:33
     CLOCK: [2019-05-17 Fri 08:14]--[2019-05-17 Fri 08:19] =>  0:05
@@ -839,7 +835,10 @@ In keeping with the idea that profiles are model-level concepts,
 mappings should be too. We should be able to import mappings in a UML
 diagram and override them or define new ones too.
 
-*** LAM types should exist as a model                                 :story:
+*** COMPLETED LAM types should exist as a model                       :story:
+    CLOSED: [2019-05-17 Fri 10:20]
+
+*Rationale*: implemented as part of moving mappings into the meta-model.
 
 At present we use LAM as a conceptual device: we don't even have a LAM
 model. Users create attributes with LAM types and we map them to
@@ -851,55 +850,29 @@ now be placed under the =masd= namespace: =masd::lannguage_agnostic=,
 =masd::la= or maybe =masd::pim=. This should be done when we place
 mappings in the meta-model.
 
-*** Use C# notation in JSON C# models                                 :story:
+*** COMPLETED Code-generate all transform contexts                    :story:
+    CLOSED: [2019-05-17 Fri 14:39]
+    :LOGBOOK:
+    CLOCK: [2019-05-17 Fri 14:31]--[2019-05-17 Fri 14:39] =>  0:08
+    :END:
 
-At present we are generating C++ style types in JSON models (at least
-for LAM):
+It seems we missed the injection context, still marked as handcrafted.
 
-:   "type": "masd::lam::text::character"
+*** STARTED Update the MASD UML profile to reflect the latest changes :story:
+    :LOGBOOK:
+    CLOCK: [2019-05-13 Mon 11:38]--[2019-05-13 Mon 11:43] =>  0:05
+    :END:
 
-If we change this to
+The UML profile is now a fair bit out of date. Take advantage of the
+down time waiting for builds to sync it.
 
-:   "type": "masd.lam.text.character"
-
-We get a parsing error.
-
-*** Colouring script should be included as part of package            :story:
-
-Users should be able to make use of script as well. We need a tools
-folder in share.
-
-*** Rename =dogen::cpp::header_only= stereotypes                      :story:
-
-Originally, we created these stereotypes for MASD:
-
-- =dogen::cpp::header_only=
-- =dogen::cpp::implementation_only=
-
-Now that have been moved across to dogen they make a lot less sense
-with these names. We have started a new naming pattern:
-
-- =dogen::handcrafted::pretty_printable=
-- =dogen::handcrafted::typeable=
-
-Therefore these should probably be something like:
-
-- =dogen::handcrafted::typeable::header_only=
-- =dogen::handcrafted::typeable::implementation_only=
-
-Because we are configuring types to have only
-header/implementation. The technical space is irrelevant as these are
-only used inside of dogen, all of which exists in the C++ technical
-space.
+*** STARTED Make wale templates meta-model elements                   :story:
+    :LOGBOOK:
+    CLOCK: [2019-05-17 Fri 15:18]--[2019-05-17 Fri 17:23] =>  2:05
+    CLOCK: [2019-05-17 Fri 14:40]--[2019-05-17 Fri 15:04] =>  0:24
+    :END:
 
 Tasks:
-
-- update the profile names
-- update all models
-- update the colour palette.
-- remove these profiles from the reference model.
-
-*** Make wale templates meta-model elements                           :story:
 
 - create a templating namespace in coding. Add a template to it.
 - create a formatter that writes templating elements into a
@@ -909,6 +882,16 @@ Tasks:
 - references to wale templates now become just templates (in
   preparation to changing it to a moustache like approach).
 - paths to wale templates are relative to the templates folder.
+
+Notes:
+
+- we called these elements =logic_less_templates= to reflect the idea
+  that wale, mustche etc templates are [[https://en.wikipedia.org/wiki/Mustache_(template_system)][logic-less]]. However, the more
+  important trait here maybe that the templates are "stand alone";
+  that is, these templates are not a facet of an existing modeling
+  element. It is entirely possible to have a logic-less template
+  directly associated with an existing modeling element just like we
+  do with "logic-full" templates (e.g. stitch).
 
 *Move wale templates from the data directory*
 
@@ -954,6 +937,51 @@ Notes:
 - automatically ignore wale templates by looking at the input
   meta-data.
 - make wale template input path relative to the output directory.
+
+*** Logic-less templates do not belong in =generation.cpp=            :story:
+
+For purely expediency purposes, we placed the logic-less templates in
+the =generation.cpp= model. However, this means you cannot create
+logic-less templates in C# models. For now its fine as Dogen is the
+only user of these meta-model elements, but in the future when we
+create a JSON schema for model data, we will want to use these from
+any technical space. We need to either implement formatters on every
+technical space or find a way to create TS-neutral formatters.
+
+*** Colouring script should be included as part of package            :story:
+
+Users should be able to make use of script as well. We need a tools
+folder in share.
+
+*** Rename =dogen::cpp::header_only= stereotypes                      :story:
+
+Originally, we created these stereotypes for MASD:
+
+- =dogen::cpp::header_only=
+- =dogen::cpp::implementation_only=
+
+Now that have been moved across to dogen they make a lot less sense
+with these names. We have started a new naming pattern:
+
+- =dogen::handcrafted::pretty_printable=
+- =dogen::handcrafted::typeable=
+
+Therefore these should probably be something like:
+
+- =dogen::handcrafted::typeable::header_only=
+- =dogen::handcrafted::typeable::implementation_only=
+
+Because we are configuring types to have only
+header/implementation. The technical space is irrelevant as these are
+only used inside of dogen, all of which exists in the C++ technical
+space.
+
+Tasks:
+
+- update the profile names
+- update all models
+- update the colour palette.
+- remove these profiles from the reference model.
 
 *** Add aliases to enumeration string conversions                     :story:
 
@@ -1023,10 +1051,6 @@ empty. For cases such as enumerations this is just confusing:
 
 It would be much easier to read this if we ignored empty types. We
 need to check that the hydrator is not expecting this field.
-
-*** Code-generate all transform contexts                              :story:
-
-It seems we missed the injection context, still marked as handcrafted.
 
 *** Create or update samples folder                                   :story:
 
