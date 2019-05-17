@@ -162,7 +162,7 @@
       "in_global_module": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.mapping.target": "masd.lam.core.text.character",
+        "masd.mapping.target": "masd.lam.text.character",
         "masd.generation.csharp.aspect.requires_static_reference_equals": false,
         "masd.generation.csharp.assistant.requires_assistance": true,
         "masd.generation.csharp.assistant.method_postfix": "Char"

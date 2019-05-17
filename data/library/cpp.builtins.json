@@ -29,7 +29,7 @@
       "in_global_module": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.mapping.target": "masd.lam.core.text.character",
+        "masd.mapping.target": "masd.lam.text.character",
         "masd.generation.cpp.helper.family": "Character",
         "masd.generation.cpp.streaming.remove_unprintable_characters": false,
         "masd.generation.cpp.streaming.requires_quoting": true,
