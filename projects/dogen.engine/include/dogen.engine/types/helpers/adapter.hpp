@@ -53,6 +53,7 @@
 #include "dogen.coding/types/meta_model/variability/feature_template_initializer.hpp"
 #include "dogen.coding/types/meta_model/mapping/fixed_mappable.hpp"
 #include "dogen.coding/types/meta_model/mapping/extensible_mappable.hpp"
+#include "dogen.coding/types/meta_model/templating/logic_less_template.hpp"
 #include "dogen.engine/types/helpers/stereotypes_conversion_result.hpp"
 
 namespace dogen::engine::helpers {
@@ -280,6 +281,15 @@ public:
      */
     boost::shared_ptr<coding::meta_model::mapping::extensible_mappable>
     to_extensible_mappable(const coding::meta_model::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::meta_model::element& ie) const;
+
+    /**
+     * @brief Converts an injection element with a stereotype of
+     * masd::templating::logic_less_template to a logic-less template.
+     */
+    boost::shared_ptr<coding::meta_model::templating::logic_less_template>
+    to_logic_less_template(const coding::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 };

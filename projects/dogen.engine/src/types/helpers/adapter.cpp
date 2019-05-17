@@ -503,4 +503,14 @@ adapter::to_extensible_mappable(const coding::meta_model::location& l,
     return r;
 }
 
+boost::shared_ptr<coding::meta_model::templating::logic_less_template>
+adapter::to_logic_less_template(const coding::meta_model::location& l,
+    const stereotypes_conversion_result& scr,
+    const injection::meta_model::element& ie) const {
+    using coding::meta_model::templating::logic_less_template;
+    auto r(boost::make_shared<logic_less_template>());
+    populate_element(l, scr, ie, *r);
+    return r;
+}
+
 }
