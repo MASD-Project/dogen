@@ -39,6 +39,7 @@
 #include "dogen.coding/types/meta_model/decoration/modeline_group.hpp"
 #include "dogen.coding/types/meta_model/variability/feature_bundle.hpp"
 #include "dogen.coding/types/meta_model/variability/feature_template_initializer.hpp"
+#include "dogen.coding/types/meta_model/templating/logic_less_template.hpp"
 #include "dogen.coding/io/meta_model/model_io.hpp"
 #include "dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "dogen.coding/types/helpers/meta_name_factory.hpp"
@@ -154,6 +155,10 @@ public:
         feature_template_initializer> ftgrg) {
         add(ftgrg);
     }
+    void operator()(boost::shared_ptr<coding::meta_model::templating::
+        logic_less_template> llt) {
+        add(llt);
+    }
 
 public:
     void add(
@@ -190,6 +195,7 @@ compute_total_size(const coding::meta_model::model& m) {
     r += m.variability_elements().feature_bundles().size();
     r += m.variability_elements().feature_template_initializer()
         != nullptr ?  1 : 0;
+    r += m.templating_elements().logic_less_templates().size();
 
     return r;
 }
