@@ -83,8 +83,7 @@ private:
     static bool is_mappable(const meta_model::technical_space from,
         const meta_model::technical_space to);
 
-    static meta_model::model apply(const context& ctx,
-        const helpers::mapping_set_repository& msrp,
+    static meta_model::model map(const helpers::mapping_set_repository& msrp,
         const meta_model::model& src, const meta_model::technical_space to);
 
 public:

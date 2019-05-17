@@ -195,20 +195,13 @@ bool mapping_transform::is_mappable(const meta_model::technical_space from,
     return helpers::mapper::is_mappable(from, to);
 }
 
-meta_model::model mapping_transform::apply(const context& ctx,
-    const helpers::mapping_set_repository& msrp,
+meta_model::model
+mapping_transform::map(const helpers::mapping_set_repository& msrp,
     const meta_model::model& src, const meta_model::technical_space to) {
 
-    const bool new_world(true);
-    if (new_world) {
-        const helpers::mapper mp(msrp);
-        auto r(mp.map(src.input_technical_space(), to, src));
-        return r;
-    } else {
-        const helpers::mapper mp(*ctx.mapping_repository());
-        auto r(mp.map(src.input_technical_space(), to, src));
-        return r;
-    }
+    const helpers::mapper mp(msrp);
+    auto r(mp.map(src.input_technical_space(), to, src));
+    return r;
 }
 
 coding::meta_model::model_set
@@ -244,7 +237,7 @@ mapping_transform::apply(const context& ctx,
      * model.
      */
     coding::meta_model::model_set r;
-    r.target(mapping_transform::apply(ctx, msrp, src.target(), to));
+    r.target(map(msrp, src.target(), to));
 
     /*
      * Now do the same for the references.
@@ -263,7 +256,7 @@ mapping_transform::apply(const context& ctx,
                                      << ref.name().qualified().dot();
             continue;
         }
-        r.references().push_back(mapping_transform::apply(ctx, msrp, ref, to));
+        r.references().push_back(map(msrp, ref, to));
     }
     stp.end_transform(r);
     return r;
