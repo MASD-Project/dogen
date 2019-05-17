@@ -16,6 +16,15 @@ such as profiles, licences etc.
 
 Stories that we haven't quite classified yet, but are needed.
 
+*** Licence compatibility errors                                      :story:
+
+If we correctly annotate all PDMs with a licence, as well as all model
+code, we could define "compatibility relationships" between
+licences. For example we could say that a model M with a proprietary
+licence including a PDM P with GPL licence is an error. This could
+come up as any other error would. We could have a "compatible with"
+field in licences for this.
+
 *** Improve model mapping support                                     :story:
 
 Our original mapping implementation was very tentative. It had a
