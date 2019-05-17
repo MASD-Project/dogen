@@ -18,17 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_INJECTION_IO_ALL_IO_HPP
-#define DOGEN_INJECTION_IO_ALL_IO_HPP
+#ifndef DOGEN_INJECTION_IO_TRANSFORMS_CONTEXT_IO_HPP
+#define DOGEN_INJECTION_IO_TRANSFORMS_CONTEXT_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.injection/io/meta_model/model_io.hpp"
-#include "dogen.injection/io/meta_model/element_io.hpp"
-#include "dogen.injection/io/transforms/context_io.hpp"
-#include "dogen.injection/io/meta_model/attribute_io.hpp"
-#include "dogen.injection/io/meta_model/model_set_io.hpp"
+#include <iosfwd>
+#include "dogen.injection/types/transforms/context.hpp"
+
+namespace dogen::injection::transforms {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::injection::transforms::context& v);
+
+}
 
 #endif

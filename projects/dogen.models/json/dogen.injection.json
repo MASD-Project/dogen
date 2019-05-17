@@ -161,7 +161,8 @@
     {
       "name": "transforms::context",
       "stereotypes": [
-        "dogen::handcrafted::typeable"
+        "dogen::typeable",
+        "dogen::pretty_printable"
       ],
       "tagged_values": {
         "masd.generation.cpp.types.forward_declarations.enabled": "true"
@@ -174,7 +175,7 @@
         },
         {
           "name": "feature_model",
-          "type": "variability::meta_model::feature_model"
+          "type": "boost::shared_ptr<variability::meta_model::feature_model>"
         },
         {
           "name": "archetype_location_repository",
