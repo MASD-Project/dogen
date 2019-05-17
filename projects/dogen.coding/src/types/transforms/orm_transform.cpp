@@ -409,7 +409,6 @@ transform_modules(const feature_group& fg, meta_model::model& m) {
                                  << mod.name().qualified().dot();
 
         const auto& cfg(*mod.configuration());
-        BOOST_LOG_SEV(lg, debug) <<"here 1 " << mod.configuration();
         auto omp(make_module_properties(fg, cfg));
         if (!omp)
             continue;
