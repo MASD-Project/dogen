@@ -1091,13 +1091,6 @@
       ]
     },
     {
-      "name": "helpers::mapping_set_repository_factory",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "helpers::mappings_validator",
       "stereotypes": [
         "dogen::handcrafted::typeable"
@@ -1152,20 +1145,6 @@
           "type": ""
         }
       ]
-    },
-    {
-      "name": "helpers::mappings_hydrator",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::hydration_error",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::mapping_transform",
