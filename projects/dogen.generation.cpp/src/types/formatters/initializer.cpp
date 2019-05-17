@@ -23,6 +23,7 @@
 #include "dogen.generation.cpp/types/formatters/include_cmakelists_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/source_cmakelists_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/msbuild_targets_formatter.hpp"
+#include "dogen.generation.cpp/types/formatters/templates/initializer.hpp"
 #include "dogen.generation.cpp/types/formatters/types/initializer.hpp"
 #include "dogen.generation.cpp/types/formatters/hash/initializer.hpp"
 #include "dogen.generation.cpp/types/formatters/odb/initializer.hpp"
@@ -50,6 +51,7 @@ void initializer::initialize(registrar& rg) {
     test_data::initializer::initialize(rg);
     serialization::initializer::initialize(rg);
     tests::initializer::initialize(rg);
+    templates::initializer::initialize(rg);
 }
 
 }
