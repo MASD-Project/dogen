@@ -30,6 +30,7 @@
 namespace dogen::generation::cpp::formatters::templates {
 
 class traits final {
+public:
     /**
      * @brief Name of this facet.
      */
