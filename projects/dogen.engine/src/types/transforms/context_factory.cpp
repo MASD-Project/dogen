@@ -34,7 +34,6 @@
 #include "dogen.injection/types/transforms/context.hpp"
 #include "dogen.injection/types/features/registrar.hpp"
 #include "dogen.coding/types/features/initializer.hpp"
-#include "dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
 #include "dogen.generation/types/features/initializer.hpp"
 #include "dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 #include "dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
@@ -236,12 +235,6 @@ context context_factory::make_context(const configuration& cfg,
      */
     const auto ibsp(create_intra_backend_segment_properties(rg));
     r.generation_context().intra_backend_segment_properties(ibsp);
-
-    coding::helpers::mapping_set_repository_factory msrpf;
-    const auto msrp(
-        boost::make_shared<coding::helpers::mapping_set_repository>(
-            msrpf.make(data_dirs)));
-    r.coding_context().mapping_repository(msrp);
 
     /*
      * Setup the tracer.

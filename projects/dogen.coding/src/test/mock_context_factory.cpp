@@ -26,7 +26,6 @@
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.archetypes/types/location_repository_builder.hpp"
 #include "dogen.tracing/types/tracer.hpp"
-#include "dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
 #include "dogen.coding/test/mock_context_factory.hpp"
 
 namespace {
@@ -47,11 +46,6 @@ transforms::context mock_context_factory::make() {
 
     const auto data_dir(utility::filesystem::data_files_directory());
     const auto data_dirs(std::vector<boost::filesystem::path>{ data_dir });
-
-    helpers::mapping_set_repository_factory msrpf;
-    const auto msrp(boost::make_shared<
-        helpers::mapping_set_repository>(msrpf.make(data_dirs)));
-    r.mapping_repository(msrp);
 
     boost::optional<tracing_configuration> tcfg;
     auto tracer(boost::make_shared<tracing::tracer>(tcfg));
