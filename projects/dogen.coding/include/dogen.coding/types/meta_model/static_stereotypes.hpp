@@ -52,7 +52,8 @@ enum class static_stereotypes : unsigned int {
     variability_feature_bundle = 18,
     variability_feature_template_initializer = 19,
     mapping_fixed_mappable = 20,
-    mapping_extensible_mappable = 21
+    mapping_extensible_mappable = 21,
+    templating_logic_less_template = 22
 };
 
 }

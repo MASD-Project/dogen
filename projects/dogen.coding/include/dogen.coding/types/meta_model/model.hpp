@@ -41,6 +41,7 @@
 #include "dogen.coding/types/meta_model/mapping/element_repository.hpp"
 #include "dogen.coding/types/meta_model/decoration/element_repository.hpp"
 #include "dogen.coding/types/meta_model/structural/element_repository.hpp"
+#include "dogen.coding/types/meta_model/templating/element_repository.hpp"
 #include "dogen.coding/types/meta_model/variability/element_repository.hpp"
 
 namespace dogen::coding::meta_model {
@@ -74,7 +75,8 @@ public:
         const dogen::coding::meta_model::structural::element_repository& structural_elements,
         const dogen::coding::meta_model::decoration::element_repository& decoration_elements,
         const dogen::coding::meta_model::variability::element_repository& variability_elements,
-        const dogen::coding::meta_model::mapping::element_repository& mapping_elements);
+        const dogen::coding::meta_model::mapping::element_repository& mapping_elements,
+        const dogen::coding::meta_model::templating::element_repository& templating_elements);
 
 public:
     /**
@@ -201,6 +203,11 @@ public:
     void mapping_elements(const dogen::coding::meta_model::mapping::element_repository&& v);
     /**@}*/
 
+    const dogen::coding::meta_model::templating::element_repository& templating_elements() const;
+    dogen::coding::meta_model::templating::element_repository& templating_elements();
+    void templating_elements(const dogen::coding::meta_model::templating::element_repository& v);
+    void templating_elements(const dogen::coding::meta_model::templating::element_repository&& v);
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -226,6 +233,7 @@ private:
     dogen::coding::meta_model::decoration::element_repository decoration_elements_;
     dogen::coding::meta_model::variability::element_repository variability_elements_;
     dogen::coding::meta_model::mapping::element_repository mapping_elements_;
+    dogen::coding::meta_model::templating::element_repository templating_elements_;
 };
 
 }

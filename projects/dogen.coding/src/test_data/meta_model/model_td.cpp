@@ -28,6 +28,7 @@
 #include "dogen.coding/test_data/meta_model/mapping/element_repository_td.hpp"
 #include "dogen.coding/test_data/meta_model/decoration/element_repository_td.hpp"
 #include "dogen.coding/test_data/meta_model/structural/element_repository_td.hpp"
+#include "dogen.coding/test_data/meta_model/templating/element_repository_td.hpp"
 #include "dogen.coding/test_data/meta_model/variability/element_repository_td.hpp"
 
 namespace {
@@ -120,6 +121,11 @@ create_dogen_coding_meta_model_mapping_element_repository(const unsigned int pos
     return dogen::coding::meta_model::mapping::element_repository_generator::create(position);
 }
 
+dogen::coding::meta_model::templating::element_repository
+create_dogen_coding_meta_model_templating_element_repository(const unsigned int position) {
+    return dogen::coding::meta_model::templating::element_repository_generator::create(position);
+}
+
 }
 
 namespace dogen::coding::meta_model {
@@ -142,6 +148,7 @@ populate(const unsigned int position, result_type& v) {
     v.decoration_elements(create_dogen_coding_meta_model_decoration_element_repository(position + 11));
     v.variability_elements(create_dogen_coding_meta_model_variability_element_repository(position + 12));
     v.mapping_elements(create_dogen_coding_meta_model_mapping_element_repository(position + 13));
+    v.templating_elements(create_dogen_coding_meta_model_templating_element_repository(position + 14));
 }
 
 model_generator::result_type

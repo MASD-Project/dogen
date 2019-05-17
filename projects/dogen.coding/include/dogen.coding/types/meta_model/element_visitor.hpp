@@ -41,6 +41,7 @@
 #include "dogen.coding/types/meta_model/mapping/extensible_mappable_fwd.hpp"
 #include "dogen.coding/types/meta_model/decoration/generation_marker_fwd.hpp"
 #include "dogen.coding/types/meta_model/variability/profile_template_fwd.hpp"
+#include "dogen.coding/types/meta_model/templating/logic_less_template_fwd.hpp"
 #include "dogen.coding/types/meta_model/variability/feature_template_initializer_fwd.hpp"
 
 namespace dogen::coding::meta_model {
@@ -191,6 +192,16 @@ public:
     virtual void visit(const dogen::coding::meta_model::structural::visitor&) { }
     virtual void visit(dogen::coding::meta_model::structural::visitor&) const { }
     virtual void visit(dogen::coding::meta_model::structural::visitor&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::coding::meta_model::templating::logic_less_template
+     */
+    /**@{*/
+    virtual void visit(const dogen::coding::meta_model::templating::logic_less_template&) const { }
+    virtual void visit(const dogen::coding::meta_model::templating::logic_less_template&) { }
+    virtual void visit(dogen::coding::meta_model::templating::logic_less_template&) const { }
+    virtual void visit(dogen::coding::meta_model::templating::logic_less_template&) { }
     /**@}*/
 
     /**

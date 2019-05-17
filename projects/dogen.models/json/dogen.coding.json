@@ -459,6 +459,10 @@
           "name": "mapping_elements",
           "type": "mapping::element_repository",
           "documentation": "Model elements related to element mapping.\n"
+        },
+        {
+          "name": "templating_elements",
+          "type": "templating::element_repository"
         }
       ]
     },
@@ -1468,6 +1472,10 @@
         },
         {
           "name": "mapping_extensible_mappable",
+          "type": ""
+        },
+        {
+          "name": "templating_logic_less_template",
           "type": ""
         }
       ]
@@ -3020,6 +3028,32 @@
         {
           "name": "destination",
           "type": "name_tree"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::templating",
+      "documentation": "Meta-model elements related to templating .\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "meta_model::templating::logic_less_template",
+      "documentation": "Represents a logic-less template.\n\nAt present the system only supports wale templates.\n",
+      "stereotypes": [
+        "coding::meta_element"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::templating::element_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "logic_less_templates",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<logic_less_template>>"
         }
       ]
     }

@@ -96,6 +96,9 @@ std::ostream& operator<<(std::ostream& s, const static_stereotypes& v) {
     case static_stereotypes::mapping_extensible_mappable:
         attr = "\"mapping_extensible_mappable\"";
         break;
+    case static_stereotypes::templating_logic_less_template:
+        attr = "\"templating_logic_less_template\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for static_stereotypes");
     }

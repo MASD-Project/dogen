@@ -43,6 +43,7 @@
 #include "dogen.coding/test_data/meta_model/decoration/generation_marker_td.hpp"
 #include "dogen.coding/test_data/meta_model/variability/profile_template_td.hpp"
 #include "dogen.coding/test_data/meta_model/decoration/element_properties_td.hpp"
+#include "dogen.coding/test_data/meta_model/templating/logic_less_template_td.hpp"
 #include "dogen.coding/test_data/meta_model/local_archetype_location_properties_td.hpp"
 #include "dogen.coding/test_data/meta_model/variability/feature_template_initializer_td.hpp"
 
@@ -168,37 +169,39 @@ populate(const unsigned int position, result_type& v) {
 
 element_generator::result_type*
 element_generator::create_ptr(const unsigned int position) {
-    if ((position % 16) == 0)
+    if ((position % 17) == 0)
         return dogen::coding::meta_model::decoration::licence_generator::create_ptr(position);
-    if ((position % 16) == 1)
+    if ((position % 17) == 1)
         return dogen::coding::meta_model::decoration::modeline_generator::create_ptr(position);
-    if ((position % 16) == 2)
+    if ((position % 17) == 2)
         return dogen::coding::meta_model::decoration::modeline_group_generator::create_ptr(position);
-    if ((position % 16) == 3)
+    if ((position % 17) == 3)
         return dogen::coding::meta_model::mapping::extensible_mappable_generator::create_ptr(position);
-    if ((position % 16) == 4)
+    if ((position % 17) == 4)
         return dogen::coding::meta_model::mapping::fixed_mappable_generator::create_ptr(position);
-    if ((position % 16) == 5)
+    if ((position % 17) == 5)
         return dogen::coding::meta_model::structural::builtin_generator::create_ptr(position);
-    if ((position % 16) == 6)
+    if ((position % 17) == 6)
         return dogen::coding::meta_model::structural::enumeration_generator::create_ptr(position);
-    if ((position % 16) == 7)
+    if ((position % 17) == 7)
         return dogen::coding::meta_model::structural::exception_generator::create_ptr(position);
-    if ((position % 16) == 8)
+    if ((position % 17) == 8)
         return dogen::coding::meta_model::structural::module_generator::create_ptr(position);
-    if ((position % 16) == 9)
+    if ((position % 17) == 9)
         return dogen::coding::meta_model::structural::object_generator::create_ptr(position);
-    if ((position % 16) == 10)
+    if ((position % 17) == 10)
         return dogen::coding::meta_model::structural::object_template_generator::create_ptr(position);
-    if ((position % 16) == 11)
+    if ((position % 17) == 11)
         return dogen::coding::meta_model::structural::primitive_generator::create_ptr(position);
-    if ((position % 16) == 12)
+    if ((position % 17) == 12)
         return dogen::coding::meta_model::structural::visitor_generator::create_ptr(position);
-    if ((position % 16) == 13)
+    if ((position % 17) == 13)
+        return dogen::coding::meta_model::templating::logic_less_template_generator::create_ptr(position);
+    if ((position % 17) == 14)
         return dogen::coding::meta_model::variability::feature_bundle_generator::create_ptr(position);
-    if ((position % 16) == 14)
+    if ((position % 17) == 15)
         return dogen::coding::meta_model::variability::feature_template_initializer_generator::create_ptr(position);
-    if ((position % 16) == 15)
+    if ((position % 17) == 16)
         return dogen::coding::meta_model::variability::profile_template_generator::create_ptr(position);
     return dogen::coding::meta_model::decoration::generation_marker_generator::create_ptr(position);
 }

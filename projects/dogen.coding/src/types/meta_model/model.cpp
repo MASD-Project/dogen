@@ -50,7 +50,8 @@ model::model(model&& rhs)
       structural_elements_(std::move(rhs.structural_elements_)),
       decoration_elements_(std::move(rhs.decoration_elements_)),
       variability_elements_(std::move(rhs.variability_elements_)),
-      mapping_elements_(std::move(rhs.mapping_elements_)) { }
+      mapping_elements_(std::move(rhs.mapping_elements_)),
+      templating_elements_(std::move(rhs.templating_elements_)) { }
 
 model::model(
     const dogen::coding::meta_model::name& name,
@@ -66,7 +67,8 @@ model::model(
     const dogen::coding::meta_model::structural::element_repository& structural_elements,
     const dogen::coding::meta_model::decoration::element_repository& decoration_elements,
     const dogen::coding::meta_model::variability::element_repository& variability_elements,
-    const dogen::coding::meta_model::mapping::element_repository& mapping_elements)
+    const dogen::coding::meta_model::mapping::element_repository& mapping_elements,
+    const dogen::coding::meta_model::templating::element_repository& templating_elements)
     : name_(name),
       meta_name_(meta_name),
       origin_type_(origin_type),
@@ -80,7 +82,8 @@ model::model(
       structural_elements_(structural_elements),
       decoration_elements_(decoration_elements),
       variability_elements_(variability_elements),
-      mapping_elements_(mapping_elements) { }
+      mapping_elements_(mapping_elements),
+      templating_elements_(templating_elements) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -98,6 +101,7 @@ void model::swap(model& other) noexcept {
     swap(decoration_elements_, other.decoration_elements_);
     swap(variability_elements_, other.variability_elements_);
     swap(mapping_elements_, other.mapping_elements_);
+    swap(templating_elements_, other.templating_elements_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -114,7 +118,8 @@ bool model::operator==(const model& rhs) const {
         structural_elements_ == rhs.structural_elements_ &&
         decoration_elements_ == rhs.decoration_elements_ &&
         variability_elements_ == rhs.variability_elements_ &&
-        mapping_elements_ == rhs.mapping_elements_;
+        mapping_elements_ == rhs.mapping_elements_ &&
+        templating_elements_ == rhs.templating_elements_;
 }
 
 model& model::operator=(model other) {
@@ -329,6 +334,22 @@ void model::mapping_elements(const dogen::coding::meta_model::mapping::element_r
 
 void model::mapping_elements(const dogen::coding::meta_model::mapping::element_repository&& v) {
     mapping_elements_ = std::move(v);
+}
+
+const dogen::coding::meta_model::templating::element_repository& model::templating_elements() const {
+    return templating_elements_;
+}
+
+dogen::coding::meta_model::templating::element_repository& model::templating_elements() {
+    return templating_elements_;
+}
+
+void model::templating_elements(const dogen::coding::meta_model::templating::element_repository& v) {
+    templating_elements_ = v;
+}
+
+void model::templating_elements(const dogen::coding::meta_model::templating::element_repository&& v) {
+    templating_elements_ = std::move(v);
 }
 
 }

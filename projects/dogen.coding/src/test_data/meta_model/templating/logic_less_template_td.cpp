@@ -18,25 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.coding/test_data/meta_model/static_stereotypes_td.hpp"
+#include "dogen.coding/test_data/meta_model/element_td.hpp"
+#include "dogen.coding/test_data/meta_model/templating/logic_less_template_td.hpp"
 
-namespace dogen::coding::meta_model {
+namespace dogen::coding::meta_model::templating {
 
-static_stereotypes_generator::static_stereotypes_generator() : position_(0) { }
-void static_stereotypes_generator::
+logic_less_template_generator::logic_less_template_generator() : position_(0) { }
+
+void logic_less_template_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<static_stereotypes>(position % 23);
+    dogen::coding::meta_model::element_generator::populate(position, v);
 }
 
-static_stereotypes_generator::result_type
-static_stereotypes_generator::create(const unsigned int  position) {
-    result_type r;
-    static_stereotypes_generator::populate(position, r);
+logic_less_template_generator::result_type
+logic_less_template_generator::create(const unsigned int position) {
+    logic_less_template r;
+    logic_less_template_generator::populate(position, r);
     return r;
 }
 
-static_stereotypes_generator::result_type
-static_stereotypes_generator::operator()() {
+logic_less_template_generator::result_type*
+logic_less_template_generator::create_ptr(const unsigned int position) {
+    logic_less_template* p = new logic_less_template();
+    logic_less_template_generator::populate(position, *p);
+    return p;
+}
+
+logic_less_template_generator::result_type
+logic_less_template_generator::operator()() {
     return create(position_++);
 }
 
