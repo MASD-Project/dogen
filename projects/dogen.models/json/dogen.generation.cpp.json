@@ -1212,6 +1212,14 @@
         {
           "name": "tests_directory_name",
           "type": "std::string"
+        },
+        {
+          "name": "templates_directory_name",
+          "type": "std::string"
+        },
+        {
+          "name": "templates_file_extension",
+          "type": "std::string"
         }
       ]
     },
@@ -2993,6 +3001,16 @@
           }
         },
         {
+          "name": "masd.generation.cpp.templates_directory_name",
+          "type": "masd::variability::text",
+          "value": "\"templates\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
           "name": "masd.generation.cpp.header_file_extension",
           "type": "masd::variability::text",
           "value": "\"hpp\"",
@@ -3006,6 +3024,16 @@
           "name": "masd.generation.cpp.implementation_file_extension",
           "type": "masd::variability::text",
           "value": "\"cpp\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.templates_file_extension",
+          "type": "masd::variability::text",
+          "value": "\"wale\"",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",

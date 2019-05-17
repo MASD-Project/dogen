@@ -34,7 +34,9 @@ locator_configuration::locator_configuration(
     const std::string& header_file_extension,
     const std::string& implementation_file_extension,
     const std::string& backend_directory_name,
-    const std::string& tests_directory_name)
+    const std::string& tests_directory_name,
+    const std::string& templates_directory_name,
+    const std::string& templates_file_extension)
     : facet_configurations_(facet_configurations),
       archetype_configurations_(archetype_configurations),
       include_directory_name_(include_directory_name),
@@ -43,7 +45,9 @@ locator_configuration::locator_configuration(
       header_file_extension_(header_file_extension),
       implementation_file_extension_(implementation_file_extension),
       backend_directory_name_(backend_directory_name),
-      tests_directory_name_(tests_directory_name) { }
+      tests_directory_name_(tests_directory_name),
+      templates_directory_name_(templates_directory_name),
+      templates_file_extension_(templates_file_extension) { }
 
 void locator_configuration::swap(locator_configuration& other) noexcept {
     using std::swap;
@@ -56,6 +60,8 @@ void locator_configuration::swap(locator_configuration& other) noexcept {
     swap(implementation_file_extension_, other.implementation_file_extension_);
     swap(backend_directory_name_, other.backend_directory_name_);
     swap(tests_directory_name_, other.tests_directory_name_);
+    swap(templates_directory_name_, other.templates_directory_name_);
+    swap(templates_file_extension_, other.templates_file_extension_);
 }
 
 bool locator_configuration::operator==(const locator_configuration& rhs) const {
@@ -67,7 +73,9 @@ bool locator_configuration::operator==(const locator_configuration& rhs) const {
         header_file_extension_ == rhs.header_file_extension_ &&
         implementation_file_extension_ == rhs.implementation_file_extension_ &&
         backend_directory_name_ == rhs.backend_directory_name_ &&
-        tests_directory_name_ == rhs.tests_directory_name_;
+        tests_directory_name_ == rhs.tests_directory_name_ &&
+        templates_directory_name_ == rhs.templates_directory_name_ &&
+        templates_file_extension_ == rhs.templates_file_extension_;
 }
 
 locator_configuration& locator_configuration::operator=(locator_configuration other) {
@@ -210,6 +218,38 @@ void locator_configuration::tests_directory_name(const std::string& v) {
 
 void locator_configuration::tests_directory_name(const std::string&& v) {
     tests_directory_name_ = std::move(v);
+}
+
+const std::string& locator_configuration::templates_directory_name() const {
+    return templates_directory_name_;
+}
+
+std::string& locator_configuration::templates_directory_name() {
+    return templates_directory_name_;
+}
+
+void locator_configuration::templates_directory_name(const std::string& v) {
+    templates_directory_name_ = v;
+}
+
+void locator_configuration::templates_directory_name(const std::string&& v) {
+    templates_directory_name_ = std::move(v);
+}
+
+const std::string& locator_configuration::templates_file_extension() const {
+    return templates_file_extension_;
+}
+
+std::string& locator_configuration::templates_file_extension() {
+    return templates_file_extension_;
+}
+
+void locator_configuration::templates_file_extension(const std::string& v) {
+    templates_file_extension_ = v;
+}
+
+void locator_configuration::templates_file_extension(const std::string&& v) {
+    templates_file_extension_ = std::move(v);
 }
 
 }

@@ -120,6 +120,12 @@ locator::make_feature_group(const variability::meta_model::feature_model& fm,
     const auto& tdn(traits::cpp::tests_directory_name());
     r.tests_directory_name = s.get_by_name(tdn);
 
+    const auto& tpl_dn(traits::cpp::templates_directory_name());
+    r.templates_directory_name = s.get_by_name(tpl_dn);
+
+    const auto& tpl_fe(traits::cpp::templates_file_extension());
+    r.templates_file_extension = s.get_by_name(tpl_fe);
+
     const auto& hde(traits::cpp::header_file_extension());
     r.header_file_extension = s.get_by_name(hde);
 
@@ -433,6 +439,10 @@ std::string locator::tests_directory_name() const {
     return configuration_.tests_directory_name();
 }
 
+std::string locator::templates_directory_name() const {
+    return configuration_.templates_directory_name();
+}
+
 boost::filesystem::path locator::
 make_relative_include_path(bool for_include_statement) const {
     boost::filesystem::path r;
@@ -514,6 +524,18 @@ boost::filesystem::path locator::make_relative_implementation_path_for_facet(
     const auto& fct_cfg(configuration_for_facet(facet));
     if (!fct_cfg.directory().empty() && !cfg.disable_facet_directories())
         r /= fct_cfg.directory();
+
+    return r;
+}
+
+boost::filesystem::path locator::make_full_path_for_templates(
+    const coding::meta_model::name& n, const std::string& archetype) const {
+    auto r(project_path_);
+
+    const auto& cfg(configuration_);
+    const auto extension(cfg.templates_file_extension());
+    const auto facet_path(make_facet_path(archetype, extension, n));
+    r /= facet_path;
 
     return r;
 }

@@ -18,12 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.generation.cpp/types/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/templates/traits.hpp"
 
 namespace dogen::generation::cpp::formatters::templates {
 
-bool traits::operator==(const traits& /*rhs*/) const {
-    return true;
+std::string traits::facet() {
+    static std::string r(cpp::traits::backend() + ".templates");
+    return r;
+}
+
+std::string traits::canonical_archetype() {
+    static std::string r(traits::facet() + ".canonical_archetype");
+    return r;
+}
+
+std::string traits::logic_less_template_archetype() {
+    static std::string r(traits::facet() + ".logic_less_template");
+    return r;
 }
 
 }

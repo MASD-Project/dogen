@@ -78,6 +78,8 @@ populate(const unsigned int position, result_type& v) {
     v.implementation_file_extension(create_std_string(position + 6));
     v.backend_directory_name(create_std_string(position + 7));
     v.tests_directory_name(create_std_string(position + 8));
+    v.templates_directory_name(create_std_string(position + 9));
+    v.templates_file_extension(create_std_string(position + 10));
 }
 
 locator_configuration_generator::result_type

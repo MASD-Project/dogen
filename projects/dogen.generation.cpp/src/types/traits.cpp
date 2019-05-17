@@ -147,6 +147,11 @@ std::string traits::cpp::implementation_file_extension() {
     return r;
 }
 
+std::string traits::cpp::templates_file_extension() {
+    static std::string r("masd.generation.cpp.templates_file_extension");
+    return r;
+}
+
 std::string traits::cpp::include_directory_name() {
     static std::string r("masd.generation.cpp.include_directory_name");
     return r;
@@ -159,6 +164,11 @@ std::string traits::cpp::source_directory_name() {
 
 std::string traits::cpp::tests_directory_name() {
     static std::string r("masd.generation.cpp.tests_directory_name");
+    return r;
+}
+
+std::string traits::cpp::templates_directory_name() {
+    static std::string r("masd.generation.cpp.templates_directory_name");
     return r;
 }
 

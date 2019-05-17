@@ -52,7 +52,9 @@ public:
         const std::string& header_file_extension,
         const std::string& implementation_file_extension,
         const std::string& backend_directory_name,
-        const std::string& tests_directory_name);
+        const std::string& tests_directory_name,
+        const std::string& templates_directory_name,
+        const std::string& templates_file_extension);
 
 public:
     const std::unordered_map<std::string, dogen::generation::cpp::formattables::locator_facet_configuration>& facet_configurations() const;
@@ -98,6 +100,16 @@ public:
     void tests_directory_name(const std::string& v);
     void tests_directory_name(const std::string&& v);
 
+    const std::string& templates_directory_name() const;
+    std::string& templates_directory_name();
+    void templates_directory_name(const std::string& v);
+    void templates_directory_name(const std::string&& v);
+
+    const std::string& templates_file_extension() const;
+    std::string& templates_file_extension();
+    void templates_file_extension(const std::string& v);
+    void templates_file_extension(const std::string&& v);
+
 public:
     bool operator==(const locator_configuration& rhs) const;
     bool operator!=(const locator_configuration& rhs) const {
@@ -118,6 +130,8 @@ private:
     std::string implementation_file_extension_;
     std::string backend_directory_name_;
     std::string tests_directory_name_;
+    std::string templates_directory_name_;
+    std::string templates_file_extension_;
 };
 
 }

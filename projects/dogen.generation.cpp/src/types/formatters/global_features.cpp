@@ -144,6 +144,26 @@ make_masd_generation_cpp_tests_directory_name() {
 }
 
 dogen::variability::meta_model::feature_template
+make_masd_generation_cpp_templates_directory_name() {
+    using namespace dogen::variability::meta_model;
+    feature_template r;
+    r.name().simple("templates_directory_name");
+    r.name().qualified("masd.generation.cpp.templates_directory_name");
+    const auto vt(value_type::text);
+    r.value_type(vt);
+    r.binding_point(binding_point::global);
+    r.kind(template_kind::instance);
+    dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ "templates" }));
+
+    archetypes::location al;
+    al.kernel("masd");
+
+     r.location(al);
+     return r;
+}
+
+dogen::variability::meta_model::feature_template
 make_masd_generation_cpp_header_file_extension() {
     using namespace dogen::variability::meta_model;
     feature_template r;
@@ -175,6 +195,26 @@ make_masd_generation_cpp_implementation_file_extension() {
     r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "cpp" }));
+
+    archetypes::location al;
+    al.kernel("masd");
+
+     r.location(al);
+     return r;
+}
+
+dogen::variability::meta_model::feature_template
+make_masd_generation_cpp_templates_file_extension() {
+    using namespace dogen::variability::meta_model;
+    feature_template r;
+    r.name().simple("templates_file_extension");
+    r.name().qualified("masd.generation.cpp.templates_file_extension");
+    const auto vt(value_type::text);
+    r.value_type(vt);
+    r.binding_point(binding_point::global);
+    r.kind(template_kind::instance);
+    dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ "wale" }));
 
     archetypes::location al;
     al.kernel("masd");
@@ -535,8 +575,10 @@ global_features::make_templates() {
     r.push_back(make_masd_generation_cpp_source_directory_name());
     r.push_back(make_masd_generation_cpp_include_directory_name());
     r.push_back(make_masd_generation_cpp_tests_directory_name());
+    r.push_back(make_masd_generation_cpp_templates_directory_name());
     r.push_back(make_masd_generation_cpp_header_file_extension());
     r.push_back(make_masd_generation_cpp_implementation_file_extension());
+    r.push_back(make_masd_generation_cpp_templates_file_extension());
     r.push_back(make_masd_generation_cpp_enable_unique_file_names());
     r.push_back(make_masd_generation_cpp_aspect_requires_manual_default_constructor());
     r.push_back(make_masd_generation_cpp_aspect_requires_manual_move_constructor());

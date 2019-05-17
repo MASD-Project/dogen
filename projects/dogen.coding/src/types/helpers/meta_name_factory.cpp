@@ -122,4 +122,11 @@ make_variability_feature_template_initializer_name() {
     return r;
 }
 
+meta_model::name meta_name_factory::
+make_templating_logic_less_templates_name() {
+    static const auto r(
+        make_name("templating_logic_less_templates_name"));
+    return r;
+}
+
 }

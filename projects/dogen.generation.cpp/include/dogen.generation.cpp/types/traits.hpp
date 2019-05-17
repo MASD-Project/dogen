@@ -140,6 +140,11 @@ struct traits {
         static std::string implementation_file_extension();
 
         /**
+         * @brief File extension to use templates.
+         */
+        static std::string templates_file_extension();
+
+        /**
          * @brief Name of the directory containing the include files.
          */
         static std::string include_directory_name();
@@ -153,6 +158,11 @@ struct traits {
          * @brief Name of the directory containing the test files.
          */
         static std::string tests_directory_name();
+
+        /**
+         * @brief Name of the directory containing the template files.
+         */
+        static std::string templates_directory_name();
 
         /**
          * @brief Name of the directory housing the backend.

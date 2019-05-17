@@ -76,8 +76,10 @@ private:
         variability::meta_model::feature include_directory_name;
         variability::meta_model::feature source_directory_name;
         variability::meta_model::feature tests_directory_name;
+        variability::meta_model::feature templates_directory_name;
         variability::meta_model::feature disable_facet_directories;
         variability::meta_model::feature backend_directory_name;
+        variability::meta_model::feature templates_file_extension;
     };
 
     feature_group make_feature_group(
@@ -196,6 +198,11 @@ public:
      */
     std::string tests_directory_name() const;
 
+    /**
+     * @brief Name of the templates directory.
+     */
+    std::string templates_directory_name() const;
+
 public:
     /**
      * @brief Generate the relative path to the include directory.
@@ -243,6 +250,12 @@ public:
      */
     boost::filesystem::path make_relative_implementation_path_for_facet(
         const std::string& facet) const;
+
+    /**
+     * @brief Generate the full path for templates.
+     */
+    boost::filesystem::path make_full_path_for_templates(
+        const coding::meta_model::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for C++ implementation for tests
