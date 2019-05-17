@@ -118,6 +118,12 @@ for layer in dia.active_display().diagram.data.layers:
             object.properties["fill_colour"] = "#F9FF7C"
 
         #
+        # Theme: Templating
+        #
+        elif "masd::templating::logic_less_templates" in stereotype:
+            object.properties["fill_colour"] = "#5EB55E"
+
+        #
         # Theme: Core meta-elements
         #
         elif "masd::enumeration" in stereotype:
