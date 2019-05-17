@@ -3319,6 +3319,116 @@
           }
         }
       ]
+    },
+    {
+      "name": "cpp_artefact_formatter_header",
+      "stereotypes": [
+        "masd::templating::logic_less_templates"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "cpp_artefact_formatter_implementation",
+      "stereotypes": [
+        "masd::templating::logic_less_templates"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "cpp_artefact_formatter_implementation_header",
+      "stereotypes": [
+        "masd::templating::logic_less_templates"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "cpp_helper_formatter_header",
+      "stereotypes": [
+        "masd::templating::logic_less_templates"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "cpp_helper_formatter_implementation",
+      "stereotypes": [
+        "masd::templating::logic_less_templates"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "cpp_helper_formatter_implementation_enabled",
+      "stereotypes": [
+        "masd::templating::logic_less_templates"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::templates",
+      "documentation": "Formatters related to templating.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "formatters::templates::initializer",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::templates::traits",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::templates::logic_less_template_formatter",
+      "stereotypes": [
+        "dogen::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::templates::features",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.cpp.templates.directory",
+          "type": "masd::variability::text",
+          "value": "\"templates\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.templates.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.templates.logic_less_template.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global"
+          }
+        }
+      ]
     }
   ]
 }
