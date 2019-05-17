@@ -138,11 +138,12 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_the_same_model_resolves_succe
 BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_different_model_results_in_successful_merge) {
     SETUP_TEST_LOG_SOURCE("object_with_attribute_type_in_different_model_results_in_successful_merge");
 
+    dogen::coding::meta_model::model_set ms;
     const auto m(factory.object_with_attribute_type_in_different_model());
-
-    const std::list<model> refs = { m[1] };
+    ms.target(m[0]);
+    ms.references().push_back(m[1]);
     const auto ctx(mock_context_factory::make());
-    auto combined(merge_transform::apply(ctx, m[0], refs));
+    auto combined(merge_transform::apply(ctx, ms));
     BOOST_CHECK(combined.structural_elements().objects().size() == 2);
     BOOST_CHECK(combined.structural_elements().builtins().empty());
 
@@ -178,11 +179,11 @@ BOOST_AUTO_TEST_CASE(object_with_missing_attribute_type_throws) {
 
 BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully) {
     SETUP_TEST_LOG_SOURCE("object_with_parent_in_the_same_model_resolves_successfully");
-    const auto m(factory.object_with_parent_in_the_same_model());
+    dogen::coding::meta_model::model_set ms;
+    ms.target(factory.object_with_parent_in_the_same_model());
 
-    const std::list<model> refs;
     const auto ctx(mock_context_factory::make());
-    auto combined(merge_transform::apply(ctx, m, refs));
+    auto combined(merge_transform::apply(ctx, ms));
     BOOST_CHECK(combined.structural_elements().objects().size() == 2);
     BOOST_CHECK(combined.structural_elements().builtins().empty());
 
@@ -209,12 +210,12 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
 BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfully) {
     SETUP_TEST_LOG_SOURCE("object_with_parent_in_different_models_resolves_successfully");
 
-
+    dogen::coding::meta_model::model_set ms;
     const auto m(factory.object_with_parent_in_different_models());
-
-    const std::list<model> refs = { m[1] };
+    ms.target(m[0]);
+    ms.references().push_back(m[1]);
     const auto ctx(mock_context_factory::make());
-    auto combined(merge_transform::apply(ctx, m[0], refs));
+    auto combined(merge_transform::apply(ctx, ms));
     BOOST_CHECK(combined.structural_elements().objects().size() == 2);
     BOOST_CHECK(combined.structural_elements().builtins().empty());
 
@@ -240,11 +241,11 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
 
 BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_successfully) {
     SETUP_TEST_LOG_SOURCE("object_with_third_degree_parent_in_same_model_resolves_successfully");
-    const auto m(factory.object_with_third_degree_parent_in_same_model());
-    const std::list<model> refs;
+    dogen::coding::meta_model::model_set ms;
+    ms.target(factory.object_with_third_degree_parent_in_same_model());
 
     const auto ctx(mock_context_factory::make());
-    auto combined(merge_transform::apply(ctx, m, refs));
+    auto combined(merge_transform::apply(ctx, ms));
     BOOST_CHECK(combined.structural_elements().objects().size() == 4);
     BOOST_CHECK(combined.structural_elements().builtins().empty());
 
@@ -291,11 +292,15 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_missing_within_single_model
 BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolves_successfully) {
     SETUP_TEST_LOG_SOURCE("object_with_third_degree_parent_in_different_models_resolves_successfully");
 
+    dogen::coding::meta_model::model_set ms;
     const auto a(factory.object_with_third_degree_parent_in_different_models());
-    const std::list<model> refs = { a[1], a[2], a[3] };
+    ms.target(a[0]);
+    ms.references().push_back(a[1]);
+    ms.references().push_back(a[2]);
+    ms.references().push_back(a[3]);
 
     const auto ctx(mock_context_factory::make());
-    auto combined(merge_transform::apply(ctx, a[0], refs));
+    auto combined(merge_transform::apply(ctx, ms));
     BOOST_CHECK(combined.structural_elements().objects().size() == 4);
     BOOST_CHECK(combined.structural_elements().builtins().empty());
 
@@ -321,12 +326,15 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
 
 BOOST_AUTO_TEST_CASE(object_with_missing_third_degree_parent_in_different_models_throws) {
     SETUP_TEST_LOG("object_with_missing_third_degree_parent_in_different_models_throws");
+    dogen::coding::meta_model::model_set ms;
     const auto a(
         factory.object_with_missing_third_degree_parent_in_different_models());
+    ms.target(a[0]);
+    ms.references().push_back(a[1]);
+    ms.references().push_back(a[2]);
 
     const auto ctx(mock_context_factory::make());
-    const std::list<model> refs = { a[1], a[2] };
-    auto combined(merge_transform::apply(ctx, a[0], refs));
+    auto combined(merge_transform::apply(ctx, ms));
 
     contains_checker<resolution_error> c(missing_parent);
     BOOST_CHECK_EXCEPTION(

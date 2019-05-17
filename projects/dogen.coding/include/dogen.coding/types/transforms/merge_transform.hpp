@@ -29,6 +29,7 @@
 #include <string>
 #include <unordered_map>
 #include "dogen.coding/types/meta_model/model.hpp"
+#include "dogen.coding/types/meta_model/model_set.hpp"
 #include "dogen.coding/types/transforms/context.hpp"
 
 namespace dogen::coding::transforms {
@@ -59,10 +60,13 @@ private:
     static void merge(const meta_model::model& src,
         meta_model::model& dst);
 
+private:
+    static meta_model::model merge(const meta_model::model& target,
+        const std::list<meta_model::model>& refs);
+
 public:
     static meta_model::model apply(const context& ctx,
-        const meta_model::model& target,
-        const std::list<meta_model::model>& refs);
+        const coding::meta_model::model_set& ms);
 };
 
 }

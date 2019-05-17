@@ -23,6 +23,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.coding/io/meta_model/technical_space_io.hpp"
 #include "dogen.coding/io/meta_model/model_io.hpp"
+#include "dogen.coding/io/meta_model/model_set_io.hpp"
 #include "dogen.coding/types/transforms/merge_transform.hpp"
 
 namespace {
@@ -103,12 +104,8 @@ merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
     dst.references().insert(p);
 }
 
-meta_model::model merge_transform::apply(const context& ctx,
-    const meta_model::model& target,
+meta_model::model merge_transform::merge(const meta_model::model& target,
     const std::list<meta_model::model>& refs) {
-    tracing::scoped_transform_tracer stp(lg, "merge transform",
-        transform_id, target.name().qualified().dot(), *ctx.tracer());
-
     /*
      * We start by making a complete copy of the target model, which
      * initialises all of the relevant parts of the merged model such
@@ -122,6 +119,16 @@ meta_model::model merge_transform::apply(const context& ctx,
     for (const auto& ref : refs)
         merge(ref, r);
 
+    return r;
+}
+
+meta_model::model merge_transform::apply(const context &ctx,
+    const coding::meta_model::model_set &ms) {
+    const auto id(ms.target().name().qualified().dot());
+    tracing::scoped_transform_tracer stp(lg, "merge transform",
+        transform_id, id, *ctx.tracer(), ms);
+
+    const auto r(merge(ms.target(), ms.references()));
     stp.end_transform(r);
     return r;
 }

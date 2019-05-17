@@ -38,41 +38,20 @@ static logger lg(logger_factory(transform_id));
 namespace dogen::coding::transforms {
 
 meta_model::model assembly_chain::apply(const context& ctx,
-    const meta_model::technical_space ts, const meta_model::model& target,
-    const std::list<meta_model::model>& refs) {
-    tracing::scoped_chain_tracer stp(lg, "model assembly chain",
-        transform_id, target.name().qualified().dot(), *ctx.tracer());
+    const meta_model::technical_space ts, coding::meta_model::model_set ms) {
+    const auto id (ms.target().name().qualified().dot());
+    tracing::scoped_chain_tracer stp(lg, "model assembly chain", transform_id,
+        id, *ctx.tracer());
 
     /*
-     * Perform all the technical space mapping required for the target
-     * model.
+     * First map the model set, if required.
      */
-    const auto mapped_target(mapping_transform::apply(ctx, target, ts));
+    const auto mapped_set(mapping_transform::apply(ctx, ms, ts));
 
     /*
-     * Now do the same for the references.
+     * Then merge the mapped set.
      */
-    std::list<meta_model::model> mapped_refs;
-    for (const auto& ref : refs) {
-        /*
-         * Note that we have all references for all the output
-         * technical spaces requested by the target model. We are only
-         * concerned with those that require mapping into ts - i.e., a
-         * subset of that set. We need to exclude all models which are
-         * not mappable to ts, such as for example the system models.
-         */
-        if (!mapping_transform::is_mappable(ref.input_technical_space(), ts)) {
-            BOOST_LOG_SEV(lg, debug) << "Skipping reference: "
-                                     << ref.name().qualified().dot();
-            continue;
-        }
-        mapped_refs.push_back(mapping_transform::apply(ctx, ref, ts));
-    }
-
-    /*
-     * Merge the mapped models.
-     */
-    const auto r(merge_transform::apply(ctx, mapped_target, mapped_refs));
+    const auto r(merge_transform::apply(ctx, mapped_set));
 
     stp.end_chain(r);
     return r;

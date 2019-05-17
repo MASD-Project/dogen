@@ -25,6 +25,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.coding/lexical_cast/meta_model/technical_space_lc.hpp"
 #include "dogen.coding/io/meta_model/model_io.hpp"
+#include "dogen.coding/io/meta_model/model_set_io.hpp"
 #include "dogen.coding/types/meta_model/mapping/extensible_mappable.hpp"
 #include "dogen.coding/io/helpers/mapping_io.hpp"
 #include "dogen.coding/io/helpers/mapping_set_io.hpp"
@@ -174,8 +175,6 @@ bool mapping_transform::is_mappable(const meta_model::technical_space from,
 
 meta_model::model mapping_transform::apply(const context& ctx,
     const meta_model::model& src, const meta_model::technical_space to) {
-    tracing::scoped_transform_tracer stp(lg, "mapping transform",
-        transform_id, src.name().qualified().dot(), *ctx.tracer(), src);
 
     const bool new_world(false);
     if (new_world) {
@@ -189,14 +188,49 @@ meta_model::model mapping_transform::apply(const context& ctx,
         const auto mrp(create_repository(mappings));
         const helpers::mapper mp(mrp);
         auto r(mp.map(src.input_technical_space(), to, src));
-        stp.end_transform(r);
         return r;
     } else {
         const helpers::mapper mp(*ctx.mapping_repository());
         auto r(mp.map(src.input_technical_space(), to, src));
-        stp.end_transform(r);
         return r;
     }
+}
+
+coding::meta_model::model_set
+mapping_transform::apply(const context& ctx, coding::meta_model::model_set src,
+    const meta_model::technical_space to) {
+    const auto id(src.target().name().qualified().dot());
+    tracing::scoped_transform_tracer stp(lg, "mapping transform", transform_id,
+        id, *ctx.tracer(), src);
+
+    /*
+     * Perform all the technical space mapping required for the target
+     * model.
+     */
+    coding::meta_model::model_set r;
+    r.target(mapping_transform::apply(ctx, src.target(), to));
+
+    /*
+     * Now do the same for the references.
+     */
+    std::list<meta_model::model> mapped_refs;
+    for (const auto& ref : src.references()) {
+        /*
+         * Note that we have all references for all the output
+         * technical spaces requested by the target model. We are only
+         * concerned with those that require mapping into ts - i.e., a
+         * subset of that set. We need to exclude all models which are
+         * not mappable to ts, such as for example the system models.
+         */
+        if (!mapping_transform::is_mappable(ref.input_technical_space(), to)) {
+            BOOST_LOG_SEV(lg, debug) << "Skipping reference: "
+                                     << ref.name().qualified().dot();
+            continue;
+        }
+        r.references().push_back(mapping_transform::apply(ctx, ref, to));
+    }
+    stp.end_transform(r);
+    return r;
 }
 
 }

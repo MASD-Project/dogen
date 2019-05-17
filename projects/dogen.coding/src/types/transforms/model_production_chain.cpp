@@ -90,7 +90,7 @@ model_production_chain::apply(const context& ctx,
          * Execute the assembly chain for each of the requested output
          * technical spaces.
          */
-        auto m(assembly_chain::apply(ctx, ots, ms.target(), ms.references()));
+        auto m(assembly_chain::apply(ctx, ots, ms));
 
         /*
          * Then apply all of the post-processing transforms to the

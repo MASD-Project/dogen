@@ -30,6 +30,7 @@
 #include "dogen.coding/types/helpers/mapping_value.hpp"
 #include "dogen.coding/types/helpers/mapping_set_repository.hpp"
 #include "dogen.coding/types/meta_model/model.hpp"
+#include "dogen.coding/types/meta_model/model_set.hpp"
 #include "dogen.coding/types/meta_model/technical_space.hpp"
 #include "dogen.coding/types/transforms/context_fwd.hpp"
 
@@ -63,12 +64,17 @@ private:
         const std::unordered_map<std::string,
         std::list<helpers::mapping>>& mappings_by_set_name);
 
-public:
+private:
     static bool is_mappable(const meta_model::technical_space from,
         const meta_model::technical_space to);
 
     static meta_model::model apply(const context& ctx,
         const meta_model::model& src, const meta_model::technical_space to);
+
+public:
+    static coding::meta_model::model_set apply(const context& ctx,
+        coding::meta_model::model_set src,
+        const meta_model::technical_space to);
 };
 
 }
