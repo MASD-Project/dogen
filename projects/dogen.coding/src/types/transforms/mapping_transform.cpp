@@ -44,6 +44,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 const std::string default_mapping_set_name("default.mapping_set");
+const std::string duplicate_mappable_id("Duplicate extensible mappable id: ");
 const std::string duplicate_agnostic_id("Duplicate agnostic id: ");
 const std::string duplicate_technical_space(
     "Technical space mapped more than once: ");
@@ -52,12 +53,33 @@ const std::string duplicate_technical_space(
 
 namespace dogen::coding::transforms {
 
-std::unordered_map<std::string, std::list<helpers::mapping>>
-mapping_transform::obtain_mappings(const meta_model::model& m) {
-    std::unordered_map<std::string, std::list<helpers::mapping>> r;
+std::unordered_map<std::string,
+                   boost::shared_ptr<
+                       meta_model::mapping::extensible_mappable>
+                   >
+mapping_transform::obtain_mappables(const coding::meta_model::model_set& ms) {
+    auto r(ms.target().mapping_elements().extensible_mappables());
+    for (const auto& ref : ms.references()) {
+        for (const auto& pair : ref.mapping_elements().extensible_mappables()) {
+            const auto inserted(r.insert(pair).second);
+            if (!inserted) {
+                const auto s(pair.first);
+                BOOST_LOG_SEV(lg, error) << duplicate_mappable_id << s;
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(duplicate_mappable_id + s));
+            }
+        }
+    }
+    return r;
+}
 
-    const auto& ems(m.mapping_elements().extensible_mappables());
-    for(const auto& pair : ems) {
+std::unordered_map<std::string, std::list<helpers::mapping>>
+mapping_transform::create_mappings(const std::unordered_map<std::string,
+    boost::shared_ptr<meta_model::mapping::extensible_mappable>>&
+    mappables) {
+
+    std::unordered_map<std::string, std::list<helpers::mapping>> r;
+    for(const auto& pair : mappables) {
         const auto id(pair.first);
         helpers::mapping mapping;
         mapping.agnostic_id(id);
@@ -174,19 +196,12 @@ bool mapping_transform::is_mappable(const meta_model::technical_space from,
 }
 
 meta_model::model mapping_transform::apply(const context& ctx,
+    const helpers::mapping_set_repository& msrp,
     const meta_model::model& src, const meta_model::technical_space to) {
 
-    const bool new_world(false);
+    const bool new_world(true);
     if (new_world) {
-        const auto mappings(obtain_mappings(src));
-        if (mappings.empty()) {
-            BOOST_LOG_SEV(lg, debug) << "No mappings, skipping validation.";
-            // return src;
-        } else
-            validate_mappings(mappings);
-
-        const auto mrp(create_repository(mappings));
-        const helpers::mapper mp(mrp);
+        const helpers::mapper mp(msrp);
         auto r(mp.map(src.input_technical_space(), to, src));
         return r;
     } else {
@@ -197,18 +212,39 @@ meta_model::model mapping_transform::apply(const context& ctx,
 }
 
 coding::meta_model::model_set
-mapping_transform::apply(const context& ctx, coding::meta_model::model_set src,
+mapping_transform::apply(const context& ctx,
+    const coding::meta_model::model_set& src,
     const meta_model::technical_space to) {
     const auto id(src.target().name().qualified().dot());
     tracing::scoped_transform_tracer stp(lg, "mapping transform", transform_id,
         id, *ctx.tracer(), src);
 
     /*
+     * First we retrieve all mappables across the model set.
+     */
+    const auto mappables(obtain_mappables(src));
+
+    /*
+     * We then use the mappables to create the mappings. If there are
+     * no mappings we needn't bother to validate them.
+     */
+    const auto mappings(create_mappings(mappables));
+    if (mappings.empty())
+        BOOST_LOG_SEV(lg, debug) << "No mappings, skipping validation.";
+    else
+        validate_mappings(mappings);
+
+    /*
+     * Now we can create a repository with all the mappings.
+     */
+    const auto msrp(create_repository(mappings));
+
+    /*
      * Perform all the technical space mapping required for the target
      * model.
      */
     coding::meta_model::model_set r;
-    r.target(mapping_transform::apply(ctx, src.target(), to));
+    r.target(mapping_transform::apply(ctx, msrp, src.target(), to));
 
     /*
      * Now do the same for the references.
@@ -227,7 +263,7 @@ mapping_transform::apply(const context& ctx, coding::meta_model::model_set src,
                                      << ref.name().qualified().dot();
             continue;
         }
-        r.references().push_back(mapping_transform::apply(ctx, ref, to));
+        r.references().push_back(mapping_transform::apply(ctx, msrp, ref, to));
     }
     stp.end_transform(r);
     return r;

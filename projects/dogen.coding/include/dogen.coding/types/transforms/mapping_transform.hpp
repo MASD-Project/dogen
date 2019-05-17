@@ -25,6 +25,9 @@
 #pragma once
 #endif
 
+#include <string>
+#include <unordered_map>
+#include <boost/shared_ptr.hpp>
 #include "dogen.coding/types/helpers/mapping.hpp"
 #include "dogen.coding/types/helpers/mapping_set.hpp"
 #include "dogen.coding/types/helpers/mapping_value.hpp"
@@ -39,10 +42,22 @@ namespace dogen::coding::transforms {
 class mapping_transform final {
 private:
     /**
-     * @brief Obtains all the element id mappings.
+     * @brief Retrieve all extensible mappables in the model set.
+     */
+    static std::unordered_map<std::string,
+                       boost::shared_ptr<
+                           meta_model::mapping::extensible_mappable>
+                       >
+    obtain_mappables(const coding::meta_model::model_set& ms);
+
+    /**
+     * @brief Creates all of the element id mappings from the
+     * mappables.
      */
     static std::unordered_map<std::string, std::list<helpers::mapping>>
-    obtain_mappings(const meta_model::model& m);
+    create_mappings(const std::unordered_map<std::string,
+        boost::shared_ptr<meta_model::mapping::extensible_mappable>>&
+        mappables);
 
     /**
      * @brief Ensures the mappings are valid.
@@ -69,11 +84,12 @@ private:
         const meta_model::technical_space to);
 
     static meta_model::model apply(const context& ctx,
+        const helpers::mapping_set_repository& msrp,
         const meta_model::model& src, const meta_model::technical_space to);
 
 public:
     static coding::meta_model::model_set apply(const context& ctx,
-        coding::meta_model::model_set src,
+        const coding::meta_model::model_set& src,
         const meta_model::technical_space to);
 };
 

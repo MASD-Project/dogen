@@ -140,6 +140,7 @@ mapper::injections_for_technical_space(const mapping_set& ms,
         BOOST_LOG_SEV(lg, error) << missing_mapping << lam_pointer;
         BOOST_THROW_EXCEPTION(mapping_error(missing_mapping + lam_pointer));
     }
+
     const auto& n(j->second);
     for (const auto& pair : m.structural_elements().objects()) {
         const auto& o(pair.second);
@@ -154,10 +155,10 @@ mapper::injections_for_technical_space(const mapping_set& ms,
 
 mapping_context mapper::create_mapping_context(const mapping_set& ms,
     const meta_model::technical_space from,
-    const meta_model::technical_space to, const meta_model::model& m) const {
+    const meta_model::technical_space to, const meta_model::model& /*m*/) const {
     mapping_context r;
     r.translations(translations_for_technical_space(ms, from, to));
-    r.injections(injections_for_technical_space(ms, to, m));
+    // r.injections(injections_for_technical_space(ms, to, m));
 
     const auto i(ms.erasures_by_technical_space().find(to));
     if (i != ms.erasures_by_technical_space().end())
