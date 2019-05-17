@@ -18,12 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.generation.cpp/types/formatters/templates/logic_less_template_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/templates/initializer.hpp"
 
 namespace dogen::generation::cpp::formatters::templates {
 
-bool initializer::operator==(const initializer& /*rhs*/) const {
-    return true;
+void initializer::initialize(registrar& rg) {
+    register_formatter<logic_less_template_formatter>(rg);
 }
 
 }
