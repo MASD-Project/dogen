@@ -6751,7 +6751,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="145.358,180.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="145.289,180.43;150.704,184.358"/>
+        <dia:rectangle val="145.288,180.43;150.704,184.358"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6822,7 +6822,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="166.086,184"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="165.336,178.117;176.893,184.8"/>
+        <dia:rectangle val="165.336,178.117;176.894,184.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15282,17 +15282,17 @@ an enumeration, false otherwise.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="281.242,60.0331"/>
+        <dia:point val="281.243,60.0331"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="280.491,49.8333;286.088,60.8331"/>
+        <dia:rectangle val="280.493,49.8333;286.088,60.8331"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="281.242,60.0331"/>
-        <dia:point val="281.239,56"/>
+        <dia:point val="281.243,60.0331"/>
+        <dia:point val="281.242,56"/>
         <dia:point val="285.888,56"/>
         <dia:point val="285.888,49.8833"/>
       </dia:attribute>
@@ -27833,7 +27833,7 @@ not a regular" helper.#</dia:string>
         <dia:point val="73.0375,285.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="71.147,285.429;73.1082,287.324"/>
+        <dia:rectangle val="71.1469,285.429;73.1082,287.324"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
