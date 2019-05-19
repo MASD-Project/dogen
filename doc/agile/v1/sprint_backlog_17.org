@@ -12,34 +12,34 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-17 Fri 17:23]
+#+CAPTION: Clock summary at [2019-05-19 Sun 15:24]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *77:49* |       |       | 100.0 |
+| *Total time*                                               | *78:29* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 77:49   |       |       | 100.0 |
-| Active                                                     |         | 77:49 |       | 100.0 |
+| Stories                                                    | 78:29   |       |       | 100.0 |
+| Active                                                     |         | 78:29 |       | 100.0 |
 | Edit release notes for previous sprint                     |         |       |  2:41 |   3.4 |
 | Create a video demo for the previous sprint's features     |         |       |  2:11 |   2.8 |
-| Sprint and product backlog grooming                        |         |       |  2:24 |   3.1 |
+| Sprint and product backlog grooming                        |         |       |  2:32 |   3.2 |
 | Defining profiles directly on a target model does not work |         |       |  0:30 |   0.6 |
 | Inner modules need to be qualified                         |         |       |  0:22 |   0.5 |
-| Create namespaces for model elements                       |         |       |  8:59 |  11.5 |
+| Create namespaces for model elements                       |         |       |  8:59 |  11.4 |
 | Leaves in internal modules are not captured correctly      |         |       |  1:33 |   2.0 |
-| Try to add relational tracing support                      |         |       |  2:51 |   3.7 |
+| Try to add relational tracing support                      |         |       |  2:51 |   3.6 |
 | Linux and OSX binaries are not stripped                    |         |       |  1:23 |   1.8 |
 | Fix issues with nightly build and CI                       |         |       |  0:05 |   0.1 |
-| Emacs maintenance and exploration work                     |         |       |  0:40 |   0.9 |
-| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |   9.3 |
-| Replace JSON based feature templates with generated code   |         |       | 16:15 |  20.9 |
-| Make a clear separation between dogen and masd             |         |       |  5:17 |   6.8 |
+| Emacs maintenance and exploration work                     |         |       |  0:40 |   0.8 |
+| Initial analysis to code generate feature infrastructure   |         |       |  7:13 |   9.2 |
+| Replace JSON based feature templates with generated code   |         |       | 16:15 |  20.7 |
+| Make a clear separation between dogen and masd             |         |       |  5:17 |   6.7 |
 | Add a method in enumeration that converts it from strings  |         |       |  7:49 |  10.0 |
 | Update palettes and colour script with new elements        |         |       |  1:09 |   1.5 |
-| Mappings as meta-model elements                            |         |       | 13:45 |  17.7 |
+| Mappings as meta-model elements                            |         |       | 13:45 |  17.5 |
 | Code-generate all transform contexts                       |         |       |  0:08 |   0.2 |
 | Update the MASD UML profile to reflect the latest changes  |         |       |  0:05 |   0.1 |
-| Make wale templates meta-model elements                    |         |       |  2:29 |   3.2 |
+| Make wale templates meta-model elements                    |         |       |  3:01 |   3.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -176,8 +176,10 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 Time spent creating the demo.
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2019-05-19 Sun 15:23]
     :LOGBOOK:
+    CLOCK: [2019-05-19 Sun 15:15]--[2019-05-19 Sun 15:23] =>  0:08
     CLOCK: [2019-05-16 Thu 08:30]--[2019-05-16 Thu 08:44] =>  0:14
     CLOCK: [2019-05-16 Thu 08:12]--[2019-05-16 Thu 08:21] =>  0:09
     CLOCK: [2019-05-15 Wed 18:28]--[2019-05-15 Wed 18:36] =>  0:08
@@ -321,7 +323,8 @@ spare time, we need to generate the model and then create the adapters
 from existing models. Finally we can look at how it will be integrated
 with tracing.
 
-*** STARTED Linux and OSX binaries are not stripped                   :story:
+*** POSTPONED Linux and OSX binaries are not stripped                 :story:
+    CLOSED: [2019-05-19 Sun 15:24]
     :LOGBOOK:
     CLOCK: [2019-05-09 Thu 16:25]--[2019-05-09 Thu 17:20] =>  0:55
     CLOCK: [2019-05-09 Thu 15:56]--[2019-05-09 Thu 16:24] =>  0:28
@@ -362,14 +365,16 @@ Links:
 - [[https://www.technovelty.org/linux/stripping-shared-libraries.html][Stripping shared libraries]]
 - [[https://cmake.org/pipermail/cmake/2012-March/049741.html][make install/strip does not strip static libraries]]
 
-*** STARTED Fix issues with nightly build and CI                      :story:
+*** COMPLETED Fix issues with nightly build and CI                    :story:
+    CLOSED: [2019-05-19 Sun 15:24]
     :LOGBOOK:
     CLOCK: [2019-05-13 Mon 08:08]--[2019-05-13 Mon 08:13] =>  0:05
     :END:
 
 Time spent fixing build issues with either nightlies and/or CI.
 
-*** STARTED Emacs maintenance and exploration work                    :story:
+*** COMPLETED Emacs maintenance and exploration work                  :story:
+    CLOSED: [2019-05-19 Sun 15:24]
     :LOGBOOK:
     CLOCK: [2019-05-16 Thu 14:52]--[2019-05-16 Thu 15:09] =>  0:17
     CLOCK: [2019-05-15 Wed 09:42]--[2019-05-15 Wed 09:53] =>  0:11
@@ -858,7 +863,8 @@ mappings in the meta-model.
 
 It seems we missed the injection context, still marked as handcrafted.
 
-*** STARTED Update the MASD UML profile to reflect the latest changes :story:
+*** POSTPONED Update the MASD UML profile to reflect the latest changes :story:
+    CLOSED: [2019-05-19 Sun 15:24]
     :LOGBOOK:
     CLOCK: [2019-05-13 Mon 11:38]--[2019-05-13 Mon 11:43] =>  0:05
     :END:
@@ -866,8 +872,10 @@ It seems we missed the injection context, still marked as handcrafted.
 The UML profile is now a fair bit out of date. Take advantage of the
 down time waiting for builds to sync it.
 
-*** STARTED Make wale templates meta-model elements                   :story:
+*** CANCELLED Make wale templates meta-model elements                 :story:
+    CLOSED: [2019-05-19 Sun 15:24]
     :LOGBOOK:
+    CLOCK: [2019-05-17 Fri 19:01]--[2019-05-17 Fri 19:33] =>  0:32
     CLOCK: [2019-05-17 Fri 15:18]--[2019-05-17 Fri 17:23] =>  2:05
     CLOCK: [2019-05-17 Fri 14:40]--[2019-05-17 Fri 15:04] =>  0:24
     :END:
@@ -937,251 +945,6 @@ Notes:
 - automatically ignore wale templates by looking at the input
   meta-data.
 - make wale template input path relative to the output directory.
-
-*** Logic-less templates do not belong in =generation.cpp=            :story:
-
-For purely expediency purposes, we placed the logic-less templates in
-the =generation.cpp= model. However, this means you cannot create
-logic-less templates in C# models. For now its fine as Dogen is the
-only user of these meta-model elements, but in the future when we
-create a JSON schema for model data, we will want to use these from
-any technical space. We need to either implement formatters on every
-technical space or find a way to create TS-neutral formatters.
-
-*** Colouring script should be included as part of package            :story:
-
-Users should be able to make use of script as well. We need a tools
-folder in share.
-
-*** Rename =dogen::cpp::header_only= stereotypes                      :story:
-
-Originally, we created these stereotypes for MASD:
-
-- =dogen::cpp::header_only=
-- =dogen::cpp::implementation_only=
-
-Now that have been moved across to dogen they make a lot less sense
-with these names. We have started a new naming pattern:
-
-- =dogen::handcrafted::pretty_printable=
-- =dogen::handcrafted::typeable=
-
-Therefore these should probably be something like:
-
-- =dogen::handcrafted::typeable::header_only=
-- =dogen::handcrafted::typeable::implementation_only=
-
-Because we are configuring types to have only
-header/implementation. The technical space is irrelevant as these are
-only used inside of dogen, all of which exists in the C++ technical
-space.
-
-Tasks:
-
-- update the profile names
-- update all models
-- update the colour palette.
-- remove these profiles from the reference model.
-
-*** Add aliases to enumeration string conversions                     :story:
-
-We often need to cast a enum from a string but the name is not exactly
-like the original enumeration. For example, we use enums for
-stereotypes but we cannot have the same namespacing structure on the
-enum. For these cases it would be nice to be able to supply an alias.
-
-The only slight problem is that if we use this approach, the cast will
-still work when you supply the simple or qualified enumeration.
-
-Perhaps we can have two concepts:
-
-- alias. Everything else will still work.
-- overrides. Only the override is considered valid. Conversions will
-  now always use the override.
-
-*** Allow user supplied enumerator values                             :story:
-
-Now that we have value support in injection, it should be fairly
-straightforward to allow users to supply their own enumeration
-values. When this happens we need to check that:
-
-- they are unique and valid according to enumeration type;
-- they do not class with invalid value.
-
-Actually we have implemented this but using meta-data for some
-reason. We need to remove the meta-data support and use the value
-field instead.
-
-*** Consider adding a =to_string= facet                               :story:
-
-We originally added the boost lexical cast facet, but that requires
-boost. The new  C++ approach seems to be to use the conversion methods
-=to_string=. However, there is no equivalent "from string". We could
-add it though.
-
-Links:
-
-- [[http://www.cplusplus.com/reference/string/to_string/][to_string]]
-
-*** Remove empty types in injection.json models                       :story:
-
-At present we are adding type to the converted model, even when its
-empty. For cases such as enumerations this is just confusing:
-
-:     {
-:       "name": "meta_model::static_stereotypes",
-:       "documentation": "Lists all stereotypes defined in the masd UML profile.\n",
-:       "stereotypes": [
-:         "masd::enumeration"
-:       ],
-:       "fallback_element_type": "masd::object",
-:       "attributes": [
-:         {
-:           "name": "object",
-:           "type": ""
-:         },
-:         {
-:           "name": "object_template",
-:           "type": ""
-:         },
-:         {
-:           "name": "exception",
-:           "type": ""
-:         },
-
-It would be much easier to read this if we ignored empty types. We
-need to check that the hydrator is not expecting this field.
-
-*** Create or update samples folder                                   :story:
-
-We should add samples to the package. These could be organsided by
-injector (dia, json), then by language type (lam, cpp, csharp) or vice
-versa.
-
-We could also try to generate all of these models when testing the
-package.
-
-*** Add logging support to generated tests                            :story:
-
-At present generated tests are not writing to the log file. This is
-because we wanted to keep them clean so that users could generate
-tests for their models without having to pull in dogen
-headers. However, for dogen tests this is a bit painful; if a test
-fails we can't just look at the log file to see why. We could have a
-flag to generate tests with logging.
-
-The other problem is we need to move utility into its own library as a
-PDM before we can do this because otherwise the logging will be in
-different locations (i.e. dogen vs reference model).
-
-*** Postfix and directory fields should be templates                  :story:
-
-We need to understand why we didn't templatise these fields. It is
-very painful to have to add these manually for each facet and
-formatter.
-
-Most likely it is because each formatter/facet needs to "override" a
-base value with its own value. For example, we almost always want a
-blank postfix, but occasionally need to set it (=fwd= for forward
-declarations and so forth). Our variability implementation does not
-cope with this type of overrides. We would have to have some kind of
-way of allowing instance templates even though a facet/archetype
-template already exists, and then use the instance template as the
-override. Alternatively, we could simply check for postfix/directory;
-if not present default to empty string.
-
-For extra bonus points, we could allow variables: =${facet.name}=
-could expand to the current facet name on the facet template.
-
-Merged stories:
-
-*Postfix and directory fields in annotations look weird*
-
-Why are we manually instantiating postfix and directory for each
-formatter/facet instead of using templates? This is one of the main
-reasons for breaks/errors when adding a new formatter.
-
-*** Formatter dependencies and model processing                       :story:
-
-At present we are manually adding the includes required by a formatter
-as part of the "inclusion_dependencies" building. There are several
-disadvantages to this approach:
-
-- we are quite far down the pipeline. We've already passed all the
-  model building checks, etc. Thus, there is no way of knowing what
-  the formatter dependencies are. At present this is not a huge
-  problem because we have so few formatters and their dependencies are
-  mainly on the standard library and a few core boost models. However,
-  as we add more formatters this will become a bigger problem. For
-  example, we've added formatters now that require access to
-  variability headers; in an ideal world, we should now need to have a
-  reference to this model (for example, so that when we integrate
-  package management we get the right dependencies, etc).
-- we are hard-coding the header files. At present this is not a big
-  problem. To be honest, we can't see when this would be a big
-  problem, short of models changing their file names and/or
-  locations. Nonetheless, it seems "unclean" to depend on the header
-  file directly.
-- the dependency is on c++ code rather than expressed via a model.
-
-In an ideal world, we would have some kind of way of declaring a
-formatter meta-model element, with a set of dependencies declared via
-meta-data. These are on the model itself. They must be declared
-against a specific archetype. We then would process these as part of
-resolution. We would then map the header files as part of the existing
-machinery for header files.
-
-However one problem with this approach is that we are generating the
-formatter code using stitch at present. For this to work we would need
-to inject a fragment of code into the stitch template somehow with the
-dependencies. Whilst this is not exactly ideal, the advantage is that
-we could piggy-back on this mechanism to inject the postfix fields as
-well, so that we don't need to define these manually in each
-model. However, this needs some thinking because the complexity of
-defining a formatter will increase yet again. When there are problems,
-it will be hard to troubleshoot.
-
-*** Add =structural= namespace to core elements                       :story:
-
-We've created a namespace inside the coding meta-model for the core
-entities but we did not update the MASD profile.
-
-Actually structural is not a very good name - all of the meta-model
-elements are structural elements, really. We need to find a good name
-before we update the stereotypes.
-
-*** Remove empty default values                                       :story:
-
-At present we have a number of default values in feature bundles set
-to the empty string =""=. It makes more sense not to have a default
-value and have the client code handle its absence.
-
-*** Make labels a plain text field not a collection                   :story:
-
-At present it is possible to label a profile with multiple
-labels. This is not a good idea. Make it a plain text field so we can
-only apply a single label.
-
-*** Create a code-generated static configuration reader               :story:
-
-Tasks:
-
-- add a configuration class to the feature bundle. Investigate how we
-  handle the archetype and facet expansion.
-- add a feature group class to the feature bundle. On construction get
-  the feature group to find all of its fields.
-- add a =read= method that uses the feature group to create the static
-  configuration.
-- add support in enumerations to convert a string to the enumeration
-  (simple and qualified name). Calling code can use this method when
-  reading an enumeration.
-- replace calling code with new static features.
-- add io support for the static configuration if the io facet is
-  enabled.
-
-*** Read variability papers                                           :story:
-
-Time spent reading the literature on variability.
 
 ** Deprecated
 *** CANCELLED Consider adding enumerations in dynamic                 :story:
