@@ -184,6 +184,9 @@ locator_configuration locator::make_configuration(const feature_group& fg,
     const auto& ife(fg.implementation_file_extension);
     r.implementation_file_extension(s.get_text_content_or_default(ife));
 
+    const auto& tpl_fe(fg.templates_file_extension);
+    r.templates_file_extension(s.get_text_content_or_default(tpl_fe));
+
     const auto& idn(fg.include_directory_name);
     r.include_directory_name(s.get_text_content_or_default(idn));
 
@@ -192,6 +195,9 @@ locator_configuration locator::make_configuration(const feature_group& fg,
 
     const auto& tdn(fg.tests_directory_name);
     r.tests_directory_name(s.get_text_content_or_default(tdn));
+
+    const auto& tpl_dn(fg.templates_directory_name);
+    r.templates_directory_name(s.get_text_content_or_default(tpl_dn));
 
     const auto& dt(fg.disable_facet_directories);
     r.disable_facet_directories(s.get_boolean_content_or_default(dt));

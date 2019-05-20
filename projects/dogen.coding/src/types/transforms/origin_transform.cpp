@@ -35,6 +35,14 @@
 #include "dogen.coding/types/meta_model/structural/enumeration.hpp"
 #include "dogen.coding/types/meta_model/structural/object_template.hpp"
 #include "dogen.coding/types/meta_model/elements_traversal.hpp"
+#include "dogen.coding/types/meta_model/decoration/licence.hpp"
+#include "dogen.coding/types/meta_model/decoration/modeline.hpp"
+#include "dogen.coding/types/meta_model/decoration/modeline_group.hpp"
+#include "dogen.coding/types/meta_model/decoration/generation_marker.hpp"
+#include "dogen.coding/types/meta_model/variability/profile_template.hpp"
+#include "dogen.coding/types/meta_model/variability/feature_template_initializer.hpp"
+#include "dogen.coding/types/meta_model/variability/feature_bundle.hpp"
+#include "dogen.coding/types/meta_model/templating/logic_less_template.hpp"
 #include "dogen.coding/types/transforms/context.hpp"
 #include "dogen.coding/types/transforms/transformation_error.hpp"
 #include "dogen.coding/types/transforms/origin_transform.hpp"
@@ -58,6 +66,7 @@ namespace {
 using namespace meta_model::structural;
 using namespace meta_model::decoration;
 using namespace meta_model::variability;
+using namespace meta_model::templating;
 
 class updater {
 public:
@@ -84,6 +93,7 @@ public:
     void operator()(feature_template_initializer& fti) { update(fti); }
     void operator()(feature_bundle& ftg) { update(ftg); }
     void operator()(profile_template& pt) { update(pt); }
+    void operator()(logic_less_template& llt) { update(llt); }
 
 private:
     const meta_model::origin_types origin_types_;

@@ -134,6 +134,12 @@ public:
             n(mnf::make_variability_feature_template_initializer_name());
         vftgr.meta_name(n);
     }
+
+    void operator()(coding::meta_model::templating::logic_less_template& llt) {
+        static const auto
+            n(mnf::make_templating_logic_less_templates_name());
+        llt.meta_name(n);
+    }
 };
 
 void meta_naming_transform::

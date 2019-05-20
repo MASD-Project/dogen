@@ -78,7 +78,7 @@ boost::filesystem::path logic_less_template_formatter::inclusion_path(
 
 boost::filesystem::path logic_less_template_formatter::full_path(
     const formattables::locator& l, const coding::meta_model::name& n) const {
-    return l.make_full_path_for_tests_cpp_implementation(n, static_id());
+    return l.make_full_path_for_templates(n, static_id());
 }
 
 std::list<std::string> logic_less_template_formatter::inclusion_dependencies(
@@ -92,6 +92,7 @@ extraction::meta_model::artefact logic_less_template_formatter::
 format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     auto r(a.make_artefact());
+    r.overwrite(false);
     return r;
 }
 }

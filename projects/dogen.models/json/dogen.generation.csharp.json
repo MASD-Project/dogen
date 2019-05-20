@@ -1291,6 +1291,34 @@
           }
         }
       ]
+    },
+    {
+      "name": "csharp_artefact_formatter_header",
+      "stereotypes": [
+        "masd::templating::logic_less_templates"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "csharp_formatter_implementation",
+      "stereotypes": [
+        "masd::templating::logic_less_templates"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "csharp_helper_formatter_header",
+      "stereotypes": [
+        "masd::templating::logic_less_templates"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "csharp_helper_formatter_implementation",
+      "stereotypes": [
+        "masd::templating::logic_less_templates"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

@@ -41,6 +41,7 @@
 #include "dogen.coding/types/meta_model/variability/profile_template.hpp"
 #include "dogen.coding/types/meta_model/variability/feature_bundle.hpp"
 #include "dogen.coding/types/meta_model/variability/feature_template_initializer.hpp"
+#include "dogen.coding/types/meta_model/templating/logic_less_template.hpp"
 
 namespace dogen::coding::meta_model {
 
@@ -96,6 +97,9 @@ inline void elements_traversal(const meta_model::model& m,
 
     if (m.variability_elements().feature_template_initializer())
         v(*m.variability_elements().feature_template_initializer());
+
+    for (const auto& pair : m.templating_elements().logic_less_templates())
+        v(*pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -146,6 +150,8 @@ inline void elements_traversal(const meta_model::model& m,
     if (m.variability_elements().feature_template_initializer())
         v(*m.variability_elements().feature_template_initializer());
 
+    for (const auto& pair : m.templating_elements().logic_less_templates())
+        v(*pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -195,6 +201,10 @@ inline void elements_traversal(meta_model::model& m,
 
     if (m.variability_elements().feature_template_initializer())
         v(*m.variability_elements().feature_template_initializer());
+
+    for (const auto& pair : m.templating_elements().logic_less_templates())
+        v(*pair.second);
+
 }
 /**@}*/
 
@@ -250,6 +260,9 @@ inline void shared_elements_traversal(const meta_model::model& m,
 
     if (m.variability_elements().feature_template_initializer())
         v(m.variability_elements().feature_template_initializer());
+
+    for (const auto& pair : m.templating_elements().logic_less_templates())
+        v(pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -299,6 +312,9 @@ inline void shared_elements_traversal(const meta_model::model& m,
 
     if (m.variability_elements().feature_template_initializer())
         v(m.variability_elements().feature_template_initializer());
+
+    for (const auto& pair : m.templating_elements().logic_less_templates())
+        v(pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -348,6 +364,9 @@ inline void shared_elements_traversal(meta_model::model& m,
 
     if (m.variability_elements().feature_template_initializer())
         v(m.variability_elements().feature_template_initializer());
+
+    for (const auto& pair : m.templating_elements().logic_less_templates())
+        v(pair.second);
 }
 /**@}*/
 
