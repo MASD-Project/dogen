@@ -1,0 +1,65 @@
+\documentclass{beamer}
+\mode<presentation>
+{ \usetheme{boxes} }
+
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{csquotes}
+\usepackage[backend=bibtex]{biblatex}
+
+\title{Dogen v1.0.17, \enquote{Porto do Namibe}}
+
+\author{Marco Craveiro \\
+  Domain Driven Development
+}
+\date{\today}
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\bibliography{sprint_17_features}
+\begin{document}
+
+\begin{frame}
+\titlepage{}
+\end{frame}
+
+\begin{frame}
+\frametitle{User Visible Changes}
+
+\begin{itemize}
+
+\item MASD vs Dogen separation
+  \pause{}
+\item Feature Templates as Meta-Model Elements
+  \pause{}
+\item Mappings as Meta-Model Elements
+  \pause{}
+\item New Facet: Lexical Cast
+  \pause{}
+\item Bug-fix: Allow Profiles at the Model Level
+  \pause{}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Next Sprint's Mission Statement}
+
+\begin{itemize}
+\item Implement code-generation support for features
+  \pause{}
+\item Finish moving wale templates into meta-model.
+  \pause{}
+\item Move fabric into coding meta-model.
+  \pause{}
+\end{itemize}
+
+\end{frame}
+
+\end{document}
