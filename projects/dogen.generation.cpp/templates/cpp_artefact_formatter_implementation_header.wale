@@ -1,0 +1,41 @@
+
+std::string {{class.simple_name}}::static_id() {
+    return traits::{{archetype.simple_name}}_archetype();
+}
+
+std::string {{class.simple_name}}::id() const {
+    return static_id();
+}
+
+archetypes::location
+{{class.simple_name}}::archetype_location() const {
+    static archetypes::location
+        r(cpp::traits::kernel(), cpp::traits::backend(),
+          traits::facet(),
+          {{class.simple_name}}::static_id());
+    return r;
+}
+
+const coding::meta_model::name& {{class.simple_name}}::meta_name() const {
+    using {{meta_name_factory}};
+    static auto r(meta_name_factory::make_{{meta_element}}_name());
+    return r;
+}
+
+std::string {{class.simple_name}}::family() const {
+    return cpp::traits::header_family();
+}
+
+inclusion_support_types {{class.simple_name}}::inclusion_support_type() const {
+    return inclusion_support_types::{{class.inclusion_support_type}};
+}
+
+boost::filesystem::path {{class.simple_name}}::inclusion_path(
+    const formattables::locator& l, const coding::meta_model::name& n) const {
+    return l.make_inclusion_path_for_cpp_header(n, static_id());
+}
+
+boost::filesystem::path {{class.simple_name}}::full_path(
+    const formattables::locator& l, const coding::meta_model::name& n) const {
+    return l.make_full_path_for_cpp_header(n, static_id());
+}
