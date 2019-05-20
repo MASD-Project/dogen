@@ -163,7 +163,11 @@ You can download binaries from [Bintray](https://bintray.com/masd-project/main/d
 - [dogen-1.0.16-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.16/DOGEN-1.0.16-Darwin-x86_64.dmg)
 - [dogen-1.0.16-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/DOGEN-1.0.16-Windows-AMD64.msi)
 
-For all other architectures and/or operative systems, you will need to build Dogen from source. tps://twitter.com/MarcoCraveiro/status/1125447976418193412][twitter]]
+For all other architectures and/or operative systems, you will need to
+build Dogen from source.
+#+end_src markdown
+
+- [[https://twitter.com/MarcoCraveiro/status/1125447976418193412][twitter]]
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6531213559836270592][LinkedIn]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 

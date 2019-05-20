@@ -13,20 +13,23 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-20 Mon 10:27]
+#+CAPTION: Clock summary at [2019-05-20 Mon 11:50]
 | <75>                                   |        |      |      |       |
 | Headline                               | Time   |      |      |     % |
 |----------------------------------------+--------+------+------+-------|
-| *Total time*                           | *1:33* |      |      | 100.0 |
+| *Total time*                           | *2:58* |      |      | 100.0 |
 |----------------------------------------+--------+------+------+-------|
-| Stories                                | 1:33   |      |      | 100.0 |
-| Active                                 |        | 1:33 |      | 100.0 |
-| Edit release notes for previous sprint |        |      | 1:33 | 100.0 |
+| Stories                                | 2:58   |      |      | 100.0 |
+| Active                                 |        | 2:58 |      | 100.0 |
+| Edit release notes for previous sprint |        |      | 2:58 | 100.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
-*** STARTED Edit release notes for previous sprint                    :story:
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2019-05-20 Mon 11:50]
     :LOGBOOK:
+    CLOCK: [2019-05-20 Mon 11:41]--[2019-05-20 Mon 11:50] =>  0:09
+    CLOCK: [2019-05-20 Mon 10:24]--[2019-05-20 Mon 11:40] =>  1:16
     CLOCK: [2019-05-20 Mon 08:50]--[2019-05-20 Mon 10:23] =>  1:33
     :END:
 
@@ -37,11 +40,13 @@ Title: Dogen v1.0.17, "Porto do Namibe"
 #+begin_src markdown
 ![Instalação do Porto do Namibe, Angola](http://agriculturaemar.com/wp-content/uploads/2018/10/Porto-do-Namibe.jpg)
 
-_Instalações do Porto do Namibe, Moçamedes, Angola. (C) 2018, [Agricultura e Mar](http://agriculturaemar.com/porto-do-namibe-pode-vir-a-ser-um-polo-de-desenvolvimento-logistico-no-sul-de-angola)_
+_Instalações do Porto do Namibe, Moçamedes, Angola. (C) 2018, [Agricultura e Mar](http://agriculturaemar.com/porto-do-namibe-pode-vir-a-ser-um-polo-de-desenvolvimento-logistico-no-sul-de-angola)._
 
 # Introduction
 
-This was yet another key sprint on our march towards "meta-modeling all things". With this sprint we have now moved all JSON files in the data directory into regular models. We've also started to move the wale templates - which, we have learned, are called [logic-less templates](https://en.wikipedia.org/wiki/Mustache_(template_system)) - but ran out of time. Predictably, our meta-model has grown considerably with this initiative, so part of this sprint was spent in organising it better into some kind of categories. Though by no means final, the present classification has already brought some benefits. Unfortunately, one of the main objectives of this sprint was not achieved: the code generation of all feature related code. Predictably, it was harder than expected, and will have to be tackled over the next sprint. But all and all, it was a very successful sprint.
+This was yet another key sprint on our long march towards "meta-modeling all things". With this sprint we have now moved all remaining JSON files in the data directory into regular models. We've also started to move the wale templates - which, we have learned, are called [logic-less templates](https://en.wikipedia.org/wiki/Mustache_(template_system)) - but ran out of time.
+
+Our meta-model has grown considerably as the initiative progresses, so part of this sprint was spent organising it into some kind of hierarchical structure. Though by no means final, the present classification has already brought home some benefits. Unfortunately, one of the main objectives of this sprint was not achieved: the code generation of all feature related code. Predictably, it was harder than expected, and will have to be tackled over the next sprint. But all and all, it was a very successful sprint.
 
 # User visible changes
 
@@ -51,15 +56,21 @@ This section covers stories that affect end users. The sprint demo provides a qu
 
 # Feature Templates as Meta-Model Elements
 
-Whilst this story is user facing - in the sense that any user model can make use of this functionality - it is mainly of interest in the development of the code generator itself. With this sprint, it is now quite straightforward to declare new features: we've introduced the new stereotype ```masd::variability::feature_bundle```, which is made up of feature templates. To recap, feature templates are projected over the archetype space, and can be thought of as toggles that control variability within the code generator.
+With this sprint, it is now quite straightforward to declare new features: we've introduced the new stereotype ```masd::variability::feature_bundle```, which is made up of feature templates. To recap, feature templates are projected over the archetype space, and can be thought of as toggles that control variability within the code generator. Whilst this story is user facing - in the sense that any user model can make use of this functionality - it is mainly of interest in the development of the code generator itself.
 
-With the approach implemented by this sprint, we can now declare each feature within the model that makes use of it, and the code generator generates all the necessary code to integrate the feature with the code generator. However, we only had time to focus on the "declaration" of the feature this sprint; next sprint we will code-generate the infrastructure needed to "read" or "deserialise" the feature from a configuration.
+![Feature templates](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/dogen_coding_features.png)
 
-In addition, we've also introduced the ```masd.variability``` model, where all of the types used by features are declared. With this, we take one more step to "normalise" these types, making them less special.
+With the approach implemented by this sprint, we can now declare each feature within the model that makes use of it - instead of lumping all features together globally as we did in the JSON days - and the code generator now generates all the necessary code to integrate the feature with the code generator itself. However, this sprint we only had time to focus on the "declaration" of the feature templates; next sprint we will look at the "consumption" end and code-generate the infrastructure needed to "read" or "deserialise" the feature from a configuration.
+
+In addition, we've also introduced the ```masd.variability``` model, where all of the types used by features are declared. With this, we take one more step to "normalise" these types, making them less special. This is covered in more detail in the next section.
 
 # Mappings as Meta-Model Elements
 
-In the past we had a JSON file with mappings between the abstract LAM (Language Agnostic Model) elements and the concrete elements (e.g. c++ and c# model types). These mappings were completely removed from the meta-model. With this sprint, we created the new type of ```masd::mapping::extensible_mappable```, which provides a flexible (and extensible) mapping mechanism. We also created the LAM model as a regular Dogen model, using ```masd::mapping::extensible_mappable``` and (mostly) mapping to the same types as the JSON file did. In order to map a type, you now need to declare the mapping:
+In the past we had a JSON file with mappings between the abstract LAM (Language Agnostic Model) elements and the concrete elements (e.g. c++ and c# model types). These mappings were completely removed from the meta-model. With this sprint, we created the new type of ```masd::mapping::extensible_mappable```, which provides a flexible (and extensible) mapping mechanism. We also created the LAM model as a regular Dogen model, using ```masd::mapping::extensible_mappable``` and (mostly) mapping to the same types as the JSON file did.
+
+![LAM Model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/masd_lam_model.png)
+
+In order to map a type, you now need to declare the mapping:
 
 ```json
     {
@@ -75,9 +86,15 @@ In the past we had a JSON file with mappings between the abstract LAM (Language 
 
 Ideally, we'd like users to create their own mapping models instead of having to rely on LAM. However, the problem we have at present is that this would require having to modify the Dogen-supplied PDMs (Platform Definition Models), which is not ideal. More thinking is required in order to implement this use case, but a number of steps were taken in the right direction.
 
+In addition, we also created the ```masd::mapping::fixed_mappable```, for the special case of variability types. This model is internal to Dogen and is not expected to be used by end users - unless, of course, they are extending Dogen.
+
+![Variability Model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/masd_variability_model.png)
+
+Unlike the extensible mappables, fixed mappables map to one and only one target and the target can be a name or a name tree. For example, ```masd::variability::text``` maps to ```std::string``` whereas ```masd::variability::text_collection``` maps to ```std::list<std::string>```. These named trees will then be used to make up the properties of the static configuration types which we will code generate next sprint.
+
 # New Facet: Lexical Cast
 
-C++ has gained a new facet: ```lexical_cast```. This facet specialises the ```boost::lexical_cast``` template function, at present only for Dogen enumerations. This enables the conversion of an enumeration from and to a string. The input string can be fully qualified (e.g. ```my_enum::my_enumerator```) or simple (e.g. ```my_enumerator```). The output string is always fully qualified (e.g. ```my_enum::my_enumerator```). Example usage:
+C++ has gained a new facet: ```lexical_cast```. This facet specialises the ```boost::lexical_cast``` template function, at present only for Dogen enumerations. This enables the conversion of an enumeration from and to a string. The input string can be fully qualified (e.g. ```my_enum::my_enumerator```) or simple (e.g. ```my_enumerator```). The output string is always fully qualified (e.g. ```my_enum::my_enumerator```). Contrived example usage for an imaginary model ```my_model```:
 
 ```c++
 #include <iostream>
@@ -96,11 +113,15 @@ void test() {
 }
 ```
 
-To use the new facet, set the feature ```masd.generation.cpp.lexical_cast.enabled``` to true on your model configuration or profile.
+See also the [generated tests](https://github.com/MASD-Project/dogen/blob/a7992a17560cd21376e9d2fa74cfc41094fc1b42/projects/dogen.coding/tests/meta_model/origin_types_tests.cpp#L44) for more examples.
+
+As with all other facets, you can use lexical cast globally or locally. To use the new facet globally, set the feature ```masd.generation.cpp.lexical_cast.enabled``` to true on your model configuration or profile. To use it locally, set it on the configuration of the specific enumeration that requires lexical cast support - or, better yet: create a local profile such as ```castable```, set it there and update the stereotype of the enumeration in question. This is the way all Dogen code is moving now.
 
 ## Bug-fix: Allow Profiles at the Model Level
 
-An important story was a fix to a [brown-paper bag bug](http://www.catb.org/jargon/html/B/brown-paper-bag-bug.html): profiles could not be declared directly on the model namespace of a user model. That is, in sprint 17 you needed to create a reference model to declare profiles. With this release you can now have a single model with both your user types and the profile. At some point we'll update the test models to contain all of the new meta-model elements on the target model, to make sure they all work.
+An important story was a fix to a [brown-paper bag bug](http://www.catb.org/jargon/html/B/brown-paper-bag-bug.html): profiles could not be declared directly on the model namespace of a user model. That is, in sprint 16 you needed to create a reference model to declare profiles. With this release you can now have a single model with both your user types and the profile. At some point we'll update the test models to contain all of the new meta-model elements on the target model, to make sure they all work.
+
+![Dogen's Profiles Model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/profiles_model.png)
 
 # Development Matters
 
@@ -108,9 +129,11 @@ In this section we cover topics that are mainly of interest if you follow Dogen 
 
 ## Significant Internal Stories
 
-A very important story that was implemented this sprint was the clarification of the separation between Dogen and MASD. Up to now we've been loosely using the ```masd::``` prefix, even for elements that are really not part of MASD. With this sprint we have made an effort to become more accurate. MASD is the public API for a code generator that follows its specifications, whereas Dogen is one (of possibly many) implementations of those specifications. This had a cross-cutting impact:
+A very important story implemented this sprint was the clarification of the separation between Dogen and MASD. Up to now we've been loosely using the ```masd::``` prefix, even for elements that are really not part of MASD. With this sprint we have made an effort to become more accurate, and we now have a very simple test to determine where to place things: MASD is the public API for a code generator that follows its specifications, whereas Dogen is one (of possibly many) implementations of those specifications.
 
-- **Profiles**: items such as Dogen's profiles have now been moved over to the ```dogen``` namespace (or conversely, to the C++/C# models reference implementation namespace). That is, where in the past we had ```masd::handcrafted::typeable```, it is now ```dogen::handcrafted::typeable```. Users are of course free to define their own profiles (under their own user defined namespaces), but it is important to make clear that the Dogen-defined profiles are **not** part of MASD.
+Applying this filtering function to the code base had a cross-cutting impact:
+
+- **Profiles**: items such as Dogen's profiles have now been moved over to the ```dogen``` namespace (or conversely, to the C++/C# models reference implementation namespace). That is, where in the past we had ```masd::handcrafted::typeable```, it is now ```dogen::handcrafted::typeable```. Users are of course free to define their own profiles (under their own user defined namespaces), but it is important to make clear that the Dogen-defined profiles are **not** part of MASD, and are only available to end users if they are extending Dogen itself.
 - **Palettes**: As part of this separation, we also moved the colour palettes from the C++ Reference Model, where it was incorrectly placed, into MASD. The colouring scheme will be part of the MASD public API.
 - **LAM and variability models**: LAM and the variability models are also part of the MASD public API, rather than just a Dogen-level concept.
 
@@ -120,13 +143,15 @@ A smidge over 80% of this sprint's total ask was dedicated to stories aligned wi
 
 ![Story Pie Chart](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_17_pie_chart.jpg)
 
-Our non-core stories cost us around 14%, somewhat more expensive than usual. Of these we had the usual suspects: backlog grooming and previous sprint work (release notes, video, etc) cost us 9.4%, followed by a smattering of minor stories. We also spent ~2.5 in bug fixes.  Finally, we spent around 3.6% on a epic, which we desperately need to see implemented, but sadly its just too peripheral to the mission: the implementation of a relational model for tracing. Once this is implemented we shall be able to write SQL queries to interrogate the state of Dogen at any point in the pipeline. At present we are doing this via the tracing dumps, but these produce large JSON files and JQ is struggling to cope with the queries. However, its a large and complex task, so we shall try to do a little bit of work every sprint to bring it to life.
+Our non-core stories cost us around 14%, somewhat more expensive than usual. Of these we had the usual suspects: backlog grooming and previous sprint work (release notes, video, etc) cost us 9.4%, followed by a smattering of minor stories. We also spent ~2.5% in bug fixes.  Finally, we spent around 3.6% on a epic, which we desperately need to see implemented, but sadly its just too peripheral to the mission: the implementation of a relational model for tracing. Once this is implemented we shall be able to write SQL queries to interrogate the state of Dogen at any point in the pipeline. At present we are doing this via the tracing dumps, but these produce large JSON files and JQ is struggling to cope with the queries. However, its a large and complex task, so we shall try to do a little bit of work every sprint to bring it to life.
 
 ## Planning
 
 We clearly underestimated the complexity of fully implementing feature templates; we had originally only planned to take a single sprint on it, but we still have all of the code generation aspect (e.g. generate static configurations, plus the respective serialisation code) as well as going through the code base and replacing the manually crafted code with the new and shinny code-generated version. This will take a large portion of the next sprint. As such, we had to bump the project plan by one sprint.
 
 ![Project Plan](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_17_project_plan.png)
+
+![Resource Allocation Graph](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_17_resource_allocation_graph.png)
 
 # Next Sprint
 
