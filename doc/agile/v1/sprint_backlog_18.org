@@ -13,21 +13,25 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-20 Mon 11:50]
-| <75>                                   |        |      |      |       |
-| Headline                               | Time   |      |      |     % |
-|----------------------------------------+--------+------+------+-------|
-| *Total time*                           | *2:58* |      |      | 100.0 |
-|----------------------------------------+--------+------+------+-------|
-| Stories                                | 2:58   |      |      | 100.0 |
-| Active                                 |        | 2:58 |      | 100.0 |
-| Edit release notes for previous sprint |        |      | 2:58 | 100.0 |
+#+CAPTION: Clock summary at [2019-05-20 Mon 19:53]
+| <75>                                                   |        |      |      |       |
+| Headline                                               | Time   |      |      |     % |
+|--------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                           | *8:16* |      |      | 100.0 |
+|--------------------------------------------------------+--------+------+------+-------|
+| Stories                                                | 8:16   |      |      | 100.0 |
+| Active                                                 |        | 8:16 |      | 100.0 |
+| Edit release notes for previous sprint                 |        |      | 3:16 |  39.5 |
+| Create a video demo for the previous sprint's features |        |      | 3:46 |  45.6 |
+| Make wale templates meta-model elements                |        |      | 1:14 |  14.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2019-05-20 Mon 11:50]
     :LOGBOOK:
+    CLOCK: [2019-05-20 Mon 16:53]--[2019-05-20 Mon 17:01] =>  0:08
+    CLOCK: [2019-05-20 Mon 11:51]--[2019-05-20 Mon 12:01] =>  0:10
     CLOCK: [2019-05-20 Mon 11:41]--[2019-05-20 Mon 11:50] =>  0:09
     CLOCK: [2019-05-20 Mon 10:24]--[2019-05-20 Mon 11:40] =>  1:16
     CLOCK: [2019-05-20 Mon 08:50]--[2019-05-20 Mon 10:23] =>  1:33
@@ -172,13 +176,100 @@ For all other architectures and/or operative systems, you will need to build Dog
 Happy Modeling!
 #+end_src markdown
 
-- [[htps://twitter.com/MarcoCraveiro/status/1125447976418193412][twitter]]
-- [[https://www.linkedin.com/feed/update/urn:li:activity:6531213559836270592][LinkedIn]]
+- [[https://twitter.com/MarcoCraveiro/status/1130500239620825088][twitter]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6536266244029505536][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
-*** Create a video demo for the previous sprint's features            :story:
+*** COMPLETED Create a video demo for the previous sprint's features  :story:
+    CLOSED: [2019-05-20 Mon 16:52]
+    :LOGBOOK:
+    CLOCK: [2019-05-20 Mon 17:02]--[2019-05-20 Mon 17:25] =>  0:23
+    CLOCK: [2019-05-20 Mon 14:48]--[2019-05-20 Mon 16:52] =>  2:04
+    CLOCK: [2019-05-20 Mon 14:21]--[2019-05-20 Mon 14:47] =>  0:26
+    CLOCK: [2019-05-20 Mon 13:07]--[2019-05-20 Mon 14:00] =>  0:53
+    :END:
 
-Time spent creating the demo.
+Time spent creating the demo and presentation.
+
+*** STARTED Make wale templates meta-model elements                   :story:
+    :LOGBOOK:
+    CLOCK: [2019-05-20 Mon 19:31]--[2019-05-20 Mon 19:53] =>  0:22
+    CLOCK: [2019-05-20 Mon 17:29]--[2019-05-20 Mon 18:18] =>  0:49
+    CLOCK: [2019-05-20 Mon 17:25]--[2019-05-20 Mon 17:28] =>  0:03
+    :END:
+
+Tasks:
+
+- create a templating namespace in coding. Add a template to it.
+- create a formatter that writes templating elements into a
+  project-level =templates= directory. We need to always have
+  overwrite off for templates (e.g. it only makes sense for them to be
+  handcrafted).
+- references to wale templates now become just templates (in
+  preparation to changing it to a moustache like approach).
+- paths to wale templates are relative to the templates folder.
+
+Notes:
+
+- we called these elements =logic_less_templates= to reflect the idea
+  that wale, mustche etc templates are [[https://en.wikipedia.org/wiki/Mustache_(template_system)][logic-less]]. However, the more
+  important trait here maybe that the templates are "stand alone";
+  that is, these templates are not a facet of an existing modeling
+  element. It is entirely possible to have a logic-less template
+  directly associated with an existing modeling element just like we
+  do with "logic-full" templates (e.g. stitch).
+
+*Move wale templates from the data directory*
+
+At present we have wale templates under the data directory. This is
+not the right location. These are part of a model just like stitch
+templates. There is one slight wrinkle though: if a user attempts to
+create a dogen formatter (say if plugins were supported), then we need
+access to the template from the debian package. So whilst they should
+live in the appropriate model (e.g. =generation.cpp=,
+=generation.csharp=), they also need to be packaged and shipped.
+
+Interestingly, so will all dogen models which are defining annotations
+and profiles. We need to rethink the data directory, separating system
+models from dogen models somehow. In effect, the data directory will
+be, in the future, the system models directory.
+
+So, in conclusion, two use cases for wale templates:
+
+- regular model defines a wale template and makes use of it. Template
+  should be with the model, just like stitch templates. However,
+  unlike stitch, there should be a directory for them.
+- user model wants to define a new formatter. It will make use of
+  dogen profiles and wale templates. These must be in the future data
+  directory somehow.
+
+Actually, the right thing to do is to make wale templates themselves
+model elements:
+
+- we may want to use a wale template in a different model. This is the
+  use case for when users want to create new formatters to add to an
+  existing backend.
+- we don't want to add additional regular expressions to ignore wale
+  templates; we've already seen how this is a bad idea (for example
+  with tests).
+- whilst adding templates to a model element is not ideal if the model
+  element is in dia or JSON, these are really limitations of the
+  injector format rather than of the idea itself. Ideally, we should
+  have an injector format that supports this use case (another use
+  case for developing a =org_uml= injector).
+
+Notes:
+
+- automatically ignore wale templates by looking at the input
+  meta-data.
+- make wale template input path relative to the output directory.
+
+*** Meta-names do not have namespaces                                 :story:
+
+At present the meta-name factory is placing all meta-names in a
+top-level namespace. It should really respect the hierarchical
+namespaces we have. However, given we want to code-generate this, we
+may just leave it as is for now until we fix it properly.
 
 *** Sprint and product backlog grooming                               :story:
 
@@ -293,6 +384,12 @@ only user of these meta-model elements, but in the future when we
 create a JSON schema for model data, we will want to use these from
 any technical space. We need to either implement formatters on every
 technical space or find a way to create TS-neutral formatters.
+
+That is to say, we create a formatter for logic-less templates in the
+C++ generation model. This means that you can only use these in the
+C++ technical space. The easy solution is just to copy across the
+formatters into the C# technical space. However, this is not scalable
+as we add more backends.
 
 *** Colouring script should be included as part of package            :story:
 

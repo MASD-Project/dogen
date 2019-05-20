@@ -876,7 +876,7 @@ It seems we missed the injection context, still marked as handcrafted.
 The UML profile is now a fair bit out of date. Take advantage of the
 down time waiting for builds to sync it.
 
-*** CANCELLED Make wale templates meta-model elements                 :story:
+*** POSTPONED Make wale templates meta-model elements                 :story:
     CLOSED: [2019-05-19 Sun 15:24]
     :LOGBOOK:
     CLOCK: [2019-05-17 Fri 19:01]--[2019-05-17 Fri 19:33] =>  0:32
