@@ -18390,7 +18390,7 @@
         <dia:string>#masd::templating::logic_less_templates#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.generation.cpp.templates.logic_less_template.overwrite=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -18479,13 +18479,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O148">
       <dia:attribute name="obj_pos">
-        <dia:point val="3,-12"/>
+        <dia:point val="3.07143,-12.0714"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,-12.05;19.72,-8.95"/>
+        <dia:rectangle val="3.02143,-12.1214;19.7914,-9.02143"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="3,-12"/>
+        <dia:point val="3.07143,-12.0714"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.669999999999998"/>
@@ -18500,7 +18500,7 @@
         <dia:string>#masd::templating::logic_less_templates#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.generation.cpp.templates.logic_less_template.overwrite=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -18610,7 +18610,7 @@
         <dia:string>#masd::templating::logic_less_templates#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.generation.cpp.templates.logic_less_template.overwrite=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -18720,7 +18720,7 @@
         <dia:string>#masd::templating::logic_less_templates#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.generation.cpp.templates.logic_less_template.overwrite=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

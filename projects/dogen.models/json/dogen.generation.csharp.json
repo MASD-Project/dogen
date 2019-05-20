@@ -1297,6 +1297,9 @@
       "stereotypes": [
         "masd::templating::logic_less_templates"
       ],
+      "tagged_values": {
+        "masd.generation.cpp.templates.logic_less_template.overwrite": "false"
+      },
       "fallback_element_type": "masd::object"
     },
     {
@@ -1304,6 +1307,9 @@
       "stereotypes": [
         "masd::templating::logic_less_templates"
       ],
+      "tagged_values": {
+        "masd.generation.cpp.templates.logic_less_template.overwrite": "false"
+      },
       "fallback_element_type": "masd::object"
     },
     {
@@ -1311,6 +1317,9 @@
       "stereotypes": [
         "masd::templating::logic_less_templates"
       ],
+      "tagged_values": {
+        "masd.generation.cpp.templates.logic_less_template.overwrite": "false"
+      },
       "fallback_element_type": "masd::object"
     },
     {
@@ -1318,6 +1327,9 @@
       "stereotypes": [
         "masd::templating::logic_less_templates"
       ],
+      "tagged_values": {
+        "masd.generation.cpp.templates.logic_less_template.overwrite": "false"
+      },
       "fallback_element_type": "masd::object"
     }
   ]
