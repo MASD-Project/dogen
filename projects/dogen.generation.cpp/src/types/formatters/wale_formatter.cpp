@@ -22,6 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/formatters/utility_formatter.hpp"
 #include "dogen.templating/types/wale/workflow.hpp"
+#include "dogen.generation.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen.generation.cpp/types/formatters/formatting_error.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/formatters/wale_formatter.hpp"
@@ -44,7 +45,8 @@ bool wale_formatter::is_header(const inclusion_support_types ist) const {
 }
 
 extraction::meta_model::artefact wale_formatter::
-format(const artefact_formatter_interface& stock_formatter, const context& ctx,
+format(const formattables::locator& l,
+    const artefact_formatter_interface& stock_formatter, const context& ctx,
     const coding::meta_model::element& e) const {
     const auto al(stock_formatter.archetype_location());
     const auto needs_guard(is_header(stock_formatter.inclusion_support_type()));
@@ -69,9 +71,13 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
                 BOOST_THROW_EXCEPTION(formatting_error(missing_input));
             }
 
+            const auto p(l.templates_project_path() / fi);
+            BOOST_LOG_SEV(lg, debug) << "Using template path: "
+                                     << p.generic_string();
+
             uf.insert_end_line();
             templating::wale::workflow w;
-            a.stream() << w.execute(fi, kvps);
+            a.stream() << w.execute(p, kvps);
             uf.insert_end_line();
         }
         uf.insert_end_line();

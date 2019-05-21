@@ -33,8 +33,6 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("templating.wale.workflow"));
 
-const std::string wale_dir("wale");
-
 }
 
 namespace dogen::templating::wale {
@@ -47,19 +45,6 @@ properties workflow::create_properties(
     r.supplied_kvps(kvps);
 
     BOOST_LOG_SEV(lg, debug) << "Properties: " << r;
-    return r;
-}
-
-boost::filesystem::path
-workflow::resolve_path(const boost::filesystem::path& p) const {
-    BOOST_LOG_SEV(lg, debug) << "Resolving path: " << p;
-
-    using namespace dogen::utility::filesystem;
-    const auto data_dir(dogen::utility::filesystem::data_files_directory());
-    const auto dir(data_dir / wale_dir);
-    const auto r(dir / p);
-
-    BOOST_LOG_SEV(lg, debug) << "Resolved path: " << r;
     return r;
 }
 
@@ -91,7 +76,7 @@ void workflow::validate(const text_template& tt) const {
 text_template workflow::create_text_template(const properties& props) const {
     text_template r;
     r.properties(props);
-    r.properties().template_path(resolve_path(props.template_path()));
+    r.properties().template_path(props.template_path());
     r.content(read_content(r.properties().template_path()));
     r.properties().expected_keys(get_expected_keys(r.content()));
     return r;

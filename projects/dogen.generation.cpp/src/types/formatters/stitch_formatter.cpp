@@ -41,9 +41,10 @@ const std::string decoration_postamble_key(
 namespace dogen::generation::cpp::formatters {
 
 stitch_formatter::stitch_formatter(
+    const formattables::locator& l,
     const variability::meta_model::feature_model& fm,
     const variability::helpers::configuration_factory& cf)
-    : instantiator_(fm, cf) {}
+    : instantiator_(l.templates_project_path(), fm, cf) {}
 
 bool stitch_formatter::is_header(const inclusion_support_types ist) const {
     return

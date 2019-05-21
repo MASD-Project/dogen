@@ -86,11 +86,11 @@ std::string model_to_extraction_model_transform::id() const {
 std::list<extraction::meta_model::artefact>
 model_to_extraction_model_transform::
 format(const std::unordered_set<generation::meta_model::element_archetype>&
-    enabled_archetype_for_element,
+    enabled_archetype_for_element, const formattables::locator& l,
     const variability::meta_model::feature_model& feature_model,
     const variability::helpers::configuration_factory& cf,
     const formattables::model& fm) const {
-    formatters::workflow wf(feature_model, cf);
+    formatters::workflow wf(l, feature_model, cf);
     return wf.execute(enabled_archetype_for_element, fm);
 }
 
@@ -180,7 +180,7 @@ extraction::meta_model::model model_to_extraction_model_transform::apply(
         cf(*ctx.archetype_location_repository(), feature_model,
             false);
 
-    r.artefacts(format(eafe, feature_model, cf, fm));
+    r.artefacts(format(eafe, l, feature_model, cf, fm));
     r.managed_directories(managed_directories(l));
 
     BOOST_LOG_SEV(lg, debug) << "Finished backend.";

@@ -43,7 +43,8 @@ typedef boost::error_info<struct tag_file_name, std::string> error_in_file;
 
 class instantiator final {
 public:
-    instantiator(const variability::meta_model::feature_model& fm,
+    instantiator(const boost::filesystem::path& wale_templates_directory,
+        const variability::meta_model::feature_model& fm,
         const variability::helpers::configuration_factory& cf);
 
 private:
@@ -102,6 +103,7 @@ public:
         const std::unordered_map<std::string, std::string>& kvps) const;
 
 private:
+    const boost::filesystem::path wale_templates_directory_;
     const variability::helpers::configuration_factory& configuration_factory_;
     const properties_factory properties_factory_;
 };

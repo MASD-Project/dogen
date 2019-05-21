@@ -29,6 +29,7 @@
 #include "dogen.extraction/types/meta_model/artefact.hpp"
 #include "dogen.coding/types/meta_model/element_fwd.hpp"
 #include "dogen.templating/types/stitch/instantiator.hpp"
+#include "dogen.generation.cpp/types/formattables/locator.hpp"
 #include "dogen.generation.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
 
@@ -36,7 +37,8 @@ namespace dogen::generation::cpp::formatters {
 
 class stitch_formatter final {
 public:
-    stitch_formatter(const variability::meta_model::feature_model& fm,
+    stitch_formatter(const formattables::locator& l,
+        const variability::meta_model::feature_model& fm,
         const variability::helpers::configuration_factory& cf);
 
 private:

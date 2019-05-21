@@ -90,7 +90,7 @@ private:
      */
     std::list<extraction::meta_model::artefact>
     format(const std::unordered_set<generation::meta_model::element_archetype>&
-        enabled_archetype_for_element,
+        enabled_archetype_for_element, const formattables::locator& l,
         const variability::meta_model::feature_model& feature_model,
         const variability::helpers::configuration_factory& cf,
         const formattables::model& fm) const;

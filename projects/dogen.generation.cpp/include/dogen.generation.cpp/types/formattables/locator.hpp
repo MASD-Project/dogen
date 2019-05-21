@@ -100,6 +100,9 @@ private:
         const boost::filesystem::path& project_path,
         const boost::filesystem::path& cpp_headers_output_directory_path) const;
 
+    boost::filesystem::path compute_templates_path(
+        const boost::filesystem::path& project_path) const;
+
     /**
      * @brief Given a facet, returns its configuration.
      *
@@ -176,6 +179,11 @@ public:
      * @brief Top-level headers project directory.
      */
     boost::filesystem::path headers_project_path() const;
+
+    /**
+     * @brief Top-level templates project directory.
+     */
+    boost::filesystem::path templates_project_path() const;
 
     /**
      * @brief Top-level headers model directory.
@@ -327,6 +335,7 @@ private:
     const std::unordered_set<std::string> module_ids_;
     const boost::filesystem::path project_path_;
     const boost::filesystem::path headers_project_path_;
+    const boost::filesystem::path templates_project_path_;
     const bool split_mode_;
 };
 

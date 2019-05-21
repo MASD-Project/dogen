@@ -36,6 +36,7 @@
 #include "dogen.extraction/types/meta_model/artefact.hpp"
 #include "dogen.coding/types/meta_model/element.hpp"
 #include "dogen.generation/types/meta_model/element_archetype.hpp"
+#include "dogen.generation.cpp/types/formattables/locator.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 #include "dogen.generation.cpp/types/formatters/registrar.hpp"
 #include "dogen.generation.cpp/types/formatters/stitch_formatter.hpp"
@@ -47,7 +48,8 @@ namespace dogen::generation::cpp::formatters {
  */
 class workflow final {
 public:
-    workflow(const variability::meta_model::feature_model& fm,
+    workflow(const formattables::locator& l,
+        const variability::meta_model::feature_model& fm,
         const variability::helpers::configuration_factory& cf);
 
 public:
@@ -77,6 +79,7 @@ public:
 private:
     static std::shared_ptr<cpp::formatters::registrar> registrar_;
     const stitch_formatter stitch_formatter_;
+    const formattables::locator& locator_;
 };
 
 }

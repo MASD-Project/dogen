@@ -44,9 +44,10 @@ namespace dogen::generation::cpp::formatters {
 
 std::shared_ptr<cpp::formatters::registrar> workflow::registrar_;
 
-workflow::workflow(const variability::meta_model::feature_model& fm,
+workflow::workflow(const formattables::locator& l,
+    const variability::meta_model::feature_model& fm,
     const variability::helpers::configuration_factory& cf)
-    : stitch_formatter_(fm, cf) { }
+    : stitch_formatter_(l, fm, cf), locator_(l) { }
 
 cpp::formatters::registrar& workflow::registrar() {
     if (!registrar_)
@@ -119,7 +120,7 @@ workflow::format(
             BOOST_LOG_SEV(lg, debug) << "Using the wale formatter.";
 
             wale_formatter f;
-            const auto artefact(f.format(fmt, ctx, e));
+            const auto artefact(f.format(locator_, fmt, ctx, e));
             const auto& p(artefact.path());
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;

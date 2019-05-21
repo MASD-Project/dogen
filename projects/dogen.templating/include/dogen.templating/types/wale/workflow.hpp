@@ -39,9 +39,6 @@ private:
     properties create_properties(const boost::filesystem::path& template_path,
         const std::unordered_map<std::string, std::string>& kvps) const;
 
-    boost::filesystem::path
-    resolve_path(const boost::filesystem::path& p) const;
-
     std::string
     read_content(const boost::filesystem::path& template_path) const;
 

@@ -69,6 +69,7 @@ locator::locator(
               configuration_, enable_backend_directories)),
       headers_project_path_(compute_headers_path(output_directory_path,
               project_path_, cpp_headers_output_directory_path)),
+      templates_project_path_(compute_templates_path(project_path_)),
       split_mode_(!cpp_headers_output_directory_path.empty()) {}
 
 locator::feature_group
@@ -227,6 +228,13 @@ boost::filesystem::path locator::compute_headers_path(
      */
     using boost::filesystem::canonical;
     return canonical(cpp_headers_output_directory_path, output_directory_path);
+}
+
+boost::filesystem::path locator::compute_templates_path(
+    const boost::filesystem::path& project_path) const {
+    const auto r(project_path / configuration_.templates_directory_name());
+    BOOST_LOG_SEV(lg, debug) << "templates path: " << r.generic_string();
+    return r;
 }
 
 locator_configuration locator::make_configuration(
@@ -425,6 +433,10 @@ boost::filesystem::path locator::project_path() const {
 
 boost::filesystem::path locator::headers_project_path() const {
     return headers_project_path_;
+}
+
+boost::filesystem::path locator::templates_project_path() const {
+    return templates_project_path_;
 }
 
 boost::filesystem::path locator::headers_model_path() const {

@@ -48,9 +48,12 @@ const std::string duplicate_key("Attempt to insert duplicate key: ");
 
 namespace dogen::templating::stitch {
 
-instantiator::instantiator(const variability::meta_model::feature_model& fm,
+instantiator::
+instantiator(const boost::filesystem::path& wale_templates_directory,
+    const variability::meta_model::feature_model& fm,
     const variability::helpers::configuration_factory& cf)
-    : configuration_factory_(cf), properties_factory_(fm) {}
+    : wale_templates_directory_(wale_templates_directory),
+      configuration_factory_(cf), properties_factory_(fm) {}
 
 boost::filesystem::path
 instantiator::compute_output_path(const boost::filesystem::path& input_path,
@@ -109,9 +112,10 @@ void instantiator::handle_wale_template(text_template& tt) const {
         BOOST_LOG_SEV(lg, debug) << "No wale template supplied.";
         return;
     }
-
+    const auto p(wale_templates_directory_ / wt);
     BOOST_LOG_SEV(lg, debug) << "Instantiating wale template: "
-                             << props.wale_template();
+                             << props.wale_template() << ". Path: "
+                             << p.generic_string();
     BOOST_LOG_SEV(lg, debug) << "Stitching properties kvps: "
                              << props.wale_kvps();
 
@@ -120,7 +124,7 @@ void instantiator::handle_wale_template(text_template& tt) const {
      * variable.
      */
     wale::workflow wkf;
-    const auto wale_value(wkf.execute(wt, props.wale_kvps()));
+    const auto wale_value(wkf.execute(p, props.wale_kvps()));
     const auto pair(std::make_pair(wale_key, wale_value));
     const auto inserted(tt.supplied_kvps().insert(pair).second);
     if (!inserted) {

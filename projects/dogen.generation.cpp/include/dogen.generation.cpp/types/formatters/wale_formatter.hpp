@@ -27,7 +27,7 @@
 
 #include "dogen.extraction/types/meta_model/artefact.hpp"
 #include "dogen.coding/types/meta_model/element_fwd.hpp"
-#include "dogen.generation.cpp/types/formattables/artefact_properties.hpp"
+#include "dogen.generation.cpp/types/formattables/locator.hpp"
 #include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
 
 namespace dogen::generation::cpp::formatters {
@@ -38,6 +38,7 @@ private:
 
 public:
     extraction::meta_model::artefact format(
+        const formattables::locator& l,
         const artefact_formatter_interface& stock_formatter,
         const context& ctx, const coding::meta_model::element& e) const;
 };
