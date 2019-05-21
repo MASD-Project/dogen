@@ -13,20 +13,21 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-21 Tue 11:55]
+#+CAPTION: Clock summary at [2019-05-21 Tue 13:23]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *11:56* |       |      | 100.0 |
+| *Total time*                                           | *12:44* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 11:56   |       |      | 100.0 |
-| Active                                                 |         | 11:56 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 3:37 |  30.3 |
-| Create a video demo for the previous sprint's features |         |       | 3:46 |  31.6 |
-| Sprint and product backlog grooming                    |         |       | 0:22 |   3.1 |
-| Make wale templates meta-model elements                |         |       | 2:45 |  23.0 |
-| Flatten the data directory                             |         |       | 1:11 |   9.9 |
-| Rename =dogen::cpp::header_only= stereotypes           |         |       | 0:15 |   2.1 |
+| Stories                                                | 12:44   |       |      | 100.0 |
+| Active                                                 |         | 12:44 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 3:37 |  28.4 |
+| Create a video demo for the previous sprint's features |         |       | 3:46 |  29.6 |
+| Sprint and product backlog grooming                    |         |       | 0:22 |   2.9 |
+| Make wale templates meta-model elements                |         |       | 2:45 |  21.6 |
+| Flatten the data directory                             |         |       | 1:11 |   9.3 |
+| Rename =dogen::cpp::header_only= stereotypes           |         |       | 0:15 |   2.0 |
+| Add code generation support to static configurations   |         |       | 0:48 |   6.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -323,6 +324,45 @@ Tasks:
 - update all models
 - update the colour palette.
 - remove these profiles from the reference model.
+
+*** Add code generation support to static configurations              :story:
+    :LOGBOOK:
+    CLOCK: [2019-05-21 Tue 12:35]--[2019-05-21 Tue 13:23] =>  0:48
+    :END:
+
+Now that we have all the variability mappings available in the
+meta-model, we can construct the static configuration as a meta-model
+element and supply it to code generation.
+
+Notes:
+
+- since the creation of mappings occurred before merging, we created a
+  transform for extensible mappables which gathered all of the
+  mappables across the model set and created a mapping repository from
+  it. We could reuse this logic.
+- its not clear why the mapping elements transform is in engine. It
+  could be part of the pre-assembly chain in coding. It does not seem
+  to go elsewhere outside of coding.
+- we have a cycle: mappings must happen before parsing for the
+  structural configuration (because that's how we generate the name
+  trees) but for everyone else, parsing must happen before mapping
+  (because normally we need to map the generated name trees, not the
+  unparsed values).
+- we need to know what kind of template expansion was made on the
+  feature template in order to implement the configuration. We'll
+  leave this for a second pass.
+
+Approach:
+
+- generate the static configuration in the bundle.
+- move mapping element transform to the assembly chain.
+- rename mapping transform to extensible mapping transform.
+- update variability transform to map fixed mappables and construct
+  the static configuration.
+- update parser to parse unparsed name trees.
+- update resolver to resolve static configurations.
+- generate the struct for the static configuration.
+- generate a method to read the struct from a dynamic configuration.
 
 *** Meta-names do not have namespaces                                 :story:
 
