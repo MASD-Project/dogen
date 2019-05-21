@@ -1851,6 +1851,11 @@
         {
           "name": "feature_templates",
           "type": "std::list<feature_template>"
+        },
+        {
+          "name": "static_representation",
+          "type": "dogen::coding::meta_model::structural::object",
+          "documentation": "Static (compile-time) representation of a feature bundle.\n"
         }
       ]
     },

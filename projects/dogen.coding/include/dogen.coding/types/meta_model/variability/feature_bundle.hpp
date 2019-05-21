@@ -29,6 +29,7 @@
 #include <iosfwd>
 #include <algorithm>
 #include "dogen.coding/types/meta_model/element.hpp"
+#include "dogen.coding/types/meta_model/structural/object.hpp"
 #include "dogen.coding/types/meta_model/variability/feature_template.hpp"
 
 namespace dogen::coding::meta_model::variability {
@@ -57,7 +58,8 @@ public:
         const std::unordered_map<std::string, dogen::coding::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const boost::optional<dogen::coding::meta_model::decoration::element_properties>& decoration,
-        const std::list<dogen::coding::meta_model::variability::feature_template>& feature_templates);
+        const std::list<dogen::coding::meta_model::variability::feature_template>& feature_templates,
+        const dogen::coding::meta_model::structural::object& static_representation);
 
 public:
     using element::accept;
@@ -75,6 +77,16 @@ public:
     void feature_templates(const std::list<dogen::coding::meta_model::variability::feature_template>& v);
     void feature_templates(const std::list<dogen::coding::meta_model::variability::feature_template>&& v);
 
+    /**
+     * @brief Static (compile-time) representation of a feature bundle.
+     */
+    /**@{*/
+    const dogen::coding::meta_model::structural::object& static_representation() const;
+    dogen::coding::meta_model::structural::object& static_representation();
+    void static_representation(const dogen::coding::meta_model::structural::object& v);
+    void static_representation(const dogen::coding::meta_model::structural::object&& v);
+    /**@}*/
+
 public:
     bool operator==(const feature_bundle& rhs) const;
     bool operator!=(const feature_bundle& rhs) const {
@@ -90,6 +102,7 @@ public:
 
 private:
     std::list<dogen::coding::meta_model::variability::feature_template> feature_templates_;
+    dogen::coding::meta_model::structural::object static_representation_;
 };
 
 }
