@@ -43,7 +43,7 @@
     {
       "name": "command_line_parser",
       "stereotypes": [
-        "dogen::cpp::header_only"
+        "dogen::handcrafted::typeable::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -60,14 +60,14 @@
     {
       "name": "injector_factory",
       "stereotypes": [
-        "dogen::cpp::header_only"
+        "dogen::handcrafted::typeable::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "main",
       "stereotypes": [
-        "dogen::cpp::implementation_only"
+        "dogen::handcrafted::typeable::implementation_only"
       ],
       "fallback_element_type": "masd::object"
     },

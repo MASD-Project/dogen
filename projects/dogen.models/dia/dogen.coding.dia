@@ -3377,7 +3377,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:string>#elements_traversal#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::header_only#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

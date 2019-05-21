@@ -55,9 +55,9 @@ for layer in dia.active_display().diagram.data.layers:
         #
         if "dogen::handcrafted::typeable" in stereotype:
             object.properties["fill_colour"] = "#FFFACD"
-        elif "dogen::cpp::header_only" in stereotype:
+        elif "dogen::handcrafted::typeable::header_only" in stereotype:
             object.properties["fill_colour"] = "#FFFACD"
-        elif "dogen::cpp::implementation_only" in stereotype:
+        elif "dogen::handcrafted::typeable::implementation_only" in stereotype:
             object.properties["fill_colour"] = "#EEFACD"
 
         #

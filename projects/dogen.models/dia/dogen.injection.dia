@@ -103,13 +103,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O1">
       <dia:attribute name="obj_pos">
-        <dia:point val="70,63"/>
+        <dia:point val="68,63"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="69.95,62.95;92.88,67.45"/>
+        <dia:rectangle val="67.95,62.95;90.88,67.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="70,63"/>
+        <dia:point val="68,63"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="22.830000000000002"/>
@@ -121,7 +121,7 @@
         <dia:string>#encoding_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::header_only#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -866,7 +866,7 @@
         <dia:point val="39.89,63"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.14,60.2;81.615,63.8"/>
+        <dia:rectangle val="39.14,60.2;79.615,63.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -874,8 +874,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="39.89,63"/>
         <dia:point val="39.89,61"/>
-        <dia:point val="81.415,61"/>
-        <dia:point val="81.415,63"/>
+        <dia:point val="79.415,61"/>
+        <dia:point val="79.415,63"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -2713,17 +2713,17 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="81.415,67.4"/>
+        <dia:point val="79.415,67.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="73.4025,66.65;82.165,74.8"/>
+        <dia:rectangle val="73.4025,66.65;80.165,74.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="81.415,67.4"/>
-        <dia:point val="81.415,72"/>
+        <dia:point val="79.415,67.4"/>
+        <dia:point val="79.415,72"/>
         <dia:point val="73.4525,72"/>
         <dia:point val="73.4525,74"/>
       </dia:attribute>
@@ -3087,13 +3087,13 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O21">
       <dia:attribute name="obj_pos">
-        <dia:point val="40,73.9286"/>
+        <dia:point val="39,74"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.95,73.8786;60.185,78.3786"/>
+        <dia:rectangle val="38.95,73.95;59.185,78.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="40,73.9286"/>
+        <dia:point val="39,74"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.134999999999998"/>
@@ -3105,7 +3105,7 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
         <dia:string>#decoding_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::header_only#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3330,17 +3330,17 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="60.135,78.3286"/>
+        <dia:point val="59.135,78.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="60.085,77.65;74.2025,81.05"/>
+        <dia:rectangle val="59.085,77.65;74.2025,81.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="60.135,78.3286"/>
-        <dia:point val="60.135,81"/>
+        <dia:point val="59.135,78.4"/>
+        <dia:point val="59.135,81"/>
         <dia:point val="73.4525,81"/>
         <dia:point val="73.4525,78.4"/>
       </dia:attribute>
@@ -3405,7 +3405,7 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
         <dia:point val="48.725,83"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.95,78.2786;49.475,83.8"/>
+        <dia:rectangle val="38.95,78.35;49.475,83.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3413,8 +3413,8 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
       <dia:attribute name="orth_points">
         <dia:point val="48.725,83"/>
         <dia:point val="48.725,81"/>
-        <dia:point val="40,81"/>
-        <dia:point val="40,78.3286"/>
+        <dia:point val="39,81"/>
+        <dia:point val="39,78.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -3477,7 +3477,7 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
         <dia:point val="39.89,69.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.14,69.05;50.2675,74.7286"/>
+        <dia:rectangle val="39.14,69.05;49.2675,74.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3485,8 +3485,8 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
       <dia:attribute name="orth_points">
         <dia:point val="39.89,69.8"/>
         <dia:point val="39.89,72"/>
-        <dia:point val="50.0675,72"/>
-        <dia:point val="50.0675,73.9286"/>
+        <dia:point val="49.0675,72"/>
+        <dia:point val="49.0675,74"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

@@ -541,7 +541,7 @@
     {
       "name": "transforms::dynamic_transform_interface",
       "stereotypes": [
-        "dogen::cpp::header_only"
+        "dogen::handcrafted::typeable::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -562,7 +562,7 @@
     {
       "name": "transforms::model_to_extraction_model_transform_interface",
       "stereotypes": [
-        "dogen::cpp::header_only"
+        "dogen::handcrafted::typeable::header_only"
       ],
       "tagged_values": {
         "masd.generation.cpp.types.forward_declarations.enabled": "true"
@@ -893,7 +893,7 @@
     {
       "name": "formatters::indent_filter",
       "stereotypes": [
-        "dogen::cpp::header_only"
+        "dogen::handcrafted::typeable::header_only"
       ],
       "fallback_element_type": "masd::object"
     },

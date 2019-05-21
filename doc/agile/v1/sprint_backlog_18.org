@@ -13,19 +13,20 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-21 Tue 11:02]
+#+CAPTION: Clock summary at [2019-05-21 Tue 11:19]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *11:05* |       |      | 100.0 |
+| *Total time*                                           | *11:20* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 11:05   |       |      | 100.0 |
-| Active                                                 |         | 11:05 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 3:37 |  32.6 |
-| Create a video demo for the previous sprint's features |         |       | 3:46 |  34.0 |
-| Sprint and product backlog grooming                    |         |       | 0:22 |   3.3 |
-| Make wale templates meta-model elements                |         |       | 2:45 |  24.8 |
-| Flatten the data directory                             |         |       | 0:35 |   5.3 |
+| Stories                                                | 11:20   |       |      | 100.0 |
+| Active                                                 |         | 11:20 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 3:37 |  31.9 |
+| Create a video demo for the previous sprint's features |         |       | 3:46 |  33.2 |
+| Sprint and product backlog grooming                    |         |       | 0:22 |   3.2 |
+| Make wale templates meta-model elements                |         |       | 2:45 |  24.3 |
+| Flatten the data directory                             |         |       | 0:35 |   5.1 |
+| Rename =dogen::cpp::header_only= stereotypes           |         |       | 0:15 |   2.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -288,6 +289,40 @@ from the data directory, all that is left are the top-level MASD
 models and (for now) the PDMs. We should really move the library
 directory to the top-level and get rid of the data directory.
 
+*** COMPLETED Rename =dogen::cpp::header_only= stereotypes            :story:
+    CLOSED: [2019-05-21 Tue 11:19]
+    :LOGBOOK:
+    CLOCK: [2019-05-21 Tue 11:03]--[2019-05-21 Tue 11:18] =>  0:15
+    :END:
+
+Originally, we created these stereotypes for MASD:
+
+- =dogen::cpp::header_only=
+- =dogen::cpp::implementation_only=
+
+Now that have been moved across to dogen they make a lot less sense
+with these names. We have started a new naming pattern:
+
+- =dogen::handcrafted::pretty_printable=
+- =dogen::handcrafted::typeable=
+
+Therefore these should probably be something like:
+
+- =dogen::handcrafted::typeable::header_only=
+- =dogen::handcrafted::typeable::implementation_only=
+
+Because we are configuring types to have only
+header/implementation. The technical space is irrelevant as these are
+only used inside of dogen, all of which exists in the C++ technical
+space.
+
+Tasks:
+
+- update the profile names
+- update all models
+- update the colour palette.
+- remove these profiles from the reference model.
+
 *** Meta-names do not have namespaces                                 :story:
 
 At present the meta-name factory is placing all meta-names in a
@@ -395,7 +430,7 @@ etc.
 The UML profile is now a fair bit out of date. Take advantage of the
 down time waiting for builds to sync it.
 
-*** Logic-less templates do not belong in =generation.cpp=            :story:
+*** Do logic-less templates belong in =generation.cpp=?               :story:
 
 For purely expediency purposes, we placed the logic-less templates in
 the =generation.cpp= model. However, this means you cannot create
@@ -415,36 +450,6 @@ as we add more backends.
 
 Users should be able to make use of script as well. We need a tools
 folder in share.
-
-*** Rename =dogen::cpp::header_only= stereotypes                      :story:
-
-Originally, we created these stereotypes for MASD:
-
-- =dogen::cpp::header_only=
-- =dogen::cpp::implementation_only=
-
-Now that have been moved across to dogen they make a lot less sense
-with these names. We have started a new naming pattern:
-
-- =dogen::handcrafted::pretty_printable=
-- =dogen::handcrafted::typeable=
-
-Therefore these should probably be something like:
-
-- =dogen::handcrafted::typeable::header_only=
-- =dogen::handcrafted::typeable::implementation_only=
-
-Because we are configuring types to have only
-header/implementation. The technical space is irrelevant as these are
-only used inside of dogen, all of which exists in the C++ technical
-space.
-
-Tasks:
-
-- update the profile names
-- update all models
-- update the colour palette.
-- remove these profiles from the reference model.
 
 *** Add aliases to enumeration string conversions                     :story:
 

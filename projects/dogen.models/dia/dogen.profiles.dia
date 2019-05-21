@@ -94,7 +94,7 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Top-level model in Dogen that contains all of the shared 
+            <dia:string>#Top-level model in Dogen that contains all of the shared
 types at the meta-model level.
 
 This model is not intended to be generated. If generated,
@@ -2316,7 +2316,7 @@ so we disable all facets.
         <dia:string>#This element has only a types header file.
 
 #DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.labels=dogen::cpp::header_only#</dia:string>
+#DOGEN masd.variability.labels=dogen::handcrafted::typeable::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2720,7 +2720,7 @@ so we disable all facets.
         <dia:string>#This element has only a types implementation file.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=dogen::cpp::implementation_only#</dia:string>
+#DOGEN masd.variability.labels=dogen::handcrafted::typeable::implementation_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

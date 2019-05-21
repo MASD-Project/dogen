@@ -440,7 +440,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
-        "masd.variability.labels": "dogen::cpp::header_only"
+        "masd.variability.labels": "dogen::handcrafted::typeable::header_only"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -490,7 +490,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.labels": "dogen::cpp::implementation_only"
+        "masd.variability.labels": "dogen::handcrafted::typeable::implementation_only"
       },
       "fallback_element_type": "masd::object",
       "attributes": [

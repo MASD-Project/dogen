@@ -33,7 +33,7 @@
     {
       "name": "transforms::encoding_transform",
       "stereotypes": [
-        "dogen::cpp::header_only"
+        "dogen::handcrafted::typeable::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -201,7 +201,7 @@
     {
       "name": "transforms::decoding_transform",
       "stereotypes": [
-        "dogen::cpp::header_only"
+        "dogen::handcrafted::typeable::header_only"
       ],
       "fallback_element_type": "masd::object"
     },

@@ -247,7 +247,7 @@
     {
       "name": "visitor",
       "stereotypes": [
-        "dogen::cpp::header_only"
+        "dogen::handcrafted::typeable::header_only"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
