@@ -114,17 +114,6 @@ public:
     result_;
 };
 
-/*
-std::string destination_gatherer::make_destination(
-    const feature_group &fg,
-    const variability::meta_model::configuration &cfg) {
-    const variability::helpers::configuration_selector s(cfg);
-    const auto r(s.get_text_content(fg.destination));
-    BOOST_LOG_SEV(lg, trace) << "Read destination: " << r;
-    return r;
-}
-*/
-
 void destination_gatherer::gather(coding::meta_model::element &e) {
     BOOST_LOG_SEV(lg, trace) << "Processing element: "
                              << e.name().qualified().dot();
@@ -224,7 +213,7 @@ apply(const context& ctx, coding::meta_model::model_set& ms) {
     const auto& tracer(*ctx.coding_context().tracer());
     const auto& id(ms.target().name().qualified().dot());
     tracing::scoped_transform_tracer stp(lg,
-        "mapping source transform", transform_id, id, tracer, ms);
+        "mapping elements transform", transform_id, id, tracer, ms);
 
     /*
      * First we obtain all of the model elements which have been
