@@ -13,23 +13,25 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-20 Mon 19:53]
+#+CAPTION: Clock summary at [2019-05-21 Tue 08:47]
 | <75>                                                   |        |      |      |       |
 | Headline                                               | Time   |      |      |     % |
 |--------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                           | *8:16* |      |      | 100.0 |
+| *Total time*                                           | *8:53* |      |      | 100.0 |
 |--------------------------------------------------------+--------+------+------+-------|
-| Stories                                                | 8:16   |      |      | 100.0 |
-| Active                                                 |        | 8:16 |      | 100.0 |
-| Edit release notes for previous sprint                 |        |      | 3:16 |  39.5 |
-| Create a video demo for the previous sprint's features |        |      | 3:46 |  45.6 |
-| Make wale templates meta-model elements                |        |      | 1:14 |  14.9 |
+| Stories                                                | 8:53   |      |      | 100.0 |
+| Active                                                 |        | 8:53 |      | 100.0 |
+| Edit release notes for previous sprint                 |        |      | 3:37 |  40.7 |
+| Create a video demo for the previous sprint's features |        |      | 3:46 |  42.4 |
+| Sprint and product backlog grooming                    |        |      | 0:16 |   3.0 |
+| Make wale templates meta-model elements                |        |      | 1:14 |  13.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2019-05-20 Mon 11:50]
     :LOGBOOK:
+    CLOCK: [2019-05-21 Tue 08:09]--[2019-05-21 Tue 08:30] =>  0:21
     CLOCK: [2019-05-20 Mon 16:53]--[2019-05-20 Mon 17:01] =>  0:08
     CLOCK: [2019-05-20 Mon 11:51]--[2019-05-20 Mon 12:01] =>  0:10
     CLOCK: [2019-05-20 Mon 11:41]--[2019-05-20 Mon 11:50] =>  0:09
@@ -191,6 +193,13 @@ Happy Modeling!
 
 Time spent creating the demo and presentation.
 
+*** STARTED Sprint and product backlog grooming                       :story:
+    :LOGBOOK:
+    CLOCK: [2019-05-21 Tue 08:31]--[2019-05-21 Tue 08:47] =>  0:16
+    :END:
+
+Updates to sprint and product backlog.
+
 *** STARTED Make wale templates meta-model elements                   :story:
     :LOGBOOK:
     CLOCK: [2019-05-20 Mon 19:31]--[2019-05-20 Mon 19:53] =>  0:22
@@ -270,10 +279,6 @@ At present the meta-name factory is placing all meta-names in a
 top-level namespace. It should really respect the hierarchical
 namespaces we have. However, given we want to code-generate this, we
 may just leave it as is for now until we fix it properly.
-
-*** Sprint and product backlog grooming                               :story:
-
-Updates to sprint and product backlog.
 
 *** Try to add relational tracing support                             :story:
 
