@@ -3061,6 +3061,13 @@
           "type": "std::unordered_map<std::string, boost::shared_ptr<logic_less_template>>"
         }
       ]
+    },
+    {
+      "name": "transforms::mapping_elements_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

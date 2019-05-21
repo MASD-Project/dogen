@@ -136,6 +136,7 @@
 #include "dogen.coding/types/meta_model/mapping/element_repository.hpp"
 #include "dogen.coding/types/meta_model/structural/object_template.hpp"
 #include "dogen.coding/types/meta_model/variability/feature_bundle.hpp"
+#include "dogen.coding/types/transforms/mapping_elements_transform.hpp"
 #include "dogen.coding/types/transforms/object_templates_transform.hpp"
 #include "dogen.coding/types/meta_model/mapping/extensible_mappable.hpp"
 #include "dogen.coding/types/meta_model/decoration/generation_marker.hpp"
