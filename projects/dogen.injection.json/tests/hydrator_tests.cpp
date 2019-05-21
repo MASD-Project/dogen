@@ -46,14 +46,6 @@ const std::string second_parent("a");
 const std::string a_stereotype("some stereotype");
 const std::string another_stereotype("another");
 
-const std::string cpp_std_model_path("library/cpp.std.json");
-const std::string cpp_std_model_name("std");
-const std::string cpp_boost_model_name("boost");
-const std::string cpp_boost_model_path("library/cpp.boost.json");
-const std::string hardware_model_path("library/cpp.builtins.json");
-const std::string hardware_model_name_front("cpp");
-const std::string hardware_model_name_back("builtins");
-
 const std::string missing_elements("Missing mandatory elements");
 
 const std::string one_object_model(R"({

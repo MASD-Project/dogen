@@ -49,11 +49,11 @@ const std::string linux_proc("/proc/self/exe");
 const std::string freebsd_proc("/proc/curproc/file");
 const std::string solaris_proc("/proc/self/path/a.out");
 
-const boost::filesystem::path in_current_dir("./share");
-const boost::filesystem::path in_dir_above("../share");
+const boost::filesystem::path in_current_dir("./share/library");
+const boost::filesystem::path in_dir_above("../share/library");
 const boost::filesystem::path in_share_dogen_versioned_dir(
-    "../share/dogen-" DOGEN_VERSION);
-const boost::filesystem::path in_share_dogen_dir("../share/dogen/");
+    "../share/dogen-" DOGEN_VERSION "/library");
+const boost::filesystem::path in_share_dogen_dir("../share/dogen/library");
 
 }
 
@@ -94,7 +94,7 @@ boost::filesystem::path executable_directory() {
 #endif
 }
 
-boost::filesystem::path share_directory() {
+boost::filesystem::path library_directory() {
     const auto ed(executable_directory());
 
     // shouldn't really happen, but just in case.

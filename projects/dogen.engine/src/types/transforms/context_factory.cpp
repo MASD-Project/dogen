@@ -116,9 +116,9 @@ make_injection_context(const configuration& cfg) {
      * Obtain the share directory.
      */
     injection::transforms::context r;
-    const auto share_dir(utility::filesystem::share_directory());
-    const auto share_dirs(std::vector<boost::filesystem::path>{ share_dir });
-    r.data_directories(share_dirs);
+    const auto lib_dir(utility::filesystem::library_directory());
+    const auto lib_dirs(std::vector<boost::filesystem::path>{ lib_dir });
+    r.data_directories(lib_dirs);
 
     /*
      * Setup the archetypes data structures.
@@ -150,9 +150,9 @@ context context_factory::make_context(const configuration& cfg,
     /*
      * Obtain the data directories.
      */
-    const auto share_dir(utility::filesystem::share_directory());
-    const auto share_dirs(std::vector<boost::filesystem::path>{ share_dir });
-    vctx.data_directories(share_dirs);
+    const auto lib_dir(utility::filesystem::library_directory());
+    const auto lib_dirs(std::vector<boost::filesystem::path>{ lib_dir });
+    vctx.data_directories(lib_dirs);
 
     /*
      * Obtain the transform registrar and ensure it has been setup.
@@ -221,7 +221,7 @@ context context_factory::make_context(const configuration& cfg,
     /*
      * Populate the data directories.
      */
-    r.injection_context().data_directories(share_dirs);
+    r.injection_context().data_directories(lib_dirs);
 
     /*
      * Setup the archetype location repository.

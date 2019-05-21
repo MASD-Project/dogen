@@ -55,7 +55,7 @@ references_resolver::references_resolver(
         BOOST_LOG_SEV(lg, error) << no_dirs;
         BOOST_THROW_EXCEPTION(reference_resolution_exception(no_dirs));
     }
-    BOOST_LOG_SEV(lg, debug) << "Extensions: " << directories_;
+    BOOST_LOG_SEV(lg, debug) << "Directories: " << directories_;
 }
 
 boost::filesystem::path

@@ -34,8 +34,6 @@ transform_id("injection.transforms.model_set_production_chain");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
-const std::string library_dir("library");
-
 }
 
 namespace dogen::injection::transforms {
@@ -48,7 +46,7 @@ model_set_production_chain::obtain_directory_list(const context& ctx,
      * Add all system directories.
      */
     for (const auto& dir : ctx.data_directories())
-        r.push_back(dir / library_dir);
+        r.push_back(dir);
 
     /*
      * Add the directory where target is located.

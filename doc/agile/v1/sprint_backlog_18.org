@@ -13,20 +13,20 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-21 Tue 11:19]
+#+CAPTION: Clock summary at [2019-05-21 Tue 11:55]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *11:20* |       |      | 100.0 |
+| *Total time*                                           | *11:56* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 11:20   |       |      | 100.0 |
-| Active                                                 |         | 11:20 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 3:37 |  31.9 |
-| Create a video demo for the previous sprint's features |         |       | 3:46 |  33.2 |
-| Sprint and product backlog grooming                    |         |       | 0:22 |   3.2 |
-| Make wale templates meta-model elements                |         |       | 2:45 |  24.3 |
-| Flatten the data directory                             |         |       | 0:35 |   5.1 |
-| Rename =dogen::cpp::header_only= stereotypes           |         |       | 0:15 |   2.2 |
+| Stories                                                | 11:56   |       |      | 100.0 |
+| Active                                                 |         | 11:56 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 3:37 |  30.3 |
+| Create a video demo for the previous sprint's features |         |       | 3:46 |  31.6 |
+| Sprint and product backlog grooming                    |         |       | 0:22 |   3.1 |
+| Make wale templates meta-model elements                |         |       | 2:45 |  23.0 |
+| Flatten the data directory                             |         |       | 1:11 |   9.9 |
+| Rename =dogen::cpp::header_only= stereotypes           |         |       | 0:15 |   2.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -281,6 +281,7 @@ Notes:
 *** COMPLETED Flatten the data directory                              :story:
     CLOSED: [2019-05-21 Tue 11:02]
     :LOGBOOK:
+    CLOCK: [2019-05-21 Tue 11:19]--[2019-05-21 Tue 11:55] =>  0:36
     CLOCK: [2019-05-21 Tue 10:27]--[2019-05-21 Tue 11:02] =>  0:35
     :END:
 
@@ -528,6 +529,10 @@ versa.
 
 We could also try to generate all of these models when testing the
 package.
+
+On the other hand, once we create a proper package for dogen headers,
+with SOs etc, we should really include the dogen models there. In
+effect, it will be symmetric with PDM packages.
 
 *** Add logging support to generated tests                            :story:
 

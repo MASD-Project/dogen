@@ -48,7 +48,7 @@ BOOST_AUTO_TEST_CASE(path_to_executable_returns_expected_results) {
 BOOST_AUTO_TEST_CASE(path_to_data_directory_returns_expected_results) {
     SETUP_TEST_LOG_SOURCE("path_to_data_directory_returns_expected_results");
 
-    const auto p(dogen::utility::filesystem::share_directory());
+    const auto p(dogen::utility::filesystem::library_directory());
     BOOST_LOG_SEV(lg, info) << "input path: " << p.string();
     BOOST_CHECK(!p.empty());
 }

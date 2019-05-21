@@ -58,7 +58,7 @@ boost::filesystem::path executable_directory();
  *
  * If the folder is not found, the function throws an exception.
  */
-boost::filesystem::path share_directory();
+boost::filesystem::path library_directory();
 
 }
 
