@@ -22,8 +22,8 @@
 #include <boost/filesystem/operations.hpp>
 #include <boost/throw_exception.hpp>
 #if defined __unix__ || defined __CYGWIN__
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include <unistd.h>
 #include <sys/types.h>
 #elif defined _WIN32
@@ -49,12 +49,11 @@ const std::string linux_proc("/proc/self/exe");
 const std::string freebsd_proc("/proc/curproc/file");
 const std::string solaris_proc("/proc/self/path/a.out");
 
-const boost::filesystem::path in_current_dir("./data");
-const boost::filesystem::path in_dir_above("../data");
-const boost::filesystem::path in_share_data_dir("../share/data");
+const boost::filesystem::path in_current_dir("./share");
+const boost::filesystem::path in_dir_above("../share");
 const boost::filesystem::path in_share_dogen_versioned_dir(
     "../share/dogen-" DOGEN_VERSION);
-const boost::filesystem::path in_share_dogen_dir("../share/dogen/data");
+const boost::filesystem::path in_share_dogen_dir("../share/dogen/");
 
 }
 
@@ -95,7 +94,7 @@ boost::filesystem::path executable_directory() {
 #endif
 }
 
-boost::filesystem::path data_files_directory() {
+boost::filesystem::path share_directory() {
     const auto ed(executable_directory());
 
     // shouldn't really happen, but just in case.
@@ -103,13 +102,8 @@ boost::filesystem::path data_files_directory() {
     if (boost::filesystem::exists(r))
         return r;
 
-    // build directory
+    // build directory, Windows, OSX, linux opt install
     r = boost::filesystem::absolute(ed / in_dir_above);
-    if (boost::filesystem::exists(r))
-        return r;
-
-    // Windows, OSX, linux opt install
-    r = boost::filesystem::absolute(ed / in_share_data_dir);
     if (boost::filesystem::exists(r))
         return r;
 
@@ -128,7 +122,6 @@ boost::filesystem::path data_files_directory() {
       << ". Locations searched: "
       << in_current_dir.string() << " "
       << in_dir_above.string() << " "
-      << in_share_data_dir.string() << " "
       << in_share_dogen_versioned_dir.string() << " "
       << in_share_dogen_dir.string() << " ";
 

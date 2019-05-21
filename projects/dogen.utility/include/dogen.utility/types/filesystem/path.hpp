@@ -37,7 +37,8 @@ namespace dogen::utility::filesystem {
 boost::filesystem::path executable_directory();
 
 /**
- * @brief Returns the path to the directory containing the data files.
+ * @brief Returns the path to the directory containing the shared
+ * files.
  *
  * We could not find a sensible way of implementing this in a
  * cross-platform way. For instance, we couldn't hard code the path
@@ -57,7 +58,7 @@ boost::filesystem::path executable_directory();
  *
  * If the folder is not found, the function throws an exception.
  */
-boost::filesystem::path data_files_directory();
+boost::filesystem::path share_directory();
 
 }
 

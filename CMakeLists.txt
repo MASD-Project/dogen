@@ -510,7 +510,7 @@ endif()
 # include all sub directories
 #
 add_subdirectory(${CMAKE_SOURCE_DIR}/build)
-add_subdirectory(${CMAKE_SOURCE_DIR}/data)
+add_subdirectory(${CMAKE_SOURCE_DIR}/share)
 add_subdirectory(${CMAKE_SOURCE_DIR}/doc)
 add_subdirectory(${CMAKE_SOURCE_DIR}/test_data)
 add_subdirectory(${CMAKE_SOURCE_DIR}/projects)

@@ -22,8 +22,6 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.utility/types/filesystem/path.hpp"
-#include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.archetypes/types/location_repository_builder.hpp"
 #include "dogen.tracing/types/tracer.hpp"
 #include "dogen.coding/test/mock_context_factory.hpp"
@@ -43,9 +41,6 @@ transforms::context mock_context_factory::make() {
     transforms::context r;
     auto alrp(boost::make_shared<archetypes::location_repository>());
     r.archetype_location_repository(alrp);
-
-    const auto data_dir(utility::filesystem::data_files_directory());
-    const auto data_dirs(std::vector<boost::filesystem::path>{ data_dir });
 
     boost::optional<tracing_configuration> tcfg;
     auto tracer(boost::make_shared<tracing::tracer>(tcfg));
