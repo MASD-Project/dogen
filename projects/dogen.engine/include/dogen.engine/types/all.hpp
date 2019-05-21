@@ -42,7 +42,6 @@
 #include "dogen.engine/types/transforms/scoped_context_manager.hpp"
 #include "dogen.engine/types/transforms/profile_binding_transform.hpp"
 #include "dogen.engine/types/helpers/stereotypes_conversion_result.hpp"
-#include "dogen.engine/types/transforms/mapping_elements_transform.hpp"
 #include "dogen.engine/types/transforms/profile_repository_transform.hpp"
 #include "dogen.engine/types/transforms/dynamic_stereotypes_transform.hpp"
 #include "dogen.engine/types/transforms/extraction_model_production_chain.hpp"
