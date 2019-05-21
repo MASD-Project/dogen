@@ -21,7 +21,6 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.coding/io/meta_model/element_io.hpp"
-#include "dogen.coding/io/meta_model/name_tree_io.hpp"
 #include "dogen.coding/types/meta_model/element_visitor.hpp"
 #include "dogen.coding/types/meta_model/mapping/fixed_mappable.hpp"
 
@@ -50,8 +49,7 @@ fixed_mappable::fixed_mappable(
     const std::unordered_map<std::string, dogen::coding::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const boost::optional<dogen::coding::meta_model::decoration::element_properties>& decoration,
-    const std::string& unparsed_destination,
-    const dogen::coding::meta_model::name_tree& destination)
+    const std::string& destination)
     : dogen::coding::meta_model::element(
       name,
       documentation,
@@ -67,7 +65,6 @@ fixed_mappable::fixed_mappable(
       artefact_properties,
       archetype_location_properties,
       decoration),
-      unparsed_destination_(unparsed_destination),
       destination_(destination) { }
 
 void fixed_mappable::accept(const element_visitor& v) const {
@@ -92,8 +89,7 @@ void fixed_mappable::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     dogen::coding::meta_model::element::to_stream(s);
     s << ", "
-      << "\"unparsed_destination\": " << "\"" << tidy_up_string(unparsed_destination_) << "\"" << ", "
-      << "\"destination\": " << destination_
+      << "\"destination\": " << "\"" << tidy_up_string(destination_) << "\""
       << " }";
 }
 
@@ -101,7 +97,6 @@ void fixed_mappable::swap(fixed_mappable& other) noexcept {
     dogen::coding::meta_model::element::swap(other);
 
     using std::swap;
-    swap(unparsed_destination_, other.unparsed_destination_);
     swap(destination_, other.destination_);
 }
 
@@ -113,7 +108,6 @@ bool fixed_mappable::equals(const dogen::coding::meta_model::element& other) con
 
 bool fixed_mappable::operator==(const fixed_mappable& rhs) const {
     return dogen::coding::meta_model::element::compare(rhs) &&
-        unparsed_destination_ == rhs.unparsed_destination_ &&
         destination_ == rhs.destination_;
 }
 
@@ -123,35 +117,19 @@ fixed_mappable& fixed_mappable::operator=(fixed_mappable other) {
     return *this;
 }
 
-const std::string& fixed_mappable::unparsed_destination() const {
-    return unparsed_destination_;
-}
-
-std::string& fixed_mappable::unparsed_destination() {
-    return unparsed_destination_;
-}
-
-void fixed_mappable::unparsed_destination(const std::string& v) {
-    unparsed_destination_ = v;
-}
-
-void fixed_mappable::unparsed_destination(const std::string&& v) {
-    unparsed_destination_ = std::move(v);
-}
-
-const dogen::coding::meta_model::name_tree& fixed_mappable::destination() const {
+const std::string& fixed_mappable::destination() const {
     return destination_;
 }
 
-dogen::coding::meta_model::name_tree& fixed_mappable::destination() {
+std::string& fixed_mappable::destination() {
     return destination_;
 }
 
-void fixed_mappable::destination(const dogen::coding::meta_model::name_tree& v) {
+void fixed_mappable::destination(const std::string& v) {
     destination_ = v;
 }
 
-void fixed_mappable::destination(const dogen::coding::meta_model::name_tree&& v) {
+void fixed_mappable::destination(const std::string&& v) {
     destination_ = std::move(v);
 }
 

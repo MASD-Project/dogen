@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen.coding/test_data/meta_model/model_td.hpp"
 #include "dogen.coding/test_data/meta_model/model_set_td.hpp"
 
@@ -36,6 +37,20 @@ std::list<dogen::coding::meta_model::model> create_std_list_dogen_coding_meta_mo
     return r;
 }
 
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
+
+std::unordered_map<std::string, std::string> create_std_unordered_map_std_string_std_string(unsigned int position) {
+    std::unordered_map<std::string, std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_std_string(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen::coding::meta_model {
@@ -46,6 +61,7 @@ void model_set_generator::
 populate(const unsigned int position, result_type& v) {
     v.target(create_dogen_coding_meta_model_model(position + 0));
     v.references(create_std_list_dogen_coding_meta_model_model(position + 1));
+    v.fixed_mappings(create_std_unordered_map_std_string_std_string(position + 2));
 }
 
 model_set_generator::result_type

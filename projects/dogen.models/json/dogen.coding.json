@@ -1518,6 +1518,11 @@
         {
           "name": "references",
           "type": "std::list<model>"
+        },
+        {
+          "name": "fixed_mappings",
+          "type": "std::unordered_map<std::string, std::string>",
+          "documentation": "Maps a fixed mappable name, using the scope notation, to its destination.\n"
         }
       ]
     },
@@ -2942,7 +2947,7 @@
     },
     {
       "name": "meta_model::mapping::extensible_mappable",
-      "documentation": "A mappable meta-model element for the general purpose of mapping.\n\nMappables can be used to create a Platform Independent Model (PIM), which is then\nmapped to concrete types to form a Platform Specific Model (PSM). Users can \nextend the mappings as required.\n",
+      "documentation": "A mappable meta-model element for the general purpose of mapping.\n\nMappables can be used to create a Platform Independent Model (PIM), which is then\nmapped to concrete types to form a Platform Specific Model (PSM). Users can\nextend the mappings as required.\n",
       "stereotypes": [
         "coding::meta_element"
       ],
@@ -3027,12 +3032,8 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "unparsed_destination",
-          "type": "std::string"
-        },
-        {
           "name": "destination",
-          "type": "name_tree"
+          "type": "std::string"
         }
       ]
     },

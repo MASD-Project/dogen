@@ -29,7 +29,6 @@
 #include <string>
 #include <algorithm>
 #include "dogen.coding/types/meta_model/element.hpp"
-#include "dogen.coding/types/meta_model/name_tree.hpp"
 
 namespace dogen::coding::meta_model::mapping {
 
@@ -63,8 +62,7 @@ public:
         const std::unordered_map<std::string, dogen::coding::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const boost::optional<dogen::coding::meta_model::decoration::element_properties>& decoration,
-        const std::string& unparsed_destination,
-        const dogen::coding::meta_model::name_tree& destination);
+        const std::string& destination);
 
 public:
     using element::accept;
@@ -77,15 +75,10 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const std::string& unparsed_destination() const;
-    std::string& unparsed_destination();
-    void unparsed_destination(const std::string& v);
-    void unparsed_destination(const std::string&& v);
-
-    const dogen::coding::meta_model::name_tree& destination() const;
-    dogen::coding::meta_model::name_tree& destination();
-    void destination(const dogen::coding::meta_model::name_tree& v);
-    void destination(const dogen::coding::meta_model::name_tree&& v);
+    const std::string& destination() const;
+    std::string& destination();
+    void destination(const std::string& v);
+    void destination(const std::string&& v);
 
 public:
     bool operator==(const fixed_mappable& rhs) const;
@@ -101,8 +94,7 @@ public:
     fixed_mappable& operator=(fixed_mappable other);
 
 private:
-    std::string unparsed_destination_;
-    dogen::coding::meta_model::name_tree destination_;
+    std::string destination_;
 };
 
 }

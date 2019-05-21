@@ -20,7 +20,6 @@
  */
 #include <sstream>
 #include "dogen.coding/test_data/meta_model/element_td.hpp"
-#include "dogen.coding/test_data/meta_model/name_tree_td.hpp"
 #include "dogen.coding/test_data/meta_model/mapping/fixed_mappable_td.hpp"
 
 namespace {
@@ -29,11 +28,6 @@ std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
     return s.str();
-}
-
-dogen::coding::meta_model::name_tree
-create_dogen_coding_meta_model_name_tree(const unsigned int position) {
-    return dogen::coding::meta_model::name_tree_generator::create(position);
 }
 
 }
@@ -45,8 +39,7 @@ fixed_mappable_generator::fixed_mappable_generator() : position_(0) { }
 void fixed_mappable_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::coding::meta_model::element_generator::populate(position, v);
-    v.unparsed_destination(create_std_string(position + 0));
-    v.destination(create_dogen_coding_meta_model_name_tree(position + 1));
+    v.destination(create_std_string(position + 0));
 }
 
 fixed_mappable_generator::result_type

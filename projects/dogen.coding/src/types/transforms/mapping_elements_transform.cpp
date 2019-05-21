@@ -199,7 +199,7 @@ void mapping_elements_transform::populate_fixed_mappables(
                 auto& mm(*pair.second);
                 const auto& cfg(*mm.configuration());
                 const variability::helpers::configuration_selector s(cfg);
-                mm.unparsed_destination(s.get_text_content(fg.destination));
+                mm.destination(s.get_text_content(fg.destination));
             }
         });
 

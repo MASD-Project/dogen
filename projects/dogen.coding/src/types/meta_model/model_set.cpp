@@ -24,19 +24,23 @@ namespace dogen::coding::meta_model {
 
 model_set::model_set(
     const dogen::coding::meta_model::model& target,
-    const std::list<dogen::coding::meta_model::model>& references)
+    const std::list<dogen::coding::meta_model::model>& references,
+    const std::unordered_map<std::string, std::string>& fixed_mappings)
     : target_(target),
-      references_(references) { }
+      references_(references),
+      fixed_mappings_(fixed_mappings) { }
 
 void model_set::swap(model_set& other) noexcept {
     using std::swap;
     swap(target_, other.target_);
     swap(references_, other.references_);
+    swap(fixed_mappings_, other.fixed_mappings_);
 }
 
 bool model_set::operator==(const model_set& rhs) const {
     return target_ == rhs.target_ &&
-        references_ == rhs.references_;
+        references_ == rhs.references_ &&
+        fixed_mappings_ == rhs.fixed_mappings_;
 }
 
 model_set& model_set::operator=(model_set other) {
@@ -75,6 +79,22 @@ void model_set::references(const std::list<dogen::coding::meta_model::model>& v)
 
 void model_set::references(const std::list<dogen::coding::meta_model::model>&& v) {
     references_ = std::move(v);
+}
+
+const std::unordered_map<std::string, std::string>& model_set::fixed_mappings() const {
+    return fixed_mappings_;
+}
+
+std::unordered_map<std::string, std::string>& model_set::fixed_mappings() {
+    return fixed_mappings_;
+}
+
+void model_set::fixed_mappings(const std::unordered_map<std::string, std::string>& v) {
+    fixed_mappings_ = v;
+}
+
+void model_set::fixed_mappings(const std::unordered_map<std::string, std::string>&& v) {
+    fixed_mappings_ = std::move(v);
 }
 
 }

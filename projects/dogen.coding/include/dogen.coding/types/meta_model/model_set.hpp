@@ -26,7 +26,9 @@
 #endif
 
 #include <list>
+#include <string>
 #include <algorithm>
+#include <unordered_map>
 #include "dogen.coding/types/meta_model/model.hpp"
 
 namespace dogen::coding::meta_model {
@@ -41,7 +43,8 @@ public:
 public:
     model_set(
         const dogen::coding::meta_model::model& target,
-        const std::list<dogen::coding::meta_model::model>& references);
+        const std::list<dogen::coding::meta_model::model>& references,
+        const std::unordered_map<std::string, std::string>& fixed_mappings);
 
 public:
     const dogen::coding::meta_model::model& target() const;
@@ -53,6 +56,16 @@ public:
     std::list<dogen::coding::meta_model::model>& references();
     void references(const std::list<dogen::coding::meta_model::model>& v);
     void references(const std::list<dogen::coding::meta_model::model>&& v);
+
+    /**
+     * @brief Maps a fixed mappable name, using the scope notation, to its destination.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, std::string>& fixed_mappings() const;
+    std::unordered_map<std::string, std::string>& fixed_mappings();
+    void fixed_mappings(const std::unordered_map<std::string, std::string>& v);
+    void fixed_mappings(const std::unordered_map<std::string, std::string>&& v);
+    /**@}*/
 
 public:
     bool operator==(const model_set& rhs) const;
@@ -67,6 +80,7 @@ public:
 private:
     dogen::coding::meta_model::model target_;
     std::list<dogen::coding::meta_model::model> references_;
+    std::unordered_map<std::string, std::string> fixed_mappings_;
 };
 
 }

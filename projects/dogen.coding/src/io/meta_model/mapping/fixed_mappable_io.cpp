@@ -21,7 +21,6 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.coding/io/meta_model/element_io.hpp"
-#include "dogen.coding/io/meta_model/name_tree_io.hpp"
 #include "dogen.coding/io/meta_model/mapping/fixed_mappable_io.hpp"
 
 namespace dogen::coding::meta_model::mapping {
