@@ -31,6 +31,7 @@
 #include "dogen.coding/types/transforms/parsing_transform.hpp"
 #include "dogen.coding/types/transforms/primitives_transform.hpp"
 #include "dogen.coding/types/transforms/containment_transform.hpp"
+#include "dogen.coding/types/transforms/mapping_elements_transform.hpp"
 #include "dogen.coding/types/transforms/extraction_properties_transform.hpp"
 #include "dogen.coding/types/transforms/variability_feature_bundle_transform.hpp"
 #include "dogen.coding/types/transforms/pre_assembly_chain.hpp"
@@ -88,6 +89,13 @@ void pre_assembly_chain::apply(const context& ctx, meta_model::model& m) {
 void pre_assembly_chain::apply(const context& ctx, meta_model::model_set& ms) {
     tracing::scoped_chain_tracer stp(lg, "pre-assembly chain",
         transform_id, ms.target().name().qualified().dot(), *ctx.tracer(), ms);
+
+    /*
+     * First we handle the processing of mapping elements. There is no
+     * particular reason to do this first as it has no dependencies in
+     * this chain.
+     */
+    mapping_elements_transform::apply(ctx, ms);
 
     /*
      * Apply all of the pre-processing transforms to the target.
