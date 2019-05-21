@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/meta_model/feature.hpp"
@@ -35,7 +36,8 @@
 #include "dogen.coding/types/meta_model/mapping/fixed_mappable.hpp"
 #include "dogen.coding/types/meta_model/mapping/extensible_mappable.hpp"
 #include "dogen.coding/types/meta_model/elements_traversal.hpp"
-#include "dogen.engine/types/transforms/context.hpp"
+#include "dogen.coding/types/transforms/context.hpp"
+#include "dogen.coding/types/transforms/transformation_error.hpp"
 #include "dogen.coding/types/transforms/mapping_elements_transform.hpp"
 
 namespace {
@@ -47,6 +49,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 const std::string empty;
+const std::string duplicate_fm_id("Duplicate fixed mapping ID: ");
 
 }
 
@@ -199,7 +202,17 @@ void mapping_elements_transform::populate_fixed_mappables(
                 auto& mm(*pair.second);
                 const auto& cfg(*mm.configuration());
                 const variability::helpers::configuration_selector s(cfg);
-                mm.destination(s.get_text_content(fg.destination));
+                const auto dst(s.get_text_content(fg.destination));
+                mm.destination(dst);
+
+                const auto fm_id(mm.name().qualified().colon());
+                const auto fm_pair(std::make_pair(fm_id, dst));
+                const auto inserted(ms.fixed_mappings().insert(fm_pair).second);
+                if (!inserted) {
+                    BOOST_LOG_SEV(lg, error) << duplicate_fm_id << fm_id;
+                    BOOST_THROW_EXCEPTION(
+                        transformation_error(duplicate_fm_id + fm_id));
+                }
             }
         });
 
