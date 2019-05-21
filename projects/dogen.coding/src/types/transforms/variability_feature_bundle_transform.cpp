@@ -150,7 +150,6 @@ make_template_kind(const feature_group& fg,
     return r;
 }
 
-
 void variability_feature_bundle_transform::update(const feature_group& fg,
     meta_model::variability::feature_template& ft) {
     const auto& cfg(*ft.configuration());

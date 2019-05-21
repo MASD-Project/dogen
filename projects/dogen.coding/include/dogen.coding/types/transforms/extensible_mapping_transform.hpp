@@ -80,9 +80,6 @@ private:
         std::list<helpers::mapping>>& mappings_by_set_name);
 
 private:
-    static bool is_mappable(const meta_model::technical_space from,
-        const meta_model::technical_space to);
-
     static meta_model::model map(const helpers::mapping_set_repository& msrp,
         const meta_model::model& src, const meta_model::technical_space to);
 
