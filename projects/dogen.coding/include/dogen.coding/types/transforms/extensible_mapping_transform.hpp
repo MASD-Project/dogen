@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CODING_TYPES_TRANSFORMS_MAPPING_TRANSFORM_HPP
-#define DOGEN_CODING_TYPES_TRANSFORMS_MAPPING_TRANSFORM_HPP
+#ifndef DOGEN_CODING_TYPES_TRANSFORMS_EXTENSIBLE_MAPPING_TRANSFORM_HPP
+#define DOGEN_CODING_TYPES_TRANSFORMS_EXTENSIBLE_MAPPING_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -39,7 +39,7 @@
 
 namespace dogen::coding::transforms {
 
-class mapping_transform final {
+class extensible_mapping_transform final {
 private:
     /**
      * @brief Retrieve all extensible mappables in the model set.

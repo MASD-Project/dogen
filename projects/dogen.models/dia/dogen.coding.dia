@@ -15605,7 +15605,7 @@ space.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#mapping_transform#</dia:string>
+        <dia:string>#extensible_mapping_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -36119,7 +36119,7 @@ the default value field if available.
         <dia:string>#A mappable meta-model element for the general purpose of mapping.
 
 Mappables can be used to create a Platform Independent Model (PIM), which is then
-mapped to concrete types to form a Platform Specific Model (PSM). Users can 
+mapped to concrete types to form a Platform Specific Model (PSM). Users can
 extend the mappings as required.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">

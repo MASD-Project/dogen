@@ -22,7 +22,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.coding/io/meta_model/model_io.hpp"
 #include "dogen.coding/types/transforms/context.hpp"
-#include "dogen.coding/types/transforms/mapping_transform.hpp"
+#include "dogen.coding/types/transforms/extensible_mapping_transform.hpp"
 #include "dogen.coding/types/transforms/merge_transform.hpp"
 #include "dogen.coding/types/transforms/assembly_chain.hpp"
 
@@ -46,7 +46,7 @@ meta_model::model assembly_chain::apply(const context& ctx,
     /*
      * First map the model set, if required.
      */
-    const auto mapped_set(mapping_transform::apply(ctx, ms, ts));
+    const auto mapped_set(extensible_mapping_transform::apply(ctx, ms, ts));
 
     /*
      * Then merge the mapped set.

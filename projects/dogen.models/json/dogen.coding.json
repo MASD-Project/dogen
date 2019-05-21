@@ -1151,7 +1151,7 @@
       ]
     },
     {
-      "name": "transforms::mapping_transform",
+      "name": "transforms::extensible_mapping_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

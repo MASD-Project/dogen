@@ -35,11 +35,11 @@
 #include "dogen.coding/types/helpers/mappings_validator.hpp"
 #include "dogen.coding/types/transforms/context.hpp"
 #include "dogen.coding/types/transforms/transformation_error.hpp"
-#include "dogen.coding/types/transforms/mapping_transform.hpp"
+#include "dogen.coding/types/transforms/extensible_mapping_transform.hpp"
 
 namespace {
 
-const std::string transform_id("coding.transforms.mapping_transform");
+const std::string transform_id("coding.transforms.extensible_mapping_transform");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
@@ -57,7 +57,7 @@ std::unordered_map<std::string,
                    boost::shared_ptr<
                        meta_model::mapping::extensible_mappable>
                    >
-mapping_transform::obtain_mappables(const coding::meta_model::model_set& ms) {
+extensible_mapping_transform::obtain_mappables(const coding::meta_model::model_set& ms) {
     auto r(ms.target().mapping_elements().extensible_mappables());
     for (const auto& ref : ms.references()) {
         for (const auto& pair : ref.mapping_elements().extensible_mappables()) {
@@ -74,7 +74,7 @@ mapping_transform::obtain_mappables(const coding::meta_model::model_set& ms) {
 }
 
 std::unordered_map<std::string, std::list<helpers::mapping>>
-mapping_transform::create_mappings(const std::unordered_map<std::string,
+extensible_mapping_transform::create_mappings(const std::unordered_map<std::string,
     boost::shared_ptr<meta_model::mapping::extensible_mappable>>&
     mappables) {
 
@@ -107,13 +107,13 @@ mapping_transform::create_mappings(const std::unordered_map<std::string,
     return r;
 }
 
-void mapping_transform::validate_mappings(const std::unordered_map<std::string,
+void extensible_mapping_transform::validate_mappings(const std::unordered_map<std::string,
     std::list<helpers::mapping>>& mappings)  {
     helpers::mappings_validator v;
     v.validate(mappings);
 }
 
-void mapping_transform::insert(const std::string& agnostic_id,
+void extensible_mapping_transform::insert(const std::string& agnostic_id,
     const meta_model::name& n, const meta_model::technical_space ts,
     std::unordered_map<meta_model::technical_space,
     std::unordered_map<std::string, meta_model::name>>& map) {
@@ -131,7 +131,7 @@ void mapping_transform::insert(const std::string& agnostic_id,
                              << "' to '" << n.qualified().dot() << "'";
 }
 
-void  mapping_transform::
+void  extensible_mapping_transform::
 populate_mapping_set(const std::list<helpers::mapping>& mappings,
     helpers::mapping_set& ms) {
 
@@ -157,7 +157,7 @@ populate_mapping_set(const std::list<helpers::mapping>& mappings,
 }
 
 helpers::mapping_set_repository
-mapping_transform::create_repository(const std::unordered_map<std::string,
+extensible_mapping_transform::create_repository(const std::unordered_map<std::string,
     std::list<helpers::mapping>>&
     mappings_by_set_name) {
 
@@ -190,13 +190,13 @@ mapping_transform::create_repository(const std::unordered_map<std::string,
     return r;
 }
 
-bool mapping_transform::is_mappable(const meta_model::technical_space from,
+bool extensible_mapping_transform::is_mappable(const meta_model::technical_space from,
     const meta_model::technical_space to) {
     return helpers::mapper::is_mappable(from, to);
 }
 
 meta_model::model
-mapping_transform::map(const helpers::mapping_set_repository& msrp,
+extensible_mapping_transform::map(const helpers::mapping_set_repository& msrp,
     const meta_model::model& src, const meta_model::technical_space to) {
 
     const helpers::mapper mp(msrp);
@@ -205,7 +205,7 @@ mapping_transform::map(const helpers::mapping_set_repository& msrp,
 }
 
 coding::meta_model::model_set
-mapping_transform::apply(const context& ctx,
+extensible_mapping_transform::apply(const context& ctx,
     const coding::meta_model::model_set& src,
     const meta_model::technical_space to) {
     const auto id(src.target().name().qualified().dot());
@@ -251,7 +251,7 @@ mapping_transform::apply(const context& ctx,
          * subset of that set. We need to exclude all models which are
          * not mappable to ts, such as for example the system models.
          */
-        if (!mapping_transform::is_mappable(ref.input_technical_space(), to)) {
+        if (!extensible_mapping_transform::is_mappable(ref.input_technical_space(), to)) {
             BOOST_LOG_SEV(lg, debug) << "Skipping reference: "
                                      << ref.name().qualified().dot();
             continue;
