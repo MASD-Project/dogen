@@ -16,6 +16,37 @@ such as profiles, licences etc.
 
 Stories that we haven't quite classified yet, but are needed.
 
+*** Correct implementation of templates in meta-model                 :story:
+
+At present we have a number of hacks to get stitch and wale to
+work. However, it seems clear how this could be implemented in a more
+"natural" way. In order for this to happen we need to first clean up
+the archetypes model and the generation model though.
+
+- artefact properties should have a template element and a template
+  path. Template element is in the meta-data. It is an ID that points
+  to a meta-model element of type template (logic-less, for now). This
+  field supports the use case of 1-M on templates (a template that is
+  instantiated for multiple modeling elements). When this field is
+  present, in the coding model, we resolve the string into a modeling
+  element. We then add the modeling element name to the
+  properties. Then, when creating the templating path, we find the
+  modeling element and obtain its path.
+- for the 1-1 use case (that is, for a given archetype we have one and
+  only one template), we always resolve the template path to be equal
+  to the archetype path we are templating, and then update the
+  extension to match (e.g. =.wale= or =.stitch=). When creating
+  artefacts, if the template file does not exist, we create an empty
+  file. In this case, we need to inject all of the template names into
+  the list of artefacts so that we do not delete them.
+
+Whilst this is a much cleaner approach, we cannot implement it at
+present because we do not have access to name resolution in generation
+as things stand. Once we've cleaned up the archetypes model and the
+generation model, the hope is that coding will take over the archetype
+expansion (via a collaboration with the archetypes model). Then we
+could do name resolution inside of coding.
+
 *** Syntax checking support for stitch templates                      :story:
 
 It would be really nice to have syntax checking for stitch
@@ -6985,6 +7016,10 @@ We could simply add a command line argument for reference directories;
 if the reference is not found in the target model directory, we would
 then try all available reference directories.
 
+We should implement this as a =-I= parameter akin to compilers. We
+should also have a command to output the current include path - check
+GCC to see what command they use for this.
+
 Merged Stories:
 
 *Add additional data files directories*
@@ -9880,7 +9915,15 @@ Some other tidbits:
   applied in the order provided by the user, with the exception of
   root.
 
-*** Create the =needle= library                                       :story:
+*** Create a PDM for the utility model                                :story:
+
+We need to create a PDM for the utility model that only includes
+utilities. To call it PDM may not be strictly correct as it is not
+doing any mapping. Perhaps it is just a simple, stand-alone
+product. We need to remove any "helper" code for other models - it
+should be placed on the corresponding PDM (e.g. =boot=, =std=, etc).
+
+*Previous Understanding*
 
 We need to create a library with support code that is used by the
 models. At present it is needed for =io= and =test_data=. However, we

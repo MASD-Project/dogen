@@ -13,18 +13,18 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-21 Tue 08:47]
-| <75>                                                   |        |      |      |       |
-| Headline                                               | Time   |      |      |     % |
-|--------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                           | *8:53* |      |      | 100.0 |
-|--------------------------------------------------------+--------+------+------+-------|
-| Stories                                                | 8:53   |      |      | 100.0 |
-| Active                                                 |        | 8:53 |      | 100.0 |
-| Edit release notes for previous sprint                 |        |      | 3:37 |  40.7 |
-| Create a video demo for the previous sprint's features |        |      | 3:46 |  42.4 |
-| Sprint and product backlog grooming                    |        |      | 0:16 |   3.0 |
-| Make wale templates meta-model elements                |        |      | 1:14 |  13.9 |
+#+CAPTION: Clock summary at [2019-05-21 Tue 10:26]
+| <75>                                                   |         |       |      |       |
+| Headline                                               | Time    |       |      |     % |
+|--------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                           | *10:30* |       |      | 100.0 |
+|--------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                | 10:30   |       |      | 100.0 |
+| Active                                                 |         | 10:30 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 3:37 |  34.4 |
+| Create a video demo for the previous sprint's features |         |       | 3:46 |  35.9 |
+| Sprint and product backlog grooming                    |         |       | 0:22 |   3.5 |
+| Make wale templates meta-model elements                |         |       | 2:45 |  26.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -195,13 +195,16 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-05-21 Tue 10:20]--[2019-05-21 Tue 10:26] =>  0:06
     CLOCK: [2019-05-21 Tue 08:31]--[2019-05-21 Tue 08:47] =>  0:16
     :END:
 
 Updates to sprint and product backlog.
 
-*** STARTED Make wale templates meta-model elements                   :story:
+*** COMPLETED Make wale templates meta-model elements                 :story:
+    CLOSED: [2019-05-21 Tue 10:19]
     :LOGBOOK:
+    CLOCK: [2019-05-21 Tue 08:48]--[2019-05-21 Tue 10:19] =>  1:31
     CLOCK: [2019-05-20 Mon 19:31]--[2019-05-20 Mon 19:53] =>  0:22
     CLOCK: [2019-05-20 Mon 17:29]--[2019-05-20 Mon 18:18] =>  0:49
     CLOCK: [2019-05-20 Mon 17:25]--[2019-05-20 Mon 17:28] =>  0:03
@@ -272,6 +275,13 @@ Notes:
 - automatically ignore wale templates by looking at the input
   meta-data.
 - make wale template input path relative to the output directory.
+
+*** Flatten the data directory                                        :story:
+
+Now that we have finally removed all the JSON files and wale templates
+from the data directory, all that is left are the top-level MASD
+models and (for now) the PDMs. We should really move the library
+directory to the top-level and get rid of the data directory.
 
 *** Meta-names do not have namespaces                                 :story:
 
