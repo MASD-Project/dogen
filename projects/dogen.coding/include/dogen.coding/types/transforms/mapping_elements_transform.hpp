@@ -25,24 +25,38 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <unordered_map>
+#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.coding/types/meta_model/model_set.hpp"
+#include "dogen.coding/types/meta_model/mapping/destination.hpp"
+#include "dogen.coding/types/meta_model/variability/feature_bundle.hpp"
+#include "dogen.coding/types/transforms/context_fwd.hpp"
 
 namespace dogen::coding::transforms {
 
 class mapping_elements_transform final {
-public:
-    mapping_elements_transform() = default;
-    mapping_elements_transform(const mapping_elements_transform&) = default;
-    mapping_elements_transform(mapping_elements_transform&&) = default;
-    ~mapping_elements_transform() = default;
-    mapping_elements_transform& operator=(const mapping_elements_transform&) = default;
+private:
+    static std::unordered_map<std::string,
+                              std::list<
+                                  coding::meta_model::mapping::destination>
+                              >
+    make_destinations(const variability::meta_model::feature_model& fm,
+        const coding::meta_model::model_set& ms);
+
+    static void populate_extensible_mappables(
+        const std::unordered_map<std::string,
+        std::list<coding::meta_model::mapping::destination>>&
+        destinations_for_target, coding::meta_model::model_set& ms);
+
+private:
+    static void populate_fixed_mappables(
+        const variability::meta_model::feature_model& fm,
+        coding::meta_model::model_set& ms);
 
 public:
-    bool operator==(const mapping_elements_transform& rhs) const;
-    bool operator!=(const mapping_elements_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void
+    apply(const context& ctx, coding::meta_model::model_set& ms);
 };
 
 }

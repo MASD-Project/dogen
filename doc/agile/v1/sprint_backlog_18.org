@@ -13,21 +13,21 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-21 Tue 13:33]
+#+CAPTION: Clock summary at [2019-05-21 Tue 13:46]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *12:53* |       |      | 100.0 |
+| *Total time*                                           | *13:05* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 12:53   |       |      | 100.0 |
-| Active                                                 |         | 12:53 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 3:37 |  28.1 |
-| Create a video demo for the previous sprint's features |         |       | 3:46 |  29.2 |
+| Stories                                                | 13:05   |       |      | 100.0 |
+| Active                                                 |         | 13:05 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 3:37 |  27.6 |
+| Create a video demo for the previous sprint's features |         |       | 3:46 |  28.8 |
 | Sprint and product backlog grooming                    |         |       | 0:22 |   2.8 |
-| Make wale templates meta-model elements                |         |       | 2:45 |  21.3 |
-| Flatten the data directory                             |         |       | 1:11 |   9.2 |
+| Make wale templates meta-model elements                |         |       | 2:45 |  21.0 |
+| Flatten the data directory                             |         |       | 1:11 |   9.0 |
 | Rename =dogen::cpp::header_only= stereotypes           |         |       | 0:15 |   1.9 |
-| Add code generation support to static configurations   |         |       | 0:57 |   7.4 |
+| Add code generation support to static configurations   |         |       | 1:09 |   8.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -327,6 +327,7 @@ Tasks:
 
 *** Add code generation support to static configurations              :story:
     :LOGBOOK:
+    CLOCK: [2019-05-21 Tue 13:34]--[2019-05-21 Tue 13:46] =>  0:12
     CLOCK: [2019-05-21 Tue 13:24]--[2019-05-21 Tue 13:33] =>  0:09
     CLOCK: [2019-05-21 Tue 12:35]--[2019-05-21 Tue 13:23] =>  0:48
     :END:
