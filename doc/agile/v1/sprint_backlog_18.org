@@ -13,22 +13,23 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-22 Wed 11:37]
+#+CAPTION: Clock summary at [2019-05-23 Thu 11:01]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *15:06* |       |      | 100.0 |
+| *Total time*                                           | *17:55* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 15:06   |       |      | 100.0 |
-| Active                                                 |         | 15:06 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 3:37 |  24.0 |
-| Create a video demo for the previous sprint's features |         |       | 3:46 |  24.9 |
-| Sprint and product backlog grooming                    |         |       | 0:22 |   2.4 |
-| Make wale templates meta-model elements                |         |       | 2:45 |  18.2 |
-| Flatten the data directory                             |         |       | 1:11 |   7.8 |
-| Rename =dogen::cpp::header_only= stereotypes           |         |       | 0:15 |   1.7 |
-| Read variability papers                                |         |       | 0:56 |   6.2 |
-| Add code generation support to static configurations   |         |       | 2:14 |  14.8 |
+| Stories                                                | 17:55   |       |      | 100.0 |
+| Active                                                 |         | 17:55 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 3:37 |  20.2 |
+| Create a video demo for the previous sprint's features |         |       | 3:46 |  21.0 |
+| Sprint and product backlog grooming                    |         |       | 0:54 |   5.0 |
+| Make wale templates meta-model elements                |         |       | 2:45 |  15.3 |
+| Flatten the data directory                             |         |       | 1:11 |   6.6 |
+| Rename =dogen::cpp::header_only= stereotypes           |         |       | 0:15 |   1.4 |
+| Rename coding model                                    |         |       | 2:17 |  12.7 |
+| Read variability papers                                |         |       | 0:56 |   5.2 |
+| Add code generation support to static configurations   |         |       | 2:14 |  12.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -199,6 +200,8 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-05-23 Thu 10:45]--[2019-05-23 Thu 11:01] =>  0:16
+    CLOCK: [2019-05-23 Thu 10:28]--[2019-05-23 Thu 10:44] =>  0:16
     CLOCK: [2019-05-21 Tue 10:20]--[2019-05-21 Tue 10:26] =>  0:06
     CLOCK: [2019-05-21 Tue 08:31]--[2019-05-21 Tue 08:47] =>  0:16
     :END:
@@ -392,6 +395,57 @@ Approach:
 - update resolver to resolve static configurations.
 - generate the struct for the static configuration.
 - generate a method to read the struct from a dynamic configuration.
+
+*** Move models into the project directory                            :story:
+
+At present we have a models directory in each component of a
+product. However, perhaps it makes more sense to have it as a
+subdirectory of the component itself. This is because in an ideal
+world, we should create a package for the component with the model and
+the header files as well as the SO, allowing users to consume it. In
+the Dogen case, it means users can create plugins for Dogen. In the
+PDM case, it means users can make use of the PDM in their own models.
+
+However, one downside of this approach is that we then need to have
+many directories in the include path for models. If we take the
+include headers as an example, there are a small number of directories
+in the path:
+
+- compiler specific directories
+- =/usr/include=
+- ...
+
+Maybe we have two separate issues here:
+
+- when creating a product, where should the models be placed? If we
+  keep in mind that models are themselves an asset like any other and
+  as such require a meta-model representation, it would be logical to
+  keep the model with the component it generates (just like we keep
+  the product model within the product it generates). This means for
+  instance that we could easily initialise a component via the command
+  line and create a "template" blank model (in dia or JSON) with a
+  number of things already set. We probably also need a way to avoid
+  deleting multiple files (e.g. if we have both a dia and a JSON
+  model, we need to know to ignore both of them). This means that when
+  building a product we need multiple include directories for models,
+  just as we do for headers. This work should be done as part of
+  adding products to the asset model because models will be in the
+  same namespace. The dia and JSON directories are then the facets for
+  the model. This also means that we can now add the targets for
+  generation, conversion etc directly into each component. So,
+  somewhat paradoxically, when we create a model, we need to have a
+  model of the model in it (or maybe two models of the model, Dia and
+  JSON). Interestingly, now that we have a model of the model, we can
+  suddenly move all of the keys that we have placed at the top-level
+  into this modeling element. We can aslo associate it with a profile
+  via stereotypes, removing the need for
+  =masd.variability.profile=. And if we take it to the next leve, then
+  perhaps references are themselves also modeling elements. Its not
+  clear if this is an advantage though.
+- from a "consumption" perspective, perhaps we could have a single
+  =shared/dogen/models= directory, just like we will also place all of
+  the PDM's includes under =/usr/include= and the SO's under
+  =/usr/lib=. We could split it into Dia and JSON if need be.
 
 *** Meta-names do not have namespaces                                 :story:
 
