@@ -526,6 +526,11 @@
           "name": "opaque_associations",
           "type": "std::list<name>",
           "documentation": "Elements that are involved in aggregation or composition relationships via\nindirection.\n\nThis is used to break cycles where required.\n"
+        },
+        {
+          "name": "associative_container_keys",
+          "type": "std::list<name>",
+          "documentation": "Elements that are keys in an associative container.\n"
         }
       ]
     },
@@ -2178,11 +2183,6 @@
           "name": "object_templates",
           "type": "std::list<name>",
           "documentation": "All object templates associated with this object.\n"
-        },
-        {
-          "name": "associative_container_keys",
-          "type": "std::list<name>",
-          "documentation": "Elements that are keys in an associative container.\n"
         },
         {
           "name": "provides_opaqueness",

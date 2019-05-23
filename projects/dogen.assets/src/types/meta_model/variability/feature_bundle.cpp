@@ -72,6 +72,7 @@ feature_bundle::feature_bundle(
     const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
     const std::list<dogen::assets::meta_model::name>& transparent_associations,
     const std::list<dogen::assets::meta_model::name>& opaque_associations,
+    const std::list<dogen::assets::meta_model::name>& associative_container_keys,
     const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates)
     : dogen::assets::meta_model::element(
       name,
@@ -90,6 +91,7 @@ feature_bundle::feature_bundle(
       decoration),
       transparent_associations_(transparent_associations),
       opaque_associations_(opaque_associations),
+      associative_container_keys_(associative_container_keys),
       feature_templates_(feature_templates) { }
 
 void feature_bundle::accept(const element_visitor& v) const {
@@ -116,6 +118,7 @@ void feature_bundle::to_stream(std::ostream& s) const {
     s << ", "
       << "\"transparent_associations\": " << transparent_associations_ << ", "
       << "\"opaque_associations\": " << opaque_associations_ << ", "
+      << "\"associative_container_keys\": " << associative_container_keys_ << ", "
       << "\"feature_templates\": " << feature_templates_
       << " }";
 }
@@ -126,6 +129,7 @@ void feature_bundle::swap(feature_bundle& other) noexcept {
     using std::swap;
     swap(transparent_associations_, other.transparent_associations_);
     swap(opaque_associations_, other.opaque_associations_);
+    swap(associative_container_keys_, other.associative_container_keys_);
     swap(feature_templates_, other.feature_templates_);
 }
 
@@ -139,6 +143,7 @@ bool feature_bundle::operator==(const feature_bundle& rhs) const {
     return dogen::assets::meta_model::element::compare(rhs) &&
         transparent_associations_ == rhs.transparent_associations_ &&
         opaque_associations_ == rhs.opaque_associations_ &&
+        associative_container_keys_ == rhs.associative_container_keys_ &&
         feature_templates_ == rhs.feature_templates_;
 }
 
@@ -178,6 +183,22 @@ void feature_bundle::opaque_associations(const std::list<dogen::assets::meta_mod
 
 void feature_bundle::opaque_associations(const std::list<dogen::assets::meta_model::name>&& v) {
     opaque_associations_ = std::move(v);
+}
+
+const std::list<dogen::assets::meta_model::name>& feature_bundle::associative_container_keys() const {
+    return associative_container_keys_;
+}
+
+std::list<dogen::assets::meta_model::name>& feature_bundle::associative_container_keys() {
+    return associative_container_keys_;
+}
+
+void feature_bundle::associative_container_keys(const std::list<dogen::assets::meta_model::name>& v) {
+    associative_container_keys_ = v;
+}
+
+void feature_bundle::associative_container_keys(const std::list<dogen::assets::meta_model::name>&& v) {
+    associative_container_keys_ = std::move(v);
 }
 
 const std::list<dogen::assets::meta_model::variability::feature_template>& feature_bundle::feature_templates() const {

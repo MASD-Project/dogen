@@ -135,6 +135,7 @@ object::object(object&& rhs)
       is_visitation_leaf_(std::move(rhs.is_visitation_leaf_)),
       transparent_associations_(std::move(rhs.transparent_associations_)),
       opaque_associations_(std::move(rhs.opaque_associations_)),
+      associative_container_keys_(std::move(rhs.associative_container_keys_)),
       is_parent_(std::move(rhs.is_parent_)),
       is_child_(std::move(rhs.is_child_)),
       is_leaf_(std::move(rhs.is_leaf_)),
@@ -147,7 +148,6 @@ object::object(object&& rhs)
       type_parameters_(std::move(rhs.type_parameters_)),
       is_associative_container_(std::move(rhs.is_associative_container_)),
       object_templates_(std::move(rhs.object_templates_)),
-      associative_container_keys_(std::move(rhs.associative_container_keys_)),
       provides_opaqueness_(std::move(rhs.provides_opaqueness_)),
       can_be_primitive_underlier_(std::move(rhs.can_be_primitive_underlier_)),
       orm_properties_(std::move(rhs.orm_properties_)) { }
@@ -178,6 +178,7 @@ object::object(
     const bool is_visitation_leaf,
     const std::list<dogen::assets::meta_model::name>& transparent_associations,
     const std::list<dogen::assets::meta_model::name>& opaque_associations,
+    const std::list<dogen::assets::meta_model::name>& associative_container_keys,
     const bool is_parent,
     const bool is_child,
     const bool is_leaf,
@@ -190,7 +191,6 @@ object::object(
     const dogen::assets::meta_model::type_parameters& type_parameters,
     const bool is_associative_container,
     const std::list<dogen::assets::meta_model::name>& object_templates,
-    const std::list<dogen::assets::meta_model::name>& associative_container_keys,
     const bool provides_opaqueness,
     const bool can_be_primitive_underlier,
     const boost::optional<dogen::assets::meta_model::orm::object_properties>& orm_properties)
@@ -220,6 +220,7 @@ object::object(
       is_visitation_leaf_(is_visitation_leaf),
       transparent_associations_(transparent_associations),
       opaque_associations_(opaque_associations),
+      associative_container_keys_(associative_container_keys),
       is_parent_(is_parent),
       is_child_(is_child),
       is_leaf_(is_leaf),
@@ -232,7 +233,6 @@ object::object(
       type_parameters_(type_parameters),
       is_associative_container_(is_associative_container),
       object_templates_(object_templates),
-      associative_container_keys_(associative_container_keys),
       provides_opaqueness_(provides_opaqueness),
       can_be_primitive_underlier_(can_be_primitive_underlier),
       orm_properties_(orm_properties) { }
@@ -276,6 +276,7 @@ void object::to_stream(std::ostream& s) const {
       << "\"is_visitation_leaf\": " << is_visitation_leaf_ << ", "
       << "\"transparent_associations\": " << transparent_associations_ << ", "
       << "\"opaque_associations\": " << opaque_associations_ << ", "
+      << "\"associative_container_keys\": " << associative_container_keys_ << ", "
       << "\"is_parent\": " << is_parent_ << ", "
       << "\"is_child\": " << is_child_ << ", "
       << "\"is_leaf\": " << is_leaf_ << ", "
@@ -288,7 +289,6 @@ void object::to_stream(std::ostream& s) const {
       << "\"type_parameters\": " << type_parameters_ << ", "
       << "\"is_associative_container\": " << is_associative_container_ << ", "
       << "\"object_templates\": " << object_templates_ << ", "
-      << "\"associative_container_keys\": " << associative_container_keys_ << ", "
       << "\"provides_opaqueness\": " << provides_opaqueness_ << ", "
       << "\"can_be_primitive_underlier\": " << can_be_primitive_underlier_ << ", "
       << "\"orm_properties\": " << orm_properties_
@@ -310,6 +310,7 @@ void object::swap(object& other) noexcept {
     swap(is_visitation_leaf_, other.is_visitation_leaf_);
     swap(transparent_associations_, other.transparent_associations_);
     swap(opaque_associations_, other.opaque_associations_);
+    swap(associative_container_keys_, other.associative_container_keys_);
     swap(is_parent_, other.is_parent_);
     swap(is_child_, other.is_child_);
     swap(is_leaf_, other.is_leaf_);
@@ -322,7 +323,6 @@ void object::swap(object& other) noexcept {
     swap(type_parameters_, other.type_parameters_);
     swap(is_associative_container_, other.is_associative_container_);
     swap(object_templates_, other.object_templates_);
-    swap(associative_container_keys_, other.associative_container_keys_);
     swap(provides_opaqueness_, other.provides_opaqueness_);
     swap(can_be_primitive_underlier_, other.can_be_primitive_underlier_);
     swap(orm_properties_, other.orm_properties_);
@@ -347,6 +347,7 @@ bool object::operator==(const object& rhs) const {
         is_visitation_leaf_ == rhs.is_visitation_leaf_ &&
         transparent_associations_ == rhs.transparent_associations_ &&
         opaque_associations_ == rhs.opaque_associations_ &&
+        associative_container_keys_ == rhs.associative_container_keys_ &&
         is_parent_ == rhs.is_parent_ &&
         is_child_ == rhs.is_child_ &&
         is_leaf_ == rhs.is_leaf_ &&
@@ -359,7 +360,6 @@ bool object::operator==(const object& rhs) const {
         type_parameters_ == rhs.type_parameters_ &&
         is_associative_container_ == rhs.is_associative_container_ &&
         object_templates_ == rhs.object_templates_ &&
-        associative_container_keys_ == rhs.associative_container_keys_ &&
         provides_opaqueness_ == rhs.provides_opaqueness_ &&
         can_be_primitive_underlier_ == rhs.can_be_primitive_underlier_ &&
         orm_properties_ == rhs.orm_properties_;
@@ -515,6 +515,22 @@ void object::opaque_associations(const std::list<dogen::assets::meta_model::name
     opaque_associations_ = std::move(v);
 }
 
+const std::list<dogen::assets::meta_model::name>& object::associative_container_keys() const {
+    return associative_container_keys_;
+}
+
+std::list<dogen::assets::meta_model::name>& object::associative_container_keys() {
+    return associative_container_keys_;
+}
+
+void object::associative_container_keys(const std::list<dogen::assets::meta_model::name>& v) {
+    associative_container_keys_ = v;
+}
+
+void object::associative_container_keys(const std::list<dogen::assets::meta_model::name>&& v) {
+    associative_container_keys_ = std::move(v);
+}
+
 bool object::is_parent() const {
     return is_parent_;
 }
@@ -649,22 +665,6 @@ void object::object_templates(const std::list<dogen::assets::meta_model::name>& 
 
 void object::object_templates(const std::list<dogen::assets::meta_model::name>&& v) {
     object_templates_ = std::move(v);
-}
-
-const std::list<dogen::assets::meta_model::name>& object::associative_container_keys() const {
-    return associative_container_keys_;
-}
-
-std::list<dogen::assets::meta_model::name>& object::associative_container_keys() {
-    return associative_container_keys_;
-}
-
-void object::associative_container_keys(const std::list<dogen::assets::meta_model::name>& v) {
-    associative_container_keys_ = v;
-}
-
-void object::associative_container_keys(const std::list<dogen::assets::meta_model::name>&& v) {
-    associative_container_keys_ = std::move(v);
 }
 
 bool object::provides_opaqueness() const {

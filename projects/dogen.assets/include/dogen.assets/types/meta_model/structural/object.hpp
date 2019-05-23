@@ -86,6 +86,7 @@ public:
         const bool is_visitation_leaf,
         const std::list<dogen::assets::meta_model::name>& transparent_associations,
         const std::list<dogen::assets::meta_model::name>& opaque_associations,
+        const std::list<dogen::assets::meta_model::name>& associative_container_keys,
         const bool is_parent,
         const bool is_child,
         const bool is_leaf,
@@ -98,7 +99,6 @@ public:
         const dogen::assets::meta_model::type_parameters& type_parameters,
         const bool is_associative_container,
         const std::list<dogen::assets::meta_model::name>& object_templates,
-        const std::list<dogen::assets::meta_model::name>& associative_container_keys,
         const bool provides_opaqueness,
         const bool can_be_primitive_underlier,
         const boost::optional<dogen::assets::meta_model::orm::object_properties>& orm_properties);
@@ -223,6 +223,16 @@ public:
     /**@}*/
 
     /**
+     * @brief Elements that are keys in an associative container.
+     */
+    /**@{*/
+    const std::list<dogen::assets::meta_model::name>& associative_container_keys() const;
+    std::list<dogen::assets::meta_model::name>& associative_container_keys();
+    void associative_container_keys(const std::list<dogen::assets::meta_model::name>& v);
+    void associative_container_keys(const std::list<dogen::assets::meta_model::name>&& v);
+    /**@}*/
+
+    /**
      * @brief True if this element is the parent of one or more elements, false otherwise.
      */
     /**@{*/
@@ -324,16 +334,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Elements that are keys in an associative container.
-     */
-    /**@{*/
-    const std::list<dogen::assets::meta_model::name>& associative_container_keys() const;
-    std::list<dogen::assets::meta_model::name>& associative_container_keys();
-    void associative_container_keys(const std::list<dogen::assets::meta_model::name>& v);
-    void associative_container_keys(const std::list<dogen::assets::meta_model::name>&& v);
-    /**@}*/
-
-    /**
      * @brief If true, this type provides opaqueness to any type parameters it may have.
      */
     /**@{*/
@@ -379,6 +379,7 @@ private:
     bool is_visitation_leaf_;
     std::list<dogen::assets::meta_model::name> transparent_associations_;
     std::list<dogen::assets::meta_model::name> opaque_associations_;
+    std::list<dogen::assets::meta_model::name> associative_container_keys_;
     bool is_parent_;
     bool is_child_;
     bool is_leaf_;
@@ -391,7 +392,6 @@ private:
     dogen::assets::meta_model::type_parameters type_parameters_;
     bool is_associative_container_;
     std::list<dogen::assets::meta_model::name> object_templates_;
-    std::list<dogen::assets::meta_model::name> associative_container_keys_;
     bool provides_opaqueness_;
     bool can_be_primitive_underlier_;
     boost::optional<dogen::assets::meta_model::orm::object_properties> orm_properties_;

@@ -60,6 +60,7 @@ public:
         const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
         const std::list<dogen::assets::meta_model::name>& transparent_associations,
         const std::list<dogen::assets::meta_model::name>& opaque_associations,
+        const std::list<dogen::assets::meta_model::name>& associative_container_keys,
         const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates);
 
 public:
@@ -96,6 +97,16 @@ public:
     void opaque_associations(const std::list<dogen::assets::meta_model::name>&& v);
     /**@}*/
 
+    /**
+     * @brief Elements that are keys in an associative container.
+     */
+    /**@{*/
+    const std::list<dogen::assets::meta_model::name>& associative_container_keys() const;
+    std::list<dogen::assets::meta_model::name>& associative_container_keys();
+    void associative_container_keys(const std::list<dogen::assets::meta_model::name>& v);
+    void associative_container_keys(const std::list<dogen::assets::meta_model::name>&& v);
+    /**@}*/
+
     const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates() const;
     std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates();
     void feature_templates(const std::list<dogen::assets::meta_model::variability::feature_template>& v);
@@ -117,6 +128,7 @@ public:
 private:
     std::list<dogen::assets::meta_model::name> transparent_associations_;
     std::list<dogen::assets::meta_model::name> opaque_associations_;
+    std::list<dogen::assets::meta_model::name> associative_container_keys_;
     std::list<dogen::assets::meta_model::variability::feature_template> feature_templates_;
 };
 

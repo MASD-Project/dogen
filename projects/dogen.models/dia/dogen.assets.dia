@@ -4231,16 +4231,16 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:point val="-232,-56"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-232.05,-56.05;-215.28,-51.55"/>
+        <dia:rectangle val="-232.05,-56.05;-214.51,-50.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-232,-56"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.669999999999998"/>
+        <dia:real val="17.440000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#Associatable#</dia:string>
@@ -4368,6 +4368,29 @@ Leaves are types concrete types which have a parent.#</dia:string>
 indirection.
 
 This is used to break cycles where required.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#associative_container_keys#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::list&lt;name&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Elements that are keys in an associative container.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4903,17 +4926,17 @@ This is used to break cycles where required.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O32">
       <dia:attribute name="obj_pos">
-        <dia:point val="-223.665,-51.6"/>
+        <dia:point val="-223.28,-50.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-224.515,-51.65;-214.888,-45.95"/>
+        <dia:rectangle val="-224.13,-50.85;-214.888,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-223.665,-51.6"/>
-        <dia:point val="-223.665,-49"/>
+        <dia:point val="-223.28,-50.8"/>
+        <dia:point val="-223.28,-49"/>
         <dia:point val="-214.938,-49"/>
         <dia:point val="-214.938,-46"/>
       </dia:attribute>
@@ -31090,7 +31113,7 @@ as a modeline.#</dia:string>
         <dia:point val="-153,-17"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-153.05,-17.05;-120.495,-9.35"/>
+        <dia:rectangle val="-153.05,-17.05;-120.495,-10.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-153,-17"/>
@@ -31099,7 +31122,7 @@ as a modeline.#</dia:string>
         <dia:real val="32.454999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.6000000000000005"/>
+        <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#object#</dia:string>
@@ -31229,29 +31252,6 @@ decided instead to use the word object.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#All object templates associated with this object.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#associative_container_keys#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;name&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Elements that are keys in an associative container.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

@@ -62,7 +62,8 @@ populate(const unsigned int position, result_type& v) {
     dogen::assets::meta_model::element_generator::populate(position, v);
     v.transparent_associations(create_std_list_dogen_assets_meta_model_name(position + 0));
     v.opaque_associations(create_std_list_dogen_assets_meta_model_name(position + 1));
-    v.feature_templates(create_std_list_dogen_assets_meta_model_variability_feature_template(position + 2));
+    v.associative_container_keys(create_std_list_dogen_assets_meta_model_name(position + 2));
+    v.feature_templates(create_std_list_dogen_assets_meta_model_variability_feature_template(position + 3));
 }
 
 feature_bundle_generator::result_type
