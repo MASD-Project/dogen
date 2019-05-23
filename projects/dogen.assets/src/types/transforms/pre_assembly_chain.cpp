@@ -72,9 +72,14 @@ void pre_assembly_chain::apply(const context& ctx,
     technical_space_transform::apply(ctx, m);
     origin_transform::apply(ctx, m);
     type_params_transform::apply(ctx, m);
-    parsing_transform::apply(ctx, m);
     extraction_properties_transform::apply(ctx, m);
     variability_feature_bundle_transform::apply(ctx, fixed_mappings, m);
+
+    /*
+     * Parsing must happen after variability feature bundles have been
+     * transformed because we rely on the mapped type being populated.
+     */
+    parsing_transform::apply(ctx, m);
 
     /*
      * Primitive transform requires parsing transform to populate the
