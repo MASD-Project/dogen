@@ -460,6 +460,7 @@ adapter::to_variability_feature_bundle(
         ft.key(n);
         ft.identifiable_key(sp.to_identifiable(n));
         ft.value(attr.value());
+        ft.unparsed_type(attr.type());
         ft.value_type(enum_mapper::to_value_type(attr.type()));
         ft.configuration(attr.configuration());
         ft.configuration()->name().qualified(ft.name().qualified().dot());
