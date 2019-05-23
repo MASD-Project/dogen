@@ -1063,6 +1063,7 @@ size limitations.#</dia:string>
 #DOGEN masd.injection.reference=cpp.std
 #DOGEN masd.injection.reference=cpp.boost
 #DOGEN masd.injection.reference=masd
+#DOGEN masd.injection.reference=masd.variability
 #DOGEN masd.injection.reference=dogen.profiles
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*

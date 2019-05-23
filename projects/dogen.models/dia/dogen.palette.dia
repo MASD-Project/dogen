@@ -110,6 +110,7 @@ as possible, so we can evaluate how they work together.
 #DOGEN masd.injection.model_modules=dogen.palette
 #DOGEN masd.injection.reference=cpp.builtins
 #DOGEN masd.injection.reference=masd
+#DOGEN masd.injection.reference=masd.variability
 #DOGEN masd.injection.reference=dogen.profiles
 #DOGEN masd.variability.profile=dogen.profiles.base.default_profile#</dia:string>
           </dia:attribute>

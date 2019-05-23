@@ -12,6 +12,7 @@
     "masd.injection.reference": "dogen.assets",
     "masd.injection.reference": "dogen.extraction",
     "masd.injection.reference": "masd",
+    "masd.injection.reference": "masd.variability",
     "masd.injection.reference": "dogen.profiles",
     "masd.injection.input_technical_space": "cpp",
     "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",

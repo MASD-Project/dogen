@@ -4514,6 +4514,7 @@ model directory.#</dia:string>
 #DOGEN masd.injection.reference=dogen.assets
 #DOGEN masd.injection.reference=dogen.extraction
 #DOGEN masd.injection.reference=masd
+#DOGEN masd.injection.reference=masd.variability
 #DOGEN masd.injection.reference=dogen.profiles
 #DOGEN masd.injection.input_technical_space=cpp
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
