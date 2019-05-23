@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
@@ -25,6 +26,7 @@
 #include "dogen.variability/types/helpers/enum_mapper.hpp"
 #include "dogen.assets/types/traits.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
+#include "dogen.assets/types/meta_model/attribute.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_template_initializer.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
 #include "dogen.assets/types/transforms/transformation_error.hpp"
@@ -39,6 +41,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 const std::string empty;
+const std::string fixed_mapping_not_found("Fixed mapping not found: ");
 
 }
 
@@ -167,7 +170,7 @@ void variability_feature_bundle_transform::update(const feature_group& fg,
 
 void variability_feature_bundle_transform::
 apply(const context& ctx,
-    const std::unordered_map<std::string, std::string>& /*fixed_mappings*/,
+    const std::unordered_map<std::string, std::string>& fixed_mappings,
     meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "variability feature bundle transform", transform_id,
@@ -181,8 +184,23 @@ apply(const context& ctx,
     const auto fg(make_feature_group(fm));
     for (auto& pair : bundles) {
         auto& fb(*pair.second);
-        for (auto& ft : fb.feature_templates())
+        auto& sr(fb.static_representation());
+        sr.name().simple("static_configuration");
+
+        for (auto& ft : fb.feature_templates()) {
             update(fg, ft);
+            meta_model::attribute attr;
+            attr.name().simple(ft.name().simple());
+
+            const auto& ut(ft.unparsed_type());
+            const auto i(fixed_mappings.find(ut));
+            if (i == fixed_mappings.end()) {
+                BOOST_LOG_SEV(lg, error) << fixed_mapping_not_found << ut;
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(fixed_mapping_not_found + ut));
+            }
+            attr.unparsed_type(i->second);
+        }
     }
 
     if (m.variability_elements().feature_template_initializer() == nullptr)
