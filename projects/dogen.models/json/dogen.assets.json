@@ -1850,7 +1850,8 @@
     {
       "name": "meta_model::variability::feature_bundle",
       "stereotypes": [
-        "assets::meta_element"
+        "assets::meta_element",
+        "Associatable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1865,8 +1866,7 @@
       "stereotypes": [
         "Documentable",
         "Configurable",
-        "Nameable",
-        "Associatable"
+        "Nameable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [

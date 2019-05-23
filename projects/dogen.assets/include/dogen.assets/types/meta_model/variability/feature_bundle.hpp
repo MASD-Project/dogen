@@ -28,6 +28,7 @@
 #include <list>
 #include <iosfwd>
 #include <algorithm>
+#include "dogen.assets/types/meta_model/name.hpp"
 #include "dogen.assets/types/meta_model/element.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_template.hpp"
 
@@ -57,6 +58,8 @@ public:
         const std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
+        const std::list<dogen::assets::meta_model::name>& transparent_associations,
+        const std::list<dogen::assets::meta_model::name>& opaque_associations,
         const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates);
 
 public:
@@ -70,6 +73,29 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
+    /**
+     * @brief Elements that are involved in aggregation or composition relationships.
+     */
+    /**@{*/
+    const std::list<dogen::assets::meta_model::name>& transparent_associations() const;
+    std::list<dogen::assets::meta_model::name>& transparent_associations();
+    void transparent_associations(const std::list<dogen::assets::meta_model::name>& v);
+    void transparent_associations(const std::list<dogen::assets::meta_model::name>&& v);
+    /**@}*/
+
+    /**
+     * @brief Elements that are involved in aggregation or composition relationships via
+     * indirection.
+     *
+     * This is used to break cycles where required.
+     */
+    /**@{*/
+    const std::list<dogen::assets::meta_model::name>& opaque_associations() const;
+    std::list<dogen::assets::meta_model::name>& opaque_associations();
+    void opaque_associations(const std::list<dogen::assets::meta_model::name>& v);
+    void opaque_associations(const std::list<dogen::assets::meta_model::name>&& v);
+    /**@}*/
+
     const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates() const;
     std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates();
     void feature_templates(const std::list<dogen::assets::meta_model::variability::feature_template>& v);
@@ -89,6 +115,8 @@ public:
     feature_bundle& operator=(feature_bundle other);
 
 private:
+    std::list<dogen::assets::meta_model::name> transparent_associations_;
+    std::list<dogen::assets::meta_model::name> opaque_associations_;
     std::list<dogen::assets::meta_model::variability::feature_template> feature_templates_;
 };
 

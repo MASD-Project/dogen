@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
@@ -53,8 +52,6 @@ public:
         const std::string& documentation,
         const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
         const dogen::assets::meta_model::name& name,
-        const std::list<dogen::assets::meta_model::name>& transparent_associations,
-        const std::list<dogen::assets::meta_model::name>& opaque_associations,
         const std::string& key,
         const std::string& identifiable_key,
         const std::string& unparsed_type,
@@ -99,29 +96,6 @@ public:
     dogen::assets::meta_model::name& name();
     void name(const dogen::assets::meta_model::name& v);
     void name(const dogen::assets::meta_model::name&& v);
-    /**@}*/
-
-    /**
-     * @brief Elements that are involved in aggregation or composition relationships.
-     */
-    /**@{*/
-    const std::list<dogen::assets::meta_model::name>& transparent_associations() const;
-    std::list<dogen::assets::meta_model::name>& transparent_associations();
-    void transparent_associations(const std::list<dogen::assets::meta_model::name>& v);
-    void transparent_associations(const std::list<dogen::assets::meta_model::name>&& v);
-    /**@}*/
-
-    /**
-     * @brief Elements that are involved in aggregation or composition relationships via
-     * indirection.
-     *
-     * This is used to break cycles where required.
-     */
-    /**@{*/
-    const std::list<dogen::assets::meta_model::name>& opaque_associations() const;
-    std::list<dogen::assets::meta_model::name>& opaque_associations();
-    void opaque_associations(const std::list<dogen::assets::meta_model::name>& v);
-    void opaque_associations(const std::list<dogen::assets::meta_model::name>&& v);
     /**@}*/
 
     const std::string& key() const;
@@ -187,8 +161,6 @@ private:
     std::string documentation_;
     boost::shared_ptr<dogen::variability::meta_model::configuration> configuration_;
     dogen::assets::meta_model::name name_;
-    std::list<dogen::assets::meta_model::name> transparent_associations_;
-    std::list<dogen::assets::meta_model::name> opaque_associations_;
     std::string key_;
     std::string identifiable_key_;
     std::string unparsed_type_;

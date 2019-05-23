@@ -18,11 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.assets/test_data/meta_model/name_td.hpp"
 #include "dogen.assets/test_data/meta_model/element_td.hpp"
 #include "dogen.assets/test_data/meta_model/variability/feature_bundle_td.hpp"
 #include "dogen.assets/test_data/meta_model/variability/feature_template_td.hpp"
 
 namespace {
+
+dogen::assets::meta_model::name
+create_dogen_assets_meta_model_name(const unsigned int position) {
+    return dogen::assets::meta_model::name_generator::create(position);
+}
+
+std::list<dogen::assets::meta_model::name> create_std_list_dogen_assets_meta_model_name(unsigned int position) {
+    std::list<dogen::assets::meta_model::name> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_dogen_assets_meta_model_name(position + i));
+    }
+    return r;
+}
 
 dogen::assets::meta_model::variability::feature_template
 create_dogen_assets_meta_model_variability_feature_template(const unsigned int position) {
@@ -46,7 +60,9 @@ feature_bundle_generator::feature_bundle_generator() : position_(0) { }
 void feature_bundle_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::assets::meta_model::element_generator::populate(position, v);
-    v.feature_templates(create_std_list_dogen_assets_meta_model_variability_feature_template(position + 0));
+    v.transparent_associations(create_std_list_dogen_assets_meta_model_name(position + 0));
+    v.opaque_associations(create_std_list_dogen_assets_meta_model_name(position + 1));
+    v.feature_templates(create_std_list_dogen_assets_meta_model_variability_feature_template(position + 2));
 }
 
 feature_bundle_generator::result_type

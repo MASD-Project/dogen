@@ -41,8 +41,6 @@ feature_template::feature_template(
     const std::string& documentation,
     const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
     const dogen::assets::meta_model::name& name,
-    const std::list<dogen::assets::meta_model::name>& transparent_associations,
-    const std::list<dogen::assets::meta_model::name>& opaque_associations,
     const std::string& key,
     const std::string& identifiable_key,
     const std::string& unparsed_type,
@@ -56,8 +54,6 @@ feature_template::feature_template(
     : documentation_(documentation),
       configuration_(configuration),
       name_(name),
-      transparent_associations_(transparent_associations),
-      opaque_associations_(opaque_associations),
       key_(key),
       identifiable_key_(identifiable_key),
       unparsed_type_(unparsed_type),
@@ -74,8 +70,6 @@ void feature_template::swap(feature_template& other) noexcept {
     swap(documentation_, other.documentation_);
     swap(configuration_, other.configuration_);
     swap(name_, other.name_);
-    swap(transparent_associations_, other.transparent_associations_);
-    swap(opaque_associations_, other.opaque_associations_);
     swap(key_, other.key_);
     swap(identifiable_key_, other.identifiable_key_);
     swap(unparsed_type_, other.unparsed_type_);
@@ -92,8 +86,6 @@ bool feature_template::operator==(const feature_template& rhs) const {
     return documentation_ == rhs.documentation_ &&
         configuration_ == rhs.configuration_ &&
         name_ == rhs.name_ &&
-        transparent_associations_ == rhs.transparent_associations_ &&
-        opaque_associations_ == rhs.opaque_associations_ &&
         key_ == rhs.key_ &&
         identifiable_key_ == rhs.identifiable_key_ &&
         unparsed_type_ == rhs.unparsed_type_ &&
@@ -158,38 +150,6 @@ void feature_template::name(const dogen::assets::meta_model::name& v) {
 
 void feature_template::name(const dogen::assets::meta_model::name&& v) {
     name_ = std::move(v);
-}
-
-const std::list<dogen::assets::meta_model::name>& feature_template::transparent_associations() const {
-    return transparent_associations_;
-}
-
-std::list<dogen::assets::meta_model::name>& feature_template::transparent_associations() {
-    return transparent_associations_;
-}
-
-void feature_template::transparent_associations(const std::list<dogen::assets::meta_model::name>& v) {
-    transparent_associations_ = v;
-}
-
-void feature_template::transparent_associations(const std::list<dogen::assets::meta_model::name>&& v) {
-    transparent_associations_ = std::move(v);
-}
-
-const std::list<dogen::assets::meta_model::name>& feature_template::opaque_associations() const {
-    return opaque_associations_;
-}
-
-std::list<dogen::assets::meta_model::name>& feature_template::opaque_associations() {
-    return opaque_associations_;
-}
-
-void feature_template::opaque_associations(const std::list<dogen::assets::meta_model::name>& v) {
-    opaque_associations_ = v;
-}
-
-void feature_template::opaque_associations(const std::list<dogen::assets::meta_model::name>&& v) {
-    opaque_associations_ = std::move(v);
 }
 
 const std::string& feature_template::key() const {

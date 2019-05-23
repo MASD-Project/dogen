@@ -19,10 +19,25 @@
  *
  */
 #include <ostream>
+#include "dogen.assets/io/meta_model/name_io.hpp"
 #include "dogen.assets/io/meta_model/element_io.hpp"
 #include "dogen.assets/types/meta_model/element_visitor.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
 #include "dogen.assets/io/meta_model/variability/feature_template_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::meta_model::name>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace std {
 
@@ -55,6 +70,8 @@ feature_bundle::feature_bundle(
     const std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
+    const std::list<dogen::assets::meta_model::name>& transparent_associations,
+    const std::list<dogen::assets::meta_model::name>& opaque_associations,
     const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates)
     : dogen::assets::meta_model::element(
       name,
@@ -71,6 +88,8 @@ feature_bundle::feature_bundle(
       artefact_properties,
       archetype_location_properties,
       decoration),
+      transparent_associations_(transparent_associations),
+      opaque_associations_(opaque_associations),
       feature_templates_(feature_templates) { }
 
 void feature_bundle::accept(const element_visitor& v) const {
@@ -95,6 +114,8 @@ void feature_bundle::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     dogen::assets::meta_model::element::to_stream(s);
     s << ", "
+      << "\"transparent_associations\": " << transparent_associations_ << ", "
+      << "\"opaque_associations\": " << opaque_associations_ << ", "
       << "\"feature_templates\": " << feature_templates_
       << " }";
 }
@@ -103,6 +124,8 @@ void feature_bundle::swap(feature_bundle& other) noexcept {
     dogen::assets::meta_model::element::swap(other);
 
     using std::swap;
+    swap(transparent_associations_, other.transparent_associations_);
+    swap(opaque_associations_, other.opaque_associations_);
     swap(feature_templates_, other.feature_templates_);
 }
 
@@ -114,6 +137,8 @@ bool feature_bundle::equals(const dogen::assets::meta_model::element& other) con
 
 bool feature_bundle::operator==(const feature_bundle& rhs) const {
     return dogen::assets::meta_model::element::compare(rhs) &&
+        transparent_associations_ == rhs.transparent_associations_ &&
+        opaque_associations_ == rhs.opaque_associations_ &&
         feature_templates_ == rhs.feature_templates_;
 }
 
@@ -121,6 +146,38 @@ feature_bundle& feature_bundle::operator=(feature_bundle other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const std::list<dogen::assets::meta_model::name>& feature_bundle::transparent_associations() const {
+    return transparent_associations_;
+}
+
+std::list<dogen::assets::meta_model::name>& feature_bundle::transparent_associations() {
+    return transparent_associations_;
+}
+
+void feature_bundle::transparent_associations(const std::list<dogen::assets::meta_model::name>& v) {
+    transparent_associations_ = v;
+}
+
+void feature_bundle::transparent_associations(const std::list<dogen::assets::meta_model::name>&& v) {
+    transparent_associations_ = std::move(v);
+}
+
+const std::list<dogen::assets::meta_model::name>& feature_bundle::opaque_associations() const {
+    return opaque_associations_;
+}
+
+std::list<dogen::assets::meta_model::name>& feature_bundle::opaque_associations() {
+    return opaque_associations_;
+}
+
+void feature_bundle::opaque_associations(const std::list<dogen::assets::meta_model::name>& v) {
+    opaque_associations_ = v;
+}
+
+void feature_bundle::opaque_associations(const std::list<dogen::assets::meta_model::name>&& v) {
+    opaque_associations_ = std::move(v);
 }
 
 const std::list<dogen::assets::meta_model::variability::feature_template>& feature_bundle::feature_templates() const {

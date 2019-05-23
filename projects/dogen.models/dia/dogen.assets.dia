@@ -27721,7 +27721,7 @@ to variability.
         <dia:string>#feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#assets::meta_element#</dia:string>
+        <dia:string>#assets::meta_element, Associatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -27856,7 +27856,7 @@ to variability.
         <dia:string>#feature_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Documentable, Configurable, Nameable, Associatable#</dia:string>
+        <dia:string>#Documentable, Configurable, Nameable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
