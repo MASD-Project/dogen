@@ -99,6 +99,42 @@ walk_name_tree(const meta_model::model& m, meta_model::structural::object& o,
     }
 }
 
+void associations_transform::walk_name_tree(const meta_model::model& m,
+    meta_model::variability::feature_bundle& fb,
+    const meta_model::name_tree& nt,
+    const bool inherit_opaqueness_from_parent) {
+
+    const auto n(nt.current());
+    if (inherit_opaqueness_from_parent)
+        fb.opaque_associations().push_back(n);
+    else
+        fb.transparent_associations().push_back(n);
+
+    /*
+     * If the parent type is an associative container, the first child
+     * type will represent the key of the associative container and
+     * the second type will be its value. We need to remember the
+     * keys.
+     *
+     * Note that we must still continue to walk the tree even if the
+     * type is not an associative container, since there are other
+     * properties to set (see above).
+     */
+    bool is_first(true);
+    const auto& objs(m.structural_elements().objects());
+    const auto i(objs.find(n.qualified().dot()));
+    const auto is_associative_container(i != objs.end() &&
+        i->second->is_associative_container());
+
+    for (const auto c : nt.children()) {
+        if (is_first && is_associative_container)
+            fb.associative_container_keys().push_back(c.current());
+
+        walk_name_tree(m, fb, c, nt.are_children_opaque());
+        is_first = false;
+    }
+}
+
 void associations_transform::
 process_object(const meta_model::model& m, meta_model::structural::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Expand object: " << o.name().qualified().dot();
@@ -127,6 +163,32 @@ process_object(const meta_model::model& m, meta_model::structural::object& o) {
         remove_duplicates(o.associative_container_keys());
 }
 
+void associations_transform::process_feature_bundle(const meta_model::model& m,
+    meta_model::variability::feature_bundle& fb) {
+
+    for (const auto& ft : fb.feature_templates()) {
+        const auto& nt(ft.parsed_type());
+        walk_name_tree(m, fb, nt, false/*inherit_opaqueness_from_parent*/);
+    }
+
+    std::unordered_set<meta_model::name> transparent_associations;
+    if (!fb.transparent_associations().empty()) {
+        remove_duplicates(fb.transparent_associations());
+        for (const auto n : fb.transparent_associations())
+            transparent_associations.insert(n);
+    }
+
+    if (!fb.opaque_associations().empty()) {
+        /*
+         * Ensure we remove any items which are simultaneously regular
+         * and weak associations.
+         */
+        remove_duplicates(fb.opaque_associations(), transparent_associations);
+    }
+
+
+}
+
 void associations_transform::
 apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "associations transform",
@@ -137,6 +199,12 @@ apply(const context& ctx, meta_model::model& m) {
 
     for (auto& pair : objs)
         process_object(m, *pair.second);
+
+    auto& bundles(m.variability_elements().feature_bundles());
+    BOOST_LOG_SEV(lg, debug) << "Total feature bundles: " << bundles.size();
+
+    for (auto& pair : bundles)
+        process_feature_bundle(m, *pair.second);
 
     stp.end_transform(m);
 }
