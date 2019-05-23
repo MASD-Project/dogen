@@ -160,6 +160,12 @@ private:
     static void resolve_primitives(const indices& idx,
         meta_model::model& m);
 
+    /**
+     * @brief Resolve all feature bundles.
+     */
+    static void resolve_feature_bundles(const indices& idx,
+        meta_model::model& m);
+
 public:
     /**
      * @brief Resolves the name against the supplied model.

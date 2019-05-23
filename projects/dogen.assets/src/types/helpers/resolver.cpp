@@ -30,6 +30,7 @@
 #include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include "dogen.assets/types/meta_model/structural/enumeration.hpp"
+#include "dogen.assets/types/meta_model/variability//feature_bundle.hpp"
 #include "dogen.assets/io/meta_model/name_io.hpp"
 #include "dogen.assets/io/meta_model/name_tree_io.hpp"
 #include "dogen.assets/io/meta_model/attribute_io.hpp"
@@ -580,10 +581,11 @@ const meta_model::structural::object_template& otp) {
 
 void resolver::
 resolve_object_templates(const indices& idx, meta_model::model& m) {
+    auto& ots(m.structural_elements().object_templates());
     BOOST_LOG_SEV(lg, debug) << "Resolving object templates. Size: "
-                             << m.structural_elements().object_templates().size();
+                             << ots.size();
 
-    for (auto& pair : m.structural_elements().object_templates()) {
+    for (auto& pair : ots) {
         auto& otp(pair.second);
 
         BOOST_LOG_SEV(lg, trace) << "Resolving object template: "
@@ -683,6 +685,16 @@ resolve_primitives(const indices& idx, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Resolved primitives.";
 }
 
+void resolver::resolve_feature_bundles(const indices& idx,
+    meta_model::model& m) {
+    for (auto& pair : m.variability_elements().feature_bundles()) {
+        auto& fb(*pair.second);
+        for (auto& ft : fb.feature_templates())
+            resolve_name_tree(m, idx, fb.name(), ft.parsed_type());
+    }
+}
+
+
 meta_model::name resolver::
 resolve(const meta_model::model& m, const indices& idx,
     const meta_model::name& ctx, const meta_model::name& n) {
@@ -713,7 +725,8 @@ try_resolve_object_template_name(meta_model::name ctx, const std::string& s,
 
     BOOST_LOG_SEV(lg, trace) << "Internal modules climb: " << r;
 
-    auto i(m.structural_elements().object_templates().find(r.qualified().dot()));
+    const auto ots(m.structural_elements().object_templates());
+    auto i(ots.find(r.qualified().dot()));
     if (i != m.structural_elements().object_templates().end()) {
         BOOST_LOG_SEV(lg, trace) << "Found object template.";
         return r;
@@ -735,7 +748,7 @@ try_resolve_object_template_name(meta_model::name ctx, const std::string& s,
 
             BOOST_LOG_SEV(lg, trace) << "Internal modules climb: " << r;
 
-            i = m.structural_elements().object_templates().find(r.qualified().dot());
+            i = ots.find(r.qualified().dot());
             if (i != m.structural_elements().object_templates().end()) {
                 BOOST_LOG_SEV(lg, trace) << "Found object templates.";
                 return r;
@@ -768,6 +781,7 @@ void resolver::resolve(const indices& idx, meta_model::model& m) {
     resolve_objects(idx, m);
     resolve_enumerations(idx, m);
     resolve_primitives(idx, m);
+    resolve_feature_bundles(idx, m);
 
     BOOST_LOG_SEV(lg, debug) << "Resolved model.";
 }
