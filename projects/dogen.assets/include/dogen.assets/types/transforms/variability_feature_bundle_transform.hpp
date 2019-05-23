@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include <string>
+#include <unordered_map>
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
@@ -78,7 +80,9 @@ private:
         meta_model::variability::feature_template& ft);
 
 public:
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx,
+        const std::unordered_map<std::string, std::string>& fixed_mappings,
+        meta_model::model& m);
 };
 
 }

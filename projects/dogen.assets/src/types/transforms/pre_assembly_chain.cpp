@@ -47,7 +47,9 @@ static logger lg(logger_factory(transform_id));
 
 namespace dogen::assets::transforms {
 
-void pre_assembly_chain::apply(const context& ctx, meta_model::model& m) {
+void pre_assembly_chain::apply(const context& ctx,
+    const std::unordered_map<std::string, std::string>& fixed_mappings,
+    meta_model::model& m) {
     /*
      * Module transform must be done before origin and technical space
      * transforms to get these properties populated on the new
@@ -72,7 +74,7 @@ void pre_assembly_chain::apply(const context& ctx, meta_model::model& m) {
     type_params_transform::apply(ctx, m);
     parsing_transform::apply(ctx, m);
     extraction_properties_transform::apply(ctx, m);
-    variability_feature_bundle_transform::apply(ctx, m);
+    variability_feature_bundle_transform::apply(ctx, fixed_mappings, m);
 
     /*
      * Primitive transform requires parsing transform to populate the
@@ -100,13 +102,13 @@ void pre_assembly_chain::apply(const context& ctx, meta_model::model_set& ms) {
     /*
      * Apply all of the pre-processing transforms to the target.
      */
-    apply(ctx, ms.target());
+    apply(ctx, ms.fixed_mappings(), ms.target());
 
     /*
      * Now we do the same thing but for the reference models.
      */
     for (auto& ref : ms.references())
-        apply(ctx, ref);
+        apply(ctx, ms.fixed_mappings(), ref);
 
     stp.end_chain(ms);
 }

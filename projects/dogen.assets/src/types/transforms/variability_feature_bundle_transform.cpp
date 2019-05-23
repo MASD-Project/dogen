@@ -166,7 +166,9 @@ void variability_feature_bundle_transform::update(const feature_group& fg,
 }
 
 void variability_feature_bundle_transform::
-apply(const context& ctx, meta_model::model& m) {
+apply(const context& ctx,
+    const std::unordered_map<std::string, std::string>& /*fixed_mappings*/,
+    meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "variability feature bundle transform", transform_id,
         m.name().qualified().dot(), *ctx.tracer(), m);

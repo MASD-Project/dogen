@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include <string>
+#include <unordered_map>
 #include "dogen.assets/types/meta_model/model.hpp"
 #include "dogen.assets/types/meta_model/model_set.hpp"
 #include "dogen.assets/types/transforms/context_fwd.hpp"
@@ -41,7 +43,9 @@ private:
      * @brief Applies all of the pre-processing transforms to the
      * supplied model.
      */
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx,
+        const std::unordered_map<std::string, std::string>& fixed_mappings,
+        meta_model::model& m);
 
 public:
     /**
