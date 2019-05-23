@@ -1857,11 +1857,6 @@
         {
           "name": "feature_templates",
           "type": "std::list<feature_template>"
-        },
-        {
-          "name": "static_representation",
-          "type": "dogen::assets::meta_model::structural::object",
-          "documentation": "Static (compile-time) representation of a feature bundle.\n"
         }
       ]
     },
@@ -1906,6 +1901,14 @@
         {
           "name": "template_kind",
           "type": "variability::meta_model::template_kind"
+        },
+        {
+          "name": "mapped_type",
+          "type": "std::string"
+        },
+        {
+          "name": "parsed_type",
+          "type": "name_tree"
         }
       ]
     },

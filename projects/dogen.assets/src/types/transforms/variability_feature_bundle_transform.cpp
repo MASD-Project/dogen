@@ -184,13 +184,9 @@ apply(const context& ctx,
     const auto fg(make_feature_group(fm));
     for (auto& pair : bundles) {
         auto& fb(*pair.second);
-        auto& sr(fb.static_representation());
-        sr.name().simple("static_configuration");
 
         for (auto& ft : fb.feature_templates()) {
             update(fg, ft);
-            meta_model::attribute attr;
-            attr.name().simple(ft.name().simple());
 
             const auto& ut(ft.unparsed_type());
             const auto i(fixed_mappings.find(ut));
@@ -199,7 +195,7 @@ apply(const context& ctx,
                 BOOST_THROW_EXCEPTION(
                     transformation_error(fixed_mapping_not_found + ut));
             }
-            attr.unparsed_type(i->second);
+            ft.mapped_type(i->second);
         }
     }
 

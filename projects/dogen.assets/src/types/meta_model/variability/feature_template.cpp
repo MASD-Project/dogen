@@ -48,7 +48,9 @@ feature_template::feature_template(
     const dogen::archetypes::location& location,
     const dogen::variability::meta_model::value_type value_type,
     const dogen::variability::meta_model::binding_point binding_point,
-    const dogen::variability::meta_model::template_kind template_kind)
+    const dogen::variability::meta_model::template_kind template_kind,
+    const std::string& mapped_type,
+    const dogen::assets::meta_model::name_tree& parsed_type)
     : documentation_(documentation),
       configuration_(configuration),
       name_(name),
@@ -59,7 +61,9 @@ feature_template::feature_template(
       location_(location),
       value_type_(value_type),
       binding_point_(binding_point),
-      template_kind_(template_kind) { }
+      template_kind_(template_kind),
+      mapped_type_(mapped_type),
+      parsed_type_(parsed_type) { }
 
 void feature_template::swap(feature_template& other) noexcept {
     using std::swap;
@@ -74,6 +78,8 @@ void feature_template::swap(feature_template& other) noexcept {
     swap(value_type_, other.value_type_);
     swap(binding_point_, other.binding_point_);
     swap(template_kind_, other.template_kind_);
+    swap(mapped_type_, other.mapped_type_);
+    swap(parsed_type_, other.parsed_type_);
 }
 
 bool feature_template::operator==(const feature_template& rhs) const {
@@ -87,7 +93,9 @@ bool feature_template::operator==(const feature_template& rhs) const {
         location_ == rhs.location_ &&
         value_type_ == rhs.value_type_ &&
         binding_point_ == rhs.binding_point_ &&
-        template_kind_ == rhs.template_kind_;
+        template_kind_ == rhs.template_kind_ &&
+        mapped_type_ == rhs.mapped_type_ &&
+        parsed_type_ == rhs.parsed_type_;
 }
 
 feature_template& feature_template::operator=(feature_template other) {
@@ -246,6 +254,38 @@ dogen::variability::meta_model::template_kind feature_template::template_kind() 
 
 void feature_template::template_kind(const dogen::variability::meta_model::template_kind v) {
     template_kind_ = v;
+}
+
+const std::string& feature_template::mapped_type() const {
+    return mapped_type_;
+}
+
+std::string& feature_template::mapped_type() {
+    return mapped_type_;
+}
+
+void feature_template::mapped_type(const std::string& v) {
+    mapped_type_ = v;
+}
+
+void feature_template::mapped_type(const std::string&& v) {
+    mapped_type_ = std::move(v);
+}
+
+const dogen::assets::meta_model::name_tree& feature_template::parsed_type() const {
+    return parsed_type_;
+}
+
+dogen::assets::meta_model::name_tree& feature_template::parsed_type() {
+    return parsed_type_;
+}
+
+void feature_template::parsed_type(const dogen::assets::meta_model::name_tree& v) {
+    parsed_type_ = v;
+}
+
+void feature_template::parsed_type(const dogen::assets::meta_model::name_tree&& v) {
+    parsed_type_ = std::move(v);
 }
 
 }

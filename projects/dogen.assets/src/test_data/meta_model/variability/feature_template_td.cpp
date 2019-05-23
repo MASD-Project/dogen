@@ -21,6 +21,7 @@
 #include <sstream>
 #include "dogen.archetypes/test_data/location_td.hpp"
 #include "dogen.assets/test_data/meta_model/name_td.hpp"
+#include "dogen.assets/test_data/meta_model/name_tree_td.hpp"
 #include "dogen.variability/test_data/meta_model/value_type_td.hpp"
 #include "dogen.variability/test_data/meta_model/binding_point_td.hpp"
 #include "dogen.variability/test_data/meta_model/configuration_td.hpp"
@@ -72,6 +73,11 @@ create_dogen_variability_meta_model_template_kind(const unsigned int position) {
     return dogen::variability::meta_model::template_kind_generator::create(position);
 }
 
+dogen::assets::meta_model::name_tree
+create_dogen_assets_meta_model_name_tree(const unsigned int position) {
+    return dogen::assets::meta_model::name_tree_generator::create(position);
+}
+
 }
 
 namespace dogen::assets::meta_model::variability {
@@ -91,6 +97,8 @@ populate(const unsigned int position, result_type& v) {
     v.value_type(create_dogen_variability_meta_model_value_type(position + 8));
     v.binding_point(create_dogen_variability_meta_model_binding_point(position + 9));
     v.template_kind(create_dogen_variability_meta_model_template_kind(position + 10));
+    v.mapped_type(create_std_string(position + 11));
+    v.parsed_type(create_dogen_assets_meta_model_name_tree(position + 12));
 }
 
 feature_template_generator::result_type

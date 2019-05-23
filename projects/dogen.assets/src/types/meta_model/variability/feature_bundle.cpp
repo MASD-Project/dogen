@@ -21,7 +21,6 @@
 #include <ostream>
 #include "dogen.assets/io/meta_model/element_io.hpp"
 #include "dogen.assets/types/meta_model/element_visitor.hpp"
-#include "dogen.assets/io/meta_model/structural/object_io.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
 #include "dogen.assets/io/meta_model/variability/feature_template_io.hpp"
 
@@ -56,8 +55,7 @@ feature_bundle::feature_bundle(
     const std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
-    const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates,
-    const dogen::assets::meta_model::structural::object& static_representation)
+    const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates)
     : dogen::assets::meta_model::element(
       name,
       documentation,
@@ -73,8 +71,7 @@ feature_bundle::feature_bundle(
       artefact_properties,
       archetype_location_properties,
       decoration),
-      feature_templates_(feature_templates),
-      static_representation_(static_representation) { }
+      feature_templates_(feature_templates) { }
 
 void feature_bundle::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -98,8 +95,7 @@ void feature_bundle::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     dogen::assets::meta_model::element::to_stream(s);
     s << ", "
-      << "\"feature_templates\": " << feature_templates_ << ", "
-      << "\"static_representation\": " << static_representation_
+      << "\"feature_templates\": " << feature_templates_
       << " }";
 }
 
@@ -108,7 +104,6 @@ void feature_bundle::swap(feature_bundle& other) noexcept {
 
     using std::swap;
     swap(feature_templates_, other.feature_templates_);
-    swap(static_representation_, other.static_representation_);
 }
 
 bool feature_bundle::equals(const dogen::assets::meta_model::element& other) const {
@@ -119,8 +114,7 @@ bool feature_bundle::equals(const dogen::assets::meta_model::element& other) con
 
 bool feature_bundle::operator==(const feature_bundle& rhs) const {
     return dogen::assets::meta_model::element::compare(rhs) &&
-        feature_templates_ == rhs.feature_templates_ &&
-        static_representation_ == rhs.static_representation_;
+        feature_templates_ == rhs.feature_templates_;
 }
 
 feature_bundle& feature_bundle::operator=(feature_bundle other) {
@@ -143,22 +137,6 @@ void feature_bundle::feature_templates(const std::list<dogen::assets::meta_model
 
 void feature_bundle::feature_templates(const std::list<dogen::assets::meta_model::variability::feature_template>&& v) {
     feature_templates_ = std::move(v);
-}
-
-const dogen::assets::meta_model::structural::object& feature_bundle::static_representation() const {
-    return static_representation_;
-}
-
-dogen::assets::meta_model::structural::object& feature_bundle::static_representation() {
-    return static_representation_;
-}
-
-void feature_bundle::static_representation(const dogen::assets::meta_model::structural::object& v) {
-    static_representation_ = v;
-}
-
-void feature_bundle::static_representation(const dogen::assets::meta_model::structural::object&& v) {
-    static_representation_ = std::move(v);
 }
 
 }

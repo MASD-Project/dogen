@@ -30,6 +30,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.archetypes/types/location.hpp"
 #include "dogen.assets/types/meta_model/name.hpp"
+#include "dogen.assets/types/meta_model/name_tree.hpp"
 #include "dogen.variability/types/meta_model/value_type.hpp"
 #include "dogen.variability/types/meta_model/binding_point.hpp"
 #include "dogen.variability/types/meta_model/template_kind.hpp"
@@ -58,7 +59,9 @@ public:
         const dogen::archetypes::location& location,
         const dogen::variability::meta_model::value_type value_type,
         const dogen::variability::meta_model::binding_point binding_point,
-        const dogen::variability::meta_model::template_kind template_kind);
+        const dogen::variability::meta_model::template_kind template_kind,
+        const std::string& mapped_type,
+        const dogen::assets::meta_model::name_tree& parsed_type);
 
 public:
     /**
@@ -134,6 +137,16 @@ public:
     dogen::variability::meta_model::template_kind template_kind() const;
     void template_kind(const dogen::variability::meta_model::template_kind v);
 
+    const std::string& mapped_type() const;
+    std::string& mapped_type();
+    void mapped_type(const std::string& v);
+    void mapped_type(const std::string&& v);
+
+    const dogen::assets::meta_model::name_tree& parsed_type() const;
+    dogen::assets::meta_model::name_tree& parsed_type();
+    void parsed_type(const dogen::assets::meta_model::name_tree& v);
+    void parsed_type(const dogen::assets::meta_model::name_tree&& v);
+
 public:
     bool operator==(const feature_template& rhs) const;
     bool operator!=(const feature_template& rhs) const {
@@ -156,6 +169,8 @@ private:
     dogen::variability::meta_model::value_type value_type_;
     dogen::variability::meta_model::binding_point binding_point_;
     dogen::variability::meta_model::template_kind template_kind_;
+    std::string mapped_type_;
+    dogen::assets::meta_model::name_tree parsed_type_;
 };
 
 }

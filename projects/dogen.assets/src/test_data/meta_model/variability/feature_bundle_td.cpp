@@ -19,7 +19,6 @@
  *
  */
 #include "dogen.assets/test_data/meta_model/element_td.hpp"
-#include "dogen.assets/test_data/meta_model/structural/object_td.hpp"
 #include "dogen.assets/test_data/meta_model/variability/feature_bundle_td.hpp"
 #include "dogen.assets/test_data/meta_model/variability/feature_template_td.hpp"
 
@@ -38,11 +37,6 @@ std::list<dogen::assets::meta_model::variability::feature_template> create_std_l
     return r;
 }
 
-dogen::assets::meta_model::structural::object
-create_dogen_assets_meta_model_structural_object(const unsigned int position) {
-    return dogen::assets::meta_model::structural::object_generator::create(position);
-}
-
 }
 
 namespace dogen::assets::meta_model::variability {
@@ -53,7 +47,6 @@ void feature_bundle_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::assets::meta_model::element_generator::populate(position, v);
     v.feature_templates(create_std_list_dogen_assets_meta_model_variability_feature_template(position + 0));
-    v.static_representation(create_dogen_assets_meta_model_structural_object(position + 1));
 }
 
 feature_bundle_generator::result_type

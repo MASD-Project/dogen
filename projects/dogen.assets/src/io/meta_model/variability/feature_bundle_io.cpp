@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include "dogen.assets/io/meta_model/element_io.hpp"
-#include "dogen.assets/io/meta_model/structural/object_io.hpp"
 #include "dogen.assets/io/meta_model/variability/feature_bundle_io.hpp"
 #include "dogen.assets/io/meta_model/variability/feature_template_io.hpp"
 

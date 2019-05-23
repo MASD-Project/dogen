@@ -22,6 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.archetypes/io/location_io.hpp"
 #include "dogen.assets/io/meta_model/name_io.hpp"
+#include "dogen.assets/io/meta_model/name_tree_io.hpp"
 #include "dogen.variability/io/meta_model/value_type_io.hpp"
 #include "dogen.variability/io/meta_model/binding_point_io.hpp"
 #include "dogen.variability/io/meta_model/configuration_io.hpp"
@@ -67,7 +68,9 @@ std::ostream& operator<<(std::ostream& s, const feature_template& v) {
       << "\"location\": " << v.location() << ", "
       << "\"value_type\": " << v.value_type() << ", "
       << "\"binding_point\": " << v.binding_point() << ", "
-      << "\"template_kind\": " << v.template_kind()
+      << "\"template_kind\": " << v.template_kind() << ", "
+      << "\"mapped_type\": " << "\"" << tidy_up_string(v.mapped_type()) << "\"" << ", "
+      << "\"parsed_type\": " << v.parsed_type()
       << " }";
     return(s);
 }
