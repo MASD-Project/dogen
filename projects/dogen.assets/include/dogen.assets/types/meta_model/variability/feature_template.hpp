@@ -53,6 +53,7 @@ public:
         const dogen::assets::meta_model::name& name,
         const std::string& key,
         const std::string& identifiable_key,
+        const std::string& unparsed_type,
         const std::string& value,
         const dogen::archetypes::location& location,
         const dogen::variability::meta_model::value_type value_type,
@@ -109,6 +110,11 @@ public:
     void identifiable_key(const std::string&& v);
     /**@}*/
 
+    const std::string& unparsed_type() const;
+    std::string& unparsed_type();
+    void unparsed_type(const std::string& v);
+    void unparsed_type(const std::string&& v);
+
     const std::string& value() const;
     std::string& value();
     void value(const std::string& v);
@@ -144,6 +150,7 @@ private:
     dogen::assets::meta_model::name name_;
     std::string key_;
     std::string identifiable_key_;
+    std::string unparsed_type_;
     std::string value_;
     dogen::archetypes::location location_;
     dogen::variability::meta_model::value_type value_type_;

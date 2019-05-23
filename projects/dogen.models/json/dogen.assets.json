@@ -1884,6 +1884,10 @@
           "documentation": "Post-processed key, suitable for use as an identifier.\n"
         },
         {
+          "name": "unparsed_type",
+          "type": "std::string"
+        },
+        {
           "name": "value",
           "type": "std::string"
         },

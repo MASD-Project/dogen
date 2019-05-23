@@ -43,6 +43,7 @@ feature_template::feature_template(
     const dogen::assets::meta_model::name& name,
     const std::string& key,
     const std::string& identifiable_key,
+    const std::string& unparsed_type,
     const std::string& value,
     const dogen::archetypes::location& location,
     const dogen::variability::meta_model::value_type value_type,
@@ -53,6 +54,7 @@ feature_template::feature_template(
       name_(name),
       key_(key),
       identifiable_key_(identifiable_key),
+      unparsed_type_(unparsed_type),
       value_(value),
       location_(location),
       value_type_(value_type),
@@ -66,6 +68,7 @@ void feature_template::swap(feature_template& other) noexcept {
     swap(name_, other.name_);
     swap(key_, other.key_);
     swap(identifiable_key_, other.identifiable_key_);
+    swap(unparsed_type_, other.unparsed_type_);
     swap(value_, other.value_);
     swap(location_, other.location_);
     swap(value_type_, other.value_type_);
@@ -79,6 +82,7 @@ bool feature_template::operator==(const feature_template& rhs) const {
         name_ == rhs.name_ &&
         key_ == rhs.key_ &&
         identifiable_key_ == rhs.identifiable_key_ &&
+        unparsed_type_ == rhs.unparsed_type_ &&
         value_ == rhs.value_ &&
         location_ == rhs.location_ &&
         value_type_ == rhs.value_type_ &&
@@ -170,6 +174,22 @@ void feature_template::identifiable_key(const std::string& v) {
 
 void feature_template::identifiable_key(const std::string&& v) {
     identifiable_key_ = std::move(v);
+}
+
+const std::string& feature_template::unparsed_type() const {
+    return unparsed_type_;
+}
+
+std::string& feature_template::unparsed_type() {
+    return unparsed_type_;
+}
+
+void feature_template::unparsed_type(const std::string& v) {
+    unparsed_type_ = v;
+}
+
+void feature_template::unparsed_type(const std::string&& v) {
+    unparsed_type_ = std::move(v);
 }
 
 const std::string& feature_template::value() const {
