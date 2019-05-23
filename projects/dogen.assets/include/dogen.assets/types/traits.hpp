@@ -106,6 +106,7 @@ struct traits {
         static std::string archetype_location_archetype();
         static std::string template_kind();
         static std::string untyped_value();
+        static std::string qualified_name();
     };
 
     struct mapping {

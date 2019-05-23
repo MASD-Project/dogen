@@ -71,6 +71,7 @@ variability_feature_bundle_transform::make_feature_group(
     r.archetype_location_archetype = s.get_by_name(
         traits::variability::archetype_location_archetype());
     r.template_kind = s.get_by_name(traits::variability::template_kind());
+    r.qualified_name = s.get_by_name(traits::variability::qualified_name());
 
     return r;
 }
@@ -140,6 +141,20 @@ make_archetype_location_archetype(const feature_group& fg,
     return empty;
 }
 
+std::string variability_feature_bundle_transform::
+make_qualified_name(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) {
+
+    const variability::helpers::configuration_selector s(cfg);
+    if (s.has_configuration_point(fg.qualified_name)) {
+        const auto r(s.get_text_content(fg.qualified_name));
+        BOOST_LOG_SEV(lg, trace) << "Read qualified name: " << r;
+        return r;
+    }
+
+    return empty;
+}
+
 variability::meta_model::template_kind variability_feature_bundle_transform::
 make_template_kind(const feature_group& fg,
     const variability::meta_model::configuration& cfg) {
@@ -166,6 +181,10 @@ void variability_feature_bundle_transform::update(const feature_group& fg,
     al.facet(make_archetype_location_facet(fg, cfg));
     al.archetype(make_archetype_location_archetype(fg, cfg));
     ft.location(al);
+
+    using variability::meta_model::template_kind;
+    if (ft.template_kind() == template_kind::instance)
+        ft.key(make_qualified_name(fg, cfg));
 }
 
 void variability_feature_bundle_transform::

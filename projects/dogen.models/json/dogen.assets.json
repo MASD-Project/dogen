@@ -2552,7 +2552,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element"
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.enumeration.use_implementation_defined_underlying_element"
           }
         },
         {
@@ -2562,7 +2563,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element"
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.enumeration.underlying_element"
           }
         },
         {
@@ -2573,7 +2575,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element"
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.enumeration.use_implementation_defined_enumerator_values"
           }
         }
       ]
@@ -2590,11 +2593,12 @@
           "name": "masd.enumeration.add_invalid_enumerator",
           "type": "masd::variability::boolean",
           "value": "\"true\"",
-          "documentation": "If true, adds an enumerator to represent an invalid choice.\n\nmasd.variability.qualified_name=masd.enumeration.add_invalid_enumerator\n",
+          "documentation": "If true, adds an enumerator to represent an invalid choice.\n",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element"
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.enumeration.add_invalid_enumerator"
           }
         },
         {
@@ -2757,7 +2761,7 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.orm.database_system"
+            "masd.variability.qualified_name": "masd.orm.table_name"
           }
         },
         {

@@ -260,6 +260,11 @@ std::string traits::variability::template_kind() {
     return r;
 }
 
+std::string traits::variability::qualified_name() {
+    static std::string r("masd.variability.qualified_name");
+    return r;
+}
+
 std::string traits::variability::untyped_value() {
     static std::string r("masd.variability.value");
     return r;

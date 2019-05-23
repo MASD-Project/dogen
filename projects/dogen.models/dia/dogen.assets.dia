@@ -34372,7 +34372,8 @@ technical space targeted.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=element#</dia:string>
+#DOGEN masd.variability.binding_point=element
+#DOGEN masd.variability.qualified_name=masd.enumeration.use_implementation_defined_underlying_element#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -34399,7 +34400,8 @@ technical space targeted.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=element#</dia:string>
+#DOGEN masd.variability.binding_point=element
+#DOGEN masd.variability.qualified_name=masd.enumeration.underlying_element#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -34426,7 +34428,8 @@ technical space targeted.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=element#</dia:string>
+#DOGEN masd.variability.binding_point=element
+#DOGEN masd.variability.qualified_name=masd.enumeration.use_implementation_defined_enumerator_values#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -34566,7 +34569,7 @@ technical space targeted.
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=element
-masd.variability.qualified_name=masd.enumeration.add_invalid_enumerator#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.enumeration.add_invalid_enumerator#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -34924,13 +34927,13 @@ masd.variability.qualified_name=masd.enumeration.add_invalid_enumerator#</dia:st
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O252">
       <dia:attribute name="obj_pos">
-        <dia:point val="52,60"/>
+        <dia:point val="52,59"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,59.95;81.425,63.65"/>
+        <dia:rectangle val="51.95,58.95;81.425,62.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="52,60"/>
+        <dia:point val="52,59"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="29.375"/>
@@ -35407,7 +35410,7 @@ it.
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.orm.database_system#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.orm.table_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
